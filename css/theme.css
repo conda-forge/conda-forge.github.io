@@ -66,7 +66,19 @@ a:focus {
     background-color: rgba(0,0,0,0.5);
 }
 
+.list-group-item {
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(255,255,255,.3);
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #000;
+    color: white;
+}
 
+.ci-badge {
+    min-width: 110px;
+    display: inline-block;
+    margin-left: 15px;
+}
 
 .navbar-custom {
     margin-bottom: 0;
