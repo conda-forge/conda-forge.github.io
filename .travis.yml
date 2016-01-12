@@ -8,6 +8,9 @@ env:
     global:
        - CONDA_INSTALL_LOCN="${HOME}/conda"
 
+       # Adds a GH_TOKEN (pelson's conda-forge.github.io token)
+       - secure: "YVgax+EX/qjD75gxfYyg6agEDnC4aYLn8zWuqdVOKW9VF8QkcNnYf5vKfx6pxC4+n/RVeD6YTkaThl/04ghvu4lt5h0Od7IiMJX5nuzXbnoGYh6BExqnQZ+iRvE/5a9lOaY7fAW5os2MuSbOz9psq/2O1USy+rrHWgPjf6c24K5y9/Fz+kzMRD1Q9IjcIOvVN0ffKMOY2EXQqIeg1/spJWRnR8NAf+Zg5o0lQuWejlf1y2z3y2O4jbewCQNhekQS+eJbo3ODWnKk1MeCqgxLY59jf2X4N1EJdM9UpooxtkPljorwx6N9qWyAfY4CGbJT10oOY/fr2XhEdAk25v6i2SR7FIr3D6OdxOGLc3ITnJPJ1tUvLSAhWPhMif2XvBhHea6Znib/vezsZeR7EmOXomDSM2+5U6R8s6QhFZ5Udt4xG1Wu6RWDT7VrlmMWKtGXNqIeAhSvEmPX+hFsFjmwW42QuWTNwqpobWaA4tI+XIfnIMyMC0SUfhRFEOBWUqsH4KZJOU1pVviz3D0G/eckwlP63l8aIbWNl2N1K7Ckt9JQt4fOeqXnf9p0hXIohhYqxP3Y4+yp7zLE2+hPqSZ9ajv/p+me/P9Joet8CwKuzIic3AWpxrXFeAivLvveQTsr+nS0s2io05pZCKBeMwhhsgyEugSrwPKKCzVwalqX55M="    
+
 install:
     - mkdir -p ${HOME}/cache/pkgs
     - "[ ! -f ${HOME}/cache/miniconda.sh ] && wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ${HOME}/cache/miniconda.sh || :"
@@ -18,6 +21,7 @@ install:
 
     - git config --global user.name "Travis user"
     - git config --global user.email travis-tests@example.com
+    - mkdir -p ~/.conda-smithy && echo $GH_TOKEN > ~/.conda-smithy/github.token
 
     # Now do the things we need to do to install it.
     - conda install conda-execute --yes --quiet -c conda-forge
