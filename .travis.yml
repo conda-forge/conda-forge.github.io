@@ -27,7 +27,13 @@ install:
     - conda install conda-execute --yes --quiet -c conda-forge
 
 script:
-    - conda execute make.py
+    #- conda execute make.py
+
+    - conda install conda-smithy -c conda-forge --yes
+    - git clone https://github.com/conda-forge/conda-smithy.git
+    - cd conda-smithy && python setup.py install && cd ..
+    - python make.py
+
     - git diff
 
 
