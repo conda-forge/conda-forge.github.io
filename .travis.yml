@@ -1,0 +1,54 @@
+# The language in this case has no bearing - we are going to be making use of conda for a
+# python distribution for the scientific python stack.
+language: python
+
+sudo: false
+
+env:
+    global:
+       - CONDA_INSTALL_LOCN="${HOME}/conda"
+
+       # Adds a GH_TOKEN (pelson's conda-forge.github.io token)
+       - secure: "YVgax+EX/qjD75gxfYyg6agEDnC4aYLn8zWuqdVOKW9VF8QkcNnYf5vKfx6pxC4+n/RVeD6YTkaThl/04ghvu4lt5h0Od7IiMJX5nuzXbnoGYh6BExqnQZ+iRvE/5a9lOaY7fAW5os2MuSbOz9psq/2O1USy+rrHWgPjf6c24K5y9/Fz+kzMRD1Q9IjcIOvVN0ffKMOY2EXQqIeg1/spJWRnR8NAf+Zg5o0lQuWejlf1y2z3y2O4jbewCQNhekQS+eJbo3ODWnKk1MeCqgxLY59jf2X4N1EJdM9UpooxtkPljorwx6N9qWyAfY4CGbJT10oOY/fr2XhEdAk25v6i2SR7FIr3D6OdxOGLc3ITnJPJ1tUvLSAhWPhMif2XvBhHea6Znib/vezsZeR7EmOXomDSM2+5U6R8s6QhFZ5Udt4xG1Wu6RWDT7VrlmMWKtGXNqIeAhSvEmPX+hFsFjmwW42QuWTNwqpobWaA4tI+XIfnIMyMC0SUfhRFEOBWUqsH4KZJOU1pVviz3D0G/eckwlP63l8aIbWNl2N1K7Ckt9JQt4fOeqXnf9p0hXIohhYqxP3Y4+yp7zLE2+hPqSZ9ajv/p+me/P9Joet8CwKuzIic3AWpxrXFeAivLvveQTsr+nS0s2io05pZCKBeMwhhsgyEugSrwPKKCzVwalqX55M="    
+
+install:
+    - mkdir -p ${HOME}/cache/pkgs
+    - "[ ! -f ${HOME}/cache/miniconda.sh ] && wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ${HOME}/cache/miniconda.sh || :"
+    - bash ${HOME}/cache/miniconda.sh -b -p ${CONDA_INSTALL_LOCN} && export PATH=${CONDA_INSTALL_LOCN}/bin:$PATH
+
+    # Re-use the packages in the cache, and download any new ones into that location.
+    - rm -rf ${CONDA_INSTALL_LOCN}/pkgs && ln -s ${HOME}/cache/pkgs ${CONDA_INSTALL_LOCN}/pkgs
+
+    - git config --global user.name "Travis-CI on github.com/conda-forge/conda-forge.github.io"
+    - git config --global user.email pelson.pub@gmail.com
+    - mkdir -p ~/.conda-smithy && echo $GH_TOKEN > ~/.conda-smithy/github.token
+
+    # Now do the things we need to do to install it.
+    - conda install conda-execute --yes --quiet -c conda-forge
+
+script:
+    #- conda execute make.py
+
+    - conda install conda-smithy -c conda-forge --yes
+    - git clone https://github.com/conda-forge/conda-smithy.git
+    - cd conda-smithy && python setup.py install && cd ..
+
+    - git checkout -b new_site_content
+    - python make.py
+
+    - git diff
+    # Only build the docs for commits on master.
+    - if (( "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" )); then
+        git commit -am "Re-ran make.py.";
+        git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null;
+        git push pushable new_site_content:master;
+      fi
+    
+
+# We store the files that are downloaded from continuum.io, but not the environments that are created.
+cache:
+    directories:
+      - $HOME/cache
+before_cache:
+  # Remove all untarred directories.
+  - find $CONDA_INSTALL_LOCN/pkgs/ -mindepth 1 -maxdepth 1 -type d -exec rm -r {} \;
