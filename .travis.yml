@@ -41,7 +41,7 @@ script:
     - if (( "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" )); then
         git commit -am "Re-ran make.py.";
         git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null;
-        git push pushable new_site_content:master;
+        git push pushable new_site_content:master > /dev/null;
       fi
     
 
