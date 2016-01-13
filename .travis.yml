@@ -11,6 +11,10 @@ env:
        # Adds a GH_TOKEN (pelson's conda-forge.github.io token)
        - secure: "Lwj/rVoBIEATGVq93byY2H47lSVqUCyyGs8W3cIfnlZS6+xF/Xw+xQj2TPJR4ffYm95mtku+VT8/39dceKiWMdtdIclLoP2MAM3SKVDbjgiGVRBpcImBIkLecvaBMb3OukDY4q8/jn2FzzqR27RhffF7reCwK3PcBcIrKgg7zDzdmQviGiRXQ8JQSf2qYETiT1Iy4BuYOkgxH2R3Y382p3dnSHUjT/4Yr3krIl6Vmjq13LIS+LRYhbKlclca0fohsbPqq1gZyXsLJF4rrIblZWzjYLlD+kM218HfIy0Qdhvf+xawn6LmlR/UCAw4aluX2RINV+QypKrmILklzasNVG7CBCRBmU3O2cpU6ZIPZXwX+AyxOzhII/MwUWf5+KbfWR6niObFvn3gG/ABcNzuXoLP0aIv0njIITAsRcPToHVAp4r5fDRTuViJnUlFlizIJaw71ovl5TzSAEcDmxyTi3E8R9OIuBx9ZIcT3Np2hNF0OshEoF4k76LIK84RPGrMnZhruT+G75zX5LI9eBJZI1fNUbRz0OL2olu5+ZAZCTM7ZrnPQtDzDsyU7mohB7pK3jRqJrb/RXU9NPDcRJtaPl3FhTsKNOh/SKeC4aFbdDhjhjtcXBopstSzNKorHZcbI8cONcLxQwDDJU2VSu7/YJemwC/md8u/zL3TjbWKGnQ="
 
+    matrix:
+#        - ACTION="feedstocks_repo"
+        - ACTION="update_docs"
+
 install:
     - mkdir -p ${HOME}/cache/pkgs
     - "[ ! -f ${HOME}/cache/miniconda.sh ] && wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ${HOME}/cache/miniconda.sh || :"
@@ -27,23 +31,9 @@ install:
     - conda install conda-execute --yes --quiet -c conda-forge
 
 script:
-    #- conda execute make.py
-
-    - conda install conda-smithy -c conda-forge --yes
-    - git clone https://github.com/conda-forge/conda-smithy.git
-    - cd conda-smithy && python setup.py install && cd ..
-
-    - git checkout -b new_site_content
-    - python make.py
-
-    - git diff
-    # Only build the docs for commits on master.
-    - if (( "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" )); then
-        git commit -am "Re-ran make.py.";
-        git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null;
-        git push pushable new_site_content:master > /dev/null;
+    - if (( "$ACTION" == "update_docs" )); then
+        source ./.ci_scripts/update_docs;
       fi
-    
 
 # We store the files that are downloaded from continuum.io, but not the environments that are created.
 cache:

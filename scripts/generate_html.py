@@ -15,8 +15,8 @@ import conda_smithy.feedstocks as feedstocks
 
 from jinja2 import Environment, FileSystemLoader
 
-print(__file__)
-loader = FileSystemLoader(os.path.dirname(__file__))
+html_source = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+loader = FileSystemLoader(html_source)
 env = Environment(loader=loader)
 
 context = {}
@@ -24,5 +24,5 @@ context['gh_feedstocks'] = feedstocks.feedstock_repos('conda-forge')
 
 
 tmpl = env.get_template('feedstocks.html.tmpl')
-with open('feedstocks.html', 'w') as fh:
+with open(os.path.join(html_source, 'feedstocks.html'), 'w') as fh:
     fh.write(tmpl.render(context))

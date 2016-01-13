@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# This script is to be run in a TravisCI context.
+
+set -e
+
+git checkout -b new_site_content
+conda execute scripts/generate_html.py
+git diff
+# Only build the docs for commits on master.
+if (( "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" )); then
+    git commit -am "Re-ran make.py."
+    git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null
+    git push pushable new_site_content:master > /dev/null
+fi
