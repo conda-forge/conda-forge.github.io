@@ -12,10 +12,17 @@ import os
 
 import conda_smithy.feedstocks as feedstocks
 
-
 from jinja2 import Environment, FileSystemLoader
 
-html_source = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+import argparse
+
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('--html-source', help="The location of the conda-forge.github.io checkout.",
+                   default=os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
+
+args = parser.parse_args()
+
+html_source = args.html_source
 loader = FileSystemLoader(html_source)
 env = Environment(loader=loader)
 

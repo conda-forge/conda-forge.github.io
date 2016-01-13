@@ -12,7 +12,7 @@ env:
        - secure: "Lwj/rVoBIEATGVq93byY2H47lSVqUCyyGs8W3cIfnlZS6+xF/Xw+xQj2TPJR4ffYm95mtku+VT8/39dceKiWMdtdIclLoP2MAM3SKVDbjgiGVRBpcImBIkLecvaBMb3OukDY4q8/jn2FzzqR27RhffF7reCwK3PcBcIrKgg7zDzdmQviGiRXQ8JQSf2qYETiT1Iy4BuYOkgxH2R3Y382p3dnSHUjT/4Yr3krIl6Vmjq13LIS+LRYhbKlclca0fohsbPqq1gZyXsLJF4rrIblZWzjYLlD+kM218HfIy0Qdhvf+xawn6LmlR/UCAw4aluX2RINV+QypKrmILklzasNVG7CBCRBmU3O2cpU6ZIPZXwX+AyxOzhII/MwUWf5+KbfWR6niObFvn3gG/ABcNzuXoLP0aIv0njIITAsRcPToHVAp4r5fDRTuViJnUlFlizIJaw71ovl5TzSAEcDmxyTi3E8R9OIuBx9ZIcT3Np2hNF0OshEoF4k76LIK84RPGrMnZhruT+G75zX5LI9eBJZI1fNUbRz0OL2olu5+ZAZCTM7ZrnPQtDzDsyU7mohB7pK3jRqJrb/RXU9NPDcRJtaPl3FhTsKNOh/SKeC4aFbdDhjhjtcXBopstSzNKorHZcbI8cONcLxQwDDJU2VSu7/YJemwC/md8u/zL3TjbWKGnQ="
 
     matrix:
-#        - ACTION="feedstocks_repo"
+        - ACTION="feedstocks_repo"
         - ACTION="update_docs"
 
 install:
@@ -31,8 +31,12 @@ install:
     - conda install conda-execute --yes --quiet -c conda-forge
 
 script:
-    - if (( "$ACTION" == "update_docs" )); then
+    - if [ $ACTION = "update_docs" ]; then
+        echo "Updating docs";
         source ./.ci_scripts/update_docs;
+      elif [ "$ACTION" = "feedstocks_repo" ]; then
+        echo "Updating feedstock repo";
+        source ./.ci_scripts/update_feedstocks_repo;
       fi
 
 # We store the files that are downloaded from continuum.io, but not the environments that are created.
