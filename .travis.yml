@@ -9,7 +9,7 @@ env:
        - CONDA_INSTALL_LOCN="${HOME}/conda"
 
        # Adds a GH_TOKEN (pelson's conda-forge.github.io token)
-       - secure: "YVgax+EX/qjD75gxfYyg6agEDnC4aYLn8zWuqdVOKW9VF8QkcNnYf5vKfx6pxC4+n/RVeD6YTkaThl/04ghvu4lt5h0Od7IiMJX5nuzXbnoGYh6BExqnQZ+iRvE/5a9lOaY7fAW5os2MuSbOz9psq/2O1USy+rrHWgPjf6c24K5y9/Fz+kzMRD1Q9IjcIOvVN0ffKMOY2EXQqIeg1/spJWRnR8NAf+Zg5o0lQuWejlf1y2z3y2O4jbewCQNhekQS+eJbo3ODWnKk1MeCqgxLY59jf2X4N1EJdM9UpooxtkPljorwx6N9qWyAfY4CGbJT10oOY/fr2XhEdAk25v6i2SR7FIr3D6OdxOGLc3ITnJPJ1tUvLSAhWPhMif2XvBhHea6Znib/vezsZeR7EmOXomDSM2+5U6R8s6QhFZ5Udt4xG1Wu6RWDT7VrlmMWKtGXNqIeAhSvEmPX+hFsFjmwW42QuWTNwqpobWaA4tI+XIfnIMyMC0SUfhRFEOBWUqsH4KZJOU1pVviz3D0G/eckwlP63l8aIbWNl2N1K7Ckt9JQt4fOeqXnf9p0hXIohhYqxP3Y4+yp7zLE2+hPqSZ9ajv/p+me/P9Joet8CwKuzIic3AWpxrXFeAivLvveQTsr+nS0s2io05pZCKBeMwhhsgyEugSrwPKKCzVwalqX55M="    
+       - secure: "Lwj/rVoBIEATGVq93byY2H47lSVqUCyyGs8W3cIfnlZS6+xF/Xw+xQj2TPJR4ffYm95mtku+VT8/39dceKiWMdtdIclLoP2MAM3SKVDbjgiGVRBpcImBIkLecvaBMb3OukDY4q8/jn2FzzqR27RhffF7reCwK3PcBcIrKgg7zDzdmQviGiRXQ8JQSf2qYETiT1Iy4BuYOkgxH2R3Y382p3dnSHUjT/4Yr3krIl6Vmjq13LIS+LRYhbKlclca0fohsbPqq1gZyXsLJF4rrIblZWzjYLlD+kM218HfIy0Qdhvf+xawn6LmlR/UCAw4aluX2RINV+QypKrmILklzasNVG7CBCRBmU3O2cpU6ZIPZXwX+AyxOzhII/MwUWf5+KbfWR6niObFvn3gG/ABcNzuXoLP0aIv0njIITAsRcPToHVAp4r5fDRTuViJnUlFlizIJaw71ovl5TzSAEcDmxyTi3E8R9OIuBx9ZIcT3Np2hNF0OshEoF4k76LIK84RPGrMnZhruT+G75zX5LI9eBJZI1fNUbRz0OL2olu5+ZAZCTM7ZrnPQtDzDsyU7mohB7pK3jRqJrb/RXU9NPDcRJtaPl3FhTsKNOh/SKeC4aFbdDhjhjtcXBopstSzNKorHZcbI8cONcLxQwDDJU2VSu7/YJemwC/md8u/zL3TjbWKGnQ="
 
 install:
     - mkdir -p ${HOME}/cache/pkgs
