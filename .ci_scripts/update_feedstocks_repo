@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Expected to be run in a TravisCI context.
+
+set -e
+
+if [ -n "$GH_TOKEN" ]; then
+    git clone https://${GH_TOKEN}@github.com/conda-forge/feedstocks.git feedstocks_repo
+    conda execute -v ./scripts/update_feedstocks_submodules.py ./feedstocks_repo
+    cd ./feedstocks_repo
+    git push origin master > /dev/null
+fi
+
