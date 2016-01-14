@@ -37,10 +37,12 @@ for feedstock in feedstocks.feedstock_repos('conda-forge'):
 
         # Add the new submodule.
         feedstocks_repo.create_submodule(feedstock.package_name, repo_subdir,
-                                         url=feedstock.clone_url,
-                                         branch='master')
-
-feedstocks_repo.submodule_update(recursive=False)
+                                         url=feedstock.clone_url)
+    # Update the submodule to point to master.
+    sm = feedstocks_repo.submodules[feedstock.package_name]
+    sm_repo = sm.module()
+    sm_repo.remotes.origin.fetch()
+    sm_repo.head.reference = sm_repo.remotes.origin.refs.master
 
 if feedstocks_repo.is_dirty():
     feedstocks_repo.index.add(['.gitmodules'])
