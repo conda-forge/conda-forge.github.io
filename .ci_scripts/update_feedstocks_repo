@@ -9,5 +9,8 @@ if [ -n "$GH_TOKEN" ]; then
     conda execute -v ./scripts/update_feedstocks_submodules.py ./feedstocks_repo
     cd ./feedstocks_repo
     git push origin master > /dev/null
+
+    echo "Updating the teams"
+    conda execute -v ./scripts/update_teams.py ./feedstocks_repo
 fi
 
