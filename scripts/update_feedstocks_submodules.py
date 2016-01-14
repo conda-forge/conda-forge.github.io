@@ -40,9 +40,9 @@ for feedstock in feedstocks.feedstock_repos('conda-forge'):
                                          url=feedstock.clone_url)
     # Update the submodule to point to master.
     sm = feedstocks_repo.submodules[feedstock.package_name]
+    sm.update()
     sm_repo = sm.module()
-    sm_repo.remotes.origin.fetch()
-    sm_repo.head.reference = sm_repo.remotes.origin.refs.master
+    sm_repo.remotes.origin.pull()
 
 if feedstocks_repo.is_dirty():
     feedstocks_repo.index.add(['.gitmodules'])
