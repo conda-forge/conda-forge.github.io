@@ -24,7 +24,7 @@ install:
     - rm -rf ${CONDA_INSTALL_LOCN}/pkgs && ln -s ${HOME}/cache/pkgs ${CONDA_INSTALL_LOCN}/pkgs
 
     - git config --global user.name "Travis-CI on github.com/conda-forge/conda-forge.github.io"
-    - git config --global user.email pelson.pub@gmail.com
+    - git config --global user.email pelson.pub+conda-forge@gmail.com
     - mkdir -p ~/.conda-smithy && echo $GH_TOKEN > ~/.conda-smithy/github.token
 
     # Now do the things we need to do to install it.
