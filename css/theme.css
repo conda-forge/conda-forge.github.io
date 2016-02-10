@@ -30,11 +30,15 @@ h6 {
     letter-spacing: 1px;
 }
 
-p, li {
-    margin: 0 0 25px;
+p, li, .text {
     font-size: 18px;
     line-height: 1.5;
 }
+
+.padded p {
+    margin-bottom: 2em;
+}
+
 
 code {
     margin-left: 40px;
@@ -43,10 +47,13 @@ code {
 
 @media(min-width:768px) {
     p, li {
-        margin: 0 0 35px;
         font-size: 20px;
         line-height: 1.6;
     }
+}
+
+.ul-instructions li {
+    padding-bottom: 1em;
 }
 
 a {
@@ -75,13 +82,9 @@ a:focus {
     margin-bottom: 0;
     border-bottom: 1px solid rgba(255,255,255,.1);
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    background-color: #000;
-    color: white;
+    color: black;
 }
 
-.panel {
-background-color: inherit;
-}
 
 .ci-badge {
     min-width: 110px;
@@ -95,12 +98,18 @@ background-color: inherit;
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     padding-bottom: 10px;
+    background-color: black;
+    color: white;
 }
 
-.navbar-header, .navbar-nav {
-    height: 4.5em;
+.navbar-header{
+   /* margin-bottom: -15px; */
 }
 
+.navbar-nav {
+    margin-top: 0px;
+    padding-top: 0px;
+}
 
 .navbar-custom .navbar-brand .navbar-toggle {
     padding: 0px;
@@ -115,6 +124,7 @@ background-color: inherit;
 
 .navbar-custom a {
     color: #fff;
+    background-color: black;
 }
 
 .navbar-custom .nav li a {
@@ -125,45 +135,35 @@ background-color: inherit;
 
 .navbar-custom .nav li a:hover {
     outline: 0;
-    color: rgba(255,255,255,.8);
-    background-color: transparent;
-}
-
-.navbar-custom .nav li a:focus,
-.navbar-custom .nav li a:active {
-    outline: 0;
-    background-color: transparent;
-}
-
-.navbar-custom .nav li.active {
-    outline: 0;
+    color: purple;
 }
 
 .navbar-custom .nav li.active a {
-    background-color: rgba(255,255,255,.3);
+    outline: 0;
+    background-color: gray;
 }
 
-.navbar-custom .nav li.active a:hover {
-    color: #fff;
+.navbar-custom {
+    height: 1em;
 }
+
+.navbar-custom.top-nav-collapse {
+    padding: 0;
+    height: 1em;
+    background-color: black;
+}
+
 
 @media(min-width:768px) {
     .navbar-custom {
         padding: 0px;
         border-bottom: 0;
         letter-spacing: 1px;
-        background: 0 0;
         -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
         -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
         transition: background .5s ease-in-out,padding .5s ease-in-out;
-    }
-
-    .navbar-custom.top-nav-collapse {
-        padding: 0;
-        border-bottom: 1px solid rgba(255,255,255,.3);
-        background: #000;
-
-        
+        background-color: black;
+        height: 1em;
     }
 }
 
@@ -293,7 +293,7 @@ background-color: inherit;
 .intro {
     display: table;
     width: 100%;
-    height: auto;
+    height: 100%;
     padding: 100px 0;
     text-align: center;
     color: #fff;
@@ -307,10 +307,9 @@ background-color: inherit;
 
 .contribute-section {
     width: 100%;
-    /*padding: 50px 0;*/
-    padding-top: 150px;
+    padding: 60px 0;
+    padding-top: 120px;
     color: #fff;
- /*   background: url(../img/hot_metal.jpg) no-repeat center center scroll; */
     background-color: 	#CD5C5C;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -372,6 +371,8 @@ ul.banner-social-buttons {
 
 footer {
     padding: 50px 0;
+    background-color: black;
+    color: white;
 }
 
 footer p {
