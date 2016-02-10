@@ -96,6 +96,9 @@ for package_name in os.listdir(feedstocks_path):
                            'The {} {} contributors!'.format(choice(superlative), package_name),
                            [repo])
         teams[package_name] = team
+    # Ensure that we have merge rights on the repo for this team.
+    url = team.url + "/repos/" + repo._identity
+    team._requester.requestJsonAndCheck("PUT", url, input={"permission": "push"})
 
     current_members = team.get_members()
     member_handles = set([member.login for member in current_members])
@@ -104,9 +107,11 @@ for package_name in os.listdir(feedstocks_path):
                                        "PUT",
                                         team.url + "/memberships/" + new_member)
     for old_member in member_handles - contributors:
-        headers, data = team._requester.requestJsonAndCheck(
-                                  "DELETE",
-                                  team.url + "/memberships/" + old_member)
+        print("AN OLD MEMBER ({}) NEEDS TO BE REMOVED FROM {}".format(old_member, repo._identity))
+        # The following works, it is just a bit scary!
+#        headers, data = team._requester.requestJsonAndCheck(
+#                                  "DELETE",
+#                                  team.url + "/memberships/" + old_member)
 
 
 # Remove any teams which don't belong any more (because there is no longer a feedstock).
@@ -114,4 +119,6 @@ for team_to_remove in set(teams.keys()) - set(packages_visited):
     if team_to_remove in ['Core', 'conda-forge.github.io']:
         print('Keeping ', team_to_remove)
         continue
-    teams[team_to_remove].delete()
+    print("THE {} TEAM NEEDS TO BE REMOVED.".format(team_to_remove))
+    # The following works, it is just a bit scary!
+#    teams[team_to_remove].delete()
