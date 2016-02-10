@@ -4,29 +4,26 @@
 # env:
 #  - python
 #  - conda-smithy
-#  - pygithub
+#  - pygithub 1.*
 # channels:
 #  - conda-forge
 # run_with: python
 
+import argparse
 import os
-
-import conda_smithy.feedstocks as feedstocks
 
 from github import Github
 import github
+import jinja2
 import yaml
 
-import argparse
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument('feedstocks_clone', help="The location of the conda-forge/feedstocks checkout.")
 
 args = parser.parse_args()
 
-
 from conda_smithy.github import gh_token
-from conda_smithy.feedstocks import cloned_feedstocks
 
 
 token = gh_token()
@@ -37,6 +34,11 @@ conda_forge = gh.get_organization('conda-forge')
 teams = {team.name: team for team in conda_forge.get_teams()}
 
 feedstocks_path = args.feedstocks_clone
+
+
+class NullUndefined(jinja2.Undefined):
+    def __unicode__(self):
+        return unicode(self._undefined_name)
 
 
 def create_team(org, name, description, repos):
@@ -76,8 +78,11 @@ for package_name in os.listdir(feedstocks_path):
         print("The {} feedstock is recipe less".format(package_name))
         continue
 
+    env = jinja2.Environment(undefined=NullUndefined)
+
     with open(recipe) as fh:
-        data = yaml.safe_load(fh)
+        contents = env.from_string(''.join(fh)).render()
+    data = yaml.safe_load(contents)
 
     contributors = set(data.get('extra', {}).get('recipe-maintainers', []))
 
@@ -106,7 +111,7 @@ for package_name in os.listdir(feedstocks_path):
 
 # Remove any teams which don't belong any more (because there is no longer a feedstock).
 for team_to_remove in set(teams.keys()) - set(packages_visited):
-    if team_to_remove in ['Contributors', 'Core', 'conda-forge.github.io']:
+    if team_to_remove in ['Core', 'conda-forge.github.io']:
         print('Keeping ', team_to_remove)
         continue
     teams[team_to_remove].delete()
