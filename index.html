@@ -13,13 +13,17 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="css/octicons.3.4.1/octicons.css">
 
     <!-- Custom CSS -->
     <link href="css/theme.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -35,28 +39,23 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
+        <div class="container semi-black-alpha" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="#page-top">
-                    <i><img src="img/anvil_white.png" alt="An anvil" style="height: 2em;"></i>  <span class="light">conda-forge</span>
+                    <i><img src="img/anvil_white.png" alt="An anvil" style="height: 1em;"></i>  <span class="light">conda-forge</span>
                 </a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
-                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
                     <li>
                         <a class="page-scroll" href="#about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contribute">Contribute</a>
+                        <a class="page-scroll" href="#contribute">Contribute</a>    
                     </li>
                 </ul>
             </div>
@@ -86,43 +85,124 @@
     <!-- About Section -->
     <section id="about" class="container content-section">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
+            <div class="col-lg-8 col-lg-offset-2 padded">
                 <h2 class="text-center">About conda-forge</h2>
                 <p>
                   <a href="https://github.com/conda-forge">conda-forge</a> is a github organization containing repositories of conda recipes.
-                  Each repository, also known as a feedstock, knows how to build itself using freely
-                  available (to open source software) CI services.</p>
+
+                  Thanks to some awesome continuous integration providers (AppVeyor, CircleCI and TravisCI),
+                  each repository, also known as a feedstock, automatically
+                  builds its own recipe in a clean and repeatable way on Windows, Linux and OSX.
+                </p>
                 <p>
                   The built distributions are uploaded to <a href="http://anaconda.org/conda-forge">anaconda.org/conda-forge</a>
-                  and can be installed to an existing conda environment with:
+                  and can be <a href="http://conda.pydata.org/docs/intro.html">installed with conda</a>. For example, to install a
+                  <a href="https://github.com/conda-forge">conda-forge</a> package into an existing conda environment:
                 </p>
                 <code>
-                  conda install package-name --channel conda-forge
+                    conda config --add channels conda-forge
+                </code> <br />
+                <code>
+                  conda install &lt;package-name&gt;
                 </code>
             </div>
         </div>
     </section>
-
-    <!-- Download Section -->
     <section class="content-section">
         <div id="contribute" class="contribute-section">
-            <div class="container semi-black-alpha">
-                <divclass="col-lg-8 col-lg-offset-2">
-                    <div class="text-center">
-                      <img src="img/anvil_white.png" alt="An anvil" style="height: 100px; margin: 40px;">
-                      <h2>Contributing to conda-forge</h2>
+            <div class="container">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2 class="text-center">Contributing to conda-forge</h2>
+                    <div class="text">
+                    I want to
+                        <ul class="" style="display: inline-block; padding: 0px; clear: none;">
+                          <li role="presentation" class="dropdown" style="display: inline;">
+                            <a id="dropdown-inline-target" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                              REPORT AN ISSUE
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li id="dropdown-default"><a data-toggle="pill" href="#report_issue">report an issue with</a></li>
+                                <li><a data-toggle="pill" href="#update_recipe">update</a></li>
+                                <li><a data-toggle="pill" href="#add_recipe">add</a></li>
+                            </ul>
+                          </li> 
+                        </ul>
+                    a package on conda-forge:
                     </div>
-                    <p>There are several ways to get involved with conda-forge.</p>
-                    <ul>
-                      <li>
-                      If you find a bug with any of the distributions, please raise an issue on the tracker of the package's feedstock.
-                      </li>
-                      <li>
-                      If you would like to contribute a new feedstock recipe, please raise an issue on the
-                      <a href="https://github.com/conda-forge/conda-forge.github.io/issues/new?title=New%20feedstock:%20<package%20name>;labels=new%20feedstock;body=Please%20create%20a%20new%20feedstock%20for%20<package%20name>.%0AFor%20those%20authorised,%20simply%20running%20%0A```conda%20smithy%20create-empty%20<package-name>```%0A%20should%20suffice.">
-                        conda-forge.github.io</a> repository.
-                      </li>
-                    </ul>
+                    <script>
+                    $(function(){
+
+                        $(".dropdown-menu li a").click(function(){
+                          $("#dropdown-inline-target").html($(this).text() + '<span class="caret"></span>');
+
+                       });
+                       $('#dropdown-default a').click()
+                    });
+                    </script>
+                    <div class="tab-content">
+                        <div id="report_issue" class="tab-pane fade in active">
+                            <ul class="fa-ul ul-instructions">
+                            <li><i class="mega-octicon fa-3x octicon-search"></i>
+                                Search for the appropriate feedstock repository.
+                                The <a href="feedstocks.html">list of existing feedsocks</a> is a good place to start.
+                            </li>
+                            <li><i class="mega-octicon fa-3x octicon-issue-opened"></i>
+                                Take a look to see if the issue has already been raised on the feedstock's issue tracker.
+                                Otherwise, create a new issue, providing appropriate information, such as your operating system,
+                                package versions and an reproducible example of the problem. Even better, if you can automate the test in the conda recipe,
+                                it might be worth <a data-toggle="pill" href="#update_recipe">submitting a PR containing the test</a>.
+                            </li>
+                            <li><i class="mega-octicon fa-3x octicon-question"></i>
+                                Can't find the feedstock?
+                                No worries, just raise the issue at <a href="https://github.com/conda-forge/conda-forge.github.io">conda-forge/conda-forge.github.io</a>
+                                and we will make sure the right people see it.
+                            </li>
+                            </ul>
+                        </div>
+                        <div id="update_recipe" class="tab-pane fade">
+                            <ul class="fa-ul ul-instructions">
+                            <li><i class="mega-octicon fa-3x octicon-search"></i>
+                                Search for the appropriate feedstock repository.
+                                The <a href="feedstocks.html">list of existing feedsocks</a> is a good place to start.
+                            </li>
+                            <li><i class="mega-octicon fa-3x octicon-repo-forked"></i>
+                                Fork the feedstock you wish to update
+                            </li>
+                            <li><i class="mega-octicon fa-3x octicon-pencil"></i>
+                                Edit the recipe as desired. You may even consider adding yourself as a recipe maintainer.
+                            </li>
+                            <li><i class="mega-octicon fa-3x octicon-git-pull-request"></i>
+                                Propose the change as a pull request. 
+                                Your recipe will automaically be built on Windows, Linux and OSX to test that it works,
+                                but the new distribution will not yet be available on the conda-forge channel.
+                            </li>
+                            <li><i class="mega-octicon fa-3x octicon-git-merge"></i>
+                                Once the recipe is ready it will be merged.
+                                Once merged, the package will automatically be built and made available on the conda-forge channel
+                            </li>
+                            </ul>
+                        </div>
+                        <div id="add_recipe" class="tab-pane fade">
+                            <ul class="fa-ul ul-instructions">
+                            <li><i class="mega-octicon fa-3x octicon-repo-forked"></i>
+                                Fork <a href="https://github.com/conda-forge/staged-recipes">conda-forge/staged-recipes</a>
+                            </li>
+                            <li><i class="mega-octicon fa-3x octicon-pencil"></i>
+                                Add a new conda recipe in the "recipes" directory.
+                                There is an example of a well written recipe there.
+                                Further guidance on writing good recipes.
+                            </li>
+                            <li><i class="mega-octicon fa-3x octicon-git-pull-request"></i>
+                                Propose the change as a pull request.
+                                Your recipe will automaically be built on Windows, Linux and OSX to test that it works,
+                                but the distribution will not yet be available on the conda-forge channel.
+                            </li>
+                            <li><i class="mega-octicon fa-3x octicon-git-merge"></i>
+                                Once the recipe is ready it will be merged and new "feedstock" repository will automatically be created for the recipe.
+                                The build and upload processes take place in the feedstock, and once complete the package will be available on the conda-forge channel</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
