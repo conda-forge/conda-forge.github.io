@@ -16,7 +16,7 @@ from jinja2 import Environment, FileSystemLoader
 
 import argparse
 
-parser = argparse.ArgumentParser(description='Process some integers.')
+parser = argparse.ArgumentParser(description='Generate the conda-forge html.')
 parser.add_argument('--html-source', help="The location of the conda-forge.github.io checkout.",
                    default=os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
 
