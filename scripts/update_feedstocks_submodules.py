@@ -24,9 +24,11 @@ args = parser.parse_args()
 feedstocks_repo = Repo(args.feedstocks_repo)
 
 for feedstock in feedstocks.feedstock_repos('conda-forge'):
+    print(feedstock)
     repo_subdir = os.path.join('feedstocks', feedstock.package_name)
     abs_subdir = os.path.join(feedstocks_repo.working_tree_dir, repo_subdir)
     sm_names = [sm.name for sm in feedstocks_repo.submodules]
+    print('Looking for {}'.format(abs_subdir))
     if not os.path.exists(abs_subdir):
         print('Adding {} to submodules.'.format(feedstock.package_name))
 
