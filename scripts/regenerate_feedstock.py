@@ -105,7 +105,9 @@ def list_pulls(repo, state='open', head=None):
 
 # Set to false to debug.
 if True:
+    print("Collecting list of conda-forge-admin repos...")
     my_repos = {repo.name: repo for repo in my_repos(gh_me)}
+    print("Collecting list of conda-forge repos...")
     forge_repos = {repo.name: repo for repo in gh_forge.get_repos()}
 else:
     # For debugging, we turn our attention to a single feedstock.
@@ -156,6 +158,10 @@ for feedstock in randomised_feedstocks:
         clone.head.reset(index=True, working_tree=True)
         clone.heads.feedstock_rerender.checkout()
 
+        # Technically, we can do whatever we like to the feedstock now. Let's just
+        # update the feedstock though. For examples of other things that *have* been
+        # done here - once upon a time @pelson modified the conda-forge.yaml config
+        # item for every single feedstock, and submitted PRs for every project.
         conda_smithy.configure_feedstock.main(feedstock.directory)    
 
         if not clone.is_dirty():
@@ -192,7 +198,7 @@ for feedstock in randomised_feedstocks:
                 Thanks!
                """.format(conda_smithy.__version__))
         pull.create_issue_comment(msg)
-        print('Updated PR on {}'.format(forge_feedstock.url))
+        print('Updated PR on {}'.format(forge_feedstock.html_url))
     else:
         # TODO: Should there be one for each branch in the repo?
         msg = textwrap.dedent("""
@@ -211,7 +217,7 @@ for feedstock in randomised_feedstocks:
         forge_feedstock.create_pull(title='MNT: Re-render the feedstock',
                                body=msg,
                                head="conda-forge-admin:feedstock_rerender", base="master")
-        print('Opened PR on {}'.format(forge_feedstock.url))
+        print('Opened PR on {}'.format(forge_feedstock.html_url))
 
     # Stop processing any more feedstocks until the next time the script is run.
     break
