@@ -19,7 +19,7 @@ import yaml
 
 
 parser = argparse.ArgumentParser(description='Process some integers.')
-parser.add_argument('feedstocks_clone', help="The location of the conda-forge/feedstocks checkout.")
+parser.add_argument('feedstocks_clone', help="The location of the feedstocks directory within the conda-forge/feedstocks clone.")
 
 args = parser.parse_args()
 
@@ -59,13 +59,12 @@ def create_team(org, name, description, repos):
 
 packages_visited = set()
 
-users = {}
+all_members = set()
 from random import choice
 superlative = ['awesome', 'slick', 'formidable', 'awe-inspiring', 'breathtaking',
                'magnificent', 'wonderous', 'stunning', 'astonishing', 'superb',
                'splendid', 'impressive', 'unbeatable', 'excellent', 'top', 'outstanding',
                'exalted', 'standout', 'smashing']
-
 
 # Go through each of the feedstocks and ensure that the team is up to date and that
 # there is nobody in the team which doesn't belong (i.e. isn't in the maintainers list).
@@ -77,7 +76,6 @@ for package_name in os.listdir(feedstocks_path):
     if not os.path.exists(recipe):
         print("The {} feedstock is recipe less".format(package_name))
         continue
-
     env = jinja2.Environment(undefined=NullUndefined)
 
     with open(recipe) as fh:
@@ -85,6 +83,7 @@ for package_name in os.listdir(feedstocks_path):
     data = yaml.safe_load(contents)
 
     contributors = set(data.get('extra', {}).get('recipe-maintainers', []))
+    all_members.update(contributors)
 
     # Get the github repo for this feedstock.
     repo = conda_forge.get_repo('{}-feedstock'.format(package_name))
@@ -114,9 +113,26 @@ for package_name in os.listdir(feedstocks_path):
 #                                  team.url + "/memberships/" + old_member)
 
 
+# Create and administer the all-members team.
+team = teams.get('all-members')
+if not team:
+    team = create_team(conda_forge, 'all-members',
+                       'All of the awesome conda-forge contributors!', [])
+
+current_members = team.get_members()
+member_handles = set([member.login for member in current_members])
+for new_member in all_members - member_handles:
+    headers, data = team._requester.requestJsonAndCheck(
+                                   "PUT",
+                                    team.url + "/memberships/" + new_member)
+for old_member in member_handles - all_members:
+    print("AN OLD MEMBER ({}) NEEDS TO BE REMOVED FROM all-members".format(old_member))
+
+
+
 # Remove any teams which don't belong any more (because there is no longer a feedstock).
 for team_to_remove in set(teams.keys()) - set(packages_visited):
-    if team_to_remove in ['Core', 'conda-forge.github.io']:
+    if team_to_remove in ['Core', 'conda-forge.github.io', 'all-members']:
         print('Keeping ', team_to_remove)
         continue
     print("THE {} TEAM NEEDS TO BE REMOVED.".format(team_to_remove))
