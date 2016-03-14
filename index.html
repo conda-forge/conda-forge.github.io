@@ -114,94 +114,79 @@
                 <div class="col-lg-8 col-lg-offset-2">
                     <h2 class="text-center">Contributing to conda-forge</h2>
                     <div class="text">
-                    I want to (please select)
-                        <ul class="" style="display: inline-block; padding: 0px; clear: none;">
-                          <li role="presentation" class="dropdown" style="display: inline;">
-                            <a id="dropdown-inline-target" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                              REPORT AN ISSUE
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li id="dropdown-default"><a data-toggle="pill" href="#report_issue">report an issue with</a></li>
-                                <li><a data-toggle="pill" href="#update_recipe">update</a></li>
-                                <li><a data-toggle="pill" href="#add_recipe">add</a></li>
-                            </ul>
-                          </li> 
-                        </ul>
-                    a package on conda-forge:
+                    <p>
+                    For a package on conda-forge, I want to ...
+                    <ul>
+                      <li><a href="#report_issue">report an issue</a></li>
+                      <li><a href="#update_recipe">update a recipe</a></li>
+                      <li><a href="#add_recipe">add a recipe</a></li>
+                    </ul>
+                    </p>
                     </div>
-                    <script>
-                    $(function(){
-
-                        $(".dropdown-menu li a").click(function(){
-                          $("#dropdown-inline-target").html($(this).text() + '<span class="caret"></span>');
-
-                       });
-                       $('#dropdown-default a').click()
-                    });
-                    </script>
-                    <div class="tab-content">
-                        <div id="report_issue" class="tab-pane fade in active">
-                            <ul class="fa-ul ul-instructions">
-                            <li><i class="mega-octicon fa-3x octicon-search"></i>
-                                Search for the appropriate feedstock repository.
-                                The <a href="feedstocks.html">list of existing feedsocks</a> is a good place to start.
-                            </li>
-                            <li><i class="mega-octicon fa-3x octicon-issue-opened"></i>
-                                Take a look to see if the issue has already been raised on the feedstock's issue tracker.
-                                Otherwise, create a new issue, providing appropriate information, such as your operating system,
-                                package versions and an reproducible example of the problem. Even better, if you can automate the test in the conda recipe,
-                                it might be worth <a data-toggle="pill" href="#update_recipe">submitting a PR containing the test</a>.
-                            </li>
-                            <li><i class="mega-octicon fa-3x octicon-question"></i>
-                                Can't find the feedstock?
-                                No worries, just raise the issue at <a href="https://github.com/conda-forge/conda-forge.github.io">conda-forge/conda-forge.github.io</a>
-                                and we will make sure the right people see it.
-                            </li>
-                            </ul>
-                        </div>
-                        <div id="update_recipe" class="tab-pane fade">
-                            <ul class="fa-ul ul-instructions">
-                            <li><i class="mega-octicon fa-3x octicon-search"></i>
-                                Search for the appropriate feedstock repository.
-                                The <a href="feedstocks.html">list of existing feedsocks</a> is a good place to start.
-                            </li>
-                            <li><i class="mega-octicon fa-3x octicon-repo-forked"></i>
-                                Fork the feedstock you wish to update
-                            </li>
-                            <li><i class="mega-octicon fa-3x octicon-pencil"></i>
-                                Edit the recipe as desired. You may even consider adding yourself as a recipe maintainer.
-                            </li>
-                            <li><i class="mega-octicon fa-3x octicon-git-pull-request"></i>
-                                Propose the change as a pull request. 
-                                Your recipe will automaically be built on Windows, Linux and OSX to test that it works,
-                                but the new distribution will not yet be available on the conda-forge channel.
-                            </li>
-                            <li><i class="mega-octicon fa-3x octicon-git-merge"></i>
-                                Once the recipe is ready it will be merged. The recipe will then automatically be built and uploaded to the conda-forge channel.
-                             </li>
-                            </ul>
-                        </div>
-                        <div id="add_recipe" class="tab-pane fade">
-                            <ul class="fa-ul ul-instructions">
-                            <li><i class="mega-octicon fa-3x octicon-repo-forked"></i>
-                                Fork <a href="https://github.com/conda-forge/staged-recipes">conda-forge/staged-recipes</a>
-                            </li>
-                            <li><i class="mega-octicon fa-3x octicon-pencil"></i>
-                                Add a new conda recipe in the "recipes" directory.
-                                There is an example of a well written recipe there.
-                                Further guidance on writing good recipes.
-                            </li>
-                            <li><i class="mega-octicon fa-3x octicon-git-pull-request"></i>
-                                Propose the change as a pull request.
-                                Your recipe will automaically be built on Windows, Linux and OSX to test that it works,
-                                but the distribution will not yet be available on the conda-forge channel.
-                            </li>
-                            <li><i class="mega-octicon fa-3x octicon-git-merge"></i>
-                                Once the recipe is ready it will be merged and new "feedstock" repository will automatically be created for the recipe.
-                                The build and upload processes take place in the feedstock, and once complete the package will be available on the conda-forge channel</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <h3 id="report_issue">Report an issue with a package</h2>
+                    <p>
+                      <ul class="fa-ul ul-instructions">
+                      <li><i class="mega-octicon fa-3x octicon-search"></i>
+                          Search for the appropriate feedstock repository.
+                          The <a href="feedstocks.html">list of existing feedsocks</a> is a good place to start.
+                      </li>
+                      <li><i class="mega-octicon fa-3x octicon-issue-opened"></i>
+                          Take a look to see if the issue has already been raised on the feedstock's issue tracker.
+                          Otherwise, create a new issue, providing appropriate information, such as your operating system,
+                          package versions and an reproducible example of the problem. Even better, if you can automate the test in the conda recipe,
+                          it might be worth <a href="#update_recipe">submitting a PR containing the test</a>.
+                      </li>
+                      <li><i class="mega-octicon fa-3x octicon-question"></i>
+                          Can't find the feedstock?
+                          No worries, just raise the issue at <a href="https://github.com/conda-forge/conda-forge.github.io">conda-forge/conda-forge.github.io</a>
+                          and we will make sure the right people see it.
+                      </li>
+                      </ul>
+                    </p>
+                    <h3 id="update_recipe">Update a package</h2>
+                    <p>
+                      <ul class="fa-ul ul-instructions">
+                      <li><i class="mega-octicon fa-3x octicon-search"></i>
+                          Search for the appropriate feedstock repository.
+                          The <a href="feedstocks.html">list of existing feedstocks</a> is a good place to start.
+                      </li>
+                      <li><i class="mega-octicon fa-3x octicon-repo-forked"></i>
+                          Fork the feedstock you wish to update
+                      </li>
+                      <li><i class="mega-octicon fa-3x octicon-pencil"></i>
+                          Edit the recipe as desired. You may even consider adding yourself as a recipe maintainer.
+                      </li>
+                      <li><i class="mega-octicon fa-3x octicon-git-pull-request"></i>
+                          Propose the change as a pull request.
+                          Your recipe will automatically be built on Windows, Linux and OSX to test that it works,
+                          but the new distribution will not yet be available on the conda-forge channel.
+                      </li>
+                      <li><i class="mega-octicon fa-3x octicon-git-merge"></i>
+                          Once the recipe is ready it will be merged. The recipe will then automatically be built and uploaded to the conda-forge channel.
+                       </li>
+                      </ul>
+                    </p>
+                    <h3 id="add_recipe">Add a recipe</h2>
+                    <p>
+                      <ul class="fa-ul ul-instructions">
+                      <li><i class="mega-octicon fa-3x octicon-repo-forked"></i>
+                          Fork <a href="https://github.com/conda-forge/staged-recipes">conda-forge/staged-recipes</a>
+                      </li>
+                      <li><i class="mega-octicon fa-3x octicon-pencil"></i>
+                          Add a new conda recipe in the "recipes" directory.
+                          There is an example of a well written recipe there.
+                          Further guidance on writing good recipes.
+                      </li>
+                      <li><i class="mega-octicon fa-3x octicon-git-pull-request"></i>
+                          Propose the change as a pull request.
+                          Your recipe will automatically be built on Windows, Linux and OSX to test that it works,
+                          but the distribution will not yet be available on the conda-forge channel.
+                      </li>
+                      <li><i class="mega-octicon fa-3x octicon-git-merge"></i>
+                          Once the recipe is ready it will be merged and new "feedstock" repository will automatically be created for the recipe.
+                          The build and upload processes take place in the feedstock, and once complete the package will be available on the conda-forge channel</li>
+                      </ul>
+                    </p>
                 </div>
             </div>
         </div>
