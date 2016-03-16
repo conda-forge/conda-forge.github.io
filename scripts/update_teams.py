@@ -82,7 +82,12 @@ for package_name in os.listdir(feedstocks_path):
         contents = env.from_string(''.join(fh)).render()
     data = yaml.safe_load(contents)
 
-    contributors = set(data.get('extra', {}).get('recipe-maintainers', []))
+    contributors = data.get('extra', {}).get('recipe-maintainers', [])
+    if not isinstance(contributors, list):
+        # Deal with a contribution list which has dashes but no spaces
+        # (e.g. https://github.com/conda-forge/pandoc-feedstock/issues/1)
+        contributors = [contributors.lstrip('-')]
+    contributors = set(handle.lower() for handle in contributors)
     all_members.update(contributors)
 
     # Get the github repo for this feedstock.
@@ -100,7 +105,7 @@ for package_name in os.listdir(feedstocks_path):
     team._requester.requestJsonAndCheck("PUT", url, input={"permission": "push"})
 
     current_members = team.get_members()
-    member_handles = set([member.login for member in current_members])
+    member_handles = set([member.login.lower() for member in current_members])
     for new_member in contributors - member_handles:
         headers, data = team._requester.requestJsonAndCheck(
                                        "PUT",
@@ -120,7 +125,7 @@ if not team:
                        'All of the awesome conda-forge contributors!', [])
 
 current_members = team.get_members()
-member_handles = set([member.login for member in current_members])
+member_handles = set([member.login.lower() for member in current_members])
 for new_member in all_members - member_handles:
     headers, data = team._requester.requestJsonAndCheck(
                                    "PUT",
