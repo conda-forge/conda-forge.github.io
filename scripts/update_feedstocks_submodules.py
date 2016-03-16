@@ -23,21 +23,32 @@ args = parser.parse_args()
 
 feedstocks_repo = Repo(args.feedstocks_repo)
 
-for feedstock in feedstocks.feedstock_repos('conda-forge'):
+forge_feedstocks = feedstocks.feedstock_repos('conda-forge')
+
+# Identify the submodule names which lie withing the repo.
+submodules = {sm.name: sm for sm in feedstocks_repo.submodules}
+
+for feedstock in forge_feedstocks:
     repo_subdir = os.path.join('feedstocks', feedstock.package_name)
     abs_subdir = os.path.join(feedstocks_repo.working_tree_dir, repo_subdir)
-    sm_names = [sm.name for sm in feedstocks_repo.submodules]
     if not os.path.exists(abs_subdir):
         print('Adding {} to submodules.'.format(feedstock.package_name))
 
         # For situations where the submodule already exists, but not in the expected locations, just
         # remove it, and re-add.
-        if feedstock.package_name in sm_names:
+        if feedstock.package_name in submodules:
             feedstocks_repo.submodules[feedstock.package_name].remove()
 
         # Add the new submodule.
         feedstocks_repo.create_submodule(feedstock.package_name, repo_subdir,
                                          url=feedstock.clone_url)
+
+
+# Pick out the feedstocks which exist on the repo, but are no longer on conda-forge.
+to_be_deleted = set(submodules.keys()) - set(repo.package_name for repo in forge_feedstocks)
+for package_name in to_be_deleted:
+    print("Removing {}.".format(package_name))
+    submodule = submodules[package_name].remove()
 
 feedstocks_repo.submodule_update(recursive=False)
 feedstocks_repo.git.submodule('foreach', 'git', 'pull', 'origin', 'master')
