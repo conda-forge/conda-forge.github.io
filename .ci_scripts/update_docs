@@ -4,12 +4,16 @@
 
 set -e
 
-git checkout -b new_site_content
-conda execute scripts/generate_html.py
-git diff
-# Only build the docs for commits on master.
-if (( "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" )); then
-    git commit -am "Re-ran make.py." | true
-    git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null
-    git push pushable new_site_content:master 2> /dev/null
+if [ -n "$GH_TOKEN" ]; then
+    git checkout -b new_site_content
+    # Generate html requires a GitHub token in order to query the available feedstocks.
+    conda execute scripts/generate_html.py
+    git diff
+    # Only build the docs for commits on master.
+    if (( "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" )); then
+        git commit -am "Re-ran make.py." | true
+        git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null
+        git push pushable new_site_content:master 2> /dev/null
+    fi
 fi
+
