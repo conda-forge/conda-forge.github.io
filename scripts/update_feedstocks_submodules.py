@@ -16,7 +16,7 @@ from git import Repo
 
 import argparse
 
-parser = argparse.ArgumentParser(description='Process some integers.')
+parser = argparse.ArgumentParser(description='Update the conda-forge/feedstocks repo.')
 parser.add_argument('feedstocks_repo', help="The location of the checked out conda-forge/feedstocks repo.")
 
 args = parser.parse_args()
