@@ -34,10 +34,12 @@ import argparse
 from contextlib import contextmanager
 import textwrap
 import random
+import re
+
 import git
 import github
-import conda_smithy.github
 
+import conda_smithy.github
 import conda_smithy.configure_feedstock
 import conda_smithy
 
@@ -47,15 +49,17 @@ import conda_smithy.feedstocks as feedstocks
 parser = argparse.ArgumentParser(description='Propose a feedstock update.')
 parser.add_argument('--feedstocks-dir', help="The location of the feedstocks.",
                     default="~/dev/conda-forge/feedstocks")
+parser.add_argument('--regexp', help="Regexp of feedstocks to consider.",
+                    default=".*")
 args = parser.parse_args()
 
 feedstocks_dir = os.path.expanduser(args.feedstocks_dir)
 
 feedstocks.clone_all('conda-forge', feedstocks_dir)
 feedstocks.fetch_feedstocks(feedstocks_dir)
-# TODO: What about feedstocks that get removed?
-
-randomised_feedstocks = list(feedstocks.cloned_feedstocks(feedstocks_dir))
+regexp = re.compile(args.regexp)
+randomised_feedstocks = [feedstock for feedstock in feedstocks.cloned_feedstocks(feedstocks_dir)
+                         if regexp.match(feedstock.package)]
 # Shuffle is in-place. :(
 random.shuffle(randomised_feedstocks)
 
@@ -111,7 +115,7 @@ if True:
     forge_repos = {repo.name: repo for repo in gh_forge.get_repos()}
 else:
     # For debugging, we turn our attention to a single feedstock.
-    debug_name = 'pyproj-feedstock'
+    debug_name = 'gdal-feedstock'
     my_repos = {debug_name: gh_me.get_repo(debug_name)}
     forge_repos = {debug_name: gh_me.get_repo(debug_name)}
     randomised_feedstocks = [feedstock for feedstock in randomised_feedstocks
@@ -125,6 +129,86 @@ def tmp_remote(repo, remote_name, url):
     remote = repo.create_remote(remote_name, url)
     yield remote
     repo.delete_remote(remote_name)
+
+
+@contextmanager
+def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
+    target_branch = 'feedstock_rerender_{}'.format(remote_head)
+    if target_branch in clone.heads:
+        # Detatch the head
+        clone.head.reference = clone.commit('HEAD~1')
+        clone.delete_head(target_branch, '-D')
+    clone.create_head(target_branch, upstream_remote.refs[remote_head]).set_tracking_branch(upstream_remote.refs[remote_head])
+
+    # Reset the working tree to a clean state.
+    clone.head.reset(index=True, working_tree=True)
+    clone.heads[target_branch].checkout()
+
+    # It is at this point we pass context back to the caller so that they can
+    # do whatever they like to the repo (like rerender the feedstock).
+    context = []
+    yield context
+
+    # If nothing was done, don't need a PR!
+    has_change = True
+    if not clone.is_dirty():
+        # We don't need this feedstock - it is slap-bang up to date. :)
+        print("{} was checked, and is up-to-date".format(feedstock.name))
+        has_change = False
+    if has_change:
+        clone.git.add('-A')
+        from git import Actor
+        author = Actor("conda-forge-admin", "pelson.pub+conda-forge@gmail.com")
+        commit = clone.index.commit("MNT: Updated the feedstock for conda-smithy version {}.\n\n[ci skip]".format(conda_smithy.__version__),
+                                    author=author)
+
+        change_from_remote_branch = True
+        full_ref = '{}/{}'.format(fork_remote.name, target_branch)
+        if full_ref in [ref.name for ref in fork_remote.refs]:
+            diff = commit.diff(fork_remote.refs[target_branch])
+            if not diff:
+                # There were no differences between this and the remote targt branch, so just continue.
+                print("{} was checked, and whilst there are changes needed, the PR is up-to-date".format(feedstock.name))
+                change_from_remote_branch = False
+
+        if change_from_remote_branch:
+            fork_remote.push('+{}'.format(target_branch))
+
+            rerender_pulls = list(list_pulls(forge_feedstock, state='open', head='conda-forge-admin:{}'.format(target_branch)))
+            if rerender_pulls:
+                pull = rerender_pulls[0]
+                msg = textwrap.dedent("""
+    It's the friendly automated conda-forge-admin here again.
+
+    Just to let you know, I've updated this PR so that it has the latest render from conda-smithy (version {}).
+
+    If there are no problems with it, please consider merging this PR.
+    If there are concerns about it, please ping the 'conda-forge/core' team (using the @ notation in a comment).
+
+    Thanks!
+                       """.format(conda_smithy.__version__))
+                pull.create_issue_comment(msg)
+                print('Updated PR on {}'.format(forge_feedstock.html_url))
+            else:
+                # TODO: Should there be one for each branch in the repo?
+                msg = textwrap.dedent("""
+    Hi! This is the friendly conda-forge-admin automated user.
+
+    I've re-rendered this feedstock with the latest version of conda-smithy ({}) and noticed some changes.
+    If the changes look good, then please go ahead and merge this PR.
+    If you have any questions about the changes though, please feel free to ping the 'conda-forge/core' team (using the @ notation in a comment). 
+
+    Remember, for any changes to the recipe you would normally need to increment the version or the build number of the package.
+    Since this is an infrastructural change, we don't actually need/want a new version to be uploaded to anaconda.org/conda-forge, so the version and build/number are left unchanged and the CI has been skipped.
+
+    Thanks!
+
+                        """.format(conda_smithy.__version__))
+                pull = forge_feedstock.create_pull(title='MNT: Re-render the feedstock',
+                                                   body=msg,
+                                                   head="conda-forge-admin:{}".format(target_branch), base=remote_head)
+                print('Opened PR on {}'.format(pull.html_url))
+            context.append(pull)
 
 
 for feedstock in randomised_feedstocks:
@@ -143,81 +227,28 @@ for feedstock in randomised_feedstocks:
     admin_fork = my_repos[feedstock.name]
     forge_feedstock = forge_repos[feedstock.name]
 
+    skip_after_package = False
+
     # Put an appropriate conda-forge-admin remote in place.
     with tmp_remote(clone, 'conda-forge-admin',
                     admin_fork.clone_url.replace('https://',
                                                  'https://{}@'.format(gh_token))) as remote:
         remote.fetch()
         clone.remotes.upstream.fetch()
-        if 'feedstock_rerender' in clone.heads:
-            clone.heads.master.checkout()
-            clone.delete_head('feedstock_rerender', '-D')
-        clone.create_head('feedstock_rerender', clone.remotes.upstream.refs.master).set_tracking_branch(clone.remotes.upstream.refs.master)
+        for branch in clone.remotes['upstream'].refs:
+            remote_branch = branch.remote_head.replace('conda-forge-admin/', '')
+            with create_update_pr(clone, remote_branch, remote, clone.remotes['upstream']) as pr:
 
-        # Reset the working tree to a clean state.
-        clone.head.reset(index=True, working_tree=True)
-        clone.heads.feedstock_rerender.checkout()
-
-        # Technically, we can do whatever we like to the feedstock now. Let's just
-        # update the feedstock though. For examples of other things that *have* been
-        # done here - once upon a time @pelson modified the conda-forge.yaml config
-        # item for every single feedstock, and submitted PRs for every project.
-        conda_smithy.configure_feedstock.main(feedstock.directory)    
-
-        if not clone.is_dirty():
-            # We don't need this feedstock - it is slap-bang up to date. :)
-            print("{} was checked, and is up-to-date".format(feedstock.name))
-            continue
-
-        # if no changes, continue. Else, commit, push and pull request.
-
-        clone.git.add('-A')
-
-        commit = clone.index.commit("MNT: Updated the feedstock for conda-smithy version {}.".format(conda_smithy.__version__))
-
-        if 'feedstock_rerender' in remote.refs:
-            diff = commit.diff(remote.refs.feedstock_rerender)
-            if not diff:
-                # There were no differences between this and the remote feedstock_rerender, so just continue.
-                print("{} was checked, and whilst there are changes needed, the PR is up-to-date".format(feedstock.name))
-                continue
-
-        remote.push('+feedstock_rerender')
-
-    rerender_pulls = list(list_pulls(forge_feedstock, state='open', head='conda-forge-admin:feedstock_rerender'))
-    if rerender_pulls:
-        pull = rerender_pulls[0]
-        msg = textwrap.dedent("""
-                It's the friendly automated conda-forge-admin here again.
-
-                Just to let you know, I've updated this PR so that it has the latest render from conda-smithy (version {}).
-
-                If there are no problems with it, please consider merging this PR.
-                If there are concerns about it, please ping the 'conda-forge/core' team (using the @ notation in a comment).
-
-                Thanks!
-               """.format(conda_smithy.__version__))
-        pull.create_issue_comment(msg)
-        print('Updated PR on {}'.format(forge_feedstock.html_url))
-    else:
-        # TODO: Should there be one for each branch in the repo?
-        msg = textwrap.dedent("""
-                Hi! This is the friendly conda-forge-admin automated user.
-
-                I've re-rendered this feedstock with the latest version of conda-smithy ({}) and noticed some changes.
-                If the changes look good, then please go ahead and merge this PR.
-                If you have any questions about the changes though, please feel free to ping the 'conda-forge/core' team (using the @ notation in a comment). 
-
-                Remember, for any changes to the recipe you would normally need to increment the version or the build number of the package.
-                Since this is an infrastructural change, we don't actually need/want a new version to be uploaded to anaconda.org/conda-forge, so the version and build/number are left unchanged.
-
-                Thanks!
-
-                """.format(conda_smithy.__version__))
-        forge_feedstock.create_pull(title='MNT: Re-render the feedstock',
-                               body=msg,
-                               head="conda-forge-admin:feedstock_rerender", base="master")
-        print('Opened PR on {}'.format(forge_feedstock.html_url))
+                # Technically, we can do whatever we like to the feedstock now. Let's just
+                # update the feedstock though. For examples of other things that *have* been
+                # done here - once upon a time @pelson modified the conda-forge.yaml config
+                # item for every single feedstock, and submitted PRs for every project.
+                conda_smithy.configure_feedstock.main(feedstock.directory)
+            if pr:
+                skip_after_package = True
 
     # Stop processing any more feedstocks until the next time the script is run.
-    break
+    if skip_after_package:
+        break
+
+
