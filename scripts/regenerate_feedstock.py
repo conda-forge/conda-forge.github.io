@@ -51,9 +51,12 @@ parser.add_argument('--feedstocks-dir', help="The location of the feedstocks.",
                     default="~/dev/conda-forge/feedstocks")
 parser.add_argument('--regexp', help="Regexp of feedstocks to consider.",
                     default=".*")
+parser.add_argument('--limit', help="Limit the number of packages to propose changes for (0 is unlimited).",
+                    default=1, type=int)
 args = parser.parse_args()
 
 feedstocks_dir = os.path.expanduser(args.feedstocks_dir)
+change_limit = args.limit
 
 feedstocks.clone_all('conda-forge', feedstocks_dir)
 feedstocks.fetch_feedstocks(feedstocks_dir)
@@ -210,7 +213,7 @@ def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
                 print('Opened PR on {}'.format(pull.html_url))
             context.append(pull)
 
-
+count = 0
 for feedstock in randomised_feedstocks:
     print('Checking {}'.format(feedstock.name))
     if feedstock.name not in forge_repos:
@@ -249,6 +252,8 @@ for feedstock in randomised_feedstocks:
 
     # Stop processing any more feedstocks until the next time the script is run.
     if skip_after_package:
-        break
+        count += 1
 
+    if change_limit > 0 and count >= change_limit:
+        break
 
