@@ -16,7 +16,7 @@ from git import Repo
 
 import argparse
 
-import warning
+import warnings
 
 parser = argparse.ArgumentParser(description='Update the conda-forge/feedstocks repo.')
 parser.add_argument('feedstocks_repo', help="The location of the checked out conda-forge/feedstocks repo.")
@@ -46,7 +46,7 @@ for feedstock in forge_feedstocks:
             feedstocks_repo.create_submodule(feedstock.package_name, repo_subdir,
                                              url=feedstock.clone_url)
         except ValueError:
-            warning.warn(
+            warnings.warn(
                     "Unable to add the submodule {}. "
                     "This is likely because the repo has no commits, "
                     "which likely means something went wrong with feedstock generation. "
