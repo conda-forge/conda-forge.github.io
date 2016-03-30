@@ -10,9 +10,11 @@
 # run_with: python
 
 import os
+import shutil
 
 import conda_smithy.feedstocks as feedstocks
 from git import Repo
+from git.exc import GitCommandError
 
 import argparse
 
@@ -43,15 +45,21 @@ for feedstock in forge_feedstocks:
 
         # Add the new submodule.
         try:
-            feedstocks_repo.create_submodule(feedstock.package_name, repo_subdir,
-                                             url=feedstock.clone_url)
-        except ValueError:
+            feedstocks_repo.git.submodule(
+                "add",
+                "--name",
+                feedstock.package_name,
+                feedstock.clone_url,
+                repo_subdir
+            )
+        except GitCommandError:
             warnings.warn(
                     "Unable to add the submodule {}. "
                     "This is likely because the repo has no commits, "
                     "which likely means something went wrong with feedstock generation. "
                     "Will skip adding this submodule and continue.".format(feedstock.package_name)
             )
+            shutil.rmtree(abs_subdir)
 
 
 # Pick out the feedstocks which exist on the repo, but are no longer on conda-forge.
