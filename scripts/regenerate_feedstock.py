@@ -20,7 +20,6 @@ Whilst it is out of date, the following pseudo code was used to outline this mod
 """
 # conda execute
 # env:
-#  - git
 #  - python
 #  - conda-smithy
 #  - gitpython
