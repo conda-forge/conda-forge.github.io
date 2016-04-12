@@ -8,6 +8,9 @@ if [ -n "$GH_TOKEN" ]; then
     git clone https://${GH_TOKEN}@github.com/conda-forge/feedstocks.git feedstocks_repo
     conda execute -v ./scripts/update_feedstocks_submodules.py ./feedstocks_repo
     cd ./feedstocks_repo
+
+    # Update to avoid race-conditions.
+    git fetch origin 2> /dev/null && git rebase origin/master
     git push origin master 2> /dev/null
     cd ../
 
