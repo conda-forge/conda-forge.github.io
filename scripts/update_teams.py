@@ -137,7 +137,10 @@ for old_member in member_handles - all_members:
 
 # Remove any teams which don't belong any more (because there is no longer a feedstock).
 for team_to_remove in set(teams.keys()) - set(packages_visited):
-    if team_to_remove in ['Core', 'conda-forge.github.io', 'all-members']:
+    if team_to_remove in ['Core',
+                          'conda-forge.github.io',
+                          'all-members',
+                          'conda-forge-webservices']:
         print('Keeping ', team_to_remove)
         continue
     print("THE {} TEAM NEEDS TO BE REMOVED.".format(team_to_remove))
