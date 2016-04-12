@@ -1,3 +1,13 @@
+#!/usr/bin/env conda-execute
+
+# conda execute
+# env:
+#  - python
+#  - conda
+# channels:
+#  - conda-forge
+# run_with: python
+
 import argparse
 from conda.api import get_index
 import conda.resolve
