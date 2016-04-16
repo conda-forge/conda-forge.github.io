@@ -10,6 +10,7 @@
 # run_with: python
 
 import argparse
+import collections
 import os
 
 from github import Github
@@ -39,6 +40,32 @@ feedstocks_path = args.feedstocks_clone
 class NullUndefined(jinja2.Undefined):
     def __unicode__(self):
         return unicode(self._undefined_name)
+
+class SilentDict(collections.MutableMapping):
+    def __init__(self, *args, **kwargs):
+        self.store = dict()
+        self.update(dict(*args, **kwargs))
+
+    def __getitem__(self, key):
+        try:
+            return self.store[key]
+        except KeyError:
+            return None
+
+    def __setitem__(self, key, value):
+        self.store[key] = value
+
+    def __delitem__(self, key):
+        try:
+            del self.store[key]
+        except KeyError:
+            pass
+
+    def __iter__(self):
+        return iter(self.store)
+
+    def __len__(self):
+        return len(self.store)
 
 
 def create_team(org, name, description, repos):
@@ -79,7 +106,7 @@ for package_name in os.listdir(feedstocks_path):
     env = jinja2.Environment(undefined=NullUndefined)
 
     with open(recipe) as fh:
-        contents = env.from_string(''.join(fh)).render(environ={})
+        contents = env.from_string(''.join(fh)).render(environ=SilentDict())
     data = yaml.safe_load(contents)
 
     contributors = data.get('extra', {}).get('recipe-maintainers', [])
