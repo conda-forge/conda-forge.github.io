@@ -43,6 +43,7 @@ class NullUndefined(jinja2.Undefined):
 
 class SilentDict(collections.MutableMapping):
     def __init__(self, *args, **kwargs):
+        self.undefined = None
         self.store = dict()
         self.update(dict(*args, **kwargs))
 
@@ -50,7 +51,7 @@ class SilentDict(collections.MutableMapping):
         try:
             return self.store[key]
         except KeyError:
-            return None
+            return self.undefined
 
     def __setitem__(self, key, value):
         self.store[key] = value
@@ -67,12 +68,6 @@ class SilentDict(collections.MutableMapping):
     def __len__(self):
         return len(self.store)
 
-
-def jinja_finalize(value):
-    if value is None:
-        return ""
-    else:
-        return value
 
 def create_team(org, name, description, repos):
     # PyGithub creates secret teams, and has no way of turning that off! :(
@@ -109,10 +104,12 @@ for package_name in os.listdir(feedstocks_path):
     if not os.path.exists(recipe):
         print("The {} feedstock is recipe less".format(package_name))
         continue
-    env = jinja2.Environment(undefined=NullUndefined, finalize=jinja_finalize)
+    env = jinja2.Environment(undefined=NullUndefined)
 
     with open(recipe) as fh:
-        contents = env.from_string(''.join(fh)).render(environ=SilentDict())
+        environ = SilentDict()
+        environ.undefined = ""
+        contents = env.from_string(''.join(fh)).render(environ=environ)
     data = yaml.safe_load(contents)
 
     contributors = data.get('extra', {}).get('recipe-maintainers', [])
