@@ -68,6 +68,12 @@ class SilentDict(collections.MutableMapping):
         return len(self.store)
 
 
+def jinja_finalize(value):
+    if value is None:
+        return ""
+    else:
+        return value
+
 def create_team(org, name, description, repos):
     # PyGithub creates secret teams, and has no way of turning that off! :(
     post_parameters = {
@@ -103,7 +109,7 @@ for package_name in os.listdir(feedstocks_path):
     if not os.path.exists(recipe):
         print("The {} feedstock is recipe less".format(package_name))
         continue
-    env = jinja2.Environment(undefined=NullUndefined)
+    env = jinja2.Environment(undefined=NullUndefined, finalize=jinja_finalize)
 
     with open(recipe) as fh:
         contents = env.from_string(''.join(fh)).render(environ=SilentDict())
