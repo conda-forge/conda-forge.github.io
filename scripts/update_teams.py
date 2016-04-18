@@ -44,6 +44,9 @@ class NullUndefined(jinja2.Undefined):
     def __getattr__(self, name):
         return unicode('{}.{}'.format(self, name))
 
+    def __getitem__(self, name):
+        return '{}["{}"]'.format(self, name)
+
 
 def create_team(org, name, description, repos):
     # PyGithub creates secret teams, and has no way of turning that off! :(
