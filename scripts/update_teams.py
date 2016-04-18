@@ -68,6 +68,9 @@ class SilentDict(collections.MutableMapping):
     def __len__(self):
         return len(self.store)
 
+    def __getitem__(self, name):
+        return '{}["{}"]'.format(self, name)
+
 
 def create_team(org, name, description, repos):
     # PyGithub creates secret teams, and has no way of turning that off! :(
