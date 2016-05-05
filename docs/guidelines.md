@@ -17,10 +17,12 @@ express permission to be adding as a maintainer should they be added to the
 maintainer list. In all cases when porting a recipe, you should add yourself as a
 maintainer. Some contributors to these repos were quite prolific, but may not be
 as actively engaged. If they specify they only want to be contacted for certain
-recipes or none at all, please respect their wishes also add here what recipes
-(if any) they would like to be notified for. If they are no longer interested in
-any conda recipes, make that note here as well. Before contacting anyone please
-consult the list below to see if that contributor has restrictions.
+recipes or none at all, please respect their wishes also add make note of what
+recipes (if any) they would like to be notified for. If they are no longer
+interested in any conda recipes, make that note here as well. Before contacting
+anyone please consult the list in this
+[issue]( https://github.com/conda-forge/staged-recipes/issues/139 )
+to see if that contributor has restrictions.
 
 When porting make sure the recipe follows the linting specifications. The
 section order should go `package`, `source`, `build`, `requirements`, `test`,
