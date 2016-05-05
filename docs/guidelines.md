@@ -40,21 +40,6 @@ for easy changing of the version (using latest is not acceptable). Also, a
 checksum should be included with all compressed source balls to allow for
 verification of downloads.
 
-When adding a package from either location, inspect the commit history to see
-who has made changes to the recipe in the past. Anyone who has touched the
-recipe should be pinged about it getting added here. They should also be
-consulted with regards to whether the recipe needs any tweaks before being added.
-Also, they should be asked if they would like to be added as maintainers. Only if
-they give express permission to be adding as a maintainer should they be added to
-the maintainer list. In all cases when porting a recipe, you should add yourself
-as a maintainer. Some contributors to these repos were quite prolific, but may
-not be as actively engaged. If they specify they only want to be contacted for
-certain recipes or none at all, please respect their wishes also add here what
-recipes (if any) they would like to be notified for. If they are no longer
-interested in any conda recipes, make that note here as well. Before contacting
-anyone please consult the list below to see if that contributor has
-restrictions.
-
 It is required to add tests with all packages. These can included but are not
 limited to checking libraries are installed, python imports, simple code snippet
 to compile or run a basic test, command line usage (checking help or version).
