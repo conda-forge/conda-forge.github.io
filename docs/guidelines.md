@@ -1,8 +1,8 @@
-This issue intends to layout some guidelines on the transfer of [conda-recipes](
-https://github.com/conda/conda-recipes ) and [anaconda-recipes](
-https://github.com/ContinuumIO/anaconda-recipes ) to conda-forge. These aren't
-hard and fast rules. They are certainly up for discussion. However, it would be
-good to come up with a consensus going forward.
+This document intends to layout some guidelines on the transfer of
+[conda-recipes]( https://github.com/conda/conda-recipes ) and
+[anaconda-recipes]( https://github.com/ContinuumIO/anaconda-recipes ) to
+conda-forge. These aren't hard and fast rules. They are certainly up for
+discussion. However, it would be good to come up with a consensus going forward.
 
 Eventually all recipes from those repos should be proposed for addition here.
 It may be decided that a few don't actually belong or should not be supported
