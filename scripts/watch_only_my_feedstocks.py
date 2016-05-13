@@ -66,7 +66,7 @@ class NullUndefined(jinja2.Undefined):
         return six.text_type(self._undefined_name)
     
     def __getattr__(self, name):
-        return '{}.{}'.format(self, name)
+        return six.text_type('{}.{}'.format(self, name))
 
     def __getitem__(self, name):
         return '{}["{}"]'.format(self, name)
