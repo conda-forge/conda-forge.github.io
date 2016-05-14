@@ -5,6 +5,7 @@
 #  - python
 #  - conda-smithy
 #  - pygithub 1.*
+#  - six
 # channels:
 #  - conda-forge
 # run_with: python
@@ -12,6 +13,7 @@
 import argparse
 import collections
 import os
+import six
 
 from github import Github
 import github
@@ -39,10 +41,10 @@ feedstocks_path = args.feedstocks_clone
 
 class NullUndefined(jinja2.Undefined):
     def __unicode__(self):
-        return unicode(self._undefined_name)
+        return six.text_type(self._undefined_name)
 
     def __getattr__(self, name):
-        return unicode('{}.{}'.format(self, name))
+        return six.text_type('{}.{}'.format(self, name))
 
     def __getitem__(self, name):
         return '{}["{}"]'.format(self, name)

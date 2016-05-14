@@ -9,6 +9,7 @@ This is super useful if you are a conda-forge administrator and you are automati
 #  - python
 #  - conda-smithy
 #  - pygithub
+#  - six
 # channels:
 #  - conda-forge
 # run_with: python
@@ -24,6 +25,7 @@ import re
 import git
 import github
 import jinja2
+import six
 
 import conda_smithy.github
 import conda_smithy.configure_feedstock
@@ -61,10 +63,10 @@ print('Found {} conda-forge subscriptions.'.format(len(current_subscriptions)))
 
 class NullUndefined(jinja2.Undefined):
     def __unicode__(self):
-        return unicode(self._undefined_name)
+        return six.text_type(self._undefined_name)
     
     def __getattr__(self, name):
-        return '{}.{}'.format(self, name)
+        return six.text_type('{}.{}'.format(self, name))
 
     def __getitem__(self, name):
         return '{}["{}"]'.format(self, name)
