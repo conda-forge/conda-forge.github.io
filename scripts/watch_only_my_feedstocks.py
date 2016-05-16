@@ -79,7 +79,7 @@ for feedstock in feedstocks.cloned_feedstocks(feedstocks_dir):
         print('Found an empty repo... :(')
         continue
     with open(meta, 'r') as fh:
-        contents = env.from_string(''.join(fh)).render()
+        contents = env.from_string(''.join(fh)).render(os=os)
     meta = yaml.safe_load(contents)
     me_a_maintainer = gh_me.login in meta.get('extra', {}).get('recipe-maintainers', [])
     print(' - {: <24}(maintainer: {})'.format(feedstock.package, me_a_maintainer))
