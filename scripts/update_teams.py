@@ -6,6 +6,7 @@
 #  - conda-smithy
 #  - pygithub 1.*
 #  - six
+#  - conda-build
 # channels:
 #  - conda-forge
 # run_with: python
@@ -17,8 +18,8 @@ import six
 
 from github import Github
 import github
-import jinja2
 import yaml
+from conda_build.metadata import MetaData
 
 
 parser = argparse.ArgumentParser(description='Process some integers.')
@@ -37,17 +38,6 @@ conda_forge = gh.get_organization('conda-forge')
 teams = {team.name: team for team in conda_forge.get_teams()}
 
 feedstocks_path = args.feedstocks_clone
-
-
-class NullUndefined(jinja2.Undefined):
-    def __unicode__(self):
-        return six.text_type(self._undefined_name)
-
-    def __getattr__(self, name):
-        return six.text_type('{}.{}'.format(self, name))
-
-    def __getitem__(self, name):
-        return '{}["{}"]'.format(self, name)
 
 
 def create_team(org, name, description, repos):
@@ -85,13 +75,9 @@ for package_name in os.listdir(feedstocks_path):
     if not os.path.exists(recipe):
         print("The {} feedstock is recipe less".format(package_name))
         continue
-    env = jinja2.Environment(undefined=NullUndefined)
+    meta = MetaData(recipe)
 
-    with open(recipe) as fh:
-        contents = env.from_string(''.join(fh)).render(os=os, environ=os.environ)
-    data = yaml.safe_load(contents)
-
-    contributors = data.get('extra', {}).get('recipe-maintainers', [])
+    contributors = meta.meta.get('extra', {}).get('recipe-maintainers', [])
     if not isinstance(contributors, list):
         # Deal with a contribution list which has dashes but no spaces
         # (e.g. https://github.com/conda-forge/pandoc-feedstock/issues/1)
