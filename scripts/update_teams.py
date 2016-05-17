@@ -88,7 +88,7 @@ for package_name in os.listdir(feedstocks_path):
     env = jinja2.Environment(undefined=NullUndefined)
 
     with open(recipe) as fh:
-        contents = env.from_string(''.join(fh)).render()
+        contents = env.from_string(''.join(fh)).render(os=os, environ=os.environ)
     data = yaml.safe_load(contents)
 
     contributors = data.get('extra', {}).get('recipe-maintainers', [])
