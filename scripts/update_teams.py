@@ -75,7 +75,7 @@ for package_name in os.listdir(feedstocks_path):
     if not os.path.exists(recipe):
         print("The {} feedstock is recipe less".format(package_name))
         continue
-    meta = MetaData(recipe)
+    meta = MetaData(feedstock)
 
     contributors = meta.meta.get('extra', {}).get('recipe-maintainers', [])
     if not isinstance(contributors, list):
