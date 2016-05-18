@@ -68,6 +68,7 @@ superlative = ['awesome', 'slick', 'formidable', 'awe-inspiring', 'breathtaking'
 # Go through each of the feedstocks and ensure that the team is up to date and that
 # there is nobody in the team which doesn't belong (i.e. isn't in the maintainers list).
 for package_name in os.listdir(feedstocks_path):
+    print("Checking {}".format(package_name))
     packages_visited.add(package_name)
     feedstock = os.path.join(feedstocks_path, package_name)
     recipe = os.path.join(feedstock, 'recipe', 'meta.yaml')
