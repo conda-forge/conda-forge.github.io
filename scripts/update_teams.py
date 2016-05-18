@@ -6,7 +6,8 @@
 #  - conda-smithy
 #  - pygithub 1.*
 #  - six
-#  - conda-build
+# This needs to be pinned because selectors are an issue in 1.20.2
+#  - conda-build =1.20.1
 # channels:
 #  - conda-forge
 # run_with: python
