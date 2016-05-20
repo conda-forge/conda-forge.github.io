@@ -10,6 +10,7 @@ This is super useful if you are a conda-forge administrator and you are automati
 #  - python
 #  - conda-smithy
 #  - pygithub
+#  - gitpython
 #  - six
 # channels:
 #  - conda-forge
