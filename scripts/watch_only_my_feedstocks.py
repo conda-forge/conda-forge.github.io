@@ -6,9 +6,11 @@ This is super useful if you are a conda-forge administrator and you are automati
 """
 # conda execute
 # env:
+#  - git
 #  - python
 #  - conda-smithy
 #  - pygithub
+#  - gitpython
 #  - six
 # channels:
 #  - conda-forge
