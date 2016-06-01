@@ -126,7 +126,7 @@ else:
     # For debugging, we turn our attention to a single feedstock.
     debug_name = 'libtiff-feedstock'
     debug_name = 'bob.io.image-feedstock'
-    debug_name = 'libnetcdf-feedstock'
+    debug_name = 'expat-feedstock'
     try:
         my_repos = {debug_name: gh_me.get_repo(debug_name)}
     except github.UnknownObjectException:
@@ -299,7 +299,7 @@ for feedstock in randomised_feedstocks:
                 forge_yaml = os.path.join(feedstock.directory, 'recipe', 'meta.yaml')
                 with open(forge_yaml, 'r') as fh:
                     content = ''.join(fh)
-                parsable_content = env.from_string(content).render(os=os, environ=os.environ) 
+                parsable_content = env.from_string(content).render(os=os)
                 code = ruamel.yaml.load(parsable_content, ruamel.yaml.RoundTripLoader)
 
                 replacements = {}
