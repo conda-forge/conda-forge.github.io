@@ -29,23 +29,23 @@ import conda_smithy.feedstocks as feedstocks
 
 
 pinned = {
-          'boost': 'boost 1.60.*',
+          'boost': 'boost 1.61.*',
           'bzip2': 'bzip2 1.0.*',
           'fontconfig': 'fontconfig 2.11.*',
-          'freetype': 'freetype 2.6*',
-          'hdf5': 'hdf5 1.8.17*',
+          'freetype': 'freetype 2.6.*',
+          'hdf5': 'hdf5 1.8.17',
           'icu': 'icu 56.*',
-          'jpeg': 'jpeg 9*',
-          'libnetcdf': 'libnetcdf 4.4*',
+          'jpeg': 'jpeg 9.*',
+          'libnetcdf': 'libnetcdf 4.4.*',
           'libpng': 'libpng >=1.6.21,<1.7',
           'libtiff': 'libtiff 4.0.*',
-          'ncurses': 'ncurses 5.9*',
-          'openssl': 'openssl 1.0*',
-          'readline': 'readline 6.2*',
+          'ncurses': 'ncurses 5.9.*',
+          'openssl': 'openssl 1.0.*',
+          'readline': 'readline 6.2.*',
           'sqlite': 'sqlite 3.9.*',
-          'tk': 'tk 8.5*',
+          'tk': 'tk 8.5.*',
           'xz': 'xz 5.0.*',  # To be changed once we have the Python recipe.
-          'zlib': 'zlib 1.2*',
+          'zlib': 'zlib 1.2.*',
         }
 
 parser = argparse.ArgumentParser(description='Propose a feedstock update.')
