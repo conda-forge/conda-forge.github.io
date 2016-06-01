@@ -1,3 +1,6 @@
+Guidelines
+**********
+
 This document intends to layout some guidelines on the transfer of
 `conda-recipes <https://github.com/conda/conda-recipes>`__ and
 `anaconda-recipes <https://github.com/ContinuumIO/anaconda-recipes>`__
