@@ -35,7 +35,7 @@ pinned = {
           'freetype': 'freetype 2.6.*',
           'hdf5': 'hdf5 1.8.17',
           'icu': 'icu 56.*',
-          'jpeg': 'jpeg 9.*',
+          'jpeg': 'jpeg 9*',
           'libnetcdf': 'libnetcdf 4.4.*',
           'libpng': 'libpng >=1.6.21,<1.7',
           'libtiff': 'libtiff 4.0.*',
