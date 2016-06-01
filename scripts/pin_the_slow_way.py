@@ -115,7 +115,7 @@ def list_pulls(repo, state='open', head=None):
 
 
 # Set to false to debug.
-if False:
+if True:
     print("Collecting list of conda-forge-admin repos...")
     my_repos = {repo.name: repo for repo in my_repos(gh_me)}
     print("Collecting list of conda-forge repos...")
