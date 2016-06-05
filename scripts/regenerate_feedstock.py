@@ -119,7 +119,7 @@ if True:
     forge_repos = {repo.name: repo for repo in gh_forge.get_repos()}
 else:
     # For debugging, we turn our attention to a single feedstock.
-    debug_name = 'gdal-feedstock'
+    debug_name = 'pint-feedstock'
     my_repos = {debug_name: gh_me.get_repo(debug_name)}
     forge_repos = {debug_name: gh_me.get_repo(debug_name)}
     randomised_feedstocks = [feedstock for feedstock in randomised_feedstocks
@@ -166,21 +166,25 @@ def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
         commit = clone.index.commit("MNT: Updated the feedstock for conda-smithy version {}.\n\n[ci skip]".format(conda_smithy.__version__),
                                     author=author)
 
+        remote_branch_already_exists = target_branch in fork_remote.refs
+
         change_from_remote_branch = True
         full_ref = '{}/{}'.format(fork_remote.name, target_branch)
         if full_ref in [ref.name for ref in fork_remote.refs]:
             diff = commit.diff(fork_remote.refs[target_branch])
             if not diff:
                 # There were no differences between this and the remote targt branch, so just continue.
-                print("{} was checked, and whilst there are changes needed, the PR is up-to-date".format(feedstock.name))
                 change_from_remote_branch = False
 
-        if change_from_remote_branch:
+        if not remote_branch_already_exists or change_from_remote_branch:
             fork_remote.push('+{}'.format(target_branch))
 
-            rerender_pulls = list(list_pulls(forge_feedstock, state='open', head='conda-forge-admin:{}'.format(target_branch)))
-            if rerender_pulls:
-                pull = rerender_pulls[0]
+        rerender_pulls = list(list_pulls(forge_feedstock, state='open', head='conda-forge-admin:{}'.format(target_branch)))
+        if rerender_pulls:
+            pull = rerender_pulls[0]
+            if not change_from_remote_branch:
+                print("{} was checked, and whilst there are changes needed, the PR ({}) is up-to-date".format(feedstock.name, pull.html_url))
+            else:
                 msg = textwrap.dedent("""
     It's the friendly automated conda-forge-admin here again.
 
@@ -193,26 +197,26 @@ def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
                        """.format(conda_smithy.__version__))
                 pull.create_issue_comment(msg)
                 print('Updated PR on {}'.format(forge_feedstock.html_url))
-            else:
-                # TODO: Should there be one for each branch in the repo?
-                msg = textwrap.dedent("""
-    Hi! This is the friendly conda-forge-admin automated user.
+        else:
+            # There were no existing open PRs, so open one!
+            msg = textwrap.dedent("""
+Hi! This is the friendly conda-forge-admin automated user.
 
-    I've re-rendered this feedstock with the latest version of conda-smithy ({}) and noticed some changes.
-    If the changes look good, then please go ahead and merge this PR.
-    If you have any questions about the changes though, please feel free to ping the 'conda-forge/core' team (using the @ notation in a comment). 
+I've re-rendered this feedstock with the latest version of conda-smithy ({}) and noticed some changes.
+If the changes look good, then please go ahead and merge this PR.
+If you have any questions about the changes though, please feel free to ping the 'conda-forge/core' team (using the @ notation in a comment). 
 
-    Remember, for any changes to the recipe you would normally need to increment the version or the build number of the package.
-    Since this is an infrastructural change, we don't actually need/want a new version to be uploaded to anaconda.org/conda-forge, so the version and build/number are left unchanged and the CI has been skipped.
+Remember, for any changes to the recipe you would normally need to increment the version or the build number of the package.
+Since this is an infrastructural change, we don't actually need/want a new version to be uploaded to anaconda.org/conda-forge, so the version and build/number are left unchanged and the CI has been skipped.
 
-    Thanks!
+Thanks!
 
-                        """.format(conda_smithy.__version__))
-                pull = forge_feedstock.create_pull(title='MNT: Re-render the feedstock',
-                                                   body=msg,
-                                                   head="conda-forge-admin:{}".format(target_branch), base=remote_head)
-                print('Opened PR on {}'.format(pull.html_url))
-            context.append(pull)
+                    """.format(conda_smithy.__version__))
+            pull = forge_feedstock.create_pull(title='MNT: Re-render the feedstock',
+                                               body=msg,
+                                               head="conda-forge-admin:{}".format(target_branch), base=remote_head)
+            print('Opened PR on {}'.format(pull.html_url))
+        context.append(pull)
 
 count = 0
 for feedstock in randomised_feedstocks:
