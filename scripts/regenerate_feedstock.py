@@ -165,7 +165,7 @@ def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
         clone.git.add('-A')
         from git import Actor
         author = Actor("conda-forge-admin", "pelson.pub+conda-forge@gmail.com")
-        commit = clone.index.commit("MNT: Updated the feedstock for conda-smithy version {}.\n\n[ci skip]".format(conda_smithy.__version__),
+        commit = clone.index.commit("MNT: Updated the feedstock for conda-smithy version {}.".format(conda_smithy.__version__),
                                     author=author)
 
         remote_branch_already_exists = target_branch in fork_remote.refs
@@ -214,7 +214,7 @@ Since this is an infrastructural change, we don't actually need/want a new versi
 Thanks!
 
                     """.format(conda_smithy.__version__))
-            pull = forge_feedstock.create_pull(title='MNT: Re-render the feedstock',
+            pull = forge_feedstock.create_pull(title='MNT: Re-render the feedstock [ci skip]',
                                                body=msg,
                                                head="conda-forge-admin:{}".format(target_branch), base=remote_head)
             print('Opened PR on {}'.format(pull.html_url))
