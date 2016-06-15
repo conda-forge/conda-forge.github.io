@@ -30,6 +30,14 @@ install:
     # Now do the things we need to do to install it.
     - conda install conda-execute --yes --quiet -c conda-forge
 
+    # Pin conda and conda-env to workaround a compatibility
+    # issue with conda-execute and conda 4.1.0. See the
+    # linked issue for more details.
+    #
+    # https://github.com/pelson/conda-execute/issues/21
+    #
+    - conda install --yes --quiet conda=4.0.8 conda-env=2.4.5
+
 script:
     - if [ $ACTION = "update_docs" ]; then
         echo "Updating docs";
