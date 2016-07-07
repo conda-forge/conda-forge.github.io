@@ -42,9 +42,9 @@ pinned = {
           'ncurses': 'ncurses 5.9*',
           'openssl': 'openssl 1.0.*',
           'readline': 'readline 6.2*',
-          'sqlite': 'sqlite 3.9.*',
+          'sqlite': 'sqlite 3.13.*',
           'tk': 'tk 8.5.*',
-          'xz': 'xz 5.0.*',  # To be changed once we have the Python recipe.
+          'xz': 'xz 5.2.*',
           'zlib': 'zlib 1.2.*',
         }
 
@@ -214,7 +214,7 @@ def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
 
     I've bumped some of the conda-forge pinned versions, and noticed that it impacts this feedstock.
     If the changes look good, then please go ahead and merge this PR.
-    If you have any questions about the changes though, please feel free to ping the 'conda-forge/core' team (using the @ notation in a comment). 
+    If you have any questions about the changes though, please feel free to ping the 'conda-forge/core' team (using the @ notation in a comment).
 
     Thanks!
 
@@ -245,7 +245,7 @@ def set_start_comment(self, comment, indent=0):
     for com in comment.split('\n'):
         pre_comments.append(CommentToken('# ' + com + '\n', start_mark, None))
 
-if not hasattr(CommentedBase, 'set_start_comment'): 
+if not hasattr(CommentedBase, 'set_start_comment'):
     CommentedBase.set_start_comment = set_start_comment
 
 import jinja2
