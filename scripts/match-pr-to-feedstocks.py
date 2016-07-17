@@ -98,7 +98,7 @@ def build_pr_index(filename, gh_org='conda-forge', staged_recipes_repo='staged-r
                 try:
                     meta = requests.get(f.raw_url).content
                     pkg_name = _extract_package_name(meta)
-                    idx = 'pr{}/{}'.format(pr.number, f.filename)
+                    idx = 'pr {} ({}) /{}'.format(pr.number, pkg_name, f.filename)
                     pkg_index[idx] = pkg_name
                 except AttributeError:
                     pkg_index[idx] = None
@@ -120,8 +120,8 @@ def compare_indices(pr_index, feedstock_index, threshold, limit):
     for pr, name in list(pr_index.items()):
         m = _fuzzy_match(name, feedstock_index, threshold=threshold, limit=limit)
         if len(m) > 0:
-            matches[(pr, name)] = m
-    print(matches)
+            matches[pr] = m
+    _format_output(matches, threshold, limit)
 
 
 @cli.command('check-pr', help='check pr against feedstock index.')
@@ -144,16 +144,16 @@ def check_pr(pr, feedstock_index, threshold, limit, gh_org, staged_recipes_repo)
             try:
                 meta = requests.get(f.raw_url).content
                 pkg_name = _extract_package_name(meta)
-                idx = 'pr{}/{}'.format(pr.number, f.filename)
+                idx = 'pr {} ({}) /{}'.format(pr.number, pkg_name, f.filename)
                 packages[idx] = pkg_name
             except AttributeError:
                 packages[idx] = None
 
-    result = {}
+    matches = {}
     for k, pkg_name in packages.items():
-        result[k] = _fuzzy_match(pkg_name, feedstock_index, threshold, limit)
+        matches[k] = _fuzzy_match(pkg_name, feedstock_index, threshold, limit)
 
-    print(result)
+    _format_output(matches, threshold, limit)
 
 
 @cli.command('check-pkg', help='check pkg name against feedstock index.')
@@ -164,7 +164,18 @@ def check_pr(pr, feedstock_index, threshold, limit, gh_org, staged_recipes_repo)
 def check_pkg(name, feedstock_index, threshold, limit):
     feedstock_index = json.load(open(feedstock_index))
     matches = _fuzzy_match(name, feedstock_index, threshold, limit)
-    print(matches)
+    _format_output({name: matches}, threshold, limit)
+
+
+def _format_output(matches, threshold, limit):
+    vals = (threshold, limit)
+    print('-------------------------------------------')
+    print('match(es) found using threshold={}, limit={}'.format(*vals))
+    print('-------------------------------------------')
+    for k, repo in matches.items():
+        for recipe in repo:
+            if len(recipe) > 0:
+                print('{} matches --> pkg={}, score={}, feedstock={}'.format(k, *recipe))
 
 
 def _fuzzy_match(name, feedstock_index, threshold, limit):
@@ -174,7 +185,7 @@ def _fuzzy_match(name, feedstock_index, threshold, limit):
     for match in matches:
         pkg, score = match
         if score > threshold:
-            result.append((score, pkg, feedstock_index[pkg]))
+            result.append((pkg, score, feedstock_index[pkg]))
 
     return result
 
