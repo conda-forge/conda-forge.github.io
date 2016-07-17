@@ -108,6 +108,60 @@ def build_pr_index(filename, gh_org='conda-forge', staged_recipes_repo='staged-r
         print('pull requests index written to {}'.format(filename))
 
 
+@cli.command('check-pr', help='check pr against feedstock index.')
+@click.argument('pr', type=int)
+@click.argument('feedstock-index')
+@click.option('--threshold', default=85, help='only return matches with scores above threshold')
+@click.option('--limit', default=2, help='maximum number of matches')
+@click.option('--gh-org', default='conda-forge', help='Set Github organization name.')
+@click.option('--staged-recipes-repo', default='staged-recipes', help='Set staged recipe repo.')
+def check_pr(pr, feedstock_index, threshold, limit, gh_org, staged_recipes_repo):
+    feedstock_index = json.load(open(feedstock_index))
+    token = smithy_github.gh_token()
+    gh = Github(token)
+    org = gh.get_organization(gh_org)
+    repo = org.get_repo(staged_recipes_repo)
+    pr = repo.get_pull(pr)
+    packages = {}
+    for f in pr.get_files():
+        if f.filename.lower().endswith('meta.yaml'):
+            try:
+                meta = requests.get(f.raw_url).content
+                pkg_name = _extract_package_name(meta)
+                idx = 'pr{}/{}'.format(pr.number, f.filename)
+                packages[idx] = pkg_name
+            except AttributeError:
+                packages[idx] = None
+
+    result = {}
+    for k, pkg_name in packages.items():
+        result[k] = _fuzzy_match(pkg_name, feedstock_index, threshold, limit)
+
+    print(result)
+
+
+@cli.command('check-pkg', help='check pkg name against feedstock index.')
+@click.argument('name')
+@click.argument('feedstock-index')
+@click.option('--threshold', default=85, help='only return matches with scores above threshold')
+@click.option('--limit', default=2, help='maximum number of matches')
+def check_pkg(name, feedstock_index, threshold, limit):
+    feedstock_index = json.load(open(feedstock_index))
+    matches = _fuzzy_match(name, feedstock_index, threshold, limit)
+    print(matches)
+
+
+def _fuzzy_match(name, feedstock_index, threshold, limit):
+    choices = list(feedstock_index.keys())
+    matches = process.extract(name, choices, limit=limit)
+    result = []
+    for match in matches:
+        pkg, score = match
+        if score > threshold:
+            result.append((score, pkg, feedstock_index[pkg]))
+
+    return result
+
 def _extract_package_name(meta):
     """Extract package name from meta.yaml"""
     content = env.from_string(meta.decode('utf8')).render(os=os)
