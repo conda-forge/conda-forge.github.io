@@ -108,6 +108,22 @@ def build_pr_index(filename, gh_org='conda-forge', staged_recipes_repo='staged-r
         print('pull requests index written to {}'.format(filename))
 
 
+@cli.command('compare-indices', help='compare pr index to feedstock index.')
+@click.argument('pr-index')
+@click.argument('feedstock-index')
+@click.option('--threshold', default=85, help='only return matches with scores above threshold')
+@click.option('--limit', default=2, help='maximum number of matches')
+def compare_indices(pr_index, feedstock_index, threshold, limit):
+    pr_index = json.load(open(pr_index))
+    feedstock_index = json.load(open(feedstock_index))
+    matches = {}
+    for pr, name in list(pr_index.items()):
+        m = _fuzzy_match(name, feedstock_index, threshold=threshold, limit=limit)
+        if len(m) > 0:
+            matches[(pr, name)] = m
+    print(matches)
+
+
 @cli.command('check-pr', help='check pr against feedstock index.')
 @click.argument('pr', type=int)
 @click.argument('feedstock-index')
