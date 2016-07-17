@@ -80,6 +80,34 @@ def build_feedstock_index(filename, gh_org='conda-forge'):
         print('feedstocks index written to {}'.format(filename))
 
 
+@cli.command('build-pr-index', help='create json index of pull requests.')
+@click.argument('filename')
+@click.option('--gh-org', default='conda-forge', help='Set Github organization name.')
+@click.option('--staged-recipes-repo', default='staged-recipes', help='Set staged recipe repo.')
+def build_pr_index(filename, gh_org='conda-forge', staged_recipes_repo='staged-recipes'):
+    "Iterate over open pull requests in staged_recipes and return dict of pr:pkg-name"
+
+    token = smithy_github.gh_token()
+    gh = Github(token)
+    org = gh.get_organization(gh_org)
+    repo = org.get_repo(staged_recipes_repo)
+    pkg_index = {}
+    for pr in list(repo.get_pulls()):
+        for f in pr.get_files():
+            if f.filename.lower().endswith('meta.yaml'):
+                try:
+                    meta = requests.get(f.raw_url).content
+                    pkg_name = _extract_package_name(meta)
+                    idx = 'pr{}/{}'.format(pr.number, f.filename)
+                    pkg_index[idx] = pkg_name
+                except AttributeError:
+                    pkg_index[idx] = None
+
+    with open(filename, 'w') as f:
+        json.dump(pkg_index, f)
+        print('pull requests index written to {}'.format(filename))
+
+
 def _extract_package_name(meta):
     """Extract package name from meta.yaml"""
     content = env.from_string(meta.decode('utf8')).render(os=os)
