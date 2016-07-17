@@ -184,7 +184,7 @@ def _fuzzy_match(name, feedstock_index, threshold, limit):
     result = []
     for match in matches:
         pkg, score = match
-        if score > threshold:
+        if score >= threshold:
             result.append((pkg, score, feedstock_index[pkg]))
 
     return result
