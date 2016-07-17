@@ -172,7 +172,7 @@ def _format_output(matches, threshold, limit):
     print('-------------------------------------------')
     print('match(es) found using threshold={}, limit={}'.format(*vals))
     print('-------------------------------------------')
-    for k, repo in matches.items():
+    for k, repo in sorted(matches.items()):
         for recipe in repo:
             if len(recipe) > 0:
                 print('{} matches --> pkg={}, score={}, feedstock={}'.format(k, *recipe))
