@@ -45,6 +45,7 @@ pinned = {
           'libsvm': 'libsvm 3.21|3.21.*',
           'libtiff': 'libtiff 4.0.*',
           'ncurses': 'ncurses 5.9*',
+          'openblas': 'openblas 0.2.18|0.2.18.*',
           'openssl': 'openssl 1.0.*',
           'readline': 'readline 6.2*',
           'sox': 'sox 14.4.2',
