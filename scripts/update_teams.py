@@ -136,6 +136,7 @@ for team_to_remove in set(teams.keys()) - set(packages_visited):
     if team_to_remove in ['Core',
                           'conda-forge.github.io',
                           'all-members',
+                          'conda-forge-anvil',
                           'conda-forge-webservices']:
         print('Keeping ', team_to_remove)
         continue
