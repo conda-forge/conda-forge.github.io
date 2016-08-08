@@ -379,13 +379,13 @@ footer p {
     margin: 0;
 }
 
-::-moz-selection {
+:not(code)::-moz-selection {
     text-shadow: none;
     background: #fcfcfc;
     background: rgba(255,255,255,.2);
 }
 
-::selection {
+:not(code)::selection {
     text-shadow: none;
     background: #fcfcfc;
     background: rgba(255,255,255,.2);
