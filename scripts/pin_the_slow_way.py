@@ -39,7 +39,7 @@ pinned = {
           'libblitz': 'libblitz 0.10|0.10.*',
           'libmatio': 'libmatio 1.5.*',
           'libnetcdf': 'libnetcdf 4.4.*',
-          'libpng': 'libpng >=1.6.21,<1.7',
+          'libpng': 'libpng >=1.6.23,<1.7',
           'libsvm': 'libsvm 3.21|3.21.*',
           'libtiff': 'libtiff 4.0.*',
           'ncurses': 'ncurses 5.9*',
