@@ -74,17 +74,6 @@
                 <ul class="list-group">
 {% for feedstock in gh_feedstocks %}
                     <li class="list-group-item">
-                        <span class="label pull-right">
-                            <div href="https://circleci.com/gh/conda-forge/{{feedstock.package_name}}-feedstock" class="ci-badge">
-                                <img src="https://circleci.com/gh/conda-forge/{{feedstock.package_name}}-feedstock.svg?style=svg" />
-                            </div>
-                            <div href="https://travis-ci.org/conda-forge/{{feedstock.package_name}}-feedstock" class="ci-badge">
-                                <img src="https://travis-ci.org/conda-forge/{{feedstock.package_name}}-feedstock.svg?branch=master" />
-                            </div>
-                            <div href="https://ci.appveyor.com/project/conda-forge/{{feedstock.package_name}}-feedstock/branch/master" class="ci-badge">
-                                <img src="https://ci.appveyor.com/api/projects/status/github/conda-forge/{{feedstock.package_name}}-feedstock?svg=True">
-                            </div>
-                        </span>
                         <a href="https://github.com/conda-forge/{{ feedstock.name }}">
                             {{ feedstock.package_name }}
                         </a>
