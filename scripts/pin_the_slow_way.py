@@ -34,7 +34,7 @@ pinned = {
           'ffmpeg': 'ffmpeg 2.8.*',
           'fontconfig': 'fontconfig 2.11.*',
           'freetype': 'freetype 2.6.*',
-          'geos: geos 3.4.*',
+          'geos': 'geos 3.4.*',
           'hdf5': 'hdf5 1.8.17|1.8.17.*',
           'icu': 'icu 56.*',
           'jpeg': 'jpeg 9*',
@@ -59,24 +59,16 @@ pinned = {
 parser = argparse.ArgumentParser(description='Propose a feedstock update.')
 parser.add_argument('--feedstocks-dir', help="The location of the feedstocks.",
                     default="~/dev/conda-forge/feedstocks")
-parser.add_argument('--regexp', help="Regexp of feedstocks to consider.",
-                    default=".*")
+regexp_or_package = parser.add_mutually_exclusive_group()
+regexp_or_package.add_argument('--regexp', help="Regexp of feedstocks to consider.")
+regexp_or_package.add_argument('--package', help="A specific package to check.")
+parser.add_argument('--local', help="Whether to use the existing local checkouts of the feedstocks, or to fetch from upstream", action="store_true", default=False)
 parser.add_argument('--limit', help="Limit the number of packages to propose changes for (0 is unlimited).",
                     default=1, type=int)
 args = parser.parse_args()
 
 feedstocks_dir = os.path.expanduser(args.feedstocks_dir)
 change_limit = args.limit
-
-#feedstocks.clone_all('conda-forge', feedstocks_dir)
-#feedstocks.fetch_feedstocks(feedstocks_dir)
-
-regexp = re.compile(args.regexp)
-randomised_feedstocks = [feedstock for feedstock in feedstocks.cloned_feedstocks(feedstocks_dir)
-                         if regexp.match(feedstock.package)]
-randomised_feedstocks = [feedstock for feedstock in randomised_feedstocks if feedstock.package not in ['boost', 'gdal', 'git', 'pandoc']]
-# Shuffle is in-place. :(
-random.shuffle(randomised_feedstocks)
 
 gh_token = conda_smithy.github.gh_token()
 gh = github.Github(gh_token)
@@ -88,6 +80,16 @@ if gh_me.login != 'conda-forge-admin':
                      "for {}), I'm going to have to bail.".format(gh_me.login))
 
 gh_forge = gh.get_organization('conda-forge')
+
+
+if args.package:
+    package_name = args.package
+    package_feedstock = '{}-feedstock'.format(package_name)
+    args.regexp = package_name
+
+need_to_clone = args.local == False
+feedstock_gen = feedstocks.feedstocks_yaml('conda-forge', feedstocks_dir, use_local=args.local,
+                                           randomise=True, pull_up_to_date=need_to_clone, regexp=args.regexp)
 
 
 def my_repos(gh_user):
@@ -122,27 +124,18 @@ def list_pulls(repo, state='open', head=None):
     )
 
 
-# Set to false to debug.
-if True:
+if args.package:
+    try:
+        my_repos = {package_feedstock: gh_me.get_repo(package_feedstock)}
+    except github.UnknownObjectException:
+        # We haven't forked it yet!
+        my_repos = {}
+    forge_repos = {package_feedstock: gh_forge.get_repo(package_feedstock)}
+else:
     print("Collecting list of conda-forge-admin repos...")
     my_repos = {repo.name: repo for repo in my_repos(gh_me)}
     print("Collecting list of conda-forge repos...")
     forge_repos = {repo.name: repo for repo in gh_forge.get_repos()}
-
-    # TODO: Maybe we should sort the feedstocks into dependency order.
-else:
-    # For debugging, we turn our attention to a single feedstock.
-    debug_name = 'libtiff-feedstock'
-    debug_name = 'bob.io.image-feedstock'
-    debug_name = 'expat-feedstock'
-    try:
-        my_repos = {debug_name: gh_me.get_repo(debug_name)}
-    except github.UnknownObjectException:
-        # We haven't forked it yet!
-        my_repos = {}
-    forge_repos = {debug_name: gh_forge.get_repo(debug_name)}
-    randomised_feedstocks = [feedstock for feedstock in randomised_feedstocks
-                             if feedstock.name == debug_name]
 
 
 @contextmanager
@@ -235,42 +228,8 @@ def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
             context.append(pull)
 
 
-from ruamel.yaml.comments import CommentedBase
-def set_start_comment(self, comment, indent=0):
-    """overwrites any preceding comment lines on an object expects comment to be without `#` and possible have mutlple lines """
-    from ruamel.yaml.error import Mark
-    from ruamel.yaml.tokens import CommentToken
-    if self.ca.comment is None:
-        pre_comments = []
-        self.ca.comment = [None, pre_comments]
-    else:
-        pre_comments = self.ca.comments[1]
-
-    if comment[-1] == '\n':
-        comment = comment[:-1]
-        # strip final newline if there
-    start_mark = Mark(None, None, None, indent, None, None)
-    for com in comment.split('\n'):
-        pre_comments.append(CommentToken('# ' + com + '\n', start_mark, None))
-
-if not hasattr(CommentedBase, 'set_start_comment'):
-    CommentedBase.set_start_comment = set_start_comment
-
-import jinja2
-class NullUndefined(jinja2.Undefined):
-    def __unicode__(self):
-        return unicode(self._undefined_name)
-
-    def __getattr__(self, name):
-        return unicode('{}.{}'.format(self, name))
-
-    def __getitem__(self, name):
-        return '{}["{}"]'.format(self, name)
-env = jinja2.Environment(undefined=NullUndefined)
-
 count = 0
-for feedstock in randomised_feedstocks:
-    print('Checking {}'.format(feedstock.name))
+for feedstock, git_ref, meta_content, recipe in feedstock_gen:
     if feedstock.name not in forge_repos:
         raise ValueError("There exists a feedstock ({}) which isn't in the "
                          "conda-forge org.".format(feedstock.name))
@@ -291,47 +250,43 @@ for feedstock in randomised_feedstocks:
     with tmp_remote(clone, gh_me.login,
                     admin_fork.clone_url.replace('https://',
                                                  'https://{}@'.format(gh_token))) as remote:
-        remote.fetch()
-        clone.remotes.upstream.fetch()
-        for branch in clone.remotes['upstream'].refs:
-            remote_branch = branch.remote_head.replace('{}/'.format(gh_me.login), '')
-            with create_update_pr(clone, remote_branch, remote, clone.remotes['upstream']) as pr:
+        try:
+            remote.fetch()
+        except git.exc.GitCommandError as ex:
+            # Periodically this fetch fails with a "git remote error: access denied 
+            # or repository not exported". Presumably this is because we have only just
+            # forked it and GitHub is taking time to catch up, so we wait a few seconds
+            # and try again.
+            print("Sleeping for 10s before retrying due to the following error: \n", str(ex))
+            time.sleep(10)
+            remote.fetch()
 
-                # Technically, we can do whatever we like to the feedstock now. Let's just
-                # update the feedstock though. For examples of other things that *have* been
-                # done here - once upon a time @pelson modified the conda-forge.yaml config
-                # item for every single feedstock, and submitted PRs for every project.
-#                conda_smithy.configure_feedstock.main(feedstock.directory)
+        remote_branch = git_ref.remote_head.replace('{}/'.format(gh_me.login), '')
+        with create_update_pr(clone, remote_branch, remote, clone.remotes['upstream']) as pr:
+            replacements = {}
+            for section_name in ['run', 'build']:
+                requirements = recipe.get('requirements')
+                if requirements is None:
+                    break
+                section = requirements.get(section_name)
+                if not section:
+                    continue
 
-                import ruamel.yaml
-                forge_yaml = os.path.join(feedstock.directory, 'recipe', 'meta.yaml')
-                with open(forge_yaml, 'r') as fh:
-                    content = ''.join(fh)
-                parsable_content = env.from_string(content).render(os=os)
-                code = ruamel.yaml.load(parsable_content, ruamel.yaml.RoundTripLoader)
-
-                replacements = {}
-                for section_name in ['run', 'build']:
-                    requirements = code.get('requirements')
-                    if requirements is None:
-                        break
-                    section = requirements.get(section_name)
-                    if not section:
-                        continue
-
-                    for pos, dep in enumerate(section):
-                        for name, pin in pinned.items():
-                            if dep.startswith(name) and dep != pin:
-                                replacements['- ' + str(dep)] = '- ' + pin
-                if replacements:
-                    current_build_number = code['build']['number']
-                    replacements['number: {}'.format(current_build_number)] = 'number: {}'.format(current_build_number + 1)
-                for orig, new in replacements.items():
-                    content = content.replace(orig, new)
-                with open(forge_yaml, 'w') as fh:
-                    fh.write(content)
-            if pr:
-                skip_after_package = True
+                for pos, dep in enumerate(section):
+                    for name, pin in pinned.items():
+                        if dep.startswith(name) and dep != pin:
+                            replacements['- ' + str(dep)] = '- ' + pin
+            if replacements:
+                current_build_number = recipe['build']['number']
+                replacements['number: {}'.format(current_build_number)] = 'number: {}'.format(current_build_number + 1)
+            content = meta_content
+            for orig, new in replacements.items():
+                content = content.replace(orig, new)
+            forge_yaml = os.path.join(feedstock.directory, 'recipe', 'meta.yaml')
+            with open(forge_yaml, 'w') as fh:
+                fh.write(content)
+        if pr:
+            skip_after_package = True
     # Stop processing any more feedstocks until the next time the script is run.
     if skip_after_package:
         count += 1
