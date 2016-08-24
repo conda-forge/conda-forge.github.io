@@ -237,8 +237,7 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
     if feedstock.name not in my_repos:
         forge_repo = gh_forge.get_repo(feedstock.name)
         print('Forking {}'.format(feedstock.name))
-        gh_me.create_fork(forge_repo)
-        my_repos[feedstock.name] = gh_me.get_repo(feedstock.name)
+        my_repos[feedstock.name] = gh_me.create_fork(forge_repo)
 
     clone = git.Repo(feedstock.directory)
     admin_fork = my_repos[feedstock.name]
