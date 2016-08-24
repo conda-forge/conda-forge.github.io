@@ -3,7 +3,7 @@
 # conda execute
 # env:
 #  - python
-#  - conda-smithy
+#  - conda-smithy >=1.1
 #  - gitpython
 #  - pygithub
 # channels:
