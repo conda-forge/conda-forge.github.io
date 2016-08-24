@@ -22,7 +22,7 @@ Whilst it is out of date, the following pseudo code was used to outline this mod
 # env:
 #  - git
 #  - python
-#  - conda-smithy
+#  - conda-smithy >=1.1
 #  - gitpython
 #  - pygithub
 # channels:
@@ -50,8 +50,10 @@ import conda_smithy.feedstocks as feedstocks
 parser = argparse.ArgumentParser(description='Propose a feedstock update.')
 parser.add_argument('--feedstocks-dir', help="The location of the feedstocks.",
                     default="~/dev/conda-forge/feedstocks")
-parser.add_argument('--regexp', help="Regexp of feedstocks to consider.",
-                    default=".*")
+regexp_or_package = parser.add_mutually_exclusive_group()
+regexp_or_package.add_argument('--regexp', help="Regexp of feedstocks to consider.")
+regexp_or_package.add_argument('--package', help="A specific package to check.")
+parser.add_argument('--local', help="Whether to use the existing local checkouts of the feedstocks, or to fetch from upstream", action="store_true", default=False)
 parser.add_argument('--limit', help="Limit the number of packages to propose changes for (0 is unlimited).",
                     default=1, type=int)
 args = parser.parse_args()
@@ -59,13 +61,14 @@ args = parser.parse_args()
 feedstocks_dir = os.path.expanduser(args.feedstocks_dir)
 change_limit = args.limit
 
-feedstocks.clone_all('conda-forge', feedstocks_dir)
-feedstocks.fetch_feedstocks(feedstocks_dir)
-regexp = re.compile(args.regexp)
-randomised_feedstocks = [feedstock for feedstock in feedstocks.cloned_feedstocks(feedstocks_dir)
-                         if regexp.match(feedstock.package)]
-# Shuffle is in-place. :(
-random.shuffle(randomised_feedstocks)
+if args.package:
+    package_name = args.package
+    package_feedstock = '{}-feedstock'.format(package_name)
+    args.regexp = package_name
+
+need_to_clone = args.local == False
+feedstock_gen = feedstocks.feedstocks_yaml('conda-forge', feedstocks_dir, use_local=args.local,
+                                           randomise=True, pull_up_to_date=need_to_clone, regexp=args.regexp)
 
 gh_token = conda_smithy.github.gh_token()
 gh = github.Github(gh_token)
@@ -111,19 +114,18 @@ def list_pulls(repo, state='open', head=None):
     )
 
 
-# Set to false to debug.
-if True:
+if args.package:
+    try:
+        my_repos = {package_feedstock: gh_me.get_repo(package_feedstock)}
+    except github.UnknownObjectException:
+        # We haven't forked it yet!
+        my_repos = {}
+    forge_repos = {package_feedstock: gh_forge.get_repo(package_feedstock)}
+else:
     print("Collecting list of conda-forge-admin repos...")
     my_repos = {repo.name: repo for repo in my_repos(gh_me)}
     print("Collecting list of conda-forge repos...")
     forge_repos = {repo.name: repo for repo in gh_forge.get_repos()}
-else:
-    # For debugging, we turn our attention to a single feedstock.
-    debug_name = 'pint-feedstock'
-    my_repos = {debug_name: gh_me.get_repo(debug_name)}
-    forge_repos = {debug_name: gh_me.get_repo(debug_name)}
-    randomised_feedstocks = [feedstock for feedstock in randomised_feedstocks
-                             if feedstock.name == debug_name]
 
 
 @contextmanager
@@ -219,8 +221,12 @@ Thanks!
         context.append(pull)
 
 count = 0
-for feedstock in randomised_feedstocks:
-    print('Checking {}'.format(feedstock.name))
+visited = []
+for feedstock, git_ref, meta_content, recipe in feedstock_gen:
+    if feedstock.name not in visited:
+        print('Checking {}'.format(feedstock.name))
+        visited.append(feedstock.name)
+
     if feedstock.name not in forge_repos:
         raise ValueError("There exists a feedstock ({}) which isn't in the "
                          "conda-forge org.".format(feedstock.name))
@@ -241,19 +247,27 @@ for feedstock in randomised_feedstocks:
     with tmp_remote(clone, 'conda-forge-admin',
                     admin_fork.clone_url.replace('https://',
                                                  'https://{}@'.format(gh_token))) as remote:
-        remote.fetch()
-        clone.remotes.upstream.fetch()
-        for branch in clone.remotes['upstream'].refs:
-            remote_branch = branch.remote_head.replace('conda-forge-admin/', '')
-            with create_update_pr(clone, remote_branch, remote, clone.remotes['upstream']) as pr:
+        try:
+            remote.fetch()
+        except git.exc.GitCommandError as ex:
+            # Periodically this fetch fails with a "git remote error: access denied
+            # or repository not exported". Presumably this is because we have only just
+            # forked it and GitHub is taking time to catch up, so we wait a few seconds
+            # and try again.
+            print("Sleeping for 10s before retrying due to the following error: \n", str(ex))
+            time.sleep(10)
+            remote.fetch()
 
-                # Technically, we can do whatever we like to the feedstock now. Let's just
-                # update the feedstock though. For examples of other things that *have* been
-                # done here - once upon a time @pelson modified the conda-forge.yaml config
-                # item for every single feedstock, and submitted PRs for every project.
-                conda_smithy.configure_feedstock.main(feedstock.directory)
-            if pr:
-                skip_after_package = True
+        remote_branch = git_ref.remote_head.replace('{}/'.format(gh_me.login), '')
+        with create_update_pr(clone, remote_branch, remote, clone.remotes['upstream']) as pr:
+
+            # Technically, we can do whatever we like to the feedstock now. Let's just
+            # update the feedstock though. For examples of other things that *have* been
+            # done here - once upon a time @pelson modified the conda-forge.yaml config
+            # item for every single feedstock, and submitted PRs for every project.
+            conda_smithy.configure_feedstock.main(feedstock.directory)
+        if pr:
+            skip_after_package = True
 
     # Stop processing any more feedstocks until the next time the script is run.
     if skip_after_package:
