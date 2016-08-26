@@ -10,21 +10,18 @@
 #  - conda-forge
 # run_with: python
 
-import os
-import time
 import argparse
 from contextlib import contextmanager
-import textwrap
+import os
 import random
 import re
+import textwrap
+import time
 
 import git
 import github
 
 import conda_smithy.github
-import conda_smithy.configure_feedstock
-import conda_smithy
-
 import conda_smithy.feedstocks as feedstocks
 
 
@@ -206,7 +203,7 @@ def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
     If there are concerns about it, please ping the 'conda-forge/core' team (using the @ notation in a comment).
 
     Thanks!
-                       """.format(conda_smithy.__version__))
+                       """)
                 pull.create_issue_comment(msg)
                 print('Updated PR on {}'.format(pull.html_url))
             else:
