@@ -22,7 +22,7 @@ Whilst it is out of date, the following pseudo code was used to outline this mod
 # env:
 #  - git
 #  - python
-#  - conda-smithy >=1.1
+#  - conda-smithy >=1.1.2
 #  - gitpython
 #  - pygithub
 # channels:
@@ -198,7 +198,7 @@ def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
     Thanks!
                        """.format(conda_smithy.__version__))
                 pull.create_issue_comment(msg)
-                print('Updated PR on {}'.format(forge_feedstock.html_url))
+                print('Updated PR on {}'.format(pull.html_url))
         else:
             # There were no existing open PRs, so open one!
             msg = textwrap.dedent("""
