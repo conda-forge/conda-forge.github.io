@@ -73,4 +73,4 @@ feedstocks_repo.submodule_update(recursive=False)
 feedstocks_repo.git.submodule('foreach', 'git', 'pull', 'origin', 'master')
 
 if feedstocks_repo.is_dirty():
-    feedstocks_repo.git.commit('-a', '-m', 'Updated feedstocks submodules.')
+    feedstocks_repo.git.commit('-a', '-m', 'Updated feedstocks submodules. [ci skip]')
