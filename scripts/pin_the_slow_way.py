@@ -36,6 +36,7 @@ pinned = {
           'icu': 'icu 56.*',
           'jpeg': 'jpeg 9*',
           'libblitz': 'libblitz 0.10|0.10.*',
+          'libevent': 'libevent 2.0.*',
           'libmatio': 'libmatio 1.5.*',
           'libnetcdf': 'libnetcdf 4.4.*',
           'libpng': 'libpng >=1.6.21,<1.7',
