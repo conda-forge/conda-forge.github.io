@@ -32,7 +32,7 @@ pinned = {
           'fontconfig': 'fontconfig 2.11.*',
           'freetype': 'freetype 2.6.*',
           'geos': 'geos 3.4.*',
-          'giflib': 'giflib 5.1.2|5.1.2.*',
+          'giflib': 'giflib 5.1.*',
           'hdf5': 'hdf5 1.8.17|1.8.17.*',
           'icu': 'icu 56.*',
           'jpeg': 'jpeg 9*',
