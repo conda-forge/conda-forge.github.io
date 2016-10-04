@@ -62,5 +62,16 @@ for each_feedstock in os.listdir(feedstocks_dir):
         each_feedstock_repo = each_feedstock
         if not each_feedstock_repo.endswith("-feedstock"):
             each_feedstock_repo += "-feedstock"
-        repo = gh_org.get_repo(each_feedstock_repo)
-        gh_me.create_fork(repo)
+        repo = git.Repo(each_feedstock_dir)
+        remote_repo = gh_org.get_repo(each_feedstock_repo)
+        fork_resp = gh_me.create_fork(remote_repo)
+
+        # Add the remote repos locally.
+        for user, url in [
+                (remote_repo.owner.login, remote_repo.clone_url),
+                (fork_resp.owner.login, fork_resp.ssh_url)
+        ]:
+            try:
+                remote = repo.create_remote(user, url)
+            except git.exc.GitCommandError:
+                pass
