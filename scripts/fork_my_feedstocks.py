@@ -34,7 +34,7 @@ import conda_smithy.feedstocks as feedstocks
 
 parser = argparse.ArgumentParser(description="Fork your maintained feedstocks.")
 parser.add_argument("--feedstocks-dir", help="The location of the feedstocks.",
-                    default="~/Developer/Conda/conda-forge/feedstocks/feedstocks")
+                    default="./feedstocks")
 args = parser.parse_args()
 
 feedstocks_dir = os.path.abspath(os.path.expanduser(args.feedstocks_dir))
