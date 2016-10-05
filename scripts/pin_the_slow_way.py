@@ -46,6 +46,8 @@ pinned = {
           'openblas': 'openblas 0.2.18|0.2.18.*',
           'openssl': 'openssl 1.0.*',
           'proj.4': 'proj.4 4.9.3',
+          'pyqt': 'pyqt 4.11.*',
+          'qt': 'qt 4.8.*',
           'readline': 'readline 6.2*',
           'sox': 'sox 14.4.2',
           'sqlite': 'sqlite 3.13.*',
