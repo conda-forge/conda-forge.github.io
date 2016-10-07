@@ -45,6 +45,7 @@ pinned = {
           'ncurses': 'ncurses 5.9*',
           'openblas': 'openblas 0.2.18|0.2.18.*',
           'openssl': 'openssl 1.0.*',
+          'proj.4': 'proj.4 4.9.3',
           'readline': 'readline 6.2*',
           'sox': 'sox 14.4.2',
           'sqlite': 'sqlite 3.13.*',
@@ -250,7 +251,7 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
         try:
             remote.fetch()
         except git.exc.GitCommandError as ex:
-            # Periodically this fetch fails with a "git remote error: access denied 
+            # Periodically this fetch fails with a "git remote error: access denied
             # or repository not exported". Presumably this is because we have only just
             # forked it and GitHub is taking time to catch up, so we wait a few seconds
             # and try again.
