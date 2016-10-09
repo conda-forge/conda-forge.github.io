@@ -137,7 +137,8 @@ for team_to_remove in set(teams.keys()) - set(packages_visited):
                           'conda-forge.github.io',
                           'all-members',
                           'conda-forge-anvil',
-                          'conda-forge-webservices']:
+                          'conda-forge-webservices',
+                          'staged-recipes']:
         print('Keeping ', team_to_remove)
         continue
     print("THE {} TEAM NEEDS TO BE REMOVED.".format(team_to_remove))
