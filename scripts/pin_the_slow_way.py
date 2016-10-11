@@ -34,6 +34,7 @@ import conda_smithy.feedstocks as feedstocks
 # https://abi-laboratory.pro/tracker/timeline/openssl/
 # https://abi-laboratory.pro/tracker/timeline/sqlite/
 # https://abi-laboratory.pro/tracker/timeline/qt/
+# https://abi-laboratory.pro/tracker/timeline/giflib/
 # http://upstream.rosalinux.ru/versions/libgeos_c.html
 # http://upstream.rosalinux.ru/versions/libgeos.html
 # http://upstream.rosalinux.ru/versions/netcdf.html
@@ -81,7 +82,7 @@ build_pin = {
 run_pin = {
           'boost': 'boost 1.61.*',
           'bzip2': 'bzip2 >=1.0,<2',
-          'ffmpeg': 'ffmpeg >=2.8,<3.0',
+          'ffmpeg': 'ffmpeg 2.8.*',
           'fontconfig': 'fontconfig >=2.11,<3',
           'freetype': 'freetype 2.6.*',
           'geos': 'geos 3.4.*',
