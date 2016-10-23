@@ -25,38 +25,90 @@ import conda_smithy.github
 import conda_smithy.feedstocks as feedstocks
 
 
-pinned = {
+# Some links that point to backward compatibility
+# https://abi-laboratory.pro/tracker/timeline/ffmpeg/
+# https://abi-laboratory.pro/tracker/timeline/libtiff/
+# https://abi-laboratory.pro/tracker/timeline/libzip/
+# https://abi-laboratory.pro/tracker/timeline/fontconfig/
+# https://abi-laboratory.pro/tracker/timeline/freetype/
+# https://abi-laboratory.pro/tracker/timeline/openssl/
+# https://abi-laboratory.pro/tracker/timeline/sqlite/
+# https://abi-laboratory.pro/tracker/timeline/qt/
+# https://abi-laboratory.pro/tracker/timeline/giflib/
+# http://upstream.rosalinux.ru/versions/libgeos_c.html
+# http://upstream.rosalinux.ru/versions/libgeos.html
+# http://upstream.rosalinux.ru/versions/netcdf.html
+# http://upstream.rosalinux.ru/versions/readline.html
+# http://upstream.rosalinux.ru/versions/tk.html
+# http://upstream.rosalinux.ru/versions/libsox.html
+# http://upstream.rosalinux.ru/versions/zlib.html
+# http://upstream.rosalinux.ru/versions/ncurses.html
+# http://upstream.rosalinux.ru/versions/blitz.html
+
+build_pin = {
           'boost': 'boost 1.61.*',
           'bzip2': 'bzip2 1.0.*',
           'ffmpeg': 'ffmpeg 2.8.*',
           'fontconfig': 'fontconfig 2.11.*',
           'freetype': 'freetype 2.6.*',
           'geos': 'geos 3.4.*',
-          'giflib': 'giflib 5.1.*',
+          'giflib': 'giflib 5.1.2',
           'hdf5': 'hdf5 1.8.17|1.8.17.*',
           'icu': 'icu 56.*',
           'jpeg': 'jpeg 9*',
           'libblitz': 'libblitz 0.10|0.10.*',
           'libmatio': 'libmatio 1.5.*',
           'libnetcdf': 'libnetcdf 4.4.*',
-          'libpng': 'libpng >=1.6.23,<1.7',
+          'libpng': 'libpng 1.6.21',
           'libsvm': 'libsvm 3.21|3.21.*',
           'libtiff': 'libtiff 4.0.*',
           'ncurses': 'ncurses 5.9*',
           'netcdf-cxx4': 'netcdf-cxx4 4.3.*',
           'netcdf-fortran': 'netcdf-fortran 4.4.*',
           'openblas': 'openblas 0.2.18|0.2.18.*',
-          'openssl': 'openssl 1.0.*',
+          'openssl': 'openssl 1.0.2h',
           'proj.4': 'proj.4 4.9.3',
-          'pyqt': 'pyqt 4.11.*',
-          'qt': 'qt 4.8.*',
+          'pyqt': 'pyqt 4.11.4',
+          'qt': 'qt 4.8.5',
           'readline': 'readline 6.2*',
           'sox': 'sox 14.4.2',
           'sqlite': 'sqlite 3.13.*',
           'tk': 'tk 8.5.*',
           'vlfeat': 'vlfeat 0.9.20',
           'xz': 'xz 5.2.*',
-          'zlib': 'zlib 1.2.*',
+          'zlib': 'zlib 1.2.8',
+        }
+
+run_pin = {
+          'boost': 'boost 1.61.*',
+          'bzip2': 'bzip2 >=1.0,<2',
+          'ffmpeg': 'ffmpeg 2.8.*',
+          'fontconfig': 'fontconfig >=2.11,<3',
+          'freetype': 'freetype 2.6.*',
+          'geos': 'geos 3.4.*',
+          'giflib': 'giflib >=5.1.2,<6',
+          'hdf5': 'hdf5 1.8.17|1.8.17.*',
+          'icu': 'icu 56.*',
+          'jpeg': 'jpeg 9*',
+          'libblitz': 'libblitz 0.10|0.10.*',
+          'libmatio': 'libmatio 1.5.*',
+          'libnetcdf': 'libnetcdf >=4.4,<5',
+          'libpng': 'libpng >=1.6.21,<1.7',
+          'libsvm': 'libsvm 3.21|3.21.*',
+          'libtiff': 'libtiff >=4.0,<5',
+          'ncurses': 'ncurses >=5.9,<6',
+          'openblas': 'openblas 0.2.18|0.2.18.*',
+          'openssl': 'openssl >=1.0.2h,<1.1',
+          'proj.4': 'proj.4 4.9.3',
+          'pyqt': 'pyqt >=4.11.4,<5',
+          'qt': 'qt >=4.8.5,<5',
+          'readline': 'readline >=6.2,<7',
+          'sox': 'sox 14.4.2',
+          'sqlite': 'sqlite >=3.13,<4',
+          'tk': 'tk 8.5.*',
+          'vlfeat': 'vlfeat 0.9.20',
+          'xz': '>=5.2,<6.0',
+          'zlib': 'zlib >=1.2.8,<1.3',
         }
 
 parser = argparse.ArgumentParser(description='Propose a feedstock update.')
@@ -265,6 +317,15 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
 
         remote_branch = git_ref.remote_head.replace('{}/'.format(gh_me.login), '')
         with create_update_pr(clone, remote_branch, remote, clone.remotes['upstream']) as pr:
+            content = meta_content
+            req_idx = content.find('requirements:')
+            if req_idx > -1:
+                run_idx = content.find('run:', req_idx)
+                build_idx = content.find('build:', req_idx)
+                if run_idx > build_idx:
+                    section_names = [('build', build_idx), ('run', run_idx)]
+                else:
+                    section_names = [('run', run_idx), ('build', build_idx)]
             replacements = {}
             for section_name in ['run', 'build']:
                 requirements = recipe.get('requirements')
@@ -273,17 +334,33 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
                 section = requirements.get(section_name)
                 if not section:
                     continue
-
+                if section_name == 'build':
+                    pinned = build_pin
+                else:
+                    pinned = run_pin
                 for pos, dep in enumerate(section):
                     for name, pin in pinned.items():
                         if dep.startswith(name) and dep != pin:
-                            replacements['- ' + str(dep)] = '- ' + pin
+                            replacements[section_name + '- ' + str(dep)] = '- ' + pin
             if replacements:
                 current_build_number = recipe['build']['number']
                 replacements['number: {}'.format(current_build_number)] = 'number: {}'.format(current_build_number + 1)
-            content = meta_content
-            for orig, new in replacements.items():
-                content = content.replace(orig, new)
+                first_idx = section_names[0][1]
+                if first_idx == -1:
+                    last_idx = -1
+                else:
+                    last_idx = section_names[1][1]
+                for i, (section_name, sec_idx) in enumerate(section_names):
+                    for orig, new in replacements.items():
+                        if not orig.split('-')[0] == section_name:
+                            continue
+                        if i == 0 or first_idx == -1:
+                            content = content[:req_idx] + \
+                                      content[req_idx:last_idx].replace(orig[len(section_name):], new, 1) + \
+                                      content[last_idx:]
+                        else:
+                            content = content[:last_idx] +  \
+                                      content[last_idx:].replace(orig[len(section_name):], new, 1)
             forge_yaml = os.path.join(feedstock.directory, 'recipe', 'meta.yaml')
             with open(forge_yaml, 'w') as fh:
                 fh.write(content)
