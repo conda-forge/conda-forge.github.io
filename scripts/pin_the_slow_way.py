@@ -46,7 +46,7 @@ pinned = {
           'ncurses': 'ncurses 5.9*',
           'netcdf-cxx4': 'netcdf-cxx4 4.3.*',
           'netcdf-fortran': 'netcdf-fortran 4.4.*',
-          'openblas': 'openblas 0.2.18|0.2.18.*',
+          'openblas': 'openblas 0.2.19|0.2.19.*',
           'openssl': 'openssl 1.0.*',
           'proj4': 'proj4 4.9.3',
           'pyqt': 'pyqt 4.11.*',
