@@ -20,6 +20,7 @@ import jinja2
 import json
 import requests
 import ruamel.yaml
+from ruamel.yaml.scanner import ScannerError
 import os
 
 from github import Github
@@ -68,10 +69,11 @@ def build_feedstock_index(filename, gh_org='conda-forge'):
         try:
             meta = repo.get_file_contents(path='recipe/meta.yaml').decoded_content
             pkg_name = _extract_package_name(meta)
-        except (AttributeError, KeyError):
+        except (AttributeError, KeyError, ScannerError) as err:
             # unable to parse the bob.io.image-feedstock
             print('Unable to parse meta.yaml for {}'.format(repo.url))
             print('guessing pkg name from feedstock url')
+            print('Traceback: \n', err)
             pkg_name = repo.url.split('/')[-1].split('-feedstock')[0].lower()
         pkg_index[pkg_name] = repo.full_name
 
@@ -100,8 +102,11 @@ def build_pr_index(filename, gh_org='conda-forge', staged_recipes_repo='staged-r
                     pkg_name = _extract_package_name(meta)
                     idx = 'pr {} ({}) /{}'.format(pr.number, pkg_name, f.filename)
                     pkg_index[idx] = pkg_name
-                except AttributeError:
+                except (AttributeError, ScannerError) as err:
                     pkg_index[idx] = None
+                    print('Unable to parse meta.yaml for pr #{}'.format(pr.number))
+                    print('setting pkg_name to None')
+                    print('Traceback: \n', err)
 
     with open(filename, 'w') as f:
         json.dump(pkg_index, f)
