@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # This script is to be run in a TravisCI context.
-
 set -e
 
 if [ -n "$GH_TOKEN" ]; then
@@ -12,6 +11,11 @@ if [ -n "$GH_TOKEN" ]; then
     git checkout -b new_site_content
     # Generate html requires a GitHub token in order to query the available feedstocks.
     conda execute scripts/generate_html.py
+    conda install sphinx --yes --quiet -c conda-forge
+    cd src
+    make html
+    cp -r _build/html/* ../docs
+    rm -rf _build
     git diff
     # Only build the docs for commits on master.
     if (( "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" )); then
