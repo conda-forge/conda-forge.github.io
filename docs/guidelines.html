@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Guidelines &#8212; conda-forge 0.0.1a1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="conda-forge 0.0.1a1 documentation" href="index.html" />
+    <link rel="prev" title="Welcome to conda-forge’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="guidelines">
+<h1>Guidelines<a class="headerlink" href="#guidelines" title="Permalink to this headline">¶</a></h1>
+<p>This document intends to layout some guidelines on the transfer of
+<a class="reference external" href="https://github.com/conda/conda-recipes">conda-recipes</a> and
+<a class="reference external" href="https://github.com/ContinuumIO/anaconda-recipes">anaconda-recipes</a>
+to conda-forge. These aren&#8217;t hard and fast rules. They are certainly up
+for discussion. However, it would be good to come up with a consensus
+going forward.</p>
+<p>Eventually all recipes from those repos should be proposed for
+addition here. It may be decided that a few don&#8217;t actually belong or
+should not be supported anymore.</p>
+<p>When adding a package from either location, inspect the commit history
+to see who has made changes to the recipe in the past. Anyone who has
+touched the recipe should be pinged about it getting added here. They
+should also be consulted with regards to whether the recipe needs any
+tweaks before being added. Also, they should be asked if they would
+like to be added as maintainers. Only if they give express permission
+to be adding as a maintainer should they be added to the maintainer list.
+In all cases when porting a recipe, you should add yourself as a
+maintainer. Some contributors to these repos were quite prolific, but may
+not be as actively engaged. If they specify they only want to be contacted
+for certain recipes or none at all, please respect their wishes also add
+make note of what recipes (if any) they would like to be notified for. If
+they are no longer interested in any conda recipes, make that note here
+as well. Before contacting anyone please consult the list in this
+<a class="reference external" href="https://github.com/conda-forge/staged-recipes/issues/139">issue</a>
+to see if that contributor has restrictions.</p>
+<p>When porting make sure the recipe follows the linting specifications.
+The section order should go <code class="docutils literal"><span class="pre">package</span></code>, <code class="docutils literal"><span class="pre">source</span></code>, <code class="docutils literal"><span class="pre">build</span></code>,
+<code class="docutils literal"><span class="pre">requirements</span></code>, <code class="docutils literal"><span class="pre">test</span></code>, <code class="docutils literal"><span class="pre">about</span></code>, <code class="docutils literal"><span class="pre">extra/recipe-maintainers</span></code>. It
+is recommended to add a <code class="docutils literal"><span class="pre">build</span></code> section with the <code class="docutils literal"><span class="pre">number</span></code> set to
+<code class="docutils literal"><span class="pre">0</span></code> explicitly even if the rest is unneeded. If there is no build for
+Windows, make sure to add <code class="docutils literal"><span class="pre">skip:</span> <span class="pre">True</span>&#160; <span class="pre">#</span> <span class="pre">[win]</span></code> to the <code class="docutils literal"><span class="pre">build</span></code>
+section. The <code class="docutils literal"><span class="pre">about</span></code> section must have the <code class="docutils literal"><span class="pre">home</span></code> URL (verify the
+URL is still correct), <code class="docutils literal"><span class="pre">license</span></code> (verify the correct license is present),
+and a one sentence (or few word) <code class="docutils literal"><span class="pre">summary</span></code>. When specifying the version it
+is strongly recommend that jinja templating be used to set the version
+at the top (e.g. <code class="docutils literal"><span class="pre">{%</span> <span class="pre">set</span> <span class="pre">version</span> <span class="pre">=</span> <span class="pre">&quot;0.10.1&quot;</span> <span class="pre">%}</span></code>) and then replace all
+uses of the version with <code class="docutils literal"><span class="pre">{{</span> <span class="pre">version</span> <span class="pre">}}</span></code>. Preference should be given to
+compressed source balls as opposed to version control checkouts. Make sure
+all links to compressed source balls allow for easy changing of the version
+(using latest is not acceptable). Also, a checksum should be included with
+all compressed source balls to allow for verification of downloads.</p>
+<p>It is required to add tests with all packages. These can included but are
+not limited to checking libraries are installed, python imports, simple
+code snippet to compile or run a basic test, command line usage (checking
+help or version). It is suggested that compiled code run all tests (e.g.
+<code class="docutils literal"><span class="pre">make</span> <span class="pre">check</span></code>) to ensure it was built properly. This normally should
+happen in the build.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to conda-forge&#8217;s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/guidelines.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, conda-forge.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.8</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/guidelines.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
