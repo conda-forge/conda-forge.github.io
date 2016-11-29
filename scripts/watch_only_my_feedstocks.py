@@ -8,6 +8,7 @@ This is super useful if you are a conda-forge administrator and you are automati
 # env:
 #  - git
 #  - python
+#  - conda 4.1.*
 #  - conda-smithy
 #  - pygithub
 #  - gitpython
