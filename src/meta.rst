@@ -21,4 +21,4 @@ keys. There are three main reasons for this:
 
 If a package does not have the ability to build from a tarball, this is
 considered a bug and should be reported upstream. In the worst case,
-the source can be patched in include the relevant build information.
+the source can be patched to include the relevant build information.
