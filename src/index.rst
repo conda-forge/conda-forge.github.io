@@ -13,6 +13,7 @@ Contents:
 
    guidelines
    meta
+   testing
 
 
 Indices and tables
