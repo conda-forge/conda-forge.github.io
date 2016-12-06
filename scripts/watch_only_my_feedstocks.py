@@ -10,6 +10,7 @@ This is super useful if you are a conda-forge administrator and you are automati
 #  - python
 #  - conda 4.1.*
 #  - conda-env 2.5.*
+#  - conda-build 1.*
 #  - conda-smithy
 #  - pygithub
 #  - gitpython
