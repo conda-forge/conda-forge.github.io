@@ -20,7 +20,7 @@ On Windows, use the ``exist`` command. See below for an example.
 
 **Simple Existence Testing Example:**
 
-.. code-block: yaml
+.. code-block:: yaml
 
     test:
       commands:
