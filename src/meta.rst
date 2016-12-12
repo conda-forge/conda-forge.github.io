@@ -22,3 +22,21 @@ keys. There are three main reasons for this:
 If a package does not have the ability to build from a tarball, this is
 considered a bug and should be reported upstream. In the worst case,
 the source can be patched to include the relevant build information.
+
+
+Packaging the License Manually
+------------------------------
+Certain software licenses, such as those in the GPL and Apache families,
+require that the text of the license be distributed with the package.
+This means that the ``about/license_file`` entry *must* be included in the
+``meta.yaml``. Unfortunately, the license isn't always included in the
+tarball of the source code.
+
+To get around this, the licence should be put in the recipe directory.
+It can then be refered to in the ``meta.yaml`` via,
+
+.. code-block:: yaml
+
+    about:
+      license_file: '{{ environ["RECIPE_DIR"] }}/LICENSE'
+
