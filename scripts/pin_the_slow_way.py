@@ -55,6 +55,7 @@ pinned = {
           'netcdf-fortran': 'netcdf-fortran 4.4.*',
           'openblas': 'openblas 0.2.19|0.2.19.*',
           'openssl': 'openssl 1.0.*',
+          'pango': 'pango 1.40.*',
           'pixman': 'pixman 0.34.*',
           'proj4': 'proj4 4.9.3',
           'pyqt': 'pyqt 4.11.*',
