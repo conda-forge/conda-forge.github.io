@@ -286,7 +286,7 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
 
                 for pos, dep in enumerate(section):
                     for name, pin in pinned.items():
-                        if dep.startswith(name) and dep != pin:
+                        if dep.split()[0] == name and dep != pin:
                             replacements['- ' + str(dep)] = '- ' + pin
             if replacements:
                 current_build_number = recipe['build']['number']
