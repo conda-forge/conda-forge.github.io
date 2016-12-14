@@ -38,3 +38,14 @@ feedstock directory and run, the ``ci_support/run_docker_build.sh`` script.
 
     $ cd my-feedstock
     $ ./ci_support/run_docker_build.sh
+
+
+Run Docker Tests Locally for Staged Recipes
+--------------------------------------------
+If you want to run the docker tests for the staged-recipes repository locally, go to
+the root repository directory and run, the ``scripts/run_docker_build.sh`` script.
+
+.. code-block:: sh
+
+    $ cd staged-recipes
+    $ ./scripts/run_docker_build.sh
