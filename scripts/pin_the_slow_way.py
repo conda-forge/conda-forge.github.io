@@ -286,14 +286,19 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
 
                 for pos, dep in enumerate(section):
                     for name, pin in pinned.items():
-                        if dep.startswith(name) and dep != pin:
+                        if re.match(r"^\s*%s\s*$" % name, dep) and dep != pin:
                             replacements['- ' + str(dep)] = '- ' + pin
             if replacements:
                 current_build_number = recipe['build']['number']
                 replacements['number: {}'.format(current_build_number)] = 'number: {}'.format(current_build_number + 1)
             content = meta_content
             for orig, new in replacements.items():
-                content = content.replace(orig, new)
+                content = re.sub(
+                    # Use capture groups to get the indentation correct.
+                    r"(^\s*)%s(\s*)$" % orig,
+                    r"\1%s\2" % new,
+                    content,
+                    flags=re.MULTILINE)
             forge_yaml = os.path.join(feedstock.directory, 'recipe', 'meta.yaml')
             with open(forge_yaml, 'w') as fh:
                 fh.write(content)
