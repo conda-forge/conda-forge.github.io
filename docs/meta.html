@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Writing the meta.yaml &#8212; conda-forge 0.0.1a1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Testing in Recipes" href="testing.html" />
+    <link rel="prev" title="Guidelines" href="guidelines.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="writing-the-meta-yaml">
+<h1>Writing the <code class="docutils literal"><span class="pre">meta.yaml</span></code><a class="headerlink" href="#writing-the-meta-yaml" title="Permalink to this headline">¶</a></h1>
+<p>This document presents conda-forge rules, guidelines, and justifications
+about writing the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file.</p>
+<div class="section" id="build-from-tarballs-not-repos">
+<h2>Build from Tarballs, Not Repos<a class="headerlink" href="#build-from-tarballs-not-repos" title="Permalink to this headline">¶</a></h2>
+<p>Conda-forge requires that building from tarballs using the
+<code class="docutils literal"><span class="pre">url</span></code> and <code class="docutils literal"><span class="pre">fn</span></code> keys in the <code class="docutils literal"><span class="pre">build</span></code> section. A recipe
+should not use the <code class="docutils literal"><span class="pre">git_url</span></code>, <code class="docutils literal"><span class="pre">git_ver</span></code>, and similar
+keys. There are three main reasons for this:</p>
+<ul class="simple">
+<li>Downloading the whole repo when you only need a single snapshot wastes
+the precious, constrained, and shared CI time and bandwidth.</li>
+<li>Repositories are not checksummed. Thus, using a tarball has a
+stronger guarantee that the download that is obtained to build from is
+in fact the intended package.</li>
+<li>On some systems (such as Windows), it is possible to not have permissions
+to remove a repo once it is created. This can be avoided by using a tarball.</li>
+</ul>
+<p>If a package does not have the ability to build from a tarball, this is
+considered a bug and should be reported upstream. In the worst case,
+the source can be patched to include the relevant build information.</p>
+</div>
+<div class="section" id="packaging-the-license-manually">
+<h2>Packaging the License Manually<a class="headerlink" href="#packaging-the-license-manually" title="Permalink to this headline">¶</a></h2>
+<p>Certain software licenses, such as those in the GPL and Apache families,
+require that the text of the license be distributed with the package.
+This means that the <code class="docutils literal"><span class="pre">about/license_file</span></code> entry <em>must</em> be included in the
+<code class="docutils literal"><span class="pre">meta.yaml</span></code>. Unfortunately, the license isn&#8217;t always included in the
+tarball of the source code.</p>
+<p>To get around this, the licence should be put in the recipe directory.
+It can then be refered to in the <code class="docutils literal"><span class="pre">meta.yaml</span></code> via,</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">about</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">license_file</span><span class="p p-Indicator">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">environ[&quot;RECIPE_DIR&quot;]</span><span class="nv"> </span><span class="s">}}/LICENSE&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Writing the <code class="docutils literal"><span class="pre">meta.yaml</span></code></a><ul>
+<li><a class="reference internal" href="#build-from-tarballs-not-repos">Build from Tarballs, Not Repos</a></li>
+<li><a class="reference internal" href="#packaging-the-license-manually">Packaging the License Manually</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="guidelines.html" title="previous chapter">Guidelines</a></li>
+      <li>Next: <a href="testing.html" title="next chapter">Testing in Recipes</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/meta.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, conda-forge.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/meta.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testing in Recipes &#8212; conda-forge 0.0.1a1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Writing the meta.yaml" href="meta.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="testing-in-recipes">
+<h1>Testing in Recipes<a class="headerlink" href="#testing-in-recipes" title="Permalink to this headline">¶</a></h1>
+<p>All recipes need tests. Here are some tips, tricks, and justifications.</p>
+<div class="section" id="simple-existence-tests">
+<h2>Simple Existence Tests<a class="headerlink" href="#simple-existence-tests" title="Permalink to this headline">¶</a></h2>
+<p>Sometime tests for the underlying code base don&#8217;t exist. And sometimes test suites
+simply take too long to run on limited CI infrastructure. Or sometimes they take
+too much bandwidth. Whatever the reason, conda-forge may not always be able to
+execute the prescribed test suite.</p>
+<p>However, this is no reason for the recipe to not have tests. At the very least
+we want to verify that the package is installed the desired files in the desired
+locations. This is called existence testing.</p>
+<p>Existence testing can be accomplished in the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file in the <code class="docutils literal"><span class="pre">test/commands</span></code>
+block. On posix systems, use the <code class="docutils literal"><span class="pre">test</span></code> utility and the <code class="docutils literal"><span class="pre">$PREFIX</span></code> variable.
+On Windows, use the <code class="docutils literal"><span class="pre">exist</span></code> command. See below for an example.</p>
+<p><strong>Simple Existence Testing Example:</strong></p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">test</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">commands</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">test -f $PREFIX/lib/libboost_log.dylib</span>  <span class="c1"># [osx]</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">test -f $PREFIX/lib/libboost_log.so</span>     <span class="c1"># [linux]</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">if not exist %PREFIX%\\Library\\lib\\boost_log-vc140-mt.lib exit 1</span>  <span class="c1"># [win and py35]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-docker-tests-locally-for-feedstock">
+<h2>Run Docker Tests Locally for Feedstock<a class="headerlink" href="#run-docker-tests-locally-for-feedstock" title="Permalink to this headline">¶</a></h2>
+<p>If you want to run the docker tests for a feedstock locally, go to the root
+feedstock directory and run, the <code class="docutils literal"><span class="pre">ci_support/run_docker_build.sh</span></code> script.</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my-feedstock
+$ ./ci_support/run_docker_build.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-docker-tests-locally-for-staged-recipes">
+<h2>Run Docker Tests Locally for Staged Recipes<a class="headerlink" href="#run-docker-tests-locally-for-staged-recipes" title="Permalink to this headline">¶</a></h2>
+<p>If you want to run the docker tests for the staged-recipes repository locally, go to
+the root repository directory and run, the <code class="docutils literal"><span class="pre">scripts/run_docker_build.sh</span></code> script.</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> staged-recipes
+$ ./scripts/run_docker_build.sh
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Testing in Recipes</a><ul>
+<li><a class="reference internal" href="#simple-existence-tests">Simple Existence Tests</a></li>
+<li><a class="reference internal" href="#run-docker-tests-locally-for-feedstock">Run Docker Tests Locally for Feedstock</a></li>
+<li><a class="reference internal" href="#run-docker-tests-locally-for-staged-recipes">Run Docker Tests Locally for Staged Recipes</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="meta.html" title="previous chapter">Writing the <code class="docutils literal"><span class="pre">meta.yaml</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/testing.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, conda-forge.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/testing.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -17,7 +17,8 @@
         VERSION:     '0.0.1a1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -25,7 +26,6 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="conda-forge 0.0.1a1 documentation" href="#" />
     <link rel="next" title="Guidelines" href="guidelines.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -48,6 +48,17 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="guidelines.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meta.html">Writing the <code class="docutils literal"><span class="pre">meta.yaml</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="meta.html#build-from-tarballs-not-repos">Build from Tarballs, Not Repos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html#packaging-the-license-manually">Packaging the License Manually</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing in Recipes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#simple-existence-tests">Simple Existence Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#run-docker-tests-locally-for-feedstock">Run Docker Tests Locally for Feedstock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#run-docker-tests-locally-for-staged-recipes">Run Docker Tests Locally for Staged Recipes</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -82,7 +93,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/index.txt"
+      <li><a href="_sources/index.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -104,11 +115,11 @@
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
-      <a href="_sources/index.txt"
+      <a href="_sources/index.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
