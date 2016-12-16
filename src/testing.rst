@@ -27,3 +27,25 @@ On Windows, use the ``exist`` command. See below for an example.
         - test -f $PREFIX/lib/libboost_log.dylib  # [osx]
         - test -f $PREFIX/lib/libboost_log.so     # [linux]
         - if not exist %PREFIX%\\Library\\lib\\boost_log-vc140-mt.lib exit 1  # [win and py35]
+
+
+Run Docker Tests Locally for Feedstock
+--------------------------------------
+If you want to run the docker tests for a feedstock locally, go to the root
+feedstock directory and run, the ``ci_support/run_docker_build.sh`` script.
+
+.. code-block:: sh
+
+    $ cd my-feedstock
+    $ ./ci_support/run_docker_build.sh
+
+
+Run Docker Tests Locally for Staged Recipes
+--------------------------------------------
+If you want to run the docker tests for the staged-recipes repository locally, go to
+the root repository directory and run, the ``scripts/run_docker_build.sh`` script.
+
+.. code-block:: sh
+
+    $ cd staged-recipes
+    $ ./scripts/run_docker_build.sh
