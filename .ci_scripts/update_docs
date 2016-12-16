@@ -22,7 +22,14 @@ if [ -n "$GH_TOKEN" ]; then
         git add -A :/
         git commit -m "Re-ran make.py. [ci skip]" || true
         git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null
-        git push pushable new_site_content:master 2> /dev/null
+
+        # Update the remotes before pushing and check the status.
+        # This should give us more info if the push will not be
+        # a simple fast-forward push.
+        git branch -u pushable/master
+        git fetch --all 2> /dev/null
+        git status
+        git push 2> /dev/null
     fi
 fi
 
