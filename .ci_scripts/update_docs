@@ -29,7 +29,7 @@ if [ -n "$GH_TOKEN" ]; then
         git fetch --all 2> /dev/null
         git branch -u pushable/master
         git status
-        git push 2>/dev/null
+        git push pushable new_site_content:master 2> /dev/null
     fi
 fi
 
