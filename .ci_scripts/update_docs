@@ -26,13 +26,10 @@ if [ -n "$GH_TOKEN" ]; then
         # Update the remotes before pushing and check the status.
         # This should give us more info if the push will not be
         # a simple fast-forward push.
-        PUSH_DEFAULT="$(git config --get push.default)"
-        git config push.default upstream
         git fetch --all 2> /dev/null
         git branch -u pushable/master
         git status
-        git push 2>/dev/null
-        git config push.default "${PUSH_DEFAULT}"
+        git push pushable new_site_content:master 2> /dev/null
     fi
 fi
 
