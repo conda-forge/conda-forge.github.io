@@ -34,7 +34,7 @@ pinned = {
           'cairo': 'cairo 1.14.*',
           'ffmpeg': 'ffmpeg 2.8.*',
           'fontconfig': 'fontconfig 2.12.*',
-          'freetype': 'freetype 2.6.*',
+          'freetype': 'freetype 2.7|2.7.*',
           'geos': 'geos 3.5.*',
           'giflib': 'giflib 5.1.*',
           'glib': 'glib 2.51.*',
