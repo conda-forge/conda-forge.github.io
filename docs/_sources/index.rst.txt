@@ -14,6 +14,7 @@ Contents:
    guidelines
    meta
    testing
+   ciservices
 
 
 Indices and tables
