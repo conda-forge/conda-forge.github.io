@@ -13,6 +13,7 @@ Contents:
 
    guidelines
    meta
+   buildwin
    testing
    ciservices
 
