@@ -13,8 +13,6 @@ build for such projects.
 
 .. code-block:: bat
 
-    setlocal EnableDelayedExpansion
-
     :: Make a build folder and change to it.
     mkdir build
     cd build
@@ -30,3 +28,8 @@ build for such projects.
     :: Install!
     nmake install
     if errorlevel 1 exit 1
+
+The following feedstocks are examples of this build structure deployed:
+
+* `libping <https://github.com/conda-forge/libpng-feedstock/blob/master/recipe/bld.bat>`_
+* `pugixml <https://github.com/conda-forge/pugixml-feedstock/blob/master/recipe/bld.bat>`_
