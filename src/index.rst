@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 2
 
    guidelines
+   recipe
    meta
    buildwin
    testing
