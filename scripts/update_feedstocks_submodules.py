@@ -6,7 +6,6 @@
 #  - python
 #  - conda 4.1.*
 #  - conda-env 2.5.*
-#  - conda-build 1.*
 #  - conda-smithy
 #  - gitpython
 # channels:
