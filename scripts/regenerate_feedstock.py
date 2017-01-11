@@ -22,7 +22,6 @@ Whilst it is out of date, the following pseudo code was used to outline this mod
 # env:
 #  - git
 #  - python
-#  - conda 4.1.*
 #  - conda-smithy >=1.1.2
 #  - gitpython
 #  - pygithub

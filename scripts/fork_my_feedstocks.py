@@ -11,7 +11,6 @@ It also requires all the feedstocks be cloned somewhere like with the `feedstock
 # env:
 #  - git
 #  - python
-#  - conda 4.1.*
 #  - conda-smithy
 #  - pygithub
 #  - gitpython

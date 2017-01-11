@@ -4,7 +4,6 @@
 # env:
 #  - git
 #  - python
-#  - conda 4.1.*
 #  - conda-smithy
 #  - gitpython
 #  - pygithub

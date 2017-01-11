@@ -3,7 +3,6 @@
 # conda execute
 # env:
 #  - python
-#  - conda 4.1.*
 #  - conda-smithy
 # channels:
 #  - conda-forge
