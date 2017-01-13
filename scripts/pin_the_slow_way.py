@@ -46,7 +46,7 @@ pinned = {
           'libevent': 'libevent 2.0.*',
           'libmatio': 'libmatio 1.5.*',
           'libnetcdf': 'libnetcdf 4.4.*',
-          'libpng': 'libpng >=1.6.23,<1.7',
+          'libpng': 'libpng >=1.6.28,<1.7',
           'libsvm': 'libsvm 3.21|3.21.*',
           'libtiff': 'libtiff 4.0.*',
           'libxml2': 'libxml2 2.9.*',
