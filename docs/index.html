@@ -48,9 +48,22 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="guidelines.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipe.html">Creating Conda Recipes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipe.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipe.html#avoid-dependencies-outside-of-conda-forge">Avoid Dependencies Outside of Conda-Forge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipe.html#optional-bld-bat-and-or-build-sh">Optional: <code class="docutils literal"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal"><span class="pre">build.sh</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipe.html#maintainer-role">Maintainer Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipe.html#other-recipes-in-staged-recipes">Other Recipes in <code class="docutils literal"><span class="pre">staged-recipes</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="meta.html">Writing the <code class="docutils literal"><span class="pre">meta.yaml</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="meta.html#build-from-tarballs-not-repos">Build from Tarballs, Not Repos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="meta.html#packaging-the-license-manually">Packaging the License Manually</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html#populating-the-hash-field">Populating the <code class="docutils literal"><span class="pre">hash</span></code> Field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html#excluding-a-platform">Excluding a Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html#building-against-numpy">Building Against NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html#build-number">Build Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html#single-verion-externally-managed">Single Verion, Externally Managed</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="buildwin.html">Building on Windows</a><ul>
@@ -62,6 +75,7 @@
 <li class="toctree-l2"><a class="reference internal" href="testing.html#simple-existence-tests">Simple Existence Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="testing.html#run-docker-tests-locally-for-feedstock">Run Docker Tests Locally for Feedstock</a></li>
 <li class="toctree-l2"><a class="reference internal" href="testing.html#run-docker-tests-locally-for-staged-recipes">Run Docker Tests Locally for Staged Recipes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#should-a-recipe-run-all-of-a-package-s-tests">Should a Recipe Run All of a Package&#8217;s Tests?</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ciservices.html">CI Services</a><ul>

@@ -27,7 +27,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Building on Windows" href="buildwin.html" />
-    <link rel="prev" title="Guidelines" href="guidelines.html" />
+    <link rel="prev" title="Creating Conda Recipes" href="recipe.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -80,6 +80,49 @@ It can then be refered to in the <code class="docutils literal"><span class="pre
 </pre></div>
 </div>
 </div>
+<div class="section" id="populating-the-hash-field">
+<h2>Populating the <code class="docutils literal"><span class="pre">hash</span></code> Field<a class="headerlink" href="#populating-the-hash-field" title="Permalink to this headline">¶</a></h2>
+<p>If your package is on PyPI, you can get the md5 hash from your package&#8217;s page
+on PyPI; look for the <code class="docutils literal"><span class="pre">md5</span></code> link next to the download link for your package.</p>
+<p>You can also generate a hash from the command line on Linux (and Mac if you
+install the necessary tools below). If you go this route, the <code class="docutils literal"><span class="pre">sha256</span></code> hash
+is preferable to the <code class="docutils literal"><span class="pre">md5</span></code> hash.</p>
+<p>To generate the <code class="docutils literal"><span class="pre">md5</span></code> hash: <code class="docutils literal"><span class="pre">md5</span> <span class="pre">your_sdist.tar.gz</span></code></p>
+<p>To generate the <code class="docutils literal"><span class="pre">sha256</span></code> hash: <code class="docutils literal"><span class="pre">openssl</span> <span class="pre">sha256</span> <span class="pre">your_sdist.tar.gz</span></code></p>
+<p>You may need the openssl package, available on conda-forge
+<code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">openssl</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code>.</p>
+</div>
+<div class="section" id="excluding-a-platform">
+<h2>Excluding a Platform<a class="headerlink" href="#excluding-a-platform" title="Permalink to this headline">¶</a></h2>
+<p>Use the <code class="docutils literal"><span class="pre">skip</span></code> key in the <code class="docutils literal"><span class="pre">build</span></code> section along with a selector:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">skip</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>  <span class="c1"># [win]</span>
+</pre></div>
+</div>
+<p>A full description of selectors is
+<a class="reference external" href="http://conda.pydata.org/docs/building/meta-yaml.html#preprocessing-selectors">in the conda docs</a>.</p>
+</div>
+<div class="section" id="building-against-numpy">
+<h2>Building Against NumPy<a class="headerlink" href="#building-against-numpy" title="Permalink to this headline">¶</a></h2>
+<p>If you have a package which links against numpy you need to build and run against
+the same version of numpy. Putting <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">x.x</span></code> in the build and run requirements
+ensures that a separate package will be built for each version of numpy that
+conda-forge builds against.</p>
+</div>
+<div class="section" id="build-number">
+<h2>Build Number<a class="headerlink" href="#build-number" title="Permalink to this headline">¶</a></h2>
+<p>The build number is used when the source code for the package has not changed but you
+need to make a new build. For example, if one of the dependencies of the package was
+not properly specified the first time you build a package, then when you fix the
+dependency and rebuild the package you should increase the build number.</p>
+<p>When the package version changes you should reset the build number to <code class="docutils literal"><span class="pre">0</span></code>.</p>
+</div>
+<div class="section" id="single-verion-externally-managed">
+<h2>Single Verion, Externally Managed<a class="headerlink" href="#single-verion-externally-managed" title="Permalink to this headline">¶</a></h2>
+<p>Many packages use <code class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span> <span class="pre">--single-version-externally-managed</span> <span class="pre">--record</span> <span class="pre">record.txt</span></code></p>
+<p>These options should be added to setup.py if a project uses setuptools. The goal is to prevent <code class="docutils literal"><span class="pre">setuptools</span></code>
+from creating an <code class="docutils literal"><span class="pre">egg-info</span></code> directory because it does not interact well with conda.</p>
+</div>
 </div>
 
 
@@ -93,6 +136,11 @@ It can then be refered to in the <code class="docutils literal"><span class="pre
 <li><a class="reference internal" href="#">Writing the <code class="docutils literal"><span class="pre">meta.yaml</span></code></a><ul>
 <li><a class="reference internal" href="#build-from-tarballs-not-repos">Build from Tarballs, Not Repos</a></li>
 <li><a class="reference internal" href="#packaging-the-license-manually">Packaging the License Manually</a></li>
+<li><a class="reference internal" href="#populating-the-hash-field">Populating the <code class="docutils literal"><span class="pre">hash</span></code> Field</a></li>
+<li><a class="reference internal" href="#excluding-a-platform">Excluding a Platform</a></li>
+<li><a class="reference internal" href="#building-against-numpy">Building Against NumPy</a></li>
+<li><a class="reference internal" href="#build-number">Build Number</a></li>
+<li><a class="reference internal" href="#single-verion-externally-managed">Single Verion, Externally Managed</a></li>
 </ul>
 </li>
 </ul>
@@ -100,7 +148,7 @@ It can then be refered to in the <code class="docutils literal"><span class="pre
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="guidelines.html" title="previous chapter">Guidelines</a></li>
+      <li>Previous: <a href="recipe.html" title="previous chapter">Creating Conda Recipes</a></li>
       <li>Next: <a href="buildwin.html" title="next chapter">Building on Windows</a></li>
   </ul></li>
 </ul>

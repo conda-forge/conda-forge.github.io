@@ -49,3 +49,11 @@ the root repository directory and run, the ``scripts/run_docker_build.sh`` scrip
 
     $ cd staged-recipes
     $ ./scripts/run_docker_build.sh
+
+
+
+Should a Recipe Run All of a Package's Tests?
+---------------------------------------------
+No. A recipe does not have to run all of a package's unit or integration tests.
+Sometimes, this might even be impossible due to timeouts on CI services.
+Just test sufficiently to know that the package is in good working order.

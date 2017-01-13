@@ -40,3 +40,58 @@ It can then be refered to in the ``meta.yaml`` via,
     about:
       license_file: '{{ environ["RECIPE_DIR"] }}/LICENSE'
 
+
+Populating the ``hash`` Field
+-----------------------------
+If your package is on PyPI, you can get the md5 hash from your package's page
+on PyPI; look for the ``md5`` link next to the download link for your package.
+
+You can also generate a hash from the command line on Linux (and Mac if you
+install the necessary tools below). If you go this route, the ``sha256`` hash
+is preferable to the ``md5`` hash.
+
+To generate the ``md5`` hash: ``md5 your_sdist.tar.gz``
+
+To generate the ``sha256`` hash: ``openssl sha256 your_sdist.tar.gz``
+
+You may need the openssl package, available on conda-forge
+``conda install openssl -c conda-forge``.
+
+
+Excluding a Platform
+--------------------
+Use the ``skip`` key in the ``build`` section along with a selector:
+
+.. code-block:: yaml
+
+    build:
+        skip: true  # [win]
+
+A full description of selectors is
+`in the conda docs <http://conda.pydata.org/docs/building/meta-yaml.html#preprocessing-selectors>`_.
+
+
+Building Against NumPy
+----------------------
+If you have a package which links against numpy you need to build and run against
+the same version of numpy. Putting ``numpy x.x`` in the build and run requirements
+ensures that a separate package will be built for each version of numpy that
+conda-forge builds against.
+
+
+Build Number
+------------
+The build number is used when the source code for the package has not changed but you
+need to make a new build. For example, if one of the dependencies of the package was
+not properly specified the first time you build a package, then when you fix the
+dependency and rebuild the package you should increase the build number.
+
+When the package version changes you should reset the build number to ``0``.
+
+
+Single Verion, Externally Managed
+---------------------------------
+Many packages use ``python setup.py install --single-version-externally-managed --record record.txt``
+
+These options should be added to setup.py if a project uses setuptools. The goal is to prevent ``setuptools``
+from creating an ``egg-info`` directory because it does not interact well with conda.

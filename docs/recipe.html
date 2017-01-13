@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Creating Conda Recipes &#8212; conda-forge 0.0.1a1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Writing the meta.yaml" href="meta.html" />
+    <link rel="prev" title="Guidelines" href="guidelines.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="creating-conda-recipes">
+<h1>Creating Conda Recipes<a class="headerlink" href="#creating-conda-recipes" title="Permalink to this headline">¶</a></h1>
+<p>This document presents conda-forge information about creating recipes overall.
+Details of modifying files inside of a recipe are present on other pages in
+this documentation.</p>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>There are two ways to get started:</p>
+<ol class="loweralpha simple">
+<li>If it is a python package you can generate a skeleton as a starting point with
+<code class="docutils literal"><span class="pre">conda</span> <span class="pre">skeleton</span> <span class="pre">pypi</span> <span class="pre">your_package_name</span></code>. You do <em>not</em> have to use skeleton, and the
+recipes produced by skeleton will need to be edited.</li>
+<li>Look at one of <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">these examples</a>
+in this repository and modify it as necessary.</li>
+</ol>
+<p>Your final recipe should have no comments and follow the order in the example.</p>
+<p><em>If there are details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.</em></p>
+</div>
+<div class="section" id="avoid-dependencies-outside-of-conda-forge">
+<h2>Avoid Dependencies Outside of Conda-Forge<a class="headerlink" href="#avoid-dependencies-outside-of-conda-forge" title="Permalink to this headline">¶</a></h2>
+<p><em>Do all of my package&#8217;s dependencies have to be in conda(-forge) already?</em></p>
+<p>Short answer: yes. Long answer: In principle, as long as your dependencies are in at least one of
+your user&#8217;s conda channels they will be able to install your package. In practice, that is difficult
+to manage, and we strive to have all dependencies built in conda-forge.</p>
+<p>Building all of the dependecies in conda-forge allow us greater assurance of ABI compatability
+for the conda-forge packages. Only in extreme cases should you rely on a dependecy outside of
+conda-forge.</p>
+</div>
+<div class="section" id="optional-bld-bat-and-or-build-sh">
+<h2>Optional: <code class="docutils literal"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal"><span class="pre">build.sh</span></code><a class="headerlink" href="#optional-bld-bat-and-or-build-sh" title="Permalink to this headline">¶</a></h2>
+<p>In many cases, <code class="docutils literal"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal"><span class="pre">build.sh</span></code> files are not required. Pure Python packages almost never need it.
+If the build can be executed with one line, you may put this line in the <code class="docutils literal"><span class="pre">script</span></code> entry of the <code class="docutils literal"><span class="pre">build</span></code> section of
+the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file.</p>
+</div>
+<div class="section" id="maintainer-role">
+<h2>Maintainer Role<a class="headerlink" href="#maintainer-role" title="Permalink to this headline">¶</a></h2>
+<p>The maintainers &#8220;job&#8221; is to:</p>
+<ul class="simple">
+<li>keep the feedstock updated by merging eventual maintenance PRs from conda-forge&#8217;s bots;</li>
+<li>keep the package updated by bumping the version whenever there is a new release;</li>
+<li>answer eventual question about the package on the feedstock issue tracker.</li>
+</ul>
+</div>
+<div class="section" id="other-recipes-in-staged-recipes">
+<h2>Other Recipes in <code class="docutils literal"><span class="pre">staged-recipes</span></code><a class="headerlink" href="#other-recipes-in-staged-recipes" title="Permalink to this headline">¶</a></h2>
+<p>When a PR of a recipe to the <code class="docutils literal"><span class="pre">staged-recipes</span></code> repo is ready to go, it is merged into <code class="docutils literal"><span class="pre">master</span></code>. This will trigger
+a CI build specially designed to convert the recipe. However, for any number of reasons, the recipe may not be converted
+right away. In the interim, the recipe will remain in <code class="docutils literal"><span class="pre">master</span></code> until they can be converted.
+There is no action required on the part of recipe contributors to resolve this. Also it should have no impact on any other
+PRs being proposed. If these recipe pending conversion do cause issues for your submission, please ping <code class="docutils literal"><span class="pre">&#64;conda-forge/core</span></code>
+for help.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Creating Conda Recipes</a><ul>
+<li><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li><a class="reference internal" href="#avoid-dependencies-outside-of-conda-forge">Avoid Dependencies Outside of Conda-Forge</a></li>
+<li><a class="reference internal" href="#optional-bld-bat-and-or-build-sh">Optional: <code class="docutils literal"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal"><span class="pre">build.sh</span></code></a></li>
+<li><a class="reference internal" href="#maintainer-role">Maintainer Role</a></li>
+<li><a class="reference internal" href="#other-recipes-in-staged-recipes">Other Recipes in <code class="docutils literal"><span class="pre">staged-recipes</span></code></a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="guidelines.html" title="previous chapter">Guidelines</a></li>
+      <li>Next: <a href="meta.html" title="next chapter">Writing the <code class="docutils literal"><span class="pre">meta.yaml</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/recipe.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, conda-forge.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/recipe.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

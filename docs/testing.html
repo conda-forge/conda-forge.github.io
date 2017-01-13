@@ -85,6 +85,12 @@ $ ./scripts/run_docker_build.sh
 </pre></div>
 </div>
 </div>
+<div class="section" id="should-a-recipe-run-all-of-a-package-s-tests">
+<h2>Should a Recipe Run All of a Package&#8217;s Tests?<a class="headerlink" href="#should-a-recipe-run-all-of-a-package-s-tests" title="Permalink to this headline">¶</a></h2>
+<p>No. A recipe does not have to run all of a package&#8217;s unit or integration tests.
+Sometimes, this might even be impossible due to timeouts on CI services.
+Just test sufficiently to know that the package is in good working order.</p>
+</div>
 </div>
 
 
@@ -99,6 +105,7 @@ $ ./scripts/run_docker_build.sh
 <li><a class="reference internal" href="#simple-existence-tests">Simple Existence Tests</a></li>
 <li><a class="reference internal" href="#run-docker-tests-locally-for-feedstock">Run Docker Tests Locally for Feedstock</a></li>
 <li><a class="reference internal" href="#run-docker-tests-locally-for-staged-recipes">Run Docker Tests Locally for Staged Recipes</a></li>
+<li><a class="reference internal" href="#should-a-recipe-run-all-of-a-package-s-tests">Should a Recipe Run All of a Package&#8217;s Tests?</a></li>
 </ul>
 </li>
 </ul>
