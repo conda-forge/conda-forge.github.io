@@ -6,7 +6,7 @@
 #  - conda-smithy
 #  - pygithub 1.*
 #  - six
-#  - conda-build 1.20.1
+#  - conda-build
 # channels:
 #  - conda-forge
 # run_with: python
