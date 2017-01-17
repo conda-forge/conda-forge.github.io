@@ -284,7 +284,7 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
 
                 for pos, dep in enumerate(section):
                     for name, pin in pinned.items():
-                        if re.match(r"^\s*%s\s*$" % name, dep) and dep != pin:
+                        if re.match(r"^\s*%s\s*$" % name, dep.split(" ", 1)[0]) and dep != pin:
                             replacements['- ' + str(dep)] = '- ' + pin
             if replacements:
                 current_build_number = recipe['build']['number']
