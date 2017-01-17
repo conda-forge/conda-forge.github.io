@@ -38,7 +38,7 @@ pinned = {
           'glib': 'glib 2.51.*',
           'harfbuzz': 'harfbuzz 1.3.*',
           'hdf5': 'hdf5 1.8.17|1.8.17.*',
-          'icu': 'icu 56.*',
+          'icu': 'icu 58.*',
           'jpeg': 'jpeg 9*',
           'libblitz': 'libblitz 0.10|0.10.*',
           'libevent': 'libevent 2.0.*',
