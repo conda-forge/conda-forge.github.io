@@ -48,6 +48,7 @@ pinned = {
           'libsvm': 'libsvm 3.21|3.21.*',
           'libtiff': 'libtiff 4.0.*',
           'libxml2': 'libxml2 2.9.*',
+          'metis': 'metis 5.1.*',
           'ncurses': 'ncurses 5.9*',
           'netcdf-cxx4': 'netcdf-cxx4 4.3.*',
           'netcdf-fortran': 'netcdf-fortran 4.4.*',
