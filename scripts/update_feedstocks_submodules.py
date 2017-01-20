@@ -69,9 +69,15 @@ for package_name in to_be_deleted:
     print("Removing {}.".format(package_name))
     submodule = submodules[package_name].remove()
 
-feedstocks_repo.submodule_update(recursive=False)
-feedstocks_repo.git.submodule('foreach', 'git', 'fetch', 'origin', 'master')
-feedstocks_repo.git.submodule('foreach', 'git', 'reset', '--hard', 'origin/master')
+for each_submodule in feedstocks_repo.submodules:
+    print("Updating {}.".format(each_submodule.name))
+    each_submodule.branch.checkout(force=True)
+    each_submodule.update(
+        init=True,
+        recursive=False,
+        force=True,
+        to_latest_revision=True
+    )
 
 if feedstocks_repo.is_dirty():
     feedstocks_repo.git.commit('-a', '-m', 'Updated feedstocks submodules. [ci skip]')
