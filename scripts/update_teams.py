@@ -2,7 +2,7 @@
 
 # conda execute
 # env:
-#  - python
+#  - python 2.7.*
 #  - conda-smithy
 #  - pygithub 1.*
 #  - six
