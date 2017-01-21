@@ -71,7 +71,15 @@ for package_name in to_be_deleted:
 
 for each_submodule in feedstocks_repo.submodules:
     print("Updating {}.".format(each_submodule.name))
+    # Update and initialize the submodule as it may not exist.
+    each_submodule.update(
+        init=True,
+        recursive=False,
+        force=True
+    )
+    # Checkout the master branch so the repo can be updated to latest.
     each_submodule.branch.checkout(force=True)
+    # Update the submodule based on the current repo's state.
     each_submodule.update(
         init=True,
         recursive=False,
