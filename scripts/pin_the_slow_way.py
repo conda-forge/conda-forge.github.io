@@ -13,8 +13,6 @@
 import argparse
 from contextlib import contextmanager
 import os
-import random
-import re
 import textwrap
 import time
 
@@ -23,50 +21,8 @@ import github
 
 import conda_smithy.github
 import conda_smithy.feedstocks as feedstocks
+from conda_smithy.configure_feedstock import update_recipe_pinning
 
-
-pinned = {
-          'boost': 'boost 1.63.*',
-          'boost-cpp': 'boost-cpp 1.63.*',
-          'bzip2': 'bzip2 1.0.*',
-          'cairo': 'cairo 1.14.*',
-          'ffmpeg': 'ffmpeg 2.8.*',
-          'fontconfig': 'fontconfig 2.12.*',
-          'freetype': 'freetype 2.7|2.7.*',
-          'geos': 'geos 3.5.*',
-          'giflib': 'giflib 5.1.*',
-          'glib': 'glib 2.51.*',
-          'harfbuzz': 'harfbuzz 1.3.*',
-          'hdf5': 'hdf5 1.8.17|1.8.17.*',
-          'icu': 'icu 58.*',
-          'jpeg': 'jpeg 9*',
-          'libblitz': 'libblitz 0.10|0.10.*',
-          'libevent': 'libevent 2.0.*',
-          'libmatio': 'libmatio 1.5.*',
-          'libnetcdf': 'libnetcdf 4.4.*',
-          'libpng': 'libpng >=1.6.28,<1.7',
-          'libsvm': 'libsvm 3.21|3.21.*',
-          'libtiff': 'libtiff 4.0.*',
-          'libxml2': 'libxml2 2.9.*',
-          'metis': 'metis 5.1.*',
-          'ncurses': 'ncurses 5.9*',
-          'netcdf-cxx4': 'netcdf-cxx4 4.3.*',
-          'netcdf-fortran': 'netcdf-fortran 4.4.*',
-          'openblas': 'openblas 0.2.19|0.2.19.*',
-          'openssl': 'openssl 1.0.*',
-          'pango': 'pango 1.40.*',
-          'pixman': 'pixman 0.34.*',
-          'proj4': 'proj4 4.9.3',
-          'pyqt': 'pyqt 4.11.*',
-          'qt': 'qt 4.8.*',
-          'readline': 'readline 6.2*',
-          'sox': 'sox 14.4.2',
-          'sqlite': 'sqlite 3.13.*',
-          'tk': 'tk 8.5.*',
-          'vlfeat': 'vlfeat 0.9.20',
-          'xz': 'xz 5.2.*',
-          'zlib': 'zlib 1.2.*',
-        }
 
 parser = argparse.ArgumentParser(description='Propose a feedstock update.')
 parser.add_argument('--feedstocks-dir', help="The location of the feedstocks.",
@@ -274,33 +230,12 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
 
         remote_branch = git_ref.remote_head.replace('{}/'.format(gh_me.login), '')
         with create_update_pr(clone, remote_branch, remote, clone.remotes['upstream']) as pr:
-            replacements = {}
-            for section_name in ['run', 'build']:
-                requirements = recipe.get('requirements')
-                if requirements is None:
-                    break
-                section = requirements.get(section_name)
-                if not section:
-                    continue
 
-                for pos, dep in enumerate(section):
-                    for name, pin in pinned.items():
-                        if re.match(r"^\s*%s\s*$" % name, dep) and dep != pin:
-                            replacements['- ' + str(dep)] = '- ' + pin
-            if replacements:
-                current_build_number = recipe['build']['number']
-                replacements['number: {}'.format(current_build_number)] = 'number: {}'.format(current_build_number + 1)
-            content = meta_content
-            for orig, new in replacements.items():
-                content = re.sub(
-                    # Use capture groups to get the indentation correct.
-                    r"(^\s*)%s(\s*)$" % orig,
-                    r"\1%s\2" % new,
-                    content,
-                    flags=re.MULTILINE)
+            changed_content, has_changed = update_recipe_pinning(recipe, meta_content)
             forge_yaml = os.path.join(feedstock.directory, 'recipe', 'meta.yaml')
-            with open(forge_yaml, 'w') as fh:
-                fh.write(content)
+            if has_changed:
+                with open(forge_yaml, 'w') as fh:
+                    fh.write(changed_content)
         if pr:
             skip_after_package = True
     # Stop processing any more feedstocks until the next time the script is run.
