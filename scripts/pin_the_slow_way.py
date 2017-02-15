@@ -61,7 +61,7 @@ pinned = {
           'proj4': 'proj4 4.9.3',
           'pyqt': 'pyqt 4.11.*',
           'qt': 'qt 4.8.*',
-          'readline': 'readline 6.2*',
+          'readline': 'readline 7.0.*',
           'sox': 'sox 14.4.2',
           'sqlite': 'sqlite 3.13.*',
           'tk': 'tk 8.5.*',
