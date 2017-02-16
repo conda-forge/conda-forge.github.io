@@ -64,12 +64,14 @@ for each_feedstock in os.listdir(feedstocks_dir):
             each_feedstock_repo += "-feedstock"
         repo = git.Repo(each_feedstock_dir)
         remote_repo = gh_org.get_repo(each_feedstock_repo)
-        fork_resp = gh_me.create_fork(remote_repo)
+        gh_me.add_to_subscriptions(remote_repo)
+        fork_repo = gh_me.create_fork(remote_repo)
+        gh_me.add_to_subscriptions(fork_repo)
 
         # Add the remote repos locally.
         for user, url in [
                 (remote_repo.owner.login, remote_repo.clone_url),
-                (fork_resp.owner.login, fork_resp.ssh_url)
+                (fork_repo.owner.login, fork_repo.ssh_url)
         ]:
             try:
                 remote = repo.create_remote(user, url)
