@@ -165,7 +165,7 @@ def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
         clone.git.add('-A')
         from git import Actor
         author = Actor("conda-forge-admin", "pelson.pub+conda-forge@gmail.com")
-        commit = clone.index.commit("MNT: Updated the feedstock for conda-smithy version {} [ci skip].".format(conda_smithy.__version__),
+        commit = clone.index.commit("MNT: Updated the feedstock for conda-smithy version {}.".format(conda_smithy.__version__),
                                     author=author)
 
         remote_branch_already_exists = target_branch in fork_remote.refs
@@ -209,7 +209,7 @@ If the changes look good, then please go ahead and merge this PR.
 If you have any questions about the changes though, please feel free to ping the 'conda-forge/core' team (using the @ notation in a comment).
 
 Remember, for any changes to the recipe you would normally need to increment the version or the build number of the package.
-Since this is an infrastructural change, we don't actually need/want a new version to be uploaded to anaconda.org/conda-forge, so the version and build/number are left unchanged and the CI has been skipped.
+Since this is an infrastructural change, we don't actually need/want a new version to be uploaded to anaconda.org/conda-forge, so the version and build/number are left unchanged.
 
 Thanks!
 
