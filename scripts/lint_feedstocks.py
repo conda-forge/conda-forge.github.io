@@ -84,7 +84,7 @@ for feedstock in randomised_feedstocks:
                 print('Already has an open issue! {}'.format(', '.join([issue.html_url for issue in open_issues])))
             else:
                 body = textwrap.dedent("""
-                    This is the friendly conda-forge-admin automated user.
+                    This is the friendly conda-forge-coordinator automated user.
 
                     I've ran the conda-smithy linter and found some lint in this feedstock :cry:.
 
