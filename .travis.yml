@@ -8,8 +8,8 @@ env:
     global:
        - CONDA_INSTALL_LOCN="${HOME}/conda"
 
-       # Adds a GH_TOKEN (conda-forge-admin's conda-forge.github.io token)
-       - secure: "bLpVeOyzwVGMaLiqi3zYuix0KCmw95Nu1IajoceC7fvzxeqfPS+jFKvddgYe83EEovDSK39ywLwDgZvGbEGcKc84wlDtQvIzoDTlvyTFiGy9sY81/0uxPXo6x1Vzd+pL8ZZC0ivygibAOjXRro90F5eyyOK6ZwgRYQoftNf8w9FTRTLEQr0iFCwKPkuNvnxUhq5/AMvGo7ajAEMq6a0bWHX5syIaxHsmGJRlpNlFnJ38ReYNi6MUnB3ZBfupBx6Mas30FwmRUgXAYeFvsg3YIH5Uwt+8bvNJSd12/m0h/XUyNCzj8YmWQliDCL2iOtiLz9Qr5QFJuhLge1yYq4etSneYlvmZBJ16uzTXNtwiTilUDOpbfBnvVei2zOFH+Jn5AZfOnA0M5Tl/anO8XNMgMqyYXOmQa+qkPtJoSyKkgY4xJsoK6nbxl/OdG88bRFZJeHK1MwuvxtyAS4+OdfdptcRHzsdHtPCjFPbMsShL2HLJOQAypXiKUcaLp5G7VcgnSArmau3mqJ1IRQMFyvnAqdRXpDcjYtVd2GQgMrGB9yZ9iGIST7E3KeNId2QOOnklKPB+dsQ9IPHEM2ixDOHbmWgvtKoetVtZlwMbKc67pFKfhTvIBGOElN/6Lzgz9wMbwv+gYRPa76olNGequFtiQKHAOki96lcnriglQODQTe8="
+       # Adds a GH_TOKEN (conda-forge-coordinator's conda-forge.github.io token)
+       - secure: "BshSms+7ZjWWtQNNzszt3ho76oWOTPeoNg+Aahmq1ZXJsAvh93IyHIxtb2xHYMrRdWXtCXof8kC1BLAjRISzL8j4+/QN6B8sjjrRYSBuM8WoCbP6c3DFbWJ2s19s5gAToqghahEP4VBJJcSny+gIzfNdKg47frwrcKLbvpzqr1q8O7H1swTXmXisplj9g5U7SWzP3lxveYxxcuh+/RTwQpQp8RriviCnacgZ6xJ3TnIirnhyyVOnA0twk3+0pSjpMSAsQY4+tTEDtIbHHUwEZxXS6sVNd/oVKBXNNHY/TJJRq413WvE7IGqyDtPQ935OAxHqiZFnA8WFQs9xK7EKssMsxXzRSOEPPCtDBMfL/4kDHF5gkF28NH9JJ9fgXxOpMm8SvFETe0nwUxSeb8uLPiw4UbXoKrd0Phxn/YyN3DOvRYKwsQpKYCGrzy+XNHmkoC80pI1OrqogtsUlUbRH0aS/6Zf7wn5ig3rVvMvhwYM/KbFPlb1z2tjb34GcFSpOsomXWvpLpG5gO91hFq9XPw0btsDq0aTJuJiAGrLKoMtkcY1FPe+M8wac2iRkfBCmbqr6HuCNdx7MCkPNysyfc+emeJIuxwhgcE1qLbTZMJ4ctMr2a2NGuoCxyWXOcNSVtUtlk5Q0rhgD0vohk/tKDdxJve9gw5qjihBjTsloTPg="
 
     matrix:
         - ACTION="feedstocks_repo"
