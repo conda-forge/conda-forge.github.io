@@ -89,8 +89,8 @@ gh = github.Github(gh_token)
 
 gh_me = gh.get_user()
 
-if gh_me.login != 'conda-forge-coordinator':
-    raise ValueError("The github token isn't that of conda-forge-coordinator (it's "
+if gh_me.login != 'conda-forge-admin':
+    raise ValueError("The github token isn't that of conda-forge-admin (it's "
                      "for {}), I'm going to have to bail.".format(gh_me.login))
 
 gh_forge = gh.get_organization('conda-forge')
@@ -146,7 +146,7 @@ if args.package:
         my_repos = {}
     forge_repos = {package_feedstock: gh_forge.get_repo(package_feedstock)}
 else:
-    print("Collecting list of conda-forge-coordinator repos...")
+    print("Collecting list of conda-forge-admin repos...")
     my_repos = {repo.name: repo for repo in my_repos(gh_me)}
     print("Collecting list of conda-forge repos...")
     forge_repos = {repo.name: repo for repo in gh_forge.get_repos()}
@@ -212,7 +212,7 @@ def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
             if pull_requests:
                 pull = pull_requests[0]
                 msg = textwrap.dedent("""
-    It's the friendly automated conda-forge-coordinator here again.
+    It's the friendly automated conda-forge-admin here again.
 
     Just to let you know, I've updated this PR so that it has the latest pinned versions.
 
@@ -225,7 +225,7 @@ def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
                 print('Updated PR on {}'.format(pull.html_url))
             else:
                 msg = textwrap.dedent("""
-    Hi! This is the friendly conda-forge-coordinator automated user.
+    Hi! This is the friendly conda-forge-admin automated user.
 
     I've bumped some of the conda-forge pinned versions, and noticed that it impacts this feedstock.
     If the changes look good, then please go ahead and merge this PR.
@@ -259,7 +259,7 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
 
     skip_after_package = False
 
-    # Put an appropriate conda-forge-coordinator remote in place.
+    # Put an appropriate conda-forge-admin remote in place.
     with tmp_remote(clone, gh_me.login,
                     admin_fork.clone_url.replace('https://',
                                                  'https://{}@'.format(gh_token))) as remote:
