@@ -75,8 +75,8 @@ gh = github.Github(gh_token)
 
 gh_me = gh.get_user()
 
-if gh_me.login != 'conda-forge-coordinator':
-    raise ValueError("The github token isn't that of conda-forge-coordinator (it's "
+if gh_me.login != 'conda-forge-admin':
+    raise ValueError("The github token isn't that of conda-forge-admin (it's "
                      "for {}), I'm going to have to bail.".format(gh_me.login))
 
 gh_forge = gh.get_organization('conda-forge')
@@ -122,7 +122,7 @@ if args.package:
         my_repos = {}
     forge_repos = {package_feedstock: gh_forge.get_repo(package_feedstock)}
 else:
-    print("Collecting list of conda-forge-coordinator repos...")
+    print("Collecting list of conda-forge-admin repos...")
     my_repos = {repo.name: repo for repo in my_repos(gh_me)}
     print("Collecting list of conda-forge repos...")
     forge_repos = {repo.name: repo for repo in gh_forge.get_repos()}
@@ -164,7 +164,7 @@ def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
     if has_change:
         clone.git.add('-A')
         from git import Actor
-        author = Actor("conda-forge-coordinator", "pelson.pub+conda-forge@gmail.com")
+        author = Actor("conda-forge-admin", "pelson.pub+conda-forge@gmail.com")
         commit = clone.index.commit("MNT: Updated the feedstock for conda-smithy version {}.".format(conda_smithy.__version__),
                                     author=author)
 
@@ -181,14 +181,14 @@ def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
         if not remote_branch_already_exists or change_from_remote_branch:
             fork_remote.push('+{}'.format(target_branch))
 
-        rerender_pulls = list(list_pulls(forge_feedstock, state='open', head='conda-forge-coordinator:{}'.format(target_branch)))
+        rerender_pulls = list(list_pulls(forge_feedstock, state='open', head='conda-forge-admin:{}'.format(target_branch)))
         if rerender_pulls:
             pull = rerender_pulls[0]
             if not change_from_remote_branch:
                 print("{} was checked, and whilst there are changes needed, the PR ({}) is up-to-date".format(feedstock.name, pull.html_url))
             else:
                 msg = textwrap.dedent("""
-    It's the friendly automated conda-forge-coordinator here again.
+    It's the friendly automated conda-forge-admin here again.
 
     Just to let you know, I've updated this PR so that it has the latest render from conda-smithy (version {}).
 
@@ -202,7 +202,7 @@ def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
         else:
             # There were no existing open PRs, so open one!
             msg = textwrap.dedent("""
-Hi! This is the friendly conda-forge-coordinator automated user.
+Hi! This is the friendly conda-forge-admin automated user.
 
 I've re-rendered this feedstock with the latest version of conda-smithy ({}) and noticed some changes.
 If the changes look good, then please go ahead and merge this PR.
@@ -216,7 +216,7 @@ Thanks!
                     """.format(conda_smithy.__version__))
             pull = forge_feedstock.create_pull(title='MNT: Re-render the feedstock [ci skip]',
                                                body=msg,
-                                               head="conda-forge-coordinator:{}".format(target_branch), base=remote_head)
+                                               head="conda-forge-admin:{}".format(target_branch), base=remote_head)
             print('Opened PR on {}'.format(pull.html_url))
         context.append(pull)
 
@@ -243,8 +243,8 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
 
     skip_after_package = False
 
-    # Put an appropriate conda-forge-coordinator remote in place.
-    with tmp_remote(clone, 'conda-forge-coordinator',
+    # Put an appropriate conda-forge-admin remote in place.
+    with tmp_remote(clone, 'conda-forge-admin',
                     admin_fork.clone_url.replace('https://',
                                                  'https://{}@'.format(gh_token))) as remote:
         try:
