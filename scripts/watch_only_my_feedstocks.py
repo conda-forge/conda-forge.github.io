@@ -53,7 +53,7 @@ gh_token = os.environ['GH_TOKEN']
 gh = github.Github(gh_token)
 gh_me = gh.get_user()
 
-if gh_me.login == 'conda-forge-coordinator':
+if gh_me.login == 'conda-forge-admin':
     raise ValueError("Please don't run this script with the github "
                      "token for {}.".format(gh_me.login))
 
