@@ -19,21 +19,29 @@ Your final recipe should have no comments and follow the order in the example.
 *If there are details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.*
 
 
-Checklist
-~~~~~~~~~
+In case you build your first recipe using conda-forge, the we provide here a step-by-step instruction and checklist that might help you with a sucessfully build
 
-In case you build your first recipe using conda-forge, the following checklist might help you with a sucessfully build
+Step-by-step instructions
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. fork the `example recipes <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
 2. within your forked copy, generate a new folder in the recipes subdirectory and copy meta.yml from the example directory. Leave the example directory unchanged!
 3. edit the example recipe (`meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_) as you need it
-4. remove all comments in the `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_
-5. ensure that the license and license family descriptors have the right case. Note that case sensitive inputs are required. The list of allowed entries can be found here (TBD --> list would need to be generated).
-6. In case your project has tests included, you need to decide if these tests should be exectuted while building the conda-feedstock.
+4. generate the ssh 256 key like described in the example recipe using the
+   openssl tool
+5. remove all comments in the `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_
+
+
+Checklist
+~~~~~~~~~
+
+* ensure that the license and license family descriptors have the right case. Note that case sensitive inputs are required. The list of allowed entries can be found here (TBD --> list would need to be generated).
+* In case your project has tests included, you need to decide if these tests should be exectuted while building the conda-feedstock.
  a. No: in that case simple tests like an import of your package can be provided. See here (TBD --> extend section on testing)
  
  b. Yes: In case you have tests for your package implemented and you want these to be exectuted automatically using e.g. nose, follow the description provided here (TBD not exising yet --> document in testing.rst how nosetests and others could be used).
-
+* In any case, make sure that all tests pass sucessfully at least on your
+  development machine
 
 
 Avoid Dependencies Outside of Conda-Forge
