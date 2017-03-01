@@ -18,18 +18,16 @@ Your final recipe should have no comments and follow the order in the example.
 
 *If there are details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.*
 
-
-In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that might help you with a sucessfully build is provided in the following.
+In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that might help you with a sucessful build is provided in the following.
 
 Step-by-step instructions
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Fork the `example recipes <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
-2. Within your forked copy, generate a new folder in the recipes subdirectory and copy meta.yml from the example directory. Please leave the example directory unchanged!
+2. Within your forked copy, generate a new folder in the recipes subdirectory and copy `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_ from the example directory. Please leave the example directory unchanged!
 3. Edit the copied recipe (`meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_) as you need it
-4. Generate the ssh 256 key like described in the example recipe using the
-   openssl tool
-5. Ensure to fill in the `tests` section. Simple tests would just import your module. More advanced would be that you run the tests coming with your package itself. For this you would need to TBD SECTION ON TESTING 
+4. Generate the ssh 256 key like described in the example recipe using the `openssl` tool. As an alternative you can also go to the package description on `PyPi <https://pypi.org>`_ where you can directly copy the ssh 256 key from.
+5. Ensure to fill in the `tests` section. Simple tests would just import your modulei and are described in the example.
 6. Remove all comments in the `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_
 
 
