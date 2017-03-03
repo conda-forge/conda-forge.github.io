@@ -46,9 +46,9 @@ Populating the ``hash`` Field
 If your package is on PyPI, you can get the md5 hash from your package's page
 on PyPI; look for the ``md5`` link next to the download link for your package.
 
-While still in pre-production, `Warehouse <https://pypi.org/>`_ also generates a
-sha256 for your package. Look for the ``SHA256`` link next to the download link
-for your package's tarball.
+While still in pre-production, `Warehouse <https://pypi.org/>`_ also generates a 
+sha256 hash for your PyPI package. Look for the ``SHA256`` link next to the download 
+link for your package's tarball.
 
 You can also generate a hash from the command line on Linux (and Mac if you
 install the necessary tools below). If you go this route, the ``sha256`` hash
