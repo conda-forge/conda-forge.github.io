@@ -60,6 +60,28 @@ in this repository and modify it as necessary.</li>
 </ol>
 <p>Your final recipe should have no comments and follow the order in the example.</p>
 <p><em>If there are details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.</em></p>
+<p>In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that might help you with a sucessful build is provided in the following.</p>
+<div class="section" id="step-by-step-instructions">
+<h3>Step-by-step instructions<a class="headerlink" href="#step-by-step-instructions" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Fork the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">example recipes</a></li>
+<li>Within your forked copy, generate a new folder in the recipes subdirectory and copy <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a> from the example directory. Please leave the example directory unchanged!</li>
+<li>Edit the copied recipe (meta.yml) as you need it</li>
+<li>Generate the ssh 256 key like described in the example recipe using the <cite>openssl</cite> tool. As an alternative you can also go to the package description on <a class="reference external" href="https://pypi.org">PyPi</a> where you can directly copy the ssh 256 key from.</li>
+<li>Ensure to fill in the <cite>tests</cite> section. Simple tests would just import your modulei and are described in the example.</li>
+<li>Remove all comments in the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a></li>
+</ol>
+</div>
+<div class="section" id="checklist">
+<h3>Checklist<a class="headerlink" href="#checklist" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache 2.0 and not APACHE 2.0).</li>
+<li>Ensure that you have included a license file if your license requires (see <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55">here</a>)</li>
+<li>In case your project has tests included, you need to decide if these tests should be exectuted while building the conda-forge feedstock.</li>
+<li>Make sure that all tests pass sucessfully at least on your
+development machine</li>
+</ul>
+</div>
 </div>
 <div class="section" id="avoid-dependencies-outside-of-conda-forge">
 <h2>Avoid Dependencies Outside of Conda-Forge<a class="headerlink" href="#avoid-dependencies-outside-of-conda-forge" title="Permalink to this headline">¶</a></h2>
@@ -106,7 +128,11 @@ for help.</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Creating Conda Recipes</a><ul>
-<li><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li><a class="reference internal" href="#step-by-step-instructions">Step-by-step instructions</a></li>
+<li><a class="reference internal" href="#checklist">Checklist</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#avoid-dependencies-outside-of-conda-forge">Avoid Dependencies Outside of Conda-Forge</a></li>
 <li><a class="reference internal" href="#optional-bld-bat-and-or-build-sh">Optional: <code class="docutils literal"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal"><span class="pre">build.sh</span></code></a></li>
 <li><a class="reference internal" href="#maintainer-role">Maintainer Role</a></li>
