@@ -27,7 +27,7 @@ Step-by-step instructions
 2. Within your forked copy, generate a new folder in the recipes subdirectory and copy `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_ from the example directory. Please leave the example directory unchanged!
 3. Edit the copied recipe (meta.yml) as you need it
 4. Generate the ssh 256 key like described in the example recipe using the `openssl` tool. As an alternative you can also go to the package description on `PyPi <https://pypi.org>`_ where you can directly copy the ssh 256 key from.
-5. Ensure to fill in the `tests` section. Simple tests would just import your modulei and are described in the example.
+5. Ensure to fill in the `tests` section. Simple tests would just import your module and are described in the example. See :ref:`testing_in_recipes` for more details.
 6. Remove all comments in the `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_
 
 
