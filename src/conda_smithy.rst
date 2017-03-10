@@ -1,4 +1,5 @@
-# conda-smithy rerender
+conda-smithy rerender
+=====================
 
 conda-forge  uses `conda-smithy` to re-render the feedstock and update the feedstock configuration.
 This action updates the `README`, CI configuration, the build matrix,
@@ -8,7 +9,8 @@ The bot issues re-rendering PRs every now and then,
 but sometimes the users may need to issue them manually instead waiting for the bot.
 Here is how, and when, to re-render.
 
-## How to re-render?
+How to re-render?
+-----------------
 
 First make sure you have both:
     - both `defaults` and `conda-forge` channels in your `.condarc` and no other channel;
@@ -42,7 +44,8 @@ and commit the changes!
 Note that you may get a warning message regarding the tokens.
 It is safe to ignore that as they are not needed for re-rendering.
 
-## When should we re-render?
+When should we re-render?
+-------------------------
 
 We need to re-render when there are changes the following parts of the feedstock:
 
