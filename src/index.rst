@@ -17,6 +17,7 @@ Contents:
    buildwin
    testing
    ciservices
+   conda_smithy
 
 
 Indices and tables
