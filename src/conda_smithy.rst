@@ -51,4 +51,5 @@ We need to re-render when there are changes the following parts of the feedstock
 
 - the `yum_requirements.txt`;
 - the platform configuration (`skip` sections);
-- build issues that a feedstock config update will fix (follow us on gitter to know about those).
+- build issues that a feedstock config update will fix (follow us on gitter to know about those);
+- updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.
