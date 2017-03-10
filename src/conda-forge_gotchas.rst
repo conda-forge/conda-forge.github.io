@@ -1,5 +1,8 @@
-conda defaults and conda-forge are incompatibilities
-====================================================
+conda-forge 'gotchas'
+=====================
+
+Using multiple channels
+-----------------------
 
 It is quite common to install a package from conda-forge and,
 when trying to use it,
@@ -18,7 +21,7 @@ is not present or the package is missing altogether.
 Once can confirm by issuing the command ``conda list`` and searching for the package in question.
 
 Why that happens?
------------------
+'''''''''''''''''
 
 The `conda-forge` and `defaults` are not 100% compatible.
 In the example above it is known that `defaults` uses `icu 54.*` while `conda-forge` relies on `icu 56.*`,
@@ -27,7 +30,7 @@ that mismatch can lead to errors when the install environment is mixing packages
 Note: All of conda-forge software pinning can be found at: https://github.com/conda-forge/staged-recipes/wiki/Pinned-dependencies
 
 How to fix it?
---------------
+''''''''''''''
 
 Newer `conda` versions introduced a channel priority feature.
 See https://conda.io/docs/channels.html for more information.
