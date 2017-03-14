@@ -78,7 +78,7 @@ stanza:
 .. code-block:: yaml
 
     test:
-      imports
+      imports:
         - package_name
     ...
       requires:
