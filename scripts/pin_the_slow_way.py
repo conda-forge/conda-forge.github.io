@@ -36,7 +36,7 @@ pinned = {
           'geos': 'geos 3.5.*',
           'giflib': 'giflib 5.1.*',
           'glib': 'glib 2.51.*',
-          'gmp': 'gmp >=5.0.1,<7,
+          'gmp': 'gmp >=5.0.1,<7',
           'harfbuzz': 'harfbuzz 1.3.*',
           'hdf5': 'hdf5 1.8.17|1.8.17.*',
           'icu': 'icu 58.*',
