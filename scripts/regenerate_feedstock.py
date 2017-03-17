@@ -23,6 +23,7 @@ Whilst it is out of date, the following pseudo code was used to outline this mod
 #  - git
 #  - python
 #  - conda-smithy >=1.1.2
+#  - conda-build-all >=1.0.2
 #  - gitpython
 #  - pygithub
 # channels:

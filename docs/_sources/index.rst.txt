@@ -17,6 +17,7 @@ Contents:
    buildwin
    testing
    ciservices
+   conda-forge_gotchas
 
 
 Indices and tables

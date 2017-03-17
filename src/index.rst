@@ -18,6 +18,7 @@ Contents:
    testing
    ciservices
    conda_smithy
+   conda-forge_gotchas
 
 
 Indices and tables
