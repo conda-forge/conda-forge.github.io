@@ -1,6 +1,9 @@
 Guidelines
 **********
 
+Transferring to conda-forge
+===========================
+
 This document intends to layout some guidelines on the transfer of
 `conda-recipes <https://github.com/conda/conda-recipes>`__ and
 `anaconda-recipes <https://github.com/ContinuumIO/anaconda-recipes>`__
@@ -52,3 +55,10 @@ code snippet to compile or run a basic test, command line usage (checking
 help or version). It is suggested that compiled code run all tests (e.g.
 ``make check``) to ensure it was built properly. This normally should
 happen in the build.
+
+Intended Usage
+==============
+
+Maintainers' time and CI resources are what enable conda-forge. They are as scarce as they are valuable. conda-forge has enough capacity to support releasing packages, but not developing them. Please limit uploaded packages to those tagged in a release.
+
+For tapping into CI services during development, consider the `ci-helpers <https://github.com/astropy/ci-helpers>`__ project.
