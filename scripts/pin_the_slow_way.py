@@ -59,8 +59,8 @@ pinned = {
           'pango': 'pango 1.40.*',
           'pixman': 'pixman 0.34.*',
           'proj4': 'proj4 4.9.3',
-          'pyqt': 'pyqt 4.11.*',
-          'qt': 'qt 4.8.*',
+          'pyqt': 'pyqt 5.6.*',
+          'qt': 'qt 5.6.*',
           'readline': 'readline 6.2*',
           'sox': 'sox 14.4.2',
           'sqlite': 'sqlite 3.13.*',
@@ -121,7 +121,7 @@ def my_repos(gh_user):
 
 def list_pulls(repo, state='open', head=None):
     """
-    List all of the pull requests that match the given critera.
+    List all of the pull requests that match the given criteria.
 
     At the time of writing, pygithub doesn't allow you to specify the head,
     so I had to create this function.
@@ -165,7 +165,7 @@ def tmp_remote(repo, remote_name, url):
 def create_update_pr(clone, remote_head, fork_remote, upstream_remote):
     target_branch = 'feedstock_version_pin_{}'.format(remote_head)
     if target_branch in clone.heads:
-        # Detatch the head
+        # Detach the head
         clone.head.reference = clone.commit('upstream/master')
         clone.delete_head(target_branch, '-D')
     clone.create_head(target_branch, upstream_remote.refs[remote_head]).set_tracking_branch(upstream_remote.refs[remote_head])
