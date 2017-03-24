@@ -15,12 +15,14 @@ How to re-render?
 First step is to install ``conda-smithy`` in your root environment
 
 .. code-block:: shell
+
     conda install -c conda-forge conda-smithy
 
 
 now, from the root directory of the feedstock, type:
 
 .. code-block:: shell
+
     conda smithy rerender
 
 
