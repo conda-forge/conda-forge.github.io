@@ -12,7 +12,7 @@ Here is how, and when, to re-render.
 How to re-render?
 -----------------
 
-First step is to install `conda-smithy` in your root environment
+First step is to install ``conda-smithy`` in your root environment
 
 .. code-block:: shell
     conda install -c conda-forge conda-smithy
