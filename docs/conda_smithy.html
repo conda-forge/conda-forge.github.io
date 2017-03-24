@@ -53,23 +53,7 @@ but sometimes the users may need to issue them manually instead waiting for the 
 Here is how, and when, to re-render.</p>
 <div class="section" id="how-to-re-render">
 <h2>How to re-render?<a class="headerlink" href="#how-to-re-render" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>First make sure you have both:</dt>
-<dd><ul class="first last simple">
-<li>both <code class="docutils literal"><span class="pre">defaults</span></code> and <code class="docutils literal"><span class="pre">conda-forge</span></code> channels in your <code class="docutils literal"><span class="pre">.condarc</span></code> and no other channel;</li>
-<li>the <code class="docutils literal"><span class="pre">conda-forge</span></code> channel should be on <strong>top</strong> of <code class="docutils literal"><span class="pre">defaults</span></code> to ensure package consistency via channel preference;</li>
-<li>updated version of <code class="docutils literal"><span class="pre">conda</span></code> and <code class="docutils literal"><span class="pre">conda-build</span></code>.</li>
-</ul>
-</dd>
-</dl>
-<p>To ensure the channels are present and in the right order you can use:</p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>conda config --add channels defaults --force
-conda config --add channels conda-forge --force
-</pre></div>
-</div>
-<p>You&#8217;ll only need to run those commands once.
-You can check if you have both channels with <code class="docutils literal"><span class="pre">conda</span> <span class="pre">info</span></code>.</p>
-<p>The next step is to install <code class="docutils literal"><span class="pre">conda-smithy</span></code> in your root environment</p>
+<p>First step is to install <cite>conda-smithy</cite> in your root environment</p>
 <p>now, from the root directory of the feedstock, type:</p>
 <p>and commit the changes!</p>
 <p>Note that you may get a warning message regarding the tokens.
