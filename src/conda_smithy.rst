@@ -1,7 +1,7 @@
 conda-smithy rerender
 =====================
 
-conda-forge  uses ``conda-smithy` to re-render the feedstock and update the feedstock configuration.
+conda-forge  uses ``conda-smithy`` to re-render the feedstock and update the feedstock configuration.
 This action updates the ``README``, CI configuration, the build matrix,
 fix problems with the feedstock configuration, etc.
 
@@ -52,5 +52,5 @@ We need to re-render when there are changes the following parts of the feedstock
 
 - the ``yum_requirements.txt``;
 - the platform configuration (``skip`` sections);
-- build issues that a feedstock configuration update will fix (follow us on ``gitter`` to know about those);
+- build issues that a feedstock configuration update will fix (follow us on `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`_ to know about those);
 - updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.
