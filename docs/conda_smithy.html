@@ -53,8 +53,14 @@ but sometimes the users may need to issue them manually instead waiting for the 
 Here is how, and when, to re-render.</p>
 <div class="section" id="how-to-re-render">
 <h2>How to re-render?<a class="headerlink" href="#how-to-re-render" title="Permalink to this headline">¶</a></h2>
-<p>First step is to install <cite>conda-smithy</cite> in your root environment</p>
+<p>First step is to install <code class="docutils literal"><span class="pre">conda-smithy</span></code> in your root environment</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>conda install -c conda-forge conda-smithy
+</pre></div>
+</div>
 <p>now, from the root directory of the feedstock, type:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>conda smithy rerender
+</pre></div>
+</div>
 <p>and commit the changes!</p>
 <p>Note that you may get a warning message regarding the tokens.
 It is safe to ignore that as they are not needed for re-rendering.</p>
