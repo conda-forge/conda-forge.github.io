@@ -58,10 +58,17 @@ Here is how, and when, to re-render.</p>
 </pre></div>
 </div>
 <p>now, from the root directory of the feedstock, type:</p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>conda smithy rerender
+<div class="highlight-shell"><div class="highlight"><pre><span></span>conda smithy rerender <span class="o">[</span>--commit <span class="o">{</span>edit<span class="p">|</span>auto<span class="o">}]</span>
 </pre></div>
 </div>
 <p>and commit the changes!</p>
+<p>Optionally one can commit the changes automatically.
+To do this use the <code class="docutils literal"><span class="pre">--commit</span></code>/<code class="docutils literal"><span class="pre">-c</span></code> option. By default, conda-smithy
+will have git open an editor to write the commit message.
+It will also provide a default commit message and
+show the changes to be added. If you wish to do this automatically,
+please just use <code class="docutils literal"><span class="pre">--commit</span> <span class="pre">auto</span></code>/<code class="docutils literal"><span class="pre">-c</span> <span class="pre">auto</span></code> and it will commit with
+the stock re-rendering message.</p>
 <p>Note that you may get a warning message regarding the tokens.
 It is safe to ignore that as they are not needed for re-rendering.</p>
 </div>

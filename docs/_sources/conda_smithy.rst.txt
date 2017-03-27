@@ -23,10 +23,18 @@ now, from the root directory of the feedstock, type:
 
 .. code-block:: shell
 
-    conda smithy rerender
+    conda smithy rerender [--commit {edit|auto}]
 
 
 and commit the changes!
+
+Optionally one can commit the changes automatically.
+To do this use the ``--commit``/``-c`` option. By default, conda-smithy
+will have git open an editor to write the commit message.
+It will also provide a default commit message and
+show the changes to be added. If you wish to do this automatically,
+please just use ``--commit auto``/``-c auto`` and it will commit with
+the stock re-rendering message.
 
 Note that you may get a warning message regarding the tokens.
 It is safe to ignore that as they are not needed for re-rendering.
