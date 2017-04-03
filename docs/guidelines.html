@@ -45,6 +45,8 @@
             
   <div class="section" id="guidelines">
 <h1>Guidelines<a class="headerlink" href="#guidelines" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="transferring-to-conda-forge">
+<h2>Transferring to conda-forge<a class="headerlink" href="#transferring-to-conda-forge" title="Permalink to this headline">¶</a></h2>
 <p>This document intends to layout some guidelines on the transfer of
 <a class="reference external" href="https://github.com/conda/conda-recipes">conda-recipes</a> and
 <a class="reference external" href="https://github.com/ContinuumIO/anaconda-recipes">anaconda-recipes</a>
@@ -93,13 +95,36 @@ help or version). It is suggested that compiled code run all tests (e.g.
 <code class="docutils literal"><span class="pre">make</span> <span class="pre">check</span></code>) to ensure it was built properly. This normally should
 happen in the build.</p>
 </div>
+<div class="section" id="intended-usage">
+<h2>Intended Usage<a class="headerlink" href="#intended-usage" title="Permalink to this headline">¶</a></h2>
+<p>Maintainers&#8217; time and CI resources are what enable conda-forge. They are as scarce as they are valuable. conda-forge has enough capacity to support releasing packages, but not developing them.</p>
+<p>Publishing a package to conda-forge signals it is suitable for users not involved with development. However, publishing does not always happen error-free. Multiple commits are acceptable when debugging issues with the release process itself.</p>
+<dl class="docutils">
+<dt>Fortunately, there are options for optimizing the development of a package.</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="https://github.com/conda-forge/conda-smithy">conda-smithy</a> is a tool used by conda-forge itself to manage feedstocks. conda-smithy can be used to create an internal development feedstock that is seperate from conda-forge.</li>
+<li><a class="reference external" href="https://github.com/astropy/ci-helpers">ci-helpers</a> is a set of scripts that drive various CI services using environment variables.</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
 
 
           </div>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Guidelines</a><ul>
+<li><a class="reference internal" href="#transferring-to-conda-forge">Transferring to conda-forge</a></li>
+<li><a class="reference internal" href="#intended-usage">Intended Usage</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
