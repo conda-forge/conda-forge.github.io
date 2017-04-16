@@ -95,3 +95,15 @@ Many packages use ``python setup.py install --single-version-externally-managed 
 
 These options should be added to setup.py if a project uses setuptools. The goal is to prevent ``setuptools``
 from creating an ``egg-info`` directory because it does not interact well with conda.
+
+
+Downloading data files needed
+---------------------------------
+If you need additional data files for the build, download them using curl in the build script.
+Add curl and openssl to the build requirements and then you can use curl to download and openssl to verify.
+
+Example recipe is 
+`here <https://github.com/conda-forge/pari-feedstock/blob/187bb3bdd0a5e35b2ecaa73ed2ceddc4ca0c2f5a/recipe/build.sh#L27-L35>`_.
+
+Upstream issue for allowing multiple source is 
+`here <https://github.com/conda/conda-build/issues/1466>`_.
