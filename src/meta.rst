@@ -89,7 +89,7 @@ dependency and rebuild the package you should increase the build number.
 When the package version changes you should reset the build number to ``0``.
 
 
-Single Verion, Externally Managed
+Single Version, Externally Managed
 ---------------------------------
 Many packages use ``python setup.py install --single-version-externally-managed --record record.txt``
 
