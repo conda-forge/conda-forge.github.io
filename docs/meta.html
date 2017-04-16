@@ -117,8 +117,8 @@ not properly specified the first time you build a package, then when you fix the
 dependency and rebuild the package you should increase the build number.</p>
 <p>When the package version changes you should reset the build number to <code class="docutils literal"><span class="pre">0</span></code>.</p>
 </div>
-<div class="section" id="single-verion-externally-managed">
-<h2>Single Verion, Externally Managed<a class="headerlink" href="#single-verion-externally-managed" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="single-version-externally-managed">
+<h2>Single Version, Externally Managed<a class="headerlink" href="#single-version-externally-managed" title="Permalink to this headline">¶</a></h2>
 <p>Many packages use <code class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span> <span class="pre">--single-version-externally-managed</span> <span class="pre">--record</span> <span class="pre">record.txt</span></code></p>
 <p>These options should be added to setup.py if a project uses setuptools. The goal is to prevent <code class="docutils literal"><span class="pre">setuptools</span></code>
 from creating an <code class="docutils literal"><span class="pre">egg-info</span></code> directory because it does not interact well with conda.</p>
@@ -140,7 +140,7 @@ from creating an <code class="docutils literal"><span class="pre">egg-info</span
 <li><a class="reference internal" href="#excluding-a-platform">Excluding a Platform</a></li>
 <li><a class="reference internal" href="#building-against-numpy">Building Against NumPy</a></li>
 <li><a class="reference internal" href="#build-number">Build Number</a></li>
-<li><a class="reference internal" href="#single-verion-externally-managed">Single Verion, Externally Managed</a></li>
+<li><a class="reference internal" href="#single-version-externally-managed">Single Version, Externally Managed</a></li>
 </ul>
 </li>
 </ul>
