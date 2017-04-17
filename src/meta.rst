@@ -97,10 +97,11 @@ These options should be added to setup.py if a project uses setuptools. The goal
 from creating an ``egg-info`` directory because it does not interact well with conda.
 
 
-Downloading data files needed
----------------------------------
-If you need additional data files for the build, download them using curl in the build script.
-Add curl and openssl to the build requirements and then you can use curl to download and openssl to verify.
+Downloading extra sources and data files
+----------------------------------------
+If you need additional source/data files for the build, download them using curl in the build script
+and verify the checksum using openssl. Add curl and openssl to the build requirements and then you
+can use curl to download and openssl to verify.
 
 Example recipe is 
 `here <https://github.com/conda-forge/pari-feedstock/blob/187bb3bdd0a5e35b2ecaa73ed2ceddc4ca0c2f5a/recipe/build.sh#L27-L35>`_.
