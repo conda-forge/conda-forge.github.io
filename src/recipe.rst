@@ -39,6 +39,16 @@ Checklist
 * In case your project has tests included, you need to decide if these tests should be exectuted while building the conda-forge feedstock.
 * Make sure that all tests pass sucessfully at least on your
   development machine
+  
+  
+What happens after the PR to staged-recipes is merged
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* After the PR is merged, travis-ci will create a new git repo automatically. For example, the recipe for a package named `pydstool` will be moved to a new repo `https://github.com/conda-forge/pydstool-feedstock <https://github.com/conda-forge/pydstool-feedstock>`_.
+* CI services (travis-ci, circleci, appveyor) will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to `https://anaconda.org/conda-forge <https://anaconda.org/conda-forge>`_
+* If this is your first contribution, you will be added to the conda-forge `team <https://github.com/orgs/conda-forge/teams/all-members >`_ and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repo.
+* If you want to make a change to the recipe, send a PR to the git repo from a fork. Branches of the main repo are used for maintaining different versions only.
+
 
 
 Avoid Dependencies Outside of Conda-Forge
