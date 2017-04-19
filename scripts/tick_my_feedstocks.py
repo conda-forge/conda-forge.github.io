@@ -39,6 +39,7 @@ This isn't a replacement for a maintainer, just a support tool.
 # TODO Add support for skipping repos (e.g. fake-factory)
 # TODO verify python 2.7 and 3.4 compatability (should work, but untested.)
 # TODO deeper check of dependencies of new feedstock against conda-forge dependencies?
+# TOD Add dry run mode that checks for packages that need updating and whether or not they can be patched but commits nothing.
 
 import argparse
 from base64 import b64encode
