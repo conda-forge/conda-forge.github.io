@@ -191,7 +191,7 @@ def feedstock_status(feedstock):
     """
     Return whether or not a feedstock is out of date and any information needed to update it.
     :param github.Repository.Repository feedstock:
-    :return: `tpl(bool,bool,obj)` -- bools indicating success and either None or a tuple of data
+    :return: `tpl(bool,bool,None|status_data)` -- bools indicating success and either None or a status_data tuple
     """
 
     meta_yaml = feedstock.get_contents('recipe/meta.yaml')
