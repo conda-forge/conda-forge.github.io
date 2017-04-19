@@ -18,7 +18,7 @@
 # run_with: python
 
 """
-Usage: python tick_my_feedstocks.py [--password <github_password_or_oauth>] [--user <github_username>]
+Usage: python tick_my_feedstocks.py [--password <github_password_or_oauth>] [--user <github_username>] [--no-regenerate --dry-run]
 NOTE that your oauth token should have these abilities: public_repo, read:org, delete_repo.
 
 This script
@@ -37,10 +37,10 @@ This isn't a replacement for a maintainer, just a support tool.
 # TODO debug .create_pull() / replace with call to requests and the API directly
 # TODO pass token/user to pygithub for push. (Currently uses system config., which is an assumption)
 # TODO Test --no-regenerate flag
+# TODO Test --dry-run flag
 # TODO Add support for skipping repos that are deprecated. (e.g. fake-factory)
 # TODO verify python 2.7 and 3.4 compatability (should work, but untested.)
 # TODO deeper check of dependencies of new feedstock against conda-forge dependencies?
-# TODO Add --dry-run flag that generates patches but does not apply them, generate forks, or rerender feedstocks.
 
 import argparse
 from base64 import b64encode
@@ -324,7 +324,7 @@ def rerender_fork(fork):
     return True
 
 
-def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False):
+def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run=False):
     """
     Finds all of the feedstocks a user maintains that can be updated without
     a dependency conflict with other feedstocks the user maintains,
@@ -333,6 +333,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False):
     :param str|None gh_password: GitHub password or OAuth token (if omitted, check environment vars)
     :param str|None gh_user: GitHub username (can be omitted with OAuth)
     :param bool no_regenerate: If True, don't rerender feedstocks before submitting pull requests
+    :param bool dry_run: If True, do not apply generate patches, fork feedstocks, or rerender
     """
 
     if gh_password is None:
@@ -381,6 +382,10 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False):
             error_dict["Couldn't Patch"].append(update)
             continue
 
+        if dry_run:
+            # Skip additional processing here.
+            continue
+        
         # make fork
         fork = even_feedstock_fork(user, update[0])
         if fork is None:
@@ -435,9 +440,13 @@ if __name__ == "__main__":
                         dest='user',
                         help='GitHub username')
     parser.add_argument('--no-regenerate',
-                        default=False,
+                        action=store_true,
                         dest='no_rerender',
-                        help="If present, don't regenerate feedstocks after updating.")
+                        help="If present, don't regenerate feedstocks after updating")
+    parse.add_argument('--dry-run',
+                       action=store_true
+                       dest='dry_run'
+                       help='If present, skip applying patches, forking, and regenerating feedstocks'
     args = parser.parse_args()
 
-    tick_feedstocks(args['password'], args['user'], args['no_regenerate'])
+    tick_feedstocks(args['password'], args['user'], args['no_regenerate'], args['dry_run'])
