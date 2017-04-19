@@ -149,10 +149,10 @@ def basic_patch(text, yaml_strs, pypi_version, blob_sha):
     """
     Given a meta.yaml file, version strings, and appropriate hashes,
     find and replace old versions and hashes, and create a patch.
-    :param str text: The raw text
-    :param dict yaml_strs:
-    :param str pypi_version:
-    :param str blob_sha:
+    :param str text: The raw text of the current meta.yaml
+    :param dict yaml_strs: Dict with 'source_fn', 'version', and 'sha256' values parsed from yaml
+    :param str pypi_version: The new version string from PyPI  
+    :param str blob_sha: the commit SHA code.
     :return: `tpl(bool,str|dict)` -- True if success and commit dict for github, false and error otherwise
     """
     pypi_sha = pypi_org_sha(
