@@ -2,7 +2,7 @@
 
 # conda execute
 # env:
-#  - python >=2.7
+#  - python >=3.5
 #  - conda-build
 #  - conda-smithy
 #  - beautifulsoup4
@@ -18,14 +18,27 @@
 # run_with: python
 
 """
-TKTKTK
+Usage: python tick_my_feedstocks.py [--password <github_password_or_oauth>] [--user <github_username>]
+NOTE that your oauth token should have these abilities: public_repo, read:org, delete_repo.
+
+This script
+* identifies all of the feedstocks maintained by a user
+* attempts to determine F, the subset of feedstocks that need updating
+* attempts to determine F_i, the subset of F that have no dependencies on other members of F
+* attempts to patch each member of F_i with the new version number and hash
+* attempts to rerender each member of F_i with the installed version of conda-smithy
+* submits a pull request for each member of F_i to the appropriate conda-forge repoository
+
+All feedstocks updated with this script should be double-checked in case build or run dependencies have changed!
+This isn't a replacement for a maintainer, just a support tool.
 """
 
-# TODO strip out rerender.sh if possible
-# TODO debug .create_pull()
+# TODO debug .create_pull() / replace with call to requests
+# TODO pass token/user to pygithub for push. (Currently uses system config., which is an assumption)
 # TODO Add --no-rerender option (stub until .create_pull())
 # TODO Add support for skipping repos (e.g. fake-factory)
-# TODO verify python 2.7 compatability
+# TODO verify python 2.7 and 3.4 compatability (should work, but untested.)
+# TODO deeper check of dependencies of new feedstock against conda-forge dependencies?
 
 import argparse
 from base64 import b64encode
