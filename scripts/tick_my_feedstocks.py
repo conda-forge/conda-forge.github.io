@@ -33,14 +33,14 @@ All feedstocks updated with this script should be double-checked in case build o
 This isn't a replacement for a maintainer, just a support tool.
 """
 
-# TODO debug .create_pull() / replace with call to requests
-# TODO pass token/user to pygithub for push. (Currently uses system config., which is an assumption)
 # TODO test command line invocation
-# TODO Test --no-rerender flag
-# TODO Add support for skipping repos (e.g. fake-factory)
+# TODO debug .create_pull() / replace with call to requests and the API directly
+# TODO pass token/user to pygithub for push. (Currently uses system config., which is an assumption)
+# TODO Test --no-regenerate flag
+# TODO Add support for skipping repos that are deprecated. (e.g. fake-factory)
 # TODO verify python 2.7 and 3.4 compatability (should work, but untested.)
 # TODO deeper check of dependencies of new feedstock against conda-forge dependencies?
-# TOD Add dry run mode that checks for packages that need updating and whether or not they can be patched but commits nothing.
+# TODO Add --dry-run flag that generates patches but does not apply them, generate forks, or rerender feedstocks.
 
 import argparse
 from base64 import b64encode
@@ -324,7 +324,7 @@ def rerender_fork(fork):
     return True
 
 
-def tick_feedstocks(gh_password=None, gh_user=None, no_rerender=False):
+def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False):
     """
     Finds all of the feedstocks a user maintains that can be updated without
     a dependency conflict with other feedstocks the user maintains,
@@ -332,7 +332,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_rerender=False):
     then submits a pull
     :param str|None gh_password: GitHub password or OAuth token (if omitted, check environment vars)
     :param str|None gh_user: GitHub username (can be omitted with OAuth)
-    :param bool non_rerender: If True, don't rerender feedstocks before submitting pull requests
+    :param bool no_regenerate: If True, don't rerender feedstocks before submitting pull requests
     """
 
     if gh_password is None:
@@ -383,9 +383,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_rerender=False):
 
         # make fork
         fork = even_feedstock_fork(user, update[0])
-
         if fork is None:
-            # forking failed
             error_dict["Couldn't Fork"].append(update)
             continue
 
@@ -395,17 +393,15 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_rerender=False):
                 fork.full_name),
             json=patch[1],
             auth=(user.login, gh_password))
-
         if not r.ok:
-            # something broke.
             error_dict["Couldn't Apply Patch"].append(update)
             continue
 
         successful_updates.append(update)
         successful_forks.append(fork)
     
-    if no_rerender:
-        print('Skipping rerendering feedstocks.)
+    if no_regenerate:
+        print('Skipping regenerate feedstocks.)
     else:
         for fork in tqdm(successful_forks, desc='Rerendering feedstocks...'):
             rerender_fork(fork)
@@ -438,10 +434,10 @@ if __name__ == "__main__":
                         default=None,
                         dest='user',
                         help='GitHub username')
-    parser.add_argument('--no-rerender',
+    parser.add_argument('--no-regenerate',
                         default=False,
                         dest='no_rerender',
-                        help="If present, don't rererender feedstocks after updating.")
+                        help="If present, don't regenerate feedstocks after updating.")
     args = parser.parse_args()
 
-    tick_feedstocks(args['password'], args['user'], args['no_rerender'])
+    tick_feedstocks(args['password'], args['user'], args['no_regenerate'])
