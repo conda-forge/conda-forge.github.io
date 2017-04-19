@@ -39,8 +39,9 @@ This isn't a replacement for a maintainer, just a support tool.
 # TODO Test --no-regenerate flag
 # TODO Test --dry-run flag
 # TODO Add support for skipping repos that are deprecated. (e.g. fake-factory)
-# TODO verify python 2.7 and 3.4 compatability (should work, but untested.)
-# TODO deeper check of dependencies of new feedstock against conda-forge dependencies?
+# TODO Test python 2.7 compatability (should work, but untested.)
+# TODO Test python 3.4 compatability (should work, but untested.)
+# TODO deeper check of dependencies of new feedstock against conda-forge dependencies for better patching?
 
 import argparse
 from base64 import b64encode
