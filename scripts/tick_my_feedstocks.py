@@ -35,7 +35,8 @@ This isn't a replacement for a maintainer, just a support tool.
 
 # TODO debug .create_pull() / replace with call to requests
 # TODO pass token/user to pygithub for push. (Currently uses system config., which is an assumption)
-# TODO Add --no-rerender option (stub until .create_pull())
+# TODO test command line invocation
+# TODO Test --no-rerender flag
 # TODO Add support for skipping repos (e.g. fake-factory)
 # TODO verify python 2.7 and 3.4 compatability (should work, but untested.)
 # TODO deeper check of dependencies of new feedstock against conda-forge dependencies?
@@ -323,7 +324,7 @@ def rerender_fork(fork):
     return True
 
 
-def tick_feedstocks(gh_password=None, gh_user=None):
+def tick_feedstocks(gh_password=None, gh_user=None, no_rerender=False):
     """
     Finds all of the feedstocks a user maintains that can be updated without
     a dependency conflict with other feedstocks the user maintains,
@@ -331,6 +332,7 @@ def tick_feedstocks(gh_password=None, gh_user=None):
     then submits a pull
     :param str|None gh_password: GitHub password or OAuth token (if omitted, check environment vars)
     :param str|None gh_user: GitHub username (can be omitted with OAuth)
+    :param bool non_rerender: If True, don't rerender feedstocks before submitting pull requests
     """
 
     if gh_password is None:
@@ -401,9 +403,12 @@ def tick_feedstocks(gh_password=None, gh_user=None):
 
         successful_updates.append(update)
         successful_forks.append(fork)
-
-    for fork in tqdm(successful_forks, desc='Rerendering feedstocks...'):
-        rerender_fork(fork)
+    
+    if no_rerender:
+        print('Skipping rerendering feedstocks.)
+    else:
+        for fork in tqdm(successful_forks, desc='Rerendering feedstocks...'):
+            rerender_fork(fork)
 
     for update in tqdm(successful_updates, desc='Submitting pulls...'):
         update[0].create_pull(
@@ -426,15 +431,17 @@ def tick_feedstocks(gh_password=None, gh_user=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--password',
+                        default=None,
                         dest='password',
                         help='GitHub password or oauth token')
     parser.add_argument('--user',
+                        default=None,
                         dest='user',
                         help='GitHub username')
+    parser.add_argument('--no-rerender',
+                        default=False,
+                        dest='no_rerender',
+                        help="If present, don't rererender feedstocks after updating.")
     args = parser.parse_args()
 
-    for key in ['user', 'password']:
-        if key not in args:
-            args[key] = None
-
-    tick_feedstocks(args['password'], args['user'])
+    tick_feedstocks(args['password'], args['user'], args['no_rerender'])
