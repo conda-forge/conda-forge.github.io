@@ -22,16 +22,14 @@ TKTKTK
 """
 
 # TODO strip out rerender.sh if possible
-# TODO when pygithub gets updated, add .create_pull() code
+# TODO debug .create_pull()
 # TODO Add --no-rerender option (stub until .create_pull())
 # TODO Add support for skipping repos (e.g. fake-factory)
 # TODO verify python 2.7 compatability
 
 import argparse
 from base64 import b64encode
-from base64 import b64decode
 from bs4 import BeautifulSoup
-import codecs
 from collections import defaultdict
 from collections import namedtuple
 import conda_smithy
@@ -46,8 +44,7 @@ import os
 from pkg_resources import parse_version
 import re
 import requests
-import shutil
-import subprocess
+# import subprocess
 import tempfile
 from tqdm import tqdm
 import yaml
@@ -200,7 +197,7 @@ def feedstock_status(feedstock):
     meta_yaml = feedstock.get_contents('recipe/meta.yaml')
 
     # yaml_dict = parsed_meta_yaml(meta_yaml.decoded_content)
-    text = codecs.decode(b64decode(meta_yaml.content))
+    text = meta_yaml.decoded_content.decode('utf-8')
     yaml_dict = parsed_meta_yaml(text)
     if yaml_dict is None:
         return fs_tuple(False, False, 'Couldn\'t parse meta.yaml')
@@ -391,7 +388,6 @@ def tick_feedstocks(gh_password=None, gh_user=None):
         successful_updates.append(update)
         successful_forks.append(fork)
 
-    subprocess.run(['conda', 'update', '-y', 'conda-smithy'])
     for fork in tqdm(successful_forks, desc='Rerendering feedstocks...'):
         rerender_fork(fork)
 
