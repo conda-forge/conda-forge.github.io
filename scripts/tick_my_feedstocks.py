@@ -84,9 +84,10 @@ pypi_pkg_uri = 'https://pypi.python.org/pypi/{}/json'.format
 
 fs_tuple = namedtuple('fs_tuple', ['success', 'needs_update', 'data'])
 
-status_data_tuple = namedtuple('status_data', ['text', 'yaml_strs',
-                                               'pypi_version', 'reqs',
-                                               'blob_sha'])
+status_data = namedtuple('status_data', ['text', 'yaml_strs',
+                                         'pypi_version', 'reqs',
+                                         'blob_sha'])
+
 
 
 def pypi_org_sha(package_name, version, bundle_type):
@@ -249,11 +250,11 @@ def feedstock_status(feedstock):
 
     return fs_tuple(True,
                     True,
-                    status_data_tuple(text,
-                                      yaml_strs,
-                                      pypi_version,
-                                      reqs - {'python', 'setuptools'},
-                                      meta_yaml.sha))
+                    status_data(text,
+                                yaml_strs,
+                                pypi_version,
+                                reqs - {'python', 'setuptools'},
+                                meta_yaml.sha))
 
 
 def get_user_fork(user, feedstock):
