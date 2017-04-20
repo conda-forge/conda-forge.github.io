@@ -2,7 +2,7 @@
 
 # conda execute
 # env:
-#  - python =3.5
+#  - python ==3.5
 #  - conda-build
 #  - conda-smithy
 #  - beautifulsoup4
@@ -44,7 +44,6 @@ IMPORTANT NOTES:
   tests may still pass successfully.
 """
 
-# TODO test command line invocation
 # TODO debug .create_pull()
 # TODO pass token/user to pygithub for push. (Currently uses system config.)
 # TODO Test --no-regenerate flag
