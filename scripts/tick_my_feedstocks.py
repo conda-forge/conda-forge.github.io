@@ -57,6 +57,7 @@ IMPORTANT NOTES:
 # TODO Test python 3.6 compatability (should work, but untested.)
 # TODO Deeper check of dependency changes in meta.yaml.
 # TODO Check installed conda-smithy against current feedstock conda-smithy.
+# TODO Check special case of feedstocks renamed with 'python-' prefixes
 
 import argparse
 from base64 import b64encode
