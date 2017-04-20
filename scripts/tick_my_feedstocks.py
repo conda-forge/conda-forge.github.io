@@ -225,7 +225,7 @@ def feedstock_status(feedstock):
 
     yaml_dict = parsed_meta_yaml(text)
     if yaml_dict is None:
-        return fs_tuple(False, False, 'Couldn\'t parse meta.yaml')
+        return fs_tuple(False, False, "Couldn't parse meta.yaml")
 
     yaml_strs = dict()
     for x, y in [('version', ('package', 'version')),
@@ -238,7 +238,7 @@ def feedstock_status(feedstock):
 
     pypi_version = pypi_version_str(feedstock.full_name[12:-10])
     if pypi_version is False:
-        return fs_tuple(False, False, 'Couldn\'t find package in PyPI')
+        return fs_tuple(False, False, "Couldn't find package in PyPI")
 
     if parse_version(yaml_strs['version']) >= parse_version(pypi_version):
         return fs_tuple(True, False, None)
