@@ -19,29 +19,43 @@
 
 """
 Usage: python tick_my_feedstocks.py [--password <github_password_or_oauth>] [--user <github_username>] [--no-regenerate --dry-run]
-NOTE that your oauth token should have these abilities: public_repo, read:org, delete_repo.
 
-This script
-* identifies all of the feedstocks maintained by a user
-* attempts to determine F, the subset of feedstocks that need updating
-* attempts to determine F_i, the subset of F that have no dependencies on other members of F
-* attempts to patch each member of F_i with the new version number and hash
-* attempts to rerender each member of F_i with the installed version of conda-smithy
-* submits a pull request for each member of F_i to the appropriate conda-forge repoository
+NOTE that your oauth token should have these abilities:
+* public_repo
+* read:org
+* delete_repo.
 
-All feedstocks updated with this script should be double-checked in case build or run dependencies have changed!
-This isn't a replacement for a maintainer, just a support tool.
+This script:
+1 identifies all of the feedstocks maintained by a user
+2 attempts to determine F, the subset of feedstocks that need updating
+3 attempts to determine F_i, the subset of F that have no dependencies
+  on other members of F
+4 attempts to patch each member of F_i with the new version number and hash
+5 attempts to rerender each member of F_i with the installed version
+  of conda-smithy
+6 submits a pull request for each member of F_i to the appropriate
+  conda-forge repoository
+
+IMPORTANT NOTES:
+* We get version information from PyPI. If the feedstock isn't based on PyPI,
+  it will raise an error. (Execution will continue.)
+* All feedstocks updated with this script SHOULD BE DOUBLE-CHECKED! Because
+  conda-forge tests are lightweight, even if the requirements have changed the
+  tests may still pass successfully.
 """
 
 # TODO test command line invocation
-# TODO debug .create_pull() / replace with call to requests and the API directly
-# TODO pass token/user to pygithub for push. (Currently uses system config., which is an assumption)
+# TODO debug .create_pull()
+# TODO pass token/user to pygithub for push. (Currently uses system config.)
 # TODO Test --no-regenerate flag
 # TODO Test --dry-run flag
+# TODO Modify --dry-run flag to list which repos need forks.
+# TODO Modify --dry-run flag to list which extant forks are dirty.
 # TODO Add support for skipping repos that are deprecated. (e.g. fake-factory)
 # TODO Test python 2.7 compatability (should work, but untested.)
 # TODO Test python 3.4 compatability (should work, but untested.)
-# TODO deeper check of dependencies of new feedstock against conda-forge dependencies for better patching?
+# TODO Deeper check of dependency changes in meta.yaml.
+# TODO Check installed conda-smithy against current feedstock conda-smithy.
 
 import argparse
 from base64 import b64encode
@@ -60,7 +74,6 @@ import os
 from pkg_resources import parse_version
 import re
 import requests
-# import subprocess
 import tempfile
 from tqdm import tqdm
 import yaml
@@ -68,15 +81,11 @@ import yaml
 
 pypi_pkg_uri = 'https://pypi.python.org/pypi/{}/json'.format
 
-fs_tuple = namedtuple('fs_status', 'success '
-                                   'needs_update '
-                                   'data')
+fs_tuple = namedtuple('fs_status', ['success', 'needs_update ', 'data'])
 
-status_data_tuple = namedtuple('status_data', 'text '
-                                              'yaml_strs '
-                                              'pypi_version '
-                                              'reqs '
-                                              'blob_sha')
+status_data_tuple = namedtuple('status_data', ['text', 'yaml_strs',
+                                               'pypi_version', 'reqs',
+                                               'blob_sha'])
 
 
 def pypi_org_sha(package_name, version, bundle_type):
@@ -152,7 +161,7 @@ def basic_patch(text, yaml_strs, pypi_version, blob_sha):
     find and replace old versions and hashes, and create a patch.
     :param str text: The raw text of the current meta.yaml
     :param dict yaml_strs: Dict with 'source_fn', 'version', and 'sha256' values parsed from yaml
-    :param str pypi_version: The new version string from PyPI  
+    :param str pypi_version: The new version string from PyPI
     :param str blob_sha: the commit SHA code.
     :return: `tpl(bool,str|dict)` -- True if success and commit dict for github, false and error otherwise
     """
@@ -240,7 +249,7 @@ def feedstock_status(feedstock):
 
     return fs_tuple(True,
                     True,
-                    status_data_tuple(text,  # meta_yaml.decoded_content,
+                    status_data_tuple(text,
                                       yaml_strs,
                                       pypi_version,
                                       reqs - {'python', 'setuptools'},
@@ -277,7 +286,7 @@ def even_feedstock_fork(user, feedstock):
     if comparison.behind_by > 0:
         # head is *behind* the base
         # conda-forge is behind the fork
-        # leave everything alone - don't want to mess.
+        # leave everything alone - don't want a mess.
         return None
 
     elif comparison.ahead_by > 0:
@@ -386,7 +395,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
         if dry_run:
             # Skip additional processing here.
             continue
-        
+
         # make fork
         fork = even_feedstock_fork(user, update[0])
         if fork is None:
@@ -405,9 +414,9 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
 
         successful_updates.append(update)
         successful_forks.append(fork)
-    
+
     if no_regenerate:
-        print('Skipping regenerate feedstocks.)
+        print('Skipping regenerating feedstocks.')
     else:
         for fork in tqdm(successful_forks, desc='Rerendering feedstocks...'):
             rerender_fork(fork)
@@ -442,12 +451,13 @@ if __name__ == "__main__":
                         help='GitHub username')
     parser.add_argument('--no-regenerate',
                         action=store_true,
-                        dest='no_rerender',
+                        dest='no_regenerate',
                         help="If present, don't regenerate feedstocks after updating")
     parse.add_argument('--dry-run',
                        action=store_true
                        dest='dry_run'
                        help='If present, skip applying patches, forking, and regenerating feedstocks'
-    args = parser.parse_args()
+    args=parser.parse_args()
 
-    tick_feedstocks(args['password'], args['user'], args['no_regenerate'], args['dry_run'])
+    tick_feedstocks(args['password'], args['user'],
+                    args['no_regenerate'], args['dry_run'])
