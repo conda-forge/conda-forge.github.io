@@ -439,25 +439,32 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
             print('  {}'.format(update[0].full_name))
 
 
-if __name__ == "__main__":
+def main():
+    """
+    Parse command-line arguments and tun tick_feedstocks
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument('--password',
                         default=None,
-                        dest='password',
+                        dest='gh_password',
                         help='GitHub password or oauth token')
     parser.add_argument('--user',
                         default=None,
-                        dest='user',
+                        dest='gh_user',
                         help='GitHub username')
     parser.add_argument('--no-regenerate',
-                        action=store_true,
+                        action='store_true',
                         dest='no_regenerate',
                         help="If present, don't regenerate feedstocks after updating")
-    parse.add_argument('--dry-run',
-                       action=store_true
-                       dest='dry_run'
-                       help='If present, skip applying patches, forking, and regenerating feedstocks'
-    args=parser.parse_args()
+    parser.add_argument('--dry-run',
+                        action='store_true',
+                        dest='dry_run',
+                        help='If present, skip applying patches, forking, and regenerating feedstocks')
+    args = parser.parse_args()
 
-    tick_feedstocks(args['password'], args['user'],
-                    args['no_regenerate'], args['dry_run'])
+    tick_feedstocks(args.gh_password, args.gh_user,
+                    args.no_regenerate, args.dry_run)
+
+
+if __name__ == "__main__":
+    main()
