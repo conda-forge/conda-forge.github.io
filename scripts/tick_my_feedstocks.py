@@ -221,9 +221,8 @@ def feedstock_status(feedstock):
     """
 
     meta_yaml = feedstock.get_contents('recipe/meta.yaml')
-
-    # yaml_dict = parsed_meta_yaml(meta_yaml.decoded_content)
     text = meta_yaml.decoded_content.decode('utf-8')
+
     yaml_dict = parsed_meta_yaml(text)
     if yaml_dict is None:
         return fs_tuple(False, False, 'Couldn\'t parse meta.yaml')
