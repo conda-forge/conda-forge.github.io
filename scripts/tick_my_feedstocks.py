@@ -2,7 +2,7 @@
 
 # conda execute
 # env:
-#  - python >=3.5
+#  - python =3.5
 #  - conda-build
 #  - conda-smithy
 #  - beautifulsoup4
@@ -54,6 +54,7 @@ IMPORTANT NOTES:
 # TODO Add support for skipping repos that are deprecated. (e.g. fake-factory)
 # TODO Test python 2.7 compatability (should work, but untested.)
 # TODO Test python 3.4 compatability (should work, but untested.)
+# TODO Test python 3.6 compatability (should work, but untested.)
 # TODO Deeper check of dependency changes in meta.yaml.
 # TODO Check installed conda-smithy against current feedstock conda-smithy.
 
