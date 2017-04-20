@@ -88,6 +88,7 @@ status_data = namedtuple('status_data', ['text', 'yaml_strs',
                                          'pypi_version', 'reqs',
                                          'blob_sha'])
 
+fs_status = namedtuple('fs_status', ['fs', 'status'])
 
 
 def pypi_org_sha(package_name, version, bundle_type):
@@ -376,7 +377,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
     package_names = set([x[0].name[:-10] for x in can_be_updated])
 
     indep_updates = [x for x in can_be_updated
-                     if len(x[1].data.reqs & package_names) < 1]
+                     if len(x.status.data.reqs & package_names) < 1]
 
     successful_forks = []
     successful_updates = []
@@ -384,10 +385,10 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
     pbar = tqdm(indep_updates, desc='Updating feedstocks')
     for update in pbar:
         # generate basic patch
-        patch = basic_patch(update[1].data.text,
-                            update[1].data.yaml_strs,
-                            update[1].data.pypi_version,
-                            update[1].data.blob_sha)
+        patch = basic_patch(update.status.data.text,
+                            update.status.data.yaml_strs,
+                            update.status.data.pypi_version,
+                            update.status.data.blob_sha)
 
         if patch[0] is False:
             # couldn't apply patch
@@ -399,7 +400,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
             continue
 
         # make fork
-        fork = even_feedstock_fork(user, update[0])
+        fork = even_feedstock_fork(user, update.fs)
         if fork is None:
             error_dict["Couldn't Fork"].append(update)
             continue
@@ -424,7 +425,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
             rerender_fork(fork)
 
     for update in tqdm(successful_updates, desc='Submitting pulls...'):
-        update[0].create_pull(
+        update.fs.create_pull(
             title="Ticked version, rerendered if needed. (Double-check reqs!)",
             head='{}:master'.format(gh_user),
             base='master')
