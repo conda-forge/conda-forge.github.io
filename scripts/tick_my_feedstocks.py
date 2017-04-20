@@ -82,7 +82,7 @@ import yaml
 
 pypi_pkg_uri = 'https://pypi.python.org/pypi/{}/json'.format
 
-fs_tuple = namedtuple('fs_status', ['success', 'needs_update ', 'data'])
+fs_tuple = namedtuple('fs_tuple', ['success', 'needs_update', 'data'])
 
 status_data_tuple = namedtuple('status_data', ['text', 'yaml_strs',
                                                'pypi_version', 'reqs',
