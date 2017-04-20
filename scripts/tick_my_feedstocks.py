@@ -62,6 +62,7 @@ import argparse
 from base64 import b64encode
 from bs4 import BeautifulSoup
 from collections import defaultdict
+from collections import deque
 from collections import namedtuple
 import conda_smithy
 import conda_smithy.configure_feedstock
@@ -363,16 +364,19 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
         user = g.get_user()
 
     feedstocks = user_feedstocks(user)
-    statuses = [feedstock_status(feedstock)
-                for feedstock in tqdm(feedstocks)]
 
-    can_be_updated = []
-    cannot_be_updated = []
-    for fs, status in zip(feedstocks, statuses):
+    can_be_updated = deque()
+    status_error_dict = defaultdict(list)
+    up_to_date_count = 0
+    pbar = tqdm(feedstocks, desc='Checking feedstock statuses...')
+    for feedstock in pbar:
+        status = feedstock_status(feedstock)
         if status.success and status.needs_update:
-            can_be_updated.append((fs, status))
+            can_be_updated.append(fs_status(feedstock, status))
+        elif not status.success:
+            status_error_dict[status.data].append(feedstock.name)
         else:
-            cannot_be_updated.append((fs.full_name, status.data))
+            up_to_date_count += 1
 
     package_names = set([x[0].name[:-10] for x in can_be_updated])
 
