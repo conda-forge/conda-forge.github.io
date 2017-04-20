@@ -198,7 +198,7 @@ def user_feedstocks(user):
     :return: `list` -- list of conda-forge feedstocks the user maintains
     """
     feedstocks = []
-    for team in tqdm(user.get_teams(), desc='Getting my feedstocks...'):
+    for team in tqdm(user.get_teams(), desc='Finding feedstock teams...'):
 
         # Each conda-forge team manages one feedstock
         # If a team has more than one repo, skip it.
@@ -380,7 +380,8 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
     successful_forks = []
     successful_updates = []
     error_dict = defaultdict(list)
-    for update in tqdm(indep_updates):
+    pbar = tqdm(indep_updates, desc='Updating feedstocks')
+    for update in pbar:
         # generate basic patch
         patch = basic_patch(update[1].data.text,
                             update[1].data.yaml_strs,
