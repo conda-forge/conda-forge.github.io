@@ -379,7 +379,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
         else:
             up_to_date_count += 1
 
-    package_names = set([x[0].name[:-10] for x in can_be_updated])
+    package_names = set([x.fs.name[:-10] for x in can_be_updated])
 
     indep_updates = [x for x in can_be_updated
                      if len(x.status.data.reqs & package_names) < 1]
