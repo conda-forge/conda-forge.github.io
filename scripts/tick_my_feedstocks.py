@@ -431,17 +431,17 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
 
     pull_count = 0
     for update in tqdm(successful_updates, desc='Submitting pulls...'):
-        r = requests.post(update.fs.pulls_url.split('{')[0],
-                          json={'title': 'Ticked version, '
-                                'regenerated if needed. '
-                                '(Double-check reqs!)',
-                                'head': '{}:master'.format(gh_user),
-                                'base': 'master'},
-                          auth=(gh_user, gh_password))
-        if not r.ok:
-            error_dict["Couldn't create pull"].append(r)
-        else:
-            pull_count += 1
+        try:
+            update.fs.create_pull(title='Ticked version, '
+                                  'regenerated if needed. '
+                                  '(Double-check reqs!)',
+                                  body='',
+                                  head='{}:master'.format(gh_user),
+                                  base='master')
+        except GithubException:
+            continue
+
+        pull_count += 1
 
     print('{} Total feedstocks checked.')
     print('  {} were up-to-date.'.format(up_to_date_count))
