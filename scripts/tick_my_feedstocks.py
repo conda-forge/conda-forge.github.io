@@ -91,6 +91,8 @@ status_data = namedtuple('status_data', ['text', 'yaml_strs',
 
 fs_status = namedtuple('fs_status', ['fs', 'status'])
 
+patch_tuple = namedtuple('patch_tuple', ['success', 'data'])
+
 
 def pypi_org_sha(package_name, version, bundle_type):
     """
@@ -167,7 +169,7 @@ def basic_patch(text, yaml_strs, pypi_version, blob_sha):
     :param dict yaml_strs: Dict with 'source_fn', 'version', and 'sha256' values parsed from yaml
     :param str pypi_version: The new version string from PyPI
     :param str blob_sha: the commit SHA code.
-    :return: `tpl(bool,str|dict)` -- True if success and commit dict for github, false and error otherwise
+    :return: `patch_tuple` -- True if success and commit dict for github, false and error otherwise
     """
     pypi_sha = pypi_org_sha(
         '-'.join(yaml_strs['source_fn'].split('-')[:-1]),
@@ -176,12 +178,14 @@ def basic_patch(text, yaml_strs, pypi_version, blob_sha):
     )
 
     if pypi_sha is None:
-        return False, 'Couldn\'t get SHA from PyPI'
+        return patch_tuple(False,
+                           "Couldn't get SHA from PyPI")
 
     if text.find(yaml_strs['version']) < 0 or text.find(yaml_strs['sha256']) < 0:
         # if we can't change both the version and the hash
         # do nothing
-        return False, 'Couldn\'t find current version or SHA in meta.yaml'
+        return patch_tuple(False,
+                           "Couldn't find current version or SHA in meta.yaml")
 
     new_text = text.replace(yaml_strs['version'], pypi_version).\
         replace(yaml_strs['sha256'], pypi_sha)
@@ -192,7 +196,7 @@ def basic_patch(text, yaml_strs, pypi_version, blob_sha):
         'sha': blob_sha
     }
 
-    return True, commit_dict
+    return patch_tuple(True, commit_dict)
 
 
 def user_feedstocks(user):
@@ -394,7 +398,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
                             update.status.data.pypi_version,
                             update.status.data.blob_sha)
 
-        if patch[0] is False:
+        if not patch.success:
             # couldn't apply patch
             error_dict["Couldn't Create Patch"].append(update.fs.name)
             continue
@@ -413,7 +417,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
         r = requests.put(
             'https://api.github.com/repos/{}/contents/recipe/meta.yaml'.format(
                 fork.full_name),
-            json=patch[1],
+            json=patch.data,
             auth=(user.login, gh_password))
         if not r.ok:
             error_dict["Couldn't Apply Patch"].append(update.fs.name)
