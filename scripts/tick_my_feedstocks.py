@@ -18,7 +18,7 @@
 # run_with: python
 
 """
-Usage: python tick_my_feedstocks.py [--password <github_password_or_oauth>] [--user <github_username>] [--no-regenerate --dry-run]
+Usage: python tick_my_feedstocks.py [--password <github_password_or_oauth>] [--user <github_username>] [--no-regenerate --no-rerender --dry-run]
 
 NOTE that your oauth token should have these abilities:
 * public_repo
@@ -474,14 +474,20 @@ def main():
                         action='store_true',
                         dest='no_regenerate',
                         help="If present, don't regenerate feedstocks after updating")
+    parser.add_argument('--no-rererender',
+                        action='store_true',
+                        dest='no_rerender',
+                        help="If present, don't regenerate feedstocks after updating")
     parser.add_argument('--dry-run',
                         action='store_true',
                         dest='dry_run',
                         help='If present, skip applying patches, forking, and regenerating feedstocks')
     args = parser.parse_args()
 
-    tick_feedstocks(args.gh_password, args.gh_user,
-                    args.no_regenerate, args.dry_run)
+    tick_feedstocks(args.gh_password,
+                    args.gh_user,
+                    args.no_regenerate and args.no_rerender,
+                    args.dry_run)
 
 
 if __name__ == "__main__":
