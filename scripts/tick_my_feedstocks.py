@@ -464,7 +464,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
 
 def main():
     """
-    Parse command-line arguments and tun tick_feedstocks
+    Parse command-line arguments and run tick_feedstocks()
     """
     parser = argparse.ArgumentParser()
     parser.add_argument('--password',
