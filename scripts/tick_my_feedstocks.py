@@ -44,7 +44,6 @@ IMPORTANT NOTES:
   tests may still pass successfully.
 """
 
-# TODO debug .create_pull()
 # TODO pass token/user to pygithub for push. (Currently uses system config.)
 # TODO Modify --dry-run flag to list which repos need forks.
 # TODO Modify --dry-run flag to list which forks are dirty.
@@ -56,6 +55,7 @@ IMPORTANT NOTES:
 # TODO Deeper check of dependency changes in meta.yaml.
 # TODO Check installed conda-smithy against current feedstock conda-smithy.
 # TODO Check special case of feedstocks renamed with 'python-' prefixes
+# TODO Check if already-forked feedstocks have open pulls.
 
 import argparse
 from base64 import b64encode
@@ -430,17 +430,25 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
         for fork in tqdm(successful_forks, desc='Regenerating feedstocks...'):
             regenerate_fork(fork)
 
+    pull_count = 0
     for update in tqdm(successful_updates, desc='Submitting pulls...'):
-        update.fs.create_pull(
-            title="Ticked version, regenerated if needed. (Double-check reqs!)",
-            head='{}:master'.format(gh_user),
-            base='master')
+        r = requests.post(update.fs.pulls_url.split('{')[0],
+                          json={'title': 'Ticked version, '
+                                'regenerated if needed. '
+                                '(Double-check reqs!)',
+                                'head': '{}:master'.format(gh_user),
+                                'base': 'master'},
+                          auth=(gh_user, gh_password))
+        if not r.ok:
+            error_dict["Couldn't create pull"].append(r)
+        else:
+            pull_count += 1
 
     print('{} Total feedstocks checked.')
     print('  {} were up-to-date.'.format(up_to_date_count))
     print('  {} were independent of other out-of-date feedstocks'.format(
         len(indep_updates)))
-    print('  {} had pulls submitted.'.format(len(successful_updates)))
+    print('  {} had pulls submitted.'.format(pull_count))
     print('-----')
 
     for msg, cur_dict in [("Couldn't check status", status_error_dict),
@@ -449,12 +457,13 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
             print('{}:'.format(msg))
             for error_msg in cur_dict:
                 print('  {} ({}):'.format(error_msg,
-                                         len(cur_dict[error_msg])))
+                                          len(cur_dict[error_msg])))
                 for name in cur_dict[error_msg]:
                     print('    {}'.format(name))
 
     for error_msg in ["Couldn't fork",
-                      "Couldn't apply patch"]:
+                      "Couldn't apply patch",
+                      "Couldn't create pull"]:
         if error_msg not in error_dict:
             continue
         print('{} ({}):'.format(error_msg, len(error_dict[error_msg])))
