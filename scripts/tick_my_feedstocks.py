@@ -387,8 +387,8 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
     indep_updates = [x for x in can_be_updated
                      if len(x.status.data.reqs & package_names) < 1]
 
-    successful_forks = []
-    successful_updates = []
+    successful_forks = deque()
+    successful_updates = deque()
     patch_error_dict = defaultdict(list)
     error_dict = defaultdict(list)
     pbar = tqdm(indep_updates, desc='Updating feedstocks')
