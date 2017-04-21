@@ -408,7 +408,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
         # make fork
         fork = even_feedstock_fork(user, update.fs)
         if fork is None:
-            error_dict["Couldn't Fork"].append(update.fs.name)
+            error_dict["Couldn't fork"].append(update.fs.name)
             continue
 
         # patch fork
@@ -418,7 +418,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
             json=patch.data,
             auth=(user.login, gh_password))
         if not r.ok:
-            error_dict["Couldn't Apply Patch"].append(update.fs.name)
+            error_dict["Couldn't apply patch"].append(update.fs.name)
             continue
 
         successful_updates.append(update)
@@ -443,18 +443,18 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
     print('  {} had pulls submitted.'.format(len(successful_updates)))
     print('-----')
 
-    for msg, cur_dict in [("Couldn't Check Status", status_error_dict),
-                          ("Couldn't Create Patch", patch_error_dict)]:
+    for msg, cur_dict in [("Couldn't check status", status_error_dict),
+                          ("Couldn't create patch", patch_error_dict)]:
         if len(cur_dict) > 0:
             print('{}:'.format(msg))
             for error_msg in cur_dict:
-                print('  {} ({})'.format(error_msg,
+                print('  {} ({}):'.format(error_msg,
                                          len(cur_dict[error_msg])))
                 for name in cur_dict[error_msg]:
                     print('    {}'.format(name))
 
-    for error_msg in ["Couldn't Fork",
-                      "Couldn't Apply Patch"]:
+    for error_msg in ["Couldn't fork",
+                      "Couldn't apply patch"]:
         if error_msg not in error_dict:
             continue
         print('{} ({}):'.format(error_msg, len(error_dict[error_msg])))
