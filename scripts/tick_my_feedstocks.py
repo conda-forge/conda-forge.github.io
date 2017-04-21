@@ -494,7 +494,7 @@ def main():
 
     tick_feedstocks(args.gh_password,
                     args.gh_user,
-                    args.no_regenerate and args.no_rerender,
+                    args.no_regenerate or args.no_rerender,
                     args.dry_run)
 
 
