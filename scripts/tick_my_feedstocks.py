@@ -31,7 +31,7 @@ This script:
 3 attempts to determine F_i, the subset of F that have no dependencies
   on other members of F
 4 attempts to patch each member of F_i with the new version number and hash
-5 attempts to rerender each member of F_i with the installed version
+5 attempts to regenerate each member of F_i with the installed version
   of conda-smithy
 6 submits a pull request for each member of F_i to the appropriate
   conda-forge repoository
@@ -46,10 +46,9 @@ IMPORTANT NOTES:
 
 # TODO debug .create_pull()
 # TODO pass token/user to pygithub for push. (Currently uses system config.)
-# TODO Test --no-regenerate flag
-# TODO Test --dry-run flag
 # TODO Modify --dry-run flag to list which repos need forks.
-# TODO Modify --dry-run flag to list which extant forks are dirty.
+# TODO Modify --dry-run flag to list which forks are dirty.
+# TODO Modify --dry-run to also cover regeneration
 # TODO Add support for skipping repos that are deprecated. (e.g. fake-factory)
 # TODO Test python 2.7 compatability (should work, but untested.)
 # TODO Test python 3.4 compatability (should work, but untested.)
@@ -312,10 +311,10 @@ def even_feedstock_fork(user, feedstock):
     return fork
 
 
-def rerender_fork(fork):
+def regenerate_fork(fork):
     """
     :param github.Repository.Repository fork: fork of conda-forge feedstock
-    :return: `bool` -- True if rerendered, false otherwise
+    :return: `bool` -- True if regenerated, false otherwise
     """
     # Would need me to pass gh_user, gh_password
     # subprocess.run(["./renderer.sh", gh_user, gh_password, fork.name])
@@ -325,7 +324,7 @@ def rerender_fork(fork):
     conda_smithy.configure_feedstock.main(working_dir.name)
 
     if not r.is_dirty():
-        # No changes made during rerender.
+        # No changes made during regeneration.
         # Clean up and return
         working_dir.cleanup()
         return False
@@ -345,12 +344,12 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
     """
     Finds all of the feedstocks a user maintains that can be updated without
     a dependency conflict with other feedstocks the user maintains,
-    creates forks, ticks versions and hashes, and rerenders,
+    creates forks, ticks versions and hashes, and regenerates,
     then submits a pull
     :param str|None gh_password: GitHub password or OAuth token (if omitted, check environment vars)
     :param str|None gh_user: GitHub username (can be omitted with OAuth)
-    :param bool no_regenerate: If True, don't rerender feedstocks before submitting pull requests
-    :param bool dry_run: If True, do not apply generate patches, fork feedstocks, or rerender
+    :param bool no_regenerate: If True, don't regenerate feedstocks before submitting pull requests
+    :param bool dry_run: If True, do not apply generate patches, fork feedstocks, or regenerate
     """
 
     if gh_password is None:
@@ -430,12 +429,12 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
     if no_regenerate:
         print('Skipping regenerating feedstocks.')
     else:
-        for fork in tqdm(successful_forks, desc='Rerendering feedstocks...'):
-            rerender_fork(fork)
+        for fork in tqdm(successful_forks, desc='Regenerating feedstocks...'):
+            regenerate_fork(fork)
 
     for update in tqdm(successful_updates, desc='Submitting pulls...'):
         update.fs.create_pull(
-            title="Ticked version, rerendered if needed. (Double-check reqs!)",
+            title="Ticked version, regenerated if needed. (Double-check reqs!)",
             head='{}:master'.format(gh_user),
             base='master')
 
@@ -481,15 +480,18 @@ def main():
     parser.add_argument('--no-regenerate',
                         action='store_true',
                         dest='no_regenerate',
-                        help="If present, don't regenerate feedstocks after updating")
+                        help="If present, don't regenerate feedstocks "
+                        'after updating')
     parser.add_argument('--no-rererender',
                         action='store_true',
                         dest='no_rerender',
-                        help="If present, don't regenerate feedstocks after updating")
+                        help="If present, don't regenerate feedstocks "
+                        'after updating')
     parser.add_argument('--dry-run',
                         action='store_true',
                         dest='dry_run',
-                        help='If present, skip applying patches, forking, and regenerating feedstocks')
+                        help='If present, skip applying patches, forking, '
+                        'and regenerating feedstocks')
     args = parser.parse_args()
 
     tick_feedstocks(args.gh_password,
