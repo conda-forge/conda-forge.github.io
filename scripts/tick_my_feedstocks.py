@@ -389,6 +389,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
 
     successful_forks = []
     successful_updates = []
+    patch_error_dict = defaultdict(list)
     error_dict = defaultdict(list)
     pbar = tqdm(indep_updates, desc='Updating feedstocks')
     for update in pbar:
@@ -400,7 +401,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
 
         if not patch.success:
             # couldn't apply patch
-            error_dict["Couldn't Create Patch"].append(update.fs.name)
+            patch_error_dict[patch.data].append(update.fs.name)
             continue
 
         if dry_run:
@@ -438,21 +439,24 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
             head='{}:master'.format(gh_user),
             base='master')
 
-    print('{} feedstocks were up-to-date.'.format(up_to_date_count))
-    print('{} feedstocks had pulls submitted.'.format(len(successful_updates)))
+    print('{} Total feedstocks checked.')
+    print('  {} were up-to-date.'.format(up_to_date_count))
+    print('  {} were independent of other out-of-date feedstocks'.format(
+        len(indep_updates)))
+    print('  {} had pulls submitted.'.format(len(successful_updates)))
     print('-----')
 
-    if len(status_error_dict) > 0:
-        print("Couldn't Check Status:")
-        for error_msg in status_error_dict:
-            print('  {} ({})'.format(error_msg,
-                                     len(status_error_dict[error_msg])))
-            for name in status_error_dict[error_msg]:
-                print('    {}'.format(name))
+    for msg, cur_dict in [("Couldn't Check Status", status_error_dict),
+                          ("Couldn't Create Patch", patch_error_dict)]:
+        if len(cur_dict) > 0:
+            print('{}:'.format(msg))
+            for error_msg in cur_dict:
+                print('  {} ({})'.format(error_msg,
+                                         len(cur_dict[error_msg])))
+                for name in cur_dict[error_msg]:
+                    print('    {}'.format(name))
 
-    for error_msg in ["Couldn't Check Status",
-                      "Couldn't Create Patch",
-                      "Couldn't Fork",
+    for error_msg in ["Couldn't Fork",
                       "Couldn't Apply Patch"]:
         if error_msg not in error_dict:
             continue
