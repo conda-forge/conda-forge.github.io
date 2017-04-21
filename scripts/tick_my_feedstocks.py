@@ -371,8 +371,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
     can_be_updated = deque()
     status_error_dict = defaultdict(list)
     up_to_date_count = 0
-    pbar = tqdm(feedstocks, desc='Checking feedstock statuses...')
-    for feedstock in pbar:
+    for feedstock in tqdm(feedstocks, desc='Checking feedstock statuses...'):
         status = feedstock_status(feedstock)
         if status.success and status.needs_update:
             can_be_updated.append(fs_status(feedstock, status))
@@ -390,8 +389,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
     successful_updates = deque()
     patch_error_dict = defaultdict(list)
     error_dict = defaultdict(list)
-    pbar = tqdm(indep_updates, desc='Updating feedstocks')
-    for update in pbar:
+    for update in tqdm(indep_updates, desc='Updating feedstocks'):
         # generate basic patch
         patch = basic_patch(update.status.data.text,
                             update.status.data.yaml_strs,
