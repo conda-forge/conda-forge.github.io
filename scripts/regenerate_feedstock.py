@@ -207,15 +207,15 @@ Hi! This is the friendly conda-forge-admin automated user.
 
 I've re-rendered this feedstock with the latest version of conda-smithy ({}) and noticed some changes.
 If the changes look good, then please go ahead and merge this PR.
-If you have any questions about the changes though, please feel free to ping the 'conda-forge/core' team (using the @ notation in a comment). 
+If you have any questions about the changes though, please feel free to ping the 'conda-forge/core' team (using the @ notation in a comment).
 
 Remember, for any changes to the recipe you would normally need to increment the version or the build number of the package.
-Since this is an infrastructural change, we don't actually need/want a new version to be uploaded to anaconda.org/conda-forge, so the version and build/number are left unchanged and the CI has been skipped.
+Since this is an infrastructural change, we don't actually need/want a new version to be uploaded to anaconda.org/conda-forge, so the version and build/number are left unchanged.
 
 Thanks!
 
                     """.format(conda_smithy.__version__))
-            pull = forge_feedstock.create_pull(title='MNT: Re-render the feedstock [ci skip]',
+            pull = forge_feedstock.create_pull(title='MNT: Re-render the feedstock',
                                                body=msg,
                                                head="conda-forge-admin:{}".format(target_branch), base=remote_head)
             print('Opened PR on {}'.format(pull.html_url))
