@@ -56,7 +56,7 @@ IMPORTANT NOTES:
 # TODO Check installed conda-smithy against current feedstock conda-smithy.
 # TODO Check special case of feedstocks renamed with 'python-' prefixes
 # TODO Check if already-forked feedstocks have open pulls.
-# TODO Refactor basic patch around find/replace
+# TODO Clean up redundant version strings (see pypi_sha())
 
 import argparse
 from base64 import b64encode
