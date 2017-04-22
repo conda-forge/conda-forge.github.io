@@ -57,6 +57,7 @@ IMPORTANT NOTES:
 # TODO Check special case of feedstocks renamed with 'python-' prefixes
 # TODO Check if already-forked feedstocks have open pulls.
 # TODO Clean up redundant version strings (see pypi_sha())
+# TODO Deal with having to change compression types in the new version
 
 import argparse
 from base64 import b64encode
@@ -128,7 +129,7 @@ def pypi_org_sha(package_name, version, bundle_type):
     :param str package_name: Name of package (PROPER case)
     :param str version: version for which to get sha
     :param str bundle_type: ".tar.gz", ".zip" - format of bundle
-    :returns: `str` -- SHA256 for a source bundle
+    :returns: `str|None` -- SHA256 for a source bundle, None if can't be found
     """
     r = requests.get('https://pypi.org/project/{}/{}/#files'.format(
         package_name,
@@ -153,9 +154,10 @@ def pypi_org_sha(package_name, version, bundle_type):
 
 def pypi_sha(source_fn, source_version, pypi_version):
     """
-    :param str source_fn:
-    :param str source_version:
-    :param str pypi_version:
+    :param str source_fn: The source bundle string - <package>-<version>.<compression>
+    :param str source_version: The version number in source_fn
+    :param str pypi_version: The version to be retrieved from PyPI.
+    :returns: `str|None` -- SHA256 for a source bundle, None if can't be found
     """
     package_name = '-'.join(source_fn.split('-')[:-1])
     bundle_type = source_fn.split(source_version)[-1]
@@ -169,8 +171,8 @@ def pypi_sha(source_fn, source_version, pypi_version):
 
 def pypi_version_str(package_name):
     """
-    Retrive the latest version of a package in pypi
-    :param str package_name:
+    Retrive the latest version of a package in PyPI
+    :param str package_name: The name of the package
     :return: `str` -- Version string
     """
     r = requests.get(pypi_pkg_uri(package_name))
