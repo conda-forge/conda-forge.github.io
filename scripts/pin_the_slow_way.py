@@ -26,8 +26,8 @@ import conda_smithy.feedstocks as feedstocks
 
 
 pinned = {
-          'boost': 'boost 1.63.*',
-          'boost-cpp': 'boost-cpp 1.63.*',
+          'boost': 'boost 1.64.*',
+          'boost-cpp': 'boost-cpp 1.64.*',
           'bzip2': 'bzip2 1.0.*',
           'cairo': 'cairo 1.14.*',
           'ffmpeg': 'ffmpeg 2.8.*',
