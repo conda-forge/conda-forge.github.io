@@ -356,8 +356,8 @@ def regenerate_fork(fork):
     commit_msg = 'MNT: Updated the feedstock for conda-smithy version {}.'.format(
         conda_smithy.__version__)
     r.git.add('-A')
-    commit = r.index.commit(commit_msg,
-                            author=Actor(fork.owner.login, fork.owner.email))
+    r.index.commit(commit_msg,
+                   author=Actor(fork.owner.login, fork.owner.email))
     r.git.push()
 
     working_dir.cleanup()
@@ -431,7 +431,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
                              })
 
         if not patch.success:
-            # couldn't apply patch
+            # couldn't create
             patch_error_dict[patch.data].append(update.fs.name)
             continue
 
