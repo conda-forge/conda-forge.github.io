@@ -93,6 +93,35 @@ fs_status = namedtuple('fs_status', ['fs', 'status'])
 patch_tuple = namedtuple('patch_tuple', ['success', 'data'])
 
 
+def pypi_legacy_json_sha(package_name, version, bundle_type):
+    """
+    Use PyPI's legacy JSON API to get the SHA256 of the source bundle
+    :param str package_name: Name of package (PROPER case)
+    :param str version: version for which to get sha
+    :param str bundle_type: ".tar.gz", ".zip" - format of bundle
+    :returns: `str` -- SHA256 for a source bundle
+    """
+    r = requests.get('https://pypi.org/pypi/{}/json'.format(package_name))
+    if not r.ok:
+        return None
+    jsn = r.json()
+
+    if version not in jsn['releases']:
+        return None
+
+    try:
+        release = next(x for x
+                       in jsn['releases'][version]
+                       if x['filename'].endswith(bundle_type))
+    except StopIteration:
+        return None
+
+    try:
+        return release['digests']['sha256']
+    except KeyError:
+        return None
+
+
 def pypi_org_sha(package_name, version, bundle_type):
     """
     Scrape pypi.org for SHA256 of the source bundle
@@ -170,15 +199,14 @@ def basic_patch(text, yaml_strs, pypi_version, blob_sha):
     :param str blob_sha: the commit SHA code.
     :return: `patch_tuple` -- True if success and commit dict for github, false and error otherwise
     """
-    pypi_sha = pypi_org_sha(
-        '-'.join(yaml_strs['source_fn'].split('-')[:-1]),
-        pypi_version,
-        yaml_strs['source_fn'].split(yaml_strs['version'])[-1]
-    )
+    package_name = '-'.join(yaml_strs['source_fn'].split('-')[:-1])
+    bundle_type = yaml_strs['source_fn'].split(yaml_strs['version'])[-1]
 
+    pypi_sha = pypi_legacy_json_sha(package_name, pypi_version, bundle_type)
     if pypi_sha is None:
-        return patch_tuple(False,
-                           "Couldn't get SHA from PyPI")
+        pypi_sha = pypi_org_sha(package_name, pypi_version, bundle_type)
+    if pypi_sha is None:
+        return patch_tuple(False, "Couldn't get SHA from PyPI")
 
     if text.find(yaml_strs['version']) < 0 or text.find(yaml_strs['sha256']) < 0:
         # if we can't change both the version and the hash
