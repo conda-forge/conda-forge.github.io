@@ -449,7 +449,11 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
         r = requests.put(
             'https://api.github.com/repos/{}/contents/recipe/meta.yaml'.format(
                 fork.full_name),
-            json=patch.data,
+            json={'message':
+                  'Tick version to {}'.format(update.status.data.pypi_version),
+                  'content': patch.data,
+                  'sha': update.status.data.blob_sha
+                  },
             auth=(gh_user, gh_password))
         if not r.ok:
             error_dict["Couldn't apply patch"].append(update.fs.name)
