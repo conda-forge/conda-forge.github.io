@@ -205,41 +205,21 @@ def parsed_meta_yaml(text):
     return yaml_dict
 
 
-def basic_patch(text, yaml_strs, pypi_version, blob_sha):
+def basic_patch(text, replace_dict):
     """
     Given a meta.yaml file, version strings, and appropriate hashes,
     find and replace old versions and hashes, and create a patch.
     :param str text: The raw text of the current meta.yaml
-    :param dict yaml_strs: Dict with 'source_fn', 'version', and 'sha256' values parsed from yaml
-    :param str pypi_version: The new version string from PyPI
-    :param str blob_sha: the commit SHA code.
-    :return: `patch_tuple` -- True if success and commit dict for github, false and error otherwise
+    :param dict[tpl] replace_dict: keys are IDs of text to be replaced. First val in tpl is original text, second is replacement.
+    :return: `patch_tuple` -- True and encoded patch if success, false and error otherwise
     """
-    package_name = '-'.join(yaml_strs['source_fn'].split('-')[:-1])
-    bundle_type = yaml_strs['source_fn'].split(yaml_strs['version'])[-1]
+    for key in replace_dict:
+        if text.find(replace_dict[key][0]) < 0:
+            return patch_tuple(False,
+                               "Couldn't find current {} in meta.yaml".format(key))
+            text = text.replace(replace_dict[key][0], replace_dict[key][1])
 
-    pypi_sha = pypi_legacy_json_sha(package_name, pypi_version, bundle_type)
-    if pypi_sha is None:
-        pypi_sha = pypi_org_sha(package_name, pypi_version, bundle_type)
-    if pypi_sha is None:
-        return patch_tuple(False, "Couldn't get SHA from PyPI")
-
-    if text.find(yaml_strs['version']) < 0 or text.find(yaml_strs['sha256']) < 0:
-        # if we can't change both the version and the hash
-        # do nothing
-        return patch_tuple(False,
-                           "Couldn't find current version or SHA in meta.yaml")
-
-    new_text = text.replace(yaml_strs['version'], pypi_version).\
-        replace(yaml_strs['sha256'], pypi_sha)
-
-    commit_dict = {
-        'message': 'Tick version to {}'.format(pypi_version),
-        'content': b64encode(new_text.encode('utf-8')).decode('utf-8'),
-        'sha': blob_sha
-    }
-
-    return patch_tuple(True, commit_dict)
+    return patch_tuple(True, b64encode(text.encode('utf-8')).decode('utf-8'))
 
 
 def user_feedstocks(user):
@@ -444,9 +424,11 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
 
         # generate basic patch
         patch = basic_patch(update.status.data.text,
-                            update.status.data.yaml_strs,
-                            update.status.data.pypi_version,
-                            update.status.data.blob_sha)
+                            {'version': (update.status.data.yaml_strs['version'],
+                                         update.status.data.pypi_version),
+                             'sha': (update.status.data.yaml_strs['sha256'],
+                                     new_sha)
+                             })
 
         if not patch.success:
             # couldn't apply patch
