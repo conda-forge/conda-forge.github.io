@@ -151,6 +151,22 @@ def pypi_org_sha(package_name, version, bundle_type):
     return sha_val
 
 
+def pypi_sha(source_fn, source_version, pypi_version):
+    """
+    :param str source_fn:
+    :param str source_version:
+    :param str pypi_version:
+    """
+    package_name = '-'.join(source_fn.split('-')[:-1])
+    bundle_type = source_fn.split(source_version)[-1]
+
+    sha = pypi_legacy_json_sha(package_name, pypi_version, bundle_type)
+    if sha is not None:
+        return sha
+
+    return pypi_org_sha(package_name, pypi_version, bundle_type)
+
+
 def pypi_version_str(package_name):
     """
     Retrive the latest version of a package in pypi
@@ -418,6 +434,14 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
     patch_error_dict = defaultdict(list)
     error_dict = defaultdict(list)
     for update in tqdm(indep_updates, desc='Updating feedstocks'):
+
+        new_sha = pypi_sha(update.status.data.yaml_strs['source_fn'],
+                           update.status.data.yaml_strs['version'],
+                           update.status.data.pypi_version)
+        if new_sha is None:
+            patch_error_dict["Couldn't get SHA from PyPI"].append(
+                update.fs.name)
+
         # generate basic patch
         patch = basic_patch(update.status.data.text,
                             update.status.data.yaml_strs,
