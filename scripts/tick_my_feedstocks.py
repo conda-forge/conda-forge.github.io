@@ -366,7 +366,10 @@ def regenerate_fork(fork):
     return True
 
 
-def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run=False):
+def tick_feedstocks(gh_password=None,
+                    gh_user=None,
+                    no_regenerate=False,
+                    dry_run=False):
     """
     Finds all of the feedstocks a user maintains that can be updated without
     a dependency conflict with other feedstocks the user maintains,
@@ -377,7 +380,6 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
     :param bool no_regenerate: If True, don't regenerate feedstocks before submitting pull requests
     :param bool dry_run: If True, do not apply generate patches, fork feedstocks, or regenerate
     """
-
     if gh_password is None:
         gh_password = os.getenv('GH_TOKEN')
         if gh_password is None:
@@ -484,7 +486,7 @@ def tick_feedstocks(gh_password=None, gh_user=None, no_regenerate=False, dry_run
 
         pull_count += 1
 
-    print('{} Total feedstocks checked.')
+    print('{} total feedstocks checked.'.format(len(feedstocks)))
     print('  {} were up-to-date.'.format(up_to_date_count))
     print('  {} were independent of other out-of-date feedstocks'.format(
         len(indep_updates)))
