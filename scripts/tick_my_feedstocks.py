@@ -18,7 +18,11 @@
 # run_with: python
 
 """
-Usage: python tick_my_feedstocks.py [--password <github_password_or_oauth>] [--user <github_username>] [--no-regenerate --no-rerender --dry-run]
+Usage:
+python tick_my_feedstocks.py
+[--password <github_password_or_oauth>]
+[--user <github_username>]
+[--no-regenerate --no-rerender --dry-run]
 
 NOTE that your oauth token should have these abilities:
 * public_repo
@@ -53,6 +57,7 @@ IMPORTANT NOTES:
 # TODO Test python 3.4 compatability (should work, but untested.)
 # TODO Test python 3.6 compatability (should work, but untested.)
 # TODO Deeper check of dependency changes in meta.yaml.
+# TODO reset build number back to zero
 # TODO Check installed conda-smithy against current feedstock conda-smithy.
 # TODO Check special case of feedstocks renamed with 'python-' prefixes
 # TODO Check if already-forked feedstocks have open pulls.
@@ -213,7 +218,7 @@ def basic_patch(text, replace_dict):
     find and replace old versions and hashes, and create a patch.
     :param str text: The raw text of the current meta.yaml
     :param dict[tpl] replace_dict: keys are IDs of text to be replaced. First val in tpl is original text, second is replacement.
-    :return: `patch_tuple` -- True and encoded patch if success, false and error otherwise
+    :return: `patch_tuple` -- True and encoded patch if success, false and error string otherwise
     """
     for key in replace_dict:
         if text.find(replace_dict[key][0]) < 0:
@@ -247,7 +252,7 @@ def user_feedstocks(user):
 
 def feedstock_status(feedstock):
     """
-    Return whether or not a feedstock is out of date and any information needed to update it.
+    Return whether a feedstock is out of date and any information needed to update it.
     :param github.Repository.Repository feedstock:
     :return: `tpl(bool,bool,None|status_data)` -- bools indicating success and either None or a status_data tuple
     """
