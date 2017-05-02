@@ -49,16 +49,25 @@ IMPORTANT NOTES:
   tests may still pass successfully.
 """
 # TODO pass token/user to pygithub for push. (Currently uses system config.)
+#  This is likely also why regeneration uses temporary CI dirs and not
+#  defined ones (e.g
+#  https://circleci.com/gh/conda-forge/tmp0bnegy33-feedstock.svg instead of
+#  https://circleci.com/gh/conda-forge/debtcollector-feedstock.svg)
+#  (Could also be an issue with conda_forge.configure_feedstock)
 # TODO Modify --dry-run flag to list which repos need forks.
 # TODO Modify --dry-run flag to list which forks are dirty.
 # TODO Modify --dry-run to also cover regeneration
 # TODO Add support for skipping repos that are deprecated. (e.g. fake-factory)
+# TODO skip upgrading from a stable release to a dev release (e.g. ghost.py)
 # TODO Test python 2.7 compatability (should work, but untested.)
 # TODO Test python 3.4 compatability (should work, but untested.)
 # TODO Test python 3.6 compatability (should work, but untested.)
 # TODO Deeper check of dependency changes in meta.yaml.
 # TODO Check installed conda-smithy against current feedstock conda-smithy.
 # TODO Check if already-forked feedstocks have open pulls.
+# TODO maintainer_can_modify flag when submitting pull
+#   Note that this isn't supported by pygithub yet, so would require
+#   switching back to requests
 
 import argparse
 from base64 import b64encode
