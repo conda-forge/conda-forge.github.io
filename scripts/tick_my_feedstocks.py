@@ -48,7 +48,6 @@ IMPORTANT NOTES:
   conda-forge tests are lightweight, even if the requirements have changed the
   tests may still pass successfully.
 """
-# TODO Finish refactoring meta yaml as a class
 # TODO pass token/user to pygithub for push. (Currently uses system config.)
 # TODO Modify --dry-run flag to list which repos need forks.
 # TODO Modify --dry-run flag to list which forks are dirty.
@@ -58,12 +57,8 @@ IMPORTANT NOTES:
 # TODO Test python 3.4 compatability (should work, but untested.)
 # TODO Test python 3.6 compatability (should work, but untested.)
 # TODO Deeper check of dependency changes in meta.yaml.
-# TODO reset build number back to zero
 # TODO Check installed conda-smithy against current feedstock conda-smithy.
-# TODO Check special case of feedstocks renamed with 'python-' prefixes
 # TODO Check if already-forked feedstocks have open pulls.
-# TODO Clean up redundant version strings (see pypi_sha())
-# TODO Deal with having to change compression types in the new version
 
 import argparse
 from base64 import b64encode
