@@ -381,9 +381,9 @@ def feedstock_status(feedstock):
     try:
         meta_yaml = Feedstock_Meta_Yaml(
             fs_contents.decoded_content.decode('utf-8'))
-    except (UndefinedError, KeyError):
+    except (UndefinedError, KeyError) as e:
         # TODO fix this to use the passed error message
-        return result_tuple(False, "Couldn't parse meta.yaml")
+        return result_tuple(False, e.args[0])
 
     pypi_version = pypi_version_str(meta_yaml.pypi_package)
     if pypi_version is False:
