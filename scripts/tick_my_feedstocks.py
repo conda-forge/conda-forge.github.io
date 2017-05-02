@@ -153,7 +153,7 @@ class Feedstock_Meta_Yaml:
         elif 'md5' in self._yaml_dict['source']:
             self.checksum_type = 'md5'
         else:
-            raise KeyError('Missing meta.yam key for checksum')
+            raise KeyError('Missing meta.yaml key for checksum')
 
         splitter = '-{}.'.format(self._yaml_dict['package']['version'])
         self.pypi_package, self.bundle_type = \
