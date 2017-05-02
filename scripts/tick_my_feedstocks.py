@@ -511,17 +511,18 @@ def tick_feedstocks(gh_password=None,
     up_to_date_count = 0
     for feedstock in tqdm(feedstocks, desc='Checking feedstock statuses...'):
         status = feedstock_status(feedstock)
-        if status.success and status.needs_update:
-            can_be_updated.append(fs_status(feedstock, status))
-        elif not status.success:
-            status_error_dict[status.data].append(feedstock.name)
+        if status.success:
+            if status.data is None:
+                up_to_date_count += 1
+            else:
+                can_be_updated.append(fs_status(feedstock, status.data))
         else:
-            up_to_date_count += 1
+            status_error_dict[status.data].append(feedstock.name)
 
     package_names = set([x.fs.name[:-10] for x in can_be_updated])
 
     indep_updates = [x for x in can_be_updated
-                     if len(x.status.data.reqs & package_names) < 1]
+                     if len(x.sd.meta_yaml.reqs & package_names) < 1]
 
     successful_forks = list()
     successful_updates = list()
@@ -529,25 +530,30 @@ def tick_feedstocks(gh_password=None,
     error_dict = defaultdict(list)
     for update in tqdm(indep_updates, desc='Updating feedstocks'):
 
-        new_sha = pypi_sha(update.status.data.yaml_strs['source_fn'],
-                           update.status.data.yaml_strs['version'],
-                           update.status.data.pypi_version)
-        if new_sha is None:
+        new_bundle_type, new_sha = pypi_sha(
+            update.sd.meta_yaml.pypi_package,
+            update.sd.pypi_version)
+
+        if new_bundle_type is None and new_sha is None:
             patch_error_dict["Couldn't get SHA from PyPI"].append(
                 update.fs.name)
+            continue
 
         # generate basic patch
-        patch = basic_patch(update.status.data.text,
-                            {'version': (update.status.data.yaml_strs['version'],
-                                         update.status.data.pypi_version),
-                             'sha': (update.status.data.yaml_strs['sha256'],
-                                     new_sha)
-                             })
+        mapping = {update.sd.meta_yaml.version():
+                   update.sd.pypi_version,
+                   update.sd.meta_yaml.checksum(): new_sha}
 
-        if not patch.success:
-            # couldn't create
-            patch_error_dict[patch.data].append(update.fs.name)
-            continue
+        if update.sd.meta_yaml.checksum_type != 'sha256':
+            mapping[update.sd.meta_yaml.checksum_type] = 'sha256'
+
+        if new_bundle_type != update.sd.meta_yaml.bundle_type:
+            mapping[update.sd.meta_yaml.bundle_type] = new_bundle_type
+
+        update.sd.meta_yaml.find_replace_update(mapping)
+
+        if update.sd.meta_yaml.build() != '0':
+            update.sd.meta_yaml.set_build_number(0)
 
         if dry_run:
             # Skip additional processing here.
@@ -564,9 +570,9 @@ def tick_feedstocks(gh_password=None,
             'https://api.github.com/repos/{}/contents/recipe/meta.yaml'.format(
                 fork.full_name),
             json={'message':
-                  'Tick version to {}'.format(update.status.data.pypi_version),
-                  'content': patch.data,
-                  'sha': update.status.data.blob_sha
+                  'Tick version to {}'.format(update.sd.pypi_version),
+                  'content': update.sd.meta_yaml.encoded_text(),
+                  'sha': update.sd.blob_sha
                   },
             auth=(gh_user, gh_password))
         if not r.ok:
