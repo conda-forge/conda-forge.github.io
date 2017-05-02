@@ -586,7 +586,7 @@ def tick_feedstocks(gh_password=None,
             update.fs.create_pull(title='Ticked version, '
                                   'regenerated if needed. '
                                   '(Double-check reqs!)',
-                                  body='(Built using tick_my_feedstocks)',
+                                  body='(Made using `tick_my_feedstocks.py`)',
                                   head='{}:master'.format(gh_user),
                                   base='master')
         except GithubException:
