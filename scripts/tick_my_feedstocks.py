@@ -87,7 +87,6 @@ from tqdm import tqdm
 import yaml
 
 
-pypi_pkg_uri = 'https://pypi.python.org/pypi/{}/json'.format
 
 fs_tuple = namedtuple('fs_tuple', ['success', 'needs_update', 'data'])
 
@@ -179,9 +178,10 @@ def pypi_version_str(package_name):
     """
     Retrive the latest version of a package in PyPI
     :param str package_name: The name of the package
-    :return: `str` -- Version string
+    :return: `str|bool` -- Version string, False if unsuccessful
     """
-    r = requests.get(pypi_pkg_uri(package_name))
+    r = requests.get('https://pypi.python.org/pypi/{}/json'.format(
+        package_name))
     if not r.ok:
         return False
     return r.json()['info']['version'].strip()
