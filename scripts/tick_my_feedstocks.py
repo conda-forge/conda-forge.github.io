@@ -8,6 +8,7 @@
 #  - beautifulsoup4
 #  - gitpython
 #  - jinja2
+#  - lxml
 #  - pygithub >=1.29
 #  - pyyaml
 #  - requests
