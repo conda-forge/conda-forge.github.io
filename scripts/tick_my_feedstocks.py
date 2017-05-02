@@ -92,23 +92,32 @@ jinja_set_regex = re.compile('{% *set +([^ ]+) *= "?([^ "]+)"? *%}')
 # Find places where YAML variables are assigned using Jinja variables
 yaml_jinja_assign_regex = re.compile(' +([^:]+): *[^ ]*({{ .* }}.*)')
 
-fs_tuple = namedtuple('fs_tuple', ['success', 'needs_update', 'data'])
-
-status_data = namedtuple('status_data', ['text', 'yaml_strs',
-                                         'pypi_version', 'reqs',
 # Jinja template informaton
 # Value being set and the setting string
 # tpl(str, str)
 jinja_var = namedtuple('jinja_var', ['value', 'string'])
 
+# result tuple
+# Success bool and any related data
+# tpl(bool, None|str|status_data)
+result_tuple = namedtuple('result_tuple', ['success', 'data'])
+
+# status_data tuple
+# data for updating a feedstock
+# tpl(Feedstock_Meta_Yaml, str,  str)
+status_data = namedtuple('status_data', ['meta_yaml',
+                                         'pypi_version',
                                          'blob_sha'])
 
-fs_status = namedtuple('fs_status', ['fs', 'status'])
+# feedstock status tuple
+# pairing of a feedstock and its status data
+# tpl(github.Repository.Repository, status_data)
+fs_status = namedtuple('fs_status', ['fs', 'sd'])
 
-patch_tuple = namedtuple('patch_tuple', ['success', 'data'])
+# Ordered list of acceptable ways source can be packaged.
+source_bundle_types = ["tar.gz", "tar.bz2", "zip", "bz2"]
 
 
-def pypi_legacy_json_sha(package_name, version, bundle_type):
 class Feedstock_Meta_Yaml:
     """
     A parser for and modifier of a feedstock's meta.yaml file.
@@ -254,78 +263,78 @@ class Feedstock_Meta_Yaml:
         """
         return b64encode(self._text.encode('utf-8')).decode('utf-8')
 
+
+def pypi_legacy_json_sha(package_name, version):
     """
     Use PyPI's legacy JSON API to get the SHA256 of the source bundle
     :param str package_name: Name of package (PROPER case)
     :param str version: version for which to get sha
-    :param str bundle_type: ".tar.gz", ".zip" - format of bundle
-    :returns: `str` -- SHA256 for a source bundle
+    :return: `str,str|None,None` -- bundle_type,SHA for source, None,None if can't be found
     """
     r = requests.get('https://pypi.org/pypi/{}/json'.format(package_name))
     if not r.ok:
-        return None
+        return None, None
     jsn = r.json()
 
     if version not in jsn['releases']:
-        return None
+        return None, None
 
-    try:
-        release = next(x for x
-                       in jsn['releases'][version]
-                       if x['filename'].endswith(bundle_type))
-    except StopIteration:
-        return None
+    release = None
+    for bundle_type in source_bundle_types:
+        try:
+            release = next(x for x
+                           in jsn['releases'][version]
+                           if x['filename'].endswith('.' + bundle_type))
+            return bundle_type, release['digests']['sha256']
+        except StopIteration:
+            # No bundle of target type
+            continue
+        except KeyError:
+            # No key  for the sha.
+            release = None
 
-    try:
-        return release['digests']['sha256']
-    except KeyError:
-        return None
+    if release is None:
+        return None, None
 
 
-def pypi_org_sha(package_name, version, bundle_type):
+def pypi_org_sha(package_name, version):
     """
     Scrape pypi.org for SHA256 of the source bundle
     :param str package_name: Name of package (PROPER case)
     :param str version: version for which to get sha
-    :param str bundle_type: ".tar.gz", ".zip" - format of bundle
-    :returns: `str|None` -- SHA256 for a source bundle, None if can't be found
+    :return: `str,str|None,None` -- bundle type,SHA for source, None,None if can't be found
     """
     r = requests.get('https://pypi.org/project/{}/{}/#files'.format(
         package_name,
         version))
 
-    bs = BeautifulSoup(r.text, 'html5lib')
-    try:
-        sha_val = bs.find('a',
-                          {'href':
-                           re.compile(
-                               'https://files.pythonhosted.org.*{}-{}{}'.
-                               format(package_name,
-                                      version,
-                                      bundle_type))
-                           }).next.next.next['data-clipboard-text']
-    except AttributeError:
-        # Bad parsing of page, couldn't get SHA256
-        return None
+    bs = BeautifulSoup(r.text, 'lxml')
+    for bundle_type in source_bundle_types:
+        try:
+            url_pattern = re.compile(
+                'https://files.pythonhosted.org.*{}-{}.{}'.format(package_name,
+                                                                  version,
+                                                                  bundle_type))
+            sha_val = bs.find('a', {'href': url_pattern}
+                              ).next.next.next['data-clipboard-text']
+            return bundle_type, sha_val
+        except AttributeError:
+            # Bad parsing of page, couldn't get SHA256
+            continue
 
-    return sha_val
+    return None, None
 
 
-def pypi_sha(source_fn, source_version, pypi_version):
+def pypi_sha(pypi_package, pypi_version):
     """
-    :param str source_fn: The source bundle string - <package>-<version>.<compression>
-    :param str source_version: The version number in source_fn
+    :param str pypi_package: The name of the package in PyPI
     :param str pypi_version: The version to be retrieved from PyPI.
-    :returns: `str|None` -- SHA256 for a source bundle, None if can't be found
+    :return: `str|None` -- SHA256 for a source bundle, None if can't be found
     """
-    package_name = '-'.join(source_fn.split('-')[:-1])
-    bundle_type = source_fn.split(source_version)[-1]
-
-    sha = pypi_legacy_json_sha(package_name, pypi_version, bundle_type)
-    if sha is not None:
-        return sha
-
-    return pypi_org_sha(package_name, pypi_version, bundle_type)
+    bundle_type, sha = pypi_legacy_json_sha(pypi_package, pypi_version)
+    if bundle_type is not None and sha is not None:
+        return bundle_type, sha
+    return pypi_org_sha(pypi_package, pypi_version)
 
 
 def pypi_version_str(package_name):
