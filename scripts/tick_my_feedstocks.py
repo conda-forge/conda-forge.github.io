@@ -237,7 +237,9 @@ class Feedstock_Meta_Yaml:
             # assignment
             build_var = self.yaml_jinja_refs['number'].split()[1]
             mapping = {self.jinja_vars[build_var].string:
-                       '{% set {} = {} %}'.format(build_var, new_number)}
+                       '{{% set {key} = {val} %}}'.format(
+                       key=build_var,
+                       val=new_number)}
         else:
             build_num_regex = re.compile('number: *{}'.format(
                 self._yaml_dict['build']['number']))
