@@ -510,19 +510,14 @@ def tick_feedstocks(gh_password=None,
 
     can_be_updated = list()
     status_error_dict = defaultdict(list)
-    up_to_date_count = 0
     for feedstock in tqdm(feedstocks, desc='Checking feedstock statuses...'):
         status = feedstock_status(feedstock)
-        if status.success:
-            if status.data is None:
-                up_to_date_count += 1
-            else:
-                can_be_updated.append(fs_status(feedstock, status.data))
-        else:
+        if status.success and status.data is not None:
+            can_be_updated.append(fs_status(feedstock, status.data))
+        elif not status.success:
             status_error_dict[status.data].append(feedstock.name)
 
     package_names = set([x.fs.name[:-10] for x in can_be_updated])
-
     indep_updates = [x for x in can_be_updated
                      if len(x.sd.meta_yaml.reqs & package_names) < 1]
 
@@ -605,7 +600,7 @@ def tick_feedstocks(gh_password=None,
         pull_count += 1
 
     print('{} total feedstocks checked.'.format(len(feedstocks)))
-    print('  {} were up-to-date.'.format(up_to_date_count))
+    print('  {} were out-of-date.'.format(len(can_be_updated)))
     print('  {} were independent of other out-of-date feedstocks'.format(
         len(indep_updates)))
     print('  {} had pulls submitted.'.format(pull_count))
