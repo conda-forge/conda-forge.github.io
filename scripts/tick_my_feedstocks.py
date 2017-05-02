@@ -420,41 +420,25 @@ def feedstock_status(feedstock):
     :param github.Repository.Repository feedstock:
     :return: `tpl(bool,bool,None|status_data)` -- bools indicating success and either None or a status_data tuple
     """
+    fs_contents = feedstock.get_contents('recipe/meta.yaml')
+    try:
+        meta_yaml = Feedstock_Meta_Yaml(
+            fs_contents.decoded_content.decode('utf-8'))
+    except (UndefinedError, KeyError):
+        # TODO fix this to use the passed error message
+        return result_tuple(False, "Couldn't parse meta.yaml")
 
-    meta_yaml = feedstock.get_contents('recipe/meta.yaml')
-    text = meta_yaml.decoded_content.decode('utf-8')
-
-    yaml_dict = parsed_meta_yaml(text)
-    if yaml_dict is None:
-        return fs_tuple(False, False, "Couldn't parse meta.yaml")
-
-    yaml_strs = dict()
-    for x, y in [('version', ('package', 'version')),
-                 ('source_fn', ('source', 'fn')),
-                 ('sha256', ('source', 'sha256'))]:
-        try:
-            yaml_strs[x] = yaml_dict[y[0]][y[1]]
-        except KeyError:
-            return fs_tuple(False, False, 'Missing meta.yaml key: [{}][{}]'.format(y[0], y[1]))
-
-    pypi_version = pypi_version_str(feedstock.full_name[12:-10])
+    pypi_version = pypi_version_str(meta_yaml.pypi_package)
     if pypi_version is False:
-        return fs_tuple(False, False, "Couldn't find package in PyPI")
+        return result_tuple(False, "Couldn't find package in PyPI")
 
-    if parse_version(yaml_strs['version']) >= parse_version(pypi_version):
-        return fs_tuple(True, False, None)
+    if parse_version(meta_yaml.version()) >= parse_version(pypi_version):
+        return result_tuple(True, None)
 
-    reqs = set()
-    for step in yaml_dict['requirements']:
-        reqs.update({x.split()[0] for x in yaml_dict['requirements'][step]})
-
-    return fs_tuple(True,
-                    True,
-                    status_data(text,
-                                yaml_strs,
-                                pypi_version,
-                                reqs - {'python', 'setuptools'},
-                                meta_yaml.sha))
+    return result_tuple(True,
+                        status_data(meta_yaml,
+                                    pypi_version,
+                                    fs_contents.sha))
 
 
 def get_user_fork(user, feedstock):
