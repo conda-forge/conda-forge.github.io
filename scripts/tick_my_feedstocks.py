@@ -100,6 +100,151 @@ patch_tuple = namedtuple('patch_tuple', ['success', 'data'])
 
 
 def pypi_legacy_json_sha(package_name, version, bundle_type):
+class Feedstock_Meta_Yaml:
+    """
+    A parser for and modifier of a feedstock's meta.yaml file.
+    Because many feedstocks use Jinja templates in their meta.yaml files
+    and because we'd like to minimize the number of changes to meta.yaml
+    when submitting a patch, this class can be used to help keep the
+    manage the file's content and keep changes small.
+    """
+
+    def _parse_text(self):
+        """
+        Extract different variables from the raw text
+        """
+        try:
+            self._yaml_dict = yaml.load(Template(self._text).render(),
+                                        Loader=yaml.BaseLoader)
+        except UndefinedError:
+            # assume we hit a RECIPE_DIR reference in the vars
+            # and can't parse it.
+            # just erase for now
+            try:
+                self._yaml_dict = yaml.load(
+                    Template(re.sub('{{ (environ\[")?RECIPE_DIR("])? }}/',
+                                    '',
+                                    self._text)
+                             ).render(),
+                    Loader=yaml.BaseLoader)
+            except UndefinedError:
+                raise UndefinedError("Can't parse meta.yaml")
+
+        for x, y in [('package', 'version'),
+                     ('source', 'fn')]:
+            if y not in self._yaml_dict[x]:
+                raise KeyError('Missing meta.yaml key: [{}][{}]'.format(x, y))
+
+        if 'sha256' in self._yaml_dict['source']:
+            self.checksum_type = 'sha256'
+        elif 'md5' in self._yaml_dict['source']:
+            self.checksum_type = 'md5'
+        else:
+            raise KeyError('Missing meta.yam key for checksum')
+
+        splitter = '-{}.'.format(self._yaml_dict['package']['version'])
+        self.pypi_package, self.bundle_type = \
+            self._yaml_dict['source']['fn'].split(splitter)
+
+        self.reqs = set()
+        for step in self._yaml_dict['requirements']:
+            self.reqs.update({x.split()[0]
+                              for x in self._yaml_dict['requirements'][step]})
+
+        # Get variables defined in the Jinja template
+        self.jinja_vars = dict()
+        for j_v in re.finditer(jinja_set_regex, self._text):
+            grps = j_v.groups()
+            match_str = j_v.string[j_v.start(): j_v.end()]
+            self.jinja_vars[grps[0]] = jinja_var(grps[1], match_str)
+
+        # Get YAML variables assigned Jinja variables
+        self.yaml_jinja_refs = {y_j.groups()[0]: y_j.groups()[1]
+                                for y_j in re.finditer(yaml_jinja_assign_regex,
+                                                       self._text)}
+
+    def __init__(self, raw_text):
+        """
+        :param str raw_text: The complete raw text of the meta.yaml file
+        """
+        self._text = raw_text
+        self._parse_text()
+
+    def build(self):
+        """
+        Get current build number.
+        :return: `str` -- the extracted build number
+        """
+        return str(self._yaml_dict['package']['number'])
+
+    def version(self):
+        """
+        Get the current version string.
+        A look up into a dictionary. Probably Unneeded.
+        :return: `str` -- the extracted version string
+        """
+        return self._yaml_dict['package']['version']
+
+    def checksum(self):
+        """
+        Get the current checksum.
+        A look up into a dictionary. Probably Unneeded.
+        :return: `str` -- the current checksum
+        """
+        return self._yaml_dict['source'][self.checksum_type]
+
+    def find_replace_update(self, mapping):
+        """
+        Find and replace values in the raw text.
+        :param dict mapping: keys are old values, values are new values
+        """
+        for key in sorted(mapping.keys()):
+            self._text = self._text.replace(key, mapping[key])
+
+        self._parse_text()
+
+    def set_build_number(self, new_number):
+        """
+        Reset the build number
+        :param int|str new_number: New build number
+        :return: `bool` -- True if replacement successful or unneeded, False if failed
+        """
+        if str(new_number) == self._yaml_dict['build']['number']:
+            # Nothing to do
+            return True
+
+        if 'number' in self.yaml_jinja_refs:
+            # We *assume* that 'number' is for assigning the build
+            # We *assume* that there's only one variable involved in the
+            # assignment
+            build_var = self.yaml_jinja_refs['number'].split()[1]
+            mapping = {self.jinja_vars[build_var].string:
+                       '{% set {} = {} %}'.format(build_var, new_number)}
+        else:
+            build_num_regex = re.compile('number: *{}'.format(
+                self._yaml_dict['build']['number']))
+            matches = re.findall(build_num_regex, self.text)
+            if len(matches) > 1:
+                # Multiple number lines
+                # So give up
+                return False
+
+            build_num_str = matches[0].string[matches[0].start():
+                                              matches[0].end()]
+            mapping = {build_num_str:
+                       'number: {}'.format(
+                           self._yaml_dict['build']['number'])}
+
+        self.find_replace_update(mapping)
+        return True
+
+    def encoded_text(self):
+        """
+        Get the encoded version of the current raw text
+        :return: `str` --  the text encoded as a b64 string
+        """
+        return b64encode(self._text.encode('utf-8')).decode('utf-8')
+
     """
     Use PyPI's legacy JSON API to get the SHA256 of the source bundle
     :param str package_name: Name of package (PROPER case)
