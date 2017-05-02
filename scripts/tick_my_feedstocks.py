@@ -193,7 +193,7 @@ class Feedstock_Meta_Yaml:
         Get current build number.
         :return: `str` -- the extracted build number
         """
-        return str(self._yaml_dict['package']['number'])
+        return str(self._yaml_dict['build']['number'])
 
     def version(self):
         """
