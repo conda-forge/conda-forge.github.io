@@ -86,12 +86,21 @@ import tempfile
 from tqdm import tqdm
 import yaml
 
+# Find places where Jinja variables are set
+jinja_set_regex = re.compile('{% *set +([^ ]+) *= "?([^ "]+)"? *%}')
 
+# Find places where YAML variables are assigned using Jinja variables
+yaml_jinja_assign_regex = re.compile(' +([^:]+): *[^ ]*({{ .* }}.*)')
 
 fs_tuple = namedtuple('fs_tuple', ['success', 'needs_update', 'data'])
 
 status_data = namedtuple('status_data', ['text', 'yaml_strs',
                                          'pypi_version', 'reqs',
+# Jinja template informaton
+# Value being set and the setting string
+# tpl(str, str)
+jinja_var = namedtuple('jinja_var', ['value', 'string'])
+
                                          'blob_sha'])
 
 fs_status = namedtuple('fs_status', ['fs', 'status'])
