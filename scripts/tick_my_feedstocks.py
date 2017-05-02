@@ -350,49 +350,6 @@ def pypi_version_str(package_name):
     return r.json()['info']['version'].strip()
 
 
-def parsed_meta_yaml(text):
-    """
-    :param str text: The raw text in conda-forge feedstock meta.yaml file
-    :return: `dict|None` -- parsed YAML dict if successful, None if not
-    """
-    try:
-        yaml_dict = yaml.load(Template(text).render(),
-                              Loader=yaml.BaseLoader)
-    except UndefinedError:
-        # assume we hit a RECIPE_DIR reference in the vars and can't parse it.
-        # just erase for now
-        try:
-            yaml_dict = yaml.load(
-                Template(re.sub('{{ (environ\[")?RECIPE_DIR("])? }}/',
-                                '',
-                                text)
-                         ).render(),
-                Loader=yaml.BaseLoader)
-        except:
-            return None
-    except:
-        return None
-
-    return yaml_dict
-
-
-def basic_patch(text, replace_dict):
-    """
-    Given a meta.yaml file, version strings, and appropriate hashes,
-    find and replace old versions and hashes, and create a patch.
-    :param str text: The raw text of the current meta.yaml
-    :param dict[tpl] replace_dict: keys are IDs of text to be replaced. First val in tpl is original text, second is replacement.
-    :return: `patch_tuple` -- True and encoded patch if success, false and error string otherwise
-    """
-    for key in replace_dict:
-        if text.find(replace_dict[key][0]) < 0:
-            return patch_tuple(False,
-                               "Couldn't find current {} in meta.yaml".format(key))
-            text = text.replace(replace_dict[key][0], replace_dict[key][1])
-
-    return patch_tuple(True, b64encode(text.encode('utf-8')).decode('utf-8'))
-
-
 def user_feedstocks(user):
     """
     :param github.AuthenticatedUser.AutheticatedUser user:
