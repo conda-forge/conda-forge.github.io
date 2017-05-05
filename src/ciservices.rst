@@ -2,11 +2,17 @@ CI Services
 ==========================
 Here we describe common issues with the CI Services that conda-forge builds.
 
+Travis CI (OS X)
+------------------------------
+Travis CI is used to build packages for OS X. After merging a staged-recipes pull request, it might be necessary to
+force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit `<https://travis-ci.org/profile>`_ and click "Sync accounts".
+
 
 CircleCI (Linux)
 ------------------------------
 Circle CI is a container-based CI service that conda-forge uses to build
 linux packages.
+
 
 Enabling Circle on your Fork
 .............................
