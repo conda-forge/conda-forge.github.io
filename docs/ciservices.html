@@ -46,6 +46,11 @@
   <div class="section" id="ci-services">
 <h1>CI Services<a class="headerlink" href="#ci-services" title="Permalink to this headline">¶</a></h1>
 <p>Here we describe common issues with the CI Services that conda-forge builds.</p>
+<div class="section" id="travis-ci-os-x">
+<h2>Travis CI (OS X)<a class="headerlink" href="#travis-ci-os-x" title="Permalink to this headline">¶</a></h2>
+<p>Travis CI is used to build packages for OS X. After merging a staged-recipes pull request, it might be necessary to
+force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit <a class="reference external" href="https://travis-ci.org/profile">https://travis-ci.org/profile</a> and click &#8220;Sync accounts&#8221;.</p>
+</div>
 <div class="section" id="circleci-linux">
 <h2>CircleCI (Linux)<a class="headerlink" href="#circleci-linux" title="Permalink to this headline">¶</a></h2>
 <p>Circle CI is a container-based CI service that conda-forge uses to build
@@ -71,6 +76,7 @@ This is not normally needed.</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">CI Services</a><ul>
+<li><a class="reference internal" href="#travis-ci-os-x">Travis CI (OS X)</a></li>
 <li><a class="reference internal" href="#circleci-linux">CircleCI (Linux)</a><ul>
 <li><a class="reference internal" href="#enabling-circle-on-your-fork">Enabling Circle on your Fork</a></li>
 </ul>
