@@ -110,9 +110,8 @@ for package_name in os.listdir(feedstocks_path):
         headers, data = team._requester.requestJsonAndCheck(
                                        "PUT",
                                         team.url + "/memberships/" + new_member)
-    # repo = conda_forge.get_repo('{}-feedstock'.format(package_name))
     for old_member in member_handles - contributors:
-        print("AN OLD MEMBER ({}) NEEDS TO BE REMOVED FROM {}".format(old_member, repo._identity))
+        print("AN OLD MEMBER ({}) NEEDS TO BE REMOVED FROM {}".format(old_member, package_name))
         # The following works, it is just a bit scary!
 #        headers, data = team._requester.requestJsonAndCheck(
 #                                  "DELETE",
