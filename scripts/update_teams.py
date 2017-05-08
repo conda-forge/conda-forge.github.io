@@ -53,7 +53,14 @@ def create_team(org, name, description, repos):
         org.url + "/teams",
         input=post_parameters
     )
-    return github.Team.Team(org._requester, headers, data, completed=True)
+    team = github.Team.Team(org._requester, headers, data, completed=True)
+
+    for repo in repos:
+        # Ensure that we have merge rights on the repo for this team.
+        url = team.url + "/repos/" + repo._identity
+        team._requester.requestJsonAndCheck("PUT", url, input={"permission": "push"})
+
+    return team
 
 
 packages_visited = set()
@@ -87,18 +94,15 @@ for package_name in os.listdir(feedstocks_path):
     all_members.update(contributors)
 
     # Get the github repo for this feedstock.
-    repo = conda_forge.get_repo('{}-feedstock'.format(package_name))
 
     # If the team already exists, get hold of it.
     team = teams.get(package_name)
     if not team:
+        repo = conda_forge.get_repo('{}-feedstock'.format(package_name))
         team = create_team(conda_forge, package_name.lower(),
                            'The {} {} contributors!'.format(choice(superlative), package_name),
                            [repo])
         teams[package_name] = team
-    # Ensure that we have merge rights on the repo for this team.
-    url = team.url + "/repos/" + repo._identity
-    team._requester.requestJsonAndCheck("PUT", url, input={"permission": "push"})
 
     current_members = team.get_members()
     member_handles = set([member.login.lower() for member in current_members])
@@ -106,6 +110,7 @@ for package_name in os.listdir(feedstocks_path):
         headers, data = team._requester.requestJsonAndCheck(
                                        "PUT",
                                         team.url + "/memberships/" + new_member)
+    # repo = conda_forge.get_repo('{}-feedstock'.format(package_name))
     for old_member in member_handles - contributors:
         print("AN OLD MEMBER ({}) NEEDS TO BE REMOVED FROM {}".format(old_member, repo._identity))
         # The following works, it is just a bit scary!
