@@ -1,6 +1,6 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -35,7 +35,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -71,7 +71,7 @@ the source can be patched to include the relevant build information.</p>
 <p>Certain software licenses, such as those in the GPL and Apache families,
 require that the text of the license be distributed with the package.
 This means that the <code class="docutils literal"><span class="pre">about/license_file</span></code> entry <em>must</em> be included in the
-<code class="docutils literal"><span class="pre">meta.yaml</span></code>. Unfortunately, the license isn&#8217;t always included in the
+<code class="docutils literal"><span class="pre">meta.yaml</span></code>. Unfortunately, the license isn’t always included in the
 tarball of the source code.</p>
 <p>To get around this, the licence should be put in the recipe directory.
 It can then be refered to in the <code class="docutils literal"><span class="pre">meta.yaml</span></code> via,</p>
@@ -82,7 +82,7 @@ It can then be refered to in the <code class="docutils literal"><span class="pre
 </div>
 <div class="section" id="populating-the-hash-field">
 <h2>Populating the <code class="docutils literal"><span class="pre">hash</span></code> Field<a class="headerlink" href="#populating-the-hash-field" title="Permalink to this headline">¶</a></h2>
-<p>If your package is on PyPI, you can get the md5 hash from your package&#8217;s page
+<p>If your package is on PyPI, you can get the md5 hash from your package’s page
 on PyPI; look for the <code class="docutils literal"><span class="pre">md5</span></code> link next to the download link for your package.</p>
 <p>You can also generate a hash from the command line on Linux (and Mac if you
 install the necessary tools below). If you go this route, the <code class="docutils literal"><span class="pre">sha256</span></code> hash
@@ -189,7 +189,7 @@ can use curl to download and openssl to verify.</p>
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
