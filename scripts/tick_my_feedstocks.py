@@ -8,7 +8,6 @@
 #  - beautifulsoup4
 #  - gitpython
 #  - jinja2
-#  - lxml
 #  - pygithub >=1.29
 #  - pyyaml
 #  - requests
@@ -20,10 +19,28 @@
 
 """
 Usage:
-python tick_my_feedstocks.py
-[--password <github_password_or_oauth>]
-[--user <github_username>]
-[--no-regenerate --no-rerender --dry-run]
+python tick_my_feedstocks.py [-h]
+[--password GH_PASSWORD] [--user GH_USER]
+[--no-regenerate] [--no-rerender] [--dry-run]
+[--targetfile TARGETFILE]
+[--target-feedstocks [TARGET_FEEDSTOCKS [TARGET_FEEDSTOCKS ...]]]
+[--limit-feedstocks LIMIT_FEEDSTOCKS]
+[--limit-outdated LIMIT_OUTDATED]
+[--skipfile SKIPFILE]
+[--skip-feedstocks [SKIP_FEEDSTOCKS [SKIP_FEEDSTOCKS ...]]]
+
+or
+
+conda execute tick_my_feedstocks.py [-h]
+[--password GH_PASSWORD] [--user GH_USER]
+[--no-regenerate] [--no-rerender] [--dry-run]
+[--targetfile TARGETFILE]
+[--target-feedstocks [TARGET_FEEDSTOCKS [TARGET_FEEDSTOCKS ...]]]
+[--limit-feedstocks LIMIT_FEEDSTOCKS]
+[--limit-outdated LIMIT_OUTDATED]
+[--skipfile SKIPFILE]
+[--skip-feedstocks [SKIP_FEEDSTOCKS [SKIP_FEEDSTOCKS ...]]]
+
 
 NOTE that your oauth token should have these abilities:
 * public_repo
@@ -31,14 +48,14 @@ NOTE that your oauth token should have these abilities:
 * delete_repo.
 
 This script:
-1 identifies all of the feedstocks maintained by a user
-2 attempts to determine F, the subset of feedstocks that need updating
-3 attempts to determine F_i, the subset of F that have no dependencies
+1. identifies all of the feedstocks maintained by a user
+2. attempts to determine F, the subset of feedstocks that need updating
+3. attempts to determine F_i, the subset of F that have no dependencies
   on other members of F
-4 attempts to patch each member of F_i with the new version number and hash
-5 attempts to regenerate each member of F_i with the installed version
+4. attempts to patch each member of F_i with the new version number and hash
+5. attempts to regenerate each member of F_i with the installed version
   of conda-smithy
-6 submits a pull request for each member of F_i to the appropriate
+6. submits a pull request for each member of F_i to the appropriate
   conda-forge repoository
 
 IMPORTANT NOTES:
@@ -49,11 +66,6 @@ IMPORTANT NOTES:
   tests may still pass successfully.
 """
 # TODO pass token/user to pygithub for push. (Currently uses system config.)
-#  This is likely also why regeneration uses temporary CI dirs and not
-#  defined ones (e.g
-#  https://circleci.com/gh/conda-forge/tmp0bnegy33-feedstock.svg instead of
-#  https://circleci.com/gh/conda-forge/debtcollector-feedstock.svg)
-#  (Could also be an issue with conda_forge.configure_feedstock)
 # TODO Modify --dry-run flag to list which repos need forks.
 # TODO Modify --dry-run flag to list which forks are dirty.
 # TODO Modify --dry-run to also cover regeneration
@@ -61,17 +73,19 @@ IMPORTANT NOTES:
 # TODO skip upgrading from a stable release to a dev release (e.g. ghost.py)
 # TODO Test python 2.7 compatability (should work, but untested.)
 # TODO Test python 3.4 compatability (should work, but untested.)
-# TODO Test python 3.6 compatability (should work, but untested.)
+# TODO Test python 3.5 compatability (worked, but un-retested.)
+# TODO Test python 3.6 compatability (worked, but un-retested.)
 # TODO Deeper check of dependency changes in meta.yaml.
 # TODO Check installed conda-smithy against current feedstock conda-smithy.
 # TODO Check if already-forked feedstocks have open pulls.
 # TODO maintainer_can_modify flag when submitting pull
 #   Note that this isn't supported by pygithub yet, so would require
 #   switching back to requests
+# TODO Suppress regeneration text output
+# TODO improve the tqdm progress bar during regeneration.
 
 import argparse
 from base64 import b64encode
-from bs4 import BeautifulSoup
 from collections import defaultdict
 from collections import namedtuple
 import conda_smithy
@@ -80,6 +94,7 @@ from git import Actor
 from git import Repo
 from github import Github
 from github import GithubException
+from github import UnknownObjectException
 from jinja2 import Template
 from jinja2 import UndefinedError
 import os
@@ -120,6 +135,31 @@ fs_status = namedtuple('fs_status', ['fs', 'sd'])
 
 # Ordered list of acceptable ways source can be packaged.
 source_bundle_types = ["tar.gz", "tar.bz2", "zip", "bz2"]
+
+
+def parse_feedstock_file(feedstock_fpath):
+    """
+    Takes a file with space-separated feedstocks on each line and comments
+    after hashmarks, and returns a list of feedstocks
+    :param str feedstock_fpath:
+    :return: `list` -- list of feedstocks
+    """
+    from itertools import chain
+
+    if not isinstance(feedstock_fpath, str) and \
+            os.path.exists(feedstock_fpath):
+        return list()
+
+    try:
+        with open(feedstock_fpath, 'r') as infile:
+            feedstocks = list(
+                chain.from_iterable(x.split('#')[0].strip().split()
+                                    for x in infile)
+            )
+    except:
+        return list()
+
+    return feedstocks
 
 
 class Feedstock_Meta_Yaml:
@@ -275,7 +315,7 @@ def pypi_legacy_json_sha(package_name, version):
     Use PyPI's legacy JSON API to get the SHA256 of the source bundle
     :param str package_name: Name of package (PROPER case)
     :param str version: version for which to get sha
-    :return: `str,str|None,None` -- bundle_type,SHA for source, None,None if can't be found
+    :return: `tpl(str,str)|tpl(None,None)` -- bundle_type,SHA or None,None
     """
     r = requests.get('https://pypi.org/pypi/{}/json'.format(package_name))
     if not r.ok:
@@ -310,11 +350,15 @@ def pypi_org_sha(package_name, version):
     :param str version: version for which to get sha
     :return: `str,str|None,None` -- bundle type,SHA for source, None,None if can't be found
     """
+    import warnings
+    from bs4 import BeautifulSoup
+    warnings.filterwarnings("ignore", category=UserWarning, module='bs4')
+
     r = requests.get('https://pypi.org/project/{}/{}/#files'.format(
         package_name,
         version))
 
-    bs = BeautifulSoup(r.text, 'lxml')
+    bs = BeautifulSoup(r.text)
     for bundle_type in source_bundle_types:
         try:
             url_pattern = re.compile(
@@ -356,13 +400,23 @@ def pypi_version_str(package_name):
     return r.json()['info']['version'].strip()
 
 
-def user_feedstocks(user):
+def user_feedstocks(user, limit=-1, skips=None):
     """
     :param github.AuthenticatedUser.AutheticatedUser user:
-    :return: `list` -- list of conda-forge feedstocks the user maintains
+    :param  int limit: If greater than -1, max number of feedstocks to return
+    :param list|set skips: an iterable of the names of feedstocks that should be skipped
+    :return: `tpl(int,list)` -- count of skipped feedstocks, list of conda-forge feedstocks the user maintains
     """
+    if skips is None:
+        skips = set()
+
+    skip_count = 0
     feedstocks = []
     for team in tqdm(user.get_teams(), desc='Finding feedstock teams...'):
+
+        # Check if we've hit the feedstock limit
+        if limit > -1 and len(feedstocks) >= limit:
+            break
 
         # Each conda-forge team manages one feedstock
         # If a team has more than one repo, skip it.
@@ -370,11 +424,17 @@ def user_feedstocks(user):
             continue
 
         repo = list(team.get_repos())[0]
-        if repo.full_name.startswith('conda-forge/') and \
-                repo.full_name.endswith('-feedstock'):
-            feedstocks.append(repo)
+        if not repo.full_name.startswith('conda-forge/') or \
+                not repo.full_name.endswith('-feedstock'):
+            continue
 
-    return feedstocks
+        if repo.name in skips:
+            skip_count += 1
+            continue
+
+        feedstocks.append(repo)
+
+    return skip_count, feedstocks
 
 
 def feedstock_status(feedstock):
@@ -404,20 +464,6 @@ def feedstock_status(feedstock):
                                     fs_contents.sha))
 
 
-def get_user_fork(user, feedstock):
-    """
-    Return a user's fork of a feedstock if one exists, else create a new one.
-    :param github.AuthenticatedUser.AuthenticatedUser user:
-    :param github.Repository.Repository feedstock: conda-forge feedstock
-    :return: `github.Repository.Repository` -- fork of the feedstock beloging to user
-    """
-    for fork in feedstock.get_forks():
-        if fork.owner.login == user.login:
-            return fork
-
-    return user.create_fork(feedstock)
-
-
 def even_feedstock_fork(user, feedstock):
     """
     Return a fork that's even with the latest version of the feedstock
@@ -426,7 +472,12 @@ def even_feedstock_fork(user, feedstock):
     :param github.Repository.Repository feedstock: conda-forge feedstock
     :return: `None|github.Repository.Repository` -- None if no fork, else the repository
     """
-    fork = get_user_fork(user, feedstock)
+    try:
+        fork = user.create_fork(feedstock)
+    except UnknownObjectException:
+        raise UnknownObjectException('Issue with GitHub API when forking')
+    except GithubException:
+        raise GithubException('Issue with GitHub API when forking')
 
     comparison = fork.compare(base='{}:master'.format(user.login),
                               head='conda-forge:master')
@@ -446,9 +497,14 @@ def even_feedstock_fork(user, feedstock):
         except GithubException:
             # couldn't delete feedstock
             # give up, don't want a mess.
-            return None
+            raise GithubException("Couldn't delete outdated fork")
 
-        fork = user.create_fork(feedstock)
+        try:
+            fork = user.create_fork(feedstock)
+        except UnknownObjectException:
+            raise UnknownObjectException('Issue with GitHub API when forking')
+        except GithubException:
+            raise GithubException('Issue with GitHub API when forking')
 
     return fork
 
@@ -462,8 +518,9 @@ def regenerate_fork(fork):
     # subprocess.run(["./renderer.sh", gh_user, gh_password, fork.name])
 
     working_dir = tempfile.TemporaryDirectory()
-    r = Repo.clone_from(fork.clone_url, working_dir.name)
-    conda_smithy.configure_feedstock.main(working_dir.name)
+    local_repo_dir = os.path.join(working_dir.name, fork.name)
+    r = Repo.clone_from(fork.clone_url, local_repo_dir)
+    conda_smithy.configure_feedstock.main(local_repo_dir)
 
     if not r.is_dirty():
         # No changes made during regeneration.
@@ -485,16 +542,33 @@ def regenerate_fork(fork):
 def tick_feedstocks(gh_password=None,
                     gh_user=None,
                     no_regenerate=False,
-                    dry_run=False):
+                    dry_run=False,
+                    targetfile=None,
+                    target_feedstocks=None,
+                    limit_feedstocks=-1,
+                    limit_outdated=-1,
+                    skipfile=None,
+                    skip_feedstocks=None):
     """
     Finds all of the feedstocks a user maintains that can be updated without
     a dependency conflict with other feedstocks the user maintains,
     creates forks, ticks versions and hashes, and regenerates,
     then submits a pull
-    :param str|None gh_password: GitHub password or OAuth token (if omitted, check environment vars)
+    :param str|None gh_password: GitHub password or OAuth token (if omitted,
+    check environment vars)
     :param str|None gh_user: GitHub username (can be omitted with OAuth)
-    :param bool no_regenerate: If True, don't regenerate feedstocks before submitting pull requests
-    :param bool dry_run: If True, do not apply generate patches, fork feedstocks, or regenerate
+    :param bool no_regenerate: If True, don't regenerate feedstocks before
+    submitting pull requests
+    :param bool dry_run: If True, do not apply generate patches, fork
+    feedstocks, or regenerate
+    :param str targetfile: path to file listing feedstocks to use
+    :param list|set target_feedstocks: list or set of feedstocks to use
+    :param int limit_feedstocks: If greater than -1, maximum number of
+    feedstocks to retrieve and check for updateds
+    :param int limit_outdated: If greater than -1, maximum number of outdated
+    feedstocks to check for patching
+    :param str skipfile: path to file listing feedstocks to skip
+    :param list|set skip_feedstocks: list or set of feedstocks to skip
     """
     if gh_password is None:
         gh_password = os.getenv('GH_TOKEN')
@@ -510,7 +584,34 @@ def tick_feedstocks(gh_password=None,
         g = Github(gh_user, gh_password)
         user = g.get_user()
 
-    feedstocks = user_feedstocks(user)
+    targets = set()
+    if isinstance(target_feedstocks, (set, list)):
+        targets.update(target_feedstocks)
+    targets.update(parse_feedstock_file(targetfile))
+
+    skips = set()
+    if isinstance(skip_feedstocks, (set, list)):
+        skips.update(skip_feedstocks)
+    skips.update(parse_feedstock_file(skipfile))
+
+    if len(targets) > 0:
+        # If iwe have specific target feedstocks
+        # only retrieve those
+        skip_count = len(targets & skips)
+        feedstocks = []
+        for name in targets - skips:
+            repo = g.get_repo('conda-forge/{}'.format(name))
+            try:
+                repo.full_name
+                feedstocks.append(repo)
+            except UnknownObjectException:
+                # couldn't get repo, so ignore it
+                continue
+
+    else:
+        # If we have no specific targets
+        # review all teams and filter based on those
+        skip_count, feedstocks = user_feedstocks(user, limit_feedstocks, skips)
 
     can_be_updated = list()
     status_error_dict = defaultdict(list)
@@ -520,6 +621,9 @@ def tick_feedstocks(gh_password=None,
             can_be_updated.append(fs_status(feedstock, status.data))
         elif not status.success:
             status_error_dict[status.data].append(feedstock.name)
+
+        if limit_outdated > -1 and len(can_be_updated) >= limit_outdated:
+            break
 
     package_names = set([x.fs.name[:-10] for x in can_be_updated])
     indep_updates = [x for x in can_be_updated
@@ -561,7 +665,12 @@ def tick_feedstocks(gh_password=None,
             continue
 
         # make fork
-        fork = even_feedstock_fork(user, update.fs)
+        try:
+            fork = even_feedstock_fork(user, update.fs)
+        except (UnknownObjectException, GithubException) as e:
+            # TODO this should be a better error catch
+            fork = None
+
         if fork is None:
             error_dict["Couldn't fork"].append(update.fs.name)
             continue
@@ -599,11 +708,13 @@ def tick_feedstocks(gh_password=None,
                                   head='{}:master'.format(gh_user),
                                   base='master')
         except GithubException:
+            error_dict["Couldn't create pull"].append(update.fs.name)
             continue
 
         pull_count += 1
 
-    print('{} total feedstocks checked.'.format(len(feedstocks)))
+    print('{} feedstocks skipped.'.format(skip_count))
+    print('{} feedstocks checked.'.format(len(feedstocks)))
     print('  {} were out-of-date.'.format(len(can_be_updated)))
     print('  {} were independent of other out-of-date feedstocks'.format(
         len(indep_updates)))
@@ -648,7 +759,7 @@ def main():
                         dest='no_regenerate',
                         help="If present, don't regenerate feedstocks "
                         'after updating')
-    parser.add_argument('--no-rererender',
+    parser.add_argument('--no-rerender',
                         action='store_true',
                         dest='no_rerender',
                         help="If present, don't regenerate feedstocks "
@@ -658,12 +769,46 @@ def main():
                         dest='dry_run',
                         help='If present, skip applying patches, forking, '
                         'and regenerating feedstocks')
+    parser.add_argument('--target-feedstocks-file',
+                        default=None,
+                        dest='targetfile',
+                        help='File listing feedstocks to check')
+    parser.add_argument('--target-feedstocks',
+                        default=None,
+                        dest='target_feedstocks',
+                        nargs='*'
+                        help='List of feedstocks to update')
+    parser.add_argument('--limit-feedstocks',
+                        type=int,
+                        default=-1,
+                        dest='limit_feedstocks',
+                        help='Maximum number of feedstocks to retrieve')
+    parser.add_argument('--limit-outdated',
+                        type=int,
+                        default=-1,
+                        dest='limit_outdated',
+                        help='Maximum number of outdated feedstocks to try and patch')
+    parser.add_argument('--skip-feedstocks-file',
+                        default=None,
+                        dest='skipfile,'
+                        help='File listing feedstocks to skip')
+    parser.add_argument('--skip-feedstocks',
+                        default=None,
+                        dest='skip_feedstocks',
+                        nargs='*',
+                        help='List of feedstocks to skip updating')
     args = parser.parse_args()
 
     tick_feedstocks(args.gh_password,
                     args.gh_user,
                     args.no_regenerate or args.no_rerender,
-                    args.dry_run)
+                    args.dry_run,
+                    args.targetfile,
+                    args.target_feedstocks,
+                    args.limit_feedstocks,
+                    args.limit_outdated,
+                    args.skipfile,
+                    args.skip_feedstocks)
 
 
 if __name__ == "__main__":
