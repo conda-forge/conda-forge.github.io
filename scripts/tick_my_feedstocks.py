@@ -287,17 +287,15 @@ class Feedstock_Meta_Yaml:
         else:
             build_num_regex = re.compile('number: *{}'.format(
                 self._yaml_dict['build']['number']))
-            matches = re.findall(build_num_regex, self.text)
-            if len(matches) > 1:
+            matches = re.findall(build_num_regex, self._text)
+            if len(matches) != 1:
                 # Multiple number lines
+                # or no number lines
                 # So give up
                 return False
 
-            build_num_str = matches[0].string[matches[0].start():
-                                              matches[0].end()]
-            mapping = {build_num_str:
-                       'number: {}'.format(
-                           self._yaml_dict['build']['number'])}
+            mapping = {matches[0]:
+                       'number: {}'.format(new_number)}
 
         self.find_replace_update(mapping)
         return True
