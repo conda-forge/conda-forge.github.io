@@ -69,18 +69,14 @@ IMPORTANT NOTES:
 # TODO Modify --dry-run flag to list which repos need forks.
 # TODO Modify --dry-run flag to list which forks are dirty.
 # TODO Modify --dry-run to also cover regeneration
-# TODO Add support for skipping repos that are deprecated. (e.g. fake-factory)
 # TODO skip upgrading from a stable release to a dev release (e.g. ghost.py)
-# TODO Test python 2.7 compatability (should work, but untested.)
-# TODO Test python 3.4 compatability (should work, but untested.)
-# TODO Test python 3.5 compatability (worked, but un-retested.)
-# TODO Test python 3.6 compatability (worked, but un-retested.)
+#  (This is useful but not critical, since we can provide skip lists)
 # TODO Deeper check of dependency changes in meta.yaml.
 # TODO Check installed conda-smithy against current feedstock conda-smithy.
 # TODO Check if already-forked feedstocks have open pulls.
 # TODO maintainer_can_modify flag when submitting pull
-#   Note that this isn't supported by pygithub yet, so would require
-#   switching back to requests
+#  Note that this isn't supported by pygithub yet, so would require
+#  switching back to requests
 # TODO Suppress regeneration text output
 # TODO improve the tqdm progress bar during regeneration.
 
@@ -270,7 +266,8 @@ class Feedstock_Meta_Yaml:
         """
         Reset the build number
         :param int|str new_number: New build number
-        :return: `bool` -- True if replacement successful or unneeded, False if failed
+        :return: `bool` -- True if replacement successful or unneeded, False if
+        failed
         """
         if str(new_number) == self._yaml_dict['build']['number']:
             # Nothing to do
@@ -347,7 +344,8 @@ def pypi_org_sha(package_name, version):
     Scrape pypi.org for SHA256 of the source bundle
     :param str package_name: Name of package (PROPER case)
     :param str version: version for which to get sha
-    :return: `str,str|None,None` -- bundle type,SHA for source, None,None if can't be found
+    :return: `str,str|None,None` -- bundle type,SHA for source, None,None if
+    can't be found
     """
     import warnings
     from bs4 import BeautifulSoup
@@ -403,8 +401,10 @@ def user_feedstocks(user, limit=-1, skips=None):
     """
     :param github.AuthenticatedUser.AutheticatedUser user:
     :param  int limit: If greater than -1, max number of feedstocks to return
-    :param list|set skips: an iterable of the names of feedstocks that should be skipped
-    :return: `tpl(int,list)` -- count of skipped feedstocks, list of conda-forge feedstocks the user maintains
+    :param list|set skips: an iterable of the names of feedstocks that should
+    be skipped
+    :return: `tpl(int,list)` -- count of skipped feedstocks, list of
+    conda-forge feedstocks the user maintains
     """
     if skips is None:
         skips = set()
@@ -438,16 +438,17 @@ def user_feedstocks(user, limit=-1, skips=None):
 
 def feedstock_status(feedstock):
     """
-    Return whether a feedstock is out of date and any information needed to update it.
+    Return whether a feedstock is out of date and any information needed to
+    update it.
     :param github.Repository.Repository feedstock:
-    :return: `tpl(bool,bool,None|status_data)` -- bools indicating success and either None or a status_data tuple
+    :return: `tpl(bool,bool,None|status_data)` -- bools indicating success and
+    either None or a status_data tuple
     """
     fs_contents = feedstock.get_contents('recipe/meta.yaml')
     try:
         meta_yaml = Feedstock_Meta_Yaml(
             fs_contents.decoded_content.decode('utf-8'))
     except (UndefinedError, KeyError) as e:
-        # TODO fix this to use the passed error message
         return result_tuple(False, e.args[0])
 
     pypi_version = pypi_version_str(meta_yaml.pypi_package)
@@ -469,7 +470,8 @@ def even_feedstock_fork(user, feedstock):
     If the user has a fork that's ahead of the feedstock, do nothing
     :param github.AuthenticatedUser.AuthenticatedUser user: GitHub user
     :param github.Repository.Repository feedstock: conda-forge feedstock
-    :return: `None|github.Repository.Repository` -- None if no fork, else the repository
+    :return: `None|github.Repository.Repository` -- None if no fork, else the
+    repository
     """
     try:
         fork = user.create_fork(feedstock)
