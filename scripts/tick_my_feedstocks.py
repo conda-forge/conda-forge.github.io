@@ -776,7 +776,7 @@ def main():
     parser.add_argument('--target-feedstocks',
                         default=None,
                         dest='target_feedstocks',
-                        nargs='*'
+                        nargs='*',
                         help='List of feedstocks to update')
     parser.add_argument('--limit-feedstocks',
                         type=int,
@@ -787,10 +787,11 @@ def main():
                         type=int,
                         default=-1,
                         dest='limit_outdated',
-                        help='Maximum number of outdated feedstocks to try and patch')
+                        help='Maximum number of outdated feedstocks to try '
+                        'and patch')
     parser.add_argument('--skip-feedstocks-file',
                         default=None,
-                        dest='skipfile,'
+                        dest='skipfile',
                         help='File listing feedstocks to skip')
     parser.add_argument('--skip-feedstocks',
                         default=None,
