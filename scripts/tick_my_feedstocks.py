@@ -146,8 +146,8 @@ def parse_feedstock_file(feedstock_fpath):
     """
     from itertools import chain
 
-    if not isinstance(feedstock_fpath, str) and \
-            os.path.exists(feedstock_fpath):
+    if not (isinstance(feedstock_fpath, str) and
+            os.path.exists(feedstock_fpath)):
         return list()
 
     try:
