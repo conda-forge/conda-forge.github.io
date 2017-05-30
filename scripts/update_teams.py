@@ -93,7 +93,7 @@ for package_name in os.listdir(feedstocks_path):
 # Create and administer the all-members team.
 team = teams.get('all-members')
 if not team:
-    raise RuntimeError("Team all-members does not exist in conda-forge organization".format(package_name))
+    raise RuntimeError("Team all-members does not exist in conda-forge organization")
 
 current_members = team.get_members()
 member_handles = set([member.login.lower() for member in current_members])
