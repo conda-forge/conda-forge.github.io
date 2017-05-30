@@ -39,30 +39,6 @@ teams = {team.name: team for team in conda_forge.get_teams()}
 
 feedstocks_path = args.feedstocks_clone
 
-
-def create_team(org, name, description, repos):
-    # PyGithub creates secret teams, and has no way of turning that off! :(
-    post_parameters = {
-        "name": name,
-        "description": description,
-        "privacy": "closed",
-    }
-    post_parameters["repo_names"] = [element._identity for element in repos]
-    headers, data = org._requester.requestJsonAndCheck(
-        "POST",
-        org.url + "/teams",
-        input=post_parameters
-    )
-    team = github.Team.Team(org._requester, headers, data, completed=True)
-
-    for repo in repos:
-        # Ensure that we have merge rights on the repo for this team.
-        url = team.url + "/repos/" + repo._identity
-        team._requester.requestJsonAndCheck("PUT", url, input={"permission": "push"})
-
-    return team
-
-
 packages_visited = set()
 
 all_members = set()
@@ -98,11 +74,7 @@ for package_name in os.listdir(feedstocks_path):
     # If the team already exists, get hold of it.
     team = teams.get(package_name)
     if not team:
-        repo = conda_forge.get_repo('{}-feedstock'.format(package_name))
-        team = create_team(conda_forge, package_name.lower(),
-                           'The {} {} contributors!'.format(choice(superlative), package_name),
-                           [repo])
-        teams[package_name] = team
+        raise RuntimeError("Team {} does not exist in conda-forge organization".format(package_name))
 
     current_members = team.get_members()
     member_handles = set([member.login.lower() for member in current_members])
@@ -121,8 +93,7 @@ for package_name in os.listdir(feedstocks_path):
 # Create and administer the all-members team.
 team = teams.get('all-members')
 if not team:
-    team = create_team(conda_forge, 'all-members',
-                       'All of the awesome conda-forge contributors!', [])
+    raise RuntimeError("Team all-members does not exist in conda-forge organization".format(package_name))
 
 current_members = team.get_members()
 member_handles = set([member.login.lower() for member in current_members])
