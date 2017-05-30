@@ -69,8 +69,6 @@ for package_name in os.listdir(feedstocks_path):
     contributors = set(handle.lower() for handle in contributors)
     all_members.update(contributors)
 
-    # Get the github repo for this feedstock.
-
     # If the team already exists, get hold of it.
     team = teams.get(package_name)
     if not team:
