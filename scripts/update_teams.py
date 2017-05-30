@@ -11,6 +11,8 @@
 #  - conda-forge
 # run_with: python
 
+from __future__ import print_function
+
 import argparse
 import collections
 import os
@@ -72,7 +74,8 @@ for package_name in os.listdir(feedstocks_path):
     # If the team already exists, get hold of it.
     team = teams.get(package_name)
     if not team:
-        raise RuntimeError("Team {} does not exist in conda-forge organization".format(package_name))
+        print("Team {} does not exist in conda-forge organization".format(package_name))
+        continue
 
     current_members = team.get_members()
     member_handles = set([member.login.lower() for member in current_members])
