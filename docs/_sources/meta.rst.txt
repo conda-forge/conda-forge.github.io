@@ -90,7 +90,7 @@ When the package version changes you should reset the build number to ``0``.
 
 
 Single Version, Externally Managed
----------------------------------
+----------------------------------
 Many packages use ``python setup.py install --single-version-externally-managed --record record.txt``
 
 These options should be added to setup.py if a project uses setuptools. The goal is to prevent ``setuptools``
