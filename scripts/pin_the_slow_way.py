@@ -78,7 +78,7 @@ pinned = {
           'tk': 'tk 8.5.*',  # 8.5.18
           'vlfeat': 'vlfeat 0.9.20',  # NA
           'xz': 'xz 5.2.*',  # 5.2.2
-          'zlib': 'zlib 1.2.*',  # 1.2.8
+          'zlib': 'zlib 1.2.8',  # 1.2.8
         }
 
 parser = argparse.ArgumentParser(description='Propose a feedstock update.')
