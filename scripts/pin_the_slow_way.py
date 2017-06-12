@@ -62,7 +62,7 @@ pinned = {
           'libxml2': 'libxml2 2.9.*',  # 2.9.4
           'metis': 'metis 5.1.*',  # NA
           'mpfr': 'mpfr 3.1.*',  # 3.1.5
-          'ncurses': 'ncurses 5.9*',  # 5.9
+          'ncurses': 'ncurses 5.9',  # 5.9
           'netcdf-cxx4': 'netcdf-cxx4 4.3.*',  # NA
           'netcdf-fortran': 'netcdf-fortran 4.4.*',  #
           'openblas': 'openblas 0.2.19|0.2.19.*',  # 0.2.19
