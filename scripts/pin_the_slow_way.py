@@ -53,7 +53,7 @@ pinned = {
           'icu': 'icu 58.*',  # 54.1
           'jpeg': 'jpeg 9*',  # 9b (but defaults is probably using 8d)
           'libblitz': 'libblitz 0.10|0.10.*',  # NA
-          'libevent': 'libevent 2.0.*',  # 2.0.22
+          'libevent': 'libevent 2.0.22',  # 2.0.22
           'libmatio': 'libmatio 1.5.*',  # NA
           'libnetcdf': 'libnetcdf 4.4.*',  # 4.4.1
           'libpng': 'libpng >=1.6.28,<1.7',  # 1.6.27
