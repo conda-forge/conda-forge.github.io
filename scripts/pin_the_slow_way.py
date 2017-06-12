@@ -43,7 +43,7 @@ pinned = {
           'cairo': 'cairo 1.14.*',  # 1.12.18
           'ffmpeg': 'ffmpeg >=2.8,<2.8.11',  # NA
           'fontconfig': 'fontconfig 2.12.*',  # 2.12.1
-          'freetype': 'freetype 2.7|2.7.*',  # 2.5.5
+          'freetype': 'freetype 2.7',  # 2.5.5
           'geos': 'geos 3.5.1',  # 3.5.0
           'giflib': 'giflib 5.1.*',  # NA
           'glib': 'glib 2.51.*',  # 2.50.2
