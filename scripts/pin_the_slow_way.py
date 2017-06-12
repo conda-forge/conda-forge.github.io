@@ -58,7 +58,7 @@ pinned = {
           'libnetcdf': 'libnetcdf 4.4.*',  # 4.4.1
           'libpng': 'libpng >=1.6.28,<1.7',  # 1.6.27
           'libsvm': 'libsvm 3.21|3.21.*',  # NA
-          'libtiff': 'libtiff 4.0.*',  # 4.0.6
+          'libtiff': 'libtiff >=4.0.3,<4.0.8',  # 4.0.6
           'libxml2': 'libxml2 2.9.*',  # 2.9.4
           'metis': 'metis 5.1.*',  # NA
           'mpfr': 'mpfr 3.1.*',  # 3.1.5
