@@ -27,7 +27,15 @@ import conda_smithy.feedstocks as feedstocks
 
 # The version commented right after the comma is the one available for **Linux** in **defaults**.
 # That version is assumed to be the same in all platforms and the one used to build all packages.
-# The only known incompatibilities at the moment are jpeg 8 vs 9, and icu 54.1 vs 58.*.
+# BE VERY CAREFUL when updating pinnings. Make sure to check https://abi-laboratory.pro/tracker/
+# for any incompatibility between versions.
+# Also be aware that currently the following pinnings are used for both build and run meta.yaml
+# sections. Defining the same pinning for both sections means we need to be more restrictive.
+#
+# For example, we used to define gmp as 'gmp >=5.0.1,<7'. This is wrong as it allows a package
+# to be built against gmp 6.1.0 but run with 5.0.1.
+# As showed by https://abi-laboratory.pro/tracker/timeline/gmp/ binaries built with 6.1.0 are not
+# compatible with 5.0.1 (the other way around would be true).
 pinned = {
           'boost': 'boost 1.64.*',  # 1.61.0
           'boost-cpp': 'boost-cpp 1.64.*',  # NA
@@ -39,7 +47,7 @@ pinned = {
           'geos': 'geos 3.5.1',  # 3.5.0
           'giflib': 'giflib 5.1.*',  # NA
           'glib': 'glib 2.51.*',  # 2.50.2
-          'gmp': 'gmp >=5.0.1,<7', # 6.1.0
+          'gmp': 'gmp 6.1.*', # 6.1.0
           'harfbuzz': 'harfbuzz 1.3.*',  # 0.9.39
           'hdf5': 'hdf5 1.8.18|1.8.18.*',  # 1.8.17
           'icu': 'icu 58.*',  # 54.1
