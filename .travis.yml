@@ -30,6 +30,7 @@ install:
 
     # Configure conda.
     - conda config --set show_channel_urls true
+    - conda config --set auto_update_conda false
 
     # Now do the things we need to do to install it.
     - conda install conda-execute --yes --quiet -c conda-forge
