@@ -41,7 +41,7 @@ pinned = {
           'boost-cpp': 'boost-cpp 1.64.*',  # NA
           'bzip2': 'bzip2 1.0.*',  # 1.0.6
           'cairo': 'cairo 1.14.*',  # 1.12.18
-          'ffmpeg': 'ffmpeg >=2.8,<2.8.11',  # NA
+          'ffmpeg': 'ffmpeg >=3.2.3,<3.2.6',  # NA
           'fontconfig': 'fontconfig 2.12.*',  # 2.12.1
           'freetype': 'freetype 2.7',  # 2.5.5
           'geos': 'geos 3.5.1',  # 3.5.0
