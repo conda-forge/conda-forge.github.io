@@ -32,13 +32,6 @@ install:
     - conda config --set show_channel_urls true
     - conda config --set auto_update_conda false
 
-    # Temporarily pin conda for conda-execute compatibility.
-    # Please see the linked issue for details.
-    #
-    # xref: https://github.com/pelson/conda-execute/issues/41
-    #
-    - conda install --yes --quiet -c conda-forge conda=4.2.13
-
     # Now do the things we need to do to install it.
     - conda install conda-execute --yes --quiet -c conda-forge
 
