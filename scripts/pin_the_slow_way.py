@@ -27,34 +27,42 @@ import conda_smithy.feedstocks as feedstocks
 
 # The version commented right after the comma is the one available for **Linux** in **defaults**.
 # That version is assumed to be the same in all platforms and the one used to build all packages.
-# The only known incompatibilities at the moment are jpeg 8 vs 9, and icu 54.1 vs 58.*.
+# BE VERY CAREFUL when updating pinnings. Make sure to check https://abi-laboratory.pro/tracker/
+# for any incompatibility between versions.
+# Also be aware that currently the following pinnings are used for both build and run meta.yaml
+# sections. Defining the same pinning for both sections means we need to be more restrictive.
+#
+# For example, we used to define gmp as 'gmp >=5.0.1,<7'. This is wrong as it allows a package
+# to be built against gmp 6.1.0 but run with 5.0.1.
+# As showed by https://abi-laboratory.pro/tracker/timeline/gmp/ binaries built with 6.1.0 are not
+# compatible with 5.0.1 (the other way around would be true).
 pinned = {
           'boost': 'boost 1.64.*',  # 1.61.0
           'boost-cpp': 'boost-cpp 1.64.*',  # NA
           'bzip2': 'bzip2 1.0.*',  # 1.0.6
           'cairo': 'cairo 1.14.*',  # 1.12.18
-          'ffmpeg': 'ffmpeg 2.8.*',  # NA
+          'ffmpeg': 'ffmpeg >=3.2.3,<3.2.6',  # NA
           'fontconfig': 'fontconfig 2.12.*',  # 2.12.1
-          'freetype': 'freetype 2.7|2.7.*',  # 2.5.5
+          'freetype': 'freetype 2.7',  # 2.5.5
           'geos': 'geos 3.5.1',  # 3.5.0
           'giflib': 'giflib 5.1.*',  # NA
           'glib': 'glib 2.51.*',  # 2.50.2
-          'gmp': 'gmp >=5.0.1,<7', # 6.1.0
-          'harfbuzz': 'harfbuzz 1.3.*',  # 0.9.39
+          'gmp': 'gmp 6.1.*', # 6.1.0
+          'harfbuzz': 'harfbuzz 1.3.4',  # 0.9.39
           'hdf5': 'hdf5 1.8.18|1.8.18.*',  # 1.8.17
           'icu': 'icu 58.*',  # 54.1
           'jpeg': 'jpeg 9*',  # 9b (but defaults is probably using 8d)
           'libblitz': 'libblitz 0.10|0.10.*',  # NA
-          'libevent': 'libevent 2.0.*',  # 2.0.22
+          'libevent': 'libevent 2.0.22',  # 2.0.22
           'libmatio': 'libmatio 1.5.*',  # NA
           'libnetcdf': 'libnetcdf 4.4.*',  # 4.4.1
           'libpng': 'libpng >=1.6.28,<1.7',  # 1.6.27
           'libsvm': 'libsvm 3.21|3.21.*',  # NA
-          'libtiff': 'libtiff 4.0.*',  # 4.0.6
+          'libtiff': 'libtiff >=4.0.3,<4.0.8',  # 4.0.6
           'libxml2': 'libxml2 2.9.*',  # 2.9.4
           'metis': 'metis 5.1.*',  # NA
-          'mpfr': 'mpfr 3.*',  # 3.1.5
-          'ncurses': 'ncurses 5.9*',  # 5.9
+          'mpfr': 'mpfr 3.1.*',  # 3.1.5
+          'ncurses': 'ncurses 5.9',  # 5.9
           'netcdf-cxx4': 'netcdf-cxx4 4.3.*',  # NA
           'netcdf-fortran': 'netcdf-fortran 4.4.*',  #
           'openblas': 'openblas 0.2.19|0.2.19.*',  # 0.2.19
@@ -70,7 +78,7 @@ pinned = {
           'tk': 'tk 8.5.*',  # 8.5.18
           'vlfeat': 'vlfeat 0.9.20',  # NA
           'xz': 'xz 5.2.*',  # 5.2.2
-          'zlib': 'zlib 1.2.*',  # 1.2.8
+          'zlib': 'zlib 1.2.8',  # 1.2.8
         }
 
 parser = argparse.ArgumentParser(description='Propose a feedstock update.')
