@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Testing in Recipes &#8212; conda-forge 0.0.1a1 documentation</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -35,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -48,7 +45,7 @@
 <p>All recipes need tests. Here are some tips, tricks, and justifications.</p>
 <div class="section" id="simple-existence-tests">
 <h2>Simple Existence Tests<a class="headerlink" href="#simple-existence-tests" title="Permalink to this headline">¶</a></h2>
-<p>Sometime tests for the underlying code base don&#8217;t exist. And sometimes test suites
+<p>Sometime tests for the underlying code base don’t exist. And sometimes test suites
 simply take too long to run on limited CI infrastructure. Or sometimes they take
 too much bandwidth. Whatever the reason, conda-forge may not always be able to
 execute the prescribed test suite.</p>
@@ -86,8 +83,8 @@ $ ./scripts/run_docker_build.sh
 </div>
 </div>
 <div class="section" id="should-a-recipe-run-all-of-a-package-s-tests">
-<h2>Should a Recipe Run All of a Package&#8217;s Tests?<a class="headerlink" href="#should-a-recipe-run-all-of-a-package-s-tests" title="Permalink to this headline">¶</a></h2>
-<p>No. A recipe does not have to run all of a package&#8217;s unit or integration tests.
+<h2>Should a Recipe Run All of a Package’s Tests?<a class="headerlink" href="#should-a-recipe-run-all-of-a-package-s-tests" title="Permalink to this headline">¶</a></h2>
+<p>No. A recipe does not have to run all of a package’s unit or integration tests.
 Sometimes, this might even be impossible due to timeouts on CI services.
 Just test sufficiently to know that the package is in good working order.</p>
 </div>
@@ -105,7 +102,7 @@ Just test sufficiently to know that the package is in good working order.</p>
 <li><a class="reference internal" href="#simple-existence-tests">Simple Existence Tests</a></li>
 <li><a class="reference internal" href="#run-docker-tests-locally-for-feedstock">Run Docker Tests Locally for Feedstock</a></li>
 <li><a class="reference internal" href="#run-docker-tests-locally-for-staged-recipes">Run Docker Tests Locally for Staged Recipes</a></li>
-<li><a class="reference internal" href="#should-a-recipe-run-all-of-a-package-s-tests">Should a Recipe Run All of a Package&#8217;s Tests?</a></li>
+<li><a class="reference internal" href="#should-a-recipe-run-all-of-a-package-s-tests">Should a Recipe Run All of a Package’s Tests?</a></li>
 </ul>
 </li>
 </ul>
@@ -143,8 +140,8 @@ Just test sufficiently to know that the package is in good working order.</p>
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
       <a href="_sources/testing.rst.txt"

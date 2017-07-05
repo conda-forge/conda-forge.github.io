@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Writing the meta.yaml &#8212; conda-forge 0.0.1a1 documentation</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -35,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -71,7 +68,7 @@ the source can be patched to include the relevant build information.</p>
 <p>Certain software licenses, such as those in the GPL and Apache families,
 require that the text of the license be distributed with the package.
 This means that the <code class="docutils literal"><span class="pre">about/license_file</span></code> entry <em>must</em> be included in the
-<code class="docutils literal"><span class="pre">meta.yaml</span></code>. Unfortunately, the license isn&#8217;t always included in the
+<code class="docutils literal"><span class="pre">meta.yaml</span></code>. Unfortunately, the license isn’t always included in the
 tarball of the source code.</p>
 <p>To get around this, the licence should be put in the recipe directory.
 It can then be refered to in the <code class="docutils literal"><span class="pre">meta.yaml</span></code> via,</p>
@@ -82,7 +79,7 @@ It can then be refered to in the <code class="docutils literal"><span class="pre
 </div>
 <div class="section" id="populating-the-hash-field">
 <h2>Populating the <code class="docutils literal"><span class="pre">hash</span></code> Field<a class="headerlink" href="#populating-the-hash-field" title="Permalink to this headline">¶</a></h2>
-<p>If your package is on PyPI, you can get the md5 hash from your package&#8217;s page
+<p>If your package is on PyPI, you can get the md5 hash from your package’s page
 on PyPI; look for the <code class="docutils literal"><span class="pre">md5</span></code> link next to the download link for your package.</p>
 <p>You can also generate a hash from the command line on Linux (and Mac if you
 install the necessary tools below). If you go this route, the <code class="docutils literal"><span class="pre">sha256</span></code> hash
@@ -117,11 +114,21 @@ not properly specified the first time you build a package, then when you fix the
 dependency and rebuild the package you should increase the build number.</p>
 <p>When the package version changes you should reset the build number to <code class="docutils literal"><span class="pre">0</span></code>.</p>
 </div>
-<div class="section" id="single-verion-externally-managed">
-<h2>Single Verion, Externally Managed<a class="headerlink" href="#single-verion-externally-managed" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="single-version-externally-managed">
+<h2>Single Version, Externally Managed<a class="headerlink" href="#single-version-externally-managed" title="Permalink to this headline">¶</a></h2>
 <p>Many packages use <code class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span> <span class="pre">--single-version-externally-managed</span> <span class="pre">--record</span> <span class="pre">record.txt</span></code></p>
 <p>These options should be added to setup.py if a project uses setuptools. The goal is to prevent <code class="docutils literal"><span class="pre">setuptools</span></code>
 from creating an <code class="docutils literal"><span class="pre">egg-info</span></code> directory because it does not interact well with conda.</p>
+</div>
+<div class="section" id="downloading-extra-sources-and-data-files">
+<h2>Downloading extra sources and data files<a class="headerlink" href="#downloading-extra-sources-and-data-files" title="Permalink to this headline">¶</a></h2>
+<p>If you need additional source/data files for the build, download them using curl in the build script
+and verify the checksum using openssl. Add curl and openssl to the build requirements and then you
+can use curl to download and openssl to verify.</p>
+<p>Example recipe is
+<a class="reference external" href="https://github.com/conda-forge/pari-feedstock/blob/187bb3bdd0a5e35b2ecaa73ed2ceddc4ca0c2f5a/recipe/build.sh#L27-L35">here</a>.</p>
+<p>Upstream issue for allowing multiple source is
+<a class="reference external" href="https://github.com/conda/conda-build/issues/1466">here</a>.</p>
 </div>
 </div>
 
@@ -140,7 +147,8 @@ from creating an <code class="docutils literal"><span class="pre">egg-info</span
 <li><a class="reference internal" href="#excluding-a-platform">Excluding a Platform</a></li>
 <li><a class="reference internal" href="#building-against-numpy">Building Against NumPy</a></li>
 <li><a class="reference internal" href="#build-number">Build Number</a></li>
-<li><a class="reference internal" href="#single-verion-externally-managed">Single Verion, Externally Managed</a></li>
+<li><a class="reference internal" href="#single-version-externally-managed">Single Version, Externally Managed</a></li>
+<li><a class="reference internal" href="#downloading-extra-sources-and-data-files">Downloading extra sources and data files</a></li>
 </ul>
 </li>
 </ul>
@@ -178,8 +186,8 @@ from creating an <code class="docutils literal"><span class="pre">egg-info</span
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
       <a href="_sources/meta.rst.txt"

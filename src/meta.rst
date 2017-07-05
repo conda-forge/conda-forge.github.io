@@ -89,9 +89,22 @@ dependency and rebuild the package you should increase the build number.
 When the package version changes you should reset the build number to ``0``.
 
 
-Single Verion, Externally Managed
----------------------------------
+Single Version, Externally Managed
+----------------------------------
 Many packages use ``python setup.py install --single-version-externally-managed --record record.txt``
 
 These options should be added to setup.py if a project uses setuptools. The goal is to prevent ``setuptools``
 from creating an ``egg-info`` directory because it does not interact well with conda.
+
+
+Downloading extra sources and data files
+----------------------------------------
+If you need additional source/data files for the build, download them using curl in the build script
+and verify the checksum using openssl. Add curl and openssl to the build requirements and then you
+can use curl to download and openssl to verify.
+
+Example recipe is 
+`here <https://github.com/conda-forge/pari-feedstock/blob/187bb3bdd0a5e35b2ecaa73ed2ceddc4ca0c2f5a/recipe/build.sh#L27-L35>`_.
+
+Upstream issue for allowing multiple source is 
+`here <https://github.com/conda/conda-build/issues/1466>`_.

@@ -1,0 +1,146 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>conda-forge ‘gotchas’ &#8212; conda-forge 0.0.1a1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="conda-smithy rerender" href="conda_smithy.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="conda-forge-gotchas">
+<h1>conda-forge ‘gotchas’<a class="headerlink" href="#conda-forge-gotchas" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="using-multiple-channels">
+<h2>Using multiple channels<a class="headerlink" href="#using-multiple-channels" title="Permalink to this headline">¶</a></h2>
+<p>It is quite common to install a package from conda-forge and,
+when trying to use it,
+see an error like (OS X example):</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>ImportError: dlopen<span class="o">(</span>.../site-packages/rpy2/rinterface/_rinterface.so, <span class="m">2</span><span class="o">)</span>: Library not loaded: @rpath/libicuuc.54.dylib
+  Referenced from: .../site-packages/rpy2/rinterface/_rinterface.so
+  Reason: image not found
+</pre></div>
+</div>
+<p>That happens because either the correct version of <cite>icu</cite>,
+or any other package in the error,
+is not present or the package is missing altogether.</p>
+<p>Once can confirm by issuing the command <code class="docutils literal"><span class="pre">conda</span> <span class="pre">list</span></code> and searching for the package in question.</p>
+<div class="section" id="why-that-happens">
+<h3>Why that happens?<a class="headerlink" href="#why-that-happens" title="Permalink to this headline">¶</a></h3>
+<p>The <cite>conda-forge</cite> and <cite>defaults</cite> are not 100% compatible.
+In the example above it is known that <cite>defaults</cite> uses <cite>icu 54.*</cite> while <cite>conda-forge</cite> relies on <cite>icu 56.*</cite>,
+that mismatch can lead to errors when the install environment is mixing packages from multiple channels.</p>
+<p>Note: All of conda-forge software pinning can be found at: <a class="reference external" href="https://github.com/conda-forge/staged-recipes/wiki/Pinned-dependencies">https://github.com/conda-forge/staged-recipes/wiki/Pinned-dependencies</a></p>
+</div>
+<div class="section" id="how-to-fix-it">
+<h3>How to fix it?<a class="headerlink" href="#how-to-fix-it" title="Permalink to this headline">¶</a></h3>
+<p>Newer <cite>conda</cite> versions introduced a channel priority feature.
+See <a class="reference external" href="https://conda.io/docs/channels.html">https://conda.io/docs/channels.html</a> for more information.</p>
+<p>One possible solution is to add the <cite>conda-forge</cite> channel on top of <cite>defaults</cite> in your <cite>condarc</cite> file when using <cite>conda-forge</cite> packages.
+This will ensuring that all the dependencies will come from the <cite>conda-forge</cite> channel.
+Here is how a <cite>.condarc</cite> file would look like:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>$ cat .condarc
+channels:
+  - conda-forge
+  - defaults
+</pre></div>
+</div>
+<p>In addition to the channel priority we recommend to always install your packages inside a new environment instead the root environment from anaconda/miniconda.
+Using envs make it easier to debug problems with packages and ensure the stability of your root env.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">conda-forge ‘gotchas’</a><ul>
+<li><a class="reference internal" href="#using-multiple-channels">Using multiple channels</a><ul>
+<li><a class="reference internal" href="#why-that-happens">Why that happens?</a></li>
+<li><a class="reference internal" href="#how-to-fix-it">How to fix it?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="conda_smithy.html" title="previous chapter">conda-smithy rerender</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/conda-forge_gotchas.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, conda-forge.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/conda-forge_gotchas.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

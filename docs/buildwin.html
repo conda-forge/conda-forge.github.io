@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Building on Windows &#8212; conda-forge 0.0.1a1 documentation</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -35,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -83,7 +80,7 @@ nmake install
 <p>Conda builds Windows packages with features as a means of keeping the Visual Studio version (<code class="docutils literal"><span class="pre">vc</span></code>) used to build packages uniform across a given Python version.</p>
 <p>Rule of thumb:</p>
 <ul class="simple">
-<li>if it&#8217;s a shared library that something other than Python will use, you only need python in build to activate features. You need the features block;</li>
+<li>if it’s a shared library that something other than Python will use, you only need python in build to activate features. You need the features block;</li>
 <li>if it is a shared library that is tied to a Python API (e.g. Boost Python), you need BOTH, and the features block;</li>
 <li>if it is a library that has compiled content, but is used only from Python, you need Python in both build and runtime requirements, but you do NOT need the features block.</li>
 </ul>
@@ -161,8 +158,8 @@ nmake install
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
       <a href="_sources/buildwin.rst.txt"

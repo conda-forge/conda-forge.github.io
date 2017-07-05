@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Guidelines &#8212; conda-forge 0.0.1a1 documentation</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -35,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -45,14 +42,16 @@
             
   <div class="section" id="guidelines">
 <h1>Guidelines<a class="headerlink" href="#guidelines" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="transferring-to-conda-forge">
+<h2>Transferring to conda-forge<a class="headerlink" href="#transferring-to-conda-forge" title="Permalink to this headline">¶</a></h2>
 <p>This document intends to layout some guidelines on the transfer of
 <a class="reference external" href="https://github.com/conda/conda-recipes">conda-recipes</a> and
 <a class="reference external" href="https://github.com/ContinuumIO/anaconda-recipes">anaconda-recipes</a>
-to conda-forge. These aren&#8217;t hard and fast rules. They are certainly up
+to conda-forge. These aren’t hard and fast rules. They are certainly up
 for discussion. However, it would be good to come up with a consensus
 going forward.</p>
 <p>Eventually all recipes from those repos should be proposed for
-addition here. It may be decided that a few don&#8217;t actually belong or
+addition here. It may be decided that a few don’t actually belong or
 should not be supported anymore.</p>
 <p>When adding a package from either location, inspect the commit history
 to see who has made changes to the recipe in the past. Anyone who has
@@ -93,17 +92,40 @@ help or version). It is suggested that compiled code run all tests (e.g.
 <code class="docutils literal"><span class="pre">make</span> <span class="pre">check</span></code>) to ensure it was built properly. This normally should
 happen in the build.</p>
 </div>
+<div class="section" id="intended-usage">
+<h2>Intended Usage<a class="headerlink" href="#intended-usage" title="Permalink to this headline">¶</a></h2>
+<p>Maintainers’ time and CI resources are what enable conda-forge. They are as scarce as they are valuable. conda-forge has enough capacity to support releasing packages, but not developing them.</p>
+<p>Publishing a package to conda-forge signals it is suitable for users not involved with development. However, publishing does not always happen error-free. Multiple commits are acceptable when debugging issues with the release process itself.</p>
+<dl class="docutils">
+<dt>Fortunately, there are options for optimizing the development of a package.</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="https://github.com/conda-forge/conda-smithy">conda-smithy</a> is a tool used by conda-forge itself to manage feedstocks. conda-smithy can be used to create an internal development feedstock that is seperate from conda-forge.</li>
+<li><a class="reference external" href="https://github.com/astropy/ci-helpers">ci-helpers</a> is a set of scripts that drive various CI services using environment variables.</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
 
 
           </div>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Guidelines</a><ul>
+<li><a class="reference internal" href="#transferring-to-conda-forge">Transferring to conda-forge</a></li>
+<li><a class="reference internal" href="#intended-usage">Intended Usage</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Welcome to conda-forge&#8217;s documentation!</a></li>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to conda-forge’s documentation!</a></li>
       <li>Next: <a href="recipe.html" title="next chapter">Creating Conda Recipes</a></li>
   </ul></li>
 </ul>
@@ -133,8 +155,8 @@ happen in the build.</p>
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
       <a href="_sources/guidelines.rst.txt"

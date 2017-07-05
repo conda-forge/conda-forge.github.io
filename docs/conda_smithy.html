@@ -1,0 +1,144 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>conda-smithy rerender &#8212; conda-forge 0.0.1a1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="conda-forge ‘gotchas’" href="conda-forge_gotchas.html" />
+    <link rel="prev" title="CI Services" href="ciservices.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="conda-smithy-rerender">
+<h1>conda-smithy rerender<a class="headerlink" href="#conda-smithy-rerender" title="Permalink to this headline">¶</a></h1>
+<p>conda-forge  uses <code class="docutils literal"><span class="pre">conda-smithy</span></code> to re-render the feedstock and update the feedstock configuration.
+This action updates the <code class="docutils literal"><span class="pre">README</span></code>, CI configuration, the build matrix,
+fix problems with the feedstock configuration, etc.</p>
+<p>The bot issues re-rendering PRs every now and then,
+but sometimes the users may need to issue them manually instead waiting for the bot.
+Here is how, and when, to re-render.</p>
+<div class="section" id="how-to-re-render">
+<h2>How to re-render?<a class="headerlink" href="#how-to-re-render" title="Permalink to this headline">¶</a></h2>
+<p>First step is to install <code class="docutils literal"><span class="pre">conda-smithy</span></code> in your root environment</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>conda install -c conda-forge conda-smithy
+</pre></div>
+</div>
+<p>now, from the root directory of the feedstock, type:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>conda smithy rerender <span class="o">[</span>--commit <span class="o">{</span>edit<span class="p">|</span>auto<span class="o">}]</span>
+</pre></div>
+</div>
+<p>and commit the changes!</p>
+<p>Optionally one can commit the changes automatically.
+To do this use the <code class="docutils literal"><span class="pre">--commit</span></code>/<code class="docutils literal"><span class="pre">-c</span></code> option. By default, conda-smithy
+will have git open an editor to write the commit message.
+It will also provide a default commit message and
+show the changes to be added. If you wish to do this automatically,
+please just use <code class="docutils literal"><span class="pre">--commit</span> <span class="pre">auto</span></code>/<code class="docutils literal"><span class="pre">-c</span> <span class="pre">auto</span></code> and it will commit with
+the stock re-rendering message.</p>
+<p>Note that you may get a warning message regarding the tokens.
+It is safe to ignore that as they are not needed for re-rendering.</p>
+</div>
+<div class="section" id="when-should-we-re-render">
+<h2>When should we re-render?<a class="headerlink" href="#when-should-we-re-render" title="Permalink to this headline">¶</a></h2>
+<p>We need to re-render when there are changes the following parts of the feedstock:</p>
+<ul class="simple">
+<li>the <code class="docutils literal"><span class="pre">yum_requirements.txt</span></code>;</li>
+<li>the platform configuration (<code class="docutils literal"><span class="pre">skip</span></code> sections);</li>
+<li>build issues that a feedstock configuration update will fix (follow us on <a class="reference external" href="https://gitter.im/conda-forge/conda-forge.github.io">gitter</a> to know about those);</li>
+<li>updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">conda-smithy rerender</a><ul>
+<li><a class="reference internal" href="#how-to-re-render">How to re-render?</a></li>
+<li><a class="reference internal" href="#when-should-we-re-render">When should we re-render?</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ciservices.html" title="previous chapter">CI Services</a></li>
+      <li>Next: <a href="conda-forge_gotchas.html" title="next chapter">conda-forge ‘gotchas’</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/conda_smithy.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, conda-forge.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/conda_smithy.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

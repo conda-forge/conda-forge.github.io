@@ -1,6 +1,9 @@
 Guidelines
 **********
 
+Transferring to conda-forge
+===========================
+
 This document intends to layout some guidelines on the transfer of
 `conda-recipes <https://github.com/conda/conda-recipes>`__ and
 `anaconda-recipes <https://github.com/ContinuumIO/anaconda-recipes>`__
@@ -52,3 +55,14 @@ code snippet to compile or run a basic test, command line usage (checking
 help or version). It is suggested that compiled code run all tests (e.g.
 ``make check``) to ensure it was built properly. This normally should
 happen in the build.
+
+Intended Usage
+==============
+
+Maintainers' time and CI resources are what enable conda-forge. They are as scarce as they are valuable. conda-forge has enough capacity to support releasing packages, but not developing them.
+
+Publishing a package to conda-forge signals it is suitable for users not involved with development. However, publishing does not always happen error-free. Multiple commits are acceptable when debugging issues with the release process itself.
+
+Fortunately, there are options for optimizing the development of a package. 
+  - `conda-smithy <https://github.com/conda-forge/conda-smithy>`__ is a tool used by conda-forge itself to manage feedstocks. conda-smithy can be used to create an internal development feedstock that is seperate from conda-forge.
+  - `ci-helpers <https://github.com/astropy/ci-helpers>`__ is a set of scripts that drive various CI services using environment variables.
