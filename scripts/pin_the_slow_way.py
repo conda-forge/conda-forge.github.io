@@ -52,11 +52,13 @@ pinned = {
           'hdf5': 'hdf5 1.8.18|1.8.18.*',  # 1.8.17
           'icu': 'icu 58.*',  # 54.1
           'jpeg': 'jpeg 9*',  # 9b (but defaults is probably using 8d)
+          'krb5': 'krb5 1.14.*',  # 1.13.2
           'libblitz': 'libblitz 0.10|0.10.*',  # NA
           'libevent': 'libevent 2.0.22',  # 2.0.22
           'libmatio': 'libmatio 1.5.*',  # NA
           'libnetcdf': 'libnetcdf 4.4.*',  # 4.4.1
           'libpng': 'libpng >=1.6.28,<1.7',  # 1.6.27
+          'libssh2': 'libssh2 1.8.*',  # 1.8.0
           'libsvm': 'libsvm 3.21|3.21.*',  # NA
           'libtiff': 'libtiff >=4.0.3,<4.0.8',  # 4.0.6
           'libxml2': 'libxml2 2.9.*',  # 2.9.4
