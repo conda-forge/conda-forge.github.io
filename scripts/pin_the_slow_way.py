@@ -52,6 +52,7 @@ pinned = {
           'hdf5': 'hdf5 1.8.18|1.8.18.*',  # 1.8.17
           'icu': 'icu 58.*',  # 54.1
           'jpeg': 'jpeg 9*',  # 9b (but defaults is probably using 8d)
+          'json-c': 'json-c 0.12|0.12.*',  # NA
           'krb5': 'krb5 1.14.*',  # 1.13.2
           'libblitz': 'libblitz 0.10|0.10.*',  # NA
           'libevent': 'libevent 2.0.22',  # 2.0.22
