@@ -55,6 +55,7 @@ pinned = {
           'krb5': 'krb5 1.14.*',  # 1.13.2
           'libblitz': 'libblitz 0.10|0.10.*',  # NA
           'libevent': 'libevent 2.0.22',  # 2.0.22
+          'libgdal': 'libgdal 2.1.*',  # 2.1.0
           'libmatio': 'libmatio 1.5.*',  # NA
           'libnetcdf': 'libnetcdf 4.4.*',  # 4.4.1
           'libpng': 'libpng >=1.6.28,<1.7',  # 1.6.27
