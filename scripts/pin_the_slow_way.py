@@ -75,6 +75,7 @@ pinned = {
           'pango': 'pango 1.40.*',  # 1.40.3
           'pixman': 'pixman 0.34.*',  # 0.34.0
           'proj4': 'proj4 4.9.3',  # 4.9.2
+          'protobuf': 'protobuf 3.4.*',  # 3.2.0
           'pyqt': 'pyqt 5.6.*',  # 5.6.0
           'qt': 'qt 5.6.*',  # 5.6.2
           'readline': 'readline 6.2*',  # 6.2
