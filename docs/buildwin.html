@@ -57,7 +57,11 @@ build for such projects.</p>
 <span class="k">cd</span> build
 
 <span class="p">:</span><span class="c1">: Configure using the CMakeFiles</span>
-<span class="nv">%LIBRARY_BIN%</span>\cmake -G <span class="s2">&quot;NMake Makefiles&quot;</span> -DCMAKE_INSTALL_PREFIX:PATH=<span class="s2">&quot;</span><span class="nv">%LIBRARY_PREFIX%</span><span class="s2">&quot;</span> -DCMAKE_BUILD_TYPE:STRING=Release ..
+cmake -G <span class="s2">&quot;NMake Makefiles&quot;</span> <span class="se">^</span>
+<span class="se"> </span>     -DCMAKE_INSTALL_PREFIX:PATH=<span class="s2">&quot;</span><span class="nv">%LIBRARY_PREFIX%</span><span class="s2">&quot;</span> <span class="se">^</span>
+<span class="se"> </span>     -DCMAKE_PREFIX_PATH:PATH=<span class="s2">&quot;</span><span class="nv">%LIBRARY_PREFIX%</span><span class="s2">&quot;</span> <span class="se">^</span>
+<span class="se"> </span>     -DCMAKE_BUILD_TYPE:STRING=Release <span class="se">^</span>
+<span class="se"> </span>     ..
 <span class="k">if</span> <span class="k">errorlevel</span> <span class="mi">1</span> <span class="k">exit</span> 1
 
 <span class="p">:</span><span class="c1">: Build!</span>
