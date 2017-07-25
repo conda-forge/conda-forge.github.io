@@ -24,9 +24,8 @@ On Windows, use the ``exist`` command. See below for an example.
 
     test:
       commands:
-        - test -f $PREFIX/lib/libboost_log.dylib  # [osx]
-        - test -f $PREFIX/lib/libboost_log.so     # [linux]
-        - if not exist %PREFIX%\\Library\\lib\\boost_log-vc140-mt.lib exit 1  # [win and py35]
+        - test -f $PREFIX/lib/libboost_log$SHLIB_EXT  # [unix]
+        - if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1  # [win and py35]
 
 
 Run Docker Tests Locally for Feedstock
