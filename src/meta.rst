@@ -73,10 +73,23 @@ A full description of selectors is
 
 Building Against NumPy
 ----------------------
-If you have a package which links against numpy you need to build and run against
-the same version of numpy. Putting ``numpy x.x`` in the build and run requirements
-ensures that a separate package will be built for each version of numpy that
-conda-forge builds against.
+If you have a package which links\* against numpy you need to build against the oldest possible version of numpy that is forwards compatible.
+That can be achieved by pinning the build requirements and letting "free" the run requirements.
+At the moment these are the oldest available numpy versions in conda-forge that you can use:
+
+.. code-block:: yaml
+
+build:
+  - numpy 1.7.*  # [py27]
+  - numpy 1.9.*  # [py35]
+  - numpy 1.11.*  # [py36]
+run:
+  - numpy >=1.7  # [py27]
+  - numpy >=1.9  # [py35]
+  - numpy >=1.11  # [py36]
+
+\* In order to know if your package links against numpy check for things like ``numpy.get_include()`` in your ``setup.py``,
+or if the package uses ``cimport``.
 
 
 Build Number
@@ -103,8 +116,8 @@ If you need additional source/data files for the build, download them using curl
 and verify the checksum using openssl. Add curl and openssl to the build requirements and then you
 can use curl to download and openssl to verify.
 
-Example recipe is 
+Example recipe is
 `here <https://github.com/conda-forge/pari-feedstock/blob/187bb3bdd0a5e35b2ecaa73ed2ceddc4ca0c2f5a/recipe/build.sh#L27-L35>`_.
 
-Upstream issue for allowing multiple source is 
+Upstream issue for allowing multiple source is
 `here <https://github.com/conda/conda-build/issues/1466>`_.
