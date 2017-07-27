@@ -101,10 +101,30 @@ is preferable to the <code class="docutils literal"><span class="pre">md5</span>
 </div>
 <div class="section" id="building-against-numpy">
 <h2>Building Against NumPy<a class="headerlink" href="#building-against-numpy" title="Permalink to this headline">¶</a></h2>
-<p>If you have a package which links against numpy you need to build and run against
-the same version of numpy. Putting <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">x.x</span></code> in the build and run requirements
-ensures that a separate package will be built for each version of numpy that
-conda-forge builds against.</p>
+<p>If you have a package which links* against numpy you need to build against the oldest possible version of numpy that is forwards compatible.
+That can be achieved by pinning the build requirements and letting “free” the run requirements.
+At the moment these are the oldest available numpy versions in conda-forge that you can use:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>build:</dt>
+<dd><ul class="first last simple">
+<li>numpy 1.7.*  # [py27]</li>
+<li>numpy 1.9.*  # [py35]</li>
+<li>numpy 1.11.*  # [py36]</li>
+</ul>
+</dd>
+<dt>run:</dt>
+<dd><ul class="first last simple">
+<li>numpy &gt;=1.7  # [py27]</li>
+<li>numpy &gt;=1.9  # [py35]</li>
+<li>numpy &gt;=1.11  # [py36]</li>
+</ul>
+</dd>
+</dl>
+<p>* In order to know if your package links against numpy check for things like <code class="docutils literal"><span class="pre">numpy.get_include()</span></code> in your <code class="docutils literal"><span class="pre">setup.py</span></code>,
+or if the package uses <code class="docutils literal"><span class="pre">cimport</span></code>.</p>
 </div>
 <div class="section" id="build-number">
 <h2>Build Number<a class="headerlink" href="#build-number" title="Permalink to this headline">¶</a></h2>
