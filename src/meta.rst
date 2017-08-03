@@ -73,22 +73,24 @@ A full description of selectors is
 
 Building Against NumPy
 ----------------------
-If you have a package which links\* against numpy you need to build against the oldest possible version of numpy that is forwards compatible.
+If you have a package which links\* against ``numpy`` you can build against the oldest possible version of ``numpy`` that is forwards compatible.
 That can be achieved by pinning the build requirements and letting "free" the run requirements.
-At the moment these are the oldest available numpy versions in conda-forge that you can use:
+At the moment these are the oldest available ``numpy`` versions in conda-forge that you can use:
 
 .. code-block:: yaml
 
 build:
-  - numpy 1.7.*  # [py27]
-  - numpy 1.9.*  # [py35]
-  - numpy 1.11.*  # [py36]
+  - numpy 1.8.*  # [not (win and py36)]
+  - numpy 1.11.*  # [win and py36]
 run:
-  - numpy >=1.7  # [py27]
-  - numpy >=1.9  # [py35]
-  - numpy >=1.11  # [py36]
+  - numpy >=1.8  # [not (win and py36)]
+  - numpy >=1.11  # [win and py36]
 
-\* In order to know if your package links against numpy check for things like ``numpy.get_include()`` in your ``setup.py``,
+We will add older versions for ``Python 3.6`` on Windows soon.
+Note that you still need to respect the package minimum supported version of ``numpy``!
+That means you cannot use ``numpy 1.8`` if the project requires at least ``numpy 1.9``.
+
+\* In order to know if your package links against ``numpy`` check for things like ``numpy.get_include()`` in your ``setup.py``,
 or if the package uses ``cimport``.
 
 
