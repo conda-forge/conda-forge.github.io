@@ -66,3 +66,12 @@ Publishing a package to conda-forge signals it is suitable for users not involve
 Fortunately, there are options for optimizing the development of a package. 
   - `conda-smithy <https://github.com/conda-forge/conda-smithy>`__ is a tool used by conda-forge itself to manage feedstocks. conda-smithy can be used to create an internal development feedstock that is seperate from conda-forge.
   - `ci-helpers <https://github.com/astropy/ci-helpers>`__ is a set of scripts that drive various CI services using environment variables.
+
+Renaming Packages
+=================
+
+Sometimes packages are misnamed. To correct the name of the package, just
+change the name of the package in the ``recipe.yaml`` and rerender with
+``conda smithy rerender``. Note that this will not change the name of the repo
+and that the package with the old name will still exist. Please contact a
+member of conda-forge/core to remove the old package.
