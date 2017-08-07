@@ -79,12 +79,12 @@ At the moment these are the oldest available ``numpy`` versions in conda-forge t
 
 .. code-block:: yaml
 
-build:
-  - numpy 1.8.*  # [not (win and py36)]
-  - numpy 1.11.*  # [win and py36]
-run:
-  - numpy >=1.8  # [not (win and py36)]
-  - numpy >=1.11  # [win and py36]
+    build:
+      - numpy 1.8.*  # [not (win and py36)]
+      - numpy 1.11.*  # [win and py36]
+    run:
+      - numpy >=1.8  # [not (win and py36)]
+      - numpy >=1.11  # [win and py36]
 
 We will add older versions for ``Python 3.6`` on Windows soon.
 Note that you still need to respect the package minimum supported version of ``numpy``!
