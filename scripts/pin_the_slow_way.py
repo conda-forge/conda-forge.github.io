@@ -62,6 +62,7 @@ pinned = {
           'libssh2': 'libssh2 1.8.*',  # 1.8.0
           'libsvm': 'libsvm 3.21|3.21.*',  # NA
           'libtiff': 'libtiff >=4.0.3,<4.0.8',  # 4.0.6
+          'libwebp': 'libwebp 0.5.*',  # 0.5.0 https://abi-laboratory.pro/tracker/timeline/libwebp/
           'libxml2': 'libxml2 2.9.*',  # 2.9.4
           'lzo': 'lzo 2.*',  # 2.06
           'metis': 'metis 5.1.*',  # NA
