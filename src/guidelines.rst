@@ -49,6 +49,21 @@ all links to compressed source balls allow for easy changing of the version
 (using latest is not acceptable). Also, a checksum should be included with
 all compressed source balls to allow for verification of downloads.
 
+It is possible but not recommendable to include multiple recipes into a
+single pull request. Within staged-recipes we use a tool called conda-build-all.
+This tool scans through the recipes, figures out what needs to be built, figures
+out what combinations needed to build, and figures out what order to build everything
+in. So this tool can handle building multiple recipes correctly. That said, there are
+limitations on the continuous integration resources. Though, and this is arguably more
+important, there are practical limits on what reviewers are able/willing to do. A large
+pull request with many recipes makes it more difficult to review. If the recipes make
+it through these two constraints and get merged, race conditions amongst the different
+feedstocks kick in meaning work by you and/or core to restart them in such a way to build
+everything. None of this is to say that one can't add multiple recipes in a single
+pull request. One certainly can do this and it can work. However there are trade-offs that
+may make it less desirable. In practice, having a couple of recipes (e.g. 2 or 3) in
+a pull request normally works fine.
+
 It is required to add tests with all packages. These can included but are
 not limited to checking libraries are installed, python imports, simple
 code snippet to compile or run a basic test, command line usage (checking
