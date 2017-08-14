@@ -70,8 +70,4 @@ Fortunately, there are options for optimizing the development of a package.
 Renaming Packages
 =================
 
-Sometimes packages are misnamed. To correct the name of the package, just
-change the name of the package in the ``recipe.yaml`` and rerender with
-``conda smithy rerender``. Note that this will not change the name of the repo
-and that the package with the old name will still exist. Please contact a
-member of conda-forge/core to remove the old package.
+Sometimes packages are misnamed. To correct the name of the package, please submit a PR into staged-recipes with the correct name. During the review process please make certain to note that the package is a rename and contact a member of conda-forge/core to remove the old package.
