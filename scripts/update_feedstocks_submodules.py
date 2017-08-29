@@ -4,6 +4,7 @@
 # env:
 #  - git
 #  - python
+#  - conda 4.3.22
 #  - conda-smithy
 #  - gitpython
 # channels:
