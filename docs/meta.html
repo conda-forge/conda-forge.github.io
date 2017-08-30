@@ -105,18 +105,22 @@ is preferable to the <code class="docutils literal"><span class="pre">md5</span>
 That can be achieved by pinning the build requirements and letting “free” the run requirements.
 At the moment these are the oldest available <code class="docutils literal"><span class="pre">numpy</span></code> versions in conda-forge that you can use:</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.8.*</span>  <span class="c1"># [not (win and py36)]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.11.*</span>  <span class="c1"># [win and py36]</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.8.*</span>  <span class="c1"># [not (win and (py35 or py36))]</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.9.*</span>  <span class="c1"># [win and (py35 or py36)]</span>
 <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy &gt;=1.8</span>  <span class="c1"># [not (win and py36)]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy &gt;=1.11</span>  <span class="c1"># [win and py36]</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy &gt;=1.8</span>  <span class="c1"># [not (win and (py35 or py36))]</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy &gt;=1.9</span>  <span class="c1"># [win and (py35 or py36)]</span>
 </pre></div>
 </div>
 <p>We will add older versions for <code class="docutils literal"><span class="pre">Python</span> <span class="pre">3.6</span></code> on Windows soon.
-Note that you still need to respect the package minimum supported version of <code class="docutils literal"><span class="pre">numpy</span></code>!
-That means you cannot use <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.8</span></code> if the project requires at least <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.9</span></code>.</p>
+That will allow us to simplify the minimum <code class="docutils literal"><span class="pre">numpy</span></code> to <code class="docutils literal"><span class="pre">1.8</span></code> across all platforms and Python versions.</p>
+<p>CAVEAT: note that you still need to respect minimum supported version of <code class="docutils literal"><span class="pre">numpy</span></code> for the package!
+That means you cannot use <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.8</span></code> if the project requires at least <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.9</span></code>,
+adjust the minimum version accordingly!</p>
 <p>* In order to know if your package links against <code class="docutils literal"><span class="pre">numpy</span></code> check for things like <code class="docutils literal"><span class="pre">numpy.get_include()</span></code> in your <code class="docutils literal"><span class="pre">setup.py</span></code>,
 or if the package uses <code class="docutils literal"><span class="pre">cimport</span></code>.</p>
+<p>PS: if your package supports <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.7</span></code>, and you are brave enough :-),
+there are <code class="docutils literal"><span class="pre">numpy</span></code> packages for <code class="docutils literal"><span class="pre">1.7</span></code> available for Python 3.4 and 2.7 in the channel.</p>
 </div>
 <div class="section" id="build-number">
 <h2>Build Number<a class="headerlink" href="#build-number" title="Permalink to this headline">¶</a></h2>
