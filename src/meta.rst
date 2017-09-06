@@ -99,6 +99,26 @@ or if the package uses ``cimport``.
 PS: if your package supports ``numpy 1.7``, and you are brave enough :-),
 there are ``numpy`` packages for ``1.7`` available for Python 3.4 and 2.7 in the channel.
 
+Building ``noarch`` packages
+----------------------------
+
+The ``noarch: python`` can be used to build pure Python packages:
+
+* that do not perform any Python version specific code translation at install time (i.e. 2to3);
+* and have fixed requirements (i.e. no ``backports``....   # [py27]).
+
+The use of ``noarch: python`` will drastically reduce the CI usage b/c the package will be built
+only once on ``CircleCI``.
+
+To use that just add ``noarch: python`` in the build section like,
+
+.. code-block:: yaml
+
+    build:
+      noarch: python
+
+and re-render with the feedstock with ``conda-smithy`` >=2.4.0
+
 
 Build Number
 ------------
