@@ -28,6 +28,9 @@ install:
     - git config --global user.email conda.forge.coordinator@gmail.com
     - mkdir -p ~/.conda-smithy && echo $GH_TOKEN > ~/.conda-smithy/github.token
 
+    # Update conda.
+    - conda update --yes --quiet conda
+
     # Configure conda.
     - conda config --set show_channel_urls true
     - conda config --set auto_update_conda false
