@@ -308,6 +308,9 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
                     for name, pin in pinned.items():
                         dep_split = dep.split(' ', 1)
                         actual_name = dep_split[0]
+                        # skip star pins: https://github.com/conda-forge/conda-forge.github.io/issues/270
+                        if len(dep_split) > 1 and dep_split[1] == '*':
+                            continue
                         if re.match(r'^\s*%s\s*' % name, actual_name) and dep != pin:
                             replacements['- ' + str(dep)] = '- ' + pin
             if replacements:
