@@ -37,6 +37,7 @@ import conda_smithy.feedstocks as feedstocks
 # As showed by https://abi-laboratory.pro/tracker/timeline/gmp/ binaries built with 6.1.0 are not
 # compatible with 5.0.1 (the other way around would be true).
 pinned = {
+          'arpack': 'arpack 3.5.*',  # NA
           'boost': 'boost 1.65.1',  # 1.61.0
           'boost-cpp': 'boost-cpp 1.65.1',  # NA
           'bzip2': 'bzip2 1.0.*',  # 1.0.6
