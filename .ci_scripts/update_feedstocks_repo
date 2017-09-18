@@ -5,8 +5,9 @@
 set -e
 
 if [ -n "$GH_TOKEN" ]; then
+    conda install conda-smithy git gitpython pygithub six conda-build -c conda-forge
     git clone https://${GH_TOKEN}@github.com/conda-forge/feedstocks.git feedstocks_repo
-    conda execute -v ./scripts/update_feedstocks_submodules.py ./feedstocks_repo
+    python scripts/update_feedstocks_submodules.py ./feedstocks_repo
     cd ./feedstocks_repo
 
     # Update to avoid race-conditions.
@@ -15,6 +16,6 @@ if [ -n "$GH_TOKEN" ]; then
     cd ../
 
     echo "Updating the teams"
-    conda execute -v ./scripts/update_teams.py ./feedstocks_repo/feedstocks
+    python scripts/update_teams.py ./feedstocks_repo/feedstocks
 fi
 
