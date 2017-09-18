@@ -65,4 +65,4 @@ BLAS & Numpy & Friends
 -  SciPy, scikit-learn, etc. package
 
    -  Same thing as NumPy
-   -  Add x.x for numpy dependency
+   -  Add numpy dependency as if linking occurs
