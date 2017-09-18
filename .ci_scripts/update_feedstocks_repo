@@ -16,6 +16,6 @@ if [ -n "$GH_TOKEN" ]; then
     cd ../
 
     echo "Updating the teams"
-    pytho scripts/update_teams.py ./feedstocks_repo/feedstocks
+    python scripts/update_teams.py ./feedstocks_repo/feedstocks
 fi
 
