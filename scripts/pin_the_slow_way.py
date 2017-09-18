@@ -72,6 +72,7 @@ pinned = {
           'ncurses': 'ncurses 5.9',  # 5.9
           'netcdf-cxx4': 'netcdf-cxx4 4.3.*',  # NA
           'netcdf-fortran': 'netcdf-fortran 4.4.*',  #
+          'nettle': 'nettle 3.3|3.3.*',  # NA
           'openblas': 'openblas 0.2.19|0.2.19.*',  # 0.2.19
           'openssl': 'openssl 1.0.*',  # 1.0.2k
           'pango': 'pango 1.40.*',  # 1.40.3
