@@ -122,6 +122,27 @@ or if the package uses <code class="docutils literal"><span class="pre">cimport<
 <p>PS: if your package supports <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.7</span></code>, and you are brave enough :-),
 there are <code class="docutils literal"><span class="pre">numpy</span></code> packages for <code class="docutils literal"><span class="pre">1.7</span></code> available for Python 3.4 and 2.7 in the channel.</p>
 </div>
+<div class="section" id="building-noarch-packages">
+<h2>Building <code class="docutils literal"><span class="pre">noarch</span></code> packages<a class="headerlink" href="#building-noarch-packages" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">noarch:</span> <span class="pre">python</span></code> can be used to build pure Python packages:</p>
+<ul class="simple">
+<li>that do not perform any Python version specific code translation at install time (i.e. 2to3);</li>
+<li>and have fixed requirements; that is to say no conditional dependencies
+depending on the Python version, or the platform ran. (If you have for example
+<code class="docutils literal"><span class="pre">backports</span> <span class="pre">#</span> <span class="pre">[py27])</span></code> in the <code class="docutils literal"><span class="pre">run</span></code> section of <code class="docutils literal"><span class="pre">meta.yml</span></code>, your package
+can’t be noarch, yet).</li>
+</ul>
+<p>The use of <code class="docutils literal"><span class="pre">noarch:</span> <span class="pre">python</span></code> will drastically reduce the CI usage as the
+package will be built only once on <code class="docutils literal"><span class="pre">CircleCI</span></code>, which will make your build much</p>
+<blockquote>
+<div>faster, and free resources for other packages !</div></blockquote>
+<p>To use that just add <code class="docutils literal"><span class="pre">noarch:</span> <span class="pre">python</span></code> in the build section like,</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">noarch</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+</pre></div>
+</div>
+<p>and re-render with the feedstock with <code class="docutils literal"><span class="pre">conda-smithy</span></code> &gt;=2.4.0</p>
+</div>
 <div class="section" id="build-number">
 <h2>Build Number<a class="headerlink" href="#build-number" title="Permalink to this headline">¶</a></h2>
 <p>The build number is used when the source code for the package has not changed but you
@@ -162,6 +183,7 @@ can use curl to download and openssl to verify.</p>
 <li><a class="reference internal" href="#populating-the-hash-field">Populating the <code class="docutils literal"><span class="pre">hash</span></code> Field</a></li>
 <li><a class="reference internal" href="#excluding-a-platform">Excluding a Platform</a></li>
 <li><a class="reference internal" href="#building-against-numpy">Building Against NumPy</a></li>
+<li><a class="reference internal" href="#building-noarch-packages">Building <code class="docutils literal"><span class="pre">noarch</span></code> packages</a></li>
 <li><a class="reference internal" href="#build-number">Build Number</a></li>
 <li><a class="reference internal" href="#single-version-externally-managed">Single Version, Externally Managed</a></li>
 <li><a class="reference internal" href="#downloading-extra-sources-and-data-files">Downloading extra sources and data files</a></li>
