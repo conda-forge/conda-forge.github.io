@@ -14,6 +14,7 @@ Contents:
    guidelines
    recipe
    meta
+   blas
    buildwin
    testing
    ciservices
