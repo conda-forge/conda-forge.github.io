@@ -133,9 +133,8 @@ depending on the Python version, or the platform ran. (If you have for example
 can’t be noarch, yet).</li>
 </ul>
 <p>The use of <code class="docutils literal"><span class="pre">noarch:</span> <span class="pre">python</span></code> will drastically reduce the CI usage as the
-package will be built only once on <code class="docutils literal"><span class="pre">CircleCI</span></code>, which will make your build much</p>
-<blockquote>
-<div>faster, and free resources for other packages !</div></blockquote>
+package will be built only once on <code class="docutils literal"><span class="pre">CircleCI</span></code>, which will make your build much
+faster, and free resources for other packages !</p>
 <p>To use that just add <code class="docutils literal"><span class="pre">noarch:</span> <span class="pre">python</span></code> in the build section like,</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">noarch</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
