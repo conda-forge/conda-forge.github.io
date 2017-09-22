@@ -115,7 +115,7 @@ The ``noarch: python`` can be used to build pure Python packages:
 
 The use of ``noarch: python`` will drastically reduce the CI usage as the
 package will be built only once on ``CircleCI``, which will make your build much
- faster, and free resources for other packages !
+faster, and free resources for other packages !
 
 To use that just add ``noarch: python`` in the build section like,
 
