@@ -20,6 +20,7 @@ Contents:
    ciservices
    conda_smithy
    conda-forge_gotchas
+   webservice
 
 
 Indices and tables
