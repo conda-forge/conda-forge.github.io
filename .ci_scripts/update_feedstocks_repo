@@ -13,9 +13,5 @@ if [ -n "$GH_TOKEN" ]; then
     # Update to avoid race-conditions.
     git fetch origin 2> /dev/null && git rebase origin/master
     git push origin master 2> /dev/null
-    cd ../
-
-    echo "Updating the teams"
-    python scripts/update_teams.py ./feedstocks_repo/feedstocks
 fi
 
