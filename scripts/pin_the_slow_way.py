@@ -82,7 +82,7 @@ pinned = {
           'pyqt': 'pyqt 5.6.*',  # 5.6.0
           'qt': 'qt 5.6.*',  # 5.6.2
           'readline': 'readline 6.2*',  # 6.2
-          'snappy': 'snappy 1.1.6',  # 1.1.6
+          'snappy': 'snappy 1.1.6|1.1.7',  # 1.1.6
           'sox': 'sox 14.4.2',  # NA
           'sqlite': 'sqlite 3.13.*',  # 3.13.0
           'tk': 'tk 8.5.*',  # 8.5.18
