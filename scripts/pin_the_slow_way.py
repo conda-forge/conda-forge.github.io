@@ -308,7 +308,12 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
 
                 for pos, dep in enumerate(section):
                     for name, pin in pinned.items():
-                        if re.match(r"^\s*%s\s*$" % name, dep) and dep != pin:
+                        dep_split = dep.split(' ', 1)
+                        actual_name = dep_split[0]
+                        # skip star pins: https://github.com/conda-forge/conda-forge.github.io/issues/270
+                        if len(dep_split) > 1 and dep_split[1] == '*':
+                            continue
+                        if re.match(r'^\s*%s\s*' % name, actual_name) and dep != pin:
                             replacements['- ' + str(dep)] = '- ' + pin
             if replacements:
                 current_build_number = recipe['build']['number']
@@ -317,8 +322,10 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
             for orig, new in replacements.items():
                 content = re.sub(
                     # Use capture groups to get the indentation correct.
-                    r"(^\s*)%s(\s*)$" % orig,
-                    r"\1%s\2" % new,
+                    # (|#.*) replaces (#.*)? to circumvent the "unmatched group" error
+                    # see: https://bugs.python.org/issue1519638
+                    r'(^\s*)%s(\s*)(|#.*)$' % re.escape(orig),
+                    r'\1%s\2\3' % new,
                     content,
                     flags=re.MULTILINE)
             forge_yaml = os.path.join(feedstock.directory, 'recipe', 'meta.yaml')
