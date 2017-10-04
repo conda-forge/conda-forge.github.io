@@ -75,16 +75,27 @@ Building Against NumPy
 ----------------------
 If you have a package which links\* against ``numpy`` you can build against the oldest possible version of ``numpy`` that is forwards compatible.
 That can be achieved by pinning the build requirements and letting "free" the run requirements.
-At the moment these are the oldest available ``numpy`` versions in conda-forge that you can use:
+If you don't want to make things complicated you can use
+
+.. code-block:: yaml
+
+    build:
+      - numpy 1.11.*
+    run:
+      - numpy >=1.11
+
+However, these are the oldest available ``numpy`` versions in conda-forge that you can use, if you need to support older versions than ``numpy 1.11``.
 
 .. code-block:: yaml
 
     build:
       - numpy 1.8.*  # [not (win and (py35 or py36))]
-      - numpy 1.9.*  # [win and (py35 or py36)]
+      - numpy 1.9.*  # [win and py35]
+      - numpy 1.11.*  # [win and py36]
     run:
       - numpy >=1.8  # [not (win and (py35 or py36))]
-      - numpy >=1.9  # [win and (py35 or py36)]
+      - numpy >=1.9  # [win and py35]
+      - numpy >=1.11  # [win and py36]
 
 We will add older versions for ``Python 3.6`` on Windows soon.
 That will allow us to simplify the minimum ``numpy`` to ``1.8`` across all platforms and Python versions.
