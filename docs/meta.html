@@ -123,13 +123,22 @@ If you don’t want to make things complicated you can use</p>
 </div>
 <p>We will add older versions for <code class="docutils literal"><span class="pre">Python</span> <span class="pre">3.6</span></code> on Windows soon.
 That will allow us to simplify the minimum <code class="docutils literal"><span class="pre">numpy</span></code> to <code class="docutils literal"><span class="pre">1.8</span></code> across all platforms and Python versions.</p>
-<p>CAVEAT: note that you still need to respect minimum supported version of <code class="docutils literal"><span class="pre">numpy</span></code> for the package!
-That means you cannot use <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.8</span></code> if the project requires at least <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.9</span></code>,
-adjust the minimum version accordingly!</p>
 <p>* In order to know if your package links against <code class="docutils literal"><span class="pre">numpy</span></code> check for things like <code class="docutils literal"><span class="pre">numpy.get_include()</span></code> in your <code class="docutils literal"><span class="pre">setup.py</span></code>,
 or if the package uses <code class="docutils literal"><span class="pre">cimport</span></code>.</p>
-<p>PS: if your package supports <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.7</span></code>, and you are brave enough :-),
+<div class="admonition-notes admonition">
+<p class="first admonition-title">Notes</p>
+<p>1. you still need to respect minimum supported version of <code class="docutils literal"><span class="pre">numpy</span></code> for the package!
+That means you cannot use <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.8</span></code> if the project requires at least <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.9</span></code>,
+adjust the minimum version accordingly!</p>
+<p class="last">2. if your package supports <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.7</span></code>, and you are brave enough :-),
 there are <code class="docutils literal"><span class="pre">numpy</span></code> packages for <code class="docutils literal"><span class="pre">1.7</span></code> available for Python 3.4 and 2.7 in the channel.</p>
+</div>
+<div class="admonition-deprecated admonition">
+<p class="first admonition-title">Deprecated</p>
+<p class="last">Adding <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">x.x</span></code> to the build and run sections translates to a matrix pinned to all
+available numpy versions (e.g. 1.11, 1.12 and 1.13). In order to optimize CI ressources
+usage this option is now deprecated in favour of the apporach described above.</p>
+</div>
 </div>
 <div class="section" id="building-noarch-packages">
 <h2>Building <code class="docutils literal"><span class="pre">noarch</span></code> packages<a class="headerlink" href="#building-noarch-packages" title="Permalink to this headline">¶</a></h2>

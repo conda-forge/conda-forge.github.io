@@ -100,15 +100,26 @@ However, these are the oldest available ``numpy`` versions in conda-forge that y
 We will add older versions for ``Python 3.6`` on Windows soon.
 That will allow us to simplify the minimum ``numpy`` to ``1.8`` across all platforms and Python versions.
 
-CAVEAT: note that you still need to respect minimum supported version of ``numpy`` for the package!
-That means you cannot use ``numpy 1.8`` if the project requires at least ``numpy 1.9``,
-adjust the minimum version accordingly!
 
 \* In order to know if your package links against ``numpy`` check for things like ``numpy.get_include()`` in your ``setup.py``,
 or if the package uses ``cimport``.
 
-PS: if your package supports ``numpy 1.7``, and you are brave enough :-),
-there are ``numpy`` packages for ``1.7`` available for Python 3.4 and 2.7 in the channel.
+
+.. admonition:: Notes
+
+    1. you still need to respect minimum supported version of ``numpy`` for the package!
+    That means you cannot use ``numpy 1.8`` if the project requires at least ``numpy 1.9``,
+    adjust the minimum version accordingly!
+
+    2. if your package supports ``numpy 1.7``, and you are brave enough :-),
+    there are ``numpy`` packages for ``1.7`` available for Python 3.4 and 2.7 in the channel.
+
+
+.. admonition:: Deprecated
+
+    Adding ``numpy x.x`` to the build and run sections translates to a matrix pinned to all
+    available numpy versions (e.g. 1.11, 1.12 and 1.13). In order to optimize CI ressources
+    usage this option is now deprecated in favour of the apporach described above.
 
 .. _noarch::
 
