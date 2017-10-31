@@ -44,6 +44,7 @@ pinned = {
           'cairo': 'cairo 1.14.*',  # 1.12.18
           'curl': 'curl >=7.44.0,<8',  # 7.54.1
           'ffmpeg': 'ffmpeg >=3.2.3,<3.2.6',  # NA
+          'flann': 'flann 1.9.1',  # NA
           'fontconfig': 'fontconfig 2.12.*',  # 2.12.1
           'freetype': 'freetype 2.7',  # 2.5.5
           'geos': 'geos 3.5.1',  # 3.5.0
