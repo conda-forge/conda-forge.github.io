@@ -47,7 +47,7 @@ pinned = {
           'flann': 'flann 1.9.1',  # NA
           'fontconfig': 'fontconfig 2.12.*',  # 2.12.1
           'freetype': 'freetype 2.7',  # 2.5.5
-          'geos': 'geos 3.5.1',  # 3.5.0
+          'geos': 'geos 3.6.2',  # 3.5.0
           'giflib': 'giflib 5.1.*',  # NA
           'glib': 'glib 2.51.*',  # 2.50.2
           'glpk': 'glpk 4.61|4.62',  # NA
