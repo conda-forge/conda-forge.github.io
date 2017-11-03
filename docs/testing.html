@@ -58,9 +58,8 @@ On Windows, use the <code class="docutils literal"><span class="pre">exist</span
 <p><strong>Simple Existence Testing Example:</strong></p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">test</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">commands</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">test -f $PREFIX/lib/libboost_log.dylib</span>  <span class="c1"># [osx]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">test -f $PREFIX/lib/libboost_log.so</span>     <span class="c1"># [linux]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">if not exist %PREFIX%\\Library\\lib\\boost_log-vc140-mt.lib exit 1</span>  <span class="c1"># [win and py35]</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">test -f $PREFIX/lib/libboost_log$SHLIB_EXT</span>  <span class="c1"># [unix]</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1</span>  <span class="c1"># [win and py35]</span>
 </pre></div>
 </div>
 </div>
@@ -140,7 +139,7 @@ Just test sufficiently to know that the package is in good working order.</p>
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

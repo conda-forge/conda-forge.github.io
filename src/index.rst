@@ -14,11 +14,13 @@ Contents:
    guidelines
    recipe
    meta
+   blas
    buildwin
    testing
    ciservices
    conda_smithy
    conda-forge_gotchas
+   webservice
 
 
 Indices and tables

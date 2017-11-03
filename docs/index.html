@@ -47,6 +47,7 @@
 <li class="toctree-l1"><a class="reference internal" href="guidelines.html">Guidelines</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="guidelines.html#transferring-to-conda-forge">Transferring to conda-forge</a></li>
 <li class="toctree-l2"><a class="reference internal" href="guidelines.html#intended-usage">Intended Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guidelines.html#renaming-packages">Renaming Packages</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="recipe.html">Creating Conda Recipes</a><ul>
@@ -63,11 +64,13 @@
 <li class="toctree-l2"><a class="reference internal" href="meta.html#populating-the-hash-field">Populating the <code class="docutils literal"><span class="pre">hash</span></code> Field</a></li>
 <li class="toctree-l2"><a class="reference internal" href="meta.html#excluding-a-platform">Excluding a Platform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="meta.html#building-against-numpy">Building Against NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html#building-noarch-packages">Building <code class="docutils literal"><span class="pre">noarch</span></code> packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="meta.html#build-number">Build Number</a></li>
 <li class="toctree-l2"><a class="reference internal" href="meta.html#single-version-externally-managed">Single Version, Externally Managed</a></li>
 <li class="toctree-l2"><a class="reference internal" href="meta.html#downloading-extra-sources-and-data-files">Downloading extra sources and data files</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="blas.html">BLAS &amp; Numpy &amp; Friends</a></li>
 <li class="toctree-l1"><a class="reference internal" href="buildwin.html">Building on Windows</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="buildwin.html#simple-cmake-based-bld-bat">Simple CMake-Based <code class="docutils literal"><span class="pre">bld.bat</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="buildwin.html#vc-features">VC features</a></li>
@@ -92,6 +95,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="conda-forge_gotchas.html">conda-forge ‘gotchas’</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="conda-forge_gotchas.html#using-multiple-channels">Using multiple channels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="webservice.html">Automatic services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="webservice.html#conda-forge-admin-please-rerender">&#64;conda-forge-admin, please rerender</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webservice.html#conda-forge-admin-please-add-noarch-python">&#64;conda-forge-admin, please add noarch: python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webservice.html#conda-forge-admin-please-lint">&#64;conda-forge-admin, please lint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webservice.html#conda-forge-admin-please-update-team">&#64;conda-forge-admin, please update team</a></li>
 </ul>
 </li>
 </ul>
@@ -150,7 +160,7 @@
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

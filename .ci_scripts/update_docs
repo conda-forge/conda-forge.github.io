@@ -10,7 +10,7 @@ if [ -n "$GH_TOKEN" ]; then
     fi
     git checkout -b new_site_content
     # Generate html requires a GitHub token in order to query the available feedstocks.
-    conda execute scripts/generate_html.py
+    conda install conda-smithy --yes --quiet -c conda-forge
     conda install sphinx --yes --quiet -c conda-forge
     cd src
     make html

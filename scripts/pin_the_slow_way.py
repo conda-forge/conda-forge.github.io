@@ -37,31 +37,38 @@ import conda_smithy.feedstocks as feedstocks
 # As showed by https://abi-laboratory.pro/tracker/timeline/gmp/ binaries built with 6.1.0 are not
 # compatible with 5.0.1 (the other way around would be true).
 pinned = {
-          'boost': 'boost 1.64.*',  # 1.61.0
-          'boost-cpp': 'boost-cpp 1.64.*',  # NA
+          'arpack': 'arpack 3.5.*',  # NA
+          'boost': 'boost 1.65.1',  # 1.61.0
+          'boost-cpp': 'boost-cpp 1.65.1',  # NA
           'bzip2': 'bzip2 1.0.*',  # 1.0.6
           'cairo': 'cairo 1.14.*',  # 1.12.18
+          'curl': 'curl >=7.44.0,<8',  # 7.54.1
           'ffmpeg': 'ffmpeg >=3.2.3,<3.2.6',  # NA
+          'flann': 'flann 1.9.1',  # NA
           'fontconfig': 'fontconfig 2.12.*',  # 2.12.1
           'freetype': 'freetype 2.7',  # 2.5.5
-          'geos': 'geos 3.5.1',  # 3.5.0
+          'geos': 'geos 3.6.2',  # 3.5.0
           'giflib': 'giflib 5.1.*',  # NA
           'glib': 'glib 2.51.*',  # 2.50.2
+          'glpk': 'glpk 4.61|4.62',  # NA
           'gmp': 'gmp 6.1.*', # 6.1.0
           'harfbuzz': 'harfbuzz 1.3.4',  # 0.9.39
           'hdf5': 'hdf5 1.8.18|1.8.18.*',  # 1.8.17
           'icu': 'icu 58.*',  # 54.1
           'jpeg': 'jpeg 9*',  # 9b (but defaults is probably using 8d)
+          'json-c': 'json-c 0.12|0.12.*',  # NA
           'krb5': 'krb5 1.14.*',  # 1.13.2
           'libblitz': 'libblitz 0.10|0.10.*',  # NA
           'libevent': 'libevent 2.0.22',  # 2.0.22
           'libgdal': 'libgdal 2.1.*',  # 2.1.0
           'libmatio': 'libmatio 1.5.*',  # NA
           'libnetcdf': 'libnetcdf 4.4.*',  # 4.4.1
-          'libpng': 'libpng >=1.6.28,<1.7',  # 1.6.27
+          'libpng': 'libpng >=1.6.22,<1.6.31',  # 1.6.27
+          'librdkafka': 'librdkafka 0.9.4|0.9.5',  # NA
           'libssh2': 'libssh2 1.8.*',  # 1.8.0
           'libsvm': 'libsvm 3.21|3.21.*',  # NA
           'libtiff': 'libtiff >=4.0.3,<4.0.8',  # 4.0.6
+          'libwebp': 'libwebp 0.5.*',  # 0.5.0 https://abi-laboratory.pro/tracker/timeline/libwebp/
           'libxml2': 'libxml2 2.9.*',  # 2.9.4
           'lzo': 'lzo 2.*',  # 2.06
           'metis': 'metis 5.1.*',  # NA
@@ -70,19 +77,22 @@ pinned = {
           'netcdf-cxx4': 'netcdf-cxx4 4.3.*',  # NA
           'netcdf-fortran': 'netcdf-fortran 4.4.*',  #
           'openblas': 'openblas 0.2.20|0.2.20.*',  # 0.2.19
+          'nettle': 'nettle 3.3|3.3.*',  # NA
           'openssl': 'openssl 1.0.*',  # 1.0.2k
           'pango': 'pango 1.40.*',  # 1.40.3
           'pixman': 'pixman 0.34.*',  # 0.34.0
           'proj4': 'proj4 4.9.3',  # 4.9.2
+          'protobuf': 'protobuf 3.4.*',  # 3.2.0
           'pyqt': 'pyqt 5.6.*',  # 5.6.0
           'qt': 'qt 5.6.*',  # 5.6.2
           'readline': 'readline 6.2*',  # 6.2
+          'snappy': 'snappy 1.1.6|1.1.7',  # 1.1.6
           'sox': 'sox 14.4.2',  # NA
           'sqlite': 'sqlite 3.13.*',  # 3.13.0
           'tk': 'tk 8.5.*',  # 8.5.18
           'vlfeat': 'vlfeat 0.9.20',  # NA
           'xz': 'xz 5.2.*',  # 5.2.2
-          'zlib': 'zlib 1.2.8',  # 1.2.8
+          'zlib': 'zlib 1.2.11',  # zlib run_exports min is latest build 1.2.11
         }
 
 parser = argparse.ArgumentParser(description='Propose a feedstock update.')
@@ -302,7 +312,12 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
 
                 for pos, dep in enumerate(section):
                     for name, pin in pinned.items():
-                        if re.match(r"^\s*%s\s*$" % name, dep) and dep != pin:
+                        dep_split = dep.split(' ', 1)
+                        actual_name = dep_split[0]
+                        # skip star pins: https://github.com/conda-forge/conda-forge.github.io/issues/270
+                        if len(dep_split) > 1 and dep_split[1] == '*':
+                            continue
+                        if re.match(r'^\s*%s\s*' % name, actual_name) and dep != pin:
                             replacements['- ' + str(dep)] = '- ' + pin
             if replacements:
                 current_build_number = recipe['build']['number']
@@ -311,8 +326,10 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
             for orig, new in replacements.items():
                 content = re.sub(
                     # Use capture groups to get the indentation correct.
-                    r"(^\s*)%s(\s*)$" % orig,
-                    r"\1%s\2" % new,
+                    # (|#.*) replaces (#.*)? to circumvent the "unmatched group" error
+                    # see: https://bugs.python.org/issue1519638
+                    r'(^\s*)%s(\s*)(|#.*)$' % re.escape(orig),
+                    r'\1%s\2\3' % new,
                     content,
                     flags=re.MULTILINE)
             forge_yaml = os.path.join(feedstock.directory, 'recipe', 'meta.yaml')

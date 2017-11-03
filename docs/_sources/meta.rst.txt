@@ -73,10 +73,80 @@ A full description of selectors is
 
 Building Against NumPy
 ----------------------
-If you have a package which links against numpy you need to build and run against
-the same version of numpy. Putting ``numpy x.x`` in the build and run requirements
-ensures that a separate package will be built for each version of numpy that
-conda-forge builds against.
+If you have a package which links\* against ``numpy`` you can build against the oldest possible version of ``numpy`` that is forwards compatible.
+That can be achieved by pinning the build requirements and letting "free" the run requirements.
+If you don't want to make things complicated you can use
+
+.. code-block:: yaml
+
+    build:
+      - numpy 1.11.*
+    run:
+      - numpy >=1.11
+
+However, these are the oldest available ``numpy`` versions in conda-forge that you can use, if you need to support older versions than ``numpy 1.11``.
+
+.. code-block:: yaml
+
+    build:
+      - numpy 1.8.*  # [not (win and (py35 or py36))]
+      - numpy 1.9.*  # [win and py35]
+      - numpy 1.11.*  # [win and py36]
+    run:
+      - numpy >=1.8  # [not (win and (py35 or py36))]
+      - numpy >=1.9  # [win and py35]
+      - numpy >=1.11  # [win and py36]
+
+We will add older versions for ``Python 3.6`` on Windows soon.
+That will allow us to simplify the minimum ``numpy`` to ``1.8`` across all platforms and Python versions.
+
+
+\* In order to know if your package links against ``numpy`` check for things like ``numpy.get_include()`` in your ``setup.py``,
+or if the package uses ``cimport``.
+
+
+.. admonition:: Notes
+
+    1. you still need to respect minimum supported version of ``numpy`` for the package!
+    That means you cannot use ``numpy 1.8`` if the project requires at least ``numpy 1.9``,
+    adjust the minimum version accordingly!
+
+    2. if your package supports ``numpy 1.7``, and you are brave enough :-),
+    there are ``numpy`` packages for ``1.7`` available for Python 3.4 and 2.7 in the channel.
+
+
+.. admonition:: Deprecated
+
+    Adding ``numpy x.x`` to the build and run sections translates to a matrix pinned to all
+    available numpy versions (e.g. 1.11, 1.12 and 1.13). In order to optimize CI ressources
+    usage this option is now deprecated in favour of the apporach described above.
+
+.. _noarch::
+
+Building ``noarch`` packages
+----------------------------
+
+The ``noarch: python`` can be used to build pure Python packages:
+
+* that do not perform any Python version specific code translation at install time (i.e. 2to3);
+
+* and have fixed requirements; that is to say no conditional dependencies
+  depending on the Python version, or the platform ran. (If you have for example
+  ``backports # [py27])`` in the ``run`` section of ``meta.yml``, your package
+  can't be noarch, yet).
+
+The use of ``noarch: python`` will drastically reduce the CI usage as the
+package will be built only once on ``CircleCI``, which will make your build much
+faster, and free resources for other packages !
+
+To use that just add ``noarch: python`` in the build section like,
+
+.. code-block:: yaml
+
+    build:
+      noarch: python
+
+and re-render with the feedstock with ``conda-smithy`` >=2.4.0
 
 
 Build Number
@@ -103,8 +173,8 @@ If you need additional source/data files for the build, download them using curl
 and verify the checksum using openssl. Add curl and openssl to the build requirements and then you
 can use curl to download and openssl to verify.
 
-Example recipe is 
+Example recipe is
 `here <https://github.com/conda-forge/pari-feedstock/blob/187bb3bdd0a5e35b2ecaa73ed2ceddc4ca0c2f5a/recipe/build.sh#L27-L35>`_.
 
-Upstream issue for allowing multiple source is 
+Upstream issue for allowing multiple source is
 `here <https://github.com/conda/conda-build/issues/1466>`_.
