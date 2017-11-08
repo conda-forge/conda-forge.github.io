@@ -53,7 +53,7 @@ pinned = {
           'glpk': 'glpk 4.61|4.62',  # NA
           'gmp': 'gmp 6.1.*', # 6.1.0
           'harfbuzz': 'harfbuzz 1.3.4',  # 0.9.39
-          'hdf5': 'hdf5 1.8.18|1.8.18.*',  # 1.8.17
+          'hdf5': 'hdf5 1.10.1',  # 1.8.17
           'icu': 'icu 58.*',  # 54.1
           'jpeg': 'jpeg 9*',  # 9b (but defaults is probably using 8d)
           'json-c': 'json-c 0.12|0.12.*',  # NA
