@@ -149,6 +149,8 @@ usage this option is now deprecated in favour of the apporach described above.</
 depending on the Python version, or the platform ran. (If you have for example
 <code class="docutils literal"><span class="pre">backports</span> <span class="pre">#</span> <span class="pre">[py27])</span></code> in the <code class="docutils literal"><span class="pre">run</span></code> section of <code class="docutils literal"><span class="pre">meta.yml</span></code>, your package
 can’t be noarch, yet).</li>
+<li>and do not use selectors to <code class="docutils literal"><span class="pre">skip</span></code> building the recipe on a specific platform or
+for a specific version of python (e.g. <code class="docutils literal"><span class="pre">skip:</span> <span class="pre">True</span>&#160; <span class="pre">#</span> <span class="pre">[py2k]</span></code>).</li>
 </ul>
 <p>The use of <code class="docutils literal"><span class="pre">noarch:</span> <span class="pre">python</span></code> will drastically reduce the CI usage as the
 package will be built only once on <code class="docutils literal"><span class="pre">CircleCI</span></code>, which will make your build much
