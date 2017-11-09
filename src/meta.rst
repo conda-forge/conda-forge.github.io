@@ -135,6 +135,9 @@ The ``noarch: python`` can be used to build pure Python packages:
   ``backports # [py27])`` in the ``run`` section of ``meta.yml``, your package
   can't be noarch, yet).
 
+* and do not use selectors to ``skip`` building the recipe on a specific platform or
+  for a specific version of python (e.g. ``skip: True  # [py2k]``).
+
 The use of ``noarch: python`` will drastically reduce the CI usage as the
 package will be built only once on ``CircleCI``, which will make your build much
 faster, and free resources for other packages !
