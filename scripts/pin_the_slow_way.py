@@ -92,6 +92,7 @@ pinned = {
           'tk': 'tk 8.5.*',  # 8.5.18
           'vlfeat': 'vlfeat 0.9.20',  # NA
           'xz': 'xz 5.2.*',  # 5.2.2
+          'zeromq': 'zeromq 4.2.*', # 4.2.*
           'zlib': 'zlib 1.2.11',  # zlib run_exports min is latest build 1.2.11
         }
 
