@@ -78,6 +78,7 @@ pinned = {
           'netcdf-fortran': 'netcdf-fortran 4.4.*',  #
           'openblas': 'openblas 0.2.20|0.2.20.*',  # 0.2.19
           'nettle': 'nettle 3.3|3.3.*',  # NA
+          'openjpeg': 'openjpeg 2.3.*',  # 2.2.0
           'openssl': 'openssl 1.0.*',  # 1.0.2k
           'pango': 'pango 1.40.*',  # 1.40.3
           'pixman': 'pixman 0.34.*',  # 0.34.0
