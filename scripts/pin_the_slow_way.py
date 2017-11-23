@@ -90,6 +90,7 @@ pinned = {
           'snappy': 'snappy 1.1.6|1.1.7',  # 1.1.6
           'sox': 'sox 14.4.2',  # NA
           'sqlite': 'sqlite 3.13.*',  # 3.13.0
+          'sundials': 'sundials 2.7.*',  # NA
           'tk': 'tk 8.5.*',  # 8.5.18
           'vlfeat': 'vlfeat 0.9.20',  # NA
           'xz': 'xz 5.2.*',  # 5.2.2
