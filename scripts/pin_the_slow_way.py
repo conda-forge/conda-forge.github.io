@@ -82,6 +82,7 @@ pinned = {
           'openssl': 'openssl 1.0.*',  # 1.0.2k
           'pango': 'pango 1.40.*',  # 1.40.3
           'pixman': 'pixman 0.34.*',  # 0.34.0
+          'poppler': 'poppler 0.61.*'  # 0.60.1
           'proj4': 'proj4 4.9.3',  # 4.9.2
           'protobuf': 'protobuf 3.4.*',  # 3.4.0
           'pyqt': 'pyqt 5.6.*',  # 5.6.0
