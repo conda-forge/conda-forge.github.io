@@ -61,6 +61,7 @@ pinned = {
           'libblitz': 'libblitz 0.10|0.10.*',  # NA
           'libevent': 'libevent 2.0.22',  # 2.0.22
           'libgdal': 'libgdal 2.1.*',  # 2.1.0
+          'libiconv' :'libiconv 1.15',  # 1.15
           'libmatio': 'libmatio 1.5.*',  # NA
           'libnetcdf': 'libnetcdf 4.4.*',  # 4.4.1
           'libpng': 'libpng >=1.6.22,<1.6.31',  # 1.6.27
@@ -82,6 +83,7 @@ pinned = {
           'openssl': 'openssl 1.0.*',  # 1.0.2k
           'pango': 'pango 1.40.*',  # 1.40.3
           'pixman': 'pixman 0.34.*',  # 0.34.0
+          'poppler': 'poppler 0.61.*'  # 0.60.1
           'proj4': 'proj4 4.9.3',  # 4.9.2
           'protobuf': 'protobuf 3.4.*',  # 3.4.0
           'pyqt': 'pyqt 5.6.*',  # 5.6.0
