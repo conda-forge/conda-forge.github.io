@@ -41,11 +41,11 @@ pinned = {
           'boost': 'boost 1.65.1',  # 1.61.0
           'boost-cpp': 'boost-cpp 1.65.1',  # NA
           'bzip2': 'bzip2 1.0.*',  # 1.0.6
-          'cairo': 'cairo 1.14.*',  # 1.12.18
+          'cairo': 'cairo 1.14.*',  # 1.14.10
           'curl': 'curl >=7.44.0,<8',  # 7.54.1
           'ffmpeg': 'ffmpeg >=3.2.3,<3.2.6',  # NA
           'flann': 'flann 1.9.1',  # NA
-          'fontconfig': 'fontconfig 2.12.*',  # 2.12.1
+          'fontconfig': 'fontconfig 2.12.*',  # 2.12.4
           'freetype': 'freetype 2.8.1',  # 2.8
           'gdal': 'gdal 2.2.*',  # 2.2.0
           'geos': 'geos 3.6.2',  # 3.5.0
@@ -69,7 +69,7 @@ pinned = {
           'librdkafka': 'librdkafka 0.9.4|0.9.5',  # NA
           'libssh2': 'libssh2 1.8.*',  # 1.8.0
           'libsvm': 'libsvm 3.21|3.21.*',  # NA
-          'libtiff': 'libtiff 4.0.9',  # 4.0.9
+          'libtiff': 'libtiff >=4.0.8,<4.0.10',  # 4.0.9
           'libwebp': 'libwebp 0.5.*',  # 0.5.0 https://abi-laboratory.pro/tracker/timeline/libwebp/
           'libxml2': 'libxml2 2.9.*',  # 2.9.4
           'lzo': 'lzo 2.*',  # 2.06
