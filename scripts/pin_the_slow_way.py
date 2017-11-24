@@ -50,7 +50,7 @@ pinned = {
           'gdal': 'gdal 2.2.*',  # 2.2.0
           'geos': 'geos 3.6.2',  # 3.5.0
           'giflib': 'giflib 5.1.*',  # NA
-          'glib': 'glib 2.51.*',  # 2.50.2
+          'glib': 'glib 2.55.*',  # 2.53.6
           'glpk': 'glpk 4.61|4.62',  # NA
           'gmp': 'gmp 6.1.*', # 6.1.0
           'harfbuzz': 'harfbuzz 1.3.4',  # 0.9.39
