@@ -47,6 +47,7 @@ pinned = {
           'flann': 'flann 1.9.1',  # NA
           'fontconfig': 'fontconfig 2.12.*',  # 2.12.1
           'freetype': 'freetype 2.7',  # 2.5.5
+          'gdal': 'gdal 2.2.*',  # 2.2.0
           'geos': 'geos 3.6.2',  # 3.5.0
           'giflib': 'giflib 5.1.*',  # NA
           'glib': 'glib 2.51.*',  # 2.50.2
@@ -60,7 +61,7 @@ pinned = {
           'krb5': 'krb5 1.14.*',  # 1.13.2
           'libblitz': 'libblitz 0.10|0.10.*',  # NA
           'libevent': 'libevent 2.0.22',  # 2.0.22
-          'libgdal': 'libgdal 2.1.*',  # 2.1.0
+          'libgdal': 'libgdal 2.2.*',  # 2.2.0
           'libiconv' :'libiconv 1.15',  # 1.15
           'libmatio': 'libmatio 1.5.*',  # NA
           'libnetcdf': 'libnetcdf 4.4.*',  # 4.4.1
