@@ -82,7 +82,7 @@ pinned = {
           'openblas': 'openblas 0.2.20|0.2.20.*',  # 0.2.19
           'nettle': 'nettle 3.3|3.3.*',  # NA
           'openjpeg': 'openjpeg 2.3.*',  # 2.2.0
-          'openssl': 'openssl 1.0.*',  # 1.0.2k
+          'openssl': 'openssl 1.0.*',  # 1.0.2m
           'pango': 'pango 1.40.*',  # 1.40.11
           'pixman': 'pixman 0.34.*',  # 0.34.0
           'poppler': 'poppler 0.61.*'  # 0.60.1
