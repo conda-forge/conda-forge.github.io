@@ -41,18 +41,20 @@ pinned = {
           'boost': 'boost 1.65.1',  # 1.61.0
           'boost-cpp': 'boost-cpp 1.65.1',  # NA
           'bzip2': 'bzip2 1.0.*',  # 1.0.6
-          'cairo': 'cairo 1.14.*',  # 1.12.18
+          'cairo': 'cairo 1.14.*',  # 1.14.10
           'curl': 'curl >=7.44.0,<8',  # 7.54.1
+          'expat': 'expat 2.2.*',  # 2.2.5
           'ffmpeg': 'ffmpeg >=3.2.3,<3.2.6',  # NA
           'flann': 'flann 1.9.1',  # NA
-          'fontconfig': 'fontconfig 2.12.*',  # 2.12.1
-          'freetype': 'freetype 2.7',  # 2.5.5
+          'fontconfig': 'fontconfig 2.12.*',  # 2.12.4
+          'freetype': 'freetype 2.8.1',  # 2.8
+          'gdal': 'gdal 2.2.*',  # 2.2.0
           'geos': 'geos 3.6.2',  # 3.5.0
           'giflib': 'giflib 5.1.*',  # NA
-          'glib': 'glib 2.51.*',  # 2.50.2
+          'glib': 'glib 2.55.*',  # 2.53.6
           'glpk': 'glpk 4.61|4.62',  # NA
           'gmp': 'gmp 6.1.*', # 6.1.0
-          'harfbuzz': 'harfbuzz 1.3.4',  # 0.9.39
+          'harfbuzz': 'harfbuzz 1.7.*',  # 1.5.0
           'hdf5': 'hdf5 1.10.1',  # 1.8.17
           'icu': 'icu 58.*',  # 54.1
           'jpeg': 'jpeg 9*',  # 9b (but defaults is probably using 8d)
@@ -60,15 +62,16 @@ pinned = {
           'krb5': 'krb5 1.14.*',  # 1.13.2
           'libblitz': 'libblitz 0.10|0.10.*',  # NA
           'libevent': 'libevent 2.0.22',  # 2.0.22
-          'libgdal': 'libgdal 2.1.*',  # 2.1.0
+          'libgdal': 'libgdal 2.2.*',  # 2.2.0
+          'libiconv' :'libiconv 1.15',  # 1.15
           'libmatio': 'libmatio 1.5.*',  # NA
           'libnetcdf': 'libnetcdf 4.4.*',  # 4.4.1
           'libpcap': 'libpcap 1.8.*',  # NA
-          'libpng': 'libpng >=1.6.22,<1.6.31',  # 1.6.27
+          'libpng': 'libpng >=1.6.32,<1.6.35',  # 1.6.32
           'librdkafka': 'librdkafka 0.9.4|0.9.5',  # NA
           'libssh2': 'libssh2 1.8.*',  # 1.8.0
           'libsvm': 'libsvm 3.21|3.21.*',  # NA
-          'libtiff': 'libtiff >=4.0.3,<4.0.8',  # 4.0.6
+          'libtiff': 'libtiff >=4.0.8,<4.0.10',  # 4.0.9
           'libwebp': 'libwebp 0.5.*',  # 0.5.0 https://abi-laboratory.pro/tracker/timeline/libwebp/
           'libxml2': 'libxml2 2.9.*',  # 2.9.4
           'lzo': 'lzo 2.*',  # 2.06
@@ -79,20 +82,25 @@ pinned = {
           'netcdf-fortran': 'netcdf-fortran 4.4.*',  #
           'openblas': 'openblas 0.2.20|0.2.20.*',  # 0.2.19
           'nettle': 'nettle 3.3|3.3.*',  # NA
-          'openssl': 'openssl 1.0.*',  # 1.0.2k
-          'pango': 'pango 1.40.*',  # 1.40.3
+          'openjpeg': 'openjpeg 2.3.*',  # 2.2.0
+          'openssl': 'openssl 1.0.*',  # 1.0.2m
+          'pango': 'pango 1.40.*',  # 1.40.11
           'pixman': 'pixman 0.34.*',  # 0.34.0
+          'poppler': 'poppler 0.61.*'  # 0.60.1
           'proj4': 'proj4 4.9.3',  # 4.9.2
           'protobuf': 'protobuf 3.4.*',  # 3.4.0
           'pyqt': 'pyqt 5.6.*',  # 5.6.0
           'qt': 'qt 5.6.*',  # 5.6.2
-          'readline': 'readline 6.2*',  # 6.2
+          'readline': 'readline 7.0',  # 7.0
           'snappy': 'snappy 1.1.6|1.1.7',  # 1.1.6
           'sox': 'sox 14.4.2',  # NA
           'sqlite': 'sqlite 3.13.*',  # 3.13.0
+          'sundials': 'sundials 2.7.*',  # NA
           'tk': 'tk 8.5.*',  # 8.5.18
           'vlfeat': 'vlfeat 0.9.20',  # NA
+          'xerces-c': 'xerces-c 3.2.0'  # 3.2.0
           'xz': 'xz 5.2.*',  # 5.2.2
+          'zeromq': 'zeromq 4.2.*', # 4.2.*
           'zlib': 'zlib 1.2.11',  # zlib run_exports min is latest build 1.2.11
         }
 
