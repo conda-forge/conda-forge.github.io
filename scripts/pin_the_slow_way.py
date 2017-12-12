@@ -66,6 +66,7 @@ pinned = {
           'libiconv' :'libiconv 1.15',  # 1.15
           'libmatio': 'libmatio 1.5.*',  # NA
           'libnetcdf': 'libnetcdf 4.4.*',  # 4.4.1
+          'libpcap': 'libpcap 1.8.*',  # NA
           'libpng': 'libpng >=1.6.32,<1.6.35',  # 1.6.32
           'librdkafka': 'librdkafka 0.9.4|0.9.5',  # NA
           'libssh2': 'libssh2 1.8.*',  # 1.8.0
