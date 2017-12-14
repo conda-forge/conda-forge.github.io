@@ -90,6 +90,7 @@ from git import Repo
 from github import Github
 from github import GithubException
 from github import UnknownObjectException
+import hashlib
 from jinja2 import Template
 from jinja2 import UndefinedError
 import os
@@ -99,6 +100,7 @@ import requests
 import shutil
 import tempfile
 from tqdm import tqdm
+import urllib
 import yaml
 
 # Find places where Jinja variables are set
@@ -121,7 +123,7 @@ result_tuple = namedtuple('result_tuple', ['success', 'data'])
 # data for updating a feedstock
 # tpl(Feedstock_Meta_Yaml, str,  str)
 status_data = namedtuple('status_data', ['meta_yaml',
-                                         'pypi_version',
+                                         'version',
                                          'blob_sha'])
 
 # feedstock status tuple
@@ -131,6 +133,47 @@ fs_status = namedtuple('fs_status', ['fs', 'sd'])
 
 # Ordered list of acceptable ways source can be packaged.
 source_bundle_types = ["tar.gz", "tar.bz2", "zip", "bz2"]
+
+
+# stream_url_progress and hash_url are vendored from rever
+def stream_url_progress(url, verb='downloading', chunksize=1024):
+    """Generator yielding successive bytes from a URL.
+
+    Parameters
+    ----------
+    url : str
+        URL to open and stream
+    verb : str
+        Verb to prefix the url downloading with, default 'downloading'
+    chunksize : int
+        Number of bytes to return, defaults to 1 kb.
+
+    Returns
+    -------
+    yields the bytes which is at most chunksize in length.
+    """
+    nbytes = 0
+    print(verb + ' ' + url)
+    with urllib.request.urlopen(url) as f:
+        totalbytes = f.length
+        while True:
+            b = f.read(chunksize)
+            lenbytes = len(b)
+            nbytes += lenbytes
+            if lenbytes == 0:
+                break
+            else:
+                yield b
+            if totalbytes is None:
+                totalbytes = f.length
+
+
+def hash_url(url, hash='sha256'):
+    """Hashes a URL, with a progress bar, and returns the hex representation"""
+    hasher = getattr(hashlib, hash)()
+    for b in stream_url_progress(url, verb='Hashing'):
+        hasher.update(b)
+    return hasher.hexdigest()
 
 
 def parse_feedstock_file(feedstock_fpath):
@@ -201,8 +244,18 @@ class Feedstock_Meta_Yaml:
             raise KeyError('Missing meta.yaml key for checksum')
 
         splitter = '-{}.'.format(self._yaml_dict['package']['version'])
-        self.pypi_package, self.bundle_type = \
+        self.package, self.bundle_type = \
             self._yaml_dict['source']['fn'].split(splitter)
+        self.package_type = None
+        self.package_owner = None
+        self.package_url = None
+        if 'github' in self._yaml_dict['source']['url']:
+            self.package_type = 'github'
+            split_url = self._yaml_dict['source']['url'].lower().split('/')
+            self.package_owner = split_url[split_url.index('github.com') + 1]
+            self.package_url = self._yaml_dict['source']['url']
+        else:
+            self.package_type = 'pypi'
 
         self.reqs = set()
         for step in self._yaml_dict['requirements']:
@@ -278,9 +331,9 @@ class Feedstock_Meta_Yaml:
             # assignment
             build_var = self.yaml_jinja_refs['number'].split()[1]
             mapping = {self.jinja_vars[build_var].string:
-                       '{{% set {key} = {val} %}}'.format(
-                       key=build_var,
-                       val=new_number)}
+                '{{% set {key} = {val} %}}'.format(
+                    key=build_var,
+                    val=new_number)}
         else:
             build_num_regex = re.compile('number: *{}'.format(
                 self._yaml_dict['build']['number']))
@@ -291,8 +344,7 @@ class Feedstock_Meta_Yaml:
                 # So give up
                 return False
 
-            mapping = {matches[0]:
-                       'number: {}'.format(new_number)}
+            mapping = {matches[0]: 'number: {}'.format(new_number)}
 
         self.find_replace_update(mapping)
         return True
@@ -371,29 +423,48 @@ def pypi_org_sha(package_name, version):
     return None, None
 
 
-def pypi_sha(pypi_package, pypi_version):
+def sha(package, version, package_type='pypi', package_url=None,
+        prior_version=None):
     """
-    :param str pypi_package: The name of the package in PyPI
-    :param str pypi_version: The version to be retrieved from PyPI.
+    :param str package: The name of the package in PyPI
+    :param str version: The version to be retrieved from PyPI.
     :return: `str|None` -- SHA256 for a source bundle, None if can't be found
     """
-    bundle_type, sha = pypi_legacy_json_sha(pypi_package, pypi_version)
-    if bundle_type is not None and sha is not None:
-        return bundle_type, sha
-    return pypi_org_sha(pypi_package, pypi_version)
+    if package_type == 'github':
+        package_url = package_url.replace(prior_version, version)
+        return hash_url(package_url)
+    else:
+        bundle_type, sha = pypi_legacy_json_sha(package, version)
+        if bundle_type is not None and sha is not None:
+            return bundle_type, sha
+        return pypi_org_sha(package, version)
 
 
-def pypi_version_str(package_name):
+def version_str(package_name, package_type='pypi', package_owner=None):
     """
     Retrive the latest version of a package in PyPI
     :param str package_name: The name of the package
+    :param str package_type: The type of package ('pypi' or 'github')
     :return: `str|bool` -- Version string, False if unsuccessful
     """
-    r = requests.get('https://pypi.python.org/pypi/{}/json'.format(
-        package_name))
-    if not r.ok:
-        return False
-    return r.json()['info']['version'].strip()
+    if package_type == 'pypi':
+        r = requests.get('https://pypi.python.org/pypi/{}/json'.format(
+            package_name))
+        if not r.ok:
+            return False
+        return r.json()['info']['version'].strip()
+    elif package_type == 'github':
+        # get all the tags
+        refs = requests.get('https://api.github.com/repos/{owner}/'
+                         '{repo}/git/refs/tags'.format(owner=package_owner,
+                                                       repo=package_name))
+        if not refs.ok:
+            return False
+        # Extract all the non rc tags
+        tags = [parse_version(r['ref'].split('/')[-1]) for r in refs if
+                'rc' not in r['ref']]
+        # return the most recent tag
+        return max(tags)
 
 
 def user_feedstocks(user, limit=-1, skips=None):
@@ -450,16 +521,18 @@ def feedstock_status(feedstock):
     except (UndefinedError, KeyError) as e:
         return result_tuple(False, e.args[0])
 
-    pypi_version = pypi_version_str(meta_yaml.pypi_package)
-    if pypi_version is False:
+    version = version_str(meta_yaml.package,
+                          meta_yaml.package_type,
+                          meta_yaml.package_owner)
+    if version is False:
         return result_tuple(False, "Couldn't find package in PyPI")
 
-    if parse_version(meta_yaml.version()) >= parse_version(pypi_version):
+    if parse_version(meta_yaml.version()) >= parse_version(version):
         return result_tuple(True, None)
 
     return result_tuple(True,
                         status_data(meta_yaml,
-                                    pypi_version,
+                                    version,
                                     fs_contents.sha))
 
 
@@ -613,8 +686,7 @@ def tick_feedstocks(gh_password=None,
     skips.update(parse_feedstock_file(skipfile))
 
     if len(targets) > 0:
-        # If iwe have specific target feedstocks
-        # only retrieve those
+        # If we have specific target feedstocks only retrieve those
         skip_count = len(targets & skips)
         feedstocks = []
         for name in targets - skips:
@@ -655,9 +727,13 @@ def tick_feedstocks(gh_password=None,
     error_dict = defaultdict(list)
     for update in tqdm(indep_updates, desc='Updating feedstocks'):
 
-        new_bundle_type, new_sha = pypi_sha(
-            update.sd.meta_yaml.pypi_package,
-            update.sd.pypi_version)
+        new_bundle_type, new_sha = sha(
+            update.sd.meta_yaml.package,
+            update.sd.version,
+            update.sd.meta_yaml.package_type,
+            update.sd.meta_yaml.package_url,
+            update.sd.meta_yaml.version()
+        )
 
         if new_bundle_type is None and new_sha is None:
             patch_error_dict["Couldn't get SHA from PyPI"].append(
@@ -666,7 +742,7 @@ def tick_feedstocks(gh_password=None,
 
         # generate basic patch
         mapping = {update.sd.meta_yaml.version():
-                   update.sd.pypi_version,
+                       update.sd.version,
                    update.sd.meta_yaml.checksum(): new_sha}
 
         if update.sd.meta_yaml.checksum_type != 'sha256':
@@ -700,7 +776,7 @@ def tick_feedstocks(gh_password=None,
             'https://api.github.com/repos/{}/contents/recipe/meta.yaml'.format(
                 fork.full_name),
             json={'message':
-                  'Tick version to {}'.format(update.sd.pypi_version),
+                      'Tick version to {}'.format(update.sd.version),
                   'content': update.sd.meta_yaml.encoded_text(),
                   'sha': update.sd.blob_sha
                   },
@@ -722,10 +798,10 @@ def tick_feedstocks(gh_password=None,
     for update in tqdm(successful_updates, desc='Submitting pulls...'):
         try:
             update.fs.create_pull(title='Ticked version, '
-                                  'regenerated if needed. '
-                                  '(Double-check reqs!)',
+                                        'regenerated if needed. '
+                                        '(Double-check reqs!)',
                                   body='Made using `tick_my_feedstocks.py`!\n'
-                                  '- [ ] **I have vetted this recipe**',
+                                       '- [ ] **I have vetted this recipe**',
                                   head='{}:master'.format(gh_user),
                                   base='master')
         except GithubException:
@@ -740,7 +816,7 @@ def tick_feedstocks(gh_password=None,
           'were out-of-date.'.format(len(can_be_updated)))
     print('  {} feedstock(s) '
           'were independent of other out-of-date feedstocks'.format(
-              len(indep_updates)))
+        len(indep_updates)))
     print('  {} feedstock(s) '
           'had pulls submitted.'.format(pull_count))
     print('-----')
@@ -784,17 +860,17 @@ def main():
                         action='store_true',
                         dest='no_regenerate',
                         help="If present, don't regenerate feedstocks "
-                        'after updating')
+                             'after updating')
     parser.add_argument('--no-rerender',
                         action='store_true',
                         dest='no_rerender',
                         help="If present, don't regenerate feedstocks "
-                        'after updating')
+                             'after updating')
     parser.add_argument('--dry-run',
                         action='store_true',
                         dest='dry_run',
                         help='If present, skip applying patches, forking, '
-                        'and regenerating feedstocks')
+                             'and regenerating feedstocks')
     parser.add_argument('--target-feedstocks-file',
                         default=None,
                         dest='targetfile',
@@ -814,7 +890,7 @@ def main():
                         default=-1,
                         dest='limit_outdated',
                         help='Maximum number of outdated feedstocks to try '
-                        'and patch')
+                             'and patch')
     parser.add_argument('--skip-feedstocks-file',
                         default=None,
                         dest='skipfile',
