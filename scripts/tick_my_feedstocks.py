@@ -151,6 +151,8 @@ def stream_url_progress(url, verb='downloading', chunksize=1024):
     Returns
     -------
     yields the bytes which is at most chunksize in length.
+
+    Copyright (c) 2017, Anthony Scopatz
     """
     nbytes = 0
     print(verb + ' ' + url)
@@ -169,7 +171,9 @@ def stream_url_progress(url, verb='downloading', chunksize=1024):
 
 
 def hash_url(url, hash='sha256'):
-    """Hashes a URL, with a progress bar, and returns the hex representation"""
+    """Hashes a URL and returns the hex representation
+
+    Copyright (c) 2017, Anthony Scopatz"""
     hasher = getattr(hashlib, hash)()
     for b in stream_url_progress(url, verb='Hashing'):
         hasher.update(b)
