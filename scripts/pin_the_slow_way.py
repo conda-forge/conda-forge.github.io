@@ -1,5 +1,30 @@
 #!/usr/bin/env conda-execute
 
+'''
+This script pins the dependencies required for all conda-forge packages.
+
+https://github.com/conda-forge/staged-recipes/wiki/Pinned-dependencies
+
+Note: You must have access to the conda-forge-admin GitHub account to use this script.
+
+usage: pin_the_slow_way.py [-h] [--feedstocks-dir FEEDSTOCKS_DIR]
+                           [--regexp REGEXP | --package PACKAGE] [--local]
+                           [--limit LIMIT]
+
+Propose a feedstock update.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --feedstocks-dir FEEDSTOCKS_DIR
+                        The location of the feedstocks.
+  --regexp REGEXP       Regexp of feedstocks to consider.
+  --package PACKAGE     A specific package to check.
+  --local               Whether to use the existing local checkouts of the
+                        feedstocks, or to fetch from upstream
+  --limit LIMIT         Limit the number of packages to propose changes for (0
+                        is unlimited).
+'''
+
 # conda execute
 # env:
 #  - python
