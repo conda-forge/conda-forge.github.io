@@ -1,5 +1,30 @@
 #!/usr/bin/env conda-execute
 
+'''
+This script pins the dependencies required for all conda-forge packages.
+
+https://github.com/conda-forge/staged-recipes/wiki/Pinned-dependencies
+
+Note: You must have access to the conda-forge-admin GitHub account to use this script.
+
+usage: pin_the_slow_way.py [-h] [--feedstocks-dir FEEDSTOCKS_DIR]
+                           [--regexp REGEXP | --package PACKAGE] [--local]
+                           [--limit LIMIT]
+
+Propose a feedstock update.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --feedstocks-dir FEEDSTOCKS_DIR
+                        The location of the feedstocks.
+  --regexp REGEXP       Regexp of feedstocks to consider.
+  --package PACKAGE     A specific package to check.
+  --local               Whether to use the existing local checkouts of the
+                        feedstocks, or to fetch from upstream
+  --limit LIMIT         Limit the number of packages to propose changes for (0
+                        is unlimited).
+'''
+
 # conda execute
 # env:
 #  - python
@@ -86,7 +111,7 @@ pinned = {
           'openssl': 'openssl 1.0.*',  # 1.0.2m
           'pango': 'pango 1.40.*',  # 1.40.11
           'pixman': 'pixman 0.34.*',  # 0.34.0
-          'poppler': 'poppler 0.61.*'  # 0.60.1
+          'poppler': 'poppler 0.61.*',  # 0.60.1
           'proj4': 'proj4 4.9.3',  # 4.9.2
           'protobuf': 'protobuf 3.4.*',  # 3.4.0
           'pyqt': 'pyqt 5.6.*',  # 5.6.0
@@ -98,7 +123,7 @@ pinned = {
           'sundials': 'sundials 2.7.*',  # NA
           'tk': 'tk 8.6.*',  # 8.6.7
           'vlfeat': 'vlfeat 0.9.20',  # NA
-          'xerces-c': 'xerces-c 3.2.0'  # 3.2.0
+          'xerces-c': 'xerces-c 3.2.0',  # 3.2.0
           'xz': 'xz 5.2.*',  # 5.2.2
           'zeromq': 'zeromq 4.2.*', # 4.2.*
           'zlib': 'zlib 1.2.11',  # zlib run_exports min is latest build 1.2.11
