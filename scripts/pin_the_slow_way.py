@@ -63,8 +63,8 @@ import conda_smithy.feedstocks as feedstocks
 # compatible with 5.0.1 (the other way around would be true).
 pinned = {
           'arpack': 'arpack 3.5.*',  # NA
-          'boost': 'boost 1.65.1',  # 1.61.0
-          'boost-cpp': 'boost-cpp 1.65.1',  # NA
+          'boost': 'boost 1.66.*',  # 1.61.0
+          'boost-cpp': 'boost-cpp 1.66.*',  # NA
           'bzip2': 'bzip2 1.0.*',  # 1.0.6
           'cairo': 'cairo 1.14.*',  # 1.14.10
           'curl': 'curl >=7.44.0,<8',  # 7.54.1
