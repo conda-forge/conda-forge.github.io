@@ -121,7 +121,7 @@ or if the package uses ``cimport``.
     available numpy versions (e.g. 1.11, 1.12 and 1.13). In order to optimize CI ressources
     usage this option is now deprecated in favour of the apporach described above.
 
-.. _noarch::
+.. _noarch:
 
 Building ``noarch`` packages
 ----------------------------

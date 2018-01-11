@@ -30,6 +30,13 @@ for you.
 Entering the above phrase in a PR of a feedstock will lint the PR again.
 
 
+@conda-forge-admin, please update circle
+----------------------------------------
+
+Entering the above phrase in an issue of a feedstock will update the Circle-CI SSH deploy key. This will fix the
+`permission denied (public key)` issue in Circle-CI checkout phase
+
+
 @conda-forge-admin, please update team
 --------------------------------------
 
