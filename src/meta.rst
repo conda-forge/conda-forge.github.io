@@ -71,6 +71,11 @@ A full description of selectors is
 `in the conda docs <http://conda.pydata.org/docs/building/meta-yaml.html#preprocessing-selectors>`_.
 
 
+Using the Compilation ``toolchain``
+-----------------------------------
+Packages that need to compile code should add the `toolchain` package as a build dependency. This helps set up environment variables to instruct the compilers to do the right thing (e.g. building against the right version of the MacOS SDK).
+
+
 Building Against NumPy
 ----------------------
 If you have a package which links\* against ``numpy`` you can build against the oldest possible version of ``numpy`` that is forwards compatible.
