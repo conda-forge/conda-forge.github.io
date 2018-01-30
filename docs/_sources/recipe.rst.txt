@@ -70,17 +70,20 @@ faster, and free some resource for other project.
 
 Optional: ``bld.bat`` and/or ``build.sh``
 ------------------------------------------
-In many cases, ``bld.bat`` and/or ``build.sh`` files are not required. Pure Python packages almost never need it.
+In many cases, ``bld.bat`` and/or ``build.sh`` files are not required. Pure Python packages almost never need them.
 If the build can be executed with one line, you may put this line in the ``script`` entry of the ``build`` section of
-the ``meta.yaml`` file.
+the ``meta.yaml`` file. (For instance, if a file uses `setuptools`, try ``script: python setup.py install --single-version-externally-managed --record=record.txt``.)
 
 
 Maintainer Role
 ---------------
-The maintainers "job" is to:
+The maintainer's job is to:
 
 - keep the feedstock updated by merging eventual maintenance PRs from conda-forge's bots;
-- keep the package updated by bumping the version whenever there is a new release;
+- keep the feedstock on par with new releases of the source package by
+  - bumping the version number and checksum;
+  - making sure that feedstock's ``install`` and ``run`` requirements stay accurate;
+  - make sure the test requirements match those of the of the updated package;
 - answer eventual question about the package on the feedstock issue tracker.
 
 

@@ -104,16 +104,19 @@ faster, and free some resource for other project.</p>
 </div>
 <div class="section" id="optional-bld-bat-and-or-build-sh">
 <h2>Optional: <code class="docutils literal"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal"><span class="pre">build.sh</span></code><a class="headerlink" href="#optional-bld-bat-and-or-build-sh" title="Permalink to this headline">¶</a></h2>
-<p>In many cases, <code class="docutils literal"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal"><span class="pre">build.sh</span></code> files are not required. Pure Python packages almost never need it.
+<p>In many cases, <code class="docutils literal"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal"><span class="pre">build.sh</span></code> files are not required. Pure Python packages almost never need them.
 If the build can be executed with one line, you may put this line in the <code class="docutils literal"><span class="pre">script</span></code> entry of the <code class="docutils literal"><span class="pre">build</span></code> section of
-the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file.</p>
+the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file. (For instance, if a file uses <cite>setuptools</cite>, try <code class="docutils literal"><span class="pre">script:</span> <span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span> <span class="pre">--single-version-externally-managed</span> <span class="pre">--record=record.txt</span></code>.)</p>
 </div>
 <div class="section" id="maintainer-role">
 <h2>Maintainer Role<a class="headerlink" href="#maintainer-role" title="Permalink to this headline">¶</a></h2>
-<p>The maintainers “job” is to:</p>
+<p>The maintainer’s job is to:</p>
 <ul class="simple">
 <li>keep the feedstock updated by merging eventual maintenance PRs from conda-forge’s bots;</li>
-<li>keep the package updated by bumping the version whenever there is a new release;</li>
+<li>keep the feedstock on par with new releases of the source package by
+- bumping the version number and checksum;
+- making sure that feedstock’s <code class="docutils literal"><span class="pre">install</span></code> and <code class="docutils literal"><span class="pre">run</span></code> requirements stay accurate;
+- make sure the test requirements match those of the of the updated package;</li>
 <li>answer eventual question about the package on the feedstock issue tracker.</li>
 </ul>
 </div>
