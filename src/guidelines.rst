@@ -7,13 +7,12 @@ Transferring to conda-forge
 This document intends to layout some guidelines on the transfer of
 `conda-recipes <https://github.com/conda/conda-recipes>`__ and
 `anaconda-recipes <https://github.com/ContinuumIO/anaconda-recipes>`__
-to conda-forge. These aren't hard and fast rules. They are certainly up
-for discussion. However, it would be good to come up with a consensus
-going forward.
+to conda-forge. These aren't hard and fast rules and are open resonable
+interpretation and reviewer judegement.
 
-Eventually all recipes from those repos should be proposed for
-addition here. It may be decided that a few don't actually belong or
-should not be supported anymore.
+It is the aspiration that almost all recipes from those repos shall be
+proposed for addition here, thought it may be decided that a few don't
+actually belong or should not be supported anymore.
 
 When adding a package from either location, inspect the commit history
 to see who has made changes to the recipe in the past. Anyone who has
@@ -49,27 +48,30 @@ all links to compressed source balls allow for easy changing of the version
 (using latest is not acceptable). Also, a checksum should be included with
 all compressed source balls to allow for verification of downloads.
 
-It is possible but not recommendable to include multiple recipes into a
-single pull request. Within staged-recipes we use a tool called conda-build-all.
-This tool scans through the recipes, figures out what needs to be built, figures
-out what combinations needed to build, and figures out what order to build everything
-in. So this tool can handle building multiple recipes correctly. That said, there are
-limitations on the continuous integration resources. Though, and this is arguably more
-important, there are practical limits on what reviewers are able/willing to do. A large
-pull request with many recipes makes it more difficult to review. If the recipes make
-it through these two constraints and get merged, race conditions amongst the different
-feedstocks kick in meaning work by you and/or core to restart them in such a way to build
-everything. None of this is to say that one can't add multiple recipes in a single
-pull request. One certainly can do this and it can work. However there are trade-offs that
-may make it less desirable. In practice, having a couple of recipes (e.g. 2 or 3) in
-a pull request normally works fine.
-
 It is required to add tests with all packages. These can included but are
 not limited to checking libraries are installed, python imports, simple
 code snippet to compile or run a basic test, command line usage (checking
 help or version). It is suggested that compiled code run all tests (e.g.
 ``make check``) to ensure it was built properly. This normally should
 happen in the build.
+
+It is possible, though not recommended, to include multiple recipes into a
+single pull request on staged-recipes. conda-build-all is used to determine
+the build order and the necessary build matrix (e.g. which python versions to
+build against). From a practical perspective, there are limitations on the
+continuous integration resources and also on what reviewers are able/willing
+to review in a single pull request.
+A large pull request with many recipes makes it more difficult to review.
+If the recipes make it through these two constraints and is merged, race
+conditions amongst the different feedstocks may require work by you and/or
+core maintainers to restart them in such a way to build everything in a
+suitable order.
+None of this is to say that one can't add multiple recipes in a single
+pull request. One certainly can do this and it can work, but the
+recommendation is to open a PR with one recipe first, and to ping
+@conda-forge/core to ask for agreement about adding one or two additional
+recipes.
+
 
 Intended Usage
 ==============
