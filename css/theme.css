@@ -80,9 +80,12 @@ a:focus {
 
 .list-group-item {
     margin-bottom: 0;
-    border-bottom: 1px solid rgba(255,255,255,.1);
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: black;
+}
+
+.list-group-item:not(:last-child){
+    border-bottom: 1px solid rgba(255,255,255,.1);
 }
 
 
