@@ -72,6 +72,13 @@
     <!-- About Section -->
     <section id="feedstocks" class="container content-section">
         <div class="row">
+          <div class="form-group col-lg-8 col-lg-offset-2 col btn-group" role='group'>
+            <input class='form-control' placeholder='Filter items'
+            style='display:none' id='searchfield' type='text'>
+          </div>
+        </div>
+
+        <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2 class="text-center">Feedstocks on conda-forge</h2>
                 <ul class="list-group">
@@ -123,6 +130,28 @@
       ga('send', 'pageview');
 
     </script>
+    <script>
+       $('#searchfield').show().on('change keyup keypress paste', function(){
+         var searchterm =  $('#searchfield').val().toLowerCase();
+
+         var searchterms = searchterm.split(' ').filter(function(it){return it});
+
+         $('.list-group-item').map(function(ind, it){
+           var searched_text = it.children[0].innerText.toLowerCase()
+
+           var match_array = searchterms.map(function(it){return searched_text.indexOf(it) == -1?0:1});
+           var n_matches = match_array.reduce(function(a,b){return a+b}, 0);
+           var match = (n_matches == searchterms.length);
+
+           if(match){
+             it.classList.remove('search-hidden');
+           } else {
+             it.classList.add('search-hidden');
+           }
+         })
+       })
+     </script>
+
 
 </body>
 
