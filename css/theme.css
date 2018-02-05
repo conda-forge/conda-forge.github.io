@@ -83,6 +83,16 @@ a:focus {
     border-bottom: 1px solid rgba(255,255,255,.1);
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: black;
+    transition: all 0.1s ease;
+}
+
+
+.list-group-item.search-hidden {
+  height:0;
+  padding-top:0;
+  padding-bottom:0;
+  opacity:0;
+  border:none;
 }
 
 
@@ -379,13 +389,13 @@ footer p {
     margin: 0;
 }
 
-:not(code)::-moz-selection {
+:not(code):not(input)::-moz-selection {
     text-shadow: none;
     background: #fcfcfc;
     background: rgba(255,255,255,.2);
 }
 
-:not(code)::selection {
+:not(code):not(input)::selection {
     text-shadow: none;
     background: #fcfcfc;
     background: rgba(255,255,255,.2);
