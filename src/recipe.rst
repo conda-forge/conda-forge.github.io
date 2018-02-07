@@ -72,7 +72,8 @@ Optional: ``bld.bat`` and/or ``build.sh``
 ------------------------------------------
 In many cases, ``bld.bat`` and/or ``build.sh`` files are not required. Pure Python packages almost never need them.
 If the build can be executed with one line, you may put this line in the ``script`` entry of the ``build`` section of
-the ``meta.yaml`` file. (For instance, if a file uses `setuptools`, try ``script: python setup.py install --single-version-externally-managed --record=record.txt``.)
+the ``meta.yaml`` file with: ``script: python -m pip install --no-deps --ignore-installed .``,
+remember to always add ``pip`` to the build requirements.
 
 
 Maintainer Role
