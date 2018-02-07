@@ -106,7 +106,8 @@ faster, and free some resource for other project.</p>
 <h2>Optional: <code class="docutils literal"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal"><span class="pre">build.sh</span></code><a class="headerlink" href="#optional-bld-bat-and-or-build-sh" title="Permalink to this headline">¶</a></h2>
 <p>In many cases, <code class="docutils literal"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal"><span class="pre">build.sh</span></code> files are not required. Pure Python packages almost never need them.
 If the build can be executed with one line, you may put this line in the <code class="docutils literal"><span class="pre">script</span></code> entry of the <code class="docutils literal"><span class="pre">build</span></code> section of
-the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file. (For instance, if a file uses <cite>setuptools</cite>, try <code class="docutils literal"><span class="pre">script:</span> <span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span> <span class="pre">--single-version-externally-managed</span> <span class="pre">--record=record.txt</span></code>.)</p>
+the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file with: <code class="docutils literal"><span class="pre">script:</span> <span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--no-deps</span> <span class="pre">--ignore-installed</span> <span class="pre">.</span></code>,
+remember to always add <code class="docutils literal"><span class="pre">pip</span></code> to the build requirements.</p>
 </div>
 <div class="section" id="maintainer-role">
 <h2>Maintainer Role<a class="headerlink" href="#maintainer-role" title="Permalink to this headline">¶</a></h2>
