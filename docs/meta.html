@@ -174,11 +174,12 @@ not properly specified the first time you build a package, then when you fix the
 dependency and rebuild the package you should increase the build number.</p>
 <p>When the package version changes you should reset the build number to <code class="docutils literal"><span class="pre">0</span></code>.</p>
 </div>
-<div class="section" id="single-version-externally-managed">
-<h2>Single Version, Externally Managed<a class="headerlink" href="#single-version-externally-managed" title="Permalink to this headline">¶</a></h2>
-<p>Many packages use <code class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span> <span class="pre">--single-version-externally-managed</span> <span class="pre">--record</span> <span class="pre">record.txt</span></code></p>
-<p>These options should be added to setup.py if a project uses setuptools. The goal is to prevent <code class="docutils literal"><span class="pre">setuptools</span></code>
-from creating an <code class="docutils literal"><span class="pre">egg-info</span></code> directory because it does not interact well with conda.</p>
+<div class="section" id="use-pip">
+<h2>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h2>
+<p>Normally packages should use <code class="docutils literal"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--no-deps</span> <span class="pre">--ignore-installed</span> <span class="pre">.</span></code> as the installation script
+in the <code class="docutils literal"><span class="pre">build/script</span></code> section or <code class="docutils literal"><span class="pre">bld.bat/build.sh</span></code> scripts, while adding <code class="docutils literal"><span class="pre">pip</span></code> to the build requirements.</p>
+<p>These options should be used to ensure a clean installation of the package without its dependencies and without
+<code class="docutils literal"><span class="pre">egg-info</span></code> directories, which do not interact well with conda.</p>
 </div>
 <div class="section" id="downloading-extra-sources-and-data-files">
 <h2>Downloading extra sources and data files<a class="headerlink" href="#downloading-extra-sources-and-data-files" title="Permalink to this headline">¶</a></h2>
@@ -209,7 +210,7 @@ can use curl to download and openssl to verify.</p>
 <li><a class="reference internal" href="#building-against-numpy">Building Against NumPy</a></li>
 <li><a class="reference internal" href="#building-noarch-packages">Building <code class="docutils literal"><span class="pre">noarch</span></code> packages</a></li>
 <li><a class="reference internal" href="#build-number">Build Number</a></li>
-<li><a class="reference internal" href="#single-version-externally-managed">Single Version, Externally Managed</a></li>
+<li><a class="reference internal" href="#use-pip">Use pip</a></li>
 <li><a class="reference internal" href="#downloading-extra-sources-and-data-files">Downloading extra sources and data files</a></li>
 </ul>
 </li>
