@@ -167,12 +167,13 @@ dependency and rebuild the package you should increase the build number.
 When the package version changes you should reset the build number to ``0``.
 
 
-Single Version, Externally Managed
-----------------------------------
-Many packages use ``python setup.py install --single-version-externally-managed --record record.txt``
+Use pip
+-------
+Normally packages should use ``python -m pip install --no-deps --ignore-installed .`` as the installation script
+in the ``build/script`` section or ``bld.bat/build.sh`` scripts, while adding ``pip`` to the build requirements.
 
-These options should be added to setup.py if a project uses setuptools. The goal is to prevent ``setuptools``
-from creating an ``egg-info`` directory because it does not interact well with conda.
+These options should be used to ensure a clean installation of the package without its dependencies and without 
+``egg-info`` directories, which do not interact well with conda.
 
 
 Downloading extra sources and data files
