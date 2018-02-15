@@ -131,25 +131,40 @@
 
     </script>
     <script>
-       $('#searchfield').show().on('change keyup keypress paste', function(){
-         var searchterm =  $('#searchfield').val().toLowerCase();
+        var listGroup = $('.list-group');
+        var listGroupItems = $('.list-group-item');
+        var listGroupText = new Array(listGroupItems.length);
+        var links = new Array(listGroupItems.length);
 
-         var searchterms = searchterm.split(' ').filter(function(it){return it});
+        // collect each element of class list-group-item's innerText
+        // along with their href on initial page load
+        for(var i = 0; i < listGroupItems.length; i++) {
+          listGroupText[i] = listGroupItems[i].innerText;
+          links[i] = listGroupItems[i].firstElementChild.href;
+        }
+        $('#searchfield').show().on('change keyup keypress paste', function() {
+          var searchterm =  $('#searchfield').val().toLowerCase();
+          var terms = searchterm.split(' ');
+          var output = '';
+          var currentItem = '';
+          var matches = [];
+          for(var i = 0; i < listGroupItems.length; i++) {
+            currentItem = listGroupText[i];
 
-         $('.list-group-item').map(function(ind, it){
-           var searched_text = it.children[0].innerText.toLowerCase()
+            // compare each searched term to the current feedstock item,
+            // return 0 if term is not in item else return 1
+            matches = terms.map(function(term) {
+                return currentItem.indexOf(term) == -1 ? 0 : 1;
+            })
 
-           var match_array = searchterms.map(function(it){return searched_text.indexOf(it) == -1?0:1});
-           var n_matches = match_array.reduce(function(a,b){return a+b}, 0);
-           var match = (n_matches == searchterms.length);
-
-           if(match){
-             it.classList.remove('search-hidden');
-           } else {
-             it.classList.add('search-hidden');
-           }
-         })
-       })
+            // sum up the matches and check that it's equal to the number of search terms entered
+            // if equal, add to output html
+            if(matches.reduce(function(a,b) { return a + b; }, 0) == terms.length) {
+              output += '<li class="list-group-item"><a href="' + links[i] + '">' + listGroupText[i] + '</a></li>';
+            }
+          }
+          listGroup.html(output);
+        })
      </script>
 
 
