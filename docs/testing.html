@@ -4,20 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Testing in Recipes &#8212; conda-forge 0.0.1a1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.0.1a1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -31,8 +23,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
@@ -52,11 +43,11 @@ execute the prescribed test suite.</p>
 <p>However, this is no reason for the recipe to not have tests. At the very least
 we want to verify that the package is installed the desired files in the desired
 locations. This is called existence testing.</p>
-<p>Existence testing can be accomplished in the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file in the <code class="docutils literal"><span class="pre">test/commands</span></code>
-block. On posix systems, use the <code class="docutils literal"><span class="pre">test</span></code> utility and the <code class="docutils literal"><span class="pre">$PREFIX</span></code> variable.
-On Windows, use the <code class="docutils literal"><span class="pre">exist</span></code> command. See below for an example.</p>
+<p>Existence testing can be accomplished in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file in the <code class="docutils literal notranslate"><span class="pre">test/commands</span></code>
+block. On posix systems, use the <code class="docutils literal notranslate"><span class="pre">test</span></code> utility and the <code class="docutils literal notranslate"><span class="pre">$PREFIX</span></code> variable.
+On Windows, use the <code class="docutils literal notranslate"><span class="pre">exist</span></code> command. See below for an example.</p>
 <p><strong>Simple Existence Testing Example:</strong></p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">test</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">test</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">commands</span><span class="p p-Indicator">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">test -f $PREFIX/lib/libboost_log$SHLIB_EXT</span>  <span class="c1"># [unix]</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1</span>  <span class="c1"># [win and py35]</span>
@@ -66,8 +57,8 @@ On Windows, use the <code class="docutils literal"><span class="pre">exist</span
 <div class="section" id="run-docker-tests-locally-for-feedstock">
 <h2>Run Docker Tests Locally for Feedstock<a class="headerlink" href="#run-docker-tests-locally-for-feedstock" title="Permalink to this headline">¶</a></h2>
 <p>If you want to run the docker tests for a feedstock locally, go to the root
-feedstock directory and run, the <code class="docutils literal"><span class="pre">ci_support/run_docker_build.sh</span></code> script.</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my-feedstock
+feedstock directory and run, the <code class="docutils literal notranslate"><span class="pre">ci_support/run_docker_build.sh</span></code> script.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my-feedstock
 $ ./ci_support/run_docker_build.sh
 </pre></div>
 </div>
@@ -75,8 +66,8 @@ $ ./ci_support/run_docker_build.sh
 <div class="section" id="run-docker-tests-locally-for-staged-recipes">
 <h2>Run Docker Tests Locally for Staged Recipes<a class="headerlink" href="#run-docker-tests-locally-for-staged-recipes" title="Permalink to this headline">¶</a></h2>
 <p>If you want to run the docker tests for the staged-recipes repository locally, go to
-the root repository directory and run the <code class="docutils literal"><span class="pre">.circleci/run_docker_build.sh</span></code> script.</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> staged-recipes
+the root repository directory and run the <code class="docutils literal notranslate"><span class="pre">.circleci/run_docker_build.sh</span></code> script.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> staged-recipes
 $ ./.circleci/run_docker_build.sh
 </pre></div>
 </div>
@@ -123,12 +114,14 @@ Just test sufficiently to know that the package is in good working order.</p>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -139,7 +132,7 @@ Just test sufficiently to know that the package is in good working order.</p>
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

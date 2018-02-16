@@ -4,20 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Writing the meta.yaml &#8212; conda-forge 0.0.1a1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.0.1a1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -31,8 +23,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
@@ -41,14 +32,14 @@
           <div class="body" role="main">
             
   <div class="section" id="writing-the-meta-yaml">
-<h1>Writing the <code class="docutils literal"><span class="pre">meta.yaml</span></code><a class="headerlink" href="#writing-the-meta-yaml" title="Permalink to this headline">¶</a></h1>
+<h1>Writing the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code><a class="headerlink" href="#writing-the-meta-yaml" title="Permalink to this headline">¶</a></h1>
 <p>This document presents conda-forge rules, guidelines, and justifications
-about writing the <code class="docutils literal"><span class="pre">meta.yaml</span></code> file.</p>
+about writing the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file.</p>
 <div class="section" id="build-from-tarballs-not-repos">
 <h2>Build from Tarballs, Not Repos<a class="headerlink" href="#build-from-tarballs-not-repos" title="Permalink to this headline">¶</a></h2>
 <p>Conda-forge requires that building from tarballs using the
-<code class="docutils literal"><span class="pre">url</span></code> and <code class="docutils literal"><span class="pre">fn</span></code> keys in the <code class="docutils literal"><span class="pre">build</span></code> section. A recipe
-should not use the <code class="docutils literal"><span class="pre">git_url</span></code>, <code class="docutils literal"><span class="pre">git_ver</span></code>, and similar
+<code class="docutils literal notranslate"><span class="pre">url</span></code> and <code class="docutils literal notranslate"><span class="pre">fn</span></code> keys in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section. A recipe
+should not use the <code class="docutils literal notranslate"><span class="pre">git_url</span></code>, <code class="docutils literal notranslate"><span class="pre">git_ver</span></code>, and similar
 keys. There are three main reasons for this:</p>
 <ul class="simple">
 <li>Downloading the whole repo when you only need a single snapshot wastes
@@ -67,32 +58,32 @@ the source can be patched to include the relevant build information.</p>
 <h2>Packaging the License Manually<a class="headerlink" href="#packaging-the-license-manually" title="Permalink to this headline">¶</a></h2>
 <p>Certain software licenses, such as those in the GPL and Apache families,
 require that the text of the license be distributed with the package.
-This means that the <code class="docutils literal"><span class="pre">about/license_file</span></code> entry <em>must</em> be included in the
-<code class="docutils literal"><span class="pre">meta.yaml</span></code>. Unfortunately, the license isn’t always included in the
+This means that the <code class="docutils literal notranslate"><span class="pre">about/license_file</span></code> entry <em>must</em> be included in the
+<code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>. Unfortunately, the license isn’t always included in the
 tarball of the source code.</p>
 <p>To get around this, the licence should be put in the recipe directory.
-It can then be refered to in the <code class="docutils literal"><span class="pre">meta.yaml</span></code> via,</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">about</span><span class="p p-Indicator">:</span>
+It can then be refered to in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> via,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">about</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">license_file</span><span class="p p-Indicator">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">environ[&quot;RECIPE_DIR&quot;]</span><span class="nv"> </span><span class="s">}}/LICENSE&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="populating-the-hash-field">
-<h2>Populating the <code class="docutils literal"><span class="pre">hash</span></code> Field<a class="headerlink" href="#populating-the-hash-field" title="Permalink to this headline">¶</a></h2>
+<h2>Populating the <code class="docutils literal notranslate"><span class="pre">hash</span></code> Field<a class="headerlink" href="#populating-the-hash-field" title="Permalink to this headline">¶</a></h2>
 <p>If your package is on PyPI, you can get the md5 hash from your package’s page
-on PyPI; look for the <code class="docutils literal"><span class="pre">md5</span></code> link next to the download link for your package.</p>
+on PyPI; look for the <code class="docutils literal notranslate"><span class="pre">md5</span></code> link next to the download link for your package.</p>
 <p>You can also generate a hash from the command line on Linux (and Mac if you
-install the necessary tools below). If you go this route, the <code class="docutils literal"><span class="pre">sha256</span></code> hash
-is preferable to the <code class="docutils literal"><span class="pre">md5</span></code> hash.</p>
-<p>To generate the <code class="docutils literal"><span class="pre">md5</span></code> hash: <code class="docutils literal"><span class="pre">md5</span> <span class="pre">your_sdist.tar.gz</span></code></p>
-<p>To generate the <code class="docutils literal"><span class="pre">sha256</span></code> hash: <code class="docutils literal"><span class="pre">openssl</span> <span class="pre">sha256</span> <span class="pre">your_sdist.tar.gz</span></code></p>
+install the necessary tools below). If you go this route, the <code class="docutils literal notranslate"><span class="pre">sha256</span></code> hash
+is preferable to the <code class="docutils literal notranslate"><span class="pre">md5</span></code> hash.</p>
+<p>To generate the <code class="docutils literal notranslate"><span class="pre">md5</span></code> hash: <code class="docutils literal notranslate"><span class="pre">md5</span> <span class="pre">your_sdist.tar.gz</span></code></p>
+<p>To generate the <code class="docutils literal notranslate"><span class="pre">sha256</span></code> hash: <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">sha256</span> <span class="pre">your_sdist.tar.gz</span></code></p>
 <p>You may need the openssl package, available on conda-forge
-<code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">openssl</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">openssl</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code>.</p>
 </div>
 <div class="section" id="excluding-a-platform">
 <h2>Excluding a Platform<a class="headerlink" href="#excluding-a-platform" title="Permalink to this headline">¶</a></h2>
-<p>Use the <code class="docutils literal"><span class="pre">skip</span></code> key in the <code class="docutils literal"><span class="pre">build</span></code> section along with a selector:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">skip</span></code> key in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section along with a selector:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
     <span class="l l-Scalar l-Scalar-Plain">skip</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>  <span class="c1"># [win]</span>
 </pre></div>
 </div>
@@ -100,22 +91,22 @@ is preferable to the <code class="docutils literal"><span class="pre">md5</span>
 <a class="reference external" href="http://conda.pydata.org/docs/building/meta-yaml.html#preprocessing-selectors">in the conda docs</a>.</p>
 </div>
 <div class="section" id="using-the-compilation-toolchain">
-<h2>Using the Compilation <code class="docutils literal"><span class="pre">toolchain</span></code><a class="headerlink" href="#using-the-compilation-toolchain" title="Permalink to this headline">¶</a></h2>
+<h2>Using the Compilation <code class="docutils literal notranslate"><span class="pre">toolchain</span></code><a class="headerlink" href="#using-the-compilation-toolchain" title="Permalink to this headline">¶</a></h2>
 <p>Packages that need to compile code should add the <cite>toolchain</cite> package as a build dependency. This helps set up environment variables to instruct the compilers to do the right thing (e.g. building against the right version of the MacOS SDK).</p>
 </div>
 <div class="section" id="building-against-numpy">
 <h2>Building Against NumPy<a class="headerlink" href="#building-against-numpy" title="Permalink to this headline">¶</a></h2>
-<p>If you have a package which links* against <code class="docutils literal"><span class="pre">numpy</span></code> you can build against the oldest possible version of <code class="docutils literal"><span class="pre">numpy</span></code> that is forwards compatible.
+<p>If you have a package which links* against <code class="docutils literal notranslate"><span class="pre">numpy</span></code> you can build against the oldest possible version of <code class="docutils literal notranslate"><span class="pre">numpy</span></code> that is forwards compatible.
 That can be achieved by pinning the build requirements and letting “free” the run requirements.
 If you don’t want to make things complicated you can use</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.11.*</span>
 <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy &gt;=1.11</span>
 </pre></div>
 </div>
-<p>However, these are the oldest available <code class="docutils literal"><span class="pre">numpy</span></code> versions in conda-forge that you can use, if you need to support older versions than <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.11</span></code>.</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+<p>However, these are the oldest available <code class="docutils literal notranslate"><span class="pre">numpy</span></code> versions in conda-forge that you can use, if you need to support older versions than <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.11</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.8.*</span>  <span class="c1"># [not (win and (py35 or py36))]</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.9.*</span>  <span class="c1"># [win and py35]</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.11.*</span>  <span class="c1"># [win and py36]</span>
@@ -125,46 +116,46 @@ If you don’t want to make things complicated you can use</p>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy &gt;=1.11</span>  <span class="c1"># [win and py36]</span>
 </pre></div>
 </div>
-<p>We will add older versions for <code class="docutils literal"><span class="pre">Python</span> <span class="pre">3.6</span></code> on Windows soon.
-That will allow us to simplify the minimum <code class="docutils literal"><span class="pre">numpy</span></code> to <code class="docutils literal"><span class="pre">1.8</span></code> across all platforms and Python versions.</p>
-<p>* In order to know if your package links against <code class="docutils literal"><span class="pre">numpy</span></code> check for things like <code class="docutils literal"><span class="pre">numpy.get_include()</span></code> in your <code class="docutils literal"><span class="pre">setup.py</span></code>,
-or if the package uses <code class="docutils literal"><span class="pre">cimport</span></code>.</p>
+<p>We will add older versions for <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3.6</span></code> on Windows soon.
+That will allow us to simplify the minimum <code class="docutils literal notranslate"><span class="pre">numpy</span></code> to <code class="docutils literal notranslate"><span class="pre">1.8</span></code> across all platforms and Python versions.</p>
+<p>* In order to know if your package links against <code class="docutils literal notranslate"><span class="pre">numpy</span></code> check for things like <code class="docutils literal notranslate"><span class="pre">numpy.get_include()</span></code> in your <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>,
+or if the package uses <code class="docutils literal notranslate"><span class="pre">cimport</span></code>.</p>
 <div class="admonition-notes admonition">
 <p class="first admonition-title">Notes</p>
-<p>1. you still need to respect minimum supported version of <code class="docutils literal"><span class="pre">numpy</span></code> for the package!
-That means you cannot use <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.8</span></code> if the project requires at least <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.9</span></code>,
+<p>1. you still need to respect minimum supported version of <code class="docutils literal notranslate"><span class="pre">numpy</span></code> for the package!
+That means you cannot use <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.8</span></code> if the project requires at least <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.9</span></code>,
 adjust the minimum version accordingly!</p>
-<p class="last">2. if your package supports <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">1.7</span></code>, and you are brave enough :-),
-there are <code class="docutils literal"><span class="pre">numpy</span></code> packages for <code class="docutils literal"><span class="pre">1.7</span></code> available for Python 3.4 and 2.7 in the channel.</p>
+<p class="last">2. if your package supports <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.7</span></code>, and you are brave enough :-),
+there are <code class="docutils literal notranslate"><span class="pre">numpy</span></code> packages for <code class="docutils literal notranslate"><span class="pre">1.7</span></code> available for Python 3.4 and 2.7 in the channel.</p>
 </div>
 <div class="admonition-deprecated admonition">
 <p class="first admonition-title">Deprecated</p>
-<p class="last">Adding <code class="docutils literal"><span class="pre">numpy</span> <span class="pre">x.x</span></code> to the build and run sections translates to a matrix pinned to all
+<p class="last">Adding <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">x.x</span></code> to the build and run sections translates to a matrix pinned to all
 available numpy versions (e.g. 1.11, 1.12 and 1.13). In order to optimize CI ressources
 usage this option is now deprecated in favour of the apporach described above.</p>
 </div>
 </div>
 <div class="section" id="building-noarch-packages">
-<span id="noarch"></span><h2>Building <code class="docutils literal"><span class="pre">noarch</span></code> packages<a class="headerlink" href="#building-noarch-packages" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal"><span class="pre">noarch:</span> <span class="pre">python</span></code> can be used to build pure Python packages:</p>
+<span id="noarch"></span><h2>Building <code class="docutils literal notranslate"><span class="pre">noarch</span></code> packages<a class="headerlink" href="#building-noarch-packages" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> can be used to build pure Python packages:</p>
 <ul class="simple">
 <li>that do not perform any Python version specific code translation at install time (i.e. 2to3);</li>
 <li>and have fixed requirements; that is to say no conditional dependencies
 depending on the Python version, or the platform ran. (If you have for example
-<code class="docutils literal"><span class="pre">backports</span> <span class="pre">#</span> <span class="pre">[py27])</span></code> in the <code class="docutils literal"><span class="pre">run</span></code> section of <code class="docutils literal"><span class="pre">meta.yml</span></code>, your package
+<code class="docutils literal notranslate"><span class="pre">backports</span> <span class="pre">#</span> <span class="pre">[py27])</span></code> in the <code class="docutils literal notranslate"><span class="pre">run</span></code> section of <code class="docutils literal notranslate"><span class="pre">meta.yml</span></code>, your package
 can’t be noarch, yet).</li>
-<li>and do not use selectors to <code class="docutils literal"><span class="pre">skip</span></code> building the recipe on a specific platform or
-for a specific version of python (e.g. <code class="docutils literal"><span class="pre">skip:</span> <span class="pre">True</span>&#160; <span class="pre">#</span> <span class="pre">[py2k]</span></code>).</li>
+<li>and do not use selectors to <code class="docutils literal notranslate"><span class="pre">skip</span></code> building the recipe on a specific platform or
+for a specific version of python (e.g. <code class="docutils literal notranslate"><span class="pre">skip:</span> <span class="pre">True</span>&#160; <span class="pre">#</span> <span class="pre">[py2k]</span></code>).</li>
 </ul>
-<p>The use of <code class="docutils literal"><span class="pre">noarch:</span> <span class="pre">python</span></code> will drastically reduce the CI usage as the
-package will be built only once on <code class="docutils literal"><span class="pre">CircleCI</span></code>, which will make your build much
+<p>The use of <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> will drastically reduce the CI usage as the
+package will be built only once on <code class="docutils literal notranslate"><span class="pre">CircleCI</span></code>, which will make your build much
 faster, and free resources for other packages!</p>
-<p>To use that just add <code class="docutils literal"><span class="pre">noarch:</span> <span class="pre">python</span></code> in the build section like,</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+<p>To use that just add <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> in the build section like,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">noarch</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
 </pre></div>
 </div>
-<p>and re-render with the feedstock with <code class="docutils literal"><span class="pre">conda-smithy</span></code> &gt;=2.4.0</p>
+<p>and re-render with the feedstock with <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> &gt;=2.4.0</p>
 </div>
 <div class="section" id="build-number">
 <h2>Build Number<a class="headerlink" href="#build-number" title="Permalink to this headline">¶</a></h2>
@@ -172,14 +163,24 @@ faster, and free resources for other packages!</p>
 need to make a new build. For example, if one of the dependencies of the package was
 not properly specified the first time you build a package, then when you fix the
 dependency and rebuild the package you should increase the build number.</p>
-<p>When the package version changes you should reset the build number to <code class="docutils literal"><span class="pre">0</span></code>.</p>
+<p>When the package version changes you should reset the build number to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 </div>
 <div class="section" id="use-pip">
 <h2>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h2>
-<p>Normally packages should use <code class="docutils literal"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--no-deps</span> <span class="pre">--ignore-installed</span> <span class="pre">.</span></code> as the installation script
-in the <code class="docutils literal"><span class="pre">build/script</span></code> section or <code class="docutils literal"><span class="pre">bld.bat/build.sh</span></code> scripts, while adding <code class="docutils literal"><span class="pre">pip</span></code> to the build requirements.</p>
-<p>These options should be used to ensure a clean installation of the package without its dependencies and without
-<code class="docutils literal"><span class="pre">egg-info</span></code> directories, which do not interact well with conda.</p>
+<p>Normally packages should use this line:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">python -m pip install --no-deps --ignore-installed .</span>
+</pre></div>
+</div>
+<p>as the installation script in the <code class="docutils literal notranslate"><span class="pre">meta.yml</span></code> file or <code class="docutils literal notranslate"><span class="pre">bld.bat/build.sh</span></code> script files,
+while adding <code class="docutils literal notranslate"><span class="pre">pip</span></code> to the build requirements:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip</span>
+</pre></div>
+</div>
+<p>These options should be used to ensure a clean installation of the package without its
+dependencies and without <code class="docutils literal notranslate"><span class="pre">egg-info</span></code> directories, which do not interact well with conda.</p>
 </div>
 <div class="section" id="downloading-extra-sources-and-data-files">
 <h2>Downloading extra sources and data files<a class="headerlink" href="#downloading-extra-sources-and-data-files" title="Permalink to this headline">¶</a></h2>
@@ -201,14 +202,14 @@ can use curl to download and openssl to verify.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Writing the <code class="docutils literal"><span class="pre">meta.yaml</span></code></a><ul>
+<li><a class="reference internal" href="#">Writing the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></a><ul>
 <li><a class="reference internal" href="#build-from-tarballs-not-repos">Build from Tarballs, Not Repos</a></li>
 <li><a class="reference internal" href="#packaging-the-license-manually">Packaging the License Manually</a></li>
-<li><a class="reference internal" href="#populating-the-hash-field">Populating the <code class="docutils literal"><span class="pre">hash</span></code> Field</a></li>
+<li><a class="reference internal" href="#populating-the-hash-field">Populating the <code class="docutils literal notranslate"><span class="pre">hash</span></code> Field</a></li>
 <li><a class="reference internal" href="#excluding-a-platform">Excluding a Platform</a></li>
-<li><a class="reference internal" href="#using-the-compilation-toolchain">Using the Compilation <code class="docutils literal"><span class="pre">toolchain</span></code></a></li>
+<li><a class="reference internal" href="#using-the-compilation-toolchain">Using the Compilation <code class="docutils literal notranslate"><span class="pre">toolchain</span></code></a></li>
 <li><a class="reference internal" href="#building-against-numpy">Building Against NumPy</a></li>
-<li><a class="reference internal" href="#building-noarch-packages">Building <code class="docutils literal"><span class="pre">noarch</span></code> packages</a></li>
+<li><a class="reference internal" href="#building-noarch-packages">Building <code class="docutils literal notranslate"><span class="pre">noarch</span></code> packages</a></li>
 <li><a class="reference internal" href="#build-number">Build Number</a></li>
 <li><a class="reference internal" href="#use-pip">Use pip</a></li>
 <li><a class="reference internal" href="#downloading-extra-sources-and-data-files">Downloading extra sources and data files</a></li>
@@ -233,12 +234,14 @@ can use curl to download and openssl to verify.</p>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -249,7 +252,7 @@ can use curl to download and openssl to verify.</p>
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

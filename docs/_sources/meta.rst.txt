@@ -169,11 +169,24 @@ When the package version changes you should reset the build number to ``0``.
 
 Use pip
 -------
-Normally packages should use ``python -m pip install --no-deps --ignore-installed .`` as the installation script
-in the ``build/script`` section or ``bld.bat/build.sh`` scripts, while adding ``pip`` to the build requirements.
+Normally packages should use this line:
 
-These options should be used to ensure a clean installation of the package without its dependencies and without 
-``egg-info`` directories, which do not interact well with conda.
+.. code-block:: yaml
+
+    build:
+      script: python -m pip install --no-deps --ignore-installed .
+
+as the installation script in the ``meta.yml`` file or ``bld.bat/build.sh`` script files,
+while adding ``pip`` to the build requirements:
+
+.. code-block:: yaml
+
+    requirements:
+      build:
+        - pip
+
+These options should be used to ensure a clean installation of the package without its
+dependencies and without ``egg-info`` directories, which do not interact well with conda.
 
 
 Downloading extra sources and data files

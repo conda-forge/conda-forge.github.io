@@ -4,20 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Building on Windows &#8212; conda-forge 0.0.1a1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.0.1a1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -31,8 +23,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
@@ -45,12 +36,12 @@
 <p>This document presents conda-forge and conda-build information and examples
 when building on Windows.</p>
 <div class="section" id="simple-cmake-based-bld-bat">
-<h2>Simple CMake-Based <code class="docutils literal"><span class="pre">bld.bat</span></code><a class="headerlink" href="#simple-cmake-based-bld-bat" title="Permalink to this headline">¶</a></h2>
+<h2>Simple CMake-Based <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code><a class="headerlink" href="#simple-cmake-based-bld-bat" title="Permalink to this headline">¶</a></h2>
 <p>Some projects provide hooks for CMake to build the project. The following
-example <code class="docutils literal"><span class="pre">bld.bat</span></code> file demonstrates how to build a traditional, out-of-core
+example <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> file demonstrates how to build a traditional, out-of-core
 build for such projects.</p>
 <p><strong>CMake-based bld.bat:</strong></p>
-<div class="highlight-bat"><div class="highlight"><pre><span></span><span class="k">setlocal</span> EnableDelayedExpansion
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="k">setlocal</span> EnableDelayedExpansion
 
 <span class="p">:</span><span class="c1">: Make a build folder and change to it.</span>
 <span class="k">mkdir</span> build
@@ -81,7 +72,7 @@ nmake install
 </div>
 <div class="section" id="vc-features">
 <h2>VC features<a class="headerlink" href="#vc-features" title="Permalink to this headline">¶</a></h2>
-<p>Conda builds Windows packages with features as a means of keeping the Visual Studio version (<code class="docutils literal"><span class="pre">vc</span></code>) used to build packages uniform across a given Python version.</p>
+<p>Conda builds Windows packages with features as a means of keeping the Visual Studio version (<code class="docutils literal notranslate"><span class="pre">vc</span></code>) used to build packages uniform across a given Python version.</p>
 <p>Rule of thumb:</p>
 <ul class="simple">
 <li>if it’s a shared library that something other than Python will use, you only need python in build to activate features. You need the features block;</li>
@@ -90,15 +81,15 @@ nmake install
 </ul>
 <p>* Note that, because PY35 and PY36 use the same <cite>vc</cite> the user can skip py36 (or py35) in the first case above because the <cite>vc14</cite> package created will work on both versions.</p>
 <p>To provide features add the following lines to the build section:</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">features</span><span class="p p-Indicator">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc9</span>   <span class="c1"># [win and py27]</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc10</span>  <span class="c1"># [win and py34]</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc14</span>  <span class="c1"># [win and py&gt;=35]</span>
 </pre></div>
 </div>
-<p>Also, add a <code class="docutils literal"><span class="pre">python</span></code> dependency to the build requirements (unless it is already a requirement like NumPy for instance). And the <code class="docutils literal"><span class="pre">vc</span></code> packages for each Python at build and run.</p>
-<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+<p>Also, add a <code class="docutils literal notranslate"><span class="pre">python</span></code> dependency to the build requirements (unless it is already a requirement like NumPy for instance). And the <code class="docutils literal notranslate"><span class="pre">vc</span></code> packages for each Python at build and run.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>  <span class="c1"># [win]</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc 9</span>  <span class="c1"># [win and py27]</span>
@@ -123,7 +114,7 @@ nmake install
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Building on Windows</a><ul>
-<li><a class="reference internal" href="#simple-cmake-based-bld-bat">Simple CMake-Based <code class="docutils literal"><span class="pre">bld.bat</span></code></a></li>
+<li><a class="reference internal" href="#simple-cmake-based-bld-bat">Simple CMake-Based <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code></a></li>
 <li><a class="reference internal" href="#vc-features">VC features</a></li>
 </ul>
 </li>
@@ -146,12 +137,14 @@ nmake install
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -162,7 +155,7 @@ nmake install
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
