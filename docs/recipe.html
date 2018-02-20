@@ -38,13 +38,16 @@ Details of modifying files inside of a recipe are present on other pages in
 this documentation.</p>
 <div class="section" id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p>There are two ways to get started:</p>
+<p>There are multiple ways to get started:</p>
 <ol class="loweralpha simple">
 <li>If it is a python package you can generate a skeleton as a starting point with
 <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">skeleton</span> <span class="pre">pypi</span> <span class="pre">your_package_name</span></code>. You do <em>not</em> have to use skeleton, and the
 recipes produced by skeleton will need to be edited.</li>
 <li>Look at one of <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">these examples</a>
 in this repository and modify it as necessary.</li>
+<li>If it is an R package from <a class="reference external" href="https://cran.r-project.org/">CRAN</a>, please
+start by using the <a class="reference external" href="https://github.com/bgruening/conda_r_skeleton_helper">conda-forge helper script for R recipes</a>.
+Then if necessary you can make manual edits to the recipe.</li>
 </ol>
 <p>Your final recipe should have no comments and follow the order in the example.</p>
 <p><em>If there are details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.</em></p>
