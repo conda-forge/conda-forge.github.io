@@ -82,16 +82,6 @@ a:focus {
     margin-bottom: 0;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: black;
-    transition: all 0.1s ease;
-}
-
-
-.list-group-item.search-hidden {
-  height:0;
-  padding-top:0;
-  padding-bottom:0;
-  opacity:0;
-  border:none;
 }
 
 .list-group-item:not(:last-child){
