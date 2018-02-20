@@ -6,13 +6,16 @@ this documentation.
 
 Getting Started
 ------------------------------
-There are two ways to get started:
+There are multiple ways to get started:
 
 a. If it is a python package you can generate a skeleton as a starting point with
    ``conda skeleton pypi your_package_name``. You do *not* have to use skeleton, and the
    recipes produced by skeleton will need to be edited.
 b. Look at one of `these examples <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
    in this repository and modify it as necessary.
+c. If it is an R package from `CRAN <https://cran.r-project.org/>`_, please
+   start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_.
+   Then if necessary you can make manual edits to the recipe.
 
 Your final recipe should have no comments and follow the order in the example.
 
