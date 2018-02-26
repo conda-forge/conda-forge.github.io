@@ -115,6 +115,37 @@ recipes.</p>
 <h2>Renaming Packages<a class="headerlink" href="#renaming-packages" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes packages are misnamed. To correct the name of the package, please submit a PR into staged-recipes with the correct name. During the review process please make certain to note that the package is a rename and contact a member of conda-forge/core to remove the old feedstock (and potentially package if needed).</p>
 </div>
+<div class="section" id="fixing-broken-packages">
+<h2>Fixing Broken Packages<a class="headerlink" href="#fixing-broken-packages" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes you need to remove a package from the conda-forge channel on Anaconda.org. The reasons
+for this are many, but the ones that immediately come to mind are:</p>
+<ul class="simple">
+<li>Incorrect pinnings. This can cause the conda solver to preferentially pick up the “old” version
+of the package even though you’ve bumped the build number.</li>
+<li>Packages renames</li>
+</ul>
+<p>We prefer to not remove packages for the following reasons:</p>
+<ol class="arabic simple">
+<li>Unaffected users are unable to get the broken package.</li>
+<li>Unable to reverse (what if we were incorrect to remove it).</li>
+<li>Loss of reproducibility (unable to create an old environment).</li>
+<li>Not as community friendly (leaves no opportunity to review decision).</li>
+<li>Blocks anyone from inspecting the broken packages.</li>
+</ol>
+<p>Though, we can easily address all of these by using a label for broken packages. If one simply
+drops the “main” label and replaces it with “broken”. This still makes it unavailable to install
+by default. However, the package remains available so as to avoid the problems listed above.</p>
+<p>To get your package relabeled as <code class="docutils literal notranslate"><span class="pre">broken</span></code> instead of <code class="docutils literal notranslate"><span class="pre">main</span></code>, please post on the issue tracker
+for your feedstock and ping <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge/core</span></code> with this request:</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a>`
+Hi &#64;conda-forge/core,</p>
+<p>Please move my package from <code class="docutils literal notranslate"><span class="pre">main</span></code> to <code class="docutils literal notranslate"><span class="pre">broken</span></code> on the conda-forge channel on anaconda.org
+because:</p>
+<p>&lt;insert your reason&gt;
+<a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
+<p>And also post to the conda-forge gitter channel! Also please be patient with us if we do not repond
+immediately :)</p>
+</div>
 </div>
 
 
@@ -129,6 +160,7 @@ recipes.</p>
 <li><a class="reference internal" href="#transferring-to-conda-forge">Transferring to conda-forge</a></li>
 <li><a class="reference internal" href="#intended-usage">Intended Usage</a></li>
 <li><a class="reference internal" href="#renaming-packages">Renaming Packages</a></li>
+<li><a class="reference internal" href="#fixing-broken-packages">Fixing Broken Packages</a></li>
 </ul>
 </li>
 </ul>

@@ -80,7 +80,7 @@ Maintainers' time and CI resources are what enable conda-forge. They are as scar
 
 Publishing a package to conda-forge signals it is suitable for users not involved with development. However, publishing does not always happen error-free. Multiple commits are acceptable when debugging issues with the release process itself.
 
-Fortunately, there are options for optimizing the development of a package. 
+Fortunately, there are options for optimizing the development of a package.
   - `conda-smithy <https://github.com/conda-forge/conda-smithy>`__ is a tool used by conda-forge itself to manage feedstocks. conda-smithy can be used to create an internal development feedstock that is seperate from conda-forge.
   - `ci-helpers <https://github.com/astropy/ci-helpers>`__ is a set of scripts that drive various CI services using environment variables.
 
@@ -88,3 +88,41 @@ Renaming Packages
 =================
 
 Sometimes packages are misnamed. To correct the name of the package, please submit a PR into staged-recipes with the correct name. During the review process please make certain to note that the package is a rename and contact a member of conda-forge/core to remove the old feedstock (and potentially package if needed).
+
+
+Fixing Broken Packages
+======================
+
+Sometimes you need to remove a package from the conda-forge channel on Anaconda.org. The reasons
+for this are many, but the ones that immediately come to mind are:
+
+* Incorrect pinnings. This can cause the conda solver to preferentially pick up the "old" version
+  of the package even though you've bumped the build number.
+* Packages renames
+
+We prefer to not remove packages for the following reasons:
+
+1. Unaffected users are unable to get the broken package.
+2. Unable to reverse (what if we were incorrect to remove it).
+3. Loss of reproducibility (unable to create an old environment).
+4. Not as community friendly (leaves no opportunity to review decision).
+5. Blocks anyone from inspecting the broken packages.
+
+Though, we can easily address all of these by using a label for broken packages. If one simply
+drops the "main" label and replaces it with "broken". This still makes it unavailable to install
+by default. However, the package remains available so as to avoid the problems listed above.
+
+To get your package relabeled as ``broken`` instead of ``main``, please post on the issue tracker
+for your feedstock and ping ``@conda-forge/core`` with this request:
+
+```
+Hi @conda-forge/core,
+
+Please move my package from ``main`` to ``broken`` on the conda-forge channel on anaconda.org
+because:
+
+<insert your reason>
+```
+
+And also post to the conda-forge gitter channel! Also please be patient with us if we do not repond
+immediately :)
