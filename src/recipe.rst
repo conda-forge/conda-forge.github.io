@@ -42,8 +42,8 @@ Checklist
 * In case your project has tests included, you need to decide if these tests should be exectuted while building the conda-forge feedstock.
 * Make sure that all tests pass sucessfully at least on your
   development machine
-  
-  
+
+
 What happens after the PR to staged-recipes is merged
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
