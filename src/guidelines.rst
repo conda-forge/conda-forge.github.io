@@ -113,16 +113,14 @@ drops the "main" label and replaces it with "broken". This still makes it unavai
 by default. However, the package remains available so as to avoid the problems listed above.
 
 To get your package relabeled as ``broken`` instead of ``main``, please post on the issue tracker
-for your feedstock and ping ``@conda-forge/core`` with this request:
+for your feedstock and ping ``@conda-forge/core`` with this request: ::
 
-```
-Hi @conda-forge/core,
+    Hi @conda-forge/core,
 
-Please move my package from ``main`` to ``broken`` on the conda-forge channel on anaconda.org
-because:
+    Please move my package from ``main`` to ``broken`` on the conda-forge channel on anaconda.org
+    because:
 
-<insert your reason>
-```
+    <insert your reason>
 
 And also post to the conda-forge gitter channel! Also please be patient with us if we do not repond
 immediately :)
