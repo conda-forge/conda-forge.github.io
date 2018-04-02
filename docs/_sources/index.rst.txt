@@ -21,6 +21,7 @@ Contents:
    conda_smithy
    conda-forge_gotchas
    webservice
+   joining-the-team
 
 
 Indices and tables
