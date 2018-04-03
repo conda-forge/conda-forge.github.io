@@ -186,7 +186,7 @@ while adding ``pip`` to the build requirements:
         - pip
 
 These options should be used to ensure a clean installation of the package without its
-dependencies and without ``egg-info`` directories, which do not interact well with conda.
+dependencies, which do not interact well with conda.
 
 
 Downloading extra sources and data files
