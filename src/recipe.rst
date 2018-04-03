@@ -75,7 +75,7 @@ Optional: ``bld.bat`` and/or ``build.sh``
 ------------------------------------------
 In many cases, ``bld.bat`` and/or ``build.sh`` files are not required. Pure Python packages almost never need them.
 If the build can be executed with one line, you may put this line in the ``script`` entry of the ``build`` section of
-the ``meta.yaml`` file with: ``script: python -m pip install --no-deps --ignore-installed .``,
+the ``meta.yaml`` file with: ``script: pip install --no-deps --ignore-installed .``,
 remember to always add ``pip`` to the build requirements.
 
 

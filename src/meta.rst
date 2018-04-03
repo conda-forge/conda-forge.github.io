@@ -174,7 +174,7 @@ Normally packages should use this line:
 .. code-block:: yaml
 
     build:
-      script: python -m pip install --no-deps --ignore-installed .
+      script: pip install --no-deps --ignore-installed .
 
 as the installation script in the ``meta.yml`` file or ``bld.bat/build.sh`` script files,
 while adding ``pip`` to the build requirements:
@@ -186,7 +186,7 @@ while adding ``pip`` to the build requirements:
         - pip
 
 These options should be used to ensure a clean installation of the package without its
-dependencies and without ``egg-info`` directories, which do not interact well with conda.
+dependencies, which do not interact well with conda.
 
 
 Downloading extra sources and data files
