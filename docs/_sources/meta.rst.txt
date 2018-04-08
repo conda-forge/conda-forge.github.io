@@ -143,6 +143,9 @@ The ``noarch: python`` can be used to build pure Python packages:
 * and do not use selectors to ``skip`` building the recipe on a specific platform or
   for a specific version of python (e.g. ``skip: True  # [py2k]``).
 
+* don't have a ``scripts`` dir, all ``noarch`` recipes which have command line
+  tools need to use ``entry_points``
+
 The use of ``noarch: python`` will drastically reduce the CI usage as the
 package will be built only once on ``CircleCI``, which will make your build much
 faster, and free resources for other packages!
