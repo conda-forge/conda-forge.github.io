@@ -48,3 +48,26 @@ Here is how a `.condarc` file would look like:
 
 In addition to the channel priority we recommend to always install your packages inside a new environment instead the root environment from anaconda/miniconda.
 Using envs make it easier to debug problems with packages and ensure the stability of your root env.
+
+
+Using a fork vs a branch when updating a recipe
+-----------------------------------------------
+
+All maintainers are given push access to the feedstocks that they maintain. This means that a maintainer can create branches in the main repo. For updates, using a branch in the main repo is discouraged because,
+
+1. CI is run on both the branch and the PR.
+
+   This wastes Appveyor and Travis-CI resources.
+
+2. Branches are automatically published.
+
+   This means if you push a version update to a branch and then create a PR, conda packages will be published to anaconda.org before the PR is merged.
+
+For these reasons maintainers are asked to fork the feedstock, push to a branch in the fork and then open a PR to the `conda-forge` repo.
+
+Branches in the main repo are used for,
+
+1. Maintaining a LTS branch of a package.
+
+   For eg. `master` branch of `python-feedstock` builds `3.6.x`, while `3.5` branch builds `3.5.x` versions of python.
+
