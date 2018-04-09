@@ -58,8 +58,8 @@ Then if necessary you can make manual edits to the recipe.</li>
 <li>Fork the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">example recipes</a></li>
 <li>Within your forked copy, generate a new folder in the recipes subdirectory and copy <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a> from the example directory. Please leave the example directory unchanged!</li>
 <li>Edit the copied recipe (meta.yml) as you need it</li>
-<li>Generate the sha-256 key like described in the example recipe using the <cite>openssl</cite> tool. As an alternative you can also go to the package description on <a class="reference external" href="https://pypi.org">PyPi</a> where you can directly copy the sha-256 key from.</li>
-<li>Ensure to fill in the <cite>tests</cite> section. Simple tests would just import your modulei and are described in the example.</li>
+<li>Generate the sha-256 key like described in the example recipe using the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative you can also go to the package description on <a class="reference external" href="https://pypi.org">PyPi</a> where you can directly copy the sha-256 key from.</li>
+<li>Ensure to fill in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> section. Simple tests would just import your modulei and are described in the example.</li>
 <li>Remove all comments in the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a></li>
 </ol>
 </div>
@@ -76,7 +76,7 @@ development machine</li>
 <div class="section" id="what-happens-after-the-pr-to-staged-recipes-is-merged">
 <h3>What happens after the PR to staged-recipes is merged<a class="headerlink" href="#what-happens-after-the-pr-to-staged-recipes-is-merged" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>After the PR is merged, travis-ci will create a new git repo automatically. For example, the recipe for a package named <cite>pydstool</cite> will be moved to a new repository <a class="reference external" href="https://github.com/conda-forge/pydstool-feedstock">https://github.com/conda-forge/pydstool-feedstock</a>.</li>
+<li>After the PR is merged, travis-ci will create a new git repo automatically. For example, the recipe for a package named <code class="docutils literal notranslate"><span class="pre">pydstool</span></code> will be moved to a new repository <a class="reference external" href="https://github.com/conda-forge/pydstool-feedstock">https://github.com/conda-forge/pydstool-feedstock</a>.</li>
 <li>CI services (travis-ci, circleci, appveyor) will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to <a class="reference external" href="https://anaconda.org/conda-forge">https://anaconda.org/conda-forge</a></li>
 <li>If this is your first contribution, you will be added to the conda-forge <a class="reference external" href="https://github.com/orgs/conda-forge/teams/all-members">team</a> and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.</li>
 <li>If you want to make a change to the recipe, send a PR to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.</li>

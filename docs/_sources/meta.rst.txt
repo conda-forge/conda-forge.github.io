@@ -73,7 +73,7 @@ A full description of selectors is
 
 Using the Compilation ``toolchain``
 -----------------------------------
-Packages that need to compile code should add the `toolchain` package as a build dependency. This helps set up environment variables to instruct the compilers to do the right thing (e.g. building against the right version of the MacOS SDK).
+Packages that need to compile code should add the ``toolchain`` package as a build dependency. This helps set up environment variables to instruct the compilers to do the right thing (e.g. building against the right version of the MacOS SDK).
 
 
 Building Against NumPy

@@ -50,7 +50,7 @@ Rule of thumb:
 * if it is a shared library that is tied to a Python API (e.g. Boost Python), you need BOTH, and the features block;
 * if it is a library that has compiled content, but is used only from Python, you need Python in both build and runtime requirements, but you do NOT need the features block.
 
-\* Note that, because PY35 and PY36 use the same `vc` the user can skip py36 (or py35) in the first case above because the `vc14` package created will work on both versions.
+\* Note that, because PY35 and PY36 use the same ``vc`` the user can skip py36 (or py35) in the first case above because the ``vc14`` package created will work on both versions.
 
 To provide features add the following lines to the build section:
 

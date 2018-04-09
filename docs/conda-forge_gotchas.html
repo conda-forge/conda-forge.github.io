@@ -43,24 +43,24 @@ see an error like (OS X example):</p>
   Reason: image not found
 </pre></div>
 </div>
-<p>That happens because either the correct version of <cite>icu</cite>,
+<p>That happens because either the correct version of <code class="docutils literal notranslate"><span class="pre">icu</span></code>,
 or any other package in the error,
 is not present or the package is missing altogether.</p>
 <p>Once can confirm by issuing the command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> and searching for the package in question.</p>
 <div class="section" id="why-that-happens">
 <h3>Why that happens?<a class="headerlink" href="#why-that-happens" title="Permalink to this headline">¶</a></h3>
-<p>The <cite>conda-forge</cite> and <cite>defaults</cite> are not 100% compatible.
-In the example above it is known that <cite>defaults</cite> uses <cite>icu 54.*</cite> while <cite>conda-forge</cite> relies on <cite>icu 56.*</cite>,
+<p>The <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and <code class="docutils literal notranslate"><span class="pre">defaults</span></code> are not 100% compatible.
+In the example above it is known that <code class="docutils literal notranslate"><span class="pre">defaults</span></code> uses <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">54.*</span></code> while <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> relies on <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">56.*</span></code>,
 that mismatch can lead to errors when the install environment is mixing packages from multiple channels.</p>
 <p>Note: All of conda-forge software pinning can be found at: <a class="reference external" href="https://github.com/conda-forge/staged-recipes/wiki/Pinned-dependencies">https://github.com/conda-forge/staged-recipes/wiki/Pinned-dependencies</a></p>
 </div>
 <div class="section" id="how-to-fix-it">
 <h3>How to fix it?<a class="headerlink" href="#how-to-fix-it" title="Permalink to this headline">¶</a></h3>
-<p>Newer <cite>conda</cite> versions introduced a channel priority feature.
+<p>Newer <code class="docutils literal notranslate"><span class="pre">conda</span></code> versions introduced a channel priority feature.
 See <a class="reference external" href="https://conda.io/docs/channels.html">https://conda.io/docs/channels.html</a> for more information.</p>
-<p>One possible solution is to add the <cite>conda-forge</cite> channel on top of <cite>defaults</cite> in your <cite>condarc</cite> file when using <cite>conda-forge</cite> packages.
-This will ensuring that all the dependencies will come from the <cite>conda-forge</cite> channel.
-Here is how a <cite>.condarc</cite> file would look like:</p>
+<p>One possible solution is to add the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel on top of <code class="docutils literal notranslate"><span class="pre">defaults</span></code> in your <code class="docutils literal notranslate"><span class="pre">condarc</span></code> file when using <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages.
+This will ensuring that all the dependencies will come from the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel.
+Here is how a <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> file would look like:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ cat .condarc
 channels:
   - conda-forge
@@ -82,11 +82,11 @@ Using envs make it easier to debug problems with packages and ensure the stabili
 <p>This means if you push a version update to a branch and then create a PR, conda packages will be published to anaconda.org before the PR is merged.</p>
 </li>
 </ol>
-<p>For these reasons maintainers are asked to fork the feedstock, push to a branch in the fork and then open a PR to the <cite>conda-forge</cite> repo.</p>
+<p>For these reasons maintainers are asked to fork the feedstock, push to a branch in the fork and then open a PR to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> repo.</p>
 <p>Branches in the main repo are used for,</p>
 <ol class="arabic">
 <li><p class="first">Maintaining a LTS branch of a package.</p>
-<p>For eg. <cite>master</cite> branch of <cite>python-feedstock</cite> builds <cite>3.6.x</cite>, while <cite>3.5</cite> branch builds <cite>3.5.x</cite> versions of python.</p>
+<p>For eg. <code class="docutils literal notranslate"><span class="pre">master</span></code> branch of <code class="docutils literal notranslate"><span class="pre">python-feedstock</span></code> builds <code class="docutils literal notranslate"><span class="pre">3.6.x</span></code>, while <code class="docutils literal notranslate"><span class="pre">3.5</span></code> branch builds <code class="docutils literal notranslate"><span class="pre">3.5.x</span></code> versions of python.</p>
 </li>
 </ol>
 </div>

@@ -14,13 +14,13 @@ The webservice also listens to issue and PR comments so that you can ask for the
 -----------------------------------
 
 Entering the above phrase in a PR of a feedstock will rerender the feedstock and push the changes to your PR.
-Make sure to tick the `Allow edits from maintainers.` button locate at the bottom of the right side bar of the PR.
+Make sure to tick the ``Allow edits from maintainers.`` button locate at the bottom of the right side bar of the PR.
 
 
 @conda-forge-admin, please add noarch: python
 ---------------------------------------------
 
-Entering the above phrase in a PR of a feedstock will add `noarch: python` to the build and rerender the feedstock
+Entering the above phrase in a PR of a feedstock will add ``noarch: python`` to the build and rerender the feedstock
 for you.
 
 
@@ -34,7 +34,7 @@ Entering the above phrase in a PR of a feedstock will lint the PR again.
 ----------------------------------------
 
 Entering the above phrase in an issue of a feedstock will update the Circle-CI SSH deploy key. This will fix the
-`permission denied (public key)` issue in Circle-CI checkout phase
+``permission denied (public key)`` issue in Circle-CI checkout phase
 
 
 @conda-forge-admin, please update team
