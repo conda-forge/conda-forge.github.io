@@ -71,6 +71,25 @@ channels:
 Using envs make it easier to debug problems with packages and ensure the stability of your root env.</p>
 </div>
 </div>
+<div class="section" id="using-a-fork-vs-a-branch-when-updating-a-recipe">
+<h2>Using a fork vs a branch when updating a recipe<a class="headerlink" href="#using-a-fork-vs-a-branch-when-updating-a-recipe" title="Permalink to this headline">¶</a></h2>
+<p>All maintainers are given push access to the feedstocks that they maintain. This means that a maintainer can create branches in the main repo. For updates, using a branch in the main repo is discouraged because,</p>
+<ol class="arabic">
+<li><p class="first">CI is run on both the branch and the PR.</p>
+<p>This wastes Appveyor and Travis-CI resources.</p>
+</li>
+<li><p class="first">Branches are automatically published.</p>
+<p>This means if you push a version update to a branch and then create a PR, conda packages will be published to anaconda.org before the PR is merged.</p>
+</li>
+</ol>
+<p>For these reasons maintainers are asked to fork the feedstock, push to a branch in the fork and then open a PR to the <cite>conda-forge</cite> repo.</p>
+<p>Branches in the main repo are used for,</p>
+<ol class="arabic">
+<li><p class="first">Maintaining a LTS branch of a package.</p>
+<p>For eg. <cite>master</cite> branch of <cite>python-feedstock</cite> builds <cite>3.6.x</cite>, while <cite>3.5</cite> branch builds <cite>3.5.x</cite> versions of python.</p>
+</li>
+</ol>
+</div>
 </div>
 
 
@@ -87,6 +106,7 @@ Using envs make it easier to debug problems with packages and ensure the stabili
 <li><a class="reference internal" href="#how-to-fix-it">How to fix it?</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#using-a-fork-vs-a-branch-when-updating-a-recipe">Using a fork vs a branch when updating a recipe</a></li>
 </ul>
 </li>
 </ul>
