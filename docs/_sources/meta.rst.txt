@@ -143,9 +143,6 @@ The ``noarch: python`` can be used to build pure Python packages:
 * and do not use selectors to ``skip`` building the recipe on a specific platform or
   for a specific version of python (e.g. ``skip: True  # [py2k]``).
 
-* don't have a ``scripts`` dir, all ``noarch`` recipes which have command line
-  tools need to use ``entry_points``
-
 The use of ``noarch: python`` will drastically reduce the CI usage as the
 package will be built only once on ``CircleCI``, which will make your build much
 faster, and free resources for other packages!
@@ -158,14 +155,6 @@ To use that just add ``noarch: python`` in the build section like,
       noarch: python
 
 and re-render with the feedstock with ``conda-smithy`` >=2.4.0
-
-Note that while ``noarch: python`` does not work with selectors, it does work
-with version constraints, so ``skip: True  # [py2k]`` can sometimes be replaced
-with a constrained python version in the build/run subsections.
-Additionally, ``noarch: python`` can work with recipes who's dependencies don't
-build for all platforms.
-If this is the case, when the install runs ``conda`` will fail with an error
-message describing which dependency couldn't be found.
 
 
 Build Number
