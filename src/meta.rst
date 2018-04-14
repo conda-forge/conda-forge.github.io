@@ -166,6 +166,7 @@ dependency and rebuild the package you should increase the build number.
 
 When the package version changes you should reset the build number to ``0``.
 
+.. _use-pip:
 
 Use pip
 -------
