@@ -169,7 +169,7 @@ When the package version changes you should reset the build number to ``0``.
 
 Use pip
 -------
-Normally packages should use this line:
+Normally Python packages should use this line:
 
 .. code-block:: yaml
 
@@ -186,7 +186,12 @@ while adding ``pip`` to the build requirements:
         - pip
 
 These options should be used to ensure a clean installation of the package without its
-dependencies, which do not interact well with conda.
+dependencies. This helps make sure that we're only including this package,
+and not accidentally bringing any dependencies along into the conda package.
+
+Note that the ``--no-deps`` line means that for pure-Python packages,
+usually only ``python`` and ``pip`` are needed as ``build`` or ``host`` requirements;
+the real package dependencies are only ``run`` requirements.
 
 
 Downloading extra sources and data files
