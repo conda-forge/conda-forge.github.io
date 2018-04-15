@@ -8,16 +8,19 @@ Getting Started
 ------------------------------
 There are multiple ways to get started:
 
-a. If it is a python package you can generate a skeleton as a starting point with
-   ``conda skeleton pypi your_package_name``. You do *not* have to use skeleton, and the
-   recipes produced by skeleton will need to be edited.
-b. Look at one of `these examples <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
+a. Look at one of `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_
    in this repository and modify it as necessary.
-c. If it is an R package from `CRAN <https://cran.r-project.org/>`_, please
-   start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_.
+b. If it is an R package from `CRAN <https://cran.r-project.org/>`_, please
+   instead start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_.
    Then if necessary you can make manual edits to the recipe.
+c. If it is a python package you can generate a skeleton as a starting point with
+   ``conda skeleton pypi your_package_name``. You do *not* have to use the skeleton, and the
+   recipes produced by skeleton will need to be edited.
+   In particular, you'll at least need to change the build line to :ref:`use pip <use-pip>`,
+   add yourself as a maintainer,
+   and specify a ``license_file``.
 
-Your final recipe should have no comments and follow the order in the example.
+Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
 
 *If there are details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.*
 
@@ -28,20 +31,19 @@ Step-by-step instructions
 
 1. Fork the `example recipes <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
 2. Within your forked copy, generate a new folder in the recipes subdirectory and copy `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_ from the example directory. Please leave the example directory unchanged!
-3. Edit the copied recipe (meta.yml) as you need it
+3. Edit the copied recipe (meta.yml) as needed.
 4. Generate the sha-256 key like described in the example recipe using the ``openssl`` tool. As an alternative you can also go to the package description on `PyPi <https://pypi.org>`_ where you can directly copy the sha-256 key from.
-5. Ensure to fill in the ``tests`` section. Simple tests would just import your modulei and are described in the example.
-6. Remove all comments in the `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_
+5. Ensure to fill in the ``tests`` section. Simple tests would just import your module and are described in the example.
+6. Remove all irrelevant comments in the `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_
 
 
 Checklist
 ~~~~~~~~~
 
 * Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache 2.0 and not APACHE 2.0).
-* Ensure that you have included a license file if your license requires (see `here <https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55>`_)
+* Ensure that you have included a license file if your license requires -- most do (see `here <https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55>`_)
 * In case your project has tests included, you need to decide if these tests should be exectuted while building the conda-forge feedstock.
-* Make sure that all tests pass sucessfully at least on your
-  development machine
+* Make sure that all tests pass sucessfully at least on your development machine.
 
 
 What happens after the PR to staged-recipes is merged
