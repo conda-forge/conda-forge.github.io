@@ -40,16 +40,19 @@ this documentation.</p>
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
 <p>There are multiple ways to get started:</p>
 <ol class="loweralpha simple">
-<li>If it is a python package you can generate a skeleton as a starting point with
-<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">skeleton</span> <span class="pre">pypi</span> <span class="pre">your_package_name</span></code>. You do <em>not</em> have to use skeleton, and the
-recipes produced by skeleton will need to be edited.</li>
-<li>Look at one of <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">these examples</a>
+<li>Look at one of <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes/example">the example recipe</a>
 in this repository and modify it as necessary.</li>
 <li>If it is an R package from <a class="reference external" href="https://cran.r-project.org/">CRAN</a>, please
-start by using the <a class="reference external" href="https://github.com/bgruening/conda_r_skeleton_helper">conda-forge helper script for R recipes</a>.
+instead start by using the <a class="reference external" href="https://github.com/bgruening/conda_r_skeleton_helper">conda-forge helper script for R recipes</a>.
 Then if necessary you can make manual edits to the recipe.</li>
+<li>If it is a python package you can generate a skeleton as a starting point with
+<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">skeleton</span> <span class="pre">pypi</span> <span class="pre">your_package_name</span></code>. You do <em>not</em> have to use the skeleton, and the
+recipes produced by skeleton will need to be edited.
+In particular, you’ll at least need to change the build line to <a class="reference internal" href="meta.html#use-pip"><span class="std std-ref">use pip</span></a>,
+add yourself as a maintainer,
+and specify a <code class="docutils literal notranslate"><span class="pre">license_file</span></code>.</li>
 </ol>
-<p>Your final recipe should have no comments and follow the order in the example.</p>
+<p>Your final recipe should have no comments (unless they’re actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.</p>
 <p><em>If there are details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.</em></p>
 <p>In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that might help you with a successful build is provided in the following.</p>
 <div class="section" id="step-by-step-instructions">
@@ -57,20 +60,19 @@ Then if necessary you can make manual edits to the recipe.</li>
 <ol class="arabic simple">
 <li>Fork the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">example recipes</a></li>
 <li>Within your forked copy, generate a new folder in the recipes subdirectory and copy <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a> from the example directory. Please leave the example directory unchanged!</li>
-<li>Edit the copied recipe (meta.yml) as you need it</li>
+<li>Edit the copied recipe (meta.yml) as needed.</li>
 <li>Generate the sha-256 key like described in the example recipe using the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative you can also go to the package description on <a class="reference external" href="https://pypi.org">PyPi</a> where you can directly copy the sha-256 key from.</li>
-<li>Ensure to fill in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> section. Simple tests would just import your modulei and are described in the example.</li>
-<li>Remove all comments in the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a></li>
+<li>Ensure to fill in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> section. Simple tests would just import your module and are described in the example.</li>
+<li>Remove all irrelevant comments in the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a></li>
 </ol>
 </div>
 <div class="section" id="checklist">
 <h3>Checklist<a class="headerlink" href="#checklist" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache 2.0 and not APACHE 2.0).</li>
-<li>Ensure that you have included a license file if your license requires (see <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55">here</a>)</li>
+<li>Ensure that you have included a license file if your license requires – most do (see <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55">here</a>)</li>
 <li>In case your project has tests included, you need to decide if these tests should be exectuted while building the conda-forge feedstock.</li>
-<li>Make sure that all tests pass sucessfully at least on your
-development machine</li>
+<li>Make sure that all tests pass sucessfully at least on your development machine.</li>
 </ul>
 </div>
 <div class="section" id="what-happens-after-the-pr-to-staged-recipes-is-merged">
