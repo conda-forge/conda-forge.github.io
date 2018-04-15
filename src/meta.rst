@@ -131,30 +131,48 @@ or if the package uses ``cimport``.
 Building ``noarch`` packages
 ----------------------------
 
-The ``noarch: python`` can be used to build pure Python packages:
+The ``noarch: python`` directive, in the ``build`` section, makes pure-Python
+packages that only need to be built once. This drastically reduces the CI usage,
+since it's only built once (on CircleCI), making your build much faster and
+freeing resources for other packages.
 
-* that do not perform any Python version specific code translation at install time (i.e. 2to3);
+``noarch: python`` can be used to build pure Python packages that:
 
-* and have fixed requirements; that is to say no conditional dependencies
+* Do not perform any Python version specific code translation at install time (i.e. 2to3).
+
+* Have fixed requirements; that is to say no conditional dependencies
   depending on the Python version, or the platform ran. (If you have for example
   ``backports # [py27])`` in the ``run`` section of ``meta.yml``, your package
-  can't be noarch, yet).
+  can't be noarch, yet.)
 
-* and do not use selectors to ``skip`` building the recipe on a specific platform or
+* Do not use selectors to ``skip`` building the recipe on a specific platform or
   for a specific version of python (e.g. ``skip: True  # [py2k]``).
 
-The use of ``noarch: python`` will drastically reduce the CI usage as the
-package will be built only once on ``CircleCI``, which will make your build much
-faster, and free resources for other packages!
+Note that while ``noarch: python`` does not work with selectors, it does work
+with version constraints, so ``skip: True  # [py2k]`` can sometimes be replaced
+with a constrained python version in the build/run subsections:
+say ``python >=3`` instead of just ``python``.
 
-To use that just add ``noarch: python`` in the build section like,
+``noarch: python`` can also work with recipes that would work on a given platform
+except that we don't have one of its dependencies available.
+If this is the case, when the install runs ``conda`` will fail with an error
+message describing which dependency couldn't be found.
+If the dependency is later made available, your package will start working
+without having to change anything.
+Note though that since ``noarch`` packages are built on Linux, currently the
+package must be installable on Linux.
+
+To use it, just add ``noarch: python`` in the build section like,
 
 .. code-block:: yaml
 
     build:
       noarch: python
 
-and re-render with the feedstock with ``conda-smithy`` >=2.4.0
+If you're submitting a new recipe to ``staged-recipes``, that's all you need.
+In an existing feedstock, you'll also need to :doc:`re-render the feedstock </conda_smithy>`,
+or you can just ask :doc:`the webservice </webservice>` to add it for you and rerender:
+say ``@conda-forge-admin, please add noarch: python`` in an open PR.
 
 
 Build Number
