@@ -137,25 +137,41 @@ usage this option is now deprecated in favour of the apporach described above.</
 </div>
 <div class="section" id="building-noarch-packages">
 <span id="noarch"></span><h2>Building <code class="docutils literal notranslate"><span class="pre">noarch</span></code> packages<a class="headerlink" href="#building-noarch-packages" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> can be used to build pure Python packages:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> directive, in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section, makes pure-Python
+packages that only need to be built once. This drastically reduces the CI usage,
+since it’s only built once (on CircleCI), making your build much faster and
+freeing resources for other packages.</p>
+<p><code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> can be used to build pure Python packages that:</p>
 <ul class="simple">
-<li>that do not perform any Python version specific code translation at install time (i.e. 2to3);</li>
-<li>and have fixed requirements; that is to say no conditional dependencies
+<li>Do not perform any Python version specific code translation at install time (i.e. 2to3).</li>
+<li>Have fixed requirements; that is to say no conditional dependencies
 depending on the Python version, or the platform ran. (If you have for example
 <code class="docutils literal notranslate"><span class="pre">backports</span> <span class="pre">#</span> <span class="pre">[py27])</span></code> in the <code class="docutils literal notranslate"><span class="pre">run</span></code> section of <code class="docutils literal notranslate"><span class="pre">meta.yml</span></code>, your package
-can’t be noarch, yet).</li>
-<li>and do not use selectors to <code class="docutils literal notranslate"><span class="pre">skip</span></code> building the recipe on a specific platform or
+can’t be noarch, yet.)</li>
+<li>Do not use selectors to <code class="docutils literal notranslate"><span class="pre">skip</span></code> building the recipe on a specific platform or
 for a specific version of python (e.g. <code class="docutils literal notranslate"><span class="pre">skip:</span> <span class="pre">True</span>&#160; <span class="pre">#</span> <span class="pre">[py2k]</span></code>).</li>
 </ul>
-<p>The use of <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> will drastically reduce the CI usage as the
-package will be built only once on <code class="docutils literal notranslate"><span class="pre">CircleCI</span></code>, which will make your build much
-faster, and free resources for other packages!</p>
-<p>To use that just add <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> in the build section like,</p>
+<p>Note that while <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> does not work with selectors, it does work
+with version constraints, so <code class="docutils literal notranslate"><span class="pre">skip:</span> <span class="pre">True</span>&#160; <span class="pre">#</span> <span class="pre">[py2k]</span></code> can sometimes be replaced
+with a constrained python version in the build/run subsections:
+say <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">&gt;=3</span></code> instead of just <code class="docutils literal notranslate"><span class="pre">python</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> can also work with recipes that would work on a given platform
+except that we don’t have one of its dependencies available.
+If this is the case, when the install runs <code class="docutils literal notranslate"><span class="pre">conda</span></code> will fail with an error
+message describing which dependency couldn’t be found.
+If the dependency is later made available, your package will start working
+without having to change anything.
+Note though that since <code class="docutils literal notranslate"><span class="pre">noarch</span></code> packages are built on Linux, currently the
+package must be installable on Linux.</p>
+<p>To use it, just add <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> in the build section like,</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">noarch</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
 </pre></div>
 </div>
-<p>and re-render with the feedstock with <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> &gt;=2.4.0</p>
+<p>If you’re submitting a new recipe to <code class="docutils literal notranslate"><span class="pre">staged-recipes</span></code>, that’s all you need.
+In an existing feedstock, you’ll also need to <a class="reference internal" href="conda_smithy.html"><span class="doc">re-render the feedstock</span></a>,
+or you can just ask <a class="reference internal" href="webservice.html"><span class="doc">the webservice</span></a> to add it for you and rerender:
+say <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">add</span> <span class="pre">noarch:</span> <span class="pre">python</span></code> in an open PR.</p>
 </div>
 <div class="section" id="build-number">
 <h2>Build Number<a class="headerlink" href="#build-number" title="Permalink to this headline">¶</a></h2>
@@ -167,7 +183,7 @@ dependency and rebuild the package you should increase the build number.</p>
 </div>
 <div class="section" id="use-pip">
 <h2>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h2>
-<p>Normally packages should use this line:</p>
+<p>Normally Python packages should use this line:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">python -m pip install --no-deps --ignore-installed .</span>
 </pre></div>
@@ -180,7 +196,11 @@ while adding <code class="docutils literal notranslate"><span class="pre">pip</s
 </pre></div>
 </div>
 <p>These options should be used to ensure a clean installation of the package without its
-dependencies, which do not interact well with conda.</p>
+dependencies. This helps make sure that we’re only including this package,
+and not accidentally bringing any dependencies along into the conda package.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">--no-deps</span></code> line means that for pure-Python packages,
+usually only <code class="docutils literal notranslate"><span class="pre">python</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span></code> are needed as <code class="docutils literal notranslate"><span class="pre">build</span></code> or <code class="docutils literal notranslate"><span class="pre">host</span></code> requirements;
+the real package dependencies are only <code class="docutils literal notranslate"><span class="pre">run</span></code> requirements.</p>
 </div>
 <div class="section" id="downloading-extra-sources-and-data-files">
 <h2>Downloading extra sources and data files<a class="headerlink" href="#downloading-extra-sources-and-data-files" title="Permalink to this headline">¶</a></h2>
