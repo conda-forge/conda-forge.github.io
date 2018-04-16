@@ -31,6 +31,12 @@ Entering the above phrase in a PR of a feedstock will lint the PR (if it hasn't
 already).
 
 
+@conda-forge-admin, please relint
+---------------------------------
+
+Entering the above phrase in a PR of a feedstock will lint the PR again.
+
+
 @conda-forge-admin, please update circle
 ----------------------------------------
 
