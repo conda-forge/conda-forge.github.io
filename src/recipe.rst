@@ -8,7 +8,7 @@ Getting Started
 ------------------------------
 There are multiple ways to get started:
 
-a. Look at one of `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_
+a. Look at `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_
    in this repository and modify it as necessary.
 b. If it is an R package from `CRAN <https://cran.r-project.org/>`_, please
    instead start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_.
