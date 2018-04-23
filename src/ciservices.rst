@@ -30,7 +30,7 @@ If CircleCI lacks permissions to checkout the source code, it will produce an er
     Permission denied (publickey).
     fatal: Could not read from remote repository.
 
-When this happens for a feedstock, it can be fixed using the [webservive](https://conda-forge.org/docs/webservice.html#conda-forge-admin-please-update-circle), by posting the following comment::
+When this happens for a feedstock, it can be fixed using the `webservice <https://conda-forge.org/docs/webservice.html#conda-forge-admin-please-update-circle>`_, by posting the following comment::
   
   @conda-forge-admin-please-update-circle
 
