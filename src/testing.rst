@@ -31,12 +31,13 @@ On Windows, use the ``exist`` command. See below for an example.
 Run Docker Tests Locally for Feedstock
 --------------------------------------
 If you want to run the docker tests for a feedstock locally, go to the root
-feedstock directory and run, the ``ci_support/run_docker_build.sh`` script.
+feedstock directory and run, the ``.circleci/run_docker_build.sh`` script
+(or ``ci_support/run_docker_build.sh`` in older feedstocks).
 
 .. code-block:: sh
 
     $ cd my-feedstock
-    $ ./ci_support/run_docker_build.sh
+    $ ./.circleci/run_docker_build.sh
 
 
 Run Docker Tests Locally for Staged Recipes
