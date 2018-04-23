@@ -51,6 +51,23 @@ Circle can be manually added for each fork. Circle calls this “Adding a Projec
 This effectively amount to going to the <a class="reference external" href="https://circleci.com/add-projects">Add Projects</a>
 page, finding the fork that you wish to enable, and clicking the “Build Project” button.
 This is not normally needed.</p>
+<p>If CircleCI lacks permissions to checkout the source code, it will produce an error like follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cloning</span> <span class="n">into</span> <span class="s1">&#39;.&#39;</span><span class="o">...</span>
+<span class="ne">Warning</span><span class="p">:</span> <span class="n">Permanently</span> <span class="n">added</span> <span class="n">the</span> <span class="n">RSA</span> <span class="n">host</span> <span class="n">key</span> <span class="k">for</span> <span class="n">IP</span> <span class="n">address</span> <span class="s1">&#39;192.30.253.113&#39;</span> <span class="n">to</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">known</span> <span class="n">hosts</span><span class="o">.</span>
+<span class="n">Permission</span> <span class="n">denied</span> <span class="p">(</span><span class="n">publickey</span><span class="p">)</span><span class="o">.</span>
+<span class="n">fatal</span><span class="p">:</span> <span class="n">Could</span> <span class="ow">not</span> <span class="n">read</span> <span class="kn">from</span> <span class="nn">remote</span> <span class="n">repository</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>When this happens for a feedstock, it can be fixed using the [webservive](<a class="reference external" href="https://conda-forge.org/docs/webservice.html#conda-forge-admin-please-update-circle">https://conda-forge.org/docs/webservice.html#conda-forge-admin-please-update-circle</a>), by posting the following comment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@conda</span><span class="o">-</span><span class="n">forge</span><span class="o">-</span><span class="n">admin</span><span class="o">-</span><span class="n">please</span><span class="o">-</span><span class="n">update</span><span class="o">-</span><span class="n">circle</span>
+</pre></div>
+</div>
+<p>Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:</p>
+<ul class="simple">
+<li>Log in and out of Circle CI.</li>
+<li>Revoke Circle CI’s access and then enable it again.</li>
+<li>In the  “Checkout SSH keys” section of your Circle CI project settings, press “add user key”.</li>
+</ul>
 </div>
 </div>
 </div>

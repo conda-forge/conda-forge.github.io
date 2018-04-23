@@ -22,3 +22,20 @@ Circle can be manually added for each fork. Circle calls this "Adding a Project"
 This effectively amount to going to the `Add Projects <https://circleci.com/add-projects>`_
 page, finding the fork that you wish to enable, and clicking the "Build Project" button.
 This is not normally needed.
+
+If CircleCI lacks permissions to checkout the source code, it will produce an error like follows::
+
+    Cloning into '.'...
+    Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
+    Permission denied (publickey).
+    fatal: Could not read from remote repository.
+
+When this happens for a feedstock, it can be fixed using the [webservive](https://conda-forge.org/docs/webservice.html#conda-forge-admin-please-update-circle), by posting the following comment::
+  
+  @conda-forge-admin-please-update-circle
+
+Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
+
+* Log in and out of Circle CI.
+* Revoke Circle CI's access and then enable it again.
+* In the  "Checkout SSH keys" section of your Circle CI project settings, press "add user key".
