@@ -32,12 +32,15 @@ Run Docker Tests Locally for Feedstock
 --------------------------------------
 If you want to run the docker tests for a feedstock locally, go to the root
 feedstock directory and run, the ``.circleci/run_docker_build.sh`` script
-(or ``ci_support/run_docker_build.sh`` in older feedstocks).
+(or ``ci_support/run_docker_build.sh`` in older feedstocks). One should also
+specify the environment variable ``CONFIG``, to select one of the ``*.yaml``
+config files in ``.ci_support`` to use for the build (this is not needed for
+older feedstocks).
 
 .. code-block:: sh
 
     $ cd my-feedstock
-    $ ./.circleci/run_docker_build.sh
+    $ CONFIG="linux_" ./.circleci/run_docker_build.sh
 
 
 Run Docker Tests Locally for Staged Recipes
