@@ -133,7 +133,7 @@ Following implies that ``python`` is a runtime dependency and a Python matrix fo
 
 .. code-block:: yaml
 
-    build:
+    host:
       - python
 
 
