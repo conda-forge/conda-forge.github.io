@@ -59,7 +59,7 @@ To skip building with a particular ``vc`` version, add a skip statement.
 .. code-block:: yaml
 
     build:
-        skip: true  # [vc==9]
+        skip: true  # [vc<14]
 
     requirements:
       build:
