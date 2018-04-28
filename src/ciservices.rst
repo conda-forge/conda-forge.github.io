@@ -8,10 +8,25 @@ Travis CI is used to build packages for OS X. After merging a staged-recipes pul
 force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit `<https://travis-ci.org/profile>`_ and click "Sync accounts".
 
 
-CircleCI (Linux)
+CircleCI (Linux, OSX)
 ------------------------------
 Circle CI is a container-based CI service that conda-forge uses to build
-linux packages.
+linux packages. It can optionally build OSX packages.
+
+
+Using Circle for both Linux and OSX
+...................................
+
+To use CircleCI for OSX, add the following to ``conda-forge.yml`` in the root of the feedstock.
+
+.. code-block:: yaml
+
+    provider:
+      osx: circle
+
+CircleCI for OSX should be used for OSX only when Travis-CI resources (50 minutes of build time per job) is not enough as CircleCI gives more resources (2 hours of build time per job).
+
+Note that you need to rerender the feedstock once this change has been made.
 
 
 Enabling Circle on your Fork
