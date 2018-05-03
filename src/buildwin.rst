@@ -52,7 +52,7 @@ With ``conda-build 3.x``, ``vc`` can be used as a selector when using the ``comp
 
     requirements:
       build:
-        - {{ compiler('cxx') }}     # [win]
+        - {{ compiler('cxx') }}
 
 To skip building with a particular ``vc`` version, add a skip statement.
 
@@ -63,5 +63,5 @@ To skip building with a particular ``vc`` version, add a skip statement.
 
     requirements:
       build:
-        - {{ compiler('cxx') }}     # [win]
+        - {{ compiler('cxx') }}
 
