@@ -98,8 +98,8 @@ can be replaced by
     requirements:
       host:
         - gmp
-
-Note that gmp need not be in ``run`` requirements as ``run_exports`` feature (or ``pin_run_as_build`` feature in ``conda_build_config.yaml``) of conda-build will add it automatically.
+      run:
+        - gmp
 
 When there's a new ABI version of gmp (say 7.0), then conda-forge-pinning will be updated. A rerendering of a package using gmp will change. Therefore to check that a recipe needs to be rebuilt for updated pinnings, you only need to check if the package needs a rerender.
 
