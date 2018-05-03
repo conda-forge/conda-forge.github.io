@@ -39,10 +39,20 @@
 <p>Travis CI is used to build packages for OS X. After merging a staged-recipes pull request, it might be necessary to
 force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit <a class="reference external" href="https://travis-ci.org/profile">https://travis-ci.org/profile</a> and click “Sync accounts”.</p>
 </div>
-<div class="section" id="circleci-linux">
-<h2>CircleCI (Linux)<a class="headerlink" href="#circleci-linux" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="circleci-linux-osx">
+<h2>CircleCI (Linux, OSX)<a class="headerlink" href="#circleci-linux-osx" title="Permalink to this headline">¶</a></h2>
 <p>Circle CI is a container-based CI service that conda-forge uses to build
-linux packages.</p>
+linux packages. It can optionally build OSX packages.</p>
+<div class="section" id="using-circle-for-both-linux-and-osx">
+<h3>Using Circle for both Linux and OSX<a class="headerlink" href="#using-circle-for-both-linux-and-osx" title="Permalink to this headline">¶</a></h3>
+<p>To use CircleCI for OSX, add the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root of the feedstock.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">provider</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">osx</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">circle</span>
+</pre></div>
+</div>
+<p>CircleCI for OSX should be used for OSX only when Travis-CI resources (50 minutes of build time per job) is not enough as CircleCI gives more resources (2 hours of build time per job).</p>
+<p>Note that you need to rerender the feedstock once this change has been made.</p>
+</div>
 <div class="section" id="enabling-circle-on-your-fork">
 <h3>Enabling Circle on your Fork<a class="headerlink" href="#enabling-circle-on-your-fork" title="Permalink to this headline">¶</a></h3>
 <p>If for some reason Circle CI is not triggering build from forks,
@@ -82,7 +92,8 @@ This is not normally needed.</p>
   <ul>
 <li><a class="reference internal" href="#">CI Services</a><ul>
 <li><a class="reference internal" href="#travis-ci-os-x">Travis CI (OS X)</a></li>
-<li><a class="reference internal" href="#circleci-linux">CircleCI (Linux)</a><ul>
+<li><a class="reference internal" href="#circleci-linux-osx">CircleCI (Linux, OSX)</a><ul>
+<li><a class="reference internal" href="#using-circle-for-both-linux-and-osx">Using Circle for both Linux and OSX</a></li>
 <li><a class="reference internal" href="#enabling-circle-on-your-fork">Enabling Circle on your Fork</a></li>
 </ul>
 </li>
@@ -125,7 +136,7 @@ This is not normally needed.</p>
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

@@ -70,38 +70,24 @@ nmake install
 <li><a class="reference external" href="https://github.com/conda-forge/pugixml-feedstock/blob/master/recipe/bld.bat">pugixml</a></li>
 </ul>
 </div>
-<div class="section" id="vc-features">
-<h2>VC features<a class="headerlink" href="#vc-features" title="Permalink to this headline">¶</a></h2>
-<p>Conda builds Windows packages with features as a means of keeping the Visual Studio version (<code class="docutils literal notranslate"><span class="pre">vc</span></code>) used to build packages uniform across a given Python version.</p>
-<p>Rule of thumb:</p>
-<ul class="simple">
-<li>if it’s a shared library that something other than Python will use, you only need python in build to activate features. You need the features block;</li>
-<li>if it is a shared library that is tied to a Python API (e.g. Boost Python), you need BOTH, and the features block;</li>
-<li>if it is a library that has compiled content, but is used only from Python, you need Python in both build and runtime requirements, but you do NOT need the features block.</li>
-</ul>
-<p>* Note that, because PY35 and PY36 use the same <code class="docutils literal notranslate"><span class="pre">vc</span></code> the user can skip py36 (or py35) in the first case above because the <code class="docutils literal notranslate"><span class="pre">vc14</span></code> package created will work on both versions.</p>
-<p>To provide features add the following lines to the build section:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">features</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc9</span>   <span class="c1"># [win and py27]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc10</span>  <span class="c1"># [win and py34]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc14</span>  <span class="c1"># [win and py&gt;=35]</span>
-</pre></div>
-</div>
-<p>Also, add a <code class="docutils literal notranslate"><span class="pre">python</span></code> dependency to the build requirements (unless it is already a requirement like NumPy for instance). And the <code class="docutils literal notranslate"><span class="pre">vc</span></code> packages for each Python at build and run.</p>
+<div class="section" id="building-for-different-vc-versions">
+<h2>Building for different VC versions<a class="headerlink" href="#building-for-different-vc-versions" title="Permalink to this headline">¶</a></h2>
+<p>On Windows, different Visual C versions have different ABI and therefore a package needs to be built for different Visual C versions. Packages are tied to the VC version that they were built with and some packages have specific requirements of the VC version. For example, python 2.7 requires <code class="docutils literal notranslate"><span class="pre">vc</span> <span class="pre">9</span></code> and python 3.5 requires <code class="docutils literal notranslate"><span class="pre">vc</span> <span class="pre">14</span></code>.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">conda-build</span> <span class="pre">3.x</span></code>, <code class="docutils literal notranslate"><span class="pre">vc</span></code> can be used as a selector when using the <code class="docutils literal notranslate"><span class="pre">compiler</span></code> jinja syntax.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>  <span class="c1"># [win]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc 9</span>  <span class="c1"># [win and py27]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc 10</span>  <span class="c1"># [win and py34]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc 14</span>  <span class="c1"># [win and py&gt;=35]</span>
-  <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc 9</span>  <span class="c1"># [win and py27]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc 10</span>  <span class="c1"># [win and py34]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vc 14</span>  <span class="c1"># [win and py&gt;=35]</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;cxx&#39;)</span> <span class="p p-Indicator">}}</span>
 </pre></div>
 </div>
-<p>For more info see <a class="reference external" href="https://github.com/conda/conda/wiki/VC-features">https://github.com/conda/conda/wiki/VC-features</a></p>
+<p>To skip building with a particular <code class="docutils literal notranslate"><span class="pre">vc</span></code> version, add a skip statement.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">skip</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>  <span class="c1"># [vc&lt;14]</span>
+
+<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;cxx&#39;)</span> <span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -115,7 +101,7 @@ nmake install
   <ul>
 <li><a class="reference internal" href="#">Building on Windows</a><ul>
 <li><a class="reference internal" href="#simple-cmake-based-bld-bat">Simple CMake-Based <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code></a></li>
-<li><a class="reference internal" href="#vc-features">VC features</a></li>
+<li><a class="reference internal" href="#building-for-different-vc-versions">Building for different VC versions</a></li>
 </ul>
 </li>
 </ul>
@@ -155,7 +141,7 @@ nmake install
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
