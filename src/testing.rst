@@ -5,7 +5,7 @@ Testing in Recipes
 All recipes need tests. Here are some tips, tricks, and justifications.
 How you shold test depends on the type of package (python, c-lib,
 command-line tool, ... ), and what tests are available for that package.
-But every conda pacakge should have at least *some* tests.
+But every conda pacakge must have at least *some* tests.
 
 
 Simple Existence Tests
@@ -36,11 +36,15 @@ On Windows, use the ``exist`` command. See below for an example.
 Testing Python Packages
 -----------------------
 
+For the best information about testing, see the conda build docs:
+
+` test section <https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#test-section>`_
+
+
 Testing Importing
 .................
 
-The minimal test of a python package should make sure that the package imports. This can
-be accomplished with this stanza in the yaml:
+The minimal test of a python package should make sure that the package imports. This can be accomplished with this stanza in the yaml:
 
 .. code-block:: yaml
 
@@ -53,8 +57,9 @@ not necessarily the name of the conda package (they are sometimes different).
 
 Testing for an import will catch the bulk of the packaging errors, generally
 including presence of dependencies. However, it does not assure that the
-package works correctly particularly if it works correctly with the particular
-versions of dependencies used. So it is good to run some other test of the code itself.
+package works correctly -- particularly if it works correctly with the
+versions of dependencies used. So it is good to run some other test of
+the code itself if possible.
 
 Running Unit Tests
 ..................
@@ -63,7 +68,7 @@ The trick here is that there are multiple ways to run unit tests in Python,
 including nose, pytest, etc.
 
 Also, some packages install the tests with the package, and thus they can be
-run in place. while others keep the tests with the source code, and thus can
+run in place, while others keep the tests with the source code, and thus can
 not be run straight from an installed package.
 
 Test Requirements
@@ -110,11 +115,6 @@ for you with the following command::
         - pytest
       commands:
         - py.test --pyargs package_name
-
-nose Tests
-...........
-
-Someone please add a description and example for running nose on an installed package.
 
 
 Command Line Utilities
