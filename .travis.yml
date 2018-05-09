@@ -11,10 +11,6 @@ env:
        # Adds a GH_TOKEN (conda-forge-coordinator's conda-forge.github.io token)
        - secure: "BshSms+7ZjWWtQNNzszt3ho76oWOTPeoNg+Aahmq1ZXJsAvh93IyHIxtb2xHYMrRdWXtCXof8kC1BLAjRISzL8j4+/QN6B8sjjrRYSBuM8WoCbP6c3DFbWJ2s19s5gAToqghahEP4VBJJcSny+gIzfNdKg47frwrcKLbvpzqr1q8O7H1swTXmXisplj9g5U7SWzP3lxveYxxcuh+/RTwQpQp8RriviCnacgZ6xJ3TnIirnhyyVOnA0twk3+0pSjpMSAsQY4+tTEDtIbHHUwEZxXS6sVNd/oVKBXNNHY/TJJRq413WvE7IGqyDtPQ935OAxHqiZFnA8WFQs9xK7EKssMsxXzRSOEPPCtDBMfL/4kDHF5gkF28NH9JJ9fgXxOpMm8SvFETe0nwUxSeb8uLPiw4UbXoKrd0Phxn/YyN3DOvRYKwsQpKYCGrzy+XNHmkoC80pI1OrqogtsUlUbRH0aS/6Zf7wn5ig3rVvMvhwYM/KbFPlb1z2tjb34GcFSpOsomXWvpLpG5gO91hFq9XPw0btsDq0aTJuJiAGrLKoMtkcY1FPe+M8wac2iRkfBCmbqr6HuCNdx7MCkPNysyfc+emeJIuxwhgcE1qLbTZMJ4ctMr2a2NGuoCxyWXOcNSVtUtlk5Q0rhgD0vohk/tKDdxJve9gw5qjihBjTsloTPg="
 
-    matrix:
-        - ACTION="feedstocks_repo"
-        - ACTION="update_docs"
-
 install:
     - mkdir -p ${HOME}/cache/pkgs
     - "[ ! -f ${HOME}/cache/miniconda.sh ] && wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ${HOME}/cache/miniconda.sh || :"
@@ -28,6 +24,9 @@ install:
     - git config --global user.email conda.forge.coordinator@gmail.com
     - mkdir -p ~/.conda-smithy && echo $GH_TOKEN > ~/.conda-smithy/github.token
 
+    # Update conda.
+    - conda update --yes --quiet conda
+
     # Configure conda.
     - conda config --set show_channel_urls true
     - conda config --set auto_update_conda false
@@ -36,13 +35,8 @@ install:
     - conda install conda-execute --yes --quiet -c conda-forge
 
 script:
-    - if [ $ACTION = "update_docs" ]; then
-        echo "Updating docs";
-        source ./.ci_scripts/update_docs;
-      elif [ "$ACTION" = "feedstocks_repo" ]; then
-        echo "Updating feedstock repo";
-        source ./.ci_scripts/update_feedstocks_repo;
-      fi
+    - echo "Updating docs";
+    - source ./.ci_scripts/update_docs;
 
 # We store the files that are downloaded from continuum.io, but not the environments that are created.
 cache:

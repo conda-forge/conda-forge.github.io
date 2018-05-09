@@ -10,14 +10,24 @@ if [ -n "$GH_TOKEN" ]; then
     fi
     git checkout -b new_site_content
     # Generate html requires a GitHub token in order to query the available feedstocks.
-    conda execute scripts/generate_html.py
+    conda install conda-smithy --yes --quiet -c conda-forge
     conda install sphinx --yes --quiet -c conda-forge
+
+    # build docs into docs/; preserve old README file
+    mv docs/README docs-README
+    rm -rf docs/
+
     cd src
     make html
-    cp -r _build/html/* ../docs
+    mv _build/html ../docs
     rm -rf _build
+
+    cd ..
+    mv docs-README docs/README
+
     git diff
-    # Only build the docs for commits on master.
+
+    # Only commit the docs for commits on master.
     if (( "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" )); then
         git add -A :/
         git commit -m "Re-ran make.py. [ci skip]" || true

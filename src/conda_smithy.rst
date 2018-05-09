@@ -12,6 +12,12 @@ Here is how, and when, to re-render.
 How to re-render?
 -----------------
 
+There are 2 options,
+
+    1. Using the webservice to run conda-smithy on the cloud. See `Automatic services <webservice.html>`_
+
+    2. Run conda-smithy locally on your machine. To do this,
+
 First step is to install ``conda-smithy`` in your root environment
 
 .. code-block:: shell

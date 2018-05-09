@@ -2,7 +2,7 @@
 
 # conda execute
 # env:
-#  - git
+#  - git 2.14.2
 #  - python
 #  - conda-smithy
 #  - gitpython

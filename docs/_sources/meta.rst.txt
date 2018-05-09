@@ -71,12 +71,222 @@ A full description of selectors is
 `in the conda docs <http://conda.pydata.org/docs/building/meta-yaml.html#preprocessing-selectors>`_.
 
 
+Pinning packages
+----------------
+
+Conda-smithy 3.0.0 switches to ``conda-build=3``. In conda-smithy 3.0.0, we use a central configuration file from 
+`conda-forge-pinning <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_. for the build matrices and versions of specific packages.
+
+When a rerendering happens, conda-smithy will render the recipe using conda-build and output configuration files for each job and save them in a yaml file in ``.ci_support`` folder. For example there's a output configuration file for each OS, each python version, etc.
+
+These output configuration files are stripped to options that are used in the build and therefore a change in the config files in ``.ci_support`` folder implies that there needs to be a new build.
+
+Pinning of packages are handled by the same configuration file and conda-build. This means that packages need not be pinned manually. For eg:
+
+.. code-block:: yaml
+
+    requirements:
+      host:
+        - gmp 6.1.*
+      run:
+        - gmp 6.1.*
+
+can be replaced by
+
+.. code-block:: yaml
+
+    requirements:
+      host:
+        - gmp
+      run:
+        - gmp
+
+When there's a new ABI version of gmp (say 7.0), then conda-forge-pinning will be updated. A rerendering of a package using gmp will change. Therefore to check that a recipe needs to be rebuilt for updated pinnings, you only need to check if the package needs a rerender.
+
+Note that ``boost`` and ``numpy`` are exceptions to this. See ``Building Against NumPy`` section.
+
+If a package is not in `conda-forge-pinning <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_, then the pinning needs to be done manually. If the package is a ``C/C++`` library with a ``C/C++`` API that is consumed and linked to by other libraries, then that package is a candidate to be added to ``conda-forge-pinning``. Please open an issue in `conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_ for discussion.
+
+If the constraints in ``conda-forge-pinning`` are not strict enough, you can override them by changing back to pinning the package with a version manually. You can make a pinning stricter by adding ``{{ pin_compatible('gmp', max_pin='x.x.x') }}`` to run requirements.
+
+If you need to remove a pinning in rare cases like linking the package statically or if the package is used with ``dlopen`` instead of linking, then you can do,
+
+.. code-block:: yaml
+
+    build:
+      ignore_run_exports:
+        - gmp
+
+
+Build matrices
+--------------
+
+Currently, ``python, vc, r-base`` will create a matrix of jobs for each supported version. If ``python`` is only a build dependency and not a runtime dependency (eg: build script of the package is written in Python, but the package is not dependent on python), use ``build`` section
+
+Following implies that ``python`` is only a build dependency and no Python matrix will be created.
+
+.. code-block:: yaml
+
+    build:
+      - python
+    host:
+      - some_other_package
+
+
+Note that ``host`` should be non-empty or ``compiler`` jinja syntax used or ``build/merge_build_host`` set to True for the ``build`` section to be treated as different from ``host``.
+
+Following implies that ``python`` is a runtime dependency and a Python matrix for each supported python version will be created.
+
+.. code-block:: yaml
+
+    host:
+      - python
+
+
+
+``conda-forge.yml``'s build matrices is removed in conda-smithy=3. To get a build matrix, create a ``conda_build_config.yaml`` file inside recipe folder. For example following will give you 2 builds and you can use the selector ``vtk_with_osmesa`` in the ``meta.yaml``
+
+.. code-block:: yaml
+
+    vtk_with_osmesa:
+      - False
+      - True
+
+You need to rerender the feedstock after this change.
+
+
+
+
+Compilers
+---------
+
+``conda-build=3`` gives the ability to use Anaconda 5 compilers, ``conda-forge`` is not using these compilers yet. Reason for holding out on using the Anaconda 5 compilers is that the packages built by them are sometimes incompatible with the packages built with the older compilers in CI platforms conda-forge has been using. All the dependencies of a package should be compiled (This is not true for all cases, but it's better to be cautious) with the new compilers before using the new compiler in a package. This presents a problem in that rebuilding a package will break the dependent packages. Therefore, ``conda-forge`` has decided to rebuild all of the packages and upload them all at once. More details on how this is done will be communicated in the future.
+
+However, using the ``{{ compiler('cxx') }}`` is supported in ``conda-forge``, but it installs the ``toolchain`` package which activates the compilers in the CI environment. If you were using ``toolchain`` or ``gcc`` build deps, consider using the following,
+
+.. code-block:: yaml
+
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - {{ compiler('fortran') }}
+
+
+Note that appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.
+
+
 Building Against NumPy
 ----------------------
-If you have a package which links against numpy you need to build and run against
-the same version of numpy. Putting ``numpy x.x`` in the build and run requirements
-ensures that a separate package will be built for each version of numpy that
-conda-forge builds against.
+If you have a package which links\* against ``numpy`` you can build against the oldest possible version of ``numpy`` that is forwards compatible.
+With conda-build 3, we can leave the pin empty for build-time, and conda-build will use the numpy key from conda_build_config.yaml. We can also utilize conda-build's dynamic pinning with its pin_compatible function to evaluate the numpy pin based on the version that actually gets used at build time.
+If you don't want to make things complicated you can use
+
+.. code-block:: yaml
+
+    host:
+      - numpy
+    run:
+      - {{ pin_compatible('numpy') }}
+
+
+At the time of writing, above is equivalent to the following,
+
+.. code-block:: yaml
+
+    host:
+      - numpy 1.9.3              # [unix]
+      - numpy 1.11.3             # [win]
+    run:
+      - numpy >=1.9.3,<2.0.a0    # [unix]
+      - numpy >=1.11.3,<2.0.a0   # [win]
+
+
+\* In order to know if your package links against ``numpy`` check for things like ``numpy.get_include()`` in your ``setup.py``,
+or if the package uses ``cimport``.
+
+
+.. admonition:: Notes
+
+    1. you still need to respect minimum supported version of ``numpy`` for the package!
+    That means you cannot use ``numpy 1.9`` if the project requires at least ``numpy 1.12``,
+    adjust the minimum version accordingly!
+
+    .. code-block:: yaml
+
+        host:
+          - numpy 1.12.*
+        run:
+          - {{ pin_compatible('numpy') }}
+
+
+    At the time of writing, above is equivalent to the following,
+
+    .. code-block:: yaml
+
+        host:
+          - numpy 1.12.3
+        run:
+          - numpy >=1.12.3,<2.0.a0
+
+
+    2. if your package supports ``numpy 1.7``, and you are brave enough :-),
+    there are ``numpy`` packages for ``1.7`` available for Python 3.4 and 2.7 in the channel.
+
+
+.. admonition:: Deprecated
+
+    Adding ``numpy x.x`` to the host and run sections translates to a matrix pinned to all
+    available numpy versions (e.g. 1.11, 1.12 and 1.13). In order to optimize CI ressources
+    usage this option is now deprecated in favour of the apporach described above.
+
+.. _noarch:
+
+Building ``noarch`` packages
+----------------------------
+
+The ``noarch: python`` directive, in the ``build`` section, makes pure-Python
+packages that only need to be built once. This drastically reduces the CI usage,
+since it's only built once (on CircleCI), making your build much faster and
+freeing resources for other packages.
+
+``noarch: python`` can be used to build pure Python packages that:
+
+* Do not perform any Python version specific code translation at install time (i.e. 2to3).
+
+* Have fixed requirements; that is to say no conditional dependencies
+  depending on the Python version, or the platform ran. (If you have for example
+  ``backports # [py27])`` in the ``run`` section of ``meta.yml``, your package
+  can't be noarch, yet.)
+
+* Do not use selectors to ``skip`` building the recipe on a specific platform or
+  for a specific version of python (e.g. ``skip: True  # [py2k]``).
+
+Note that while ``noarch: python`` does not work with selectors, it does work
+with version constraints, so ``skip: True  # [py2k]`` can sometimes be replaced
+with a constrained python version in the build/run subsections:
+say ``python >=3`` instead of just ``python``.
+
+``noarch: python`` can also work with recipes that would work on a given platform
+except that we don't have one of its dependencies available.
+If this is the case, when the install runs ``conda`` will fail with an error
+message describing which dependency couldn't be found.
+If the dependency is later made available, your package will start working
+without having to change anything.
+Note though that since ``noarch`` packages are built on Linux, currently the
+package must be installable on Linux.
+
+To use it, just add ``noarch: python`` in the build section like,
+
+.. code-block:: yaml
+
+    build:
+      noarch: python
+
+If you're submitting a new recipe to ``staged-recipes``, that's all you need.
+In an existing feedstock, you'll also need to :doc:`re-render the feedstock </conda_smithy>`,
+or you can just ask :doc:`the webservice </webservice>` to add it for you and rerender:
+say ``@conda-forge-admin, please add noarch: python`` in an open PR.
 
 
 Build Number
@@ -88,23 +298,36 @@ dependency and rebuild the package you should increase the build number.
 
 When the package version changes you should reset the build number to ``0``.
 
+.. _use-pip:
 
-Single Version, Externally Managed
-----------------------------------
-Many packages use ``python setup.py install --single-version-externally-managed --record record.txt``
+Use pip
+-------
+Normally Python packages should use this line:
 
-These options should be added to setup.py if a project uses setuptools. The goal is to prevent ``setuptools``
-from creating an ``egg-info`` directory because it does not interact well with conda.
+.. code-block:: yaml
+
+    build:
+      script: python -m pip install --no-deps --ignore-installed .
+
+as the installation script in the ``meta.yml`` file or ``bld.bat/build.sh`` script files,
+while adding ``pip`` to the build requirements:
+
+.. code-block:: yaml
+
+    requirements:
+      build:
+        - pip
+
+These options should be used to ensure a clean installation of the package without its
+dependencies. This helps make sure that we're only including this package,
+and not accidentally bringing any dependencies along into the conda package.
+
+Note that the ``--no-deps`` line means that for pure-Python packages,
+usually only ``python`` and ``pip`` are needed as ``build`` or ``host`` requirements;
+the real package dependencies are only ``run`` requirements.
 
 
 Downloading extra sources and data files
 ----------------------------------------
-If you need additional source/data files for the build, download them using curl in the build script
-and verify the checksum using openssl. Add curl and openssl to the build requirements and then you
-can use curl to download and openssl to verify.
+``conda-build 3`` supports multiple sources per recipe. Examples are available `in the conda-build docs <https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#source-from-multiple-sources>`_.
 
-Example recipe is 
-`here <https://github.com/conda-forge/pari-feedstock/blob/187bb3bdd0a5e35b2ecaa73ed2ceddc4ca0c2f5a/recipe/build.sh#L27-L35>`_.
-
-Upstream issue for allowing multiple source is 
-`here <https://github.com/conda/conda-build/issues/1466>`_.

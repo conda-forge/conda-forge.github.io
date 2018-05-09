@@ -1,2 +1,4 @@
 # Ignore doc build
 src/_build/
+# Ignore sphinx .buildinfo metadata
+docs/.buildinfo

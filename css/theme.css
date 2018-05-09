@@ -80,9 +80,12 @@ a:focus {
 
 .list-group-item {
     margin-bottom: 0;
-    border-bottom: 1px solid rgba(255,255,255,.1);
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: black;
+}
+
+.list-group-item:not(:last-child){
+    border-bottom: 1px solid rgba(255,255,255,.1);
 }
 
 
@@ -379,13 +382,13 @@ footer p {
     margin: 0;
 }
 
-:not(code)::-moz-selection {
+:not(code):not(input)::-moz-selection {
     text-shadow: none;
     background: #fcfcfc;
     background: rgba(255,255,255,.2);
 }
 
-:not(code)::selection {
+:not(code):not(input)::selection {
     text-shadow: none;
     background: #fcfcfc;
     background: rgba(255,255,255,.2);
