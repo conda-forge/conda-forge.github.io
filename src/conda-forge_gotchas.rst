@@ -27,7 +27,7 @@ The ``conda-forge`` and ``defaults`` are not 100% compatible.
 In the example above it is known that ``defaults`` uses ``icu 54.*`` while ``conda-forge`` relies on ``icu 56.*``,
 that mismatch can lead to errors when the install environment is mixing packages from multiple channels.
 
-Note: All of conda-forge software pinning can be found at: https://github.com/conda-forge/staged-recipes/wiki/Pinned-dependencies
+Note: All of conda-forge software pinning can be found at: https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml
 
 How to fix it?
 ''''''''''''''
