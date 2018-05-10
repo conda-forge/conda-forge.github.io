@@ -147,13 +147,13 @@ what an end-user will see.
 
 This makes it very hard to run tests that are not installed with the package.
 
-**NOTE** if anyone has good ideas as to how to do that, please put it here!
+.. **NOTE** if anyone has good ideas as to how to do that, please put it here!
 
 Docker Tests
 ------------
 
-**NOTE** This could use some explanation of what docker tests are, and why
-one would want to run them.
+.. **NOTE** This could use some explanation of what docker tests are, and why one would want to run them.
+
 
 Run Docker Tests Locally for Feedstock
 .......................................
