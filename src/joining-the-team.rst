@@ -18,7 +18,7 @@ yes/no and give the team 24h to vote. The person will then be given merge
 rights to conda-forge/staged-recipes so that they can help us review and merge
 submissions more quickly!
 
-staged-recipes responsibilities
+staged-recipes Responsibilities
 ===============================
 
 You are the welcoming committee for new recipes coming in to the conda-forge
@@ -27,12 +27,13 @@ Generally speaking your role is as follows:
 
 1. Keep up to date with the current best practices for conda packaging standards
 2. Provide recipe review which generally means making sure that the recipe
-   under review adheres to what we list on the :ref:`recipe` page.
+   under review adheres to what we list on the :ref:`creating_recipes` page.
 3. Open issues as needed, both on staged and on the other flagship repos
    (smithy, webservices, etc), especially when problems occur.
-4. <Other people please chime in here with what the responsibilities are supposed to be>
+.. 4. <Other people please chime in here with what the responsibilities are supposed to be>
 
 TODO
 ====
+
 * Add description of core team responsibilities
 * Add description of how we add new core team members

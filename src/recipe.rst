@@ -1,15 +1,18 @@
+.. _creating_recipes:
+
 Creating Conda Recipes
-==========================
+======================
+
 This document presents conda-forge information about creating recipes overall.
 Details of modifying files inside of a recipe are present on other pages in
 this documentation.
 
 Getting Started
-------------------------------
+---------------
+
 There are multiple ways to get started:
 
-a. Look at `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_
-   in this repository and modify it as necessary.
+a. Look at `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the staged-recipes repository and modify it as necessary.
 b. If it is an R package from `CRAN <https://cran.r-project.org/>`_, please
    instead start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_.
    Then if necessary you can make manual edits to the recipe.
@@ -34,7 +37,7 @@ Step-by-step instructions
 3. Edit the copied recipe (meta.yml) as needed.
 4. Generate the sha-256 key as described in the example recipe using the ``openssl`` tool. As an alternative you can also go to the package description on `PyPi <https://pypi.org>`_ from which you can directly copy the sha-256.
 5. Be sure to fill in the ``tests`` section. The simplest test will simply test that the module can be imported, as described in the example.
-6. Remove all irrelevant comments in the `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_ file.
+6. Remove all irrelevant comments in the ``meta.yaml``  file.
 
 
 Checklist
