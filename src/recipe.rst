@@ -29,8 +29,8 @@ Your final recipe should have no comments (unless they're actually relevant to t
 
 In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that might help you with a successful build is provided in the following.
 
-Step-by-step instructions
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Step-by-step Instructions
+-------------------------
 
 1. Fork `example recipes <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
 2. Within your forked copy, generate a new folder in the recipes subdirectory and copy `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_ file. from the example directory. Please leave the example directory unchanged!
@@ -41,7 +41,7 @@ Step-by-step instructions
 
 
 Checklist
-~~~~~~~~~
+.........
 
 * Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache 2.0 rather than APACHE 2.0).
 * Ensure that you have included a license file if your license requires one -- most do. (see `here <https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55>`_)
@@ -50,7 +50,7 @@ Checklist
 
 
 What happens after the PR to staged-recipes is merged
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------------------
 
 * After the PR is merged, travis-ci will create a new git repo automatically. For example, the recipe for a package named ``pydstool`` will be moved to a new repository `https://github.com/conda-forge/pydstool-feedstock <https://github.com/conda-forge/pydstool-feedstock>`_.
 * CI services (travis-ci, circleci, appveyor) will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to `https://anaconda.org/conda-forge <https://anaconda.org/conda-forge>`_

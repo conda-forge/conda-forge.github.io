@@ -30,6 +30,7 @@ Generally speaking your role is as follows:
    under review adheres to what we list on the :ref:`creating_recipes` page.
 3. Open issues as needed, both on staged and on the other flagship repos
    (smithy, webservices, etc), especially when problems occur.
+
 .. 4. <Other people please chime in here with what the responsibilities are supposed to be>
 
 TODO

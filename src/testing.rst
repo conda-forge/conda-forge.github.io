@@ -172,7 +172,8 @@ older feedstocks).
 
 
 Run Docker Tests Locally for Staged Recipes
---------------------------------------------
+...........................................
+
 If you want to run the docker tests for the staged-recipes repository locally,
 go to the root repository directory and run the
 ``.circleci/run_docker_build.sh`` script.
