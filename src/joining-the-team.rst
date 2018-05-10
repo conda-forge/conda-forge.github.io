@@ -20,14 +20,15 @@ submissions more quickly!
 
 staged-recipes responsibilities
 ===============================
+
 You are the welcoming committee for new recipes coming in to the conda-forge
 community! Please give new (and experienced) contributors a pleasant experience!
 Generally speaking your role is as follows:
 
 1. Keep up to date with the current best practices for conda packaging standards
 2. Provide recipe review which generally means making sure that the recipe
-   under review adheres to what we list on the :ref:`recipe`__ page.
-3. Open issues as needed, both on staged and on the other flagship repos 
+   under review adheres to what we list on the :ref:`recipe` page.
+3. Open issues as needed, both on staged and on the other flagship repos
    (smithy, webservices, etc), especially when problems occur.
 4. <Other people please chime in here with what the responsibilities are supposed to be>
 

@@ -16,35 +16,40 @@ too much bandwidth. Whatever the reason, conda-forge may not always be able to
 execute the prescribed test suite.
 
 However, this is no reason for the recipe to not have tests. At the very least
-we want to verify that the package is installed the desired files in the desired
+we want to verify that the package has installed the desired files in the desired
 locations. This is called existence testing.
 
-Existence testing can be accomplished in the ``meta.yaml`` file in the ``test/commands``
-block. On posix systems, use the ``test`` utility and the ``$PREFIX`` variable.
+Existence testing can be accomplished in the ``meta.yaml`` file in the
+``test/commands`` block.
+
+On posix systems, use the ``test`` utility and the ``$PREFIX`` variable.
+
 On Windows, use the ``exist`` command. See below for an example.
 
-**Simple Existence Testing Example:**
+Simple Existence Testing Example
+................................
 
 .. code-block:: yaml
 
     test:
       commands:
         - test -f $PREFIX/lib/libboost_log$SHLIB_EXT  # [unix]
-        - if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1  # [win and py35]
+        - if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1  # [win]
 
 
 Testing Python Packages
 -----------------------
 
-For the best information about testing, see the conda build docs:
-
-` test section <https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#test-section>`_
+For the best information about testing, see the conda build docs
+`test section. <https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#test-section>`_
 
 
 Testing Importing
 .................
 
-The minimal test of a python package should make sure that the package imports. This can be accomplished with this stanza in the yaml:
+The minimal test of a python package should make sure that the package
+can be successfully imported. This can be accomplished with this
+stanza in the ``meta.yaml``:
 
 .. code-block:: yaml
 
@@ -52,14 +57,15 @@ The minimal test of a python package should make sure that the package imports. 
       imports:
         - package_name
 
-Note that that ``package_name`` is the name that is imported by python,
+Note that ``package_name`` is the name imported by python;
 not necessarily the name of the conda package (they are sometimes different).
 
 Testing for an import will catch the bulk of the packaging errors, generally
 including presence of dependencies. However, it does not assure that the
-package works correctly -- particularly if it works correctly with the
-versions of dependencies used. So it is good to run some other test of
-the code itself if possible.
+package works correctly. In particular, it doesn't test if if it works
+correctly with the versions of dependencies used.
+
+It is good to run some other tests of the code itself (the test suite) if possible.
 
 Running Unit Tests
 ..................
@@ -76,8 +82,8 @@ Test Requirements
 
 Sometimes there are packages required to run the tests that are not required
 to simply use the package. This is usually a test-running framework, such as
-nose or pytest. You can ensure that it is included by adding it to the test
-stanza:
+nose or pytest. You can ensure that it is included by adding it to requirements
+in the the test stanza:
 
 .. code-block:: yaml
 
