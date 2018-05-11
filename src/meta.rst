@@ -43,20 +43,20 @@ It can then be refered to in the ``meta.yaml`` via,
 
 Populating the ``hash`` Field
 -----------------------------
-If your package is on PyPI, you can get the md5 hash from your package's page
-on PyPI; look for the ``md5`` link next to the download link for your package.
+If your package is on PyPi_, you can get the sha256 hash from your package's page
+on PyPI; look for the ``SHA256`` link next to the download link on your package's
+files page, e.g. ``https://pypi.org/project/<your-project>/#files``.
 
 You can also generate a hash from the command line on Linux (and Mac if you
 install the necessary tools below). If you go this route, the ``sha256`` hash
 is preferable to the ``md5`` hash.
-
-To generate the ``md5`` hash: ``md5 your_sdist.tar.gz``
 
 To generate the ``sha256`` hash: ``openssl sha256 your_sdist.tar.gz``
 
 You may need the openssl package, available on conda-forge
 ``conda install openssl -c conda-forge``.
 
+.. _PyPi: https://pypi.org
 
 Excluding a Platform
 --------------------
