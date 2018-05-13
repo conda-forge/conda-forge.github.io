@@ -70,12 +70,12 @@ It can then be refered to in the <code class="docutils literal notranslate"><spa
 </div>
 <div class="section" id="populating-the-hash-field">
 <h2>Populating the <code class="docutils literal notranslate"><span class="pre">hash</span></code> Field<a class="headerlink" href="#populating-the-hash-field" title="Permalink to this headline">¶</a></h2>
-<p>If your package is on PyPI, you can get the md5 hash from your package’s page
-on PyPI; look for the <code class="docutils literal notranslate"><span class="pre">md5</span></code> link next to the download link for your package.</p>
+<p>If your package is on <a class="reference external" href="https://pypi.org">PyPi</a>, you can get the sha256 hash from your package’s page
+on PyPI; look for the <code class="docutils literal notranslate"><span class="pre">SHA256</span></code> link next to the download link on your package’s
+files page, e.g. <code class="docutils literal notranslate"><span class="pre">https://pypi.org/project/&lt;your-project&gt;/#files</span></code>.</p>
 <p>You can also generate a hash from the command line on Linux (and Mac if you
 install the necessary tools below). If you go this route, the <code class="docutils literal notranslate"><span class="pre">sha256</span></code> hash
 is preferable to the <code class="docutils literal notranslate"><span class="pre">md5</span></code> hash.</p>
-<p>To generate the <code class="docutils literal notranslate"><span class="pre">md5</span></code> hash: <code class="docutils literal notranslate"><span class="pre">md5</span> <span class="pre">your_sdist.tar.gz</span></code></p>
 <p>To generate the <code class="docutils literal notranslate"><span class="pre">sha256</span></code> hash: <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">sha256</span> <span class="pre">your_sdist.tar.gz</span></code></p>
 <p>You may need the openssl package, available on conda-forge
 <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">openssl</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code>.</p>
