@@ -117,6 +117,7 @@ If you need to remove a pinning in rare cases like linking the package staticall
       ignore_run_exports:
         - gmp
 
+There is additional documentation on this pinning scheme in `the conda docs <https://conda.io/docs/user-guide/tasks/build-packages/variants.html#build-variants>`_.
 
 Build matrices
 --------------
@@ -173,7 +174,7 @@ However, using the ``{{ compiler('cxx') }}`` is supported in ``conda-forge``, bu
         - {{ compiler('fortran') }}
 
 
-Note that appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.
+Note that appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.  There is additional information about how conda-build 3 treats compilers in `the conda docs <https://conda.io/docs/user-guide/tasks/build-packages/compiler-tools.html>`_.
 
 
 Building Against NumPy
