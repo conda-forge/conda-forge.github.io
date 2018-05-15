@@ -69,7 +69,7 @@ for the conda-forge packages. Only in extreme cases should you rely on a depende
 conda-forge.
 
 If your dependencies do not change with the python version, or with the
-platform, consider making your build `noarch <noarch>`_, for them to be much
+platform, consider making your build :ref:`noarch <noarch>`, for them to be much
 faster, and free some resource for other project.
 
 
