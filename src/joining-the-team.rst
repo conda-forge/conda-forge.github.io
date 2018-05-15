@@ -27,7 +27,7 @@ Generally speaking your role is as follows:
 
 1. Keep up to date with the current best practices for conda packaging standards
 2. Provide recipe review which generally means making sure that the recipe
-   under review adheres to what we list on the :ref:`creating_recipes` page.
+   under review adheres to what we list on the :doc:`recipe` page.
 3. Open issues as needed, both on staged and on the other flagship repos
    (smithy, webservices, etc), especially when problems occur.
 
