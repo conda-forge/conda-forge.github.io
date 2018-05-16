@@ -2,3 +2,6 @@
 src/_build/
 # Ignore sphinx .buildinfo metadata
 docs/.buildinfo
+
+# OS-X crap
+.DS_Store
