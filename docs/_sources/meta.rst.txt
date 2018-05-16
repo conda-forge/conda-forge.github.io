@@ -43,20 +43,20 @@ It can then be refered to in the ``meta.yaml`` via,
 
 Populating the ``hash`` Field
 -----------------------------
-If your package is on PyPI, you can get the md5 hash from your package's page
-on PyPI; look for the ``md5`` link next to the download link for your package.
+If your package is on PyPi_, you can get the sha256 hash from your package's page
+on PyPI; look for the ``SHA256`` link next to the download link on your package's
+files page, e.g. ``https://pypi.org/project/<your-project>/#files``.
 
 You can also generate a hash from the command line on Linux (and Mac if you
 install the necessary tools below). If you go this route, the ``sha256`` hash
 is preferable to the ``md5`` hash.
-
-To generate the ``md5`` hash: ``md5 your_sdist.tar.gz``
 
 To generate the ``sha256`` hash: ``openssl sha256 your_sdist.tar.gz``
 
 You may need the openssl package, available on conda-forge
 ``conda install openssl -c conda-forge``.
 
+.. _PyPi: https://pypi.org
 
 Excluding a Platform
 --------------------
@@ -103,7 +103,7 @@ can be replaced by
 
 When there's a new ABI version of gmp (say 7.0), then conda-forge-pinning will be updated. A rerendering of a package using gmp will change. Therefore to check that a recipe needs to be rebuilt for updated pinnings, you only need to check if the package needs a rerender.
 
-Note that ``boost`` and ``numpy`` are exceptions to this. See ``Building Against NumPy`` section.
+Note that ``numpy`` is an exception to this. See ``Building Against NumPy`` section.
 
 If a package is not in `conda-forge-pinning <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_, then the pinning needs to be done manually. If the package is a ``C/C++`` library with a ``C/C++`` API that is consumed and linked to by other libraries, then that package is a candidate to be added to ``conda-forge-pinning``. Please open an issue in `conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_ for discussion.
 
@@ -117,6 +117,7 @@ If you need to remove a pinning in rare cases like linking the package staticall
       ignore_run_exports:
         - gmp
 
+There is additional documentation on this pinning scheme in `the conda docs <https://conda.io/docs/user-guide/tasks/build-packages/variants.html#build-variants>`_.
 
 Build matrices
 --------------
@@ -173,7 +174,7 @@ However, using the ``{{ compiler('cxx') }}`` is supported in ``conda-forge``, bu
         - {{ compiler('fortran') }}
 
 
-Note that appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.
+Note that appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.  There is additional information about how conda-build 3 treats compilers in `the conda docs <https://conda.io/docs/user-guide/tasks/build-packages/compiler-tools.html>`_.
 
 
 Building Against NumPy

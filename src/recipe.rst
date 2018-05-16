@@ -33,7 +33,7 @@ Step-by-step Instructions
 -------------------------
 
 1. Fork `example recipes <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
-2. Within your forked copy, generate a new folder in the recipes subdirectory and copy `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_ file. from the example directory. Please leave the example directory unchanged!
+2. Within your forked copy, generate a new folder in the recipes subdirectory and copy the `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_ file from the example directory. Please leave the example directory unchanged!
 3. Edit the copied recipe (meta.yml) as needed.
 4. Generate the sha-256 key as described in the example recipe using the ``openssl`` tool. As an alternative you can also go to the package description on `PyPi <https://pypi.org>`_ from which you can directly copy the sha-256.
 5. Be sure to fill in the ``tests`` section. The simplest test will simply test that the module can be imported, as described in the example.
@@ -54,7 +54,7 @@ What happens after the PR to staged-recipes is merged
 
 * After the PR is merged, travis-ci will create a new git repo automatically. For example, the recipe for a package named ``pydstool`` will be moved to a new repository `https://github.com/conda-forge/pydstool-feedstock <https://github.com/conda-forge/pydstool-feedstock>`_.
 * CI services (travis-ci, circleci, appveyor) will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to `https://anaconda.org/conda-forge <https://anaconda.org/conda-forge>`_
-* If this is your first contribution, you will be added to the conda-forge `team <https://github.com/orgs/conda-forge/teams/all-members>`_ and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.
+* If this is your first contribution, you will be added to the conda-forge `team <https://github.com/orgs/conda-forge/people>`_ and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.
 * If you want to make a change to the recipe, send a PR to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.
 
 
@@ -74,7 +74,9 @@ of ABI compatibility for the conda-forge packages. Only in extreme cases
 should you rely on a dependency outside of conda-forge.
 
 If your dependencies do not change with the python version, or with the
-platform, consider making your build `noarch <noarch>`_, this will allow the recipe to build faster, and free some CI resources for other projects.
+platform, consider making your build :ref:`noarch <noarch>`, for them
+to be much faster, and free some resources for other projects.
+
 
 
 Optional: ``bld.bat`` and/or ``build.sh``
