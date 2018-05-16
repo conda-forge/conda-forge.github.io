@@ -74,8 +74,7 @@ of ABI compatibility for the conda-forge packages. Only in extreme cases
 should you rely on a dependency outside of conda-forge.
 
 If your dependencies do not change with the python version, or with the
-platform, consider making your build :ref:`noarch <noarch>`, for them
-to be much faster, and free some resources for other projects.
+platform, consider making your build :ref:`noarch <noarch>`, this will allow the recipe to build faster, and free some CI resources for other projects.
 
 
 
