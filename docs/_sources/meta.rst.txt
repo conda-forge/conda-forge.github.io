@@ -1,11 +1,14 @@
+
 Writing the ``meta.yaml``
 ==========================
+
 This document presents conda-forge rules, guidelines, and justifications
 about writing the ``meta.yaml`` file.
 
 
 Build from Tarballs, Not Repos
 ------------------------------
+
 Conda-forge requires that building from tarballs using the
 ``url`` and ``fn`` keys in the ``build`` section. A recipe
 should not use the ``git_url``, ``git_ver``, and similar
@@ -26,6 +29,7 @@ the source can be patched to include the relevant build information.
 
 Packaging the License Manually
 ------------------------------
+
 Certain software licenses, such as those in the GPL and Apache families,
 require that the text of the license be distributed with the package.
 This means that the ``about/license_file`` entry *must* be included in the
@@ -43,6 +47,7 @@ It can then be refered to in the ``meta.yaml`` via,
 
 Populating the ``hash`` Field
 -----------------------------
+
 If your package is on PyPi_, you can get the sha256 hash from your package's page
 on PyPI; look for the ``SHA256`` link next to the download link on your package's
 files page, e.g. ``https://pypi.org/project/<your-project>/#files``.
@@ -60,6 +65,7 @@ You may need the openssl package, available on conda-forge
 
 Excluding a Platform
 --------------------
+
 Use the ``skip`` key in the ``build`` section along with a selector:
 
 .. code-block:: yaml
@@ -74,7 +80,7 @@ A full description of selectors is
 Pinning packages
 ----------------
 
-Conda-smithy 3.0.0 switches to ``conda-build=3``. In conda-smithy 3.0.0, we use a central configuration file from 
+Conda-smithy 3.0.0 switches to ``conda-build=3``. In conda-smithy 3.0.0, we use a central configuration file from
 `conda-forge-pinning <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_. for the build matrices and versions of specific packages.
 
 When a rerendering happens, conda-smithy will render the recipe using conda-build and output configuration files for each job and save them in a yaml file in ``.ci_support`` folder. For example there's a output configuration file for each OS, each python version, etc.
@@ -174,7 +180,7 @@ However, using the ``{{ compiler('cxx') }}`` is supported in ``conda-forge``, bu
         - {{ compiler('fortran') }}
 
 
-Note that appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.  There is additional information about how conda-build 3 treats compilers in `the conda docs <https://conda.io/docs/user-guide/tasks/build-packages/compiler-tools.html>`_.
+Note that appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.  There is additional information about how conda-build 3 treats compilers in the `conda docs <https://conda.io/docs/user-guide/tasks/build-packages/compiler-tools.html>`_.
 
 
 Building Against NumPy

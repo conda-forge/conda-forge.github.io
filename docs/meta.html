@@ -159,7 +159,7 @@ is preferable to the <code class="docutils literal notranslate"><span class="pre
     <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;fortran&#39;)</span> <span class="p p-Indicator">}}</span>
 </pre></div>
 </div>
-<p>Note that appropriate compiler runtime packages will be automatically added to the package’s runtime requirements and therefore there’s no need to specify <code class="docutils literal notranslate"><span class="pre">libgcc</span></code> or <code class="docutils literal notranslate"><span class="pre">libgfortran</span></code>.  There is additional information about how conda-build 3 treats compilers in <a class="reference external" href="https://conda.io/docs/user-guide/tasks/build-packages/compiler-tools.html">the conda docs</a>.</p>
+<p>Note that appropriate compiler runtime packages will be automatically added to the package’s runtime requirements and therefore there’s no need to specify <code class="docutils literal notranslate"><span class="pre">libgcc</span></code> or <code class="docutils literal notranslate"><span class="pre">libgfortran</span></code>.  There is additional information about how conda-build 3 treats compilers in the <a class="reference external" href="https://conda.io/docs/user-guide/tasks/build-packages/compiler-tools.html">conda docs</a>.</p>
 </div>
 <div class="section" id="building-against-numpy">
 <h2>Building Against NumPy<a class="headerlink" href="#building-against-numpy" title="Permalink to this headline">¶</a></h2>
@@ -258,7 +258,7 @@ dependency and rebuild the package you should increase the build number.</p>
 <p>When the package version changes you should reset the build number to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 </div>
 <div class="section" id="use-pip">
-<span id="id3"></span><h2>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h2>
 <p>Normally Python packages should use this line:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
   <span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">python -m pip install --no-deps --ignore-installed .</span>

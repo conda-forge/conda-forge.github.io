@@ -32,7 +32,7 @@
           <div class="body" role="main">
             
   <div class="section" id="creating-conda-recipes">
-<h1>Creating Conda Recipes<a class="headerlink" href="#creating-conda-recipes" title="Permalink to this headline">¶</a></h1>
+<span id="creating-recipes"></span><h1>Creating Conda Recipes<a class="headerlink" href="#creating-conda-recipes" title="Permalink to this headline">¶</a></h1>
 <p>This document presents conda-forge information about creating recipes overall.
 Details of modifying files inside of a recipe are present on other pages in
 this documentation.</p>
@@ -40,8 +40,7 @@ this documentation.</p>
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
 <p>There are multiple ways to get started:</p>
 <ol class="loweralpha simple">
-<li>Look at <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes/example">the example recipe</a>
-in this repository and modify it as necessary.</li>
+<li>Look at <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes/example">the example recipe</a> in the staged-recipes repository and modify it as necessary.</li>
 <li>If it is an R package from <a class="reference external" href="https://cran.r-project.org/">CRAN</a>, please
 instead start by using the <a class="reference external" href="https://github.com/bgruening/conda_r_skeleton_helper">conda-forge helper script for R recipes</a>.
 Then if necessary you can make manual edits to the recipe.</li>
@@ -55,28 +54,29 @@ and specify a <code class="docutils literal notranslate"><span class="pre">licen
 <p>Your final recipe should have no comments (unless they’re actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.</p>
 <p><em>If there are details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.</em></p>
 <p>In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that might help you with a successful build is provided in the following.</p>
-<div class="section" id="step-by-step-instructions">
-<h3>Step-by-step instructions<a class="headerlink" href="#step-by-step-instructions" title="Permalink to this headline">¶</a></h3>
-<ol class="arabic simple">
-<li>Fork the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">example recipes</a></li>
-<li>Within your forked copy, generate a new folder in the recipes subdirectory and copy <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a> from the example directory. Please leave the example directory unchanged!</li>
-<li>Edit the copied recipe (meta.yml) as needed.</li>
-<li>Generate the sha-256 key like described in the example recipe using the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative you can also go to the package description on <a class="reference external" href="https://pypi.org">PyPi</a> where you can directly copy the sha-256 key from.</li>
-<li>Ensure to fill in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> section. Simple tests would just import your module and are described in the example.</li>
-<li>Remove all irrelevant comments in the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a></li>
-</ol>
 </div>
+<div class="section" id="step-by-step-instructions">
+<h2>Step-by-step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Fork <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">example recipes</a></li>
+<li>Within your forked copy, generate a new folder in the recipes subdirectory and copy the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a> file from the example directory. Please leave the example directory unchanged!</li>
+<li>Edit the copied recipe (meta.yml) as needed.</li>
+<li>Generate the sha-256 key as described in the example recipe using the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative you can also go to the package description on <a class="reference external" href="https://pypi.org">PyPi</a> from which you can directly copy the sha-256.</li>
+<li>Be sure to fill in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> section. The simplest test will simply test that the module can be imported, as described in the example.</li>
+<li>Remove all irrelevant comments in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>  file.</li>
+</ol>
 <div class="section" id="checklist">
 <h3>Checklist<a class="headerlink" href="#checklist" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache 2.0 and not APACHE 2.0).</li>
-<li>Ensure that you have included a license file if your license requires – most do (see <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55">here</a>)</li>
-<li>In case your project has tests included, you need to decide if these tests should be exectuted while building the conda-forge feedstock.</li>
+<li>Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache 2.0 rather than APACHE 2.0).</li>
+<li>Ensure that you have included a license file if your license requires one – most do. (see <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55">here</a>)</li>
+<li>In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.</li>
 <li>Make sure that all tests pass sucessfully at least on your development machine.</li>
 </ul>
 </div>
+</div>
 <div class="section" id="what-happens-after-the-pr-to-staged-recipes-is-merged">
-<h3>What happens after the PR to staged-recipes is merged<a class="headerlink" href="#what-happens-after-the-pr-to-staged-recipes-is-merged" title="Permalink to this headline">¶</a></h3>
+<h2>What happens after the PR to staged-recipes is merged<a class="headerlink" href="#what-happens-after-the-pr-to-staged-recipes-is-merged" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>After the PR is merged, travis-ci will create a new git repo automatically. For example, the recipe for a package named <code class="docutils literal notranslate"><span class="pre">pydstool</span></code> will be moved to a new repository <a class="reference external" href="https://github.com/conda-forge/pydstool-feedstock">https://github.com/conda-forge/pydstool-feedstock</a>.</li>
 <li>CI services (travis-ci, circleci, appveyor) will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to <a class="reference external" href="https://anaconda.org/conda-forge">https://anaconda.org/conda-forge</a></li>
@@ -84,47 +84,50 @@ and specify a <code class="docutils literal notranslate"><span class="pre">licen
 <li>If you want to make a change to the recipe, send a PR to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.</li>
 </ul>
 </div>
-</div>
 <div class="section" id="avoid-dependencies-outside-of-conda-forge">
 <h2>Avoid Dependencies Outside of Conda-Forge<a class="headerlink" href="#avoid-dependencies-outside-of-conda-forge" title="Permalink to this headline">¶</a></h2>
 <p><em>Do all of my package’s dependencies have to be in conda(-forge) already?</em></p>
-<p>Short answer: yes. Long answer: In principle, as long as your dependencies are in at least one of
-your user’s conda channels they will be able to install your package. In practice, that is difficult
-to manage, and we strive to have all dependencies built in conda-forge.</p>
-<p>Building all of the dependencies in conda-forge allow us greater assurance of ABI compatibility
-for the conda-forge packages. Only in extreme cases should you rely on a dependency outside of
-conda-forge.</p>
+<p>Short answer: yes.</p>
+<p>Long answer: In principle, as long as your dependencies are in at least one of
+your user’s conda channels they will be able to install your package. In practice, that is difficult to manage, and we strive to have all dependencies built in conda-forge.</p>
+<p>Building all of the dependencies in conda-forge allow us greater assurance
+of ABI compatibility for the conda-forge packages. Only in extreme cases
+should you rely on a dependency outside of conda-forge.</p>
 <p>If your dependencies do not change with the python version, or with the
-platform, consider making your build <a class="reference internal" href="meta.html#noarch"><span class="std std-ref">noarch</span></a>, for them to be much
-faster, and free some resource for other project.</p>
+platform, consider making your build <a class="reference internal" href="meta.html#noarch"><span class="std std-ref">noarch</span></a>, this will allow the recipe to build faster, and free some CI resources for other projects.</p>
 </div>
 <div class="section" id="optional-bld-bat-and-or-build-sh">
 <h2>Optional: <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal notranslate"><span class="pre">build.sh</span></code><a class="headerlink" href="#optional-bld-bat-and-or-build-sh" title="Permalink to this headline">¶</a></h2>
-<p>In many cases, <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal notranslate"><span class="pre">build.sh</span></code> files are not required. Pure Python packages almost never need them.
-If the build can be executed with one line, you may put this line in the <code class="docutils literal notranslate"><span class="pre">script</span></code> entry of the <code class="docutils literal notranslate"><span class="pre">build</span></code> section of
-the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file with: <code class="docutils literal notranslate"><span class="pre">script:</span> <span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--no-deps</span> <span class="pre">--ignore-installed</span> <span class="pre">.</span></code>,
-remember to always add <code class="docutils literal notranslate"><span class="pre">pip</span></code> to the build requirements.</p>
+<p>In many cases, <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal notranslate"><span class="pre">build.sh</span></code> files are not required.
+Pure Python packages almost never need them.</p>
+<p>If the build can be executed with one line, you may put this line in the
+<code class="docutils literal notranslate"><span class="pre">script</span></code> entry of the <code class="docutils literal notranslate"><span class="pre">build</span></code> section of the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file with:
+<code class="docutils literal notranslate"><span class="pre">script:</span> <span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--no-deps</span> <span class="pre">--ignore-installed</span> <span class="pre">.</span></code>.</p>
+<p>Remember to always add <code class="docutils literal notranslate"><span class="pre">pip</span></code> to the build requirements.</p>
 </div>
 <div class="section" id="maintainer-role">
 <h2>Maintainer Role<a class="headerlink" href="#maintainer-role" title="Permalink to this headline">¶</a></h2>
 <p>The maintainer’s job is to:</p>
 <ul class="simple">
-<li>keep the feedstock updated by merging eventual maintenance PRs from conda-forge’s bots;</li>
-<li>keep the feedstock on par with new releases of the source package by
-- bumping the version number and checksum;
-- making sure that feedstock’s <code class="docutils literal notranslate"><span class="pre">install</span></code> and <code class="docutils literal notranslate"><span class="pre">run</span></code> requirements stay accurate;
-- make sure the test requirements match those of the of the updated package;</li>
-<li>answer eventual question about the package on the feedstock issue tracker.</li>
+<li>Keep the feedstock updated by merging eventual maintenance PRs from conda-forge’s bots.</li>
+<li>Keep the feedstock on par with new releases of the source package by
+- Bumping the version number and checksum.
+- Making sure that feedstock’s <code class="docutils literal notranslate"><span class="pre">install</span></code> and <code class="docutils literal notranslate"><span class="pre">run</span></code> requirements stay accurate.
+- Make sure the test requirements match those of the of the updated package.</li>
+<li>Answer eventual question about the package on the feedstock issue tracker.</li>
 </ul>
 </div>
 <div class="section" id="other-recipes-in-staged-recipes">
 <h2>Other Recipes in <code class="docutils literal notranslate"><span class="pre">staged-recipes</span></code><a class="headerlink" href="#other-recipes-in-staged-recipes" title="Permalink to this headline">¶</a></h2>
-<p>When a PR of a recipe to the <code class="docutils literal notranslate"><span class="pre">staged-recipes</span></code> repo is ready to go, it is merged into <code class="docutils literal notranslate"><span class="pre">master</span></code>. This will trigger
-a CI build specially designed to convert the recipe. However, for any number of reasons, the recipe may not be converted
-right away. In the interim, the recipe will remain in <code class="docutils literal notranslate"><span class="pre">master</span></code> until they can be converted.
-There is no action required on the part of recipe contributors to resolve this. Also it should have no impact on any other
-PRs being proposed. If these recipe pending conversion do cause issues for your submission, please ping <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge/core</span></code>
-for help.</p>
+<p>When a PR of a recipe to the <code class="docutils literal notranslate"><span class="pre">staged-recipes</span></code> repo is ready to go, it is merged
+into <code class="docutils literal notranslate"><span class="pre">master</span></code>. This will trigger a CI build specially designed to convert the
+recipe. However, for any number of reasons, the recipe may not be converted
+right away. In the interim, the recipe will remain in <code class="docutils literal notranslate"><span class="pre">master</span></code> until they can be
+converted.</p>
+<p>There is no action required on the part of recipe contributors to resolve this.
+It should have no impact on any other PRs being proposed. If any recipes
+pending conversion do cause issues for your submission, please ping
+<code class="docutils literal notranslate"><span class="pre">&#64;conda-forge/core</span></code> for help.</p>
 </div>
 </div>
 
@@ -137,12 +140,12 @@ for help.</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Creating Conda Recipes</a><ul>
-<li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
-<li><a class="reference internal" href="#step-by-step-instructions">Step-by-step instructions</a></li>
+<li><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li><a class="reference internal" href="#step-by-step-instructions">Step-by-step Instructions</a><ul>
 <li><a class="reference internal" href="#checklist">Checklist</a></li>
-<li><a class="reference internal" href="#what-happens-after-the-pr-to-staged-recipes-is-merged">What happens after the PR to staged-recipes is merged</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#what-happens-after-the-pr-to-staged-recipes-is-merged">What happens after the PR to staged-recipes is merged</a></li>
 <li><a class="reference internal" href="#avoid-dependencies-outside-of-conda-forge">Avoid Dependencies Outside of Conda-Forge</a></li>
 <li><a class="reference internal" href="#optional-bld-bat-and-or-build-sh">Optional: <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal notranslate"><span class="pre">build.sh</span></code></a></li>
 <li><a class="reference internal" href="#maintainer-role">Maintainer Role</a></li>
