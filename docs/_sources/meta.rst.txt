@@ -167,9 +167,9 @@ You need to rerender the feedstock after this change.
 Compilers
 ---------
 
-``conda-build=3`` gives the ability to use Anaconda 5 compilers, ``conda-forge`` is not using these compilers yet. Reason for holding out on using the Anaconda 5 compilers is that the packages built by them are sometimes incompatible with the packages built with the older compilers in CI platforms conda-forge has been using. All the dependencies of a package should be compiled (This is not true for all cases, but it's better to be cautious) with the new compilers before using the new compiler in a package. This presents a problem in that rebuilding a package will break the dependent packages. Therefore, ``conda-forge`` has decided to rebuild all of the packages and upload them all at once. More details on how this is done will be communicated in the future.
+While ``conda-build=3`` provides access to Anaconda 5 compilers, ``conda-forge`` is not using them yet. This is because packages built using the Anaconda 5 compilers are sometimes incompatible with those built with the older compilers in the CI platforms conda-forge has been using. As a general rule, all of a package's dependencies should be compiled with the new compiler before using the new compiler to recompile the package itself. This target hasn't yet been met for all ``conda-forge`` packages, but a large-scale rebuild-and-reupload using the new compilers is planned for an unspecified future date.
 
-However, using the ``{{ compiler('cxx') }}`` is supported in ``conda-forge``, but it installs the ``toolchain`` package which activates the compilers in the CI environment. If you were using ``toolchain`` or ``gcc`` build deps, consider using the following,
+Using the ``{{ compiler('cxx') }}`` syntax is supported in ``conda-forge``, but it installs the ``toolchain`` package which activates the compilers in the CI environment. If you have been using ``toolchain`` or ``gcc`` build dependencies, consider using the following instead:
 
 .. code-block:: yaml
 
