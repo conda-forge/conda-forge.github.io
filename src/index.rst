@@ -22,6 +22,7 @@ Contents:
    conda-forge_gotchas
    webservice
    joining-the-team
+   governance
 
 
 Indices and tables
