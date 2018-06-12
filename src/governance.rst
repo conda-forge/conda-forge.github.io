@@ -109,13 +109,14 @@ the time when a vote is called, but may never be less than 24 hrs.
 
 :Lock an Issue, Pull Request, Thread: Occasionally, discussions become
     toxic and antithetical to the goal of fostering the conda-forge
-    community. Members of core have the right to call a vote to lock
-    the thread. Such a call must be legitimate and well justified.
-    This power may not be used to stop valid discussions between those
-    with differing opinions on the technical matter at hand.
+    community. Members of core have the right to lock the thread in an
+    "ask for forgiveness and not for permission" way so bad situations
+    are handled quickly. The lock must be justified in the thread itself
+    with a text explaining the reasons for locking and how the participants
+    may can contest it.
 
     * Standard
-    * 50% Majority to pass
+    * No need for voting to lock a thread
 
 :Block a Contributor: In extreme cases, such as repeated harassment,
     it may become necessary to block a user completely from participating
