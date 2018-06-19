@@ -32,12 +32,13 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
 Step-by-step Instructions
 -------------------------
 
-1. Fork `example recipes <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
-2. Within your forked copy, generate a new folder in the recipes subdirectory and copy the `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_ file from the example directory. Please leave the example directory unchanged!
-3. Edit the copied recipe (meta.yml) as needed.
-4. Generate the sha-256 key as described in the example recipe using the ``openssl`` tool. As an alternative you can also go to the package description on `PyPi <https://pypi.org>`_ from which you can directly copy the sha-256.
-5. Be sure to fill in the ``tests`` section. The simplest test will simply test that the module can be imported, as described in the example.
-6. Remove all irrelevant comments in the ``meta.yaml``  file.
+1. Fork the `example recipes <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_ repository.
+2. Create a new branch from the staged-recipes ``master`` branch.
+3. Within your forked copy, generate a new folder in the recipes subdirectory and copy the `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_ file from the example directory. Please leave the example directory unchanged!
+4. Edit the copied recipe (meta.yml) as needed.
+5. Generate the sha-256 key as described in the example recipe using the ``openssl`` tool. As an alternative you can also go to the package description on `PyPi <https://pypi.org>`_ from which you can directly copy the sha-256.
+6. Be sure to fill in the ``tests`` section. The simplest test will simply test that the module can be imported, as described in the example.
+7. Remove all irrelevant comments in the ``meta.yaml``  file.
 
 
 Checklist
