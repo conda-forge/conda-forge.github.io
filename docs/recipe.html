@@ -29,6 +29,8 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="creating-conda-recipes">
@@ -58,11 +60,20 @@ and specify a <code class="docutils literal notranslate"><span class="pre">licen
 <div class="section" id="step-by-step-instructions">
 <h2>Step-by-step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Fork <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">example recipes</a></li>
-<li>Within your forked copy, generate a new folder in the recipes subdirectory and copy the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a> file from the example directory. Please leave the example directory unchanged!</li>
+<li>Fork the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">example recipes</a>
+repository.</li>
+<li>Create a new branch from the staged-recipes <code class="docutils literal notranslate"><span class="pre">master</span></code> branch.</li>
+<li>Within your forked copy, generate a new folder in the recipes subdirectory
+and copy the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a>
+file from the example directory. Please leave the example directory
+unchanged!</li>
 <li>Edit the copied recipe (meta.yml) as needed.</li>
-<li>Generate the sha-256 key as described in the example recipe using the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative you can also go to the package description on <a class="reference external" href="https://pypi.org">PyPi</a> from which you can directly copy the sha-256.</li>
-<li>Be sure to fill in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> section. The simplest test will simply test that the module can be imported, as described in the example.</li>
+<li>Generate the SHA256 key as described in the example recipe using the
+<code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative you can also go to the package
+description on <a class="reference external" href="https://pypi.org">PyPi</a> from which you can directly copy
+the SHA256.</li>
+<li>Be sure to fill in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> section. The simplest test will simply
+test that the module can be imported, as described in the example.</li>
 <li>Remove all irrelevant comments in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>  file.</li>
 </ol>
 <div class="section" id="checklist">
@@ -167,6 +178,7 @@ this install process easier. Please feel free to lift it.</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -225,7 +237,7 @@ this install process easier. Please feel free to lift it.</p>
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
       
       |
       <a href="_sources/recipe.rst.txt"
