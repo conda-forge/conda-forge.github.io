@@ -32,11 +32,11 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
 Step-by-step Instructions
 -------------------------
 
-0. Prepare your source code. Conda-forge requires building source code from a 
-   tarball, so all files required for building your package should be 
-   compressed in .tar.gz format (see `Build from Tarballs, Not Repos 
-   <https://conda-forge.org/docs/meta.html#build-from-tarballs-not-repos>` 
-   for further detail). 
+0. Ensure your source code can be downloaded as a single file. Source code 
+   should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz) 
+   or tagged on GitHub, to ensure that it can be verified. (For further 
+   detail, see `Build from Tarballs, Not Repos 
+   <https://conda-forge.org/docs/meta.html#build-from-tarballs-not-repos>`). 
 1. Fork the `example recipes
    <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
    repository.
@@ -48,11 +48,11 @@ Step-by-step Instructions
    file from the example directory. Please leave the example directory
    unchanged!
 4. Edit the copied recipe (meta.yml) as needed. For details, see 
-   `Writing the ``meta.yml`` <https://conda-forge.org/docs/meta.html>`
-5. Generate the SHA256 key for your source tarball as described in the example 
-   recipe using the ``openssl`` tool. As an alternative you can also go to the 
-   package description on `PyPi <https://pypi.org>`_ from which you can 
-   directly copy the SHA256.
+   `Writing the "meta.yml" <https://conda-forge.org/docs/meta.html>`
+5. Generate the SHA256 key for your source code archive, as described in the 
+   example recipe using the ``openssl`` tool. As an alternative you can also 
+   go to the package description on `PyPi <https://pypi.org>`_ from which you 
+   can directly copy the SHA256.
 6. Be sure to fill in the ``tests`` section. The simplest test will simply
    test that the module can be imported, as described in the example.
 7. Remove all irrelevant comments in the ``meta.yaml``  file.
