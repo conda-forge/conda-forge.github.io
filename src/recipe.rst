@@ -65,7 +65,7 @@ Checklist
 * Ensure that you have included a license file if your license requires one -- most do. (see `here <https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55>`_)
 * In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
 * Make sure that all tests pass sucessfully at least on your development machine.
-* Recommended: run ``conda build`` on your source code to ensure the recipe works locally.
+* Recommended: run ``conda-build`` on your source code to ensure the recipe works locally.
 
 
 What happens after the PR to staged-recipes is merged
