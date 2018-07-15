@@ -59,7 +59,12 @@ and specify a <code class="docutils literal notranslate"><span class="pre">licen
 </div>
 <div class="section" id="step-by-step-instructions">
 <h2>Step-by-step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
+<ol class="arabic simple" start="0">
+<li>Ensure your source code can be downloaded as a single file. Source code
+should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz)
+or tagged on GitHub, to ensure that it can be verified. (For further
+detail, see <cite>Build from Tarballs, Not Repos
+&lt;https://conda-forge.org/docs/meta.html#build-from-tarballs-not-repos&gt;</cite>).</li>
 <li>Fork the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">example recipes</a>
 repository.</li>
 <li>Create a new branch from the staged-recipes <code class="docutils literal notranslate"><span class="pre">master</span></code> branch.</li>
@@ -67,11 +72,12 @@ repository.</li>
 and copy the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a>
 file from the example directory. Please leave the example directory
 unchanged!</li>
-<li>Edit the copied recipe (meta.yml) as needed.</li>
-<li>Generate the SHA256 key as described in the example recipe using the
-<code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative you can also go to the package
-description on <a class="reference external" href="https://pypi.org">PyPi</a> from which you can directly copy
-the SHA256.</li>
+<li>Edit the copied recipe (meta.yml) as needed. For details, see
+<cite>Writing the “meta.yml” &lt;https://conda-forge.org/docs/meta.html&gt;</cite></li>
+<li>Generate the SHA256 key for your source code archive, as described in the
+example recipe using the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative you can also
+go to the package description on <a class="reference external" href="https://pypi.org">PyPi</a> from which you
+can directly copy the SHA256.</li>
 <li>Be sure to fill in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> section. The simplest test will simply
 test that the module can be imported, as described in the example.</li>
 <li>Remove all irrelevant comments in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>  file.</li>
@@ -83,6 +89,7 @@ test that the module can be imported, as described in the example.</li>
 <li>Ensure that you have included a license file if your license requires one – most do. (see <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55">here</a>)</li>
 <li>In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.</li>
 <li>Make sure that all tests pass sucessfully at least on your development machine.</li>
+<li>Recommended: run <code class="docutils literal notranslate"><span class="pre">conda-build</span></code> on your source code to ensure the recipe works locally.</li>
 </ul>
 </div>
 </div>
