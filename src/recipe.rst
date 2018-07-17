@@ -32,12 +32,30 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
 Step-by-step Instructions
 -------------------------
 
-1. Fork `example recipes <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
-2. Within your forked copy, generate a new folder in the recipes subdirectory and copy the `meta.yml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml>`_ file from the example directory. Please leave the example directory unchanged!
-3. Edit the copied recipe (meta.yml) as needed.
-4. Generate the sha-256 key as described in the example recipe using the ``openssl`` tool. As an alternative you can also go to the package description on `PyPi <https://pypi.org>`_ from which you can directly copy the sha-256.
-5. Be sure to fill in the ``tests`` section. The simplest test will simply test that the module can be imported, as described in the example.
-6. Remove all irrelevant comments in the ``meta.yaml``  file.
+0. Ensure your source code can be downloaded as a single file. Source code 
+   should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz) 
+   or tagged on GitHub, to ensure that it can be verified. (For further 
+   detail, see `Build from Tarballs, Not Repos 
+   <https://conda-forge.org/docs/meta.html#build-from-tarballs-not-repos>`). 
+1. Fork the `example recipes
+   <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
+   repository.
+2. Create a new branch from the staged-recipes ``master`` branch.
+3. Within your forked copy, generate a new folder in the recipes subdirectory
+   and copy the `meta.yml
+   <https://github.com/conda-forge/staged-recipes/blob/master/recipes/
+   example/meta.yaml>`_
+   file from the example directory. Please leave the example directory
+   unchanged!
+4. Edit the copied recipe (meta.yml) as needed. For details, see 
+   `Writing the "meta.yml" <https://conda-forge.org/docs/meta.html>`
+5. Generate the SHA256 key for your source code archive, as described in the 
+   example recipe using the ``openssl`` tool. As an alternative you can also 
+   go to the package description on `PyPi <https://pypi.org>`_ from which you 
+   can directly copy the SHA256.
+6. Be sure to fill in the ``tests`` section. The simplest test will simply
+   test that the module can be imported, as described in the example.
+7. Remove all irrelevant comments in the ``meta.yaml``  file.
 
 
 Checklist
@@ -47,6 +65,7 @@ Checklist
 * Ensure that you have included a license file if your license requires one -- most do. (see `here <https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55>`_)
 * In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
 * Make sure that all tests pass sucessfully at least on your development machine.
+* Recommended: run ``conda-build`` on your source code to ensure the recipe works locally.
 
 
 What happens after the PR to staged-recipes is merged
@@ -117,3 +136,43 @@ There is no action required on the part of recipe contributors to resolve this.
 It should have no impact on any other PRs being proposed. If any recipes
 pending conversion do cause issues for your submission, please ping
 ``@conda-forge/core`` for help.
+
+
+Activate scripts
+----------------
+
+Recipes are allowed to have activate scripts, which will be ``sourced``\ d or
+``call``\ ed as appropriate. It is generally recommended to avoid using
+activate scripts when another option is possible because people don't always
+activate environments the expected way and these packages may then misbehave.
+However when there is no other option, these are a reasonable option to use.
+When using them in a recipe, feel free to name them ``activate.bat``,
+``activate.sh``, ``deactivate.bat``, and ``deactivate.sh`` in the recipe. The
+installed scripts are recommended to be prefixed by the package name and a
+separating ``-``. Below is some sample code for Unix and Windows that will make
+this install process easier. Please feel free to lift it.
+
+In ``build.sh``:
+
+.. code-block:: bash
+
+    # Copy the [de]activate scripts to $PREFIX/etc/conda/[de]activate.d.
+    # This will allow them to be run on environment activation.
+    for CHANGE in "activate" "deactivate"
+    do
+        mkdir -p "${PREFIX}/etc/conda/${CHANGE}.d"
+        cp "${RECIPE_DIR}/${CHANGE}.sh" "${PREFIX}/etc/conda/${CHANGE}.d/${PKG_NAME}_${CHANGE}.sh"
+    done
+
+In ``build.bat``:
+
+.. code-block:: batch
+
+    setlocal EnableDelayedExpansion
+
+    :: Copy the [de]activate scripts to %PREFIX%\etc\conda\[de]activate.d.
+    :: This will allow them to be run on environment activation.
+    for %%F in (activate deactivate) DO (
+        if not exist %PREFIX%\etc\conda\%%F.d mkdir %PREFIX%\etc\conda\%%F.d
+        copy %RECIPE_DIR%\%%F.bat %PREFIX%\etc\conda\%%F.d\%PKG_NAME%_%%F.bat
+    )

@@ -9,7 +9,7 @@
     <title>Creating Conda Recipes &#8212; conda-forge 0.0.1a1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -29,6 +29,8 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="creating-conda-recipes">
@@ -57,12 +59,27 @@ and specify a <code class="docutils literal notranslate"><span class="pre">licen
 </div>
 <div class="section" id="step-by-step-instructions">
 <h2>Step-by-step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Fork <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">example recipes</a></li>
-<li>Within your forked copy, generate a new folder in the recipes subdirectory and copy the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a> file from the example directory. Please leave the example directory unchanged!</li>
-<li>Edit the copied recipe (meta.yml) as needed.</li>
-<li>Generate the sha-256 key as described in the example recipe using the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative you can also go to the package description on <a class="reference external" href="https://pypi.org">PyPi</a> from which you can directly copy the sha-256.</li>
-<li>Be sure to fill in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> section. The simplest test will simply test that the module can be imported, as described in the example.</li>
+<ol class="arabic simple" start="0">
+<li>Ensure your source code can be downloaded as a single file. Source code
+should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz)
+or tagged on GitHub, to ensure that it can be verified. (For further
+detail, see <cite>Build from Tarballs, Not Repos
+&lt;https://conda-forge.org/docs/meta.html#build-from-tarballs-not-repos&gt;</cite>).</li>
+<li>Fork the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">example recipes</a>
+repository.</li>
+<li>Create a new branch from the staged-recipes <code class="docutils literal notranslate"><span class="pre">master</span></code> branch.</li>
+<li>Within your forked copy, generate a new folder in the recipes subdirectory
+and copy the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a>
+file from the example directory. Please leave the example directory
+unchanged!</li>
+<li>Edit the copied recipe (meta.yml) as needed. For details, see
+<cite>Writing the “meta.yml” &lt;https://conda-forge.org/docs/meta.html&gt;</cite></li>
+<li>Generate the SHA256 key for your source code archive, as described in the
+example recipe using the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative you can also
+go to the package description on <a class="reference external" href="https://pypi.org">PyPi</a> from which you
+can directly copy the SHA256.</li>
+<li>Be sure to fill in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> section. The simplest test will simply
+test that the module can be imported, as described in the example.</li>
 <li>Remove all irrelevant comments in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>  file.</li>
 </ol>
 <div class="section" id="checklist">
@@ -72,6 +89,7 @@ and specify a <code class="docutils literal notranslate"><span class="pre">licen
 <li>Ensure that you have included a license file if your license requires one – most do. (see <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55">here</a>)</li>
 <li>In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.</li>
 <li>Make sure that all tests pass sucessfully at least on your development machine.</li>
+<li>Recommended: run <code class="docutils literal notranslate"><span class="pre">conda-build</span></code> on your source code to ensure the recipe works locally.</li>
 </ul>
 </div>
 </div>
@@ -129,10 +147,45 @@ It should have no impact on any other PRs being proposed. If any recipes
 pending conversion do cause issues for your submission, please ping
 <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge/core</span></code> for help.</p>
 </div>
+<div class="section" id="activate-scripts">
+<h2>Activate scripts<a class="headerlink" href="#activate-scripts" title="Permalink to this headline">¶</a></h2>
+<p>Recipes are allowed to have activate scripts, which will be <code class="docutils literal notranslate"><span class="pre">sourced</span></code>d or
+<code class="docutils literal notranslate"><span class="pre">call</span></code>ed as appropriate. It is generally recommended to avoid using
+activate scripts when another option is possible because people don’t always
+activate environments the expected way and these packages may then misbehave.
+However when there is no other option, these are a reasonable option to use.
+When using them in a recipe, feel free to name them <code class="docutils literal notranslate"><span class="pre">activate.bat</span></code>,
+<code class="docutils literal notranslate"><span class="pre">activate.sh</span></code>, <code class="docutils literal notranslate"><span class="pre">deactivate.bat</span></code>, and <code class="docutils literal notranslate"><span class="pre">deactivate.sh</span></code> in the recipe. The
+installed scripts are recommended to be prefixed by the package name and a
+separating <code class="docutils literal notranslate"><span class="pre">-</span></code>. Below is some sample code for Unix and Windows that will make
+this install process easier. Please feel free to lift it.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">build.sh</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy the [de]activate scripts to $PREFIX/etc/conda/[de]activate.d.</span>
+<span class="c1"># This will allow them to be run on environment activation.</span>
+<span class="k">for</span> CHANGE in <span class="s2">&quot;activate&quot;</span> <span class="s2">&quot;deactivate&quot;</span>
+<span class="k">do</span>
+    mkdir -p <span class="s2">&quot;</span><span class="si">${</span><span class="nv">PREFIX</span><span class="si">}</span><span class="s2">/etc/conda/</span><span class="si">${</span><span class="nv">CHANGE</span><span class="si">}</span><span class="s2">.d&quot;</span>
+    cp <span class="s2">&quot;</span><span class="si">${</span><span class="nv">RECIPE_DIR</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">CHANGE</span><span class="si">}</span><span class="s2">.sh&quot;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">PREFIX</span><span class="si">}</span><span class="s2">/etc/conda/</span><span class="si">${</span><span class="nv">CHANGE</span><span class="si">}</span><span class="s2">.d/</span><span class="si">${</span><span class="nv">PKG_NAME</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">CHANGE</span><span class="si">}</span><span class="s2">.sh&quot;</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">build.bat</span></code>:</p>
+<div class="highlight-batch notranslate"><div class="highlight"><pre><span></span><span class="k">setlocal</span> EnableDelayedExpansion
+
+<span class="p">:</span><span class="c1">: Copy the [de]activate scripts to %PREFIX%\etc\conda\[de]activate.d.</span>
+<span class="p">:</span><span class="c1">: This will allow them to be run on environment activation.</span>
+<span class="k">for</span> <span class="se">%%</span>F <span class="k">in</span> <span class="p">(</span>activate deactivate<span class="p">)</span> <span class="k">DO</span> <span class="p">(</span>
+    <span class="k">if</span> <span class="k">not</span> <span class="k">exist</span> <span class="nv">%PREFIX%</span>\etc\conda\<span class="se">%%</span>F.d <span class="k">mkdir</span> <span class="nv">%PREFIX%</span>\etc\conda\<span class="se">%%</span>F.d
+    <span class="k">copy</span> <span class="nv">%RECIPE_DIR%</span>\<span class="se">%%</span>F.bat <span class="nv">%PREFIX%</span>\etc\conda\<span class="se">%%</span>F.d\<span class="nv">%PKG_NAME%</span>_<span class="se">%%</span>F.bat
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -150,6 +203,7 @@ pending conversion do cause issues for your submission, please ping
 <li><a class="reference internal" href="#optional-bld-bat-and-or-build-sh">Optional: <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal notranslate"><span class="pre">build.sh</span></code></a></li>
 <li><a class="reference internal" href="#maintainer-role">Maintainer Role</a></li>
 <li><a class="reference internal" href="#other-recipes-in-staged-recipes">Other Recipes in <code class="docutils literal notranslate"><span class="pre">staged-recipes</span></code></a></li>
+<li><a class="reference internal" href="#activate-scripts">Activate scripts</a></li>
 </ul>
 </li>
 </ul>
@@ -189,8 +243,8 @@ pending conversion do cause issues for your submission, please ping
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
       
       |
       <a href="_sources/recipe.rst.txt"
