@@ -13,8 +13,10 @@ The webservice also listens to issue and PR comments so that you can ask for the
 @conda-forge-admin, please rerender
 -----------------------------------
 
-Entering the above phrase in a PR of a feedstock will rerender the feedstock and push the changes to your PR.
-Make sure to tick the ``Allow edits from maintainers.`` button locate at the bottom of the right side bar of the PR.
+Entering the above phrase in a PR of a feedstock will rerender the feedstock and push the changes to your PR. 
+Make sure to tick the ``Allow edits from maintainers.`` button locate at the bottom of the right side bar of 
+the PR. If you say this phrase in an issue comment, the bot will create a new pull request with the requested 
+re-rendering completed.
 
 
 @conda-forge-admin, please add noarch: python
