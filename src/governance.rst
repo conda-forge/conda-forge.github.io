@@ -88,9 +88,8 @@ the time when a vote is called, but may never be less than 24 hrs.
 
 :Nominate new member of core: The proposer must provide
     a sufficient justification as to why the nominee should be welcomed
-    into core. It is necessary that all nominees are current and active
-    members of staged-recipes. Nominees to core must have been members
-    of staged-recipes for at least 1 month (4 weeks) prior to this vote.
+    into core. It is not necessary that all nominees are active
+    members of staged-recipes but that is desirable.
 
     * Sensitive
     * 66.7% Majority to pass
