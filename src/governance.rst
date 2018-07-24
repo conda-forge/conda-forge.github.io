@@ -155,7 +155,7 @@ the time when a vote is called, but may never be less than 24 hrs.
     * 50% Majority to pass
 
 :Modifying the governance document: The voting should happen in the PR
-    in question and there mus tbe a call to `@conda-forge/core`.
+    in question and there must be a call to `@conda-forge/core`.
     The voting period must be open for at least one core
     member meeting cycle to allow for clarification questions
     and discussions.
