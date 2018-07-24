@@ -160,7 +160,7 @@ the time when a vote is called, but may never be less than 24 hrs.
     member meeting cycle to allow for clarification questions
     and discussions.
 
-    * Sensitive
+    * Standard
     * 75% Majority to pass
 
 All other voting items are considered to be standard and require a 50%
