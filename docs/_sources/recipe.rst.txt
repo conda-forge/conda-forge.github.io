@@ -36,7 +36,7 @@ Step-by-step Instructions
    should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz) 
    or tagged on GitHub, to ensure that it can be verified. (For further 
    detail, see `Build from Tarballs, Not Repos 
-   <https://conda-forge.org/docs/meta.html#build-from-tarballs-not-repos>`). 
+   <https://conda-forge.org/docs/meta.html#build-from-tarballs-not-repos>`_). 
 1. Fork the `example recipes
    <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
    repository.
@@ -48,7 +48,7 @@ Step-by-step Instructions
    file from the example directory. Please leave the example directory
    unchanged!
 4. Edit the copied recipe (meta.yml) as needed. For details, see 
-   `Writing the "meta.yml" <https://conda-forge.org/docs/meta.html>`
+   `Writing the "meta.yml" <https://conda-forge.org/docs/meta.html>`_
 5. Generate the SHA256 key for your source code archive, as described in the 
    example recipe using the ``openssl`` tool. As an alternative you can also 
    go to the package description on `PyPi <https://pypi.org>`_ from which you 
