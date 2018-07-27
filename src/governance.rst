@@ -70,7 +70,7 @@ calling a vote are as follows:
   violating the code of conduct.
 * Voting yes moves the proposal forward;
   voting no is the only way to express opposition to the proposal;
-  not voting is discouraged, but non-votes do not count as "no"
+  not voting is discouraged, but non-votes do not count as "no".
 * There should always be an option to abstain from voting.
 
 Voting items are labeled as either **standard** or **sensitive**.
