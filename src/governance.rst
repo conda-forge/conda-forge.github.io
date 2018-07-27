@@ -68,6 +68,10 @@ calling a vote are as follows:
   after a previous votes failed to achieve Sam's result. Sam is
   attempting to bully other members of core into agreeing, and is thus
   violating the code of conduct.
+* Voting yes moves the proposal forward;
+  voting no is the only way to express opposition to the proposal;
+  not voting is discouraged, but non-votes do not count as "no"
+* There should always be an option to abstain from voting.
 
 Voting items are labeled as either **standard** or **sensitive**.
 Standard items are ones where public record and discourse and record is
@@ -149,10 +153,10 @@ the time when a vote is called, but may never be less than 24 hrs.
     for voting on the GH issue in question.
     The voting must period be open for at least one core
     member meeting cycle to allow for clarification questions
-    and discussions.
+    and discussions. Friendly reminders to vote are encouraged.
 
     * Standard
-    * 50% Majority to pass
+    * 50% plus one of those voting to pass
 
 :Modifying the governance document: The voting should happen in the PR
     in question and there must be a call to `@conda-forge/core`.
@@ -161,7 +165,7 @@ the time when a vote is called, but may never be less than 24 hrs.
     and discussions.
 
     * Standard
-    * 75% Majority to pass
+    * 75% of those voting to pass
 
 All other voting items are considered to be standard and require a 50%
 majority to pass.
