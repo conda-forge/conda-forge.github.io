@@ -35,11 +35,11 @@
             
   <div class="section" id="automatic-services">
 <h1>Automatic services<a class="headerlink" href="#automatic-services" title="Permalink to this headline">¶</a></h1>
-<p>conda-forge is running a webservice on heroku called <a class="reference external" href="https://github.com/conda-forge/conda-forge-webservices">conda-forge-webservices</a></p>
-<p>Following services are run by default on a feedstock</p>
+<p>conda-forge is running a webservice on heroku called <a class="reference external" href="https://github.com/conda-forge/conda-forge-webservices">conda-forge-webservices</a>.</p>
+<p>The following services are run by default on a feedstock:</p>
 <ul class="simple">
 <li>It will lint the recipes in the PRs and report back whether recipe is in excellent condition or not.</li>
-<li>When maintainers are added to a recipe, the maintainer will be added to the team and given push access</li>
+<li>When maintainers are added to a recipe, the maintainer will be added to the team and given push access.</li>
 </ul>
 <p>The webservice also listens to issue and PR comments so that you can ask for the following services to be done.</p>
 <div class="section" id="conda-forge-admin-please-rerender">
@@ -51,8 +51,12 @@ re-rendering completed.</p>
 </div>
 <div class="section" id="conda-forge-admin-please-add-noarch-python">
 <h2>&#64;conda-forge-admin, please add noarch: python<a class="headerlink" href="#conda-forge-admin-please-add-noarch-python" title="Permalink to this headline">¶</a></h2>
-<p>Entering the above phrase in a PR of a feedstock will add <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> to the build and rerender the feedstock
+<p>Entering the above phrase in a PR or issue of a feedstock will add <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> to the build and rerender the feedstock
 for you.</p>
+</div>
+<div class="section" id="conda-forge-admin-please-update-for-conda-build-3">
+<h2>&#64;conda-forge-admin, please update for conda-build 3<a class="headerlink" href="#conda-forge-admin-please-update-for-conda-build-3" title="Permalink to this headline">¶</a></h2>
+<p>This command will attempt to update a recipe to the new conda-build 3 format. It can be sent either in an issue or a PR.</p>
 </div>
 <div class="section" id="conda-forge-admin-please-lint">
 <h2>&#64;conda-forge-admin, please lint<a class="headerlink" href="#conda-forge-admin-please-lint" title="Permalink to this headline">¶</a></h2>
@@ -61,11 +65,11 @@ for you.</p>
 <div class="section" id="conda-forge-admin-please-update-circle">
 <h2>&#64;conda-forge-admin, please update circle<a class="headerlink" href="#conda-forge-admin-please-update-circle" title="Permalink to this headline">¶</a></h2>
 <p>Entering the above phrase in an issue of a feedstock will update the Circle-CI SSH deploy key. This will fix the
-<code class="docutils literal notranslate"><span class="pre">permission</span> <span class="pre">denied</span> <span class="pre">(public</span> <span class="pre">key)</span></code> issue in Circle-CI checkout phase</p>
+<code class="docutils literal notranslate"><span class="pre">permission</span> <span class="pre">denied</span> <span class="pre">(public</span> <span class="pre">key)</span></code> issue in Circle-CI checkout phase; it shouldn’t be needed otherwise.</p>
 </div>
 <div class="section" id="conda-forge-admin-please-update-team">
 <h2>&#64;conda-forge-admin, please update team<a class="headerlink" href="#conda-forge-admin-please-update-team" title="Permalink to this headline">¶</a></h2>
-<p>Entering the above phrase in an issue will update the team for the feedstock.</p>
+<p>Entering the above phrase in an issue will update the team for the feedstock. This is usually done automatically.</p>
 </div>
 </div>
 
@@ -81,6 +85,7 @@ for you.</p>
 <li><a class="reference internal" href="#">Automatic services</a><ul>
 <li><a class="reference internal" href="#conda-forge-admin-please-rerender">&#64;conda-forge-admin, please rerender</a></li>
 <li><a class="reference internal" href="#conda-forge-admin-please-add-noarch-python">&#64;conda-forge-admin, please add noarch: python</a></li>
+<li><a class="reference internal" href="#conda-forge-admin-please-update-for-conda-build-3">&#64;conda-forge-admin, please update for conda-build 3</a></li>
 <li><a class="reference internal" href="#conda-forge-admin-please-lint">&#64;conda-forge-admin, please lint</a></li>
 <li><a class="reference internal" href="#conda-forge-admin-please-update-circle">&#64;conda-forge-admin, please update circle</a></li>
 <li><a class="reference internal" href="#conda-forge-admin-please-update-team">&#64;conda-forge-admin, please update team</a></li>
