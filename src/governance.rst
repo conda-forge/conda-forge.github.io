@@ -165,7 +165,7 @@ the time when a vote is called, but may never be less than 24 hrs.
     and discussions.
 
     * Standard
-    * 75% of those voting to pass
+    * 75% plus one of those voting to pass
 
 All other voting items are considered to be standard and require a 50%
 majority to pass.
