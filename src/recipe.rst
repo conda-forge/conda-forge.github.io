@@ -105,7 +105,7 @@ Pure Python packages almost never need them.
 
 If the build can be executed with one line, you may put this line in the
 ``script`` entry of the ``build`` section of the ``meta.yaml`` file with:
-``script: python -m pip install --no-deps --ignore-installed .``.
+``script: python -m pip install --no-deps --ignore-installed . --verbose``.
 
 Remember to always add ``pip`` to the build requirements.
 
