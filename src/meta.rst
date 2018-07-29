@@ -314,7 +314,7 @@ Normally Python packages should use this line:
 .. code-block:: yaml
 
     build:
-      script: python -m pip install --no-deps --ignore-installed .  --verbose
+      script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
 
 as the installation script in the ``meta.yml`` file or ``bld.bat/build.sh`` script files,
 while adding ``pip`` to the build requirements:
