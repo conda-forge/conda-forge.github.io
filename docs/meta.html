@@ -263,7 +263,7 @@ dependency and rebuild the package you should increase the build number.</p>
 <span id="id2"></span><h2>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h2>
 <p>Normally Python packages should use this line:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">python -m pip install --no-deps --ignore-installed .  --verbose</span>
+  <span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">--no-deps</span><span class="nv"> </span><span class="s">--ignore-installed</span><span class="nv"> </span><span class="s">--no-cache-dir</span><span class="nv"> </span><span class="s">-vvv&quot;</span>
 </pre></div>
 </div>
 <p>as the installation script in the <code class="docutils literal notranslate"><span class="pre">meta.yml</span></code> file or <code class="docutils literal notranslate"><span class="pre">bld.bat/build.sh</span></code> script files,
