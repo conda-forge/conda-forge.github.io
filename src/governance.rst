@@ -151,7 +151,7 @@ the time when a vote is called, but may never be less than 24 hrs.
 :Overall workflow and packaging policies: The proposer can choose to
     create a poll with an external tool or call
     for voting on the GH issue in question.
-    The voting must period be open for at least one core
+    The voting period must be open for at least one core
     member meeting cycle to allow for clarification questions
     and discussions. Friendly reminders to vote are encouraged.
 
