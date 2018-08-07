@@ -175,6 +175,7 @@ Current Members of Core
 In alphabetical order,
 
 * Marcel Bargull, @mbargull
+* Lori Burns, @loriab
 * Matt Craig, @mwcraig
 * Eric Dill, @ericdill
 * Phil Elson, @pelson
