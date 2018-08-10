@@ -47,7 +47,7 @@ If CircleCI lacks permissions to checkout the source code, it will produce an er
 
 When this happens for a feedstock, it can be fixed using the `webservice <https://conda-forge.org/docs/webservice.html#conda-forge-admin-please-update-circle>`_, by posting the following comment::
   
-  @conda-forge-admin-please-update-circle
+  @conda-forge-admin, please update circle
 
 Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
 
