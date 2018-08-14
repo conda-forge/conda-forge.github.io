@@ -86,11 +86,12 @@ the time when a vote is called, but may never be less than 24 hrs.
 
 To call for a standard vote, here is a template PR comment:
 ```
-@conda-forge/core This PR falls under {policy}, please vote and/or comment
-on this PR. This PR needs {policy_percent} of core to vote yea to pass. 
+@conda-forge/core 
+This PR falls under {policy}, please vote and/or comment on this PR. 
+This PR needs {policy_percent} of core to vote yea to pass. 
 To vote please leave Approve (yea) or Request Changes (nay) reviews.
-If you would like changes to the current language please leave a comment or
-push to this branch. This vote will end on {date}.
+If you would like changes to the current language please leave a comment or push to this branch. 
+This vote will end on {date}.
 ```
 
 :Nominate new member of staged-recipes: The proposer must provide
