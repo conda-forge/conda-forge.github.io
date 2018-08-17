@@ -23,6 +23,7 @@ Contents:
    webservice
    joining-the-team
    governance
+   subgroups/index
 
 
 Indices and tables
