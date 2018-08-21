@@ -317,12 +317,12 @@ Normally Python packages should use this line:
       script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
 
 as the installation script in the ``meta.yml`` file or ``bld.bat/build.sh`` script files,
-while adding ``pip`` to the build requirements:
+while adding ``pip`` to the host requirements:
 
 .. code-block:: yaml
 
     requirements:
-      build:
+      host:
         - pip
 
 These options should be used to ensure a clean installation of the package without its
