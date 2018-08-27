@@ -107,7 +107,7 @@ If the build can be executed with one line, you may put this line in the
 ``script`` entry of the ``build`` section of the ``meta.yaml`` file with:
 ``script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"``.
 
-Remember to always add ``pip`` to the build requirements.
+Remember to always add ``pip`` to the host requirements.
 
 
 Maintainer Role
