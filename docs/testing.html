@@ -195,32 +195,38 @@ Just test sufficiently to know that the package is in good working order.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Testing in Recipes</a><ul>
-<li><a class="reference internal" href="#simple-existence-tests">Simple Existence Tests</a><ul>
-<li><a class="reference internal" href="#simple-existence-testing-example">Simple Existence Testing Example</a></li>
+<h1 class="logo"><a href="index.html">conda-forge</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guidelines.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipe.html">Creating Conda Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meta.html">Writing the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="blas.html">BLAS &amp; Numpy &amp; Friends</a></li>
+<li class="toctree-l1"><a class="reference internal" href="buildwin.html">Building on Windows</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Testing in Recipes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#simple-existence-tests">Simple Existence Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-python-packages">Testing Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docker-tests">Docker Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#should-a-recipe-run-all-of-a-package-s-tests">Should a Recipe Run All of a Package’s Tests?</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#testing-python-packages">Testing Python Packages</a><ul>
-<li><a class="reference internal" href="#testing-importing">Testing Importing</a></li>
-<li><a class="reference internal" href="#running-unit-tests">Running Unit Tests</a></li>
-<li><a class="reference internal" href="#test-requirements">Test Requirements</a></li>
-<li><a class="reference internal" href="#built-in-tests">Built-in Tests</a></li>
-<li><a class="reference internal" href="#pytest-tests">pytest Tests</a></li>
-<li><a class="reference internal" href="#command-line-utilities">Command Line Utilities</a></li>
-<li><a class="reference internal" href="#tests-outside-of-the-package">Tests Outside of The Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ciservices.html">CI Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conda_smithy.html">conda-smithy rerender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conda-forge_gotchas.html">conda-forge ‘gotchas’</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webservice.html">Automatic services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="joining-the-team.html">Joining the team!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="governance.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subgroups/index.html">Conda-Forge Subteams</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#docker-tests">Docker Tests</a><ul>
-<li><a class="reference internal" href="#run-docker-tests-locally-for-feedstock">Run Docker Tests Locally for Feedstock</a></li>
-<li><a class="reference internal" href="#run-docker-tests-locally-for-staged-recipes">Run Docker Tests Locally for Staged Recipes</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#should-a-recipe-run-all-of-a-package-s-tests">Should a Recipe Run All of a Package’s Tests?</a></li>
-</ul>
-</li>
-</ul>
+
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
@@ -230,13 +236,6 @@ Just test sufficiently to know that the package is in good working order.</p>
   </ul></li>
 </ul>
 </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/testing.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -257,7 +256,7 @@ Just test sufficiently to know that the package is in good working order.</p>
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.9</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
       
       |

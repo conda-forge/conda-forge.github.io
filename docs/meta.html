@@ -293,24 +293,46 @@ the real package dependencies are only <code class="docutils literal notranslate
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Writing the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></a><ul>
-<li><a class="reference internal" href="#build-from-tarballs-not-repos">Build from Tarballs, Not Repos</a></li>
-<li><a class="reference internal" href="#packaging-the-license-manually">Packaging the License Manually</a></li>
-<li><a class="reference internal" href="#populating-the-hash-field">Populating the <code class="docutils literal notranslate"><span class="pre">hash</span></code> Field</a></li>
-<li><a class="reference internal" href="#excluding-a-platform">Excluding a Platform</a></li>
-<li><a class="reference internal" href="#pinning-packages">Pinning packages</a></li>
-<li><a class="reference internal" href="#build-matrices">Build matrices</a></li>
-<li><a class="reference internal" href="#compilers">Compilers</a></li>
-<li><a class="reference internal" href="#building-against-numpy">Building Against NumPy</a></li>
-<li><a class="reference internal" href="#building-noarch-packages">Building <code class="docutils literal notranslate"><span class="pre">noarch</span></code> packages</a></li>
-<li><a class="reference internal" href="#build-number">Build Number</a></li>
-<li><a class="reference internal" href="#use-pip">Use pip</a></li>
-<li><a class="reference internal" href="#downloading-extra-sources-and-data-files">Downloading extra sources and data files</a></li>
+<h1 class="logo"><a href="index.html">conda-forge</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guidelines.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipe.html">Creating Conda Recipes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Writing the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#build-from-tarballs-not-repos">Build from Tarballs, Not Repos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#packaging-the-license-manually">Packaging the License Manually</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#populating-the-hash-field">Populating the <code class="docutils literal notranslate"><span class="pre">hash</span></code> Field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#excluding-a-platform">Excluding a Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pinning-packages">Pinning packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-matrices">Build matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compilers">Compilers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-against-numpy">Building Against NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-noarch-packages">Building <code class="docutils literal notranslate"><span class="pre">noarch</span></code> packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-number">Build Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#use-pip">Use pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#downloading-extra-sources-and-data-files">Downloading extra sources and data files</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="blas.html">BLAS &amp; Numpy &amp; Friends</a></li>
+<li class="toctree-l1"><a class="reference internal" href="buildwin.html">Building on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing in Recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ciservices.html">CI Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conda_smithy.html">conda-smithy rerender</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conda-forge_gotchas.html">conda-forge ‘gotchas’</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webservice.html">Automatic services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="joining-the-team.html">Joining the team!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="governance.html">Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subgroups/index.html">Conda-Forge Subteams</a></li>
 </ul>
+
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
@@ -320,13 +342,6 @@ the real package dependencies are only <code class="docutils literal notranslate
   </ul></li>
 </ul>
 </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/meta.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -347,7 +362,7 @@ the real package dependencies are only <code class="docutils literal notranslate
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.9</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
       
       |
