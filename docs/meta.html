@@ -13,6 +13,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="BLAS &amp; Numpy &amp; Friends" href="blas.html" />
@@ -125,6 +126,43 @@ is preferable to the <code class="docutils literal notranslate"><span class="pre
 </pre></div>
 </div>
 <p>There is additional documentation on this pinning scheme in <a class="reference external" href="https://conda.io/docs/user-guide/tasks/build-packages/variants.html#build-variants">the conda docs</a>.</p>
+</div>
+<div class="section" id="using-conda-build-s-run-exports-feature">
+<h2>Using conda-build’s run_exports feature<a class="headerlink" href="#using-conda-build-s-run-exports-feature" title="Permalink to this headline">¶</a></h2>
+<p>Conda-build has a feature called “run_exports” that allows recipe builders to
+specify what downstream consumers of their package need as runtime dependencies
+when a given package is used as a build-time (host) dependency. There’s
+documentation on run_exports in <a class="reference external" href="https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#export-runtime-requirements">conda-build’s documentation</a>.
+For conda-forge specifically, we encourage the use of run_exports, as it places
+the burden of understanding binary compatibilty bounds on the upstream package
+maintainers, rather than the downstream package consumers. We feel that the
+upstream maintainers are more likely to understand the compatibility bounds of
+their package. Downstream maintainers are still free to override any run_exports
+entries, using the build/ignore_run_exports key, as documented in the
+conda-build documentation.</p>
+<p>When should you think about using run_exports for your package?</p>
+<ul class="simple">
+<li>Does your package produce a shared library that other people will link against?</li>
+<li>Does the version of your package used at build time determine which version of your package is required at run time?</li>
+</ul>
+<p>If these are true, you should use run_exports. You can refer to your package
+with the pin_subpackage jinja2 function, again described in conda-build’s
+documentation.</p>
+<p>It is not always completely clear how a given package is going to be used. For
+example, numpy may be used either as a python package, and it also has a C
+library that can be linked against. The former usage would not require
+run_exports, but the latter would. In this scenario, it may be advantageous to
+split the package into distinct metapackages that may share a common parent
+containing the actual files, but with each metapackage defining different
+pinning behavior. Anaconda does this for numpy. You can see the recipe at
+<a class="reference external" href="https://github.com/AnacondaRecipes/numpy-feedstock/blob/master/recipe/meta.yaml">https://github.com/AnacondaRecipes/numpy-feedstock/blob/master/recipe/meta.yaml</a> -
+the general idea is that the numpy-devel package should be used when a package
+is building against the C interface (i.e. it needs the compatibility bound), and
+the numpy package should be used when a package is using only the python
+interface.</p>
+<p>In general, it is not necessary to split up packages. At conda-forge, we only
+advise it when it greatly reduces package size, or when it helps remove
+dependencies that would otherwise be unnecessarily included.</p>
 </div>
 <div class="section" id="build-matrices">
 <h2>Build matrices<a class="headerlink" href="#build-matrices" title="Permalink to this headline">¶</a></h2>
@@ -312,6 +350,7 @@ the real package dependencies are only <code class="docutils literal notranslate
 <li class="toctree-l2"><a class="reference internal" href="#populating-the-hash-field">Populating the <code class="docutils literal notranslate"><span class="pre">hash</span></code> Field</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#excluding-a-platform">Excluding a Platform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pinning-packages">Pinning packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-conda-build-s-run-exports-feature">Using conda-build’s run_exports feature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#build-matrices">Build matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#compilers">Compilers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-against-numpy">Building Against NumPy</a></li>
@@ -362,7 +401,7 @@ the real package dependencies are only <code class="docutils literal notranslate
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
       
       |
