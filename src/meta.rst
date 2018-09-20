@@ -125,6 +125,48 @@ If you need to remove a pinning in rare cases like linking the package staticall
 
 There is additional documentation on this pinning scheme in `the conda docs <https://conda.io/docs/user-guide/tasks/build-packages/variants.html#build-variants>`_.
 
+Using conda-build's run_exports feature
+---------------------------------------
+
+Conda-build has a feature called "run_exports" that allows recipe builders to
+specify what downstream consumers of their package need as runtime dependencies
+when a given package is used as a build-time (host) dependency. There's
+documentation on run_exports in `conda-build's documentation
+<https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#export-runtime-requirements>`_.
+For conda-forge specifically, we encourage the use of run_exports, as it places
+the burden of understanding binary compatibilty bounds on the upstream package
+maintainers, rather than the downstream package consumers. We feel that the
+upstream maintainers are more likely to understand the compatibility bounds of
+their package. Downstream maintainers are still free to override any run_exports
+entries, using the build/ignore_run_exports key, as documented in the
+conda-build documentation.
+
+When should you think about using run_exports for your package?
+
+* Does your package produce a shared library that other people will link against?
+* Does the version of your package used at build time determine which version of your package is required at run time?
+
+If these are true, you should use run_exports. You can refer to your package
+with the pin_subpackage jinja2 function, again described in conda-build's
+documentation.
+
+It is not always completely clear how a given package is going to be used. For
+example, numpy may be used either as a python package, and it also has a C
+library that can be linked against. The former usage would not require
+run_exports, but the latter would. In this scenario, it may be advantageous to
+split the package into distinct metapackages that may share a common parent
+containing the actual files, but with each metapackage defining different
+pinning behavior. Anaconda does this for numpy. You can see the recipe at
+https://github.com/AnacondaRecipes/numpy-feedstock/blob/master/recipe/meta.yaml -
+the general idea is that the numpy-devel package should be used when a package
+is building against the C interface (i.e. it needs the compatibility bound), and
+the numpy package should be used when a package is using only the python
+interface.
+
+In general, it is not necessary to split up packages. At conda-forge, we only
+advise it when it greatly reduces package size, or when it helps remove
+dependencies that would otherwise be unnecessarily included.
+
 Build matrices
 --------------
 
