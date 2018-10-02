@@ -11,6 +11,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   news_announce
    guidelines
    recipe
    meta
