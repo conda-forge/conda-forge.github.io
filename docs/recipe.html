@@ -120,7 +120,7 @@ platform, consider making your build <a class="reference internal" href="meta.ht
 Pure Python packages almost never need them.</p>
 <p>If the build can be executed with one line, you may put this line in the
 <code class="docutils literal notranslate"><span class="pre">script</span></code> entry of the <code class="docutils literal notranslate"><span class="pre">build</span></code> section of the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file with:
-<code class="docutils literal notranslate"><span class="pre">script:</span> <span class="pre">&quot;{{</span> <span class="pre">PYTHON</span> <span class="pre">}}</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span> <span class="pre">--no-deps</span> <span class="pre">--ignore-installed</span> <span class="pre">--no-cache-dir</span> <span class="pre">-vvv&quot;</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">script:</span> <span class="pre">&quot;{{</span> <span class="pre">PYTHON</span> <span class="pre">}}</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span> <span class="pre">-vvv&quot;</span></code>.</p>
 <p>Remember to always add <code class="docutils literal notranslate"><span class="pre">pip</span></code> to the host requirements.</p>
 </div>
 <div class="section" id="maintainer-role">
