@@ -105,7 +105,7 @@ Pure Python packages almost never need them.
 
 If the build can be executed with one line, you may put this line in the
 ``script`` entry of the ``build`` section of the ``meta.yaml`` file with:
-``script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"``.
+``script: "{{ PYTHON }} -m pip install . -vvv"``.
 
 Remember to always add ``pip`` to the host requirements.
 
