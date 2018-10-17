@@ -193,7 +193,11 @@ To call for a standard vote, here is a template PR comment:
     enough in order to prevent excessive voting.  For example, recurrent
     items (such as CI) should not need to be voted on each and every month.
     Instead, they should exist for a defined period of time (e.g. until the
-    current migration ends, or for the next year).
+    current migration ends, or for the next year). For such recurring expenses,
+    the person coordinating spending the funds can choose to cancel the
+    spending if it is deemed no longer necessary or cost-effective without
+    calling another vote, although they should make reasonable efforts to
+    notify the rest of core before doing so.
 
     * Standard
     * 50% Majority to pass
