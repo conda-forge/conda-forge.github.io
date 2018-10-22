@@ -5,7 +5,7 @@ Testing in Recipes
 All recipes need tests. Here are some tips, tricks, and justifications.
 How you shold test depends on the type of package (python, c-lib,
 command-line tool, ... ), and what tests are available for that package.
-But every conda pacakge must have at least *some* tests.
+But every conda package must have at least *some* tests.
 
 
 Simple Existence Tests
