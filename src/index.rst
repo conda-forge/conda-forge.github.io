@@ -25,6 +25,7 @@ Contents:
    joining-the-team
    governance
    subgroups/index
+   self-improvement
 
 
 Indices and tables
