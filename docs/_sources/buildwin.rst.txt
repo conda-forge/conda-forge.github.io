@@ -3,6 +3,44 @@ Building on Windows
 This document presents conda-forge and conda-build information and examples
 when building on Windows.
 
+
+Local testing
+-------------
+
+The first thing that you should know is that you can locally test Windows
+builds of your packages even if you don’t own a Windows machine. Microsoft
+makes available free, official Windows virtual machines (VMs) `at this website
+<https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/>`_. If you
+are unfamiliar with VM systems or have trouble installing Microsoft’s, please
+use a general web search to investigate — while these topics are beyond the
+scope of this documentation, there is ample discussion of them on the broader
+Internet.
+
+In order to compile native code (C, C++, etc.) on Windows, you will need to
+install Microsoft’s Visual C++ build tools on your VM. You must install
+particular versions of these tools — this is to maintain compatibility between
+compiled libraries used in Python, `as described on this Python wiki page
+<https://wiki.python.org/moin/WindowsCompilers>`_. The current relevant
+versions are:
+
+* For Python 2.7: Visual C++ 9.0
+* For Python 3.5–3.7: Visual C++ 14.0
+
+While you can obtain these tools by installing the right version of the full
+`Visual Studio <https://visualstudio.microsoft.com/>`_ development
+environment, you can save a lot of time and bandwidth by installing standalone
+“build tools” packages. The links are:
+
+* For Python 2.7: `Microsoft Visual C++ Compiler for Python 2.7
+  <https://www.microsoft.com/download/details.aspx?id=44266>`_.
+* For Python 3.5–3.7: `Microsoft Build Tools for Visual Studio 2017
+  <https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017>`_.
+
+Please see `the Python wiki page on Windows compilers
+<https://wiki.python.org/moin/WindowsCompilers>`_ if you need more
+information.
+
+
 Simple CMake-Based ``bld.bat``
 ------------------------------
 Some projects provide hooks for CMake to build the project. The following
@@ -64,4 +102,3 @@ To skip building with a particular ``vc`` version, add a skip statement.
     requirements:
       build:
         - {{ compiler('cxx') }}
-

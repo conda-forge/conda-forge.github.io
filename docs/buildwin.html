@@ -38,6 +38,35 @@
 <h1>Building on Windows<a class="headerlink" href="#building-on-windows" title="Permalink to this headline">¶</a></h1>
 <p>This document presents conda-forge and conda-build information and examples
 when building on Windows.</p>
+<div class="section" id="local-testing">
+<h2>Local testing<a class="headerlink" href="#local-testing" title="Permalink to this headline">¶</a></h2>
+<p>The first thing that you should know is that you can locally test Windows
+builds of your packages even if you don’t own a Windows machine. Microsoft
+makes available free, official Windows virtual machines (VMs) <a class="reference external" href="https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/">at this website</a>. If you
+are unfamiliar with VM systems or have trouble installing Microsoft’s, please
+use a general web search to investigate — while these topics are beyond the
+scope of this documentation, there is ample discussion of them on the broader
+Internet.</p>
+<p>In order to compile native code (C, C++, etc.) on Windows, you will need to
+install Microsoft’s Visual C++ build tools on your VM. You must install
+particular versions of these tools — this is to maintain compatibility between
+compiled libraries used in Python, <a class="reference external" href="https://wiki.python.org/moin/WindowsCompilers">as described on this Python wiki page</a>. The current relevant
+versions are:</p>
+<ul class="simple">
+<li>For Python 2.7: Visual C++ 9.0</li>
+<li>For Python 3.5–3.7: Visual C++ 14.0</li>
+</ul>
+<p>While you can obtain these tools by installing the right version of the full
+<a class="reference external" href="https://visualstudio.microsoft.com/">Visual Studio</a> development
+environment, you can save a lot of time and bandwidth by installing standalone
+“build tools” packages. The links are:</p>
+<ul class="simple">
+<li>For Python 2.7: <a class="reference external" href="https://www.microsoft.com/download/details.aspx?id=44266">Microsoft Visual C++ Compiler for Python 2.7</a>.</li>
+<li>For Python 3.5–3.7: <a class="reference external" href="https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017">Microsoft Build Tools for Visual Studio 2017</a>.</li>
+</ul>
+<p>Please see <a class="reference external" href="https://wiki.python.org/moin/WindowsCompilers">the Python wiki page on Windows compilers</a> if you need more
+information.</p>
+</div>
 <div class="section" id="simple-cmake-based-bld-bat">
 <h2>Simple CMake-Based <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code><a class="headerlink" href="#simple-cmake-based-bld-bat" title="Permalink to this headline">¶</a></h2>
 <p>Some projects provide hooks for CMake to build the project. The following
@@ -118,6 +147,7 @@ nmake install
 <li class="toctree-l1"><a class="reference internal" href="meta.html">Writing the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="blas.html">BLAS &amp; Numpy &amp; Friends</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Building on Windows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#local-testing">Local testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#simple-cmake-based-bld-bat">Simple CMake-Based <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-for-different-vc-versions">Building for different VC versions</a></li>
 </ul>
@@ -130,6 +160,7 @@ nmake install
 <li class="toctree-l1"><a class="reference internal" href="joining-the-team.html">Joining the team!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="governance.html">Governance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="subgroups/index.html">Conda-Forge Subteams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="self-improvement.html">Improving This Documentation</a></li>
 </ul>
 
 <div class="relations">
