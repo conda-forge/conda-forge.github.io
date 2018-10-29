@@ -29,7 +29,10 @@ Generally speaking your role is as follows:
 2. Provide recipe review which generally means making sure that the recipe
    under review adheres to what we list on the :doc:`recipe` page.
 3. Open issues as needed, both on staged and on the other flagship repos
-   (smithy, webservices, etc), especially when problems occur.
+   (`smithy <https://github.com/conda-forge/conda-smithy>`_,
+   `webservices <https://github.com/conda-forge/conda-forge-webservices>`_,
+   `docs <https://github.com/conda-forge/conda-forge.github.io>`_, etc.),
+   especially when problems occur.
 
 .. 4. <Other people please chime in here with what the responsibilities are supposed to be>
 
