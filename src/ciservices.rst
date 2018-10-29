@@ -54,3 +54,23 @@ Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
 * Log in and out of Circle CI.
 * Revoke Circle CI's access and then enable it again.
 * In the  "Checkout SSH keys" section of your Circle CI project settings, press "add user key".
+
+
+Environmental Variables and Config Files
+----------------------------------------
+Conda-forge sets a number of environmental variables during the build on the
+various CI services. Here, we enumerate all of them.
+
+Individual feedstock repositories
+.................................
+
+* /conda-forge.yml: Contains hashed secrets so the CI services can 
+* /.ci-support/linux_.yaml: Contains various parameters that control the build inside of the feedstock
+
+    - build_number_decrement
+    - channel_sources
+    - channel_targets
+    - docker_image
+
+In the staged-recipes repository
+................................
