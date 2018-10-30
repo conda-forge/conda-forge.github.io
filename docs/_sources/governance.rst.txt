@@ -95,12 +95,15 @@ To call for a standard vote, here is a template PR comment:
     If you would like changes to the current language please leave a comment or push to this branch.
     This vote will end on {date}.
 
+----
 
 :Nominate new member of staged-recipes: The proposer must provide
     a brief justification as to why the new member is desirable or needed.
 
     * Sensitive
     * 50% Majority to pass
+
+----
 
 :Nominate new member of core: The proposer must provide
     a sufficient justification as to why the nominee should be welcomed
@@ -112,17 +115,23 @@ To call for a standard vote, here is a template PR comment:
     * Sensitive
     * 66.7% Majority to pass
 
+----
+
 :Sub-team Formation: Proposers must specify the name, role & responsibility,
     members, and charter (dynamic or static) of any new sub-teams.
 
     * Standard
     * 50% Majority to pass
 
+----
+
 :Sub-team Dissolution: Proposers must specify the name and justification
     for why a sub-team should be dissolved.
 
     * Standard
     * 50% Majority to pass
+
+----
 
 :Lock an Issue, Pull Request, Thread: Occasionally, discussions become
     toxic and antithetical to the goal of fostering the conda-forge
@@ -135,6 +144,8 @@ To call for a standard vote, here is a template PR comment:
     * Standard
     * No need for voting to lock a thread
 
+----
+
 :Block a Contributor: In extreme cases, such as repeated harassment,
     it may become necessary to block a user completely from participating
     in all conda-forge activities. This should not be done lightly,
@@ -145,6 +156,7 @@ To call for a standard vote, here is a template PR comment:
     * Sensitive
     * 60% Majority to pass
 
+----
 
 :Remove member of staged-recipes: The proposer must provide
     a justification as to why the member of staged recipes
@@ -153,12 +165,16 @@ To call for a standard vote, here is a template PR comment:
     * Sensitive
     * 66.7% Majority to pass
 
+----
+
 :Remove member of core: The proposer must provide
     an overwhelming justification as to why the member core
     should be removed.
 
     * Sensitive
     * 75% Majority to pass
+
+----
 
 :Overall workflow and packaging policies: The proposer can choose to
     create a poll with an external tool or call
@@ -170,6 +186,24 @@ To call for a standard vote, here is a template PR comment:
     * Standard
     * 50% plus one of those voting to pass
 
+----
+
+:Spending of funds: Proposers must specify the purpose, time limit, and source
+    of funds that are to be spent. Purpose and time limit should be general
+    enough in order to prevent excessive voting.  For example, recurrent
+    items (such as CI) should not need to be voted on each and every month.
+    Instead, they should exist for a defined period of time (e.g. until the
+    current migration ends, or for the next year). For such recurring expenses,
+    the person coordinating spending the funds can choose to cancel the
+    spending if it is deemed no longer necessary or cost-effective without
+    calling another vote, although they should make reasonable efforts to
+    notify the rest of core before doing so.
+
+    * Standard
+    * 50% Majority to pass
+
+----
+
 :Modifying the governance document: The voting should happen in the PR
     in question and there must be a call to `@conda-forge/core`.
     The voting period must be open for at least one core
@@ -178,6 +212,8 @@ To call for a standard vote, here is a template PR comment:
 
     * Standard
     * 75% plus one of those voting to pass
+
+----
 
 All other voting items are considered to be standard and require a 50%
 majority to pass.
