@@ -5,10 +5,6 @@ Writing the ``meta.yaml``
 This document presents conda-forge rules, guidelines, and justifications
 about writing the ``meta.yaml`` file.
 
-If you are new to writing ``meta.yaml`` files, please see the
-`main documentation <https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html>`_
-on it first.
-
 
 Build from Tarballs, Not Repos
 ------------------------------
