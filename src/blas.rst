@@ -66,3 +66,57 @@ BLAS & Numpy & Friends
 
    -  Same thing as NumPy
    -  Add numpy dependency as if linking occurs
+
+openblas mkl dance
+------------------
+
+When updating packages, it might seem that openblas and mkl keep trying to
+overwrite one and other. For example:
+
+.. code-block:: bash
+
+  $ conda install pytest
+  Solving environment: done
+
+  [...]
+
+  The following packages will be UPDATED:
+
+  libgcc-ng:      7.2.0-hdf63c60_3                     conda-forge --> 8.2.0-hdf63c60_1
+  numpy:          1.15.2-py36_blas_openblashd3ea46f_1  conda-forge [blas_openblas] --> 1.15.2-py36h1d66e8a_1
+
+  The following packages will be DOWNGRADED:
+
+  blas:           1.1-openblas                         conda-forge --> 1.0-mkl
+  opencv:         3.4.3-py36_blas_openblash829a850_200 conda-forge [blas_openblas] --> 3.4.1-py36h6fd60c2_1
+  scipy:          1.1.0-py36_blas_openblash7943236_201 conda-forge [blas_openblas] --> 1.1.0-py36hc49cb51_0
+
+The problem is that conda really wants to minimize the "features" installed
+in the environment. Implicit dependencies, such as openblas in the case of
+``numpy`` from conda-forge, behave differently from explicit ones.
+Explicitly specifying the dependency on either ``openblas`` or ``mkl`` will
+solve this problem. As of writing, conda-forge does not package ``mkl``.
+
+Specifying:
+
+.. code-block:: bash
+
+  conda install blas=*=openblas
+
+solves the problem in new environments. The challenge comes if you already
+installed ``openblas`` (likely because of ``numpy``) and now need to add a
+dependency for ``openblas``. ``conda install`` will tell you it is already
+satisfied and not add  it to the list of explicitly specified dependencies.
+To work around this problem, execute the following commands:
+
+.. code-block:: bash
+
+  conda uninstall blas --force
+  conda install blas=*=openblas
+
+Here, we specified ``--force`` so as not to uninstall packages that depend on
+``blas`` (e.g. numpy and all dependencies).
+
+It may be helpful to read the conda documentation regarding installing
+default packages in new environments
+<https://conda.io/docs/user-guide/configuration/use-condarc.html#always-add-packages-by-default-create-default-packages>`_
