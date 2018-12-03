@@ -356,7 +356,7 @@ Normally Python packages should use this line:
 .. code-block:: yaml
 
     build:
-      script: "{{ PYTHON }} -m pip install . -vvv"
+      script: "{{ PYTHON }} -m pip install . -vv"
 
 as the installation script in the ``meta.yml`` file or ``bld.bat/build.sh`` script files,
 while adding ``pip`` to the host requirements:
