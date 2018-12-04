@@ -2,8 +2,6 @@
 # python distribution for the scientific python stack.
 language: generic
 
-sudo: false
-
 env:
     global:
        - CONDA_INSTALL_LOCN="${HOME}/conda"
