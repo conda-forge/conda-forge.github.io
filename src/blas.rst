@@ -101,7 +101,7 @@ Specifying:
 
 .. code-block:: bash
 
-  conda install blas=*=openblas
+  conda install "blas=*=openblas"
 
 solves the problem in new environments. The challenge comes if you already
 installed ``openblas`` (likely because of ``numpy``) and now need to add a
@@ -112,7 +112,7 @@ To work around this problem, execute the following commands:
 .. code-block:: bash
 
   conda uninstall blas --force
-  conda install blas=*=openblas
+  conda install "blas=*=openblas"
 
 Here, we specified ``--force`` so as not to uninstall packages that depend on
 ``blas`` (e.g. numpy and all dependencies).
