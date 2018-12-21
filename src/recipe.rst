@@ -66,6 +66,9 @@ Checklist
 * In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
 * Make sure that all tests pass sucessfully at least on your development machine.
 * Recommended: run ``conda-build`` on your source code to ensure the recipe works locally.
+  **In order to build against the correct versions of library dependencies specified in `meta.yaml`, the proper conda-forge channel must be added to your conda config**:
+    - conda config --add channels conda-forge/label/gcc7 # when using the conda3 compiler toolchain
+    - conda config --add channels conda-forge
 
 
 What happens after the PR to staged-recipes is merged
