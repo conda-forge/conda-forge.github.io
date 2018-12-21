@@ -66,7 +66,9 @@ Checklist
 * In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
 * Make sure that all tests pass sucessfully at least on your development machine.
 * Recommended: run ``conda-build`` on your source code to ensure the recipe works locally.
-  **In order to build against the correct versions of library dependencies specified in `meta.yaml`, the proper conda-forge channel must be added to your conda config**:
+  
+  * In order to build against the correct versions of library dependencies specified in `meta.yaml`, the proper conda-forge channel must be added to your conda config. The ``conda-forge`` and ``conda-forge/label/gcc7`` channels are not compatible, so you must activate **only one of these channels, corresponding to the compiler toolchain you with to use**:
+  
     - conda config --add channels conda-forge/label/gcc7 # when using the conda3 compiler toolchain
     - conda config --add channels conda-forge
 
