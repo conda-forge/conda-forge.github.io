@@ -65,8 +65,8 @@ This means that the <code class="docutils literal notranslate"><span class="pre"
 tarball of the source code.</p>
 <p>To get around this, the licence should be put in the recipe directory.
 It can then be refered to in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> via,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">about</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">license_file</span><span class="p p-Indicator">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">environ[&quot;RECIPE_DIR&quot;]</span><span class="nv"> </span><span class="s">}}/LICENSE&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">about</span><span class="p">:</span>
+  <span class="nt">license_file</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">environ[&quot;RECIPE_DIR&quot;]</span><span class="nv"> </span><span class="s">}}/LICENSE&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -85,8 +85,8 @@ is preferable to the <code class="docutils literal notranslate"><span class="pre
 <div class="section" id="excluding-a-platform">
 <h2>Excluding a Platform<a class="headerlink" href="#excluding-a-platform" title="Permalink to this headline">¶</a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">skip</span></code> key in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section along with a selector:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">skip</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>  <span class="c1"># [win]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+    <span class="nt">skip</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>  <span class="c1"># [win]</span>
 </pre></div>
 </div>
 <p>A full description of selectors is
@@ -99,18 +99,18 @@ is preferable to the <code class="docutils literal notranslate"><span class="pre
 <p>When a rerendering happens, conda-smithy will render the recipe using conda-build and output configuration files for each job and save them in a yaml file in <code class="docutils literal notranslate"><span class="pre">.ci_support</span></code> folder. For example there’s a output configuration file for each OS, each python version, etc.</p>
 <p>These output configuration files are stripped to options that are used in the build and therefore a change in the config files in <code class="docutils literal notranslate"><span class="pre">.ci_support</span></code> folder implies that there needs to be a new build.</p>
 <p>Pinning of packages are handled by the same configuration file and conda-build. This means that packages need not be pinned manually. For eg:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">host</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gmp 6.1.*</span>
-  <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+  <span class="nt">run</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gmp 6.1.*</span>
 </pre></div>
 </div>
 <p>can be replaced by</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">host</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gmp</span>
-  <span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+  <span class="nt">run</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gmp</span>
 </pre></div>
 </div>
@@ -119,8 +119,8 @@ is preferable to the <code class="docutils literal notranslate"><span class="pre
 <p>If a package is not in <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">conda-forge-pinning</a>, then the pinning needs to be done manually. If the package is a <code class="docutils literal notranslate"><span class="pre">C/C++</span></code> library with a <code class="docutils literal notranslate"><span class="pre">C/C++</span></code> API that is consumed and linked to by other libraries, then that package is a candidate to be added to <code class="docutils literal notranslate"><span class="pre">conda-forge-pinning</span></code>. Please open an issue in <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge-pinning-feedstock</a> for discussion.</p>
 <p>If the constraints in <code class="docutils literal notranslate"><span class="pre">conda-forge-pinning</span></code> are not strict enough, you can override them by changing back to pinning the package with a version manually. You can make a pinning stricter by adding <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">pin_compatible('gmp',</span> <span class="pre">max_pin='x.x.x')</span> <span class="pre">}}</span></code> to run requirements.</p>
 <p>If you need to remove a pinning in rare cases like linking the package statically or if the package is used with <code class="docutils literal notranslate"><span class="pre">dlopen</span></code> instead of linking, then you can do,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">ignore_run_exports</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+  <span class="nt">ignore_run_exports</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gmp</span>
 </pre></div>
 </div>
@@ -167,20 +167,20 @@ dependencies that would otherwise be unnecessarily included.</p>
 <h2>Build matrices<a class="headerlink" href="#build-matrices" title="Permalink to this headline">¶</a></h2>
 <p>Currently, <code class="docutils literal notranslate"><span class="pre">python,</span> <span class="pre">vc,</span> <span class="pre">r-base</span></code> will create a matrix of jobs for each supported version. If <code class="docutils literal notranslate"><span class="pre">python</span></code> is only a build dependency and not a runtime dependency (eg: build script of the package is written in Python, but the package is not dependent on python), use <code class="docutils literal notranslate"><span class="pre">build</span></code> section</p>
 <p>Following implies that <code class="docutils literal notranslate"><span class="pre">python</span></code> is only a build dependency and no Python matrix will be created.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
-<span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span>
+<span class="nt">host</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">some_other_package</span>
 </pre></div>
 </div>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">host</span></code> should be non-empty or <code class="docutils literal notranslate"><span class="pre">compiler</span></code> jinja syntax used or <code class="docutils literal notranslate"><span class="pre">build/merge_build_host</span></code> set to True for the <code class="docutils literal notranslate"><span class="pre">build</span></code> section to be treated as different from <code class="docutils literal notranslate"><span class="pre">host</span></code>.</p>
 <p>Following implies that <code class="docutils literal notranslate"><span class="pre">python</span></code> is a runtime dependency and a Python matrix for each supported python version will be created.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>’s build matrices is removed in conda-smithy=3. To get a build matrix, create a <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file inside recipe folder. For example following will give you 2 builds and you can use the selector <code class="docutils literal notranslate"><span class="pre">vtk_with_osmesa</span></code> in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">vtk_with_osmesa</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vtk_with_osmesa</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
 </pre></div>
@@ -191,8 +191,8 @@ dependencies that would otherwise be unnecessarily included.</p>
 <h2>Compilers<a class="headerlink" href="#compilers" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">conda-build=3</span></code> gives the ability to use Anaconda 5 compilers, <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> is not using these compilers yet. Reason for holding out on using the Anaconda 5 compilers is that the packages built by them are sometimes incompatible with the packages built with the older compilers in CI platforms conda-forge has been using. All the dependencies of a package should be compiled (This is not true for all cases, but it’s better to be cautious) with the new compilers before using the new compiler in a package. This presents a problem in that rebuilding a package will break the dependent packages. Therefore, <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> has decided to rebuild all of the packages and upload them all at once. More details on how this is done will be communicated in the future.</p>
 <p>However, using the <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">compiler('cxx')</span> <span class="pre">}}</span></code> is supported in <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>, but it installs the <code class="docutils literal notranslate"><span class="pre">toolchain</span></code> package which activates the compilers in the CI environment. If you were using <code class="docutils literal notranslate"><span class="pre">toolchain</span></code> or <code class="docutils literal notranslate"><span class="pre">gcc</span></code> build deps, consider using the following,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;c&#39;)</span> <span class="p p-Indicator">}}</span>
     <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;cxx&#39;)</span> <span class="p p-Indicator">}}</span>
     <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;fortran&#39;)</span> <span class="p p-Indicator">}}</span>
@@ -205,17 +205,17 @@ dependencies that would otherwise be unnecessarily included.</p>
 <p>If you have a package which links* against <code class="docutils literal notranslate"><span class="pre">numpy</span></code> you can build against the oldest possible version of <code class="docutils literal notranslate"><span class="pre">numpy</span></code> that is forwards compatible.
 With conda-build 3, we can leave the pin empty for build-time, and conda-build will use the numpy key from conda_build_config.yaml. We can also utilize conda-build’s dynamic pinning with its pin_compatible function to evaluate the numpy pin based on the version that actually gets used at build time.
 If you don’t want to make things complicated you can use</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy</span>
-<span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+<span class="nt">run</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_compatible(&#39;numpy&#39;)</span> <span class="p p-Indicator">}}</span>
 </pre></div>
 </div>
 <p>At the time of writing, above is equivalent to the following,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.9.3</span>              <span class="c1"># [unix]</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.11.3</span>             <span class="c1"># [win]</span>
-<span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+<span class="nt">run</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy &gt;=1.9.3,&lt;2.0.a0</span>    <span class="c1"># [unix]</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy &gt;=1.11.3,&lt;2.0.a0</span>   <span class="c1"># [win]</span>
 </pre></div>
@@ -227,16 +227,16 @@ or if the package uses <code class="docutils literal notranslate"><span class="p
 <p>1. you still need to respect minimum supported version of <code class="docutils literal notranslate"><span class="pre">numpy</span></code> for the package!
 That means you cannot use <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.9</span></code> if the project requires at least <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.12</span></code>,
 adjust the minimum version accordingly!</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.12.*</span>
-<span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+<span class="nt">run</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_compatible(&#39;numpy&#39;)</span> <span class="p p-Indicator">}}</span>
 </pre></div>
 </div>
 <p>At the time of writing, above is equivalent to the following,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.12.3</span>
-<span class="l l-Scalar l-Scalar-Plain">run</span><span class="p p-Indicator">:</span>
+<span class="nt">run</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy &gt;=1.12.3,&lt;2.0.a0</span>
 </pre></div>
 </div>
@@ -279,8 +279,8 @@ without having to change anything.
 Note though that since <code class="docutils literal notranslate"><span class="pre">noarch</span></code> packages are built on Linux, currently the
 package must be installable on Linux.</p>
 <p>To use it, just add <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> in the build section like,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">noarch</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+  <span class="nt">noarch</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
 </pre></div>
 </div>
 <p>If you’re submitting a new recipe to <code class="docutils literal notranslate"><span class="pre">staged-recipes</span></code>, that’s all you need.
@@ -299,14 +299,14 @@ dependency and rebuild the package you should increase the build number.</p>
 <div class="section" id="use-pip">
 <span id="id2"></span><h2>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h2>
 <p>Normally Python packages should use this line:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">-vv&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+  <span class="nt">script</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">-vv&quot;</span>
 </pre></div>
 </div>
 <p>as the installation script in the <code class="docutils literal notranslate"><span class="pre">meta.yml</span></code> file or <code class="docutils literal notranslate"><span class="pre">bld.bat/build.sh</span></code> script files,
 while adding <code class="docutils literal notranslate"><span class="pre">pip</span></code> to the host requirements:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">host</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip</span>
 </pre></div>
 </div>

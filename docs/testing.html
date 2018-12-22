@@ -54,8 +54,8 @@ locations. This is called existence testing.</p>
 <p>On Windows, use the <code class="docutils literal notranslate"><span class="pre">exist</span></code> command. See below for an example.</p>
 <div class="section" id="simple-existence-testing-example">
 <h3>Simple Existence Testing Example<a class="headerlink" href="#simple-existence-testing-example" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">test</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">commands</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span>
+  <span class="nt">commands</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">test -f $PREFIX/lib/libboost_log$SHLIB_EXT</span>  <span class="c1"># [unix]</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1</span>  <span class="c1"># [win]</span>
 </pre></div>
@@ -71,8 +71,8 @@ locations. This is called existence testing.</p>
 <p>The minimal test of a python package should make sure that the package
 can be successfully imported. This can be accomplished with this
 stanza in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">test</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">imports</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span>
+  <span class="nt">imports</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">package_name</span>
 </pre></div>
 </div>
@@ -98,11 +98,11 @@ not be run straight from an installed package.</p>
 to simply use the package. This is usually a test-running framework, such as
 nose or pytest. You can ensure that it is included by adding it to requirements
 in the the test stanza:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">test</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">imports</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span>
+  <span class="nt">imports</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">package_name</span>
 <span class="nn">...</span>
-  <span class="l l-Scalar l-Scalar-Plain">requires</span><span class="p p-Indicator">:</span>
+  <span class="nt">requires</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pytest</span>
 </pre></div>
 </div>
@@ -111,7 +111,7 @@ in the the test stanza:</p>
 <h3>Built-in Tests<a class="headerlink" href="#built-in-tests" title="Permalink to this headline">¶</a></h3>
 <p>Some packages have testing built-in. In this case, you can put a test command
 directly in the test stanza:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">test</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span>
   <span class="l l-Scalar l-Scalar-Plain">...</span>
   <span class="l l-Scalar l-Scalar-Plain">commands</span><span class="p p-Indicator">:</span>
      <span class="l l-Scalar l-Scalar-Plain">python -c &quot;import package_name; package_name.tests.runall()&quot;</span>

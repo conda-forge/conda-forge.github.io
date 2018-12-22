@@ -105,17 +105,17 @@ nmake install
 <h2>Building for different VC versions<a class="headerlink" href="#building-for-different-vc-versions" title="Permalink to this headline">¶</a></h2>
 <p>On Windows, different Visual C versions have different ABI and therefore a package needs to be built for different Visual C versions. Packages are tied to the VC version that they were built with and some packages have specific requirements of the VC version. For example, python 2.7 requires <code class="docutils literal notranslate"><span class="pre">vc</span> <span class="pre">9</span></code> and python 3.5 requires <code class="docutils literal notranslate"><span class="pre">vc</span> <span class="pre">14</span></code>.</p>
 <p>With <code class="docutils literal notranslate"><span class="pre">conda-build</span> <span class="pre">3.x</span></code>, <code class="docutils literal notranslate"><span class="pre">vc</span></code> can be used as a selector when using the <code class="docutils literal notranslate"><span class="pre">compiler</span></code> jinja syntax.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;cxx&#39;)</span> <span class="p p-Indicator">}}</span>
 </pre></div>
 </div>
 <p>To skip building with a particular <code class="docutils literal notranslate"><span class="pre">vc</span></code> version, add a skip statement.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">skip</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>  <span class="c1"># [vc&lt;14]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+    <span class="nt">skip</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>  <span class="c1"># [vc&lt;14]</span>
 
-<span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+<span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;cxx&#39;)</span> <span class="p p-Indicator">}}</span>
 </pre></div>
 </div>

@@ -48,8 +48,8 @@ linux packages. It can optionally build OSX packages.</p>
 <div class="section" id="using-circle-for-both-linux-and-osx">
 <h3>Using Circle for both Linux and OSX<a class="headerlink" href="#using-circle-for-both-linux-and-osx" title="Permalink to this headline">¶</a></h3>
 <p>To use CircleCI for OSX, add the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root of the feedstock.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">provider</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">osx</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">circle</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
+  <span class="nt">osx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">circle</span>
 </pre></div>
 </div>
 <p>CircleCI for OSX should be used for OSX only when Travis-CI resources (50 minutes of build time per job) is not enough as CircleCI gives more resources (2 hours of build time per job).</p>
