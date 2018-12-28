@@ -32,11 +32,11 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
 Step-by-step Instructions
 -------------------------
 
-0. Ensure your source code can be downloaded as a single file. Source code 
-   should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz) 
-   or tagged on GitHub, to ensure that it can be verified. (For further 
-   detail, see `Build from Tarballs, Not Repos 
-   <https://conda-forge.org/docs/meta.html#build-from-tarballs-not-repos>`_). 
+0. Ensure your source code can be downloaded as a single file. Source code
+   should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz)
+   or tagged on GitHub, to ensure that it can be verified. (For further
+   detail, see `Build from Tarballs, Not Repos
+   <https://conda-forge.org/docs/meta.html#build-from-tarballs-not-repos>`_).
 1. Fork the `example recipes
    <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
    repository.
@@ -47,11 +47,11 @@ Step-by-step Instructions
    example/meta.yaml>`_
    file from the example directory. Please leave the example directory
    unchanged!
-4. Edit the copied recipe (meta.yml) as needed. For details, see 
+4. Edit the copied recipe (meta.yml) as needed. For details, see
    `Writing the "meta.yml" <https://conda-forge.org/docs/meta.html>`_
-5. Generate the SHA256 key for your source code archive, as described in the 
-   example recipe using the ``openssl`` tool. As an alternative you can also 
-   go to the package description on `PyPi <https://pypi.org>`_ from which you 
+5. Generate the SHA256 key for your source code archive, as described in the
+   example recipe using the ``openssl`` tool. As an alternative you can also
+   go to the package description on `PyPi <https://pypi.org>`_ from which you
    can directly copy the SHA256.
 6. Be sure to fill in the ``tests`` section. The simplest test will simply
    test that the module can be imported, as described in the example.
@@ -86,15 +86,23 @@ Avoid Dependencies Outside of Conda-Forge
 Short answer: yes.
 
 Long answer: In principle, as long as your dependencies are in at least one of
-your user's conda channels they will be able to install your package. In practice, that is difficult to manage, and we strive to have all dependencies built in conda-forge.
+your user's conda channels they will be able to install your package. In practice,
+that is difficult to manage, and we strive to have all dependencies built in conda-forge.
 
 Building all of the dependencies in conda-forge allow us greater assurance
-of ABI compatibility for the conda-forge packages. Only in extreme cases
-should you rely on a dependency outside of conda-forge.
+of ABI compatibility for the conda-forge packages.
+**Only in extreme cases should you rely on a dependency outside of conda-forge.**
+In these cases, the basic heirarchy for dependencies, in order of preference, is,
 
-If your dependencies do not change with the python version, or with the
-platform, consider making your build :ref:`noarch <noarch>`, this will allow the recipe to build faster, and free some CI resources for other projects.
+1. Make or use a conda-forge package for the dependency
+2. Use a defaults package for a dependency
+3. Use a CDT for a dependency
+4. Use a ``yum_requirements.txt`` for a dependency (deprecated)
+5. Silently require the package to exist on the user's system
 
+If your dependencies do not change with the Python version, or with the
+platform, consider making your build :ref:`noarch <noarch>`, this will
+allow the recipe to build faster, and free some CI resources for other projects.
 
 
 Optional: ``bld.bat`` and/or ``build.sh``
