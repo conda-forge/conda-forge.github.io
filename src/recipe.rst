@@ -96,7 +96,7 @@ In these cases, the basic heirarchy for dependencies, in order of preference, is
 
 1. Make or use a conda-forge package for the dependency
 2. Use a defaults package for a dependency
-3. Use a CDT for a dependency
+3. Use a `CDT <https://conda.io/docs/user-guide/tasks/build-packages/compiler-tools.html#cdt-packages>`_ for a dependency
 4. Use a ``yum_requirements.txt`` for a dependency (deprecated)
 5. Silently require the package to exist on the user's system
 
