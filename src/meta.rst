@@ -42,7 +42,7 @@ It can then be refered to in the ``meta.yaml`` as if it was in the source direct
 .. code-block:: yaml
 
     about:
-      license_file: 'LICENSE.txt'
+      license_file: LICENSE.txt
 
 
 Populating the ``hash`` Field
