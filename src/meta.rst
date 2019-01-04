@@ -37,12 +37,12 @@ This means that the ``about/license_file`` entry *must* be included in the
 tarball of the source code.
 
 To get around this, the licence should be put in the recipe directory.
-It can then be refered to in the ``meta.yaml`` via,
+It can then be refered to in the ``meta.yaml`` as if it was in the source directory,
 
 .. code-block:: yaml
 
     about:
-      license_file: '{{ environ["RECIPE_DIR"] }}/LICENSE'
+      license_file: 'LICENSE.txt'
 
 
 Populating the ``hash`` Field
