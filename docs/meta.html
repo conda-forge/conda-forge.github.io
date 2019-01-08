@@ -13,6 +13,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="BLAS &amp; Numpy &amp; Friends" href="blas.html" />
@@ -64,9 +65,9 @@ This means that the <code class="docutils literal notranslate"><span class="pre"
 <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>. Unfortunately, the license isn’t always included in the
 tarball of the source code.</p>
 <p>To get around this, the licence should be put in the recipe directory.
-It can then be refered to in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> via,</p>
+It can then be refered to in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> as if it was in the source directory,</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">about</span><span class="p">:</span>
-  <span class="nt">license_file</span><span class="p">:</span> <span class="s">&#39;{{</span><span class="nv"> </span><span class="s">environ[&quot;RECIPE_DIR&quot;]</span><span class="nv"> </span><span class="s">}}/LICENSE&#39;</span>
+  <span class="nt">license_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">LICENSE.txt</span>
 </pre></div>
 </div>
 </div>
@@ -410,7 +411,7 @@ the real package dependencies are only <code class="docutils literal notranslate
       &copy;2016, conda-forge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
