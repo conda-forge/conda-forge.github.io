@@ -107,12 +107,27 @@ test that the module can be imported, as described in the example.</li>
 <p><em>Do all of my package’s dependencies have to be in conda(-forge) already?</em></p>
 <p>Short answer: yes.</p>
 <p>Long answer: In principle, as long as your dependencies are in at least one of
-your user’s conda channels they will be able to install your package. In practice, that is difficult to manage, and we strive to have all dependencies built in conda-forge.</p>
+your user’s conda channels they will be able to install your package. In practice,
+that is difficult to manage, and we strive to have all dependencies built in conda-forge.</p>
 <p>Building all of the dependencies in conda-forge allow us greater assurance
-of ABI compatibility for the conda-forge packages. Only in extreme cases
-should you rely on a dependency outside of conda-forge.</p>
-<p>If your dependencies do not change with the python version, or with the
-platform, consider making your build <a class="reference internal" href="meta.html#noarch"><span class="std std-ref">noarch</span></a>, this will allow the recipe to build faster, and free some CI resources for other projects.</p>
+of ABI compatibility for the conda-forge packages.
+<strong>Only in extreme cases should you rely on a dependency outside of conda-forge.</strong>
+In these cases, the basic heirarchy for dependencies, in order of preference, is,</p>
+<ol class="arabic simple">
+<li>Make or use a conda-forge package for the dependency</li>
+<li>Use a defaults package for a dependency</li>
+<li>Use a <a class="reference external" href="https://conda.io/docs/user-guide/tasks/build-packages/compiler-tools.html#cdt-packages">CDT</a> for a dependency</li>
+<li>Use a <code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code> for a dependency (deprecated)</li>
+<li>Require the package to exist implicitly on the user’s system outside of conda managing the package
+in any way, shape, or form. This is obviously a terrible option and should never
+be purposefully used. The only exceptions are packages such as device drivers
+that <strong>need</strong> root or sys admin permissions and kernel access. For example,
+GPU code usually requires that a graphics card driver be installed for the
+code to execute. Avoid these implicit dependencies at all costs.</li>
+</ol>
+<p>If your dependencies do not change with the Python version, or with the
+platform, consider making your build <a class="reference internal" href="meta.html#noarch"><span class="std std-ref">noarch</span></a>, this will
+allow the recipe to build faster, and free some CI resources for other projects.</p>
 </div>
 <div class="section" id="optional-bld-bat-and-or-build-sh">
 <h2>Optional: <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal notranslate"><span class="pre">build.sh</span></code><a class="headerlink" href="#optional-bld-bat-and-or-build-sh" title="Permalink to this headline">¶</a></h2>
