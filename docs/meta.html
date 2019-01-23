@@ -125,14 +125,14 @@ is preferable to the <code class="docutils literal notranslate"><span class="pre
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gmp</span>
 </pre></div>
 </div>
-<p>There is additional documentation on this pinning scheme in <a class="reference external" href="https://conda.io/docs/user-guide/tasks/build-packages/variants.html#build-variants">the conda docs</a>.</p>
+<p>There is additional documentation on this pinning scheme in <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/source/variants.html#build-variants">the conda docs</a>.</p>
 </div>
 <div class="section" id="using-conda-build-s-run-exports-feature">
 <h2>Using conda-build’s run_exports feature<a class="headerlink" href="#using-conda-build-s-run-exports-feature" title="Permalink to this headline">¶</a></h2>
 <p>Conda-build has a feature called “run_exports” that allows recipe builders to
 specify what downstream consumers of their package need as runtime dependencies
 when a given package is used as a build-time (host) dependency. There’s
-documentation on run_exports in <a class="reference external" href="https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#export-runtime-requirements">conda-build’s documentation</a>.
+documentation on run_exports in <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/source/define-metadata.html#export-runtime-requirements">conda-build’s documentation</a>.
 For conda-forge specifically, we encourage the use of run_exports, as it places
 the burden of understanding binary compatibilty bounds on the upstream package
 maintainers, rather than the downstream package consumers. We feel that the
@@ -199,7 +199,7 @@ dependencies that would otherwise be unnecessarily included.</p>
     <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;fortran&#39;)</span> <span class="p p-Indicator">}}</span>
 </pre></div>
 </div>
-<p>Note that appropriate compiler runtime packages will be automatically added to the package’s runtime requirements and therefore there’s no need to specify <code class="docutils literal notranslate"><span class="pre">libgcc</span></code> or <code class="docutils literal notranslate"><span class="pre">libgfortran</span></code>.  There is additional information about how conda-build 3 treats compilers in the <a class="reference external" href="https://conda.io/docs/user-guide/tasks/build-packages/compiler-tools.html">conda docs</a>.</p>
+<p>Note that appropriate compiler runtime packages will be automatically added to the package’s runtime requirements and therefore there’s no need to specify <code class="docutils literal notranslate"><span class="pre">libgcc</span></code> or <code class="docutils literal notranslate"><span class="pre">libgfortran</span></code>.  There is additional information about how conda-build 3 treats compilers in the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/source/compiler-tools.html">conda docs</a>.</p>
 </div>
 <div class="section" id="building-against-numpy">
 <h2>Building Against NumPy<a class="headerlink" href="#building-against-numpy" title="Permalink to this headline">¶</a></h2>
@@ -320,7 +320,7 @@ the real package dependencies are only <code class="docutils literal notranslate
 </div>
 <div class="section" id="downloading-extra-sources-and-data-files">
 <h2>Downloading extra sources and data files<a class="headerlink" href="#downloading-extra-sources-and-data-files" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">conda-build</span> <span class="pre">3</span></code> supports multiple sources per recipe. Examples are available <a class="reference external" href="https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#source-from-multiple-sources">in the conda-build docs</a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">conda-build</span> <span class="pre">3</span></code> supports multiple sources per recipe. Examples are available <a class="reference external" href="https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#source-from-multiple-sources">in the conda-build docs</a>.</p>
 </div>
 </div>
 
