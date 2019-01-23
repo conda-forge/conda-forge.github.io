@@ -123,7 +123,7 @@ If you need to remove a pinning in rare cases like linking the package staticall
       ignore_run_exports:
         - gmp
 
-There is additional documentation on this pinning scheme in `the conda docs <https://conda.io/docs/user-guide/tasks/build-packages/variants.html#build-variants>`_.
+There is additional documentation on this pinning scheme in `the conda docs <https://docs.conda.io/projects/conda-build/en/latest/source/variants.html#build-variants>`_.
 
 Using conda-build's run_exports feature
 ---------------------------------------
@@ -132,7 +132,7 @@ Conda-build has a feature called "run_exports" that allows recipe builders to
 specify what downstream consumers of their package need as runtime dependencies
 when a given package is used as a build-time (host) dependency. There's
 documentation on run_exports in `conda-build's documentation
-<https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#export-runtime-requirements>`_.
+<https://docs.conda.io/projects/conda-build/en/latest/source/define-metadata.html#export-runtime-requirements>`_.
 For conda-forge specifically, we encourage the use of run_exports, as it places
 the burden of understanding binary compatibilty bounds on the upstream package
 maintainers, rather than the downstream package consumers. We feel that the
@@ -222,7 +222,7 @@ However, using the ``{{ compiler('cxx') }}`` is supported in ``conda-forge``, bu
         - {{ compiler('fortran') }}
 
 
-Note that appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.  There is additional information about how conda-build 3 treats compilers in the `conda docs <https://conda.io/docs/user-guide/tasks/build-packages/compiler-tools.html>`_.
+Note that appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.  There is additional information about how conda-build 3 treats compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/source/compiler-tools.html>`_.
 
 
 Building Against NumPy
@@ -378,5 +378,5 @@ the real package dependencies are only ``run`` requirements.
 
 Downloading extra sources and data files
 ----------------------------------------
-``conda-build 3`` supports multiple sources per recipe. Examples are available `in the conda-build docs <https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#source-from-multiple-sources>`_.
+``conda-build 3`` supports multiple sources per recipe. Examples are available `in the conda-build docs <https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#source-from-multiple-sources>`_.
 
