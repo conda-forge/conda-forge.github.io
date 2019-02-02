@@ -20,6 +20,7 @@ Contents:
    testing
    ciservices
    conda_smithy
+   conda-forge-yml
    conda-forge_gotchas
    webservice
    joining-the-team
