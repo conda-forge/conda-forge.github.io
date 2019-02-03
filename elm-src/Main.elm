@@ -22,39 +22,51 @@ main =
 
 -- MODEL
 
+type Model
+  = Failure
+  | Loading
+  | Success String
+  | Query String
 
-type alias Model =
-  { query : String
-  }
-
-
-init : Model
-init =
-  Model ""
+init : () -> (Model, Cmd Msg)
+init _ =
+  (Query "", getNone)
 
 
 
 -- UPDATE
 
-
 type Msg
-  = Query String
+  = SendSearch
+  | GotSearch (Result Http.Error String)
+  | GotQuery String
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
   case msg of
-    Query query ->
-      { model | query = query }
+    SendSearch ->
+      (model, Cmd.none)
+
+    GotSearch result ->
+      case result of
+        Ok url ->
+          (Success url, Cmd.none)
+
+        Err _ ->
+          (Failure, Cmd.none)
+
+    GotQuery q ->
+      (model, Cmd.none)
 
 
 
 -- SUBSCRIPTIONS
 
 
---subscriptions : Model -> Sub Msg
---subscriptions model =
---  Sub.none
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Sub.none
 
 
 
@@ -64,21 +76,39 @@ update msg model =
 view : Model -> Html Msg
 view model =
   div []
-    [ viewInput "text" "Search" model.query Query
+    [ viewInput "text" "Search" GotQuery
     , viewResults model
     ]
 
+viewInput : String -> String -> (String -> msg) -> Html msg
+viewInput t p toMsg =
+  input [ type_ t, placeholder p, onInput toMsg ] []
 
 viewResults : Model -> Html msg
 viewResults model =
-  if model.query == "" then
-  else
-    h2 [] [ text "Search Results" ]
+  case model of
+    Query q ->
+        if q == "" then
+            div [] []
+        else
+            h2 [] [ text "Search Results" ]
+    Failure ->
+        div [] []
+
+    Loading ->
+        div [] []
+
+    Success _ ->
+        div [] []
 
 
 
 -- HTTP
 
+
+getNone : Cmd Msg
+getNone =
+    Cmd.none
 
 --getRandomCatGif : Cmd Msg
 --getRandomCatGif =
