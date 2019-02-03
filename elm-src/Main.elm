@@ -10,27 +10,6 @@ import Json.Decode as Decode
 import Json.Encode as Encode
 
 
-exampleVersion : String
-exampleVersion =
-    "7"
-
-
-viewHeader : String -> Html msg
-viewHeader version =
-    div [ class "header" ]
-        [ h1 [] [ text ("Elm Forms - Example " ++ version) ]
-        ]
-
-
-viewFooter : String -> Html msg
-viewFooter version =
-    div [ class "footer" ]
-        [ a [ href "https://github.com/lucamug/elm-form-examples" ]
-            [ text "[ code ] " ]
-        , a [ href "https://medium.com/@l.mugnaini/forms-in-elm-validation-tutorial-and-examples-2339830055da" ] [ text " [ article ]" ]
-        ]
-
-
 
 viewResponse : String -> Html msg
 viewResponse response =
@@ -43,12 +22,11 @@ viewResponse response =
 
 viewUtils :
     { a | response : Maybe String }
-    -> String
     -> ({ a | response : Maybe String } -> Html msg)
     -> Html msg
-viewUtils model exampleVer viewF =
+viewUtils model viewF =
     div []
-        [ viewHeader exampleVer
+        [ viewHeader
         , viewF model
         , case model.response of
             Just response ->
@@ -56,13 +34,12 @@ viewUtils model exampleVer viewF =
 
             Nothing ->
                 text ""
-        , viewFooter exampleVer
+        , viewFooter
         ]
 
 
 viewU :
     { a | response : Maybe String }
-    -> String
     -> ({ a | response : Maybe String } -> Html msg)
     -> Html msg
 viewU =
@@ -165,10 +142,23 @@ onEnter msg =
 
 -- VIEWS
 
+viewHeader : Html msg
+viewHeader =
+    div [ class "header" ]
+        [ h1 [] [ text ("Conda-Forge") ]
+        ]
+
+viewFooter : Html msg
+viewFooter =
+    div [ class "footer" ]
+        [ a [ href "https://github.com/lucamug/elm-form-examples" ]
+            [ text "[ code ] " ]
+        , a [ href "https://medium.com/@l.mugnaini/forms-in-elm-validation-tutorial-and-examples-2339830055da" ] [ text " [ article ]" ]
+        ]
 
 view : Model -> Html Msg
 view model =
-    viewU model exampleVersion viewForm
+    viewU model viewForm
 
 
 viewForm : Model -> Html Msg
