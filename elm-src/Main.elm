@@ -1,123 +1,229 @@
+module Main exposing (..)
+import List
 import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
-import Json.Decode exposing (Decoder, field, string)
+import Json.Decode
+import Json.Decode as Decode
+import Json.Encode as Encode
+
+
+exampleVersion : String
+exampleVersion =
+    "7"
+
+
+viewHeader : String -> Html msg
+viewHeader version =
+    div [ class "header" ]
+        [ h1 [] [ text ("Elm Forms - Example " ++ version) ]
+        ]
+
+
+viewFooter : String -> Html msg
+viewFooter version =
+    div [ class "footer" ]
+        [ a [ href "https://github.com/lucamug/elm-form-examples" ]
+            [ text "[ code ] " ]
+        , a [ href "https://medium.com/@l.mugnaini/forms-in-elm-validation-tutorial-and-examples-2339830055da" ] [ text " [ article ]" ]
+        ]
 
 
 
--- MAIN
+viewResponse : String -> Html msg
+viewResponse response =
+    div [ class "response-container" ]
+        [ h2 [] [ text "Response" ]
+        , textarea []
+            [ text response ]
+        ]
 
 
-main =
-  Browser.element
-    { init = init
-    , update = update
-    , subscriptions = subscriptions
-    , view = view
+viewUtils :
+    { a | response : Maybe String }
+    -> String
+    -> ({ a | response : Maybe String } -> Html msg)
+    -> Html msg
+viewUtils model exampleVer viewF =
+    div []
+        [ viewHeader exampleVer
+        , viewF model
+        , case model.response of
+            Just response ->
+                viewResponse response
+
+            Nothing ->
+                text ""
+        , viewFooter exampleVer
+        ]
+
+
+viewU :
+    { a | response : Maybe String }
+    -> String
+    -> ({ a | response : Maybe String } -> Html msg)
+    -> Html msg
+viewU =
+    viewUtils
+
+type alias Model =
+    { errors : List Error
+    , email : String
+    , password : String
+    , response : Maybe String
     }
 
 
+initialModel : Model
+initialModel =
+    { errors = []
+    , email = ""
+    , password = ""
+    , response = Nothing
+    }
 
--- MODEL
 
-type Model
-  = Failure
-  | Loading
-  | Success String
-  | Query String
+type alias Error =
+    ( FormField, String )
 
-init : () -> (Model, Cmd Msg)
-init _ =
-  (Query "", getNone)
+
+type Msg
+    = NoOp
+    | SubmitForm
+    | SetField FormField String
+    | Response (Result Http.Error String)
+
+
+type FormField
+    = Email
+    | Password
 
 
 
 -- UPDATE
 
-type Msg
-  = SendSearch
-  | GotSearch (Result Http.Error String)
-  | GotQuery String
-
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-  case msg of
-    SendSearch ->
-      (model, Cmd.none)
+    case Debug.log "msg" msg of
+        NoOp ->
+            ( model, Cmd.none )
 
-    GotSearch result ->
-      case result of
-        Ok url ->
-          (Success url, Cmd.none)
+        SubmitForm ->
+            if List.length model.errors == 0 then
+                ( { model | errors = [], response = Nothing }
+                --, Http.request Response (postRequest model)
+                , Cmd.none
+                )
+            else
+                ( { model | errors = model.errors }
+                , Cmd.none
+                )
 
-        Err _ ->
-          (Failure, Cmd.none)
+        SetField field value ->
+            ( setField field value model, Cmd.none )
 
-    GotQuery q ->
-      (model, Cmd.none)
+        Response (Ok response) ->
+            ( { model | response = Just response }, Cmd.none )
 
-
-
--- SUBSCRIPTIONS
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-  Sub.none
+        Response (Err error) ->
+            --( { model | response = Just (error ++ " - See the Console for more details.") }, Cmd.none )
+            ( { model | response = Just ("Some errors") }, Cmd.none )
 
 
 
--- VIEW
+-- HELPERS
+
+
+setField : FormField -> String -> Model -> Model
+setField field value model =
+    case field of
+        Email ->
+            { model | email = value }
+
+        Password ->
+            { model | password = value }
+
+
+
+
+onEnter : msg -> Attribute msg
+onEnter msg =
+    keyCode
+        |> Decode.andThen
+            (\key ->
+                if key == 13 then
+                    Decode.succeed msg
+                else
+                    Decode.fail "Not enter"
+            )
+        |> on "keyup"
+
+
+
+-- VIEWS
 
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ viewInput "text" "Search" GotQuery
-    , viewResults model
-    ]
-
-viewInput : String -> String -> (String -> msg) -> Html msg
-viewInput t p toMsg =
-  input [ type_ t, placeholder p, onInput toMsg ] []
-
-viewResults : Model -> Html msg
-viewResults model =
-  case model of
-    Query q ->
-        if q == "" then
-            div [] []
-        else
-            h2 [] [ text "Search Results" ]
-    Failure ->
-        div [] []
-
-    Loading ->
-        div [] []
-
-    Success _ ->
-        div [] []
+    viewU model exampleVersion viewForm
 
 
+viewForm : Model -> Html Msg
+viewForm model =
+    Html.div
+        [ class "form-container"
+        , onEnter SubmitForm
+        ]
+        [ label []
+            [ text "Email"
+            , input
+                [ type_ "text"
+                , placeholder "Email"
+                , onInput <| SetField Email
+                , value model.email
+                ]
+                []
+            , viewFormErrors Email model.errors
+            ]
+        , label []
+            [ text "Password"
+            , input
+                [ type_ "password"
+                , placeholder "Password"
+                , onInput <| SetField Password
+                , value model.password
+                ]
+                []
+            , viewFormErrors Password model.errors
+            ]
+        , button
+            [ onClick SubmitForm
+            , classList
+                [ ( "disabled", not <| List.isEmpty model.errors ) ]
+            ]
+            [ text "Submit" ]
+        ]
 
--- HTTP
+
+viewFormErrors : FormField -> List Error -> Html msg
+viewFormErrors field errors =
+    errors
+        |> List.filter (\( fieldError, _ ) -> fieldError == field)
+        |> List.map (\( _, error ) -> li [] [ text error ])
+        |> ul [ class "formErrors" ]
 
 
-getNone : Cmd Msg
-getNone =
-    Cmd.none
 
---getRandomCatGif : Cmd Msg
---getRandomCatGif =
---  Http.get
---    { url = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cat"
---    , expect = Http.expectJson GotGif gifDecoder
---    }
+-- MAIN
 
-
---gifDecoder : Decoder String
---gifDecoder =
---  field "data" (field "image_url" string)
+main : Program Decode.Value Model Msg
+main =
+  Browser.element
+        { init = \_ -> ( initialModel, Cmd.none )
+        , view = view
+        , update = update
+        , subscriptions = \_ -> Sub.none
+        }
