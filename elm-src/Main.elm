@@ -10,7 +10,16 @@ import Http
 import Json.Decode
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Json.Decode exposing (Decoder, map2, field, list, dict, string, int)
+import Json.Decode exposing (Decoder, map3, field, list, dict, string, int)
+
+
+-- Types
+
+type alias SearchResult =
+    { query : String
+    , page_num : Int
+    , page_size : Int
+    }
 
 
 type alias Model =
@@ -73,7 +82,7 @@ update msg model =
 
         Response (Err error) ->
             --( { model | response = Just (error ++ " - See the Console for more details.") }, Cmd.none )
-            ( { model | response = Just (SearchResult "Some errors" 0) }, Cmd.none )
+            ( { model | response = Just (SearchResult error -1 -1) }, Cmd.none )
 
 
 
@@ -87,18 +96,12 @@ getQuery query =
     }
 
 
-type alias SearchResult =
-    { query : String
-    , page_num : Int
-    }
-
-
 searchQueryDecoder: Decoder SearchResult
 searchQueryDecoder =
-    map2 SearchResult
+    map3 SearchResult
         (field "query" string)
         (field "page_num" int)
-  -- field "results" (list (dict (field "name" string)))
+        (field "page_size" int)
 
 -- HELPERS
 
@@ -137,6 +140,8 @@ viewResponse response =
             [ text response.query ]
         , div []
             [ text (String.fromInt response.page_num) ]
+        , div []
+            [ text (String.fromInt response.page_size) ]
         ]
 
 
