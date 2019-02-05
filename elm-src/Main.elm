@@ -173,7 +173,8 @@ viewResponse response =
         [ h2 [] [ text "Results" ]
         , div []
             [ text response.query ]
-        , ul [] ((List.map viewArtifact) response.results)
+        , ol [start ((response.page_num - 1) * response.page_size + 1)]
+            ((List.map viewArtifact) response.results)
         , div []
             [ text (String.fromInt response.page_num) ]
         , div []
