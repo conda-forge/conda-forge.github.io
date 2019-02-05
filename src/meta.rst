@@ -371,8 +371,7 @@ These options should be used to ensure a clean installation of the package witho
 dependencies. This helps make sure that we're only including this package,
 and not accidentally bringing any dependencies along into the conda package.
 
-Note that the ``--no-deps`` line means that for pure-Python packages,
-usually only ``python`` and ``pip`` are needed as ``build`` or ``host`` requirements;
+For pure-Python packages usually only ``python`` and ``pip`` are needed as ``build`` or ``host`` requirements;
 the real package dependencies are only ``run`` requirements.
 
 
