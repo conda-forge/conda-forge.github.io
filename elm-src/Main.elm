@@ -10,7 +10,7 @@ import Http
 import Json.Decode
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Json.Decode exposing (Decoder, map3, field, list, dict, string, int)
+import Json.Decode exposing (Decoder, map2, map4, field, list, dict, string, int)
 
 
 -- Types
@@ -19,11 +19,17 @@ type alias SearchResult =
     { query : String
     , page_num : Int
     , page_size : Int
+    , results : List Artifact
     }
 
 
+type alias Artifact =
+    { name : String
+    , version : String
+    }
+
 type alias Model =
-    { errors : List Error
+    { error : Maybe Http.Error
     , query : String
     , response : Maybe SearchResult
     }
@@ -31,14 +37,10 @@ type alias Model =
 
 initialModel : Model
 initialModel =
-    { errors = []
+    { error = Nothing
     , query = ""
     , response = Nothing
     }
-
-
-type alias Error =
-    ( FormField, String )
 
 
 type Msg
@@ -63,26 +65,19 @@ update msg model =
             ( model, Cmd.none )
 
         SubmitForm ->
-            if List.length model.errors == 0 then
-                ( { model | errors = [], response = Nothing }
-                --, Http.request Response (postRequest model)
-                , getQuery model.query
-                --, Cmd.none
-                )
-            else
-                ( { model | errors = model.errors }
-                , Cmd.none
-                )
+            ( { model | error = Nothing, response = Nothing }
+            , getQuery model.query
+            )
 
         SetField field value ->
             ( setField field value model, Cmd.none )
 
         Response (Ok response) ->
-            ( { model | response = Just response }, Cmd.none )
+            ( { model | error = Nothing, response = Just response }, Cmd.none )
 
         Response (Err error) ->
-            --( { model | response = Just (error ++ " - See the Console for more details.") }, Cmd.none )
-            ( { model | response = Just (SearchResult error -1 -1) }, Cmd.none )
+            ( { model | error = Just error, response = Nothing }, Cmd.none )
+
 
 
 
@@ -98,10 +93,19 @@ getQuery query =
 
 searchQueryDecoder: Decoder SearchResult
 searchQueryDecoder =
-    map3 SearchResult
+    map4 SearchResult
         (field "query" string)
         (field "page_num" int)
         (field "page_size" int)
+        (field "results" (list artifactDecoder))
+
+
+artifactDecoder : Decoder Artifact
+artifactDecoder =
+  map2 Artifact
+      (field "name" string)
+      (field "version" string)
+
 
 -- HELPERS
 
@@ -131,13 +135,17 @@ onEnter msg =
 
 -- VIEWS
 
+viewArtifact : Artifact -> Html msg
+viewArtifact artifact =
+    div [] [ text (artifact.name ++ " v" ++ artifact.version) ]
 
 viewResponse : SearchResult -> Html msg
 viewResponse response =
     div [ class "response-container" ]
-        [ h2 [] [ text "Response" ]
-        , textarea []
+        [ h2 [] [ text "Results" ]
+        , div []
             [ text response.query ]
+        , div [] ((List.map viewArtifact) response.results)
         , div []
             [ text (String.fromInt response.page_num) ]
         , div []
@@ -145,9 +153,28 @@ viewResponse response =
         ]
 
 
+viewError : Http.Error -> Html msg
+viewError error =
+    div [ class "error-container" ]
+        [ h2 [] [ text "Search Errors" ]
+        , div [] (case error of
+            Http.BadUrl url ->
+                [ text ("Bad URL: " ++ url)]
+            Http.Timeout ->
+                [ text "Network timeout" ]
+            Http.NetworkError ->
+                [ text "Network error" ]
+            Http.BadStatus code ->
+                [ text ("Bad status: " ++ String.fromInt code) ]
+            Http.BadBody body ->
+                [ text body ]
+        )
+        ]
+
+
 viewUtils :
-    { a | response : Maybe SearchResult }
-    -> ({ a | response : Maybe SearchResult } -> Html msg)
+    { a | error : Maybe Http.Error, response : Maybe SearchResult }
+    -> ({ a | error : Maybe Http.Error, response : Maybe SearchResult } -> Html msg)
     -> Html msg
 viewUtils model viewF =
     div []
@@ -159,16 +186,14 @@ viewUtils model viewF =
 
             Nothing ->
                 text ""
+        , case model.error of
+            Just error ->
+                viewError error
+
+            Nothing ->
+                text ""
         , viewFooter
         ]
-
-
-viewU :
-    { a | response : Maybe SearchResult }
-    -> ({ a | response : Maybe SearchResult } -> Html msg)
-    -> Html msg
-viewU =
-    viewUtils
 
 
 viewHeader : Html msg
@@ -187,7 +212,7 @@ viewFooter =
 
 view : Model -> Html Msg
 view model =
-    viewU model viewForm
+    viewUtils model viewForm
 
 
 viewForm : Model -> Html Msg
@@ -205,24 +230,11 @@ viewForm model =
                 , value model.query
                 ]
                 []
-            , viewFormErrors Query model.errors
             ]
         , button
-            [ onClick SubmitForm
-            , classList
-                [ ( "disabled", not <| List.isEmpty model.errors ) ]
-            ]
+            [ onClick SubmitForm ]
             [ text "Submit" ]
         ]
-
-
-viewFormErrors : FormField -> List Error -> Html msg
-viewFormErrors field errors =
-    errors
-        |> List.filter (\( fieldError, _ ) -> fieldError == field)
-        |> List.map (\( _, error ) -> li [] [ text error ])
-        |> ul [ class "formErrors" ]
-
 
 
 -- MAIN
