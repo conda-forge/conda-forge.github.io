@@ -1,5 +1,7 @@
 module Main exposing (..)
 import List
+import Dict
+import String
 import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -8,56 +10,20 @@ import Http
 import Json.Decode
 import Json.Decode as Decode
 import Json.Encode as Encode
+import Json.Decode exposing (Decoder, map2, field, list, dict, string, int)
 
-
-
-viewResponse : String -> Html msg
-viewResponse response =
-    div [ class "response-container" ]
-        [ h2 [] [ text "Response" ]
-        , textarea []
-            [ text response ]
-        ]
-
-
-viewUtils :
-    { a | response : Maybe String }
-    -> ({ a | response : Maybe String } -> Html msg)
-    -> Html msg
-viewUtils model viewF =
-    div []
-        [ viewHeader
-        , viewF model
-        , case model.response of
-            Just response ->
-                viewResponse response
-
-            Nothing ->
-                text ""
-        , viewFooter
-        ]
-
-
-viewU :
-    { a | response : Maybe String }
-    -> ({ a | response : Maybe String } -> Html msg)
-    -> Html msg
-viewU =
-    viewUtils
 
 type alias Model =
     { errors : List Error
-    , email : String
-    , password : String
-    , response : Maybe String
+    , query : String
+    , response : Maybe SearchResult
     }
 
 
 initialModel : Model
 initialModel =
     { errors = []
-    , email = ""
-    , password = ""
+    , query = ""
     , response = Nothing
     }
 
@@ -70,12 +36,11 @@ type Msg
     = NoOp
     | SubmitForm
     | SetField FormField String
-    | Response (Result Http.Error String)
+    | Response (Result Http.Error SearchResult)
 
 
 type FormField
-    = Email
-    | Password
+    = Query
 
 
 
@@ -92,7 +57,8 @@ update msg model =
             if List.length model.errors == 0 then
                 ( { model | errors = [], response = Nothing }
                 --, Http.request Response (postRequest model)
-                , Cmd.none
+                , getQuery model.query
+                --, Cmd.none
                 )
             else
                 ( { model | errors = model.errors }
@@ -107,9 +73,32 @@ update msg model =
 
         Response (Err error) ->
             --( { model | response = Just (error ++ " - See the Console for more details.") }, Cmd.none )
-            ( { model | response = Just ("Some errors") }, Cmd.none )
+            ( { model | response = Just (SearchResult "Some errors" 0) }, Cmd.none )
 
 
+
+-- HTTP
+
+getQuery : String -> Cmd Msg
+getQuery query =
+  Http.get
+    { url = "http://localhost:8888/search?query=" ++ query
+    , expect = Http.expectJson Response searchQueryDecoder
+    }
+
+
+type alias SearchResult =
+    { query : String
+    , page_num : Int
+    }
+
+
+searchQueryDecoder: Decoder SearchResult
+searchQueryDecoder =
+    map2 SearchResult
+        (field "query" string)
+        (field "page_num" int)
+  -- field "results" (list (dict (field "name" string)))
 
 -- HELPERS
 
@@ -117,11 +106,8 @@ update msg model =
 setField : FormField -> String -> Model -> Model
 setField field value model =
     case field of
-        Email ->
-            { model | email = value }
-
-        Password ->
-            { model | password = value }
+        Query ->
+            { model | query = value }
 
 
 
@@ -141,6 +127,44 @@ onEnter msg =
 
 
 -- VIEWS
+
+
+viewResponse : SearchResult -> Html msg
+viewResponse response =
+    div [ class "response-container" ]
+        [ h2 [] [ text "Response" ]
+        , textarea []
+            [ text response.query ]
+        , div []
+            [ text (String.fromInt response.page_num) ]
+        ]
+
+
+viewUtils :
+    { a | response : Maybe SearchResult }
+    -> ({ a | response : Maybe SearchResult } -> Html msg)
+    -> Html msg
+viewUtils model viewF =
+    div []
+        [ viewHeader
+        , viewF model
+        , case model.response of
+            Just response ->
+                viewResponse response
+
+            Nothing ->
+                text ""
+        , viewFooter
+        ]
+
+
+viewU :
+    { a | response : Maybe SearchResult }
+    -> ({ a | response : Maybe SearchResult } -> Html msg)
+    -> Html msg
+viewU =
+    viewUtils
+
 
 viewHeader : Html msg
 viewHeader =
@@ -168,26 +192,15 @@ viewForm model =
         , onEnter SubmitForm
         ]
         [ label []
-            [ text "Email"
+            [ text "Search"
             , input
                 [ type_ "text"
-                , placeholder "Email"
-                , onInput <| SetField Email
-                , value model.email
+                , placeholder "Query"
+                , onInput <| SetField Query
+                , value model.query
                 ]
                 []
-            , viewFormErrors Email model.errors
-            ]
-        , label []
-            [ text "Password"
-            , input
-                [ type_ "password"
-                , placeholder "Password"
-                , onInput <| SetField Password
-                , value model.password
-                ]
-                []
-            , viewFormErrors Password model.errors
+            , viewFormErrors Query model.errors
             ]
         , button
             [ onClick SubmitForm
