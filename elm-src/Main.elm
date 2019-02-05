@@ -42,6 +42,7 @@ type alias ArtifactSpec =
 type alias Model =
     { error : Maybe Http.Error
     , query : String
+    , page_num : Int
     , response : Maybe SearchResult
     }
 
@@ -50,6 +51,7 @@ initialModel : Model
 initialModel =
     { error = Nothing
     , query = ""
+    , page_num = 1
     , response = Nothing
     }
 
@@ -57,13 +59,13 @@ initialModel =
 type Msg
     = NoOp
     | SubmitForm
+    | UpdatePageNum Int
     | SetField FormField String
     | Response (Result Http.Error SearchResult)
 
 
 type FormField
     = Query
-
 
 
 -- UPDATE
@@ -77,7 +79,12 @@ update msg model =
 
         SubmitForm ->
             ( { model | error = Nothing, response = Nothing }
-            , getQuery model.query
+            , getQuery model.query model.page_num
+            )
+
+        UpdatePageNum value ->
+            ( { model | page_num = value, error = Nothing, response = Nothing }
+            , getQuery model.query value
             )
 
         SetField field value ->
@@ -91,13 +98,12 @@ update msg model =
 
 
 
-
 -- HTTP
 
-getQuery : String -> Cmd Msg
-getQuery query =
+getQuery : String -> Int -> Cmd Msg
+getQuery query page_num =
   Http.get
-    { url = "http://localhost:8888/search?query=" ++ query
+    { url = "http://localhost:8888/search?query=" ++ query ++ "&page_num=" ++ (String.fromInt page_num)
     , expect = Http.expectJson Response searchQueryDecoder
     }
 
@@ -141,7 +147,6 @@ setField field value model =
 
 
 
-
 onEnter : msg -> Attribute msg
 onEnter msg =
     keyCode
@@ -158,7 +163,7 @@ onEnter msg =
 
 -- VIEWS
 
-viewArtifact : Artifact -> Html msg
+viewArtifact : Artifact -> Html Msg
 viewArtifact artifact =
     li []
         [ b [] [text (artifact.name ++ " v" ++ artifact.version)]
@@ -167,7 +172,15 @@ viewArtifact artifact =
         , i [] [text (artifact.spec.path)]
         ]
 
-viewResponse : SearchResult -> Html msg
+
+viewPageBar : SearchResult -> Html Msg
+viewPageBar response =
+    button
+        [ onClick (UpdatePageNum (response.page_num + 1)) ]
+        [ text (String.fromInt (response.page_num + 1)) ]
+
+
+viewResponse : SearchResult -> Html Msg
 viewResponse response =
     div [ class "response-container" ]
         [ h2 [] [ text "Results" ]
@@ -179,10 +192,11 @@ viewResponse response =
             [ text (String.fromInt response.page_num) ]
         , div []
             [ text (String.fromInt response.page_size) ]
+        , viewPageBar response
         ]
 
 
-viewError : Http.Error -> Html msg
+viewError : Http.Error -> Html Msg
 viewError error =
     div [ class "error-container" ]
         [ h2 [] [ text "Search Errors" ]
@@ -203,8 +217,8 @@ viewError error =
 
 viewUtils :
     { a | error : Maybe Http.Error, response : Maybe SearchResult }
-    -> ({ a | error : Maybe Http.Error, response : Maybe SearchResult } -> Html msg)
-    -> Html msg
+    -> ({ a | error : Maybe Http.Error, response : Maybe SearchResult } -> Html Msg)
+    -> Html Msg
 viewUtils model viewF =
     div []
         [ viewHeader
@@ -251,7 +265,7 @@ viewForm model =
         , onEnter SubmitForm
         ]
         [ label []
-            [ text "Search"
+            [ text "Search: "
             , input
                 [ type_ "text"
                 , placeholder "Query"
