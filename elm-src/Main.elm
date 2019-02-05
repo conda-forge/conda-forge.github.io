@@ -2,6 +2,7 @@ module Main exposing (..)
 import List
 import Dict
 import String
+import Basics
 import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -173,11 +174,26 @@ viewArtifact artifact =
         ]
 
 
-viewPageBar : SearchResult -> Html Msg
-viewPageBar response =
+viewPageBarLink : Int -> Html Msg
+viewPageBarLink page_num =
     button
-        [ onClick (UpdatePageNum (response.page_num + 1)) ]
-        [ text (String.fromInt (response.page_num + 1)) ]
+        [ onClick (UpdatePageNum page_num) ]
+        [ text (String.fromInt page_num) ]
+
+
+viewPageBar : Int -> Html Msg
+viewPageBar page_num =
+    div [ class "page-bar"] (List.concat
+        [ if page_num == 1 then
+            [ text "" ]
+          else
+            List.range (Basics.max (page_num - 5) 1) (page_num - 1)
+                |> List.map viewPageBarLink
+        , [ text (String.fromInt page_num) ]
+        , List.range (page_num + 1) (Basics.max (page_num + 5) 10)
+                |> List.map viewPageBarLink
+        ])
+
 
 
 viewResponse : SearchResult -> Html Msg
@@ -185,14 +201,11 @@ viewResponse response =
     div [ class "response-container" ]
         [ h2 [] [ text "Results" ]
         , div []
-            [ text response.query ]
+            [ text ("searched: '" ++ response.query ++ "'") ]
+        , viewPageBar response.page_num
         , ol [start ((response.page_num - 1) * response.page_size + 1)]
             ((List.map viewArtifact) response.results)
-        , div []
-            [ text (String.fromInt response.page_num) ]
-        , div []
-            [ text (String.fromInt response.page_size) ]
-        , viewPageBar response
+        , viewPageBar response.page_num
         ]
 
 
@@ -248,9 +261,14 @@ viewHeader =
 viewFooter : Html msg
 viewFooter =
     div [ class "footer" ]
-        [ a [ href "https://github.com/lucamug/elm-form-examples" ]
-            [ text "[ code ] " ]
-        , a [ href "https://medium.com/@l.mugnaini/forms-in-elm-validation-tutorial-and-examples-2339830055da" ] [ text " [ article ]" ]
+        [ a [ href "https://conda-forge.org/" ]
+            [ text "[ homepage ] " ]
+        , a [ href "https://conda-forge.org/docs/" ]
+            [ text "[ docs ] " ]
+        , a [ href "https://twitter.com/condaforge" ]
+            [ text " [ twitter ]" ]
+        , a [ href "https://www.flipcause.com/secure/cause_pdetails/NDA0OTk=" ]
+            [ text "[ donate ] " ]
         ]
 
 view : Model -> Html Msg
