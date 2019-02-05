@@ -10,7 +10,7 @@ import Http
 import Json.Decode
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Json.Decode exposing (Decoder, map2, map4, field, list, dict, string, int)
+import Json.Decode exposing (Decoder, map2, map3, map4, map5, field, list, dict, string, int)
 
 
 -- Types
@@ -26,7 +26,18 @@ type alias SearchResult =
 type alias Artifact =
     { name : String
     , version : String
+    , spec : ArtifactSpec
     }
+
+
+type alias ArtifactSpec =
+    { path : String
+    , pkg : String
+    , channel : String
+    , arch : String
+    , name : String
+    }
+
 
 type alias Model =
     { error : Maybe Http.Error
@@ -102,9 +113,21 @@ searchQueryDecoder =
 
 artifactDecoder : Decoder Artifact
 artifactDecoder =
-  map2 Artifact
-      (field "name" string)
-      (field "version" string)
+    map3 Artifact
+        (field "name" string)
+        (field "version" string)
+        (field "spec" artifactSpecDecoder)
+
+
+artifactSpecDecoder : Decoder ArtifactSpec
+artifactSpecDecoder =
+    map5 ArtifactSpec
+        (field "path" string)
+        (field "pkg" string)
+        (field "channel" string)
+        (field "arch" string)
+        (field "name" string)
+
 
 
 -- HELPERS
@@ -137,7 +160,12 @@ onEnter msg =
 
 viewArtifact : Artifact -> Html msg
 viewArtifact artifact =
-    div [] [ text (artifact.name ++ " v" ++ artifact.version) ]
+    li []
+        [ b [] [text (artifact.name ++ " v" ++ artifact.version)]
+        , br [] []
+        , text ("artifact: ")
+        , i [] [text (artifact.spec.path)]
+        ]
 
 viewResponse : SearchResult -> Html msg
 viewResponse response =
@@ -145,7 +173,7 @@ viewResponse response =
         [ h2 [] [ text "Results" ]
         , div []
             [ text response.query ]
-        , div [] ((List.map viewArtifact) response.results)
+        , ul [] ((List.map viewArtifact) response.results)
         , div []
             [ text (String.fromInt response.page_num) ]
         , div []
