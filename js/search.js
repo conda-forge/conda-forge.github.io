@@ -2834,7 +2834,7 @@ var _VirtualDom_mapEventTuple = F2(function(func, tuple)
 var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
-		o: func(record.o),
+		p: func(record.p),
 		W: record.W,
 		T: record.T
 	}
@@ -3104,7 +3104,7 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		// 3 = Custom
 
 		var value = result.a;
-		var message = !tag ? value : tag < 3 ? value.a : value.o;
+		var message = !tag ? value : tag < 3 ? value.a : value.p;
 		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.W;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
@@ -4486,13 +4486,13 @@ function _Browser_load(url)
 	}));
 }
 var elm$core$Maybe$Nothing = {$: 1};
-var author$project$Main$initialModel = {t: elm$core$Maybe$Nothing, q: 1, r: '', x: elm$core$Maybe$Nothing};
+var author$project$Main$initialModel = {t: elm$core$Maybe$Nothing, m: 1, r: '', x: elm$core$Maybe$Nothing};
 var author$project$Main$Response = function (a) {
 	return {$: 4, a: a};
 };
 var author$project$Main$SearchResult = F4(
 	function (query, page_num, page_size, results) {
-		return {q: page_num, ag: page_size, r: query, ar: results};
+		return {m: page_num, ag: page_size, r: query, ar: results};
 	});
 var author$project$Main$Artifact = F3(
 	function (name, version, spec) {
@@ -5893,14 +5893,14 @@ var author$project$Main$getQuery = F2(
 		return elm$http$Http$get(
 			{
 				aG: A2(elm$http$Http$expectJson, author$project$Main$Response, author$project$Main$searchQueryDecoder),
-				aX: 'http://localhost:8888/search?query=' + (query + ('&page_num=' + elm$core$String$fromInt(page_num)))
+				aX: 'http://35.192.108.152/search?query=' + (query + ('&page_num=' + elm$core$String$fromInt(page_num)))
 			});
 	});
 var author$project$Main$setField = F3(
 	function (field, value, model) {
 		return _Utils_update(
 			model,
-			{r: value});
+			{m: 1, r: value});
 	});
 var elm$core$Platform$Cmd$batch = _Platform_batch;
 var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
@@ -5914,13 +5914,13 @@ var author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{t: elm$core$Maybe$Nothing, x: elm$core$Maybe$Nothing}),
-					A2(author$project$Main$getQuery, model.r, model.q));
+					A2(author$project$Main$getQuery, model.r, model.m));
 			case 2:
 				var value = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{t: elm$core$Maybe$Nothing, q: value, x: elm$core$Maybe$Nothing}),
+						{t: elm$core$Maybe$Nothing, m: value, x: elm$core$Maybe$Nothing}),
 					A2(author$project$Main$getQuery, model.r, value));
 			case 3:
 				var field = msg.a;
@@ -6355,15 +6355,15 @@ var author$project$Main$viewResponse = function (response) {
 					[
 						elm$html$Html$text('searched: \'' + (response.r + '\''))
 					])),
-				author$project$Main$viewPageBar(response.q),
+				author$project$Main$viewPageBar(response.m),
 				A2(
 				elm$html$Html$ol,
 				_List_fromArray(
 					[
-						elm$html$Html$Attributes$start(((response.q - 1) * response.ag) + 1)
+						elm$html$Html$Attributes$start(((response.m - 1) * response.ag) + 1)
 					]),
 				elm$core$List$map(author$project$Main$viewArtifact)(response.ar)),
-				author$project$Main$viewPageBar(response.q)
+				author$project$Main$viewPageBar(response.m)
 			]));
 };
 var author$project$Main$viewUtils = F2(

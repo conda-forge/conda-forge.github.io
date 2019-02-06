@@ -103,7 +103,7 @@ update msg model =
 getQuery : String -> Int -> Cmd Msg
 getQuery query page_num =
   Http.get
-    { url = "http://localhost:8888/search?query=" ++ query ++ "&page_num=" ++ (String.fromInt page_num)
+    { url = "http://35.192.108.152/search?query=" ++ query ++ "&page_num=" ++ (String.fromInt page_num)
     , expect = Http.expectJson Response searchQueryDecoder
     }
 
@@ -143,7 +143,7 @@ setField : FormField -> String -> Model -> Model
 setField field value model =
     case field of
         Query ->
-            { model | query = value }
+            { model | query = value, page_num = 1 }
 
 
 
