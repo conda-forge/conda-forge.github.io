@@ -14,7 +14,7 @@ take much interest in the staged-recipes review process.
 
 For transparency, our process is to have the core team "vote" on adding new
 members. When we have a new member candidate, we ask the core team to vote
-yes/no and give the team 24h to vote. The person will then be given merge
+yes/no and give the team 7 days to vote. The person will then be given merge
 rights to conda-forge/staged-recipes so that they can help us review and merge
 submissions more quickly!
 
