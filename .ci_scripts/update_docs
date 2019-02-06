@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # This script is to be run in a TravisCI context.
-set -e
+set -ex
 
 if [ -n "$GH_TOKEN" ]; then
     # Make sure we are on the latest commit on `master` if we are planning to deploy the change.
