@@ -5,6 +5,7 @@ from xonsh.tools import print_color
 
 
 $RAISE_SUBPROC_ERROR = True
+$XONSH_SHOW_TRACEBACK = False
 SOURCES = ['Search.elm']
 with ${...}.swap(RAISE_SUBPROC_ERROR=False):
     HAVE_UGLIFY = bool(!(which uglifyjs e>o))

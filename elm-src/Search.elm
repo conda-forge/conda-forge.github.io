@@ -12,32 +12,10 @@ import Json.Decode as Decode
 import Json.Encode as Encode
 import Json.Decode exposing (Decoder, map2, map3, map4, map5, field, list, dict, string, int)
 
+import LibcflibRest exposing (SearchResult, searchResultDecoder, Artifact)
+
 
 -- Types
-
-type alias SearchResult =
-    { query : String
-    , page_num : Int
-    , page_size : Int
-    , results : List Artifact
-    }
-
-
-type alias Artifact =
-    { name : String
-    , version : String
-    , spec : ArtifactSpec
-    }
-
-
-type alias ArtifactSpec =
-    { path : String
-    , pkg : String
-    , channel : String
-    , arch : String
-    , name : String
-    }
-
 
 type alias Model =
     { error : Maybe Http.Error
@@ -104,36 +82,8 @@ getQuery : String -> Int -> Cmd Msg
 getQuery query page_num =
   Http.get
     { url = "http://35.192.108.152/search?query=" ++ query ++ "&page_num=" ++ (String.fromInt page_num)
-    , expect = Http.expectJson Response searchQueryDecoder
+    , expect = Http.expectJson Response searchResultDecoder
     }
-
-
-searchQueryDecoder: Decoder SearchResult
-searchQueryDecoder =
-    map4 SearchResult
-        (field "query" string)
-        (field "page_num" int)
-        (field "page_size" int)
-        (field "results" (list artifactDecoder))
-
-
-artifactDecoder : Decoder Artifact
-artifactDecoder =
-    map3 Artifact
-        (field "name" string)
-        (field "version" string)
-        (field "spec" artifactSpecDecoder)
-
-
-artifactSpecDecoder : Decoder ArtifactSpec
-artifactSpecDecoder =
-    map5 ArtifactSpec
-        (field "path" string)
-        (field "pkg" string)
-        (field "channel" string)
-        (field "arch" string)
-        (field "name" string)
-
 
 
 -- HELPERS
