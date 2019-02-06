@@ -11,12 +11,15 @@ Pinned Announcements
 
     No new python 3.5 packages will be built after 2018-10-01.
 
-:2018‑09‑20:  The compiler migration is in full swing.  The bot will be making the rounds and
-    modernizing more than 4000 packages.  This is going to take a few months to get done so
-    bear with us.
+:2019‑01‑22: It has happened! Conda-forge has migrated to the latest compilers 🎉.
+
+    If you:
+      * maintain a compiled feedstock, it will likely need to be rerender
+      * need to roll back to the old compilers, you can use the "cf201901" label
 
 Announcements
 -------------
+
 :2018‑10‑12: The rebuild is moving along nicely with almost a third of packages completed.
 
     Recently completed are numpy and openblas which should open up much of the python numeric stack.
@@ -24,9 +27,10 @@ Announcements
 
 :2018‑09‑24: A minimal python 3.7 build is now available across all platforms and both compilers!
 
+:2018‑09‑20:  The compiler migration is in full swing.  The bot will be making the rounds and
+    modernizing more than 4000 packages.  This is going to take a few months to get done so
+    bear with us.
+
 :2018‑09‑10: Conda forge now has a magical status bar for tracking the progress of migrations.
     
     You can find this at `conda-forge.org/status <https://conda-forge.org/status>`_.
-
-
-    
