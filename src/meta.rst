@@ -10,7 +10,7 @@ Build from Tarballs, Not Repos
 ------------------------------
 
 Conda-forge requires that building from tarballs using the
-``url`` and ``fn`` keys in the ``build`` section. A recipe
+``url`` (optionally ``fn``, filename) key in the ``build`` section. A recipe
 should not use the ``git_url``, ``git_ver``, and similar
 keys. There are three main reasons for this:
 
@@ -25,6 +25,10 @@ keys. There are three main reasons for this:
 If a package does not have the ability to build from a tarball, this is
 considered a bug and should be reported upstream. In the worst case,
 the source can be patched to include the relevant build information.
+
+Note that the ``fn`` key can be omitted, if the last part of the url specifies
+the filename already and the server does not perform some kind of redirection
+to a different, therefore unexpected filename.
 
 
 Packaging the License Manually
