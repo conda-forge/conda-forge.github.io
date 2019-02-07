@@ -4,9 +4,12 @@ import os
 from xonsh.tools import print_color
 
 
+SOURCES = [
+    'Artifact.elm',
+    'Search.elm',
+]
 $RAISE_SUBPROC_ERROR = True
 $XONSH_SHOW_TRACEBACK = False
-SOURCES = ['Search.elm']
 with ${...}.swap(RAISE_SUBPROC_ERROR=False):
     HAVE_UGLIFY = bool(!(which uglifyjs e>o))
 
@@ -20,6 +23,7 @@ for source in SOURCES:
     js_target = os.path.join('js', base + '.js')
     print_color('Compiling {YELLOW}' + src + '{NO_COLOR} -> {GREEN}' +
                 js_target + '{NO_COLOR}')
+    $XONSH_SHOW_TRACEBACK = False
     ![elm make --optimize --output @(js_target) @(src)]
     new_files = [js_target]
     min_target = os.path.join('js', base + '.min.js')

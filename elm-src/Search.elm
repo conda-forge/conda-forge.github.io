@@ -10,7 +10,6 @@ import Http
 import Json.Decode
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Json.Decode exposing (Decoder, map2, map3, map4, map5, field, list, dict, string, int)
 
 import LibcflibRest exposing (SearchResult, searchResultDecoder, Artifact)
 
