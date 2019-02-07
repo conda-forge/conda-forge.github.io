@@ -23,10 +23,10 @@ import LibcflibRest exposing (Artifact, artifactDecoder)
 
 type alias Model =
     { error : Maybe Http.Error
-    , response : Maybe Artifact
     , url : Url.Url
     , key : Nav.Key
-    , query : Maybe UrlQuery
+    , query : UrlQuery
+    , response : Maybe Artifact
     }
 
 
@@ -34,13 +34,12 @@ initialModel : Url.Url -> Nav.Key -> Model
 initialModel url key =
     Model
         Nothing
-        Nothing
         url
         key
         (parseUrlQuery url)
-
---type Route
-    --= ArtifactQuery UrlQuery
+        Nothing
+        -- (artFromUrl (parseUrlQuery url))
+        --(artifactFromUrl (parseUrlQuery url))
 
 
 type alias UrlQuery =
@@ -52,18 +51,18 @@ type alias UrlQuery =
 
 
 
---routeParser : Parser (Route -> a) a
---routeParser =
---    map ArtifactQuery (s "artifact" <?> Query.string "pkg")
-
-parseUrlQuery : Url.Url -> Maybe UrlQuery
-parseUrlQuery url =
+maybeParseUrlQuery : Url.Url -> Maybe UrlQuery
+maybeParseUrlQuery url =
     parse (query (map4 UrlQuery
         (string "pkg")
         (string "channel")
         (string "arch")
         (string "name")
     )) url
+
+parseUrlQuery : Url.Url -> UrlQuery
+parseUrlQuery url =
+    Maybe.withDefault (UrlQuery (Just "") (Just "") (Just "") (Just "")) (maybeParseUrlQuery url)
 
 type Msg
     = NoOp
@@ -112,6 +111,15 @@ getArtifact pkg channel arch name =
     }
 
 
+artifactFromUrl : UrlQuery -> Cmd Msg
+artifactFromUrl urlquery =
+    getArtifact (Maybe.withDefault "" urlquery.pkg)
+                (Maybe.withDefault "" urlquery.channel)
+                (Maybe.withDefault "" urlquery.arch)
+                (Maybe.withDefault "" urlquery.name)
+
+
+
 -- VIEWS
 
 viewArtifact : Artifact -> Html Msg
@@ -154,7 +162,7 @@ viewBody model =
                 viewArtifact response
 
             Nothing ->
-                text ""
+                text "failed"
         , case model.error of
             Just error ->
                 viewError error
