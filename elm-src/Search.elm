@@ -115,7 +115,13 @@ onEnter msg =
 viewArtifact : Artifact -> Html Msg
 viewArtifact artifact =
     li []
-        [ b [] [text (artifact.name ++ " v" ++ artifact.version)]
+        [ b [] [
+          a [ href ("/artifact.html?pkg=" ++ artifact.spec.pkg ++
+                    "&channel=" ++ artifact.spec.channel ++
+                    "&arch=" ++ artifact.spec.arch ++
+                    "&name=" ++ artifact.spec.name) ]
+            [ text (artifact.name ++ " v" ++ artifact.version) ]
+        ]
         , br [] []
         , text ("artifact: ")
         , i [] [text (artifact.spec.path)]

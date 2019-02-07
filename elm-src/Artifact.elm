@@ -149,7 +149,7 @@ viewUrlQuery r =
                 (Maybe.withDefault "<no-pkg>" urlquery.pkg) ++ "/" ++
                 (Maybe.withDefault "<no-channel" urlquery.channel) ++ "/" ++
                 (Maybe.withDefault "<no-arch>" urlquery.arch) ++ "/" ++
-                (Maybe.withDefault "<no-name" urlquery.name) )]
+                (Maybe.withDefault "<no-name>" urlquery.name) )]
             ]
 
 viewArtifact : Artifact -> Html Msg
@@ -227,14 +227,13 @@ view : Model -> Browser.Document Msg
 view model =
     Browser.Document
         "Conda-Forge Artifact"  -- title
-        [viewBody model]       -- body
+        [viewBody model]        -- body
 
 
 -- MAIN
 
 init : Decode.Value -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
-    --( initialModel url key, Cmd.none  )
     update (UrlChanged url) (initialModel url key)
 
 
