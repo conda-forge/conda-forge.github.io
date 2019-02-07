@@ -3,6 +3,7 @@ import Dict
 import String
 import Basics
 import Browser
+import Browser.Navigation as Nav
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -10,6 +11,7 @@ import Http
 import Json.Decode
 import Json.Decode as Decode
 import Json.Encode as Encode
+import Url
 import Url.Parser exposing ((</>), (<?>), s)
 import Url.Parser.Query exposing (Parser, map4, string)
 import Url.Parser.Query as Query
@@ -22,12 +24,20 @@ import LibcflibRest exposing (Artifact, artifactDecoder)
 type alias Model =
     { error : Maybe Http.Error
     , response : Maybe Artifact
+    , url : Url.Url
+    , key : Nav.Key
+    , query : Maybe UrlQuery
     }
 
 
-initialModel : Model
-initialModel =
-    getArtifact (parseUrlQuery s)
+initialModel : Url.Url -> Nav.Key -> Model
+initialModel url key =
+    { error = Nothing
+    , response = Nothing
+    , url = url
+    , key = key
+    , query = parseUrlQuery url
+    }
 
 
 type alias UrlQuery =
@@ -47,6 +57,8 @@ parseUrlQuery =
 
 type Msg
     = NoOp
+    | LinkClicked Browser.UrlRequest
+    | UrlChanged Url.Url
     | Response (Result Http.Error Artifact)
 
 
@@ -59,6 +71,17 @@ update msg model =
     case msg of
         NoOp ->
             ( model, Cmd.none )
+
+        LinkClicked urlRequest ->
+            case urlRequest of
+                Browser.Internal url ->
+                    ( model, Nav.pushUrl model.key (Url.toString url) )
+
+                Browser.External href ->
+                    ( model, Nav.load href )
+
+        UrlChanged url ->
+            ( { model | url = url, query = Just parseUrlQuery url }, Cmd.none )
 
         Response (Ok response) ->
             ( { model | error = Nothing, response = Just response }, Cmd.none )
@@ -151,18 +174,25 @@ viewFooter =
             [ text "[ donate ] " ]
         ]
 
-view : Model -> Html Msg
+view : Model -> Browser.Document Msg
 view model =
     viewUtils model
 
 
 -- MAIN
 
+init : Decode.Value -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
+init flags url key =
+    ( initialModel url key, Cmd.none  )
+
+
 main : Program Decode.Value Model Msg
 main =
-  Browser.element
-        { init = \_ -> (initialModel, Cmd.none)
+  Browser.application
+        { init = init
         , view = view
         , update = update
         , subscriptions = \_ -> Sub.none
+        , onUrlChange = UrlChanged
+        , onUrlRequest = LinkClicked
         }
