@@ -41,7 +41,7 @@ about writing the <code class="docutils literal notranslate"><span class="pre">m
 <div class="section" id="build-from-tarballs-not-repos">
 <h2>Build from Tarballs, Not Repos<a class="headerlink" href="#build-from-tarballs-not-repos" title="Permalink to this headline">¶</a></h2>
 <p>Conda-forge requires that building from tarballs using the
-<code class="docutils literal notranslate"><span class="pre">url</span></code> and <code class="docutils literal notranslate"><span class="pre">fn</span></code> keys in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section. A recipe
+<code class="docutils literal notranslate"><span class="pre">url</span></code> (optionally <code class="docutils literal notranslate"><span class="pre">fn</span></code>, filename) key in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section. A recipe
 should not use the <code class="docutils literal notranslate"><span class="pre">git_url</span></code>, <code class="docutils literal notranslate"><span class="pre">git_ver</span></code>, and similar
 keys. There are three main reasons for this:</p>
 <ul class="simple">
@@ -56,6 +56,9 @@ to remove a repo once it is created. This can be avoided by using a tarball.</li
 <p>If a package does not have the ability to build from a tarball, this is
 considered a bug and should be reported upstream. In the worst case,
 the source can be patched to include the relevant build information.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">fn</span></code> key can be omitted, if the last part of the url specifies
+the filename already and the server does not perform some kind of redirection
+to a different, therefore unexpected filename.</p>
 </div>
 <div class="section" id="packaging-the-license-manually">
 <h2>Packaging the License Manually<a class="headerlink" href="#packaging-the-license-manually" title="Permalink to this headline">¶</a></h2>
