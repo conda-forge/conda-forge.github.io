@@ -16,7 +16,7 @@ import Url.Parser exposing (Parser, parse, query, (</>), (<?>), s, oneOf, map)
 import Url.Parser.Query exposing (map4, string)
 import Url.Parser.Query as Query
 
-import LibcflibRest exposing (Artifact, artifactDecoder)
+import LibcflibRest exposing (Artifact, artifactDecoder, ArtifactAbout, artifactAboutDecoder)
 
 
 -- Types
@@ -151,13 +151,26 @@ viewUrlQuery r =
                 (Maybe.withDefault "<no-name>" urlquery.name) )]
             ]
 
+viewDecoded : (Decode.Decoder valType) -> Decode.Value -> (valType -> Html Msg) -> Html Msg
+viewDecoded decoder val htmlMaker =
+   case (Decode.decodeValue decoder val) of
+        Ok v ->
+            htmlMaker v
+
+        Err error ->
+            text (Decode.errorToString error)
+
 viewArtifact : Artifact -> Html Msg
 viewArtifact artifact =
-    li []
+    div []
         [ b [] [text (artifact.name ++ " v" ++ artifact.version)]
         , br [] []
-        , text ("artifact: ")
-        , i [] [text (artifact.spec.path)]
+        , viewDecoded artifactAboutDecoder artifact.about (\about -> div [ class "about" ]
+            [ text about.summary
+            , br [] []
+            , a [ href about.home ] [text "[website]"]
+            , text (" - " ++ about.license)
+            ])
         ]
 
 
@@ -181,7 +194,10 @@ viewError error =
 
 
 viewBody :
-    { a | error : Maybe Http.Error, response : Maybe Artifact, route : Route, url : Url.Url}
+    { a | error : Maybe Http.Error,
+          response : Maybe Artifact,
+          route : Route,
+          url : Url.Url}
     -> Html Msg
 viewBody model =
     div []

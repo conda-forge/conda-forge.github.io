@@ -7,7 +7,8 @@ import String
 import Json.Decode
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Json.Decode exposing (Decoder, map2, map3, map4, map5, field, list, dict, string, int)
+import Json.Decode exposing (Decoder, map2, map3, map4, map5, field, list, dict,
+    string, int, Value, value)
 
 
 -- Types & Decoders
@@ -32,15 +33,17 @@ type alias Artifact =
     { name : String
     , version : String
     , spec : ArtifactSpec
+    -- The following we normally don't need to decode
+    , about : Value
     }
 
 artifactDecoder : Decoder Artifact
 artifactDecoder =
-    map3 Artifact
+    map4 Artifact
         (field "name" string)
         (field "version" string)
         (field "spec" artifactSpecDecoder)
-
+        (field "about" value)
 
 type alias ArtifactSpec =
     { path : String
@@ -58,3 +61,17 @@ artifactSpecDecoder =
         (field "channel" string)
         (field "arch" string)
         (field "name" string)
+
+
+type alias ArtifactAbout =
+    { license : String
+    , home : String
+    , summary : String
+    }
+
+artifactAboutDecoder : Decoder ArtifactAbout
+artifactAboutDecoder =
+    map3 ArtifactAbout
+        (field "license" string)
+        (field "home" string)
+        (field "summary" string)
