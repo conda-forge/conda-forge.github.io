@@ -174,6 +174,9 @@ viewArtifact artifact =
             , br [] []
             , a [ href about.home ] [text "[website]"]
             , text (" - " ++ about.license)
+            , case about.description of
+                Just desc -> p [] [text desc]
+                Nothing -> text ""
             ])
         , br [] []
         , br [] []

@@ -9,7 +9,7 @@ import Json.Decode as Decode
 import Json.Encode as Encode
 import Json.Decode exposing (Decoder,
     map, map2, map3, map4, map5,
-    field, list, dict,
+    field, maybe, list, dict,
     string, int, Value, value)
 
 
@@ -71,14 +71,16 @@ type alias ArtifactAbout =
     { license : String
     , home : String
     , summary : String
+    , description : Maybe String
     }
 
 artifactAboutDecoder : Decoder ArtifactAbout
 artifactAboutDecoder =
-    map3 ArtifactAbout
+    map4 ArtifactAbout
         (field "license" string)
         (field "home" string)
         (field "summary" string)
+        (maybe (field "description" string))
 
 type alias ArtifactRenderedRecipe =
     { requirements : Dict.Dict String (List String)
