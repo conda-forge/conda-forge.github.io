@@ -115,8 +115,7 @@ update msg model =
 getArtifact : String -> String -> String -> String -> Cmd Msg
 getArtifact pkg channel arch name =
   Http.get
-    --{ url = "http://35.192.108.152/search?query=" ++ query ++ "&page_num=" ++ (String.fromInt page_num)
-    { url = "http://localhost:8888/artifact?pkg=" ++ pkg ++ "&channel=" ++ channel ++ "&arch=" ++ arch ++ "&name=" ++ name
+    { url = "http://35.192.108.152/artifact?pkg=" ++ pkg ++ "&channel=" ++ channel ++ "&arch=" ++ arch ++ "&name=" ++ name
     , expect = Http.expectJson Response artifactDecoder
     }
 
