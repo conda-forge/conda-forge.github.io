@@ -122,6 +122,16 @@ artifactFromUrl urlquery =
 
 -- VIEWS
 
+viewUrlQuery : UrlQuery -> Html Msg
+viewUrlQuery urlquery =
+    div [ class "url-query-text" ]
+        [ h4 [] [ text (
+            (Maybe.withDefault "<no-pkg>" urlquery.pkg) ++ "/" ++
+            (Maybe.withDefault "<no-channel" urlquery.channel) ++ "/" ++
+            (Maybe.withDefault "<no-arch>" urlquery.arch) ++ "/" ++
+            (Maybe.withDefault "<no-name" urlquery.name) )]
+        ]
+
 viewArtifact : Artifact -> Html Msg
 viewArtifact artifact =
     li []
@@ -152,11 +162,13 @@ viewError error =
 
 
 viewBody :
-    { a | error : Maybe Http.Error, response : Maybe Artifact }
+    { a | error : Maybe Http.Error, response : Maybe Artifact, query : UrlQuery, url : Url.Url}
     -> Html Msg
 viewBody model =
     div []
         [ viewHeader
+        , text (Url.toString model.url)
+        , viewUrlQuery model.query
         , case model.response of
             Just response ->
                 viewArtifact response
