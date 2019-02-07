@@ -1858,8 +1858,8 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 		flagDecoder,
 		args,
 		impl.aG,
-		impl.aZ,
-		impl.aW,
+		impl.a$,
+		impl.aY,
 		function() { return function() {} }
 	);
 });
@@ -2331,9 +2331,9 @@ var _Http_toTask = F3(function(router, toTask, request)
 		elm$core$Maybe$isJust(request.j) && _Http_track(router, xhr, request.j.a);
 
 		try {
-			xhr.open(request.h, request.a_, true);
+			xhr.open(request.h, request.a0, true);
 		} catch (e) {
-			return done(elm$http$Http$BadUrl_(request.a_));
+			return done(elm$http$Http$BadUrl_(request.a0));
 		}
 
 		_Http_configureRequest(xhr, request);
@@ -2377,9 +2377,9 @@ function _Http_toResponse(toBody, xhr)
 function _Http_toMetadata(xhr)
 {
 	return {
-		a_: xhr.responseURL,
+		a0: xhr.responseURL,
 		ao: xhr.status,
-		aV: xhr.statusText,
+		aX: xhr.statusText,
 		e: _Http_parseHeaders(xhr.getAllResponseHeaders())
 	};
 }
@@ -2475,7 +2475,7 @@ function _Http_track(router, xhr, tracker)
 	xhr.upload.addEventListener('progress', function(event) {
 		if (xhr.c) { return; }
 		_Scheduler_rawSpawn(A2(elm$core$Platform$sendToSelf, router, _Utils_Tuple2(tracker, elm$http$Http$Sending({
-			aT: event.loaded,
+			aV: event.loaded,
 			R: event.total
 		}))));
 	});
@@ -4059,10 +4059,10 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 		flagDecoder,
 		args,
 		impl.aG,
-		impl.aZ,
-		impl.aW,
+		impl.a$,
+		impl.aY,
 		function(sendToApp, initialModel) {
-			var view = impl.a0;
+			var view = impl.a2;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -4095,11 +4095,11 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 		flagDecoder,
 		args,
 		impl.aG,
-		impl.aZ,
-		impl.aW,
+		impl.a$,
+		impl.aY,
 		function(sendToApp, initialModel) {
 			var divertHrefToApp = impl.H && impl.H(sendToApp)
-			var view = impl.a0;
+			var view = impl.a2;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -4112,7 +4112,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.aY) && (_VirtualDom_doc.title = title = doc.aY);
+				(title !== doc.a_) && (_VirtualDom_doc.title = title = doc.a_);
 			});
 		}
 	);
@@ -4203,9 +4203,9 @@ function _Browser_application(impl)
 		{
 			return A3(impl.aG, flags, _Browser_getUrl(), key);
 		},
-		a0: impl.a0,
-		aZ: impl.aZ,
-		aW: impl.aW
+		a2: impl.a2,
+		a$: impl.a$,
+		aY: impl.aY
 	});
 }
 
@@ -4489,11 +4489,11 @@ var elm$core$Maybe$Nothing = {$: 1};
 var author$project$Main$initialModel = {r: elm$core$Maybe$Nothing, aL: 1, aP: '', v: elm$core$Maybe$Nothing};
 var author$project$LibcflibRest$SearchResult = F4(
 	function (query, page_num, page_size, results) {
-		return {aL: page_num, aM: page_size, aP: query, aR: results};
+		return {aL: page_num, aM: page_size, aP: query, aT: results};
 	});
-var author$project$LibcflibRest$Artifact = F4(
-	function (name, version, spec, about) {
-		return {at: about, ac: name, aU: spec, a$: version};
+var author$project$LibcflibRest$Artifact = F5(
+	function (name, version, spec, about, rendered_recipe) {
+		return {at: about, ac: name, aR: rendered_recipe, aW: spec, a1: version};
 	});
 var author$project$LibcflibRest$ArtifactSpec = F5(
 	function (path, pkg, channel, arch, name) {
@@ -4984,17 +4984,18 @@ var author$project$LibcflibRest$artifactSpecDecoder = A6(
 	A2(elm$json$Json$Decode$field, 'channel', elm$json$Json$Decode$string),
 	A2(elm$json$Json$Decode$field, 'arch', elm$json$Json$Decode$string),
 	A2(elm$json$Json$Decode$field, 'name', elm$json$Json$Decode$string));
-var elm$json$Json$Decode$map4 = _Json_map4;
 var elm$json$Json$Decode$value = _Json_decodeValue;
-var author$project$LibcflibRest$artifactDecoder = A5(
-	elm$json$Json$Decode$map4,
+var author$project$LibcflibRest$artifactDecoder = A6(
+	elm$json$Json$Decode$map5,
 	author$project$LibcflibRest$Artifact,
 	A2(elm$json$Json$Decode$field, 'name', elm$json$Json$Decode$string),
 	A2(elm$json$Json$Decode$field, 'version', elm$json$Json$Decode$string),
 	A2(elm$json$Json$Decode$field, 'spec', author$project$LibcflibRest$artifactSpecDecoder),
-	A2(elm$json$Json$Decode$field, 'about', elm$json$Json$Decode$value));
+	A2(elm$json$Json$Decode$field, 'about', elm$json$Json$Decode$value),
+	A2(elm$json$Json$Decode$field, 'rendered_recipe', elm$json$Json$Decode$value));
 var elm$json$Json$Decode$int = _Json_decodeInt;
 var elm$json$Json$Decode$list = _Json_decodeList;
+var elm$json$Json$Decode$map4 = _Json_map4;
 var author$project$LibcflibRest$searchResultDecoder = A5(
 	elm$json$Json$Decode$map4,
 	author$project$LibcflibRest$SearchResult,
@@ -5860,7 +5861,7 @@ var elm$http$Http$cmdMap = F2(
 					h: r.h,
 					i: r.i,
 					j: r.j,
-					a_: r.a_
+					a0: r.a0
 				});
 		}
 	});
@@ -5883,18 +5884,18 @@ var elm$http$Http$subscription = _Platform_leaf('Http');
 var elm$http$Http$request = function (r) {
 	return elm$http$Http$command(
 		elm$http$Http$Request(
-			{x: false, aw: r.aw, aA: r.aA, e: r.e, h: r.h, i: r.i, j: r.j, a_: r.a_}));
+			{x: false, aw: r.aw, aA: r.aA, e: r.e, h: r.h, i: r.i, j: r.j, a0: r.a0}));
 };
 var elm$http$Http$get = function (r) {
 	return elm$http$Http$request(
-		{aw: elm$http$Http$emptyBody, aA: r.aA, e: _List_Nil, h: 'GET', i: elm$core$Maybe$Nothing, j: elm$core$Maybe$Nothing, a_: r.a_});
+		{aw: elm$http$Http$emptyBody, aA: r.aA, e: _List_Nil, h: 'GET', i: elm$core$Maybe$Nothing, j: elm$core$Maybe$Nothing, a0: r.a0});
 };
 var author$project$Main$getQuery = F2(
 	function (query, page_num) {
 		return elm$http$Http$get(
 			{
 				aA: A2(elm$http$Http$expectJson, author$project$Main$Response, author$project$LibcflibRest$searchResultDecoder),
-				a_: 'http://35.192.108.152/search?query=' + (query + ('&page_num=' + elm$core$String$fromInt(page_num)))
+				a0: 'http://35.192.108.152/search?query=' + (query + ('&page_num=' + elm$core$String$fromInt(page_num)))
 			});
 	});
 var author$project$Main$setField = F3(
@@ -6241,11 +6242,11 @@ var author$project$Main$viewArtifact = function (artifact) {
 						elm$html$Html$a,
 						_List_fromArray(
 							[
-								elm$html$Html$Attributes$href('/artifact.html?pkg=' + (artifact.aU.aO + ('&channel=' + (artifact.aU.ay + ('&arch=' + (artifact.aU.au + ('&name=' + artifact.aU.ac)))))))
+								elm$html$Html$Attributes$href('/artifact.html?pkg=' + (artifact.aW.aO + ('&channel=' + (artifact.aW.ay + ('&arch=' + (artifact.aW.au + ('&name=' + artifact.aW.ac)))))))
 							]),
 						_List_fromArray(
 							[
-								elm$html$Html$text(artifact.ac + (' v' + artifact.a$))
+								elm$html$Html$text(artifact.ac + (' v' + artifact.a1))
 							]))
 					])),
 				A2(elm$html$Html$br, _List_Nil, _List_Nil),
@@ -6255,7 +6256,7 @@ var author$project$Main$viewArtifact = function (artifact) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						elm$html$Html$text(artifact.aU.aN)
+						elm$html$Html$text(artifact.aW.aN)
 					]))
 			]));
 };
@@ -6372,7 +6373,7 @@ var author$project$Main$viewResponse = function (response) {
 					[
 						elm$html$Html$Attributes$start(((response.aL - 1) * response.aM) + 1)
 					]),
-				elm$core$List$map(author$project$Main$viewArtifact)(response.aR)),
+				elm$core$List$map(author$project$Main$viewArtifact)(response.aT)),
 				author$project$Main$viewPageBar(response.aL)
 			]));
 };
@@ -6612,10 +6613,10 @@ var author$project$Main$main = elm$browser$Browser$element(
 		aG: function (_n0) {
 			return _Utils_Tuple2(author$project$Main$initialModel, elm$core$Platform$Cmd$none);
 		},
-		aW: function (_n1) {
+		aY: function (_n1) {
 			return elm$core$Platform$Sub$none;
 		},
-		aZ: author$project$Main$update,
-		a0: author$project$Main$view
+		a$: author$project$Main$update,
+		a2: author$project$Main$view
 	});
 _Platform_export({'Main':{'init':author$project$Main$main(elm$json$Json$Decode$value)(0)}});}(this));

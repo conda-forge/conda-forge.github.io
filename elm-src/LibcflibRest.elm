@@ -7,7 +7,9 @@ import String
 import Json.Decode
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Json.Decode exposing (Decoder, map2, map3, map4, map5, field, list, dict,
+import Json.Decode exposing (Decoder,
+    map, map2, map3, map4, map5,
+    field, list, dict,
     string, int, Value, value)
 
 
@@ -35,15 +37,17 @@ type alias Artifact =
     , spec : ArtifactSpec
     -- The following we normally don't need to decode
     , about : Value
+    , rendered_recipe : Value
     }
 
 artifactDecoder : Decoder Artifact
 artifactDecoder =
-    map4 Artifact
+    map5 Artifact
         (field "name" string)
         (field "version" string)
         (field "spec" artifactSpecDecoder)
         (field "about" value)
+        (field "rendered_recipe" value)
 
 type alias ArtifactSpec =
     { path : String
@@ -75,3 +79,12 @@ artifactAboutDecoder =
         (field "license" string)
         (field "home" string)
         (field "summary" string)
+
+type alias ArtifactRenderedRecipe =
+    { requirements : Dict.Dict String (List String)
+    }
+
+artifactRenderedRecipeDecoder : Decoder ArtifactRenderedRecipe
+artifactRenderedRecipeDecoder =
+    map ArtifactRenderedRecipe
+        (field "requirements" (dict (list string)) )

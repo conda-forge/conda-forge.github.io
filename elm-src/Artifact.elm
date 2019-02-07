@@ -16,7 +16,11 @@ import Url.Parser exposing (Parser, parse, query, (</>), (<?>), s, oneOf, map)
 import Url.Parser.Query exposing (map4, string)
 import Url.Parser.Query as Query
 
-import LibcflibRest exposing (Artifact, artifactDecoder, ArtifactAbout, artifactAboutDecoder)
+import LibcflibRest exposing
+    ( Artifact, artifactDecoder
+    , ArtifactAbout, artifactAboutDecoder
+    , ArtifactRenderedRecipe, artifactRenderedRecipeDecoder
+    )
 
 
 -- Types
@@ -170,6 +174,35 @@ viewArtifact artifact =
             , br [] []
             , a [ href about.home ] [text "[website]"]
             , text (" - " ++ about.license)
+            ])
+        , br [] []
+        , br [] []
+        , viewDecoded artifactRenderedRecipeDecoder artifact.rendered_recipe (\rr -> div [ class "rendered-recipe" ]
+            [ b [] [ text "Requirements" ]
+            , case Dict.get "build" rr.requirements of
+                Just val ->
+                    div [ class "build-requirements"]
+                    [ u [] [text "build:"]
+                    , ul [] (List.map (\v -> li [] [text v]) val)
+                    ]
+                Nothing ->
+                    text ""
+            , case Dict.get "host" rr.requirements of
+                Just val ->
+                    div [ class "host-requirements"]
+                    [ u [] [text "host:"]
+                    , ul [] (List.map (\v -> li [] [text v]) val)
+                    ]
+                Nothing ->
+                    text ""
+            , case Dict.get "run" rr.requirements of
+                Just val ->
+                    div [ class "run-requirements"]
+                    [ u [] [text "run:"]
+                    , ul [] (List.map (\v -> li [] [text v]) val)
+                    ]
+                Nothing ->
+                    text ""
             ])
         ]
 

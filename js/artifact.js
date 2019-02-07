@@ -1875,8 +1875,8 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 		flagDecoder,
 		args,
 		impl.aI,
-		impl.a$,
-		impl.aY,
+		impl.a1,
+		impl.a_,
 		function() { return function() {} }
 	);
 });
@@ -2396,7 +2396,7 @@ function _Http_toMetadata(xhr)
 	return {
 		V: xhr.responseURL,
 		aq: xhr.status,
-		aX: xhr.statusText,
+		aZ: xhr.statusText,
 		e: _Http_parseHeaders(xhr.getAllResponseHeaders())
 	};
 }
@@ -2492,7 +2492,7 @@ function _Http_track(router, xhr, tracker)
 	xhr.upload.addEventListener('progress', function(event) {
 		if (xhr.c) { return; }
 		_Scheduler_rawSpawn(A2(elm$core$Platform$sendToSelf, router, _Utils_Tuple2(tracker, elm$http$Http$Sending({
-			aV: event.loaded,
+			aX: event.loaded,
 			S: event.total
 		}))));
 	});
@@ -4076,10 +4076,10 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 		flagDecoder,
 		args,
 		impl.aI,
-		impl.a$,
-		impl.aY,
+		impl.a1,
+		impl.a_,
 		function(sendToApp, initialModel) {
-			var view = impl.a1;
+			var view = impl.a3;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -4112,11 +4112,11 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 		flagDecoder,
 		args,
 		impl.aI,
-		impl.a$,
-		impl.aY,
+		impl.a1,
+		impl.a_,
 		function(sendToApp, initialModel) {
 			var divertHrefToApp = impl.F && impl.F(sendToApp)
-			var view = impl.a1;
+			var view = impl.a3;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -4129,7 +4129,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.a_) && (_VirtualDom_doc.title = title = doc.a_);
+				(title !== doc.a0) && (_VirtualDom_doc.title = title = doc.a0);
 			});
 		}
 	);
@@ -4220,9 +4220,9 @@ function _Browser_application(impl)
 		{
 			return A3(impl.aI, flags, _Browser_getUrl(), key);
 		},
+		a3: impl.a3,
 		a1: impl.a1,
-		a$: impl.a$,
-		aY: impl.aY
+		a_: impl.a_
 	});
 }
 
@@ -5550,9 +5550,9 @@ var author$project$Main$initialModel = F2(
 			author$project$Main$parseUrlQuery(url),
 			elm$core$Maybe$Nothing);
 	});
-var author$project$LibcflibRest$Artifact = F4(
-	function (name, version, spec, about) {
-		return {av: about, ae: name, aW: spec, a0: version};
+var author$project$LibcflibRest$Artifact = F5(
+	function (name, version, spec, about, rendered_recipe) {
+		return {av: about, ae: name, aT: rendered_recipe, aY: spec, a2: version};
 	});
 var author$project$LibcflibRest$ArtifactSpec = F5(
 	function (path, pkg, channel, arch, name) {
@@ -5925,15 +5925,15 @@ var author$project$LibcflibRest$artifactSpecDecoder = A6(
 	A2(elm$json$Json$Decode$field, 'channel', elm$json$Json$Decode$string),
 	A2(elm$json$Json$Decode$field, 'arch', elm$json$Json$Decode$string),
 	A2(elm$json$Json$Decode$field, 'name', elm$json$Json$Decode$string));
-var elm$json$Json$Decode$map4 = _Json_map4;
 var elm$json$Json$Decode$value = _Json_decodeValue;
-var author$project$LibcflibRest$artifactDecoder = A5(
-	elm$json$Json$Decode$map4,
+var author$project$LibcflibRest$artifactDecoder = A6(
+	elm$json$Json$Decode$map5,
 	author$project$LibcflibRest$Artifact,
 	A2(elm$json$Json$Decode$field, 'name', elm$json$Json$Decode$string),
 	A2(elm$json$Json$Decode$field, 'version', elm$json$Json$Decode$string),
 	A2(elm$json$Json$Decode$field, 'spec', author$project$LibcflibRest$artifactSpecDecoder),
-	A2(elm$json$Json$Decode$field, 'about', elm$json$Json$Decode$value));
+	A2(elm$json$Json$Decode$field, 'about', elm$json$Json$Decode$value),
+	A2(elm$json$Json$Decode$field, 'rendered_recipe', elm$json$Json$Decode$value));
 var author$project$Main$Response = function (a) {
 	return {$: 3, a: a};
 };
@@ -6592,7 +6592,7 @@ var author$project$Main$init = F3(
 	});
 var author$project$LibcflibRest$ArtifactAbout = F3(
 	function (license, home, summary) {
-		return {aG: home, aJ: license, aZ: summary};
+		return {aG: home, aJ: license, a$: summary};
 	});
 var elm$json$Json$Decode$map3 = _Json_map3;
 var author$project$LibcflibRest$artifactAboutDecoder = A4(
@@ -6601,6 +6601,37 @@ var author$project$LibcflibRest$artifactAboutDecoder = A4(
 	A2(elm$json$Json$Decode$field, 'license', elm$json$Json$Decode$string),
 	A2(elm$json$Json$Decode$field, 'home', elm$json$Json$Decode$string),
 	A2(elm$json$Json$Decode$field, 'summary', elm$json$Json$Decode$string));
+var author$project$LibcflibRest$ArtifactRenderedRecipe = function (requirements) {
+	return {aU: requirements};
+};
+var elm$core$Dict$fromList = function (assocs) {
+	return A3(
+		elm$core$List$foldl,
+		F2(
+			function (_n0, dict) {
+				var key = _n0.a;
+				var value = _n0.b;
+				return A3(elm$core$Dict$insert, key, value, dict);
+			}),
+		elm$core$Dict$empty,
+		assocs);
+};
+var elm$json$Json$Decode$keyValuePairs = _Json_decodeKeyValuePairs;
+var elm$json$Json$Decode$dict = function (decoder) {
+	return A2(
+		elm$json$Json$Decode$map,
+		elm$core$Dict$fromList,
+		elm$json$Json$Decode$keyValuePairs(decoder));
+};
+var elm$json$Json$Decode$list = _Json_decodeList;
+var author$project$LibcflibRest$artifactRenderedRecipeDecoder = A2(
+	elm$json$Json$Decode$map,
+	author$project$LibcflibRest$ArtifactRenderedRecipe,
+	A2(
+		elm$json$Json$Decode$field,
+		'requirements',
+		elm$json$Json$Decode$dict(
+			elm$json$Json$Decode$list(elm$json$Json$Decode$string))));
 var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
 var elm$json$Json$Decode$decodeValue = _Json_run;
@@ -6620,6 +6651,9 @@ var elm$html$Html$a = _VirtualDom_node('a');
 var elm$html$Html$b = _VirtualDom_node('b');
 var elm$html$Html$br = _VirtualDom_node('br');
 var elm$html$Html$div = _VirtualDom_node('div');
+var elm$html$Html$li = _VirtualDom_node('li');
+var elm$html$Html$u = _VirtualDom_node('u');
+var elm$html$Html$ul = _VirtualDom_node('ul');
 var elm$json$Json$Encode$string = _Json_wrap;
 var elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -6646,7 +6680,7 @@ var author$project$Main$viewArtifact = function (artifact) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						elm$html$Html$text(artifact.ae + (' v' + artifact.a0))
+						elm$html$Html$text(artifact.ae + (' v' + artifact.a2))
 					])),
 				A2(elm$html$Html$br, _List_Nil, _List_Nil),
 				A3(
@@ -6662,7 +6696,7 @@ var author$project$Main$viewArtifact = function (artifact) {
 							]),
 						_List_fromArray(
 							[
-								elm$html$Html$text(about.aZ),
+								elm$html$Html$text(about.a$),
 								A2(elm$html$Html$br, _List_Nil, _List_Nil),
 								A2(
 								elm$html$Html$a,
@@ -6675,6 +6709,147 @@ var author$project$Main$viewArtifact = function (artifact) {
 										elm$html$Html$text('[website]')
 									])),
 								elm$html$Html$text(' - ' + about.aJ)
+							]));
+				}),
+				A2(elm$html$Html$br, _List_Nil, _List_Nil),
+				A2(elm$html$Html$br, _List_Nil, _List_Nil),
+				A3(
+				author$project$Main$viewDecoded,
+				author$project$LibcflibRest$artifactRenderedRecipeDecoder,
+				artifact.aT,
+				function (rr) {
+					return A2(
+						elm$html$Html$div,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$class('rendered-recipe')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$b,
+								_List_Nil,
+								_List_fromArray(
+									[
+										elm$html$Html$text('Requirements')
+									])),
+								function () {
+								var _n0 = A2(elm$core$Dict$get, 'build', rr.aU);
+								if (!_n0.$) {
+									var val = _n0.a;
+									return A2(
+										elm$html$Html$div,
+										_List_fromArray(
+											[
+												elm$html$Html$Attributes$class('build-requirements')
+											]),
+										_List_fromArray(
+											[
+												A2(
+												elm$html$Html$u,
+												_List_Nil,
+												_List_fromArray(
+													[
+														elm$html$Html$text('build:')
+													])),
+												A2(
+												elm$html$Html$ul,
+												_List_Nil,
+												A2(
+													elm$core$List$map,
+													function (v) {
+														return A2(
+															elm$html$Html$li,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	elm$html$Html$text(v)
+																]));
+													},
+													val))
+											]));
+								} else {
+									return elm$html$Html$text('');
+								}
+							}(),
+								function () {
+								var _n1 = A2(elm$core$Dict$get, 'host', rr.aU);
+								if (!_n1.$) {
+									var val = _n1.a;
+									return A2(
+										elm$html$Html$div,
+										_List_fromArray(
+											[
+												elm$html$Html$Attributes$class('host-requirements')
+											]),
+										_List_fromArray(
+											[
+												A2(
+												elm$html$Html$u,
+												_List_Nil,
+												_List_fromArray(
+													[
+														elm$html$Html$text('host:')
+													])),
+												A2(
+												elm$html$Html$ul,
+												_List_Nil,
+												A2(
+													elm$core$List$map,
+													function (v) {
+														return A2(
+															elm$html$Html$li,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	elm$html$Html$text(v)
+																]));
+													},
+													val))
+											]));
+								} else {
+									return elm$html$Html$text('');
+								}
+							}(),
+								function () {
+								var _n2 = A2(elm$core$Dict$get, 'run', rr.aU);
+								if (!_n2.$) {
+									var val = _n2.a;
+									return A2(
+										elm$html$Html$div,
+										_List_fromArray(
+											[
+												elm$html$Html$Attributes$class('run-requirements')
+											]),
+										_List_fromArray(
+											[
+												A2(
+												elm$html$Html$u,
+												_List_Nil,
+												_List_fromArray(
+													[
+														elm$html$Html$text('run:')
+													])),
+												A2(
+												elm$html$Html$ul,
+												_List_Nil,
+												A2(
+													elm$core$List$map,
+													function (v) {
+														return A2(
+															elm$html$Html$li,
+															_List_Nil,
+															_List_fromArray(
+																[
+																	elm$html$Html$text(v)
+																]));
+													},
+													val))
+											]));
+								} else {
+									return elm$html$Html$text('');
+								}
+							}()
 							]));
 				})
 			]));
@@ -6871,7 +7046,7 @@ var author$project$Main$viewBody = function (model) {
 };
 var elm$browser$Browser$Document = F2(
 	function (title, body) {
-		return {ay: body, a_: title};
+		return {ay: body, a0: title};
 	});
 var author$project$Main$view = function (model) {
 	return A2(
@@ -6890,10 +7065,10 @@ var author$project$Main$main = elm$browser$Browser$application(
 		aI: author$project$Main$init,
 		aK: author$project$Main$UrlChanged,
 		aL: author$project$Main$LinkClicked,
-		aY: function (_n0) {
+		a_: function (_n0) {
 			return elm$core$Platform$Sub$none;
 		},
-		a$: author$project$Main$update,
-		a1: author$project$Main$view
+		a1: author$project$Main$update,
+		a3: author$project$Main$view
 	});
 _Platform_export({'Main':{'init':author$project$Main$main(elm$json$Json$Decode$value)(0)}});}(this));
