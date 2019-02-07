@@ -32,12 +32,12 @@ type alias Model =
 
 initialModel : Url.Url -> Nav.Key -> Model
 initialModel url key =
-    { error = Nothing
-    , response = Nothing
-    , url = url
-    , key = key
-    , query = parseUrlQuery url
-    }
+    Model
+        Nothing
+        Nothing
+        url
+        key
+        (parseUrlQuery url)
 
 
 type alias UrlQuery =
@@ -47,13 +47,14 @@ type alias UrlQuery =
     , name : Maybe String
     }
 
-parseUrlQuery : Parser UrlQuery
-parseUrlQuery =
+parseUrlQuery : Url.Url -> Parser UrlQuery
+parseUrlQuery url =
     map4 UrlQuery
         (string "pkg")
         (string "channel")
         (string "arch")
         (string "name")
+    url
 
 type Msg
     = NoOp
@@ -81,7 +82,7 @@ update msg model =
                     ( model, Nav.load href )
 
         UrlChanged url ->
-            ( { model | url = url, query = Just parseUrlQuery url }, Cmd.none )
+            ( { model | url = url, query = Just (parseUrlQuery url) }, Cmd.none )
 
         Response (Ok response) ->
             ( { model | error = Nothing, response = Just response }, Cmd.none )
@@ -133,10 +134,10 @@ viewError error =
         ]
 
 
-viewUtils :
+viewBody :
     { a | error : Maybe Http.Error, response : Maybe Artifact }
     -> Html Msg
-viewUtils model =
+viewBody model =
     div []
         [ viewHeader
         , case model.response of
@@ -176,7 +177,9 @@ viewFooter =
 
 view : Model -> Browser.Document Msg
 view model =
-    viewUtils model
+    Browser.Document
+        "Conda-Forge Artifact"  -- title
+        [viewBody model]       -- body
 
 
 -- MAIN
