@@ -12,8 +12,8 @@ import Json.Decode
 import Json.Decode as Decode
 import Json.Encode as Encode
 import Url
-import Url.Parser exposing ((</>), (<?>), s)
-import Url.Parser.Query exposing (Parser, map4, string)
+import Url.Parser exposing (Parser, parse, query, (</>), (<?>), s)
+import Url.Parser.Query exposing (map4, string)
 import Url.Parser.Query as Query
 
 import LibcflibRest exposing (Artifact, artifactDecoder)
@@ -39,6 +39,9 @@ initialModel url key =
         key
         (parseUrlQuery url)
 
+--type Route
+    --= ArtifactQuery UrlQuery
+
 
 type alias UrlQuery =
     { pkg : Maybe String
@@ -47,14 +50,20 @@ type alias UrlQuery =
     , name : Maybe String
     }
 
-parseUrlQuery : Url.Url -> Parser UrlQuery
+
+
+--routeParser : Parser (Route -> a) a
+--routeParser =
+--    map ArtifactQuery (s "artifact" <?> Query.string "pkg")
+
+parseUrlQuery : Url.Url -> Maybe UrlQuery
 parseUrlQuery url =
-    map4 UrlQuery
+    parse (query (map4 UrlQuery
         (string "pkg")
         (string "channel")
         (string "arch")
         (string "name")
-    url
+    )) url
 
 type Msg
     = NoOp
@@ -82,7 +91,7 @@ update msg model =
                     ( model, Nav.load href )
 
         UrlChanged url ->
-            ( { model | url = url, query = Just (parseUrlQuery url) }, Cmd.none )
+            ( { model | url = url, query = (parseUrlQuery url) }, Cmd.none )
 
         Response (Ok response) ->
             ( { model | error = Nothing, response = Just response }, Cmd.none )
