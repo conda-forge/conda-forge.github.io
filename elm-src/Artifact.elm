@@ -30,16 +30,6 @@ type alias Model =
     }
 
 
-toUrl : String -> Url.Url -> Url.Url
-toUrl s url =
-    case Url.fromString s of
-        Nothing ->
-            url
-        Just u ->
-            u
-            --Maybe.withDefault url u
-
-
 initialModel : Url.Url -> Nav.Key -> Model
 initialModel url key =
     Model
@@ -48,18 +38,16 @@ initialModel url key =
         key
         (parseUrlQuery url)
         Nothing
-        -- (artFromUrl (parseUrlQuery url))
-        --(artifactFromUrl (parseUrlQuery url))
 
 
 type Route
     = NotFound
     | ParsedRoute UrlQuery
 
-route : Parser (Route -> a) a
-route =
+router : Parser (Route -> a) a
+router =
   oneOf
-    [ map ParsedRoute queryParserUrlQuery
+    [ map ParsedRoute (s "artifact.html" <?> queryParserUrlQuery)
     ]
 
 type alias UrlQuery =
@@ -72,7 +60,7 @@ type alias UrlQuery =
 
 
 queryParserUrlQuery =
-    query (map4 UrlQuery
+    (map4 UrlQuery
         (string "pkg")
         (string "channel")
         (string "arch")
@@ -82,10 +70,7 @@ queryParserUrlQuery =
 
 parseUrlQuery : Url.Url -> Route
 parseUrlQuery url =
-    Maybe.withDefault
-        --(UrlQuery (Just "") (Just "") (Just "") (Just ""))
-        NotFound
-        (parse route url)
+    Maybe.withDefault NotFound (parse router url)
 
 type Msg
     = NoOp
@@ -113,7 +98,9 @@ update msg model =
                     ( model, Nav.load href )
 
         UrlChanged url ->
-            ( { model | url = url, route = (parseUrlQuery url) }, Cmd.none )
+            ( { model | url = url, route = (parseUrlQuery url) },
+              artifactFromRoute (parseUrlQuery url)
+            )
 
         Response (Ok response) ->
             ( { model | error = Nothing, response = Just response }, Cmd.none )
@@ -134,13 +121,18 @@ getArtifact pkg channel arch name =
     }
 
 
-artifactFromUrl : UrlQuery -> Cmd Msg
-artifactFromUrl urlquery =
+artifactFromUrlQuery : UrlQuery -> Cmd Msg
+artifactFromUrlQuery urlquery =
     getArtifact (Maybe.withDefault "" urlquery.pkg)
                 (Maybe.withDefault "" urlquery.channel)
                 (Maybe.withDefault "" urlquery.arch)
                 (Maybe.withDefault "" urlquery.name)
 
+artifactFromRoute : Route -> Cmd Msg
+artifactFromRoute route =
+    case route of
+        NotFound -> Cmd.none
+        ParsedRoute urlquery -> artifactFromUrlQuery urlquery
 
 
 -- VIEWS
@@ -195,7 +187,6 @@ viewBody :
 viewBody model =
     div []
         [ viewHeader
-        , text (Url.toString model.url)
         , viewUrlQuery model.route
         , case model.response of
             Just response ->
@@ -243,7 +234,8 @@ view model =
 
 init : Decode.Value -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
-    ( initialModel url key, Cmd.none  )
+    --( initialModel url key, Cmd.none  )
+    update (UrlChanged url) (initialModel url key)
 
 
 main : Program Decode.Value Model Msg
