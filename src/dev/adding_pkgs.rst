@@ -1,3 +1,5 @@
+.. _dev_contribute_pkgs:
+
 Contributing new packages
 *************************
 
