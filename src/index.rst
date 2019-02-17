@@ -59,3 +59,4 @@ Table of Contents
    user/00_intro
    dev/00_intro
    orga/00_intro
+   misc/00_intro

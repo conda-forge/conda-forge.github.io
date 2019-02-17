@@ -1,0 +1,7 @@
+Miscellaneous
+#############
+
+
+.. toctree::
+  
+  glossary

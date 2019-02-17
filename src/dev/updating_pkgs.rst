@@ -11,13 +11,13 @@ All maintainers are given push access to the feedstocks that they maintain.
 This means that a maintainer can create branches in the main repo. 
 For updates, using a branch in the main repo is discouraged because,
 
-1. CI is run on both the branch and the PR.
+1. :term:`CI` is run on both the branch and the PR.
 
-   This wastes CI resources
+   This wastes :term:`CI` resources
 
 2. Branches are automatically published.
 
-   This means if you push a version update to a branch and then create a PR, conda packages will be published to anaconda.org before the PR is merged.
+   This means if you push a version update to a branch and then create a :term:`PR`, conda packages will be published to anaconda.org before the PR is merged.
 
 .. important::
   For these reasons maintainers are asked to fork the feedstock, push to a branch in the fork and then open a PR to the ``conda-forge`` repo.
@@ -72,6 +72,53 @@ Checking the dependencies
 Bumping the build number
 ------------------------
 
+.. _dev_update_rerender:
+
+Rerendering feedstocks
+======================
+
+Rerendering is conda-forge's way to update the files common to all feedstocks (e.g. README, :term:`CI` configuration, pinned dependencies)
+
+Rerendering can be done in two ways:
+
+ #. Using the webservice to run conda-smithy on the cloud by adding the comment ``@conda-forge-admin please rerender`` (see :ref:`dev_admservice`). 
+
+ #. Run conda-smithy locally on your machine (see :ref:`dev_rerender_local`).
+
+.. _dev_rerender_local:
+
+Rerendering with conda-smithy locally
+------------------------------------
+
+First step is to install ``conda-smithy`` in your root environment
+
+.. code-block:: shell
+
+    conda install -c conda-forge conda-smithy
+
+
+Commit all changes and from the root directory of the feedstock, type:
+
+.. code-block:: shell
+
+    conda smithy rerender -c auto
+
+
+Optionally one can commit the changes manually.
+To do this drop ``-c auto`` from the command.
+
+When to rerender
+----------------
+
+We need to re-render when there are changes the following parts of the feedstock:
+
+- the platform configuration (``skip`` sections);
+- the ``yum_requirements.txt``;
+- updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.
+- updates in conda-forge pinning that affect the feedstock
+- build issues that a feedstock configuration update will fix (follow us on `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`_ to know about those);
+
+
 
 Maintaining several versions
 ============================
@@ -79,5 +126,6 @@ Maintaining several versions
 TODO: LTS branch
 
 
-Rerendering feedstocks
-======================
+
+Testing changes locally
+=======================
