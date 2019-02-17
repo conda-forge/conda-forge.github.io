@@ -3,4 +3,5 @@ Organisation Documentation
 
 
 .. toctree::
+  governance
   

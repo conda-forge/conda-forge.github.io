@@ -1,0 +1,83 @@
+Updating packages
+*****************
+
+Important notes
+===============
+
+Forking and pull requests
+-------------------------
+
+All maintainers are given push access to the feedstocks that they maintain. 
+This means that a maintainer can create branches in the main repo. 
+For updates, using a branch in the main repo is discouraged because,
+
+1. CI is run on both the branch and the PR.
+
+   This wastes CI resources
+
+2. Branches are automatically published.
+
+   This means if you push a version update to a branch and then create a PR, conda packages will be published to anaconda.org before the PR is merged.
+
+.. important::
+  For these reasons maintainers are asked to fork the feedstock, push to a branch in the fork and then open a PR to the ``conda-forge`` repo.
+
+
+Example workflow for updating a package
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Here we assume that your would like to update the feedstock ``<feedstock>``. Feedstock is a placeholder and can e.g. be replaced by ``numpy-feedstock``.
+
+#. Forking the feedstock
+
+   Before you can submit your first PR, you have to fork conda-forge's feedstock. 
+
+   - Navigate to https://github.com/conda-forge/<feedstock> in your favorite web browser and click the ``fork`` button.
+   - You now have a clone of the feedstock in ``https://github.com/<your-github-id>/<feedstock>`` under your control.
+   - Connect to the feedstock from your computer by using ``git clone https://github.com/<your-github-id>/<feedstock>``.
+
+#. Syncing your fork with conda-forges feedstock
+
+   This step is only required if you have forked some time ago and your fork is missing commits from the feedstock at conda-forge.
+
+   - Make sure you are on the master branch: ``git checkout master``
+   - Register conda-forge's feedstock with ``git remote add upstream https://github.com/conda-forge/<feedstock>``
+   - Fetch the latest updates with ``git fetch upstream``
+   - Pull in the latest changes into your master branch: ``git rebase upstream/master``
+
+#. Creating your changes in a new branch
+
+   Now you are ready to update the recipe
+
+   - Create and switch to a new branch: ``git checkout -b <branch-name>``. ``<branch-name>`` can be e.g. ``update_1_0_1``.
+   - Make your chances locally
+   - Review your changes then use ``git add <changed-files>``. Where ``<changed-files>`` are a whitespace separated list of filenames you changed.
+   - Create a commit by ``git commit -m <commit-msg>``, where ``<commit-msg>`` can be ``updated feedstock to version 1.0.1``
+
+#. Pushing your changes to github and propose a PR
+
+   - Push the branch with changes to your fork in github:  ``git push origin <branch-name>``
+   - Create a pull request via the web interface by navigating to ``https://github.com/<your-github-id>/<feedstock>`` with your web browser and clicking the button ``create pull request``.
+
+
+Updating recipes
+================
+
+Updating version and hash
+-------------------------
+
+Checking the dependencies
+-------------------------
+
+Bumping the build number
+------------------------
+
+
+Maintaining several versions
+============================
+
+TODO: LTS branch
+
+
+Rerendering feedstocks
+======================

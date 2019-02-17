@@ -4,4 +4,4 @@ User Documentation
 
 .. toctree::
   
-  test.rst
+  faq
