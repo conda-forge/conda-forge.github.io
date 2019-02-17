@@ -88,7 +88,7 @@ Rerendering can be done in two ways:
 .. _dev_rerender_local:
 
 Rerendering with conda-smithy locally
-------------------------------------
+-------------------------------------
 
 First step is to install ``conda-smithy`` in your root environment
 
@@ -129,3 +129,19 @@ TODO: LTS branch
 
 Testing changes locally
 =======================
+
+If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is  built by our :term:`CI`.
+
+If you want to build and test updates to  a feedstock locally, go to the root
+feedstock directory and run, the ``.circleci/run_docker_build.sh`` script.
+
+The environment variable ``CONFIG`` is required to select one of the ``*.yaml``
+config files in ``.ci_support`` to use for the build.
+older feedstocks).
+
+For example, the docker build with the config in ``.ci_support/linux_.yaml`` can be invoked by:
+
+.. code-block:: sh
+
+    $ cd my-feedstock
+    $ CONFIG="linux_" ./.circleci/run_docker_build.sh
