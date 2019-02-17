@@ -3,11 +3,35 @@
 Contributing packages
 *********************
 
-Specifying dependencies
-=======================
+Source
+======
 
-Pinning dependency versions
----------------------------
+Build from tarballs, not repos
+------------------------------
+
+Packages should be built from tarballs using the ``url`` key, not from repositories directly by using e.g. ``git_url``.
+
+There are several reasons behind this rule:
+
+  - Repositories are usually larger than tarballs, draining shared CI time and bandwidth
+  - Repositories are not checksummed.  Thus, using a tarball has a
+  stronger guarantee that the download that is obtained to build from is
+  in fact the intended package.
+  - On some systems it is possible to not have permissions
+  to remove a repo once it is created.
+
+Build
+=====
+
+Requirements
+============
+
+Build, host and run
+-------------------
+
+Pinning
+-------
+
 
 TODO: 
   - Why is pinning needed (ABI)
@@ -21,8 +45,10 @@ TODO: CDT packages & yum_requierements.
 
 .. _testing_in_recipes:
 
-Adding tests
-============
+Test
+====
+
+
 
 All recipes need tests. Here are some tips, tricks, and justifications.
 How you shold test depends on the type of package (python, c-lib,
@@ -189,3 +215,7 @@ This requires that you have docker installed on your machine.
 
     $ cd staged-recipes
     $ ./.circleci/run_docker_build.sh
+
+
+About
+=====
