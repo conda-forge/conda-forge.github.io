@@ -6,31 +6,6 @@ This document presents conda-forge rules, guidelines, and justifications
 about writing the ``meta.yaml`` file.
 
 
-Build from Tarballs, Not Repos
-------------------------------
-
-Conda-forge requires that building from tarballs using the
-``url`` (optionally ``fn``, filename) key in the ``build`` section. A recipe
-should not use the ``git_url``, ``git_ver``, and similar
-keys. There are three main reasons for this:
-
-* Downloading the whole repo when you only need a single snapshot wastes
-  the precious, constrained, and shared CI time and bandwidth.
-* Repositories are not checksummed. Thus, using a tarball has a
-  stronger guarantee that the download that is obtained to build from is
-  in fact the intended package.
-* On some systems (such as Windows), it is possible to not have permissions
-  to remove a repo once it is created. This can be avoided by using a tarball.
-
-If a package does not have the ability to build from a tarball, this is
-considered a bug and should be reported upstream. In the worst case,
-the source can be patched to include the relevant build information.
-
-Note that the ``fn`` key can be omitted, if the last part of the url specifies
-the filename already and the server does not perform some kind of redirection
-to a different, therefore unexpected filename.
-
-
 Packaging the License Manually
 ------------------------------
 
@@ -47,38 +22,6 @@ It can then be refered to in the ``meta.yaml`` as if it was in the source direct
 
     about:
       license_file: LICENSE.txt
-
-
-Populating the ``hash`` Field
------------------------------
-
-If your package is on PyPi_, you can get the sha256 hash from your package's page
-on PyPI; look for the ``SHA256`` link next to the download link on your package's
-files page, e.g. ``https://pypi.org/project/<your-project>/#files``.
-
-You can also generate a hash from the command line on Linux (and Mac if you
-install the necessary tools below). If you go this route, the ``sha256`` hash
-is preferable to the ``md5`` hash.
-
-To generate the ``sha256`` hash: ``openssl sha256 your_sdist.tar.gz``
-
-You may need the openssl package, available on conda-forge
-``conda install openssl -c conda-forge``.
-
-.. _PyPi: https://pypi.org
-
-Excluding a Platform
---------------------
-
-Use the ``skip`` key in the ``build`` section along with a selector:
-
-.. code-block:: yaml
-
-    build:
-        skip: true  # [win]
-
-A full description of selectors is
-`in the conda docs <http://conda.pydata.org/docs/building/meta-yaml.html#preprocessing-selectors>`_.
 
 
 Pinning packages
@@ -350,37 +293,3 @@ not properly specified the first time you build a package, then when you fix the
 dependency and rebuild the package you should increase the build number.
 
 When the package version changes you should reset the build number to ``0``.
-
-.. _use-pip:
-
-Use pip
--------
-Normally Python packages should use this line:
-
-.. code-block:: yaml
-
-    build:
-      script: "{{ PYTHON }} -m pip install . --no-deps -vv"
-
-as the installation script in the ``meta.yml`` file or ``bld.bat/build.sh`` script files,
-while adding ``pip`` to the host requirements:
-
-.. code-block:: yaml
-
-    requirements:
-      host:
-        - pip
-
-These options should be used to ensure a clean installation of the package without its
-dependencies. This helps make sure that we're only including this package,
-and not accidentally bringing any dependencies along into the conda package.
-
-Note that the ``--no-deps`` line means that for pure-Python packages,
-usually only ``python`` and ``pip`` are needed as ``build`` or ``host`` requirements;
-the real package dependencies are only ``run`` requirements.
-
-
-Downloading extra sources and data files
-----------------------------------------
-``conda-build 3`` supports multiple sources per recipe. Examples are available `in the conda-build docs <https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#source-from-multiple-sources>`_.
-
