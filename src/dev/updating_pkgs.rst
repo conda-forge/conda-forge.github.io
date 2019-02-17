@@ -120,10 +120,6 @@ We need to re-render when there are changes the following parts of the feedstock
 
 
 
-Maintaining several versions
-============================
-
-TODO: LTS branch
 
 
 
@@ -145,3 +141,14 @@ For example, the docker build with the config in ``.ci_support/linux_.yaml`` can
 
     $ cd my-feedstock
     $ CONFIG="linux_" ./.circleci/run_docker_build.sh
+
+
+Removing broken packages
+========================
+
+Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel. In this case core can help you (see :ref:`fix_broken_packages`)
+
+Maintaining several versions
+============================
+
+TODO: LTS branch

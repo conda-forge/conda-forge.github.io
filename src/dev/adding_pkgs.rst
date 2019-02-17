@@ -1,7 +1,7 @@
 .. _dev_contribute_pkgs:
 
-Contributing new packages
-*************************
+Contributing packages
+*********************
 
 Specifying dependencies
 =======================
