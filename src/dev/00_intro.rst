@@ -4,10 +4,10 @@ Developer Documentation
 
 .. toctree::
   
-  structure
+  infrastructure
   adding_pkgs
   updating_pkgs
   pinning_deps
-  windows_builds
+  knowledge_base
   conda_forge_yml
   

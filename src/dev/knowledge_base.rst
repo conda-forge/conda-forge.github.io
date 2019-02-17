@@ -1,5 +1,8 @@
-Particularities when building for Windows
-*****************************************
+Knowledge base
+**************
+
+Particularities on Windows
+==========================
 
 This document presents conda-forge and conda-build information and examples
 when building on Windows.
@@ -104,3 +107,29 @@ To skip building with a particular ``vc`` version, add a skip statement.
       build:
         - {{ compiler('cxx') }}
 
+
+
+Special dependencies
+====================
+
+Compilers
+---------
+
+Core dependency tree packages (CDT)
+-----------------------------------
+
+NumPy
+-----
+
+Message passing interface (MPI)
+-------------------------------
+
+
+Noarch builds
+=============
+
+Noarch python
+-------------
+
+Noarch generic
+--------------

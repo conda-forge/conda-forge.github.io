@@ -1,2 +1,2 @@
-conda-forge pinning
-*******************
+Pinning dependencies
+********************

@@ -15,10 +15,9 @@ There are several reasons behind this rule:
 
   - Repositories are usually larger than tarballs, draining shared CI time and bandwidth
   - Repositories are not checksummed.  Thus, using a tarball has a
-  stronger guarantee that the download that is obtained to build from is
-  in fact the intended package.
-  - On some systems it is possible to not have permissions
-  to remove a repo once it is created.
+    stronger guarantee that the download that is obtained to build from is
+    in fact the intended package.
+  - On some systems it is possible to not have permission to remove a repo once it is created.
 
 Build
 =====
@@ -203,7 +202,7 @@ This makes it very hard to run tests that are not installed with the package.
 
 
 Running tests locally for staged recipes
-========================================
+----------------------------------------
 
 If you want to run and build packages in the staged-recipes repository locally,
 go to the root repository directory and run the
