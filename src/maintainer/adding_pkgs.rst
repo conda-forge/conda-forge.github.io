@@ -3,11 +3,14 @@
 Contributing packages
 *********************
 
+The recipe meta.yaml
+====================
+
 Source
-======
+------
 
 Build from tarballs, not repos
-------------------------------
+..............................
 
 Packages should be built from tarballs using the ``url`` key, not from repositories directly by using e.g. ``git_url``.
 
@@ -20,16 +23,18 @@ There are several reasons behind this rule:
   - On some systems it is possible to not have permission to remove a repo once it is created.
 
 Build
-=====
+-----
+
+
 
 Requirements
-============
+------------
 
 Build, host and run
--------------------
+...................
 
 Pinning
--------
+.......
 
 
 TODO: 
@@ -37,7 +42,7 @@ TODO:
   - How does pinning work (e.g. pin-max
 
 External dependencies
----------------------
+.....................
 
 TODO: CDT packages & yum_requierements.
 
@@ -45,7 +50,7 @@ TODO: CDT packages & yum_requierements.
 .. _testing_in_recipes:
 
 Test
-====
+----
 
 
 
@@ -56,7 +61,7 @@ But every conda package must have at least *some* tests.
 
 
 Simple existence tests
-----------------------
+......................
 
 Sometimes defining tests seems to be hard, e.g. due to:
 
@@ -77,8 +82,8 @@ On posix systems, use the ``test`` utility and the ``$PREFIX`` variable.
 
 On Windows, use the ``exist`` command. See below for an example.
 
-Simple existence testing example
-................................
+Simple existence testing example:
+
 
 .. code-block:: yaml
 
@@ -89,14 +94,14 @@ Simple existence testing example
 
 
 Testing python packages
------------------------
+.......................
 
 For the best information about testing, see the conda build docs
 `test section. <https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#test-section>`_
 
 
 Testing importing
-.................
+^^^^^^^^^^^^^^^^^
 
 The minimal test of a python package should make sure that the package
 can be successfully imported. This can be accomplished with this
@@ -119,7 +124,7 @@ correctly with the versions of dependencies used.
 It is good to run some other tests of the code itself (the test suite) if possible.
 
 Running unit tests
-------------------
+..................
 
 The trick here is that there are multiple ways to run unit tests in Python,
 including nose, pytest, etc.
@@ -129,7 +134,7 @@ run in place, while others keep the tests with the source code, and thus can
 not be run straight from an installed package.
 
 Test requirements
-.................
+^^^^^^^^^^^^^^^^^
 
 Sometimes there are packages required to run the tests that are not required
 to simply use the package. This is usually a test-running framework, such as
@@ -146,7 +151,7 @@ in the the test stanza:
         - pytest
 
 Built-in tests
-..............
+^^^^^^^^^^^^^^
 
 Some packages have testing built-in. In this case, you can put a test command
 directly in the test stanza:
@@ -162,7 +167,7 @@ Alternatively, you can add a file called ``run_test.py`` in the recipe that
 will be run at test time. This allows an arbitrarily complicated test script.
 
 pytest tests
-............
+^^^^^^^^^^^^
 
 If the tests are installed with the package, pytest can find and run them
 for you with the following command::
@@ -175,7 +180,7 @@ for you with the following command::
 
 
 Command Line Utilities
-----------------------
+......................
 
 If a python package installs command line utilities, you probably want to test that
 they were properly installed::
@@ -189,7 +194,7 @@ If the utility actually has a test mode, great. Otherwise simply invoking
 installed and can run.
 
 Tests outside of the package
-----------------------------
+............................
 
 Note that conda-build runs the tests in an isolated environment after installing
 the package -- thus, at this point it does not have access to the original source
@@ -202,7 +207,7 @@ This makes it very hard to run tests that are not installed with the package.
 
 
 Running tests locally for staged recipes
-----------------------------------------
+........................................
 
 If you want to run and build packages in the staged-recipes repository locally,
 go to the root repository directory and run the
@@ -217,4 +222,44 @@ This requires that you have docker installed on your machine.
 
 
 About
-=====
+-----
+
+Activate scripts
+----------------
+
+Recipes are allowed to have activate scripts, which will be ``sourced``\ d or
+``call``\ ed when the environment is activated. It is generally recommended to avoid using
+activate scripts when another option is possible because people do not always
+activate environments the expected way and these packages may then misbehave.
+
+When using them in a recipe, feel free to name them ``activate.bat``,
+``activate.sh``, ``deactivate.bat``, and ``deactivate.sh`` in the recipe. The
+installed scripts are recommended to be prefixed by the package name and a
+separating ``-``. Below is some sample code for Unix and Windows that will make
+this install process easier. Please feel free to lift it.
+
+In ``build.sh``:
+
+.. code-block:: bash
+
+    # Copy the [de]activate scripts to $PREFIX/etc/conda/[de]activate.d.
+    # This will allow them to be run on environment activation.
+    for CHANGE in "activate" "deactivate"
+    do
+        mkdir -p "${PREFIX}/etc/conda/${CHANGE}.d"
+        cp "${RECIPE_DIR}/${CHANGE}.sh" "${PREFIX}/etc/conda/${CHANGE}.d/${PKG_NAME}_${CHANGE}.sh"
+    done
+
+In ``build.bat``:
+
+.. code-block:: batch
+
+    setlocal EnableDelayedExpansion
+
+    :: Copy the [de]activate scripts to %PREFIX%\etc\conda\[de]activate.d.
+    :: This will allow them to be run on environment activation.
+    for %%F in (activate deactivate) DO (
+        if not exist %PREFIX%\etc\conda\%%F.d mkdir %PREFIX%\etc\conda\%%F.d
+        copy %RECIPE_DIR%\%%F.bat %PREFIX%\etc\conda\%%F.d\%PKG_NAME%_%%F.bat
+    )
+
