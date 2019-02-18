@@ -135,7 +135,7 @@ A package that needs all three compilers would define
 
 .. note::
 
-  Note that appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.
+  Appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.
   There is additional information about how conda-build 3 treats compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/source/compiler-tools.html>`_.
 
 .. _cdt_packages:
@@ -198,9 +198,19 @@ At the time of writing, above is equivalent to the following,
     there are ``numpy`` packages for ``1.7`` available for Python 2.7 in the channel.
 
 
-
 Message passing interface (MPI)
 -------------------------------
+
+.. todo::
+  
+  Add Min's notes: https://hackmd.io/ry4uI0thTs2q_b4mAQd_qg
+
+OpenMP on macOS
+---------------
+
+.. todo::
+
+  Get help from @beckermr
 
 yum_requirements.txt
 --------------------
@@ -215,8 +225,37 @@ There are only very few situations where dependencies installed by yum are accep
 Noarch builds
 =============
 
+Noarch packages are packages that are not architecture specific and therefore only have to be built once.
+
+Declaring these packages as ``noarch`` in the ``build`` section of the meta.yaml, reduces shared CI resources. Therefore all packages that qualify to be noarch packages, should be declared as such.
+
+
+.. _noarch:
+
 Noarch python
 -------------
+The ``noarch: python`` directive, in the ``build`` section, makes pure-Python
+packages that only need to be built once.
+
+In order to qualify as a noarch python package, all of the following criteria must be fulfilled:
+
+  - No compiled extensions
+  - No post-link or pre-link or pre-unlink scripts
+  - No OS specific build scripts
+  - No python version specific requirements
+  - No skips except for python version. (If the recipe is py3 only, remove skip statement and add version constraint on python)
+  - 2to3 is not used
+  - Scripts argument in setup.py is not used
+  - If entrypoints are in setup.py, they are listed in meta.yaml
+  - No activate scripts
+  - Not a dependency of `conda`
+
+.. note::
+  While ``noarch: python`` does not work with selectors, it does work with version constraints.
+  ``skip: True  # [py2k]`` can sometimes be replaced with a constrained python version in the build/run subsections: say ``python >=3`` instead of just ``python``.
+
+If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including ``@conda-forge-admin, please add noarch: python``.
+
 
 Noarch generic
 --------------
