@@ -72,6 +72,17 @@ Checking the dependencies
 Bumping the build number
 ------------------------
 
+The build number is increased when the source code for the package has not changed but you
+need to make a new build.
+As a rule of thumb, the build number is increased whenever a new package with the same version needs to be uploaded to the conda-forge channel.
+
+Examples for needing to increase the build number are
+
+ - updating the pinned dependencies after a rerendering
+ - Fixing wrong dependencies
+
+When the package version changes you should reset the build number back to ``0``.
+
 .. _dev_update_rerender:
 
 Rerendering feedstocks

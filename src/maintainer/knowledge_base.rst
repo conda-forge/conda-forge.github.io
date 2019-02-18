@@ -101,7 +101,7 @@ To skip building with a particular ``vc`` version, add a skip statement.
 .. code-block:: yaml
 
     build:
-        skip: true  # [vc<14]
+        skip: true  # [win and vc<14]
 
     requirements:
       build:
@@ -115,15 +115,102 @@ Special dependencies
 Compilers
 ---------
 
+Compilers are dependencies with a special syntax and are always added to ``requirements/build``.
+
+There are currently three supported compilers:
+
+ - c
+ - cxx
+ - fortran
+
+A package that needs all three compilers would define
+
+.. code-block:: yaml
+
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - {{ compiler('fortran') }}
+
+.. note::
+
+  Note that appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.
+  There is additional information about how conda-build 3 treats compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/source/compiler-tools.html>`_.
+
+.. _cdt_packages:
+
 Core dependency tree packages (CDT)
 -----------------------------------
 
-NumPy
------
+
+
+libGL
+.....
+
+.. _linking_numpy:
+
+Building Against NumPy
+----------------------
+
+Packages that link against NumPy need a special treatment in the dependency section.
+Finding ``numpy.get_include()`` in ``setup.py`` or ``cimport`` statements in ``.pyx`` or ``.pyd`` fil
+es are a telltale sign that the package links against NumPy.
+
+In the case of linking, you need to use the ``pin_compatible`` function to ensure having a compatible
+ numpy version at run time:
+
+.. code-block:: yaml
+
+    host:
+      - numpy
+    run:
+      - {{ pin_compatible('numpy') }}
+
+
+At the time of writing, above is equivalent to the following,
+
+.. code-block:: yaml
+
+    host:
+      - numpy 1.9.3              # [unix]
+      - numpy 1.11.3             # [win]
+    run:
+      - numpy >=1.9.3,<2.0.a0    # [unix]
+      - numpy >=1.11.3,<2.0.a0   # [win]
+
+
+.. admonition:: Notes
+
+    1. You still need to respect minimum supported version of ``numpy`` for the package!
+    That means you cannot use ``numpy 1.9`` if the project requires at least ``numpy 1.12``,
+    adjust the minimum version accordingly!
+
+    .. code-block:: yaml
+
+        host:
+          - numpy 1.12.*
+        run:
+          - {{ pin_compatible('numpy') }}
+
+
+    2. if your package supports ``numpy 1.7``, and you are brave enough :-),
+    there are ``numpy`` packages for ``1.7`` available for Python 2.7 in the channel.
+
+
 
 Message passing interface (MPI)
 -------------------------------
 
+yum_requirements.txt
+--------------------
+
+Dependencies can be installed into the build container with ``yum``, by listing package names line by line in a file named ``yum_requirements.txt`` in the ``recipe`` directory of a feedstock.
+
+There are only very few situations where dependencies installed by yum are acceptable. These cases include
+
+  - satisfying the requirements of :term:`CDT` packages
+  - installing packages that are only required for testing
 
 Noarch builds
 =============
@@ -133,3 +220,38 @@ Noarch python
 
 Noarch generic
 --------------
+
+Build matrices
+==============
+
+Currently, ``python, vc, r-base`` will create a matrix of jobs for each supported version. If ``python`` is only a build dependency and not a runtime dependency (eg: build script of the package is written in Python, but the package is not dependent on python), use ``build`` section
+
+Following implies that ``python`` is only a build dependency and no Python matrix will be created.
+
+.. code-block:: yaml
+
+    build:
+      - python
+    host:
+      - some_other_package
+
+
+Note that ``host`` should be non-empty or ``compiler`` jinja syntax used or ``build/merge_build_host`` set to True for the ``build`` section to be treated as different from ``host``.
+
+Following implies that ``python`` is a runtime dependency and a Python matrix for each supported python version will be created.
+
+.. code-block:: yaml
+
+    host:
+      - python
+
+``conda-forge.yml``'s build matrices is removed in conda-smithy=3. To get a build matrix, create a ``conda_build_config.yaml`` file inside recipe folder. For example following will give you 2 builds and you can use the selector ``vtk_with_osmesa`` in the ``meta.yaml``
+
+.. code-block:: yaml
+
+    vtk_with_osmesa:
+      - False
+      - True
+
+You need to rerender the feedstock after this change.
+

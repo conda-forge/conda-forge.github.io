@@ -68,8 +68,9 @@ Checklist
 * Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache 2.0 rather than APACHE 2.0).
 * Ensure that you have included a license file if your license requires one -- most do. (see `here <https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55>`_)
 * In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
-* Make sure that all tests pass sucessfully at least on your development machine.
+* Make sure that all tests pass successfully at least on your development machine.
 * Recommended: run the test locally on your source code to ensure the recipe works locally (see  :ref:`staging_test_locally`).
+* Make sure that your changes do not interfere with other recipes that are int the ``recipes`` folder (e.g. the ``example`` recipe).
 
 
 
@@ -82,7 +83,17 @@ Post staging process
 * If you want to make a change to the recipe, send a :term:`PR` to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.
 
 
+Maintainer role
+---------------
 
+The maintainer's job is to:
+
+- Keep the feedstock updated by merging eventual maintenance :term:`PR`\ s from conda-forge's bots.
+- Keep the feedstock on par with new releases of the source package by
+  - Bumping the version number and checksum.
+  - Making sure that feedstock's requirements stay accurate.
+  - Make sure the test requirements match those of the of the updated package.
+- Answer eventual question about the package on the feedstock issue tracker.
 
 
 .. _meta_yaml:
@@ -149,7 +160,7 @@ A full description of selectors is
 
 
 Optional: ``bld.bat`` and/or ``build.sh``
------------------------------------------
+.........................................
 
 In many cases, ``bld.bat`` and/or ``build.sh`` files are not required.
 Pure Python packages almost never need them.
@@ -195,6 +206,19 @@ Requirements
 
 Build, host and run
 ...................
+
+Avoid external dependencies
+...........................
+
+As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure :term:`ABI` compatiblity for all our packages.
+
+There are only few exceptions to this rule:
+
+#. Some dependencies have to be satisfied with :term:`CDT` packages (see :ref:`cdt_packages`).
+
+#. Some packages require root access (e.g. device drivers) that cannot be distributed by conda-forge. These dependencies should be avoided whenever possible.
+
+
 
 Pinning
 .......
@@ -388,6 +412,22 @@ This requires that you have docker installed on your machine.
 
 About
 -----
+
+Packaging the licence manually
+..............................
+
+Sometimes upstream maintainers do not include a license file in their tarball despite being demanded by the license.
+
+In this case it is possible to add the license to the ``recipe`` directory (here named ``LICENSE.txt``)  and reference it inside the meta.yaml:
+
+
+.. code-block:: yaml
+
+   about:
+     license_file: {{ RECIPE_DIR }}/LICENSE.txt
+
+In this case, please also notify the upstream developers that the license file is missing.
+
 
 Activate scripts
 ----------------
