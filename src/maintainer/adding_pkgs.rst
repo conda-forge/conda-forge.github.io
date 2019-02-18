@@ -3,11 +3,97 @@
 Contributing packages
 *********************
 
+.. _creating_recipes:
+
+The staging process
+===================
+
+This document presents an overview over  how to contribute packages to conda-forge.
+
+
+Getting Started
+---------------
+
+There are multiple ways to get started:
+
+#. Look at `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the staged-recipes repository and modify it as necessary.
+#. If it is an R package from `CRAN <https://cran.r-project.org/>`_, please
+   instead start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_.
+   Then if necessary you can make manual edits to the recipe.
+#. If it is a python package you can generate a skeleton as a starting point with
+   ``conda skeleton pypi your_package_name``. You do *not* have to use the skeleton, and the
+   recipes produced by skeleton will need to be edited.
+   In particular, you'll at least need to change the build line to :ref:`use pip <use-pip>`,
+   add yourself as a maintainer,
+   and specify a ``license_file``.
+
+Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
+
+*If there are details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.*
+
+In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that might help you with a successful build is provided in the following.
+
+Step-by-step Instructions
+-------------------------
+
+#. Ensure your source code can be downloaded as a single file. Source code
+   should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz)
+   or tagged on GitHub, to ensure that it can be verified. (For further
+   detail, sees :ref:`tarballs_no_repos`).
+#. Fork the `example recipes
+   <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
+   repository.
+#. Create a new branch from the staged-recipes ``master`` branch.
+#. Within your forked copy, generate a new folder in the recipes subdirectory
+   and copy the `meta.yml
+   <https://github.com/conda-forge/staged-recipes/blob/master/recipes/
+   example/meta.yaml>`_
+   file from the example directory. Please leave the example directory
+   unchanged!
+#. Edit the copied recipe (meta.yml) as needed. For details, see
+   :ref:`meta_yaml`.
+#. Generate the SHA256 key for your source code archive, as described in the
+   example recipe using the ``openssl`` tool. As an alternative you can also
+   go to the package description on `PyPi <https://pypi.org>`_ from which you
+   can directly copy the SHA256.
+#. Be sure to fill in the ``tests`` section. The simplest test will simply
+   test that the module can be imported, as described in the example.
+#. Remove all irrelevant comments in the ``meta.yaml``  file.
+
+
+
+Checklist
+.........
+
+* Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache 2.0 rather than APACHE 2.0).
+* Ensure that you have included a license file if your license requires one -- most do. (see `here <https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55>`_)
+* In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
+* Make sure that all tests pass sucessfully at least on your development machine.
+* Recommended: run the test locally on your source code to ensure the recipe works locally (see  :ref:`staging_test_locally`).
+
+
+
+Post staging process
+--------------------
+
+* After the PR is merged, our :term:`CI` services will create a new git repo automatically. For example, the recipe for a package named ``pydstool`` will be moved to a new repository `https://github.com/conda-forge/pydstool-feedstock <https://github.com/conda-forge/pydstool-feedstock>`_.
+* CI services will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to `https://anaconda.org/conda-forge <https://anaconda.org/conda-forge>`_
+* If this is your first contribution, you will be added to the conda-forge `team <https://github.com/orgs/conda-forge/people>`_ and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.
+* If you want to make a change to the recipe, send a :term:`PR` to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.
+
+
+
+
+
+.. _meta_yaml:
+
 The recipe meta.yaml
 ====================
 
 Source
 ------
+
+.. _tarballs_no_repos:
 
 Build from tarballs, not repos
 ..............................
@@ -22,9 +108,86 @@ There are several reasons behind this rule:
     in fact the intended package.
   - On some systems it is possible to not have permission to remove a repo once it is created.
 
+Populating the ``hash`` field
+.............................
+
+If your package is on PyPi_, you can get the sha256 hash from your package's page
+on PyPI; look for the ``SHA256`` link next to the download link on your package's
+files page, e.g. ``https://pypi.org/project/<your-project>/#files``.
+
+You can also generate a hash from the command line on Linux (and Mac if you
+install the necessary tools below). 
+
+To generate the ``sha256`` hash: ``openssl sha256 your_sdist.tar.gz``
+
+You may need the openssl package, available on conda-forge
+``conda install openssl -c conda-forge``.
+
+.. _PyPi: https://pypi.org
+
+Downloading extra sources and data files
+........................................
+
+``conda-build 3`` supports multiple sources per recipe. Examples are available `in the conda-build docs <https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#source-from-multiple-sources>`_.
+
+
 Build
 -----
 
+Excluding a platform
+....................
+
+Use the ``skip`` key in the ``build`` section along with a selector:
+
+.. code-block:: yaml
+
+    build:
+        skip: true  # [win]
+
+A full description of selectors is
+`in the conda docs <http://conda.pydata.org/docs/building/meta-yaml.html#preprocessing-selectors>`_.
+
+
+Optional: ``bld.bat`` and/or ``build.sh``
+-----------------------------------------
+
+In many cases, ``bld.bat`` and/or ``build.sh`` files are not required.
+Pure Python packages almost never need them.
+
+If the build can be executed with one line, you may put this line in the
+``script`` entry of the ``build`` section of the ``meta.yaml`` file with:
+``script: "{{ PYTHON }} -m pip install . --no-deps -vv"``.
+
+Remember to always add ``pip`` to the host requirements.
+
+
+.. _use-pip:
+
+Use pip
+.......
+Normally Python packages should use this line:
+
+.. code-block:: yaml
+
+    build:
+      script: "{{ PYTHON }} -m pip install . --no-deps -vv"
+
+as the installation script in the ``meta.yml`` file or ``bld.bat/build.sh`` script files,
+while adding ``pip`` to the host requirements:
+
+.. code-block:: yaml
+
+    requirements:
+      host:
+        - pip
+
+These options should be used to ensure a clean installation of the package without its
+dependencies. This helps make sure that we're only including this package,
+and not accidentally bringing any dependencies along into the conda package.
+
+Note that the ``--no-deps`` line means that for pure-Python packages,
+usually only ``python`` and ``pip`` are needed as ``build`` or ``host`` requirements;
+the real package dependencies are only ``run`` requirements.
 
 
 Requirements
@@ -205,6 +368,8 @@ This makes it very hard to run tests that are not installed with the package.
 
 .. **NOTE** if anyone has good ideas as to how to do that, please put it here!
 
+
+.. _staging_test_locally:
 
 Running tests locally for staged recipes
 ........................................

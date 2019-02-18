@@ -1,71 +1,3 @@
-.. _creating_recipes:
-
-Creating Conda Recipes
-======================
-
-This document presents conda-forge information about creating recipes overall.
-Details of modifying files inside of a recipe are present on other pages in
-this documentation.
-
-Getting Started
----------------
-
-There are multiple ways to get started:
-
-a. Look at `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the staged-recipes repository and modify it as necessary.
-b. If it is an R package from `CRAN <https://cran.r-project.org/>`_, please
-   instead start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_.
-   Then if necessary you can make manual edits to the recipe.
-c. If it is a python package you can generate a skeleton as a starting point with
-   ``conda skeleton pypi your_package_name``. You do *not* have to use the skeleton, and the
-   recipes produced by skeleton will need to be edited.
-   In particular, you'll at least need to change the build line to :ref:`use pip <use-pip>`,
-   add yourself as a maintainer,
-   and specify a ``license_file``.
-
-Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
-
-*If there are details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.*
-
-In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that might help you with a successful build is provided in the following.
-
-Step-by-step Instructions
--------------------------
-
-0. Ensure your source code can be downloaded as a single file. Source code
-   should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz)
-   or tagged on GitHub, to ensure that it can be verified. (For further
-   detail, see `Build from Tarballs, Not Repos
-   <https://conda-forge.org/docs/meta.html#build-from-tarballs-not-repos>`_).
-1. Fork the `example recipes
-   <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
-   repository.
-2. Create a new branch from the staged-recipes ``master`` branch.
-3. Within your forked copy, generate a new folder in the recipes subdirectory
-   and copy the `meta.yml
-   <https://github.com/conda-forge/staged-recipes/blob/master/recipes/
-   example/meta.yaml>`_
-   file from the example directory. Please leave the example directory
-   unchanged!
-4. Edit the copied recipe (meta.yml) as needed. For details, see
-   `Writing the "meta.yml" <https://conda-forge.org/docs/meta.html>`_
-5. Generate the SHA256 key for your source code archive, as described in the
-   example recipe using the ``openssl`` tool. As an alternative you can also
-   go to the package description on `PyPi <https://pypi.org>`_ from which you
-   can directly copy the SHA256.
-6. Be sure to fill in the ``tests`` section. The simplest test will simply
-   test that the module can be imported, as described in the example.
-7. Remove all irrelevant comments in the ``meta.yaml``  file.
-
-
-Checklist
-.........
-
-* Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache 2.0 rather than APACHE 2.0).
-* Ensure that you have included a license file if your license requires one -- most do. (see `here <https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55>`_)
-* In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
-* Make sure that all tests pass sucessfully at least on your development machine.
-* Recommended: run ``conda-build`` on your source code to ensure the recipe works locally.
 
 
 What happens after the PR to staged-recipes is merged
@@ -108,19 +40,6 @@ In these cases, the basic heirarchy for dependencies, in order of preference, is
 If your dependencies do not change with the Python version, or with the
 platform, consider making your build :ref:`noarch <noarch>`, this will
 allow the recipe to build faster, and free some CI resources for other projects.
-
-
-Optional: ``bld.bat`` and/or ``build.sh``
------------------------------------------
-
-In many cases, ``bld.bat`` and/or ``build.sh`` files are not required.
-Pure Python packages almost never need them.
-
-If the build can be executed with one line, you may put this line in the
-``script`` entry of the ``build`` section of the ``meta.yaml`` file with:
-``script: "{{ PYTHON }} -m pip install . -vv"``.
-
-Remember to always add ``pip`` to the host requirements.
 
 
 Maintainer Role
