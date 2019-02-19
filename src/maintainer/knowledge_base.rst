@@ -143,10 +143,39 @@ A package that needs all three compilers would define
 Core dependency tree packages (CDT)
 -----------------------------------
 
+Dependencies outside of the conda-forge channel should be avoideded (see :ref:`no_external_deps`).
+However there are very few exceptions: some dependencies are so close to the system that they are not packaged with conda-forge.
+These dependencies have to be satisfied with *Core Dependency Tree* packages.
 
+In conda-forge this currently affects only packages that link against libGL.
 
 libGL
 .....
+
+In addition to the required compilers ``{{ compiler('c') }}`` and/or ``{{ compiler('cxx') }}``, following CDT packages are required for linking against libGL:
+
+.. code-block:: yaml
+
+  build:
+    - {{ cdt('mesa-libgl-devel') }}  # [linux]
+    - {{ cdt('mesa-dri-drivers') }}  # [linux]
+    - {{ cdt('libselinux') }}  # [linux]
+    - {{ cdt('libxdamage') }}  # [linux]
+    - {{ cdt('libxfixes') }}  # [linux]
+    - {{ cdt('libxxf86vm') }}  # [linux]
+
+
+If you need a fully functional binary in the test phase, you have to also provide the shared libraries via ``yum_requirements.txt`` (see :ref:`yum_deps`).
+
+::
+
+  mesa-libGL
+  mesa-dri-drivers
+  libselinux
+  libXdamage
+  libXfixes
+  libXxf86vm
+
 
 .. _linking_numpy:
 
@@ -212,6 +241,9 @@ OpenMP on macOS
 
   Get help from @beckermr
 
+
+.. _yum_deps:
+
 yum_requirements.txt
 --------------------
 
@@ -219,7 +251,7 @@ Dependencies can be installed into the build container with ``yum``, by listing 
 
 There are only very few situations where dependencies installed by yum are acceptable. These cases include
 
-  - satisfying the requirements of :term:`CDT` packages
+  - satisfying the requirements of :term:`CDT` packages during test phase
   - installing packages that are only required for testing
 
 

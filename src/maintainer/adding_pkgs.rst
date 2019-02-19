@@ -207,6 +207,8 @@ Requirements
 Build, host and run
 ...................
 
+.. _no_external_deps:
+
 Avoid external dependencies
 ...........................
 
