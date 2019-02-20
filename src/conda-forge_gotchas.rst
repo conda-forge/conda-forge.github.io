@@ -32,16 +32,23 @@ Note: All of conda-forge software pinning can be found at: https://github.com/co
 How to fix it?
 ''''''''''''''
 
-Newer ``conda`` versions introduced a channel priority feature.
-See https://conda.io/docs/channels.html for more information.
+Newer ``conda`` versions introduced a strict channel priority feature.
+Type ``conda config --describe channel_priority`` for more information.
 
-One possible solution is to add the ``conda-forge`` channel on top of ``defaults`` in your ``condarc`` file when using ``conda-forge`` packages.
-This will ensuring that all the dependencies will come from the ``conda-forge`` channel.
+The solution is to add the ``conda-forge`` channel on top of ``defaults`` in your ``.condarc`` file when using ``conda-forge`` packages
+and activate the strict channel priority with:
+
+.. code-block:: shell
+  
+    $ conda config --set channel_priority strict
+
+This will ensuring that all the dependencies will come from the ``conda-forge`` channel unless they exist only on ``defaults``.
 Here is how a ``.condarc`` file would look like:
 
 .. code-block:: shell
 
     $ cat .condarc
+    channel_priority: strict
     channels:
       - conda-forge
       - defaults
