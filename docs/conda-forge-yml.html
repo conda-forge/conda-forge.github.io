@@ -249,17 +249,12 @@ arches:</p>
 <li><code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> to disable a platform.</li>
 </ul>
 <p>For example, switing everything to build on Azure pipelines:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">code</span><span class="o">-</span><span class="n">block</span><span class="p">::</span> <span class="n">yaml</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
+  <span class="nt">linux</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+  <span class="nt">osx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+  <span class="nt">win</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
 </pre></div>
 </div>
-<blockquote>
-<div><dl class="docutils">
-<dt>provider:</dt>
-<dd>linux: azure
-osx: azure
-win: azure</dd>
-</dl>
-</div></blockquote>
 </div>
 <div class="section" id="recipe-dir">
 <h2>recipe_dir<a class="headerlink" href="#recipe-dir" title="Permalink to this headline">¶</a></h2>
