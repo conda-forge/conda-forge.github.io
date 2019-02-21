@@ -59,12 +59,17 @@ that mismatch can lead to errors when the install environment is mixing packages
 </div>
 <div class="section" id="how-to-fix-it">
 <h3>How to fix it?<a class="headerlink" href="#how-to-fix-it" title="Permalink to this headline">¶</a></h3>
-<p>Newer <code class="docutils literal notranslate"><span class="pre">conda</span></code> versions introduced a channel priority feature.
-See <a class="reference external" href="https://conda.io/docs/channels.html">https://conda.io/docs/channels.html</a> for more information.</p>
-<p>One possible solution is to add the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel on top of <code class="docutils literal notranslate"><span class="pre">defaults</span></code> in your <code class="docutils literal notranslate"><span class="pre">condarc</span></code> file when using <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages.
-This will ensuring that all the dependencies will come from the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel.
+<p>Newer <code class="docutils literal notranslate"><span class="pre">conda</span></code> versions introduced a strict channel priority feature.
+Type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">config</span> <span class="pre">--describe</span> <span class="pre">channel_priority</span></code> for more information.</p>
+<p>The solution is to add the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel on top of <code class="docutils literal notranslate"><span class="pre">defaults</span></code> in your <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> file when using <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages
+and activate the strict channel priority with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ conda config --set channel_priority strict
+</pre></div>
+</div>
+<p>This will ensure that all the dependencies will come from the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel unless they exist only on <code class="docutils literal notranslate"><span class="pre">defaults</span></code>.
 Here is how a <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> file would look like:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ cat .condarc
+channel_priority: strict
 channels:
   - conda-forge
   - defaults
