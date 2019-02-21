@@ -237,7 +237,7 @@ The following CI services are available:
 * ``appveyor``
 * ``None`` or ``False`` to disable a platform.
 
-For example, switing everything to build on Azure pipelines::
+For example, switing everything to build on Azure pipelines:
 
 .. code-block:: yaml
 
