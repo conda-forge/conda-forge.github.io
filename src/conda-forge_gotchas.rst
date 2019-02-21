@@ -42,7 +42,7 @@ and activate the strict channel priority with:
   
     $ conda config --set channel_priority strict
 
-This will ensuring that all the dependencies will come from the ``conda-forge`` channel unless they exist only on ``defaults``.
+This will ensure that all the dependencies will come from the ``conda-forge`` channel unless they exist only on ``defaults``.
 Here is how a ``.condarc`` file would look like:
 
 .. code-block:: shell
