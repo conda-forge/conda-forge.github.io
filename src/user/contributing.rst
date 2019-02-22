@@ -11,6 +11,8 @@ Help is always welcome for
  - help improving the documentation 
 
 
+.. _improve_docs:
+
 Improving the documentation
 ===========================
 

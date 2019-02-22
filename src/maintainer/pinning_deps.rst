@@ -1,5 +1,7 @@
-Pinning dependencies
-********************
+Pinned dependencies
+*******************
+
+.. _globally_pinned_packages:
 
 Globally pinned packages
 ========================
@@ -76,3 +78,18 @@ Packages that depend on a package with ``run_exports`` can choose to overwrite t
   The general idea is that the ``numpy-devel`` package should be used when a package is building against the C interface (i.e. it needs the compatibility bound), and the numpy package should be used when a package is using only the python interface.
 
   In general, it is not necessary to split up packages. At conda-forge, we only advise it when it greatly reduces package size, or when it helps remove dependencies that would otherwise be unnecessarily included.
+
+
+.. _update_pins:
+
+Updating package pins
+=====================
+
+Updating a pin requires following steps:
+
+ - edit `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`__ in the ``conda-forge/conda-forge-pinning`` repository.
+ - bump the version of the conda-forge-pinning `recipe <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/meta.yaml>`__ by setting the version to the current date.
+ - rerender the feedstock.
+ - propose the changes as a :term:`PR` to ``conda-forge/conda-forge-pinning-feedstock``.
+
+

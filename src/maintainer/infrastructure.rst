@@ -7,24 +7,48 @@ Repositories
 Staging area for recipes
 ------------------------
 
+`conda-forge/staged-recipes <https://github.com/conda-forge/staged-recipes>`_ is the entry point for new packages to join the conda-forge package collection.
+You can find a detailed guide to submitting new package recipes in :ref:`creating_recipes`.
+
 Smithy
 ------
 
-conda-forge  uses ``conda-smithy`` to re-render the feedstock and update the feedstock configuration.
-This action updates the ``README``, CI configuration, the build matrix,
-fixes problems with the feedstock configuration, etc.
+Smithy contains maintainance code for conda-forge, which is used by the ``conda smithy`` command line tool and the :ref:`dev_admservice`. Smithy lives in the repository `conda-forge/conda-smithy <https://github.com/conda-forge/conda-smithy>`_.
 
-See :ref:`dev_update_rerender` for detailed description how feedstocks can be rerendered.
+``conda-forge/conda-smithy`` is the right repository to report bugs for
+
+ - the rerendering process
+ - the recipe linter
+ - :term:`CI` support utils
+
+``conda-smithy`` also contains the commandline tool that you will use if you rerender manually from the commandline (see :ref:`dev_update_rerender`).
+
 
 Web services
 ------------
 
+The heroku app providing the conda-forge web services are living in `conda-forge/conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
+Please note that the code logic provided by the app is in the ``Smithy`` repository.
+
+Bugs or suggestions regarding the service functionality should therefore be opened in at ``conda-forge/conda-smithy``'s `bug tracker <https://github.com/conda-forge/conda-smithy/issues>`_.
+
 conda-forge pinning
 -------------------
+
+Package-wide dependency pins are defined in `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_  in the `conda-forge/conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_.
+
+For more information on conda-forge wide package pins, please refer to :ref:`globally_pinned_packages`.
+
+Please open :term:`PR` and/or issues there if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to :ref:`update_pins`.
 
 Documentation
 -------------
 
+The documentation lives in `conda-forge/conda-forge.github.io <https://github.com/conda-forge/conda-forge.github.io/>`__ and is automatically deployed to our `online version <https://conda-forge.org/docs/>`__.
+
+The documentation is built with ``Sphinx`` and the sources files are located in the `src <https://github.com/conda-forge/conda-forge.github.io/tree/master/src>`__ directory of the repository.
+
+If you found a typo, unclear explanations or new topics that could be covered, you can suggest changes to the documentation. For more details, please refer to :ref:`improve_docs`.
 
 
 

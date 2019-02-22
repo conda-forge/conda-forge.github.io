@@ -109,6 +109,5 @@ To work around this problem, execute the following commands:
 Here, we specified ``--force`` so as not to uninstall packages that depend on
 ``blas`` (e.g. numpy and all dependencies).
 
-It may be helpful to read the conda documentation regarding installing
-default packages in new environments
-<https://conda.io/docs/user-guide/configuration/use-condarc.html#always-add-packages-by-default-create-default-packages>`_
+It may be helpful to read the `conda documentation <https://conda.io/docs/user-guide/configuration/use-condarc.html#always-add-packages-by-default-create-default-packages>`_ regarding installing
+default packages in new environments.
