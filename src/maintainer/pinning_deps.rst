@@ -1,3 +1,5 @@
+.. _pinned_deps:
+
 Pinned dependencies
 *******************
 

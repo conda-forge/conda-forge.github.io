@@ -207,6 +207,44 @@ Requirements
 Build, host and run
 ...................
 
+Conda-build distinguishes three different kinds of dependencies.
+In the following paragraphs we give a very short overview what packages go where.
+For a detailed explanation please refer to the `conda-build documentation <https://docs.conda.io/projects/conda-build/en/latest/source/resources/define-metadata.html#requirements-section>`__.
+
+Build
+^^^^^
+
+Build dependencies are required in the build environment and contain all tools that are not needed on the host of the package.
+
+Following packages are examples of typical ``build`` dependencies:
+
+ - compilers (see :ref:`dep_compilers`)
+ - cmake
+ - make
+ - pkg-config
+ - CDT packages (see :ref:`cdt_packages`)
+
+
+Host
+^^^^
+
+Host dependencies are required during build phase, but in contrast to build packages they have to be present on the host.
+
+Following packages are typical examples for ``host`` dependencies:
+
+ - shared libraries (c/c++)
+ - python/r libraries that link against c libraries (see e.g. :ref:`linking_numpy`)
+ - python, r-base
+ - setuptools, pip (see :ref:`use-pip`)
+
+Run
+^^^
+
+Run dependencies are only required during run time of the package. Run dependencies typically include
+
+ - most python/r libraries
+
+
 .. _no_external_deps:
 
 Avoid external dependencies
@@ -225,10 +263,38 @@ There are only few exceptions to this rule:
 Pinning
 .......
 
+Linking shared c/c++ libraries creates dependence on the :term:`ABI` of the library that was used at build time on the package.
+The exposed interface changes when previously existing exposed symbols are deleted or modified in a newer version.
 
-TODO: 
-  - Why is pinning needed (ABI)
-  - How does pinning work (e.g. pin-max
+It is therefore crucial to ensure that only library versions with a compatible :term:`ABI` are used after linking.
+
+In the best case, the shared library you depend on:
+
+- defines a pin in the `list of globally pinned packages <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`__
+
+- exports its :term:`ABI` compatible requirements by defining ``run_exports`` in it's meta.yaml
+
+In these cases you do not have to worry about version requirements:
+
+.. code-block:: yaml
+
+  requirements:
+    # [...]
+    host:
+      - readline
+      - libpng
+
+In other cases you have to specify :term:`ABI` compatible versions manually.
+
+.. code-block:: yaml
+
+  requirements:
+    # [...]
+    host:
+      - libawesome 1.1.*
+
+For more information on pinning, please refer to :ref:`pinned_deps`.
+
 
 External dependencies
 .....................

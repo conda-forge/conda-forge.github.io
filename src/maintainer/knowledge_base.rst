@@ -112,6 +112,8 @@ To skip building with a particular ``vc`` version, add a skip statement.
 Special dependencies
 ====================
 
+.. _dep_compilers:
+
 Compilers
 ---------
 
@@ -234,6 +236,298 @@ Message passing interface (MPI)
   
   Add Min's notes: https://hackmd.io/ry4uI0thTs2q_b4mAQd_qg
 
+MPI Variants in conda-forge
+...........................
+
+How are MPI variants best handled in conda-forge?
+
+
+There are a few broad cases:
+
+- package requires a specific MPI provider (easy!)
+- package works with any MPI provider (e.g. mpich, openmpi)
+- package works with/without MPI
+
+
+
+Building MPI variants
+^^^^^^^^^^^^^^^^^^^^^
+
+In `conda_build_config.yaml`:
+
+.. code-block:: yaml
+
+  mpi:
+    - mpich
+    - openmpi
+
+
+In `meta.yaml`:
+
+.. code-block:: yaml
+
+  requirements:
+    host:
+      - {{ mpi }}
+
+And rerender with:
+
+.. code-block:: bash
+
+  conda-smithy rerender -c auto
+
+to produce the build matrices.
+
+Current builds of both mpi providers have `run_exports` which is equivalent to adding:
+
+.. code-block:: yaml
+
+  requirements:
+    run:
+      - {{ pin_run_as_build(mpi, min_pin='x.x', max_pin='x.x') }}
+
+If you want to do the pinning yourself (i.e. not trust the mpi providers, or pin differently, add):
+
+.. code-block:: yaml
+
+  # conda_build_config.yaml
+  pin_run_as_build:
+    mpich: x.x
+    openmpi: x.x
+ 
+.. code-block:: yaml
+
+  # meta.yaml
+  requirements:
+    host:
+      - {{ mpi }}
+    run:
+      - {{ mpi }}
+
+Including a no-mpi build
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Some packages (e.g. hdf5) may want a no-mpi build, in addition to the mpi builds.
+To do this, add `nompi` to the mpi matrix:
+
+.. code-block:: yaml
+
+  mpi:
+    - nompi
+    - mpich
+    - openmpi
+
+and apply the appropriate conditionals in your build:
+
+.. code-block:: yaml
+
+  requirements:
+    host:
+      - {{ mpi }}  # [mpi != 'nompi']
+    run:
+      - {{ mpi }}  # [mpi != 'nompi']
+
+
+
+Preferring a provider (usually nompi)
+"""""""""""""""""""""""""""""""""""""
+
+Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual-exclusivity of the ``mpi`` metapackage allows picking between mpi providers by installing an mpi provider, e.g.
+
+.. code-block:: bash
+
+    conda install mpich ptscotch
+
+or
+
+.. code-block:: bash
+
+    conda install openmpi ptscotch
+
+This doesn't extend to ``nompi``, because there is no ``nompi`` variant of the mpi metapackage. And there probably shouldn't be, because some packages built with mpi doesn't preclude other packages in the env that *may* have an mpi variant from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no parallel hdf5 yet. This works fine, though some features may not be available).
+
+Typically, if there is a preference it will be packages with a nompi variant, where the serial build is preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.
+
+
+.. admonition:: Outdated
+
+  To de-prioritize a build in the solver, it can be given a special ``track_features`` field:
+
+  - All builds *other than* the priority build should have a ``track_features`` field
+  - Build strings can be used to allow downstream packages to make explicit dependencies.
+  - No package should actually *have* the tracked feature.
+
+
+  .. note:: **update**: track_features deprioritization has too high priority in the solver, preventing a package from adopting a variant of a dependency after some builds have already been made. Instead, use a build number offset to apply the preference at a more appropriate level.
+
+
+Here is an example build section:
+
+::
+
+  {% if mpi == 'nompi' %}
+  # prioritize nompi variant via build number
+  {% set build = build + 100 %}
+  {% endif %}
+  build:
+    number: {{ build }}
+
+    # add build string so packages can depend on
+    # mpi or nompi variants explicitly:
+    # `pkg * mpi_mpich_*` for mpich
+    # `pkg * mpi_*` for any mpi
+    # `pkg * nompi_*` for no mpi
+
+    {% set mpi_prefix = "mpi_" + mpi %}
+    {% else %}
+    {% set mpi_prefix = "nompi" %}
+    {% endif %}
+    string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
+
+.. note::
+
+  ``{{ PKG_HASH }}`` avoids build string collisions on *most* variants,
+  but not on packages that are excluded from the default build string,
+  e.g. Python itself. If the package is built for multiple Python versions, use:
+
+  .. code-block:: yaml
+
+    string: "{{ mpi_prefix }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
+
+  as seen in `mpi4py <https://github.com/conda-forge/h5py-feedstock/pull/49/commits/b08ee9307d16864e775f1a7f9dd10f25c83b5974>`__
+
+
+This build section creates the following packages:
+
+- ``pkg-x.y.z-mpi_mpich_h12345_0``
+- ``pkg-x.y.z-mpi_openmpi_h23456_0``
+- ``pkg-x.y.z-nompi_h34567_100``
+
+Which has the following consequences:
+
+- The ``nompi`` variant is preferred, and will be installed by default unless an mpi variant is explicitly requested.
+- mpi variants can be explicitly requested with ``pkg=*=mpi_{{ mpi }}_*``
+- any mpi variant, ignoring provider, can be requested with ``pkg=*=mpi_*``
+- nompi variant can be explicitly requested with ``pkg=*=nompi_*``
+
+If building with this library creates a runtime dependency on the variant, the build string pinning can be added to ``run_exports``.
+
+For example, if building against the nompi variant will work with any installed version, but building with a given mpi provider requires running with that mpi:
+
+
+::
+
+  build:
+    ...
+    {% if mpi != 'nompi' %}
+    run_exports:
+      - {{ name }} * {{ mpi_prefix }}_*
+    {% endif %}
+
+Remove the ``if mpi...`` condition if all variants should create a strict runtime dependency based on the variant chosen at build time (i.e. if the nompi build cannot be run against the mpich build).
+
+Complete example
+""""""""""""""""
+
+Combining all of the above, here is a complete recipe, with:
+
+- nompi, mpich, openmpi variants
+- run-exports to apply mpi choice made at build time to runtime where nompi builds can be run with mpi, but not vice versa.
+- nompi variant is preferred by default
+- only build nompi on Windows
+
+This matches what is done in `hdf5 <https://github.com/conda-forge/hdf5-feedstock/pull/90>`__.
+
+
+.. code-block:: yaml
+
+  # conda_build_config.yaml
+  mpi:
+    - nompi
+    - mpich  # [not win]
+    - openmpi  # [not win]
+
+::
+
+  # meta.yaml
+  {% set name = 'pkg' %}
+  {% set build = 1000 %}
+
+  # ensure mpi is defined (needed for conda-smithy recipe-lint)
+  {% set mpi = mpi or 'nompi' %}
+
+  {% if mpi == 'nompi' %}
+  # prioritize nompi variant via build number
+  {% set build = build + 100 %}
+  {% endif %}
+
+  build:
+    number: {{ build }}
+
+    # add build string so packages can depend on
+    # mpi or nompi variants explicitly:
+    # `pkg * mpi_mpich_*` for mpich
+    # `pkg * mpi_*` for any mpi
+    # `pkg * nompi_*` for no mpi
+
+    {% if mpi != 'nompi' %}
+    {% set mpi_prefix = "mpi_" + mpi %}
+    {% else %}
+    {% set mpi_prefix = "nompi" %}
+    {% endif %}
+    string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
+
+    {% if mpi != 'nompi' %}
+    run_exports:
+      - {{ name }} * {{ mpi_prefix }}_*
+    {% endif %}
+
+  requirements:
+    host:
+      - {{ mpi }}  # [mpi != 'nompi']
+    run:
+      - {{ mpi }}  # [mpi != 'nompi']
+
+And then a package that depends on this one can explicitly pick the appropriate mpi builds:
+
+.. code-block:: yaml
+
+  # meta.yaml
+
+  requirements:
+    host:
+      - {{ mpi }}  # [mpi != 'nompi']
+      - pkg
+      - pkg * mpi_{{ mpi }}_*  # [mpi != 'nompi']
+    run:
+      - {{ mpi }}  # [mpi != 'nompi']
+      - pkg * mpi_{{ mpi }}_*  # [mpi != 'nompi']
+
+mpi-metapackage exclusivity allows ``mpi_*`` to resolve the same as ``mpi_{{ mpi }}_*`` if ``{{ mpi }}`` is also a direct dependency, though it's probably nicer to be explicit.
+
+Just mpi example
+""""""""""""""""
+
+Without a preferred ``nompi`` variant, recipes that require mpi are much simpler. This is all that is needed:
+
+.. code-block:: yaml
+
+  # conda_build_config.yaml
+  mpi:
+    - mpich
+    - openmpi
+
+.. code-block:: yaml
+
+  # meta.yaml
+  requirements:
+    host:
+      - {{ mpi }}
+    run:
+      - {{ mpi }}
+
+
+
 OpenMP on macOS
 ---------------
 
@@ -299,7 +593,7 @@ BLAS metapackage
       -  noblas - no BLAS optimisations (e.g. for reasons of smaller
          installations)
 
-Numpy package
+NumPy package
 .............
 
    -  "version + build number" must always be greater than or equal to that
