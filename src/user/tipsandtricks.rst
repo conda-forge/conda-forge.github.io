@@ -2,6 +2,8 @@ Tips & tricks
 *************
 
 
+.. _multiple_channels: 
+
 Using multiple channels
 =======================
 

@@ -6,10 +6,33 @@
 What is conda-forge?
 ====================
 
+conda-forge is a community effort that provides conda packages for a wide range of software.
+
+**Missing a package that you would love to install with conda?** - Chances are we already packaged it for you!
+
+You can `search <https://anaconda.org/>`__ for packages online. Look out for packages provided  by our ``conda-forge`` organization.
+
+**Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack! Please refer to :ref:`becoming_involved`, for an overview over how to start contributing.
+
 
 How can I install packages from conda-forge?
 ============================================
 
+Using conda-forge is as easy! You just have to register the conda-forge channel as a package source for conda.
+
+.. code-block:: bash
+
+  conda config --add channels conda-forge
+
+
+From now on using ``conda install <package-name>`` will also find packages in our conda-forge channels.
+
+
+.. note::
+
+  Please be aware that the order of your conda package channels is important, especially when you combine conda-forge with other channels, e.g. ``bioconda``.
+  
+  Please refer to :ref:`multiple_channels` for more information.
 
 Announcements
 =============

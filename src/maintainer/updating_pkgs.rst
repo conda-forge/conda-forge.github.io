@@ -1,5 +1,7 @@
-Updating packages
-*****************
+.. _maintaining_pkgs:
+
+Maintaining packages
+********************
 
 Important notes
 ===============

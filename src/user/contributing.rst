@@ -1,14 +1,16 @@
+.. _becoming_involved:
+
 Becoming involved
 *****************
 
 conda-forge is a community-driven effort of cross-platform packaging and as such relies on volunteers to sustain and improve.
 
-Help is always welcome for
+Help is always welcome! You can contribute e.g. by
 
- - contributing new packages
- - help maintaining packages
- - suggesting and implementing improvements to ourinfrastructure
- - help improving the documentation 
+ - contributing new packages (:ref:`dev_contribute_pkgs`)
+ - help updating and maintaining packages (:ref:`maintaining_pkgs`)
+ - suggesting and implementing improvements for our :ref:`infrastructure`
+ - help :ref:`improve_docs`
 
 
 .. _improve_docs:
