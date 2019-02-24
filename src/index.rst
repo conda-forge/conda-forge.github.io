@@ -32,7 +32,7 @@ From now on using ``conda install <package-name>`` will also find packages in ou
 
   Please be aware that the order of your conda package channels is important, especially when you combine conda-forge with other channels, e.g. ``bioconda``.
   
-  Please refer to :ref:`multiple_channels` for more information.
+  Please refer to :ref:`multiple_channels` for pitfalls and more information.
 
 Announcements
 =============

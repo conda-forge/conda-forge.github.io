@@ -232,9 +232,9 @@ At the time of writing, above is equivalent to the following,
 Message passing interface (MPI)
 -------------------------------
 
-.. todo::
+.. note::
   
-  Add Min's notes: https://hackmd.io/ry4uI0thTs2q_b4mAQd_qg
+  This section originates from Min's notes: https://hackmd.io/ry4uI0thTs2q_b4mAQd_qg
 
 MPI Variants in conda-forge
 ...........................
@@ -666,6 +666,11 @@ If an existing python package qualifies to be converted to a noarch package, you
 
 Noarch generic
 --------------
+
+.. todo::
+
+  add some information on r packages which make heavy use of ``noarch: generic``
+
 
 Build matrices
 ==============
