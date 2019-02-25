@@ -158,13 +158,15 @@ In addition to the required compilers ``{{ compiler('c') }}`` and/or ``{{ compil
 
 .. code-block:: yaml
 
-  build:
-    - {{ cdt('mesa-libgl-devel') }}  # [linux]
-    - {{ cdt('mesa-dri-drivers') }}  # [linux]
-    - {{ cdt('libselinux') }}  # [linux]
-    - {{ cdt('libxdamage') }}  # [linux]
-    - {{ cdt('libxfixes') }}  # [linux]
-    - {{ cdt('libxxf86vm') }}  # [linux]
+  requirements:
+    build:
+      - {{ cdt('mesa-libgl-devel') }}  # [linux]
+      - {{ cdt('mesa-dri-drivers') }}  # [linux]
+      - {{ cdt('libselinux') }}  # [linux]
+      - {{ cdt('libxdamage') }}  # [linux]
+      - {{ cdt('libxxf86vm') }}  # [linux]
+    host:
+      - xorg-libxfixes  # [linux]
 
 
 If you need a fully functional binary in the test phase, you have to also provide the shared libraries via ``yum_requirements.txt`` (see :ref:`yum_deps`).
@@ -175,7 +177,6 @@ If you need a fully functional binary in the test phase, you have to also provid
   mesa-dri-drivers
   libselinux
   libXdamage
-  libXfixes
   libXxf86vm
 
 
