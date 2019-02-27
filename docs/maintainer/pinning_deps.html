@@ -1,0 +1,235 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Pinned dependencies &#8212; conda-forge 2019.01 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    <script type="text/javascript" src="../_static/cloud.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Knowledge base" href="knowledge_base.html" />
+    <link rel="prev" title="Maintaining packages" href="updating_pkgs.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="knowledge_base.html" title="Knowledge base"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="updating_pkgs.html" title="Maintaining packages"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pinned-dependencies">
+<span id="pinned-deps"></span><h1>Pinned dependencies<a class="headerlink" href="#pinned-dependencies" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="globally-pinned-packages">
+<span id="id1"></span><h2>Globally pinned packages<a class="headerlink" href="#globally-pinned-packages" title="Permalink to this headline">¶</a></h2>
+<p>Globally pinned packages are defined in the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">conda_build_config.yaml</a> file located in the <code class="docutils literal notranslate"><span class="pre">conda-forge-pinning</span></code> feedstock.</p>
+<p>When a rerendering happens, conda-smithy will render the recipe using conda-build and output configuration files for each job and save them in a yaml file in <code class="docutils literal notranslate"><span class="pre">.ci_support</span></code> folder. For example there’s a output configuration file for each OS, each python version, etc.</p>
+<p>These output configuration files are stripped to options that are used in the build and therefore a change in the config files in <code class="docutils literal notranslate"><span class="pre">.ci_support</span></code> folder implies that there needs to be a new build.</p>
+<p>Pinning of packages are handled by the same configuration file and conda-build. This means that packages need not be pinned manually.</p>
+<p>E.g.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">host</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gmp 6.1.*</span>
+  <span class="nt">run</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gmp 6.1.*</span>
+</pre></div>
+</div>
+<p>Should be replaced by</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">host</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gmp</span>
+  <span class="nt">run</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gmp</span>
+</pre></div>
+</div>
+<p>When there’s a new ABI version of gmp (say 7.0), then conda-forge-pinning will be updated. A rerendering of a package using gmp will change. Therefore to check that a recipe needs to be rebuilt for updated pinnings, you only need to check if the package needs a rerender.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">NumPy</span></code> is an exception to this (See <a class="reference internal" href="knowledge_base.html#linking-numpy"><span class="std std-ref">Building Against NumPy</span></a>).</p>
+</div>
+<p>If a package is not pinned in <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">conda-forge-pinning</a>, then the pinning needs to be done manually. If the package is a <code class="docutils literal notranslate"><span class="pre">C/C++</span></code> library with a <code class="docutils literal notranslate"><span class="pre">C/C++</span></code> API that is consumed and linked to by other libraries, then that package is a candidate to be added to <code class="docutils literal notranslate"><span class="pre">conda-forge-pinning</span></code>. Please open an issue in <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge-pinning-feedstock</a> for discussion.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the constraints in <code class="docutils literal notranslate"><span class="pre">conda-forge-pinning</span></code> are not strict enough, you can override them by changing back to pinning the package with a version manually. You can make a pinning stricter by adding <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">pin_compatible('gmp',</span> <span class="pre">max_pin='x.x.x')</span> <span class="pre">}}</span></code> to run requirements.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you need to remove a pinning in rare cases like linking the package statically or if the package is used with <code class="docutils literal notranslate"><span class="pre">dlopen</span></code> instead of linking, then you can do,</p>
+<div class="last highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+  <span class="nt">ignore_run_exports</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gmp</span>
+</pre></div>
+</div>
+</div>
+<p>There is additional documentation on this pinning scheme in <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/source/variants.html#build-variants">the conda docs</a>.</p>
+</div>
+<div class="section" id="specifying-run-exports">
+<h2>Specifying run_exports<a class="headerlink" href="#specifying-run-exports" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> feature can be used to specify the versions that are <a class="reference internal" href="../misc/00_intro.html#term-abi"><span class="xref std std-term">ABI</span></a> compatible with the built version. This leads to higher flexibility of choosable packages, without breakages due to incompatibilities.</p>
+<p>Packages that depend on a package with <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> can choose to overwrite this behavior using the <code class="docutils literal notranslate"><span class="pre">build/ignore_run_exports</span></code> key.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>It is not always completely clear how a given package is going to be used.
+For example, numpy may be used either as a python package, and it also has a C library that can be linked against.
+The former usage would not require <code class="docutils literal notranslate"><span class="pre">run_exports</span></code>, but the latter would.</p>
+<p>In this scenario, it may be advantageous to split the package into distinct metapackages that may share a common parent containing the actual files, but with each metapackage defining different pinning behavior.
+Anaconda does this for numpy (see the <a class="reference external" href="https://github.com/AnacondaRecipes/numpy-feedstock/blob/master/recipe/meta.yaml">recipe</a>).</p>
+<p>The general idea is that the <code class="docutils literal notranslate"><span class="pre">numpy-devel</span></code> package should be used when a package is building against the C interface (i.e. it needs the compatibility bound), and the numpy package should be used when a package is using only the python interface.</p>
+<p class="last">In general, it is not necessary to split up packages. At conda-forge, we only advise it when it greatly reduces package size, or when it helps remove dependencies that would otherwise be unnecessarily included.</p>
+</div>
+</div>
+<div class="section" id="updating-package-pins">
+<span id="update-pins"></span><h2>Updating package pins<a class="headerlink" href="#updating-package-pins" title="Permalink to this headline">¶</a></h2>
+<p>Updating a pin requires following steps:</p>
+<blockquote>
+<div><ul class="simple">
+<li>edit <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">conda_build_config.yaml</a> in the <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-forge-pinning</span></code> repository.</li>
+<li>bump the version of the conda-forge-pinning <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/meta.yaml">recipe</a> by setting the version to the current date.</li>
+<li>rerender the feedstock.</li>
+<li>propose the changes as a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> to <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-forge-pinning-feedstock</span></code>.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/00_intro.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="00_intro.html">Maintainer Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_pkgs.html">Contributing packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="updating_pkgs.html">Maintaining packages</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Pinned dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#globally-pinned-packages">Globally pinned packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#specifying-run-exports">Specifying run_exports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-package-pins">Updating package pins</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html">Knowledge base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="updating_pkgs.html"
+                          title="Previous page">&larr; Maintaining packages</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="knowledge_base.html"
+                          title="Next page">&rarr; Knowledge base</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/maintainer/pinning_deps.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="knowledge_base.html" title="Knowledge base"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="updating_pkgs.html" title="Maintaining packages"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2019, conda-forge.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

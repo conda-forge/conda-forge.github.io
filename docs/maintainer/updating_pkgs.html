@@ -1,0 +1,322 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Maintaining packages &#8212; conda-forge 2019.01 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    <script type="text/javascript" src="../_static/cloud.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pinned dependencies" href="pinning_deps.html" />
+    <link rel="prev" title="Contributing packages" href="adding_pkgs.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="pinning_deps.html" title="Pinned dependencies"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="adding_pkgs.html" title="Contributing packages"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="maintaining-packages">
+<span id="maintaining-pkgs"></span><h1>Maintaining packages<a class="headerlink" href="#maintaining-packages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="important-notes">
+<h2>Important notes<a class="headerlink" href="#important-notes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="forking-and-pull-requests">
+<h3>Forking and pull requests<a class="headerlink" href="#forking-and-pull-requests" title="Permalink to this headline">¶</a></h3>
+<p>All maintainers are given push access to the feedstocks that they maintain.
+This means that a maintainer can create branches in the main repo.
+For updates, using a branch in the main repo is discouraged because,</p>
+<ol class="arabic">
+<li><p class="first"><a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> is run on both the branch and the PR.</p>
+<p>This wastes <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> resources</p>
+</li>
+<li><p class="first">Branches are automatically published.</p>
+<p>This means if you push a version update to a branch and then create a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>, conda packages will be published to anaconda.org before the PR is merged.</p>
+</li>
+</ol>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">For these reasons maintainers are asked to fork the feedstock, push to a branch in the fork and then open a PR to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> repo.</p>
+</div>
+<div class="section" id="example-workflow-for-updating-a-package">
+<h4>Example workflow for updating a package<a class="headerlink" href="#example-workflow-for-updating-a-package" title="Permalink to this headline">¶</a></h4>
+<p>Here we assume that your would like to update the feedstock <code class="docutils literal notranslate"><span class="pre">&lt;feedstock&gt;</span></code>. Feedstock is a placeholder and can e.g. be replaced by <code class="docutils literal notranslate"><span class="pre">numpy-feedstock</span></code>.</p>
+<ol class="arabic">
+<li><p class="first">Forking the feedstock</p>
+<p>Before you can submit your first PR, you have to fork conda-forge’s feedstock.</p>
+<ul class="simple">
+<li>Navigate to <a class="reference external" href="https://github.com/conda-forge">https://github.com/conda-forge</a>/&lt;feedstock&gt; in your favorite web browser and click the <code class="docutils literal notranslate"><span class="pre">fork</span></code> button.</li>
+<li>You now have a clone of the feedstock in <code class="docutils literal notranslate"><span class="pre">https://github.com/&lt;your-github-id&gt;/&lt;feedstock&gt;</span></code> under your control.</li>
+<li>Connect to the feedstock from your computer by using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/&lt;your-github-id&gt;/&lt;feedstock&gt;</span></code>.</li>
+</ul>
+</li>
+<li><p class="first">Syncing your fork with conda-forges feedstock</p>
+<p>This step is only required if you have forked some time ago and your fork is missing commits from the feedstock at conda-forge.</p>
+<ul class="simple">
+<li>Make sure you are on the master branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">master</span></code></li>
+<li>Register conda-forge’s feedstock with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">upstream</span> <span class="pre">https://github.com/conda-forge/&lt;feedstock&gt;</span></code></li>
+<li>Fetch the latest updates with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">upstream</span></code></li>
+<li>Pull in the latest changes into your master branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">upstream/master</span></code></li>
+</ul>
+</li>
+<li><p class="first">Creating your changes in a new branch</p>
+<p>Now you are ready to update the recipe</p>
+<ul class="simple">
+<li>Create and switch to a new branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">&lt;branch-name&gt;</span></code>. <code class="docutils literal notranslate"><span class="pre">&lt;branch-name&gt;</span></code> can be e.g. <code class="docutils literal notranslate"><span class="pre">update_1_0_1</span></code>.</li>
+<li>Make your chances locally</li>
+<li>Review your changes then use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;changed-files&gt;</span></code>. Where <code class="docutils literal notranslate"><span class="pre">&lt;changed-files&gt;</span></code> are a whitespace separated list of filenames you changed.</li>
+<li>Create a commit by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&lt;commit-msg&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;commit-msg&gt;</span></code> can be <code class="docutils literal notranslate"><span class="pre">updated</span> <span class="pre">feedstock</span> <span class="pre">to</span> <span class="pre">version</span> <span class="pre">1.0.1</span></code></li>
+</ul>
+</li>
+<li><p class="first">Pushing your changes to github and propose a PR</p>
+<ul class="simple">
+<li>Push the branch with changes to your fork in github:  <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">&lt;branch-name&gt;</span></code></li>
+<li>Create a pull request via the web interface by navigating to <code class="docutils literal notranslate"><span class="pre">https://github.com/&lt;your-github-id&gt;/&lt;feedstock&gt;</span></code> with your web browser and clicking the button <code class="docutils literal notranslate"><span class="pre">create</span> <span class="pre">pull</span> <span class="pre">request</span></code>.</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="updating-recipes">
+<h2>Updating recipes<a class="headerlink" href="#updating-recipes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="updating-version-and-hash">
+<h3>Updating version and hash<a class="headerlink" href="#updating-version-and-hash" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="checking-the-dependencies">
+<h3>Checking the dependencies<a class="headerlink" href="#checking-the-dependencies" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="bumping-the-build-number">
+<h3>Bumping the build number<a class="headerlink" href="#bumping-the-build-number" title="Permalink to this headline">¶</a></h3>
+<p>The build number is increased when the source code for the package has not changed but you
+need to make a new build.
+As a rule of thumb, the build number is increased whenever a new package with the same version needs to be uploaded to the conda-forge channel.</p>
+<p>Examples for needing to increase the build number are</p>
+<blockquote>
+<div><ul class="simple">
+<li>updating the pinned dependencies after a rerendering</li>
+<li>Fixing wrong dependencies</li>
+</ul>
+</div></blockquote>
+<p>When the package version changes you should reset the build number back to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</div>
+</div>
+<div class="section" id="rerendering-feedstocks">
+<span id="dev-update-rerender"></span><h2>Rerendering feedstocks<a class="headerlink" href="#rerendering-feedstocks" title="Permalink to this headline">¶</a></h2>
+<p>Rerendering is conda-forge’s way to update the files common to all feedstocks (e.g. README, <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> configuration, pinned dependencies)</p>
+<p>Rerendering can be done in two ways:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Using the webservice to run conda-smithy on the cloud by adding the comment <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin</span> <span class="pre">please</span> <span class="pre">rerender</span></code> (see <a class="reference internal" href="infrastructure.html#dev-admservice"><span class="std std-ref">Admin web services</span></a>).</li>
+<li>Run conda-smithy locally on your machine (see <a class="reference internal" href="#dev-rerender-local"><span class="std std-ref">Rerendering with conda-smithy locally</span></a>).</li>
+</ol>
+</div></blockquote>
+<div class="section" id="rerendering-with-conda-smithy-locally">
+<span id="dev-rerender-local"></span><h3>Rerendering with conda-smithy locally<a class="headerlink" href="#rerendering-with-conda-smithy-locally" title="Permalink to this headline">¶</a></h3>
+<p>First step is to install <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> in your root environment</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge conda-smithy
+</pre></div>
+</div>
+<p>Commit all changes and from the root directory of the feedstock, type:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda smithy rerender -c auto
+</pre></div>
+</div>
+<p>Optionally one can commit the changes manually.
+To do this drop <code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">auto</span></code> from the command.</p>
+</div>
+<div class="section" id="when-to-rerender">
+<h3>When to rerender<a class="headerlink" href="#when-to-rerender" title="Permalink to this headline">¶</a></h3>
+<p>We need to re-render when there are changes the following parts of the feedstock:</p>
+<ul class="simple">
+<li>the platform configuration (<code class="docutils literal notranslate"><span class="pre">skip</span></code> sections);</li>
+<li>the <code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code>;</li>
+<li>updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.</li>
+<li>updates in conda-forge pinning that affect the feedstock</li>
+<li>build issues that a feedstock configuration update will fix (follow us on <a class="reference external" href="https://gitter.im/conda-forge/conda-forge.github.io">gitter</a> to know about those);</li>
+</ul>
+</div>
+</div>
+<div class="section" id="testing-changes-locally">
+<h2>Testing changes locally<a class="headerlink" href="#testing-changes-locally" title="Permalink to this headline">¶</a></h2>
+<p>If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is  built by our <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a>.</p>
+<p>If you want to build and test updates to  a feedstock locally, go to the root
+feedstock directory and run, the <code class="docutils literal notranslate"><span class="pre">.circleci/run_docker_build.sh</span></code> script.</p>
+<p>The environment variable <code class="docutils literal notranslate"><span class="pre">CONFIG</span></code> is required to select one of the <code class="docutils literal notranslate"><span class="pre">*.yaml</span></code>
+config files in <code class="docutils literal notranslate"><span class="pre">.ci_support</span></code> to use for the build.
+older feedstocks).</p>
+<p>For example, the docker build with the config in <code class="docutils literal notranslate"><span class="pre">.ci_support/linux_.yaml</span></code> can be invoked by:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my-feedstock
+$ <span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;linux_&quot;</span> ./.circleci/run_docker_build.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="removing-broken-packages">
+<h2>Removing broken packages<a class="headerlink" href="#removing-broken-packages" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel. In this case core can help you (see <a class="reference internal" href="../orga/guidelines.html#fix-broken-packages"><span class="std std-ref">Fixing Broken Packages</span></a>)</p>
+</div>
+<div class="section" id="maintaining-several-versions">
+<h2>Maintaining several versions<a class="headerlink" href="#maintaining-several-versions" title="Permalink to this headline">¶</a></h2>
+<p>TODO: LTS branch</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/00_intro.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="00_intro.html">Maintainer Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_pkgs.html">Contributing packages</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Maintaining packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#important-notes">Important notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#forking-and-pull-requests">Forking and pull requests</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#example-workflow-for-updating-a-package">Example workflow for updating a package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-recipes">Updating recipes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#updating-version-and-hash">Updating version and hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#checking-the-dependencies">Checking the dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bumping-the-build-number">Bumping the build number</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rerendering-feedstocks">Rerendering feedstocks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rerendering-with-conda-smithy-locally">Rerendering with conda-smithy locally</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#when-to-rerender">When to rerender</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-changes-locally">Testing changes locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#removing-broken-packages">Removing broken packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maintaining-several-versions">Maintaining several versions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pinning_deps.html">Pinned dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html">Knowledge base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="adding_pkgs.html"
+                          title="Previous page">&larr; Contributing packages</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="pinning_deps.html"
+                          title="Next page">&rarr; Pinned dependencies</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/maintainer/updating_pkgs.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="pinning_deps.html" title="Pinned dependencies"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="adding_pkgs.html" title="Contributing packages"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2019, conda-forge.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
