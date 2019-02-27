@@ -1,17 +1,15 @@
-============================
-The ``conda-forge.yml`` file
-============================
+Configuring conda-forge.yml
+***************************
+
 You can configure how conda-forge is setup and builds via the ``conda-forge.yml``
-file that is present in the root directory of a feedstock.  Rerendering the
-feedstock after you modify this file is usually required and always a good idea.
-You can rerender on an PR or issue in the feedstock by commenting with the
-text ``@conda-forge-admin, please rerender``, or locally from the command line
-by running ``conda smithy rerender``.
+file that is present in the root directory of a feedstock.
 
-The ``conda-forge.yml``  YAML file has the following top-level fields.
-These are documented in their own sections below.
+Rerendering the feedstock after you modify this file is usually required and always a good idea (see :ref:`dev_update_rerender`).
 
-**Top-level Fields:**
+The next section describes in detail the top-level fields in  ``conda-forge.yml``.
+
+Top-level fields
+================
 
 * appveyor
 * azure
@@ -237,7 +235,7 @@ The following CI services are available:
 * ``appveyor``
 * ``None`` or ``False`` to disable a platform.
 
-For example, switing everything to build on Azure pipelines:
+For example, switching everything to build on Azure pipelines:
 
 .. code-block:: yaml
 
@@ -281,3 +279,4 @@ Currently only:
 
     win:
       enabled: False
+

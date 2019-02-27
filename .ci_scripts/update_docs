@@ -10,7 +10,7 @@ if [ -n "$GH_TOKEN" ]; then
     fi
     git checkout -b new_site_content
     # Generate html requires a GitHub token in order to query the available feedstocks.
-    conda install --yes --quiet -c conda-forge conda-smithy sphinx elm make nodejs xonsh
+    conda install --yes --quiet -c conda-forge conda-smithy sphinx cloud_sptheme sphinxcontrib-fulltoc  elm make nodejs xonsh
     npm install uglify-js --global
 
     # rebuild elm

@@ -1,5 +1,22 @@
-Improving This Documentation
-============================
+.. _becoming_involved:
+
+Becoming involved
+*****************
+
+conda-forge is a community-driven effort of cross-platform packaging and as such relies on volunteers to sustain and improve.
+
+Help is always welcome! You can contribute e.g. by
+
+ - contributing new packages (:ref:`dev_contribute_pkgs`)
+ - help updating and maintaining packages (:ref:`maintaining_pkgs`)
+ - suggesting and implementing improvements for our :ref:`infrastructure`
+ - help :ref:`improve_docs`
+
+
+.. _improve_docs:
+
+Improving the documentation
+===========================
 
 You can help improve this documentation! It is version-controlled in the
 `conda-forge.github.io repository
@@ -11,7 +28,7 @@ is formatted using Python’s `reStructuredText
 
 You can propose quick edits directly through the GitHub website, if you have
 an account there — for instance, `this link
-<https://github.com/conda-forge/conda-forge.github.io/edit/master/src/self-improvement.rst>`_
+<https://github.com/conda-forge/conda-forge.github.io/edit/master/src/user/contributing.rst>`_
 will take you directly to a web-based editor for this very webpage. In
 general, the file corresponding to each page in the GitHub browser has a
 little pencil icon in its top-right that lets you open it up for editing.
