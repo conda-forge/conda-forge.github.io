@@ -233,6 +233,7 @@ In alphabetical order,
 * Jonathan J. Helmus, @jjhelmus
 * John Kirkham, @jakirkham
 * Marius van Niekerk, @mariusvniekerk
+* Min Ragan-Kelley, @minrk 
 * Mike Sarahan, @msarahan
 * Anthony Scopatz, @scopatz
 * Patrick Snape, @patricksnape
