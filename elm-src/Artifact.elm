@@ -119,7 +119,7 @@ update msg model =
 getArtifact : String -> String -> String -> String -> Cmd Msg
 getArtifact pkg channel arch name =
   Http.get
-    { url = "http://35.192.108.152/artifact?pkg=" ++ pkg ++ "&channel=" ++ channel ++ "&arch=" ++ arch ++ "&name=" ++ name
+    { url = "https://libcflib.conda-forge.org/artifact?pkg=" ++ pkg ++ "&channel=" ++ channel ++ "&arch=" ++ arch ++ "&name=" ++ name
     , expect = Http.expectJson Response artifactDecoder
     }
 

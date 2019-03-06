@@ -5895,7 +5895,7 @@ var author$project$Main$getQuery = F2(
 		return elm$http$Http$get(
 			{
 				aB: A2(elm$http$Http$expectJson, author$project$Main$Response, author$project$LibcflibRest$searchResultDecoder),
-				a1: 'http://35.192.108.152/search?query=' + (query + ('&page_num=' + elm$core$String$fromInt(page_num)))
+				a1: 'http://libcflib.conda-forge.org/search?query=' + (query + ('&page_num=' + elm$core$String$fromInt(page_num)))
 			});
 	});
 var author$project$Main$setField = F3(
