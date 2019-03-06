@@ -6250,7 +6250,7 @@ var author$project$Main$getArtifact = F4(
 		return elm$http$Http$get(
 			{
 				aD: A2(elm$http$Http$expectJson, author$project$Main$Response, author$project$LibcflibRest$artifactDecoder),
-				V: 'http://35.192.108.152/artifact?pkg=' + (pkg + ('&channel=' + (channel + ('&arch=' + (arch + ('&name=' + name))))))
+				V: 'https://libcflib.conda-forge.org/artifact?pkg=' + (pkg + ('&channel=' + (channel + ('&arch=' + (arch + ('&name=' + name))))))
 			});
 	});
 var author$project$Main$artifactFromUrlQuery = function (urlquery) {

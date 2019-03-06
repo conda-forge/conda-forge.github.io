@@ -80,7 +80,7 @@ update msg model =
 getQuery : String -> Int -> Cmd Msg
 getQuery query page_num =
   Http.get
-    { url = "http://35.192.108.152/search?query=" ++ query ++ "&page_num=" ++ (String.fromInt page_num)
+    { url = "http://libcflib.conda-forge.org/search?query=" ++ query ++ "&page_num=" ++ (String.fromInt page_num)
     , expect = Http.expectJson Response searchResultDecoder
     }
 
