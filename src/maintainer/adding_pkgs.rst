@@ -145,18 +145,29 @@ Downloading extra sources and data files
 Build
 -----
 
-Excluding a platform
-....................
+Skipping builds
+...............
 
 Use the ``skip`` key in the ``build`` section along with a selector:
 
-.. code-block:: yaml
+You can e.g. specify not to build ...
+
+ - on specific architectures:
+
+  .. code-block:: yaml
+
+      build:
+          skip: true  # [win]
+
+ - for specific python versions:
+
+  .. code-block:: yaml
 
     build:
-        skip: true  # [win]
+        skip: true  # [py<35]
 
 A full description of selectors is
-`in the conda docs <http://conda.pydata.org/docs/building/meta-yaml.html#preprocessing-selectors>`_.
+`in the conda docs <http://conda.pydata.org/docs/building/meta-yaml.html#preprocessing-selectors>`__.
 
 
 Optional: ``bld.bat`` and/or ``build.sh``
