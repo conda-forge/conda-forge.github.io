@@ -171,13 +171,30 @@ install the necessary tools below).</p>
 </div>
 <div class="section" id="build">
 <h3>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="excluding-a-platform">
-<h4>Excluding a platform<a class="headerlink" href="#excluding-a-platform" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="skipping-builds">
+<h4>Skipping builds<a class="headerlink" href="#skipping-builds" title="Permalink to this headline">¶</a></h4>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">skip</span></code> key in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section along with a selector:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+<p>You can e.g. specify not to build …</p>
+<blockquote>
+<div><ul class="simple">
+<li>on specific architectures:</li>
+</ul>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
     <span class="nt">skip</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>  <span class="c1"># [win]</span>
 </pre></div>
 </div>
+</div></blockquote>
+<ul class="simple">
+<li>for specific python versions:</li>
+</ul>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+    <span class="nt">skip</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>  <span class="c1"># [py&lt;35]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
 <p>A full description of selectors is
 <a class="reference external" href="http://conda.pydata.org/docs/building/meta-yaml.html#preprocessing-selectors">in the conda docs</a>.</p>
 </div>
@@ -512,7 +529,7 @@ this install process easier. Please feel free to lift it.</p>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#build">Build</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#excluding-a-platform">Excluding a platform</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#skipping-builds">Skipping builds</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#optional-bld-bat-and-or-build-sh">Optional: <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal notranslate"><span class="pre">build.sh</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="#use-pip">Use pip</a></li>
 </ul>
