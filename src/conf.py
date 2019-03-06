@@ -120,6 +120,14 @@ html_theme = 'cloud'
 # documentation.
 html_theme_options = {
     'sidebar_localtoc_title': 'Overview',
+    'externalrefs': False,
+    'relbarbgcolor': '#000000',
+    'footerbgcolor': '#FFFFFF',
+    'sectionbgcolor': '#cd5c5c',
+    'linkcolor': 'rgb(31, 158, 111)',
+    'sidebarlinkcolor': 'rgb(31, 158, 111)',
+    'codebgcolor': '#F2F2F2',
+    'sidebarbgcolor': '#F2F2F2',
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
