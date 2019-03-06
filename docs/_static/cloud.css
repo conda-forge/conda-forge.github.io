@@ -200,7 +200,7 @@ body
 
     
         margin: 1em 1em 0;
-        background: #1A4162;
+        background: #FFFFFF;
         background-attachment: fixed;
     
 }
@@ -233,7 +233,7 @@ div.related
 {
     margin: 0 auto;
     max-width: 11.5in;
-    background: #5682AD;
+    background: #000000;
     line-height: 1.5em;
     padding: .75em 0;
     color: #ffffff;
@@ -501,7 +501,7 @@ div.sphinxsidebar ul
 
 div.sphinxsidebar a
 {
-    color: #003469;
+    color: rgb(31, 158, 111);
     border: 1px solid transparent;
     border-width: 1px 0;
 }
@@ -1050,7 +1050,7 @@ h1#search-documentation
     
         
         padding: 6px 10px;
-        background-color: #84A6C7;
+        background-color: #cd5c5c;
         border: 1px solid rgba(0,0,0,.125);
         border-width: 0 0 0 6px;
         color: #ffffff;
@@ -1215,7 +1215,7 @@ h1#search-documentation
 
 #hide-page-sections { float: right; opacity: 0.88; }a.headerlink
 {
-    color: #003469;
+    color: rgb(31, 158, 111);
     font-size: 0.8em;
     margin: 0 0 0 1px;
     padding: 0 5px 0 4px;
@@ -1406,7 +1406,7 @@ li > p ~ ul.simple { margin-bottom: 1.5em; }
 
 a
 {
-    color: #003469;
+    color: rgb(31, 158, 111);
     text-decoration: none;
 }
 
@@ -1445,28 +1445,6 @@ a.biglink
     font-size: 130%;
 }
 
-
-    a.external:before
-    {
-        content: "\21D7";
-        padding-right: .1em;
-    }
-
-    a.external.issue:before
-    {
-        content: "\21D7";
-    }
-
-    a.external[href^="mailto:"]:before
-    {
-        content: "";
-    }
-
-    em.issue:before
-    {
-        content: "\21D7";
-        padding-right: .1em;
-    }
 dt:target,
 .footnote:target,
 .highlighted
@@ -1775,7 +1753,7 @@ td.linenos pre
 
 div.highlight pre
 {
-    background-color: #eeffcc;
+    background-color: #F2F2F2;
 
     border: 1px solid #AACC99;
     border-width: 1px 0;
@@ -1969,13 +1947,13 @@ div.viewcode-block:target
     0.8em
     0;
 
-    border-bottom: 1px dotted #84A6C7;
-    color: #84A6C7;
+    border-bottom: 1px dotted #cd5c5c;
+    color: #cd5c5c;
 }
 
 .desc-section-2 > .section-header
 {
-    color: #84A6C7;
+    color: #cd5c5c;
 }
 
 .desc-section > .section-header:before
@@ -2133,7 +2111,7 @@ table.indextable span.category
 table.indextable a,
 table.indextable a:hover span.category
 {
-    color: #003469;
+    color: rgb(31, 158, 111);
 }
 
 table.indextable span.category span.location
