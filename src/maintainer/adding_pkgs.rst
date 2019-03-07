@@ -73,6 +73,19 @@ Checklist
 * Make sure that your changes do not interfere with other recipes that are int the ``recipes`` folder (e.g. the ``example`` recipe).
 
 
+Feedback and revision
+---------------------
+
+Once you finished your PR, all you have to do is waiting for feedback from our reviewer team.
+
+The reviewer team will assist you by pointing out improvements and answering questions. Once the package is ready, the reviewers will approve and merge your pull request.
+
+After merging the :ter:`PR`, our infrastructure will build the package and make it available in the conda-channel.
+
+.. note::
+
+  If you have questions or have not heard back for a while, you can notify us by including ``@conda-forge/staged-recipes`` in your github message.
+
 
 Post staging process
 --------------------
