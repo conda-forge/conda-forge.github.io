@@ -486,7 +486,7 @@ Packaging the licence manually
 
 Sometimes upstream maintainers do not include a license file in their tarball despite being demanded by the license.
 
-In this case it is possible to add the license to the ``recipe`` directory (here named ``LICENSE.txt``)  and reference it inside the meta.yaml:
+If this is the case, you can add the license to the ``recipe`` directory (here named ``LICENSE.txt``)  and reference it inside the meta.yaml:
 
 
 .. code-block:: yaml
@@ -496,6 +496,10 @@ In this case it is possible to add the license to the ``recipe`` directory (here
 
 In this case, please also notify the upstream developers that the license file is missing.
 
+.. important::
+ 
+  The license should only be shipped along with the recipe if there is no license file in the downloaded archive.
+  If there is a license file in the archive, please set ``license_file`` to the path of the license file in the archive.
 
 Activate scripts
 ----------------
