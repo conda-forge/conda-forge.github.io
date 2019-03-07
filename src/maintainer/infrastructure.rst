@@ -177,3 +177,10 @@ Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
 Skipping CI builds
 ------------------
 
+.. todo::
+
+  - add information regarding [ci skip] for all CIs.
+
+.. admonition:: Related links
+
+  - **abort builds with [skip ci]/etc** `(conda-forge.github.io/#629) <https://github.com/conda-forge/conda-forge.github.io/issues/629>`__
