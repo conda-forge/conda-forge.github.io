@@ -467,7 +467,7 @@ $ ./.circleci/run_docker_build.sh
 <p>Sometimes upstream maintainers do not include a license file in their tarball despite being demanded by the license.</p>
 <p>If this is the case, you can add the license to the <code class="docutils literal notranslate"><span class="pre">recipe</span></code> directory (here named <code class="docutils literal notranslate"><span class="pre">LICENSE.txt</span></code>)  and reference it inside the meta.yaml:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">about</span><span class="p">:</span>
-  <span class="nt">license_file</span><span class="p">:</span> <span class="p p-Indicator">{{</span> <span class="nv">RECIPE_DIR</span> <span class="p p-Indicator">}}</span><span class="l l-Scalar l-Scalar-Plain">/LICENSE.txt</span>
+  <span class="nt">license_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">LICENSE.txt</span>
 </pre></div>
 </div>
 <p>In this case, please also notify the upstream developers that the license file is missing.</p>
