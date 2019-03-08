@@ -140,7 +140,7 @@ on PyPI; look for the ``SHA256`` link next to the download link on your package'
 files page, e.g. ``https://pypi.org/project/<your-project>/#files``.
 
 You can also generate a hash from the command line on Linux (and Mac if you
-install the necessary tools below). 
+install the necessary tools below).
 
 To generate the ``sha256`` hash: ``openssl sha256 your_sdist.tar.gz``
 
@@ -346,8 +346,8 @@ Sometimes defining tests seems to be hard, e.g. due to:
 
  - tests for the underlying code base may not exist.
  - test suites may take too long to run on limited :term:`CI` infrastructure.
- - tests may take too much bandwidth. 
-   
+ - tests may take too much bandwidth.
+
 In these cases conda-forge may not be able to execute the prescribed test suite.
 
 However, this is no reason for the recipe to not have tests. At the very least
@@ -516,12 +516,12 @@ If this is the case, you can add the license to the ``recipe`` directory (here n
 .. code-block:: yaml
 
    about:
-     license_file: {{ RECIPE_DIR }}/LICENSE.txt
+     license_file: LICENSE.txt
 
 In this case, please also notify the upstream developers that the license file is missing.
 
 .. important::
- 
+
   The license should only be shipped along with the recipe if there is no license file in the downloaded archive.
   If there is a license file in the archive, please set ``license_file`` to the path of the license file in the archive.
 
