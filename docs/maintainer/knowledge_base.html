@@ -611,7 +611,9 @@ packages that only need to be built once.</p>
 <li>No post-link or pre-link or pre-unlink scripts</li>
 <li>No OS specific build scripts</li>
 <li>No python version specific requirements</li>
-<li>No skips except for python version. (If the recipe is py3 only, remove skip statement and add version constraint on python)</li>
+<li>No skips except for python version. If the recipe is py3 only, remove skip
+statement and add version constraint on python in <code class="docutils literal notranslate"><span class="pre">host</span></code> and <code class="docutils literal notranslate"><span class="pre">run</span></code>
+section.</li>
 <li>2to3 is not used</li>
 <li>Scripts argument in setup.py is not used</li>
 <li>If entrypoints are in setup.py, they are listed in meta.yaml</li>
@@ -622,7 +624,7 @@ packages that only need to be built once.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">While <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> does not work with selectors, it does work with version constraints.
-<code class="docutils literal notranslate"><span class="pre">skip:</span> <span class="pre">True</span>&#160; <span class="pre">#</span> <span class="pre">[py2k]</span></code> can sometimes be replaced with a constrained python version in the build/run subsections: say <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">&gt;=3</span></code> instead of just <code class="docutils literal notranslate"><span class="pre">python</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">skip:</span> <span class="pre">True</span>&#160; <span class="pre">#</span> <span class="pre">[py2k]</span></code> can sometimes be replaced with a constrained python version in the host and run subsections: say <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">&gt;=3</span></code> instead of just <code class="docutils literal notranslate"><span class="pre">python</span></code>.</p>
 </div>
 <p>If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">add</span> <span class="pre">noarch:</span> <span class="pre">python</span></code>.</p>
 </div>
