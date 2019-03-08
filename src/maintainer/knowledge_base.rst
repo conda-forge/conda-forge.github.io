@@ -651,7 +651,9 @@ In order to qualify as a noarch python package, all of the following criteria mu
   - No post-link or pre-link or pre-unlink scripts
   - No OS specific build scripts
   - No python version specific requirements
-  - No skips except for python version. (If the recipe is py3 only, remove skip statement and add version constraint on python)
+  - No skips except for python version. If the recipe is py3 only, remove skip
+    statement and add version constraint on python in ``host`` and ``run``
+    section.
   - 2to3 is not used
   - Scripts argument in setup.py is not used
   - If entrypoints are in setup.py, they are listed in meta.yaml
@@ -660,7 +662,7 @@ In order to qualify as a noarch python package, all of the following criteria mu
 
 .. note::
   While ``noarch: python`` does not work with selectors, it does work with version constraints.
-  ``skip: True  # [py2k]`` can sometimes be replaced with a constrained python version in the build/run subsections: say ``python >=3`` instead of just ``python``.
+  ``skip: True  # [py2k]`` can sometimes be replaced with a constrained python version in the host and run subsections: say ``python >=3`` instead of just ``python``.
 
 If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including ``@conda-forge-admin, please add noarch: python``.
 
