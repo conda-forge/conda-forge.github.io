@@ -117,7 +117,7 @@ test that the module can be imported, as described in the example.</li>
 <h3>Feedback and revision<a class="headerlink" href="#feedback-and-revision" title="Permalink to this headline">¶</a></h3>
 <p>Once you finished your PR, all you have to do is waiting for feedback from our reviewer team.</p>
 <p>The reviewer team will assist you by pointing out improvements and answering questions. Once the package is ready, the reviewers will approve and merge your pull request.</p>
-<p>After merging the <a href="#id1"><span class="problematic" id="id2">:ter:`PR`</span></a>, our infrastructure will build the package and make it available in the conda-channel.</p>
+<p>After merging the <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>, our infrastructure will build the package and make it available in the conda-channel.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If you have questions or have not heard back for a while, you can notify us by including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge/staged-recipes</span></code> in your github message.</p>
@@ -218,7 +218,7 @@ Pure Python packages almost never need them.</p>
 <p>Remember to always add <code class="docutils literal notranslate"><span class="pre">pip</span></code> to the host requirements.</p>
 </div>
 <div class="section" id="use-pip">
-<span id="id4"></span><h4>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h4>
+<span id="id2"></span><h4>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h4>
 <p>Normally Python packages should use this line:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
   <span class="nt">script</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">--no-deps</span><span class="nv"> </span><span class="s">-vv&quot;</span>
@@ -246,8 +246,8 @@ the real package dependencies are only <code class="docutils literal notranslate
 <p>Conda-build distinguishes three different kinds of dependencies.
 In the following paragraphs we give a very short overview what packages go where.
 For a detailed explanation please refer to the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/source/resources/define-metadata.html#requirements-section">conda-build documentation</a>.</p>
-<div class="section" id="id5">
-<h5>Build<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h5>
+<div class="section" id="id3">
+<h5>Build<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h5>
 <p>Build dependencies are required in the build environment and contain all tools that are not needed on the host of the package.</p>
 <p>Following packages are examples of typical <code class="docutils literal notranslate"><span class="pre">build</span></code> dependencies:</p>
 <blockquote>
@@ -519,7 +519,10 @@ this install process easier. Please feel free to lift it.</p>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html" title="index">
+          <img class="logo" src="../_static/logo_black_on_trans.png" alt="Logo"/>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
     <h3><a href="../index.html">Overview</a></h3>
     <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../user/00_intro.html">User Documentation</a></li>
@@ -552,7 +555,7 @@ this install process easier. Please feel free to lift it.</p>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#build-host-and-run">Build, host and run</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#id5">Build</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#id3">Build</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#host">Host</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#run">Run</a></li>
 </ul>

@@ -80,7 +80,7 @@ Once you finished your PR, all you have to do is waiting for feedback from our r
 
 The reviewer team will assist you by pointing out improvements and answering questions. Once the package is ready, the reviewers will approve and merge your pull request.
 
-After merging the :ter:`PR`, our infrastructure will build the package and make it available in the conda-channel.
+After merging the :term:`PR`, our infrastructure will build the package and make it available in the conda-channel.
 
 .. note::
 
