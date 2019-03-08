@@ -83,3 +83,41 @@ Members
 - Jonathan Helmus <jjhelmus@gmail.com>
 - Marius van Niekerk <marius.v.niekerk@gmail.com>
 - Mark Harfouche <mark.harfouche@gmail.com>
+
+
+Doc Sub-Team
+============
+
+Role
+----
+
+Maintain and improve the documentation; review, organize and help with documentation related issues. 
+
+Charter
+-------
+Dynamic
+
+Responsibility
+--------------
+
+A good documentation is an important corner stone of a successful community project.
+An accurate, well organized and comprehensive documentation not only benefits users, but also frees the core team by decreasing support requests.
+
+The documentation team is responsible for
+
+ - keeping the documentation accurate and up-to-date.
+ - help expanding the documentation by identifying new topics of common interest.
+ - improving the documentation by reorganizing and clarifying its contents.
+ - giving feedback on community contributions to the documentation.
+
+As such following task are performed by the documentation team:
+
+ - reviewing and organizing documentation related issues and PRs in ``conda-forge.github.io``.
+ - proposing improvements and new content by opening issues and pull requests.
+ - engaging with the community to ensure the effectiveness of the documentation.
+
+
+Members
+-------
+- Anthony Scopatz <scopatz@gmail.com>
+- Christian Roth <ch.m.roth@gmail.com>
