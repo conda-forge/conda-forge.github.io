@@ -100,8 +100,8 @@ Dynamic
 Responsibility
 --------------
 
-A good documentation is an important corner stone of a successful community project.
-An accurate, well organized and comprehensive documentation not only benefits users, but also frees the core team by decreasing support requests.
+Good documentation is an important corner stone of a successful community project.
+Accurate, well organized and comprehensive documentation not only benefits users, but also frees the core team by decreasing support requests.
 
 The documentation team is responsible for
 
