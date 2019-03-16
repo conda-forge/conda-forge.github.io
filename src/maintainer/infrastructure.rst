@@ -126,7 +126,7 @@ To see all build on azure go to `<https://dev.azure.com/conda-forge/feedstock-bu
 Restarting builds
 .................
 
-Presently azure does not sync githuhb users. In order to restart a build you can restart it from the github checks interface.
+Presently azure does not sync Github users. In order to restart a build you can restart it from the Github checks interface.
 If that doesn't work, a close/open will kick off a new build.
 
 Using azure for *everything*
@@ -168,6 +168,8 @@ CircleCI (Linux, OSX)
 ---------------------
 Circle CI is a container-based CI service that conda-forge uses to build
 linux packages. It can optionally build OSX packages.
+
+Linux builds are identical to those on azure as both are built inside docker containers.
 
 
 Using Circle for both Linux and OSX
