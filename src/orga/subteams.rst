@@ -153,10 +153,10 @@ The staging team is responsible for:
 
 Members
 -------
- - Amir Mohammadi <>
- - Matthew R. Becker <>
+ - Amir Mohammadi <183.amir@gmail.com>
+ - Matthew R. Becker <becker.mr@gmail.com>
  - Björn Grüning <>
- - Chris Burr <>
+ - Chris Burr <christopher.burr@cern.ch>
  - Dougal J. Sutherland <dougal@gmail.com>
  - Eric Dill <thedizzle@gmail.com>
  - Igor T. Ghisi <>
@@ -164,7 +164,7 @@ Members
  - John Kirkham <kirkhamj@janelia.hhmi.org>
  - Jonathan J. Helmus <jjhelmus@gmail.com>
  - Johannes Köster <>
- - Marcelo Duarte Trevisani <>
+ - Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
  - Marius van Niekerk <marius.v.niekerk@gmail.com>
  - Mike Sarahan <msarahan@gmail.com>
  - Matt Craig <mattwcraig@gmail.com>
@@ -175,5 +175,5 @@ Members
  - Peter M. Landwehr <>
  - Anthony Scopatz  <scopatz@gmail.com>
  - Patrick Sodré <>
- - Sylvain Corlay <>
+ - Sylvain Corlay <sylvain.corlay@gmail.com>
  - Joshua Adelman  <>
