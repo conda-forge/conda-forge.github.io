@@ -122,3 +122,58 @@ Members
 - Anthony Scopatz <scopatz@gmail.com>
 - Christian Roth <ch.m.roth@gmail.com>
 - Lori A. Burns <lori.burns@gmail.com>
+
+
+Staging Sub-Team
+================
+
+Role
+----
+
+Review and merge feedstock candidates in the staged-recipes repository. Helping users to create conda-forge compatible recipes.
+
+
+Charter
+-------
+Dynamic
+
+Responsibility
+--------------
+
+Introducing a recipe for most users is the first step of becoming involved with the development of conda-forge.
+Especially for new maintainers it is crucial to be able to ask questions and receive helpful and constructive feedback.
+
+The staging team is responsible for:
+
+ - reviewing and merging pull requests in conda-forge/staged-recipes
+ - answering question and giving feedback regarding conda-forge requirements
+ - identifying common misconceptions and problems due to unclear documentation
+ - help the documentation team maintain a clear documentation that simplifies contributing packages
+
+
+Members
+-------
+ - Amir Mohammadi <>
+ - Matthew R. Becker <>
+ - Björn Grüning <>
+ - Chris Burr <>
+ - Dougal J. Sutherland <dougal@gmail.com>
+ - Eric Dill <thedizzle@gmail.com>
+ - Igor T. Ghisi <>
+ - Isuru Fernando <isuruf@gmail.com>
+ - John Kirkham <kirkhamj@janelia.hhmi.org>
+ - Jonathan J. Helmus <jjhelmus@gmail.com>
+ - Johannes Köster <>
+ - Marcelo Duarte Trevisani <>
+ - Marius van Niekerk <marius.v.niekerk@gmail.com>
+ - Mike Sarahan <msarahan@gmail.com>
+ - Matt Craig <mattwcraig@gmail.com>
+ - Filipe Pires Alvarenga Fernandes <ocefpaf@gmail.com>
+ - Patrick Snape <patricksnape@gmail.com>
+ - Phil Elson <pelson.pub@gmail.com>
+ - Peter Williams <>
+ - Peter M. Landwehr <>
+ - Anthony Scopatz  <scopatz@gmail.com>
+ - Patrick Sodré <>
+ - Sylvain Corlay <>
+ - Joshua Adelman  <>
