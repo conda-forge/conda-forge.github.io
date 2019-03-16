@@ -15,7 +15,7 @@ You can find a detailed guide to submitting new package recipes in :ref:`creatin
 Smithy
 ------
 
-Smithy contains maintainance code for conda-forge, which is used by the ``conda smithy`` command line tool and the :ref:`dev_admservice`. Smithy lives in the repository `conda-forge/conda-smithy <https://github.com/conda-forge/conda-smithy>`_.
+Smithy contains maintenance code for conda-forge, which is used by the ``conda smithy`` command line tool and the :ref:`dev_admservice`. Smithy lives in the repository `conda-forge/conda-smithy <https://github.com/conda-forge/conda-smithy>`_.
 
 ``conda-forge/conda-smithy`` is the right repository to report bugs for
 
