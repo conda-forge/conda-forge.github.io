@@ -132,7 +132,7 @@ If that doesn't work, a close/open will kick off a new build.
 Using azure for *everything*
 ............................
 
-Azure is the default provider for Linux and OS X.  To use azure for everything dd the following to ``conda-forge.yml`` in the root
+Azure is the default provider for Linux and OS X.  To use azure for everything add the following to ``conda-forge.yml`` in the root
 of the feedstock.
 
 .. code-block:: yaml
@@ -140,8 +140,10 @@ of the feedstock.
     provider:
       win: azure
 
-Presently azure has some issues building libraries using cmake on windows.  Azure does not have a VS2008 installation so building
-certain very old packages that require VC9 will fail.
+.. note::
+
+  Presently azure has some issues building libraries using cmake on windows.  Azure does not have a VS2008 installation so building
+  certain very old packages that require VC9 will fail.
 
 
 Travis CI (OS X)
