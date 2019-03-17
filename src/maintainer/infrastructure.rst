@@ -15,7 +15,7 @@ You can find a detailed guide to submitting new package recipes in :ref:`creatin
 Smithy
 ------
 
-Smithy contains maintainance code for conda-forge, which is used by the ``conda smithy`` command line tool and the :ref:`dev_admservice`. Smithy lives in the repository `conda-forge/conda-smithy <https://github.com/conda-forge/conda-smithy>`_.
+Smithy contains maintenance code for conda-forge, which is used by the ``conda smithy`` command line tool and the :ref:`dev_admservice`. Smithy lives in the repository `conda-forge/conda-smithy <https://github.com/conda-forge/conda-smithy>`_.
 
 ``conda-forge/conda-smithy`` is the right repository to report bugs for
 
@@ -111,22 +111,67 @@ Entering the above phrase in an issue of a feedstock will update the Circle-CI S
 Entering the above phrase in an issue will update the team for the feedstock. This is usually done automatically.
 
 
-
 CI build services
 =================
 
 Here we describe common issues with the CI Services that conda-forge builds.
 
+Azure Pipelines
+---------------
+Azure is used to build packages for OS X, Linux, Linux (ARMv8) and Linux (IBM Power8+).  The build queue on azure is substantially larger
+than on all the other providers.  Azure builds have a maximum duration of 6 hours.
+
+To see all build on azure go to `<https://dev.azure.com/conda-forge/feedstock-builds/_build>`_.
+
+Restarting builds
+.................
+
+Presently azure does not sync Github users. In order to restart a build you can restart it from the Github checks interface.
+If that doesn't work, a close/open will kick off a new build.
+
+Using azure for *everything*
+............................
+
+Azure is the default provider for Linux and OS X.  To use azure for everything add the following to ``conda-forge.yml`` in the root
+of the feedstock.
+
+.. code-block:: yaml
+
+    provider:
+      win: azure
+
+.. note::
+
+  Presently azure has some issues building libraries using cmake on windows.  Azure does not have a VS2008 installation so building
+  certain very old packages that require VC9 will fail.
+
+
 Travis CI (OS X)
 ----------------
+
 Travis CI is used to build packages for OS X. After merging a staged-recipes pull request, it might be necessary to
 force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit `<https://travis-ci.org/profile>`_ and click "Sync accounts".
+
+Enabling travis
+...............
+
+TravisCI should only be needed to build recipes on OS X if there is a strange failure on azure.
+
+Enable a build by adding the following to ``conda-forge.yml`` in the root
+of the feedstock.
+
+.. code-block:: yaml
+
+    provider:
+      osx: travis
 
 
 CircleCI (Linux, OSX)
 ---------------------
 Circle CI is a container-based CI service that conda-forge uses to build
 linux packages. It can optionally build OSX packages.
+
+Linux builds are identical to those on azure as both are built inside docker containers.
 
 
 Using Circle for both Linux and OSX
@@ -138,6 +183,7 @@ To use CircleCI for OSX, add the following to ``conda-forge.yml`` in the root of
 
     provider:
       osx: circle
+      linux: circle
 
 CircleCI for OSX should be used for OSX only when Travis-CI resources (50 minutes of build time per job) is not enough as CircleCI gives more resources (2 hours of build time per job).
 
@@ -171,7 +217,10 @@ Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
 * Revoke Circle CI's access and then enable it again.
 * In the  "Checkout SSH keys" section of your Circle CI project settings, press "add user key".
 
+Appveyor
+--------
 
+Appveyor is used to build windows packages.  It is the only provider that can build recipes that require Visual Studio 2008.
 
 
 Skipping CI builds

@@ -145,7 +145,7 @@ A package that needs all three compilers would define
 Core dependency tree packages (CDT)
 -----------------------------------
 
-Dependencies outside of the conda-forge channel should be avoideded (see :ref:`no_external_deps`).
+Dependencies outside of the conda-forge channel should be avoided (see :ref:`no_external_deps`).
 However there are very few exceptions: some dependencies are so close to the system that they are not packaged with conda-forge.
 These dependencies have to be satisfied with *Core Dependency Tree* packages.
 
@@ -234,7 +234,7 @@ Message passing interface (MPI)
 -------------------------------
 
 .. note::
-  
+
   This section originates from Min's notes: https://hackmd.io/ry4uI0thTs2q_b4mAQd_qg
 
 MPI Variants in conda-forge
@@ -295,7 +295,7 @@ If you want to do the pinning yourself (i.e. not trust the mpi providers, or pin
   pin_run_as_build:
     mpich: x.x
     openmpi: x.x
- 
+
 .. code-block:: yaml
 
   # meta.yaml

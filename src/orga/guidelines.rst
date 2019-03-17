@@ -7,8 +7,8 @@ Transferring to conda-forge
 This document intends to layout some guidelines on the transfer of
 `conda-recipes <https://github.com/conda/conda-recipes>`__ and
 `anaconda-recipes <https://github.com/ContinuumIO/anaconda-recipes>`__
-to conda-forge. These aren't hard and fast rules and are open resonable
-interpretation and reviewer judegement.
+to conda-forge. These aren't hard and fast rules and are open reasonable
+interpretation and reviewer judgement.
 
 It is the aspiration that almost all recipes from those repos shall be
 proposed for addition here, thought it may be decided that a few don't
@@ -123,5 +123,5 @@ for your feedstock and ping ``@conda-forge/core`` with this request: ::
 
     <insert your reason>
 
-And also post to the conda-forge gitter channel! Also please be patient with us if we do not repond
+And also post to the conda-forge gitter channel! Also please be patient with us if we do not respond
 immediately :)
