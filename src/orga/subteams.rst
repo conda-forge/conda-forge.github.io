@@ -130,7 +130,7 @@ Staging Sub-Team
 Role
 ----
 
-Review and merge feedstock candidates in the staged-recipes repository. Helping users to create conda-forge compatible recipes.
+Review and merge feedstock candidates in the staged-recipes repository. Help users to create conda-forge compatible recipes.
 
 
 Charter
@@ -146,9 +146,9 @@ Especially for new maintainers it is crucial to be able to ask questions and rec
 The staging team is responsible for:
 
  - reviewing and merging pull requests in conda-forge/staged-recipes
- - answering question and giving feedback regarding conda-forge requirements
+ - answering questions and giving feedback regarding conda-forge requirements
  - identifying common misconceptions and problems due to unclear documentation
- - help the documentation team maintain a clear documentation that simplifies contributing packages
+ - help the documentation team maintain clear documentation that simplifies contributing packages
 
 
 Members
