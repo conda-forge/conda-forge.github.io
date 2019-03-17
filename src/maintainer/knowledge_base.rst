@@ -536,6 +536,9 @@ OpenMP on macOS
 
   Get help from @beckermr
 
+.. admonition:: Related links
+
+ - **openmp package conflict** (`conda-forge.github.io/#727 <https://github.com/conda-forge/conda-forge.github.io/issues/727>`__)
 
 .. _yum_deps:
 
