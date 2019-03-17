@@ -532,9 +532,18 @@ Without a preferred ``nompi`` variant, recipes that require mpi are much simpler
 OpenMP on macOS
 ---------------
 
-.. todo::
+You can enable OpenMP on macOS by adding the ``llvm-openmp`` package to the ``build``, ``host``, and ``run`` sections of the ``meta.yaml``. You will also want to add a selector for macOS like this
 
-  Get help from @beckermr
+.. code-block:: yaml
+
+  # meta.yaml
+  requirements:
+    build:
+      - llvm-openmp  # [osx]
+    host:
+      - llvm-openmp  # [osx]
+    run:
+      - llvm-openmp  # [osx]
 
 .. admonition:: Related links
 
