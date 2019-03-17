@@ -489,10 +489,19 @@ e.g. Python itself. If the package is built for multiple Python versions, use:</
 </div>
 <div class="section" id="openmp-on-macos">
 <h3>OpenMP on macOS<a class="headerlink" href="#openmp-on-macos" title="Permalink to this headline">¶</a></h3>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">Get help from &#64;beckermr</p>
+<p>You can enable OpenMP on macOS by adding the <code class="docutils literal notranslate"><span class="pre">llvm-openmp</span></code> package to the <code class="docutils literal notranslate"><span class="pre">build</span></code>, <code class="docutils literal notranslate"><span class="pre">host</span></code>, and <code class="docutils literal notranslate"><span class="pre">run</span></code> sections of the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>. You will also want to add a selector for macOS like this:</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># meta.yaml</span>
+<span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">llvm-openmp</span>  <span class="c1"># [osx]</span>
+  <span class="nt">host</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">llvm-openmp</span>  <span class="c1"># [osx]</span>
+  <span class="nt">run</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">llvm-openmp</span>  <span class="c1"># [osx]</span>
+</pre></div>
 </div>
+</div></blockquote>
 <div class="admonition-related-links admonition">
 <p class="first admonition-title">Related links</p>
 <ul class="last simple">
@@ -516,7 +525,7 @@ e.g. Python itself. If the package is built for multiple Python versions, use:</
 <h2>Special packages<a class="headerlink" href="#special-packages" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="blas">
 <h3>BLAS<a class="headerlink" href="#blas" title="Permalink to this headline">¶</a></h3>
-<div class="admonition-todo admonition" id="index-1">
+<div class="admonition-todo admonition" id="index-0">
 <p class="first admonition-title">Todo</p>
 <p class="last">The information regarding the blas package may now be outdated and needs checking.</p>
 </div>
@@ -636,7 +645,7 @@ section.</li>
 </div>
 <div class="section" id="noarch-generic">
 <h3>Noarch generic<a class="headerlink" href="#noarch-generic" title="Permalink to this headline">¶</a></h3>
-<div class="admonition-todo admonition" id="index-2">
+<div class="admonition-todo admonition" id="index-1">
 <p class="first admonition-title">Todo</p>
 <p class="last">add some information on r packages which make heavy use of <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">generic</span></code></p>
 </div>
