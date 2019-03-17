@@ -75,12 +75,21 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="infrastructure.html#ci-build-services">CI build services</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="infrastructure.html#travis-ci-os-x">Travis CI (OS X)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="infrastructure.html#azure-pipelines">Azure Pipelines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="infrastructure.html#restarting-builds">Restarting builds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="infrastructure.html#using-azure-for-everything">Using azure for <em>everything</em></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="infrastructure.html#travis-ci-os-x">Travis CI (OS X)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="infrastructure.html#enabling-travis">Enabling travis</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="infrastructure.html#circleci-linux-osx">CircleCI (Linux, OSX)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="infrastructure.html#using-circle-for-both-linux-and-osx">Using Circle for both Linux and OSX</a></li>
 <li class="toctree-l4"><a class="reference internal" href="infrastructure.html#enabling-circle-on-your-fork">Enabling Circle on your Fork</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="infrastructure.html#appveyor">Appveyor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="infrastructure.html#skipping-ci-builds">Skipping CI builds</a></li>
 </ul>
 </li>
@@ -179,6 +188,33 @@
 <li class="toctree-l2"><a class="reference internal" href="pinning_deps.html#updating-package-pins">Updating package pins</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html#top-level-fields">Top-level fields</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#appveyor">appveyor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#azure">azure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#channels">channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#circle">circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#compiler-stack">compiler_stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#docker">docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#github">github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#idle-timeout-minutes">idle_timeout_minutes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#linux">linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#linux-aarch64">linux_aarch64</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#linux-ppc64le">linux_ppc64le</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#max-py-ver">max_py_ver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#max-r-ver">max_r_ver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#min-py-ver">min_py_ver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#min-r-ver">min_r_ver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#osx">osx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#provider">provider</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#recipe-dir">recipe_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#templates">templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#travis">travis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#win">win</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="knowledge_base.html">Knowledge base</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="knowledge_base.html#particularities-on-windows">Particularities on Windows</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#local-testing">Local testing</a></li>
@@ -227,33 +263,7 @@
 <li class="toctree-l2"><a class="reference internal" href="knowledge_base.html#build-matrices">Build matrices</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html#top-level-fields">Top-level fields</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#appveyor">appveyor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#azure">azure</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#channels">channels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#circle">circle</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#compiler-stack">compiler_stack</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#docker">docker</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#github">github</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#idle-timeout-minutes">idle_timeout_minutes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#linux">linux</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#linux-aarch64">linux_aarch64</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#linux-ppc64le">linux_ppc64le</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#max-py-ver">max_py_ver</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#max-r-ver">max_r_ver</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#min-py-ver">min_py_ver</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#min-r-ver">min_r_ver</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#osx">osx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#provider">provider</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#recipe-dir">recipe_dir</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#templates">templates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#travis">travis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#win">win</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
 </ul>
 </div>
 </div>
@@ -275,8 +285,9 @@
 <li class="toctree-l2"><a class="reference internal" href="adding_pkgs.html">Contributing packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="updating_pkgs.html">Maintaining packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pinning_deps.html">Pinned dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html">Knowledge base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html">Knowledge base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>

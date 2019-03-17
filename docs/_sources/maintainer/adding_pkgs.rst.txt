@@ -274,7 +274,7 @@ Run dependencies are only required during run time of the package. Run dependenc
 Avoid external dependencies
 ...........................
 
-As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure :term:`ABI` compatiblity for all our packages.
+As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure :term:`ABI` compatibility for all our packages.
 
 There are only few exceptions to this rule:
 
@@ -323,7 +323,7 @@ For more information on pinning, please refer to :ref:`pinned_deps`.
 External dependencies
 .....................
 
-TODO: CDT packages & yum_requierements.
+TODO: CDT packages & yum_requirements.
 
 
 .. _testing_in_recipes:
@@ -334,7 +334,7 @@ Test
 
 
 All recipes need tests. Here are some tips, tricks, and justifications.
-How you shold test depends on the type of package (python, c-lib,
+How you should test depends on the type of package (python, c-lib,
 command-line tool, ... ), and what tests are available for that package.
 But every conda package must have at least *some* tests.
 

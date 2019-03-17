@@ -22,8 +22,8 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Configuring conda-forge.yml" href="conda_forge_yml.html" />
-    <link rel="prev" title="Pinned dependencies" href="pinning_deps.html" /> 
+    <link rel="next" title="FAQ" href="maintainer_faq.html" />
+    <link rel="prev" title="Configuring conda-forge.yml" href="conda_forge_yml.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -35,10 +35,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
+          <a href="maintainer_faq.html" title="FAQ"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="pinning_deps.html" title="Pinned dependencies"
+          <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -172,7 +172,7 @@ There is additional information about how conda-build 3 treats compilers in the 
 </div>
 <div class="section" id="core-dependency-tree-packages-cdt">
 <span id="cdt-packages"></span><h3>Core dependency tree packages (CDT)<a class="headerlink" href="#core-dependency-tree-packages-cdt" title="Permalink to this headline">¶</a></h3>
-<p>Dependencies outside of the conda-forge channel should be avoideded (see <a class="reference internal" href="adding_pkgs.html#no-external-deps"><span class="std std-ref">Avoid external dependencies</span></a>).
+<p>Dependencies outside of the conda-forge channel should be avoided (see <a class="reference internal" href="adding_pkgs.html#no-external-deps"><span class="std std-ref">Avoid external dependencies</span></a>).
 However there are very few exceptions: some dependencies are so close to the system that they are not packaged with conda-forge.
 These dependencies have to be satisfied with <em>Core Dependency Tree</em> packages.</p>
 <p>In conda-forge this currently affects only packages that link against libGL.</p>
@@ -493,6 +493,12 @@ e.g. Python itself. If the package is built for multiple Python versions, use:</
 <p class="first admonition-title">Todo</p>
 <p class="last">Get help from &#64;beckermr</p>
 </div>
+<div class="admonition-related-links admonition">
+<p class="first admonition-title">Related links</p>
+<ul class="last simple">
+<li><strong>openmp package conflict</strong> (<a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues/727">conda-forge.github.io/#727</a>)</li>
+</ul>
+</div>
 </div>
 <div class="section" id="yum-requirements-txt">
 <span id="yum-deps"></span><h3>yum_requirements.txt<a class="headerlink" href="#yum-requirements-txt" title="Permalink to this headline">¶</a></h3>
@@ -679,6 +685,7 @@ section.</li>
 <li class="toctree-l2"><a class="reference internal" href="adding_pkgs.html">Contributing packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="updating_pkgs.html">Maintaining packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pinning_deps.html">Pinned dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Knowledge base</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#particularities-on-windows">Particularities on Windows</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#local-testing">Local testing</a></li>
@@ -727,7 +734,7 @@ section.</li>
 <li class="toctree-l3"><a class="reference internal" href="#build-matrices">Build matrices</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
@@ -737,13 +744,13 @@ section.</li>
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="pinning_deps.html"
-                          title="Previous page">&larr; Pinned dependencies</a></p>
+    <p class="topless"><a href="conda_forge_yml.html"
+                          title="Previous page">&larr; Configuring conda-forge.yml</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="conda_forge_yml.html"
-                          title="Next page">&rarr; Configuring conda-forge.yml</a></p>
+    <p class="topless"><a href="maintainer_faq.html"
+                          title="Next page">&rarr; FAQ</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -794,10 +801,10 @@ section.</li>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
+          <a href="maintainer_faq.html" title="FAQ"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="pinning_deps.html" title="Pinned dependencies"
+          <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 

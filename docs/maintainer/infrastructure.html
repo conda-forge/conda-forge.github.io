@@ -64,7 +64,7 @@ You can find a detailed guide to submitting new package recipes in <a class="ref
 </div>
 <div class="section" id="smithy">
 <h3>Smithy<a class="headerlink" href="#smithy" title="Permalink to this headline">¶</a></h3>
-<p>Smithy contains maintainance code for conda-forge, which is used by the <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">smithy</span></code> command line tool and the <a class="reference internal" href="#dev-admservice"><span class="std std-ref">Admin web services</span></a>. Smithy lives in the repository <a class="reference external" href="https://github.com/conda-forge/conda-smithy">conda-forge/conda-smithy</a>.</p>
+<p>Smithy contains maintenance code for conda-forge, which is used by the <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">smithy</span></code> command line tool and the <a class="reference internal" href="#dev-admservice"><span class="std std-ref">Admin web services</span></a>. Smithy lives in the repository <a class="reference external" href="https://github.com/conda-forge/conda-smithy">conda-forge/conda-smithy</a>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">conda-forge/conda-smithy</span></code> is the right repository to report bugs for</p>
 <blockquote>
 <div><ul class="simple">
@@ -137,20 +137,57 @@ for you.</p>
 <div class="section" id="ci-build-services">
 <h2>CI build services<a class="headerlink" href="#ci-build-services" title="Permalink to this headline">¶</a></h2>
 <p>Here we describe common issues with the CI Services that conda-forge builds.</p>
+<div class="section" id="azure-pipelines">
+<h3>Azure Pipelines<a class="headerlink" href="#azure-pipelines" title="Permalink to this headline">¶</a></h3>
+<p>Azure is used to build packages for OS X, Linux, Linux (ARMv8) and Linux (IBM Power8+).  The build queue on azure is substantially larger
+than on all the other providers.  Azure builds have a maximum duration of 6 hours.</p>
+<p>To see all build on azure go to <a class="reference external" href="https://dev.azure.com/conda-forge/feedstock-builds/_build">https://dev.azure.com/conda-forge/feedstock-builds/_build</a>.</p>
+<div class="section" id="restarting-builds">
+<h4>Restarting builds<a class="headerlink" href="#restarting-builds" title="Permalink to this headline">¶</a></h4>
+<p>Presently azure does not sync Github users. In order to restart a build you can restart it from the Github checks interface.
+If that doesn’t work, a close/open will kick off a new build.</p>
+</div>
+<div class="section" id="using-azure-for-everything">
+<h4>Using azure for <em>everything</em><a class="headerlink" href="#using-azure-for-everything" title="Permalink to this headline">¶</a></h4>
+<p>Azure is the default provider for Linux and OS X.  To use azure for everything add the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root
+of the feedstock.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
+  <span class="nt">win</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Presently azure has some issues building libraries using cmake on windows.  Azure does not have a VS2008 installation so building
+certain very old packages that require VC9 will fail.</p>
+</div>
+</div>
+</div>
 <div class="section" id="travis-ci-os-x">
 <h3>Travis CI (OS X)<a class="headerlink" href="#travis-ci-os-x" title="Permalink to this headline">¶</a></h3>
 <p>Travis CI is used to build packages for OS X. After merging a staged-recipes pull request, it might be necessary to
 force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit <a class="reference external" href="https://travis-ci.org/profile">https://travis-ci.org/profile</a> and click “Sync accounts”.</p>
+<div class="section" id="enabling-travis">
+<h4>Enabling travis<a class="headerlink" href="#enabling-travis" title="Permalink to this headline">¶</a></h4>
+<p>TravisCI should only be needed to build recipes on OS X if there is a strange failure on azure.</p>
+<p>Enable a build by adding the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root
+of the feedstock.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
+  <span class="nt">osx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">travis</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="circleci-linux-osx">
 <h3>CircleCI (Linux, OSX)<a class="headerlink" href="#circleci-linux-osx" title="Permalink to this headline">¶</a></h3>
 <p>Circle CI is a container-based CI service that conda-forge uses to build
 linux packages. It can optionally build OSX packages.</p>
+<p>Linux builds are identical to those on azure as both are built inside docker containers.</p>
 <div class="section" id="using-circle-for-both-linux-and-osx">
 <h4>Using Circle for both Linux and OSX<a class="headerlink" href="#using-circle-for-both-linux-and-osx" title="Permalink to this headline">¶</a></h4>
 <p>To use CircleCI for OSX, add the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root of the feedstock.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
   <span class="nt">osx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">circle</span>
+  <span class="nt">linux</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">circle</span>
 </pre></div>
 </div>
 <p>CircleCI for OSX should be used for OSX only when Travis-CI resources (50 minutes of build time per job) is not enough as CircleCI gives more resources (2 hours of build time per job).</p>
@@ -183,6 +220,10 @@ This is not normally needed.</p>
 </ul>
 </div>
 </div>
+<div class="section" id="appveyor">
+<h3>Appveyor<a class="headerlink" href="#appveyor" title="Permalink to this headline">¶</a></h3>
+<p>Appveyor is used to build windows packages.  It is the only provider that can build recipes that require Visual Studio 2008.</p>
+</div>
 <div class="section" id="skipping-ci-builds">
 <h3>Skipping CI builds<a class="headerlink" href="#skipping-ci-builds" title="Permalink to this headline">¶</a></h3>
 <div class="admonition-todo admonition" id="index-0">
@@ -195,6 +236,7 @@ This is not normally needed.</p>
 <p class="first admonition-title">Related links</p>
 <ul class="last simple">
 <li><strong>abort builds with [skip ci]/etc</strong> <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues/629">(conda-forge.github.io/#629)</a></li>
+<li><strong>Skip CI requests</strong> <a class="reference external" href="https://github.com/conda-forge/staged-recipes/issues/1148">(staged-recipes/#1148)</a></li>
 </ul>
 </div>
 </div>
@@ -233,12 +275,21 @@ This is not normally needed.</p>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#ci-build-services">CI build services</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#travis-ci-os-x">Travis CI (OS X)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#azure-pipelines">Azure Pipelines</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#restarting-builds">Restarting builds</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#using-azure-for-everything">Using azure for <em>everything</em></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#travis-ci-os-x">Travis CI (OS X)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#enabling-travis">Enabling travis</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#circleci-linux-osx">CircleCI (Linux, OSX)</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#using-circle-for-both-linux-and-osx">Using Circle for both Linux and OSX</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#enabling-circle-on-your-fork">Enabling Circle on your Fork</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="#appveyor">Appveyor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#skipping-ci-builds">Skipping CI builds</a></li>
 </ul>
 </li>
@@ -247,8 +298,9 @@ This is not normally needed.</p>
 <li class="toctree-l2"><a class="reference internal" href="adding_pkgs.html">Contributing packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="updating_pkgs.html">Maintaining packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pinning_deps.html">Pinned dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html">Knowledge base</a></li>
 <li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html">Knowledge base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>

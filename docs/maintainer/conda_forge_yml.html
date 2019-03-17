@@ -22,8 +22,8 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Organisation Documentation" href="../orga/00_intro.html" />
-    <link rel="prev" title="Knowledge base" href="knowledge_base.html" /> 
+    <link rel="next" title="Knowledge base" href="knowledge_base.html" />
+    <link rel="prev" title="Pinned dependencies" href="pinning_deps.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -35,10 +35,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../orga/00_intro.html" title="Organisation Documentation"
+          <a href="knowledge_base.html" title="Knowledge base"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="knowledge_base.html" title="Knowledge base"
+          <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -86,7 +86,7 @@ file that is present in the root directory of a feedstock.</p>
 </ul>
 <div class="section" id="appveyor">
 <h3>appveyor<a class="headerlink" href="#appveyor" title="Permalink to this headline">¶</a></h3>
-<p>The top-level <code class="docutils literal notranslate"><span class="pre">appveyor</span></code> key speficies configurations for the Appveyor
+<p>The top-level <code class="docutils literal notranslate"><span class="pre">appveyor</span></code> key specifies configurations for the Appveyor
 CI service.  This is usually <strong>read-only</strong> and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as need.  It has a single
 <code class="docutils literal notranslate"><span class="pre">secure</span></code> field which contains the binstar token.  For example:</p>
@@ -129,7 +129,7 @@ has been built.  The <code class="docutils literal notranslate"><span class="pre
 </div>
 <div class="section" id="circle">
 <h3>circle<a class="headerlink" href="#circle" title="Permalink to this headline">¶</a></h3>
-<p>The top-level <code class="docutils literal notranslate"><span class="pre">circle</span></code> key speficies configurations for the Circle
+<p>The top-level <code class="docutils literal notranslate"><span class="pre">circle</span></code> key specifies configurations for the Circle
 CI service.  This is usually <strong>read-only</strong> and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as need.  It has a single
 <code class="docutils literal notranslate"><span class="pre">secure</span></code> field which contains the binstar token.  For example:</p>
@@ -165,7 +165,7 @@ defaults are as follows:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">github</span><span class="p">:</span>
   <span class="c1"># name of the github organization</span>
   <span class="nt">user_or_org</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
-  <span class="c1"># repository name, usually filled in authomatically</span>
+  <span class="c1"># repository name, usually filled in automatically</span>
   <span class="nt">repo_name</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
   <span class="c1"># branch name to execute on</span>
   <span class="nt">branch_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
@@ -286,7 +286,7 @@ You shouldn’t need it.</p>
 </div>
 <div class="section" id="travis">
 <h3>travis<a class="headerlink" href="#travis" title="Permalink to this headline">¶</a></h3>
-<p>The top-level <code class="docutils literal notranslate"><span class="pre">travis</span></code> key speficies configurations for the Travis
+<p>The top-level <code class="docutils literal notranslate"><span class="pre">travis</span></code> key specifies configurations for the Travis
 CI service.  This is usually <strong>read-only</strong> and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as need.  It has a single
 <code class="docutils literal notranslate"><span class="pre">secure</span></code> field which contains the binstar token.  For example:</p>
@@ -325,7 +325,6 @@ Currently only:</p>
 <li class="toctree-l2"><a class="reference internal" href="adding_pkgs.html">Contributing packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="updating_pkgs.html">Maintaining packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pinning_deps.html">Pinned dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html">Knowledge base</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Configuring conda-forge.yml</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#top-level-fields">Top-level fields</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#appveyor">appveyor</a></li>
@@ -353,6 +352,8 @@ Currently only:</p>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html">Knowledge base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
@@ -362,13 +363,13 @@ Currently only:</p>
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="knowledge_base.html"
-                          title="Previous page">&larr; Knowledge base</a></p>
+    <p class="topless"><a href="pinning_deps.html"
+                          title="Previous page">&larr; Pinned dependencies</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="../orga/00_intro.html"
-                          title="Next page">&rarr; Organisation Documentation</a></p>
+    <p class="topless"><a href="knowledge_base.html"
+                          title="Next page">&rarr; Knowledge base</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -419,10 +420,10 @@ Currently only:</p>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../orga/00_intro.html" title="Organisation Documentation"
+          <a href="knowledge_base.html" title="Knowledge base"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="knowledge_base.html" title="Knowledge base"
+          <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
