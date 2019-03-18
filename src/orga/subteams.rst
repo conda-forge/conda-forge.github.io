@@ -149,6 +149,7 @@ The staging team is responsible for:
  - answering questions and giving feedback regarding conda-forge requirements
  - identifying common misconceptions and problems due to unclear documentation
  - help the documentation team maintain clear documentation that simplifies contributing packages
+ - assist core in supporting feedstock maintainers when questions/issues arise during recipe maintenance
 
 
 Members
@@ -171,7 +172,7 @@ Members
  - Filipe Pires Alvarenga Fernandes <ocefpaf@gmail.com>
  - Patrick Snape <patricksnape@gmail.com>
  - Phil Elson <pelson.pub@gmail.com>
- - Peter Williams <>
+ - Peter K. G. Williams <peter@newton.cx>
  - Peter M. Landwehr <>
  - Anthony Scopatz  <scopatz@gmail.com>
  - Patrick Sodré <>
