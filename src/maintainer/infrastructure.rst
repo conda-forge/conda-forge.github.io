@@ -97,6 +97,7 @@ Note that this update command is kind of a hack, and things might go wrong. Make
 
 Entering the above phrase in a PR of a feedstock will lint the PR again.
 
+.. _ci_update_circle:
 
 @conda-forge-admin, please update circle
 ----------------------------------------
