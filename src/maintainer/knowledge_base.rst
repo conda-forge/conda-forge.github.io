@@ -579,22 +579,6 @@ At runtime by default the following packages will be used,
     - openblas   # [not win]
     - mkl        # [win]
 
-You can also switch your BLAS implementation by doing,
-
-.. code-block:: bash
-    conda install "libblas=*=*mkl"
-    conda install "libblas=*=*openblas"
-    conda install "libblas=*=*blis"
-    conda install "libblas=*=*netlib"
-
-Following legacy commands are also supported for now,
-
-.. code-block:: bash
-    conda install "blas=*=mkl"
-    conda install "blas=*=openblas"
-    conda install "blas=*=blis"
-    conda install "blas=*=netlib"
-
 If a package needs a specific implementation's internal API for more control you can have,
 
 .. code-block:: yaml
@@ -616,9 +600,30 @@ a specific blas implementation,
         - libblas * *openblas
         - openblas
 
-
 .. note::
 `blas_*` features should not be used anymore.
+
+Switching BLAS implementation
+"""""""""""""""""""""""""""""
+
+You can switch your BLAS implementation by doing,
+
+.. code-block:: bash
+    conda install "libblas=*=*mkl"
+    conda install "libblas=*=*openblas"
+    conda install "libblas=*=*blis"
+    conda install "libblas=*=*netlib"
+
+This would change the BLAS implementation without changing the conda packages depending
+on BLAS.
+
+Following legacy commands are also supported as well.
+
+.. code-block:: bash
+    conda install "blas=*=mkl"
+    conda install "blas=*=openblas"
+    conda install "blas=*=blis"
+    conda install "blas=*=netlib"
 
 How it works
 """"""""""""
