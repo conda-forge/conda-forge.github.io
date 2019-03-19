@@ -629,7 +629,7 @@ How it works
 """"""""""""
 
 At recipe build time, the netlib packages are used. This means that the downstream package will
-link to ``libblas.so.3`` in the ``libblis=*=*netlib` and will use only the reference
+link to ``libblas.so.3`` in the ``libblas=*=*netlib`` and will use only the reference
 implementation's symbols.
 
 ``libblas`` and `libcblas`` versioning is based on the Reference LAPACK versioning which at the
