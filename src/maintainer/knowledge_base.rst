@@ -567,45 +567,96 @@ Special packages
 ================
 
 BLAS
-----
+....
 
-.. todo::
+If a package needs one of BLAS, CBLAS, LAPACK, LAPACKE, use the following in the
+host of the recipe,
 
-  The information regarding the blas package may now be outdated and needs checking.
+.. code-block:: yaml
+    requirements:
+      host:
+        - libblas
+        - libcblas
+        - liblapack
+        - liblapacke
 
-BLAS metapackage
-................
+.. note::
+You should specify only the libraries the package needs. (i.e. if the package
+doesn't need LAPACK, remove liblapack and liblapacke)
 
-   -  Version will have two values X.Y
+At recipe build time, above requirements would download the NETLIB's reference
+implementations and build your recipe against those.
+At runtime by default the following packages will be used,
 
-      -  X represents changes to the metapackage.
-      -  Y represents priority of BLAS (if we change priorities BLASes X
-         must be bumped, if we want to prioritize something new over
-         OpenBLAS we do not need to change X)
+.. code-block:: yaml
+    - openblas   # [not win]
+    - mkl        # [win]
 
-         -  1 is OpenBLAS
-         -  0 is None (no BLAS whatsoever)
+If a package needs a specific implementation's internal API for more control you can have,
 
-   -  needs to have version stay the same across all variants.
-   -  build number cannot be touched (it won't be in the string anyways)
-   -  no pinning of BLAS inside the metapackages (dependencies can pin
-      this)
-   -  to preserve a BLAS in an environment it is recommend to add
-      ``pinned`` to ``conda-meta`` and specify down to the build string
-      what is the expected BLAS
-   -  To install a specific variant, ``conda install blas=1.0=none`` /
-      ``conda install blas=1.0=openblas``. It is hoped the syntax will be
-      improved in conda.
+.. code-block:: yaml
+    requirements:
+      host:
+        - {{ blas_impl }}
+      run:
+        - libblas * *{{ blas_impl }}
+        - {{ blas_impl }}
 
-      -  In the future, with some fixes to ``conda`` will allow for syntax
-         like ``conda install blas=*=openblas``. We should keep an eye on
-         this. (maybe even ``conda install blas:openblas``)
+This would give you a matrix builds for different blas implementations. If you only want to support
+a specific blas implementation,
 
-   -  There will be two variants initially:
+.. code-block:: yaml
+    requirements:
+      host:
+        - openblas
+      run:
+        - libblas * *openblas
+        - openblas
 
-      -  openblas
-      -  noblas - no BLAS optimisations (e.g. for reasons of smaller
-         installations)
+.. note::
+`blas_*` features should not be used anymore.
+
+Switching BLAS implementation
+"""""""""""""""""""""""""""""
+
+You can switch your BLAS implementation by doing,
+
+.. code-block:: bash
+    conda install "libblas=*=*mkl"
+    conda install "libblas=*=*openblas"
+    conda install "libblas=*=*blis"
+    conda install "libblas=*=*netlib"
+
+This would change the BLAS implementation without changing the conda packages depending
+on BLAS.
+
+Following legacy commands are also supported as well.
+
+.. code-block:: bash
+    conda install "blas=*=mkl"
+    conda install "blas=*=openblas"
+    conda install "blas=*=blis"
+    conda install "blas=*=netlib"
+
+How it works
+""""""""""""
+
+At recipe build time, the netlib packages are used. This means that the downstream package will
+link to ``libblas.so.3`` in the ``libblas=*=*netlib`` and will use only the reference
+implementation's symbols.
+
+``libblas`` and ``libcblas`` versioning is based on the Reference LAPACK versioning which at the
+time of writing is ``3.8.0``. Since the BLAS API is stable, a downstream package will only pin to
+``3.*`` of ``libblas`` and ``libcblas``. On the other hand, ``liblapack`` and ``liblapacke`` pins to
+``3.8.*``.
+
+In addition to the above netlib package there are other variants like ``libblas=*=*openblas``,
+which has ``openblas`` as a dependency and has a symlink from ``libblas.so.3`` to ``libopenblas.so``.
+``libblas=3.8.0=*openblas`` pins the ``openblas`` dependency to a version that is known to support the
+BLAS ``3.8.0`` API.  This means that at install time, the user can select what BLAS implementation
+they like without any knowledge of the version of the BLAS implementation needed.
+
+
 
 NumPy package
 .............
@@ -632,8 +683,6 @@ NumPy package
          available on conda-forge, they will be prompted to update to their
          previous variant
 
-   -  will track the blas\_{{ variant }} feature enabled by the BLAS
-      metapackage
    -  will pin the specific blas package versions (e.g. openblas .)
 
 SciPy, scikit-learn, etc.
