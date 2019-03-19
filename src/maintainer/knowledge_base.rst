@@ -634,12 +634,12 @@ implementation's symbols.
 
 ``libblas`` and `libcblas`` versioning is based on the Reference LAPACK versioning which at the
 time of writing is ``3.8.0``. Since the BLAS API is stable, a downstream package will only pin to
-``3.*`` of ``libblas`` and `libcblas``. On the other hand, ``liblapack`` and ``liblapacke`` pins to
+``3.*`` of ``libblas`` and ``libcblas``. On the other hand, ``liblapack`` and ``liblapacke`` pins to
 ``3.8.*``.
 
-In addition to the above netlib package there are other variants like ``libblis=*=*openblas1``,
+In addition to the above netlib package there are other variants like ``libblas=*=*openblas``,
 which has ``openblas`` as a dependency and has a symlink from ``libblas.so.3`` to `libopenblas.so``.
-``libblis=3.8.0=*openblas1`` pins the ``openblas`` dependency to a version that is known to support the
+``libblas=3.8.0=*openblas`` pins the ``openblas`` dependency to a version that is known to support the
 BLAS ``3.8.0`` API.  This means that at install time, the user can select what BLAS implementation
 they like without any knowledge of the version of the BLAS implementation needed.
 
