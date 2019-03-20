@@ -560,6 +560,7 @@ There are only very few situations where dependencies installed by yum are accep
   - satisfying the requirements of :term:`CDT` packages during test phase
   - installing packages that are only required for testing
 
+After changing ``yum_requirements.txt``, :ref:`rerender <dev_update_rerender>` to update       the configuration.
 
 Special packages
 ================
