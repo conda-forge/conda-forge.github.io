@@ -136,7 +136,6 @@ A package that needs all three compilers would define
         - {{ compiler('fortran') }}
 
 .. note::
-
   Appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.
   There is additional information about how conda-build 3 treats compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/source/compiler-tools.html>`_.
 
@@ -232,7 +231,6 @@ Message passing interface (MPI)
 -------------------------------
 
 .. note::
-
   This section originates from Min's notes: https://hackmd.io/ry4uI0thTs2q_b4mAQd_qg
 
 MPI Variants in conda-forge
@@ -562,16 +560,18 @@ There are only very few situations where dependencies installed by yum are accep
 
 After changing ``yum_requirements.txt``, :ref:`rerender <dev_update_rerender>` to update       the configuration.
 
+
 Special packages
 ================
 
 BLAS
-....
+----
 
 If a package needs one of BLAS, CBLAS, LAPACK, LAPACKE, use the following in the
 host of the recipe,
 
 .. code-block:: yaml
+
     requirements:
       host:
         - libblas
@@ -580,20 +580,22 @@ host of the recipe,
         - liblapacke
 
 .. note::
-You should specify only the libraries the package needs. (i.e. if the package
-doesn't need LAPACK, remove liblapack and liblapacke)
+  You should specify only the libraries the package needs. (i.e. if the package
+  doesn't need LAPACK, remove liblapack and liblapacke)
 
-At recipe build time, above requirements would download the NETLIB's reference
-implementations and build your recipe against those.
-At runtime by default the following packages will be used,
+  At recipe build time, above requirements would download the NETLIB's reference
+  implementations and build your recipe against those.
+  At runtime by default the following packages will be used.
 
 .. code-block:: yaml
+
     - openblas   # [not win]
     - mkl        # [win]
 
 If a package needs a specific implementation's internal API for more control you can have,
 
 .. code-block:: yaml
+
     requirements:
       host:
         - {{ blas_impl }}
@@ -605,6 +607,7 @@ This would give you a matrix builds for different blas implementations. If you o
 a specific blas implementation,
 
 .. code-block:: yaml
+
     requirements:
       host:
         - openblas
@@ -613,14 +616,15 @@ a specific blas implementation,
         - openblas
 
 .. note::
-`blas_*` features should not be used anymore.
+  ``blas_*`` features should not be used anymore.
 
 Switching BLAS implementation
-"""""""""""""""""""""""""""""
+.............................
 
 You can switch your BLAS implementation by doing,
 
 .. code-block:: bash
+
     conda install "libblas=*=*mkl"
     conda install "libblas=*=*openblas"
     conda install "libblas=*=*blis"
@@ -632,13 +636,14 @@ on BLAS.
 Following legacy commands are also supported as well.
 
 .. code-block:: bash
+
     conda install "blas=*=mkl"
     conda install "blas=*=openblas"
     conda install "blas=*=blis"
     conda install "blas=*=netlib"
 
 How it works
-""""""""""""
+............
 
 At recipe build time, the netlib packages are used. This means that the downstream package will
 link to ``libblas.so.3`` in the ``libblas=*=*netlib`` and will use only the reference
@@ -658,7 +663,7 @@ they like without any knowledge of the version of the BLAS implementation needed
 
 
 NumPy package
-.............
+-------------
 
    -  "version + build number" must always be greater than or equal to that
       in defaults. If not, defaults "numpy" will be chosen, complete with
@@ -685,7 +690,7 @@ NumPy package
    -  will pin the specific blas package versions (e.g. openblas .)
 
 SciPy, scikit-learn, etc.
-.........................
+-------------------------
 
    -  Same thing as NumPy
    -  Add numpy dependency as if linking occurs
