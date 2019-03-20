@@ -186,11 +186,9 @@ Building Against NumPy
 ----------------------
 
 Packages that link against NumPy need a special treatment in the dependency section.
-Finding ``numpy.get_include()`` in ``setup.py`` or ``cimport`` statements in ``.pyx`` or ``.pyd`` fil
-es are a telltale sign that the package links against NumPy.
+Finding ``numpy.get_include()`` in ``setup.py`` or ``cimport`` statements in ``.pyx`` or ``.pyd`` files are a telltale sign that the package links against NumPy.
 
-In the case of linking, you need to use the ``pin_compatible`` function to ensure having a compatible
- numpy version at run time:
+In the case of linking, you need to use the ``pin_compatible`` function to ensure having a compatible numpy version at run time:
 
 .. code-block:: yaml
 
