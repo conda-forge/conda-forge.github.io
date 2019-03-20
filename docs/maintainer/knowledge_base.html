@@ -203,12 +203,8 @@ These dependencies have to be satisfied with <em>Core Dependency Tree</em> packa
 <div class="section" id="building-against-numpy">
 <span id="linking-numpy"></span><h3>Building Against NumPy<a class="headerlink" href="#building-against-numpy" title="Permalink to this headline">¶</a></h3>
 <p>Packages that link against NumPy need a special treatment in the dependency section.
-Finding <code class="docutils literal notranslate"><span class="pre">numpy.get_include()</span></code> in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> or <code class="docutils literal notranslate"><span class="pre">cimport</span></code> statements in <code class="docutils literal notranslate"><span class="pre">.pyx</span></code> or <code class="docutils literal notranslate"><span class="pre">.pyd</span></code> fil
-es are a telltale sign that the package links against NumPy.</p>
-<dl class="docutils">
-<dt>In the case of linking, you need to use the <code class="docutils literal notranslate"><span class="pre">pin_compatible</span></code> function to ensure having a compatible</dt>
-<dd>numpy version at run time:</dd>
-</dl>
+Finding <code class="docutils literal notranslate"><span class="pre">numpy.get_include()</span></code> in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> or <code class="docutils literal notranslate"><span class="pre">cimport</span></code> statements in <code class="docutils literal notranslate"><span class="pre">.pyx</span></code> or <code class="docutils literal notranslate"><span class="pre">.pyd</span></code> files are a telltale sign that the package links against NumPy.</p>
+<p>In the case of linking, you need to use the <code class="docutils literal notranslate"><span class="pre">pin_compatible</span></code> function to ensure having a compatible numpy version at run time:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy</span>
 <span class="nt">run</span><span class="p">:</span>
@@ -519,25 +515,79 @@ e.g. Python itself. If the package is built for multiple Python versions, use:</
 <li>installing packages that are only required for testing</li>
 </ul>
 </div></blockquote>
+<p>After changing <code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code>, <a class="reference internal" href="updating_pkgs.html#dev-update-rerender"><span class="std std-ref">rerender</span></a> to update       the configuration.</p>
 </div>
 </div>
 <div class="section" id="special-packages">
 <h2>Special packages<a class="headerlink" href="#special-packages" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="blas">
+<h3>BLAS<a class="headerlink" href="#blas" title="Permalink to this headline">¶</a></h3>
 <p>If a package needs one of BLAS, CBLAS, LAPACK, LAPACKE, use the following in the
 host of the recipe,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">host</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libblas</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libcblas</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">liblapack</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">liblapacke</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>You should specify only the libraries the package needs. (i.e. if the package
 doesn’t need LAPACK, remove liblapack and liblapacke)</p>
-<p>At recipe build time, above requirements would download the NETLIB’s reference
+<p class="last">At recipe build time, above requirements would download the NETLIB’s reference
 implementations and build your recipe against those.
-At runtime by default the following packages will be used,</p>
+At runtime by default the following packages will be used.</p>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openblas</span>   <span class="c1"># [not win]</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mkl</span>        <span class="c1"># [win]</span>
+</pre></div>
+</div>
 <p>If a package needs a specific implementation’s internal API for more control you can have,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">host</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">blas_impl</span> <span class="p p-Indicator">}}</span>
+  <span class="nt">run</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libblas * *{{ blas_impl }}</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">blas_impl</span> <span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
 <p>This would give you a matrix builds for different blas implementations. If you only want to support
 a specific blas implementation,</p>
-<p><cite>blas_*</cite> features should not be used anymore.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">host</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openblas</span>
+  <span class="nt">run</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libblas * *openblas</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openblas</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">blas_*</span></code> features should not be used anymore.</p>
+</div>
+<div class="section" id="switching-blas-implementation">
+<h4>Switching BLAS implementation<a class="headerlink" href="#switching-blas-implementation" title="Permalink to this headline">¶</a></h4>
 <p>You can switch your BLAS implementation by doing,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install <span class="s2">&quot;libblas=*=*mkl&quot;</span>
+conda install <span class="s2">&quot;libblas=*=*openblas&quot;</span>
+conda install <span class="s2">&quot;libblas=*=*blis&quot;</span>
+conda install <span class="s2">&quot;libblas=*=*netlib&quot;</span>
+</pre></div>
+</div>
 <p>This would change the BLAS implementation without changing the conda packages depending
 on BLAS.</p>
 <p>Following legacy commands are also supported as well.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install <span class="s2">&quot;blas=*=mkl&quot;</span>
+conda install <span class="s2">&quot;blas=*=openblas&quot;</span>
+conda install <span class="s2">&quot;blas=*=blis&quot;</span>
+conda install <span class="s2">&quot;blas=*=netlib&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-it-works">
+<h4>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h4>
 <p>At recipe build time, the netlib packages are used. This means that the downstream package will
 link to <code class="docutils literal notranslate"><span class="pre">libblas.so.3</span></code> in the <code class="docutils literal notranslate"><span class="pre">libblas=*=*netlib</span></code> and will use only the reference
 implementation’s symbols.</p>
@@ -550,6 +600,10 @@ which has <code class="docutils literal notranslate"><span class="pre">openblas<
 <code class="docutils literal notranslate"><span class="pre">libblas=3.8.0=*openblas</span></code> pins the <code class="docutils literal notranslate"><span class="pre">openblas</span></code> dependency to a version that is known to support the
 BLAS <code class="docutils literal notranslate"><span class="pre">3.8.0</span></code> API.  This means that at install time, the user can select what BLAS implementation
 they like without any knowledge of the version of the BLAS implementation needed.</p>
+</div>
+</div>
+<div class="section" id="numpy-package">
+<h3>NumPy package<a class="headerlink" href="#numpy-package" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>“version + build number” must always be greater than or equal to that
@@ -577,12 +631,16 @@ previous variant</li>
 <li>will pin the specific blas package versions (e.g. openblas .)</li>
 </ul>
 </div></blockquote>
+</div>
+<div class="section" id="scipy-scikit-learn-etc">
+<h3>SciPy, scikit-learn, etc.<a class="headerlink" href="#scipy-scikit-learn-etc" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li>Same thing as NumPy</li>
 <li>Add numpy dependency as if linking occurs</li>
 </ul>
 </div></blockquote>
+</div>
 </div>
 <div class="section" id="noarch-builds">
 <h2>Noarch builds<a class="headerlink" href="#noarch-builds" title="Permalink to this headline">¶</a></h2>
@@ -699,7 +757,16 @@ section.</li>
 <li class="toctree-l4"><a class="reference internal" href="#yum-requirements-txt">yum_requirements.txt</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#special-packages">Special packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#special-packages">Special packages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#blas">BLAS</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#switching-blas-implementation">Switching BLAS implementation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#how-it-works">How it works</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#numpy-package">NumPy package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scipy-scikit-learn-etc">SciPy, scikit-learn, etc.</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#noarch-builds">Noarch builds</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#noarch-python">Noarch python</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#noarch-generic">Noarch generic</a></li>
