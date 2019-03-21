@@ -270,7 +270,7 @@ viewFooter =
             [ text "[ docs ] " ]
         , a [ href "https://twitter.com/condaforge" ]
             [ text " [ twitter ]" ]
-        , a [ href "https://www.flipcause.com/secure/cause_pdetails/NDA0OTk=" ]
+        , a [ href "https://numfocus.salsalabs.org/donate-to-conda-forge/index.html" ]
             [ text "[ donate ] " ]
         ]
 
