@@ -147,6 +147,11 @@ test that the module can be imported, as described in the example.</li>
 </div>
 <div class="section" id="the-recipe-meta-yaml">
 <span id="meta-yaml"></span><h2>The recipe meta.yaml<a class="headerlink" href="#the-recipe-meta-yaml" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file in the recipe directory is at the heart of every conda package.
+It defines everything that is required build and use the  package.</p>
+<p><code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> is in <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">yaml</a> format, augmented with <a class="reference external" href="http://jinja.pocoo.org/">Jinja</a> templating.</p>
+<p>A full reference of the structure and fields of <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file can be found in the <a class="reference external" href="https://conda.io/projects/conda-build/en/latest/resources/define-metadata.html">Defining metadata (meta.yaml)</a> section in the conda-build documentation.</p>
+<p>In the following we highlight particularly important and conda-forge specific information and guidelines, ordered by section in <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>.</p>
 <div class="section" id="source">
 <h3>Source<a class="headerlink" href="#source" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="build-from-tarballs-not-repos">
