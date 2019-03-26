@@ -114,6 +114,16 @@ The maintainer's job is to:
 The recipe meta.yaml
 ====================
 
+The ``meta.yaml`` file in the recipe directory is at the heart of every conda package.
+It defines everything that is required build and use the  package.
+
+``meta.yaml`` is in `yaml <https://en.wikipedia.org/wiki/YAML>`__ format, augmented with `Jinja <http://jinja.pocoo.org/>`__ templating.
+
+A full reference of the structure and fields of ``meta.yaml`` file can be found in the `Defining metadata (meta.yaml) <https://conda.io/projects/conda-build/en/latest/resources/define-metadata.html>`__ section in the conda-build documentation.
+
+In the following we highlight particularly important and conda-forge specific information and guidelines, ordered by section in ``meta.yaml``.
+
+
 Source
 ------
 
