@@ -330,7 +330,7 @@ For more information on pinning, please refer to :ref:`pinned_deps`.
 Constraining packages at runtime
 ................................
 
-The ``run_constrained`` section allows to define restrictions on packages at runtime without depending on the package. It can be used to Restrict allowed versions of optional dependencies and defining incompatible packages.
+The ``run_constrained`` section allows to define restrictions on packages at runtime without depending on the package. It can be used to restrict allowed versions of optional dependencies and defining incompatible packages.
 
 Defining non-dependency restrictions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
