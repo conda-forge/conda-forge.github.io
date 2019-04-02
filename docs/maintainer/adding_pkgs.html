@@ -432,6 +432,24 @@ in the the test stanza:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="copying-test-files">
+<h5>Copying test files<a class="headerlink" href="#copying-test-files" title="Permalink to this headline">¶</a></h5>
+<p>Often test files are not installed alongside packages. Conda creates a fresh
+working copy to execute the test stage of build recipes, which don’t contain
+the files of source package.</p>
+<p>You can include files required for testing with the <code class="docutils literal notranslate"><span class="pre">source_files</span></code> section:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span>
+  <span class="nt">imports</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">package_name</span>
+  <span class="nt">requires</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pytest tests test_pkg_integration.py</span>
+  <span class="nt">source_files</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">tests</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">test_pkg_integration.py</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">source_files</span></code> section works for files and directories.</p>
+</div>
 <div class="section" id="built-in-tests">
 <h5>Built-in tests<a class="headerlink" href="#built-in-tests" title="Permalink to this headline">¶</a></h5>
 <p>Some packages have testing built-in. In this case, you can put a test command
@@ -453,7 +471,7 @@ for you with the following command:</p>
   <span class="n">requires</span><span class="p">:</span>
     <span class="o">-</span> <span class="n">pytest</span>
   <span class="n">commands</span><span class="p">:</span>
-    <span class="o">-</span> <span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="o">--</span><span class="n">pyargs</span> <span class="n">package_name</span>
+    <span class="o">-</span> <span class="n">pytest</span> <span class="o">--</span><span class="n">pyargs</span> <span class="n">package_name</span>
 </pre></div>
 </div>
 </div>
@@ -603,6 +621,7 @@ this install process easier. Please feel free to lift it.</p>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="#running-unit-tests">Running unit tests</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#test-requirements">Test requirements</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#copying-test-files">Copying test files</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#built-in-tests">Built-in tests</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#pytest-tests">pytest tests</a></li>
 </ul>
