@@ -245,38 +245,35 @@ Conda-build distinguishes three different kinds of dependencies.
 In the following paragraphs we give a very short overview what packages go where.
 For a detailed explanation please refer to the `conda-build documentation <https://docs.conda.io/projects/conda-build/en/latest/source/resources/define-metadata.html#requirements-section>`__.
 
-Build
-^^^^^
+**Build**
 
-Build dependencies are required in the build environment and contain all tools that are not needed on the host of the package.
+  Build dependencies are required in the build environment and contain all tools that are not needed on the host of the package.
 
-Following packages are examples of typical ``build`` dependencies:
+  Following packages are examples of typical ``build`` dependencies:
 
- - compilers (see :ref:`dep_compilers`)
- - cmake
- - make
- - pkg-config
- - CDT packages (see :ref:`cdt_packages`)
+   - compilers (see :ref:`dep_compilers`)
+   - cmake
+   - make
+   - pkg-config
+   - CDT packages (see :ref:`cdt_packages`)
 
 
-Host
-^^^^
+**Host**
 
-Host dependencies are required during build phase, but in contrast to build packages they have to be present on the host.
+  Host dependencies are required during build phase, but in contrast to build packages they have to be present on the host.
 
-Following packages are typical examples for ``host`` dependencies:
+  Following packages are typical examples for ``host`` dependencies:
 
- - shared libraries (c/c++)
- - python/r libraries that link against c libraries (see e.g. :ref:`linking_numpy`)
- - python, r-base
- - setuptools, pip (see :ref:`use-pip`)
+   - shared libraries (c/c++)
+   - python/r libraries that link against c libraries (see e.g. :ref:`linking_numpy`)
+   - python, r-base
+   - setuptools, pip (see :ref:`use-pip`)
 
-Run
-^^^
+**Run**
 
-Run dependencies are only required during run time of the package. Run dependencies typically include
+  Run dependencies are only required during run time of the package. Run dependencies typically include
 
- - most python/r libraries
+   - most python/r libraries
 
 
 .. _no_external_deps:
@@ -330,10 +327,46 @@ In other cases you have to specify :term:`ABI` compatible versions manually.
 For more information on pinning, please refer to :ref:`pinned_deps`.
 
 
-External dependencies
-.....................
+Constraining packages at runtime
+................................
 
-TODO: CDT packages & yum_requirements.
+The ``run_constrained`` section allows to define restrictions on packages at runtime without depending on the package. It can be used to restrict allowed versions of optional dependencies and defining incompatible packages.
+
+Defining non-dependency restrictions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Imagine a package can be used together with version 1 of ``awesome-software`` when present, but does not strictly depend on it.
+Therefore you would like to let the user choose whether he/she would like to use the package with or without ``awesome-software``. Let's assume further that the package is incompatible to version 2 of ``awesome-software``.
+
+In this case ``run_dependencies`` can be used to restrict ``awesome-software`` to version 1.*, if the user chooses to install it:
+
+.. code-block:: yaml
+
+  requirements:
+    # [...]
+    run_constrained:
+      - awesome-software 1.*
+
+Here ``run_constrained`` acts as a means to protect users from incompatible version without introducing an unwanted dependency.
+
+Defining blockers
+^^^^^^^^^^^^^^^^^
+
+Sometimes packages interfere with each other and therefore only one of them can be installed at any time.
+In combination with an unsatisfiable version, ``run_constrained`` can define blockers:
+
+
+.. code-block:: yaml
+
+  package:
+  name: awesome-db
+
+  requirements:
+    # [...]
+    run_constrained:
+      - amazing-db ==9999999999
+
+In this example, ``awesome-db`` cannot be be installed together with ``amazing-db`` as there is no package ``amazing-db-9999999999``.
 
 
 .. _testing_in_recipes:
@@ -573,4 +606,3 @@ In ``build.bat``:
         if not exist %PREFIX%\etc\conda\%%F.d mkdir %PREFIX%\etc\conda\%%F.d
         copy %RECIPE_DIR%\%%F.bat %PREFIX%\etc\conda\%%F.d\%PKG_NAME%_%%F.bat
     )
-

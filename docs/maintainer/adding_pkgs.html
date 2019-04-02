@@ -1,17 +1,15 @@
 
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>Contributing packages &#8212; conda-forge 2019.01 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
@@ -62,16 +60,16 @@
 <h3>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h3>
 <p>There are multiple ways to get started:</p>
 <ol class="arabic simple">
-<li>Look at <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes/example">the example recipe</a> in the staged-recipes repository and modify it as necessary.</li>
-<li>If it is an R package from <a class="reference external" href="https://cran.r-project.org/">CRAN</a>, please
+<li><p>Look at <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes/example">the example recipe</a> in the staged-recipes repository and modify it as necessary.</p></li>
+<li><p>If it is an R package from <a class="reference external" href="https://cran.r-project.org/">CRAN</a>, please
 instead start by using the <a class="reference external" href="https://github.com/bgruening/conda_r_skeleton_helper">conda-forge helper script for R recipes</a>.
-Then if necessary you can make manual edits to the recipe.</li>
-<li>If it is a python package you can generate a skeleton as a starting point with
+Then if necessary you can make manual edits to the recipe.</p></li>
+<li><p>If it is a python package you can generate a skeleton as a starting point with
 <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">skeleton</span> <span class="pre">pypi</span> <span class="pre">your_package_name</span></code>. You do <em>not</em> have to use the skeleton, and the
 recipes produced by skeleton will need to be edited.
 In particular, you’ll at least need to change the build line to <a class="reference internal" href="#use-pip"><span class="std std-ref">use pip</span></a>,
 add yourself as a maintainer,
-and specify a <code class="docutils literal notranslate"><span class="pre">license_file</span></code>.</li>
+and specify a <code class="docutils literal notranslate"><span class="pre">license_file</span></code>.</p></li>
 </ol>
 <p>Your final recipe should have no comments (unless they’re actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.</p>
 <p><em>If there are details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.</em></p>
@@ -80,36 +78,36 @@ and specify a <code class="docutils literal notranslate"><span class="pre">licen
 <div class="section" id="step-by-step-instructions">
 <h3>Step-by-step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>Ensure your source code can be downloaded as a single file. Source code
+<li><p>Ensure your source code can be downloaded as a single file. Source code
 should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz)
 or tagged on GitHub, to ensure that it can be verified. (For further
-detail, sees <a class="reference internal" href="#tarballs-no-repos"><span class="std std-ref">Build from tarballs, not repos</span></a>).</li>
-<li>Fork the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">example recipes</a>
-repository.</li>
-<li>Create a new branch from the staged-recipes <code class="docutils literal notranslate"><span class="pre">master</span></code> branch.</li>
-<li>Within your forked copy, generate a new folder in the recipes subdirectory
+detail, sees <a class="reference internal" href="#tarballs-no-repos"><span class="std std-ref">Build from tarballs, not repos</span></a>).</p></li>
+<li><p>Fork the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">example recipes</a>
+repository.</p></li>
+<li><p>Create a new branch from the staged-recipes <code class="docutils literal notranslate"><span class="pre">master</span></code> branch.</p></li>
+<li><p>Within your forked copy, generate a new folder in the recipes subdirectory
 and copy the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a>
 file from the example directory. Please leave the example directory
-unchanged!</li>
-<li>Edit the copied recipe (meta.yml) as needed. For details, see
-<a class="reference internal" href="#meta-yaml"><span class="std std-ref">The recipe meta.yaml</span></a>.</li>
-<li>Generate the SHA256 key for your source code archive, as described in the
+unchanged!</p></li>
+<li><p>Edit the copied recipe (meta.yml) as needed. For details, see
+<a class="reference internal" href="#meta-yaml"><span class="std std-ref">The recipe meta.yaml</span></a>.</p></li>
+<li><p>Generate the SHA256 key for your source code archive, as described in the
 example recipe using the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative you can also
 go to the package description on <a class="reference external" href="https://pypi.org">PyPi</a> from which you
-can directly copy the SHA256.</li>
-<li>Be sure to fill in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> section. The simplest test will simply
-test that the module can be imported, as described in the example.</li>
-<li>Remove all irrelevant comments in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>  file.</li>
+can directly copy the SHA256.</p></li>
+<li><p>Be sure to fill in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> section. The simplest test will simply
+test that the module can be imported, as described in the example.</p></li>
+<li><p>Remove all irrelevant comments in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>  file.</p></li>
 </ol>
 <div class="section" id="checklist">
 <h4>Checklist<a class="headerlink" href="#checklist" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache 2.0 rather than APACHE 2.0).</li>
-<li>Ensure that you have included a license file if your license requires one – most do. (see <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55">here</a>)</li>
-<li>In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.</li>
-<li>Make sure that all tests pass successfully at least on your development machine.</li>
-<li>Recommended: run the test locally on your source code to ensure the recipe works locally (see  <a class="reference internal" href="#staging-test-locally"><span class="std std-ref">Running tests locally for staged recipes</span></a>).</li>
-<li>Make sure that your changes do not interfere with other recipes that are int the <code class="docutils literal notranslate"><span class="pre">recipes</span></code> folder (e.g. the <code class="docutils literal notranslate"><span class="pre">example</span></code> recipe).</li>
+<li><p>Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache 2.0 rather than APACHE 2.0).</p></li>
+<li><p>Ensure that you have included a license file if your license requires one – most do. (see <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55">here</a>)</p></li>
+<li><p>In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.</p></li>
+<li><p>Make sure that all tests pass successfully at least on your development machine.</p></li>
+<li><p>Recommended: run the test locally on your source code to ensure the recipe works locally (see  <a class="reference internal" href="#staging-test-locally"><span class="std std-ref">Running tests locally for staged recipes</span></a>).</p></li>
+<li><p>Make sure that your changes do not interfere with other recipes that are int the <code class="docutils literal notranslate"><span class="pre">recipes</span></code> folder (e.g. the <code class="docutils literal notranslate"><span class="pre">example</span></code> recipe).</p></li>
 </ul>
 </div>
 </div>
@@ -119,29 +117,29 @@ test that the module can be imported, as described in the example.</li>
 <p>The reviewer team will assist you by pointing out improvements and answering questions. Once the package is ready, the reviewers will approve and merge your pull request.</p>
 <p>After merging the <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>, our infrastructure will build the package and make it available in the conda-channel.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you have questions or have not heard back for a while, you can notify us by including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge/staged-recipes</span></code> in your github message.</p>
+<p class="admonition-title">Note</p>
+<p>If you have questions or have not heard back for a while, you can notify us by including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge/staged-recipes</span></code> in your github message.</p>
 </div>
 </div>
 <div class="section" id="post-staging-process">
 <h3>Post staging process<a class="headerlink" href="#post-staging-process" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>After the PR is merged, our <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> services will create a new git repo automatically. For example, the recipe for a package named <code class="docutils literal notranslate"><span class="pre">pydstool</span></code> will be moved to a new repository <a class="reference external" href="https://github.com/conda-forge/pydstool-feedstock">https://github.com/conda-forge/pydstool-feedstock</a>.</li>
-<li>CI services will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to <a class="reference external" href="https://anaconda.org/conda-forge">https://anaconda.org/conda-forge</a></li>
-<li>If this is your first contribution, you will be added to the conda-forge <a class="reference external" href="https://github.com/orgs/conda-forge/people">team</a> and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.</li>
-<li>If you want to make a change to the recipe, send a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.</li>
+<li><p>After the PR is merged, our <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> services will create a new git repo automatically. For example, the recipe for a package named <code class="docutils literal notranslate"><span class="pre">pydstool</span></code> will be moved to a new repository <a class="reference external" href="https://github.com/conda-forge/pydstool-feedstock">https://github.com/conda-forge/pydstool-feedstock</a>.</p></li>
+<li><p>CI services will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to <a class="reference external" href="https://anaconda.org/conda-forge">https://anaconda.org/conda-forge</a></p></li>
+<li><p>If this is your first contribution, you will be added to the conda-forge <a class="reference external" href="https://github.com/orgs/conda-forge/people">team</a> and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.</p></li>
+<li><p>If you want to make a change to the recipe, send a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.</p></li>
 </ul>
 </div>
 <div class="section" id="maintainer-role">
 <h3>Maintainer role<a class="headerlink" href="#maintainer-role" title="Permalink to this headline">¶</a></h3>
 <p>The maintainer’s job is to:</p>
 <ul class="simple">
-<li>Keep the feedstock updated by merging eventual maintenance <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>s from conda-forge’s bots.</li>
-<li>Keep the feedstock on par with new releases of the source package by
+<li><p>Keep the feedstock updated by merging eventual maintenance <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>s from conda-forge’s bots.</p></li>
+<li><p>Keep the feedstock on par with new releases of the source package by
 - Bumping the version number and checksum.
 - Making sure that feedstock’s requirements stay accurate.
-- Make sure the test requirements match those of the of the updated package.</li>
-<li>Answer eventual question about the package on the feedstock issue tracker.</li>
+- Make sure the test requirements match those of the of the updated package.</p></li>
+<li><p>Answer eventual question about the package on the feedstock issue tracker.</p></li>
 </ul>
 </div>
 </div>
@@ -160,11 +158,11 @@ It defines everything that is required build and use the  package.</p>
 <p>There are several reasons behind this rule:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Repositories are usually larger than tarballs, draining shared CI time and bandwidth</li>
-<li>Repositories are not checksummed.  Thus, using a tarball has a
+<li><p>Repositories are usually larger than tarballs, draining shared CI time and bandwidth</p></li>
+<li><p>Repositories are not checksummed.  Thus, using a tarball has a
 stronger guarantee that the download that is obtained to build from is
-in fact the intended package.</li>
-<li>On some systems it is possible to not have permission to remove a repo once it is created.</li>
+in fact the intended package.</p></li>
+<li><p>On some systems it is possible to not have permission to remove a repo once it is created.</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -192,7 +190,7 @@ install the necessary tools below).</p>
 <p>You can e.g. specify not to build …</p>
 <blockquote>
 <div><ul class="simple">
-<li>on specific architectures:</li>
+<li><p>on specific architectures:</p></li>
 </ul>
 <blockquote>
 <div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
@@ -201,7 +199,7 @@ install the necessary tools below).</p>
 </div>
 </div></blockquote>
 <ul class="simple">
-<li>for specific python versions:</li>
+<li><p>for specific python versions:</p></li>
 </ul>
 <blockquote>
 <div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
@@ -251,50 +249,50 @@ the real package dependencies are only <code class="docutils literal notranslate
 <p>Conda-build distinguishes three different kinds of dependencies.
 In the following paragraphs we give a very short overview what packages go where.
 For a detailed explanation please refer to the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/source/resources/define-metadata.html#requirements-section">conda-build documentation</a>.</p>
-<div class="section" id="id3">
-<h5>Build<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h5>
-<p>Build dependencies are required in the build environment and contain all tools that are not needed on the host of the package.</p>
+<p><strong>Build</strong></p>
+<blockquote>
+<div><p>Build dependencies are required in the build environment and contain all tools that are not needed on the host of the package.</p>
 <p>Following packages are examples of typical <code class="docutils literal notranslate"><span class="pre">build</span></code> dependencies:</p>
 <blockquote>
 <div><ul class="simple">
-<li>compilers (see <a class="reference internal" href="knowledge_base.html#dep-compilers"><span class="std std-ref">Compilers</span></a>)</li>
-<li>cmake</li>
-<li>make</li>
-<li>pkg-config</li>
-<li>CDT packages (see <a class="reference internal" href="knowledge_base.html#cdt-packages"><span class="std std-ref">Core dependency tree packages (CDT)</span></a>)</li>
+<li><p>compilers (see <a class="reference internal" href="knowledge_base.html#dep-compilers"><span class="std std-ref">Compilers</span></a>)</p></li>
+<li><p>cmake</p></li>
+<li><p>make</p></li>
+<li><p>pkg-config</p></li>
+<li><p>CDT packages (see <a class="reference internal" href="knowledge_base.html#cdt-packages"><span class="std std-ref">Core dependency tree packages (CDT)</span></a>)</p></li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="host">
-<h5>Host<a class="headerlink" href="#host" title="Permalink to this headline">¶</a></h5>
-<p>Host dependencies are required during build phase, but in contrast to build packages they have to be present on the host.</p>
+</div></blockquote>
+<p><strong>Host</strong></p>
+<blockquote>
+<div><p>Host dependencies are required during build phase, but in contrast to build packages they have to be present on the host.</p>
 <p>Following packages are typical examples for <code class="docutils literal notranslate"><span class="pre">host</span></code> dependencies:</p>
 <blockquote>
 <div><ul class="simple">
-<li>shared libraries (c/c++)</li>
-<li>python/r libraries that link against c libraries (see e.g. <a class="reference internal" href="knowledge_base.html#linking-numpy"><span class="std std-ref">Building Against NumPy</span></a>)</li>
-<li>python, r-base</li>
-<li>setuptools, pip (see <a class="reference internal" href="#use-pip"><span class="std std-ref">Use pip</span></a>)</li>
+<li><p>shared libraries (c/c++)</p></li>
+<li><p>python/r libraries that link against c libraries (see e.g. <a class="reference internal" href="knowledge_base.html#linking-numpy"><span class="std std-ref">Building Against NumPy</span></a>)</p></li>
+<li><p>python, r-base</p></li>
+<li><p>setuptools, pip (see <a class="reference internal" href="#use-pip"><span class="std std-ref">Use pip</span></a>)</p></li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="run">
-<h5>Run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h5>
-<p>Run dependencies are only required during run time of the package. Run dependencies typically include</p>
+</div></blockquote>
+<p><strong>Run</strong></p>
+<blockquote>
+<div><p>Run dependencies are only required during run time of the package. Run dependencies typically include</p>
 <blockquote>
 <div><ul class="simple">
-<li>most python/r libraries</li>
+<li><p>most python/r libraries</p></li>
 </ul>
 </div></blockquote>
-</div>
+</div></blockquote>
 </div>
 <div class="section" id="avoid-external-dependencies">
 <span id="no-external-deps"></span><h4>Avoid external dependencies<a class="headerlink" href="#avoid-external-dependencies" title="Permalink to this headline">¶</a></h4>
 <p>As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure <a class="reference internal" href="../misc/00_intro.html#term-abi"><span class="xref std std-term">ABI</span></a> compatibility for all our packages.</p>
 <p>There are only few exceptions to this rule:</p>
 <ol class="arabic simple">
-<li>Some dependencies have to be satisfied with <a class="reference internal" href="../misc/00_intro.html#term-cdt"><span class="xref std std-term">CDT</span></a> packages (see <a class="reference internal" href="knowledge_base.html#cdt-packages"><span class="std std-ref">Core dependency tree packages (CDT)</span></a>).</li>
-<li>Some packages require root access (e.g. device drivers) that cannot be distributed by conda-forge. These dependencies should be avoided whenever possible.</li>
+<li><p>Some dependencies have to be satisfied with <a class="reference internal" href="../misc/00_intro.html#term-cdt"><span class="xref std std-term">CDT</span></a> packages (see <a class="reference internal" href="knowledge_base.html#cdt-packages"><span class="std std-ref">Core dependency tree packages (CDT)</span></a>).</p></li>
+<li><p>Some packages require root access (e.g. device drivers) that cannot be distributed by conda-forge. These dependencies should be avoided whenever possible.</p></li>
 </ol>
 </div>
 <div class="section" id="pinning">
@@ -304,8 +302,8 @@ The exposed interface changes when previously existing exposed symbols are delet
 <p>It is therefore crucial to ensure that only library versions with a compatible <a class="reference internal" href="../misc/00_intro.html#term-abi"><span class="xref std std-term">ABI</span></a> are used after linking.</p>
 <p>In the best case, the shared library you depend on:</p>
 <ul class="simple">
-<li>defines a pin in the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">list of globally pinned packages</a></li>
-<li>exports its <a class="reference internal" href="../misc/00_intro.html#term-abi"><span class="xref std std-term">ABI</span></a> compatible requirements by defining <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> in it’s meta.yaml</li>
+<li><p>defines a pin in the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">list of globally pinned packages</a></p></li>
+<li><p>exports its <a class="reference internal" href="../misc/00_intro.html#term-abi"><span class="xref std std-term">ABI</span></a> compatible requirements by defining <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> in it’s meta.yaml</p></li>
 </ul>
 <p>In these cases you do not have to worry about version requirements:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
@@ -324,9 +322,37 @@ The exposed interface changes when previously existing exposed symbols are delet
 </div>
 <p>For more information on pinning, please refer to <a class="reference internal" href="pinning_deps.html#pinned-deps"><span class="std std-ref">Pinned dependencies</span></a>.</p>
 </div>
-<div class="section" id="external-dependencies">
-<h4>External dependencies<a class="headerlink" href="#external-dependencies" title="Permalink to this headline">¶</a></h4>
-<p>TODO: CDT packages &amp; yum_requirements.</p>
+<div class="section" id="constraining-packages-at-runtime">
+<h4>Constraining packages at runtime<a class="headerlink" href="#constraining-packages-at-runtime" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> section allows to define restrictions on packages at runtime without depending on the package. It can be used to restrict allowed versions of optional dependencies and defining incompatible packages.</p>
+<div class="section" id="defining-non-dependency-restrictions">
+<h5>Defining non-dependency restrictions<a class="headerlink" href="#defining-non-dependency-restrictions" title="Permalink to this headline">¶</a></h5>
+<p>Imagine a package can be used together with version 1 of <code class="docutils literal notranslate"><span class="pre">awesome-software</span></code> when present, but does not strictly depend on it.
+Therefore you would like to let the user choose whether he/she would like to use the package with or without <code class="docutils literal notranslate"><span class="pre">awesome-software</span></code>. Let’s assume further that the package is incompatible to version 2 of <code class="docutils literal notranslate"><span class="pre">awesome-software</span></code>.</p>
+<p>In this case <code class="docutils literal notranslate"><span class="pre">run_dependencies</span></code> can be used to restrict <code class="docutils literal notranslate"><span class="pre">awesome-software</span></code> to version 1.*, if the user chooses to install it:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="c1"># [...]</span>
+  <span class="nt">run_constrained</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">awesome-software 1.*</span>
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> acts as a means to protect users from incompatible version without introducing an unwanted dependency.</p>
+</div>
+<div class="section" id="defining-blockers">
+<h5>Defining blockers<a class="headerlink" href="#defining-blockers" title="Permalink to this headline">¶</a></h5>
+<p>Sometimes packages interfere with each other and therefore only one of them can be installed at any time.
+In combination with an unsatisfiable version, <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> can define blockers:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">package</span><span class="p">:</span>
+<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">awesome-db</span>
+
+<span class="nt">requirements</span><span class="p">:</span>
+  <span class="c1"># [...]</span>
+  <span class="nt">run_constrained</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">amazing-db ==9999999999</span>
+</pre></div>
+</div>
+<p>In this example, <code class="docutils literal notranslate"><span class="pre">awesome-db</span></code> cannot be be installed together with <code class="docutils literal notranslate"><span class="pre">amazing-db</span></code> as there is no package <code class="docutils literal notranslate"><span class="pre">amazing-db-9999999999</span></code>.</p>
+</div>
 </div>
 </div>
 <div class="section" id="test">
@@ -340,9 +366,9 @@ But every conda package must have at least <em>some</em> tests.</p>
 <p>Sometimes defining tests seems to be hard, e.g. due to:</p>
 <blockquote>
 <div><ul class="simple">
-<li>tests for the underlying code base may not exist.</li>
-<li>test suites may take too long to run on limited <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> infrastructure.</li>
-<li>tests may take too much bandwidth.</li>
+<li><p>tests for the underlying code base may not exist.</p></li>
+<li><p>test suites may take too long to run on limited <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> infrastructure.</p></li>
+<li><p>tests may take too much bandwidth.</p></li>
 </ul>
 </div></blockquote>
 <p>In these cases conda-forge may not be able to execute the prescribed test suite.</p>
@@ -477,8 +503,8 @@ $ ./.circleci/run_docker_build.sh
 </div>
 <p>In this case, please also notify the upstream developers that the license file is missing.</p>
 <div class="admonition important">
-<p class="first admonition-title">Important</p>
-<p class="last">The license should only be shipped along with the recipe if there is no license file in the downloaded archive.
+<p class="admonition-title">Important</p>
+<p>The license should only be shipped along with the recipe if there is no license file in the downloaded archive.
 If there is a license file in the archive, please set <code class="docutils literal notranslate"><span class="pre">license_file</span></code> to the path of the license file in the archive.</p>
 </div>
 </div>
@@ -559,15 +585,14 @@ this install process easier. Please feel free to lift it.</p>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#build-host-and-run">Build, host and run</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#id3">Build</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#host">Host</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#run">Run</a></li>
-</ul>
-</li>
+<li class="toctree-l5"><a class="reference internal" href="#build-host-and-run">Build, host and run</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#avoid-external-dependencies">Avoid external dependencies</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#pinning">Pinning</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#external-dependencies">External dependencies</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#constraining-packages-at-runtime">Constraining packages at runtime</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#defining-non-dependency-restrictions">Defining non-dependency restrictions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#defining-blockers">Defining blockers</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#test">Test</a><ul>
@@ -631,8 +656,6 @@ this install process easier. Please feel free to lift it.</p>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
@@ -681,7 +704,7 @@ this install process easier. Please feel free to lift it.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
