@@ -438,6 +438,28 @@ in the the test stanza:
     ...
       requires:
         - pytest
+        
+Copying test files
+^^^^^^^^^^^^^^^^^^
+
+Often test files are not installed alongside packages. Conda creates a fresh
+working copy to execute the test stage of build recipes, which don't contain
+the files of source package.
+
+You can include files required for testing with the ``source_files`` section:
+
+.. code-block:: yaml
+
+    test:
+      imports:
+        - package_name
+      requires:
+        - pytest tests test_pkg_integration.py
+      source_files:
+        - tests
+        - test_pkg_integration.py
+        
+The ``source_files`` section works for files and directories.
 
 Built-in tests
 ^^^^^^^^^^^^^^
@@ -465,7 +487,7 @@ for you with the following command::
       requires:
         - pytest
       commands:
-        - py.test --pyargs package_name
+        - pytest --pyargs package_name        
 
 
 Command Line Utilities
