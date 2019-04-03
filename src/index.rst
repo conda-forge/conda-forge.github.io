@@ -12,5 +12,6 @@ Table of Contents
 
    user/00_intro
    maintainer/00_intro
+   related/00_intro
    orga/00_intro
    misc/00_intro
