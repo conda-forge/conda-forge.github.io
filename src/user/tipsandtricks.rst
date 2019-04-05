@@ -35,7 +35,7 @@ Note: All of conda-forge software pinning can be found at: https://github.com/co
 How to fix it?
 --------------
 
-Newer ``conda`` versions introduced a strict channel priority feature.
+Newer ``conda`` versions (>=4.6) introduced a strict channel priority feature.
 Type ``conda config --describe channel_priority`` for more information.
 
 
@@ -60,6 +60,15 @@ Here is how a ``.condarc`` file would look like:
 
 In addition to the channel priority we recommend to always install your packages inside a new environment instead the root environment from anaconda/miniconda.
 Using envs make it easier to debug problems with packages and ensure the stability of your root env.
+
+Note: in the past ``conda-forge`` used to vendorize some of ``defaults`` dependencies that were not built in our infrastructure,
+like compilers run-times, to avoid the mixing channel problem.
+However, with the ``strict`` option, we no longer have to vendorize those (which has its own problems too),
+instead we removed everything that is not built in ``conda-forge`` and let ``strict`` pull those from ``defaults``.
+
+TL;DR if you are experiencing missing compilers run-times like ``libgcc-ng``,
+that is probably because you removed ``defaults``,
+just re-add it and activate ``strict`` for a smooth and stable experience when installing packages.
 
 Avoiding the openblas/mkl dance
 ===============================
