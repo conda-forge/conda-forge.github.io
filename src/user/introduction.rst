@@ -47,11 +47,13 @@ conda-forge is a community effort that tackles these issues:
 How can I install packages from conda-forge?
 --------------------------------------------
 
-Using conda-forge is as easy! You just have to register the conda-forge channel as a package source for conda.
+Using conda-forge is as easy! You just have to register the conda-forge channel as a package source for conda,
+and activate the ``strict`` channel priority (strict will be activated by default in conda 4.7).
 
 .. code-block:: bash
 
   conda config --add channels conda-forge
+  conda config --set channel_priority strict
 
 
 From now on using ``conda install <package-name>`` will also find packages in our conda-forge channels.
