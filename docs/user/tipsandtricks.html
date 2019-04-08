@@ -76,7 +76,7 @@ that mismatch can lead to errors when the install environment is mixing packages
 </div>
 <div class="section" id="how-to-fix-it">
 <h3>How to fix it?<a class="headerlink" href="#how-to-fix-it" title="Permalink to this headline">¶</a></h3>
-<p>Newer <code class="docutils literal notranslate"><span class="pre">conda</span></code> versions introduced a strict channel priority feature.
+<p>Newer <code class="docutils literal notranslate"><span class="pre">conda</span></code> versions (&gt;=4.6) introduced a strict channel priority feature.
 Type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">config</span> <span class="pre">--describe</span> <span class="pre">channel_priority</span></code> for more information.</p>
 <p>The solution is to add the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel on top of <code class="docutils literal notranslate"><span class="pre">defaults</span></code> in your <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> file when using <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages
 and activate the strict channel priority with:</p>
@@ -94,6 +94,16 @@ channels:
 </div>
 <p>In addition to the channel priority we recommend to always install your packages inside a new environment instead the root environment from anaconda/miniconda.
 Using envs make it easier to debug problems with packages and ensure the stability of your root env.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the past <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> used to vendorize some of <code class="docutils literal notranslate"><span class="pre">defaults</span></code> dependencies that were not built in our infrastructure,
+like compilers run-times, to avoid the mixing channel problem.
+However, with the <code class="docutils literal notranslate"><span class="pre">strict</span></code> option, we no longer have to vendorize those (this led to its own set of problems),
+instead we removed everything that is not built in <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and let <code class="docutils literal notranslate"><span class="pre">strict</span></code> pull those from <code class="docutils literal notranslate"><span class="pre">defaults</span></code>.</p>
+<p>TL;DR if you are experiencing missing compilers run-times like <code class="docutils literal notranslate"><span class="pre">libgcc-ng</span></code>,
+that is probably because you removed <code class="docutils literal notranslate"><span class="pre">defaults</span></code>,
+just re-add it and activate <code class="docutils literal notranslate"><span class="pre">strict</span></code> for a smooth and stable experience when installing packages.</p>
+</div>
 </div>
 </div>
 <div class="section" id="avoiding-the-openblas-mkl-dance">
