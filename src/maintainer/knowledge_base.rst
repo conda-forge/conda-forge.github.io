@@ -169,6 +169,7 @@ In addition to the required compilers ``{{ compiler('c') }}`` and/or ``{{ compil
 
 
 If you need a fully functional binary in the test phase, you have to also provide the shared libraries via ``yum_requirements.txt`` (see :ref:`yum_deps`).
+You will need to re-render the feedstock after making these changes.
 
 ::
 
