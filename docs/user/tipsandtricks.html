@@ -106,50 +106,6 @@ just re-add it and activate <code class="docutils literal notranslate"><span cla
 </div>
 </div>
 </div>
-<div class="section" id="avoiding-the-openblas-mkl-dance">
-<h2>Avoiding the openblas/mkl dance<a class="headerlink" href="#avoiding-the-openblas-mkl-dance" title="Permalink to this headline">¶</a></h2>
-<p>When updating packages, it might seem that openblas and mkl keep trying to
-overwrite one and other. For example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conda install pytest
-Solving environment: <span class="k">done</span>
-
-<span class="o">[</span>...<span class="o">]</span>
-
-The following packages will be UPDATED:
-
-libgcc-ng:      <span class="m">7</span>.2.0-hdf63c60_3                     conda-forge --&gt; <span class="m">8</span>.2.0-hdf63c60_1
-numpy:          <span class="m">1</span>.15.2-py36_blas_openblashd3ea46f_1  conda-forge <span class="o">[</span>blas_openblas<span class="o">]</span> --&gt; <span class="m">1</span>.15.2-py36h1d66e8a_1
-
-The following packages will be DOWNGRADED:
-
-blas:           <span class="m">1</span>.1-openblas                         conda-forge --&gt; <span class="m">1</span>.0-mkl
-opencv:         <span class="m">3</span>.4.3-py36_blas_openblash829a850_200 conda-forge <span class="o">[</span>blas_openblas<span class="o">]</span> --&gt; <span class="m">3</span>.4.1-py36h6fd60c2_1
-scipy:          <span class="m">1</span>.1.0-py36_blas_openblash7943236_201 conda-forge <span class="o">[</span>blas_openblas<span class="o">]</span> --&gt; <span class="m">1</span>.1.0-py36hc49cb51_0
-</pre></div>
-</div>
-<p>The problem is that conda really wants to minimize the “features” installed
-in the environment. Implicit dependencies, such as openblas in the case of
-<code class="docutils literal notranslate"><span class="pre">numpy</span></code> from conda-forge, behave differently from explicit ones.
-Explicitly specifying the dependency on either <code class="docutils literal notranslate"><span class="pre">openblas</span></code> or <code class="docutils literal notranslate"><span class="pre">mkl</span></code> will
-solve this problem. As of writing, conda-forge does not package <code class="docutils literal notranslate"><span class="pre">mkl</span></code>.</p>
-<p>Specifying:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install <span class="s2">&quot;blas=*=openblas&quot;</span>
-</pre></div>
-</div>
-<p>solves the problem in new environments. The challenge comes if you already
-installed <code class="docutils literal notranslate"><span class="pre">openblas</span></code> (likely because of <code class="docutils literal notranslate"><span class="pre">numpy</span></code>) and now need to add a
-dependency for <code class="docutils literal notranslate"><span class="pre">openblas</span></code>. <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span></code> will tell you it is already
-satisfied and not add  it to the list of explicitly specified dependencies.
-To work around this problem, execute the following commands:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda uninstall blas --force
-conda install <span class="s2">&quot;blas=*=openblas&quot;</span>
-</pre></div>
-</div>
-<p>Here, we specified <code class="docutils literal notranslate"><span class="pre">--force</span></code> so as not to uninstall packages that depend on
-<code class="docutils literal notranslate"><span class="pre">blas</span></code> (e.g. numpy and all dependencies).</p>
-<p>It may be helpful to read the <a class="reference external" href="https://conda.io/docs/user-guide/configuration/use-condarc.html#always-add-packages-by-default-create-default-packages">conda documentation</a> regarding installing
-default packages in new environments.</p>
-</div>
 </div>
 
 
@@ -172,7 +128,6 @@ default packages in new environments.</p>
 <li class="toctree-l4"><a class="reference internal" href="#how-to-fix-it">How to fix it?</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#avoiding-the-openblas-mkl-dance">Avoiding the openblas/mkl dance</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html">FAQ</a></li>
