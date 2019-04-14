@@ -664,7 +664,7 @@ statement and add version constraint on python in <code class="docutils literal 
 section.</p></li>
 <li><p>2to3 is not used</p></li>
 <li><p>Scripts argument in setup.py is not used</p></li>
-<li><p>If entrypoints are in setup.py, they are listed in meta.yaml</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">console_script</span></code> entrypoints are in setup.py, they are listed in meta.yaml</p></li>
 <li><p>No activate scripts</p></li>
 <li><p>Not a dependency of <cite>conda</cite></p></li>
 </ul>
@@ -673,6 +673,10 @@ section.</p></li>
 <p class="admonition-title">Note</p>
 <p>While <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> does not work with selectors, it does work with version constraints.
 <code class="docutils literal notranslate"><span class="pre">skip:</span> <span class="pre">True</span>&#160; <span class="pre">#</span> <span class="pre">[py2k]</span></code> can sometimes be replaced with a constrained python version in the host and run subsections: say <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">&gt;=3</span></code> instead of just <code class="docutils literal notranslate"><span class="pre">python</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only <code class="docutils literal notranslate"><span class="pre">console_script</span></code> entrypoints have to be listed in meta.yaml. Other entrypoints do not conflict with <code class="docutils literal notranslate"><span class="pre">noarch</span></code> and therefore do not require extra treatment.</p>
 </div>
 <p>If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">add</span> <span class="pre">noarch:</span> <span class="pre">python</span></code>.</p>
 </div>

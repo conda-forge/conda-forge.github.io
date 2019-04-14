@@ -527,6 +527,9 @@ If there is a license file in the archive, please set <code class="docutils lite
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="miscellaneous">
+<h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="activate-scripts">
 <h3>Activate scripts<a class="headerlink" href="#activate-scripts" title="Permalink to this headline">¶</a></h3>
 <p>Recipes are allowed to have activate scripts, which will be <code class="docutils literal notranslate"><span class="pre">sourced</span></code>d or
@@ -559,6 +562,52 @@ this install process easier. Please feel free to lift it.</p>
 <span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="jinja-templating">
+<h3>Jinja templating<a class="headerlink" href="#jinja-templating" title="Permalink to this headline">¶</a></h3>
+<p>The recipe <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> can contain expressions that are evaluated during build time.
+These expressions are written in <a class="reference external" href="http://jinja.pocoo.org/">Jinja</a> syntax.</p>
+<p>Jinja expressions serve following purposes in the meta.yaml:</p>
+<ul>
+<li><p>They allow defining variables to avoid code duplication. Using a variable for the <code class="docutils literal notranslate"><span class="pre">version</span></code> allows to change the version only once with every update.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span>{% set version = &quot;3.7.3&quot; %}
+ [...]
+
+package:
+  name: python
+  version: {{ version }}
+
+source:
+  url: https://www.python.org/ftp/python/{{ version }}/Python-{{ version }}.tar.xz
+  sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
+</pre></div>
+</div>
+</li>
+<li><p>They can call <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#conda-build-specific-jinja2-functions">conda-build functions</a> for automatic code generation. Examples are the compilers, cdt packages or the <code class="docutils literal notranslate"><span class="pre">pin_compatible</span></code> function.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;c&#39;)</span> <span class="p p-Indicator">}}</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;cxx&#39;)</span> <span class="p p-Indicator">}}</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">cdt(&#39;xorg-x11-proto-devel&#39;)</span> <span class="p p-Indicator">}}</span>  <span class="c1"># [linux]</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">cdt(&#39;libx11-devel&#39;)</span> <span class="p p-Indicator">}}</span>          <span class="c1"># [linux]</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;c&#39;)</span> <span class="p p-Indicator">}}</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;cxx&#39;)</span> <span class="p p-Indicator">}}</span>
+  <span class="nt">host</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy</span>
+  <span class="nt">run</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_compatible(&#39;numpy&#39;)</span> <span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>For more information please refer to the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#templating-with-jinja">Templating with Jinja</a> section in the conda-build docs.</p>
 </div>
 </div>
 </div>
@@ -635,7 +684,11 @@ this install process easier. Please feel free to lift it.</p>
 <li class="toctree-l5"><a class="reference internal" href="#packaging-the-licence-manually">Packaging the licence manually</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#miscellaneous">Miscellaneous</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#activate-scripts">Activate scripts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jinja-templating">Jinja templating</a></li>
 </ul>
 </li>
 </ul>

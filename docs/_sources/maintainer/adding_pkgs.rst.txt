@@ -590,6 +590,9 @@ In this case, please also notify the upstream developers that the license file i
   The license should only be shipped along with the recipe if there is no license file in the downloaded archive.
   If there is a license file in the archive, please set ``license_file`` to the path of the license file in the archive.
 
+Miscellaneous
+=============
+
 Activate scripts
 ----------------
 
@@ -628,3 +631,58 @@ In ``build.bat``:
         if not exist %PREFIX%\etc\conda\%%F.d mkdir %PREFIX%\etc\conda\%%F.d
         copy %RECIPE_DIR%\%%F.bat %PREFIX%\etc\conda\%%F.d\%PKG_NAME%_%%F.bat
     )
+
+Jinja templating
+----------------
+
+The recipe ``meta.yaml`` can contain expressions that are evaluated during build time.
+These expressions are written in `Jinja <http://jinja.pocoo.org/>`__ syntax.
+
+Jinja expressions serve following purposes in the meta.yaml:
+
+- They allow defining variables to avoid code duplication. Using a variable for the ``version`` allows to change the version only once with every update.
+
+  .. code-block:: yaml
+
+      {% set version = "3.7.3" %}
+       [...]
+
+      package:
+        name: python
+        version: {{ version }}
+
+      source:
+        url: https://www.python.org/ftp/python/{{ version }}/Python-{{ version }}.tar.xz
+        sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
+
+- They can call `conda-build functions <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#conda-build-specific-jinja2-functions>`__ for automatic code generation. Examples are the compilers, cdt packages or the ``pin_compatible`` function. 
+
+  .. code-block:: yaml
+
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+        - {{ cdt('libx11-devel') }}          # [linux]
+
+  or
+
+  .. code-block:: yaml
+
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+      host:
+        - python
+        - numpy
+      run:
+        - python
+        - {{ pin_compatible('numpy') }}
+
+
+
+For more information please refer to the `Templating with Jinja <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#templating-with-jinja>`__ section in the conda-build docs.
+
+

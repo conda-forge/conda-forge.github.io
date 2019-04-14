@@ -723,13 +723,16 @@ In order to qualify as a noarch python package, all of the following criteria mu
     section.
   - 2to3 is not used
   - Scripts argument in setup.py is not used
-  - If entrypoints are in setup.py, they are listed in meta.yaml
+  - If ``console_script`` entrypoints are in setup.py, they are listed in meta.yaml
   - No activate scripts
   - Not a dependency of `conda`
 
 .. note::
   While ``noarch: python`` does not work with selectors, it does work with version constraints.
   ``skip: True  # [py2k]`` can sometimes be replaced with a constrained python version in the host and run subsections: say ``python >=3`` instead of just ``python``.
+
+.. note::
+  Only ``console_script`` entrypoints have to be listed in meta.yaml. Other entrypoints do not conflict with ``noarch`` and therefore do not require extra treatment.
 
 If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including ``@conda-forge-admin, please add noarch: python``.
 
