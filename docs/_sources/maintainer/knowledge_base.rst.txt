@@ -565,6 +565,8 @@ After changing ``yum_requirements.txt``, :ref:`rerender <dev_update_rerender>` t
 Special packages
 ================
 
+.. _knowledge:blas:
+
 BLAS
 ----
 
