@@ -224,6 +224,7 @@ In alphabetical order,
 
 * Marcel Bargull, @mbargull
 * Lori Burns, @loriab
+* Sophia Castellarin, @soapy1
 * Matt Craig, @mwcraig
 * Eric Dill, @ericdill
 * Phil Elson, @pelson
@@ -238,6 +239,7 @@ In alphabetical order,
 * Anthony Scopatz, @scopatz
 * Patrick Snape, @patricksnape
 * Dougal J. Sutherland, @dougalsutherland
+* Peter K. G. Williams, @pkgw
 * Christopher J. Wright, @CJ-Wright
 
 Document History
