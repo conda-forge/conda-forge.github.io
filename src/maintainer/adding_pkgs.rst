@@ -103,9 +103,11 @@ The maintainer's job is to:
 
 - Keep the feedstock updated by merging eventual maintenance :term:`PR`\ s from conda-forge's bots.
 - Keep the feedstock on par with new releases of the source package by
+
   - Bumping the version number and checksum.
   - Making sure that feedstock's requirements stay accurate.
   - Make sure the test requirements match those of the of the updated package.
+
 - Answer eventual question about the package on the feedstock issue tracker.
 
 
@@ -440,7 +442,7 @@ not necessarily the name of the conda package (they are sometimes different).
 
 Testing for an import will catch the bulk of the packaging errors, generally
 including presence of dependencies. However, it does not assure that the
-package works correctly. In particular, it doesn't test if if it works
+package works correctly. In particular, it doesn't test if it works
 correctly with the versions of dependencies used.
 
 It is good to run some other tests of the code itself (the test suite) if possible.
@@ -471,7 +473,7 @@ in the the test stanza:
     ...
       requires:
         - pytest
-        
+
 Copying test files
 ^^^^^^^^^^^^^^^^^^
 
@@ -491,7 +493,7 @@ You can include files required for testing with the ``source_files`` section:
       source_files:
         - tests
         - test_pkg_integration.py
-        
+
 The ``source_files`` section works for files and directories.
 
 Built-in tests
@@ -520,7 +522,7 @@ for you with the following command::
       requires:
         - pytest
       commands:
-        - pytest --pyargs package_name        
+        - pytest --pyargs package_name
 
 
 Command Line Utilities
@@ -655,7 +657,7 @@ Jinja expressions serve following purposes in the meta.yaml:
         url: https://www.python.org/ftp/python/{{ version }}/Python-{{ version }}.tar.xz
         sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
 
-- They can call `conda-build functions <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#conda-build-specific-jinja2-functions>`__ for automatic code generation. Examples are the compilers, cdt packages or the ``pin_compatible`` function. 
+- They can call `conda-build functions <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#conda-build-specific-jinja2-functions>`__ for automatic code generation. Examples are the compilers, cdt packages or the ``pin_compatible`` function.
 
   .. code-block:: yaml
 
@@ -684,5 +686,3 @@ Jinja expressions serve following purposes in the meta.yaml:
 
 
 For more information please refer to the `Templating with Jinja <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#templating-with-jinja>`__ section in the conda-build docs.
-
-
