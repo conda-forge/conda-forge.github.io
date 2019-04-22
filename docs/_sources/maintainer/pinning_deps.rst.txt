@@ -93,5 +93,32 @@ Updating a pin requires following steps:
  - bump the version of the conda-forge-pinning `recipe <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/meta.yaml>`__ by setting the version to the current date.
  - rerender the feedstock.
  - propose the changes as a :term:`PR` to ``conda-forge/conda-forge-pinning-feedstock``.
+ - write a :ref:`migrator <pin_migrator>` for propagating the pin changes.
+
+.. _pin_migrator:
+
+Propagate pin changes with a migrator
+-------------------------------------
+
+Changing global pins requires rerendering all packages that depend on the package with the changed pin. Doing this manually can be tedious, especially when many packages are involved.
+Migrators are used to automatically generate pull requests for the affected packages in conda-forge.
+
+Migrators are added to `auto_tick.xsh <https://github.com/regro/cf-scripts/blob/master/conda_forge_tick/auto_tick.xsh>`__ in `regro/cf-scripts <https://github.com/regro/cf-scripts>`__.
+
+After changing a pin, append following line to the ``initialize_migrators`` method:
+
+.. code-block:: none
+  
+  add_rebuild_successors($MIGRATORS, gx, '<package-name>', '<new-version>')
+
+You can do this by forking `regro/cf-scripts <https://github.com/regro/cf-scripts>`__ and submitting a pull request.
+
+.. admonition:: Example
+  
+  After advancing the pin of ``zeromq`` to version 4.3.1, following line needs to be added to the ``initialize_migrators`` method:
+
+  .. code-block:: none
+
+    add_rebuild_successors($MIGRATORS, gx, 'zeromq', '4.3.1')
 
 

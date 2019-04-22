@@ -120,8 +120,27 @@ Anaconda does this for numpy (see the <a class="reference external" href="https:
 <li><p>bump the version of the conda-forge-pinning <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/meta.yaml">recipe</a> by setting the version to the current date.</p></li>
 <li><p>rerender the feedstock.</p></li>
 <li><p>propose the changes as a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> to <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-forge-pinning-feedstock</span></code>.</p></li>
+<li><p>write a <a class="reference internal" href="#pin-migrator"><span class="std std-ref">migrator</span></a> for propagating the pin changes.</p></li>
 </ul>
 </div></blockquote>
+<div class="section" id="propagate-pin-changes-with-a-migrator">
+<span id="pin-migrator"></span><h3>Propagate pin changes with a migrator<a class="headerlink" href="#propagate-pin-changes-with-a-migrator" title="Permalink to this headline">¶</a></h3>
+<p>Changing global pins requires rerendering all packages that depend on the package with the changed pin. Doing this manually can be tedious, especially when many packages are involved.
+Migrators are used to automatically generate pull requests for the affected packages in conda-forge.</p>
+<p>Migrators are added to <a class="reference external" href="https://github.com/regro/cf-scripts/blob/master/conda_forge_tick/auto_tick.xsh">auto_tick.xsh</a> in <a class="reference external" href="https://github.com/regro/cf-scripts">regro/cf-scripts</a>.</p>
+<p>After changing a pin, append following line to the <code class="docutils literal notranslate"><span class="pre">initialize_migrators</span></code> method:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>add_rebuild_successors($MIGRATORS, gx, &#39;&lt;package-name&gt;&#39;, &#39;&lt;new-version&gt;&#39;)
+</pre></div>
+</div>
+<p>You can do this by forking <a class="reference external" href="https://github.com/regro/cf-scripts">regro/cf-scripts</a> and submitting a pull request.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>After advancing the pin of <code class="docutils literal notranslate"><span class="pre">zeromq</span></code> to version 4.3.1, following line needs to be added to the <code class="docutils literal notranslate"><span class="pre">initialize_migrators</span></code> method:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>add_rebuild_successors($MIGRATORS, gx, &#39;zeromq&#39;, &#39;4.3.1&#39;)
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 
@@ -144,7 +163,10 @@ Anaconda does this for numpy (see the <a class="reference external" href="https:
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Pinned dependencies</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#globally-pinned-packages">Globally pinned packages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#specifying-run-exports">Specifying run_exports</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#updating-package-pins">Updating package pins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-package-pins">Updating package pins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#propagate-pin-changes-with-a-migrator">Propagate pin changes with a migrator</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a></li>
