@@ -239,7 +239,7 @@ In alphabetical order,
 * Anthony Scopatz, @scopatz
 * Patrick Snape, @patricksnape
 * Dougal J. Sutherland, @dougalsutherland
-* Peter Williams, @pkgw
+* Peter K. G. Williams, @pkgw
 * Christopher J. Wright, @CJ-Wright
 
 Document History
