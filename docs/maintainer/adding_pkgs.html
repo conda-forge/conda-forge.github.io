@@ -135,10 +135,13 @@ test that the module can be imported, as described in the example.</p></li>
 <p>The maintainer’s job is to:</p>
 <ul class="simple">
 <li><p>Keep the feedstock updated by merging eventual maintenance <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>s from conda-forge’s bots.</p></li>
-<li><p>Keep the feedstock on par with new releases of the source package by
-- Bumping the version number and checksum.
-- Making sure that feedstock’s requirements stay accurate.
-- Make sure the test requirements match those of the of the updated package.</p></li>
+<li><p>Keep the feedstock on par with new releases of the source package by</p>
+<ul>
+<li><p>Bumping the version number and checksum.</p></li>
+<li><p>Making sure that feedstock’s requirements stay accurate.</p></li>
+<li><p>Make sure the test requirements match those of the of the updated package.</p></li>
+</ul>
+</li>
 <li><p>Answer eventual question about the package on the feedstock issue tracker.</p></li>
 </ul>
 </div>
@@ -405,7 +408,7 @@ stanza in the <code class="docutils literal notranslate"><span class="pre">meta.
 not necessarily the name of the conda package (they are sometimes different).</p>
 <p>Testing for an import will catch the bulk of the packaging errors, generally
 including presence of dependencies. However, it does not assure that the
-package works correctly. In particular, it doesn’t test if if it works
+package works correctly. In particular, it doesn’t test if it works
 correctly with the versions of dependencies used.</p>
 <p>It is good to run some other tests of the code itself (the test suite) if possible.</p>
 </div>
