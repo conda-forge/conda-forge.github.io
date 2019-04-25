@@ -36,3 +36,23 @@ FAQ
 
     - **Selectors in conda-build documentation** (`Preprocessing selectors <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#preprocessing-selectors>`__)
     - **Linter: deprecate the use of py27, py36** (`conda-smithy/#1026 <https://github.com/conda-forge/conda-smithy/issues/1026>`__)
+
+
+.. _mfaq_build_number_1000:
+
+:ref:`(Q) <mfaq_build_number_1000>` **What do build numbers above 1000 signify? How do I treat them?**
+
+  TL;DR: there is no need for build numbers larger than 1000 anymore.
+
+  When you update a feedstock that still uses build numbers > 1000, following rules apply:
+
+    - when you increase the version, reset the build number back to 0 (e.g. ``1005 -> 0``).
+    - when the version stays the same and you need to upload a new package, increase the build number by 1 (e.g. ``1005 -> 1006``).
+  
+
+  **Backstory:** Build numbers of 1000 and larger are a relict from the compiler migration, where a build number offset of 1000 signified that a package was migrated to the new compilers.
+  Since the completion of the compiler migration, this offsetting is not needed anymore.
+  However, we cannot simply subtract the offset without updating the version, due to higher build numbers being preferred by the solver.
+  Therefore build numbers above 1000 will gradually vanish as packages get updated to newer versions.
+
+  
