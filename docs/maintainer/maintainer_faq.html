@@ -83,6 +83,21 @@ While the legacy selectors <code class="docutils literal notranslate"><span clas
 </ul>
 </div>
 </div></blockquote>
+<p id="mfaq-build-number-1000"><a class="reference internal" href="#mfaq-build-number-1000"><span class="std std-ref">(Q)</span></a> <strong>What do build numbers above 1000 signify? How do I treat them?</strong></p>
+<blockquote>
+<div><p>TL;DR: there is no need for build numbers larger than 1000 anymore.</p>
+<p>When you update a feedstock that still uses build numbers &gt; 1000, following rules apply:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>when you increase the version, reset the build number back to 0 (e.g. <code class="docutils literal notranslate"><span class="pre">1005</span> <span class="pre">-&gt;</span> <span class="pre">0</span></code>).</p></li>
+<li><p>when the version stays the same and you need to upload a new package, increase the build number by 1 (e.g. <code class="docutils literal notranslate"><span class="pre">1005</span> <span class="pre">-&gt;</span> <span class="pre">1006</span></code>).</p></li>
+</ul>
+</div></blockquote>
+<p><strong>Backstory:</strong> Build numbers of 1000 and larger are a relict from the compiler migration, where a build number offset of 1000 signified that a package was migrated to the new compilers.
+Since the completion of the compiler migration, this offsetting is not needed anymore.
+However, we cannot simply subtract the offset without updating the version, due to higher build numbers being preferred by the solver.
+Therefore build numbers above 1000 will gradually vanish as packages get updated to newer versions.</p>
+</div></blockquote>
 </div>
 
 
