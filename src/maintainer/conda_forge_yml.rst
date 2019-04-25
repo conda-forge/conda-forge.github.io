@@ -251,9 +251,9 @@ provider entry is equivalent to the following:
 .. code-block:: yaml
 
     provider:
-      linux: default
-      osx: default
-      win: default
+      linux: azure
+      osx: azure
+      win: appveyor
       linux_ppc64le: None
       linux_aarch64: None
 
