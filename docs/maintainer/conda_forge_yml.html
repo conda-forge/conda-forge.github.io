@@ -261,12 +261,29 @@ arches:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">travis</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">appveyor</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> to disable a platform.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">default</span></code> to enable a platform and choose an appropriate CI</p></li>
 </ul>
 <p>For example, switching everything to build on Azure pipelines:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
   <span class="nt">linux</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
   <span class="nt">osx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
   <span class="nt">win</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+</pre></div>
+</div>
+<p>Currently, x86_64 are enabled, but other arches are disabled by default. i.e. an empty
+provider entry is equivalent to the following:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
+  <span class="nt">linux</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+  <span class="nt">osx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+  <span class="nt">win</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">appveyor</span>
+  <span class="nt">linux_ppc64le</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+  <span class="nt">linux_aarch64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+</pre></div>
+</div>
+<p>To enable <code class="docutils literal notranslate"><span class="pre">linux_ppc64le</span></code> and <code class="docutils literal notranslate"><span class="pre">linux_aarch64</span></code> and the following:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
+  <span class="nt">linux_ppc64le</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
+  <span class="nt">linux_aarch64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
 </pre></div>
 </div>
 </div>

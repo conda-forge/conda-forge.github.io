@@ -234,6 +234,7 @@ The following CI services are available:
 * ``travis``
 * ``appveyor``
 * ``None`` or ``False`` to disable a platform.
+* ``default`` to enable a platform and choose an appropriate CI
 
 For example, switching everything to build on Azure pipelines:
 
@@ -243,6 +244,26 @@ For example, switching everything to build on Azure pipelines:
       linux: azure
       osx: azure
       win: azure
+
+Currently, x86_64 are enabled, but other arches are disabled by default. i.e. an empty
+provider entry is equivalent to the following:
+
+.. code-block:: yaml
+
+    provider:
+      linux: azure
+      osx: azure
+      win: appveyor
+      linux_ppc64le: None
+      linux_aarch64: None
+
+To enable ``linux_ppc64le`` and ``linux_aarch64`` and the following:
+
+.. code-block:: yaml
+
+    provider:
+      linux_ppc64le: default
+      linux_aarch64: default
 
 recipe_dir
 ----------
