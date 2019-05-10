@@ -351,8 +351,8 @@ In this case ``run_dependencies`` can be used to restrict ``awesome-software`` t
 
 Here ``run_constrained`` acts as a means to protect users from incompatible version without introducing an unwanted dependency.
 
-Defining blockers
-^^^^^^^^^^^^^^^^^
+Defining conflicts
+^^^^^^^^^^^^^^^^^^
 
 Sometimes packages interfere with each other and therefore only one of them can be installed at any time.
 In combination with an unsatisfiable version, ``run_constrained`` can define blockers:
