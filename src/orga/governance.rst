@@ -97,6 +97,17 @@ To call for a standard vote, here is a template PR comment:
 
 ----
 
+:CFEP Approval: When ready, the proposer may call for a vote on an
+    existing conda-forge enhancement proposal (CFEP). This requires a
+    super-majority (60%) to pass so that the decision to accept the
+    CFEP is unequivocable and we have ensured that consensus has been
+    reached.
+
+    * Standard
+    * 60% Majority to pass
+
+----
+
 :Nominate new member of staged-recipes: The proposer must provide
     a brief justification as to why the new member is desirable or needed.
 
@@ -234,7 +245,7 @@ In alphabetical order,
 * Jonathan J. Helmus, @jjhelmus
 * John Kirkham, @jakirkham
 * Marius van Niekerk, @mariusvniekerk
-* Min Ragan-Kelley, @minrk 
+* Min Ragan-Kelley, @minrk
 * Mike Sarahan, @msarahan
 * Anthony Scopatz, @scopatz
 * Patrick Snape, @patricksnape
