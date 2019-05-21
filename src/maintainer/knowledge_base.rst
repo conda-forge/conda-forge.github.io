@@ -203,11 +203,9 @@ At the time of writing, above is equivalent to the following,
 .. code-block:: yaml
 
     host:
-      - numpy 1.9.3              # [unix]
-      - numpy 1.11.3             # [win]
+      - numpy 1.14.6
     run:
-      - numpy >=1.9.3,<2.0.a0    # [unix]
-      - numpy >=1.11.3,<2.0.a0   # [win]
+      - numpy >=1.14.6,<2.0.a0
 
 
 .. admonition:: Notes
