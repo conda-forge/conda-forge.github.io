@@ -663,40 +663,6 @@ they like without any knowledge of the version of the BLAS implementation needed
 
 
 
-NumPy package
--------------
-
-   -  "version + build number" must always be greater than or equal to that
-      in defaults. If not, defaults "numpy" will be chosen, complete with
-      mkl
-
-      -  to make this simple we can pick a high build number so this is
-         prioritized 100 and then bump from there
-
-         -  Should make the build number ranges tied to BLAS X version above.
-         -  Build number should start at ``(X+1)*100``.
-
-            -  Means OpenBLAS starts at 200.
-            -  No BLAS starts at 100.
-
-         -  Unfortunately the 1.11.0 release breaks this rule so we will have
-            No BLAS at 101.
-
-      -  if defaults gains a newer version and build without conda-forge
-         updating, users will be prompted to upgrade to the defaults numpy.
-         Even if a user does this, as soon as an equivalent build is
-         available on conda-forge, they will be prompted to update to their
-         previous variant
-
-   -  will pin the specific blas package versions (e.g. openblas .)
-
-SciPy, scikit-learn, etc.
--------------------------
-
-   -  Same thing as NumPy
-   -  Add numpy dependency as if linking occurs
-
-
 Noarch builds
 =============
 
