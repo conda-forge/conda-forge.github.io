@@ -599,48 +599,6 @@ BLAS <code class="docutils literal notranslate"><span class="pre">3.8.0</span></
 they like without any knowledge of the version of the BLAS implementation needed.</p>
 </div>
 </div>
-<div class="section" id="numpy-package">
-<h3>NumPy package<a class="headerlink" href="#numpy-package" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><ul class="simple">
-<li><p>“version + build number” must always be greater than or equal to that
-in defaults. If not, defaults “numpy” will be chosen, complete with
-mkl</p>
-<ul>
-<li><p>to make this simple we can pick a high build number so this is
-prioritized 100 and then bump from there</p>
-<ul>
-<li><p>Should make the build number ranges tied to BLAS X version above.</p></li>
-<li><p>Build number should start at <code class="docutils literal notranslate"><span class="pre">(X+1)*100</span></code>.</p>
-<ul>
-<li><p>Means OpenBLAS starts at 200.</p></li>
-<li><p>No BLAS starts at 100.</p></li>
-</ul>
-</li>
-<li><p>Unfortunately the 1.11.0 release breaks this rule so we will have
-No BLAS at 101.</p></li>
-</ul>
-</li>
-<li><p>if defaults gains a newer version and build without conda-forge
-updating, users will be prompted to upgrade to the defaults numpy.
-Even if a user does this, as soon as an equivalent build is
-available on conda-forge, they will be prompted to update to their
-previous variant</p></li>
-</ul>
-</li>
-<li><p>will pin the specific blas package versions (e.g. openblas .)</p></li>
-</ul>
-</div></blockquote>
-</div>
-<div class="section" id="scipy-scikit-learn-etc">
-<h3>SciPy, scikit-learn, etc.<a class="headerlink" href="#scipy-scikit-learn-etc" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><ul class="simple">
-<li><p>Same thing as NumPy</p></li>
-<li><p>Add numpy dependency as if linking occurs</p></li>
-</ul>
-</div></blockquote>
-</div>
 </div>
 <div class="section" id="noarch-builds">
 <h2>Noarch builds<a class="headerlink" href="#noarch-builds" title="Permalink to this headline">¶</a></h2>
@@ -767,8 +725,6 @@ section.</p></li>
 <li class="toctree-l5"><a class="reference internal" href="#how-it-works">How it works</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#numpy-package">NumPy package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#scipy-scikit-learn-etc">SciPy, scikit-learn, etc.</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#noarch-builds">Noarch builds</a><ul>
