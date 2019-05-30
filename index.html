@@ -121,7 +121,10 @@
                     conda config --add channels conda-forge
                 </code> <br>
                 <code>
-                  conda install &lt;package-name&gt;
+                    conda config --set channel_priority strict
+                </code> <br>
+                <code>
+                    conda install &lt;package-name&gt;
                 </code>
                 <p> <br>
                   Learn more about conda-forge by reading our <a href="https://conda-forge.org/docs">docs</a>.
