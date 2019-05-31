@@ -13,6 +13,12 @@ FAQ
 
   You can open an issue in the packages feedstock repository on github. Search for the repository ``conda-forge/<package-name>-feedstock``. There you can also suggest fixes or even become a maintainer. Please refer to :ref:`maintaining_pkgs` for details.
 
+.. _faq_pkg_update:
+
+:ref:`(Q) <faq_pkg_update>` **The feedstock for a package from conda-forge is updated, how long should it take to update on Anaconda Cloud?**
+
+  It depends on the queue, but a good rule of thumb is to wait at least 30 mins - 2 hours.  If you don't see it after 24 hrs, please raise an issue.
+
 .. _faq_contact:
 
 :ref:`(Q) <faq_contact>` **I have a question/suggestion. How can I contact you?**
