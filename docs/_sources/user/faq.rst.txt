@@ -27,4 +27,3 @@ FAQ
 
     - Add information on strict channel priorities here.
     - Add information on conda-metachannel here.
-
