@@ -1,4 +1,5 @@
 FAQ
+***
 
 .. _faq_pkg_not_available:
 
