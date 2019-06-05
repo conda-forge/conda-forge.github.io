@@ -28,7 +28,7 @@ Here are defined the primary teams participating in conda-forge activities.
   of one or more feedstock repositories and packages. Maintainers have the ability
   to merge pull requests into the feedstock of only the packages they maintain.
 * **external contributors:** This group encompasses all others who are not on
-  core, part of staged-recipes, or maintainers. This includes first time
+  core, part of staged-recipes, or maintainers. This includes first-time
   contributors, collaborators, and funders. They have no special rights within
   the conda-forge organization itself.
 
@@ -65,7 +65,7 @@ calling a vote are as follows:
 * There must only be one vote active on a particular item at any time.
 * The act of calling for a vote cannot itself violate the code of
   conduct. For example, Sam repeatedly called for votes immediately
-  after a previous votes failed to achieve Sam's result. Sam is
+  after a previous vote failed to achieve Sam's result. Sam is
   attempting to bully other members of core into agreeing, and is thus
   violating the code of conduct.
 * Voting yes moves the proposal forward;
@@ -150,7 +150,7 @@ To call for a standard vote, here is a template PR comment:
     "ask for forgiveness and not for permission" way so bad situations
     are handled quickly. The lock must be justified in the thread itself
     with a text explaining the reasons for locking and how the participants
-    may can contest it.
+    can contest it.
 
     * Standard
     * No need for voting to lock a thread
