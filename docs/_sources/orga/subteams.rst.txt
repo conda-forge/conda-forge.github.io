@@ -26,7 +26,7 @@ Example migrations that can happen include:
 - Python version bump
 - R version bump
 - Build number bumps of the ecosystem when a pinned package version updates and
-  there is a binary incompatibility which necessitate downstream rebuilds.
+  there is a binary incompatibility which necessitates downstream rebuilds.
 - Automatically version bumping of feedstocks when the package releases a new version.
 
 For large scale (affecting >20% of packages) this sub-team will inform and
@@ -100,7 +100,7 @@ Dynamic
 Responsibility
 --------------
 
-Good documentation is an important corner stone of a successful community project.
+Good documentation is an important cornerstone of a successful community project.
 Accurate, well organized and comprehensive documentation not only benefits users, but also frees the core team by decreasing support requests.
 
 The documentation team is responsible for

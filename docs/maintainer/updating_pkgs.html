@@ -70,11 +70,11 @@ For updates, using a branch in the main repo is discouraged because,</p>
 </ol>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>For these reasons maintainers are asked to fork the feedstock, push to a branch in the fork and then open a PR to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> repo.</p>
+<p>For these reasons, maintainers are asked to fork the feedstock, push to a branch in the fork and then open a PR to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> repo.</p>
 </div>
 <div class="section" id="example-workflow-for-updating-a-package">
 <h4>Example workflow for updating a package<a class="headerlink" href="#example-workflow-for-updating-a-package" title="Permalink to this headline">¶</a></h4>
-<p>Here we assume that your would like to update the feedstock <code class="docutils literal notranslate"><span class="pre">&lt;feedstock&gt;</span></code>. Feedstock is a placeholder and can e.g. be replaced by <code class="docutils literal notranslate"><span class="pre">numpy-feedstock</span></code>.</p>
+<p>Here we assume that you would like to update the feedstock <code class="docutils literal notranslate"><span class="pre">&lt;feedstock&gt;</span></code>. Feedstock is a placeholder and can e.g. be replaced by <code class="docutils literal notranslate"><span class="pre">numpy-feedstock</span></code>.</p>
 <ol class="arabic">
 <li><p>Forking the feedstock</p>
 <p>Before you can submit your first PR, you have to fork conda-forge’s feedstock.</p>
@@ -97,14 +97,14 @@ For updates, using a branch in the main repo is discouraged because,</p>
 <p>Now you are ready to update the recipe</p>
 <ul class="simple">
 <li><p>Create and switch to a new branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">&lt;branch-name&gt;</span></code>. <code class="docutils literal notranslate"><span class="pre">&lt;branch-name&gt;</span></code> can be e.g. <code class="docutils literal notranslate"><span class="pre">update_1_0_1</span></code>.</p></li>
-<li><p>Make your chances locally</p></li>
+<li><p>Make your changes locally</p></li>
 <li><p>Review your changes then use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;changed-files&gt;</span></code>. Where <code class="docutils literal notranslate"><span class="pre">&lt;changed-files&gt;</span></code> are a whitespace separated list of filenames you changed.</p></li>
 <li><p>Create a commit by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&lt;commit-msg&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;commit-msg&gt;</span></code> can be <code class="docutils literal notranslate"><span class="pre">updated</span> <span class="pre">feedstock</span> <span class="pre">to</span> <span class="pre">version</span> <span class="pre">1.0.1</span></code></p></li>
 </ul>
 </li>
-<li><p>Pushing your changes to github and propose a PR</p>
+<li><p>Pushing your changes to GitHub and propose a PR</p>
 <ul class="simple">
-<li><p>Push the branch with changes to your fork in github:  <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">&lt;branch-name&gt;</span></code></p></li>
+<li><p>Push the branch with changes to your fork on GitHub:  <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">&lt;branch-name&gt;</span></code></p></li>
 <li><p>Create a pull request via the web interface by navigating to <code class="docutils literal notranslate"><span class="pre">https://github.com/&lt;your-github-id&gt;/&lt;feedstock&gt;</span></code> with your web browser and clicking the button <code class="docutils literal notranslate"><span class="pre">create</span> <span class="pre">pull</span> <span class="pre">request</span></code>.</p></li>
 </ul>
 </li>
@@ -147,7 +147,7 @@ As a rule of thumb, the build number is increased whenever a new package with th
 </div></blockquote>
 <div class="section" id="rerendering-with-conda-smithy-locally">
 <span id="dev-rerender-local"></span><h3>Rerendering with conda-smithy locally<a class="headerlink" href="#rerendering-with-conda-smithy-locally" title="Permalink to this headline">¶</a></h3>
-<p>First step is to install <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> in your root environment</p>
+<p>The first step is to install <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> in your root environment</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge conda-smithy
 </pre></div>
 </div>
@@ -172,7 +172,7 @@ To do this drop <code class="docutils literal notranslate"><span class="pre">-c<
 </div>
 <div class="section" id="testing-changes-locally">
 <h2>Testing changes locally<a class="headerlink" href="#testing-changes-locally" title="Permalink to this headline">¶</a></h2>
-<p>If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is  built by our <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a>.</p>
+<p>If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is built by our <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a>.</p>
 <p>If you want to build and test updates to  a feedstock locally, go to the root
 feedstock directory and run, the <code class="docutils literal notranslate"><span class="pre">.circleci/run_docker_build.sh</span></code> script.</p>
 <p>The environment variable <code class="docutils literal notranslate"><span class="pre">CONFIG</span></code> is required to select one of the <code class="docutils literal notranslate"><span class="pre">*.yaml</span></code>
@@ -186,7 +186,7 @@ $ <span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;l
 </div>
 <div class="section" id="removing-broken-packages">
 <h2>Removing broken packages<a class="headerlink" href="#removing-broken-packages" title="Permalink to this headline">¶</a></h2>
-<p>Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel. In this case core can help you (see <a class="reference internal" href="../orga/guidelines.html#fix-broken-packages"><span class="std std-ref">Fixing Broken Packages</span></a>)</p>
+<p>Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel. In this case, core can help you (see <a class="reference internal" href="../orga/guidelines.html#fix-broken-packages"><span class="std std-ref">Fixing Broken Packages</span></a>)</p>
 </div>
 <div class="section" id="maintaining-several-versions">
 <h2>Maintaining several versions<a class="headerlink" href="#maintaining-several-versions" title="Permalink to this headline">¶</a></h2>
@@ -262,10 +262,10 @@ $ <span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;l
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -315,7 +315,7 @@ $ <span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;l
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

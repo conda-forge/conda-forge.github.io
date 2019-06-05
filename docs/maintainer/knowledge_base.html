@@ -171,7 +171,7 @@ There is additional information about how conda-build 3 treats compilers in the 
 <div class="section" id="core-dependency-tree-packages-cdt">
 <span id="cdt-packages"></span><h3>Core dependency tree packages (CDT)<a class="headerlink" href="#core-dependency-tree-packages-cdt" title="Permalink to this headline">¶</a></h3>
 <p>Dependencies outside of the conda-forge channel should be avoided (see <a class="reference internal" href="adding_pkgs.html#no-external-deps"><span class="std std-ref">Avoid external dependencies</span></a>).
-However there are very few exceptions: some dependencies are so close to the system that they are not packaged with conda-forge.
+However, there are very few exceptions: some dependencies are so close to the system that they are not packaged with conda-forge.
 These dependencies have to be satisfied with <em>Core Dependency Tree</em> packages.</p>
 <p>In conda-forge this currently affects only packages that link against libGL.</p>
 <div class="section" id="libgl">
@@ -201,7 +201,7 @@ You will need to re-render the feedstock after making these changes.</p>
 </div>
 <div class="section" id="building-against-numpy">
 <span id="linking-numpy"></span><h3>Building Against NumPy<a class="headerlink" href="#building-against-numpy" title="Permalink to this headline">¶</a></h3>
-<p>Packages that link against NumPy need a special treatment in the dependency section.
+<p>Packages that link against NumPy need special treatment in the dependency section.
 Finding <code class="docutils literal notranslate"><span class="pre">numpy.get_include()</span></code> in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> or <code class="docutils literal notranslate"><span class="pre">cimport</span></code> statements in <code class="docutils literal notranslate"><span class="pre">.pyx</span></code> or <code class="docutils literal notranslate"><span class="pre">.pyd</span></code> files are a telltale sign that the package links against NumPy.</p>
 <p>In the case of linking, you need to use the <code class="docutils literal notranslate"><span class="pre">pin_compatible</span></code> function to ensure having a compatible numpy version at run time:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
@@ -244,8 +244,8 @@ there are <code class="docutils literal notranslate"><span class="pre">numpy</sp
 <p>There are a few broad cases:</p>
 <ul class="simple">
 <li><p>package requires a specific MPI provider (easy!)</p></li>
-<li><p>package works with any MPI provider (e.g. mpich, openmpi)</p></li>
-<li><p>package works with/without MPI</p></li>
+<li><p>the package works with any MPI provider (e.g. mpich, openmpi)</p></li>
+<li><p>the package works with/without MPI</p></li>
 </ul>
 <div class="section" id="building-mpi-variants">
 <h5>Building MPI variants<a class="headerlink" href="#building-mpi-variants" title="Permalink to this headline">¶</a></h5>
@@ -317,7 +317,7 @@ To do this, add <cite>nompi</cite> to the mpi matrix:</p>
 </pre></div>
 </div>
 <p>This doesn’t extend to <code class="docutils literal notranslate"><span class="pre">nompi</span></code>, because there is no <code class="docutils literal notranslate"><span class="pre">nompi</span></code> variant of the mpi metapackage. And there probably shouldn’t be, because some packages built with mpi doesn’t preclude other packages in the env that <em>may</em> have an mpi variant from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no parallel hdf5 yet. This works fine, though some features may not be available).</p>
-<p>Typically, if there is a preference it will be packages with a nompi variant, where the serial build is preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.</p>
+<p>Typically, if there is a preference it will be packaged with a nompi variant, where the serial build is preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.</p>
 <div class="admonition-outdated admonition">
 <p class="admonition-title">Outdated</p>
 <p>To de-prioritize a build in the solver, it can be given a special <code class="docutils literal notranslate"><span class="pre">track_features</span></code> field:</p>
@@ -575,7 +575,7 @@ conda install <span class="s2">&quot;libblas=*=*netlib&quot;</span>
 </div>
 <p>This would change the BLAS implementation without changing the conda packages depending
 on BLAS.</p>
-<p>Following legacy commands are also supported as well.</p>
+<p>The following legacy commands are also supported as well.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install <span class="s2">&quot;blas=*=mkl&quot;</span>
 conda install <span class="s2">&quot;blas=*=openblas&quot;</span>
 conda install <span class="s2">&quot;blas=*=blis&quot;</span>
@@ -592,7 +592,7 @@ implementation’s symbols.</p>
 time of writing is <code class="docutils literal notranslate"><span class="pre">3.8.0</span></code>. Since the BLAS API is stable, a downstream package will only pin to
 <code class="docutils literal notranslate"><span class="pre">3.*</span></code> of <code class="docutils literal notranslate"><span class="pre">libblas</span></code> and <code class="docutils literal notranslate"><span class="pre">libcblas</span></code>. On the other hand, <code class="docutils literal notranslate"><span class="pre">liblapack</span></code> and <code class="docutils literal notranslate"><span class="pre">liblapacke</span></code> pins to
 <code class="docutils literal notranslate"><span class="pre">3.8.*</span></code>.</p>
-<p>In addition to the above netlib package there are other variants like <code class="docutils literal notranslate"><span class="pre">libblas=*=*openblas</span></code>,
+<p>In addition to the above netlib package, there are other variants like <code class="docutils literal notranslate"><span class="pre">libblas=*=*openblas</span></code>,
 which has <code class="docutils literal notranslate"><span class="pre">openblas</span></code> as a dependency and has a symlink from <code class="docutils literal notranslate"><span class="pre">libblas.so.3</span></code> to <code class="docutils literal notranslate"><span class="pre">libopenblas.so</span></code>.
 <code class="docutils literal notranslate"><span class="pre">libblas=3.8.0=*openblas</span></code> pins the <code class="docutils literal notranslate"><span class="pre">openblas</span></code> dependency to a version that is known to support the
 BLAS <code class="docutils literal notranslate"><span class="pre">3.8.0</span></code> API.  This means that at install time, the user can select what BLAS implementation
@@ -613,7 +613,7 @@ packages that only need to be built once.</p>
 <div><ul class="simple">
 <li><p>No compiled extensions</p></li>
 <li><p>No post-link or pre-link or pre-unlink scripts</p></li>
-<li><p>No OS specific build scripts</p></li>
+<li><p>No OS-specific build scripts</p></li>
 <li><p>No python version specific requirements</p></li>
 <li><p>No skips except for python version. If the recipe is py3 only, remove skip
 statement and add version constraint on python in <code class="docutils literal notranslate"><span class="pre">host</span></code> and <code class="docutils literal notranslate"><span class="pre">run</span></code>
@@ -632,13 +632,13 @@ section.</p></li>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Only <code class="docutils literal notranslate"><span class="pre">console_script</span></code> entrypoints have to be listed in meta.yaml. Other entrypoints do not conflict with <code class="docutils literal notranslate"><span class="pre">noarch</span></code> and therefore do not require extra treatment.</p>
+<p>Only <code class="docutils literal notranslate"><span class="pre">console_script</span></code> entry points have to be listed in meta.yaml. Other entry points do not conflict with <code class="docutils literal notranslate"><span class="pre">noarch</span></code> and therefore do not require extra treatment.</p>
 </div>
 <p>If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">add</span> <span class="pre">noarch:</span> <span class="pre">python</span></code>.</p>
 </div>
 <div class="section" id="noarch-generic">
 <h3>Noarch generic<a class="headerlink" href="#noarch-generic" title="Permalink to this headline">¶</a></h3>
-<div class="admonition-todo admonition" id="index-0">
+<div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
 <p>add some information on r packages which make heavy use of <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">generic</span></code></p>
 </div>
@@ -660,7 +660,7 @@ section.</p></li>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>’s build matrices is removed in conda-smithy=3. To get a build matrix, create a <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file inside recipe folder. For example following will give you 2 builds and you can use the selector <code class="docutils literal notranslate"><span class="pre">vtk_with_osmesa</span></code> in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>’s build matrices is removed in conda-smithy=3. To get a build matrix, create a <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file inside the recipe folder. For example, the following will give you 2 builds and you can use the selector <code class="docutils literal notranslate"><span class="pre">vtk_with_osmesa</span></code> in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vtk_with_osmesa</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
@@ -761,10 +761,10 @@ section.</p></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -814,7 +814,7 @@ section.</p></li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

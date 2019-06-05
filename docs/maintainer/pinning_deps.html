@@ -56,7 +56,7 @@
 <div class="section" id="globally-pinned-packages">
 <span id="id1"></span><h2>Globally pinned packages<a class="headerlink" href="#globally-pinned-packages" title="Permalink to this headline">¶</a></h2>
 <p>Globally pinned packages are defined in the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">conda_build_config.yaml</a> file located in the <code class="docutils literal notranslate"><span class="pre">conda-forge-pinning</span></code> feedstock.</p>
-<p>When a rerendering happens, conda-smithy will render the recipe using conda-build and output configuration files for each job and save them in a yaml file in <code class="docutils literal notranslate"><span class="pre">.ci_support</span></code> folder. For example there’s a output configuration file for each OS, each python version, etc.</p>
+<p>When a rerendering happens, conda-smithy will render the recipe using conda-build and output configuration files for each job and save them in a yaml file in <code class="docutils literal notranslate"><span class="pre">.ci_support</span></code> folder. For example, there’s an output configuration file for each OS, each python version, etc.</p>
 <p>These output configuration files are stripped to options that are used in the build and therefore a change in the config files in <code class="docutils literal notranslate"><span class="pre">.ci_support</span></code> folder implies that there needs to be a new build.</p>
 <p>Pinning of packages are handled by the same configuration file and conda-build. This means that packages need not be pinned manually.</p>
 <p>E.g.</p>
@@ -75,7 +75,7 @@
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gmp</span>
 </pre></div>
 </div>
-<p>When there’s a new ABI version of gmp (say 7.0), then conda-forge-pinning will be updated. A rerendering of a package using gmp will change. Therefore to check that a recipe needs to be rebuilt for updated pinnings, you only need to check if the package needs a rerender.</p>
+<p>When there’s a new ABI version of gmp (say 7.0), then conda-forge-pinning will be updated. A re-rendering of a package using gmp will change. Therefore to check that a recipe needs to be rebuilt for updated pinnings, you only need to check if the package needs a rerender.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">NumPy</span></code> is an exception to this (See <a class="reference internal" href="knowledge_base.html#linking-numpy"><span class="std std-ref">Building Against NumPy</span></a>).</p>
@@ -197,10 +197,10 @@ Migrators are used to automatically generate pull requests for the affected pack
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -250,7 +250,7 @@ Migrators are used to automatically generate pull requests for the affected pack
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

@@ -71,7 +71,7 @@ You can find a detailed guide to submitting new package recipes in <a class="ref
 <li><p><a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> support utils</p></li>
 </ul>
 </div></blockquote>
-<p><code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> also contains the commandline tool that you will use if you rerender manually from the commandline (see <a class="reference internal" href="updating_pkgs.html#dev-update-rerender"><span class="std std-ref">Rerendering feedstocks</span></a>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> also contains the command line tool that you will use if you rerender manually from the command line (see <a class="reference internal" href="updating_pkgs.html#dev-update-rerender"><span class="std std-ref">Rerendering feedstocks</span></a>).</p>
 </div>
 <div class="section" id="web-services">
 <h3>Web services<a class="headerlink" href="#web-services" title="Permalink to this headline">¶</a></h3>
@@ -97,7 +97,7 @@ Please note that the code logic provided by the app is in the <code class="docut
 <p>conda-forge is running a webservice on heroku called <a class="reference external" href="https://github.com/conda-forge/conda-forge-webservices">conda-forge-webservices</a>.</p>
 <p>The following services are run by default on a feedstock:</p>
 <ul class="simple">
-<li><p>It will lint the recipes in the PRs and report back whether recipe is in excellent condition or not.</p></li>
+<li><p>It will lint the recipes in the PRs and report back whether the recipe is in excellent condition or not.</p></li>
 <li><p>When maintainers are added to a recipe, the maintainer will be added to the team and given push access.</p></li>
 </ul>
 <p>The webservice also listens to issue and PR comments so that you can ask for the following services to be done.</p>
@@ -224,7 +224,7 @@ This is not normally needed.</p>
 </div>
 <div class="section" id="skipping-ci-builds">
 <h3>Skipping CI builds<a class="headerlink" href="#skipping-ci-builds" title="Permalink to this headline">¶</a></h3>
-<div class="admonition-todo admonition" id="index-0">
+<div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <ul class="simple">
 <li><p>add information regarding [ci skip] for all CIs.</p></li>
@@ -324,10 +324,10 @@ This is not normally needed.</p>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -377,7 +377,7 @@ This is not normally needed.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

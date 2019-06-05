@@ -23,7 +23,7 @@ Smithy contains maintenance code for conda-forge, which is used by the ``conda s
  - the recipe linter
  - :term:`CI` support utils
 
-``conda-smithy`` also contains the commandline tool that you will use if you rerender manually from the commandline (see :ref:`dev_update_rerender`).
+``conda-smithy`` also contains the command line tool that you will use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
 
 
 Web services
@@ -63,7 +63,7 @@ conda-forge is running a webservice on heroku called `conda-forge-webservices <h
 
 The following services are run by default on a feedstock:
 
-- It will lint the recipes in the PRs and report back whether recipe is in excellent condition or not.
+- It will lint the recipes in the PRs and report back whether the recipe is in excellent condition or not.
 - When maintainers are added to a recipe, the maintainer will be added to the team and given push access.
 
 The webservice also listens to issue and PR comments so that you can ask for the following services to be done.

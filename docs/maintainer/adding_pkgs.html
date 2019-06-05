@@ -55,7 +55,7 @@
 <span id="dev-contribute-pkgs"></span><h1>Contributing packages<a class="headerlink" href="#contributing-packages" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="the-staging-process">
 <span id="creating-recipes"></span><h2>The staging process<a class="headerlink" href="#the-staging-process" title="Permalink to this headline">¶</a></h2>
-<p>This document presents an overview over  how to contribute packages to conda-forge.</p>
+<p>This document presents an overview over how to contribute packages to conda-forge.</p>
 <div class="section" id="getting-started">
 <h3>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h3>
 <p>There are multiple ways to get started:</p>
@@ -92,7 +92,7 @@ unchanged!</p></li>
 <li><p>Edit the copied recipe (meta.yml) as needed. For details, see
 <a class="reference internal" href="#meta-yaml"><span class="std std-ref">The recipe meta.yaml</span></a>.</p></li>
 <li><p>Generate the SHA256 key for your source code archive, as described in the
-example recipe using the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative you can also
+example recipe using the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative, you can also
 go to the package description on <a class="reference external" href="https://pypi.org">PyPi</a> from which you
 can directly copy the SHA256.</p></li>
 <li><p>Be sure to fill in the <code class="docutils literal notranslate"><span class="pre">tests</span></code> section. The simplest test will simply
@@ -107,7 +107,7 @@ test that the module can be imported, as described in the example.</p></li>
 <li><p>In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.</p></li>
 <li><p>Make sure that all tests pass successfully at least on your development machine.</p></li>
 <li><p>Recommended: run the test locally on your source code to ensure the recipe works locally (see  <a class="reference internal" href="#staging-test-locally"><span class="std std-ref">Running tests locally for staged recipes</span></a>).</p></li>
-<li><p>Make sure that your changes do not interfere with other recipes that are int the <code class="docutils literal notranslate"><span class="pre">recipes</span></code> folder (e.g. the <code class="docutils literal notranslate"><span class="pre">example</span></code> recipe).</p></li>
+<li><p>Make sure that your changes do not interfere with other recipes that are in the <code class="docutils literal notranslate"><span class="pre">recipes</span></code> folder (e.g. the <code class="docutils literal notranslate"><span class="pre">example</span></code> recipe).</p></li>
 </ul>
 </div>
 </div>
@@ -118,7 +118,7 @@ test that the module can be imported, as described in the example.</p></li>
 <p>After merging the <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>, our infrastructure will build the package and make it available in the conda-channel.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you have questions or have not heard back for a while, you can notify us by including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge/staged-recipes</span></code> in your github message.</p>
+<p>If you have questions or have not heard back for a while, you can notify us by including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge/staged-recipes</span></code> in your GitHub message.</p>
 </div>
 </div>
 <div class="section" id="post-staging-process">
@@ -139,20 +139,20 @@ test that the module can be imported, as described in the example.</p></li>
 <ul>
 <li><p>Bumping the version number and checksum.</p></li>
 <li><p>Making sure that feedstock’s requirements stay accurate.</p></li>
-<li><p>Make sure the test requirements match those of the of the updated package.</p></li>
+<li><p>Make sure the test requirements match those of the updated package.</p></li>
 </ul>
 </li>
-<li><p>Answer eventual question about the package on the feedstock issue tracker.</p></li>
+<li><p>Answer eventual questions about the package on the feedstock issue tracker.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="the-recipe-meta-yaml">
 <span id="meta-yaml"></span><h2>The recipe meta.yaml<a class="headerlink" href="#the-recipe-meta-yaml" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file in the recipe directory is at the heart of every conda package.
-It defines everything that is required build and use the  package.</p>
+It defines everything that is required to build and use the package.</p>
 <p><code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> is in <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">yaml</a> format, augmented with <a class="reference external" href="http://jinja.pocoo.org/">Jinja</a> templating.</p>
 <p>A full reference of the structure and fields of <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file can be found in the <a class="reference external" href="https://conda.io/projects/conda-build/en/latest/resources/define-metadata.html">Defining metadata (meta.yaml)</a> section in the conda-build documentation.</p>
-<p>In the following we highlight particularly important and conda-forge specific information and guidelines, ordered by section in <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>.</p>
+<p>In the following, we highlight particularly important and conda-forge specific information and guidelines, ordered by section in <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>.</p>
 <div class="section" id="source">
 <h3>Source<a class="headerlink" href="#source" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="build-from-tarballs-not-repos">
@@ -165,7 +165,7 @@ It defines everything that is required build and use the  package.</p>
 <li><p>Repositories are not checksummed.  Thus, using a tarball has a
 stronger guarantee that the download that is obtained to build from is
 in fact the intended package.</p></li>
-<li><p>On some systems it is possible to not have permission to remove a repo once it is created.</p></li>
+<li><p>On some systems, it is possible to not have permission to remove a repo once it is created.</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -250,7 +250,7 @@ the real package dependencies are only <code class="docutils literal notranslate
 <div class="section" id="build-host-and-run">
 <h4>Build, host and run<a class="headerlink" href="#build-host-and-run" title="Permalink to this headline">¶</a></h4>
 <p>Conda-build distinguishes three different kinds of dependencies.
-In the following paragraphs we give a very short overview what packages go where.
+In the following paragraphs, we give a very short overview what packages go where.
 For a detailed explanation please refer to the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/source/resources/define-metadata.html#requirements-section">conda-build documentation</a>.</p>
 <p><strong>Build</strong></p>
 <blockquote>
@@ -292,7 +292,7 @@ For a detailed explanation please refer to the <a class="reference external" hre
 <div class="section" id="avoid-external-dependencies">
 <span id="no-external-deps"></span><h4>Avoid external dependencies<a class="headerlink" href="#avoid-external-dependencies" title="Permalink to this headline">¶</a></h4>
 <p>As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure <a class="reference internal" href="../misc/00_intro.html#term-abi"><span class="xref std std-term">ABI</span></a> compatibility for all our packages.</p>
-<p>There are only few exceptions to this rule:</p>
+<p>There are only a few exceptions to this rule:</p>
 <ol class="arabic simple">
 <li><p>Some dependencies have to be satisfied with <a class="reference internal" href="../misc/00_intro.html#term-cdt"><span class="xref std std-term">CDT</span></a> packages (see <a class="reference internal" href="knowledge_base.html#cdt-packages"><span class="std std-ref">Core dependency tree packages (CDT)</span></a>).</p></li>
 <li><p>Some packages require root access (e.g. device drivers) that cannot be distributed by conda-forge. These dependencies should be avoided whenever possible.</p></li>
@@ -327,7 +327,7 @@ The exposed interface changes when previously existing exposed symbols are delet
 </div>
 <div class="section" id="constraining-packages-at-runtime">
 <h4>Constraining packages at runtime<a class="headerlink" href="#constraining-packages-at-runtime" title="Permalink to this headline">¶</a></h4>
-<p>The <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> section allows to define restrictions on packages at runtime without depending on the package. It can be used to restrict allowed versions of optional dependencies and defining incompatible packages.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> section allows defining restrictions on packages at runtime without depending on the package. It can be used to restrict allowed versions of optional dependencies and defining incompatible packages.</p>
 <div class="section" id="defining-non-dependency-restrictions">
 <h5>Defining non-dependency restrictions<a class="headerlink" href="#defining-non-dependency-restrictions" title="Permalink to this headline">¶</a></h5>
 <p>Imagine a package can be used together with version 1 of <code class="docutils literal notranslate"><span class="pre">awesome-software</span></code> when present, but does not strictly depend on it.
@@ -339,7 +339,7 @@ Therefore you would like to let the user choose whether he/she would like to use
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">awesome-software 1.*</span>
 </pre></div>
 </div>
-<p>Here <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> acts as a means to protect users from incompatible version without introducing an unwanted dependency.</p>
+<p>Here <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> acts as a means to protect users from incompatible versions without introducing an unwanted dependency.</p>
 </div>
 <div class="section" id="defining-conflicts">
 <h5>Defining conflicts<a class="headerlink" href="#defining-conflicts" title="Permalink to this headline">¶</a></h5>
@@ -374,7 +374,7 @@ But every conda package must have at least <em>some</em> tests.</p>
 <li><p>tests may take too much bandwidth.</p></li>
 </ul>
 </div></blockquote>
-<p>In these cases conda-forge may not be able to execute the prescribed test suite.</p>
+<p>In these cases, conda-forge may not be able to execute the prescribed test suite.</p>
 <p>However, this is no reason for the recipe to not have tests. At the very least
 we want to verify that the package has installed the desired files in the desired
 locations. This is called existence testing.</p>
@@ -407,7 +407,7 @@ stanza in the <code class="docutils literal notranslate"><span class="pre">meta.
 <p>Note that <code class="docutils literal notranslate"><span class="pre">package_name</span></code> is the name imported by python;
 not necessarily the name of the conda package (they are sometimes different).</p>
 <p>Testing for an import will catch the bulk of the packaging errors, generally
-including presence of dependencies. However, it does not assure that the
+including the presence of dependencies. However, it does not assure that the
 package works correctly. In particular, it doesn’t test if it works
 correctly with the versions of dependencies used.</p>
 <p>It is good to run some other tests of the code itself (the test suite) if possible.</p>
@@ -425,7 +425,7 @@ not be run straight from an installed package.</p>
 <p>Sometimes there are packages required to run the tests that are not required
 to simply use the package. This is usually a test-running framework, such as
 nose or pytest. You can ensure that it is included by adding it to requirements
-in the the test stanza:</p>
+in the test stanza:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span>
   <span class="nt">imports</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">package_name</span>
@@ -514,8 +514,8 @@ $ ./.circleci/run_docker_build.sh
 </div>
 <div class="section" id="about">
 <h3>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="packaging-the-licence-manually">
-<h4>Packaging the licence manually<a class="headerlink" href="#packaging-the-licence-manually" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="packaging-the-license-manually">
+<h4>Packaging the license manually<a class="headerlink" href="#packaging-the-license-manually" title="Permalink to this headline">¶</a></h4>
 <p>Sometimes upstream maintainers do not include a license file in their tarball despite being demanded by the license.</p>
 <p>If this is the case, you can add the license to the <code class="docutils literal notranslate"><span class="pre">recipe</span></code> directory (here named <code class="docutils literal notranslate"><span class="pre">LICENSE.txt</span></code>)  and reference it inside the meta.yaml:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">about</span><span class="p">:</span>
@@ -535,7 +535,7 @@ If there is a license file in the archive, please set <code class="docutils lite
 <h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="activate-scripts">
 <h3>Activate scripts<a class="headerlink" href="#activate-scripts" title="Permalink to this headline">¶</a></h3>
-<p>Recipes are allowed to have activate scripts, which will be <code class="docutils literal notranslate"><span class="pre">sourced</span></code>d or
+<p>Recipes are allowed to have activate scripts, which will be <code class="docutils literal notranslate"><span class="pre">source</span></code>d or
 <code class="docutils literal notranslate"><span class="pre">call</span></code>ed when the environment is activated. It is generally recommended to avoid using
 activate scripts when another option is possible because people do not always
 activate environments the expected way and these packages may then misbehave.</p>
@@ -572,7 +572,7 @@ this install process easier. Please feel free to lift it.</p>
 These expressions are written in <a class="reference external" href="http://jinja.pocoo.org/">Jinja</a> syntax.</p>
 <p>Jinja expressions serve following purposes in the meta.yaml:</p>
 <ul>
-<li><p>They allow defining variables to avoid code duplication. Using a variable for the <code class="docutils literal notranslate"><span class="pre">version</span></code> allows to change the version only once with every update.</p>
+<li><p>They allow defining variables to avoid code duplication. Using a variable for the <code class="docutils literal notranslate"><span class="pre">version</span></code> allows changing the version only once with every update.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span>{% set version = &quot;3.7.3&quot; %}
  [...]
 
@@ -684,7 +684,7 @@ source:
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#about">About</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#packaging-the-licence-manually">Packaging the licence manually</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#packaging-the-license-manually">Packaging the license manually</a></li>
 </ul>
 </li>
 </ul>
@@ -726,10 +726,10 @@ source:
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -779,7 +779,7 @@ source:
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

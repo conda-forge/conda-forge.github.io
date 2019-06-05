@@ -61,7 +61,7 @@
 to conda-forge. These aren’t hard and fast rules and are open reasonable
 interpretation and reviewer judgement.</p>
 <p>It is the aspiration that almost all recipes from those repos shall be
-proposed for addition here, thought it may be decided that a few don’t
+proposed for addition here, though it may be decided that a few don’t
 actually belong or should not be supported anymore.</p>
 <p>When adding a package from either location, inspect the commit history
 to see who has made changes to the recipe in the past. Anyone who has
@@ -88,14 +88,14 @@ Windows, make sure to add <code class="docutils literal notranslate"><span class
 section. The <code class="docutils literal notranslate"><span class="pre">about</span></code> section must have the <code class="docutils literal notranslate"><span class="pre">home</span></code> URL (verify the
 URL is still correct), <code class="docutils literal notranslate"><span class="pre">license</span></code> (verify the correct license is present),
 and a one sentence (or few word) <code class="docutils literal notranslate"><span class="pre">summary</span></code>. When specifying the version it
-is strongly recommend that jinja templating be used to set the version
+is strongly recommended that jinja templating be used to set the version
 at the top (e.g. <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">set</span> <span class="pre">version</span> <span class="pre">=</span> <span class="pre">&quot;0.10.1&quot;</span> <span class="pre">%}</span></code>) and then replace all
 uses of the version with <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">version</span> <span class="pre">}}</span></code>. Preference should be given to
 compressed source balls as opposed to version control checkouts. Make sure
 all links to compressed source balls allow for easy changing of the version
 (using latest is not acceptable). Also, a checksum should be included with
 all compressed source balls to allow for verification of downloads.</p>
-<p>It is required to add tests with all packages. These can included but are
+<p>It is required to add tests with all packages. These can include but are
 not limited to checking libraries are installed, python imports, simple
 code snippet to compile or run a basic test, command line usage (checking
 help or version). It is suggested that compiled code run all tests (e.g.
@@ -108,7 +108,7 @@ build against). From a practical perspective, there are limitations on the
 continuous integration resources and also on what reviewers are able/willing
 to review in a single pull request.
 A large pull request with many recipes makes it more difficult to review.
-If the recipes make it through these two constraints and is merged, race
+If the recipes make it through these two constraints and are merged, race
 conditions amongst the different feedstocks may require work by you and/or
 core maintainers to restart them in such a way to build everything in a
 suitable order.
@@ -124,7 +124,7 @@ recipes.</p>
 <p>Publishing a package to conda-forge signals it is suitable for users not involved with development. However, publishing does not always happen error-free. Multiple commits are acceptable when debugging issues with the release process itself.</p>
 <dl class="simple">
 <dt>Fortunately, there are options for optimizing the development of a package.</dt><dd><ul class="simple">
-<li><p><a class="reference external" href="https://github.com/conda-forge/conda-smithy">conda-smithy</a> is a tool used by conda-forge itself to manage feedstocks. conda-smithy can be used to create an internal development feedstock that is seperate from conda-forge.</p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/conda-smithy">conda-smithy</a> is a tool used by conda-forge itself to manage feedstocks. conda-smithy can be used to create an internal development feedstock that is separate from conda-forge.</p></li>
 <li><p><a class="reference external" href="https://github.com/astropy/ci-helpers">ci-helpers</a> is a set of scripts that drive various CI services using environment variables.</p></li>
 </ul>
 </dd>
@@ -217,10 +217,10 @@ immediately :)</p>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -270,7 +270,7 @@ immediately :)</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

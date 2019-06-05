@@ -22,13 +22,13 @@ For updates, using a branch in the main repo is discouraged because,
    This means if you push a version update to a branch and then create a :term:`PR`, conda packages will be published to anaconda.org before the PR is merged.
 
 .. important::
-  For these reasons maintainers are asked to fork the feedstock, push to a branch in the fork and then open a PR to the ``conda-forge`` repo.
+  For these reasons, maintainers are asked to fork the feedstock, push to a branch in the fork and then open a PR to the ``conda-forge`` repo.
 
 
 Example workflow for updating a package
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Here we assume that your would like to update the feedstock ``<feedstock>``. Feedstock is a placeholder and can e.g. be replaced by ``numpy-feedstock``.
+Here we assume that you would like to update the feedstock ``<feedstock>``. Feedstock is a placeholder and can e.g. be replaced by ``numpy-feedstock``.
 
 #. Forking the feedstock
 
@@ -52,13 +52,13 @@ Here we assume that your would like to update the feedstock ``<feedstock>``. Fee
    Now you are ready to update the recipe
 
    - Create and switch to a new branch: ``git checkout -b <branch-name>``. ``<branch-name>`` can be e.g. ``update_1_0_1``.
-   - Make your chances locally
+   - Make your changes locally
    - Review your changes then use ``git add <changed-files>``. Where ``<changed-files>`` are a whitespace separated list of filenames you changed.
    - Create a commit by ``git commit -m <commit-msg>``, where ``<commit-msg>`` can be ``updated feedstock to version 1.0.1``
 
-#. Pushing your changes to github and propose a PR
+#. Pushing your changes to GitHub and propose a PR
 
-   - Push the branch with changes to your fork in github:  ``git push origin <branch-name>``
+   - Push the branch with changes to your fork on GitHub:  ``git push origin <branch-name>``
    - Create a pull request via the web interface by navigating to ``https://github.com/<your-github-id>/<feedstock>`` with your web browser and clicking the button ``create pull request``.
 
 
@@ -103,7 +103,7 @@ Rerendering can be done in two ways:
 Rerendering with conda-smithy locally
 -------------------------------------
 
-First step is to install ``conda-smithy`` in your root environment
+The first step is to install ``conda-smithy`` in your root environment
 
 .. code-block:: shell
 
@@ -139,7 +139,7 @@ We need to re-render when there are changes the following parts of the feedstock
 Testing changes locally
 =======================
 
-If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is  built by our :term:`CI`.
+If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is built by our :term:`CI`.
 
 If you want to build and test updates to  a feedstock locally, go to the root
 feedstock directory and run, the ``.circleci/run_docker_build.sh`` script.
@@ -159,7 +159,7 @@ For example, the docker build with the config in ``.ci_support/linux_.yaml`` can
 Removing broken packages
 ========================
 
-Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel. In this case core can help you (see :ref:`fix_broken_packages`)
+Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel. In this case, core can help you (see :ref:`fix_broken_packages`)
 
 Maintaining several versions
 ============================

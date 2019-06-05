@@ -66,9 +66,9 @@ see an error like (OS X example):</p>
 <p>That happens because either the correct version of <code class="docutils literal notranslate"><span class="pre">icu</span></code>,
 or any other package in the error,
 is not present or the package is missing altogether.</p>
-<p>Once can confirm by issuing the command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> and searching for the package in question.</p>
-<div class="section" id="why-that-happens">
-<h3>Why that happens?<a class="headerlink" href="#why-that-happens" title="Permalink to this headline">¶</a></h3>
+<p>Once you can confirm by issuing the command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> and searching for the package in question.</p>
+<div class="section" id="why-does-that-happen">
+<h3>Why does that happen?<a class="headerlink" href="#why-does-that-happen" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and <code class="docutils literal notranslate"><span class="pre">defaults</span></code> are not 100% compatible.
 In the example above it is known that <code class="docutils literal notranslate"><span class="pre">defaults</span></code> uses <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">54.*</span></code> while <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> relies on <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">56.*</span></code>,
 that mismatch can lead to errors when the install environment is mixing packages from multiple channels.</p>
@@ -92,14 +92,14 @@ channels:
   - defaults
 </pre></div>
 </div>
-<p>In addition to the channel priority we recommend to always install your packages inside a new environment instead the root environment from anaconda/miniconda.
+<p>In addition to the channel priority, we recommend to always install your packages inside a new environment instead of the root environment from anaconda/miniconda.
 Using envs make it easier to debug problems with packages and ensure the stability of your root env.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In the past <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> used to vendorize some of <code class="docutils literal notranslate"><span class="pre">defaults</span></code> dependencies that were not built in our infrastructure,
 like compilers run-times, to avoid the mixing channel problem.
 However, with the <code class="docutils literal notranslate"><span class="pre">strict</span></code> option, we no longer have to vendorize those (this led to its own set of problems),
-instead we removed everything that is not built in <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and let <code class="docutils literal notranslate"><span class="pre">strict</span></code> pull those from <code class="docutils literal notranslate"><span class="pre">defaults</span></code>.</p>
+instead, we removed everything that is not built in <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and let <code class="docutils literal notranslate"><span class="pre">strict</span></code> pull those from <code class="docutils literal notranslate"><span class="pre">defaults</span></code>.</p>
 <p>TL;DR if you are experiencing missing compilers run-times like <code class="docutils literal notranslate"><span class="pre">libgcc-ng</span></code>,
 that is probably because you removed <code class="docutils literal notranslate"><span class="pre">defaults</span></code>,
 just re-add it and activate <code class="docutils literal notranslate"><span class="pre">strict</span></code> for a smooth and stable experience when installing packages.</p>
@@ -124,7 +124,7 @@ just re-add it and activate <code class="docutils literal notranslate"><span cla
 <li class="toctree-l2"><a class="reference internal" href="announcements.html">Announcements</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Tips &amp; tricks</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#using-multiple-channels">Using multiple channels</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#why-that-happens">Why that happens?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-does-that-happen">Why does that happen?</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#how-to-fix-it">How to fix it?</a></li>
 </ul>
 </li>
@@ -158,10 +158,10 @@ just re-add it and activate <code class="docutils literal notranslate"><span cla
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -211,7 +211,7 @@ just re-add it and activate <code class="docutils literal notranslate"><span cla
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
