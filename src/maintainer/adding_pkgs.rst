@@ -8,7 +8,7 @@ Contributing packages
 The staging process
 ===================
 
-This document presents an overview over  how to contribute packages to conda-forge.
+This document presents an overview over how to contribute packages to conda-forge.
 
 
 Getting Started
@@ -53,7 +53,7 @@ Step-by-step Instructions
 #. Edit the copied recipe (meta.yml) as needed. For details, see
    :ref:`meta_yaml`.
 #. Generate the SHA256 key for your source code archive, as described in the
-   example recipe using the ``openssl`` tool. As an alternative you can also
+   example recipe using the ``openssl`` tool. As an alternative, you can also
    go to the package description on `PyPi <https://pypi.org>`_ from which you
    can directly copy the SHA256.
 #. Be sure to fill in the ``tests`` section. The simplest test will simply
@@ -70,7 +70,7 @@ Checklist
 * In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
 * Make sure that all tests pass successfully at least on your development machine.
 * Recommended: run the test locally on your source code to ensure the recipe works locally (see  :ref:`staging_test_locally`).
-* Make sure that your changes do not interfere with other recipes that are int the ``recipes`` folder (e.g. the ``example`` recipe).
+* Make sure that your changes do not interfere with other recipes that are in the ``recipes`` folder (e.g. the ``example`` recipe).
 
 
 Feedback and revision
@@ -84,7 +84,7 @@ After merging the :term:`PR`, our infrastructure will build the package and make
 
 .. note::
 
-  If you have questions or have not heard back for a while, you can notify us by including ``@conda-forge/staged-recipes`` in your github message.
+  If you have questions or have not heard back for a while, you can notify us by including ``@conda-forge/staged-recipes`` in your GitHub message.
 
 
 Post staging process
@@ -106,9 +106,9 @@ The maintainer's job is to:
 
   - Bumping the version number and checksum.
   - Making sure that feedstock's requirements stay accurate.
-  - Make sure the test requirements match those of the of the updated package.
+  - Make sure the test requirements match those of the updated package.
 
-- Answer eventual question about the package on the feedstock issue tracker.
+- Answer eventual questions about the package on the feedstock issue tracker.
 
 
 .. _meta_yaml:
@@ -117,13 +117,13 @@ The recipe meta.yaml
 ====================
 
 The ``meta.yaml`` file in the recipe directory is at the heart of every conda package.
-It defines everything that is required build and use the  package.
+It defines everything that is required to build and use the package.
 
 ``meta.yaml`` is in `yaml <https://en.wikipedia.org/wiki/YAML>`__ format, augmented with `Jinja <http://jinja.pocoo.org/>`__ templating.
 
 A full reference of the structure and fields of ``meta.yaml`` file can be found in the `Defining metadata (meta.yaml) <https://conda.io/projects/conda-build/en/latest/resources/define-metadata.html>`__ section in the conda-build documentation.
 
-In the following we highlight particularly important and conda-forge specific information and guidelines, ordered by section in ``meta.yaml``.
+In the following, we highlight particularly important and conda-forge specific information and guidelines, ordered by section in ``meta.yaml``.
 
 
 Source
@@ -142,7 +142,7 @@ There are several reasons behind this rule:
   - Repositories are not checksummed.  Thus, using a tarball has a
     stronger guarantee that the download that is obtained to build from is
     in fact the intended package.
-  - On some systems it is possible to not have permission to remove a repo once it is created.
+  - On some systems, it is possible to not have permission to remove a repo once it is created.
 
 Populating the ``hash`` field
 .............................
@@ -244,7 +244,7 @@ Build, host and run
 ...................
 
 Conda-build distinguishes three different kinds of dependencies.
-In the following paragraphs we give a very short overview what packages go where.
+In the following paragraphs, we give a very short overview what packages go where.
 For a detailed explanation please refer to the `conda-build documentation <https://docs.conda.io/projects/conda-build/en/latest/source/resources/define-metadata.html#requirements-section>`__.
 
 **Build**
@@ -285,7 +285,7 @@ Avoid external dependencies
 
 As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure :term:`ABI` compatibility for all our packages.
 
-There are only few exceptions to this rule:
+There are only a few exceptions to this rule:
 
 #. Some dependencies have to be satisfied with :term:`CDT` packages (see :ref:`cdt_packages`).
 
@@ -332,7 +332,7 @@ For more information on pinning, please refer to :ref:`pinned_deps`.
 Constraining packages at runtime
 ................................
 
-The ``run_constrained`` section allows to define restrictions on packages at runtime without depending on the package. It can be used to restrict allowed versions of optional dependencies and defining incompatible packages.
+The ``run_constrained`` section allows defining restrictions on packages at runtime without depending on the package. It can be used to restrict allowed versions of optional dependencies and defining incompatible packages.
 
 Defining non-dependency restrictions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -349,7 +349,7 @@ In this case ``run_dependencies`` can be used to restrict ``awesome-software`` t
     run_constrained:
       - awesome-software 1.*
 
-Here ``run_constrained`` acts as a means to protect users from incompatible version without introducing an unwanted dependency.
+Here ``run_constrained`` acts as a means to protect users from incompatible versions without introducing an unwanted dependency.
 
 Defining conflicts
 ^^^^^^^^^^^^^^^^^^
@@ -393,7 +393,7 @@ Sometimes defining tests seems to be hard, e.g. due to:
  - test suites may take too long to run on limited :term:`CI` infrastructure.
  - tests may take too much bandwidth.
 
-In these cases conda-forge may not be able to execute the prescribed test suite.
+In these cases, conda-forge may not be able to execute the prescribed test suite.
 
 However, this is no reason for the recipe to not have tests. At the very least
 we want to verify that the package has installed the desired files in the desired
@@ -441,7 +441,7 @@ Note that ``package_name`` is the name imported by python;
 not necessarily the name of the conda package (they are sometimes different).
 
 Testing for an import will catch the bulk of the packaging errors, generally
-including presence of dependencies. However, it does not assure that the
+including the presence of dependencies. However, it does not assure that the
 package works correctly. In particular, it doesn't test if it works
 correctly with the versions of dependencies used.
 
@@ -463,7 +463,7 @@ Test requirements
 Sometimes there are packages required to run the tests that are not required
 to simply use the package. This is usually a test-running framework, such as
 nose or pytest. You can ensure that it is included by adding it to requirements
-in the the test stanza:
+in the test stanza:
 
 .. code-block:: yaml
 
@@ -572,7 +572,7 @@ This requires that you have docker installed on your machine.
 About
 -----
 
-Packaging the licence manually
+Packaging the license manually
 ..............................
 
 Sometimes upstream maintainers do not include a license file in their tarball despite being demanded by the license.
@@ -598,7 +598,7 @@ Miscellaneous
 Activate scripts
 ----------------
 
-Recipes are allowed to have activate scripts, which will be ``sourced``\ d or
+Recipes are allowed to have activate scripts, which will be ``source``\ d or
 ``call``\ ed when the environment is activated. It is generally recommended to avoid using
 activate scripts when another option is possible because people do not always
 activate environments the expected way and these packages may then misbehave.
@@ -642,7 +642,7 @@ These expressions are written in `Jinja <http://jinja.pocoo.org/>`__ syntax.
 
 Jinja expressions serve following purposes in the meta.yaml:
 
-- They allow defining variables to avoid code duplication. Using a variable for the ``version`` allows to change the version only once with every update.
+- They allow defining variables to avoid code duplication. Using a variable for the ``version`` allows changing the version only once with every update.
 
   .. code-block:: yaml
 

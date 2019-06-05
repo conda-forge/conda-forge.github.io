@@ -17,7 +17,7 @@ FAQ
 
 :ref:`(Q) <faq_report_issue>` **A package from conda-forge is outdated or broken, where can I report the issue?**
 
-  You can open an issue in the packages feedstock repository on github. Search for the repository ``conda-forge/<package-name>-feedstock``. There you can also suggest fixes or even become a maintainer. Please refer to :ref:`maintaining_pkgs` for details.
+  You can open an issue in the packages feedstock repository on GitHub. Search for the repository ``conda-forge/<package-name>-feedstock``. There you can also suggest fixes or even become a maintainer. Please refer to :ref:`maintaining_pkgs` for details.
 
 .. _faq_contact:
 

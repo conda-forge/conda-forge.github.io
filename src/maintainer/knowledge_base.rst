@@ -145,7 +145,7 @@ Core dependency tree packages (CDT)
 -----------------------------------
 
 Dependencies outside of the conda-forge channel should be avoided (see :ref:`no_external_deps`).
-However there are very few exceptions: some dependencies are so close to the system that they are not packaged with conda-forge.
+However, there are very few exceptions: some dependencies are so close to the system that they are not packaged with conda-forge.
 These dependencies have to be satisfied with *Core Dependency Tree* packages.
 
 In conda-forge this currently affects only packages that link against libGL.
@@ -185,7 +185,7 @@ You will need to re-render the feedstock after making these changes.
 Building Against NumPy
 ----------------------
 
-Packages that link against NumPy need a special treatment in the dependency section.
+Packages that link against NumPy need special treatment in the dependency section.
 Finding ``numpy.get_include()`` in ``setup.py`` or ``cimport`` statements in ``.pyx`` or ``.pyd`` files are a telltale sign that the package links against NumPy.
 
 In the case of linking, you need to use the ``pin_compatible`` function to ensure having a compatible numpy version at run time:
@@ -241,8 +241,8 @@ How are MPI variants best handled in conda-forge?
 There are a few broad cases:
 
 - package requires a specific MPI provider (easy!)
-- package works with any MPI provider (e.g. mpich, openmpi)
-- package works with/without MPI
+- the package works with any MPI provider (e.g. mpich, openmpi)
+- the package works with/without MPI
 
 
 
@@ -342,7 +342,7 @@ or
 
 This doesn't extend to ``nompi``, because there is no ``nompi`` variant of the mpi metapackage. And there probably shouldn't be, because some packages built with mpi doesn't preclude other packages in the env that *may* have an mpi variant from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no parallel hdf5 yet. This works fine, though some features may not be available).
 
-Typically, if there is a preference it will be packages with a nompi variant, where the serial build is preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.
+Typically, if there is a preference it will be packaged with a nompi variant, where the serial build is preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.
 
 
 .. admonition:: Outdated
@@ -634,7 +634,7 @@ You can switch your BLAS implementation by doing,
 This would change the BLAS implementation without changing the conda packages depending
 on BLAS.
 
-Following legacy commands are also supported as well.
+The following legacy commands are also supported as well.
 
 .. code-block:: bash
 
@@ -655,7 +655,7 @@ time of writing is ``3.8.0``. Since the BLAS API is stable, a downstream package
 ``3.*`` of ``libblas`` and ``libcblas``. On the other hand, ``liblapack`` and ``liblapacke`` pins to
 ``3.8.*``.
 
-In addition to the above netlib package there are other variants like ``libblas=*=*openblas``,
+In addition to the above netlib package, there are other variants like ``libblas=*=*openblas``,
 which has ``openblas`` as a dependency and has a symlink from ``libblas.so.3`` to ``libopenblas.so``.
 ``libblas=3.8.0=*openblas`` pins the ``openblas`` dependency to a version that is known to support the
 BLAS ``3.8.0`` API.  This means that at install time, the user can select what BLAS implementation
@@ -682,7 +682,7 @@ In order to qualify as a noarch python package, all of the following criteria mu
 
   - No compiled extensions
   - No post-link or pre-link or pre-unlink scripts
-  - No OS specific build scripts
+  - No OS-specific build scripts
   - No python version specific requirements
   - No skips except for python version. If the recipe is py3 only, remove skip
     statement and add version constraint on python in ``host`` and ``run``
@@ -698,7 +698,7 @@ In order to qualify as a noarch python package, all of the following criteria mu
   ``skip: True  # [py2k]`` can sometimes be replaced with a constrained python version in the host and run subsections: say ``python >=3`` instead of just ``python``.
 
 .. note::
-  Only ``console_script`` entrypoints have to be listed in meta.yaml. Other entrypoints do not conflict with ``noarch`` and therefore do not require extra treatment.
+  Only ``console_script`` entry points have to be listed in meta.yaml. Other entry points do not conflict with ``noarch`` and therefore do not require extra treatment.
 
 If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including ``@conda-forge-admin, please add noarch: python``.
 
@@ -735,7 +735,7 @@ Following implies that ``python`` is a runtime dependency and a Python matrix fo
     host:
       - python
 
-``conda-forge.yml``'s build matrices is removed in conda-smithy=3. To get a build matrix, create a ``conda_build_config.yaml`` file inside recipe folder. For example following will give you 2 builds and you can use the selector ``vtk_with_osmesa`` in the ``meta.yaml``
+``conda-forge.yml``'s build matrices is removed in conda-smithy=3. To get a build matrix, create a ``conda_build_config.yaml`` file inside the recipe folder. For example, the following will give you 2 builds and you can use the selector ``vtk_with_osmesa`` in the ``meta.yaml``
 
 .. code-block:: yaml
 

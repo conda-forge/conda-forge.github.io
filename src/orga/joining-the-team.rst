@@ -23,7 +23,7 @@ staged-recipes Responsibilities
 
 You are the welcoming committee for new recipes coming in to the conda-forge
 community! Please give new (and experienced) contributors a pleasant experience!
-Generally speaking your role is as follows:
+Generally speaking, your role is as follows:
 
 1. Keep up to date with the current best practices for conda packaging standards
 2. Provide recipe review which generally means making sure that the recipe
@@ -39,5 +39,5 @@ Generally speaking your role is as follows:
 
 .. todo::
 
-  - Add description of core team responsibilities
-  - Add description of how we add new core team members
+  - Add a description of core team responsibilities
+  - Add a description of how we add new core team members
