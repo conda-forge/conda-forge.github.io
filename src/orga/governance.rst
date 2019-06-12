@@ -35,7 +35,7 @@ Here are defined the primary teams participating in conda-forge activities.
   and voting on polls) in the past year will be asked if they want to become emeritus-core
   developers. They can still vote and be back to active core anytime, the only difference is
   that emeritus-core will not count as the total core members when computing the necessary
-  votes a poll need to pass.
+  votes a poll needs to pass.
 
 Sub-Teams
 ---------
