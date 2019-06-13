@@ -74,7 +74,7 @@ calling a vote are as follows:
 * There should always be an option to abstain from voting.
 
 Voting items are labeled as either **standard** or **sensitive**.
-Standard items are ones where public record and discourse and record is
+Standard items are ones where public record and discourse is
 preferable. Sensitive voting items are ones where the results of the
 vote should remain private to the voters after the vote has occurred.
 Sensitive votes should take place on
