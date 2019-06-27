@@ -37,7 +37,7 @@ Here are defined the primary teams participating in conda-forge activities.
   (e.g. taking a sabbatical or long vacation).
   Emeritus core members can still vote and be back to active core anytime, the only difference is
   that emeritus-core will not count as the total core members when computing the necessary
-  votes a poll needs to pass. The `core.csv` list should be update when change in the status of a member occurs.
+  votes a poll needs to pass. The ``core.csv`` list should be update when change in the status of a member occurs.
 
 Sub-Teams
 ---------
