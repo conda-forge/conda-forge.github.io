@@ -33,9 +33,11 @@ Here are defined the primary teams participating in conda-forge activities.
   the conda-forge organization itself.
 * **emeritus-core:** Core members that are inactive (commits, GitHub comments/issues/reviews,
   and voting on polls) in the past six months will be asked if they want to become emeritus-core
-  developers. They can still vote and be back to active core anytime, the only difference is
+  developers. Any core member can also request to become emeritus if they wish to do so
+  (e.g. taking a sabbatical or long vacation).
+  Emeritus core members can still vote and be back to active core anytime, the only difference is
   that emeritus-core will not count as the total core members when computing the necessary
-  votes a poll needs to pass.
+  votes a poll needs to pass. The `core.csv` list should be update when change in the status of a member occurs.
 
 Sub-Teams
 ---------
