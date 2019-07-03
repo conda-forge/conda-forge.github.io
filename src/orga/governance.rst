@@ -32,7 +32,7 @@ Here are defined the primary teams participating in conda-forge activities.
   contributors, collaborators, and funders. They have no special rights within
   the conda-forge organization itself.
 * **emeritus-core:** Core members that are inactive (commits, GitHub comments/issues/reviews,
-  and voting on polls) in the past six months will be asked if they want to become emeritus-core
+  dev meetings and voting on polls) in the past six months will be asked if they want to become emeritus-core
   developers. Any core member can also request to become emeritus if they wish to do so
   (e.g. taking a sabbatical or long vacation).
   Emeritus core members can still vote and be back to active core anytime, the only difference is
