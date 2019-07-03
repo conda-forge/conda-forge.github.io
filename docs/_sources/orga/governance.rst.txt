@@ -10,7 +10,7 @@ appreciate all good faith contributions.
 Code of Conduct
 ---------------
 Conda-forge adheres to the
-`Numfocus Code of Conduct <https://www.numfocus.org/code-of-conduct>`_.
+`NumFOCUS Code of Conduct <https://www.numfocus.org/code-of-conduct>`_.
 
 Teams & Roles
 -------------
@@ -31,6 +31,13 @@ Here are defined the primary teams participating in conda-forge activities.
   core, part of staged-recipes, or maintainers. This includes first-time
   contributors, collaborators, and funders. They have no special rights within
   the conda-forge organization itself.
+* **emeritus-core:** Core members that are inactive (commits, GitHub comments/issues/reviews,
+  dev meetings and voting on polls) in the past six months will be asked if they want to become emeritus-core
+  developers. Any core member can also request to become emeritus if they wish to do so
+  (e.g. taking a sabbatical or long vacation).
+  Emeritus core members can still vote and be back to active core anytime, the only difference is
+  that emeritus-core will not count as the total core members when computing the necessary
+  votes a poll needs to pass. The ``core.csv`` list should be updated when change in the status of a member occurs.
 
 Sub-Teams
 ---------
