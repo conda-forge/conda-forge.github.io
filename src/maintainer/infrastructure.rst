@@ -29,7 +29,7 @@ Smithy contains maintenance code for conda-forge, which is used by the ``conda s
 Web services
 ------------
 
-The heroku app providing the conda-forge web services are living in `conda-forge/conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
+The Heroku app providing the conda-forge web services is living in `conda-forge/conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
 Please note that the code logic provided by the app is in the ``Smithy`` repository.
 
 Bugs or suggestions regarding the service functionality should therefore be opened in at ``conda-forge/conda-smithy``'s `bug tracker <https://github.com/conda-forge/conda-smithy/issues>`_.
@@ -59,7 +59,7 @@ If you found a typo, unclear explanations or new topics that could be covered, y
 Admin web services
 ==================
 
-conda-forge is running a webservice on heroku called `conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
+conda-forge is running a webservice on Heroku called `conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
 
 The following services are run by default on a feedstock:
 
@@ -119,21 +119,21 @@ Here we describe common issues with the CI Services that conda-forge builds.
 
 Azure Pipelines
 ---------------
-Azure is used to build packages for OS X, Linux, Linux (ARMv8) and Linux (IBM Power8+).  The build queue on azure is substantially larger
+Azure is used to build packages for OS X, Linux, Linux (ARMv8) and Linux (IBM Power8+).  The build queue on Azure is substantially larger
 than on all the other providers.  Azure builds have a maximum duration of 6 hours.
 
-To see all build on azure go to `<https://dev.azure.com/conda-forge/feedstock-builds/_build>`_.
+To see all builds on Azure go to `<https://dev.azure.com/conda-forge/feedstock-builds/_build>`_.
 
 Restarting builds
 .................
 
-Presently azure does not sync Github users. In order to restart a build you can restart it from the Github checks interface.
+Presently Azure does not sync GitHub users. In order to restart a build you can restart it from the GitHub checks interface.
 If that doesn't work, a close/open will kick off a new build.
 
 Using azure for *everything*
 ............................
 
-Azure is the default provider for Linux and OS X.  To use azure for everything add the following to ``conda-forge.yml`` in the root
+Azure is the default provider for Linux and OS X.  To use Azure for everything add the following to ``conda-forge.yml`` in the root
 of the feedstock.
 
 .. code-block:: yaml
@@ -143,7 +143,7 @@ of the feedstock.
 
 .. note::
 
-  Presently azure has some issues building libraries using cmake on windows.  Azure does not have a VS2008 installation so building
+  Presently Azure has some issues building libraries using cmake on Windows.  Azure does not have a VS2008 installation so building
   certain very old packages that require VC9 will fail.
 
 
@@ -156,7 +156,7 @@ force sync your repositories in Travis CI to see the reload and cancel buttons. 
 Enabling travis
 ...............
 
-TravisCI should only be needed to build recipes on OS X if there is a strange failure on azure.
+TravisCI should only be needed to build recipes on OS X if there is a strange failure on Azure.
 
 Enable a build by adding the following to ``conda-forge.yml`` in the root
 of the feedstock.
@@ -172,7 +172,7 @@ CircleCI (Linux, OSX)
 Circle CI is a container-based CI service that conda-forge uses to build
 linux packages. It can optionally build OSX packages.
 
-Linux builds are identical to those on azure as both are built inside docker containers.
+Linux builds are identical to those on Azure as both are built inside Docker containers.
 
 
 Using Circle for both Linux and OSX
@@ -221,7 +221,7 @@ Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
 Appveyor
 --------
 
-Appveyor is used to build windows packages.  It is the only provider that can build recipes that require Visual Studio 2008.
+Appveyor is used to build Windows packages.  It is the only provider that can build recipes that require Visual Studio 2008.
 
 
 Skipping CI builds

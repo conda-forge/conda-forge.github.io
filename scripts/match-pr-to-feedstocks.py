@@ -61,7 +61,7 @@ def cli():
 
 @cli.command('build-feedstock-index', help='create json index of feedstocks.')
 @click.argument('filename')
-@click.option('--gh-org', default='conda-forge', help='Set Github organization name.')
+@click.option('--gh-org', default='conda-forge', help='Set GitHub organization name.')
 def build_feedstock_index(filename, gh_org='conda-forge'):
     "Iterate over feedstocks and return dict of pkg-name:feedstock"
     pkg_index = {}
@@ -84,7 +84,7 @@ def build_feedstock_index(filename, gh_org='conda-forge'):
 
 @cli.command('build-pr-index', help='create json index of pull requests.')
 @click.argument('filename')
-@click.option('--gh-org', default='conda-forge', help='Set Github organization name.')
+@click.option('--gh-org', default='conda-forge', help='Set GitHub organization name.')
 @click.option('--staged-recipes-repo', default='staged-recipes', help='Set staged recipe repo.')
 def build_pr_index(filename, gh_org='conda-forge', staged_recipes_repo='staged-recipes'):
     "Iterate over open pull requests in staged_recipes and return dict of pr:pkg-name"
@@ -134,7 +134,7 @@ def compare_indices(pr_index, feedstock_index, threshold, limit):
 @click.argument('feedstock-index')
 @click.option('--threshold', default=85, help='only return matches with scores above threshold')
 @click.option('--limit', default=2, help='maximum number of matches')
-@click.option('--gh-org', default='conda-forge', help='Set Github organization name.')
+@click.option('--gh-org', default='conda-forge', help='Set GitHub organization name.')
 @click.option('--staged-recipes-repo', default='staged-recipes', help='Set staged recipe repo.')
 def check_pr(pr, feedstock_index, threshold, limit, gh_org, staged_recipes_repo):
     feedstock_index = json.load(open(feedstock_index))
