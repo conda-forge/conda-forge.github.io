@@ -75,15 +75,15 @@ You can find a detailed guide to submitting new package recipes in <a class="ref
 </div>
 <div class="section" id="web-services">
 <h3>Web services<a class="headerlink" href="#web-services" title="Permalink to this headline">¶</a></h3>
-<p>The heroku app providing the conda-forge web services are living in <a class="reference external" href="https://github.com/conda-forge/conda-forge-webservices">conda-forge/conda-forge-webservices</a>.
+<p>The Heroku app providing the conda-forge web services lives in <a class="reference external" href="https://github.com/conda-forge/conda-forge-webservices">conda-forge/conda-forge-webservices</a>.
 Please note that the code logic provided by the app is in the <code class="docutils literal notranslate"><span class="pre">Smithy</span></code> repository.</p>
-<p>Bugs or suggestions regarding the service functionality should therefore be opened in at <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-smithy</span></code>’s <a class="reference external" href="https://github.com/conda-forge/conda-smithy/issues">bug tracker</a>.</p>
+<p>Bugs or suggestions regarding the service functionality should therefore be opened in <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-smithy</span></code>’s <a class="reference external" href="https://github.com/conda-forge/conda-smithy/issues">bug tracker</a>.</p>
 </div>
 <div class="section" id="conda-forge-pinning">
 <h3>conda-forge pinning<a class="headerlink" href="#conda-forge-pinning" title="Permalink to this headline">¶</a></h3>
 <p>Package-wide dependency pins are defined in <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">conda_build_config.yaml</a>  in the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a>.</p>
 <p>For more information on conda-forge wide package pins, please refer to <a class="reference internal" href="pinning_deps.html#globally-pinned-packages"><span class="std std-ref">Globally pinned packages</span></a>.</p>
-<p>Please open <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> and/or issues there if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to <a class="reference internal" href="pinning_deps.html#update-pins"><span class="std std-ref">Updating package pins</span></a>.</p>
+<p>Please open a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> and/or issues there if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to <a class="reference internal" href="pinning_deps.html#update-pins"><span class="std std-ref">Updating package pins</span></a>.</p>
 </div>
 <div class="section" id="documentation">
 <h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
@@ -94,7 +94,7 @@ Please note that the code logic provided by the app is in the <code class="docut
 </div>
 <div class="section" id="admin-web-services">
 <span id="dev-admservice"></span><h2>Admin web services<a class="headerlink" href="#admin-web-services" title="Permalink to this headline">¶</a></h2>
-<p>conda-forge is running a webservice on heroku called <a class="reference external" href="https://github.com/conda-forge/conda-forge-webservices">conda-forge-webservices</a>.</p>
+<p>conda-forge is running a webservice on Heroku called <a class="reference external" href="https://github.com/conda-forge/conda-forge-webservices">conda-forge-webservices</a>.</p>
 <p>The following services are run by default on a feedstock:</p>
 <ul class="simple">
 <li><p>It will lint the recipes in the PRs and report back whether the recipe is in excellent condition or not.</p></li>
@@ -125,7 +125,7 @@ for you.</p>
 <div class="section" id="conda-forge-admin-please-update-circle">
 <span id="ci-update-circle"></span><h3>&#64;conda-forge-admin, please update circle<a class="headerlink" href="#conda-forge-admin-please-update-circle" title="Permalink to this headline">¶</a></h3>
 <p>Entering the above phrase in an issue of a feedstock will update the Circle-CI SSH deploy key. This will fix the
-<code class="docutils literal notranslate"><span class="pre">permission</span> <span class="pre">denied</span> <span class="pre">(public</span> <span class="pre">key)</span></code> issue in Circle-CI checkout phase; it shouldn’t be needed otherwise.</p>
+<code class="docutils literal notranslate"><span class="pre">permission</span> <span class="pre">denied</span> <span class="pre">(public</span> <span class="pre">key)</span></code> issue in Circle-CI’s checkout phase; it shouldn’t be needed otherwise.</p>
 </div>
 <div class="section" id="conda-forge-admin-please-update-team">
 <h3>&#64;conda-forge-admin, please update team<a class="headerlink" href="#conda-forge-admin-please-update-team" title="Permalink to this headline">¶</a></h3>
@@ -137,17 +137,17 @@ for you.</p>
 <p>Here we describe common issues with the CI Services that conda-forge builds.</p>
 <div class="section" id="azure-pipelines">
 <h3>Azure Pipelines<a class="headerlink" href="#azure-pipelines" title="Permalink to this headline">¶</a></h3>
-<p>Azure is used to build packages for OS X, Linux, Linux (ARMv8) and Linux (IBM Power8+).  The build queue on azure is substantially larger
+<p>Azure is used to build packages for OS X, Linux, Linux (ARMv8) and Linux (IBM Power8+).  The build queue on Azure is substantially larger
 than on all the other providers.  Azure builds have a maximum duration of 6 hours.</p>
-<p>To see all build on azure go to <a class="reference external" href="https://dev.azure.com/conda-forge/feedstock-builds/_build">https://dev.azure.com/conda-forge/feedstock-builds/_build</a>.</p>
+<p>To see all builds on Azure go to <a class="reference external" href="https://dev.azure.com/conda-forge/feedstock-builds/_build">https://dev.azure.com/conda-forge/feedstock-builds/_build</a>.</p>
 <div class="section" id="restarting-builds">
 <h4>Restarting builds<a class="headerlink" href="#restarting-builds" title="Permalink to this headline">¶</a></h4>
-<p>Presently azure does not sync Github users. In order to restart a build you can restart it from the Github checks interface.
+<p>Presently Azure does not sync GitHub users. In order to restart a build you can restart it from the GitHub checks interface.
 If that doesn’t work, a close/open will kick off a new build.</p>
 </div>
 <div class="section" id="using-azure-for-everything">
-<h4>Using azure for <em>everything</em><a class="headerlink" href="#using-azure-for-everything" title="Permalink to this headline">¶</a></h4>
-<p>Azure is the default provider for Linux and OS X.  To use azure for everything add the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root
+<h4>Using Azure for <em>everything</em><a class="headerlink" href="#using-azure-for-everything" title="Permalink to this headline">¶</a></h4>
+<p>Azure is the default provider for Linux and OS X.  To use Azure for everything add the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root
 of the feedstock.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
   <span class="nt">win</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
@@ -155,7 +155,7 @@ of the feedstock.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Presently azure has some issues building libraries using cmake on windows.  Azure does not have a VS2008 installation so building
+<p>Presently Azure has some issues building libraries using cmake on Windows.  Azure does not have a VS2008 installation so building
 certain very old packages that require VC9 will fail.</p>
 </div>
 </div>
@@ -165,8 +165,8 @@ certain very old packages that require VC9 will fail.</p>
 <p>Travis CI is used to build packages for OS X. After merging a staged-recipes pull request, it might be necessary to
 force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit <a class="reference external" href="https://travis-ci.org/profile">https://travis-ci.org/profile</a> and click “Sync accounts”.</p>
 <div class="section" id="enabling-travis">
-<h4>Enabling travis<a class="headerlink" href="#enabling-travis" title="Permalink to this headline">¶</a></h4>
-<p>TravisCI should only be needed to build recipes on OS X if there is a strange failure on azure.</p>
+<h4>Enabling Travis<a class="headerlink" href="#enabling-travis" title="Permalink to this headline">¶</a></h4>
+<p>TravisCI should only be needed to build recipes on OS X if there is a strange failure on Azure.</p>
 <p>Enable a build by adding the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root
 of the feedstock.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
@@ -175,20 +175,20 @@ of the feedstock.</p>
 </div>
 </div>
 </div>
-<div class="section" id="circleci-linux-osx">
-<h3>CircleCI (Linux, OSX)<a class="headerlink" href="#circleci-linux-osx" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="circleci-linux-os-x">
+<h3>CircleCI (Linux, OS X)<a class="headerlink" href="#circleci-linux-os-x" title="Permalink to this headline">¶</a></h3>
 <p>Circle CI is a container-based CI service that conda-forge uses to build
-linux packages. It can optionally build OSX packages.</p>
-<p>Linux builds are identical to those on azure as both are built inside docker containers.</p>
-<div class="section" id="using-circle-for-both-linux-and-osx">
-<h4>Using Circle for both Linux and OSX<a class="headerlink" href="#using-circle-for-both-linux-and-osx" title="Permalink to this headline">¶</a></h4>
-<p>To use CircleCI for OSX, add the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root of the feedstock.</p>
+Linux packages. It can optionally build OS X packages.</p>
+<p>Linux builds are identical to those on Azure as both are built inside Docker containers.</p>
+<div class="section" id="using-circle-for-both-linux-and-os-x">
+<h4>Using Circle for both Linux and OS X<a class="headerlink" href="#using-circle-for-both-linux-and-os-x" title="Permalink to this headline">¶</a></h4>
+<p>To use CircleCI for OS X, add the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root of the feedstock.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
   <span class="nt">osx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">circle</span>
   <span class="nt">linux</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">circle</span>
 </pre></div>
 </div>
-<p>CircleCI for OSX should be used for OSX only when Travis-CI resources (50 minutes of build time per job) is not enough as CircleCI gives more resources (2 hours of build time per job).</p>
+<p>CircleCI for OS X should be used for OS X only when Travis-CI resources (50 minutes of build time per job) are not enough as CircleCI gives more resources (2 hours of build time per job).</p>
 <p>Note that you need to rerender the feedstock once this change has been made.</p>
 </div>
 <div class="section" id="enabling-circle-on-your-fork">
@@ -196,7 +196,7 @@ linux packages. It can optionally build OSX packages.</p>
 <p>If for some reason Circle CI is not triggering build from forks,
 Circle can be manually added for each fork. Circle calls this “Adding a Project” and
 <a class="reference external" href="https://circleci.com/docs/getting-started/#add-and-follow-more-projects">the official Circle’s documentation is available here</a>.
-This effectively amount to going to the <a class="reference external" href="https://circleci.com/add-projects">Add Projects</a>
+This effectively amounts to going to the <a class="reference external" href="https://circleci.com/add-projects">Add Projects</a>
 page, finding the fork that you wish to enable, and clicking the “Build Project” button.
 This is not normally needed.</p>
 <p>If CircleCI lacks permissions to checkout the source code, it will produce an error like follows:</p>
@@ -214,13 +214,13 @@ This is not normally needed.</p>
 <ul class="simple">
 <li><p>Log in and out of Circle CI.</p></li>
 <li><p>Revoke Circle CI’s access and then enable it again.</p></li>
-<li><p>In the  “Checkout SSH keys” section of your Circle CI project settings, press “add user key”.</p></li>
+<li><p>In the “Checkout SSH keys” section of your Circle CI project settings, press “add user key”.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="appveyor">
 <h3>Appveyor<a class="headerlink" href="#appveyor" title="Permalink to this headline">¶</a></h3>
-<p>Appveyor is used to build windows packages.  It is the only provider that can build recipes that require Visual Studio 2008.</p>
+<p>Appveyor is used to build Windows packages.  It is the only provider that can build recipes that require Visual Studio 2008.</p>
 </div>
 <div class="section" id="skipping-ci-builds">
 <h3>Skipping CI builds<a class="headerlink" href="#skipping-ci-builds" title="Permalink to this headline">¶</a></h3>
@@ -275,15 +275,15 @@ This is not normally needed.</p>
 <li class="toctree-l3"><a class="reference internal" href="#ci-build-services">CI build services</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#azure-pipelines">Azure Pipelines</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#restarting-builds">Restarting builds</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#using-azure-for-everything">Using azure for <em>everything</em></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#using-azure-for-everything">Using Azure for <em>everything</em></a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#travis-ci-os-x">Travis CI (OS X)</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#enabling-travis">Enabling travis</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#enabling-travis">Enabling Travis</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#circleci-linux-osx">CircleCI (Linux, OSX)</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#using-circle-for-both-linux-and-osx">Using Circle for both Linux and OSX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#circleci-linux-os-x">CircleCI (Linux, OS X)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#using-circle-for-both-linux-and-os-x">Using Circle for both Linux and OS X</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#enabling-circle-on-your-fork">Enabling Circle on your Fork</a></li>
 </ul>
 </li>
