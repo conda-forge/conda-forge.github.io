@@ -29,10 +29,10 @@ Smithy contains maintenance code for conda-forge, which is used by the ``conda s
 Web services
 ------------
 
-The Heroku app providing the conda-forge web services is living in `conda-forge/conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
+The Heroku app providing the conda-forge web services lives in `conda-forge/conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
 Please note that the code logic provided by the app is in the ``Smithy`` repository.
 
-Bugs or suggestions regarding the service functionality should therefore be opened in at ``conda-forge/conda-smithy``'s `bug tracker <https://github.com/conda-forge/conda-smithy/issues>`_.
+Bugs or suggestions regarding the service functionality should therefore be opened in ``conda-forge/conda-smithy``'s `bug tracker <https://github.com/conda-forge/conda-smithy/issues>`_.
 
 conda-forge pinning
 -------------------
@@ -41,7 +41,7 @@ Package-wide dependency pins are defined in `conda_build_config.yaml <https://gi
 
 For more information on conda-forge wide package pins, please refer to :ref:`globally_pinned_packages`.
 
-Please open :term:`PR` and/or issues there if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to :ref:`update_pins`.
+Please open a :term:`PR` and/or issues there if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to :ref:`update_pins`.
 
 Documentation
 -------------
@@ -103,7 +103,7 @@ Entering the above phrase in a PR of a feedstock will lint the PR again.
 ----------------------------------------
 
 Entering the above phrase in an issue of a feedstock will update the Circle-CI SSH deploy key. This will fix the
-``permission denied (public key)`` issue in Circle-CI checkout phase; it shouldn't be needed otherwise.
+``permission denied (public key)`` issue in Circle-CI's checkout phase; it shouldn't be needed otherwise.
 
 
 @conda-forge-admin, please update team
@@ -130,7 +130,7 @@ Restarting builds
 Presently Azure does not sync GitHub users. In order to restart a build you can restart it from the GitHub checks interface.
 If that doesn't work, a close/open will kick off a new build.
 
-Using azure for *everything*
+Using Azure for *everything*
 ............................
 
 Azure is the default provider for Linux and OS X.  To use Azure for everything add the following to ``conda-forge.yml`` in the root
@@ -153,7 +153,7 @@ Travis CI (OS X)
 Travis CI is used to build packages for OS X. After merging a staged-recipes pull request, it might be necessary to
 force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit `<https://travis-ci.org/profile>`_ and click "Sync accounts".
 
-Enabling travis
+Enabling Travis
 ...............
 
 TravisCI should only be needed to build recipes on OS X if there is a strange failure on Azure.
@@ -167,18 +167,18 @@ of the feedstock.
       osx: travis
 
 
-CircleCI (Linux, OSX)
----------------------
+CircleCI (Linux, OS X)
+----------------------
 Circle CI is a container-based CI service that conda-forge uses to build
-linux packages. It can optionally build OSX packages.
+Linux packages. It can optionally build OS X packages.
 
 Linux builds are identical to those on Azure as both are built inside Docker containers.
 
 
-Using Circle for both Linux and OSX
-...................................
+Using Circle for both Linux and OS X
+....................................
 
-To use CircleCI for OSX, add the following to ``conda-forge.yml`` in the root of the feedstock.
+To use CircleCI for OS X, add the following to ``conda-forge.yml`` in the root of the feedstock.
 
 .. code-block:: yaml
 
@@ -186,7 +186,7 @@ To use CircleCI for OSX, add the following to ``conda-forge.yml`` in the root of
       osx: circle
       linux: circle
 
-CircleCI for OSX should be used for OSX only when Travis-CI resources (50 minutes of build time per job) is not enough as CircleCI gives more resources (2 hours of build time per job).
+CircleCI for OS X should be used for OS X only when Travis-CI resources (50 minutes of build time per job) are not enough as CircleCI gives more resources (2 hours of build time per job).
 
 Note that you need to rerender the feedstock once this change has been made.
 
@@ -197,7 +197,7 @@ Enabling Circle on your Fork
 If for some reason Circle CI is not triggering build from forks,
 Circle can be manually added for each fork. Circle calls this "Adding a Project" and
 `the official Circle's documentation is available here <https://circleci.com/docs/getting-started/#add-and-follow-more-projects>`_.
-This effectively amount to going to the `Add Projects <https://circleci.com/add-projects>`_
+This effectively amounts to going to the `Add Projects <https://circleci.com/add-projects>`_
 page, finding the fork that you wish to enable, and clicking the "Build Project" button.
 This is not normally needed.
 
@@ -216,7 +216,7 @@ Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
 
 * Log in and out of Circle CI.
 * Revoke Circle CI's access and then enable it again.
-* In the  "Checkout SSH keys" section of your Circle CI project settings, press "add user key".
+* In the "Checkout SSH keys" section of your Circle CI project settings, press "add user key".
 
 Appveyor
 --------
