@@ -33,13 +33,15 @@ Your final recipe should have no comments (unless they're actually relevant to t
 
 In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that might help you with a successful build is provided in the following.
 
+.. _staging_steps:
+
 Step-by-step Instructions
 -------------------------
 
 #. Ensure your source code can be downloaded as a single file. Source code
    should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz)
    or tagged on GitHub, to ensure that it can be verified. (For further
-   detail, sees :ref:`tarballs_no_repos`).
+   detail, see :ref:`tarballs_no_repos`).
 #. Fork the `example recipes
    <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
    repository.
@@ -109,6 +111,50 @@ The maintainer's job is to:
   - Make sure the test requirements match those of the updated package.
 
 - Answer eventual questions about the package on the feedstock issue tracker.
+
+
+Adding multiple packages at once
+--------------------------------
+
+If you would like to add more than one related packages, they can be added to staged-recipes in a single pull request (in separate directories). If the packages are interdependent (i.e. one package being added lists one or more of the other packages being added as a requirement), conda-build will be able to locate the dependencies that are only present within staged-recipes. Using a single pull request cuts down on the work load for reviewers and allows you to quickly get packages set up without waiting for each package in a dependency chain to be approved and built.
+
+
+Adding additional packages in the future
+----------------------------------------
+
+If you would like to add additional packages in the future, you will need to reset your fork of staged-recipes before creating a new branch on your fork, adding the new package directory/recipe, and creating a pull request. This step ensures you have the most recent version of the tools and configuration files contained in the staged-recipes repository and makes the pull request much easier to review. The following steps will reset your fork of staged-recipes and should be executed from within a clone of your forked staged-recipes directory.
+
+#. Checkout your master branch
+
+  .. code-block:: none
+
+     git checkout master
+
+#. Define the conda-forge/staged-recipes repository as “upstream” (if you have not already done so).
+
+  .. code-block:: none
+
+     git remote add upstream
+
+#. Pull all of the upstream commits from the upstream master branch.
+
+  .. code-block:: none
+
+     git pull upstream master
+
+#. Remove all of the local commits to your staged-recipes fork (make sure that you do not have any recipes for packages that do not yet have feedstocks).
+
+  .. code-block:: none
+
+     git reset --hard upstream/master
+
+#. Push all of the changes to your fork on GitHub (make sure there are not any changes on GitHub that you need because they will be overwritten).
+
+  .. code-block:: none
+
+     git push origin master --force
+
+Once these steps are complete, you can continue with the steps in :ref:`staging_steps` to stage your new package recipe using your existing staged-recipes fork.
 
 
 .. _meta_yaml:
