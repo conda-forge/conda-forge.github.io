@@ -129,7 +129,7 @@ before starting the process over with the next recipe in the chain.
 .. note::
 
    When PRs with multiple interdependent recipes are merged,  
-   there will an error if a build finishes before its dependency is built. If
+   there may be an error if a build finishes before its dependency is built. If
    this occurs, you can trigger a new build by pushing an empty commit.
 
    .. code-block:: none
