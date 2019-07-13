@@ -8,7 +8,12 @@ Pinned dependencies
 Globally pinned packages
 ========================
 
-Globally pinned packages are defined in the `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_ file located in the ``conda-forge-pinning`` feedstock.
+Maintaining a large collection of packages with different requirements poses the danger of producing islands of packages with mutually exclusive dependencies.
+Especially widely used libraries with restricted version compatibilities increase the danger of fractioning the package space.
+By fixing crucial libraries to specific dependency version shared by all packages in conda-forge, we avoid fractioning of our packages in incompatible islands.
+The following paragraphs give a short introduction how this global version pinning is realized in conda-forge.
+
+The current versions of globally pinned packages are defined in the `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_ file located in the ``conda-forge-pinning`` feedstock.
 
 When a rerendering happens, conda-smithy will render the recipe using conda-build and output configuration files for each job and save them in a yaml file in ``.ci_support`` folder. For example, there's an output configuration file for each OS, each python version, etc.
 
