@@ -227,11 +227,8 @@ Appveyor is used to build Windows packages.  It is the only provider that can bu
 Skipping CI builds
 ------------------
 
-.. todo::
-
-  - add information regarding [ci skip] for all CIs.
-
-.. admonition:: Related links
-
-  - **abort builds with [skip ci]/etc** `(conda-forge.github.io/#629) <https://github.com/conda-forge/conda-forge.github.io/issues/629>`__
-  - **Skip CI requests** `(staged-recipes/#1148) <https://github.com/conda-forge/staged-recipes/issues/1148>`__
+Each CI provider allows for different keywords in commit titles:
+  - Travis CI: https://docs.travis-ci.com/user/customizing-the-build/#skipping-a-build
+  - AppVeyor: https://www.appveyor.com/docs/how-to/filtering-commits/#skip-directive-in-commit-message
+  - Circle CI: https://circleci.com/docs/2.0/skip-build/
+  - Azure: https://developercommunity.visualstudio.com/comments/503497/view.html
