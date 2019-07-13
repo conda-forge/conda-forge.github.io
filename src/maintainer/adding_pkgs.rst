@@ -119,7 +119,7 @@ Adding multiple packages at once
 If you would like to add more than one related packages, they can be added to 
 staged-recipes in a single pull request (in separate directories). If the 
 packages are interdependent (i.e. one package being added lists one or more of 
-the other packages being added as a requirement), conda-build will be able to 
+the other packages being added as a requirement), the build script will be able to 
 locate the dependencies that are only present within staged-recipes as long as 
 the builds finish in the dependencies order. Using a single pull request 
 allows you to quickly get packages set up without waiting for each package in a 
