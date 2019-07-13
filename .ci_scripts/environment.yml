@@ -1,0 +1,14 @@
+name: docs
+channels:
+  - conda-forge
+dependencies:
+  - python=3
+  - conda-smithy
+  - sphinx
+  - cloud_sptheme
+  - sphinxcontrib-fulltoc
+  - elm
+  - make
+  - nodejs
+  - xonsh
+  - recommonmark

@@ -1,8 +1,0 @@
-- conda-smithy
-- sphinx
-- cloud_sptheme
-- sphinxcontrib-fulltoc
-- elm
-- make
-- nodejs
-- xonsh
