@@ -121,7 +121,7 @@ staged-recipes in a single pull request (in separate directories). If the
 packages are interdependent (i.e. one package being added lists one or more of 
 the other packages being added as a requirement), conda-build will be able to 
 locate the dependencies that are only present within staged-recipes as long as 
-the builds finish in the dependencies order. Using a single pull request cuts 
+the builds finish in the dependencies order. Using a single pull request 
 allows you to quickly get packages set up without waiting for each package in a 
 dependency chain to be reviewed, built, and added to the conda-forge channel 
 before starting the process over with the next recipe in the chain.
@@ -129,41 +129,39 @@ before starting the process over with the next recipe in the chain.
 .. note::
 
    There will be a race condition if the packages are interdependent such that 
-   there will an error if a build finishes before its dependency is built.
+   there will an error if a build finishes before its dependency is built. If
+   this occurs, you can trigger a new build by pushing an empty commit.
+
+   .. code-block:: none
+
+      git commit --allow-empty
 
 
-Adding additional packages in the future
-----------------------------------------
+Synchronizing fork for future use
+---------------------------------
 
-If you would like to add additional packages in the future, you will need to reset your fork of staged-recipes before creating a new branch on your fork, adding the new package directory/recipe, and creating a pull request. This step ensures you have the most recent version of the tools and configuration files contained in the staged-recipes repository and makes the pull request much easier to review. The following steps will reset your fork of staged-recipes and should be executed from within a clone of your forked staged-recipes directory.
+If you would like to add additional packages in the future, you will need to 
+reset your fork of staged-recipes before creating a new branch on your fork, 
+adding the new package directory/recipe, and creating a pull request. This 
+step ensures you have the most recent version of the tools and configuration 
+files contained in the staged-recipes repository and makes the pull request 
+much easier to review. The following steps will reset your fork of 
+staged-recipes and should be executed from within a clone of your forked 
+staged-recipes directory.
 
-#. Checkout your master branch
-
-  .. code-block:: none
+#. Checkout your master branch::
 
      git checkout master
 
-#. Define the conda-forge/staged-recipes repository as “upstream” (if you have not already done so).
-
-  .. code-block:: none
+#. Define the conda-forge/staged-recipes repository as “upstream” (if you have not already done so).::
 
      git remote add upstream https://github.com/conda-forge/staged-recipes.git
 
-#. Pull all of the upstream commits from the upstream master branch.
-
-  .. code-block:: none
+#. Pull all of the upstream commits from the upstream master branch.::
 
      git pull --rebase upstream master
 
-#. Remove all of the local commits to your staged-recipes fork (make sure that you do not have any recipes for packages that do not yet have feedstocks).
-
-  .. code-block:: none
-
-     git reset --hard upstream/master
-
-#. Push all of the changes to your fork on GitHub (make sure there are not any changes on GitHub that you need because they will be overwritten).
-
-  .. code-block:: none
+#. Push all of the changes to your fork on GitHub (make sure there are not any changes on GitHub that you need because they will be overwritten).::
 
      git push origin master --force
 
