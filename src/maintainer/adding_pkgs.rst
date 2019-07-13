@@ -134,7 +134,7 @@ before starting the process over with the next recipe in the chain.
 
    .. code-block:: none
 
-      git commit --allow-empty
+      git commit --amend --no-edit && git push --force
 
 
 Synchronizing fork for future use
