@@ -116,7 +116,7 @@ The maintainer's job is to:
 Adding multiple packages at once
 --------------------------------
 
-If you would like to add more than one related packages, they can be added to staged-recipes in a single pull request (in separate directories). If the packages are interdependent (i.e. one package being added lists one or more of the other packages being added as a requirement), conda-build will be able to locate the dependencies that are only present within staged-recipes. Using a single pull request cuts down on the work load for reviewers and allows you to quickly get packages set up without waiting for each package in a dependency chain to be approved and built.
+If you would like to add more than one related packages, they can be added to staged-recipes in a single pull request (in separate directories). If the packages are interdependent (i.e. one package being added lists one or more of the other packages being added as a requirement), conda-build will be able to locate the dependencies that are only present within staged-recipes. Using a single pull request cuts down on the work load for reviewers and allows you to quickly get packages set up without waiting for each package in a dependency chain to be reviewed, built, and added to the conda-forge channel before starting the process over with the next recipe in the chain.
 
 
 Adding additional packages in the future
@@ -134,13 +134,13 @@ If you would like to add additional packages in the future, you will need to res
 
   .. code-block:: none
 
-     git remote add upstream
+     git remote add upstream https://github.com/conda-forge/staged-recipes.git
 
 #. Pull all of the upstream commits from the upstream master branch.
 
   .. code-block:: none
 
-     git pull upstream master
+     git pull --rebase upstream master
 
 #. Remove all of the local commits to your staged-recipes fork (make sure that you do not have any recipes for packages that do not yet have feedstocks).
 
