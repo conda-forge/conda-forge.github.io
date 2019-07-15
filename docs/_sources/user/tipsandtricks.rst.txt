@@ -24,7 +24,7 @@ is not present or the package is missing altogether.
 Once you can confirm by issuing the command ``conda list`` and searching for the package in question.
 
 Why does that happen?
------------------
+---------------------
 
 The ``conda-forge`` and ``defaults`` are not 100% compatible.
 In the example above it is known that ``defaults`` uses ``icu 54.*`` while ``conda-forge`` relies on ``icu 56.*``,
