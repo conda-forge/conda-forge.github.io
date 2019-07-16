@@ -8,3 +8,6 @@ elm-stuff
 
 # OS-X crap
 .DS_Store
+
+# Ignore dymaic stuff
+src/related/metachannel.md

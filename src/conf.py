@@ -17,6 +17,13 @@ import os
 
 import cloud_sptheme as csp
 
+import requests
+
+import recommonmark
+from recommonmark.parser import CommonMarkParser
+from recommonmark.transform import AutoStructify
+
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -40,8 +47,8 @@ templates_path = ['_templates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_parsers = {'.md': CommonMarkParser}
+source_suffix = ['.rst', '.md']
 
 # The encoding of source files.
 #source_encoding = 'utf-8-sig'
@@ -300,3 +307,11 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+#
+# Get latest version of metachannel
+#
+BASEDIR = os.path.abspath(os.path.dirname(__file__))
+resp = requests.get('https://raw.githubusercontent.com/regro/conda-metachannel/master/README.md')
+with open(os.path.join(BASEDIR, 'related', 'metachannel.md'), 'w') as f:
+    f.write(resp.text)
