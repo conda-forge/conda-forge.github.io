@@ -31,7 +31,7 @@ install:
 
 script:
     - echo "Updating docs";
-    - bash ./ci_scripts/update_docs;
+    - bash ./.ci_scripts/update_docs;
 
 # We store the files that are downloaded from continuum.io, but not the environments that are created.
 cache:
