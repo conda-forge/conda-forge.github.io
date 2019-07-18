@@ -1,3 +1,6 @@
+# MEETING TEMPLATE
+
+```none
 # YYYY-MM-DD conda-forge core meeting 
 
 ****
@@ -23,3 +26,4 @@ Make sure each action item is assigned to someone or it will likely not get done
 
 [ ]  List resultant action items here
 
+```
