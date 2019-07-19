@@ -13,10 +13,11 @@ if [ -n "$GH_TOKEN" ]; then
     # Generate html requires a GitHub token in order to query the available feedstocks.
     conda install --yes --quiet -c conda-forge --file ./ci_scripts/requirements-ci.txt
     conda activate conda-forge-docs
-    npm install uglify-js --global
 
     # rebuild elm
-    ./elm-compile.xsh
+    # uncomment to restore search
+    # npm install uglify-js --global
+    # ./elm-compile.xsh
 
     # build docs into docs/; preserve old README file
     mv docs/README docs-README
