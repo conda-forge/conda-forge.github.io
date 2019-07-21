@@ -11,7 +11,7 @@ if [ -n "$GH_TOKEN" ]; then
     # TODO What is this magic branch `new_site_content`?
     git checkout -b new_site_content
     # Generate html requires a GitHub token in order to query the available feedstocks.
-    conda install --yes --quiet -c conda-forge --file ./.ci_scripts/requirements-ci.txt
+    conda env create -f ./.ci_scripts/environment.yml
     conda activate conda-forge-docs
 
     # rebuild elm
