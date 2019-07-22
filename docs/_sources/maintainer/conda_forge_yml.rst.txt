@@ -36,7 +36,7 @@ Top-level fields
 
 appveyor
 --------
-The top-level ``appveyor`` key speficies configurations for the Appveyor
+The top-level ``appveyor`` key specifies configurations for the Appveyor
 CI service.  This is usually **read-only** and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as need.  It has a single
 ``secure`` field which contains the binstar token.  For example:
@@ -83,7 +83,7 @@ has been built.  The ``channels`` variable is a mapping with
 
 circle
 --------
-The top-level ``circle`` key speficies configurations for the Circle
+The top-level ``circle`` key specifies configurations for the Circle
 CI service.  This is usually **read-only** and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as need.  It has a single
 ``secure`` field which contains the binstar token.  For example:
@@ -125,7 +125,7 @@ defaults are as follows:
     github:
       # name of the github organization
       user_or_org: conda-forge
-      # repository name, usually filled in authomatically
+      # repository name, usually filled in automatically
       repo_name: ""
       # branch name to execute on
       branch_name: master
@@ -234,6 +234,7 @@ The following CI services are available:
 * ``travis``
 * ``appveyor``
 * ``None`` or ``False`` to disable a platform.
+* ``default`` to enable a platform and choose an appropriate CI
 
 For example, switching everything to build on Azure pipelines:
 
@@ -243,6 +244,26 @@ For example, switching everything to build on Azure pipelines:
       linux: azure
       osx: azure
       win: azure
+
+Currently, x86_64 are enabled, but other arches are disabled by default. i.e. an empty
+provider entry is equivalent to the following:
+
+.. code-block:: yaml
+
+    provider:
+      linux: azure
+      osx: azure
+      win: appveyor
+      linux_ppc64le: None
+      linux_aarch64: None
+
+To enable ``linux_ppc64le`` and ``linux_aarch64`` and the following:
+
+.. code-block:: yaml
+
+    provider:
+      linux_ppc64le: default
+      linux_aarch64: default
 
 recipe_dir
 ----------
@@ -259,7 +280,7 @@ You shouldn't need it.
 
 travis
 ------
-The top-level ``travis`` key speficies configurations for the Travis
+The top-level ``travis`` key specifies configurations for the Travis
 CI service.  This is usually **read-only** and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as need.  It has a single
 ``secure`` field which contains the binstar token.  For example:

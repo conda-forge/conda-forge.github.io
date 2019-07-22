@@ -1,0 +1,15 @@
+name: conda-forge-docs
+channels:
+  - conda-forge
+dependencies:
+  - python=3
+  - conda-smithy
+  - sphinx
+  - cloud_sptheme
+  - sphinxcontrib-fulltoc
+  - make
+  - xonsh
+  - recommonmark
+  # uncomment to restore search
+  # - elm
+  # - nodejs

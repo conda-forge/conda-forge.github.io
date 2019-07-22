@@ -6199,7 +6199,7 @@ var author$project$Main$viewFooter = A2(
 			elm$html$Html$a,
 			_List_fromArray(
 				[
-					elm$html$Html$Attributes$href('https://www.flipcause.com/secure/cause_pdetails/NDA0OTk=')
+					elm$html$Html$Attributes$href('https://numfocus.salsalabs.org/donate-to-conda-forge/index.html')
 				]),
 			_List_fromArray(
 				[

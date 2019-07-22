@@ -14,3 +14,4 @@ Table of Contents
    maintainer/00_intro
    orga/00_intro
    misc/00_intro
+   minutes/00_intro

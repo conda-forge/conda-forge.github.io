@@ -1,17 +1,15 @@
 
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>Knowledge base &#8212; conda-forge 2019.01 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
@@ -22,8 +20,8 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Configuring conda-forge.yml" href="conda_forge_yml.html" />
-    <link rel="prev" title="Pinned dependencies" href="pinning_deps.html" /> 
+    <link rel="next" title="FAQ" href="maintainer_faq.html" />
+    <link rel="prev" title="Configuring conda-forge.yml" href="conda_forge_yml.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -35,10 +33,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
+          <a href="maintainer_faq.html" title="FAQ"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="pinning_deps.html" title="Pinned dependencies"
+          <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -74,16 +72,16 @@ particular versions of these tools — this is to maintain compatibility between
 compiled libraries used in Python, <a class="reference external" href="https://wiki.python.org/moin/WindowsCompilers">as described on this Python wiki page</a>. The current relevant
 versions are:</p>
 <ul class="simple">
-<li>For Python 2.7: Visual C++ 9.0</li>
-<li>For Python 3.5–3.7: Visual C++ 14.0</li>
+<li><p>For Python 2.7: Visual C++ 9.0</p></li>
+<li><p>For Python 3.5–3.7: Visual C++ 14.0</p></li>
 </ul>
 <p>While you can obtain these tools by installing the right version of the full
 <a class="reference external" href="https://visualstudio.microsoft.com/">Visual Studio</a> development
 environment, you can save a lot of time and bandwidth by installing standalone
 “build tools” packages. The links are:</p>
 <ul class="simple">
-<li>For Python 2.7: <a class="reference external" href="https://www.microsoft.com/download/details.aspx?id=44266">Microsoft Visual C++ Compiler for Python 2.7</a>.</li>
-<li>For Python 3.5–3.7: <a class="reference external" href="https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017">Microsoft Build Tools for Visual Studio 2017</a>.</li>
+<li><p>For Python 2.7: <a class="reference external" href="https://www.microsoft.com/download/details.aspx?id=44266">Microsoft Visual C++ Compiler for Python 2.7</a>.</p></li>
+<li><p>For Python 3.5–3.7: <a class="reference external" href="https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017">Microsoft Build Tools for Visual Studio 2017</a>.</p></li>
 </ul>
 <p>Please see <a class="reference external" href="https://wiki.python.org/moin/WindowsCompilers">the Python wiki page on Windows compilers</a> if you need more
 information.</p>
@@ -119,8 +117,8 @@ nmake install
 </div>
 <p>The following feedstocks are examples of this build structure deployed:</p>
 <ul class="simple">
-<li><a class="reference external" href="https://github.com/conda-forge/libpng-feedstock/blob/master/recipe/bld.bat">libpng</a></li>
-<li><a class="reference external" href="https://github.com/conda-forge/pugixml-feedstock/blob/master/recipe/bld.bat">pugixml</a></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/libpng-feedstock/blob/master/recipe/bld.bat">libpng</a></p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/pugixml-feedstock/blob/master/recipe/bld.bat">pugixml</a></p></li>
 </ul>
 </div>
 <div class="section" id="building-for-different-vc-versions">
@@ -151,9 +149,9 @@ nmake install
 <p>There are currently three supported compilers:</p>
 <blockquote>
 <div><ul class="simple">
-<li>c</li>
-<li>cxx</li>
-<li>fortran</li>
+<li><p>c</p></li>
+<li><p>cxx</p></li>
+<li><p>fortran</p></li>
 </ul>
 </div></blockquote>
 <p>A package that needs all three compilers would define</p>
@@ -165,15 +163,15 @@ nmake install
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Appropriate compiler runtime packages will be automatically added to the package’s runtime requirements and therefore there’s no need to specify <code class="docutils literal notranslate"><span class="pre">libgcc</span></code> or <code class="docutils literal notranslate"><span class="pre">libgfortran</span></code>.
+<p class="admonition-title">Note</p>
+<p>Appropriate compiler runtime packages will be automatically added to the package’s runtime requirements and therefore there’s no need to specify <code class="docutils literal notranslate"><span class="pre">libgcc</span></code> or <code class="docutils literal notranslate"><span class="pre">libgfortran</span></code>.
 There is additional information about how conda-build 3 treats compilers in the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/source/compiler-tools.html">conda docs</a>.</p>
 </div>
 </div>
 <div class="section" id="core-dependency-tree-packages-cdt">
 <span id="cdt-packages"></span><h3>Core dependency tree packages (CDT)<a class="headerlink" href="#core-dependency-tree-packages-cdt" title="Permalink to this headline">¶</a></h3>
-<p>Dependencies outside of the conda-forge channel should be avoideded (see <a class="reference internal" href="adding_pkgs.html#no-external-deps"><span class="std std-ref">Avoid external dependencies</span></a>).
-However there are very few exceptions: some dependencies are so close to the system that they are not packaged with conda-forge.
+<p>Dependencies outside of the conda-forge channel should be avoided (see <a class="reference internal" href="adding_pkgs.html#no-external-deps"><span class="std std-ref">Avoid external dependencies</span></a>).
+However, there are very few exceptions: some dependencies are so close to the system that they are not packaged with conda-forge.
 These dependencies have to be satisfied with <em>Core Dependency Tree</em> packages.</p>
 <p>In conda-forge this currently affects only packages that link against libGL.</p>
 <div class="section" id="libgl">
@@ -190,7 +188,8 @@ These dependencies have to be satisfied with <em>Core Dependency Tree</em> packa
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">xorg-libxfixes</span>  <span class="c1"># [linux]</span>
 </pre></div>
 </div>
-<p>If you need a fully functional binary in the test phase, you have to also provide the shared libraries via <code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code> (see <a class="reference internal" href="#yum-deps"><span class="std std-ref">yum_requirements.txt</span></a>).</p>
+<p>If you need a fully functional binary in the test phase, you have to also provide the shared libraries via <code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code> (see <a class="reference internal" href="#yum-deps"><span class="std std-ref">yum_requirements.txt</span></a>).
+You will need to re-render the feedstock after making these changes.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mesa</span><span class="o">-</span><span class="n">libGL</span>
 <span class="n">mesa</span><span class="o">-</span><span class="n">dri</span><span class="o">-</span><span class="n">drivers</span>
 <span class="n">libselinux</span>
@@ -202,13 +201,9 @@ These dependencies have to be satisfied with <em>Core Dependency Tree</em> packa
 </div>
 <div class="section" id="building-against-numpy">
 <span id="linking-numpy"></span><h3>Building Against NumPy<a class="headerlink" href="#building-against-numpy" title="Permalink to this headline">¶</a></h3>
-<p>Packages that link against NumPy need a special treatment in the dependency section.
-Finding <code class="docutils literal notranslate"><span class="pre">numpy.get_include()</span></code> in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> or <code class="docutils literal notranslate"><span class="pre">cimport</span></code> statements in <code class="docutils literal notranslate"><span class="pre">.pyx</span></code> or <code class="docutils literal notranslate"><span class="pre">.pyd</span></code> fil
-es are a telltale sign that the package links against NumPy.</p>
-<dl class="docutils">
-<dt>In the case of linking, you need to use the <code class="docutils literal notranslate"><span class="pre">pin_compatible</span></code> function to ensure having a compatible</dt>
-<dd>numpy version at run time:</dd>
-</dl>
+<p>Packages that link against NumPy need special treatment in the dependency section.
+Finding <code class="docutils literal notranslate"><span class="pre">numpy.get_include()</span></code> in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> or <code class="docutils literal notranslate"><span class="pre">cimport</span></code> statements in <code class="docutils literal notranslate"><span class="pre">.pyx</span></code> or <code class="docutils literal notranslate"><span class="pre">.pyd</span></code> files are a telltale sign that the package links against NumPy.</p>
+<p>In the case of linking, you need to use the <code class="docutils literal notranslate"><span class="pre">pin_compatible</span></code> function to ensure having a compatible numpy version at run time:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy</span>
 <span class="nt">run</span><span class="p">:</span>
@@ -217,15 +212,13 @@ es are a telltale sign that the package links against NumPy.</p>
 </div>
 <p>At the time of writing, above is equivalent to the following,</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.9.3</span>              <span class="c1"># [unix]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.11.3</span>             <span class="c1"># [win]</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.14.6</span>
 <span class="nt">run</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy &gt;=1.9.3,&lt;2.0.a0</span>    <span class="c1"># [unix]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy &gt;=1.11.3,&lt;2.0.a0</span>   <span class="c1"># [win]</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy &gt;=1.14.6,&lt;2.0.a0</span>
 </pre></div>
 </div>
 <div class="admonition-notes admonition">
-<p class="first admonition-title">Notes</p>
+<p class="admonition-title">Notes</p>
 <p>1. You still need to respect minimum supported version of <code class="docutils literal notranslate"><span class="pre">numpy</span></code> for the package!
 That means you cannot use <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.9</span></code> if the project requires at least <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.12</span></code>,
 adjust the minimum version accordingly!</p>
@@ -235,24 +228,24 @@ adjust the minimum version accordingly!</p>
   <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_compatible(&#39;numpy&#39;)</span> <span class="p p-Indicator">}}</span>
 </pre></div>
 </div>
-<p class="last">2. if your package supports <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.7</span></code>, and you are brave enough :-),
+<p>2. if your package supports <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.7</span></code>, and you are brave enough :-),
 there are <code class="docutils literal notranslate"><span class="pre">numpy</span></code> packages for <code class="docutils literal notranslate"><span class="pre">1.7</span></code> available for Python 2.7 in the channel.</p>
 </div>
 </div>
 <div class="section" id="message-passing-interface-mpi">
 <h3>Message passing interface (MPI)<a class="headerlink" href="#message-passing-interface-mpi" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This section originates from Min’s notes: <a class="reference external" href="https://hackmd.io/ry4uI0thTs2q_b4mAQd_qg">https://hackmd.io/ry4uI0thTs2q_b4mAQd_qg</a></p>
+<p class="admonition-title">Note</p>
+<p>This section originates from Min’s notes: <a class="reference external" href="https://hackmd.io/ry4uI0thTs2q_b4mAQd_qg">https://hackmd.io/ry4uI0thTs2q_b4mAQd_qg</a></p>
 </div>
 <div class="section" id="mpi-variants-in-conda-forge">
 <h4>MPI Variants in conda-forge<a class="headerlink" href="#mpi-variants-in-conda-forge" title="Permalink to this headline">¶</a></h4>
 <p>How are MPI variants best handled in conda-forge?</p>
 <p>There are a few broad cases:</p>
 <ul class="simple">
-<li>package requires a specific MPI provider (easy!)</li>
-<li>package works with any MPI provider (e.g. mpich, openmpi)</li>
-<li>package works with/without MPI</li>
+<li><p>package requires a specific MPI provider (easy!)</p></li>
+<li><p>the package works with any MPI provider (e.g. mpich, openmpi)</p></li>
+<li><p>the package works with/without MPI</p></li>
 </ul>
 <div class="section" id="building-mpi-variants">
 <h5>Building MPI variants<a class="headerlink" href="#building-mpi-variants" title="Permalink to this headline">¶</a></h5>
@@ -324,18 +317,18 @@ To do this, add <cite>nompi</cite> to the mpi matrix:</p>
 </pre></div>
 </div>
 <p>This doesn’t extend to <code class="docutils literal notranslate"><span class="pre">nompi</span></code>, because there is no <code class="docutils literal notranslate"><span class="pre">nompi</span></code> variant of the mpi metapackage. And there probably shouldn’t be, because some packages built with mpi doesn’t preclude other packages in the env that <em>may</em> have an mpi variant from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no parallel hdf5 yet. This works fine, though some features may not be available).</p>
-<p>Typically, if there is a preference it will be packages with a nompi variant, where the serial build is preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.</p>
+<p>Typically, if there is a preference it will be packaged with a nompi variant, where the serial build is preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.</p>
 <div class="admonition-outdated admonition">
-<p class="first admonition-title">Outdated</p>
+<p class="admonition-title">Outdated</p>
 <p>To de-prioritize a build in the solver, it can be given a special <code class="docutils literal notranslate"><span class="pre">track_features</span></code> field:</p>
 <ul class="simple">
-<li>All builds <em>other than</em> the priority build should have a <code class="docutils literal notranslate"><span class="pre">track_features</span></code> field</li>
-<li>Build strings can be used to allow downstream packages to make explicit dependencies.</li>
-<li>No package should actually <em>have</em> the tracked feature.</li>
+<li><p>All builds <em>other than</em> the priority build should have a <code class="docutils literal notranslate"><span class="pre">track_features</span></code> field</p></li>
+<li><p>Build strings can be used to allow downstream packages to make explicit dependencies.</p></li>
+<li><p>No package should actually <em>have</em> the tracked feature.</p></li>
 </ul>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>update</strong>: track_features deprioritization has too high priority in the solver, preventing a package from adopting a variant of a dependency after some builds have already been made. Instead, use a build number offset to apply the preference at a more appropriate level.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>update</strong>: track_features deprioritization has too high priority in the solver, preventing a package from adopting a variant of a dependency after some builds have already been made. Instead, use a build number offset to apply the preference at a more appropriate level.</p>
 </div>
 </div>
 <p>Here is an example build section:</p>
@@ -360,27 +353,27 @@ To do this, add <cite>nompi</cite> to the mpi matrix:</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">PKG_HASH</span> <span class="pre">}}</span></code> avoids build string collisions on <em>most</em> variants,
 but not on packages that are excluded from the default build string,
 e.g. Python itself. If the package is built for multiple Python versions, use:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">string</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">mpi_prefix</span><span class="nv"> </span><span class="s">}}_py{{</span><span class="nv"> </span><span class="s">py</span><span class="nv"> </span><span class="s">}}h{{</span><span class="nv"> </span><span class="s">PKG_HASH</span><span class="nv"> </span><span class="s">}}_{{</span><span class="nv"> </span><span class="s">build</span><span class="nv"> </span><span class="s">}}&quot;</span>
 </pre></div>
 </div>
-<p class="last">as seen in <a class="reference external" href="https://github.com/conda-forge/h5py-feedstock/pull/49/commits/b08ee9307d16864e775f1a7f9dd10f25c83b5974">mpi4py</a></p>
+<p>as seen in <a class="reference external" href="https://github.com/conda-forge/h5py-feedstock/pull/49/commits/b08ee9307d16864e775f1a7f9dd10f25c83b5974">mpi4py</a></p>
 </div>
 <p>This build section creates the following packages:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">pkg-x.y.z-mpi_mpich_h12345_0</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">pkg-x.y.z-mpi_openmpi_h23456_0</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">pkg-x.y.z-nompi_h34567_100</span></code></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pkg-x.y.z-mpi_mpich_h12345_0</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pkg-x.y.z-mpi_openmpi_h23456_0</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pkg-x.y.z-nompi_h34567_100</span></code></p></li>
 </ul>
 <p>Which has the following consequences:</p>
 <ul class="simple">
-<li>The <code class="docutils literal notranslate"><span class="pre">nompi</span></code> variant is preferred, and will be installed by default unless an mpi variant is explicitly requested.</li>
-<li>mpi variants can be explicitly requested with <code class="docutils literal notranslate"><span class="pre">pkg=*=mpi_{{</span> <span class="pre">mpi</span> <span class="pre">}}_*</span></code></li>
-<li>any mpi variant, ignoring provider, can be requested with <code class="docutils literal notranslate"><span class="pre">pkg=*=mpi_*</span></code></li>
-<li>nompi variant can be explicitly requested with <code class="docutils literal notranslate"><span class="pre">pkg=*=nompi_*</span></code></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">nompi</span></code> variant is preferred, and will be installed by default unless an mpi variant is explicitly requested.</p></li>
+<li><p>mpi variants can be explicitly requested with <code class="docutils literal notranslate"><span class="pre">pkg=*=mpi_{{</span> <span class="pre">mpi</span> <span class="pre">}}_*</span></code></p></li>
+<li><p>any mpi variant, ignoring provider, can be requested with <code class="docutils literal notranslate"><span class="pre">pkg=*=mpi_*</span></code></p></li>
+<li><p>nompi variant can be explicitly requested with <code class="docutils literal notranslate"><span class="pre">pkg=*=nompi_*</span></code></p></li>
 </ul>
 <p>If building with this library creates a runtime dependency on the variant, the build string pinning can be added to <code class="docutils literal notranslate"><span class="pre">run_exports</span></code>.</p>
 <p>For example, if building against the nompi variant will work with any installed version, but building with a given mpi provider requires running with that mpi:</p>
@@ -398,10 +391,10 @@ e.g. Python itself. If the package is built for multiple Python versions, use:</
 <h6>Complete example<a class="headerlink" href="#complete-example" title="Permalink to this headline">¶</a></h6>
 <p>Combining all of the above, here is a complete recipe, with:</p>
 <ul class="simple">
-<li>nompi, mpich, openmpi variants</li>
-<li>run-exports to apply mpi choice made at build time to runtime where nompi builds can be run with mpi, but not vice versa.</li>
-<li>nompi variant is preferred by default</li>
-<li>only build nompi on Windows</li>
+<li><p>nompi, mpich, openmpi variants</p></li>
+<li><p>run-exports to apply mpi choice made at build time to runtime where nompi builds can be run with mpi, but not vice versa.</p></li>
+<li><p>nompi variant is preferred by default</p></li>
+<li><p>only build nompi on Windows</p></li>
 </ul>
 <p>This matches what is done in <a class="reference external" href="https://github.com/conda-forge/hdf5-feedstock/pull/90">hdf5</a>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># conda_build_config.yaml</span>
@@ -489,9 +482,24 @@ e.g. Python itself. If the package is built for multiple Python versions, use:</
 </div>
 <div class="section" id="openmp-on-macos">
 <h3>OpenMP on macOS<a class="headerlink" href="#openmp-on-macos" title="Permalink to this headline">¶</a></h3>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">Get help from &#64;beckermr</p>
+<p>You can enable OpenMP on macOS by adding the <code class="docutils literal notranslate"><span class="pre">llvm-openmp</span></code> package to the <code class="docutils literal notranslate"><span class="pre">build</span></code>, <code class="docutils literal notranslate"><span class="pre">host</span></code>, and <code class="docutils literal notranslate"><span class="pre">run</span></code> sections of the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>. You will also want to add a selector for macOS like this:</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># meta.yaml</span>
+<span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">llvm-openmp</span>  <span class="c1"># [osx]</span>
+  <span class="nt">host</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">llvm-openmp</span>  <span class="c1"># [osx]</span>
+  <span class="nt">run</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">llvm-openmp</span>  <span class="c1"># [osx]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition-related-links admonition">
+<p class="admonition-title">Related links</p>
+<ul class="simple">
+<li><p><strong>openmp package conflict</strong> (<a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues/727">conda-forge.github.io/#727</a>)</p></li>
+</ul>
 </div>
 </div>
 <div class="section" id="yum-requirements-txt">
@@ -500,99 +508,95 @@ e.g. Python itself. If the package is built for multiple Python versions, use:</
 <p>There are only very few situations where dependencies installed by yum are acceptable. These cases include</p>
 <blockquote>
 <div><ul class="simple">
-<li>satisfying the requirements of <a class="reference internal" href="../misc/00_intro.html#term-cdt"><span class="xref std std-term">CDT</span></a> packages during test phase</li>
-<li>installing packages that are only required for testing</li>
+<li><p>satisfying the requirements of <a class="reference internal" href="../misc/00_intro.html#term-cdt"><span class="xref std std-term">CDT</span></a> packages during test phase</p></li>
+<li><p>installing packages that are only required for testing</p></li>
 </ul>
 </div></blockquote>
+<p>After changing <code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code>, <a class="reference internal" href="updating_pkgs.html#dev-update-rerender"><span class="std std-ref">rerender</span></a> to update       the configuration.</p>
 </div>
 </div>
 <div class="section" id="special-packages">
 <h2>Special packages<a class="headerlink" href="#special-packages" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="blas">
-<h3>BLAS<a class="headerlink" href="#blas" title="Permalink to this headline">¶</a></h3>
-<div class="admonition-todo admonition" id="index-1">
-<p class="first admonition-title">Todo</p>
-<p class="last">The information regarding the blas package may now be outdated and needs checking.</p>
+<span id="knowledge-blas"></span><h3>BLAS<a class="headerlink" href="#blas" title="Permalink to this headline">¶</a></h3>
+<p>If a package needs one of BLAS, CBLAS, LAPACK, LAPACKE, use the following in the
+host of the recipe,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">host</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libblas</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libcblas</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">liblapack</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">liblapacke</span>
+</pre></div>
 </div>
-<div class="section" id="blas-metapackage">
-<h4>BLAS metapackage<a class="headerlink" href="#blas-metapackage" title="Permalink to this headline">¶</a></h4>
-<blockquote>
-<div><ul class="simple">
-<li>Version will have two values X.Y<ul>
-<li>X represents changes to the metapackage.</li>
-<li>Y represents priority of BLAS (if we change priorities BLASes X
-must be bumped, if we want to prioritize something new over
-OpenBLAS we do not need to change X)<ul>
-<li>1 is OpenBLAS</li>
-<li>0 is None (no BLAS whatsoever)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>needs to have version stay the same across all variants.</li>
-<li>build number cannot be touched (it won’t be in the string anyways)</li>
-<li>no pinning of BLAS inside the metapackages (dependencies can pin
-this)</li>
-<li>to preserve a BLAS in an environment it is recommend to add
-<code class="docutils literal notranslate"><span class="pre">pinned</span></code> to <code class="docutils literal notranslate"><span class="pre">conda-meta</span></code> and specify down to the build string
-what is the expected BLAS</li>
-<li>To install a specific variant, <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">blas=1.0=none</span></code> /
-<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">blas=1.0=openblas</span></code>. It is hoped the syntax will be
-improved in conda.<ul>
-<li>In the future, with some fixes to <code class="docutils literal notranslate"><span class="pre">conda</span></code> will allow for syntax
-like <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">blas=*=openblas</span></code>. We should keep an eye on
-this. (maybe even <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">blas:openblas</span></code>)</li>
-</ul>
-</li>
-<li>There will be two variants initially:<ul>
-<li>openblas</li>
-<li>noblas - no BLAS optimisations (e.g. for reasons of smaller
-installations)</li>
-</ul>
-</li>
-</ul>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You should specify only the libraries the package needs. (i.e. if the package
+doesn’t need LAPACK, remove liblapack and liblapacke)</p>
+<p>At recipe build time, above requirements would download the NETLIB’s reference
+implementations and build your recipe against those.
+At runtime by default the following packages will be used.</p>
 </div>
-<div class="section" id="numpy-package">
-<h4>NumPy package<a class="headerlink" href="#numpy-package" title="Permalink to this headline">¶</a></h4>
-<blockquote>
-<div><ul class="simple">
-<li>“version + build number” must always be greater than or equal to that
-in defaults. If not, defaults “numpy” will be chosen, complete with
-mkl<ul>
-<li>to make this simple we can pick a high build number so this is
-prioritized 100 and then bump from there<ul>
-<li>Should make the build number ranges tied to BLAS X version above.</li>
-<li>Build number should start at <code class="docutils literal notranslate"><span class="pre">(X+1)*100</span></code>.<ul>
-<li>Means OpenBLAS starts at 200.</li>
-<li>No BLAS starts at 100.</li>
-</ul>
-</li>
-<li>Unfortunately the 1.11.0 release breaks this rule so we will have
-No BLAS at 101.</li>
-</ul>
-</li>
-<li>if defaults gains a newer version and build without conda-forge
-updating, users will be prompted to upgrade to the defaults numpy.
-Even if a user does this, as soon as an equivalent build is
-available on conda-forge, they will be prompted to update to their
-previous variant</li>
-</ul>
-</li>
-<li>will track the blas_{{ variant }} feature enabled by the BLAS
-metapackage</li>
-<li>will pin the specific blas package versions (e.g. openblas .)</li>
-</ul>
-</div></blockquote>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openblas</span>   <span class="c1"># [not win]</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mkl</span>        <span class="c1"># [win]</span>
+</pre></div>
 </div>
-<div class="section" id="scipy-scikit-learn-etc">
-<h4>SciPy, scikit-learn, etc.<a class="headerlink" href="#scipy-scikit-learn-etc" title="Permalink to this headline">¶</a></h4>
-<blockquote>
-<div><ul class="simple">
-<li>Same thing as NumPy</li>
-<li>Add numpy dependency as if linking occurs</li>
-</ul>
-</div></blockquote>
+<p>If a package needs a specific implementation’s internal API for more control you can have,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">host</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">blas_impl</span> <span class="p p-Indicator">}}</span>
+  <span class="nt">run</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libblas * *{{ blas_impl }}</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">blas_impl</span> <span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
+<p>This would give you a matrix builds for different blas implementations. If you only want to support
+a specific blas implementation,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">host</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openblas</span>
+  <span class="nt">run</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libblas * *openblas</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openblas</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">blas_*</span></code> features should not be used anymore.</p>
+</div>
+<div class="section" id="switching-blas-implementation">
+<h4>Switching BLAS implementation<a class="headerlink" href="#switching-blas-implementation" title="Permalink to this headline">¶</a></h4>
+<p>You can switch your BLAS implementation by doing,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install <span class="s2">&quot;libblas=*=*mkl&quot;</span>
+conda install <span class="s2">&quot;libblas=*=*openblas&quot;</span>
+conda install <span class="s2">&quot;libblas=*=*blis&quot;</span>
+conda install <span class="s2">&quot;libblas=*=*netlib&quot;</span>
+</pre></div>
+</div>
+<p>This would change the BLAS implementation without changing the conda packages depending
+on BLAS.</p>
+<p>The following legacy commands are also supported as well.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install <span class="s2">&quot;blas=*=mkl&quot;</span>
+conda install <span class="s2">&quot;blas=*=openblas&quot;</span>
+conda install <span class="s2">&quot;blas=*=blis&quot;</span>
+conda install <span class="s2">&quot;blas=*=netlib&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-it-works">
+<h4>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h4>
+<p>At recipe build time, the netlib packages are used. This means that the downstream package will
+link to <code class="docutils literal notranslate"><span class="pre">libblas.so.3</span></code> in the <code class="docutils literal notranslate"><span class="pre">libblas=*=*netlib</span></code> and will use only the reference
+implementation’s symbols.</p>
+<p><code class="docutils literal notranslate"><span class="pre">libblas</span></code> and <code class="docutils literal notranslate"><span class="pre">libcblas</span></code> versioning is based on the Reference LAPACK versioning which at the
+time of writing is <code class="docutils literal notranslate"><span class="pre">3.8.0</span></code>. Since the BLAS API is stable, a downstream package will only pin to
+<code class="docutils literal notranslate"><span class="pre">3.*</span></code> of <code class="docutils literal notranslate"><span class="pre">libblas</span></code> and <code class="docutils literal notranslate"><span class="pre">libcblas</span></code>. On the other hand, <code class="docutils literal notranslate"><span class="pre">liblapack</span></code> and <code class="docutils literal notranslate"><span class="pre">liblapacke</span></code> pins to
+<code class="docutils literal notranslate"><span class="pre">3.8.*</span></code>.</p>
+<p>In addition to the above netlib package, there are other variants like <code class="docutils literal notranslate"><span class="pre">libblas=*=*openblas</span></code>,
+which has <code class="docutils literal notranslate"><span class="pre">openblas</span></code> as a dependency and has a symlink from <code class="docutils literal notranslate"><span class="pre">libblas.so.3</span></code> to <code class="docutils literal notranslate"><span class="pre">libopenblas.so</span></code>.
+<code class="docutils literal notranslate"><span class="pre">libblas=3.8.0=*openblas</span></code> pins the <code class="docutils literal notranslate"><span class="pre">openblas</span></code> dependency to a version that is known to support the
+BLAS <code class="docutils literal notranslate"><span class="pre">3.8.0</span></code> API.  This means that at install time, the user can select what BLAS implementation
+they like without any knowledge of the version of the BLAS implementation needed.</p>
 </div>
 </div>
 </div>
@@ -607,32 +611,36 @@ packages that only need to be built once.</p>
 <p>In order to qualify as a noarch python package, all of the following criteria must be fulfilled:</p>
 <blockquote>
 <div><ul class="simple">
-<li>No compiled extensions</li>
-<li>No post-link or pre-link or pre-unlink scripts</li>
-<li>No OS specific build scripts</li>
-<li>No python version specific requirements</li>
-<li>No skips except for python version. If the recipe is py3 only, remove skip
+<li><p>No compiled extensions</p></li>
+<li><p>No post-link or pre-link or pre-unlink scripts</p></li>
+<li><p>No OS-specific build scripts</p></li>
+<li><p>No python version specific requirements</p></li>
+<li><p>No skips except for python version. If the recipe is py3 only, remove skip
 statement and add version constraint on python in <code class="docutils literal notranslate"><span class="pre">host</span></code> and <code class="docutils literal notranslate"><span class="pre">run</span></code>
-section.</li>
-<li>2to3 is not used</li>
-<li>Scripts argument in setup.py is not used</li>
-<li>If entrypoints are in setup.py, they are listed in meta.yaml</li>
-<li>No activate scripts</li>
-<li>Not a dependency of <cite>conda</cite></li>
+section.</p></li>
+<li><p>2to3 is not used</p></li>
+<li><p>Scripts argument in setup.py is not used</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">console_script</span></code> entrypoints are in setup.py, they are listed in meta.yaml</p></li>
+<li><p>No activate scripts</p></li>
+<li><p>Not a dependency of <cite>conda</cite></p></li>
 </ul>
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">While <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> does not work with selectors, it does work with version constraints.
+<p class="admonition-title">Note</p>
+<p>While <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> does not work with selectors, it does work with version constraints.
 <code class="docutils literal notranslate"><span class="pre">skip:</span> <span class="pre">True</span>&#160; <span class="pre">#</span> <span class="pre">[py2k]</span></code> can sometimes be replaced with a constrained python version in the host and run subsections: say <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">&gt;=3</span></code> instead of just <code class="docutils literal notranslate"><span class="pre">python</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only <code class="docutils literal notranslate"><span class="pre">console_script</span></code> entry points have to be listed in meta.yaml. Other entry points do not conflict with <code class="docutils literal notranslate"><span class="pre">noarch</span></code> and therefore do not require extra treatment.</p>
 </div>
 <p>If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">add</span> <span class="pre">noarch:</span> <span class="pre">python</span></code>.</p>
 </div>
 <div class="section" id="noarch-generic">
 <h3>Noarch generic<a class="headerlink" href="#noarch-generic" title="Permalink to this headline">¶</a></h3>
-<div class="admonition-todo admonition" id="index-2">
-<p class="first admonition-title">Todo</p>
-<p class="last">add some information on r packages which make heavy use of <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">generic</span></code></p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>add some information on r packages which make heavy use of <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">generic</span></code></p>
 </div>
 </div>
 </div>
@@ -652,7 +660,7 @@ section.</li>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>’s build matrices is removed in conda-smithy=3. To get a build matrix, create a <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file inside recipe folder. For example following will give you 2 builds and you can use the selector <code class="docutils literal notranslate"><span class="pre">vtk_with_osmesa</span></code> in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>’s build matrices is removed in conda-smithy=3. To get a build matrix, create a <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file inside the recipe folder. For example, the following will give you 2 builds and you can use the selector <code class="docutils literal notranslate"><span class="pre">vtk_with_osmesa</span></code> in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vtk_with_osmesa</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
@@ -679,6 +687,7 @@ section.</li>
 <li class="toctree-l2"><a class="reference internal" href="adding_pkgs.html">Contributing packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="updating_pkgs.html">Maintaining packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pinning_deps.html">Pinned dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Knowledge base</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#particularities-on-windows">Particularities on Windows</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#local-testing">Local testing</a></li>
@@ -712,9 +721,8 @@ section.</li>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#special-packages">Special packages</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#blas">BLAS</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#blas-metapackage">BLAS metapackage</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#numpy-package">NumPy package</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#scipy-scikit-learn-etc">SciPy, scikit-learn, etc.</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#switching-blas-implementation">Switching BLAS implementation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#how-it-works">How it works</a></li>
 </ul>
 </li>
 </ul>
@@ -727,7 +735,7 @@ section.</li>
 <li class="toctree-l3"><a class="reference internal" href="#build-matrices">Build matrices</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
@@ -737,13 +745,13 @@ section.</li>
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="pinning_deps.html"
-                          title="Previous page">&larr; Pinned dependencies</a></p>
+    <p class="topless"><a href="conda_forge_yml.html"
+                          title="Previous page">&larr; Configuring conda-forge.yml</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="conda_forge_yml.html"
-                          title="Next page">&rarr; Configuring conda-forge.yml</a></p>
+    <p class="topless"><a href="maintainer_faq.html"
+                          title="Next page">&rarr; FAQ</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -753,13 +761,11 @@ section.</li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
@@ -794,10 +800,10 @@ section.</li>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
+          <a href="maintainer_faq.html" title="FAQ"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="pinning_deps.html" title="Pinned dependencies"
+          <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -808,7 +814,7 @@ section.</li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

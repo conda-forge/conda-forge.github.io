@@ -7,11 +7,11 @@ Transferring to conda-forge
 This document intends to layout some guidelines on the transfer of
 `conda-recipes <https://github.com/conda/conda-recipes>`__ and
 `anaconda-recipes <https://github.com/ContinuumIO/anaconda-recipes>`__
-to conda-forge. These aren't hard and fast rules and are open resonable
-interpretation and reviewer judegement.
+to conda-forge. These aren't hard and fast rules and are open reasonable
+interpretation and reviewer judgement.
 
 It is the aspiration that almost all recipes from those repos shall be
-proposed for addition here, thought it may be decided that a few don't
+proposed for addition here, though it may be decided that a few don't
 actually belong or should not be supported anymore.
 
 When adding a package from either location, inspect the commit history
@@ -40,7 +40,7 @@ Windows, make sure to add ``skip: True  # [win]`` to the ``build``
 section. The ``about`` section must have the ``home`` URL (verify the
 URL is still correct), ``license`` (verify the correct license is present),
 and a one sentence (or few word) ``summary``. When specifying the version it
-is strongly recommend that jinja templating be used to set the version
+is strongly recommended that jinja templating be used to set the version
 at the top (e.g. ``{% set version = "0.10.1" %}``) and then replace all
 uses of the version with ``{{ version }}``. Preference should be given to
 compressed source balls as opposed to version control checkouts. Make sure
@@ -48,7 +48,7 @@ all links to compressed source balls allow for easy changing of the version
 (using latest is not acceptable). Also, a checksum should be included with
 all compressed source balls to allow for verification of downloads.
 
-It is required to add tests with all packages. These can included but are
+It is required to add tests with all packages. These can include but are
 not limited to checking libraries are installed, python imports, simple
 code snippet to compile or run a basic test, command line usage (checking
 help or version). It is suggested that compiled code run all tests (e.g.
@@ -62,7 +62,7 @@ build against). From a practical perspective, there are limitations on the
 continuous integration resources and also on what reviewers are able/willing
 to review in a single pull request.
 A large pull request with many recipes makes it more difficult to review.
-If the recipes make it through these two constraints and is merged, race
+If the recipes make it through these two constraints and are merged, race
 conditions amongst the different feedstocks may require work by you and/or
 core maintainers to restart them in such a way to build everything in a
 suitable order.
@@ -81,7 +81,7 @@ Maintainers' time and CI resources are what enable conda-forge. They are as scar
 Publishing a package to conda-forge signals it is suitable for users not involved with development. However, publishing does not always happen error-free. Multiple commits are acceptable when debugging issues with the release process itself.
 
 Fortunately, there are options for optimizing the development of a package.
-  - `conda-smithy <https://github.com/conda-forge/conda-smithy>`__ is a tool used by conda-forge itself to manage feedstocks. conda-smithy can be used to create an internal development feedstock that is seperate from conda-forge.
+  - `conda-smithy <https://github.com/conda-forge/conda-smithy>`__ is a tool used by conda-forge itself to manage feedstocks. conda-smithy can be used to create an internal development feedstock that is separate from conda-forge.
   - `ci-helpers <https://github.com/astropy/ci-helpers>`__ is a set of scripts that drive various CI services using environment variables.
 
 Renaming Packages
@@ -123,5 +123,5 @@ for your feedstock and ping ``@conda-forge/core`` with this request: ::
 
     <insert your reason>
 
-And also post to the conda-forge gitter channel! Also please be patient with us if we do not repond
+And also post to the conda-forge gitter channel! Also please be patient with us if we do not respond
 immediately :)

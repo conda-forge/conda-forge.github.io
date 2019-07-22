@@ -8,9 +8,14 @@ Pinned dependencies
 Globally pinned packages
 ========================
 
-Globally pinned packages are defined in the `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_ file located in the ``conda-forge-pinning`` feedstock.
+Maintaining a large collection of packages with different requirements poses the danger of producing islands of packages with mutually exclusive dependencies.
+Especially widely used libraries with restricted version compatibilities increase the danger of fractioning the package space.
+By fixing crucial libraries to specific dependency version shared by all packages in conda-forge, we avoid fractioning of our packages in incompatible islands.
+The following paragraphs give a short introduction how this global version pinning is realized in conda-forge.
 
-When a rerendering happens, conda-smithy will render the recipe using conda-build and output configuration files for each job and save them in a yaml file in ``.ci_support`` folder. For example there's a output configuration file for each OS, each python version, etc.
+The current versions of globally pinned packages are defined in the `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_ file located in the ``conda-forge-pinning`` feedstock.
+
+When a rerendering happens, conda-smithy will render the recipe using conda-build and output configuration files for each job and save them in a yaml file in ``.ci_support`` folder. For example, there's an output configuration file for each OS, each python version, etc.
 
 These output configuration files are stripped to options that are used in the build and therefore a change in the config files in ``.ci_support`` folder implies that there needs to be a new build.
 
@@ -36,7 +41,7 @@ Should be replaced by
       run:
         - gmp
 
-When there's a new ABI version of gmp (say 7.0), then conda-forge-pinning will be updated. A rerendering of a package using gmp will change. Therefore to check that a recipe needs to be rebuilt for updated pinnings, you only need to check if the package needs a rerender.
+When there's a new ABI version of gmp (say 7.0), then conda-forge-pinning will be updated. A re-rendering of a package using gmp will change. Therefore to check that a recipe needs to be rebuilt for updated pinnings, you only need to check if the package needs a rerender.
 
 .. note::
 
@@ -93,5 +98,32 @@ Updating a pin requires following steps:
  - bump the version of the conda-forge-pinning `recipe <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/meta.yaml>`__ by setting the version to the current date.
  - rerender the feedstock.
  - propose the changes as a :term:`PR` to ``conda-forge/conda-forge-pinning-feedstock``.
+ - write a :ref:`migrator <pin_migrator>` for propagating the pin changes.
+
+.. _pin_migrator:
+
+Propagate pin changes with a migrator
+-------------------------------------
+
+Changing global pins requires rerendering all packages that depend on the package with the changed pin. Doing this manually can be tedious, especially when many packages are involved.
+Migrators are used to automatically generate pull requests for the affected packages in conda-forge.
+
+Migrators are added to `auto_tick.xsh <https://github.com/regro/cf-scripts/blob/master/conda_forge_tick/auto_tick.xsh>`__ in `regro/cf-scripts <https://github.com/regro/cf-scripts>`__.
+
+After changing a pin, append following line to the ``initialize_migrators`` method:
+
+.. code-block:: none
+  
+  add_rebuild_successors($MIGRATORS, gx, '<package-name>', '<new-version>')
+
+You can do this by forking `regro/cf-scripts <https://github.com/regro/cf-scripts>`__ and submitting a pull request.
+
+.. admonition:: Example
+  
+  After advancing the pin of ``zeromq`` to version 4.3.1, following line needs to be added to the ``initialize_migrators`` method:
+
+  .. code-block:: none
+
+    add_rebuild_successors($MIGRATORS, gx, 'zeromq', '4.3.1')
 
 

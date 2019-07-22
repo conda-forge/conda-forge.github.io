@@ -54,9 +54,11 @@
                     <li>
                         <a class="page-scroll" href="#about">About</a>
                     </li>
+                    <!-- Uncomment to restore search
                     <li>
                         <a href="search.html">Search</a>
                     </li>
+                    -->
                     <li>
                         <a href="docs">Docs</a>
                     </li>
@@ -67,13 +69,13 @@
                         <a href="feedstocks">Packages</a>
                     </li>
                     <li>
-                        <a href="docs/news_announce.html">News</a>
+                        <a href="docs/user/announcements.html#announcements">News</a>
                     </li>
                     <li>
                         <a href="status">Status</a>
                     </li>
                     <li>
-                        <a href="https://www.flipcause.com/secure/cause_pdetails/NDA0OTk=">Donate!</a>
+                        <a href="https://numfocus.salsalabs.org/donate-to-conda-forge/index.html">Donate!</a>
                     </li>
                 </ul>
             </div>
@@ -90,7 +92,7 @@
                     <div class="col-md-8 col-md-offset-2">
                         <img src="img/anvil_white.png" alt="An anvil" style="height: 100px; margin: 40px;">
                         <h2 class="brand-heading"> conda-forge</h2>
-                        <p class="intro-text">A community led collection of recipes, build infrastructure and distributions for the conda package manager.</p>
+                        <p class="intro-text">A community-led collection of recipes, build infrastructure and distributions for the conda package manager.</p>
                         <a href="#about" class="btn btn-circle page-scroll">
                             <i class="fa fa-angle-double-down animated"></i>
                         </a>
@@ -106,9 +108,9 @@
             <div class="col-lg-8 col-lg-offset-2 padded">
                 <h2 class="text-center">About conda-forge</h2>
                 <p>
-                  <a href="https://github.com/conda-forge">conda-forge</a> is a github organization containing repositories of conda recipes.
+                  <a href="https://github.com/conda-forge">conda-forge</a> is a GitHub organization containing repositories of conda recipes.
 
-                  Thanks to some awesome continuous integration providers (AppVeyor, CircleCI and TravisCI),
+                  Thanks to some awesome continuous integration providers (AppVeyor, Azure Pipelines, CircleCI and TravisCI),
                   each repository, also known as a feedstock, automatically
                   builds its own recipe in a clean and repeatable way on Windows, Linux and OSX.
                 </p>
@@ -121,10 +123,18 @@
                     conda config --add channels conda-forge
                 </code> <br>
                 <code>
-                  conda install &lt;package-name&gt;
+                    conda config --set channel_priority strict
+                </code> <br>
+                <code>
+                    conda install &lt;package-name&gt;
                 </code>
                 <p> <br>
-                  Learn more about conda-forge by reading our <a href="https://conda-forge.org/docs">docs</a>.
+                  Learn more about conda-forge by reading our <a href="https://conda-forge.org/docs">docs</a>
+                  or watching the following episode of
+                  <a href="https://www.quansight.com/open-source-directions">Open Source Directions</a>.
+                </p>
+                <p align="center">
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/EWh-BtdYE7M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </p>
             </div>
         </div>
@@ -200,9 +210,9 @@
                           Create a new branch from the staged-recipes master branch.
                       </li>
                       <li><i class="mega-octicon fa-3x octicon-pencil"></i>
-                          Add a new conda recipe in the "recipes" directory.
-                          There is an example of a well written recipe there.
-                          <a href="docs/recipe.html">Further guidance on writing good recipes</a>.
+                          Add a new conda recipe in a new "recipes/[your-package-name]" directory.
+                          There is an example of a well-written recipe in "recipes/example" you can copy.
+                          <a href="docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml">Further guidance on writing good recipes</a>.
                       </li>
                       <li><i class="mega-octicon fa-3x octicon-git-pull-request"></i>
                           Propose the change as a pull request.
@@ -211,7 +221,7 @@
                       </li>
                       <li><i class="mega-octicon fa-3x octicon-git-merge"></i>
                           Once the recipe is ready it will be merged and new "feedstock" repository will automatically be created for the recipe.
-                          The build and upload processes take place in the feedstock, and once complete the package will be available on the conda-forge channel</li>
+                          The build and upload processes take place in the feedstock, and once complete the package will be available on the conda-forge channel.</li>
                       </ul>
                     </p>
                 </div>
@@ -232,7 +242,7 @@
                     a nonprofit dedicated to supporting the open source
                     scientific computing community. If you like conda-forge
                     and want to support our mission, please consider making a
-                    <a href="https://www.flipcause.com/secure/cause_pdetails/NDA0OTk=">donation</a> to support our efforts.
+                    <a href="https://numfocus.salsalabs.org/donate-to-conda-forge/index.html">donation</a> to support our efforts.
                 </p>
             </div>
         </div>

@@ -1,17 +1,15 @@
 
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>Configuring conda-forge.yml &#8212; conda-forge 2019.01 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
@@ -22,8 +20,8 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Organisation Documentation" href="../orga/00_intro.html" />
-    <link rel="prev" title="Knowledge base" href="knowledge_base.html" /> 
+    <link rel="next" title="Knowledge base" href="knowledge_base.html" />
+    <link rel="prev" title="Pinned dependencies" href="pinning_deps.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -35,10 +33,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../orga/00_intro.html" title="Organisation Documentation"
+          <a href="knowledge_base.html" title="Knowledge base"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="knowledge_base.html" title="Knowledge base"
+          <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -62,31 +60,31 @@ file that is present in the root directory of a feedstock.</p>
 <div class="section" id="top-level-fields">
 <h2>Top-level fields<a class="headerlink" href="#top-level-fields" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>appveyor</li>
-<li>azure</li>
-<li>channels</li>
-<li>circle</li>
-<li>compiler_stack</li>
-<li>docker</li>
-<li>github</li>
-<li>idle_timeout_minutes</li>
-<li>linux</li>
-<li>linux_aarch64</li>
-<li>linux_ppc64le</li>
-<li>max_py_ver</li>
-<li>max_r_ver</li>
-<li>min_py_ver</li>
-<li>min_r_ver</li>
-<li>osx</li>
-<li>provider</li>
-<li>recipe_dir</li>
-<li>templates</li>
-<li>travis</li>
-<li>win</li>
+<li><p>appveyor</p></li>
+<li><p>azure</p></li>
+<li><p>channels</p></li>
+<li><p>circle</p></li>
+<li><p>compiler_stack</p></li>
+<li><p>docker</p></li>
+<li><p>github</p></li>
+<li><p>idle_timeout_minutes</p></li>
+<li><p>linux</p></li>
+<li><p>linux_aarch64</p></li>
+<li><p>linux_ppc64le</p></li>
+<li><p>max_py_ver</p></li>
+<li><p>max_r_ver</p></li>
+<li><p>min_py_ver</p></li>
+<li><p>min_r_ver</p></li>
+<li><p>osx</p></li>
+<li><p>provider</p></li>
+<li><p>recipe_dir</p></li>
+<li><p>templates</p></li>
+<li><p>travis</p></li>
+<li><p>win</p></li>
 </ul>
 <div class="section" id="appveyor">
 <h3>appveyor<a class="headerlink" href="#appveyor" title="Permalink to this headline">¶</a></h3>
-<p>The top-level <code class="docutils literal notranslate"><span class="pre">appveyor</span></code> key speficies configurations for the Appveyor
+<p>The top-level <code class="docutils literal notranslate"><span class="pre">appveyor</span></code> key specifies configurations for the Appveyor
 CI service.  This is usually <strong>read-only</strong> and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as need.  It has a single
 <code class="docutils literal notranslate"><span class="pre">secure</span></code> field which contains the binstar token.  For example:</p>
@@ -129,7 +127,7 @@ has been built.  The <code class="docutils literal notranslate"><span class="pre
 </div>
 <div class="section" id="circle">
 <h3>circle<a class="headerlink" href="#circle" title="Permalink to this headline">¶</a></h3>
-<p>The top-level <code class="docutils literal notranslate"><span class="pre">circle</span></code> key speficies configurations for the Circle
+<p>The top-level <code class="docutils literal notranslate"><span class="pre">circle</span></code> key specifies configurations for the Circle
 CI service.  This is usually <strong>read-only</strong> and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as need.  It has a single
 <code class="docutils literal notranslate"><span class="pre">secure</span></code> field which contains the binstar token.  For example:</p>
@@ -165,7 +163,7 @@ defaults are as follows:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">github</span><span class="p">:</span>
   <span class="c1"># name of the github organization</span>
   <span class="nt">user_or_org</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
-  <span class="c1"># repository name, usually filled in authomatically</span>
+  <span class="c1"># repository name, usually filled in automatically</span>
   <span class="nt">repo_name</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
   <span class="c1"># branch name to execute on</span>
   <span class="nt">branch_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
@@ -250,25 +248,42 @@ Currently only:</p>
 Thus this controls where a package is built. The following are available as
 arches:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">linux</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">osx</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">win</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">linux_aarch64</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">linux_ppc64le</span></code></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linux</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">osx</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">win</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linux_aarch64</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linux_ppc64le</span></code></p></li>
 </ul>
 <p>The following CI services are available:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">azure</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">circle</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">travis</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">appveyor</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> to disable a platform.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">azure</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">circle</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">travis</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">appveyor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> to disable a platform.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">default</span></code> to enable a platform and choose an appropriate CI</p></li>
 </ul>
 <p>For example, switching everything to build on Azure pipelines:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
   <span class="nt">linux</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
   <span class="nt">osx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
   <span class="nt">win</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+</pre></div>
+</div>
+<p>Currently, x86_64 are enabled, but other arches are disabled by default. i.e. an empty
+provider entry is equivalent to the following:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
+  <span class="nt">linux</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+  <span class="nt">osx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+  <span class="nt">win</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">appveyor</span>
+  <span class="nt">linux_ppc64le</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+  <span class="nt">linux_aarch64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+</pre></div>
+</div>
+<p>To enable <code class="docutils literal notranslate"><span class="pre">linux_ppc64le</span></code> and <code class="docutils literal notranslate"><span class="pre">linux_aarch64</span></code> and the following:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
+  <span class="nt">linux_ppc64le</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
+  <span class="nt">linux_aarch64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
 </pre></div>
 </div>
 </div>
@@ -286,7 +301,7 @@ You shouldn’t need it.</p>
 </div>
 <div class="section" id="travis">
 <h3>travis<a class="headerlink" href="#travis" title="Permalink to this headline">¶</a></h3>
-<p>The top-level <code class="docutils literal notranslate"><span class="pre">travis</span></code> key speficies configurations for the Travis
+<p>The top-level <code class="docutils literal notranslate"><span class="pre">travis</span></code> key specifies configurations for the Travis
 CI service.  This is usually <strong>read-only</strong> and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as need.  It has a single
 <code class="docutils literal notranslate"><span class="pre">secure</span></code> field which contains the binstar token.  For example:</p>
@@ -325,7 +340,6 @@ Currently only:</p>
 <li class="toctree-l2"><a class="reference internal" href="adding_pkgs.html">Contributing packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="updating_pkgs.html">Maintaining packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pinning_deps.html">Pinned dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html">Knowledge base</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Configuring conda-forge.yml</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#top-level-fields">Top-level fields</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#appveyor">appveyor</a></li>
@@ -353,6 +367,8 @@ Currently only:</p>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html">Knowledge base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
@@ -362,13 +378,13 @@ Currently only:</p>
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="knowledge_base.html"
-                          title="Previous page">&larr; Knowledge base</a></p>
+    <p class="topless"><a href="pinning_deps.html"
+                          title="Previous page">&larr; Pinned dependencies</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="../orga/00_intro.html"
-                          title="Next page">&rarr; Organisation Documentation</a></p>
+    <p class="topless"><a href="knowledge_base.html"
+                          title="Next page">&rarr; Knowledge base</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -378,13 +394,11 @@ Currently only:</p>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
@@ -419,10 +433,10 @@ Currently only:</p>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../orga/00_intro.html" title="Organisation Documentation"
+          <a href="knowledge_base.html" title="Knowledge base"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="knowledge_base.html" title="Knowledge base"
+          <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -433,7 +447,7 @@ Currently only:</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

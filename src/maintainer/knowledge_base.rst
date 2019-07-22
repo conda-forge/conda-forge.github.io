@@ -136,7 +136,6 @@ A package that needs all three compilers would define
         - {{ compiler('fortran') }}
 
 .. note::
-
   Appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.
   There is additional information about how conda-build 3 treats compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/source/compiler-tools.html>`_.
 
@@ -145,8 +144,8 @@ A package that needs all three compilers would define
 Core dependency tree packages (CDT)
 -----------------------------------
 
-Dependencies outside of the conda-forge channel should be avoideded (see :ref:`no_external_deps`).
-However there are very few exceptions: some dependencies are so close to the system that they are not packaged with conda-forge.
+Dependencies outside of the conda-forge channel should be avoided (see :ref:`no_external_deps`).
+However, there are very few exceptions: some dependencies are so close to the system that they are not packaged with conda-forge.
 These dependencies have to be satisfied with *Core Dependency Tree* packages.
 
 In conda-forge this currently affects only packages that link against libGL.
@@ -170,6 +169,7 @@ In addition to the required compilers ``{{ compiler('c') }}`` and/or ``{{ compil
 
 
 If you need a fully functional binary in the test phase, you have to also provide the shared libraries via ``yum_requirements.txt`` (see :ref:`yum_deps`).
+You will need to re-render the feedstock after making these changes.
 
 ::
 
@@ -185,12 +185,10 @@ If you need a fully functional binary in the test phase, you have to also provid
 Building Against NumPy
 ----------------------
 
-Packages that link against NumPy need a special treatment in the dependency section.
-Finding ``numpy.get_include()`` in ``setup.py`` or ``cimport`` statements in ``.pyx`` or ``.pyd`` fil
-es are a telltale sign that the package links against NumPy.
+Packages that link against NumPy need special treatment in the dependency section.
+Finding ``numpy.get_include()`` in ``setup.py`` or ``cimport`` statements in ``.pyx`` or ``.pyd`` files are a telltale sign that the package links against NumPy.
 
-In the case of linking, you need to use the ``pin_compatible`` function to ensure having a compatible
- numpy version at run time:
+In the case of linking, you need to use the ``pin_compatible`` function to ensure having a compatible numpy version at run time:
 
 .. code-block:: yaml
 
@@ -205,11 +203,9 @@ At the time of writing, above is equivalent to the following,
 .. code-block:: yaml
 
     host:
-      - numpy 1.9.3              # [unix]
-      - numpy 1.11.3             # [win]
+      - numpy 1.14.6
     run:
-      - numpy >=1.9.3,<2.0.a0    # [unix]
-      - numpy >=1.11.3,<2.0.a0   # [win]
+      - numpy >=1.14.6,<2.0.a0
 
 
 .. admonition:: Notes
@@ -234,7 +230,6 @@ Message passing interface (MPI)
 -------------------------------
 
 .. note::
-  
   This section originates from Min's notes: https://hackmd.io/ry4uI0thTs2q_b4mAQd_qg
 
 MPI Variants in conda-forge
@@ -246,8 +241,8 @@ How are MPI variants best handled in conda-forge?
 There are a few broad cases:
 
 - package requires a specific MPI provider (easy!)
-- package works with any MPI provider (e.g. mpich, openmpi)
-- package works with/without MPI
+- the package works with any MPI provider (e.g. mpich, openmpi)
+- the package works with/without MPI
 
 
 
@@ -295,7 +290,7 @@ If you want to do the pinning yourself (i.e. not trust the mpi providers, or pin
   pin_run_as_build:
     mpich: x.x
     openmpi: x.x
- 
+
 .. code-block:: yaml
 
   # meta.yaml
@@ -347,7 +342,7 @@ or
 
 This doesn't extend to ``nompi``, because there is no ``nompi`` variant of the mpi metapackage. And there probably shouldn't be, because some packages built with mpi doesn't preclude other packages in the env that *may* have an mpi variant from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no parallel hdf5 yet. This works fine, though some features may not be available).
 
-Typically, if there is a preference it will be packages with a nompi variant, where the serial build is preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.
+Typically, if there is a preference it will be packaged with a nompi variant, where the serial build is preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.
 
 
 .. admonition:: Outdated
@@ -532,10 +527,23 @@ Without a preferred ``nompi`` variant, recipes that require mpi are much simpler
 OpenMP on macOS
 ---------------
 
-.. todo::
+You can enable OpenMP on macOS by adding the ``llvm-openmp`` package to the ``build``, ``host``, and ``run`` sections of the ``meta.yaml``. You will also want to add a selector for macOS like this:
 
-  Get help from @beckermr
+ .. code-block:: yaml
 
+  # meta.yaml
+  requirements:
+    build:
+      - llvm-openmp  # [osx]
+    host:
+      - llvm-openmp  # [osx]
+    run:
+      - llvm-openmp  # [osx]
+
+
+.. admonition:: Related links
+
+ - **openmp package conflict** (`conda-forge.github.io/#727 <https://github.com/conda-forge/conda-forge.github.io/issues/727>`__)
 
 .. _yum_deps:
 
@@ -549,85 +557,110 @@ There are only very few situations where dependencies installed by yum are accep
   - satisfying the requirements of :term:`CDT` packages during test phase
   - installing packages that are only required for testing
 
+After changing ``yum_requirements.txt``, :ref:`rerender <dev_update_rerender>` to update       the configuration.
+
 
 Special packages
 ================
 
+.. _knowledge:blas:
+
 BLAS
 ----
 
-.. todo::
+If a package needs one of BLAS, CBLAS, LAPACK, LAPACKE, use the following in the
+host of the recipe,
 
-  The information regarding the blas package may now be outdated and needs checking.
+.. code-block:: yaml
 
-BLAS metapackage
-................
+    requirements:
+      host:
+        - libblas
+        - libcblas
+        - liblapack
+        - liblapacke
 
-   -  Version will have two values X.Y
+.. note::
+  You should specify only the libraries the package needs. (i.e. if the package
+  doesn't need LAPACK, remove liblapack and liblapacke)
 
-      -  X represents changes to the metapackage.
-      -  Y represents priority of BLAS (if we change priorities BLASes X
-         must be bumped, if we want to prioritize something new over
-         OpenBLAS we do not need to change X)
+  At recipe build time, above requirements would download the NETLIB's reference
+  implementations and build your recipe against those.
+  At runtime by default the following packages will be used.
 
-         -  1 is OpenBLAS
-         -  0 is None (no BLAS whatsoever)
+.. code-block:: yaml
 
-   -  needs to have version stay the same across all variants.
-   -  build number cannot be touched (it won't be in the string anyways)
-   -  no pinning of BLAS inside the metapackages (dependencies can pin
-      this)
-   -  to preserve a BLAS in an environment it is recommend to add
-      ``pinned`` to ``conda-meta`` and specify down to the build string
-      what is the expected BLAS
-   -  To install a specific variant, ``conda install blas=1.0=none`` /
-      ``conda install blas=1.0=openblas``. It is hoped the syntax will be
-      improved in conda.
+    - openblas   # [not win]
+    - mkl        # [win]
 
-      -  In the future, with some fixes to ``conda`` will allow for syntax
-         like ``conda install blas=*=openblas``. We should keep an eye on
-         this. (maybe even ``conda install blas:openblas``)
+If a package needs a specific implementation's internal API for more control you can have,
 
-   -  There will be two variants initially:
+.. code-block:: yaml
 
-      -  openblas
-      -  noblas - no BLAS optimisations (e.g. for reasons of smaller
-         installations)
+    requirements:
+      host:
+        - {{ blas_impl }}
+      run:
+        - libblas * *{{ blas_impl }}
+        - {{ blas_impl }}
 
-NumPy package
-.............
+This would give you a matrix builds for different blas implementations. If you only want to support
+a specific blas implementation,
 
-   -  "version + build number" must always be greater than or equal to that
-      in defaults. If not, defaults "numpy" will be chosen, complete with
-      mkl
+.. code-block:: yaml
 
-      -  to make this simple we can pick a high build number so this is
-         prioritized 100 and then bump from there
+    requirements:
+      host:
+        - openblas
+      run:
+        - libblas * *openblas
+        - openblas
 
-         -  Should make the build number ranges tied to BLAS X version above.
-         -  Build number should start at ``(X+1)*100``.
+.. note::
+  ``blas_*`` features should not be used anymore.
 
-            -  Means OpenBLAS starts at 200.
-            -  No BLAS starts at 100.
+Switching BLAS implementation
+.............................
 
-         -  Unfortunately the 1.11.0 release breaks this rule so we will have
-            No BLAS at 101.
+You can switch your BLAS implementation by doing,
 
-      -  if defaults gains a newer version and build without conda-forge
-         updating, users will be prompted to upgrade to the defaults numpy.
-         Even if a user does this, as soon as an equivalent build is
-         available on conda-forge, they will be prompted to update to their
-         previous variant
+.. code-block:: bash
 
-   -  will track the blas\_{{ variant }} feature enabled by the BLAS
-      metapackage
-   -  will pin the specific blas package versions (e.g. openblas .)
+    conda install "libblas=*=*mkl"
+    conda install "libblas=*=*openblas"
+    conda install "libblas=*=*blis"
+    conda install "libblas=*=*netlib"
 
-SciPy, scikit-learn, etc.
-.........................
+This would change the BLAS implementation without changing the conda packages depending
+on BLAS.
 
-   -  Same thing as NumPy
-   -  Add numpy dependency as if linking occurs
+The following legacy commands are also supported as well.
+
+.. code-block:: bash
+
+    conda install "blas=*=mkl"
+    conda install "blas=*=openblas"
+    conda install "blas=*=blis"
+    conda install "blas=*=netlib"
+
+How it works
+............
+
+At recipe build time, the netlib packages are used. This means that the downstream package will
+link to ``libblas.so.3`` in the ``libblas=*=*netlib`` and will use only the reference
+implementation's symbols.
+
+``libblas`` and ``libcblas`` versioning is based on the Reference LAPACK versioning which at the
+time of writing is ``3.8.0``. Since the BLAS API is stable, a downstream package will only pin to
+``3.*`` of ``libblas`` and ``libcblas``. On the other hand, ``liblapack`` and ``liblapacke`` pins to
+``3.8.*``.
+
+In addition to the above netlib package, there are other variants like ``libblas=*=*openblas``,
+which has ``openblas`` as a dependency and has a symlink from ``libblas.so.3`` to ``libopenblas.so``.
+``libblas=3.8.0=*openblas`` pins the ``openblas`` dependency to a version that is known to support the
+BLAS ``3.8.0`` API.  This means that at install time, the user can select what BLAS implementation
+they like without any knowledge of the version of the BLAS implementation needed.
+
 
 
 Noarch builds
@@ -649,20 +682,23 @@ In order to qualify as a noarch python package, all of the following criteria mu
 
   - No compiled extensions
   - No post-link or pre-link or pre-unlink scripts
-  - No OS specific build scripts
+  - No OS-specific build scripts
   - No python version specific requirements
   - No skips except for python version. If the recipe is py3 only, remove skip
     statement and add version constraint on python in ``host`` and ``run``
     section.
   - 2to3 is not used
   - Scripts argument in setup.py is not used
-  - If entrypoints are in setup.py, they are listed in meta.yaml
+  - If ``console_script`` entrypoints are in setup.py, they are listed in meta.yaml
   - No activate scripts
   - Not a dependency of `conda`
 
 .. note::
   While ``noarch: python`` does not work with selectors, it does work with version constraints.
   ``skip: True  # [py2k]`` can sometimes be replaced with a constrained python version in the host and run subsections: say ``python >=3`` instead of just ``python``.
+
+.. note::
+  Only ``console_script`` entry points have to be listed in meta.yaml. Other entry points do not conflict with ``noarch`` and therefore do not require extra treatment.
 
 If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including ``@conda-forge-admin, please add noarch: python``.
 
@@ -699,7 +735,7 @@ Following implies that ``python`` is a runtime dependency and a Python matrix fo
     host:
       - python
 
-``conda-forge.yml``'s build matrices is removed in conda-smithy=3. To get a build matrix, create a ``conda_build_config.yaml`` file inside recipe folder. For example following will give you 2 builds and you can use the selector ``vtk_with_osmesa`` in the ``meta.yaml``
+``conda-forge.yml``'s build matrices is removed in conda-smithy=3. To get a build matrix, create a ``conda_build_config.yaml`` file inside the recipe folder. For example, the following will give you 2 builds and you can use the selector ``vtk_with_osmesa`` in the ``meta.yaml``
 
 .. code-block:: yaml
 

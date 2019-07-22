@@ -7,8 +7,8 @@ Bot Sub-Team
 
 Role
 ----
-Develop and manage the conda-forge migration bot and all related tooling. 
-Also manages and deploys migrations themselves. 
+Develop and manage the conda-forge migration bot and all related tooling.
+Also manages and deploys migrations themselves.
 
 Charter
 -------
@@ -16,21 +16,21 @@ Dynamic
 
 Responsibility
 --------------
-The migration and autotick bot is now a central part of the conda-forge ecosystem. 
-This subteam has the right and responsibility to manage and develop the general 
+The migration and autotick bot is now a central part of the conda-forge ecosystem.
+This subteam has the right and responsibility to manage and develop the general
 operation of the bot.
-This includes building new migrators, fixing migration related bugs, and tooling. 
+This includes building new migrators, fixing migration related bugs, and tooling.
 Example migrations that can happen include:
 
 - Compiler bumps
 - Python version bump
 - R version bump
-- Build number bumps of the ecosystem when a pinned package version updates and 
-  there is a binary incompatibility which necessitate downstream rebuilds.
+- Build number bumps of the ecosystem when a pinned package version updates and
+  there is a binary incompatibility which necessitates downstream rebuilds.
 - Automatically version bumping of feedstocks when the package releases a new version.
 
-For large scale (affecting >20% of packages) this sub-team will inform and 
-discuss with the core team about the upcoming migration prior to starting the 
+For large scale (affecting >20% of packages) this sub-team will inform and
+discuss with the core team about the upcoming migration prior to starting the
 migration.
 
 Packages and tools that fall under the purview of the bot subteam include:
@@ -68,7 +68,7 @@ Dynamic
 
 Responsibility
 --------------
-This sub-team is broadly responsible for enabling the ARM architechture.
+This sub-team is broadly responsible for enabling the ARM architecture.
 This includes updates and enabling features to:
 
 - staged-recipes
@@ -91,7 +91,7 @@ Doc Sub-Team
 Role
 ----
 
-Maintain and improve the documentation; review, organize and help with documentation related issues. 
+Maintain and improve the documentation; review, organize and help with documentation related issues.
 
 Charter
 -------
@@ -100,7 +100,7 @@ Dynamic
 Responsibility
 --------------
 
-Good documentation is an important corner stone of a successful community project.
+Good documentation is an important cornerstone of a successful community project.
 Accurate, well organized and comprehensive documentation not only benefits users, but also frees the core team by decreasing support requests.
 
 The documentation team is responsible for

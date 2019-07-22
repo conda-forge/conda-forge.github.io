@@ -1,0 +1,205 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>FAQ &#8212; conda-forge 2019.01 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    <script type="text/javascript" src="../_static/cloud.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Organisation Documentation" href="../orga/00_intro.html" />
+    <link rel="prev" title="Knowledge base" href="knowledge_base.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../orga/00_intro.html" title="Organisation Documentation"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="knowledge_base.html" title="Knowledge base"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="faq">
+<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
+<p id="mfaq-update-circle"><a class="reference internal" href="#mfaq-update-circle"><span class="std std-ref">(Q)</span></a> <strong>How to address</strong> <code class="docutils literal notranslate"><span class="pre">permission</span> <span class="pre">denied</span> <span class="pre">(publickey)</span></code> <strong>in circle builds?</strong></p>
+<blockquote>
+<div><p>When you see this error in a circle build:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Permission</span> <span class="n">denied</span> <span class="p">(</span><span class="n">publickey</span><span class="p">)</span><span class="o">.</span>
+
+<span class="n">fatal</span><span class="p">:</span> <span class="n">Could</span> <span class="ow">not</span> <span class="n">read</span> <span class="kn">from</span> <span class="nn">remote</span> <span class="n">repository</span><span class="o">.</span>
+
+<span class="n">Please</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">you</span> <span class="n">have</span> <span class="n">the</span> <span class="n">correct</span> <span class="n">access</span> <span class="n">rights</span>
+<span class="ow">and</span> <span class="n">the</span> <span class="n">repository</span> <span class="n">exists</span><span class="o">.</span>
+<span class="n">Exited</span> <span class="k">with</span> <span class="n">code</span> <span class="mi">128</span>
+</pre></div>
+</div>
+<p>open a new issue with a comment <a class="reference internal" href="infrastructure.html#ci-update-circle"><span class="std std-ref">&#64;conda-forge-admin, please update circle</span></a>.
+Once our web services updated the circle configuration, restart the build.</p>
+</div></blockquote>
+<p id="mfaq-py37-selector"><a class="reference internal" href="#mfaq-py37-selector"><span class="std std-ref">(Q)</span></a> <strong>Why does conda-build ignore the</strong> <code class="docutils literal notranslate"><span class="pre">py37</span></code> <strong>selector in meta.yaml?</strong></p>
+<blockquote>
+<div><p>TL;DR: replace <code class="docutils literal notranslate"><span class="pre">py37</span></code> with <code class="docutils literal notranslate"><span class="pre">py==37</span></code>.</p>
+<p>conda-build has changed the selector syntax.
+You are now encouraged to use <code class="docutils literal notranslate"><span class="pre">py==&lt;version&gt;</span></code>, instead of <code class="docutils literal notranslate"><span class="pre">py&lt;version&gt;</span></code>.
+While the legacy selectors <code class="docutils literal notranslate"><span class="pre">py27</span></code> and <code class="docutils literal notranslate"><span class="pre">py36</span></code> are still valid, <code class="docutils literal notranslate"><span class="pre">py37</span></code> and higher are not available anymore.</p>
+<p>Please use the new syntax <code class="docutils literal notranslate"><span class="pre">py==27</span></code>, <code class="docutils literal notranslate"><span class="pre">py==36</span></code> and <code class="docutils literal notranslate"><span class="pre">py==37</span></code> to avoid confusion.</p>
+<div class="admonition-related-links admonition">
+<p class="admonition-title">Related links</p>
+<ul class="simple">
+<li><p><strong>Selectors in conda-build documentation</strong> (<a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#preprocessing-selectors">Preprocessing selectors</a>)</p></li>
+<li><p><strong>Linter: deprecate the use of py27, py36</strong> (<a class="reference external" href="https://github.com/conda-forge/conda-smithy/issues/1026">conda-smithy/#1026</a>)</p></li>
+</ul>
+</div>
+</div></blockquote>
+<p id="mfaq-build-number-1000"><a class="reference internal" href="#mfaq-build-number-1000"><span class="std std-ref">(Q)</span></a> <strong>What do build numbers above 1000 signify? How do I treat them?</strong></p>
+<blockquote>
+<div><p>TL;DR: there is no need for build numbers larger than 1000 anymore.</p>
+<p>When you update a feedstock that still uses build numbers &gt; 1000, following rules apply:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>when you increase the version, reset the build number back to 0 (e.g. <code class="docutils literal notranslate"><span class="pre">1005</span> <span class="pre">-&gt;</span> <span class="pre">0</span></code>).</p></li>
+<li><p>when the version stays the same and you need to upload a new package, increase the build number by 1 (e.g. <code class="docutils literal notranslate"><span class="pre">1005</span> <span class="pre">-&gt;</span> <span class="pre">1006</span></code>).</p></li>
+</ul>
+</div></blockquote>
+<p><strong>Backstory:</strong> Build numbers of 1000 and larger are a relict from the compiler migration, where a build number offset of 1000 signified that a package was migrated to the new compilers.
+Since the completion of the compiler migration, this offsetting is not needed anymore.
+However, we cannot simply subtract the offset without updating the version, due to higher build numbers being preferred by the solver.
+Therefore build numbers above 1000 will gradually vanish as packages get updated to newer versions.</p>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html" title="index">
+          <img class="logo" src="../_static/logo_black_on_trans.png" alt="Logo"/>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Overview</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/00_intro.html">User Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="00_intro.html">Maintainer Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="infrastructure.html">Infrastructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_pkgs.html">Contributing packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="updating_pkgs.html">Maintaining packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pinning_deps.html">Pinned dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html">Knowledge base</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="knowledge_base.html"
+                          title="Previous page">&larr; Knowledge base</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="../orga/00_intro.html"
+                          title="Next page">&rarr; Organisation Documentation</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/maintainer/maintainer_faq.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../orga/00_intro.html" title="Organisation Documentation"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="knowledge_base.html" title="Knowledge base"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2019, conda-forge.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

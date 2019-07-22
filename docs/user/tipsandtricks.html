@@ -1,17 +1,15 @@
 
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>Tips &amp; tricks &#8212; conda-forge 2019.01 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
@@ -23,7 +21,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="FAQ" href="faq.html" />
-    <link rel="prev" title="A brief introduction" href="introduction.html" /> 
+    <link rel="prev" title="Announcements" href="announcements.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -38,7 +36,7 @@
           <a href="faq.html" title="FAQ"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="introduction.html" title="A brief introduction"
+          <a href="announcements.html" title="Announcements"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -68,9 +66,9 @@ see an error like (OS X example):</p>
 <p>That happens because either the correct version of <code class="docutils literal notranslate"><span class="pre">icu</span></code>,
 or any other package in the error,
 is not present or the package is missing altogether.</p>
-<p>Once can confirm by issuing the command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> and searching for the package in question.</p>
-<div class="section" id="why-that-happens">
-<h3>Why that happens?<a class="headerlink" href="#why-that-happens" title="Permalink to this headline">¶</a></h3>
+<p>Once you can confirm by issuing the command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> and searching for the package in question.</p>
+<div class="section" id="why-does-that-happen">
+<h3>Why does that happen?<a class="headerlink" href="#why-does-that-happen" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and <code class="docutils literal notranslate"><span class="pre">defaults</span></code> are not 100% compatible.
 In the example above it is known that <code class="docutils literal notranslate"><span class="pre">defaults</span></code> uses <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">54.*</span></code> while <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> relies on <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">56.*</span></code>,
 that mismatch can lead to errors when the install environment is mixing packages from multiple channels.</p>
@@ -78,7 +76,7 @@ that mismatch can lead to errors when the install environment is mixing packages
 </div>
 <div class="section" id="how-to-fix-it">
 <h3>How to fix it?<a class="headerlink" href="#how-to-fix-it" title="Permalink to this headline">¶</a></h3>
-<p>Newer <code class="docutils literal notranslate"><span class="pre">conda</span></code> versions introduced a strict channel priority feature.
+<p>Newer <code class="docutils literal notranslate"><span class="pre">conda</span></code> versions (&gt;=4.6) introduced a strict channel priority feature.
 Type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">config</span> <span class="pre">--describe</span> <span class="pre">channel_priority</span></code> for more information.</p>
 <p>The solution is to add the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel on top of <code class="docutils literal notranslate"><span class="pre">defaults</span></code> in your <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> file when using <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages
 and activate the strict channel priority with:</p>
@@ -94,53 +92,19 @@ channels:
   - defaults
 </pre></div>
 </div>
-<p>In addition to the channel priority we recommend to always install your packages inside a new environment instead the root environment from anaconda/miniconda.
+<p>In addition to the channel priority, we recommend to always install your packages inside a new environment instead of the root environment from anaconda/miniconda.
 Using envs make it easier to debug problems with packages and ensure the stability of your root env.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the past <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> used to vendorize some of <code class="docutils literal notranslate"><span class="pre">defaults</span></code> dependencies that were not built in our infrastructure,
+like compilers run-times, to avoid the mixing channel problem.
+However, with the <code class="docutils literal notranslate"><span class="pre">strict</span></code> option, we no longer have to vendorize those (this led to its own set of problems),
+instead, we removed everything that is not built in <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and let <code class="docutils literal notranslate"><span class="pre">strict</span></code> pull those from <code class="docutils literal notranslate"><span class="pre">defaults</span></code>.</p>
+<p>TL;DR if you are experiencing missing compilers run-times like <code class="docutils literal notranslate"><span class="pre">libgcc-ng</span></code>,
+that is probably because you removed <code class="docutils literal notranslate"><span class="pre">defaults</span></code>,
+just re-add it and activate <code class="docutils literal notranslate"><span class="pre">strict</span></code> for a smooth and stable experience when installing packages.</p>
 </div>
 </div>
-<div class="section" id="avoiding-the-openblas-mkl-dance">
-<h2>Avoiding the openblas/mkl dance<a class="headerlink" href="#avoiding-the-openblas-mkl-dance" title="Permalink to this headline">¶</a></h2>
-<p>When updating packages, it might seem that openblas and mkl keep trying to
-overwrite one and other. For example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conda install pytest
-Solving environment: <span class="k">done</span>
-
-<span class="o">[</span>...<span class="o">]</span>
-
-The following packages will be UPDATED:
-
-libgcc-ng:      <span class="m">7</span>.2.0-hdf63c60_3                     conda-forge --&gt; <span class="m">8</span>.2.0-hdf63c60_1
-numpy:          <span class="m">1</span>.15.2-py36_blas_openblashd3ea46f_1  conda-forge <span class="o">[</span>blas_openblas<span class="o">]</span> --&gt; <span class="m">1</span>.15.2-py36h1d66e8a_1
-
-The following packages will be DOWNGRADED:
-
-blas:           <span class="m">1</span>.1-openblas                         conda-forge --&gt; <span class="m">1</span>.0-mkl
-opencv:         <span class="m">3</span>.4.3-py36_blas_openblash829a850_200 conda-forge <span class="o">[</span>blas_openblas<span class="o">]</span> --&gt; <span class="m">3</span>.4.1-py36h6fd60c2_1
-scipy:          <span class="m">1</span>.1.0-py36_blas_openblash7943236_201 conda-forge <span class="o">[</span>blas_openblas<span class="o">]</span> --&gt; <span class="m">1</span>.1.0-py36hc49cb51_0
-</pre></div>
-</div>
-<p>The problem is that conda really wants to minimize the “features” installed
-in the environment. Implicit dependencies, such as openblas in the case of
-<code class="docutils literal notranslate"><span class="pre">numpy</span></code> from conda-forge, behave differently from explicit ones.
-Explicitly specifying the dependency on either <code class="docutils literal notranslate"><span class="pre">openblas</span></code> or <code class="docutils literal notranslate"><span class="pre">mkl</span></code> will
-solve this problem. As of writing, conda-forge does not package <code class="docutils literal notranslate"><span class="pre">mkl</span></code>.</p>
-<p>Specifying:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install <span class="s2">&quot;blas=*=openblas&quot;</span>
-</pre></div>
-</div>
-<p>solves the problem in new environments. The challenge comes if you already
-installed <code class="docutils literal notranslate"><span class="pre">openblas</span></code> (likely because of <code class="docutils literal notranslate"><span class="pre">numpy</span></code>) and now need to add a
-dependency for <code class="docutils literal notranslate"><span class="pre">openblas</span></code>. <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span></code> will tell you it is already
-satisfied and not add  it to the list of explicitly specified dependencies.
-To work around this problem, execute the following commands:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda uninstall blas --force
-conda install <span class="s2">&quot;blas=*=openblas&quot;</span>
-</pre></div>
-</div>
-<p>Here, we specified <code class="docutils literal notranslate"><span class="pre">--force</span></code> so as not to uninstall packages that depend on
-<code class="docutils literal notranslate"><span class="pre">blas</span></code> (e.g. numpy and all dependencies).</p>
-<p>It may be helpful to read the <a class="reference external" href="https://conda.io/docs/user-guide/configuration/use-condarc.html#always-add-packages-by-default-create-default-packages">conda documentation</a> regarding installing
-default packages in new environments.</p>
 </div>
 </div>
 
@@ -157,14 +121,13 @@ default packages in new environments.</p>
     <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="00_intro.html">User Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="introduction.html">A brief introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#announcements">Announcements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="announcements.html">Announcements</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Tips &amp; tricks</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#using-multiple-channels">Using multiple channels</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#why-that-happens">Why that happens?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-does-that-happen">Why does that happen?</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#how-to-fix-it">How to fix it?</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#avoiding-the-openblas-mkl-dance">Avoiding the openblas/mkl dance</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html">FAQ</a></li>
@@ -179,8 +142,8 @@ default packages in new environments.</p>
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="introduction.html"
-                          title="Previous page">&larr; A brief introduction</a></p>
+    <p class="topless"><a href="announcements.html"
+                          title="Previous page">&larr; Announcements</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -195,13 +158,11 @@ default packages in new environments.</p>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
@@ -239,7 +200,7 @@ default packages in new environments.</p>
           <a href="faq.html" title="FAQ"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="introduction.html" title="A brief introduction"
+          <a href="announcements.html" title="Announcements"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -250,7 +211,7 @@ default packages in new environments.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

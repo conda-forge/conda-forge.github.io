@@ -10,7 +10,7 @@ appreciate all good faith contributions.
 Code of Conduct
 ---------------
 Conda-forge adheres to the
-`Numfocus Code of Conduct <https://www.numfocus.org/code-of-conduct>`_.
+`NumFOCUS Code of Conduct <https://www.numfocus.org/code-of-conduct>`_.
 
 Teams & Roles
 -------------
@@ -28,9 +28,16 @@ Here are defined the primary teams participating in conda-forge activities.
   of one or more feedstock repositories and packages. Maintainers have the ability
   to merge pull requests into the feedstock of only the packages they maintain.
 * **external contributors:** This group encompasses all others who are not on
-  core, part of staged-recipes, or maintainers. This includes first time
+  core, part of staged-recipes, or maintainers. This includes first-time
   contributors, collaborators, and funders. They have no special rights within
   the conda-forge organization itself.
+* **emeritus-core:** Core members that are inactive (commits, GitHub comments/issues/reviews,
+  dev meetings and voting on polls) in the past six months will be asked if they want to become emeritus-core
+  developers. Any core member can also request to become emeritus if they wish to do so
+  (e.g. taking a sabbatical or long vacation).
+  Emeritus core members can still vote and be back to active core anytime, the only difference is
+  that emeritus-core will not count as the total core members when computing the necessary
+  votes a poll needs to pass. The ``core.csv`` list should be updated when change in the status of a member occurs.
 
 Sub-Teams
 ---------
@@ -65,7 +72,7 @@ calling a vote are as follows:
 * There must only be one vote active on a particular item at any time.
 * The act of calling for a vote cannot itself violate the code of
   conduct. For example, Sam repeatedly called for votes immediately
-  after a previous votes failed to achieve Sam's result. Sam is
+  after a previous vote failed to achieve Sam's result. Sam is
   attempting to bully other members of core into agreeing, and is thus
   violating the code of conduct.
 * Voting yes moves the proposal forward;
@@ -74,7 +81,7 @@ calling a vote are as follows:
 * There should always be an option to abstain from voting.
 
 Voting items are labeled as either **standard** or **sensitive**.
-Standard items are ones where public record and discourse and record is
+Standard items are ones where public record and discourse is
 preferable. Sensitive voting items are ones where the results of the
 vote should remain private to the voters after the vote has occurred.
 Sensitive votes should take place on
@@ -94,6 +101,17 @@ To call for a standard vote, here is a template PR comment:
     To vote please leave Approve (yea) or Request Changes (nay) reviews.
     If you would like changes to the current language please leave a comment or push to this branch.
     This vote will end on {date}.
+
+----
+
+:CFEP Approval: When ready, the proposer may call for a vote on an
+    existing conda-forge enhancement proposal (CFEP). This requires a
+    super-majority (60%) to pass so that the decision to accept the
+    CFEP is unequivocable and we have ensured that consensus has been
+    reached.
+
+    * Standard
+    * 60% Majority to pass
 
 ----
 
@@ -139,7 +157,7 @@ To call for a standard vote, here is a template PR comment:
     "ask for forgiveness and not for permission" way so bad situations
     are handled quickly. The lock must be justified in the thread itself
     with a text explaining the reasons for locking and how the participants
-    may can contest it.
+    can contest it.
 
     * Standard
     * No need for voting to lock a thread
@@ -224,6 +242,7 @@ In alphabetical order,
 
 * Marcel Bargull, @mbargull
 * Lori Burns, @loriab
+* Sophia Castellarin, @soapy1
 * Matt Craig, @mwcraig
 * Eric Dill, @ericdill
 * Phil Elson, @pelson
@@ -233,11 +252,12 @@ In alphabetical order,
 * Jonathan J. Helmus, @jjhelmus
 * John Kirkham, @jakirkham
 * Marius van Niekerk, @mariusvniekerk
-* Min Ragan-Kelley, @minrk 
+* Min Ragan-Kelley, @minrk
 * Mike Sarahan, @msarahan
 * Anthony Scopatz, @scopatz
 * Patrick Snape, @patricksnape
 * Dougal J. Sutherland, @dougalsutherland
+* Peter K. G. Williams, @pkgw
 * Christopher J. Wright, @CJ-Wright
 
 Document History

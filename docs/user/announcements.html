@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>FAQ &#8212; conda-forge 2019.01 documentation</title>
+    <title>Announcements &#8212; conda-forge 2019.01 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -20,8 +20,8 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Becoming involved" href="contributing.html" />
-    <link rel="prev" title="Tips &amp; tricks" href="tipsandtricks.html" /> 
+    <link rel="next" title="Tips &amp; tricks" href="tipsandtricks.html" />
+    <link rel="prev" title="A brief introduction" href="introduction.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -33,10 +33,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="contributing.html" title="Becoming involved"
+          <a href="tipsandtricks.html" title="Tips &amp; tricks"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="tipsandtricks.html" title="Tips &amp; tricks"
+          <a href="introduction.html" title="A brief introduction"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -51,34 +51,61 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="faq">
-<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
-<p id="faq-pkg-not-available"><a class="reference internal" href="#faq-pkg-not-available"><span class="std std-ref">(Q)</span></a> <strong>A package I am looking for is not on conda-forge, what can I do?</strong></p>
+  <div class="section" id="announcements">
+<h1>Announcements<a class="headerlink" href="#announcements" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>2019<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<dl class="field-list">
+<dt class="field-odd">2019-03-28</dt>
+<dd class="field-odd"><p>We overhauled the blas support in conda-forge.</p>
 <blockquote>
-<div><p>We have an overview and step-by-step instruction on contributing packages in the section <a class="reference internal" href="../maintainer/adding_pkgs.html#dev-contribute-pkgs"><span class="std std-ref">Contributing packages</span></a>.</p>
-</div></blockquote>
-<p id="faq-pkg-update"><a class="reference internal" href="#faq-pkg-update"><span class="std std-ref">(Q)</span></a> <strong>The feedstock for a package from conda-forge is updated, how long should it take to update on Anaconda Cloud?</strong></p>
-<blockquote>
-<div><p>It depends on the queue, but a good rule of thumb is to wait at least 30 mins - 2 hours.  If you don’t see it after 24 hrs, please raise an issue.</p>
-</div></blockquote>
-<p id="faq-report-issue"><a class="reference internal" href="#faq-report-issue"><span class="std std-ref">(Q)</span></a> <strong>A package from conda-forge is outdated or broken, where can I report the issue?</strong></p>
-<blockquote>
-<div><p>You can open an issue in the packages feedstock repository on GitHub. Search for the repository <code class="docutils literal notranslate"><span class="pre">conda-forge/&lt;package-name&gt;-feedstock</span></code>. There you can also suggest fixes or even become a maintainer. Please refer to <a class="reference internal" href="../maintainer/updating_pkgs.html#maintaining-pkgs"><span class="std std-ref">Maintaining packages</span></a> for details.</p>
-</div></blockquote>
-<p id="faq-contact"><a class="reference internal" href="#faq-contact"><span class="std std-ref">(Q)</span></a> <strong>I have a question/suggestion. How can I contact you?</strong></p>
-<blockquote>
-<div><p>Please join us in our <a class="reference external" href="https://gitter.im/conda-forge/conda-forge.github.io">gitter channel</a>! We are always happy to answer questions and help beginners!</p>
-</div></blockquote>
-<p id="faq-solver-speed"><a class="reference internal" href="#faq-solver-speed"><span class="std std-ref">(Q)</span></a> <strong>Installing and updating takes a long time, what can I do?</strong></p>
-<blockquote>
-<div><div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<ul class="simple">
-<li><p>Add information on strict channel priorities here.</p></li>
-<li><p>Add information on conda-metachannel here.</p></li>
+<div><ul class="simple">
+<li><p>Our packages now build against NETLIB’s reference implementation.</p></li>
+<li><p>You as a user can now choose the implementation available at runtime.</p></li>
 </ul>
-</div>
 </div></blockquote>
+<p>For more information please refer to the <a class="reference internal" href="../maintainer/knowledge_base.html#knowledge-blas"><span class="std std-ref">documentation</span></a>.</p>
+</dd>
+<dt class="field-even">2019‑01‑22</dt>
+<dd class="field-even"><p>It has happened! Conda-forge has migrated to the latest compilers 🎉.</p>
+<dl class="simple">
+<dt>If you:</dt><dd><ul class="simple">
+<li><p>maintain a compiled feedstock, it will likely need to be rerender</p></li>
+<li><p>need to roll back to the old compilers, you can use the “cf201901” label</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="id2">
+<h2>2018<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<dl class="field-list">
+<dt class="field-odd">2018‑10‑12</dt>
+<dd class="field-odd"><p>The rebuild is moving along nicely with almost a third of packages completed.</p>
+<p>Recently completed are numpy and openblas which should open up much of the python numeric stack.
+We’re only about 5 feedstocks away from opening up all of R as well.</p>
+</dd>
+<dt class="field-even">2018‑09‑24</dt>
+<dd class="field-even"><p>A minimal python 3.7 build is now available across all platforms and both compilers!</p>
+</dd>
+<dt class="field-odd">2018‑09‑24</dt>
+<dd class="field-odd"><p>Deprecation notice for Python 3.5</p>
+<p>As we start building out more of the python 3.7 stack, we will no longer be building
+python 3.5 packages.</p>
+<p>No new python 3.5 packages will be built after 2018-10-01.</p>
+</dd>
+<dt class="field-even">2018‑09‑20</dt>
+<dd class="field-even"><p>The compiler migration is in full swing.  The bot will be making the rounds and
+modernizing more than 4000 packages.  This is going to take a few months to get done so
+bear with us.</p>
+</dd>
+<dt class="field-odd">2018‑09‑10</dt>
+<dd class="field-odd"><p>Conda forge now has a magical status bar for tracking the progress of migrations.</p>
+<p>You can find this at <a class="reference external" href="https://conda-forge.org/status">conda-forge.org/status</a>.</p>
+</dd>
+</dl>
+</div>
 </div>
 
 
@@ -94,9 +121,13 @@
     <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="00_intro.html">User Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="introduction.html">A brief introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="announcements.html">Announcements</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Announcements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2019</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2018</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="tipsandtricks.html">Tips &amp; tricks</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l2"><a class="reference internal" href="contributing.html">Becoming involved</a></li>
 </ul>
 </li>
@@ -108,18 +139,18 @@
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="tipsandtricks.html"
-                          title="Previous page">&larr; Tips &amp; tricks</a></p>
+    <p class="topless"><a href="introduction.html"
+                          title="Previous page">&larr; A brief introduction</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="contributing.html"
-                          title="Next page">&rarr; Becoming involved</a></p>
+    <p class="topless"><a href="tipsandtricks.html"
+                          title="Next page">&rarr; Tips &amp; tricks</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/user/faq.rst.txt"
+      <li><a href="../_sources/user/announcements.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -163,10 +194,10 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="contributing.html" title="Becoming involved"
+          <a href="tipsandtricks.html" title="Tips &amp; tricks"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="tipsandtricks.html" title="Tips &amp; tricks"
+          <a href="introduction.html" title="A brief introduction"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 

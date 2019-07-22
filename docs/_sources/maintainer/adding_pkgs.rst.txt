@@ -8,7 +8,7 @@ Contributing packages
 The staging process
 ===================
 
-This document presents an overview over  how to contribute packages to conda-forge.
+This document presents an overview over how to contribute packages to conda-forge.
 
 
 Getting Started
@@ -33,13 +33,15 @@ Your final recipe should have no comments (unless they're actually relevant to t
 
 In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that might help you with a successful build is provided in the following.
 
+.. _staging_steps:
+
 Step-by-step Instructions
 -------------------------
 
 #. Ensure your source code can be downloaded as a single file. Source code
    should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz)
    or tagged on GitHub, to ensure that it can be verified. (For further
-   detail, sees :ref:`tarballs_no_repos`).
+   detail, see :ref:`tarballs_no_repos`).
 #. Fork the `example recipes
    <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
    repository.
@@ -53,7 +55,7 @@ Step-by-step Instructions
 #. Edit the copied recipe (meta.yml) as needed. For details, see
    :ref:`meta_yaml`.
 #. Generate the SHA256 key for your source code archive, as described in the
-   example recipe using the ``openssl`` tool. As an alternative you can also
+   example recipe using the ``openssl`` tool. As an alternative, you can also
    go to the package description on `PyPi <https://pypi.org>`_ from which you
    can directly copy the SHA256.
 #. Be sure to fill in the ``tests`` section. The simplest test will simply
@@ -70,7 +72,7 @@ Checklist
 * In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
 * Make sure that all tests pass successfully at least on your development machine.
 * Recommended: run the test locally on your source code to ensure the recipe works locally (see  :ref:`staging_test_locally`).
-* Make sure that your changes do not interfere with other recipes that are int the ``recipes`` folder (e.g. the ``example`` recipe).
+* Make sure that your changes do not interfere with other recipes that are in the ``recipes`` folder (e.g. the ``example`` recipe).
 
 
 Feedback and revision
@@ -84,7 +86,7 @@ After merging the :term:`PR`, our infrastructure will build the package and make
 
 .. note::
 
-  If you have questions or have not heard back for a while, you can notify us by including ``@conda-forge/staged-recipes`` in your github message.
+  If you have questions or have not heard back for a while, you can notify us by including ``@conda-forge/staged-recipes`` in your GitHub message.
 
 
 Post staging process
@@ -103,16 +105,83 @@ The maintainer's job is to:
 
 - Keep the feedstock updated by merging eventual maintenance :term:`PR`\ s from conda-forge's bots.
 - Keep the feedstock on par with new releases of the source package by
+
   - Bumping the version number and checksum.
   - Making sure that feedstock's requirements stay accurate.
-  - Make sure the test requirements match those of the of the updated package.
-- Answer eventual question about the package on the feedstock issue tracker.
+  - Make sure the test requirements match those of the updated package.
+
+- Answer eventual questions about the package on the feedstock issue tracker.
+
+
+Adding multiple packages at once
+--------------------------------
+
+If you would like to add more than one related packages, they can be added to 
+staged-recipes in a single pull request (in separate directories). If the 
+packages are interdependent (i.e. one package being added lists one or more of 
+the other packages being added as a requirement), the build script will be able to 
+locate the dependencies that are only present within staged-recipes as long as 
+the builds finish in the dependencies order. Using a single pull request 
+allows you to quickly get packages set up without waiting for each package in a 
+dependency chain to be reviewed, built, and added to the conda-forge channel 
+before starting the process over with the next recipe in the chain.
+
+.. note::
+
+   When PRs with multiple interdependent recipes are merged,  
+   there may be an error if a build finishes before its dependency is built. If
+   this occurs, you can trigger a new build by pushing an empty commit.
+
+   .. code-block:: none
+
+      git commit --amend --no-edit && git push --force
+
+
+Synchronizing fork for future use
+---------------------------------
+
+If you would like to add additional packages in the future, you will need to 
+reset your fork of staged-recipes before creating a new branch on your fork, 
+adding the new package directory/recipe, and creating a pull request. This 
+step ensures you have the most recent version of the tools and configuration 
+files contained in the staged-recipes repository and makes the pull request 
+much easier to review. The following steps will reset your fork of 
+staged-recipes and should be executed from within a clone of your forked 
+staged-recipes directory.
+
+#. Checkout your master branch::
+
+     git checkout master
+
+#. Define the conda-forge/staged-recipes repository as “upstream” (if you have not already done so).::
+
+     git remote add upstream https://github.com/conda-forge/staged-recipes.git
+
+#. Pull all of the upstream commits from the upstream master branch.::
+
+     git pull --rebase upstream master
+
+#. Push all of the changes to your fork on GitHub (make sure there are not any changes on GitHub that you need because they will be overwritten).::
+
+     git push origin master --force
+
+Once these steps are complete, you can continue with the steps in :ref:`staging_steps` to stage your new package recipe using your existing staged-recipes fork.
 
 
 .. _meta_yaml:
 
 The recipe meta.yaml
 ====================
+
+The ``meta.yaml`` file in the recipe directory is at the heart of every conda package.
+It defines everything that is required to build and use the package.
+
+``meta.yaml`` is in `yaml <https://en.wikipedia.org/wiki/YAML>`__ format, augmented with `Jinja <http://jinja.pocoo.org/>`__ templating.
+
+A full reference of the structure and fields of ``meta.yaml`` file can be found in the `Defining metadata (meta.yaml) <https://conda.io/projects/conda-build/en/latest/resources/define-metadata.html>`__ section in the conda-build documentation.
+
+In the following, we highlight particularly important and conda-forge specific information and guidelines, ordered by section in ``meta.yaml``.
+
 
 Source
 ------
@@ -130,7 +199,7 @@ There are several reasons behind this rule:
   - Repositories are not checksummed.  Thus, using a tarball has a
     stronger guarantee that the download that is obtained to build from is
     in fact the intended package.
-  - On some systems it is possible to not have permission to remove a repo once it is created.
+  - On some systems, it is possible to not have permission to remove a repo once it is created.
 
 Populating the ``hash`` field
 .............................
@@ -232,41 +301,38 @@ Build, host and run
 ...................
 
 Conda-build distinguishes three different kinds of dependencies.
-In the following paragraphs we give a very short overview what packages go where.
+In the following paragraphs, we give a very short overview what packages go where.
 For a detailed explanation please refer to the `conda-build documentation <https://docs.conda.io/projects/conda-build/en/latest/source/resources/define-metadata.html#requirements-section>`__.
 
-Build
-^^^^^
+**Build**
 
-Build dependencies are required in the build environment and contain all tools that are not needed on the host of the package.
+  Build dependencies are required in the build environment and contain all tools that are not needed on the host of the package.
 
-Following packages are examples of typical ``build`` dependencies:
+  Following packages are examples of typical ``build`` dependencies:
 
- - compilers (see :ref:`dep_compilers`)
- - cmake
- - make
- - pkg-config
- - CDT packages (see :ref:`cdt_packages`)
+   - compilers (see :ref:`dep_compilers`)
+   - cmake
+   - make
+   - pkg-config
+   - CDT packages (see :ref:`cdt_packages`)
 
 
-Host
-^^^^
+**Host**
 
-Host dependencies are required during build phase, but in contrast to build packages they have to be present on the host.
+  Host dependencies are required during build phase, but in contrast to build packages they have to be present on the host.
 
-Following packages are typical examples for ``host`` dependencies:
+  Following packages are typical examples for ``host`` dependencies:
 
- - shared libraries (c/c++)
- - python/r libraries that link against c libraries (see e.g. :ref:`linking_numpy`)
- - python, r-base
- - setuptools, pip (see :ref:`use-pip`)
+   - shared libraries (c/c++)
+   - python/r libraries that link against c libraries (see e.g. :ref:`linking_numpy`)
+   - python, r-base
+   - setuptools, pip (see :ref:`use-pip`)
 
-Run
-^^^
+**Run**
 
-Run dependencies are only required during run time of the package. Run dependencies typically include
+  Run dependencies are only required during run time of the package. Run dependencies typically include
 
- - most python/r libraries
+   - most python/r libraries
 
 
 .. _no_external_deps:
@@ -274,9 +340,9 @@ Run dependencies are only required during run time of the package. Run dependenc
 Avoid external dependencies
 ...........................
 
-As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure :term:`ABI` compatiblity for all our packages.
+As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure :term:`ABI` compatibility for all our packages.
 
-There are only few exceptions to this rule:
+There are only a few exceptions to this rule:
 
 #. Some dependencies have to be satisfied with :term:`CDT` packages (see :ref:`cdt_packages`).
 
@@ -320,10 +386,46 @@ In other cases you have to specify :term:`ABI` compatible versions manually.
 For more information on pinning, please refer to :ref:`pinned_deps`.
 
 
-External dependencies
-.....................
+Constraining packages at runtime
+................................
 
-TODO: CDT packages & yum_requierements.
+The ``run_constrained`` section allows defining restrictions on packages at runtime without depending on the package. It can be used to restrict allowed versions of optional dependencies and defining incompatible packages.
+
+Defining non-dependency restrictions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Imagine a package can be used together with version 1 of ``awesome-software`` when present, but does not strictly depend on it.
+Therefore you would like to let the user choose whether he/she would like to use the package with or without ``awesome-software``. Let's assume further that the package is incompatible to version 2 of ``awesome-software``.
+
+In this case ``run_dependencies`` can be used to restrict ``awesome-software`` to version 1.*, if the user chooses to install it:
+
+.. code-block:: yaml
+
+  requirements:
+    # [...]
+    run_constrained:
+      - awesome-software 1.*
+
+Here ``run_constrained`` acts as a means to protect users from incompatible versions without introducing an unwanted dependency.
+
+Defining conflicts
+^^^^^^^^^^^^^^^^^^
+
+Sometimes packages interfere with each other and therefore only one of them can be installed at any time.
+In combination with an unsatisfiable version, ``run_constrained`` can define blockers:
+
+
+.. code-block:: yaml
+
+  package:
+  name: awesome-db
+
+  requirements:
+    # [...]
+    run_constrained:
+      - amazing-db ==9999999999
+
+In this example, ``awesome-db`` cannot be be installed together with ``amazing-db`` as there is no package ``amazing-db-9999999999``.
 
 
 .. _testing_in_recipes:
@@ -334,7 +436,7 @@ Test
 
 
 All recipes need tests. Here are some tips, tricks, and justifications.
-How you shold test depends on the type of package (python, c-lib,
+How you should test depends on the type of package (python, c-lib,
 command-line tool, ... ), and what tests are available for that package.
 But every conda package must have at least *some* tests.
 
@@ -348,7 +450,7 @@ Sometimes defining tests seems to be hard, e.g. due to:
  - test suites may take too long to run on limited :term:`CI` infrastructure.
  - tests may take too much bandwidth.
 
-In these cases conda-forge may not be able to execute the prescribed test suite.
+In these cases, conda-forge may not be able to execute the prescribed test suite.
 
 However, this is no reason for the recipe to not have tests. At the very least
 we want to verify that the package has installed the desired files in the desired
@@ -396,8 +498,8 @@ Note that ``package_name`` is the name imported by python;
 not necessarily the name of the conda package (they are sometimes different).
 
 Testing for an import will catch the bulk of the packaging errors, generally
-including presence of dependencies. However, it does not assure that the
-package works correctly. In particular, it doesn't test if if it works
+including the presence of dependencies. However, it does not assure that the
+package works correctly. In particular, it doesn't test if it works
 correctly with the versions of dependencies used.
 
 It is good to run some other tests of the code itself (the test suite) if possible.
@@ -418,7 +520,7 @@ Test requirements
 Sometimes there are packages required to run the tests that are not required
 to simply use the package. This is usually a test-running framework, such as
 nose or pytest. You can ensure that it is included by adding it to requirements
-in the the test stanza:
+in the test stanza:
 
 .. code-block:: yaml
 
@@ -428,6 +530,28 @@ in the the test stanza:
     ...
       requires:
         - pytest
+
+Copying test files
+^^^^^^^^^^^^^^^^^^
+
+Often test files are not installed alongside packages. Conda creates a fresh
+working copy to execute the test stage of build recipes, which don't contain
+the files of source package.
+
+You can include files required for testing with the ``source_files`` section:
+
+.. code-block:: yaml
+
+    test:
+      imports:
+        - package_name
+      requires:
+        - pytest tests test_pkg_integration.py
+      source_files:
+        - tests
+        - test_pkg_integration.py
+
+The ``source_files`` section works for files and directories.
 
 Built-in tests
 ^^^^^^^^^^^^^^
@@ -455,7 +579,7 @@ for you with the following command::
       requires:
         - pytest
       commands:
-        - py.test --pyargs package_name
+        - pytest --pyargs package_name
 
 
 Command Line Utilities
@@ -505,7 +629,7 @@ This requires that you have docker installed on your machine.
 About
 -----
 
-Packaging the licence manually
+Packaging the license manually
 ..............................
 
 Sometimes upstream maintainers do not include a license file in their tarball despite being demanded by the license.
@@ -525,10 +649,13 @@ In this case, please also notify the upstream developers that the license file i
   The license should only be shipped along with the recipe if there is no license file in the downloaded archive.
   If there is a license file in the archive, please set ``license_file`` to the path of the license file in the archive.
 
+Miscellaneous
+=============
+
 Activate scripts
 ----------------
 
-Recipes are allowed to have activate scripts, which will be ``sourced``\ d or
+Recipes are allowed to have activate scripts, which will be ``source``\ d or
 ``call``\ ed when the environment is activated. It is generally recommended to avoid using
 activate scripts when another option is possible because people do not always
 activate environments the expected way and these packages may then misbehave.
@@ -564,3 +691,55 @@ In ``build.bat``:
         copy %RECIPE_DIR%\%%F.bat %PREFIX%\etc\conda\%%F.d\%PKG_NAME%_%%F.bat
     )
 
+Jinja templating
+----------------
+
+The recipe ``meta.yaml`` can contain expressions that are evaluated during build time.
+These expressions are written in `Jinja <http://jinja.pocoo.org/>`__ syntax.
+
+Jinja expressions serve following purposes in the meta.yaml:
+
+- They allow defining variables to avoid code duplication. Using a variable for the ``version`` allows changing the version only once with every update.
+
+  .. code-block:: yaml
+
+      {% set version = "3.7.3" %}
+       [...]
+
+      package:
+        name: python
+        version: {{ version }}
+
+      source:
+        url: https://www.python.org/ftp/python/{{ version }}/Python-{{ version }}.tar.xz
+        sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
+
+- They can call `conda-build functions <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#conda-build-specific-jinja2-functions>`__ for automatic code generation. Examples are the compilers, cdt packages or the ``pin_compatible`` function.
+
+  .. code-block:: yaml
+
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+        - {{ cdt('libx11-devel') }}          # [linux]
+
+  or
+
+  .. code-block:: yaml
+
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+      host:
+        - python
+        - numpy
+      run:
+        - python
+        - {{ pin_compatible('numpy') }}
+
+
+
+For more information please refer to the `Templating with Jinja <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#templating-with-jinja>`__ section in the conda-build docs.

@@ -8,6 +8,7 @@ Maintainer Documentation
   adding_pkgs
   updating_pkgs
   pinning_deps
-  knowledge_base
   conda_forge_yml
+  knowledge_base
+  maintainer_faq
   
