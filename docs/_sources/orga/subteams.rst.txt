@@ -151,30 +151,18 @@ The staging team is responsible for:
  - help the documentation team maintain clear documentation that simplifies contributing packages
  - assist core in supporting feedstock maintainers when questions/issues arise during recipe maintenance
 
-
 Members
 -------
+In addition to [core](https://github.com/conda-forge/conda-forge.github.io/blob/master/src/core.csv)
+and [emeritus](https://github.com/conda-forge/conda-forge.github.io/blob/master/src/emeritus.csv),
+the following are members of the staged-recipes team and have commit rights.
+
  - Amir Mohammadi <183.amir@gmail.com>
  - Matthew R. Becker <becker.mr@gmail.com>
- - Björn Grüning <>
  - Chris Burr <christopher.burr@cern.ch>
- - Dougal J. Sutherland <dougal@gmail.com>
- - Eric Dill <thedizzle@gmail.com>
  - Igor T. Ghisi <>
- - Isuru Fernando <isuruf@gmail.com>
- - John Kirkham <kirkhamj@janelia.hhmi.org>
- - Jonathan J. Helmus <jjhelmus@gmail.com>
  - Johannes Köster <>
  - Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
- - Marius van Niekerk <marius.v.niekerk@gmail.com>
- - Mike Sarahan <msarahan@gmail.com>
- - Matt Craig <mattwcraig@gmail.com>
- - Filipe Pires Alvarenga Fernandes <ocefpaf@gmail.com>
- - Patrick Snape <patricksnape@gmail.com>
- - Phil Elson <pelson.pub@gmail.com>
- - Peter K. G. Williams <peter@newton.cx>
  - Peter M. Landwehr <>
- - Anthony Scopatz  <scopatz@gmail.com>
- - Patrick Sodré <>
+ - Patrick Sodré <psodre@gmail.com>
  - Sylvain Corlay <sylvain.corlay@gmail.com>
- - Joshua Adelman  <>
