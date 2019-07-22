@@ -12,7 +12,7 @@ if [ -n "$GH_TOKEN" ]; then
     git checkout -b new_site_content
     # Generate html requires a GitHub token in order to query the available feedstocks.
     conda env create -f ./.ci_scripts/environment.yml
-    conda activate conda-forge-docs
+    source activate conda-forge-docs
 
     # rebuild elm
     # uncomment to restore search
