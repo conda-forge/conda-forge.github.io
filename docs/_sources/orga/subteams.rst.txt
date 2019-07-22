@@ -122,3 +122,59 @@ Members
 - Anthony Scopatz <scopatz@gmail.com>
 - Christian Roth <ch.m.roth@gmail.com>
 - Lori A. Burns <lori.burns@gmail.com>
+
+
+Staging Sub-Team
+================
+
+Role
+----
+
+Review and merge feedstock candidates in the staged-recipes repository. Help users to create conda-forge compatible recipes.
+
+
+Charter
+-------
+Dynamic
+
+Responsibility
+--------------
+
+Introducing a recipe for most users is the first step of becoming involved with the development of conda-forge.
+Especially for new maintainers it is crucial to be able to ask questions and receive helpful and constructive feedback.
+
+The staging team is responsible for:
+
+ - reviewing and merging pull requests in conda-forge/staged-recipes
+ - answering questions and giving feedback regarding conda-forge requirements
+ - identifying common misconceptions and problems due to unclear documentation
+ - help the documentation team maintain clear documentation that simplifies contributing packages
+ - assist core in supporting feedstock maintainers when questions/issues arise during recipe maintenance
+
+
+Members
+-------
+ - Amir Mohammadi <183.amir@gmail.com>
+ - Matthew R. Becker <becker.mr@gmail.com>
+ - Björn Grüning <>
+ - Chris Burr <christopher.burr@cern.ch>
+ - Dougal J. Sutherland <dougal@gmail.com>
+ - Eric Dill <thedizzle@gmail.com>
+ - Igor T. Ghisi <>
+ - Isuru Fernando <isuruf@gmail.com>
+ - John Kirkham <kirkhamj@janelia.hhmi.org>
+ - Jonathan J. Helmus <jjhelmus@gmail.com>
+ - Johannes Köster <>
+ - Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
+ - Marius van Niekerk <marius.v.niekerk@gmail.com>
+ - Mike Sarahan <msarahan@gmail.com>
+ - Matt Craig <mattwcraig@gmail.com>
+ - Filipe Pires Alvarenga Fernandes <ocefpaf@gmail.com>
+ - Patrick Snape <patricksnape@gmail.com>
+ - Phil Elson <pelson.pub@gmail.com>
+ - Peter K. G. Williams <peter@newton.cx>
+ - Peter M. Landwehr <>
+ - Anthony Scopatz  <scopatz@gmail.com>
+ - Patrick Sodré <>
+ - Sylvain Corlay <sylvain.corlay@gmail.com>
+ - Joshua Adelman  <>

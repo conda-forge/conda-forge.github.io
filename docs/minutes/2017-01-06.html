@@ -1,0 +1,235 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>2017-01-06: General Discussion &#8212; conda-forge 2019.01 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    <script type="text/javascript" src="../_static/cloud.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2017-04-26: General Discussion" href="2017-04-26.html" />
+    <link rel="prev" title="2016-11-24: General Discussion" href="2016-11-24.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="2017-04-26.html" title="2017-04-26: General Discussion"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="2016-11-24.html" title="2016-11-24: General Discussion"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="general-discussion">
+<h1>2017-01-06: General Discussion<a class="headerlink" href="#general-discussion" title="Permalink to this headline">¶</a></h1>
+<p>Time: 20:00 (UTC)</p>
+<p>Hangout link: <a class="reference external" href="https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie"></a><a class="reference external" href="https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie">https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie</a></p>
+<p><strong>Attendees</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/wv6uvIZX6h0">John Kirkham</a></p></li>
+<li><p>Ray Donnelly</p></li>
+<li><p>Filipe Fernandes</p></li>
+<li><p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS">Michael Sarahan</a></p></li>
+<li><p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/Gxz5eDxqYrB">Peter Williams</a></p></li>
+<li><p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/yJqDqpPqJyz">Eric Dill</a></p></li>
+</ul>
+<p><strong>Standing Items</strong></p>
+<ul class="simple">
+<li><p>How many repos? ~1400</p></li>
+<li><p>How many contributors? ~300</p></li>
+<li><p>CFEP status</p></li>
+</ul>
+<p><strong>Notes</strong></p>
+<ul>
+<li><p>Options for packaging X.org libraries.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Bundle</span> <span class="n">them</span> <span class="n">together</span> <span class="p">[</span><span class="n">PR</span><span class="c1">#2068](https://github.com/conda-forge/staged-recipes/pull/2068).</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Use build customization to do one build and split out multiple packages.</p></li>
+</ul>
+</li>
+<li><p>Drop numpy 1.10 but leave Python 3.4 for a while longer.</p></li>
+<li><p>John will build Qt 4 on OS X.</p></li>
+<li><p>Ray will build Qt 5 with jpeg 9* soon on defaults and our problem will go away.</p></li>
+<li><p>conda-build 2</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">do</span> <span class="ow">not</span> <span class="n">wait</span> <span class="k">for</span> <span class="n">the</span> <span class="n">remaining</span> <span class="n">packages</span> <span class="n">that</span> <span class="n">needs</span> <span class="n">long</span> <span class="n">prefix</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>merge <a class="reference external" href="https://github.com/conda-forge/conda-forge-build-setup-feedstock/issues/40">conda forge/conda forge build setup feedstock#40</a></p></li>
+<li><p>investigate why pestc is not uploading</p></li>
+</ul>
+</li>
+<li><p>Move MACOSX_DEPLOYMENT_TARGET variable to conda-build-setup and modify the CFEP to reflect that.</p></li>
+</ul>
+<p><strong>Agenda</strong></p>
+<ul class="simple">
+<li><p>pkgw would like to discuss bundling X.org client libraries in the conda-forge stack, as per <a class="reference external" href="https://github.com/conda-forge/staged-recipes/pull/2068">PR#2068</a>. The PR has everything bundled into a giant tarball for simplicity; gqmelo posted <a class="reference external" href="https://github.com/ESSS/xorg-recipes">a set of recipes</a> that splits each library out.</p></li>
+<li><p>Defaults  channel libpng and jpeg updates: scheduled for 1Q 2017.  Continuum  requests closer collaboration on future api/abi incompatible updates to  core libraries.</p></li>
+<li><p>One pinning scheme for both defaults and conda-forge?</p></li>
+<li><p>That would be ideal.  Hopefully we can head that way.</p></li>
+<li><p>Drop  Python 3.4. Now that conda-forge have Qt 4+jpeg9* on Windows the Python  3.5+Windows users can migrate from Python 3.4 to 3.5.</p></li>
+<li><p>Do MinGW compile things that play well with Python 3.5/MSVC 2015 yet? AFAICT this is still an <a class="reference external" href="http://bugs.python.org/issue4709">issue</a>.</p></li>
+<li><p>Drop numpy 110</p></li>
+<li><p>Upload of Qt 4 for OS X</p></li>
+<li><p>Have a VM I’m willing to use to do this. Details <a class="reference external" href="https://github.com/boxcutter/macos">here</a>.</p></li>
+<li><p>Build and upload of Qt 5+jpeg 9* for all platforms</p></li>
+<li><p>PyCon  2017. Just submitted a place holder talk as we lost the tutorial  deadline and the talk deadline is today. Anyone interested in  participating please get in touch.</p></li>
+<li><p>Re-rendering channel improvements. ( <a class="reference external" href="https://github.com/conda-forge/conda-smithy/pull/401">conda forge/conda smithy#401</a> )</p></li>
+<li><p>conda-build 2 ( <a class="reference external" href="https://github.com/conda-forge/conda-forge-build-setup-feedstock/issues/40">conda forge/conda forge build setup feedstock#40</a> )</p></li>
+<li><p>Travis CI image change. ( <a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/6">conda forge/conda forge enhancement proposals#6</a> )</p></li>
+<li><p>conda-smithy and conda 4.2 ( <a class="reference external" href="https://github.com/conda-forge/conda-smithy/pull/394">conda forge/conda smithy#394</a> )</p></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html" title="index">
+          <img class="logo" src="../_static/logo_black_on_trans.png" alt="Logo"/>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Overview</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user/00_intro.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../maintainer/00_intro.html">Maintainer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2016-04-15.html">2016-04-15</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-04-22.html">2016-04-22 Exceptional meeting regarding VC pinning mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-04-29.html">2016-04-29</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-05-09.html">2016-05-09 Exceptional meeting regarding build customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-05-13.html">2016-05-13</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-06-03.html">2016-06-03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-06-09.html">2016-06-09: Compiler special meeting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-06-24.html">2016-06-24: General discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-07-22.html">2016-07-22: General discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-08-12.html">2016-08-12: General discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-08-25.html">2016-08-25: General discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-09-09.html">2016-09-09: General discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-09-23.html">2016-09-23 (postponed from 16th): General Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-10-07.html">2016-10-07: General Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-11-17.html">2016-11-17: Operational catchup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2016-11-24.html">2016-11-24: General Discussion</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2017-01-06: General Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-04-26.html">2017-04-26: General Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-08-11.html">2017-08-11: General Discussion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2019-06-26.html">2019-06-26 core dev meeting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2019-07-24.html">2017-07-24 conda-forge core meeting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TEMPLATE.html">MEETING TEMPLATE</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="2016-11-24.html"
+                          title="Previous page">&larr; 2016-11-24: General Discussion</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="2017-04-26.html"
+                          title="Next page">&rarr; 2017-04-26: General Discussion</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/minutes/2017-01-06.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="2017-04-26.html" title="2017-04-26: General Discussion"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="2016-11-24.html" title="2016-11-24: General Discussion"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2019, conda-forge.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
