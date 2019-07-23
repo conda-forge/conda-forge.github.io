@@ -291,6 +291,15 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
       secure:
         BINSTAR_TOKEN: <some big hash>
 
+upload_on_branch
+----------------
+This parameter restricts uploading access on work from certain branches of the same repo.
+Set the value to the name of the branch that should be granted uploading privileges.
+
+.. code-block:: yaml
+
+    upload_on_branch: master
+
 win
 ---
 The Windows-specific configuration options. This is largely an internal setting.
