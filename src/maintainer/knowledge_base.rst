@@ -689,7 +689,7 @@ In order to qualify as a noarch python package, all of the following criteria mu
     section.
   - ``2to3`` is not used
   - Scripts argument in setup.py is not used
-  - If ``console_script`` entry points are defined in ``setup.py`` or ``setup.cfg``, they are also listed in the ``build`` section of ``meta.yaml``
+  - If ``console_script`` ``entry_points`` are defined in ``setup.py`` or ``setup.cfg``, they are also listed in the ``build`` section of ``meta.yaml``
   - No activate scripts
   - Not a dependency of ``conda``
 
