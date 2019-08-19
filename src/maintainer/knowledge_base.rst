@@ -687,11 +687,11 @@ In order to qualify as a noarch python package, all of the following criteria mu
   - No skips except for python version. If the recipe is py3 only, remove skip
     statement and add version constraint on python in ``host`` and ``run``
     section.
-  - 2to3 is not used
+  - ``2to3`` is not used
   - Scripts argument in setup.py is not used
-  - If ``console_script`` entrypoints are in setup.py, they are listed in meta.yaml
+  - If ``console_script`` ``entry_points`` are defined in ``setup.py`` or ``setup.cfg``, they are also listed in the ``build`` section of ``meta.yaml``
   - No activate scripts
-  - Not a dependency of `conda`
+  - Not a dependency of ``conda``
 
 .. note::
   While ``noarch: python`` does not work with selectors, it does work with version constraints.
