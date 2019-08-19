@@ -293,7 +293,9 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
 
 upload_on_branch
 ----------------
-Only the branch listed in ``upload_on_branch`` will upload packages to the conda-forge channel. The default is the master branch.
+This parameter restricts uploading access on work from certain branches of the 
+same repo. Only the branch listed in ``upload_on_branch`` will upload packages 
+to the conda-forge channel. The default is:
 
 .. code-block:: yaml
 
