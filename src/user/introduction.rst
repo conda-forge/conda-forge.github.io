@@ -58,6 +58,13 @@ and activate the ``strict`` channel priority (strict will be activated by defaul
 
 From now on using ``conda install <package-name>`` will also find packages in our conda-forge channels.
 
+.. note::
+
+  In addition to the channel priority,
+  we recommend to always install your packages inside a new environment instead of the ``base`` (formerly known as ``root``) environment,
+  and we also recommend the use ``miniconda`` instead of the Anaconda Distribution.
+  Using environments make it easier to debug problems with packages and ensure the stability of your ``base`` environment.
+  Avoiding the Anaconda Distribution reduces chances of unsolvable/conflicts installations, it is also a smaller download.
 
 .. note::
 
