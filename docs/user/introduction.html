@@ -97,6 +97,14 @@ conda config --set channel_priority strict
 <p>From now on using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">&lt;package-name&gt;</span></code> will also find packages in our conda-forge channels.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
+<p>In addition to the channel priority,
+we recommend to always install your packages inside a new environment instead of the <code class="docutils literal notranslate"><span class="pre">base</span></code> (formerly known as <code class="docutils literal notranslate"><span class="pre">root</span></code>) environment,
+and we also recommend the use <code class="docutils literal notranslate"><span class="pre">miniconda</span></code> instead of the Anaconda Distribution.
+Using environments make it easier to debug problems with packages and ensure the stability of your <code class="docutils literal notranslate"><span class="pre">base</span></code> environment.
+Avoiding the Anaconda Distribution reduces chances of unsolvable/conflicts installations, it is also a smaller download.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Please be aware that the order of your conda package channels is important, especially when you combine conda-forge with other channels, e.g. <code class="docutils literal notranslate"><span class="pre">bioconda</span></code>.</p>
 <p>Please refer to <a class="reference internal" href="tipsandtricks.html#multiple-channels"><span class="std std-ref">Using multiple channels</span></a> for pitfalls and more information.</p>
 </div>
