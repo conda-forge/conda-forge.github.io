@@ -305,6 +305,17 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
       secure:
         BINSTAR_TOKEN: <some big hash>
 
+upload_on_branch
+----------------
+This parameter restricts uploading access on work from certain branches of the 
+same repo. Only the branch listed in ``upload_on_branch`` will trigger uploading
+of packages to the target channel. The default is to skip this check if the key
+``upload_on_branch`` is not in ``conda-forge.yml``. To restrict uploads to the
+master branch:
+
+.. code-block:: yaml
+    upload_on_branch: master
+
 win
 ---
 The Windows-specific configuration options. This is largely an internal setting.
