@@ -324,6 +324,14 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
 </pre></div>
 </div>
 </div>
+<div class="section" id="upload-on-branch">
+<h3>upload_on_branch<a class="headerlink" href="#upload-on-branch" title="Permalink to this headline">¶</a></h3>
+<p>This parameter restricts uploading access on work from certain branches of the
+same repo. Only the branch listed in <code class="docutils literal notranslate"><span class="pre">upload_on_branch</span></code> will trigger uploading
+of packages to the target channel. The default is to skip this check if the key
+<code class="docutils literal notranslate"><span class="pre">upload_on_branch</span></code> is not in <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>. To restrict uploads to the
+master branch:</p>
+</div>
 <div class="section" id="win">
 <h3>win<a class="headerlink" href="#win" title="Permalink to this headline">¶</a></h3>
 <p>The Windows-specific configuration options. This is largely an internal setting.
@@ -376,6 +384,7 @@ Currently only:</p>
 <li class="toctree-l4"><a class="reference internal" href="#skip-render">skip_render</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#templates">templates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#travis">travis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upload-on-branch">upload_on_branch</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#win">win</a></li>
 </ul>
 </li>
