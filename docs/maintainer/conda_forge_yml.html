@@ -81,6 +81,7 @@ file that is present in the root directory of a feedstock.</p>
 <li><p>skip_render</p></li>
 <li><p>templates</p></li>
 <li><p>travis</p></li>
+<li><p>upload_on_branch</p></li>
 <li><p>win</p></li>
 </ul>
 <div class="section" id="appveyor">
@@ -331,6 +332,9 @@ same repo. Only the branch listed in <code class="docutils literal notranslate">
 of packages to the target channel. The default is to skip this check if the key
 <code class="docutils literal notranslate"><span class="pre">upload_on_branch</span></code> is not in <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>. To restrict uploads to the
 master branch:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">upload_on_branch</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="win">
 <h3>win<a class="headerlink" href="#win" title="Permalink to this headline">¶</a></h3>
