@@ -48,7 +48,7 @@ How can I install packages from conda-forge?
 --------------------------------------------
 
 Using conda-forge is as easy! You just have to register the conda-forge channel as a package source for conda,
-and activate the ``strict`` channel priority (strict will be activated by default in conda 4.7).
+and activate the ``strict`` channel priority (``strict`` will be activated by default in conda 5.0).
 
 .. code-block:: bash
 
