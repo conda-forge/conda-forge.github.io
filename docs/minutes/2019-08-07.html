@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>2017-07-24 conda-forge core meeting &#8212; conda-forge 2019.01 documentation</title>
+    <title>2017-08-07 conda-forge core meeting &#8212; conda-forge 2019.01 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -52,16 +52,154 @@
           <div class="body" role="main">
             
   <div class="section" id="conda-forge-core-meeting">
-<h1>2017-07-24 conda-forge core meeting<a class="headerlink" href="#conda-forge-core-meeting" title="Permalink to this headline">¶</a></h1>
+<h1>2017-08-07 conda-forge core meeting<a class="headerlink" href="#conda-forge-core-meeting" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://hackmd.io/1VB13FnIQpiruA0lb04MKw?edit">HackMD link</a></p>
 <hr class="docutils" />
 <div class="section" id="attendees">
 <h2>Attendees<a class="headerlink" href="#attendees" title="Permalink to this headline">¶</a></h2>
 <p>List the attendees for the meeting</p>
+<ul class="simple">
+<li><p>Jonathan Helmus</p></li>
+<li><p>Filipe Fernandes</p></li>
+<li><p>Kai Tietz</p></li>
+<li><p>Lori Burns</p></li>
+<li><p>Sophia Castellarin</p></li>
+<li><p>Marius van Niekerk</p></li>
+<li><p>Michael Sarahan</p></li>
+<li><p>Anthony Scopatz</p></li>
+<li><p>John Blischak</p></li>
+<li><p>Sophia Parafina</p></li>
+</ul>
 </div>
 <div class="section" id="agenda">
 <h2>Agenda<a class="headerlink" href="#agenda" title="Permalink to this headline">¶</a></h2>
 <p>Please add new items to the meeting Agenda</p>
+<div class="section" id="esip-update-filipe">
+<h3>ESIP update (Filipe)<a class="headerlink" href="#esip-update-filipe" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Thread in gitter from Filipe about the ESIP funding. Annie Burgess (the coordinator of the lab incubator grant) has the following to say:</p></li>
+</ul>
+<blockquote>
+<div><p>I’ve been pretty pleased with how the CondaForge
+project has gone on a couple of fronts.</p>
+</div></blockquote>
+<blockquote>
+<div><p>I think the model of using the funding for sprints,
+with direct or in-kind contribution from other orgs
+(e.g. Anaconda) is a good model for how to get some
+concerted development done on some of these
+foundational software projects.</p>
+</div></blockquote>
+<blockquote>
+<div><p>Also, seems they’ve been able to get quite a bit
+done at the sprints themselves.</p>
+</div></blockquote>
+<blockquote>
+<div><p>In terms of the utility of what they’ve done,
+that is really for the community/users to decide.
+It would be good to seek users out to see how the added
+functionality is helping them accomplish their work AND
+to scope what next development efforts could be next,
+with ESIP or other funding agencies.</p>
+</div></blockquote>
+</div>
+<div class="section" id="start-a-blog">
+<h3>Start a blog<a class="headerlink" href="#start-a-blog" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Thread in gitter about starting a blog that is a follow-on from the ESIP update</p></li>
+</ul>
+<blockquote>
+<div><p>We have to work on the second part there. Most of the results from the latest improvements in conda-forge are “invisible” to an average user. They will get newer packages faster thanks to the migration infrastructure we have and the packages will be more stable. But most users won’t even notice that. TL;DR we need to start blogging.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Bit of a discussion around Medium, but that doesn’t easily let others contribute. Someone needs to manage the Medium account.</p></li>
+<li><p>Using github to host the blog was proposed and had +1’s from Marcel, Bjorn and John</p></li>
+<li><p>Cross-posting blogs to the Anaconda blog is also on the table. Had a +1 from John on that. Any objections?</p></li>
+<li><p>[ ] TODO: Find someone to champion running the blog and someone to do the infrastructure work to set up the blog. That can be the same person but doesn’t have to be</p></li>
+</ul>
+<p>Discussion:</p>
+<ul class="simple">
+<li><p>Chris Roth might be interested, he has been interested in docs in the past. (Filipe will contact)
+Technology to use:</p></li>
+<li><p>Markdown?</p></li>
+<li><p>Jupyter Notebooks?</p></li>
+<li><p>Let champion have final say in technology to use.</p></li>
+<li><p>Need reviewers once content is created</p></li>
+</ul>
+</div>
+<div class="section" id="user-survey-john-k">
+<h3>User survey (John K)<a class="headerlink" href="#user-survey-john-k" title="Permalink to this headline">¶</a></h3>
+<p>Also in gitter, from John (plus some light editing to clarify):</p>
+<blockquote>
+<div><p>How do we feel about doing a user survey? As in, a short list of
+questions about what people are using Conda-forge for and what
+things they would like to improve. Just thinking how we can
+address the request in the last (ESIP) paragraph (above). This
+should give us some tangible community-oriented goals that we can
+move towards over the next year (and data to back that it up in
+case someone asks why we spent time on some task)</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>[ ] Link to google document that John mentioned that he would be creating</p></li>
+<li><p>Questions:</p>
+<ul>
+<li><p>How would you feel about collecting telemetry information?</p></li>
+<li><p>How do you use conda-forge</p></li>
+<li><p>What architectures, platforms, etc do you use?</p></li>
+<li><p>What packages are missing in conda-forge</p></li>
+<li><p>What’s needed here?</p></li>
+<li><p><em>How</em> do we conduct a user survey?</p>
+<ul>
+<li><p>Typeform makes nice surveys but not free for volume needed (https://www.typeform.com/pricing/) +1</p></li>
+<li><p>Google forms?</p></li>
+</ul>
+</li>
+<li><p>Who is interested in helping:</p>
+<ul>
+<li><p>Conduct the user survey?</p></li>
+<li><p>Collate the results?</p></li>
+<li><p>Analyze the data?</p></li>
+<li><p>Produce the resultant report?</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="migrate-away-from-appveyor-marius-isuru">
+<h3>Migrate away from Appveyor (Marius / Isuru)<a class="headerlink" href="#migrate-away-from-appveyor-marius-isuru" title="Permalink to this headline">¶</a></h3>
+<p>Discussion in gitter between Marius and Isuru. Anything else needed to discuss?</p>
+<ul class="simple">
+<li><p>Everything that doesn’t use CMake or msbuild is a candidate to migrate off of Appveyor</p></li>
+<li><p>Could use Azure API to get the builds that are successful</p></li>
+</ul>
+<p>Using build status is not ideal since Azure logs are only available for a limited time.
+Can use cfgraph to determine if cmake is used.
+Push with “skip appveyor” to all effected feedstocks or create migrator, former seems better.</p>
+<p>AppVeyor usage:</p>
+<ul class="simple">
+<li><p>have 4 job plan</p></li>
+<li><p>~4 feedstocks added per day</p></li>
+</ul>
+<p>Actions:</p>
+<ul class="simple">
+<li><p>[ ] Get list of packages to KEEP on Appveyor</p></li>
+<li><p>[ ] Change the default fo Azure.</p></li>
+</ul>
+</div>
+<div class="section" id="czi-scopatz">
+<h3>CZI (Scopatz)<a class="headerlink" href="#czi-scopatz" title="Permalink to this headline">¶</a></h3>
+<p>Have conda-forge apply to CZI for funding.
+Grants up to 250k
+Focus on Open Source infastructure
+What would the topic of the grant be?
+Funding would not be directly under conda-forge but under another organization.
+NumFocus could sub-contract these funds.
+Could team up with bioconda (<a class="reference external" href="https://github.com/orgs/bioconda/teams/core/members">core team</a>)</p>
+<p>https://chanzuckerberg.com/rfa/essential-open-source-software-for-science/
+Mid-December 2019
+Mid-June 2020</p>
+</div>
 <div class="section" id="subteam-updates">
 <h3>Subteam updates<a class="headerlink" href="#subteam-updates" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="bot">
@@ -69,6 +207,9 @@
 </div>
 <div class="section" id="arm">
 <h4>ARM<a class="headerlink" href="#arm" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>[ ] Need a new conda-smithy release for ARMV7</p></li>
+</ul>
 </div>
 <div class="section" id="docs">
 <h4>Docs<a class="headerlink" href="#docs" title="Permalink to this headline">¶</a></h4>
@@ -84,22 +225,41 @@
 <h3>Your agenda items<a class="headerlink" href="#your-agenda-items" title="Permalink to this headline">¶</a></h3>
 <p>Please add a level three markdown heading (###) with whatever you wish to discuss.</p>
 </div>
+<div class="section" id="eric">
+<h3>Eric<a class="headerlink" href="#eric" title="Permalink to this headline">¶</a></h3>
+<p>Record the meetings and upload them to youtube?</p>
+</div>
 </div>
 <div class="section" id="discussion">
 <h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
 <p>Notes from todays core meeting</p>
+<p>QT recipe almost ready, needed some fixes for clang.
+RSS feed is available for conda-forge repository.  Would be helpful to provide docs on how this should be interpreted.</p>
 </div>
 <div class="section" id="check-in-on-previous-action-items">
 <h2>Check in on previous action items<a class="headerlink" href="#check-in-on-previous-action-items" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>[ ] Filipe: Research software for audio listen only access for other members of the community that want to attend but aren’t part of core.</p></li>
-<li><p>[ ] Filipe to open issue about fixing docs – there were some issues that came up at the sprints.</p></li>
+<li><p>[x] Filipe: Research software for audio listen only access for other members of the community that want to attend but aren’t part of core.</p>
+<ul>
+<li><p>I e-mailed them, no answer yet. We have a better chance asking directly during one of the meetings.</p></li>
+</ul>
+</li>
+<li><p>[ ] Filipe to open issue about fixing docs – there were some issues that came up at the sprints.
+Two were fixed at SciPy. One is pending: make the use of <code class="docutils literal notranslate"><span class="pre">strict</span></code> clear in our docs.</p></li>
 <li><p>[ ] Mike S.:  pypy Next steps: Say yes / no to the spec, point out potential pitfalls, give it back to (Matti?) and say here’s the work that needs to be done.</p></li>
-<li><p>[ ] Marius to reach out to Wolf about robot operating systems making it to conda-forge</p></li>
+<li><p>[x] Marius to reach out to Wolf about robot operating systems making it to conda-forge</p>
+<ul>
+<li><p>He’s just done this on his own :D</p></li>
+</ul>
+</li>
 <li><p>[ ] Marius: Open issue on conda-forge.github.io noting work done on the kubernetes cluster</p></li>
 <li><p>[ ] Marius: reach out to internal IT to clean up some Zoom hiccups.</p></li>
-<li><p>[ ] Marius: intel compiler architecture repo update.</p></li>
-<li><p>[ ] Matt: source-extractor update. Follow-up with Anthony and NumFocus around the renaming issue.</p></li>
+<li><p>[ ] Marius: intel compiler architecture repo update.</p>
+<ul>
+<li><p>Will set up linux hosts</p></li>
+</ul>
+</li>
+<li><p>[ ] Matt: source-extractor update. Follow-up with Anthony and NumFocus around the renaming issue. <strong>Update:</strong> Anthony has submitted the potential CoC violation, we are waiting to hear back. Feedback from participants at Python in Astronomy 2019 was that it is time for the name to change to source-extractor.</p></li>
 <li><p>[ ] Eric: Set up meeting to talk through the conda-forge feature set requirements for the new Anaconda.org</p></li>
 <li><p>[ ] Eric: Confirm with core team that no one wants access, as long as the conda-forge feature set is included in the design of the replacement for anaconda.org</p></li>
 </ul>
@@ -108,6 +268,13 @@
 <h2>New Action items<a class="headerlink" href="#new-action-items" title="Permalink to this headline">¶</a></h2>
 <p>Copy new action items to next meetings agenda so we can check in.
 Make sure each action item is assigned to someone or it will likely not get done.</p>
+<ul class="simple">
+<li><p>[ ] Filipe: contact Chris Roth about interesting in helping in create a blog</p></li>
+<li><p>[ ] John K: Create, or link, google doc with survey questions</p></li>
+<li><p>[ ] Marius: Begin migration from AppVeyor, see topic for breakout items</p></li>
+<li><p>[ ] Jonathan: conda smithy release for linux-armv7l</p></li>
+<li><p>[ ] Anthony + SoPhia: Statuspage RSS</p></li>
+</ul>
 </div>
 </div>
 
@@ -148,9 +315,14 @@ Make sure each action item is assigned to someone or it will likely not get done
 <li class="toctree-l2"><a class="reference internal" href="2017-08-11.html">2017-08-11: General Discussion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2019-06-26.html">2019-06-26 core dev meeting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2019-07-24.html">2017-07-24 conda-forge core meeting</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2017-07-24 conda-forge core meeting</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2017-08-07 conda-forge core meeting</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#attendees">Attendees</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#agenda">Agenda</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#esip-update-filipe">ESIP update (Filipe)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#start-a-blog">Start a blog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-survey-john-k">User survey (John K)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#migrate-away-from-appveyor-marius-isuru">Migrate away from Appveyor (Marius / Isuru)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#czi-scopatz">CZI (Scopatz)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#subteam-updates">Subteam updates</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#bot">Bot</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#arm">ARM</a></li>
@@ -160,6 +332,7 @@ Make sure each action item is assigned to someone or it will likely not get done
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#ci-infrastructure">CI infrastructure</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#your-agenda-items">Your agenda items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eric">Eric</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#discussion">Discussion</a></li>
