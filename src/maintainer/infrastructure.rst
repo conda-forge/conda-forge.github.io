@@ -111,6 +111,11 @@ Entering the above phrase in an issue of a feedstock will update the Circle-CI S
 
 Entering the above phrase in an issue will update the team for the feedstock. This is usually done automatically.
 
+@conda-forge-admin, please restart ci
+-------------------------------------
+
+Entering this command in the PR of a feedstock or staged-recipes will close and then open the PR, causing 
+all of the CI builds to restart.
 
 CI build services
 =================
@@ -128,7 +133,7 @@ Restarting builds
 .................
 
 Presently Azure does not sync GitHub users. In order to restart a build you can restart it from the GitHub checks interface.
-If that doesn't work, a close/open will kick off a new build.
+If that doesn't work, a close/open will kick off a new build. You can also use the web services command ``@conda-forge-admin, please restart ci``.
 
 Using Azure for *everything*
 ............................
