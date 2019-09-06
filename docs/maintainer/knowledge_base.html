@@ -618,11 +618,11 @@ packages that only need to be built once.</p>
 <li><p>No skips except for python version. If the recipe is py3 only, remove skip
 statement and add version constraint on python in <code class="docutils literal notranslate"><span class="pre">host</span></code> and <code class="docutils literal notranslate"><span class="pre">run</span></code>
 section.</p></li>
-<li><p>2to3 is not used</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2to3</span></code> is not used</p></li>
 <li><p>Scripts argument in setup.py is not used</p></li>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">console_script</span></code> entrypoints are in setup.py, they are listed in meta.yaml</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">console_script</span></code> <code class="docutils literal notranslate"><span class="pre">entry_points</span></code> are defined in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> or <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code>, they are also listed in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section of <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></p></li>
 <li><p>No activate scripts</p></li>
-<li><p>Not a dependency of <cite>conda</cite></p></li>
+<li><p>Not a dependency of <code class="docutils literal notranslate"><span class="pre">conda</span></code></p></li>
 </ul>
 </div></blockquote>
 <div class="admonition note">
@@ -815,7 +815,7 @@ section.</p></li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

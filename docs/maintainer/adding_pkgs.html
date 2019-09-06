@@ -617,6 +617,8 @@ this install process easier. Please feel free to lift it.</p>
 <span class="k">for</span> <span class="se">%%</span>F <span class="k">in</span> <span class="p">(</span>activate deactivate<span class="p">)</span> <span class="k">DO</span> <span class="p">(</span>
     <span class="k">if</span> <span class="k">not</span> <span class="k">exist</span> <span class="nv">%PREFIX%</span>\etc\conda\<span class="se">%%</span>F.d <span class="k">mkdir</span> <span class="nv">%PREFIX%</span>\etc\conda\<span class="se">%%</span>F.d
     <span class="k">copy</span> <span class="nv">%RECIPE_DIR%</span>\<span class="se">%%</span>F.bat <span class="nv">%PREFIX%</span>\etc\conda\<span class="se">%%</span>F.d\<span class="nv">%PKG_NAME%</span>_<span class="se">%%</span>F.bat
+    <span class="p">:</span><span class="c1">: Copy unix shell activation scripts, needed by Windows Bash users</span>
+    <span class="k">copy</span> <span class="nv">%RECIPE_DIR%</span>\<span class="se">%%</span>F.sh <span class="nv">%PREFIX%</span>\etc\conda\<span class="se">%%</span>F.d\<span class="nv">%PKG_NAME%</span>_<span class="se">%%</span>F.sh
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -837,7 +839,7 @@ source:
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

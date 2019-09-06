@@ -89,12 +89,20 @@ In the past users only had the option to create an <a class="reference external"
 <div class="section" id="how-can-i-install-packages-from-conda-forge">
 <h2>How can I install packages from conda-forge?<a class="headerlink" href="#how-can-i-install-packages-from-conda-forge" title="Permalink to this headline">¶</a></h2>
 <p>Using conda-forge is as easy! You just have to register the conda-forge channel as a package source for conda,
-and activate the <code class="docutils literal notranslate"><span class="pre">strict</span></code> channel priority (strict will be activated by default in conda 4.7).</p>
+and activate the <code class="docutils literal notranslate"><span class="pre">strict</span></code> channel priority (<code class="docutils literal notranslate"><span class="pre">strict</span></code> will be activated by default in conda 5.0).</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --add channels conda-forge
 conda config --set channel_priority strict
 </pre></div>
 </div>
 <p>From now on using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">&lt;package-name&gt;</span></code> will also find packages in our conda-forge channels.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In addition to the channel priority,
+we recommend to always install your packages inside a new environment instead of the <code class="docutils literal notranslate"><span class="pre">base</span></code> (formerly known as <code class="docutils literal notranslate"><span class="pre">root</span></code>) environment,
+and we also recommend the use <code class="docutils literal notranslate"><span class="pre">miniconda</span></code> instead of the Anaconda Distribution.
+Using environments make it easier to debug problems with packages and ensure the stability of your <code class="docutils literal notranslate"><span class="pre">base</span></code> environment.
+Avoiding the Anaconda Distribution reduces chances of unsolvable/conflicts installations, it is also a smaller download.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Please be aware that the order of your conda package channels is important, especially when you combine conda-forge with other channels, e.g. <code class="docutils literal notranslate"><span class="pre">bioconda</span></code>.</p>
@@ -205,7 +213,7 @@ conda config --set channel_priority strict
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
