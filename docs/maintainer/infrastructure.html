@@ -131,6 +131,11 @@ for you.</p>
 <h3>&#64;conda-forge-admin, please update team<a class="headerlink" href="#conda-forge-admin-please-update-team" title="Permalink to this headline">¶</a></h3>
 <p>Entering the above phrase in an issue will update the team for the feedstock. This is usually done automatically.</p>
 </div>
+<div class="section" id="conda-forge-admin-please-restart-ci">
+<h3>&#64;conda-forge-admin, please restart ci<a class="headerlink" href="#conda-forge-admin-please-restart-ci" title="Permalink to this headline">¶</a></h3>
+<p>Entering this command in the PR of a feedstock or staged-recipes will close and then open the PR, causing
+all of the CI builds to restart.</p>
+</div>
 </div>
 <div class="section" id="ci-build-services">
 <h2>CI build services<a class="headerlink" href="#ci-build-services" title="Permalink to this headline">¶</a></h2>
@@ -143,7 +148,7 @@ than on all the other providers.  Azure builds have a maximum duration of 6 hour
 <div class="section" id="restarting-builds">
 <h4>Restarting builds<a class="headerlink" href="#restarting-builds" title="Permalink to this headline">¶</a></h4>
 <p>Presently Azure does not sync GitHub users. In order to restart a build you can restart it from the GitHub checks interface.
-If that doesn’t work, a close/open will kick off a new build.</p>
+If that doesn’t work, a close/open will kick off a new build. You can also use the web services command <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">restart</span> <span class="pre">ci</span></code>.</p>
 </div>
 <div class="section" id="using-azure-for-everything">
 <h4>Using Azure for <em>everything</em><a class="headerlink" href="#using-azure-for-everything" title="Permalink to this headline">¶</a></h4>
@@ -270,6 +275,7 @@ This is not normally needed.</p>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-lint">&#64;conda-forge-admin, please lint</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-update-circle">&#64;conda-forge-admin, please update circle</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-update-team">&#64;conda-forge-admin, please update team</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-restart-ci">&#64;conda-forge-admin, please restart ci</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#ci-build-services">CI build services</a><ul>
