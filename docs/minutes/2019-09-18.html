@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>2019-09-04 conda-forge core meeting &#8212; conda-forge 2019.01 documentation</title>
+    <title>2019-09-18 conda-forge core meeting &#8212; conda-forge 2019.01 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -20,8 +20,8 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2019-09-18 conda-forge core meeting" href="2019-09-18.html" />
-    <link rel="prev" title="2017-08-07 conda-forge core meeting" href="2019-08-07.html" /> 
+    <link rel="next" title="MEETING TEMPLATE" href="TEMPLATE.html" />
+    <link rel="prev" title="2019-09-04 conda-forge core meeting" href="2019-09-04.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -33,10 +33,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="2019-09-18.html" title="2019-09-18 conda-forge core meeting"
+          <a href="TEMPLATE.html" title="MEETING TEMPLATE"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2019-08-07.html" title="2017-08-07 conda-forge core meeting"
+          <a href="2019-09-04.html" title="2019-09-04 conda-forge core meeting"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -52,19 +52,19 @@
           <div class="body" role="main">
             
   <div class="section" id="conda-forge-core-meeting">
-<h1>2019-09-04 conda-forge core meeting<a class="headerlink" href="#conda-forge-core-meeting" title="Permalink to this headline">¶</a></h1>
+<h1>2019-09-18 conda-forge core meeting<a class="headerlink" href="#conda-forge-core-meeting" title="Permalink to this headline">¶</a></h1>
 <hr class="docutils" />
 <div class="section" id="attendees">
 <h2>Attendees<a class="headerlink" href="#attendees" title="Permalink to this headline">¶</a></h2>
-<p>List the attendees for the meeting</p>
 <ul class="simple">
-<li><p>Filipe</p></li>
+<li><p>CJ</p></li>
 <li><p>Eric</p></li>
+<li><p>Filipe</p></li>
+<li><p>John K.</p></li>
+<li><p>Jonathan</p></li>
 <li><p>Sophia C.</p></li>
-<li><p>Dougal</p></li>
-<li><p>Lori</p></li>
 <li><p>Anthony</p></li>
-<li><p>Marius</p></li>
+<li><p>Ray D.</p></li>
 </ul>
 </div>
 <div class="section" id="agenda">
@@ -72,49 +72,10 @@
 <p>Pre-arranged stuff to talk about.
 Email core team on Monday of the week of the dev meeting to ask for things to talk about.</p>
 <ul class="simple">
-<li><p>NumFOCUS summit. Can send 2 people with their funding. Can apply for 1 numfocus award.</p>
+<li><p>(CJ) CFEP5. Updated the proposal to reflect the desire for a <code class="docutils literal notranslate"><span class="pre">rc_&lt;packagename&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;packagename&gt;_rc</span></code></p>
 <ul>
-<li><p>What’s the numfocus award? “Outstanding new contributor award”. Every project gives out an award to their best new member / contributor. That is up to the project to determine. This is a “welcome, hey, you’re doing a great job” sort of thing. Last year we gave it to CJ.</p>
-<ul>
-<li><p>Anthony will own the nominations and voting.</p></li>
-</ul>
-</li>
-<li><p>Two people to send with funding:
-https://www.eventbrite.com/e/2019-numfocus-summit-tickets-68012012761</p>
-<ul>
-<li><p>Filipe</p></li>
-<li><p>Sophia C.</p></li>
-</ul>
-</li>
-<li><p>Time: November 1st-3rd. (Fri-Sun). Pydata: Nov 4th-6th (M-W)</p></li>
-</ul>
-</li>
-<li><p>conda-forge talk at pydata nyc? Marius will check and see if there’s interest from the organizing committe.
-~~- conda-forge tutorial at pydata nyc?~~</p></li>
-</ul>
-<ul class="simple">
-<li><p>Discussed how to set up a blog. Options are probably Medium / host your own on the conda-forge website.</p>
-<ul>
-<li><p>Medium seems to be generally downvoted</p></li>
-<li><p>Host your own blog seems to be generally positive</p></li>
-<li><p>Issues raised: Searching on our website is a little difficult.</p></li>
-</ul>
-</li>
-<li><p>New conda-smithy release? haven’t cut one in months. Anthony will cut a new release of conda-smithy.</p>
-<ul>
-<li><p>Do we have docs on releasing conda-smithy? There are some instructions in the readme. Anthony and Filipe will sync later on getting this done (and maybe the docs updated)</p></li>
-</ul>
-</li>
-<li><p>(Filipe) ESIP funds. Gave good feedback on packages. They weren’t really sure what it was that we did behind the scenes.</p></li>
-<li><p>(Filipe) Pangeo meeting last week. Folks are generally happy with conda-forge. They’re struggling with channels, <code class="docutils literal notranslate"><span class="pre">strict</span></code>, and are generally not interested in engaging us with issues.</p>
-<ul>
-<li><p>How can we get users to engage us and open issues?</p>
-<ul>
-<li><p>Something to think about: If you know nothing about conda-forge, the website does not necessarily give you clear instructions on how to understand where your issue might be.</p></li>
-<li><p>Would be good to improve the entry points for folks</p></li>
-<li><p>https://github.com/conda-forge/conda-forge.github.io/issues/852</p></li>
-</ul>
-</li>
+<li><p>Filipe: Update the issue with discussion during call when finished with conference.</p></li>
+<li><p>CJ: Hot potato! you own this cfep now</p></li>
 </ul>
 </li>
 </ul>
@@ -122,6 +83,15 @@ https://www.eventbrite.com/e/2019-numfocus-summit-tickets-68012012761</p>
 <h3>Subteam updates<a class="headerlink" href="#subteam-updates" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="bot">
 <h4>Bot<a class="headerlink" href="#bot" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>(CJ) updates to the bot database structure</p></li>
+<li><p>(CJ) piggy back migrations proposal</p>
+<ul>
+<li><p>e.g., Converting python package installs from <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></code> to <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">&lt;more</span> <span class="pre">stuff&gt;</span></code></p></li>
+</ul>
+</li>
+<li><p>(CJ) cfep9 update</p></li>
+</ul>
 </div>
 <div class="section" id="arm">
 <h4>ARM<a class="headerlink" href="#arm" title="Permalink to this headline">¶</a></h4>
@@ -132,12 +102,74 @@ https://www.eventbrite.com/e/2019-numfocus-summit-tickets-68012012761</p>
 <div class="section" id="staged-recipes">
 <h4>staged-recipes<a class="headerlink" href="#staged-recipes" title="Permalink to this headline">¶</a></h4>
 </div>
+<div class="section" id="website">
+<h4>website<a class="headerlink" href="#website" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>(Filipe, Dougal) How can we get users to engage us and open issues?</p>
+<ul>
+<li><p>https://github.com/conda-forge/conda-forge.github.io/issues/852</p></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" id="ci-infrastructure">
 <h3>CI infrastructure<a class="headerlink" href="#ci-infrastructure" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>(Marius, Isuru) Azure migration update?</p></li>
+<li><p>Do we want to roll out https://github.com/conda-forge/conda-smithy/issues/1131 to all feedstocks?</p></li>
+</ul>
+<div class="section" id="compiler-upgrade">
+<h4>Compiler upgrade<a class="headerlink" href="#compiler-upgrade" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Update to clang 8.0.1 and gfortran 7.3.0 on OSX</p>
+<ul>
+<li><p>No rebuild necessary. (Rebuild for gfortran 7.3.0 is already done. We build with 7.3.0 and 4.8.5)</p></li>
+<li><p>This should be pain free except for some packages that do -Wall -Werror.</p></li>
+<li><p>We get better compilers.</p></li>
+<li><p>We don’t have to rely on defaults as we build these in conda-forge CI.</p></li>
+<li><p>We get a linker that supports .tbds .
+(new linker might work with older compiler, but not sure about packages compiled with -flto)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="make-missing-license-file-an-error">
+<h4>Make missing license_file an error<a class="headerlink" href="#make-missing-license-file-an-error" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>We merged https://github.com/conda-forge/conda-smithy/pull/1102 in the feedstock</p>
+<ul>
+<li><p>(Isuru) - It’s illegal to not package the license file in most licenses, so we should strictly enforce this.</p></li>
+<li><p>1268 feedstocks with no license files (some may not require a license file)</p>
+<ul>
+<li><p>(Isuru) - PR to conda-smithy was to enforce this for GPL, BSD, MIT, Apache only</p>
+<ul>
+<li><p>https://github.com/conda-forge/conda-smithy/pull/1098</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>(Scopatz) Reach out to NumFocus to figure out legal ramifications of not including licenses in files.</p></li>
+</ul>
+</li>
+<li><p>(John K.) Three hard problems regarding licensing</p>
+<ul>
+<li><p>not all packages even include a license file</p></li>
+<li><p>people in the community are resistant to packaging license files</p></li>
+<li><p>we already have packges in our ecosystem that do not have</p></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" id="your-agenda-items">
 <h3>Your agenda items<a class="headerlink" href="#your-agenda-items" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>(Eric) Scheduling Anaconda &lt;&gt; conda-forge sync on anaconda.org requirements gathering</p></li>
+<li><p>(Sophia) New conda environments. What do you like? What do you hate? What are we still missing? <a class="reference external" href="https://docs.google.com/document/d/1-XNmPJJ0XqNW5CZm7nHwCzOSOs3PdiuOCUmJ8Yuimz0/edit?usp=sharing">Workflows</a>, <a class="reference external" href="https://docs.google.com/document/d/1eV4fRezxHu2lg-foVRv2gq56KEbrnaA8J_14uX31ja0/edit?usp=sharing">Condafile</a>, <a class="reference external" href="https://docs.google.com/document/d/17gum3j1DKcy2ygapP982879NAa7sM9ihLQ-sPOdzRVc/edit?usp=sharing">CLI</a></p></li>
+<li><p>(Filipe) A closer collaboration with other packaging communities would be awesome. I guess that we don’t have a good means for that kind of communication at the moment. Gitter is high volume, our mailing list never cought on, and an email thread may get stale quickly or we may drop people accidentally. TL;DR maybe we should invite them to our meeting call. Filipe to ping Bjorn – maybe we can get both Bjorn and debian on a dev meeting</p></li>
+<li><p>(Eric) Email out to see if we can get more engagement on regular dev meetings.</p></li>
+</ul>
 </div>
 </div>
 <div class="section" id="discussion">
@@ -146,62 +178,44 @@ https://www.eventbrite.com/e/2019-numfocus-summit-tickets-68012012761</p>
 </div>
 <div class="section" id="check-in-on-previous-action-items">
 <h2>Check in on previous action items<a class="headerlink" href="#check-in-on-previous-action-items" title="Permalink to this headline">¶</a></h2>
-<p>Numbers in parentheses indicate how many meetings these action items have been carried over. If they make it to 3 (4?) then our default is to get rid of them as action items and open up an issue on the conda-forge.github.io issue tracker.</p>
+<p>Copy previous action items from last meeting agenda.</p>
 <div class="section" id="last-meeting">
 <h3>Last meeting<a class="headerlink" href="#last-meeting" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>[x] Filipe: contact Chris Roth about interesting in helping in create a blog
-Done. No opinion on platform and no experience with blogging.</p></li>
-<li><p>[ ] John K: Create, or link, google doc with survey questions</p></li>
-<li><p>[x] Marius: Begin migration from AppVeyor, see topic for breakout items</p>
+<li><p>[ ] (Filipe) Progress on setting up a self-hosted blog</p>
 <ul>
-<li><p>TODO: Make this an issue and outline the things that are going to happen.
-https://github.com/conda-forge/conda-forge.github.io/issues/857
-This can serve as a centralized info spot for the community.</p></li>
-<li><p>[ ] Get list of packages to KEEP on Appveyor</p></li>
-<li><p>[ ] Change the default fo Azure.</p></li>
+<li><p>Medium seems to be generally downvoted</p></li>
+<li><p>Host your own blog seems to be generally positive</p></li>
+<li><p>Can we mimic what Dask does for their dev blog? https://github.com/dask/dask-blog</p></li>
 </ul>
 </li>
-<li><p>[ ] Anthony and Filipe: conda smithy release for linux-armv7l</p></li>
-<li><p>[x] Anthony + Sophia: Statuspage RSS</p></li>
-<li><p>[x] Anthony: Who is going to champion the CZI funding initiative? May be useful to turn this into a github issue</p>
-<ul>
-<li><p>Have conda-forge apply to CZI for funding. Grants up to 250k. Focus on Open Source infastructure. What would the topic of the grant be? Funding would not be directly under conda-forge but under another organization. NumFocus could sub-contract these funds. Could team up with bioconda (core team) https://chanzuckerberg.com/rfa/essential-open-source-software-for-science/. Mid-December 2019. Mid-June 2020</p></li>
-<li><p>(Filipe) Was at pangeo and met some of the CZI folks.
-If we joined with bioconda it would make our application stronger.</p></li>
-<li><p>Thread on gitter https://gitter.im/bioconda/core-x-conda-forge</p></li>
-</ul>
-</li>
+<li><p>[ ] (Needs Owner) Searching on our website is a little difficult</p></li>
+<li><p>[ ] (Filipe, Anthony) Improve docs on releasing conda-smithy. Currently says “use rever”. Would be good to fill out more info there for those of us that are unfamiliar with rever.</p></li>
+<li><p>[x] (Filipe, Anthony) conda-smithy release.</p></li>
 </ul>
 </div>
 <div class="section" id="meetings-ago">
 <h3>2 meetings ago<a class="headerlink" href="#meetings-ago" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>[X] Filipe to open issue about fixing docs – there were some issues that came up at the sprints.
-~~* Two were fixed at SciPy. One is pending: make the use of <code class="docutils literal notranslate"><span class="pre">strict</span></code> clear in our docs.~~
-All done.</p></li>
-<li><p>[ ] Mike S.:  pypy Next steps: Say yes / no to the spec, point out potential pitfalls, give it back to (Matti?) and say here’s the work that needs to be done.</p></li>
-<li><p>[ ] Marius: Open issue on conda-forge.github.io noting work done on the kubernetes cluster. Did some kubernetes work at scipy.</p></li>
-<li><p>[ ] Marius: reach out to internal IT to clean up some Zoom hiccups. Still in progress 2019-09-04</p></li>
-<li><p>[x] Marius: intel compiler architecture repo update.</p>
+<li><p>[ ] John K: Create, or link, google doc with survey questions</p></li>
+<li><p>[x] Anthony and Filipe: conda smithy release for linux-armv7l</p></li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h3>3 meetings ago<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Unresolved action items in this heading will be moved to issues on conda-forge.github.io</p>
+<ul class="simple">
+<li><p>[x] Mike S.:  pypy Next steps: Say yes / no to the spec, point out potential pitfalls, give it back to (Matti?) and say here’s the work that needs to be done.</p>
 <ul>
-<li><p>Will set up linux hosts.</p></li>
-<li><p>2019-09-04. Talked with Azure DevOps to get them to help with image building. There’s someone here in NYC that Marius has met with to give better support to extend existing build containers. Then we can add the intel compiler into it as opposed to building it ourselves.</p></li>
-<li><p>[x] Eric: Move this to a conda-forge.github.io issue.
-https://github.com/conda-forge/conda-forge.github.io/issues/856</p></li>
+<li><p>(Eric) Opened up issue: https://github.com/conda-forge/conda-forge.github.io/issues/867</p></li>
 </ul>
 </li>
-<li><p>[x] Matt: source-extractor update. Follow-up with Anthony and NumFocus around the renaming issue. <strong>Update:</strong> Anthony has submitted the potential CoC violation, we are waiting to hear back. Feedback from participants at Python in Astronomy 2019 was that it is time for the name to change to source-extractor.</p>
+<li><p>[x] Marius: Open issue on conda-forge.github.io noting work done on the kubernetes cluster. Did some kubernetes work at scipy.</p>
 <ul>
-<li><p>2019-09-04. Anthony: More or less resolved. Waiting on someone to approve (beckermr). Then will go through another round of review with numfocus</p></li>
+<li><p>(Eric) Opened up issue: https://github.com/conda-forge/conda-forge.github.io/issues/868</p></li>
 </ul>
 </li>
-<li><p>[x] Eric: Set up meeting to talk through the conda-forge feature set requirements for the new Anaconda.org</p>
-<ul>
-<li><p>Sent out email to group beginning this conversation on 20-19-09-06.</p></li>
-</ul>
-</li>
-<li><p>[x] Eric: Confirm with core team that no one wants access, as long as the conda-forge feature set is included in the design of the replacement for anaconda.org</p></li>
+<li><p>[x] Marius: reach out to internal IT to clean up some Zoom hiccups. Still in progress 2019-09-04</p></li>
 </ul>
 </div>
 </div>
@@ -209,7 +223,14 @@ https://github.com/conda-forge/conda-forge.github.io/issues/856</p></li>
 <h2>New Action items<a class="headerlink" href="#new-action-items" title="Permalink to this headline">¶</a></h2>
 <p>Copy new action items to next meetings agenda so we can check in.
 Make sure each action item is assigned to someone or it will likely not get done.</p>
-<p>[ ]  List resultant action items here</p>
+<ul class="simple">
+<li><p>[ ] (Eric) Email out to see if we can get more engagement on regular dev meetings.</p></li>
+<li><p>[ ] (Sophia) Set up meeting to talk about Condafile stuff.</p></li>
+<li><p>[ ] (CJ) write blog post on bot work and compiler migration</p></li>
+<li><p>[ ] (Filipe) Ping Bjorn to try and get Debian community more involved with conda-forge</p></li>
+<li><p>[ ] (Eric) Scheduling Anaconda &lt;&gt; conda-forge sync on anaconda.org requirements gathering</p></li>
+<li><p>[ ] (Anthony) Reach out to NumFocus to figure out legal ramifications of not including licenses in files.</p></li>
+</ul>
 </div>
 </div>
 
@@ -251,7 +272,8 @@ Make sure each action item is assigned to someone or it will likely not get done
 <li class="toctree-l2"><a class="reference internal" href="2019-06-26.html">2019-06-26 core dev meeting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2019-07-24.html">2017-07-24 conda-forge core meeting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2019-08-07.html">2017-08-07 conda-forge core meeting</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2019-09-04 conda-forge core meeting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="2019-09-04.html">2019-09-04 conda-forge core meeting</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2019-09-18 conda-forge core meeting</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#attendees">Attendees</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#agenda">Agenda</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#subteam-updates">Subteam updates</a><ul>
@@ -259,9 +281,14 @@ Make sure each action item is assigned to someone or it will likely not get done
 <li class="toctree-l5"><a class="reference internal" href="#arm">ARM</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#docs">Docs</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#staged-recipes">staged-recipes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#website">website</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#ci-infrastructure">CI infrastructure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ci-infrastructure">CI infrastructure</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#compiler-upgrade">Compiler upgrade</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#make-missing-license-file-an-error">Make missing license_file an error</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#your-agenda-items">Your agenda items</a></li>
 </ul>
 </li>
@@ -269,12 +296,12 @@ Make sure each action item is assigned to someone or it will likely not get done
 <li class="toctree-l3"><a class="reference internal" href="#check-in-on-previous-action-items">Check in on previous action items</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#last-meeting">Last meeting</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#meetings-ago">2 meetings ago</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">3 meetings ago</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#new-action-items">New Action items</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="2019-09-18.html">2019-09-18 conda-forge core meeting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="TEMPLATE.html">MEETING TEMPLATE</a></li>
 </ul>
 </li>
@@ -283,18 +310,18 @@ Make sure each action item is assigned to someone or it will likely not get done
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="2019-08-07.html"
-                          title="Previous page">&larr; 2017-08-07 conda-forge core meeting</a></p>
+    <p class="topless"><a href="2019-09-04.html"
+                          title="Previous page">&larr; 2019-09-04 conda-forge core meeting</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="2019-09-18.html"
-                          title="Next page">&rarr; 2019-09-18 conda-forge core meeting</a></p>
+    <p class="topless"><a href="TEMPLATE.html"
+                          title="Next page">&rarr; MEETING TEMPLATE</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/minutes/2019-09-04.md.txt"
+      <li><a href="../_sources/minutes/2019-09-18.md.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -338,10 +365,10 @@ Make sure each action item is assigned to someone or it will likely not get done
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="2019-09-18.html" title="2019-09-18 conda-forge core meeting"
+          <a href="TEMPLATE.html" title="MEETING TEMPLATE"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2019-08-07.html" title="2017-08-07 conda-forge core meeting"
+          <a href="2019-09-04.html" title="2019-09-04 conda-forge core meeting"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
