@@ -256,6 +256,7 @@ In alphabetical order,
 * Mike Sarahan, @msarahan
 * Anthony Scopatz, @scopatz
 * Patrick Snape, @patricksnape
+* Patrick Sodré, @sodre
 * Dougal J. Sutherland, @dougalsutherland
 * Peter K. G. Williams, @pkgw
 * Christopher J. Wright, @CJ-Wright
