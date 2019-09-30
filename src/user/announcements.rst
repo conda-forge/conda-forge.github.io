@@ -4,6 +4,14 @@ Announcements
 2019
 ----
 
+:2019-09-30: Clang 9.0.0 and gfortran 7.3.0 as default compilers in OSX.
+
+   - If you maintain a feedstock which require a C/C++ compiler, no changes necessary. A rerender
+     should be done next time the feedstock is updated to use the new compiler.
+   - If you maintain a feedstock with a Fortran compiler, a PR to upgrade to gfortran 7.3.0 was
+     already issued. If that PR was merged, there's nothing to do. If not, contact core if you
+     need help migrating.
+
 :2019-03-28: We overhauled the blas support in conda-forge.
 
    - Our packages now build against NETLIB’s reference implementation.
