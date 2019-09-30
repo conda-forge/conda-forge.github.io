@@ -173,14 +173,14 @@ To do this drop <code class="docutils literal notranslate"><span class="pre">-c<
 <div class="section" id="testing-changes-locally">
 <h2>Testing changes locally<a class="headerlink" href="#testing-changes-locally" title="Permalink to this headline">¶</a></h2>
 <p>If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is built by our <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a>.</p>
-<p>If you want to build and test updates to  a feedstock locally, go to the root
-feedstock directory and run, the <code class="docutils literal notranslate"><span class="pre">.circleci/run_docker_build.sh</span></code> script.</p>
-<p>The environment variable <code class="docutils literal notranslate"><span class="pre">CONFIG</span></code> is required to select one of the <code class="docutils literal notranslate"><span class="pre">*.yaml</span></code>
-config files in <code class="docutils literal notranslate"><span class="pre">.ci_support</span></code> to use for the build.
-older feedstocks).</p>
-<p>For example, the docker build with the config in <code class="docutils literal notranslate"><span class="pre">.ci_support/linux_.yaml</span></code> can be invoked by:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my-feedstock
-$ <span class="nv">CONFIG</span><span class="o">=</span><span class="s2">&quot;linux_&quot;</span> ./.circleci/run_docker_build.sh
+<p>If you want to build and test updates to a feedstock locally, go to the root
+feedstock directory and run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python build-locally.py
+</pre></div>
+</div>
+<p>This will prompt you to choose one of the <code class="docutils literal notranslate"><span class="pre">*.yaml</span></code> config files in <code class="docutils literal notranslate"><span class="pre">.ci_support/</span></code>.</p>
+<p>Alternatively, you can specify ahead which config to use with e.g. (assuming you wish to build and test python 3.6 on linux, and such a config file exists at <code class="docutils literal notranslate"><span class="pre">.ci_support/linux_python3.6.yaml</span></code>):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python build-locally.py linux_python3.6
 </pre></div>
 </div>
 </div>

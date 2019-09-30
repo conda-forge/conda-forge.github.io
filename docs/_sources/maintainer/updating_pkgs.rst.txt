@@ -141,19 +141,21 @@ Testing changes locally
 
 If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is built by our :term:`CI`.
 
-If you want to build and test updates to  a feedstock locally, go to the root
-feedstock directory and run, the ``.circleci/run_docker_build.sh`` script.
+If you want to build and test updates to a feedstock locally, go to the root
+feedstock directory and run:
 
-The environment variable ``CONFIG`` is required to select one of the ``*.yaml``
-config files in ``.ci_support`` to use for the build.
-older feedstocks).
+.. code-block:: shell
 
-For example, the docker build with the config in ``.ci_support/linux_.yaml`` can be invoked by:
+    python build-locally.py
 
-.. code-block:: sh
 
-    $ cd my-feedstock
-    $ CONFIG="linux_" ./.circleci/run_docker_build.sh
+This will prompt you to choose one of the ``*.yaml`` config files in ``.ci_support/``.
+
+Alternatively, you can specify ahead which config to use with e.g. (assuming you wish to build and test python 3.6 on linux, and such a config file exists at ``.ci_support/linux_python3.6.yaml``):
+
+.. code-block:: shell
+
+    python build-locally.py linux_python3.6
 
 
 Removing broken packages

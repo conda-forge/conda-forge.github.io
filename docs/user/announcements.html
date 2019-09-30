@@ -56,8 +56,18 @@
 <div class="section" id="id1">
 <h2>2019<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <dl class="field-list">
-<dt class="field-odd">2019-03-28</dt>
-<dd class="field-odd"><p>We overhauled the blas support in conda-forge.</p>
+<dt class="field-odd">2019-09-30</dt>
+<dd class="field-odd"><p>Clang 9.0.0 and gfortran 7.3.0 as default compilers in OSX.</p>
+<ul class="simple">
+<li><p>If you maintain a feedstock which require a C/C++ compiler, no changes necessary. A rerender
+should be done next time the feedstock is updated to use the new compiler.</p></li>
+<li><p>If you maintain a feedstock with a Fortran compiler, a PR to upgrade to gfortran 7.3.0 was
+already issued. If that PR was merged, there’s nothing to do. If not, contact core if you
+need help migrating.</p></li>
+</ul>
+</dd>
+<dt class="field-even">2019-03-28</dt>
+<dd class="field-even"><p>We overhauled the blas support in conda-forge.</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Our packages now build against NETLIB’s reference implementation.</p></li>
@@ -66,8 +76,8 @@
 </div></blockquote>
 <p>For more information please refer to the <a class="reference internal" href="../maintainer/knowledge_base.html#knowledge-blas"><span class="std std-ref">documentation</span></a>.</p>
 </dd>
-<dt class="field-even">2019‑01‑22</dt>
-<dd class="field-even"><p>It has happened! Conda-forge has migrated to the latest compilers 🎉.</p>
+<dt class="field-odd">2019‑01‑22</dt>
+<dd class="field-odd"><p>It has happened! Conda-forge has migrated to the latest compilers 🎉.</p>
 <dl class="simple">
 <dt>If you:</dt><dd><ul class="simple">
 <li><p>maintain a compiled feedstock, it will likely need to be rerender</p></li>
