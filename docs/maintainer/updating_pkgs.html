@@ -72,6 +72,29 @@ For updates, using a branch in the main repo is discouraged because,</p>
 <p class="admonition-title">Important</p>
 <p>For these reasons, maintainers are asked to fork the feedstock, push to a branch in the fork and then open a PR to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> repo.</p>
 </div>
+<div class="section" id="pushing-to-regro-cf-autotick-bot-branch">
+<h4>Pushing to regro-cf-autotick-bot branch<a class="headerlink" href="#pushing-to-regro-cf-autotick-bot-branch" title="Permalink to this headline">¶</a></h4>
+<p>When a new version of a package is released on PyPI/CRAN/.., we have a bot that automatically creates version updates for the feedstock. In most cases you can simply merge this PR and it should include all changes. When certain things have changed upstream, e.g. the dependencies, you will still have to do changes to the created PR. As feedstock maintainer, you don’t have to create a new PR for that but can simply push to the branch the bot created. There are two alternatives to push to the branch of the bot:</p>
+<ol class="arabic simple">
+<li><p>Manually setting up git remotes:</p>
+<ul class="simple">
+<li><p>Clone the conda-forge feedstock repository</p></li>
+<li><p>Add the remote of the bot: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">regro-cf-autotick-bot</span> <span class="pre">git://github.com/regro-cf-autotick-bot/&lt;package&gt;-feedstock.git</span></code></p></li>
+<li><p>Fetch the remote: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">regro-cf-autotick-bot</span></code></p></li>
+<li><p>Checkout the branch of the PR, git should automatically link it to the <cite>regro-cf-autotick-bot</cite> remote if this is the only remote with a branch of that name.</p></li>
+<li><p>If there are multiple remotes with this branch name, you need to first checkout the remote branch and then turn it into a local branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">regro-cf-autotick-bot/&lt;branch&gt;</span> <span class="pre">&amp;&amp;</span> <span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">&lt;branch&gt;</span></code></p></li>
+<li><p>Commit and push on that branch, if the remote was not correctly setup, use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-u</span> <span class="pre">regro-cf-autotick-bot</span> <span class="pre">&lt;branch&gt;</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Using Github’s <a class="reference external" href="https://github.com/github/hub">hub</a> tool:</p>
+<ul class="simple">
+<li><p>Clone the conda-forge feedstock repository</p></li>
+<li><p>Checkout the correct branch with remote: <code class="docutils literal notranslate"><span class="pre">hub</span> <span class="pre">pr</span> <span class="pre">checkout</span> <span class="pre">12</span></code> where <code class="docutils literal notranslate"><span class="pre">12</span></code> is the ID of the PR.</p></li>
+<li><p>Commit and push on this branch, the remote is automatically setup to push to regro-cf-autotick-bot’s fork.</p></li>
+</ul>
+</li>
+</ol>
+</div>
 <div class="section" id="example-workflow-for-updating-a-package">
 <h4>Example workflow for updating a package<a class="headerlink" href="#example-workflow-for-updating-a-package" title="Permalink to this headline">¶</a></h4>
 <p>Here we assume that you would like to update the feedstock <code class="docutils literal notranslate"><span class="pre">&lt;feedstock&gt;</span></code>. Feedstock is a placeholder and can e.g. be replaced by <code class="docutils literal notranslate"><span class="pre">numpy-feedstock</span></code>.</p>
@@ -212,6 +235,7 @@ feedstock directory and run:</p>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Maintaining packages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#important-notes">Important notes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#forking-and-pull-requests">Forking and pull requests</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#pushing-to-regro-cf-autotick-bot-branch">Pushing to regro-cf-autotick-bot branch</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#example-workflow-for-updating-a-package">Example workflow for updating a package</a></li>
 </ul>
 </li>
