@@ -24,10 +24,10 @@ Or you can open an issue about a specific package at the package feedstock via
 
 When opening issues be sure to:
 
-1) Try a new environment first following conda-forge `install instructions<https://conda-forge.org/docs/user/introduction.html#how-can-i-install-packages-from-conda-forge`__.
-2) Always open a new one when an issue is closed.
+1. Try a new environment first following conda-forge `install instructions<https://conda-forge.org/docs/user/introduction.html#how-can-i-install-packages-from-conda-forge`__.
+2. Always open a new one when an issue is closed.
 In the packaging world symptoms may be similar but the causes are usually very different.
-3) Fill in the required information. Without the output of `conda list` and `conda info -a`
+3. Fill in the required information. Without the output of `conda list` and `conda info -a`
 the team cannot debug the problem.
 
 
