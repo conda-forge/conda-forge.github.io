@@ -31,9 +31,9 @@ In the packaging world symptoms may be similar but the causes are usually very d
 the team cannot debug the problem.
 
 
-You can open issues at `conda-forge.github.io<https://github.com/conda-forge/conda-forge.github.io/issues>`_
+You can open issues at `conda-forge.github.io <https://github.com/conda-forge/conda-forge.github.io/issues>`_
 for long threads involving infrastructural, architectural or ecosystem wide discussions.
-Please note that some of these discussions will be turned into policy via the `CFEP process<https://github.com/conda-forge/conda-forge-enhancement-proposals>`_.
+Please note that some of these discussions will be turned into policy via the `CFEP process <https://github.com/conda-forge/conda-forge-enhancement-proposals>`_.
 
 Mailing list
 ------------
