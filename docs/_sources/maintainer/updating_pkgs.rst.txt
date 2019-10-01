@@ -38,7 +38,7 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
    - If there are multiple remotes with this branch name, you need to first checkout the remote branch and then turn it into a local branch: ``git checkout regro-cf-autotick-bot/<branch> && git checkout -b <branch>``
    - Commit and push on that branch, if the remote was not correctly setup, use ``git push -u regro-cf-autotick-bot <branch>``.
 
-#. Using Github's `hub <https://github.com/github/hub>`_ tool:
+#. Using Github's `hub <https://github.com/github/hub>`_ tool (which conda-forge ships! ``conda install hub -c conda-forge``):
 
    - Clone the conda-forge feedstock repository
    - Checkout the correct branch with remote: ``hub pr checkout 12`` where ``12`` is the ID of the PR.
