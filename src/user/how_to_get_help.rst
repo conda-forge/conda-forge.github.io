@@ -30,10 +30,15 @@ In the packaging world symptoms may be similar but the causes are usually very d
 3) Fill in the required information. Without the output of `conda list` and `conda info -a`
 the team cannot debug the problem.
 
+
+You can open issues at `conda-forge.github.io<https://github.com/conda-forge/conda-forge.github.io/issues>`__
+for long threads involving infrastructural, architectural or ecosystem wide discussions.
+Please note that some of these discussions will be turned into policy via the `CFEP process<https://github.com/conda-forge/conda-forge-enhancement-proposals>`__.
+
 Mailing list
 ------------
 
-Appropriated for long threads that integrates many packages,
-hence it is not possible to have a single feedstock issue.
+The mailing list is a secondary home for long threads about the ecosystem.
 
 TL:DR Don't be shy! Get in thouch!
+----------------------------------
