@@ -73,7 +73,7 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
    - Fetch the remote: ``git fetch regro-cf-autotick-bot``
    - Checkout the branch of the PR, git should automatically link it to the `regro-cf-autotick-bot` remote if this is the only remote with a branch of that name.
    - If there are multiple remotes with this branch name, you need to first checkout the remote branch and then turn it into a local branch: ``git checkout regro-cf-autotick-bot/<branch> && git checkout -b <branch>``
-   - Commit and push on that branch, if the remote was not correctly setup, use ``git push -u regro-cf-autotick-bot <branch>`.
+   - Commit and push on that branch, if the remote was not correctly setup, use ``git push -u regro-cf-autotick-bot <branch>``.
 
 #. Using Github's `hub <https://github.com/github/hub>`_ tool:
 
