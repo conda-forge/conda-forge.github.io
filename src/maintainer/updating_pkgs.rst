@@ -24,6 +24,25 @@ For updates, using a branch in the main repo is discouraged because,
 .. important::
   For these reasons, maintainers are asked to fork the feedstock, push to a branch in the fork and then open a PR to the ``conda-forge`` repo.
 
+Pushing to regro-cf-autotick-bot branch
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When a new version of a package is released on PyPI/CRAN/.., we have a bot that automatically creates version updates for the feedstock. In most cases you can simply merge this PR and it should include all changes. When certain things have changed upstream, e.g. the dependencies, you will still have to do changes to the created PR. As feedstock maintainer, you don't have to create a new PR for that but can simply push to the branch the bot created. There are two alternatives to push to the branch of the bot:
+
+#. Manually setting up git remotes:
+
+   - Clone the conda-forge feedstock repository
+   - Add the remote of the bot: ``git add regro-cf-autotick-bot git://github.com/regro-cf-autotick-bot/<package>-feedstock.git``
+   - Fetch the remote: ``git fetch regro-cf-autotick-bot``
+   - Checkout the branch of the PR, git should automatically link it to the `regro-cf-autotick-bot` remote if this is the only remote with a branch of that name.
+   - If there are multiple remotes with this branch name, you need to first checkout the remote branch and then turn it into a local branch: ``git checkout regro-cf-autotick-bot/<branch> && git checkout -b <branch>``
+   - Commit and push on that branch, if the remote was not correctly setup, use ``git push -u regro-cf-autotick-bot <branch>``.
+
+#. Using Github's `hub <https://github.com/github/hub>`_ tool:
+
+   - Clone the conda-forge feedstock repository
+   - Checkout the correct branch with remote: ``hub pr checkout 12`` where ``12`` is the ID of the PR.
+   - Commit and push on this branch, the remote is automatically setup to push to regro-cf-autotick-bot's fork.
 
 Example workflow for updating a package
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -60,27 +79,6 @@ Here we assume that you would like to update the feedstock ``<feedstock>``. Feed
 
    - Push the branch with changes to your fork on GitHub:  ``git push origin <branch-name>``
    - Create a pull request via the web interface by navigating to ``https://github.com/<your-github-id>/<feedstock>`` with your web browser and clicking the button ``create pull request``.
-   
-Pushing to regro-cf-autotick-bot branch
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-When a new version of a package is released on PyPI/CRAN/.., we have a bot that automatically creates version updates for the feedstock. In most cases you can simply merge this PR and it should include all changes. When certain things have changed upstream, e.g. the dependencies, you will still have to do changes to the created PR. As feedstock maintainer, you don't have to create a new PR for that but can simply push to the branch the bot created. There are two alternatives to push to the branch of the bot:
-
-#. Manually setting up git remotes:
-
-   - Clone the conda-forge feedstock repository
-   - Add the remote of the bot: ``git add regro-cf-autotick-bot git://github.com/regro-cf-autotick-bot/<package>-feedstock.git``
-   - Fetch the remote: ``git fetch regro-cf-autotick-bot``
-   - Checkout the branch of the PR, git should automatically link it to the `regro-cf-autotick-bot` remote if this is the only remote with a branch of that name.
-   - If there are multiple remotes with this branch name, you need to first checkout the remote branch and then turn it into a local branch: ``git checkout regro-cf-autotick-bot/<branch> && git checkout -b <branch>``
-   - Commit and push on that branch, if the remote was not correctly setup, use ``git push -u regro-cf-autotick-bot <branch>``.
-
-#. Using Github's `hub <https://github.com/github/hub>`_ tool:
-
-   - Clone the conda-forge feedstock repository
-   - Checkout the correct branch with remote: ``hub pr checkout 12`` where ``12`` is the ID of the PR.
-   - Commit and push on this branch, the remote is automatically setup to push to regro-cf-autotick-bot's fork.
-
 
 
 Updating recipes
