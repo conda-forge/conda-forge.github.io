@@ -50,7 +50,7 @@ FAQ
     - when the version stays the same and you need to upload a new package, increase the build number by 1 (e.g. ``1005 -> 1006``).
   
 
-  **Backstory:** Build numbers of 1000 and larger are a relict from the compiler migration, where a build number offset of 1000 signified that a package was migrated to the new compilers.
+  **Backstory:** Build numbers of 1000 and larger are a relic from the compiler migration, where a build number offset of 1000 signified that a package was migrated to the new compilers.
   Since the completion of the compiler migration, this offsetting is not needed anymore.
   However, we cannot simply subtract the offset without updating the version, due to higher build numbers being preferred by the solver.
   Therefore build numbers above 1000 will gradually vanish as packages get updated to newer versions.

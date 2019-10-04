@@ -93,7 +93,7 @@ While the legacy selectors <code class="docutils literal notranslate"><span clas
 <li><p>when the version stays the same and you need to upload a new package, increase the build number by 1 (e.g. <code class="docutils literal notranslate"><span class="pre">1005</span> <span class="pre">-&gt;</span> <span class="pre">1006</span></code>).</p></li>
 </ul>
 </div></blockquote>
-<p><strong>Backstory:</strong> Build numbers of 1000 and larger are a relict from the compiler migration, where a build number offset of 1000 signified that a package was migrated to the new compilers.
+<p><strong>Backstory:</strong> Build numbers of 1000 and larger are a relic from the compiler migration, where a build number offset of 1000 signified that a package was migrated to the new compilers.
 Since the completion of the compiler migration, this offsetting is not needed anymore.
 However, we cannot simply subtract the offset without updating the version, due to higher build numbers being preferred by the solver.
 Therefore build numbers above 1000 will gradually vanish as packages get updated to newer versions.</p>
