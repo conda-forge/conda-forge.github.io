@@ -24,7 +24,7 @@ Why conda-forge?
 The conda team from Anaconda, Inc packages a multitude of packages and provides them to all users free of charge in their ``default`` channel.
 
 But what if a package you are looking for is not in the default channel?
-In the past users only had the option to create an `anaconda cloud <https://anaconda.org/>`__ account and create their own channel.
+In the past users only had the option to create an `Anaconda Cloud <https://anaconda.org/>`__ account and create their own channel.
 
 This came with a list of disadvantages:
 
