@@ -131,19 +131,10 @@ Anaconda does this for numpy (see the <a class="reference external" href="https:
 <span id="pin-migrator"></span><h3>Propagate pin changes with a migrator<a class="headerlink" href="#propagate-pin-changes-with-a-migrator" title="Permalink to this headline">¶</a></h3>
 <p>Changing global pins requires rerendering all packages that depend on the package with the changed pin. Doing this manually can be tedious, especially when many packages are involved.
 Migrators are used to automatically generate pull requests for the affected packages in conda-forge.</p>
-<p>Migrators are added to <a class="reference external" href="https://github.com/regro/cf-scripts/blob/master/conda_forge_tick/auto_tick.xsh">auto_tick.xsh</a> in <a class="reference external" href="https://github.com/regro/cf-scripts">regro/cf-scripts</a>.</p>
-<p>After changing a pin, append following line to the <code class="docutils literal notranslate"><span class="pre">initialize_migrators</span></code> method:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>add_rebuild_successors($MIGRATORS, gx, &#39;&lt;package-name&gt;&#39;, &#39;&lt;new-version&gt;&#39;)
-</pre></div>
-</div>
-<p>You can do this by forking <a class="reference external" href="https://github.com/regro/cf-scripts">regro/cf-scripts</a> and submitting a pull request.</p>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<p>After advancing the pin of <code class="docutils literal notranslate"><span class="pre">zeromq</span></code> to version 4.3.1, following line needs to be added to the <code class="docutils literal notranslate"><span class="pre">initialize_migrators</span></code> method:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>add_rebuild_successors($MIGRATORS, gx, &#39;zeromq&#39;, &#39;4.3.1&#39;)
-</pre></div>
-</div>
-</div>
+<p>Migrators are added to the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations">migrations folder in conda-forge-pinning-feedstock</a>.</p>
+<p>You can do this by forking <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a> and submitting a pull request.</p>
+<p>Details of how the migration yaml is setup are provided in an <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations/example.exyaml">example</a>
+and documentation <a class="reference external" href="https://regro.github.io/cf-scripts/migrators.html#building-a-migration-yaml">here</a>.</p>
 </div>
 </div>
 </div>
