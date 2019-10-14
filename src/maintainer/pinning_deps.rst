@@ -108,22 +108,12 @@ Propagate pin changes with a migrator
 Changing global pins requires rerendering all packages that depend on the package with the changed pin. Doing this manually can be tedious, especially when many packages are involved.
 Migrators are used to automatically generate pull requests for the affected packages in conda-forge.
 
-Migrators are added to `auto_tick.xsh <https://github.com/regro/cf-scripts/blob/master/conda_forge_tick/auto_tick.xsh>`__ in `regro/cf-scripts <https://github.com/regro/cf-scripts>`__.
+Migrators are added to the `migrations folder in conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations>`__.
 
-After changing a pin, append following line to the ``initialize_migrators`` method:
 
-.. code-block:: none
-  
-  add_rebuild_successors($MIGRATORS, gx, '<package-name>', '<new-version>')
+You can do this by forking `conda-forge/conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`__ and submitting a pull request.
 
-You can do this by forking `regro/cf-scripts <https://github.com/regro/cf-scripts>`__ and submitting a pull request.
-
-.. admonition:: Example
-  
-  After advancing the pin of ``zeromq`` to version 4.3.1, following line needs to be added to the ``initialize_migrators`` method:
-
-  .. code-block:: none
-
-    add_rebuild_successors($MIGRATORS, gx, 'zeromq', '4.3.1')
+Details of how the migration yaml is setup are provided in an `example <https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations/example.exyaml>`__
+and documentation `here <https://regro.github.io/cf-scripts/migrators.html#building-a-migration-yaml>`_.
 
 
