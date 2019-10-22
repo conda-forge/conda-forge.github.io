@@ -262,6 +262,8 @@ In `meta.yaml`:
 
 .. code-block:: yaml
 
+  {% set mpi = mpi or 'mpich' %}
+
   requirements:
     host:
       - {{ mpi }}
