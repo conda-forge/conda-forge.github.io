@@ -11,7 +11,7 @@ Live chat on gitter
 -------------------
 
 If you don't know the first thing about conda-forge and/or is completely
-lost we recommend to get in touch via the chat and our community members will directly
+lost we recommend to get in touch via the chat and our community members will direct
 you to the proper documentation and/or help you via the chat.
 
 GitHub issues
