@@ -206,6 +206,11 @@ feedstock directory and run:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python build-locally.py linux_python3.6
 </pre></div>
 </div>
+<p>Note that for long build logs one can do</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python build-locally.py <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> tee log.txt
+</pre></div>
+</div>
+<p>to save it in a text file for future inspection.</p>
 </div>
 <div class="section" id="removing-broken-packages">
 <h2>Removing broken packages<a class="headerlink" href="#removing-broken-packages" title="Permalink to this headline">¶</a></h2>

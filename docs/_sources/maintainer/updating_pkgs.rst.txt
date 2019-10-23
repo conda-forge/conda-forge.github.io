@@ -177,6 +177,15 @@ Alternatively, you can specify ahead which config to use with e.g. (assuming you
     python build-locally.py linux_python3.6
 
 
+Note that for long build logs one can do
+
+.. code-block:: shell
+
+    python build-locally.py 2>&1 | tee log.txt
+
+to save it in a text file for future inspection.
+
+
 Removing broken packages
 ========================
 
