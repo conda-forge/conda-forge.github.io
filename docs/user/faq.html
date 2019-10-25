@@ -69,6 +69,13 @@
 <blockquote>
 <div><p>Please join us in our <a class="reference external" href="https://gitter.im/conda-forge/conda-forge.github.io">gitter channel</a>! We are always happy to answer questions and help beginners!</p>
 </div></blockquote>
+<p id="faq-teams"><a class="reference internal" href="#faq-teams"><span class="std std-ref">(Q)</span></a> <strong>I have a set of related packages, how do I create a conda-forge team?</strong></p>
+<blockquote>
+<div><p>Conda-forge github teams are very useful means of adding common maintainers to a set of related packages. For example, most R packages are co-maintained by the conda-forge/R team.
+To create a new team, you can just use one of the existing feedstocks from your packages. Each feedstock has automatically a team assigned (formed from the maintainers of that feedstock).
+For example, the conda-forge R team is coming from the <a class="reference external" href="https://github.com/conda-forge/r-feedstock">r-feedstock</a>. Then you can just add <cite>- conda-forge/r</cite> in the maintainers section to
+make all maintainers of the r-feedstock also maintainers of the new package.</p>
+</div></blockquote>
 <p id="faq-solver-speed"><a class="reference internal" href="#faq-solver-speed"><span class="std std-ref">(Q)</span></a> <strong>Installing and updating takes a long time, what can I do?</strong></p>
 <blockquote>
 <div><div class="admonition-todo admonition" id="id1">
