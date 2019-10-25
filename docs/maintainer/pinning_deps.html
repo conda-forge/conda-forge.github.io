@@ -59,7 +59,8 @@
 Especially widely used libraries with restricted version compatibilities increase the danger of fractioning the package space.
 By fixing crucial libraries to specific dependency version shared by all packages in conda-forge, we avoid fractioning of our packages in incompatible islands.
 The following paragraphs give a short introduction how this global version pinning is realized in conda-forge.</p>
-<p>The current versions of globally pinned packages are defined in the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">conda_build_config.yaml</a> file located in the <code class="docutils literal notranslate"><span class="pre">conda-forge-pinning</span></code> feedstock.</p>
+<p>The current versions of globally pinned packages are defined in the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">conda_build_config.yaml</a> file located in the <code class="docutils literal notranslate"><span class="pre">conda-forge-pinning</span></code> feedstock.
+These pinned versions represent the ABIs that conda-forge is currently supporting, with almost all availble packages built against that version.</p>
 <p>When a rerendering happens, conda-smithy will render the recipe using conda-build and output configuration files for each job and save them in a yaml file in <code class="docutils literal notranslate"><span class="pre">.ci_support</span></code> folder. For example, there’s an output configuration file for each OS, each python version, etc.</p>
 <p>These output configuration files are stripped to options that are used in the build and therefore a change in the config files in <code class="docutils literal notranslate"><span class="pre">.ci_support</span></code> folder implies that there needs to be a new build.</p>
 <p>Pinning of packages are handled by the same configuration file and conda-build. This means that packages need not be pinned manually.</p>
@@ -114,28 +115,21 @@ Anaconda does this for numpy (see the <a class="reference external" href="https:
 <p>The general idea is that the <code class="docutils literal notranslate"><span class="pre">numpy-devel</span></code> package should be used when a package is building against the C interface (i.e. it needs the compatibility bound), and the numpy package should be used when a package is using only the python interface.</p>
 <p>In general, it is not necessary to split up packages. At conda-forge, we only advise it when it greatly reduces package size, or when it helps remove dependencies that would otherwise be unnecessarily included.</p>
 </div>
+<p>The global pins and <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> are two sides of the same coin.
+If there is an ABI break, as determined by the <code class="docutils literal notranslate"><span class="pre">run_exports</span></code>, then the global pins <em>may</em> need to be updated. It is possible that conda-forge skips that ABI.
+Once the pins are updated, via a migration yaml, then all the packages that are linked are rebuilt.</p>
 </div>
 <div class="section" id="updating-package-pins">
 <span id="update-pins"></span><h2>Updating package pins<a class="headerlink" href="#updating-package-pins" title="Permalink to this headline">¶</a></h2>
 <p>Updating a pin requires following steps:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>edit <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">conda_build_config.yaml</a> in the <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-forge-pinning</span></code> repository.</p></li>
-<li><p>bump the version of the conda-forge-pinning <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/meta.yaml">recipe</a> by setting the version to the current date.</p></li>
-<li><p>rerender the feedstock.</p></li>
+<li><p>create a new migration yaml by copying <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/example.exyaml">example.exyaml</a> in the <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-forge-pinning</span></code> repository.</p></li>
+<li><p>change the migration yaml to reflect the package and version to be migrated</p></li>
 <li><p>propose the changes as a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> to <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-forge-pinning-feedstock</span></code>.</p></li>
-<li><p>write a <a class="reference internal" href="#pin-migrator"><span class="std std-ref">migrator</span></a> for propagating the pin changes.</p></li>
+<li><p>once accepted the migration will begin</p></li>
 </ul>
 </div></blockquote>
-<div class="section" id="propagate-pin-changes-with-a-migrator">
-<span id="pin-migrator"></span><h3>Propagate pin changes with a migrator<a class="headerlink" href="#propagate-pin-changes-with-a-migrator" title="Permalink to this headline">¶</a></h3>
-<p>Changing global pins requires rerendering all packages that depend on the package with the changed pin. Doing this manually can be tedious, especially when many packages are involved.
-Migrators are used to automatically generate pull requests for the affected packages in conda-forge.</p>
-<p>Migrators are added to the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations">migrations folder in conda-forge-pinning-feedstock</a>.</p>
-<p>You can do this by forking <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a> and submitting a pull request.</p>
-<p>Details of how the migration yaml is setup are provided in an <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations/example.exyaml">example</a>
-and documentation <a class="reference external" href="https://regro.github.io/cf-scripts/migrators.html#building-a-migration-yaml">here</a>.</p>
-</div>
 </div>
 </div>
 
@@ -158,10 +152,7 @@ and documentation <a class="reference external" href="https://regro.github.io/cf
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Pinned dependencies</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#globally-pinned-packages">Globally pinned packages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#specifying-run-exports">Specifying run_exports</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#updating-package-pins">Updating package pins</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#propagate-pin-changes-with-a-migrator">Propagate pin changes with a migrator</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-package-pins">Updating package pins</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a></li>
