@@ -643,6 +643,9 @@ The following legacy commands are also supported as well.
     conda install "blas=*=blis"
     conda install "blas=*=netlib"
 
+.. note::
+  If you want to commit to a specific blas implementation you can prevent conda from switching back by pinning the blas implementation in your environment. To commit to mkl, add ``blas=*=mkl`` to ``<conda-root>/envs/<env-name>/conda-meta/pinned``, as described in the `conda-docs <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning>`__.
+
 How it works
 ............
 
