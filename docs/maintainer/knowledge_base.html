@@ -582,6 +582,10 @@ conda install <span class="s2">&quot;blas=*=blis&quot;</span>
 conda install <span class="s2">&quot;blas=*=netlib&quot;</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to commit to a specific blas implementation you can prevent conda from switching back by pinning the blas implementation in your environment. To commit to mkl, add <code class="docutils literal notranslate"><span class="pre">blas=*=mkl</span></code> to <code class="docutils literal notranslate"><span class="pre">&lt;conda-root&gt;/envs/&lt;env-name&gt;/conda-meta/pinned</span></code>, as described in the <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning">conda-docs</a>.</p>
+</div>
 </div>
 <div class="section" id="how-it-works">
 <h4>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h4>
@@ -815,7 +819,7 @@ section.</p></li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
