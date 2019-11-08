@@ -86,7 +86,7 @@ preferable. Sensitive voting items are ones where the results of the
 vote should remain private to the voters after the vote has occurred.
 Sensitive votes should take place on a secure anonymous voting platform
 (such as `Polys <polys.me>`_ or
-`the Helios voting system <https://vote.heliosvoting.org/>`_) in order
+`the Helios voting system <https://vote.heliosvoting.org/>`_) in order to
 retain anonymity.
 
 The default voting period is 1 week (7 days). This may be modified at
