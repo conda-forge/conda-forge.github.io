@@ -751,6 +751,11 @@ You need to rerender the feedstock after this change.
 Requiring newer macOS SDKs
 ==========================
 
+conda-forge uses macOS SDK 10.9 to build software so that they can be deployed to
+all macOS versions newer than 10.9. Sometimes, some packages require a newer SDK
+to build with. While the default version 10.9 can be overridden using the following
+changes to the recipe, it should be done as a last resort.
+
 To use a new SDK, add the following in ``recipe/conda_build_config.yaml``
 
 .. code-block:: yaml
