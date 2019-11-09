@@ -755,8 +755,8 @@ To use a new SDK, add the following in ``recipe/conda_build_config.yaml``
 
 .. code-block:: yaml
 
-    MACOSX_DEPLOYMENT_TARGET:
-      - 10.12
+    MACOSX_DEPLOYMENT_TARGET:  # [osx]
+      - 10.12                  # [osx]
 
 In ``recipe/meta.yaml``, add the following to ensure that the user's system is compatible.
 
