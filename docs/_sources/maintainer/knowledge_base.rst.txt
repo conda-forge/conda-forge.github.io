@@ -748,3 +748,30 @@ Following implies that ``python`` is a runtime dependency and a Python matrix fo
 
 You need to rerender the feedstock after this change.
 
+Requiring newer macOS SDKs
+==========================
+
+conda-forge uses macOS SDK 10.9 to build software so that they can be deployed to
+all macOS versions newer than 10.9. Sometimes, some packages require a newer SDK
+to build with. While the default version 10.9 can be overridden using the following
+changes to the recipe, it should be done as a last resort. Please consult with
+core team if this is something you think you need.
+
+To use a new SDK, add the following in ``recipe/conda_build_config.yaml``
+
+.. code-block:: yaml
+
+    MACOSX_DEPLOYMENT_TARGET:  # [osx]
+      - 10.12                  # [osx]
+
+In ``recipe/meta.yaml``, add the following to ensure that the user's system is compatible.
+
+.. code-block:: yaml
+
+    requirements:
+      run_constrained:
+        - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.9") }}  # [osx]
+
+Note that the requirement is a `run_constrained`, because the ``__osx`` virtual package
+is supported only by ``conda>=4.8``. Once that conda version is used widely, the
+requirement will be changed from ``run_constrained`` to ``run``.

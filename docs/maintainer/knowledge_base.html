@@ -672,6 +672,28 @@ section.</p></li>
 </div>
 <p>You need to rerender the feedstock after this change.</p>
 </div>
+<div class="section" id="requiring-newer-macos-sdks">
+<h2>Requiring newer macOS SDKs<a class="headerlink" href="#requiring-newer-macos-sdks" title="Permalink to this headline">¶</a></h2>
+<p>conda-forge uses macOS SDK 10.9 to build software so that they can be deployed to
+all macOS versions newer than 10.9. Sometimes, some packages require a newer SDK
+to build with. While the default version 10.9 can be overridden using the following
+changes to the recipe, it should be done as a last resort. Please consult with
+core team if this is something you think you need.</p>
+<p>To use a new SDK, add the following in <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">MACOSX_DEPLOYMENT_TARGET</span><span class="p">:</span>  <span class="c1"># [osx]</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">10.12</span>                  <span class="c1"># [osx]</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">recipe/meta.yaml</span></code>, add the following to ensure that the user’s system is compatible.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">run_constrained</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">__osx &gt;={{ MACOSX_DEPLOYMENT_TARGET|default(&quot;10.9&quot;) }}</span>  <span class="c1"># [osx]</span>
+</pre></div>
+</div>
+<p>Note that the requirement is a <cite>run_constrained</cite>, because the <code class="docutils literal notranslate"><span class="pre">__osx</span></code> virtual package
+is supported only by <code class="docutils literal notranslate"><span class="pre">conda&gt;=4.8</span></code>. Once that conda version is used widely, the
+requirement will be changed from <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> to <code class="docutils literal notranslate"><span class="pre">run</span></code>.</p>
+</div>
 </div>
 
 
@@ -737,6 +759,7 @@ section.</p></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#build-matrices">Build matrices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#requiring-newer-macos-sdks">Requiring newer macOS SDKs</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
