@@ -216,6 +216,13 @@ feedstock directory and run:</p>
 <h2>Removing broken packages<a class="headerlink" href="#removing-broken-packages" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel. In this case, core can help you (see <a class="reference internal" href="../orga/guidelines.html#fix-broken-packages"><span class="std std-ref">Fixing Broken Packages</span></a>)</p>
 </div>
+<div class="section" id="archiving-feedstocks">
+<h2>Archiving feedstocks<a class="headerlink" href="#archiving-feedstocks" title="Permalink to this headline">¶</a></h2>
+<p>If a package is no longer maintained <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> will <em>archive</em>
+the repository. An archived repository can no longer accept PRs and issues, which prevents people and <code class="docutils literal notranslate"><span class="pre">regro-cf-autotick-bot</span></code> from updating the
+package (an example would be to re-render the feedstock to support new Python versions). Note that this <strong>does not</strong> remove the existing packages, those will still be available.</p>
+<p>If you believe a feedstock should be archived, please contact <a class="reference external" href="https://github.com/orgs/conda-forge/teams/core">&#64;conda-forge/core</a>.</p>
+</div>
 <div class="section" id="maintaining-several-versions">
 <h2>Maintaining several versions<a class="headerlink" href="#maintaining-several-versions" title="Permalink to this headline">¶</a></h2>
 <p>TODO: LTS branch</p>
@@ -259,6 +266,7 @@ feedstock directory and run:</p>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-changes-locally">Testing changes locally</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#removing-broken-packages">Removing broken packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#archiving-feedstocks">Archiving feedstocks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#maintaining-several-versions">Maintaining several versions</a></li>
 </ul>
 </li>

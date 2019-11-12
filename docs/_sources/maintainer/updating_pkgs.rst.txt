@@ -9,8 +9,8 @@ Important notes
 Forking and pull requests
 -------------------------
 
-All maintainers are given push access to the feedstocks that they maintain. 
-This means that a maintainer can create branches in the main repo. 
+All maintainers are given push access to the feedstocks that they maintain.
+This means that a maintainer can create branches in the main repo.
 For updates, using a branch in the main repo is discouraged because,
 
 1. :term:`CI` is run on both the branch and the PR.
@@ -51,7 +51,7 @@ Here we assume that you would like to update the feedstock ``<feedstock>``. Feed
 
 #. Forking the feedstock
 
-   Before you can submit your first PR, you have to fork conda-forge's feedstock. 
+   Before you can submit your first PR, you have to fork conda-forge's feedstock.
 
    - Navigate to https://github.com/conda-forge/<feedstock> in your favorite web browser and click the ``fork`` button.
    - You now have a clone of the feedstock in ``https://github.com/<your-github-id>/<feedstock>`` under your control.
@@ -113,7 +113,7 @@ Rerendering is conda-forge's way to update the files common to all feedstocks (e
 
 Rerendering can be done in two ways:
 
- #. Using the webservice to run conda-smithy on the cloud by adding the comment ``@conda-forge-admin please rerender`` (see :ref:`dev_admservice`). 
+ #. Using the webservice to run conda-smithy on the cloud by adding the comment ``@conda-forge-admin please rerender`` (see :ref:`dev_admservice`).
 
  #. Run conda-smithy locally on your machine (see :ref:`dev_rerender_local`).
 
@@ -190,6 +190,17 @@ Removing broken packages
 ========================
 
 Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel. In this case, core can help you (see :ref:`fix_broken_packages`)
+
+
+Archiving feedstocks
+====================
+
+If a package is no longer maintained ``conda-forge`` will *archive*
+the repository. An archived repository can no longer accept PRs and issues, which prevents people and ``regro-cf-autotick-bot`` from updating the
+package (an example would be to re-render the feedstock to support new Python versions). Note that this **does not** remove the existing packages, those will still be available.
+
+If you believe a feedstock should be archived, please contact `@conda-forge/core <https://github.com/orgs/conda-forge/teams/core>`__.
+
 
 Maintaining several versions
 ============================
