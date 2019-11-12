@@ -197,7 +197,7 @@ Archiving feedstocks
 
 If a package is no longer maintained ``conda-forge`` will *archive*
 the repository. An archived repository can no longer accept PRs and issues, which prevents people and ``regro-cf-autotick-bot`` from updating the
-package (an example would be to re-render the feedstock to support new Python versions).
+package (an example would be to re-render the feedstock to support new Python versions). Note that this **does not** remove the existing packages, those will still be available.
 
 If you believe a feedstock should be archived, please contact `@conda-forge/core <https://github.com/orgs/conda-forge/teams/core>`__.
 
