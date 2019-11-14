@@ -189,7 +189,7 @@ Members
 -------
 In addition to [core](https://github.com/conda-forge/conda-forge.github.io/blob/master/src/core.csv)
 and [emeritus](https://github.com/conda-forge/conda-forge.github.io/blob/master/src/emeritus.csv),
-the following are members of the staged-recipes team and have commit rights.
+the following are members of the miniforge team and have commit and admin rights.
 
 - Mark Harfouche <mark.harfouche@gmail.com>
 
