@@ -170,7 +170,7 @@ the following are members of the staged-recipes team and have commit rights.
 
 
 Miniforge Sub-Team
-============
+==================
 
 Role
 ----
@@ -192,4 +192,4 @@ and [emeritus](https://github.com/conda-forge/conda-forge.github.io/blob/master/
 the following are members of the miniforge team and have commit and admin rights.
 
 - Mark Harfouche <mark.harfouche@gmail.com>
-
+- Anthony Scopatz <scopatz@gmail.com>
