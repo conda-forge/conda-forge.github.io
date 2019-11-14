@@ -166,3 +166,30 @@ the following are members of the staged-recipes team and have commit rights.
  - Peter M. Landwehr <>
  - Patrick Sodré <psodre@gmail.com>
  - Sylvain Corlay <sylvain.corlay@gmail.com>
+
+
+
+Miniforge Sub-Team
+============
+
+Role
+----
+Develop and manage miniforge installers for conda-forge
+
+Charter
+-------
+Dynamic
+
+Responsibility
+--------------
+This sub-team is broadly responsible for developing, maintaining and releasing
+miniforge installers.
+
+Members
+-------
+In addition to [core](https://github.com/conda-forge/conda-forge.github.io/blob/master/src/core.csv)
+and [emeritus](https://github.com/conda-forge/conda-forge.github.io/blob/master/src/emeritus.csv),
+the following are members of the staged-recipes team and have commit rights.
+
+- Mark Harfouche <mark.harfouche@gmail.com>
+
