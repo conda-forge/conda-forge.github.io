@@ -47,7 +47,7 @@ FAQ
 
 :ref:`(Q) <faq_travis_ci>` **Why is Travis-CI failing on my feedstock?**
 
-  Travis CI build should be enabled or disabled via the ``conda-forge.yml`` configuration.
+  Travis CI builds should be enabled or disabled via the ``conda-forge.yml`` configuration.
   Nevertheless, sometimes Travis CI ignores this for whatever reason (probably a bug somewhere).
   In such a case, please disregard failing builds.
   Note that ``travis-ci.org`` builds are soon being phased out and replaced by ``travis-ci.com``.
