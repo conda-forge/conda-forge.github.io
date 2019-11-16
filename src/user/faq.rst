@@ -43,7 +43,6 @@ FAQ
     - Add information on strict channel priorities here.
     - Add information on conda-metachannel here.
 
-
 .. _faq_travis_ci:
 
 :ref:`(Q) <faq_travis_ci>` **Why is Travis-CI failing on my feedstock?**
