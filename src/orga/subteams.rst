@@ -166,3 +166,29 @@ the following are members of the staged-recipes team and have commit rights.
  - Peter M. Landwehr <>
  - Patrick Sodré <psodre@gmail.com>
  - Sylvain Corlay <sylvain.corlay@gmail.com>
+
+
+
+Miniforge Sub-Team
+==================
+
+Role
+----
+Develop and manage miniforge installers for conda-forge
+
+Charter
+-------
+Dynamic
+
+Responsibility
+--------------
+This sub-team is broadly responsible for developing, maintaining and releasing
+miniforge installers.
+
+Members
+-------
+
+- Mark Harfouche <mark.harfouche@gmail.com>
+- Anthony Scopatz <scopatz@gmail.com>
+- Hadrien Mary <hadrien.mary@gmail.com>
+- Isuru Fernando <isuruf@gmail.com>
