@@ -59,7 +59,7 @@ FAQ
 
 :ref:`(Q) <mfaq_windows_cmake>` **How to fix CMake not finding MSBuild.exe on Azure Windows builds?**
 
-   TL;DR: Use ``Ninja`` or ``NMake Makefiles JOM`` as the CMake generator.
+   TL;DR: Use ``Ninja`` or ``NMake Makefiles JOM`` as the CMake generator (``cmake -G"Ninja"``), and add ``build`` requirements for ``ninja`` or ``jom``.
    
    Sadly in the Azure Windows images, `MSBuild.exe` is not correctly setup for CMake builds with the ``Visual Studio`` generators. To workaround this, you can use a different CMake generator, e.g. ``cmake -GNinja`` or ``cmake -G"NMake Makefiles JOM"``. These two are preferred because they allow for concurrent builds in contrast to e.g. only using ``cmake -G"NMake Makefiles"``
   
