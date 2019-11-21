@@ -122,15 +122,29 @@ Once the pins are updated, via a migration yaml, then all the packages that are 
 <div class="section" id="updating-package-pins">
 <span id="update-pins"></span><h2>Updating package pins<a class="headerlink" href="#updating-package-pins" title="Permalink to this headline">¶</a></h2>
 <p>Updating a pin requires following steps:</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><p>create a new migration yaml by copying <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/example.exyaml">example.exyaml</a> in the <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-forge-pinning</span></code> repository.</p></li>
 <li><p>change the migration yaml to reflect the package and version to be migrated</p></li>
 <li><p>write a <a class="reference internal" href="#pin-migrator"><span class="std std-ref">migrator</span></a> for propagating the pin changes.</p></li>
-<li><p>propose the changes as a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> to <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-forge-pinning-feedstock</span></code>.</p></li>
-<li><p>once accepted the migration will begin</p></li>
+<li><p>propose the changes as a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> to <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a>.</p></li>
+<li><p>once accepted the migration will begin.
+The migration status can be monitored at <a class="reference external" href="https://conda-forge.org/status">https://conda-forge.org/status</a>.</p></li>
+<li><p>after the migration is complete,
+a new PR can be issued to <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a> to:</p>
+<ul>
+<li><p>Remove the migrator yaml for the completed migration</p></li>
+<li><p>If the version of the package is pinned in the global conda_build_config.yaml,
+this PR should also:</p>
+<ul>
+<li><p>update the version in conda_build_config.yaml</p></li>
+<li><p>bump the version in meta.yaml to the current date</p></li>
 </ul>
-</div></blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<div></div></blockquote>
 <div class="section" id="propagate-pin-changes-with-a-migrator">
 <span id="pin-migrator"></span><h3>Propagate pin changes with a migrator<a class="headerlink" href="#propagate-pin-changes-with-a-migrator" title="Permalink to this headline">¶</a></h3>
 <p>Changing global pins requires rerendering all packages that depend on the package with the changed pin. Doing this manually can be tedious, especially when many packages are involved.

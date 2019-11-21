@@ -99,6 +99,13 @@ can directly copy the SHA256.</p></li>
 test that the module can be imported, as described in the example.</p></li>
 <li><p>Remove all irrelevant comments in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>  file.</p></li>
 </ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Be sure not to checksum the redirection page. Therefore use for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">sL</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">username</span><span class="o">/</span><span class="n">repename</span><span class="o">/</span><span class="n">archive</span><span class="o">/</span><span class="n">vX</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="o">|</span> <span class="n">openssl</span> <span class="n">sha256</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="checklist">
 <h4>Checklist<a class="headerlink" href="#checklist" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
@@ -234,6 +241,13 @@ install the necessary tools below).</p>
 <p>To generate the <code class="docutils literal notranslate"><span class="pre">sha256</span></code> hash: <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">sha256</span> <span class="pre">your_sdist.tar.gz</span></code></p>
 <p>You may need the openssl package, available on conda-forge
 <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">openssl</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Be sure not to checksum the redirection page. Therefore use for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">sL</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">username</span><span class="o">/</span><span class="n">repename</span><span class="o">/</span><span class="n">archive</span><span class="o">/</span><span class="n">vX</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="o">|</span> <span class="n">openssl</span> <span class="n">sha256</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="downloading-extra-sources-and-data-files">
 <h4>Downloading extra sources and data files<a class="headerlink" href="#downloading-extra-sources-and-data-files" title="Permalink to this headline">¶</a></h4>
