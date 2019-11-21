@@ -121,10 +121,14 @@ staged-recipes in a single pull request (in separate directories). If the
 packages are interdependent (i.e. one package being added lists one or more of 
 the other packages being added as a requirement), the build script will be able to 
 locate the dependencies that are only present within staged-recipes as long as 
-the builds finish in the dependencies order. Using a single pull request 
-allows you to quickly get packages set up without waiting for each package in a 
-dependency chain to be reviewed, built, and added to the conda-forge channel 
-before starting the process over with the next recipe in the chain.
+the builds finish in the dependencies order. Note that due to a bug in that script,
+only simple PRs will pass and it is recommended to split the recipes into multiple
+PRs in that case.
+
+Using a single pull request allows you to quickly get packages set up without
+waiting for each package in a dependency chain to be reviewed, built, and
+added to the conda-forge channel before starting the process over with the
+next recipe in the chain.
 
 .. note::
 
