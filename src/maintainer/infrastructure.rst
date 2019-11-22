@@ -114,7 +114,7 @@ Entering the above phrase in an issue will update the team for the feedstock. Th
 @conda-forge-admin, please restart ci
 -------------------------------------
 
-Entering this command in the PR of a feedstock or staged-recipes will close and then open the PR, causing 
+Entering this command in the PR of a feedstock or staged-recipes will close and then open the PR, causing
 all of the CI builds to restart.
 
 CI build services
@@ -138,7 +138,7 @@ If that doesn't work, a close/open will kick off a new build. You can also use t
 Using Azure for *everything*
 ............................
 
-Azure is the default provider for Linux and OS X.  To use Azure for everything add the following to ``conda-forge.yml`` in the root
+Azure is the default provider for Linux and OS X.  To use Azure for everything, add the following to ``conda-forge.yml`` in the root
 of the feedstock.
 
 .. code-block:: yaml

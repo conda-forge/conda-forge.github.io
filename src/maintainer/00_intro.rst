@@ -3,7 +3,7 @@ Maintainer Documentation
 
 
 .. toctree::
-  
+
   infrastructure
   adding_pkgs
   updating_pkgs
@@ -11,4 +11,4 @@ Maintainer Documentation
   conda_forge_yml
   knowledge_base
   maintainer_faq
-  
+

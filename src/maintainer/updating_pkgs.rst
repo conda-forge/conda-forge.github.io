@@ -42,7 +42,7 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
 
    - Clone the conda-forge feedstock repository
    - Checkout the correct branch with remote: ``hub pr checkout 12`` where ``12`` is the ID of the PR.
-   - Commit and push on this branch, the remote is automatically setup to push to regro-cf-autotick-bot's fork.
+   - Commit and push on this branch, the remote is automatically set up to push to regro-cf-autotick-bot's fork.
 
 Example workflow for updating a package
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -170,7 +170,7 @@ feedstock directory and run:
 
 This will prompt you to choose one of the ``*.yaml`` config files in ``.ci_support/``.
 
-Alternatively, you can specify ahead which config to use with e.g. (assuming you wish to build and test python 3.6 on linux, and such a config file exists at ``.ci_support/linux_python3.6.yaml``):
+Alternatively, you can specify ahead which config to use with e.g. (assuming you wish to build and test python 3.6 on Linux, and such a config file exists at ``.ci_support/linux_python3.6.yaml``):
 
 .. code-block:: shell
 
