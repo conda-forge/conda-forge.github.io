@@ -17,7 +17,7 @@ FAQ
     Exited with code 128
 
   open a new issue with a comment :ref:`ci_update_circle`.
-  Once our web services updated the circle configuration, restart the build. 
+  Once our web services updated the circle configuration, restart the build.
 
 
 .. _mfaq_py37_selector:
@@ -48,7 +48,7 @@ FAQ
 
     - when you increase the version, reset the build number back to 0 (e.g. ``1005 -> 0``).
     - when the version stays the same and you need to upload a new package, increase the build number by 1 (e.g. ``1005 -> 1006``).
-  
+
 
   **Backstory:** Build numbers of 1000 and larger are a relic from the compiler migration, where a build number offset of 1000 signified that a package was migrated to the new compilers.
   Since the completion of the compiler migration, this offsetting is not needed anymore.
@@ -60,6 +60,6 @@ FAQ
 :ref:`(Q) <mfaq_windows_cmake>` **How to fix CMake not finding MSBuild.exe on Azure Windows builds?**
 
    TL;DR: Use ``Ninja`` or ``NMake Makefiles JOM`` as the CMake generator (``cmake -G"Ninja"``), and add ``build`` requirements for ``ninja`` or ``jom``.
-   
-   Sadly in the Azure Windows images, `MSBuild.exe` is not correctly setup for CMake builds with the ``Visual Studio`` generators. To workaround this, you can use a different CMake generator, e.g. ``cmake -GNinja`` or ``cmake -G"NMake Makefiles JOM"``. These two are preferred because they allow for concurrent builds in contrast to e.g. only using ``cmake -G"NMake Makefiles"``
-  
+
+   Sadly in the Azure Windows images, `MSBuild.exe` is not correctly setup for CMake builds with the ``Visual Studio`` generators. To work around this, you can use a different CMake generator, e.g. ``cmake -GNinja`` or ``cmake -G"NMake Makefiles JOM"``. These two are preferred because they allow for concurrent builds in contrast to e.g. only using ``cmake -G"NMake Makefiles"``
+

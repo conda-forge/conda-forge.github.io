@@ -328,7 +328,7 @@ and apply the appropriate conditionals in your build:
 Preferring a provider (usually nompi)
 """""""""""""""""""""""""""""""""""""
 
-Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual-exclusivity of the ``mpi`` metapackage allows picking between mpi providers by installing an mpi provider, e.g.
+Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual exclusivity of the ``mpi`` metapackage allows picking between mpi providers by installing an mpi provider, e.g.
 
 .. code-block:: bash
 
@@ -581,12 +581,12 @@ host of the recipe,
         - liblapacke
 
 .. note::
-  You should specify only the libraries the package needs. (i.e. if the package
+  You should specify only the libraries that the package needs. (i.e. if the package
   doesn't need LAPACK, remove liblapack and liblapacke)
 
   At recipe build time, above requirements would download the NETLIB's reference
   implementations and build your recipe against those.
-  At runtime by default the following packages will be used.
+  At runtime, by default the following packages will be used.
 
 .. code-block:: yaml
 
@@ -644,7 +644,7 @@ The following legacy commands are also supported as well.
     conda install "blas=*=netlib"
 
 .. note::
-  If you want to commit to a specific blas implementation you can prevent conda from switching back by pinning the blas implementation in your environment. To commit to mkl, add ``blas=*=mkl`` to ``<conda-root>/envs/<env-name>/conda-meta/pinned``, as described in the `conda-docs <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning>`__.
+  If you want to commit to a specific blas implementation, you can prevent conda from switching back by pinning the blas implementation in your environment. To commit to mkl, add ``blas=*=mkl`` to ``<conda-root>/envs/<env-name>/conda-meta/pinned``, as described in the `conda-docs <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning>`__.
 
 How it works
 ............
@@ -661,7 +661,7 @@ time of writing is ``3.8.0``. Since the BLAS API is stable, a downstream package
 In addition to the above netlib package, there are other variants like ``libblas=*=*openblas``,
 which has ``openblas`` as a dependency and has a symlink from ``libblas.so.3`` to ``libopenblas.so``.
 ``libblas=3.8.0=*openblas`` pins the ``openblas`` dependency to a version that is known to support the
-BLAS ``3.8.0`` API.  This means that at install time, the user can select what BLAS implementation
+BLAS ``3.8.0`` API.  This means that, at install time, the user can select what BLAS implementation
 they like without any knowledge of the version of the BLAS implementation needed.
 
 
