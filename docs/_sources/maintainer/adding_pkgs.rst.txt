@@ -20,7 +20,7 @@ There are multiple ways to get started:
 #. If it is an R package from `CRAN <https://cran.r-project.org/>`_, please
    instead start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_.
    Then if necessary you can make manual edits to the recipe.
-#. If it is a python package you can generate a skeleton as a starting point with
+#. If it is a python package, you can generate a skeleton as a starting point with
    ``conda skeleton pypi your_package_name``. You do *not* have to use the skeleton, and the
    recipes produced by skeleton will need to be edited.
    In particular, you'll at least need to change the build line to :ref:`use pip <use-pip>`,
@@ -64,9 +64,9 @@ Step-by-step Instructions
 
 .. tip::
 
-  Be sure not to checksum the redirection page. Therefore use for example::
+  Be sure not to checksum the redirection page. Therefore use, for example,::
 
-    curl -sL https://github.com/username/repename/archive/vX.X.X.tar.gz | openssl sha256
+    curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sha256
 
 Checklist
 .........
@@ -111,7 +111,7 @@ The maintainer's job is to:
 - Keep the feedstock on par with new releases of the source package by
 
   - Bumping the version number and checksum.
-  - Making sure that feedstock's requirements stay accurate.
+  - Making sure that the feedstock's requirements stay accurate.
   - Make sure the test requirements match those of the updated package.
 
 - Answer eventual questions about the package on the feedstock issue tracker.
@@ -222,9 +222,9 @@ You may need the openssl package, available on conda-forge
 
 .. tip::
 
-  Be sure not to checksum the redirection page. Therefore use for example::
+  Be sure not to checksum the redirection page. Therefore use, for example,::
 
-    curl -sL https://github.com/username/repename/archive/vX.X.X.tar.gz | openssl sha256
+    curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sha256
 
 .. _PyPi: https://pypi.org
 
@@ -435,7 +435,7 @@ In combination with an unsatisfiable version, ``run_constrained`` can define blo
     run_constrained:
       - amazing-db ==9999999999
 
-In this example, ``awesome-db`` cannot be be installed together with ``amazing-db`` as there is no package ``amazing-db-9999999999``.
+In this example, ``awesome-db`` cannot be installed together with ``amazing-db`` as there is no package ``amazing-db-9999999999``.
 
 
 .. _testing_in_recipes:
@@ -462,7 +462,7 @@ Sometimes defining tests seems to be hard, e.g. due to:
 
 In these cases, conda-forge may not be able to execute the prescribed test suite.
 
-However, this is no reason for the recipe to not have tests. At the very least
+However, this is no reason for the recipe to not have tests. At the very least,
 we want to verify that the package has installed the desired files in the desired
 locations. This is called existence testing.
 

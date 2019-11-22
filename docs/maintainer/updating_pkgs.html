@@ -90,7 +90,7 @@ For updates, using a branch in the main repo is discouraged because,</p>
 <ul class="simple">
 <li><p>Clone the conda-forge feedstock repository</p></li>
 <li><p>Checkout the correct branch with remote: <code class="docutils literal notranslate"><span class="pre">hub</span> <span class="pre">pr</span> <span class="pre">checkout</span> <span class="pre">12</span></code> where <code class="docutils literal notranslate"><span class="pre">12</span></code> is the ID of the PR.</p></li>
-<li><p>Commit and push on this branch, the remote is automatically setup to push to regro-cf-autotick-bot’s fork.</p></li>
+<li><p>Commit and push on this branch, the remote is automatically set up to push to regro-cf-autotick-bot’s fork.</p></li>
 </ul>
 </li>
 </ol>
@@ -202,7 +202,7 @@ feedstock directory and run:</p>
 </pre></div>
 </div>
 <p>This will prompt you to choose one of the <code class="docutils literal notranslate"><span class="pre">*.yaml</span></code> config files in <code class="docutils literal notranslate"><span class="pre">.ci_support/</span></code>.</p>
-<p>Alternatively, you can specify ahead which config to use with e.g. (assuming you wish to build and test python 3.6 on linux, and such a config file exists at <code class="docutils literal notranslate"><span class="pre">.ci_support/linux_python3.6.yaml</span></code>):</p>
+<p>Alternatively, you can specify ahead which config to use with e.g. (assuming you wish to build and test python 3.6 on Linux, and such a config file exists at <code class="docutils literal notranslate"><span class="pre">.ci_support/linux_python3.6.yaml</span></code>):</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python build-locally.py linux_python3.6
 </pre></div>
 </div>

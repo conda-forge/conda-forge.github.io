@@ -308,7 +308,7 @@ To do this, add <cite>nompi</cite> to the mpi matrix:</p>
 </div>
 <div class="section" id="preferring-a-provider-usually-nompi">
 <h6>Preferring a provider (usually nompi)<a class="headerlink" href="#preferring-a-provider-usually-nompi" title="Permalink to this headline">¶</a></h6>
-<p>Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual-exclusivity of the <code class="docutils literal notranslate"><span class="pre">mpi</span></code> metapackage allows picking between mpi providers by installing an mpi provider, e.g.</p>
+<p>Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual exclusivity of the <code class="docutils literal notranslate"><span class="pre">mpi</span></code> metapackage allows picking between mpi providers by installing an mpi provider, e.g.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install mpich ptscotch
 </pre></div>
 </div>
@@ -531,11 +531,11 @@ host of the recipe,</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You should specify only the libraries the package needs. (i.e. if the package
+<p>You should specify only the libraries that the package needs. (i.e. if the package
 doesn’t need LAPACK, remove liblapack and liblapacke)</p>
 <p>At recipe build time, above requirements would download the NETLIB’s reference
 implementations and build your recipe against those.
-At runtime by default the following packages will be used.</p>
+At runtime, by default the following packages will be used.</p>
 </div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openblas</span>   <span class="c1"># [not win]</span>
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mkl</span>        <span class="c1"># [win]</span>
@@ -584,7 +584,7 @@ conda install <span class="s2">&quot;blas=*=netlib&quot;</span>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you want to commit to a specific blas implementation you can prevent conda from switching back by pinning the blas implementation in your environment. To commit to mkl, add <code class="docutils literal notranslate"><span class="pre">blas=*=mkl</span></code> to <code class="docutils literal notranslate"><span class="pre">&lt;conda-root&gt;/envs/&lt;env-name&gt;/conda-meta/pinned</span></code>, as described in the <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning">conda-docs</a>.</p>
+<p>If you want to commit to a specific blas implementation, you can prevent conda from switching back by pinning the blas implementation in your environment. To commit to mkl, add <code class="docutils literal notranslate"><span class="pre">blas=*=mkl</span></code> to <code class="docutils literal notranslate"><span class="pre">&lt;conda-root&gt;/envs/&lt;env-name&gt;/conda-meta/pinned</span></code>, as described in the <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning">conda-docs</a>.</p>
 </div>
 </div>
 <div class="section" id="how-it-works">
@@ -599,7 +599,7 @@ time of writing is <code class="docutils literal notranslate"><span class="pre">
 <p>In addition to the above netlib package, there are other variants like <code class="docutils literal notranslate"><span class="pre">libblas=*=*openblas</span></code>,
 which has <code class="docutils literal notranslate"><span class="pre">openblas</span></code> as a dependency and has a symlink from <code class="docutils literal notranslate"><span class="pre">libblas.so.3</span></code> to <code class="docutils literal notranslate"><span class="pre">libopenblas.so</span></code>.
 <code class="docutils literal notranslate"><span class="pre">libblas=3.8.0=*openblas</span></code> pins the <code class="docutils literal notranslate"><span class="pre">openblas</span></code> dependency to a version that is known to support the
-BLAS <code class="docutils literal notranslate"><span class="pre">3.8.0</span></code> API.  This means that at install time, the user can select what BLAS implementation
+BLAS <code class="docutils literal notranslate"><span class="pre">3.8.0</span></code> API.  This means that, at install time, the user can select what BLAS implementation
 they like without any knowledge of the version of the BLAS implementation needed.</p>
 </div>
 </div>
