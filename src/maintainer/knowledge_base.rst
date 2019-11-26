@@ -665,6 +665,16 @@ BLAS ``3.8.0`` API.  This means that, at install time, the user can select what 
 they like without any knowledge of the version of the BLAS implementation needed.
 
 
+.. _knowledge:mpl:
+
+Matplotlib
+----------
+
+``matplotlib`` on ``conda-forge`` comes in two parts. The core library is in ``matplotlib-base``. The
+actual ``matplotlib`` package is this core library plus ``pyqt``. Most, if not all, packages that have
+dependence at runtime on ``matplotlib`` should list this dependence as ``matplotlib-base``. 
+
+
 
 Noarch builds
 =============
