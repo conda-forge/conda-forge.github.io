@@ -413,6 +413,11 @@ div.body
     padding: 30px 20px;
 
     
+
+    
+    
+    min-width: 0;
+    max-width: none;
 }
 
 
@@ -718,8 +723,17 @@ div.sphinx-toc li.toc-toggle.closed > a:after
 
 
 
+div#searchbox {
+    margin-right: 10px; /* make this match sphinxsidebarwrapper left margin */
+}
+
+div#searchbox form > div {
+    display: inline-block;
+    margin-right: -0.4em;
+}
+
 div.sphinxsidebar input,
-h1#search-documentation ~ form > input
+h1#search-documentation ~ form input
 {
     border: 1px solid rgba(0,0,0,.15);
     font-family: sans-serif;
@@ -732,18 +746,18 @@ h1#search-documentation ~ form > input[type="submit"]
     background: #F2F2F2;
     
     
-        -moz-border-radius: 0 0 0.7em 0;
-        -webkit-border-radius: 0 0 0.7em 0;
-        -o-border-radius: 0 0 0.7em 0;
-        -ms-border-radius: 0 0 0.7em 0;
-        border-radius: 0 0 0.7em 0;
+        -moz-border-radius: 0 5px 5px 0;
+        -webkit-border-radius: 0 5px 5px 0;
+        -o-border-radius: 0 5px 5px 0;
+        -ms-border-radius: 0 5px 5px 0;
+        border-radius: 0 5px 5px 0;
     
 
 
 }
 
 div#searchbox input[type="submit"]:hover,
-h1#search-documentation ~ form > input[type="submit"]:hover,
+h1#search-documentation ~ form input[type="submit"]:hover,
 button.sidebar-toggle#sidebar-hide:hover,
 button.sidebar-toggle#sidebar-show:hover,
 .highlight .copybutton:hover
@@ -753,7 +767,7 @@ button.sidebar-toggle#sidebar-show:hover,
     border-color: #F8D186;
 }
 
-h1#search-documentation ~ form > input[type="text"]:focus,
+h1#search-documentation ~ form input[type="text"]:focus,
 div.sphinxsidebar input[type="text"]:focus
 {
     border-color: #F8D186;
@@ -762,7 +776,7 @@ div.sphinxsidebar input[type="text"]:focus
 .highlight .copybutton:hover:not(:active),
 div.sphinxsidebar button:hover:not(:active),
 div.sphinxsidebar input[type="submit"]:hover:not(:active),
-h1#search-documentation ~ form > input[type="submit"]:hover,
+h1#search-documentation ~ form input[type="submit"]:hover,
 button.sidebar-toggle:hover:not(:active)
 {
     
@@ -1425,7 +1439,6 @@ a:hover
 
 a:hover:active
 {
-    position: relative;
     left: 1px;
     top: 1px;
     
@@ -1472,7 +1485,32 @@ table.docutils.plain { border: none; }
 table.docutils.plain tr.row-odd > * { background: none; }
 
 
-table.docutils.html-plain-table tr.row-odd > * { background: none; }table.docutils th {
+table.docutils.html-plain-table tr.row-odd > * { background: none; }
+
+
+table.docutils.align-right { margin-left: auto; }
+    table.docutils tbody
+    {
+        
+        vertical-align: top;
+    }
+
+    
+    
+    table.docutils th p:first-child,
+    table.docutils td p:first-child
+    {
+        margin-top: 0;
+    }
+
+    table.docutils th p:last-child,
+    table.docutils td p:last-child
+    {
+        margin-bottom: 0;
+    }
+
+
+table.docutils th {
     border: 0 solid transparent;
     padding: .4em;
     font-family: "Noticia Text", serif;
@@ -1495,48 +1533,27 @@ table.docutils td {
 table.docutils tr.row-odd td { background: rgba(0,0,0,.06); }
 
 h2 + table.docutils { margin-top: 1em; }
-table > caption { margin: 1em 0 .5em; font-style: italic; }table.docutils .left-align { text-align: left; }
-table.docutils .center-align { text-align: center; }
-table.docutils .right-align { text-align: right; }
-table.docutils .justify-align { text-align: justify; }
-table.docutils .nowrap { white-space: nowrap; }
+table > caption { margin: 1em 0 .5em; font-style: italic; }
 
-table.docutils .single-left-divider { border-left-width: 2px; }
+
+
 table.docutils th + .single-left-divider,
 table.docutils th + .double-left-divider { border-left-width: 0; }
-table.docutils .double-left-divider { border-left-width: 6px; border-left-style: double; }
-table.docutils .single-right-divider:last-child { border-right-width: 2px; }
-table.docutils .double-right-divider:last-child { border-right-width: 6px; border-right-style: double; }
 
 
 
 
-table.field-list { margin: 1.5em 0; }
+
+    
+    dl.field-list > dd > p:first-child,
+    dl.field-list > dd > p:first-child:empty + ul.simple li > p:first-child,
+    dl.field-list > dd > ul:first-child.simple li > p:first-child
+    { margin-top: 0; }
+
+    
+    dl.field-list > dd > p:first-child:empty { display: none; }
 
 
-table.field-list th { background: none;  padding: 0 0.4em 0 0; }
-
-
-table.field-list td { padding: 0 0 1.5em 0; }
-table.field-list tr:last-child td { padding-bottom: 0; }
-
-
-td.field-body > ul.first.simple > li {  margin: 0 0 1.5em 0; }
-td.field-body > ul.first.simple > li:last-child {  margin-bottom: 0; }
-
-
-td.field-body > em,
-td.field-body > ul.first.simple > li > em { padding: 2px 4px; }
-
-
-td.field-body > p,
-td.field-body > ul > li > p { margin: 0 0 1.5em; }
-
-td.field-body > p:last-child,
-td.field-body > ul > li > .admonition { margin-bottom: 0; }
-
-
-td.field-body > p:empty { display: none; }
 
 
 
@@ -1639,7 +1656,7 @@ div.admonition.floater
 
 
 
- p.admonition-title.first
+ p.admonition-title:first-child
 {
     
     margin: -.5em -1em .5em;
@@ -1659,7 +1676,7 @@ div.admonition.floater
 }
 
 
- p.admonition-title.first { margin-top: -.5em !important; }
+ p.admonition-title:first-child { margin-top: -.5em !important; }
 
 
 div.admonition.inline-title p.admonition-title
@@ -1979,18 +1996,19 @@ div.viewcode-block:target
     
 
     
-    dl.object > dt,
+    dl.object > dt,  
+    dl.data > dt,
     dl.function > dt,
     dl.method > dt,
     dl.attribute > dt,
     dl.class > dt,
     dl.exception > dt,
-    dl.classmethod > dt,
-    dl.staticmethod > dt
+    dl.classmethod > dt, 
+    dl.staticmethod > dt 
     {
         display: inline-block;
         
-            padding: 0.3em 0 0.3em 0.6em;
+            padding: 0.3em 1em 0.3em 0.6em;
         
         border: rgba(0,0,0,0.1) solid 1px;
         border-width: 0 0 0 3px;
@@ -2007,7 +2025,17 @@ div.viewcode-block:target
     }
 
     
-    dl.object > dt,
+        
+        dl.has-headerlink > dt,
+        dl.has-headerlink > dt
+        {
+            padding-right: 0;
+        }
+    
+
+    
+    dl.object > dt,  
+    dl.data > dt,
     dl.attribute > dt
     {
         background-color:
@@ -2016,8 +2044,8 @@ div.viewcode-block:target
 
     dl.function > dt,
     dl.method > dt,
-    dl.classmethod > dt,
-    dl.staticmethod > dt
+    dl.classmethod > dt, 
+    dl.staticmethod > dt 
     {
         background-color:
         #deebf5;
@@ -2037,14 +2065,16 @@ div.viewcode-block:target
     }
 
     
-    dl.object > dt:before,
+    dl.object > dt:before, 
+    dl.data > dt:before,
     dl.function > dt:before,
     dl.method > dt:before,
     dl.attribute > dt:before,
     dl.class > dt > .property:first-child,
     dl.exception > dt > .property:first-child,
-    dl.classmethod > dt > .property:first-child,
-    dl.staticmethod > dt > .property:first-child
+    dl.classmethod > dt > .property:first-child, 
+        dl.method[subtype] > dt > .property:first-child, 
+    dl.staticmethod > dt > .property:first-child 
     {
         font-size: 0.8em;
         font-weight: bold;
@@ -2056,12 +2086,6 @@ div.viewcode-block:target
     
     
         
-
-        .desc-section  dl.object > dt:before
-        {
-            content: "obj";
-            padding-right: 0.6em;
-        }
 
         .desc-section  dl.attribute > dt:before
         {
@@ -2075,7 +2099,7 @@ div.viewcode-block:target
             padding-right: 0.6em;
         }
 
-        .desc-section  dl.method > dt:before
+        .desc-section  dl.method:not([subtype]) > dt:before
         {
             content: "method";
             padding-right: 0.6em;

@@ -10,14 +10,29 @@
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
-    <script type="text/javascript" src="../_static/cloud.base.js"></script>
-    <script type="text/javascript" src="../_static/cloud.js"></script>
+
+    
+    
+     
+        <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.js"></script>
+    
+
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="FAQ" href="maintainer_faq.html" />
@@ -603,6 +618,15 @@ BLAS <code class="docutils literal notranslate"><span class="pre">3.8.0</span></
 they like without any knowledge of the version of the BLAS implementation needed.</p>
 </div>
 </div>
+<div class="section" id="matplotlib">
+<span id="knowledge-mpl"></span><h3>Matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> comes in two parts. The core library is in <code class="docutils literal notranslate"><span class="pre">matplotlib-base</span></code>. The
+actual <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> package is this core library plus <code class="docutils literal notranslate"><span class="pre">pyqt</span></code>. Most, if not all, packages that have
+dependence at runtime on <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> should list this dependence as <code class="docutils literal notranslate"><span class="pre">matplotlib-base</span></code> unless they
+explicitly need <code class="docutils literal notranslate"><span class="pre">pyqt</span></code>. <code class="docutils literal notranslate"><span class="pre">pyqt</span></code> is a rather large package, so not requiring it indirectly is better for users.
+Rationale is that a user installing <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> explicitly would get the batteries included version, but
+it should not be installed indirectly.</p>
+</div>
 </div>
 <div class="section" id="noarch-builds">
 <h2>Noarch builds<a class="headerlink" href="#noarch-builds" title="Permalink to this headline">¶</a></h2>
@@ -751,6 +775,7 @@ requirement will be changed from <code class="docutils literal notranslate"><spa
 <li class="toctree-l5"><a class="reference internal" href="#how-it-works">How it works</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="#matplotlib">Matplotlib</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#noarch-builds">Noarch builds</a><ul>
