@@ -117,6 +117,14 @@ Entering the above phrase in an issue will update the team for the feedstock. Th
 Entering this command in the PR of a feedstock or staged-recipes will close and then open the PR, causing
 all of the CI builds to restart.
 
+@conda-forge-admin, please ping team
+------------------------------------
+
+Entering this command in the PR of a feedstock or staged-recipes will have the admin bot @-mention the team
+associated with the repo. This command can be useful for people who are not yet members of conda-forge and 
+so cannot @-mention the ``staged-recipes`` team for PR reviews.
+
+
 CI build services
 =================
 
