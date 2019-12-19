@@ -142,7 +142,7 @@ To do this drop ``-c auto`` from the command.
 When to rerender
 ----------------
 
-We need to re-render when there are changes the following parts of the feedstock:
+We need to re-render when there are changes to the following parts of the feedstock:
 
 - the platform configuration (``skip`` sections);
 - the ``yum_requirements.txt``;
