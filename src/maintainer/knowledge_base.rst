@@ -673,11 +673,16 @@ Matplotlib
 ``matplotlib`` on ``conda-forge`` comes in two parts. The core library is in ``matplotlib-base``. The
 actual ``matplotlib`` package is this core library plus ``pyqt``. Most, if not all, packages that have
 dependence at runtime on ``matplotlib`` should list this dependence as ``matplotlib-base`` unless they 
-explicitly need ``pyqt``. ``pyqt`` is a rather large package, so not requiring it indirectly is better for users.
-Rationale is that a user installing ``matplotlib`` explicitly would get the batteries included version, but
-it should not be installed indirectly.
+explicitly need ``pyqt``. The idea is that a user installing ``matplotlib`` explicitly would get a full 
+featured installation with ``pyqt``. However, ``pyqt`` is a rather large package, so not requiring it 
+indirectly is better for performance. Note that you may need to include a ``yum_requirements.txt`` file 
+in your recipe with 
 
+.. code-block:: bash
 
+    xorg-x11-server-Xorg
+    
+if you import parts of ``matplotlib`` that link to ``libX11``.
 
 Noarch builds
 =============
