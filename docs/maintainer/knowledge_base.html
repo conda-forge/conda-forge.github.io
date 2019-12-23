@@ -623,9 +623,14 @@ they like without any knowledge of the version of the BLAS implementation needed
 <p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> comes in two parts. The core library is in <code class="docutils literal notranslate"><span class="pre">matplotlib-base</span></code>. The
 actual <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> package is this core library plus <code class="docutils literal notranslate"><span class="pre">pyqt</span></code>. Most, if not all, packages that have
 dependence at runtime on <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> should list this dependence as <code class="docutils literal notranslate"><span class="pre">matplotlib-base</span></code> unless they
-explicitly need <code class="docutils literal notranslate"><span class="pre">pyqt</span></code>. <code class="docutils literal notranslate"><span class="pre">pyqt</span></code> is a rather large package, so not requiring it indirectly is better for users.
-Rationale is that a user installing <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> explicitly would get the batteries included version, but
-it should not be installed indirectly.</p>
+explicitly need <code class="docutils literal notranslate"><span class="pre">pyqt</span></code>. The idea is that a user installing <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> explicitly would get a full
+featured installation with <code class="docutils literal notranslate"><span class="pre">pyqt</span></code>. However, <code class="docutils literal notranslate"><span class="pre">pyqt</span></code> is a rather large package, so not requiring it
+indirectly is better for performance. Note that you may need to include a <code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code> file
+in your recipe with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xorg-x11-server-Xorg
+</pre></div>
+</div>
+<p>if you import parts of <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> that link to <code class="docutils literal notranslate"><span class="pre">libX11</span></code>.</p>
 </div>
 </div>
 <div class="section" id="noarch-builds">
