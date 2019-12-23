@@ -43,7 +43,8 @@ Packages and tools that fall under the purview of the bot subteam include:
 
 Members
 -------
-- Justin Calamari <justin.calamari@gmail.com>
+- Matthew R. Becker <becker.mr@gmail.com>
+- Sophia Castellarin <scastellarin@anaconda.com>
 - Filipe Fernandes <ocefpaf@gmail.com>
 - Marius van Niekerk <marius.v.niekerk@gmail.com>
 - Michael Sarahan <msarahan@gmail.com>
