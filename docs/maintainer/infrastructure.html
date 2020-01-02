@@ -157,6 +157,12 @@ all of the CI builds to restart.</p>
 associated with the repo. This command can be useful for people who are not yet members of conda-forge and
 so cannot &#64;-mention the <code class="docutils literal notranslate"><span class="pre">staged-recipes</span></code> team for PR reviews.</p>
 </div>
+<div class="section" id="conda-forge-admin-please-rerun-bot">
+<h3>&#64;conda-forge-admin, please rerun bot<a class="headerlink" href="#conda-forge-admin-please-rerun-bot" title="Permalink to this headline">¶</a></h3>
+<p>Entering this command in a PR comment will add the <cite>bot-rerun</cite> label to that PR. This label will cause
+the <cite>auto-tick</cite> bot that issues migration and version updates to close the current PR and reissue it.
+Adding this label to non-bot issued PRs will have no effect.</p>
+</div>
 </div>
 <div class="section" id="ci-build-services">
 <h2>CI build services<a class="headerlink" href="#ci-build-services" title="Permalink to this headline">¶</a></h2>
@@ -298,6 +304,7 @@ This is not normally needed.</p>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-update-team">&#64;conda-forge-admin, please update team</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-restart-ci">&#64;conda-forge-admin, please restart ci</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-ping-team">&#64;conda-forge-admin, please ping team</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-rerun-bot">&#64;conda-forge-admin, please rerun bot</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#ci-build-services">CI build services</a><ul>
@@ -406,7 +413,7 @@ This is not normally needed.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

@@ -124,6 +124,12 @@ Entering this command in the PR of a feedstock or staged-recipes will have the a
 associated with the repo. This command can be useful for people who are not yet members of conda-forge and 
 so cannot @-mention the ``staged-recipes`` team for PR reviews.
 
+@conda-forge-admin, please rerun bot
+------------------------------------
+
+Entering this command in a PR comment will add the `bot-rerun` label to that PR. This label will cause 
+the `auto-tick` bot that issues migration and version updates to close the current PR and reissue it. 
+Adding this label to non-bot issued PRs will have no effect.
 
 CI build services
 =================
