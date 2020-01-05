@@ -588,10 +588,14 @@ what an end-user will see.</p>
 <span id="staging-test-locally"></span><h4>Running tests locally for staged recipes<a class="headerlink" href="#running-tests-locally-for-staged-recipes" title="Permalink to this headline">¶</a></h4>
 <p>If you want to run and build packages in the staged-recipes repository locally,
 go to the root repository directory and run the
-<code class="docutils literal notranslate"><span class="pre">.circleci/run_docker_build.sh</span></code> script.</p>
-<p>This requires that you have docker installed on your machine.</p>
+<code class="docutils literal notranslate"><span class="pre">.circleci/run_docker_build.sh</span></code> script.  This requires that you have docker
+installed on your machine.</p>
+<p>You need to define an environment variable named <code class="docutils literal notranslate"><span class="pre">CONFIG</span></code>. Its value must be
+the name of one of the three YAML configuration files in the <code class="docutils literal notranslate"><span class="pre">.ci_support</span></code>
+directory (either <code class="docutils literal notranslate"><span class="pre">linux64</span></code>, <code class="docutils literal notranslate"><span class="pre">osx64</span></code>, or <code class="docutils literal notranslate"><span class="pre">win64</span></code>). As an example, you can
+invoke the command as follows.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> staged-recipes
-$ ./.circleci/run_docker_build.sh
+$ <span class="nv">CONFIG</span><span class="o">=</span>linux64 ./.circleci/run_docker_build.sh
 </pre></div>
 </div>
 </div>
