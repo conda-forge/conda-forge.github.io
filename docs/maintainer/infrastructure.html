@@ -159,9 +159,17 @@ so cannot &#64;-mention the <code class="docutils literal notranslate"><span cla
 </div>
 <div class="section" id="conda-forge-admin-please-rerun-bot">
 <h3>&#64;conda-forge-admin, please rerun bot<a class="headerlink" href="#conda-forge-admin-please-rerun-bot" title="Permalink to this headline">¶</a></h3>
-<p>Entering this command in a PR comment will add the <cite>bot-rerun</cite> label to that PR. This label will cause
-the <cite>auto-tick</cite> bot that issues migration and version updates to close the current PR and reissue it.
+<p>Entering this command in a PR comment will add the <code class="docutils literal notranslate"><span class="pre">bot-rerun</span></code> label to that PR. This label will cause
+the <code class="docutils literal notranslate"><span class="pre">auto-tick</span></code> bot that issues migration and version updates to close the current PR and reissue it.
 Adding this label to non-bot issued PRs will have no effect.</p>
+</div>
+<div class="section" id="conda-forge-admin-please-add-bot-automerge">
+<h3>&#64;conda-forge-admin, please add bot automerge<a class="headerlink" href="#conda-forge-admin-please-add-bot-automerge" title="Permalink to this headline">¶</a></h3>
+<p>Entering this command in the title or comment of an issue will instruct the admin bot to
+open a PR enabling the automatic merging of passing PRs from the <code class="docutils literal notranslate"><span class="pre">auto-tick</span></code>
+bot. This functionality is currently experimental. You can find more details
+<a class="reference external" href="https://regro.github.io/cf-scripts/github_actions_infrastructure.html#automerging-prs">here</a>.
+Please open issue on <code class="docutils literal notranslate"><span class="pre">regro/cf-scripts</span></code> for any feedback, bugs, and/or questions!</p>
 </div>
 </div>
 <div class="section" id="ci-build-services">
@@ -305,6 +313,7 @@ This is not normally needed.</p>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-restart-ci">&#64;conda-forge-admin, please restart ci</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-ping-team">&#64;conda-forge-admin, please ping team</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-rerun-bot">&#64;conda-forge-admin, please rerun bot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-add-bot-automerge">&#64;conda-forge-admin, please add bot automerge</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#ci-build-services">CI build services</a><ul>
