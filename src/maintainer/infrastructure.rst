@@ -127,8 +127,8 @@ so cannot @-mention the ``staged-recipes`` team for PR reviews.
 @conda-forge-admin, please rerun bot
 ------------------------------------
 
-Entering this command in a PR comment will add the `bot-rerun` label to that PR. This label will cause
-the `auto-tick` bot that issues migration and version updates to close the current PR and reissue it.
+Entering this command in a PR comment will add the ``bot-rerun`` label to that PR. This label will cause
+the ``auto-tick`` bot that issues migration and version updates to close the current PR and reissue it.
 Adding this label to non-bot issued PRs will have no effect.
 
 @conda-forge-admin, please add bot automerge
