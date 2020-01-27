@@ -135,11 +135,10 @@ Adding this label to non-bot issued PRs will have no effect.
 --------------------------------------------
 
 Entering this command in the title or comment of an issue will instruct the admin bot to
-open a PR enabling the automatic merging of passing PRs from the `auto-tick`
-bot. This functionality is currently experimental. You can find more details 
-'here <https://regro.github.io/cf-scripts/github_actions_infrastructure.html#automerging-prs>'_. 
-Please open issue on `regro/cf-scripts`
-for any feedback, bugs, and/or questions!
+open a PR enabling the automatic merging of passing PRs from the ``auto-tick``
+bot. This functionality is currently experimental. You can find more details
+`here <https://regro.github.io/cf-scripts/github_actions_infrastructure.html#automerging-prs>`_.
+Please open issue on ``regro/cf-scripts`` for any feedback, bugs, and/or questions!
 
 
 CI build services

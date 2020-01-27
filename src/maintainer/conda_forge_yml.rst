@@ -66,7 +66,7 @@ mapping for Azure-specific configuration options. For example:
 
 bot
 ---
-This field controls the behavior of the `auto-tick` bot which issues
+This field controls the behavior of the ``auto-tick`` bot which issues
 automatic version updates/migrations for feedstocks. The current options are
 
 .. code-block:: yaml
