@@ -13,6 +13,7 @@ Top-level fields
 
 * appveyor
 * azure
+* bot
 * channels
 * circle
 * compiler_stack
@@ -62,6 +63,17 @@ mapping for Azure-specific configuration options. For example:
       upload_packages: False
       # flag for forcing the building all supported providers
       force: False
+
+bot
+---
+This field controls the behavior of the `auto-tick` bot which issues
+automatic version updates for feedstocks. The current options are
+
+.. code-block:: yaml
+
+    bot:
+      # can the bot automerge PRs it makes on this feedstock
+      automerge: True
 
 channels
 --------
@@ -327,4 +339,3 @@ Currently only:
 
     win:
       enabled: False
-

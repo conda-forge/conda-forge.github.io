@@ -121,15 +121,24 @@ all of the CI builds to restart.
 ------------------------------------
 
 Entering this command in the PR of a feedstock or staged-recipes will have the admin bot @-mention the team
-associated with the repo. This command can be useful for people who are not yet members of conda-forge and 
+associated with the repo. This command can be useful for people who are not yet members of conda-forge and
 so cannot @-mention the ``staged-recipes`` team for PR reviews.
 
 @conda-forge-admin, please rerun bot
 ------------------------------------
 
-Entering this command in a PR comment will add the `bot-rerun` label to that PR. This label will cause 
-the `auto-tick` bot that issues migration and version updates to close the current PR and reissue it. 
+Entering this command in a PR comment will add the `bot-rerun` label to that PR. This label will cause
+the `auto-tick` bot that issues migration and version updates to close the current PR and reissue it.
 Adding this label to non-bot issued PRs will have no effect.
+
+@conda-forge-admin, please add bot automerge
+--------------------------------------------
+
+Entering this command in the title or comment of an issue will instruct the admin bot to
+open a PR enabling the automatic merging of passing PRs from the `auto-tick`
+bot. This functionality is currently experimental. Please open issue on `regro/cf-scripts`
+for any feedback, bugs, and/or questions!
+
 
 CI build services
 =================
