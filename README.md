@@ -8,7 +8,7 @@ Documentation for conda-forge.
 The docs are built on travis ci with the `.travis.yml` file at the root of this repository.
 `.travis.yml` uses [conda-execute](https://github.com/conda-tools/conda-execute) to run the `.ci_scripts/update_docs` script.
 To build the docs locally, you should do the following:
-1. `conda env create -f ./.ci_support/environment.yml`
+1. `conda env create -f ./.ci_scripts/environment.yml`
 2. `conda activate conda-forge-docs`
 3. `cd src`
 4. `make html`
