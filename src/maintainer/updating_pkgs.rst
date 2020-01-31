@@ -33,6 +33,7 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
 
    - Clone the conda-forge feedstock repository
    - Add the remote of the bot: ``git add regro-cf-autotick-bot git@github.com:regro-cf-autotick-bot/<package>-feedstock.git``
+
      .. important::
         It is not possible to push to a GitHub repository using the ``git://`` or ``https://``
         protocols
