@@ -242,6 +242,7 @@ Current Members of Core
 In alphabetical order,
 
 * Marcel Bargull, @mbargull
+* Matthew Becker, @beckermr
 * Lori Burns, @loriab
 * Sophia Castellarin, @soapy1
 * Matt Craig, @mwcraig
@@ -260,7 +261,7 @@ In alphabetical order,
 * Patrick Sodré, @sodre
 * Dougal J. Sutherland, @dougalsutherland
 * Peter K. G. Williams, @pkgw
-* Christopher J. Wright, @CJ-Wright
+* Christopher J. "CJ" Wright, @CJ-Wright
 
 Document History
 ----------------
