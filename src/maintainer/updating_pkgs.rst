@@ -35,8 +35,12 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
    - Add the remote of the bot: ``git add regro-cf-autotick-bot git@github.com:regro-cf-autotick-bot/<package>-feedstock.git``
 
      .. important::
-        It is not possible to push to a GitHub repository using the ``git://`` or ``https://``
-        protocols
+        It is not possible to push to a GitHub repository using the
+        ``git://`` protocol.  See `Which remote URL should I use?
+        <https://help.github.com/en/github/using-git/which-remote-url-should-i-use>`_
+        for instructions on using the ``https://`` protocol if you have
+        enabled `two-factor authentication
+        <https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa>`_.
    - Fetch the remote: ``git fetch regro-cf-autotick-bot``
    - Checkout the branch of the PR, git should automatically link it to the `regro-cf-autotick-bot` remote if this is the only remote with a branch of that name.
    - If there are multiple remotes with this branch name, you need to first checkout the remote branch and then turn it into a local branch: ``git checkout regro-cf-autotick-bot/<branch> && git checkout -b <branch>``
