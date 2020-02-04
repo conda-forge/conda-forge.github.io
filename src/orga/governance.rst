@@ -85,8 +85,7 @@ Standard items are ones where public record and discourse is
 preferable. Sensitive voting items are ones where the results of the
 vote should remain private to the voters after the vote has occurred.
 Sensitive votes should take place on a secure anonymous voting platform
-(such as `Polys <polys.me>`_ or
-`the Helios voting system <https://vote.heliosvoting.org/>`_) in order to retain
+(we recommend `Polys <polys.me>`_) in order to retain
 anonymity. The email capability of your chosen voting platform should be used,
 and you should use the email list from
 https://github.com/conda-forge/conda-forge.github.io/blob/master/src/core.csv as
