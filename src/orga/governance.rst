@@ -104,6 +104,44 @@ To call for a standard vote, here is a template PR comment:
     This vote will end on {date}.
 
 ----
+:Quorum: All percentages below express *both* required participation, as a
+         fraction of the active core team, as well as the fraction of that
+         fraction who vote affirmatively on the issue. For example, in a vote
+         requiring 50%, with 18 active core members, at least 9 must vote, and
+         among them, there must 5 affirmative votes.
+
+         Because everyone is busy and it is difficult sometimes to get quorum,
+         there is a timeout, where the current participation level is taken for
+         what it is, and the percentage of affirmative votes is calculated from
+         whatever the vote total is at that time.  In order for a timeout to occur,
+         the vote must have:
+
+             * been open for at least 2 weeks
+             * been advertised on at least 3 separate occasions on the gitter core
+               channel (beginning of voting period, middle, and one day prior to
+               proposed timeout)
+             * been sent to core members via email.  Email reminders must have been
+               sent similarly to the gitter core channel: at least 3 times,
+               occurring as beginning of voting period, middle, and one day
+               prior to proposed timeout.
+
+         Extending the above example, if 9 people are required for a quorum, but
+         only 7 have voted, those 7 votes can form the basis of a completed vote
+         after the above conditions are met. 4 votes within those 7 would be
+         needed to pass the vote.
+
+         To post a timeout reminder, here is a template comment:
+
+          .. code-block:: md
+
+              @conda-forge/core
+              This vote falls under the {policy} policy, please vote and/or comment on this PR.
+              This vote needs {policy_percent} of core to vote yea to pass.
+              This vote presently has {current voters}, and needs {policy_percent * core} more for quorum.
+              It is proposed that this vote will timeout and be evaluated with the current votes in {days}, on {date}.
+              To vote please leave Approve (yea) or Request Changes (nay) reviews.
+
+----
 
 :CFEP Approval: When ready, the proposer may call for a vote on an
     existing conda-forge enhancement proposal (CFEP). This requires a
