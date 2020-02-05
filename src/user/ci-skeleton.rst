@@ -9,10 +9,10 @@ you don't have to write or manage your own CI configurations?!
 By adding a ``recipe/`` directory to your repository, the conda-smithy
 command ``ci-skeleton`` let's you hook into well-tested and robust
 CI infrastructure. Using the conda-smithy ``rerender`` command, you
-can then keep your reposoitory up-to-date with any needed changes!
+can then keep your repository up-to-date with any needed changes!
 
-CI Skeleton
------------
+Getting Started
+---------------
 The ``ci-skeleton`` command helps get you started by preparing a repository
 to have the proper structure such that the ``rerender`` command will correctly
 add the CI configurations. Let's see an example!
@@ -48,7 +48,7 @@ This will produce output like the following:
     At any time in the future, you will be able to automatically update your
     CI configuration by re-running the rerender command above. Happy testing!
 
-As you can see, this generates and updates a few imporant files.
+As you can see, this generates and updates a few important files.
 The first file it creates is the ``conda-forge.yml`` file.  This is
 specifically constructed to tell ``conda smithy rerender`` that we are
 not running ``myproj`` CI as a regular feedstock. The ``.gitignore`` is
@@ -61,10 +61,10 @@ Let's go through them one-by-one!
 
 1. Fill out recipe/meta.yaml
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The ``ci-skeleton`` command emmits an example ``meta.yaml`` file for
+The ``ci-skeleton`` command emits an example ``meta.yaml`` file for
 building ``myproj``, hence the "skeleton" part of the name. If you
 don't want the skeleton to be produced in the ``recipe/`` directory,
-you can use the ``-r`` option to suply an alternative.
+you can use the ``-r`` option to supply an alternative.
 
 The **meta.yaml** looks like:
 
@@ -169,4 +169,38 @@ Just run the following commands:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This is important!  It you haven't done so already, you'll need to go
 to the CI providers (Travis, Circle, Azure, etc.) and enable CI
-to for your repository.
+to for your repository. Each CI provider that you use will have
+documentation on how to get set up with them.
+
+4. Rerender
+~~~~~~~~~~~
+Last, but certainly not least, we need to generate the CI configuration
+scripts! This is based on the content of the recipe as well as the
+provider selections made in the ``conda-forge.yml`` file. (Please
+refer to `these docs <https://conda-forge.org/docs/maintainer/conda_forge_yml.html#provider>`_
+for a complete list of CI providers.)
+
+In order to generate the CI configuration files, run:
+
+.. code-block:: bash
+
+    ~/repo $ conda smithy rerender -c auto
+
+Pushing those changes up to the repo should now give be building and testing
+your package on CI!
+
+Keeping Up-to-date
+------------------
+A major advantage of using ``ci-skeleton`` is that once it has been
+setup, it is very easy to keep your CI system up-to-date. If you
+modify your recipe to enable new architectures, you want to
+run on a different provider, or even if the CI system changes out from under you,
+getting back up and running is as easy as rerendering.
+You just need to repeat step 4, above:
+
+.. code-block:: bash
+
+    ~/repo $ conda smithy rerender -c auto
+
+This will generate and replace the CI configuration files for the
+current time and state of the recipe.  It is just that easy!
