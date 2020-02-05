@@ -735,11 +735,10 @@ In order to qualify as a noarch python package, all of the following criteria mu
   - Scripts argument in setup.py is not used
   - If ``console_script`` ``entry_points`` are defined in ``setup.py`` or ``setup.cfg``, they are also listed in the ``build`` section of ``meta.yaml``
   - No activate scripts
-  - Not a dependency of ``conda``
 
 .. note::
   While ``noarch: python`` does not work with selectors, it does work with version constraints.
-  ``skip: True  # [py2k]`` can sometimes be replaced with a constrained python version in the host and run subsections: say ``python >=3`` instead of just ``python``.
+  ``skip: True  # [py2k]`` can be replaced with a constrained python version in the host and run subsections: say ``python >=3`` instead of just ``python``.
 
 .. note::
   Only ``console_script`` entry points have to be listed in meta.yaml. Other entry points do not conflict with ``noarch`` and therefore do not require extra treatment.
