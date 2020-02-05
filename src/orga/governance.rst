@@ -109,14 +109,15 @@ To call for a standard vote, here is a template PR comment:
 :Quorum: All percentages below express *both* required participation, as a
          fraction of the active core team, as well as the fraction of that
          fraction who vote affirmatively on the issue. For example, in a vote
-         requiring 50%, with 18 active core members, at least 9 must vote, and
-         among them, there must 5 affirmative votes.
+         requiring 50%, with 18 active core members, at least 9 must vote;
+         if 9 vote, there must 5 affirmative votes. If 13 members vote, 7
+         must be affirmative.
 
          Because everyone is busy and it is difficult sometimes to get quorum,
-         there is a timeout, where the current participation level is taken for
-         what it is, and the percentage of affirmative votes is calculated from
-         whatever the vote total is at that time.  In order for a timeout to occur,
-         the vote must have:
+         votes not achieving quorum will eventually time out. When this happens,
+         the current participation level is taken for what it is, and the percentage
+         of affirmative votes is calculated from whatever the vote total is at that
+         time.  In order for a timeout to occur, the vote must have:
 
              * been open for at least 2 weeks
              * been advertised on at least 3 separate occasions on the gitter core
@@ -139,8 +140,8 @@ To call for a standard vote, here is a template PR comment:
               @conda-forge/core
               This vote falls under the {policy} policy, please vote and/or comment on this PR.
               This vote needs {policy_percent} of core to vote yea to pass.
-              This vote presently has {current voters}, and needs {policy_percent * core} more for quorum.
-              It is proposed that this vote will timeout and be evaluated with the current votes in {days}, on {date}.
+              This vote presently has {current_voters}, and needs {policy_percent * core - current_voters} more for quorum.
+              It is proposed that this vote will time out and be evaluated with the current votes in {days}, on {date}.
               To vote please leave Approve (yea) or Request Changes (nay) reviews.
 
 ----
