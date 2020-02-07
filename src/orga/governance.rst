@@ -106,6 +106,23 @@ To call for a standard vote, here is a template PR comment:
     To vote please leave Approve (yea) or Request Changes (nay) reviews.
     If you would like changes to the current language please leave a comment or push to this branch.
     This vote will end on {date}.
+    
+----
+:Posting results: To maintain the historical record, the outcome of any vote should be 
+         recorded in the "vote-results" folder at 
+         https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results
+         
+         Each vote should be its own file.  The filename should reflect the topic and the 
+         date that the vote opened.  The file should contain at least:
+         
+         * vote description
+         * vote policy
+         * vote totals
+         * Poll open and close dates
+         
+         If a vote has "timed out," as described in "Quorum," the documentation regarding
+         notification records should also be in this file.
+         
 
 ----
 :Quorum: All percentages below express *both* required participation, as a
@@ -145,6 +162,11 @@ To call for a standard vote, here is a template PR comment:
               This vote presently has {current_voters}, and needs {policy_percent * core - current_voters} more for quorum.
               It is proposed that this vote will time out and be evaluated with the current votes in {days}, on {date}.
               To vote please leave Approve (yea) or Request Changes (nay) reviews.
+              
+         To declare a vote "timed out," the person making such a declaration must post a pull-request adding 
+         a vote record to the https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results
+         folder.  The declaration PR should be merged by the first core member who is available to verify that
+         the requirements for the timeout have been met, based on their own personal records.
 
 ----
 
