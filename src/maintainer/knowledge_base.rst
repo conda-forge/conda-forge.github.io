@@ -735,6 +735,7 @@ In order to qualify as a noarch python package, all of the following criteria mu
   - Scripts argument in setup.py is not used
   - If ``console_script`` ``entry_points`` are defined in ``setup.py`` or ``setup.cfg``, they are also listed in the ``build`` section of ``meta.yaml``
   - No activate scripts
+  - Not a dependency of conda
 
 .. note::
   While ``noarch: python`` does not work with selectors, it does work with version constraints.
