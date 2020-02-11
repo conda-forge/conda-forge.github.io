@@ -537,7 +537,7 @@ implementation from the GNU project.
   requirements:
     build:
       - llvm-openmp  # [osx]
-      - libgomp      # [linux and not aarch64]
+      - libgomp      # [linux]
 
 Switching OpenMP implementation
 """""""""""""""""""""""""""""""
