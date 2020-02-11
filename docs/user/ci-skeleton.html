@@ -1,0 +1,373 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Using conda-forge to manage your CI &#8212; conda-forge 2019.01 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+
+    
+    
+     
+        <script src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="FAQ" href="faq.html" />
+    <link rel="prev" title="Tips &amp; tricks" href="tipsandtricks.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="faq.html" title="FAQ"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="tipsandtricks.html" title="Tips &amp; tricks"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="using-conda-forge-to-manage-your-ci">
+<h1>Using conda-forge to manage your CI<a class="headerlink" href="#using-conda-forge-to-manage-your-ci" title="Permalink to this headline">¶</a></h1>
+<p>Conda-forge, and specifically <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> contains a lot of
+tools for building and deploying continuous integration (CI)
+infrastructure on a variety of different platforms and architectures!
+Wouldn’t it be nice if you could reuse all of this hard work, so
+you don’t have to write or manage your own CI configurations?!</p>
+<p>By adding a <code class="docutils literal notranslate"><span class="pre">recipe/</span></code> directory to your repository, the conda-smithy
+command <code class="docutils literal notranslate"><span class="pre">ci-skeleton</span></code> let’s you hook into well-tested and robust
+CI infrastructure. Using the conda-smithy <code class="docutils literal notranslate"><span class="pre">rerender</span></code> command, you
+can then keep your repository up-to-date with any needed changes!</p>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">ci-skeleton</span></code> command helps get you started by preparing a repository
+to have the proper structure such that the <code class="docutils literal notranslate"><span class="pre">rerender</span></code> command will correctly
+add the CI configurations. Let’s see an example!</p>
+<p>Suppose you have a repository for a project called <code class="docutils literal notranslate"><span class="pre">myproj</span></code>.  In the
+root level of the repository, you can run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/repo $ conda smithy ci-skeleton myproj
+</pre></div>
+</div>
+<p>This will produce output like the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Generating ~/repo/conda-forge.yml
+Generating ~/repo/recipe/meta.yaml
+Updating ~/repo/.gitignore
+A CI skeleton has been generated! Please use the following steps
+to <span class="nb">complete</span> the CI setup process:
+
+<span class="m">1</span>. Fill out recipe/meta.yaml with your install and <span class="nb">test</span> code
+<span class="m">2</span>. Commit all changes to the repo.
+
+        $ git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;ran conda smithy skeleton&quot;</span>
+
+<span class="m">3</span>. Remember to register your repo with the CI providers.
+<span class="m">4</span>. Rerender this repo to generate the CI configurations files.
+   This can be <span class="k">done</span> with:
+
+        $ conda smithy rerender -c auto
+
+At any <span class="nb">time</span> in the future, you will be able to automatically update your
+CI configuration by re-running the rerender <span class="nb">command</span> above. Happy testing!
+</pre></div>
+</div>
+<p>As you can see, this generates and updates a few important files.
+The first file it creates is the <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> file.  This is
+specifically constructed to tell <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">smithy</span> <span class="pre">rerender</span></code> that we are
+not running <code class="docutils literal notranslate"><span class="pre">myproj</span></code> CI as a regular feedstock. The <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> is
+modified to not accidentally add unwanted conda-smithy temporary files
+to your repository.</p>
+<p>Also the steps that the <code class="docutils literal notranslate"><span class="pre">ci-skeleton</span></code> spits out are very important
+for wiring everything up properly. Luckily, they are easy to perform!
+Let’s go through them one-by-one!</p>
+<div class="section" id="fill-out-recipe-meta-yaml">
+<h3>1. Fill out recipe/meta.yaml<a class="headerlink" href="#fill-out-recipe-meta-yaml" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ci-skeleton</span></code> command emits an example <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file for
+building <code class="docutils literal notranslate"><span class="pre">myproj</span></code>, hence the “skeleton” part of the name. If you
+don’t want the skeleton to be produced in the <code class="docutils literal notranslate"><span class="pre">recipe/</span></code> directory,
+you can use the <code class="docutils literal notranslate"><span class="pre">-r</span></code> option to supply an alternative.</p>
+<p>The <strong>meta.yaml</strong> looks like:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span>{% set name = &quot;myproj&quot; %}
+{% set version = environ.get(&#39;GIT_DESCRIBE_TAG&#39;, &#39;untagged&#39;)|string|replace(&#39;-&#39;,&#39;_&#39;) %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: {{ environ.get(&#39;FEEDSTOCK_ROOT&#39;, &#39;..&#39;) }}
+
+build:
+  # Uncomment the following line if the package is pure Python and the recipe
+  # is exactly the same for all platforms. It is okay if the dependencies are
+  # not built for all platforms/versions, although selectors are still not allowed.
+  # See https://conda-forge.org/docs/maintainer/knowledge_base.html#noarch-python
+  # for more details.
+  # noarch: python
+
+  number: {{ environ.get(&#39;GIT_DESCRIBE_NUMBER&#39;, &#39;0&#39;) }}
+  string: {{ [build_number, (&#39;h&#39; + PKG_HASH), environ.get(&#39;GIT_DESCRIBE_HASH&#39;, &#39;&#39;)]|join(&#39;_&#39;) }}
+
+  # If the installation is complex, or different between Unix and Windows,
+  # use separate bld.bat and build.sh files instead of this key. By default,
+  # the package will be built for the Python versions supported by conda-forge
+  # and for all major OSs. Add the line &quot;skip: True  # [py&lt;35]&quot; (for example)
+  # to limit to Python 3.5 and newer, or &quot;skip: True  # [not win]&quot; to limit
+  # to Windows.
+  script: &quot;{{ PYTHON }} -m pip install . -vv&quot;
+
+requirements:
+  build:
+    # If your project compiles code (such as a C extension) then add the required
+    # compilers as separate entries here. Compilers are named &#39;c&#39;, &#39;cxx&#39; and &#39;fortran&#39;.
+    - {{ compiler(&#39;c&#39;) }}
+  host:
+    - python
+    - pip
+  run:
+    - python
+
+test:
+  # Some packages might need a `test/commands` key to check CLI.
+  # List all the packages/modules that `run_test.py` imports.
+  imports:
+    - myproj
+  # Run your test commands here
+  commands:
+    - myproj --help
+    - pytest
+  # declare any test-only requirements here
+  requires:
+    - pytest
+  # copy over any needed test files here
+  source_files:
+    - tests/
+
+# Uncomment and fill in myproj metadata
+#about:
+#  home: https://github.com/conda-forge/conda-smithy
+#  license: BSD-3-Clause
+#  license_family: BSD
+#  license_file: LICENSE
+
+# Uncomment the following if this will be on a forge
+# Remove these lines if this is only be used for CI
+#extra:
+#  recipe-maintainers:
+#    - BobaFett
+#    - LisaSimpson
+</pre></div>
+</div>
+<p>This recipe is configured to correctly grab the source code and the version
+information from git.  It also stubs out adding any test files that you might
+want to have <code class="docutils literal notranslate"><span class="pre">conda-build</span></code> use when it runs the test suite.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because you are using conda-forge, conda-build, etc as your CI, it is
+important to run the full test suite here.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Metadata such as licenses and maintainers are likely less important,
+because in the default case, packages created here will never be uploaded
+to a channel. Feel free to delete or ignore these fields.</p>
+</div>
+</div>
+<div class="section" id="commit-the-changes">
+<h3>2. Commit the changes<a class="headerlink" href="#commit-the-changes" title="Permalink to this headline">¶</a></h3>
+<p>Once you have written your recipe, it is important to save the modifications!
+Just run the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/repo $ git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;ran conda smithy skeleton&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="register-with-the-ci-providers">
+<h3>3. Register with the CI providers<a class="headerlink" href="#register-with-the-ci-providers" title="Permalink to this headline">¶</a></h3>
+<p>This is important!  It you haven’t done so already, you’ll need to go
+to the CI providers (Travis, Circle, Azure, etc.) and enable CI
+to for your repository. Each CI provider that you use will have
+documentation on how to get set up with them.</p>
+</div>
+<div class="section" id="rerender">
+<h3>4. Rerender<a class="headerlink" href="#rerender" title="Permalink to this headline">¶</a></h3>
+<p>Last, but certainly not least, we need to generate the CI configuration
+scripts! This is based on the content of the recipe as well as the
+provider selections made in the <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> file. (Please
+refer to <a class="reference external" href="https://conda-forge.org/docs/maintainer/conda_forge_yml.html#provider">these docs</a>
+for a complete list of CI providers.)</p>
+<p>In order to generate the CI configuration files, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/repo $ conda smithy rerender -c auto
+</pre></div>
+</div>
+<p>Pushing those changes up to the repo should now give be building and testing
+your package on CI!</p>
+</div>
+</div>
+<div class="section" id="keeping-up-to-date">
+<h2>Keeping Up-to-date<a class="headerlink" href="#keeping-up-to-date" title="Permalink to this headline">¶</a></h2>
+<p>A major advantage of using <code class="docutils literal notranslate"><span class="pre">ci-skeleton</span></code> is that once it has been
+setup, it is very easy to keep your CI system up-to-date. If you
+modify your recipe to enable new architectures, you want to
+run on a different provider, or even if the CI system changes out from under you,
+getting back up and running is as easy as rerendering.
+You just need to repeat step 4, above:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/repo $ conda smithy rerender -c auto
+</pre></div>
+</div>
+<p>This will generate and replace the CI configuration files for the
+current time and state of the recipe.  It is just that easy!</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html" title="index">
+          <img class="logo" src="../_static/logo_black_on_trans.png" alt="Logo"/>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Overview</a></h3>
+    <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="00_intro.html">User Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">A brief introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="announcements.html">Announcements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tipsandtricks.html">Tips &amp; tricks</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Using conda-forge to manage your CI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fill-out-recipe-meta-yaml">1. Fill out recipe/meta.yaml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#commit-the-changes">2. Commit the changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-with-the-ci-providers">3. Register with the CI providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rerender">4. Rerender</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#keeping-up-to-date">Keeping Up-to-date</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html">Becoming involved</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how_to_get_help.html">How to get help in conda-forge</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../maintainer/00_intro.html">Maintainer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../minutes/00_intro.html">Core team meeting minutes</a></li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="tipsandtricks.html"
+                          title="Previous page">&larr; Tips &amp; tricks</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="faq.html"
+                          title="Next page">&rarr; FAQ</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user/ci-skeleton.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="faq.html" title="FAQ"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="tipsandtricks.html" title="Tips &amp; tricks"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2019, conda-forge.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
