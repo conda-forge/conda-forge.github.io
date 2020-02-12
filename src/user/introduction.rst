@@ -71,4 +71,14 @@ From now on using ``conda install <package-name>`` will also find packages in ou
 
   Please be aware that the order of your conda package channels is important, especially when you combine conda-forge with other channels, e.g. ``bioconda``.
   
+.. note::
+
+  `Miniforge <https://github.com/conda-forge/miniforge>`__ is a community
+  effort to provide Miniconda-like installers, with the added feature that
+  conda-forge is the default channel.
+  For certain platforms (such as ARMv8 64-bit, formally known as `aarch64`)
+  Anaconda, Inc. does not provide any Miniconda installers, however Miniforge
+  does.
+  Miniforge installers are available here: https://github.com/conda-forge/miniforge/releases
+
   Please refer to :ref:`multiple_channels` for pitfalls and more information.
