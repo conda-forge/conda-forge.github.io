@@ -139,6 +139,7 @@ To call for a standard vote, here is a template PR comment:
          time.  In order for a timeout to occur, the vote must have:
 
              * been open for at least 2 weeks
+             * been presented and discussed at a Core team meeting
              * been advertised on at least 3 separate occasions on the gitter core
                channel (beginning of voting period, middle, and one day prior to
                proposed timeout)
