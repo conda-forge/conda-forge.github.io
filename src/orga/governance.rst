@@ -96,6 +96,8 @@ the authoritative list of emails to use.
 The default voting period is 1 week (7 days). This may be modified at
 the time when a vote is called, but may never be less than 24 hrs.
 
+Additional requirements may apply in case low turnouts have to be handled, see "Quorum" below.
+
 To call for a standard vote, here is a template PR comment:
 
 .. code-block:: md
