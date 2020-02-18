@@ -166,7 +166,7 @@ To call for a standard vote, here is a template PR comment:
               It is proposed that this vote will time out and be evaluated with the current votes in {days}, on {date}.
               To vote please leave Approve (yea) or Request Changes (nay) reviews.
               
-         To declare a vote "timed out," the person making such a declaration must post a pull-request adding 
+         To declare a standard vote "timed out," the person making such a declaration must post a pull-request adding
          a vote record to the https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results
          folder.  The declaration PR should be merged by the first core member who is available to verify that
          the requirements for the timeout have been met, based on their own personal records.
