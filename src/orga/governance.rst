@@ -135,7 +135,7 @@ To call for a standard vote, here is a template PR comment:
          must be affirmative.
 
          Because everyone is busy and it is difficult sometimes to get quorum,
-         votes not achieving quorum will eventually time out. When this happens,
+         votes not achieving quorum will eventually time out on their set end date. When this happens,
          the current participation level is taken for what it is, and the percentage
          of affirmative votes is calculated from whatever the vote total is at that
          time.  In order for a timeout to occur, the vote must have:
