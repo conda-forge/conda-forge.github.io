@@ -79,6 +79,6 @@ From now on using ``conda install <package-name>`` will also find packages in ou
   For certain platforms (such as ARMv8 64-bit, formally known as `aarch64`)
   Anaconda, Inc. does not provide any Miniconda installers, however Miniforge
   does.
-  Miniforge installers are available here: https://github.com/conda-forge/miniforge/releases
+  Miniforge installers are available here: https://github.com/conda-forge/miniforge/#download
 
   Please refer to :ref:`multiple_channels` for pitfalls and more information.
