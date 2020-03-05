@@ -10,12 +10,15 @@ from the URL for the vote
 
 Please include times to the nearest hour, in GMT time zone.
 
+| Event       |  Dates |
+| ---            |  ---:|
 | Proposed on:   |  2020/02/02 15:00 |
 | Original proposed close date:   |  2020/02/09 15:00 |
 | Presented at core meeting on:   |  2020/02/05 15:00 |
 
 ### Timeout (if this vote wasn't complete on the original proposed date)
-
+| Event       |  Dates |
+| ---            |  ---:|
 | Date(s) in-between reminders sent:   |  2020/02/02, 2020/02/09 |
 | Date final reminder sent:   |  2020/02/14 15:00 |
 | Date timeout declared:   |  2020/02/14 15:00 |
@@ -35,6 +38,8 @@ This vote will end on {date}.
 
 ## Final vote tallies (do not include names)
 
+|Direction       |  Count |
+| ---            |  ---:|
 | For   |   5 |
 | Against   |   2  |
 | Abstain   |   12  |
