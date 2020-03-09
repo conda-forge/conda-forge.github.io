@@ -743,6 +743,31 @@ core team if this is something you think you need.</p>
 is supported only by <code class="docutils literal notranslate"><span class="pre">conda&gt;=4.8</span></code>. Once that conda version is used widely, the
 requirement will be changed from <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> to <code class="docutils literal notranslate"><span class="pre">run</span></code>.</p>
 </div>
+<div class="section" id="pypy-builds">
+<h2>PyPy builds<a class="headerlink" href="#pypy-builds" title="Permalink to this headline">¶</a></h2>
+<p>To use the PyPy builds you can do the following,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.6.*<span class="o">=</span>*_pypy
+</pre></div>
+</div>
+<p>or,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install pypy <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.6
+</pre></div>
+</div>
+<p>or,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install pypy
+</pre></div>
+</div>
+<p>To build your python package for pypy, wait for the bot to send a
+PR and contact <code class="docutils literal notranslate"><span class="pre">conda-forge/bot</span></code> team if a PR is not sent after the
+dependencies have been built.</p>
+<p>To add a dependency just for pypy or cpython, do,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">run</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">spam</span>           <span class="c1"># [python.endswith(&#39;cpython&#39;)]</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ham</span>            <span class="c1"># [python.endswith(&#39;pypy&#39;)]</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -811,6 +836,7 @@ requirement will be changed from <code class="docutils literal notranslate"><spa
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#build-matrices">Build matrices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#requiring-newer-macos-sdks">Requiring newer macOS SDKs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pypy-builds">PyPy builds</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>

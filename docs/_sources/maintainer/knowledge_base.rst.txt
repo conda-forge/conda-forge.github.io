@@ -816,3 +816,37 @@ In ``recipe/meta.yaml``, add the following to ensure that the user's system is c
 Note that the requirement is a `run_constrained`, because the ``__osx`` virtual package
 is supported only by ``conda>=4.8``. Once that conda version is used widely, the
 requirement will be changed from ``run_constrained`` to ``run``.
+
+PyPy builds
+===========
+
+To use the PyPy builds you can do the following,
+
+.. code-block:: bash
+
+   conda install python=3.6.*=*_pypy
+
+or,
+
+.. code-block:: bash
+
+   conda install pypy python=3.6
+
+or,
+
+.. code-block:: bash
+
+   conda install pypy
+
+To build your python package for pypy, wait for the bot to send a
+PR and contact ``conda-forge/bot`` team if a PR is not sent after the
+dependencies have been built.
+
+To add a dependency just for pypy or cpython, do,
+
+.. code-block:: yaml
+
+   requirements:
+     run:
+       - spam           # [python.endswith('cpython')]
+       - ham            # [python.endswith('pypy')]
