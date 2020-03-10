@@ -757,6 +757,16 @@ requirement will be changed from <code class="docutils literal notranslate"><spa
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install pypy
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As of March 8, if you are using defaults as a low priority channel,
+then you need to use strict channel priority as the metadata in defaults
+has not been patched yet which allows cpython extension packages to be
+installed alongside pypy.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --set channel_priority strict
+</pre></div>
+</div>
 <p>To build your python package for pypy, wait for the bot to send a
 PR and contact <code class="docutils literal notranslate"><span class="pre">conda-forge/bot</span></code> team if a PR is not sent after the
 dependencies have been built.</p>

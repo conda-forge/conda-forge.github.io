@@ -838,6 +838,17 @@ or,
 
    conda install pypy
 
+.. note::
+
+   As of March 8, if you are using defaults as a low priority channel,
+   then you need to use strict channel priority as the metadata in defaults
+   has not been patched yet which allows cpython extension packages to be
+   installed alongside pypy.
+
+.. code-block:: bash
+
+   conda config --set channel_priority strict
+
 To build your python package for pypy, wait for the bot to send a
 PR and contact ``conda-forge/bot`` team if a PR is not sent after the
 dependencies have been built.
