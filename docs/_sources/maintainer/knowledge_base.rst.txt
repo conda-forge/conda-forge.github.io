@@ -859,5 +859,12 @@ To add a dependency just for pypy or cpython, do,
 
    requirements:
      run:
-       - spam           # [python.endswith('cpython')]
-       - ham            # [python.endswith('pypy')]
+       - spam           # [python_impl == 'cpython']
+       - ham            # [python_impl == 'pypy']
+
+To skip the pypy builds, do the following,
+
+.. code-block:: yaml
+
+   build:
+     skip: True         # [python_impl == 'pypy']

@@ -773,8 +773,13 @@ dependencies have been built.</p>
 <p>To add a dependency just for pypy or cpython, do,</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
   <span class="nt">run</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">spam</span>           <span class="c1"># [python.endswith(&#39;cpython&#39;)]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ham</span>            <span class="c1"># [python.endswith(&#39;pypy&#39;)]</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">spam</span>           <span class="c1"># [python_impl == &#39;cpython&#39;]</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ham</span>            <span class="c1"># [python_impl == &#39;pypy&#39;]</span>
+</pre></div>
+</div>
+<p>To skip the pypy builds, do the following,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+  <span class="nt">skip</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>         <span class="c1"># [python_impl == &#39;pypy&#39;]</span>
 </pre></div>
 </div>
 </div>
