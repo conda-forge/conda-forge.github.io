@@ -6,7 +6,7 @@ set -ex
 if [ -n "$GH_TOKEN" ]; then
     # TODO What is the purpose of this check? If we're on master, then check out master??
     # Make sure we are on the latest commit on `master` if we are planning to deploy the change.
-#    if (( "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" )); then
+#    if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then
 #        git checkout master
 #    fi
     git checkout -b new_site_content
@@ -34,7 +34,7 @@ if [ -n "$GH_TOKEN" ]; then
     git diff
 
     # Only commit the docs for commits on master.
-    if (( "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" )); then
+    if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then
         git add -A :/
         git commit -m "Re-ran make.py. [ci skip]" || true
         git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null
