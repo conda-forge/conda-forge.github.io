@@ -865,7 +865,7 @@ To add a dependency just for pypy or cpython, do,
 .. note::
 
    You'll need to rerender the feedstocks after making the above
-   chage in order for the python_impl variable to be available to
+   change in order for the ``python_impl`` variable to be available to
    conda-build
 
 To skip the pypy builds, do the following,
