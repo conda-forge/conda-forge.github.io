@@ -777,6 +777,12 @@ dependencies have been built.</p>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ham</span>            <span class="c1"># [python_impl == &#39;pypy&#39;]</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You’ll need to rerender the feedstocks after making the above
+change in order for the <code class="docutils literal notranslate"><span class="pre">python_impl</span></code> variable to be available to
+conda-build</p>
+</div>
 <p>To skip the pypy builds, do the following,</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
   <span class="nt">skip</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>         <span class="c1"># [python_impl == &#39;pypy&#39;]</span>
