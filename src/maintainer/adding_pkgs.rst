@@ -71,7 +71,7 @@ Step-by-step Instructions
 Checklist
 .........
 
-* Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache-2.0 rather than APACHE 2.0). Use SPDX identifiers for license field. (see  :ref:`spdx_expressions`) 
+* Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache-2.0 rather than APACHE 2.0). Use SPDX identifiers for license field. (see :ref:`spdx`)
 * Ensure that you have included a license file if your license requires one -- most do. (see `here <https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55>`_)
 * In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
 * Make sure that all tests pass successfully at least on your development machine.
@@ -663,7 +663,7 @@ In this case, please also notify the upstream developers that the license file i
   The license should only be shipped along with the recipe if there is no license file in the downloaded archive.
   If there is a license file in the archive, please set ``license_file`` to the path of the license file in the archive.
 
-.. _spdx_expressions:
+.. _spdx:
 
 SPDX Identifiers and Expressions
 ................................
