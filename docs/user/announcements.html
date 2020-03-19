@@ -76,14 +76,15 @@
 <ul class="simple">
 <li><p>Python 2.7 is no longer supported by the upstream developers as of 2020-01-01.
 Conda-forge is thus deprecating its Python 2.7 support. Conda-forge will provide
-no ongoing support for Python 2.7 builds and any builds are provided on an “as-is” basis.</p></li>
+no ongoing support for Python 2.7 builds and any existing builds are provided on an “as-is” basis.</p></li>
 <li><p>A <code class="docutils literal notranslate"><span class="pre">cf202003</span></code> label has been applied to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel for those
 who need a reference to the package index with Python 2.7.</p></li>
 <li><p>We are removing support for <code class="docutils literal notranslate"><span class="pre">vs2008</span></code> on Windows conjunction with the deprecation
-of Python 2.7.</p></li>
-<li><p>We have provided an admin command that will add back Python 2.7 to any feedstock.
+of Python 2.7, as it was only supported to build this version of Python.</p></li>
+<li><p>We will provide an admin command that will add back Python 2.7 to any feedstock.
 Note that as stated above, we cannot provide support for any Python 2.7 builds
-generated with this admin command.</p></li>
+generated with this admin command. Further, this admin command will only work on
+<code class="docutils literal notranslate"><span class="pre">osx-64</span></code> and <code class="docutils literal notranslate"><span class="pre">linux-64</span></code> platforms.</p></li>
 </ul>
 </dd>
 </dl>
