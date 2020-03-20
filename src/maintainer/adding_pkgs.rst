@@ -58,7 +58,7 @@ Step-by-step Instructions
    example recipe using the ``openssl`` tool. As an alternative, you can also
    go to the package description on `PyPi <https://pypi.org>`_ from which you
    can directly copy the SHA256.
-#. Be sure to fill in the ``tests`` section. The simplest test will simply
+#. Be sure to fill in the ``test`` section. The simplest test will simply
    test that the module can be imported, as described in the example.
 #. Remove all irrelevant comments in the ``meta.yaml``  file.
 
