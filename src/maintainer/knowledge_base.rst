@@ -164,6 +164,7 @@ In addition to the required compilers ``{{ compiler('c') }}`` and/or ``{{ compil
       - {{ cdt('libselinux') }}  # [linux]
       - {{ cdt('libxdamage') }}  # [linux]
       - {{ cdt('libxxf86vm') }}  # [linux]
+      - {{ cdt('libxext') }}     # [linux]
     host:
       - xorg-libxfixes  # [linux]
 
@@ -178,6 +179,7 @@ You will need to re-render the feedstock after making these changes.
   libselinux
   libXdamage
   libXxf86vm
+  libXext
 
 
 .. _linking_numpy:
