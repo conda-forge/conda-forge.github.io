@@ -71,8 +71,19 @@
 <div class="section" id="id1">
 <h2>2020<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <dl class="field-list simple">
-<dt class="field-odd">2020-03-18</dt>
-<dd class="field-odd"><p>Python 2.7 and <code class="docutils literal notranslate"><span class="pre">vs2008</span></code> Deprecation</p>
+<dt class="field-odd">2020-03-21</dt>
+<dd class="field-odd"><p>Python 2.7 Admin Command Available</p>
+<ul class="simple">
+<li><p>A webservices admin command is now available to add Python 2.7 back to
+feedstocks. Put <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin</span> <span class="pre">add</span> <span class="pre">python</span> <span class="pre">2.7</span></code> in the title on an
+issue in your feedstock. The admin webservices bot will then issue a PR
+adding back Python 2.7. Note that this PR will remove other Python builds
+and any <code class="docutils literal notranslate"><span class="pre">win</span></code>, <code class="docutils literal notranslate"><span class="pre">aarch64</span></code>, or <code class="docutils literal notranslate"><span class="pre">ppc64le</span></code> builds. If you want to keep
+those, merge the PR into a separate branch on your feedstock.</p></li>
+</ul>
+</dd>
+<dt class="field-even">2020-03-18</dt>
+<dd class="field-even"><p>Python 2.7 and <code class="docutils literal notranslate"><span class="pre">vs2008</span></code> Deprecation</p>
 <ul class="simple">
 <li><p>Python 2.7 is no longer supported by the upstream developers as of 2020-01-01.
 Conda-forge is thus deprecating its Python 2.7 support. Conda-forge will provide

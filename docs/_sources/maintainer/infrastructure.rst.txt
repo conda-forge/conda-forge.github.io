@@ -140,6 +140,15 @@ bot. This functionality is currently experimental. You can find more details
 `here <https://regro.github.io/cf-scripts/github_actions_infrastructure.html#automerging-prs>`_.
 Please open issue on ``regro/cf-scripts`` for any feedback, bugs, and/or questions!
 
+@conda-forge-admin, please add python 2.7
+-----------------------------------------
+
+Entering this command in the title of an issue will instruct the admin bot to 
+add Python 2.7 back to a feedstock. Note that this command will remove any other 
+Python versions and any ``win``, ``aarch64`` or ``ppc64le`` builds. Thus you should 
+merge the PR into a separate branch on your feedstock if you want to keep these 
+other builds.
+
 
 CI build services
 =================
@@ -256,9 +265,7 @@ Appveyor is used to build Windows packages.  It is the only provider that can bu
 Skipping CI builds
 ------------------
 
-.. todo::
-
-  - add information regarding [ci skip] for all CIs.
+To skip a CI build for a given commit, put ``[ci skip] ***NO_CI***`` in the commit message.
 
 .. admonition:: Related links
 

@@ -171,6 +171,14 @@ bot. This functionality is currently experimental. You can find more details
 <a class="reference external" href="https://regro.github.io/cf-scripts/github_actions_infrastructure.html#automerging-prs">here</a>.
 Please open issue on <code class="docutils literal notranslate"><span class="pre">regro/cf-scripts</span></code> for any feedback, bugs, and/or questions!</p>
 </div>
+<div class="section" id="conda-forge-admin-please-add-python-2-7">
+<h3>&#64;conda-forge-admin, please add python 2.7<a class="headerlink" href="#conda-forge-admin-please-add-python-2-7" title="Permalink to this headline">¶</a></h3>
+<p>Entering this command in the title of an issue will instruct the admin bot to
+add Python 2.7 back to a feedstock. Note that this command will remove any other
+Python versions and any <code class="docutils literal notranslate"><span class="pre">win</span></code>, <code class="docutils literal notranslate"><span class="pre">aarch64</span></code> or <code class="docutils literal notranslate"><span class="pre">ppc64le</span></code> builds. Thus you should
+merge the PR into a separate branch on your feedstock if you want to keep these
+other builds.</p>
+</div>
 </div>
 <div class="section" id="ci-build-services">
 <h2>CI build services<a class="headerlink" href="#ci-build-services" title="Permalink to this headline">¶</a></h2>
@@ -264,12 +272,7 @@ This is not normally needed.</p>
 </div>
 <div class="section" id="skipping-ci-builds">
 <h3>Skipping CI builds<a class="headerlink" href="#skipping-ci-builds" title="Permalink to this headline">¶</a></h3>
-<div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">Todo</p>
-<ul class="simple">
-<li><p>add information regarding [ci skip] for all CIs.</p></li>
-</ul>
-</div>
+<p>To skip a CI build for a given commit, put <code class="docutils literal notranslate"><span class="pre">[ci</span> <span class="pre">skip]</span> <span class="pre">***NO_CI***</span></code> in the commit message.</p>
 <div class="admonition-related-links admonition">
 <p class="admonition-title">Related links</p>
 <ul class="simple">
@@ -314,6 +317,7 @@ This is not normally needed.</p>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-ping-team">&#64;conda-forge-admin, please ping team</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-rerun-bot">&#64;conda-forge-admin, please rerun bot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-add-bot-automerge">&#64;conda-forge-admin, please add bot automerge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-add-python-2-7">&#64;conda-forge-admin, please add python 2.7</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#ci-build-services">CI build services</a><ul>
