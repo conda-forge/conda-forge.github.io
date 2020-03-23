@@ -71,7 +71,7 @@ Step-by-step Instructions
 Checklist
 .........
 
-* Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache-2.0 rather than APACHE 2.0). Use SPDX identifiers for license field. (see :ref:`spdx`)
+* Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache-2.0 rather than APACHE 2.0). Using SPDX identifiers for license field is recommended. (see :ref:`spdx`)
 * Ensure that you have included a license file if your license requires one -- most do. (see `here <https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55>`_)
 * In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
 * Make sure that all tests pass successfully at least on your development machine.
@@ -668,7 +668,7 @@ In this case, please also notify the upstream developers that the license file i
 SPDX Identifiers and Expressions
 ................................
 
-For the ``about: license`` entry in the recipe ``meta.yaml``, use a SPDX identifier or expression or Other.
+For the ``about: license`` entry in the recipe ``meta.yaml``, using a SPDX identifier or expression is recommended.
 
 See `SPDX license identifiers <https://spdx.org/licenses/>`__ for the licenses.
 See `SPDX license exceptions <https://spdx.org/licenses/exceptions-index.html>`__ for license exceptions.
@@ -682,11 +682,11 @@ for the specification on expressions.
    BSD-3-Clause
    BSD-3-Clause OR MIT
    GPL-2.0-or-later
-   LGPL-2.0 OR GPL-2.0
+   LGPL-2.0 OR GPL-2.0-only
+   LicenseRef-HDF5
    MIT
    MIT AND BSD-2-Clause
    PSF-2.0
-   Other
 
 
 Miscellaneous
