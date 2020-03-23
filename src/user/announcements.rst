@@ -4,14 +4,23 @@ Announcements
 2020
 ----
 
+:2020-03-23: Disabling Appveyor
+
+    We are formally deprecating Appveyor in favor of Azure for builds on the 
+    ``win`` platform. Note that we have not been adding appveyor to new feedstocks 
+    for a while, so this is not a new change in policy. We will now, however, begin to 
+    actively disable Appveyor builds by turning off builds for GitHub ``push`` events. 
+    Additionally, we have been issuing PRs to any remaining feedstocks to move them to 
+    Azure.
+
 :2020-03-21: Python 2.7 Admin Command Available
 
-   - A webservices admin command is now available to add Python 2.7 back to 
-     feedstocks. Put ``@conda-forge-admin add python 2.7`` in the title on an 
-     issue in your feedstock. The admin webservices bot will then issue a PR
-     adding back Python 2.7. Note that this PR will remove other Python builds
-     and any ``win``, ``aarch64``, or ``ppc64le`` builds. If you want to keep 
-     those, merge the PR into a separate branch on your feedstock.
+    A webservices admin command is now available to add Python 2.7 back to 
+    feedstocks. Put ``@conda-forge-admin add python 2.7`` in the title on an 
+    issue in your feedstock. The admin webservices bot will then issue a PR
+    adding back Python 2.7. Note that this PR will remove other Python builds
+    and any ``win``, ``aarch64``, or ``ppc64le`` builds. If you want to keep 
+    those, merge the PR into a separate branch on your feedstock.
 
 :2020-03-18: Python 2.7 and ``vs2008`` Deprecation
 
