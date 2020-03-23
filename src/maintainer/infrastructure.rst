@@ -256,11 +256,6 @@ Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
 * Revoke Circle CI's access and then enable it again.
 * In the "Checkout SSH keys" section of your Circle CI project settings, press "add user key".
 
-Appveyor
---------
-
-Appveyor is used to build Windows packages.  It is the only provider that can build recipes that require Visual Studio 2008.
-
 
 Skipping CI builds
 ------------------
