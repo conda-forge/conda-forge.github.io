@@ -4,6 +4,14 @@ Announcements
 2020
 ----
 
+:2020-03-24: ``vs2015`` to ``vs2017`` Transition
+
+    We are formally deprecating ``vs2015`` in two weeks on :2020-04-07: and will move to 
+    ``vs2017``. This change will enable us to support the usage of ``msbuild`` on Azure for the 
+    ``win`` platform. Users of static libraries may encounter ABI incompatibilities if they 
+    have not been rebuilt. Users of shared libraries should make sure to link with the 
+    newer runtime.
+
 :2020-03-23: Appveyor Deprecation
 
     We are now starting to formally deprecate Appveyor in favor of Azure for builds on the 
