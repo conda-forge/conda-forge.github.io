@@ -8,7 +8,7 @@ Announcements
 
     We are formally deprecating ``vs2015`` in two weeks on 2020-04-07 and will move to 
     ``vs2017``. This change will enable us to support the usage of ``msbuild`` on Azure for the 
-    ``win`` platform and also to get more C++ support.
+    ``win`` platform and will provide additional support for ``C++``.
     Most packages built with ``vs2015`` can be linked with ``vs2017`` toolchain (but not vice-versa).
     An exception is static libraries compiled with whole program optimization (/GL flag) which may be
     incompatible with the ``vs2017`` toolchain. These static libraries will need to be rebuilt
