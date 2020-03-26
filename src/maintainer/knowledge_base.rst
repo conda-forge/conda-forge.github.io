@@ -28,7 +28,7 @@ code layout and aren't intended to be used "as is".
     cmake CMakeLists.txt -DPython3_EXECUTABLE="$PYTHON"
     cmake --build . --config Release
 
-**CMake lines for bld.bat (macOS/Linux):**
+**CMake lines for bld.bat (Windows):**
 
 .. code-block::
 
