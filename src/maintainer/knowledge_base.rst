@@ -1,6 +1,47 @@
 Knowledge base
 **************
 
+Using CMake
+===========
+
+`CMake <https://cmake.org/>`__ can be used to build more complex projects in ``build.sh``
+or ``bld.bat`` scripts.
+
+If you are using cmake, be sure to make it a build requirement in the ``build`` section.
+
+.. code-block:: yaml
+
+    requirements:
+      build:
+        - cmake
+
+You can tell CMake which Python to use by passing ``-DPython3_EXECUTABLE="$PYTHON"``
+(macOS or Linux) or ``-DPython3_EXECUTABLE="%PYTHON%"`` (Windows) as a command line option.
+
+Here are some basic commands to get you started. These are dependent on your source
+code layout and aren't intended to be used "as is".
+
+**CMake lines for build.sh (macOS/Linux):**
+
+.. code-block::
+
+    cmake CMakeLists.txt -DPython3_EXECUTABLE="$PYTHON"
+    cmake --build . --config Release
+
+**CMake lines for bld.bat (macOS/Linux):**
+
+.. code-block::
+
+    cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE:STRING=Release -DPython3_EXECUTABLE="%PYTHON%"
+    if errorlevel 1 exit /b 1
+    cmake --build . --config Release
+    if errorlevel 1 exit /b 1
+
+See also the ``bld.bat`` in the Windows section below for an additional example.
+
+Other useful ``cmake`` options are ``-B<directory>`` and ``-S<directory>`` to specify build and source
+directories.
+
 Particularities on Windows
 ==========================
 
@@ -50,8 +91,6 @@ Simple CMake-Based ``bld.bat``
 Some projects provide hooks for CMake to build the project. The following
 example ``bld.bat`` file demonstrates how to build a traditional, out-of-core
 build for such projects.
-
-See also the Using CMake section below.
 
 **CMake-based bld.bat:**
 
@@ -792,52 +831,6 @@ Following implies that ``python`` is a runtime dependency and a Python matrix fo
       - True
 
 You need to rerender the feedstock after this change.
-
-Using CMake
-===========
-
-`CMake <https://cmake.org/>`__ can be used to build more complex projects in ``build.sh``
-or ``bld.bat`` scripts.
-
-If you are using cmake, be sure to make it a build requirement in the ``build`` or ``host`` section.
-
-.. code-block:: yaml
-
-    build:
-      - cmake
-
-CMake requires you to supply a configuration file, usually called ``CMakeLists.txt``.
-You can use the one from your source tar ball if it exists or include your own in the
-same directory as the conda-forge recipe file and copy it to the source directory.
-
-You can tell CMake which Python to use by passing ``-DPython3_EXECUTABLE="$PYTHON"``
-(macOS or Linux) or ``-DPython3_EXECUTABLE="%PYTHON%"`` (Windows) as a command line option
-to CMake.
-
-Here are some basic commands to get you started. These are highly dependent on your source
-code layout and aren't intended to be used "as is".
-
-.. code-block::
-
-    cmake CMakeLists.txt -DPython3_EXECUTABLE="$PYTHON"
-    cmake --build . --config Release
-
-.. code-block::
-
-    cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE:STRING=Release -DPython3_EXECUTABLE="%PYTHON%"
-    if errorlevel 1 exit /b 1
-
-Other useful options are ``-B<directory>`` and ``-S<directory>`` to specify build and source
-directories.
-
-Inside the ``CMakeLists.txt`` file, the following options may be useful.
-
-.. code-block::
-
-    find_package (Python3 COMPONENTS Development NumPy)
-    target_include_directories(${APP_NAME} PRIVATE ${Python3_INCLUDE_DIRS})
-    target_include_directories(${APP_NAME} PRIVATE ${Python3_NumPy_INCLUDE_DIRS})
-    target_link_libraries(${APP_NAME} ${PYTHON_LIBRARIES})
 
 Requiring newer macOS SDKs
 ==========================
