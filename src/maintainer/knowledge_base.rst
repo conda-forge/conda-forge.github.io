@@ -803,7 +803,7 @@ If you are using cmake, be sure to make it a build requirement in the ``build`` 
 
 .. code-block:: yaml
 
-    host:
+    build:
       - cmake
 
 CMake requires you to supply a configuration file, usually called ``CMakeLists.txt``.
