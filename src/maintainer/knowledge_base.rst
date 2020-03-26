@@ -791,6 +791,17 @@ Following implies that ``python`` is a runtime dependency and a Python matrix fo
 
 You need to rerender the feedstock after this change.
 
+Build environment
+=================
+
+When the build system runs your scripts from the scripts section or in a ``build.sh`` or
+``bld.bat`` file, the conda environment specified in the requirements/build or
+requirements/host section may *not be activated*.
+
+Because of this, if you are using CMake, it is important to tell CMake which Python to
+use. This can be done using ``-DPython3_EXECUTABLE="$PYTHON"`` (macOS or Linux) or
+``-DPython3_EXECUTABLE="%PYTHON%"`` (Windows) as a command line option to CMake.
+
 Requiring newer macOS SDKs
 ==========================
 
