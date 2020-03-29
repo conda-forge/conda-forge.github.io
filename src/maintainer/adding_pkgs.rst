@@ -682,7 +682,7 @@ for the specification on expressions.
    BSD-3-Clause
    BSD-3-Clause OR MIT
    GPL-2.0-or-later
-   LGPL-2.0 OR GPL-2.0-only
+   LGPL-2.0-only OR GPL-2.0-only
    LicenseRef-HDF5
    MIT
    MIT AND BSD-2-Clause
