@@ -675,7 +675,7 @@ See `SPDX license exceptions <https://spdx.org/licenses/exceptions-index.html>`_
 See `SPDX specification <https://spdx.org/spdx-specification-21-web-version>`__ Appendix IV
 for the specification on expressions.
 
-.. code-block:: yaml
+.. code-block:: none
 
    Apache-2.0
    Apache-2.0 WITH LLVM-exception
