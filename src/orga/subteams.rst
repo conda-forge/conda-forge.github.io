@@ -41,6 +41,7 @@ This team will operate via the following rules
 Members
 -------
 - Matthew R. Becker <becker.mr@gmail.com>
+- Christopher J. "CJ" Wright <cjwright4242@gmail.com>
 
 
 Bot Sub-Team
