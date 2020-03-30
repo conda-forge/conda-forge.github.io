@@ -42,6 +42,7 @@ Members
 -------
 - Matthew R. Becker <becker.mr@gmail.com>
 - Christopher J. "CJ" Wright <cjwright4242@gmail.com>
+- Anthony Scopatz <scopatz@gmail.com>
 
 
 Bot Sub-Team
