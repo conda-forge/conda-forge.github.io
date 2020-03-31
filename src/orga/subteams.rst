@@ -2,12 +2,55 @@ A list of current sub-teams
 ***************************
 
 
+Security and Systems Sub-Team
+=============================
+
+Role
+----
+The purpose of the security and systems sub-team is to secure and maintain appropriate access
+to the credentials and services/systems used by ``conda-forge``. This infrastructure
+includes all bot accounts, all service provider accounts, and all keys, API or otherwise,
+used for various tasks. This team is also charged with provisioning new members of ``core``
+with access to the organization.
+
+Charter
+-------
+Static
+
+Responsibility
+--------------
+The core responsibilities of this team are to
+
+- maintain secure access to the credentials to all bot accounts
+- maintain secure access to all keys, API or otherwise, used by ``conda-forge``
+- maintain secure access to all service provider accounts owned by ``conda-forge``
+- maintain the infrastructure for CFEP-13
+- maintain automated ways to recover and reprovision ``conda-forge`` systems
+- perform ongoing security maintenance tasks
+- provision new members of `core` with access to all ``conda-forge`` systems, credentials
+  and keys
+
+This team will operate via the following rules
+
+- only members of `core` can be on this sub-team
+- this sub-team will report its activity to core at all ``core`` meetings
+- this sub-team will consult with core at ``core`` meetings regarding all planned activity
+- this sub-team will not limit the access by ``core`` members to any ``conda-forge`` resources
+  including but not limited to its systems, credentials, keys, or service accounts
+
+Members
+-------
+- Matthew R. Becker <becker.mr@gmail.com>
+- Christopher J. "CJ" Wright <cjwright4242@gmail.com>
+- Anthony Scopatz <scopatz@gmail.com>
+
+
 Bot Sub-Team
 ============
 
 Role
 ----
-Develop and manage the conda-forge migration bot and all related tooling.
+Develop and manage the ``conda-forge`` migration bot and all related tooling.
 Also manages and deploys migrations themselves.
 
 Charter
@@ -16,7 +59,7 @@ Dynamic
 
 Responsibility
 --------------
-The migration and autotick bot is now a central part of the conda-forge ecosystem.
+The migration and autotick bot is now a central part of the ``conda-forge`` ecosystem.
 This subteam has the right and responsibility to manage and develop the general
 operation of the bot.
 This includes building new migrators, fixing migration related bugs, and tooling.
@@ -52,16 +95,12 @@ Members
 - Christopher J. "CJ" Wright <cjwright4242@gmail.com>
 
 
-
-
-
-
 ARM Sub-Team
 ============
 
 Role
 ----
-Develop and manage ARM architecture support for conda-forge.
+Develop and manage ARM architecture support for ``conda-forge``.
 
 Charter
 -------
@@ -77,7 +116,7 @@ This includes updates and enabling features to:
 - conda-smithy
 - Docker containers
 
-And other parts of the conda-forge ecosystem.
+And other parts of the ``conda-forge`` ecosystem.
 
 Members
 -------
@@ -91,7 +130,6 @@ Doc Sub-Team
 
 Role
 ----
-
 Maintain and improve the documentation; review, organize and help with documentation related issues.
 
 Charter
@@ -100,9 +138,9 @@ Dynamic
 
 Responsibility
 --------------
-
 Good documentation is an important cornerstone of a successful community project.
-Accurate, well organized and comprehensive documentation not only benefits users, but also frees the core team by decreasing support requests.
+Accurate, well organized and comprehensive documentation not only benefits users, but also frees
+the core team by decreasing support requests.
 
 The documentation team is responsible for
 
@@ -130,9 +168,8 @@ Staging Sub-Team
 
 Role
 ----
-
-Review and merge feedstock candidates in the staged-recipes repository. Help users to create conda-forge compatible recipes.
-
+Review and merge feedstock candidates in the staged-recipes repository. Help users to create
+``conda-forge`` compatible recipes.
 
 Charter
 -------
@@ -140,14 +177,13 @@ Dynamic
 
 Responsibility
 --------------
-
-Introducing a recipe for most users is the first step of becoming involved with the development of conda-forge.
+Introducing a recipe for most users is the first step of becoming involved with the development of ``conda-forge``.
 Especially for new maintainers it is crucial to be able to ask questions and receive helpful and constructive feedback.
 
 The staging team is responsible for:
 
- - reviewing and merging pull requests in conda-forge/staged-recipes
- - answering questions and giving feedback regarding conda-forge requirements
+ - reviewing and merging pull requests in ``conda-forge/staged-recipes``
+ - answering questions and giving feedback regarding ``conda-forge`` requirements
  - identifying common misconceptions and problems due to unclear documentation
  - help the documentation team maintain clear documentation that simplifies contributing packages
  - assist core in supporting feedstock maintainers when questions/issues arise during recipe maintenance
@@ -169,13 +205,12 @@ the following are members of the staged-recipes team and have commit rights.
  - Sylvain Corlay <sylvain.corlay@gmail.com>
 
 
-
 Miniforge Sub-Team
 ==================
 
 Role
 ----
-Develop and manage miniforge installers for conda-forge
+Develop and manage miniforge installers for ``conda-forge``
 
 Charter
 -------
@@ -188,7 +223,6 @@ miniforge installers.
 
 Members
 -------
-
 - Mark Harfouche <mark.harfouche@gmail.com>
 - Anthony Scopatz <scopatz@gmail.com>
 - Hadrien Mary <hadrien.mary@gmail.com>
