@@ -31,9 +31,6 @@ Some optional, but useful CMake options:
     - ``-DCMAKE_INSTALL_PREFIX=$PREFIX`` Specify the install location.
     - ``-DCMAKE_INSTALL_LIBDIR=lib`` Libraries will land in $PREFIX/lib, sometimes projects install
       into lib64 or similar but on conda-forge we keep shared libraries in simply lib.
-    - ``-DBUILD_TESTING=OFF`` Disable building the unit tests. We normally only test the existence of
-      certain files and don't build the whole unit tests suite. Disabling it saves a lot of compute
-      resources as well as minimizing the number of dependencies needed for the build.
     - ``-DBUILD_SHARED_LIBS=ON`` Instruct CMake to build shared libraries instead of static ones.
 
 Here are some basic commands to get you started. These are dependent on your source
