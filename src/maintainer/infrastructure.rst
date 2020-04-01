@@ -299,4 +299,5 @@ that form the given stack.
 
 * Our current compiler stack is referred to internally as ``comp7``.
 * The previous compiler stack based in part on the various ``toolchain_*`` packages
-  was sometimes referred to as ``comp4``.
+  was sometimes referred to as ``comp4``. On linux the ``toolchain_*`` compilers were 
+  GCC 4.8.2 as packaged in the devtoolset-2 software collection.
