@@ -1,6 +1,62 @@
 Knowledge base
 **************
 
+Using CMake
+===========
+
+`CMake <https://cmake.org/>`__ can be used to build more complex projects in ``build.sh``
+or ``bld.bat`` scripts.
+
+If you are using cmake, be sure to make it a build requirement in the ``build`` section. You
+may also need to include ``make`` or ``ninja`` depending on your platform and build tools.
+On Windows, you can also use ``nmake`` to build, but that does not need to be explicitly included.
+
+.. code-block:: yaml
+
+    requirements:
+      build:
+        - cmake
+        - make  # [not win]
+        - ninja  # [win]
+
+For CMake projects using the `FindPython3 <https://cmake.org/cmake/help/git-stage/module/FindPython3.html>`__
+module, you can tell CMake which Python to use by passing ``-DPython3_EXECUTABLE="$PYTHON"``
+(macOS or Linux) or ``-DPython3_EXECUTABLE="%PYTHON%"`` (Windows) as a command line option.
+Older CMake projects may require similar, but slightly different options.
+
+Some optional, but useful CMake options:
+
+    - ``-DCMAKE_BUILD_TYPE=Release`` Configure as release build. This is better done on the initial
+      ``cmake`` call as some packages construct different build configurations depending on this flag.
+    - ``-DCMAKE_INSTALL_PREFIX=$PREFIX`` Specify the install location.
+    - ``-DCMAKE_INSTALL_LIBDIR=lib`` Libraries will land in $PREFIX/lib, sometimes projects install
+      into lib64 or similar but on conda-forge we keep shared libraries in simply lib.
+    - ``-DBUILD_SHARED_LIBS=ON`` Instruct CMake to build shared libraries instead of static ones.
+
+Here are some basic commands to get you started. These are dependent on your source
+code layout and aren't intended to be used "as is".
+
+**CMake lines for build.sh (macOS/Linux):**
+
+.. code-block::
+
+    cmake CMakeLists.txt -DPython3_EXECUTABLE="$PYTHON"
+    cmake --build . --config Release
+
+**CMake lines for bld.bat (Windows):**
+
+.. code-block::
+
+    cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DPython3_EXECUTABLE="%PYTHON%"
+    if errorlevel 1 exit /b 1
+    cmake --build . --config Release
+    if errorlevel 1 exit /b 1
+
+See also the ``bld.bat`` in the Windows section below for an additional example.
+
+Other useful ``cmake`` options are ``-B<directory>`` and ``-S<directory>`` to specify build and source
+directories.
+
 Particularities on Windows
 ==========================
 

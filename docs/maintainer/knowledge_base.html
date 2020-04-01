@@ -68,6 +68,53 @@
             
   <div class="section" id="knowledge-base">
 <h1>Knowledge base<a class="headerlink" href="#knowledge-base" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="using-cmake">
+<h2>Using CMake<a class="headerlink" href="#using-cmake" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://cmake.org/">CMake</a> can be used to build more complex projects in <code class="docutils literal notranslate"><span class="pre">build.sh</span></code>
+or <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> scripts.</p>
+<p>If you are using cmake, be sure to make it a build requirement in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section. You
+may also need to include <code class="docutils literal notranslate"><span class="pre">make</span></code> or <code class="docutils literal notranslate"><span class="pre">ninja</span></code> depending on your platform and build tools.
+On Windows, you can also use <code class="docutils literal notranslate"><span class="pre">nmake</span></code> to build, but that does not need to be explicitly included.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cmake</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">make</span>  <span class="c1"># [not win]</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ninja</span>  <span class="c1"># [win]</span>
+</pre></div>
+</div>
+<p>For CMake projects using the <a class="reference external" href="https://cmake.org/cmake/help/git-stage/module/FindPython3.html">FindPython3</a>
+module, you can tell CMake which Python to use by passing <code class="docutils literal notranslate"><span class="pre">-DPython3_EXECUTABLE=&quot;$PYTHON&quot;</span></code>
+(macOS or Linux) or <code class="docutils literal notranslate"><span class="pre">-DPython3_EXECUTABLE=&quot;%PYTHON%&quot;</span></code> (Windows) as a command line option.
+Older CMake projects may require similar, but slightly different options.</p>
+<p>Some optional, but useful CMake options:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-DCMAKE_BUILD_TYPE=Release</span></code> Configure as release build. This is better done on the initial
+<code class="docutils literal notranslate"><span class="pre">cmake</span></code> call as some packages construct different build configurations depending on this flag.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DCMAKE_INSTALL_PREFIX=$PREFIX</span></code> Specify the install location.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DCMAKE_INSTALL_LIBDIR=lib</span></code> Libraries will land in $PREFIX/lib, sometimes projects install
+into lib64 or similar but on conda-forge we keep shared libraries in simply lib.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DBUILD_SHARED_LIBS=ON</span></code> Instruct CMake to build shared libraries instead of static ones.</p></li>
+</ul>
+</div></blockquote>
+<p>Here are some basic commands to get you started. These are dependent on your source
+code layout and aren’t intended to be used “as is”.</p>
+<p><strong>CMake lines for build.sh (macOS/Linux):</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="n">CMakeLists</span><span class="o">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">DPython3_EXECUTABLE</span><span class="o">=</span><span class="s2">&quot;$PYTHON&quot;</span>
+<span class="n">cmake</span> <span class="o">--</span><span class="n">build</span> <span class="o">.</span> <span class="o">--</span><span class="n">config</span> <span class="n">Release</span>
+</pre></div>
+</div>
+<p><strong>CMake lines for bld.bat (Windows):</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="o">-</span><span class="n">G</span> <span class="s2">&quot;NMake Makefiles&quot;</span> <span class="o">-</span><span class="n">DCMAKE_BUILD_TYPE</span><span class="o">=</span><span class="n">Release</span> <span class="o">-</span><span class="n">DPython3_EXECUTABLE</span><span class="o">=</span><span class="s2">&quot;%PYTHON%&quot;</span>
+<span class="k">if</span> <span class="n">errorlevel</span> <span class="mi">1</span> <span class="n">exit</span> <span class="o">/</span><span class="n">b</span> <span class="mi">1</span>
+<span class="n">cmake</span> <span class="o">--</span><span class="n">build</span> <span class="o">.</span> <span class="o">--</span><span class="n">config</span> <span class="n">Release</span>
+<span class="k">if</span> <span class="n">errorlevel</span> <span class="mi">1</span> <span class="n">exit</span> <span class="o">/</span><span class="n">b</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>See also the <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> in the Windows section below for an additional example.</p>
+<p>Other useful <code class="docutils literal notranslate"><span class="pre">cmake</span></code> options are <code class="docutils literal notranslate"><span class="pre">-B&lt;directory&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">-S&lt;directory&gt;</span></code> to specify build and source
+directories.</p>
+</div>
 <div class="section" id="particularities-on-windows">
 <h2>Particularities on Windows<a class="headerlink" href="#particularities-on-windows" title="Permalink to this headline">¶</a></h2>
 <p>This document presents conda-forge and conda-build information and examples
@@ -812,6 +859,7 @@ conda-build</p>
 <li class="toctree-l2"><a class="reference internal" href="pinning_deps.html">Pinned dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Knowledge base</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-cmake">Using CMake</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#particularities-on-windows">Particularities on Windows</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#local-testing">Local testing</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#simple-cmake-based-bld-bat">Simple CMake-Based <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code></a></li>
