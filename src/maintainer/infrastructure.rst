@@ -286,8 +286,8 @@ principles.
 * We upgrade them in an ad-hoc manner on a periodic basis as we have the time and energy to do so.
   Note that because of the way we enforce runtime constraints, these compiler upgrades will not break
   existing packages. However, if you are using the compilers outside of ``conda``, then you may find issues.
-* We generally provide notice in the form of an announcement when a compiler is upgraded.
-  Note that these changes take months to complete, so you will generally have a lot of time
+* We generally provide notice in the form of an announcement when a compiler is going to be upgraded.
+  Note that these changes take a bit of time to complete, so you will generally have time 
   to prepare should you need to.
 * Some of the criteria we think about when considering a compiler migration include
   1) the degree of disruption to the ecosystem, 2) the amount of work for the ``core`` team,
