@@ -278,6 +278,41 @@ This is not normally needed.</p>
 </div>
 </div>
 </div>
+<div class="section" id="compilers-and-runtimes">
+<h2>Compilers and Runtimes<a class="headerlink" href="#compilers-and-runtimes" title="Permalink to this headline">¶</a></h2>
+<p>Conda-forge builds and maintains its own set of compilers for various languages
+and/or systems (e.g., <code class="docutils literal notranslate"><span class="pre">C</span></code>, <code class="docutils literal notranslate"><span class="pre">FORTRAN</span></code>, <code class="docutils literal notranslate"><span class="pre">C++</span></code>, <code class="docutils literal notranslate"><span class="pre">CUDA</span></code>, etc.). These are used
+in all of our CI builds to build both core dependencies (e.g., <code class="docutils literal notranslate"><span class="pre">Python</span></code>) and maintainer-contributed
+packages. While we do not have any formal policies or promises of support for these
+compilers, we have historically maintained them according to the following (non-binding)
+principles.</p>
+<ul class="simple">
+<li><p>The authoritative source of the current compilers and versions for various languages
+and platforms is the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">conda_build_config.yaml</a>
+in the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a>
+as described in <a class="reference internal" href="pinning_deps.html#globally-pinned-packages"><span class="std std-ref">Globally pinned packages</span></a>.</p></li>
+<li><p>We provide no support of any kind in terms of the long-term stability of these pinnings.</p></li>
+<li><p>We upgrade them in an ad-hoc manner on a periodic basis as we have the time and energy to do so.
+Note that because of the way we enforce runtime constraints, these compiler upgrades will not break
+existing packages. However, if you are using the compilers outside of <code class="docutils literal notranslate"><span class="pre">conda</span></code>, then you may find issues.</p></li>
+<li><p>We generally provide notice in the form of an announcement when a compiler is going to be upgraded.
+Note that these changes take a bit of time to complete, so you will generally have time
+to prepare should you need to.</p></li>
+<li><p>Some of the criteria we think about when considering a compiler migration include
+1) the degree of disruption to the ecosystem, 2) the amount of work for the <code class="docutils literal notranslate"><span class="pre">core</span></code> team,
+and 3) the amount of time it will cost our (volunteer) feedstock maintainers.</p></li>
+</ul>
+<p>Finally, we do use some unofficial names for our compiler stack internally. Note however that
+the existence of these names does not imply any level of support or stability for the compilers
+that form the given stack.</p>
+<ul class="simple">
+<li><p>Our current compiler stack is referred to internally as <code class="docutils literal notranslate"><span class="pre">comp7</span></code>.</p></li>
+<li><p>The previous compiler stack based in part on the various <code class="docutils literal notranslate"><span class="pre">toolchain_*</span></code> packages
+was sometimes referred to as <code class="docutils literal notranslate"><span class="pre">comp4</span></code>. On linux the <code class="docutils literal notranslate"><span class="pre">toolchain_*</span></code> compilers were
+GCC 4.8.2 as packaged in the devtoolset-2 software collection. On osx, we use clang from
+Apple’s Xcode in the <code class="docutils literal notranslate"><span class="pre">toolchain_*</span></code> packages.</p></li>
+</ul>
+</div>
 </div>
 
 
@@ -334,6 +369,7 @@ This is not normally needed.</p>
 <li class="toctree-l4"><a class="reference internal" href="#skipping-ci-builds">Skipping CI builds</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#compilers-and-runtimes">Compilers and Runtimes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="adding_pkgs.html">Contributing packages</a></li>

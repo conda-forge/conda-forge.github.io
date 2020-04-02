@@ -143,10 +143,10 @@ Please open issue on ``regro/cf-scripts`` for any feedback, bugs, and/or questio
 @conda-forge-admin, please add python 2.7
 -----------------------------------------
 
-Entering this command in the title of an issue will instruct the admin bot to 
-add Python 2.7 back to a feedstock. Note that this command will remove any other 
-Python versions and any ``win``, ``aarch64`` or ``ppc64le`` builds. Thus you should 
-merge the PR into a separate branch on your feedstock if you want to keep these 
+Entering this command in the title of an issue will instruct the admin bot to
+add Python 2.7 back to a feedstock. Note that this command will remove any other
+Python versions and any ``win``, ``aarch64`` or ``ppc64le`` builds. Thus you should
+merge the PR into a separate branch on your feedstock if you want to keep these
 other builds.
 
 
@@ -266,3 +266,39 @@ To skip a CI build for a given commit, put ``[ci skip] ***NO_CI***`` in the comm
 
   - **abort builds with [skip ci]/etc** `(conda-forge.github.io/#629) <https://github.com/conda-forge/conda-forge.github.io/issues/629>`__
   - **Skip CI requests** `(staged-recipes/#1148) <https://github.com/conda-forge/staged-recipes/issues/1148>`__
+
+
+Compilers and Runtimes
+======================
+
+Conda-forge builds and maintains its own set of compilers for various languages
+and/or systems (e.g., ``C``, ``FORTRAN``, ``C++``, ``CUDA``, etc.). These are used
+in all of our CI builds to build both core dependencies (e.g., ``Python``) and maintainer-contributed
+packages. While we do not have any formal policies or promises of support for these
+compilers, we have historically maintained them according to the following (non-binding)
+principles.
+
+* The authoritative source of the current compilers and versions for various languages
+  and platforms is the `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_
+  in the `conda-forge/conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_
+  as described in :ref:`globally_pinned_packages`.
+* We provide no support of any kind in terms of the long-term stability of these pinnings.
+* We upgrade them in an ad-hoc manner on a periodic basis as we have the time and energy to do so.
+  Note that because of the way we enforce runtime constraints, these compiler upgrades will not break
+  existing packages. However, if you are using the compilers outside of ``conda``, then you may find issues.
+* We generally provide notice in the form of an announcement when a compiler is going to be upgraded.
+  Note that these changes take a bit of time to complete, so you will generally have time 
+  to prepare should you need to.
+* Some of the criteria we think about when considering a compiler migration include
+  1) the degree of disruption to the ecosystem, 2) the amount of work for the ``core`` team,
+  and 3) the amount of time it will cost our (volunteer) feedstock maintainers.
+
+Finally, we do use some unofficial names for our compiler stack internally. Note however that
+the existence of these names does not imply any level of support or stability for the compilers
+that form the given stack.
+
+* Our current compiler stack is referred to internally as ``comp7``.
+* The previous compiler stack based in part on the various ``toolchain_*`` packages
+  was sometimes referred to as ``comp4``. On linux the ``toolchain_*`` compilers were 
+  GCC 4.8.2 as packaged in the devtoolset-2 software collection. On osx, we use clang from 
+  Apple's Xcode in the ``toolchain_*`` packages.
