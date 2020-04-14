@@ -3,10 +3,10 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>2017-08-11: General Discussion &#8212; conda-forge 2019.01 documentation</title>
+    <title>&lt;no title&gt; &#8212; conda-forge 2019.01 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -35,8 +35,8 @@
 
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2017-04-26: General Discussion" href="2017-04-26.html" />
-    <link rel="prev" title="2019-06-26 core dev meeting" href="2019-06-26.html" /> 
+    <link rel="next" title="&lt;no title&gt;" href="2017-04-26.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="2019-06-26.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -48,10 +48,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="2017-04-26.html" title="2017-04-26: General Discussion"
+          <a href="2017-04-26.html" title="&lt;no title&gt;"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2019-06-26.html" title="2019-06-26 core dev meeting"
+          <a href="2019-06-26.html" title="&lt;no title&gt;"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -66,8 +66,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="general-discussion">
-<h1>2017-08-11: General Discussion<a class="headerlink" href="#general-discussion" title="Permalink to this headline">¶</a></h1>
+  <p># 2017-08-11: General Discussion</p>
 <p>Date: 2017-08-11
 Attendees (github handle in parens):</p>
 <ul class="simple">
@@ -80,89 +79,63 @@ Attendees (github handle in parens):</p>
 <li><p>John Blischak (jdblischak)</p></li>
 <li><p>Chris (Barker)</p></li>
 </ul>
-<div class="section" id="agenda">
-<h2>Agenda<a class="headerlink" href="#agenda" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><strong>Please add your own items to the agenda!</strong></p></li>
-<li><p>Anaconda upload issues.</p>
-<ul>
+<p>## Agenda
+- <strong>Please add your own items to the agenda!</strong>
+- Anaconda upload issues.</p>
+<blockquote>
+<div><ul class="simple">
 <li><p>Jonathan - create tool for modifying feedstocks directly. Sync up with John K with any additional questions</p></li>
 <li><p>John K - Update staged recipes with new binstar token. We can then update feedstocks by merging the recipe for that feedstock again</p></li>
 <li><p>email to mailing list</p></li>
-<li><p>add note to status page “We’re aware of this issue. Please take these steps <link> to resolve it”</p></li>
+<li><p>add note to status page “We’re aware of this issue. Please take these steps &lt;link&gt; to resolve it”</p></li>
 </ul>
-</li>
-<li><p>Proposing new members for core or staged-recipes team and create reviewing policies</p>
+</div></blockquote>
 <ul>
-<li><p>https://github.com/conda-forge/staged-recipes/wiki/Reviewing-recipes-on-conda-forge-staged-recipes</p></li>
-</ul>
-</li>
+<li><p>Proposing new members for core or staged-recipes team and create reviewing policies
+- <a class="reference external" href="https://github.com/conda-forge/staged-recipes/wiki/Reviewing-recipes-on-conda-forge-staged-recipes">https://github.com/conda-forge/staged-recipes/wiki/Reviewing-recipes-on-conda-forge-staged-recipes</a></p></li>
 <li><p>SciPy Review (Filipe)</p></li>
-<li><p>Migration to noarch for pure Python packages</p>
-<ul>
-<li><p>https://github.com/ericdill/conda-forge-migration</p></li>
-<li><p>What do we need to do to start moving packages to noarch?</p></li>
+<li><p>Migration to noarch for pure Python packages
+- <a class="reference external" href="https://github.com/ericdill/conda-forge-migration">https://github.com/ericdill/conda-forge-migration</a>
+- What do we need to do to start moving packages to noarch?</p></li>
+<li><p>Migration to single NumPy build
+- <a class="reference external" href="https://github.com/conda-forge/pandas-feedstock/pull/32">https://github.com/conda-forge/pandas-feedstock/pull/32</a>
+- decide on the lowest numpy version we want to support in the long term (1.8 and/or 1.7?)
+- older builds for Windows. (1.8, 1.10, and 1.11)</p></li>
+<li><p>NumFOCUS application status (Filipe)
+- Code of conduct <a class="reference external" href="https://docs.google.com/document/d/10dxX0Zse0Rx1HqsxC73Wfsghmy5m8PP8cHuBIOhWKpc/edit">https://docs.google.com/document/d/10dxX0Zse0Rx1HqsxC73Wfsghmy5m8PP8cHuBIOhWKpc/edit</a>
+- Fiscally sponsored application</p></li>
+<li><p>Package and repo naming consistency
+- namespace packages
+- repo renaming</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ssl_match_hostname - <a class="reference external" href="https://github.com/conda-forge/ssl_match_hostname-feedstock/">https://github.com/conda-forge/ssl_match_hostname-feedstock/</a></p></li>
+<li><p>PR for renaming packages/repos docs - <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/pull/420">https://github.com/conda-forge/conda-forge.github.io/pull/420</a></p></li>
 </ul>
-</li>
-<li><p>Migration to single NumPy build</p>
-<ul>
-<li><p>https://github.com/conda-forge/pandas-feedstock/pull/32</p></li>
-<li><p>decide on the lowest numpy version we want to support in the long term (1.8 and/or 1.7?)</p></li>
-<li><p>older builds for Windows. (1.8, 1.10, and 1.11)</p></li>
-</ul>
-</li>
-<li><p>NumFOCUS application status (Filipe)</p>
-<ul>
-<li><p>Code of conduct https://docs.google.com/document/d/10dxX0Zse0Rx1HqsxC73Wfsghmy5m8PP8cHuBIOhWKpc/edit</p></li>
-<li><p>Fiscally sponsored application</p></li>
-</ul>
-</li>
-<li><p>Package and repo naming consistency</p>
-<ul>
-<li><p>namespace packages</p></li>
-<li><p>repo renaming</p>
-<ul>
-<li><p>ssl_match_hostname - https://github.com/conda-forge/ssl_match_hostname-feedstock/</p></li>
-<li><p>PR for renaming packages/repos docs - https://github.com/conda-forge/conda-forge.github.io/pull/420</p></li>
-</ul>
-</li>
-<li><p>Open up an issue on https://github.com/conda-forge/conda-forge.github.io/issues to surface packages that need to be renamed and start a discussion about what to do about tooling. Post to the mailing list and link this issue</p></li>
-</ul>
-</li>
-<li><p>Brief intro on how to pkg namespaced packages</p>
-<ul>
-<li><p>Backports - https://github.com/conda-forge/staged-recipes/pull/1439</p></li>
-<li><p>https://github.com/conda-forge/staged-recipes/wiki/Namespace-packages</p></li>
-</ul>
-</li>
-<li><p>Uploading packages to anaconda outside of feedstock mechanism</p>
-<ul>
-<li><p>Filipe &amp; Chris B. talk offline about this</p></li>
-</ul>
-</li>
-<li><p>Next dev meeting? Two weeks from today</p>
-<ul>
-<li><p>Eric — send out mailing list announcement</p></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="section" id="next-meeting">
-<h2>Next Meeting<a class="headerlink" href="#next-meeting" title="Permalink to this headline">¶</a></h2>
+</div></blockquote>
 <ul class="simple">
-<li><p>cairo with X11 (Filipe &amp; Peter)</p>
-<ul>
-<li><p>https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/7</p></li>
+<li><p>Open up an issue on <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues">https://github.com/conda-forge/conda-forge.github.io/issues</a> to surface packages that need to be renamed and start a discussion about what to do about tooling. Post to the mailing list and link this issue</p></li>
 </ul>
 </li>
-<li><p>Migration to conda-build 3</p>
-<ul>
-<li><p>https://www.continuum.io/blog/developer-blog/package-better-conda-build-3</p></li>
+<li><p>Brief intro on how to pkg namespaced packages
+- Backports - <a class="reference external" href="https://github.com/conda-forge/staged-recipes/pull/1439">https://github.com/conda-forge/staged-recipes/pull/1439</a>
+- <a class="reference external" href="https://github.com/conda-forge/staged-recipes/wiki/Namespace-packages">https://github.com/conda-forge/staged-recipes/wiki/Namespace-packages</a></p></li>
+<li><p>Uploading packages to anaconda outside of feedstock mechanism
+- Filipe &amp; Chris B. talk offline about this</p></li>
+<li><p>Next dev meeting? Two weeks from today
+- Eric — send out mailing list announcement</p></li>
 </ul>
-</li>
+<p>## Next Meeting
+- cairo with X11 (Filipe &amp; Peter)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/7">https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/7</a></p></li>
 </ul>
-</div>
-</div>
+</div></blockquote>
+<ul class="simple">
+<li><p>Migration to conda-build 3
+- <a class="reference external" href="https://www.continuum.io/blog/developer-blog/package-better-conda-build-3">https://www.continuum.io/blog/developer-blog/package-better-conda-build-3</a></p></li>
+</ul>
 
 
           </div>
@@ -174,60 +147,24 @@ Attendees (github handle in parens):</p>
           <img class="logo" src="../_static/logo_black_on_trans.png" alt="Logo"/>
         </a></p><div class="sphinx-toc sphinxlocaltoc">
     <h3><a href="../index.html">Overview</a></h3>
-    <ul class="current">
+    <ul>
 <li class="toctree-l1"><a class="reference internal" href="../user/00_intro.html">User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../maintainer/00_intro.html">Maintainer Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="2020-01-22.html">2020-01-22 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2020-01-08.html">2020-01-08 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-11-12.html">2019-11-12 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-10-30.html">2019-10-30 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-10-16.html">2019-10-16 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-10-02.html">2019-10-02 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-09-18.html">2019-09-18 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-09-04.html">2019-09-04 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-08-07.html">2017-08-07 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-07-24.html">2017-07-24 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-06-26.html">2019-06-26 core dev meeting</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2017-08-11: General Discussion</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#agenda">Agenda</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#next-meeting">Next Meeting</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="2017-04-26.html">2017-04-26: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2017-01-06.html">2017-01-06: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-11-24.html">2016-11-24: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-11-17.html">2016-11-17: Operational catchup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-10-07.html">2016-10-07: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-09-23.html">2016-09-23 (postponed from 16th): General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-09-09.html">2016-09-09: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-08-25.html">2016-08-25: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-08-12.html">2016-08-12: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-07-22.html">2016-07-22: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-06-24.html">2016-06-24: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-06-09.html">2016-06-09: Compiler special meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-06-03.html">2016-06-03</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-05-13.html">2016-05-13</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-05-09.html">2016-05-09 Exceptional meeting regarding build customization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-04-29.html">2016-04-29</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-04-22.html">2016-04-22 Exceptional meeting regarding VC pinning mechanism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-04-15.html">2016-04-15</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a></li>
 </ul>
 
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="2019-06-26.html"
-                          title="Previous page">&larr; 2019-06-26 core dev meeting</a></p>
+                          title="Previous page">&larr; &lt;no title&gt;</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
     <p class="topless"><a href="2017-04-26.html"
-                          title="Next page">&rarr; 2017-04-26: General Discussion</a></p>
+                          title="Next page">&rarr; &lt;no title&gt;</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -276,10 +213,10 @@ Attendees (github handle in parens):</p>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="2017-04-26.html" title="2017-04-26: General Discussion"
+          <a href="2017-04-26.html" title="&lt;no title&gt;"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2019-06-26.html" title="2019-06-26 core dev meeting"
+          <a href="2019-06-26.html" title="&lt;no title&gt;"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -290,7 +227,7 @@ Attendees (github handle in parens):</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

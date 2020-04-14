@@ -3,10 +3,10 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>2016-04-15 &#8212; conda-forge 2019.01 documentation</title>
+    <title>&lt;no title&gt; &#8212; conda-forge 2019.01 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -35,7 +35,7 @@
 
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="2016-04-22 Exceptional meeting regarding VC pinning mechanism" href="2016-04-22.html" /> 
+    <link rel="prev" title="&lt;no title&gt;" href="2016-04-22.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -47,7 +47,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="2016-04-22.html" title="2016-04-22 Exceptional meeting regarding VC pinning mechanism"
+          <a href="2016-04-22.html" title="&lt;no title&gt;"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -62,78 +62,58 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="id1">
-<h1>2016-04-15<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="how-to-manage-agendas-meetings">
-<h2>How to manage agendas &amp; meetings?<a class="headerlink" href="#how-to-manage-agendas-meetings" title="Permalink to this headline">¶</a></h2>
+  <p># 2016-04-15</p>
+<p>## How to manage agendas &amp; meetings?</p>
 <p>use hackpad for agenda, repo for minutes</p>
-<p>Agenda hackpad: https://hackpad.com/conda-forge-meeting-notes-WZIa4PBQ6sz</p>
-</div>
-<div class="section" id="stats-on-conda-forge">
-<h2>Stats on conda-forge<a class="headerlink" href="#stats-on-conda-forge" title="Permalink to this headline">¶</a></h2>
+<p>Agenda hackpad: <a class="reference external" href="https://hackpad.com/conda-forge-meeting-notes-WZIa4PBQ6sz">https://hackpad.com/conda-forge-meeting-notes-WZIa4PBQ6sz</a></p>
+<p>## Stats on conda-forge</p>
 <p>google analytics says 500 unique visitors to conda-forge
 Packaging
 300-ish feedstocks in conda-forge
 600-ish packages at continuum</p>
 <p>1126 packages on conda-recipes (918 non-r), though some are repeats (e.g. python2 vs python3)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>import os
-packages = [f1 for f1, f2, f3, in os.walk(&#39;conda-recipes&#39;) if &#39;meta.yaml&#39; in f3]
-print(len(packages))
-
-$ find . -name &quot;meta.yaml&quot; | wc -l
-    1126
-</pre></div>
-</div>
-</div>
-<div class="section" id="next-meeting">
-<h2>Next meeting<a class="headerlink" href="#next-meeting" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a>`
+import os
+packages = [f1 for f1, f2, f3, in os.walk(‘conda-recipes’) if ‘meta.yaml’ in f3]
+print(len(packages))</p>
+<dl class="simple">
+<dt>$ find . -name “meta.yaml” | wc -l</dt><dd><p>1126</p>
+</dd>
+</dl>
+<p><a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
+<p>##  Next meeting</p>
 <p>2016-04-29 14:00 UTC</p>
-</div>
-<div class="section" id="external-developers-to-github-com-continuum-repos">
-<h2>External developers to github.com/continuum repos<a class="headerlink" href="#external-developers-to-github-com-continuum-repos" title="Permalink to this headline">¶</a></h2>
-<p>In particular, the heroku build pack. https://github.com/conda-forge/conda-forge-webservices is using neither the Continuum one, nor the one written by the Heroku product owner.</p>
+<p>## External developers to github.com/continuum repos</p>
+<p>In particular, the heroku build pack. <a class="reference external" href="https://github.com/conda-forge/conda-forge-webservices">https://github.com/conda-forge/conda-forge-webservices</a> is using neither the Continuum one, nor the one written by the Heroku product owner.</p>
 <p>No precedent for non Continuum contributors yet. We would love to have a canonical conda buildpack.</p>
-</div>
-<div class="section" id="centos5-vs-centos6">
-<h2>Centos5 vs Centos6<a class="headerlink" href="#centos5-vs-centos6" title="Permalink to this headline">¶</a></h2>
+<p>## Centos5 vs Centos6</p>
 <p>conda and conda-build are hopefully to be upgraded to understand the glibc version</p>
 <p>conda will be upgraded to provide analytics to anaconda.org on the glibc version of the requestor to feed information about the systems people are installing onto</p>
 <p>Suggested that one standardizes the syntax on the build commands, not the images that are used to build</p>
-</div>
-<div class="section" id="features-and-feedstocks">
-<h2>Features and feedstocks<a class="headerlink" href="#features-and-feedstocks" title="Permalink to this headline">¶</a></h2>
-<p>figuring out how you select a library that implements a common features set</p>
-<ul class="simple">
-<li><p>single repo for numpy and use selectors/features/branches to control how things get built</p>
-<ul>
-<li><p>mild-preference for single repo with selectors to toggle</p></li>
+<p>## Features and feedstocks</p>
+<dl class="simple">
+<dt>figuring out how you select a library that implements a common features set</dt><dd><ul class="simple">
+<li><p>single repo for numpy and use selectors/features/branches to control how things get built
+* mild-preference for single repo with selectors to toggle</p></li>
 </ul>
-</li>
-</ul>
-</div>
-<div class="section" id="netcdf">
-<h2>NetCDF<a class="headerlink" href="#netcdf" title="Permalink to this headline">¶</a></h2>
-<p>Q: How should we manage multiple “features” within it (e.g. compiled with/without OpenDAP)</p>
+</dd>
+</dl>
+<p>## NetCDF
+Q: How should we manage multiple “features” within it (e.g. compiled with/without OpenDAP)</p>
 <p>If possible, build as much as possible, but only provide the sensible run-time dependencies. Adding further dependencies would enable more functionality.</p>
 <p>In practice, that is sometimes not possible (e.g. a required .so is missing), in which case, we will need to be able toggle different build “variants”. &#64;msarahan suggested that the conda features concept may not  be the best way of solving this.</p>
-</div>
-<div class="section" id="windows-vc-feature">
-<h2>Windows VC feature<a class="headerlink" href="#windows-vc-feature" title="Permalink to this headline">¶</a></h2>
-<p>There is no strong candidate for going forwards at this point. Suggestion is to investigate some more, and &#64;msarahan, &#64;jakirkham and &#64;pelson to reconvene on 2016-04-22 at 14:00 UTC (though previously advertised for the 21st) to discuss specifically this issue.</p>
+<p>## Windows VC feature
+There is no strong candidate for going forwards at this point. Suggestion is to investigate some more, and &#64;msarahan, &#64;jakirkham and &#64;pelson to reconvene on 2016-04-22 at 14:00 UTC (though previously advertised for the 21st) to discuss specifically this issue.</p>
 <ul class="simple">
 <li><p>Features are intended to standardize packages that need certain things across your installed packages</p></li>
 <li><p>if you install a package that tracks the vc9 feature and one that tracks the vc10 feature and both get installed, conda will fall over and forget how to resolve dependencies and both will get installed?</p></li>
 <li><p>vc## features should never be added as a runtime requirement?</p></li>
 </ul>
-</div>
-<div class="section" id="documentation">
-<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
-<p>add a folder in the conda-forge.github.io git repo</p>
+<p>## Documentation
+add a folder in the conda-forge.github.io git repo</p>
 <p>A: John to add guidelines</p>
 <hr class="docutils" />
 <p>Next planned meeting is 2016-04-29 at 14:00 UTC</p>
-</div>
-</div>
 
 
           </div>
@@ -145,62 +125,19 @@ $ find . -name &quot;meta.yaml&quot; | wc -l
           <img class="logo" src="../_static/logo_black_on_trans.png" alt="Logo"/>
         </a></p><div class="sphinx-toc sphinxlocaltoc">
     <h3><a href="../index.html">Overview</a></h3>
-    <ul class="current">
+    <ul>
 <li class="toctree-l1"><a class="reference internal" href="../user/00_intro.html">User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../maintainer/00_intro.html">Maintainer Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="2020-01-22.html">2020-01-22 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2020-01-08.html">2020-01-08 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-11-12.html">2019-11-12 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-10-30.html">2019-10-30 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-10-16.html">2019-10-16 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-10-02.html">2019-10-02 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-09-18.html">2019-09-18 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-09-04.html">2019-09-04 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-08-07.html">2017-08-07 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-07-24.html">2017-07-24 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-06-26.html">2019-06-26 core dev meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2017-08-11.html">2017-08-11: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2017-04-26.html">2017-04-26: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2017-01-06.html">2017-01-06: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-11-24.html">2016-11-24: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-11-17.html">2016-11-17: Operational catchup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-10-07.html">2016-10-07: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-09-23.html">2016-09-23 (postponed from 16th): General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-09-09.html">2016-09-09: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-08-25.html">2016-08-25: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-08-12.html">2016-08-12: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-07-22.html">2016-07-22: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-06-24.html">2016-06-24: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-06-09.html">2016-06-09: Compiler special meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-06-03.html">2016-06-03</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-05-13.html">2016-05-13</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-05-09.html">2016-05-09 Exceptional meeting regarding build customization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-04-29.html">2016-04-29</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-04-22.html">2016-04-22 Exceptional meeting regarding VC pinning mechanism</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2016-04-15</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#how-to-manage-agendas-meetings">How to manage agendas &amp; meetings?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#stats-on-conda-forge">Stats on conda-forge</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#next-meeting">Next meeting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#external-developers-to-github-com-continuum-repos">External developers to github.com/continuum repos</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#centos5-vs-centos6">Centos5 vs Centos6</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#features-and-feedstocks">Features and feedstocks</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#netcdf">NetCDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#windows-vc-feature">Windows VC feature</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#documentation">Documentation</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a></li>
 </ul>
 
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="2016-04-22.html"
-                          title="Previous page">&larr; 2016-04-22 Exceptional meeting regarding VC pinning mechanism</a></p>
+                          title="Previous page">&larr; &lt;no title&gt;</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -249,7 +186,7 @@ $ find . -name &quot;meta.yaml&quot; | wc -l
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="2016-04-22.html" title="2016-04-22 Exceptional meeting regarding VC pinning mechanism"
+          <a href="2016-04-22.html" title="&lt;no title&gt;"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -260,7 +197,7 @@ $ find . -name &quot;meta.yaml&quot; | wc -l
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

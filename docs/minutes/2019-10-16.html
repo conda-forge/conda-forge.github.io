@@ -3,10 +3,10 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>2019-10-16 conda-forge core meeting &#8212; conda-forge 2019.01 documentation</title>
+    <title>&lt;no title&gt; &#8212; conda-forge 2019.01 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -35,8 +35,8 @@
 
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2019-10-02 conda-forge core meeting" href="2019-10-02.html" />
-    <link rel="prev" title="2019-10-30 conda-forge core meeting" href="2019-10-30.html" /> 
+    <link rel="next" title="&lt;no title&gt;" href="2019-10-02.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="2019-10-30.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -48,10 +48,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="2019-10-02.html" title="2019-10-02 conda-forge core meeting"
+          <a href="2019-10-02.html" title="&lt;no title&gt;"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2019-10-30.html" title="2019-10-30 conda-forge core meeting"
+          <a href="2019-10-30.html" title="&lt;no title&gt;"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -66,155 +66,116 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="conda-forge-core-meeting">
-<h1>2019-10-16 conda-forge core meeting<a class="headerlink" href="#conda-forge-core-meeting" title="Permalink to this headline">¶</a></h1>
-<hr class="docutils" />
-<div class="section" id="attendees">
-<h2>Attendees<a class="headerlink" href="#attendees" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="agenda">
-<h2>Agenda<a class="headerlink" href="#agenda" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="your-agenda-items">
-<h3>Your agenda items<a class="headerlink" href="#your-agenda-items" title="Permalink to this headline">¶</a></h3>
-<p>(Filipe) Should we try GSoC? If so, should we try under the NumFOCUS umbrella? Deadline is Monday, October 28 at 17:00 UTC!
-Discussion:</p>
-<ul class="simple">
-<li><p>Ideas?</p>
-<ul>
+  <p># 2019-10-16 conda-forge core meeting</p>
+<p>## Agenda</p>
+<p>### Your agenda items
+(Filipe) Should we try GSoC? If so, should we try under the NumFOCUS umbrella? Deadline is Monday, October 28 at 17:00 UTC!
+Discussion:
+* Ideas?</p>
+<blockquote>
+<div><ul class="simple">
 <li><p>Should be straightforward to get started</p></li>
 <li><p>Should have a meaningful impact</p></li>
 <li><p>Should have a meaningful endpoint</p></li>
 </ul>
-</li>
+</div></blockquote>
+<ul class="simple">
 <li><p>Willing to mentor?</p></li>
 <li><p>Start creating/tagging issues GSoC or maybe build a project of issues</p></li>
-<li><p>Need to find students</p>
-<ul>
+<li><dl class="simple">
+<dt>Need to find students</dt><dd><ul>
 <li><p>CJ: Put out feelers</p></li>
 <li><p>Can be undergrad or grad</p></li>
 <li><p>Anthony: Tweet out we’re looking for people who want to champion  GSOC?</p></li>
 </ul>
+</dd>
+</dl>
 </li>
 </ul>
 <p>(CJ) Python 3.8 progress
-Discussion:</p>
-<ul class="simple">
-<li><p>Windows issue is pretty nasty. (https://github.com/conda-forge/python-feedstock/pull/274#issuecomment-542331428)</p></li>
-<li><p>Something’s up with macos (fixed if you don’t build with LTO - Link Time Optimization - but that’s more fun)</p></li>
-<li><p>Jonathan has linux packages with py38 label on his anaconda.org channel.</p></li>
+Discussion:
+* Windows issue is pretty nasty. (<a class="reference external" href="https://github.com/conda-forge/python-feedstock/pull/274#issuecomment-542331428">https://github.com/conda-forge/python-feedstock/pull/274#issuecomment-542331428</a>)
+* Something’s up with macos (fixed if you don’t build with LTO - Link Time Optimization - but that’s more fun)
+* Jonathan has linux packages with py38 label on his anaconda.org channel.</p>
+<p>### Subteam updates</p>
+<p>#### Bot
+- (CJ) License bot is operational.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Upstream to conda skeleton? Show Filipe that part of the code [link](<a class="reference external" href="https://github.com/regro/cf-scripts/blob/master/conda_forge_tick/migrators.xsh#L99">https://github.com/regro/cf-scripts/blob/master/conda_forge_tick/migrators.xsh#L99</a>)</p></li>
+<li><p>List of all feedstocks that dont have a license: [link](<a class="reference external" href="https://github.com/regro/cf-graph-countyfair/blob/master/status/unlicensed.json">https://github.com/regro/cf-graph-countyfair/blob/master/status/unlicensed.json</a>)</p></li>
 </ul>
-</div>
-<div class="section" id="subteam-updates">
-<h3>Subteam updates<a class="headerlink" href="#subteam-updates" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="bot">
-<h4>Bot<a class="headerlink" href="#bot" title="Permalink to this headline">¶</a></h4>
+</div></blockquote>
 <ul class="simple">
-<li><p>(CJ) License bot is operational.</p>
-<ul>
-<li><p>Upstream to conda skeleton? Show Filipe that part of the code <a class="reference external" href="https://github.com/regro/cf-scripts/blob/master/conda_forge_tick/migrators.xsh#L99">link</a></p></li>
-<li><p>List of all feedstocks that dont have a license: <a class="reference external" href="https://github.com/regro/cf-graph-countyfair/blob/master/status/unlicensed.json">link</a></p></li>
-</ul>
-</li>
 <li><p>(CJ) libnetcdf and zstd migrations are up</p></li>
 <li><p>(CJ) CFEP9 docs went up, seemed to help new users with issuing PRs</p></li>
 </ul>
-</div>
-<div class="section" id="arm">
-<h4>ARM<a class="headerlink" href="#arm" title="Permalink to this headline">¶</a></h4>
-</div>
-<div class="section" id="docs">
-<h4>Docs<a class="headerlink" href="#docs" title="Permalink to this headline">¶</a></h4>
-</div>
-<div class="section" id="staged-recipes">
-<h4>staged-recipes<a class="headerlink" href="#staged-recipes" title="Permalink to this headline">¶</a></h4>
-</div>
-<div class="section" id="website">
-<h4>website<a class="headerlink" href="#website" title="Permalink to this headline">¶</a></h4>
-</div>
-</div>
-<div class="section" id="ci-infrastructure">
-<h3>CI infrastructure<a class="headerlink" href="#ci-infrastructure" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="compiler-upgrade">
-<h4>Compiler upgrade<a class="headerlink" href="#compiler-upgrade" title="Permalink to this headline">¶</a></h4>
-</div>
-</div>
-<div class="section" id="cfep-updates">
-<h3>CFEP updates<a class="headerlink" href="#cfep-updates" title="Permalink to this headline">¶</a></h3>
-<p>How do we start getting traction on these?</p>
-<div class="section" id="cfep-03-manual-upload-of-builds">
-<h4><a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/5">cfep-03</a> Manual upload of builds<a class="headerlink" href="#cfep-03-manual-upload-of-builds" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li><p>Filipe to review, fix any text and merge it in.</p></li>
-</ul>
-</div>
-<div class="section" id="cfep-04-x11-and-cdt-policy">
-<h4><a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/7">cfep-04</a> X11 and CDT policy<a class="headerlink" href="#cfep-04-x11-and-cdt-policy" title="Permalink to this headline">¶</a></h4>
-</div>
-<div class="section" id="cfep-05-dev-rc-builds">
-<h4><a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/3">cfep-05</a> dev/rc builds<a class="headerlink" href="#cfep-05-dev-rc-builds" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li><p>It seems that the <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">label::package</span></code> syntax gives some odd/unexpected results</p></li>
-<li><p>Maybe we should build a cron job that tests some expected environments?</p></li>
-<li><p>discussion:</p>
-<ul>
+<p>#### ARM</p>
+<p>#### Docs</p>
+<p>#### staged-recipes</p>
+<p>#### website</p>
+<p>### CI infrastructure</p>
+<p>#### Compiler upgrade</p>
+<p>### CFEP updates
+How do we start getting traction on these?</p>
+<p>#### [cfep-03](<a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/5">https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/5</a>) Manual upload of builds
+* Filipe to review, fix any text and merge it in.</p>
+<p>#### [cfep-04](<a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/7">https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/7</a>) X11 and CDT policy</p>
+<p>#### [cfep-05](<a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/3">https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/3</a>) dev/rc builds
+- It seems that the <cite>conda install label::package</cite> syntax gives some odd/unexpected results
+- Maybe we should build a cron job that tests some expected environments?
+- discussion:</p>
+<blockquote>
+<div><ul class="simple">
 <li><p>doesn’t</p></li>
 <li><p>automated dev builds: opt-in?</p></li>
 <li><p>enable maintainers to ask for a new PR to be created for a dev release.</p></li>
 </ul>
-</li>
-</ul>
-</div>
-<div class="section" id="cfep-06-staged-recipes-review-lifecycle">
-<h4><a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/9">cfep-06</a> Staged-recipes review lifecycle<a class="headerlink" href="#cfep-06-staged-recipes-review-lifecycle" title="Permalink to this headline">¶</a></h4>
-</div>
-<div class="section" id="cfep-08-too-big-to-fail">
-<h4>cfep-08 Too Big To Fail<a class="headerlink" href="#cfep-08-too-big-to-fail" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li><p>Tabled for the time being</p></li>
-<li><p>CJ: Merge this in with the Deferred Status.</p></li>
-</ul>
-</div>
-<div class="section" id="cfep-10-feedstock-statuses-unmaintained">
-<h4><a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/15">cfep-10</a> Feedstock statuses, unmaintained<a class="headerlink" href="#cfep-10-feedstock-statuses-unmaintained" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li><p>How to handle being a collection of packages “which work” and/or an archival store.</p></li>
-<li><p>Epoching of the conda-forge channel</p>
-<ul>
-<li><p>Epoching in conda</p>
-<ul>
-<li><p>two indexes <code class="docutils literal notranslate"><span class="pre">current_repodata.json</span></code> and <code class="docutils literal notranslate"><span class="pre">repodata.json</span></code></p></li>
+</div></blockquote>
+<p>#### [cfep-06](<a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/9">https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/9</a>) Staged-recipes review lifecycle</p>
+<p>#### cfep-08 Too Big To Fail
+- Tabled for the time being
+- CJ: Merge this in with the Deferred Status.</p>
+<p>#### [cfep-10](<a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/15">https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/15</a>) Feedstock statuses, unmaintained
+- How to handle being a collection of packages “which work” and/or an archival store.
+- Epoching of the conda-forge channel</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Epoching in conda</dt><dd><ul>
+<li><p>two indexes <cite>current_repodata.json</cite> and <cite>repodata.json</cite></p></li>
 <li><p>Build on this idea for more epochs</p></li>
 </ul>
+</dd>
+</dl>
 </li>
 <li><p>Shallow graph thing</p></li>
 <li><p>Put time slice repodata.json file on CDN?</p></li>
-<li><p>enable <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">package</span> <span class="pre">-date=Jan2019</span></code></p></li>
+<li><p>enable <cite>conda install package -date=Jan2019</cite></p></li>
 </ul>
-</li>
-<li><p>Purpose of conda-forge: Reproducibility vs replicability vs new stuff that just works</p>
-<ul>
-<li><p>Ways in which we can help with reproducibility:</p>
-<ul>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Purpose of conda-forge: Reproducibility vs replicability vs new stuff that just works</dt><dd><ul>
+<li><dl class="simple">
+<dt>Ways in which we can help with reproducibility:</dt><dd><ul>
 <li><p>label all packages with “reproducible” or “all”</p></li>
 <li><p>lock/freeze your environment</p></li>
 <li><p>conda create with locked environment pointing to the “all” channel of conda-forge</p></li>
 <li><p>Best Practices on using conda, conda files, environment.yml, construct.yml, anaconda.org, local channels, etc.</p></li>
 </ul>
+</dd>
+</dl>
 </li>
 </ul>
+</dd>
+</dl>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="section" id="discussion">
-<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="check-in-on-previous-action-items">
-<h2>Check in on previous action items<a class="headerlink" href="#check-in-on-previous-action-items" title="Permalink to this headline">¶</a></h2>
-<p>Copy previous action items from last meeting agenda.</p>
-<div class="section" id="meeting">
-<h3>2 meeting<a class="headerlink" href="#meeting" title="Permalink to this headline">¶</a></h3>
+<p>## Discussion</p>
+<p>## Check in on previous action items
+Copy previous action items from last meeting agenda.</p>
+<p>### 2 meeting</p>
 <ul class="simple">
 <li><p>[ ] (Eric) Email out to see if we can get more engagement on regular dev meetings.</p></li>
 <li><p>[ ] (Sophia) Set up meeting to talk about Condafile stuff.</p></li>
@@ -223,31 +184,23 @@ Discussion:</p>
 <li><p>[ ] (Eric) Scheduling Anaconda &lt;-&gt; conda-forge sync on anaconda.org requirements gathering</p></li>
 <li><p>[ ] (Anthony) Reach out to NumFocus to figure out legal ramifications of not including licenses in files.</p></li>
 </ul>
-</div>
-<div class="section" id="meetings-ago">
-<h3>3 meetings ago<a class="headerlink" href="#meetings-ago" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>[ ] (Filipe) Progress on setting up a self-hosted blog</p>
-<ul>
+<p>### 3 meetings ago
+* [ ] (Filipe) Progress on setting up a self-hosted blog</p>
+<blockquote>
+<div><ul class="simple">
 <li><p>Medium seems to be generally downvoted</p></li>
 <li><p>Host your own blog seems to be generally positive</p></li>
-<li><p>Can we mimic what Dask does for their dev blog? https://github.com/dask/dask-blog</p></li>
+<li><p>Can we mimic what Dask does for their dev blog? <a class="reference external" href="https://github.com/dask/dask-blog">https://github.com/dask/dask-blog</a></p></li>
 </ul>
-</li>
+</div></blockquote>
+<ul class="simple">
 <li><p>[ ] (Needs Owner) Searching on our website is a little difficult</p></li>
 <li><p>[ ] (Filipe, Anthony) Improve docs on releasing conda-smithy. Currently says “use rever”. Would be good to fill out more info there for those of us that are unfamiliar with rever.</p></li>
 </ul>
-</div>
-<div class="section" id="id1">
-<h3>3 meetings ago<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-</div>
-</div>
-<div class="section" id="new-action-items">
-<h2>New Action items<a class="headerlink" href="#new-action-items" title="Permalink to this headline">¶</a></h2>
-<p>Copy new action items to next meetings agenda so we can check in.
+<p>### 3 meetings ago</p>
+<p>## New Action items
+Copy new action items to next meetings agenda so we can check in.
 Make sure each action item is assigned to someone or it will likely not get done.</p>
-</div>
-</div>
 
 
           </div>
@@ -259,92 +212,24 @@ Make sure each action item is assigned to someone or it will likely not get done
           <img class="logo" src="../_static/logo_black_on_trans.png" alt="Logo"/>
         </a></p><div class="sphinx-toc sphinxlocaltoc">
     <h3><a href="../index.html">Overview</a></h3>
-    <ul class="current">
+    <ul>
 <li class="toctree-l1"><a class="reference internal" href="../user/00_intro.html">User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../maintainer/00_intro.html">Maintainer Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="2020-01-22.html">2020-01-22 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2020-01-08.html">2020-01-08 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-11-12.html">2019-11-12 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-10-30.html">2019-10-30 conda-forge core meeting</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2019-10-16 conda-forge core meeting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#attendees">Attendees</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#agenda">Agenda</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#your-agenda-items">Your agenda items</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#subteam-updates">Subteam updates</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#bot">Bot</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#arm">ARM</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#docs">Docs</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#staged-recipes">staged-recipes</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#website">website</a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#ci-infrastructure">CI infrastructure</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#compiler-upgrade">Compiler upgrade</a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#cfep-updates">CFEP updates</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#cfep-03-manual-upload-of-builds">cfep-03 Manual upload of builds</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#cfep-04-x11-and-cdt-policy">cfep-04 X11 and CDT policy</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#cfep-05-dev-rc-builds">cfep-05 dev/rc builds</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#cfep-06-staged-recipes-review-lifecycle">cfep-06 Staged-recipes review lifecycle</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#cfep-08-too-big-to-fail">cfep-08 Too Big To Fail</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#cfep-10-feedstock-statuses-unmaintained">cfep-10 Feedstock statuses, unmaintained</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#discussion">Discussion</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#check-in-on-previous-action-items">Check in on previous action items</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#meeting">2 meeting</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#meetings-ago">3 meetings ago</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id1">3 meetings ago</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#new-action-items">New Action items</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="2019-10-02.html">2019-10-02 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-09-18.html">2019-09-18 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-09-04.html">2019-09-04 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-08-07.html">2017-08-07 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-07-24.html">2017-07-24 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-06-26.html">2019-06-26 core dev meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2017-08-11.html">2017-08-11: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2017-04-26.html">2017-04-26: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2017-01-06.html">2017-01-06: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-11-24.html">2016-11-24: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-11-17.html">2016-11-17: Operational catchup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-10-07.html">2016-10-07: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-09-23.html">2016-09-23 (postponed from 16th): General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-09-09.html">2016-09-09: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-08-25.html">2016-08-25: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-08-12.html">2016-08-12: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-07-22.html">2016-07-22: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-06-24.html">2016-06-24: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-06-09.html">2016-06-09: Compiler special meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-06-03.html">2016-06-03</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-05-13.html">2016-05-13</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-05-09.html">2016-05-09 Exceptional meeting regarding build customization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-04-29.html">2016-04-29</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-04-22.html">2016-04-22 Exceptional meeting regarding VC pinning mechanism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-04-15.html">2016-04-15</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a></li>
 </ul>
 
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="2019-10-30.html"
-                          title="Previous page">&larr; 2019-10-30 conda-forge core meeting</a></p>
+                          title="Previous page">&larr; &lt;no title&gt;</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
     <p class="topless"><a href="2019-10-02.html"
-                          title="Next page">&rarr; 2019-10-02 conda-forge core meeting</a></p>
+                          title="Next page">&rarr; &lt;no title&gt;</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -393,10 +278,10 @@ Make sure each action item is assigned to someone or it will likely not get done
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="2019-10-02.html" title="2019-10-02 conda-forge core meeting"
+          <a href="2019-10-02.html" title="&lt;no title&gt;"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2019-10-30.html" title="2019-10-30 conda-forge core meeting"
+          <a href="2019-10-30.html" title="&lt;no title&gt;"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -407,7 +292,7 @@ Make sure each action item is assigned to someone or it will likely not get done
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

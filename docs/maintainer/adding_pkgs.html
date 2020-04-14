@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>Contributing packages &#8212; conda-forge 2019.01 documentation</title>
@@ -124,7 +124,7 @@ test that the module can be imported, as described in the example.</p></li>
 <div class="section" id="checklist">
 <h4>Checklist<a class="headerlink" href="#checklist" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li><p>Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache 2.0 rather than APACHE 2.0).</p></li>
+<li><p>Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache-2.0 rather than APACHE 2.0). Using SPDX identifiers for license field is recommended. (see <a class="reference internal" href="#spdx"><span class="std std-ref">SPDX Identifiers and Expressions</span></a>)</p></li>
 <li><p>Ensure that you have included a license file if your license requires one – most do. (see <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55">here</a>)</p></li>
 <li><p>In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.</p></li>
 <li><p>Make sure that all tests pass successfully at least on your development machine.</p></li>
@@ -137,7 +137,7 @@ test that the module can be imported, as described in the example.</p></li>
 <h3>Feedback and revision<a class="headerlink" href="#feedback-and-revision" title="Permalink to this headline">¶</a></h3>
 <p>Once you finished your PR, all you have to do is waiting for feedback from our reviewer team.</p>
 <p>The reviewer team will assist you by pointing out improvements and answering questions. Once the package is ready, the reviewers will approve and merge your pull request.</p>
-<p>After merging the <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>, our infrastructure will build the package and make it available in the conda-channel.</p>
+<p>After merging the <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a>, our infrastructure will build the package and make it available in the conda-channel.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have questions or have not heard back for a while, you can notify us by including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge/staged-recipes</span></code> in your GitHub message.</p>
@@ -146,17 +146,17 @@ test that the module can be imported, as described in the example.</p></li>
 <div class="section" id="post-staging-process">
 <h3>Post staging process<a class="headerlink" href="#post-staging-process" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>After the PR is merged, our <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> services will create a new git repo automatically. For example, the recipe for a package named <code class="docutils literal notranslate"><span class="pre">pydstool</span></code> will be moved to a new repository <a class="reference external" href="https://github.com/conda-forge/pydstool-feedstock">https://github.com/conda-forge/pydstool-feedstock</a>.</p></li>
+<li><p>After the PR is merged, our <a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a> services will create a new git repo automatically. For example, the recipe for a package named <code class="docutils literal notranslate"><span class="pre">pydstool</span></code> will be moved to a new repository <a class="reference external" href="https://github.com/conda-forge/pydstool-feedstock">https://github.com/conda-forge/pydstool-feedstock</a>.</p></li>
 <li><p>CI services will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to <a class="reference external" href="https://anaconda.org/conda-forge">https://anaconda.org/conda-forge</a></p></li>
 <li><p>If this is your first contribution, you will be added to the conda-forge <a class="reference external" href="https://github.com/orgs/conda-forge/people">team</a> and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.</p></li>
-<li><p>If you want to make a change to the recipe, send a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.</p></li>
+<li><p>If you want to make a change to the recipe, send a <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a> to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.</p></li>
 </ul>
 </div>
 <div class="section" id="maintainer-role">
 <h3>Maintainer role<a class="headerlink" href="#maintainer-role" title="Permalink to this headline">¶</a></h3>
 <p>The maintainer’s job is to:</p>
 <ul class="simple">
-<li><p>Keep the feedstock updated by merging eventual maintenance <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>s from conda-forge’s bots.</p></li>
+<li><p>Keep the feedstock updated by merging eventual maintenance <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a>s from conda-forge’s bots.</p></li>
 <li><p>Keep the feedstock on par with new releases of the source package by</p>
 <ul>
 <li><p>Bumping the version number and checksum.</p></li>
@@ -375,22 +375,22 @@ For a detailed explanation please refer to the <a class="reference external" hre
 </div>
 <div class="section" id="avoid-external-dependencies">
 <span id="no-external-deps"></span><h4>Avoid external dependencies<a class="headerlink" href="#avoid-external-dependencies" title="Permalink to this headline">¶</a></h4>
-<p>As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure <a class="reference internal" href="../misc/00_intro.html#term-abi"><span class="xref std std-term">ABI</span></a> compatibility for all our packages.</p>
+<p>As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure <a class="reference internal" href="../misc/00_intro.html#term-ABI"><span class="xref std std-term">ABI</span></a> compatibility for all our packages.</p>
 <p>There are only a few exceptions to this rule:</p>
 <ol class="arabic simple">
-<li><p>Some dependencies have to be satisfied with <a class="reference internal" href="../misc/00_intro.html#term-cdt"><span class="xref std std-term">CDT</span></a> packages (see <a class="reference internal" href="knowledge_base.html#cdt-packages"><span class="std std-ref">Core dependency tree packages (CDT)</span></a>).</p></li>
+<li><p>Some dependencies have to be satisfied with <a class="reference internal" href="../misc/00_intro.html#term-CDT"><span class="xref std std-term">CDT</span></a> packages (see <a class="reference internal" href="knowledge_base.html#cdt-packages"><span class="std std-ref">Core dependency tree packages (CDT)</span></a>).</p></li>
 <li><p>Some packages require root access (e.g. device drivers) that cannot be distributed by conda-forge. These dependencies should be avoided whenever possible.</p></li>
 </ol>
 </div>
 <div class="section" id="pinning">
 <h4>Pinning<a class="headerlink" href="#pinning" title="Permalink to this headline">¶</a></h4>
-<p>Linking shared c/c++ libraries creates dependence on the <a class="reference internal" href="../misc/00_intro.html#term-abi"><span class="xref std std-term">ABI</span></a> of the library that was used at build time on the package.
+<p>Linking shared c/c++ libraries creates dependence on the <a class="reference internal" href="../misc/00_intro.html#term-ABI"><span class="xref std std-term">ABI</span></a> of the library that was used at build time on the package.
 The exposed interface changes when previously existing exposed symbols are deleted or modified in a newer version.</p>
-<p>It is therefore crucial to ensure that only library versions with a compatible <a class="reference internal" href="../misc/00_intro.html#term-abi"><span class="xref std std-term">ABI</span></a> are used after linking.</p>
+<p>It is therefore crucial to ensure that only library versions with a compatible <a class="reference internal" href="../misc/00_intro.html#term-ABI"><span class="xref std std-term">ABI</span></a> are used after linking.</p>
 <p>In the best case, the shared library you depend on:</p>
 <ul class="simple">
 <li><p>defines a pin in the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">list of globally pinned packages</a></p></li>
-<li><p>exports its <a class="reference internal" href="../misc/00_intro.html#term-abi"><span class="xref std std-term">ABI</span></a> compatible requirements by defining <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> in it’s meta.yaml</p></li>
+<li><p>exports its <a class="reference internal" href="../misc/00_intro.html#term-ABI"><span class="xref std std-term">ABI</span></a> compatible requirements by defining <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> in it’s meta.yaml</p></li>
 </ul>
 <p>In these cases you do not have to worry about version requirements:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
@@ -400,7 +400,7 @@ The exposed interface changes when previously existing exposed symbols are delet
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libpng</span>
 </pre></div>
 </div>
-<p>In other cases you have to specify <a class="reference internal" href="../misc/00_intro.html#term-abi"><span class="xref std std-term">ABI</span></a> compatible versions manually.</p>
+<p>In other cases you have to specify <a class="reference internal" href="../misc/00_intro.html#term-ABI"><span class="xref std std-term">ABI</span></a> compatible versions manually.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
   <span class="c1"># [...]</span>
   <span class="nt">host</span><span class="p">:</span>
@@ -454,7 +454,7 @@ But every conda package must have at least <em>some</em> tests.</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>tests for the underlying code base may not exist.</p></li>
-<li><p>test suites may take too long to run on limited <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> infrastructure.</p></li>
+<li><p>test suites may take too long to run on limited <a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a> infrastructure.</p></li>
 <li><p>tests may take too much bandwidth.</p></li>
 </ul>
 </div></blockquote>
@@ -617,6 +617,26 @@ $ <span class="nv">CONFIG</span><span class="o">=</span>linux64 ./.circleci/run_
 If there is a license file in the archive, please set <code class="docutils literal notranslate"><span class="pre">license_file</span></code> to the path of the license file in the archive.</p>
 </div>
 </div>
+<div class="section" id="spdx-identifiers-and-expressions">
+<span id="spdx"></span><h4>SPDX Identifiers and Expressions<a class="headerlink" href="#spdx-identifiers-and-expressions" title="Permalink to this headline">¶</a></h4>
+<p>For the <code class="docutils literal notranslate"><span class="pre">about:</span> <span class="pre">license</span></code> entry in the recipe <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>, using a SPDX identifier or expression is recommended.</p>
+<p>See <a class="reference external" href="https://spdx.org/licenses/">SPDX license identifiers</a> for the licenses.
+See <a class="reference external" href="https://spdx.org/licenses/exceptions-index.html">SPDX license exceptions</a> for license exceptions.
+See <a class="reference external" href="https://spdx.org/spdx-specification-21-web-version">SPDX specification</a> Appendix IV
+for the specification on expressions.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Apache-2.0
+Apache-2.0 WITH LLVM-exception
+BSD-3-Clause
+BSD-3-Clause OR MIT
+GPL-2.0-or-later
+LGPL-2.0-only OR GPL-2.0-only
+LicenseRef-HDF5
+MIT
+MIT AND BSD-2-Clause
+PSF-2.0
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="miscellaneous">
@@ -777,6 +797,7 @@ source:
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#about">About</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#packaging-the-license-manually">Packaging the license manually</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#spdx-identifiers-and-expressions">SPDX Identifiers and Expressions</a></li>
 </ul>
 </li>
 </ul>
@@ -872,7 +893,7 @@ source:
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>Pinned dependencies &#8212; conda-forge 2019.01 documentation</title>
@@ -118,7 +118,7 @@ These pinned versions represent the ABIs that conda-forge is currently supportin
 </div>
 <div class="section" id="specifying-run-exports">
 <h2>Specifying run_exports<a class="headerlink" href="#specifying-run-exports" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> feature can be used to specify the versions that are <a class="reference internal" href="../misc/00_intro.html#term-abi"><span class="xref std std-term">ABI</span></a> compatible with the built version. This leads to higher flexibility of choosable packages, without breakages due to incompatibilities.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> feature can be used to specify the versions that are <a class="reference internal" href="../misc/00_intro.html#term-ABI"><span class="xref std std-term">ABI</span></a> compatible with the built version. This leads to higher flexibility of choosable packages, without breakages due to incompatibilities.</p>
 <p>Packages that depend on a package with <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> can choose to overwrite this behavior using the <code class="docutils literal notranslate"><span class="pre">build/ignore_run_exports</span></code> key.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -141,7 +141,7 @@ Once the pins are updated, via a migration yaml, then all the packages that are 
 <li><p>create a new migration yaml by copying <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/example.exyaml">example.exyaml</a> in the <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-forge-pinning</span></code> repository.</p></li>
 <li><p>change the migration yaml to reflect the package and version to be migrated</p></li>
 <li><p>write a <a class="reference internal" href="#pin-migrator"><span class="std std-ref">migrator</span></a> for propagating the pin changes.</p></li>
-<li><p>propose the changes as a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> to <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a>.</p></li>
+<li><p>propose the changes as a <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a> to <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a>.</p></li>
 <li><p>once accepted the migration will begin.
 The migration status can be monitored at <a class="reference external" href="https://conda-forge.org/status">https://conda-forge.org/status</a>.</p></li>
 <li><p>after the migration is complete,
@@ -279,7 +279,7 @@ and documentation <a class="reference external" href="https://regro.github.io/cf
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

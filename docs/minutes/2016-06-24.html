@@ -3,10 +3,10 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>2016-06-24: General discussion &#8212; conda-forge 2019.01 documentation</title>
+    <title>&lt;no title&gt; &#8212; conda-forge 2019.01 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -35,8 +35,8 @@
 
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2016-06-09: Compiler special meeting" href="2016-06-09.html" />
-    <link rel="prev" title="2016-07-22: General discussion" href="2016-07-22.html" /> 
+    <link rel="next" title="&lt;no title&gt;" href="2016-06-09.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="2016-07-22.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -48,10 +48,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="2016-06-09.html" title="2016-06-09: Compiler special meeting"
+          <a href="2016-06-09.html" title="&lt;no title&gt;"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2016-07-22.html" title="2016-07-22: General discussion"
+          <a href="2016-07-22.html" title="&lt;no title&gt;"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -66,19 +66,18 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="general-discussion">
-<h1>2016-06-24: General discussion<a class="headerlink" href="#general-discussion" title="Permalink to this headline">¶</a></h1>
+  <p># 2016-06-24: General discussion</p>
 <p><strong>(please note this document previously incorrectly slated the meeting for the 17th)</strong></p>
 <p>Time: 14:00 UTC</p>
-<p>Hangout link: <a class="reference external" href="https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie"></a>https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie</p>
+<p>Hangout link: [](<a class="reference external" href="https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie)https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie">https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie)https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie</a></p>
 <p><strong>Attendees</strong></p>
-<p><a class="reference external" href="/ep/profile/DMmBLyb21HK">Bjˆrn Gr¸ning</a></p>
+<p>[Bjˆrn Gr¸ning](/ep/profile/DMmBLyb21HK)</p>
 <p>Filipe</p>
-<p><a class="reference external" href="/ep/profile/wv6uvIZX6h0">John Kirkham</a></p>
-<p><a class="reference external" href="/ep/profile/yHQTJXZ4gyS">Michael Sarahan</a></p>
+<p>[John Kirkham](/ep/profile/wv6uvIZX6h0)</p>
+<p>[Michael Sarahan](/ep/profile/yHQTJXZ4gyS)</p>
 <p>Jonathan Helmus</p>
 <p>Matt Craig</p>
-<p><a class="reference external" href="/ep/profile/AviM60TiesB">Phil Elson</a></p>
+<p>[Phil Elson](/ep/profile/AviM60TiesB)</p>
 <p><strong>Standing items</strong></p>
 <ul class="simple">
 <li><p>How many repos?</p></li>
@@ -91,19 +90,23 @@
 <li><p>Split gcc or work with defaults? We need a better and more consistent way to build packages that depends on Fortran and libgomp or we will keep seeing broken packages when mixing conda-forge and defaults.</p></li>
 <li><p>Basic community practices when PR-ing to staged-recipes.</p></li>
 <li><p>Recently I present conda-forge in a NOAA/IOOS in DC. Most people are excited about conda-forge, but reluctant to switch from the IOOS channel to conda-forge. The main reason is, of course, control.  I made my best ensured them that conda-forge will follow all the good community practices as any other open source project that they already rely on. However, there are still some concerns. I would like to present a summary of the discussion in our meeting.</p></li>
-<li><p>NetCDF (<s>also curl/ca-certificates and Perl packages</s>) - Done?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">curl</span> <span class="ow">and</span> <span class="n">ca</span><span class="o">-</span><span class="n">certificates</span> <span class="n">are</span> <span class="n">done</span> <span class="ow">and</span> <span class="n">available</span><span class="o">.</span> 
-</pre></div>
-</div>
+<li><p>NetCDF (&lt;s&gt;also curl/ca-certificates and Perl packages&lt;/s&gt;) - Done?</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>curl and ca-certificates are done and available.</p></li>
+</ul>
+</div></blockquote>
 <ul class="simple">
 <li><p>Perl is no longer relevant as part of this process</p></li>
 </ul>
 </li>
-<li><p><s>GitHub rate limiting. How can we further mitigate these?</s> This is a duplicate, it appears again below.</p></li>
+<li><p>&lt;s&gt;GitHub rate limiting. How can we further mitigate these?&lt;/s&gt; This is a duplicate, it appears again below.</p></li>
 <li><p>PR reviews</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Treat</span> <span class="n">every</span> <span class="n">PR</span> <span class="k">as</span> <span class="n">a</span> <span class="n">Work</span> <span class="ow">in</span> <span class="n">Progress</span><span class="o">.</span> <span class="n">At</span> <span class="n">least</span> <span class="n">let</span> <span class="n">PRs</span> <span class="n">sit</span> <span class="k">for</span> <span class="n">a</span> <span class="n">few</span> <span class="n">hours</span> <span class="n">before</span> <span class="n">merging</span> <span class="n">them</span><span class="o">.</span>
-</pre></div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Treat every PR as a Work in Progress. At least let PRs sit for a few hours before merging them.</p></li>
+</ul>
+</div></blockquote>
 <ul class="simple">
 <li><p>Wait for answers when we ask clarification questions and avoid acting before we have them.</p></li>
 <li><p>Respect   the first reviewer by not repeating her/his review comments with   another words. That is also bad for the person submitting the PR as it   is confusing.</p></li>
@@ -112,26 +115,35 @@
 </li>
 <li><p>Notifications (how do we stay on top of them)</p></li>
 <li><p>Standardizing installs</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Mention [`toolchain`](https://github.com/conda-forge/toolchain-feedstock) .
-
-        *   Discuss rollout to feedstocks.
-
-*   Get feedback on [`python-toolchain`](https://github.com/conda-forge/staged-recipes/pull/642) 
-</pre></div>
-</div>
+<blockquote>
+<div><ul>
+<li><p>Mention [<cite>toolchain</cite>](<a class="reference external" href="https://github.com/conda-forge/toolchain-feedstock">https://github.com/conda-forge/toolchain-feedstock</a>) .</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Discuss rollout to feedstocks.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Get feedback on [<cite>python-toolchain</cite>](<a class="reference external" href="https://github.com/conda-forge/staged-recipes/pull/642">https://github.com/conda-forge/staged-recipes/pull/642</a>)</p></li>
+</ul>
+</div></blockquote>
 </li>
 <li><p>MSYS2</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Discussing</span> <span class="n">Ray</span> <span class="n">Donnelly</span><span class="s1">&#39;s work on MSYS2 packages and how we want to use and integrate these into conda-forge.</span>
-</pre></div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Discussing Ray Donnelly’s work on MSYS2 packages and how we want to use and integrate these into conda-forge.</p></li>
+</ul>
+</div></blockquote>
 <ul class="simple">
 <li><p>Some use cases to consider OpenBLAS, FFTW, build tools, others?</p></li>
 </ul>
 </li>
 <li><p>Binary data</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Do we include it in recipes?
-</pre></div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Do we include it in recipes?</p></li>
+</ul>
+</div></blockquote>
 <ul class="simple">
 <li><p>What kinds do we allow if any (e.g. icons)?</p></li>
 <li><p>How do we verify the licensing?</p></li>
@@ -140,50 +152,69 @@
 </li>
 <li><p>OpenBLAS (on Windows)</p></li>
 <li><p>Dev releases: Where do they happen?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Do we do them at conda-forge?
-
-        *   Maybe add a label.
-
-*   Do we let others do them with a feedstock on their own repo?
-</pre></div>
-</div>
+<blockquote>
+<div><ul>
+<li><p>Do we do them at conda-forge?</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Maybe add a label.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Do we let others do them with a feedstock on their own repo?</p></li>
+</ul>
+</div></blockquote>
 <ul class="simple">
 <li><p>How do we enforce whatever we decide?</p></li>
 </ul>
 </li>
 <li><p>Conda-forge installer</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">We</span> <span class="n">have</span> <span class="n">Python</span> <span class="mf">3.5</span> <span class="n">now</span>
-</pre></div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>We have Python 3.5 now</p></li>
+</ul>
+</div></blockquote>
 <ul class="simple">
-<li><p>Still need <code class="docutils literal notranslate"><span class="pre">conda</span></code>.</p></li>
+<li><p>Still need <cite>conda</cite>.</p></li>
 <li><p>New repo?</p></li>
 <li><p>Where do we host the installers? Git tags?</p></li>
 </ul>
 </li>
 <li><p>GitHub rate limitations. How can we further mitigate these?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   GitHub letter ( [](https://docs.google.com/document/d/19HLtYPwg6IKAwmxPwL7Vd3AX0n47ANP-ZTpZROn-Cwc/edit?pref=2&amp;pli=1)https://docs.google.com/document/d/19HLtYPwg6IKAwmxPwL7Vd3AX0n47ANP-ZTpZROn-Cwc/edit?pref=2&amp;pli=1 ).
-
-        *   +1, this reads very well
-*   +1 also -- is it appropriate to ask for advice on how to reduce our API calls or queue them up in the event they are unwilling to raise  limit?
-*   So, there have been updates since this was initially added. See this issue ( [conda forge/conda forge.github.io#88](https://github.com/conda-forge/conda-forge.github.io/issues/88) ). They wrote this letter in reply ( [](https://docs.google.com/document/d/1lzWNxvmEtrgjSBVrUWEO-imDryBOLRfObz3PkI9qT5Y/edit?pref=2&amp;pli=1)https://docs.google.com/document/d/1lzWNxvmEtrgjSBVrUWEO-imDryBOLRfObz3PkI9qT5Y/edit?pref=2&amp;pli=1 ). Basically, they said that it wouldn&#39;t make sense for them to bump our rate limit in this way as our current usage scales poorly. I think I agree with that sentiment. Wrote up this proposal for more optimizations ( [conda forge/conda forge.github.io#172](https://github.com/conda-forge/conda-forge.github.io/issues/172) ). Have done some of them. See this PR ( [conda forge/staged recipes#733](https://github.com/conda-forge/staged-recipes/pull/733) ) for part of the fix. This has greatly improved the situation. Though we still have some issues.
-</pre></div>
-</div>
+<blockquote>
+<div><ul>
+<li><p>GitHub letter ( [](<a class="reference external" href="https://docs.google.com/document/d/19HLtYPwg6IKAwmxPwL7Vd3AX0n47ANP-ZTpZROn-Cwc/edit?pref=2&amp;pli=1)https://docs.google.com/document/d/19HLtYPwg6IKAwmxPwL7Vd3AX0n47ANP-ZTpZROn-Cwc/edit">https://docs.google.com/document/d/19HLtYPwg6IKAwmxPwL7Vd3AX0n47ANP-ZTpZROn-Cwc/edit?pref=2&amp;pli=1)https://docs.google.com/document/d/19HLtYPwg6IKAwmxPwL7Vd3AX0n47ANP-ZTpZROn-Cwc/edit</a>?pref=2&amp;pli=1 ).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>+1, this reads very well</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>+1 also – is it appropriate to ask for advice on how to reduce our API calls or queue them up in the event they are unwilling to raise  limit?</p></li>
+<li><p>So, there have been updates since this was initially added. See this issue ( [conda forge/conda forge.github.io#88](<a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues/88">https://github.com/conda-forge/conda-forge.github.io/issues/88</a>) ). They wrote this letter in reply ( [](<a class="reference external" href="https://docs.google.com/document/d/1lzWNxvmEtrgjSBVrUWEO-imDryBOLRfObz3PkI9qT5Y/edit?pref=2&amp;pli=1)https://docs.google.com/document/d/1lzWNxvmEtrgjSBVrUWEO-imDryBOLRfObz3PkI9qT5Y/edit">https://docs.google.com/document/d/1lzWNxvmEtrgjSBVrUWEO-imDryBOLRfObz3PkI9qT5Y/edit?pref=2&amp;pli=1)https://docs.google.com/document/d/1lzWNxvmEtrgjSBVrUWEO-imDryBOLRfObz3PkI9qT5Y/edit</a>?pref=2&amp;pli=1 ). Basically, they said that it wouldn’t make sense for them to bump our rate limit in this way as our current usage scales poorly. I think I agree with that sentiment. Wrote up this proposal for more optimizations ( [conda forge/conda forge.github.io#172](<a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues/172">https://github.com/conda-forge/conda-forge.github.io/issues/172</a>) ). Have done some of them. See this PR ( [conda forge/staged recipes#733](<a class="reference external" href="https://github.com/conda-forge/staged-recipes/pull/733">https://github.com/conda-forge/staged-recipes/pull/733</a>) ) for part of the fix. This has greatly improved the situation. Though we still have some issues.</p></li>
+</ul>
+</div></blockquote>
 </li>
 <li><p>Channel mirroring</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Can this point be a little bit explained? I thought about this as well and would like to contribute to this point.
-</pre></div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Can this point be a little bit explained? I thought about this as well and would like to contribute to this point.</p></li>
+</ul>
+</div></blockquote>
 </li>
 <li><p>Feedstock history</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Is it sacred?
-</pre></div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Is it sacred?</p></li>
+</ul>
+</div></blockquote>
 <ul>
 <li><p>Do we rebase/force push?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    *   If so, under what conditions?
-</pre></div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>If so, under what conditions?</p></li>
+</ul>
+</div></blockquote>
 <ul class="simple">
 <li><p>How do we avoid multiple people doing this simultaneously?</p></li>
 </ul>
@@ -191,9 +222,11 @@
 </ul>
 </li>
 <li><p>Docker hosting solution</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Docker</span> <span class="n">Hub</span> <span class="n">builds</span> <span class="n">were</span> <span class="n">broken</span> <span class="k">for</span> <span class="n">a</span> <span class="n">week</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">half</span><span class="o">.</span>
-</pre></div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Docker Hub builds were broken for a week and a half.</p></li>
+</ul>
+</div></blockquote>
 <ul class="simple">
 <li><p>Have switched to quay.io currently.</p></li>
 <li><p>Mirroring quay.io image on Docker Hub.</p></li>
@@ -201,37 +234,43 @@
 </ul>
 </li>
 <li><p>Continuum metadata request: can we add these to linter?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">example</span> <span class="n">metadata</span><span class="p">:</span> <span class="p">[](</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ContinuumIO</span><span class="o">/</span><span class="n">anaconda</span><span class="o">-</span><span class="n">recipes</span><span class="o">/</span><span class="n">blob</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">anaconda</span><span class="o">-</span><span class="n">build</span><span class="o">/</span><span class="n">meta</span><span class="o">.</span><span class="n">yaml</span><span class="c1">#L36-L44)[https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44](https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44)</span>
-</pre></div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>example metadata: [](<a class="reference external" href="https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44)[https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta">https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44)[https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta</a>.yaml#L36-L44](<a class="reference external" href="https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44">https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44</a>)</p></li>
+</ul>
+</div></blockquote>
 <ul class="simple">
 <li><p>Also, distinguish summary (limit of 77 or 80 chars) from description (unlimited)</p></li>
 </ul>
 </li>
 <li><p>Google  hangouts has a max capacity of 10. Is it worth considering other  methods of communication so everyone who wants to participate can?</p></li>
-<li><p>Maybe this ( <a class="reference external" href="http://www.freeconferencecalling.com/"></a>http://www.freeconferencecalling.com/ ) is an option.</p></li>
+<li><p>Maybe this ( [](<a class="reference external" href="http://www.freeconferencecalling.com/)http://www.freeconferencecalling.com/">http://www.freeconferencecalling.com/)http://www.freeconferencecalling.com/</a> ) is an option.</p></li>
 <li><p>Bluejeans</p></li>
 <li><p>Continuum has webex.  Past experience is that some Linux platforms had trouble connecting</p></li>
 <li><p>Drop numpy 1.10 and reduce our build matrix. (Numba now works with numpy 1.11.)</p></li>
-<li><p>This comment from the PR for graphviz is the best summary I’ve seen: <a class="reference external" href="https://github.com/conda-forge/staged-recipes/pull/568">conda forge/staged recipes#568</a>#issuecomment-225315370</p></li>
+<li><p>This comment from the PR for graphviz is the best summary I’ve seen: [conda forge/staged recipes#568](<a class="reference external" href="https://github.com/conda-forge/staged-recipes/pull/568">https://github.com/conda-forge/staged-recipes/pull/568</a>)#issuecomment-225315370</p></li>
 <li><p>Thanks for pointing this out. The described solution looks reasonable and is preferable to prefixing package names. Great!</p></li>
 <li></li>
 <li><p>Signing packages</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Should</span> <span class="n">be</span> <span class="n">easy</span> <span class="n">to</span> <span class="n">do</span><span class="o">.</span> <span class="p">(</span> <span class="p">[](</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">conda</span><span class="o">.</span><span class="n">pydata</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">signed</span><span class="o">-</span><span class="n">packages</span><span class="o">.</span><span class="n">html</span><span class="p">)</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">conda</span><span class="o">.</span><span class="n">pydata</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">signed</span><span class="o">-</span><span class="n">packages</span><span class="o">.</span><span class="n">html</span> <span class="p">)</span>
-</pre></div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Should be easy to do. ( [](<a class="reference external" href="http://conda.pydata.org/docs/signed-packages.html)http://conda.pydata.org/docs/signed-packages.html">http://conda.pydata.org/docs/signed-packages.html)http://conda.pydata.org/docs/signed-packages.html</a> )</p></li>
+</ul>
+</div></blockquote>
 <ul class="simple">
 <li><p>There has been some interest previously.</p></li>
 </ul>
 </li>
 <li><p>HTTPError: 503 Server Error: Service Unavailable: Back-end server is at capacity for url…</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Seems</span> <span class="n">we</span> <span class="n">are</span> <span class="n">regularly</span> <span class="n">running</span> <span class="n">into</span> <span class="n">this</span> <span class="n">issue</span> <span class="n">under</span> <span class="n">normal</span> <span class="n">usage</span> <span class="n">conditions</span><span class="o">.</span>
-</pre></div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Seems we are regularly running into this issue under normal usage conditions.</p></li>
+</ul>
+</div></blockquote>
 <ul class="simple">
 <li><p>Had discussed previously caching packages on AppVeyor and trying to reuse those to start.</p></li>
 <li><p>Maybe we need to consider caching on all CIs.</p></li>
-<li><p>Building our own Miniconda-like self-extracting scripts with packages via <a class="reference external" href="https://github.com/conda/constructor"><code class="docutils literal notranslate"><span class="pre">constructor</span></code></a>.</p></li>
+<li><p>Building our own Miniconda-like self-extracting scripts with packages via [<cite>constructor</cite>](<a class="reference external" href="https://github.com/conda/constructor">https://github.com/conda/constructor</a>).</p></li>
 </ul>
 </li>
 </ul>
@@ -250,13 +289,15 @@
 <li><p>Should raise issues on conda GitHub repo</p></li>
 <li><p>No easy solutions, but we need to choose some solution</p></li>
 <li><p>meta-package which use “common” name</p></li>
-<li><p>Correct solution is to prefix everything with “python-“ but people do not want to do this when installing and people are already used to the old method.</p></li>
+<li><p>Correct solution is to prefix everything with “python-” but people do not want to do this when installing and people are already used to the old method.</p></li>
 <li><p>Filipe’s issue with namespaces is that it makes choices for users, would rather have that choice… raise on GitHub issue XXX</p></li>
 <li><p>For many users conda is a drop in replacement for pip, should we keep this big advantage?</p></li>
 <li><p>Are there less engineered solution than namespacing?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Should</span> <span class="n">be</span> <span class="n">raised</span> <span class="ow">in</span> <span class="n">GitHub</span><span class="p">,</span> <span class="n">submit</span> <span class="n">PRs</span> 
-</pre></div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Should be raised in GitHub, submit PRs</p></li>
+</ul>
+</div></blockquote>
 </li>
 <li><p>Prefix everything and have conda install be smart about finding these packages?</p></li>
 <li><p>Do not prefix packages which are in defaults but anything not in defaults should be prefixed with python-, r-</p></li>
@@ -287,9 +328,11 @@
 <p>Suggestions for Phil’s priorities</p>
 <ul>
 <li><p>conda-build-all</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="p">[</span><span class="n">SciTools</span><span class="o">/</span><span class="n">conda</span> <span class="n">build</span> <span class="nb">all</span><span class="c1">#41](https://github.com/SciTools/conda-build-all/issues/41)</span>
-</pre></div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>[SciTools/conda build all#41](<a class="reference external" href="https://github.com/SciTools/conda-build-all/issues/41">https://github.com/SciTools/conda-build-all/issues/41</a>)</p></li>
+</ul>
+</div></blockquote>
 </li>
 </ul>
 <p>Service to run builds on beta releases of conda-build</p>
@@ -298,7 +341,6 @@
 <li><p>Consolidate multiple PR into a single version</p></li>
 <li><p>conda-build-all PR</p></li>
 </ul>
-</div>
 
 
           </div>
@@ -310,56 +352,24 @@
           <img class="logo" src="../_static/logo_black_on_trans.png" alt="Logo"/>
         </a></p><div class="sphinx-toc sphinxlocaltoc">
     <h3><a href="../index.html">Overview</a></h3>
-    <ul class="current">
+    <ul>
 <li class="toctree-l1"><a class="reference internal" href="../user/00_intro.html">User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../maintainer/00_intro.html">Maintainer Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="2020-01-22.html">2020-01-22 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2020-01-08.html">2020-01-08 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-11-12.html">2019-11-12 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-10-30.html">2019-10-30 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-10-16.html">2019-10-16 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-10-02.html">2019-10-02 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-09-18.html">2019-09-18 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-09-04.html">2019-09-04 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-08-07.html">2017-08-07 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-07-24.html">2017-07-24 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-06-26.html">2019-06-26 core dev meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2017-08-11.html">2017-08-11: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2017-04-26.html">2017-04-26: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2017-01-06.html">2017-01-06: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-11-24.html">2016-11-24: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-11-17.html">2016-11-17: Operational catchup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-10-07.html">2016-10-07: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-09-23.html">2016-09-23 (postponed from 16th): General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-09-09.html">2016-09-09: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-08-25.html">2016-08-25: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-08-12.html">2016-08-12: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-07-22.html">2016-07-22: General discussion</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2016-06-24: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-06-09.html">2016-06-09: Compiler special meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-06-03.html">2016-06-03</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-05-13.html">2016-05-13</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-05-09.html">2016-05-09 Exceptional meeting regarding build customization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-04-29.html">2016-04-29</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-04-22.html">2016-04-22 Exceptional meeting regarding VC pinning mechanism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-04-15.html">2016-04-15</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a></li>
 </ul>
 
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="2016-07-22.html"
-                          title="Previous page">&larr; 2016-07-22: General discussion</a></p>
+                          title="Previous page">&larr; &lt;no title&gt;</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
     <p class="topless"><a href="2016-06-09.html"
-                          title="Next page">&rarr; 2016-06-09: Compiler special meeting</a></p>
+                          title="Next page">&rarr; &lt;no title&gt;</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -408,10 +418,10 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="2016-06-09.html" title="2016-06-09: Compiler special meeting"
+          <a href="2016-06-09.html" title="&lt;no title&gt;"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2016-07-22.html" title="2016-07-22: General discussion"
+          <a href="2016-07-22.html" title="&lt;no title&gt;"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -422,7 +432,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

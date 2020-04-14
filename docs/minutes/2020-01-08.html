@@ -3,10 +3,10 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>2020-01-08 conda-forge core meeting &#8212; conda-forge 2019.01 documentation</title>
+    <title>&lt;no title&gt; &#8212; conda-forge 2019.01 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -35,8 +35,8 @@
 
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2019-11-12 conda-forge core meeting" href="2019-11-12.html" />
-    <link rel="prev" title="2020-01-22 conda-forge core meeting" href="2020-01-22.html" /> 
+    <link rel="next" title="&lt;no title&gt;" href="2019-11-12.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="2020-01-22.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -48,10 +48,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="2019-11-12.html" title="2019-11-12 conda-forge core meeting"
+          <a href="2019-11-12.html" title="&lt;no title&gt;"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2020-01-22.html" title="2020-01-22 conda-forge core meeting"
+          <a href="2020-01-22.html" title="&lt;no title&gt;"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -66,189 +66,164 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="conda-forge-core-meeting">
-<h1>2020-01-08 conda-forge core meeting<a class="headerlink" href="#conda-forge-core-meeting" title="Permalink to this headline">¶</a></h1>
+  <p># 2020-01-08 conda-forge core meeting</p>
 <hr class="docutils" />
-<div class="section" id="attendees">
-<h2>Attendees<a class="headerlink" href="#attendees" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="agenda">
-<h2>Agenda<a class="headerlink" href="#agenda" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="your-agenda-items">
-<h3>Your agenda items<a class="headerlink" href="#your-agenda-items" title="Permalink to this headline">¶</a></h3>
+<p>## Attendees</p>
+<p>## Agenda</p>
+<p>### Your agenda items</p>
 <ul class="simple">
-<li><p>(FF) We have a blog: https://github.com/conda-forge/blog
-All we need now is a blog ;-p</p>
-<ul>
-<li><p>https://conda-forge.org/blog/</p></li>
+<li><p>(FF) We have a blog: <a class="reference external" href="https://github.com/conda-forge/blog">https://github.com/conda-forge/blog</a>
+All we need now is a blog ;-p
+* <a class="reference external" href="https://conda-forge.org/blog/">https://conda-forge.org/blog/</a></p></li>
 </ul>
-</li>
-</ul>
-</div>
-<div class="section" id="subteam-updates">
-<h3>Subteam updates<a class="headerlink" href="#subteam-updates" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="bot">
-<h4>Bot<a class="headerlink" href="#bot" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li><p>(CJ) Major bot refactor has finished, most of the code is now in IDE friendly, type hinted python</p></li>
-<li><p>(CJ) Matt Becker has joined the bot subteam</p>
-<ul>
-<li><p>wants to push on auto-merging green bot PRs. At least looking at what infrastructure needs to be set up for that.</p>
-<ul>
+<p>### Subteam updates</p>
+<p>#### Bot
+- (CJ) Major bot refactor has finished, most of the code is now in IDE friendly, type hinted python
+- (CJ) Matt Becker has joined the bot subteam</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>wants to push on auto-merging green bot PRs. At least looking at what infrastructure needs to be set up for that.</dt><dd><ul>
 <li><p>(Marcel) makes sense if its opt-in.</p></li>
 <li><p>(Eric) would suggest opt-in at start to work out kinks, once stable switch to opt-out.</p></li>
 </ul>
+</dd>
+</dl>
 </li>
 <li><p>look at issue tracker for more info</p></li>
 <li><p>UX around abandoned feedstocks? pseudo-abandoned</p></li>
 </ul>
-</li>
-<li><p>(CJ) Version bump PRs now close open version PRs for previous versions</p>
-<ul>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>(CJ) Version bump PRs now close open version PRs for previous versions</dt><dd><ul>
 <li><p>Merging the newer version bump PR will close the older version bump PR.</p></li>
 </ul>
+</dd>
+</dl>
 </li>
 <li><p>(jakirkham) use linter bot to update bot’s graph with PR status</p></li>
 </ul>
-</div>
-<div class="section" id="arm">
-<h4>ARM<a class="headerlink" href="#arm" title="Permalink to this headline">¶</a></h4>
-</div>
-<div class="section" id="power">
-<h4>POWER<a class="headerlink" href="#power" title="Permalink to this headline">¶</a></h4>
-</div>
-<div class="section" id="cuda">
-<h4>CUDA<a class="headerlink" href="#cuda" title="Permalink to this headline">¶</a></h4>
+<p>#### ARM</p>
+<p>#### POWER</p>
+<p>#### CUDA</p>
 <ul class="simple">
-<li><p>(jakirkham) CUDA 10.2 migration</p>
-<ul>
-<li><p>(CJ) the bot doesn’t handle run_exports at all. It’s particularly glaring with run_exports strong. Usually fuse host / run to figure dependencies. Does not use build for dependency tracking. Has some notes / issues that descirbes this a bit https://github.com/regro/cf-scripts/issues/677. TODO: Make a lookup table for the strong run_exports. Before making edges in graph, add in the run_exports strong requirements to the dependencies. This should propery express dependencies in the graph.</p></li>
+<li><dl class="simple">
+<dt>(jakirkham) CUDA 10.2 migration</dt><dd><ul>
+<li><p>(CJ) the bot doesn’t handle run_exports at all. It’s particularly glaring with run_exports strong. Usually fuse host / run to figure dependencies. Does not use build for dependency tracking. Has some notes / issues that descirbes this a bit <a class="reference external" href="https://github.com/regro/cf-scripts/issues/677">https://github.com/regro/cf-scripts/issues/677</a>. TODO: Make a lookup table for the strong run_exports. Before making edges in graph, add in the run_exports strong requirements to the dependencies. This should propery express dependencies in the graph.</p></li>
 <li><p>(jakirkham) needs pointers from CJ as to where in the bot to make these updates.</p></li>
-<li><p>(CJ) question: Using <code class="docutils literal notranslate"><span class="pre">render</span></code> from the conda public API. This doesn’t seem to add the run_exports to the meta.yaml. Is there another function to use that does add the run_exports to the rendered? A: this function needs all of the jinja variables provided or the rendered dictionary wont be correct.</p></li>
+<li><p>(CJ) question: Using <cite>render</cite> from the conda public API. This doesn’t seem to add the run_exports to the meta.yaml. Is there another function to use that does add the run_exports to the rendered? A: this function needs all of the jinja variables provided or the rendered dictionary wont be correct.</p></li>
 <li><p>(jakirkham) Discussion to have. Break cudatoolkit into two packages: cudatoolkit runtime and the rest.</p></li>
 </ul>
+</dd>
+</dl>
 </li>
 </ul>
-</div>
-<div class="section" id="docs">
-<h4>Docs<a class="headerlink" href="#docs" title="Permalink to this headline">¶</a></h4>
-</div>
-<div class="section" id="staged-recipes">
-<h4>staged-recipes<a class="headerlink" href="#staged-recipes" title="Permalink to this headline">¶</a></h4>
-</div>
-<div class="section" id="website">
-<h4>website<a class="headerlink" href="#website" title="Permalink to this headline">¶</a></h4>
-</div>
-</div>
-<div class="section" id="ci-infrastructure">
-<h3>CI infrastructure<a class="headerlink" href="#ci-infrastructure" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="compiler-upgrade">
-<h4>Compiler upgrade<a class="headerlink" href="#compiler-upgrade" title="Permalink to this headline">¶</a></h4>
-</div>
-</div>
-<div class="section" id="cfep-updates">
-<h3>CFEP updates<a class="headerlink" href="#cfep-updates" title="Permalink to this headline">¶</a></h3>
+<p>#### Docs</p>
+<p>#### staged-recipes</p>
+<p>#### website</p>
+<p>### CI infrastructure</p>
+<p>#### Compiler upgrade</p>
+<p>### CFEP updates</p>
 <ul class="simple">
 <li><p>(Eric) (finally) renamed conda-forge-enhancement-proposals to cfep</p></li>
 </ul>
-<div class="section" id="open-prs">
-<h4>Open PRs<a class="headerlink" href="#open-prs" title="Permalink to this headline">¶</a></h4>
+<p>#### Open PRs</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/5">cfep-03</a> Manual upload of builds</p>
-<ul>
+<li><dl class="simple">
+<dt>[cfep-03](<a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/5">https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/5</a>) Manual upload of builds</dt><dd><ul>
 <li><p>Has 10 approvals, what are next steps here?</p></li>
 <li><p>Merged today!</p></li>
 </ul>
+</dd>
+</dl>
 </li>
-<li><p><a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/7">cfep-04</a> X11 and CDT policy</p>
-<ul>
+<li><dl class="simple">
+<dt>[cfep-04](<a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/7">https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/7</a>) X11 and CDT policy</dt><dd><ul>
 <li><p>jjhelmus to add a comment to this PR about what we discussed today. Ping jjhelmus about tk. It’s not clear if we can even build tk against a non system X11 because tk ships its own X11 headers that the conda X11 package doesn’t work against</p></li>
 </ul>
+</dd>
+</dl>
 </li>
-<li><p><a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/3">cfep-05</a> dev/rc builds</p>
-<ul>
+<li><dl class="simple">
+<dt>[cfep-05](<a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/3">https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/3</a>) dev/rc builds</dt><dd><ul>
 <li><p>Seems that there was voting, but did anything come of it?</p></li>
-<li><p>CJ to make formal vote call on this. Will check in next week</p>
-<ul>
+<li><dl class="simple">
+<dt>CJ to make formal vote call on this. Will check in next week</dt><dd><ul>
 <li><p>Vote issued</p></li>
 </ul>
+</dd>
+</dl>
 </li>
 </ul>
+</dd>
+</dl>
 </li>
-<li><p><a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/9">cfep-06</a> Staged-recipes review lifecycle</p>
-<ul>
+<li><dl class="simple">
+<dt>[cfep-06](<a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/9">https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/9</a>) Staged-recipes review lifecycle</dt><dd><ul>
 <li><p>Has some recent comments from &#64;saraedum that are unaddressed</p></li>
 <li><p>Ask staged-recipes team to champion this CFEP and move it forward.</p></li>
 </ul>
+</dd>
+</dl>
 </li>
-<li><p><a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/15">cfep-10</a> Feedstock statuses, unmaintained</p>
-<ul>
+<li><dl class="simple">
+<dt>[cfep-10](<a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/15">https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/15</a>) Feedstock statuses, unmaintained</dt><dd><ul>
 <li><p>Discussion around maintainers removing themselves</p></li>
 <li><p>Maybe move to a x number of versions away from most recent</p></li>
-<li><p>https://github.com/regro/cf-graph-countyfair/blob/master/status/could_use_help.json</p></li>
+<li><p><a class="reference external" href="https://github.com/regro/cf-graph-countyfair/blob/master/status/could_use_help.json">https://github.com/regro/cf-graph-countyfair/blob/master/status/could_use_help.json</a></p></li>
 <li><p>CJ to make a call to vote</p></li>
 </ul>
+</dd>
+</dl>
 </li>
-<li><p><a class="reference external" href="https://github.com/conda-forge/cfep/pull/18">cfep-11</a> Automated Closing of Excessively Old PRs on Staged Recipes</p>
-<ul>
+<li><dl class="simple">
+<dt>[cfep-11](<a class="reference external" href="https://github.com/conda-forge/cfep/pull/18">https://github.com/conda-forge/cfep/pull/18</a>) Automated Closing of Excessively Old PRs on Staged Recipes</dt><dd><ul>
 <li><p>Has a 8 approvals. what are next steps?</p></li>
 <li><p>Next steps: Merge PR and ping staged-recipes team they can implement if they want?</p></li>
 </ul>
+</dd>
+</dl>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="section" id="discussion">
-<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="check-in-on-previous-action-items">
-<h2>Check in on previous action items<a class="headerlink" href="#check-in-on-previous-action-items" title="Permalink to this headline">¶</a></h2>
-<p>Copy previous action items from last meeting agenda.</p>
-<div class="section" id="last-meeting">
-<h3>Last meeting<a class="headerlink" href="#last-meeting" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>[ ] cfep-11 next steps: Merge PR and ping staged-recipes team they can implement if they want?</p></li>
-<li><p>[ ] cfep-10 next steps: CJ to call a vote for feedback</p></li>
-<li><p>[ ] cfep-06 next steps: Ask staged recipes team to champion this CFEP and move it forward</p></li>
-<li><p>[ ] cfep-04 next steps: jjhelmus to add a comment per notes above</p></li>
-<li><p>[ ] jakirkham &amp; CJ-wright to sync on adding CUDA to the migration bot</p></li>
-</ul>
-</div>
-<div class="section" id="meetings-ago">
-<h3>2 meetings ago<a class="headerlink" href="#meetings-ago" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="id1">
-<h3>3 meetings ago<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>[ ] (Filipe) CFEP-03: Review, fix any text and merge it in.</p>
-<ul>
+<p>## Discussion</p>
+<p>## Check in on previous action items
+Copy previous action items from last meeting agenda.</p>
+<p>### Last meeting
+* [ ] cfep-11 next steps: Merge PR and ping staged-recipes team they can implement if they want?
+* [ ] cfep-10 next steps: CJ to call a vote for feedback
+* [ ] cfep-06 next steps: Ask staged recipes team to champion this CFEP and move it forward
+* [ ] cfep-04 next steps: jjhelmus to add a comment per notes above
+* [ ] jakirkham &amp; CJ-wright to sync on adding CUDA to the migration bot
+### 2 meetings ago</p>
+<p>### 3 meetings ago
+* [ ] (Filipe) CFEP-03: Review, fix any text and merge it in.</p>
+<blockquote>
+<div><ul class="simple">
 <li><p>Minor updates that are needed. This will likely get done in December.</p></li>
 </ul>
-</li>
-<li><p>[ ] (CJ) CFEP-08: Merge in with deferred status</p>
-<ul>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>[ ] (CJ) CFEP-08: Merge in with deferred status</dt><dd><ul>
 <li><p>Will check in next meeting.</p></li>
 </ul>
+</dd>
+</dl>
 </li>
 </ul>
-</div>
-<div class="section" id="id2">
-<h3>4 meetings ago<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="move-to-issue-tracker">
-<h3>Move to Issue Tracker<a class="headerlink" href="#move-to-issue-tracker" title="Permalink to this headline">¶</a></h3>
+<p>### 4 meetings ago</p>
+<p>### Move to Issue Tracker</p>
 <ul class="simple">
-<li><p>[ ] (Eric) Scheduling Anaconda &lt;-&gt; conda-forge sync on anaconda.org requirements gathering</p>
-<ul>
+<li><dl class="simple">
+<dt>[ ] (Eric) Scheduling Anaconda &lt;-&gt; conda-forge sync on anaconda.org requirements gathering</dt><dd><ul>
 <li><p>Will try and get this scheduled in the next month.</p></li>
 </ul>
+</dd>
+</dl>
 </li>
 <li><p>[ ] (Anthony) Reach out to NumFocus to figure out legal ramifications of not including licenses in files.</p></li>
 </ul>
-</div>
-</div>
-</div>
 
 
           </div>
@@ -260,90 +235,24 @@ All we need now is a blog ;-p</p>
           <img class="logo" src="../_static/logo_black_on_trans.png" alt="Logo"/>
         </a></p><div class="sphinx-toc sphinxlocaltoc">
     <h3><a href="../index.html">Overview</a></h3>
-    <ul class="current">
+    <ul>
 <li class="toctree-l1"><a class="reference internal" href="../user/00_intro.html">User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../maintainer/00_intro.html">Maintainer Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="2020-01-22.html">2020-01-22 conda-forge core meeting</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2020-01-08 conda-forge core meeting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#attendees">Attendees</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#agenda">Agenda</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#your-agenda-items">Your agenda items</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#subteam-updates">Subteam updates</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#bot">Bot</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#arm">ARM</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#power">POWER</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#cuda">CUDA</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#docs">Docs</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#staged-recipes">staged-recipes</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#website">website</a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#ci-infrastructure">CI infrastructure</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#compiler-upgrade">Compiler upgrade</a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#cfep-updates">CFEP updates</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#open-prs">Open PRs</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#discussion">Discussion</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#check-in-on-previous-action-items">Check in on previous action items</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#last-meeting">Last meeting</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#meetings-ago">2 meetings ago</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id1">3 meetings ago</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">4 meetings ago</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#move-to-issue-tracker">Move to Issue Tracker</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="2019-11-12.html">2019-11-12 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-10-30.html">2019-10-30 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-10-16.html">2019-10-16 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-10-02.html">2019-10-02 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-09-18.html">2019-09-18 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-09-04.html">2019-09-04 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-08-07.html">2017-08-07 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-07-24.html">2017-07-24 conda-forge core meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2019-06-26.html">2019-06-26 core dev meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2017-08-11.html">2017-08-11: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2017-04-26.html">2017-04-26: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2017-01-06.html">2017-01-06: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-11-24.html">2016-11-24: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-11-17.html">2016-11-17: Operational catchup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-10-07.html">2016-10-07: General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-09-23.html">2016-09-23 (postponed from 16th): General Discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-09-09.html">2016-09-09: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-08-25.html">2016-08-25: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-08-12.html">2016-08-12: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-07-22.html">2016-07-22: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-06-24.html">2016-06-24: General discussion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-06-09.html">2016-06-09: Compiler special meeting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-06-03.html">2016-06-03</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-05-13.html">2016-05-13</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-05-09.html">2016-05-09 Exceptional meeting regarding build customization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-04-29.html">2016-04-29</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-04-22.html">2016-04-22 Exceptional meeting regarding VC pinning mechanism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2016-04-15.html">2016-04-15</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a></li>
 </ul>
 
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="2020-01-22.html"
-                          title="Previous page">&larr; 2020-01-22 conda-forge core meeting</a></p>
+                          title="Previous page">&larr; &lt;no title&gt;</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
     <p class="topless"><a href="2019-11-12.html"
-                          title="Next page">&rarr; 2019-11-12 conda-forge core meeting</a></p>
+                          title="Next page">&rarr; &lt;no title&gt;</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -392,10 +301,10 @@ All we need now is a blog ;-p</p>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="2019-11-12.html" title="2019-11-12 conda-forge core meeting"
+          <a href="2019-11-12.html" title="&lt;no title&gt;"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2020-01-22.html" title="2020-01-22 conda-forge core meeting"
+          <a href="2020-01-22.html" title="&lt;no title&gt;"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2019.01 documentation</a> &#187;</li>
 
@@ -406,7 +315,7 @@ All we need now is a blog ;-p</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
