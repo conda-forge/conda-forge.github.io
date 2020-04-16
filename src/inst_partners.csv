@@ -1,2 +1,4 @@
-Partner Name; Short Description; Associated Core Developers (if any); Logo URL, Site URL
+Partner Name; Short Description; Associated Core Developers (if any); Logo URL; Site URL
 Microsoft Azure; Azure provides build systems for Windows, OSX, and Linux; ; https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg; https://azure.microsoft.com/en-us/services/devops/pipelines/
+Oregon State University Open Source Lab; OSL provides ppc64le machines for long running jobs; ; https://osuosl.org/images/osllogo-print_0.png; https://osuosl.org
+Works on Arm; Works on Arm project provides aarch64 machines for long running jobs; ; https://www.worksonarm.com/wp-content/themes/worksonarm2019/assets/images/logo.png; https://www.worksonarm.com/
