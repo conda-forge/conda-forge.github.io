@@ -8,20 +8,18 @@ from the URL for the vote
 
 ## Dates
 
-Please include times to the nearest hour, in GMT time zone.
-
 | Event       |  Dates |
 | ---            |  ---:|
-| Proposed on:   |  2020/02/02 15:00 |
-| Original proposed close date:   |  2020/02/09 15:00 |
-| Presented at core meeting on:   |  2020/02/05 15:00 |
+| Proposed on:   |  2020/02/02 |
+| Original proposed close date:   |  2020/02/09 |
+| Presented at core meeting on:   |  2020/02/05 |
 
 ### Timeout (if this vote wasn't complete on the original proposed date)
 | Event       |  Dates |
 | ---            |  ---:|
 | Date(s) in-between reminders sent:   |  2020/02/02, 2020/02/09 |
-| Date final reminder sent:   |  2020/02/14 15:00 |
-| Date timeout declared:   |  2020/02/14 15:00 |
+| Date final reminder sent:   |  2020/02/14 |
+| Date timeout declared:   |  2020/02/14 |
 
 Note that timeout declaration must be 24 hours or more from final reminder.
 
