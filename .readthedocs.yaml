@@ -4,4 +4,4 @@ sphinx:
   configuration: rtd/conf.py
 
 formats:
-  - html
+  - htmlzip
