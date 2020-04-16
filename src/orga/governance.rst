@@ -113,8 +113,8 @@ To call for a standard vote, here is a template PR comment:
 
 ----
 
-:Posting results: To maintain the historical record, the outcome of any standard vote outside
-    the CFEP process should be recorded in the "vote-results" folder at
+:Posting results: To maintain the historical record, the outcome of any standard,
+    except those excluded in this section, should be recorded in the "vote-results" folder at
     https://github.com/conda-forge/conda-forge.github.io/tree/master/vote-results
 
     Each vote should be its own file.  The filename should reflect the topic and the
@@ -128,7 +128,9 @@ To call for a standard vote, here is a template PR comment:
     If a vote has "timed out," as described in "Quorum," the documentation regarding
     notification records should also be in this file.
 
-    As stated above, votes occurring via a CFEP do not require a record.
+    Votes on CFEPs which did not invoke the rules on quorums described below do
+    not require a vote summary. Any CFEP vote which does use the quorum rules
+    requires a vote summary in order to document it properly.
 
 ----
 
