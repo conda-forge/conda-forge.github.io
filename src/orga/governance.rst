@@ -113,7 +113,7 @@ To call for a standard vote, here is a template PR comment:
 
 ----
 
-:Posting results: To maintain the historical record, the outcome of any standard,
+:Posting results: To maintain the historical record, the outcome of any standard vote,
     except those excluded in this section, should be recorded in the "vote-results" folder at
     https://github.com/conda-forge/conda-forge.github.io/tree/master/vote-results
 
