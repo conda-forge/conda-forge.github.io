@@ -8,3 +8,5 @@ elm-stuff
 
 # OS-X crap
 .DS_Store
+
+rtd/_build
