@@ -299,6 +299,16 @@ htmlhelp_basename = 'conda-forgedoc'
 #texinfo_no_detailmenu = False
 
 
+# lifted from dask-ml
+templates_path = ["templates"]
+pages = [
+    "index",
+]
+html_additional_pages = {page: "redirect.html" for page in pages}
+html_context = {
+    "redirects": {page: f"https://conda-forge.org/docs/{page}" for page in pages}}
+
+
 def add_404(app, docname):
     if app.builder.format == "html":
         pth_index = os.path.join(app.outdir, "index.html")
