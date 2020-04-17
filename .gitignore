@@ -1,5 +1,6 @@
 # Ignore doc build
 src/_build/
+src/default.profraw
 # Ignore sphinx .buildinfo metadata
 docs/.buildinfo
 
@@ -9,4 +10,6 @@ elm-stuff
 # OS-X crap
 .DS_Store
 
+# Ignore RTD redirect build
 rtd/_build
+rtd/default.profraw
