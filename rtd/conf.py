@@ -12,6 +12,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+import shutil
 import sys
 import os
 
@@ -296,3 +297,14 @@ htmlhelp_basename = 'conda-forgedoc'
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+
+def add_404(app, docname):
+    if app.builder.name == "html":
+        pth_index = os.path.join(app.outdir, "index.html")
+        pth_out = os.path.join(app.outdir, "404.html")
+        shutil.copyfile(pth_index, pth_out)
+
+
+def setup(app):
+    app.connect("build-finished", add_404)
