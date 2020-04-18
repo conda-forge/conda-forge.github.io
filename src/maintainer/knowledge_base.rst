@@ -81,6 +81,8 @@ Here are some things you should check,
 
 5. Check that the symbols exported are the same.
 
+6. Check that additional packaging information stays the same, e.g. is the same pkg-config information provided.
+
 
 Particularities on Windows
 ==========================
