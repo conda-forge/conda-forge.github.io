@@ -114,6 +114,27 @@ code layout and aren’t intended to be used “as is”.</p>
 <p>See also the <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> in the Windows section below for an additional example.</p>
 <p>Other useful <code class="docutils literal notranslate"><span class="pre">cmake</span></code> options are <code class="docutils literal notranslate"><span class="pre">-B&lt;directory&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">-S&lt;directory&gt;</span></code> to specify build and source
 directories.</p>
+<div class="section" id="moving-from-an-autotools-build-to-a-cmake-build">
+<h3>Moving from an autotools build to a CMake build<a class="headerlink" href="#moving-from-an-autotools-build-to-a-cmake-build" title="Permalink to this headline">¶</a></h3>
+<p>Some packages maintain an autotools build and a cmake build. Some maintainers
+would like to switch to a cmake build because that provides windows builds
+easily. These builds are mostly not ABI compatible with each other.
+Here are some things you should check,</p>
+<ol class="arabic">
+<li><p>Check that both libraries have the same SONAME on linux</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">readelf</span> <span class="pre">-d</span> <span class="pre">/path/to/lib.so</span></code></p>
+</li>
+<li><p>Check that both libraries have the same install name and have the same
+compatibility and current versions.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">otool</span> <span class="pre">-L</span> <span class="pre">/path/to/lib.dylib</span></code>. The second line should give you
+the three pieces of information</p>
+</li>
+<li><p>Check that the file list is the same in both.</p></li>
+<li><p>Check that you use the same options as the same autoconf build.</p></li>
+<li><p>Check that the symbols exported are the same.</p></li>
+<li><p>Check that additional packaging information stays the same, e.g. is the same pkg-config information provided.</p></li>
+</ol>
+</div>
 </div>
 <div class="section" id="particularities-on-windows">
 <h2>Particularities on Windows<a class="headerlink" href="#particularities-on-windows" title="Permalink to this headline">¶</a></h2>
@@ -859,7 +880,10 @@ conda-build</p>
 <li class="toctree-l2"><a class="reference internal" href="pinning_deps.html">Pinned dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Knowledge base</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#using-cmake">Using CMake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-cmake">Using CMake</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#moving-from-an-autotools-build-to-a-cmake-build">Moving from an autotools build to a CMake build</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#particularities-on-windows">Particularities on Windows</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#local-testing">Local testing</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#simple-cmake-based-bld-bat">Simple CMake-Based <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code></a></li>
@@ -990,7 +1014,7 @@ conda-build</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.2.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
