@@ -4,7 +4,7 @@ channels:
 dependencies:
   - python=3
   - conda-smithy
-  - sphinx
+  - sphinx<3
   - cloud_sptheme
   - sphinxcontrib-fulltoc
   - make
