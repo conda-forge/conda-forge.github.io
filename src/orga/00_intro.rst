@@ -6,4 +6,5 @@ Organisation Documentation
   governance
   subteams
   joining-the-team
+  minutes/00_intro
   
