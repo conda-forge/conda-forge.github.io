@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
     <title>Maintaining packages &#8212; conda-forge 2019.01 documentation</title>
@@ -76,11 +76,11 @@
 This means that a maintainer can create branches in the main repo.
 For updates, using a branch in the main repo is discouraged because,</p>
 <ol class="arabic">
-<li><p><a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a> is run on both the branch and the PR.</p>
-<p>This wastes <a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a> resources</p>
+<li><p><a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> is run on both the branch and the PR.</p>
+<p>This wastes <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> resources</p>
 </li>
 <li><p>Branches are automatically published.</p>
-<p>This means if you push a version update to a branch and then create a <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a>, conda packages will be published to anaconda.org before the PR is merged.</p>
+<p>This means if you push a version update to a branch and then create a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>, conda packages will be published to anaconda.org before the PR is merged.</p>
 </li>
 </ol>
 <div class="admonition important">
@@ -183,7 +183,7 @@ As a rule of thumb, the build number is increased whenever a new package with th
 </div>
 <div class="section" id="rerendering-feedstocks">
 <span id="dev-update-rerender"></span><h2>Rerendering feedstocks<a class="headerlink" href="#rerendering-feedstocks" title="Permalink to this headline">¶</a></h2>
-<p>Rerendering is conda-forge’s way to update the files common to all feedstocks (e.g. README, <a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a> configuration, pinned dependencies)</p>
+<p>Rerendering is conda-forge’s way to update the files common to all feedstocks (e.g. README, <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> configuration, pinned dependencies)</p>
 <p>Rerendering can be done in two ways:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -218,7 +218,7 @@ To do this drop <code class="docutils literal notranslate"><span class="pre">-c<
 </div>
 <div class="section" id="testing-changes-locally">
 <h2>Testing changes locally<a class="headerlink" href="#testing-changes-locally" title="Permalink to this headline">¶</a></h2>
-<p>If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is built by our <a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a>.</p>
+<p>If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is built by our <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a>.</p>
 <p>If you want to build and test updates to a feedstock locally, go to the root
 feedstock directory and run:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python build-locally.py
@@ -301,7 +301,6 @@ package (an example would be to re-render the feedstock to support new Python ve
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../minutes/00_intro.html">Core team meeting minutes</a></li>
 </ul>
 
   </div>
@@ -376,7 +375,7 @@ package (an example would be to re-render the feedstock to support new Python ve
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2019, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
