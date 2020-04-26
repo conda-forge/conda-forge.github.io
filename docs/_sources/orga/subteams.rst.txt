@@ -200,6 +200,7 @@ the following are members of the staged-recipes team and have commit rights.
  - Igor T. Ghisi <>
  - Johannes Köster <>
  - Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
+ - Nehal J Wani <nehaljw.kkd1@gmail.com>
  - Peter M. Landwehr <>
  - Patrick Sodré <psodre@gmail.com>
  - Sylvain Corlay <sylvain.corlay@gmail.com>
