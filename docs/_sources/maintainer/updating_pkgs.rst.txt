@@ -22,7 +22,7 @@ For updates, using a branch in the main repo is discouraged because,
    This means if you push a version update to a branch and then create a :term:`PR`, conda packages will be published to anaconda.org before the PR is merged.
 
 .. important::
-  For these reasons, maintainers are asked to fork the feedstock, push to a branch in the fork and then open a PR to the ``conda-forge`` repo.
+  For these reasons, maintainers are asked to fork the feedstock to their personal account, push to a branch in the fork and then open a PR to the ``conda-forge`` repo.
 
 Pushing to regro-cf-autotick-bot branch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
