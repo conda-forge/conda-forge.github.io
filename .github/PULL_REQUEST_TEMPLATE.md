@@ -1,5 +1,7 @@
 <!--
 Thank you for pull request.
+Please note that the `docs` subdir is generated from the sphinx sources in `src`, changes 
+to `.html` files will only be effective if applied to the respective `.rst`.
 -->
 
 <!--
