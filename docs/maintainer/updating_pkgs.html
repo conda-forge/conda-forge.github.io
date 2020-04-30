@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Maintaining packages &#8212; conda-forge 2020.04.27 documentation</title>
+    <title>Maintaining packages &#8212; conda-forge 2020.04.30 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.04.27 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.04.30 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -236,8 +236,15 @@ feedstock directory and run:</p>
 <p>to save it in a text file for future inspection.</p>
 </div>
 <div class="section" id="removing-broken-packages">
-<h2>Removing broken packages<a class="headerlink" href="#removing-broken-packages" title="Permalink to this headline">¶</a></h2>
-<p>Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel. In this case, core can help you (see <a class="reference internal" href="../orga/guidelines.html#fix-broken-packages"><span class="std std-ref">Fixing Broken Packages</span></a>)</p>
+<span id="maint-fix-broken-packages"></span><h2>Removing broken packages<a class="headerlink" href="#removing-broken-packages" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel.</p>
+<p>Following steps will remove broken packages from the channel:</p>
+<ol class="arabic simple">
+<li><p>Locate the paths to broken files on <a class="reference external" href="https://anaconda.org">anaconda.org</a>, by searching for the conda-forge package and switching to the files tab.</p></li>
+<li><p>Fork <a class="reference external" href="https://github.com/conda-forge/cf-mark-broken">conda-forge/cf-mark-broken</a> and add a new text file in the <code class="docutils literal notranslate"><span class="pre">pkgs</span></code> directory.</p></li>
+<li><p>Add the broken files to the new text file, one path per line. See <a class="reference external" href="https://github.com/conda-forge/cf-mark-broken/blob/master/pkgs/example.txt">pkgs/example.txt</a> for an example file.</p></li>
+<li><p>Open a new PR. Once merged, a bot will label all listed files as broken, thus effectively removing them from the channel.</p></li>
+</ol>
 </div>
 <div class="section" id="archiving-feedstocks">
 <h2>Archiving feedstocks<a class="headerlink" href="#archiving-feedstocks" title="Permalink to this headline">¶</a></h2>
@@ -366,7 +373,7 @@ package (an example would be to re-render the feedstock to support new Python ve
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.04.27 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.04.30 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>

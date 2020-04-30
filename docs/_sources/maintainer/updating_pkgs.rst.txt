@@ -194,10 +194,19 @@ Note that for long build logs one can do
 to save it in a text file for future inspection.
 
 
+.. _maint_fix_broken_packages:
+
 Removing broken packages
 ========================
 
-Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel. In this case, core can help you (see :ref:`fix_broken_packages`)
+Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel.
+
+Following steps will remove broken packages from the channel:
+
+1. Locate the paths to broken files on `anaconda.org <https://anaconda.org>`__, by searching for the conda-forge package and switching to the files tab.
+2. Fork `conda-forge/cf-mark-broken <https://github.com/conda-forge/cf-mark-broken>`__ and add a new text file in the ``pkgs`` directory.
+3. Add the broken files to the new text file, one path per line. See `pkgs/example.txt <https://github.com/conda-forge/cf-mark-broken/blob/master/pkgs/example.txt>`__ for an example file.
+4. Open a new PR. Once merged, a bot will label all listed files as broken, thus effectively removing them from the channel.
 
 
 Archiving feedstocks
