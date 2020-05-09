@@ -30,6 +30,9 @@ Announcements
        channel will happen automatically. 
      * Should a copy request fail, you will get a notification via a comment on the commit 
        to master.
+     * As part of this process, uploads from ``appveyor`` will no longer be allowed unless there is 
+       a significant barrier to using ``azure``. We have recently upgraded the compiler infrastructure 
+       on ``azure`` to support this change in policy.
 
     Despite our extensive testing, we do not expect this change to be completely smooth, 
     so please bear with us while we are rolling out this change.
