@@ -35,10 +35,8 @@ Announcements
        on ``azure`` to support this change in policy.
 
     Despite our extensive testing, we do not expect this change to be completely smooth, 
-    so please bear with us while we are rolling out this change.
-
-    As always, if you have any questions, concerns, or trouble, you can find us on gitter or 
-    bump us directly on github!
+    so please bear with us. As always, if you have any questions, concerns, or trouble, you 
+    can find us on gitter or bump us directly on github!
 
 :2020-03-24: ``vs2015`` to ``vs2017`` Transition
 
