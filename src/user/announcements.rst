@@ -15,7 +15,7 @@ Announcements
     What will you see as a feedstock maintainer?
 
      * Starting this week, the ``admin-migrations`` service will be making commits to all 
-       feedstocks to provision them with the necessary, configuration, API keys, and tokens. 
+       feedstocks to provision them with the necessary configuration, API keys, and tokens. 
      * Each feedstock will now be provisioned with a secret token. This token should not be 
        shared or taken out of the CI services. It is used to identify the feedstock during 
        the upload process.
