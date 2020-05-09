@@ -4,6 +4,33 @@ Announcements
 2020
 ----
 
+:2020-05-09: New Staging Process for ``anaconda.org`` Uploads
+
+    Starting this week, we are changing the way we upload packages to ``anaconda.org``. 
+    We will move from direct uploads to the ``conda-forge`` ``main`` channel to using a 
+    staging organization/channel combined with a copy request from the staging channel to 
+    the production channel. This new process will allow us to perform some validation on 
+    the outputs of feedstocks before they are released.
+    
+    What will you see as a feedstock maintainer?
+
+     * Starting this week, the ``admin-migrations`` service will be making commits to all 
+       feedstocks to provision them with the necessary API keys and tokens. 
+     * Additionally, it will be setting a new key in the ``conda-forge.yml``, 
+       ``conda_forge_output_validation``. This key indicates to ``conda-smithy`` that it 
+       should include the output validation calls in the feedstock CI scripts.
+     * Currently open PRs will need to have this key added by hand and then rerendered.
+     * When PRs are running the CI scripts, they will do some initial validation of the 
+       feedstock outputs. If this validation fails, the CI job will fail. Please see the 
+       CI logs for the error message which is printed after ``conda-build`` runs.
+     * Once a PR is merged to master, the copy from the staging channel to the production 
+       channel will happen automatically. 
+     * Should a copy request fail, you will get a notification via a comment on the commit 
+       to master.
+    
+    As always, if you have any questions, concerns, or trouble, you can find us on gitter or 
+    bump us directly on github!
+
 :2020-03-24: ``vs2015`` to ``vs2017`` Transition
 
     We are formally deprecating ``vs2015`` in two weeks on 2020-04-07 and will move to 
