@@ -11,13 +11,16 @@ Announcements
     staging organization/channel combined with a copy request from the staging channel to 
     the production channel. This new process will allow us to perform some validation on 
     the outputs of feedstocks before they are released.
-    
+
     What will you see as a feedstock maintainer?
 
      * Starting this week, the ``admin-migrations`` service will be making commits to all 
-       feedstocks to provision them with the necessary API keys and tokens. 
-     * Additionally, it will be setting a new key in the ``conda-forge.yml``, 
-       ``conda_forge_output_validation``. This key indicates to ``conda-smithy`` that it 
+       feedstocks to provision them with the necessary, configuration, API keys, and tokens. 
+     * Each feedstock will now be provisioned with a secret token. This token should not be 
+       shared or taken out of the CI services. It is used to identify the feedstock during 
+       the upload process.
+     * The ``admin-migrations`` service will be setting a new top-level key in the ``conda-forge.yml``, 
+       ``conda_forge_output_validation: true``. This key indicates to ``conda-smithy`` that it 
        should include the output validation calls in the feedstock CI scripts.
      * Currently open PRs will need to have this key added by hand and then rerendered.
      * When PRs are running the CI scripts, they will do some initial validation of the 
@@ -27,7 +30,10 @@ Announcements
        channel will happen automatically. 
      * Should a copy request fail, you will get a notification via a comment on the commit 
        to master.
-    
+
+    Despite our extensive testing, we do not expect this change to be completely smooth, 
+    so please bear with us while we are rolling out this change.
+
     As always, if you have any questions, concerns, or trouble, you can find us on gitter or 
     bump us directly on github!
 
