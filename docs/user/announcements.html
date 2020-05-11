@@ -71,8 +71,43 @@
 <div class="section" id="id1">
 <h2>2020<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <dl class="field-list">
-<dt class="field-odd">2020-03-24</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">vs2015</span></code> to <code class="docutils literal notranslate"><span class="pre">vs2017</span></code> Transition</p>
+<dt class="field-odd">2020-05-09</dt>
+<dd class="field-odd"><p>New Staging Process for <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code> Uploads</p>
+<p>Starting this week, we are changing the way we upload packages to <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code>.
+We will move from direct uploads to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> <code class="docutils literal notranslate"><span class="pre">main</span></code> channel to using a
+staging organization/channel combined with a copy request from the staging channel to
+the production channel. This new process will allow us to perform some validation on
+the outputs of feedstocks before they are released.</p>
+<p>What will you see as a feedstock maintainer?</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Starting this week, the <code class="docutils literal notranslate"><span class="pre">admin-migrations</span></code> service will be making commits to all
+feedstocks to provision them with the necessary configuration, API keys, and tokens.</p></li>
+<li><p>Each feedstock will now be provisioned with a secret token. This token should not be
+shared or taken out of the CI services. It is used to identify the feedstock during
+the upload process.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">admin-migrations</span></code> service will be setting a new top-level key in the <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>,
+<code class="docutils literal notranslate"><span class="pre">conda_forge_output_validation:</span> <span class="pre">true</span></code>. This key indicates to <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> that it
+should include the output validation calls in the feedstock CI scripts.</p></li>
+<li><p>Currently open PRs will need to have this key added by hand and then rerendered.</p></li>
+<li><p>When PRs are running the CI scripts, they will do some initial validation of the
+feedstock outputs. If this validation fails, the CI job will fail. Please see the
+CI logs for the error message which is printed after <code class="docutils literal notranslate"><span class="pre">conda-build</span></code> runs.</p></li>
+<li><p>Once a PR is merged to master, the copy from the staging channel to the production
+channel will happen automatically.</p></li>
+<li><p>Should a copy request fail, you will get a notification via a comment on the commit
+to master.</p></li>
+<li><p>As part of this process, uploads from <code class="docutils literal notranslate"><span class="pre">appveyor</span></code> will no longer be allowed unless there is
+a significant barrier to using <code class="docutils literal notranslate"><span class="pre">azure</span></code>. We have recently upgraded the compiler infrastructure
+on <code class="docutils literal notranslate"><span class="pre">azure</span></code> to support this change in policy.</p></li>
+</ul>
+</div></blockquote>
+<p>Despite our extensive testing, we do not expect this change to be completely smooth,
+so please bear with us. As always, if you have any questions, concerns, or trouble, you
+can find us on gitter or bump us directly on github!</p>
+</dd>
+<dt class="field-even">2020-03-24</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">vs2015</span></code> to <code class="docutils literal notranslate"><span class="pre">vs2017</span></code> Transition</p>
 <p>We are formally deprecating <code class="docutils literal notranslate"><span class="pre">vs2015</span></code> in two weeks on 2020-04-07 and will move to
 <code class="docutils literal notranslate"><span class="pre">vs2017</span></code>. This change will enable us to support the usage of <code class="docutils literal notranslate"><span class="pre">msbuild</span></code> on Azure for the
 <code class="docutils literal notranslate"><span class="pre">win</span></code> platform and will provide additional support for <code class="docutils literal notranslate"><span class="pre">C++</span></code>.
@@ -81,8 +116,8 @@ An exception is static libraries compiled with whole program optimization (/GL f
 incompatible with the <code class="docutils literal notranslate"><span class="pre">vs2017</span></code> toolchain. These static libraries will need to be rebuilt
 using <code class="docutils literal notranslate"><span class="pre">vs2017</span></code>.</p>
 </dd>
-<dt class="field-even">2020-03-23</dt>
-<dd class="field-even"><p>Appveyor Deprecation</p>
+<dt class="field-odd">2020-03-23</dt>
+<dd class="field-odd"><p>Appveyor Deprecation</p>
 <p>We are now starting to formally deprecate Appveyor in favor of Azure for builds on the
 <code class="docutils literal notranslate"><span class="pre">win</span></code> platform. Note that we have not been adding appveyor to new feedstocks
 for a while, so this is not a completely new change in policy. We will now, however, begin to
@@ -92,8 +127,8 @@ feedstocks to move them to Azure. We are aware that some packages built with <co
 cannot yet be moved to Azure and so are leaving Appveyor on for those feedstocks for
 now.</p>
 </dd>
-<dt class="field-odd">2020-03-21</dt>
-<dd class="field-odd"><p>Python 2.7 Admin Command Available</p>
+<dt class="field-even">2020-03-21</dt>
+<dd class="field-even"><p>Python 2.7 Admin Command Available</p>
 <p>A webservices admin command is now available to add Python 2.7 back to
 feedstocks. Put <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin</span> <span class="pre">add</span> <span class="pre">python</span> <span class="pre">2.7</span></code> in the title on an
 issue in your feedstock. The admin webservices bot will then issue a PR
@@ -101,8 +136,8 @@ adding back Python 2.7. Note that this PR will remove other Python builds
 and any <code class="docutils literal notranslate"><span class="pre">win</span></code>, <code class="docutils literal notranslate"><span class="pre">aarch64</span></code>, or <code class="docutils literal notranslate"><span class="pre">ppc64le</span></code> builds. If you want to keep
 those, merge the PR into a separate branch on your feedstock.</p>
 </dd>
-<dt class="field-even">2020-03-18</dt>
-<dd class="field-even"><p>Python 2.7 and <code class="docutils literal notranslate"><span class="pre">vs2008</span></code> Deprecation</p>
+<dt class="field-odd">2020-03-18</dt>
+<dd class="field-odd"><p>Python 2.7 and <code class="docutils literal notranslate"><span class="pre">vs2008</span></code> Deprecation</p>
 <ul class="simple">
 <li><p>Python 2.7 is no longer supported by the upstream developers as of 2020-01-01.
 Conda-forge is thus deprecating its Python 2.7 support. Conda-forge will provide
