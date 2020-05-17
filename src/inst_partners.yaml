@@ -1,0 +1,26 @@
+Microsoft Aure:
+  Description: Azure provides build systems for Windows, OSX, and Linux
+  Site URL: https://azure.microsoft.com/en-us/services/devops/pipelines/
+  contribution type: infrastructure
+Oregon State University Open Source Lab:
+  Description: OSL provides ppc64le machines for long running jobs
+  Logo UR: https://osuosl.org/images/osllogo-print_0.png
+  Site URL: https://osuosl.org
+  contribution type: infrastructure
+Works on Arm:
+  Description: Works on Arm project provides aarch64 machines for long running jobs
+  Logo URL: https://www.worksonarm.com/wp-content/themes/worksonarm2019/assets/images/logo.png
+  Site URL: https://www.worksonarm.com/
+  contribution type: infrastructure
+IOOS:
+  Description: The U.S. Integrated Ocean Observing System
+  Developers: Filipe Fernandes
+  Logo URL: https://cdn.ioos.noaa.gov/media/2017/12/IOOS_logo.png
+  Site URL: https://ioos.noaa.gov/
+  contribution type: dev support
+Anaconda Inc:
+  Description: Anaconda hosts the conda-forge package repository on anaconda.org and maintains conda and conda-build
+  Developers: jjhelmus
+  Logo URL: https://know.anaconda.com/rs/387-XNW-688/images/2020_Anaconda_Logo_RGB_Corporate.png
+  Site URL: https://www.anaconda.com/
+  contribution type: [infrastructure, dev support]
