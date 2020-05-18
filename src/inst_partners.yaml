@@ -14,9 +14,11 @@ Works on Arm:
   contribution type: infrastructure
 IOOS:
   Description: The U.S. Integrated Ocean Observing System
-  Developers: Filipe Fernandes
+  Developers: ocefpaf
   Logo URL: https://cdn.ioos.noaa.gov/media/2017/12/IOOS_logo.png
-  Site URL: https://ioos.noaa.gov/
+  Site URL:
+    - https://ioos.noaa.gov/
+    - https://ioos.us/
   contribution type: dev support
 Anaconda Inc:
   Description: Anaconda hosts the conda-forge package repository on anaconda.org and maintains conda and conda-build
