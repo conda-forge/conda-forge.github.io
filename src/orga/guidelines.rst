@@ -87,7 +87,12 @@ Fortunately, there are options for optimizing the development of a package.
 Renaming Packages
 =================
 
-Sometimes packages are misnamed. To correct the name of the package, please submit a PR into staged-recipes with the correct name. During the review process please make certain to note that the package is a rename and contact a member of conda-forge/core to remove the old feedstock (and potentially package if needed).
+Sometimes packages are misnamed.
+To correct the name of the package, please submit a PR into staged-recipes with the correct name.
+During the review process please make certain to note that the package is a rename and contact a member of conda-forge/core to remove the old feedstock (and potentially package if needed).
+Occasionally the .gitmodules file in the `feedstocks <https://github.com/conda-forge/feedstocks/blob/master/.gitmodules>` needs to be updated to remove the old feedstock.
+It's not entirely clear what those circumstances are.
+See `conda-forge.github.io#1070 <https://github.com/conda-forge/conda-forge.github.io/issues/1070>`.
 
 .. _fix_broken_packages:
 
