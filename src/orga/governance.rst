@@ -310,8 +310,9 @@ Current Members of Core
 In alphabetical order,
 
 * Anthony Scopatz, @scopatz
-* Christopher J. 'CJ' Wright, @cj-wright
-* D.J. Sutherland, @djsutherland
+* Björn Grüning, @bgruening
+* Christopher J. "CJ" Wright, @CJ-Wright
+* Dougal J. Sutherland, @dougalsutherland
 * Eric Dill, @ericdill
 * Filipe Pires Alvarenga Fernandes, @ocefpaf
 * Isuru Fernando, @isuruf
@@ -326,8 +327,11 @@ In alphabetical order,
 * Matthew R. Becker, @beckermr
 * Mike Sarahan, @msarahan
 * Min Ragan-Kelley, @minrk
+* Patrick Snape, @patricksnape
 * Patrick Sodré, @sodre
 * Peter K. G. Williams, @pkgw
+* Phil Elson, @pelson
+* Sophia Castellarin, @soapy1
 * Uwe L. Korn, @xhochy
 * Wolf Vollprecht, @wolfv
 
