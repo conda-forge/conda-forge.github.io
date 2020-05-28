@@ -309,27 +309,27 @@ Current Members of Core
 -----------------------
 In alphabetical order,
 
-* Marcel Bargull, @mbargull
-* Matthew Becker, @beckermr
-* Lori Burns, @loriab
-* Sophia Castellarin, @soapy1
-* Matt Craig, @mwcraig
+* Anthony Scopatz, @scopatz
+* Christopher J. 'CJ' Wright, @cj-wright
+* D.J. Sutherland, @djsutherland
 * Eric Dill, @ericdill
-* Phil Elson, @pelson
 * Filipe Pires Alvarenga Fernandes, @ocefpaf
 * Isuru Fernando, @isuruf
-* Björn Grüning, @bgruening
-* Jonathan J. Helmus, @jjhelmus
 * John Kirkham, @jakirkham
+* Jonathan J. Helmus, @jjhelmus
+* Joshua Adelman, @synapticarbors
+* Lori A. Burns, @loriab
+* Marcel Bargull, @mbargull
+* Marcelo Duarte Trevisani, @marcelotrevisani
 * Marius van Niekerk, @mariusvniekerk
-* Min Ragan-Kelley, @minrk
+* Matt Craig, @mwcraig
+* Matthew R. Becker, @beckermr
 * Mike Sarahan, @msarahan
-* Anthony Scopatz, @scopatz
-* Patrick Snape, @patricksnape
+* Min Ragan-Kelley, @minrk
 * Patrick Sodré, @sodre
-* Dougal J. Sutherland, @dougalsutherland
 * Peter K. G. Williams, @pkgw
-* Christopher J. "CJ" Wright, @CJ-Wright
+* Uwe L. Korn, @xhochy
+* Wolf Vollprecht, @wolfv
 
 Document History
 ----------------
