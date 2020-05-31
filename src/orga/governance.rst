@@ -310,7 +310,6 @@ Current Members of Core
 In alphabetical order,
 
 * Anthony Scopatz, @scopatz
-* Björn Grüning, @bgruening
 * Christopher J. "CJ" Wright, @CJ-Wright
 * Dougal J. Sutherland, @dougalsutherland
 * Eric Dill, @ericdill
@@ -327,13 +326,20 @@ In alphabetical order,
 * Matthew R. Becker, @beckermr
 * Mike Sarahan, @msarahan
 * Min Ragan-Kelley, @minrk
-* Patrick Snape, @patricksnape
 * Patrick Sodré, @sodre
 * Peter K. G. Williams, @pkgw
-* Phil Elson, @pelson
-* Sophia Castellarin, @soapy1
 * Uwe L. Korn, @xhochy
 * Wolf Vollprecht, @wolfv
+
+Emetirus members
+-----------------------
+In alphabetical order,
+
+* Björn Grüning, @bgruening
+* Patrick Snape, @patricksnape
+* Phil Elson, @pelson
+* Sophia Castellarin, @soapy1
+
 
 Document History
 ----------------
