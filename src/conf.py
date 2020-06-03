@@ -11,9 +11,9 @@
 #
 # All configuration values have a default; values that are commented out
 # serve to show the default.
-
-import sys
+import csv
 import os
+import sys
 import datetime
 
 import cloud_sptheme as csp
@@ -307,3 +307,35 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+def rstjinja(app, docname, source):
+    def get_formated_names(path_file):
+        with open(path_file, "r") as csv_file:
+            dict_csv = csv.DictReader(csv_file)
+            sorted_csv = sorted(dict_csv, key=lambda d: d["name"])
+        return "\n".join(
+            f"* `{m['name']},"
+            f" @{m['github_username']}"
+            f" <https://github.com/{m['github_username']}>`__" for m in sorted_csv
+        )
+
+    if (
+            app.builder.format != "html"
+            or os.path.basename(docname) != "governance"
+    ):
+        return
+    src = source[0]
+    current_file = os.path.dirname(__file__)
+    context = app.config.html_context
+    context["core_members"] = get_formated_names(
+        os.path.join(current_file, "core.csv")
+    )
+    context["emeritus_members"] = get_formated_names(
+        os.path.join(current_file, "emeritus.csv")
+    )
+    rendered = app.builder.templates.render_string(src, context)
+    source[0] = rendered
+
+
+def setup(app):
+    app.connect("source-read", rstjinja)

@@ -309,27 +309,13 @@ Current Members of Core
 -----------------------
 In alphabetical order,
 
-* Marcel Bargull, @mbargull
-* Matthew Becker, @beckermr
-* Lori Burns, @loriab
-* Sophia Castellarin, @soapy1
-* Matt Craig, @mwcraig
-* Eric Dill, @ericdill
-* Phil Elson, @pelson
-* Filipe Pires Alvarenga Fernandes, @ocefpaf
-* Isuru Fernando, @isuruf
-* Björn Grüning, @bgruening
-* Jonathan J. Helmus, @jjhelmus
-* John Kirkham, @jakirkham
-* Marius van Niekerk, @mariusvniekerk
-* Min Ragan-Kelley, @minrk
-* Mike Sarahan, @msarahan
-* Anthony Scopatz, @scopatz
-* Patrick Snape, @patricksnape
-* Patrick Sodré, @sodre
-* Dougal J. Sutherland, @dougalsutherland
-* Peter K. G. Williams, @pkgw
-* Christopher J. "CJ" Wright, @CJ-Wright
+{{ core_members }}
+
+Emetirus members
+-----------------------
+In alphabetical order,
+
+{{ emeritus_members }}
 
 Document History
 ----------------
