@@ -121,27 +121,10 @@ by default. However, the package remains available so as to avoid the problems l
 To get your package relabeled as ``broken`` instead of ``main``, please refer to :ref:`maint_fix_broken_packages`.
 
 
-.. _becoming_maintainer:
-
 Becoming a maintainer
 =====================
 
 Conda-forge is a community project and it can therefore happen that feedstocks become temporarily abandoned.
-You can join the maintainer team by following steps:
+You can join the maintainer team of a feedstock by adding your github-id to the ``recipe-maintainers`` section in the recipe's ``meta.yaml``. 
+Please refer to :ref:`maint_updating_maintainers` for detailed instructions.
 
-1) Add your github-id to the ``recipe-maintainers`` section at the bottom of the ``recipe/meta.yaml`` file in the feedstock:
-
-  .. code-block:: yaml
-
-    extra:
-      recipe-maintainers:
-        - current-maintainer
-        - your-github-id
-
-2) Commit and push the change to your fork and open a :term:`PR` against the feedstock you want to become a maintainer of.
-
-3) :ref:`Rerender<dev_update_rerender>` the feedstock by posting ``@conda-forge-admin, please rerender`` as a new comment in the :term:`PR`.
-
-4) Wait until the :term:`PR` is merged. If the current maintainer is no longer active, you can ping ``@conda-forge/core`` and ask for a merge.
-
-Once the PR is merged, our infrastructure will grant you maintainer permissions.
