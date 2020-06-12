@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Maintaining packages &#8212; conda-forge 2020.06.03 documentation</title>
+    <title>Maintaining packages &#8212; conda-forge 2020.06.12 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.06.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.06.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -253,6 +253,27 @@ the repository. An archived repository can no longer accept PRs and issues, whic
 package (an example would be to re-render the feedstock to support new Python versions). Note that this <strong>does not</strong> remove the existing packages, those will still be available.</p>
 <p>If you believe a feedstock should be archived, please contact <a class="reference external" href="https://github.com/orgs/conda-forge/teams/core">&#64;conda-forge/core</a>.</p>
 </div>
+<div class="section" id="updating-the-maintainer-list">
+<span id="maint-updating-maintainers"></span><h2>Updating the maintainer list<a class="headerlink" href="#updating-the-maintainer-list" title="Permalink to this headline">¶</a></h2>
+<p>The list of maintainers of a feedstock is recorded in the recipe itself. The list of maintainers can be updated with following steps:</p>
+<ol class="arabic simple">
+<li><p>Add your github-id to the <code class="docutils literal notranslate"><span class="pre">recipe-maintainers</span></code> section at the bottom of the <code class="docutils literal notranslate"><span class="pre">recipe/meta.yaml</span></code> file in the feedstock:</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">extra</span><span class="p">:</span>
+  <span class="nt">recipe-maintainers</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">current-maintainer</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">your-github-id</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>Commit and push the change to your fork and open a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> against the feedstock you want to become a maintainer of.</p></li>
+<li><p><a class="reference internal" href="#dev-update-rerender"><span class="std std-ref">Rerender</span></a> the feedstock by posting <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">rerender</span></code> as a new comment in the <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>.</p></li>
+<li><p>Wait until the <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> is merged. If the current maintainer is no longer active, you can ping <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge/core</span></code> and ask for a merge.</p></li>
+</ol>
+<p>Once the PR is merged, our infrastructure will grant and revoke maintainer permissions.</p>
+</div>
 <div class="section" id="maintaining-several-versions">
 <h2>Maintaining several versions<a class="headerlink" href="#maintaining-several-versions" title="Permalink to this headline">¶</a></h2>
 <p>TODO: LTS branch</p>
@@ -297,6 +318,7 @@ package (an example would be to re-render the feedstock to support new Python ve
 <li class="toctree-l3"><a class="reference internal" href="#testing-changes-locally">Testing changes locally</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#removing-broken-packages">Removing broken packages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#archiving-feedstocks">Archiving feedstocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-the-maintainer-list">Updating the maintainer list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#maintaining-several-versions">Maintaining several versions</a></li>
 </ul>
 </li>
@@ -373,7 +395,7 @@ package (an example would be to re-render the feedstock to support new Python ve
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.06.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.06.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
