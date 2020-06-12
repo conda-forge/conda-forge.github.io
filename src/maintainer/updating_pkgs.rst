@@ -218,6 +218,30 @@ package (an example would be to re-render the feedstock to support new Python ve
 
 If you believe a feedstock should be archived, please contact `@conda-forge/core <https://github.com/orgs/conda-forge/teams/core>`__.
 
+.. _maint_updating_maintainers:
+
+Updating the maintainer list
+============================
+
+The list of maintainers of a feedstock is recorded in the recipe itself. The list of maintainers can be updated with following steps:
+
+1. Add your github-id to the ``recipe-maintainers`` section at the bottom of the ``recipe/meta.yaml`` file in the feedstock:
+
+  .. code-block:: yaml
+
+    extra:
+      recipe-maintainers:
+        - current-maintainer
+        - your-github-id
+
+2. Commit and push the change to your fork and open a :term:`PR` against the feedstock you want to become a maintainer of.
+
+3. :ref:`Rerender<dev_update_rerender>` the feedstock by posting ``@conda-forge-admin, please rerender`` as a new comment in the :term:`PR`.
+
+4. Wait until the :term:`PR` is merged. If the current maintainer is no longer active, you can ping ``@conda-forge/core`` and ask for a merge.
+
+Once the PR is merged, our infrastructure will grant and revoke maintainer permissions.
+
 
 Maintaining several versions
 ============================
