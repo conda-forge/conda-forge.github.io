@@ -612,7 +612,7 @@ Without a preferred ``nompi`` variant, recipes that require mpi are much simpler
 OpenMP
 ------
 
-You can enable OpenMP on macOS by adding the ``llvm-openmp`` package to the ``build``, ``host``, and ``run`` sections of the ``meta.yaml``.
+You can enable OpenMP on macOS by adding the ``llvm-openmp`` package to the ``build`` section of the ``meta.yaml``.
 For Linux OpenMP support is on by default, however it's better to explicitly depend on the `libgomp` package which is the OpenMP
 implementation from the GNU project.
 
