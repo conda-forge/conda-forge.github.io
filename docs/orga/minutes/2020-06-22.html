@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>2020-03-18 conda-forge core meeting &#8212; conda-forge 2020.06.25 documentation</title>
+    <title>2020-06-22 conda-forge core meeting &#8212; conda-forge 2020.06.25 documentation</title>
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -35,8 +35,8 @@
 
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2020-03-04 conda-forge core meeting" href="2020-03-04.html" />
-    <link rel="prev" title="2020-04-01 conda-forge core meeting" href="2020-04-01.html" /> 
+    <link rel="next" title="2020-05-27 conda-forge core meeting" href="2020-05-27.html" />
+    <link rel="prev" title="Core team meeting minutes" href="00_intro.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -48,10 +48,10 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="2020-03-04.html" title="2020-03-04 conda-forge core meeting"
+          <a href="2020-05-27.html" title="2020-05-27 conda-forge core meeting"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2020-04-01.html" title="2020-04-01 conda-forge core meeting"
+          <a href="00_intro.html" title="Core team meeting minutes"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">conda-forge 2020.06.25 documentation</a> &#187;</li>
 
@@ -68,49 +68,153 @@
           <div class="body" role="main">
             
   <div class="section" id="conda-forge-core-meeting">
-<h1>2020-03-18 conda-forge core meeting<a class="headerlink" href="#conda-forge-core-meeting" title="Permalink to this headline">¶</a></h1>
+<h1>2020-06-22 conda-forge core meeting<a class="headerlink" href="#conda-forge-core-meeting" title="Permalink to this headline">¶</a></h1>
 <hr class="docutils" />
 <div class="section" id="attendees">
 <h2>Attendees<a class="headerlink" href="#attendees" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Eric D</p></li>
+<li><p>Filipe</p></li>
+<li><p>Uwe</p></li>
+<li><p>Jonathan Helmus</p></li>
+<li><p>Kirkham</p></li>
+<li><p>Matt B.</p></li>
+<li><p>Anthony Scopatz</p></li>
+<li><p>Lori</p></li>
+<li><p>Cheng Lee</p></li>
+<li><p>Ray Douglass</p></li>
+<li><p>Keith Kraus</p></li>
+<li><p>Sylvain</p></li>
+<li><p>Mike Sarahan</p></li>
+<li><p>Wolf</p></li>
+<li><p>Isuru</p></li>
+</ul>
 </div>
 <div class="section" id="agenda">
 <h2>Agenda<a class="headerlink" href="#agenda" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="your-agenda-items">
 <h3>Your agenda items<a class="headerlink" href="#your-agenda-items" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>(MB) Communication on keybase: Who, when, why, what?</p>
+<li><p>[ ] (anyone) intros for new people on the line?</p></li>
+<li><p>[x] (FF) NumFOCUS updates on GH 2FA, Google Drive, and AWS</p>
 <ul>
-<li><p>What kinds of communication goes to keybase?</p>
+<li><p>GitHub 2FA issue has been resolved (only needed for core members)</p></li>
+<li><p>Donors names and addresses are in NumFocus Google Drive</p></li>
+<li><p>Need to respond to NumFocus on possible AWS usage, deadline has passed. The purpose here was to get credits for CF to use on AWS</p>
 <ul>
-<li><p>bot subteam is fully on keybase. used to use hangout chat, so keybase is definitely better than hangouts.</p></li>
-<li><p>bot passwords, API keys, etc. are on keybase</p></li>
+<li><p>Can send a note to Leah</p></li>
+<li><p>maybe get credits for AWS workspaces for windows machines? This would help with debugging windows stuff. Also have aarch64 machines. Edit the following doc if you’ve got ideas for how do to stuff with AWS. Next week Filipe will send an email to Leah / NumFocus</p></li>
+<li><p>https://hackmd.io/bXUZ8a08SBeTs4t9fVXR4A?edit</p></li>
 </ul>
 </li>
-<li><p>How do we avoid split-brain between gitter.im and keybase?</p></li>
 </ul>
 </li>
-<li><p>Whats up with the new google group?</p>
+<li><p>[x] (FF) Scipy BoF, sprint, and members attendance/presentations.</p>
 <ul>
-<li><p>Convienent format for emailing everyone without needing to dig out the csv list</p></li>
+<li><p>CJ/Marius will be handling packaging BoF.</p></li>
+<li><p>Anyone to handle sprints?</p></li>
+<li><p>Anyone submitting talks / tutorials?</p>
+<ul>
+<li><p>John to give talk on GPU packaging</p></li>
+<li><p>wolf giving talk on scikit-geometry</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>[x] (CJ) standing budget item</p>
+<ul>
+<li><p>Waiting on follow up on existing AWS charges</p></li>
+</ul>
+</li>
+<li><p>[x] (CJ/Anthony/MRB) making a conda-tools org for tooling (conda-smithy, conda, mamba, grayskull, boa, etc.)</p>
+<ul>
+<li><p>Bit of an existential threat of forking the community of conda package users. Would be good to try and avoid that.</p></li>
+<li><p>Centralize tools under one github org</p>
+<ul>
+<li><p>conda-forge org?</p>
+<ul>
+<li><p>benefit: already a NumFocus project.
+Get a lot of admin overhead for free
+(governance model, community participation, etc.)</p></li>
+</ul>
+</li>
+<li><p>conda-tools or new other org?</p>
+<ul>
+<li><p>putting tooling org under conda-forge raises
+questions with some enterprise users and some
+other users. Separate org may be easier</p></li>
+<li><p>Form new org, apply as new NumFocus project.
+Accomplishes same goal of bringing together single
+set of community led tools and projects for this ecosystem.</p></li>
+<li><p>Proposal: If we form new org just copy the conda-forge governance model</p></li>
+<li><p>This could also be a good place to have the specification
+discussions that we’ve been talking about for a while
+(conda, conda-build meta.yaml, etc.)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>(WV) Having specs in a centralized community-owned place would be
+great - makes planning for the future feasible.</p>
+<ul>
+<li><p>(JH) there’s a specs repo in the conda org, https://github.com/conda/schemas</p></li>
+</ul>
+</li>
+<li><p>(FF) How do we avoid stifling innovation?</p>
+<ul>
+<li><p>pypa sort of has a “Graduate into top level org” policy.</p></li>
+<li><p>need to be a welcoming org. More along the lines of pyvis</p></li>
+</ul>
+</li>
+<li><p>(SC) What is considered “core” to jupyter is not the implementations,
+but the protocols / file formats / etc. If you write a tool in Jupyter
+that supports these then you have immediate access to a wide variety
+of tooling</p>
+<ul>
+<li><p>What is the analog of this for the conda ecosystem? package specs
+(meta.yaml), package formats, etc.?</p></li>
+</ul>
+</li>
+<li><p>Need to be careful about naming. Don’t want to become another
+“python packaging authority”</p></li>
+</ul>
+</li>
+<li><p>[ ] (WV) Quick announce of micromamba (https://gist.github.com/wolfv/fe1ea521979973ab1d016d95a589dcde)</p></li>
+<li><p>[ ] (WV) Update on standardization of next gen package format from <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/pull/1087/files#diff-22b0eaa2e5f72f138d4b095f7a87853fR52-R77">last meeting</a>?</p></li>
+<li><p>[ ] (MRB/Isuru) cos7 and CDTs plans</p>
+<ul>
+<li><p>merge this PR: https://github.com/conda/conda-build/pull/3969</p></li>
+<li><p>move all cos6/cos7 CDT packages from defaults to conda-forge</p></li>
+<li><p>update builds with <code class="docutils literal notranslate"><span class="pre">no_hoist</span></code> and run constrained on the sysroot packages</p></li>
+<li><p>migrate all of them to new sysroot and add dep on sysroot package</p></li>
+<li><p>remove shims in compilers</p></li>
+</ul>
+</li>
+<li><p>[ ] (FF) Should we do Outreachy as part of an effort to support diversity in tech? Advantages are low cost and high impact. Dissdvantages are the time effort from the mentors.</p></li>
+<li><p>[ ] (UK) CFEP-18: Packaging static libraries</p></li>
+<li><p>[ ] (IF) cf-mark-broken: Marking not broken packages as broken</p></li>
+<li><p>[ ] (KK) CUDA 11 support</p>
+<ul>
+<li><p>CUDA 11 dropped CentOS 6 support</p></li>
+<li><p>Ties into CentOS 7 migration above</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code> 11 - https://github.com/AnacondaRecipes/cudatoolkit-feedstock/pull/7</p></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="active-votes">
 <h3>Active votes<a class="headerlink" href="#active-votes" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Wolf to core</p></li>
-<li><p>CFEP-16</p>
-<ul>
-<li><p>https://github.com/conda-forge/cfep/pull/30#issuecomment-606064392</p></li>
-</ul>
-</li>
-</ul>
 </div>
 <div class="section" id="subteam-updates">
 <h3>Subteam updates<a class="headerlink" href="#subteam-updates" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="bot">
 <h4>Bot<a class="headerlink" href="#bot" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>[ ] (CJ) Status of openjdk, r-java stalled out</p></li>
+</ul>
+<div class="section" id="stuff-from-last-week-that-we-didnt-get-to">
+<h5>Stuff from last week that we didnt get to<a class="headerlink" href="#stuff-from-last-week-that-we-didnt-get-to" title="Permalink to this headline">¶</a></h5>
+</div>
 </div>
 <div class="section" id="arm">
 <h4>ARM<a class="headerlink" href="#arm" title="Permalink to this headline">¶</a></h4>
@@ -129,6 +233,12 @@
 </div>
 <div class="section" id="website">
 <h4>website<a class="headerlink" href="#website" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="security-systems">
+<h4>security+systems<a class="headerlink" href="#security-systems" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>still need to finish CFEP-13</p></li>
+</ul>
 </div>
 </div>
 <div class="section" id="ci-infrastructure">
@@ -152,6 +262,7 @@
 <ul>
 <li><p>INACTIVE - Merge in with some inactive-esque status?</p></li>
 <li><p>Lingering comment from &#64;saraedum. &#64;jakirkham, can you reply? Has unadressed comment from &#64;saraedum from Jan 8, 2020</p></li>
+<li><p>(MRB) The stalebot has solved the worst of the issues here. I think we could defer this one permanently.</p></li>
 </ul>
 </li>
 <li><p><a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/15">cfep-10</a> Feedstock statuses, unmaintained</p>
@@ -164,18 +275,11 @@
 <ul>
 <li><p>Active debate about moving to “broken” vs deleting from conda-forge channel</p></li>
 <li><p>Active vote, ends on 2020-03-11</p></li>
+<li><p>What were the results of the vote?</p></li>
+<li><p>Did we hear back from NumFOCUS?</p></li>
 </ul>
 </li>
-<li><p><a class="reference external" href="https://github.com/conda-forge/cfep/pull/25">cfep-14</a> security and systems subteam</p>
-<ul>
-<li><p>Active vote</p></li>
-</ul>
-</li>
-<li><p><a class="reference external" href="https://github.com/conda-forge/cfep/pull/26">cfep-15</a> Deprecate Python 2.7 and vs2008</p>
-<ul>
-<li><p>Active vote</p></li>
-</ul>
-</li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/cfep/pull/34">cfep-18</a> Packaging static libraries</p></li>
 </ul>
 </div>
 </div>
@@ -186,36 +290,45 @@
 <div class="section" id="check-in-on-previous-action-items">
 <h2>Check in on previous action items<a class="headerlink" href="#check-in-on-previous-action-items" title="Permalink to this headline">¶</a></h2>
 <p>Copy previous action items from last meeting agenda.</p>
+<div class="section" id="last-meeting">
+<h3>Last meeting<a class="headerlink" href="#last-meeting" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>[ ] (CJ) Form finance subteam</p></li>
+<li><p>[ ] document how users are supposed to interpret broken label</p></li>
+<li><p>[ ] update how we, as core, are supposed to mark packages as broken</p></li>
+<li><p>[ ] (ED) document strategies for reproducible environments using conda-forge</p></li>
+<li><p>[ ] (UK) Static libraries stuff</p>
+<ul>
+<li><p>[ ] Add linting hints to builds to find them</p></li>
+<li><p>[x] Recommend how to package them -&gt; CFEP-18</p></li>
+<li><p>[x] We should write docs saying we don’t provide support and this is a bad idea. -&gt; CFEP-18</p></li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="meetings-ago">
 <h3>2 meetings ago<a class="headerlink" href="#meetings-ago" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Remove conda forge readthedocs.</p></li>
-<li><p>[ ] (jakirkham) write a blog post on CUDA stuff we discussed today</p></li>
-<li><p>[ ] (jakirkham) update docs on how to add CUDA support to feedstocks</p></li>
-<li><p>[ ] (jakirkham) will open an issue on conda-smithy to investigate Drone issues. (ping the aarch team)</p>
+<li><p>[ ] (ED) Who we are page? Some combination of a FAQ and a who is everyone. FAQ things like:</p>
 <ul>
-<li><p>https://github.com/conda-forge/conda-forge.github.io/issues/954</p></li>
+<li><p>who’s the POC for CF &lt;&gt; Anaconda, CF &lt;&gt; NumFocus, CF &lt;&gt; Azure</p></li>
+<li><p>who’s the POC for the various subteams?</p></li>
+<li><p>Informal information: roles, day jobs, bios, the whole nine yards, why you’re here, etc.</p></li>
+<li><p>Public or internal? I don’t really care either way. Anyone feel strongly one way or the other?</p></li>
+<li><p>opt-in to public bios</p></li>
+<li><p>software carpentry has a large number of instructors and has https://carpentries.org/instructors</p></li>
+<li><p>some concern about “yet another place to keep stuff up to date”</p></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="id1">
 <h3>3 meetings ago<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Open up a CFEP about what to do about Python 2.7.</p>
-<ul>
-<li><p><a class="reference external" href="https://github.com/conda-forge/cfep/issues/20">cfep issue #20</a></p></li>
-<li><p>[x] Someone volunteer to drive this CFEP to completion (Matt B.)</p></li>
-</ul>
-</li>
-<li><p>[ ] (Eric) check internally for funding levels for hotels &amp; flying folks from the community in?</p></li>
-<li><p>[ ] (Eric) Figure out finances of conda-forge to support themselves?</p></li>
-<li><p>[ ] (jjhelmus) Open up CFEP for which python’s we’re going to support.</p></li>
-</ul>
 </div>
 <div class="section" id="move-to-issue-tracker">
 <h3>Move to Issue Tracker<a class="headerlink" href="#move-to-issue-tracker" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
+<li><p>[ ] (Kale) schedule conda working group</p></li>
 <li><p>[ ] cfep-10 next steps: CJ to call a vote for feedback</p></li>
 <li><p>[ ] cfep-06 next steps: Ask staged recipes team to champion this CFEP and move it forward</p></li>
 <li><p>[ ] jakirkham &amp; CJ-wright to sync on adding CUDA to the migration bot</p></li>
@@ -225,6 +338,16 @@
 </ul>
 </li>
 <li><p>[ ] (Anthony) Reach out to NumFocus to figure out legal ramifications of not including licenses in files.</p></li>
+<li><p>[ ] (Eric) check internally for funding levels for hotels &amp; flying folks from the community in?</p></li>
+<li><p>[ ] (Eric) Figure out finances of conda-forge to support themselves?</p></li>
+<li><p>[ ] (jjhelmus) Open up CFEP for which python’s we’re going to support</p></li>
+<li><p>[ ] (jakirkham) write a blog post on CUDA stuff we discussed today</p></li>
+<li><p>[ ] (jakirkham) update docs on how to add CUDA support to feedstocks</p></li>
+<li><p>[ ] (jakirkham) will open an issue on conda-smithy to investigate Drone issues. (ping the aarch team)</p>
+<ul>
+<li><p>https://github.com/conda-forge/conda-forge.github.io/issues/954</p></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -249,25 +372,23 @@
 <li class="toctree-l2"><a class="reference internal" href="../subteams.html">A list of current sub-teams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../joining-the-team.html">Joining the team</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="2020-06-22.html">2020-06-22 conda-forge core meeting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="2020-05-27.html">2020-05-27 conda-forge core meeting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="2020-05-13.html">2020-05-13 conda-forge core meeting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="2020-04-29.html">2020-04-29 conda-forge core meeting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="2020-04-15.html">2020-04-15 conda-forge core meeting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="2020-04-01.html">2020-04-01 conda-forge core meeting</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">2020-03-18 conda-forge core meeting</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2020-06-22 conda-forge core meeting</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#attendees">Attendees</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#agenda">Agenda</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#your-agenda-items">Your agenda items</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#active-votes">Active votes</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#subteam-updates">Subteam updates</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#bot">Bot</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#bot">Bot</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#stuff-from-last-week-that-we-didnt-get-to">Stuff from last week that we didnt get to</a></li>
+</ul>
+</li>
 <li class="toctree-l6"><a class="reference internal" href="#arm">ARM</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#power">POWER</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#cuda">CUDA</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#docs">Docs</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#staged-recipes">staged-recipes</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#website">website</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#security-systems">security+systems</a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="#ci-infrastructure">CI infrastructure</a><ul>
@@ -282,6 +403,7 @@
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#discussion">Discussion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#check-in-on-previous-action-items">Check in on previous action items</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#last-meeting">Last meeting</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#meetings-ago">2 meetings ago</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#id1">3 meetings ago</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#move-to-issue-tracker">Move to Issue Tracker</a></li>
@@ -289,6 +411,12 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="2020-05-27.html">2020-05-27 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-05-13.html">2020-05-13 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-04-29.html">2020-04-29 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-04-15.html">2020-04-15 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-04-01.html">2020-04-01 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-03-18.html">2020-03-18 conda-forge core meeting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2020-03-04.html">2020-03-04 conda-forge core meeting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2020-02-19.html">2020-02-19 conda-forge core meeting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2020-02-05.html">2020-02-05 conda-forge core meeting</a></li>
@@ -332,18 +460,18 @@
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="2020-04-01.html"
-                          title="Previous page">&larr; 2020-04-01 conda-forge core meeting</a></p>
+    <p class="topless"><a href="00_intro.html"
+                          title="Previous page">&larr; Core team meeting minutes</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="2020-03-04.html"
-                          title="Next page">&rarr; 2020-03-04 conda-forge core meeting</a></p>
+    <p class="topless"><a href="2020-05-27.html"
+                          title="Next page">&rarr; 2020-05-27 conda-forge core meeting</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/orga/minutes/2020-03-18.md.txt"
+      <li><a href="../../_sources/orga/minutes/2020-06-22.md.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -387,10 +515,10 @@
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="2020-03-04.html" title="2020-03-04 conda-forge core meeting"
+          <a href="2020-05-27.html" title="2020-05-27 conda-forge core meeting"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2020-04-01.html" title="2020-04-01 conda-forge core meeting"
+          <a href="00_intro.html" title="Core team meeting minutes"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">conda-forge 2020.06.25 documentation</a> &#187;</li>
 
