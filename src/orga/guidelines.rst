@@ -114,11 +114,20 @@ We prefer to not remove packages for the following reasons:
 4. Not as community friendly (leaves no opportunity to review decision).
 5. Blocks anyone from inspecting the broken packages.
 
-Instead, we add an extra label ``broken`` to the package. Packages with this extra label
-are removed from the repo data on the ``main`` label. Thus they are not considered by the solver
-but their binaries are still available on Anaconda.org.
+Instead, if possible, we prefer to take one of the following actions.
 
-To get the ``broken`` label added to your package, please refer to :ref:`maint_fix_broken_packages`.
+1. If the only issue is in the package metadata, we can directly patch it using
+   the `repo data patches feedstock <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock>`__.
+   To change the repo data for your package, make a PR on the feedstock.
+
+2. If the the package contents themselves are broken, we add an extra label ``broken``
+   to the package. Packages with this extra label are removed from the repo data on the
+   ``main`` label. Thus they are not considered by the solver
+   but their binaries are still available on Anaconda.org. To get the ``broken`` label
+   added to your package, please refer to :ref:`maint_fix_broken_packages`.
+
+Adding the ``broken`` label to a package is more destructive than patching the repo data
+and thus we prefer repo data patches over labeling things as ``broken``.
 
 
 Becoming a maintainer
