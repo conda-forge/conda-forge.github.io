@@ -201,11 +201,16 @@ Removing broken packages
 
 Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel.
 
-Following steps will remove broken packages from the channel:
+If the only issue is in the package metadata, we can directly patch it using
+the `repo data patches feedstock <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock>`__.
+To change the repo data for your package, make a PR on the feedstock.
+
+If instead the actual contents of the package are broken, the following steps will
+remove broken packages from the ``main`` channel:
 
 1. Locate the paths to broken files on `anaconda.org <https://anaconda.org>`__, by searching for the conda-forge package and switching to the files tab.
-2. Fork `conda-forge/cf-mark-broken <https://github.com/conda-forge/cf-mark-broken>`__ and add a new text file in the ``pkgs`` directory.
-3. Add the broken files to the new text file, one path per line. See `pkgs/example.txt <https://github.com/conda-forge/cf-mark-broken/blob/master/pkgs/example.txt>`__ for an example file.
+2. Fork `conda-forge/admin-requests <https://github.com/conda-forge/admin-requests>`__ and add a new text file in the ``broken`` directory.
+3. Add the broken files to the new text file, one path per line. See `broken/example.txt <https://github.com/conda-forge/admin-requests/blob/master/pkgs/example.txt>`__ for an example file.
 4. Open a new PR. Once merged, a bot will label all listed files as broken, thus effectively removing them from the channel.
 
 
