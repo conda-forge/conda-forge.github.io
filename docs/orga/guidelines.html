@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Guidelines &#8212; conda-forge 2020.06.25 documentation</title>
+    <title>Guidelines &#8212; conda-forge 2020.07.03 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="00_intro.html" title="Organisation Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.06.25 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.07.03 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Organisation Documentation</a> &#187;</li> 
       </ul>
@@ -159,9 +159,9 @@ See <a class="reference external" href="https://github.com/conda-forge/conda-for
 <p>Sometimes you need to remove a package from the conda-forge channel on Anaconda.org. The reasons
 for this are many, but the ones that immediately come to mind are:</p>
 <ul class="simple">
-<li><p>Incorrect pinnings. This can cause the conda solver to preferentially pick up the “old” version
-of the package even though you’ve bumped the build number.</p></li>
-<li><p>Packages renames</p></li>
+<li><p>incorrect pinnings or metadata</p></li>
+<li><p>packages being renamed</p></li>
+<li><p>broken package contents</p></li>
 </ul>
 <p>We prefer to not remove packages for the following reasons:</p>
 <ol class="arabic simple">
@@ -171,10 +171,19 @@ of the package even though you’ve bumped the build number.</p></li>
 <li><p>Not as community friendly (leaves no opportunity to review decision).</p></li>
 <li><p>Blocks anyone from inspecting the broken packages.</p></li>
 </ol>
-<p>Though, we can easily address all of these by using a label for broken packages. If one simply
-drops the “main” label and replaces it with “broken”. This still makes it unavailable to install
-by default. However, the package remains available so as to avoid the problems listed above.</p>
-<p>To get your package relabeled as <code class="docutils literal notranslate"><span class="pre">broken</span></code> instead of <code class="docutils literal notranslate"><span class="pre">main</span></code>, please refer to <a class="reference internal" href="../maintainer/updating_pkgs.html#maint-fix-broken-packages"><span class="std std-ref">Removing broken packages</span></a>.</p>
+<p>Instead, if possible, we prefer to take one of the following actions.</p>
+<ol class="arabic simple">
+<li><p>If the only issue is in the package metadata, we can directly patch it using
+the <a class="reference external" href="https://github.com/conda-forge/conda-forge-repodata-patches-feedstock">repo data patches feedstock</a>.
+To change the repo data for your package, make a PR on the feedstock.</p></li>
+<li><p>If the the package contents themselves are broken, we add an extra label <code class="docutils literal notranslate"><span class="pre">broken</span></code>
+to the package. Packages with this extra label are removed from the repo data on the
+<code class="docutils literal notranslate"><span class="pre">main</span></code> label. Thus they are not considered by the solver
+but their binaries are still available on Anaconda.org. To get the <code class="docutils literal notranslate"><span class="pre">broken</span></code> label
+added to your package, please refer to <a class="reference internal" href="../maintainer/updating_pkgs.html#maint-fix-broken-packages"><span class="std std-ref">Removing broken packages</span></a>.</p></li>
+</ol>
+<p>Adding the <code class="docutils literal notranslate"><span class="pre">broken</span></code> label to a package is more destructive than patching the repo data
+and thus we prefer repo data patches over labeling things as <code class="docutils literal notranslate"><span class="pre">broken</span></code>.</p>
 </div>
 <div class="section" id="becoming-a-maintainer">
 <h2>Becoming a maintainer<a class="headerlink" href="#becoming-a-maintainer" title="Permalink to this headline">¶</a></h2>
@@ -278,7 +287,7 @@ Please refer to <a class="reference internal" href="../maintainer/updating_pkgs.
         <li class="right" >
           <a href="00_intro.html" title="Organisation Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.06.25 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.07.03 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Organisation Documentation</a> &#187;</li> 
       </ul>
