@@ -102,9 +102,9 @@ Fixing Broken Packages
 Sometimes you need to remove a package from the conda-forge channel on Anaconda.org. The reasons
 for this are many, but the ones that immediately come to mind are:
 
-* Incorrect pinnings. This can cause the conda solver to preferentially pick up the "old" version
-  of the package even though you've bumped the build number.
-* Packages renames
+* incorrect pinnings or metadata
+* packages being renamed
+* broken package contents
 
 We prefer to not remove packages for the following reasons:
 
@@ -114,17 +114,16 @@ We prefer to not remove packages for the following reasons:
 4. Not as community friendly (leaves no opportunity to review decision).
 5. Blocks anyone from inspecting the broken packages.
 
-Though, we can easily address all of these by using a label for broken packages. If one simply
-drops the "main" label and replaces it with "broken". This still makes it unavailable to install
-by default. However, the package remains available so as to avoid the problems listed above.
+Instead, we add an extra label ``broken`` to the package. Packages with this extra label
+are removed from the repo data on the ``main`` label. Thus they are not considered by the solver
+but their binaries are still available on Anaconda.org.
 
-To get your package relabeled as ``broken`` instead of ``main``, please refer to :ref:`maint_fix_broken_packages`.
+To get the ``broken`` label added to your package, please refer to :ref:`maint_fix_broken_packages`.
 
 
 Becoming a maintainer
 =====================
 
 Conda-forge is a community project and it can therefore happen that feedstocks become temporarily abandoned.
-You can join the maintainer team of a feedstock by adding your github-id to the ``recipe-maintainers`` section in the recipe's ``meta.yaml``. 
+You can join the maintainer team of a feedstock by adding your github-id to the ``recipe-maintainers`` section in the recipe's ``meta.yaml``.
 Please refer to :ref:`maint_updating_maintainers` for detailed instructions.
-

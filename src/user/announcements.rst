@@ -4,68 +4,74 @@ Announcements
 2020
 ----
 
+:2020-07-03: ``cf-mark-broken`` renamed to ``admin-requests``
+
+    The ``cf-mark-broken`` repo has been renamed to ``admin-requests``. It still
+    serves the same purpose. However, we have expanded the capabilities of the repo
+    to be able to mark packages as not broken.
+
 :2020-05-28: New Process for Marking Packages as Broken
 
-    We are changing the way we mark packages as ``broken`` to 
-    better match the ``defaults`` channel and to better enable 
+    We are changing the way we mark packages as ``broken`` to
+    better match the ``defaults`` channel and to better enable
     reproducible environments that depended on broken packages.
-    We will now be adding the ``broken`` label to packages but leaving 
-    them on the ``main`` channel. In order to make sure they do not 
-    appear in the ``repodata.json`` for the ``main`` channel, we will 
-    be patching the repo data to remove them using the ``removals`` 
-    feature. 
-    
+    We will now be adding the ``broken`` label to packages but leaving
+    them on the ``main`` channel. In order to make sure they do not
+    appear in the ``repodata.json`` for the ``main`` channel, we will
+    be patching the repo data to remove them using the ``removals``
+    feature.
+
     Users will notice the following changes
-    
+
      * The packages on ``anaconda.org`` will now have both the ``main``
        and the ``broken`` labels.
-     * All requests to mark packages as broken must be sent to the 
-       ``cf-mark-broken`` repo. 
-     * Members of ``core`` can no longer mark things as broken by 
+     * All requests to mark packages as broken must be sent to the
+       ``cf-mark-broken`` repo.
+     * Members of ``core`` can no longer mark things as broken by
        hand since the repo data patching must be done as well.
-     * The package metadata for broken packages may differ slightly 
-       from when they were on the ``main`` channel. 
+     * The package metadata for broken packages may differ slightly
+       from when they were on the ``main`` channel.
      * The only correct source of package metadata is now the ``repodata.json``
        etc on ``anaconda.org``. Any other sources may be missing critical changes.
 
 :2020-05-09: New Staging Process for ``anaconda.org`` Uploads
 
-    Starting this week, we are changing the way we upload packages to ``anaconda.org``. 
-    We will move from direct uploads to the ``conda-forge`` ``main`` channel to using a 
-    staging organization/channel combined with a copy request from the staging channel to 
-    the production channel. This new process will allow us to perform some validation on 
+    Starting this week, we are changing the way we upload packages to ``anaconda.org``.
+    We will move from direct uploads to the ``conda-forge`` ``main`` channel to using a
+    staging organization/channel combined with a copy request from the staging channel to
+    the production channel. This new process will allow us to perform some validation on
     the outputs of feedstocks before they are released.
 
     What will you see as a feedstock maintainer?
 
-     * Starting this week, the ``admin-migrations`` service will be making commits to all 
-       feedstocks to provision them with the necessary configuration, API keys, and tokens. 
-     * Each feedstock will now be provisioned with a secret token. This token should not be 
-       shared or taken out of the CI services. It is used to identify the feedstock during 
+     * Starting this week, the ``admin-migrations`` service will be making commits to all
+       feedstocks to provision them with the necessary configuration, API keys, and tokens.
+     * Each feedstock will now be provisioned with a secret token. This token should not be
+       shared or taken out of the CI services. It is used to identify the feedstock during
        the upload process.
-     * The ``admin-migrations`` service will be setting a new top-level key in the ``conda-forge.yml``, 
-       ``conda_forge_output_validation: true``. This key indicates to ``conda-smithy`` that it 
+     * The ``admin-migrations`` service will be setting a new top-level key in the ``conda-forge.yml``,
+       ``conda_forge_output_validation: true``. This key indicates to ``conda-smithy`` that it
        should include the output validation calls in the feedstock CI scripts.
      * Currently open PRs will need to have this key added by hand and then rerendered.
-     * When PRs are running the CI scripts, they will do some initial validation of the 
-       feedstock outputs. If this validation fails, the CI job will fail. Please see the 
+     * When PRs are running the CI scripts, they will do some initial validation of the
+       feedstock outputs. If this validation fails, the CI job will fail. Please see the
        CI logs for the error message which is printed after ``conda-build`` runs.
-     * Once a PR is merged to master, the copy from the staging channel to the production 
-       channel will happen automatically. 
-     * Should a copy request fail, you will get a notification via a comment on the commit 
+     * Once a PR is merged to master, the copy from the staging channel to the production
+       channel will happen automatically.
+     * Should a copy request fail, you will get a notification via a comment on the commit
        to master.
-     * As part of this process, uploads from ``appveyor`` will no longer be allowed unless there is 
-       a significant barrier to using ``azure``. We have recently upgraded the compiler infrastructure 
+     * As part of this process, uploads from ``appveyor`` will no longer be allowed unless there is
+       a significant barrier to using ``azure``. We have recently upgraded the compiler infrastructure
        on ``azure`` to support this change in policy.
 
-    Despite our extensive testing, we do not expect this change to be completely smooth, 
-    so please bear with us. As always, if you have any questions, concerns, or trouble, you 
+    Despite our extensive testing, we do not expect this change to be completely smooth,
+    so please bear with us. As always, if you have any questions, concerns, or trouble, you
     can find us on gitter or bump us directly on github!
 
 :2020-03-24: ``vs2015`` to ``vs2017`` Transition
 
-    We are formally deprecating ``vs2015`` in two weeks on 2020-04-07 and will move to 
-    ``vs2017``. This change will enable us to support the usage of ``msbuild`` on Azure for the 
+    We are formally deprecating ``vs2015`` in two weeks on 2020-04-07 and will move to
+    ``vs2017``. This change will enable us to support the usage of ``msbuild`` on Azure for the
     ``win`` platform and will provide additional support for ``C++``.
     Most packages built with ``vs2015`` can be linked with ``vs2017`` toolchain (but not vice-versa).
     An exception is static libraries compiled with whole program optimization (/GL flag) which may be
@@ -74,22 +80,22 @@ Announcements
 
 :2020-03-23: Appveyor Deprecation
 
-    We are now starting to formally deprecate Appveyor in favor of Azure for builds on the 
-    ``win`` platform. Note that we have not been adding appveyor to new feedstocks 
-    for a while, so this is not a completely new change in policy. We will now, however, begin to 
-    actively disable Appveyor builds on feedstocks not using it by turning off builds for 
-    GitHub ``push`` events. Additionally, we have been issuing PRs to any remaining 
+    We are now starting to formally deprecate Appveyor in favor of Azure for builds on the
+    ``win`` platform. Note that we have not been adding appveyor to new feedstocks
+    for a while, so this is not a completely new change in policy. We will now, however, begin to
+    actively disable Appveyor builds on feedstocks not using it by turning off builds for
+    GitHub ``push`` events. Additionally, we have been issuing PRs to any remaining
     feedstocks to move them to Azure. We are aware that some packages built with ``msbuild``
     cannot yet be moved to Azure and so are leaving Appveyor on for those feedstocks for
     now.
 
 :2020-03-21: Python 2.7 Admin Command Available
 
-    A webservices admin command is now available to add Python 2.7 back to 
-    feedstocks. Put ``@conda-forge-admin add python 2.7`` in the title on an 
+    A webservices admin command is now available to add Python 2.7 back to
+    feedstocks. Put ``@conda-forge-admin add python 2.7`` in the title on an
     issue in your feedstock. The admin webservices bot will then issue a PR
     adding back Python 2.7. Note that this PR will remove other Python builds
-    and any ``win``, ``aarch64``, or ``ppc64le`` builds. If you want to keep 
+    and any ``win``, ``aarch64``, or ``ppc64le`` builds. If you want to keep
     those, merge the PR into a separate branch on your feedstock.
 
 :2020-03-18: Python 2.7 and ``vs2008`` Deprecation
@@ -103,7 +109,7 @@ Announcements
      of Python 2.7, as it was only supported to build this version of Python.
    - We will provide an admin command that will add back Python 2.7 to any feedstock.
      Note that as stated above, we cannot provide support for any Python 2.7 builds
-     generated with this admin command. Further, this admin command will only work on 
+     generated with this admin command. Further, this admin command will only work on
      ``osx-64`` and ``linux-64`` platforms.
 
 2019

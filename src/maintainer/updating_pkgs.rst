@@ -204,8 +204,8 @@ Sometimes mistakes happen and a broken package ends up being uploaded to the con
 Following steps will remove broken packages from the channel:
 
 1. Locate the paths to broken files on `anaconda.org <https://anaconda.org>`__, by searching for the conda-forge package and switching to the files tab.
-2. Fork `conda-forge/cf-mark-broken <https://github.com/conda-forge/cf-mark-broken>`__ and add a new text file in the ``pkgs`` directory.
-3. Add the broken files to the new text file, one path per line. See `pkgs/example.txt <https://github.com/conda-forge/cf-mark-broken/blob/master/pkgs/example.txt>`__ for an example file.
+2. Fork `conda-forge/admin-requests <https://github.com/conda-forge/admin-requests>`__ and add a new text file in the ``broken`` directory.
+3. Add the broken files to the new text file, one path per line. See `broken/example.txt <https://github.com/conda-forge/admin-requests/blob/master/pkgs/example.txt>`__ for an example file.
 4. Open a new PR. Once merged, a bot will label all listed files as broken, thus effectively removing them from the channel.
 
 
