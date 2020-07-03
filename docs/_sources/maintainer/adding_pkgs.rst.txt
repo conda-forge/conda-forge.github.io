@@ -556,10 +556,12 @@ You can include files required for testing with the ``source_files`` section:
       imports:
         - package_name
       requires:
-        - pytest tests test_pkg_integration.py
+        - pytest
       source_files:
         - tests
         - test_pkg_integration.py
+      commands:
+        - pytest tests test_pkg_integration.py
 
 The ``source_files`` section works for files and directories.
 
