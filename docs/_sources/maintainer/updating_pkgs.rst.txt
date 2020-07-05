@@ -210,7 +210,7 @@ remove broken packages from the ``main`` channel:
 
 1. Locate the paths to broken files on `anaconda.org <https://anaconda.org>`__, by searching for the conda-forge package and switching to the files tab.
 2. Fork `conda-forge/admin-requests <https://github.com/conda-forge/admin-requests>`__ and add a new text file in the ``broken`` directory.
-3. Add the broken files to the new text file, one path per line. See `broken/example.txt <https://github.com/conda-forge/admin-requests/blob/master/pkgs/example.txt>`__ for an example file.
+3. Add the broken files to the new text file, one path per line. See `broken/example.txt <https://github.com/conda-forge/admin-requests/blob/master/broken/example.txt>`__ for an example file.
 4. Open a new PR. Once merged, a bot will label all listed files as broken, thus effectively removing them from the channel.
 
 
