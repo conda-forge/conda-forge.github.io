@@ -78,7 +78,7 @@ This team will operate via the following rules
 Members
 -------
 - Christopher J. "CJ" Wright <cjwright4242@gmail.com>
-
+- Filipe Fernandes <ocefpaf@gmail.com>
 
 Bot Sub-Team
 ============
