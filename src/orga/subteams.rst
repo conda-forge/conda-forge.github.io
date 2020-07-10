@@ -71,7 +71,7 @@ The core responsibilities of this team are to
 This team will operate via the following rules
 
 - only members of ``core`` can be on this sub-team
-- this sub-team will report its activity to core at all ``core`` meetings
+- this sub-team will report its activity to core at all attended ``core`` meetings
 - this sub-team will not approve or deny access to funds unless instructed to
   via the method specified by the conda-forge governance document.
 
