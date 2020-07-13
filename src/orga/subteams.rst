@@ -79,6 +79,7 @@ Members
 -------
 - Christopher J. "CJ" Wright <cjwright4242@gmail.com>
 - Filipe Fernandes <ocefpaf@gmail.com>
+- Eric Dill <ericdill@pm.me>
 
 Bot Sub-Team
 ============
