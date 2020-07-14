@@ -1,28 +1,81 @@
-Microsoft Azure:
-  Description: Azure provides build systems for Windows, OSX, and Linux
-  Site URL: https://azure.microsoft.com/en-us/services/devops/pipelines/
-  contribution type: infrastructure
-Oregon State University Open Source Lab:
-  Description: OSL provides ppc64le machines for long running jobs
-  Logo UR: https://osuosl.org/images/osllogo-print_0.png
-  Site URL: https://osuosl.org
-  contribution type: infrastructure
-Works on Arm:
-  Description: Works on Arm project provides aarch64 machines for long running jobs
-  Logo URL: https://www.worksonarm.com/wp-content/themes/worksonarm2019/assets/images/logo.png
-  Site URL: https://www.worksonarm.com/
-  contribution type: infrastructure
+# Institution:
+#   Description: string
+#   Site URL: list
+#   Logo URL: list
+#   contribution type: list
+      # Options:
+      # - infrastructure
+      # - dev support
+#   Developers: list
+
+# Places that employ core
+Lab49:
+  Description:
+  Developers:
+    - cj-wright
+  Logo URL:
+    - imgs/lab49.png
+  Site URL:
+    - https://www.lab49.com
+  contribution type:
+    - dev support
+
+DTN:
+  Description: DTN provides developer time
+  Developers:
+    - ericdill
+  Logo URL:
+    - imgs/dtn.png
+  Site URL:
+    - https://dtn.com
+  contribution type:
+    - dev support
+
 IOOS:
   Description: IOOS provides developer time
-  Developers: ocefpaf
-  Logo URL: https://cdn.ioos.noaa.gov/media/2017/12/IOOS_logo.png
+  Developers:
+    - ocefpaf
+  Logo URL:
+    - https://cdn.ioos.noaa.gov/media/2017/12/IOOS_logo.png
   Site URL:
     - https://ioos.noaa.gov/
     - https://ioos.us/
-  contribution type: dev support
+  contribution type:
+    - dev support
+
 Anaconda Inc:
   Description: Anaconda hosts the conda-forge package repository on anaconda.org and maintains conda and conda-build
   Developers: jjhelmus
-  Logo URL: https://know.anaconda.com/rs/387-XNW-688/images/2020_Anaconda_Logo_RGB_Corporate.png
-  Site URL: https://www.anaconda.com/
-  contribution type: [infrastructure, dev support]
+  Logo URL:
+    - https://know.anaconda.com/rs/387-XNW-688/images/2020_Anaconda_Logo_RGB_Corporate.png
+  Site URL:
+    - https://www.anaconda.com/
+  contribution type:
+    - infrastructure
+    - dev support
+
+# Places that give us stuff
+Microsoft Azure:
+  Description: Azure provides build systems for Windows, OSX, and Linux
+  Site URL:
+    - https://azure.microsoft.com/en-us/services/devops/pipelines/
+  contribution type:
+    - infrastructure
+
+Oregon State University Open Source Lab:
+  Description: OSL provides ppc64le machines for long running jobs
+  Logo UR:
+    - https://osuosl.org/images/osllogo-print_0.png
+  Site URL:
+    - https://osuosl.org
+  contribution type:
+    - infrastructure
+
+Works on Arm:
+  Description: Works on Arm project provides aarch64 machines for long running jobs
+  Logo URL:
+    - https://www.worksonarm.com/wp-content/themes/worksonarm2019/assets/images/logo.png
+  Site URL:
+    - https://www.worksonarm.com/
+  contribution type:
+    - infrastructure
