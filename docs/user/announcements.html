@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Announcements &#8212; conda-forge 2020.07.15 documentation</title>
+    <title>Announcements &#8212; conda-forge 2020.07.16 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="introduction.html" title="A brief introduction"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.07.15 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.07.16 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li> 
       </ul>
@@ -71,6 +71,33 @@
 <div class="section" id="id1">
 <h2>2020<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <dl class="field-list">
+<dt class="field-odd">2020-07-16</dt>
+<dd class="field-odd"><p>Core Dependency Tree Package Changes</p>
+<p><code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> is moving to a new system for generating Core Dependency Tree (CDT)
+packages. These changes include</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>CDT packages will no longer be built using feedstocks and this
+practice is officially deprecated.</p></li>
+<li><p>Any current CDT packages in feedstocks will be moved to the new
+<a class="reference external" href="https://github.com/conda-forge/cdt-builds">conda-forge/cdt-builds</a>
+repo and the feedstock will be archived. Members of core will be doing this slowly
+on an as-needed basis, so it may not happen right away.</p></li>
+<li><p>Requests for new CDTs should be submitted as PRs to the
+<a class="reference external" href="https://github.com/conda-forge/cdt-builds">conda-forge/cdt-builds</a> repo.</p></li>
+</ul>
+</div></blockquote>
+<p>These changes are being made so that <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> can provide access to
+CentOS 7 / glibc 2.17 for <code class="docutils literal notranslate"><span class="pre">linux-64</span></code> builds. They will also move more of the
+packages needed for <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> builds into the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channels making
+builds more reliable.</p>
+</dd>
+<dt class="field-even">2020-07-16</dt>
+<dd class="field-even"><p>Moving from clang 9 to clang 10</p>
+<p>conda-forge is moving to clang 10 on macOS!
+Check the release <a class="reference external" href="https://releases.llvm.org/10.0.0/tools/clang/docs/ReleaseNotes.html#what-s-new-in-clang-10-0-0">notes</a>
+for what is new, breaking, or deprecated.</p>
+</dd>
 <dt class="field-odd">2020-07-15</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">CFEP-18:</span></code> Removing static libraries from the main build</p>
 <p>With <a class="reference external" href="https://github.com/conda-forge/cfep/blob/master/cfep-18.md">CFEP-18</a>
@@ -194,8 +221,8 @@ generated with this admin command. Further, this admin command will only work on
 </dd>
 </dl>
 </div>
-<div class="section" id="id2">
-<h2>2019<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h2>2019<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <dl class="field-list">
 <dt class="field-odd">2019-09-30</dt>
 <dd class="field-odd"><p>Clang 9.0.0 and gfortran 7.3.0 as default compilers in OSX.</p>
@@ -229,8 +256,8 @@ need help migrating.</p></li>
 </dd>
 </dl>
 </div>
-<div class="section" id="id3">
-<h2>2018<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h2>2018<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <dl class="field-list">
 <dt class="field-odd">2018‑10‑12</dt>
 <dd class="field-odd"><p>The rebuild is moving along nicely with almost a third of packages completed.</p>
@@ -274,8 +301,8 @@ bear with us.</p>
 <li class="toctree-l2"><a class="reference internal" href="introduction.html">A brief introduction</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Announcements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">2020</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">2019</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">2018</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2019</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2018</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="tipsandtricks.html">Tips &amp; tricks</a></li>
@@ -353,7 +380,7 @@ bear with us.</p>
         <li class="right" >
           <a href="introduction.html" title="A brief introduction"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.07.15 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.07.16 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li> 
       </ul>

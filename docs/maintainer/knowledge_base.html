@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge base &#8212; conda-forge 2020.07.15 documentation</title>
+    <title>Knowledge base &#8212; conda-forge 2020.07.16 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.07.15 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.07.16 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -251,15 +251,22 @@ nmake install
 There is additional information about how conda-build 3 treats compilers in the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/source/compiler-tools.html">conda docs</a>.</p>
 </div>
 </div>
-<div class="section" id="core-dependency-tree-packages-cdt">
-<span id="cdt-packages"></span><h3>Core dependency tree packages (CDT)<a class="headerlink" href="#core-dependency-tree-packages-cdt" title="Permalink to this headline">¶</a></h3>
-<p>Dependencies outside of the conda-forge channel should be avoided (see <a class="reference internal" href="adding_pkgs.html#no-external-deps"><span class="std std-ref">Avoid external dependencies</span></a>).
-However, there are very few exceptions: some dependencies are so close to the system that they are not packaged with conda-forge.
-These dependencies have to be satisfied with <em>Core Dependency Tree</em> packages.</p>
-<p>In conda-forge this currently affects only packages that link against libGL.</p>
+<div class="section" id="core-dependency-tree-packages-cdts">
+<span id="cdt-packages"></span><h3>Core Dependency Tree Packages (CDTs)<a class="headerlink" href="#core-dependency-tree-packages-cdts" title="Permalink to this headline">¶</a></h3>
+<p>Dependencies outside of the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel should be avoided (see <a class="reference internal" href="adding_pkgs.html#no-external-deps"><span class="std std-ref">Avoid external dependencies</span></a>).
+However, there are a few exceptions: some dependencies are so close to the system
+that they are not packaged with <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. These dependencies have to be satisfied with
+<em>Core Dependency Tree</em> (CDT) packages. A CDT package consists of repackaged CentOS binaries from the
+appropriate version, either 6 or 7 depending on user choice and platform. We manage the build of CDT
+packages using a centralized repo, <a class="reference external" href="https://github.com/conda-forge/cdt-builds">conda-forge/cdt-builds</a>,
+as opposed to generating feedstocks for them. (Note that historically we did use feedstocks but this
+practice has been deprecated.) To add a new CDT, make a PR on the
+<a class="reference external" href="https://github.com/conda-forge/cdt-builds">conda-forge/cdt-builds</a> repo.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> the primary usages of CDTs is currently for packages that link against libGL.</p>
 <div class="section" id="libgl">
 <h4>libGL<a class="headerlink" href="#libgl" title="Permalink to this headline">¶</a></h4>
-<p>In addition to the required compilers <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">compiler('c')</span> <span class="pre">}}</span></code> and/or <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">compiler('cxx')</span> <span class="pre">}}</span></code>, following CDT packages are required for linking against libGL:</p>
+<p>In addition to the required compilers <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">compiler('c')</span> <span class="pre">}}</span></code> and/or <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">compiler('cxx')</span> <span class="pre">}}</span></code>,
+the following CDT packages are required for linking against libGL:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
   <span class="nt">build</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">cdt(&#39;mesa-libgl-devel&#39;)</span> <span class="p p-Indicator">}}</span>  <span class="c1"># [linux]</span>
@@ -272,16 +279,17 @@ These dependencies have to be satisfied with <em>Core Dependency Tree</em> packa
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">xorg-libxfixes</span>  <span class="c1"># [linux]</span>
 </pre></div>
 </div>
-<p>If you need a fully functional binary in the test phase, you have to also provide the shared libraries via <code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code> (see <a class="reference internal" href="#yum-deps"><span class="std std-ref">yum_requirements.txt</span></a>).
-You will need to re-render the feedstock after making these changes.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mesa</span><span class="o">-</span><span class="n">libGL</span>
-<span class="n">mesa</span><span class="o">-</span><span class="n">dri</span><span class="o">-</span><span class="n">drivers</span>
-<span class="n">libselinux</span>
-<span class="n">libXdamage</span>
-<span class="n">libXxf86vm</span>
-<span class="n">libXext</span>
+<p>If you need a fully functional binary in the test phase, you have to also provide the shared
+libraries via <code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code> (see <a class="reference internal" href="#yum-deps"><span class="std std-ref">yum_requirements.txt</span></a>).</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mesa-libGL
+mesa-dri-drivers
+libselinux
+libXdamage
+libXxf86vm
+libXext
 </pre></div>
 </div>
+<p>You will need to re-render the feedstock after making these changes.</p>
 </div>
 </div>
 <div class="section" id="building-against-numpy">
@@ -761,7 +769,7 @@ section.</p></li>
 </div>
 <div class="section" id="noarch-generic">
 <h3>Noarch generic<a class="headerlink" href="#noarch-generic" title="Permalink to this headline">¶</a></h3>
-<div class="admonition-todo admonition" id="id1">
+<div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <p>add some information on r packages which make heavy use of <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">generic</span></code></p>
 </div>
@@ -892,7 +900,7 @@ conda-build</p>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#special-dependencies">Special dependencies</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#compilers">Compilers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#core-dependency-tree-packages-cdt">Core dependency tree packages (CDT)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#core-dependency-tree-packages-cdts">Core Dependency Tree Packages (CDTs)</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#libgl">libGL</a></li>
 </ul>
 </li>
@@ -1004,7 +1012,7 @@ conda-build</p>
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.07.15 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.07.16 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
