@@ -4,6 +4,12 @@ Announcements
 2020
 ----
 
+:2020-07-17: Conda-forge is building openblas with both pthreads and openmp on Linux
+
+    The main change is that ``openblas`` will use pthreads for threading by default on Linux
+    instead of the previous ``openmp`` default.
+    The ``openmp`` builds can be recovered by installing ``libopenblas=*=*openmp*``.
+
 :2020-07-16: Core Dependency Tree Package Changes
 
     ``conda-forge`` is moving to a new system for generating Core Dependency Tree (CDT)
