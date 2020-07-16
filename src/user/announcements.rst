@@ -5,6 +5,12 @@ Announcements
 ----
 
 
+:2020-07-16: Moving from clang 9 to clang 10
+
+    conda-forge is moving to clang 10 on macOS!
+    Check the release `notes <https://releases.llvm.org/10.0.0/tools/clang/docs/ReleaseNotes.html#what-s-new-in-clang-10-0-0>`_
+    for what is new, breaking, or deprecated.
+
 :2020-07-15: ``CFEP-18:`` Removing static libraries from the main build
 
     With `CFEP-18 <https://github.com/conda-forge/cfep/blob/master/cfep-18.md>`_
