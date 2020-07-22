@@ -45,6 +45,42 @@ Members
 - Anthony Scopatz <scopatz@gmail.com>
 
 
+Finance Sub-Team
+=============================
+
+Role
+----
+The purpose of the finance sub-team is to provide a point of contact
+for financial and budgetary issues. This includes keeping core aware
+of the current conda-forge balance via ``core`` meetings and facilitating
+dispersal of funds.
+
+Charter
+-------
+Static
+
+Responsibility
+--------------
+The core responsibilities of this team are to
+
+- keep core aware of budgetary and financial matters pertaining to conda-forge
+- facilitate dispersal of funds
+- give core updates via the standing budget item at core meetings
+- work closely with the NumFOCUS point of contact to ensure smooth financial operations
+
+This team will operate via the following rules
+
+- only members of ``core`` can be on this sub-team
+- this sub-team will report its activity to core at all attended ``core`` meetings
+- this sub-team will not approve or deny access to funds unless instructed to
+  via the method specified by the conda-forge governance document.
+
+Members
+-------
+- Christopher J. "CJ" Wright <cjwright4242@gmail.com>
+- Filipe Fernandes <ocefpaf@gmail.com>
+- Eric Dill <ericdill@pm.me>
+
 Bot Sub-Team
 ============
 
