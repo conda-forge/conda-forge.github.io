@@ -4,6 +4,14 @@ Announcements
 2020
 ----
 
+:2020-07-23: Strict channel priority in builds for OSX and Linux
+
+    We have changed the OSX and Linux platforms to enforce strict channel priority
+    in package builds. This change means that if a package is available in the ``conda-forge``
+    channels, the ``conda`` solver will not consider any versions of the package from other
+    channels. Users can disable this by setting ``channel_priority: flexible`` in their
+    ``conda-forge.yml``. 
+
 :2020-07-23: NumPy 1.16 as the minimal NumPy version on all platforms.
 
     In accordance with `NEP-29 <https://numpy.org/neps/nep-0029-deprecation_policy.html>`_,
