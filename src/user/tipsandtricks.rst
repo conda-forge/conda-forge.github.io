@@ -77,15 +77,15 @@ Using ``conda-forge`` w/ External Message Passing Interface (MPI) Libraries
 
 On some high-performance computing (HPC) systems, users are expected to use the
 MPI binaries that are available on the system as opposed to those built by ``conda-forge``.
-These binaries are typically specialized for the system and interface properly with queueing
-software, etc. However, this practice creates issues for ``conda-forge`` users. When you install
+These binaries are typically specialized for the system and interface properly with job
+schedulers, etc. However, this practice creates issues for ``conda-forge`` users. When you install
 a package from ``conda-forge`` that relies on MPI, ``conda`` will install the MPI binaries
-built by ``conda-forge`` and the package will link to those binaries. This setup tends to break
-or not function in unexpected ways on HPC systems.
+built by ``conda-forge`` and the package will link to those binaries. This setup often either
+does not work at all or functions in unexpected ways on HPC systems.
 
 To solve these issues, ``conda-forge`` has created special dummy builds of the ``mpich`` libraries
 that are simply shell packages with no contents. These packages allow the ``conda`` solver to produce
-correct environments while eliminating the installed MPI binaries from ``conda-forge``. You can install the
+correct environments while avoiding installing MPI binaries from ``conda-forge``. You can install the
 dummy package with the following command
 
 .. code-block:: shell
