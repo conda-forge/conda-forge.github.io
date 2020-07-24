@@ -72,8 +72,10 @@ Using envs make it easier to debug problems with packages and ensure the stabili
   just re-add it and activate ``strict`` for a smooth and stable experience when installing packages.
 
 
-Using ``conda-forge`` w/ External Message Passing Interface (MPI) Libraries
-===========================================================================
+.. _Using External Message Passing Interface (MPI) Libraries:
+
+Using External Message Passing Interface (MPI) Libraries
+========================================================
 
 On some high-performance computing (HPC) systems, users are expected to use the
 MPI binaries that are available on the system as opposed to those built by ``conda-forge``.
