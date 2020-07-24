@@ -4,6 +4,12 @@ Announcements
 2020
 ----
 
+:2020-07-23: NumPy 1.16 as the minimal NumPy version on all platforms.
+
+    In accordance with `NEP-29 <https://numpy.org/neps/nep-0029-deprecation_policy.html>`_,
+    we have switched to have ``numpy 1.16`` as the minimal supported version on all
+    platforms.
+
 :2020-07-17: Conda-forge is building openblas with both pthreads and openmp on Linux
 
     The main change is that ``openblas`` will use pthreads for threading by default on Linux

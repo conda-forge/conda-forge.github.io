@@ -71,14 +71,20 @@
 <div class="section" id="id1">
 <h2>2020<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <dl class="field-list">
-<dt class="field-odd">2020-07-17</dt>
-<dd class="field-odd"><p>Conda-forge is building openblas with both pthreads and openmp on Linux</p>
+<dt class="field-odd">2020-07-23</dt>
+<dd class="field-odd"><p>NumPy 1.16 as the minimal NumPy version on all platforms.</p>
+<p>In accordance with <a class="reference external" href="https://numpy.org/neps/nep-0029-deprecation_policy.html">NEP-29</a>,
+we have switched to have <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.16</span></code> as the minimal supported version on all
+platforms.</p>
+</dd>
+<dt class="field-even">2020-07-17</dt>
+<dd class="field-even"><p>Conda-forge is building openblas with both pthreads and openmp on Linux</p>
 <p>The main change is that <code class="docutils literal notranslate"><span class="pre">openblas</span></code> will use pthreads for threading by default on Linux
 instead of the previous <code class="docutils literal notranslate"><span class="pre">openmp</span></code> default.
 The <code class="docutils literal notranslate"><span class="pre">openmp</span></code> builds can be recovered by installing <code class="docutils literal notranslate"><span class="pre">libopenblas=*=*openmp*</span></code>.</p>
 </dd>
-<dt class="field-even">2020-07-16</dt>
-<dd class="field-even"><p>Core Dependency Tree Package Changes</p>
+<dt class="field-odd">2020-07-16</dt>
+<dd class="field-odd"><p>Core Dependency Tree Package Changes</p>
 <p><code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> is moving to a new system for generating Core Dependency Tree (CDT)
 packages. These changes include</p>
 <blockquote>
@@ -98,28 +104,28 @@ CentOS 7 / glibc 2.17 for <code class="docutils literal notranslate"><span class
 packages needed for <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> builds into the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channels making
 builds more reliable.</p>
 </dd>
-<dt class="field-odd">2020-07-16</dt>
-<dd class="field-odd"><p>Moving from clang 9 to clang 10</p>
+<dt class="field-even">2020-07-16</dt>
+<dd class="field-even"><p>Moving from clang 9 to clang 10</p>
 <p>conda-forge is moving to clang 10 on macOS!
 Check the release <a class="reference external" href="https://releases.llvm.org/10.0.0/tools/clang/docs/ReleaseNotes.html#what-s-new-in-clang-10-0-0">notes</a>
 for what is new, breaking, or deprecated.</p>
 </dd>
-<dt class="field-even">2020-07-15</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">CFEP-18:</span></code> Removing static libraries from the main build</p>
+<dt class="field-odd">2020-07-15</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">CFEP-18:</span></code> Removing static libraries from the main build</p>
 <p>With <a class="reference external" href="https://github.com/conda-forge/cfep/blob/master/cfep-18.md">CFEP-18</a>
 we now have a policy on how to deal with static packages. The most important
 change here is that we will be removing static libraries from the main packages
 and moving them to <code class="docutils literal notranslate"><span class="pre">-static</span></code> suffixed packages. <code class="docutils literal notranslate"><span class="pre">-static</span></code> packages will not
 be built by default but only on request.</p>
 </dd>
-<dt class="field-odd">2020-07-03</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">cf-mark-broken</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">admin-requests</span></code></p>
+<dt class="field-even">2020-07-03</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">cf-mark-broken</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">admin-requests</span></code></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">cf-mark-broken</span></code> repo has been renamed to <code class="docutils literal notranslate"><span class="pre">admin-requests</span></code>. It still
 serves the same purpose. However, we have expanded the capabilities of the repo
 to be able to mark packages as not broken.</p>
 </dd>
-<dt class="field-even">2020-05-28</dt>
-<dd class="field-even"><p>New Process for Marking Packages as Broken</p>
+<dt class="field-odd">2020-05-28</dt>
+<dd class="field-odd"><p>New Process for Marking Packages as Broken</p>
 <p>We are changing the way we mark packages as <code class="docutils literal notranslate"><span class="pre">broken</span></code> to
 better match the <code class="docutils literal notranslate"><span class="pre">defaults</span></code> channel and to better enable
 reproducible environments that depended on broken packages.
@@ -144,8 +150,8 @@ etc on <code class="docutils literal notranslate"><span class="pre">anaconda.org
 </ul>
 </div></blockquote>
 </dd>
-<dt class="field-odd">2020-05-09</dt>
-<dd class="field-odd"><p>New Staging Process for <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code> Uploads</p>
+<dt class="field-even">2020-05-09</dt>
+<dd class="field-even"><p>New Staging Process for <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code> Uploads</p>
 <p>Starting this week, we are changing the way we upload packages to <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code>.
 We will move from direct uploads to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> <code class="docutils literal notranslate"><span class="pre">main</span></code> channel to using a
 staging organization/channel combined with a copy request from the staging channel to
@@ -179,8 +185,8 @@ on <code class="docutils literal notranslate"><span class="pre">azure</span></co
 so please bear with us. As always, if you have any questions, concerns, or trouble, you
 can find us on gitter or bump us directly on github!</p>
 </dd>
-<dt class="field-even">2020-03-24</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">vs2015</span></code> to <code class="docutils literal notranslate"><span class="pre">vs2017</span></code> Transition</p>
+<dt class="field-odd">2020-03-24</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">vs2015</span></code> to <code class="docutils literal notranslate"><span class="pre">vs2017</span></code> Transition</p>
 <p>We are formally deprecating <code class="docutils literal notranslate"><span class="pre">vs2015</span></code> in two weeks on 2020-04-07 and will move to
 <code class="docutils literal notranslate"><span class="pre">vs2017</span></code>. This change will enable us to support the usage of <code class="docutils literal notranslate"><span class="pre">msbuild</span></code> on Azure for the
 <code class="docutils literal notranslate"><span class="pre">win</span></code> platform and will provide additional support for <code class="docutils literal notranslate"><span class="pre">C++</span></code>.
@@ -189,8 +195,8 @@ An exception is static libraries compiled with whole program optimization (/GL f
 incompatible with the <code class="docutils literal notranslate"><span class="pre">vs2017</span></code> toolchain. These static libraries will need to be rebuilt
 using <code class="docutils literal notranslate"><span class="pre">vs2017</span></code>.</p>
 </dd>
-<dt class="field-odd">2020-03-23</dt>
-<dd class="field-odd"><p>Appveyor Deprecation</p>
+<dt class="field-even">2020-03-23</dt>
+<dd class="field-even"><p>Appveyor Deprecation</p>
 <p>We are now starting to formally deprecate Appveyor in favor of Azure for builds on the
 <code class="docutils literal notranslate"><span class="pre">win</span></code> platform. Note that we have not been adding appveyor to new feedstocks
 for a while, so this is not a completely new change in policy. We will now, however, begin to
@@ -200,8 +206,8 @@ feedstocks to move them to Azure. We are aware that some packages built with <co
 cannot yet be moved to Azure and so are leaving Appveyor on for those feedstocks for
 now.</p>
 </dd>
-<dt class="field-even">2020-03-21</dt>
-<dd class="field-even"><p>Python 2.7 Admin Command Available</p>
+<dt class="field-odd">2020-03-21</dt>
+<dd class="field-odd"><p>Python 2.7 Admin Command Available</p>
 <p>A webservices admin command is now available to add Python 2.7 back to
 feedstocks. Put <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin</span> <span class="pre">add</span> <span class="pre">python</span> <span class="pre">2.7</span></code> in the title on an
 issue in your feedstock. The admin webservices bot will then issue a PR
@@ -209,8 +215,8 @@ adding back Python 2.7. Note that this PR will remove other Python builds
 and any <code class="docutils literal notranslate"><span class="pre">win</span></code>, <code class="docutils literal notranslate"><span class="pre">aarch64</span></code>, or <code class="docutils literal notranslate"><span class="pre">ppc64le</span></code> builds. If you want to keep
 those, merge the PR into a separate branch on your feedstock.</p>
 </dd>
-<dt class="field-odd">2020-03-18</dt>
-<dd class="field-odd"><p>Python 2.7 and <code class="docutils literal notranslate"><span class="pre">vs2008</span></code> Deprecation</p>
+<dt class="field-even">2020-03-18</dt>
+<dd class="field-even"><p>Python 2.7 and <code class="docutils literal notranslate"><span class="pre">vs2008</span></code> Deprecation</p>
 <ul class="simple">
 <li><p>Python 2.7 is no longer supported by the upstream developers as of 2020-01-01.
 Conda-forge is thus deprecating its Python 2.7 support. Conda-forge will provide
