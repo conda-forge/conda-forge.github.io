@@ -81,7 +81,7 @@ These binaries are typically specialized for the system and interface properly w
 software, etc. However, this practice creates issues for ``conda-forge`` users. When you install
 a package from ``conda-forge`` that relies on MPI, ``conda`` will install the MPI binaries
 built by ``conda-forge`` and the package will link to those binaries. This setup tends to break
-or not function in unexpected ways.
+or not function in unexpected ways on HPC systems.
 
 To solve these issues, ``conda-forge`` has created special dummy builds of the ``mpich`` Libraries
 that are simply shell packages with no contents. These packages allow the ``conda`` solver to produce
