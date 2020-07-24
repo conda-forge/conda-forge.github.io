@@ -99,6 +99,7 @@ file that is present in the root directory of a feedstock.</p>
 <li><p>travis</p></li>
 <li><p>upload_on_branch</p></li>
 <li><p>win</p></li>
+<li><p>channel_priority</p></li>
 </ul>
 <div class="section" id="appveyor">
 <h3>appveyor<a class="headerlink" href="#appveyor" title="Permalink to this headline">¶</a></h3>
@@ -371,6 +372,13 @@ Currently only:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="channel-priority">
+<h3>channel_priority<a class="headerlink" href="#channel-priority" title="Permalink to this headline">¶</a></h3>
+<p>This value sets the <code class="docutils literal notranslate"><span class="pre">conda</span></code> solver channel priority for feedstock builds. On
+OSX and Liunx, it defaults to <code class="docutils literal notranslate"><span class="pre">strict</span></code>. On Windows, it defaults to the default in
+<code class="docutils literal notranslate"><span class="pre">conda</span></code> (<code class="docutils literal notranslate"><span class="pre">flexible</span></code> at the time of writing). Any valid value for the same setting
+in the <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> is allowed here.</p>
+</div>
 </div>
 </div>
 
@@ -417,6 +425,7 @@ Currently only:</p>
 <li class="toctree-l4"><a class="reference internal" href="#travis">travis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#upload-on-branch">upload_on_branch</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#win">win</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#channel-priority">channel_priority</a></li>
 </ul>
 </li>
 </ul>
