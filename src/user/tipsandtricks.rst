@@ -83,10 +83,10 @@ a package from ``conda-forge`` that relies on MPI, ``conda`` will install the MP
 built by ``conda-forge`` and the package will link to those binaries. This setup tends to break
 or not function in unexpected ways on HPC systems.
 
-To solve these issues, ``conda-forge`` has created special dummy builds of the ``mpich`` Libraries
+To solve these issues, ``conda-forge`` has created special dummy builds of the ``mpich`` libraries
 that are simply shell packages with no contents. These packages allow the ``conda`` solver to produce
-correct environments while eliminating the MPI binaries from ``conda-forge``. You can install them
-with the following command
+correct environments while eliminating the installed MPI binaries from ``conda-forge``. You can install the
+dummy package with the following command
 
 .. code-block:: shell
 
@@ -94,6 +94,11 @@ with the following command
 
 As long as you have the local copies of the ``mpich`` library in your linking paths and
 the local version matches the ``conda`` version up to the minor version number (e.g., ``3.3.1``
-matches ``3.3.2`` but not ``3.4.1``), then this procedure should work. ``mpich`` has a high degree of
-ABI compatibility, making this procedure possible. We have not currently implemented this procedure
-with ``openmpi``, but can do so at a later date.
+matches ``3.3.2`` but not ``3.4.1``), then this procedure should work. At runtime, the ``conda-forge``
+package that depends on MPI should find the local copy of ``mpich`` and link to it.
+
+.. note::
+
+  ``mpich`` has a high degree of ABI compatibility, making this procedure possible.
+  We have not currently implemented this procedure with ``openmpi``, but can do so at a later date
+  as ABI compatibility allows.
