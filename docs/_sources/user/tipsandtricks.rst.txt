@@ -2,7 +2,7 @@ Tips & tricks
 *************
 
 
-.. _multiple_channels: 
+.. _multiple_channels:
 
 Using multiple channels
 =======================
@@ -70,3 +70,37 @@ Using envs make it easier to debug problems with packages and ensure the stabili
   TL;DR if you are experiencing missing compilers run-times like ``libgcc-ng``,
   that is probably because you removed ``defaults``,
   just re-add it and activate ``strict`` for a smooth and stable experience when installing packages.
+
+
+.. _Using External Message Passing Interface (MPI) Libraries:
+
+Using External Message Passing Interface (MPI) Libraries
+========================================================
+
+On some high-performance computing (HPC) systems, users are expected to use the
+MPI binaries that are available on the system as opposed to those built by ``conda-forge``.
+These binaries are typically specialized for the system and interface properly with job
+schedulers, etc. However, this practice creates issues for ``conda-forge`` users. When you install
+a package from ``conda-forge`` that relies on MPI, ``conda`` will install the MPI binaries
+built by ``conda-forge`` and the package will link to those binaries. This setup often either
+does not work at all or functions in unexpected ways on HPC systems.
+
+To solve these issues, ``conda-forge`` has created special dummy builds of the ``mpich`` libraries
+that are simply shell packages with no contents. These packages allow the ``conda`` solver to produce
+correct environments while avoiding installing MPI binaries from ``conda-forge``. You can install the
+dummy package with the following command
+
+.. code-block:: shell
+
+    $ conda install mpich=3.3.*=external_*
+
+As long as you have the local copies of the ``mpich`` library in your linking paths and
+the local version matches the ``conda`` version up to the minor version number (e.g., ``3.3.1``
+matches ``3.3.2`` but not ``3.4.1``), then this procedure should work. At runtime, the ``conda-forge``
+package that depends on MPI should find the local copy of ``mpich`` and link to it.
+
+.. note::
+
+  ``mpich`` has a high degree of ABI compatibility, making this procedure possible.
+  We have not currently implemented this procedure with ``openmpi``, but can do so at a later date
+  as ABI compatibility allows.

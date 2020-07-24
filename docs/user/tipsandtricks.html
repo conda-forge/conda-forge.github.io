@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Tips &amp; tricks &#8212; conda-forge 2020.07.22 documentation</title>
+    <title>Tips &amp; tricks &#8212; conda-forge 2020.07.24 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.07.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.07.24 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li> 
       </ul>
@@ -121,6 +121,33 @@ just re-add it and activate <code class="docutils literal notranslate"><span cla
 </div>
 </div>
 </div>
+<div class="section" id="using-external-message-passing-interface-mpi-libraries">
+<span id="id1"></span><h2>Using External Message Passing Interface (MPI) Libraries<a class="headerlink" href="#using-external-message-passing-interface-mpi-libraries" title="Permalink to this headline">¶</a></h2>
+<p>On some high-performance computing (HPC) systems, users are expected to use the
+MPI binaries that are available on the system as opposed to those built by <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.
+These binaries are typically specialized for the system and interface properly with job
+schedulers, etc. However, this practice creates issues for <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> users. When you install
+a package from <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> that relies on MPI, <code class="docutils literal notranslate"><span class="pre">conda</span></code> will install the MPI binaries
+built by <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and the package will link to those binaries. This setup often either
+does not work at all or functions in unexpected ways on HPC systems.</p>
+<p>To solve these issues, <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> has created special dummy builds of the <code class="docutils literal notranslate"><span class="pre">mpich</span></code> libraries
+that are simply shell packages with no contents. These packages allow the <code class="docutils literal notranslate"><span class="pre">conda</span></code> solver to produce
+correct environments while avoiding installing MPI binaries from <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. You can install the
+dummy package with the following command</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ conda install <span class="nv">mpich</span><span class="o">=</span><span class="m">3</span>.3.*<span class="o">=</span>external_*
+</pre></div>
+</div>
+<p>As long as you have the local copies of the <code class="docutils literal notranslate"><span class="pre">mpich</span></code> library in your linking paths and
+the local version matches the <code class="docutils literal notranslate"><span class="pre">conda</span></code> version up to the minor version number (e.g., <code class="docutils literal notranslate"><span class="pre">3.3.1</span></code>
+matches <code class="docutils literal notranslate"><span class="pre">3.3.2</span></code> but not <code class="docutils literal notranslate"><span class="pre">3.4.1</span></code>), then this procedure should work. At runtime, the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>
+package that depends on MPI should find the local copy of <code class="docutils literal notranslate"><span class="pre">mpich</span></code> and link to it.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">mpich</span></code> has a high degree of ABI compatibility, making this procedure possible.
+We have not currently implemented this procedure with <code class="docutils literal notranslate"><span class="pre">openmpi</span></code>, but can do so at a later date
+as ABI compatibility allows.</p>
+</div>
+</div>
 </div>
 
 
@@ -143,6 +170,7 @@ just re-add it and activate <code class="docutils literal notranslate"><span cla
 <li class="toctree-l4"><a class="reference internal" href="#how-to-fix-it">How to fix it?</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#using-external-message-passing-interface-mpi-libraries">Using External Message Passing Interface (MPI) Libraries</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ci-skeleton.html">Using conda-forge to manage your CI</a></li>
@@ -219,7 +247,7 @@ just re-add it and activate <code class="docutils literal notranslate"><span cla
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.07.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.07.24 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li> 
       </ul>

@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge base &#8212; conda-forge 2020.07.22 documentation</title>
+    <title>Knowledge base &#8212; conda-forge 2020.07.24 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.07.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.07.24 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -206,7 +206,9 @@ nmake install
 </div>
 <div class="section" id="building-for-different-vc-versions">
 <h3>Building for different VC versions<a class="headerlink" href="#building-for-different-vc-versions" title="Permalink to this headline">¶</a></h3>
-<p>On Windows, different Visual C versions have different ABI and therefore a package needs to be built for different Visual C versions. Packages are tied to the VC version that they were built with and some packages have specific requirements of the VC version. For example, python 2.7 requires <code class="docutils literal notranslate"><span class="pre">vc</span> <span class="pre">9</span></code> and python 3.5 requires <code class="docutils literal notranslate"><span class="pre">vc</span> <span class="pre">14</span></code>.</p>
+<p>On Windows, different Visual C versions have different ABI and therefore a package needs to be built for different
+Visual C versions. Packages are tied to the VC version that they were built with and some packages have specific
+requirements of the VC version. For example, python 2.7 requires <code class="docutils literal notranslate"><span class="pre">vc</span> <span class="pre">9</span></code> and python 3.5 requires <code class="docutils literal notranslate"><span class="pre">vc</span> <span class="pre">14</span></code>.</p>
 <p>With <code class="docutils literal notranslate"><span class="pre">conda-build</span> <span class="pre">3.x</span></code>, <code class="docutils literal notranslate"><span class="pre">vc</span></code> can be used as a selector when using the <code class="docutils literal notranslate"><span class="pre">compiler</span></code> jinja syntax.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
   <span class="nt">build</span><span class="p">:</span>
@@ -247,8 +249,9 @@ nmake install
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Appropriate compiler runtime packages will be automatically added to the package’s runtime requirements and therefore there’s no need to specify <code class="docutils literal notranslate"><span class="pre">libgcc</span></code> or <code class="docutils literal notranslate"><span class="pre">libgfortran</span></code>.
-There is additional information about how conda-build 3 treats compilers in the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/source/compiler-tools.html">conda docs</a>.</p>
+<p>Appropriate compiler runtime packages will be automatically added to the package’s runtime requirements and therefore
+there’s no need to specify <code class="docutils literal notranslate"><span class="pre">libgcc</span></code> or <code class="docutils literal notranslate"><span class="pre">libgfortran</span></code>. There is additional information about how conda-build 3 treats
+compilers in the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/source/compiler-tools.html">conda docs</a>.</p>
 </div>
 </div>
 <div class="section" id="core-dependency-tree-packages-cdts">
@@ -340,6 +343,10 @@ there are <code class="docutils literal notranslate"><span class="pre">numpy</sp
 <li><p>the package works with any MPI provider (e.g. mpich, openmpi)</p></li>
 <li><p>the package works with/without MPI</p></li>
 </ul>
+<p>Note that sometimes users want to use packages in <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> built against
+our MPI libraries but linked to external MPI libraries at runtime. If you are interested
+in this procedure, see <a class="reference internal" href="../user/tipsandtricks.html#using-external-message-passing-interface-mpi-libraries"><span class="std std-ref">Using External Message Passing Interface (MPI) Libraries</span></a>
+for details.</p>
 </div>
 <div class="section" id="building-mpi-variants">
 <h4>Building MPI variants<a class="headerlink" href="#building-mpi-variants" title="Permalink to this headline">¶</a></h4>
@@ -402,7 +409,8 @@ To do this, add <cite>nompi</cite> to the mpi matrix:</p>
 </div>
 <div class="section" id="preferring-a-provider-usually-nompi">
 <h5>Preferring a provider (usually nompi)<a class="headerlink" href="#preferring-a-provider-usually-nompi" title="Permalink to this headline">¶</a></h5>
-<p>Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual exclusivity of the <code class="docutils literal notranslate"><span class="pre">mpi</span></code> metapackage allows picking between mpi providers by installing an mpi provider, e.g.</p>
+<p>Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual exclusivity of
+the <code class="docutils literal notranslate"><span class="pre">mpi</span></code> metapackage allows picking between mpi providers by installing an mpi provider, e.g.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install mpich ptscotch
 </pre></div>
 </div>
@@ -410,8 +418,12 @@ To do this, add <cite>nompi</cite> to the mpi matrix:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install openmpi ptscotch
 </pre></div>
 </div>
-<p>This doesn’t extend to <code class="docutils literal notranslate"><span class="pre">nompi</span></code>, because there is no <code class="docutils literal notranslate"><span class="pre">nompi</span></code> variant of the mpi metapackage. And there probably shouldn’t be, because some packages built with mpi doesn’t preclude other packages in the env that <em>may</em> have an mpi variant from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no parallel hdf5 yet. This works fine, though some features may not be available).</p>
-<p>Typically, if there is a preference it will be packaged with a nompi variant, where the serial build is preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.</p>
+<p>This doesn’t extend to <code class="docutils literal notranslate"><span class="pre">nompi</span></code>, because there is no <code class="docutils literal notranslate"><span class="pre">nompi</span></code> variant of the mpi metapackage. And there probably
+shouldn’t be, because some packages built with mpi doesn’t preclude other packages in the env that <em>may</em> have an mpi variant
+from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no
+parallel hdf5 yet. This works fine, though some features may not be available).</p>
+<p>Typically, if there is a preference it will be packaged with a nompi variant, where the serial build is
+preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.</p>
 <div class="admonition-outdated admonition">
 <p class="admonition-title">Outdated</p>
 <p>To de-prioritize a build in the solver, it can be given a special <code class="docutils literal notranslate"><span class="pre">track_features</span></code> field:</p>
@@ -422,7 +434,9 @@ To do this, add <cite>nompi</cite> to the mpi matrix:</p>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>update</strong>: track_features deprioritization has too high priority in the solver, preventing a package from adopting a variant of a dependency after some builds have already been made. Instead, use a build number offset to apply the preference at a more appropriate level.</p>
+<p><strong>update</strong>: track_features deprioritization has too high priority in the solver, preventing a package from
+adopting a variant of a dependency after some builds have already been made. Instead, use a build number
+offset to apply the preference at a more appropriate level.</p>
 </div>
 </div>
 <p>Here is an example build section:</p>
@@ -470,7 +484,8 @@ e.g. Python itself. If the package is built for multiple Python versions, use:</
 <li><p>nompi variant can be explicitly requested with <code class="docutils literal notranslate"><span class="pre">pkg=*=nompi_*</span></code></p></li>
 </ul>
 <p>If building with this library creates a runtime dependency on the variant, the build string pinning can be added to <code class="docutils literal notranslate"><span class="pre">run_exports</span></code>.</p>
-<p>For example, if building against the nompi variant will work with any installed version, but building with a given mpi provider requires running with that mpi:</p>
+<p>For example, if building against the nompi variant will work with any installed version, but building with a
+given mpi provider requires running with that mpi:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">build</span><span class="p">:</span>
   <span class="o">...</span>
   <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">mpi</span> <span class="o">!=</span> <span class="s1">&#39;nompi&#39;</span> <span class="o">%</span><span class="p">}</span>
@@ -479,7 +494,8 @@ e.g. Python itself. If the package is built for multiple Python versions, use:</
   <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>Remove the <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">mpi...</span></code> condition if all variants should create a strict runtime dependency based on the variant chosen at build time (i.e. if the nompi build cannot be run against the mpich build).</p>
+<p>Remove the <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">mpi...</span></code> condition if all variants should create a strict runtime dependency based on the variant
+chosen at build time (i.e. if the nompi build cannot be run against the mpich build).</p>
 </div>
 <div class="section" id="complete-example">
 <h5>Complete example<a class="headerlink" href="#complete-example" title="Permalink to this headline">¶</a></h5>
@@ -551,7 +567,8 @@ e.g. Python itself. If the package is built for multiple Python versions, use:</
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pkg * mpi_{{ mpi }}_*</span>  <span class="c1"># [mpi != &#39;nompi&#39;]</span>
 </pre></div>
 </div>
-<p>mpi-metapackage exclusivity allows <code class="docutils literal notranslate"><span class="pre">mpi_*</span></code> to resolve the same as <code class="docutils literal notranslate"><span class="pre">mpi_{{</span> <span class="pre">mpi</span> <span class="pre">}}_*</span></code> if <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">mpi</span> <span class="pre">}}</span></code> is also a direct dependency, though it’s probably nicer to be explicit.</p>
+<p>mpi-metapackage exclusivity allows <code class="docutils literal notranslate"><span class="pre">mpi_*</span></code> to resolve the same as <code class="docutils literal notranslate"><span class="pre">mpi_{{</span> <span class="pre">mpi</span> <span class="pre">}}_*</span></code>
+if <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">mpi</span> <span class="pre">}}</span></code> is also a direct dependency, though it’s probably nicer to be explicit.</p>
 </div>
 <div class="section" id="just-mpi-example">
 <h5>Just mpi example<a class="headerlink" href="#just-mpi-example" title="Permalink to this headline">¶</a></h5>
@@ -606,18 +623,21 @@ switched from GNU to LLVM by doing the following.</p>
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>OpenMP library switching is possible because LLVM’s implementation has the symbol’s from GNU in addition to the LLVM ones (originally from Intel).
-An object file generated by <code class="docutils literal notranslate"><span class="pre">gcc</span></code>, <code class="docutils literal notranslate"><span class="pre">g++</span></code> or <code class="docutils literal notranslate"><span class="pre">gfortran</span></code> will have GNU’s symbols and therefore the underlying library can be switched.
-However, an object file generated by <code class="docutils literal notranslate"><span class="pre">clang</span></code> or <code class="docutils literal notranslate"><span class="pre">clang++</span></code> will have LLVM’s symbols and therefore the underlying OpenMP library
-cannot be switched to GNU’s library.</p>
-<p>One reason you may wish to switch to LLVM is because the implementation is fork safe. One reason to keep using the GNU implementation is that
-the OpenMP target offloading symbols in <code class="docutils literal notranslate"><span class="pre">libgomp</span></code> like <code class="docutils literal notranslate"><span class="pre">GOMP_target</span></code> are empty stubs in LLVM and therefore does not work.</p>
+<p>OpenMP library switching is possible because LLVM’s implementation has the symbol’s from GNU in addition to the LLVM
+ones (originally from Intel). An object file generated by <code class="docutils literal notranslate"><span class="pre">gcc</span></code>, <code class="docutils literal notranslate"><span class="pre">g++</span></code> or <code class="docutils literal notranslate"><span class="pre">gfortran</span></code> will have GNU’s symbols and
+therefore the underlying library can be switched.
+However, an object file generated by <code class="docutils literal notranslate"><span class="pre">clang</span></code> or <code class="docutils literal notranslate"><span class="pre">clang++</span></code> will have LLVM’s symbols and therefore the underlying
+OpenMP library cannot be switched to GNU’s library.</p>
+<p>One reason you may wish to switch to LLVM is because the implementation is fork safe. One reason to keep using the
+GNU implementation is that the OpenMP target offloading symbols in <code class="docutils literal notranslate"><span class="pre">libgomp</span></code> like <code class="docutils literal notranslate"><span class="pre">GOMP_target</span></code> are empty stubs
+in LLVM and therefore does not work.</p>
 </div>
 </div>
 </div>
 <div class="section" id="yum-requirements-txt">
 <span id="yum-deps"></span><h3>yum_requirements.txt<a class="headerlink" href="#yum-requirements-txt" title="Permalink to this headline">¶</a></h3>
-<p>Dependencies can be installed into the build container with <code class="docutils literal notranslate"><span class="pre">yum</span></code>, by listing package names line by line in a file named <code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code> in the <code class="docutils literal notranslate"><span class="pre">recipe</span></code> directory of a feedstock.</p>
+<p>Dependencies can be installed into the build container with <code class="docutils literal notranslate"><span class="pre">yum</span></code>, by listing package names line by line in a file
+named <code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code> in the <code class="docutils literal notranslate"><span class="pre">recipe</span></code> directory of a feedstock.</p>
 <p>There are only very few situations where dependencies installed by yum are acceptable. These cases include</p>
 <blockquote>
 <div><ul class="simple">
@@ -625,7 +645,7 @@ the OpenMP target offloading symbols in <code class="docutils literal notranslat
 <li><p>installing packages that are only required for testing</p></li>
 </ul>
 </div></blockquote>
-<p>After changing <code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code>, <a class="reference internal" href="updating_pkgs.html#dev-update-rerender"><span class="std std-ref">rerender</span></a> to update       the configuration.</p>
+<p>After changing <code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code>, <a class="reference internal" href="updating_pkgs.html#dev-update-rerender"><span class="std std-ref">rerender</span></a> to update the configuration.</p>
 </div>
 </div>
 <div class="section" id="special-packages">
@@ -697,7 +717,10 @@ conda install <span class="s2">&quot;blas=*=netlib&quot;</span>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you want to commit to a specific blas implementation, you can prevent conda from switching back by pinning the blas implementation in your environment. To commit to mkl, add <code class="docutils literal notranslate"><span class="pre">blas=*=mkl</span></code> to <code class="docutils literal notranslate"><span class="pre">&lt;conda-root&gt;/envs/&lt;env-name&gt;/conda-meta/pinned</span></code>, as described in the <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning">conda-docs</a>.</p>
+<p>If you want to commit to a specific blas implementation, you can prevent conda from switching back by pinning
+the blas implementation in your environment. To commit to mkl, add <code class="docutils literal notranslate"><span class="pre">blas=*=mkl</span></code> to
+<code class="docutils literal notranslate"><span class="pre">&lt;conda-root&gt;/envs/&lt;env-name&gt;/conda-meta/pinned</span></code>, as described in the
+<a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning">conda-docs</a>.</p>
 </div>
 </div>
 <div class="section" id="how-it-works">
@@ -734,7 +757,8 @@ in your recipe with</p>
 <div class="section" id="noarch-builds">
 <h2>Noarch builds<a class="headerlink" href="#noarch-builds" title="Permalink to this headline">¶</a></h2>
 <p>Noarch packages are packages that are not architecture specific and therefore only have to be built once.</p>
-<p>Declaring these packages as <code class="docutils literal notranslate"><span class="pre">noarch</span></code> in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section of the meta.yaml, reduces shared CI resources. Therefore all packages that qualify to be noarch packages, should be declared as such.</p>
+<p>Declaring these packages as <code class="docutils literal notranslate"><span class="pre">noarch</span></code> in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section of the meta.yaml, reduces shared CI resources.
+Therefore all packages that qualify to be noarch packages, should be declared as such.</p>
 <div class="section" id="noarch-python">
 <span id="noarch"></span><h3>Noarch python<a class="headerlink" href="#noarch-python" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> directive, in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section, makes pure-Python
@@ -751,7 +775,8 @@ statement and add version constraint on python in <code class="docutils literal 
 section.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">2to3</span></code> is not used</p></li>
 <li><p>Scripts argument in setup.py is not used</p></li>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">console_script</span></code> <code class="docutils literal notranslate"><span class="pre">entry_points</span></code> are defined in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> or <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code>, they are also listed in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section of <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">console_script</span></code> <code class="docutils literal notranslate"><span class="pre">entry_points</span></code> are defined in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> or <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code>, they are also listed in
+the <code class="docutils literal notranslate"><span class="pre">build</span></code> section of <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></p></li>
 <li><p>No activate scripts</p></li>
 <li><p>Not a dependency of conda</p></li>
 </ul>
@@ -759,13 +784,16 @@ section.</p></li>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>While <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> does not work with selectors, it does work with version constraints.
-<code class="docutils literal notranslate"><span class="pre">skip:</span> <span class="pre">True</span>&#160; <span class="pre">#</span> <span class="pre">[py2k]</span></code> can be replaced with a constrained python version in the host and run subsections: say <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">&gt;=3</span></code> instead of just <code class="docutils literal notranslate"><span class="pre">python</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">skip:</span> <span class="pre">True</span>&#160; <span class="pre">#</span> <span class="pre">[py2k]</span></code> can be replaced with a constrained python version in the host and run subsections:
+say <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">&gt;=3</span></code> instead of just <code class="docutils literal notranslate"><span class="pre">python</span></code>.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Only <code class="docutils literal notranslate"><span class="pre">console_script</span></code> entry points have to be listed in meta.yaml. Other entry points do not conflict with <code class="docutils literal notranslate"><span class="pre">noarch</span></code> and therefore do not require extra treatment.</p>
+<p>Only <code class="docutils literal notranslate"><span class="pre">console_script</span></code> entry points have to be listed in meta.yaml. Other entry points do not conflict
+with <code class="docutils literal notranslate"><span class="pre">noarch</span></code> and therefore do not require extra treatment.</p>
 </div>
-<p>If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">add</span> <span class="pre">noarch:</span> <span class="pre">python</span></code>.</p>
+<p>If an existing python package qualifies to be converted to a noarch package, you can request the required changes
+by opening a new issue and including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">add</span> <span class="pre">noarch:</span> <span class="pre">python</span></code>.</p>
 </div>
 <div class="section" id="noarch-generic">
 <h3>Noarch generic<a class="headerlink" href="#noarch-generic" title="Permalink to this headline">¶</a></h3>
@@ -777,7 +805,9 @@ section.</p></li>
 </div>
 <div class="section" id="build-matrices">
 <h2>Build matrices<a class="headerlink" href="#build-matrices" title="Permalink to this headline">¶</a></h2>
-<p>Currently, <code class="docutils literal notranslate"><span class="pre">python,</span> <span class="pre">vc,</span> <span class="pre">r-base</span></code> will create a matrix of jobs for each supported version. If <code class="docutils literal notranslate"><span class="pre">python</span></code> is only a build dependency and not a runtime dependency (eg: build script of the package is written in Python, but the package is not dependent on python), use <code class="docutils literal notranslate"><span class="pre">build</span></code> section</p>
+<p>Currently, <code class="docutils literal notranslate"><span class="pre">python,</span> <span class="pre">vc,</span> <span class="pre">r-base</span></code> will create a matrix of jobs for each supported version. If <code class="docutils literal notranslate"><span class="pre">python</span></code> is only a
+build dependency and not a runtime dependency (eg: build script of the package is written in Python, but the
+package is not dependent on python), use <code class="docutils literal notranslate"><span class="pre">build</span></code> section</p>
 <p>Following implies that <code class="docutils literal notranslate"><span class="pre">python</span></code> is only a build dependency and no Python matrix will be created.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
@@ -785,13 +815,16 @@ section.</p></li>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">some_other_package</span>
 </pre></div>
 </div>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">host</span></code> should be non-empty or <code class="docutils literal notranslate"><span class="pre">compiler</span></code> jinja syntax used or <code class="docutils literal notranslate"><span class="pre">build/merge_build_host</span></code> set to True for the <code class="docutils literal notranslate"><span class="pre">build</span></code> section to be treated as different from <code class="docutils literal notranslate"><span class="pre">host</span></code>.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">host</span></code> should be non-empty or <code class="docutils literal notranslate"><span class="pre">compiler</span></code> jinja syntax used or <code class="docutils literal notranslate"><span class="pre">build/merge_build_host</span></code> set to
+True for the <code class="docutils literal notranslate"><span class="pre">build</span></code> section to be treated as different from <code class="docutils literal notranslate"><span class="pre">host</span></code>.</p>
 <p>Following implies that <code class="docutils literal notranslate"><span class="pre">python</span></code> is a runtime dependency and a Python matrix for each supported python version will be created.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>’s build matrices is removed in conda-smithy=3. To get a build matrix, create a <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file inside the recipe folder. For example, the following will give you 2 builds and you can use the selector <code class="docutils literal notranslate"><span class="pre">vtk_with_osmesa</span></code> in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>’s build matrices is removed in conda-smithy=3. To get a build matrix,
+create a <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file inside the recipe folder. For example, the following will give you 2
+builds and you can use the selector <code class="docutils literal notranslate"><span class="pre">vtk_with_osmesa</span></code> in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vtk_with_osmesa</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
@@ -1012,7 +1045,7 @@ conda-build</p>
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.07.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.07.24 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
