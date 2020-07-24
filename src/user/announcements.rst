@@ -4,7 +4,7 @@ Announcements
 2020
 ----
 
-:2020-07-23: Struct channel priority in builds for OSX and Linux
+:2020-07-23: Strict channel priority in builds for OSX and Linux
 
     We have changed the OSX and Linux platforms to enforce struct channel priority
     in package builds. This change means that if a package is available in the ``conda-forge``
