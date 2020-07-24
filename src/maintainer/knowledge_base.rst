@@ -922,6 +922,7 @@ builds and you can use the selector ``vtk_with_osmesa`` in the ``meta.yaml``
 
 You need to rerender the feedstock after this change.
 
+
 Requiring newer macOS SDKs
 ==========================
 
@@ -949,6 +950,7 @@ In ``recipe/meta.yaml``, add the following to ensure that the user's system is c
 Note that the requirement is a `run_constrained`, because the ``__osx`` virtual package
 is supported only by ``conda>=4.8``. Once that conda version is used widely, the
 requirement will be changed from ``run_constrained`` to ``run``.
+
 
 PyPy builds
 ===========
@@ -1007,3 +1009,19 @@ To skip the pypy builds, do the following,
 
    build:
      skip: True         # [python_impl == 'pypy']
+
+
+Using the CentOS 7 / ``glibc`` ``2.17`` ``sysroot`` on ``linux-64``
+===================================================================
+
+To use the newer CentOS 7 ``sysroot`` with ``glibc`` ``2.17`` on ``linux-64``,
+put the following in your build section
+
+.. code-block:: yaml
+
+   requirements:
+     build:
+       - {{ compiler('c') }}
+       - sysroot_linux-64 2.17  # [linux]
+
+Note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 7.
