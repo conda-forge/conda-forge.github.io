@@ -169,7 +169,9 @@ The following feedstocks are examples of this build structure deployed:
 Building for different VC versions
 ----------------------------------
 
-On Windows, different Visual C versions have different ABI and therefore a package needs to be built for different Visual C versions. Packages are tied to the VC version that they were built with and some packages have specific requirements of the VC version. For example, python 2.7 requires ``vc 9`` and python 3.5 requires ``vc 14``.
+On Windows, different Visual C versions have different ABI and therefore a package needs to be built for different
+Visual C versions. Packages are tied to the VC version that they were built with and some packages have specific
+requirements of the VC version. For example, python 2.7 requires ``vc 9`` and python 3.5 requires ``vc 14``.
 
 With ``conda-build 3.x``, ``vc`` can be used as a selector when using the ``compiler`` jinja syntax.
 
@@ -219,8 +221,10 @@ A package that needs all three compilers would define
         - {{ compiler('fortran') }}
 
 .. note::
-  Appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore there's no need to specify ``libgcc`` or ``libgfortran``.
-  There is additional information about how conda-build 3 treats compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/source/compiler-tools.html>`_.
+
+  Appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore
+  there's no need to specify ``libgcc`` or ``libgfortran``. There is additional information about how conda-build 3 treats
+  compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/source/compiler-tools.html>`_.
 
 .. _cdt_packages:
 
@@ -323,6 +327,7 @@ Message passing interface (MPI)
 -------------------------------
 
 .. note::
+
   This section originates from Min's notes: https://hackmd.io/ry4uI0thTs2q_b4mAQd_qg
 
 MPI Variants in conda-forge
@@ -337,7 +342,10 @@ There are a few broad cases:
 - the package works with any MPI provider (e.g. mpich, openmpi)
 - the package works with/without MPI
 
-
+Note that sometimes users want to use packages in ``conda-forge`` built against
+our MPI libraries but linked to external MPI libraries at runtime. If you are interested
+in this procedure, see :ref:`Using External Message Passing Interface (MPI) Libraries`
+for details.
 
 Building MPI variants
 ^^^^^^^^^^^^^^^^^^^^^
@@ -421,7 +429,8 @@ and apply the appropriate conditionals in your build:
 Preferring a provider (usually nompi)
 """""""""""""""""""""""""""""""""""""
 
-Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual exclusivity of the ``mpi`` metapackage allows picking between mpi providers by installing an mpi provider, e.g.
+Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual exclusivity of
+the ``mpi`` metapackage allows picking between mpi providers by installing an mpi provider, e.g.
 
 .. code-block:: bash
 
@@ -433,9 +442,13 @@ or
 
     conda install openmpi ptscotch
 
-This doesn't extend to ``nompi``, because there is no ``nompi`` variant of the mpi metapackage. And there probably shouldn't be, because some packages built with mpi doesn't preclude other packages in the env that *may* have an mpi variant from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no parallel hdf5 yet. This works fine, though some features may not be available).
+This doesn't extend to ``nompi``, because there is no ``nompi`` variant of the mpi metapackage. And there probably
+shouldn't be, because some packages built with mpi doesn't preclude other packages in the env that *may* have an mpi variant
+from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no
+parallel hdf5 yet. This works fine, though some features may not be available).
 
-Typically, if there is a preference it will be packaged with a nompi variant, where the serial build is preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.
+Typically, if there is a preference it will be packaged with a nompi variant, where the serial build is
+preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.
 
 
 .. admonition:: Outdated
@@ -447,7 +460,11 @@ Typically, if there is a preference it will be packaged with a nompi variant, wh
   - No package should actually *have* the tracked feature.
 
 
-  .. note:: **update**: track_features deprioritization has too high priority in the solver, preventing a package from adopting a variant of a dependency after some builds have already been made. Instead, use a build number offset to apply the preference at a more appropriate level.
+  .. note::
+
+    **update**: track_features deprioritization has too high priority in the solver, preventing a package from
+    adopting a variant of a dependency after some builds have already been made. Instead, use a build number
+    offset to apply the preference at a more appropriate level.
 
 
 Here is an example build section:
@@ -501,7 +518,8 @@ Which has the following consequences:
 
 If building with this library creates a runtime dependency on the variant, the build string pinning can be added to ``run_exports``.
 
-For example, if building against the nompi variant will work with any installed version, but building with a given mpi provider requires running with that mpi:
+For example, if building against the nompi variant will work with any installed version, but building with a
+given mpi provider requires running with that mpi:
 
 
 ::
@@ -513,7 +531,8 @@ For example, if building against the nompi variant will work with any installed 
       - {{ name }} * {{ mpi_prefix }}_*
     {% endif %}
 
-Remove the ``if mpi...`` condition if all variants should create a strict runtime dependency based on the variant chosen at build time (i.e. if the nompi build cannot be run against the mpich build).
+Remove the ``if mpi...`` condition if all variants should create a strict runtime dependency based on the variant
+chosen at build time (i.e. if the nompi build cannot be run against the mpich build).
 
 Complete example
 """"""""""""""""
@@ -592,7 +611,8 @@ And then a package that depends on this one can explicitly pick the appropriate 
       - {{ mpi }}  # [mpi != 'nompi']
       - pkg * mpi_{{ mpi }}_*  # [mpi != 'nompi']
 
-mpi-metapackage exclusivity allows ``mpi_*`` to resolve the same as ``mpi_{{ mpi }}_*`` if ``{{ mpi }}`` is also a direct dependency, though it's probably nicer to be explicit.
+mpi-metapackage exclusivity allows ``mpi_*`` to resolve the same as ``mpi_{{ mpi }}_*``
+if ``{{ mpi }}`` is also a direct dependency, though it's probably nicer to be explicit.
 
 Just mpi example
 """"""""""""""""
@@ -652,13 +672,16 @@ OpenMP library can be switched back to GNU's libgomp by doing the following.
     conda install _openmp_mutex=*=*_gnu
 
 .. note::
-  OpenMP library switching is possible because LLVM's implementation has the symbol's from GNU in addition to the LLVM ones (originally from Intel).
-  An object file generated by ``gcc``, ``g++`` or ``gfortran`` will have GNU's symbols and therefore the underlying library can be switched.
-  However, an object file generated by ``clang`` or ``clang++`` will have LLVM's symbols and therefore the underlying OpenMP library
-  cannot be switched to GNU's library.
 
-  One reason you may wish to switch to LLVM is because the implementation is fork safe. One reason to keep using the GNU implementation is that
-  the OpenMP target offloading symbols in ``libgomp`` like ``GOMP_target`` are empty stubs in LLVM and therefore does not work.
+  OpenMP library switching is possible because LLVM's implementation has the symbol's from GNU in addition to the LLVM
+  ones (originally from Intel). An object file generated by ``gcc``, ``g++`` or ``gfortran`` will have GNU's symbols and
+  therefore the underlying library can be switched.
+  However, an object file generated by ``clang`` or ``clang++`` will have LLVM's symbols and therefore the underlying
+  OpenMP library cannot be switched to GNU's library.
+
+  One reason you may wish to switch to LLVM is because the implementation is fork safe. One reason to keep using the
+  GNU implementation is that the OpenMP target offloading symbols in ``libgomp`` like ``GOMP_target`` are empty stubs
+  in LLVM and therefore does not work.
 
 
 .. _yum_deps:
@@ -666,14 +689,15 @@ OpenMP library can be switched back to GNU's libgomp by doing the following.
 yum_requirements.txt
 --------------------
 
-Dependencies can be installed into the build container with ``yum``, by listing package names line by line in a file named ``yum_requirements.txt`` in the ``recipe`` directory of a feedstock.
+Dependencies can be installed into the build container with ``yum``, by listing package names line by line in a file
+named ``yum_requirements.txt`` in the ``recipe`` directory of a feedstock.
 
 There are only very few situations where dependencies installed by yum are acceptable. These cases include
 
   - satisfying the requirements of :term:`CDT` packages during test phase
   - installing packages that are only required for testing
 
-After changing ``yum_requirements.txt``, :ref:`rerender <dev_update_rerender>` to update       the configuration.
+After changing ``yum_requirements.txt``, :ref:`rerender <dev_update_rerender>` to update the configuration.
 
 
 Special packages
@@ -760,7 +784,11 @@ The following legacy commands are also supported as well.
     conda install "blas=*=netlib"
 
 .. note::
-  If you want to commit to a specific blas implementation, you can prevent conda from switching back by pinning the blas implementation in your environment. To commit to mkl, add ``blas=*=mkl`` to ``<conda-root>/envs/<env-name>/conda-meta/pinned``, as described in the `conda-docs <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning>`__.
+
+  If you want to commit to a specific blas implementation, you can prevent conda from switching back by pinning
+  the blas implementation in your environment. To commit to mkl, add ``blas=*=mkl`` to
+  ``<conda-root>/envs/<env-name>/conda-meta/pinned``, as described in the
+  `conda-docs <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning>`__.
 
 How it works
 ^^^^^^^^^^^^
@@ -805,7 +833,8 @@ Noarch builds
 
 Noarch packages are packages that are not architecture specific and therefore only have to be built once.
 
-Declaring these packages as ``noarch`` in the ``build`` section of the meta.yaml, reduces shared CI resources. Therefore all packages that qualify to be noarch packages, should be declared as such.
+Declaring these packages as ``noarch`` in the ``build`` section of the meta.yaml, reduces shared CI resources.
+Therefore all packages that qualify to be noarch packages, should be declared as such.
 
 
 .. _noarch:
@@ -826,18 +855,24 @@ In order to qualify as a noarch python package, all of the following criteria mu
     section.
   - ``2to3`` is not used
   - Scripts argument in setup.py is not used
-  - If ``console_script`` ``entry_points`` are defined in ``setup.py`` or ``setup.cfg``, they are also listed in the ``build`` section of ``meta.yaml``
+  - If ``console_script`` ``entry_points`` are defined in ``setup.py`` or ``setup.cfg``, they are also listed in
+    the ``build`` section of ``meta.yaml``
   - No activate scripts
   - Not a dependency of conda
 
 .. note::
+
   While ``noarch: python`` does not work with selectors, it does work with version constraints.
-  ``skip: True  # [py2k]`` can be replaced with a constrained python version in the host and run subsections: say ``python >=3`` instead of just ``python``.
+  ``skip: True  # [py2k]`` can be replaced with a constrained python version in the host and run subsections:
+  say ``python >=3`` instead of just ``python``.
 
 .. note::
-  Only ``console_script`` entry points have to be listed in meta.yaml. Other entry points do not conflict with ``noarch`` and therefore do not require extra treatment.
 
-If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including ``@conda-forge-admin, please add noarch: python``.
+  Only ``console_script`` entry points have to be listed in meta.yaml. Other entry points do not conflict
+  with ``noarch`` and therefore do not require extra treatment.
+
+If an existing python package qualifies to be converted to a noarch package, you can request the required changes
+by opening a new issue and including ``@conda-forge-admin, please add noarch: python``.
 
 
 Noarch generic
@@ -851,7 +886,9 @@ Noarch generic
 Build matrices
 ==============
 
-Currently, ``python, vc, r-base`` will create a matrix of jobs for each supported version. If ``python`` is only a build dependency and not a runtime dependency (eg: build script of the package is written in Python, but the package is not dependent on python), use ``build`` section
+Currently, ``python, vc, r-base`` will create a matrix of jobs for each supported version. If ``python`` is only a
+build dependency and not a runtime dependency (eg: build script of the package is written in Python, but the
+package is not dependent on python), use ``build`` section
 
 Following implies that ``python`` is only a build dependency and no Python matrix will be created.
 
@@ -863,7 +900,8 @@ Following implies that ``python`` is only a build dependency and no Python matri
       - some_other_package
 
 
-Note that ``host`` should be non-empty or ``compiler`` jinja syntax used or ``build/merge_build_host`` set to True for the ``build`` section to be treated as different from ``host``.
+Note that ``host`` should be non-empty or ``compiler`` jinja syntax used or ``build/merge_build_host`` set to
+True for the ``build`` section to be treated as different from ``host``.
 
 Following implies that ``python`` is a runtime dependency and a Python matrix for each supported python version will be created.
 
@@ -872,7 +910,9 @@ Following implies that ``python`` is a runtime dependency and a Python matrix fo
     host:
       - python
 
-``conda-forge.yml``'s build matrices is removed in conda-smithy=3. To get a build matrix, create a ``conda_build_config.yaml`` file inside the recipe folder. For example, the following will give you 2 builds and you can use the selector ``vtk_with_osmesa`` in the ``meta.yaml``
+``conda-forge.yml``'s build matrices is removed in conda-smithy=3. To get a build matrix,
+create a ``conda_build_config.yaml`` file inside the recipe folder. For example, the following will give you 2
+builds and you can use the selector ``vtk_with_osmesa`` in the ``meta.yaml``
 
 .. code-block:: yaml
 
