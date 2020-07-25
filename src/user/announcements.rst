@@ -3,6 +3,18 @@ Announcements
 
 2020
 ----
+:2020-07-27: Automerge bot rebuild PRs by default
+
+    In two weeks we will set all new bot PRs for rebuilding packages (eg for a new version of boost)
+    to automatically merge once they pass the CI and linter, by default.
+    This will enable migrations to go much faster and will reduce maintainance burden.
+    If you maintain a package where this could be detrimental please add 
+    ``bot: automerge: False`` or ``bot: automerge: version`` to the ``conda-forge.yaml``.
+    ``False`` will tell the bot to never automerge and ``version`` will only automerge for 
+    version bump PRs.
+    If you have any issues or concerns please contact the bot team via ``@conda-forge/bot`` or
+    on the `bot gitter <https://gitter.im/conda-forge/regro-cf-autotick-bot>`_.
+    Note that this doesn't cause PRs which have already been issued to be automerged.
 
 :2020-07-23: Strict channel priority in builds for OSX and Linux
 
