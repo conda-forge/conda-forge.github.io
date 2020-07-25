@@ -9,7 +9,7 @@ Announcements
     to automatically merge once they pass the CI and linter, by default.
     This will enable migrations to go much faster and will reduce maintenance burden.
     If you maintain a package where this could be detrimental please add 
-    ``bot: automerge: False`` or ``bot: automerge: version`` to the ``conda-forge.yaml``.
+    ``bot: automerge: False`` or ``bot: automerge: version`` to the ``conda-forge.yml``.
     ``False`` will tell the bot to never automerge and ``version`` will only automerge for 
     version bump PRs.
     If you have any issues or concerns please contact the bot team via ``@conda-forge/bot`` or
