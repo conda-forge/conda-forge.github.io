@@ -1011,8 +1011,10 @@ To skip the pypy builds, do the following,
      skip: True         # [python_impl == 'pypy']
 
 
-Using the CentOS 7 / ``glibc`` ``2.17`` ``sysroot`` on ``linux-64``
-===================================================================
+.. _centos7:
+
+Using CentOS 7
+==============
 
 To use the newer CentOS 7 ``sysroot`` with ``glibc`` ``2.17`` on ``linux-64``,
 put the following in your build section
@@ -1023,5 +1025,14 @@ put the following in your build section
      build:
        - {{ compiler('c') }}
        - sysroot_linux-64 2.17  # [linux]
+
+You also need to use a newer docker image by setting this in the ``conda_build_config.yaml``
+of your recipe
+
+.. code-block:: yaml
+
+   docker_image:                             # [linux64]
+     - condaforge/linux-anvil-cos7-x86_64    # [linux64]
+
 
 Note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 7.
