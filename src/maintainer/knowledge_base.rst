@@ -1024,7 +1024,7 @@ put the following in your build section
    requirements:
      build:
        - {{ compiler('c') }}
-       - sysroot_linux-64 2.17  # [linux]
+       - sysroot_linux-64 2.17  # [linux64]
 
 You also need to use a newer docker image by setting this in the ``conda_build_config.yaml``
 of your recipe
