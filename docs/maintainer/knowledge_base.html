@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge base &#8212; conda-forge 2020.07.25 documentation</title>
+    <title>Knowledge base &#8212; conda-forge 2020.07.26 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.07.25 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.07.26 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -900,6 +900,24 @@ conda-build</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="using-centos-7">
+<span id="centos7"></span><h2>Using CentOS 7<a class="headerlink" href="#using-centos-7" title="Permalink to this headline">¶</a></h2>
+<p>To use the newer CentOS 7 <code class="docutils literal notranslate"><span class="pre">sysroot</span></code> with <code class="docutils literal notranslate"><span class="pre">glibc</span></code> <code class="docutils literal notranslate"><span class="pre">2.17</span></code> on <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>,
+put the following in your build section.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;c&#39;)</span> <span class="p p-Indicator">}}</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sysroot_linux-64 2.17</span>  <span class="c1"># [linux64]</span>
+</pre></div>
+</div>
+<p>You also need to use a newer docker image by setting this in the <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code>
+of your recipe and rerendering.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">docker_image</span><span class="p">:</span>                             <span class="c1"># [linux64]</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">condaforge/linux-anvil-cos7-x86_64</span>    <span class="c1"># [linux64]</span>
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">aarch64</span></code> and <code class="docutils literal notranslate"><span class="pre">ppc64le</span></code> platforms already use CentOS 7.</p>
+</div>
 </div>
 
 
@@ -973,6 +991,7 @@ conda-build</p>
 <li class="toctree-l3"><a class="reference internal" href="#build-matrices">Build matrices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#requiring-newer-macos-sdks">Requiring newer macOS SDKs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pypy-builds">PyPy builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-centos-7">Using CentOS 7</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
@@ -1045,7 +1064,7 @@ conda-build</p>
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.07.25 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.07.26 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>

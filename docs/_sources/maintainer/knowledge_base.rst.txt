@@ -922,6 +922,7 @@ builds and you can use the selector ``vtk_with_osmesa`` in the ``meta.yaml``
 
 You need to rerender the feedstock after this change.
 
+
 Requiring newer macOS SDKs
 ==========================
 
@@ -949,6 +950,7 @@ In ``recipe/meta.yaml``, add the following to ensure that the user's system is c
 Note that the requirement is a `run_constrained`, because the ``__osx`` virtual package
 is supported only by ``conda>=4.8``. Once that conda version is used widely, the
 requirement will be changed from ``run_constrained`` to ``run``.
+
 
 PyPy builds
 ===========
@@ -1007,3 +1009,30 @@ To skip the pypy builds, do the following,
 
    build:
      skip: True         # [python_impl == 'pypy']
+
+
+.. _centos7:
+
+Using CentOS 7
+==============
+
+To use the newer CentOS 7 ``sysroot`` with ``glibc`` ``2.17`` on ``linux-64``,
+put the following in your build section.
+
+.. code-block:: yaml
+
+   requirements:
+     build:
+       - {{ compiler('c') }}
+       - sysroot_linux-64 2.17  # [linux64]
+
+You also need to use a newer docker image by setting this in the ``conda_build_config.yaml``
+of your recipe and rerendering.
+
+.. code-block:: yaml
+
+   docker_image:                             # [linux64]
+     - condaforge/linux-anvil-cos7-x86_64    # [linux64]
+
+
+Note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 7.
