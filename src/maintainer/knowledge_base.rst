@@ -1017,7 +1017,7 @@ Using CentOS 7
 ==============
 
 To use the newer CentOS 7 ``sysroot`` with ``glibc`` ``2.17`` on ``linux-64``,
-put the following in your build section
+put the following in your build section.
 
 .. code-block:: yaml
 
