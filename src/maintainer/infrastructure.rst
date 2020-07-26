@@ -287,18 +287,32 @@ principles.
   Note that because of the way we enforce runtime constraints, these compiler upgrades will not break
   existing packages. However, if you are using the compilers outside of ``conda``, then you may find issues.
 * We generally provide notice in the form of an announcement when a compiler is going to be upgraded.
-  Note that these changes take a bit of time to complete, so you will generally have time 
+  Note that these changes take a bit of time to complete, so you will generally have time
   to prepare should you need to.
 * Some of the criteria we think about when considering a compiler migration include
   1) the degree of disruption to the ecosystem, 2) the amount of work for the ``core`` team,
   and 3) the amount of time it will cost our (volunteer) feedstock maintainers.
 
-Finally, we do use some unofficial names for our compiler stack internally. Note however that
+We do use some unofficial names for our compiler stack internally. Note however that
 the existence of these names does not imply any level of support or stability for the compilers
 that form the given stack.
 
 * Our current compiler stack is referred to internally as ``comp7``.
 * The previous compiler stack based in part on the various ``toolchain_*`` packages
-  was sometimes referred to as ``comp4``. On linux the ``toolchain_*`` compilers were 
-  GCC 4.8.2 as packaged in the devtoolset-2 software collection. On osx, we use clang from 
+  was sometimes referred to as ``comp4``. On linux the ``toolchain_*`` compilers were
+  GCC 4.8.2 as packaged in the devtoolset-2 software collection. On osx, we use clang from
   Apple's Xcode in the ``toolchain_*`` packages.
+
+CentOS ``sysroot``s for ``linux-*`` Platforms
+---------------------------------------------
+
+We currently repackage the ``sysroot`` from the appropriate version of CentOS for use
+with our compilers. These ``sysroot``s are available in the ``sysroot_linux-*`` packages.
+These packages have version numbers that match the version of ``glibc`` they package. These
+versions are ``2.12`` for CentOS 6 and ``2.17`` for CentOS 7.
+
+For ``gcc``/``gxx``/``gfortran`` versions prior to ``8.4.0`` on ``ppc64le and ``7.5.0``
+on ``aarch64``/``x86_64``, we had been building our own versions of ``glibc``. This practice
+is now deprecated in favor of the CentOS-based ``sysroots``. Additionally, as of the same
+compiler versions above, we have removed the ``cos*`` part of the ``sysroot`` path. The new
+``sysroot`` path has in it simply ``conda`` as opposed to ``conda_cos6`` or ``conda_cos7``.

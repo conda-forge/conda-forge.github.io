@@ -4,13 +4,27 @@ Announcements
 2020
 ----
 
+:2020-07-23: CentOS 7 ``sysroot`` Now Available for ``linux-64`` Builds
+
+    We are very excited to announce that new compilers based on repackaged
+    ``sysroot``s from CentOS 7 are now available for all ``linux-*`` platforms.
+    These compilers will be the default going forward for any ``gcc``, ``gxx``,
+    and ``gfortran`` versions past ``8.4.0`` on ``ppc64le`` and ``7.5.0`` on
+    ``x86_64``/``aarch64``.
+
+    On the ``linux-64`` platform, we have also built the CentOS 6 ``sysroot``
+    and set it as the default, consistent with our current compilers. To use the
+    CentOS 7 ``sysroot`` on ``linux-64``, add a requirement of ``sysroot_linux-64 2.17``
+    to the build section of your recipe. You also need to set the proper Docker
+    image in your ``conda_build_config.yaml``. See :ref:`Using CentOS 7 <centos7>` for details.
+
 :2020-07-23: Strict channel priority in builds for OSX and Linux
 
     We have changed the OSX and Linux platforms to enforce strict channel priority
     in package builds. This change means that if a package is available in the ``conda-forge``
     channels, the ``conda`` solver will not consider any versions of the package from other
     channels. Users can disable this by setting ``channel_priority: flexible`` in their
-    ``conda-forge.yml``. 
+    ``conda-forge.yml``.
 
 :2020-07-23: NumPy 1.16 as the minimal NumPy version on all platforms.
 
