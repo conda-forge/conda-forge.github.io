@@ -1022,6 +1022,6 @@ put the following in your build section
    requirements:
      build:
        - {{ compiler('c') }}
-       - sysroot_linux-64 2.17  # [linux]
+       - sysroot_linux-64 2.17  # [linux64]
 
 Note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 7.
