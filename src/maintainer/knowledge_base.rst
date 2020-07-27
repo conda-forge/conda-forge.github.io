@@ -4,7 +4,7 @@ Knowledge base
 Using CMake
 ===========
 
-`CMake <https://cmake.org/>`__ can be used to build more complex projects in ``builwd.sh``
+`CMake <https://cmake.org/>`__ can be used to build more complex projects in ``build.sh``
 or ``bld.bat`` scripts.
 
 If you are using cmake, be sure to make it a build requirement in the ``build`` section. You
