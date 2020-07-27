@@ -1026,13 +1026,17 @@ put the following in your build section.
        - {{ compiler('c') }}
        - sysroot_linux-64 2.17  # [linux64]
 
-You also need to use a newer docker image by setting this in the ``conda_build_config.yaml``
+You also need to use a newer docker image by setting the following in the ``conda_build_config.yaml``
 of your recipe and rerendering.
 
 .. code-block:: yaml
 
+   cuda_compiler_version:                    # [linux64]
+     - None                                  # [linux64]
    docker_image:                             # [linux64]
      - condaforge/linux-anvil-cos7-x86_64    # [linux64]
 
+The extra ``cuda_compiler_version`` key is needed because we currently zip that key with ``docker_image``. 
+If this changes in the future, then this extra key may not be needed.
 
-Note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 7.
+Finally, note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 7.
