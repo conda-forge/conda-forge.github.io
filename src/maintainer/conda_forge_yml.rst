@@ -251,14 +251,14 @@ The following CI services are available:
 * ``None`` or ``False`` to disable a platform.
 * ``default`` to enable a platform and choose an appropriate CI
 
-For example, switching everything to build on Azure pipelines:
+For example, switching linux & osx to build on Travis Ci, with win on Appveyor:
 
 .. code-block:: yaml
 
     provider:
-      linux: azure
-      osx: azure
-      win: azure
+      linux: travis
+      osx: travis
+      win: appveyor
 
 Currently, x86_64 are enabled, but other arches are disabled by default. i.e. an empty
 provider entry is equivalent to the following:
@@ -268,7 +268,7 @@ provider entry is equivalent to the following:
     provider:
       linux: azure
       osx: azure
-      win: appveyor
+      win: azure
       linux_ppc64le: None
       linux_aarch64: None
 
