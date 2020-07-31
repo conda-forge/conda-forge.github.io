@@ -323,6 +323,52 @@ At the time of writing, above is equivalent to the following,
     there are ``numpy`` packages for ``1.7`` available for Python 2.7 in the channel.
 
 
+.. _jupyterlab_extension:
+
+JupyterLab Extensions
+---------------------
+A typical JupyterLab extension has both Python and JavaScript components.
+These should be packaged together, to prevent node from being needing to
+grab the JavaScript side of the package on the user's machine. To package
+an extension, the build should have the following ``meta.yaml`` snippet:
+
+.. code-block:: yaml
+
+    build:
+      noarch: python
+
+
+    requirements:
+      host:
+        - python
+        - nodejs
+        - pip
+      run:
+        - python
+        - nodejs
+        - jupyterlab >=2
+
+Please use the following ``build.sh`` script in your recipe:
+
+.. code-block:: sh
+
+    #!/usr/bin/env bash
+    set -ex
+
+    $PYTHON -m pip install . -vv
+    npm pack ${PKG_NAME}@${PKG_VERSION}
+    mkdir -p ${PREFIX}/share/jupyter/lab/extensions/js
+    cp ${PKG_NAME}-${PKG_VERSION}.tgz ${PREFIX}/share/jupyter/lab/extensions/js
+
+
+Since this is a noarch recipe, the build script only needs to run on ``linux-64``.
+Also note that we do not need to run ``jupyter labextension install``  or
+``jupyter lab build`` as part of the package build or in any post-link scripts.
+This is because JupyterLab will run the build step itself when it is next run.
+The ``${PREFIX}/share/jupyter/lab/extensions/js`` directory which JupyterLab
+knows to build from when performing this build step.
+
+
 Message passing interface (MPI)
 -------------------------------
 
@@ -1036,7 +1082,7 @@ of your recipe and rerendering.
    docker_image:                             # [linux64]
      - condaforge/linux-anvil-cos7-x86_64    # [linux64]
 
-The extra ``cuda_compiler_version`` key is needed because we currently zip that key with ``docker_image``. 
+The extra ``cuda_compiler_version`` key is needed because we currently zip that key with ``docker_image``.
 If this changes in the future, then this extra key may not be needed.
 
 Finally, note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 7.

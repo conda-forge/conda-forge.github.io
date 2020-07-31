@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge base &#8212; conda-forge 2020.07.30 documentation</title>
+    <title>Knowledge base &#8212; conda-forge 2020.07.31 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.07.30 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.07.31 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -327,6 +327,44 @@ adjust the minimum version accordingly!</p>
 <p>2. if your package supports <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.7</span></code>, and you are brave enough :-),
 there are <code class="docutils literal notranslate"><span class="pre">numpy</span></code> packages for <code class="docutils literal notranslate"><span class="pre">1.7</span></code> available for Python 2.7 in the channel.</p>
 </div>
+</div>
+<div class="section" id="jupyterlab-extensions">
+<span id="jupyterlab-extension"></span><h3>JupyterLab Extensions<a class="headerlink" href="#jupyterlab-extensions" title="Permalink to this headline">¶</a></h3>
+<p>A typical JupyterLab extension has both Python and JavaScript components.
+These should be packaged together, to prevent node from being needing to
+grab the JavaScript side of the package on the user’s machine. To package
+an extension, the build should have the following <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> snippet:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+  <span class="nt">noarch</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+
+
+<span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">host</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nodejs</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip</span>
+  <span class="nt">run</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nodejs</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">jupyterlab &gt;=2</span>
+</pre></div>
+</div>
+<p>Please use the following <code class="docutils literal notranslate"><span class="pre">build.sh</span></code> script in your recipe:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+<span class="nb">set</span> -ex
+
+<span class="nv">$PYTHON</span> -m pip install . -vv
+npm pack <span class="si">${</span><span class="nv">PKG_NAME</span><span class="si">}</span>@<span class="si">${</span><span class="nv">PKG_VERSION</span><span class="si">}</span>
+mkdir -p <span class="si">${</span><span class="nv">PREFIX</span><span class="si">}</span>/share/jupyter/lab/extensions/js
+cp <span class="si">${</span><span class="nv">PKG_NAME</span><span class="si">}</span>-<span class="si">${</span><span class="nv">PKG_VERSION</span><span class="si">}</span>.tgz <span class="si">${</span><span class="nv">PREFIX</span><span class="si">}</span>/share/jupyter/lab/extensions/js
+</pre></div>
+</div>
+<p>Since this is a noarch recipe, the build script only needs to run on <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>.
+Also note that we do not need to run <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">labextension</span> <span class="pre">install</span></code>  or
+<code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">lab</span> <span class="pre">build</span></code> as part of the package build or in any post-link scripts.
+This is because JupyterLab will run the build step itself when it is next run.
+The <code class="docutils literal notranslate"><span class="pre">${PREFIX}/share/jupyter/lab/extensions/js</span></code> directory which JupyterLab
+knows to build from when performing this build step.</p>
 </div>
 <div class="section" id="message-passing-interface-mpi">
 <h3>Message passing interface (MPI)<a class="headerlink" href="#message-passing-interface-mpi" title="Permalink to this headline">¶</a></h3>
@@ -960,6 +998,7 @@ If this changes in the future, then this extra key may not be needed.</p>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#building-against-numpy">Building Against NumPy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jupyterlab-extensions">JupyterLab Extensions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#message-passing-interface-mpi">Message passing interface (MPI)</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#mpi-variants-in-conda-forge">MPI Variants in conda-forge</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#building-mpi-variants">Building MPI variants</a></li>
@@ -1068,7 +1107,7 @@ If this changes in the future, then this extra key may not be needed.</p>
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.07.30 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.07.31 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
