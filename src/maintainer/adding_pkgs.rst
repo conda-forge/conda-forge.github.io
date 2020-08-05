@@ -20,10 +20,10 @@ There are multiple ways to get started:
 #. If it is an R package from `CRAN <https://cran.r-project.org/>`_, please
    instead start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_.
    Then if necessary you can make manual edits to the recipe.
-#. If it is a python package, you can generate a skeleton as a starting point with
-   ``conda skeleton pypi your_package_name``. You do *not* have to use the skeleton, and the
-   recipes produced by skeleton will need to be edited.
-   In particular, you'll at least need to change the build line to :ref:`use pip <use-pip>`,
+#. If it is a python package, you can generate the recipe as a starting point with
+   ``grayskull pypi your_package_name``. To install it you can use `conda install -c conda-forge grayskull`. You do *not* have to use grayskull, and the
+   recipes produced by grayskull will need to be reviewed and edited.
+   In particular, you'll at least need to check the build line to :ref:`use pip <use-pip>`,
    add yourself as a maintainer,
    and specify a ``license_file``.
 
