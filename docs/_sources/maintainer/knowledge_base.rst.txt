@@ -192,6 +192,18 @@ To skip building with a particular ``vc`` version, add a skip statement.
       build:
         - {{ compiler('cxx') }}
 
+Choosing the build-directory on azure
+-------------------------------------
+
+If a build needs too much space and fails due to azure limitations, it's possible to switch 
+the drive from D:\\bld\\ to C:\\bld\\ by adding the following specification to the `conda-forge.yaml` 
+and rerendering:
+```
+azure:
+  settings_win:
+    variables:
+      CONDA_BLD_PATH: "C:\\bld\\"
+```
 
 
 Special dependencies
