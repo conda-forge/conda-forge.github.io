@@ -13,6 +13,7 @@ Top-level fields
 
 * appveyor
 * azure
+* build_platform
 * bot
 * channels
 * circle
@@ -32,6 +33,7 @@ Top-level fields
 * recipe_dir
 * skip_render
 * templates
+* test_on_native_only
 * travis
 * upload_on_branch
 * win
@@ -75,6 +77,17 @@ automatic version updates/migrations for feedstocks. The current options are
     bot:
       # can the bot automerge PRs it makes on this feedstock
       automerge: True
+
+build_platform
+--------------
+This is a mapping from the build platform to the host platform of the package
+to be built. For eg: following builds a ``osx-64`` platform from ``linux-64``
+build platform using cross-compiling.
+
+.. code-block:: yaml
+
+    build_platform:
+      osx_64: linux_64
 
 channels
 --------
@@ -305,6 +318,14 @@ templates
 ---------
 This is mostly an internal field for specifying where templates files live.
 You shouldn't need it.
+
+test_on_native_only
+-------------------
+This is used for disabling testing for cross compiling. Default is ``false``
+
+.. code-block:: yaml
+
+    test_on_native_only: True
 
 travis
 ------

@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2020.08.06 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2020.08.07 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.08.06 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.08.07 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -77,6 +77,7 @@ file that is present in the root directory of a feedstock.</p>
 <ul class="simple">
 <li><p>appveyor</p></li>
 <li><p>azure</p></li>
+<li><p>build_platform</p></li>
 <li><p>bot</p></li>
 <li><p>channels</p></li>
 <li><p>circle</p></li>
@@ -96,6 +97,7 @@ file that is present in the root directory of a feedstock.</p>
 <li><p>recipe_dir</p></li>
 <li><p>skip_render</p></li>
 <li><p>templates</p></li>
+<li><p>test_on_native_only</p></li>
 <li><p>travis</p></li>
 <li><p>upload_on_branch</p></li>
 <li><p>win</p></li>
@@ -133,6 +135,16 @@ automatic version updates/migrations for feedstocks. The current options are</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">bot</span><span class="p">:</span>
   <span class="c1"># can the bot automerge PRs it makes on this feedstock</span>
   <span class="nt">automerge</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-platform">
+<h3>build_platform<a class="headerlink" href="#build-platform" title="Permalink to this headline">¶</a></h3>
+<p>This is a mapping from the build platform to the host platform of the package
+to be built. For eg: following builds a <code class="docutils literal notranslate"><span class="pre">osx-64</span></code> platform from <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>
+build platform using cross-compiling.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build_platform</span><span class="p">:</span>
+  <span class="nt">osx_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">linux_64</span>
 </pre></div>
 </div>
 </div>
@@ -340,6 +352,13 @@ For example, if you want to customize .gitignore and LICENSE.txt file by your ow
 <p>This is mostly an internal field for specifying where templates files live.
 You shouldn’t need it.</p>
 </div>
+<div class="section" id="test-on-native-only">
+<h3>test_on_native_only<a class="headerlink" href="#test-on-native-only" title="Permalink to this headline">¶</a></h3>
+<p>This is used for disabling testing for cross compiling. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_on_native_only</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="travis">
 <h3>travis<a class="headerlink" href="#travis" title="Permalink to this headline">¶</a></h3>
 <p>The top-level <code class="docutils literal notranslate"><span class="pre">travis</span></code> key specifies configurations for the Travis
@@ -404,6 +423,7 @@ in the <code class="docutils literal notranslate"><span class="pre">.condarc</sp
 <li class="toctree-l4"><a class="reference internal" href="#appveyor">appveyor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#azure">azure</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bot">bot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-platform">build_platform</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#channels">channels</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#circle">circle</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#compiler-stack">compiler_stack</a></li>
@@ -422,6 +442,7 @@ in the <code class="docutils literal notranslate"><span class="pre">.condarc</sp
 <li class="toctree-l4"><a class="reference internal" href="#recipe-dir">recipe_dir</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#skip-render">skip_render</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#templates">templates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test-on-native-only">test_on_native_only</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#travis">travis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#upload-on-branch">upload_on_branch</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#win">win</a></li>
@@ -501,7 +522,7 @@ in the <code class="docutils literal notranslate"><span class="pre">.condarc</sp
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.08.06 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.08.07 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
