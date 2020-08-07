@@ -66,6 +66,9 @@ mapping for Azure-specific configuration options. For example:
       upload_packages: False
       # flag for forcing the building all supported providers
       force: False
+      # toggle for storing the conda build_artifacts directory (including the
+      # built packages) as an Azure pipeline artifact that can be downloaded
+      store_build_artifacts: False
 
 bot
 ---
