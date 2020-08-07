@@ -4,6 +4,14 @@ Announcements
 2020
 ----
 
+:2020-05-09: Completed New Staging Process for ``anaconda.org`` Uploads
+
+    We have now completed rolling out the new staging process for uploads
+    to anaconda.org. Direct uploads to the ``conda-forge`` channel will no
+    longer work. If you are having trouble with package uploads, please
+    rerender your feedstock with the latest version of ``conda-smithy``.
+    As always, if you need help, bump us on gitter or GitHub!
+
 :2020-08-06: Fixed Maintenance Process for Feedstock Teams
 
     We have fixed a bug where the maintainers of feedstocks listed in the
