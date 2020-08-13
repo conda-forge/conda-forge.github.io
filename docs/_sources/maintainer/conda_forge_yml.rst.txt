@@ -8,6 +8,16 @@ Rerendering the feedstock after you modify this file is usually required and alw
 
 The next section describes in detail the top-level fields in  ``conda-forge.yml``.
 
+Note that each top-level CI provider field supports the ``upload_packages`` option.
+When set to False this will override the default behaviour of attempting to
+upload packages to anaconda.org, which can be useful for testing. For example:
+
+.. code-block:: yaml
+
+    azure:
+      upload_packages: False
+
+
 Top-level fields
 ================
 
@@ -61,9 +71,6 @@ mapping for Azure-specific configuration options. For example:
 .. code-block:: yaml
 
     azure:
-      # flag for whether or not Azure should upload the packages
-      # it builds to anaconda.org
-      upload_packages: False
       # flag for forcing the building all supported providers
       force: False
       # toggle for storing the conda build_artifacts directory (including the

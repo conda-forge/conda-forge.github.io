@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2020.08.07 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2020.08.13 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.08.07 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.08.13 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -72,6 +72,13 @@
 file that is present in the root directory of a feedstock.</p>
 <p>Rerendering the feedstock after you modify this file is usually required and always a good idea (see <a class="reference internal" href="updating_pkgs.html#dev-update-rerender"><span class="std std-ref">Rerendering feedstocks</span></a>).</p>
 <p>The next section describes in detail the top-level fields in  <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>.</p>
+<p>Note that each top-level CI provider field supports the <code class="docutils literal notranslate"><span class="pre">upload_packages</span></code> option.
+When set to False this will override the default behaviour of attempting to
+upload packages to anaconda.org, which can be useful for testing. For example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span>
+  <span class="nt">upload_packages</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+</pre></div>
+</div>
 <div class="section" id="top-level-fields">
 <h2>Top-level fields<a class="headerlink" href="#top-level-fields" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -120,9 +127,6 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
 <p>This dictates the behavior of the Azure Pipelines CI service. It is a
 mapping for Azure-specific configuration options. For example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span>
-  <span class="c1"># flag for whether or not Azure should upload the packages</span>
-  <span class="c1"># it builds to anaconda.org</span>
-  <span class="nt">upload_packages</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
   <span class="c1"># flag for forcing the building all supported providers</span>
   <span class="nt">force</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
   <span class="c1"># toggle for storing the conda build_artifacts directory (including the</span>
@@ -525,7 +529,7 @@ in the <code class="docutils literal notranslate"><span class="pre">.condarc</sp
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.08.07 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.08.13 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
