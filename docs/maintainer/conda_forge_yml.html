@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2020.08.13 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2020.08.14 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.08.13 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.08.14 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -141,7 +141,14 @@ mapping for Azure-specific configuration options. For example:</p>
 automatic version updates/migrations for feedstocks. The current options are</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">bot</span><span class="p">:</span>
   <span class="c1"># can the bot automerge PRs it makes on this feedstock</span>
-  <span class="nt">automerge</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+  <span class="nt">automerge</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="c1"># only automerge on successful version PRs, migrations are not automerged</span>
+  <span class="nt">automerge</span><span class="p">:</span> <span class="s">&#39;version&#39;</span>
+  <span class="c1"># only automerge on successful migration PRs, versions are not automerged</span>
+  <span class="nt">automerge</span><span class="p">:</span> <span class="s">&#39;migration&#39;</span>
+
+  <span class="c1"># only open PRs if resulting environment is solvable, useful for tightly coupled packages</span>
+  <span class="nt">check_solvable</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
 </div>
@@ -529,7 +536,7 @@ in the <code class="docutils literal notranslate"><span class="pre">.condarc</sp
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.08.13 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.08.14 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>

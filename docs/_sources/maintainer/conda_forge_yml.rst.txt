@@ -86,7 +86,14 @@ automatic version updates/migrations for feedstocks. The current options are
 
     bot:
       # can the bot automerge PRs it makes on this feedstock
-      automerge: True
+      automerge: true
+      # only automerge on successful version PRs, migrations are not automerged
+      automerge: 'version'
+      # only automerge on successful migration PRs, versions are not automerged
+      automerge: 'migration'
+      
+      # only open PRs if resulting environment is solvable, useful for tightly coupled packages
+      check_solvable: true
 
 build_platform
 --------------
