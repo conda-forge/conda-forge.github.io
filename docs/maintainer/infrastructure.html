@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Infrastructure &#8212; conda-forge 2020.08.14 documentation</title>
+    <title>Infrastructure &#8212; conda-forge 2020.08.15 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.08.14 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.08.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -312,10 +312,10 @@ was sometimes referred to as <code class="docutils literal notranslate"><span cl
 GCC 4.8.2 as packaged in the devtoolset-2 software collection. On osx, we use clang from
 Apple’s Xcode in the <code class="docutils literal notranslate"><span class="pre">toolchain_*</span></code> packages.</p></li>
 </ul>
-<div class="section" id="centos-sysroot-s-for-linux-platforms">
-<h3>CentOS <code class="docutils literal notranslate"><span class="pre">sysroot``s</span> <span class="pre">for</span> <span class="pre">``linux-*</span></code> Platforms<a class="headerlink" href="#centos-sysroot-s-for-linux-platforms" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="centos-sysroot-for-linux-platforms">
+<h3>CentOS <code class="docutils literal notranslate"><span class="pre">sysroot</span></code> for <code class="docutils literal notranslate"><span class="pre">linux-*</span></code> Platforms<a class="headerlink" href="#centos-sysroot-for-linux-platforms" title="Permalink to this headline">¶</a></h3>
 <p>We currently repackage the <code class="docutils literal notranslate"><span class="pre">sysroot</span></code> from the appropriate version of CentOS for use
-with our compilers. These <code class="docutils literal notranslate"><span class="pre">sysroot``s</span> <span class="pre">are</span> <span class="pre">available</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">``sysroot_linux-*</span></code> packages.
+with our compilers. These <code class="docutils literal notranslate"><span class="pre">sysroot</span></code> files are available in the <code class="docutils literal notranslate"><span class="pre">sysroot_linux-*</span></code> packages.
 These packages have version numbers that match the version of <code class="docutils literal notranslate"><span class="pre">glibc</span></code> they package. These
 versions are <code class="docutils literal notranslate"><span class="pre">2.12</span></code> for CentOS 6 and <code class="docutils literal notranslate"><span class="pre">2.17</span></code> for CentOS 7.</p>
 <p>For <code class="docutils literal notranslate"><span class="pre">gcc</span></code>/<code class="docutils literal notranslate"><span class="pre">gxx</span></code>/<code class="docutils literal notranslate"><span class="pre">gfortran</span></code> versions prior to <code class="docutils literal notranslate"><span class="pre">8.4.0</span></code> on <code class="docutils literal notranslate"><span class="pre">ppc64le</span> <span class="pre">and</span> <span class="pre">``7.5.0</span></code>
@@ -324,6 +324,30 @@ is now deprecated in favor of the CentOS-based <code class="docutils literal not
 compiler versions above, we have removed the <code class="docutils literal notranslate"><span class="pre">cos*</span></code> part of the <code class="docutils literal notranslate"><span class="pre">sysroot</span></code> path. The new
 <code class="docutils literal notranslate"><span class="pre">sysroot</span></code> path has in it simply <code class="docutils literal notranslate"><span class="pre">conda</span></code> as opposed to <code class="docutils literal notranslate"><span class="pre">conda_cos6</span></code> or <code class="docutils literal notranslate"><span class="pre">conda_cos7</span></code>.</p>
 </div>
+</div>
+<div class="section" id="output-validation-and-feedstock-tokens">
+<h2>Output Validation and Feedstock Tokens<a class="headerlink" href="#output-validation-and-feedstock-tokens" title="Permalink to this headline">¶</a></h2>
+<p>As of writing, <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code> does not support generating API tokens that are scoped
+to allow uploads for some packages but not others. In order to secure feedstock uploads,
+so that, e.g., the maintainers of the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> feedstock cannot push a <code class="docutils literal notranslate"><span class="pre">python</span></code> version,
+we use a package staging process and issue secret tokens unique to each feedback. This process
+works as follows.</p>
+<ol class="arabic simple">
+<li><p>When a CI job on a feedstock is building packages to be uploaded to <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code>, it
+first uploads them to a staging channel, <code class="docutils literal notranslate"><span class="pre">cf-staging</span></code>.</p></li>
+<li><p>Then the feedback CI job makes an API call to our admin webservices server with its secret token
+and some information about the package it is trying to upload.</p></li>
+<li><p>The webservices server validates the secret token, the integrity of the package, and
+that the package is allowed for the given feedstock.</p></li>
+<li><p>If all of the validation passes, the package is then copied to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>
+channel.</p></li>
+</ol>
+<p>We attempt to report errors in this process to users via comments on commits/issues in the feedstocks.
+Note however that sometimes these fail. If you think you are having trouble with uploads, make
+sure <code class="docutils literal notranslate"><span class="pre">conda_forge_output_validation:</span> <span class="pre">true</span></code> is set in your <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> and rerender
+your feedstock with the latest version of <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code>. Finally, new packages that are added to
+feedstocks are registered automatically and once uploaded successfully once, no other feedstock
+will be able to upload packages with the same name.</p>
 </div>
 </div>
 
@@ -382,9 +406,10 @@ compiler versions above, we have removed the <code class="docutils literal notra
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#compilers-and-runtimes">Compilers and Runtimes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#centos-sysroot-s-for-linux-platforms">CentOS <code class="docutils literal notranslate"><span class="pre">sysroot``s</span> <span class="pre">for</span> <span class="pre">``linux-*</span></code> Platforms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centos-sysroot-for-linux-platforms">CentOS <code class="docutils literal notranslate"><span class="pre">sysroot</span></code> for <code class="docutils literal notranslate"><span class="pre">linux-*</span></code> Platforms</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#output-validation-and-feedstock-tokens">Output Validation and Feedstock Tokens</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="adding_pkgs.html">Contributing packages</a></li>
@@ -462,7 +487,7 @@ compiler versions above, we have removed the <code class="docutils literal notra
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.08.14 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.08.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
