@@ -303,11 +303,11 @@ that form the given stack.
   GCC 4.8.2 as packaged in the devtoolset-2 software collection. On osx, we use clang from
   Apple's Xcode in the ``toolchain_*`` packages.
 
-CentOS ``sysroot``s for ``linux-*`` Platforms
+CentOS ``sysroot`` for ``linux-*`` Platforms
 ---------------------------------------------
 
 We currently repackage the ``sysroot`` from the appropriate version of CentOS for use
-with our compilers. These ``sysroot``s are available in the ``sysroot_linux-*`` packages.
+with our compilers. These ``sysroot`` files are available in the ``sysroot_linux-*`` packages.
 These packages have version numbers that match the version of ``glibc`` they package. These
 versions are ``2.12`` for CentOS 6 and ``2.17`` for CentOS 7.
 
@@ -316,3 +316,29 @@ on ``aarch64``/``x86_64``, we had been building our own versions of ``glibc``. T
 is now deprecated in favor of the CentOS-based ``sysroots``. Additionally, as of the same
 compiler versions above, we have removed the ``cos*`` part of the ``sysroot`` path. The new
 ``sysroot`` path has in it simply ``conda`` as opposed to ``conda_cos6`` or ``conda_cos7``.
+
+
+Output Validation and Feedstock Tokens
+======================================
+
+As of writing, ``anaconda.org`` does not support generating API tokens that are scoped
+to allow uploads for some packages but not others. In order to secure feedstock uploads,
+so that, e.g., the maintainers of the ``numpy`` feedstock cannot push a ``python`` version,
+we use a package staging process and issue secret tokens unique to each feedback. This process
+works as follows.
+
+1. When a CI job on a feedstock is building packages to be uploaded to ``anaconda.org``, it
+   first uploads them to a staging channel, ``cf-staging``.
+2. Then the feedback CI job makes an API call to our admin webservices server with its secret token
+   and some information about the package it is trying to upload.
+3. The webservices server validates the secret token, the integrity of the package, and
+   that the package is allowed for the given feedstock.
+4. If all of the validation passes, the package is then copied to the ``conda-forge``
+   channel.
+
+We attempt to report errors in this process to users via comments on commits/issues in the feedstocks.
+Note however that sometimes these fail. If you think you are having trouble with uploads, make
+sure ``conda_forge_output_validation: true`` is set in your ``conda-forge.yml`` and rerender
+your feedstock with the latest version of ``conda-smithy``. Finally, new packages that are added to
+feedstocks are registered automatically and once uploaded successfully once, no other feedstock
+will be able to upload packages with the same name.
