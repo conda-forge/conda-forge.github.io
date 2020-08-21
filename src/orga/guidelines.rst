@@ -162,3 +162,5 @@ The guidance that we can provide here is two fold:
    * pypy
 2. The core team can decide to keep an old version around temporarily until some specific criteria is met.
    For example, we're holding off on turning off py36 until pypy comes out with pypy3.7.
+3. If there are lots of people in the community relying on older versions, core team can decide to keep an old version around
+   For example, we held off turning off py27 even after numpy, scipy dropped support as there were many in the community interested in keeping support until the end of life of that version.
