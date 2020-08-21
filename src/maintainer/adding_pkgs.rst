@@ -259,7 +259,7 @@ You can e.g. specify not to build ...
         skip: true  # [py<35]
 
 A full description of selectors is
-`in the conda docs <http://conda.pydata.org/docs/building/meta-yaml.html#preprocessing-selectors>`__.
+`in the conda docs <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#preprocessing-selectors>`__.
 
 
 Optional: ``bld.bat`` and/or ``build.sh``
