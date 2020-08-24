@@ -917,6 +917,16 @@ In order to qualify as a noarch python package, all of the following criteria mu
   Only ``console_script`` entry points have to be listed in meta.yaml. Other entry points do not conflict
   with ``noarch`` and therefore do not require extra treatment.
 
+.. note::
+
+  ``noarch`` is a statement about the package's source code and not its install environment. A package is still considered
+  ``noarch`` even if one of its dependencies is not available on a given platform. If this is the case, conda will
+  display a helpful error message describing which dependency couldn't be found when it tries to install the package.
+  If the dependency is later made available, your package will be installable on that platform without having to make
+  any changes to the feedstock. However, keep in mind that since ``noarch`` packages are built on Linux, all
+  dependencies must be available on Linux.
+
+
 If an existing python package qualifies to be converted to a noarch package, you can request the required changes
 by opening a new issue and including ``@conda-forge-admin, please add noarch: python``.
 
