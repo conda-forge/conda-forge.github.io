@@ -82,3 +82,18 @@ From now on using ``conda install <package-name>`` will also find packages in ou
   Miniforge installers are available here: https://github.com/conda-forge/miniforge/#download
 
   Please refer to :ref:`multiple_channels` for pitfalls and more information.
+
+
+
+Display conda-forge packages in Anaconda Navigator
+------------------------------------------------------------
+
+#. Open **Anaconda Navigator** by running ``anaconda-navigator``
+#. Go to the **Environments** tab.
+#. Click the **Channels** button.
+#. Click the **Add** button.
+#. Enter the channel url ``https://conda.anaconda.org/conda-forge/``
+#. Press the **Enter key** on your keyboard.
+#. Click the **Update channels** button.
+
+From now on, whenever the **package filter** is set to **All** on the Environments tab, all conda-forge packages will be displayed.
