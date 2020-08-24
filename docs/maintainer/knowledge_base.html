@@ -830,6 +830,15 @@ say <code class="docutils literal notranslate"><span class="pre">python</span> <
 <p>Only <code class="docutils literal notranslate"><span class="pre">console_script</span></code> entry points have to be listed in meta.yaml. Other entry points do not conflict
 with <code class="docutils literal notranslate"><span class="pre">noarch</span></code> and therefore do not require extra treatment.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">noarch</span></code> is a statement about the package’s source code and not its install environment. A package is still considered
+<code class="docutils literal notranslate"><span class="pre">noarch</span></code> even if one of its dependencies is not available on a given platform. If this is the case, conda will
+display a helpful error message describing which dependency couldn’t be found when it tries to install the package.
+If the dependency is later made available, your package will be installable on that platform without having to make
+any changes to the feedstock. However, keep in mind that since <code class="docutils literal notranslate"><span class="pre">noarch</span></code> packages are built on Linux, all
+dependencies must be available on Linux.</p>
+</div>
 <p>If an existing python package qualifies to be converted to a noarch package, you can request the required changes
 by opening a new issue and including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">add</span> <span class="pre">noarch:</span> <span class="pre">python</span></code>.</p>
 </div>
