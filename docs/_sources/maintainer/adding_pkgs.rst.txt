@@ -628,7 +628,7 @@ Running tests locally for staged recipes
 
 If you want to run and build packages in the staged-recipes repository locally,
 go to the root repository directory and run the
-``.circleci/run_docker_build.sh`` script.  This requires that you have docker
+``.scripts/run_docker_build.sh`` script.  This requires that you have docker
 installed on your machine.
 
 You need to define an environment variable named ``CONFIG``. Its value must be
@@ -639,7 +639,7 @@ invoke the command as follows.
 .. code-block:: sh
 
     $ cd staged-recipes
-    $ CONFIG=linux64 ./.circleci/run_docker_build.sh
+    $ CONFIG=linux64 ./.scripts/run_docker_build.sh
 
 
 About
