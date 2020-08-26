@@ -147,7 +147,7 @@ As it comes up, each group should be able to define their own policy on how long
 
 Python
 ------
-For the Python language, conda-forge aims to keep package builds active and available for the current version and the two preceding minor versions.
+For the Python language, conda-forge aims to keep package builds active and available for the current version and at least two preceding minor versions.
 Whenever Python 4.0 comes out we'll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously. 
 Fortunately, we can punt on that for now.
 The question of when to decide to drop an older language version remains.
