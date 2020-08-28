@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Guidelines &#8212; conda-forge 2020.08.26 documentation</title>
+    <title>Guidelines &#8212; conda-forge 2020.08.28 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="00_intro.html" title="Organisation Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.08.26 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.08.28 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Organisation Documentation</a> &#187;</li> 
       </ul>
@@ -191,6 +191,33 @@ and thus we prefer repo data patches over labeling things as <code class="docuti
 You can join the maintainer team of a feedstock by adding your github-id to the <code class="docutils literal notranslate"><span class="pre">recipe-maintainers</span></code> section in the recipe’s <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>.
 Please refer to <a class="reference internal" href="../maintainer/updating_pkgs.html#maint-updating-maintainers"><span class="std std-ref">Updating the maintainer list</span></a> for detailed instructions.</p>
 </div>
+<div class="section" id="language-versions">
+<h2>Language versions<a class="headerlink" href="#language-versions" title="Permalink to this headline">¶</a></h2>
+<p>Conda-forge contains packages from a number of languages including Python and R, among many others.
+Each of these language-specific packaging sub-ecosystems needs to keep cadence with the language itself, making it challenging to have a blanket policy for how long to keep older versions of the language around.
+As it comes up, each group should be able to define their own policy on how long to keep older versions of their language around.</p>
+<div class="section" id="python">
+<h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<p>For the Python language, conda-forge aims to keep package builds active and available for the current version and at least two preceding minor versions.
+Whenever Python 4.0 comes out we’ll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously.
+Fortunately, we can punt on that for now.
+The question of when to decide to drop an older language version remains.
+The guidance that we can provide here is two fold:</p>
+<ol class="arabic simple">
+<li><p>We will move with the community.
+When our core libraries stop supporting an old version, so too will conda forge.
+The (nonexhaustive) list of core libraries that we consider when making the decision to drop an older version are:
+* matplotlib
+* numpy
+* scipy
+* pypy</p></li>
+<li><p>The core team can decide to keep an old version around temporarily until some specific criteria is met.
+For example, we’re holding off on turning off py36 until pypy comes out with pypy3.7.</p></li>
+<li><p>If there are lots of people in the community relying on older versions, core team can decide to keep an old version around
+For example, we held off turning off py27 even after numpy, scipy dropped support as there were many in the community interested in keeping support until the end of life of that version.</p></li>
+</ol>
+</div>
+</div>
 </div>
 
 
@@ -213,6 +240,10 @@ Please refer to <a class="reference internal" href="../maintainer/updating_pkgs.
 <li class="toctree-l3"><a class="reference internal" href="#renaming-packages">Renaming Packages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fixing-broken-packages">Fixing Broken Packages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#becoming-a-maintainer">Becoming a maintainer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#language-versions">Language versions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#python">Python</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="governance.html">Governance</a></li>
@@ -288,7 +319,7 @@ Please refer to <a class="reference internal" href="../maintainer/updating_pkgs.
         <li class="right" >
           <a href="00_intro.html" title="Organisation Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.08.26 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.08.28 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Organisation Documentation</a> &#187;</li> 
       </ul>
