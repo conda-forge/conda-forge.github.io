@@ -134,7 +134,7 @@ a:focus {
     -webkit-transition: background .3s ease-in-out;
     -moz-transition: background .3s ease-in-out;
     transition: background .3s ease-in-out;
-    font-size: 0.8em;
+    font-size: 0.75em;
 }
 
 .navbar-custom .nav li a:hover {
