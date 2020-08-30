@@ -7,4 +7,4 @@ Organisation Documentation
   subteams
   joining-the-team
   minutes/00_intro
-  
+  getting-in-touch
