@@ -8,4 +8,3 @@ Organisation Documentation
   joining-the-team
   minutes/00_intro
   getting-in-touch
-

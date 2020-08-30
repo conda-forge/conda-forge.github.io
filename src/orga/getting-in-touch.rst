@@ -13,12 +13,12 @@ The main chat rooms that you'll interact with are:
   Move stuff to an issue tracker if your question isn't getting resolved.
 * [gitter: core/private](https://gitter.im/conda-forge/core). Private chat for the @conda-forge/core team to discuss continued operations and improvements to conda-forge.
 * [gitter: power pc](https://gitter.im/conda-forge-ppc64le/Lobby). Public chat room for all things related to building for power pc (IBM) systems.
+* [gitter: bot subteam](https://gitter.im/conda-forge/regro-cf-autotick-bot). Public chat room for all things related to the conda-forge automation infrastructure.
+  Our automation infrastructure is colloquially referred to as "the bot".
 
 Mailing lists:
 * [google group: conda-forge](https://groups.google.com/g/conda-forge). The general mailing list for conda-forge.
   Sees a moderate amount of traffic, though substantially lower than the public gitter room.
-* [google group: conda-forge-core](https://groups.google.com/g/conda-forge-core). The mailing list for the core team.
-  Send announcements here (like meetings / CFEP stuff / votes, etc.)
 
 Other communication methods:
 * The core team is also on Keybase for security related stuff.
