@@ -41,6 +41,7 @@ Top-level fields
 * osx
 * provider
 * recipe_dir
+* remote_ci_setup
 * skip_render
 * templates
 * test_on_native_only
@@ -317,6 +318,16 @@ The relative path to the recipe directory. The default is:
 .. code-block:: yaml
 
     recipe_dir: recipe
+
+remote_ci_setup
+---------------
+This option can be used to override the default ``conda-forge-ci-setup`` package.
+Can be given with ``${url or channel_alias}::package_name``, defaults to conda-forge
+channel_alias if no prefix given.
+
+.. code-block:: yaml
+
+    remote_ci_setup: "conda-forge-ci-setup=3"
 
 skip_render
 -----------

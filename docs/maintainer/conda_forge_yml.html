@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2020.08.30 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2020.09.01 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.08.30 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.09.01 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -102,6 +102,7 @@ upload packages to anaconda.org, which can be useful for testing. For example:</
 <li><p>osx</p></li>
 <li><p>provider</p></li>
 <li><p>recipe_dir</p></li>
+<li><p>remote_ci_setup</p></li>
 <li><p>skip_render</p></li>
 <li><p>templates</p></li>
 <li><p>test_on_native_only</p></li>
@@ -349,6 +350,15 @@ provider entry is equivalent to the following:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="remote-ci-setup">
+<h3>remote_ci_setup<a class="headerlink" href="#remote-ci-setup" title="Permalink to this headline">¶</a></h3>
+<p>This option can be used to override the default <code class="docutils literal notranslate"><span class="pre">conda-forge-ci-setup</span></code> package.
+Can be given with <code class="docutils literal notranslate"><span class="pre">${url</span> <span class="pre">or</span> <span class="pre">channel_alias}::package_name</span></code>, defaults to conda-forge
+channel_alias if no prefix given.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">remote_ci_setup</span><span class="p">:</span> <span class="s">&quot;conda-forge-ci-setup=3&quot;</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="skip-render">
 <h3>skip_render<a class="headerlink" href="#skip-render" title="Permalink to this headline">¶</a></h3>
 <p>This option specifies a list of files which conda smithy will skip rendering.
@@ -454,6 +464,7 @@ in the <code class="docutils literal notranslate"><span class="pre">.condarc</sp
 <li class="toctree-l4"><a class="reference internal" href="#osx">osx</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#provider">provider</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#recipe-dir">recipe_dir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remote-ci-setup">remote_ci_setup</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#skip-render">skip_render</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#templates">templates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#test-on-native-only">test_on_native_only</a></li>
@@ -537,7 +548,7 @@ in the <code class="docutils literal notranslate"><span class="pre">.condarc</sp
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.08.30 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.09.01 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
