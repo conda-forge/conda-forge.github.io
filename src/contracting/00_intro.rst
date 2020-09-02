@@ -23,6 +23,14 @@ Services Offered:
 Contact Information:
 Background / Description:
 
+Lab49
+=====
+Services Offered: Architecture and Technical Design Advisory, Cloud Strategy and Migrations, Outsourced Software Development, SDLC Advisory
+
+Contact Information: sales@lab49.com
+
+Background / Description: Lab49 is a full service strategy, design and technology consultancy with a global reach focused on financial services. We specialize in product development across the full stack, from data and analytics, through services, through next generation user interfaces. 
+
 
 Becoming a Service Provider
 ***************************
