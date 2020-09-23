@@ -45,7 +45,8 @@ IOOS:
 
 Anaconda Inc:
   Description: Anaconda hosts the conda-forge package repository on anaconda.org and maintains conda and conda-build
-  Developers: jjhelmus
+  Developers:
+    - jjhelmus
   Logo URL:
     - https://know.anaconda.com/rs/387-XNW-688/images/2020_Anaconda_Logo_RGB_Corporate.png
   Site URL:
@@ -53,6 +54,17 @@ Anaconda Inc:
   contribution type:
     - infrastructure
     - dev support
+
+QuantStack:
+   Description: QuantStack provides developer time
+   Site URL: https://quantstack.net
+   Developers:
+     - wolfv
+     - SylvainCorlay
+   Logo URL:
+     - https://quantstack.net/img/quantstack-logo.png
+   contribution type:
+     - dev support
 
 # Places that give us stuff
 Microsoft Azure:
@@ -79,3 +91,11 @@ Works on Arm:
     - https://www.worksonarm.com/
   contribution type:
     - infrastructure
+
+OVHCloud:
+   Description: OVH Provides a Windows Build VM
+   Site URL: https://www.ovh.com/
+   Logo URL:
+     - https://www.frenchtechbordeaux.com/wp-content/uploads/2019/08/LogoOVHCloud_Vertical-Blue2.png
+   contribution type:
+     - infrastructure
