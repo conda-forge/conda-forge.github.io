@@ -26,6 +26,7 @@ Top-level fields
 * build_platform
 * bot
 * channels
+* choco
 * circle
 * compiler_stack
 * docker
@@ -92,7 +93,7 @@ automatic version updates/migrations for feedstocks. The current options are
       automerge: 'version'
       # only automerge on successful migration PRs, versions are not automerged
       automerge: 'migration'
-      
+
       # only open PRs if resulting environment is solvable, useful for tightly coupled packages
       check_solvable: true
 
@@ -126,6 +127,25 @@ has been built.  The ``channels`` variable is a mapping with
       targets:
         - ["conda-forge", "main"]
 
+
+choco
+-----
+This parameter allows for conda-smithy to run chocoloatey installs on Windows
+when additional system packages are needed. This is a list of strings that
+represent package names and any additional parameters. For example,
+
+.. code-block:: yaml
+
+    choco:
+      # install a package
+      - nvidia-display-driver
+
+      # install a package with a specific version
+      - cuda --version=11.0.3
+
+This is currently only implemented for Azure Pipelines. The command that is run is
+``choco install {entry} -fdv -y --debug``.  That is, ``choco install`` is executed
+with a standard set of additional flags that are useful on CI.
 
 circle
 --------

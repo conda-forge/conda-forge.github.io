@@ -87,6 +87,7 @@ upload packages to anaconda.org, which can be useful for testing. For example:</
 <li><p>build_platform</p></li>
 <li><p>bot</p></li>
 <li><p>channels</p></li>
+<li><p>choco</p></li>
 <li><p>circle</p></li>
 <li><p>compiler_stack</p></li>
 <li><p>docker</p></li>
@@ -180,6 +181,23 @@ has been built.  The <code class="docutils literal notranslate"><span class="pre
     <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&quot;conda-forge&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;main&quot;</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="choco">
+<h3>choco<a class="headerlink" href="#choco" title="Permalink to this headline">¶</a></h3>
+<p>This parameter allows for conda-smithy to run chocoloatey installs on Windows
+when additional system packages are needed. This is a list of strings that
+represent package names and any additional parameters. For example,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">choco</span><span class="p">:</span>
+  <span class="c1"># install a package</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nvidia-display-driver</span>
+
+  <span class="c1"># install a package with a specific version</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cuda --version=11.0.3</span>
+</pre></div>
+</div>
+<p>This is currently only implemented for Azure Pipelines. The command that is run is
+<code class="docutils literal notranslate"><span class="pre">choco</span> <span class="pre">install</span> <span class="pre">{entry}</span> <span class="pre">-fdv</span> <span class="pre">-y</span> <span class="pre">--debug</span></code>.  That is, <code class="docutils literal notranslate"><span class="pre">choco</span> <span class="pre">install</span></code> is executed
+with a standard set of additional flags that are useful on CI.</p>
 </div>
 <div class="section" id="circle">
 <h3>circle<a class="headerlink" href="#circle" title="Permalink to this headline">¶</a></h3>
@@ -449,6 +467,7 @@ in the <code class="docutils literal notranslate"><span class="pre">.condarc</sp
 <li class="toctree-l4"><a class="reference internal" href="#bot">bot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#build-platform">build_platform</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#channels">channels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#choco">choco</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#circle">circle</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#compiler-stack">compiler_stack</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#docker">docker</a></li>
