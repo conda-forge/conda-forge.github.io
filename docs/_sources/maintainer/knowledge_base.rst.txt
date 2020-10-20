@@ -1091,8 +1091,11 @@ of your recipe and rerendering.
      - None                                  # [linux64]
    docker_image:                             # [linux64]
      - condaforge/linux-anvil-cos7-x86_64    # [linux64]
+   cdt_name:                                 # [linux64]
+     - cos7                                  # [linux64]
 
-The extra ``cuda_compiler_version`` key is needed because we currently zip that key with ``docker_image``.
-If this changes in the future, then this extra key may not be needed.
+The extra ``cuda_compiler_version`` key is needed because we currently zip that
+key with ``docker_image``. Also ``cdt_name`` ensures the CDTs match the CentOS
+version. If this changes in the future, then this extra key may not be needed.
 
 Finally, note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 7.
