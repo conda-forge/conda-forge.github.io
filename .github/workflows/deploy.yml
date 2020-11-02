@@ -1,0 +1,40 @@
+name: deploy
+
+on:
+  push: null
+
+jobs:
+  tests:
+    name: deploy
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: conda-incubator/setup-miniconda@v1
+        with:
+          python-version: 3.7
+          channels: conda-forge,defaults
+          channel-priority: strict
+          show-channel-urls: true
+
+      - name: configure conda
+        shell: bash -l {0}
+        run: |
+          # configure bot account
+          git config --global user.name "Travis-CI on github.com/conda-forge/conda-forge.github.io"
+          git config --global user.email conda.forge.coordinator@gmail.com
+          mkdir -p ~/.conda-smithy && echo $GH_TOKEN > ~/.conda-smithy/github.token
+          
+          # update conda
+          conda update --yes --quiet conda
+          
+          # configure conda
+          conda config --set show_channel_urls true
+          conda config --set auto_update_conda false
+
+      - name: build and deploy
+        shell: bash -l {0}
+        run: |
+          source ./.ci_scripts/update_docs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
