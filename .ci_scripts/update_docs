@@ -31,11 +31,11 @@ if [ -n "$GH_TOKEN" ]; then
     cd ..
     mv docs-README docs/README
 
-    git diff
+    # git diff
 
     # Only commit the docs for commits on master.
     # GITHUB_HEAD_REF is empty on forks
-    if [[ "$GITHUB_REF" == "ref/heads/master" ]] && [[ "$GITHUB_HEAD_REF" == "" ]]; then
+    if [[ "$GH_REF" == "ref/heads/master" ]] && [[ "$GH_HEAD_REF" == "" ]]; then
         git add -A :/
         git commit -m "Re-ran make.py. [ci skip]" || true
         git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null
