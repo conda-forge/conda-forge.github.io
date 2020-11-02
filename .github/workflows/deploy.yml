@@ -35,3 +35,5 @@ jobs:
           source ./.ci_scripts/update_docs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REF: ${{ github.ref }}
+          GH_ACTOR: ${{ github.actor }}
