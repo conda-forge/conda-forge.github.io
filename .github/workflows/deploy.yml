@@ -2,6 +2,7 @@ name: deploy
 
 on:
   push: null
+  pull_request: null
 
 jobs:
   tests:
@@ -35,3 +36,4 @@ jobs:
           source ./.ci_scripts/update_docs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REF: ${{ github.ref }}

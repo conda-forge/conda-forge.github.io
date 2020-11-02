@@ -1,52 +1,43 @@
 #!/usr/bin/env bash
 
-# This script is to be run in a TravisCI context.
 set -ex
 
-if [ -n "$GH_TOKEN" ]; then
-    # TODO What is the purpose of this check? If we're on master, then check out master??
-    # Make sure we are on the latest commit on `master` if we are planning to deploy the change.
-#    if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then
-#        git checkout master
-#    fi
-    git checkout -b new_site_content
-    # Generate html requires a GitHub token in order to query the available feedstocks.
-    conda env create -f ./.ci_scripts/environment.yml
-    conda activate conda-forge-docs
+git checkout -b new_site_content
+# Generate html requires a GitHub token in order to query the available feedstocks.
+conda env create -f ./.ci_scripts/environment.yml
+conda activate conda-forge-docs
 
-    # rebuild elm
-    # uncomment to restore search
-    # npm install uglify-js --global
-    # ./elm-compile.xsh
+# rebuild elm
+# uncomment to restore search
+# npm install uglify-js --global
+# ./elm-compile.xsh
 
-    # build docs into docs/; preserve old README file
-    mv docs/README docs-README
-    rm -rf docs/
+# build docs into docs/; preserve old README file
+mv docs/README docs-README
+rm -rf docs/
 
-    cd src
-    make html
-    mv _build/html ../docs
-    rm -rf _build
+cd src
+make html
+mv _build/html ../docs
+rm -rf _build
 
-    cd ..
-    mv docs-README docs/README
+cd ..
+mv docs-README docs/README
 
-    git diff
+# git diff
 
-    # Only commit the docs for commits on master.
-    # GITHUB_HEAD_REF is empty on forks
-    if [[ "$GITHUB_REF" == "ref/heads/master" ]] && [[ "$GITHUB_HEAD_REF" == "" ]]; then
-        git add -A :/
-        git commit -m "Re-ran make.py. [ci skip]" || true
-        git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null
+# Only commit the docs for commits on master.
+# GITHUB_HEAD_REF is empty on forks
+if [[ "$GH_REF" == "ref/heads/master" ]] && [[ "$GH_TOKEN" != "" ]]; then
+    git add -A :/
+    git commit -m "Re-ran make.py. [ci skip]" || true
+    git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null
 
-        # Update the remotes before pushing and check the status.
-        # This should give us more info if the push will not be
-        # a simple fast-forward push.
-        git fetch --all 2> /dev/null
-        git branch -u pushable/master
-        git status
-        git push pushable new_site_content:master 2> /dev/null
-    fi
+    # Update the remotes before pushing and check the status.
+    # This should give us more info if the push will not be
+    # a simple fast-forward push.
+    git fetch --all 2> /dev/null
+    git branch -u pushable/master
+    git status
+    git push pushable new_site_content:master 2> /dev/null
 fi
-
