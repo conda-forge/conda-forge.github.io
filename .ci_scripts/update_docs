@@ -12,7 +12,7 @@ if [ -n "$GH_TOKEN" ]; then
     git checkout -b new_site_content
     # Generate html requires a GitHub token in order to query the available feedstocks.
     conda env create -f ./.ci_scripts/environment.yml
-    source activate conda-forge-docs
+    conda activate conda-forge-docs
 
     # rebuild elm
     # uncomment to restore search
@@ -34,7 +34,8 @@ if [ -n "$GH_TOKEN" ]; then
     git diff
 
     # Only commit the docs for commits on master.
-    if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+    # GITHUB_HEAD_REF is empty on forks
+    if [[ "$GITHUB_REF" == "ref/heads/master" ]] && [[ "$GITHUB_HEAD_REF" == "" ]]; then
         git add -A :/
         git commit -m "Re-ran make.py. [ci skip]" || true
         git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null

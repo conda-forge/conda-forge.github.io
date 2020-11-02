@@ -1,5 +1,5 @@
 # [conda-forge.org](https://conda-forge.org)
-[![Build Status](https://travis-ci.org/conda-forge/conda-forge.github.io.svg?branch=master)](https://travis-ci.org/conda-forge/conda-forge.github.io)
+[![deploy](https://github.com/conda-forge/conda-forge.github.io/workflows/deploy/badge.svg)](https://github.com/conda-forge/conda-forge.github.io/actions?query=workflow%3Adeploy)
 
 ## Overview
 This repository
@@ -10,8 +10,7 @@ If you have questions or need help, please check out our documentation for a [li
 
 ## Building the docs
 
-The docs are built on travis ci with the `.travis.yml` file at the root of this repository.
-`.travis.yml` uses [conda-execute](https://github.com/conda-tools/conda-execute) to run the `.ci_scripts/update_docs` script.
+The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` script.
 To build the docs locally, you should do the following:
 1. `conda env create -f ./.ci_scripts/environment.yml`
 2. `conda activate conda-forge-docs`
