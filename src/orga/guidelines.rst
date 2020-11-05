@@ -176,7 +176,7 @@ maintain. The ``core`` team abides by the following guidelines when doing this.
    rule encompasses both migration PRs from the autotick bot and requests from community members to merge PRs on feedstocks.
 2. In extenuating circumstances (i.e., bad bugs, blocking lots of other PRs/work, unmaintained feedstocks), the ``core`` team reserves the right to merge
    before the three day window has passed. In this case, at least two ``core`` members must approve the merge. Approvals include
-   the act of merging and a ``core`` member making the PR being merged.
+   the act of merging, a ``core`` member requesting something be merged, and a ``core`` member making the PR being merged.
 3. The ``core`` team will do its best to not merge PRs marked as in a draft state, either explicitly as a github draft PR or
    through a label, comment, or indication in a title.
 4. The ``core`` team will do its best to not merge PRs with requested changes (via a comment, label, title, or a PR review),
