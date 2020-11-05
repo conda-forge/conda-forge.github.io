@@ -148,12 +148,12 @@ As it comes up, each group should be able to define their own policy on how long
 Python
 ------
 For the Python language, conda-forge aims to keep package builds active and available for the current version and at least two preceding minor versions.
-Whenever Python 4.0 comes out we'll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously. 
+Whenever Python 4.0 comes out we'll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously.
 Fortunately, we can punt on that for now.
 The question of when to decide to drop an older language version remains.
 The guidance that we can provide here is two fold:
 
-1. We will move with the community. 
+1. We will move with the community.
    When our core libraries stop supporting an old version, so too will conda forge.
    The (nonexhaustive) list of core libraries that we consider when making the decision to drop an older version are:
    * matplotlib
@@ -164,3 +164,21 @@ The guidance that we can provide here is two fold:
    For example, we're holding off on turning off py36 until pypy comes out with pypy3.7.
 3. If there are lots of people in the community relying on older versions, core team can decide to keep an old version around
    For example, we held off turning off py27 even after numpy, scipy dropped support as there were many in the community interested in keeping support until the end of life of that version.
+
+
+Requesting ``core`` to Merge PRs
+================================
+
+Due to various reasons, it is sometimes necessary for the ``core`` team to merge PRs on feedstocks they do not personally
+maintain. The ``core`` team abides by the following guidelines when doing this.
+
+1. The ``core`` team will normally wait three days before merging a PR on a feedstock they do not maintain personally. This
+   rule encompasses both migration PRs from the autotick bot and requests from community members to merge PRs on feedstocks.
+2. In extenuating circumstances (i.e., bad bugs, blocking lots of other PRs/work), the ``core`` team reserves the right to merge
+   before the three day window has passed. In this case, at least two ``core`` members must approve the merge. Approvals include
+   the act of merging and a ``core`` member making the PR being merged.
+3. The ``core`` team will do its best to not merge PRs marked as in a draft state, either explicitly as a github draft PR or
+   through a label, comment, or indication in a title.
+4. The ``core`` team will do its best to not merge PRs with requested changes (via a comment, label, title, or a PR review),
+   though if the community member requesting the change is unresponsive to questions or to changes being made,
+   then they may merge.
