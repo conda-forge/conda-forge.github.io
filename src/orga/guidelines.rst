@@ -181,4 +181,4 @@ maintain. The ``core`` team abides by the following guidelines when doing this.
    through a label, comment, or indication in a title.
 4. The ``core`` team will do its best to not merge PRs with requested changes (via a comment, label, title, or a PR review),
    though if the community member requesting the change is unresponsive to questions or to changes being made,
-   then they may merge.
+   then a ``core`` team member may merge.
