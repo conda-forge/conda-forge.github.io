@@ -174,7 +174,7 @@ maintain. The ``core`` team abides by the following guidelines when doing this.
 
 1. The ``core`` team will normally wait three days before merging a PR on a feedstock they do not maintain personally. This
    rule encompasses both migration PRs from the autotick bot and requests from community members to merge PRs on feedstocks.
-2. In extenuating circumstances (i.e., bad bugs, blocking lots of other PRs/work), the ``core`` team reserves the right to merge
+2. In extenuating circumstances (i.e., bad bugs, blocking lots of other PRs/work, unmaintained feedstocks), the ``core`` team reserves the right to merge
    before the three day window has passed. In this case, at least two ``core`` members must approve the merge. Approvals include
    the act of merging and a ``core`` member making the PR being merged.
 3. The ``core`` team will do its best to not merge PRs marked as in a draft state, either explicitly as a github draft PR or
