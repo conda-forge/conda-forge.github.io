@@ -992,20 +992,42 @@ To use a new SDK, add the following in ``recipe/conda_build_config.yaml``
 
 .. code-block:: yaml
 
-    MACOSX_DEPLOYMENT_TARGET:  # [osx]
-      - 10.12                  # [osx]
+    # Please consult conda-forge/core before doing this
+    MACOSX_SDK_VERSION:        # [osx and x86_64]
+      - 10.12                  # [osx and x86_64]
+
+Note that this should be done if the error you are getting says that a header is not
+found or a macro is not defined. This will make your package compile with a newer SDK
+but with ``10.9`` as the deployment target.
+WARNING: some packages might use features from ``10.12`` if you do the above due to
+buggy symbol availability checks. For example packages looking for ``clock_gettime``
+will see it as it will be a weak symbol, but the package might not have a codepath
+to handle the weak symbol, in that case, you need to update the ``MACOSX_DEPLOYMENT_TARGET``
+as described below.
+
+After increasing the SDK version, if you are getting an error that says that a function
+is available only for macOS x.x, then do the following in ``recipe/conda_build_config.yaml``,
+
+.. code-block:: yaml
+
+    # Please consult conda-forge/core before doing this
+    MACOSX_DEPLOYMENT_TARGET:  # [osx and x86_64]
+      - 10.12                  # [osx and x86_64]
+    MACOSX_SDK_VERSION:        # [osx and x86_64]
+      - 10.12                  # [osx and x86_64]
+
 
 In ``recipe/meta.yaml``, add the following to ensure that the user's system is compatible.
 
 .. code-block:: yaml
 
     requirements:
-      run_constrained:
-        - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.9") }}  # [osx]
+      run:
+        - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.9") }}  # [osx and x86_64]
 
-Note that the requirement is a `run_constrained`, because the ``__osx`` virtual package
-is supported only by ``conda>=4.8``. Once that conda version is used widely, the
-requirement will be changed from ``run_constrained`` to ``run``.
+Note that this requires ``conda>=4.8``. If you want to support older conda versions
+the requirement should be changed from ``run`` to ``run_constrained``. Note that
+``conda<4.8`` will ignore the condition if it's a ``run_constrained`` on ``__osx``.
 
 
 PyPy builds

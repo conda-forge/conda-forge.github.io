@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge base &#8212; conda-forge 2020.11.02 documentation</title>
+    <title>Knowledge base &#8212; conda-forge 2020.11.05 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.11.02 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.11.05 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -887,19 +887,37 @@ to build with. While the default version 10.9 can be overridden using the follow
 changes to the recipe, it should be done as a last resort. Please consult with
 core team if this is something you think you need.</p>
 <p>To use a new SDK, add the following in <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code></p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">MACOSX_DEPLOYMENT_TARGET</span><span class="p">:</span>  <span class="c1"># [osx]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">10.12</span>                  <span class="c1"># [osx]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Please consult conda-forge/core before doing this</span>
+<span class="nt">MACOSX_SDK_VERSION</span><span class="p">:</span>        <span class="c1"># [osx and x86_64]</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">10.12</span>                  <span class="c1"># [osx and x86_64]</span>
+</pre></div>
+</div>
+<p>Note that this should be done if the error you are getting says that a header is not
+found or a macro is not defined. This will make your package compile with a newer SDK
+but with <code class="docutils literal notranslate"><span class="pre">10.9</span></code> as the deployment target.
+WARNING: some packages might use features from <code class="docutils literal notranslate"><span class="pre">10.12</span></code> if you do the above due to
+buggy symbol availability checks. For example packages looking for <code class="docutils literal notranslate"><span class="pre">clock_gettime</span></code>
+will see it as it will be a weak symbol, but the package might not have a codepath
+to handle the weak symbol, in that case, you need to update the <code class="docutils literal notranslate"><span class="pre">MACOSX_DEPLOYMENT_TARGET</span></code>
+as described below.</p>
+<p>After increasing the SDK version, if you are getting an error that says that a function
+is available only for macOS x.x, then do the following in <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code>,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Please consult conda-forge/core before doing this</span>
+<span class="nt">MACOSX_DEPLOYMENT_TARGET</span><span class="p">:</span>  <span class="c1"># [osx and x86_64]</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">10.12</span>                  <span class="c1"># [osx and x86_64]</span>
+<span class="nt">MACOSX_SDK_VERSION</span><span class="p">:</span>        <span class="c1"># [osx and x86_64]</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">10.12</span>                  <span class="c1"># [osx and x86_64]</span>
 </pre></div>
 </div>
 <p>In <code class="docutils literal notranslate"><span class="pre">recipe/meta.yaml</span></code>, add the following to ensure that the user’s system is compatible.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">run_constrained</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">__osx &gt;={{ MACOSX_DEPLOYMENT_TARGET|default(&quot;10.9&quot;) }}</span>  <span class="c1"># [osx]</span>
+  <span class="nt">run</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">__osx &gt;={{ MACOSX_DEPLOYMENT_TARGET|default(&quot;10.9&quot;) }}</span>  <span class="c1"># [osx and x86_64]</span>
 </pre></div>
 </div>
-<p>Note that the requirement is a <cite>run_constrained</cite>, because the <code class="docutils literal notranslate"><span class="pre">__osx</span></code> virtual package
-is supported only by <code class="docutils literal notranslate"><span class="pre">conda&gt;=4.8</span></code>. Once that conda version is used widely, the
-requirement will be changed from <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> to <code class="docutils literal notranslate"><span class="pre">run</span></code>.</p>
+<p>Note that this requires <code class="docutils literal notranslate"><span class="pre">conda&gt;=4.8</span></code>. If you want to support older conda versions
+the requirement should be changed from <code class="docutils literal notranslate"><span class="pre">run</span></code> to <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code>. Note that
+<code class="docutils literal notranslate"><span class="pre">conda&lt;4.8</span></code> will ignore the condition if it’s a <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> on <code class="docutils literal notranslate"><span class="pre">__osx</span></code>.</p>
 </div>
 <div class="section" id="pypy-builds">
 <h2>PyPy builds<a class="headerlink" href="#pypy-builds" title="Permalink to this headline">¶</a></h2>
@@ -1120,7 +1138,7 @@ version. If this changes in the future, then this extra key may not be needed.</
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.11.02 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.11.05 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
