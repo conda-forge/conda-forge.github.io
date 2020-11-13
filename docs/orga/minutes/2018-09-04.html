@@ -1,0 +1,421 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>2018-09-04 conda-forge meeting &#8212; conda-forge 2020.11.13 documentation</title>
+    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+
+    
+    
+     
+        <script src="../../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="../../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="../../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2018-08-21 conda-forge meeting" href="2018-08-21.html" />
+    <link rel="prev" title="2018-09-18 conda-forge meeting" href="2018-09-18.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="2018-08-21.html" title="2018-08-21 conda-forge meeting"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="2018-09-18.html" title="2018-09-18 conda-forge meeting"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../../index.html">conda-forge 2020.11.13 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="conda-forge-meeting">
+<h1>2018-09-04 conda-forge meeting<a class="headerlink" href="#conda-forge-meeting" title="Permalink to this headline">¶</a></h1>
+<p><strong>Pinned Items</strong></p>
+<ul class="simple">
+<li><p>Zoom instructions: <a class="reference external" href="https://paper.dropbox.com/doc/How-to-connect-to-zoom-odl94oveHyiRv6UqTtZE5">+How to connect to zoom</a></p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>New items</strong></p>
+<ul class="simple">
+<li><p>Meet with NumFOCUS RE: Fiscal sponsorship</p></li>
+<li><p><a class="reference external" href="https://numfocus.org/rocket/">numfocus.org/rocket</a></p></li>
+<li><p>Need .la removal for compiler rebuilds</p></li>
+</ul>
+<p><strong>Existing Items</strong></p>
+<ul class="simple">
+<li><p>Compiler migration has started (finished in Q1 2019)</p>
+<ul>
+<li><p>Updated needed to Python: https://github.com/conda-forge/python-feedstock/pull/190</p></li>
+</ul>
+</li>
+<li><p>Votes/discussion in progress or need start:</p>
+<ul>
+<li><p>https://github.com/conda-forge/conda-forge.github.io/pull/628</p></li>
+<li><p>https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/10</p></li>
+<li><p>https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/11</p></li>
+<li><p>Subteams which need PR into conda-forge.github.io</p>
+<ul>
+<li><p>fiscal: how to allocate resources from NumFOCUS/approve expenditures periodically</p></li>
+<li><p>toolchain: compilers, when to update to new ABI’s (MichaelS needs to put up proposal)</p></li>
+<li><p>R ecosystem</p></li>
+</ul>
+</li>
+<li><p>MichaelS <strong>still</strong> owes a PR to the docs for current run_exports best practices</p></li>
+</ul>
+</li>
+<li><p>Conda 4.5.9 (features thing):</p>
+<ul>
+<li><p>Filipe asking for option to error if conda tries to use packages from a lower-priority channel over their higher priority channel.  Allow fallback, but only for things that don’t exist.</p>
+<ul>
+<li><p>Implementation by Jonathan at https://github.com/conda/conda/pull/7660</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Dougal raising issue with conda-build creating noarch packages.  Conda-build wants to use new python, then runs into unsatisfiable deps (python 3.7 isn’t totally built out yet).</p>
+<ul>
+<li><p>https://github.com/conda-forge/google-cloud-bigquery-feedstock/pull/14</p></li>
+<li><p>on closer inspection, the problem is that conda-forge does not yet have a protobuf package built for py3.7 yet, and defaults’ protobuf package does not exclude conda-forge’s libprotobuf, so the mix of the two breaks due to C++ ABI incompatibility.</p></li>
+</ul>
+</li>
+<li><p>Discuss the recipes syncing between defaults and conda-forge and some issues we are facing:</p>
+<ul>
+<li><p>large number of patches</p></li>
+<li><p>the use of <code class="docutils literal notranslate"><span class="pre">cdt</span></code> jinja (ping Peter Williams on the benchmark &#64;pkgw)</p></li>
+<li><p>new compiler specific stuff on the build scripts</p></li>
+<li><p>multiple outputs and new names: curl/libcurl, etc</p></li>
+<li><p>the use of features (https://github.com/conda-forge/blas-feedstock/pull/12)</p></li>
+</ul>
+</li>
+<li><p>Sharing passwords (to start off the meeting next time)</p>
+<ul>
+<li><p>Try something out and move on to more interesting problems</p></li>
+<li><p>Let’s try KeyBase. Eric D. just sent out invites to most of the core team.</p></li>
+</ul>
+</li>
+<li><p>Establish next steps/action items/gh issues for migrations</p>
+<ul>
+<li><p>MVN will coordinate with CJ on issuing prs for the things that need compilers that don’t actually call it out nicely.</p></li>
+<li><p>Parse graph find everything which could be py 3.7 but no compiler and not noarch, run rebuild on that.</p></li>
+<li><p>May need to have two versions of pinnings + smithy whilst graph is being rebuilt.</p></li>
+</ul>
+</li>
+<li><p>Decide on a policy for when maintainers stop maintaining</p>
+<ul>
+<li><p>Come back to later</p></li>
+</ul>
+</li>
+<li><p>Related to 2k-ish pending bot PRs…</p>
+<ul>
+<li><p>MVN will give CJ a list of merge-conflicted feedstocks that were closed and not merged.</p></li>
+<li><p>Auto close out of date PRs</p></li>
+<li><p>Auto delete closed/merged bot PR</p></li>
+</ul>
+</li>
+<li><p>run_exports vote https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/102</p>
+<ul>
+<li><p>John questioned run_exports practice: https://github.com/conda-forge/staged-recipes/pull/4858#discussion_r204076032</p></li>
+<li><p>Dougal redirected discussion to https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/102#issue-343171939</p></li>
+<li><p>John questioned validity of vote on run_exports:</p>
+<ul>
+<li><p>https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/102#issuecomment-406672840</p></li>
+<li><p>https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/102#issuecomment-406681093</p></li>
+</ul>
+</li>
+<li><p>Filipe to add to governance doc on process to un-stick situations like this</p></li>
+<li><p>Overall: we need a community standards communication scheme.  Mike S dropped the ball on communicating the results of the poll.</p></li>
+<li><p>Related: governance doc may need definition of how a valid poll is to be conducted.</p></li>
+</ul>
+</li>
+<li><p>Expiring (i.e., auto-closing with a bot) “old” PRs into staged-recipes?</p>
+<ul>
+<li><p>Put on label, add message (stale), ping relevant parties to close</p></li>
+<li><p>Decide on policy</p></li>
+</ul>
+</li>
+<li><p>Finding a good solution to sharing passwords among core</p>
+<ul>
+<li><p>Git Secret? https://github.com/sobolevn/git-secret</p></li>
+</ul>
+</li>
+<li><p>Build packages on C3I and upload to conda-forge</p>
+<ul>
+<li><p>Make is missing from the base image for PowerPC internal to Anaconda. Fun times!</p></li>
+<li><p>Mike is open to other people helping with this.  If interested, reach out!  Helping means trying recipes, debugging any issues, and resolving any merge conflicts that have happened since Mike pulled them in last.  Moving target.</p></li>
+<li><p>Packages that have been built https://anaconda.org/cf-cb3 - these may need more work regarding versions.  The graph was computed with the versions, but probably should have ignored them.  When a pin is older than a newer recipe, the upstream recipe gets missed as a real dependency because of the version mismatch.</p></li>
+</ul>
+</li>
+<li><p>Making the agenda and notes public again.</p>
+<ul>
+<li><p>John will see if we can make dropbox paper readable by the world</p></li>
+<li><p>other options are to just post the notes somewhere public after the meeting</p></li>
+</ul>
+</li>
+<li><p>conda-forge blog</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Discussed Items</strong></p>
+<ul class="simple">
+<li></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Done</strong></p>
+<ul class="simple">
+<li><p>NumFOCUS summit: http://summit.numfocus.org/pages/schedule.html</p>
+<ul>
+<li><p>Marius and Anthony attending (maybe CJ)</p></li>
+</ul>
+</li>
+<li><p>Subgroup proposal: have smaller groups that meet outside of core meetings with different frequency</p>
+<ul>
+<li><p>Each of these need to be put up as a proposal (to conda-forge.github.io), which then needs a core vote for creation.  Each proposal should have a scope of the group and initial members, as well as how the group is expected to coordinate and communicate.</p></li>
+<li><p>Proposed initial groups:</p>
+<ul>
+<li><p>bot: people responsible for bot architecture, implementation, maintenance.  NOT actual uses of bot (e.g. creating large migrations)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../../index.html" title="index">
+          <img class="logo" src="../../_static/logo_black_on_trans.png" alt="Logo"/>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../../index.html">Overview</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../user/00_intro.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../maintainer/00_intro.html">Maintainer Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../00_intro.html">Organisation Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../guidelines.html">Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../governance.html">Governance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../subteams.html">A list of current sub-teams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../joining-the-team.html">Joining the team</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="2020-10-28.html">2020-10-28 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-10-21.html">2020-10-21 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-10-14.html">2020-10-14 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-10-07.html">2020-10-07 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-09-30.html">2020-09-30 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-09-16.html">2020-09-16 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-09-09.html">2020-09-09 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-09-02.html">2020-09-02 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-08-26.html">2020-08-26 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-08-19.html">2020-08-19 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-08-12.html">2020-08-12 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-08-05.html">2020-08-05 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-07.29.html">2020-07-29 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-07.22.html">2020-07-22 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-07-15.html">2020-07-15 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-07-08.html">2020-07-08 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-07-01.html">2020-07-01 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-06-22.html">2020-06-22 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-05-27.html">2020-05-27 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-05-13.html">2020-05-13 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-04-29.html">2020-04-29 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-04-15.html">2020-04-15 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-04-01.html">2020-04-01 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-03-18.html">2020-03-18 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-03-04.html">2020-03-04 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-02-19.html">2020-02-19 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-02-05.html">2020-02-05 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-01-22.html">2020-01-22 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2020-01-08.html">2020-01-08 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-11-12.html">2019-11-12 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-10-30.html">2019-10-30 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-10-16.html">2019-10-16 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-10-02.html">2019-10-02 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-09-18.html">2019-09-18 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-09-04.html">2019-09-04 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-08-07.html">2017-08-07 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-07-24.html">2017-07-24 conda-forge core meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-06-26.html">2019-06-26 core dev meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-06-12.html">2019-06-12 Meeting Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-05-29.html">2019-05-29 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-05-15.html">2019-05-15 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-04-17.html">2019-04-17 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-04-03.html">2019-04-03 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-03-20.html">2019-03-20 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-03-06.html">2019-03-06 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-02-20.html">2019-02-20 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-02-06.html">2019-02-06 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-01-23.html">2019-01-23 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-01-09.html">2019-01-09 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-11-27.html">2018-11-27 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-11-13.html">2018-11-13 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-10-30.html">2018-10-30 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-10-02.html">2018-10-02 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-09-18.html">2018-09-18 conda-forge meeting</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2018-09-04 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-08-21.html">2018-08-21 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-08-07.html">2018-08-07 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-07-24.html">2018-07-24 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-07-17.html">2018-07-17 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-06-26.html">2018-06-26 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-06-12.html">2018-06-12 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-05-29.html">2018-05-29 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-05-01.html">2018-05-01 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-04-17.html">2018-04-17 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-04-03.html">2018-04-03 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-03-20.html">2018-03-20 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-03-06.html">2018-03-06 meeting agenda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2018-02-20.html">2018-02-20 meeting notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2017-11-16.html">2017-11-16 compiler meeting notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2017-11-16.html#adopting-anaconda-compilers">Adopting Anaconda compilers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2017-11-16.html#compiler-flag-unification">Compiler flag unification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2017-11-16.html#conda-build-3-strategy-for-moving">Conda-build 3: strategy for moving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2017-11-16.html#fortran-support-on-windows">Fortran support on Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2017-11-16.html#openmp-behavior">OpenMP behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2017-08-11.html">2017-08-11: General Discussion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2017-05-10.html">conda-forge meetings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2017-05-10.html#general-discussion">2017-05-10: General Discussion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2017-04-26.html">2017-04-26: General Discussion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2017-01-06.html">2017-01-06: General Discussion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-11-24.html">2016-11-24: General Discussion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-11-17.html">2016-11-17: Operational catchup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-10-07.html">2016-10-07: General Discussion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-09-23.html">2016-09-23 (postponed from 16th): General Discussion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-09-09.html">2016-09-09: General discussion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-08-25.html">2016-08-25: General discussion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-08-12.html">2016-08-12: General discussion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-07-22.html">2016-07-22: General discussion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-06-24.html">2016-06-24: General discussion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-06-09.html">2016-06-09: Compiler special meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-06-03.html">2016-06-03</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-05-13.html">2016-05-13</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-05-09.html">2016-05-09 Exceptional meeting regarding build customization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-04-29.html">2016-04-29</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-04-22.html">2016-04-22 Exceptional meeting regarding VC pinning mechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-04-15.html">2016-04-15</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-in-touch.html">Getting in Touch</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../misc/00_intro.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contracting/00_intro.html">Contracting Information</a></li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="2018-09-18.html"
+                          title="Previous page">&larr; 2018-09-18 conda-forge meeting</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="2018-08-21.html"
+                          title="Next page">&rarr; 2018-08-21 conda-forge meeting</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/orga/minutes/2018-09-04.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="2018-08-21.html" title="2018-08-21 conda-forge meeting"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="2018-09-18.html" title="2018-09-18 conda-forge meeting"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../../index.html">conda-forge 2020.11.13 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2020, conda-forge.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
