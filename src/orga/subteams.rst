@@ -294,4 +294,4 @@ Members
 -------
 - Filipe Fernandes <ocefpaf@gmail.com>
 - Christopher J. "CJ" Wright <cjwright4242@gmail.com>
-
+- Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
