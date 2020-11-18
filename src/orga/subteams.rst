@@ -281,7 +281,7 @@ Dynamic
 Responsibility
 --------------
 One of the core strengths of ``conda-forge`` is the diversity of ecosystems it supports.
-Likewise, fostering and advancing a diverse community of users, maintainers and infrastructure contributors
+Likewise, fostering and advancing a diverse community of users, maintainers, and infrastructure contributors
 is an important part of creating and maintaining a vibrant project.
 The mandate of this subteam is to support and increase the diversity of the ``conda-forge`` 
 community at all levels.
@@ -296,3 +296,4 @@ Members
 - Christopher J. "CJ" Wright <cjwright4242@gmail.com>
 - Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
 - Peter K. G. Williams <peter@newton.cx>
+- Keith Kraus <kkraus@nvidia.com>
