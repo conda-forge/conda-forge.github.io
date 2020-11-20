@@ -226,20 +226,16 @@ The staging team is responsible for:
 
 Members
 -------
-In addition to [core](https://github.com/conda-forge/conda-forge.github.io/blob/master/src/core.csv)
-and [emeritus](https://github.com/conda-forge/conda-forge.github.io/blob/master/src/emeritus.csv),
+In addition to `core <https://github.com/conda-forge/conda-forge.github.io/blob/master/src/core.csv>`_
+and `emeritus <https://github.com/conda-forge/conda-forge.github.io/blob/master/src/emeritus.csv>`_,
 the following are members of the staged-recipes team and have commit rights.
 
  - Amir Mohammadi <183.amir@gmail.com>
- - Matthew R. Becker <becker.mr@gmail.com>
- - Chris Burr <christopher.burr@cern.ch>
  - Igor T. Ghisi <>
  - Johannes Köster <>
- - Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
  - Nehal J Wani <nehaljw.kkd1@gmail.com>
  - Peter M. Landwehr <>
  - Patrick Sodré <psodre@gmail.com>
- - Sylvain Corlay <sylvain.corlay@gmail.com>
 
 
 Miniforge Sub-Team
