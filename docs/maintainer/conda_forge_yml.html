@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2020.11.20 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2020.11.27 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.11.20 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.11.27 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -89,17 +89,12 @@ upload packages to anaconda.org, which can be useful for testing. For example:</
 <li><p>channels</p></li>
 <li><p>choco</p></li>
 <li><p>circle</p></li>
-<li><p>compiler_stack</p></li>
 <li><p>docker</p></li>
 <li><p>github</p></li>
 <li><p>idle_timeout_minutes</p></li>
 <li><p>linux</p></li>
 <li><p>linux_aarch64</p></li>
 <li><p>linux_ppc64le</p></li>
-<li><p>max_py_ver</p></li>
-<li><p>max_r_ver</p></li>
-<li><p>min_py_ver</p></li>
-<li><p>min_r_ver</p></li>
 <li><p>osx</p></li>
 <li><p>provider</p></li>
 <li><p>recipe_dir</p></li>
@@ -211,13 +206,6 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
 </pre></div>
 </div>
 </div>
-<div class="section" id="compiler-stack">
-<h3>compiler_stack<a class="headerlink" href="#compiler-stack" title="Permalink to this headline">¶</a></h3>
-<p>Sets the compiler stack environment variable. The default is:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">compiler_stack</span><span class="p">:</span> <span class="s">&quot;comp7&quot;</span>
-</pre></div>
-</div>
-</div>
 <div class="section" id="docker">
 <h3>docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h3>
 <p>This is a mapping to docker configuration options. These are relatively
@@ -276,34 +264,6 @@ Currently only:</p>
 Currently only:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">linux_ppc64le</span><span class="p">:</span>
   <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="max-py-ver">
-<h3>max_py_ver<a class="headerlink" href="#max-py-ver" title="Permalink to this headline">¶</a></h3>
-<p>The maximum Python version to be built. The current default is:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">max_py_ver</span><span class="p">:</span> <span class="s">&quot;37&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="max-r-ver">
-<h3>max_r_ver<a class="headerlink" href="#max-r-ver" title="Permalink to this headline">¶</a></h3>
-<p>The maximum R version to be built. The current default is:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">max_r_ver</span><span class="p">:</span> <span class="s">&quot;34&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="min-py-ver">
-<h3>min_py_ver<a class="headerlink" href="#min-py-ver" title="Permalink to this headline">¶</a></h3>
-<p>The minimum Python version to be built. The current default is:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">min_py_ver</span><span class="p">:</span> <span class="s">&quot;27&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="min-r-ver">
-<h3>min_r_ver<a class="headerlink" href="#min-r-ver" title="Permalink to this headline">¶</a></h3>
-<p>The minimum R version to be built. The current default is:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">min_r_ver</span><span class="p">:</span> <span class="s">&quot;34&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -469,17 +429,12 @@ in the <code class="docutils literal notranslate"><span class="pre">.condarc</sp
 <li class="toctree-l4"><a class="reference internal" href="#channels">channels</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#choco">choco</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#circle">circle</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#compiler-stack">compiler_stack</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#docker">docker</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github">github</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#idle-timeout-minutes">idle_timeout_minutes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#linux">linux</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#linux-aarch64">linux_aarch64</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#linux-ppc64le">linux_ppc64le</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#max-py-ver">max_py_ver</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#max-r-ver">max_r_ver</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#min-py-ver">min_py_ver</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#min-r-ver">min_r_ver</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#osx">osx</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#provider">provider</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#recipe-dir">recipe_dir</a></li>
@@ -567,7 +522,7 @@ in the <code class="docutils literal notranslate"><span class="pre">.condarc</sp
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.11.20 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.11.27 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>

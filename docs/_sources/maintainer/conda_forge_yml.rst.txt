@@ -28,17 +28,12 @@ Top-level fields
 * channels
 * choco
 * circle
-* compiler_stack
 * docker
 * github
 * idle_timeout_minutes
 * linux
 * linux_aarch64
 * linux_ppc64le
-* max_py_ver
-* max_r_ver
-* min_py_ver
-* min_r_ver
 * osx
 * provider
 * recipe_dir
@@ -160,14 +155,6 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
       secure:
         BINSTAR_TOKEN: <some big hash>
 
-compiler_stack
---------------
-Sets the compiler stack environment variable. The default is:
-
-.. code-block:: yaml
-
-    compiler_stack: "comp7"
-
 docker
 ------
 This is a mapping to docker configuration options. These are relatively
@@ -238,38 +225,6 @@ Currently only:
 
     linux_ppc64le:
       enabled: False
-
-max_py_ver
-----------
-The maximum Python version to be built. The current default is:
-
-.. code-block:: yaml
-
-    max_py_ver: "37"
-
-max_r_ver
-----------
-The maximum R version to be built. The current default is:
-
-.. code-block:: yaml
-
-    max_r_ver: "34"
-
-min_py_ver
-----------
-The minimum Python version to be built. The current default is:
-
-.. code-block:: yaml
-
-    min_py_ver: "27"
-
-min_r_ver
-----------
-The minimum R version to be built. The current default is:
-
-.. code-block:: yaml
-
-    min_r_ver: "34"
 
 osx
 ---
