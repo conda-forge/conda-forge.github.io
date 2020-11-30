@@ -93,9 +93,17 @@ Works on Arm:
     - infrastructure
 
 OVHCloud:
-   Description: OVH Provides a Windows Build VM
+   Description: OVH provides a Windows build VM
    Site URL: https://www.ovh.com/
    Logo URL:
      - https://www.frenchtechbordeaux.com/wp-content/uploads/2019/08/LogoOVHCloud_Vertical-Blue2.png
+   contribution type:
+     - infrastructure
+
+MacStadium:
+   Description: MacStadium provides dedicated Mac mini hardware
+   Site URL: https://www.macstadium.com/
+   Logo URL:
+     - https://uploads-ssl.webflow.com/5ac3c046c82724970fc60918/5c019d917bba312af7553b49_MacStadium-developerlogo.png
    contribution type:
      - infrastructure
