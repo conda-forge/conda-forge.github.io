@@ -189,7 +189,7 @@ of the feedstock.
 Travis CI (OS X, IBM Power 8+)
 ------------------------------
 
-Travis CI is used to build packages for OS X and IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
+Travis CI is used to build packages for IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
 force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit `<https://travis-ci.com/profile>`_ 
 and click "Sync accounts".
 
