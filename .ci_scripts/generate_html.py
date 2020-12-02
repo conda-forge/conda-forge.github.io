@@ -17,13 +17,20 @@ data = {k: data[k] for k in keys}
 
 for k in data:
     if "Logo URL" in data[k]:
-        try:
-            r = requests.get(data[k]["Logo URL"][0])
-            if k != "Lab49":
-                r.raise_for_status()
-        except Exception as e:
-            print(e)
-            del data[k]["Logo URL"]
+        for i in range(5):
+            try:
+                # extra header is needed for lab49
+                r = requests.get(
+                    data[k]["Logo URL"][0],
+                    headers={'user-agent': 'Mozilla/5.0'},
+                )
+                break
+            except Exception as e:
+                if i < 4:
+                    pass
+                else:
+                    print(f"bad logo for {k}: {e}")
+                    del data[k]["Logo URL"]
 
 with open(os.path.join(repo_dir, "index.html.tmpl")) as fp:
     tmpl = jinja2.Template(fp.read())
