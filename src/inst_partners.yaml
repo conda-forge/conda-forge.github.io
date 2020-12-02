@@ -66,6 +66,18 @@ QuantStack:
    contribution type:
      - dev support
 
+NVIDIA:
+   Description: NVIDIA provides developer time
+   Developers:
+     - jakirkham
+     - kkraus14
+   Logo URL:
+     - https://s3.amazonaws.com/cms.ipressroom.com/219/files/20149/544a0d86f6091d6699000060_NVLogo_2D/NVLogo_2D_362acb00-8e1b-476b-9662-9fe138a4a920-prv.jpg
+   Site URL:
+     - https://www.nvidia.com
+   contribution type:
+     - dev support
+
 # Places that give us stuff
 Microsoft Azure:
   Description: Azure provides build systems for Windows, OSX, and Linux
