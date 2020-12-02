@@ -11,11 +11,11 @@
 
 # Places that employ core
 Lab49:
-  Description:
+  Description: Lab49 provides developer time
   Developers:
     - cj-wright
   Logo URL:
-    - imgs/lab49.png
+    - https://www.lab49.com/wp-content/uploads/2020/06/logo.svg
   Site URL:
     - https://www.lab49.com
   contribution type:
@@ -67,6 +67,19 @@ QuantStack:
     - https://quantstack.net/img/quantstack-logo.png
   contribution type:
     - dev support
+
+NVIDIA:
+   Description: NVIDIA provides developer time
+   Developers:
+     - jakirkham
+     - kkraus14
+   Logo URL:
+     - https://cdn-assets-cloud.frontify.com/s3/frontify-cloud-files-us/eyJwYXRoIjoiZnJvbnRpZnlcL2FjY291bnRzXC84MVwvOTYxNTJcL3Byb2plY3RzXC8xNzY2NDRcL2Fzc2V0c1wvOWRcLzI0NzM4MTdcLzY0ZmRkOTc3MGY4Zjg0YjMxM2E3NDQ5NGY3NTc0MzZiLTE1MzE1MTU3MjkucG5nIn0:cloud:hhu8wqybRLydq7ZhAqVEYy66lpq61SJurz-rRPPEX2s
+   Site URL:
+     - https://www.nvidia.com
+   contribution type:
+     - dev support
+     - fiscal support
 
 # Places that give us stuff
 Microsoft Azure:
