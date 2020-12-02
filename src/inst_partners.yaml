@@ -58,7 +58,8 @@ Anaconda Inc:
 
 QuantStack:
   Description: QuantStack provides developer time
-  Site URL: https://quantstack.net
+  Site URL:
+    - https://quantstack.net
   Developers:
     - wolfv
     - SylvainCorlay
@@ -95,7 +96,8 @@ Works on Arm:
 
 OVHCloud:
   Description: OVH provides a Windows build VM
-  Site URL: https://www.ovh.com/
+  Site URL:
+    - https://www.ovh.com/
   Logo URL:
     - https://www.frenchtechbordeaux.com/wp-content/uploads/2019/08/LogoOVHCloud_Vertical-Blue2.png
   contribution type:
@@ -103,7 +105,8 @@ OVHCloud:
 
 MacStadium:
    Description: MacStadium provides dedicated Mac mini hardware
-   Site URL: https://www.macstadium.com/
+   Site URL:
+     - https://www.macstadium.com/
    Logo URL:
      - https://uploads-ssl.webflow.com/5ac3c046c82724970fc60918/5c019d917bba312af7553b49_MacStadium-developerlogo.png
    contribution type:
@@ -112,7 +115,8 @@ MacStadium:
 # fiscal sponsorship
 NumFOCUS:
   Description: NumFOCUS provides fiscal sponsorship
-  Site URL: https://numfocus.org/
+  Site URL:
+    - https://numfocus.org/
   Logo URL:
     - https://www.conda-forge.org/img/NumFocus_LRG.png
   contribution type:

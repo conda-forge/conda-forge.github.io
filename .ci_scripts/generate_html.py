@@ -29,9 +29,18 @@ with open(os.path.join(repo_dir, "index.html.tmpl")) as fp:
 
 context = {
     "inst_partners": data,
-    "do_dev": any('dev support' in data[k]['contribution type'] for k in keys),
-    "do_infra": any('infrastructure' in data[k]['contribution type'] for k in keys),
-    "do_fiscal": any('fiscal support' in data[k]['contribution type'] for k in keys),
+    "do_dev": min(
+        sum(['dev support' in data[k]['contribution type'] for k in keys]),
+        2,
+    ),
+    "do_infra": min(
+        sum(['infrastructure' in data[k]['contribution type'] for k in keys]),
+        2,
+    ),
+    "do_fiscal": min(
+        sum(['fiscal support' in data[k]['contribution type'] for k in keys]),
+        2,
+    ),
 }
 
 with open(os.path.join(repo_dir, 'index.html'), 'w') as fp:
