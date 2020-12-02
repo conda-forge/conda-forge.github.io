@@ -82,16 +82,16 @@ NVIDIA:
      - fiscal support
 
 # Places that give us stuff
-Microsoft Azure:
-  Description: Azure provides build systems for Windows, OSX, and Linux
-  Site URL:
-    - https://azure.microsoft.com/en-us/services/devops/pipelines/
-  contribution type:
-    - infrastructure
+# Microsoft:
+#   Description: Microsoft provides build systems for Windows, OSX, and Linux on Azure.
+#   Site URL:
+#     - https://azure.microsoft.com/en-us/services/devops/pipelines/
+#   contribution type:
+#     - infrastructure
 
 Oregon State University Open Source Lab:
   Description: OSL provides ppc64le machines for long running jobs
-  Logo UR:
+  Logo URL:
     - https://osuosl.org/images/osllogo-print_0.png
   Site URL:
     - https://osuosl.org
