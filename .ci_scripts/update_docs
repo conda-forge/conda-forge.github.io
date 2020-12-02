@@ -3,9 +3,10 @@
 set -ex
 
 git checkout -b new_site_content
-# Generate html requires a GitHub token in order to query the available feedstocks.
 conda env create -f ./.ci_scripts/environment.yml
 conda activate conda-forge-docs
+
+python .ci_scripts/generate_html.py
 
 # rebuild elm
 # uncomment to restore search
