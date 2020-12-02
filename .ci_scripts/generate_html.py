@@ -27,7 +27,12 @@ for k in data:
 with open(os.path.join(repo_dir, "index.html.tmpl")) as fp:
     tmpl = jinja2.Template(fp.read())
 
-context = {"inst_partners": data}
+context = {
+    "inst_partners": data,
+    "do_dev": any('dev support' in data[k]['contribution type'] for k in keys),
+    "do_infra": any('infrastructure' in data[k]['contribution type'] for k in keys),
+    "do_fiscal": any('fiscal support' in data[k]['contribution type'] for k in keys),
+}
 
 with open(os.path.join(repo_dir, 'index.html'), 'w') as fp:
     fp.write(tmpl.render(context))

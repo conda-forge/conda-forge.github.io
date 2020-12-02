@@ -267,10 +267,36 @@
         <div class="col-lg-8 col-lg-offset-2">
           <h1 class="text-center">Institutional Partners</h1>
           </br>
+
+          {% if do_fiscal %}
+          <h2 class="text-center">Fiscal Support</h2>
+          <div class="card-columns" style="column-count: 2; padding-bottom:100px">
+            {% for partner, data in inst_partners.items() %}
+            {% if 'fiscal support' in data['contribution type'] %}
+            <div class="card">
+              <a href="{{ data['Site URL'][0] }}">
+                {% if 'Logo URL' in data %}
+                <img style="width:100%" class="card-img" src="{{ data['Logo URL'][0] }}" alt="{{ partner }}">
+                {% endif %}
+                <div class="card-img-overlay">
+                  {% if 'Logo URL' not in data %}
+                  <h3 class="card-title">{{ partner }}</h3>
+                  {% else %}
+                  <h3 class="card-title"></h3>
+                  {% endif %}
+                </div>
+              </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          {% if do_infra %}
           <h2 class="text-center">Infrastructure Support</h2>
-          <div class="card-columns" style="column-count: 2">
+          <div class="card-columns" style="column-count: 2; padding-bottom:100px">
             {% for partner, data in inst_partners.items() %}
-            {% if data['contribution type'][0] == 'infrastructure' %}
+            {% if 'infrastructure' in data['contribution type'] %}
             <div class="card">
               <a href="{{ data['Site URL'][0] }}">
                 {% if 'Logo URL' in data %}
@@ -288,11 +314,13 @@
             {% endif %}
             {% endfor %}
           </div>
-          </br>
+          {% endif %}
+
+          {% if do_dev %}
           <h2 class="text-center">Developer Support</h2>
-          <div class="card-columns" style="column-count: 2">
+          <div class="card-columns" style="column-count: 2; padding-bottom:100px">
             {% for partner, data in inst_partners.items() %}
-            {% if data['contribution type'][0] == 'dev support' %}
+            {% if 'dev support' in data['contribution type'] %}
             <div class="card">
               <a href="{{ data['Site URL'][0] }}">
                 {% if 'Logo URL' in data %}
@@ -310,6 +338,7 @@
             {% endif %}
             {% endfor %}
           </div>
+          {% endif %}
         </div>
       </div>
     </section>
