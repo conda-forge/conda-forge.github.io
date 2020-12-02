@@ -111,13 +111,3 @@ MacStadium:
      - https://uploads-ssl.webflow.com/5ac3c046c82724970fc60918/5c019d917bba312af7553b49_MacStadium-developerlogo.png
    contribution type:
      - infrastructure
-
-# fiscal sponsorship
-NumFOCUS:
-  Description: NumFOCUS provides fiscal sponsorship
-  Site URL:
-    - https://numfocus.org/
-  Logo URL:
-    - https://www.conda-forge.org/img/NumFocus_LRG.png
-  contribution type:
-    - fiscal support
