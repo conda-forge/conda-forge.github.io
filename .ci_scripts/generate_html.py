@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 import os
+import random
+
 import jinja2
 import yaml
 import requests
@@ -8,6 +10,10 @@ repo_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 with open(os.path.join(repo_dir, "src", "inst_partners.yaml")) as fp:
     data = yaml.safe_load(fp)
+
+keys = list(data.keys())
+random.shuffle(keys)
+data = {k: data[k] for k in keys}
 
 for k in data:
     if "Logo URL" in data[k]:
