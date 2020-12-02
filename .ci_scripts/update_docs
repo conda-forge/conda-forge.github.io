@@ -17,12 +17,12 @@ python .ci_scripts/generate_html.py
 mv docs/README docs-README
 rm -rf docs/
 
-cd src
+pushd src
 make html
 mv _build/html ../docs
 rm -rf _build
+popd
 
-cd ..
 mv docs-README docs/README
 
 # git diff

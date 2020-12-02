@@ -24,8 +24,7 @@ jobs:
           # configure bot account
           git config --global user.name "Travis-CI on github.com/conda-forge/conda-forge.github.io"
           git config --global user.email conda.forge.coordinator@gmail.com
-          mkdir -p ~/.conda-smithy && echo $GH_TOKEN > ~/.conda-smithy/github.token
-          
+
           # configure conda
           conda config --set show_channel_urls true
           conda config --set auto_update_conda false

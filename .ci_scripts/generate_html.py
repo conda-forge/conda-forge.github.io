@@ -1,26 +1,27 @@
 #!/usr/bin/env python
 import os
-import argparse
+import jinja2
+import yaml
+import requests
 
-import conda_smithy.feedstocks as feedstocks
-from jinja2 import Environment, FileSystemLoader
+repo_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
-parser = argparse.ArgumentParser(description='Generate the conda-forge html.')
-parser.add_argument(
-    '--html-source', help="The location of the conda-forge.github.io checkout.",
-    default=os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-)
+with open(os.path.join(repo_dir, "src", "inst_partners.yaml")) as fp:
+    data = yaml.safe_load(fp)
 
-args = parser.parse_args()
+for k in data:
+    if "Logo URL" in data[k]:
+        try:
+            r = requests.get(data[k]["Logo URL"][0])
+            r.raise_for_status()
+        except Exception as e:
+            print(e)
+            del data[k]["Logo URL"]
 
-html_source = args.html_source
-loader = FileSystemLoader(html_source)
-env = Environment(loader=loader)
+with open(os.path.join(repo_dir, "index.html.tmpl")) as fp:
+    tmpl = jinja2.Template(fp.read())
 
-if "GH_TOKEN" in os.environ:
-    context = {}
-    context['gh_feedstocks'] = feedstocks.feedstock_repos('conda-forge')
+context = {"inst_partners": data}
 
-    tmpl = env.get_template('feedstocks.html.tmpl')
-    with open(os.path.join(html_source, 'feedstocks.html'), 'w') as fh:
-        fh.write(tmpl.render(context))
+with open(os.path.join(repo_dir, 'index.html'), 'w') as fp:
+    fp.write(tmpl.render(context))

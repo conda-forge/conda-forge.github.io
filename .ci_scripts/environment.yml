@@ -10,6 +10,9 @@ dependencies:
   - make
   - xonsh
   - recommonmark
+  - pyyaml
+  - jinja2
+  - requests
   # uncomment to restore search
   # - elm
   # - nodejs
