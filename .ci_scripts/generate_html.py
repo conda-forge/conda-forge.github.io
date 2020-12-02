@@ -19,7 +19,8 @@ for k in data:
     if "Logo URL" in data[k]:
         try:
             r = requests.get(data[k]["Logo URL"][0])
-            r.raise_for_status()
+            if k != "Lab49":
+                r.raise_for_status()
         except Exception as e:
             print(e)
             del data[k]["Logo URL"]
