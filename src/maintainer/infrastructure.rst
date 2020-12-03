@@ -157,7 +157,7 @@ Here we describe common issues with the CI Services that conda-forge builds.
 
 Azure Pipelines
 ---------------
-Azure is used to build packages for OS X, Linux, Linux (ARMv8, emulated) and Linux (IBM Power8+, emulated). 
+Azure is used to build packages for OS X, Linux (x86_64, native), Linux (ARMv8, emulated) and Linux (IBM Power8+, emulated). 
 The build queue on Azure is substantially larger than on all the other providers. 
 Azure builds have a maximum duration of 6 hours.
 
