@@ -98,14 +98,15 @@ Oregon State University Open Source Lab:
   contribution type:
     - infrastructure
 
-Works on Arm:
-  Description: Works on Arm project provides aarch64 machines for long running jobs
-  Logo URL:
-    - https://www.worksonarm.com/wp-content/themes/worksonarm2019/assets/images/logo.png
-  Site URL:
-    - https://www.worksonarm.com/
-  contribution type:
-    - infrastructure
+# waiting for them to say yes
+# Works on Arm:
+#   Description: Works on Arm project provides aarch64 machines for long running jobs
+#   Logo URL:
+#     - https://www.worksonarm.com/wp-content/themes/worksonarm2019/assets/images/logo.png
+#   Site URL:
+#     - https://www.worksonarm.com/
+#   contribution type:
+#     - infrastructure
 
 OVHCloud:
   Description: OVH provides a Windows build VM
