@@ -35,9 +35,10 @@ Here are defined the primary teams participating in conda-forge activities.
   dev meetings and voting on polls) in the past six months will be asked if they want to become emeritus-core
   developers. Any core member can also request to become emeritus if they wish to do so
   (e.g. taking a sabbatical or long vacation).
-  Emeritus core members can still vote and be back to active core anytime, the only difference is
-  that emeritus-core will not count as the total core members when computing the necessary
-  votes a poll needs to pass. The ``core.csv`` list should be updated when change in the status of a member occurs.
+  Emeritus core members can still vote and move back to active core anytime. Emeritus 
+  votes can be used to count towards quorum but the quorum level is computed from the size of 
+  the active core group. The ``core.csv`` list should be updated when change in the status 
+  of a member occurs.
 
 Sub-Teams
 ---------
@@ -110,8 +111,8 @@ To call for a standard vote, here is a template PR comment:
     This vote will end on {date}.
     
 ----
-:Posting results: To maintain the historical record, the outcome of any standard vote should be 
-         recorded in the "vote-results" folder at 
+:Posting results: To maintain the historical record, the outcome of any standard vote which invokes the 
+         "time out" rules below should be recorded in the "vote-results" folder at 
          https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results
          
          Each vote should be its own file.  The filename should reflect the topic and the 
