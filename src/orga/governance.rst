@@ -36,7 +36,7 @@ Here are defined the primary teams participating in conda-forge activities.
   developers. Any core member can also request to become emeritus if they wish to do so
   (e.g. taking a sabbatical or long vacation).
   Emeritus core members can still vote and move back to active core anytime. Emeritus 
-  votes can be used to count towards quorum but the quorum size is computed from the size of 
+  votes are be used to count towards quorum but the quorum size is computed from the size of 
   the active core group. The ``core.csv`` list should be updated when change in the status 
   of a member occurs.
 
