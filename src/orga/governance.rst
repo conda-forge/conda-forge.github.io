@@ -109,7 +109,7 @@ To call for a standard vote, here is a template PR comment:
     To vote please leave Approve (yea) or Request Changes (nay) reviews.
     If you would like changes to the current language please leave a comment or push to this branch.
     This vote will end on {date}.
-    
+
 ----
 :Posting results: To maintain the historical record, the outcome of any standard vote which invokes the 
          "time out" rules below should be recorded in the "vote-results" folder at 
@@ -121,11 +121,8 @@ To call for a standard vote, here is a template PR comment:
          * vote description
          * vote policy
          * vote totals
-         * Poll open and close dates
-         
-         If a vote has "timed out," as described in "Quorum," the documentation regarding
-         notification records should also be in this file.
-         
+         * poll open and close dates
+         * notifications given to the core group         
 
 ----
 :Quorum: All percentages below express *both* required participation, as a
