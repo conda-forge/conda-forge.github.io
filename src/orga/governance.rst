@@ -37,7 +37,7 @@ Here are defined the primary teams participating in conda-forge activities.
   (e.g. taking a sabbatical or long vacation).
   Emeritus core members can still vote and move back to active core anytime. Emeritus 
   votes are used to count towards quorum but the quorum size is computed from the size of 
-  the active core group. The ``core.csv`` list should be updated when change in the status 
+  the active core group. The ``core.csv`` list should be updated when a change in the status 
   of a member occurs.
 
 Sub-Teams
