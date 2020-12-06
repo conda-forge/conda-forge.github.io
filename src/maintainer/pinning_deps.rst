@@ -97,37 +97,27 @@ Once the pins are updated, via a migration yaml, then all the packages that are 
 Updating package pins
 =====================
 
-Updating a pin requires following steps:
+Changing global pins requires rerendering all packages that depend on the package with the changed pin. Doing this manually
+can be tedious, especially when many packages are involved. Migrators are used to automatically generate pull requests
+for the affected packages in conda-forge.
 
-- create a new migration yaml by copying `example.exyaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/example.exyaml>`__ in the ``conda-forge/conda-forge-pinning`` repository.
-- change the migration yaml to reflect the package and version to be migrated
-- write a :ref:`migrator <pin_migrator>` for propagating the pin changes.
-- propose the changes as a :term:`PR` to `conda-forge/conda-forge-pinning-feedstock`_.
-- once accepted the migration will begin.
-  The migration status can be monitored at https://conda-forge.org/status.
-- after the migration is complete,
-  a new PR can be issued to `conda-forge/conda-forge-pinning-feedstock`_ to:
+Usually, the bot will generate these migrations automatically. However, when a pin is first made or added, one may need to
+be added by hand. To do this, follow these steps:
 
-  - Remove the migrator yaml for the completed migration
-  - If the version of the package is pinned in the global conda_build_config.yaml,
-    this PR should also:
+#. create a new migration yaml by copying `example.exyaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/example.exyaml>`__ in the ``conda-forge/conda-forge-pinning`` repository.
+#. change the migration yaml to reflect the package and version to be migrated
+#. write a :ref:`migrator <pin_migrator>` for propagating the pin changes.
+#. propose the changes as a :term:`PR` to `conda-forge/conda-forge-pinning-feedstock`_.
+#. once accepted the migration will begin. The migration status can be monitored at https://conda-forge.org/status.
+#. After the migration is complete, a new PR can be issued to `conda-forge/conda-forge-pinning-feedstock`_ to:
 
-    - update the version in conda_build_config.yaml
-    - bump the version in meta.yaml to the current date
+   - Remove the migrator yaml for the completed migration
+   - If the version of the package is pinned in the global conda_build_config.yaml, this PR should also:
 
-.. _conda-forge/conda-forge-pinning-feedstock: https://github.com/conda-forge/conda-forge-pinning-feedstock
-
- .. _pin_migrator:
-
-Propagate pin changes with a migrator
--------------------------------------
-
-Changing global pins requires rerendering all packages that depend on the package with the changed pin. Doing this manually can be tedious, especially when many packages are involved.
-Migrators are used to automatically generate pull requests for the affected packages in conda-forge.
-
-Migrators are added to the `migrations folder in conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations>`__.
-
-You can do this by forking `conda-forge/conda-forge-pinning-feedstock`_ and submitting a pull request.
+     - update the version in conda_build_config.yaml
+     - bump the version in meta.yaml to the current date
 
 Details of how the migration yaml is setup are provided in an `example <https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations/example.exyaml>`__
 and documentation `here <https://regro.github.io/cf-scripts/migrators.html#building-a-migration-yaml>`_.
+
+.. _conda-forge/conda-forge-pinning-feedstock: https://github.com/conda-forge/conda-forge-pinning-feedstock

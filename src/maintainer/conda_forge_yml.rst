@@ -92,6 +92,11 @@ automatic version updates/migrations for feedstocks. The current options are
       # only open PRs if resulting environment is solvable, useful for tightly coupled packages
       check_solvable: true
 
+      # any branches listed in this section will get bot migration PRs in addition
+      # to the default branch
+      abi_migration_branches:
+        - v1.10.x
+
 build_platform
 --------------
 This is a mapping from the build platform to the host platform of the package
