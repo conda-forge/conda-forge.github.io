@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Maintainer Documentation &#8212; conda-forge 2020.12.04 documentation</title>
+    <title>Maintainer Documentation &#8212; conda-forge 2020.12.06 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="../user/how_to_get_help.html" title="How to get help in conda-forge"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.04 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.12.06 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -217,10 +217,7 @@
 <li class="toctree-l1"><a class="reference internal" href="pinning_deps.html">Pinned dependencies</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pinning_deps.html#globally-pinned-packages">Globally pinned packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pinning_deps.html#specifying-run-exports">Specifying run_exports</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pinning_deps.html#updating-package-pins">Updating package pins</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="pinning_deps.html#propagate-pin-changes-with-a-migrator">Propagate pin changes with a migrator</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="pinning_deps.html#updating-package-pins">Updating package pins</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a><ul>
@@ -229,9 +226,11 @@
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#azure">azure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#bot">bot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#build-platform">build_platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#channel-priority">channel_priority</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#channels">channels</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#choco">choco</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#circle">circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#conda-forge-output-validation">conda_forge_output_validation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#docker">docker</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#github">github</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#idle-timeout-minutes">idle_timeout_minutes</a></li>
@@ -248,7 +247,6 @@
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#travis">travis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#upload-on-branch">upload_on_branch</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#win">win</a></li>
-<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#channel-priority">channel_priority</a></li>
 </ul>
 </li>
 </ul>
@@ -264,7 +262,7 @@
 <li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#building-for-different-vc-versions">Building for different VC versions</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html#special-dependencies">Special dependencies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html#special-dependencies-and-packages">Special Dependencies and Packages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#compilers">Compilers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#core-dependency-tree-packages-cdts">Core Dependency Tree Packages (CDTs)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="knowledge_base.html#libgl">libGL</a></li>
@@ -288,9 +286,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#yum-requirements-txt">yum_requirements.txt</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html#special-packages">Special packages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#blas">BLAS</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="knowledge_base.html#switching-blas-implementation">Switching BLAS implementation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="knowledge_base.html#how-it-works">How it works</a></li>
@@ -405,7 +400,7 @@
         <li class="right" >
           <a href="../user/how_to_get_help.html" title="How to get help in conda-forge"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.04 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.12.06 documentation</a> &#187;</li>
  
       </ul>
     </div>

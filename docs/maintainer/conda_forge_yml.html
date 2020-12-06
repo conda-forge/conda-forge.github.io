@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2020.12.04 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2020.12.06 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.04 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.12.06 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -86,9 +86,11 @@ upload packages to anaconda.org, which can be useful for testing. For example:</
 <li><p>azure</p></li>
 <li><p>build_platform</p></li>
 <li><p>bot</p></li>
+<li><p>channel_priority</p></li>
 <li><p>channels</p></li>
 <li><p>choco</p></li>
 <li><p>circle</p></li>
+<li><p>conda_forge_output_validation</p></li>
 <li><p>docker</p></li>
 <li><p>github</p></li>
 <li><p>idle_timeout_minutes</p></li>
@@ -105,7 +107,6 @@ upload packages to anaconda.org, which can be useful for testing. For example:</
 <li><p>travis</p></li>
 <li><p>upload_on_branch</p></li>
 <li><p>win</p></li>
-<li><p>channel_priority</p></li>
 </ul>
 <div class="section" id="appveyor">
 <h3>appveyor<a class="headerlink" href="#appveyor" title="Permalink to this headline">¶</a></h3>
@@ -146,6 +147,11 @@ automatic version updates/migrations for feedstocks. The current options are</p>
 
   <span class="c1"># only open PRs if resulting environment is solvable, useful for tightly coupled packages</span>
   <span class="nt">check_solvable</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+
+  <span class="c1"># any branches listed in this section will get bot migration PRs in addition</span>
+  <span class="c1"># to the default branch</span>
+  <span class="nt">abi_migration_branches</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">v1.10.x</span>
 </pre></div>
 </div>
 </div>
@@ -158,6 +164,13 @@ build platform using cross-compiling.</p>
   <span class="nt">osx_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">linux_64</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="channel-priority">
+<h3>channel_priority<a class="headerlink" href="#channel-priority" title="Permalink to this headline">¶</a></h3>
+<p>This value sets the <code class="docutils literal notranslate"><span class="pre">conda</span></code> solver channel priority for feedstock builds. On
+OSX and Liunx, it defaults to <code class="docutils literal notranslate"><span class="pre">strict</span></code>. On Windows, it defaults to the default in
+<code class="docutils literal notranslate"><span class="pre">conda</span></code> (<code class="docutils literal notranslate"><span class="pre">flexible</span></code> at the time of writing). Any valid value for the same setting
+in the <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> is allowed here.</p>
 </div>
 <div class="section" id="channels">
 <h3>channels<a class="headerlink" href="#channels" title="Permalink to this headline">¶</a></h3>
@@ -205,6 +218,12 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
     <span class="nt">BINSTAR_TOKEN</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;some big hash&gt;</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="conda-forge-output-validation">
+<h3>conda_forge_output_validation<a class="headerlink" href="#conda-forge-output-validation" title="Permalink to this headline">¶</a></h3>
+<p>This field must be set to <code class="docutils literal notranslate"><span class="pre">True</span></code> for feedstocks in the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> GitHub
+organization. It enables the required feedstock artifact validation as described
+in <a class="reference internal" href="infrastructure.html#output-validation"><span class="std std-ref">Output Validation and Feedstock Tokens</span></a>.</p>
 </div>
 <div class="section" id="docker">
 <h3>docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h3>
@@ -393,13 +412,6 @@ Currently only:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="channel-priority">
-<h3>channel_priority<a class="headerlink" href="#channel-priority" title="Permalink to this headline">¶</a></h3>
-<p>This value sets the <code class="docutils literal notranslate"><span class="pre">conda</span></code> solver channel priority for feedstock builds. On
-OSX and Liunx, it defaults to <code class="docutils literal notranslate"><span class="pre">strict</span></code>. On Windows, it defaults to the default in
-<code class="docutils literal notranslate"><span class="pre">conda</span></code> (<code class="docutils literal notranslate"><span class="pre">flexible</span></code> at the time of writing). Any valid value for the same setting
-in the <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> is allowed here.</p>
-</div>
 </div>
 </div>
 
@@ -426,9 +438,11 @@ in the <code class="docutils literal notranslate"><span class="pre">.condarc</sp
 <li class="toctree-l4"><a class="reference internal" href="#azure">azure</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bot">bot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#build-platform">build_platform</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#channel-priority">channel_priority</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#channels">channels</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#choco">choco</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#circle">circle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conda-forge-output-validation">conda_forge_output_validation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#docker">docker</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github">github</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#idle-timeout-minutes">idle_timeout_minutes</a></li>
@@ -445,7 +459,6 @@ in the <code class="docutils literal notranslate"><span class="pre">.condarc</sp
 <li class="toctree-l4"><a class="reference internal" href="#travis">travis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#upload-on-branch">upload_on_branch</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#win">win</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#channel-priority">channel_priority</a></li>
 </ul>
 </li>
 </ul>
@@ -522,7 +535,7 @@ in the <code class="docutils literal notranslate"><span class="pre">.condarc</sp
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.04 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.12.06 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>

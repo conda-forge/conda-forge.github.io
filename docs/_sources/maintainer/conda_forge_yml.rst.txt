@@ -25,9 +25,11 @@ Top-level fields
 * azure
 * build_platform
 * bot
+* channel_priority
 * channels
 * choco
 * circle
+* conda_forge_output_validation
 * docker
 * github
 * idle_timeout_minutes
@@ -44,7 +46,6 @@ Top-level fields
 * travis
 * upload_on_branch
 * win
-* channel_priority
 
 
 appveyor
@@ -92,6 +93,11 @@ automatic version updates/migrations for feedstocks. The current options are
       # only open PRs if resulting environment is solvable, useful for tightly coupled packages
       check_solvable: true
 
+      # any branches listed in this section will get bot migration PRs in addition
+      # to the default branch
+      abi_migration_branches:
+        - v1.10.x
+
 build_platform
 --------------
 This is a mapping from the build platform to the host platform of the package
@@ -102,6 +108,14 @@ build platform using cross-compiling.
 
     build_platform:
       osx_64: linux_64
+
+channel_priority
+----------------
+
+This value sets the ``conda`` solver channel priority for feedstock builds. On
+OSX and Liunx, it defaults to ``strict``. On Windows, it defaults to the default in
+``conda`` (``flexible`` at the time of writing). Any valid value for the same setting
+in the ``.condarc`` is allowed here.
 
 channels
 --------
@@ -154,6 +168,13 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
     appveyor:
       secure:
         BINSTAR_TOKEN: <some big hash>
+
+conda_forge_output_validation
+-----------------------------
+
+This field must be set to ``True`` for feedstocks in the ``conda-forge`` GitHub
+organization. It enables the required feedstock artifact validation as described
+in :ref:`output_validation`.
 
 docker
 ------
@@ -364,11 +385,3 @@ Currently only:
 
     win:
       enabled: False
-
-channel_priority
-----------------
-
-This value sets the ``conda`` solver channel priority for feedstock builds. On
-OSX and Liunx, it defaults to ``strict``. On Windows, it defaults to the default in
-``conda`` (``flexible`` at the time of writing). Any valid value for the same setting
-in the ``.condarc`` is allowed here.

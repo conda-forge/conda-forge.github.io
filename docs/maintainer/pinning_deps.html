@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Pinned dependencies &#8212; conda-forge 2020.12.04 documentation</title>
+    <title>Pinned dependencies &#8212; conda-forge 2020.12.06 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="updating_pkgs.html" title="Maintaining packages"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.04 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.12.06 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -136,20 +136,21 @@ Once the pins are updated, via a migration yaml, then all the packages that are 
 </div>
 <div class="section" id="updating-package-pins">
 <span id="update-pins"></span><h2>Updating package pins<a class="headerlink" href="#updating-package-pins" title="Permalink to this headline">¶</a></h2>
-<p>Updating a pin requires following steps:</p>
-<ul class="simple">
+<p>Changing global pins requires rerendering all packages that depend on the package with the changed pin. Doing this manually
+can be tedious, especially when many packages are involved. Migrators are used to automatically generate pull requests
+for the affected packages in conda-forge.</p>
+<p>Usually, the bot will generate these migrations automatically. However, when a pin is first made or added, one may need to
+be added by hand. To do this, follow these steps:</p>
+<ol class="arabic simple">
 <li><p>create a new migration yaml by copying <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/example.exyaml">example.exyaml</a> in the <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-forge-pinning</span></code> repository.</p></li>
 <li><p>change the migration yaml to reflect the package and version to be migrated</p></li>
-<li><p>write a <a class="reference internal" href="#pin-migrator"><span class="std std-ref">migrator</span></a> for propagating the pin changes.</p></li>
+<li><p>write a <span class="xref std std-ref">migrator</span> for propagating the pin changes.</p></li>
 <li><p>propose the changes as a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> to <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a>.</p></li>
-<li><p>once accepted the migration will begin.
-The migration status can be monitored at <a class="reference external" href="https://conda-forge.org/status">https://conda-forge.org/status</a>.</p></li>
-<li><p>after the migration is complete,
-a new PR can be issued to <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a> to:</p>
-<ul>
+<li><p>once accepted the migration will begin. The migration status can be monitored at <a class="reference external" href="https://conda-forge.org/status">https://conda-forge.org/status</a>.</p></li>
+<li><p>After the migration is complete, a new PR can be issued to <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a> to:</p>
+<ul class="simple">
 <li><p>Remove the migrator yaml for the completed migration</p></li>
-<li><p>If the version of the package is pinned in the global conda_build_config.yaml,
-this PR should also:</p>
+<li><p>If the version of the package is pinned in the global conda_build_config.yaml, this PR should also:</p>
 <ul>
 <li><p>update the version in conda_build_config.yaml</p></li>
 <li><p>bump the version in meta.yaml to the current date</p></li>
@@ -157,18 +158,9 @@ this PR should also:</p>
 </li>
 </ul>
 </li>
-</ul>
-<blockquote>
-<div></div></blockquote>
-<div class="section" id="propagate-pin-changes-with-a-migrator">
-<span id="pin-migrator"></span><h3>Propagate pin changes with a migrator<a class="headerlink" href="#propagate-pin-changes-with-a-migrator" title="Permalink to this headline">¶</a></h3>
-<p>Changing global pins requires rerendering all packages that depend on the package with the changed pin. Doing this manually can be tedious, especially when many packages are involved.
-Migrators are used to automatically generate pull requests for the affected packages in conda-forge.</p>
-<p>Migrators are added to the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations">migrations folder in conda-forge-pinning-feedstock</a>.</p>
-<p>You can do this by forking <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a> and submitting a pull request.</p>
+</ol>
 <p>Details of how the migration yaml is setup are provided in an <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations/example.exyaml">example</a>
 and documentation <a class="reference external" href="https://regro.github.io/cf-scripts/migrators.html#building-a-migration-yaml">here</a>.</p>
-</div>
 </div>
 </div>
 
@@ -191,10 +183,7 @@ and documentation <a class="reference external" href="https://regro.github.io/cf
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Pinned dependencies</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#globally-pinned-packages">Globally pinned packages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#specifying-run-exports">Specifying run_exports</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#updating-package-pins">Updating package pins</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#propagate-pin-changes-with-a-migrator">Propagate pin changes with a migrator</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-package-pins">Updating package pins</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="conda_forge_yml.html">Configuring conda-forge.yml</a></li>
@@ -270,7 +259,7 @@ and documentation <a class="reference external" href="https://regro.github.io/cf
         <li class="right" >
           <a href="updating_pkgs.html" title="Maintaining packages"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.04 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.12.06 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>

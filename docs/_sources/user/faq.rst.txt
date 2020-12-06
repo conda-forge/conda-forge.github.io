@@ -23,7 +23,7 @@ FAQ
 
 :ref:`(Q) <faq_contact>` **I have a question/suggestion. How can I contact you?**
 
-  Please join us in our `gitter channel <https://gitter.im/conda-forge/conda-forge.github.io>`__! We are always happy to answer questions and help beginners! 
+  Please join us in our `gitter channel <https://gitter.im/conda-forge/conda-forge.github.io>`__! We are always happy to answer questions and help beginners!
 
 .. _faq_teams:
 
@@ -31,17 +31,26 @@ FAQ
 
   Conda-forge github teams are very useful means of adding common maintainers to a set of related packages. For example, most R packages are co-maintained by the conda-forge/R team.
   To create a new team, you can just use one of the existing feedstocks from your packages. Each feedstock has automatically a team assigned (formed from the maintainers of that feedstock).
-  For example, the conda-forge R team is coming from the `r-feedstock <https://github.com/conda-forge/r-feedstock>`_. Then you can just add `- conda-forge/r` in the maintainers section to 
+  For example, the conda-forge R team is coming from the `r-feedstock <https://github.com/conda-forge/r-feedstock>`_. Then you can just add `- conda-forge/r` in the maintainers section to
   make all maintainers of the r-feedstock also maintainers of the new package.
 
 .. _faq_solver_speed:
 
 :ref:`(Q) <faq_solver_speed>` **Installing and updating takes a long time, what can I do?**
 
-  .. todo:: 
+  Enabling struct channel priority may help. You can do this via
 
-    - Add information on strict channel priorities here.
-    - Add information on conda-metachannel here.
+  .. code-block:: bash
+
+    conda config --set channel_priority strict
+
+  You can also try using a package called `mamba <https://github.com/mamba-org/mamba>`__.
+  ``mamba`` is an ``conda``-compatible package that can be used in place of ``conda``. It
+  employs a faster solver implemented in ``C``. It can be installed via
+
+  .. code-block:: bash
+
+    conda install mamba
 
 .. _faq_travis_ci:
 

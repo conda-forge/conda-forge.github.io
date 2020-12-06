@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>FAQ &#8212; conda-forge 2020.12.04 documentation</title>
+    <title>FAQ &#8212; conda-forge 2020.12.06 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="ci-skeleton.html" title="Using conda-forge to manage your CI"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.04 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.12.06 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li> 
       </ul>
@@ -93,12 +93,15 @@ make all maintainers of the r-feedstock also maintainers of the new package.</p>
 </div></blockquote>
 <p id="faq-solver-speed"><a class="reference internal" href="#faq-solver-speed"><span class="std std-ref">(Q)</span></a> <strong>Installing and updating takes a long time, what can I do?</strong></p>
 <blockquote>
-<div><div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<ul class="simple">
-<li><p>Add information on strict channel priorities here.</p></li>
-<li><p>Add information on conda-metachannel here.</p></li>
-</ul>
+<div><p>Enabling struct channel priority may help. You can do this via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --set channel_priority strict
+</pre></div>
+</div>
+<p>You can also try using a package called <a class="reference external" href="https://github.com/mamba-org/mamba">mamba</a>.
+<code class="docutils literal notranslate"><span class="pre">mamba</span></code> is an <code class="docutils literal notranslate"><span class="pre">conda</span></code>-compatible package that can be used in place of <code class="docutils literal notranslate"><span class="pre">conda</span></code>. It
+employs a faster solver implemented in <code class="docutils literal notranslate"><span class="pre">C</span></code>. It can be installed via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install mamba
+</pre></div>
 </div>
 </div></blockquote>
 <p id="faq-travis-ci"><a class="reference internal" href="#faq-travis-ci"><span class="std std-ref">(Q)</span></a> <strong>Why is Travis-CI failing on my feedstock?</strong></p>
@@ -200,7 +203,7 @@ Note that <code class="docutils literal notranslate"><span class="pre">travis-ci
         <li class="right" >
           <a href="ci-skeleton.html" title="Using conda-forge to manage your CI"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.04 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.12.06 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li> 
       </ul>
