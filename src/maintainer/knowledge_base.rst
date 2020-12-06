@@ -194,8 +194,8 @@ To skip building with a particular ``vc`` version, add a skip statement.
 
 
 
-Special dependencies
-====================
+Special Dependencies and Packages
+=================================
 
 .. _dep_compilers:
 
@@ -745,9 +745,6 @@ There are only very few situations where dependencies installed by yum are accep
 
 After changing ``yum_requirements.txt``, :ref:`rerender <dev_update_rerender>` to update the configuration.
 
-
-Special packages
-================
 
 .. _knowledge:blas:
 

@@ -318,6 +318,8 @@ compiler versions above, we have removed the ``cos*`` part of the ``sysroot`` pa
 ``sysroot`` path has in it simply ``conda`` as opposed to ``conda_cos6`` or ``conda_cos7``.
 
 
+.. _output_validation:
+
 Output Validation and Feedstock Tokens
 ======================================
 
