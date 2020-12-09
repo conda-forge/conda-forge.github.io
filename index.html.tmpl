@@ -271,7 +271,7 @@
           </br>
 
           {% if do_fiscal > 0 %}
-          <h2 class="text-center">Fiscal Support</h2>
+          <h2 class="text-center">Financial Support</h2>
           <div class="card-columns" style="column-count: {{ do_fiscal }}; padding-bottom:100px">
             {% for partner, data in inst_partners.items() %}
             {% if 'fiscal support' in data['contribution type'] %}
