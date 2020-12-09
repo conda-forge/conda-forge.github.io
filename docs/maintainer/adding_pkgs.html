@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Contributing packages &#8212; conda-forge 2020.12.06 documentation</title>
+    <title>Contributing packages &#8212; conda-forge 2020.12.09 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.06 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.12.09 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -304,14 +304,14 @@ install the necessary tools below).</p>
 Pure Python packages almost never need them.</p>
 <p>If the build can be executed with one line, you may put this line in the
 <code class="docutils literal notranslate"><span class="pre">script</span></code> entry of the <code class="docutils literal notranslate"><span class="pre">build</span></code> section of the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file with:
-<code class="docutils literal notranslate"><span class="pre">script:</span> <span class="pre">&quot;{{</span> <span class="pre">PYTHON</span> <span class="pre">}}</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span> <span class="pre">--no-deps</span> <span class="pre">-vv&quot;</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">script:</span> <span class="pre">&quot;{{</span> <span class="pre">PYTHON</span> <span class="pre">}}</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span> <span class="pre">-vv&quot;</span></code>.</p>
 <p>Remember to always add <code class="docutils literal notranslate"><span class="pre">pip</span></code> to the host requirements.</p>
 </div>
 <div class="section" id="use-pip">
 <span id="id2"></span><h4>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h4>
 <p>Normally Python packages should use this line:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
-  <span class="nt">script</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">--no-deps</span><span class="nv"> </span><span class="s">-vv&quot;</span>
+  <span class="nt">script</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">-vv&quot;</span>
 </pre></div>
 </div>
 <p>as the installation script in the <code class="docutils literal notranslate"><span class="pre">meta.yml</span></code> file or <code class="docutils literal notranslate"><span class="pre">bld.bat/build.sh</span></code> script files,
@@ -324,9 +324,9 @@ while adding <code class="docutils literal notranslate"><span class="pre">pip</s
 <p>These options should be used to ensure a clean installation of the package without its
 dependencies. This helps make sure that we’re only including this package,
 and not accidentally bringing any dependencies along into the conda package.</p>
-<p>Note that the <code class="docutils literal notranslate"><span class="pre">--no-deps</span></code> line means that for pure-Python packages,
-usually only <code class="docutils literal notranslate"><span class="pre">python</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span></code> are needed as <code class="docutils literal notranslate"><span class="pre">build</span></code> or <code class="docutils literal notranslate"><span class="pre">host</span></code> requirements;
-the real package dependencies are only <code class="docutils literal notranslate"><span class="pre">run</span></code> requirements.</p>
+<p>Usually pure-Python packages only require <code class="docutils literal notranslate"><span class="pre">python</span></code>, <code class="docutils literal notranslate"><span class="pre">setuptools</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span></code>
+as <code class="docutils literal notranslate"><span class="pre">host</span></code> requirements; the real package dependencies are only
+<code class="docutils literal notranslate"><span class="pre">run</span></code> requirements.</p>
 </div>
 </div>
 <div class="section" id="requirements">
@@ -886,7 +886,7 @@ source:
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.06 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.12.09 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
