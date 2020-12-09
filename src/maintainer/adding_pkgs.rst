@@ -270,7 +270,7 @@ Pure Python packages almost never need them.
 
 If the build can be executed with one line, you may put this line in the
 ``script`` entry of the ``build`` section of the ``meta.yaml`` file with:
-``script: "{{ PYTHON }} -m pip install . --no-deps -vv"``.
+``script: "{{ PYTHON }} -m pip install . -vv"``.
 
 Remember to always add ``pip`` to the host requirements.
 
@@ -284,7 +284,7 @@ Normally Python packages should use this line:
 .. code-block:: yaml
 
     build:
-      script: "{{ PYTHON }} -m pip install . --no-deps -vv"
+      script: "{{ PYTHON }} -m pip install . -vv"
 
 as the installation script in the ``meta.yml`` file or ``bld.bat/build.sh`` script files,
 while adding ``pip`` to the host requirements:
@@ -299,9 +299,9 @@ These options should be used to ensure a clean installation of the package witho
 dependencies. This helps make sure that we're only including this package,
 and not accidentally bringing any dependencies along into the conda package.
 
-Note that the ``--no-deps`` line means that for pure-Python packages,
-usually only ``python`` and ``pip`` are needed as ``build`` or ``host`` requirements;
-the real package dependencies are only ``run`` requirements.
+Usually pure-Python packages only require ``python``, ``setuptools`` and ``pip``
+as ``host`` requirements; the real package dependencies are only
+``run`` requirements.
 
 
 Requirements
