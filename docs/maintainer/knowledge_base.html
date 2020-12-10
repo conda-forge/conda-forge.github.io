@@ -788,6 +788,20 @@ in your recipe with</p>
 </div>
 <p>if you import parts of <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> that link to <code class="docutils literal notranslate"><span class="pre">libX11</span></code>.</p>
 </div>
+<div class="section" id="pybind11-abi-constraints">
+<h3><code class="docutils literal notranslate"><span class="pre">pybind11</span></code> ABI Constraints<a class="headerlink" href="#pybind11-abi-constraints" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes when different python libraries using <code class="docutils literal notranslate"><span class="pre">pybind11</span></code> interact via lower-level C++ interfaces,
+the underlying ABI between the two libraries has to match. To ease this use case, we have a <code class="docutils literal notranslate"><span class="pre">pybind11-abi</span></code>
+metapackage that can be used in the <code class="docutils literal notranslate"><span class="pre">host</span></code> section of a build. Its version is pinned globally and it has a
+run export on itself, meaning that builds with this package in <code class="docutils literal notranslate"><span class="pre">host</span></code> will have a runtime constraint on it.
+Further, the <code class="docutils literal notranslate"><span class="pre">pybind11</span></code> has a run constraint on the ABI metapackage to help ensure consistent usage.</p>
+<p>To use this package in a build, put it in the host environment like so</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+  <span class="nt">host</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pybind11-abi</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="noarch-builds">
 <h2>Noarch builds<a class="headerlink" href="#noarch-builds" title="Permalink to this headline">¶</a></h2>
@@ -1048,6 +1062,7 @@ version. If this changes in the future, then this extra key may not be needed.</
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#matplotlib">Matplotlib</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pybind11-abi-constraints"><code class="docutils literal notranslate"><span class="pre">pybind11</span></code> ABI Constraints</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#noarch-builds">Noarch builds</a><ul>

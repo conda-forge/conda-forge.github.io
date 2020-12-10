@@ -871,6 +871,24 @@ in your recipe with
 
 if you import parts of ``matplotlib`` that link to ``libX11``.
 
+``pybind11`` ABI Constraints
+----------------------------
+
+Sometimes when different python libraries using ``pybind11`` interact via lower-level C++ interfaces, 
+the underlying ABI between the two libraries has to match. To ease this use case, we have a ``pybind11-abi``
+metapackage that can be used in the ``host`` section of a build. Its version is pinned globally and it has a 
+run export on itself, meaning that builds with this package in ``host`` will have a runtime constraint on it. 
+Further, the ``pybind11`` has a run constraint on the ABI metapackage to help ensure consistent usage. 
+
+To use this package in a build, put it in the host environment like so
+
+.. code-block:: yaml
+
+    requirements:
+      host:
+        - pybind11-abi
+
+
 Noarch builds
 =============
 
