@@ -157,8 +157,9 @@ Here we describe common issues with the CI Services that conda-forge builds.
 
 Azure Pipelines
 ---------------
-Azure is used to build packages for OS X, Linux, Linux (ARMv8) and Linux (IBM Power8+).  The build queue on Azure is substantially larger
-than on all the other providers.  Azure builds have a maximum duration of 6 hours.
+Azure is used to build packages for OS X, Linux (x86_64, native), Linux (ARMv8, emulated) and Linux (IBM Power8+, emulated). 
+The build queue on Azure is substantially larger than on all the other providers. 
+Azure builds have a maximum duration of 6 hours.
 
 To see all builds on Azure go to `<https://dev.azure.com/conda-forge/feedstock-builds/_build>`_.
 
@@ -185,24 +186,28 @@ of the feedstock.
   certain very old packages that require VC9 will fail.
 
 
-Travis CI (OS X)
-----------------
+Travis CI (OS X, IBM Power 8+)
+------------------------------
 
-Travis CI is used to build packages for OS X. After merging a staged-recipes pull request, it might be necessary to
-force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit `<https://travis-ci.org/profile>`_ and click "Sync accounts".
+Travis CI is used to build packages for IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
+force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit `<https://travis-ci.com/profile>`_ 
+and click "Sync accounts".
 
 Enabling Travis
 ...............
 
 TravisCI should only be needed to build recipes on OS X if there is a strange failure on Azure.
 
-Enable a build by adding the following to ``conda-forge.yml`` in the root
-of the feedstock.
+Enable a build by adding the following to ``conda-forge.yml`` in the root of the feedstock.
 
 .. code-block:: yaml
 
     provider:
       osx: travis
+      
+For IBM Power 8+ builds, add the name of your feedstock to the list here
+`<https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`_
+via a pull request.
 
 
 CircleCI (Linux, OS X)
@@ -257,6 +262,20 @@ Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
 * In the "Checkout SSH keys" section of your Circle CI project settings, press "add user key".
 
 
+Drone.io
+--------
+
+We use Drone.io for Linux ARMv8 builds. To enable these builds on your feedstock, make a pull request to add your feedstock to the list 
+here `<https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`_.
+
+
+GitHub Actions
+--------------
+
+We use GitHub actions to rerender feedstocks and run our pull request automerge service. We do not currently support builds on 
+GitHub Actions. 
+
+
 Skipping CI builds
 ------------------
 
@@ -266,6 +285,15 @@ To skip a CI build for a given commit, put ``[ci skip] ***NO_CI***`` in the comm
 
   - **abort builds with [skip ci]/etc** `(conda-forge.github.io/#629) <https://github.com/conda-forge/conda-forge.github.io/issues/629>`__
   - **Skip CI requests** `(staged-recipes/#1148) <https://github.com/conda-forge/staged-recipes/issues/1148>`__
+
+
+Third-party Use of Our CI Services
+----------------------------------
+
+Due to its stature in the open-source community, conda-forge has enhanced access to certain CI services. This access is a community 
+resource entrusted to conda-forge for use in building packages. We thus cannot support third-party or "off-label" CI jobs in our 
+feedstocks on any of our CI services. If we find such use, we will politely ask the maintainers to rectify the situation. We may 
+take more serious actions, including archiving feedstocks or removing maintainers from the organization, if the situation cannot be rectified.
 
 
 Compilers and Runtimes

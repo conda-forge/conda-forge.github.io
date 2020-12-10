@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Infrastructure &#8212; conda-forge 2020.12.09 documentation</title>
+    <title>Infrastructure &#8212; conda-forge 2020.12.10 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.09 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.12.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -185,8 +185,9 @@ other builds.</p>
 <p>Here we describe common issues with the CI Services that conda-forge builds.</p>
 <div class="section" id="azure-pipelines">
 <h3>Azure Pipelines<a class="headerlink" href="#azure-pipelines" title="Permalink to this headline">¶</a></h3>
-<p>Azure is used to build packages for OS X, Linux, Linux (ARMv8) and Linux (IBM Power8+).  The build queue on Azure is substantially larger
-than on all the other providers.  Azure builds have a maximum duration of 6 hours.</p>
+<p>Azure is used to build packages for OS X, Linux (x86_64, native), Linux (ARMv8, emulated) and Linux (IBM Power8+, emulated).
+The build queue on Azure is substantially larger than on all the other providers.
+Azure builds have a maximum duration of 6 hours.</p>
 <p>To see all builds on Azure go to <a class="reference external" href="https://dev.azure.com/conda-forge/feedstock-builds/_build">https://dev.azure.com/conda-forge/feedstock-builds/_build</a>.</p>
 <div class="section" id="restarting-builds">
 <h4>Restarting builds<a class="headerlink" href="#restarting-builds" title="Permalink to this headline">¶</a></h4>
@@ -208,19 +209,22 @@ certain very old packages that require VC9 will fail.</p>
 </div>
 </div>
 </div>
-<div class="section" id="travis-ci-os-x">
-<h3>Travis CI (OS X)<a class="headerlink" href="#travis-ci-os-x" title="Permalink to this headline">¶</a></h3>
-<p>Travis CI is used to build packages for OS X. After merging a staged-recipes pull request, it might be necessary to
-force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit <a class="reference external" href="https://travis-ci.org/profile">https://travis-ci.org/profile</a> and click “Sync accounts”.</p>
+<div class="section" id="travis-ci-os-x-ibm-power-8">
+<h3>Travis CI (OS X, IBM Power 8+)<a class="headerlink" href="#travis-ci-os-x-ibm-power-8" title="Permalink to this headline">¶</a></h3>
+<p>Travis CI is used to build packages for IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
+force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit <a class="reference external" href="https://travis-ci.com/profile">https://travis-ci.com/profile</a>
+and click “Sync accounts”.</p>
 <div class="section" id="enabling-travis">
 <h4>Enabling Travis<a class="headerlink" href="#enabling-travis" title="Permalink to this headline">¶</a></h4>
 <p>TravisCI should only be needed to build recipes on OS X if there is a strange failure on Azure.</p>
-<p>Enable a build by adding the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root
-of the feedstock.</p>
+<p>Enable a build by adding the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root of the feedstock.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
   <span class="nt">osx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">travis</span>
 </pre></div>
 </div>
+<p>For IBM Power 8+ builds, add the name of your feedstock to the list here
+<a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt">https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt</a>
+via a pull request.</p>
 </div>
 </div>
 <div class="section" id="circleci-linux-os-x">
@@ -266,6 +270,16 @@ This is not normally needed.</p>
 </ul>
 </div>
 </div>
+<div class="section" id="drone-io">
+<h3>Drone.io<a class="headerlink" href="#drone-io" title="Permalink to this headline">¶</a></h3>
+<p>We use Drone.io for Linux ARMv8 builds. To enable these builds on your feedstock, make a pull request to add your feedstock to the list
+here <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt">https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt</a>.</p>
+</div>
+<div class="section" id="github-actions">
+<h3>GitHub Actions<a class="headerlink" href="#github-actions" title="Permalink to this headline">¶</a></h3>
+<p>We use GitHub actions to rerender feedstocks and run our pull request automerge service. We do not currently support builds on
+GitHub Actions.</p>
+</div>
 <div class="section" id="skipping-ci-builds">
 <h3>Skipping CI builds<a class="headerlink" href="#skipping-ci-builds" title="Permalink to this headline">¶</a></h3>
 <p>To skip a CI build for a given commit, put <code class="docutils literal notranslate"><span class="pre">[ci</span> <span class="pre">skip]</span> <span class="pre">***NO_CI***</span></code> in the commit message.</p>
@@ -276,6 +290,13 @@ This is not normally needed.</p>
 <li><p><strong>Skip CI requests</strong> <a class="reference external" href="https://github.com/conda-forge/staged-recipes/issues/1148">(staged-recipes/#1148)</a></p></li>
 </ul>
 </div>
+</div>
+<div class="section" id="third-party-use-of-our-ci-services">
+<h3>Third-party Use of Our CI Services<a class="headerlink" href="#third-party-use-of-our-ci-services" title="Permalink to this headline">¶</a></h3>
+<p>Due to its stature in the open-source community, conda-forge has enhanced access to certain CI services. This access is a community
+resource entrusted to conda-forge for use in building packages. We thus cannot support third-party or “off-label” CI jobs in our
+feedstocks on any of our CI services. If we find such use, we will politely ask the maintainers to rectify the situation. We may
+take more serious actions, including archiving feedstocks or removing maintainers from the organization, if the situation cannot be rectified.</p>
 </div>
 </div>
 <div class="section" id="compilers-and-runtimes">
@@ -393,7 +414,7 @@ will be able to upload packages with the same name.</p>
 <li class="toctree-l5"><a class="reference internal" href="#using-azure-for-everything">Using Azure for <em>everything</em></a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#travis-ci-os-x">Travis CI (OS X)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#travis-ci-os-x-ibm-power-8">Travis CI (OS X, IBM Power 8+)</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#enabling-travis">Enabling Travis</a></li>
 </ul>
 </li>
@@ -402,7 +423,10 @@ will be able to upload packages with the same name.</p>
 <li class="toctree-l5"><a class="reference internal" href="#enabling-circle-on-your-fork">Enabling Circle on your Fork</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="#drone-io">Drone.io</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-actions">GitHub Actions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#skipping-ci-builds">Skipping CI builds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#third-party-use-of-our-ci-services">Third-party Use of Our CI Services</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#compilers-and-runtimes">Compilers and Runtimes</a><ul>
@@ -488,7 +512,7 @@ will be able to upload packages with the same name.</p>
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.09 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.12.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
