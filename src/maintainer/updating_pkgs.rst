@@ -176,7 +176,7 @@ feedstock directory and run:
     python build-locally.py
 
 
-This will prompt you to choose one of the ``*.yaml`` config files in ``.ci_support/``.
+This will prompt you to choose one of the ``*.yaml`` config files in ``.ci_support/``. Note that ``shyaml`` is needed to parse the ``docker_image`` from these files. Otherwise the build will use the default ``docker_image``.
 
 Alternatively, you can specify ahead which config to use with e.g. (assuming you wish to build and test python 3.6 on Linux, and such a config file exists at ``.ci_support/linux_python3.6.yaml``):
 
