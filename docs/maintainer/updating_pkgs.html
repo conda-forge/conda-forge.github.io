@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Maintaining packages &#8212; conda-forge 2020.12.10 documentation</title>
+    <title>Maintaining packages &#8212; conda-forge 2020.12.11 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.10 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.12.11 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -224,7 +224,7 @@ feedstock directory and run:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python build-locally.py
 </pre></div>
 </div>
-<p>This will prompt you to choose one of the <code class="docutils literal notranslate"><span class="pre">*.yaml</span></code> config files in <code class="docutils literal notranslate"><span class="pre">.ci_support/</span></code>.</p>
+<p>This will prompt you to choose one of the <code class="docutils literal notranslate"><span class="pre">*.yaml</span></code> config files in <code class="docutils literal notranslate"><span class="pre">.ci_support/</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">shyaml</span></code> is needed to parse the <code class="docutils literal notranslate"><span class="pre">docker_image</span></code> from these files. Otherwise the build will use the default <code class="docutils literal notranslate"><span class="pre">docker_image</span></code>.</p>
 <p>Alternatively, you can specify ahead which config to use with e.g. (assuming you wish to build and test python 3.6 on Linux, and such a config file exists at <code class="docutils literal notranslate"><span class="pre">.ci_support/linux_python3.6.yaml</span></code>):</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python build-locally.py linux_python3.6
 </pre></div>
@@ -400,7 +400,7 @@ package (an example would be to re-render the feedstock to support new Python ve
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.10 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2020.12.11 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
