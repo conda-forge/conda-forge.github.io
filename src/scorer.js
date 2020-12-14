@@ -5,7 +5,7 @@ var Scorer = {
 
     score: function(result) {
       if (result[0].includes('orga/minutes')) {
-        return result[4] - 10;
+        return result[4] - 100;
       } else {
         return result[4];
       }
