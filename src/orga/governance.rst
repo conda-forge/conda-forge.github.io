@@ -35,9 +35,9 @@ Here are defined the primary teams participating in conda-forge activities.
   dev meetings and voting on polls) in the past six months will be asked if they want to become emeritus-core
   developers. Any core member can also request to become emeritus if they wish to do so
   (e.g. taking a sabbatical or long vacation).
-  Emeritus core members can still vote and move back to active core anytime. Emeritus 
-  votes are used to count towards quorum but the quorum size is computed from the size of 
-  the active core group. The ``core.csv`` list should be updated when a change in the status 
+  Emeritus core members can still vote and move back to active core anytime. Emeritus
+  votes are used to count towards quorum but the quorum size is computed from the size of
+  the active core group. The ``core.csv`` list should be updated when a change in the status
   of a member occurs.
 
 Sub-Teams
@@ -86,9 +86,9 @@ Standard items are ones where public record and discourse is
 preferable. Sensitive voting items are ones where the results of the
 vote should remain private to the voters after the vote has occurred.
 Sensitive votes should take place on a secure anonymous voting platform
-in order to retain election integrity and anonymity. (We have used `Polys <polys.me>`_ 
-and `the Helios voting system <https://vote.heliosvoting.org/>`_, but are 
-open to any secure, anonymous system.) The email capability of your chosen 
+in order to retain election integrity and anonymity. (We have used `Polys <polys.me>`_
+and `the Helios voting system <https://vote.heliosvoting.org/>`_, but are
+open to any secure, anonymous system.) The email capability of your chosen
 voting platform should be used for sending voting invitations and reminders,
 and you should use the email list from
 https://github.com/conda-forge/conda-forge.github.io/blob/master/src/core.csv as
@@ -111,72 +111,89 @@ To call for a standard vote, here is a template PR comment:
     This vote will end on {date}.
 
 ----
-:Posting results: To maintain the historical record, the outcome of any standard vote which invokes the 
-         "time out" rules below should be recorded in the "vote-results" folder at 
+
+:Posting results: To maintain the historical record, the outcome of any standard vote which invokes the
+         "time out" rules below should be recorded in the "vote-results" folder at
          https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results
-         
-         Each vote should be its own file.  The filename should reflect the topic and the 
+
+         Each vote should be its own file.  The filename should reflect the topic and the
          date that the vote opened.  The file should contain at least:
-         
+
          * vote description
          * vote policy
          * vote totals
          * poll open and close dates
-         * notifications given to the core group         
+         * notifications given to the core group
 
 ----
-:Quorum: Quorum for votes can be met in one of three ways depending on the vote: the standard quorum rules, 
-         the accelerated quorum rules, and the "time out" quorum rules. The specific quorum rules applicable 
-         for each vote are listed below.
 
-         **Standard Quorum Rules**: All percentages below express *both* required participation, as a
-         fraction of the active core team, as well as the fraction of that
-         fraction who vote affirmatively on the issue. For example, in a vote
-         requiring 50%, with 18 active core members, at least 9 must vote;
-         if 9 vote, there must 5 affirmative votes. If 13 members vote, 7
-         must be affirmative.
-         
-         **Accelerated Quorum Rules**: For certain votes, we allow a lower quorum level. For these votes,
-         if the vote ends after at least a week and there are no "no" votes, a quorum of half of the size 
-         needed for a **standard quorum** above is accepatble. For example, for a vote requiring 50% with 18
-         active core members, at least 5 people must vote "yes" and exactly 0 people must vote "no".
+:Quorum: Quorum for votes can be met in one of three ways depending on the
+     vote: the standard quorum rules, the accelerated quorum rules, and the
+     "time out" quorum rules. The specific quorum rules applicable
+     for each vote are listed below.
 
-         **Time-out Quorum Rules**: Because everyone is busy and it is difficult sometimes to get quorum,
-         votes not achieving quorum will eventually time out on their set end date. When this happens,
-         the current participation level is taken for what it is, and the percentage
-         of affirmative votes is calculated from whatever the vote total is at that
-         time.  In order for a timeout to occur, the vote must have:
+     **Standard Quorum Rules**: All percentages below express *both*
+     required participation, as a
+     fraction of the active core team, as well as the fraction of that
+     fraction who vote affirmatively on the issue. For example, in a vote
+     requiring 50%, with 18 active core members, at least 9 must vote;
+     if 9 vote, there must 5 affirmative votes. If 13 members vote, 7
+     must be affirmative.
 
-             * been open for at least 2 weeks
-             * been presented and discussed at a Core team meeting
-             * been advertised on at least 3 separate occasions on the gitter core
-               channel (beginning of voting period, middle, and one day prior to
-               proposed timeout)
-             * been sent to core members via email.  Email reminders must have been
-               sent similarly to the gitter core channel: at least 3 times,
-               occurring as beginning of voting period, middle, and one day
-               prior to proposed timeout.
+     **Accelerated Quorum Rules**: For certain votes, we allow a lower quorum level.
+     For these votes,
+     if the vote ends after at least a week and there are no "no" votes, a quorum
+     of half of the size
+     needed for a **standard quorum** above is accepatble. For example, for a vote
+     requiring 50% with 18
+     active core members, at least 5 people must vote "yes" and exactly 0 people
+     must vote "no".
 
-         Extending the above example, if 9 people are required for a quorum, but
-         only 7 have voted, those 7 votes can form the basis of a completed vote
-         after the above conditions are met. 4 votes within those 7 would be
-         needed to pass the vote.
+     **Time-out Quorum Rules**: Because everyone is busy and it is difficult
+     sometimes to get quorum,
+     votes not achieving quorum will eventually time out on their set end date.
+     When this happens,
+     the current participation level is taken for what it is, and the percentage
+     of affirmative votes is calculated from whatever the vote total is at that
+     time.  In order for a timeout to occur, the vote must have:
 
-         To post a timeout reminder, here is a template comment:
+         * been open for at least 2 weeks
+         * been presented and discussed at a Core team meeting
+         * been advertised on at least 3 separate occasions on the gitter core
+           channel (beginning of voting period, middle, and one day prior to
+           proposed timeout)
+         * been sent to core members via email.  Email reminders must have been
+           sent similarly to the gitter core channel: at least 3 times,
+           occurring as beginning of voting period, middle, and one day
+           prior to proposed timeout.
 
-          .. code-block:: md
+     Extending the above example, if 9 people are required for a quorum, but
+     only 7 have voted, those 7 votes can form the basis of a completed vote
+     after the above conditions are met. 4 votes within those 7 would be
+     needed to pass the vote.
 
-              @conda-forge/core
-              This vote falls under the {policy} policy, please vote and/or comment on this PR.
-              This vote needs {policy_percent} of core to vote yea to pass.
-              This vote presently has {current_voters}, and needs {policy_percent * core - current_voters} more for quorum.
-              It is proposed that this vote will time out and be evaluated with the current votes in {days}, on {date}.
-              To vote please leave Approve (yea) or Request Changes (nay) reviews.
-              
-         To declare a standard vote "timed out," the person making such a declaration must post a pull-request adding
-         a vote record to the https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results
-         folder.  The declaration PR should be merged by the first core member who is available to verify that
-         the requirements for the timeout have been met, based on their own personal records.
+     To post a timeout reminder, here is a template comment:
+
+      .. code-block:: md
+
+          @conda-forge/core
+          This vote falls under the {policy} policy, please vote
+          and/or comment on this PR.
+          This vote needs {policy_percent} of core to vote yea to pass.
+          This vote presently has {current_voters}, and needs
+          {policy_percent * core - current_voters} more for quorum.
+          It is proposed that this vote will time out and be
+          evaluated with the current votes in {days}, on {date}.
+          To vote please leave Approve (yea) or Request Changes (nay)
+          reviews.
+
+     To declare a standard vote "timed out," the person making such a declaration
+     must post a pull-request adding
+     a vote record to the https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results
+     folder.  The declaration PR should be merged by the first core member
+     who is available to verify that
+     the requirements for the timeout have been met, based on their
+     own personal records.
 
 ----
 
