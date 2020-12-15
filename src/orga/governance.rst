@@ -125,14 +125,23 @@ To call for a standard vote, here is a template PR comment:
          * notifications given to the core group         
 
 ----
-:Quorum: All percentages below express *both* required participation, as a
+:Quorum: Quorum for votes can be met in one of three ways depending on the vote: the standard quorum rules, 
+         the accelerated quorum rules, and the "time out" quorum rules. The specific quorum rules applicable 
+         for each vote are listed below.
+
+         **Standard Quorum Rules**: All percentages below express *both* required participation, as a
          fraction of the active core team, as well as the fraction of that
          fraction who vote affirmatively on the issue. For example, in a vote
          requiring 50%, with 18 active core members, at least 9 must vote;
          if 9 vote, there must 5 affirmative votes. If 13 members vote, 7
          must be affirmative.
+         
+         **Accelerated Quorum Rules**: For certain votes, we allow a lower quorum level. For these votes,
+         if the vote ends after at least a week and there are no "no" votes, a quorum of half of the size 
+         needed for a **standard quorum** above is accepatble. For example, for a vote requiring 50% with 18
+         active core members, at least 5 people must vote "yes" and exactly 0 people must vote "no".
 
-         Because everyone is busy and it is difficult sometimes to get quorum,
+         **Time-out Quorum Rules**: Because everyone is busy and it is difficult sometimes to get quorum,
          votes not achieving quorum will eventually time out on their set end date. When this happens,
          the current participation level is taken for what it is, and the percentage
          of affirmative votes is calculated from whatever the vote total is at that
@@ -179,6 +188,7 @@ To call for a standard vote, here is a template PR comment:
 
     * Standard
     * 60% Majority to pass
+    * Quorum rules: standard or time-out
 
 ----
 
@@ -187,6 +197,7 @@ To call for a standard vote, here is a template PR comment:
 
     * Sensitive
     * 50% Majority to pass
+    * Quorum rules: standard, accelerated, or time-out
 
 ----
 
@@ -199,6 +210,7 @@ To call for a standard vote, here is a template PR comment:
 
     * Sensitive
     * 66.7% Majority to pass
+    * Quorum rules: standard or time-out
 
 ----
 
@@ -207,6 +219,7 @@ To call for a standard vote, here is a template PR comment:
 
     * Standard
     * 50% Majority to pass
+    * Quorum rules: standard or time-out
 
 ----
 
@@ -215,6 +228,7 @@ To call for a standard vote, here is a template PR comment:
 
     * Standard
     * 50% Majority to pass
+    * Quorum rules: standard or time-out
 
 ----
 
@@ -240,6 +254,7 @@ To call for a standard vote, here is a template PR comment:
 
     * Sensitive
     * 60% Majority to pass
+    * Quorum rules: standard or time-out
 
 ----
 
@@ -249,6 +264,7 @@ To call for a standard vote, here is a template PR comment:
 
     * Sensitive
     * 66.7% Majority to pass
+    * Quorum rules: standard or time-out
 
 ----
 
@@ -258,6 +274,7 @@ To call for a standard vote, here is a template PR comment:
 
     * Sensitive
     * 75% Majority to pass
+    * Quorum rules: standard or time-out
 
 ----
 
@@ -269,7 +286,8 @@ To call for a standard vote, here is a template PR comment:
     and discussions. Friendly reminders to vote are encouraged.
 
     * Standard
-    * 50% plus one of those voting to pass
+    * 50% Majority to pass
+    * Quorum rules: standard, accelerated, or time-out
 
 ----
 
@@ -286,6 +304,7 @@ To call for a standard vote, here is a template PR comment:
 
     * Standard
     * 50% Majority to pass
+    * Quorum rules: standard or time-out
 
 ----
 
@@ -297,11 +316,12 @@ To call for a standard vote, here is a template PR comment:
 
     * Standard
     * 75% plus one of those voting to pass
+    * Quorum rules: standard or time-out
 
 ----
 
-All other voting items are considered to be standard and require a 50%
-majority to pass.
+All other voting items are considered to be standard, require a 50%
+majority to pass, and use only the standard or time-out quorum rules.
 
 Current Members of Core
 -----------------------
