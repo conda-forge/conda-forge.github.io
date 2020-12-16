@@ -1,5 +1,9 @@
+.. _news:
+
 Announcements
 =============
+
+Our announcements are published to an RSS feed `here <https://conda-forge.org/docs/news.rss>`_.
 
 2020
 ----
