@@ -129,6 +129,7 @@ Members
 - Michael Sarahan <msarahan@gmail.com>
 - Anthony Scopatz <scopatz@gmail.com>
 - Christopher J. "CJ" Wright <cjwright4242@gmail.com>
+- Chris Burr <christopher.burr@cern.ch>
 
 
 ARM Sub-Team
