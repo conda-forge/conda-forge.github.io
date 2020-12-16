@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>conda-forge news &amp; announcements</title>
+    <link>https://conda-forge.org/docs/user/announcements.html</link>
+    <description>News and announcements for the conda-forge ecosystem and channel.</description>
+    <lastBuildDate>Wed, 16 Dec 2020 12:56:22 GMT</lastBuildDate>
+    <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2020-12-02: Artifact Validation</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;In an effort to better secure &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt;, we are developing a process to
+validate artifacts before they are uploaded to &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;anaconda.org&lt;/span&gt;&lt;/code&gt;. This validation
+will look for various security related items, such as artifacts which overwrite
+key pieces of certain packages. While this process is in development, we will not
+be rejecting uploads. However, we will start scanning our current artifacts and
+working with the maintainers of those artifacts to mark broken any which we deem
+a security risk. We will also be running validation on new artifacts being upload
+and will report any issues back to feedstocks. At a future date, artifacts which
+do not pass validation will not be uploaded.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Wed, 02 Dec 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-10-08: Compiler Upgrade to GCC 9.3.0</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;We will be upgrading all &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;GCC&lt;/span&gt;&lt;/code&gt;-based compilers to version
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;9.3.0&lt;/span&gt;&lt;/code&gt; on all platforms. This upgrade will not affect &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;C&lt;/span&gt;&lt;/code&gt; or
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;C++&lt;/span&gt;&lt;/code&gt; code, but will require a rebuild of all feedstocks that use
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;FORTRAN&lt;/span&gt;&lt;/code&gt; due to a change in the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;SONAME&lt;/span&gt;&lt;/code&gt;. During this rebuild,
+we will keep the old compiler versions in production, temporarily
+doubling the build matrix. Once the migration is deemed complete,
+these old compiler versions will be removed.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Thu, 08 Oct 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-08-07: Completed New Staging Process for anaconda.org Uploads</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;We have now completed rolling out the new staging process for uploads
+to anaconda.org. Direct uploads to the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; channel will no
+longer work. If you are having trouble with package uploads, please
+rerender your feedstock with the latest version of &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-smithy&lt;/span&gt;&lt;/code&gt;.
+As always, if you need help, bump us on gitter or GitHub!&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Fri, 07 Aug 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-08-06: Fixed Maintenance Process for Feedstock Teams</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;We have fixed a bug where the maintainers of feedstocks listed in the
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;meta.yaml&lt;/span&gt;&lt;/code&gt; did not match those listed in the GitHub team. Due to this
+change, you may notice emails from GitHub informing you that you have been
+removed from a GitHub team if you have recently removed yourself from a
+feedstock via changing the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;meta.yaml&lt;/span&gt;&lt;/code&gt;. A similar fix has been applied
+for maintenance teams as well, though you will not see emails from this
+fix.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Thu, 06 Aug 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-07-23: CentOS 7 sysroot Now Available for linux-64 Builds</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;We are very excited to announce that new compilers based on repackaged
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;sysroot&lt;/span&gt;&lt;/code&gt;’s from CentOS 7 are now available for all &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;linux-*&lt;/span&gt;&lt;/code&gt; platforms.
+These compilers will be the default going forward for any &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;gcc&lt;/span&gt;&lt;/code&gt;, &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;gxx&lt;/span&gt;&lt;/code&gt;,
+and &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;gfortran&lt;/span&gt;&lt;/code&gt; versions past &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;8.4.0&lt;/span&gt;&lt;/code&gt; on &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;ppc64le&lt;/span&gt;&lt;/code&gt; and &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;7.5.0&lt;/span&gt;&lt;/code&gt; on
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;x86_64&lt;/span&gt;&lt;/code&gt;/&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;aarch64&lt;/span&gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;On the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;linux-64&lt;/span&gt;&lt;/code&gt; platform, we have also built the CentOS 6 &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;sysroot&lt;/span&gt;&lt;/code&gt;
+and set it as the default, consistent with our current compilers. To use the
+CentOS 7 &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;sysroot&lt;/span&gt;&lt;/code&gt; on &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;linux-64&lt;/span&gt;&lt;/code&gt;, add a requirement of &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;sysroot_linux-64&lt;/span&gt; &lt;span class="pre"&gt;2.17&lt;/span&gt;&lt;/code&gt;
+to the build section of your recipe. You also need to set the proper Docker
+image in your &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda_build_config.yaml&lt;/span&gt;&lt;/code&gt;. See &lt;a class="reference internal" href="../maintainer/knowledge_base.html#centos7"&gt;&lt;span class="std std-ref"&gt;Using CentOS 7&lt;/span&gt;&lt;/a&gt; for details.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Thu, 23 Jul 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-07-23: Strict channel priority in builds for OSX and Linux</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;We have changed the OSX and Linux platforms to enforce strict channel priority
+in package builds. This change means that if a package is available in the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt;
+channels, the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda&lt;/span&gt;&lt;/code&gt; solver will not consider any versions of the package from other
+channels. Users can disable this by setting &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;channel_priority:&lt;/span&gt; &lt;span class="pre"&gt;flexible&lt;/span&gt;&lt;/code&gt; in their
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge.yml&lt;/span&gt;&lt;/code&gt;.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Thu, 23 Jul 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-07-23: NumPy 1.16 as the minimal NumPy version on all platforms.</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;In accordance with &lt;a class="reference external" href="https://numpy.org/neps/nep-0029-deprecation_policy.html"&gt;NEP-29&lt;/a&gt;,
+we have switched to have &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;numpy&lt;/span&gt; &lt;span class="pre"&gt;1.16&lt;/span&gt;&lt;/code&gt; as the minimal supported version on all
+platforms.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Thu, 23 Jul 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-07-17: Conda-forge is building openblas with both pthreads and openmp on Linux</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;The main change is that &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;openblas&lt;/span&gt;&lt;/code&gt; will use pthreads for threading by default on Linux
+instead of the previous &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;openmp&lt;/span&gt;&lt;/code&gt; default.
+The &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;openmp&lt;/span&gt;&lt;/code&gt; builds can be recovered by installing &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;libopenblas=*=*openmp*&lt;/span&gt;&lt;/code&gt;.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Fri, 17 Jul 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-07-16: Core Dependency Tree Package Changes</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; is moving to a new system for generating Core Dependency Tree (CDT)
+packages. These changes include&lt;/p&gt;
+
+&lt;p&gt;CDT packages will no longer be built using feedstocks and this
+practice is officially deprecated.&lt;/p&gt;
+
+&lt;p&gt;Any current CDT packages in feedstocks will be moved to the new
+&lt;a class="reference external" href="https://github.com/conda-forge/cdt-builds"&gt;conda-forge/cdt-builds&lt;/a&gt;
+repo and the feedstock will be archived. Members of core will be doing this slowly
+on an as-needed basis, so it may not happen right away.&lt;/p&gt;
+
+&lt;p&gt;Requests for new CDTs should be submitted as PRs to the
+&lt;a class="reference external" href="https://github.com/conda-forge/cdt-builds"&gt;conda-forge/cdt-builds&lt;/a&gt; repo.&lt;/p&gt;
+
+&lt;p&gt;These changes are being made so that &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; can provide access to
+CentOS 7 / glibc 2.17 for &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;linux-64&lt;/span&gt;&lt;/code&gt; builds. They will also move more of the
+packages needed for &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; builds into the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; channels making
+builds more reliable.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Thu, 16 Jul 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-07-16: Moving from clang 9 to clang 10</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;conda-forge is moving to clang 10 on macOS!
+Check the release &lt;a class="reference external" href="https://releases.llvm.org/10.0.0/tools/clang/docs/ReleaseNotes.html#what-s-new-in-clang-10-0-0"&gt;notes&lt;/a&gt;
+for what is new, breaking, or deprecated.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Thu, 16 Jul 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-07-15: CFEP-18: Removing static libraries from the main build</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;With &lt;a class="reference external" href="https://github.com/conda-forge/cfep/blob/master/cfep-18.md"&gt;CFEP-18&lt;/a&gt;
+we now have a policy on how to deal with static packages. The most important
+change here is that we will be removing static libraries from the main packages
+and moving them to &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;-static&lt;/span&gt;&lt;/code&gt; suffixed packages. &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;-static&lt;/span&gt;&lt;/code&gt; packages will not
+be built by default but only on request.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Wed, 15 Jul 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-07-03: cf-mark-broken renamed to admin-requests</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;The &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;cf-mark-broken&lt;/span&gt;&lt;/code&gt; repo has been renamed to &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;admin-requests&lt;/span&gt;&lt;/code&gt;. It still
+serves the same purpose. However, we have expanded the capabilities of the repo
+to be able to mark packages as not broken.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Fri, 03 Jul 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-05-28: New Process for Marking Packages as Broken</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;We are changing the way we mark packages as &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;broken&lt;/span&gt;&lt;/code&gt; to
+better match the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;defaults&lt;/span&gt;&lt;/code&gt; channel and to better enable
+reproducible environments that depended on broken packages.
+We will now be adding the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;broken&lt;/span&gt;&lt;/code&gt; label to packages but leaving
+them on the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;main&lt;/span&gt;&lt;/code&gt; channel. In order to make sure they do not
+appear in the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;repodata.json&lt;/span&gt;&lt;/code&gt; for the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;main&lt;/span&gt;&lt;/code&gt; channel, we will
+be patching the repo data to remove them using the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;removals&lt;/span&gt;&lt;/code&gt;
+feature.&lt;/p&gt;
+
+&lt;p&gt;Users will notice the following changes&lt;/p&gt;
+
+&lt;p&gt;The packages on &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;anaconda.org&lt;/span&gt;&lt;/code&gt; will now have both the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;main&lt;/span&gt;&lt;/code&gt;
+and the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;broken&lt;/span&gt;&lt;/code&gt; labels.&lt;/p&gt;
+
+&lt;p&gt;All requests to mark packages as broken must be sent to the
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;cf-mark-broken&lt;/span&gt;&lt;/code&gt; repo.&lt;/p&gt;
+
+&lt;p&gt;Members of &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;core&lt;/span&gt;&lt;/code&gt; can no longer mark things as broken by
+hand since the repo data patching must be done as well.&lt;/p&gt;
+
+&lt;p&gt;The package metadata for broken packages may differ slightly
+from when they were on the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;main&lt;/span&gt;&lt;/code&gt; channel.&lt;/p&gt;
+
+&lt;p&gt;The only correct source of package metadata is now the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;repodata.json&lt;/span&gt;&lt;/code&gt;
+etc on &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;anaconda.org&lt;/span&gt;&lt;/code&gt;. Any other sources may be missing critical changes.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Thu, 28 May 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-05-09: New Staging Process for anaconda.org Uploads</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;Starting this week, we are changing the way we upload packages to &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;anaconda.org&lt;/span&gt;&lt;/code&gt;.
+We will move from direct uploads to the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;main&lt;/span&gt;&lt;/code&gt; channel to using a
+staging organization/channel combined with a copy request from the staging channel to
+the production channel. This new process will allow us to perform some validation on
+the outputs of feedstocks before they are released.&lt;/p&gt;
+
+&lt;p&gt;What will you see as a feedstock maintainer?&lt;/p&gt;
+
+&lt;p&gt;Starting this week, the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;admin-migrations&lt;/span&gt;&lt;/code&gt; service will be making commits to all
+feedstocks to provision them with the necessary configuration, API keys, and tokens.&lt;/p&gt;
+
+&lt;p&gt;Each feedstock will now be provisioned with a secret token. This token should not be
+shared or taken out of the CI services. It is used to identify the feedstock during
+the upload process.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;admin-migrations&lt;/span&gt;&lt;/code&gt; service will be setting a new top-level key in the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge.yml&lt;/span&gt;&lt;/code&gt;,
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda_forge_output_validation:&lt;/span&gt; &lt;span class="pre"&gt;true&lt;/span&gt;&lt;/code&gt;. This key indicates to &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-smithy&lt;/span&gt;&lt;/code&gt; that it
+should include the output validation calls in the feedstock CI scripts.&lt;/p&gt;
+
+&lt;p&gt;Currently open PRs will need to have this key added by hand and then rerendered.&lt;/p&gt;
+
+&lt;p&gt;When PRs are running the CI scripts, they will do some initial validation of the
+feedstock outputs. If this validation fails, the CI job will fail. Please see the
+CI logs for the error message which is printed after &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-build&lt;/span&gt;&lt;/code&gt; runs.&lt;/p&gt;
+
+&lt;p&gt;Once a PR is merged to master, the copy from the staging channel to the production
+channel will happen automatically.&lt;/p&gt;
+
+&lt;p&gt;Should a copy request fail, you will get a notification via a comment on the commit
+to master.&lt;/p&gt;
+
+&lt;p&gt;As part of this process, uploads from &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;appveyor&lt;/span&gt;&lt;/code&gt; will no longer be allowed unless there is
+a significant barrier to using &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;azure&lt;/span&gt;&lt;/code&gt;. We have recently upgraded the compiler infrastructure
+on &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;azure&lt;/span&gt;&lt;/code&gt; to support this change in policy.&lt;/p&gt;
+
+&lt;p&gt;Despite our extensive testing, we do not expect this change to be completely smooth,
+so please bear with us. As always, if you have any questions, concerns, or trouble, you
+can find us on gitter or bump us directly on github!&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Sat, 09 May 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-03-24: vs2015 to vs2017 Transition</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;We are formally deprecating &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;vs2015&lt;/span&gt;&lt;/code&gt; in two weeks on 2020-04-07 and will move to
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;vs2017&lt;/span&gt;&lt;/code&gt;. This change will enable us to support the usage of &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;msbuild&lt;/span&gt;&lt;/code&gt; on Azure for the
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;win&lt;/span&gt;&lt;/code&gt; platform and will provide additional support for &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;C++&lt;/span&gt;&lt;/code&gt;.
+Most packages built with &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;vs2015&lt;/span&gt;&lt;/code&gt; can be linked with &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;vs2017&lt;/span&gt;&lt;/code&gt; toolchain (but not vice-versa).
+An exception is static libraries compiled with whole program optimization (/GL flag) which may be
+incompatible with the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;vs2017&lt;/span&gt;&lt;/code&gt; toolchain. These static libraries will need to be rebuilt
+using &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;vs2017&lt;/span&gt;&lt;/code&gt;.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Tue, 24 Mar 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-03-23: Appveyor Deprecation</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;We are now starting to formally deprecate Appveyor in favor of Azure for builds on the
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;win&lt;/span&gt;&lt;/code&gt; platform. Note that we have not been adding appveyor to new feedstocks
+for a while, so this is not a completely new change in policy. We will now, however, begin to
+actively disable Appveyor builds on feedstocks not using it by turning off builds for
+GitHub &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;push&lt;/span&gt;&lt;/code&gt; events. Additionally, we have been issuing PRs to any remaining
+feedstocks to move them to Azure. We are aware that some packages built with &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;msbuild&lt;/span&gt;&lt;/code&gt;
+cannot yet be moved to Azure and so are leaving Appveyor on for those feedstocks for
+now.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Mon, 23 Mar 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-03-21: Python 2.7 Admin Command Available</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;A webservices admin command is now available to add Python 2.7 back to
+feedstocks. Put &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;&amp;#64;conda-forge-admin&lt;/span&gt; &lt;span class="pre"&gt;add&lt;/span&gt; &lt;span class="pre"&gt;python&lt;/span&gt; &lt;span class="pre"&gt;2.7&lt;/span&gt;&lt;/code&gt; in the title on an
+issue in your feedstock. The admin webservices bot will then issue a PR
+adding back Python 2.7. Note that this PR will remove other Python builds
+and any &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;win&lt;/span&gt;&lt;/code&gt;, &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;aarch64&lt;/span&gt;&lt;/code&gt;, or &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;ppc64le&lt;/span&gt;&lt;/code&gt; builds. If you want to keep
+those, merge the PR into a separate branch on your feedstock.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Sat, 21 Mar 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2020-03-18: Python 2.7 and vs2008 Deprecation</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;Python 2.7 is no longer supported by the upstream developers as of 2020-01-01.
+Conda-forge is thus deprecating its Python 2.7 support. Conda-forge will provide
+no ongoing support for Python 2.7 builds and any existing builds are provided on an “as-is” basis.&lt;/p&gt;
+
+&lt;p&gt;A &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;cf202003&lt;/span&gt;&lt;/code&gt; label has been applied to the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; channel for those
+who need a reference to the package index with Python 2.7.&lt;/p&gt;
+
+&lt;p&gt;We are removing support for &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;vs2008&lt;/span&gt;&lt;/code&gt; on Windows conjunction with the deprecation
+of Python 2.7, as it was only supported to build this version of Python.&lt;/p&gt;
+
+&lt;p&gt;We will provide an admin command that will add back Python 2.7 to any feedstock.
+Note that as stated above, we cannot provide support for any Python 2.7 builds
+generated with this admin command. Further, this admin command will only work on
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;osx-64&lt;/span&gt;&lt;/code&gt; and &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;linux-64&lt;/span&gt;&lt;/code&gt; platforms.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2019-09-30: Clang 9.0.0 and gfortran 7.3.0 as default compilers in OSX.</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;If you maintain a feedstock which require a C/C++ compiler, no changes necessary. A rerender
+should be done next time the feedstock is updated to use the new compiler.&lt;/p&gt;
+
+&lt;p&gt;If you maintain a feedstock with a Fortran compiler, a PR to upgrade to gfortran 7.3.0 was
+already issued. If that PR was merged, there’s nothing to do. If not, contact core if you
+need help migrating.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Mon, 30 Sep 2019 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2019-03-28: We overhauled the blas support in conda-forge.</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;Our packages now build against NETLIB’s reference implementation.&lt;/p&gt;
+
+&lt;p&gt;You as a user can now choose the implementation available at runtime.&lt;/p&gt;
+
+&lt;p&gt;For more information please refer to the &lt;a class="reference internal" href="../maintainer/knowledge_base.html#knowledge-blas"&gt;&lt;span class="std std-ref"&gt;documentation&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Thu, 28 Mar 2019 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2019-01-22: It has happened! Conda-forge has migrated to the latest compilers 🎉.</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;maintain a compiled feedstock, it will likely need to be rerender&lt;/p&gt;
+
+&lt;p&gt;need to roll back to the old compilers, you can use the “cf201901” label&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Tue, 22 Jan 2019 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2018-10-12: The rebuild is moving along nicely with almost a third of packages completed.</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;Recently completed are numpy and openblas which should open up much of the python numeric stack.
+We’re only about 5 feedstocks away from opening up all of R as well.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Fri, 12 Oct 2018 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2018-09-24: A minimal python 3.7 build is now available across all platforms and both compilers!</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description></description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Mon, 24 Sep 2018 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2018-09-24: Deprecation notice for Python 3.5</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;As we start building out more of the python 3.7 stack, we will no longer be building
+python 3.5 packages.&lt;/p&gt;
+
+&lt;p&gt;No new python 3.5 packages will be built after 2018-10-01.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Mon, 24 Sep 2018 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2018-09-20: The compiler migration is in full swing.  The bot will be making the rounds and
+modernizing more than 4000 packages.  This is going to take a few months to get done so
+bear with us.</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description></description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Thu, 20 Sep 2018 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>2018-09-10: Conda forge now has a magical status bar for tracking the progress of migrations.</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;You can find this at &lt;a class="reference external" href="https://conda-forge.org/status"&gt;conda-forge.org/status&lt;/a&gt;.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Mon, 10 Sep 2018 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
