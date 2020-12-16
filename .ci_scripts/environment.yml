@@ -15,6 +15,7 @@ dependencies:
   - requests
   - python-dateutil
   - pip
+  - python-rapidjson
   # uncomment to restore search
   # - elm
   # - nodejs
