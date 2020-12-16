@@ -35,7 +35,7 @@ import recommonmark.parser
 extensions = [
     'sphinx.ext.todo',
     'sphinxcontrib.fulltoc',
-
+    'sphinxcontrib.newsfeed',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

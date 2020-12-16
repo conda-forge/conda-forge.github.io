@@ -13,6 +13,8 @@ dependencies:
   - pyyaml
   - jinja2
   - requests
+  - python-dateutil
+  - pip
   # uncomment to restore search
   # - elm
   # - nodejs
