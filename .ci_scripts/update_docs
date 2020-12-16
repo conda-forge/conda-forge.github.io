@@ -6,6 +6,10 @@ git checkout -b new_site_content
 conda env create -f ./.ci_scripts/environment.yml
 conda activate conda-forge-docs
 
+pushd newsfeed
+pip install --no-deps .
+popd
+
 python .ci_scripts/generate_html.py
 
 # rebuild elm

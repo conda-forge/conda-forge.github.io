@@ -1,0 +1,3 @@
+
+include README NEWS LICENSE demo/Makefile demo/conf.py demo/*.rst demo/_templates/*.html
+

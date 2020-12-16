@@ -13,3 +13,4 @@ elm-stuff
 # Ignore RTD redirect build
 rtd/_build
 rtd/default.profraw
+newsfeed/demo/_build

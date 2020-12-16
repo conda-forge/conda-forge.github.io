@@ -47,7 +47,7 @@ Announcements
 :2020-07-23: CentOS 7 ``sysroot`` Now Available for ``linux-64`` Builds
 
     We are very excited to announce that new compilers based on repackaged
-    ``sysroot``'s from CentOS 7 are now available for all ``linux-*`` platforms.
+    ``sysroot``s from CentOS 7 are now available for all ``linux-*`` platforms.
     These compilers will be the default going forward for any ``gcc``, ``gxx``,
     and ``gfortran`` versions past ``8.4.0`` on ``ppc64le`` and ``7.5.0`` on
     ``x86_64``/``aarch64``.
@@ -56,7 +56,7 @@ Announcements
     and set it as the default, consistent with our current compilers. To use the
     CentOS 7 ``sysroot`` on ``linux-64``, add a requirement of ``sysroot_linux-64 2.17``
     to the build section of your recipe. You also need to set the proper Docker
-    image in your ``conda_build_config.yaml``. See :ref:`Using CentOS 7 <centos7>` for details.
+    image in your ``conda_build_config.yaml``.
 
 :2020-07-23: Strict channel priority in builds for OSX and Linux
 
@@ -235,7 +235,7 @@ Announcements
    - Our packages now build against NETLIB’s reference implementation.
    - You as a user can now choose the implementation available at runtime.
 
-  For more information please refer to the :ref:`documentation <knowledge:blas>`.
+  For more information please refer to the.
 
 
 :2019-01-22: It has happened! Conda-forge has migrated to the latest compilers 🎉.
