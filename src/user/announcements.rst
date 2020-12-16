@@ -19,7 +19,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     CentOS8 might not be ready for a full-scale switch to CentOS7. Thus the 
     ``conda-forge`` core team has decided to delay moving to CentOS7 until sometime 
     early next year, likely the end of January 2021 at the earliest. We are actively 
-    looking for feedback from our users on this issue. Please do :ref:`get in touch <>`
+    looking for feedback from our users on this issue. Please do :ref:`get in touch <getintouch>`
     if you have comments or concerns!
 
 :2020-12-02: Artifact Validation
