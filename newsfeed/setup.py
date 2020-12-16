@@ -9,7 +9,7 @@ from setuptools import setup
 NAME = "sphinxcontrib-newsfeed"
 VERSION = "0.1.4"
 DESCRIPTION = "News Feed extension for Sphinx"
-LONG_DESCRIPTION = open('README').read()
+LONG_DESCRIPTION = open('README.md').read()
 AUTHOR = "Kirill Simonov (Prometheus Research, LLC)"
 AUTHOR_EMAIL = "xi@resolvent.net"
 LICENSE = "BSD"
@@ -48,5 +48,3 @@ setup(name=NAME,
       zip_safe=ZIP_SAFE,
       include_package_data=INCLUDE_PACKAGE_DATA,
       namespace_packages=NAMESPACE_PACKAGES)
-
-
