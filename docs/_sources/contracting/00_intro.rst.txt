@@ -17,12 +17,6 @@ That is between the payer and payee to hammer out on their own.
 Known Service Providers
 ***********************
 
-Anthony Scopatz
-===============
-Services Offered:
-Contact Information:
-Background / Description:
-
 Lab49
 =====
 Services Offered: Architecture and Technical Design Advisory, Cloud Strategy and Migrations, Outsourced Software Development, SDLC Advisory
