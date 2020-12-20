@@ -61,6 +61,8 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
       secure:
         BINSTAR_TOKEN: <some big hash>
 
+.. _azure-config:
+
 azure
 -----
 This dictates the behavior of the Azure Pipelines CI service. It is a

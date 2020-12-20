@@ -1136,3 +1136,101 @@ key with ``docker_image``. Also ``cdt_name`` ensures the CDTs match the CentOS
 version. If this changes in the future, then this extra key may not be needed.
 
 Finally, note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 7.
+
+.. _cuda:
+
+CUDA builds
+===========
+
+Although the provisioned CI machines do not feature a GPU, Conda Forge does provide mechanisms
+to build CUDA-enabled packages. These mechanisms involve several packages:
+
+* ``cudatoolkit``: The runtime libraries for the CUDA toolkit. This is what end-users will end
+  up installing next to your package.
+
+* ``nvcc``: Nvidia's EULA does not allow the redistribution of compilers and drivers. Instead, we
+  provide a wrapper package that locates the CUDA installation in the system. The main role of this
+  package is to set some environment variables (``CUDA_HOME``, as well as ``CFLAGS`` and friends),
+  as well as wrapping the real ``nvcc`` executable to set some extra command line arguments.
+
+.. note::
+
+  **How is CUDA provided at the system level?**
+
+  * On Linux, Nvidia provides official Docker images, which we then
+    `adapt <https://github.com/conda-forge/docker-images>`_ to the Conda Forge needs.
+
+  * On Windows, the compilers need to be installed for every CI run. This is done through the
+    `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`_ scripts.
+    Do note that the Nvidia executable won't install the drivers because no GPU is present in the machine.
+
+In practice, to enable CUDA on your package, add ``{{ compiler('cuda') }}`` to the ``build``
+section of your requirements. The matching ``cudatoolkit`` will be added to the ``run``
+requirements automatically.
+
+Testing the packages
+--------------------
+
+Since the CI machines do not feature a GPU, you won't be able to test the built packages as part
+of the conda recipe. For now, the workaround is to enable the Azure artifacts for your feedstock
+(see :ref:`azure-config`) and then perform the tests locally.
+
+Common problems and known issues
+--------------------------------
+
+Helping your build system locate CUDA
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Some build systems might need some help finding CUDA, so you might need to pass the value
+of ``CUDA_HOME`` as some kind of flag. Some examples include:
+
+* Old-style CMake (using the deprecated ``FindCUDA`` module), you might need to pass this flag::
+
+    -DCUDA_TOOLKIT_ROOT_DIR=${CUDA_HOME}
+
+* On Windows, if you need to pass ``CUDA_PATH``, CMake might choke on a backslash. In that case,
+  you can overwrite ``CUDA_PATH`` as follows::
+
+    set "CUDA_PATH=%CUDA_PATH:\=/%"
+
+* On Windows packages that are built with MSBuild, new-style CMake (using ``FindCUDAToolkit`` module)
+  you might need to define this environment variable::
+
+    set "CudaToolkitDir=%CUDA_PATH%"
+
+
+CUDA 11 and CDT packages
+^^^^^^^^^^^^^^^^^^^^^^^^
+If your package requires both CUDA and some CDTs on Linux, you will need to patch the
+``.ci_support/*.yml`` files corresponding to CUDA 11 and above so they reflect
+``cdt_name: cos7``. Do note that these changes do not survive feedstock rerenders!
+
+This should be fixed at some point, but for now you need to do it manually. Apologies!
+
+
+Adding support for a new CUDA version
+-------------------------------------
+
+Providing a new CUDA version involves five repositores:
+
+* `cudatoolkit-feedstock <https://github.com/conda-forge/cudatoolkit-feedstock>`_
+* `nvcc-feedstock <https://github.com/conda-forge/nvcc-feedstock>`_
+* `conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_
+* `docker-images <https://github.com/conda-forge/docker-images>`_ (Linux only)
+* `conda-forge-ci-setup-feedstock <https://github.com/conda-forge/conda-forge-ci-setup-feedstock>`_ (Windows only)
+
+The steps involved are, roughly:
+
+1. Add the ``cudatoolkit`` packages in ``cudatoolkit-feedstock``
+2. Submit the version migrator to ``conda-forge-pinning-feedstock``.
+   This will stay open during the following steps.
+3. For Linux, add the corresponding Docker images at ``docker-images``.
+   Copy the migration file manually to ``.ci_support/migrations``.
+   This copy should not specify a timestamp. Comment it out and rerender.
+4. For Windows, add the installer URLs and hashes to the ``conda-forge-ci-setup``
+   `script <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat>`_.
+   The migration file must also be manually copied here. Rerender.
+5. Create the new ``nvcc`` packages for the new version. Again, manual
+   migration must be added. Rerender.
+6. When everything else has been merged and testing has taken place,
+   consider merging the PR opened at step 2 now so it can apply to all the downstream feedstocks.
