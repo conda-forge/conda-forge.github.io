@@ -1153,6 +1153,10 @@ to build CUDA-enabled packages. These mechanisms involve several packages:
   package is to set some environment variables (``CUDA_HOME``, as well as ``CFLAGS`` and friends),
   as well as wrapping the real ``nvcc`` executable to set some extra command line arguments.
 
+In practice, to enable CUDA on your package, add ``{{ compiler('cuda') }}`` to the ``build``
+section of your requirements and rerender! The matching ``cudatoolkit`` will be added to the ``run``
+requirements automatically.
+
 .. note::
 
   **How is CUDA provided at the system level?**
@@ -1164,9 +1168,16 @@ to build CUDA-enabled packages. These mechanisms involve several packages:
     `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`_ scripts.
     Do note that the Nvidia executable won't install the drivers because no GPU is present in the machine.
 
-In practice, to enable CUDA on your package, add ``{{ compiler('cuda') }}`` to the ``build``
-section of your requirements. The matching ``cudatoolkit`` will be added to the ``run``
-requirements automatically.
+  **How is ``cudatoolkit`` selected at install time?**
+
+  Conda exposes the maximum CUDA version supported by the installed Nvidia drivers through a virtual package
+  named ``__cuda``. By default, ``conda`` will install the highest version available
+  for the packages involved. However, prior to v4.8.4, ``__cuda`` versions would not be part of the
+  constraints, so you would always get the latest one, regardless the supported CUDA version.
+
+  If for some reason you want to install a specific version, you can use::
+
+    conda install your-gpu-package cudatoolkit==10.1
 
 Testing the packages
 --------------------
@@ -1207,6 +1218,11 @@ If your package requires both CUDA and some CDTs on Linux, you will need to patc
 
 This should be fixed at some point, but for now you need to do it manually. Apologies!
 
+Submitting CUDA-enabled packages
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Right now, ``staged-recipes`` cannot build CUDA-enabled packages. You will have to
+start with a simpler version (CPU only) and then add the CUDA bits once you
+have obtained a feedstock.
 
 Adding support for a new CUDA version
 -------------------------------------
