@@ -488,7 +488,7 @@ Testing python packages
 .......................
 
 For the best information about testing, see the conda build docs
-`test section. <https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#test-section>`_
+`test section. <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#test-section>`_
 
 
 Testing importing
