@@ -1218,11 +1218,6 @@ If your package requires both CUDA and some CDTs on Linux, you will need to patc
 
 This should be fixed at some point, but for now you need to do it manually. Apologies!
 
-Submitting CUDA-enabled packages
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Right now, ``staged-recipes`` cannot build CUDA-enabled packages. You will have to
-start with a simpler version (CPU only) and then add the CUDA bits once you
-have obtained a feedstock.
 
 Adding support for a new CUDA version
 -------------------------------------
