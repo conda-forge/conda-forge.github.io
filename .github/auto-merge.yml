@@ -1,7 +1,0 @@
-reportStatus: true
-
-minApprovals:
-  COLLABORATOR: 0
-  
-requiredLabels:
-  - automerge
