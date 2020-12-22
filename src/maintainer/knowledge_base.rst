@@ -1150,11 +1150,11 @@ to build CUDA-enabled packages. These mechanisms involve several packages:
 
 * ``nvcc``: Nvidia's EULA does not allow the redistribution of compilers and drivers. Instead, we
   provide a wrapper package that locates the CUDA installation in the system. The main role of this
-  package is to set some environment variables (``CUDA_HOME``, as well as ``CFLAGS`` and friends),
+  package is to set some environment variables (``CUDA_HOME``, ``CUDA_PATH``,``CFLAGS`` and others),
   as well as wrapping the real ``nvcc`` executable to set some extra command line arguments.
 
 In practice, to enable CUDA on your package, add ``{{ compiler('cuda') }}`` to the ``build``
-section of your requirements and rerender! The matching ``cudatoolkit`` will be added to the ``run``
+section of your requirements and rerender. The matching ``cudatoolkit`` will be added to the ``run``
 requirements automatically.
 
 .. note::
@@ -1168,12 +1168,16 @@ requirements automatically.
     `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`_ scripts.
     Do note that the Nvidia executable won't install the drivers because no GPU is present in the machine.
 
-  **How is ``cudatoolkit`` selected at install time?**
+  **How is cudatoolkit selected at install time?**
 
   Conda exposes the maximum CUDA version supported by the installed Nvidia drivers through a virtual package
   named ``__cuda``. By default, ``conda`` will install the highest version available
-  for the packages involved. However, prior to v4.8.4, ``__cuda`` versions would not be part of the
-  constraints, so you would always get the latest one, regardless the supported CUDA version.
+  for the packages involved. To override this behaviour, you can define a ``CONDA_OVERRIDE_CUDA`` environment
+  variable. More details in the
+  `Conda docs <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html#overriding-detected-packages>`_.
+
+  Note that prior to v4.8.4, ``__cuda`` versions would not be part of the constraints, so you would always
+  get the latest one, regardless the supported CUDA version.
 
   If for some reason you want to install a specific version, you can use::
 
@@ -1183,8 +1187,18 @@ Testing the packages
 --------------------
 
 Since the CI machines do not feature a GPU, you won't be able to test the built packages as part
-of the conda recipe. For now, the workaround is to enable the Azure artifacts for your feedstock
-(see :ref:`azure-config`) and then perform the tests locally.
+of the conda recipe. That does not mean you can't test your package locally. To do so:
+
+1. Enable the Azure artifacts for your feedstock (see :ref:`here <azure-config>`).
+2. Include the test files and requirements in the recipe
+   `like this <https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/meta.yaml#L51-L61>`_.
+3. Provide the test instructions. Take into account that the GPU tests will fail in the CI run,
+   so you need to ignore them to get the package built and uploaded as an artifact.
+   `Example <https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/run_test.py>`_.
+4. Once you have downloaded the artifacts, you will be able to run::
+
+    conda build --test <pkg file>.tar.bz2
+
 
 Common problems and known issues
 --------------------------------
