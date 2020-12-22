@@ -1177,7 +1177,7 @@ requirements automatically.
 
   If for some reason you want to install a specific version, you can use::
 
-    conda install your-gpu-package cudatoolkit==10.1
+    conda install your-gpu-package cudatoolkit=10.1
 
 Testing the packages
 --------------------
