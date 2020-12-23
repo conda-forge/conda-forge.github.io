@@ -1,10 +1,10 @@
 Joining the team
 ****************
 
-``conda-forge`` is a volunteer-driven community. We need your help! We have three 
-main groups of people who maintain the ecosystem. They are the core team, the 
-staged-recipes maintainers, and the feedstock maintainers. If you are interested in 
-helping us maintain this ecosystem, our biggest need is help reviewing new conda packages 
+``conda-forge`` is a volunteer-driven community. We need your help! We have three
+main groups of people who maintain the ecosystem. They are the core team, the
+staged-recipes maintainers, and the feedstock maintainers. If you are interested in
+helping us maintain this ecosystem, our biggest need is help reviewing new conda packages
 coming in through staged-recipes.
 
 To join the staged-recipes team, please ask one of the core members on
@@ -23,14 +23,24 @@ If you'd like to maintain a specific feedstock, open a PR on the feedstock addin
 yourself as a maintainer. If the current maintainers have not responded after a week,
 please get in touch with the core team to get the PR merged.
 
-If you are interested in joining the core team, please get in touch with us on 
+If you are interested in joining the core team, please get in touch with us on
 `our gitter channel <https://gitter.im/conda-forge/conda-forge.github.io>`__.
-Core members are added via a vote amongst the current core team. The core team 
-member who is running your vote will ask you to provide sufficient justification 
-as to why you should be nominated to core. Prior service to the community, including 
+Core members are added via a vote amongst the current core team. The core team
+member who is running your vote will ask you to provide sufficient justification
+as to why you should be nominated to core. Prior service to the community, including
 but not limited to serving as a staged-recipes reviewer, working on critical conda-forge
-infrastructure, and helping to bridge disparate communities are an important part of 
+infrastructure, and helping to bridge disparate communities are an important part of
 the nomination process.
+
+
+core Responsibilities
+=====================
+
+The core team is the governing body over the entire ``conda-forge``
+organization. Members of the core team have full rights over all ``conda-forge``
+repositories. Members of core are the face of the project, and are responsible
+for officially interfacing with external communities, organizations, non-profits,
+and companies. They are also responsible for maintaining conda-forge's infrastructure.
 
 
 staged-recipes Responsibilities
@@ -51,11 +61,11 @@ Generally speaking, your role is as follows:
 4. Helping recipe maintainers who bump the ``conda-forge/help-*`` teams.
 
 
-core Responsibilities
-=====================
+feedstock maintainer Responsibilities
+=====================================
 
-The core team is the governing body over the entire ``conda-forge``
-organization. Members of the core team have full rights over all ``conda-forge``
-repositories. Members of core are the face of the project, and are responsible
-for officially interfacing with external communities, organizations, non-profits,
-and companies. They are also responsible for maintaing conda-forge's core infrastructure.
+Feedstock maintainers are responsible for
+
+1. Keeping their recipes up-to-date including version bumps.
+2. Merging ABI migration PRs from our bots.
+3. Responding to issues raised by the community on the feedstock issues tracker.
