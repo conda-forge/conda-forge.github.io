@@ -35,9 +35,6 @@ jobs:
         shell: bash -l {0}
         run: |
           source ./.ci_scripts/update_docs
-        # env:
-        #   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        #   GH_REF: ${{ github.ref }}
 
       - name: deploy
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
@@ -46,5 +43,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: .
-          user_name: cf-blacksmithy
-          user_email: cf-blacksmithy@email.com
+          user_name: conda-forge-coordinator
+          user_email: conda-forge-coordinator@email.com
