@@ -44,4 +44,4 @@ jobs:
           publish_branch: gh-pages
           publish_dir: .
           user_name: conda-forge-coordinator
-          user_email: conda-forge-coordinator@email.com
+          user_email: conda.forge.coordinator@gmail.com
