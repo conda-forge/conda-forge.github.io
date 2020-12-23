@@ -2,7 +2,7 @@ name: deploy
 
 on:
   push:
-    branches: 
+    branches:
       - master
   pull_request: null
 
@@ -31,10 +31,20 @@ jobs:
           conda config --set show_channel_urls true
           conda config --set auto_update_conda false
 
-      - name: build and deploy
+      - name: build
         shell: bash -l {0}
         run: |
           source ./.ci_scripts/update_docs
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REF: ${{ github.ref }}
+        # env:
+        #   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #   GH_REF: ${{ github.ref }}
+
+      - name: deploy
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: .
+          user_name: cf-blacksmithy
+          user_email: cf-blacksmithy@email.com

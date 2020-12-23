@@ -31,18 +31,18 @@ mv docs-README docs/README
 
 # git diff
 
-# Only commit the docs for commits on master.
-if [[ $GH_REF == refs/heads/master ]] && [[ $GH_TOKEN != "" ]]; then
-    git add -A :/
-    git commit -m "Re-ran make.py. [ci skip]" || true
-    git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null
-
-    # Update the remotes before pushing and check the status.
-    # This should give us more info if the push will not be
-    # a simple fast-forward push.
-    git fetch --all 2> /dev/null
-    git branch -u pushable/gh-pages
-    git status
-    git push pushable new_site_content:gh-pages
-    # 2> /dev/null
-fi
+# # Only commit the docs for commits on master.
+# if [[ $GH_REF == refs/heads/master ]] && [[ $GH_TOKEN != "" ]]; then
+#     git add -A :/
+#     git commit -m "Re-ran make.py. [ci skip]" || true
+#     git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null
+#
+#     # Update the remotes before pushing and check the status.
+#     # This should give us more info if the push will not be
+#     # a simple fast-forward push.
+#     git fetch --all 2> /dev/null
+#     git branch -u pushable/gh-pages
+#     git status
+#     git push pushable new_site_content:gh-pages
+#     # 2> /dev/null
+# fi
