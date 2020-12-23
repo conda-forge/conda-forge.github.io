@@ -41,8 +41,8 @@ if [[ $GH_REF == refs/heads/master ]] && [[ $GH_TOKEN != "" ]]; then
     # This should give us more info if the push will not be
     # a simple fast-forward push.
     git fetch --all 2> /dev/null
-    git branch -u pushable/master
+    git branch -u pushable/gh-pages
     git status
-    git push pushable new_site_content:master 
+    git push pushable new_site_content:gh-pages
     # 2> /dev/null
 fi
