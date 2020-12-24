@@ -6,6 +6,14 @@ Maintaining packages
 Important notes
 ===============
 
+Packages on ``conda-forge`` are immutable
+-----------------------------------------
+
+As a matter of policy, we do not allow edits or the deletion of packages on ``conda-forge``. This 
+policy is very important as it increases the reliability and reproducibility of ``conda`` environments 
+made with the ``conda-forge`` channel. If you need to remove a package, please see the :ref:`section <maint_fix_broken_packages>`
+on marking packages broken.
+
 Forking and pull requests
 -------------------------
 
@@ -159,10 +167,6 @@ We need to re-render when there are changes to the following parts of the feedst
 - build issues that a feedstock configuration update will fix (follow us on `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`_ to know about those);
 
 
-
-
-
-
 Testing changes locally
 =======================
 
@@ -203,7 +207,8 @@ Sometimes mistakes happen and a broken package ends up being uploaded to the con
 
 If the only issue is in the package metadata, we can directly patch it using
 the `repo data patches feedstock <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock>`__.
-To change the repo data for your package, make a PR on the feedstock.
+Please make a PR there to add a patch. In order to ensure future versions have the required changes, you also 
+need to change recipe to reflect the metadata changes.
 
 If instead the actual contents of the package are broken, the following steps will
 remove broken packages from the ``main`` channel:
@@ -251,4 +256,6 @@ Once the PR is merged, our infrastructure will grant and revoke maintainer permi
 Maintaining several versions
 ============================
 
-TODO: LTS branch
+If you'd like to maintain more than one version of your package, you can use branches on the feedstock. To do this, fork your feedstock and make 
+a meaningful branch name (e.g., `v1.X` or `v1.0`). Make the required changes to the recipe and rerender the feedstock. Then push this branch 
+from your fork to the upstream feedstock. Our CI services will automatically build any branches in addition to the default branch.
