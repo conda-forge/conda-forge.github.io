@@ -106,7 +106,7 @@ Updating recipes
 Please follow the following guidelines when updating recipes.
 
 1. Always use a fork of the feedstock when updating the recipe.
-2. When a package's version is not changed, but other metadata or parts of the recipe are changed, increase the build number by 1.
+2. When a package's version is not changed, but other metadata or parts of the recipe are changed, increase the build number by ``1``.
 3. When shipping a new version of your package, reset the build number to ``0``.
 
 
