@@ -9,10 +9,13 @@ Important notes
 Packages on ``conda-forge`` are immutable
 -----------------------------------------
 
-As a matter of policy, we do not allow edits or the deletion of packages on ``conda-forge``. This 
-policy is very important as it increases the reliability and reproducibility of ``conda`` environments 
-made with the ``conda-forge`` channel. If you need to remove a package, please see the :ref:`section <maint_fix_broken_packages>`
-on marking packages broken.
+As a matter of policy, we do not allow edits or the deletion of packages on ``conda-forge``. This
+policy is very important as it increases the reliability and reproducibility of ``conda`` environments
+made with the ``conda-forge`` channel. Note that because of this policy, our upload scripts will refuse to
+upload packages which already exist on the ``conda-forge`` channel.
+
+If you need to remove a package, please see the :ref:`section <maint_fix_broken_packages>` on marking packages broken.
+
 
 Forking and pull requests
 -------------------------
@@ -100,25 +103,12 @@ Here we assume that you would like to update the feedstock ``<feedstock>``. Feed
 Updating recipes
 ================
 
-Updating version and hash
--------------------------
+Please follow the following guidelines when updating recipes.
 
-Checking the dependencies
--------------------------
+1. Always use a fork of the feedstock when updating the recipe.
+2. When a package's version is not changed, but other metadata or parts of the recipe are changed, increase the build number by 1.
+3. When shipping a new version of your package, reset the build number to ``0``.
 
-Bumping the build number
-------------------------
-
-The build number is increased when the source code for the package has not changed but you
-need to make a new build.
-As a rule of thumb, the build number is increased whenever a new package with the same version needs to be uploaded to the conda-forge channel.
-
-Examples for needing to increase the build number are
-
- - updating the pinned dependencies after a rerendering
- - Fixing wrong dependencies
-
-When the package version changes you should reset the build number back to ``0``.
 
 .. _dev_update_rerender:
 
@@ -207,7 +197,7 @@ Sometimes mistakes happen and a broken package ends up being uploaded to the con
 
 If the only issue is in the package metadata, we can directly patch it using
 the `repo data patches feedstock <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock>`__.
-Please make a PR there to add a patch. In order to ensure future versions have the required changes, you also 
+Please make a PR there to add a patch. In order to ensure future versions have the required changes, you also
 need to change recipe to reflect the metadata changes.
 
 If instead the actual contents of the package are broken, the following steps will
@@ -256,6 +246,8 @@ Once the PR is merged, our infrastructure will grant and revoke maintainer permi
 Maintaining several versions
 ============================
 
-If you'd like to maintain more than one version of your package, you can use branches on the feedstock. To do this, fork your feedstock and make 
-a meaningful branch name (e.g., `v1.X` or `v1.0`). Make the required changes to the recipe and rerender the feedstock. Then push this branch 
-from your fork to the upstream feedstock. Our CI services will automatically build any branches in addition to the default branch.
+If you'd like to maintain more than one version of your package, you can use branches on the feedstock. To do this,
+fork your feedstock and make a meaningful branch name (e.g., `v1.X` or `v1.0`).
+Make the required changes to the recipe and rerender the feedstock. Then push this branch
+from your fork to the upstream feedstock. Our CI services will automatically build any
+branches in addition to the default branch.
