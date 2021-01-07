@@ -1150,7 +1150,7 @@ to build CUDA-enabled packages. These mechanisms involve several packages:
 
 * ``nvcc``: Nvidia's EULA does not allow the redistribution of compilers and drivers. Instead, we
   provide a wrapper package that locates the CUDA installation in the system. The main role of this
-  package is to set some environment variables (``CUDA_HOME``, ``CUDA_PATH``,``CFLAGS`` and others),
+  package is to set some environment variables (``CUDA_HOME``, ``CUDA_PATH``, ``CFLAGS`` and others),
   as well as wrapping the real ``nvcc`` executable to set some extra command line arguments.
 
 In practice, to enable CUDA on your package, add ``{{ compiler('cuda') }}`` to the ``build``
@@ -1203,34 +1203,25 @@ of the conda recipe. That does not mean you can't test your package locally. To 
 Common problems and known issues
 --------------------------------
 
-Helping your build system locate CUDA
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``nvcuda.dll`` cannot be found on Windows
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Some build systems might need some help finding CUDA, so you might need to pass the value
-of ``CUDA_HOME`` as some kind of flag. Some examples include:
+The `scripts <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat>`_
+used to install the CUDA Toolkit on Windows cannot provide ``nvcuda.dll``
+as part of the installation because no GPU is physically present in the CI machines.
+As a result, you might get linking errors in the postprocessing steps of ``conda build``::
 
-* Old-style CMake (using the deprecated ``FindCUDA`` module), you might need to pass this flag::
+  WARNING (arrow-cpp,Library/bin/arrow_cuda.dll): $RPATH/nvcuda.dll not found in packages,
+  sysroot(s) nor the missing_dso_whitelist.
 
-    -DCUDA_TOOLKIT_ROOT_DIR=${CUDA_HOME}
+  .. is this binary repackaging?
 
-* On Windows, if you need to pass ``CUDA_PATH``, CMake might choke on a backslash. In that case,
-  you can overwrite ``CUDA_PATH`` as follows::
+For now, you will have to add ``nvcuda.dll`` to the ``missing_dso_whitelist``::
 
-    set "CUDA_PATH=%CUDA_PATH:\=/%"
-
-* On Windows packages that are built with MSBuild, new-style CMake (using ``FindCUDAToolkit`` module)
-  you might need to define this environment variable::
-
-    set "CudaToolkitDir=%CUDA_PATH%"
-
-
-CUDA 11 and CDT packages
-^^^^^^^^^^^^^^^^^^^^^^^^
-If your package requires both CUDA and some CDTs on Linux, you will need to patch the
-``.ci_support/*.yml`` files corresponding to CUDA 11 and above so they reflect
-``cdt_name: cos7``. Do note that these changes do not survive feedstock rerenders!
-
-This should be fixed at some point, but for now you need to do it manually. Apologies!
+  build:
+    ...
+    missing_dso_whitelist:
+      - "*/nvcuda.dll"   # [win]
 
 
 Adding support for a new CUDA version
@@ -1246,7 +1237,7 @@ Providing a new CUDA version involves five repositores:
 
 The steps involved are, roughly:
 
-1. Add the ``cudatoolkit`` packages in ``cudatoolkit-feedstock``
+1. Add the ``cudatoolkit`` packages in ``cudatoolkit-feedstock``.
 2. Submit the version migrator to ``conda-forge-pinning-feedstock``.
    This will stay open during the following steps.
 3. For Linux, add the corresponding Docker images at ``docker-images``.
