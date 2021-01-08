@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge base &#8212; conda-forge 2021.01.04 documentation</title>
+    <title>Knowledge base &#8212; conda-forge 2021.01.08 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.01.04 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.01.08 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -1001,6 +1001,119 @@ key with <code class="docutils literal notranslate"><span class="pre">docker_ima
 version. If this changes in the future, then this extra key may not be needed.</p>
 <p>Finally, note that the <code class="docutils literal notranslate"><span class="pre">aarch64</span></code> and <code class="docutils literal notranslate"><span class="pre">ppc64le</span></code> platforms already use CentOS 7.</p>
 </div>
+<div class="section" id="cuda-builds">
+<span id="cuda"></span><h2>CUDA builds<a class="headerlink" href="#cuda-builds" title="Permalink to this headline">¶</a></h2>
+<p>Although the provisioned CI machines do not feature a GPU, Conda-Forge does provide mechanisms
+to build CUDA-enabled packages. These mechanisms involve several packages:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code>: The runtime libraries for the CUDA toolkit. This is what end-users will end
+up installing next to your package.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nvcc</span></code>: Nvidia’s EULA does not allow the redistribution of compilers and drivers. Instead, we
+provide a wrapper package that locates the CUDA installation in the system. The main role of this
+package is to set some environment variables (<code class="docutils literal notranslate"><span class="pre">CUDA_HOME</span></code>, <code class="docutils literal notranslate"><span class="pre">CUDA_PATH</span></code>, <code class="docutils literal notranslate"><span class="pre">CFLAGS</span></code> and others),
+as well as wrapping the real <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> executable to set some extra command line arguments.</p></li>
+</ul>
+<p>In practice, to enable CUDA on your package, add <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">compiler('cuda')</span> <span class="pre">}}</span></code> to the <code class="docutils literal notranslate"><span class="pre">build</span></code>
+section of your requirements and rerender. The matching <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code> will be added to the <code class="docutils literal notranslate"><span class="pre">run</span></code>
+requirements automatically.</p>
+<p>On Linux, CMake users are required to use <code class="docutils literal notranslate"><span class="pre">${CMAKE_ARGS}</span></code> so CMake can find CUDA correctly. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mkdir build &amp;&amp; cd build
+cmake ${CMAKE_ARGS} ${SRC_DIR}
+make
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>How is CUDA provided at the system level?</strong></p>
+<ul class="simple">
+<li><p>On Linux, Nvidia provides official Docker images, which we then
+<a class="reference external" href="https://github.com/conda-forge/docker-images">adapt</a> to Conda-Forge’s needs.</p></li>
+<li><p>On Windows, the compilers need to be installed for every CI run. This is done through the
+<a class="reference external" href="https://github.com/conda-forge/conda-forge-ci-setup-feedstock/">conda-forge-ci-setup</a> scripts.
+Do note that the Nvidia executable won’t install the drivers because no GPU is present in the machine.</p></li>
+</ul>
+<p><strong>How is cudatoolkit selected at install time?</strong></p>
+<p>Conda exposes the maximum CUDA version supported by the installed Nvidia drivers through a virtual package
+named <code class="docutils literal notranslate"><span class="pre">__cuda</span></code>. By default, <code class="docutils literal notranslate"><span class="pre">conda</span></code> will install the highest version available
+for the packages involved. To override this behaviour, you can define a <code class="docutils literal notranslate"><span class="pre">CONDA_OVERRIDE_CUDA</span></code> environment
+variable. More details in the
+<a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html#overriding-detected-packages">Conda docs</a>.</p>
+<p>Note that prior to v4.8.4, <code class="docutils literal notranslate"><span class="pre">__cuda</span></code> versions would not be part of the constraints, so you would always
+get the latest one, regardless the supported CUDA version.</p>
+<p>If for some reason you want to install a specific version, you can use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">your</span><span class="o">-</span><span class="n">gpu</span><span class="o">-</span><span class="n">package</span> <span class="n">cudatoolkit</span><span class="o">=</span><span class="mf">10.1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing-the-packages">
+<h3>Testing the packages<a class="headerlink" href="#testing-the-packages" title="Permalink to this headline">¶</a></h3>
+<p>Since the CI machines do not feature a GPU, you won’t be able to test the built packages as part
+of the conda recipe. That does not mean you can’t test your package locally. To do so:</p>
+<ol class="arabic">
+<li><p>Enable the Azure artifacts for your feedstock (see <a class="reference internal" href="conda_forge_yml.html#azure-config"><span class="std std-ref">here</span></a>).</p></li>
+<li><p>Include the test files and requirements in the recipe
+<a class="reference external" href="https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/meta.yaml#L51-L61">like this</a>.</p></li>
+<li><p>Provide the test instructions. Take into account that the GPU tests will fail in the CI run,
+so you need to ignore them to get the package built and uploaded as an artifact.
+<a class="reference external" href="https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/run_test.py">Example</a>.</p></li>
+<li><p>Once you have downloaded the artifacts, you will be able to run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">build</span> <span class="o">--</span><span class="n">test</span> <span class="o">&lt;</span><span class="n">pkg</span> <span class="n">file</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="common-problems-and-known-issues">
+<h3>Common problems and known issues<a class="headerlink" href="#common-problems-and-known-issues" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="nvcuda-dll-cannot-be-found-on-windows">
+<h4><code class="docutils literal notranslate"><span class="pre">nvcuda.dll</span></code> cannot be found on Windows<a class="headerlink" href="#nvcuda-dll-cannot-be-found-on-windows" title="Permalink to this headline">¶</a></h4>
+<p>The <a class="reference external" href="https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat">scripts</a>
+used to install the CUDA Toolkit on Windows cannot provide <code class="docutils literal notranslate"><span class="pre">nvcuda.dll</span></code>
+as part of the installation because no GPU is physically present in the CI machines.
+As a result, you might get linking errors in the postprocessing steps of <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">build</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>WARNING (arrow-cpp,Library/bin/arrow_cuda.dll): $RPATH/nvcuda.dll not found in packages,
+sysroot(s) nor the missing_dso_whitelist.
+
+.. is this binary repackaging?
+</pre></div>
+</div>
+<p>For now, you will have to add <code class="docutils literal notranslate"><span class="pre">nvcuda.dll</span></code> to the <code class="docutils literal notranslate"><span class="pre">missing_dso_whitelist</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">build</span><span class="p">:</span>
+  <span class="o">...</span>
+  <span class="n">missing_dso_whitelist</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s2">&quot;*/nvcuda.dll&quot;</span>   <span class="c1"># [win]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="adding-support-for-a-new-cuda-version">
+<h3>Adding support for a new CUDA version<a class="headerlink" href="#adding-support-for-a-new-cuda-version" title="Permalink to this headline">¶</a></h3>
+<p>Providing a new CUDA version involves five repositores:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/conda-forge/cudatoolkit-feedstock">cudatoolkit-feedstock</a></p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/nvcc-feedstock">nvcc-feedstock</a></p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge-pinning-feedstock</a></p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/docker-images">docker-images</a> (Linux only)</p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/conda-forge-ci-setup-feedstock">conda-forge-ci-setup-feedstock</a> (Windows only)</p></li>
+</ul>
+<p>The steps involved are, roughly:</p>
+<ol class="arabic simple">
+<li><p>Add the <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code> packages in <code class="docutils literal notranslate"><span class="pre">cudatoolkit-feedstock</span></code>.</p></li>
+<li><p>Submit the version migrator to <code class="docutils literal notranslate"><span class="pre">conda-forge-pinning-feedstock</span></code>.
+This will stay open during the following steps.</p></li>
+<li><p>For Linux, add the corresponding Docker images at <code class="docutils literal notranslate"><span class="pre">docker-images</span></code>.
+Copy the migration file manually to <code class="docutils literal notranslate"><span class="pre">.ci_support/migrations</span></code>.
+This copy should not specify a timestamp. Comment it out and rerender.</p></li>
+<li><p>For Windows, add the installer URLs and hashes to the <code class="docutils literal notranslate"><span class="pre">conda-forge-ci-setup</span></code>
+<a class="reference external" href="https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat">script</a>.
+The migration file must also be manually copied here. Rerender.</p></li>
+<li><p>Create the new <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> packages for the new version. Again, manual
+migration must be added. Rerender.</p></li>
+<li><p>When everything else has been merged and testing has taken place,
+consider merging the PR opened at step 2 now so it can apply to all the downstream feedstocks.</p></li>
+</ol>
+</div>
+</div>
 </div>
 
 
@@ -1074,6 +1187,15 @@ version. If this changes in the future, then this extra key may not be needed.</
 <li class="toctree-l3"><a class="reference internal" href="#requiring-newer-macos-sdks">Requiring newer macOS SDKs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pypy-builds">PyPy builds</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-centos-7">Using CentOS 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cuda-builds">CUDA builds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#testing-the-packages">Testing the packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-problems-and-known-issues">Common problems and known issues</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#nvcuda-dll-cannot-be-found-on-windows"><code class="docutils literal notranslate"><span class="pre">nvcuda.dll</span></code> cannot be found on Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-support-for-a-new-cuda-version">Adding support for a new CUDA version</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
@@ -1147,7 +1269,7 @@ version. If this changes in the future, then this extra key may not be needed.</
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.01.04 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.01.08 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>

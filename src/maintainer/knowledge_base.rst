@@ -1136,3 +1136,124 @@ key with ``docker_image``. Also ``cdt_name`` ensures the CDTs match the CentOS
 version. If this changes in the future, then this extra key may not be needed.
 
 Finally, note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 7.
+
+.. _cuda:
+
+CUDA builds
+===========
+
+Although the provisioned CI machines do not feature a GPU, Conda-Forge does provide mechanisms
+to build CUDA-enabled packages. These mechanisms involve several packages:
+
+* ``cudatoolkit``: The runtime libraries for the CUDA toolkit. This is what end-users will end
+  up installing next to your package.
+
+* ``nvcc``: Nvidia's EULA does not allow the redistribution of compilers and drivers. Instead, we
+  provide a wrapper package that locates the CUDA installation in the system. The main role of this
+  package is to set some environment variables (``CUDA_HOME``, ``CUDA_PATH``, ``CFLAGS`` and others),
+  as well as wrapping the real ``nvcc`` executable to set some extra command line arguments.
+
+In practice, to enable CUDA on your package, add ``{{ compiler('cuda') }}`` to the ``build``
+section of your requirements and rerender. The matching ``cudatoolkit`` will be added to the ``run``
+requirements automatically.
+
+On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CUDA correctly. For example::
+
+  mkdir build && cd build
+  cmake ${CMAKE_ARGS} ${SRC_DIR}
+  make
+
+
+.. note::
+
+  **How is CUDA provided at the system level?**
+
+  * On Linux, Nvidia provides official Docker images, which we then
+    `adapt <https://github.com/conda-forge/docker-images>`_ to Conda-Forge's needs.
+
+  * On Windows, the compilers need to be installed for every CI run. This is done through the
+    `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`_ scripts.
+    Do note that the Nvidia executable won't install the drivers because no GPU is present in the machine.
+
+  **How is cudatoolkit selected at install time?**
+
+  Conda exposes the maximum CUDA version supported by the installed Nvidia drivers through a virtual package
+  named ``__cuda``. By default, ``conda`` will install the highest version available
+  for the packages involved. To override this behaviour, you can define a ``CONDA_OVERRIDE_CUDA`` environment
+  variable. More details in the
+  `Conda docs <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html#overriding-detected-packages>`_.
+
+  Note that prior to v4.8.4, ``__cuda`` versions would not be part of the constraints, so you would always
+  get the latest one, regardless the supported CUDA version.
+
+  If for some reason you want to install a specific version, you can use::
+
+    conda install your-gpu-package cudatoolkit=10.1
+
+Testing the packages
+--------------------
+
+Since the CI machines do not feature a GPU, you won't be able to test the built packages as part
+of the conda recipe. That does not mean you can't test your package locally. To do so:
+
+1. Enable the Azure artifacts for your feedstock (see :ref:`here <azure-config>`).
+2. Include the test files and requirements in the recipe
+   `like this <https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/meta.yaml#L51-L61>`_.
+3. Provide the test instructions. Take into account that the GPU tests will fail in the CI run,
+   so you need to ignore them to get the package built and uploaded as an artifact.
+   `Example <https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/run_test.py>`_.
+4. Once you have downloaded the artifacts, you will be able to run::
+
+    conda build --test <pkg file>.tar.bz2
+
+
+Common problems and known issues
+--------------------------------
+
+``nvcuda.dll`` cannot be found on Windows
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The `scripts <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat>`_
+used to install the CUDA Toolkit on Windows cannot provide ``nvcuda.dll``
+as part of the installation because no GPU is physically present in the CI machines.
+As a result, you might get linking errors in the postprocessing steps of ``conda build``::
+
+  WARNING (arrow-cpp,Library/bin/arrow_cuda.dll): $RPATH/nvcuda.dll not found in packages,
+  sysroot(s) nor the missing_dso_whitelist.
+
+  .. is this binary repackaging?
+
+For now, you will have to add ``nvcuda.dll`` to the ``missing_dso_whitelist``::
+
+  build:
+    ...
+    missing_dso_whitelist:
+      - "*/nvcuda.dll"   # [win]
+
+
+Adding support for a new CUDA version
+-------------------------------------
+
+Providing a new CUDA version involves five repositores:
+
+* `cudatoolkit-feedstock <https://github.com/conda-forge/cudatoolkit-feedstock>`_
+* `nvcc-feedstock <https://github.com/conda-forge/nvcc-feedstock>`_
+* `conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_
+* `docker-images <https://github.com/conda-forge/docker-images>`_ (Linux only)
+* `conda-forge-ci-setup-feedstock <https://github.com/conda-forge/conda-forge-ci-setup-feedstock>`_ (Windows only)
+
+The steps involved are, roughly:
+
+1. Add the ``cudatoolkit`` packages in ``cudatoolkit-feedstock``.
+2. Submit the version migrator to ``conda-forge-pinning-feedstock``.
+   This will stay open during the following steps.
+3. For Linux, add the corresponding Docker images at ``docker-images``.
+   Copy the migration file manually to ``.ci_support/migrations``.
+   This copy should not specify a timestamp. Comment it out and rerender.
+4. For Windows, add the installer URLs and hashes to the ``conda-forge-ci-setup``
+   `script <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat>`_.
+   The migration file must also be manually copied here. Rerender.
+5. Create the new ``nvcc`` packages for the new version. Again, manual
+   migration must be added. Rerender.
+6. When everything else has been merged and testing has taken place,
+   consider merging the PR opened at step 2 now so it can apply to all the downstream feedstocks.
