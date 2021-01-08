@@ -1142,7 +1142,7 @@ Finally, note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 
 CUDA builds
 ===========
 
-Although the provisioned CI machines do not feature a GPU, Conda Forge does provide mechanisms
+Although the provisioned CI machines do not feature a GPU, Conda-Forge does provide mechanisms
 to build CUDA-enabled packages. These mechanisms involve several packages:
 
 * ``cudatoolkit``: The runtime libraries for the CUDA toolkit. This is what end-users will end
@@ -1162,7 +1162,7 @@ requirements automatically.
   **How is CUDA provided at the system level?**
 
   * On Linux, Nvidia provides official Docker images, which we then
-    `adapt <https://github.com/conda-forge/docker-images>`_ to the Conda Forge needs.
+    `adapt <https://github.com/conda-forge/docker-images>`_ to Conda-Forge's needs.
 
   * On Windows, the compilers need to be installed for every CI run. This is done through the
     `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`_ scripts.
