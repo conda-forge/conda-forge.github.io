@@ -1157,6 +1157,13 @@ In practice, to enable CUDA on your package, add ``{{ compiler('cuda') }}`` to t
 section of your requirements and rerender. The matching ``cudatoolkit`` will be added to the ``run``
 requirements automatically.
 
+On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CUDA correctly. For example::
+
+  mkdir build && cd build
+  cmake ${CMAKE_ARGS} ${SRC_DIR}
+  make
+
+
 .. note::
 
   **How is CUDA provided at the system level?**
