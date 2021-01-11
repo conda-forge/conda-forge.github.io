@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge base &#8212; conda-forge 2021.01.08 documentation</title>
+    <title>Knowledge base &#8212; conda-forge 2021.01.11 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.01.08 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.01.11 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -1114,6 +1114,95 @@ consider merging the PR opened at step 2 now so it can apply to all the downstre
 </ol>
 </div>
 </div>
+<div class="section" id="pre-release-builds">
+<h2>Pre-release builds<a class="headerlink" href="#pre-release-builds" title="Permalink to this headline">¶</a></h2>
+<p>Recipe maintainers can make pre-release builds available on
+conda-forge by adding them to the <code class="docutils literal notranslate"><span class="pre">dev</span></code> or <code class="docutils literal notranslate"><span class="pre">rc</span></code> label.</p>
+<p>The semantics of these labels should generally follow the
+<a class="reference external" href="https://docs.python.org/devguide/devcycle.html#stages">guidelines</a> that Python
+itself follows.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rc</span></code>: <a class="reference external" href="https://docs.python.org/devguide/devcycle.html#beta">Beta</a> and <a class="reference external" href="https://docs.python.org/devguide/devcycle.html#release-candidate-rc">Release
+Candidate</a>
+(RC). No new features. Bugfix only.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dev</span></code>: <a class="reference external" href="https://docs.python.org/devguide/devcycle.html#pre-alpha">Pre-Alpha</a>
+and <a class="reference external" href="https://docs.python.org/devguide/devcycle.html#alpha">Alpha</a>. These are
+still packages that could see substantial changes
+between the dev version and the final release.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> labels aren’t used. Given the light usage of labels on the conda-forge
+channel thus far, it seems rather unnecessary to introduce many labels.
+<code class="docutils literal notranslate"><span class="pre">dev</span></code> and <code class="docutils literal notranslate"><span class="pre">rc</span></code> seem like a nice compromise.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Certain packages (for example <a class="reference external" href="https://pypi.org/project/black/#history">black</a>) follow
+a release cycle in which they have never had a non-beta/alpha release.  In these cases
+the conda packages for those do <em>not</em> need to be published to a prerelease label.</p>
+</div>
+<div class="section" id="creating-a-pre-release-build">
+<h3>Creating a pre-release build<a class="headerlink" href="#creating-a-pre-release-build" title="Permalink to this headline">¶</a></h3>
+<p>To create a <code class="docutils literal notranslate"><span class="pre">dev</span></code> or <code class="docutils literal notranslate"><span class="pre">rc</span></code> package, a PR can be issued into the <code class="docutils literal notranslate"><span class="pre">dev</span></code> or <code class="docutils literal notranslate"><span class="pre">rc</span></code> branch of the
+feedstock.
+This branch must change the <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code> file to point to the <code class="docutils literal notranslate"><span class="pre">&lt;package_name&gt;_dev</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;package_name&gt;_rc</span></code> label.</p>
+<p>For example, matplotlib rc releases would include:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channel_targets</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge matplotlib_rc</span>
+</pre></div>
+</div>
+<p>If a pre-release build of B depends on a pre-release build of A, then A should have,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channel_targets</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge A_rc</span>
+</pre></div>
+</div>
+<p>while B should have,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channel_sources</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge/label/A_rc,conda-forge,defaults</span>
+<span class="nt">channel_targets</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge B_rc</span>
+</pre></div>
+</div>
+<p>in <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code> in their respective feedstocks.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A rerender needs to happen for these changes to reflect in CI files.</p>
+</div>
+</div>
+<div class="section" id="installing-a-pre-release-build">
+<h3>Installing a pre-release build<a class="headerlink" href="#installing-a-pre-release-build" title="Permalink to this headline">¶</a></h3>
+<p>Use the following command, but replace <code class="docutils literal notranslate"><span class="pre">PACKAGE_NAME</span></code> with the package you want
+to install and replace <code class="docutils literal notranslate"><span class="pre">LABEL</span></code> with <code class="docutils literal notranslate"><span class="pre">rc</span></code> or <code class="docutils literal notranslate"><span class="pre">dev</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">conda install -c conda-forge/label/PACKAGE_NAME_LABEL -c conda-forge PACKAGE_NAME</span>
+</pre></div>
+</div>
+<p>For example, let’s install matplotlib from the <code class="docutils literal notranslate"><span class="pre">rc</span></code> label:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">conda install -c conda-forge/label/matplotlib_rc -c conda-forge matplotlib</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pre-release-version-sorting">
+<h3>Pre-release version sorting<a class="headerlink" href="#pre-release-version-sorting" title="Permalink to this headline">¶</a></h3>
+<p>If you wish to add numbers to your <code class="docutils literal notranslate"><span class="pre">dev</span></code> or <code class="docutils literal notranslate"><span class="pre">rc</span></code> build, you should follow the
+<a class="reference external" href="http://conda.pydata.org/docs/spec.html#build-version-spec">guidelines</a> put
+forth by Continuum regarding version sorting in <code class="docutils literal notranslate"><span class="pre">conda</span></code>. Also see the <a class="reference external" href="https://github.com/conda/conda/blob/4.2.13/conda/version.py#L93-L119">source
+code for conda
+4.2.13</a>.
+The tl;dr here is that conda sorts as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span> <span class="mf">1.0</span>
+<span class="o">&lt;</span> <span class="mf">1.1</span><span class="n">dev1</span>    <span class="c1"># special case &#39;dev&#39;</span>
+<span class="o">&lt;</span> <span class="mf">1.1</span><span class="o">.</span><span class="mi">0</span><span class="n">dev1</span>  <span class="c1"># special case &#39;dev&#39;</span>
+<span class="o">==</span> <span class="mf">1.1</span><span class="o">.</span><span class="n">dev1</span>   <span class="c1"># 0 is inserted before string</span>
+<span class="o">&lt;</span> <span class="mf">1.1</span><span class="o">.</span><span class="mi">0</span><span class="n">rc1</span>
+<span class="o">&lt;</span> <span class="mf">1.1</span><span class="o">.</span><span class="mi">0</span>
+</pre></div>
+</div>
+<p>So make sure that you <strong>tag</strong> your package in such a way that the package name
+that conda-build spits out will sort the package uploaded with an <code class="docutils literal notranslate"><span class="pre">rc</span></code> label
+higher than the package uploaded with the <code class="docutils literal notranslate"><span class="pre">dev</span></code> label.</p>
+</div>
+</div>
 </div>
 
 
@@ -1196,6 +1285,12 @@ consider merging the PR opened at step 2 now so it can apply to all the downstre
 <li class="toctree-l4"><a class="reference internal" href="#adding-support-for-a-new-cuda-version">Adding support for a new CUDA version</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-release-builds">Pre-release builds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-pre-release-build">Creating a pre-release build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-a-pre-release-build">Installing a pre-release build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pre-release-version-sorting">Pre-release version sorting</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
@@ -1269,7 +1364,7 @@ consider merging the PR opened at step 2 now so it can apply to all the downstre
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.01.08 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.01.11 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
