@@ -1257,3 +1257,112 @@ The steps involved are, roughly:
    migration must be added. Rerender.
 6. When everything else has been merged and testing has taken place,
    consider merging the PR opened at step 2 now so it can apply to all the downstream feedstocks.
+
+
+Pre-release builds
+==================
+
+Recipe maintainers can make pre-release builds available on
+conda-forge by adding them to the ``dev`` or ``rc`` label.
+
+The semantics of these labels should generally follow the
+`guidelines <https://docs.python.org/devguide/devcycle.html#stages>`_ that Python
+itself follows.
+
+- ``rc``: `Beta <https://docs.python.org/devguide/devcycle.html#beta>`_ and `Release
+  Candidate <https://docs.python.org/devguide/devcycle.html#release-candidate-rc>`_
+  (RC). No new features. Bugfix only.
+
+- ``dev``: `Pre-Alpha <https://docs.python.org/devguide/devcycle.html#pre-alpha>`_
+  and `Alpha <https://docs.python.org/devguide/devcycle.html#alpha>`_. These are
+  still packages that could see substantial changes
+  between the dev version and the final release.
+
+
+.. note::
+
+  ``alpha`` and ``beta`` labels aren't used. Given the light usage of labels on the conda-forge
+  channel thus far, it seems rather unnecessary to introduce many labels.
+  ``dev`` and ``rc`` seem like a nice compromise.
+
+.. note::
+
+  Certain packages (for example `black <https://pypi.org/project/black/#history>`_) follow
+  a release cycle in which they have never had a non-beta/alpha release.  In these cases
+  the conda packages for those do *not* need to be published to a prerelease label.
+
+Creating a pre-release build
+----------------------------
+
+To create a ``dev`` or ``rc`` package, a PR can be issued into the ``dev`` or ``rc`` branch of the
+feedstock.
+This branch must change the ``recipe/conda_build_config.yaml`` file to point to the ``<package_name>_dev`` or ``<package_name>_rc`` label.
+
+For example, matplotlib rc releases would include:
+
+.. code-block:: yaml
+
+   channel_targets:
+     - conda-forge matplotlib_rc
+
+If a pre-release build of B depends on a pre-release build of A, then A should have,
+
+.. code-block:: yaml
+
+   channel_targets:
+     - conda-forge A_rc
+
+while B should have,
+
+.. code-block:: yaml
+
+   channel_sources:
+     - conda-forge/label/A_rc,conda-forge,defaults
+   channel_targets:
+     - conda-forge B_rc
+
+in ``recipe/conda_build_config.yaml`` in their respective feedstocks.
+
+.. note::
+
+  A rerender needs to happen for these changes to reflect in CI files.
+
+Installing a pre-release build
+------------------------------
+
+Use the following command, but replace ``PACKAGE_NAME`` with the package you want
+to install and replace ``LABEL`` with ``rc`` or ``dev``:
+
+.. code-block:: yaml
+
+   conda install -c conda-forge/label/PACKAGE_NAME_LABEL -c conda-forge PACKAGE_NAME
+
+For example, let's install matplotlib from the ``rc`` label:
+
+.. code-block:: yaml
+
+   conda install -c conda-forge/label/matplotlib_rc -c conda-forge matplotlib
+
+Pre-release version sorting
+---------------------------
+
+If you wish to add numbers to your ``dev`` or ``rc`` build, you should follow the
+`guidelines <http://conda.pydata.org/docs/spec.html#build-version-spec>`_ put
+forth by Continuum regarding version sorting in ``conda``. Also see the `source
+code for conda
+4.2.13 <https://github.com/conda/conda/blob/4.2.13/conda/version.py#L93-L119>`_.
+The tl;dr here is that conda sorts as follows:
+
+.. code-block::
+
+   < 1.0
+   < 1.1dev1    # special case 'dev'
+   < 1.1.0dev1  # special case 'dev'
+   == 1.1.dev1   # 0 is inserted before string
+   < 1.1.0rc1
+   < 1.1.0
+
+
+So make sure that you **tag** your package in such a way that the package name
+that conda-build spits out will sort the package uploaded with an ``rc`` label
+higher than the package uploaded with the ``dev`` label.
