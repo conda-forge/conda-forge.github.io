@@ -1048,27 +1048,16 @@ the requirement should be changed from ``run`` to ``run_constrained``. Note that
 PyPy builds
 ===========
 
-To use the PyPy builds you can do the following,
+To use the PyPy 3.6 or 3.7 builds you can do the following,
 
 .. code-block:: bash
 
-   conda install python=3.6.*=*_pypy
-
-or,
-
-.. code-block:: bash
-
-   conda install pypy python=3.6
-
-or,
-
-.. code-block:: bash
-
-   conda install pypy
+   conda create -n pypy36  pypy python=3.6
+   conda create -n pypy37  pypy python=3.7
 
 .. note::
 
-   As of March 8, if you are using defaults as a low priority channel,
+   As of March 8 2020, if you are using defaults as a low priority channel,
    then you need to use strict channel priority as the metadata in defaults
    has not been patched yet which allows cpython extension packages to be
    installed alongside pypy.

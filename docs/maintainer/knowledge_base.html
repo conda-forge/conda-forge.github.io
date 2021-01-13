@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge base &#8212; conda-forge 2021.01.11 documentation</title>
+    <title>Knowledge base &#8212; conda-forge 2021.01.13 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.01.11 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.01.13 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -932,21 +932,14 @@ the requirement should be changed from <code class="docutils literal notranslate
 </div>
 <div class="section" id="pypy-builds">
 <h2>PyPy builds<a class="headerlink" href="#pypy-builds" title="Permalink to this headline">¶</a></h2>
-<p>To use the PyPy builds you can do the following,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.6.*<span class="o">=</span>*_pypy
-</pre></div>
-</div>
-<p>or,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install pypy <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.6
-</pre></div>
-</div>
-<p>or,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install pypy
+<p>To use the PyPy 3.6 or 3.7 builds you can do the following,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n pypy36  pypy <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.6
+conda create -n pypy37  pypy <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>As of March 8, if you are using defaults as a low priority channel,
+<p>As of March 8 2020, if you are using defaults as a low priority channel,
 then you need to use strict channel priority as the metadata in defaults
 has not been patched yet which allows cpython extension packages to be
 installed alongside pypy.</p>
@@ -1364,7 +1357,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.01.11 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.01.13 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
