@@ -1053,7 +1053,7 @@ To use the PyPy 3.6 or 3.7 builds you can do the following,
 .. code-block:: bash
 
    conda create -n pypy36  pypy python=3.6
-   conda create -n pypy37  pypy3.7 python=3.7
+   conda create -n pypy37  pypy python=3.7
 
 .. note::
 
