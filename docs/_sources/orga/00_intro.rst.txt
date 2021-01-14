@@ -7,4 +7,5 @@ Organisation Documentation
   subteams
   joining-the-team
   minutes/00_intro
+  cfep-index
   getting-in-touch
