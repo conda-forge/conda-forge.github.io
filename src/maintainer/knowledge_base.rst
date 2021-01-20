@@ -605,7 +605,7 @@ This matches what is done in `hdf5 <https://github.com/conda-forge/hdf5-feedstoc
 
   # meta.yaml
   {% set name = 'pkg' %}
-  {% set build = 1000 %}
+  {% set build = 0 %}
 
   # ensure mpi is defined (needed for conda-smithy recipe-lint)
   {% set mpi = mpi or 'nompi' %}
