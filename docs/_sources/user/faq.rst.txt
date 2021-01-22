@@ -60,3 +60,15 @@ FAQ
   Nevertheless, sometimes Travis CI ignores this for whatever reason (probably a bug somewhere).
   In such a case, please disregard failing builds.
   Note that ``travis-ci.org`` builds are soon being phased out and replaced by ``travis-ci.com``.
+
+.. _faq_compiler_metapkg:
+
+:ref:`(Q) <faq_compiler_metapkg>` **How can I install a C/C++ compiler in my environment?**
+
+  You can use our convenient meta-packages ``c-compiler`` and ``cxx-compiler`` to install a compiler stack that fits your platform. Error messages such as 
+  
+  .. code-block::
+
+    x86_64-apple-darwin13.4.0-clang: No such file or directory
+    
+  are a telltale sign that you are lacking compilers.
