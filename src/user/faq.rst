@@ -72,3 +72,9 @@ FAQ
     x86_64-apple-darwin13.4.0-clang: No such file or directory
     
   are a telltale sign that you are lacking compilers.
+
+:ref:`(Q) <faq_cuda_compiler_header>` **How can I compile CUDA (host or device) codes in my environment?**
+
+  Unfortunately, this is not possible with Conda-Forge's current infrastructure (``nvcc``, ``cudatoolkit``, etc) if there is no local CUDA Toolkit installation. In particular, the ``nvcc`` package provided on Conda-Forge is a *metapackage* wrapping an actual ``nvcc`` compiler for our CI to use; it does not contain the full ``nvcc`` compiler toolchain. One of the reasons is that CUDA headers like ``cuda.h``, ``cuda_runtime.h``, etc, are not redistributable according to NVIDIA's EULA, which are needed at compile time. Likewise, the ``cudatoolkit`` package only contains CUDA runtime libraries and not the compiler toolchain.
+  
+  If you need to compile CUDA codes, even if they involve only CUDA host APIs, you will still need a valid CUDA Toolkit installed locally and use it.
