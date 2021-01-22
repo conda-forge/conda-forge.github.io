@@ -1113,6 +1113,8 @@ of your recipe and rerendering.
 
 .. code-block:: yaml
 
+   cudnn:                                    # [linux64]
+     - undefined                             # [linux64]
    cuda_compiler_version:                    # [linux64]
      - None                                  # [linux64]
    docker_image:                             # [linux64]
