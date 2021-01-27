@@ -147,7 +147,7 @@ Entering this command in the title of an issue will instruct the admin bot to
 add Python 2.7 back to a feedstock. Note that this command will remove any other
 Python versions and any ``win``, ``aarch64`` or ``ppc64le`` builds. Thus you should
 merge the PR into a separate branch on your feedstock if you want to keep these
-other builds. **Python 2.7 support is deprecated and further any feedstocks on Python 2.7 will 
+other builds. **Python 2.7 support is deprecated and any feedstocks on Python 2.7 will 
 not be properly handled by our bots.**
 
 
