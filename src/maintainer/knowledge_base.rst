@@ -1274,7 +1274,7 @@ and all its dependencies:
 5. The feedstock maintainers (who very likely *do not* have an M1) will work to make
    any changes required to pass continuous intgration. If you have insight into
    the particular package, **please** chime in, but most of all **be patient and polite**.
-6. Once the new builds are available from ``anaconda.org`, please help the maintainers
+6. Once the new builds are available from ``anaconda.org``, please help the maintainers
    by testing the packages, and reporting back with any problems... but also successes!
 
 
