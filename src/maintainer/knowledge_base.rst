@@ -1250,6 +1250,34 @@ The steps involved are, roughly:
    consider merging the PR opened at step 2 now so it can apply to all the downstream feedstocks.
 
 
+.. _osxarm64:
+
+Apple Silicon builds
+====================
+
+The new Apple M1 processor is the first Apple Silicon supported by conda-forge
+`osx-arm64 <https://github.com/conda-forge/conda-forge.github.io/issues/1126>`_ builds.
+For new builds to be available, via cross-compilation, a migration is required for
+the package and its dependencies. To request a migration for a particular package
+and all its dependencies:
+
+1. Check the feedstock in question to see if there is already an issue or pull request.
+   Opening an issue here is fine, as it might take a couple iterations of the below,
+   especially if many dependencies need to be built as well.
+2. If nothing is under way, look at the current `conda-forge-pinning <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt>`_.
+3. If the package is not listed there, make a PR, adding the package
+   name to the end of ``osx_arm64.txt``. The migration bot should start making automated
+   pull requests to the repo and its dependencies.
+4. Within a few hours, the `status page <https://conda-forge.org/status/#armosxaddition>`_
+   should reflect the progress of the package in question, and help you keep track
+   of progress. Help out if you can!
+5. The feedstock maintainers (who very likely *do not* have an M1) will work to make
+   any changes required to pass continuous intgration. If you have insight into
+   the particular package, **please** chime in, but most of all **be patient and polite**.
+6. Once the new builds are available from ``anaconda.org`, please help the maintainers
+   by testing the packages, and reporting back with any problems... but also successes!
+
+
 Pre-release builds
 ==================
 
