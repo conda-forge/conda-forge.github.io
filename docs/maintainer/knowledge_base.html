@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge base &#8212; conda-forge 2021.01.27 documentation</title>
+    <title>Knowledge base &#8212; conda-forge 2021.02.08 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.01.27 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.02.08 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -1109,6 +1109,31 @@ consider merging the PR opened at step 2 now so it can apply to all the downstre
 </ol>
 </div>
 </div>
+<div class="section" id="apple-silicon-builds">
+<span id="osxarm64"></span><h2>Apple Silicon builds<a class="headerlink" href="#apple-silicon-builds" title="Permalink to this headline">¶</a></h2>
+<p>The new Apple M1 processor is the first Apple Silicon supported by conda-forge
+<a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues/1126">osx-arm64</a> builds.
+For new builds to be available, via cross-compilation, a migration is required for
+the package and its dependencies. To request a migration for a particular package
+and all its dependencies:</p>
+<ol class="arabic simple">
+<li><p>Check the feedstock in question to see if there is already an issue or pull request.
+Opening an issue here is fine, as it might take a couple iterations of the below,
+especially if many dependencies need to be built as well.</p></li>
+<li><p>If nothing is under way, look at the current <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt">conda-forge-pinning</a>.</p></li>
+<li><p>If the package is not listed there, make a PR, adding the package
+name to the end of <code class="docutils literal notranslate"><span class="pre">osx_arm64.txt</span></code>. The migration bot should start making automated
+pull requests to the repo and its dependencies.</p></li>
+<li><p>Within a few hours, the <a class="reference external" href="https://conda-forge.org/status/#armosxaddition">status page</a>
+should reflect the progress of the package in question, and help you keep track
+of progress. Help out if you can!</p></li>
+<li><p>The feedstock maintainers (who very likely <em>do not</em> have an M1) will work to make
+any changes required to pass continuous intgration. If you have insight into
+the particular package, <strong>please</strong> chime in, but most of all <strong>be patient and polite</strong>.</p></li>
+<li><p>Once the new builds are available from <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code>, please help the maintainers
+by testing the packages, and reporting back with any problems… but also successes!</p></li>
+</ol>
+</div>
 <div class="section" id="pre-release-builds">
 <h2>Pre-release builds<a class="headerlink" href="#pre-release-builds" title="Permalink to this headline">¶</a></h2>
 <p>Recipe maintainers can make pre-release builds available on
@@ -1280,6 +1305,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
 <li class="toctree-l4"><a class="reference internal" href="#adding-support-for-a-new-cuda-version">Adding support for a new CUDA version</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#apple-silicon-builds">Apple Silicon builds</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pre-release-builds">Pre-release builds</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#creating-a-pre-release-build">Creating a pre-release build</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#installing-a-pre-release-build">Installing a pre-release build</a></li>
@@ -1359,7 +1385,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.01.27 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.02.08 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
