@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge base &#8212; conda-forge 2021.02.08 documentation</title>
+    <title>Knowledge base &#8212; conda-forge 2021.02.15 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.02.08 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.02.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -405,27 +405,6 @@ for details.</p>
 </pre></div>
 </div>
 <p>to produce the build matrices.</p>
-<p>Current builds of both mpi providers have <cite>run_exports</cite> which is equivalent to adding:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">run</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_run_as_build(mpi</span><span class="p p-Indicator">,</span> <span class="nv">min_pin=&#39;x.x&#39;</span><span class="p p-Indicator">,</span> <span class="nv">max_pin=&#39;x.x&#39;)</span> <span class="p p-Indicator">}}</span>
-</pre></div>
-</div>
-<p>If you want to do the pinning yourself (i.e. not trust the mpi providers, or pin differently, add):</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># conda_build_config.yaml</span>
-<span class="nt">pin_run_as_build</span><span class="p">:</span>
-  <span class="nt">mpich</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">x.x</span>
-  <span class="nt">openmpi</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">x.x</span>
-</pre></div>
-</div>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># meta.yaml</span>
-<span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">mpi</span> <span class="p p-Indicator">}}</span>
-  <span class="nt">run</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">mpi</span> <span class="p p-Indicator">}}</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="including-a-no-mpi-build">
 <h4>Including a no-mpi build<a class="headerlink" href="#including-a-no-mpi-build" title="Permalink to this headline">¶</a></h4>
@@ -457,26 +436,11 @@ the <code class="docutils literal notranslate"><span class="pre">mpi</span></cod
 </pre></div>
 </div>
 <p>This doesn’t extend to <code class="docutils literal notranslate"><span class="pre">nompi</span></code>, because there is no <code class="docutils literal notranslate"><span class="pre">nompi</span></code> variant of the mpi metapackage. And there probably
-shouldn’t be, because some packages built with mpi doesn’t preclude other packages in the env that <em>may</em> have an mpi variant
+shouldn’t be, because some packages built with mpi don’t preclude other packages in the env that <em>may</em> have an mpi variant
 from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no
 parallel hdf5 yet. This works fine, though some features may not be available).</p>
-<p>Typically, if there is a preference it will be packaged with a nompi variant, where the serial build is
-preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.</p>
-<div class="admonition-outdated admonition">
-<p class="admonition-title">Outdated</p>
-<p>To de-prioritize a build in the solver, it can be given a special <code class="docutils literal notranslate"><span class="pre">track_features</span></code> field:</p>
-<ul class="simple">
-<li><p>All builds <em>other than</em> the priority build should have a <code class="docutils literal notranslate"><span class="pre">track_features</span></code> field</p></li>
-<li><p>Build strings can be used to allow downstream packages to make explicit dependencies.</p></li>
-<li><p>No package should actually <em>have</em> the tracked feature.</p></li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><strong>update</strong>: track_features deprioritization has too high priority in the solver, preventing a package from
-adopting a variant of a dependency after some builds have already been made. Instead, use a build number
-offset to apply the preference at a more appropriate level.</p>
-</div>
-</div>
+<p>Typically, if there is a preference it will be for the serial build, such that installers/requirers of the package
+only get the mpi build if explicitly requested. We use a higher build number for the <code class="docutils literal notranslate"><span class="pre">nompi</span></code> variant in this case.</p>
 <p>Here is an example build section:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">mpi</span> <span class="o">==</span> <span class="s1">&#39;nompi&#39;</span> <span class="o">%</span><span class="p">}</span>
 <span class="c1"># prioritize nompi variant via build number</span>
@@ -1385,7 +1349,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.02.08 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.02.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>

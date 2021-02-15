@@ -421,32 +421,6 @@ And rerender with:
 
 to produce the build matrices.
 
-Current builds of both mpi providers have `run_exports` which is equivalent to adding:
-
-.. code-block:: yaml
-
-  requirements:
-    run:
-      - {{ pin_run_as_build(mpi, min_pin='x.x', max_pin='x.x') }}
-
-If you want to do the pinning yourself (i.e. not trust the mpi providers, or pin differently, add):
-
-.. code-block:: yaml
-
-  # conda_build_config.yaml
-  pin_run_as_build:
-    mpich: x.x
-    openmpi: x.x
-
-.. code-block:: yaml
-
-  # meta.yaml
-  requirements:
-    host:
-      - {{ mpi }}
-    run:
-      - {{ mpi }}
-
 Including a no-mpi build
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -489,29 +463,12 @@ or
     conda install openmpi ptscotch
 
 This doesn't extend to ``nompi``, because there is no ``nompi`` variant of the mpi metapackage. And there probably
-shouldn't be, because some packages built with mpi doesn't preclude other packages in the env that *may* have an mpi variant
+shouldn't be, because some packages built with mpi don't preclude other packages in the env that *may* have an mpi variant
 from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no
 parallel hdf5 yet. This works fine, though some features may not be available).
 
-Typically, if there is a preference it will be packaged with a nompi variant, where the serial build is
-preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.
-
-
-.. admonition:: Outdated
-
-  To de-prioritize a build in the solver, it can be given a special ``track_features`` field:
-
-  - All builds *other than* the priority build should have a ``track_features`` field
-  - Build strings can be used to allow downstream packages to make explicit dependencies.
-  - No package should actually *have* the tracked feature.
-
-
-  .. note::
-
-    **update**: track_features deprioritization has too high priority in the solver, preventing a package from
-    adopting a variant of a dependency after some builds have already been made. Instead, use a build number
-    offset to apply the preference at a more appropriate level.
-
+Typically, if there is a preference it will be for the serial build, such that installers/requirers of the package 
+only get the mpi build if explicitly requested. We use a higher build number for the ``nompi`` variant in this case.
 
 Here is an example build section:
 
