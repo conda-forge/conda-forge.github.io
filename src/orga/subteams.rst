@@ -123,13 +123,15 @@ Packages and tools that fall under the purview of the bot subteam include:
 Members
 -------
 - Matthew R. Becker <becker.mr@gmail.com>
+- Chris Burr <christopher.burr@cern.ch>
 - Sophia Castellarin <scastellarin@anaconda.com>
+- Vinicius D. Cerutti <vinicius.douglas.cerutti9@gmail.com>
 - Filipe Fernandes <ocefpaf@gmail.com>
+- Isuru Fernando <isuruf@gmail.com>
 - Marius van Niekerk <marius.v.niekerk@gmail.com>
 - Michael Sarahan <msarahan@gmail.com>
 - Anthony Scopatz <scopatz@gmail.com>
 - Christopher J. "CJ" Wright <cjwright4242@gmail.com>
-- Chris Burr <christopher.burr@cern.ch>
 
 
 ARM Sub-Team
