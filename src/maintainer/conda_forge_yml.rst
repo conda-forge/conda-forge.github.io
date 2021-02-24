@@ -252,7 +252,7 @@ Currently only:
 os_version
 ----------
 This key is used to set the OS versions for ``linux_*`` platforms. Valid entries map a linux platform and arch to either ``cos6``
-or ``cos7``. Currently ``cos6`` is the default. Here is an example that enables CentOS 7 on ``linux-64`` builds
+or ``cos7``. Currently ``cos6`` is the default for ``linux-64``. All other linux architectures use CentOS 7. Here is an example that enables CentOS 7 on ``linux-64`` builds
 
 .. code-block:: yaml
 
