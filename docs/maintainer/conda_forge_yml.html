@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2021.02.23 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2021.02.24 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.02.23 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.02.24 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -97,6 +97,7 @@ upload packages to anaconda.org, which can be useful for testing. For example:</
 <li><p>linux</p></li>
 <li><p>linux_aarch64</p></li>
 <li><p>linux_ppc64le</p></li>
+<li><p>os_version</p></li>
 <li><p>osx</p></li>
 <li><p>provider</p></li>
 <li><p>recipe_dir</p></li>
@@ -285,6 +286,15 @@ Currently only:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="os-version">
+<h3>os_version<a class="headerlink" href="#os-version" title="Permalink to this headline">¶</a></h3>
+<p>This key is used to set the OS versions for <code class="docutils literal notranslate"><span class="pre">linux_*</span></code> platforms. Valid entries map a linux platform and arch to either <code class="docutils literal notranslate"><span class="pre">cos6</span></code>
+or <code class="docutils literal notranslate"><span class="pre">cos7</span></code>. Currently <code class="docutils literal notranslate"><span class="pre">cos6</span></code> is the default for <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>. All other linux architectures use CentOS 7. Here is an example that enables CentOS 7 on <code class="docutils literal notranslate"><span class="pre">linux-64</span></code> builds</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">os_version</span><span class="p">:</span>
+  <span class="nt">linux_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cos7</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="osx">
 <h3>osx<a class="headerlink" href="#osx" title="Permalink to this headline">¶</a></h3>
 <p>The macOSX-specific configuration options. This is largely an internal setting.
@@ -448,6 +458,7 @@ Currently only:</p>
 <li class="toctree-l4"><a class="reference internal" href="#linux">linux</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#linux-aarch64">linux_aarch64</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#linux-ppc64le">linux_ppc64le</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#os-version">os_version</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#osx">osx</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#provider">provider</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#recipe-dir">recipe_dir</a></li>
@@ -534,7 +545,7 @@ Currently only:</p>
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.02.23 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.02.24 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
