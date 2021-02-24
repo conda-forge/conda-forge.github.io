@@ -36,6 +36,7 @@ Top-level fields
 * linux
 * linux_aarch64
 * linux_ppc64le
+* os_version
 * osx
 * provider
 * recipe_dir
@@ -247,6 +248,16 @@ Currently only:
 
     linux_ppc64le:
       enabled: False
+
+os_version
+----------
+This key is used to set the OS versions for ``linux_*`` platforms. Valid entries map a linux platform and arch to either ``cos6``
+or ``cos7``. Currently ``cos6`` is the default. Here is an example that enables CentOS 7 on ``linux-64`` builds
+
+.. code-block:: yaml
+
+    os_version:
+      linux_64: cos7
 
 osx
 ---
