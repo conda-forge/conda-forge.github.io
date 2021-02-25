@@ -142,16 +142,14 @@ To call for a standard vote, here is a template PR comment:
 
      **Accelerated Quorum Rules**: For certain votes, we allow a lower quorum level.
      For these votes,
-     if the vote ends after at least a week and there are no "no" votes, a quorum
+     if the voting period is longer than a week and there are no "no" votes, a quorum
      of half of the size
      needed for a **standard quorum** above is accepatble. For example, for a vote
      requiring 50% with 18
      active core members, at least 5 people must vote "yes" and exactly 0 people
      must vote "no".
 
-     **Time-out Quorum Rules**: Because everyone is busy and it is difficult
-     sometimes to get quorum,
-     votes not achieving quorum will eventually time out on their set end date.
+     **Time-out Quorum Rules**: Votes not achieving quorum will eventually time out on their set end date.
      When this happens,
      the current participation level is taken for what it is, and the percentage
      of affirmative votes is calculated from whatever the vote total is at that
