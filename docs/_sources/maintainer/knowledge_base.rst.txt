@@ -966,7 +966,7 @@ To use a new SDK, add the following in ``recipe/conda_build_config.yaml``
 
     # Please consult conda-forge/core before doing this
     MACOSX_SDK_VERSION:        # [osx and x86_64]
-      - 10.12                  # [osx and x86_64]
+      - "10.12"                # [osx and x86_64]
 
 Note that this should be done if the error you are getting says that a header is not
 found or a macro is not defined. This will make your package compile with a newer SDK
@@ -984,9 +984,9 @@ is available only for macOS x.x, then do the following in ``recipe/conda_build_c
 
     # Please consult conda-forge/core before doing this
     MACOSX_DEPLOYMENT_TARGET:  # [osx and x86_64]
-      - 10.12                  # [osx and x86_64]
+      - "10.12"                # [osx and x86_64]
     MACOSX_SDK_VERSION:        # [osx and x86_64]
-      - 10.12                  # [osx and x86_64]
+      - "10.12"                # [osx and x86_64]
 
 
 In ``recipe/meta.yaml``, add the following to ensure that the user's system is compatible.

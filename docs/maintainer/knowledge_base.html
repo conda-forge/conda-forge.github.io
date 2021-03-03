@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge base &#8212; conda-forge 2021.02.24 documentation</title>
+    <title>Knowledge base &#8212; conda-forge 2021.03.03 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.02.24 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.03.03 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -864,7 +864,7 @@ core team if this is something you think you need.</p>
 <p>To use a new SDK, add the following in <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Please consult conda-forge/core before doing this</span>
 <span class="nt">MACOSX_SDK_VERSION</span><span class="p">:</span>        <span class="c1"># [osx and x86_64]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">10.12</span>                  <span class="c1"># [osx and x86_64]</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;10.12&quot;</span>                <span class="c1"># [osx and x86_64]</span>
 </pre></div>
 </div>
 <p>Note that this should be done if the error you are getting says that a header is not
@@ -879,9 +879,9 @@ as described below.</p>
 is available only for macOS x.x, then do the following in <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code>,</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Please consult conda-forge/core before doing this</span>
 <span class="nt">MACOSX_DEPLOYMENT_TARGET</span><span class="p">:</span>  <span class="c1"># [osx and x86_64]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">10.12</span>                  <span class="c1"># [osx and x86_64]</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;10.12&quot;</span>                <span class="c1"># [osx and x86_64]</span>
 <span class="nt">MACOSX_SDK_VERSION</span><span class="p">:</span>        <span class="c1"># [osx and x86_64]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">10.12</span>                  <span class="c1"># [osx and x86_64]</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;10.12&quot;</span>                <span class="c1"># [osx and x86_64]</span>
 </pre></div>
 </div>
 <p>In <code class="docutils literal notranslate"><span class="pre">recipe/meta.yaml</span></code>, add the following to ensure that the user’s system is compatible.</p>
@@ -1340,7 +1340,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.02.24 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.03.03 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
