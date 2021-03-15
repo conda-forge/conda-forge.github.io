@@ -15,10 +15,10 @@ Below is a list of conda-forge enhancement proposals (CFEP):
 * `CFEP-05: Providing pre-release builds on the conda-forge anaconda channel <https://github.com/conda-forge/cfep/blob/master/cfep-05.md>`_ -- *Accepted*
 * `CFEP-07: Migration strategy to Anaconda compilers <https://github.com/conda-forge/cfep/blob/master/cfep-07.md>`_ -- *Proposed*
 * `CFEP-08: Packages which are "Too Big to Fail" <https://github.com/conda-forge/cfep/blob/master/cfep-08.md>`_ -- *Deferred*
-* `CFEP-09: Pinning Proposal System for Automatic Rebuilds <https://github.com/conda-forge/cfep/blob/master/cfep-09.md>`_ -- *Proposed*
+* `CFEP-09: Pinning Proposal System for Automatic Rebuilds <https://github.com/conda-forge/cfep/blob/master/cfep-09.md>`_ -- *Accepted*
 * `CFEP-11: Automated Closing of Excessively Old PRs on Staged Recipes <https://github.com/conda-forge/cfep/blob/master/cfep-11.md>`_ -- *Accepted*
 * `CFEP-13: Securing conda-forge Uploads to anaconda.org <https://github.com/conda-forge/cfep/blob/master/cfep-13.md>`_ -- *Accepted*
-* `CFEP-14: Security and Systems Subteam <https://github.com/conda-forge/cfep/blob/master/cfep-14.md>`_ -- *Draft*
+* `CFEP-14: Security and Systems Subteam <https://github.com/conda-forge/cfep/blob/master/cfep-14.md>`_ -- *Accepted*
 * `CFEP-15: Deprecate Python 2.7 and vs2008 <https://github.com/conda-forge/cfep/blob/master/cfep-15.md>`_ -- *Accepted*
 * `CFEP-16: Setting license and license_family field <https://github.com/conda-forge/cfep/blob/master/cfep-16.md>`_ -- *Proposed*
 * `CFEP-18: Packaging static libraries <https://github.com/conda-forge/cfep/blob/master/cfep-18.md>`_ -- *Accepted*

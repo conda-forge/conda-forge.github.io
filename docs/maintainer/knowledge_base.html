@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge base &#8212; conda-forge 2021.03.13 documentation</title>
+    <title>Knowledge base &#8212; conda-forge 2021.03.15 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.03.13 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.03.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -933,6 +933,47 @@ conda-build</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="using-setuptools-scm">
+<h2>Using setuptools_scm<a class="headerlink" href="#using-setuptools-scm" title="Permalink to this headline">¶</a></h2>
+<p>The Python module <a class="reference external" href="https://github.com/pypa/setuptools_scm">setuptools_scm</a>
+can be used to manage a package’s version automatically from metadata, such as git tags.
+The package’s version string is thus not specified anywhere in the package,
+but encoded in it at install-time.</p>
+<p>For conda-build this means that <code class="docutils literal notranslate"><span class="pre">setuptools_scm</span></code> must be included as a <code class="docutils literal notranslate"><span class="pre">host</span></code> dependency.
+Additionally, some attention because the metadata is often not available in the sources.
+There are two options for how to proceed:</p>
+<ul>
+<li><p>For Python package also available on PyPI:
+Use the PyPi tarball as a source, as it will have the metadata encoded
+(in such a way that <code class="docutils literal notranslate"><span class="pre">setuptools_scm</span></code> knows how to find it).</p></li>
+<li><p>Specify the environment variable <code class="docutils literal notranslate"><span class="pre">SETUPTOOLS_SCM_PRETEND_VERSION</span></code> with the version string.
+If specified this environment variable is the principle source for <code class="docutils literal notranslate"><span class="pre">setuptools_scm</span></code>.
+There are two ways how to do this:</p>
+<ul>
+<li><p>If you are using build scripts, in <code class="docutils literal notranslate"><span class="pre">build.sh</span></code> specify:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">SETUPTOOLS_SCM_PRETEND_VERSION</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PKG_VERSION</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>and in <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> specify:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span> <span class="nv">SETUPTOOLS_SCM_PRETEND_VERSION</span><span class="o">=</span>%PKG_VERSION%
+</pre></div>
+</div>
+<p>Whereby you use that <code class="docutils literal notranslate"><span class="pre">PKG_VERSION</span></code> has been set with the version string,
+see <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#env-vars">Environment variables</a>.</p>
+</li>
+<li><p>Otherwise, if you are directly building from <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>, use for example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+  <span class="c1"># [...]</span>
+  <span class="nt">script_env</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">SETUPTOOLS_SCM_PRETEND_VERSION={{version}}</span>
+  <span class="nt">script</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">-vv&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="using-centos-7">
 <span id="centos7"></span><h2>Using CentOS 7<a class="headerlink" href="#using-centos-7" title="Permalink to this headline">¶</a></h2>
 <p>To use the newer CentOS 7 <code class="docutils literal notranslate"><span class="pre">sysroot</span></code> with <code class="docutils literal notranslate"><span class="pre">glibc</span></code> <code class="docutils literal notranslate"><span class="pre">2.17</span></code> on <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>,
@@ -1250,6 +1291,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
 <li class="toctree-l3"><a class="reference internal" href="#build-matrices">Build matrices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#requiring-newer-macos-sdks">Requiring newer macOS SDKs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pypy-builds">PyPy builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-setuptools-scm">Using setuptools_scm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-centos-7">Using CentOS 7</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cuda-builds">CUDA builds</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#testing-the-packages">Testing the packages</a></li>
@@ -1340,7 +1382,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.03.13 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.03.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
