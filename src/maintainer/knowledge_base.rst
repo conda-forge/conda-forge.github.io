@@ -1090,10 +1090,9 @@ The are two options to proceed:
 
             build:
               # [...]
-              script:
-                - export SETUPTOOLS_SCM_PRETEND_VERSION="{{ version }}"  # [unix]
-                - set SETUPTOOLS_SCM_PRETEND_VERSION="{{ version }}"  # [win]
-                - "{{ PYTHON }} -m pip install . -vv"
+              script_env:
+                - SETUPTOOLS_SCM_PRETEND_VERSION={{version}}
+              script: "{{ PYTHON }} -m pip install . -vv"
 
 .. _centos7:
 
