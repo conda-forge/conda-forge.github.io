@@ -467,7 +467,7 @@ shouldn't be, because some packages built with mpi don't preclude other packages
 from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no
 parallel hdf5 yet. This works fine, though some features may not be available).
 
-Typically, if there is a preference it will be for the serial build, such that installers/requirers of the package 
+Typically, if there is a preference it will be for the serial build, such that installers/requirers of the package
 only get the mpi build if explicitly requested. We use a higher build number for the ``nompi`` variant in this case.
 
 Here is an example build section:
@@ -1049,6 +1049,51 @@ To skip the pypy builds, do the following,
    build:
      skip: True         # [python_impl == 'pypy']
 
+
+Using setuptools_scm
+====================
+
+The Python module `setuptools_scm <https://github.com/pypa/setuptools_scm>`_
+can be used to manage a package's version automatically from metadata, such as git tags.
+The package's version string is thus not specified anywhere in the package,
+but encoded in it at install-time.
+
+For conda-build this means that ``setuptools_scm`` must be included as a ``host`` dependency.
+Additionally, some attention because the metadata is often not available in the sources.
+There are two options for how to proceed:
+
+*   For Python package also available on PyPI:
+    Use the PyPi tarball as a source, as it will have the metadata encoded
+    (in such a way that ``setuptools_scm`` knows how to find it).
+
+*   Specify the environment variable ``SETUPTOOLS_SCM_PRETEND_VERSION`` with the version string.
+    If specified this environment variable is the principle source for ``setuptools_scm``.
+    There are two ways how to do this:
+
+    -   If you are using build scripts, in ``build.sh`` specify:
+
+        .. code-block:: bash
+
+            export SETUPTOOLS_SCM_PRETEND_VERSION="$PKG_VERSION"
+
+        and in ``bld.bat`` specify:
+
+        .. code-block:: bash
+
+            set SETUPTOOLS_SCM_PRETEND_VERSION=%PKG_VERSION%
+
+        Whereby you use that ``PKG_VERSION`` has been set with the version string,
+        see `Environment variables <https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#env-vars>`_.
+
+    -   Otherwise, if you are directly building from ``meta.yaml``, use for example:
+
+        .. code-block:: yaml
+
+            build:
+              # [...]
+              script_env:
+                - SETUPTOOLS_SCM_PRETEND_VERSION={{version}}
+              script: "{{ PYTHON }} -m pip install . -vv"
 
 .. _centos7:
 
