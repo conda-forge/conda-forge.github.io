@@ -1061,7 +1061,7 @@ but encoded in it at install-time.
 For conda-build this warrants some attention because the metadata is often not available.
 The are two options to proceed:
 
-*   For Python package also available on PyPi:
+*   For Python package also available on PyPI:
     Use the PyPi tarball as a source, as it will have the metadata encoded
     (in such a way that ``setuptools_scm`` knows how to find it).
 
