@@ -1058,8 +1058,9 @@ can be used to manage a package's version automatically from metadata, such as g
 The package's version string is thus not specified anywhere in the package,
 but encoded in it at install-time.
 
-For conda-build this warrants some attention because the metadata is often not available.
-The are two options to proceed:
+For conda-build this means that ``setuptools_scm`` must be included as a ``host`` dependency.
+Additionally, some attention because the metadata is often not available in the sources.
+There are two options for how to proceed:
 
 *   For Python package also available on PyPI:
     Use the PyPi tarball as a source, as it will have the metadata encoded
