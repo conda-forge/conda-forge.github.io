@@ -20,5 +20,5 @@ Below is a list of conda-forge enhancement proposals (CFEP):
 * `CFEP-13: Securing conda-forge Uploads to anaconda.org <https://github.com/conda-forge/cfep/blob/master/cfep-13.md>`_ -- *Accepted*
 * `CFEP-14: Security and Systems Subteam <https://github.com/conda-forge/cfep/blob/master/cfep-14.md>`_ -- *Accepted*
 * `CFEP-15: Deprecate Python 2.7 and vs2008 <https://github.com/conda-forge/cfep/blob/master/cfep-15.md>`_ -- *Accepted*
-* `CFEP-16: Setting license and license_family field <https://github.com/conda-forge/cfep/blob/master/cfep-16.md>`_ -- *Proposed*
+* `CFEP-16: Setting license and license_family field <https://github.com/conda-forge/cfep/blob/master/cfep-16.md>`_ -- *Accepted*
 * `CFEP-18: Packaging static libraries <https://github.com/conda-forge/cfep/blob/master/cfep-18.md>`_ -- *Accepted*
