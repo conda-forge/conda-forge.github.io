@@ -58,7 +58,7 @@ Here is how a ``.condarc`` file would look like:
       - conda-forge
       - defaults
 
-In addition to the channel priority, we recommend always installing your packages inside a new environment instead of the root environment from anaconda/miniconda.
+In addition to the channel priority, we recommend always installing your packages inside a new environment instead of the ``base`` environment from anaconda/miniconda.
 Using envs make it easier to debug problems with packages and ensure the stability of your root env.
 
 .. note::
