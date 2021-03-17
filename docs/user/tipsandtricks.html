@@ -98,7 +98,7 @@ and activate the strict channel priority with:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ conda config --set channel_priority strict
 </pre></div>
 </div>
-<p>This will ensure that all the dependencies will come from the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel unless they exist only on <code class="docutils literal notranslate"><span class="pre">defaults</span></code>.</p>
+<p>This will ensure that all the dependencies come from the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel unless they exist only on <code class="docutils literal notranslate"><span class="pre">defaults</span></code>.</p>
 <p>Here is how a <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> file would look like:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ cat .condarc
 channel_priority: strict
@@ -107,7 +107,7 @@ channels:
   - defaults
 </pre></div>
 </div>
-<p>In addition to the channel priority, we recommend to always install your packages inside a new environment instead of the root environment from anaconda/miniconda.
+<p>In addition to the channel priority, we recommend always installing your packages inside a new environment instead of the <code class="docutils literal notranslate"><span class="pre">base</span></code> environment from anaconda/miniconda.
 Using envs make it easier to debug problems with packages and ensure the stability of your root env.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
