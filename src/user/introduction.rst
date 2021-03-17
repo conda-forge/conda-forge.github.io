@@ -65,7 +65,7 @@ From now on using ``conda install <package-name>`` will also find packages in ou
   we recommend always installing your packages inside a new environment instead of the ``base`` (formerly known as ``root``) environment,
   and we also recommend the use of ``miniconda`` instead of the Anaconda Distribution.
   Using environments make it easier to debug problems with packages and ensure the stability of your ``base`` environment.
-  Avoiding the Anaconda Distribution reduces chances of unsolvable/conflict installations, it is also a smaller download.
+  Avoiding the Anaconda Distribution reduces chances of unsolvable/conflicting installations, it is also a smaller download.
 
 .. note::
 
