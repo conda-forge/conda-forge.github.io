@@ -853,10 +853,10 @@ Empty Python packages
 For some features introduced in later Python versions, the Python community creates backports, which makes these
 features available for earlier versions of Python as well.
 One example here is `dataclasses <https://www.python.org/dev/peps/pep-0557/>`__ which was introduced with
-Python3.7 but is available as a `backport <https://github.com/ericvsmith/dataclasses>`__ for Python3.6 as well.
+Python3.7 but is available as a `backport <https://github.com/ericvsmith/dataclasses>`__ for Python3.6 too.
 Therefore, most upstream packages make those backports only mandatory for specific versions of Python and exclude them otherwise.
 
-Implementing this restriction in conda-forge is currently only possible through the usage of ``skips``
+Implementing this restriction in conda-forge is currently only possible through the use of ``skips``
 which restricts the corresponding conda-forge recipes from becoming ``noarch``.
 
 Therefore, some conda-forge recipes only create an actual package on specific Python versions and are otherwise an
