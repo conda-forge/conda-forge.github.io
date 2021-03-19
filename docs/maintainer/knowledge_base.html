@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge base &#8212; conda-forge 2021.03.17 documentation</title>
+    <title>Knowledge base &#8212; conda-forge 2021.03.19 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.03.17 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.03.19 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -766,6 +766,38 @@ Further, the <code class="docutils literal notranslate"><span class="pre">pybind
 </pre></div>
 </div>
 </div>
+<div class="section" id="empty-python-packages">
+<span id="knowledge-empty"></span><h3>Empty Python packages<a class="headerlink" href="#empty-python-packages" title="Permalink to this headline">¶</a></h3>
+<p>For some features introduced in later Python versions, the Python community creates backports, which makes these
+features available for earlier versions of Python as well.
+One example here is <a class="reference external" href="https://www.python.org/dev/peps/pep-0557/">dataclasses</a> which was introduced with
+Python3.7 but is available as a <a class="reference external" href="https://github.com/ericvsmith/dataclasses">backport</a> for Python3.6 too.
+Therefore, most upstream packages make those backports only mandatory for specific versions of Python and exclude them otherwise.</p>
+<p>Implementing this restriction in conda-forge is currently only possible through the use of <code class="docutils literal notranslate"><span class="pre">skips</span></code>
+which restricts the corresponding conda-forge recipes from becoming <code class="docutils literal notranslate"><span class="pre">noarch</span></code>.</p>
+<p>Therefore, some conda-forge recipes only create an actual package on specific Python versions and are otherwise an
+empty placeholder. This allows them to be safely installed under all Python versions and makes using <code class="docutils literal notranslate"><span class="pre">skips</span></code> unnecessary.</p>
+<p>Currently available packages:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 41%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Available on:</p></th>
+<th class="head"><p>Empty on:</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dataclasses</p></td>
+<td><p>python &gt;=3.6,&lt;3.7</p></td>
+<td><p>python &gt;=3.7</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="section" id="noarch-builds">
 <h2>Noarch builds<a class="headerlink" href="#noarch-builds" title="Permalink to this headline">¶</a></h2>
@@ -1281,6 +1313,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#matplotlib">Matplotlib</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pybind11-abi-constraints"><code class="docutils literal notranslate"><span class="pre">pybind11</span></code> ABI Constraints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#empty-python-packages">Empty Python packages</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#noarch-builds">Noarch builds</a><ul>
@@ -1382,7 +1415,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.03.17 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.03.19 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
