@@ -51,7 +51,7 @@ Using conda-forge is easy!
 
  - Make sure you have ``conda >=4.9``.
  - Add ``conda-forge`` as the highest priority channel. 
- - Activate the ``strict`` channel priority (``strict`` will be activated by default in conda 5.0).
+ - Activate ``strict`` channel priority (``strict`` will be activated by default in conda 5.0).
 
 .. code-block:: bash
 
