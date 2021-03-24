@@ -15,7 +15,7 @@ conda-forge is a community effort that provides conda packages for a wide range 
 
 You can `search <https://anaconda.org/>`__ for packages online. Look out for packages provided by our ``conda-forge`` organization.
 
-**Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack! Please refer to :ref:`becoming_involved`, for an overview over how to start contributing.
+**Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack! Please refer to :ref:`becoming_involved`, for an overview on how to start contributing.
 
 
 Why conda-forge?
@@ -35,19 +35,19 @@ This came with a list of disadvantages:
 
 conda-forge is a community effort that tackles these issues:
 
- - all packages are shared in a single channel named ``conda-forge``
- - care is taken that all packages are up-to-date
- - common standards ensure that all packages have compatible versions
- - by default, we build packages for macOS, Linux AMD64 and Windows AMD64
- - many packages are updated by multiple maintainers with an easy option to become a maintainer
- - an active core developer team is trying to also maintain abandoned packages
+ - all packages are shared in a single channel named ``conda-forge``.
+ - care is taken that all packages are up-to-date.
+ - common standards ensure that all packages have compatible versions.
+ - by default, we build packages for macOS, Linux AMD64 and Windows AMD64.
+ - many packages are updated by multiple maintainers with an easy option to become a maintainer.
+ - an active core developer team is trying to also maintain abandoned packages.
 
 
 
 How can I install packages from conda-forge?
 --------------------------------------------
 
-Using conda-forge is as easy! Make sure you have at least ``conda >=4.6``,
+Using conda-forge is easy! Make sure you have ``conda >=4.9``,
 then you just have to register the conda-forge channel as a package source for conda,
 and activate the ``strict`` channel priority (``strict`` will be activated by default in conda 5.0).
 
@@ -62,10 +62,10 @@ From now on using ``conda install <package-name>`` will also find packages in ou
 .. note::
 
   In addition to the channel priority,
-  we recommend to always install your packages inside a new environment instead of the ``base`` (formerly known as ``root``) environment,
-  and we also recommend the use ``miniconda`` instead of the Anaconda Distribution.
+  we recommend always installing your packages inside a new environment instead of the ``base`` (formerly known as ``root``) environment,
+  and we also recommend the use of ``miniconda`` instead of the Anaconda Distribution.
   Using environments make it easier to debug problems with packages and ensure the stability of your ``base`` environment.
-  Avoiding the Anaconda Distribution reduces chances of unsolvable/conflicts installations, it is also a smaller download.
+  Avoiding the Anaconda Distribution reduces chances of unsolvable/conflicting installations, it is also a smaller download.
 
 .. note::
 
