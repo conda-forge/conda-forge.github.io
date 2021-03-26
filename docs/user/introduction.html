@@ -107,14 +107,24 @@ In the past users only had the option to create an <a class="reference external"
 <blockquote>
 <div><ul class="simple">
 <li><p>Make sure you have <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">&gt;=4.9</span></code>.</p></li>
-<li><p>Add <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> as the highest priority channel.</p></li>
-<li><p>Activate <code class="docutils literal notranslate"><span class="pre">strict</span></code> channel priority (<code class="docutils literal notranslate"><span class="pre">strict</span></code> will be activated by default in conda 5.0).</p></li>
 </ul>
-</div></blockquote>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --add channels conda-forge
-conda config --set channel_priority strict
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda --version
+conda update conda
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> as the highest priority channel.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --add channels conda-forge
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Activate <code class="docutils literal notranslate"><span class="pre">strict</span></code> channel priority (<code class="docutils literal notranslate"><span class="pre">strict</span></code> will be activated by default in conda 5.0).</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --set channel_priority strict
+</pre></div>
+</div>
+</div></blockquote>
 <p>From now on using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">&lt;package-name&gt;</span></code> will also find packages in our conda-forge channels.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

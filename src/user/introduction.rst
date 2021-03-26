@@ -50,12 +50,22 @@ How can I install packages from conda-forge?
 Using conda-forge is easy!
 
  - Make sure you have ``conda >=4.9``.
- - Add ``conda-forge`` as the highest priority channel. 
- - Activate ``strict`` channel priority (``strict`` will be activated by default in conda 5.0).
+ 
+ .. code-block:: bash
 
-.. code-block:: bash
+  conda --version
+  conda update conda
+  
+ - Add ``conda-forge`` as the highest priority channel. 
+ 
+ .. code-block:: bash
 
   conda config --add channels conda-forge
+  
+ - Activate ``strict`` channel priority (``strict`` will be activated by default in conda 5.0).
+ 
+ .. code-block:: bash
+
   conda config --set channel_priority strict
 
 
