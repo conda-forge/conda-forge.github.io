@@ -1145,6 +1145,45 @@ of your recipe and rerendering.
 
 Finally, note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 7.
 
+
+.. _opencl:
+
+OpenCL builds
+=============
+
+Including OpenCL can accelerate computation of supporting software without
+requiring packages to rebuild depending on the specific underlying hardware they are targetting.
+
+To build packages with OpenCL support, one must add the following to the relevant sections in the 
+recipe:
+
+.. code-block:: yaml
+
+    requirements:
+      build:
+        ...
+        # Include the opencl headers
+        # https://github.com/conda-forge/clhpp-feedstock
+        - clhpp
+        # Include the different loader implementations
+        - ocl-icd                    # [linux]
+        - khronos-opencl-icd-loader  # [osx or win]
+      run:
+        - ocl-icd-system         # [linux]
+        - ocl_icd_wrapper_apple  # [osx]
+        # We currently don't have support for running
+        # opencl applications on windows
+        # intel opencl implementation for windows
+
+    test:
+      requires:
+        - pocl  >=0.14      # [linux]
+
+If ``pocl`` is installed at the same time as ``ocl-icd-system`` or ``ocl_icd_wrapper_apple`` then
+``________`` will take precedence.
+
+For support for OpenCL on Windows and Conda-forge, follow issue:
+
 .. _cuda:
 
 CUDA builds
