@@ -1168,21 +1168,31 @@ recipe:
         # Include the different loader implementations
         - ocl-icd                    # [linux]
         - khronos-opencl-icd-loader  # [osx or win]
+
+Applications and libraries build with OpenCL support should be able to detect which
+features exist at runtime and use OpenCL whenever it is found and they choose to.
+
+If you would like your package to utilize system OpenCL implementations, you can add
+the following run dependencies:
+
+.. code-block:: yaml
+
+    requirements:
       run:
         - ocl-icd-system         # [linux]
         - ocl_icd_wrapper_apple  # [osx]
-        # We currently don't have support for running
-        # opencl applications on windows
-        # intel opencl implementation for windows
+        # We currently don't have support for system OpenCL detection on Windows
+
+
+To test OpenCL code paths on CI services, 
+`pocl <https://github.com/conda-forge/pocl-feedstock>`_ can be added as a test or
+run-time dependency.
+
+.. code-block:: yaml
 
     test:
       requires:
-        - pocl  >=0.14      # [linux]
-
-If ``pocl`` is installed at the same time as ``ocl-icd-system`` or ``ocl_icd_wrapper_apple`` then
-``________`` will take precedence.
-
-For support for OpenCL on Windows and Conda-forge, follow issue:
+        - pocl  >=0.14  # [linux]
 
 .. _cuda:
 
