@@ -18,10 +18,8 @@ To build the docs locally, you should do the following:
 3. `conda env create -f ./.ci_scripts/environment.yml`
 4. `conda activate conda-forge-docs`
 5. `cd newsfeed && pip install --no-deps .`
-6. `pip install --no-deps .`
-7. `popd`
-8. `cd src`
-9. `make html`
+6. `cd ../src`
+7. `make html`
 
 ## Improving the docs
 
