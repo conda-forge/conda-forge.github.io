@@ -21,9 +21,9 @@ To build the docs locally, you should do the following:
 6. `cd ../src`
 7. `make html`
 8.  If you prefer to test the changes you made in .rst files on src folder, (It is advised to test the modified docs in your local system before sending the PR.
-   - open the command prompt
-   - `sphinx-build . ../docs`
-   - open docs folder, you can find the auto-generated html file.
+     - open the command prompt
+     - `sphinx-build . ../docs`
+     - open docs folder, you can find the auto-generated html file.
 
 ## Improving the docs
 
