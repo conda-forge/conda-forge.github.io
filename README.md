@@ -12,10 +12,14 @@ If you have questions or need help, please check out our documentation for a [li
 
 The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` script.
 To build the docs locally, you should do the following:
-1. `conda env create -f ./.ci_scripts/environment.yml`
-2. `conda activate conda-forge-docs`
-3. `cd src`
-4. `make html`
+1.  Clone the repository into your local machine.
+2.  Go into the main folder. </br>
+    Run the following commands.  
+3. `conda env create -f ./.ci_scripts/environment.yml`
+4. `conda activate conda-forge-docs`
+5. `cd newsfeed && pip install --no-deps .`
+6. `cd ../src`
+7. `make html`
 
 ## Improving the docs
 
