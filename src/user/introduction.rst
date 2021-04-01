@@ -21,7 +21,7 @@ You can `search <https://anaconda.org/>`__ for packages online. Look out for pac
 Why conda-forge?
 ----------------
 
-The conda team, from `Anaconda Inc. <https://anaconda.org/>`__, packages a multitude of packages and provides them to all users free of charge in their ``default`` channel.
+The conda team, from `Anaconda, Inc. <https://anaconda.org/>`__, packages a multitude of packages and provides them to all users free of charge in their ``default`` channel.
 
 But what if a package you are looking for is not in the default channel?
 In the past users only had the option to create an `Anaconda Cloud <https://anaconda.org/>`__ account and create their own channel.
