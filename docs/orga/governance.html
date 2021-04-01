@@ -3,19 +3,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Governance &#8212; conda-forge 2020.12.21 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Governance &#8212; conda-forge 2021.04.01 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
 
     
     
@@ -53,9 +53,10 @@
         <li class="right" >
           <a href="guidelines.html" title="Guidelines"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Organisation Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Organisation Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Governance</a></li> 
       </ul>
     </div>
     </div>
@@ -102,9 +103,10 @@ the conda-forge organization itself.</p></li>
 dev meetings and voting on polls) in the past six months will be asked if they want to become emeritus-core
 developers. Any core member can also request to become emeritus if they wish to do so
 (e.g. taking a sabbatical or long vacation).
-Emeritus core members can still vote and be back to active core anytime, the only difference is
-that emeritus-core will not count as the total core members when computing the necessary
-votes a poll needs to pass. The <code class="docutils literal notranslate"><span class="pre">core.csv</span></code> list should be updated when change in the status of a member occurs.</p></li>
+Emeritus core members can still vote and move back to active core anytime. Emeritus
+votes are used to count towards quorum but the quorum size is computed from the size of
+the active core group. The <code class="docutils literal notranslate"><span class="pre">core.csv</span></code> list should be updated when a change in the status
+of a member occurs.</p></li>
 </ul>
 </div>
 <div class="section" id="sub-teams">
@@ -171,26 +173,47 @@ If you would like changes to the current language please leave a comment or push
 This vote will end on {date}.
 </pre></div>
 </div>
-<blockquote>
-<div><p><a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results">https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results</a></p>
+<hr class="docutils" />
+<dl class="field-list">
+<dt class="field-odd">Posting results</dt>
+<dd class="field-odd"><p>To maintain the historical record, the outcome of any standard vote which invokes the
+“time out” rules below should be recorded in the “vote-results” folder at
+<a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results">https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results</a></p>
 <p>Each vote should be its own file.  The filename should reflect the topic and the
 date that the vote opened.  The file should contain at least:</p>
 <ul class="simple">
 <li><p>vote description</p></li>
 <li><p>vote policy</p></li>
 <li><p>vote totals</p></li>
-<li><p>Poll open and close dates</p></li>
+<li><p>poll open and close dates</p></li>
+<li><p>notifications given to the core group</p></li>
 </ul>
-<p>If a vote has “timed out,” as described in “Quorum,” the documentation regarding
-notification records should also be in this file.</p>
-</div></blockquote>
-<blockquote>
-<div><p>fraction who vote affirmatively on the issue. For example, in a vote
+</dd>
+</dl>
+<hr class="docutils" />
+<dl class="field-list">
+<dt class="field-odd">Quorum</dt>
+<dd class="field-odd"><p>Quorum for votes can be met in one of three ways depending on the
+vote: the standard quorum rules, the accelerated quorum rules, and the
+“time out” quorum rules. The specific quorum rules applicable
+for each vote are listed below.</p>
+<p><strong>Standard Quorum Rules</strong>: All percentages below express <em>both</em>
+required participation, as a
+fraction of the active core team, as well as the fraction of that
+fraction who vote affirmatively on the issue. For example, in a vote
 requiring 50%, with 18 active core members, at least 9 must vote;
 if 9 vote, there must 5 affirmative votes. If 13 members vote, 7
 must be affirmative.</p>
-<p>Because everyone is busy and it is difficult sometimes to get quorum,
-votes not achieving quorum will eventually time out on their set end date. When this happens,
+<p><strong>Accelerated Quorum Rules</strong>: For certain votes, we allow a lower quorum level.
+For these votes,
+if the voting period is longer than a week and there are no “no” votes, a quorum
+of half of the size
+needed for a <strong>standard quorum</strong> above is accepatble. For example, for a vote
+requiring 50% with 18
+active core members, at least 5 people must vote “yes” and exactly 0 people
+must vote “no”.</p>
+<p><strong>Time-out Quorum Rules</strong>: Votes not achieving quorum will eventually time out on their set end date.
+When this happens,
 the current participation level is taken for what it is, and the percentage
 of affirmative votes is calculated from whatever the vote total is at that
 time.  In order for a timeout to occur, the vote must have:</p>
@@ -202,7 +225,7 @@ time.  In order for a timeout to occur, the vote must have:</p>
 channel (beginning of voting period, middle, and one day prior to
 proposed timeout)</p></li>
 <li><p>been sent to core members via email.  Email reminders must have been
-sent similarly to the gitter core channel: at least 3 times,
+sent to the core email list in a manner similar to the gitter channel: at least 3 times,
 occurring as beginning of voting period, middle, and one day
 prior to proposed timeout.</p></li>
 </ul>
@@ -214,19 +237,27 @@ needed to pass the vote.</p>
 <p>To post a timeout reminder, here is a template comment:</p>
 <blockquote>
 <div><div class="highlight-md notranslate"><div class="highlight"><pre><span></span><span class="ni">@conda</span>-forge/core
-This vote falls under the {policy} policy, please vote and/or comment on this PR.
+This vote falls under the {policy} policy, please vote
+and/or comment on this PR.
 This vote needs {policy_percent} of core to vote yea to pass.
-This vote presently has {current_voters}, and needs {policy_percent * core - current_voters} more for quorum.
-It is proposed that this vote will time out and be evaluated with the current votes in {days}, on {date}.
-To vote please leave Approve (yea) or Request Changes (nay) reviews.
+This vote presently has {current_voters}, and needs
+{policy_percent * core - current_voters} more for quorum.
+It is proposed that this vote will time out and be
+evaluated with the current votes in {days}, on {date}.
+To vote please leave Approve (yea) or Request Changes (nay)
+reviews.
 </pre></div>
 </div>
 </div></blockquote>
-<p>To declare a standard vote “timed out,” the person making such a declaration must post a pull-request adding
+<p>To declare a standard vote “timed out,” the person making such a declaration
+must post a pull-request adding
 a vote record to the <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results">https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results</a>
-folder.  The declaration PR should be merged by the first core member who is available to verify that
-the requirements for the timeout have been met, based on their own personal records.</p>
-</div></blockquote>
+folder.  The declaration PR should be merged by the first core member
+who is available to verify that
+the requirements for the timeout have been met, based on their
+own personal records.</p>
+</dd>
+</dl>
 <hr class="docutils" />
 <dl class="field-list simple">
 <dt class="field-odd">CFEP Approval</dt>
@@ -238,6 +269,7 @@ reached.</p>
 <ul class="simple">
 <li><p>Standard</p></li>
 <li><p>60% Majority to pass</p></li>
+<li><p>Quorum rules: standard or time-out</p></li>
 </ul>
 </dd>
 </dl>
@@ -249,6 +281,7 @@ a brief justification as to why the new member is desirable or needed.</p>
 <ul class="simple">
 <li><p>Sensitive</p></li>
 <li><p>50% Majority to pass</p></li>
+<li><p>Quorum rules: standard, accelerated, or time-out</p></li>
 </ul>
 </dd>
 </dl>
@@ -264,6 +297,7 @@ important part of the nomination process.</p>
 <ul class="simple">
 <li><p>Sensitive</p></li>
 <li><p>66.7% Majority to pass</p></li>
+<li><p>Quorum rules: standard or time-out</p></li>
 </ul>
 </dd>
 </dl>
@@ -275,6 +309,7 @@ members, and charter (dynamic or static) of any new sub-teams.</p>
 <ul class="simple">
 <li><p>Standard</p></li>
 <li><p>50% Majority to pass</p></li>
+<li><p>Quorum rules: standard or time-out</p></li>
 </ul>
 </dd>
 </dl>
@@ -286,6 +321,7 @@ for why a sub-team should be dissolved.</p>
 <ul class="simple">
 <li><p>Standard</p></li>
 <li><p>50% Majority to pass</p></li>
+<li><p>Quorum rules: standard or time-out</p></li>
 </ul>
 </dd>
 </dl>
@@ -317,6 +353,7 @@ must provide ample justification as to why this is needed.</p>
 <ul class="simple">
 <li><p>Sensitive</p></li>
 <li><p>60% Majority to pass</p></li>
+<li><p>Quorum rules: standard or time-out</p></li>
 </ul>
 </dd>
 </dl>
@@ -329,6 +366,7 @@ should be removed.</p>
 <ul class="simple">
 <li><p>Sensitive</p></li>
 <li><p>66.7% Majority to pass</p></li>
+<li><p>Quorum rules: standard or time-out</p></li>
 </ul>
 </dd>
 </dl>
@@ -341,6 +379,7 @@ should be removed.</p>
 <ul class="simple">
 <li><p>Sensitive</p></li>
 <li><p>75% Majority to pass</p></li>
+<li><p>Quorum rules: standard or time-out</p></li>
 </ul>
 </dd>
 </dl>
@@ -355,7 +394,8 @@ member meeting cycle to allow for clarification questions
 and discussions. Friendly reminders to vote are encouraged.</p>
 <ul class="simple">
 <li><p>Standard</p></li>
-<li><p>50% plus one of those voting to pass</p></li>
+<li><p>50% Majority to pass</p></li>
+<li><p>Quorum rules: standard, accelerated, or time-out</p></li>
 </ul>
 </dd>
 </dl>
@@ -375,6 +415,7 @@ notify the rest of core before doing so.</p>
 <ul class="simple">
 <li><p>Standard</p></li>
 <li><p>50% Majority to pass</p></li>
+<li><p>Quorum rules: standard or time-out</p></li>
 </ul>
 </dd>
 </dl>
@@ -389,12 +430,13 @@ and discussions.</p>
 <ul class="simple">
 <li><p>Standard</p></li>
 <li><p>75% plus one of those voting to pass</p></li>
+<li><p>Quorum rules: standard or time-out</p></li>
 </ul>
 </dd>
 </dl>
 <hr class="docutils" />
-<p>All other voting items are considered to be standard and require a 50%
-majority to pass.</p>
+<p>All other voting items are considered to be standard, require a 50%
+majority to pass, and use only the standard or time-out quorum rules.</p>
 </div>
 <div class="section" id="current-members-of-core">
 <h2>Current Members of Core<a class="headerlink" href="#current-members-of-core" title="Permalink to this headline">¶</a></h2>
@@ -403,7 +445,6 @@ majority to pass.</p>
 <li><p><a class="reference external" href="https://github.com/chenghlee">Cheng H. Lee, &#64;chenghlee</a></p></li>
 <li><p><a class="reference external" href="https://github.com/chrisburr">Chris Burr, &#64;chrisburr</a></p></li>
 <li><p><a class="reference external" href="https://github.com/cj-wright">Christopher J. ‘CJ’ Wright, &#64;cj-wright</a></p></li>
-<li><p><a class="reference external" href="https://github.com/djsutherland">D.J. Sutherland, &#64;djsutherland</a></p></li>
 <li><p><a class="reference external" href="https://github.com/ericdill">Eric Dill, &#64;ericdill</a></p></li>
 <li><p><a class="reference external" href="https://github.com/ocefpaf">Filipe Pires Alvarenga Fernandes, &#64;ocefpaf</a></p></li>
 <li><p><a class="reference external" href="https://github.com/isuruf">Isuru Fernando, &#64;isuruf</a></p></li>
@@ -416,12 +457,13 @@ majority to pass.</p>
 <li><p><a class="reference external" href="https://github.com/mariusvniekerk">Marius van Niekerk, &#64;mariusvniekerk</a></p></li>
 <li><p><a class="reference external" href="https://github.com/mwcraig">Matt Craig, &#64;mwcraig</a></p></li>
 <li><p><a class="reference external" href="https://github.com/beckermr">Matthew R. Becker, &#64;beckermr</a></p></li>
-<li><p><a class="reference external" href="https://github.com/msarahan">Mike Sarahan, &#64;msarahan</a></p></li>
 <li><p><a class="reference external" href="https://github.com/minrk">Min Ragan-Kelley, &#64;minrk</a></p></li>
-<li><p><a class="reference external" href="https://github.com/sodre">Patrick Sodré, &#64;sodre</a></p></li>
+<li><p><a class="reference external" href="https://github.com/sodre">Patrick SodrÃ©, &#64;sodre</a></p></li>
 <li><p><a class="reference external" href="https://github.com/pkgw">Peter K. G. Williams, &#64;pkgw</a></p></li>
+<li><p><a class="reference external" href="https://github.com/dopplershift">Ryan May, &#64;dopplershift</a></p></li>
 <li><p><a class="reference external" href="https://github.com/SylvainCorlay">Sylvain Corlay, &#64;SylvainCorlay</a></p></li>
 <li><p><a class="reference external" href="https://github.com/xhochy">Uwe L. Korn, &#64;xhochy</a></p></li>
+<li><p><a class="reference external" href="https://github.com/viniciusdc">Vinicius Douglas Cerutti, &#64;viniciusdc</a></p></li>
 <li><p><a class="reference external" href="https://github.com/wolfv">Wolf Vollprecht, &#64;wolfv</a></p></li>
 </ul>
 </div>
@@ -430,8 +472,10 @@ majority to pass.</p>
 <p>In alphabetical order,</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/scopatz">Anthony Scopatz, &#64;scopatz</a></p></li>
-<li><p><a class="reference external" href="https://github.com/bgruening">Björn Grüning, &#64;bgruening</a></p></li>
+<li><p><a class="reference external" href="https://github.com/bgruening">BjÃ¶rn GrÃ¼ning, &#64;bgruening</a></p></li>
+<li><p><a class="reference external" href="https://github.com/djsutherland">Danica J. Sutherland, &#64;djsutherland</a></p></li>
 <li><p><a class="reference external" href="https://github.com/jjhelmus">Jonathan J. Helmus, &#64;jjhelmus</a></p></li>
+<li><p><a class="reference external" href="https://github.com/msarahan">Michael Sarahan, &#64;msarahan</a></p></li>
 <li><p><a class="reference external" href="https://github.com/patricksnape">Patrick Snape, &#64;patricksnape</a></p></li>
 <li><p><a class="reference external" href="https://github.com/pelson">Phil Elson, &#64;pelson</a></p></li>
 <li><p><a class="reference external" href="https://github.com/soapy1">Sophia Castellarin, &#64;soapy1</a></p></li>
@@ -445,6 +489,7 @@ majority to pass.</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -472,11 +517,15 @@ majority to pass.</p>
 <li class="toctree-l2"><a class="reference internal" href="subteams.html">A list of current sub-teams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="joining-the-team.html">Joining the team</a></li>
 <li class="toctree-l2"><a class="reference internal" href="minutes/00_intro.html">Core team meeting minutes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfep-index.html">Index of CFEPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting-in-touch.html">Getting in Touch</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contracting/00_intro.html">Contracting Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/announcements.html">Announcements</a></li>
 </ul>
 
   </div>
@@ -542,16 +591,17 @@ majority to pass.</p>
         <li class="right" >
           <a href="guidelines.html" title="Guidelines"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" >Organisation Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >Organisation Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Governance</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2020, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+        &#169; Copyright 2016-2021, conda-forge.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

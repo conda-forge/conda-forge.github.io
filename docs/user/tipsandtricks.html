@@ -3,19 +3,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Tips &amp; tricks &#8212; conda-forge 2020.12.21 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tips &amp; tricks &#8212; conda-forge 2021.04.01 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
 
     
     
@@ -53,9 +53,10 @@
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Tips &amp; tricks</a></li> 
       </ul>
     </div>
     </div>
@@ -98,7 +99,7 @@ and activate the strict channel priority with:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ conda config --set channel_priority strict
 </pre></div>
 </div>
-<p>This will ensure that all the dependencies will come from the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel unless they exist only on <code class="docutils literal notranslate"><span class="pre">defaults</span></code>.</p>
+<p>This will ensure that all the dependencies come from the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel unless they exist only on <code class="docutils literal notranslate"><span class="pre">defaults</span></code>.</p>
 <p>Here is how a <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> file would look like:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ cat .condarc
 channel_priority: strict
@@ -107,7 +108,7 @@ channels:
   - defaults
 </pre></div>
 </div>
-<p>In addition to the channel priority, we recommend to always install your packages inside a new environment instead of the root environment from anaconda/miniconda.
+<p>In addition to the channel priority, we recommend always installing your packages inside a new environment instead of the <code class="docutils literal notranslate"><span class="pre">base</span></code> environment from anaconda/miniconda.
 Using envs make it easier to debug problems with packages and ensure the stability of your root env.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -151,6 +152,7 @@ as ABI compatibility allows.</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -183,6 +185,9 @@ as ABI compatibility allows.</p>
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contracting/00_intro.html">Contracting Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="announcements.html">Announcements</a></li>
 </ul>
 
   </div>
@@ -248,16 +253,17 @@ as ABI compatibility allows.</p>
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Tips &amp; tricks</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2020, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+        &#169; Copyright 2016-2021, conda-forge.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

@@ -3,19 +3,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2020.12.21 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2021.04.01 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
 
     
     
@@ -53,9 +53,10 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
       </ul>
     </div>
     </div>
@@ -97,6 +98,7 @@ upload packages to anaconda.org, which can be useful for testing. For example:</
 <li><p>linux</p></li>
 <li><p>linux_aarch64</p></li>
 <li><p>linux_ppc64le</p></li>
+<li><p>os_version</p></li>
 <li><p>osx</p></li>
 <li><p>provider</p></li>
 <li><p>recipe_dir</p></li>
@@ -121,7 +123,7 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
 </div>
 </div>
 <div class="section" id="azure">
-<h3>azure<a class="headerlink" href="#azure" title="Permalink to this headline">¶</a></h3>
+<span id="azure-config"></span><h3>azure<a class="headerlink" href="#azure" title="Permalink to this headline">¶</a></h3>
 <p>This dictates the behavior of the Azure Pipelines CI service. It is a
 mapping for Azure-specific configuration options. For example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span>
@@ -167,10 +169,9 @@ build platform using cross-compiling.</p>
 </div>
 <div class="section" id="channel-priority">
 <h3>channel_priority<a class="headerlink" href="#channel-priority" title="Permalink to this headline">¶</a></h3>
-<p>This value sets the <code class="docutils literal notranslate"><span class="pre">conda</span></code> solver channel priority for feedstock builds. On
-OSX and Liunx, it defaults to <code class="docutils literal notranslate"><span class="pre">strict</span></code>. On Windows, it defaults to the default in
-<code class="docutils literal notranslate"><span class="pre">conda</span></code> (<code class="docutils literal notranslate"><span class="pre">flexible</span></code> at the time of writing). Any valid value for the same setting
-in the <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> is allowed here.</p>
+<p>This value sets the <code class="docutils literal notranslate"><span class="pre">conda</span></code> solver channel priority for feedstock builds.
+The default is <code class="docutils literal notranslate"><span class="pre">strict</span></code>. Any valid value for the same setting in the <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> is
+allowed here.</p>
 </div>
 <div class="section" id="channels">
 <h3>channels<a class="headerlink" href="#channels" title="Permalink to this headline">¶</a></h3>
@@ -283,6 +284,15 @@ Currently only:</p>
 Currently only:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">linux_ppc64le</span><span class="p">:</span>
   <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="os-version">
+<h3>os_version<a class="headerlink" href="#os-version" title="Permalink to this headline">¶</a></h3>
+<p>This key is used to set the OS versions for <code class="docutils literal notranslate"><span class="pre">linux_*</span></code> platforms. Valid entries map a linux platform and arch to either <code class="docutils literal notranslate"><span class="pre">cos6</span></code>
+or <code class="docutils literal notranslate"><span class="pre">cos7</span></code>. Currently <code class="docutils literal notranslate"><span class="pre">cos6</span></code> is the default for <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>. All other linux architectures use CentOS 7. Here is an example that enables CentOS 7 on <code class="docutils literal notranslate"><span class="pre">linux-64</span></code> builds</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">os_version</span><span class="p">:</span>
+  <span class="nt">linux_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cos7</span>
 </pre></div>
 </div>
 </div>
@@ -416,6 +426,7 @@ Currently only:</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -449,6 +460,7 @@ Currently only:</p>
 <li class="toctree-l4"><a class="reference internal" href="#linux">linux</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#linux-aarch64">linux_aarch64</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#linux-ppc64le">linux_ppc64le</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#os-version">os_version</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#osx">osx</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#provider">provider</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#recipe-dir">recipe_dir</a></li>
@@ -470,6 +482,9 @@ Currently only:</p>
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contracting/00_intro.html">Contracting Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/announcements.html">Announcements</a></li>
 </ul>
 
   </div>
@@ -535,16 +550,17 @@ Currently only:</p>
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2020, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+        &#169; Copyright 2016-2021, conda-forge.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

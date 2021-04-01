@@ -421,32 +421,6 @@ And rerender with:
 
 to produce the build matrices.
 
-Current builds of both mpi providers have `run_exports` which is equivalent to adding:
-
-.. code-block:: yaml
-
-  requirements:
-    run:
-      - {{ pin_run_as_build(mpi, min_pin='x.x', max_pin='x.x') }}
-
-If you want to do the pinning yourself (i.e. not trust the mpi providers, or pin differently, add):
-
-.. code-block:: yaml
-
-  # conda_build_config.yaml
-  pin_run_as_build:
-    mpich: x.x
-    openmpi: x.x
-
-.. code-block:: yaml
-
-  # meta.yaml
-  requirements:
-    host:
-      - {{ mpi }}
-    run:
-      - {{ mpi }}
-
 Including a no-mpi build
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -489,29 +463,12 @@ or
     conda install openmpi ptscotch
 
 This doesn't extend to ``nompi``, because there is no ``nompi`` variant of the mpi metapackage. And there probably
-shouldn't be, because some packages built with mpi doesn't preclude other packages in the env that *may* have an mpi variant
+shouldn't be, because some packages built with mpi don't preclude other packages in the env that *may* have an mpi variant
 from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no
 parallel hdf5 yet. This works fine, though some features may not be available).
 
-Typically, if there is a preference it will be packaged with a nompi variant, where the serial build is
-preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.
-
-
-.. admonition:: Outdated
-
-  To de-prioritize a build in the solver, it can be given a special ``track_features`` field:
-
-  - All builds *other than* the priority build should have a ``track_features`` field
-  - Build strings can be used to allow downstream packages to make explicit dependencies.
-  - No package should actually *have* the tracked feature.
-
-
-  .. note::
-
-    **update**: track_features deprioritization has too high priority in the solver, preventing a package from
-    adopting a variant of a dependency after some builds have already been made. Instead, use a build number
-    offset to apply the preference at a more appropriate level.
-
+Typically, if there is a preference it will be for the serial build, such that installers/requirers of the package
+only get the mpi build if explicitly requested. We use a higher build number for the ``nompi`` variant in this case.
 
 Here is an example build section:
 
@@ -605,7 +562,7 @@ This matches what is done in `hdf5 <https://github.com/conda-forge/hdf5-feedstoc
 
   # meta.yaml
   {% set name = 'pkg' %}
-  {% set build = 1000 %}
+  {% set build = 0 %}
 
   # ensure mpi is defined (needed for conda-smithy recipe-lint)
   {% set mpi = mpi or 'nompi' %}
@@ -889,6 +846,31 @@ To use this package in a build, put it in the host environment like so
         - pybind11-abi
 
 
+.. _knowledge:empty:
+
+Empty Python packages
+----------
+For some features introduced in later Python versions, the Python community creates backports, which makes these
+features available for earlier versions of Python as well.
+One example here is `dataclasses <https://www.python.org/dev/peps/pep-0557/>`__ which was introduced with
+Python3.7 but is available as a `backport <https://github.com/ericvsmith/dataclasses>`__ for Python3.6 too.
+Therefore, most upstream packages make those backports only mandatory for specific versions of Python and exclude them otherwise.
+
+Implementing this restriction in conda-forge is currently only possible through the use of ``skips``
+which restricts the corresponding conda-forge recipes from becoming ``noarch``.
+
+Therefore, some conda-forge recipes only create an actual package on specific Python versions and are otherwise an
+empty placeholder. This allows them to be safely installed under all Python versions and makes using ``skips`` unnecessary.
+
+Currently available packages:
+
++-------------+-------------------+--------------+
+| Name        | Available on:     | Empty on:    |
++=============+===================+==============+
+| dataclasses | python >=3.6,<3.7 | python >=3.7 |
++-------------+-------------------+--------------+
+
+
 Noarch builds
 =============
 
@@ -1009,7 +991,7 @@ To use a new SDK, add the following in ``recipe/conda_build_config.yaml``
 
     # Please consult conda-forge/core before doing this
     MACOSX_SDK_VERSION:        # [osx and x86_64]
-      - 10.12                  # [osx and x86_64]
+      - "10.12"                # [osx and x86_64]
 
 Note that this should be done if the error you are getting says that a header is not
 found or a macro is not defined. This will make your package compile with a newer SDK
@@ -1027,9 +1009,9 @@ is available only for macOS x.x, then do the following in ``recipe/conda_build_c
 
     # Please consult conda-forge/core before doing this
     MACOSX_DEPLOYMENT_TARGET:  # [osx and x86_64]
-      - 10.12                  # [osx and x86_64]
+      - "10.12"                # [osx and x86_64]
     MACOSX_SDK_VERSION:        # [osx and x86_64]
-      - 10.12                  # [osx and x86_64]
+      - "10.12"                # [osx and x86_64]
 
 
 In ``recipe/meta.yaml``, add the following to ensure that the user's system is compatible.
@@ -1048,27 +1030,16 @@ the requirement should be changed from ``run`` to ``run_constrained``. Note that
 PyPy builds
 ===========
 
-To use the PyPy builds you can do the following,
+To use the PyPy 3.6 or 3.7 builds you can do the following,
 
 .. code-block:: bash
 
-   conda install python=3.6.*=*_pypy
-
-or,
-
-.. code-block:: bash
-
-   conda install pypy python=3.6
-
-or,
-
-.. code-block:: bash
-
-   conda install pypy
+   conda create -n pypy36  pypy python=3.6
+   conda create -n pypy37  pypy python=3.7
 
 .. note::
 
-   As of March 8, if you are using defaults as a low priority channel,
+   As of March 8 2020, if you are using defaults as a low priority channel,
    then you need to use strict channel priority as the metadata in defaults
    has not been patched yet which allows cpython extension packages to be
    installed alongside pypy.
@@ -1104,6 +1075,51 @@ To skip the pypy builds, do the following,
      skip: True         # [python_impl == 'pypy']
 
 
+Using setuptools_scm
+====================
+
+The Python module `setuptools_scm <https://github.com/pypa/setuptools_scm>`_
+can be used to manage a package's version automatically from metadata, such as git tags.
+The package's version string is thus not specified anywhere in the package,
+but encoded in it at install-time.
+
+For conda-build this means that ``setuptools_scm`` must be included as a ``host`` dependency.
+Additionally, some attention because the metadata is often not available in the sources.
+There are two options for how to proceed:
+
+*   For Python package also available on PyPI:
+    Use the PyPi tarball as a source, as it will have the metadata encoded
+    (in such a way that ``setuptools_scm`` knows how to find it).
+
+*   Specify the environment variable ``SETUPTOOLS_SCM_PRETEND_VERSION`` with the version string.
+    If specified this environment variable is the principle source for ``setuptools_scm``.
+    There are two ways how to do this:
+
+    -   If you are using build scripts, in ``build.sh`` specify:
+
+        .. code-block:: bash
+
+            export SETUPTOOLS_SCM_PRETEND_VERSION="$PKG_VERSION"
+
+        and in ``bld.bat`` specify:
+
+        .. code-block:: bash
+
+            set SETUPTOOLS_SCM_PRETEND_VERSION=%PKG_VERSION%
+
+        Whereby you use that ``PKG_VERSION`` has been set with the version string,
+        see `Environment variables <https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#env-vars>`_.
+
+    -   Otherwise, if you are directly building from ``meta.yaml``, use for example:
+
+        .. code-block:: yaml
+
+            build:
+              # [...]
+              script_env:
+                - SETUPTOOLS_SCM_PRETEND_VERSION={{version}}
+              script: "{{ PYTHON }} -m pip install . -vv"
+
 .. _centos7:
 
 Using CentOS 7
@@ -1119,20 +1135,271 @@ put the following in your build section.
        - {{ compiler('c') }}
        - sysroot_linux-64 2.17  # [linux64]
 
-You also need to use a newer docker image by setting the following in the ``conda_build_config.yaml``
+You also need to use a newer docker image by setting the following in the ``conda-forge.yml``
 of your recipe and rerendering.
 
 .. code-block:: yaml
 
-   cuda_compiler_version:                    # [linux64]
-     - None                                  # [linux64]
-   docker_image:                             # [linux64]
-     - condaforge/linux-anvil-cos7-x86_64    # [linux64]
-   cdt_name:                                 # [linux64]
-     - cos7                                  # [linux64]
-
-The extra ``cuda_compiler_version`` key is needed because we currently zip that
-key with ``docker_image``. Also ``cdt_name`` ensures the CDTs match the CentOS
-version. If this changes in the future, then this extra key may not be needed.
+   os_version:
+     linux_64: cos7
 
 Finally, note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 7.
+
+.. _cuda:
+
+CUDA builds
+===========
+
+Although the provisioned CI machines do not feature a GPU, Conda-Forge does provide mechanisms
+to build CUDA-enabled packages. These mechanisms involve several packages:
+
+* ``cudatoolkit``: The runtime libraries for the CUDA toolkit. This is what end-users will end
+  up installing next to your package.
+
+* ``nvcc``: Nvidia's EULA does not allow the redistribution of compilers and drivers. Instead, we
+  provide a wrapper package that locates the CUDA installation in the system. The main role of this
+  package is to set some environment variables (``CUDA_HOME``, ``CUDA_PATH``, ``CFLAGS`` and others),
+  as well as wrapping the real ``nvcc`` executable to set some extra command line arguments.
+
+In practice, to enable CUDA on your package, add ``{{ compiler('cuda') }}`` to the ``build``
+section of your requirements and rerender. The matching ``cudatoolkit`` will be added to the ``run``
+requirements automatically.
+
+On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CUDA correctly. For example::
+
+  mkdir build && cd build
+  cmake ${CMAKE_ARGS} ${SRC_DIR}
+  make
+
+
+.. note::
+
+  **How is CUDA provided at the system level?**
+
+  * On Linux, Nvidia provides official Docker images, which we then
+    `adapt <https://github.com/conda-forge/docker-images>`_ to Conda-Forge's needs.
+
+  * On Windows, the compilers need to be installed for every CI run. This is done through the
+    `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`_ scripts.
+    Do note that the Nvidia executable won't install the drivers because no GPU is present in the machine.
+
+  **How is cudatoolkit selected at install time?**
+
+  Conda exposes the maximum CUDA version supported by the installed Nvidia drivers through a virtual package
+  named ``__cuda``. By default, ``conda`` will install the highest version available
+  for the packages involved. To override this behaviour, you can define a ``CONDA_OVERRIDE_CUDA`` environment
+  variable. More details in the
+  `Conda docs <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html#overriding-detected-packages>`_.
+
+  Note that prior to v4.8.4, ``__cuda`` versions would not be part of the constraints, so you would always
+  get the latest one, regardless the supported CUDA version.
+
+  If for some reason you want to install a specific version, you can use::
+
+    conda install your-gpu-package cudatoolkit=10.1
+
+Testing the packages
+--------------------
+
+Since the CI machines do not feature a GPU, you won't be able to test the built packages as part
+of the conda recipe. That does not mean you can't test your package locally. To do so:
+
+1. Enable the Azure artifacts for your feedstock (see :ref:`here <azure-config>`).
+2. Include the test files and requirements in the recipe
+   `like this <https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/meta.yaml#L51-L61>`_.
+3. Provide the test instructions. Take into account that the GPU tests will fail in the CI run,
+   so you need to ignore them to get the package built and uploaded as an artifact.
+   `Example <https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/run_test.py>`_.
+4. Once you have downloaded the artifacts, you will be able to run::
+
+    conda build --test <pkg file>.tar.bz2
+
+
+Common problems and known issues
+--------------------------------
+
+``nvcuda.dll`` cannot be found on Windows
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The `scripts <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat>`_
+used to install the CUDA Toolkit on Windows cannot provide ``nvcuda.dll``
+as part of the installation because no GPU is physically present in the CI machines.
+As a result, you might get linking errors in the postprocessing steps of ``conda build``::
+
+  WARNING (arrow-cpp,Library/bin/arrow_cuda.dll): $RPATH/nvcuda.dll not found in packages,
+  sysroot(s) nor the missing_dso_whitelist.
+
+  .. is this binary repackaging?
+
+For now, you will have to add ``nvcuda.dll`` to the ``missing_dso_whitelist``::
+
+  build:
+    ...
+    missing_dso_whitelist:
+      - "*/nvcuda.dll"   # [win]
+
+
+Adding support for a new CUDA version
+-------------------------------------
+
+Providing a new CUDA version involves five repositores:
+
+* `cudatoolkit-feedstock <https://github.com/conda-forge/cudatoolkit-feedstock>`_
+* `nvcc-feedstock <https://github.com/conda-forge/nvcc-feedstock>`_
+* `conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_
+* `docker-images <https://github.com/conda-forge/docker-images>`_ (Linux only)
+* `conda-forge-ci-setup-feedstock <https://github.com/conda-forge/conda-forge-ci-setup-feedstock>`_ (Windows only)
+
+The steps involved are, roughly:
+
+1. Add the ``cudatoolkit`` packages in ``cudatoolkit-feedstock``.
+2. Submit the version migrator to ``conda-forge-pinning-feedstock``.
+   This will stay open during the following steps.
+3. For Linux, add the corresponding Docker images at ``docker-images``.
+   Copy the migration file manually to ``.ci_support/migrations``.
+   This copy should not specify a timestamp. Comment it out and rerender.
+4. For Windows, add the installer URLs and hashes to the ``conda-forge-ci-setup``
+   `script <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat>`_.
+   The migration file must also be manually copied here. Rerender.
+5. Create the new ``nvcc`` packages for the new version. Again, manual
+   migration must be added. Rerender.
+6. When everything else has been merged and testing has taken place,
+   consider merging the PR opened at step 2 now so it can apply to all the downstream feedstocks.
+
+
+.. _osxarm64:
+
+Apple Silicon builds
+====================
+
+The new Apple M1 processor is the first Apple Silicon supported by conda-forge
+`osx-arm64 <https://github.com/conda-forge/conda-forge.github.io/issues/1126>`_ builds.
+For new builds to be available, via cross-compilation, a migration is required for
+the package and its dependencies. These builds are experimental as many of them are untested.
+
+To request a migration for a particular package and all its dependencies:
+
+1. Check the feedstock in question to see if there is already an issue or pull request.
+   Opening an issue here is fine, as it might take a couple iterations of the below,
+   especially if many dependencies need to be built as well.
+2. If nothing is under way, look at the current `conda-forge-pinning <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt>`_.
+3. If the package is not listed there, make a PR, adding the package
+   name to the end of ``osx_arm64.txt``. The migration bot should start making automated
+   pull requests to the repo and its dependencies.
+4. Within a few hours, the `status page <https://conda-forge.org/status/#armosxaddition>`_
+   should reflect the progress of the package in question, and help you keep track
+   of progress. Help out if you can!
+5. The feedstock maintainers (who very likely *do not* have an M1) will work to make
+   any changes required to pass continuous intgration. If you have insight into
+   the particular package, **please** chime in, but most of all **be patient and polite**.
+6. Once the new builds are available from ``anaconda.org``, please help the maintainers
+   by testing the packages, and reporting back with any problems... but also successes!
+
+
+Pre-release builds
+==================
+
+Recipe maintainers can make pre-release builds available on
+conda-forge by adding them to the ``dev`` or ``rc`` label.
+
+The semantics of these labels should generally follow the
+`guidelines <https://docs.python.org/devguide/devcycle.html#stages>`_ that Python
+itself follows.
+
+- ``rc``: `Beta <https://docs.python.org/devguide/devcycle.html#beta>`_ and `Release
+  Candidate <https://docs.python.org/devguide/devcycle.html#release-candidate-rc>`_
+  (RC). No new features. Bugfix only.
+
+- ``dev``: `Pre-Alpha <https://docs.python.org/devguide/devcycle.html#pre-alpha>`_
+  and `Alpha <https://docs.python.org/devguide/devcycle.html#alpha>`_. These are
+  still packages that could see substantial changes
+  between the dev version and the final release.
+
+
+.. note::
+
+  ``alpha`` and ``beta`` labels aren't used. Given the light usage of labels on the conda-forge
+  channel thus far, it seems rather unnecessary to introduce many labels.
+  ``dev`` and ``rc`` seem like a nice compromise.
+
+.. note::
+
+  Certain packages (for example `black <https://pypi.org/project/black/#history>`_) follow
+  a release cycle in which they have never had a non-beta/alpha release.  In these cases
+  the conda packages for those do *not* need to be published to a prerelease label.
+
+Creating a pre-release build
+----------------------------
+
+To create a ``dev`` or ``rc`` package, a PR can be issued into the ``dev`` or ``rc`` branch of the
+feedstock.
+This branch must change the ``recipe/conda_build_config.yaml`` file to point to the ``<package_name>_dev`` or ``<package_name>_rc`` label.
+
+For example, matplotlib rc releases would include:
+
+.. code-block:: yaml
+
+   channel_targets:
+     - conda-forge matplotlib_rc
+
+If a pre-release build of B depends on a pre-release build of A, then A should have,
+
+.. code-block:: yaml
+
+   channel_targets:
+     - conda-forge A_rc
+
+while B should have,
+
+.. code-block:: yaml
+
+   channel_sources:
+     - conda-forge/label/A_rc,conda-forge,defaults
+   channel_targets:
+     - conda-forge B_rc
+
+in ``recipe/conda_build_config.yaml`` in their respective feedstocks.
+
+.. note::
+
+  A rerender needs to happen for these changes to reflect in CI files.
+
+Installing a pre-release build
+------------------------------
+
+Use the following command, but replace ``PACKAGE_NAME`` with the package you want
+to install and replace ``LABEL`` with ``rc`` or ``dev``:
+
+.. code-block:: yaml
+
+   conda install -c conda-forge/label/PACKAGE_NAME_LABEL -c conda-forge PACKAGE_NAME
+
+For example, let's install matplotlib from the ``rc`` label:
+
+.. code-block:: yaml
+
+   conda install -c conda-forge/label/matplotlib_rc -c conda-forge matplotlib
+
+Pre-release version sorting
+---------------------------
+
+If you wish to add numbers to your ``dev`` or ``rc`` build, you should follow the
+`guidelines <http://conda.pydata.org/docs/spec.html#build-version-spec>`_ put
+forth by Continuum regarding version sorting in ``conda``. Also see the `source
+code for conda
+4.2.13 <https://github.com/conda/conda/blob/4.2.13/conda/version.py#L93-L119>`_.
+The tl;dr here is that conda sorts as follows:
+
+.. code-block::
+
+   < 1.0
+   < 1.1dev1    # special case 'dev'
+   < 1.1.0dev1  # special case 'dev'
+   == 1.1.dev1   # 0 is inserted before string
+   < 1.1.0rc1
+   < 1.1.0
+
+
+So make sure that you **tag** your package in such a way that the package name
+that conda-build spits out will sort the package uploaded with an ``rc`` label
+higher than the package uploaded with the ``dev`` label.

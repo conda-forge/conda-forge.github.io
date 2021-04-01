@@ -46,7 +46,7 @@ and activate the strict channel priority with:
 
     $ conda config --set channel_priority strict
 
-This will ensure that all the dependencies will come from the ``conda-forge`` channel unless they exist only on ``defaults``.
+This will ensure that all the dependencies come from the ``conda-forge`` channel unless they exist only on ``defaults``.
 
 Here is how a ``.condarc`` file would look like:
 
@@ -58,7 +58,7 @@ Here is how a ``.condarc`` file would look like:
       - conda-forge
       - defaults
 
-In addition to the channel priority, we recommend to always install your packages inside a new environment instead of the root environment from anaconda/miniconda.
+In addition to the channel priority, we recommend always installing your packages inside a new environment instead of the ``base`` environment from anaconda/miniconda.
 Using envs make it easier to debug problems with packages and ensure the stability of your root env.
 
 .. note::

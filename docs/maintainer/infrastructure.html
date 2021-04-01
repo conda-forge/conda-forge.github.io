@@ -3,19 +3,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Infrastructure &#8212; conda-forge 2020.12.21 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infrastructure &#8212; conda-forge 2021.04.01 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
 
     
     
@@ -53,9 +53,10 @@
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Infrastructure</a></li> 
       </ul>
     </div>
     </div>
@@ -83,7 +84,7 @@ You can find a detailed guide to submitting new package recipes in <a class="ref
 <div><ul class="simple">
 <li><p>the rerendering process</p></li>
 <li><p>the recipe linter</p></li>
-<li><p><a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> support utils</p></li>
+<li><p><a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a> support utils</p></li>
 </ul>
 </div></blockquote>
 <p><code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> also contains the command line tool that you will use if you rerender manually from the command line (see <a class="reference internal" href="updating_pkgs.html#dev-update-rerender"><span class="std std-ref">Rerendering feedstocks</span></a>).</p>
@@ -98,7 +99,7 @@ Please note that the code logic provided by the app is in the <code class="docut
 <h3>conda-forge pinning<a class="headerlink" href="#conda-forge-pinning" title="Permalink to this headline">¶</a></h3>
 <p>Package-wide dependency pins are defined in <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">conda_build_config.yaml</a>  in the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a>.</p>
 <p>For more information on conda-forge wide package pins, please refer to <a class="reference internal" href="pinning_deps.html#globally-pinned-packages"><span class="std std-ref">Globally pinned packages</span></a>.</p>
-<p>Please open a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> and/or issues there if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to <a class="reference internal" href="pinning_deps.html#update-pins"><span class="std std-ref">Updating package pins</span></a>.</p>
+<p>Please open a <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a> and/or issues there if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to <a class="reference internal" href="pinning_deps.html#update-pins"><span class="std std-ref">Updating package pins</span></a>.</p>
 </div>
 <div class="section" id="documentation">
 <h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
@@ -177,7 +178,8 @@ Please open issue on <code class="docutils literal notranslate"><span class="pre
 add Python 2.7 back to a feedstock. Note that this command will remove any other
 Python versions and any <code class="docutils literal notranslate"><span class="pre">win</span></code>, <code class="docutils literal notranslate"><span class="pre">aarch64</span></code> or <code class="docutils literal notranslate"><span class="pre">ppc64le</span></code> builds. Thus you should
 merge the PR into a separate branch on your feedstock if you want to keep these
-other builds.</p>
+other builds. <strong>Python 2.7 support is deprecated and any feedstocks on Python 2.7 will
+not be properly handled by our bots.</strong></p>
 </div>
 </div>
 <div class="section" id="ci-build-services">
@@ -373,6 +375,7 @@ will be able to upload packages with the same name.</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -448,6 +451,9 @@ will be able to upload packages with the same name.</p>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contracting/00_intro.html">Contracting Information</a></li>
 </ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/announcements.html">Announcements</a></li>
+</ul>
 
   </div>
   <div class="sphinxprev">
@@ -512,16 +518,17 @@ will be able to upload packages with the same name.</p>
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Infrastructure</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2020, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+        &#169; Copyright 2016-2021, conda-forge.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

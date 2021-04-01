@@ -3,19 +3,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Maintaining packages &#8212; conda-forge 2020.12.21 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maintaining packages &#8212; conda-forge 2021.04.01 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
 
     
     
@@ -53,9 +53,10 @@
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Maintaining packages</a></li> 
       </ul>
     </div>
     </div>
@@ -70,17 +71,25 @@
 <span id="maintaining-pkgs"></span><h1>Maintaining packages<a class="headerlink" href="#maintaining-packages" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="important-notes">
 <h2>Important notes<a class="headerlink" href="#important-notes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="packages-on-conda-forge-are-immutable">
+<h3>Packages on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> are immutable<a class="headerlink" href="#packages-on-conda-forge-are-immutable" title="Permalink to this headline">¶</a></h3>
+<p>As a matter of policy, we do not allow edits or the deletion of packages on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. This
+policy is very important as it increases the reliability and reproducibility of <code class="docutils literal notranslate"><span class="pre">conda</span></code> environments
+made with the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel. Note that because of this policy, our upload scripts will refuse to
+upload packages which already exist on the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel.</p>
+<p>If you need to remove a package, please see the <a class="reference internal" href="#maint-fix-broken-packages"><span class="std std-ref">section</span></a> on marking packages broken.</p>
+</div>
 <div class="section" id="forking-and-pull-requests">
 <h3>Forking and pull requests<a class="headerlink" href="#forking-and-pull-requests" title="Permalink to this headline">¶</a></h3>
 <p>All maintainers are given push access to the feedstocks that they maintain.
 This means that a maintainer can create branches in the main repo.
 For updates, using a branch in the main repo is discouraged because,</p>
 <ol class="arabic">
-<li><p><a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> is run on both the branch and the PR.</p>
-<p>This wastes <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> resources</p>
+<li><p><a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a> is run on both the branch and the PR.</p>
+<p>This wastes <a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a> resources</p>
 </li>
 <li><p>Branches are automatically published.</p>
-<p>This means if you push a version update to a branch and then create a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>, conda packages will be published to anaconda.org before the PR is merged.</p>
+<p>This means if you push a version update to a branch and then create a <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a>, conda packages will be published to anaconda.org before the PR is merged.</p>
 </li>
 </ol>
 <div class="admonition important">
@@ -160,30 +169,16 @@ enabled <a class="reference external" href="https://help.github.com/en/articles/
 </div>
 <div class="section" id="updating-recipes">
 <h2>Updating recipes<a class="headerlink" href="#updating-recipes" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="updating-version-and-hash">
-<h3>Updating version and hash<a class="headerlink" href="#updating-version-and-hash" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="checking-the-dependencies">
-<h3>Checking the dependencies<a class="headerlink" href="#checking-the-dependencies" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="bumping-the-build-number">
-<h3>Bumping the build number<a class="headerlink" href="#bumping-the-build-number" title="Permalink to this headline">¶</a></h3>
-<p>The build number is increased when the source code for the package has not changed but you
-need to make a new build.
-As a rule of thumb, the build number is increased whenever a new package with the same version needs to be uploaded to the conda-forge channel.</p>
-<p>Examples for needing to increase the build number are</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>updating the pinned dependencies after a rerendering</p></li>
-<li><p>Fixing wrong dependencies</p></li>
-</ul>
-</div></blockquote>
-<p>When the package version changes you should reset the build number back to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
-</div>
+<p>Please follow the following guidelines when updating recipes.</p>
+<ol class="arabic simple">
+<li><p>Always use a fork of the feedstock when updating the recipe.</p></li>
+<li><p>When a package’s version is not changed, but other metadata or parts of the recipe are changed, increase the build number by <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p>When shipping a new version of your package, reset the build number to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+</ol>
 </div>
 <div class="section" id="rerendering-feedstocks">
 <span id="dev-update-rerender"></span><h2>Rerendering feedstocks<a class="headerlink" href="#rerendering-feedstocks" title="Permalink to this headline">¶</a></h2>
-<p>Rerendering is conda-forge’s way to update the files common to all feedstocks (e.g. README, <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> configuration, pinned dependencies)</p>
+<p>Rerendering is conda-forge’s way to update the files common to all feedstocks (e.g. README, <a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a> configuration, pinned dependencies)</p>
 <p>Rerendering can be done in two ways:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -218,7 +213,7 @@ To do this drop <code class="docutils literal notranslate"><span class="pre">-c<
 </div>
 <div class="section" id="testing-changes-locally">
 <h2>Testing changes locally<a class="headerlink" href="#testing-changes-locally" title="Permalink to this headline">¶</a></h2>
-<p>If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is built by our <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a>.</p>
+<p>If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is built by our <a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a>.</p>
 <p>If you want to build and test updates to a feedstock locally, go to the root
 feedstock directory and run:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python build-locally.py
@@ -240,7 +235,8 @@ feedstock directory and run:</p>
 <p>Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel.</p>
 <p>If the only issue is in the package metadata, we can directly patch it using
 the <a class="reference external" href="https://github.com/conda-forge/conda-forge-repodata-patches-feedstock">repo data patches feedstock</a>.
-To change the repo data for your package, make a PR on the feedstock.</p>
+Please make a PR there to add a patch. In order to ensure future versions have the required changes, you also
+need to change recipe to reflect the metadata changes.</p>
 <p>If instead the actual contents of the package are broken, the following steps will
 remove broken packages from the <code class="docutils literal notranslate"><span class="pre">main</span></code> channel:</p>
 <ol class="arabic simple">
@@ -272,19 +268,24 @@ package (an example would be to re-render the feedstock to support new Python ve
 </div>
 </div></blockquote>
 <ol class="arabic simple" start="2">
-<li><p>Commit and push the change to your fork and open a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> against the feedstock you want to become a maintainer of.</p></li>
-<li><p><a class="reference internal" href="#dev-update-rerender"><span class="std std-ref">Rerender</span></a> the feedstock by posting <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">rerender</span></code> as a new comment in the <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>.</p></li>
-<li><p>Wait until the <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> is merged. If the current maintainer is no longer active, you can ping <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge/core</span></code> and ask for a merge.</p></li>
+<li><p>Commit and push the change to your fork and open a <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a> against the feedstock you want to become a maintainer of.</p></li>
+<li><p><a class="reference internal" href="#dev-update-rerender"><span class="std std-ref">Rerender</span></a> the feedstock by posting <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">rerender</span></code> as a new comment in the <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a>.</p></li>
+<li><p>Wait until the <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a> is merged. If the current maintainer is no longer active, you can ping <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge/core</span></code> and ask for a merge.</p></li>
 </ol>
 <p>Once the PR is merged, our infrastructure will grant and revoke maintainer permissions.</p>
 </div>
 <div class="section" id="maintaining-several-versions">
 <h2>Maintaining several versions<a class="headerlink" href="#maintaining-several-versions" title="Permalink to this headline">¶</a></h2>
-<p>TODO: LTS branch</p>
+<p>If you’d like to maintain more than one version of your package, you can use branches on the feedstock. To do this,
+fork your feedstock and make a meaningful branch name (e.g., <cite>v1.X</cite> or <cite>v1.0</cite>).
+Make the required changes to the recipe and rerender the feedstock. Then push this branch
+from your fork to the upstream feedstock. Our CI services will automatically build any
+branches in addition to the default branch.</p>
 </div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -301,6 +302,7 @@ package (an example would be to re-render the feedstock to support new Python ve
 <li class="toctree-l2"><a class="reference internal" href="adding_pkgs.html">Contributing packages</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Maintaining packages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#important-notes">Important notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#packages-on-conda-forge-are-immutable">Packages on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> are immutable</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#forking-and-pull-requests">Forking and pull requests</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#pushing-to-regro-cf-autotick-bot-branch">Pushing to regro-cf-autotick-bot branch</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#example-workflow-for-updating-a-package">Example workflow for updating a package</a></li>
@@ -308,12 +310,7 @@ package (an example would be to re-render the feedstock to support new Python ve
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#updating-recipes">Updating recipes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#updating-version-and-hash">Updating version and hash</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#checking-the-dependencies">Checking the dependencies</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#bumping-the-build-number">Bumping the build number</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-recipes">Updating recipes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rerendering-feedstocks">Rerendering feedstocks</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#rerendering-with-conda-smithy-locally">Rerendering with conda-smithy locally</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#when-to-rerender">When to rerender</a></li>
@@ -335,6 +332,9 @@ package (an example would be to re-render the feedstock to support new Python ve
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contracting/00_intro.html">Contracting Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/announcements.html">Announcements</a></li>
 </ul>
 
   </div>
@@ -400,16 +400,17 @@ package (an example would be to re-render the feedstock to support new Python ve
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Maintaining packages</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2020, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+        &#169; Copyright 2016-2021, conda-forge.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

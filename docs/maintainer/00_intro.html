@@ -3,19 +3,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Maintainer Documentation &#8212; conda-forge 2020.12.21 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maintainer Documentation &#8212; conda-forge 2021.04.01 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
 
     
     
@@ -53,8 +53,9 @@
         <li class="right" >
           <a href="../user/how_to_get_help.html" title="How to get help in conda-forge"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
- 
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">Maintainer Documentation</a></li> 
       </ul>
     </div>
     </div>
@@ -192,6 +193,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="updating_pkgs.html">Maintaining packages</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="updating_pkgs.html#important-notes">Important notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="updating_pkgs.html#packages-on-conda-forge-are-immutable">Packages on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> are immutable</a></li>
 <li class="toctree-l3"><a class="reference internal" href="updating_pkgs.html#forking-and-pull-requests">Forking and pull requests</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="updating_pkgs.html#pushing-to-regro-cf-autotick-bot-branch">Pushing to regro-cf-autotick-bot branch</a></li>
 <li class="toctree-l4"><a class="reference internal" href="updating_pkgs.html#example-workflow-for-updating-a-package">Example workflow for updating a package</a></li>
@@ -199,12 +201,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="updating_pkgs.html#updating-recipes">Updating recipes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="updating_pkgs.html#updating-version-and-hash">Updating version and hash</a></li>
-<li class="toctree-l3"><a class="reference internal" href="updating_pkgs.html#checking-the-dependencies">Checking the dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="updating_pkgs.html#bumping-the-build-number">Bumping the build number</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="updating_pkgs.html#updating-recipes">Updating recipes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="updating_pkgs.html#rerendering-feedstocks">Rerendering feedstocks</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="updating_pkgs.html#rerendering-with-conda-smithy-locally">Rerendering with conda-smithy locally</a></li>
 <li class="toctree-l3"><a class="reference internal" href="updating_pkgs.html#when-to-rerender">When to rerender</a></li>
@@ -240,6 +237,7 @@
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#linux">linux</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#linux-aarch64">linux_aarch64</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#linux-ppc64le">linux_ppc64le</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#os-version">os_version</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#osx">osx</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#provider">provider</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conda_forge_yml.html#recipe-dir">recipe_dir</a></li>
@@ -296,6 +294,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#matplotlib">Matplotlib</a></li>
 <li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#pybind11-abi-constraints"><code class="docutils literal notranslate"><span class="pre">pybind11</span></code> ABI Constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#empty-python-packages">Empty Python packages</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="knowledge_base.html#noarch-builds">Noarch builds</a><ul>
@@ -306,7 +305,24 @@
 <li class="toctree-l2"><a class="reference internal" href="knowledge_base.html#build-matrices">Build matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="knowledge_base.html#requiring-newer-macos-sdks">Requiring newer macOS SDKs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="knowledge_base.html#pypy-builds">PyPy builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html#using-setuptools-scm">Using setuptools_scm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="knowledge_base.html#using-centos-7">Using CentOS 7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html#cuda-builds">CUDA builds</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#testing-the-packages">Testing the packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#common-problems-and-known-issues">Common problems and known issues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="knowledge_base.html#nvcuda-dll-cannot-be-found-on-windows"><code class="docutils literal notranslate"><span class="pre">nvcuda.dll</span></code> cannot be found on Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#adding-support-for-a-new-cuda-version">Adding support for a new CUDA version</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html#apple-silicon-builds">Apple Silicon builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knowledge_base.html#pre-release-builds">Pre-release builds</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#creating-a-pre-release-build">Creating a pre-release build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#installing-a-pre-release-build">Installing a pre-release build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="knowledge_base.html#pre-release-version-sorting">Pre-release version sorting</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
@@ -315,6 +331,7 @@
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -339,6 +356,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contracting/00_intro.html">Contracting Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/announcements.html">Announcements</a></li>
 </ul>
 
   </div>
@@ -404,15 +424,16 @@
         <li class="right" >
           <a href="../user/how_to_get_help.html" title="How to get help in conda-forge"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
- 
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">Maintainer Documentation</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2020, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+        &#169; Copyright 2016-2021, conda-forge.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

@@ -1763,7 +1763,7 @@ td.linenos pre
 {
     padding: 10px;
 
-    font-family: "Droid Sans Mono", monospace;
+    font-family: "Roboto Mono", monospace;
     font-size: 85%;
     line-height: 1.5em;
 }
@@ -1825,7 +1825,7 @@ table.highlighttable div.linenodiv pre
 
 code
 {
-    font-family: "Droid Sans Mono", monospace;
+    font-family: "Roboto Mono", monospace;
     font-size: 90%;
 }
 
@@ -1852,7 +1852,7 @@ p code.literal { white-space: nowrap; }
 
 code.samp.literal > em
 {
-    font-family: "Droid Sans Mono", monospace;
+    font-family: "Roboto Mono", monospace;
     padding: 0 1px;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=
     60);

@@ -3,19 +3,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge base &#8212; conda-forge 2020.12.21 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Knowledge base &#8212; conda-forge 2021.04.01 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
 
     
     
@@ -53,9 +53,10 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Knowledge base</a></li> 
       </ul>
     </div>
     </div>
@@ -405,27 +406,6 @@ for details.</p>
 </pre></div>
 </div>
 <p>to produce the build matrices.</p>
-<p>Current builds of both mpi providers have <cite>run_exports</cite> which is equivalent to adding:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">run</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_run_as_build(mpi</span><span class="p p-Indicator">,</span> <span class="nv">min_pin=&#39;x.x&#39;</span><span class="p p-Indicator">,</span> <span class="nv">max_pin=&#39;x.x&#39;)</span> <span class="p p-Indicator">}}</span>
-</pre></div>
-</div>
-<p>If you want to do the pinning yourself (i.e. not trust the mpi providers, or pin differently, add):</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># conda_build_config.yaml</span>
-<span class="nt">pin_run_as_build</span><span class="p">:</span>
-  <span class="nt">mpich</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">x.x</span>
-  <span class="nt">openmpi</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">x.x</span>
-</pre></div>
-</div>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># meta.yaml</span>
-<span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">mpi</span> <span class="p p-Indicator">}}</span>
-  <span class="nt">run</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">mpi</span> <span class="p p-Indicator">}}</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="including-a-no-mpi-build">
 <h4>Including a no-mpi build<a class="headerlink" href="#including-a-no-mpi-build" title="Permalink to this headline">¶</a></h4>
@@ -457,26 +437,11 @@ the <code class="docutils literal notranslate"><span class="pre">mpi</span></cod
 </pre></div>
 </div>
 <p>This doesn’t extend to <code class="docutils literal notranslate"><span class="pre">nompi</span></code>, because there is no <code class="docutils literal notranslate"><span class="pre">nompi</span></code> variant of the mpi metapackage. And there probably
-shouldn’t be, because some packages built with mpi doesn’t preclude other packages in the env that <em>may</em> have an mpi variant
+shouldn’t be, because some packages built with mpi don’t preclude other packages in the env that <em>may</em> have an mpi variant
 from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no
 parallel hdf5 yet. This works fine, though some features may not be available).</p>
-<p>Typically, if there is a preference it will be packaged with a nompi variant, where the serial build is
-preferred, such that installers/requirers of the package only get the mpi build if explicitly requested.</p>
-<div class="admonition-outdated admonition">
-<p class="admonition-title">Outdated</p>
-<p>To de-prioritize a build in the solver, it can be given a special <code class="docutils literal notranslate"><span class="pre">track_features</span></code> field:</p>
-<ul class="simple">
-<li><p>All builds <em>other than</em> the priority build should have a <code class="docutils literal notranslate"><span class="pre">track_features</span></code> field</p></li>
-<li><p>Build strings can be used to allow downstream packages to make explicit dependencies.</p></li>
-<li><p>No package should actually <em>have</em> the tracked feature.</p></li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><strong>update</strong>: track_features deprioritization has too high priority in the solver, preventing a package from
-adopting a variant of a dependency after some builds have already been made. Instead, use a build number
-offset to apply the preference at a more appropriate level.</p>
-</div>
-</div>
+<p>Typically, if there is a preference it will be for the serial build, such that installers/requirers of the package
+only get the mpi build if explicitly requested. We use a higher build number for the <code class="docutils literal notranslate"><span class="pre">nompi</span></code> variant in this case.</p>
 <p>Here is an example build section:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">mpi</span> <span class="o">==</span> <span class="s1">&#39;nompi&#39;</span> <span class="o">%</span><span class="p">}</span>
 <span class="c1"># prioritize nompi variant via build number</span>
@@ -554,7 +519,7 @@ chosen at build time (i.e. if the nompi build cannot be run against the mpich bu
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># meta.yaml</span>
 <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;pkg&#39;</span> <span class="o">%</span><span class="p">}</span>
-<span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">build</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">build</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">%</span><span class="p">}</span>
 
 <span class="c1"># ensure mpi is defined (needed for conda-smithy recipe-lint)</span>
 <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">mpi</span> <span class="o">=</span> <span class="n">mpi</span> <span class="ow">or</span> <span class="s1">&#39;nompi&#39;</span> <span class="o">%</span><span class="p">}</span>
@@ -679,7 +644,7 @@ named <code class="docutils literal notranslate"><span class="pre">yum_requireme
 <p>There are only very few situations where dependencies installed by yum are acceptable. These cases include</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>satisfying the requirements of <a class="reference internal" href="../misc/00_intro.html#term-cdt"><span class="xref std std-term">CDT</span></a> packages during test phase</p></li>
+<li><p>satisfying the requirements of <a class="reference internal" href="../misc/00_intro.html#term-CDT"><span class="xref std std-term">CDT</span></a> packages during test phase</p></li>
 <li><p>installing packages that are only required for testing</p></li>
 </ul>
 </div></blockquote>
@@ -802,6 +767,38 @@ Further, the <code class="docutils literal notranslate"><span class="pre">pybind
 </pre></div>
 </div>
 </div>
+<div class="section" id="empty-python-packages">
+<span id="knowledge-empty"></span><h3>Empty Python packages<a class="headerlink" href="#empty-python-packages" title="Permalink to this headline">¶</a></h3>
+<p>For some features introduced in later Python versions, the Python community creates backports, which makes these
+features available for earlier versions of Python as well.
+One example here is <a class="reference external" href="https://www.python.org/dev/peps/pep-0557/">dataclasses</a> which was introduced with
+Python3.7 but is available as a <a class="reference external" href="https://github.com/ericvsmith/dataclasses">backport</a> for Python3.6 too.
+Therefore, most upstream packages make those backports only mandatory for specific versions of Python and exclude them otherwise.</p>
+<p>Implementing this restriction in conda-forge is currently only possible through the use of <code class="docutils literal notranslate"><span class="pre">skips</span></code>
+which restricts the corresponding conda-forge recipes from becoming <code class="docutils literal notranslate"><span class="pre">noarch</span></code>.</p>
+<p>Therefore, some conda-forge recipes only create an actual package on specific Python versions and are otherwise an
+empty placeholder. This allows them to be safely installed under all Python versions and makes using <code class="docutils literal notranslate"><span class="pre">skips</span></code> unnecessary.</p>
+<p>Currently available packages:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 41%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Available on:</p></th>
+<th class="head"><p>Empty on:</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dataclasses</p></td>
+<td><p>python &gt;=3.6,&lt;3.7</p></td>
+<td><p>python &gt;=3.7</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="section" id="noarch-builds">
 <h2>Noarch builds<a class="headerlink" href="#noarch-builds" title="Permalink to this headline">¶</a></h2>
@@ -900,7 +897,7 @@ core team if this is something you think you need.</p>
 <p>To use a new SDK, add the following in <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Please consult conda-forge/core before doing this</span>
 <span class="nt">MACOSX_SDK_VERSION</span><span class="p">:</span>        <span class="c1"># [osx and x86_64]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">10.12</span>                  <span class="c1"># [osx and x86_64]</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;10.12&quot;</span>                <span class="c1"># [osx and x86_64]</span>
 </pre></div>
 </div>
 <p>Note that this should be done if the error you are getting says that a header is not
@@ -915,9 +912,9 @@ as described below.</p>
 is available only for macOS x.x, then do the following in <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code>,</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Please consult conda-forge/core before doing this</span>
 <span class="nt">MACOSX_DEPLOYMENT_TARGET</span><span class="p">:</span>  <span class="c1"># [osx and x86_64]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">10.12</span>                  <span class="c1"># [osx and x86_64]</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;10.12&quot;</span>                <span class="c1"># [osx and x86_64]</span>
 <span class="nt">MACOSX_SDK_VERSION</span><span class="p">:</span>        <span class="c1"># [osx and x86_64]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">10.12</span>                  <span class="c1"># [osx and x86_64]</span>
+  <span class="p p-Indicator">-</span> <span class="s">&quot;10.12&quot;</span>                <span class="c1"># [osx and x86_64]</span>
 </pre></div>
 </div>
 <p>In <code class="docutils literal notranslate"><span class="pre">recipe/meta.yaml</span></code>, add the following to ensure that the user’s system is compatible.</p>
@@ -932,21 +929,14 @@ the requirement should be changed from <code class="docutils literal notranslate
 </div>
 <div class="section" id="pypy-builds">
 <h2>PyPy builds<a class="headerlink" href="#pypy-builds" title="Permalink to this headline">¶</a></h2>
-<p>To use the PyPy builds you can do the following,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.6.*<span class="o">=</span>*_pypy
-</pre></div>
-</div>
-<p>or,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install pypy <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.6
-</pre></div>
-</div>
-<p>or,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install pypy
+<p>To use the PyPy 3.6 or 3.7 builds you can do the following,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n pypy36  pypy <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.6
+conda create -n pypy37  pypy <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>As of March 8, if you are using defaults as a low priority channel,
+<p>As of March 8 2020, if you are using defaults as a low priority channel,
 then you need to use strict channel priority as the metadata in defaults
 has not been patched yet which allows cpython extension packages to be
 installed alongside pypy.</p>
@@ -976,6 +966,47 @@ conda-build</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="using-setuptools-scm">
+<h2>Using setuptools_scm<a class="headerlink" href="#using-setuptools-scm" title="Permalink to this headline">¶</a></h2>
+<p>The Python module <a class="reference external" href="https://github.com/pypa/setuptools_scm">setuptools_scm</a>
+can be used to manage a package’s version automatically from metadata, such as git tags.
+The package’s version string is thus not specified anywhere in the package,
+but encoded in it at install-time.</p>
+<p>For conda-build this means that <code class="docutils literal notranslate"><span class="pre">setuptools_scm</span></code> must be included as a <code class="docutils literal notranslate"><span class="pre">host</span></code> dependency.
+Additionally, some attention because the metadata is often not available in the sources.
+There are two options for how to proceed:</p>
+<ul>
+<li><p>For Python package also available on PyPI:
+Use the PyPi tarball as a source, as it will have the metadata encoded
+(in such a way that <code class="docutils literal notranslate"><span class="pre">setuptools_scm</span></code> knows how to find it).</p></li>
+<li><p>Specify the environment variable <code class="docutils literal notranslate"><span class="pre">SETUPTOOLS_SCM_PRETEND_VERSION</span></code> with the version string.
+If specified this environment variable is the principle source for <code class="docutils literal notranslate"><span class="pre">setuptools_scm</span></code>.
+There are two ways how to do this:</p>
+<ul>
+<li><p>If you are using build scripts, in <code class="docutils literal notranslate"><span class="pre">build.sh</span></code> specify:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">SETUPTOOLS_SCM_PRETEND_VERSION</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PKG_VERSION</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>and in <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> specify:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span> <span class="nv">SETUPTOOLS_SCM_PRETEND_VERSION</span><span class="o">=</span>%PKG_VERSION%
+</pre></div>
+</div>
+<p>Whereby you use that <code class="docutils literal notranslate"><span class="pre">PKG_VERSION</span></code> has been set with the version string,
+see <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#env-vars">Environment variables</a>.</p>
+</li>
+<li><p>Otherwise, if you are directly building from <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>, use for example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+  <span class="c1"># [...]</span>
+  <span class="nt">script_env</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">SETUPTOOLS_SCM_PRETEND_VERSION={{version}}</span>
+  <span class="nt">script</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">-vv&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="using-centos-7">
 <span id="centos7"></span><h2>Using CentOS 7<a class="headerlink" href="#using-centos-7" title="Permalink to this headline">¶</a></h2>
 <p>To use the newer CentOS 7 <code class="docutils literal notranslate"><span class="pre">sysroot</span></code> with <code class="docutils literal notranslate"><span class="pre">glibc</span></code> <code class="docutils literal notranslate"><span class="pre">2.17</span></code> on <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>,
@@ -986,24 +1017,245 @@ put the following in your build section.</p>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sysroot_linux-64 2.17</span>  <span class="c1"># [linux64]</span>
 </pre></div>
 </div>
-<p>You also need to use a newer docker image by setting the following in the <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code>
+<p>You also need to use a newer docker image by setting the following in the <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>
 of your recipe and rerendering.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cuda_compiler_version</span><span class="p">:</span>                    <span class="c1"># [linux64]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">None</span>                                  <span class="c1"># [linux64]</span>
-<span class="nt">docker_image</span><span class="p">:</span>                             <span class="c1"># [linux64]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">condaforge/linux-anvil-cos7-x86_64</span>    <span class="c1"># [linux64]</span>
-<span class="nt">cdt_name</span><span class="p">:</span>                                 <span class="c1"># [linux64]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cos7</span>                                  <span class="c1"># [linux64]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">os_version</span><span class="p">:</span>
+  <span class="nt">linux_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cos7</span>
 </pre></div>
 </div>
-<p>The extra <code class="docutils literal notranslate"><span class="pre">cuda_compiler_version</span></code> key is needed because we currently zip that
-key with <code class="docutils literal notranslate"><span class="pre">docker_image</span></code>. Also <code class="docutils literal notranslate"><span class="pre">cdt_name</span></code> ensures the CDTs match the CentOS
-version. If this changes in the future, then this extra key may not be needed.</p>
 <p>Finally, note that the <code class="docutils literal notranslate"><span class="pre">aarch64</span></code> and <code class="docutils literal notranslate"><span class="pre">ppc64le</span></code> platforms already use CentOS 7.</p>
 </div>
+<div class="section" id="cuda-builds">
+<span id="cuda"></span><h2>CUDA builds<a class="headerlink" href="#cuda-builds" title="Permalink to this headline">¶</a></h2>
+<p>Although the provisioned CI machines do not feature a GPU, Conda-Forge does provide mechanisms
+to build CUDA-enabled packages. These mechanisms involve several packages:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code>: The runtime libraries for the CUDA toolkit. This is what end-users will end
+up installing next to your package.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nvcc</span></code>: Nvidia’s EULA does not allow the redistribution of compilers and drivers. Instead, we
+provide a wrapper package that locates the CUDA installation in the system. The main role of this
+package is to set some environment variables (<code class="docutils literal notranslate"><span class="pre">CUDA_HOME</span></code>, <code class="docutils literal notranslate"><span class="pre">CUDA_PATH</span></code>, <code class="docutils literal notranslate"><span class="pre">CFLAGS</span></code> and others),
+as well as wrapping the real <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> executable to set some extra command line arguments.</p></li>
+</ul>
+<p>In practice, to enable CUDA on your package, add <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">compiler('cuda')</span> <span class="pre">}}</span></code> to the <code class="docutils literal notranslate"><span class="pre">build</span></code>
+section of your requirements and rerender. The matching <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code> will be added to the <code class="docutils literal notranslate"><span class="pre">run</span></code>
+requirements automatically.</p>
+<p>On Linux, CMake users are required to use <code class="docutils literal notranslate"><span class="pre">${CMAKE_ARGS}</span></code> so CMake can find CUDA correctly. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mkdir build &amp;&amp; cd build
+cmake ${CMAKE_ARGS} ${SRC_DIR}
+make
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>How is CUDA provided at the system level?</strong></p>
+<ul class="simple">
+<li><p>On Linux, Nvidia provides official Docker images, which we then
+<a class="reference external" href="https://github.com/conda-forge/docker-images">adapt</a> to Conda-Forge’s needs.</p></li>
+<li><p>On Windows, the compilers need to be installed for every CI run. This is done through the
+<a class="reference external" href="https://github.com/conda-forge/conda-forge-ci-setup-feedstock/">conda-forge-ci-setup</a> scripts.
+Do note that the Nvidia executable won’t install the drivers because no GPU is present in the machine.</p></li>
+</ul>
+<p><strong>How is cudatoolkit selected at install time?</strong></p>
+<p>Conda exposes the maximum CUDA version supported by the installed Nvidia drivers through a virtual package
+named <code class="docutils literal notranslate"><span class="pre">__cuda</span></code>. By default, <code class="docutils literal notranslate"><span class="pre">conda</span></code> will install the highest version available
+for the packages involved. To override this behaviour, you can define a <code class="docutils literal notranslate"><span class="pre">CONDA_OVERRIDE_CUDA</span></code> environment
+variable. More details in the
+<a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html#overriding-detected-packages">Conda docs</a>.</p>
+<p>Note that prior to v4.8.4, <code class="docutils literal notranslate"><span class="pre">__cuda</span></code> versions would not be part of the constraints, so you would always
+get the latest one, regardless the supported CUDA version.</p>
+<p>If for some reason you want to install a specific version, you can use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">your</span><span class="o">-</span><span class="n">gpu</span><span class="o">-</span><span class="n">package</span> <span class="n">cudatoolkit</span><span class="o">=</span><span class="mf">10.1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing-the-packages">
+<h3>Testing the packages<a class="headerlink" href="#testing-the-packages" title="Permalink to this headline">¶</a></h3>
+<p>Since the CI machines do not feature a GPU, you won’t be able to test the built packages as part
+of the conda recipe. That does not mean you can’t test your package locally. To do so:</p>
+<ol class="arabic">
+<li><p>Enable the Azure artifacts for your feedstock (see <a class="reference internal" href="conda_forge_yml.html#azure-config"><span class="std std-ref">here</span></a>).</p></li>
+<li><p>Include the test files and requirements in the recipe
+<a class="reference external" href="https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/meta.yaml#L51-L61">like this</a>.</p></li>
+<li><p>Provide the test instructions. Take into account that the GPU tests will fail in the CI run,
+so you need to ignore them to get the package built and uploaded as an artifact.
+<a class="reference external" href="https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/run_test.py">Example</a>.</p></li>
+<li><p>Once you have downloaded the artifacts, you will be able to run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">build</span> <span class="o">--</span><span class="n">test</span> <span class="o">&lt;</span><span class="n">pkg</span> <span class="n">file</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="common-problems-and-known-issues">
+<h3>Common problems and known issues<a class="headerlink" href="#common-problems-and-known-issues" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="nvcuda-dll-cannot-be-found-on-windows">
+<h4><code class="docutils literal notranslate"><span class="pre">nvcuda.dll</span></code> cannot be found on Windows<a class="headerlink" href="#nvcuda-dll-cannot-be-found-on-windows" title="Permalink to this headline">¶</a></h4>
+<p>The <a class="reference external" href="https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat">scripts</a>
+used to install the CUDA Toolkit on Windows cannot provide <code class="docutils literal notranslate"><span class="pre">nvcuda.dll</span></code>
+as part of the installation because no GPU is physically present in the CI machines.
+As a result, you might get linking errors in the postprocessing steps of <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">build</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>WARNING (arrow-cpp,Library/bin/arrow_cuda.dll): $RPATH/nvcuda.dll not found in packages,
+sysroot(s) nor the missing_dso_whitelist.
+
+.. is this binary repackaging?
+</pre></div>
+</div>
+<p>For now, you will have to add <code class="docutils literal notranslate"><span class="pre">nvcuda.dll</span></code> to the <code class="docutils literal notranslate"><span class="pre">missing_dso_whitelist</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">build</span><span class="p">:</span>
+  <span class="o">...</span>
+  <span class="n">missing_dso_whitelist</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s2">&quot;*/nvcuda.dll&quot;</span>   <span class="c1"># [win]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="adding-support-for-a-new-cuda-version">
+<h3>Adding support for a new CUDA version<a class="headerlink" href="#adding-support-for-a-new-cuda-version" title="Permalink to this headline">¶</a></h3>
+<p>Providing a new CUDA version involves five repositores:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/conda-forge/cudatoolkit-feedstock">cudatoolkit-feedstock</a></p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/nvcc-feedstock">nvcc-feedstock</a></p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge-pinning-feedstock</a></p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/docker-images">docker-images</a> (Linux only)</p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/conda-forge-ci-setup-feedstock">conda-forge-ci-setup-feedstock</a> (Windows only)</p></li>
+</ul>
+<p>The steps involved are, roughly:</p>
+<ol class="arabic simple">
+<li><p>Add the <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code> packages in <code class="docutils literal notranslate"><span class="pre">cudatoolkit-feedstock</span></code>.</p></li>
+<li><p>Submit the version migrator to <code class="docutils literal notranslate"><span class="pre">conda-forge-pinning-feedstock</span></code>.
+This will stay open during the following steps.</p></li>
+<li><p>For Linux, add the corresponding Docker images at <code class="docutils literal notranslate"><span class="pre">docker-images</span></code>.
+Copy the migration file manually to <code class="docutils literal notranslate"><span class="pre">.ci_support/migrations</span></code>.
+This copy should not specify a timestamp. Comment it out and rerender.</p></li>
+<li><p>For Windows, add the installer URLs and hashes to the <code class="docutils literal notranslate"><span class="pre">conda-forge-ci-setup</span></code>
+<a class="reference external" href="https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat">script</a>.
+The migration file must also be manually copied here. Rerender.</p></li>
+<li><p>Create the new <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> packages for the new version. Again, manual
+migration must be added. Rerender.</p></li>
+<li><p>When everything else has been merged and testing has taken place,
+consider merging the PR opened at step 2 now so it can apply to all the downstream feedstocks.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="apple-silicon-builds">
+<span id="osxarm64"></span><h2>Apple Silicon builds<a class="headerlink" href="#apple-silicon-builds" title="Permalink to this headline">¶</a></h2>
+<p>The new Apple M1 processor is the first Apple Silicon supported by conda-forge
+<a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues/1126">osx-arm64</a> builds.
+For new builds to be available, via cross-compilation, a migration is required for
+the package and its dependencies. These builds are experimental as many of them are untested.</p>
+<p>To request a migration for a particular package and all its dependencies:</p>
+<ol class="arabic simple">
+<li><p>Check the feedstock in question to see if there is already an issue or pull request.
+Opening an issue here is fine, as it might take a couple iterations of the below,
+especially if many dependencies need to be built as well.</p></li>
+<li><p>If nothing is under way, look at the current <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt">conda-forge-pinning</a>.</p></li>
+<li><p>If the package is not listed there, make a PR, adding the package
+name to the end of <code class="docutils literal notranslate"><span class="pre">osx_arm64.txt</span></code>. The migration bot should start making automated
+pull requests to the repo and its dependencies.</p></li>
+<li><p>Within a few hours, the <a class="reference external" href="https://conda-forge.org/status/#armosxaddition">status page</a>
+should reflect the progress of the package in question, and help you keep track
+of progress. Help out if you can!</p></li>
+<li><p>The feedstock maintainers (who very likely <em>do not</em> have an M1) will work to make
+any changes required to pass continuous intgration. If you have insight into
+the particular package, <strong>please</strong> chime in, but most of all <strong>be patient and polite</strong>.</p></li>
+<li><p>Once the new builds are available from <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code>, please help the maintainers
+by testing the packages, and reporting back with any problems… but also successes!</p></li>
+</ol>
+</div>
+<div class="section" id="pre-release-builds">
+<h2>Pre-release builds<a class="headerlink" href="#pre-release-builds" title="Permalink to this headline">¶</a></h2>
+<p>Recipe maintainers can make pre-release builds available on
+conda-forge by adding them to the <code class="docutils literal notranslate"><span class="pre">dev</span></code> or <code class="docutils literal notranslate"><span class="pre">rc</span></code> label.</p>
+<p>The semantics of these labels should generally follow the
+<a class="reference external" href="https://docs.python.org/devguide/devcycle.html#stages">guidelines</a> that Python
+itself follows.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rc</span></code>: <a class="reference external" href="https://docs.python.org/devguide/devcycle.html#beta">Beta</a> and <a class="reference external" href="https://docs.python.org/devguide/devcycle.html#release-candidate-rc">Release
+Candidate</a>
+(RC). No new features. Bugfix only.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dev</span></code>: <a class="reference external" href="https://docs.python.org/devguide/devcycle.html#pre-alpha">Pre-Alpha</a>
+and <a class="reference external" href="https://docs.python.org/devguide/devcycle.html#alpha">Alpha</a>. These are
+still packages that could see substantial changes
+between the dev version and the final release.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> labels aren’t used. Given the light usage of labels on the conda-forge
+channel thus far, it seems rather unnecessary to introduce many labels.
+<code class="docutils literal notranslate"><span class="pre">dev</span></code> and <code class="docutils literal notranslate"><span class="pre">rc</span></code> seem like a nice compromise.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Certain packages (for example <a class="reference external" href="https://pypi.org/project/black/#history">black</a>) follow
+a release cycle in which they have never had a non-beta/alpha release.  In these cases
+the conda packages for those do <em>not</em> need to be published to a prerelease label.</p>
+</div>
+<div class="section" id="creating-a-pre-release-build">
+<h3>Creating a pre-release build<a class="headerlink" href="#creating-a-pre-release-build" title="Permalink to this headline">¶</a></h3>
+<p>To create a <code class="docutils literal notranslate"><span class="pre">dev</span></code> or <code class="docutils literal notranslate"><span class="pre">rc</span></code> package, a PR can be issued into the <code class="docutils literal notranslate"><span class="pre">dev</span></code> or <code class="docutils literal notranslate"><span class="pre">rc</span></code> branch of the
+feedstock.
+This branch must change the <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code> file to point to the <code class="docutils literal notranslate"><span class="pre">&lt;package_name&gt;_dev</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;package_name&gt;_rc</span></code> label.</p>
+<p>For example, matplotlib rc releases would include:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channel_targets</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge matplotlib_rc</span>
+</pre></div>
+</div>
+<p>If a pre-release build of B depends on a pre-release build of A, then A should have,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channel_targets</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge A_rc</span>
+</pre></div>
+</div>
+<p>while B should have,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channel_sources</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge/label/A_rc,conda-forge,defaults</span>
+<span class="nt">channel_targets</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge B_rc</span>
+</pre></div>
+</div>
+<p>in <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code> in their respective feedstocks.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A rerender needs to happen for these changes to reflect in CI files.</p>
+</div>
+</div>
+<div class="section" id="installing-a-pre-release-build">
+<h3>Installing a pre-release build<a class="headerlink" href="#installing-a-pre-release-build" title="Permalink to this headline">¶</a></h3>
+<p>Use the following command, but replace <code class="docutils literal notranslate"><span class="pre">PACKAGE_NAME</span></code> with the package you want
+to install and replace <code class="docutils literal notranslate"><span class="pre">LABEL</span></code> with <code class="docutils literal notranslate"><span class="pre">rc</span></code> or <code class="docutils literal notranslate"><span class="pre">dev</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">conda install -c conda-forge/label/PACKAGE_NAME_LABEL -c conda-forge PACKAGE_NAME</span>
+</pre></div>
+</div>
+<p>For example, let’s install matplotlib from the <code class="docutils literal notranslate"><span class="pre">rc</span></code> label:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">conda install -c conda-forge/label/matplotlib_rc -c conda-forge matplotlib</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pre-release-version-sorting">
+<h3>Pre-release version sorting<a class="headerlink" href="#pre-release-version-sorting" title="Permalink to this headline">¶</a></h3>
+<p>If you wish to add numbers to your <code class="docutils literal notranslate"><span class="pre">dev</span></code> or <code class="docutils literal notranslate"><span class="pre">rc</span></code> build, you should follow the
+<a class="reference external" href="http://conda.pydata.org/docs/spec.html#build-version-spec">guidelines</a> put
+forth by Continuum regarding version sorting in <code class="docutils literal notranslate"><span class="pre">conda</span></code>. Also see the <a class="reference external" href="https://github.com/conda/conda/blob/4.2.13/conda/version.py#L93-L119">source
+code for conda
+4.2.13</a>.
+The tl;dr here is that conda sorts as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span> <span class="mf">1.0</span>
+<span class="o">&lt;</span> <span class="mf">1.1</span><span class="n">dev1</span>    <span class="c1"># special case &#39;dev&#39;</span>
+<span class="o">&lt;</span> <span class="mf">1.1</span><span class="o">.</span><span class="mi">0</span><span class="n">dev1</span>  <span class="c1"># special case &#39;dev&#39;</span>
+<span class="o">==</span> <span class="mf">1.1</span><span class="o">.</span><span class="n">dev1</span>   <span class="c1"># 0 is inserted before string</span>
+<span class="o">&lt;</span> <span class="mf">1.1</span><span class="o">.</span><span class="mi">0</span><span class="n">rc1</span>
+<span class="o">&lt;</span> <span class="mf">1.1</span><span class="o">.</span><span class="mi">0</span>
+</pre></div>
+</div>
+<p>So make sure that you <strong>tag</strong> your package in such a way that the package name
+that conda-build spits out will sort the package uploaded with an <code class="docutils literal notranslate"><span class="pre">rc</span></code> label
+higher than the package uploaded with the <code class="docutils literal notranslate"><span class="pre">dev</span></code> label.</p>
+</div>
+</div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -1063,6 +1315,7 @@ version. If this changes in the future, then this extra key may not be needed.</
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#matplotlib">Matplotlib</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pybind11-abi-constraints"><code class="docutils literal notranslate"><span class="pre">pybind11</span></code> ABI Constraints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#empty-python-packages">Empty Python packages</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#noarch-builds">Noarch builds</a><ul>
@@ -1073,7 +1326,24 @@ version. If this changes in the future, then this extra key may not be needed.</
 <li class="toctree-l3"><a class="reference internal" href="#build-matrices">Build matrices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#requiring-newer-macos-sdks">Requiring newer macOS SDKs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pypy-builds">PyPy builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-setuptools-scm">Using setuptools_scm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-centos-7">Using CentOS 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cuda-builds">CUDA builds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#testing-the-packages">Testing the packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-problems-and-known-issues">Common problems and known issues</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#nvcuda-dll-cannot-be-found-on-windows"><code class="docutils literal notranslate"><span class="pre">nvcuda.dll</span></code> cannot be found on Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-support-for-a-new-cuda-version">Adding support for a new CUDA version</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#apple-silicon-builds">Apple Silicon builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-release-builds">Pre-release builds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-pre-release-build">Creating a pre-release build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-a-pre-release-build">Installing a pre-release build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pre-release-version-sorting">Pre-release version sorting</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
@@ -1082,6 +1352,9 @@ version. If this changes in the future, then this extra key may not be needed.</
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contracting/00_intro.html">Contracting Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/announcements.html">Announcements</a></li>
 </ul>
 
   </div>
@@ -1147,16 +1420,17 @@ version. If this changes in the future, then this extra key may not be needed.</
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Knowledge base</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2020, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+        &#169; Copyright 2016-2021, conda-forge.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

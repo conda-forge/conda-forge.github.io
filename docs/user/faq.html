@@ -3,19 +3,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>FAQ &#8212; conda-forge 2020.12.21 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ &#8212; conda-forge 2021.04.01 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
 
     
     
@@ -53,9 +53,10 @@
         <li class="right" >
           <a href="ci-skeleton.html" title="Using conda-forge to manage your CI"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FAQ</a></li> 
       </ul>
     </div>
     </div>
@@ -111,9 +112,23 @@ Nevertheless, sometimes Travis CI ignores this for whatever reason (probably a b
 In such a case, please disregard failing builds.
 Note that <code class="docutils literal notranslate"><span class="pre">travis-ci.org</span></code> builds are soon being phased out and replaced by <code class="docutils literal notranslate"><span class="pre">travis-ci.com</span></code>.</p>
 </div></blockquote>
+<p id="faq-compiler-metapkg"><a class="reference internal" href="#faq-compiler-metapkg"><span class="std std-ref">(Q)</span></a> <strong>How can I install a C/C++ compiler in my environment?</strong></p>
+<blockquote>
+<div><p>You can use our convenient meta-packages <code class="docutils literal notranslate"><span class="pre">c-compiler</span></code> and <code class="docutils literal notranslate"><span class="pre">cxx-compiler</span></code> to install a compiler stack that fits your platform. Error messages such as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x86_64</span><span class="o">-</span><span class="n">apple</span><span class="o">-</span><span class="n">darwin13</span><span class="o">.</span><span class="mf">4.0</span><span class="o">-</span><span class="n">clang</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span>
+</pre></div>
+</div>
+<p>are a telltale sign that you are lacking compilers.</p>
+</div></blockquote>
+<p><span class="xref std std-ref">(Q)</span> <strong>How can I compile CUDA (host or device) codes in my environment?</strong></p>
+<blockquote>
+<div><p>Unfortunately, this is not possible with Conda-Forge’s current infrastructure (<code class="docutils literal notranslate"><span class="pre">nvcc</span></code>, <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code>, etc) if there is no local CUDA Toolkit installation. In particular, the <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> package provided on Conda-Forge is a <em>wrapper package</em> that exposes the actual <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler to our CI infrastructure in a <code class="docutils literal notranslate"><span class="pre">conda</span></code>-friendly way; it does not contain the full <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler toolchain. One of the reasons is that CUDA headers like <code class="docutils literal notranslate"><span class="pre">cuda.h</span></code>, <code class="docutils literal notranslate"><span class="pre">cuda_runtime.h</span></code>, etc, are not redistributable according to NVIDIA’s EULA, which are needed at compile time. Likewise, the <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code> package only contains CUDA runtime libraries and not the compiler toolchain.</p>
+<p>If you need to compile CUDA codes, even if they involve only CUDA host APIs, you will still need a valid CUDA Toolkit installed locally and use it. Please refer to <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html">NVCC’s documentation</a> for the CUDA compiler usage and <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html">CUDA Programming Guide</a> for general CUDA programming.</p>
+</div></blockquote>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -138,6 +153,9 @@ Note that <code class="docutils literal notranslate"><span class="pre">travis-ci
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contracting/00_intro.html">Contracting Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="announcements.html">Announcements</a></li>
 </ul>
 
   </div>
@@ -203,16 +221,17 @@ Note that <code class="docutils literal notranslate"><span class="pre">travis-ci
         <li class="right" >
           <a href="ci-skeleton.html" title="Using conda-forge to manage your CI"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FAQ</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2020, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+        &#169; Copyright 2016-2021, conda-forge.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

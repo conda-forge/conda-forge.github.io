@@ -96,7 +96,7 @@ After merging the :term:`PR`, our infrastructure will build the package and make
 Post staging process
 --------------------
 
-* After the PR is merged, our :term:`CI` services will create a new git repo automatically. For example, the recipe for a package named ``pydstool`` will be moved to a new repository `https://github.com/conda-forge/pydstool-feedstock <https://github.com/conda-forge/pydstool-feedstock>`_.
+* After the PR is merged, our :term:`CI` services will create a new git repo automatically. For example, the recipe for a package named ``pydstool`` will be moved to a new repository `https://github.com/conda-forge/pydstool-feedstock <https://github.com/conda-forge/pydstool-feedstock>`_. This process is automated through a CI job on the ``conda-forge/staged-recipes`` repo. It sometimes fails due to API rate limits and will automatically retry itself. If your feedstock has not been created after a day or so, please get in touch with the ``conda-forge/core`` team for help.
 * CI services will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to `https://anaconda.org/conda-forge <https://anaconda.org/conda-forge>`_
 * If this is your first contribution, you will be added to the conda-forge `team <https://github.com/orgs/conda-forge/people>`_ and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.
 * If you want to make a change to the recipe, send a :term:`PR` to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.

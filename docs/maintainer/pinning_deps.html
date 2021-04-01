@@ -3,19 +3,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Pinned dependencies &#8212; conda-forge 2020.12.21 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pinned dependencies &#8212; conda-forge 2021.04.01 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
 
     
     
@@ -53,9 +53,10 @@
         <li class="right" >
           <a href="updating_pkgs.html" title="Maintaining packages"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Pinned dependencies</a></li> 
       </ul>
     </div>
     </div>
@@ -118,7 +119,7 @@ These pinned versions represent the ABIs that conda-forge is currently supportin
 </div>
 <div class="section" id="specifying-run-exports">
 <h2>Specifying run_exports<a class="headerlink" href="#specifying-run-exports" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> feature can be used to specify the versions that are <a class="reference internal" href="../misc/00_intro.html#term-abi"><span class="xref std std-term">ABI</span></a> compatible with the built version. This leads to higher flexibility of choosable packages, without breakages due to incompatibilities.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> feature can be used to specify the versions that are <a class="reference internal" href="../misc/00_intro.html#term-ABI"><span class="xref std std-term">ABI</span></a> compatible with the built version. This leads to higher flexibility of choosable packages, without breakages due to incompatibilities.</p>
 <p>Packages that depend on a package with <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> can choose to overwrite this behavior using the <code class="docutils literal notranslate"><span class="pre">build/ignore_run_exports</span></code> key.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -145,7 +146,7 @@ be added by hand. To do this, follow these steps:</p>
 <li><p>create a new migration yaml by copying <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/example.exyaml">example.exyaml</a> in the <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-forge-pinning</span></code> repository.</p></li>
 <li><p>change the migration yaml to reflect the package and version to be migrated</p></li>
 <li><p>write a <span class="xref std std-ref">migrator</span> for propagating the pin changes.</p></li>
-<li><p>propose the changes as a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> to <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a>.</p></li>
+<li><p>propose the changes as a <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a> to <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a>.</p></li>
 <li><p>once accepted the migration will begin. The migration status can be monitored at <a class="reference external" href="https://conda-forge.org/status">https://conda-forge.org/status</a>.</p></li>
 <li><p>After the migration is complete, a new PR can be issued to <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a> to:</p>
 <ul class="simple">
@@ -165,6 +166,7 @@ and documentation <a class="reference external" href="https://regro.github.io/cf
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -194,6 +196,9 @@ and documentation <a class="reference external" href="https://regro.github.io/cf
 <li class="toctree-l1"><a class="reference internal" href="../orga/00_intro.html">Organisation Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/00_intro.html">Miscellaneous</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contracting/00_intro.html">Contracting Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/announcements.html">Announcements</a></li>
 </ul>
 
   </div>
@@ -259,16 +264,17 @@ and documentation <a class="reference external" href="https://regro.github.io/cf
         <li class="right" >
           <a href="updating_pkgs.html" title="Maintaining packages"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2020.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Pinned dependencies</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2020, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+        &#169; Copyright 2016-2021, conda-forge.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
