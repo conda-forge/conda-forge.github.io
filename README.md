@@ -11,7 +11,7 @@ If you have questions or need help, please check out our documentation for a [li
 ## Building the docs
 
 The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` script.
-To build the docs locally, you should follow the steps mentioned below:
+<br> To build the docs locally, you should follow the steps mentioned below:
 
 1.  Clone the repository into your local machine.
 2.  Go into the main folder. </br>
