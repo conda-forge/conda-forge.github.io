@@ -1403,3 +1403,11 @@ The tl;dr here is that conda sorts as follows:
 So make sure that you **tag** your package in such a way that the package name
 that conda-build spits out will sort the package uploaded with an ``rc`` label
 higher than the package uploaded with the ``dev`` label.
+
+Linking jpeg
+============
+
+If you mantain a feedstock that depends on jpeg, please make it depend on the ``jpeg`` package, not 
+on the ``libjpeg-turbo`` package. ``jpeg`` and ``libjpeg-turbo`` have common symbols and loading both into the
+same process can be problematic. It is possible that in the future conda-forge will switch to use 
+libjpeg-turbo, but at the moment depending on libjpeg-turbo is not supported and discouraged.
