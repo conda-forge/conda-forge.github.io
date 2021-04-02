@@ -52,3 +52,5 @@ The more manual process is as follows:
    repository proposing your changes.
 
 Happy editing!
+
+`Go Back Home  <https://conda-forge.org/>`_

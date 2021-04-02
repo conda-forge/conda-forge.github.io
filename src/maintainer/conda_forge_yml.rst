@@ -397,3 +397,5 @@ Currently only:
 
     win:
       enabled: False
+
+`Go Back Home  <https://conda-forge.org/>`_

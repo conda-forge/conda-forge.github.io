@@ -40,3 +40,5 @@ The mailing list is a secondary home for long threads about the ecosystem.
 
 TL:DR Don't be shy! Get in touch!
 ----------------------------------
+
+`Go Back Home  <https://conda-forge.org/>`_

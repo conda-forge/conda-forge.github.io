@@ -109,3 +109,5 @@ Display conda-forge packages in Anaconda Navigator
 #. Click the **Update channels** button.
 
 From now on, whenever the **package filter** is set to **All** on the Environments tab, all conda-forge packages will be displayed.
+
+`Go Back Home  <https://conda-forge.org/>`_

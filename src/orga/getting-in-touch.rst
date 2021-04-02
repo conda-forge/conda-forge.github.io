@@ -40,3 +40,5 @@ There are several sources that have the latest conda-forge information.
 
 * `blog <https://conda-forge.org/blog>`_: We blog about big feature enhancements and other items. Our blog has an Atom `feed <https://conda-forge.org/blog/atom.xml>`_.
 * `news <https://conda-forge.org/docs/user/announcements.html#announcements>`_: Our :ref:`announcements <news>` page has periodic notices about technical changes to our infrastructure. It is also served as an RSS `feed <https://conda-forge.org/docs/news.rss>`_.
+
+`Go Back Home  <https://conda-forge.org/>`_

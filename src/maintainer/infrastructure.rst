@@ -373,3 +373,5 @@ sure ``conda_forge_output_validation: true`` is set in your ``conda-forge.yml`` 
 your feedstock with the latest version of ``conda-smithy``. Finally, new packages that are added to
 feedstocks are registered automatically and once uploaded successfully once, no other feedstock
 will be able to upload packages with the same name.
+
+`Go Back Home  <https://conda-forge.org/>`_

@@ -251,3 +251,5 @@ fork your feedstock and make a meaningful branch name (e.g., `v1.X` or `v1.0`).
 Make the required changes to the recipe and rerender the feedstock. Then push this branch
 from your fork to the upstream feedstock. Our CI services will automatically build any
 branches in addition to the default branch.
+
+`Go Back Home  <https://conda-forge.org/>`_

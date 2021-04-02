@@ -121,3 +121,5 @@ Details of how the migration yaml is setup are provided in an `example <https://
 and documentation `here <https://regro.github.io/cf-scripts/migrators.html#building-a-migration-yaml>`_.
 
 .. _conda-forge/conda-forge-pinning-feedstock: https://github.com/conda-forge/conda-forge-pinning-feedstock
+
+`Go Back Home  <https://conda-forge.org/>`_

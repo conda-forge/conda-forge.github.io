@@ -104,3 +104,5 @@ package that depends on MPI should find the local copy of ``mpich`` and link to 
   ``mpich`` has a high degree of ABI compatibility, making this procedure possible.
   We have not currently implemented this procedure with ``openmpi``, but can do so at a later date
   as ABI compatibility allows.
+
+`Go Back Home  <https://conda-forge.org/>`_  

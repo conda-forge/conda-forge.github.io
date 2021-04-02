@@ -12,3 +12,5 @@ Maintainer Documentation
   knowledge_base
   maintainer_faq
 
+
+`Go Back Home  <https://conda-forge.org/>`_

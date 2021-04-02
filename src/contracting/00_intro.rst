@@ -34,3 +34,5 @@ If you are a service provider and are interested in being added to this list ple
 Add yourself to this list and detailing the services you provide. 
 Please be brief and link to existing materials on your own website where possible.
 Then, when ready, ping @conda-forge/core for review and merging.
+
+`Go Back Home  <https://conda-forge.org/>`_

@@ -69,3 +69,5 @@ Feedstock maintainers are responsible for
 1. Keeping their recipes up-to-date including version bumps.
 2. Merging ABI migration PRs from our bots.
 3. Responding to issues raised by the community on the feedstock issues tracker.
+   
+`Go Back Home  <https://conda-forge.org/>`_

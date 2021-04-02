@@ -9,3 +9,5 @@ Organisation Documentation
   minutes/00_intro
   cfep-index
   getting-in-touch
+
+`Go Back Home  <https://conda-forge.org/>`_

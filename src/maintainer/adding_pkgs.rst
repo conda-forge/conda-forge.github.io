@@ -787,3 +787,5 @@ Jinja expressions serve following purposes in the meta.yaml:
 
 
 For more information please refer to the `Templating with Jinja <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#templating-with-jinja>`__ section in the conda-build docs.
+
+`Go Back Home  <https://conda-forge.org/>`_

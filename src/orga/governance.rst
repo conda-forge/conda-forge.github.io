@@ -355,3 +355,5 @@ Document History
 This document was written by Anthony Scopatz.
 
 This document is released under the CC-BY 4.0 license.
+
+`Go Back Home  <https://conda-forge.org/>`_

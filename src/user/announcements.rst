@@ -287,3 +287,5 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 :2018-09-10: Conda forge now has a magical status bar for tracking the progress of migrations.
 
     You can find this at `conda-forge.org/status <https://conda-forge.org/status>`_.
+
+`Go Back Home  <https://conda-forge.org/>`_

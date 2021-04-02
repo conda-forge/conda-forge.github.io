@@ -1403,3 +1403,5 @@ The tl;dr here is that conda sorts as follows:
 So make sure that you **tag** your package in such a way that the package name
 that conda-build spits out will sort the package uploaded with an ``rc`` label
 higher than the package uploaded with the ``dev`` label.
+
+`Go Back Home  <https://conda-forge.org/>`_

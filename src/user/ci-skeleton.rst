@@ -204,3 +204,5 @@ You just need to repeat step 4, above:
 
 This will generate and replace the CI configuration files for the
 current time and state of the recipe.  It is just that easy!
+
+`Go Back Home  <https://conda-forge.org/>`_
