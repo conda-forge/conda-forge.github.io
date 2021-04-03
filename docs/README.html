@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>&lt;no title&gt; &#8212; conda-forge 2021.04.01 documentation</title>
+    <title>&lt;no title&gt; &#8212; conda-forge 2021.04.03 documentation</title>
     <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -45,7 +45,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-    <li><a href="index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
+    <li><a href="index.html">conda-forge 2021.04.03 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -57,8 +57,19 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <p>To build the docs here locally: make sure you have Sphinx, the Cloud Sphinx Theme, and the sphinxcontrib-fulltoc Sphinx extension installed (<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">sphinx</span> <span class="pre">cloud_sptheme</span> <span class="pre">sphinxcontrib-fulltoc</span></code>), then run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> (Unix) or <code class="docutils literal notranslate"><span class="pre">./make.bat</span> <span class="pre">html</span></code> (Windows). This will create the output files in <code class="docutils literal notranslate"><span class="pre">_build/html</span></code>.</p>
-<p>Documentation update PRs should only change this source; once merged to <code class="docutils literal notranslate"><span class="pre">master</span></code>, <a class="reference external" href="../ci_scripts/update_docs"><code class="docutils literal notranslate"><span class="pre">.ci_scripts/update_docs</span></code></a> will then automatically build it into the <code class="docutils literal notranslate"><span class="pre">docs</span></code> directory.</p>
+  <p>The docs are built on GitHub Actions and run the <code class="docutils literal notranslate"><span class="pre">.ci_scripts/update_docs</span></code> script.</p>
+<p>To build the docs locally, follow the steps mentioned below:</p>
+<ol class="simple">
+<li><p>Clone the repository into your local machine.</p></li>
+<li><p>Go into the main folder and run the following commands.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-f</span> <span class="pre">./.ci_scripts/environment.yml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">conda-forge-docs</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">newsfeed</span> <span class="pre">&amp;&amp;</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--no-deps</span> <span class="pre">.</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">../src</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code></p></li>
+</ol>
+<p>Documentation update PRs should only change the files in <code class="docutils literal notranslate"><span class="pre">src</span></code>.</p>
+<p>Once the PR is merged to <code class="docutils literal notranslate"><span class="pre">master</span></code>, you can find the auto-generated html files in <code class="docutils literal notranslate"><span class="pre">docs</span></code> directory.</p>
 
 
           </div>
@@ -125,7 +136,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
-    <li><a href="index.html">conda-forge 2021.04.01 documentation</a> &#187;</li>
+    <li><a href="index.html">conda-forge 2021.04.03 documentation</a> &#187;</li>
  
       </ul>
     </div>
