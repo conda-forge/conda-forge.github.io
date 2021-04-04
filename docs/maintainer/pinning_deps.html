@@ -5,7 +5,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
     <title>Pinned dependencies &#8212; conda-forge 2021.04.04 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -66,9 +67,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="pinned-dependencies">
+  <section id="pinned-dependencies">
 <span id="pinned-deps"></span><h1>Pinned dependencies<a class="headerlink" href="#pinned-dependencies" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="globally-pinned-packages">
+<section id="globally-pinned-packages">
 <span id="id1"></span><h2>Globally pinned packages<a class="headerlink" href="#globally-pinned-packages" title="Permalink to this headline">¶</a></h2>
 <p>Maintaining a large collection of packages with different requirements poses the danger of producing islands of packages with mutually exclusive dependencies.
 Especially widely used libraries with restricted version compatibilities increase the danger of fractioning the package space.
@@ -115,8 +116,8 @@ These pinned versions represent the ABIs that conda-forge is currently supportin
 </div>
 </div>
 <p>There is additional documentation on this pinning scheme in <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/source/variants.html#build-variants">the conda docs</a>.</p>
-</div>
-<div class="section" id="specifying-run-exports">
+</section>
+<section id="specifying-run-exports">
 <h2>Specifying run_exports<a class="headerlink" href="#specifying-run-exports" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> feature can be used to specify the versions that are <a class="reference internal" href="../misc/00_intro.html#term-abi"><span class="xref std std-term">ABI</span></a> compatible with the built version. This leads to higher flexibility of choosable packages, without breakages due to incompatibilities.</p>
 <p>Packages that depend on a package with <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> can choose to overwrite this behavior using the <code class="docutils literal notranslate"><span class="pre">build/ignore_run_exports</span></code> key.</p>
@@ -133,8 +134,8 @@ Anaconda does this for numpy (see the <a class="reference external" href="https:
 <p>The global pins and <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> are two sides of the same coin.
 If there is an ABI break, as determined by the <code class="docutils literal notranslate"><span class="pre">run_exports</span></code>, then the global pins <em>may</em> need to be updated. It is possible that conda-forge skips that ABI.
 Once the pins are updated, via a migration yaml, then all the packages that are linked are rebuilt.</p>
-</div>
-<div class="section" id="updating-package-pins">
+</section>
+<section id="updating-package-pins">
 <span id="update-pins"></span><h2>Updating package pins<a class="headerlink" href="#updating-package-pins" title="Permalink to this headline">¶</a></h2>
 <p>Changing global pins requires rerendering all packages that depend on the package with the changed pin. Doing this manually
 can be tedious, especially when many packages are involved. Migrators are used to automatically generate pull requests
@@ -161,8 +162,8 @@ be added by hand. To do this, follow these steps:</p>
 </ol>
 <p>Details of how the migration yaml is setup are provided in an <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations/example.exyaml">example</a>
 and documentation <a class="reference external" href="https://regro.github.io/cf-scripts/migrators.html#building-a-migration-yaml">here</a>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
           </div>

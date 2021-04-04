@@ -5,7 +5,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
     <title>Guidelines &#8212; conda-forge 2021.04.04 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -66,9 +67,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="guidelines">
+  <section id="guidelines">
 <h1>Guidelines<a class="headerlink" href="#guidelines" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="transferring-to-conda-forge">
+<section id="transferring-to-conda-forge">
 <h2>Transferring to conda-forge<a class="headerlink" href="#transferring-to-conda-forge" title="Permalink to this headline">¶</a></h2>
 <p>This document intends to layout some guidelines on the transfer of
 <a class="reference external" href="https://github.com/conda/conda-recipes">conda-recipes</a> and
@@ -132,8 +133,8 @@ pull request. One certainly can do this and it can work, but the
 recommendation is to open a PR with one recipe first, and to ping
 &#64;conda-forge/core to ask for agreement about adding one or two additional
 recipes.</p>
-</div>
-<div class="section" id="intended-usage">
+</section>
+<section id="intended-usage">
 <h2>Intended Usage<a class="headerlink" href="#intended-usage" title="Permalink to this headline">¶</a></h2>
 <p>Maintainers’ time and CI resources are what enable conda-forge. They are as scarce as they are valuable. conda-forge has enough capacity to support releasing packages, but not developing them.</p>
 <p>Publishing a package to conda-forge signals it is suitable for users not involved with development. However, publishing does not always happen error-free. Multiple commits are acceptable when debugging issues with the release process itself.</p>
@@ -144,8 +145,8 @@ recipes.</p>
 </ul>
 </dd>
 </dl>
-</div>
-<div class="section" id="renaming-packages">
+</section>
+<section id="renaming-packages">
 <h2>Renaming Packages<a class="headerlink" href="#renaming-packages" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes packages are misnamed.
 To correct the name of the package, please submit a PR into staged-recipes with the correct name.
@@ -153,8 +154,8 @@ During the review process please make certain to note that the package is a rena
 Occasionally the .gitmodules file in the <a class="reference external" href="https://github.com/conda-forge/feedstocks/blob/master/.gitmodules">feedstocks</a> needs to be updated to remove the old feedstock.
 It’s not entirely clear what those circumstances are.
 See <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues/1070">conda-forge.github.io#1070</a>.</p>
-</div>
-<div class="section" id="fixing-broken-packages">
+</section>
+<section id="fixing-broken-packages">
 <span id="fix-broken-packages"></span><h2>Fixing Broken Packages<a class="headerlink" href="#fixing-broken-packages" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes you need to remove a package from the conda-forge channel on Anaconda.org. The reasons
 for this are many, but the ones that immediately come to mind are:</p>
@@ -184,19 +185,19 @@ added to your package, please refer to <a class="reference internal" href="../ma
 </ol>
 <p>Adding the <code class="docutils literal notranslate"><span class="pre">broken</span></code> label to a package is more destructive than patching the repo data
 and thus we prefer repo data patches over labeling things as <code class="docutils literal notranslate"><span class="pre">broken</span></code>.</p>
-</div>
-<div class="section" id="becoming-a-maintainer">
+</section>
+<section id="becoming-a-maintainer">
 <h2>Becoming a maintainer<a class="headerlink" href="#becoming-a-maintainer" title="Permalink to this headline">¶</a></h2>
 <p>Conda-forge is a community project and it can therefore happen that feedstocks become temporarily abandoned.
 You can join the maintainer team of a feedstock by adding your github-id to the <code class="docutils literal notranslate"><span class="pre">recipe-maintainers</span></code> section in the recipe’s <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>.
 Please refer to <a class="reference internal" href="../maintainer/updating_pkgs.html#maint-updating-maintainers"><span class="std std-ref">Updating the maintainer list</span></a> for detailed instructions.</p>
-</div>
-<div class="section" id="language-versions">
+</section>
+<section id="language-versions">
 <h2>Language versions<a class="headerlink" href="#language-versions" title="Permalink to this headline">¶</a></h2>
 <p>Conda-forge contains packages from a number of languages including Python and R, among many others.
 Each of these language-specific packaging sub-ecosystems needs to keep cadence with the language itself, making it challenging to have a blanket policy for how long to keep older versions of the language around.
 As it comes up, each group should be able to define their own policy on how long to keep older versions of their language around.</p>
-<div class="section" id="python">
+<section id="python">
 <h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
 <p>For the Python language, conda-forge aims to keep package builds active and available for the current version and at least two preceding minor versions.
 Whenever Python 4.0 comes out we’ll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously.
@@ -216,9 +217,9 @@ For example, we’re holding off on turning off py36 until pypy comes out with p
 <li><p>If there are lots of people in the community relying on older versions, core team can decide to keep an old version around
 For example, we held off turning off py27 even after numpy, scipy dropped support as there were many in the community interested in keeping support until the end of life of that version.</p></li>
 </ol>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
           </div>

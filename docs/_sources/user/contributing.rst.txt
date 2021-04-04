@@ -1,24 +1,24 @@
-.. _becoming_involved:
+.. _Becoming_involved:
 
 Becoming involved
 *****************
 
-conda-forge is a community-driven effort of cross-platform packaging and as such relies on volunteers to sustain and improve.
+Conda-forge is a community-driven effort of cross-platform packaging and as such relies on volunteers to sustain and improve.
 
-Help is always welcome! You can contribute e.g. by
+We encourage you to contribute in any way you can and would like! You can contribute in many categories such as:
 
- - contributing new packages (:ref:`dev_contribute_pkgs`)
- - help updating and maintaining packages (:ref:`maintaining_pkgs`)
- - suggesting and implementing improvements for our :ref:`infrastructure`
- - help :ref:`improve_docs`
+ - Contributing new packages (:ref:`dev_contribute_pkgs`)
+ - Help updating and maintaining packages (:ref:`maintaining_pkgs`)
+ - Suggesting and implementing improvements for our :ref:`infrastructure`
+ - Help :ref:`improve_docs`
 
 
 .. _improve_docs:
 
-Improving the documentation
+Improve the documentation
 ===========================
 
-You can help improve this documentation! It is version-controlled in the
+You can help improving the documentation! It is version-controlled in the
 `conda-forge.github.io repository
 <https://github.com/conda-forge/conda-forge.github.io>`_ on GitHub. The source
 text is stored there in `the src/ subdirectory
@@ -33,7 +33,7 @@ will take you directly to a web-based editor for this very webpage. In
 general, the file corresponding to each page in the GitHub browser has a
 little pencil icon in its top-right that lets you open it up for editing.
 
-The more manual process is as follows:
+We are glad to know that you would like to contribute. If you are new to our community, we strongly recommend you getting through the following list:
 
 1. `Fork <https://help.github.com/articles/fork-a-repo/>`_ the
    `conda-forge.github.io repository

@@ -5,7 +5,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
     <title>FAQ &#8212; conda-forge 2021.04.04 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -66,7 +67,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="faq">
+  <section id="faq">
 <h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
 <p id="faq-pkg-not-available"><a class="reference internal" href="#faq-pkg-not-available"><span class="std std-ref">(Q)</span></a> <strong>A package I am looking for is not on conda-forge, what can I do?</strong></p>
 <blockquote>
@@ -124,7 +125,7 @@ Note that <code class="docutils literal notranslate"><span class="pre">travis-ci
 <div><p>Unfortunately, this is not possible with Conda-Forge’s current infrastructure (<code class="docutils literal notranslate"><span class="pre">nvcc</span></code>, <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code>, etc) if there is no local CUDA Toolkit installation. In particular, the <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> package provided on Conda-Forge is a <em>wrapper package</em> that exposes the actual <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler to our CI infrastructure in a <code class="docutils literal notranslate"><span class="pre">conda</span></code>-friendly way; it does not contain the full <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler toolchain. One of the reasons is that CUDA headers like <code class="docutils literal notranslate"><span class="pre">cuda.h</span></code>, <code class="docutils literal notranslate"><span class="pre">cuda_runtime.h</span></code>, etc, are not redistributable according to NVIDIA’s EULA, which are needed at compile time. Likewise, the <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code> package only contains CUDA runtime libraries and not the compiler toolchain.</p>
 <p>If you need to compile CUDA codes, even if they involve only CUDA host APIs, you will still need a valid CUDA Toolkit installed locally and use it. Please refer to <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html">NVCC’s documentation</a> for the CUDA compiler usage and <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html">CUDA Programming Guide</a> for general CUDA programming.</p>
 </div></blockquote>
-</div>
+</section>
 
 
           </div>
