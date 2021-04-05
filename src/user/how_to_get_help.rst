@@ -1,4 +1,4 @@
-How to reach out to us
+How to get help in conda-forge
 ==============================
 
 You could connect with us via **Gitter, GitHub Issues or Mailing List**. 
