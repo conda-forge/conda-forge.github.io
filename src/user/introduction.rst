@@ -9,13 +9,14 @@ A brief introduction
 What is conda-forge?
 --------------------
 
-conda-forge is a community effort that provides conda packages for a wide range of software.
+Conda-forge is a GitHub organization containing a collection of recipes, build infrastructure and distributions for the conda package manager.
+
+Modern applications use a large number of libraries. Since the pace of development is expediting, traditional platform package vendors fall short in keeping up with it.
+
+Conda-forge is the one stop shop for all the packages you may care about. 
 
 **Missing a package that you would love to install with conda?** - Chances are we have already packaged it for you!
 
-You can `search <https://anaconda.org/>`__ for packages online. Look out for packages provided by our ``conda-forge`` organization.
-
-**Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack! Please refer to :ref:`becoming_involved`, for an overview on how to start contributing.
 
 
 Why conda-forge?
