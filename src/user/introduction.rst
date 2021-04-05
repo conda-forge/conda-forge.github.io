@@ -9,7 +9,7 @@ A brief introduction
 What is conda-forge?
 --------------------
 
-conda-forge is a community effort that provides conda packages for a wide range of software.
+Conda-forge is a community effort that provides conda packages for a wide range of software.
 
 **Missing a package that you would love to install with conda?** - Chances are we have already packaged it for you!
 
@@ -28,19 +28,19 @@ In the past users only had the option to create an `Anaconda Cloud <https://anac
 
 This came with a list of disadvantages:
 
- - locating packages was difficult due to them being scattered over many channels.
- - combining packages across channels was not always possible due to binary incompatibilities.
- - packages were only available for architectures the developer was interested in or had access to. 
- - channels were often abandoned, updating required locating new channels
+ - Locating packages was difficult due to them being scattered over many channels.
+ - Combining packages across channels was not always possible due to binary incompatibilities.
+ - Packages were only available for architectures the developer was interested in or had access to. 
+ - Channels were often abandoned, updating required locating new channels
 
 conda-forge is a community effort that tackles these issues:
 
- - all packages are shared in a single channel named ``conda-forge``.
- - care is taken that all packages are up-to-date.
- - common standards ensure that all packages have compatible versions.
- - by default, we build packages for macOS, Linux AMD64 and Windows AMD64.
- - many packages are updated by multiple maintainers with an easy option to become a maintainer.
- - an active core developer team is trying to also maintain abandoned packages.
+ - All packages are shared in a single channel named ``conda-forge``.
+ - Care is taken that all packages are up-to-date.
+ - Common standards ensure that all packages have compatible versions.
+ - By default, we build packages for macOS, Linux AMD64 and Windows AMD64.
+ - Many packages are updated by multiple maintainers with an easy option to become a maintainer.
+ - An active core developer team is trying to also maintain abandoned packages.
 
 
 
