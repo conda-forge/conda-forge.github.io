@@ -22,26 +22,26 @@ Conda-forge is the one stop shop for all the packages you may care about.
 Why conda-forge?
 ----------------
 
-The conda team from Anaconda, Inc packages a multitude of packages and provides them to all users free of charge in their ``default`` channel.
+The conda team, from `Anaconda, Inc. <https://anaconda.org/>`__, packages a multitude of packages and provides them to all users free of charge in their ``default`` channel.
 
 But what if a package you are looking for is not in the default channel?
 In the past users only had the option to create an `Anaconda Cloud <https://anaconda.org/>`__ account and create their own channel.
 
 This came with a list of disadvantages:
 
- - locating packages was difficult due to them being scattered over many channels.
- - combining packages across channels was not always possible due to binary incompatibilities.
- - packages were only available for architectures the developer was interested in or had access to. 
- - channels were often abandoned, updating required locating new channels
+ - Locating packages was difficult due to them being scattered over many channels.
+ - Combining packages across channels was not always possible due to binary incompatibilities.
+ - Packages were only available for architectures the developer was interested in or had access to. 
+ - Channels were often abandoned, updating required locating new channels
 
 conda-forge is a community effort that tackles these issues:
 
- - all packages are shared in a single channel named ``conda-forge``.
- - care is taken that all packages are up-to-date.
- - common standards ensure that all packages have compatible versions.
- - by default, we build packages for macOS, Linux AMD64 and Windows AMD64.
- - many packages are updated by multiple maintainers with an easy option to become a maintainer.
- - an active core developer team is trying to also maintain abandoned packages.
+ - All packages are shared in a single channel named ``conda-forge``.
+ - Care is taken that all packages are up-to-date.
+ - Common standards ensure that all packages have compatible versions.
+ - By default, we build packages for macOS, Linux AMD64 and Windows AMD64.
+ - Many packages are updated by multiple maintainers with an easy option to become a maintainer.
+ - An active core developer team is trying to also maintain abandoned packages.
 
 
 
