@@ -135,6 +135,7 @@ html_theme_options = {
     'sidebarlinkcolor': 'rgb(31, 158, 111)',
     'codebgcolor': '#F2F2F2',
     'sidebarbgcolor': '#F2F2F2',
+    'logotarget': '../../../index',
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
