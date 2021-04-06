@@ -19,24 +19,24 @@ Static
 
 Responsibility
 --------------
-The core responsibilities of this team are to
+The core responsibilities of this team are as follows:
 
-- maintain secure access to the credentials to all bot accounts
-- maintain secure access to all keys, API or otherwise, used by ``conda-forge``
-- maintain secure access to all service provider accounts owned by ``conda-forge``
-- maintain the infrastructure for CFEP-13
-- maintain automated ways to recover and reprovision ``conda-forge`` systems
-- perform ongoing security maintenance tasks
-- provision new members of `core` with access to all ``conda-forge`` systems, credentials
-  and keys
+- Maintain secure access to the credentials to all bot accounts.
+- Maintain secure access to all keys, API or otherwise, used by ``conda-forge``.
+- Maintain secure access to all service provider accounts owned by ``conda-forge``.
+- Maintain the infrastructure for ``CFEP-13``.
+- Maintain automated ways to recover and reprovision ``conda-forge`` systems.
+- Perform ongoing security maintenance tasks.
+- Provision new members of `core` with access to all ``conda-forge`` systems, credentials
+  and keys.
 
-This team will operate via the following rules
+This team will operate via the following rules:
 
-- only members of `core` can be on this sub-team
-- this sub-team will report its activity to core at all ``core`` meetings
-- this sub-team will consult with core at ``core`` meetings regarding all planned activity
-- this sub-team will not limit the access by ``core`` members to any ``conda-forge`` resources
-  including but not limited to its systems, credentials, keys, or service accounts
+- Only members of ``core`` can be on this sub-team.
+- This sub-team will report its activity to core at all ``core`` meetings.
+- This sub-team will consult with core at ``core`` meetings regarding all planned activity.
+- This sub-team will not limit the access by ``core`` members to any ``conda-forge`` resources
+  including but not limited to its systems, credentials, keys, or service accounts.
 
 Members
 -------
@@ -61,18 +61,18 @@ Static
 
 Responsibility
 --------------
-The core responsibilities of this team are to
+The core responsibilities of this team are as follows:
 
-- keep core aware of budgetary and financial matters pertaining to conda-forge
-- facilitate dispersal of funds
-- give core updates via the standing budget item at core meetings
-- work closely with the NumFOCUS point of contact to ensure smooth financial operations
+- Keep core aware of budgetary and financial matters pertaining to conda-forge.
+- Facilitate dispersal of funds.
+- Give core updates via the standing budget item at core meetings.
+- Work closely with the NumFOCUS point of contact to ensure smooth financial operations.
 
-This team will operate via the following rules
+This team will operate via the following rules:
 
-- only members of ``core`` can be on this sub-team
-- this sub-team will report its activity to core at all attended ``core`` meetings
-- this sub-team will not approve or deny access to funds unless instructed to
+- Only members of ``core`` can be on this sub-team.
+- This sub-team will report its activity to core at all attended ``core`` meetings.
+- This sub-team will not approve or deny access to funds unless instructed to
   via the method specified by the conda-forge governance document.
 
 Members
@@ -169,7 +169,7 @@ Doc Sub-Team
 
 Role
 ----
-Maintain and improve the documentation; review, organize and help with documentation related issues.
+Maintain and improve the documentation. Review, organize and help with documentation related issues.
 
 Charter
 -------
@@ -181,18 +181,18 @@ Good documentation is an important cornerstone of a successful community project
 Accurate, well organized and comprehensive documentation not only benefits users, but also frees
 the core team by decreasing support requests.
 
-The documentation team is responsible for
+The documentation team is responsible for:
 
- - keeping the documentation accurate and up-to-date.
- - help expanding the documentation by identifying new topics of common interest.
- - improving the documentation by reorganizing and clarifying its contents.
- - giving feedback on community contributions to the documentation.
+ - Keeping the documentation accurate and up-to-date.
+ - Help expanding the documentation by identifying new topics of common interest.
+ - Improving the documentation by reorganizing and clarifying its contents.
+ - Giving feedback on community contributions to the documentation.
 
 As such following task are performed by the documentation team:
 
- - reviewing and organizing documentation related issues and PRs in ``conda-forge.github.io``.
- - proposing improvements and new content by opening issues and pull requests.
- - engaging with the community to ensure the effectiveness of the documentation.
+ - Reviewing and organizing documentation related issues and PRs in ``conda-forge.github.io``.
+ - Proposing improvements and new content by opening issues and pull requests.
+ - Engaging with the community to ensure the effectiveness of the documentation.
 
 
 Members
@@ -221,11 +221,11 @@ Especially for new maintainers it is crucial to be able to ask questions and rec
 
 The staging team is responsible for:
 
- - reviewing and merging pull requests in ``conda-forge/staged-recipes``
- - answering questions and giving feedback regarding ``conda-forge`` requirements
- - identifying common misconceptions and problems due to unclear documentation
- - help the documentation team maintain clear documentation that simplifies contributing packages
- - assist core in supporting feedstock maintainers when questions/issues arise during recipe maintenance
+ - Reviewing and merging pull requests in ``conda-forge/staged-recipes``.
+ - Answering questions and giving feedback regarding ``conda-forge`` requirements.
+ - Identifying common misconceptions and problems due to unclear documentation.
+ - Help the documentation team maintain clear documentation that simplifies contributing packages.
+ - Assist core in supporting feedstock maintainers when questions/issues arise during recipe maintenance.
 
 Members
 -------
