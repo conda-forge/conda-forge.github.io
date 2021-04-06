@@ -1,4 +1,4 @@
-Knowledge base
+Knowledge Base
 **************
 
 Using CMake
