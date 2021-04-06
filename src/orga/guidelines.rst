@@ -22,7 +22,7 @@ tweaks before being added. Also, they should be asked if they would
 like to be added as maintainers. Only if they give express permission,
 to take up the role as a maintainer, then only they should be added in the maintainer list.
 
-In all cases when porting a recipe, you should add yourself as a
+In all cases while porting a recipe, you should add yourself as a
 maintainer. Some contributors to these repos might be quite prolific, but may
 not be as actively engaged. If they specify they only want to be contacted
 for certain recipes or none at all, please respect their wishes also add them too,
