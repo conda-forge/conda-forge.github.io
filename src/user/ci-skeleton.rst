@@ -15,7 +15,7 @@ Getting Started
 ---------------
 The ``ci-skeleton`` command helps get you started by preparing a repository
 to have the proper structure such that the ``rerender`` command will correctly
-add the CI configurations. Let's see an example!
+add the CI configurations. Lets see an example!
 
 Suppose you have a repository for a project called ``myproj``.  In the
 root level of the repository, you can run the following command:

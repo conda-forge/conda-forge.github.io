@@ -27,12 +27,12 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
     In an effort to better secure ``conda-forge``, we are developing a process to
     validate artifacts before they are uploaded to ``anaconda.org``. This validation
-    will look for various security related items, such as artifacts which overwrite
+    will look for various security-related items, such as artifacts that overwrite
     key pieces of certain packages. While this process is in development, we will not
     be rejecting uploads. However, we will start scanning our current artifacts and
     working with the maintainers of those artifacts to mark broken any which we deem
     a security risk. We will also be running validation on new artifacts being upload
-    and will report any issues back to feedstocks. At a future date, artifacts which
+    and will report any issues back to feedstocks. At a future date, artifacts that
     do not pass validation will not be uploaded.
 
 :2020-10-08: Compiler Upgrade to ``GCC`` ``9.3.0``
@@ -51,7 +51,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     to anaconda.org. Direct uploads to the ``conda-forge`` channel will no
     longer work. If you are having trouble with package uploads, please
     rerender your feedstock with the latest version of ``conda-smithy``.
-    As always, if you need help, bump us on gitter or GitHub!
+    As always, if you need help, bump us on Gitter or GitHub!
 
 :2020-08-06: Fixed Maintenance Process for Feedstock Teams
 
@@ -85,10 +85,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     channels. Users can disable this by setting ``channel_priority: flexible`` in their
     ``conda-forge.yml``.
 
-:2020-07-23: NumPy 1.16 as the minimal NumPy version on all platforms.
+:2020-07-23: NumPy 1.16 is the minimal NumPy version on all platforms.
 
     In accordance with `NEP-29 <https://numpy.org/neps/nep-0029-deprecation_policy.html>`_,
-    we have switched to have ``numpy 1.16`` as the minimal supported version on all
+    we have switched to have ``numpy 1.16`` as the minimum supported version on all
     platforms.
 
 :2020-07-17: Conda-forge is building openblas with both pthreads and openmp on Linux
@@ -192,7 +192,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
     Despite our extensive testing, we do not expect this change to be completely smooth,
     so please bear with us. As always, if you have any questions, concerns, or trouble, you
-    can find us on gitter or bump us directly on github!
+    can find us on Gitter or bump us directly on Github!
 
 :2020-03-24: ``vs2015`` to ``vs2017`` Transition
 
@@ -231,7 +231,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
      no ongoing support for Python 2.7 builds and any existing builds are provided on an "as-is" basis.
    - A ``cf202003`` label has been applied to the ``conda-forge`` channel for those
      who need a reference to the package index with Python 2.7.
-   - We are removing support for ``vs2008`` on Windows conjunction with the deprecation
+   - We are removing support for ``vs2008`` on Windows in conjunction with the deprecation
      of Python 2.7, as it was only supported to build this version of Python.
    - We will provide an admin command that will add back Python 2.7 to any feedstock.
      Note that as stated above, we cannot provide support for any Python 2.7 builds
@@ -243,7 +243,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
 :2019-09-30: Clang 9.0.0 and gfortran 7.3.0 as default compilers in OSX.
 
-   - If you maintain a feedstock which require a C/C++ compiler, no changes necessary. A rerender
+   - If you maintain a feedstock that requires a C/C++ compiler, no changes necessary. A rerender
      should be done next time the feedstock is updated to use the new compiler.
    - If you maintain a feedstock with a Fortran compiler, a PR to upgrade to gfortran 7.3.0 was
      already issued. If that PR was merged, there's nothing to do. If not, contact core if you
@@ -266,17 +266,17 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2018
 ----
 
-:2018-10-12: The rebuild is moving along nicely with almost a third of packages completed.
+:2018-10-12: The rebuild is moving along nicely with almost a third of the packages completed.
 
-    Recently completed are numpy and openblas which should open up much of the python numeric stack.
+    Recently completed are NumPy and Openblas which should open up much of the python numeric stack.
     We're only about 5 feedstocks away from opening up all of R as well.
 
 :2018-09-24: A minimal python 3.7 build is now available across all platforms and both compilers!
 
 :2018-09-24:  Deprecation notice for Python 3.5
 
-    As we start building out more of the python 3.7 stack, we will no longer be building
-    python 3.5 packages.
+    As we start building out more of the Python 3.7 stack, we will no longer be building
+    Python 3.5 packages.
 
     No new python 3.5 packages will be built after 2018-10-01.
 

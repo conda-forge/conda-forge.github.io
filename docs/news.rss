@@ -4,7 +4,7 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Wed, 07 Apr 2021 11:32:12 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 07 Apr 2021 11:33:38 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
     <item>
       <title>2020-12-16: Moving to CentOS 7 and CentOS 6 End-of-Life</title>
@@ -30,12 +30,12 @@ if you have comments or concerns!&lt;/p&gt;
       <link>https://conda-forge.org/docs/user/announcements.html</link>
       <description>&lt;p&gt;In an effort to better secure &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt;, we are developing a process to
 validate artifacts before they are uploaded to &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;anaconda.org&lt;/span&gt;&lt;/code&gt;. This validation
-will look for various security related items, such as artifacts which overwrite
+will look for various security-related items, such as artifacts that overwrite
 key pieces of certain packages. While this process is in development, we will not
 be rejecting uploads. However, we will start scanning our current artifacts and
 working with the maintainers of those artifacts to mark broken any which we deem
 a security risk. We will also be running validation on new artifacts being upload
-and will report any issues back to feedstocks. At a future date, artifacts which
+and will report any issues back to feedstocks. At a future date, artifacts that
 do not pass validation will not be uploaded.&lt;/p&gt;
 </description>
       <guid>https://conda-forge.org/docs/user/announcements.html</guid>
@@ -62,7 +62,7 @@ these old compiler versions will be removed.&lt;/p&gt;
 to anaconda.org. Direct uploads to the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; channel will no
 longer work. If you are having trouble with package uploads, please
 rerender your feedstock with the latest version of &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-smithy&lt;/span&gt;&lt;/code&gt;.
-As always, if you need help, bump us on gitter or GitHub!&lt;/p&gt;
+As always, if you need help, bump us on Gitter or GitHub!&lt;/p&gt;
 </description>
       <guid>https://conda-forge.org/docs/user/announcements.html</guid>
       <pubDate>Fri, 07 Aug 2020 00:00:00 GMT</pubDate>
@@ -112,10 +112,10 @@ channels. Users can disable this by setting &lt;code class="docutils literal not
       <pubDate>Thu, 23 Jul 2020 00:00:00 GMT</pubDate>
     </item>
     <item>
-      <title>2020-07-23: NumPy 1.16 as the minimal NumPy version on all platforms.</title>
+      <title>2020-07-23: NumPy 1.16 is the minimal NumPy version on all platforms.</title>
       <link>https://conda-forge.org/docs/user/announcements.html</link>
       <description>&lt;p&gt;In accordance with &lt;a class="reference external" href="https://numpy.org/neps/nep-0029-deprecation_policy.html"&gt;NEP-29&lt;/a&gt;,
-we have switched to have &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;numpy&lt;/span&gt; &lt;span class="pre"&gt;1.16&lt;/span&gt;&lt;/code&gt; as the minimal supported version on all
+we have switched to have &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;numpy&lt;/span&gt; &lt;span class="pre"&gt;1.16&lt;/span&gt;&lt;/code&gt; as the minimum supported version on all
 platforms.&lt;/p&gt;
 </description>
       <guid>https://conda-forge.org/docs/user/announcements.html</guid>
@@ -260,7 +260,7 @@ on &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;azur
 
 &lt;p&gt;Despite our extensive testing, we do not expect this change to be completely smooth,
 so please bear with us. As always, if you have any questions, concerns, or trouble, you
-can find us on gitter or bump us directly on github!&lt;/p&gt;
+can find us on Gitter or bump us directly on Github!&lt;/p&gt;
 </description>
       <guid>https://conda-forge.org/docs/user/announcements.html</guid>
       <pubDate>Sat, 09 May 2020 00:00:00 GMT</pubDate>
@@ -317,7 +317,7 @@ no ongoing support for Python 2.7 builds and any existing builds are provided on
 &lt;p&gt;A &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;cf202003&lt;/span&gt;&lt;/code&gt; label has been applied to the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; channel for those
 who need a reference to the package index with Python 2.7.&lt;/p&gt;
 
-&lt;p&gt;We are removing support for &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;vs2008&lt;/span&gt;&lt;/code&gt; on Windows conjunction with the deprecation
+&lt;p&gt;We are removing support for &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;vs2008&lt;/span&gt;&lt;/code&gt; on Windows in conjunction with the deprecation
 of Python 2.7, as it was only supported to build this version of Python.&lt;/p&gt;
 
 &lt;p&gt;We will provide an admin command that will add back Python 2.7 to any feedstock.
@@ -331,7 +331,7 @@ generated with this admin command. Further, this admin command will only work on
     <item>
       <title>2019-09-30: Clang 9.0.0 and gfortran 7.3.0 as default compilers in OSX.</title>
       <link>https://conda-forge.org/docs/user/announcements.html</link>
-      <description>&lt;p&gt;If you maintain a feedstock which require a C/C++ compiler, no changes necessary. A rerender
+      <description>&lt;p&gt;If you maintain a feedstock that requires a C/C++ compiler, no changes necessary. A rerender
 should be done next time the feedstock is updated to use the new compiler.&lt;/p&gt;
 
 &lt;p&gt;If you maintain a feedstock with a Fortran compiler, a PR to upgrade to gfortran 7.3.0 was
@@ -364,9 +364,9 @@ need help migrating.&lt;/p&gt;
       <pubDate>Tue, 22 Jan 2019 00:00:00 GMT</pubDate>
     </item>
     <item>
-      <title>2018-10-12: The rebuild is moving along nicely with almost a third of packages completed.</title>
+      <title>2018-10-12: The rebuild is moving along nicely with almost a third of the packages completed.</title>
       <link>https://conda-forge.org/docs/user/announcements.html</link>
-      <description>&lt;p&gt;Recently completed are numpy and openblas which should open up much of the python numeric stack.
+      <description>&lt;p&gt;Recently completed are NumPy and Openblas which should open up much of the python numeric stack.
 We’re only about 5 feedstocks away from opening up all of R as well.&lt;/p&gt;
 </description>
       <guid>https://conda-forge.org/docs/user/announcements.html</guid>
@@ -382,8 +382,8 @@ We’re only about 5 feedstocks away from opening up all of R as well.&lt;/p&gt;
     <item>
       <title>2018-09-24: Deprecation notice for Python 3.5</title>
       <link>https://conda-forge.org/docs/user/announcements.html</link>
-      <description>&lt;p&gt;As we start building out more of the python 3.7 stack, we will no longer be building
-python 3.5 packages.&lt;/p&gt;
+      <description>&lt;p&gt;As we start building out more of the Python 3.7 stack, we will no longer be building
+Python 3.5 packages.&lt;/p&gt;
 
 &lt;p&gt;No new python 3.5 packages will be built after 2018-10-01.&lt;/p&gt;
 </description>
