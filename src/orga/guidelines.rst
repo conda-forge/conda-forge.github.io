@@ -7,10 +7,10 @@ Transferring to conda-forge
 This document intends to layout some guidelines on the transfer of
 `conda-recipes <https://github.com/conda/conda-recipes>`__ and
 `anaconda-recipes <https://github.com/ContinuumIO/anaconda-recipes>`__
-to conda-forge. These aren't hard and fast rules, and are open reasonable
+to conda-forge. These aren't hard and fast rules and are open reasonable
 interpretation and reviewer judgement.
 
-It is the anticipated that almost all recipes from those repos shall be
+It is anticipated that almost all recipes from those repos shall be
 proposed for addition here, though it may be decided that a few don't
 actually belong or should not be supported anymore.
 
