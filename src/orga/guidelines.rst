@@ -7,31 +7,32 @@ Transferring to conda-forge
 This document intends to layout some guidelines on the transfer of
 `conda-recipes <https://github.com/conda/conda-recipes>`__ and
 `anaconda-recipes <https://github.com/ContinuumIO/anaconda-recipes>`__
-to conda-forge. These aren't hard and fast rules and are open reasonable
+to conda-forge. These aren't hard and fast rules, instead are open reasonable
 interpretation and reviewer judgement.
 
-It is the aspiration that almost all recipes from those repos shall be
+It is anticipated that almost all recipes from those repos shall be
 proposed for addition here, though it may be decided that a few don't
 actually belong or should not be supported anymore.
 
-When adding a package from either location, inspect the commit history
-to see who has made changes to the recipe in the past. Anyone who has
-touched the recipe should be pinged about it getting added here. They
-should also be consulted with regards to whether the recipe needs any
+While adding a package from either location, inspect the commit history
+to see who had made changes to the recipe in the past. Anyone who has
+touched the recipe should be pinged about it, so that they can be added here. They
+should also be consulted with regards, if the recipe needs any
 tweaks before being added. Also, they should be asked if they would
-like to be added as maintainers. Only if they give express permission
-to be adding as a maintainer should they be added to the maintainer list.
-In all cases when porting a recipe, you should add yourself as a
-maintainer. Some contributors to these repos were quite prolific, but may
+like to be added as maintainers. Only if they give express permission,
+to take up the role as a maintainer the only they should be added in the maintainer list.
+
+In all cases while porting a recipe, you should add yourself as a
+maintainer. Some contributors to these repos might be quite prolific, but may
 not be as actively engaged. If they specify they only want to be contacted
-for certain recipes or none at all, please respect their wishes also add
-make note of what recipes (if any) they would like to be notified for. If
+for certain recipes or none at all, please respect their wishes add them too.
+Make note of what recipes (if any) they would like to be notified for. If
 they are no longer interested in any conda recipes, make that note here
 as well. Before contacting anyone please consult the list in this
 `issue <https://github.com/conda-forge/staged-recipes/issues/139>`__
 to see if that contributor has restrictions.
 
-When porting make sure the recipe follows the linting specifications.
+While porting make sure the recipe follows the linting specifications.
 The section order should go ``package``, ``source``, ``build``,
 ``requirements``, ``test``, ``about``, ``extra/recipe-maintainers``. It
 is recommended to add a ``build`` section with the ``number`` set to
@@ -61,7 +62,7 @@ the build order and the necessary build matrix (e.g. which python versions to
 build against). From a practical perspective, there are limitations on the
 continuous integration resources and also on what reviewers are able/willing
 to review in a single pull request.
-A large pull request with many recipes makes it more difficult to review.
+A large pull request with numerous recipes makes it more difficult to review.
 If the recipes make it through these two constraints and are merged, race
 conditions amongst the different feedstocks may require work by you and/or
 core maintainers to restart them in such a way to build everything in a
@@ -102,9 +103,9 @@ Fixing Broken Packages
 Sometimes you need to remove a package from the conda-forge channel on Anaconda.org. The reasons
 for this are many, but the ones that immediately come to mind are:
 
-* incorrect pinnings or metadata
-* packages being renamed
-* broken package contents
+* Incorrect pinnings or metadata
+* Packages being renamed
+* Broken package contents
 
 We prefer to not remove packages for the following reasons:
 
@@ -114,7 +115,7 @@ We prefer to not remove packages for the following reasons:
 4. Not as community friendly (leaves no opportunity to review decision).
 5. Blocks anyone from inspecting the broken packages.
 
-Instead, if possible, we prefer to take one of the following actions.
+Instead, if possible, we prefer to take one of the following actions:
 
 1. If the only issue is in the package metadata, we can directly patch it using
    the `repo data patches feedstock <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock>`__.
