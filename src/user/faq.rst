@@ -73,6 +73,8 @@ FAQ
     
   are a telltale sign that you are lacking compilers.
 
+.. _faq_cuda_compiler_header:
+
 :ref:`(Q) <faq_cuda_compiler_header>` **How can I compile CUDA (host or device) codes in my environment?**
 
   Unfortunately, this is not possible with Conda-Forge's current infrastructure (``nvcc``, ``cudatoolkit``, etc) if there is no local CUDA Toolkit installation. In particular, the ``nvcc`` package provided on Conda-Forge is a *wrapper package* that exposes the actual ``nvcc`` compiler to our CI infrastructure in a ``conda``-friendly way; it does not contain the full ``nvcc`` compiler toolchain. One of the reasons is that CUDA headers like ``cuda.h``, ``cuda_runtime.h``, etc, are not redistributable according to NVIDIA's EULA, which are needed at compile time. Likewise, the ``cudatoolkit`` package only contains CUDA runtime libraries and not the compiler toolchain.
