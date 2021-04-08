@@ -3,6 +3,20 @@
 Pinned dependencies
 *******************
 
+**Pinning a dependency** is a practice of explicitly pointing to the version of a library which our package is linked with. 
+A pinned dependency , for example, can look like this : ``numpy==1.1.3`` . On the other hand, a non-pinned dependency would be  just: ``numpy``.
+
+**Why to pin your dependencies?**
+
+Explicitly declaring the versions of the dependencies could be advantageous to the quality of the software and to the developers and the open source community that makes up the software ecosystem.
+ 
+* Pinning our dependencies may help in avoiding a situation where our software does not builds or runs due to the release of newer versions of the dependencies which are incompatible with our software, consisting some breaking changes.
+* Not updating the pinned dependencies each time we upgrade our software and deploy it with newer versions of those dependencies, can result in an older version to hang around longer than it should, which can pose difficulties if these older version have some security issues. These older versions might also be incompatible with some new dependency that is introduced.
+
+While its good on many levels to get your versions of dependencies explicit, it might not always be a good choice to pin them in all the cases. 
+By not pinning the dependencies , especially the non-crucial ones, we provide fewer constraints on the software and make it easier to incorporate into an existing software stack. 
+Case in point, If ``numpy==1.1.3`` has been specified / pinned for a software and a person with ``numpy 1.1.4`` already there in his system, tries to install this package, they will have to downgrade numpy to meet the package dependencies or create a new Python environment just to use our package. However, if we specify ``numpy>=1.1.3`` ( i.e. not pinning it to a certain version but to a range of versions) , the package will be installed smoothly.
+
 .. _globally_pinned_packages:
 
 Globally pinned packages
