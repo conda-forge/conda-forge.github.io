@@ -68,3 +68,7 @@ FAQ
 :ref:`(Q) <mfaq_anaconda_delay>` **Why does my new version appear on Anaconda Cloud, but is not installable with conda?**
 
    For certain, high-traffic channels (main & conda-forge), Anaconda uses a CDN to decrease costs. The CDN is only reindexed every 20 min, however Anaconda.org uses the original channel that the CDN mirrors.  Therefore, packages will show up on the anaconda.org ~20-40 min before they are downloadable by conda.  You can use conda search <pkg>  to see if the package is installable, because this command reads from the CDN.
+
+:ref:`(Q) <mfaq_docker_139>` **How to fix "build-locally.py fails with exit code 139"?**
+
+    With Linux Kernel 4.11 there were some changes in the ``vsyscall`` linking. Depending on your distribution this may cause the above error. You can fix that on Debian by editing ``/etc/default/grub`` and specifiy ``GRUB_CMDLINE_LINUX_DEFAULT="vsyscall=emulate"`` in this file. Afterwards, you need run ``update-grub`` and reboot your system. On other Linux distributions the fix is similar but you need to edit a different configuration file to change the Linux kernel cmdline.
