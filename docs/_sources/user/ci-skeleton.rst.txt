@@ -1,5 +1,5 @@
-Using conda-forge to manage your CI
-===================================
+Using conda-smithy to manage your CI
+====================================
 Conda-forge, and specifically ``conda-smithy`` contains a lot of
 tools for building and deploying continuous integration (CI)
 infrastructure on a variety of different platforms and architectures!
