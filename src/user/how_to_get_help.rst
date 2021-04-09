@@ -1,4 +1,4 @@
-How to get help in conda-forge
+How to get help at conda-forge
 ==============================
 
 You could connect with us via **Gitter, GitHub Issues or Mailing List**. 
@@ -7,8 +7,8 @@ We would be happy to hear from you!
 Gitter
 -------------------
 
-If you are just starting out with conda-forge and/or are completely lost, we recommend to get in touch through `Gitter <https://gitter.im/conda-forge/conda-forge.github.io>`__ and our community members will direct
-you to the proper documentation and/or help you via the chat.
+If you are just starting out with conda-forge and/or feel completely lost, we recommend getting in touch through `Gitter <https://gitter.im/conda-forge/conda-forge.github.io>`__. Our community members will direct
+you to the proper documentation and/or help you via the chat. 
 
 GitHub issues
 -------------
