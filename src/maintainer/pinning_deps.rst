@@ -3,7 +3,7 @@
 Pinned dependencies
 *******************
 
-**Pinning a dependency** is a practice of explicitly pointing to the version of a library which our package is linked with. 
+**Pinning a dependency** is the practice of explicitly pointing to the version of a library which our package is linked with. 
 A pinned dependency , for example, can look like this : ``numpy==1.1.3`` . On the other hand, a non-pinned dependency would be  just: ``numpy``.
 
 **Why to pin your dependencies?**
