@@ -15,7 +15,7 @@ Explicitly declaring the versions of the dependencies could be advantageous to t
 
 While its good on many levels to get your versions of dependencies explicit, it might not always be a good choice to pin them in all the cases. 
 By not pinning the dependencies , especially the non-crucial ones, we provide fewer constraints on the software and make it easier to incorporate into an existing software stack. 
-Case in point, Suppose ``numpy==1.1.3`` has been specified / pinned for a software 'A'. There is a person with ``numpy 1.1.4`` already there in his system. If he tries to install this package 'A', he will have to downgrade numpy to meet the package dependencies or create a new Python environment just to use our package. However, if we specify ``numpy>=1.1.3`` ( i.e. not pinning it to a certain version but to a range of versions) , the package will be installed smoothly.
+Case in point, Suppose ``numpy==1.1.3`` has been specified / pinned for a software 'A'. There is a person with ``numpy 1.1.4`` already there in their system. If they try to install this package 'A', they will have to downgrade numpy to meet the package dependencies or create a new Python environment just to use our package. However, if we specify ``numpy>=1.1.3`` ( i.e. not pinning it to a certain version but to a range of versions) , the package will be installed smoothly.
 
 .. _globally_pinned_packages:
 
