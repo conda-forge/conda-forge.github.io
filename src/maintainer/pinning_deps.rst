@@ -10,7 +10,7 @@ A pinned dependency , for example, can look like this : ``numpy==1.1.3`` . On th
 
 Explicitly declaring the versions of the dependencies could be advantageous to the quality of the software and to the developers and the open source community that makes up the software ecosystem.
  
-* Pinning our dependencies may help in avoiding a situation where our software does not builds or runs due to the release of newer versions of the dependencies which are incompatible with our software, consisting some breaking changes.
+* Pinning our dependencies may help in avoiding a situation where our software does not build or run due to the release of newer versions of the dependencies which are incompatible with our software, consisting some breaking changes.
 * Not updating the pinned dependencies each time we upgrade our software and deploy it with newer versions of those dependencies, can result in an older version to hang around longer than it should, which can pose difficulties if these older version have some security issues. These older versions might also be incompatible with some new dependency that is introduced.
 
 While its good on many levels to get your versions of dependencies explicit, it might not always be a good choice to pin them in all the cases. 
