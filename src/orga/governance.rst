@@ -76,8 +76,8 @@ calling a vote are as follows:
   after a previous vote failed to achieve Sam's result. Sam is
   attempting to bully other members of core into agreeing, and is thus
   violating the code of conduct.
-* Voting *yes* moves the proposal forward.
-  Voting *no* is the only way to express opposition to the proposal.
+* Voting **yes** moves the proposal forward.
+  Voting **no** is the only way to express opposition to the proposal.
   Not voting is discouraged, but non-votes do not count as "no".
 * There should always be an option to abstain from voting.
 
@@ -116,14 +116,14 @@ To call for a standard vote, here is a template PR comment:
          "time out" rules below should be recorded in the "vote-results" folder at
          https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results
 
-         Each vote should be its own file.  The filename should reflect the topic and the
+         Each vote should have its own file.  The filename should reflect the topic and the
          date that the vote opened.  The file should contain at least:
 
-         * vote description
-         * vote policy
-         * vote totals
-         * poll open and close dates
-         * notifications given to the core group
+         * Vote description
+         * Vote policy
+         * Vote totals
+         * Poll open and close dates
+         * Notifications given to the core group
 
 ----
 
@@ -166,7 +166,7 @@ To call for a standard vote, here is a template PR comment:
            prior to proposed timeout.
 
      Extending the above example, if 9 people are required for a quorum, but
-     only 7 have voted, those 7 votes can form the basis of a completed vote
+     only 7 have voted, those 7 votes can form the basis of a completed vote,
      after the above conditions are met. 4 votes within those 7 would be
      needed to pass the vote.
 
