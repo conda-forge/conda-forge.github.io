@@ -14,24 +14,24 @@ Conda-forge adheres to the
 
 Teams & Roles
 -------------
-Here are defined the primary teams participating in conda-forge activities.
+The primary teams participating in conda-forge activities are mentioned below:
 
-* **core:** The core team is the governing body over the entire conda-forge
+* **Core:** The core team is the governing body over the entire conda-forge
   organization. Members of the core team have full rights over all conda-forge
   repositories. Members of core are the face of the project, and are responsible
   for officially interfacing with external communities, organizations, non-profits,
-  and companies. The core team may create new sub-teams, as appropriate.
+  and companies. The core team may create new sub-teams, when required.
   Each member of core is entitled to one vote on all elected matters.
-* **staged-recipes:** The staged-recipes team administers the staged-recipes
+* **Staged-recipes:** The staged-recipes team administers the staged-recipes
   repository and is responsible for the review and creation of new feedstocks.
-* **maintainers:** A maintainer is an individual responsible for the management
+* **Maintainers:** A maintainer is an individual responsible for the management
   of one or more feedstock repositories and packages. Maintainers have the ability
   to merge pull requests into the feedstock of only the packages they maintain.
-* **external contributors:** This group encompasses all others who are not on
+* **External contributors:** This group encompasses all others who are not on
   core, part of staged-recipes, or maintainers. This includes first-time
   contributors, collaborators, and funders. They have no special rights within
   the conda-forge organization itself.
-* **emeritus-core:** Core members that are inactive (commits, GitHub comments/issues/reviews,
+* **Emeritus-core:** Core members that are inactive (commits, GitHub comments/issues/reviews,
   dev meetings and voting on polls) in the past six months will be asked if they want to become emeritus-core
   developers. Any core member can also request to become emeritus if they wish to do so
   (e.g. taking a sabbatical or long vacation).
@@ -49,14 +49,14 @@ have  a core team member for more than 1 week, that team is considered to be
 dissolved. A new sub-team would need to be established by the core in order to
 reinstate the activity.
 
-Sub-teams have a charter that is either *dynamic* or *static*.
+Sub-teams have a charter that is either ``dynamic`` or ``static``.
 
-* A *dynamic* charter means that the sub-team is self-organizing, with respect
+* A ``dynamic`` charter means that the sub-team is self-organizing, with respect
   to its own internal policies, procedures, and membership. A sub-team may choose
   to modify its membership independent of the core team. For example, a
   Google Summer of Code team could be a good candidate for a dynamic charter.
   Alternatively, language-based maintenance teams also have a dynamic charter.
-* A *static* charter means that all membership decisions and non-trivial policies
+* A ``static`` charter means that all membership decisions and non-trivial policies
   changes must be approved by the core team. For example, a finance team
   may require a static charter.
 
@@ -65,20 +65,20 @@ conda-forge at all times.
 
 Voting
 ------
-This section presents descriptions and criteria for voting items in the
-conda-forge community. The core team is the only team with voting rights.
+This section apprises descriptions and criteria for voting items in the
+conda-forge community. The core team is the only team who has the voting rights.
 Members of core may also call a vote on any topic. The restrictions on
 calling a vote are as follows:
 
 * There must only be one vote active on a particular item at any time.
-* The act of calling for a vote cannot itself violate the code of
+* The act of calling for a vote for baseless reasons, can itself violate the code of
   conduct. For example, Sam repeatedly called for votes immediately
   after a previous vote failed to achieve Sam's result. Sam is
   attempting to bully other members of core into agreeing, and is thus
   violating the code of conduct.
-* Voting yes moves the proposal forward;
-  voting no is the only way to express opposition to the proposal;
-  not voting is discouraged, but non-votes do not count as "no".
+* Voting *yes* moves the proposal forward.
+  Voting *no* is the only way to express opposition to the proposal.
+  Not voting is discouraged, but non-votes do not count as "no".
 * There should always be an option to abstain from voting.
 
 Voting items are labeled as either **standard** or **sensitive**.
