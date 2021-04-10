@@ -74,16 +74,18 @@ What the pins mean
 
 Pins, generally, are all about setting benchmarked versions of packages or libraries that serve as dependencies for some other packages or libraries, just so these dependent packages behave as much as the author(s) of the dependent packages would want them to behave. 
 
-So conda-forge pins are about declaring the standard version (a specific version) of a package dependency that conda-forge or a `conda recipe <https://github.com/conda-forge/staged-recipes>`_ supports, and how recipes that depend on some specific version of some libraries are set in order to not use other varying versions of the dependency.
+So conda-forge pins are about declaring the standard version (a specific version) of a package dependency that conda-forge or a `conda recipe <https://github.com/conda-forge/staged-recipes>`_ supports, and how recipes that depend on some specific version of some libraries are set in order to not use other varying versions of that dependency.
+
+Additional information on how conda-forge handles the pinning process can be found in `this blog post <https://conda-forge.org/blog/posts/2020-10-02-versions/#version-numbers-and-api-pinning>`_.
 
 .. _abis_and_the_conda-forge-pinning_feedstock:
 
 ABIs and the conda-forge-pinning feedstock
 ==========================================
 
-conda-forge pinning can be expounded in terms of ABIs (Application Binary Interface), that is, as some programs require specific versions of some API libraries to function correctly - so do some packages require specific versions of some ABIs to function correctly, which is why some libraries used within the conda-forge feedstock are specific to some particular ABI versions.
+conda-forge pinning can be expounded in terms of ABIs (Application Binary Interfaces) and APIs (Application Programming Interfaces), that is, as an application source code might be dependent on (a specific version of) the API of a given library in order for that source code to function as intended, similarly, a software might require specific versions of a library (or a compiler) in order for that software to function correctly across multiple Operating Systems (OSs). ABIs take care of this variability - for the software - which is why some libraries outlined within the conda-forge-pinning feedstock are specified with multiple versions, because there is a need for these libraries to function evenly across multiple OSs.
 
-The `conda-forge-pinning feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_, for instance, has a list of ABIs that have been benchmarked as the dependencies that the recipe supports, these ABIs are declared `here <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_.
+The `conda-forge-pinning feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_, for instance, has a list of libraries that have been benchmarked as the dependencies that the conda-forge-pinning feedstock supports, these ABIs ensure compatibility of the feedstock across Operating Systems (Linux, OSX, and Windows), and are declared `here <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_.
 
 More detailed information on ABIs can be located on this `StackOverflow discussion <https://stackoverflow.com/questions/2171177/what-is-an-application-binary-interface-abi>`_.
 
@@ -94,7 +96,7 @@ Pins and bounds
 
 Another interesting thing about pinning is the ability to have both lower and upper bound declarations for pins. A package can be declared to depend on a specific version of a dependency, as the minimum version of that dependency the package supports, then, another declaration can be made to set the maximum version of that dependency that the package supports. These are lower and upper bound declarations. 
 
-In the `conda-forge-pinning feedstock ABIs <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_ declaration, many of the libraries that are supported by the recipe include declarations around the maximum version the conda-forge-pinning feedstock supports. The upper bound declarations are made in terms of  `max_pin: x.x.x` to ensure that the recipe supports latest versions of these dependencies.
+In the `conda-forge-pinning feedstock ABIs <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_ declaration, many of the libraries that are supported by the recipe include declarations around the maximum version the conda-forge-pinning feedstock supports. The upper bound declarations are made in terms of  ``max_pin: x.x.x`` to ensure that the recipe supports latest versions of these dependencies.
 
 
 Specifying run_exports
