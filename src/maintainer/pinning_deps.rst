@@ -81,7 +81,7 @@ So conda-forge pins are about declaring the standard version (a specific version
 ABIs and the conda-forge-pinning feedstock
 ==========================================
 
-conda-forge pinning can be expounded in terms of ABIs (Application Binary Interface), that is, as some programs requires a specific version of an API library to function correctly - so do some modules require a specific version of an ABI to function correctly, which is why some libraries used within the conda-forge feedstock are specified to some specific ABI version.
+conda-forge pinning can be expounded in terms of ABIs (Application Binary Interface), that is, as some programs require specific versions of some API libraries to function correctly - so do some packages require specific versions of some ABIs to function correctly, which is why some libraries used within the conda-forge feedstock are specific to some particular ABI versions.
 
 The `conda-forge-pinning feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_, for instance, has a list of ABIs that have been benchmarked as the dependencies that the recipe supports, these ABIs are declared `here <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_.
 
