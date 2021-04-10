@@ -68,3 +68,22 @@ FAQ
 :ref:`(Q) <mfaq_anaconda_delay>` **Why does my new version appear on Anaconda Cloud, but is not installable with conda?**
 
    For certain, high-traffic channels (main & conda-forge), Anaconda uses a `CDN <https://cloudflare.com/learning/cdn/what-is-a-cdn/>`_ to decrease costs. The CDN is only reindexed every 20 minutes, however `Anaconda.org https://anaconda.org>`_ uses the original channel that the CDN mirrors.  Therefore, packages will show up on the `Anaconda Cloud https://anaconda.org>`_ about 20 to 40 minutes before they are downloadable via conda.  You can use ``conda search <pkg>``  to see if the package is installable, because this command reads from the CDN.
+
+.. _mfaq_mamba_local:
+
+:ref:`(Q) <mfaq_mamba_local>` **Is it possible to use mamba instead of conda, while testing?**
+   
+   Yes, it is. If you want to run in the CI
+     - Set ``build_with_mambabuild: True to conda-forge.yaml``
+     - Rerender with ``conda-smithy`` 
+   (Remember to remove this configuration before merge.)
+
+   You can also run tests locally by using: 
+     ``conda install conda-smithy -c conda-forge && conda smithy rerender``
+   Important: the builds made with mambabuild won't be uploaded to conda-forge, this is purely for debugging (as of now). 
+
+   Another way to test using mamba, is directly buiding your recipe using: 
+     ``conda install boa -c conda-forge``
+     Then you can use ``conda mambabuild myrecipe``
+  
+  
