@@ -230,10 +230,13 @@ Core Dependency Tree Packages (CDTs)
 ------------------------------------
 
 Dependencies outside of the ``conda-forge`` channel should be avoided (see :ref:`no_external_deps`).
-However, there are a few exceptions: some dependencies are so close to the system
-that they are not packaged with ``conda-forge``. These dependencies have to be satisfied with
-*Core Dependency Tree* (CDT) packages. A CDT package consists of repackaged CentOS binaries from the
-appropriate version, either 6 or 7 depending on user choice and platform. We manage the build of CDT
+However, there are a few exceptions: 
+
+Some dependencies are so close to the system that they are not packaged with ``conda-forge``. 
+These dependencies have to be satisfied with *Core Dependency Tree* (CDT) packages. 
+
+A CDT package consists of repackaged CentOS binaries from the appropriate version, 
+either 6 or 7 depending on user choice and platform. We manage the build of CDT
 packages using a centralized repo, `conda-forge/cdt-builds <https://github.com/conda-forge/cdt-builds>`_,
 as opposed to generating feedstocks for them. (Note that historically we did use feedstocks but this
 practice has been deprecated.) To add a new CDT, make a PR on the
