@@ -113,7 +113,7 @@ versions are:
 * For Python 2.7: Visual C++ 9.0
 * For Python 3.5–3.7: Visual C++ 14.0
 
-You can obtain these tools by installing the right version of the full
+While you can obtain these tools by installing the right version of the full
 `Visual Studio <https://visualstudio.microsoft.com/>`_ development
 environment, you can save a lot of time and bandwidth by installing standalone
 “build tools” packages. The links are as follows:
