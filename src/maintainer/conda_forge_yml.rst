@@ -49,6 +49,9 @@ Top-level fields
 * win
 
 
+Detail of the top-level fields
+==============================
+
 appveyor
 --------
 The top-level ``appveyor`` key specifies configurations for the Appveyor
