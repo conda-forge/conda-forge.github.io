@@ -1,5 +1,23 @@
-Knowledge base
+Knowledge Base
 **************
+
+Using Mamba as a Package Manager
+==================================
+
+**Mamba** is a cross platform package manager. 
+
+Conda sometimes proves to be really slow while installing multiple packages at the same time. The conda solver tries to solve the environment and looks out for the best set of versions to download. This can decelerate the process of installation if the packages are in bulk.
+That's where mamba pulls off. Mamba is a drop-in replacement for conda.
+
+Being a reimplementation of conda package manager in C++, mamba uses the same command line parser, package installation and deinstallation code and transaction verification routine as conda to stay as compatible as possible with conda packages.
+
+The edge of mamba over conda, as already hinted, comes in the dependency resolution part. It offers high speed and reliable environment solution. 
+**Libsolv** is the solver used by mamba to provide efficient and quick solutions. It uses satisfiability algorithm for resolving package dependencies. It also uses a dictionary approach to store and retrieve package and dependency information in a fast and space efficient manner.
+Mamba uses multi-threading technique to parallely download the repo data and package files. 
+
+For the procedure of installation of mamba, you can look into `Mamba  Documentation. <https://mamba.readthedocs.io/en/latest/getting_started.html>`__
+
+To know how to use ``mamba-build`` , refer `Maintainers FAQ. <https://conda-forge.org/docs/maintainer/maintainer_faq.html>`__  
 
 Using CMake
 ===========
