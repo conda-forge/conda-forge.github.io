@@ -77,7 +77,7 @@ recipes.
 Intended Usage
 ==============
 
-Maintainers' time and CI resources are what enable conda-forge. They are as scarce as they are valuable. conda-forge has enough capacity to support releasing packages, but not developing them.
+Maintainers' time and CI resources are what enable conda-forge. They are just as scarce as valuable. conda-forge has enough capacity to support releasing packages, but not developing them.
 
 Publishing a package to conda-forge signals it is suitable for users not involved with development. However, publishing does not always happen error-free. Multiple commits are acceptable when debugging issues with the release process itself.
 
@@ -88,10 +88,10 @@ Fortunately, there are options for optimizing the development of a package.
 Renaming Packages
 =================
 
-Sometimes packages are misnamed.
-To correct the name of the package, please submit a PR into staged-recipes with the correct name.
-During the review process please make certain to note that the package is a rename and contact a member of conda-forge/core to remove the old feedstock (and potentially package if needed).
-Occasionally the .gitmodules file in the `feedstocks <https://github.com/conda-forge/feedstocks/blob/master/.gitmodules>`__ needs to be updated to remove the old feedstock.
+Sometimes, packages are misnamed.
+To correct the name of the package, please submit a PR into `staged-recipes <https://github.com/conda-forge/staged-recipes>`__ with the correct name.
+During the review process, please make certain to note that the package is renamed and contact a member of conda-forge/core to remove the old feedstock (and potentially package, if needed).
+Occasionally, the .gitmodules file in the `feedstocks <https://github.com/conda-forge/feedstocks/blob/master/.gitmodules>`__ needs to be updated to remove the old feedstock.
 It's not entirely clear what those circumstances are.
 See `conda-forge.github.io#1070 <https://github.com/conda-forge/conda-forge.github.io/issues/1070>`__.
 
@@ -100,8 +100,8 @@ See `conda-forge.github.io#1070 <https://github.com/conda-forge/conda-forge.gith
 Fixing Broken Packages
 ======================
 
-Sometimes you need to remove a package from the conda-forge channel on Anaconda.org. The reasons
-for this are many, but the ones that immediately come to mind are:
+Sometimes, you need to remove a package from the conda-forge channel on Anaconda.org.
+There can be many reasons for this, but the ones that immediately come to mind are:
 
 * Incorrect pinnings or metadata
 * Packages being renamed
