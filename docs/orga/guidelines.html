@@ -136,7 +136,7 @@ recipes.</p>
 </section>
 <section id="intended-usage">
 <h2>Intended Usage<a class="headerlink" href="#intended-usage" title="Permalink to this headline">¶</a></h2>
-<p>Maintainers’ time and CI resources are what enable conda-forge. They are as scarce as they are valuable. conda-forge has enough capacity to support releasing packages, but not developing them.</p>
+<p>Maintainers’ time and CI resources are what enable conda-forge. They are just as scarce as valuable. conda-forge has enough capacity to support releasing packages, but not developing them.</p>
 <p>Publishing a package to conda-forge signals it is suitable for users not involved with development. However, publishing does not always happen error-free. Multiple commits are acceptable when debugging issues with the release process itself.</p>
 <dl class="simple">
 <dt>Fortunately, there are options for optimizing the development of a package.</dt><dd><ul class="simple">
@@ -148,17 +148,17 @@ recipes.</p>
 </section>
 <section id="renaming-packages">
 <h2>Renaming Packages<a class="headerlink" href="#renaming-packages" title="Permalink to this headline">¶</a></h2>
-<p>Sometimes packages are misnamed.
-To correct the name of the package, please submit a PR into staged-recipes with the correct name.
-During the review process please make certain to note that the package is a rename and contact a member of conda-forge/core to remove the old feedstock (and potentially package if needed).
-Occasionally the .gitmodules file in the <a class="reference external" href="https://github.com/conda-forge/feedstocks/blob/master/.gitmodules">feedstocks</a> needs to be updated to remove the old feedstock.
+<p>Sometimes, packages are misnamed.
+To correct the name of the package, please submit a PR into <a class="reference external" href="https://github.com/conda-forge/staged-recipes">staged-recipes</a> with the correct name.
+During the review process, please make certain to note that the package is renamed and contact a member of conda-forge/core to remove the old feedstock (and potentially package, if needed).
+Occasionally, the .gitmodules file in the <a class="reference external" href="https://github.com/conda-forge/feedstocks/blob/master/.gitmodules">feedstocks</a> needs to be updated to remove the old feedstock.
 It’s not entirely clear what those circumstances are.
 See <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues/1070">conda-forge.github.io#1070</a>.</p>
 </section>
 <section id="fixing-broken-packages">
 <span id="fix-broken-packages"></span><h2>Fixing Broken Packages<a class="headerlink" href="#fixing-broken-packages" title="Permalink to this headline">¶</a></h2>
-<p>Sometimes you need to remove a package from the conda-forge channel on Anaconda.org. The reasons
-for this are many, but the ones that immediately come to mind are:</p>
+<p>Sometimes, you need to remove a package from the conda-forge channel on Anaconda.org.
+There can be many reasons for this, but the ones that immediately come to mind are:</p>
 <ul class="simple">
 <li><p>Incorrect pinnings or metadata</p></li>
 <li><p>Packages being renamed</p></li>
