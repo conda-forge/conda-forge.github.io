@@ -23,7 +23,7 @@ FAQ
 
 :ref:`(Q) <faq_contact>` **I have a question/suggestion. How can I contact you?**
 
-  Please join us in our `gitter channel <https://gitter.im/conda-forge/conda-forge.github.io>`__! We are always happy to answer questions and help beginners!
+  Please join us on our `Gitter channel <https://gitter.im/conda-forge/conda-forge.github.io>`__. We are always happy to answer questions and help beginners.
 
 .. _faq_teams:
 
@@ -38,7 +38,7 @@ FAQ
 
 :ref:`(Q) <faq_solver_speed>` **Installing and updating takes a long time, what can I do?**
 
-  Enabling struct channel priority may help. You can do this via
+  Enabling strict channel priority may help. You can do this via
 
   .. code-block:: bash
 
@@ -77,6 +77,6 @@ FAQ
 
 :ref:`(Q) <faq_cuda_compiler_header>` **How can I compile CUDA (host or device) codes in my environment?**
 
-  Unfortunately, this is not possible with Conda-Forge's current infrastructure (``nvcc``, ``cudatoolkit``, etc) if there is no local CUDA Toolkit installation. In particular, the ``nvcc`` package provided on Conda-Forge is a *wrapper package* that exposes the actual ``nvcc`` compiler to our CI infrastructure in a ``conda``-friendly way; it does not contain the full ``nvcc`` compiler toolchain. One of the reasons is that CUDA headers like ``cuda.h``, ``cuda_runtime.h``, etc, are not redistributable according to NVIDIA's EULA, which are needed at compile time. Likewise, the ``cudatoolkit`` package only contains CUDA runtime libraries and not the compiler toolchain.
+  Unfortunately, this is not possible with conda-forge's current infrastructure (``nvcc``, ``cudatoolkit``, etc) if there is no local CUDA Toolkit installation. In particular, the ``nvcc`` package provided on conda-forge is a *wrapper package* that exposes the actual ``nvcc`` compiler to our CI infrastructure in a ``conda``-friendly way; it does not contain the full ``nvcc`` compiler toolchain. One of the reasons is that CUDA headers like ``cuda.h``, ``cuda_runtime.h``, etc, which are needed at compile time, are not redistributable according to NVIDIA's EULA. Likewise, the ``cudatoolkit`` package only contains CUDA runtime libraries and not the compiler toolchain.
   
-  If you need to compile CUDA codes, even if they involve only CUDA host APIs, you will still need a valid CUDA Toolkit installed locally and use it. Please refer to `NVCC's documentation <https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html>`_ for the CUDA compiler usage and `CUDA Programming Guide <https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html>`_ for general CUDA programming.
+  If you need to compile CUDA code, even if it involves only CUDA host APIs, you will still need a valid CUDA Toolkit installed locally and use it. Please refer to `NVCC's documentation <https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html>`_ for the CUDA compiler usage and `CUDA Programming Guide <https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html>`_ for general CUDA programming.

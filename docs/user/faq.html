@@ -83,7 +83,7 @@
 </div></blockquote>
 <p id="faq-contact"><a class="reference internal" href="#faq-contact"><span class="std std-ref">(Q)</span></a> <strong>I have a question/suggestion. How can I contact you?</strong></p>
 <blockquote>
-<div><p>Please join us in our <a class="reference external" href="https://gitter.im/conda-forge/conda-forge.github.io">gitter channel</a>! We are always happy to answer questions and help beginners!</p>
+<div><p>Please join us on our <a class="reference external" href="https://gitter.im/conda-forge/conda-forge.github.io">Gitter channel</a>. We are always happy to answer questions and help beginners.</p>
 </div></blockquote>
 <p id="faq-teams"><a class="reference internal" href="#faq-teams"><span class="std std-ref">(Q)</span></a> <strong>I have a set of related packages, how do I create a conda-forge team?</strong></p>
 <blockquote>
@@ -94,7 +94,7 @@ make all maintainers of the r-feedstock also maintainers of the new package.</p>
 </div></blockquote>
 <p id="faq-solver-speed"><a class="reference internal" href="#faq-solver-speed"><span class="std std-ref">(Q)</span></a> <strong>Installing and updating takes a long time, what can I do?</strong></p>
 <blockquote>
-<div><p>Enabling struct channel priority may help. You can do this via</p>
+<div><p>Enabling strict channel priority may help. You can do this via</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --set channel_priority strict
 </pre></div>
 </div>
@@ -122,8 +122,8 @@ Note that <code class="docutils literal notranslate"><span class="pre">travis-ci
 </div></blockquote>
 <p id="faq-cuda-compiler-header"><a class="reference internal" href="#faq-cuda-compiler-header"><span class="std std-ref">(Q)</span></a> <strong>How can I compile CUDA (host or device) codes in my environment?</strong></p>
 <blockquote>
-<div><p>Unfortunately, this is not possible with Conda-Forge’s current infrastructure (<code class="docutils literal notranslate"><span class="pre">nvcc</span></code>, <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code>, etc) if there is no local CUDA Toolkit installation. In particular, the <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> package provided on Conda-Forge is a <em>wrapper package</em> that exposes the actual <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler to our CI infrastructure in a <code class="docutils literal notranslate"><span class="pre">conda</span></code>-friendly way; it does not contain the full <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler toolchain. One of the reasons is that CUDA headers like <code class="docutils literal notranslate"><span class="pre">cuda.h</span></code>, <code class="docutils literal notranslate"><span class="pre">cuda_runtime.h</span></code>, etc, are not redistributable according to NVIDIA’s EULA, which are needed at compile time. Likewise, the <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code> package only contains CUDA runtime libraries and not the compiler toolchain.</p>
-<p>If you need to compile CUDA codes, even if they involve only CUDA host APIs, you will still need a valid CUDA Toolkit installed locally and use it. Please refer to <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html">NVCC’s documentation</a> for the CUDA compiler usage and <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html">CUDA Programming Guide</a> for general CUDA programming.</p>
+<div><p>Unfortunately, this is not possible with conda-forge’s current infrastructure (<code class="docutils literal notranslate"><span class="pre">nvcc</span></code>, <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code>, etc) if there is no local CUDA Toolkit installation. In particular, the <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> package provided on conda-forge is a <em>wrapper package</em> that exposes the actual <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler to our CI infrastructure in a <code class="docutils literal notranslate"><span class="pre">conda</span></code>-friendly way; it does not contain the full <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler toolchain. One of the reasons is that CUDA headers like <code class="docutils literal notranslate"><span class="pre">cuda.h</span></code>, <code class="docutils literal notranslate"><span class="pre">cuda_runtime.h</span></code>, etc, which are needed at compile time, are not redistributable according to NVIDIA’s EULA. Likewise, the <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code> package only contains CUDA runtime libraries and not the compiler toolchain.</p>
+<p>If you need to compile CUDA code, even if it involves only CUDA host APIs, you will still need a valid CUDA Toolkit installed locally and use it. Please refer to <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html">NVCC’s documentation</a> for the CUDA compiler usage and <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html">CUDA Programming Guide</a> for general CUDA programming.</p>
 </div></blockquote>
 </section>
 
