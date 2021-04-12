@@ -55,7 +55,7 @@ not running ``myproj`` CI as a regular feedstock. The ``.gitignore`` is
 modified to not accidentally add unwanted conda-smithy temporary files
 to your repository.
 
-Also the steps that the ``ci-skeleton`` splits out are very important
+Also the steps that the ``ci-skeleton`` spits out are very important
 for wiring everything up properly. Luckily, they are easy to perform!
 Let's go through them one-by-one!
 
