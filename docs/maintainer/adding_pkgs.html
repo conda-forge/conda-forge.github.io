@@ -76,19 +76,19 @@
 <h3>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h3>
 <p>There are multiple ways to get started:</p>
 <ol class="arabic simple">
-<li><p>Look at <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes/example">the example recipe</a> in the staged-recipes repository and modify it as necessary.</p></li>
-<li><p>If it is an R package from <a class="reference external" href="https://cran.r-project.org/">CRAN</a>, please
-instead start by using the <a class="reference external" href="https://github.com/bgruening/conda_r_skeleton_helper">conda-forge helper script for R recipes</a>.
-Then if necessary you can make manual edits to the recipe.</p></li>
+<li><p>Look at <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes/example">the example recipe</a> in the <a class="reference external" href="https://github.com/conda-forge/staged-recipes">staged-recipes repository</a> and modify it as necessary.</p></li>
+<li><p>If it is an R package from <a class="reference external" href="https://cran.r-project.org/">CRAN</a>, kindly
+start by using the <a class="reference external" href="https://github.com/bgruening/conda_r_skeleton_helper">conda-forge helper script for R recipes</a> instead.
+Then if necessary, you can make manual edits to the recipe.</p></li>
 <li><p>If it is a python package, you can generate the recipe as a starting point with
-<code class="docutils literal notranslate"><span class="pre">grayskull</span> <span class="pre">pypi</span> <span class="pre">your_package_name</span></code>. To install it you can use <cite>conda install -c conda-forge grayskull</cite>. You do <em>not</em> have to use grayskull, and the
-recipes produced by grayskull will need to be reviewed and edited.
+<code class="docutils literal notranslate"><span class="pre">grayskull</span> <span class="pre">pypi</span> <span class="pre">your_package_name</span></code>. To install it you can use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">grayskull</span></code>. You do <em>not</em> have to use <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>, and the
+recipes produced by <code class="docutils literal notranslate"><span class="pre">grayskull</span></code> will need to be reviewed and edited.
 In particular, you’ll at least need to check the build line to <a class="reference internal" href="#use-pip"><span class="std std-ref">use pip</span></a>,
 add yourself as a maintainer,
 and specify a <code class="docutils literal notranslate"><span class="pre">license_file</span></code>.</p></li>
 </ol>
 <p>Your final recipe should have no comments (unless they’re actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.</p>
-<p><em>If there are details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.</em></p>
+<p><em>If there are any details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.</em></p>
 <p>In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that might help you with a successful build is provided in the following.</p>
 </section>
 <section id="step-by-step-instructions">
@@ -136,9 +136,9 @@ test that the module can be imported, as described in the example.</p></li>
 </section>
 <section id="feedback-and-revision">
 <h3>Feedback and revision<a class="headerlink" href="#feedback-and-revision" title="Permalink to this headline">¶</a></h3>
-<p>Once you finished your PR, all you have to do is waiting for feedback from our reviewer team.</p>
-<p>The reviewer team will assist you by pointing out improvements and answering questions. Once the package is ready, the reviewers will approve and merge your pull request.</p>
-<p>After merging the <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>, our infrastructure will build the package and make it available in the conda-channel.</p>
+<p>Once you finished your PR, all you have to do is wait for feedback from our review team.</p>
+<p>The review team will assist you by pointing out improvements and answering questions. Once the package is ready, the reviewers will approve and merge your pull request.</p>
+<p>After merging the <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>, our <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> infrastructure will build the package and make it available in the conda-channel.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you have questions or have not heard back for a while, you can notify us by including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge/staged-recipes</span></code> in your GitHub message.</p>
@@ -205,7 +205,7 @@ staged-recipes directory.</p>
 </pre></div>
 </div>
 </li>
-<li><p>Define the conda-forge/staged-recipes repository as “upstream” (if you have not already done so).:</p>
+<li><p>Define the conda-forge/staged-recipes repository as <code class="docutils literal notranslate"><span class="pre">upstream</span></code> (if you have not already done so).:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="o">/</span><span class="n">staged</span><span class="o">-</span><span class="n">recipes</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
