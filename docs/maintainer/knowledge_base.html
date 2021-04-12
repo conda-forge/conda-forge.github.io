@@ -140,15 +140,15 @@ the three pieces of information</p>
 <section id="particularities-on-windows">
 <h2>Particularities on Windows<a class="headerlink" href="#particularities-on-windows" title="Permalink to this headline">¶</a></h2>
 <p>This document presents conda-forge and conda-build information and examples
-when building on Windows.</p>
+while building on Windows.</p>
 <section id="local-testing">
 <h3>Local testing<a class="headerlink" href="#local-testing" title="Permalink to this headline">¶</a></h3>
 <p>The first thing that you should know is that you can locally test Windows
 builds of your packages even if you don’t own a Windows machine. Microsoft
 makes available free, official Windows virtual machines (VMs) <a class="reference external" href="https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/">at this website</a>. If you
-are unfamiliar with VM systems or have trouble installing Microsoft’s, please
-use a general web search to investigate — while these topics are beyond the
-scope of this documentation, there is ample discussion of them on the broader
+are unfamiliar with VM systems or have trouble installing Microsoft’s VMs, please
+use a general web search to explore — while these topics are beyond the
+scope of this documentation, there are ample discussions on them on the broader
 Internet.</p>
 <p>In order to compile native code (C, C++, etc.) on Windows, you will need to
 install Microsoft’s Visual C++ build tools on your VM. You must install
@@ -162,13 +162,13 @@ versions are:</p>
 <p>While you can obtain these tools by installing the right version of the full
 <a class="reference external" href="https://visualstudio.microsoft.com/">Visual Studio</a> development
 environment, you can save a lot of time and bandwidth by installing standalone
-“build tools” packages. The links are:</p>
+“build tools” packages. The links are as follows:</p>
 <ul class="simple">
 <li><p>For Python 2.7: <a class="reference external" href="https://www.microsoft.com/download/details.aspx?id=44266">Microsoft Visual C++ Compiler for Python 2.7</a>.</p></li>
 <li><p>For Python 3.5–3.7: <a class="reference external" href="https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017">Microsoft Build Tools for Visual Studio 2017</a>.</p></li>
 </ul>
-<p>Please see <a class="reference external" href="https://wiki.python.org/moin/WindowsCompilers">the Python wiki page on Windows compilers</a> if you need more
-information.</p>
+<p>If you need more information. Please refer <cite>the Python wiki page on Windows compilers
+&lt;https://wiki.python.org/moin/WindowsCompilers&gt;</cite>.</p>
 </section>
 <section id="simple-cmake-based-bld-bat">
 <h3>Simple CMake-Based <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code><a class="headerlink" href="#simple-cmake-based-bld-bat" title="Permalink to this headline">¶</a></h3>
@@ -202,7 +202,7 @@ nmake install
 <p>The following feedstocks are examples of this build structure deployed:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/conda-forge/libpng-feedstock/blob/master/recipe/bld.bat">libpng</a></p></li>
-<li><p><a class="reference external" href="https://github.com/conda-forge/pugixml-feedstock/blob/master/recipe/bld.bat">pugixml</a></p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/pugixml-feedstock/blob/master/recipe/bld.bat">Pugixml</a></p></li>
 </ul>
 </section>
 <section id="building-for-different-vc-versions">
@@ -235,9 +235,9 @@ requirements of the VC version. For example, python 2.7 requires <code class="do
 <p>There are currently three supported compilers:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>c</p></li>
+<li><p>C</p></li>
 <li><p>cxx</p></li>
-<li><p>fortran</p></li>
+<li><p>Fortran</p></li>
 </ul>
 </div></blockquote>
 <p>A package that needs all three compilers would define</p>
@@ -251,17 +251,18 @@ requirements of the VC version. For example, python 2.7 requires <code class="do
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Appropriate compiler runtime packages will be automatically added to the package’s runtime requirements and therefore
-there’s no need to specify <code class="docutils literal notranslate"><span class="pre">libgcc</span></code> or <code class="docutils literal notranslate"><span class="pre">libgfortran</span></code>. There is additional information about how conda-build 3 treats
+there’s no need to specify <code class="docutils literal notranslate"><span class="pre">libgcc</span></code> or <code class="docutils literal notranslate"><span class="pre">libgfortran</span></code>. There are additional informations about how conda-build 3 treats
 compilers in the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/source/compiler-tools.html">conda docs</a>.</p>
 </div>
 </section>
 <section id="core-dependency-tree-packages-cdts">
 <span id="cdt-packages"></span><h3>Core Dependency Tree Packages (CDTs)<a class="headerlink" href="#core-dependency-tree-packages-cdts" title="Permalink to this headline">¶</a></h3>
 <p>Dependencies outside of the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel should be avoided (see <a class="reference internal" href="adding_pkgs.html#no-external-deps"><span class="std std-ref">Avoid external dependencies</span></a>).
-However, there are a few exceptions: some dependencies are so close to the system
-that they are not packaged with <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. These dependencies have to be satisfied with
-<em>Core Dependency Tree</em> (CDT) packages. A CDT package consists of repackaged CentOS binaries from the
-appropriate version, either 6 or 7 depending on user choice and platform. We manage the build of CDT
+However, there are a few exceptions:</p>
+<p>Some dependencies are so close to the system that they are not packaged with <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.
+These dependencies have to be satisfied with <em>Core Dependency Tree</em> (CDT) packages.</p>
+<p>A CDT package consists of repackaged CentOS binaries from the appropriate version,
+either 6 or 7 depending on user choice and platform. We manage the build of CDT
 packages using a centralized repo, <a class="reference external" href="https://github.com/conda-forge/cdt-builds">conda-forge/cdt-builds</a>,
 as opposed to generating feedstocks for them. (Note that historically we did use feedstocks but this
 practice has been deprecated.) To add a new CDT, make a PR on the
