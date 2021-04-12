@@ -38,7 +38,7 @@ FAQ
 
 :ref:`(Q) <faq_solver_speed>` **Installing and updating takes a long time, what can I do?**
 
-  Enabling struct channel priority may help. You can do this via
+  Enabling strict channel priority may help. You can do this via
 
   .. code-block:: bash
 
