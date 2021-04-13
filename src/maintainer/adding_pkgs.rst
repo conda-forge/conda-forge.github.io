@@ -231,7 +231,7 @@ You may need the openssl package, available on conda-forge
 Downloading extra sources and data files
 ........................................
 
-``conda-build 3`` supports multiple sources per recipe. Examples are available `in the conda-build docs <https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#source-from-multiple-sources>`_.
+``conda-build 3`` supports multiple sources per recipe. Examples are available `in the conda-build docs <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#source-from-multiple-sources>`_.
 
 
 Build
