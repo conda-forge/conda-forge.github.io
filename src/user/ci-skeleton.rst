@@ -7,15 +7,15 @@ Wouldn't it be nice if you could reuse all of this hard work, so
 you don't have to write or manage your own CI configurations?
 
 By adding a ``recipe/`` directory to your repository, the conda-smithy
-command ``ci-skeleton`` let's you hook into well-tested and robust
+command ``ci-skeleton`` lets you hook into well-tested and robust
 CI infrastructure. Using the conda-smithy ``rerender`` command, you
 can then keep your repository up-to-date with any needed changes.
 
 Getting Started
 ---------------
-The ``ci-skeleton`` command helps get you started by preparing a repository
+The ``ci-skeleton`` command helps you get started by preparing a repository
 to have the proper structure such that the ``rerender`` command will correctly
-add the CI configurations. Lets see an example!
+add the CI configurations. Let's see an example!
 
 Suppose you have a repository for a project called ``myproj``.  In the
 root level of the repository, you can run the following command:
