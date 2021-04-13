@@ -143,18 +143,18 @@ for the affected packages in conda-forge.</p>
 <p>Usually, the bot will generate these migrations automatically. However, when a pin is first made or added, one may need to
 be added by hand. To do this, follow these steps:</p>
 <ol class="arabic simple">
-<li><p>create a new migration yaml by copying <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/example.exyaml">example.exyaml</a> in the <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-forge-pinning</span></code> repository.</p></li>
-<li><p>change the migration yaml to reflect the package and version to be migrated</p></li>
-<li><p>write a <span class="xref std std-ref">migrator</span> for propagating the pin changes.</p></li>
-<li><p>propose the changes as a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> to <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a>.</p></li>
-<li><p>once accepted the migration will begin. The migration status can be monitored at <a class="reference external" href="https://conda-forge.org/status">https://conda-forge.org/status</a>.</p></li>
+<li><p>Create a new migration yaml by copying <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/example.exyaml">example.exyaml</a> in the <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-forge-pinning</span></code> repository.</p></li>
+<li><p>Change the migration yaml to reflect the package and version to be migrated</p></li>
+<li><p>Write a <span class="xref std std-ref">migrator</span> for propagating the pin changes.</p></li>
+<li><p>Propose the changes as a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a> to <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a>.</p></li>
+<li><p>Once accepted the migration will begin. The migration status can be monitored at <a class="reference external" href="https://conda-forge.org/status">https://conda-forge.org/status</a>.</p></li>
 <li><p>After the migration is complete, a new PR can be issued to <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a> to:</p>
 <ul class="simple">
 <li><p>Remove the migrator yaml for the completed migration</p></li>
 <li><p>If the version of the package is pinned in the global conda_build_config.yaml, this PR should also:</p>
 <ul>
-<li><p>update the version in conda_build_config.yaml</p></li>
-<li><p>bump the version in meta.yaml to the current date</p></li>
+<li><p>Update the version in conda_build_config.yaml</p></li>
+<li><p>Bump the version in meta.yaml to the current date</p></li>
 </ul>
 </li>
 </ul>
