@@ -284,7 +284,7 @@ To skip a CI build for a given commit, put ``[ci skip] ***NO_CI***`` in the comm
 
 .. admonition:: Related links
 
-  - **abort builds with [skip ci]/etc** `(conda-forge.github.io/#629) <https://github.com/conda-forge/conda-forge.github.io/issues/629>`__
+  - **Abort builds with [skip ci]/etc** `(conda-forge.github.io/#629) <https://github.com/conda-forge/conda-forge.github.io/issues/629>`__
   - **Skip CI requests** `(staged-recipes/#1148) <https://github.com/conda-forge/staged-recipes/issues/1148>`__
 
 
