@@ -59,7 +59,7 @@ If you found a typo, unclear explanations or new topics that could be covered, y
 Admin web services
 ==================
 
-conda-forge is running a webservice on Heroku called `conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
+Conda-forge is running a webservice on Heroku called `conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
 
 The following services are run by default on a feedstock:
 
