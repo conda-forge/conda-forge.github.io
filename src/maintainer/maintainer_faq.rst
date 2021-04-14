@@ -68,3 +68,23 @@ FAQ
 :ref:`(Q) <mfaq_anaconda_delay>` **Why does my new version appear on Anaconda Cloud, but is not installable with conda?**
 
    For certain, high-traffic channels (main & conda-forge), Anaconda uses a `CDN <https://cloudflare.com/learning/cdn/what-is-a-cdn/>`_ to decrease costs. The CDN is only reindexed every 20 minutes, however `Anaconda.org https://anaconda.org>`_ uses the original channel that the CDN mirrors.  Therefore, packages will show up on the `Anaconda Cloud https://anaconda.org>`_ about 20 to 40 minutes before they are downloadable via conda.  You can use ``conda search <pkg>``  to see if the package is installable, because this command reads from the CDN.
+
+.. _mfaq_mamba_local:
+
+:ref:`(Q) <mfaq_mamba_local>` **How can I make debugging solver failures on the CI faster?**
+
+    An alternative to the conda solver is the mamba solver. The mamba solver has a faster solve speed and prints better error messages that make debugging simpler.
+    
+    You can configure the conda-forge CI to run a debug build using the mamba solver with the following changes:
+    
+      - Set ``build_with_mambabuild: True`` in ``conda-forge.yaml`` file
+      - Rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line)
+    [Note: Builds made with ``mambabuild`` won't be uploaded to ``conda-forge``. These builds are purely for debugging purposes.]
+
+    You can also do this locally by using: 
+    
+      - ``conda install boa -c conda-forge``
+      - ``conda mambabuild myrecipe``
+    For more details visit `this <https://boa-build.readthedocs.io/en/latest/mambabuild.html>`_ page. 
+  
+  
