@@ -50,7 +50,7 @@ The documentation lives in `conda-forge/conda-forge.github.io <https://github.co
 
 The documentation is built with ``Sphinx`` and the sources files are located in the `src <https://github.com/conda-forge/conda-forge.github.io/tree/master/src>`__ directory of the repository.
 
-If you find any typo error, unclear explanations or new topics that could be covered, you can suggest changes to the documentation. For more details, please refer to :ref:`improve_docs`.
+If you find any typo error, unclear explanations or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to :ref:`improve_docs`.
 
 
 
@@ -72,7 +72,7 @@ The webservice also listens to issue and PR comments so that you can ask for the
 -----------------------------------
 
 Entering the above phrase in a PR of a feedstock will rerender the feedstock and push the changes to your PR.
-Make sure to tick the ``Allow edits from maintainers.`` button locate at the bottom of the right side bar of
+Make sure to tick the ``Allow edits from maintainers`` button located at the bottom of the right side bar of
 the PR. If you say this phrase in an issue comment, the bot will create a new pull request with the requested
 re-rendering completed.
 
@@ -103,7 +103,7 @@ Entering the above phrase in a PR of a feedstock will lint the PR again.
 ----------------------------------------
 
 Entering the above phrase in an issue of a feedstock will update the Circle-CI SSH deploy key. This will fix the
-``permission denied (public key)`` issue in Circle-CI's checkout phase; it shouldn't be needed otherwise.
+``permission denied (public key)`` issue in Circle-CI's checkout phase. It shouldn't be needed otherwise.
 
 
 @conda-forge-admin, please update team
@@ -162,7 +162,7 @@ Azure is used to build packages for OS X, Linux (x86_64, native), Linux (ARMv8, 
 The build queue on Azure is substantially larger than on all the other providers. 
 Azure builds have a maximum duration of 6 hours.
 
-To see all builds on Azure go to `<https://dev.azure.com/conda-forge/feedstock-builds/_build>`_.
+To see all builds on Azure, visit `<https://dev.azure.com/conda-forge/feedstock-builds/_build>`_.
 
 Restarting builds
 .................
@@ -191,7 +191,7 @@ Travis CI (OS X, IBM Power 8+)
 ------------------------------
 
 Travis CI is used to build packages for IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
-force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit `<https://travis-ci.com/profile>`_ 
+force sync your repositories in **Travis CI** to see the reload and cancel buttons. To do this please visit `<https://travis-ci.com/profile>`_ 
 and click "Sync accounts".
 
 Enabling Travis
