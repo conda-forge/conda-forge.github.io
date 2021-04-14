@@ -222,7 +222,7 @@ A package that needs all three compilers would define
 
   Appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore
   there's no need to specify ``libgcc`` or ``libgfortran``. There are additional informations about how conda-build 3 treats
-  compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/source/compiler-tools.html>`_.
+  compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html>`_.
 
 .. _cdt_packages:
 
