@@ -100,7 +100,7 @@ See `conda-forge.github.io#1070 <https://github.com/conda-forge/conda-forge.gith
 Fixing Broken Packages
 ======================
 
-Sometimes, you need to remove a package from the conda-forge channel on Anaconda.org. 
+Sometimes, you need to remove a package from the conda-forge channel on Anaconda.org.
 There can be many reasons for this, but the ones that immediately come to mind are:
 
 * Incorrect pinnings or metadata
