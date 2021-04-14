@@ -57,7 +57,7 @@ help or version). It is suggested to get the compiled code to run all tests (e.g
 happen in the build.
 
 It is possible, though not recommended, to include multiple recipes into a
-single pull request on `staged-recipes <https://github.com/conda-forge/staged-recipes>`__. conda-build-all is used to determine
+single pull request on `staged-recipes <https://github.com/conda-forge/staged-recipes>`__. ``conda-build-all`` is used to determine
 the build order and the necessary build matrix (e.g. which python versions to
 build against). From a practical perspective, there are limitations on the
 continuous integration resources and also on what reviewers are able/willing
