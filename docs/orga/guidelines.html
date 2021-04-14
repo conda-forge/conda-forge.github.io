@@ -74,8 +74,8 @@
 <p>This document intends to layout some guidelines on the transfer of
 <a class="reference external" href="https://github.com/conda/conda-recipes">conda-recipes</a> and
 <a class="reference external" href="https://github.com/ContinuumIO/anaconda-recipes">anaconda-recipes</a>
-to conda-forge. These aren’t hard and fast rules, instead are open reasonable
-interpretation and reviewer judgement.</p>
+to conda-forge. These aren’t hard and fast rules, instead are open to reasonable
+interpretation and reviewer’s judgement.</p>
 <p>It is anticipated that almost all recipes from those repos shall be
 proposed for addition here, though it may be decided that a few don’t
 actually belong or should not be supported anymore.</p>
@@ -84,15 +84,15 @@ to see who had made changes to the recipe in the past. Anyone who has
 touched the recipe should be pinged about it, so that they can be added here. They
 should also be consulted with regards, if the recipe needs any
 tweaks before being added. Also, they should be asked if they would
-like to be added as maintainers. Only if they give express permission,
-to take up the role as a maintainer the only they should be added in the maintainer list.</p>
+like to be added as maintainers. If they give their consent
+to take up the role as a maintainer, only then they should be added in the maintainer list.</p>
 <p>In all cases while porting a recipe, you should add yourself as a
 maintainer. Some contributors to these repos might be quite prolific, but may
 not be as actively engaged. If they specify they only want to be contacted
-for certain recipes or none at all, please respect their wishes add them too.
+for certain recipes or none at all, please respect their wishes and add them too.
 Make note of what recipes (if any) they would like to be notified for. If
 they are no longer interested in any conda recipes, make that note here
-as well. Before contacting anyone please consult the list in this
+as well. Before contacting anyone, please consult the list in this
 <a class="reference external" href="https://github.com/conda-forge/staged-recipes/issues/139">issue</a>
 to see if that contributor has restrictions.</p>
 <p>While porting make sure the recipe follows the linting specifications.
@@ -101,9 +101,9 @@ The section order should go <code class="docutils literal notranslate"><span cla
 is recommended to add a <code class="docutils literal notranslate"><span class="pre">build</span></code> section with the <code class="docutils literal notranslate"><span class="pre">number</span></code> set to
 <code class="docutils literal notranslate"><span class="pre">0</span></code> explicitly even if the rest is unneeded. If there is no build for
 Windows, make sure to add <code class="docutils literal notranslate"><span class="pre">skip:</span> <span class="pre">True</span>&#160; <span class="pre">#</span> <span class="pre">[win]</span></code> to the <code class="docutils literal notranslate"><span class="pre">build</span></code>
-section. The <code class="docutils literal notranslate"><span class="pre">about</span></code> section must have the <code class="docutils literal notranslate"><span class="pre">home</span></code> URL (verify the
-URL is still correct), <code class="docutils literal notranslate"><span class="pre">license</span></code> (verify the correct license is present),
-and a one sentence (or few word) <code class="docutils literal notranslate"><span class="pre">summary</span></code>. When specifying the version it
+section. The <code class="docutils literal notranslate"><span class="pre">about</span></code> section must have the <code class="docutils literal notranslate"><span class="pre">home</span></code> URL (verify if the
+URL is still correct), <code class="docutils literal notranslate"><span class="pre">license</span></code> (verify if the correct license is present),
+and a one sentence (or few words) <code class="docutils literal notranslate"><span class="pre">summary</span></code>. When specifying the version, it
 is strongly recommended that jinja templating be used to set the version
 at the top (e.g. <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">set</span> <span class="pre">version</span> <span class="pre">=</span> <span class="pre">&quot;0.10.1&quot;</span> <span class="pre">%}</span></code>) and then replace all
 uses of the version with <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">version</span> <span class="pre">}}</span></code>. Preference should be given to
@@ -111,14 +111,14 @@ compressed source balls as opposed to version control checkouts. Make sure
 all links to compressed source balls allow for easy changing of the version
 (using latest is not acceptable). Also, a checksum should be included with
 all compressed source balls to allow for verification of downloads.</p>
-<p>It is required to add tests with all packages. These can include but are
-not limited to checking libraries are installed, python imports, simple
+<p>It is required to add tests with all packages. These can include, but are
+not limited to, checking if libraries are installed, python imports, simple
 code snippet to compile or run a basic test, command line usage (checking
-help or version). It is suggested that compiled code run all tests (e.g.
+help or version). It is suggested to get the compiled code to run all tests (e.g.
 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code>) to ensure it was built properly. This normally should
 happen in the build.</p>
 <p>It is possible, though not recommended, to include multiple recipes into a
-single pull request on staged-recipes. conda-build-all is used to determine
+single pull request on <a class="reference external" href="https://github.com/conda-forge/staged-recipes">staged-recipes</a>. <code class="docutils literal notranslate"><span class="pre">conda-build-all</span></code> is used to determine
 the build order and the necessary build matrix (e.g. which python versions to
 build against). From a practical perspective, there are limitations on the
 continuous integration resources and also on what reviewers are able/willing
@@ -131,7 +131,7 @@ suitable order.
 None of this is to say that one can’t add multiple recipes in a single
 pull request. One certainly can do this and it can work, but the
 recommendation is to open a PR with one recipe first, and to ping
-&#64;conda-forge/core to ask for agreement about adding one or two additional
+<strong>&#64;conda-forge/core</strong> to ask for agreement about adding one or two additional
 recipes.</p>
 </section>
 <section id="intended-usage">
