@@ -71,19 +71,20 @@ FAQ
 
 .. _mfaq_mamba_local:
 
-:ref:`(Q) <mfaq_mamba_local>` **Is it possible to use mamba instead of conda, while testing?**
-   
-   Yes, it is. If you want to run in the CI
-     - Set ``build_with_mambabuild: True to conda-forge.yaml``
-     - Rerender with ``conda-smithy`` 
-   (Remember to remove this configuration before merge.)
+:ref:`(Q) <mfaq_mamba_local>` **How can I make debugging solver failures on the CI faster?**
 
-   You can also run tests locally by using: 
-     ``conda install conda-smithy -c conda-forge && conda smithy rerender``
-   Important: the builds made with mambabuild won't be uploaded to conda-forge, this is purely for debugging (as of now). 
+    An alternative to the conda solver is the mamba solver. The mamba solver has a faster solve speed and prints better error messages that make debugging simpler.
+    
+    You can configure the conda-forge CI to run a debug build using the mamba solver with the following changes:
+    
+      - Set ``build_with_mambabuild: True`` in ``conda-forge.yaml`` file
+      - Rerender with ``conda-smithy`` 
+    [Note: Builds made with ``mambabuild`` won't be uploaded to ``conda-forge``. These builds are purely for debugging purposes.]
 
-   Another way to test using mamba, is directly buiding your recipe using: 
-     ``conda install boa -c conda-forge``
-     Then you can use ``conda mambabuild myrecipe``
+    You can also do this locally by using: 
+    
+      - ``conda install boa -c conda-forge``
+      - ``conda mambabuild myrecipe``
+    For more details visit `this <https://boa-build.readthedocs.io/en/latest/mambabuild.html>`_ page. 
   
   
