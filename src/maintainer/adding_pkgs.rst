@@ -710,7 +710,7 @@ Mamba uses multi-threading technique to parallely download the repo data and pac
 
 For the procedure of installation of mamba, you can look into `Mamba  Documentation. <https://mamba.readthedocs.io/en/latest/getting_started.html>`__
 
-To know how to use ``mamba-build`` , refer `Maintainers FAQ. <https://conda-forge.org/docs/maintainer/maintainer_faq.html>`__  
+If you are interested to quicken up your testing using ``mamba-build``, refer `Maintainers FAQ. <https://conda-forge.org/docs/maintainer/maintainer_faq.html>`__  
 
 
 Activate scripts
