@@ -23,7 +23,7 @@ Smithy contains maintenance code for conda-forge, which is used by the ``conda s
  - The recipe linter
  - :term:`CI` support utils
 
-``conda-smithy`` also contains the command line tool that you will use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
+``conda-smithy`` also contains the command line tool that you can use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
 
 
 Web services
@@ -41,7 +41,7 @@ Package-wide dependency pins are defined in `conda_build_config.yaml <https://gi
 
 For more information on conda-forge wide package pins, please refer to :ref:`globally_pinned_packages`.
 
-Please open a :term:`PR` and/or issues there if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to :ref:`update_pins`.
+Please open a :term:`PR` and/or issues there if you think any of the pins needs to be advanced. For more information on updating globally pinned packages, please refer to :ref:`update_pins`.
 
 Documentation
 -------------
@@ -50,7 +50,7 @@ The documentation lives in `conda-forge/conda-forge.github.io <https://github.co
 
 The documentation is built with ``Sphinx`` and the sources files are located in the `src <https://github.com/conda-forge/conda-forge.github.io/tree/master/src>`__ directory of the repository.
 
-If you found a typo, unclear explanations or new topics that could be covered, you can suggest changes to the documentation. For more details, please refer to :ref:`improve_docs`.
+If you find any typo error, unclear explanations or new topics that could be covered, you can suggest changes to the documentation. For more details, please refer to :ref:`improve_docs`.
 
 
 
