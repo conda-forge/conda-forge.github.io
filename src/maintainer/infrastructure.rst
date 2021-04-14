@@ -10,7 +10,7 @@ Staging area for recipes
 ------------------------
 
 `conda-forge/staged-recipes <https://github.com/conda-forge/staged-recipes>`_ is the entry point for new packages to join the conda-forge package collection.
-You can find a detailed guide to submitting new package recipes in :ref:`creating_recipes`.
+You can find the detailed guide for submitting new package recipes in :ref:`creating_recipes`.
 
 Smithy
 ------
@@ -19,11 +19,11 @@ Smithy contains maintenance code for conda-forge, which is used by the ``conda-s
 
 ``conda-forge/conda-smithy`` is the right repository to report bugs for
 
- - the rerendering process
- - the recipe linter
+ - The rerendering process
+ - The recipe linter
  - :term:`CI` support utils
 
-``conda-smithy`` also contains the command line tool that you will use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
+``conda-smithy`` also contains the command line tool that you can use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
 
 
 Web services
