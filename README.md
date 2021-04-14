@@ -11,15 +11,18 @@ If you have questions or need help, please check out our documentation for a [li
 ## Building the docs
 
 The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` script.
-To build the docs locally, you should do the following:
-1.  Clone the repository into your local machine.
-2.  Go into the main folder. </br>
+We are glad to know that you would like to contribute. To build the docs locally, follow the steps mentioned below:
+1.  [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the [conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io)        repository to your own GitHub user account.
+2.  [Clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) this fork onto your computer.
+3.  Go into the main folder. </br>
     Run the following commands.  
-3. `conda env create -f ./.ci_scripts/environment.yml`
-4. `conda activate conda-forge-docs`
-5. `cd newsfeed && pip install --no-deps .`
-6. `cd ../src`
-7. `make html`
+      *  `conda env create -f ./.ci_scripts/environment.yml`
+      *  `conda activate conda-forge-docs`
+      *  `cd newsfeed && pip install --no-deps .`
+      *  `cd ../src`
+      *  `make html`
+4.  Make and commit your changes.
+5.  Submit a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) to the main repository proposing your changes.
 
 ## Improving the docs
 
