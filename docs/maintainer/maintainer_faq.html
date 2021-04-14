@@ -123,6 +123,26 @@ Therefore build numbers above 1000 will gradually vanish as packages get updated
 <blockquote>
 <div><p>For certain, high-traffic channels (main &amp; conda-forge), Anaconda uses a <a class="reference external" href="https://cloudflare.com/learning/cdn/what-is-a-cdn/">CDN</a> to decrease costs. The CDN is only reindexed every 20 minutes, however <a href="#id1"><span class="problematic" id="id2">`Anaconda.org https://anaconda.org&gt;`_</span></a> uses the original channel that the CDN mirrors.  Therefore, packages will show up on the <a href="#id3"><span class="problematic" id="id4">`Anaconda Cloud https://anaconda.org&gt;`_</span></a> about 20 to 40 minutes before they are downloadable via conda.  You can use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">search</span> <span class="pre">&lt;pkg&gt;</span></code>  to see if the package is installable, because this command reads from the CDN.</p>
 </div></blockquote>
+<p id="mfaq-mamba-local"><a class="reference internal" href="#mfaq-mamba-local"><span class="std std-ref">(Q)</span></a> <strong>How can I make debugging solver failures on the CI faster?</strong></p>
+<blockquote>
+<div><p>An alternative to the conda solver is the mamba solver. The mamba solver has a faster solve speed and prints better error messages that make debugging simpler.</p>
+<p>You can configure the conda-forge CI to run a debug build using the mamba solver with the following changes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">build_with_mambabuild:</span> <span class="pre">True</span></code> in <code class="docutils literal notranslate"><span class="pre">conda-forge.yaml</span></code> file</p></li>
+<li><p>Rerender with <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> (to rerender manually use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">smithy</span> <span class="pre">rerender</span></code> from the command line)</p></li>
+</ul>
+</div></blockquote>
+<p>[Note: Builds made with <code class="docutils literal notranslate"><span class="pre">mambabuild</span></code> won’t be uploaded to <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. These builds are purely for debugging purposes.]</p>
+<p>You can also do this locally by using:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">boa</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">mambabuild</span> <span class="pre">myrecipe</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>For more details visit <a class="reference external" href="https://boa-build.readthedocs.io/en/latest/mambabuild.html">this</a> page.</p>
+</div></blockquote>
 </section>
 
 
