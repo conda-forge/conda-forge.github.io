@@ -10,10 +10,10 @@ If you have questions or need help, please check out our documentation for a [li
 
 ## Improving the docs
 
-You can help to improve the documentation! It is version-controlled in the [conda-forge.github.io repository on GitHub](https://github.com/conda-forge/conda-forge.github.io). The source text is stored there in the src/ subdirectory and is formatted using Python’s [reStructuredText system](https://docutils.sourceforge.io/rst.html).
+- You can help to improve the documentation! It is version-controlled in the [conda-forge.github.io repository on GitHub](https://github.com/conda-forge/conda-forge.github.io).   The source text is stored there in the src/ subdirectory and is formatted using Python’s [reStructuredText system](https://docutils.sourceforge.io/rst.html).
 
-The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` script.
-We are glad to know that you would like to contribute. To build the docs locally, follow the steps mentioned below:
+- The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` script.
+  We are glad to know that you would like to contribute. To build the docs locally, follow the steps mentioned below:
 1.  [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the [conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io)        repository to your own GitHub user account.
 2.  [Clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) this fork onto your computer.
 3.  Go into the main folder. </br>
