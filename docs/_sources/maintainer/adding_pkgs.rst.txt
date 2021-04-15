@@ -312,7 +312,7 @@ Build, host and run
 
 Conda-build distinguishes three different kinds of dependencies.
 In the following paragraphs, we give a very short overview what packages go where.
-For a detailed explanation please refer to the `conda-build documentation <https://docs.conda.io/projects/conda-build/en/latest/source/resources/define-metadata.html#requirements-section>`__.
+For a detailed explanation please refer to the `conda-build documentation <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#requirements-section>`__.
 
 **Build**
 
