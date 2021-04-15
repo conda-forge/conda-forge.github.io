@@ -74,7 +74,7 @@
 <section id="staging-area-for-recipes">
 <h3>Staging area for recipes<a class="headerlink" href="#staging-area-for-recipes" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://github.com/conda-forge/staged-recipes">conda-forge/staged-recipes</a> is the entry point for new packages to join the conda-forge package collection.
-You can find a detailed guide to submitting new package recipes in <a class="reference internal" href="adding_pkgs.html#creating-recipes"><span class="std std-ref">The staging process</span></a>.</p>
+You can find the detailed guide for submitting new package recipes in <a class="reference internal" href="adding_pkgs.html#creating-recipes"><span class="std std-ref">The staging process</span></a>.</p>
 </section>
 <section id="smithy">
 <h3>Smithy<a class="headerlink" href="#smithy" title="Permalink to this headline">¶</a></h3>
@@ -82,12 +82,12 @@ You can find a detailed guide to submitting new package recipes in <a class="ref
 <p><code class="docutils literal notranslate"><span class="pre">conda-forge/conda-smithy</span></code> is the right repository to report bugs for</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>the rerendering process</p></li>
-<li><p>the recipe linter</p></li>
+<li><p>The rerendering process</p></li>
+<li><p>The recipe linter</p></li>
 <li><p><a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> support utils</p></li>
 </ul>
 </div></blockquote>
-<p><code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> also contains the command line tool that you will use if you rerender manually from the command line (see <a class="reference internal" href="updating_pkgs.html#dev-update-rerender"><span class="std std-ref">Rerendering feedstocks</span></a>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> also contains the command line tool that you should use if you rerender manually from the command line (see <a class="reference internal" href="updating_pkgs.html#dev-update-rerender"><span class="std std-ref">Rerendering feedstocks</span></a>).</p>
 </section>
 <section id="web-services">
 <h3>Web services<a class="headerlink" href="#web-services" title="Permalink to this headline">¶</a></h3>
@@ -105,7 +105,7 @@ Please note that the code logic provided by the app is in the <code class="docut
 <h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
 <p>The documentation lives in <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/">conda-forge/conda-forge.github.io</a>, and is automatically deployed to our <a class="reference external" href="https://conda-forge.org/docs/">online version</a>.</p>
 <p>The documentation is built with <code class="docutils literal notranslate"><span class="pre">Sphinx</span></code> and the sources files are located in the <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/tree/master/src">src</a> directory of the repository.</p>
-<p>If you found a typo, unclear explanations or new topics that could be covered, you can suggest changes to the documentation. For more details, please refer to <a class="reference internal" href="../user/contributing.html#improve-docs"><span class="std std-ref">Improve the documentation</span></a>.</p>
+<p>If you found any typo error, unclear explanations or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to <a class="reference internal" href="../user/contributing.html#improve-docs"><span class="std std-ref">Improve the documentation</span></a>.</p>
 </section>
 </section>
 <section id="admin-web-services">
@@ -120,7 +120,7 @@ Please note that the code logic provided by the app is in the <code class="docut
 <section id="conda-forge-admin-please-rerender">
 <h3>&#64;conda-forge-admin, please rerender<a class="headerlink" href="#conda-forge-admin-please-rerender" title="Permalink to this headline">¶</a></h3>
 <p>Entering the above phrase in a PR of a feedstock will rerender the feedstock and push the changes to your PR.
-Make sure to tick the <code class="docutils literal notranslate"><span class="pre">Allow</span> <span class="pre">edits</span> <span class="pre">from</span> <span class="pre">maintainers.</span></code> button locate at the bottom of the right side bar of
+Make sure to tick the <code class="docutils literal notranslate"><span class="pre">Allow</span> <span class="pre">edits</span> <span class="pre">from</span> <span class="pre">maintainers</span></code> button located at the bottom of the right side bar of
 the PR. If you enter this phrase in the comment for an issue, the bot will create a new pull request, with the requested
 re-rendering being completed.</p>
 </section>
@@ -190,7 +190,7 @@ not be properly handled by our bots.</strong></p>
 <p>Azure is used to build packages for OSX, Linux (x86_64, native), Linux (ARMv8, emulated) and Linux (IBM Power8+, emulated).
 The build queue on Azure is substantially larger than on all the other providers.
 Azure builds have a maximum duration of 6 hours.</p>
-<p>To see all builds on Azure go to <a class="reference external" href="https://dev.azure.com/conda-forge/feedstock-builds/_build">https://dev.azure.com/conda-forge/feedstock-builds/_build</a>.</p>
+<p>To see all builds on Azure, visit <a class="reference external" href="https://dev.azure.com/conda-forge/feedstock-builds/_build">https://dev.azure.com/conda-forge/feedstock-builds/_build</a>.</p>
 <section id="restarting-builds">
 <h4>Restarting builds<a class="headerlink" href="#restarting-builds" title="Permalink to this headline">¶</a></h4>
 <p>Presently Azure does not sync GitHub users. In order to restart a build you can restart it from the GitHub checks interface.
@@ -352,7 +352,7 @@ compiler versions above, we have removed the <code class="docutils literal notra
 <p>As of writing, <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code> does not support generating API tokens that are scoped
 to allow uploads for some packages but not others. In order to secure feedstock uploads,
 so that, e.g., the maintainers of the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> feedstock cannot push a <code class="docutils literal notranslate"><span class="pre">python</span></code> version,
-we use a package staging process and issue secret tokens unique to each feedback. This process
+we use a package staging process and issue secret tokens, unique to each feedback. This process
 works as follows.</p>
 <ol class="arabic simple">
 <li><p>When a CI job on a feedstock is building packages to be uploaded to <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code>, it
@@ -368,7 +368,7 @@ channel.</p></li>
 Note however that sometimes these fail. If you think you are having trouble with uploads, make
 sure <code class="docutils literal notranslate"><span class="pre">conda_forge_output_validation:</span> <span class="pre">true</span></code> is set in your <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> and rerender
 your feedstock with the latest version of <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code>. Finally, new packages that are added to
-feedstocks are registered automatically and once uploaded successfully once, no other feedstock
+feedstocks are registered automatically and once uploaded successfully, no other feedstock
 will be able to upload packages with the same name.</p>
 </section>
 </section>
