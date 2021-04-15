@@ -23,7 +23,7 @@ Smithy contains maintenance code for conda-forge, which is used by the ``conda-s
  - The recipe linter
  - :term:`CI` support utils
 
-``conda-smithy`` also contains the command line tool that you can use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
+``conda-smithy`` also contains the command line tool that you should use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
 
 
 Web services
