@@ -11,7 +11,8 @@ If you have questions or need help, please check out our documentation for a [li
 ## Building the docs
 
 The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` script.
-To build the docs locally, you should do the following:
+<br> To build the docs locally, you should follow the steps mentioned below:
+
 1.  Clone the repository into your local machine.
 2.  Go into the main folder. </br>
     Run the following commands.  
@@ -20,6 +21,10 @@ To build the docs locally, you should do the following:
 5. `cd newsfeed && pip install --no-deps .`
 6. `cd ../src`
 7. `make html`
+8.  If you prefer to test the changes you made in .rst files on src folder, (It is advised to test the modified docs in your local system before sending the PR.
+     - open the command prompt
+     - `sphinx-build . ../docs`
+     - open docs folder, you can find the auto-generated html file.
 
 ## Improving the docs
 
