@@ -10,7 +10,7 @@ Staging area for recipes
 ------------------------
 
 `conda-forge/staged-recipes <https://github.com/conda-forge/staged-recipes>`_ is the entry point for new packages to join the conda-forge package collection.
-You can find a detailed guide to submitting new package recipes in :ref:`creating_recipes`.
+You can find the detailed guide for submitting new package recipes in :ref:`creating_recipes`.
 
 Smithy
 ------
@@ -19,11 +19,11 @@ Smithy contains maintenance code for conda-forge, which is used by the ``conda-s
 
 ``conda-forge/conda-smithy`` is the right repository to report bugs for
 
- - the rerendering process
- - the recipe linter
+ - The rerendering process
+ - The recipe linter
  - :term:`CI` support utils
 
-``conda-smithy`` also contains the command line tool that you will use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
+``conda-smithy`` also contains the command line tool that you should use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
 
 
 Web services
@@ -50,7 +50,7 @@ The documentation lives in `conda-forge/conda-forge.github.io <https://github.co
 
 The documentation is built with ``Sphinx`` and the sources files are located in the `src <https://github.com/conda-forge/conda-forge.github.io/tree/master/src>`__ directory of the repository.
 
-If you found a typo, unclear explanations or new topics that could be covered, you can suggest changes to the documentation. For more details, please refer to :ref:`improve_docs`.
+If you found any typo error, unclear explanations or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to :ref:`improve_docs`.
 
 
 
@@ -72,7 +72,7 @@ The webservice also listens to issues and PR comments, so that you can ask for t
 -----------------------------------
 
 Entering the above phrase in a PR of a feedstock will rerender the feedstock and push the changes to your PR.
-Make sure to tick the ``Allow edits from maintainers.`` button locate at the bottom of the right side bar of
+Make sure to tick the ``Allow edits from maintainers`` button located at the bottom of the right side bar of
 the PR. If you enter this phrase in the comment for an issue, the bot will create a new pull request, with the requested
 re-rendering being completed.
 
@@ -162,7 +162,7 @@ Azure is used to build packages for OSX, Linux (x86_64, native), Linux (ARMv8, e
 The build queue on Azure is substantially larger than on all the other providers. 
 Azure builds have a maximum duration of 6 hours.
 
-To see all builds on Azure go to `<https://dev.azure.com/conda-forge/feedstock-builds/_build>`_.
+To see all builds on Azure, visit `<https://dev.azure.com/conda-forge/feedstock-builds/_build>`_.
 
 Restarting builds
 .................
@@ -355,7 +355,7 @@ Output Validation and Feedstock Tokens
 As of writing, ``anaconda.org`` does not support generating API tokens that are scoped
 to allow uploads for some packages but not others. In order to secure feedstock uploads,
 so that, e.g., the maintainers of the ``numpy`` feedstock cannot push a ``python`` version,
-we use a package staging process and issue secret tokens unique to each feedback. This process
+we use a package staging process and issue secret tokens, unique to each feedback. This process
 works as follows.
 
 1. When a CI job on a feedstock is building packages to be uploaded to ``anaconda.org``, it
@@ -371,5 +371,5 @@ We attempt to report errors in this process to users via comments on commits/iss
 Note however that sometimes these fail. If you think you are having trouble with uploads, make
 sure ``conda_forge_output_validation: true`` is set in your ``conda-forge.yml`` and rerender
 your feedstock with the latest version of ``conda-smithy``. Finally, new packages that are added to
-feedstocks are registered automatically and once uploaded successfully once, no other feedstock
+feedstocks are registered automatically and once uploaded successfully, no other feedstock
 will be able to upload packages with the same name.
