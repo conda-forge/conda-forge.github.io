@@ -8,22 +8,25 @@ This repository
 
 If you have questions or need help, please check out our documentation for a [list of ways to interact with us](https://conda-forge.org/docs/user/how_to_get_help.html).
 
-## Building the docs
-
-The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` script.
-To build the docs locally, you should do the following:
-1.  Clone the repository into your local machine.
-2.  Go into the main folder. </br>
-    Run the following commands.  
-3. `conda env create -f ./.ci_scripts/environment.yml`
-4. `conda activate conda-forge-docs`
-5. `cd newsfeed && pip install --no-deps .`
-6. `cd ../src`
-7. `make html`
-
 ## Improving the docs
 
-We are constantly improving our documentation and are very grateful for feedback and contributions. If you would like to help, please be aware that the html documentation in the `docs` folder is automatically generated from the source files in the `src` folder. Therefore please always edit the files in `src` and never in `docs`.
+- You can help to improve the documentation! It is version-controlled in the [conda-forge.github.io repository on GitHub](https://github.com/conda-forge/conda-forge.github.io).   The source text is stored in the src/ subdirectory and is formatted using Python’s [reStructuredText system](https://docutils.sourceforge.io/rst.html).
+
+- The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` script.
+  We are glad to know that you would like to contribute. To build the docs locally, follow the steps mentioned below:
+1.  [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the [conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io)        repository to your own GitHub user account.
+2.  [Clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) this fork onto your computer.
+3.  Go into the main folder. </br>
+    Run the following commands.  
+      *  `conda env create -f ./.ci_scripts/environment.yml`
+      *  `conda activate conda-forge-docs`
+      *  `cd newsfeed && pip install --no-deps .`
+      *  `cd ../src`
+      *  `make html`
+4.  Make and commit your changes.
+5.  Submit a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) to the main repository proposing your changes.
+
+**Note: "All changes must be made in the `/src` folder and NOT in the `/docs` folder. Html files in the ./docs folder are auto generated "**
 
 ## conda-forge dev meetings
 
