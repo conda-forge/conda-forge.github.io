@@ -24,6 +24,8 @@ We are glad to know that you would like to contribute. To build the docs locally
 4.  Make and commit your changes.
 5.  Submit a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) to the main repository proposing your changes.
 
+**Note**: "All changes must be made in the /src folder and NOT in the /docs folder."
+
 ## Improving the docs
 
 We are constantly improving our documentation and are very grateful for feedback and contributions. If you would like to help, please be aware that the html documentation in the `docs` folder is automatically generated from the source files in the `src` folder. Therefore please always edit the files in `src` and never in `docs`.
