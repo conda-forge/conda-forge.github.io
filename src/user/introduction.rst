@@ -104,7 +104,7 @@ Display conda-forge packages in Anaconda Navigator
 #. Go to the **Environments** tab.
 #. Click the **Channels** button.
 #. Click the **Add** button.
-#. Enter the channel url ``https://conda.anaconda.org/conda-forge/``
+#. Enter the channel url: https://conda.anaconda.org/conda-forge/
 #. Press the **Enter key** on your keyboard.
 #. Click the **Update channels** button.
 
