@@ -25,6 +25,10 @@ Smithy contains maintenance code for conda-forge, which is used by the ``conda-s
 
 ``conda-smithy`` also contains the command line tool that you should use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
 
+Smithy can be used for more than just CF; it can also be used to set up self-hosted agents for non-CF infrastructures.
+For autoscaling agents, you can also use `Azure virtual machine scale set agents <https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops>`_ , 
+which are less expensive to run than permanently active agents. 
+
 
 Web services
 ------------
