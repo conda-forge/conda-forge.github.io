@@ -8,9 +8,9 @@ Conda-forge is a community-driven effort of cross-platform packaging and as such
 We encourage you to contribute in any way you can and would like! You can contribute in many categories such as:
 
  - Contributing new packages (:ref:`dev_contribute_pkgs`)
- - Help in updating and maintaining packages (:ref:`maintaining_pkgs`)
- - Suggesting and implementing improvements for our:ref:`infrastructure`
- - Help :ref:`improve_docs`
+ - Helping in updating and maintaining packages (:ref:`maintaining_pkgs`)
+ - Suggesting and implementing improvements for our :ref:`infrastructure`
+ - Helping to :ref:`improve_docs`
 
 
 .. _improve_docs:
@@ -33,12 +33,12 @@ will take you directly to a web-based editor for this very webpage. In
 general, the file corresponding to each page in the GitHub browser has a
 little pencil icon in its top-right that lets you open it up for editing.
 
-We are glad to know that you would like to contribute. If you are new to our community, we strongly recommend you getting through the following list:
+We are glad to know that you would like to contribute. If you are new to our community, follow the steps below to make your first contribution:
 
 1. `Fork <https://help.github.com/articles/fork-a-repo/>`_ the
    `conda-forge.github.io repository
    <https://github.com/conda-forge/conda-forge.github.io>`_ to your own GitHub user account.
-2. `Clone <https://help.github.com/articles/cloning-a-repository/>`_ that fork onto your computer.
+2. `Clone <https://help.github.com/articles/cloning-a-repository/>`_ this fork onto your computer.
 3. `Check out
    <https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging>`_
    a new branch deriving from ``master`` to do your work.

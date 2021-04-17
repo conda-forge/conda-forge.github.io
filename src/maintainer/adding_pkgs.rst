@@ -16,20 +16,20 @@ Getting Started
 
 There are multiple ways to get started:
 
-#. Look at `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the staged-recipes repository and modify it as necessary.
-#. If it is an R package from `CRAN <https://cran.r-project.org/>`_, please
-   instead start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_.
-   Then if necessary you can make manual edits to the recipe.
+#. Look at `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`_ and modify it as necessary.
+#. If it is an R package from `CRAN <https://cran.r-project.org/>`_, kindly
+   start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_ instead.
+   Then if necessary, you can make manual edits to the recipe.
 #. If it is a python package, you can generate the recipe as a starting point with
-   ``grayskull pypi your_package_name``. To install it you can use `conda install -c conda-forge grayskull`. You do *not* have to use grayskull, and the
-   recipes produced by grayskull will need to be reviewed and edited.
+   ``grayskull pypi your_package_name``. To install it you can use ``conda install -c conda-forge grayskull``. You do *not* have to use ``grayskull``, and the
+   recipes produced by ``grayskull`` will need to be reviewed and edited.
    In particular, you'll at least need to check the build line to :ref:`use pip <use-pip>`,
    add yourself as a maintainer,
    and specify a ``license_file``.
 
 Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
 
-*If there are details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.*
+*If there are any details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.*
 
 In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that might help you with a successful build is provided in the following.
 
@@ -82,11 +82,11 @@ Checklist
 Feedback and revision
 ---------------------
 
-Once you finished your PR, all you have to do is waiting for feedback from our reviewer team.
+Once you finished your PR, all you have to do is wait for feedback from our review team.
 
-The reviewer team will assist you by pointing out improvements and answering questions. Once the package is ready, the reviewers will approve and merge your pull request.
+The review team will assist you by pointing out improvements and answering questions. Once the package is ready, the reviewers will approve and merge your pull request.
 
-After merging the :term:`PR`, our infrastructure will build the package and make it available in the conda-channel.
+After merging the :term:`PR`, our :term:`CI` infrastructure will build the package and make it available in the conda-channel.
 
 .. note::
 
@@ -157,7 +157,7 @@ staged-recipes directory.
 
      git checkout master
 
-#. Define the conda-forge/staged-recipes repository as “upstream” (if you have not already done so).::
+#. Define the conda-forge/staged-recipes repository as ``upstream`` (if you have not already done so).::
 
      git remote add upstream https://github.com/conda-forge/staged-recipes.git
 
@@ -231,7 +231,7 @@ You may need the openssl package, available on conda-forge
 Downloading extra sources and data files
 ........................................
 
-``conda-build 3`` supports multiple sources per recipe. Examples are available `in the conda-build docs <https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#source-from-multiple-sources>`_.
+``conda-build 3`` supports multiple sources per recipe. Examples are available `in the conda-build docs <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#source-from-multiple-sources>`_.
 
 
 Build
@@ -312,7 +312,7 @@ Build, host and run
 
 Conda-build distinguishes three different kinds of dependencies.
 In the following paragraphs, we give a very short overview what packages go where.
-For a detailed explanation please refer to the `conda-build documentation <https://docs.conda.io/projects/conda-build/en/latest/source/resources/define-metadata.html#requirements-section>`__.
+For a detailed explanation please refer to the `conda-build documentation <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#requirements-section>`__.
 
 **Build**
 
