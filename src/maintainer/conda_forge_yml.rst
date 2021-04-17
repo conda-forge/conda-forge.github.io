@@ -82,8 +82,6 @@ mapping for Azure-specific configuration options. For example:
 
 .. _self-hosted_azure-config:
 
-self-hosted azure
------------------
 Conda-Smithy is capable of doing things beyond CF's purposes, it also allows setting up
 self-hosted agents for non-CF infrastructures. Here is an example demonstrating that:
 
