@@ -97,8 +97,6 @@ Below is the configuration for setting up a self-hosted Azure agent:
           strategy:
             maxParallel: 1
 
-You can also use `Azure virtual machine scale set agents <https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops>`_ 
-for autoscaling agents as they are cheaper to run than permanently active agents.
 
 .. _bot:
 
