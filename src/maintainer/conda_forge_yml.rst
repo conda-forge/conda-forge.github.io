@@ -23,6 +23,7 @@ Top-level fields
 
 * appveyor
 * azure
+* self-hosted azure
 * build_platform
 * bot
 * channel_priority
@@ -77,6 +78,32 @@ mapping for Azure-specific configuration options. For example:
       # toggle for storing the conda build_artifacts directory (including the
       # built packages) as an Azure pipeline artifact that can be downloaded
       store_build_artifacts: False
+
+self-hosted azure
+-----------------
+Conda-Smithy is capable of doing things beyond CF's purposes, it also allows setting up
+self-hosted agents for non-CF infrastructures. Here is an example demonstrating that:
+
+.. code-block:: yaml
+
+      azure:
+        user_or_org: nsls2forge
+        project_name: nsls2forge
+        for local GPU runners
+        settings_linux:
+        pool:
+        name: BNL-machines
+        demands:
+          - gpu -equals true
+        workspace:
+          clean: all
+        strategy:
+          maxParallel: 2
+          variables:
+            cutensor_path: /home/ci_agent/libcutensor_1.0.1/
+
+You can also use `Azure virtual machine scale set agents <https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops>`_ 
+for autoscaling agents as they are cheaper to run than permanently active agents.
 
 bot
 ---
