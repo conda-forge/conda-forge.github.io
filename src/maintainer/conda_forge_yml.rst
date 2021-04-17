@@ -87,20 +87,15 @@ Below is the configuration for setting up a self-hosted Azure agent:
 .. code-block:: yaml
 
       azure:
-        user_or_org: nsls2forge
-        project_name: nsls2forge
-        for local GPU runners
         settings_linux:
-        pool:
-        name: BNL-machines
-        demands:
-          - gpu -equals true
-        workspace:
-          clean: all
-        strategy:
-          maxParallel: 2
-          variables:
-            cutensor_path: /home/ci_agent/libcutensor_1.0.1/
+          pool:
+            name: your_local_pool_name
+            demands:
+              - some_key -equals some_value
+          workspace:
+            clean: all
+          strategy:
+            maxParallel: 1
 
 You can also use `Azure virtual machine scale set agents <https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops>`_ 
 for autoscaling agents as they are cheaper to run than permanently active agents.
