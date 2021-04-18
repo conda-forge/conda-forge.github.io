@@ -18,7 +18,7 @@ These pinned versions represent the ABIs that conda-forge is currently supportin
 
 When a rerendering happens, conda-smithy will render the recipe using conda-build and output configuration files for each job and save them in a yaml file in ``.ci_support`` folder. For example, there's an output configuration file for each OS, each python version, etc.
 
-These output configuration files are stripped to options that are used in the build and therefore a change in the config files in ``.ci_support`` folder implies that there needs to be a new build.
+These output configuration files are stripped to options that are used in the build and therefore a change in the config files in ``.ci_support`` folder implies that a new build is needed there.
 
 Pinning of packages are handled by the same configuration file and conda-build. This means that packages need not be pinned manually.
 
