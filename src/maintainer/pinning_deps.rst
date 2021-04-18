@@ -11,7 +11,7 @@ Globally pinned packages
 Maintaining a large collection of packages with different requirements poses the danger of producing islands of packages with mutually exclusive dependencies.
 Especially widely used libraries with restricted version compatibilities increase the danger of fractioning the package space.
 By fixing crucial libraries to specific dependency version shared by all packages in conda-forge, we avoid fractioning of our packages in incompatible islands.
-The following paragraphs give a short introduction how this global version pinning is realized in conda-forge.
+The following paragraphs give a short introduction about how this global version pinning is realized in conda-forge.
 
 The current versions of globally pinned packages are defined in the `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_ file located in the ``conda-forge-pinning`` feedstock.
 These pinned versions represent the ABIs that conda-forge is currently supporting, with almost all available packages built against that version.
