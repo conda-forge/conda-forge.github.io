@@ -23,7 +23,6 @@ Top-level fields
 
 * :ref:`appveyor`
 * :ref:`azure-config`
-* :ref:`self-hosted_azure-config`
 * :ref:`build_platform`
 * :ref:`bot`
 * :ref:`channel_priority`
