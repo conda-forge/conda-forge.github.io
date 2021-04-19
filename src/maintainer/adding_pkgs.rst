@@ -171,6 +171,61 @@ staged-recipes directory.
 
 Once these steps are complete, you can continue with the steps in :ref:`staging_steps` to stage your new package recipe using your existing staged-recipes fork.
 
+.. _feedstock_repo_structure :
+
+Structure of Feedstock's Git Repository
+======================================
+
+.azure-pipelines
+----------------------
+This folder contains azure pipeline configuration files for Linux, Mac and/or Windows hosted agents and pythons versions.
+
+.ci_support
+-------------------
+When a rerendering happens, conda-smithy will render the recipe using conda-build and output
+configuration files for each job and save them in a yaml file in .ci_support folder. These output
+configuration files are stripped to options that are used in the build and therefore a change in the config
+files in .ci_support folder implies that there needs to be a new build.
+
+.circleci
+-------------
+
+.github
+------------
+
+.scripts
+-----------
+This folder contains build scripts for various environments.
+
+recipe
+-----------
+
+.gitattributes
+----------------
+A text file that gives attributes to pathnames.
+
+.gitignore
+---------------
+It specifies intentionally untracked files that Git should ignore. (eg : build_artifacts)
+
+LICENSE.txt
+---------------
+This is feedstock license (BSD 3-clause license). This is different from the related package license.
+
+README.md
+--------------
+
+azure-pipelines.yml
+---------------------
+
+build-locally.py
+---------------------
+It contains python script which could be run to build and test updates to a feedstock, locally on our machine.
+
+conda-forge.yml
+--------------------
+You can configure how conda-forge is setup and built via this file.
+
 
 .. _meta_yaml:
 
