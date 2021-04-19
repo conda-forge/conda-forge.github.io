@@ -79,6 +79,24 @@ mapping for Azure-specific configuration options. For example:
       # built packages) as an Azure pipeline artifact that can be downloaded
       store_build_artifacts: False
 
+.. _self-hosted_azure-config:
+
+Below is an example configuration for setting up a self-hosted Azure agent for Linux:
+
+.. code-block:: yaml
+
+      azure:
+        settings_linux:
+          pool:
+            name: your_local_pool_name
+            demands:
+              - some_key -equals some_value
+          workspace:
+            clean: all
+          strategy:
+            maxParallel: 1
+
+
 .. _bot:
 
 bot
