@@ -81,7 +81,7 @@ mapping for Azure-specific configuration options. For example:
 
 .. _self-hosted_azure-config:
 
-Below is the configuration for setting up a self-hosted Azure agent:
+Below is an example configuration for setting up a self-hosted Azure agent for linux:
 
 .. code-block:: yaml
 
