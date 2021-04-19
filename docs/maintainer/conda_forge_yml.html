@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2021.04.18 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2021.04.19 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.04.18 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.19 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -132,6 +132,19 @@ mapping for Azure-specific configuration options. For example:</p>
   <span class="c1"># toggle for storing the conda build_artifacts directory (including the</span>
   <span class="c1"># built packages) as an Azure pipeline artifact that can be downloaded</span>
   <span class="nt">store_build_artifacts</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+</pre></div>
+</div>
+<p id="self-hosted-azure-config">Below is an example configuration for setting up a self-hosted Azure agent for Linux:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span>
+  <span class="nt">settings_linux</span><span class="p">:</span>
+    <span class="nt">pool</span><span class="p">:</span>
+      <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">your_local_pool_name</span>
+      <span class="nt">demands</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">some_key -equals some_value</span>
+    <span class="nt">workspace</span><span class="p">:</span>
+      <span class="nt">clean</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
+    <span class="nt">strategy</span><span class="p">:</span>
+      <span class="nt">maxParallel</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
 </pre></div>
 </div>
 </section>
@@ -546,7 +559,7 @@ Currently only:</p>
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.04.18 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.19 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
