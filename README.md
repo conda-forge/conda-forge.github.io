@@ -6,7 +6,7 @@
   conda-forge.org
 </h1>
 
-# [conda-forge.org](https://conda-forge.org)
+## [conda-forge.org](https://conda-forge.org)
 <br> [![deploy](https://github.com/conda-forge/conda-forge.github.io/workflows/deploy/badge.svg)](https://github.com/conda-forge/conda-forge.github.io/actions?query=workflow%3Adeploy)
 
 ## Overview
