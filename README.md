@@ -1,4 +1,5 @@
 <p align="center">
+      <a href="https://conda-forge.org">
      <img alt="conda-forge" src="https://conda-forge.org/docs/_static/logo_black_on_trans.png" width="80" />
   </a>
 </p>
