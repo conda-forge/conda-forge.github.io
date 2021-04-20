@@ -3,12 +3,11 @@
      <img alt="conda-forge" src="https://conda-forge.org/docs/_static/logo_black_on_trans.png" width="80" />
   </a>
 </p>
-<h1 align="center">
-  conda-forge.org
-</h1>
+<h2 align="center">
+      <a href="https://conda-forge.org">conda-forge.org</a>
+</h2>
 
-## [conda-forge.org](https://conda-forge.org)
-<br> [![deploy](https://github.com/conda-forge/conda-forge.github.io/workflows/deploy/badge.svg)](https://github.com/conda-forge/conda-forge.github.io/actions?query=workflow%3Adeploy)
+## [![deploy](https://github.com/conda-forge/conda-forge.github.io/workflows/deploy/badge.svg)](https://github.com/conda-forge/conda-forge.github.io/actions?query=workflow%3Adeploy)
 
 ## Overview
 This repository
