@@ -7,7 +7,8 @@ Glossary
 .. glossary::
 
   Recipe
-    **R**\ ecipe is the collection of files required to build the conda package. This includes at minimum the `meta.yaml <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml>`_, but can also include license files, patches, build scripts, test scripts etc.
+    **R**\ ecipe is a collection of files required to build the conda package. This includes, at minimum, the `meta.yaml <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml>`_, but can also include license files, patches, build scripts, test scripts etc. `Learn More <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_.
+
   
   CI
     **C**\ ontinuous **I**\ ntegration.
