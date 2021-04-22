@@ -8,7 +8,7 @@ A maintainer is an individual who is responsible for maintaining and updating on
 
 Once you create a package, as a code owner you automatically become a maintainer of it. In case you wish to be a maintainer of a certain package, you can ask for permission from the current maintainers of it and get your `gitub-id` added to the `recipe-maintainers` section in the recipe’s `meta.yaml`. `Please refer to Updating the maintainer list <https://conda-forge.org/docs/maintainer/updating_pkgs.html#updating-the-maintainer-list>`__ for detailed instructions.
 The list of maintainers of the feedstock package is recorded in the recipe of that package itself.
-For more details on this, check `Updating the maintainers list. <https://conda-forge.org/docs/maintainer/updating_pkgs.html#updating-the-maintainer-list>`__
+
 
 .. _creating_recipes:
 
