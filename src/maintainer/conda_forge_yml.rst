@@ -51,6 +51,9 @@ Top-level fields
 
 .. _appveyor:
 
+Detail of the top-level fields
+==============================
+
 appveyor
 --------
 The top-level ``appveyor`` key specifies configurations for the Appveyor
