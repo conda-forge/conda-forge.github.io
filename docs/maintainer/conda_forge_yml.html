@@ -86,6 +86,7 @@ upload packages to anaconda.org, which can be useful for testing. For example:</
 <li><p><a class="reference internal" href="#appveyor"><span class="std std-ref">appveyor</span></a></p></li>
 <li><p><a class="reference internal" href="#azure-config"><span class="std std-ref">azure</span></a></p></li>
 <li><p><a class="reference internal" href="#build-platform"><span class="std std-ref">build_platform</span></a></p></li>
+<li><p><a class="reference internal" href="#build-with-mamba"><span class="std std-ref">build_with_mamba</span></a></p></li>
 <li><p><a class="reference internal" href="#bot"><span class="std std-ref">bot</span></a></p></li>
 <li><p><a class="reference internal" href="#channel-priority"><span class="std std-ref">channel_priority</span></a></p></li>
 <li><p><a class="reference internal" href="#channels"><span class="std std-ref">channels</span></a></p></li>
@@ -180,14 +181,22 @@ build platform using cross-compiling.</p>
 </pre></div>
 </div>
 </section>
+<section id="build-with-mamba">
+<span id="id4"></span><h3>build_with_mamba<a class="headerlink" href="#build-with-mamba" title="Permalink to this headline">¶</a></h3>
+<p>This option, when enabled, configures the conda-forge CI to run a debug build using the <code class="docutils literal notranslate"><span class="pre">mamba</span></code> solver. Check <a class="reference external" href="https://conda-forge.org/docs/maintainer/maintainer_faq.html#mfaq-mamba-local">this</a> to know more.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build_with_mamba</span><span class="p">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">True</span>
+</pre></div>
+</div>
+</section>
 <section id="channel-priority">
-<span id="id4"></span><h3>channel_priority<a class="headerlink" href="#channel-priority" title="Permalink to this headline">¶</a></h3>
+<span id="id5"></span><h3>channel_priority<a class="headerlink" href="#channel-priority" title="Permalink to this headline">¶</a></h3>
 <p>This value sets the <code class="docutils literal notranslate"><span class="pre">conda</span></code> solver channel priority for feedstock builds.
 The default is <code class="docutils literal notranslate"><span class="pre">strict</span></code>. Any valid value for the same setting in the <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> is
 allowed here.</p>
 </section>
 <section id="channels">
-<span id="id5"></span><h3>channels<a class="headerlink" href="#channels" title="Permalink to this headline">¶</a></h3>
+<span id="id6"></span><h3>channels<a class="headerlink" href="#channels" title="Permalink to this headline">¶</a></h3>
 <p>This represents the channels to grab packages from during builds and
 which channels/labels to push to on anaconda.org after a package
 has been built.  The <code class="docutils literal notranslate"><span class="pre">channels</span></code> variable is a mapping with
@@ -205,7 +214,7 @@ has been built.  The <code class="docutils literal notranslate"><span class="pre
 </div>
 </section>
 <section id="choco">
-<span id="id6"></span><h3>choco<a class="headerlink" href="#choco" title="Permalink to this headline">¶</a></h3>
+<span id="id7"></span><h3>choco<a class="headerlink" href="#choco" title="Permalink to this headline">¶</a></h3>
 <p>This parameter allows for conda-smithy to run chocoloatey installs on Windows
 when additional system packages are needed. This is a list of strings that
 represent package names and any additional parameters. For example,</p>
@@ -222,7 +231,7 @@ represent package names and any additional parameters. For example,</p>
 with a standard set of additional flags that are useful on CI.</p>
 </section>
 <section id="circle">
-<span id="id7"></span><h3>circle<a class="headerlink" href="#circle" title="Permalink to this headline">¶</a></h3>
+<span id="id8"></span><h3>circle<a class="headerlink" href="#circle" title="Permalink to this headline">¶</a></h3>
 <p>The top-level <code class="docutils literal notranslate"><span class="pre">circle</span></code> key specifies configurations for the Circle
 CI service.  This is usually <strong>read-only</strong> and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as need.  It has a single
@@ -234,13 +243,13 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
 </div>
 </section>
 <section id="conda-forge-output-validation">
-<span id="id8"></span><h3>conda_forge_output_validation<a class="headerlink" href="#conda-forge-output-validation" title="Permalink to this headline">¶</a></h3>
+<span id="id9"></span><h3>conda_forge_output_validation<a class="headerlink" href="#conda-forge-output-validation" title="Permalink to this headline">¶</a></h3>
 <p>This field must be set to <code class="docutils literal notranslate"><span class="pre">True</span></code> for feedstocks in the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> GitHub
 organization. It enables the required feedstock artifact validation as described
 in <a class="reference internal" href="infrastructure.html#output-validation"><span class="std std-ref">Output Validation and Feedstock Tokens</span></a>.</p>
 </section>
 <section id="docker">
-<span id="id9"></span><h3>docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h3>
+<span id="id10"></span><h3>docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h3>
 <p>This is a mapping to docker configuration options. These are relatively
 self-explanatory. The defaults are as follows:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">docker</span><span class="p">:</span>
@@ -252,7 +261,7 @@ self-explanatory. The defaults are as follows:</p>
 </div>
 </section>
 <section id="github">
-<span id="id10"></span><h3>github<a class="headerlink" href="#github" title="Permalink to this headline">¶</a></h3>
+<span id="id11"></span><h3>github<a class="headerlink" href="#github" title="Permalink to this headline">¶</a></h3>
 <p>This is mapping of configuration variables for GitHub. The
 defaults are as follows:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">github</span><span class="p">:</span>
@@ -266,7 +275,7 @@ defaults are as follows:</p>
 </div>
 </section>
 <section id="idle-timeout-minutes">
-<span id="id11"></span><h3>idle_timeout_minutes<a class="headerlink" href="#idle-timeout-minutes" title="Permalink to this headline">¶</a></h3>
+<span id="id12"></span><h3>idle_timeout_minutes<a class="headerlink" href="#idle-timeout-minutes" title="Permalink to this headline">¶</a></h3>
 <p>Configurable idle timeout that is either an int or None.  Used for packages that
 don’t have chatty enough builds. Currently only implemented in Travis and Circle.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">idle_timeout_minutes</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">60</span>
@@ -274,7 +283,7 @@ don’t have chatty enough builds. Currently only implemented in Travis and Circ
 </div>
 </section>
 <section id="linux">
-<span id="id12"></span><h3>linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
+<span id="id13"></span><h3>linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
 <p>The Linux-specific configuration options. This is largely an internal setting.
 Currently only:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">linux</span><span class="p">:</span>
@@ -283,7 +292,7 @@ Currently only:</p>
 </div>
 </section>
 <section id="linux-aarch64">
-<span id="id13"></span><h3>linux_aarch64<a class="headerlink" href="#linux-aarch64" title="Permalink to this headline">¶</a></h3>
+<span id="id14"></span><h3>linux_aarch64<a class="headerlink" href="#linux-aarch64" title="Permalink to this headline">¶</a></h3>
 <p>The ARM-specific configuration options. This is largely an internal setting.
 Currently only:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">linux_aarch64</span><span class="p">:</span>
@@ -292,7 +301,7 @@ Currently only:</p>
 </div>
 </section>
 <section id="linux-ppc64le">
-<span id="id14"></span><h3>linux_ppc64le<a class="headerlink" href="#linux-ppc64le" title="Permalink to this headline">¶</a></h3>
+<span id="id15"></span><h3>linux_ppc64le<a class="headerlink" href="#linux-ppc64le" title="Permalink to this headline">¶</a></h3>
 <p>The PPC-specific configuration options. This is largely an internal setting.
 Currently only:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">linux_ppc64le</span><span class="p">:</span>
@@ -301,7 +310,7 @@ Currently only:</p>
 </div>
 </section>
 <section id="os-version">
-<span id="id15"></span><h3>os_version<a class="headerlink" href="#os-version" title="Permalink to this headline">¶</a></h3>
+<span id="id16"></span><h3>os_version<a class="headerlink" href="#os-version" title="Permalink to this headline">¶</a></h3>
 <p>This key is used to set the OS versions for <code class="docutils literal notranslate"><span class="pre">linux_*</span></code> platforms. Valid entries map a linux platform and arch to either <code class="docutils literal notranslate"><span class="pre">cos6</span></code>
 or <code class="docutils literal notranslate"><span class="pre">cos7</span></code>. Currently <code class="docutils literal notranslate"><span class="pre">cos6</span></code> is the default for <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>. All other linux architectures use CentOS 7. Here is an example that enables CentOS 7 on <code class="docutils literal notranslate"><span class="pre">linux-64</span></code> builds</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">os_version</span><span class="p">:</span>
@@ -310,7 +319,7 @@ or <code class="docutils literal notranslate"><span class="pre">cos7</span></cod
 </div>
 </section>
 <section id="osx">
-<span id="id16"></span><h3>osx<a class="headerlink" href="#osx" title="Permalink to this headline">¶</a></h3>
+<span id="id17"></span><h3>osx<a class="headerlink" href="#osx" title="Permalink to this headline">¶</a></h3>
 <p>The macOSX-specific configuration options. This is largely an internal setting.
 Currently only:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">osx</span><span class="p">:</span>
@@ -319,7 +328,7 @@ Currently only:</p>
 </div>
 </section>
 <section id="provider">
-<span id="id17"></span><h3>provider<a class="headerlink" href="#provider" title="Permalink to this headline">¶</a></h3>
+<span id="id18"></span><h3>provider<a class="headerlink" href="#provider" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">provider</span></code> field is a mapping from arch (operating system) to CI service.
 This thus controls where a package is built. The following are available as
 arches:</p>
@@ -364,14 +373,14 @@ provider entry is equivalent to the following:</p>
 </div>
 </section>
 <section id="recipe-dir">
-<span id="id18"></span><h3>recipe_dir<a class="headerlink" href="#recipe-dir" title="Permalink to this headline">¶</a></h3>
+<span id="id19"></span><h3>recipe_dir<a class="headerlink" href="#recipe-dir" title="Permalink to this headline">¶</a></h3>
 <p>The relative path to the recipe directory. The default is:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">recipe_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">recipe</span>
 </pre></div>
 </div>
 </section>
 <section id="remote-ci-setup">
-<span id="id19"></span><h3>remote_ci_setup<a class="headerlink" href="#remote-ci-setup" title="Permalink to this headline">¶</a></h3>
+<span id="id20"></span><h3>remote_ci_setup<a class="headerlink" href="#remote-ci-setup" title="Permalink to this headline">¶</a></h3>
 <p>This option can be used to override the default <code class="docutils literal notranslate"><span class="pre">conda-forge-ci-setup</span></code> package.
 Can be given with <code class="docutils literal notranslate"><span class="pre">${url</span> <span class="pre">or</span> <span class="pre">channel_alias}::package_name</span></code>, defaults to conda-forge
 channel_alias if no prefix given.</p>
@@ -380,7 +389,7 @@ channel_alias if no prefix given.</p>
 </div>
 </section>
 <section id="skip-render">
-<span id="id20"></span><h3>skip_render<a class="headerlink" href="#skip-render" title="Permalink to this headline">¶</a></h3>
+<span id="id21"></span><h3>skip_render<a class="headerlink" href="#skip-render" title="Permalink to this headline">¶</a></h3>
 <p>This option specifies a list of files which conda smithy will skip rendering.
 The possible values can be a subset of <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>, <code class="docutils literal notranslate"><span class="pre">.gitattributes</span></code>, <code class="docutils literal notranslate"><span class="pre">README.md</span></code>, <code class="docutils literal notranslate"><span class="pre">LICENSE.txt</span></code>.
 The default value is an empty list [ ], i.e. all these four files will be generated by conda smithy.
@@ -392,19 +401,19 @@ For example, if you want to customize .gitignore and LICENSE.txt file by your ow
 </div>
 </section>
 <section id="templates">
-<span id="id21"></span><h3>templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h3>
+<span id="id22"></span><h3>templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h3>
 <p>This is mostly an internal field for specifying where templates files live.
 You shouldn’t need it.</p>
 </section>
 <section id="test-on-native-only">
-<span id="id22"></span><h3>test_on_native_only<a class="headerlink" href="#test-on-native-only" title="Permalink to this headline">¶</a></h3>
+<span id="id23"></span><h3>test_on_native_only<a class="headerlink" href="#test-on-native-only" title="Permalink to this headline">¶</a></h3>
 <p>This is used for disabling testing for cross compiling. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_on_native_only</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
 </pre></div>
 </div>
 </section>
 <section id="travis">
-<span id="id23"></span><h3>travis<a class="headerlink" href="#travis" title="Permalink to this headline">¶</a></h3>
+<span id="id24"></span><h3>travis<a class="headerlink" href="#travis" title="Permalink to this headline">¶</a></h3>
 <p>The top-level <code class="docutils literal notranslate"><span class="pre">travis</span></code> key specifies configurations for the Travis
 CI service.  This is usually <strong>read-only</strong> and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as need.  It has a single
@@ -416,7 +425,7 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
 </div>
 </section>
 <section id="upload-on-branch">
-<span id="id24"></span><h3>upload_on_branch<a class="headerlink" href="#upload-on-branch" title="Permalink to this headline">¶</a></h3>
+<span id="id25"></span><h3>upload_on_branch<a class="headerlink" href="#upload-on-branch" title="Permalink to this headline">¶</a></h3>
 <p>This parameter restricts uploading access on work from certain branches of the
 same repo. Only the branch listed in <code class="docutils literal notranslate"><span class="pre">upload_on_branch</span></code> will trigger uploading
 of packages to the target channel. The default is to skip this check if the key
@@ -427,7 +436,7 @@ master branch:</p>
 </div>
 </section>
 <section id="win">
-<span id="id25"></span><h3>win<a class="headerlink" href="#win" title="Permalink to this headline">¶</a></h3>
+<span id="id26"></span><h3>win<a class="headerlink" href="#win" title="Permalink to this headline">¶</a></h3>
 <p>The Windows-specific configuration options. This is largely an internal setting.
 Currently only:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">win</span><span class="p">:</span>
@@ -461,6 +470,7 @@ Currently only:</p>
 <li class="toctree-l4"><a class="reference internal" href="#azure">azure</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bot">bot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#build-platform">build_platform</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-with-mamba">build_with_mamba</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#channel-priority">channel_priority</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#channels">channels</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#choco">choco</a></li>
