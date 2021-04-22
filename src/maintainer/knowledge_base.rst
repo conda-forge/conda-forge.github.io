@@ -1387,7 +1387,7 @@ Pre-release version sorting
 ---------------------------
 
 If you wish to add numbers to your ``dev`` or ``rc`` build, you should follow the
-`guidelines <http://conda.pydata.org/docs/spec.html#build-version-spec>`_ put
+`guidelines <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/pkg-specs.html#version-ordering>`_ put
 forth by Continuum regarding version sorting in ``conda``. Also see the `source
 code for conda
 4.2.13 <https://github.com/conda/conda/blob/4.2.13/conda/version.py#L93-L119>`_.
