@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Knowledge Base &#8212; conda-forge 2021.04.22 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2021.04.23 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.04.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.23 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -98,7 +98,7 @@ into lib64 or similar but on conda-forge we keep shared libraries in simply lib.
 <li><p><code class="docutils literal notranslate"><span class="pre">-DBUILD_SHARED_LIBS=ON</span></code> Instruct CMake to build shared libraries instead of static ones.</p></li>
 </ul>
 </div></blockquote>
-<p>Here are some basic commands to get you started. These are dependent on your source
+<p>Here are some basic commands for you to get started. These are dependent on your source
 code layout and aren’t intended to be used “as is”.</p>
 <p><strong>CMake lines for build.sh (macOS/Linux):</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="n">CMakeLists</span><span class="o">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">DPython3_EXECUTABLE</span><span class="o">=</span><span class="s2">&quot;$PYTHON&quot;</span>
@@ -867,7 +867,7 @@ by opening a new issue and including <code class="docutils literal notranslate">
 <h2>Build matrices<a class="headerlink" href="#build-matrices" title="Permalink to this headline">¶</a></h2>
 <p>Currently, <code class="docutils literal notranslate"><span class="pre">python,</span> <span class="pre">vc,</span> <span class="pre">r-base</span></code> will create a matrix of jobs for each supported version. If <code class="docutils literal notranslate"><span class="pre">python</span></code> is only a
 build dependency and not a runtime dependency (eg: build script of the package is written in Python, but the
-package is not dependent on python), use <code class="docutils literal notranslate"><span class="pre">build</span></code> section</p>
+package is not dependent on Python), use <code class="docutils literal notranslate"><span class="pre">build</span></code> section</p>
 <p>Following implies that <code class="docutils literal notranslate"><span class="pre">python</span></code> is only a build dependency and no Python matrix will be created.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
@@ -877,7 +877,7 @@ package is not dependent on python), use <code class="docutils literal notransla
 </div>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">host</span></code> should be non-empty or <code class="docutils literal notranslate"><span class="pre">compiler</span></code> jinja syntax used or <code class="docutils literal notranslate"><span class="pre">build/merge_build_host</span></code> set to
 True for the <code class="docutils literal notranslate"><span class="pre">build</span></code> section to be treated as different from <code class="docutils literal notranslate"><span class="pre">host</span></code>.</p>
-<p>Following implies that <code class="docutils literal notranslate"><span class="pre">python</span></code> is a runtime dependency and a Python matrix for each supported python version will be created.</p>
+<p>Following implies that <code class="docutils literal notranslate"><span class="pre">python</span></code> is a runtime dependency and a Python matrix for each supported Python version will be created.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
 </pre></div>
@@ -1421,7 +1421,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.04.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.23 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>

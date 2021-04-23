@@ -33,7 +33,7 @@ Some optional, but useful CMake options:
       into lib64 or similar but on conda-forge we keep shared libraries in simply lib.
     - ``-DBUILD_SHARED_LIBS=ON`` Instruct CMake to build shared libraries instead of static ones.
 
-Here are some basic commands to get you started. These are dependent on your source
+Here are some basic commands for you to get started. These are dependent on your source
 code layout and aren't intended to be used "as is".
 
 **CMake lines for build.sh (macOS/Linux):**
@@ -944,7 +944,7 @@ Build matrices
 
 Currently, ``python, vc, r-base`` will create a matrix of jobs for each supported version. If ``python`` is only a
 build dependency and not a runtime dependency (eg: build script of the package is written in Python, but the
-package is not dependent on python), use ``build`` section
+package is not dependent on Python), use ``build`` section
 
 Following implies that ``python`` is only a build dependency and no Python matrix will be created.
 
@@ -959,7 +959,7 @@ Following implies that ``python`` is only a build dependency and no Python matri
 Note that ``host`` should be non-empty or ``compiler`` jinja syntax used or ``build/merge_build_host`` set to
 True for the ``build`` section to be treated as different from ``host``.
 
-Following implies that ``python`` is a runtime dependency and a Python matrix for each supported python version will be created.
+Following implies that ``python`` is a runtime dependency and a Python matrix for each supported Python version will be created.
 
 .. code-block:: yaml
 
