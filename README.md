@@ -40,6 +40,6 @@ There is a template provided in [`misc/DEV_MEETING_TEMPLATE.md`](https://github.
 ## Contact
 
 In case you have any questions/doubts or want to discuss something about this repo, feel free to reach out to our team:
-* Join us on Gitter.
+* Join us on [Gitter](https://gitter.im/conda-forge/conda-forge.github.io).
 * Subscribe to our Mailing List and post your queries there.
 * For a specific bug report, content suggestion, or feature request, please create an issue on GitHub.
