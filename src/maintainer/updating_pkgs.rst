@@ -150,11 +150,11 @@ When to rerender
 
 We need to re-render when there are changes in the following parts of the feedstock:
 
-- The platform configuration (``skip`` sections);
-- The ``yum_requirements.txt``;
+- The platform configuration (``skip`` sections).
+- The ``yum_requirements.txt``.
 - Updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.
-- Updates in conda-forge pinning that affect the feedstock
-- Build issues that a feedstock configuration update will fix (follow us on `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`_ to know about those);
+- Updates in conda-forge pinning that affect the feedstock.
+- Build issues that a feedstock configuration update will fix (follow us on `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`_ to know about those).
 
 
 Testing changes locally
