@@ -36,3 +36,10 @@ A link to the google calendar item can be found [here](https://calendar.google.c
 We use https://hackmd.io/ for taking meeting minutes and will upload the resultant markdown file after the meeting has concluded.
 
 There is a template provided in [`misc/DEV_MEETING_TEMPLATE.md`](https://github.com/conda-forge/conda-forge.github.io/tree/master/misc/DEV_MEETING_TEMPLATE.md) that you should use to create a new hackmd document.
+
+## Contact
+
+In case you have any questions/doubts or want to discuss something about this repo, feel free to reach out to our team:
+* Join us on Gitter.
+* Subscribe to our Mailing List and post your queries there.
+* For a specific bug report, content suggestion, or feature request, please create an issue on GitHub.
