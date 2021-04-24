@@ -93,17 +93,7 @@ FAQ
 
    ``Importing conda-verify failed. Please be sure to test your packages. conda install conda-verify to make this message go away.``
 You are seeing this error message because by default, conda-build uses conda-verify to ensure that your recipe and package meet some minimum sanity checks. 
-This message can be safely ignored. 
-Additionally, if you wish to make this message go away, you may disable conda-verify. 
-
-.. code-block:: bash
-
-
-  conda-build:
-      no_verify: true
-    
-    
-.. code-block:: bash
+This message can be safely ignored as conda-forge doesn't use conda-verify. 
 
   
   
