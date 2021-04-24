@@ -21,11 +21,8 @@ Glossary
   ICU
     **I**\ nternational **C**\ omponents for **U**\ nicode. ICU is an open-source project of mature C/C++ and Java libraries for Unicode support, software internationalization, and software globalization. `Learn More <http://site.icu-project.org/>`_. 
     
-  R
-    **R** is a free software environment for statistical computing and graphics. It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS. `Learn More <https://r-project.org/>`_.
-
   CRAN
-    **C**\ omprehensive **R** **A**\ rchive **N**\ etwork. CRAN is a network of FTP and web servers around the world that store identical, up-to-date, versions of code and documentation for :term:`R`. `Learn More <https://cran.r-project.org/>`_.
+    **C**\ omprehensive **R** **A**\ rchive **N**\ etwork. CRAN is a network of FTP and web servers around the world that store identical, up-to-date, versions of code and documentation for R. `Learn More <https://cran.r-project.org/>`_.
 
 
 TODO list
