@@ -56,7 +56,7 @@ Sub-teams have a charter that is either *dynamic* or *static*.
   to modify its membership independent of the core team. For example, a
   Google Summer of Code team could be a good candidate for a dynamic charter.
   Alternatively, language-based maintenance teams also have a dynamic charter.
-* A *static* charter means that all membership decisions and non-trivial policies
+* A *static* charter means that all membership decisions and non-trivial policy
   changes must be approved by the core team. For example, a finance team
   may require a static charter.
 
@@ -144,7 +144,7 @@ To call for a standard vote, here is a template PR comment:
      For these votes,
      if the voting period is longer than a week and there are no "no" votes, a quorum
      of half of the size
-     needed for a **standard quorum** above is accepatble. For example, for a vote
+     needed for a **standard quorum** above is acceptable. For example, for a vote
      requiring 50% with 18
      active core members, at least 5 people must vote "yes" and exactly 0 people
      must vote "no".
