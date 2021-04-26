@@ -198,7 +198,7 @@ Sometimes mistakes happen and a broken package ends up being uploaded to the con
 If the only issue is in the package metadata, we can directly patch it using
 the `repo data patches feedstock <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock>`__.
 Please make a PR there to add a patch. In order to ensure future versions have the required changes, you also
-need to change recipe to reflect the metadata changes.
+need to change the recipe to reflect the metadata changes.
 
 If instead the actual contents of the package are broken, the following steps will
 remove broken packages from the ``main`` channel:
