@@ -25,7 +25,7 @@ Glossary
     **C**\ omprehensive **R** **A**\ rchive **N**\ etwork. CRAN is a network of FTP and web servers around the world that store identical, up-to-date, versions of code and documentation for R. `Learn More <https://cran.r-project.org/>`_.
 
   CFEP  
-    **C**\ onda **F**\ orge **E**\ nhancement **P**\ roposal. All major changes to the conda-forge project, from a technical standpoint as well as to address social topics such as governance and expected conduct, should be submitted as a CFEP. `Learn More <https://conda-forge.org/docs/orga/cfep-index.html#index-of-cfeps/>`_. 
+    **C**\ onda **F**\ orge **E**\ nhancement **P**\ roposal. A CFEP is a document which outlines a suggested change to how the conda-forge project operates, from a technical standpoint as well as to address social topics such as governance and expected conduct. `Learn More <https://github.com/conda-forge/cfep/blob/master/cfep-01.md/>`_. 
 
 TODO list
 *********
