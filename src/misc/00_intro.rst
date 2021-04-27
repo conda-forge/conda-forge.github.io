@@ -23,6 +23,9 @@ Glossary
     
   CRAN
     **C**\ omprehensive **R** **A**\ rchive **N**\ etwork. CRAN is a network of FTP and web servers around the world that store identical, up-to-date, versions of code and documentation for R. `Learn More <https://cran.r-project.org/>`_.
+    
+  FTP
+    **F**\ ile **T**\ ransfer **P**\ rotocol. The File Transfer Protocol (FTP) is a standard communication protocol used for the transfer of computer files from a server to a client on a computer network. FTP is built on a client–server model architecture using separate control and data connections between the client and the server. `Learn More <https://en.wikipedia.org/wiki/File_Transfer_Protocol>`_.
 
 
 TODO list
