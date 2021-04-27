@@ -24,6 +24,8 @@ Glossary
   CRAN
     **C**\ omprehensive **R** **A**\ rchive **N**\ etwork. CRAN is a network of FTP and web servers around the world that store identical, up-to-date, versions of code and documentation for R. `Learn More <https://cran.r-project.org/>`_.
 
+  CFEP  
+    **C**\ onda **F**\ orge **E**\ nhancement **P**\ roposal. This CFEP contains the index of all conda-forge Enhancement Proposals, known as CFEPs. All major changes to the project should be submitted as CFEP. 
 
 TODO list
 *********
