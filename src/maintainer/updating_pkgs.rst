@@ -107,7 +107,7 @@ Please follow the following guidelines while updating recipes:
 
 1. Always use a fork of the feedstock while updating the recipe.
 2. When a package's version is not changed, but other metadata or parts of the recipe are changed, increase the build number by ``1``.
-3. When you ship a new version of your package, reset the build number to ``0``.
+3. While shipping a new version of your package, reset the build number to ``0``.
 
 
 .. _dev_update_rerender:
@@ -117,11 +117,11 @@ Rerendering feedstocks
 
 Rerendering is conda-forge's way to update the files common to all feedstocks (e.g. README, :term:`CI` configuration, pinned dependencies).
 
-Rerendering can be done in two ways, that are mentioned below:
+Rerendering can be done in two ways:
 
- #. Using the webservice to run conda-smithy on the cloud by adding the comment ``@conda-forge-admin please rerender`` (Visit :ref:`dev_admservice`).
+ #. Using the webservice to run conda-smithy on the cloud by adding the comment ``@conda-forge-admin please rerender`` (See :ref:`dev_admservice`).
 
- #. Run conda-smithy locally on your machine (Visit :ref:`dev_rerender_local`).
+ #. Run conda-smithy locally on your machine (See :ref:`dev_rerender_local`).
 
 .. _dev_rerender_local:
 
@@ -150,8 +150,8 @@ When to rerender
 
 We need to re-render when there are changes in the following parts of the feedstock:
 
-- The platform configuration (``skip`` sections).
-- The ``yum_requirements.txt``.
+- Platform configuration (``skip`` sections).
+- ``yum_requirements.txt`` or ``conda-forge.yml``.
 - Updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.
 - Updates in conda-forge pinning that affect the feedstock.
 - Build issues that a feedstock configuration update will fix (follow us on `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`_ to know about those).
