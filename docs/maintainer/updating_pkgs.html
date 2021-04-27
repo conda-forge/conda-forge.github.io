@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Maintaining packages &#8212; conda-forge 2021.04.26 documentation</title>
+    <title>Maintaining packages &#8212; conda-forge 2021.04.27 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.04.26 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.27 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -169,26 +169,26 @@ enabled <a class="reference external" href="https://help.github.com/en/articles/
 </section>
 <section id="updating-recipes">
 <h2>Updating recipes<a class="headerlink" href="#updating-recipes" title="Permalink to this headline">¶</a></h2>
-<p>Please follow the following guidelines when updating recipes.</p>
+<p>Please follow the following guidelines while updating recipes:</p>
 <ol class="arabic simple">
-<li><p>Always use a fork of the feedstock when updating the recipe.</p></li>
+<li><p>Always use a fork of the feedstock while updating the recipe.</p></li>
 <li><p>When a package’s version is not changed, but other metadata or parts of the recipe are changed, increase the build number by <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
-<li><p>When shipping a new version of your package, reset the build number to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p>While shipping a new version of your package, reset the build number to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
 </ol>
 </section>
 <section id="rerendering-feedstocks">
 <span id="dev-update-rerender"></span><h2>Rerendering feedstocks<a class="headerlink" href="#rerendering-feedstocks" title="Permalink to this headline">¶</a></h2>
-<p>Rerendering is conda-forge’s way to update the files common to all feedstocks (e.g. README, <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> configuration, pinned dependencies)</p>
+<p>Rerendering is conda-forge’s way to update the files common to all feedstocks (e.g. README, <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> configuration, pinned dependencies).</p>
 <p>Rerendering can be done in two ways:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Using the webservice to run conda-smithy on the cloud by adding the comment <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin</span> <span class="pre">please</span> <span class="pre">rerender</span></code> (see <a class="reference internal" href="infrastructure.html#dev-admservice"><span class="std std-ref">Admin web services</span></a>).</p></li>
-<li><p>Run conda-smithy locally on your machine (see <a class="reference internal" href="#dev-rerender-local"><span class="std std-ref">Rerendering with conda-smithy locally</span></a>).</p></li>
+<li><p>Using the webservice to run conda-smithy on the cloud by adding the comment <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin</span> <span class="pre">please</span> <span class="pre">rerender</span></code> (See <a class="reference internal" href="infrastructure.html#dev-admservice"><span class="std std-ref">Admin web services</span></a>).</p></li>
+<li><p>Run conda-smithy locally on your machine (See <a class="reference internal" href="#dev-rerender-local"><span class="std std-ref">Rerendering with conda-smithy locally</span></a>).</p></li>
 </ol>
 </div></blockquote>
 <section id="rerendering-with-conda-smithy-locally">
 <span id="dev-rerender-local"></span><h3>Rerendering with conda-smithy locally<a class="headerlink" href="#rerendering-with-conda-smithy-locally" title="Permalink to this headline">¶</a></h3>
-<p>The first step is to install <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> in your root environment</p>
+<p>The first step is to install <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> in your root environment.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge conda-smithy
 </pre></div>
 </div>
@@ -201,13 +201,13 @@ To do this drop <code class="docutils literal notranslate"><span class="pre">-c<
 </section>
 <section id="when-to-rerender">
 <h3>When to rerender<a class="headerlink" href="#when-to-rerender" title="Permalink to this headline">¶</a></h3>
-<p>We need to re-render when there are changes to the following parts of the feedstock:</p>
+<p>We need to re-render when there are changes in the following parts of the feedstock:</p>
 <ul class="simple">
-<li><p>the platform configuration (<code class="docutils literal notranslate"><span class="pre">skip</span></code> sections);</p></li>
-<li><p>the <code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code>;</p></li>
-<li><p>updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.</p></li>
-<li><p>updates in conda-forge pinning that affect the feedstock</p></li>
-<li><p>build issues that a feedstock configuration update will fix (follow us on <a class="reference external" href="https://gitter.im/conda-forge/conda-forge.github.io">gitter</a> to know about those);</p></li>
+<li><p>Platform configuration (<code class="docutils literal notranslate"><span class="pre">skip</span></code> sections).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yum_requirements.txt</span></code> or <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>.</p></li>
+<li><p>Updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.</p></li>
+<li><p>Updates in conda-forge pinning that affect the feedstock.</p></li>
+<li><p>Build issues that a feedstock configuration update will fix (follow us on <a class="reference external" href="https://gitter.im/conda-forge/conda-forge.github.io">gitter</a> to know about those).</p></li>
 </ul>
 </section>
 </section>
@@ -396,7 +396,7 @@ branches in addition to the default branch.</p>
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.04.26 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.27 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
