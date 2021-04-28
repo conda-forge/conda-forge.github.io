@@ -124,7 +124,7 @@ environment, you can save a lot of time and bandwidth by installing standalone
   <https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017>`_.
 
 If you need more information. Please refer `the Python wiki page on Windows compilers
-<https://wiki.python.org/moin/WindowsCompilers>`.
+<https://wiki.python.org/moin/WindowsCompilers>`_.
 
 Simple CMake-Based ``bld.bat``
 ------------------------------
