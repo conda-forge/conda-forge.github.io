@@ -31,7 +31,7 @@ This came with a list of disadvantages:
  - Locating packages was difficult due to them being scattered over many channels.
  - Combining packages across channels was not always possible due to binary incompatibilities.
  - Packages were only available for architectures the developer was interested in or had access to. 
- - Channels were often abandoned, updating required locating new channels
+ - Channels were often abandoned, updating required locating new channels.
 
 conda-forge is a community effort that tackles these issues:
 
