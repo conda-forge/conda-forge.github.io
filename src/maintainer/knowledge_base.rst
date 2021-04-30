@@ -205,8 +205,6 @@ In conda_build_config.yaml file:
     - vs2019                       
 
 
-.. code-block::
-
 In conda-forge.yml file:
 
 .. code-block:: yaml
