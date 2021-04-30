@@ -189,8 +189,35 @@ To skip building with a particular ``vc`` version, add a skip statement.
     requirements:
       build:
         - {{ compiler('cxx') }}
+        
+Using vs2019
+-------------
+
+To use ``vs2019`` make the following changes: 
+
+In conda_build_config.yaml file:    
+
+.. code-block:: yaml
+
+    c_compiler:                    
+    - vs2019                       
+    cxx_compiler:                  
+    - vs2019                       
 
 
+.. code-block::
+
+In conda-forge.yml file:
+
+.. code-block:: yaml
+
+    azure:
+      settings_win:
+          pool:
+              vmImage: windows-2019
+     
+     
+.. code-block::  
 
 Special Dependencies and Packages
 =================================
