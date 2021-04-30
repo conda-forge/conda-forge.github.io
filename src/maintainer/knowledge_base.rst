@@ -217,6 +217,9 @@ In conda-forge.yml file:
      
 .. code-block::  
 
+For example see the changes made in the ``conda_build_config.yaml`` and ``conda-forge.yml`` files in `this
+<https://github.com/conda-forge/libignition-physics-feedstock/commit/c586d765a2f5fd0ecf6da43c53315c898c9bf6bd>`_ PR.
+
 Special Dependencies and Packages
 =================================
 
