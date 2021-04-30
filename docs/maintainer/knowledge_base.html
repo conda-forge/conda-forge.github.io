@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Knowledge Base &#8212; conda-forge 2021.04.29 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2021.04.30 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.04.29 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.30 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -224,6 +224,26 @@ requirements of the VC version. For example, python 2.7 requires <code class="do
     <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;cxx&#39;)</span> <span class="p p-Indicator">}}</span>
 </pre></div>
 </div>
+</section>
+<section id="using-vs2019">
+<h3>Using vs2019<a class="headerlink" href="#using-vs2019" title="Permalink to this headline">¶</a></h3>
+<p>To use <code class="docutils literal notranslate"><span class="pre">vs2019</span></code> make the following changes:</p>
+<p>In conda_build_config.yaml file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">c_compiler</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vs2019</span>
+<span class="nt">cxx_compiler</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vs2019</span>
+</pre></div>
+</div>
+<p>In conda-forge.yml file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span>
+  <span class="nt">settings_win</span><span class="p">:</span>
+      <span class="nt">pool</span><span class="p">:</span>
+          <span class="nt">vmImage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">windows-2019</span>
+</pre></div>
+</div>
+<p>For example see the changes made in the <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> files in <a class="reference external" href="https://github.com/conda-forge/libignition-physics-feedstock/commit/c586d765a2f5fd0ecf6da43c53315c898c9bf6bd">this</a> PR.</p>
+<p>After making these changes don’t forget to rerender with <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> (to rerender manually use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">smithy</span> <span class="pre">rerender</span></code> from the command line).</p>
 </section>
 </section>
 <section id="special-dependencies-and-packages">
@@ -1285,6 +1305,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
 <li class="toctree-l4"><a class="reference internal" href="#local-testing">Local testing</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#simple-cmake-based-bld-bat">Simple CMake-Based <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#building-for-different-vc-versions">Building for different VC versions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-vs2019">Using vs2019</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#special-dependencies-and-packages">Special Dependencies and Packages</a><ul>
@@ -1420,7 +1441,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.04.29 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.04.30 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
