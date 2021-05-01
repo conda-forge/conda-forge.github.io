@@ -6,6 +6,10 @@ Glossary
 
 .. glossary::
 
+  Recipe
+    **R**\ ecipe is a collection of files required to build the conda package. This includes, at minimum, the `meta.yaml <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml>`_, but can also include license files, patches, build scripts, test scripts etc. `Learn More <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_.
+
+  
   CI
     **C**\ ontinuous **I**\ ntegration. Continuous integration is the practice of automating the integration of code changes from multiple contributors into a single software project. `Learn More <https://en.wikipedia.org/wiki/Continuous_integration/>`_.
 
