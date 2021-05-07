@@ -91,9 +91,12 @@ FAQ
 
 :ref:`(Q) <mfaq_conda_verify>` **I am seeing** ``Importing conda-verify failed.`` **error message during build. What do I do?**
 
-   ``Importing conda-verify failed. Please be sure to test your packages. conda install conda-verify to make this message go away.``
-You are seeing this error message because by default, conda-build uses conda-verify to ensure that your recipe and package meet some minimum sanity checks. 
-This message can be safely ignored as conda-forge doesn't use conda-verify. 
+    .. code-block:: yaml       
+        
+         Importing conda-verify failed. Please be sure to test your packages. conda install conda-verify to make this message go away. 
+
+  You are seeing this error message because by default, conda-build uses conda-verify to ensure that your recipe and package meet some minimum sanity checks. 
+  This message can be safely ignored as conda-forge doesn't use conda-verify. 
 
   
   
