@@ -187,6 +187,17 @@ Note that for long build logs one can do
 
 to save it in a text file for future inspection.
 
+Downloading prebuilt packages
+----------------
+
+To download prebuilt packages follow the steps below:
+
+- Starting from your PR, navigate to the CI.
+- Open the log corresponding to the package you want to download.
+- In this log find a link to the ``artifacts produced``.
+- From the list of published artifacts that appears download your required archive.
+- Unarchive and extract the required package.
+
 
 .. _maint_fix_broken_packages:
 
