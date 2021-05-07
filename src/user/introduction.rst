@@ -31,7 +31,7 @@ This came with a list of disadvantages:
  - Locating packages was difficult due to them being scattered over many channels.
  - Combining packages across channels was not always possible due to binary incompatibilities.
  - Packages were only available for architectures the developer was interested in or had access to. 
- - Channels were often abandoned, updating required locating new channels
+ - Channels were often abandoned, updating required locating new channels.
 
 conda-forge is a community effort that tackles these issues:
 
@@ -104,7 +104,7 @@ Display conda-forge packages in Anaconda Navigator
 #. Go to the **Environments** tab.
 #. Click the **Channels** button.
 #. Click the **Add** button.
-#. Enter the channel url ``https://conda.anaconda.org/conda-forge/``
+#. Enter the channel url: https://conda.anaconda.org/conda-forge/
 #. Press the **Enter key** on your keyboard.
 #. Click the **Update channels** button.
 

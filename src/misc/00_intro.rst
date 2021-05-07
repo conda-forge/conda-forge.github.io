@@ -21,8 +21,11 @@ Glossary
   ICU
     **I**\ nternational **C**\ omponents for **U**\ nicode. ICU is an open-source project of mature C/C++ and Java libraries for Unicode support, software internationalization, and software globalization. `Learn More <http://site.icu-project.org/>`_. 
     
-    
+  CRAN
+    **C**\ omprehensive **R** **A**\ rchive **N**\ etwork. CRAN is a network of FTP and web servers around the world that store identical, up-to-date, versions of code and documentation for R. `Learn More <https://cran.r-project.org/>`_.
 
+  CFEP  
+    **C**\ onda **F**\ orge **E**\ nhancement **P**\ roposal. A CFEP is a document which outlines a suggested change to how the conda-forge project operates, from a technical standpoint as well as to address social topics such as governance and expected conduct. `Learn More <https://github.com/conda-forge/cfep/blob/master/cfep-01.md/>`_. 
 
 TODO list
 *********

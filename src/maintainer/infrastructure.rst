@@ -10,20 +10,24 @@ Staging area for recipes
 ------------------------
 
 `conda-forge/staged-recipes <https://github.com/conda-forge/staged-recipes>`_ is the entry point for new packages to join the conda-forge package collection.
-You can find a detailed guide to submitting new package recipes in :ref:`creating_recipes`.
+You can find the detailed guide for submitting new package recipes in :ref:`creating_recipes`.
 
 Smithy
 ------
 
-Smithy contains maintenance code for conda-forge, which is used by the ``conda smithy`` command line tool and the :ref:`dev_admservice`. Smithy lives in the repository `conda-forge/conda-smithy <https://github.com/conda-forge/conda-smithy>`_.
+Smithy contains maintenance code for conda-forge, which is used by the ``conda-smithy`` command line tool and the :ref:`dev_admservice`. Smithy lives in the repository `conda-forge/conda-smithy <https://github.com/conda-forge/conda-smithy>`_.
 
 ``conda-forge/conda-smithy`` is the right repository to report bugs for
 
- - the rerendering process
- - the recipe linter
+ - The rerendering process
+ - The recipe linter
  - :term:`CI` support utils
 
-``conda-smithy`` also contains the command line tool that you will use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
+``conda-smithy`` also contains the command line tool that you should use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
+
+Smithy can be used beyond Conda-Forge's purposes. For example, it can be used to `set up self-hosted Azure agents <self-hosted_azure-config>`_ for non-Conda-Forge infrastructures.
+(You could also consider using `Azure virtual machine scale set agents <https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops>`_,
+which could be less expensive to run than permanently active agents.)
 
 
 Web services
@@ -41,16 +45,16 @@ Package-wide dependency pins are defined in `conda_build_config.yaml <https://gi
 
 For more information on conda-forge wide package pins, please refer to :ref:`globally_pinned_packages`.
 
-Please open a :term:`PR` and/or issues there if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to :ref:`update_pins`.
+Please open a :term:`PR` and/or an issue there, if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to :ref:`update_pins`.
 
 Documentation
 -------------
 
-The documentation lives in `conda-forge/conda-forge.github.io <https://github.com/conda-forge/conda-forge.github.io/>`__ and is automatically deployed to our `online version <https://conda-forge.org/docs/>`__.
+The documentation lives in `conda-forge/conda-forge.github.io <https://github.com/conda-forge/conda-forge.github.io/>`__, and is automatically deployed to our `online version <https://conda-forge.org/docs/>`__.
 
 The documentation is built with ``Sphinx`` and the sources files are located in the `src <https://github.com/conda-forge/conda-forge.github.io/tree/master/src>`__ directory of the repository.
 
-If you found a typo, unclear explanations or new topics that could be covered, you can suggest changes to the documentation. For more details, please refer to :ref:`improve_docs`.
+If you found any typo error, unclear explanations or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to :ref:`improve_docs`.
 
 
 
@@ -59,35 +63,35 @@ If you found a typo, unclear explanations or new topics that could be covered, y
 Admin web services
 ==================
 
-conda-forge is running a webservice on Heroku called `conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
+Conda-forge is running a webservice on Heroku called `conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
 
 The following services are run by default on a feedstock:
 
 - It will lint the recipes in the PRs and report back whether the recipe is in excellent condition or not.
-- When maintainers are added to a recipe, the maintainer will be added to the team and given push access.
+- When maintainers are added to a recipe, each of the maintainers will be added to the team and given push access to the feedstock.
 
-The webservice also listens to issue and PR comments so that you can ask for the following services to be done.
+The webservice also listens to issues and PR comments, so that you can ask for the following services to be done:
 
 @conda-forge-admin, please rerender
 -----------------------------------
 
 Entering the above phrase in a PR of a feedstock will rerender the feedstock and push the changes to your PR.
-Make sure to tick the ``Allow edits from maintainers.`` button locate at the bottom of the right side bar of
-the PR. If you say this phrase in an issue comment, the bot will create a new pull request with the requested
-re-rendering completed.
+Make sure to tick the ``Allow edits from maintainers`` button located at the bottom of the right side bar of
+the PR. If you enter this phrase in the comment for an issue, the bot will create a new pull request, with the requested
+re-rendering being completed.
 
 
 @conda-forge-admin, please add noarch: python
 ---------------------------------------------
 
-Entering the above phrase in a PR or issue of a feedstock will add ``noarch: python`` to the build and rerender the feedstock
+Entering the above phrase in a PR or an issue of a feedstock will add ``noarch: python`` to the build and rerender the feedstock
 for you.
 
 
 @conda-forge-admin, please update for conda-build 3
 ---------------------------------------------------
 
-This command will attempt to update a recipe to the new conda-build 3 format. It can be sent either in an issue or a PR.
+This command will attempt to update a recipe to the new ``conda-build 3`` format. It can be sent either in an issue or a PR.
 
 Note that this update command is kind of a hack, and things might go wrong. Make sure to look over the changes, and ask for help if you're not sure about something.
 
@@ -158,11 +162,11 @@ Here we describe common issues with the CI Services that conda-forge builds.
 
 Azure Pipelines
 ---------------
-Azure is used to build packages for OS X, Linux (x86_64, native), Linux (ARMv8, emulated) and Linux (IBM Power8+, emulated). 
+Azure is used to build packages for OSX, Linux (x86_64, native), Linux (ARMv8, emulated) and Linux (IBM Power8+, emulated). 
 The build queue on Azure is substantially larger than on all the other providers. 
 Azure builds have a maximum duration of 6 hours.
 
-To see all builds on Azure go to `<https://dev.azure.com/conda-forge/feedstock-builds/_build>`_.
+To see all builds on Azure, visit `<https://dev.azure.com/conda-forge/feedstock-builds/_build>`_.
 
 Restarting builds
 .................
@@ -173,7 +177,7 @@ If that doesn't work, a close/open will kick off a new build. You can also use t
 Using Azure for *everything*
 ............................
 
-Azure is the default provider for Linux and OS X.  To use Azure for everything, add the following to ``conda-forge.yml`` in the root
+Azure is the default provider for Linux and OSX.  To use Azure for everything, add the following to ``conda-forge.yml`` in the root
 of the feedstock.
 
 .. code-block:: yaml
@@ -183,21 +187,21 @@ of the feedstock.
 
 .. note::
 
-  Presently Azure has some issues building libraries using cmake on Windows.  Azure does not have a VS2008 installation so building
+  Presently Azure has some issues building libraries using cmake on Windows. Azure does not have a VS2008 installation, so building
   certain very old packages that require VC9 will fail.
 
 
-Travis CI (OS X, IBM Power 8+)
+TravisCI (OSX, IBM Power 8+)
 ------------------------------
 
-Travis CI is used to build packages for IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
-force sync your repositories in Travis CI to see the reload and cancel buttons. To do this please visit `<https://travis-ci.com/profile>`_ 
+TravisCI is used to build packages for IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
+force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit `<https://travis-ci.com/profile>`_ 
 and click "Sync accounts".
 
 Enabling Travis
 ...............
 
-TravisCI should only be needed to build recipes on OS X if there is a strange failure on Azure.
+TravisCI should only be needed to build recipes on OSX, if there is a strange failure on Azure.
 
 Enable a build by adding the following to ``conda-forge.yml`` in the root of the feedstock.
 
@@ -206,23 +210,23 @@ Enable a build by adding the following to ``conda-forge.yml`` in the root of the
     provider:
       osx: travis
       
-For IBM Power 8+ builds, add the name of your feedstock to the list here
-`<https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`_
+For IBM Power 8+ builds, add the name of your feedstock to the list `here
+<https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`_
 via a pull request.
 
 
-CircleCI (Linux, OS X)
+CircleCI (Linux, OSX)
 ----------------------
-Circle CI is a container-based CI service that conda-forge uses to build
-Linux packages. It can optionally build OS X packages.
+CircleCI is a container-based CI service that conda-forge uses to build
+Linux packages. It can optionally build OSX packages.
 
 Linux builds are identical to those on Azure as both are built inside Docker containers.
 
 
-Using Circle for both Linux and OS X
+Using Circle for both Linux and OSX
 ....................................
 
-To use CircleCI for OS X, add the following to ``conda-forge.yml`` in the root of the feedstock.
+To use CircleCI for OSX, add the following to ``conda-forge.yml`` in the root of the feedstock.
 
 .. code-block:: yaml
 
@@ -230,22 +234,22 @@ To use CircleCI for OS X, add the following to ``conda-forge.yml`` in the root o
       osx: circle
       linux: circle
 
-CircleCI for OS X should be used for OS X only when Travis-CI resources (50 minutes of build time per job) are not enough as CircleCI gives more resources (2 hours of build time per job).
+CircleCI for OSX should be used for OSX, only when TravisCI resources (50 minutes of build time per job) are not enough as CircleCI gives more resources (2 hours of build time per job).
 
-Note that you need to rerender the feedstock once this change has been made.
+Note that you need to rerender the feedstock, once this change has been made.
 
 
 Enabling Circle on your Fork
 ............................
 
-If for some reason Circle CI is not triggering build from forks,
+If for some reason CircleCI is not triggering build from forks,
 Circle can be manually added for each fork. Circle calls this "Adding a Project" and
-`the official Circle's documentation is available here <https://circleci.com/docs/getting-started/#add-and-follow-more-projects>`_.
+`the official CircleCI documentation is available here <https://circleci.com/docs/getting-started/#add-and-follow-more-projects>`_.
 This effectively amounts to going to the `Add Projects <https://circleci.com/add-projects>`_
 page, finding the fork that you wish to enable, and clicking the "Build Project" button.
 This is not normally needed.
 
-If CircleCI lacks permissions to checkout the source code, it will produce an error like follows::
+If CircleCI lacks permissions to checkout the source code, it will produce an error as follows::
 
     Cloning into '.'...
     Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
@@ -259,21 +263,21 @@ When this happens for a feedstock, it can be fixed using the `webservice <https:
 Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
 
 * Log in and out of Circle CI.
-* Revoke Circle CI's access and then enable it again.
+* Revoke CircleCI's access and then enable it again.
 * In the "Checkout SSH keys" section of your Circle CI project settings, press "add user key".
 
 
 Drone.io
 --------
 
-We use Drone.io for Linux ARMv8 builds. To enable these builds on your feedstock, make a pull request to add your feedstock to the list 
+We use `Drone.io <https://drone.io>`_ for Linux ARMv8 builds. To enable these builds on your feedstock, make a pull request to add your feedstock to the list 
 here `<https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`_.
 
 
 GitHub Actions
 --------------
 
-We use GitHub actions to rerender feedstocks and run our pull request automerge service. We do not currently support builds on 
+We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on 
 GitHub Actions. 
 
 
@@ -284,7 +288,7 @@ To skip a CI build for a given commit, put ``[ci skip] ***NO_CI***`` in the comm
 
 .. admonition:: Related links
 
-  - **abort builds with [skip ci]/etc** `(conda-forge.github.io/#629) <https://github.com/conda-forge/conda-forge.github.io/issues/629>`__
+  - **Abort builds with [skip ci]/etc** `(conda-forge.github.io/#629) <https://github.com/conda-forge/conda-forge.github.io/issues/629>`__
   - **Skip CI requests** `(staged-recipes/#1148) <https://github.com/conda-forge/staged-recipes/issues/1148>`__
 
 
@@ -355,7 +359,7 @@ Output Validation and Feedstock Tokens
 As of writing, ``anaconda.org`` does not support generating API tokens that are scoped
 to allow uploads for some packages but not others. In order to secure feedstock uploads,
 so that, e.g., the maintainers of the ``numpy`` feedstock cannot push a ``python`` version,
-we use a package staging process and issue secret tokens unique to each feedback. This process
+we use a package staging process and issue secret tokens, unique to each feedback. This process
 works as follows.
 
 1. When a CI job on a feedstock is building packages to be uploaded to ``anaconda.org``, it
@@ -371,5 +375,5 @@ We attempt to report errors in this process to users via comments on commits/iss
 Note however that sometimes these fail. If you think you are having trouble with uploads, make
 sure ``conda_forge_output_validation: true`` is set in your ``conda-forge.yml`` and rerender
 your feedstock with the latest version of ``conda-smithy``. Finally, new packages that are added to
-feedstocks are registered automatically and once uploaded successfully once, no other feedstock
+feedstocks are registered automatically and once uploaded successfully, no other feedstock
 will be able to upload packages with the same name.

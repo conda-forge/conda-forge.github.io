@@ -11,14 +11,14 @@ Globally pinned packages
 Maintaining a large collection of packages with different requirements poses the danger of producing islands of packages with mutually exclusive dependencies.
 Especially widely used libraries with restricted version compatibilities increase the danger of fractioning the package space.
 By fixing crucial libraries to specific dependency version shared by all packages in conda-forge, we avoid fractioning of our packages in incompatible islands.
-The following paragraphs give a short introduction how this global version pinning is realized in conda-forge.
+The following paragraphs give a short introduction about how this global version pinning is realized in conda-forge.
 
 The current versions of globally pinned packages are defined in the `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_ file located in the ``conda-forge-pinning`` feedstock.
 These pinned versions represent the ABIs that conda-forge is currently supporting, with almost all available packages built against that version.
 
 When a rerendering happens, conda-smithy will render the recipe using conda-build and output configuration files for each job and save them in a yaml file in ``.ci_support`` folder. For example, there's an output configuration file for each OS, each python version, etc.
 
-These output configuration files are stripped to options that are used in the build and therefore a change in the config files in ``.ci_support`` folder implies that there needs to be a new build.
+These output configuration files are stripped to options that are used in the build and therefore a change in the config files in ``.ci_support`` folder implies that a new build is needed there.
 
 Pinning of packages are handled by the same configuration file and conda-build. This means that packages need not be pinned manually.
 
@@ -64,7 +64,7 @@ If a package is not pinned in `conda-forge-pinning <https://github.com/conda-for
       ignore_run_exports:
         - gmp
 
-There is additional documentation on this pinning scheme in `the conda docs <https://docs.conda.io/projects/conda-build/en/latest/source/variants.html#build-variants>`_.
+There is additional documentation on this pinning scheme in `the conda docs <https://docs.conda.io/projects/conda-build/en/latest/resources/variants.html#build-variants>`_.
 
 
 Specifying run_exports
@@ -104,18 +104,18 @@ for the affected packages in conda-forge.
 Usually, the bot will generate these migrations automatically. However, when a pin is first made or added, one may need to
 be added by hand. To do this, follow these steps:
 
-#. create a new migration yaml by copying `example.exyaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/example.exyaml>`__ in the ``conda-forge/conda-forge-pinning`` repository.
-#. change the migration yaml to reflect the package and version to be migrated
-#. write a :ref:`migrator <pin_migrator>` for propagating the pin changes.
-#. propose the changes as a :term:`PR` to `conda-forge/conda-forge-pinning-feedstock`_.
-#. once accepted the migration will begin. The migration status can be monitored at https://conda-forge.org/status.
+#. Create a new migration yaml by copying `example.exyaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/example.exyaml>`__ in the ``conda-forge/conda-forge-pinning`` repository.
+#. Change the migration yaml to reflect the package and version to be migrated
+#. Write a :ref:`migrator <pin_migrator>` for propagating the pin changes.
+#. Propose the changes as a :term:`PR` to `conda-forge/conda-forge-pinning-feedstock`_.
+#. Once accepted the migration will begin. The migration status can be monitored at https://conda-forge.org/status.
 #. After the migration is complete, a new PR can be issued to `conda-forge/conda-forge-pinning-feedstock`_ to:
 
    - Remove the migrator yaml for the completed migration
    - If the version of the package is pinned in the global conda_build_config.yaml, this PR should also:
 
-     - update the version in conda_build_config.yaml
-     - bump the version in meta.yaml to the current date
+     - Update the version in conda_build_config.yaml
+     - Bump the version in meta.yaml to the current date
 
 Details of how the migration yaml is setup are provided in an `example <https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations/example.exyaml>`__
 and documentation `here <https://regro.github.io/cf-scripts/migrators.html#building-a-migration-yaml>`_.

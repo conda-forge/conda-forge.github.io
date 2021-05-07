@@ -1,7 +1,7 @@
 Configuring conda-forge.yml
 ***************************
 
-You can configure how conda-forge is setup and builds via the ``conda-forge.yml``
+You can configure how conda-forge is set up and built via the ``conda-forge.yml``
 file that is present in the root directory of a feedstock.
 
 Rerendering the feedstock after you modify this file is usually required and always a good idea (see :ref:`dev_update_rerender`).
@@ -21,33 +21,35 @@ upload packages to anaconda.org, which can be useful for testing. For example:
 Top-level fields
 ================
 
-* appveyor
-* azure
-* build_platform
-* bot
-* channel_priority
-* channels
-* choco
-* circle
-* conda_forge_output_validation
-* docker
-* github
-* idle_timeout_minutes
-* linux
-* linux_aarch64
-* linux_ppc64le
-* os_version
-* osx
-* provider
-* recipe_dir
-* remote_ci_setup
-* skip_render
-* templates
-* test_on_native_only
-* travis
-* upload_on_branch
-* win
+* :ref:`appveyor`
+* :ref:`azure-config`
+* :ref:`build_platform`
+* :ref:`build_with_mamba`
+* :ref:`bot`
+* :ref:`channel_priority`
+* :ref:`channels`
+* :ref:`choco`
+* :ref:`circle`
+* :ref:`conda_forge_output_validation`
+* :ref:`docker`
+* :ref:`github`
+* :ref:`idle_timeout_minutes`
+* :ref:`linux`
+* :ref:`linux_aarch64`
+* :ref:`linux_ppc64le`
+* :ref:`os_version`
+* :ref:`osx`
+* :ref:`provider`
+* :ref:`recipe_dir`
+* :ref:`remote_ci_setup`
+* :ref:`skip_render`
+* :ref:`templates`
+* :ref:`test_on_native_only`
+* :ref:`travis`
+* :ref:`upload_on_branch`
+* :ref:`win`
 
+.. _appveyor:
 
 appveyor
 --------
@@ -78,6 +80,26 @@ mapping for Azure-specific configuration options. For example:
       # built packages) as an Azure pipeline artifact that can be downloaded
       store_build_artifacts: False
 
+.. _self-hosted_azure-config:
+
+Below is an example configuration for setting up a self-hosted Azure agent for Linux:
+
+.. code-block:: yaml
+
+      azure:
+        settings_linux:
+          pool:
+            name: your_local_pool_name
+            demands:
+              - some_key -equals some_value
+          workspace:
+            clean: all
+          strategy:
+            maxParallel: 1
+
+
+.. _bot:
+
 bot
 ---
 This field controls the behavior of the ``auto-tick`` bot which issues
@@ -101,6 +123,8 @@ automatic version updates/migrations for feedstocks. The current options are
       abi_migration_branches:
         - v1.10.x
 
+.. _build_platform:
+
 build_platform
 --------------
 This is a mapping from the build platform to the host platform of the package
@@ -111,6 +135,19 @@ build platform using cross-compiling.
 
     build_platform:
       osx_64: linux_64
+      
+.. _build_with_mamba:
+
+build_with_mamba
+--------------
+This option, when enabled, configures the conda-forge CI to run a debug build using the ``mamba`` solver. Check `this <https://conda-forge.org/docs/maintainer/maintainer_faq.html#mfaq-mamba-local>`__ to know more.  
+
+.. code-block:: yaml
+
+    build_with_mamba:
+      True   
+          
+.. _channel_priority:
 
 channel_priority
 ----------------
@@ -118,6 +155,8 @@ channel_priority
 This value sets the ``conda`` solver channel priority for feedstock builds. 
 The default is ``strict``. Any valid value for the same setting in the ``.condarc`` is
 allowed here.
+
+.. _channels:
 
 channels
 --------
@@ -138,6 +177,7 @@ has been built.  The ``channels`` variable is a mapping with
       targets:
         - ["conda-forge", "main"]
 
+.. _choco:
 
 choco
 -----
@@ -158,11 +198,13 @@ This is currently only implemented for Azure Pipelines. The command that is run 
 ``choco install {entry} -fdv -y --debug``.  That is, ``choco install`` is executed
 with a standard set of additional flags that are useful on CI.
 
+.. _circle:
+
 circle
 --------
 The top-level ``circle`` key specifies configurations for the Circle
 CI service.  This is usually **read-only** and should not normally be manually
-modified.  Tools like conda-smithy may modify this, as need.  It has a single
+modified.  Tools like conda-smithy may modify this, as needed.  It has a single
 ``secure`` field which contains the binstar token.  For example:
 
 .. code-block:: yaml
@@ -171,12 +213,16 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
       secure:
         BINSTAR_TOKEN: <some big hash>
 
+.. _conda_forge_output_validation:
+
 conda_forge_output_validation
 -----------------------------
 
 This field must be set to ``True`` for feedstocks in the ``conda-forge`` GitHub
 organization. It enables the required feedstock artifact validation as described
 in :ref:`output_validation`.
+
+.. _docker:
 
 docker
 ------
@@ -190,6 +236,8 @@ self-explanatory. The defaults are as follows:
       image: "condaforge/linux-anvil-comp7"
       command: "bash"
       interactive: True
+
+.. _github:
 
 github
 ------
@@ -206,6 +254,7 @@ defaults are as follows:
       # branch name to execute on
       branch_name: master
 
+.. _idle_timeout_minutes:
 
 idle_timeout_minutes
 --------------------
@@ -216,6 +265,7 @@ don't have chatty enough builds. Currently only implemented in Travis and Circle
 
     idle_timeout_minutes: 60
 
+.. _linux:
 
 linux
 -----
@@ -227,6 +277,7 @@ Currently only:
     linux:
       enabled: False
 
+.. _linux_aarch64:
 
 linux_aarch64
 -------------
@@ -238,6 +289,7 @@ Currently only:
     linux_aarch64:
       enabled: False
 
+.. _linux_ppc64le:
 
 linux_ppc64le
 -------------
@@ -249,6 +301,8 @@ Currently only:
     linux_ppc64le:
       enabled: False
 
+.. _os_version:
+
 os_version
 ----------
 This key is used to set the OS versions for ``linux_*`` platforms. Valid entries map a linux platform and arch to either ``cos6``
@@ -259,6 +313,8 @@ or ``cos7``. Currently ``cos6`` is the default for ``linux-64``. All other linux
     os_version:
       linux_64: cos7
 
+.. _osx:
+
 osx
 ---
 The macOSX-specific configuration options. This is largely an internal setting.
@@ -268,6 +324,8 @@ Currently only:
 
     osx:
       enabled: False
+
+.. _provider:
 
 provider
 --------
@@ -319,6 +377,8 @@ To enable ``linux_ppc64le`` and ``linux_aarch64`` and the following:
       linux_ppc64le: default
       linux_aarch64: default
 
+.. _recipe_dir:
+
 recipe_dir
 ----------
 The relative path to the recipe directory. The default is:
@@ -327,22 +387,26 @@ The relative path to the recipe directory. The default is:
 
     recipe_dir: recipe
 
+.. _remote_ci_setup:
+
 remote_ci_setup
 ---------------
 This option can be used to override the default ``conda-forge-ci-setup`` package.
 Can be given with ``${url or channel_alias}::package_name``, defaults to conda-forge
-channel_alias if no prefix given.
+channel_alias if no prefix is given.
 
 .. code-block:: yaml
 
     remote_ci_setup: "conda-forge-ci-setup=3"
+
+.. _skip_render:
 
 skip_render
 -----------
 This option specifies a list of files which conda smithy will skip rendering.
 The possible values can be a subset of ``.gitignore``, ``.gitattributes``, ``README.md``, ``LICENSE.txt``.
 The default value is an empty list [ ], i.e. all these four files will be generated by conda smithy.
-For example, if you want to customize .gitignore and LICENSE.txt file by your own, you should have the following configuration.
+For example, if you want to customize .gitignore and LICENSE.txt files on your own, you should have the following configuration.
 
 .. code-block:: yaml
 
@@ -350,10 +414,14 @@ For example, if you want to customize .gitignore and LICENSE.txt file by your ow
       - .gitignore
       - LICENSE.txt
 
+.. _templates:
+
 templates
 ---------
 This is mostly an internal field for specifying where templates files live.
 You shouldn't need it.
+
+.. _test_on_native_only:
 
 test_on_native_only
 -------------------
@@ -363,11 +431,13 @@ This is used for disabling testing for cross compiling. Default is ``false``
 
     test_on_native_only: True
 
+.. _travis:
+
 travis
 ------
 The top-level ``travis`` key specifies configurations for the Travis
 CI service.  This is usually **read-only** and should not normally be manually
-modified.  Tools like conda-smithy may modify this, as need.  It has a single
+modified.  Tools like conda-smithy may modify this, as needed.  It has a single
 ``secure`` field which contains the binstar token.  For example:
 
 .. code-block:: yaml
@@ -375,6 +445,8 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
     travis:
       secure:
         BINSTAR_TOKEN: <some big hash>
+
+.. _upload_on_branch:
 
 upload_on_branch
 ----------------
@@ -387,6 +459,8 @@ master branch:
 .. code-block:: yaml
 
     upload_on_branch: master
+
+.. _win:
 
 win
 ---
