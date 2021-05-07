@@ -95,5 +95,9 @@ FAQ
 You are seeing this error message because by default, conda-build uses conda-verify to ensure that your recipe and package meet some minimum sanity checks. 
 This message can be safely ignored as conda-forge doesn't use conda-verify. 
 
-  
+      .. _mfaq_package_submit:
+
+:ref:`(Q) <mfaq_package_submit>` **Is it necessary for me to be a maintainer of the package I submit to Conda-forge?**
+	Everybody can submit a package to Conda-forge, irrespective of whether they maintain it or not. Its not required but considered a good practice to inform the upstream of a new package and invite them to be the maintainers.
+
   
