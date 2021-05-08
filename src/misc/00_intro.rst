@@ -27,6 +27,8 @@ Glossary
   FTP
     **F**\ ile **T**\ ransfer **P**\ rotocol. The File Transfer Protocol (FTP) is a network protocol used for transferring the computer files between computers over some network such as internet. FTP is widely used to exchange applications and share data across the internet. `Learn More <https://en.wikipedia.org/wiki/File_Transfer_Protocol>`_.
 
+  CFEP  
+    **C**\ onda **F**\ orge **E**\ nhancement **P**\ roposal. A CFEP is a document which outlines a suggested change to how the conda-forge project operates, from a technical standpoint as well as to address social topics such as governance and expected conduct. `Learn More <https://github.com/conda-forge/cfep/blob/master/cfep-01.md/>`_. 
 
 TODO list
 *********

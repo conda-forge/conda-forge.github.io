@@ -124,7 +124,7 @@ environment, you can save a lot of time and bandwidth by installing standalone
   <https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017>`_.
 
 If you need more information. Please refer `the Python wiki page on Windows compilers
-<https://wiki.python.org/moin/WindowsCompilers>`.
+<https://wiki.python.org/moin/WindowsCompilers>`_.
 
 Simple CMake-Based ``bld.bat``
 ------------------------------
@@ -189,8 +189,37 @@ To skip building with a particular ``vc`` version, add a skip statement.
     requirements:
       build:
         - {{ compiler('cxx') }}
+        
+Using vs2019
+-------------
+
+To use ``vs2019`` make the following changes: 
+
+In conda_build_config.yaml file:    
+
+.. code-block:: yaml
+
+    c_compiler:                    
+    - vs2019                       
+    cxx_compiler:                  
+    - vs2019                       
 
 
+In conda-forge.yml file:
+
+.. code-block:: yaml
+
+    azure:
+      settings_win:
+          pool:
+              vmImage: windows-2019
+     
+      
+
+For example see the changes made in the ``conda_build_config.yaml`` and ``conda-forge.yml`` files in `this
+<https://github.com/conda-forge/libignition-physics-feedstock/commit/c586d765a2f5fd0ecf6da43c53315c898c9bf6bd>`_ PR.
+
+After making these changes don't forget to rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line).
 
 Special Dependencies and Packages
 =================================
