@@ -95,5 +95,9 @@ FAQ
 You are seeing this error message because by default, conda-build uses conda-verify to ensure that your recipe and package meet some minimum sanity checks. 
 This message can be safely ignored as conda-forge doesn't use conda-verify. 
 
-  
+    .. _mfaq_version_update:
+
+:ref:`(Q) <mfaq_version_update>` **When the bot creates a pull request to a feedstock to update the version, should I approve the pull request and wait with merging until everybody else that is a code owner has approved the PR?**
+
+   There is no need to approve the PR. Every maintainer can verify and merge the bot PR without waiting on the approval of the other maintainers.
   
