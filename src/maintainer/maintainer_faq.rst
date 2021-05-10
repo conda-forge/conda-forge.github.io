@@ -91,7 +91,7 @@ FAQ
 
 :ref:`(Q) <mfaq_conda_verify>` **I am seeing** ``Importing conda-verify failed.`` **error message during build. What do I do?**
 
-    .. code-block:: yaml       
+    .. code-block:: shell       
         
          Importing conda-verify failed. Please be sure to test your packages. conda install conda-verify to make this message go away. 
 
