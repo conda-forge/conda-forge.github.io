@@ -227,7 +227,7 @@ To take over the abandoned feedstock and become their new maintainers :
 
 1. Create a `Pull Request <https://conda-forge.org/docs/misc/00_intro.html>`__ to the feedstock repository and add your username to the ``meta.yaml``. (Make sure not to remove the current maintainer’s name from it unless requested by them)
 2. Rerender the feedstock with ``conda-smithy``.
-3. Contact the core members through `Gitter <https://gitter.im/conda-forge/conda-forge.github.io>`__ to merge the `Pull Request <https://conda-forge.org/docs/misc/00_intro.html>`__.
+3. To get the `Pull Request <https://conda-forge.org/docs/misc/00_intro.html>`__ merged,  contact the core members by pinging ***conda-forge/core*** in the same PR. If that's not possible, get in touch through `Gitter <https://gitter.im/conda-forge/conda-forge.github.io>`__ .
 4. Fix any pending `Pull Requests <https://conda-forge.org/docs/misc/00_intro.html>`__ and update the feedstock, if necessary.
 
 .. _maint_updating_maintainers:
