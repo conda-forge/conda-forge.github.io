@@ -96,9 +96,18 @@ You are seeing this error message because by default, conda-build uses conda-ver
 This message can be safely ignored as conda-forge doesn't use conda-verify. 
 
 
+    .. _mfaq_version_update:
+
+:ref:`(Q) <mfaq_version_update>` **When the bot creates a pull request to a feedstock to update the version, should I approve the pull request and wait with merging until everybody else that is a code owner has approved the PR?**
+
+   There is no need to approve the PR. Every maintainer can verify and merge the bot PR without waiting on the approval of the other maintainers.
+  
+
+
 :ref:`(Q) <mfaq_docker_139>` **How to fix "build-locally.py fails with exit code 139"?**
 
     With Linux Kernel 4.11 there were some changes in the ``vsyscall`` linking. Depending on your distribution this may cause the above error. You can fix that on Debian by editing ``/etc/default/grub`` and specifiy ``GRUB_CMDLINE_LINUX_DEFAULT="vsyscall=emulate"`` in this file. Afterwards, you need to run ``update-grub`` and reboot your system. On other Linux distributions the fix is similar but you need to edit a different configuration file to change the Linux kernel cmdline. This workaround is only needed for images based on CentOS 6 (``cos6``). You could also workaround this by forcing the CentOS 7 based images using ``DOCKER_IMAGE=quay.io/condaforge/linux-anvil-cos7-x86_64 ./build-locally.py``.
 
     The exit code 139 itself actually is the general exit code for a segmentation fault. This could also mean that you have run into a different issue but the above issue is the most likely one with our CentOS 6-based images.
+
 
