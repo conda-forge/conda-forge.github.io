@@ -7,6 +7,16 @@ FAQ
 
   We have an overview and step-by-step instruction on contributing packages in the section :ref:`dev_contribute_pkgs`.
 
+.. _faq_supported_lang:
+
+:ref:`(Q) <faq_supported_lang>` **What languages does conda-forge support?**
+
+  Following are some languages conda-forge supports.
+   - Python                  
+   - R	
+   - Fortran 
+   - C++ 	
+  Learn More about about packages per language `here <https://github.com/conda-forge/by-the-numbers/blob/master/packages_per_lang.ipynb>`_.
 .. _faq_pkg_update:
 
 :ref:`(Q) <faq_pkg_update>` **The feedstock for a package from conda-forge is updated, how long should it take to update on Anaconda Cloud?**
