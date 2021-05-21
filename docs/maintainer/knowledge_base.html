@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Knowledge Base &#8212; conda-forge 2021.05.19 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2021.05.21 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.05.19 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.05.21 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -83,10 +83,23 @@ On Windows, you can also use <code class="docutils literal notranslate"><span cl
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ninja</span>  <span class="c1"># [win]</span>
 </pre></div>
 </div>
-<p>For CMake projects using the <a class="reference external" href="https://cmake.org/cmake/help/git-stage/module/FindPython3.html">FindPython3</a>
-module, you can tell CMake which Python to use by passing <code class="docutils literal notranslate"><span class="pre">-DPython3_EXECUTABLE=&quot;$PYTHON&quot;</span></code>
-(macOS or Linux) or <code class="docutils literal notranslate"><span class="pre">-DPython3_EXECUTABLE=&quot;%PYTHON%&quot;</span></code> (Windows) as a command line option.
+<p>For CMake projects using the <a class="reference external" href="https://cmake.org/cmake/help/git-stage/module/FindPython.html">FindPython</a>
+module, you can tell CMake which Python to use by passing <code class="docutils literal notranslate"><span class="pre">-DPython_EXECUTABLE=&quot;$PYTHON&quot;</span></code>
+(macOS or Linux) or <code class="docutils literal notranslate"><span class="pre">-DPython_EXECUTABLE=&quot;%PYTHON%&quot;</span></code> (Windows) as a command line option.
 Older CMake projects may require similar, but slightly different options.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Don’t forget that depending on which CMake module you use you have to use a different command:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cmake.org/cmake/help/git-stage/module/FindPython.html">FindPython</a>:
+<code class="docutils literal notranslate"><span class="pre">-DPython_EXECUTABLE=...</span></code>.</p></li>
+<li><p><a class="reference external" href="https://cmake.org/cmake/help/git-stage/module/FindPython3.html">FindPython3</a>:
+<code class="docutils literal notranslate"><span class="pre">-DPython3_EXECUTABLE=...</span></code>.</p></li>
+<li><p><a class="reference external" href="https://cmake.org/cmake/help/git-stage/module/FindPython2.html">FindPython2</a>:
+<code class="docutils literal notranslate"><span class="pre">-DPython2_EXECUTABLE=...</span></code>.</p></li>
+</ul>
+<p>or if you are still on the deprecated <a class="reference external" href="https://cmake.org/cmake/help/latest/module/FindPythonLibs.html">FindPythonLibs</a>: <code class="docutils literal notranslate"><span class="pre">-DPYTHON_EXECUTABLE=...</span></code>.</p>
+</div>
 <p>Some optional, but useful CMake options:</p>
 <blockquote>
 <div><ul class="simple">
@@ -1441,7 +1454,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.05.19 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.05.21 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
