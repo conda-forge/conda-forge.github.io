@@ -5,6 +5,15 @@ Announcements
 
 Our announcements are published to an RSS feed `here <https://conda-forge.org/docs/news.rss>`_.
 
+2021
+----
+
+:2020-05-22: ``conda-forge`` is now citable!
+
+    You can now cite ``conda-forge`` using our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_!
+    This entry credits the entire ``conda-forge`` community for its hard work in building our
+    amazing ecosystem.
+
 2020
 ----
 

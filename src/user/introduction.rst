@@ -30,7 +30,7 @@ This came with a list of disadvantages:
 
  - Locating packages was difficult due to them being scattered over many channels.
  - Combining packages across channels was not always possible due to binary incompatibilities.
- - Packages were only available for architectures the developer was interested in or had access to. 
+ - Packages were only available for architectures the developer was interested in or had access to.
  - Channels were often abandoned, updating required locating new channels.
 
 conda-forge is a community effort that tackles these issues:
@@ -43,31 +43,29 @@ conda-forge is a community effort that tackles these issues:
  - An active core developer team is trying to also maintain abandoned packages.
 
 
-
 How can I install packages from conda-forge?
 --------------------------------------------
 
 Using conda-forge is easy!
 
  - Make sure you have ``conda >=4.9``.
- 
+
  .. code-block:: bash
 
   conda --version
   conda update conda
-  
- - Add ``conda-forge`` as the highest priority channel. 
- 
+
+ - Add ``conda-forge`` as the highest priority channel.
+
  .. code-block:: bash
 
   conda config --add channels conda-forge
-  
+
  - Activate ``strict`` channel priority (``strict`` will be activated by default in conda 5.0).
- 
+
  .. code-block:: bash
 
   conda config --set channel_priority strict
-
 
 From now on using ``conda install <package-name>`` will also find packages in our conda-forge channels.
 
@@ -82,7 +80,7 @@ From now on using ``conda install <package-name>`` will also find packages in ou
 .. note::
 
   Please be aware that the order of your conda package channels is important, especially when you combine conda-forge with other channels, e.g. ``bioconda``.
-  
+
 .. note::
 
   `Miniforge <https://github.com/conda-forge/miniforge>`__ is a community
@@ -96,9 +94,36 @@ From now on using ``conda install <package-name>`` will also find packages in ou
   Please refer to :ref:`multiple_channels` for pitfalls and more information.
 
 
+How can I give credit to ``conda-forge``?
+-----------------------------------------
+
+If you'd like to credit ``conda-forge`` in your work, please cite our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_. This citation is
+
+::
+
+  conda-forge community. (2015). The conda-forge Project: Community-based
+  Software Distribution Built on the conda Package Format and Ecosystem.
+  Zenodo. http://doi.org/10.5281/zenodo.4774216
+
+or in `bibtex` it is
+
+::
+
+  @misc{conda_forge_community_2015_4774216,
+    author       = {conda-forge community},
+    title        = {{The conda-forge Project: Community-based Software
+         Distribution Built on the conda Package Format and
+         Ecosystem}},
+    month        = jul,
+    year         = 2015,
+    publisher    = {Zenodo},
+    doi          = {10.5281/zenodo.4774216},
+    url          = {https://doi.org/10.5281/zenodo.4774216}
+  }
+
 
 Display conda-forge packages in Anaconda Navigator
-------------------------------------------------------------
+--------------------------------------------------
 
 #. Open **Anaconda Navigator** by running ``anaconda-navigator``
 #. Go to the **Environments** tab.
