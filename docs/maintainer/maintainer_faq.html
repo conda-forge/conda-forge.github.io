@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>FAQ &#8212; conda-forge 2021.05.22 documentation</title>
+    <title>FAQ &#8212; conda-forge 2021.05.26 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="knowledge_base.html" title="Knowledge Base"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.05.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.05.26 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -145,12 +145,16 @@ Therefore build numbers above 1000 will gradually vanish as packages get updated
 </div></blockquote>
 <p id="mfaq-conda-verify"><a class="reference internal" href="#mfaq-conda-verify"><span class="std std-ref">(Q)</span></a> <strong>I am seeing</strong> <code class="docutils literal notranslate"><span class="pre">Importing</span> <span class="pre">conda-verify</span> <span class="pre">failed.</span></code> <strong>error message during build. What do I do?</strong></p>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">Importing</span> <span class="pre">conda-verify</span> <span class="pre">failed.</span> <span class="pre">Please</span> <span class="pre">be</span> <span class="pre">sure</span> <span class="pre">to</span> <span class="pre">test</span> <span class="pre">your</span> <span class="pre">packages.</span> <span class="pre">conda</span> <span class="pre">install</span> <span class="pre">conda-verify</span> <span class="pre">to</span> <span class="pre">make</span> <span class="pre">this</span> <span class="pre">message</span> <span class="pre">go</span> <span class="pre">away.</span></code></p>
+<div><blockquote>
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Importing conda-verify failed. Please be sure to <span class="nb">test</span> your packages. conda install conda-verify to make this message go away.
+</pre></div>
+</div>
 </div></blockquote>
 <p>You are seeing this error message because by default, conda-build uses conda-verify to ensure that your recipe and package meet some minimum sanity checks.
 This message can be safely ignored as conda-forge doesn’t use conda-verify.</p>
 <blockquote>
 <div></div></blockquote>
+</div></blockquote>
 <p id="mfaq-version-update"><a class="reference internal" href="#mfaq-version-update"><span class="std std-ref">(Q)</span></a> <strong>When the bot creates a pull request to a feedstock to update the version, should I approve the pull request and wait with merging until everybody else that is a code owner has approved the PR?</strong></p>
 <blockquote>
 <div><p>There is no need to approve the PR. Every maintainer can verify and merge the bot PR without waiting on the approval of the other maintainers.</p>
@@ -252,7 +256,7 @@ This message can be safely ignored as conda-forge doesn’t use conda-verify.</p
         <li class="right" >
           <a href="knowledge_base.html" title="Knowledge Base"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.05.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.05.26 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
