@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Contributing packages &#8212; conda-forge 2021.05.26 documentation</title>
+    <title>Contributing packages &#8212; conda-forge 2021.06.03 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.05.26 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.06.03 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -84,12 +84,9 @@ get your <cite>gitub-id</cite> added to the <cite>recipe-maintainers</cite> sect
 <li><p>If it is an R package from <a class="reference external" href="https://cran.r-project.org/">CRAN</a>, kindly
 start by using the <a class="reference external" href="https://github.com/bgruening/conda_r_skeleton_helper">conda-forge helper script for R recipes</a> instead.
 Then if necessary, you can make manual edits to the recipe.</p></li>
-<li><p>If it is a python package, you can generate the recipe as a starting point with
-<code class="docutils literal notranslate"><span class="pre">grayskull</span> <span class="pre">pypi</span> <span class="pre">your_package_name</span></code>. To install it you can use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">grayskull</span></code>. You do <em>not</em> have to use <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>, and the
-recipes produced by <code class="docutils literal notranslate"><span class="pre">grayskull</span></code> will need to be reviewed and edited.
-In particular, you’ll at least need to check the build line to <a class="reference internal" href="#use-pip"><span class="std std-ref">use pip</span></a>,
-add yourself as a maintainer,
-and specify a <code class="docutils literal notranslate"><span class="pre">license_file</span></code>.</p></li>
+<li><p>If it is a python package, you can generate the recipe as a starting point with <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>.
+Use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">grayskull</span></code> to install <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>, followed by <code class="docutils literal notranslate"><span class="pre">grayskull</span> <span class="pre">pypi</span> <span class="pre">your_package_name</span></code> to generate the recipe. Note that you do <em>not</em> necessarily have to use <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>, and the
+recipes produced by <code class="docutils literal notranslate"><span class="pre">grayskull</span></code> might need to be reviewed and edited. Read more about <code class="docutils literal notranslate"><span class="pre">grayskull</span></code> and how to use it <a class="reference external" href="https://github.com/conda-incubator/grayskull#introduction">here</a>.</p></li>
 </ol>
 <p>Your final recipe should have no comments (unless they’re actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.</p>
 <p><em>If there are any details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.</em></p>
@@ -313,7 +310,7 @@ Pure Python packages almost never need them.</p>
 <p>Remember to always add <code class="docutils literal notranslate"><span class="pre">pip</span></code> to the host requirements.</p>
 </section>
 <section id="use-pip">
-<span id="id2"></span><h4>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h4>
+<span id="id3"></span><h4>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h4>
 <p>Normally Python packages should use this line:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
   <span class="nt">script</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">-vv&quot;</span>
@@ -891,7 +888,7 @@ source:
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.05.26 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.06.03 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
