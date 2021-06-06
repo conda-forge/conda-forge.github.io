@@ -104,8 +104,9 @@ FAQ
 :ref:`(Q) <mfaq_version_update>` **When the bot creates a pull request to a feedstock to update the version, should I approve the pull request and wait with merging until everybody else that is a code owner has approved the PR?**
 
    There is no need to approve the PR. Every maintainer can verify and merge the bot PR without waiting on the approval of the other maintainers.
-  
 
+
+    .. _mfaq_docker_139:
 
 :ref:`(Q) <mfaq_docker_139>` **How to fix "build-locally.py fails with exit code 139"?**
 
@@ -114,9 +115,10 @@ FAQ
     The exit code 139 itself actually is the general exit code for a segmentation fault. This could also mean that you have run into a different issue but the above issue is the most likely one with our CentOS 6-based images.
 
 
-.. _mfaq_libGL_so_1:
+  .. _mfaq_libGL_so_1:
 
-:ref:`(Q) <_mfaq_libGL_so_1>` **How do I fix the** ``libGL.so.1`` **import error?**
+:ref:`(Q) <mfaq_libGL_so_1>` **How do I fix the** ``libGL.so.1`` **import error?**
+
 
   Error: 
   
