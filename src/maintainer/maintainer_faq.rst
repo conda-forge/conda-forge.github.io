@@ -114,3 +114,14 @@ FAQ
     The exit code 139 itself actually is the general exit code for a segmentation fault. This could also mean that you have run into a different issue but the above issue is the most likely one with our CentOS 6-based images.
 
 
+.. _mfaq_libGL_so_1:
+
+:ref:`(Q) <_mfaq_libGL_so_1>` **How do I fix the** ``libGL.so.1`` **import error?**
+
+  Error: 
+  
+  .. code-block:: shell
+  
+    ImportError: libGL.so.1: cannot open shared object file: No such file or directory
+    
+  Create a  `yum_requirements.txt <https://conda-forge.org/docs/maintainer/knowledge_base.html#yum-deps>`_ file and add *mesa-libGL*.
