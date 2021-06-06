@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>FAQ &#8212; conda-forge 2021.06.03 documentation</title>
+    <title>FAQ &#8212; conda-forge 2021.06.06 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="knowledge_base.html" title="Knowledge Base"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.06.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.06.06 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -158,11 +158,23 @@ This message can be safely ignored as conda-forge doesn’t use conda-verify.</p
 <p id="mfaq-version-update"><a class="reference internal" href="#mfaq-version-update"><span class="std std-ref">(Q)</span></a> <strong>When the bot creates a pull request to a feedstock to update the version, should I approve the pull request and wait with merging until everybody else that is a code owner has approved the PR?</strong></p>
 <blockquote>
 <div><p>There is no need to approve the PR. Every maintainer can verify and merge the bot PR without waiting on the approval of the other maintainers.</p>
-</div></blockquote>
-<p><span class="xref std std-ref">(Q)</span> <strong>How to fix “build-locally.py fails with exit code 139”?</strong></p>
 <blockquote>
+<div></div></blockquote>
+</div></blockquote>
+<p id="mfaq-docker-139"><a class="reference internal" href="#mfaq-docker-139"><span class="std std-ref">(Q)</span></a> <strong>How to fix “build-locally.py fails with exit code 139”?</strong></p>
+<blockquote>
+<div><blockquote>
 <div><p>With Linux Kernel 4.11 there were some changes in the <code class="docutils literal notranslate"><span class="pre">vsyscall</span></code> linking. Depending on your distribution this may cause the above error. You can fix that on Debian by editing <code class="docutils literal notranslate"><span class="pre">/etc/default/grub</span></code> and specifiy <code class="docutils literal notranslate"><span class="pre">GRUB_CMDLINE_LINUX_DEFAULT=&quot;vsyscall=emulate&quot;</span></code> in this file. Afterwards, you need to run <code class="docutils literal notranslate"><span class="pre">update-grub</span></code> and reboot your system. On other Linux distributions the fix is similar but you need to edit a different configuration file to change the Linux kernel cmdline. This workaround is only needed for images based on CentOS 6 (<code class="docutils literal notranslate"><span class="pre">cos6</span></code>). You could also workaround this by forcing the CentOS 7 based images using <code class="docutils literal notranslate"><span class="pre">DOCKER_IMAGE=quay.io/condaforge/linux-anvil-cos7-x86_64</span> <span class="pre">./build-locally.py</span></code>.</p>
 <p>The exit code 139 itself actually is the general exit code for a segmentation fault. This could also mean that you have run into a different issue but the above issue is the most likely one with our CentOS 6-based images.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="mfaq-libgl-so-1"><a class="reference internal" href="#mfaq-libgl-so-1"><span class="std std-ref">(Q)</span></a> <strong>How do I fix the</strong> <code class="docutils literal notranslate"><span class="pre">libGL.so.1</span></code> <strong>import error?</strong></p>
+<blockquote>
+<div><p>Error:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ImportError: libGL.so.1: cannot open shared object file: No such file or directory
+</pre></div>
+</div>
+<p>To fix the error, create a  <a class="reference external" href="https://conda-forge.org/docs/maintainer/knowledge_base.html#yum-deps">yum_requirements.txt</a> file and add <em>mesa-libGL</em>.</p>
 </div></blockquote>
 </section>
 
@@ -256,7 +268,7 @@ This message can be safely ignored as conda-forge doesn’t use conda-verify.</p
         <li class="right" >
           <a href="knowledge_base.html" title="Knowledge Base"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.06.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.06.06 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
