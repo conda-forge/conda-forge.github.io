@@ -124,4 +124,4 @@ FAQ
   
     ImportError: libGL.so.1: cannot open shared object file: No such file or directory
     
-  Create a  `yum_requirements.txt <https://conda-forge.org/docs/maintainer/knowledge_base.html#yum-deps>`_ file and add *mesa-libGL*.
+  To fix the error, create a  `yum_requirements.txt <https://conda-forge.org/docs/maintainer/knowledge_base.html#yum-deps>`_ file and add *mesa-libGL*.
