@@ -112,7 +112,6 @@ This message can be safely ignored as conda-forge doesn't use conda-verify.
 
 .. _mfaq_package_submit:
 
-:ref:`(Q) <mfaq_package_submit>` **Is it necessary for me to be a maintainer of the package I submit to Conda-forge?**
+:ref:`(Q) <mfaq_package_submit>` **Is it necessary for me to be an upstream maintainer of the package I submit to Conda-forge?**
 	Everybody can submit a package to Conda-forge, irrespective of whether they maintain it or not. Additionally, it’s not required but considered a good practice to inform the upstream of a new package and invite them to be maintainers as well.
-
 
