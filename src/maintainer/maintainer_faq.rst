@@ -114,6 +114,12 @@ FAQ
 
     The exit code 139 itself actually is the general exit code for a segmentation fault. This could also mean that you have run into a different issue but the above issue is the most likely one with our CentOS 6-based images.
 
+  .. _mfaq_package_submit:
+
+:ref:`(Q) <mfaq_package_submit>` **Is it necessary for me to be an upstream maintainer of the package I submit to Conda-forge?**
+
+    Everybody can submit a package to Conda-forge, irrespective of whether they maintain the upstream version or not. Additionally, it’s not required but considered good practice to inform the upstream of a new package and invite them to be maintainers as well.
+
 
   .. _mfaq_libGL_so_1:
 
@@ -126,6 +132,7 @@ FAQ
   
     ImportError: libGL.so.1: cannot open shared object file: No such file or directory
     
+
   To fix the error, create a `yum_requirements.txt <https://conda-forge.org/docs/maintainer/knowledge_base.html#yum-deps>`_ file and add *mesa-libGL*.
 
 
