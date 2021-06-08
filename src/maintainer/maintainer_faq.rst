@@ -91,9 +91,12 @@ FAQ
 
 :ref:`(Q) <mfaq_conda_verify>` **I am seeing** ``Importing conda-verify failed.`` **error message during build. What do I do?**
 
-   ``Importing conda-verify failed. Please be sure to test your packages. conda install conda-verify to make this message go away.``
-You are seeing this error message because by default, conda-build uses conda-verify to ensure that your recipe and package meet some minimum sanity checks. 
-This message can be safely ignored as conda-forge doesn't use conda-verify. 
+    .. code-block:: shell       
+        
+         Importing conda-verify failed. Please be sure to test your packages. conda install conda-verify to make this message go away. 
+
+  You are seeing this error message because by default, conda-build uses conda-verify to ensure that your recipe and package meet some minimum sanity checks. 
+  This message can be safely ignored as conda-forge doesn't use conda-verify. 
 
 
     .. _mfaq_version_update:
@@ -101,8 +104,9 @@ This message can be safely ignored as conda-forge doesn't use conda-verify.
 :ref:`(Q) <mfaq_version_update>` **When the bot creates a pull request to a feedstock to update the version, should I approve the pull request and wait with merging until everybody else that is a code owner has approved the PR?**
 
    There is no need to approve the PR. Every maintainer can verify and merge the bot PR without waiting on the approval of the other maintainers.
-  
 
+
+    .. _mfaq_docker_139:
 
 :ref:`(Q) <mfaq_docker_139>` **How to fix "build-locally.py fails with exit code 139"?**
 
@@ -110,7 +114,22 @@ This message can be safely ignored as conda-forge doesn't use conda-verify.
 
     The exit code 139 itself actually is the general exit code for a segmentation fault. This could also mean that you have run into a different issue but the above issue is the most likely one with our CentOS 6-based images.
 
-.. _mfaq_package_submit:
+  .. _mfaq_package_submit:
 
 :ref:`(Q) <mfaq_package_submit>` **Is it necessary for me to be an upstream maintainer of the package I submit to Conda-forge?**
-	Everybody can submit a package to Conda-forge, irrespective of whether they maintain the upstream version or not. Additionally, it’s not required but considered good practice to inform the upstream of a new package and invite them to be maintainers as well.
+
+    Everybody can submit a package to Conda-forge, irrespective of whether they maintain the upstream version or not. Additionally, it’s not required but considered good practice to inform the upstream of a new package and invite them to be maintainers as well.
+
+
+  .. _mfaq_libGL_so_1:
+
+:ref:`(Q) <mfaq_libGL_so_1>` **How do I fix the** ``libGL.so.1`` **import error?**
+
+
+  Error: 
+  
+  .. code-block:: shell
+  
+    ImportError: libGL.so.1: cannot open shared object file: No such file or directory
+    
+  To fix the error, create a  `yum_requirements.txt <https://conda-forge.org/docs/maintainer/knowledge_base.html#yum-deps>`_ file and add *mesa-libGL*.
