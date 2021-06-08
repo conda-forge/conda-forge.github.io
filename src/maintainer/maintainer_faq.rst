@@ -126,4 +126,31 @@ FAQ
   
     ImportError: libGL.so.1: cannot open shared object file: No such file or directory
     
-  To fix the error, create a  `yum_requirements.txt <https://conda-forge.org/docs/maintainer/knowledge_base.html#yum-deps>`_ file and add *mesa-libGL*.
+  To fix the error, create a `yum_requirements.txt <https://conda-forge.org/docs/maintainer/knowledge_base.html#yum-deps>`_ file and add *mesa-libGL*.
+
+
+  .. _mfaq_qt_load_xcb:
+
+:ref:`(Q) <mfaq_qt_load_xcb>` **How can I fix the** ``The Qt platform plugin "xcb" could not be loaded`` **error during testing?**
+
+
+  When testing packages that have a dependency on pyqt, the following error might occur under linux: 
+  
+  
+  .. code-block:: shell
+  
+    qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+    This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+
+    Available platform plugins are: eglfs, minimal, minimalegl, offscreen, vnc, webgl, xcb.
+
+    
+  
+  This comes from the CI environment being headless and can be fixed by adding the ``QT_QPA_PLATFORM=offscreen`` `environment variable <https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#inherited-environment-variabless>`_.
+ The variable can either be added directly to the test command or provided in the `meta.yaml <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml>`_ like so:
+ 
+ .. code-block:: yaml
+ 
+    build:
+      script_env:
+        - QT_QPA_PLATFORM=offscreen
