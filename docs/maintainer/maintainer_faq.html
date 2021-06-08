@@ -81,7 +81,7 @@
 <span class="n">Exited</span> <span class="k">with</span> <span class="n">code</span> <span class="mi">128</span>
 </pre></div>
 </div>
-<p>open a new issue with a comment <a class="reference internal" href="infrastructure.html#ci-update-circle"><span class="std std-ref">&#64;conda-forge-admin, please update circle</span></a>.
+<p>Open a new issue with a comment <a class="reference internal" href="infrastructure.html#ci-update-circle"><span class="std std-ref">&#64;conda-forge-admin, please update circle</span></a>.
 Once our web services have updated the circle configuration, restart the build.</p>
 </div></blockquote>
 <p id="mfaq-py37-selector"><a class="reference internal" href="#mfaq-py37-selector"><span class="std std-ref">(Q)</span></a> <strong>Why does conda-build ignore the</strong> <code class="docutils literal notranslate"><span class="pre">py37</span></code> <strong>selector in meta.yaml?</strong></p>
@@ -103,12 +103,10 @@ While the legacy selectors <code class="docutils literal notranslate"><span clas
 <blockquote>
 <div><p>TL;DR: there is no need for build numbers larger than 1000 anymore.</p>
 <p>When you update a feedstock that still uses build numbers &gt; 1000, the following rules apply:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>when you increase the version, reset the build number back to 0 (e.g. <code class="docutils literal notranslate"><span class="pre">1005</span> <span class="pre">-&gt;</span> <span class="pre">0</span></code>).</p></li>
-<li><p>when the version stays the same and you need to upload a new package, increase the build number by 1 (e.g. <code class="docutils literal notranslate"><span class="pre">1005</span> <span class="pre">-&gt;</span> <span class="pre">1006</span></code>).</p></li>
+<ul class="simple">
+<li><p>When you increase the version, reset the build number back to 0 (e.g. <code class="docutils literal notranslate"><span class="pre">1005</span> <span class="pre">-&gt;</span> <span class="pre">0</span></code>).</p></li>
+<li><p>When the version stays the same and you need to upload a new package, increase the build number by 1 (e.g. <code class="docutils literal notranslate"><span class="pre">1005</span> <span class="pre">-&gt;</span> <span class="pre">1006</span></code>).</p></li>
 </ul>
-</div></blockquote>
 <p><strong>Backstory:</strong> Build numbers of 1000 and larger are a relic from the compiler migration, where a build number offset of 1000 signified that a package was migrated to the new compilers.
 Since the completion of the compiler migration, this offsetting is not needed anymore.
 However, we cannot simply subtract the offset without updating the version, due to higher build numbers being preferred by the solver.
@@ -127,52 +125,38 @@ Therefore build numbers above 1000 will gradually vanish as packages get updated
 <blockquote>
 <div><p>An alternative to the conda solver is the mamba solver. The mamba solver has a faster solve speed and prints better error messages that make debugging simpler.</p>
 <p>You can configure the conda-forge CI to run a debug build using the mamba solver with the following changes:</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><p>Set <code class="docutils literal notranslate"><span class="pre">build_with_mambabuild:</span> <span class="pre">True</span></code> in <code class="docutils literal notranslate"><span class="pre">conda-forge.yaml</span></code> file</p></li>
 <li><p>Rerender with <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> (to rerender manually use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">smithy</span> <span class="pre">rerender</span></code> from the command line)</p></li>
 </ul>
-</div></blockquote>
 <p>[Note: Builds made with <code class="docutils literal notranslate"><span class="pre">mambabuild</span></code> won’t be uploaded to <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. These builds are purely for debugging purposes.]</p>
 <p>You can also do this locally by using:</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">boa</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">mambabuild</span> <span class="pre">myrecipe</span></code></p></li>
 </ul>
-</div></blockquote>
 <p>For more details visit <a class="reference external" href="https://boa-build.readthedocs.io/en/latest/mambabuild.html">this</a> page.</p>
 </div></blockquote>
 <p id="mfaq-conda-verify"><a class="reference internal" href="#mfaq-conda-verify"><span class="std std-ref">(Q)</span></a> <strong>I am seeing</strong> <code class="docutils literal notranslate"><span class="pre">Importing</span> <span class="pre">conda-verify</span> <span class="pre">failed.</span></code> <strong>error message during build. What do I do?</strong></p>
 <blockquote>
-<div><blockquote>
 <div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Importing conda-verify failed. Please be sure to <span class="nb">test</span> your packages. conda install conda-verify to make this message go away.
 </pre></div>
 </div>
-</div></blockquote>
 <p>You are seeing this error message because by default, conda-build uses conda-verify to ensure that your recipe and package meet some minimum sanity checks.
 This message can be safely ignored as conda-forge doesn’t use conda-verify.</p>
-<blockquote>
-<div></div></blockquote>
 </div></blockquote>
 <p id="mfaq-version-update"><a class="reference internal" href="#mfaq-version-update"><span class="std std-ref">(Q)</span></a> <strong>When the bot creates a pull request to a feedstock to update the version, should I approve the pull request and wait with merging until everybody else that is a code owner has approved the PR?</strong></p>
 <blockquote>
 <div><p>There is no need to approve the PR. Every maintainer can verify and merge the bot PR without waiting on the approval of the other maintainers.</p>
-<blockquote>
-<div></div></blockquote>
 </div></blockquote>
 <p id="mfaq-docker-139"><a class="reference internal" href="#mfaq-docker-139"><span class="std std-ref">(Q)</span></a> <strong>How to fix “build-locally.py fails with exit code 139”?</strong></p>
 <blockquote>
-<div><blockquote>
 <div><p>With Linux Kernel 4.11 there were some changes in the <code class="docutils literal notranslate"><span class="pre">vsyscall</span></code> linking. Depending on your distribution this may cause the above error. You can fix that on Debian by editing <code class="docutils literal notranslate"><span class="pre">/etc/default/grub</span></code> and specifiy <code class="docutils literal notranslate"><span class="pre">GRUB_CMDLINE_LINUX_DEFAULT=&quot;vsyscall=emulate&quot;</span></code> in this file. Afterwards, you need to run <code class="docutils literal notranslate"><span class="pre">update-grub</span></code> and reboot your system. On other Linux distributions the fix is similar but you need to edit a different configuration file to change the Linux kernel cmdline. This workaround is only needed for images based on CentOS 6 (<code class="docutils literal notranslate"><span class="pre">cos6</span></code>). You could also workaround this by forcing the CentOS 7 based images using <code class="docutils literal notranslate"><span class="pre">DOCKER_IMAGE=quay.io/condaforge/linux-anvil-cos7-x86_64</span> <span class="pre">./build-locally.py</span></code>.</p>
 <p>The exit code 139 itself actually is the general exit code for a segmentation fault. This could also mean that you have run into a different issue but the above issue is the most likely one with our CentOS 6-based images.</p>
 </div></blockquote>
-</div></blockquote>
 <p id="mfaq-package-submit"><a class="reference internal" href="#mfaq-package-submit"><span class="std std-ref">(Q)</span></a> <strong>Is it necessary for me to be an upstream maintainer of the package I submit to Conda-forge?</strong></p>
 <blockquote>
-<div><blockquote>
 <div><p>Everybody can submit a package to Conda-forge, irrespective of whether they maintain the upstream version or not. Additionally, it’s not required but considered good practice to inform the upstream of a new package and invite them to be maintainers as well.</p>
-</div></blockquote>
 </div></blockquote>
 <p id="mfaq-libgl-so-1"><a class="reference internal" href="#mfaq-libgl-so-1"><span class="std std-ref">(Q)</span></a> <strong>How do I fix the</strong> <code class="docutils literal notranslate"><span class="pre">libGL.so.1</span></code> <strong>import error?</strong></p>
 <blockquote>
@@ -180,7 +164,24 @@ This message can be safely ignored as conda-forge doesn’t use conda-verify.</p
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ImportError: libGL.so.1: cannot open shared object file: No such file or directory
 </pre></div>
 </div>
-<p>To fix the error, create a  <a class="reference external" href="https://conda-forge.org/docs/maintainer/knowledge_base.html#yum-deps">yum_requirements.txt</a> file and add <em>mesa-libGL</em>.</p>
+<p>To fix the error, create a <a class="reference external" href="https://conda-forge.org/docs/maintainer/knowledge_base.html#yum-deps">yum_requirements.txt</a> file and add <em>mesa-libGL</em>.</p>
+</div></blockquote>
+<p id="mfaq-qt-load-xcb"><a class="reference internal" href="#mfaq-qt-load-xcb"><span class="std std-ref">(Q)</span></a> <strong>How can I fix the</strong> <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">Qt</span> <span class="pre">platform</span> <span class="pre">plugin</span> <span class="pre">&quot;xcb&quot;</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">loaded</span></code> <strong>error during testing?</strong></p>
+<blockquote>
+<div><p>When testing packages that have a dependency on <code class="docutils literal notranslate"><span class="pre">pyqt</span></code>, the following error might occur under linux:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>qt.qpa.plugin: Could not load the Qt platform plugin <span class="s2">&quot;xcb&quot;</span> <span class="k">in</span> <span class="s2">&quot;&quot;</span> even though it was found.
+This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+
+Available platform plugins are: eglfs, minimal, minimalegl, offscreen, vnc, webgl, xcb.
+</pre></div>
+</div>
+<p>This comes from the CI environment being headless and can be fixed by adding the <code class="docutils literal notranslate"><span class="pre">QT_QPA_PLATFORM=offscreen</span></code> <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#inherited-environment-variabless">environment variable</a>.
+The variable can either be added directly to the test command or provided in the <a class="reference external" href="https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml">meta.yaml</a> like so:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+  <span class="nt">script_env</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">QT_QPA_PLATFORM=offscreen</span>
+</pre></div>
+</div>
 </div></blockquote>
 </section>
 
