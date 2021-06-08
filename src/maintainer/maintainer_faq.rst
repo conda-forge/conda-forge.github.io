@@ -79,7 +79,10 @@ FAQ
 
   - Set ``build_with_mambabuild: True`` in ``conda-forge.yaml`` file
   - Rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line)
-  [Note: Builds made with ``mambabuild`` won't be uploaded to ``conda-forge``. These builds are purely for debugging purposes.]
+  
+  .. note::
+  
+    Builds made with ``mambabuild`` won't be uploaded to ``conda-forge``. These builds are purely for debugging purposes.
 
   You can also do this locally by using:
 
