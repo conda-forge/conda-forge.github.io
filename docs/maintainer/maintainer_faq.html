@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>FAQ &#8212; conda-forge 2021.06.08 documentation</title>
+    <title>FAQ &#8212; conda-forge 2021.06.09 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="knowledge_base.html" title="Knowledge Base"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.06.08 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.06.09 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -119,7 +119,7 @@ Therefore build numbers above 1000 will gradually vanish as packages get updated
 </div></blockquote>
 <p id="mfaq-anaconda-delay"><a class="reference internal" href="#mfaq-anaconda-delay"><span class="std std-ref">(Q)</span></a> <strong>Why does my new version appear on Anaconda Cloud, but is not installable with conda?</strong></p>
 <blockquote>
-<div><p>For certain, high-traffic channels (main &amp; conda-forge), Anaconda uses a <a class="reference external" href="https://cloudflare.com/learning/cdn/what-is-a-cdn/">CDN</a> to decrease costs. The CDN is only reindexed every 20 minutes, however <a href="#id1"><span class="problematic" id="id2">`Anaconda.org https://anaconda.org&gt;`_</span></a> uses the original channel that the CDN mirrors.  Therefore, packages will show up on the <a href="#id3"><span class="problematic" id="id4">`Anaconda Cloud https://anaconda.org&gt;`_</span></a> about 20 to 40 minutes before they are downloadable via conda.  You can use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">search</span> <span class="pre">&lt;pkg&gt;</span></code>  to see if the package is installable, because this command reads from the CDN.</p>
+<div><p>For certain, high-traffic channels (main &amp; conda-forge), Anaconda uses a <a class="reference external" href="https://cloudflare.com/learning/cdn/what-is-a-cdn/">CDN</a> to decrease costs. The CDN is only reindexed every 20 minutes, however <a class="reference external" href="https://anaconda.org">Anaconda.org</a> uses the original channel that the CDN mirrors.  Therefore, packages will show up on the <a class="reference external" href="https://anaconda.org">Anaconda Cloud</a> about 20 to 40 minutes before they are downloadable via conda.  You can use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">search</span> <span class="pre">&lt;pkg&gt;</span></code>  to see if the package is installable, because this command reads from the CDN.</p>
 </div></blockquote>
 <p id="mfaq-mamba-local"><a class="reference internal" href="#mfaq-mamba-local"><span class="std std-ref">(Q)</span></a> <strong>How can I make debugging solver failures on the CI faster?</strong></p>
 <blockquote>
@@ -129,7 +129,10 @@ Therefore build numbers above 1000 will gradually vanish as packages get updated
 <li><p>Set <code class="docutils literal notranslate"><span class="pre">build_with_mambabuild:</span> <span class="pre">True</span></code> in <code class="docutils literal notranslate"><span class="pre">conda-forge.yaml</span></code> file</p></li>
 <li><p>Rerender with <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> (to rerender manually use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">smithy</span> <span class="pre">rerender</span></code> from the command line)</p></li>
 </ul>
-<p>[Note: Builds made with <code class="docutils literal notranslate"><span class="pre">mambabuild</span></code> won’t be uploaded to <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. These builds are purely for debugging purposes.]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Builds made with <code class="docutils literal notranslate"><span class="pre">mambabuild</span></code> won’t be uploaded to <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. These builds are purely for debugging purposes.</p>
+</div>
 <p>You can also do this locally by using:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">boa</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code></p></li>
@@ -275,7 +278,7 @@ The variable can either be added directly to the test command or provided in the
         <li class="right" >
           <a href="knowledge_base.html" title="Knowledge Base"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.06.08 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.06.09 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
