@@ -5,9 +5,9 @@ User Documentation
 .. toctree::
 
   introduction
-  announcements
+  contributing
+  how_to_get_help
   tipsandtricks
   ci-skeleton
   faq
-  contributing
-  how_to_get_help
+  announcements
