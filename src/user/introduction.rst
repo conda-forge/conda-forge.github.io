@@ -94,7 +94,15 @@ From now on using ``conda install <package-name>`` will also find packages in ou
   Please refer to :ref:`multiple_channels` for pitfalls and more information.
 
 
-How can I give credit to ``conda-forge``?
+Can I contribute packages to conda-forge?
+-----------------------------------------
+
+Yes, anyone can contribute packages to the ``conda-forge`` channel. 
+You don't have to be the upstream maintainer of a package in order to contribute it to ``conda-forge``. 
+To learn how you can contribute your first package read `the staging process <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-staging-process>`_.
+
+
+How can I give credit to conda-forge?
 -----------------------------------------
 
 If you'd like to credit ``conda-forge`` in your work, please cite our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_. This citation is
