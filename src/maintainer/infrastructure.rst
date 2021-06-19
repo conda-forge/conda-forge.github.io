@@ -151,8 +151,16 @@ Entering this command in the title of an issue will instruct the admin bot to
 add Python 2.7 back to a feedstock. Note that this command will remove any other
 Python versions and any ``win``, ``aarch64`` or ``ppc64le`` builds. Thus you should
 merge the PR into a separate branch on your feedstock if you want to keep these
-other builds. **Python 2.7 support is deprecated and any feedstocks on Python 2.7 will 
+other builds. **Python 2.7 support is deprecated and any feedstocks on Python 2.7 will
 not be properly handled by our bots.**
+
+@conda-forge-admin, please add <@user>
+--------------------------------------
+
+Entering the above phrase in the title of an issue on a feedstock will make a PR
+that adds the given user to the feedstock. A maintainer or member of ``core`` can then merge
+this PR to add the user. Please do not modify this PR or adjust the commit message. This
+PR is designed to skip building the package.
 
 
 CI build services
@@ -162,8 +170,8 @@ Here we describe common issues with the CI Services that conda-forge builds.
 
 Azure Pipelines
 ---------------
-Azure is used to build packages for OSX, Linux (x86_64, native), Linux (ARMv8, emulated) and Linux (IBM Power8+, emulated). 
-The build queue on Azure is substantially larger than on all the other providers. 
+Azure is used to build packages for OSX, Linux (x86_64, native), Linux (ARMv8, emulated) and Linux (IBM Power8+, emulated).
+The build queue on Azure is substantially larger than on all the other providers.
 Azure builds have a maximum duration of 6 hours.
 
 To see all builds on Azure, visit `<https://dev.azure.com/conda-forge/feedstock-builds/_build>`_.
@@ -195,7 +203,7 @@ TravisCI (OSX, IBM Power 8+)
 ------------------------------
 
 TravisCI is used to build packages for IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
-force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit `<https://travis-ci.com/profile>`_ 
+force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit `<https://travis-ci.com/profile>`_
 and click "Sync accounts".
 
 Enabling Travis
@@ -209,7 +217,7 @@ Enable a build by adding the following to ``conda-forge.yml`` in the root of the
 
     provider:
       osx: travis
-      
+
 For IBM Power 8+ builds, add the name of your feedstock to the list `here
 <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`_
 via a pull request.
@@ -270,15 +278,15 @@ Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
 Drone.io
 --------
 
-We use `Drone.io <https://drone.io>`_ for Linux ARMv8 builds. To enable these builds on your feedstock, make a pull request to add your feedstock to the list 
+We use `Drone.io <https://drone.io>`_ for Linux ARMv8 builds. To enable these builds on your feedstock, make a pull request to add your feedstock to the list
 here `<https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`_.
 
 
 GitHub Actions
 --------------
 
-We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on 
-GitHub Actions. 
+We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on
+GitHub Actions.
 
 
 Skipping CI builds
@@ -295,9 +303,9 @@ To skip a CI build for a given commit, put ``[ci skip] ***NO_CI***`` in the comm
 Third-party Use of Our CI Services
 ----------------------------------
 
-Due to its stature in the open-source community, conda-forge has enhanced access to certain CI services. This access is a community 
-resource entrusted to conda-forge for use in building packages. We thus cannot support third-party or "off-label" CI jobs in our 
-feedstocks on any of our CI services. If we find such use, we will politely ask the maintainers to rectify the situation. We may 
+Due to its stature in the open-source community, conda-forge has enhanced access to certain CI services. This access is a community
+resource entrusted to conda-forge for use in building packages. We thus cannot support third-party or "off-label" CI jobs in our
+feedstocks on any of our CI services. If we find such use, we will politely ask the maintainers to rectify the situation. We may
 take more serious actions, including archiving feedstocks or removing maintainers from the organization, if the situation cannot be rectified.
 
 
