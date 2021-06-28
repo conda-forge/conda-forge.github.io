@@ -2,10 +2,13 @@ Organisation Documentation
 ##########################
 
 .. toctree::
-  guidelines
-  governance
-  subteams
-  joining-the-team
-  minutes/00_intro
-  cfep-index
-  getting-in-touch
+   :maxdepth: 1
+   :includehidden:
+
+   guidelines
+   governance
+   subteams
+   joining-the-team
+   minutes/00_intro
+   cfep-index
+   getting-in-touch

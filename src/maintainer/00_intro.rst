@@ -3,6 +3,8 @@ Maintainer Documentation
 
 
 .. toctree::
+  :maxdepth: 1
+  :includehidden:
 
   infrastructure
   adding_pkgs
