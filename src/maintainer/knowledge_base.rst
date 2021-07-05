@@ -1186,15 +1186,9 @@ With the `addition of CUDA 11.1 and 11.2 <https://github.com/conda-forge/conda-f
 the default build matrix for CUDA versions was trimmed down to versions 10.2, 11.0, 11.1, 11.2. If you want to
 re-add support for 9.2, 10.0 and 10.1, you need to follow these steps below:
 
-1. Rename the file ``.ci_support/migrations/cuda111_112.yaml`` to ``.ci_support/migrations/cuda111_112.disabled``.
-2. Add the contents of `this file <https://github.com/conda-forge/nvcc-feedstock/blob/master/recipe/conda_build_config.yaml>`_
-   to your ``recipe/conda_build_config.yaml``. Create it if it didn't exist yet.
-3. Re-render the feedstock.
-
-Note that by following this procedure you are opting out of the migration process for CUDA builds and you will have to
-update the contents of ``conda_build_config.yaml`` by hand. If you experience re-rendering errors, check that the contents
-of this file match the one present in the `nvcc-feedstock <https://github.com/conda-forge/nvcc-feedstock>`_. When in doubt,
-remove ``conda_build_config.yaml``, rename back the migrator file (step 1) and re-render.
+1. Download this `migration file <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/cuda92_100_101.yaml>`_.
+2. In your feedstock fork, create a new branch and place the migration file under ``.ci_support/migrations``.
+3. Open a PR and re-render. CUDA 9.2, 10.0 and 10.1 will appear in the CI checks now. Merge when ready!
 
 
 Adding support for a new CUDA version
