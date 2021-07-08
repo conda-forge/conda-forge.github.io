@@ -97,7 +97,7 @@ From now on using ``conda install <package-name>`` will also find packages in ou
 Becoming Involved: How to contribute packages to conda-forge?
 -----------------------------------------
 
-Yes, anyone can contribute packages to the ``conda-forge`` channel. 
+Anyone can contribute packages to the ``conda-forge`` channel. 
 You don't have to be the upstream maintainer of a package in order to contribute it to ``conda-forge``. 
 To learn how you can contribute your first package read `the staging process <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-staging-process>`_.
 
