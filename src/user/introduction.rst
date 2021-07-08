@@ -99,7 +99,7 @@ Becoming Involved: How to contribute packages to conda-forge?
 
 Anyone can contribute packages to the ``conda-forge`` channel. 
 You don't have to be the upstream maintainer of a package in order to contribute it to ``conda-forge``. 
-To learn how you can contribute your first package read `the staging process <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-staging-process>`_.
+If you are interested in submitting a package to conda-forge, read `the staging process <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-staging-process>`_. for a better description of the process.
 
 
 How can I give credit to conda-forge?
