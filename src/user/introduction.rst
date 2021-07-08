@@ -94,7 +94,7 @@ From now on using ``conda install <package-name>`` will also find packages in ou
   Please refer to :ref:`multiple_channels` for pitfalls and more information.
 
 
-Can I contribute packages to conda-forge?
+Becoming Involved: How to contribute packages to conda-forge?
 -----------------------------------------
 
 Yes, anyone can contribute packages to the ``conda-forge`` channel. 
