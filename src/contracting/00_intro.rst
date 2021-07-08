@@ -26,6 +26,16 @@ Contact Information: sales@lab49.com
 Background / Description: Lab49 is a full service strategy, design and technology consultancy with a global reach focused on financial services. We specialize in product development across the full stack, from data and analytics, through services, through next generation user interfaces. 
 
 
+Quansight
+=========
+
+Services offered: Core Library Development, Data Engineering, Algorithms / AI / ML, Infrastructure / Big Data, Visualization / Dashboards, Open Source Support, Packaging, Integration
+
+Contact Info: https://www.quansight.com/consulting
+
+Background / Description: Quansight's goal is to create operational solutions to support your analytic and visualization needs. We automate the data-science process in a way that works for your business use cases. Quansight has the experience to assess an organization's needs and provide the best integrated solution to turn raw data into actionable quantitative insights. By employing the maintainers and contributors to many open source projects worldwide, including core aspects of the Conda ecosystem and community, we provide top talent to ensure our customers have access to the latest technology while also leveraging legacy investments.
+
+
 Becoming a Service Provider
 ***************************
 

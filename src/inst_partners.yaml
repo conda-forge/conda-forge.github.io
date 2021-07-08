@@ -81,6 +81,17 @@ NVIDIA:
      - dev support
      - fiscal support
 
+Quansight:
+  Description: Quansight provides developer time
+  Developers:
+    - viniciusdc
+  Logo URL:
+    - https://avatars.githubusercontent.com/u/34879953
+  Site URL:
+    - https://www.quansight.com/
+  contribution type:
+    - dev support
+
 # Places that give us stuff
 # Microsoft:
 #   Description: Microsoft provides build systems for Windows, OSX, and Linux on Azure.
