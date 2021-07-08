@@ -9,5 +9,6 @@ User Documentation
   how_to_get_help
   tipsandtricks
   ci-skeleton
+  announcements
   faq
   announcements
