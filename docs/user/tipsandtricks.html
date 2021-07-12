@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Tips &amp; tricks &#8212; conda-forge 2021.06.19 documentation</title>
+    <title>Tips &amp; tricks &#8212; conda-forge 2021.07.12 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.06.19 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.07.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li> 
       </ul>
@@ -82,13 +82,16 @@ see an error like (OS X example):</p>
 <p>That happens because either the correct version of <code class="docutils literal notranslate"><span class="pre">icu</span></code>,
 or any other package in the error,
 is not present or the package is missing altogether.</p>
-<p>Once you can confirm by issuing the command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> and searching for the package in question.</p>
+<p>You can confirm this by issuing the command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> and searching for the package in question.</p>
 <section id="why-does-that-happen">
 <h3>Why does that happen?<a class="headerlink" href="#why-does-that-happen" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and <code class="docutils literal notranslate"><span class="pre">defaults</span></code> are not 100% compatible.
 In the example above it is known that <code class="docutils literal notranslate"><span class="pre">defaults</span></code> uses <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">54.*</span></code> while <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> relies on <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">56.*</span></code>,
 that mismatch can lead to errors when the install environment is mixing packages from multiple channels.</p>
-<p>Note: All of conda-forge software pinning can be found at: <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All of conda-forge software pinning can be found at: <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml</a></p>
+</div>
 </section>
 <section id="how-to-fix-it">
 <h3>How to fix it?<a class="headerlink" href="#how-to-fix-it" title="Permalink to this headline">¶</a></h3>
@@ -249,7 +252,7 @@ as ABI compatibility allows.</p>
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.06.19 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.07.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li> 
       </ul>

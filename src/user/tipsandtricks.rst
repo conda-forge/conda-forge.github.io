@@ -21,7 +21,7 @@ That happens because either the correct version of ``icu``,
 or any other package in the error,
 is not present or the package is missing altogether.
 
-Once you can confirm by issuing the command ``conda list`` and searching for the package in question.
+You can confirm this by issuing the command ``conda list`` and searching for the package in question.
 
 Why does that happen?
 ---------------------
@@ -30,7 +30,8 @@ The ``conda-forge`` and ``defaults`` are not 100% compatible.
 In the example above it is known that ``defaults`` uses ``icu 54.*`` while ``conda-forge`` relies on ``icu 56.*``,
 that mismatch can lead to errors when the install environment is mixing packages from multiple channels.
 
-Note: All of conda-forge software pinning can be found at: https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml
+.. note::
+   All of conda-forge software pinning can be found at: https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml
 
 How to fix it?
 --------------
