@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Knowledge Base &#8212; conda-forge 2021.07.13 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2021.07.15 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.07.13 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.07.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -1146,6 +1146,19 @@ sysroot(s) nor the missing_dso_whitelist.
 </pre></div>
 </div>
 </section>
+<section id="my-feedstock-is-not-building-old-cuda-versions-anymore">
+<h4>My feedstock is not building old CUDA versions anymore<a class="headerlink" href="#my-feedstock-is-not-building-old-cuda-versions-anymore" title="Permalink to this headline">¶</a></h4>
+<p>With the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/1162">addition of CUDA 11.1 and 11.2</a>,
+the default build matrix for CUDA versions was trimmed down to versions 10.2, 11.0, 11.1, 11.2.</p>
+<p>If you really need it, you can re-add support for 9.2, 10.0 and 10.1. However, this is not recommended.
+Adding more CUDA versions to the build matrix will dramatically increase the number of jobs and will place a large
+burden on our CI resources. Only proceed if there’s a known use case for the extra packages.</p>
+<ol class="arabic simple">
+<li><p>Download this <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/cuda92_100_101.yaml">migration file</a>.</p></li>
+<li><p>In your feedstock fork, create a new branch and place the migration file under <code class="docutils literal notranslate"><span class="pre">.ci_support/migrations</span></code>.</p></li>
+<li><p>Open a PR and re-render. CUDA 9.2, 10.0 and 10.1 will appear in the CI checks now. Merge when ready!</p></li>
+</ol>
+</section>
 </section>
 <section id="adding-support-for-a-new-cuda-version">
 <h3>Adding support for a new CUDA version<a class="headerlink" href="#adding-support-for-a-new-cuda-version" title="Permalink to this headline">¶</a></h3>
@@ -1369,6 +1382,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
 <li class="toctree-l4"><a class="reference internal" href="#testing-the-packages">Testing the packages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#common-problems-and-known-issues">Common problems and known issues</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#nvcuda-dll-cannot-be-found-on-windows"><code class="docutils literal notranslate"><span class="pre">nvcuda.dll</span></code> cannot be found on Windows</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#my-feedstock-is-not-building-old-cuda-versions-anymore">My feedstock is not building old CUDA versions anymore</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#adding-support-for-a-new-cuda-version">Adding support for a new CUDA version</a></li>
@@ -1454,7 +1468,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.07.13 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.07.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
