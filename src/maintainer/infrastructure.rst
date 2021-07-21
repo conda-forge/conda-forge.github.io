@@ -154,7 +154,7 @@ merge the PR into a separate branch on your feedstock if you want to keep these
 other builds. **Python 2.7 support is deprecated and any feedstocks on Python 2.7 will
 not be properly handled by our bots.**
 
-@conda-forge-admin, please add user <@username>
+@conda-forge-admin, please add user @username
 --------------------------------------
 
 Entering the above phrase in the title of an issue on a feedstock will make a PR
