@@ -226,9 +226,9 @@ Updating the maintainer list
 The list of maintainers of a feedstock is recorded in the recipe itself. A new maintainer can be added by opening
 an issue in the feedstock repository with the following title: 
 
-``@conda-forge-admin, please add <@user>``
+``@conda-forge-admin, please add user @username``
 
-where ``<@user>`` is the new maintainer to be added.
+where ``username`` is the username of the new maintainer to be added.
 A PR will be automatically created and a maintainer or a member of the ``core`` can then merge this PR to add the user. 
 
 .. note::
