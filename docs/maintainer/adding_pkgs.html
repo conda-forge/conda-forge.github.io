@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Contributing packages &#8212; conda-forge 2021.07.22 documentation</title>
+    <title>Contributing packages &#8212; conda-forge 2021.07.28 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.07.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.07.28 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -69,13 +69,13 @@
             
   <section id="contributing-packages">
 <span id="dev-contribute-pkgs"></span><h1>Contributing packages<a class="headerlink" href="#contributing-packages" title="Permalink to this headline">¶</a></h1>
-<p>A maintainer is an individual who is responsible for maintaining and updating one or more feedstock repositories and packages as well as their future versions. They have push access to the feedstock repositories of only the packages they maintain and can merge <a class="reference external" href="https://conda-forge.org/docs/misc/00_intro.html#glossary">PR</a> into it. See <a class="reference external" href="https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role">Maintainers Role.</a></p>
-<p>The list of maintainers of a feedstock package is recorded in the recipe of that package itself. Once you create a package, as a code owner, you automatically become a maintainer of it. In case you wish to be a maintainer of a certain package, you should ask for permission from its current maintainers and
-get your <cite>gitub-id</cite> added to the <cite>recipe-maintainers</cite> section in the recipe’s <cite>meta.yaml</cite>.
-<a class="reference external" href="https://conda-forge.org/docs/maintainer/updating_pkgs.html#updating-the-maintainer-list">Please refer to Updating the maintainer list</a> for detailed instructions.</p>
+<p>To submit a package to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel, add its <code class="docutils literal notranslate"><span class="pre">recipe</span></code> and licence to the <code class="docutils literal notranslate"><span class="pre">staged-recipes</span></code> repository and create a pull request. Once the pull request is merged, the package becomes available
+on the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel. Note that contributing a package makes you the <code class="docutils literal notranslate"><span class="pre">maintainer</span></code> of that package.</p>
+<p>A maintainer is responsible for maintaining the feedstock repository and packages as well as their future versions and has push access to the feedstock repositories of only the packages it maintains.
+You can learn more about the roles of a maintainer <a class="reference external" href="https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role">here.</a></p>
+<p>The sections below provide detailed instructions on contributing packages to conda-forge.</p>
 <section id="the-staging-process">
 <span id="creating-recipes"></span><h2>The staging process<a class="headerlink" href="#the-staging-process" title="Permalink to this headline">¶</a></h2>
-<p>This document presents an overview over how to contribute packages to conda-forge.</p>
 <section id="getting-started">
 <h3>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h3>
 <p>There are multiple ways to get started:</p>
@@ -89,8 +89,11 @@ Use <code class="docutils literal notranslate"><span class="pre">conda</span> <s
 recipes produced by <code class="docutils literal notranslate"><span class="pre">grayskull</span></code> might need to be reviewed and edited. Read more about <code class="docutils literal notranslate"><span class="pre">grayskull</span></code> and how to use it <a class="reference external" href="https://github.com/conda-incubator/grayskull#introduction">here</a>.</p></li>
 </ol>
 <p>Your final recipe should have no comments (unless they’re actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.</p>
-<p><em>If there are any details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.</em></p>
-<p>In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that might help you with a successful build is provided in the following.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If there are any details you are not sure about please create a pull request anyway. The conda-forge team will review it and help you make changes to it.</p>
+</div>
+<p>In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that will help you with a successful build is provided below.</p>
 </section>
 <section id="step-by-step-instructions">
 <span id="staging-steps"></span><h3>Step-by-step Instructions<a class="headerlink" href="#step-by-step-instructions" title="Permalink to this headline">¶</a></h3>
@@ -888,7 +891,7 @@ source:
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.07.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.07.28 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
