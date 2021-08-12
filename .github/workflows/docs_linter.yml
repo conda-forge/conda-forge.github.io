@@ -1,0 +1,28 @@
+on:
+  pull_request_target:
+    types: [opened]
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v4
+        id: body_message
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Hi, thanks for improving the conda-forge docs.
+              Unfortunately, the edit was made in the _docs_ folder and not in the _src_ folder.
+              \nPlease only edit the _src_ folder as the HTML is automatically generated after merging.
+              For more information, visit the
+              [conda-forge docs](https://conda-forge.org/docs/user/contributing.html#improve-the-documentation).'
+            })
+      - name: Get Result
+        run: echo "${{{steps.body_message.outputs.result}}}"
