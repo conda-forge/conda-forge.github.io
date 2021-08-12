@@ -5,6 +5,7 @@ on:
     branches:
       - master
   pull_request: null
+  workflow_dispatch: null
 
 jobs:
   tests:
@@ -37,7 +38,7 @@ jobs:
           source ./.ci_scripts/update_docs
 
       - name: deploy
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
