@@ -5,6 +5,7 @@ on:
     branches:
       - master
   pull_request: null
+  workflow_dispatch: null
 
 jobs:
   tests:
