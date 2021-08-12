@@ -14,7 +14,7 @@ A list of conda-forge enhancement proposals (CFEP) are as follows:
 * `CFEP-03: Providing manually uploaded builds on the conda-forge anaconda channel <https://github.com/conda-forge/cfep/blob/master/cfep-03.md>`_ -- *Proposed*
 * `CFEP-04: Policies for packaging X11-based software in conda-forge <https://github.com/conda-forge/cfep/blob/master/cfep-04.md>`_ -- *Deferred*
 * `CFEP-05: Providing pre-release builds on the conda-forge anaconda channel <https://github.com/conda-forge/cfep/blob/master/cfep-05.md>`_ -- *Accepted*
-* `CFEP-06:  <https://github.com/conda-forge/cfep/blob/master/cfep-06.md>`_ -- *Deferred*
+* `CFEP-06: staged-recipes code review lifecycle <https://github.com/conda-forge/cfep/blob/master/cfep-06.md>`_ -- *Deferred*
 * `CFEP-07: Migration strategy to Anaconda compilers <https://github.com/conda-forge/cfep/blob/master/cfep-07.md>`_ -- *Proposed*
 * `CFEP-08: Packages which are "Too Big to Fail" <https://github.com/conda-forge/cfep/blob/master/cfep-08.md>`_ -- *Deferred*
 * `CFEP-09: Pinning Proposal System for Automatic Rebuilds <https://github.com/conda-forge/cfep/blob/master/cfep-09.md>`_ -- *Accepted*
