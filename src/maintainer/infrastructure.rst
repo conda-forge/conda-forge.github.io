@@ -60,7 +60,7 @@ If you found any typo error, unclear explanations or new topics that can be cove
 Autotick Bot
 =============
 
-
+Write about the bot here
 
 
 .. _dev_admservice:
