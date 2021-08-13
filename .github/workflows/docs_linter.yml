@@ -1,0 +1,28 @@
+name: Linter docs
+
+on:
+  push:
+    paths:
+      - 'docs/**'
+
+jobs:
+  comment:
+    name: Notify user
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Comment on PR
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Hi, thanks for improving the conda-forge docs.
+              Unfortunately, the edit was made in the _docs_ folder and not in the _src_ folder.
+              \nPlease only edit the _src_ folder as the HTML is automatically generated after merging.
+              For more information, visit the
+              [conda-forge docs](https://conda-forge.org/docs/user/contributing.html#improve-the-documentation).'
+            })
