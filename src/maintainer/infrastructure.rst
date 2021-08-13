@@ -57,6 +57,11 @@ The documentation is built with ``Sphinx`` and the sources files are located in 
 If you found any typo error, unclear explanations or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to :ref:`improve_docs`.
 
 
+Autotick Bot
+=============
+
+
+
 
 .. _dev_admservice:
 
