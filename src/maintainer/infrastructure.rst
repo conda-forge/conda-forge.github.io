@@ -60,7 +60,52 @@ If you found any typo error, unclear explanations or new topics that can be cove
 Autotick Bot
 =============
 
-Write about the bot here
+The Autotick bot issues automatic version updates and migrations for feedstocks.
+
+conda-forge.yaml keys
+----------------------
+
+It is possible to control the behaviour of the autotick bot by adding some keys in the ``bot`` section of the conda-forge.yaml file.
+
+.. code-block:: yaml
+
+    bot:
+      automerge: true
+
+Setting ``automerge`` to ``true`` will configure the bot to automatically merge all the PRs it makes on the feedstock.
+
+.. note::
+   If no key has been set ``automerge`` currently defaults to ``false``, but this may change in future.
+
+.. code-block:: yaml
+
+    bot:
+      automerge: 'version'
+
+Setting ``automerge`` to ``'version'`` will configure the bot to automatically merge 'version' PRs. Migration PRs will not be merged automatically.
+
+.. code-block:: yaml
+
+    bot:
+      automerge: 'migration'
+
+Setting ``automerge`` to ``'migration'`` will configure the bot to automatically merge 'migration' PRs. Version PRs will not be merged automatically.
+
+.. code-block:: yaml
+
+    bot:
+      check_solvable: true
+
+Setting ``check_solvable`` to ``true`` will configure the bot to issue PRs only if the resulting environment is solvable. This key is specially useful for tightly coupled packages.
+
+.. code-block:: yaml
+
+    bot:
+      abi_migration_branches:
+        - v1.10.x
+
+This key will configure the bot to generate migration PRs for all the branches listed under it in addition to the default branch.
+
 
 
 .. _dev_admservice:
