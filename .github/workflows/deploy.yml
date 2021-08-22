@@ -25,8 +25,8 @@ jobs:
         shell: bash -l {0}
         run: |
           # configure bot account
-          git config --global user.name "Travis-CI on github.com/conda-forge/conda-forge.github.io"
-          git config --global user.email conda.forge.coordinator@gmail.com
+          git config --global user.email "pelson.pub+conda-forge@gmail.com"
+          git config --global user.name "conda-forge-admin"
 
           # configure conda
           conda config --set show_channel_urls true
@@ -44,5 +44,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: .
-          user_name: conda-forge-coordinator
-          user_email: conda.forge.coordinator@gmail.com
+          user_name: conda-forge-admin
+          user_email: pelson.pub+conda-forge@gmail.com

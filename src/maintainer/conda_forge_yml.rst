@@ -24,7 +24,7 @@ Top-level fields
 * :ref:`appveyor`
 * :ref:`azure-config`
 * :ref:`build_platform`
-* :ref:`build_with_mamba`
+* :ref:`build_with_mambabuild`
 * :ref:`bot`
 * :ref:`channel_priority`
 * :ref:`channels`
@@ -136,15 +136,15 @@ build platform using cross-compiling.
     build_platform:
       osx_64: linux_64
       
-.. _build_with_mamba:
+.. _build_with_mambabuild:
 
-build_with_mamba
+build_with_mambabuild
 --------------
 This option, when enabled, configures the conda-forge CI to run a debug build using the ``mamba`` solver. Check `this <https://conda-forge.org/docs/maintainer/maintainer_faq.html#mfaq-mamba-local>`__ to know more.  
 
 .. code-block:: yaml
 
-    build_with_mamba:
+    build_with_mambabuild:
       True   
           
 .. _channel_priority:
