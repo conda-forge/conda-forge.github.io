@@ -207,7 +207,7 @@ Hi! This is the friendly conda-forge-admin automated user.
 
 I've re-rendered this feedstock with the latest version of conda-smithy ({}) and noticed some changes.
 If the changes look good, then please go ahead and merge this PR.
-If you have any questions about the changes though, please feel free to ping the 'conda-forge/core' team (using the @ notation in a comment). 
+If you have any questions about the changes though, please feel free to ping the 'conda-forge/core' team (using the @ notation in a comment).
 
 Remember, for any changes to the recipe you would normally need to increment the version or the build number of the package.
 Since this is an infrastructural change, we don't actually need/want a new version to be uploaded to anaconda.org/conda-forge, so the version and build/number are left unchanged and the CI has been skipped.
@@ -264,7 +264,7 @@ for feedstock, git_ref, meta_content, recipe in feedstock_gen:
 
             # Technically, we can do whatever we like to the feedstock now. Let's just
             # update the feedstock though. For examples of other things that *have* been
-            # done here - once upon a time @pelson modified the conda-forge.yaml config
+            # done here - once upon a time @pelson modified the conda-forge.yml config
             # item for every single feedstock, and submitted PRs for every project.
             conda_smithy.configure_feedstock.main(feedstock.directory)
         if pr:
