@@ -77,11 +77,11 @@ FAQ
 
   You can configure the conda-forge CI to run a debug build using the mamba solver with the following changes:
 
-  - Set ``build_with_mambabuild: True`` in ``conda-forge.yaml`` file
+  - Set ``build_with_mambabuild: True`` in ``conda-forge.yml`` file
   - Rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line)
-  
+
   .. note::
-  
+
     Builds made with ``mambabuild`` won't be uploaded to ``conda-forge``. These builds are purely for debugging purposes.
 
   You can also do this locally by using:
