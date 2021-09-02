@@ -106,7 +106,14 @@ Setting ``check_solvable`` to ``true`` will configure the bot to issue PRs only 
 
 This key will configure the bot to generate migration PRs for all the branches listed under it in addition to the default branch.
 
+bot-rerun label
+----------------
 
+Adding the ``bot-rerun`` label to an ``auto-tick bot`` issued PR will cause the bot to close the PR and reissue it.
+Adding this label to non-bot issued PRs will have no effect.
+
+To add this label to a PR enter the following command in a PR comment:
+``@conda-forge-admin, please rerun bot``
 
 .. _dev_admservice:
 
