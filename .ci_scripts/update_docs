@@ -3,7 +3,7 @@
 set -ex
 
 git checkout -b new_site_content
-conda env create -f ./.ci_scripts/environment.yml
+mamba env create -f ./.ci_scripts/environment.yml
 conda activate conda-forge-docs
 
 pushd newsfeed
