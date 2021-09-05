@@ -205,7 +205,7 @@ remove broken packages from the ``main`` channel:
 
 1. Locate the paths to broken files on `anaconda.org <https://anaconda.org>`__, by searching for the conda-forge package and switching to the files tab.
 2. Fork `conda-forge/admin-requests <https://github.com/conda-forge/admin-requests>`__ and add a new text file in the ``broken`` directory.
-3. Add the broken files to the new text file, one path per line. See `broken/example.txt <https://github.com/conda-forge/admin-requests/blob/master/broken/example.txt>`__ for an example file.
+3. Add the broken files to the new text file, one path per line. See `broken/example.txt <https://github.com/conda-forge/admin-requests/blob/main/broken/example.txt>`__ for an example file.
 4. Open a new PR. Once merged, a bot will label all listed files as broken, thus effectively removing them from the channel.
 
 
@@ -224,19 +224,19 @@ Updating the maintainer list
 ============================
 
 The list of maintainers of a feedstock is recorded in the recipe itself. A new maintainer can be added by opening
-an issue in the feedstock repository with the following title: 
+an issue in the feedstock repository with the following title:
 
 ``@conda-forge-admin, please add user @username``
 
 where ``username`` is the username of the new maintainer to be added.
-A PR will be automatically created and a maintainer or a member of the ``core`` can then merge this PR to add the user. 
+A PR will be automatically created and a maintainer or a member of the ``core`` can then merge this PR to add the user.
 
 .. note::
 
 
    This PR is designed to skip building the package. Please do **not** modify it or adjust the commit message.
 
-For example see `this <https://github.com/conda-forge/cudnn-feedstock/issues/20>`__ issue. 
+For example see `this <https://github.com/conda-forge/cudnn-feedstock/issues/20>`__ issue.
 
 
 Maintaining several versions

@@ -91,7 +91,7 @@ and `the Helios voting system <https://vote.heliosvoting.org/>`_, but are
 open to any secure, anonymous system.) The email capability of your chosen
 voting platform should be used for sending voting invitations and reminders,
 and you should use the email list from
-https://github.com/conda-forge/conda-forge.github.io/blob/master/src/core.csv as
+https://github.com/conda-forge/conda-forge.github.io/blob/main/src/core.csv as
 the authoritative list of emails to use.
 
 The default voting period is 1 week (7 days). This may be modified at
@@ -114,7 +114,7 @@ To call for a standard vote, here is a template PR comment:
 
 :Posting results: To maintain the historical record, the outcome of any standard vote which invokes the
          "time out" rules below should be recorded in the "vote-results" folder at
-         https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results
+         https://github.com/conda-forge/conda-forge.github.io/tree/main/src/vote-results
 
          Each vote should be its own file.  The filename should reflect the topic and the
          date that the vote opened.  The file should contain at least:
@@ -187,7 +187,7 @@ To call for a standard vote, here is a template PR comment:
 
      To declare a standard vote "timed out," the person making such a declaration
      must post a pull-request adding
-     a vote record to the https://github.com/conda-forge/conda-forge.github.io/tree/master/src/vote-results
+     a vote record to the https://github.com/conda-forge/conda-forge.github.io/tree/main/src/vote-results
      folder.  The declaration PR should be merged by the first core member
      who is available to verify that
      the requirements for the timeout have been met, based on their
