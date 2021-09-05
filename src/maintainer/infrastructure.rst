@@ -52,7 +52,7 @@ Documentation
 
 The documentation lives in `conda-forge/conda-forge.github.io <https://github.com/conda-forge/conda-forge.github.io/>`__, and is automatically deployed to our `online version <https://conda-forge.org/docs/>`__.
 
-The documentation is built with ``Sphinx`` and the sources files are located in the `src <https://github.com/conda-forge/conda-forge.github.io/tree/master/src>`__ directory of the repository.
+The documentation is built with ``Sphinx`` and the sources files are located in the `src <https://github.com/conda-forge/conda-forge.github.io/tree/main/src>`__ directory of the repository.
 
 If you found any typo error, unclear explanations or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to :ref:`improve_docs`.
 

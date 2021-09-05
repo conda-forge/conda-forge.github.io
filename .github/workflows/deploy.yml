@@ -3,7 +3,7 @@ name: deploy
 on:
   push:
     branches:
-      - master
+      - main
   pull_request: null
   workflow_dispatch: null
 
@@ -16,21 +16,14 @@ jobs:
 
       - uses: conda-incubator/setup-miniconda@v2
         with:
-          python-version: 3.7
-          channels: conda-forge,defaults
+          python-version: 3.8
+          channels: conda-forge
           channel-priority: strict
           show-channel-urls: true
-
-      - name: configure conda
-        shell: bash -l {0}
-        run: |
-          # configure bot account
-          git config --global user.email "pelson.pub+conda-forge@gmail.com"
-          git config --global user.name "conda-forge-admin"
-
-          # configure conda
-          conda config --set show_channel_urls true
-          conda config --set auto_update_conda false
+          miniforge-version: latest
+          miniforge-variant: Mambaforge
+          activate-environment: conda-forge-docs
+          environment-file: .ci_scripts/environment.yml
 
       - name: build
         shell: bash -l {0}
@@ -38,7 +31,7 @@ jobs:
           source ./.ci_scripts/update_docs
 
       - name: deploy
-        if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

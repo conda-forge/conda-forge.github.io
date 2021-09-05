@@ -22,13 +22,13 @@ The ``conda-forge`` documentation is version-controlled in the
 `conda-forge.github.io repository
 <https://github.com/conda-forge/conda-forge.github.io>`_ on GitHub. The source
 text is stored in `the src/ subdirectory
-<https://github.com/conda-forge/conda-forge.github.io/tree/master/src>`_ of this repository and
+<https://github.com/conda-forge/conda-forge.github.io/tree/main/src>`_ of this repository and
 is formatted using Python’s `reStructuredText
 <http://docutils.sourceforge.net/rst.html>`_ system.
 
 You can propose quick edits directly through the GitHub website if you have
 a GitHub account — for instance, `this link
-<https://github.com/conda-forge/conda-forge.github.io/edit/master/src/user/contributing.rst>`_
+<https://github.com/conda-forge/conda-forge.github.io/edit/main/src/user/contributing.rst>`_
 will take you directly to a web-based editor for this very webpage. In
 general, the file corresponding to each page in the GitHub browser has a
 little pencil icon in its top-right corner that lets you open it up for editing.
