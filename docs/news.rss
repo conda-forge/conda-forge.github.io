@@ -4,7 +4,7 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Wed, 25 Aug 2021 17:45:57 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 05 Sep 2021 16:40:07 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
     <item>
       <title>2020-05-22: conda-forge is now citable!</title>
@@ -179,7 +179,7 @@ for what is new, breaking, or deprecated.&lt;/p&gt;
     <item>
       <title>2020-07-15: CFEP-18: Removing static libraries from the main build</title>
       <link>https://conda-forge.org/docs/user/announcements.html</link>
-      <description>&lt;p&gt;With &lt;a class="reference external" href="https://github.com/conda-forge/cfep/blob/master/cfep-18.md"&gt;CFEP-18&lt;/a&gt;
+      <description>&lt;p&gt;With &lt;a class="reference external" href="https://github.com/conda-forge/cfep/blob/main/cfep-18.md"&gt;CFEP-18&lt;/a&gt;
 we now have a policy on how to deal with static packages. The most important
 change here is that we will be removing static libraries from the main packages
 and moving them to &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;-static&lt;/span&gt;&lt;/code&gt; suffixed packages. &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;-static&lt;/span&gt;&lt;/code&gt; packages will not

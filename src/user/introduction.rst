@@ -1,4 +1,4 @@
-.. conda-forge documentation master file, created by
+.. conda-forge documentation primary file, created by
    sphinx-quickstart on Wed Jun  1 01:44:13 2016.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -97,8 +97,8 @@ From now on using ``conda install <package-name>`` will also find packages in ou
 Can I contribute packages to conda-forge?
 -----------------------------------------
 
-Anyone can contribute packages to the ``conda-forge`` channel. 
-You don't have to be the upstream maintainer of a package in order to contribute it to ``conda-forge``. 
+Anyone can contribute packages to the ``conda-forge`` channel.
+You don't have to be the upstream maintainer of a package in order to contribute it to ``conda-forge``.
 To learn how to contribute your first package read `the staging process <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-staging-process>`_.
 
 

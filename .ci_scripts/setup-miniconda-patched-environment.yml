@@ -1,0 +1,19 @@
+name: conda-forge-docs
+channels:
+  - conda-forge
+dependencies:
+  - python=3
+  - conda-smithy
+  - sphinx<3
+  - cloud_sptheme
+  - sphinxcontrib-fulltoc
+  - make
+  - xonsh
+  - recommonmark
+  - pyyaml
+  - jinja2
+  - requests
+  - python-dateutil
+  - pip
+  - python-rapidjson
+  - python=3.8
