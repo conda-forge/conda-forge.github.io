@@ -47,7 +47,8 @@ IOOS:
 Anaconda Inc:
   Description: Anaconda hosts the conda-forge package repository on anaconda.org and maintains conda and conda-build
   Developers:
-    - jjhelmus
+    - chenghlee
+    - jezdez
   Logo URL:
     - https://know.anaconda.com/rs/387-XNW-688/images/2020_Anaconda_Logo_RGB_Corporate.png
   Site URL:
@@ -85,6 +86,7 @@ Quansight:
   Description: Quansight provides developer time
   Developers:
     - viniciusdc
+    - jaimergp
   Logo URL:
     - https://avatars.githubusercontent.com/u/34879953
   Site URL:
