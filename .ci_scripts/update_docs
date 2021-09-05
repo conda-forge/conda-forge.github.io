@@ -2,9 +2,11 @@
 
 set -ex
 
+# configure bot account
+git config --global user.email "pelson.pub+conda-forge@gmail.com"
+git config --global user.name "conda-forge-admin"
+
 git checkout -b new_site_content
-mamba env create -f ./.ci_scripts/environment.yml
-conda activate conda-forge-docs
 
 pushd newsfeed
 pip install --no-deps .

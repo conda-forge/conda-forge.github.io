@@ -17,22 +17,13 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v2
         with:
           python-version: 3.8
-          channels: conda-forge,defaults
+          channels: conda-forge
           channel-priority: strict
           show-channel-urls: true
           miniforge-version: latest
           miniforge-variant: Mambaforge
-
-      - name: configure conda
-        shell: bash -l {0}
-        run: |
-          # configure bot account
-          git config --global user.email "pelson.pub+conda-forge@gmail.com"
-          git config --global user.name "conda-forge-admin"
-
-          # configure conda
-          conda config --set show_channel_urls true
-          conda config --set auto_update_conda false
+          activate-environment: conda-forge-docs
+          environment-file: .ci_scripts/environment.yml
 
       - name: build
         shell: bash -l {0}
