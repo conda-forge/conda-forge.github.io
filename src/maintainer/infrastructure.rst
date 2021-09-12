@@ -288,6 +288,27 @@ GitHub Actions
 We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on
 GitHub Actions.
 
+Automerge
+.........
+
+The automerge service uses the GitHub action in this `repo <https://github.com/conda-forge/automerge-action>`_. This action runs out of a 
+Docker `container <https://hub.docker.com/repository/docker/condaforge/automerge-action>`_ on the ``prod`` tag. See the 
+repo `README.md <https://github.com/conda-forge/automerge-action#readme>`_ for mofe details. PRs are automatically merged if they satisfy either 
+of the two following sets of conditions:
+
+1. are from the ``regro-cf-autotick-bot``, have ``[bot-automerge]`` in the title, all statuses are passing, and the feedstock allows automerge
+2. have the ``automerge`` label and all statuses are passing. 
+
+For PRs from the ``regro-cf-autotick-bot``, it can be useful to remove the ``[bot-automerge]`` slug from the PR title if you are making 
+edits to the PR.
+
+Rerendering
+...........
+
+The rerendering service is triggered by the Heroku app. It uses the GitHub action in this `repo <https://github.com/conda-forge/webservices-dispatch-action>`_. 
+This action runs out of a Docker `container <https://hub.docker.com/repository/docker/condaforge/webservices-dispatch-action>`_ on the ``prod`` tag. See the 
+repo `README.md <https://github.com/conda-forge/webservices-dispatch-action#readme>`_ for mofe details. 
+
 
 Skipping CI builds
 ------------------
