@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Infrastructure &#8212; conda-forge 2021.09.05 documentation</title>
+    <title>Infrastructure &#8212; conda-forge 2021.09.12 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.09.05 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.09.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -290,6 +290,25 @@ here <a class="reference external" href="https://github.com/conda-forge/conda-fo
 <h3>GitHub Actions<a class="headerlink" href="#github-actions" title="Permalink to this headline">¶</a></h3>
 <p>We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on
 GitHub Actions.</p>
+<section id="automerge">
+<h4>Automerge<a class="headerlink" href="#automerge" title="Permalink to this headline">¶</a></h4>
+<p>The automerge service uses the GitHub action in this <a class="reference external" href="https://github.com/conda-forge/automerge-action">repo</a>. This action runs out of a
+Docker <a class="reference external" href="https://hub.docker.com/repository/docker/condaforge/automerge-action">container</a> on the <code class="docutils literal notranslate"><span class="pre">prod</span></code> tag. See the
+repo <a class="reference external" href="https://github.com/conda-forge/automerge-action#readme">README.md</a> for mofe details. PRs are automatically merged if they satisfy either
+of the two following sets of conditions:</p>
+<ol class="arabic simple">
+<li><p>are from the <code class="docutils literal notranslate"><span class="pre">regro-cf-autotick-bot</span></code>, have <code class="docutils literal notranslate"><span class="pre">[bot-automerge]</span></code> in the title, all statuses are passing, and the feedstock allows automerge</p></li>
+<li><p>have the <code class="docutils literal notranslate"><span class="pre">automerge</span></code> label and all statuses are passing.</p></li>
+</ol>
+<p>For PRs from the <code class="docutils literal notranslate"><span class="pre">regro-cf-autotick-bot</span></code>, it can be useful to remove the <code class="docutils literal notranslate"><span class="pre">[bot-automerge]</span></code> slug from the PR title if you are making
+edits to the PR.</p>
+</section>
+<section id="rerendering">
+<h4>Rerendering<a class="headerlink" href="#rerendering" title="Permalink to this headline">¶</a></h4>
+<p>The rerendering service is triggered by the Heroku app. It uses the GitHub action in this <a class="reference external" href="https://github.com/conda-forge/webservices-dispatch-action">repo</a>.
+This action runs out of a Docker <a class="reference external" href="https://hub.docker.com/repository/docker/condaforge/webservices-dispatch-action">container</a> on the <code class="docutils literal notranslate"><span class="pre">prod</span></code> tag. See the
+repo <a class="reference external" href="https://github.com/conda-forge/webservices-dispatch-action#readme">README.md</a> for mofe details.</p>
+</section>
 </section>
 <section id="skipping-ci-builds">
 <h3>Skipping CI builds<a class="headerlink" href="#skipping-ci-builds" title="Permalink to this headline">¶</a></h3>
@@ -436,7 +455,11 @@ will be able to upload packages with the same name.</p>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#drone-io">Drone.io</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#github-actions">GitHub Actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-actions">GitHub Actions</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#automerge">Automerge</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#rerendering">Rerendering</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#skipping-ci-builds">Skipping CI builds</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#third-party-use-of-our-ci-services">Third-party Use of Our CI Services</a></li>
 </ul>
@@ -524,7 +547,7 @@ will be able to upload packages with the same name.</p>
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.09.05 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.09.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
