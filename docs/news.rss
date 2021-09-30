@@ -4,8 +4,17 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Sun, 12 Sep 2021 23:45:45 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 30 Sep 2021 20:35:38 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2021-09-30: defaults channel is now dropped when building conda-forge packages</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;You can get the previous behaviour by using the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;channel_sources&lt;/span&gt;&lt;/code&gt; setting in
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge.yml&lt;/span&gt;&lt;/code&gt;&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Thu, 30 Sep 2021 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2020-05-22: conda-forge is now citable!</title>
       <link>https://conda-forge.org/docs/user/announcements.html</link>
