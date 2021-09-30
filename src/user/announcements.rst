@@ -8,6 +8,11 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2021
 ----
 
+:2021-09-30: ``defaults`` channel is now dropped when building conda-forge packages
+
+    You can get the previous behaviour by using the ``channel_sources`` setting in
+    ``conda-forge.yml``
+
 :2020-05-22: ``conda-forge`` is now citable!
 
     You can now cite ``conda-forge`` using our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_!
