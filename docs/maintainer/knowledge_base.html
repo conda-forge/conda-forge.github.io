@@ -489,6 +489,7 @@ only get the mpi build if explicitly requested. We use a higher build number for
   <span class="c1"># `pkg * mpi_*` for any mpi</span>
   <span class="c1"># `pkg * nompi_*` for no mpi</span>
 
+  <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">mpi</span> <span class="o">!=</span> <span class="s1">&#39;nompi&#39;</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">mpi_prefix</span> <span class="o">=</span> <span class="s2">&quot;mpi_&quot;</span> <span class="o">+</span> <span class="n">mpi</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">mpi_prefix</span> <span class="o">=</span> <span class="s2">&quot;nompi&quot;</span> <span class="o">%</span><span class="p">}</span>
