@@ -8,6 +8,12 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2021
 ----
 
+:2021-10-04: python 3.6 is now dropped when building conda-forge packages
+
+    python 3.6 is end-of-life in December 2021 and we are dropping support for it
+    early to avoid having to rebuild packages as part of python 3.10 migration
+    as that would save lots of CI resources.
+
 :2021-09-30: ``defaults`` channel is now dropped when building conda-forge packages
 
     You can get the previous behaviour by using the ``channel_sources`` setting in

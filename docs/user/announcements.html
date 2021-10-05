@@ -73,13 +73,19 @@
 <section id="id1">
 <h2>2021<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <dl class="field-list">
-<dt class="field-odd">2021-09-30</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">defaults</span></code> channel is now dropped when building conda-forge packages</p>
+<dt class="field-odd">2021-10-04</dt>
+<dd class="field-odd"><p>python 3.6 is now dropped when building conda-forge packages</p>
+<p>python 3.6 is end-of-life in December 2021 and we are dropping support for it
+early to avoid having to rebuild packages as part of python 3.10 migration
+as that would save lots of CI resources.</p>
+</dd>
+<dt class="field-even">2021-09-30</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">defaults</span></code> channel is now dropped when building conda-forge packages</p>
 <p>You can get the previous behaviour by using the <code class="docutils literal notranslate"><span class="pre">channel_sources</span></code> setting in
 <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code></p>
 </dd>
-<dt class="field-even">2020-05-22</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> is now citable!</p>
+<dt class="field-odd">2020-05-22</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> is now citable!</p>
 <p>You can now cite <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> using our <a class="reference external" href="https://doi.org/10.5281/zenodo.4774216">Zenodo entry</a>!
 This entry credits the entire <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> community for its hard work in building our
 amazing ecosystem.</p>
