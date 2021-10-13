@@ -137,3 +137,12 @@ MacStadium:
      - https://uploads-ssl.webflow.com/5ac3c046c82724970fc60918/5c019d917bba312af7553b49_MacStadium-developerlogo.png
    contribution type:
      - infrastructure
+
+Oracle:
+  Description: Provides support for aarch64 builds.
+  Logo URL:
+    - img/Oracle_Cloud_rgb.png
+  Site URL:
+    - https://www.oracle.com/cloud/
+  contribution type:
+    - infrastructure
