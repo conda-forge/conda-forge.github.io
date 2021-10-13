@@ -8,6 +8,11 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2021
 ----
 
+:2021-10-13: GCC 10 and clang 12 as default compilers for Linux and macOS
+
+    These compilers will become the default for building packages in conda-forge.
+    One notable change in GCC 10 is that the -fopenmp flag in FFLAGS is dropped.
+
 :2021-10-04: python 3.6 is now dropped when building conda-forge packages
 
     python 3.6 is end-of-life in December 2021 and we are dropping support for it
