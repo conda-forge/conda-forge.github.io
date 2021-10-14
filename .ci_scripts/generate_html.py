@@ -16,7 +16,7 @@ random.shuffle(keys)
 data = {k: data[k] for k in keys}
 
 for k in data:
-    if "Logo URL" in data[k]:
+    if "Logo URL" in data[k] and data[k]["Logo URL"][0].startswith("http"):
         for i in range(5):
             try:
                 # extra header is needed for lab49
