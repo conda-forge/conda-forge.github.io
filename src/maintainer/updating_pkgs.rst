@@ -187,6 +187,7 @@ Note that for long build logs one can do
 
 to save it in a text file for future inspection.
 
+Once built, you can find the finished package in the ``build_artifacts`` directory in your feedstock.  
 
 .. _maint_fix_broken_packages:
 
