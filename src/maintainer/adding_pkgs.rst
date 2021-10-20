@@ -648,6 +648,8 @@ invoke the command as follows.
     $ cd staged-recipes
     $ CONFIG=linux64 ./.scripts/run_docker_build.sh
 
+Once built, you can find the finished package under ``staged-recipes/build_artifacts``.  
+
 
 About
 -----
