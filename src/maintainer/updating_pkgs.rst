@@ -189,6 +189,8 @@ to save it in a text file for future inspection.
 
 Downloading prebuilt packages
 ----------------
+A neat feature that feedstocks have is the ability to `upload packages to the CI provider for testing <https://conda-forge.org/docs/maintainer/conda_forge_yml.html?highlight=store_build_artifacts#azure>`_.
+This is useful when trying out packages built in a PR. But you first need to download these prebuilt packages.
 
 To download prebuilt packages follow the steps below:
 
