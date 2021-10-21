@@ -373,7 +373,7 @@ with our compilers. These ``sysroot`` files are available in the ``sysroot_linux
 These packages have version numbers that match the version of ``glibc`` they package. These
 versions are ``2.12`` for CentOS 6 and ``2.17`` for CentOS 7.
 
-For ``gcc``/``gxx``/``gfortran`` versions prior to ``8.4.0`` on ``ppc64le and ``7.5.0``
+For ``gcc``/``gxx``/``gfortran`` versions prior to ``8.4.0`` on ``ppc64le`` and ``7.5.0``
 on ``aarch64``/``x86_64``, we had been building our own versions of ``glibc``. This practice
 is now deprecated in favor of the CentOS-based ``sysroots``. Additionally, as of the same
 compiler versions above, we have removed the ``cos*`` part of the ``sysroot`` path. The new
