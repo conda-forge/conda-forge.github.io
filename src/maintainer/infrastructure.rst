@@ -52,7 +52,7 @@ Documentation
 
 The documentation lives in `conda-forge/conda-forge.github.io <https://github.com/conda-forge/conda-forge.github.io/>`__, and is automatically deployed to our `online version <https://conda-forge.org/docs/>`__.
 
-The documentation is built with ``Sphinx`` and the sources files are located in the `src <https://github.com/conda-forge/conda-forge.github.io/tree/master/src>`__ directory of the repository.
+The documentation is built with ``Sphinx`` and the sources files are located in the `src <https://github.com/conda-forge/conda-forge.github.io/tree/main/src>`__ directory of the repository.
 
 If you found any typo error, unclear explanations or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to :ref:`improve_docs`.
 
@@ -288,6 +288,27 @@ GitHub Actions
 We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on
 GitHub Actions.
 
+Automerge
+.........
+
+The automerge service uses the GitHub action in this `repo <https://github.com/conda-forge/automerge-action>`_. This action runs out of a 
+Docker `container <https://hub.docker.com/repository/docker/condaforge/automerge-action>`_ on the ``prod`` tag. See the 
+repo `README.md <https://github.com/conda-forge/automerge-action#readme>`_ for more details. PRs are automatically merged if they satisfy either 
+of the two following sets of conditions:
+
+1. are from the ``regro-cf-autotick-bot``, have ``[bot-automerge]`` in the title, all statuses are passing, and the feedstock allows automerge
+2. have the ``automerge`` label and all statuses are passing. 
+
+For PRs from the ``regro-cf-autotick-bot``, it can be useful to remove the ``[bot-automerge]`` slug from the PR title if you are making 
+edits to the PR.
+
+Rerendering
+...........
+
+The rerendering service is triggered by the Heroku app. It uses the GitHub action in this `repo <https://github.com/conda-forge/webservices-dispatch-action>`_. 
+This action runs out of a Docker `container <https://hub.docker.com/repository/docker/condaforge/webservices-dispatch-action>`_ on the ``prod`` tag. See the 
+repo `README.md <https://github.com/conda-forge/webservices-dispatch-action#readme>`_ for more details. 
+
 
 Skipping CI builds
 ------------------
@@ -352,7 +373,7 @@ with our compilers. These ``sysroot`` files are available in the ``sysroot_linux
 These packages have version numbers that match the version of ``glibc`` they package. These
 versions are ``2.12`` for CentOS 6 and ``2.17`` for CentOS 7.
 
-For ``gcc``/``gxx``/``gfortran`` versions prior to ``8.4.0`` on ``ppc64le and ``7.5.0``
+For ``gcc``/``gxx``/``gfortran`` versions prior to ``8.4.0`` on ``ppc64le`` and ``7.5.0``
 on ``aarch64``/``x86_64``, we had been building our own versions of ``glibc``. This practice
 is now deprecated in favor of the CentOS-based ``sysroots``. Additionally, as of the same
 compiler versions above, we have removed the ``cos*`` part of the ``sysroot`` path. The new

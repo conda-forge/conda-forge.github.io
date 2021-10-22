@@ -8,6 +8,22 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2021
 ----
 
+:2021-10-13: GCC 10 and clang 12 as default compilers for Linux and macOS
+
+    These compilers will become the default for building packages in conda-forge.
+    One notable change in GCC 10 is that the -fopenmp flag in FFLAGS is dropped.
+
+:2021-10-04: python 3.6 is now dropped when building conda-forge packages
+
+    python 3.6 is end-of-life in December 2021 and we are dropping support for it
+    early to avoid having to rebuild packages as part of python 3.10 migration
+    as that would save lots of CI resources.
+
+:2021-09-30: ``defaults`` channel is now dropped when building conda-forge packages
+
+    You can get the previous behaviour by using the ``channel_sources`` setting in
+    ``conda-forge.yml``
+
 :2020-05-22: ``conda-forge`` is now citable!
 
     You can now cite ``conda-forge`` using our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_!
@@ -133,7 +149,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
 :2020-07-15: ``CFEP-18:`` Removing static libraries from the main build
 
-    With `CFEP-18 <https://github.com/conda-forge/cfep/blob/master/cfep-18.md>`_
+    With `CFEP-18 <https://github.com/conda-forge/cfep/blob/main/cfep-18.md>`_
     we now have a policy on how to deal with static packages. The most important
     change here is that we will be removing static libraries from the main packages
     and moving them to ``-static`` suffixed packages. ``-static`` packages will not
