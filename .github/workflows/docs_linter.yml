@@ -1,0 +1,29 @@
+name: docs_linter
+
+on:
+  pull_request_target:
+    paths:
+      - 'docs/**'
+
+jobs:
+  comment:
+    name: Notify user
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Comment on PR
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Hi! We appreciate your contribution to the conda-forge docs.' +
+                    '\nUnfortunately, the edit was made in the **_docs_** folder and not in the **_src_** folder. ' +
+                    'Please only edit the **_src_** folder.' +
+                    '\nFor more information on contributing to conda-forge, visit the ' +
+                    '[conda-forge docs](https://conda-forge.org/docs/user/contributing.html#improve-the-documentation).' +
+                    '\nIn case of any questions, please get in touch with us through our public [Gitter channel](https://gitter.im/conda-forge/conda-forge.github.io).'
+            })
