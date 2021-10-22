@@ -20,9 +20,10 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Hi, thanks for improving the conda-forge docs. ' +
-                    'Unfortunately, the edit was made in the _docs_ folder and not in the _src_ folder. ' +
-                    '\nPlease only edit the _src_ folder.' +
+              body: 'Hi! We appreciate your contribution to the conda-forge docs.' +
+                    'Unfortunately, the edit was made in the **_docs_** folder and not in the **_src_** folder. ' +
+                    '\nPlease only edit the **_src_** folder.' +
                     '\nFor more information, visit the ' +
-                    '[conda-forge docs](https://conda-forge.org/docs/user/contributing.html#improve-the-documentation).'
+                    '[conda-forge docs](https://conda-forge.org/docs/user/contributing.html#improve-the-documentation).' +
+                    '\nIf you have any questions, please get in touch with us through our public [Gitter channel](https://gitter.im/conda-forge/conda-forge.github.io).'
             })
