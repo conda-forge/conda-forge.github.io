@@ -22,7 +22,7 @@ jobs:
               repo: context.repo.repo,
               body: 'Hi, thanks for improving the conda-forge docs. ' +
                     'Unfortunately, the edit was made in the _docs_ folder and not in the _src_ folder. ' +
-                    '\nPlease only edit the _src_ folder as the HTML is automatically generated after merging. ' +
-                    'For more information, visit the ' +
+                    '\nPlease only edit the _src_ folder.' +
+                    '\nFor more information, visit the ' +
                     '[conda-forge docs](https://conda-forge.org/docs/user/contributing.html#improve-the-documentation).'
             })
