@@ -530,6 +530,7 @@ Here is an example build section:
     # `pkg * mpi_*` for any mpi
     # `pkg * nompi_*` for no mpi
 
+    {% if mpi != 'nompi' %}
     {% set mpi_prefix = "mpi_" + mpi %}
     {% else %}
     {% set mpi_prefix = "nompi" %}
