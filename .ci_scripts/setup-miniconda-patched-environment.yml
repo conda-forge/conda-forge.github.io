@@ -5,6 +5,7 @@ dependencies:
   - python=3
   - conda-smithy
   - sphinx<3
+  - docutils<0.18
   - cloud_sptheme
   - sphinxcontrib-fulltoc
   - make
