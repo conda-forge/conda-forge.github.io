@@ -237,7 +237,7 @@ A PR will be automatically created and a maintainer or a member of the ``core`` 
 
    This PR is designed to skip building the package. Please do **not** modify it or adjust the commit message.
 
-For example see `this <https://github.com/conda-forge/cudnn-feedstock/issues/20>`__ issue.
+For an example see `this <https://github.com/conda-forge/cudnn-feedstock/issues/20>`__ issue.
 
 
 Maintaining several versions
