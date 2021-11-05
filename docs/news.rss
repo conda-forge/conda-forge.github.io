@@ -4,8 +4,18 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Thu, 28 Oct 2021 18:56:59 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 05 Nov 2021 13:02:28 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2021-10-20: conda-forge now uses mambabuild as default</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;conda-forge now uses &lt;a class="reference external" href="https://github.com/mamba-org/mamba"&gt;mamba&lt;/a&gt; during the build process (via &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda&lt;/span&gt; &lt;span class="pre"&gt;mambabuild&lt;/span&gt;&lt;/code&gt; of the &lt;a class="reference external" href="https://github.com/mamba-org/boa"&gt;boa&lt;/a&gt; project). This was
+changed in &lt;a class="reference external" href="https://github.com/conda-forge/conda-smithy/blob/main/CHANGELOG.rst#v3130"&gt;conda-smithy 3.13.0&lt;/a&gt;
+and should automatically apply when re-rendering.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Wed, 20 Oct 2021 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2021-10-13: GCC 10 and clang 12 as default compilers for Linux and macOS</title>
       <link>https://conda-forge.org/docs/user/announcements.html</link>
