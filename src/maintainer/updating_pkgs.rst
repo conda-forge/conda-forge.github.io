@@ -230,14 +230,15 @@ an issue in the feedstock repository with the following title:
 ``@conda-forge-admin, please add user @username``
 
 where ``username`` is the username of the new maintainer to be added.
-A PR will be automatically created and a maintainer or a member of the ``core`` can then merge this PR to add the user.
+A PR will be automatically created and a maintainer or a member of the ``core`` team, in case no maintainer is active anymore, can then merge this PR to add the user. 
+To contact core, ping them by mentioning @conda-forge/core in a comment or, if you haven't heard back in a while or are new to conda-forge, contact them through the community `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`__.
 
 .. note::
 
 
    This PR is designed to skip building the package. Please do **not** modify it or adjust the commit message.
 
-For example see `this <https://github.com/conda-forge/cudnn-feedstock/issues/20>`__ issue.
+For an example see `this <https://github.com/conda-forge/cudnn-feedstock/issues/20>`__ issue.
 
 
 Maintaining several versions
