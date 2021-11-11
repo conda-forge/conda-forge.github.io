@@ -45,6 +45,7 @@ Top-level fields
 * :ref:`skip_render`
 * :ref:`templates`
 * :ref:`test_on_native_only`
+* :ref:`test`
 * :ref:`travis`
 * :ref:`upload_on_branch`
 * :ref:`win`
@@ -430,6 +431,26 @@ This is used for disabling testing for cross compiling. Default is ``false``
 .. code-block:: yaml
 
     test_on_native_only: True
+
+.. note::
+
+  This has been deprecated in favor of the :ref:`test` top-level field. It is now mapped to ``test: native_and_emulated``.
+
+.. _test:
+
+test
+-------------------
+This is used to configure on which platforms a recipe is tested. Default is ``all``.
+
+.. code-block:: yaml
+
+    test: native_and_emulated
+Will do testing only if the platform is native or if there is an emulator.
+
+.. code-block:: yaml
+
+    test: native
+Will do testing only if the platform is native.
 
 .. _travis:
 

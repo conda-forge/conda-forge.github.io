@@ -107,6 +107,7 @@ upload packages to anaconda.org, which can be useful for testing. For example:</
 <li><p><a class="reference internal" href="#skip-render"><span class="std std-ref">skip_render</span></a></p></li>
 <li><p><a class="reference internal" href="#templates"><span class="std std-ref">templates</span></a></p></li>
 <li><p><a class="reference internal" href="#test-on-native-only"><span class="std std-ref">test_on_native_only</span></a></p></li>
+<li><p><a class="reference internal" href="#test"><span class="std std-ref">test</span></a></p></li>
 <li><p><a class="reference internal" href="#travis"><span class="std std-ref">travis</span></a></p></li>
 <li><p><a class="reference internal" href="#upload-on-branch"><span class="std std-ref">upload_on_branch</span></a></p></li>
 <li><p><a class="reference internal" href="#win"><span class="std std-ref">win</span></a></p></li>
@@ -411,9 +412,25 @@ You shouldn’t need it.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_on_native_only</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This has been deprecated in favor of the <a class="reference internal" href="#test"><span class="std std-ref">test</span></a> top-level field. It is now mapped to <code class="docutils literal notranslate"><span class="pre">test:</span> <span class="pre">native_and_emulated</span></code>.</p>
+</div>
+</section>
+<section id="test">
+<span id="id24"></span><h3>test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h3>
+<p>This is used to configure on which platforms a recipe is tested. Default is <code class="docutils literal notranslate"><span class="pre">all</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">native_and_emulated</span>
+</pre></div>
+</div>
+<p>Will do testing only if the platform is native or if there is an emulator.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">native</span>
+</pre></div>
+</div>
+<p>Will do testing only if the platform is native.</p>
 </section>
 <section id="travis">
-<span id="id24"></span><h3>travis<a class="headerlink" href="#travis" title="Permalink to this headline">¶</a></h3>
+<span id="id25"></span><h3>travis<a class="headerlink" href="#travis" title="Permalink to this headline">¶</a></h3>
 <p>The top-level <code class="docutils literal notranslate"><span class="pre">travis</span></code> key specifies configurations for the Travis
 CI service.  This is usually <strong>read-only</strong> and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as needed.  It has a single
@@ -425,7 +442,7 @@ modified.  Tools like conda-smithy may modify this, as needed.  It has a single
 </div>
 </section>
 <section id="upload-on-branch">
-<span id="id25"></span><h3>upload_on_branch<a class="headerlink" href="#upload-on-branch" title="Permalink to this headline">¶</a></h3>
+<span id="id26"></span><h3>upload_on_branch<a class="headerlink" href="#upload-on-branch" title="Permalink to this headline">¶</a></h3>
 <p>This parameter restricts uploading access on work from certain branches of the
 same repo. Only the branch listed in <code class="docutils literal notranslate"><span class="pre">upload_on_branch</span></code> will trigger uploading
 of packages to the target channel. The default is to skip this check if the key
@@ -436,7 +453,7 @@ master branch:</p>
 </div>
 </section>
 <section id="win">
-<span id="id26"></span><h3>win<a class="headerlink" href="#win" title="Permalink to this headline">¶</a></h3>
+<span id="id27"></span><h3>win<a class="headerlink" href="#win" title="Permalink to this headline">¶</a></h3>
 <p>The Windows-specific configuration options. This is largely an internal setting.
 Currently only:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">win</span><span class="p">:</span>
@@ -490,6 +507,7 @@ Currently only:</p>
 <li class="toctree-l4"><a class="reference internal" href="#skip-render">skip_render</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#templates">templates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#test-on-native-only">test_on_native_only</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test">test</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#travis">travis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#upload-on-branch">upload_on_branch</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#win">win</a></li>

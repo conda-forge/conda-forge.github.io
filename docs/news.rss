@@ -4,7 +4,7 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Thu, 11 Nov 2021 16:44:30 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 11 Nov 2021 17:42:49 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
     <item>
       <title>2021-10-20: conda-forge now uses mambabuild as default</title>
