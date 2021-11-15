@@ -176,7 +176,7 @@ FAQ
   .. note::
 
     Due to a GitHub limitation, this is disabled for new members.
-    In that case, we suggest asking your question in our `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`_ channel instead.
+    In that case, you can ping core using the bot command "`please ping team <https://gitter.im/conda-forge/conda-forge.github.io>`_".
 
   In case your issue is longer or you would like to contact us privately, feel free to reach out to us via the options listed `here <https://conda-forge.org/docs/orga/governance.html#teams-roles>`_.
 
