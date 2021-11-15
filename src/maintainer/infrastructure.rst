@@ -128,7 +128,7 @@ Entering this command in the PR of a feedstock or staged-recipes will have the a
 associated with the repo. This command can be useful for people who are not yet members of conda-forge and
 so cannot @-mention the ``staged-recipes`` team for PR reviews.
 
-@conda-forge-admin, please ping conda-forge/core
+@conda-forge-admin, please ping conda-forge/<team>
 ------------------------------------
 
 Entering this command in the PR of a feedstock or staged-recipes will have the admin bot @-mention `conda-forge/core <https://conda-forge.org/docs/orga/governance.html#teams-roles>`_.
