@@ -5,9 +5,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-    <title>Tips &amp; tricks &#8212; conda-forge 2021.11.11 documentation</title>
+    <meta charset="utf-8" />
+    <title>Tips &amp; tricks &#8212; conda-forge 2021.11.15 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
@@ -55,7 +54,7 @@
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.11.11 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.11.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li> 
       </ul>
@@ -68,9 +67,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="tips-tricks">
+  <div class="section" id="tips-tricks">
 <h1>Tips &amp; tricks<a class="headerlink" href="#tips-tricks" title="Permalink to this headline">¶</a></h1>
-<section id="using-multiple-channels">
+<div class="section" id="using-multiple-channels">
 <span id="multiple-channels"></span><h2>Using multiple channels<a class="headerlink" href="#using-multiple-channels" title="Permalink to this headline">¶</a></h2>
 <p>It is quite common to install a package from conda-forge and,
 when trying to use it,
@@ -84,7 +83,7 @@ see an error like (OS X example):</p>
 or any other package in the error,
 is not present or the package is missing altogether.</p>
 <p>You can confirm this by issuing the command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> and searching for the package in question.</p>
-<section id="why-does-that-happen">
+<div class="section" id="why-does-that-happen">
 <h3>Why does that happen?<a class="headerlink" href="#why-does-that-happen" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and <code class="docutils literal notranslate"><span class="pre">defaults</span></code> are not 100% compatible.
 In the example above it is known that <code class="docutils literal notranslate"><span class="pre">defaults</span></code> uses <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">54.*</span></code> while <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> relies on <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">56.*</span></code>,
@@ -93,8 +92,8 @@ that mismatch can lead to errors when the install environment is mixing packages
 <p class="admonition-title">Note</p>
 <p>All of conda-forge software pinning can be found at: <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml</a></p>
 </div>
-</section>
-<section id="how-to-fix-it">
+</div>
+<div class="section" id="how-to-fix-it">
 <h3>How to fix it?<a class="headerlink" href="#how-to-fix-it" title="Permalink to this headline">¶</a></h3>
 <p>Newer <code class="docutils literal notranslate"><span class="pre">conda</span></code> versions (&gt;=4.6) introduced a strict channel priority feature.
 Type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">config</span> <span class="pre">--describe</span> <span class="pre">channel_priority</span></code> for more information.</p>
@@ -124,9 +123,9 @@ instead, we removed everything that is not built in <code class="docutils litera
 that is probably because you removed <code class="docutils literal notranslate"><span class="pre">defaults</span></code>,
 just re-add it and activate <code class="docutils literal notranslate"><span class="pre">strict</span></code> for a smooth and stable experience when installing packages.</p>
 </div>
-</section>
-</section>
-<section id="using-external-message-passing-interface-mpi-libraries">
+</div>
+</div>
+<div class="section" id="using-external-message-passing-interface-mpi-libraries">
 <span id="id1"></span><h2>Using External Message Passing Interface (MPI) Libraries<a class="headerlink" href="#using-external-message-passing-interface-mpi-libraries" title="Permalink to this headline">¶</a></h2>
 <p>On some high-performance computing (HPC) systems, users are expected to use the
 MPI binaries that are available on the system as opposed to those built by <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.
@@ -152,8 +151,8 @@ package that depends on MPI should find the local copy of <code class="docutils 
 We have not currently implemented this procedure with <code class="docutils literal notranslate"><span class="pre">openmpi</span></code>, but can do so at a later date
 as ABI compatibility allows.</p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
           </div>
@@ -253,7 +252,7 @@ as ABI compatibility allows.</p>
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.11.11 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.11.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li> 
       </ul>

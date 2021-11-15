@@ -5,9 +5,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-    <title>2017-11-16 compiler meeting notes &#8212; conda-forge 2021.11.11 documentation</title>
+    <meta charset="utf-8" />
+    <title>2017-11-16 compiler meeting notes &#8212; conda-forge 2021.11.15 documentation</title>
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
@@ -55,7 +54,7 @@
         <li class="right" >
           <a href="2018-02-20.html" title="2018-02-20 meeting notes"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">conda-forge 2021.11.11 documentation</a> &#187;</li>
+    <li><a href="../../index.html">conda-forge 2021.11.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li> 
@@ -69,11 +68,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="compiler-meeting-notes">
+  <div class="section" id="compiler-meeting-notes">
 <h1>2017-11-16 compiler meeting notes<a class="headerlink" href="#compiler-meeting-notes" title="Permalink to this headline">¶</a></h1>
 <p>Scheduled time: 9 AM central.  Meeting link: https://anaconda.webex.com/anaconda-en/j.php?MTID=m11b5ddad66325da22bbe58d7d1c02809</p>
-</section>
-<section id="adopting-anaconda-compilers">
+</div>
+<div class="section" id="adopting-anaconda-compilers">
 <h1>Adopting Anaconda compilers<a class="headerlink" href="#adopting-anaconda-compilers" title="Permalink to this headline">¶</a></h1>
 <ul>
 <li><p>Linux: gcc 7.2</p>
@@ -102,11 +101,11 @@
 </li>
 </ul>
 <p>import os</p>
-<p>print(”Hello World”)</p>
+<p>print(“Hello World”)</p>
 </li>
 </ul>
-</section>
-<section id="compiler-flag-unification">
+</div>
+<div class="section" id="compiler-flag-unification">
 <h1>Compiler flag unification<a class="headerlink" href="#compiler-flag-unification" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>GCC</p>
@@ -159,8 +158,8 @@
 <p>Overall: everyone receptive to new compilers.  Mike to provide way of keeping host and build prefix separate, even when not cross compiling.  This would avoid need for things like “always_include_files” and would facilitate conda-forge keeping their llvmdev recipe as is (for cling usage).</p>
 <p>Filipe: this is really little more than a vendor change.  We already depend on other vendors for compilers (RH for devtoolset2; apple for existing clang), we’re only switching to a different vendor, not fundamentally changing what we do.</p>
 <p>Need to maintain llvm with cling patches, but this will not be the default compiler.</p>
-</section>
-<section id="conda-build-3-strategy-for-moving">
+</div>
+<div class="section" id="conda-build-3-strategy-for-moving">
 <h1>Conda-build 3: strategy for moving<a class="headerlink" href="#conda-build-3-strategy-for-moving" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>install and use with c-b-a (no cb3 matrix)</p>
@@ -196,22 +195,22 @@
 </ul>
 </li>
 </ul>
-</section>
-<section id="fortran-support-on-windows">
+</div>
+<div class="section" id="fortran-support-on-windows">
 <h1>Fortran support on Windows<a class="headerlink" href="#fortran-support-on-windows" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>gfortran (msys2) / Flang</p></li>
 <li><p>Timeline for adding either</p></li>
 <li><p>Mike asked that whatever is done is done with community approval, for the sake of maintaining a high quality user experience.</p></li>
 </ul>
-</section>
-<section id="openmp-behavior">
+</div>
+<div class="section" id="openmp-behavior">
 <h1>OpenMP behavior<a class="headerlink" href="#openmp-behavior" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>Currently, needs extra package on mac, but is included on Linux (not active in flags, though)</p></li>
 <li><p>What is desirable default behavior?</p></li>
 </ul>
-</section>
+</div>
 
 
           </div>
@@ -424,7 +423,7 @@
         <li class="right" >
           <a href="2018-02-20.html" title="2018-02-20 meeting notes"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">conda-forge 2021.11.11 documentation</a> &#187;</li>
+    <li><a href="../../index.html">conda-forge 2021.11.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li> 

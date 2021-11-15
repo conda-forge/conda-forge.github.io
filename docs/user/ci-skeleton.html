@@ -5,9 +5,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-    <title>Using conda-smithy to manage your CI &#8212; conda-forge 2021.11.11 documentation</title>
+    <meta charset="utf-8" />
+    <title>Using conda-smithy to manage your CI &#8212; conda-forge 2021.11.15 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
@@ -55,7 +54,7 @@
         <li class="right" >
           <a href="tipsandtricks.html" title="Tips &amp; tricks"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.11.11 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.11.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li> 
       </ul>
@@ -68,7 +67,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="using-conda-smithy-to-manage-your-ci">
+  <div class="section" id="using-conda-smithy-to-manage-your-ci">
 <h1>Using conda-smithy to manage your CI<a class="headerlink" href="#using-conda-smithy-to-manage-your-ci" title="Permalink to this headline">¶</a></h1>
 <p>Conda-forge, and specifically <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> contains a lot of
 tools for building and deploying continuous integration (CI)
@@ -79,7 +78,7 @@ you don’t have to write or manage your own CI configurations?</p>
 command <code class="docutils literal notranslate"><span class="pre">ci-skeleton</span></code> lets you hook into well-tested and robust
 CI infrastructure. Using the conda-smithy <code class="docutils literal notranslate"><span class="pre">rerender</span></code> command, you
 can then keep your repository up-to-date with any needed changes.</p>
-<section id="getting-started">
+<div class="section" id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">ci-skeleton</span></code> command helps you get started by preparing a repository
 to have the proper structure such that the <code class="docutils literal notranslate"><span class="pre">rerender</span></code> command will correctly
@@ -120,7 +119,7 @@ to your repository.</p>
 <p>Also the steps that the <code class="docutils literal notranslate"><span class="pre">ci-skeleton</span></code> spits out are very important
 for wiring everything up properly. Luckily, they are easy to perform!
 Let’s go through them one-by-one!</p>
-<section id="fill-out-recipe-meta-yaml">
+<div class="section" id="fill-out-recipe-meta-yaml">
 <h3>1. Fill out recipe/meta.yaml<a class="headerlink" href="#fill-out-recipe-meta-yaml" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">ci-skeleton</span></code> command emits an example <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file for
 building <code class="docutils literal notranslate"><span class="pre">myproj</span></code>, hence the “skeleton” part of the name. If you
@@ -212,23 +211,23 @@ important to run the full test suite here.</p>
 because in the default case, packages created here will never be uploaded
 to a channel. Feel free to delete or ignore these fields.</p>
 </div>
-</section>
-<section id="commit-the-changes">
+</div>
+<div class="section" id="commit-the-changes">
 <h3>2. Commit the changes<a class="headerlink" href="#commit-the-changes" title="Permalink to this headline">¶</a></h3>
 <p>Once you have written your recipe, it is important to save the modifications!
 Just run the following commands:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/repo $ git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;ran conda smithy skeleton&quot;</span>
 </pre></div>
 </div>
-</section>
-<section id="register-with-the-ci-providers">
+</div>
+<div class="section" id="register-with-the-ci-providers">
 <h3>3. Register with the CI providers<a class="headerlink" href="#register-with-the-ci-providers" title="Permalink to this headline">¶</a></h3>
 <p>This is important!  If you haven’t done so already, you’ll need to go
 to the CI providers (Travis, Circle, Azure, etc.) and enable CI
 to for your repository. Each CI provider that you use will have
 documentation on how to get set up with them.</p>
-</section>
-<section id="rerender">
+</div>
+<div class="section" id="rerender">
 <h3>4. Rerender<a class="headerlink" href="#rerender" title="Permalink to this headline">¶</a></h3>
 <p>Last, but certainly not least, we need to generate the CI configuration
 scripts! This is based on the content of the recipe as well as the
@@ -241,9 +240,9 @@ for a complete list of CI providers.)</p>
 </div>
 <p>Pushing those changes up to the repo should now give be building and testing
 your package on CI!</p>
-</section>
-</section>
-<section id="keeping-up-to-date">
+</div>
+</div>
+<div class="section" id="keeping-up-to-date">
 <h2>Keeping Up-to-date<a class="headerlink" href="#keeping-up-to-date" title="Permalink to this headline">¶</a></h2>
 <p>A major advantage of using <code class="docutils literal notranslate"><span class="pre">ci-skeleton</span></code> is that once it has been
 setup, it is very easy to keep your CI system up-to-date. If you
@@ -256,8 +255,8 @@ You just need to repeat step 4, above:</p>
 </div>
 <p>This will generate and replace the CI configuration files for the
 current time and state of the recipe.  It is just that easy!</p>
-</section>
-</section>
+</div>
+</div>
 
 
           </div>
@@ -359,7 +358,7 @@ current time and state of the recipe.  It is just that easy!</p>
         <li class="right" >
           <a href="tipsandtricks.html" title="Tips &amp; tricks"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.11.11 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.11.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li> 
       </ul>

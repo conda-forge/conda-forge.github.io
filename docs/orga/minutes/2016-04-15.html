@@ -5,9 +5,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-    <title>2016-04-15 &#8212; conda-forge 2021.11.11 documentation</title>
+    <meta charset="utf-8" />
+    <title>2016-04-15 &#8212; conda-forge 2021.11.15 documentation</title>
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
@@ -55,7 +54,7 @@
         <li class="right" >
           <a href="2016-04-22.html" title="2016-04-22 Exceptional meeting regarding VC pinning mechanism"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">conda-forge 2021.11.11 documentation</a> &#187;</li>
+    <li><a href="../../index.html">conda-forge 2021.11.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li> 
@@ -69,14 +68,14 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="id1">
+  <div class="section" id="id1">
 <h1>2016-04-15<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<section id="how-to-manage-agendas-meetings">
+<div class="section" id="how-to-manage-agendas-meetings">
 <h2>How to manage agendas &amp; meetings?<a class="headerlink" href="#how-to-manage-agendas-meetings" title="Permalink to this headline">¶</a></h2>
 <p>use hackpad for agenda, repo for minutes</p>
 <p>Agenda hackpad: https://hackpad.com/conda-forge-meeting-notes-WZIa4PBQ6sz</p>
-</section>
-<section id="stats-on-conda-forge">
+</div>
+<div class="section" id="stats-on-conda-forge">
 <h2>Stats on conda-forge<a class="headerlink" href="#stats-on-conda-forge" title="Permalink to this headline">¶</a></h2>
 <p>google analytics says 500 unique visitors to conda-forge
 Packaging
@@ -91,23 +90,23 @@ $ find . -name &quot;meta.yaml&quot; | wc -l
     1126
 </pre></div>
 </div>
-</section>
-<section id="next-meeting">
+</div>
+<div class="section" id="next-meeting">
 <h2>Next meeting<a class="headerlink" href="#next-meeting" title="Permalink to this headline">¶</a></h2>
 <p>2016-04-29 14:00 UTC</p>
-</section>
-<section id="external-developers-to-github-com-continuum-repos">
+</div>
+<div class="section" id="external-developers-to-github-com-continuum-repos">
 <h2>External developers to github.com/continuum repos<a class="headerlink" href="#external-developers-to-github-com-continuum-repos" title="Permalink to this headline">¶</a></h2>
 <p>In particular, the heroku build pack. https://github.com/conda-forge/conda-forge-webservices is using neither the Continuum one, nor the one written by the Heroku product owner.</p>
 <p>No precedent for non Continuum contributors yet. We would love to have a canonical conda buildpack.</p>
-</section>
-<section id="centos5-vs-centos6">
+</div>
+<div class="section" id="centos5-vs-centos6">
 <h2>Centos5 vs Centos6<a class="headerlink" href="#centos5-vs-centos6" title="Permalink to this headline">¶</a></h2>
 <p>conda and conda-build are hopefully to be upgraded to understand the glibc version</p>
 <p>conda will be upgraded to provide analytics to anaconda.org on the glibc version of the requestor to feed information about the systems people are installing onto</p>
 <p>Suggested that one standardizes the syntax on the build commands, not the images that are used to build</p>
-</section>
-<section id="features-and-feedstocks">
+</div>
+<div class="section" id="features-and-feedstocks">
 <h2>Features and feedstocks<a class="headerlink" href="#features-and-feedstocks" title="Permalink to this headline">¶</a></h2>
 <p>figuring out how you select a library that implements a common features set</p>
 <ul class="simple">
@@ -117,14 +116,14 @@ $ find . -name &quot;meta.yaml&quot; | wc -l
 </ul>
 </li>
 </ul>
-</section>
-<section id="netcdf">
+</div>
+<div class="section" id="netcdf">
 <h2>NetCDF<a class="headerlink" href="#netcdf" title="Permalink to this headline">¶</a></h2>
 <p>Q: How should we manage multiple “features” within it (e.g. compiled with/without OpenDAP)</p>
 <p>If possible, build as much as possible, but only provide the sensible run-time dependencies. Adding further dependencies would enable more functionality.</p>
 <p>In practice, that is sometimes not possible (e.g. a required .so is missing), in which case, we will need to be able toggle different build “variants”. &#64;msarahan suggested that the conda features concept may not  be the best way of solving this.</p>
-</section>
-<section id="windows-vc-feature">
+</div>
+<div class="section" id="windows-vc-feature">
 <h2>Windows VC feature<a class="headerlink" href="#windows-vc-feature" title="Permalink to this headline">¶</a></h2>
 <p>There is no strong candidate for going forwards at this point. Suggestion is to investigate some more, and &#64;msarahan, &#64;jakirkham and &#64;pelson to reconvene on 2016-04-22 at 14:00 UTC (though previously advertised for the 21st) to discuss specifically this issue.</p>
 <ul class="simple">
@@ -132,15 +131,15 @@ $ find . -name &quot;meta.yaml&quot; | wc -l
 <li><p>if you install a package that tracks the vc9 feature and one that tracks the vc10 feature and both get installed, conda will fall over and forget how to resolve dependencies and both will get installed?</p></li>
 <li><p>vc## features should never be added as a runtime requirement?</p></li>
 </ul>
-</section>
-<section id="documentation">
+</div>
+<div class="section" id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
 <p>add a folder in the conda-forge.github.io git repo</p>
 <p>A: John to add guidelines</p>
 <hr class="docutils" />
 <p>Next planned meeting is 2016-04-29 at 14:00 UTC</p>
-</section>
-</section>
+</div>
+</div>
 
 
           </div>
@@ -364,7 +363,7 @@ $ find . -name &quot;meta.yaml&quot; | wc -l
         <li class="right" >
           <a href="2016-04-22.html" title="2016-04-22 Exceptional meeting regarding VC pinning mechanism"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">conda-forge 2021.11.11 documentation</a> &#187;</li>
+    <li><a href="../../index.html">conda-forge 2021.11.15 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li> 
