@@ -176,7 +176,7 @@ FAQ
   .. note::
 
     Due to a GitHub limitation, this is disabled for new members.
-    In that case, you can ping core using the bot command "`@conda-forge-admin, please ping conda-forge/core <https://conda-forge.org/docs/maintainer/infrastructure.html#conda-forge-admin-please-ping-conda-forge-core>`_".
+    In that case, you can ping core using the bot command `@conda-forge-admin, please ping conda-forge/core <https://conda-forge.org/docs/maintainer/infrastructure.html#conda-forge-admin-please-ping-conda-forge-core>`_.
 
   In case your issue is longer or you would like to contact us privately, feel free to reach out to us via the options listed `here <https://conda-forge.org/docs/orga/governance.html#teams-roles>`_.
 
