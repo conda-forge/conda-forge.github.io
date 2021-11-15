@@ -170,11 +170,20 @@ FAQ
 
 :ref:`(Q) <mfaq_contact_core>` **How can I contact `conda-forge/core <https://conda-forge.org/docs/orga/governance.html?highlight=core#teams-roles>`_?**
 
-  When in an issue or PR, you can contact core by simply mentioning @conda-forge/core in a comment. 
+  When in an issue or PR, you can contact core by simply mentioning @conda-forge/core in a comment. If you don't receive an an answer after a couple of days, feel free to reach out to us via the public `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`_ channel.
   
   .. note::
   
     Due to a GitHub limitation, this is disabled for new members. 
     In that case, we suggest asking your question in our public `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`_ channel. 
 
+
+.. _mfaq_abandoned_feedstock:
+
+:ref:`(Q) <mfaq_abandoned_feedstock>` **A feedstock has been abandoned and I would like to take over maintenance?**
+
+  A  feedstock is generally considered abandoned when the maintainer isn't around anymore and doesn't merge new PRs or answer any issues. If that is the case, you can add yourself to the team by using the `@conda-forge-admin, please add user @username <https://conda-forge.org/docs/maintainer/infrastructure.html#conda-forge-admin-please-add-user-username>`_ command. If the maintainer doesn't merge it after roughly a week, :ref:`contact conda-forge/core<mfaq_contact_core>` to have it merged. Once added, you have full rights to the feedstock and can continue it's maintenance.
   
+  .. note::  
+  
+    Even if the maintainer isn't active anymore, we generally like to keep them in the list of maintainers and not remove them, in case they want to take up maintenance at a later date.
