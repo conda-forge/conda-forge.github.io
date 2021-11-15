@@ -164,3 +164,17 @@ FAQ
     build:
       script_env:
         - QT_QPA_PLATFORM=offscreen
+
+
+.. _mfaq_contact_core:
+
+:ref:`(Q) <mfaq_contact_core>` **How can I contact `conda-forge/core <https://conda-forge.org/docs/orga/governance.html?highlight=core#teams-roles>`_?**
+
+  When in an issue or PR, you can contact core by simply mentioning @conda-forge/core in a comment. 
+  
+  .. note::
+  
+    Due to a GitHub limitation, this is disabled for new members. 
+    In that case, we suggest asking your question in our public `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`_ channel. 
+
+  
