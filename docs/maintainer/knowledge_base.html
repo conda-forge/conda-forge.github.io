@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge Base &#8212; conda-forge 2021.11.15 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2021.11.16 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.11.15 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.11.16 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -109,6 +109,7 @@ Older CMake projects may require similar, but slightly different options.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">-DCMAKE_INSTALL_LIBDIR=lib</span></code> Libraries will land in $PREFIX/lib, sometimes projects install
 into lib64 or similar but on conda-forge we keep shared libraries in simply lib.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-DBUILD_SHARED_LIBS=ON</span></code> Instruct CMake to build shared libraries instead of static ones.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">${CMAKE_ARGS}</span></code> Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like <a class="reference external" href="https://conda-forge.org/docs/maintainer/knowledge_base.html#cuda-builds">CUDA builds</a>.</p></li>
 </ul>
 </div></blockquote>
 <p>Here are some basic commands for you to get started. These are dependent on your source
@@ -1469,7 +1470,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.11.15 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.11.16 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
