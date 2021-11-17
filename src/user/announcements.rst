@@ -8,9 +8,19 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2021
 ----
 
+:2021-11-17: ``cloud.drone.io`` no longer working
+
+    The ``cloud.drone.io`` service we use for ``aarch64`` builds is no longer accepting our API
+    requests for triggering builds. We have been in contact with them, but have been unable to
+    resolve the issue. Going forward, we will still be adding feedstocks to ``cloud.drone.io`` but
+    we have moved all ``aarch64`` builds to emulated builds on ``Azure``. Cross-compilers are
+    available as well for resource-intensive builds. Please rerender your feedstock as needed to
+    get the updated configuration.
+
 :2021-10-20: conda-forge now uses mambabuild as default
 
-    conda-forge now uses `mamba <https://github.com/mamba-org/mamba>`_ during the build process (via ``conda mambabuild`` of the `boa <https://github.com/mamba-org/boa>`_ project). This was 
+    conda-forge now uses `mamba <https://github.com/mamba-org/mamba>`_ during the build
+    process (via ``conda mambabuild`` of the `boa <https://github.com/mamba-org/boa>`_ project). This was
     changed in `conda-smithy 3.13.0 <https://github.com/conda-forge/conda-smithy/blob/main/CHANGELOG.rst#v3130>`_
     and should automatically apply when re-rendering.
 
