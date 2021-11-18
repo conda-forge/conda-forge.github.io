@@ -175,10 +175,20 @@ automatic version updates/migrations for feedstocks. The current options are</p>
 <div class="section" id="build-platform">
 <span id="id3"></span><h3>build_platform<a class="headerlink" href="#build-platform" title="Permalink to this headline">¶</a></h3>
 <p>This is a mapping from the build platform to the host platform of the package
-to be built. For eg: following builds a <code class="docutils literal notranslate"><span class="pre">osx-64</span></code> platform from <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>
+to be built. e.g. the following builds a <code class="docutils literal notranslate"><span class="pre">osx-64</span></code> package on the <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>
 build platform using cross-compiling.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build_platform</span><span class="p">:</span>
   <span class="nt">osx_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">linux_64</span>
+</pre></div>
+</div>
+<p>Leaving this field empty implicitly requests to build a package natively. i.e.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build_platform</span><span class="p">:</span>
+  <span class="nt">linux_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">linux_64</span>
+  <span class="nt">linux_ppc64le</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">linux_ppc64le</span>
+  <span class="nt">linux_aarch64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">linux_aarch64</span>
+  <span class="nt">osx_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">osx_64</span>
+  <span class="nt">osx_arm64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">osx_arm64</span>
+  <span class="nt">win_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">win_64</span>
 </pre></div>
 </div>
 </div>
@@ -339,6 +349,7 @@ arches:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">win</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">linux_aarch64</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">linux_ppc64le</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">osx_arm64</span></code></p></li>
 </ul>
 <p>The following CI services are available:</p>
 <ul class="simple">
@@ -364,6 +375,7 @@ provider entry is equivalent to the following:</p>
   <span class="nt">win</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
   <span class="nt">linux_ppc64le</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
   <span class="nt">linux_aarch64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+  <span class="nt">osx_arm64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
 </pre></div>
 </div>
 <p>To enable <code class="docutils literal notranslate"><span class="pre">linux_ppc64le</span></code> and <code class="docutils literal notranslate"><span class="pre">linux_aarch64</span></code> and the following:</p>
@@ -372,6 +384,9 @@ provider entry is equivalent to the following:</p>
   <span class="nt">linux_aarch64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
 </pre></div>
 </div>
+<p>If the <code class="docutils literal notranslate"><span class="pre">build_platform</span></code> for an arch is not available with the selected provider
+(either natively or with emulation), the build will be disabled; cross-compilation
+must be specified manually.</p>
 </div>
 <div class="section" id="recipe-dir">
 <span id="id19"></span><h3>recipe_dir<a class="headerlink" href="#recipe-dir" title="Permalink to this headline">¶</a></h3>
