@@ -1073,6 +1073,32 @@ Note that this requires ``conda>=4.8``. If you want to support older conda versi
 the requirement should be changed from ``run`` to ``run_constrained``. Note that
 ``conda<4.8`` will ignore the condition if it's a ``run_constrained`` on ``__osx``.
 
+Newer C++ features with old SDK
+-------------------------------
+
+The libc++ library uses Clang availability annotations to mark certain symbols as
+unavailable when targeting versions of macOS that ship with a system libc++
+that do not contain them. Clang always assumes that the system libc++ is used.
+
+The conda-forge build infrastructure targets macOS 10.9 and some newer C++ features
+such as ``fs::path`` are marked as unavailable on that platform, so the build aborts:
+
+.. code-block:: sh
+
+  ...
+  error: 'path' is unavailable: introduced in macOS 10.15
+  ...
+  note: 'path' has been explicitly marked unavailable here
+  class _LIBCPP_TYPE_VIS path {
+
+However, since conda-forge ships its own (modern) libcxx we can ignore these checks
+because these symbols are in fact available. To do so, add
+``_LIBCPP_DISABLE_AVAILABILITY`` to the defines. For example
+
+.. code-block:: sh
+
+  CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
+
 
 PyPy builds
 ===========
