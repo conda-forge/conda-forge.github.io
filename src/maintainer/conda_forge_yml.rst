@@ -129,14 +129,26 @@ automatic version updates/migrations for feedstocks. The current options are
 build_platform
 --------------
 This is a mapping from the build platform to the host platform of the package
-to be built. For eg: following builds a ``osx-64`` platform from ``linux-64``
+to be built. e.g. the following builds a ``osx-64`` package on the ``linux-64``
 build platform using cross-compiling.
 
 .. code-block:: yaml
 
     build_platform:
       osx_64: linux_64
-      
+
+Leaving this field empty implicitly requests to build a package natively. i.e. 
+
+.. code-block:: yaml
+
+    build_platform:
+      linux_64: linux_64
+      linux_ppc64le: linux_ppc64le
+      linux_aarch64: linux_aarch64
+      osx_64: osx_64
+      osx_arm64: osx_arm64
+      win_64: win_64
+
 .. _build_with_mambabuild:
 
 build_with_mambabuild
@@ -339,6 +351,7 @@ arches:
 * ``win``
 * ``linux_aarch64``
 * ``linux_ppc64le``
+* ``osx_arm64``
 
 The following CI services are available:
 
@@ -369,6 +382,7 @@ provider entry is equivalent to the following:
       win: azure
       linux_ppc64le: None
       linux_aarch64: None
+      osx_arm64: None
 
 To enable ``linux_ppc64le`` and ``linux_aarch64`` and the following:
 
@@ -377,6 +391,8 @@ To enable ``linux_ppc64le`` and ``linux_aarch64`` and the following:
     provider:
       linux_ppc64le: default
       linux_aarch64: default
+
+If the ``build_platform`` for an arch is not available with the selected provider, the build will be disabled; cross-compilation must be specified manually.
 
 .. _recipe_dir:
 
