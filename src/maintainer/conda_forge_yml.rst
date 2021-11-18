@@ -392,7 +392,9 @@ To enable ``linux_ppc64le`` and ``linux_aarch64`` and the following:
       linux_ppc64le: default
       linux_aarch64: default
 
-If the ``build_platform`` for an arch is not available with the selected provider, the build will be disabled; cross-compilation must be specified manually.
+If the ``build_platform`` for an arch is not available with the selected provider
+(either natively or with emulation), the build will be disabled; cross-compilation
+must be specified manually.
 
 .. _recipe_dir:
 
