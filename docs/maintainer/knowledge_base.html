@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Knowledge Base &#8212; conda-forge 2021.11.17 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2021.11.18 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.11.17 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.11.18 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
       </ul>
@@ -965,6 +965,27 @@ is available only for macOS x.x, then do the following in <code class="docutils 
 <p>Note that this requires <code class="docutils literal notranslate"><span class="pre">conda&gt;=4.8</span></code>. If you want to support older conda versions
 the requirement should be changed from <code class="docutils literal notranslate"><span class="pre">run</span></code> to <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code>. Note that
 <code class="docutils literal notranslate"><span class="pre">conda&lt;4.8</span></code> will ignore the condition if it’s a <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> on <code class="docutils literal notranslate"><span class="pre">__osx</span></code>.</p>
+<div class="section" id="newer-c-features-with-old-sdk">
+<h3>Newer C++ features with old SDK<a class="headerlink" href="#newer-c-features-with-old-sdk" title="Permalink to this headline">¶</a></h3>
+<p>The libc++ library uses Clang availability annotations to mark certain symbols as
+unavailable when targeting versions of macOS that ship with a system libc++
+that do not contain them. Clang always assumes that the system libc++ is used.</p>
+<p>The conda-forge build infrastructure targets macOS 10.9 and some newer C++ features
+such as <code class="docutils literal notranslate"><span class="pre">fs::path</span></code> are marked as unavailable on that platform, so the build aborts:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>...
+error: <span class="s1">&#39;path&#39;</span> is unavailable: introduced <span class="k">in</span> macOS <span class="m">10</span>.15
+...
+note: <span class="s1">&#39;path&#39;</span> has been explicitly marked unavailable here
+class _LIBCPP_TYPE_VIS path <span class="o">{</span>
+</pre></div>
+</div>
+<p>However, since conda-forge ships its own (modern) libcxx we can ignore these checks
+because these symbols are in fact available. To do so, add
+<code class="docutils literal notranslate"><span class="pre">_LIBCPP_DISABLE_AVAILABILITY</span></code> to the defines. For example</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">CXXFLAGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CXXFLAGS</span><span class="si">}</span><span class="s2"> -D_LIBCPP_DISABLE_AVAILABILITY&quot;</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="pypy-builds">
 <h2>PyPy builds<a class="headerlink" href="#pypy-builds" title="Permalink to this headline">¶</a></h2>
@@ -1376,7 +1397,10 @@ higher than the package uploaded with the <code class="docutils literal notransl
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#build-matrices">Build matrices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#requiring-newer-macos-sdks">Requiring newer macOS SDKs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#requiring-newer-macos-sdks">Requiring newer macOS SDKs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#newer-c-features-with-old-sdk">Newer C++ features with old SDK</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#pypy-builds">PyPy builds</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-setuptools-scm">Using setuptools_scm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-centos-7">Using CentOS 7</a></li>
@@ -1470,7 +1494,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.11.17 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.11.18 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
       </ul>
