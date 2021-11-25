@@ -25,7 +25,7 @@ Hangout link: [](https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie)[h
         *   Currently done with "low hanging fruit" or difficult packages
     *   CFEP would be helpful to give clear guidance
     *   What does it take to merge repackaging stuff?  At what point does it become painful enough to allow repackaging?  
-    *   MSYS2 - [Michael Sarahan](https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS) to ask Ray about build infrastructure for MSYS2 and perhaps unification with conda/conda-forge
+    *   MSYS2 - [Michael Sarahan](https://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS) to ask Ray about build infrastructure for MSYS2 and perhaps unification with conda/conda-forge
     *   Git  for windows as example to avoid (Large agglomeration of individual  projects - prefer to build individual projects).  If MSYS2 were not  available, this would be an OK candidate for repackaging, because it is  such a huge pain.  Because MSYS2 is available, we should avoid  repackaging git for windows.
 
 *   conda-build 2

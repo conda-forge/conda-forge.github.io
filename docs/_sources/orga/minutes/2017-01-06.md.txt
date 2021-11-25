@@ -6,12 +6,12 @@ Hangout link: [](https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie)[h
 
 **Attendees**
 
-*   [John Kirkham](https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/wv6uvIZX6h0)
+*   [John Kirkham](https://conda-forge.hackpad.com/ep/profile/wv6uvIZX6h0)
 *   Ray Donnelly
 *   Filipe Fernandes
-*   [Michael Sarahan](https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS)
-*   [Peter Williams](https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/Gxz5eDxqYrB)
-*   [Eric Dill](https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/yJqDqpPqJyz)
+*   [Michael Sarahan](https://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS)
+*   [Peter Williams](https://conda-forge.hackpad.com/ep/profile/Gxz5eDxqYrB)
+*   [Eric Dill](https://conda-forge.hackpad.com/ep/profile/yJqDqpPqJyz)
 
 **Standing Items**
 

@@ -6,7 +6,7 @@ Hangout link: [](https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie) [
 
 **Attendees**
 
-Ray, Matt, Jonathan, Phil, Jonas, Michael, Philippe, John, [Bjorn Gruning](https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/DMmBLyb21HK), Jan
+Ray, Matt, Jonathan, Phil, Jonas, Michael, Philippe, John, [Bjorn Gruning](https://conda-forge.hackpad.com/ep/profile/DMmBLyb21HK), Jan
 
 **Standing items**
 
@@ -52,7 +52,7 @@ Ray, Matt, Jonathan, Phil, Jonas, Michael, Philippe, John, [Bjorn Gruning](https
 
 *   Another   thing to consider here might be a new piece of metadata. For instance,   we could specify the primary language of a package. We could then   specify to `conda install`    that we want this language of a package. Possible syntax might include   something that looks like that of the above. Not sure how we want to   handled conflicts if we want to error, warn and install everything, or   something else.
 
-*   A simpler idea that we might consider that includes some of the ideas [Michael](https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS) mentioned above, but could be implemented without changes to `conda` or package metadata would be to place packages in labeled channels. That way all Python packages would be in `conda-forge/label/python`. This way one could simply add this labeled channel and get all the `python`  packages one wants. It's still a little fragile when enabling multiple  labels, but maybe this can leverage the channel resolution stuff that  Michael Grant has worked on.
+*   A simpler idea that we might consider that includes some of the ideas [Michael](https://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS) mentioned above, but could be implemented without changes to `conda` or package metadata would be to place packages in labeled channels. That way all Python packages would be in `conda-forge/label/python`. This way one could simply add this labeled channel and get all the `python`  packages one wants. It's still a little fragile when enabling multiple  labels, but maybe this can leverage the channel resolution stuff that  Michael Grant has worked on.
 
 *   PR reviews
 
