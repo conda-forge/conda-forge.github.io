@@ -754,10 +754,9 @@ Jinja expressions serve following purposes in the meta.yaml:
 
 - They allow defining variables to avoid code duplication. Using a variable for the ``version`` allows changing the version only once with every update.
 
-  .. code-block:: yaml
+  .. code-block:: yaml+jinja
 
       {% set version = "3.7.3" %}
-       [...]
 
       package:
         name: python
@@ -769,7 +768,7 @@ Jinja expressions serve following purposes in the meta.yaml:
 
 - They can call `conda-build functions <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#conda-build-specific-jinja2-functions>`__ for automatic code generation. Examples are the compilers, cdt packages or the ``pin_compatible`` function.
 
-  .. code-block:: yaml
+  .. code-block:: yaml+jinja
 
     requirements:
       build:
