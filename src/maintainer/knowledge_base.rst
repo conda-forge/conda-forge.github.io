@@ -111,7 +111,7 @@ Local testing
 The first thing that you should know is that you can locally test Windows
 builds of your packages even if you don’t own a Windows machine. Microsoft
 makes available free, official Windows virtual machines (VMs) `at this website
-<https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/>`_. If you
+<https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/>`__. If you
 are unfamiliar with VM systems or have trouble installing Microsoft’s VMs, please
 use a general web search to explore — while these topics are beyond the
 scope of this documentation, there are ample discussions on them on the broader
@@ -121,24 +121,24 @@ In order to compile native code (C, C++, etc.) on Windows, you will need to
 install Microsoft’s Visual C++ build tools on your VM. You must install
 particular versions of these tools — this is to maintain compatibility between
 compiled libraries used in Python, `as described on this Python wiki page
-<https://wiki.python.org/moin/WindowsCompilers>`_. The current relevant
+<https://wiki.python.org/moin/WindowsCompilers>`__. The current relevant
 versions are:
 
 * For Python 2.7: Visual C++ 9.0
 * For Python 3.5–3.7: Visual C++ 14.0
 
 While you can obtain these tools by installing the right version of the full
-`Visual Studio <https://visualstudio.microsoft.com/>`_ development
+`Visual Studio <https://visualstudio.microsoft.com/>`__ development
 environment, you can save a lot of time and bandwidth by installing standalone
 “build tools” packages. The links are as follows:
 
 * For Python 2.7: `Microsoft Visual C++ Compiler for Python 2.7
-  <https://www.microsoft.com/download/details.aspx?id=44266>`_.
+  <https://www.microsoft.com/download/details.aspx?id=44266>`__.
 * For Python 3.5–3.7: `Microsoft Build Tools for Visual Studio 2017
-  <https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017>`_.
+  <https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017>`__.
 
 If you need more information. Please refer `the Python wiki page on Windows compilers
-<https://wiki.python.org/moin/WindowsCompilers>`_.
+<https://wiki.python.org/moin/WindowsCompilers>`__.
 
 Simple CMake-Based ``bld.bat``
 ------------------------------
@@ -231,7 +231,7 @@ In conda-forge.yml file:
 
 
 For example see the changes made in the ``conda_build_config.yaml`` and ``conda-forge.yml`` files in `this
-<https://github.com/conda-forge/libignition-physics-feedstock/commit/c586d765a2f5fd0ecf6da43c53315c898c9bf6bd>`_ PR.
+<https://github.com/conda-forge/libignition-physics-feedstock/commit/c586d765a2f5fd0ecf6da43c53315c898c9bf6bd>`__ PR.
 
 After making these changes don't forget to rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line).
 
@@ -265,7 +265,7 @@ A package that needs all three compilers would define
 
   Appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore
   there's no need to specify ``libgcc`` or ``libgfortran``. There are additional informations about how conda-build 3 treats
-  compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html>`_.
+  compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html>`__.
 
 .. _cdt_packages:
 
@@ -283,7 +283,7 @@ either 6 or 7 depending on user choice and platform. We manage the build of CDT
 packages using a centralized repo, `conda-forge/cdt-builds <https://github.com/conda-forge/cdt-builds>`_,
 as opposed to generating feedstocks for them. (Note that historically we did use feedstocks but this
 practice has been deprecated.) To add a new CDT, make a PR on the
-`conda-forge/cdt-builds <https://github.com/conda-forge/cdt-builds>`_ repo.
+`conda-forge/cdt-builds <https://github.com/conda-forge/cdt-builds>`__ repo.
 
 In ``conda-forge`` the primary usages of CDTs is currently for packages that link against libGL.
 
@@ -894,7 +894,7 @@ To use this package in a build, put it in the host environment like so
 .. _knowledge:empty:
 
 Empty Python packages
-----------
+---------------------
 For some features introduced in later Python versions, the Python community creates backports, which makes these
 features available for earlier versions of Python as well.
 One example here is `dataclasses <https://www.python.org/dev/peps/pep-0557/>`__ which was introduced with
@@ -1181,7 +1181,7 @@ There are two options for how to proceed:
             set SETUPTOOLS_SCM_PRETEND_VERSION=%PKG_VERSION%
 
         Whereby you use that ``PKG_VERSION`` has been set with the version string,
-        see `Environment variables <https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#env-vars>`_.
+        see `Environment variables <https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#env-vars>`__.
 
     -   Otherwise, if you are directly building from ``meta.yaml``, use for example:
 
@@ -1250,10 +1250,10 @@ On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CU
   **How is CUDA provided at the system level?**
 
   * On Linux, Nvidia provides official Docker images, which we then
-    `adapt <https://github.com/conda-forge/docker-images>`_ to Conda-Forge's needs.
+    `adapt <https://github.com/conda-forge/docker-images>`__ to Conda-Forge's needs.
 
   * On Windows, the compilers need to be installed for every CI run. This is done through the
-    `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`_ scripts.
+    `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`__ scripts.
     Do note that the Nvidia executable won't install the drivers because no GPU is present in the machine.
 
   **How is cudatoolkit selected at install time?**
@@ -1262,7 +1262,7 @@ On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CU
   named ``__cuda``. By default, ``conda`` will install the highest version available
   for the packages involved. To override this behaviour, you can define a ``CONDA_OVERRIDE_CUDA`` environment
   variable. More details in the
-  `Conda docs <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html#overriding-detected-packages>`_.
+  `Conda docs <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html#overriding-detected-packages>`__.
 
   Note that prior to v4.8.4, ``__cuda`` versions would not be part of the constraints, so you would always
   get the latest one, regardless the supported CUDA version.
@@ -1279,10 +1279,10 @@ of the conda recipe. That does not mean you can't test your package locally. To 
 
 1. Enable the Azure artifacts for your feedstock (see :ref:`here <azure-config>`).
 2. Include the test files and requirements in the recipe
-   `like this <https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/meta.yaml#L51-L61>`_.
+   `like this <https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/meta.yaml#L51-L61>`__.
 3. Provide the test instructions. Take into account that the GPU tests will fail in the CI run,
    so you need to ignore them to get the package built and uploaded as an artifact.
-   `Example <https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/run_test.py>`_.
+   `Example <https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/run_test.py>`__.
 4. Once you have downloaded the artifacts, you will be able to run::
 
     conda build --test <pkg file>.tar.bz2
@@ -1322,7 +1322,7 @@ If you really need it, you can re-add support for 9.2, 10.0 and 10.1. However, t
 Adding more CUDA versions to the build matrix will dramatically increase the number of jobs and will place a large
 burden on our CI resources. Only proceed if there's a known use case for the extra packages.
 
-1. Download this `migration file <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/cuda92_100_101.yaml>`_.
+1. Download this `migration file <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/cuda92_100_101.yaml>`__.
 2. In your feedstock fork, create a new branch and place the migration file under ``.ci_support/migrations``.
 3. Open a PR and re-render. CUDA 9.2, 10.0 and 10.1 will appear in the CI checks now. Merge when ready!
 
@@ -1335,8 +1335,8 @@ Providing a new CUDA version involves five repositores:
 * `cudatoolkit-feedstock <https://github.com/conda-forge/cudatoolkit-feedstock>`_
 * `nvcc-feedstock <https://github.com/conda-forge/nvcc-feedstock>`_
 * `conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_
-* `docker-images <https://github.com/conda-forge/docker-images>`_ (Linux only)
-* `conda-forge-ci-setup-feedstock <https://github.com/conda-forge/conda-forge-ci-setup-feedstock>`_ (Windows only)
+* `docker-images <https://github.com/conda-forge/docker-images>`__ (Linux only)
+* `conda-forge-ci-setup-feedstock <https://github.com/conda-forge/conda-forge-ci-setup-feedstock>`__ (Windows only)
 
 The steps involved are, roughly:
 
@@ -1347,7 +1347,7 @@ The steps involved are, roughly:
    Copy the migration file manually to ``.ci_support/migrations``.
    This copy should not specify a timestamp. Comment it out and rerender.
 4. For Windows, add the installer URLs and hashes to the ``conda-forge-ci-setup``
-   `script <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat>`_.
+   `script <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat>`__.
    The migration file must also be manually copied here. Rerender.
 5. Create the new ``nvcc`` packages for the new version. Again, manual
    migration must be added. Rerender.
@@ -1361,7 +1361,7 @@ Apple Silicon builds
 ====================
 
 The new Apple M1 processor is the first Apple Silicon supported by conda-forge
-`osx-arm64 <https://github.com/conda-forge/conda-forge.github.io/issues/1126>`_ builds.
+`osx-arm64 <https://github.com/conda-forge/conda-forge.github.io/issues/1126>`__ builds.
 For new builds to be available, via cross-compilation, a migration is required for
 the package and its dependencies. These builds are experimental as many of them are untested.
 
@@ -1370,7 +1370,7 @@ To request a migration for a particular package and all its dependencies:
 1. Check the feedstock in question to see if there is already an issue or pull request.
    Opening an issue here is fine, as it might take a couple iterations of the below,
    especially if many dependencies need to be built as well.
-2. If nothing is under way, look at the current `conda-forge-pinning <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt>`_.
+2. If nothing is under way, look at the current `conda-forge-pinning <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt>`__.
 3. If the package is not listed there, make a PR, adding the package
    name to the end of ``osx_arm64.txt``. The migration bot should start making automated
    pull requests to the repo and its dependencies.
@@ -1391,15 +1391,15 @@ Recipe maintainers can make pre-release builds available on
 conda-forge by adding them to the ``dev`` or ``rc`` label.
 
 The semantics of these labels should generally follow the
-`guidelines <https://docs.python.org/devguide/devcycle.html#stages>`_ that Python
+`guidelines <https://docs.python.org/devguide/devcycle.html#stages>`__ that Python
 itself follows.
 
-- ``rc``: `Beta <https://docs.python.org/devguide/devcycle.html#beta>`_ and `Release
+- ``rc``: `Beta <https://docs.python.org/devguide/devcycle.html#beta>`__ and `Release
   Candidate <https://docs.python.org/devguide/devcycle.html#release-candidate-rc>`_
   (RC). No new features. Bugfix only.
 
 - ``dev``: `Pre-Alpha <https://docs.python.org/devguide/devcycle.html#pre-alpha>`_
-  and `Alpha <https://docs.python.org/devguide/devcycle.html#alpha>`_. These are
+  and `Alpha <https://docs.python.org/devguide/devcycle.html#alpha>`__. These are
   still packages that could see substantial changes
   between the dev version and the final release.
 
@@ -1472,10 +1472,10 @@ Pre-release version sorting
 ---------------------------
 
 If you wish to add numbers to your ``dev`` or ``rc`` build, you should follow the
-`guidelines <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/pkg-specs.html#version-ordering>`_ put
+`guidelines <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/pkg-specs.html#version-ordering>`__ put
 forth by Continuum regarding version sorting in ``conda``. Also see the `source
 code for conda
-4.2.13 <https://github.com/conda/conda/blob/4.2.13/conda/version.py#L93-L119>`_.
+4.2.13 <https://github.com/conda/conda/blob/4.2.13/conda/version.py#L93-L119>`__.
 The tl;dr here is that conda sorts as follows:
 
 .. code-block::

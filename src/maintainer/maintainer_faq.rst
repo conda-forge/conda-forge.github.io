@@ -67,7 +67,7 @@ FAQ
 
 :ref:`(Q) <mfaq_anaconda_delay>` **Why does my new version appear on Anaconda Cloud, but is not installable with conda?**
 
-  For certain, high-traffic channels (main & conda-forge), Anaconda uses a `CDN <https://cloudflare.com/learning/cdn/what-is-a-cdn/>`_ to decrease costs. The CDN is only reindexed every 20 minutes, however `Anaconda.org <https://anaconda.org>`_ uses the original channel that the CDN mirrors.  Therefore, packages will show up on the `Anaconda Cloud <https://anaconda.org>`_ about 20 to 40 minutes before they are downloadable via conda.  You can use ``conda search <pkg>``  to see if the package is installable, because this command reads from the CDN.
+  For certain, high-traffic channels (main & conda-forge), Anaconda uses a `CDN <https://cloudflare.com/learning/cdn/what-is-a-cdn/>`__ to decrease costs. The CDN is only reindexed every 20 minutes, however `Anaconda.org <https://anaconda.org>`__ uses the original channel that the CDN mirrors.  Therefore, packages will show up on the `Anaconda Cloud <https://anaconda.org>`__ about 20 to 40 minutes before they are downloadable via conda.  You can use ``conda search <pkg>``  to see if the package is installable, because this command reads from the CDN.
 
 .. _mfaq_mamba_local:
 
@@ -88,7 +88,8 @@ FAQ
 
   - ``conda install boa -c conda-forge``
   - ``conda mambabuild myrecipe``
-  For more details visit `this <https://boa-build.readthedocs.io/en/latest/mambabuild.html>`_ page.
+  
+  For more details visit `this <https://boa-build.readthedocs.io/en/latest/mambabuild.html>`__ page.
 
 .. _mfaq_conda_verify:
 
@@ -136,7 +137,7 @@ FAQ
     ImportError: libGL.so.1: cannot open shared object file: No such file or directory
 
 
-  To fix the error, create a `yum_requirements.txt <https://conda-forge.org/docs/maintainer/knowledge_base.html#yum-deps>`_ file and add *mesa-libGL*.
+  To fix the error, create a `yum_requirements.txt <https://conda-forge.org/docs/maintainer/knowledge_base.html#yum-deps>`__ file and add *mesa-libGL*.
 
 
 .. _mfaq_qt_load_xcb:
@@ -157,7 +158,7 @@ FAQ
 
 
   This comes from the CI environment being headless and can be fixed by adding the ``QT_QPA_PLATFORM=offscreen`` `environment variable <https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#inherited-environment-variabless>`_.
-  The variable can either be added directly to the test command or provided in the `meta.yaml <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml>`_ like so:
+  The variable can either be added directly to the test command or provided in the `meta.yaml <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml>`__ like so:
 
   .. code-block:: yaml
 
@@ -170,8 +171,8 @@ FAQ
 
 :ref:`(Q) <mfaq_contact_core>` **How can I contact conda-forge/core?**
 
-  When in an issue or PR, you can contact `conda-forge/core <https://conda-forge.org/docs/orga/governance.html#teams-roles>`_ by simply mentioning ``@conda-forge/core`` in a comment.
-  If you don't receive an an answer after a couple of days, feel free to reach out to us via the public `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`_ channel.
+  When in an issue or PR, you can contact `conda-forge/core <https://conda-forge.org/docs/orga/governance.html#teams-roles>`__ by simply mentioning ``@conda-forge/core`` in a comment.
+  If you don't receive an an answer after a couple of days, feel free to reach out to us via the public `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`__ channel.
 
   .. note::
 
@@ -184,7 +185,7 @@ FAQ
 
 :ref:`(Q) <mfaq_abandoned_feedstock>` **A feedstock has been abandoned and I would like to take over maintenance.**
 
-  A  feedstock is generally considered abandoned when the maintainer isn't around anymore and doesn't merge new PRs or answer any issues. If that is the case, you can add yourself to the team by using the `@conda-forge-admin, please add user @username <https://conda-forge.org/docs/maintainer/infrastructure.html#conda-forge-admin-please-add-user-username>`_ command. If the maintainer doesn't merge it after roughly a week, :ref:`contact conda-forge/core<mfaq_contact_core>` to have it merged. Once added, you have full rights to the feedstock and can continue its maintenance.
+  A  feedstock is generally considered abandoned when the maintainer isn't around anymore and doesn't merge new PRs or answer any issues. If that is the case, you can add yourself to the team by using the `@conda-forge-admin, please add user @username <https://conda-forge.org/docs/maintainer/infrastructure.html#conda-forge-admin-please-add-user-username>`__ command. If the maintainer doesn't merge it after roughly a week, :ref:`contact conda-forge/core<mfaq_contact_core>` to have it merged. Once added, you have full rights to the feedstock and can continue its maintenance.
 
   .. note::
 
