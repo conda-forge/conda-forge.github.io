@@ -106,7 +106,7 @@ be added by hand. To do this, follow these steps:
 
 #. Create a new migration yaml by copying `example.exyaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/example.exyaml>`__ in the ``conda-forge/conda-forge-pinning`` repository.
 #. Change the migration yaml to reflect the package and version to be migrated
-#. Write a :ref:`migrator <pin_migrator>` for propagating the pin changes.
+#. Write a migrator for propagating the pin changes.
 #. Propose the changes as a :term:`PR` to `conda-forge/conda-forge-pinning-feedstock`_.
 #. Once accepted the migration will begin. The migration status can be monitored at https://conda-forge.org/status.
 #. After the migration is complete, a new PR can be issued to `conda-forge/conda-forge-pinning-feedstock`_ to:

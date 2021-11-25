@@ -1,6 +1,5 @@
 # YYYY-MM-DD conda-forge core meeting 
 
-****
 ## Attendees
 List the attendees for the meeting
 
