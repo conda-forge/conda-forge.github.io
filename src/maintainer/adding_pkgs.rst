@@ -29,7 +29,7 @@ There are multiple ways to get started:
    Then if necessary, you can make manual edits to the recipe.
 #. If it is a python package, you can generate the recipe as a starting point with ``grayskull``.
    Use ``conda install -c conda-forge grayskull`` to install ``grayskull``, followed by ``grayskull pypi your_package_name`` to generate the recipe. Note that you do *not* necessarily have to use ``grayskull``, and the
-   recipes produced by ``grayskull`` might need to be reviewed and edited. Read more about ``grayskull`` and how to use it `here <https://github.com/conda-incubator/grayskull#introduction>`_.
+   recipes produced by ``grayskull`` might need to be reviewed and edited. Read more about ``grayskull`` and how to use it `here <https://github.com/conda-incubator/grayskull#introduction>`__.
 
 Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
 
