@@ -152,7 +152,7 @@ Leaving this field empty implicitly requests to build a package natively. i.e.
 .. _build_with_mambabuild:
 
 build_with_mambabuild
---------------
+---------------------
 This option, when enabled, configures the conda-forge CI to run a debug build using the ``mamba`` solver. Check `this <https://conda-forge.org/docs/maintainer/maintainer_faq.html#mfaq-mamba-local>`__ to know more.  
 
 .. code-block:: yaml
@@ -457,17 +457,19 @@ This is used for disabling testing for cross compiling. Default is ``false``
 .. _test:
 
 test
--------------------
+----
 This is used to configure on which platforms a recipe is tested. Default is ``all``.
 
 .. code-block:: yaml
 
     test: native_and_emulated
+
 Will do testing only if the platform is native or if there is an emulator.
 
 .. code-block:: yaml
 
     test: native
+
 Will do testing only if the platform is native.
 
 .. _travis:
