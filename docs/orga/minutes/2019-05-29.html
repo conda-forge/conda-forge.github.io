@@ -3,19 +3,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>2019-05-29 conda-forge meeting &#8212; conda-forge 2021.11.25 documentation</title>
-    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/cloud.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
 
     
     
@@ -57,7 +58,8 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2019-05-29 conda-forge meeting</a></li> 
       </ul>
     </div>
     </div>
@@ -68,7 +70,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="conda-forge-meeting">
+  <section class="tex2jax_ignore mathjax_ignore" id="conda-forge-meeting">
 <h1>2019-05-29 conda-forge meeting<a class="headerlink" href="#conda-forge-meeting" title="Permalink to this headline">¶</a></h1>
 <p><strong>Pinned Items</strong></p>
 <ul class="simple">
@@ -102,83 +104,148 @@
 <li><p>https://github.com/conda-forge/conda-forge.github.io/issues/791</p></li>
 </ul>
 </li>
+<li><p>Discuss a strategy to manage qt patches (23!) and new version builds in the CIs.</p></li>
+<li><p>ESIP update:</p>
+<ul>
+<li><p>balance: 3827.78 USD</p></li>
+<li><p>use part of the money to pay for Azure dedicated machines: Windows and Linux to build Qt.</p></li>
+<li><p>Use money to fund travel to SciPy this year?</p></li>
 </ul>
-<div class="highlight-- Discuss a strategy to manage qt patches (23!) and new version builds in the CIs. notranslate"><div class="highlight"><pre><span></span>- ESIP update:
-    - balance: 3827.78 USD
-    - use part of the money to pay for Azure dedicated machines: Windows and Linux to build Qt.
-    - Use money to fund travel to SciPy this year?
-- http://conda-forge.org does not auto-upgrade to https
-- CFEP9 conda-smithy
-    - PR is now doing the right thing but requires some minor changes to conda-build to make it less gross
-    - Works for VC14→ 14.1 and VS2015→ VS2017 as a test case.  
-- Emiritus Change model
-    - TODO: Governance model similar to sklearn for moving users to non-voting
+</li>
+<li><p>http://conda-forge.org does not auto-upgrade to https</p></li>
+<li><p>CFEP9 conda-smithy</p>
+<ul>
+<li><p>PR is now doing the right thing but requires some minor changes to conda-build to make it less gross</p></li>
+<li><p>Works for VC14→ 14.1 and VS2015→ VS2017 as a test case.</p></li>
+</ul>
+</li>
+<li><p>Emiritus Change model</p>
+<ul>
+<li><p>TODO: Governance model similar to sklearn for moving users to non-voting</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Old items</strong></p>
+<ul class="simple">
+<li><p>“Dogfood”  <code class="docutils literal notranslate"><span class="pre">strict</span></code>, which may be default in the next conda, in our CIs?</p>
+<ul>
+<li><p>https://github.com/conda-forge/conda-forge-ci-setup-feedstock/pull/50</p></li>
+<li><p>https://github.com/conda-forge/staged-recipes/pull/8009</p></li>
+<li><p>Currently we have a problem with <code class="docutils literal notranslate"><span class="pre">vc</span></code> on Windows. If we activate <code class="docutils literal notranslate"><span class="pre">strict</span></code> only the <code class="docutils literal notranslate"><span class="pre">vc</span></code> present in conda-forge, which is vc 14, will be used but we are building without <code class="docutils literal notranslate"><span class="pre">strict</span></code> and depending on <code class="docutils literal notranslate"><span class="pre">vc</span> <span class="pre">14.1</span></code> from <code class="docutils literal notranslate"><span class="pre">defaults</span></code>. That means we would need to remove conda-forge <code class="docutils literal notranslate"><span class="pre">vc</span></code> packages and probably do some rebuilds. (Tried to rebuild <code class="docutils literal notranslate"><span class="pre">qt</span></code> with strict and hit a wall there even when removing our <code class="docutils literal notranslate"><span class="pre">vc</span></code>, which means more things must be rebuild first, maybe a migrator would be the best course of action here.)</p></li>
+</ul>
+</li>
+<li><p>Discuss the use of Drone (native ARM) in conda-forge.</p>
+<ul>
+<li><p>https://github.com/conda-forge/conda-smithy/pull/1069</p></li>
+</ul>
+</li>
+<li><p>Make conda-forge enhancements proposal a “first class citizen”  and it a voting process for approving them in our governance docs. (scopatz volunteered to add it to the docs.)</p></li>
+<li><p>Elections/Governance
+Upcoming helper for staged-recipes
+- jan jansen (TODO)</p>
+<ul>
+<li><p>Staged-recipes team in Governance doc (Review and merge)</p>
+<ul>
+<li><p>https://github.com/conda-forge/conda-forge.github.io/pull/738</p></li>
+</ul>
+</li>
+<li><p>Add formal budget team to Governance doc.</p></li>
+<li><p>Make the spreadsheets available to all (NumFOCUS team drive folder).</p></li>
+<li><p>Perform switch after blas migration is more finished (ocefpaf: check the blas migration status.)</p>
+<ul>
+<li><p>Need to either copy over new compiler activation scripts package to cf</p></li>
+<li><p>Or delete ours entirely</p></li>
+<li><p>TODO: Verify that smithy and pinnings are fine for the compilers</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Azure status</p>
+<ul>
+<li><p>Need to fix windows (vc9/14 and cmake)</p></li>
+<li><p>Credentials issues (need pipelines account to access Azure, will move to GH auth soon)</p></li>
+<li><p>How to handle bespoke build agents (for builds taking longer than 6 hours (qt, compilers, etc.)</p></li>
+<li><p>How to restart an Azure job?</p></li>
+</ul>
+</li>
+<li><p>NVIDIA</p>
+<ul>
+<li><p>Louder communication path for large ecosystem shifts (compiler migrations)</p>
+<ul>
+<li><p>Banner on AnacondaCloud, status updates on channel</p></li>
+<li><p>Print something while using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span></code></p></li>
+<li><p>More frequent updates</p></li>
+</ul>
+</li>
+<li><p>AnacondaCloud can fall over (mirroring conda)</p></li>
+<li><p>Try to track down hard linked drivers in GPU packages.</p></li>
+<li><p>Progress on colo talks for bins of gpus at Anaconda (Waiting on Mike W. on this.)</p></li>
+</ul>
+</li>
+<li><p>Migrations</p>
+<ul>
+<li><p>Blas</p>
+<ul>
+<li><p>Underway</p></li>
+</ul>
+</li>
+<li><p>Libprotobuf</p>
+<ul>
+<li><p>Underway</p></li>
+</ul>
+</li>
+<li><p>gfortran (wait for cfep-09)</p>
+<ul>
+<li><p>Need to build a migrator for new osx gfortran</p></li>
+<li><p>https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/174 maybe?</p></li>
+</ul>
+</li>
+<li><p>Power and Arm</p>
+<ul>
+<li><p>Ongoing https://conda-forge.org/status/</p></li>
+<li><p>More leafs to target?</p></li>
+</ul>
+</li>
+<li><p>Openssl</p>
+<ul>
+<li><p>Underway</p></li>
+</ul>
+</li>
+<li><p>Readline (wait for cfep-09)</p>
+<ul>
+<li><p>ABI change</p></li>
+<li><p>Needs migrator</p></li>
+</ul>
+</li>
+<li><p>&#64;Christopher W : Add link to migration (conda-forge status?) docs for conda-forge.github.io (ocefpaf: I’ll add the status link to the docs)</p></li>
+</ul>
+</li>
+<li><p>Nvidia relationship</p>
+<ul>
+<li><p>Building GPU packages using conda-forge packages, upload to their own channel after building with cudatoolkit on their own Jenkins system.</p></li>
+<li><p>GPU compiler shim package: https://github.com/conda-forge/staged-recipes/pull/8229</p></li>
+<li><p>Maybe form a working group?</p></li>
+</ul>
+</li>
+<li><p>Perl ecosystem? (ocefpaf:Ask bBjorn G.)</p>
+<ul>
+<li><p>move forward with plan to incorporate perl into CF</p>
+<ul>
+<li><p>Do we have an issue or something for this?</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>R 3.6 migration? (ocefpaf: Ask bBjorn G.)</p>
+<ul>
+<li><p>https://github.com/conda-forge/r-base-feedstock/pull/82</p></li>
+</ul>
+</li>
+</ul>
+</section>
 
-**Old items**
 
-- “Dogfood”  `strict`, which may be default in the next conda, in our CIs?
-    - https://github.com/conda-forge/conda-forge-ci-setup-feedstock/pull/50
-    - https://github.com/conda-forge/staged-recipes/pull/8009
-    - Currently we have a problem with `vc` on Windows. If we activate `strict` only the `vc` present in conda-forge, which is vc 14, will be used but we are building without `strict` and depending on `vc 14.1` from `defaults`. That means we would need to remove conda-forge `vc` packages and probably do some rebuilds. (Tried to rebuild `qt` with strict and hit a wall there even when removing our `vc`, which means more things must be rebuild first, maybe a migrator would be the best course of action here.)
-- Discuss the use of Drone (native ARM) in conda-forge.
-    - https://github.com/conda-forge/conda-smithy/pull/1069
-- Make conda-forge enhancements proposal a “first class citizen”  and it a voting process for approving them in our governance docs. (scopatz volunteered to add it to the docs.)
-- Elections/Governance
-        Upcoming helper for staged-recipes
-        - jan jansen (TODO)
-    - Staged-recipes team in Governance doc (Review and merge)
-        - https://github.com/conda-forge/conda-forge.github.io/pull/738
-    - Add formal budget team to Governance doc.
-    - Make the spreadsheets available to all (NumFOCUS team drive folder).
-    - Perform switch after blas migration is more finished (ocefpaf: check the blas migration status.)
-        - Need to either copy over new compiler activation scripts package to cf
-        - Or delete ours entirely
-        - TODO: Verify that smithy and pinnings are fine for the compilers
-- Azure status
-    - Need to fix windows (vc9/14 and cmake)
-    - Credentials issues (need pipelines account to access Azure, will move to GH auth soon)
-    - How to handle bespoke build agents (for builds taking longer than 6 hours (qt, compilers, etc.)
-    - How to restart an Azure job?
-- NVIDIA
-    - Louder communication path for large ecosystem shifts (compiler migrations)
-        - Banner on AnacondaCloud, status updates on channel
-        - Print something while using `conda install`
-        - More frequent updates
-    - AnacondaCloud can fall over (mirroring conda)
-    - Try to track down hard linked drivers in GPU packages.
-    - Progress on colo talks for bins of gpus at Anaconda (Waiting on Mike W. on this.)
-- Migrations
-    - Blas
-        - Underway
-    - Libprotobuf
-        - Underway
-    - gfortran (wait for cfep-09)
-        - Need to build a migrator for new osx gfortran
-        - https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/174 maybe?
-    - Power and Arm
-        - Ongoing https://conda-forge.org/status/
-        - More leafs to target?
-    - Openssl
-        - Underway
-    - Readline (wait for cfep-09)
-        - ABI change
-        - Needs migrator
-    - @Christopher W : Add link to migration (conda-forge status?) docs for conda-forge.github.io (ocefpaf: I’ll add the status link to the docs)
-- Nvidia relationship
-    - Building GPU packages using conda-forge packages, upload to their own channel after building with cudatoolkit on their own Jenkins system.
-    - GPU compiler shim package: https://github.com/conda-forge/staged-recipes/pull/8229
-    - Maybe form a working group?
-- Perl ecosystem? (ocefpaf:Ask bBjorn G.)
-    - move forward with plan to incorporate perl into CF
-        - Do we have an issue or something for this?
-- R 3.6 migration? (ocefpaf: Ask bBjorn G.)
-    - https://github.com/conda-forge/r-base-feedstock/pull/82
-
-</pre></div>
-</div>
-</div>
-
-
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -348,7 +415,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -392,14 +459,15 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2019-05-29 conda-forge meeting</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2021, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

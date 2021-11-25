@@ -3,19 +3,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>2016-04-29 &#8212; conda-forge 2021.11.25 documentation</title>
-    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/cloud.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
 
     
     
@@ -57,7 +58,8 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2016-04-29</a></li> 
       </ul>
     </div>
     </div>
@@ -68,29 +70,29 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="id1">
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>2016-04-29<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>14:00 UTC</p>
 <p>Hangout link: <a class="reference external" href="https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie"></a>https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie</p>
 <p>Agenda:</p>
 <ul>
 <li><p>Dependency tracking (I know this has jumped the order, but this has become extremely pressing.)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Proposed</span> <span class="n">fixes</span> <span class="n">to</span> <span class="n">conda</span><span class="o">-</span><span class="n">build</span><span class="o">.</span> <span class="n">There</span> <span class="n">are</span> <span class="n">many</span> <span class="ow">and</span> <span class="n">this</span> <span class="ow">is</span> <span class="n">pretty</span> <span class="n">slow</span> <span class="n">moving</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Proposed fixes to conda-build. There are many and this is pretty slow moving.
 
-        <span class="o">*</span>   <span class="n">Question</span> <span class="n">about</span> <span class="n">conda</span><span class="o">-</span><span class="n">smithy</span><span class="o">/</span><span class="n">conda</span><span class="o">-</span><span class="n">build</span><span class="o">-</span><span class="nb">all</span> <span class="n">requirements</span><span class="o">.</span> <span class="n">Please</span> <span class="n">see</span> <span class="n">reference</span> <span class="n">to</span> <span class="s2">&quot;Question 4.5&quot;</span> <span class="ow">in</span> <span class="p">[</span><span class="n">this</span> <span class="n">comment</span><span class="p">](</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">conda</span><span class="o">/</span><span class="n">conda</span><span class="o">-</span><span class="n">build</span><span class="o">/</span><span class="n">pull</span><span class="o">/</span><span class="mi">848</span><span class="c1">#issuecomment-215523101) </span>
+        *   Question about conda-smithy/conda-build-all requirements. Please see reference to &quot;Question 4.5&quot; in [this comment](https://github.com/conda/conda-build/pull/848#issuecomment-215523101) 
 
-<span class="o">*</span>   <span class="n">Internal</span> <span class="n">pinning</span> <span class="n">mechanism</span><span class="o">.</span> <span class="p">[</span><span class="n">Phil</span> <span class="n">Elson</span><span class="p">](</span><span class="o">/</span><span class="n">ep</span><span class="o">/</span><span class="n">profile</span><span class="o">/</span><span class="n">AviM60TiesB</span><span class="p">)</span> <span class="n">wrote</span> <span class="n">some</span> <span class="n">nice</span> <span class="n">scripts</span> <span class="n">here</span> <span class="ow">and</span> <span class="n">they</span> <span class="n">are</span> <span class="n">very</span> <span class="n">helpful</span><span class="o">.</span>
+*   Internal pinning mechanism. [Phil Elson](https://conda-forge.hackpad.com/ep/profile/AviM60TiesB) wrote some nice scripts here and they are very helpful.
 </pre></div>
 </div>
 <ul>
 <li><p>Questions:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    *   How can we figure out what things need pinning?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   How can we figure out what things need pinning?
 </pre></div>
 </div>
 <ul>
 <li><p>When do we rollback a pinning?</p></li>
 <li><p>How can we handle pinning in a more automated manner?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>        *   What things should be pinned?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>        *   What things should be pinned?
 </pre></div>
 </div>
 <ul class="simple">
@@ -103,7 +105,7 @@
 </ul>
 </li>
 <li><p>PyPI metadata redundancy</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Prototype</span> <span class="n">tool</span> <span class="n">to</span> <span class="n">convert</span> <span class="n">pure</span> <span class="n">Python</span> <span class="n">wheels</span> <span class="n">directly</span> <span class="n">to</span> <span class="n">conda</span> <span class="n">packages</span><span class="p">:</span> <span class="p">[](</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">takluyver</span><span class="o">/</span><span class="n">wheel2conda</span><span class="p">)</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">takluyver</span><span class="o">/</span><span class="n">wheel2conda</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Prototype tool to convert pure Python wheels directly to conda packages: [](https://github.com/takluyver/wheel2conda)https://github.com/takluyver/wheel2conda
 </pre></div>
 </div>
 <ul class="simple">
@@ -111,7 +113,7 @@
 </ul>
 </li>
 <li><p>Python3 vs Python==3</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">How</span> <span class="n">to</span> <span class="n">depend</span> <span class="p">(</span><span class="n">inc</span> <span class="n">build</span> <span class="n">depend</span><span class="p">)</span> <span class="n">on</span> <span class="n">applications</span> <span class="n">which</span> <span class="n">require</span> <span class="n">Python</span> <span class="mi">3</span><span class="p">,</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">Python</span><span class="o">==</span><span class="mi">2</span> <span class="n">env</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   How to depend (inc build depend) on applications which require Python 3, from a Python==2 env
 </pre></div>
 </div>
 <ul class="simple">
@@ -135,7 +137,7 @@
 <ul>
 <li><p>Let’s give webex a shot</p></li>
 <li><p>Dependency tracking</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Currently</span> <span class="n">baking</span> <span class="ow">in</span> <span class="n">versions</span> <span class="n">into</span> <span class="n">the</span> <span class="n">recipe</span><span class="p">,</span> <span class="n">automated</span> <span class="k">with</span> <span class="n">script</span> <span class="kn">from</span> <span class="p">[</span><span class="n">Phil</span> <span class="n">Elson</span><span class="p">](</span><span class="o">/</span><span class="n">ep</span><span class="o">/</span><span class="n">profile</span><span class="o">/</span><span class="n">AviM60TiesB</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Currently baking in versions into the recipe, automated with script from [Phil Elson](https://conda-forge.hackpad.com/ep/profile/AviM60TiesB)
 </pre></div>
 </div>
 <ul>
@@ -143,7 +145,7 @@
 <li><p><a class="reference external" href="https://github.com/conda-forge/staged-recipes/wiki/Pinned-dependencies"></a>https://github.com/conda-forge/staged-recipes/wiki/Pinned-dependencies</p></li>
 <li><p>What if we want to change a pinned version, say zlib 1.2 to 1.3?</p></li>
 <li><p>Shared VM which performs automated and semi-automated tasks which multiple contributors have access too</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">*</span>   <span class="n">Look</span> <span class="n">into</span> <span class="n">setting</span> <span class="n">up</span> <span class="n">a</span> <span class="n">lightweight</span> <span class="n">host</span><span class="o">/</span><span class="n">VM</span><span class="p">,</span> <span class="n">heroku</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   Look into setting up a lightweight host/VM, heroku
 </pre></div>
 </div>
 <ul class="simple">
@@ -153,13 +155,13 @@
 </ul>
 </li>
 <li><p>Proposed fixes to conda-build, <a class="reference external" href="https://github.com/conda/conda-build/pull/848">conda/conda build#848</a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Will these brake conda-build-all, do we care?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Will these brake conda-build-all, do we care?
 </pre></div>
 </div>
 <ul>
 <li><p>Micheal is working on conda-render tool to try to fill in as much jinja template as possible</p></li>
 <li><p>Talk about this specific topic, plan agenda in advance</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">*</span>   <span class="n">Plan</span> <span class="n">time</span> <span class="n">using</span> <span class="n">emai</span><span class="o">/</span><span class="n">GitHub</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   Plan time using emai/GitHub
 </pre></div>
 </div>
 <ul class="simple">
@@ -169,27 +171,27 @@
 </ul>
 </li>
 <li><p>Complex licensing, ie MKL, CUDA, CuDNN</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">MKL</span> <span class="n">runtimes</span> <span class="n">are</span> <span class="n">spelled</span> <span class="n">out</span><span class="p">,</span> <span class="n">headers</span> <span class="n">more</span> <span class="nb">complex</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   MKL runtimes are spelled out, headers more complex
 </pre></div>
 </div>
 <ul>
 <li><p>CUDA seems better, CentOS 6 images available</p></li>
 <li><p>Micheal not aware of CuDNN requirements</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">*</span>   <span class="n">Micheal</span> <span class="n">will</span> <span class="n">look</span> <span class="n">into</span> <span class="n">cuDNN</span> <span class="n">license</span> <span class="n">constraints</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   Micheal will look into cuDNN license constraints.
 </pre></div>
 </div>
 </li>
 </ul>
 </li>
 <li><p>Python package</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Windows</span> <span class="n">needs</span> <span class="n">some</span> <span class="n">files</span> <span class="n">moved</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Windows needs some files moved.
 </pre></div>
 </div>
 <ul>
 <li><p>Features or vc package?</p></li>
 <li><p>xz 5.0 or 5.2?  Start with 5.0, then do 5.2 build</p></li>
 <li><p>Branding?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    *   Easy to implement, but is it wanted?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   Easy to implement, but is it wanted?
 </pre></div>
 </div>
 <ul class="simple">
@@ -201,10 +203,10 @@
 </ul>
 </li>
 </ul>
-<p>All of the contents below were discussed between <a class="reference external" href="/ep/profile/AviM60TiesB">Phil Elson</a> and <a class="reference external" href="/ep/profile/wv6uvIZX6h0">John Kirkham</a>. Many of the items have already been planned before and just need the details ironed out. Anything that required large group discussion was not decided in anyway.</p>
+<p>All of the contents below were discussed between <a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/AviM60TiesB">Phil Elson</a> and <a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/wv6uvIZX6h0">John Kirkham</a>. Many of the items have already been planned before and just need the details ironed out. Anything that required large group discussion was not decided in anyway.</p>
 <ul>
 <li><p>Yum requirements</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Decided</span> <span class="n">to</span> <span class="n">go</span> <span class="k">with</span> <span class="n">this</span> <span class="n">PR</span> <span class="p">(</span> <span class="p">[</span><span class="n">conda</span> <span class="n">forge</span><span class="o">/</span><span class="n">conda</span> <span class="n">smithy</span><span class="c1">#135](https://github.com/conda-forge/conda-smithy/pull/135) ).</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Decided to go with this PR ( [conda forge/conda smithy#135](https://github.com/conda-forge/conda-smithy/pull/135) ).
 </pre></div>
 </div>
 <ul class="simple">
@@ -212,7 +214,7 @@
 </ul>
 </li>
 <li><p>Low level packaging</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Some</span> <span class="n">brief</span> <span class="n">discussion</span> <span class="n">about</span> <span class="n">using</span> <span class="n">different</span> <span class="n">subchannels</span> <span class="k">for</span> <span class="n">these</span> <span class="n">to</span> <span class="n">avoid</span> <span class="n">dependency</span> <span class="n">clashes</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">compiler</span> <span class="n">components</span><span class="p">)</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Some brief discussion about using different subchannels for these to avoid dependency clashes (e.g. compiler components).
 </pre></div>
 </div>
 <ul class="simple">
@@ -220,17 +222,17 @@
 </ul>
 </li>
 <li><p>Adding a devtoolset to the container (for now).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">This</span> <span class="n">was</span> <span class="n">already</span> <span class="n">merged</span> <span class="p">(</span><span class="n">adds</span> <span class="n">devtoolset</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   This was already merged (adds devtoolset-2).
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><a class="reference external" href="/ep/profile/AviM60TiesB">Phil</a> has rebuilt this.</p></li>
-<li><p><a class="reference external" href="/ep/profile/wv6uvIZX6h0">John</a> tested the image with a trivial C++11 <a class="reference external" href="https://github.com/jakirkham/hello_tests/blob/5b2f6b0c5682ecd84bee3be9cb73d790265f6002/hello.cxx">program</a> and that worked fine.</p></li>
+<li><p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/AviM60TiesB">Phil</a> has rebuilt this.</p></li>
+<li><p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/wv6uvIZX6h0">John</a> tested the image with a trivial C++11 <a class="reference external" href="https://github.com/jakirkham/hello_tests/blob/5b2f6b0c5682ecd84bee3be9cb73d790265f6002/hello.cxx">program</a> and that worked fine.</p></li>
 <li><p>Automatic builds are not working. Will likely contact Docker to fix. However, this only matters if this problem still happens after moving the images.</p></li>
 </ul>
 </li>
 <li><p>Movement of Docker images to common spaces (Docker Hub org, GitHub org).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="p">[</span><span class="n">John</span><span class="p">](</span><span class="o">/</span><span class="n">ep</span><span class="o">/</span><span class="n">profile</span><span class="o">/</span><span class="n">wv6uvIZX6h0</span><span class="p">)</span> <span class="n">will</span> <span class="n">add</span> <span class="n">the</span> <span class="n">PRs</span> <span class="n">to</span> <span class="n">move</span> <span class="n">Obvious</span><span class="o">-</span><span class="n">CI</span><span class="s1">&#39;s Docker image to the org and from Obvious-CI.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   [John](https://conda-forge.hackpad.com/ep/profile/wv6uvIZX6h0) will add the PRs to move Obvious-CI&#39;s Docker image to the org and from Obvious-CI.
 </pre></div>
 </div>
 <ul class="simple">
@@ -241,9 +243,10 @@
 </ul>
 </li>
 </ul>
-</div>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -413,7 +416,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -457,14 +460,15 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2016-04-29</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2021, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

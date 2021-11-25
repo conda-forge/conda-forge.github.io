@@ -3,19 +3,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>2016-06-24: General discussion &#8212; conda-forge 2021.11.25 documentation</title>
-    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/cloud.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
 
     
     
@@ -57,7 +58,8 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2016-06-24: General discussion</a></li> 
       </ul>
     </div>
     </div>
@@ -68,19 +70,19 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="general-discussion">
+  <section class="tex2jax_ignore mathjax_ignore" id="general-discussion">
 <h1>2016-06-24: General discussion<a class="headerlink" href="#general-discussion" title="Permalink to this headline">¶</a></h1>
 <p><strong>(please note this document previously incorrectly slated the meeting for the 17th)</strong></p>
 <p>Time: 14:00 UTC</p>
 <p>Hangout link: <a class="reference external" href="https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie"></a>https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie</p>
 <p><strong>Attendees</strong></p>
-<p><a class="reference external" href="/ep/profile/DMmBLyb21HK">Bjˆrn Gr¸ning</a></p>
+<p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/DMmBLyb21HK">Bjˆrn Gr¸ning</a></p>
 <p>Filipe</p>
-<p><a class="reference external" href="/ep/profile/wv6uvIZX6h0">John Kirkham</a></p>
-<p><a class="reference external" href="/ep/profile/yHQTJXZ4gyS">Michael Sarahan</a></p>
+<p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/wv6uvIZX6h0">John Kirkham</a></p>
+<p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS">Michael Sarahan</a></p>
 <p>Jonathan Helmus</p>
 <p>Matt Craig</p>
-<p><a class="reference external" href="/ep/profile/AviM60TiesB">Phil Elson</a></p>
+<p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/AviM60TiesB">Phil Elson</a></p>
 <p><strong>Standing items</strong></p>
 <ul class="simple">
 <li><p>How many repos?</p></li>
@@ -94,7 +96,7 @@
 <li><p>Basic community practices when PR-ing to staged-recipes.</p></li>
 <li><p>Recently I present conda-forge in a NOAA/IOOS in DC. Most people are excited about conda-forge, but reluctant to switch from the IOOS channel to conda-forge. The main reason is, of course, control.  I made my best ensured them that conda-forge will follow all the good community practices as any other open source project that they already rely on. However, there are still some concerns. I would like to present a summary of the discussion in our meeting.</p></li>
 <li><p>NetCDF (<s>also curl/ca-certificates and Perl packages</s>) - Done?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">curl</span> <span class="ow">and</span> <span class="n">ca</span><span class="o">-</span><span class="n">certificates</span> <span class="n">are</span> <span class="n">done</span> <span class="ow">and</span> <span class="n">available</span><span class="o">.</span> 
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   curl and ca-certificates are done and available. 
 </pre></div>
 </div>
 <ul class="simple">
@@ -103,7 +105,7 @@
 </li>
 <li><p><s>GitHub rate limiting. How can we further mitigate these?</s> This is a duplicate, it appears again below.</p></li>
 <li><p>PR reviews</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Treat</span> <span class="n">every</span> <span class="n">PR</span> <span class="k">as</span> <span class="n">a</span> <span class="n">Work</span> <span class="ow">in</span> <span class="n">Progress</span><span class="o">.</span> <span class="n">At</span> <span class="n">least</span> <span class="n">let</span> <span class="n">PRs</span> <span class="n">sit</span> <span class="k">for</span> <span class="n">a</span> <span class="n">few</span> <span class="n">hours</span> <span class="n">before</span> <span class="n">merging</span> <span class="n">them</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Treat every PR as a Work in Progress. At least let PRs sit for a few hours before merging them.
 </pre></div>
 </div>
 <ul class="simple">
@@ -114,7 +116,7 @@
 </li>
 <li><p>Notifications (how do we stay on top of them)</p></li>
 <li><p>Standardizing installs</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Mention [`toolchain`](https://github.com/conda-forge/toolchain-feedstock) .
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Mention [`toolchain`](https://github.com/conda-forge/toolchain-feedstock) .
 
         *   Discuss rollout to feedstocks.
 
@@ -123,7 +125,7 @@
 </div>
 </li>
 <li><p>MSYS2</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Discussing</span> <span class="n">Ray</span> <span class="n">Donnelly</span><span class="s1">&#39;s work on MSYS2 packages and how we want to use and integrate these into conda-forge.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Discussing Ray Donnelly&#39;s work on MSYS2 packages and how we want to use and integrate these into conda-forge.
 </pre></div>
 </div>
 <ul class="simple">
@@ -131,7 +133,7 @@
 </ul>
 </li>
 <li><p>Binary data</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Do we include it in recipes?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Do we include it in recipes?
 </pre></div>
 </div>
 <ul class="simple">
@@ -142,7 +144,7 @@
 </li>
 <li><p>OpenBLAS (on Windows)</p></li>
 <li><p>Dev releases: Where do they happen?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Do we do them at conda-forge?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Do we do them at conda-forge?
 
         *   Maybe add a label.
 
@@ -154,7 +156,7 @@
 </ul>
 </li>
 <li><p>Conda-forge installer</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">We</span> <span class="n">have</span> <span class="n">Python</span> <span class="mf">3.5</span> <span class="n">now</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   We have Python 3.5 now
 </pre></div>
 </div>
 <ul class="simple">
@@ -164,7 +166,7 @@
 </ul>
 </li>
 <li><p>GitHub rate limitations. How can we further mitigate these?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   GitHub letter ( [](https://docs.google.com/document/d/19HLtYPwg6IKAwmxPwL7Vd3AX0n47ANP-ZTpZROn-Cwc/edit?pref=2&amp;pli=1)https://docs.google.com/document/d/19HLtYPwg6IKAwmxPwL7Vd3AX0n47ANP-ZTpZROn-Cwc/edit?pref=2&amp;pli=1 ).
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   GitHub letter ( [](https://docs.google.com/document/d/19HLtYPwg6IKAwmxPwL7Vd3AX0n47ANP-ZTpZROn-Cwc/edit?pref=2&amp;pli=1)https://docs.google.com/document/d/19HLtYPwg6IKAwmxPwL7Vd3AX0n47ANP-ZTpZROn-Cwc/edit?pref=2&amp;pli=1 ).
 
         *   +1, this reads very well
 *   +1 also -- is it appropriate to ask for advice on how to reduce our API calls or queue them up in the event they are unwilling to raise  limit?
@@ -173,17 +175,17 @@
 </div>
 </li>
 <li><p>Channel mirroring</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Can this point be a little bit explained? I thought about this as well and would like to contribute to this point.
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Can this point be a little bit explained? I thought about this as well and would like to contribute to this point.
 </pre></div>
 </div>
 </li>
 <li><p>Feedstock history</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Is it sacred?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Is it sacred?
 </pre></div>
 </div>
 <ul>
 <li><p>Do we rebase/force push?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    *   If so, under what conditions?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   If so, under what conditions?
 </pre></div>
 </div>
 <ul class="simple">
@@ -193,7 +195,7 @@
 </ul>
 </li>
 <li><p>Docker hosting solution</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Docker</span> <span class="n">Hub</span> <span class="n">builds</span> <span class="n">were</span> <span class="n">broken</span> <span class="k">for</span> <span class="n">a</span> <span class="n">week</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">half</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Docker Hub builds were broken for a week and a half.
 </pre></div>
 </div>
 <ul class="simple">
@@ -203,7 +205,7 @@
 </ul>
 </li>
 <li><p>Continuum metadata request: can we add these to linter?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">example</span> <span class="n">metadata</span><span class="p">:</span> <span class="p">[](</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ContinuumIO</span><span class="o">/</span><span class="n">anaconda</span><span class="o">-</span><span class="n">recipes</span><span class="o">/</span><span class="n">blob</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">anaconda</span><span class="o">-</span><span class="n">build</span><span class="o">/</span><span class="n">meta</span><span class="o">.</span><span class="n">yaml</span><span class="c1">#L36-L44)[https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44](https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   example metadata: [](https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44)[https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44](https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44)
 </pre></div>
 </div>
 <ul class="simple">
@@ -219,7 +221,7 @@
 <li><p>Thanks for pointing this out. The described solution looks reasonable and is preferable to prefixing package names. Great!</p></li>
 <li></li>
 <li><p>Signing packages</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Should</span> <span class="n">be</span> <span class="n">easy</span> <span class="n">to</span> <span class="n">do</span><span class="o">.</span> <span class="p">(</span> <span class="p">[](</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">conda</span><span class="o">.</span><span class="n">pydata</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">signed</span><span class="o">-</span><span class="n">packages</span><span class="o">.</span><span class="n">html</span><span class="p">)</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">conda</span><span class="o">.</span><span class="n">pydata</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">signed</span><span class="o">-</span><span class="n">packages</span><span class="o">.</span><span class="n">html</span> <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Should be easy to do. ( [](http://conda.pydata.org/docs/signed-packages.html)http://conda.pydata.org/docs/signed-packages.html )
 </pre></div>
 </div>
 <ul class="simple">
@@ -227,7 +229,7 @@
 </ul>
 </li>
 <li><p>HTTPError: 503 Server Error: Service Unavailable: Back-end server is at capacity for url…</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Seems</span> <span class="n">we</span> <span class="n">are</span> <span class="n">regularly</span> <span class="n">running</span> <span class="n">into</span> <span class="n">this</span> <span class="n">issue</span> <span class="n">under</span> <span class="n">normal</span> <span class="n">usage</span> <span class="n">conditions</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Seems we are regularly running into this issue under normal usage conditions.
 </pre></div>
 </div>
 <ul class="simple">
@@ -252,11 +254,11 @@
 <li><p>Should raise issues on conda GitHub repo</p></li>
 <li><p>No easy solutions, but we need to choose some solution</p></li>
 <li><p>meta-package which use “common” name</p></li>
-<li><p>Correct solution is to prefix everything with “python-“ but people do not want to do this when installing and people are already used to the old method.</p></li>
+<li><p>Correct solution is to prefix everything with “python-” but people do not want to do this when installing and people are already used to the old method.</p></li>
 <li><p>Filipe’s issue with namespaces is that it makes choices for users, would rather have that choice… raise on GitHub issue XXX</p></li>
 <li><p>For many users conda is a drop in replacement for pip, should we keep this big advantage?</p></li>
 <li><p>Are there less engineered solution than namespacing?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Should</span> <span class="n">be</span> <span class="n">raised</span> <span class="ow">in</span> <span class="n">GitHub</span><span class="p">,</span> <span class="n">submit</span> <span class="n">PRs</span> 
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Should be raised in GitHub, submit PRs 
 </pre></div>
 </div>
 </li>
@@ -289,7 +291,7 @@
 <p>Suggestions for Phil’s priorities</p>
 <ul>
 <li><p>conda-build-all</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="p">[</span><span class="n">SciTools</span><span class="o">/</span><span class="n">conda</span> <span class="n">build</span> <span class="nb">all</span><span class="c1">#41](https://github.com/SciTools/conda-build-all/issues/41)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   [SciTools/conda build all#41](https://github.com/SciTools/conda-build-all/issues/41)
 </pre></div>
 </div>
 </li>
@@ -300,9 +302,10 @@
 <li><p>Consolidate multiple PR into a single version</p></li>
 <li><p>conda-build-all PR</p></li>
 </ul>
-</div>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -472,7 +475,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -516,14 +519,15 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2016-06-24: General discussion</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2021, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

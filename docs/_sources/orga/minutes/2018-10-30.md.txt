@@ -14,7 +14,7 @@
 - Compiler rebuild status
     - python done for both compiler stacks
     - ~~pending: openblas (numeric stack currently held up)~~
-~~~~    - Qt: try to build on Azure?
+    - Qt: try to build on Azure?
 - New approach to reducing CI load https://github.com/conda-forge/conda-forge.github.io/issues/647
     - Might be possible to not be totally insecure with work. But nobody is volunteering to do that work right now. :)
     - Pushing PR builds to a staging channel might be a nice UX improvement so you can test anyway.

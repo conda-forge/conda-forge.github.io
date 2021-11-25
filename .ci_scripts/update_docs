@@ -26,7 +26,10 @@ rm -rf docs/
 python .ci_scripts/generate_cfep_index.py
 
 pushd src
-make html
+
+# -W --keep-going: list all warnings but fail build in case there are any
+# -n: check validity of all links
+make html SPHINXOPTS="-W --keep-going -n"
 mv _build/html ../docs
 rm -rf _build
 popd

@@ -3,19 +3,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Maintaining packages &#8212; conda-forge 2021.11.25 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
 
     
     
@@ -56,7 +57,8 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Maintaining packages</a></li> 
       </ul>
     </div>
     </div>
@@ -67,36 +69,36 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="maintaining-packages">
+  <section id="maintaining-packages">
 <span id="maintaining-pkgs"></span><h1>Maintaining packages<a class="headerlink" href="#maintaining-packages" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="important-notes">
+<section id="important-notes">
 <h2>Important notes<a class="headerlink" href="#important-notes" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="packages-on-conda-forge-are-immutable">
+<section id="packages-on-conda-forge-are-immutable">
 <h3>Packages on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> are immutable<a class="headerlink" href="#packages-on-conda-forge-are-immutable" title="Permalink to this headline">¶</a></h3>
 <p>As a matter of policy, we do not allow edits or the deletion of packages on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. This
 policy is very important as it increases the reliability and reproducibility of <code class="docutils literal notranslate"><span class="pre">conda</span></code> environments
 made with the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel. Note that because of this policy, our upload scripts will refuse to
 upload packages which already exist on the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel.</p>
 <p>If you need to remove a package, please see the <a class="reference internal" href="#maint-fix-broken-packages"><span class="std std-ref">section</span></a> on marking packages broken.</p>
-</div>
-<div class="section" id="forking-and-pull-requests">
+</section>
+<section id="forking-and-pull-requests">
 <h3>Forking and pull requests<a class="headerlink" href="#forking-and-pull-requests" title="Permalink to this headline">¶</a></h3>
 <p>All maintainers are given push access to the feedstocks that they maintain.
 This means that a maintainer can create branches in the main repo.
 For updates, using a branch in the main repo is discouraged because,</p>
 <ol class="arabic">
-<li><p><a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> is run on both the branch and the PR.</p>
-<p>This wastes <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> resources</p>
+<li><p><a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a> is run on both the branch and the PR.</p>
+<p>This wastes <a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a> resources</p>
 </li>
 <li><p>Branches are automatically published.</p>
-<p>This means if you push a version update to a branch and then create a <a class="reference internal" href="../misc/00_intro.html#term-pr"><span class="xref std std-term">PR</span></a>, conda packages will be published to anaconda.org before the PR is merged.</p>
+<p>This means if you push a version update to a branch and then create a <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a>, conda packages will be published to anaconda.org before the PR is merged.</p>
 </li>
 </ol>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>For these reasons, maintainers are asked to fork the feedstock to their personal account, push to a branch in the fork and then open a PR to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> repo.</p>
 </div>
-<div class="section" id="pushing-to-regro-cf-autotick-bot-branch">
+<section id="pushing-to-regro-cf-autotick-bot-branch">
 <h4>Pushing to regro-cf-autotick-bot branch<a class="headerlink" href="#pushing-to-regro-cf-autotick-bot-branch" title="Permalink to this headline">¶</a></h4>
 <p>When a new version of a package is released on PyPI/CRAN/.., we have a bot that automatically creates version updates for the feedstock. In most cases you can simply merge this PR and it should include all changes. When certain things have changed upstream, e.g. the dependencies, you will still have to do changes to the created PR. As feedstock maintainer, you don’t have to create a new PR for that but can simply push to the branch the bot created. There are two alternatives to push to the branch of the bot:</p>
 <ol class="arabic">
@@ -126,8 +128,8 @@ enabled <a class="reference external" href="https://help.github.com/en/articles/
 </ul>
 </li>
 </ol>
-</div>
-<div class="section" id="example-workflow-for-updating-a-package">
+</section>
+<section id="example-workflow-for-updating-a-package">
 <h4>Example workflow for updating a package<a class="headerlink" href="#example-workflow-for-updating-a-package" title="Permalink to this headline">¶</a></h4>
 <p>Here we assume that you would like to update the feedstock <code class="docutils literal notranslate"><span class="pre">&lt;feedstock&gt;</span></code>. Feedstock is a placeholder and can e.g. be replaced by <code class="docutils literal notranslate"><span class="pre">numpy-feedstock</span></code>.</p>
 <ol class="arabic">
@@ -164,10 +166,10 @@ enabled <a class="reference external" href="https://help.github.com/en/articles/
 </ul>
 </li>
 </ol>
-</div>
-</div>
-</div>
-<div class="section" id="updating-recipes">
+</section>
+</section>
+</section>
+<section id="updating-recipes">
 <h2>Updating recipes<a class="headerlink" href="#updating-recipes" title="Permalink to this headline">¶</a></h2>
 <p>Please follow the following guidelines while updating recipes:</p>
 <ol class="arabic simple">
@@ -175,10 +177,10 @@ enabled <a class="reference external" href="https://help.github.com/en/articles/
 <li><p>When a package’s version is not changed, but other metadata or parts of the recipe are changed, increase the build number by <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
 <li><p>While shipping a new version of your package, reset the build number to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
 </ol>
-</div>
-<div class="section" id="rerendering-feedstocks">
+</section>
+<section id="rerendering-feedstocks">
 <span id="dev-update-rerender"></span><h2>Rerendering feedstocks<a class="headerlink" href="#rerendering-feedstocks" title="Permalink to this headline">¶</a></h2>
-<p>Rerendering is conda-forge’s way to update the files common to all feedstocks (e.g. README, <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a> configuration, pinned dependencies).</p>
+<p>Rerendering is conda-forge’s way to update the files common to all feedstocks (e.g. README, <a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a> configuration, pinned dependencies).</p>
 <p>Rerendering can be done in two ways:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -186,7 +188,7 @@ enabled <a class="reference external" href="https://help.github.com/en/articles/
 <li><p>Run conda-smithy locally on your machine (See <a class="reference internal" href="#dev-rerender-local"><span class="std std-ref">Rerendering with conda-smithy locally</span></a>).</p></li>
 </ol>
 </div></blockquote>
-<div class="section" id="rerendering-with-conda-smithy-locally">
+<section id="rerendering-with-conda-smithy-locally">
 <span id="dev-rerender-local"></span><h3>Rerendering with conda-smithy locally<a class="headerlink" href="#rerendering-with-conda-smithy-locally" title="Permalink to this headline">¶</a></h3>
 <p>The first step is to install <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> in your root environment.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge conda-smithy
@@ -198,8 +200,8 @@ enabled <a class="reference external" href="https://help.github.com/en/articles/
 </div>
 <p>Optionally one can commit the changes manually.
 To do this drop <code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">auto</span></code> from the command.</p>
-</div>
-<div class="section" id="when-to-rerender">
+</section>
+<section id="when-to-rerender">
 <h3>When to rerender<a class="headerlink" href="#when-to-rerender" title="Permalink to this headline">¶</a></h3>
 <p>We need to re-render when there are changes in the following parts of the feedstock:</p>
 <ul class="simple">
@@ -209,11 +211,11 @@ To do this drop <code class="docutils literal notranslate"><span class="pre">-c<
 <li><p>Updates in conda-forge pinning that affect the feedstock.</p></li>
 <li><p>Build issues that a feedstock configuration update will fix (follow us on <a class="reference external" href="https://gitter.im/conda-forge/conda-forge.github.io">gitter</a> to know about those).</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="testing-changes-locally">
+</section>
+</section>
+<section id="testing-changes-locally">
 <h2>Testing changes locally<a class="headerlink" href="#testing-changes-locally" title="Permalink to this headline">¶</a></h2>
-<p>If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is built by our <a class="reference internal" href="../misc/00_intro.html#term-ci"><span class="xref std std-term">CI</span></a>.</p>
+<p>If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is built by our <a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a>.</p>
 <p>If you want to build and test updates to a feedstock locally, go to the root
 feedstock directory and run:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python build-locally.py
@@ -230,8 +232,8 @@ feedstock directory and run:</p>
 </div>
 <p>to save it in a text file for future inspection.</p>
 <p>Once built, you can find the finished package in the <code class="docutils literal notranslate"><span class="pre">build_artifacts</span></code> directory in your feedstock.</p>
-</div>
-<div class="section" id="removing-broken-packages">
+</section>
+<section id="removing-broken-packages">
 <span id="maint-fix-broken-packages"></span><h2>Removing broken packages<a class="headerlink" href="#removing-broken-packages" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel.</p>
 <p>If the only issue is in the package metadata, we can directly patch it using
@@ -246,15 +248,15 @@ remove broken packages from the <code class="docutils literal notranslate"><span
 <li><p>Add the broken files to the new text file, one path per line. See <a class="reference external" href="https://github.com/conda-forge/admin-requests/blob/main/broken/example.txt">broken/example.txt</a> for an example file.</p></li>
 <li><p>Open a new PR. Once merged, a bot will label all listed files as broken, thus effectively removing them from the channel.</p></li>
 </ol>
-</div>
-<div class="section" id="archiving-feedstocks">
+</section>
+<section id="archiving-feedstocks">
 <h2>Archiving feedstocks<a class="headerlink" href="#archiving-feedstocks" title="Permalink to this headline">¶</a></h2>
 <p>If a package is no longer maintained <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> will <em>archive</em>
 the repository. An archived repository can no longer accept PRs and issues, which prevents people and <code class="docutils literal notranslate"><span class="pre">regro-cf-autotick-bot</span></code> from updating the
 package (an example would be to re-render the feedstock to support new Python versions). Note that this <strong>does not</strong> remove the existing packages, those will still be available.</p>
 <p>If you believe a feedstock should be archived, please contact <a class="reference external" href="https://github.com/orgs/conda-forge/teams/core">&#64;conda-forge/core</a>.</p>
-</div>
-<div class="section" id="updating-the-maintainer-list">
+</section>
+<section id="updating-the-maintainer-list">
 <span id="maint-updating-maintainers"></span><h2>Updating the maintainer list<a class="headerlink" href="#updating-the-maintainer-list" title="Permalink to this headline">¶</a></h2>
 <p>The list of maintainers of a feedstock is recorded in the recipe itself. A new maintainer can be added by opening
 an issue in the feedstock repository with the following title:</p>
@@ -267,18 +269,19 @@ To contact core, ping them by mentioning &#64;conda-forge/core in a comment or, 
 <p>This PR is designed to skip building the package. Please do <strong>not</strong> modify it or adjust the commit message.</p>
 </div>
 <p>For an example see <a class="reference external" href="https://github.com/conda-forge/cudnn-feedstock/issues/20">this</a> issue.</p>
-</div>
-<div class="section" id="maintaining-several-versions">
+</section>
+<section id="maintaining-several-versions">
 <h2>Maintaining several versions<a class="headerlink" href="#maintaining-several-versions" title="Permalink to this headline">¶</a></h2>
 <p>If you’d like to maintain more than one version of your package, you can use branches on the feedstock. To do this,
 fork your feedstock and make a meaningful branch name (e.g., <cite>v1.X</cite> or <cite>v1.0</cite>).
 Make the required changes to the recipe and rerender the feedstock. Then push this branch
 from your fork to the upstream feedstock. Our CI services will automatically build any
 branches in addition to the default branch.</p>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -349,7 +352,7 @@ branches in addition to the default branch.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -392,14 +395,15 @@ branches in addition to the default branch.</p>
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Maintaining packages</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2021, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

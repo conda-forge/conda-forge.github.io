@@ -6,15 +6,15 @@ Hangout link: [](https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie)[h
 
 **Attendees**
 
-[John Kirkham](https://conda-forge.hackpad.com/ep/profile/wv6uvIZX6h0)
+[John Kirkham](https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/wv6uvIZX6h0)
 
 Jonathan Helmus
 
-[Matt Craig](https://conda-forge.hackpad.com/ep/profile/yBvjHx0Ad3Y)
+[Matt Craig](https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/yBvjHx0Ad3Y)
 
 Phil Elson
 
-[Michael Sarahan](https://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS)
+[Michael Sarahan](https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS)
 
 Filipe 
 

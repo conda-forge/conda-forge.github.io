@@ -3,19 +3,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>FAQ &#8212; conda-forge 2021.11.25 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
 
     
     
@@ -56,7 +57,8 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FAQ</a></li> 
       </ul>
     </div>
     </div>
@@ -67,7 +69,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="faq">
+  <section id="faq">
 <h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
 <p id="faq-pkg-not-available"><a class="reference internal" href="#faq-pkg-not-available"><span class="std std-ref">(Q)</span></a> <strong>A package I am looking for is not on conda-forge, what can I do?</strong></p>
 <blockquote>
@@ -125,9 +127,10 @@ Note that <code class="docutils literal notranslate"><span class="pre">travis-ci
 <div><p>Unfortunately, this is not possible with conda-forge’s current infrastructure (<code class="docutils literal notranslate"><span class="pre">nvcc</span></code>, <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code>, etc) if there is no local CUDA Toolkit installation. In particular, the <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> package provided on conda-forge is a <em>wrapper package</em> that exposes the actual <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler to our CI infrastructure in a <code class="docutils literal notranslate"><span class="pre">conda</span></code>-friendly way; it does not contain the full <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler toolchain. One of the reasons is that CUDA headers like <code class="docutils literal notranslate"><span class="pre">cuda.h</span></code>, <code class="docutils literal notranslate"><span class="pre">cuda_runtime.h</span></code>, etc, which are needed at compile time, are not redistributable according to NVIDIA’s EULA. Likewise, the <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code> package only contains CUDA runtime libraries and not the compiler toolchain.</p>
 <p>If you need to compile CUDA code, even if it involves only CUDA host APIs, you will still need a valid CUDA Toolkit installed locally and use it. Please refer to <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html">NVCC’s documentation</a> for the CUDA compiler usage and <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html">CUDA Programming Guide</a> for general CUDA programming.</p>
 </div></blockquote>
-</div>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -176,7 +179,7 @@ Note that <code class="docutils literal notranslate"><span class="pre">travis-ci
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -219,14 +222,15 @@ Note that <code class="docutils literal notranslate"><span class="pre">travis-ci
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">FAQ</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2021, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

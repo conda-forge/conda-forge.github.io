@@ -3,19 +3,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>2016-09-09: General discussion &#8212; conda-forge 2021.11.25 documentation</title>
-    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/cloud.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
 
     
     
@@ -57,7 +58,8 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2016-09-09: General discussion</a></li> 
       </ul>
     </div>
     </div>
@@ -68,13 +70,13 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="general-discussion">
+  <section class="tex2jax_ignore mathjax_ignore" id="general-discussion">
 <h1>2016-09-09: General discussion<a class="headerlink" href="#general-discussion" title="Permalink to this headline">¶</a></h1>
 <p>Time: 14:00 UTC</p>
 <p>Hangout link: <a class="reference external" href="https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie"></a><a class="reference external" href="https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie">https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie</a></p>
 <p><strong>Attendees</strong></p>
 <ul class="simple">
-<li><p>Jonathan Helmus, Filipe, Michael, Ray, <a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/yJqDqpPqJyz">Eric Dill</a>, Björn Grüning, <a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/yBvjHx0Ad3Y">Matt Craig</a> (late)</p></li>
+<li><p>Jonathan Helmus, Filipe, Michael, Ray, <a class="reference external" href="https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/yJqDqpPqJyz">Eric Dill</a>, Björn Grüning, <a class="reference external" href="https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/yBvjHx0Ad3Y">Matt Craig</a> (late)</p></li>
 </ul>
 <p><strong>Standing items</strong></p>
 <ul class="simple">
@@ -101,7 +103,7 @@
 <p>Pre-releases/RC</p>
 <ul>
 <li><p>Needs a champion to write a proposal!</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Eric</span> <span class="n">Dill</span> <span class="n">will</span> <span class="n">take</span> <span class="n">this</span> <span class="n">on</span><span class="o">.</span> <span class="n">Hopefully</span> <span class="n">a</span> <span class="n">CFEP</span> <span class="n">will</span> <span class="n">land</span> <span class="n">within</span> <span class="n">one</span> <span class="n">week</span><span class="p">,</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">16</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Eric Dill will take this on. Hopefully a CFEP will land within one week, 2016-09-16
 </pre></div>
 </div>
 </li>
@@ -150,19 +152,19 @@
 <li><p>What support for unicode should we have?  Any?  Summary/description only?</p></li>
 <li><p>CUDA/cuDNN update</p></li>
 <li><p>Improving infrastructure</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Better</span> <span class="n">workflows</span> <span class="k">with</span> <span class="n">staged</span><span class="o">-</span><span class="n">recipes</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Better workflows with staged-recipes
 
-        <span class="o">*</span>   <span class="n">Fast</span> <span class="n">finish</span> <span class="n">AppVeyor</span> <span class="n">on</span> <span class="n">merge</span> <span class="p">(</span> <span class="p">[</span><span class="n">conda</span> <span class="n">forge</span><span class="o">/</span><span class="n">staged</span> <span class="n">recipes</span><span class="c1">#1142](https://github.com/conda-forge/staged-recipes/pull/1142) )</span>
-<span class="o">*</span>   <span class="n">Drop</span> <span class="n">Travis</span> <span class="n">CI</span> <span class="n">matrix</span> <span class="p">(</span> <span class="p">[</span><span class="n">conda</span> <span class="n">forge</span><span class="o">/</span><span class="n">staged</span> <span class="n">recipes</span><span class="c1">#1234](https://github.com/conda-forge/staged-recipes/pull/1234) )</span>
-<span class="o">*</span>   <span class="n">Use</span> <span class="n">CircleCI</span> <span class="k">for</span> <span class="n">feedstock</span> <span class="n">generation</span> <span class="p">(</span> <span class="p">[</span><span class="n">conda</span> <span class="n">forge</span><span class="o">/</span><span class="n">staged</span> <span class="n">recipes</span><span class="c1">#916](https://github.com/conda-forge/staged-recipes/issues/916) )</span>
-<span class="o">*</span>   <span class="n">Keeping</span> <span class="n">recipes</span> <span class="n">out</span> <span class="n">of</span> <span class="n">PRs</span> <span class="p">(</span> <span class="p">[</span><span class="n">conda</span> <span class="n">forge</span><span class="o">/</span><span class="n">staged</span> <span class="n">recipes</span><span class="c1">#942](https://github.com/conda-forge/staged-recipes/issues/942) )</span>
-<span class="o">*</span>   <span class="n">Bank</span> <span class="n">work</span> <span class="ow">in</span> <span class="n">partial</span> <span class="n">conversion</span> <span class="p">(</span> <span class="p">[</span><span class="n">conda</span> <span class="n">forge</span><span class="o">/</span><span class="n">staged</span> <span class="n">recipes</span><span class="c1">#915](https://github.com/conda-forge/staged-recipes/issues/915) )</span>
+        *   Fast finish AppVeyor on merge ( [conda forge/staged recipes#1142](https://github.com/conda-forge/staged-recipes/pull/1142) )
+*   Drop Travis CI matrix ( [conda forge/staged recipes#1234](https://github.com/conda-forge/staged-recipes/pull/1234) )
+*   Use CircleCI for feedstock generation ( [conda forge/staged recipes#916](https://github.com/conda-forge/staged-recipes/issues/916) )
+*   Keeping recipes out of PRs ( [conda forge/staged recipes#942](https://github.com/conda-forge/staged-recipes/issues/942) )
+*   Bank work in partial conversion ( [conda forge/staged recipes#915](https://github.com/conda-forge/staged-recipes/issues/915) )
 </pre></div>
 </div>
 </li>
 <li><p>Notifications (how do we stay on top of them)</p></li>
 <li><p>MSYS2</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Available</span> <span class="n">on</span> <span class="n">defaults</span> <span class="o">-</span> <span class="n">was</span> <span class="ow">in</span> <span class="n">conda</span> <span class="mf">4.1.7</span><span class="p">,</span> <span class="n">but</span> <span class="n">that</span> <span class="n">was</span> <span class="n">pulled</span><span class="o">.</span>  <span class="n">Coming</span> <span class="ow">in</span> <span class="mf">4.1.8</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Available on defaults - was in conda 4.1.7, but that was pulled.  Coming in 4.1.8.
 </pre></div>
 </div>
 <ul class="simple">
@@ -171,7 +173,7 @@
 </ul>
 </li>
 <li><p>Binary data</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Do we include it in recipes?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Do we include it in recipes?
 </pre></div>
 </div>
 <ul class="simple">
@@ -181,7 +183,7 @@
 </ul>
 </li>
 <li><p>Dev releases: Where do they happen?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Do we do them at conda-forge?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Do we do them at conda-forge?
 
         *   Maybe add a label.
 
@@ -193,7 +195,7 @@
 </ul>
 </li>
 <li><p>Channel mirroring</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Can this point be a little bit explained? I thought about this as well and would like to contribute to this point.
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Can this point be a little bit explained? I thought about this as well and would like to contribute to this point.
 
         *   Eric Dill has put together a script for copying a package from one channel to another here: [conda forge/conda forge.github.io#134](https://github.com/conda-forge/conda-forge.github.io/pull/134)
 *   I have a really, really crude script that copies all of the packages in one channel to another that I just put at: [](https://gist.github.com/mwcraig/8473cf840f6d29236d6d8af699404555)[https://gist.github.com/mwcraig/8473cf840f6d29236d6d8af699404555](https://gist.github.com/mwcraig/8473cf840f6d29236d6d8af699404555)
@@ -202,19 +204,19 @@
 </div>
 </li>
 <li><p>Feedstock history</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Is it sacred?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Is it sacred?
 </pre></div>
 </div>
 <ul>
 <li><p>Do we rebase/force push?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    *   If so, under what conditions?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   If so, under what conditions?
 </pre></div>
 </div>
 <ul>
 <li><p>How do we avoid multiple people doing this simultaneously?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>        <span class="o">*</span>   <span class="n">I</span> <span class="n">don</span><span class="s1">&#39;t think you can.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>        *   I don&#39;t think you can.
 
-<span class="o">*</span>   <span class="n">IMHO</span><span class="p">,</span>  <span class="k">if</span> <span class="n">it</span><span class="s1">&#39;s just one author in staged recipes, sure.  If feedstock, no  force push - only to PRs to feedstock.  If people don&#39;</span><span class="n">t</span> <span class="n">mind</span> <span class="n">merge</span> <span class="n">PRs</span><span class="p">,</span>  <span class="n">it</span> <span class="n">sure</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">lot</span> <span class="n">simpler</span> <span class="n">to</span> <span class="ow">not</span> <span class="n">rebase</span><span class="o">.</span>  <span class="n">I</span> <span class="n">have</span> <span class="n">messed</span> <span class="n">up</span> <span class="n">rebasing</span> <span class="n">a</span> <span class="n">few</span>  <span class="n">times</span> <span class="n">recently</span><span class="o">...</span> <span class="o">=</span><span class="p">(</span>
+*   IMHO,  if it&#39;s just one author in staged recipes, sure.  If feedstock, no  force push - only to PRs to feedstock.  If people don&#39;t mind merge PRs,  it sure is a lot simpler to not rebase.  I have messed up rebasing a few  times recently... =(
 </pre></div>
 </div>
 </li>
@@ -225,7 +227,7 @@
 <li><p>Drop numpy 1.10 and reduce our build matrix. (Numba now works with numpy 1.11.)</p></li>
 <li><p>Feedstocks philosophy:  Explicit vs implicit / reproducible vs redundant</p></li>
 <li><p>Signing packages</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Should</span> <span class="n">be</span> <span class="n">easy</span> <span class="n">to</span> <span class="n">do</span><span class="o">.</span> <span class="p">(</span> <span class="p">[](</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">conda</span><span class="o">.</span><span class="n">pydata</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">signed</span><span class="o">-</span><span class="n">packages</span><span class="o">.</span><span class="n">html</span><span class="p">)[</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">conda</span><span class="o">.</span><span class="n">pydata</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">signed</span><span class="o">-</span><span class="n">packages</span><span class="o">.</span><span class="n">html</span><span class="p">](</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">conda</span><span class="o">.</span><span class="n">pydata</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">signed</span><span class="o">-</span><span class="n">packages</span><span class="o">.</span><span class="n">html</span><span class="p">)</span> <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Should be easy to do. ( [](http://conda.pydata.org/docs/signed-packages.html)[http://conda.pydata.org/docs/signed-packages.html](http://conda.pydata.org/docs/signed-packages.html) )
 </pre></div>
 </div>
 <ul class="simple">
@@ -233,7 +235,7 @@
 </ul>
 </li>
 <li><p>HTTPError: 503 Server Error: Service Unavailable: Back-end server is at capacity for url…</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Seems</span> <span class="n">we</span> <span class="n">are</span> <span class="n">regularly</span> <span class="n">running</span> <span class="n">into</span> <span class="n">this</span> <span class="n">issue</span> <span class="n">under</span> <span class="n">normal</span> <span class="n">usage</span> <span class="n">conditions</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Seems we are regularly running into this issue under normal usage conditions.
 </pre></div>
 </div>
 <ul class="simple">
@@ -244,7 +246,7 @@
 </ul>
 </li>
 <li><p>Handling removal of unpinned/improperly pinned packages.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Has</span> <span class="n">been</span> <span class="n">done</span> <span class="n">manually</span> <span class="n">thus</span> <span class="n">far</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Has been done manually thus far.
 </pre></div>
 </div>
 <ul class="simple">
@@ -255,7 +257,7 @@
 </ul>
 </li>
 <li><p>Not currently buildable packages</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">In</span> <span class="n">particular</span> <span class="nb">open</span> <span class="n">source</span> <span class="n">code</span> <span class="n">that</span> <span class="ow">is</span> <span class="n">out</span> <span class="n">of</span> <span class="n">scope</span> <span class="k">for</span> <span class="n">CIs</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   In particular open source code that is out of scope for CIs.
 </pre></div>
 </div>
 <ul>
@@ -264,13 +266,13 @@
 <li><p>Are we ok with uploading non-built binaries?</p></li>
 <li><p>When do we determine something is ok to be built manually?</p></li>
 <li><p>What procedures should people follow for building manually?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">*</span>   <span class="n">Use</span> <span class="n">a</span> <span class="n">standard</span> <span class="n">build</span> <span class="n">docker</span> <span class="n">image</span><span class="p">,</span> <span class="n">VM</span><span class="p">,</span> <span class="ow">or</span> <span class="n">vagrant</span> <span class="n">file</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   Use a standard build docker image, VM, or vagrant file
 </pre></div>
 </div>
 <ul>
 <li><p>Sign package?</p></li>
 <li><p>Implement reproducible builds where feasible (linux)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>        <span class="o">*</span>   <span class="p">[](</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">reproducible</span><span class="o">-</span><span class="n">builds</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="p">)[</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">reproducible</span><span class="o">-</span><span class="n">builds</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="p">](</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">reproducible</span><span class="o">-</span><span class="n">builds</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>        *   [](https://reproducible-builds.org/)[https://reproducible-builds.org/](https://reproducible-builds.org/)
 </pre></div>
 </div>
 </li>
@@ -278,7 +280,7 @@
 </ul>
 </li>
 <li><p>What other build infrastructure could we utilize?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">*</span>   <span class="n">Would</span>  <span class="n">be</span> <span class="n">nice</span> <span class="n">to</span> <span class="n">provide</span> <span class="n">some</span> <span class="n">volunteer</span> <span class="n">builder</span> <span class="n">abstraction</span><span class="p">,</span> <span class="n">so</span> <span class="n">that</span> <span class="n">we</span> <span class="n">could</span>  <span class="n">have</span> <span class="n">an</span> <span class="n">elastic</span> <span class="n">worker</span> <span class="n">farm</span> <span class="n">that</span> <span class="n">would</span> <span class="n">be</span> <span class="n">somewhat</span> <span class="n">resilient</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   Would  be nice to provide some volunteer builder abstraction, so that we could  have an elastic worker farm that would be somewhat resilient.
 </pre></div>
 </div>
 <ul class="simple">
@@ -289,30 +291,30 @@
 </li>
 <li><p><a class="reference external" href="https://conda-forge.hackpad.com/DZNKZdgiMbF">Staged Releases</a></p></li>
 <li><p>Windows BLAS Solutions</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Still</span> <span class="n">don</span><span class="s1">&#39;t have a BLAS for Windows yet need something.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Still don&#39;t have a BLAS for Windows yet need something.
 </pre></div>
 </div>
 <ul>
 <li><p>Don’t build a BLAS</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">*</span>   <span class="n">NumPy</span> <span class="n">has</span> <span class="n">a</span> <span class="n">small</span> <span class="n">subset</span> <span class="n">of</span> <span class="n">BLAS</span> <span class="n">functionality</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   NumPy has a small subset of BLAS functionality.
 </pre></div>
 </div>
 <ul>
 <li><p>Not sure what to do with SciPy (unable to find Windows wheels for them either).</p></li>
 <li><p>Build OpenBLAS with C support only.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Will</span> <span class="n">be</span> <span class="n">pretty</span> <span class="n">slow</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Will be pretty slow.
 </pre></div>
 </div>
 </li>
 <li><p>Should work on all Pythons.</p></li>
 <li><p>Build OpenBLAS with MinGW compilers.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Works</span> <span class="k">with</span> <span class="n">Python</span> <span class="mf">2.7</span> <span class="ow">and</span> <span class="mf">3.4</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Works with Python 2.7 and 3.4.
 </pre></div>
 </div>
 </li>
 <li><p>Won’t work with Python 3.5?</p></li>
 <li><p>Reuse something like R’s BLAS.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Is there a package for something like this?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Is there a package for something like this?
 </pre></div>
 </div>
 </li>
@@ -323,9 +325,10 @@
 </ul>
 </li>
 </ul>
-</div>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -495,7 +498,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -539,14 +542,15 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2016-09-09: General discussion</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2021, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

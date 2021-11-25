@@ -17,7 +17,6 @@ import sys
 import datetime
 
 import cloud_sptheme as csp
-import recommonmark.parser
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -33,6 +32,7 @@ import recommonmark.parser
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'myst_parser',
     'sphinx.ext.todo',
     'sphinxcontrib.fulltoc',
     'sphinxcontrib.newsfeed',
@@ -41,10 +41,6 @@ extensions = [
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
-# Transpile markdown into rest
-source_parsers = {
-    '.md': 'recommonmark.parser.CommonMarkParser',
-}
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -86,7 +82,7 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.md']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.

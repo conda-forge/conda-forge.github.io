@@ -3,19 +3,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>2017-01-06: General Discussion &#8212; conda-forge 2021.11.25 documentation</title>
-    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/cloud.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
 
     
     
@@ -57,7 +58,8 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2017-01-06: General Discussion</a></li> 
       </ul>
     </div>
     </div>
@@ -68,18 +70,18 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="general-discussion">
+  <section class="tex2jax_ignore mathjax_ignore" id="general-discussion">
 <h1>2017-01-06: General Discussion<a class="headerlink" href="#general-discussion" title="Permalink to this headline">¶</a></h1>
 <p>Time: 20:00 (UTC)</p>
 <p>Hangout link: <a class="reference external" href="https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie"></a><a class="reference external" href="https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie">https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie</a></p>
 <p><strong>Attendees</strong></p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/wv6uvIZX6h0">John Kirkham</a></p></li>
+<li><p><a class="reference external" href="https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/wv6uvIZX6h0">John Kirkham</a></p></li>
 <li><p>Ray Donnelly</p></li>
 <li><p>Filipe Fernandes</p></li>
-<li><p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS">Michael Sarahan</a></p></li>
-<li><p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/Gxz5eDxqYrB">Peter Williams</a></p></li>
-<li><p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/yJqDqpPqJyz">Eric Dill</a></p></li>
+<li><p><a class="reference external" href="https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS">Michael Sarahan</a></p></li>
+<li><p><a class="reference external" href="https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/Gxz5eDxqYrB">Peter Williams</a></p></li>
+<li><p><a class="reference external" href="https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/yJqDqpPqJyz">Eric Dill</a></p></li>
 </ul>
 <p><strong>Standing Items</strong></p>
 <ul class="simple">
@@ -90,7 +92,7 @@
 <p><strong>Notes</strong></p>
 <ul>
 <li><p>Options for packaging X.org libraries.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Bundle</span> <span class="n">them</span> <span class="n">together</span> <span class="p">[</span><span class="n">PR</span><span class="c1">#2068](https://github.com/conda-forge/staged-recipes/pull/2068).</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Bundle them together [PR#2068](https://github.com/conda-forge/staged-recipes/pull/2068).
 </pre></div>
 </div>
 <ul class="simple">
@@ -101,7 +103,7 @@
 <li><p>John will build Qt 4 on OS X.</p></li>
 <li><p>Ray will build Qt 5 with jpeg 9* soon on defaults and our problem will go away.</p></li>
 <li><p>conda-build 2</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">do</span> <span class="ow">not</span> <span class="n">wait</span> <span class="k">for</span> <span class="n">the</span> <span class="n">remaining</span> <span class="n">packages</span> <span class="n">that</span> <span class="n">needs</span> <span class="n">long</span> <span class="n">prefix</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   do not wait for the remaining packages that needs long prefix
 </pre></div>
 </div>
 <ul class="simple">
@@ -129,9 +131,10 @@
 <li><p>Travis CI image change. ( <a class="reference external" href="https://github.com/conda-forge/conda-forge-enhancement-proposals/pull/6">conda forge/conda forge enhancement proposals#6</a> )</p></li>
 <li><p>conda-smithy and conda 4.2 ( <a class="reference external" href="https://github.com/conda-forge/conda-smithy/pull/394">conda forge/conda smithy#394</a> )</p></li>
 </ul>
-</div>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -301,7 +304,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -345,14 +348,15 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2017-01-06: General Discussion</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2021, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

@@ -3,19 +3,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>2016-11-24: General Discussion &#8212; conda-forge 2021.11.25 documentation</title>
-    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/cloud.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
 
     
     
@@ -57,7 +58,8 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2016-11-24: General Discussion</a></li> 
       </ul>
     </div>
     </div>
@@ -68,7 +70,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="general-discussion">
+  <section class="tex2jax_ignore mathjax_ignore" id="general-discussion">
 <h1>2016-11-24: General Discussion<a class="headerlink" href="#general-discussion" title="Permalink to this headline">¶</a></h1>
 <p>Time: 20:00 (UTC)</p>
 <p>Hangout link: <a class="reference external" href="https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie"></a><a class="reference external" href="https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie">https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie</a></p>
@@ -89,25 +91,25 @@
 <li><p>Action: Phil to take a look at <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/pull/256">conda forge/conda forge.github.io#256</a></p></li>
 <li><p>Filipe will ask Carlos whether he is prepared to build qt</p></li>
 <li><p>Binary data (repacking)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Currently</span> <span class="n">done</span> <span class="k">with</span> <span class="s2">&quot;low hanging fruit&quot;</span> <span class="ow">or</span> <span class="n">difficult</span> <span class="n">packages</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Currently done with &quot;low hanging fruit&quot; or difficult packages
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>CFEP would be helpful to give clear guidance</p></li>
 <li><p>What does it take to merge repackaging stuff?  At what point does it become painful enough to allow repackaging?</p></li>
-<li><p>MSYS2 - <a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS">Michael Sarahan</a> to ask Ray about build infrastructure for MSYS2 and perhaps unification with conda/conda-forge</p></li>
+<li><p>MSYS2 - <a class="reference external" href="https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS">Michael Sarahan</a> to ask Ray about build infrastructure for MSYS2 and perhaps unification with conda/conda-forge</p></li>
 <li><p>Git  for windows as example to avoid (Large agglomeration of individual  projects - prefer to build individual projects).  If MSYS2 were not  available, this would be an OK candidate for repackaging, because it is  such a huge pain.  Because MSYS2 is available, we should avoid  repackaging git for windows.</p></li>
 </ul>
 </li>
 <li><p>conda-build 2</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">bldpkg_path</span> <span class="n">also</span> <span class="n">takes</span> <span class="n">a</span> <span class="n">config</span> <span class="n">argument</span><span class="o">.</span> <span class="n">See</span> <span class="p">[](</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">circleci</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gh</span><span class="o">/</span><span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="o">/</span><span class="n">texinfo</span><span class="o">-</span><span class="n">feedstock</span><span class="o">/</span><span class="mi">24</span><span class="p">)[</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">circleci</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gh</span><span class="o">/</span><span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="o">/</span><span class="n">texinfo</span><span class="o">-</span><span class="n">feedstock</span><span class="o">/</span><span class="mi">24</span><span class="p">](</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">circleci</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gh</span><span class="o">/</span><span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="o">/</span><span class="n">texinfo</span><span class="o">-</span><span class="n">feedstock</span><span class="o">/</span><span class="mi">24</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   bldpkg_path also takes a config argument. See [](https://circleci.com/gh/conda-forge/texinfo-feedstock/24)[https://circleci.com/gh/conda-forge/texinfo-feedstock/24](https://circleci.com/gh/conda-forge/texinfo-feedstock/24)
 </pre></div>
 </div>
 <ul>
 <li><p>There is very little that needs to be done. See <a class="reference external" href="https://github.com/conda-forge/conda-forge-build-setup-feedstock/issues/38">conda forge/conda forge build setup feedstock#38</a>#issuecomment-262931757</p></li>
 <li><p>(It is a matter of merging PRs now :-)</p></li>
 <li><p>can we just disable symlinks for environments when building to fix the CMAKE issue? Phil: I believe so. MS +1</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">*</span>   <span class="p">[](</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">conda</span><span class="o">.</span><span class="n">pydata</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">html</span><span class="c1">#disallow-soft-linking-allow-softlinks)[http://conda.pydata.org/docs/config.html#disallow-soft-linking-allow-softlinks](http://conda.pydata.org/docs/config.html#disallow-soft-linking-allow-softlinks)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   [](http://conda.pydata.org/docs/config.html#disallow-soft-linking-allow-softlinks)[http://conda.pydata.org/docs/config.html#disallow-soft-linking-allow-softlinks](http://conda.pydata.org/docs/config.html#disallow-soft-linking-allow-softlinks)
 </pre></div>
 </div>
 <ul class="simple">
@@ -117,7 +119,7 @@
 </ul>
 </li>
 <li><p>Handling broken packages</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Hotfix</span>  <span class="n">capability</span><span class="p">:</span> <span class="n">we</span> <span class="n">will</span> <span class="n">never</span> <span class="n">have</span> <span class="n">control</span> <span class="n">of</span> <span class="n">the</span> <span class="n">channel</span> <span class="n">index</span><span class="p">,</span> <span class="n">so</span> <span class="n">we</span> <span class="n">must</span>  <span class="n">rebuild</span> <span class="ow">or</span> <span class="n">modify</span> <span class="n">existing</span> <span class="n">packages</span><span class="o">.</span> <span class="n">MS</span><span class="p">:</span> <span class="n">There</span> <span class="n">should</span> <span class="n">be</span> <span class="n">a</span> <span class="n">preference</span>  <span class="k">for</span> <span class="n">rebuild</span> <span class="n">vs</span> <span class="n">modify</span><span class="o">.</span> <span class="n">CFEP</span> <span class="p">(</span><span class="n">policy</span><span class="p">)</span> <span class="n">would</span> <span class="n">be</span> <span class="n">helpful</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Hotfix  capability: we will never have control of the channel index, so we must  rebuild or modify existing packages. MS: There should be a preference  for rebuild vs modify. CFEP (policy) would be helpful.
 </pre></div>
 </div>
 <ul class="simple">
@@ -141,9 +143,10 @@
 <li><p>conda-forge.org</p></li>
 <li><p>pycon 2017</p></li>
 </ul>
-</div>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -313,7 +316,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -357,14 +360,15 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2016-11-24: General Discussion</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2021, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

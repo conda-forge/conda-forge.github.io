@@ -3,19 +3,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>2016-07-22: General discussion &#8212; conda-forge 2021.11.25 documentation</title>
-    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/cloud.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
 
     
     
@@ -57,7 +58,8 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2016-07-22: General discussion</a></li> 
       </ul>
     </div>
     </div>
@@ -68,16 +70,16 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="general-discussion">
+  <section class="tex2jax_ignore mathjax_ignore" id="general-discussion">
 <h1>2016-07-22: General discussion<a class="headerlink" href="#general-discussion" title="Permalink to this headline">¶</a></h1>
 <p>Time: 14:00 UTC</p>
 <p>Hangout link: <a class="reference external" href="https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie"></a><a class="reference external" href="https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie">https://hangouts.google.com/call/v5olhwzpfzgzpoq5i3wthjpqpie</a></p>
 <p><strong>Attendees</strong></p>
-<p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/wv6uvIZX6h0">John Kirkham</a></p>
+<p><a class="reference external" href="https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/wv6uvIZX6h0">John Kirkham</a></p>
 <p>Jonathan Helmus</p>
-<p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/yBvjHx0Ad3Y">Matt Craig</a></p>
+<p><a class="reference external" href="https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/yBvjHx0Ad3Y">Matt Craig</a></p>
 <p>Phil Elson</p>
-<p><a class="reference external" href="https://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS">Michael Sarahan</a></p>
+<p><a class="reference external" href="https://conda-forge.hackpad.comhttps://conda-forge.hackpad.com/ep/profile/yHQTJXZ4gyS">Michael Sarahan</a></p>
 <p>Filipe</p>
 <p><strong>Standing items</strong></p>
 <ul class="simple">
@@ -88,12 +90,12 @@
 <p><strong>Agenda</strong></p>
 <ul>
 <li><p>Governance/mechanism for formally proposing and deciding on enhancements.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Motivation</span><span class="p">:</span>  <span class="n">Without</span> <span class="n">a</span> <span class="n">formal</span> <span class="n">governance</span> <span class="n">model</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">difficult</span> <span class="k">for</span> <span class="n">the</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>  <span class="n">community</span> <span class="n">to</span> <span class="n">reach</span> <span class="n">final</span> <span class="n">decisions</span><span class="o">.</span>  <span class="n">There</span> <span class="ow">is</span> <span class="n">no</span> <span class="n">designated</span> <span class="n">place</span> <span class="n">to</span>  <span class="n">propose</span> <span class="n">changes</span> <span class="ow">in</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">compiler</span> <span class="n">infrastructure</span> <span class="ow">or</span> <span class="n">whether</span> <span class="n">to</span> <span class="n">run</span> <span class="ow">or</span>  <span class="ow">not</span> <span class="n">to</span> <span class="n">run</span> <span class="n">a</span> <span class="n">package</span><span class="s1">&#39;s unit tests, so these end up being scattered  across pull requests and issues.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Motivation:  Without a formal governance model it is difficult for the conda-forge  community to reach final decisions.  There is no designated place to  propose changes in, e.g. compiler infrastructure or whether to run or  not to run a package&#39;s unit tests, so these end up being scattered  across pull requests and issues.
 </pre></div>
 </div>
 <ul>
 <li><p>Governance models:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">*</span>   <span class="n">The</span> <span class="n">Python</span> <span class="n">model</span><span class="p">:</span> <span class="n">BDFL</span> <span class="o">+</span> <span class="n">PEPs</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   The Python model: BDFL + PEPs
 </pre></div>
 </div>
 <ul class="simple">
@@ -111,7 +113,7 @@
 <li><p>Discuss some guidelines to contact the authors</p></li>
 <li><p>Feedstocks philosophy:  Explicit vs implicit / reproducible vs redundant</p></li>
 <li><p>OSX - getting back to a usable, coherent, stack</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">libc</span><span class="o">++</span> <span class="p">(</span><span class="n">clang</span><span class="p">)</span> <span class="n">vs</span> <span class="n">libstdc</span><span class="o">++</span> <span class="p">(</span><span class="n">gcc</span><span class="o">/</span><span class="n">g</span><span class="o">++</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   libc++ (clang) vs libstdc++ (gcc/g++)
 </pre></div>
 </div>
 <ul class="simple">
@@ -122,7 +124,7 @@
 </ul>
 </li>
 <li><p>Improving infrastructure</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Travis</span> <span class="n">CI</span> <span class="n">API</span> <span class="n">issues</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Travis CI API issues
 </pre></div>
 </div>
 <ul class="simple">
@@ -134,7 +136,7 @@
 <li><p>Basic community practices when PR-ing to staged-recipes.</p></li>
 <li><p>No need to re-discuss this. I am still writing the docs and, if ready, I will send the link tomorrow (or after SciPy ;-)</p></li>
 <li><p>NetCDF (<s>also curl/ca-certificates and Perl packages</s>) - Done?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">curl</span> <span class="ow">and</span> <span class="n">ca</span><span class="o">-</span><span class="n">certificates</span> <span class="n">are</span> <span class="n">done</span> <span class="ow">and</span> <span class="n">available</span><span class="o">.</span> 
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   curl and ca-certificates are done and available. 
 </pre></div>
 </div>
 <ul class="simple">
@@ -143,7 +145,7 @@
 </li>
 <li><p>Notifications (how do we stay on top of them)</p></li>
 <li><p>Standardizing installs</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Mention [`toolchain`](https://github.com/conda-forge/toolchain-feedstock) .
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Mention [`toolchain`](https://github.com/conda-forge/toolchain-feedstock) .
 
         *   Discuss rollout to feedstocks.
 
@@ -152,7 +154,7 @@
 </div>
 </li>
 <li><p>MSYS2</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Available</span> <span class="n">on</span> <span class="n">defaults</span> <span class="o">-</span> <span class="n">was</span> <span class="ow">in</span> <span class="n">conda</span> <span class="mf">4.1.7</span><span class="p">,</span> <span class="n">but</span> <span class="n">that</span> <span class="n">was</span> <span class="n">pulled</span><span class="o">.</span>  <span class="n">Coming</span> <span class="ow">in</span> <span class="mf">4.1.8</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Available on defaults - was in conda 4.1.7, but that was pulled.  Coming in 4.1.8.
 </pre></div>
 </div>
 <ul class="simple">
@@ -161,7 +163,7 @@
 </ul>
 </li>
 <li><p>Binary data</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Do we include it in recipes?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Do we include it in recipes?
 </pre></div>
 </div>
 <ul class="simple">
@@ -172,7 +174,7 @@
 </li>
 <li><p>OpenBLAS (on Windows)</p></li>
 <li><p>Dev releases: Where do they happen?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Do we do them at conda-forge?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Do we do them at conda-forge?
 
         *   Maybe add a label.
 
@@ -184,7 +186,7 @@
 </ul>
 </li>
 <li><p>Conda-forge installer</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">We</span> <span class="n">have</span> <span class="n">Python</span> <span class="mf">3.5</span><span class="p">,</span> <span class="ow">and</span> <span class="mf">3.4</span> <span class="n">now</span><span class="o">.</span> <span class="n">Would</span> <span class="n">be</span> <span class="n">nice</span> <span class="n">to</span> <span class="n">have</span> <span class="mf">2.7</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   We have Python 3.5, and 3.4 now. Would be nice to have 2.7.
 </pre></div>
 </div>
 <ul class="simple">
@@ -193,7 +195,7 @@
 </ul>
 </li>
 <li><p>Channel mirroring</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Can this point be a little bit explained? I thought about this as well and would like to contribute to this point.
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Can this point be a little bit explained? I thought about this as well and would like to contribute to this point.
 
         *   Eric Dill has put together a script for copying a package from one channel to another here: [conda forge/conda forge.github.io#134](https://github.com/conda-forge/conda-forge.github.io/pull/134)
 *   I have a really, really crude script that copies all of the packages in one channel to another that I just put at: [](https://gist.github.com/mwcraig/8473cf840f6d29236d6d8af699404555)[https://gist.github.com/mwcraig/8473cf840f6d29236d6d8af699404555](https://gist.github.com/mwcraig/8473cf840f6d29236d6d8af699404555)
@@ -202,19 +204,19 @@
 </div>
 </li>
 <li><p>Feedstock history</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Is it sacred?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Is it sacred?
 </pre></div>
 </div>
 <ul>
 <li><p>Do we rebase/force push?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    *   If so, under what conditions?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   If so, under what conditions?
 </pre></div>
 </div>
 <ul>
 <li><p>How do we avoid multiple people doing this simultaneously?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>        <span class="o">*</span>   <span class="n">I</span> <span class="n">don</span><span class="s1">&#39;t think you can.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>        *   I don&#39;t think you can.
 
-<span class="o">*</span>   <span class="n">IMHO</span><span class="p">,</span>  <span class="k">if</span> <span class="n">it</span><span class="s1">&#39;s just one author in staged recipes, sure.  If feedstock, no  force push - only to PRs to feedstock.  If people don&#39;</span><span class="n">t</span> <span class="n">mind</span> <span class="n">merge</span> <span class="n">PRs</span><span class="p">,</span>  <span class="n">it</span> <span class="n">sure</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">lot</span> <span class="n">simpler</span> <span class="n">to</span> <span class="ow">not</span> <span class="n">rebase</span><span class="o">.</span>  <span class="n">I</span> <span class="n">have</span> <span class="n">messed</span> <span class="n">up</span> <span class="n">rebasing</span> <span class="n">a</span> <span class="n">few</span>  <span class="n">times</span> <span class="n">recently</span><span class="o">...</span> <span class="o">=</span><span class="p">(</span>
+*   IMHO,  if it&#39;s just one author in staged recipes, sure.  If feedstock, no  force push - only to PRs to feedstock.  If people don&#39;t mind merge PRs,  it sure is a lot simpler to not rebase.  I have messed up rebasing a few  times recently... =(
 </pre></div>
 </div>
 </li>
@@ -223,7 +225,7 @@
 </ul>
 </li>
 <li><p>Docker hosting solution</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Docker</span> <span class="n">Hub</span> <span class="n">builds</span> <span class="n">were</span> <span class="n">broken</span> <span class="k">for</span> <span class="n">a</span> <span class="n">week</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">half</span><span class="o">.</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Docker Hub builds were broken for a week and a half.
 </pre></div>
 </div>
 <ul class="simple">
@@ -233,7 +235,7 @@
 </ul>
 </li>
 <li><p>Continuum metadata request: can we add these to linter?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">example</span> <span class="n">metadata</span><span class="p">:</span> <span class="p">[](</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ContinuumIO</span><span class="o">/</span><span class="n">anaconda</span><span class="o">-</span><span class="n">recipes</span><span class="o">/</span><span class="n">blob</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">anaconda</span><span class="o">-</span><span class="n">build</span><span class="o">/</span><span class="n">meta</span><span class="o">.</span><span class="n">yaml</span><span class="c1">#L36-L44)[https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44](https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   example metadata: [](https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44)[https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44](https://github.com/ContinuumIO/anaconda-recipes/blob/master/anaconda-build/meta.yaml#L36-L44)
 </pre></div>
 </div>
 <ul class="simple">
@@ -251,7 +253,7 @@
 <li><p>What is the benefit?</p></li>
 <li><p>Will   we distinguish between libs and standalone tools, similar to Debian? I   would strongly suggest to do this, because it is (1) established and  (2)  more accessible for the user (if he wants to use a library, he  knows  the language. If he wants to use a standalone, he doesn’t care).<a class="reference external" href="https://www.debian.org/doc/packaging-manuals/python-policy/ch-module_packages.html#s-package_names"> ( </a><a class="reference external" href="https://www.debian.org/doc/packaging-manuals/python-policy/ch-module_packages.html#s-package_names"></a>)<a class="reference external" href="https://www.debian.org/doc/packaging-manuals/python-policy/ch-module_packages.html#s-package_names">https://www.debian.org/doc/packaging-manuals/python-policy/ch-module_packages.html#s-package_names)</a><a class="reference external" href="https://www.debian.org/doc/packaging-manuals/python-policy/ch-module_packages.html#s-package_names"> </a></p></li>
 <li><p>Will   there be an orchestrated move? If not, how do we deal with   inconsistencies and potential conflicts (installing both python-h5py  and  h5py).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">we</span> <span class="n">will</span> <span class="n">probably</span> <span class="n">go</span> <span class="k">with</span> <span class="n">meta</span><span class="o">-</span><span class="n">packages</span> <span class="k">for</span> <span class="n">conflicting</span> <span class="n">packages</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   we will probably go with meta-packages for conflicting packages
 </pre></div>
 </div>
 </li>
@@ -274,11 +276,12 @@
 <p><strong>Notes:</strong></p>
 <ul><li>873 repositories, 171 people</li>
 <li>Discussion of adding new core-devs and onboarding new contributors</li>
-<li>Governance/Enhancements proposals<ul>
+<li>Governance/Enhancements proposals
+<ul>
 <li><p><a class="reference external" href="https://github.com/ipython/ipython/wiki/IPEPs:-IPython-Enhancement-Proposals"></a><a class="reference external" href="https://github.com/ipython/ipython/wiki/IPEPs:-IPython-Enhancement-Proposals">https://github.com/ipython/ipython/wiki/IPEPs:-IPython-Enhancement-Proposals</a></p></li>
 <li><p>Want place to move longer technical discussions which will eventually move to decision</p></li>
 <li><p>Use cases for enhancements proposals from the past</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">compiler</span> <span class="n">decisions</span> <span class="p">(</span><span class="n">one</span> <span class="n">per</span> <span class="n">OS</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   compiler decisions (one per OS)
 </pre></div>
 </div>
 <ul class="simple">
@@ -286,7 +289,7 @@
 </ul>
 </li>
 <li><p>Enhancements vs how decisions are made</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   core group which votes on the issue?  Others from the community?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   core group which votes on the issue?  Others from the community?
 </pre></div>
 </div>
 <ul class="simple">
@@ -294,7 +297,7 @@
 </ul>
 </li>
 <li><p>Enhancement proposals get merged regularly</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="s2">&quot;pending&quot;</span> <span class="n">status</span> <span class="n">on</span> <span class="n">issue</span> <span class="n">where</span> <span class="n">no</span> <span class="n">decision</span> <span class="n">has</span> <span class="n">been</span> <span class="n">made</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   &quot;pending&quot; status on issue where no decision has been made
 </pre></div>
 </div>
 </li>
@@ -302,10 +305,11 @@
 <li><p>Enhancement proposal proposal Pull Request – Jonathan</p></li>
 <li><p>Iterate for numpy like governance</p></li>
 </ul>
-</ul class="task"><ul>
+</ul class="task">
+<ul>
 <li><p>Blog post on conda-forge sprint – Filipe</p></li>
 <li><p>code of conduct</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">Filipe</span> <span class="n">has</span> <span class="n">draft</span><span class="p">,</span> <span class="n">please</span> <span class="n">review</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Filipe has draft, please review
 </pre></div>
 </div>
 <ul class="simple">
@@ -315,7 +319,7 @@
 </ul>
 </li>
 <li><p>contacting authors – ping 4/5 active contributors to inform and ask if they want to contribute</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>   <span class="n">do</span> <span class="ow">not</span> <span class="n">add</span> <span class="n">people</span> <span class="n">to</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">maintainers</span> <span class="n">without</span> <span class="n">permissions</span><span class="p">,</span> <span class="n">let</span> <span class="n">them</span> <span class="n">add</span> <span class="n">themselves</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">pull</span> <span class="n">request</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   do not add people to list of maintainers without permissions, let them add themselves in a pull request
 </pre></div>
 </div>
 <ul class="simple">
@@ -324,7 +328,7 @@
 </ul>
 </li>
 <li><p>Lots of mention and excitement of conda-forge at SciPy</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*   Time-series on big packages mentioned at SciPy?
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Time-series on big packages mentioned at SciPy?
 </pre></div>
 </div>
 <ul class="simple">
@@ -334,9 +338,10 @@
 <li><p>Split gdal into libgdal and gdal like default has done, seem to have fixed issue</p></li>
 <li><p>Next meeting 3 weeks from today, Aug 12th</p></li>
 </ul>
-</div>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -506,7 +511,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -550,14 +555,15 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2016-07-22: General discussion</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2021, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

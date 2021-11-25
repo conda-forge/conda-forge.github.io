@@ -3,19 +3,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>2019-09-18 conda-forge core meeting &#8212; conda-forge 2021.11.25 documentation</title>
-    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&display=swap" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/cloud.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
 
     
     
@@ -57,7 +58,8 @@
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2019-09-18 conda-forge core meeting</a></li> 
       </ul>
     </div>
     </div>
@@ -68,10 +70,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="conda-forge-core-meeting">
+  <section class="tex2jax_ignore mathjax_ignore" id="conda-forge-core-meeting">
 <h1>2019-09-18 conda-forge core meeting<a class="headerlink" href="#conda-forge-core-meeting" title="Permalink to this headline">¶</a></h1>
-<hr class="docutils" />
-<div class="section" id="attendees">
+<section id="attendees">
 <h2>Attendees<a class="headerlink" href="#attendees" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>CJ</p></li>
@@ -83,8 +84,8 @@
 <li><p>Anthony</p></li>
 <li><p>Ray D.</p></li>
 </ul>
-</div>
-<div class="section" id="agenda">
+</section>
+<section id="agenda">
 <h2>Agenda<a class="headerlink" href="#agenda" title="Permalink to this headline">¶</a></h2>
 <p>Pre-arranged stuff to talk about.
 Email core team on Monday of the week of the dev meeting to ask for things to talk about.</p>
@@ -96,9 +97,9 @@ Email core team on Monday of the week of the dev meeting to ask for things to ta
 </ul>
 </li>
 </ul>
-<div class="section" id="subteam-updates">
+<section id="subteam-updates">
 <h3>Subteam updates<a class="headerlink" href="#subteam-updates" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="bot">
+<section id="bot">
 <h4>Bot<a class="headerlink" href="#bot" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>(CJ) updates to the bot database structure</p></li>
@@ -109,17 +110,17 @@ Email core team on Monday of the week of the dev meeting to ask for things to ta
 </li>
 <li><p>(CJ) cfep9 update</p></li>
 </ul>
-</div>
-<div class="section" id="arm">
+</section>
+<section id="arm">
 <h4>ARM<a class="headerlink" href="#arm" title="Permalink to this headline">¶</a></h4>
-</div>
-<div class="section" id="docs">
+</section>
+<section id="docs">
 <h4>Docs<a class="headerlink" href="#docs" title="Permalink to this headline">¶</a></h4>
-</div>
-<div class="section" id="staged-recipes">
+</section>
+<section id="staged-recipes">
 <h4>staged-recipes<a class="headerlink" href="#staged-recipes" title="Permalink to this headline">¶</a></h4>
-</div>
-<div class="section" id="website">
+</section>
+<section id="website">
 <h4>website<a class="headerlink" href="#website" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>(Filipe, Dougal) How can we get users to engage us and open issues?</p>
@@ -128,15 +129,15 @@ Email core team on Monday of the week of the dev meeting to ask for things to ta
 </ul>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="ci-infrastructure">
+</section>
+</section>
+<section id="ci-infrastructure">
 <h3>CI infrastructure<a class="headerlink" href="#ci-infrastructure" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>(Marius, Isuru) Azure migration update?</p></li>
 <li><p>Do we want to roll out https://github.com/conda-forge/conda-smithy/issues/1131 to all feedstocks?</p></li>
 </ul>
-<div class="section" id="compiler-upgrade">
+<section id="compiler-upgrade">
 <h4>Compiler upgrade<a class="headerlink" href="#compiler-upgrade" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>Update to clang 8.0.1 and gfortran 7.3.0 on OSX</p>
@@ -150,8 +151,8 @@ Email core team on Monday of the week of the dev meeting to ask for things to ta
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="make-missing-license-file-an-error">
+</section>
+<section id="make-missing-license-file-an-error">
 <h4>Make missing license_file an error<a class="headerlink" href="#make-missing-license-file-an-error" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>We merged https://github.com/conda-forge/conda-smithy/pull/1102 in the feedstock</p>
@@ -177,9 +178,9 @@ Email core team on Monday of the week of the dev meeting to ask for things to ta
 </ul>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="your-agenda-items">
+</section>
+</section>
+<section id="your-agenda-items">
 <h3>Your agenda items<a class="headerlink" href="#your-agenda-items" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>(Eric) Scheduling Anaconda &lt;&gt; conda-forge sync on anaconda.org requirements gathering</p></li>
@@ -187,16 +188,16 @@ Email core team on Monday of the week of the dev meeting to ask for things to ta
 <li><p>(Filipe) A closer collaboration with other packaging communities would be awesome. I guess that we don’t have a good means for that kind of communication at the moment. Gitter is high volume, our mailing list never cought on, and an email thread may get stale quickly or we may drop people accidentally. TL;DR maybe we should invite them to our meeting call. Filipe to ping Bjorn – maybe we can get both Bjorn and debian on a dev meeting</p></li>
 <li><p>(Eric) Email out to see if we can get more engagement on regular dev meetings.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="discussion">
+</section>
+</section>
+<section id="discussion">
 <h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
 <p>Notes from todays dev meeting</p>
-</div>
-<div class="section" id="check-in-on-previous-action-items">
+</section>
+<section id="check-in-on-previous-action-items">
 <h2>Check in on previous action items<a class="headerlink" href="#check-in-on-previous-action-items" title="Permalink to this headline">¶</a></h2>
 <p>Copy previous action items from last meeting agenda.</p>
-<div class="section" id="last-meeting">
+<section id="last-meeting">
 <h3>Last meeting<a class="headerlink" href="#last-meeting" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>[ ] (Filipe) Progress on setting up a self-hosted blog</p>
@@ -210,15 +211,15 @@ Email core team on Monday of the week of the dev meeting to ask for things to ta
 <li><p>[ ] (Filipe, Anthony) Improve docs on releasing conda-smithy. Currently says “use rever”. Would be good to fill out more info there for those of us that are unfamiliar with rever.</p></li>
 <li><p>[x] (Filipe, Anthony) conda-smithy release.</p></li>
 </ul>
-</div>
-<div class="section" id="meetings-ago">
+</section>
+<section id="meetings-ago">
 <h3>2 meetings ago<a class="headerlink" href="#meetings-ago" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>[ ] John K: Create, or link, google doc with survey questions</p></li>
 <li><p>[x] Anthony and Filipe: conda smithy release for linux-armv7l</p></li>
 </ul>
-</div>
-<div class="section" id="id1">
+</section>
+<section id="id1">
 <h3>3 meetings ago<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Unresolved action items in this heading will be moved to issues on conda-forge.github.io</p>
 <ul class="simple">
@@ -234,9 +235,9 @@ Email core team on Monday of the week of the dev meeting to ask for things to ta
 </li>
 <li><p>[x] Marius: reach out to internal IT to clean up some Zoom hiccups. Still in progress 2019-09-04</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="new-action-items">
+</section>
+</section>
+<section id="new-action-items">
 <h2>New Action items<a class="headerlink" href="#new-action-items" title="Permalink to this headline">¶</a></h2>
 <p>Copy new action items to next meetings agenda so we can check in.
 Make sure each action item is assigned to someone or it will likely not get done.</p>
@@ -248,10 +249,11 @@ Make sure each action item is assigned to someone or it will likely not get done
 <li><p>[ ] (Eric) Scheduling Anaconda &lt;&gt; conda-forge sync on anaconda.org requirements gathering</p></li>
 <li><p>[ ] (Anthony) Reach out to NumFocus to figure out legal ramifications of not including licenses in files.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -449,7 +451,7 @@ Make sure each action item is assigned to someone or it will likely not get done
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -493,14 +495,15 @@ Make sure each action item is assigned to someone or it will likely not get done
     <li><a href="../../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">2019-09-18 conda-forge core meeting</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2021, conda-forge.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
