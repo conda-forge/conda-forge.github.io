@@ -128,7 +128,7 @@ automatic version updates/migrations for feedstocks. The current options are
 
 build_platform
 --------------
-This is a mapping from the build platform to the host platform of the package
+This is a mapping from the target platform to the build platform for the package
 to be built. e.g. the following builds a ``osx-64`` package on the ``linux-64``
 build platform using cross-compiling.
 
@@ -148,6 +148,7 @@ Leaving this field empty implicitly requests to build a package natively. i.e.
       osx_64: osx_64
       osx_arm64: osx_arm64
       win_64: win_64
+
 
 .. _build_with_mambabuild:
 
@@ -342,16 +343,15 @@ Currently only:
 
 provider
 --------
-The ``provider`` field is a mapping from arch (operating system) to CI service.
-This thus controls where a package is built. The following are available as
-arches:
+The ``provider`` field is a mapping from build platform (not target platform) to CI service.
+It determines which service handles each build platform. The following are available as
+build platforms:
 
-* ``linux``
-* ``osx``
-* ``win``
+* ``linux_64``
+* ``osx_64``
+* ``win_64``
 * ``linux_aarch64``
 * ``linux_ppc64le``
-* ``osx_arm64``
 
 The following CI services are available:
 
@@ -359,32 +359,31 @@ The following CI services are available:
 * ``circle``
 * ``travis``
 * ``appveyor``
-* ``None`` or ``False`` to disable a platform.
-* ``default`` to enable a platform and choose an appropriate CI
+* ``None`` or ``False`` to disable a build platform.
+* ``default`` to choose an appropriate CI (only if available)
 
-For example, switching linux & osx to build on Travis Ci, with win on Appveyor:
+For example, switching linux_64 & osx_64 to build on Travis CI, with win_64 on Appveyor:
 
 .. code-block:: yaml
 
     provider:
-      linux: travis
-      osx: travis
-      win: appveyor
+      linux_64: travis
+      osx_64: travis
+      win_64: appveyor
 
-Currently, x86_64 are enabled, but other arches are disabled by default. i.e. an empty
+Currently, x86_64 platforms are enabled, but other build platforms are disabled by default. i.e. an empty
 provider entry is equivalent to the following:
 
 .. code-block:: yaml
 
     provider:
-      linux: azure
-      osx: azure
-      win: azure
+      linux_64: azure
+      osx_64: azure
+      win_64: azure
       linux_ppc64le: None
       linux_aarch64: None
-      osx_arm64: None
 
-To enable ``linux_ppc64le`` and ``linux_aarch64`` and the following:
+To enable ``linux_ppc64le`` and ``linux_aarch64`` add the following:
 
 .. code-block:: yaml
 
@@ -392,9 +391,9 @@ To enable ``linux_ppc64le`` and ``linux_aarch64`` and the following:
       linux_ppc64le: default
       linux_aarch64: default
 
-If the ``build_platform`` for an arch is not available with the selected provider
-(either natively or with emulation), the build will be disabled; cross-compilation
-must be specified manually.
+If a desired build platform is not available with a selected provider
+(either natively or with emulation), the build will be disabled. Use the ``build_platform``
+field to manually specify cross-compilation when no providers offer a desired build platform.
 
 .. _recipe_dir:
 
