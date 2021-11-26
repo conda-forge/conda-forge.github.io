@@ -118,6 +118,6 @@ be added by hand. To do this, follow these steps:
      - Bump the version in meta.yaml to the current date
 
 Details of how the migration yaml is setup are provided in an `example <https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations/example.exyaml>`__
-and documentation `here <https://regro.github.io/cf-scripts/migrators.html#building-a-migration-yaml>`_.
+and documentation `here <https://regro.github.io/cf-scripts/migrators.html#making-migrators>`_.
 
 .. _conda-forge/conda-forge-pinning-feedstock: https://github.com/conda-forge/conda-forge-pinning-feedstock

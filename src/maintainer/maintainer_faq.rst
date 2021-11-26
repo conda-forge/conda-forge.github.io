@@ -148,7 +148,7 @@ FAQ
 
 
 
-  This comes from the CI environment being headless and can be fixed by adding the ``QT_QPA_PLATFORM=offscreen`` `environment variable <https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#inherited-environment-variabless>`_.
+  This comes from the CI environment being headless and can be fixed by adding the ``QT_QPA_PLATFORM=offscreen`` `environment variable <https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#inherited-environment-variables>`__.
   The variable can either be added directly to the test command or provided in the `meta.yaml <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml>`__ like so:
 
   .. code-block:: yaml
