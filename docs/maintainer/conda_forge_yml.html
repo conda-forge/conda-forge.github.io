@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2021.11.25 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2021.11.26 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.11.26 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
@@ -176,7 +176,7 @@ automatic version updates/migrations for feedstocks. The current options are</p>
 </section>
 <section id="build-platform">
 <span id="id3"></span><h3>build_platform<a class="headerlink" href="#build-platform" title="Permalink to this headline">¶</a></h3>
-<p>This is a mapping from the build platform to the host platform of the package
+<p>This is a mapping from the target platform to the build platform for the package
 to be built. e.g. the following builds a <code class="docutils literal notranslate"><span class="pre">osx-64</span></code> package on the <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>
 build platform using cross-compiling.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build_platform</span><span class="p">:</span>
@@ -342,16 +342,15 @@ Currently only:</p>
 </section>
 <section id="provider">
 <span id="id18"></span><h3>provider<a class="headerlink" href="#provider" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">provider</span></code> field is a mapping from arch (operating system) to CI service.
-This thus controls where a package is built. The following are available as
-arches:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">provider</span></code> field is a mapping from build platform (not target platform) to CI service.
+It determines which service handles each build platform. The following are available as
+build platforms:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">linux</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">osx</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">win</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linux_64</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">osx_64</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">win_64</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">linux_aarch64</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">linux_ppc64le</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">osx_arm64</span></code></p></li>
 </ul>
 <p>The following CI services are available:</p>
 <ul class="simple">
@@ -359,36 +358,35 @@ arches:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">circle</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">travis</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">appveyor</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> to disable a platform.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">default</span></code> to enable a platform and choose an appropriate CI</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> to disable a build platform.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">default</span></code> to choose an appropriate CI (only if available)</p></li>
 </ul>
-<p>For example, switching linux &amp; osx to build on Travis Ci, with win on Appveyor:</p>
+<p>For example, switching linux_64 &amp; osx_64 to build on Travis CI, with win_64 on Appveyor:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
-  <span class="nt">linux</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">travis</span>
-  <span class="nt">osx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">travis</span>
-  <span class="nt">win</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">appveyor</span>
+  <span class="nt">linux_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">travis</span>
+  <span class="nt">osx_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">travis</span>
+  <span class="nt">win_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">appveyor</span>
 </pre></div>
 </div>
-<p>Currently, x86_64 are enabled, but other arches are disabled by default. i.e. an empty
+<p>Currently, x86_64 platforms are enabled, but other build platforms are disabled by default. i.e. an empty
 provider entry is equivalent to the following:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
-  <span class="nt">linux</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
-  <span class="nt">osx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
-  <span class="nt">win</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+  <span class="nt">linux_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+  <span class="nt">osx_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
+  <span class="nt">win_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
   <span class="nt">linux_ppc64le</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
   <span class="nt">linux_aarch64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
-  <span class="nt">osx_arm64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
 </pre></div>
 </div>
-<p>To enable <code class="docutils literal notranslate"><span class="pre">linux_ppc64le</span></code> and <code class="docutils literal notranslate"><span class="pre">linux_aarch64</span></code> and the following:</p>
+<p>To enable <code class="docutils literal notranslate"><span class="pre">linux_ppc64le</span></code> and <code class="docutils literal notranslate"><span class="pre">linux_aarch64</span></code> add the following:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
   <span class="nt">linux_ppc64le</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
   <span class="nt">linux_aarch64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
 </pre></div>
 </div>
-<p>If the <code class="docutils literal notranslate"><span class="pre">build_platform</span></code> for an arch is not available with the selected provider
-(either natively or with emulation), the build will be disabled; cross-compilation
-must be specified manually.</p>
+<p>If a desired build platform is not available with a selected provider
+(either natively or with emulation), the build will be disabled. Use the <code class="docutils literal notranslate"><span class="pre">build_platform</span></code>
+field to manually specify cross-compilation when no providers offer a desired build platform.</p>
 </section>
 <section id="recipe-dir">
 <span id="id19"></span><h3>recipe_dir<a class="headerlink" href="#recipe-dir" title="Permalink to this headline">¶</a></h3>
@@ -605,7 +603,7 @@ Currently only:</p>
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.11.25 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.11.26 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
