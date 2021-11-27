@@ -210,8 +210,8 @@ TravisCI (OSX, IBM Power 8+)
 ------------------------------
 
 TravisCI is used to build packages for IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
-force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit `<https://travis-ci.com/profile>`_
-and click "Sync accounts".
+force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit `<https://app.travis-ci.com/account/repositories>`__
+and click the "Sync accounts" button.
 
 Enabling Travis
 ...............
