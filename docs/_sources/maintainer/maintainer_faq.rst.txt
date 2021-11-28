@@ -71,20 +71,11 @@ FAQ
 
 .. _mfaq_mamba_local:
 
-:ref:`(Q) <mfaq_mamba_local>` **How can I make debugging solver failures on the CI faster?**
+:ref:`(Q) <mfaq_mamba_local>` **How can I make local debugging faster?**
 
-  An alternative to the conda solver is the mamba solver. The mamba solver has a faster solve speed and prints better error messages that make debugging simpler.
+  If you prefer to debug your recipes locally and not use the provided `scripts <https://conda-forge.org/docs/maintainer/updating_pkgs.html#testing-changes-locally>`__ but instead your own setup, you may also use the mamba solver through ``mambabuild``. It not only has a faster solve speed but also prints better error messages that make debugging simpler.
 
-  You can configure the conda-forge CI to run a debug build using the mamba solver with the following changes:
-
-  - Set ``build_with_mambabuild: True`` in ``conda-forge.yml`` file
-  - Rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line)
-
-  .. note::
-
-    Builds made with ``mambabuild`` won't be uploaded to ``conda-forge``. These builds are purely for debugging purposes.
-
-  You can also do this locally by using:
+  To do this, first install the solver and then build the recipe like you normally would
 
   - ``conda install boa -c conda-forge``
   - ``conda mambabuild myrecipe``

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>FAQ &#8212; conda-forge 2021.11.26 documentation</title>
+    <title>FAQ &#8212; conda-forge 2021.11.28 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="knowledge_base.html" title="Knowledge Base"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.11.26 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.11.28 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">FAQ</a></li> 
@@ -123,19 +123,10 @@ Therefore build numbers above 1000 will gradually vanish as packages get updated
 <blockquote>
 <div><p>For certain, high-traffic channels (main &amp; conda-forge), Anaconda uses a <a class="reference external" href="https://cloudflare.com/learning/cdn/what-is-a-cdn/">CDN</a> to decrease costs. The CDN is only reindexed every 20 minutes, however <a class="reference external" href="https://anaconda.org">Anaconda.org</a> uses the original channel that the CDN mirrors.  Therefore, packages will show up on the <a class="reference external" href="https://anaconda.org">Anaconda Cloud</a> about 20 to 40 minutes before they are downloadable via conda.  You can use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">search</span> <span class="pre">&lt;pkg&gt;</span></code>  to see if the package is installable, because this command reads from the CDN.</p>
 </div></blockquote>
-<p id="mfaq-mamba-local"><a class="reference internal" href="#mfaq-mamba-local"><span class="std std-ref">(Q)</span></a> <strong>How can I make debugging solver failures on the CI faster?</strong></p>
+<p id="mfaq-mamba-local"><a class="reference internal" href="#mfaq-mamba-local"><span class="std std-ref">(Q)</span></a> <strong>How can I make local debugging faster?</strong></p>
 <blockquote>
-<div><p>An alternative to the conda solver is the mamba solver. The mamba solver has a faster solve speed and prints better error messages that make debugging simpler.</p>
-<p>You can configure the conda-forge CI to run a debug build using the mamba solver with the following changes:</p>
-<ul class="simple">
-<li><p>Set <code class="docutils literal notranslate"><span class="pre">build_with_mambabuild:</span> <span class="pre">True</span></code> in <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> file</p></li>
-<li><p>Rerender with <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> (to rerender manually use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">smithy</span> <span class="pre">rerender</span></code> from the command line)</p></li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Builds made with <code class="docutils literal notranslate"><span class="pre">mambabuild</span></code> won’t be uploaded to <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. These builds are purely for debugging purposes.</p>
-</div>
-<p>You can also do this locally by using:</p>
+<div><p>If you prefer to debug your recipes locally and not use the provided <a class="reference external" href="https://conda-forge.org/docs/maintainer/updating_pkgs.html#testing-changes-locally">scripts</a> but instead your own setup, you may also use the mamba solver through <code class="docutils literal notranslate"><span class="pre">mambabuild</span></code>. It not only has a faster solve speed but also prints better error messages that make debugging simpler.</p>
+<p>To do this, first install the solver and then build the recipe like you normally would</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">boa</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">mambabuild</span> <span class="pre">myrecipe</span></code></p></li>
@@ -300,7 +291,7 @@ In that case, you can ping core using the bot command <a class="reference extern
         <li class="right" >
           <a href="knowledge_base.html" title="Knowledge Base"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.11.26 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.11.28 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">FAQ</a></li> 
@@ -310,7 +301,7 @@ In that case, you can ping core using the bot command <a class="reference extern
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2021, conda-forge.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
