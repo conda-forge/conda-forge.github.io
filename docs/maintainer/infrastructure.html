@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Infrastructure &#8212; conda-forge 2021.11.28 documentation</title>
+    <title>Infrastructure &#8212; conda-forge 2021.12.01 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.11.28 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.12.01 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Infrastructure</a></li> 
@@ -180,7 +180,7 @@ Adding this label to non-bot issued PRs will have no effect.</p>
 <p>Entering this command in the title or comment of an issue will instruct the admin bot to
 open a PR enabling the automatic merging of passing PRs from the <code class="docutils literal notranslate"><span class="pre">auto-tick</span></code>
 bot. This functionality is currently experimental. You can find more details
-<a class="reference external" href="https://regro.github.io/cf-scripts/github_actions_infrastructure.html#automerging-prs">here</a>.
+<a class="reference internal" href="#automerge"><span class="std std-ref">here</span></a>.
 Please open issue on <code class="docutils literal notranslate"><span class="pre">regro/cf-scripts</span></code> for any feedback, bugs, and/or questions!</p>
 </section>
 <section id="conda-forge-admin-please-add-python-2-7">
@@ -299,7 +299,7 @@ here <a class="reference external" href="https://github.com/conda-forge/conda-fo
 <p>We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on
 GitHub Actions.</p>
 <section id="automerge">
-<h4>Automerge<a class="headerlink" href="#automerge" title="Permalink to this headline">¶</a></h4>
+<span id="id2"></span><h4>Automerge<a class="headerlink" href="#automerge" title="Permalink to this headline">¶</a></h4>
 <p>The automerge service uses the GitHub action in this <a class="reference external" href="https://github.com/conda-forge/automerge-action">repo</a>. This action runs out of a
 Docker <a class="reference external" href="https://hub.docker.com/repository/docker/condaforge/automerge-action">container</a> on the <code class="docutils literal notranslate"><span class="pre">prod</span></code> tag. See the
 repo <a class="reference external" href="https://github.com/conda-forge/automerge-action#readme">README.md</a> for more details. PRs are automatically merged if they satisfy either
@@ -557,7 +557,7 @@ will be able to upload packages with the same name.</p>
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.11.28 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.12.01 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Infrastructure</a></li> 
