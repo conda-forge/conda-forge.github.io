@@ -4,8 +4,22 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Wed, 01 Dec 2021 20:10:07 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 02 Dec 2021 17:12:16 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2021-12-02: CentOS 7 docker images are now the default</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;We are moving all &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;linux-64&lt;/span&gt;&lt;/code&gt; jobs to use CentOS 7-based docker images.
+This will help users avoid &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda/mamba&lt;/span&gt;&lt;/code&gt; solver errors where dependencies that need
+CentOS 7 cannot be installed. Importantly, our compiler stack will still default to using
+a CentOS 6 sysroot unless the recipe explicitly lists the CentoOS 7 sysroot package. This
+build configuration means that our core system ABI on linux will remain largely CentOS 6-compatible,
+keeping support for older systems largely intact. We will reconsider moving the default ABI to
+CentOS 7 at a later date.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Thu, 02 Dec 2021 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2021-11-17: cloud.drone.io no longer working</title>
       <link>https://conda-forge.org/docs/user/announcements.html</link>

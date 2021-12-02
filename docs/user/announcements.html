@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Announcements &#8212; conda-forge 2021.12.01 documentation</title>
+    <title>Announcements &#8212; conda-forge 2021.12.02 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="introduction.html" title="A brief introduction"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.12.01 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.12.02 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Announcements</a></li> 
@@ -75,8 +75,18 @@
 <section id="id1">
 <h2>2021<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <dl class="field-list">
-<dt class="field-odd">2021-11-17</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">cloud.drone.io</span></code> no longer working</p>
+<dt class="field-odd">2021-12-02</dt>
+<dd class="field-odd"><p>CentOS 7 docker images are now the default</p>
+<p>We are moving all <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> <code class="docutils literal notranslate"><span class="pre">linux-64</span></code> jobs to use CentOS 7-based docker images.
+This will help users avoid <code class="docutils literal notranslate"><span class="pre">conda/mamba</span></code> solver errors where dependencies that need
+CentOS 7 cannot be installed. Importantly, our compiler stack will still default to using
+a CentOS 6 sysroot unless the recipe explicitly lists the CentoOS 7 sysroot package. This
+build configuration means that our core system ABI on linux will remain largely CentOS 6-compatible,
+keeping support for older systems largely intact. We will reconsider moving the default ABI to
+CentOS 7 at a later date.</p>
+</dd>
+<dt class="field-even">2021-11-17</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">cloud.drone.io</span></code> no longer working</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">cloud.drone.io</span></code> service we use for <code class="docutils literal notranslate"><span class="pre">aarch64</span></code> builds is no longer accepting our API
 requests for triggering builds. We have been in contact with them, but have been unable to
 resolve the issue. Going forward, we will still be adding feedstocks to <code class="docutils literal notranslate"><span class="pre">cloud.drone.io</span></code> but
@@ -84,31 +94,31 @@ we have moved all <code class="docutils literal notranslate"><span class="pre">a
 available as well for resource-intensive builds. Please rerender your feedstock as needed to
 get the updated configuration.</p>
 </dd>
-<dt class="field-even">2021-10-20</dt>
-<dd class="field-even"><p>conda-forge now uses mambabuild as default</p>
+<dt class="field-odd">2021-10-20</dt>
+<dd class="field-odd"><p>conda-forge now uses mambabuild as default</p>
 <p>conda-forge now uses <a class="reference external" href="https://github.com/mamba-org/mamba">mamba</a> during the build
 process (via <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">mambabuild</span></code> of the <a class="reference external" href="https://github.com/mamba-org/boa">boa</a> project). This was
 changed in <a class="reference external" href="https://github.com/conda-forge/conda-smithy/blob/main/CHANGELOG.rst#v3130">conda-smithy 3.13.0</a>
 and should automatically apply when re-rendering.</p>
 </dd>
-<dt class="field-odd">2021-10-13</dt>
-<dd class="field-odd"><p>GCC 10 and clang 12 as default compilers for Linux and macOS</p>
+<dt class="field-even">2021-10-13</dt>
+<dd class="field-even"><p>GCC 10 and clang 12 as default compilers for Linux and macOS</p>
 <p>These compilers will become the default for building packages in conda-forge.
 One notable change in GCC 10 is that the -fopenmp flag in FFLAGS is dropped.</p>
 </dd>
-<dt class="field-even">2021-10-04</dt>
-<dd class="field-even"><p>python 3.6 is now dropped when building conda-forge packages</p>
+<dt class="field-odd">2021-10-04</dt>
+<dd class="field-odd"><p>python 3.6 is now dropped when building conda-forge packages</p>
 <p>python 3.6 is end-of-life in December 2021 and we are dropping support for it
 early to avoid having to rebuild packages as part of python 3.10 migration
 as that would save lots of CI resources.</p>
 </dd>
-<dt class="field-odd">2021-09-30</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">defaults</span></code> channel is now dropped when building conda-forge packages</p>
+<dt class="field-even">2021-09-30</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">defaults</span></code> channel is now dropped when building conda-forge packages</p>
 <p>You can get the previous behaviour by using the <code class="docutils literal notranslate"><span class="pre">channel_sources</span></code> setting in
 <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code></p>
 </dd>
-<dt class="field-even">2020-05-22</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> is now citable!</p>
+<dt class="field-odd">2020-05-22</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> is now citable!</p>
 <p>You can now cite <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> using our <a class="reference external" href="https://doi.org/10.5281/zenodo.4774216">Zenodo entry</a>!
 This entry credits the entire <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> community for its hard work in building our
 amazing ecosystem.</p>
@@ -518,7 +528,7 @@ bear with us.</p>
         <li class="right" >
           <a href="introduction.html" title="A brief introduction"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.12.01 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.12.02 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Announcements</a></li> 
