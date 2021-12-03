@@ -124,7 +124,6 @@ compiled libraries used in Python, `as described on this Python wiki page
 <https://wiki.python.org/moin/WindowsCompilers>`__. The current relevant
 versions are:
 
-* For Python 2.7: Visual C++ 9.0
 * For Python 3.5–3.7: Visual C++ 14.0
 
 While you can obtain these tools by installing the right version of the full
@@ -132,10 +131,8 @@ While you can obtain these tools by installing the right version of the full
 environment, you can save a lot of time and bandwidth by installing standalone
 “build tools” packages. The links are as follows:
 
-* For Python 2.7: `Microsoft Visual C++ Compiler for Python 2.7
-  <https://www.microsoft.com/download/details.aspx?id=44266>`__.
 * For Python 3.5–3.7: `Microsoft Build Tools for Visual Studio 2017
-  <https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017>`__.
+  <https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2017-and-other-products>`__.
 
 If you need more information. Please refer `the Python wiki page on Windows compilers
 <https://wiki.python.org/moin/WindowsCompilers>`__.

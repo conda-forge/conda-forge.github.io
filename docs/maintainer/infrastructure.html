@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Infrastructure &#8212; conda-forge 2021.12.02 documentation</title>
+    <title>Infrastructure &#8212; conda-forge 2021.12.03 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.12.02 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.12.03 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Infrastructure</a></li> 
@@ -90,7 +90,7 @@ You can find the detailed guide for submitting new package recipes in <a class="
 </ul>
 </div></blockquote>
 <p><code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> also contains the command line tool that you should use if you rerender manually from the command line (see <a class="reference internal" href="updating_pkgs.html#dev-update-rerender"><span class="std std-ref">Rerendering feedstocks</span></a>).</p>
-<p>Smithy can be used beyond Conda-Forge’s purposes. For example, it can be used to <a class="reference external" href="self-hosted_azure-config">set up self-hosted Azure agents</a> for non-Conda-Forge infrastructures.
+<p>Smithy can be used beyond Conda-Forge’s purposes. For example, it can be used to <cite>set up self-hosted Azure agents &lt;azure-config&gt;</cite> for non-Conda-Forge infrastructures.
 (You could also consider using <a class="reference external" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops">Azure virtual machine scale set agents</a>,
 which could be less expensive to run than permanently active agents.)</p>
 </section>
@@ -232,8 +232,8 @@ certain very old packages that require VC9 will fail.</p>
 <section id="travisci-osx-ibm-power-8">
 <h3>TravisCI (OSX, IBM Power 8+)<a class="headerlink" href="#travisci-osx-ibm-power-8" title="Permalink to this headline">¶</a></h3>
 <p>TravisCI is used to build packages for IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
-force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit <a class="reference external" href="https://travis-ci.com/profile">https://travis-ci.com/profile</a>
-and click “Sync accounts”.</p>
+force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit <a class="reference external" href="https://app.travis-ci.com/account/repositories">https://app.travis-ci.com/account/repositories</a>
+and click the “Sync accounts” button.</p>
 <section id="enabling-travis">
 <h4>Enabling Travis<a class="headerlink" href="#enabling-travis" title="Permalink to this headline">¶</a></h4>
 <p>TravisCI should only be needed to build recipes on OSX, if there is a strange failure on Azure.</p>
@@ -262,14 +262,8 @@ Linux packages. It can optionally build OSX packages.</p>
 <p>CircleCI for OSX should be used for OSX, only when TravisCI resources (50 minutes of build time per job) are not enough as CircleCI gives more resources (2 hours of build time per job).</p>
 <p>Note that you need to rerender the feedstock, once this change has been made.</p>
 </section>
-<section id="enabling-circle-on-your-fork">
-<h4>Enabling Circle on your Fork<a class="headerlink" href="#enabling-circle-on-your-fork" title="Permalink to this headline">¶</a></h4>
-<p>If for some reason CircleCI is not triggering build from forks,
-Circle can be manually added for each fork. Circle calls this “Adding a Project” and
-<a class="reference external" href="https://circleci.com/docs/getting-started/#add-and-follow-more-projects">the official CircleCI documentation is available here</a>.
-This effectively amounts to going to the <a class="reference external" href="https://circleci.com/add-projects">Add Projects</a>
-page, finding the fork that you wish to enable, and clicking the “Build Project” button.
-This is not normally needed.</p>
+<section id="debugging-permission-errors">
+<h4>Debugging permission errors<a class="headerlink" href="#debugging-permission-errors" title="Permalink to this headline">¶</a></h4>
 <p>If CircleCI lacks permissions to checkout the source code, it will produce an error as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cloning</span> <span class="n">into</span> <span class="s1">&#39;.&#39;</span><span class="o">...</span>
 <span class="ne">Warning</span><span class="p">:</span> <span class="n">Permanently</span> <span class="n">added</span> <span class="n">the</span> <span class="n">RSA</span> <span class="n">host</span> <span class="n">key</span> <span class="k">for</span> <span class="n">IP</span> <span class="n">address</span> <span class="s1">&#39;192.30.253.113&#39;</span> <span class="n">to</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">known</span> <span class="n">hosts</span><span class="o">.</span>
@@ -277,7 +271,7 @@ This is not normally needed.</p>
 <span class="n">fatal</span><span class="p">:</span> <span class="n">Could</span> <span class="ow">not</span> <span class="n">read</span> <span class="kn">from</span> <span class="nn">remote</span> <span class="n">repository</span><span class="o">.</span>
 </pre></div>
 </div>
-<p>When this happens for a feedstock, it can be fixed using the <a class="reference external" href="https://conda-forge.org/docs/webservice.html#conda-forge-admin-please-update-circle">webservice</a>, by posting the following comment:</p>
+<p>When this happens for a feedstock, it can be fixed using the <cite>webservice &lt;ci_update_circle&gt;</cite>, by posting the following comment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@conda</span><span class="o">-</span><span class="n">forge</span><span class="o">-</span><span class="n">admin</span><span class="p">,</span> <span class="n">please</span> <span class="n">update</span> <span class="n">circle</span>
 </pre></div>
 </div>
@@ -461,7 +455,7 @@ will be able to upload packages with the same name.</p>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#circleci-linux-osx">CircleCI (Linux, OSX)</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#using-circle-for-both-linux-and-osx">Using Circle for both Linux and OSX</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#enabling-circle-on-your-fork">Enabling Circle on your Fork</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#debugging-permission-errors">Debugging permission errors</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#drone-io">Drone.io</a></li>
@@ -557,7 +551,7 @@ will be able to upload packages with the same name.</p>
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.12.02 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.12.03 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Infrastructure</a></li> 

@@ -2,7 +2,7 @@
 Scheduled time: 9 AM central.  Meeting link: https://anaconda.webex.com/anaconda-en/j.php?MTID=m11b5ddad66325da22bbe58d7d1c02809
 
 
-# Adopting Anaconda compilers
+## Adopting Anaconda compilers
 - Linux: gcc 7.2
     - Prefixed compilers: require activation
     - Common adaptations required for new anaconda compilers:
@@ -20,7 +20,7 @@ Scheduled time: 9 AM central.  Meeting link: https://anaconda.webex.com/anaconda
     import os
     
     print("Hello World")
-# Compiler flag unification
+## Compiler flag unification
 - GCC
     - toolchain: https://github.com/conda-forge/toolchain-feedstock/blob/master/recipe/activate.sh
     - toolchain3: https://github.com/conda-forge/toolchain3-feedstock/blob/master/recipe/activate.sh
@@ -65,7 +65,7 @@ Filipe: this is really little more than a vendor change.  We already depend on o
 
 Need to maintain llvm with cling patches, but this will not be the default compiler.
 
-# Conda-build 3: strategy for moving
+## Conda-build 3: strategy for moving
 - install and use with c-b-a (no cb3 matrix)
     - Waiting on feedback from issue https://github.com/conda-tools/conda-build-all/issues/94 but mostly seems OK.
 - Mike: needs to fix —skip-existing.  Concern is that re-rendering should not generate new packages when only some dependency has changed (bugfix bump?)
@@ -82,13 +82,13 @@ Need to maintain llvm with cling patches, but this will not be the default compi
     - People generally interested, but needs to be implemented and proven over time.  Good experience so far with defaults.
 
 
-# Fortran support on Windows
+## Fortran support on Windows
 - gfortran (msys2) / Flang
 - Timeline for adding either
 - Mike asked that whatever is done is done with community approval, for the sake of maintaining a high quality user experience.
 
 
-# OpenMP behavior
+## OpenMP behavior
 - Currently, needs extra package on mac, but is included on Linux (not active in flags, though)
 - What is desirable default behavior?
 
