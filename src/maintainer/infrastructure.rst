@@ -254,15 +254,8 @@ CircleCI for OSX should be used for OSX, only when TravisCI resources (50 minute
 Note that you need to rerender the feedstock, once this change has been made.
 
 
-Enabling Circle on your Fork
-............................
-
-If for some reason CircleCI is not triggering build from forks,
-Circle can be manually added for each fork. Circle calls this "Adding a Project" and
-`the official CircleCI documentation is available here <https://circleci.com/docs/getting-started/#add-and-follow-more-projects>`__.
-This effectively amounts to going to the `Add Projects <https://circleci.com/add-projects>`__
-page, finding the fork that you wish to enable, and clicking the "Build Project" button.
-This is not normally needed.
+Debugging permission errors
+...........................
 
 If CircleCI lacks permissions to checkout the source code, it will produce an error as follows::
 
@@ -271,7 +264,7 @@ If CircleCI lacks permissions to checkout the source code, it will produce an er
     Permission denied (publickey).
     fatal: Could not read from remote repository.
 
-When this happens for a feedstock, it can be fixed using the `webservice <https://conda-forge.org/docs/webservice.html#conda-forge-admin-please-update-circle>`__, by posting the following comment::
+When this happens for a feedstock, it can be fixed using the `webservice <ci_update_circle>`, by posting the following comment::
 
   @conda-forge-admin, please update circle
 
