@@ -187,8 +187,8 @@ To call for a standard vote, here is a template PR comment:
 
      To declare a standard vote "timed out," the person making such a declaration
      must post a pull-request adding
-     a vote record to the https://github.com/conda-forge/conda-forge.github.io/tree/main/src/vote-results
-     folder.  The declaration PR should be merged by the first core member
+     a vote record to the `vote-results folder <https://github.com/conda-forge/conda-forge.github.io/tree/main/vote-results>`__.  
+     The declaration PR should be merged by the first core member
      who is available to verify that
      the requirements for the timeout have been met, based on their
      own personal records.
