@@ -110,7 +110,7 @@ package that depends on MPI should find the local copy of ``mpich`` and link to 
 .. _apple_silicon_rosetta:
 
 Installing Apple Intel packages on Apple Silicon
-=======================
+================================================
 
 Using `Rosetta 2 <https://support.apple.com/en-us/HT211861>`_, you can install packages originally compiled for Mac computers with Intel processors on Mac computers with Apple silicon processors.
 
