@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Tips &amp; tricks &#8212; conda-forge 2021.12.03 documentation</title>
+    <title>Tips &amp; tricks &#8212; conda-forge 2021.12.22 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.12.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.12.22 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Tips &amp; tricks</a></li> 
@@ -154,6 +154,23 @@ We have not currently implemented this procedure with <code class="docutils lite
 as ABI compatibility allows.</p>
 </div>
 </section>
+<section id="installing-apple-intel-packages-on-apple-silicon">
+<span id="apple-silicon-rosetta"></span><h2>Installing Apple Intel packages on Apple Silicon<a class="headerlink" href="#installing-apple-intel-packages-on-apple-silicon" title="Permalink to this headline">¶</a></h2>
+<p>Using <a class="reference external" href="https://support.apple.com/en-us/HT211861">Rosetta 2</a>, you can install packages originally compiled for Mac computers with Intel processors on Mac computers with Apple silicon processors.</p>
+<p>This can be enabled per environment using the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64 conda create -n your_environment_name python   <span class="c1"># Create a new environment called your_environment_name with intel packages.</span>
+conda activate your_environment_name
+conda env config vars <span class="nb">set</span> <span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64  <span class="c1"># Make sure that conda commands in this environment use intel packages.</span>
+conda deactivate
+conda activate your_environment_name
+</pre></div>
+</div>
+<p>To verify that the correct platform is being used, run the following commands after the environment has been activated:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -c <span class="s2">&quot;import platform;print(platform.machine())&quot;</span>  <span class="c1"># Should print &quot;x86_64&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;CONDA_SUBDIR: </span><span class="nv">$CONDA_SUBDIR</span><span class="s2">&quot;</span>  <span class="c1"># Should print &quot;CONDA_SUBDIR: osx-64&quot;</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -178,6 +195,7 @@ as ABI compatibility allows.</p>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#using-external-message-passing-interface-mpi-libraries">Using External Message Passing Interface (MPI) Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-apple-intel-packages-on-apple-silicon">Installing Apple Intel packages on Apple Silicon</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ci-skeleton.html">Using conda-smithy to manage your CI</a></li>
@@ -255,7 +273,7 @@ as ABI compatibility allows.</p>
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.12.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2021.12.22 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Tips &amp; tricks</a></li> 
@@ -265,7 +283,7 @@ as ABI compatibility allows.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2021, conda-forge.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

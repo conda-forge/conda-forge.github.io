@@ -105,3 +105,28 @@ package that depends on MPI should find the local copy of ``mpich`` and link to 
   ``mpich`` has a high degree of ABI compatibility, making this procedure possible.
   We have not currently implemented this procedure with ``openmpi``, but can do so at a later date
   as ABI compatibility allows.
+
+
+.. _apple_silicon_rosetta:
+
+Installing Apple Intel packages on Apple Silicon
+================================================
+
+Using `Rosetta 2 <https://support.apple.com/en-us/HT211861>`_, you can install packages originally compiled for Mac computers with Intel processors on Mac computers with Apple silicon processors.
+
+This can be enabled per environment using the following commands:
+
+.. code-block:: shell
+
+    CONDA_SUBDIR=osx-64 conda create -n your_environment_name python   # Create a new environment called your_environment_name with intel packages.
+    conda activate your_environment_name
+    conda env config vars set CONDA_SUBDIR=osx-64  # Make sure that conda commands in this environment use intel packages.
+    conda deactivate
+    conda activate your_environment_name
+
+To verify that the correct platform is being used, run the following commands after the environment has been activated:
+
+.. code-block:: shell
+
+    python -c "import platform;print(platform.machine())"  # Should print "x86_64"
+    echo "CONDA_SUBDIR: $CONDA_SUBDIR"  # Should print "CONDA_SUBDIR: osx-64"
