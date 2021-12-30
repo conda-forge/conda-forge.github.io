@@ -1,0 +1,45 @@
+name: General question
+description: Ask a general question about conda-forge
+labels: General
+body:
+    - type: markdown
+      attributes:
+        value: |
+          Thanks for reporting your issue.
+          Please fill out the sections below.
+    - type: checkboxes
+      id: cf-documentation
+      attributes:
+        label: Conda-forge documentation
+        description: I read [the conda-forge documentation](https://conda-forge.org/docs/user/introduction.html#how-can-i-install-packages-from-conda-forge) and could not find the solution for my problem there.
+        options:
+        - label: I could not solve my problem using the conda-forge documentation.
+          required: true
+    - type: textarea
+      id: environment
+      attributes:
+        label: Environment
+        description: |
+          Please share your installed packages by running `conda list` and entering the output below.
+        placeholder: "`conda list`"
+        render: shell
+      validations:
+        required: true
+    - type: textarea
+      id: environment
+      attributes:
+        label: Info
+        description: |
+            Please share your environment by running `conda info` and entering the output below.
+        placeholder: "`conda info`"
+        render: shell
+      validations:
+        required: true
+    - type: textarea
+      id: environment
+      attributes:
+        label: Issue
+        description: |
+            Please descripe the issue you are experiencing.
+      validations:
+        required: true
