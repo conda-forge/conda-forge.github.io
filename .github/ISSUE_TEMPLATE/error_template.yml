@@ -16,9 +16,9 @@ body:
         - label: I could not solve my problem using the conda-forge documentation.
           required: true
     - type: textarea
-      id: environment
+      id: installed
       attributes:
-        label: Environment
+        label: Installed packages
         description: |
           Please share your installed packages by running `conda list` and entering the output below.
         placeholder: "`conda list`"
@@ -26,9 +26,9 @@ body:
       validations:
         required: true
     - type: textarea
-      id: environment
+      id: Info
       attributes:
-        label: Info
+        label: Environment info
         description: |
             Please share your environment by running `conda info` and entering the output below.
         placeholder: "`conda info`"
@@ -36,7 +36,7 @@ body:
       validations:
         required: true
     - type: textarea
-      id: environment
+      id: Issue
       attributes:
         label: Issue
         description: |
