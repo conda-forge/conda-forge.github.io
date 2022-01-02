@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2021.12.22 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2022.01.02 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.12.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.01.02 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
@@ -78,8 +78,8 @@ file that is present in the root directory of a feedstock.</p>
 <p>Note that each top-level CI provider field supports the <code class="docutils literal notranslate"><span class="pre">upload_packages</span></code> option.
 When set to False this will override the default behaviour of attempting to
 upload packages to anaconda.org, which can be useful for testing. For example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span>
-  <span class="nt">upload_packages</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">upload_packages</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </pre></div>
 </div>
 <section id="top-level-fields">
@@ -120,9 +120,9 @@ upload packages to anaconda.org, which can be useful for testing. For example:</
 CI service.  This is usually <strong>read-only</strong> and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as need.  It has a single
 <code class="docutils literal notranslate"><span class="pre">secure</span></code> field which contains the binstar token.  For example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">appveyor</span><span class="p">:</span>
-  <span class="nt">secure</span><span class="p">:</span>
-    <span class="nt">BINSTAR_TOKEN</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;some big hash&gt;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">appveyor</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">secure</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">BINSTAR_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;some big hash&gt;</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -130,25 +130,25 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
 <span id="azure-config"></span><h3>azure<a class="headerlink" href="#azure" title="Permalink to this headline">¶</a></h3>
 <p>This dictates the behavior of the Azure Pipelines CI service. It is a
 mapping for Azure-specific configuration options. For example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span>
-  <span class="c1"># flag for forcing the building all supported providers</span>
-  <span class="nt">force</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
-  <span class="c1"># toggle for storing the conda build_artifacts directory (including the</span>
-  <span class="c1"># built packages) as an Azure pipeline artifact that can be downloaded</span>
-  <span class="nt">store_build_artifacts</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># flag for forcing the building all supported providers</span><span class="w"></span>
+<span class="w">  </span><span class="nt">force</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># toggle for storing the conda build_artifacts directory (including the</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># built packages) as an Azure pipeline artifact that can be downloaded</span><span class="w"></span>
+<span class="w">  </span><span class="nt">store_build_artifacts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </pre></div>
 </div>
 <p id="self-hosted-azure-config">Below is an example configuration for setting up a self-hosted Azure agent for Linux:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span>
-  <span class="nt">settings_linux</span><span class="p">:</span>
-    <span class="nt">pool</span><span class="p">:</span>
-      <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">your_local_pool_name</span>
-      <span class="nt">demands</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">some_key -equals some_value</span>
-    <span class="nt">workspace</span><span class="p">:</span>
-      <span class="nt">clean</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
-    <span class="nt">strategy</span><span class="p">:</span>
-      <span class="nt">maxParallel</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">settings_linux</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">pool</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your_local_pool_name</span><span class="w"></span>
+<span class="w">      </span><span class="nt">demands</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">some_key -equals some_value</span><span class="w"></span>
+<span class="w">    </span><span class="nt">workspace</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">clean</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span><span class="w"></span>
+<span class="w">    </span><span class="nt">strategy</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">maxParallel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -156,21 +156,21 @@ mapping for Azure-specific configuration options. For example:</p>
 <span id="id2"></span><h3>bot<a class="headerlink" href="#bot" title="Permalink to this headline">¶</a></h3>
 <p>This field controls the behavior of the <code class="docutils literal notranslate"><span class="pre">auto-tick</span></code> bot which issues
 automatic version updates/migrations for feedstocks. The current options are</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">bot</span><span class="p">:</span>
-  <span class="c1"># can the bot automerge PRs it makes on this feedstock</span>
-  <span class="nt">automerge</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-  <span class="c1"># only automerge on successful version PRs, migrations are not automerged</span>
-  <span class="nt">automerge</span><span class="p">:</span> <span class="s">&#39;version&#39;</span>
-  <span class="c1"># only automerge on successful migration PRs, versions are not automerged</span>
-  <span class="nt">automerge</span><span class="p">:</span> <span class="s">&#39;migration&#39;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">bot</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># can the bot automerge PRs it makes on this feedstock</span><span class="w"></span>
+<span class="w">  </span><span class="nt">automerge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># only automerge on successful version PRs, migrations are not automerged</span><span class="w"></span>
+<span class="w">  </span><span class="nt">automerge</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;version&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># only automerge on successful migration PRs, versions are not automerged</span><span class="w"></span>
+<span class="w">  </span><span class="nt">automerge</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;migration&#39;</span><span class="w"></span>
 
-  <span class="c1"># only open PRs if resulting environment is solvable, useful for tightly coupled packages</span>
-  <span class="nt">check_solvable</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="c1"># only open PRs if resulting environment is solvable, useful for tightly coupled packages</span><span class="w"></span>
+<span class="w">  </span><span class="nt">check_solvable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 
-  <span class="c1"># any branches listed in this section will get bot migration PRs in addition</span>
-  <span class="c1"># to the default branch</span>
-  <span class="nt">abi_migration_branches</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">v1.10.x</span>
+<span class="w">  </span><span class="c1"># any branches listed in this section will get bot migration PRs in addition</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># to the default branch</span><span class="w"></span>
+<span class="w">  </span><span class="nt">abi_migration_branches</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.10.x</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -179,26 +179,26 @@ automatic version updates/migrations for feedstocks. The current options are</p>
 <p>This is a mapping from the target platform to the build platform for the package
 to be built. e.g. the following builds a <code class="docutils literal notranslate"><span class="pre">osx-64</span></code> package on the <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>
 build platform using cross-compiling.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build_platform</span><span class="p">:</span>
-  <span class="nt">osx_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">linux_64</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build_platform</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">osx_64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux_64</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Leaving this field empty implicitly requests to build a package natively. i.e.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build_platform</span><span class="p">:</span>
-  <span class="nt">linux_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">linux_64</span>
-  <span class="nt">linux_ppc64le</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">linux_ppc64le</span>
-  <span class="nt">linux_aarch64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">linux_aarch64</span>
-  <span class="nt">osx_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">osx_64</span>
-  <span class="nt">osx_arm64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">osx_arm64</span>
-  <span class="nt">win_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">win_64</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build_platform</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">linux_64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux_64</span><span class="w"></span>
+<span class="w">  </span><span class="nt">linux_ppc64le</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux_ppc64le</span><span class="w"></span>
+<span class="w">  </span><span class="nt">linux_aarch64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux_aarch64</span><span class="w"></span>
+<span class="w">  </span><span class="nt">osx_64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">osx_64</span><span class="w"></span>
+<span class="w">  </span><span class="nt">osx_arm64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">osx_arm64</span><span class="w"></span>
+<span class="w">  </span><span class="nt">win_64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">win_64</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
 <section id="build-with-mambabuild">
 <span id="id4"></span><h3>build_with_mambabuild<a class="headerlink" href="#build-with-mambabuild" title="Permalink to this headline">¶</a></h3>
 <p>This option, when enabled, configures the conda-forge CI to run a debug build using the <code class="docutils literal notranslate"><span class="pre">mamba</span></code> solver. Check <a class="reference external" href="https://conda-forge.org/docs/maintainer/maintainer_faq.html#mfaq-mamba-local">this</a> to know more.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build_with_mambabuild</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">True</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build_with_mambabuild</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -214,15 +214,15 @@ allowed here.</p>
 which channels/labels to push to on anaconda.org after a package
 has been built.  The <code class="docutils literal notranslate"><span class="pre">channels</span></code> variable is a mapping with
 <code class="docutils literal notranslate"><span class="pre">sources</span></code> and <code class="docutils literal notranslate"><span class="pre">targets</span></code>, as follows:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channels</span><span class="p">:</span>
-  <span class="c1"># sources selects the channels to pull packages from, in order.</span>
-  <span class="nt">sources</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">defaults</span>
-  <span class="c1"># targets is a list of 2-lists, where the first element is the</span>
-  <span class="c1"># channel to push to and the second element is the label on that channel</span>
-  <span class="nt">targets</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&quot;conda-forge&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;main&quot;</span><span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channels</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># sources selects the channels to pull packages from, in order.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">sources</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">defaults</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># targets is a list of 2-lists, where the first element is the</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># channel to push to and the second element is the label on that channel</span><span class="w"></span>
+<span class="w">  </span><span class="nt">targets</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;conda-forge&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;main&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -231,12 +231,12 @@ has been built.  The <code class="docutils literal notranslate"><span class="pre
 <p>This parameter allows for conda-smithy to run chocoloatey installs on Windows
 when additional system packages are needed. This is a list of strings that
 represent package names and any additional parameters. For example,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">choco</span><span class="p">:</span>
-  <span class="c1"># install a package</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nvidia-display-driver</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">choco</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># install a package</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nvidia-display-driver</span><span class="w"></span>
 
-  <span class="c1"># install a package with a specific version</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cuda --version=11.0.3</span>
+<span class="w">  </span><span class="c1"># install a package with a specific version</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cuda --version=11.0.3</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This is currently only implemented for Azure Pipelines. The command that is run is
@@ -249,9 +249,9 @@ with a standard set of additional flags that are useful on CI.</p>
 CI service.  This is usually <strong>read-only</strong> and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as needed.  It has a single
 <code class="docutils literal notranslate"><span class="pre">secure</span></code> field which contains the binstar token.  For example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">appveyor</span><span class="p">:</span>
-  <span class="nt">secure</span><span class="p">:</span>
-    <span class="nt">BINSTAR_TOKEN</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;some big hash&gt;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">appveyor</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">secure</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">BINSTAR_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;some big hash&gt;</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -265,11 +265,11 @@ in <a class="reference internal" href="infrastructure.html#output-validation"><s
 <span id="id10"></span><h3>docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h3>
 <p>This is a mapping to docker configuration options. These are relatively
 self-explanatory. The defaults are as follows:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">docker</span><span class="p">:</span>
-  <span class="nt">executable</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker</span>
-  <span class="nt">image</span><span class="p">:</span> <span class="s">&quot;condaforge/linux-anvil-comp7&quot;</span>
-  <span class="nt">command</span><span class="p">:</span> <span class="s">&quot;bash&quot;</span>
-  <span class="nt">interactive</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">docker</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">executable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker</span><span class="w"></span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;condaforge/linux-anvil-comp7&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bash&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">interactive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -277,13 +277,13 @@ self-explanatory. The defaults are as follows:</p>
 <span id="id11"></span><h3>github<a class="headerlink" href="#github" title="Permalink to this headline">¶</a></h3>
 <p>This is mapping of configuration variables for GitHub. The
 defaults are as follows:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">github</span><span class="p">:</span>
-  <span class="c1"># name of the github organization</span>
-  <span class="nt">user_or_org</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
-  <span class="c1"># repository name, usually filled in automatically</span>
-  <span class="nt">repo_name</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
-  <span class="c1"># branch name to execute on</span>
-  <span class="nt">branch_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">github</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># name of the github organization</span><span class="w"></span>
+<span class="w">  </span><span class="nt">user_or_org</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># repository name, usually filled in automatically</span><span class="w"></span>
+<span class="w">  </span><span class="nt">repo_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># branch name to execute on</span><span class="w"></span>
+<span class="w">  </span><span class="nt">branch_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">master</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -291,7 +291,7 @@ defaults are as follows:</p>
 <span id="id12"></span><h3>idle_timeout_minutes<a class="headerlink" href="#idle-timeout-minutes" title="Permalink to this headline">¶</a></h3>
 <p>Configurable idle timeout that is either an int or None.  Used for packages that
 don’t have chatty enough builds. Currently only implemented in Travis and Circle.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">idle_timeout_minutes</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">60</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">idle_timeout_minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -299,8 +299,8 @@ don’t have chatty enough builds. Currently only implemented in Travis and Circ
 <span id="id13"></span><h3>linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
 <p>The Linux-specific configuration options. This is largely an internal setting.
 Currently only:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">linux</span><span class="p">:</span>
-  <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">linux</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -308,8 +308,8 @@ Currently only:</p>
 <span id="id14"></span><h3>linux_aarch64<a class="headerlink" href="#linux-aarch64" title="Permalink to this headline">¶</a></h3>
 <p>The ARM-specific configuration options. This is largely an internal setting.
 Currently only:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">linux_aarch64</span><span class="p">:</span>
-  <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">linux_aarch64</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -317,8 +317,8 @@ Currently only:</p>
 <span id="id15"></span><h3>linux_ppc64le<a class="headerlink" href="#linux-ppc64le" title="Permalink to this headline">¶</a></h3>
 <p>The PPC-specific configuration options. This is largely an internal setting.
 Currently only:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">linux_ppc64le</span><span class="p">:</span>
-  <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">linux_ppc64le</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -326,8 +326,8 @@ Currently only:</p>
 <span id="id16"></span><h3>os_version<a class="headerlink" href="#os-version" title="Permalink to this headline">¶</a></h3>
 <p>This key is used to set the OS versions for <code class="docutils literal notranslate"><span class="pre">linux_*</span></code> platforms. Valid entries map a linux platform and arch to either <code class="docutils literal notranslate"><span class="pre">cos6</span></code>
 or <code class="docutils literal notranslate"><span class="pre">cos7</span></code>. Currently <code class="docutils literal notranslate"><span class="pre">cos6</span></code> is the default for <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>. All other linux architectures use CentOS 7. Here is an example that enables CentOS 7 on <code class="docutils literal notranslate"><span class="pre">linux-64</span></code> builds</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">os_version</span><span class="p">:</span>
-  <span class="nt">linux_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cos7</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">os_version</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">linux_64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cos7</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -335,8 +335,8 @@ or <code class="docutils literal notranslate"><span class="pre">cos7</span></cod
 <span id="id17"></span><h3>osx<a class="headerlink" href="#osx" title="Permalink to this headline">¶</a></h3>
 <p>The macOSX-specific configuration options. This is largely an internal setting.
 Currently only:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">osx</span><span class="p">:</span>
-  <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">osx</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -362,26 +362,26 @@ build platforms:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">default</span></code> to choose an appropriate CI (only if available)</p></li>
 </ul>
 <p>For example, switching linux_64 &amp; osx_64 to build on Travis CI, with win_64 on Appveyor:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
-  <span class="nt">linux_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">travis</span>
-  <span class="nt">osx_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">travis</span>
-  <span class="nt">win_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">appveyor</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">linux_64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">travis</span><span class="w"></span>
+<span class="w">  </span><span class="nt">osx_64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">travis</span><span class="w"></span>
+<span class="w">  </span><span class="nt">win_64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">appveyor</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Currently, x86_64 platforms are enabled, but other build platforms are disabled by default. i.e. an empty
 provider entry is equivalent to the following:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
-  <span class="nt">linux_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
-  <span class="nt">osx_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
-  <span class="nt">win_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure</span>
-  <span class="nt">linux_ppc64le</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
-  <span class="nt">linux_aarch64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">None</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">linux_64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure</span><span class="w"></span>
+<span class="w">  </span><span class="nt">osx_64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure</span><span class="w"></span>
+<span class="w">  </span><span class="nt">win_64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure</span><span class="w"></span>
+<span class="w">  </span><span class="nt">linux_ppc64le</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="w">  </span><span class="nt">linux_aarch64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
 </pre></div>
 </div>
 <p>To enable <code class="docutils literal notranslate"><span class="pre">linux_ppc64le</span></code> and <code class="docutils literal notranslate"><span class="pre">linux_aarch64</span></code> add the following:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
-  <span class="nt">linux_ppc64le</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
-  <span class="nt">linux_aarch64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">linux_ppc64le</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span><span class="w"></span>
+<span class="w">  </span><span class="nt">linux_aarch64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span><span class="w"></span>
 </pre></div>
 </div>
 <p>If a desired build platform is not available with a selected provider
@@ -391,7 +391,7 @@ field to manually specify cross-compilation when no providers offer a desired bu
 <section id="recipe-dir">
 <span id="id19"></span><h3>recipe_dir<a class="headerlink" href="#recipe-dir" title="Permalink to this headline">¶</a></h3>
 <p>The relative path to the recipe directory. The default is:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">recipe_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">recipe</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">recipe_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recipe</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -400,7 +400,7 @@ field to manually specify cross-compilation when no providers offer a desired bu
 <p>This option can be used to override the default <code class="docutils literal notranslate"><span class="pre">conda-forge-ci-setup</span></code> package.
 Can be given with <code class="docutils literal notranslate"><span class="pre">${url</span> <span class="pre">or</span> <span class="pre">channel_alias}::package_name</span></code>, defaults to conda-forge
 channel_alias if no prefix is given.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">remote_ci_setup</span><span class="p">:</span> <span class="s">&quot;conda-forge-ci-setup=3&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">remote_ci_setup</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;conda-forge-ci-setup=3&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -410,9 +410,9 @@ channel_alias if no prefix is given.</p>
 The possible values can be a subset of <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>, <code class="docutils literal notranslate"><span class="pre">.gitattributes</span></code>, <code class="docutils literal notranslate"><span class="pre">README.md</span></code>, <code class="docutils literal notranslate"><span class="pre">LICENSE.txt</span></code>.
 The default value is an empty list [ ], i.e. all these four files will be generated by conda smithy.
 For example, if you want to customize .gitignore and LICENSE.txt files on your own, you should have the following configuration.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">skip_render</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">.gitignore</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">LICENSE.txt</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">skip_render</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.gitignore</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LICENSE.txt</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -424,7 +424,7 @@ You shouldn’t need it.</p>
 <section id="test-on-native-only">
 <span id="id23"></span><h3>test_on_native_only<a class="headerlink" href="#test-on-native-only" title="Permalink to this headline">¶</a></h3>
 <p>This is used for disabling testing for cross compiling. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_on_native_only</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_on_native_only</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -435,11 +435,11 @@ You shouldn’t need it.</p>
 <section id="test">
 <span id="id24"></span><h3>test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h3>
 <p>This is used to configure on which platforms a recipe is tested. Default is <code class="docutils literal notranslate"><span class="pre">all</span></code>.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">native_and_emulated</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_and_emulated</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Will do testing only if the platform is native or if there is an emulator.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">native</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Will do testing only if the platform is native.</p>
@@ -450,9 +450,9 @@ You shouldn’t need it.</p>
 CI service.  This is usually <strong>read-only</strong> and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as needed.  It has a single
 <code class="docutils literal notranslate"><span class="pre">secure</span></code> field which contains the binstar token.  For example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">travis</span><span class="p">:</span>
-  <span class="nt">secure</span><span class="p">:</span>
-    <span class="nt">BINSTAR_TOKEN</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;some big hash&gt;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">travis</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">secure</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">BINSTAR_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;some big hash&gt;</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -463,7 +463,7 @@ same repo. Only the branch listed in <code class="docutils literal notranslate">
 of packages to the target channel. The default is to skip this check if the key
 <code class="docutils literal notranslate"><span class="pre">upload_on_branch</span></code> is not in <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>. To restrict uploads to the
 master branch:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">upload_on_branch</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">upload_on_branch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">master</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -471,8 +471,8 @@ master branch:</p>
 <span id="id27"></span><h3>win<a class="headerlink" href="#win" title="Permalink to this headline">¶</a></h3>
 <p>The Windows-specific configuration options. This is largely an internal setting.
 Currently only:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">win</span><span class="p">:</span>
-  <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">win</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -603,7 +603,7 @@ Currently only:</p>
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.12.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.01.02 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
@@ -612,7 +612,7 @@ Currently only:</p>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2021, conda-forge.
+        &#169; Copyright 2016-2022, conda-forge.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
     <!-- cloud_sptheme 1.4 -->

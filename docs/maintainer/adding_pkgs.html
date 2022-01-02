@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Contributing packages &#8212; conda-forge 2021.12.22 documentation</title>
+    <title>Contributing packages &#8212; conda-forge 2022.01.02 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.12.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.01.02 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Contributing packages</a></li> 
@@ -287,8 +287,8 @@ install the necessary tools below).</p>
 <li><p>on specific architectures:</p></li>
 </ul>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
-    <span class="nt">skip</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>  <span class="c1"># [win]</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">skip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># [win]</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -296,8 +296,8 @@ install the necessary tools below).</p>
 <li><p>for specific python versions:</p></li>
 </ul>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
-    <span class="nt">skip</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>  <span class="c1"># [py&lt;35]</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">skip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># [py&lt;35]</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -317,15 +317,15 @@ Pure Python packages almost never need them.</p>
 <section id="use-pip">
 <span id="id2"></span><h4>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h4>
 <p>Normally Python packages should use this line:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
-  <span class="nt">script</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">-vv&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">-vv&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>as the installation script in the <code class="docutils literal notranslate"><span class="pre">meta.yml</span></code> file or <code class="docutils literal notranslate"><span class="pre">bld.bat/build.sh</span></code> script files,
 while adding <code class="docutils literal notranslate"><span class="pre">pip</span></code> to the host requirements:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span><span class="w"></span>
 </pre></div>
 </div>
 <p>These options should be used to ensure a clean installation of the package without its
@@ -400,18 +400,18 @@ The exposed interface changes when previously existing exposed symbols are delet
 <li><p>exports its <a class="reference internal" href="../misc/00_intro.html#term-ABI"><span class="xref std std-term">ABI</span></a> compatible requirements by defining <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> in it’s meta.yaml</p></li>
 </ul>
 <p>In these cases you do not have to worry about version requirements:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="c1"># [...]</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">readline</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libpng</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># [...]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">readline</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">libpng</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In other cases you have to specify <a class="reference internal" href="../misc/00_intro.html#term-ABI"><span class="xref std std-term">ABI</span></a> compatible versions manually.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="c1"># [...]</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libawesome 1.1.*</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># [...]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">libawesome 1.1.*</span><span class="w"></span>
 </pre></div>
 </div>
 <p>For more information on pinning, please refer to <a class="reference internal" href="pinning_deps.html#pinned-deps"><span class="std std-ref">Pinned dependencies</span></a>.</p>
@@ -424,10 +424,10 @@ The exposed interface changes when previously existing exposed symbols are delet
 <p>Imagine a package can be used together with version 1 of <code class="docutils literal notranslate"><span class="pre">awesome-software</span></code> when present, but does not strictly depend on it.
 Therefore you would like to let the user choose whether he/she would like to use the package with or without <code class="docutils literal notranslate"><span class="pre">awesome-software</span></code>. Let’s assume further that the package is incompatible to version 2 of <code class="docutils literal notranslate"><span class="pre">awesome-software</span></code>.</p>
 <p>In this case <code class="docutils literal notranslate"><span class="pre">run_dependencies</span></code> can be used to restrict <code class="docutils literal notranslate"><span class="pre">awesome-software</span></code> to version 1.*, if the user chooses to install it:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="c1"># [...]</span>
-  <span class="nt">run_constrained</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">awesome-software 1.*</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># [...]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">run_constrained</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">awesome-software 1.*</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Here <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> acts as a means to protect users from incompatible versions without introducing an unwanted dependency.</p>
@@ -436,13 +436,13 @@ Therefore you would like to let the user choose whether he/she would like to use
 <h5>Defining conflicts<a class="headerlink" href="#defining-conflicts" title="Permalink to this headline">¶</a></h5>
 <p>Sometimes packages interfere with each other and therefore only one of them can be installed at any time.
 In combination with an unsatisfiable version, <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> can define blockers:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">package</span><span class="p">:</span>
-<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">awesome-db</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">package</span><span class="p">:</span><span class="w"></span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">awesome-db</span><span class="w"></span>
 
-<span class="nt">requirements</span><span class="p">:</span>
-  <span class="c1"># [...]</span>
-  <span class="nt">run_constrained</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">amazing-db ==9999999999</span>
+<span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># [...]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">run_constrained</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amazing-db ==9999999999</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In this example, <code class="docutils literal notranslate"><span class="pre">awesome-db</span></code> cannot be installed together with <code class="docutils literal notranslate"><span class="pre">amazing-db</span></code> as there is no package <code class="docutils literal notranslate"><span class="pre">amazing-db-9999999999</span></code>.</p>
@@ -474,10 +474,10 @@ locations. This is called existence testing.</p>
 <p>On posix systems, use the <code class="docutils literal notranslate"><span class="pre">test</span></code> utility and the <code class="docutils literal notranslate"><span class="pre">$PREFIX</span></code> variable.</p>
 <p>On Windows, use the <code class="docutils literal notranslate"><span class="pre">exist</span></code> command. See below for an example.</p>
 <p>Simple existence testing example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span>
-  <span class="nt">commands</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">test -f $PREFIX/lib/libboost_log$SHLIB_EXT</span>  <span class="c1"># [unix]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1</span>  <span class="c1"># [win]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">commands</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test -f $PREFIX/lib/libboost_log$SHLIB_EXT</span><span class="w">  </span><span class="c1"># [unix]</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1</span><span class="w">  </span><span class="c1"># [win]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -490,9 +490,9 @@ locations. This is called existence testing.</p>
 <p>The minimal test of a python package should make sure that the package
 can be successfully imported. This can be accomplished with this
 stanza in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span>
-  <span class="nt">imports</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">package_name</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">imports</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">package_name</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">package_name</span></code> is the name imported by python;
@@ -517,12 +517,12 @@ not be run straight from an installed package.</p>
 to simply use the package. This is usually a test-running framework, such as
 nose or pytest. You can ensure that it is included by adding it to requirements
 in the test stanza:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span>
-  <span class="nt">imports</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">package_name</span>
-<span class="nn">...</span>
-  <span class="nt">requires</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pytest</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">imports</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">package_name</span><span class="w"></span>
+<span class="nn">...</span><span class="w"></span>
+<span class="w">  </span><span class="nt">requires</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -532,16 +532,16 @@ in the test stanza:</p>
 working copy to execute the test stage of build recipes, which don’t contain
 the files of source package.</p>
 <p>You can include files required for testing with the <code class="docutils literal notranslate"><span class="pre">source_files</span></code> section:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span>
-  <span class="nt">imports</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">package_name</span>
-  <span class="nt">requires</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pytest</span>
-  <span class="nt">source_files</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">tests</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">test_pkg_integration.py</span>
-  <span class="nt">commands</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pytest tests test_pkg_integration.py</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">imports</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">package_name</span><span class="w"></span>
+<span class="w">  </span><span class="nt">requires</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest</span><span class="w"></span>
+<span class="w">  </span><span class="nt">source_files</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tests</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test_pkg_integration.py</span><span class="w"></span>
+<span class="w">  </span><span class="nt">commands</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest tests test_pkg_integration.py</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">source_files</span></code> section works for files and directories.</p>
@@ -550,10 +550,10 @@ the files of source package.</p>
 <h5>Built-in tests<a class="headerlink" href="#built-in-tests" title="Permalink to this headline">¶</a></h5>
 <p>Some packages have testing built-in. In this case, you can put a test command
 directly in the test stanza:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">...</span>
-  <span class="l l-Scalar l-Scalar-Plain">commands</span><span class="p p-Indicator">:</span>
-     <span class="l l-Scalar l-Scalar-Plain">python -c &quot;import package_name; package_name.tests.runall()&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">commands</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">python -c &quot;import package_name; package_name.tests.runall()&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Alternatively, you can add a file called <code class="docutils literal notranslate"><span class="pre">run_test.py</span></code> in the recipe that
@@ -616,8 +616,8 @@ $ <span class="nv">CONFIG</span><span class="o">=</span>linux64 ./.scripts/run_d
 <h4>Packaging the license manually<a class="headerlink" href="#packaging-the-license-manually" title="Permalink to this headline">¶</a></h4>
 <p>Sometimes upstream maintainers do not include a license file in their tarball despite being demanded by the license.</p>
 <p>If this is the case, you can add the license to the <code class="docutils literal notranslate"><span class="pre">recipe</span></code> directory (here named <code class="docutils literal notranslate"><span class="pre">LICENSE.txt</span></code>)  and reference it inside the meta.yaml:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">about</span><span class="p">:</span>
-  <span class="nt">license_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">LICENSE.txt</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">about</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">license_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LICENSE.txt</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In this case, please also notify the upstream developers that the license file is missing.</p>
@@ -693,38 +693,38 @@ These expressions are written in <a class="reference external" href="http://jinj
 <p>Jinja expressions serve following purposes in the meta.yaml:</p>
 <ul>
 <li><p>They allow defining variables to avoid code duplication. Using a variable for the <code class="docutils literal notranslate"><span class="pre">version</span></code> allows changing the version only once with every update.</p>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">version</span> <span class="o">=</span> <span class="s2">&quot;3.7.3&quot;</span> <span class="cp">%}</span>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">version</span> <span class="o">=</span> <span class="s2">&quot;3.7.3&quot;</span> <span class="cp">%}</span><span class="w"></span>
 
-<span class="nt">package</span><span class="p">:</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
-  <span class="nt">version</span><span class="p">:</span> <span class="cp">{{</span> <span class="nv">version</span> <span class="cp">}}</span>
+<span class="nt">package</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">version</span> <span class="cp">}}</span><span class="w"></span>
 
-<span class="nt">source</span><span class="p">:</span>
-  <span class="nt">url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://www.python.org/ftp/python/</span><span class="cp">{{</span> <span class="nv">version</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/Python-</span><span class="cp">{{</span> <span class="nv">version</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">.tar.xz</span>
-  <span class="nt">sha256</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318</span>
+<span class="nt">source</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.python.org/ftp/python/</span><span class="cp">{{</span> <span class="nv">version</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">/Python-</span><span class="cp">{{</span> <span class="nv">version</span> <span class="cp">}}</span><span class="l l-Scalar l-Scalar-Plain">.tar.xz</span><span class="w"></span>
+<span class="w">  </span><span class="nt">sha256</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318</span><span class="w"></span>
 </pre></div>
 </div>
 </li>
 <li><p>They can call <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#conda-build-specific-jinja2-functions">conda-build functions</a> for automatic code generation. Examples are the compilers, cdt packages or the <code class="docutils literal notranslate"><span class="pre">pin_compatible</span></code> function.</p>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">build</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="cp">{{</span> <span class="nv">compiler</span><span class="o">(</span><span class="s1">&#39;c&#39;</span><span class="o">)</span> <span class="cp">}}</span>
-    <span class="p p-Indicator">-</span> <span class="cp">{{</span> <span class="nv">compiler</span><span class="o">(</span><span class="s1">&#39;cxx&#39;</span><span class="o">)</span> <span class="cp">}}</span>
-    <span class="p p-Indicator">-</span> <span class="cp">{{</span> <span class="nv">cdt</span><span class="o">(</span><span class="s1">&#39;xorg-x11-proto-devel&#39;</span><span class="o">)</span> <span class="cp">}}</span>  <span class="c1"># [linux]</span>
-    <span class="p p-Indicator">-</span> <span class="cp">{{</span> <span class="nv">cdt</span><span class="o">(</span><span class="s1">&#39;libx11-devel&#39;</span><span class="o">)</span> <span class="cp">}}</span>          <span class="c1"># [linux]</span>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">compiler</span><span class="o">(</span><span class="s1">&#39;c&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">compiler</span><span class="o">(</span><span class="s1">&#39;cxx&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">cdt</span><span class="o">(</span><span class="s1">&#39;xorg-x11-proto-devel&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="w">  </span><span class="c1"># [linux]</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">cdt</span><span class="o">(</span><span class="s1">&#39;libx11-devel&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="w">          </span><span class="c1"># [linux]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>or</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">build</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;c&#39;)</span> <span class="p p-Indicator">}}</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;cxx&#39;)</span> <span class="p p-Indicator">}}</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy</span>
-  <span class="nt">run</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_compatible(&#39;numpy&#39;)</span> <span class="p p-Indicator">}}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&#39;c&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&#39;cxx&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy</span><span class="w"></span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">pin_compatible(&#39;numpy&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
 </pre></div>
 </div>
 </li>
@@ -894,7 +894,7 @@ These expressions are written in <a class="reference external" href="http://jinj
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.12.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.01.02 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Contributing packages</a></li> 
@@ -903,7 +903,7 @@ These expressions are written in <a class="reference external" href="http://jinj
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2021, conda-forge.
+        &#169; Copyright 2016-2022, conda-forge.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
     <!-- cloud_sptheme 1.4 -->

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Knowledge Base &#8212; conda-forge 2021.12.22 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2022.01.02 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.12.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.01.02 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -78,11 +78,11 @@ or <code class="docutils literal notranslate"><span class="pre">bld.bat</span></
 <p>If you are using cmake, be sure to make it a build requirement in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section. You
 may also need to include <code class="docutils literal notranslate"><span class="pre">make</span></code> or <code class="docutils literal notranslate"><span class="pre">ninja</span></code> depending on your platform and build tools.
 On Windows, you can also use <code class="docutils literal notranslate"><span class="pre">nmake</span></code> to build, but that does not need to be explicitly included.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">build</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cmake</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">make</span>  <span class="c1"># [not win]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ninja</span>  <span class="c1"># [win]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cmake</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make</span><span class="w">  </span><span class="c1"># [not win]</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ninja</span><span class="w">  </span><span class="c1"># [win]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>For CMake projects using the <a class="reference external" href="https://cmake.org/cmake/help/git-stage/module/FindPython.html">FindPython</a>
@@ -224,18 +224,18 @@ nmake install
 Visual C versions. Packages are tied to the VC version that they were built with and some packages have specific
 requirements of the VC version. For example, python 2.7 requires <code class="docutils literal notranslate"><span class="pre">vc</span> <span class="pre">9</span></code> and python 3.5 requires <code class="docutils literal notranslate"><span class="pre">vc</span> <span class="pre">14</span></code>.</p>
 <p>With <code class="docutils literal notranslate"><span class="pre">conda-build</span> <span class="pre">3.x</span></code>, <code class="docutils literal notranslate"><span class="pre">vc</span></code> can be used as a selector when using the <code class="docutils literal notranslate"><span class="pre">compiler</span></code> jinja syntax.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">build</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;cxx&#39;)</span> <span class="p p-Indicator">}}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&#39;cxx&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>To skip building with a particular <code class="docutils literal notranslate"><span class="pre">vc</span></code> version, add a skip statement.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
-    <span class="nt">skip</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>  <span class="c1"># [win and vc&lt;14]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">skip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># [win and vc&lt;14]</span><span class="w"></span>
 
-<span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">build</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;cxx&#39;)</span> <span class="p p-Indicator">}}</span>
+<span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&#39;cxx&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -243,17 +243,17 @@ requirements of the VC version. For example, python 2.7 requires <code class="do
 <h3>Using vs2019<a class="headerlink" href="#using-vs2019" title="Permalink to this headline">¶</a></h3>
 <p>To use <code class="docutils literal notranslate"><span class="pre">vs2019</span></code> make the following changes:</p>
 <p>In conda_build_config.yaml file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">c_compiler</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vs2019</span>
-<span class="nt">cxx_compiler</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">vs2019</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">c_compiler</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vs2019</span><span class="w"></span>
+<span class="nt">cxx_compiler</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vs2019</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In conda-forge.yml file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span>
-  <span class="nt">settings_win</span><span class="p">:</span>
-      <span class="nt">pool</span><span class="p">:</span>
-          <span class="nt">vmImage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">windows-2019</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">settings_win</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">pool</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">vmImage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">windows-2019</span><span class="w"></span>
 </pre></div>
 </div>
 <p>For example see the changes made in the <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> files in <a class="reference external" href="https://github.com/conda-forge/libignition-physics-feedstock/commit/c586d765a2f5fd0ecf6da43c53315c898c9bf6bd">this</a> PR.</p>
@@ -274,11 +274,11 @@ requirements of the VC version. For example, python 2.7 requires <code class="do
 </ul>
 </div></blockquote>
 <p>A package that needs all three compilers would define</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">build</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;c&#39;)</span> <span class="p p-Indicator">}}</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;cxx&#39;)</span> <span class="p p-Indicator">}}</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;fortran&#39;)</span> <span class="p p-Indicator">}}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&#39;c&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&#39;cxx&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&#39;fortran&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -305,16 +305,16 @@ practice has been deprecated.) To add a new CDT, make a PR on the
 <h4>libGL<a class="headerlink" href="#libgl" title="Permalink to this headline">¶</a></h4>
 <p>In addition to the required compilers <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">compiler('c')</span> <span class="pre">}}</span></code> and/or <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">compiler('cxx')</span> <span class="pre">}}</span></code>,
 the following CDT packages are required for linking against libGL:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">build</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">cdt(&#39;mesa-libgl-devel&#39;)</span> <span class="p p-Indicator">}}</span>  <span class="c1"># [linux]</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">cdt(&#39;mesa-dri-drivers&#39;)</span> <span class="p p-Indicator">}}</span>  <span class="c1"># [linux]</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">cdt(&#39;libselinux&#39;)</span> <span class="p p-Indicator">}}</span>  <span class="c1"># [linux]</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">cdt(&#39;libxdamage&#39;)</span> <span class="p p-Indicator">}}</span>  <span class="c1"># [linux]</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">cdt(&#39;libxxf86vm&#39;)</span> <span class="p p-Indicator">}}</span>  <span class="c1"># [linux]</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">cdt(&#39;libxext&#39;)</span> <span class="p p-Indicator">}}</span>     <span class="c1"># [linux]</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">xorg-libxfixes</span>  <span class="c1"># [linux]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">cdt(&#39;mesa-libgl-devel&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w">  </span><span class="c1"># [linux]</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">cdt(&#39;mesa-dri-drivers&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w">  </span><span class="c1"># [linux]</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">cdt(&#39;libselinux&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w">  </span><span class="c1"># [linux]</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">cdt(&#39;libxdamage&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w">  </span><span class="c1"># [linux]</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">cdt(&#39;libxxf86vm&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w">  </span><span class="c1"># [linux]</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">cdt(&#39;libxext&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w">     </span><span class="c1"># [linux]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xorg-libxfixes</span><span class="w">  </span><span class="c1"># [linux]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>If you need a fully functional binary in the test phase, you have to also provide the shared
@@ -335,17 +335,17 @@ libXext
 <p>Packages that link against NumPy need special treatment in the dependency section.
 Finding <code class="docutils literal notranslate"><span class="pre">numpy.get_include()</span></code> in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> or <code class="docutils literal notranslate"><span class="pre">cimport</span></code> statements in <code class="docutils literal notranslate"><span class="pre">.pyx</span></code> or <code class="docutils literal notranslate"><span class="pre">.pyd</span></code> files are a telltale sign that the package links against NumPy.</p>
 <p>In the case of linking, you need to use the <code class="docutils literal notranslate"><span class="pre">pin_compatible</span></code> function to ensure having a compatible numpy version at run time:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy</span>
-<span class="nt">run</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_compatible(&#39;numpy&#39;)</span> <span class="p p-Indicator">}}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy</span><span class="w"></span>
+<span class="nt">run</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">pin_compatible(&#39;numpy&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>At the time of writing, above is equivalent to the following,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.14.6</span>
-<span class="nt">run</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy &gt;=1.14.6,&lt;2.0.a0</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy 1.14.6</span><span class="w"></span>
+<span class="nt">run</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy &gt;=1.14.6,&lt;2.0.a0</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition-notes admonition">
@@ -353,10 +353,10 @@ Finding <code class="docutils literal notranslate"><span class="pre">numpy.get_i
 <p>1. You still need to respect minimum supported version of <code class="docutils literal notranslate"><span class="pre">numpy</span></code> for the package!
 That means you cannot use <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.9</span></code> if the project requires at least <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.12</span></code>,
 adjust the minimum version accordingly!</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy 1.12.*</span>
-<span class="nt">run</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">pin_compatible(&#39;numpy&#39;)</span> <span class="p p-Indicator">}}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy 1.12.*</span><span class="w"></span>
+<span class="nt">run</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">pin_compatible(&#39;numpy&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>2. if your package supports <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">1.7</span></code>, and you are brave enough :-),
@@ -369,19 +369,19 @@ there are <code class="docutils literal notranslate"><span class="pre">numpy</sp
 These should be packaged together, to prevent node from being needing to
 grab the JavaScript side of the package on the user’s machine. To package
 an extension, the build should have the following <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> snippet:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
-  <span class="nt">noarch</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">noarch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
 
 
-<span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nodejs</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip</span>
-  <span class="nt">run</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nodejs</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">jupyterlab &gt;=2</span>
+<span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nodejs</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span><span class="w"></span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nodejs</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jupyterlab &gt;=2</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Please use the following <code class="docutils literal notranslate"><span class="pre">build.sh</span></code> script in your recipe:</p>
@@ -424,15 +424,15 @@ for details.</p>
 <section id="building-mpi-variants">
 <h4>Building MPI variants<a class="headerlink" href="#building-mpi-variants" title="Permalink to this headline">¶</a></h4>
 <p>In <cite>conda_build_config.yaml</cite>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mpi</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mpich</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openmpi</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mpi</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mpich</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openmpi</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In <cite>meta.yaml</cite>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">mpi</span> <span class="p p-Indicator">}}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">mpi</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>And rerender with:</p>
@@ -445,18 +445,18 @@ for details.</p>
 <h4>Including a no-mpi build<a class="headerlink" href="#including-a-no-mpi-build" title="Permalink to this headline">¶</a></h4>
 <p>Some packages (e.g. hdf5) may want a no-mpi build, in addition to the mpi builds.
 To do this, add <cite>nompi</cite> to the mpi matrix:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mpi</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nompi</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mpich</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openmpi</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mpi</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nompi</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mpich</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openmpi</span><span class="w"></span>
 </pre></div>
 </div>
 <p>and apply the appropriate conditionals in your build:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">mpi</span> <span class="p p-Indicator">}}</span>  <span class="c1"># [mpi != &#39;nompi&#39;]</span>
-  <span class="nt">run</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">mpi</span> <span class="p p-Indicator">}}</span>  <span class="c1"># [mpi != &#39;nompi&#39;]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">mpi</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w">  </span><span class="c1"># [mpi != &#39;nompi&#39;]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">mpi</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w">  </span><span class="c1"># [mpi != &#39;nompi&#39;]</span><span class="w"></span>
 </pre></div>
 </div>
 <section id="preferring-a-provider-usually-nompi">
@@ -503,7 +503,7 @@ only get the mpi build if explicitly requested. We use a higher build number for
 <p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">PKG_HASH</span> <span class="pre">}}</span></code> avoids build string collisions on <em>most</em> variants,
 but not on packages that are excluded from the default build string,
 e.g. Python itself. If the package is built for multiple Python versions, use:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">string</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">mpi_prefix</span><span class="nv"> </span><span class="s">}}_py{{</span><span class="nv"> </span><span class="s">py</span><span class="nv"> </span><span class="s">}}h{{</span><span class="nv"> </span><span class="s">PKG_HASH</span><span class="nv"> </span><span class="s">}}_{{</span><span class="nv"> </span><span class="s">build</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">string</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">mpi_prefix</span><span class="nv"> </span><span class="s">}}_py{{</span><span class="nv"> </span><span class="s">py</span><span class="nv"> </span><span class="s">}}h{{</span><span class="nv"> </span><span class="s">PKG_HASH</span><span class="nv"> </span><span class="s">}}_{{</span><span class="nv"> </span><span class="s">build</span><span class="nv"> </span><span class="s">}}&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>as seen in <a class="reference external" href="https://github.com/conda-forge/h5py-feedstock/pull/49/commits/b08ee9307d16864e775f1a7f9dd10f25c83b5974">mpi4py</a></p>
@@ -545,11 +545,11 @@ chosen at build time (i.e. if the nompi build cannot be run against the mpich bu
 <li><p>only build nompi on Windows</p></li>
 </ul>
 <p>This matches what is done in <a class="reference external" href="https://github.com/conda-forge/hdf5-feedstock/pull/90">hdf5</a>.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># conda_build_config.yaml</span>
-<span class="nt">mpi</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">nompi</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mpich</span>  <span class="c1"># [not win]</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openmpi</span>  <span class="c1"># [not win]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># conda_build_config.yaml</span><span class="w"></span>
+<span class="nt">mpi</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nompi</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mpich</span><span class="w">  </span><span class="c1"># [not win]</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openmpi</span><span class="w">  </span><span class="c1"># [not win]</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># meta.yaml</span>
@@ -593,16 +593,16 @@ chosen at build time (i.e. if the nompi build cannot be run against the mpich bu
 </pre></div>
 </div>
 <p>And then a package that depends on this one can explicitly pick the appropriate mpi builds:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># meta.yaml</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># meta.yaml</span><span class="w"></span>
 
-<span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">mpi</span> <span class="p p-Indicator">}}</span>  <span class="c1"># [mpi != &#39;nompi&#39;]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pkg</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pkg * mpi_{{ mpi }}_*</span>  <span class="c1"># [mpi != &#39;nompi&#39;]</span>
-  <span class="nt">run</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">mpi</span> <span class="p p-Indicator">}}</span>  <span class="c1"># [mpi != &#39;nompi&#39;]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pkg * mpi_{{ mpi }}_*</span>  <span class="c1"># [mpi != &#39;nompi&#39;]</span>
+<span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">mpi</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w">  </span><span class="c1"># [mpi != &#39;nompi&#39;]</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg * mpi_{{ mpi }}_*</span><span class="w">  </span><span class="c1"># [mpi != &#39;nompi&#39;]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">mpi</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w">  </span><span class="c1"># [mpi != &#39;nompi&#39;]</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg * mpi_{{ mpi }}_*</span><span class="w">  </span><span class="c1"># [mpi != &#39;nompi&#39;]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>mpi-metapackage exclusivity allows <code class="docutils literal notranslate"><span class="pre">mpi_*</span></code> to resolve the same as <code class="docutils literal notranslate"><span class="pre">mpi_{{</span> <span class="pre">mpi</span> <span class="pre">}}_*</span></code>
@@ -611,18 +611,18 @@ if <code class="docutils literal notranslate"><span class="pre">{{</span> <span 
 <section id="just-mpi-example">
 <h5>Just mpi example<a class="headerlink" href="#just-mpi-example" title="Permalink to this headline">¶</a></h5>
 <p>Without a preferred <code class="docutils literal notranslate"><span class="pre">nompi</span></code> variant, recipes that require mpi are much simpler. This is all that is needed:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># conda_build_config.yaml</span>
-<span class="nt">mpi</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mpich</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openmpi</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># conda_build_config.yaml</span><span class="w"></span>
+<span class="nt">mpi</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mpich</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openmpi</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># meta.yaml</span>
-<span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">mpi</span> <span class="p p-Indicator">}}</span>
-  <span class="nt">run</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">mpi</span> <span class="p p-Indicator">}}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># meta.yaml</span><span class="w"></span>
+<span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">mpi</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">mpi</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -634,11 +634,11 @@ if <code class="docutils literal notranslate"><span class="pre">{{</span> <span 
 For Linux OpenMP support is on by default, however it’s better to explicitly depend on the <cite>libgomp</cite> package which is the OpenMP
 implementation from the GNU project.</p>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># meta.yaml</span>
-<span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">build</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">llvm-openmp</span>  <span class="c1"># [osx]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libgomp</span>      <span class="c1"># [linux]</span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># meta.yaml</span><span class="w"></span>
+<span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">llvm-openmp</span><span class="w">  </span><span class="c1"># [osx]</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">libgomp</span><span class="w">      </span><span class="c1"># [linux]</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -689,12 +689,12 @@ named <code class="docutils literal notranslate"><span class="pre">yum_requireme
 <span id="knowledge-blas"></span><h3>BLAS<a class="headerlink" href="#blas" title="Permalink to this headline">¶</a></h3>
 <p>If a package needs one of BLAS, CBLAS, LAPACK, LAPACKE, use the following in the
 host of the recipe,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libblas</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libcblas</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">liblapack</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">liblapacke</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">libblas</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">libcblas</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">liblapack</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">liblapacke</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -705,27 +705,27 @@ doesn’t need LAPACK, remove liblapack and liblapacke)</p>
 implementations and build your recipe against those.
 At runtime, by default the following packages will be used.</p>
 </div>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openblas</span>   <span class="c1"># [not win]</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mkl</span>        <span class="c1"># [win]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openblas</span><span class="w">   </span><span class="c1"># [not win]</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mkl</span><span class="w">        </span><span class="c1"># [win]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>If a package needs a specific implementation’s internal API for more control you can have,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">blas_impl</span> <span class="p p-Indicator">}}</span>
-  <span class="nt">run</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libblas * *{{ blas_impl }}</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">blas_impl</span> <span class="p p-Indicator">}}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">blas_impl</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">libblas * *{{ blas_impl }}</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">blas_impl</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This would give you a matrix builds for different blas implementations. If you only want to support
 a specific blas implementation,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openblas</span>
-  <span class="nt">run</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">libblas * *openblas</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">openblas</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openblas</span><span class="w"></span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">libblas * *openblas</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openblas</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -796,9 +796,9 @@ metapackage that can be used in the <code class="docutils literal notranslate"><
 run export on itself, meaning that builds with this package in <code class="docutils literal notranslate"><span class="pre">host</span></code> will have a runtime constraint on it.
 Further, the <code class="docutils literal notranslate"><span class="pre">pybind11</span></code> has a run constraint on the ABI metapackage to help ensure consistent usage.</p>
 <p>To use this package in a build, put it in the host environment like so</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">host</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pybind11-abi</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pybind11-abi</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -903,25 +903,25 @@ by opening a new issue and including <code class="docutils literal notranslate">
 build dependency and not a runtime dependency (eg: build script of the package is written in Python, but the
 package is not dependent on Python), use <code class="docutils literal notranslate"><span class="pre">build</span></code> section</p>
 <p>Following implies that <code class="docutils literal notranslate"><span class="pre">python</span></code> is only a build dependency and no Python matrix will be created.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
-<span class="nt">host</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">some_other_package</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
+<span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">some_other_package</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">host</span></code> should be non-empty or <code class="docutils literal notranslate"><span class="pre">compiler</span></code> jinja syntax used or <code class="docutils literal notranslate"><span class="pre">build/merge_build_host</span></code> set to
 True for the <code class="docutils literal notranslate"><span class="pre">build</span></code> section to be treated as different from <code class="docutils literal notranslate"><span class="pre">host</span></code>.</p>
 <p>Following implies that <code class="docutils literal notranslate"><span class="pre">python</span></code> is a runtime dependency and a Python matrix for each supported Python version will be created.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>’s build matrices is removed in conda-smithy=3. To get a build matrix,
 create a <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file inside the recipe folder. For example, the following will give you 2
 builds and you can use the selector <code class="docutils literal notranslate"><span class="pre">vtk_with_osmesa</span></code> in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vtk_with_osmesa</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">vtk_with_osmesa</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
 </pre></div>
 </div>
 <p>You need to rerender the feedstock after this change.</p>
@@ -934,9 +934,9 @@ to build with. While the default version 10.9 can be overridden using the follow
 changes to the recipe, it should be done as a last resort. Please consult with
 core team if this is something you think you need.</p>
 <p>To use a new SDK, add the following in <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code></p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Please consult conda-forge/core before doing this</span>
-<span class="nt">MACOSX_SDK_VERSION</span><span class="p">:</span>        <span class="c1"># [osx and x86_64]</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;10.12&quot;</span>                <span class="c1"># [osx and x86_64]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Please consult conda-forge/core before doing this</span><span class="w"></span>
+<span class="nt">MACOSX_SDK_VERSION</span><span class="p">:</span><span class="w">        </span><span class="c1"># [osx and x86_64]</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;10.12&quot;</span><span class="w">                </span><span class="c1"># [osx and x86_64]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Note that this should be done if the error you are getting says that a header is not
@@ -949,17 +949,17 @@ to handle the weak symbol, in that case, you need to update the <code class="doc
 as described below.</p>
 <p>After increasing the SDK version, if you are getting an error that says that a function
 is available only for macOS x.x, then do the following in <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code>,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Please consult conda-forge/core before doing this</span>
-<span class="nt">MACOSX_DEPLOYMENT_TARGET</span><span class="p">:</span>  <span class="c1"># [osx and x86_64]</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;10.12&quot;</span>                <span class="c1"># [osx and x86_64]</span>
-<span class="nt">MACOSX_SDK_VERSION</span><span class="p">:</span>        <span class="c1"># [osx and x86_64]</span>
-  <span class="p p-Indicator">-</span> <span class="s">&quot;10.12&quot;</span>                <span class="c1"># [osx and x86_64]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Please consult conda-forge/core before doing this</span><span class="w"></span>
+<span class="nt">MACOSX_DEPLOYMENT_TARGET</span><span class="p">:</span><span class="w">  </span><span class="c1"># [osx and x86_64]</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;10.12&quot;</span><span class="w">                </span><span class="c1"># [osx and x86_64]</span><span class="w"></span>
+<span class="nt">MACOSX_SDK_VERSION</span><span class="p">:</span><span class="w">        </span><span class="c1"># [osx and x86_64]</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;10.12&quot;</span><span class="w">                </span><span class="c1"># [osx and x86_64]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In <code class="docutils literal notranslate"><span class="pre">recipe/meta.yaml</span></code>, add the following to ensure that the user’s system is compatible.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">run</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">__osx &gt;={{ MACOSX_DEPLOYMENT_TARGET|default(&quot;10.9&quot;) }}</span>  <span class="c1"># [osx and x86_64]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__osx &gt;={{ MACOSX_DEPLOYMENT_TARGET|default(&quot;10.9&quot;) }}</span><span class="w">  </span><span class="c1"># [osx and x86_64]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Note that this requires <code class="docutils literal notranslate"><span class="pre">conda&gt;=4.8</span></code>. If you want to support older conda versions
@@ -1008,10 +1008,10 @@ installed alongside pypy.</p>
 PR and contact <code class="docutils literal notranslate"><span class="pre">conda-forge/bot</span></code> team if a PR is not sent after the
 dependencies have been built.</p>
 <p>To add a dependency just for pypy or cpython, do,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">run</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">spam</span>           <span class="c1"># [python_impl == &#39;cpython&#39;]</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ham</span>            <span class="c1"># [python_impl == &#39;pypy&#39;]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spam</span><span class="w">           </span><span class="c1"># [python_impl == &#39;cpython&#39;]</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ham</span><span class="w">            </span><span class="c1"># [python_impl == &#39;pypy&#39;]</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1021,8 +1021,8 @@ change in order for the <code class="docutils literal notranslate"><span class="
 conda-build</p>
 </div>
 <p>To skip the pypy builds, do the following,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
-  <span class="nt">skip</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>         <span class="c1"># [python_impl == &#39;pypy&#39;]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">skip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w">         </span><span class="c1"># [python_impl == &#39;pypy&#39;]</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -1055,11 +1055,11 @@ There are two ways how to do this:</p>
 see <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#env-vars">Environment variables</a>.</p>
 </li>
 <li><p>Otherwise, if you are directly building from <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>, use for example:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
-  <span class="c1"># [...]</span>
-  <span class="nt">script_env</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">SETUPTOOLS_SCM_PRETEND_VERSION={{version}}</span>
-  <span class="nt">script</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">-vv&quot;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># [...]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">script_env</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SETUPTOOLS_SCM_PRETEND_VERSION={{version}}</span><span class="w"></span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">-vv&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </li>
@@ -1071,16 +1071,16 @@ see <a class="reference external" href="https://docs.conda.io/projects/conda-bui
 <span id="centos7"></span><h2>Using CentOS 7<a class="headerlink" href="#using-centos-7" title="Permalink to this headline">¶</a></h2>
 <p>To use the newer CentOS 7 <code class="docutils literal notranslate"><span class="pre">sysroot</span></code> with <code class="docutils literal notranslate"><span class="pre">glibc</span></code> <code class="docutils literal notranslate"><span class="pre">2.17</span></code> on <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>,
 put the following in your build section.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
-  <span class="nt">build</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{{</span> <span class="nv">compiler(&#39;c&#39;)</span> <span class="p p-Indicator">}}</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">sysroot_linux-64 2.17</span>  <span class="c1"># [linux64]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&#39;c&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sysroot_linux-64 2.17</span><span class="w">  </span><span class="c1"># [linux64]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>You also need to use a newer docker image by setting the following in the <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>
 of your recipe and rerendering.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">os_version</span><span class="p">:</span>
-  <span class="nt">linux_64</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cos7</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">os_version</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">linux_64</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cos7</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Finally, note that the <code class="docutils literal notranslate"><span class="pre">aarch64</span></code> and <code class="docutils literal notranslate"><span class="pre">ppc64le</span></code> platforms already use CentOS 7.</p>
@@ -1270,20 +1270,20 @@ the conda packages for those do <em>not</em> need to be published to a prereleas
 feedstock.
 This branch must change the <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code> file to point to the <code class="docutils literal notranslate"><span class="pre">&lt;package_name&gt;_dev</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;package_name&gt;_rc</span></code> label.</p>
 <p>For example, matplotlib rc releases would include:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channel_targets</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge matplotlib_rc</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channel_targets</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge matplotlib_rc</span><span class="w"></span>
 </pre></div>
 </div>
 <p>If a pre-release build of B depends on a pre-release build of A, then A should have,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channel_targets</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge A_rc</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channel_targets</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge A_rc</span><span class="w"></span>
 </pre></div>
 </div>
 <p>while B should have,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channel_sources</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge/label/A_rc,conda-forge,defaults</span>
-<span class="nt">channel_targets</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge B_rc</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channel_sources</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge/label/A_rc,conda-forge,defaults</span><span class="w"></span>
+<span class="nt">channel_targets</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge B_rc</span><span class="w"></span>
 </pre></div>
 </div>
 <p>in <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code> in their respective feedstocks.</p>
@@ -1296,11 +1296,11 @@ This branch must change the <code class="docutils literal notranslate"><span cla
 <h3>Installing a pre-release build<a class="headerlink" href="#installing-a-pre-release-build" title="Permalink to this headline">¶</a></h3>
 <p>Use the following command, but replace <code class="docutils literal notranslate"><span class="pre">PACKAGE_NAME</span></code> with the package you want
 to install and replace <code class="docutils literal notranslate"><span class="pre">LABEL</span></code> with <code class="docutils literal notranslate"><span class="pre">rc</span></code> or <code class="docutils literal notranslate"><span class="pre">dev</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">conda install -c conda-forge/label/PACKAGE_NAME_LABEL -c conda-forge PACKAGE_NAME</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">conda install -c conda-forge/label/PACKAGE_NAME_LABEL -c conda-forge PACKAGE_NAME</span><span class="w"></span>
 </pre></div>
 </div>
 <p>For example, let’s install matplotlib from the <code class="docutils literal notranslate"><span class="pre">rc</span></code> label:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">conda install -c conda-forge/label/matplotlib_rc -c conda-forge matplotlib</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">conda install -c conda-forge/label/matplotlib_rc -c conda-forge matplotlib</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -1495,7 +1495,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2021.12.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.01.02 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -1504,7 +1504,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2021, conda-forge.
+        &#169; Copyright 2016-2022, conda-forge.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
     <!-- cloud_sptheme 1.4 -->
