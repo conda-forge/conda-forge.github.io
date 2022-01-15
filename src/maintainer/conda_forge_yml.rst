@@ -124,6 +124,9 @@ automatic version updates/migrations for feedstocks. The current options are
       abi_migration_branches:
         - v1.10.x
 
+The ``abi_migration_branches`` feature is useful to, for example, add a
+long-term support (LTS) branch for a package.
+
 .. _build_platform:
 
 build_platform
@@ -137,7 +140,7 @@ build platform using cross-compiling.
     build_platform:
       osx_64: linux_64
 
-Leaving this field empty implicitly requests to build a package natively. i.e. 
+Leaving this field empty implicitly requests to build a package natively. i.e.
 
 .. code-block:: yaml
 
@@ -154,19 +157,19 @@ Leaving this field empty implicitly requests to build a package natively. i.e.
 
 build_with_mambabuild
 ---------------------
-This option, when enabled, configures the conda-forge CI to run a debug build using the ``mamba`` solver. Check `this <https://conda-forge.org/docs/maintainer/maintainer_faq.html#mfaq-mamba-local>`__ to know more.  
+This option, when enabled, configures the conda-forge CI to run a debug build using the ``mamba`` solver. Check `this <https://conda-forge.org/docs/maintainer/maintainer_faq.html#mfaq-mamba-local>`__ to know more.
 
 .. code-block:: yaml
 
     build_with_mambabuild:
-      True   
-          
+      True
+
 .. _channel_priority:
 
 channel_priority
 ----------------
 
-This value sets the ``conda`` solver channel priority for feedstock builds. 
+This value sets the ``conda`` solver channel priority for feedstock builds.
 The default is ``strict``. Any valid value for the same setting in the ``.condarc`` is
 allowed here.
 
