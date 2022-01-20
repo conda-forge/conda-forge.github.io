@@ -811,6 +811,7 @@ You can switch your BLAS implementation by doing,
     conda install "libblas=*=*mkl"
     conda install "libblas=*=*openblas"
     conda install "libblas=*=*blis"
+    conda install "libblas=*=*accelerate"
     conda install "libblas=*=*netlib"
 
 This would change the BLAS implementation without changing the conda packages depending
@@ -823,6 +824,7 @@ The following legacy commands are also supported as well.
     conda install "blas=*=mkl"
     conda install "blas=*=openblas"
     conda install "blas=*=blis"
+    conda install "blas=*=accelerate"
     conda install "blas=*=netlib"
 
 .. note::
