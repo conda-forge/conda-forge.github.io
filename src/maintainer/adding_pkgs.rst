@@ -692,7 +692,6 @@ Or append the call with the name of the run from the ``.ci_support`` directory (
     $ cd staged-recipes
     $ python build-locally.py linux_64_c_compiler_version9cuda_compiler_versionNonecudnnundefinedcxx_compiler_version9numpy1.19python3.9.____cpython
 
-Note: for ``osx`` runs, you will need to set the ``export OSX_SDK_DIR`` when using ``python build-locally.py``, for example ``export OSX_SDK_DIR=/opt``.
 
 About
 -----
