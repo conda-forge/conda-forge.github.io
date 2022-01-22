@@ -668,7 +668,7 @@ If you are trying to run ``osx64`` builds, you can directly invoke ``run_osx_bui
     $ .scripts/run_osx_build.sh
 
 
-Or you can build using your own conda-build environment (``conda install conda-build`` or ``mamba install boa``) and the run the command (``conda build recipes/RECIPE_DIR`` or ``mamba build recipes/RECIPE_DIR``). However, if the recipe has additional variables like ``cuda_compiler_version`` in the case of cuda-enabled builds. Then, you would need to set that to ``"None"`` when running on osx.
+Or you can build using your own conda-build environment (``conda install conda-build`` or ``mamba install boa``) and then run the command (``conda build recipes/RECIPE_DIR`` or ``mamba build recipes/RECIPE_DIR``). However, if the recipe has additional variables like ``cuda_compiler_version`` in the case of cuda-enabled builds, then, you would need to set that to ``"None"`` when running on osx.
 
 .. code-block:: sh
 
