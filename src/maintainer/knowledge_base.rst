@@ -336,14 +336,21 @@ In the case of linking, you need to use the ``pin_compatible`` function to ensur
       - {{ pin_compatible('numpy') }}
 
 
-At the time of writing, above is equivalent to the following,
+At the time of writing (January 22, 2022), above is equivalent to the following,
 
 .. code-block:: yaml
 
     host:
-      - numpy 1.14.6
+      - numpy   1.18   # [py==37]
+      - numpy   1.18   # [py==38]
+      - numpy   1.19   # [py==39]
     run:
-      - numpy >=1.14.6,<2.0.a0
+      - numpy >=1.18.5,<2.0.a0   # [py==37]
+      - numpy >=1.18.5,<2.0.a0   # [py==38]
+      - numpy >=1.19.5,<2.0.a0   # [py==39]
+
+See the pinning repository for what the pinning corresponds to at time of writing
+https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml#L631
 
 
 .. admonition:: Notes
