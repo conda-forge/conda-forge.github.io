@@ -635,62 +635,23 @@ Running tests locally for staged recipes
 
 If you want to run and build packages in the staged-recipes repository locally,
 go to the root repository directory and run the
-``.scripts/run_docker_build.sh`` script.  This requires that you have docker
-installed on your machine.
+``build-locally.py`` script (you need Python 3). And then you could follow the prompt to select the variant you'd like build. This requires that you have Docker
+installed on your machine if you are building a package for Linux.
+For MacOS, it will prompt you to select a location for the SDK (via ``export OSX_SDK_DIR=/opt``) to be downloaded.
 
-You need to define an environment variable named ``CONFIG``. Its value must correspond
-the name of one of the YAML configuration file in the ``.ci_support``
-directory (for all practical purposes, only ``linux64`` is used here). As an example, you can
-invoke the command as follows. 
-
-.. code-block:: sh
-
-    $ cd staged-recipes
-    $ CONFIG=linux64 ./.scripts/run_docker_build.sh
-
-Once built, you can find the finished package under ``staged-recipes/build_artifacts``. In order to run cuda-enabled builds locally, you need to set the ``IMAGE_NAME`` environment variable alongside the ``CONFIG`` environment variable (see the following for cuda 10.2 and 11.2). 
-
-.. code-block:: sh
-
-    $ cd staged-recipes
-    $ CONFIG=linux64 IMAGE_NAME=quay.io/condaforge/linux-anvil-cos7-cuda:10.2 ./.scripts/run_docker_build.sh
-
-.. code-block:: sh
-
-    $ cd staged-recipes
-    $ CONFIG=linux64 IMAGE_NAME=quay.io/condaforge/linux-anvil-cuda:11.2 ./.scripts/run_docker_build.sh
-
-If you are trying to run ``osx64`` builds, you can directly invoke ``run_osx_build.sh`` script. 
-
-.. code-block:: sh
-
-    $ cd staged-recipes
-    $ .scripts/run_osx_build.sh
-
-
-Or you can build using your own conda-build environment (``conda install conda-build`` or ``mamba install boa``) and then run the command (``conda build recipes/RECIPE_DIR`` or ``mamba build recipes/RECIPE_DIR``). However, if the recipe has additional variables like ``cuda_compiler_version`` in the case of cuda-enabled builds, then, you would need to set that to ``"None"`` when running on osx.
-
-.. code-block:: sh
-
-    $ cd staged-recipes
-    $ cuda_compiler_version="None" mamba build recipes/RECIPE_DIR
-
-Running tests locally for feedstocks
-....................................
-
-Simply invoke the ``build-locally.py`` script in the root of the feedstock repository and select the appropriate build. 
-
-.. code-block:: sh
-
-    $ cd staged-recipes
+.. code-block:: bash
+        
+    $ cd ~/staged-recipes
     $ python build-locally.py
 
-Or append the call with the name of the run from the ``.ci_support`` directory (without the ``.yaml`` extension).
+If you know which image you want to build, you can specify it as an argument to the script.
 
-.. code-block:: sh
-
-    $ cd staged-recipes
-    $ python build-locally.py linux_64_c_compiler_version9cuda_compiler_versionNonecudnnundefinedcxx_compiler_version9numpy1.19python3.9.____cpython
+.. code-block:: bash
+        
+    $ cd ~/staged-recipes
+    $ python build-locally.py <VARIANT>
+ 
+where ``<VARIANT>`` is one of the file names in the ``.ci_support/`` directory, e.g. ``linux64``, ``osx64``, and ``linux64_cuda102``.
 
 
 About
