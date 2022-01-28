@@ -91,8 +91,9 @@ and `the Helios voting system <https://vote.heliosvoting.org/>`__, but are
 open to any secure, anonymous system.) The email capability of your chosen
 voting platform should be used for sending voting invitations and reminders,
 and you should use the email list from
-https://github.com/conda-forge/conda-forge.github.io/blob/main/src/core.csv as
-the authoritative list of emails to use.
+https://github.com/conda-forge/conda-forge.github.io/blob/main/src/core.csv
+and https://github.com/conda-forge/conda-forge.github.io/blob/main/src/emeritus.csv
+as the authoritative list of emails to use.
 
 The default voting period is 1 week (7 days). This may be modified at
 the time when a vote is called, but may never be less than 24 hrs.
