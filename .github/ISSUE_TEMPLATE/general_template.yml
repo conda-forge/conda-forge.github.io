@@ -1,0 +1,8 @@
+name: Ask a general question
+description: Ask a general question about conda-forge
+labels: General
+body:
+  - type: textarea
+    id: comment
+    attributes:
+       label: "Your question:"
