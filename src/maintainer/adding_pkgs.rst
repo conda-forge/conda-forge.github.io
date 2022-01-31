@@ -635,9 +635,9 @@ Running tests locally for staged recipes
 
 If you want to run and build packages in the staged-recipes repository locally,
 go to the root repository directory and run the
-``build-locally.py`` script (you need Python 3). And then you could follow the prompt to select the variant you'd like build. This requires that you have Docker
+``build-locally.py`` script (you need Python 3). And then you could follow the prompt to select the variant you'd like to build. This requires that you have Docker
 installed on your machine if you are building a package for Linux.
-For MacOS, it will prompt you to select a location for the SDK (via ``export OSX_SDK_DIR=/opt``) to be downloaded.
+For MacOS, it will prompt you to select a location for the SDK (e.g. ``export OSX_SDK_DIR=/opt``) to be downloaded.
 
 .. code-block:: bash
         
