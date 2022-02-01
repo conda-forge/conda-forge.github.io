@@ -1,6 +1,6 @@
 name: Report an issue
 description: Report an issue you are experiencing.
-labels: General
+labels: bug
 body:
     - type: markdown
       attributes:
