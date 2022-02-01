@@ -106,9 +106,9 @@ and should automatically apply when re-rendering.</p>
 <p>These compilers will become the default for building packages in conda-forge.
 One notable change in gcc 10 is that the -fopenmp flag in FFLAGS is dropped.
 In clang 12, -std=c++14 explicit flag has been dropped from CXXFLAGS,
-as it is the default compilation mode for clang 12. In clang&gt;=12 and gcc&gt;=11,
-we will not provide an explicit C++ standard, and will defer to the compiler
-default.</p>
+as it is the default compilation mode for clang 12. In gcc 11, the default
+is -std=gnu++17. In clang&gt;=12 and gcc&gt;=11, we will not provide an explicit
+C++ standard, and will defer to the compiler default.</p>
 </dd>
 <dt class="field-odd">2021-10-04</dt>
 <dd class="field-odd"><p>python 3.6 is now dropped when building conda-forge packages</p>

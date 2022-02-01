@@ -4,7 +4,7 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Tue, 01 Feb 2022 21:01:29 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 01 Feb 2022 21:46:40 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
     <item>
       <title>2021-12-02: CentOS 7 docker images are now the default</title>
@@ -50,9 +50,9 @@ and should automatically apply when re-rendering.&lt;/p&gt;
       <description>&lt;p&gt;These compilers will become the default for building packages in conda-forge.
 One notable change in gcc 10 is that the -fopenmp flag in FFLAGS is dropped.
 In clang 12, -std=c++14 explicit flag has been dropped from CXXFLAGS,
-as it is the default compilation mode for clang 12. In clang&amp;gt;=12 and gcc&amp;gt;=11,
-we will not provide an explicit C++ standard, and will defer to the compiler
-default.&lt;/p&gt;
+as it is the default compilation mode for clang 12. In gcc 11, the default
+is -std=gnu++17. In clang&amp;gt;=12 and gcc&amp;gt;=11, we will not provide an explicit
+C++ standard, and will defer to the compiler default.&lt;/p&gt;
 </description>
       <guid>https://conda-forge.org/docs/user/announcements.html</guid>
       <pubDate>Wed, 13 Oct 2021 00:00:00 GMT</pubDate>
