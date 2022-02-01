@@ -635,20 +635,23 @@ Running tests locally for staged recipes
 
 If you want to run and build packages in the staged-recipes repository locally,
 go to the root repository directory and run the
-``.scripts/run_docker_build.sh`` script.  This requires that you have docker
-installed on your machine.
+``build-locally.py`` script (you need Python 3). And then you could follow the prompt to select the variant you'd like to build. This requires that you have Docker
+installed on your machine if you are building a package for Linux.
+For MacOS, it will prompt you to select a location for the SDK (e.g. ``export OSX_SDK_DIR=/opt``) to be downloaded.
 
-You need to define an environment variable named ``CONFIG``. Its value must be
-the name of one of the three YAML configuration files in the ``.ci_support``
-directory (either ``linux64``, ``osx64``, or ``win64``). As an example, you can
-invoke the command as follows.
+.. code-block:: bash
+        
+    $ cd ~/staged-recipes
+    $ python build-locally.py
 
-.. code-block:: sh
+If you know which image you want to build, you can specify it as an argument to the script.
 
-    $ cd staged-recipes
-    $ CONFIG=linux64 ./.scripts/run_docker_build.sh
-
-Once built, you can find the finished package under ``staged-recipes/build_artifacts``.  
+.. code-block:: bash
+        
+    $ cd ~/staged-recipes
+    $ python build-locally.py <VARIANT>
+ 
+where ``<VARIANT>`` is one of the file names in the ``.ci_support/`` directory, e.g. ``linux64``, ``osx64``, and ``linux64_cuda102``.
 
 
 About

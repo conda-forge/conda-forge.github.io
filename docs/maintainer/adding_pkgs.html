@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Contributing packages &#8212; conda-forge 2022.01.31 documentation</title>
+    <title>Contributing packages &#8212; conda-forge 2022.02.01 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.01.31 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.02.01 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Contributing packages</a></li> 
@@ -597,17 +597,19 @@ what an end-user will see.</p>
 <span id="staging-test-locally"></span><h4>Running tests locally for staged recipes<a class="headerlink" href="#running-tests-locally-for-staged-recipes" title="Permalink to this headline">¶</a></h4>
 <p>If you want to run and build packages in the staged-recipes repository locally,
 go to the root repository directory and run the
-<code class="docutils literal notranslate"><span class="pre">.scripts/run_docker_build.sh</span></code> script.  This requires that you have docker
-installed on your machine.</p>
-<p>You need to define an environment variable named <code class="docutils literal notranslate"><span class="pre">CONFIG</span></code>. Its value must be
-the name of one of the three YAML configuration files in the <code class="docutils literal notranslate"><span class="pre">.ci_support</span></code>
-directory (either <code class="docutils literal notranslate"><span class="pre">linux64</span></code>, <code class="docutils literal notranslate"><span class="pre">osx64</span></code>, or <code class="docutils literal notranslate"><span class="pre">win64</span></code>). As an example, you can
-invoke the command as follows.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> staged-recipes
-$ <span class="nv">CONFIG</span><span class="o">=</span>linux64 ./.scripts/run_docker_build.sh
+<code class="docutils literal notranslate"><span class="pre">build-locally.py</span></code> script (you need Python 3). And then you could follow the prompt to select the variant you’d like to build. This requires that you have Docker
+installed on your machine if you are building a package for Linux.
+For MacOS, it will prompt you to select a location for the SDK (e.g. <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">OSX_SDK_DIR=/opt</span></code>) to be downloaded.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/staged-recipes
+$ python build-locally.py
 </pre></div>
 </div>
-<p>Once built, you can find the finished package under <code class="docutils literal notranslate"><span class="pre">staged-recipes/build_artifacts</span></code>.</p>
+<p>If you know which image you want to build, you can specify it as an argument to the script.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/staged-recipes
+$ python build-locally.py &lt;VARIANT&gt;
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">&lt;VARIANT&gt;</span></code> is one of the file names in the <code class="docutils literal notranslate"><span class="pre">.ci_support/</span></code> directory, e.g. <code class="docutils literal notranslate"><span class="pre">linux64</span></code>, <code class="docutils literal notranslate"><span class="pre">osx64</span></code>, and <code class="docutils literal notranslate"><span class="pre">linux64_cuda102</span></code>.</p>
 </section>
 </section>
 <section id="about">
@@ -894,7 +896,7 @@ These expressions are written in <a class="reference external" href="http://jinj
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.01.31 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.02.01 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Contributing packages</a></li> 
