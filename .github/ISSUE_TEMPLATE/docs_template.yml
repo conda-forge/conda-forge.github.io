@@ -1,0 +1,44 @@
+name: Improve existing content
+description: Make a suggestion about the conda-forge docs
+labels:
+  - Docs
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for improving the conda-forge docs!
+        
+        Please check to make sure someone hasn't already opened a similar [issue](https://github.com/conda-forge/conda-forge.github.io/issues) and then fill out the form below.
+        
+        If you believe that something is incorrect in the docs, please open an issue with a fix instead or directly make a PR.
+        
+        _Note:_ As we're all volunteers, we cannot promise to include your change immediately and encourage you therefore to create a [PR](https://github.com/conda-forge/conda-forge.github.io/pulls) instead.
+        
+        Don't worry about the completeness of your PR, we are happy to help with any questions you might have!
+
+  - type: input
+    attributes:
+      label: Where should the content be added?
+      description: In case the content fits onto an already exisiting page, please provide its name or link to it here.
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: What should be added?
+      description: |
+        Please insert the content to be added.
+        
+        This can be just a couple of bullet points or the text to be included.
+        
+        _Note:_ If you already have a pretty good idea of what the addtion should look like, you can also open a [PR](https://github.com/conda-forge/conda-forge.github.io/pulls) and add the content yourself.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Additional information
+      description: Add any more info or links that explain what you want to add.
+    validations:
+      required: false
