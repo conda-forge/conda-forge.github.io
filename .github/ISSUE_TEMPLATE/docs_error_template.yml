@@ -42,3 +42,13 @@ body:
       description: Add any more info or links that explain what you want to change.
     validations:
       required: false
+
+  - type: checkboxes
+    attributes:
+      label: Incorrect or outdated
+      description: Is the content incorrect or outdated?
+      options:
+      - label: Incorrect
+      - label: Outdated
+    validations:
+      required: true
