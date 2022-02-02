@@ -1,5 +1,5 @@
 name: Correct existing content
-description: Suggest a correction of the conda-forge docs
+description: Suggest a correction of the conda-forge docs.
 labels:
   - Docs
   - bug
