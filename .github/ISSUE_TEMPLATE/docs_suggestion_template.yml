@@ -12,10 +12,7 @@ body:
         Please check to make sure someone hasn't already opened a similar [issue](https://github.com/conda-forge/conda-forge.github.io/issues) and then fill out the form below.
         
         If you believe that something is incorrect in the docs, please open an issue with a fix instead or directly make a PR.
-        
-        _Note:_ As we're all volunteers, we cannot promise to include your change immediately and encourage you therefore to create a [PR](https://github.com/conda-forge/conda-forge.github.io/pulls) instead.
-        
-        Don't worry about the completeness of your PR, we are happy to help with any questions you might have!
+        _Note:_ As we're all volunteers, we cannot promise to include your change immediately and encourage you therefore to create a [PR](https://github.com/conda-forge/conda-forge.github.io/pulls) instead. Don't worry about the completeness of it, we are happy to help with any questions you might have!
 
   - type: input
     attributes:
