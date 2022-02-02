@@ -1,5 +1,5 @@
 name: Correct existing content
-description: Suggest a correction of the conda-forge docs
+description: Suggest a correction of the conda-forge docs.
 labels:
   - Docs
   - bug
@@ -11,16 +11,13 @@ body:
         
         Please check to make sure someone hasn't already opened a similar [issue](https://github.com/conda-forge/conda-forge.github.io/issues) and then fill out the form below.
         
-        If you would like to add something to the docsm, please open an issue with a suggestion instead or directly make a PR.
-        
-        _Note:_ As we're all volunteers, we cannot promise to include your change immediately and encourage you therefore to create a [PR](https://github.com/conda-forge/conda-forge.github.io/pulls) instead.
-        
-        Don't worry about the completeness of your PR, we are happy to help with any questions you might have!
+        If you would like to add something to the docs, please open an issue with a suggestion instead or directly make a PR.
+        _Note:_ As we're all volunteers, we cannot promise to include your change immediately and encourage you therefore to create a [PR](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests) instead. Don't worry about the completeness of it, we are happy to help with any questions you might have!
 
   - type: input
     attributes:
       label: Where should the content be changed?
-      description: Please provide a link to the page where the incorreect content appears.
+      description: Please provide a link to the page where the incorrect content appears.
     validations:
       required: false
 
@@ -29,10 +26,9 @@ body:
       label: What should be changed?
       description: |
         Please insert the content to be changed and what should be changed.
-        
         This can be just a couple of bullet points or the text to be included.
         
-        _Note:_ If you already have a pretty good idea of what the change should look like, you can also open a [PR](https://github.com/conda-forge/conda-forge.github.io/pulls) and change the content yourself.
+        _Note:_ If you already have a pretty good idea of what the change should look like, you can also open a [PR](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests) and change the content yourself.
     validations:
       required: true
 
