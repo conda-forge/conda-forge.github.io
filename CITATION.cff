@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you'd like to credit conda-forge, please use this citation."
+authors:
+- name: "conda-forge community"
+title: "The conda-forge Project: Community-based Software Distribution Built on the conda Package Format and Ecosystem"
+date-released: "2015-07-01"
+publisher:
+  name: "Zenodo"
+doi: "10.5281/zenodo.4774216"
+url: "https://doi.org/10.5281/zenodo.4774216"
