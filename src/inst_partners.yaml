@@ -21,17 +21,6 @@ Lab49:
   contribution type:
     - dev support
 
-DTN:
-  Description: DTN provides developer time
-  Developers:
-    - ericdill
-  Logo URL:
-    - imgs/dtn.png
-  Site URL:
-    - https://dtn.com
-  contribution type:
-    - dev support
-
 IOOS:
   Description: IOOS provides developer time
   Developers:
@@ -73,7 +62,6 @@ NVIDIA:
    Description: NVIDIA provides developer time
    Developers:
      - jakirkham
-     - kkraus14
    Logo URL:
      - https://cdn-assets-cloud.frontify.com/s3/frontify-cloud-files-us/eyJwYXRoIjoiZnJvbnRpZnlcL2FjY291bnRzXC84MVwvOTYxNTJcL3Byb2plY3RzXC8xNzY2NDRcL2Fzc2V0c1wvOWRcLzI0NzM4MTdcLzY0ZmRkOTc3MGY4Zjg0YjMxM2E3NDQ5NGY3NTc0MzZiLTE1MzE1MTU3MjkucG5nIn0:cloud:hhu8wqybRLydq7ZhAqVEYy66lpq61SJurz-rRPPEX2s
    Site URL:
@@ -91,6 +79,19 @@ Quansight:
     - https://avatars.githubusercontent.com/u/34879953
   Site URL:
     - https://www.quansight.com/
+  contribution type:
+    - dev support
+
+Voltron Data:
+  Description: Voltron Data provides developer time
+  Developers:
+    - ericdill
+    - mariusvniekerk
+    - kkraus14
+  Logo URL:
+    - img/VoltronData.svg
+  Site URL:
+    - https://voltrondata.com
   contribution type:
     - dev support
 
