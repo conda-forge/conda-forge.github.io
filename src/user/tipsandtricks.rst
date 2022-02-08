@@ -151,4 +151,4 @@ In order to override the default behavior, a user can set the environment variab
    
    Note that you should select the cudatoolkit version most appropraite for your GPU; currently, we have "10.2", "11.0", "11.1", and "11.2" available.
 
-For context, for TensorFlow 2.7.0, ``CONDA_CUDA_OVERRIDE="11.2" mamba install tensorflow -c conda-forge`` results in approximately 2 GB to download while ``CONDA_CUDA_OVERRIDE="11.2" mamba install tensorflow=2.7.0=cpu* -c conda-forge`` results in approximately 200 MB to download. That is a significant bandwidth AND storage wasted wasted if one only needs the ``-cpu`` variant! 
+For context, installing TensorFlow 2.7.0 with ``CONDA_CUDA_OVERRIDE="11.2" mamba install tensorflow -c conda-forge`` results in approximately 2 GB of packages to download while ``CONDA_CUDA_OVERRIDE="11.2" mamba install tensorflow=2.7.0=cpu* -c conda-forge`` results in approximately 200 MB to download. That is a significant bandwidth AND storage wasted wasted if one only needs the ``-cpu`` variant! 
