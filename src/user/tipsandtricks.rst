@@ -130,3 +130,17 @@ To verify that the correct platform is being used, run the following commands af
 
     python -c "import platform;print(platform.machine())"  # Should print "x86_64"
     echo "CONDA_SUBDIR: $CONDA_SUBDIR"  # Should print "CONDA_SUBDIR: osx-64"
+
+Installing CUDA-enabled packages like TensorFlow and PyTorch 
+============================================================
+
+In conda-forge, some packages are available with GPU support. These packages not only take significantly longer to compile and build, but they also result in rather large binaries that users download. As an effort to maximize accessibility to users with lower connection and/or storage bandwidth, there is an ongoing effort to limit installing packages compiled for GPU use unnecessarily on CPU machines by default. This is accomplished by adding a run dependency, `__cuda`, that detects if the local machine has a GPU. However, this introduces challenges to people who may prefer to still download and use `-gpu` packages even on a non-GPU machine. For example, login nodes on HPCs often do not have GPUs and the compute counterparts with GPUs often do not have internet access. In this case, the user can still override the default settings via the environemnt variable `CONDA_CUDA_OVERRIDE`. At the time of writing (February 2022), our conclusion is this safe default behavior is best for most of conda-forge users, with an easy override option available. Please let us know if you have thoughts on this.
+
+In order to override the default behavior, a user can set the environemnt variable `CONDA_CUDA_OVERRIDE` like below to install TensorFlow with GPU support even on a machine with CPU only.
+
+.. code-block:: bash
+     CONDA_CUDA_OVERRIDE="" mamba install tensorflow -c conda-forge
+     # OR
+     CONDA_CUDA_OVERRIDE="11.2" mamba install tensorflow -c conda-forge
+
+For context, for TensorFlow 2.7.0, `CONDA_CUDA_OVERRIDE="11.2" mamba install tensorflow -c conda-forge` results in approximately 2 GB to download while `CONDA_CUDA_OVERRIDE="11.2" mamba install tensorflow=2.7.0=cpu* -c conda-forge` results in approximately 200 MB to download. That is a significant storage wasted if one only needs the `-cpu` variant. 
