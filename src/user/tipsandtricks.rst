@@ -132,7 +132,7 @@ To verify that the correct platform is being used, run the following commands af
     echo "CONDA_SUBDIR: $CONDA_SUBDIR"  # Should print "CONDA_SUBDIR: osx-64"
 
 
-.. _installing_GPU_on_GPUs_and_CPUs:
+.. _installing_packages_for_GPUs_and_CPUs:
 
 Installing CUDA-enabled packages like TensorFlow and PyTorch 
 ============================================================
