@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2017-11-16 compiler meeting notes &#8212; conda-forge 2022.02.11 documentation</title>
+    <title>2017-11-16 compiler meeting notes &#8212; conda-forge 2022.02.12 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -17,8 +17,6 @@
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     
     
@@ -57,7 +55,7 @@
         <li class="right" >
           <a href="2018-02-20.html" title="2018-02-20 meeting notes"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">conda-forge 2022.02.11 documentation</a> &#187;</li>
+    <li><a href="../../index.html">conda-forge 2022.02.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li>
@@ -72,7 +70,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section class="tex2jax_ignore mathjax_ignore" id="compiler-meeting-notes">
+  <section id="compiler-meeting-notes">
 <h1>2017-11-16 compiler meeting notes<a class="headerlink" href="#compiler-meeting-notes" title="Permalink to this headline">¶</a></h1>
 <p>Scheduled time: 9 AM central.  Meeting link: https://anaconda.webex.com/anaconda-en/j.php?MTID=m11b5ddad66325da22bbe58d7d1c02809</p>
 <section id="adopting-anaconda-compilers">
@@ -118,9 +116,9 @@
 <li><p>anaconda: https://github.com/AnacondaRecipes/aggregate/blob/master/ctng-compilers-activation-feedstock/recipe/conda_build_config.cos6.x86_64.yaml#L41-L54
 | Variable | toolchain only                          | anaconda only                                                                                                                                             |  |
 | ——– | ————————————— | ——————————————————————————————————————————————————— |  |
-| CFLAGS   | -m<span class="math notranslate nohighlight">\({ARCH}                               | march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe                                                            |  |
+| CFLAGS   | -m${ARCH}                               | march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe                                                            |  |
 | CPPFLAGS |                                         | -D_FORTIFY_SOURCE=2 -O2                                                                                                                                   |  |
-| CXXFLAGS | -DBOOST_MATH_DISABLE_FLOAT128 -m\)</span>{ARCH} | -fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe |  |
+| CXXFLAGS | -DBOOST_MATH_DISABLE_FLOAT128 -m${ARCH} | -fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe |  |
 | LDFLAGS  | -Wl,-rpath,$PREFIX/lib                  | Wl,-O2 -Wl,–sort-common -Wl,–as-needed -Wl,-z,relro -Wl,-z,now                                                                                          |  |</p></li>
 </ul>
 </li>
@@ -131,10 +129,10 @@
 <li><p>anaconda: https://github.com/AnacondaRecipes/aggregate/blob/master/clang/build.sh
 | Variable   | toolchain only                                                          | anaconda only                                                                                                                                                                |
 | ———- | ———————————————————————– | —————————————————————————————————————————————————————————- |
-| CPPFLAGS   |                                                                         | -mmacosx-version-min=<span class="math notranslate nohighlight">\({MACOSX_VERSION_MIN}                                                                                                                                   |
-| CFLAGS     | -mmacosx-version-min=\)</span>{MACOSX_VERSION_MIN} -m<span class="math notranslate nohighlight">\({ARCH}                    | -march=core2 -mtune=haswell -mssse3 -ftree-vectorize -fPIC -fPIE -fstack-protector-strong -O2 -pipe                                                                          |
-| CXXFLAGS   | -mmacosx-version-min=\)</span>{MACOSX_VERSION_MIN} -m<span class="math notranslate nohighlight">\({ARCH}                    | -march=core2 -mtune=haswell -mssse3 -ftree-vectorize -fPIC -fPIE -fstack-protector-strong -O2 -pipe -stdlib=libc++ -fvisibility-inlines-hidden -std=c++14 -fmessage-length=0 |
-| LDFLAGS    | -mmacosx-version-min=\)</span>{MACOSX_VERSION_MIN} -lc++ -Wl,-rpath,$PREFIX/lib | -pie                                                                                                                                                                         |
+| CPPFLAGS   |                                                                         | -mmacosx-version-min=${MACOSX_VERSION_MIN}                                                                                                                                   |
+| CFLAGS     | -mmacosx-version-min=${MACOSX_VERSION_MIN} -m${ARCH}                    | -march=core2 -mtune=haswell -mssse3 -ftree-vectorize -fPIC -fPIE -fstack-protector-strong -O2 -pipe                                                                          |
+| CXXFLAGS   | -mmacosx-version-min=${MACOSX_VERSION_MIN} -m${ARCH}                    | -march=core2 -mtune=haswell -mssse3 -ftree-vectorize -fPIC -fPIE -fstack-protector-strong -O2 -pipe -stdlib=libc++ -fvisibility-inlines-hidden -std=c++14 -fmessage-length=0 |
+| LDFLAGS    | -mmacosx-version-min=${MACOSX_VERSION_MIN} -lc++ -Wl,-rpath,$PREFIX/lib | -pie                                                                                                                                                                         |
 | LDFLAGS_CC |                                                                         | -Wl,-pie -Wl,-headerpad_max_install_names                                                                                                                                    |
 |            |                                                                         |                                                                                                                                                                              |</p></li>
 </ul>
@@ -435,7 +433,7 @@
         <li class="right" >
           <a href="2018-02-20.html" title="2018-02-20 meeting notes"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">conda-forge 2022.02.11 documentation</a> &#187;</li>
+    <li><a href="../../index.html">conda-forge 2022.02.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li>
