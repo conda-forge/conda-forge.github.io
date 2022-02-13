@@ -4,7 +4,7 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Sun, 13 Feb 2022 21:23:29 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 13 Feb 2022 21:25:33 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
     <item>
       <title>2022-02-13: Default branch migration from master to main</title>
