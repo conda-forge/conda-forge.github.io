@@ -4,8 +4,19 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Sat, 12 Feb 2022 23:07:30 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 13 Feb 2022 21:23:29 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2022-02-13: Default branch migration from master to main</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;We will be migrating the default branches of all feedstocks and other &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; repos
+from &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;master&lt;/span&gt;&lt;/code&gt; to &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;main&lt;/span&gt;&lt;/code&gt;. We do expect some minor hiccups while this migration is
+going on. If you encounter any problems, please comment on this Github
+&lt;a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues/1162"&gt;issue&lt;/a&gt;.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Sun, 13 Feb 2022 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2021-12-02: CentOS 7 docker images are now the default</title>
       <link>https://conda-forge.org/docs/user/announcements.html</link>
