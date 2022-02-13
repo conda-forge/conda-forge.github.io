@@ -10,7 +10,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
 :2022-02-13: Default branch migration from ``master`` to ``main``
 
-    We will be migrating the default branches of all feedstocks and other ``conda-forge``
+    We will be migrating the default branches of all feedstocks and other ``conda-forge`` repos
     from ``master`` to ``main``. We do expect some minor hiccups while this migration is 
     going on. If you encounter any problems, please comment on this Github 
     `issue <https://github.com/conda-forge/conda-forge.github.io/issues/1162>`__.
