@@ -1448,7 +1448,7 @@ while B should have,
 .. code-block:: yaml
 
    channel_sources:
-     - conda-forge/label/A_rc,conda-forge,defaults
+     - conda-forge/label/A_rc,conda-forge
    channel_targets:
      - conda-forge B_rc
 
