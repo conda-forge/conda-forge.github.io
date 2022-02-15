@@ -265,20 +265,24 @@ requirements of the VC version. For example, python 2.7 requires <code class="do
 <section id="compilers">
 <span id="dep-compilers"></span><h3>Compilers<a class="headerlink" href="#compilers" title="Permalink to this headline">¶</a></h3>
 <p>Compilers are dependencies with a special syntax and are always added to <code class="docutils literal notranslate"><span class="pre">requirements/build</span></code>.</p>
-<p>There are currently three supported compilers:</p>
+<p>There are currently five supported compilers:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>C</p></li>
 <li><p>cxx</p></li>
 <li><p>Fortran</p></li>
+<li><p>Go</p></li>
+<li><p>Rust</p></li>
 </ul>
 </div></blockquote>
-<p>A package that needs all three compilers would define</p>
+<p>A package that needs all five compilers would define</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&#39;c&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&#39;cxx&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&#39;fortran&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&#39;go&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&#39;rust&#39;)</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition note">

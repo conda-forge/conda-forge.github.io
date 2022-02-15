@@ -242,13 +242,15 @@ Compilers
 
 Compilers are dependencies with a special syntax and are always added to ``requirements/build``.
 
-There are currently three supported compilers:
+There are currently five supported compilers:
 
  - C
  - cxx
  - Fortran
+ - Go
+ - Rust
 
-A package that needs all three compilers would define
+A package that needs all five compilers would define
 
 .. code-block:: yaml
 
@@ -257,6 +259,8 @@ A package that needs all three compilers would define
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - {{ compiler('fortran') }}
+        - {{ compiler('go') }}
+        - {{ compiler('rust') }}
 
 .. note::
 
