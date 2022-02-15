@@ -137,18 +137,18 @@ To verify that the correct platform is being used, run the following commands af
 Installing CUDA-enabled packages like TensorFlow and PyTorch 
 ============================================================
 
-In conda-forge, some packages are available with GPU support. These packages not only take significantly longer to compile and build, but they also result in rather large binaries that users then download. As an effort to maximize accessibility for users with lower connection and/or storage bandwidth, there is an ongoing effort to limit installing packages compiled for GPUs unnecessarily on CPU-only machines by default. This is accomplished by adding a run dependency, ``__cuda``, that detects if the local machine has a GPU. However, this introduces challenges to users who may prefer to still download and use ``-gpu`` packages even on a non-GPU machine. For example, login nodes on HPCs often do not have GPUs and their compute counterparts with GPUs often do not have internet access. In this case, a user can override the default setting via the environment variable ``CONDA_CUDA_OVERRIDE`` to install GPU packages on the login node to be used later on the compute node. At the time of writing (February 2022), we have concluded this safe default behavior is best for most of conda-forge users, with an easy override option available and documented. Please let us know if you have thoughts on or issues with this.
+In conda-forge, some packages are available with GPU support. These packages not only take significantly longer to compile and build, but they also result in rather large binaries that users then download. As an effort to maximize accessibility for users with lower connection and/or storage bandwidth, there is an ongoing effort to limit installing packages compiled for GPUs unnecessarily on CPU-only machines by default. This is accomplished by adding a run dependency, ``__cuda``, that detects if the local machine has a GPU. However, this introduces challenges to users who may prefer to still download and use GPU-enabled packages even on a non-GPU machine. For example, login nodes on HPCs often do not have GPUs and their compute counterparts with GPUs often do not have internet access. In this case, a user can override the default setting via the environment variable ``CONDA_CUDA_OVERRIDE`` to install GPU packages on the login node to be used later on the compute node. At the time of writing (February 2022), we have concluded this safe default behavior is best for most of conda-forge users, with an easy override option available and documented. Please let us know if you have thoughts on or issues with this.
 
 In order to override the default behavior, a user can set the environment variable ``CONDA_CUDA_OVERRIDE`` like below to install TensorFlow with GPU support even on a machine with CPU only.
 
 .. code-block:: shell
 
-     CONDA_CUDA_OVERRIDE="11.2" conda install tensorflow -c conda-forge
+     CONDA_CUDA_OVERRIDE="11.2" conda install tensorflow==2.7.0=cuda* -c conda-forge
      # OR
-     CONDA_CUDA_OVERRIDE="11.2" mamba install tensorflow -c conda-forge
+     CONDA_CUDA_OVERRIDE="11.2" mamba install tensorflow==2.7.0=cuda* -c conda-forge
 
 .. note::
    
-   Note that you should select the cudatoolkit version most appropraite for your GPU; currently, we have "10.2", "11.0", "11.1", and "11.2" available.
+   Note that you should select the cudatoolkit version most appropraite for your GPU; currently, we have "10.2", "11.0", "11.1", and "11.2" builds available, where the "11.2" builds are compatible with all cudatoolkits>=11.2. (At the time of writing, there seems to be a bug in how cuda builds resolved, defaulting to cudatoolkit==10.2; thus, it is prudent to be as explicit as possible like above.) 
 
-For context, installing TensorFlow 2.7.0 with ``CONDA_CUDA_OVERRIDE="11.2" mamba install tensorflow -c conda-forge`` results in approximately 2 GB of packages to download while ``CONDA_CUDA_OVERRIDE="11.2" mamba install tensorflow=2.7.0=cpu* -c conda-forge`` results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the ``-cpu`` variant! 
+For context, installing TensorFlow 2.7.0 with ``CONDA_CUDA_OVERRIDE="11.2" mamba install tensorflow==2.7.0=cuda* -c conda-forge`` results in approximately 2 GB of packages to download while ``CONDA_CUDA_OVERRIDE="11.2" mamba install tensorflow=2.7.0=cpu* -c conda-forge`` results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the ``-cpu`` variant! 
