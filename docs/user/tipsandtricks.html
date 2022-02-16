@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Tips &amp; tricks &#8212; conda-forge 2022.02.15 documentation</title>
+    <title>Tips &amp; tricks &#8212; conda-forge 2022.02.16 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.02.15 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.02.16 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Tips &amp; tricks</a></li> 
@@ -171,6 +171,21 @@ conda activate your_environment_name
 </pre></div>
 </div>
 </section>
+<section id="installing-cuda-enabled-packages-like-tensorflow-and-pytorch">
+<span id="installing-packages-for-gpus-and-cpus"></span><h2>Installing CUDA-enabled packages like TensorFlow and PyTorch<a class="headerlink" href="#installing-cuda-enabled-packages-like-tensorflow-and-pytorch" title="Permalink to this headline">¶</a></h2>
+<p>In conda-forge, some packages are available with GPU support. These packages not only take significantly longer to compile and build, but they also result in rather large binaries that users then download. As an effort to maximize accessibility for users with lower connection and/or storage bandwidth, there is an ongoing effort to limit installing packages compiled for GPUs unnecessarily on CPU-only machines by default. This is accomplished by adding a run dependency, <code class="docutils literal notranslate"><span class="pre">__cuda</span></code>, that detects if the local machine has a GPU. However, this introduces challenges to users who may prefer to still download and use GPU-enabled packages even on a non-GPU machine. For example, login nodes on HPCs often do not have GPUs and their compute counterparts with GPUs often do not have internet access. In this case, a user can override the default setting via the environment variable <code class="docutils literal notranslate"><span class="pre">CONDA_CUDA_OVERRIDE</span></code> to install GPU packages on the login node to be used later on the compute node. At the time of writing (February 2022), we have concluded this safe default behavior is best for most of conda-forge users, with an easy override option available and documented. Please let us know if you have thoughts on or issues with this.</p>
+<p>In order to override the default behavior, a user can set the environment variable <code class="docutils literal notranslate"><span class="pre">CONDA_CUDA_OVERRIDE</span></code> like below to install TensorFlow with GPU support even on a machine with CPU only.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_CUDA_OVERRIDE</span><span class="o">=</span><span class="s2">&quot;11.2&quot;</span> conda install <span class="s2">&quot;tensorflow==2.7.0=cuda112*&quot;</span> -c conda-forge
+<span class="c1"># OR</span>
+<span class="nv">CONDA_CUDA_OVERRIDE</span><span class="o">=</span><span class="s2">&quot;11.2&quot;</span> mamba install <span class="s2">&quot;tensorflow==2.7.0=cuda112*&quot;</span> -c conda-forge
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that you should select the cudatoolkit version most appropraite for your GPU; currently, we have “10.2”, “11.0”, “11.1”, and “11.2” builds available, where the “11.2” builds are compatible with all cudatoolkits&gt;=11.2. (At the time of writing, there seems to be a bug in how the cuda builds are resolved by mamba, defaulting to cudatoolkit==10.2; thus, it is prudent to be as explicit as possible like above or by adding <code class="docutils literal notranslate"><span class="pre">cudatoolkit&gt;=11.2</span></code> or similar to the line above.)</p>
+</div>
+<p>For context, installing TensorFlow 2.7.0 with <code class="docutils literal notranslate"><span class="pre">CONDA_CUDA_OVERRIDE=&quot;11.2&quot;</span> <span class="pre">mamba</span> <span class="pre">install</span> <span class="pre">&quot;tensorflow==2.7.0=cuda*&quot;</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code> results in approximately 2 GB of packages to download while <code class="docutils literal notranslate"><span class="pre">CONDA_CUDA_OVERRIDE=&quot;11.2&quot;</span> <span class="pre">mamba</span> <span class="pre">install</span> <span class="pre">&quot;tensorflow=2.7.0=cpu*&quot;</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code> results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the <code class="docutils literal notranslate"><span class="pre">-cpu</span></code> variant!</p>
+</section>
 </section>
 
 
@@ -196,6 +211,7 @@ conda activate your_environment_name
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#using-external-message-passing-interface-mpi-libraries">Using External Message Passing Interface (MPI) Libraries</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-apple-intel-packages-on-apple-silicon">Installing Apple Intel packages on Apple Silicon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-cuda-enabled-packages-like-tensorflow-and-pytorch">Installing CUDA-enabled packages like TensorFlow and PyTorch</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ci-skeleton.html">Using conda-smithy to manage your CI</a></li>
@@ -273,7 +289,7 @@ conda activate your_environment_name
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.02.15 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.02.16 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Tips &amp; tricks</a></li> 
