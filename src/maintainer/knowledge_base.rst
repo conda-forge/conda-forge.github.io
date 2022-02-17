@@ -930,6 +930,27 @@ Currently available packages:
 +-------------+-------------------+--------------+
 
 
+.. _knowledge:all-installs:
+
+Non-version-specific Python packages
+------------------------------------
+For some dependencies, upstream maintainers list Python versions where those packages are needed,
+even if the packages can actually be installed under all Python versions.
+
+Implementing this restriction in conda-forge is currently only possible through the use of ``skips``
+which restricts the corresponding conda-forge recipes from becoming ``noarch``.
+
+Therefore, the conda-forge community maintains a list of packages that are safe to be installed under all Python versions,
+even if the original package only requires it for some versions.
+
+For example, the package `pyquil <https://github.com/rigetti/pyquil>`__ only
+`requires <https://github.com/rigetti/pyquil/blob/497791e8108d8780109d75410be786c5f6e590ea/pyproject.toml#L30>`__ ``importlib-metadata`` for ``python <3.8`` but it is actually save to be installed under ``python >=3.8`` as well.
+
+Currently available packages:
+
+  - importlib-metadata
+
+
 Noarch builds
 =============
 
