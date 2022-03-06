@@ -8,6 +8,15 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2022
 ----
 
+:2022-03-06: Travis CI Usage Deprecated for ``win_*``, ``osx_*``, and ``linux_64`` Platforms
+
+    Due to changes in how Travis CI tracks open-source build time, we are deprecating using it 
+    for the ``win_*``, ``osx_*``, and ``linux_64`` platforms. Travis CI will be available only 
+    for platforms in their `partner queues <https://docs.travis-ci.com/user/billing-overview/#partner-queue-solution>`_.
+    These platforms currently include ``ppc64le``, ``aarch64`` and ``s390x``. Rerendering will 
+    raise an error if Travis CI is used for a non-partner queue platform in the ``conda-forge``
+    GitHub organization.
+
 :2022-02-13: Default branch migration from ``master`` to ``main``
 
     We will be migrating the default branches of all feedstocks and other ``conda-forge`` repos
