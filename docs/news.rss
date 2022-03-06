@@ -4,14 +4,17 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Thu, 24 Feb 2022 20:21:41 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 06 Mar 2022 13:19:00 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
     <item>
       <title>2022-02-13: Default branch migration from master to main</title>
       <link>https://conda-forge.org/docs/user/announcements.html</link>
       <description>&lt;p&gt;We will be migrating the default branches of all feedstocks and other &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; repos
 from &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;master&lt;/span&gt;&lt;/code&gt; to &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;main&lt;/span&gt;&lt;/code&gt;. We do expect some minor hiccups while this migration is
-going on. If you encounter any problems, please comment on this Github
+going on. You will need to change to the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;main&lt;/span&gt;&lt;/code&gt; branch from &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;master&lt;/span&gt;&lt;/code&gt; on any local clones via the
+following git commands:&lt;/p&gt;
+
+&lt;p&gt;If you encounter any problems, please comment on this Github
 &lt;a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues/1162"&gt;issue&lt;/a&gt;.&lt;/p&gt;
 </description>
       <guid>https://conda-forge.org/docs/user/announcements.html</guid>

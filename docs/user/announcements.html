@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Announcements &#8212; conda-forge 2022.02.24 documentation</title>
+    <title>Announcements &#8212; conda-forge 2022.03.06 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="introduction.html" title="A brief introduction"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.02.24 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.03.06 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Announcements</a></li> 
@@ -79,7 +79,15 @@
 <dd class="field-odd"><p>Default branch migration from <code class="docutils literal notranslate"><span class="pre">master</span></code> to <code class="docutils literal notranslate"><span class="pre">main</span></code></p>
 <p>We will be migrating the default branches of all feedstocks and other <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> repos
 from <code class="docutils literal notranslate"><span class="pre">master</span></code> to <code class="docutils literal notranslate"><span class="pre">main</span></code>. We do expect some minor hiccups while this migration is
-going on. If you encounter any problems, please comment on this Github
+going on. You will need to change to the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch from <code class="docutils literal notranslate"><span class="pre">master</span></code> on any local clones via the
+following git commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">m</span> <span class="n">master</span> <span class="n">main</span>
+<span class="n">git</span> <span class="n">fetch</span> <span class="n">origin</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span><span class="o">/</span><span class="n">main</span> <span class="n">main</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="nb">set</span><span class="o">-</span><span class="n">head</span> <span class="n">origin</span> <span class="o">-</span><span class="n">a</span>
+</pre></div>
+</div>
+<p>If you encounter any problems, please comment on this Github
 <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues/1162">issue</a>.</p>
 </dd>
 </dl>
@@ -545,7 +553,7 @@ bear with us.</p>
         <li class="right" >
           <a href="introduction.html" title="A brief introduction"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.02.24 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.03.06 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Announcements</a></li> 
