@@ -75,8 +75,17 @@
 <section id="id1">
 <h2>2022<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <dl class="field-list">
-<dt class="field-odd">2022-02-13</dt>
-<dd class="field-odd"><p>Default branch migration from <code class="docutils literal notranslate"><span class="pre">master</span></code> to <code class="docutils literal notranslate"><span class="pre">main</span></code></p>
+<dt class="field-odd">2022-03-06</dt>
+<dd class="field-odd"><p>Travis CI Usage Deprecated for <code class="docutils literal notranslate"><span class="pre">win_*</span></code>, <code class="docutils literal notranslate"><span class="pre">osx_*</span></code>, and <code class="docutils literal notranslate"><span class="pre">linux_64</span></code> Platforms</p>
+<p>Due to changes in how Travis CI tracks open-source build time, we are deprecating using it
+for the <code class="docutils literal notranslate"><span class="pre">win_*</span></code>, <code class="docutils literal notranslate"><span class="pre">osx_*</span></code>, and <code class="docutils literal notranslate"><span class="pre">linux_64</span></code> platforms. Travis CI will be available only
+for platforms in their <a class="reference external" href="https://docs.travis-ci.com/user/billing-overview/#partner-queue-solution">partner queues</a>.
+These platforms currently include <code class="docutils literal notranslate"><span class="pre">ppc64le</span></code>, <code class="docutils literal notranslate"><span class="pre">aarch64</span></code> and <code class="docutils literal notranslate"><span class="pre">s390x</span></code>. Rerendering will
+raise an error if Travis CI is used for a non-partner queue platform in the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>
+GitHub organization.</p>
+</dd>
+<dt class="field-even">2022-02-13</dt>
+<dd class="field-even"><p>Default branch migration from <code class="docutils literal notranslate"><span class="pre">master</span></code> to <code class="docutils literal notranslate"><span class="pre">main</span></code></p>
 <p>We will be migrating the default branches of all feedstocks and other <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> repos
 from <code class="docutils literal notranslate"><span class="pre">master</span></code> to <code class="docutils literal notranslate"><span class="pre">main</span></code>. We do expect some minor hiccups while this migration is
 going on. You will need to change to the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch from <code class="docutils literal notranslate"><span class="pre">master</span></code> on any local clones via the

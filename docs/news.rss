@@ -4,8 +4,21 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Sun, 06 Mar 2022 13:19:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 06 Mar 2022 14:18:31 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2022-03-06: Travis CI Usage Deprecated for win_*, osx_*, and linux_64 Platforms</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;Due to changes in how Travis CI tracks open-source build time, we are deprecating using it
+for the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;win_*&lt;/span&gt;&lt;/code&gt;, &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;osx_*&lt;/span&gt;&lt;/code&gt;, and &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;linux_64&lt;/span&gt;&lt;/code&gt; platforms. Travis CI will be available only
+for platforms in their &lt;a class="reference external" href="https://docs.travis-ci.com/user/billing-overview/#partner-queue-solution"&gt;partner queues&lt;/a&gt;.
+These platforms currently include &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;ppc64le&lt;/span&gt;&lt;/code&gt;, &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;aarch64&lt;/span&gt;&lt;/code&gt; and &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;s390x&lt;/span&gt;&lt;/code&gt;. Rerendering will
+raise an error if Travis CI is used for a non-partner queue platform in the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt;
+GitHub organization.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Sun, 06 Mar 2022 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2022-02-13: Default branch migration from master to main</title>
       <link>https://conda-forge.org/docs/user/announcements.html</link>
