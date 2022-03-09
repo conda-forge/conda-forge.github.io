@@ -1012,7 +1012,7 @@ In order to qualify as a noarch python package, all of the following criteria mu
 .. hint::
 
   If a ``noarch`` package `cannot` be built on Linux, one or more ``noarch_platforms`` can be provided in
-  ``conda-forge.yml``. One example is `pywin32-on-windows <https://github.com/conda-forge/pywin32-on-windows>`_,
+  ``conda-forge.yml``. One example is `pywin32-on-windows <https://github.com/conda-forge/pywin32-on-windows-feedstock>`_,
   which builds on Linux `and` Windows, with ``build_number`` offsets to create a pair packages, like
   ``dataclasses``.
 
