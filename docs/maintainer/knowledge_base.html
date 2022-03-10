@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Knowledge Base &#8212; conda-forge 2022.03.06 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2022.03.10 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.03.06 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.03.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -825,12 +825,15 @@ Therefore, most upstream packages make those backports only mandatory for specif
 which restricts the corresponding conda-forge recipes from becoming <code class="docutils literal notranslate"><span class="pre">noarch</span></code>.</p>
 <p>Therefore, some conda-forge recipes only create an actual package on specific Python versions and are otherwise an
 empty placeholder. This allows them to be safely installed under all Python versions and makes using <code class="docutils literal notranslate"><span class="pre">skips</span></code> unnecessary.</p>
+<p>Similarly, some packages are <cite>only</cite> platform-specific dependency of a package, such as <code class="docutils literal notranslate"><span class="pre">pywin32</span></code>, and have
+helper metapackages which can help recipes stay <code class="docutils literal notranslate"><span class="pre">noarch</span></code>. The version of the <cite>actual</cite> package required
+can be controlled with <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code>, even for packages not available on all platforms.</p>
 <p>Currently available packages:</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 28%" />
-<col style="width: 41%" />
-<col style="width: 30%" />
+<col style="width: 38%" />
+<col style="width: 36%" />
+<col style="width: 26%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -850,6 +853,10 @@ empty placeholder. This allows them to be safely installed under all Python vers
 <tr class="row-even"><td><p>typing</p></td>
 <td></td>
 <td><p>python &gt;=3</p></td>
+</tr>
+<tr class="row-odd"><td><p>pywin32-on-windows</p></td>
+<td><p>windows</p></td>
+<td><p>unix</p></td>
 </tr>
 </tbody>
 </table>
@@ -876,7 +883,7 @@ even if the original package only requires it for some versions.</p>
 <h2>Noarch builds<a class="headerlink" href="#noarch-builds" title="Permalink to this headline">¶</a></h2>
 <p>Noarch packages are packages that are not architecture specific and therefore only have to be built once.</p>
 <p>Declaring these packages as <code class="docutils literal notranslate"><span class="pre">noarch</span></code> in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section of the meta.yaml, reduces shared CI resources.
-Therefore all packages that qualify to be noarch packages, should be declared as such.</p>
+Therefore all packages that qualify to be noarch packages <cite>should</cite> be declared as such.</p>
 <section id="noarch-python">
 <span id="noarch"></span><h3>Noarch python<a class="headerlink" href="#noarch-python" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> directive, in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section, makes pure-Python
@@ -892,7 +899,7 @@ packages that only need to be built once.</p>
 statement and add version constraint on python in <code class="docutils literal notranslate"><span class="pre">host</span></code> and <code class="docutils literal notranslate"><span class="pre">run</span></code>
 section.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">2to3</span></code> is not used</p></li>
-<li><p>Scripts argument in setup.py is not used</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts</span></code> argument in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> is not used</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">console_scripts</span></code> <code class="docutils literal notranslate"><span class="pre">entry_points</span></code> are defined in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> or <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code>, they are also listed in
 the <code class="docutils literal notranslate"><span class="pre">build</span></code> section of <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></p></li>
 <li><p>No activate scripts</p></li>
@@ -907,7 +914,7 @@ say <code class="docutils literal notranslate"><span class="pre">python</span> <
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Only <code class="docutils literal notranslate"><span class="pre">console_scripts</span></code> entry points have to be listed in meta.yaml. Other entry points do not conflict
+<p>Only <code class="docutils literal notranslate"><span class="pre">console_scripts</span></code> entry points have to be listed in <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>. Other entry points do not conflict
 with <code class="docutils literal notranslate"><span class="pre">noarch</span></code> and therefore do not require extra treatment.</p>
 </div>
 <div class="admonition note">
@@ -916,8 +923,15 @@ with <code class="docutils literal notranslate"><span class="pre">noarch</span><
 <code class="docutils literal notranslate"><span class="pre">noarch</span></code> even if one of its dependencies is not available on a given platform. If this is the case, conda will
 display a helpful error message describing which dependency couldn’t be found when it tries to install the package.
 If the dependency is later made available, your package will be installable on that platform without having to make
-any changes to the feedstock. However, keep in mind that since <code class="docutils literal notranslate"><span class="pre">noarch</span></code> packages are built on Linux, all
-dependencies must be available on Linux.</p>
+any changes to the feedstock.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">noarch</span></code> packages are built on Linux, and all dependencies must be available on Linux.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If a <code class="docutils literal notranslate"><span class="pre">noarch</span></code> package <cite>cannot</cite> be built on Linux, one or more <code class="docutils literal notranslate"><span class="pre">noarch_platforms</span></code> can be provided in
+<code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>. One example is <a class="reference external" href="https://github.com/conda-forge/pywin32-on-windows-feedstock">pywin32-on-windows</a>,
+which builds on Linux <cite>and</cite> Windows, with <code class="docutils literal notranslate"><span class="pre">build_number</span></code> offsets to create a pair packages, like
+<code class="docutils literal notranslate"><span class="pre">dataclasses</span></code>.</p>
 </div>
 <p>If an existing python package qualifies to be converted to a noarch package, you can request the required changes
 by opening a new issue and including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">add</span> <span class="pre">noarch:</span> <span class="pre">python</span></code>.</p>
@@ -1529,7 +1543,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.03.06 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.03.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 

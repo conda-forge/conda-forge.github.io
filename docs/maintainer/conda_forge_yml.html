@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2022.03.06 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2022.03.10 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.03.06 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.03.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
@@ -101,6 +101,7 @@ upload packages to anaconda.org, which can be useful for testing. For example:</
 <li><p><a class="reference internal" href="#linux"><span class="std std-ref">linux</span></a></p></li>
 <li><p><a class="reference internal" href="#linux-aarch64"><span class="std std-ref">linux_aarch64</span></a></p></li>
 <li><p><a class="reference internal" href="#linux-ppc64le"><span class="std std-ref">linux_ppc64le</span></a></p></li>
+<li><p><a class="reference internal" href="#noarch-platforms"><span class="std std-ref">noarch_platforms</span></a></p></li>
 <li><p><a class="reference internal" href="#os-version"><span class="std std-ref">os_version</span></a></p></li>
 <li><p><a class="reference internal" href="#osx"><span class="std std-ref">osx</span></a></p></li>
 <li><p><a class="reference internal" href="#provider"><span class="std std-ref">provider</span></a></p></li>
@@ -327,8 +328,23 @@ Currently only:</p>
 </pre></div>
 </div>
 </section>
+<section id="noarch-platforms">
+<span id="id16"></span><h3>noarch_platforms<a class="headerlink" href="#noarch-platforms" title="Permalink to this headline">¶</a></h3>
+<p>Platforms on which to build noarch packages. The preferred default is a
+single build on <code class="docutils literal notranslate"><span class="pre">linux_64</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">noarch_platforms</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux_64</span><span class="w"></span>
+</pre></div>
+</div>
+<p>To build on multiple platforms, e.g. for simple packages with platform-specific
+dependencies, provide a list.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">noarch_platforms</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux_64</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">win_64</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
 <section id="os-version">
-<span id="id16"></span><h3>os_version<a class="headerlink" href="#os-version" title="Permalink to this headline">¶</a></h3>
+<span id="id17"></span><h3>os_version<a class="headerlink" href="#os-version" title="Permalink to this headline">¶</a></h3>
 <p>This key is used to set the OS versions for <code class="docutils literal notranslate"><span class="pre">linux_*</span></code> platforms. Valid entries map a linux platform and arch to either <code class="docutils literal notranslate"><span class="pre">cos6</span></code>
 or <code class="docutils literal notranslate"><span class="pre">cos7</span></code>. Currently <code class="docutils literal notranslate"><span class="pre">cos6</span></code> is the default for <code class="docutils literal notranslate"><span class="pre">linux-64</span></code>. All other linux architectures use CentOS 7. Here is an example that enables CentOS 7 on <code class="docutils literal notranslate"><span class="pre">linux-64</span></code> builds</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">os_version</span><span class="p">:</span><span class="w"></span>
@@ -337,7 +353,7 @@ or <code class="docutils literal notranslate"><span class="pre">cos7</span></cod
 </div>
 </section>
 <section id="osx">
-<span id="id17"></span><h3>osx<a class="headerlink" href="#osx" title="Permalink to this headline">¶</a></h3>
+<span id="id18"></span><h3>osx<a class="headerlink" href="#osx" title="Permalink to this headline">¶</a></h3>
 <p>The macOSX-specific configuration options. This is largely an internal setting.
 Currently only:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">osx</span><span class="p">:</span><span class="w"></span>
@@ -346,7 +362,7 @@ Currently only:</p>
 </div>
 </section>
 <section id="provider">
-<span id="id18"></span><h3>provider<a class="headerlink" href="#provider" title="Permalink to this headline">¶</a></h3>
+<span id="id19"></span><h3>provider<a class="headerlink" href="#provider" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">provider</span></code> field is a mapping from build platform (not target platform) to CI service.
 It determines which service handles each build platform. The following are available as
 build platforms:</p>
@@ -394,14 +410,14 @@ provider entry is equivalent to the following:</p>
 field to manually specify cross-compilation when no providers offer a desired build platform.</p>
 </section>
 <section id="recipe-dir">
-<span id="id19"></span><h3>recipe_dir<a class="headerlink" href="#recipe-dir" title="Permalink to this headline">¶</a></h3>
+<span id="id20"></span><h3>recipe_dir<a class="headerlink" href="#recipe-dir" title="Permalink to this headline">¶</a></h3>
 <p>The relative path to the recipe directory. The default is:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">recipe_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recipe</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
 <section id="remote-ci-setup">
-<span id="id20"></span><h3>remote_ci_setup<a class="headerlink" href="#remote-ci-setup" title="Permalink to this headline">¶</a></h3>
+<span id="id21"></span><h3>remote_ci_setup<a class="headerlink" href="#remote-ci-setup" title="Permalink to this headline">¶</a></h3>
 <p>This option can be used to override the default <code class="docutils literal notranslate"><span class="pre">conda-forge-ci-setup</span></code> package.
 Can be given with <code class="docutils literal notranslate"><span class="pre">${url</span> <span class="pre">or</span> <span class="pre">channel_alias}::package_name</span></code>, defaults to conda-forge
 channel_alias if no prefix is given.</p>
@@ -410,7 +426,7 @@ channel_alias if no prefix is given.</p>
 </div>
 </section>
 <section id="skip-render">
-<span id="id21"></span><h3>skip_render<a class="headerlink" href="#skip-render" title="Permalink to this headline">¶</a></h3>
+<span id="id22"></span><h3>skip_render<a class="headerlink" href="#skip-render" title="Permalink to this headline">¶</a></h3>
 <p>This option specifies a list of files which conda smithy will skip rendering.
 The possible values can be a subset of <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>, <code class="docutils literal notranslate"><span class="pre">.gitattributes</span></code>, <code class="docutils literal notranslate"><span class="pre">README.md</span></code>, <code class="docutils literal notranslate"><span class="pre">LICENSE.txt</span></code>.
 The default value is an empty list [ ], i.e. all these four files will be generated by conda smithy.
@@ -422,12 +438,12 @@ For example, if you want to customize .gitignore and LICENSE.txt files on your o
 </div>
 </section>
 <section id="templates">
-<span id="id22"></span><h3>templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h3>
+<span id="id23"></span><h3>templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h3>
 <p>This is mostly an internal field for specifying where templates files live.
 You shouldn’t need it.</p>
 </section>
 <section id="test-on-native-only">
-<span id="id23"></span><h3>test_on_native_only<a class="headerlink" href="#test-on-native-only" title="Permalink to this headline">¶</a></h3>
+<span id="id24"></span><h3>test_on_native_only<a class="headerlink" href="#test-on-native-only" title="Permalink to this headline">¶</a></h3>
 <p>This is used for disabling testing for cross compiling. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test_on_native_only</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
 </pre></div>
@@ -438,7 +454,7 @@ You shouldn’t need it.</p>
 </div>
 </section>
 <section id="test">
-<span id="id24"></span><h3>test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h3>
+<span id="id25"></span><h3>test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h3>
 <p>This is used to configure on which platforms a recipe is tested. Default is <code class="docutils literal notranslate"><span class="pre">all</span></code>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_and_emulated</span><span class="w"></span>
 </pre></div>
@@ -450,7 +466,7 @@ You shouldn’t need it.</p>
 <p>Will do testing only if the platform is native.</p>
 </section>
 <section id="travis">
-<span id="id25"></span><h3>travis<a class="headerlink" href="#travis" title="Permalink to this headline">¶</a></h3>
+<span id="id26"></span><h3>travis<a class="headerlink" href="#travis" title="Permalink to this headline">¶</a></h3>
 <p>The top-level <code class="docutils literal notranslate"><span class="pre">travis</span></code> key specifies configurations for the Travis
 CI service.  This is usually <strong>read-only</strong> and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as needed.  It has a single
@@ -462,7 +478,7 @@ modified.  Tools like conda-smithy may modify this, as needed.  It has a single
 </div>
 </section>
 <section id="upload-on-branch">
-<span id="id26"></span><h3>upload_on_branch<a class="headerlink" href="#upload-on-branch" title="Permalink to this headline">¶</a></h3>
+<span id="id27"></span><h3>upload_on_branch<a class="headerlink" href="#upload-on-branch" title="Permalink to this headline">¶</a></h3>
 <p>This parameter restricts uploading access on work from certain branches of the
 same repo. Only the branch listed in <code class="docutils literal notranslate"><span class="pre">upload_on_branch</span></code> will trigger uploading
 of packages to the target channel. The default is to skip this check if the key
@@ -473,7 +489,7 @@ master branch:</p>
 </div>
 </section>
 <section id="win">
-<span id="id27"></span><h3>win<a class="headerlink" href="#win" title="Permalink to this headline">¶</a></h3>
+<span id="id28"></span><h3>win<a class="headerlink" href="#win" title="Permalink to this headline">¶</a></h3>
 <p>The Windows-specific configuration options. This is largely an internal setting.
 Currently only:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">win</span><span class="p">:</span><span class="w"></span>
@@ -520,6 +536,7 @@ Currently only:</p>
 <li class="toctree-l4"><a class="reference internal" href="#linux">linux</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#linux-aarch64">linux_aarch64</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#linux-ppc64le">linux_ppc64le</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#noarch-platforms">noarch_platforms</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#os-version">os_version</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#osx">osx</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#provider">provider</a></li>
@@ -608,7 +625,7 @@ Currently only:</p>
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.03.06 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.03.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
