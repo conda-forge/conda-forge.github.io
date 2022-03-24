@@ -1148,23 +1148,7 @@ because these symbols are in fact available. To do so, add
 PyPy builds
 ===========
 
-To use the PyPy 3.6 or 3.7 builds you can do the following,
-
-.. code-block:: bash
-
-   conda create -n pypy36  pypy python=3.6
-   conda create -n pypy37  pypy python=3.7
-
-.. note::
-
-   As of March 8 2020, if you are using defaults as a low priority channel,
-   then you need to use strict channel priority as the metadata in defaults
-   has not been patched yet which allows cpython extension packages to be
-   installed alongside pypy.
-
-.. code-block:: bash
-
-   conda config --set channel_priority strict
+See :ref:`pypy` in the user docs for more info about PyPy and ``conda-forge``.
 
 To build your python package for pypy, wait for the bot to send a
 PR and contact ``conda-forge/bot`` team if a PR is not sent after the
