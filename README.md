@@ -27,7 +27,16 @@ If you have questions or need help, please check out our documentation for a [li
 5.  Submit a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) to the main repository proposing your changes.
 
 ## Code of conduct
-Conda-forge adheres to the NumFOCUS [Code of Conduct.](https://numfocus.org/code-of-conduct)
+
+Be kind to others. Do not insult or put down others. Behave professionally. Remember that harassment and sexist, racist, or exclusionary jokes are not appropriate for conda-forge.
+
+All communication should be appropriate for a professional audience including people of many different backgrounds. Sexual language and imagery is not appropriate.
+
+conda-forge is dedicated to providing a harassment-free community for everyone, regardless of gender, sexual orientation, gender identity and expression, disability, physical appearance, body size, race, or religion. We do not tolerate harassment of community members in any form.
+
+Thank you for helping make this a welcoming, friendly community for all.
+
+Note: Conda-forge adheres to [NumFOCUS Code of Conduct.](https://numfocus.org/code-of-conduct)
 
 **Note: "All changes must be made in the `/src` folder and NOT in the `/docs` folder. Html files in the ./docs folder are auto generated "**
 
