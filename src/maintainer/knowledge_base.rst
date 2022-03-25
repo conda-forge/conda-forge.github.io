@@ -1120,7 +1120,7 @@ the requirement should be changed from ``run`` to ``run_constrained``. Note that
 ``conda<4.8`` will ignore the condition if it's a ``run_constrained`` on ``__osx``.
 
 Compile for Apple's Metal framework
--------------------------------
+-----------------------------------
 
 It is possible to compile against Apple's Metal framework. 
 However, you will likely need to use newer SDKs (11 and newer) for functionality.
