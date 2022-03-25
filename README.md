@@ -26,6 +26,9 @@ If you have questions or need help, please check out our documentation for a [li
 4.  Make and commit your changes.
 5.  Submit a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) to the main repository proposing your changes.
 
+## Code of conduct
+Conda-forge adheres to the NumFOCUS [Code of Conduct.](https://numfocus.org/code-of-conduct)
+
 **Note: "All changes must be made in the `/src` folder and NOT in the `/docs` folder. Html files in the ./docs folder are auto generated "**
 
 ## conda-forge dev meetings
