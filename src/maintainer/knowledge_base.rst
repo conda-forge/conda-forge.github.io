@@ -1071,13 +1071,14 @@ You need to rerender the feedstock after this change.
 Requiring newer macOS SDKs
 ==========================
 
-conda-forge uses macOS SDK 10.9 to build software so that they can be deployed to
+At conda-forge,we use macOS SDK 10.9 to build software so that they can be deployed to
 all macOS versions newer than 10.9. Sometimes, some packages require a newer SDK
 to build with. While the default version 10.9 can be overridden using the following
 changes to the recipe, it should be done as a last resort. Please consult with
 core team if this is something you think you need.
+Note that for macOS with Apple Silicon (osx-arm64), the default macOS SDK is 11.0
 
-To use a new SDK, add the following in ``recipe/conda_build_config.yaml``
+To use a newer SDK, add the following in ``recipe/conda_build_config.yaml``
 
 .. code-block:: yaml
 
@@ -1117,6 +1118,36 @@ In ``recipe/meta.yaml``, add the following to ensure that the user's system is c
 Note that this requires ``conda>=4.8``. If you want to support older conda versions
 the requirement should be changed from ``run`` to ``run_constrained``. Note that
 ``conda<4.8`` will ignore the condition if it's a ``run_constrained`` on ``__osx``.
+
+Compile for Apple's Metal framework
+-------------------------------
+
+It is possible to compile against Apple's Metal framework. 
+However, you will likely need to use newer SDKs (11 and newer) for functionality.
+If in doubt, you can search the phracker/MacOSX-SDKs repo 
+for the exact symbols and their availability. https://github.com/phracker/MacOSX-SDKs.git
+
+
+Changing the Azure vmImage
+--------------------------
+
+Currently, the Azure pipeline's default vmImage for macOS is 10.15.
+If you increase the ``MACOSX_DEPLOYMENT_TARGET`` beyond this, the 
+``__osx`` run condition will prevent you from running tests.
+To use a newer vmImage, you can do it by editing ``conda-forge.yml`` 
+in the root of the repo like below. Note that the release after 10.15 is 11, 
+but Azure pipelines only offer the latest of 11, ``macOS-11``, which 
+at the time of writing (March 2022) is 11.6. (Currently, macOS-12 is in 
+private review.)
+
+.. code-block:: yaml
+
+    azure:
+      settings_osx:
+        pool:
+          vmImage: macOS-11
+
+As always, remember to rerender for changes to take effect.
 
 Newer C++ features with old SDK
 -------------------------------
