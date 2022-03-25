@@ -10,7 +10,7 @@ on the ``conda-forge`` channel. Note that contributing a package makes you the `
 A maintainer is responsible for maintaining the feedstock repository and packages as well as their future versions and has push access to the feedstock repositories of only the packages it maintains. 
 You can learn more about the roles of a maintainer `here. <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`__
 
-The sections below provide detailed instructions on contributing packages to conda-forge.
+The sections below provide detailed instructions on contributing packages to ``conda-forge``.
 
 
 .. _creating_recipes:
@@ -35,10 +35,10 @@ Your final recipe should have no comments (unless they're actually relevant to t
 
 .. note::
 
-  If there are any details you are not sure about please create a pull request anyway. The conda-forge team will review it and help you make changes to it.
+  If there are any details you are not sure about please create a pull request anyway. The ``conda-forge`` team will review it and help you make changes to it.
 
 
-In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that will help you with a successful build is provided below.
+In case you are building your first recipe using ``conda-forge``, a step-by-step instruction and checklist that will help you with a successful build is provided below.
 
 .. _staging_steps:
 
@@ -80,7 +80,7 @@ Checklist
 
 * Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache-2.0 rather than APACHE 2.0). Using SPDX identifiers for license field is recommended. (see :ref:`spdx`)
 * Ensure that you have included a license file if your license requires one -- most do. (see `here <https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55>`_)
-* In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
+* In case your project has tests included, you need to decide if these tests should be executed while building the ``conda-forge`` feedstock.
 * Make sure that all tests pass successfully at least on your development machine.
 * Recommended: run the test locally on your source code to ensure the recipe works locally (see  :ref:`staging_test_locally`).
 * Make sure that your changes do not interfere with other recipes that are in the ``recipes`` folder (e.g. the ``example`` recipe).
@@ -105,7 +105,7 @@ Post staging process
 
 * After the PR is merged, our :term:`CI` services will create a new git repo automatically. For example, the recipe for a package named ``pydstool`` will be moved to a new repository `https://github.com/conda-forge/pydstool-feedstock <https://github.com/conda-forge/pydstool-feedstock>`_. This process is automated through a CI job on the ``conda-forge/staged-recipes`` repo. It sometimes fails due to API rate limits and will automatically retry itself. If your feedstock has not been created after a day or so, please get in touch with the ``conda-forge/core`` team for help.
 * CI services will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to `https://anaconda.org/conda-forge <https://anaconda.org/conda-forge>`_
-* If this is your first contribution, you will be added to the conda-forge `team <https://github.com/orgs/conda-forge/people>`_ and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.
+* If this is your first contribution, you will be added to the ``conda-forge`` `team <https://github.com/orgs/conda-forge/people>`_ and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.
 * If you want to make a change to the recipe, send a :term:`PR` to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.
 
 
@@ -134,7 +134,7 @@ the other packages being added as a requirement), the build script will be able 
 locate the dependencies that are only present within staged-recipes as long as
 the builds finish in the dependencies order. Using a single pull request
 allows you to quickly get packages set up without waiting for each package in a
-dependency chain to be reviewed, built, and added to the conda-forge channel
+dependency chain to be reviewed, built, and added to the ``conda-forge`` channel
 before starting the process over with the next recipe in the chain.
 
 .. note::
@@ -191,7 +191,7 @@ It defines everything that is required to build and use the package.
 
 A full reference of the structure and fields of ``meta.yaml`` file can be found in the `Defining metadata (meta.yaml) <https://conda.io/projects/conda-build/en/latest/resources/define-metadata.html>`__ section in the conda-build documentation.
 
-In the following, we highlight particularly important and conda-forge specific information and guidelines, ordered by section in ``meta.yaml``.
+In the following, we highlight particularly important and ``conda-forge`` specific information and guidelines, ordered by section in ``meta.yaml``.
 
 
 Source
@@ -224,7 +224,7 @@ install the necessary tools below).
 
 To generate the ``sha256`` hash: ``openssl sha256 your_sdist.tar.gz``
 
-You may need the openssl package, available on conda-forge
+You may need the openssl package, available on ``conda-forge``
 ``conda install openssl -c conda-forge``.
 
 .. tip::
@@ -357,13 +357,13 @@ For a detailed explanation please refer to the `conda-build documentation <https
 Avoid external dependencies
 ...........................
 
-As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure :term:`ABI` compatibility for all our packages.
+As a general rule: all dependencies have to be packaged by ``conda-forge`` as well. This is necessary to assure :term:`ABI` compatibility for all our packages.
 
 There are only a few exceptions to this rule:
 
 #. Some dependencies have to be satisfied with :term:`CDT` packages (see :ref:`cdt_packages`).
 
-#. Some packages require root access (e.g. device drivers) that cannot be distributed by conda-forge. These dependencies should be avoided whenever possible.
+#. Some packages require root access (e.g. device drivers) that cannot be distributed by ``conda-forge``. These dependencies should be avoided whenever possible.
 
 
 
@@ -467,7 +467,7 @@ Sometimes defining tests seems to be hard, e.g. due to:
  - test suites may take too long to run on limited :term:`CI` infrastructure.
  - tests may take too much bandwidth.
 
-In these cases, conda-forge may not be able to execute the prescribed test suite.
+In these cases, ``conda-forge`` may not be able to execute the prescribed test suite.
 
 However, this is no reason for the recipe to not have tests. At the very least,
 we want to verify that the package has installed the desired files in the desired

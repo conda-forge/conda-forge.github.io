@@ -43,9 +43,9 @@ Some optional, but useful CMake options:
       ``cmake`` call as some packages construct different build configurations depending on this flag.
     - ``-DCMAKE_INSTALL_PREFIX=$PREFIX`` Specify the install location.
     - ``-DCMAKE_INSTALL_LIBDIR=lib`` Libraries will land in $PREFIX/lib, sometimes projects install
-      into lib64 or similar but on conda-forge we keep shared libraries in simply lib.
+      into lib64 or similar but on ``conda-forge`` we keep shared libraries in simply lib.
     - ``-DBUILD_SHARED_LIBS=ON`` Instruct CMake to build shared libraries instead of static ones.
-    - ``${CMAKE_ARGS}`` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like `CUDA builds <https://conda-forge.org/docs/maintainer/knowledge_base.html#cuda-builds>`__.
+    - ``${CMAKE_ARGS}`` Add variables defined by ``conda-forge`` internally. This is required to enable various ``conda-forge`` enhancements, like `CUDA builds <https://conda-forge.org/docs/maintainer/knowledge_base.html#cuda-builds>`__.
 
 Here are some basic commands for you to get started. These are dependent on your source
 code layout and aren't intended to be used "as is".
@@ -101,7 +101,7 @@ Here are some things you should check,
 Particularities on Windows
 ==========================
 
-This document presents conda-forge and conda-build information and examples
+This document presents ``conda-forge`` and conda-build information and examples
 while building on Windows.
 
 
@@ -431,7 +431,7 @@ Message passing interface (MPI)
 MPI Variants in conda-forge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-How are MPI variants best handled in conda-forge?
+How are MPI variants best handled in ``conda-forge``?
 
 
 There are a few broad cases:
@@ -911,10 +911,10 @@ One example here is `dataclasses <https://www.python.org/dev/peps/pep-0557/>`__ 
 Python3.7 but is available as a `backport <https://github.com/ericvsmith/dataclasses>`__ for Python3.6 too.
 Therefore, most upstream packages make those backports only mandatory for specific versions of Python and exclude them otherwise.
 
-Implementing this restriction in conda-forge is currently only possible through the use of ``skips``
-which restricts the corresponding conda-forge recipes from becoming ``noarch``.
+Implementing this restriction in ``conda-forge`` is currently only possible through the use of ``skips``
+which restricts the corresponding ``conda-forge`` recipes from becoming ``noarch``.
 
-Therefore, some conda-forge recipes only create an actual package on specific Python versions and are otherwise an
+Therefore, some ``conda-forge`` recipes only create an actual package on specific Python versions and are otherwise an
 empty placeholder. This allows them to be safely installed under all Python versions and makes using ``skips`` unnecessary.
 
 Similarly, some packages are `only` platform-specific dependency of a package, such as ``pywin32``, and have
@@ -942,10 +942,10 @@ Non-version-specific Python packages
 For some dependencies, upstream maintainers list Python versions where those packages are needed,
 even if the packages can actually be installed under all Python versions.
 
-Implementing this restriction in conda-forge is currently only possible through the use of ``skips``
-which restricts the corresponding conda-forge recipes from becoming ``noarch``.
+Implementing this restriction in ``conda-forge`` is currently only possible through the use of ``skips``
+which restricts the corresponding ``conda-forge`` recipes from becoming ``noarch``.
 
-Therefore, the conda-forge community maintains a list of packages that are safe to be installed under all Python versions,
+Therefore, the ``conda-forge`` community maintains a list of packages that are safe to be installed under all Python versions,
 even if the original package only requires it for some versions.
 
 For example, the package `pyquil <https://github.com/rigetti/pyquil>`__ only
@@ -1071,7 +1071,7 @@ You need to rerender the feedstock after this change.
 Requiring newer macOS SDKs
 ==========================
 
-conda-forge uses macOS SDK 10.9 to build software so that they can be deployed to
+``conda-forge`` uses macOS SDK 10.9 to build software so that they can be deployed to
 all macOS versions newer than 10.9. Sometimes, some packages require a newer SDK
 to build with. While the default version 10.9 can be overridden using the following
 changes to the recipe, it should be done as a last resort. Please consult with
@@ -1125,7 +1125,7 @@ The libc++ library uses Clang availability annotations to mark certain symbols a
 unavailable when targeting versions of macOS that ship with a system libc++
 that do not contain them. Clang always assumes that the system libc++ is used.
 
-The conda-forge build infrastructure targets macOS 10.9 and some newer C++ features
+The ``conda-forge`` build infrastructure targets macOS 10.9 and some newer C++ features
 such as ``fs::path`` are marked as unavailable on that platform, so the build aborts:
 
 .. code-block:: sh
@@ -1136,7 +1136,7 @@ such as ``fs::path`` are marked as unavailable on that platform, so the build ab
   note: 'path' has been explicitly marked unavailable here
   class _LIBCPP_TYPE_VIS path {
 
-However, since conda-forge ships its own (modern) libcxx we can ignore these checks
+However, since ``conda-forge`` ships its own (modern) libcxx we can ignore these checks
 because these symbols are in fact available. To do so, add
 ``_LIBCPP_DISABLE_AVAILABILITY`` to the defines. For example
 
@@ -1268,7 +1268,7 @@ Finally, note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 
 CUDA builds
 ===========
 
-Although the provisioned CI machines do not feature a GPU, Conda-Forge does provide mechanisms
+Although the provisioned CI machines do not feature a GPU, ``conda-forge`` does provide mechanisms
 to build CUDA-enabled packages. These mechanisms involve several packages:
 
 * ``cudatoolkit``: The runtime libraries for the CUDA toolkit. This is what end-users will end
@@ -1295,7 +1295,7 @@ On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CU
   **How is CUDA provided at the system level?**
 
   * On Linux, Nvidia provides official Docker images, which we then
-    `adapt <https://github.com/conda-forge/docker-images>`__ to Conda-Forge's needs.
+    `adapt <https://github.com/conda-forge/docker-images>`__ to ``conda-forge``'s needs.
 
   * On Windows, the compilers need to be installed for every CI run. This is done through the
     `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`__ scripts.
@@ -1405,7 +1405,7 @@ The steps involved are, roughly:
 Apple Silicon builds
 ====================
 
-The new Apple M1 processor is the first Apple Silicon supported by conda-forge
+The new Apple M1 processor is the first Apple Silicon supported by ``conda-forge``
 `osx-arm64 <https://github.com/conda-forge/conda-forge.github.io/issues/1126>`__ builds.
 For new builds to be available, via cross-compilation, a migration is required for
 the package and its dependencies. These builds are experimental as many of them are untested.
@@ -1433,7 +1433,7 @@ Pre-release builds
 ==================
 
 Recipe maintainers can make pre-release builds available on
-conda-forge by adding them to the ``dev`` or ``rc`` label.
+``conda-forge`` by adding them to the ``dev`` or ``rc`` label.
 
 The semantics of these labels should generally follow the
 `guidelines <https://docs.python.org/devguide/devcycle.html#stages>`__ that Python
@@ -1451,7 +1451,7 @@ itself follows.
 
 .. note::
 
-  ``alpha`` and ``beta`` labels aren't used. Given the light usage of labels on the conda-forge
+  ``alpha`` and ``beta`` labels aren't used. Given the light usage of labels on the ``conda-forge``
   channel thus far, it seems rather unnecessary to introduce many labels.
   ``dev`` and ``rc`` seem like a nice compromise.
 

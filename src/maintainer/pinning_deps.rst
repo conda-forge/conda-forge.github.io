@@ -10,11 +10,11 @@ Globally pinned packages
 
 Maintaining a large collection of packages with different requirements poses the danger of producing islands of packages with mutually exclusive dependencies.
 Especially widely used libraries with restricted version compatibilities increase the danger of fractioning the package space.
-By fixing crucial libraries to specific dependency version shared by all packages in conda-forge, we avoid fractioning of our packages in incompatible islands.
-The following paragraphs give a short introduction about how this global version pinning is realized in conda-forge.
+By fixing crucial libraries to specific dependency version shared by all packages in ``conda-forge``, we avoid fractioning of our packages in incompatible islands.
+The following paragraphs give a short introduction about how this global version pinning is realized in ``conda-forge``.
 
 The current versions of globally pinned packages are defined in the `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_ file located in the ``conda-forge-pinning`` feedstock.
-These pinned versions represent the ABIs that conda-forge is currently supporting, with almost all available packages built against that version.
+These pinned versions represent the ABIs that ``conda-forge`` is currently supporting, with almost all available packages built against that version.
 
 When a rerendering happens, conda-smithy will render the recipe using conda-build and output configuration files for each job and save them in a yaml file in ``.ci_support`` folder. For example, there's an output configuration file for each OS, each python version, etc.
 
@@ -85,10 +85,10 @@ Packages that depend on a package with ``run_exports`` can choose to overwrite t
 
   The general idea is that the ``numpy-devel`` package should be used when a package is building against the C interface (i.e. it needs the compatibility bound), and the numpy package should be used when a package is using only the python interface.
 
-  In general, it is not necessary to split up packages. At conda-forge, we only advise it when it greatly reduces package size, or when it helps remove dependencies that would otherwise be unnecessarily included.
+  In general, it is not necessary to split up packages. At ``conda-forge``, we only advise it when it greatly reduces package size, or when it helps remove dependencies that would otherwise be unnecessarily included.
 
 The global pins and ``run_exports`` are two sides of the same coin.
-If there is an ABI break, as determined by the ``run_exports``, then the global pins *may* need to be updated. It is possible that conda-forge skips that ABI.
+If there is an ABI break, as determined by the ``run_exports``, then the global pins *may* need to be updated. It is possible that ``conda-forge`` skips that ABI.
 Once the pins are updated, via a migration yaml, then all the packages that are linked are rebuilt.
 
 
@@ -99,7 +99,7 @@ Updating package pins
 
 Changing global pins requires rerendering all packages that depend on the package with the changed pin. Doing this manually
 can be tedious, especially when many packages are involved. Migrators are used to automatically generate pull requests
-for the affected packages in conda-forge.
+for the affected packages in ``conda-forge``.
 
 Usually, the bot will generate these migrations automatically. However, when a pin is first made or added, one may need to
 be added by hand. To do this, follow these steps:

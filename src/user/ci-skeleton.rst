@@ -1,6 +1,6 @@
 Using conda-smithy to manage your CI
 ====================================
-Conda-forge, and specifically ``conda-smithy`` contains a lot of
+``conda-forge``, and specifically ``conda-smithy`` contains a lot of
 tools for building and deploying continuous integration (CI)
 infrastructure on a variety of different platforms and architectures.
 Wouldn't it be nice if you could reuse all of this hard work, so
@@ -93,7 +93,7 @@ The **meta.yaml** looks like:
 
       # If the installation is complex, or different between Unix and Windows,
       # use separate bld.bat and build.sh files instead of this key. By default,
-      # the package will be built for the Python versions supported by conda-forge
+      # the package will be built for the Python versions supported by ``conda-forge``
       # and for all major OSs. Add the line "skip: True  # [py<35]" (for example)
       # to limit to Python 3.5 and newer, or "skip: True  # [not win]" to limit
       # to Windows.
@@ -146,7 +146,7 @@ want to have ``conda-build`` use when it runs the test suite.
 
 .. note::
 
-    Because you are using conda-forge, conda-build, etc as your CI, it is
+    Because you are using ``conda-forge``, conda-build, etc as your CI, it is
     important to run the full test suite here.
 
 .. note::

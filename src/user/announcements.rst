@@ -56,29 +56,29 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     available as well for resource-intensive builds. Please rerender your feedstock as needed to
     get the updated configuration.
 
-:2021-10-20: conda-forge now uses mambabuild as default
+:2021-10-20: ``conda-forge`` now uses mambabuild as default
 
-    conda-forge now uses `mamba <https://github.com/mamba-org/mamba>`_ during the build
+    ``conda-forge`` now uses `mamba <https://github.com/mamba-org/mamba>`_ during the build
     process (via ``conda mambabuild`` of the `boa <https://github.com/mamba-org/boa>`_ project). This was
     changed in `conda-smithy 3.13.0 <https://github.com/conda-forge/conda-smithy/blob/main/CHANGELOG.rst#v3130>`_
     and should automatically apply when re-rendering.
 
 :2021-10-13: GCC 10 and clang 12 as default compilers for Linux and macOS
 
-    These compilers will become the default for building packages in conda-forge.
+    These compilers will become the default for building packages in ``conda-forge``.
     One notable change in gcc 10 is that the -fopenmp flag in FFLAGS is dropped.
     In clang 12, -std=c++14 explicit flag has been dropped from CXXFLAGS,
     as it is the default compilation mode for clang 12. In gcc 11, the default
     is -std=gnu++17. In clang>=12 and gcc>=11, we will not provide an explicit
     C++ standard, and will defer to the compiler default.
 
-:2021-10-04: python 3.6 is now dropped when building conda-forge packages
+:2021-10-04: python 3.6 is now dropped when building ``conda-forge`` packages
 
     python 3.6 is end-of-life in December 2021 and we are dropping support for it
     early to avoid having to rebuild packages as part of python 3.10 migration
     as that would save lots of CI resources.
 
-:2021-09-30: ``defaults`` channel is now dropped when building conda-forge packages
+:2021-09-30: ``defaults`` channel is now dropped when building ``conda-forge`` packages
 
     You can get the previous behaviour by using the ``channel_sources`` setting in
     ``conda-forge.yml``
@@ -175,7 +175,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     we have switched to have ``numpy 1.16`` as the minimum supported version on all
     platforms.
 
-:2020-07-17: Conda-forge is building openblas with both pthreads and openmp on Linux
+:2020-07-17: ``conda-forge`` is building openblas with both pthreads and openmp on Linux
 
     The main change is that ``openblas`` will use pthreads for threading by default on Linux
     instead of the previous ``openmp`` default.
@@ -202,7 +202,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
 :2020-07-16: Moving from clang 9 to clang 10
 
-    conda-forge is moving to clang 10 on macOS!
+    ``conda-forge`` is moving to clang 10 on macOS!
     Check the release `notes <https://releases.llvm.org/10.0.0/tools/clang/docs/ReleaseNotes.html#what-s-new-in-clang-10-0-0>`_
     for what is new, breaking, or deprecated.
 
@@ -311,7 +311,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 :2020-03-18: Python 2.7 and ``vs2008`` Deprecation
 
    - Python 2.7 is no longer supported by the upstream developers as of 2020-01-01.
-     Conda-forge is thus deprecating its Python 2.7 support. Conda-forge will provide
+     ``conda-forge`` is thus deprecating its Python 2.7 support. ``conda-forge`` will provide
      no ongoing support for Python 2.7 builds and any existing builds are provided on an "as-is" basis.
    - A ``cf202003`` label has been applied to the ``conda-forge`` channel for those
      who need a reference to the package index with Python 2.7.
@@ -333,7 +333,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
      already issued. If that PR was merged, there's nothing to do. If not, contact core if you
      need help migrating.
 
-:2019-03-28: We overhauled the blas support in conda-forge.
+:2019-03-28: We overhauled the blas support in ``conda-forge``.
 
    - Our packages now build against NETLIB’s reference implementation.
    - You as a user can now choose the implementation available at runtime.
@@ -341,7 +341,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
   For more information please refer to the :ref:`documentation <knowledge:blas>`.
 
 
-:2019-01-22: It has happened! Conda-forge has migrated to the latest compilers 🎉.
+:2019-01-22: It has happened! ``conda-forge`` has migrated to the latest compilers 🎉.
 
     If you:
       * maintain a compiled feedstock, it will likely need to be rerender
@@ -368,6 +368,6 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     modernizing more than 4000 packages.  This is going to take a few months to get done so
     bear with us.
 
-:2018-09-10: Conda forge now has a magical status bar for tracking the progress of migrations.
+:2018-09-10: ``conda-forge`` now has a magical status bar for tracking the progress of migrations.
 
     You can find this at `conda-forge.org/status <https://conda-forge.org/status>`_.

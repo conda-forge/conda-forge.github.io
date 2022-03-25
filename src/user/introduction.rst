@@ -9,7 +9,7 @@ A brief introduction
 What is conda-forge?
 --------------------
 
-Conda-forge is a community effort that provides conda packages for a wide range of software.
+``conda-forge`` is a community effort that provides conda packages for a wide range of software.
 
 **Missing a package that you would love to install with conda?** - Chances are we have already packaged it for you!
 
@@ -33,7 +33,7 @@ This came with a list of disadvantages:
  - Packages were only available for architectures the developer was interested in or had access to.
  - Channels were often abandoned, updating required locating new channels.
 
-conda-forge is a community effort that tackles these issues:
+``conda-forge`` is a community effort that tackles these issues:
 
  - All packages are shared in a single channel named ``conda-forge``.
  - Care is taken that all packages are up-to-date.
@@ -46,7 +46,7 @@ conda-forge is a community effort that tackles these issues:
 How can I install packages from conda-forge?
 --------------------------------------------
 
-Using conda-forge is easy!
+Using ``conda-forge`` is easy!
 
  - Make sure you have ``conda >=4.9``.
 
@@ -67,7 +67,7 @@ Using conda-forge is easy!
 
   conda config --set channel_priority strict
 
-From now on using ``conda install <package-name>`` will also find packages in our conda-forge channels.
+From now on using ``conda install <package-name>`` will also find packages in our ``conda-forge`` channels.
 
 .. note::
 
@@ -79,13 +79,13 @@ From now on using ``conda install <package-name>`` will also find packages in ou
 
 .. note::
 
-  Please be aware that the order of your conda package channels is important, especially when you combine conda-forge with other channels, e.g. ``bioconda``.
+  Please be aware that the order of your conda package channels is important, especially when you combine ``conda-forge`` with other channels, e.g. ``bioconda``.
 
 .. note::
 
   `Miniforge <https://github.com/conda-forge/miniforge>`__ is a community
   effort to provide Miniconda-like installers, with the added feature that
-  conda-forge is the default channel.
+  ``conda-forge`` is the default channel.
   For certain platforms (such as ARMv8 64-bit, formally known as `aarch64`)
   Anaconda, Inc. does not provide any Miniconda installers, however Miniforge
   does.
@@ -141,4 +141,4 @@ Display conda-forge packages in Anaconda Navigator
 #. Press the **Enter key** on your keyboard.
 #. Click the **Update channels** button.
 
-From now on, whenever the **package filter** is set to **All** on the Environments tab, all conda-forge packages will be displayed.
+From now on, whenever the **package filter** is set to **All** on the Environments tab, all ``conda-forge`` packages will be displayed.

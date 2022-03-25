@@ -67,7 +67,7 @@ FAQ
 
 :ref:`(Q) <mfaq_anaconda_delay>` **Why does my new version appear on Anaconda Cloud, but is not installable with conda?**
 
-  For certain, high-traffic channels (main & conda-forge), Anaconda uses a `CDN <https://cloudflare.com/learning/cdn/what-is-a-cdn/>`__ to decrease costs. The CDN is only reindexed every 20 minutes, however `Anaconda.org <https://anaconda.org>`__ uses the original channel that the CDN mirrors.  Therefore, packages will show up on the `Anaconda Cloud <https://anaconda.org>`__ about 20 to 40 minutes before they are downloadable via conda.  You can use ``conda search <pkg>``  to see if the package is installable, because this command reads from the CDN.
+  For certain, high-traffic channels (main & ``conda-forge``), Anaconda uses a `CDN <https://cloudflare.com/learning/cdn/what-is-a-cdn/>`__ to decrease costs. The CDN is only reindexed every 20 minutes, however `Anaconda.org <https://anaconda.org>`__ uses the original channel that the CDN mirrors.  Therefore, packages will show up on the `Anaconda Cloud <https://anaconda.org>`__ about 20 to 40 minutes before they are downloadable via conda.  You can use ``conda search <pkg>``  to see if the package is installable, because this command reads from the CDN.
 
 .. _mfaq_mamba_local:
 
@@ -91,7 +91,7 @@ FAQ
     Importing conda-verify failed. Please be sure to test your packages. conda install conda-verify to make this message go away.
 
   You are seeing this error message because by default, conda-build uses conda-verify to ensure that your recipe and package meet some minimum sanity checks.
-  This message can be safely ignored as conda-forge doesn't use conda-verify.
+  This message can be safely ignored as``conda-forge``doesn't use conda-verify.
 
 
 .. _mfaq_version_update:
@@ -111,9 +111,9 @@ FAQ
 
 .. _mfaq_package_submit:
 
-:ref:`(Q) <mfaq_package_submit>` **Is it necessary for me to be an upstream maintainer of the package I submit to Conda-forge?**
+:ref:`(Q) <mfaq_package_submit>` **Is it necessary for me to be an upstream maintainer of the package I submit to ``conda-forge``?**
 
-  Everybody can submit a package to Conda-forge, irrespective of whether they maintain the upstream version or not. Additionally, it’s not required but considered good practice to inform the upstream of a new package and invite them to be maintainers as well.
+  Everybody can submit a package to ``conda-forge``, irrespective of whether they maintain the upstream version or not. Additionally, it’s not required but considered good practice to inform the upstream of a new package and invite them to be maintainers as well.
 
 
 .. _mfaq_libGL_so_1:

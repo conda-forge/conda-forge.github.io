@@ -1,7 +1,7 @@
 Configuring conda-forge.yml
 ***************************
 
-You can configure how conda-forge is set up and built via the ``conda-forge.yml``
+You can configure how ``conda-forge`` is set up and built via the ``conda-forge.yml``
 file that is present in the root directory of a feedstock.
 
 Rerendering the feedstock after you modify this file is usually required and always a good idea (see :ref:`dev_update_rerender`).
@@ -157,7 +157,7 @@ Leaving this field empty implicitly requests to build a package natively. i.e.
 
 build_with_mambabuild
 ---------------------
-This option, when enabled, configures the conda-forge CI to run a debug build using the ``mamba`` solver. Check `this <https://conda-forge.org/docs/maintainer/maintainer_faq.html#mfaq-mamba-local>`__ to know more.
+This option, when enabled, configures the ``conda-forge`` CI to run a debug build using the ``mamba`` solver. Check `this <https://conda-forge.org/docs/maintainer/maintainer_faq.html#mfaq-mamba-local>`__ to know more.
 
 .. code-block:: yaml
 
@@ -436,7 +436,7 @@ The relative path to the recipe directory. The default is:
 remote_ci_setup
 ---------------
 This option can be used to override the default ``conda-forge-ci-setup`` package.
-Can be given with ``${url or channel_alias}::package_name``, defaults to conda-forge
+Can be given with ``${url or channel_alias}::package_name``, defaults to ``conda-forge``
 channel_alias if no prefix is given.
 
 .. code-block:: yaml

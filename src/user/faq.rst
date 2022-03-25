@@ -29,9 +29,9 @@ FAQ
 
 :ref:`(Q) <faq_teams>` **I have a set of related packages, how do I create a conda-forge team?**
 
-  Conda-forge github teams are very useful means of adding common maintainers to a set of related packages. For example, most R packages are co-maintained by the conda-forge/R team.
+  ``conda-forge`` github teams are very useful means of adding common maintainers to a set of related packages. For example, most R packages are co-maintained by the conda-forge/R team.
   To create a new team, you can just use one of the existing feedstocks from your packages. Each feedstock has automatically a team assigned (formed from the maintainers of that feedstock).
-  For example, the conda-forge R team is coming from the `r-feedstock <https://github.com/conda-forge/r-feedstock>`_. Then you can just add `- conda-forge/r` in the maintainers section to
+  For example, the ``conda-forge`` R team is coming from the `r-feedstock <https://github.com/conda-forge/r-feedstock>`_. Then you can just add `- conda-forge/r` in the maintainers section to
   make all maintainers of the r-feedstock also maintainers of the new package.
 
 .. _faq_solver_speed:
@@ -77,6 +77,6 @@ FAQ
 
 :ref:`(Q) <faq_cuda_compiler_header>` **How can I compile CUDA (host or device) codes in my environment?**
 
-  Unfortunately, this is not possible with conda-forge's current infrastructure (``nvcc``, ``cudatoolkit``, etc) if there is no local CUDA Toolkit installation. In particular, the ``nvcc`` package provided on conda-forge is a *wrapper package* that exposes the actual ``nvcc`` compiler to our CI infrastructure in a ``conda``-friendly way; it does not contain the full ``nvcc`` compiler toolchain. One of the reasons is that CUDA headers like ``cuda.h``, ``cuda_runtime.h``, etc, which are needed at compile time, are not redistributable according to NVIDIA's EULA. Likewise, the ``cudatoolkit`` package only contains CUDA runtime libraries and not the compiler toolchain.
+  Unfortunately, this is not possible with ``conda-forge``'s current infrastructure (``nvcc``, ``cudatoolkit``, etc) if there is no local CUDA Toolkit installation. In particular, the ``nvcc`` package provided on ``conda-forge`` is a *wrapper package* that exposes the actual ``nvcc`` compiler to our CI infrastructure in a ``conda``-friendly way; it does not contain the full ``nvcc`` compiler toolchain. One of the reasons is that CUDA headers like ``cuda.h``, ``cuda_runtime.h``, etc, which are needed at compile time, are not redistributable according to NVIDIA's EULA. Likewise, the ``cudatoolkit`` package only contains CUDA runtime libraries and not the compiler toolchain.
   
   If you need to compile CUDA code, even if it involves only CUDA host APIs, you will still need a valid CUDA Toolkit installed locally and use it. Please refer to `NVCC's documentation <https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html>`_ for the CUDA compiler usage and `CUDA Programming Guide <https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html>`_ for general CUDA programming.

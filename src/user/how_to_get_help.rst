@@ -7,21 +7,21 @@ We would be happy to hear from you!
 Gitter
 -------------------
 
-If you are just starting out with conda-forge and/or feel completely lost, we recommend getting in touch through `Gitter <https://gitter.im/conda-forge/conda-forge.github.io>`__. Our community members will direct
+If you are just starting out with ``conda-forge`` and/or feel completely lost, we recommend getting in touch through `Gitter <https://gitter.im/conda-forge/conda-forge.github.io>`__. Our community members will direct
 you to the proper documentation and/or help you via the chat. 
 
 GitHub issues
 -------------
 
 You can open issues at `staged-recipes <https://github.com/conda-forge/staged-recipes/issues>`__
-to request a new package or to report a problem with staged-recipes itself (our port of entry to conda-forge).
+to request a new package or to report a problem with staged-recipes itself (our port of entry to ``conda-forge``).
 
 Or you can open an issue about a specific package at the package feedstock via
 ``https://github.com/conda-forge/<PACKAGE-NAME>-feedstock/issues``
 
 When opening issues, be sure to:
 
-* Try a new environment first following conda-forge `install instructions <https://conda-forge.org/docs/user/introduction.html#how-can-i-install-packages-from-conda-forge>`__.
+* Try a new environment first following ``conda-forge`` `install instructions <https://conda-forge.org/docs/user/introduction.html#how-can-i-install-packages-from-conda-forge>`__.
 * Always open a new one when an issue is closed. In the packaging world symptoms may be similar but the causes are usually very different.
 * Fill in the required information. Without the output of `conda list` and `conda info -a` the team cannot debug the problem.
 

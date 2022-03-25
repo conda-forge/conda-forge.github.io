@@ -3,9 +3,9 @@
 Becoming involved
 *****************
 
-conda-forge is a community-driven effort of cross-platform packaging and relies on volunteers to sustain and improve.
+``conda-forge`` is a community-driven effort of cross-platform packaging and relies on volunteers to sustain and improve.
 
-We encourage you to contribute to conda-forge. You can do so in several ways:
+We encourage you to contribute to ``conda-forge``. You can do so in several ways:
 
  - `Contribute new packages <https://conda-forge.org/docs/maintainer/adding_pkgs.html>`_.
  - Help update and `maintain packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-pkgs>`_.
@@ -34,7 +34,7 @@ will take you directly to a web-based editor for this very webpage. In
 general, the file corresponding to each page in the GitHub browser has a
 little pencil icon in its top-right corner that lets you open it up for editing.
 
-We are glad to know that you would like to contribute to the ``conda-forge`` documentation. If you are new to the conda-forge community, follow the steps below to make your first contribution:
+We are glad to know that you would like to contribute to the ``conda-forge`` documentation. If you are new to the ``conda-forge`` community, follow the steps below to make your first contribution:
 
 1. `Fork <https://help.github.com/articles/fork-a-repo/>`_ the
    `conda-forge.github.io repository

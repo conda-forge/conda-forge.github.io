@@ -16,14 +16,14 @@ The core team is the governing body over the entire ``conda-forge``
 organization. Members of the core team have full rights over all ``conda-forge``
 repositories. Members of core are the face of the project, and are responsible
 for officially interfacing with external communities, organizations, non-profits,
-and companies. They are also responsible for maintaining conda-forge's infrastructure.
+and companies. They are also responsible for maintaining ``conda-forge``'s infrastructure.
 
 If you are interested in joining the core team, please get in touch with us on our
 `Gitter Channel <https://gitter.im/conda-forge/conda-forge.github.io>`__.
 Core members are added via a vote amongst the current core team. The core team
 member who is running your vote will ask you to provide sufficient justification
 as to why you should be nominated to core. Prior service to the community, including
-,but not limited to, serving as a staged-recipes reviewer, working on critical conda-forge
+,but not limited to, serving as a staged-recipes reviewer, working on critical ``conda-forge``
 infrastructure, and helping to bridge disparate communities are an important part of
 the nomination process.
 
@@ -31,7 +31,7 @@ the nomination process.
 The staged-recipes Maintainers
 ===============================
 
-You are the welcoming committee for new recipes coming in to the conda-forge
+You are the welcoming committee for new recipes coming in to the ``conda-forge``
 community! Please give new (and experienced) contributors a pleasant experience!
 Generally speaking, your role is as follows:
 
