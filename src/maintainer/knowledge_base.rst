@@ -1071,7 +1071,7 @@ You need to rerender the feedstock after this change.
 Requiring newer macOS SDKs
 ==========================
 
-At conda-forge,we use macOS SDK 10.9 to build software so that they can be deployed to
+At conda-forge, we use macOS SDK 10.9 to build software so that they can be deployed to
 all macOS versions newer than 10.9. Sometimes, some packages require a newer SDK
 to build with. While the default version 10.9 can be overridden using the following
 changes to the recipe, it should be done as a last resort. Please consult with
@@ -1134,8 +1134,9 @@ Changing the Azure vmImage
 Currently, the conda-forge's default vmImage for macOS is 10.15.
 If you increase the ``MACOSX_DEPLOYMENT_TARGET`` beyond this, the 
 ``__osx`` run condition will prevent you from running tests.
-To use a newer vmImage, you can do it by editing ``conda-forge.yml`` 
-in the root of the repo like below. Note that the release after 10.15 is 11, 
+To use a newer vmImage, edit ``conda-forge.yml`` 
+in the root of the repo like below. 
+Note that the release after 10.15 is 11, 
 but Azure pipelines only offer the latest of 11, ``macOS-11``, which 
 at the time of writing (March 2022) is 11.6. (Currently, the ``macOS-12`` vmImage is in 
 private preview.)
