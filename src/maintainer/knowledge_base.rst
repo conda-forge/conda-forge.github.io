@@ -1124,8 +1124,8 @@ Compile for Apple's Metal framework
 
 It is possible to compile against Apple's Metal framework. 
 However, you will likely need to use newer SDKs (11 and newer) for functionality.
-If in doubt, you can search the phracker/MacOSX-SDKs repo 
-for the exact symbols and their availability. https://github.com/phracker/MacOSX-SDKs.git
+If in doubt, you can search the `phracker/MacOSX-SDKs <https://github.com/phracker/MacOSX-SDKs.git>`__ 
+repo for the exact symbols and their availability.
 
 
 Changing the Azure vmImage
