@@ -47,6 +47,6 @@ All are welcome to participate in conda-forge community (including the dev meeti
 * The team at conda-forge takes reports of misconduct very seriously and is committed to preserving and maintaining the welcoming nature of our community.
 * If you have experienced or witnessed behavior that violates the conda-forge Code of Conduct, please report this in a timely manner and complete the [form](https://numfocus.typeform.com/to/ynjGdT) to make a report.
 <br/>
-ATTRIBUTION : This Code of Conduct was based on the NumFOCUS [Code of Conduct](https://numfocus.org/code-of-conduct).
+ATTRIBUTION : This Code of Conduct was based on the NumFOCUS [Code of Conduct](https://numfocus.org/code-of-conduct)
 
 
