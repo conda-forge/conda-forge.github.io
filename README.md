@@ -52,7 +52,7 @@ conda-forge and/or our event staff will attempt to ensure your safety and help w
 
 ## conda-forge dev meetings
 
-Our documentation contains a section with [minutes from previous dev meetings]([https://conda-forge.org/docs/minutes/00_intro.html]). These meetings occur every two weeks on Wednesday from 17:00-18:00 UTC.
+Our documentation contains a section with [minutes from previous dev meetings][https://conda-forge.org/docs/minutes/00_intro.html]. These meetings occur every two weeks on Wednesday from 17:00-18:00 UTC.
 A link to the google calendar item can be found [here](https://calendar.google.com/event?action=TEMPLATE&tmeid=Z2lraDk2a205cGUxdDkxYmNybXQxMGIxMGtfMjAxOTA3MjRUMTcwMDAwWiBzY29wYXR6QG0&tmsrc=scopatz%40gmail.com&scp=ALL).
 
 We use https://hackmd.io/ for taking meeting minutes and will upload the resultant markdown file after the meeting has concluded.
