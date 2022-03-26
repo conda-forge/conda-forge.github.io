@@ -10,7 +10,7 @@ We encourage you to contribute to conda-forge. You can do so in several ways:
  - `Contribute new packages <https://conda-forge.org/docs/maintainer/adding_pkgs.html>`_.
  - Help update and `maintain packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-pkgs>`_.
  - Suggest or implement improvements for our `infrastructure <https://conda-forge.org/docs/maintainer/infrastructure.html#infrastructure>`_.
- - Help `improve the documentation <https://conda-forge.org/docs/user/contributing.html#improve-docs>`_.
+ - Help us `improve our documentation <https://conda-forge.org/docs/user/contributing.html#improve-docs>`_.
 
 
 .. _improve_docs:
@@ -40,9 +40,9 @@ We are glad to know that you would like to contribute to the ``conda-forge`` doc
    `conda-forge.github.io repository
    <https://github.com/conda-forge/conda-forge.github.io>`_.
 2. `Clone <https://help.github.com/articles/cloning-a-repository/>`_ this fork onto your computer.
-3. `Check out
+3. `Create a new branch
    <https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging>`_
-   a new branch deriving from ``master`` to do your work.
+   to make all the changes.
 4. Make and `commit
    <https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository>`_
    your changes.
