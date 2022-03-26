@@ -38,7 +38,6 @@ We use https://hackmd.io/ for taking meeting minutes and will upload the resulta
 There is a template provided in [`misc/DEV_MEETING_TEMPLATE.md`](https://github.com/conda-forge/conda-forge.github.io/tree/main/misc/DEV_MEETING_TEMPLATE.md) that you should use to create a new hackmd document.
 
 ## Code Of Conduct
-------------
 All are welcome to participate in conda-forge community (including the dev meetings) as long as the tenets of this Code of Conduct are adhered to:
 * Treat one another with dignity and respect.
 * Respect and treat others fairly, regardless of race ancestry, place of origin, colour, ethnic origin, citizenship, religion, gender, sexual orientation, age or disability.
