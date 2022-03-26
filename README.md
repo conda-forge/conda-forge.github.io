@@ -48,7 +48,7 @@ All reports will be kept confidential. Please have a look at the [Reporting Guid
 
 ## Enforcement: What Happens After a Report is Filed?
 
-conda-forge and/or our event staff will attempt to ensure your safety and help with any immediate needs, particularly at an in-person event. conda-forge will make every effort to acknowledge receipt within 24 hours (and we’ll aim for much more quickly than that). Have a look at the process of [What Happens After a Report is Filed?](https://numfocus.org/code-of-conduct#enforcement).
+conda-forge's team and/or our event staff will try to ensure your safety and help with any immediate needs, particularly at an in-person event. Once we have received the report through the relevant authorities, conda-forge will make every effort to acknowledge the receipt and take action. (and we’ll aim for much more quickly than that). Have a look at the process of [What Happens After a Report is Filed?](https://numfocus.org/code-of-conduct#enforcement).
 
 ## conda-forge dev meetings
 
