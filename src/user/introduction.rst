@@ -89,7 +89,7 @@ From now on using ``conda install <package-name>`` will also find packages in ou
   For certain platforms (such as ARMv8 64-bit, formally known as `aarch64`)
   Anaconda, Inc. does not provide any Miniconda installers, however Miniforge
   does.
-  Miniforge installers are available here: https://github.com/conda-forge/miniforge/#download
+  Miniforge installers are available `here` <https://github.com/conda-forge/miniforge/#download>_.
 
   Please refer to :ref:`multiple_channels` for pitfalls and more information.
 
@@ -105,7 +105,7 @@ To learn how to contribute your first package read `the staging process <https:/
 How can I give credit to conda-forge?
 -----------------------------------------
 
-If you'd like to credit ``conda-forge`` in your work, please cite our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_. This citation is
+If you'd like to give credit to ``conda-forge`` in your work, please cite our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_. This citation is
 
 ::
 
