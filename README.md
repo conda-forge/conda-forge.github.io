@@ -36,3 +36,18 @@ A link to the google calendar item can be found [here](https://calendar.google.c
 We use https://hackmd.io/ for taking meeting minutes and will upload the resultant markdown file after the meeting has concluded.
 
 There is a template provided in [`misc/DEV_MEETING_TEMPLATE.md`](https://github.com/conda-forge/conda-forge.github.io/tree/main/misc/DEV_MEETING_TEMPLATE.md) that you should use to create a new hackmd document.
+
+## Code Of Conduct
+------------
+All are welcome to participate in conda-forge community (including the dev meetings) as long as the tenets of this Code of Conduct are adhered to:
+* Treat one another with dignity and respect.
+* Respect and treat others fairly, regardless of race ancestry, place of origin, colour, ethnic origin, citizenship, religion, gender, sexual orientation, age or disability.
+* Behave professionally. Harassment and sexist, racist, or exclusionary jokes are condoned.
+
+### Reporting Guidelines
+* The team at conda-forge takes reports of misconduct very seriously and is committed to preserving and maintaining the welcoming nature of our community.
+* If you have experienced or witnessed behavior that violates the conda-forge Code of Conduct, please report this in a timely manner and complete the [form](https://numfocus.typeform.com/to/ynjGdT) to make a report.
+<br/>
+ATTRIBUTION : This Code of Conduct was based on the NumFOCUS [Code of Conduct](https://numfocus.org/code-of-conduct).
+
+
