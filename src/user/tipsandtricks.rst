@@ -159,7 +159,7 @@ For context, installing TensorFlow 2.7.0 with the following command:
 
 results in approximately 2 GB of packages to download while using this:
 
-.. code-block: : shell
+.. code-block:: shell
 
     CONDA_CUDA_OVERRIDE="11.2" mamba install "tensorflow=2.7.0=cpu*" -c conda-forge 
 
