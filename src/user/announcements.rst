@@ -8,7 +8,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2022
 ----
 
-:2022-02-13: Default branch migration from ``master`` to ``main``
+13 February
+~~~~~~~~~~~
+
+  **Default branch migration from ``master`` to ``main``**
 
     We will be migrating the default branches of all feedstocks and other ``conda-forge`` repos
     from ``master`` to ``main``. We do expect some minor hiccups while this migration is 
@@ -18,7 +21,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2021
 ----
 
-:2021-12-02: CentOS 7 docker images are now the default
+02 December
+~~~~~~~~~~~
+
+  **CentOS 7 docker images are now the default**
 
     We are moving all ``conda-forge`` ``linux-64`` jobs to use CentOS 7-based docker images. 
     This will help users avoid ``conda/mamba`` solver errors where dependencies that need 
@@ -28,7 +34,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     keeping support for older systems largely intact. We will reconsider moving the default ABI to 
     CentOS 7 at a later date.
 
-:2021-11-17: ``cloud.drone.io`` no longer working
+17 November
+~~~~~~~~~~~
+
+  **``cloud.drone.io`` no longer working**
 
     The ``cloud.drone.io`` service we use for ``aarch64`` builds is no longer accepting our API
     requests for triggering builds. We have been in contact with them, but have been unable to
@@ -37,14 +46,20 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     available as well for resource-intensive builds. Please rerender your feedstock as needed to
     get the updated configuration.
 
-:2021-10-20: conda-forge now uses mambabuild as default
+20 October
+~~~~~~~~~~
+
+  **conda-forge now uses mambabuild as default**
 
     conda-forge now uses `mamba <https://github.com/mamba-org/mamba>`_ during the build
     process (via ``conda mambabuild`` of the `boa <https://github.com/mamba-org/boa>`_ project). This was
     changed in `conda-smithy 3.13.0 <https://github.com/conda-forge/conda-smithy/blob/main/CHANGELOG.rst#v3130>`_
     and should automatically apply when re-rendering.
 
-:2021-10-13: GCC 10 and clang 12 as default compilers for Linux and macOS
+13 October
+~~~~~~~~~~
+
+  **GCC 10 and clang 12 as default compilers for Linux and macOS**
 
     These compilers will become the default for building packages in conda-forge.
     One notable change in gcc 10 is that the -fopenmp flag in FFLAGS is dropped.
@@ -53,18 +68,27 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     is -std=gnu++17. In clang>=12 and gcc>=11, we will not provide an explicit
     C++ standard, and will defer to the compiler default.
 
-:2021-10-04: python 3.6 is now dropped when building conda-forge packages
+04 October
+~~~~~~~~~~
+
+  **python 3.6 is now dropped when building conda-forge packages**
 
     python 3.6 is end-of-life in December 2021 and we are dropping support for it
     early to avoid having to rebuild packages as part of python 3.10 migration
     as that would save lots of CI resources.
 
-:2021-09-30: ``defaults`` channel is now dropped when building conda-forge packages
+30 September
+~~~~~~~~~~~~
+
+  **``defaults`` channel is now dropped when building conda-forge packages**
 
     You can get the previous behaviour by using the ``channel_sources`` setting in
     ``conda-forge.yml``
 
-:2020-05-22: ``conda-forge`` is now citable!
+22 May
+~~~~~~
+
+  **``conda-forge`` is now citable!**
 
     You can now cite ``conda-forge`` using our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_!
     This entry credits the entire ``conda-forge`` community for its hard work in building our
@@ -73,7 +97,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2020
 ----
 
-:2020-12-16: Moving to CentOS 7 and CentOS 6 End-of-Life
+16 December
+~~~~~~~~~~~
+
+  **Moving to CentOS 7 and CentOS 6 End-of-Life**
 
     ``conda-forge``'s compiler stack uses repackaged libraries from CentOS 6
     to supply certain libraries, notably ``glibc`` when building recipes. We currently
@@ -88,7 +115,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     looking for feedback from our users on this issue. Please do :ref:`get in touch <getintouch>`
     if you have comments or concerns!
 
-:2020-12-02: Artifact Validation
+02 December
+~~~~~~~~~~~
+
+  **Artifact Validation**
 
     In an effort to better secure ``conda-forge``, we are developing a process to
     validate artifacts before they are uploaded to ``anaconda.org``. This validation
@@ -100,7 +130,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     and will report any issues back to feedstocks. At a future date, artifacts that
     do not pass validation will not be uploaded.
 
-:2020-10-08: Compiler Upgrade to ``GCC`` ``9.3.0``
+08 October
+~~~~~~~~~~
+
+  **Compiler Upgrade to ``GCC`` ``9.3.0``**
 
     We will be upgrading all ``GCC``-based compilers to version
     ``9.3.0`` on all platforms. This upgrade will not affect ``C`` or
@@ -110,7 +143,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     doubling the build matrix. Once the migration is deemed complete,
     these old compiler versions will be removed.
 
-:2020-08-07: Completed New Staging Process for ``anaconda.org`` Uploads
+07 August
+~~~~~~~~~
+
+  **Completed New Staging Process for ``anaconda.org`` Uploads**
 
     We have now completed rolling out the new staging process for uploads
     to anaconda.org. Direct uploads to the ``conda-forge`` channel will no
@@ -118,7 +154,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     rerender your feedstock with the latest version of ``conda-smithy``.
     As always, if you need help, bump us on Gitter or GitHub!
 
-:2020-08-06: Fixed Maintenance Process for Feedstock Teams
+06 August
+~~~~~~~~~
+
+  **Fixed Maintenance Process for Feedstock Teams**
 
     We have fixed a bug where the maintainers of feedstocks listed in the
     ``meta.yaml`` did not match those listed in the GitHub team. Due to this
@@ -128,7 +167,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     for maintenance teams as well, though you will not see emails from this
     fix.
 
-:2020-07-23: CentOS 7 ``sysroot`` Now Available for ``linux-64`` Builds
+23 July
+~~~~~~~
+
+  **CentOS 7 ``sysroot`` Now Available for ``linux-64`` Builds**
 
     We are very excited to announce that new compilers based on repackaged
     ``sysroot``'s from CentOS 7 are now available for all ``linux-*`` platforms.
@@ -142,7 +184,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     to the build section of your recipe. You also need to set the proper Docker
     image in your ``conda_build_config.yaml``. See :ref:`Using CentOS 7 <centos7>` for details.
 
-:2020-07-23: Strict channel priority in builds for OSX and Linux
+23 July
+~~~~~~~
+
+  **Strict channel priority in builds for OSX and Linux**
 
     We have changed the OSX and Linux platforms to enforce strict channel priority
     in package builds. This change means that if a package is available in the ``conda-forge``
@@ -150,19 +195,28 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     channels. Users can disable this by setting ``channel_priority: flexible`` in their
     ``conda-forge.yml``.
 
-:2020-07-23: NumPy 1.16 is the minimal NumPy version on all platforms.
+23 July
+~~~~~~~
+
+  **NumPy 1.16 is the minimal NumPy version on all platforms.**
 
     In accordance with `NEP-29 <https://numpy.org/neps/nep-0029-deprecation_policy.html>`_,
     we have switched to have ``numpy 1.16`` as the minimum supported version on all
     platforms.
 
-:2020-07-17: Conda-forge is building openblas with both pthreads and openmp on Linux
+17 July
+~~~~~~~
+
+  **Conda-forge is building openblas with both pthreads and openmp on Linux**
 
     The main change is that ``openblas`` will use pthreads for threading by default on Linux
     instead of the previous ``openmp`` default.
     The ``openmp`` builds can be recovered by installing ``libopenblas=*=*openmp*``.
 
-:2020-07-16: Core Dependency Tree Package Changes
+16 July
+~~~~~~~
+
+  **Core Dependency Tree Package Changes**
 
     ``conda-forge`` is moving to a new system for generating Core Dependency Tree (CDT)
     packages. These changes include
@@ -181,13 +235,19 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     packages needed for ``conda-forge`` builds into the ``conda-forge`` channels making
     builds more reliable.
 
-:2020-07-16: Moving from clang 9 to clang 10
+16 July
+~~~~~~~
+
+  **Moving from clang 9 to clang 10**
 
     conda-forge is moving to clang 10 on macOS!
     Check the release `notes <https://releases.llvm.org/10.0.0/tools/clang/docs/ReleaseNotes.html#what-s-new-in-clang-10-0-0>`_
     for what is new, breaking, or deprecated.
 
-:2020-07-15: ``CFEP-18:`` Removing static libraries from the main build
+15 July
+~~~~~~~
+
+  **``CFEP-18:`` Removing static libraries from the main build**
 
     With `CFEP-18 <https://github.com/conda-forge/cfep/blob/main/cfep-18.md>`_
     we now have a policy on how to deal with static packages. The most important
@@ -195,13 +255,19 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     and moving them to ``-static`` suffixed packages. ``-static`` packages will not
     be built by default but only on request.
 
-:2020-07-03: ``cf-mark-broken`` renamed to ``admin-requests``
+03 July
+~~~~~~~
+
+  **``cf-mark-broken`` renamed to ``admin-requests``**
 
     The ``cf-mark-broken`` repo has been renamed to ``admin-requests``. It still
     serves the same purpose. However, we have expanded the capabilities of the repo
     to be able to mark packages as not broken.
 
-:2020-05-28: New Process for Marking Packages as Broken
+28 May
+~~~~~~
+
+**New Process for Marking Packages as Broken**
 
     We are changing the way we mark packages as ``broken`` to
     better match the ``defaults`` channel and to better enable
@@ -225,7 +291,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
      * The only correct source of package metadata is now the ``repodata.json``
        etc on ``anaconda.org``. Any other sources may be missing critical changes.
 
-:2020-05-09: New Staging Process for ``anaconda.org`` Uploads
+09 May
+~~~~~~
+
+  **New Staging Process for ``anaconda.org`` Uploads**
 
     Starting this week, we are changing the way we upload packages to ``anaconda.org``.
     We will move from direct uploads to the ``conda-forge`` ``main`` channel to using a
@@ -259,7 +328,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     so please bear with us. As always, if you have any questions, concerns, or trouble, you
     can find us on Gitter or bump us directly on Github!
 
-:2020-03-24: ``vs2015`` to ``vs2017`` Transition
+24 March
+~~~~~~~~
+
+  **``vs2015`` to ``vs2017`` Transition**
 
     We are formally deprecating ``vs2015`` in two weeks on 2020-04-07 and will move to
     ``vs2017``. This change will enable us to support the usage of ``msbuild`` on Azure for the
@@ -269,7 +341,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     incompatible with the ``vs2017`` toolchain. These static libraries will need to be rebuilt
     using ``vs2017``.
 
-:2020-03-23: Appveyor Deprecation
+23 March
+~~~~~~~~
+
+  **Appveyor Deprecation**
 
     We are now starting to formally deprecate Appveyor in favor of Azure for builds on the
     ``win`` platform. Note that we have not been adding appveyor to new feedstocks
@@ -280,7 +355,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     cannot yet be moved to Azure and so are leaving Appveyor on for those feedstocks for
     now.
 
-:2020-03-21: Python 2.7 Admin Command Available
+21 March
+~~~~~~~~
+
+  **Python 2.7 Admin Command Available**
 
     A webservices admin command is now available to add Python 2.7 back to
     feedstocks. Put ``@conda-forge-admin add python 2.7`` in the title on an
@@ -289,7 +367,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     and any ``win``, ``aarch64``, or ``ppc64le`` builds. If you want to keep
     those, merge the PR into a separate branch on your feedstock.
 
-:2020-03-18: Python 2.7 and ``vs2008`` Deprecation
+18 March
+~~~~~~~~
+
+  **Python 2.7 and ``vs2008`` Deprecation**
 
    - Python 2.7 is no longer supported by the upstream developers as of 2020-01-01.
      Conda-forge is thus deprecating its Python 2.7 support. Conda-forge will provide
@@ -306,7 +387,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2019
 ----
 
-:2019-09-30: Clang 9.0.0 and gfortran 7.3.0 as default compilers in OSX.
+30 September
+~~~~~~~~~~~~
+
+  **Clang 9.0.0 and gfortran 7.3.0 as default compilers in OSX.**
 
    - If you maintain a feedstock that requires a C/C++ compiler, no changes necessary. A rerender
      should be done next time the feedstock is updated to use the new compiler.
@@ -314,7 +398,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
      already issued. If that PR was merged, there's nothing to do. If not, contact core if you
      need help migrating.
 
-:2019-03-28: We overhauled the blas support in conda-forge.
+28 March
+~~~~~~~~
+
+  **We overhauled the blas support in conda-forge.**
 
    - Our packages now build against NETLIB’s reference implementation.
    - You as a user can now choose the implementation available at runtime.
@@ -322,7 +409,10 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
   For more information please refer to the :ref:`documentation <knowledge:blas>`.
 
 
-:2019-01-22: It has happened! Conda-forge has migrated to the latest compilers 🎉.
+22 January
+~~~~~~~~~~
+
+  **It has happened! Conda-forge has migrated to the latest compilers 🎉.**
 
     If you:
       * maintain a compiled feedstock, it will likely need to be rerender
@@ -331,24 +421,39 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2018
 ----
 
-:2018-10-12: The rebuild is moving along nicely with almost a third of the packages completed.
+12 October
+~~~~~~~~~~
+
+  **The rebuild is moving along nicely with almost a third of the packages completed.**
 
     Recently completed are NumPy and Openblas which should open up much of the python numeric stack.
     We're only about 5 feedstocks away from opening up all of R as well.
 
-:2018-09-24: A minimal python 3.7 build is now available across all platforms and both compilers!
+24 September
+~~~~~~~~~~~~
 
-:2018-09-24:  Deprecation notice for Python 3.5
+  A minimal python 3.7 build is now available across all platforms and both compilers!
+
+24 September
+~~~~~~~~~~~~
+
+  **Deprecation notice for Python 3.5**
 
     As we start building out more of the Python 3.7 stack, we will no longer be building
     Python 3.5 packages.
 
     No new python 3.5 packages will be built after 2018-10-01.
 
-:2018-09-20:  The compiler migration is in full swing.  The bot will be making the rounds and
+20 September
+~~~~~~~~~~~~  
+
+    The compiler migration is in full swing.  The bot will be making the rounds and
     modernizing more than 4000 packages.  This is going to take a few months to get done so
     bear with us.
 
-:2018-09-10: Conda forge now has a magical status bar for tracking the progress of migrations.
+10 September
+~~~~~~~~~~~~
+
+  **Conda forge now has a magical status bar for tracking the progress of migrations.**
 
     You can find this at `conda-forge.org/status <https://conda-forge.org/status>`_.
