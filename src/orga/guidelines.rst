@@ -157,10 +157,12 @@ The guidance that we can provide here is two fold:
 1. We will move with the community. 
    When our core libraries stop supporting an old version, so too will conda forge.
    The (nonexhaustive) list of core libraries that we consider when making the decision to drop an older version are:
+
    * matplotlib
    * numpy
    * scipy
    * pypy
+
 2. The core team can decide to keep an old version around temporarily until some specific criteria is met.
    For example, we're holding off on turning off py36 until pypy comes out with pypy3.7.
 3. If there are lots of people in the community relying on older versions, core team can decide to keep an old version around.
