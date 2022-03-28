@@ -10,10 +10,14 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
 :2022-03-28: PyPy 3.8+3.9 Migration
 
-    Our bots will begin migrating all feedstocks with PyPy enabled
-    to 3.8+3.9. We will be dropping PyPy 3.7 builds in each feedstock
-    as the newer versions are added. As usual, you can track the status
-    of the migration on our status page. 
+    We have begun rolling out packages built for PyPy3.8 and PyPy3.9. This work
+    may take a few weeks. See :ref:`pypy` in the user docs for information on how to
+    set up a PyPy environment. Please report issues to the PyPy developers at
+    https://foss.heptapod.net/pypy/pypy/issues. We are also dropping PyPy3.7
+    in each feedstock as the newer versions of PyPy are added. New versions of
+    migrated feedstocks will not be built for PyPy3.7 and that version of the
+    python interpreter will not be receiving updates. As usual, you can track the
+    status of the migration on our status page.
 
 :2022-03-06: Travis CI Usage Deprecated for ``win_*``, ``osx_*``, and ``linux_64`` Platforms
 
