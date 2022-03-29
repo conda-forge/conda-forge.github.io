@@ -30,8 +30,8 @@ If you have questions or need help, please check out our documentation for a [li
 
 ## conda-forge dev meetings
 
-We hold biweekly meetings every second Wednesday from 17:00-18:00 (UTC). Feel free to stop by then with the help of the [link](https://calendar.google.com/calendar/u/0/r/eventedit/copy/Z2lraDk2a205cGUxdDkxYmNybXQxMGIxMGtfMjAxOTA3MjRUMTcwMDAwWiBzY29wYXR6QG0/c2hsb2thcHJpbmNlc3MxMDFAZ21haWwuY29t?scp=ALL&sf=true).
+We hold biweekly meetings every second Wednesday from 17:00-18:00 (UTC). Feel free to stop by with the help of this [link](https://calendar.google.com/calendar/u/0/r/eventedit/copy/Z2lraDk2a205cGUxdDkxYmNybXQxMGIxMGtfMjAxOTA3MjRUMTcwMDAwWiBzY29wYXR6QG0/c2hsb2thcHJpbmNlc3MxMDFAZ21haWwuY29t?scp=ALL&sf=true).
 
-Our [meeting notes](https://conda-forge.org/docs/orga/minutes/00_intro.html) record important points discussed during the meetings and serve as a record for upcoming meetings. We make use of [HackMd](https://hackmd.io/) and the [template](https://github.com/conda-forge/conda-forge.github.io/blob/main/misc/DEV_MEETING_TEMPLATE.md) to create the meeting notes.
+Our [meeting notes](https://conda-forge.org/docs/orga/minutes/00_intro.html) record important points discussed during the meetings and serve as a record for upcoming meetings. We make use of [HackMd](https://hackmd.io/) and a [template](https://github.com/conda-forge/conda-forge.github.io/blob/main/misc/DEV_MEETING_TEMPLATE.md) to create the meeting notes.
 
 We encourage contributors to join the meetings and learn more about and from the community.
