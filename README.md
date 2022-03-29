@@ -30,9 +30,8 @@ If you have questions or need help, please check out our documentation for a [li
 
 ## conda-forge dev meetings
 
-Our documentation contains a section with [minutes from previous dev meetings]([https://conda-forge.org/docs/minutes/00_intro.html]). These meetings occur every two weeks on Wednesday from 17:00-18:00 UTC.
-A link to the google calendar item can be found [here](https://calendar.google.com/event?action=TEMPLATE&tmeid=Z2lraDk2a205cGUxdDkxYmNybXQxMGIxMGtfMjAxOTA3MjRUMTcwMDAwWiBzY29wYXR6QG0&tmsrc=scopatz%40gmail.com&scp=ALL).
+We hold biweekly meetings every second Wednesday from 17:00-18:00 (UTC). Feel free to stop by then with the help of the [link](https://calendar.google.com/calendar/u/0/r/eventedit/copy/Z2lraDk2a205cGUxdDkxYmNybXQxMGIxMGtfMjAxOTA3MjRUMTcwMDAwWiBzY29wYXR6QG0/c2hsb2thcHJpbmNlc3MxMDFAZ21haWwuY29t?scp=ALL&sf=true).
 
-We use https://hackmd.io/ for taking meeting minutes and will upload the resultant markdown file after the meeting has concluded.
+Our [meeting notes](https://conda-forge.org/docs/orga/minutes/00_intro.html) record important points discussed during the meetings and serve as a record for upcoming meetings. We make use of [HackMd](https://hackmd.io/) and the [template](https://github.com/conda-forge/conda-forge.github.io/blob/main/misc/DEV_MEETING_TEMPLATE.md) to create the meeting notes.
 
-There is a template provided in [`misc/DEV_MEETING_TEMPLATE.md`](https://github.com/conda-forge/conda-forge.github.io/tree/main/misc/DEV_MEETING_TEMPLATE.md) that you should use to create a new hackmd document.
+We encourage contributors to join the meetings and learn more about and from the community.
