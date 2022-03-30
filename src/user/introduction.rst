@@ -46,7 +46,7 @@ conda-forge is a community effort that tackles these issues:
 Prequisites
 -----------
 
-**Miniconda(Recommended)**
+**Miniconda (Recommended)**
 
   **Windows** 
   
