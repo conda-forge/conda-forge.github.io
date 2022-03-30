@@ -4,8 +4,19 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Fri, 25 Mar 2022 08:05:32 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 30 Mar 2022 06:25:12 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2022-03-28: PyPy 3.8+3.9 Migration</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;Our bots will begin migrating all feedstocks with PyPy enabled
+to 3.8+3.9. We will be dropping PyPy 3.7 builds in each feedstock
+as the newer versions are added. As usual, you can track the status
+of the migration on our status page.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Mon, 28 Mar 2022 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2022-03-06: Travis CI Usage Deprecated for win_*, osx_*, and linux_64 Platforms</title>
       <link>https://conda-forge.org/docs/user/announcements.html</link>
