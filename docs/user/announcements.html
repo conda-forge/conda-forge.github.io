@@ -77,10 +77,14 @@
 <dl class="field-list">
 <dt class="field-odd">2022-03-28</dt>
 <dd class="field-odd"><p>PyPy 3.8+3.9 Migration</p>
-<p>Our bots will begin migrating all feedstocks with PyPy enabled
-to 3.8+3.9. We will be dropping PyPy 3.7 builds in each feedstock
-as the newer versions are added. As usual, you can track the status
-of the migration on our status page.</p>
+<p>We have begun rolling out packages built for PyPy3.8 and PyPy3.9. This work
+may take a few weeks. See <a class="reference internal" href="tipsandtricks.html#pypy"><span class="std std-ref">Using PyPy as an interpreter</span></a> in the user docs for information on how to
+set up a PyPy environment. Please report issues to the PyPy developers at
+<a class="reference external" href="https://foss.heptapod.net/pypy/pypy/issues">https://foss.heptapod.net/pypy/pypy/issues</a>. We are also dropping PyPy3.7
+in each feedstock as the newer versions of PyPy are added. New versions of
+migrated feedstocks will not be built for PyPy3.7 and that version of the
+python interpreter will not be receiving updates. As usual, you can track the
+status of the migration on our status page.</p>
 </dd>
 <dt class="field-even">2022-03-06</dt>
 <dd class="field-even"><p>Travis CI Usage Deprecated for <code class="docutils literal notranslate"><span class="pre">win_*</span></code>, <code class="docutils literal notranslate"><span class="pre">osx_*</span></code>, and <code class="docutils literal notranslate"><span class="pre">linux_64</span></code> Platforms</p>

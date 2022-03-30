@@ -4,15 +4,19 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Wed, 30 Mar 2022 06:25:12 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 30 Mar 2022 08:07:27 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
     <item>
       <title>2022-03-28: PyPy 3.8+3.9 Migration</title>
       <link>https://conda-forge.org/docs/user/announcements.html</link>
-      <description>&lt;p&gt;Our bots will begin migrating all feedstocks with PyPy enabled
-to 3.8+3.9. We will be dropping PyPy 3.7 builds in each feedstock
-as the newer versions are added. As usual, you can track the status
-of the migration on our status page.&lt;/p&gt;
+      <description>&lt;p&gt;We have begun rolling out packages built for PyPy3.8 and PyPy3.9. This work
+may take a few weeks. See &lt;a class="reference internal" href="tipsandtricks.html#pypy"&gt;&lt;span class="std std-ref"&gt;Using PyPy as an interpreter&lt;/span&gt;&lt;/a&gt; in the user docs for information on how to
+set up a PyPy environment. Please report issues to the PyPy developers at
+&lt;a class="reference external" href="https://foss.heptapod.net/pypy/pypy/issues"&gt;https://foss.heptapod.net/pypy/pypy/issues&lt;/a&gt;. We are also dropping PyPy3.7
+in each feedstock as the newer versions of PyPy are added. New versions of
+migrated feedstocks will not be built for PyPy3.7 and that version of the
+python interpreter will not be receiving updates. As usual, you can track the
+status of the migration on our status page.&lt;/p&gt;
 </description>
       <guid>https://conda-forge.org/docs/user/announcements.html</guid>
       <pubDate>Mon, 28 Mar 2022 00:00:00 GMT</pubDate>

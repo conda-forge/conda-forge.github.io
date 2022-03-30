@@ -1036,21 +1036,7 @@ because these symbols are in fact available. To do so, add
 </section>
 <section id="pypy-builds">
 <h2>PyPy builds<a class="headerlink" href="#pypy-builds" title="Permalink to this headline">¶</a></h2>
-<p>To use the PyPy 3.6 or 3.7 builds you can do the following,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n pypy36  pypy <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.6
-conda create -n pypy37  pypy <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>As of March 8 2020, if you are using defaults as a low priority channel,
-then you need to use strict channel priority as the metadata in defaults
-has not been patched yet which allows cpython extension packages to be
-installed alongside pypy.</p>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --set channel_priority strict
-</pre></div>
-</div>
+<p>See <a class="reference internal" href="../user/tipsandtricks.html#pypy"><span class="std std-ref">Using PyPy as an interpreter</span></a> in the user docs for more info about PyPy and <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.</p>
 <p>To build your python package for pypy, wait for the bot to send a
 PR and contact <code class="docutils literal notranslate"><span class="pre">conda-forge/bot</span></code> team if a PR is not sent after the
 dependencies have been built.</p>

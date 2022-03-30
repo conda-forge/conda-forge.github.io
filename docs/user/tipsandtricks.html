@@ -186,6 +186,31 @@ conda activate your_environment_name
 </div>
 <p>For context, installing TensorFlow 2.7.0 with <code class="docutils literal notranslate"><span class="pre">CONDA_CUDA_OVERRIDE=&quot;11.2&quot;</span> <span class="pre">mamba</span> <span class="pre">install</span> <span class="pre">&quot;tensorflow==2.7.0=cuda*&quot;</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code> results in approximately 2 GB of packages to download while <code class="docutils literal notranslate"><span class="pre">CONDA_CUDA_OVERRIDE=&quot;11.2&quot;</span> <span class="pre">mamba</span> <span class="pre">install</span> <span class="pre">&quot;tensorflow=2.7.0=cpu*&quot;</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code> results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the <code class="docutils literal notranslate"><span class="pre">-cpu</span></code> variant!</p>
 </section>
+<section id="using-pypy-as-an-interpreter">
+<span id="pypy"></span><h2>Using PyPy as an interpreter<a class="headerlink" href="#using-pypy-as-an-interpreter" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel supports creating and installing packages into
+environments using the <a class="reference external" href="https://www.pypy.org">PyPy interpreter</a>. Many packages are already
+available. You need to enable the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel and use
+the <code class="docutils literal notranslate"><span class="pre">pypy</span></code> identifier when creating your environment:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ conda create -c conda-forge -n my-pypy-env pypy <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+$ conda activate my-pypy-env
+</pre></div>
+</div>
+<p>Currently supported python versions are 3.8 and 3.9. Support for <code class="docutils literal notranslate"><span class="pre">pypy3.7</span></code>
+has been dropped. While you can still create a python 3.7 environment, you
+you will not be getting updates as new package versions are released (including
+pypy itself).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As of March 8 2020, if you are using defaults as a low priority channel,
+then you need to use strict channel priority as the metadata in defaults
+has not been patched yet which allows cpython extension packages to be
+installed alongside pypy.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conda config --set channel_priority strict
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -212,6 +237,7 @@ conda activate your_environment_name
 <li class="toctree-l3"><a class="reference internal" href="#using-external-message-passing-interface-mpi-libraries">Using External Message Passing Interface (MPI) Libraries</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-apple-intel-packages-on-apple-silicon">Installing Apple Intel packages on Apple Silicon</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-cuda-enabled-packages-like-tensorflow-and-pytorch">Installing CUDA-enabled packages like TensorFlow and PyTorch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-pypy-as-an-interpreter">Using PyPy as an interpreter</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ci-skeleton.html">Using conda-smithy to manage your CI</a></li>
