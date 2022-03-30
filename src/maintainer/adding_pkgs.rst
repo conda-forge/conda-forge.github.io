@@ -37,7 +37,7 @@ There are multiple ways to get started:
   Installation and usage of ``grayskull``:
 
   - Run ``conda install -c conda-forge grayskull`` to install ``grayskull``.
-  - Followed by ``grayskull pypi your_package_name`` to generate the recipe.
+  - Followed by ``grayskull pypi --strict-conda-forge your_package_name`` to generate the recipe.
 
 You do *not* necessarily have to use ``grayskull``, and the recipes produced by ``grayskull`` might need to be reviewed and edited.
 Read more about ``grayskull`` and how to use it `here <https://github.com/conda-incubator/grayskull#introduction>`__.
