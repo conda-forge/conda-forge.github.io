@@ -43,6 +43,41 @@ conda-forge is a community effort that tackles these issues:
  - An active core developer team is trying to also maintain abandoned packages.
 
 
+Prequisites
+-----------
+
+**Miniconda (Recommended)**
+
+  **Windows** 
+  
+    `Windows Installation <https://conda.io/projects/conda/en/latest/user-guide/install/windows.html#installing-on-windows>`__
+
+  **Linux** 
+  
+    `Linux Installation <https://conda.io/projects/conda/en/latest/user-guide/install/linux.html>`__
+
+  **Macbook**
+
+    `Mac Installation <https://conda.io/projects/conda/en/latest/user-guide/install/macos.html>`__
+  
+
+
+**Anaconda**
+
+  **Windows** 
+  
+    `Windows Installation <https://docs.anaconda.com/anaconda/install/windows/>`__
+
+  **Linux** 
+  
+    `Linux Installation <https://docs.anaconda.com/anaconda/install/linux/>`__
+
+  **Macbook**
+
+    `Mac Installation <https://conda.io/projects/conda/en/latest/user-guide/install/macos.html>`__
+  
+
+
 How can I install packages from conda-forge?
 --------------------------------------------
 
