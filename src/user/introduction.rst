@@ -43,8 +43,8 @@ conda-forge is a community effort that tackles these issues:
  - An active core developer team is trying to also maintain abandoned packages.
 
 
-Prequisite
------------
+Prerequisites
+-------------
 
 **Miniforge** 
   
