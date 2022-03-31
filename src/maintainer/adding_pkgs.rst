@@ -32,12 +32,14 @@ There are multiple ways to get started:
 .. note::
 
   `Grayskull <https://github.com/conda-incubator/grayskull>`_ is an automatic conda recipe generator. The goal of this project is to generate concise recipes
-  for conda-forge and eventually replace conda skeleton. Presently, Grayskull can generate recipes for Python packages available on PyPI and also those not published on PyPI and are only available as GitHub repositories.
+  for conda-forge and eventually replace conda skeleton. Presently, Grayskull can generate recipes for Python packages available on PyPI and also those not published on PyPI and only available as GitHub repositories.
 
   Installation and usage of ``grayskull``:
 
+  - Create a new environment using : ``conda create --name MY_ENV``. Replace ``MY_ENV`` with the environment name.
+  - Activate this new environment : ``conda activate MY_ENV``.
   - Run ``conda install -c conda-forge grayskull`` to install ``grayskull``.
-  - Followed by ``grayskull pypi --strict-conda-forge your_package_name`` to generate the recipe.
+  - Followed by ``grayskull pypi --strict-conda-forge YOUR_PACKAGE_NAME`` to generate the recipe. Replace ``YOUR_PACKAGE_NAME`` with the package name.
 
 You do *not* necessarily have to use ``grayskull``, and the recipes produced by ``grayskull`` might need to be reviewed and edited.
 Read more about ``grayskull`` and how to use it `here <https://github.com/conda-incubator/grayskull#introduction>`__.
