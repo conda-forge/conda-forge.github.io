@@ -917,18 +917,23 @@ which restricts the corresponding conda-forge recipes from becoming ``noarch``.
 Therefore, some conda-forge recipes only create an actual package on specific Python versions and are otherwise an
 empty placeholder. This allows them to be safely installed under all Python versions and makes using ``skips`` unnecessary.
 
+Similarly, some packages are `only` platform-specific dependency of a package, such as ``pywin32``, and have
+helper metapackages which can help recipes stay ``noarch``. The version of the `actual` package required
+can be controlled with ``run_constrained``, even for packages not available on all platforms.
+
 Currently available packages:
 
-+-------------+-------------------+--------------+
-| Name        | Available on:     | Empty on:    |
-+=============+===================+==============+
-| dataclasses | python >=3.6,<3.7 | python >=3.7 |
-+-------------+-------------------+--------------+
-| enum34      | python =2.7       | python >=3.4 |
-+-------------+-------------------+--------------+
-| typing      |                   | python >=3   |
-+-------------+-------------------+--------------+
-
++--------------------+-------------------+--------------+
+| Name               | Available on:     | Empty on:    |
++====================+===================+==============+
+| dataclasses        | python >=3.6,<3.7 | python >=3.7 |
++--------------------+-------------------+--------------+
+| enum34             | python =2.7       | python >=3.4 |
++--------------------+-------------------+--------------+
+| typing             |                   | python >=3   |
++--------------------+-------------------+--------------+
+| pywin32-on-windows | windows           | unix         |
++--------------------+-------------------+--------------+
 
 .. _knowledge:all-installs:
 
@@ -957,7 +962,7 @@ Noarch builds
 Noarch packages are packages that are not architecture specific and therefore only have to be built once.
 
 Declaring these packages as ``noarch`` in the ``build`` section of the meta.yaml, reduces shared CI resources.
-Therefore all packages that qualify to be noarch packages, should be declared as such.
+Therefore all packages that qualify to be noarch packages `should` be declared as such.
 
 
 .. _noarch:
@@ -977,7 +982,7 @@ In order to qualify as a noarch python package, all of the following criteria mu
     statement and add version constraint on python in ``host`` and ``run``
     section.
   - ``2to3`` is not used
-  - Scripts argument in setup.py is not used
+  - ``scripts`` argument in ``setup.py`` is not used
   - If ``console_scripts`` ``entry_points`` are defined in ``setup.py`` or ``setup.cfg``, they are also listed in
     the ``build`` section of ``meta.yaml``
   - No activate scripts
@@ -991,7 +996,7 @@ In order to qualify as a noarch python package, all of the following criteria mu
 
 .. note::
 
-  Only ``console_scripts`` entry points have to be listed in meta.yaml. Other entry points do not conflict
+  Only ``console_scripts`` entry points have to be listed in ``meta.yaml``. Other entry points do not conflict
   with ``noarch`` and therefore do not require extra treatment.
 
 .. note::
@@ -1000,9 +1005,16 @@ In order to qualify as a noarch python package, all of the following criteria mu
   ``noarch`` even if one of its dependencies is not available on a given platform. If this is the case, conda will
   display a helpful error message describing which dependency couldn't be found when it tries to install the package.
   If the dependency is later made available, your package will be installable on that platform without having to make
-  any changes to the feedstock. However, keep in mind that since ``noarch`` packages are built on Linux, all
-  dependencies must be available on Linux.
+  any changes to the feedstock.
 
+  By default, ``noarch`` packages are built on Linux, and all dependencies must be available on Linux.
+
+.. hint::
+
+  If a ``noarch`` package `cannot` be built on Linux, one or more ``noarch_platforms`` can be provided in
+  ``conda-forge.yml``. One example is `pywin32-on-windows <https://github.com/conda-forge/pywin32-on-windows-feedstock>`_,
+  which builds on Linux `and` Windows, with ``build_number`` offsets to create a pair packages, like
+  ``dataclasses``.
 
 If an existing python package qualifies to be converted to a noarch package, you can request the required changes
 by opening a new issue and including ``@conda-forge-admin, please add noarch: python``.
@@ -1136,23 +1148,7 @@ because these symbols are in fact available. To do so, add
 PyPy builds
 ===========
 
-To use the PyPy 3.6 or 3.7 builds you can do the following,
-
-.. code-block:: bash
-
-   conda create -n pypy36  pypy python=3.6
-   conda create -n pypy37  pypy python=3.7
-
-.. note::
-
-   As of March 8 2020, if you are using defaults as a low priority channel,
-   then you need to use strict channel priority as the metadata in defaults
-   has not been patched yet which allows cpython extension packages to be
-   installed alongside pypy.
-
-.. code-block:: bash
-
-   conda config --set channel_priority strict
+See :ref:`pypy` in the user docs for more info about PyPy and ``conda-forge``.
 
 To build your python package for pypy, wait for the bot to send a
 PR and contact ``conda-forge/bot`` team if a PR is not sent after the

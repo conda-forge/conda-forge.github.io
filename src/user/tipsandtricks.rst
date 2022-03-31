@@ -164,3 +164,39 @@ results in approximately 2 GB of packages to download while using this:
     CONDA_CUDA_OVERRIDE="11.2" mamba install "tensorflow=2.7.0=cpu*" -c conda-forge 
 
 results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the ``-cpu`` variant!
+=======
+For context, installing TensorFlow 2.7.0 with ``CONDA_CUDA_OVERRIDE="11.2" mamba install "tensorflow==2.7.0=cuda*" -c conda-forge`` results in approximately 2 GB of packages to download while ``CONDA_CUDA_OVERRIDE="11.2" mamba install "tensorflow=2.7.0=cpu*" -c conda-forge`` results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the ``-cpu`` variant! 
+
+
+.. _pypy:
+
+Using PyPy as an interpreter
+============================
+The ``conda-forge`` channel supports creating and installing packages into
+environments using the `PyPy interpreter`_. Many packages are already
+available. You need to enable the ``conda-forge`` channel and use
+the ``pypy`` identifier when creating your environment:
+
+.. code-block:: shell
+
+    $ conda create -c conda-forge -n my-pypy-env pypy python=3.8
+    $ conda activate my-pypy-env
+
+Currently supported python versions are 3.8 and 3.9. Support for ``pypy3.7``
+has been dropped. While you can still create a python 3.7 environment, you
+you will not be getting updates as new package versions are released (including
+pypy itself).
+
+.. note::
+
+   As of March 8 2020, if you are using defaults as a low priority channel,
+   then you need to use strict channel priority as the metadata in defaults
+   has not been patched yet which allows cpython extension packages to be
+   installed alongside pypy.
+
+.. code-block:: bash
+
+   $ conda config --set channel_priority strict
+
+.. _`PyPy interpreter`: https://www.pypy.org
+
