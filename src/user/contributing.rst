@@ -42,7 +42,7 @@ We are glad to know that you would like to contribute to the ``conda-forge`` doc
 2. `Clone <https://help.github.com/articles/cloning-a-repository/>`_ this fork onto your computer.
 3. `Create a new branch
    <https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging>`_
-   to make all the changes.
+   deriving from ``main`` to do your work.
 4. Make and `commit
    <https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository>`_
    your changes.
