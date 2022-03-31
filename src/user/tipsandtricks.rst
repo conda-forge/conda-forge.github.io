@@ -164,9 +164,6 @@ results in approximately 2 GB of packages to download while using this:
     CONDA_CUDA_OVERRIDE="11.2" mamba install "tensorflow=2.7.0=cpu*" -c conda-forge 
 
 results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the ``-cpu`` variant!
-=======
-For context, installing TensorFlow 2.7.0 with ``CONDA_CUDA_OVERRIDE="11.2" mamba install "tensorflow==2.7.0=cuda*" -c conda-forge`` results in approximately 2 GB of packages to download while ``CONDA_CUDA_OVERRIDE="11.2" mamba install "tensorflow=2.7.0=cpu*" -c conda-forge`` results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the ``-cpu`` variant! 
-
 
 .. _pypy:
 
