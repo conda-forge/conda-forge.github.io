@@ -28,6 +28,9 @@ If you have questions or need help, please check out our documentation for a [li
 
 **Note: "All changes must be made in the `/src` folder and NOT in the `/docs` folder. Html files in the ./docs folder are auto generated "**
 
+## Code of Conduct
+We welcome everyone to participate in the Conda-Forge community, nevertheless it is important that every member understands the guidelines and rules of it. Here https://numfocus.org/code-of-conduct you can check the Code of Conduct and reporting guidelines we follow.
+
 ## conda-forge dev meetings
 
 Our documentation contains a section with [minutes from previous dev meetings]([https://conda-forge.org/docs/minutes/00_intro.html]). These meetings occur every two weeks on Wednesday from 17:00-18:00 UTC.
