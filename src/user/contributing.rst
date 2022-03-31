@@ -61,7 +61,7 @@ We are glad to know that you would like to contribute to the ``conda-forge`` doc
 
 You can check the changes locally by opening the html files in ``src/_build/html``.
 
-1. Add and commit your changes:
+6. Add and commit your changes:
 
  - ``git add .``
  - ``git commit -m "your commit message"``
