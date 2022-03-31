@@ -27,8 +27,8 @@ Why does that happen?
 ---------------------
 
 The ``conda-forge`` and ``defaults`` are not 100% compatible.
-In the example above it is known that ``defaults`` uses ``icu 54.*`` while ``conda-forge`` relies on ``icu 56.*``,
-this mismatch can lead to errors when the install environment is mixing packages from multiple channels.
+In the example above it is known that ``defaults`` uses ``icu 54.*`` while ``conda-forge`` relies on ``icu 56.*``.
+This mismatch can lead to errors when the install environment is mixing packages from multiple channels.
 
 .. note::
    All of conda-forge software pinning can be found `here <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_.
@@ -37,7 +37,7 @@ How to fix it?
 --------------
 
 Newer ``conda`` versions (>=4.6) introduced a strict channel priority feature.
-Run ``conda config --describe channel_priority`` command for more information.
+Run ``conda config --describe channel_priority`` for more information.
 
 
 The solution is to add the ``conda-forge`` channel on top of ``defaults`` in your ``.condarc`` file when using ``conda-forge`` packages
