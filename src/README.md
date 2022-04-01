@@ -1,13 +1,29 @@
-# The docs are built on GitHub Actions and run the ``.ci_scripts/update_docs`` script.
+The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` script.
 
 To build the docs locally, follow the steps mentioned below:
- 1.  Clone the repository into your local machine.
- 2.  Go into the main folder and run the following commands.  
- 3. ``conda env create -f ./.ci_scripts/environment.yml``
- 4. ``conda activate conda-forge-docs``
- 5. ``cd newsfeed && pip install --no-deps .``
- 6. ``cd ../src``
- 7. ``make html``
+
+1.  Clone the repository into your local machine.
+2.  Go into the main folder and run the following commands.
+
+```
+conda env create -f ./.ci_scripts/environment.yml
+```
+
+```
+conda activate conda-forge-docs
+```
+
+```
+cd newsfeed && pip install --no-deps .
+```
+
+```
+cd ../src
+```
+
+```
+make html
+```
 
 Documentation update PRs should only change the files in ``src``. 
 
@@ -94,5 +110,11 @@ No one espousing views or values contrary to the standards of our code of conduc
 
 We will contact the person who is the subject of the report to let them know what actions will be taken as a result of the report, if any.
 
+_This code-of-conduct is common to the any projects of conda-forge found here(https://github.com/conda-forge)_
+
 Our policy is to make sure that everyone aware of the initial incident is also made aware that official action has been taken, while still respecting the privacy of individuals. We may choose to make a public report of the incident, while maintaining the anonymity of those involved.
+
+
+
+
 
