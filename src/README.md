@@ -14,7 +14,7 @@ Documentation update PRs should only change the files in ``src``.
 Once the PR is merged to ``master``, you can find the auto-generated html files in ``docs`` directory.
 
 
-### Code of conduct
+# Code of conduct
 
 We adheres to the [NumFOCUS Code of Conduct](https://numfocus.org/code-of-conduct).
 
@@ -29,7 +29,7 @@ Thank you for helping make this a welcoming, friendly community for all.
 This is the short version of Code of Conduct. If you want to read more about it check out on [NumFOCUS Code of Conduct](https://numfocus.org/code-of-conduct).
 
 
-### Reporting Guidelines
+# Reporting Guidelines
 
 If you believe someone is violating the code of conduct, please report this in a timely manner. Code of conduct violations reduce the value of the community for everyone. The team at conda-forge takes reports of misconduct very seriously and is committed to preserving and maintaining the welcoming nature of our community.
 
@@ -40,7 +40,7 @@ All reports will be kept confidential. Please go through it thoroughly [Reportin
 
 
 
-### Enforcement: What Happens After a Report is Filed?
+# Enforcement: What Happens After a Report is Filed?
 ## Acknowledgment and Responding to Immediate Needs
 
 We will attempt to ensure your safety and help with any immediate needs, particularly at an in-person event. We will make every effort to acknowledge receipt within 24 hours (and we’ll aim for much more quickly than that). Have a look at the process of [What Happens After a Report is Filed?](https://numfocus.org/code-of-conduct#enforcement).
