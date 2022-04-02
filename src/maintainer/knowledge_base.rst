@@ -1540,32 +1540,34 @@ higher than the package uploaded with the ``dev`` label.
 Perl package
 ==================
 
-The most commonly used build system for perl packages is ``ExtUtils::MakeMaker``. 
+The most commonly used build system for perl packages<https://github.com/conda-forge/perl-file-which-feedstock/blob/main/recipe/meta.yaml
+
+> is ``ExtUtils::MakeMaker``. 
 For the archetypical packaging of packages of this form, you can have a look at ``perl-file-which``'s recipe.
 
 The steps are as follows: 
 
-* The name is composed of ``perl-`` + the lowered version of the CPAN name.
-* The requirements contain ``make`` for build, ``perl`` and ``perl-extutils-makemaker`` for host, and perl for run.
-* The tests section under imports lists the CPAN module that can be ``used`` in perl.
+* The name is composed of ``perl-`` + the lower-cased version of the CPAN name.
+* The requirements contain ``make`` for ``build``, ``perl`` and ``perl-extutils-makemaker`` for ``host``, and ``perl`` for ``run``.
+* The tests section under ``imports`` lists the CPAN module that can be ``used`` in perl.
 
 The script should be identical with:
 
 .. code-block::
 
   build:
-  number: 0
-  noarch: generic
-  script:
-    - perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1
-    - make
-    - make test
-    - make install VERBINST=1
+   number: 0
+   noarch: generic
+   script:
+     - perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1
+     - make
+     - make test
+     - make install VERBINST=1
 
 ``Makefile.PL`` is the crucial one that guarantees installation into the vendor section, as well as non-interference with standard files by the ``NO_PERLLOCAL`` and ``NO_PACKLIST`` switches.
 
 .. note::
- ``noarch: generic`` should be present only if the package is a pure perl one, i.e. contains no compiled c code or extensions, and that of course more requirements can be necessary.
+ ``noarch: generic`` should be present only if the package is a pure perl one (i.e. contains no compiled C code or extensions), and that of course more requirements can be necessary.
 
 
 
