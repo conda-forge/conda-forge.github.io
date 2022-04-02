@@ -1540,7 +1540,9 @@ higher than the package uploaded with the ``dev`` label.
 Perl package
 ==================
 
-The most commonly used build system for perl packages is ``ExtUtils::MakeMaker``. 
+The most commonly used build system for  `perl packages <https://github.com/conda-forge/perl-file-which-feedstock/blob/main/recipe/meta.yaml
+
+>`__ is ``ExtUtils::MakeMaker``. 
 For the archetypical packaging of packages of this form, you can have a look at ``perl-file-which``'s recipe.
 
 The steps are as follows: 
