@@ -8,6 +8,13 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2022
 ----
 
+:2022-04-03: CircleCI and Drone.io Deprecated for New Feedstocks
+
+    Due to technical issues in generating new feedstocks, we have deprecated using 
+    CircleCI and Drone.io for builds of new feedstocks. Existing CircleCI builds, 
+    if any, should be moved to azure. Existing Drone.io builds can be moved to 
+    Travis CI or cross-compiled/emulated builds on azure.
+
 :2022-03-28: PyPy 3.8+3.9 Migration
 
     We have begun rolling out packages built for PyPy3.8 and PyPy3.9. This work
