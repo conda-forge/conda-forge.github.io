@@ -706,6 +706,8 @@ for the specification on expressions.
 Miscellaneous
 =============
 
+.. _activate_scripts:
+
 Activate scripts
 ----------------
 

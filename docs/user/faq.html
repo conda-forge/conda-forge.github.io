@@ -122,6 +122,50 @@ Note that <code class="docutils literal notranslate"><span class="pre">travis-ci
 </div>
 <p>are a telltale sign that you are lacking compilers.</p>
 </div></blockquote>
+<p id="faq-compiler-required-options"><a class="reference internal" href="#faq-compiler-required-options"><span class="std std-ref">(Q)</span></a> <strong>Why don’t the C/C++ compilers automatically know how to find libraries installed by conda?</strong></p>
+<blockquote>
+<div><p>All of our toolchains are built as cross-compilers (even when they are built to run on the same
+architecture that they are targeting).  We do this because it makes it possible to then install
+them anywhere like any other conda package.  As a result, the builtin search path for the
+compilers only contains the sysroot they were built with. The compiler binary names are also
+‘prefixed’ with more complete information about the architecture and <a class="reference internal" href="../misc/00_intro.html#term-ABI"><span class="xref std std-term">ABI</span></a> they target.  So, instead
+of <code class="docutils literal notranslate"><span class="pre">gcc</span></code>, the actual binary will be named something like <code class="docutils literal notranslate"><span class="pre">x86_64-conda-linux-gnu-cc</span></code>.</p>
+<p>The conda-forge infrastructure provides <a class="reference internal" href="../maintainer/adding_pkgs.html#activate-scripts"><span class="std std-ref">activation scripts</span></a> which are run when
+you <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span></code> an environment that contains the compiler toolchain.  Those scripts set
+many environment variables that are typically used by GNU <code class="docutils literal notranslate"><span class="pre">autotools</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span></code> in the
+<code class="docutils literal notranslate"><span class="pre">standard</span></code> (i.e. builtin) build rules.  For example, you would see the variable <code class="docutils literal notranslate"><span class="pre">CC</span></code> set to
+the long compiler name <code class="docutils literal notranslate"><span class="pre">x86_64-conda-linux-gnu-cc</span></code>.  The activation scripts also set a
+<code class="docutils literal notranslate"><span class="pre">CMAKE_ARGS</span></code> variable with many arguments the conda-forge community finds helpful for
+configuring cmake build flows.  Of particular note, the activation scripts add the
+<code class="docutils literal notranslate"><span class="pre">CONDA_PREFIX/include</span></code> and <code class="docutils literal notranslate"><span class="pre">CONDA_PREFIX/lib</span></code> paths to the appropriate <code class="docutils literal notranslate"><span class="pre">FLAGS</span></code> environment
+variables (<code class="docutils literal notranslate"><span class="pre">CLAGS</span></code>, <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code>, <code class="docutils literal notranslate"><span class="pre">LDFLAGS</span></code>, etc) so that many build systems will pick them up correctly.</p>
+<p>What do you do if you have custom <code class="docutils literal notranslate"><span class="pre">FLAGS</span></code> that your project requires for it’s build or you can’t
+build with some of the flags supplied by conda-forge?  What if you are building something that
+is setup for cross-compiling and expects <code class="docutils literal notranslate"><span class="pre">CC</span></code> to contain the name of the target toolchain but
+wants to be able to build some things for the build-host to use during the build by just calling
+<code class="docutils literal notranslate"><span class="pre">gcc</span></code>?</p>
+<p>The <a class="reference internal" href="#faq-compiler-metapkg"><span class="std std-ref">compiler metapackages mentioned above</span></a> also install packages that
+create symlinks of the short names (like <code class="docutils literal notranslate"><span class="pre">gcc</span></code>) to the actual toolchain binary names (like
+<code class="docutils literal notranslate"><span class="pre">x86_64-conda-linux-gnu-cc</span></code>) for toolchains that are targeting the system they are running on.</p>
+<dl class="simple">
+<dt>A new optional package called <code class="docutils literal notranslate"><span class="pre">conda-gcc-specs</span></code> can also be installed that adds:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-include</span> <span class="pre">$CONDA_PREFIX/include</span></code> to compile commands</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-rpath</span> <span class="pre">$CONDA_PREFIX/lib</span> <span class="pre">-rpath-link</span> <span class="pre">$CONDA_PREFIX/lib</span> <span class="pre">-disable-new-dtags</span> <span class="pre">-L</span> <span class="pre">$CONDA_PREFIX/lib</span></code> to link
+commands</p></li>
+</ul>
+</dd>
+</dl>
+<p>Using the compiler metapackage with <code class="docutils literal notranslate"><span class="pre">conda-gcc-specs</span></code> you can incude and link libraries installed
+in <code class="docutils literal notranslate"><span class="pre">CONDA_PREFIX</span></code> without having to provide any conda-specific cmdline arguments.</p>
+</div></blockquote>
+<p id="faq-compiler-use-system-libs"><a class="reference internal" href="#faq-compiler-use-system-libs"><span class="std std-ref">(Q)</span></a> <strong>How can I make conda gcc use my system libraries?</strong></p>
+<blockquote>
+<div><p>First, the conda-forge infrastructure tries very hard to avoid using any of the system-provided
+libraries, otherwise the dependencies betweeen packages quickly become incomplete and nothing works.</p>
+<p>However, as an end user, when not building something that will be packaged and distributed via
+conda-forge, you may need to link against libraries on your system instead of libraries in your
+conda environment.  This can be accomplished (for gcc) by passing <code class="docutils literal notranslate"><span class="pre">-sysroot=/</span></code> on the cmdline.</p>
+</div></blockquote>
 <p id="faq-cuda-compiler-header"><a class="reference internal" href="#faq-cuda-compiler-header"><span class="std std-ref">(Q)</span></a> <strong>How can I compile CUDA (host or device) codes in my environment?</strong></p>
 <blockquote>
 <div><p>Unfortunately, this is not possible with conda-forge’s current infrastructure (<code class="docutils literal notranslate"><span class="pre">nvcc</span></code>, <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code>, etc) if there is no local CUDA Toolkit installation. In particular, the <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> package provided on conda-forge is a <em>wrapper package</em> that exposes the actual <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler to our CI infrastructure in a <code class="docutils literal notranslate"><span class="pre">conda</span></code>-friendly way; it does not contain the full <code class="docutils literal notranslate"><span class="pre">nvcc</span></code> compiler toolchain. One of the reasons is that CUDA headers like <code class="docutils literal notranslate"><span class="pre">cuda.h</span></code>, <code class="docutils literal notranslate"><span class="pre">cuda_runtime.h</span></code>, etc, which are needed at compile time, are not redistributable according to NVIDIA’s EULA. Likewise, the <code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code> package only contains CUDA runtime libraries and not the compiler toolchain.</p>
