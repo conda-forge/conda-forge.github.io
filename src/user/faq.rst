@@ -79,7 +79,7 @@ FAQ
 
   All of our toolchains are built as cross-compilers (even when they are built to run on the same
   architecture that they are targeting).  We do this because it makes it possible to then install
-  them anywhere like any other conda package.  As a result, the buildin search path for the
+  them anywhere like any other conda package.  As a result, the builtin search path for the
   compilers only contains the sysroot they were built with. The compiler binary names are also
   'prefixed' with more complete information about the architecture and :std:term:`ABI` they target.  So, instead
   of ``gcc``, the actual binary will be named something like ``x86_64-conda-linux-gnu-cc``.
@@ -98,7 +98,7 @@ FAQ
   build with some of the flags supplied by conda-forge?  What if you are building something that
   is setup for cross-compiling and expects ``CC`` to contain the name of the target toolchain but
   wants to be able to build some things for the build-host to use during the build by just calling
-  ``gcc``?  You can filter out the 
+  ``gcc``? 
 
   The :ref:`compiler metapackages mentioned above <faq_compiler_metapkg>` also install packages that
   create symlinks of the short names (like ``gcc``) to the actual toolchain binary names (like
