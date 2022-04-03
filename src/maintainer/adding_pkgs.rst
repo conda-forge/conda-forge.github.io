@@ -3,15 +3,19 @@
 Contributing packages
 *********************
 
+Process
+===================
 
-To submit a package to the ``conda-forge`` channel, add its ``recipe`` and licence to the ``staged-recipes`` repository and create a pull request. Once the pull request is merged, the package becomes available
-on the ``conda-forge`` channel. Note that contributing a package makes you the ``maintainer`` of that package.
+To submit a package to conda-forge one has to follow the steps:
 
-A maintainer is responsible for maintaining the feedstock repository and packages as well as their future versions and has push access to the feedstock repositories of only the packages it maintains. 
-You can learn more about the roles of a maintainer `here. <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`__
+* Step 1. The staging process (add recipe and license)
+ To submit a package to the ``conda-forge`` channel, one has to add its recipe and license, with the help of the `staging process <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-staging-process>`_, to the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`_ and create a pull request.
 
-The sections below provide detailed instructions on contributing packages to conda-forge.
+* Step 2. Post Staging process.
+ To know what happens once a PR has been merged have a look at our `post staging process <https://conda-forge.org/docs/maintainer/adding_pkgs.html#post-staging-process>`_.
 
+* Step 3. Maintaining the package.
+ Note that contributing a package to ``conda-forge`` makes you the maintainer of that package. A maintainer is responsible for maintaining the feedstock repository and packages as well as their future versions and has to push access to the feedstock repositories of only the packages it maintains. Learn more about the `roles of a maintainer <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`_. 
 
 .. _creating_recipes:
 
@@ -101,7 +105,7 @@ After merging the :term:`PR`, our :term:`CI` infrastructure will build the packa
 
 
 Post staging process
---------------------
+===================
 
 * After the PR is merged, our :term:`CI` services will create a new git repo automatically. For example, the recipe for a package named ``pydstool`` will be moved to a new repository `https://github.com/conda-forge/pydstool-feedstock <https://github.com/conda-forge/pydstool-feedstock>`_. This process is automated through a CI job on the ``conda-forge/staged-recipes`` repo. It sometimes fails due to API rate limits and will automatically retry itself. If your feedstock has not been created after a day or so, please get in touch with the ``conda-forge/core`` team for help.
 * CI services will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to `https://anaconda.org/conda-forge <https://anaconda.org/conda-forge>`_
@@ -110,7 +114,7 @@ Post staging process
 
 
 Maintainer role
----------------
+===================
 
 The maintainer's job is to:
 
