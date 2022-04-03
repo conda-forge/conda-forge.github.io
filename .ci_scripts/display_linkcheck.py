@@ -7,8 +7,8 @@ status_colors = dict(
     broken='red',
     redirected='yellow',
     working='green',
-    ignored='grey',
-    unchecked='grey',
+    ignored='white',
+    unchecked='white',
  )
 
 def create_parser():
