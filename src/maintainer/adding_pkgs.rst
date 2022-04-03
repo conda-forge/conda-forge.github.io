@@ -52,7 +52,7 @@ Step-by-step Instructions
 #. Fork the `example recipes
    <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
    repository.
-#. Create a new branch from the staged-recipes ``master`` branch.
+#. Create a new branch from the staged-recipes ``main`` branch.
 #. Within your forked copy, generate a new folder in the recipes subdirectory
    and copy the `meta.yml
    <https://github.com/conda-forge/staged-recipes/blob/master/recipes/
@@ -160,21 +160,21 @@ much easier to review. The following steps will reset your fork of
 staged-recipes and should be executed from within a clone of your forked
 staged-recipes directory.
 
-#. Checkout your master branch::
+#. Checkout your main branch::
 
-     git checkout master
+     git checkout main
 
 #. Define the conda-forge/staged-recipes repository as ``upstream`` (if you have not already done so).::
 
      git remote add upstream https://github.com/conda-forge/staged-recipes.git
 
-#. Pull all of the upstream commits from the upstream master branch.::
+#. Pull all of the upstream commits from the upstream main branch.::
 
-     git pull --rebase upstream master
+     git pull --rebase upstream main
 
 #. Push all of the changes to your fork on GitHub (make sure there are not any changes on GitHub that you need because they will be overwritten).::
 
-     git push origin master --force
+     git push origin main --force
 
 Once these steps are complete, you can continue with the steps in :ref:`staging_steps` to stage your new package recipe using your existing staged-recipes fork.
 

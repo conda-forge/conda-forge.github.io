@@ -80,10 +80,10 @@ Here we assume that you would like to update the feedstock ``<feedstock>``. Feed
 
    This step is only required if you have forked some time ago and your fork is missing commits from the feedstock at conda-forge.
 
-   - Make sure you are on the master branch: ``git checkout master``
+   - Make sure you are on the main branch: ``git checkout main``
    - Register conda-forge's feedstock with ``git remote add upstream https://github.com/conda-forge/<feedstock>``
    - Fetch the latest updates with ``git fetch upstream``
-   - Pull in the latest changes into your master branch: ``git rebase upstream/master``
+   - Pull in the latest changes into your main branch: ``git rebase upstream/main``
 
 #. Creating your changes in a new branch
 
