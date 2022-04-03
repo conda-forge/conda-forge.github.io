@@ -30,8 +30,10 @@ pushd src
 # -W --keep-going: list all warnings but fail build in case there are any
 # -n: check validity of all links
 make html SPHINXOPTS="-W --keep-going -n"
-make linkcheck > /dev/null
+linkcheck_failed=0
+make linkcheck > /dev/null || linkcheck_failed=1
 python ../.ci_scripts/display_linkcheck.py _build/linkcheck/output.json
+test "$linkcheck_failed" -eq 0
 mv _build/html ../docs
 rm -rf _build
 popd
