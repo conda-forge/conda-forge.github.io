@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Announcements &#8212; conda-forge 2022.04.01 documentation</title>
+    <title>Announcements &#8212; conda-forge 2022.04.03 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="introduction.html" title="A brief introduction"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.04.01 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.04.03 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Announcements</a></li> 
@@ -75,8 +75,15 @@
 <section id="id1">
 <h2>2022<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <dl class="field-list">
-<dt class="field-odd">2022-03-28</dt>
-<dd class="field-odd"><p>PyPy 3.8+3.9 Migration</p>
+<dt class="field-odd">2022-04-03</dt>
+<dd class="field-odd"><p>CircleCI and Drone.io Deprecated for New Feedstocks</p>
+<p>Due to technical issues in generating new feedstocks, we have deprecated using
+CircleCI and Drone.io for builds of new feedstocks. Existing CircleCI builds,
+if any, should be moved to azure. Existing Drone.io builds can be moved to
+Travis CI or cross-compiled/emulated builds on azure.</p>
+</dd>
+<dt class="field-even">2022-03-28</dt>
+<dd class="field-even"><p>PyPy 3.8+3.9 Migration</p>
 <p>We have begun rolling out packages built for PyPy3.8 and PyPy3.9. This work
 may take a few weeks. See <a class="reference internal" href="tipsandtricks.html#pypy"><span class="std std-ref">Using PyPy as an interpreter</span></a> in the user docs for information on how to
 set up a PyPy environment. Please report issues to the PyPy developers at
@@ -86,8 +93,8 @@ migrated feedstocks will not be built for PyPy3.7 and that version of the
 python interpreter will not be receiving updates. As usual, you can track the
 status of the migration on our status page.</p>
 </dd>
-<dt class="field-even">2022-03-06</dt>
-<dd class="field-even"><p>Travis CI Usage Deprecated for <code class="docutils literal notranslate"><span class="pre">win_*</span></code>, <code class="docutils literal notranslate"><span class="pre">osx_*</span></code>, and <code class="docutils literal notranslate"><span class="pre">linux_64</span></code> Platforms</p>
+<dt class="field-odd">2022-03-06</dt>
+<dd class="field-odd"><p>Travis CI Usage Deprecated for <code class="docutils literal notranslate"><span class="pre">win_*</span></code>, <code class="docutils literal notranslate"><span class="pre">osx_*</span></code>, and <code class="docutils literal notranslate"><span class="pre">linux_64</span></code> Platforms</p>
 <p>Due to changes in how Travis CI tracks open-source build time, we are deprecating using it
 for the <code class="docutils literal notranslate"><span class="pre">win_*</span></code>, <code class="docutils literal notranslate"><span class="pre">osx_*</span></code>, and <code class="docutils literal notranslate"><span class="pre">linux_64</span></code> platforms. Travis CI will be available only
 for platforms in their <a class="reference external" href="https://docs.travis-ci.com/user/billing-overview/#partner-queue-solution">partner queues</a>.
@@ -95,8 +102,8 @@ These platforms currently include <code class="docutils literal notranslate"><sp
 raise an error if Travis CI is used for a non-partner queue platform in the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>
 GitHub organization.</p>
 </dd>
-<dt class="field-odd">2022-02-13</dt>
-<dd class="field-odd"><p>Default branch migration from <code class="docutils literal notranslate"><span class="pre">master</span></code> to <code class="docutils literal notranslate"><span class="pre">main</span></code></p>
+<dt class="field-even">2022-02-13</dt>
+<dd class="field-even"><p>Default branch migration from <code class="docutils literal notranslate"><span class="pre">master</span></code> to <code class="docutils literal notranslate"><span class="pre">main</span></code></p>
 <p>We will be migrating the default branches of all feedstocks and other <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> repos
 from <code class="docutils literal notranslate"><span class="pre">master</span></code> to <code class="docutils literal notranslate"><span class="pre">main</span></code>. We do expect some minor hiccups while this migration is
 going on. You will need to change to the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch from <code class="docutils literal notranslate"><span class="pre">master</span></code> on any local clones via the
@@ -573,7 +580,7 @@ bear with us.</p>
         <li class="right" >
           <a href="introduction.html" title="A brief introduction"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.04.01 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.04.03 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Announcements</a></li> 
