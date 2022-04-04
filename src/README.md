@@ -13,6 +13,8 @@ conda env create -f ./.ci_scripts/environment.yml
 conda activate conda-forge-docs
 ```
 
+\_
+
 ```
 cd newsfeed && pip install --no-deps .
 ```
@@ -54,25 +56,25 @@ Examples of unacceptable behavior by participants include:
 - Public or private harassment.
 - Sharing private content, such as emails sent privately or non-publicly, or direct message history, without the sender’s consent.
 - Posting sexually explicit or violent material.
-- Other unethical or unprofessional conduct
-- Advocating for, or encouraging, any of the above behaviors
+- Other unethical or unprofessional conduct.
+- Advocating for, or encouraging, any of the above behaviors.
 
 ## Reporting a Misconduct
 
-- You can reach the Project maintainers.
+- You can reach the Project [maintainers](https://conda-forge.org/docs/orga/getting-in-touch.html).
 
 ## Enforcement: What Happens After a Report is Filed
 
-- Reviewing the Report.
-- Contacting the Person Reported.
+- Reviewing the report.
+- Contacting the person reported.
 
 ## Response and Potential Consequences
 
 - Nothing (if we determine that no violation occurred).
 - Private feedback or reprimand from Conda-forge to the individual(s) involved.
 - Removing a person from Conda-forge membership or other formal affiliation.
-- Publishing an account of the harassment and calling for the resignation of the alleged harasser from their responsibilities (usually pursued by people without formal authority: may be called for if the person is the event leader, or refuses to stand aside from the conflict of interest, or similar)
-- Any other response that Conda-forge deems necessary and appropriate to the situation
+- Publishing an account of the harassment and calling for the resignation of the alleged harasser from their responsibilities (usually pursued by people without formal authority: may be called for if the person is the event leader, or refuses to stand aside from the conflict of interest, or similar).
+- Any other response that Conda-forge deems necessary and appropriate to the situation.
 
 _This code-of-conduct is common to the following projects:_
 
@@ -92,4 +94,4 @@ _This code-of-conduct is common to the following projects:_
 
 This Code of Conduct is adapted from the [Contributor Conda-forge][code of conduct]
 
-[homepage]: https://conda-forge.org/docs/orga/governance.html
+[code of conduct]: https://conda-forge.org/docs/orga/governance.html
