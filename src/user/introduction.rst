@@ -13,7 +13,7 @@ What is conda-forge?
 
 **Missing a package that you would love to install with conda?** - Chances are we have already packaged it for you! You can `search <https://anaconda.org/>`__ for packages online as well as keep an eye out for packages from our ``conda-forge`` organization.
 
-We value all kinds of contributions - not just code. A few recommended ways to start contributing to conda-forge are:
+We value all kinds of contributions — not just code. A few recommended ways to start contributing to ``conda-forge`` are:
 
  - `Contribute new packages <https://conda-forge.org/docs/maintainer/adding_pkgs.html>`_
  - Help update and `maintain packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-pkgs>`_
