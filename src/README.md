@@ -13,8 +13,6 @@ conda env create -f ./.ci_scripts/environment.yml
 conda activate conda-forge-docs
 ```
 
-\_
-
 ```
 cd newsfeed && pip install --no-deps .
 ```
@@ -59,9 +57,9 @@ Examples of unacceptable behavior by participants include:
 - Other unethical or unprofessional conduct.
 - Advocating for, or encouraging, any of the above behaviors.
 
-## Reporting a Misconduct
+## Reporting Misconduct
 
-- You can reach the Project [maintainers](https://conda-forge.org/docs/orga/getting-in-touch.html).
+- You can reach the project maintainers [here](https://conda-forge.org/docs/orga/getting-in-touch.html).
 
 ## Enforcement: What Happens After a Report is Filed
 
@@ -92,6 +90,4 @@ _This code-of-conduct is common to the following projects:_
 
 ## Attribution
 
-This Code of Conduct is adapted from the [Contributor Conda-forge][code of conduct]
-
-[code of conduct]: https://conda-forge.org/docs/orga/governance.html
+This Code of Conduct is adapted from the [Contributor Conda-forge](https://conda-forge.org/docs/orga/governance.html)
