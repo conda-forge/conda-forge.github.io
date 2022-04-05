@@ -2,7 +2,7 @@ Contracting Information
 #######################
 
 If you are interested in a contractual engagement to solve a specific problem that you're facing, this page details the kinds of services that are available to you. Conda-forge, as an entity, does not have the ability to engage in a contractual arrangement as of now.
-However, there are a number of community members that you may engage with. 
+However, there are a number of community members that you may engage with.
 Conda-forge does not endorse anyone (individuals or companies) listed on this page.
 
 
@@ -23,7 +23,7 @@ Services Offered: Architecture and Technical Design Advisory, Cloud Strategy and
 
 Contact Information: sales@lab49.com
 
-Background / Description: Lab49 is a full service strategy, design and technology consultancy with a global reach focused on financial services. We specialize in product development across the full stack, from data and analytics, through services, through next generation user interfaces. 
+Background / Description: Lab49 is a full service strategy, design and technology consultancy with a global reach focused on financial services. We specialize in product development across the full stack, from data and analytics, through services, through next generation user interfaces.
 
 
 Quansight
@@ -41,6 +41,6 @@ Becoming a Service Provider
 
 The conda-forge core team reserves the right to unilaterally update this list at any time for any reason.
 If you are a service provider and are interested in being added to this list please open up a pull request against the conda-forge.github.io repository.
-Add yourself to this list and detailing the services you provide. 
+Add yourself to this list and detailing the services you provide.
 Please be brief and link to existing materials on your own website where possible.
 Then, when ready, ping @conda-forge/core for review and merging.

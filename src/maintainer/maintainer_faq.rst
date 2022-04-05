@@ -61,7 +61,7 @@ FAQ
 
   TL;DR: Use ``Ninja`` or ``NMake Makefiles JOM`` as the CMake generator (``cmake -G"Ninja"``), and add ``build`` requirements for ``ninja`` or ``jom``.
 
-  Sadly in the Azure Windows images, `MSBuild.exe` is not correctly setup for CMake builds with the ``Visual Studio`` generators. To work around this, you can use a different CMake generator, e.g. ``cmake -GNinja`` or ``cmake -G"NMake Makefiles JOM"``. These two are preferred because they allow for concurrent builds in contrast to e.g. only using ``cmake -G"NMake Makefiles"``
+  Sadly in the Azure Windows images, ``MSBuild.exe`` is not correctly setup for CMake builds with the ``Visual Studio`` generators. To work around this, you can use a different CMake generator, e.g. ``cmake -GNinja`` or ``cmake -G"NMake Makefiles JOM"``. These two are preferred because they allow for concurrent builds in contrast to e.g. only using ``cmake -G"NMake Makefiles"``
 
 .. _mfaq_anaconda_delay:
 
@@ -79,7 +79,7 @@ FAQ
 
   - ``conda install boa -c conda-forge``
   - ``conda mambabuild myrecipe``
-  
+
   For more details visit `this <https://boa-build.readthedocs.io/en/latest/mambabuild.html>`__ page.
 
 .. _mfaq_conda_verify:

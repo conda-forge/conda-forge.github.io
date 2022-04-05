@@ -7,7 +7,7 @@ Contributing packages
 To submit a package to the ``conda-forge`` channel, add its ``recipe`` and licence to the ``staged-recipes`` repository and create a pull request. Once the pull request is merged, the package becomes available
 on the ``conda-forge`` channel. Note that contributing a package makes you the ``maintainer`` of that package.
 
-A maintainer is responsible for maintaining the feedstock repository and packages as well as their future versions and has push access to the feedstock repositories of only the packages it maintains. 
+A maintainer is responsible for maintaining the feedstock repository and packages as well as their future versions and has push access to the feedstock repositories of only the packages it maintains.
 You can learn more about the roles of a maintainer `here. <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`__
 
 The sections below provide detailed instructions on contributing packages to conda-forge.
@@ -640,17 +640,17 @@ installed on your machine if you are building a package for Linux.
 For MacOS, it will prompt you to select a location for the SDK (e.g. ``export OSX_SDK_DIR=/opt``) to be downloaded.
 
 .. code-block:: bash
-        
+
     $ cd ~/staged-recipes
     $ python build-locally.py
 
 If you know which image you want to build, you can specify it as an argument to the script.
 
 .. code-block:: bash
-        
+
     $ cd ~/staged-recipes
     $ python build-locally.py <VARIANT>
- 
+
 where ``<VARIANT>`` is one of the file names in the ``.ci_support/`` directory, e.g. ``linux64``, ``osx64``, and ``linux64_cuda102``.
 
 

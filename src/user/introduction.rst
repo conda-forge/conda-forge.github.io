@@ -113,7 +113,7 @@ If you'd like to credit ``conda-forge`` in your work, please cite our `Zenodo en
   Software Distribution Built on the conda Package Format and Ecosystem.
   Zenodo. http://doi.org/10.5281/zenodo.4774216
 
-or in `bibtex` it is
+or in *bibtex* it is
 
 ::
 

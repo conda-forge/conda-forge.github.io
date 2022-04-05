@@ -10,41 +10,41 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
 :2022-03-06: Travis CI Usage Deprecated for ``win_*``, ``osx_*``, and ``linux_64`` Platforms
 
-    Due to changes in how Travis CI tracks open-source build time, we are deprecating using it 
-    for the ``win_*``, ``osx_*``, and ``linux_64`` platforms. Travis CI will be available only 
+    Due to changes in how Travis CI tracks open-source build time, we are deprecating using it
+    for the ``win_*``, ``osx_*``, and ``linux_64`` platforms. Travis CI will be available only
     for platforms in their `partner queues <https://docs.travis-ci.com/user/billing-overview/#partner-queue-solution>`_.
-    These platforms currently include ``ppc64le``, ``aarch64`` and ``s390x``. Rerendering will 
+    These platforms currently include ``ppc64le``, ``aarch64`` and ``s390x``. Rerendering will
     raise an error if Travis CI is used for a non-partner queue platform in the ``conda-forge``
     GitHub organization.
 
 :2022-02-13: Default branch migration from ``master`` to ``main``
 
     We will be migrating the default branches of all feedstocks and other ``conda-forge`` repos
-    from ``master`` to ``main``. We do expect some minor hiccups while this migration is 
-    going on. You will need to change to the ``main`` branch from ``master`` on any local clones via the 
+    from ``master`` to ``main``. We do expect some minor hiccups while this migration is
+    going on. You will need to change to the ``main`` branch from ``master`` on any local clones via the
     following git commands:
-    
+
     .. code-block::
-        
+
         git branch -m master main
         git fetch origin
         git branch -u origin/main main
         git remote set-head origin -a
 
-    If you encounter any problems, please comment on this Github 
-    `issue <https://github.com/conda-forge/conda-forge.github.io/issues/1162>`_. 
+    If you encounter any problems, please comment on this Github
+    `issue <https://github.com/conda-forge/conda-forge.github.io/issues/1162>`_.
 
 2021
 ----
 
 :2021-12-02: CentOS 7 docker images are now the default
 
-    We are moving all ``conda-forge`` ``linux-64`` jobs to use CentOS 7-based docker images. 
-    This will help users avoid ``conda/mamba`` solver errors where dependencies that need 
-    CentOS 7 cannot be installed. Importantly, our compiler stack will still default to using 
-    a CentOS 6 sysroot unless the recipe explicitly lists the CentoOS 7 sysroot package. This 
+    We are moving all ``conda-forge`` ``linux-64`` jobs to use CentOS 7-based docker images.
+    This will help users avoid ``conda/mamba`` solver errors where dependencies that need
+    CentOS 7 cannot be installed. Importantly, our compiler stack will still default to using
+    a CentOS 6 sysroot unless the recipe explicitly lists the CentoOS 7 sysroot package. This
     build configuration means that our core system ABI on linux will remain largely CentOS 6-compatible,
-    keeping support for older systems largely intact. We will reconsider moving the default ABI to 
+    keeping support for older systems largely intact. We will reconsider moving the default ABI to
     CentOS 7 at a later date.
 
 :2021-11-17: ``cloud.drone.io`` no longer working

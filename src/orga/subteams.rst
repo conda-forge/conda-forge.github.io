@@ -27,7 +27,7 @@ The core responsibilities of this team are as follows:
 - Maintain the infrastructure for ``CFEP-13``.
 - Maintain automated ways to recover and reprovision ``conda-forge`` systems.
 - Perform ongoing security maintenance tasks.
-- Provision new members of `core` with access to all ``conda-forge`` systems, credentials
+- Provision new members of *core* with access to all ``conda-forge`` systems, credentials
   and keys.
 
 This team will operate via the following rules:

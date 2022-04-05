@@ -477,7 +477,7 @@ Including a no-mpi build
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Some packages (e.g. hdf5) may want a no-mpi build, in addition to the mpi builds.
-To do this, add `nompi` to the mpi matrix:
+To do this, add *nompi* to the mpi matrix:
 
 .. code-block:: yaml
 
@@ -697,7 +697,7 @@ OpenMP
 ------
 
 You can enable OpenMP on macOS by adding the ``llvm-openmp`` package to the ``build`` section of the ``meta.yaml``.
-For Linux OpenMP support is on by default, however it's better to explicitly depend on the `libgomp` package which is the OpenMP
+For Linux OpenMP support is on by default, however it's better to explicitly depend on the *libgomp* package which is the OpenMP
 implementation from the GNU project.
 
  .. code-block:: yaml
@@ -917,9 +917,9 @@ which restricts the corresponding conda-forge recipes from becoming ``noarch``.
 Therefore, some conda-forge recipes only create an actual package on specific Python versions and are otherwise an
 empty placeholder. This allows them to be safely installed under all Python versions and makes using ``skips`` unnecessary.
 
-Similarly, some packages are `only` platform-specific dependency of a package, such as ``pywin32``, and have
-helper metapackages which can help recipes stay ``noarch``. The version of the `actual` package required
-can be controlled with ``run_constrained``, even for packages not available on all platforms.
+Similarly, some packages are ``only`` platform-specific dependency of a package, such as ``pywin32``, and have
+helper metapackages which can help recipes stay ``noarch``. The version of the *actual* package required
+can be controlled with *run_constrained*, even for packages not available on all platforms.
 
 Currently available packages:
 
@@ -962,7 +962,7 @@ Noarch builds
 Noarch packages are packages that are not architecture specific and therefore only have to be built once.
 
 Declaring these packages as ``noarch`` in the ``build`` section of the meta.yaml, reduces shared CI resources.
-Therefore all packages that qualify to be noarch packages `should` be declared as such.
+Therefore all packages that qualify to be noarch packages *should* be declared as such.
 
 
 .. _noarch:

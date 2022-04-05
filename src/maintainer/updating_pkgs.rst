@@ -53,7 +53,7 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
         enabled `two-factor authentication
         <https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa>`_.
    - Fetch the remote: ``git fetch regro-cf-autotick-bot``
-   - Checkout the branch of the PR, git should automatically link it to the `regro-cf-autotick-bot` remote if this is the only remote with a branch of that name.
+   - Checkout the branch of the PR, git should automatically link it to the *regro-cf-autotick-bot* remote if this is the only remote with a branch of that name.
    - If there are multiple remotes with this branch name, you need to first checkout the remote branch and then turn it into a local branch: ``git checkout regro-cf-autotick-bot/<branch> && git checkout -b <branch>``
    - Commit and push on that branch, if the remote was not correctly setup, use ``git push -u regro-cf-autotick-bot <branch>``.
 
@@ -187,7 +187,7 @@ Note that for long build logs one can do
 
 to save it in a text file for future inspection.
 
-Once built, you can find the finished package in the ``build_artifacts`` directory in your feedstock.  
+Once built, you can find the finished package in the ``build_artifacts`` directory in your feedstock.
 
 .. _maint_fix_broken_packages:
 
@@ -230,7 +230,7 @@ an issue in the feedstock repository with the following title:
 ``@conda-forge-admin, please add user @username``
 
 where ``username`` is the username of the new maintainer to be added.
-A PR will be automatically created and a maintainer or a member of the ``core`` team, in case no maintainer is active anymore, can then merge this PR to add the user. 
+A PR will be automatically created and a maintainer or a member of the ``core`` team, in case no maintainer is active anymore, can then merge this PR to add the user.
 To contact core, ping them by mentioning @conda-forge/core in a comment or, if you haven't heard back in a while or are new to conda-forge, contact them through the community `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`__.
 
 .. note::
@@ -245,7 +245,7 @@ Maintaining several versions
 ============================
 
 If you'd like to maintain more than one version of your package, you can use branches on the feedstock. To do this,
-fork your feedstock and make a meaningful branch name (e.g., `v1.X` or `v1.0`).
+fork your feedstock and make a meaningful branch name (e.g., *v1.X* or *v1.0*).
 Make the required changes to the recipe and rerender the feedstock. Then push this branch
 from your fork to the upstream feedstock. Our CI services will automatically build any
 branches in addition to the default branch.
