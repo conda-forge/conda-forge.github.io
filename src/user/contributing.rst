@@ -49,4 +49,12 @@ We are glad to know that you would like to contribute to the ``conda-forge`` doc
 5. Submit a `pull request
    <https://help.github.com/articles/about-pull-requests/>`_ to the main repository proposing your changes.
 
+   Writing guidelines:
+   1. Identify your audience and Understand their skill level.
+   2. Match the technical language with to the audience's skill level proficiency.
+   3. Try to Keep it simple.Incase,if you have to use a lot of complicated terms provide a glossary of key terms
+   4. Address the audience directly as user(s).
+   5. While mentioning about an action, use the "command" form of the verb: "Choose an option from the menu and press Enter."
+   6. For reference,Provide links to related content.
+
 Happy contributing!
