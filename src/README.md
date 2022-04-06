@@ -10,12 +10,11 @@ To build the docs locally, follow the steps mentioned below:
  7. ``make html``
 
 
- Conda-forge adheres to the NumFOCUS Code of Conduct. (https://numfocus.org/code-of-conduct)
+Conda-forge adheres to the NumFOCUS Code of Conduct. (https://numfocus.org/code-of-conduct)
 
- ## Scope
+## Scope
 
- This code of conduct applies to all spaces managed by conda-forge, including all public and private mailing lists, issue trackers, wikis, forums, and any other communication channel used by our community. The code of conduct equally applies at conda-forge events and governs standards of behavior for attendees, speakers, volunteers, booth staff, and event sponsors.
-
+This code of conduct applies to all spaces managed by conda-forge, including all public and private mailing lists, issue trackers, wikis, forums, and any other communication channel used by our community. The code of conduct equally applies at conda-forge events and governs standards of behavior for attendees, speakers, volunteers, booth staff, and event sponsors.
 
 ## Code of Conduct 
 
@@ -29,9 +28,7 @@ To build the docs locally, follow the steps mentioned below:
 - Be inquisitive. Nobody knows everything! Asking questions early avoids many problems later, so we encourage questions, although we may direct them to the appropriate forum. We will try hard to be responsive and helpful.
 - Be careful in the words that we choose. We are careful and respectful in our communication and we take responsibility for our own speech. Be kind to others. Do not insult or put down other members of the community.
 
-
 Thank you for helping make this a welcoming, friendly community for all.
-
 
 ## Examples of Unacceptable Behaviours 
 
@@ -45,7 +42,7 @@ We will not accept harassment or other exclusionary behaviors, such as:
 - Inappropriate physical contact and/or unwelcome sexual attention or sexual comments
 - Sexist, racist, or otherwise discriminatory jokes and language
 - Trolling or insulting and derogatory comments
-- Written or verbal comments which have the effect of excluding people on the basis of membership in a specific group, including level of   experience, gender, gender identity and expression, sexual orientation, disability, neurotype, personal appearance, body size, race, ethnicity, age, religion, or nationality
+- Written or verbal comments which have the effect of excluding people on the basis of membership in a specific group, including level of experience, gender, gender identity and expression, sexual orientation, disability, neurotype, personal appearance, body size, race, ethnicity, age, religion, or nationality
 - Public or private harassment
 - Sharing private content, such as emails sent privately or non-publicly, or direct message history, without the sender’s consent
 - Continuing to initiate interaction (such as photography, recording, messaging, or conversation) with someone after being asked to stop
@@ -55,19 +52,21 @@ We will not accept harassment or other exclusionary behaviors, such as:
 - Advocating for, or encouraging, any of the above behaviors
 
 ## Reporting Guidelines
+
 If you believe someone is violating the code of conduct, please report this in a timely manner. Code of conduct violations reduce the value of the community for everyone. The team at conda-forge takes reports of misconduct very seriously and is committed to preserving and maintaining the welcoming nature of our community.
 
 All reports will be kept confidential.
 
 If you feel your safety is in jeopardy or the situation is an emergency, we urge you to contact local law enforcement before making a report to conda-forge. (In the U.S., dial 911.)
 
-
 ## Conflicts of Interest
+
 In the event of any conflict of interest, the team member will immediately notify the Board and recuse themselves if necessary.
 
 If you are concerned about making a report that will be read by any of the above individuals, please reach out to one of the members of the conda-forge Board.
 
 ## What to Include in a Report
+
 Our ability to address any code of conduct breaches in a timely and effective manner is impacted by the amount of information you can provide, so, our reporting form asks you to include as much of the following information as you can:
 
 - Your contact info (so we can get in touch with you if we need to follow up). This will be kept confidential. If you wish to remain anonymous, your information will not be shared beyond the person receiving the initial report.
@@ -80,6 +79,7 @@ Our ability to address any code of conduct breaches in a timely and effective ma
 - Any other relevant information you believe we should have
  
 ## Reviewing the Report
+
 conda-forge will review the incident as quickly as possible and determine:
 
 - Whether this is an ongoing situation, or if there is a threat to anyone’s physical safety
@@ -88,8 +88,8 @@ conda-forge will review the incident as quickly as possible and determine:
 - Who the bad actor was, if any
 - If the incident took place at an event or meetup or within the community channels of a conda-forge project, the conda-forge Code of Conduct Enforcement Team will reach out to the relevant organizers/community managers/project leaders as necessary to follow up on the incident.
 
- 
 ## Response and Potential Consequences
+
 Once conda-forge has completed our investigation of the report, we will make a decision as to how to respond. The person making a report will not normally be consulted as to the proposed resolution of the issue, except insofar as we need to understand how to help them feel safe.
 
 Potential consequences for violating the conda-forge code of conduct include:
@@ -113,14 +113,9 @@ Potential consequences for violating the conda-forge Code of Conduct at an in-pe
 - Requiring that the person not volunteer for future events conda-forge runs (either indefinitely or for a certain time period)
 - Expelling the person from the event without a refund
 
-
 We will contact the person who is the subject of the report to let them know what actions will be taken as a result of the report, if any.
 
 Our policy is to make sure that everyone aware of the initial incident is also made aware that official action has been taken, while still respecting the privacy of individuals. conda-forge may choose to make a public report of the incident, while maintaining the anonymity of those involved.
-
-
-
-
 
 Documentation update PRs should only change the files in ``src``. 
 
