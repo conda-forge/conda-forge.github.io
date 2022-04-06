@@ -83,11 +83,11 @@ FAQ
 
 .. _faq_api_abi_breakage:
 
-:ref:`(Q) <faq_api_abi_breakage>` **How to handle a ABI/API breakage of a package?**
+:ref:`(Q) <faq_api_abi_breakage>` **How to handle breaking of a package due to ABI/API incompatibility?**
 
-  If your package breaks, here are a few steps you can take to fix it:
+  If your package breaks due to ABI/API incompatibility, here are a few steps you can take to fix it:
 
-  - Rebuild the package with corrected ``run_exports`` (build number bump).
+  - Rebuild the package with corrected ``run_exports``.
   - Hot-fix repodata of previous package to apply the right ``run_exports``.
   - Hot-fix the repodata of dependencies to include corrected pinnings for the package.
 
@@ -95,5 +95,5 @@ FAQ
   Some of the examples you can see for reference, where broken packages are fixed by:
 
   - `Replacing an existing pin that was incorrect <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/pull/217>`_.
-  - `Loosen a pin <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/pull/132>`_.
-  - `Tighten a pin <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/pull/154>`_.
+  - `Pinning packages loosely to rely on their ABI compatibility. <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/pull/132>`_.
+  - `Pinning packages strictly <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/pull/154>`_.
