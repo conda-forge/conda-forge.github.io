@@ -52,4 +52,13 @@ We are glad to know that you would like to contribute to the ``conda-forge`` doc
 
 .. _Guidelines:
 
+Guidelines
+===========================
+1. For submitting or updating conda-build documentation, follow these rules.
+2. Determine who your target audience is, their level of expertise, and how they will use the content.
+3. Match the technical jargon to the audience's degree of understanding. It's preferable to underestimate rather than overestimate your readers' knowledge. Limit the usage of technical phrases to those that the user is likely to encounter. Use a glossary to augment definitions in the text if you need to define a large number of terms.
+4. Use the active voice (e.g., click this) and speak directly to your audience (write "you" rather than "the user"). Use the "command" form of the verb to describe an action: "Choose an option from the menu and press Enter."
+5. The format can be found in the `tutorial template<https://docs.conda.io/projects/conda-build/en/latest/resources/tutorial-template.html>`_. Do not number headings and use descriptive task and subtask names.
+
+
 Happy contributing!
