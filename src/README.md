@@ -13,3 +13,83 @@ Documentation update PRs should only change the files in ``src``.
 
 Once the PR is merged to ``master``, you can find the auto-generated html files in ``docs`` directory.
 
+## Code of conduct
+
+We adheres to the [NumFOCUS Code of Conduct](https://numfocus.org/code-of-conduct).
+
+Be kind to others. Do not insult or put down others. Behave professionally. Remember that harassment and sexist, racist, or exclusionary jokes are not appropriate for conda-forge.
+
+All communication should be appropriate for a professional audience including people of many different backgrounds. Sexual language and imagery is not appropriate.
+
+conda-forge is dedicated to providing a harassment-free community for everyone, regardless of gender, sexual orientation, gender identity and expression, disability, physical appearance, body size, race, or religion. We do not tolerate harassment of community members in any form.
+
+Thank you for helping make this a welcoming, friendly community for all.
+
+## Reporting Guidelines
+
+If you believe someone is violating the code of conduct, please report this in a timely manner. Code of conduct violations reduce the value of the community for everyone. The team at conda-forge takes reports of misconduct very seriously and is committed to preserving and maintaining the welcoming nature of our community.
+
+All reports will be kept confidential. Please have a look at the [Reporting Guidelines](https://numfocus.org/code-of-conduct#reporting-guidelines).
+
+
+
+
+
+
+## Enforcement: What Happens After a Report is Filed?
+## Acknowledgment and Responding to Immediate Needs
+
+We will attempt to ensure your safety and help with any immediate needs, particularly at an in-person event. We will make every effort to acknowledge receipt within 24 hours (and we’ll aim for much more quickly than that). Have a look at the process of [What Happens After a Report is Filed?](https://numfocus.org/code-of-conduct#enforcement).
+
+ 
+## Reviewing the Report
+We will review the incident as quickly as possible and determine:
+
+Whether this is an ongoing situation, or if there is a threat to anyone’s physical safety
+What happened
+Whether this event constitutes a code of conduct violation
+Who the bad actor was, if any
+If the incident took place at an event or meetup or within the community channels], the Team will reach out to the relevant organizers/community managers/project leaders as necessary to follow up on the incident.
+
+## Contacting the Person Reported
+After we has had time to review and discuss the report, someone will attempt to contact the person who is the subject of the report to inform them of what has been reported about them. We will then ask that person for their account of what happened.
+
+ 
+## Response and Potential Consequences
+Once we have completed our investigation of the report, we will make a decision as to how to respond. The person making a report will not normally be consulted as to the proposed resolution of the issue, except insofar as we need to understand how to help them feel safe.
+
+## Potential consequences for violating the our code of conduct include:
+
+Nothing (if we determine that no violation occurred)
+Private feedback or reprimand from NumFOCUS to the individual(s) involved
+Warning the person to cease their behavior and that any further reports will result in sanctions
+A public announcement that an incident occurred
+Mediation (only if both reporter and reportee agree)
+An imposed vacation (e.g. asking someone to “take a week off” from a mailing list)
+A permanent or temporary ban from some or all NumFOCUS spaces (mailing lists, GitHub repos, in-person events, etc.)
+Assistance to the complainant with a report to other bodies, for example, institutional offices or appropriate law enforcement agencies
+Removing a person from our membership or other formal affiliation
+Publishing an account of the harassment and calling for the resignation of the alleged harasser from their responsibilities (usually pursued by people without formal authority: may be called for if the person is the event leader, or refuses to stand aside from the conflict of interest, or similar)
+Any other response that we deem necessary and appropriate to the situation
+At our events, if a participant engages in behavior that violates this code of conduct, the conference organizers and staff may take any action they deem appropriate.
+
+## Potential consequences for violating the Code of Conduct at an in-person event include:
+
+Warning the person to cease their behavior and that any further reports will result in sanctions
+Requiring that the person avoid any interaction with, and physical proximity to, the person they are harassing for the remainder of the event
+Ending a talk that violates the policy early
+Not publishing the video or slides of a talk that violated the policy
+Not allowing a speaker who violated the policy to give (further) talks at the event now or in the future
+Immediately ending any event volunteer responsibilities and privileges the reported person holds
+Requiring that the person not volunteer for future events  (either indefinitely or for a certain time period)
+Expelling the person from the event without a refund
+Requiring that the person immediately leave the event and not return
+Banning the person from future events (either indefinitely or for a certain time period)
+Any other response that we deem necessary and appropriate to the situation
+No one espousing views or values contrary to the standards of our code of conduct will be permitted to hold any position representing us, including volunteer positions. We have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned with this code of conduct.
+
+We will contact the person who is the subject of the report to let them know what actions will be taken as a result of the report, if any.
+
+Our policy is to make sure that everyone aware of the initial incident is also made aware that official action has been taken, while still respecting the privacy of individuals. We may choose to make a public report of the incident, while maintaining the anonymity of those involved.
+
+
