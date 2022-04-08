@@ -16,7 +16,7 @@ Once the PR is merged to ``master``, you can find the auto-generated html files 
 
 # Code of conduct
 
-The [NumFOCUS Code of Conduct] (https://numfocus.org/code-of-conduct) is followed by us.
+The [NumFOCUS Code of Conduct](https://numfocus.org/code-of-conduct) is followed by us.
 
 1.Be considerate of others. Don't make others feel bad by insulting or dismissing them. Behave in a professional manner.
 2.Remember that conda-forge does not tolerate harassing or sexist, racist, or exclusionary humour.
@@ -32,7 +32,7 @@ The following is a condensed version of the Code of Conduct. Check out the [NumF
 
 If you suspect someone is breaking the code of conduct, please notify us as soon as possible. Violations of the community's code of conduct lower the community's value for everyone. Conda-team forge's takes accusations of misconduct extremely seriously and is dedicated to protecting and maintaining our community's welcome atmosphere.
 
-All information will be kept private. Please read the [Reporting Guidelines] (https://numfocus.org/code-of-conduct#reporting-guidelines) carefully.
+All information will be kept private. Please read the [Reporting Guidelines](https://numfocus.org/code-of-conduct#reporting-guidelines) carefully.
 
 
 # What Happens After a Report is Filed in Terms of Enforcement?
