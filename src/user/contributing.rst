@@ -49,4 +49,7 @@ We are glad to know that you would like to contribute to the ``conda-forge`` doc
 5. Submit a `pull request
    <https://help.github.com/articles/about-pull-requests/>`_ to the main repository proposing your changes.
 
+
+.. _Guidelines:
+
 Happy contributing!
