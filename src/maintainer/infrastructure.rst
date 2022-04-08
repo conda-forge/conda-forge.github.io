@@ -232,13 +232,13 @@ via a pull request.
 
 CircleCI (Linux, OSX)
 ----------------------
-CircleCI is a container-based CI service that conda-forge uses to build
+`CircleCI <https://circleci.com>`_ is a container-based CI service that conda-forge uses to build
 Linux packages. It can optionally build OSX packages.
 
 Linux builds are identical to those on Azure as both are built inside Docker containers.
 
 
-Using Circle for both Linux and OSX
+Using CircleCI for both Linux and OSX
 ....................................
 
 To use CircleCI for OSX, add the following to ``conda-forge.yml`` in the root of the feedstock.
@@ -270,9 +270,9 @@ When this happens for a feedstock, it can be fixed using the `webservice <ci_upd
 
 Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
 
-* Log in and out of Circle CI.
+* Log in and out of CircleCI.
 * Revoke CircleCI's access and then enable it again.
-* In the "Checkout SSH keys" section of your Circle CI project settings, press "add user key".
+* In the "Checkout SSH keys" section of your CircleCI project settings, press "add user key".
 
 
 Drone.io
