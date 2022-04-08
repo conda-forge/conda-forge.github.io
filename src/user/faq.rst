@@ -73,6 +73,56 @@ FAQ
     
   are a telltale sign that you are lacking compilers.
 
+.. _faq_compiler_required_options:
+
+:ref:`(Q) <faq_compiler_required_options>` **Why don't the C/C++ compilers automatically know how to find libraries installed by conda?**
+
+  All of our toolchains are built as cross-compilers (even when they are built to run on the same
+  architecture that they are targeting).  We do this because it makes it possible to then install
+  them anywhere like any other conda package.  As a result, the builtin search path for the
+  compilers only contains the sysroot they were built with. The compiler binary names are also
+  'prefixed' with more complete information about the architecture and :std:term:`ABI` they target.  So, instead
+  of ``gcc``, the actual binary will be named something like ``x86_64-conda-linux-gnu-cc``.
+
+  The conda-forge infrastructure provides :ref:`activation scripts <activate_scripts>` which are run when
+  you ``conda activate`` an environment that contains the compiler toolchain.  Those scripts set
+  many environment variables that are typically used by GNU ``autotools`` and ``make`` in the
+  ``standard`` (i.e. builtin) build rules.  For example, you would see the variable ``CC`` set to
+  the long compiler name ``x86_64-conda-linux-gnu-cc``.  The activation scripts also set a
+  ``CMAKE_ARGS`` variable with many arguments the conda-forge community finds helpful for
+  configuring cmake build flows.  Of particular note, the activation scripts add the
+  ``CONDA_PREFIX/include`` and ``CONDA_PREFIX/lib`` paths to the appropriate ``FLAGS`` environment
+  variables (``CLAGS``, ``CPPFLAGS``, ``LDFLAGS``, etc) so that many build systems will pick them up correctly.
+
+  What do you do if you have custom ``FLAGS`` that your project requires for it's build or you can't
+  build with some of the flags supplied by conda-forge?  What if you are building something that
+  is setup for cross-compiling and expects ``CC`` to contain the name of the target toolchain but
+  wants to be able to build some things for the build-host to use during the build by just calling
+  ``gcc``? 
+
+  The :ref:`compiler metapackages mentioned above <faq_compiler_metapkg>` also install packages that
+  create symlinks of the short names (like ``gcc``) to the actual toolchain binary names (like
+  ``x86_64-conda-linux-gnu-cc``) for toolchains that are targeting the system they are running on.
+
+  A new optional package called ``conda-gcc-specs`` can also be installed that adds:
+     * ``-include $CONDA_PREFIX/include`` to compile commands
+     * ``-rpath $CONDA_PREFIX/lib -rpath-link $CONDA_PREFIX/lib -disable-new-dtags -L $CONDA_PREFIX/lib`` to link
+       commands
+
+  Using the compiler metapackage with ``conda-gcc-specs`` you can incude and link libraries installed
+  in ``CONDA_PREFIX`` without having to provide any conda-specific cmdline arguments.
+
+.. _faq_compiler_use_system_libs:
+
+:ref:`(Q) <faq_compiler_use_system_libs>` **How can I make conda gcc use my system libraries?**
+
+  First, the conda-forge infrastructure tries very hard to avoid using any of the system-provided
+  libraries, otherwise the dependencies betweeen packages quickly become incomplete and nothing works.
+
+  However, as an end user, when not building something that will be packaged and distributed via
+  conda-forge, you may need to link against libraries on your system instead of libraries in your
+  conda environment.  This can be accomplished (for gcc) by passing ``-sysroot=/`` on the cmdline.
+
 .. _faq_cuda_compiler_header:
 
 :ref:`(Q) <faq_cuda_compiler_header>` **How can I compile CUDA (host or device) codes in my environment?**
