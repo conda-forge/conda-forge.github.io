@@ -1,4 +1,4 @@
-# The docs are built on GitHub Actions and run the ``.ci_scripts/update_docs`` script.
+## The docs are built on GitHub Actions and run the ``.ci_scripts/update_docs`` script.
 
 To build the docs locally, follow the steps mentioned below:
  1.  Clone the repository into your local machine.
@@ -16,83 +16,79 @@ Once the PR is merged to ``master``, you can find the auto-generated html files 
 
 # Code of conduct
 
-We adheres to the [NumFOCUS Code of Conduct](https://numfocus.org/code-of-conduct).
+The [NumFOCUS Code of Conduct] (https://numfocus.org/code-of-conduct) is followed by us.
 
-1. Be kind to others. Do not insult or put down others. Behave professionally. 
-2. Remember that harassment and sexist, racist, or exclusionary jokes are not appropriate for conda-forge.
-3. All communication should be appropriate for a professional audience including people of many different backgrounds. Sexual language and imagery is not appropriate.
-4. conda-forge is dedicated to providing a harassment-free community for everyone, regardless of gender, sexual orientation, gender identity and expression, disability, physical appearance, body size, race, or religion. We do not tolerate harassment of community members in any form.
-5. We strive to Be empathetic, welcoming, friendly, and patient, Be collaborative, Be inquisitive, Be careful in the words that we choose.
+1.Be considerate of others. Don't make others feel bad by insulting or dismissing them. Behave in a professional manner.
+2.Remember that conda-forge does not tolerate harassing or sexist, racist, or exclusionary humour.
+3.Every piece of communication should be tailored to a professional audience that includes people from a variety of backgrounds. Sexual imagery and language are not suitable.
+4.Regardless of gender, sexual orientation, gender identity and expression, handicap, physical appearance, body size, race, or religion, conda-forge is committed to creating a harassment-free community. Harassment of community members in any manner is not tolerated.
+5.We endeavour to be empathic, welcoming, kind, and patient, as well as collaborative, inquiring, and cautious with our words.
 
-Thank you for helping make this a welcoming, friendly community for all.
+Thank you for your assistance in making this possible.
 
-This is the short version of Code of Conduct. If you want to read more about it check out on [NumFOCUS Code of Conduct](https://numfocus.org/code-of-conduct).
+The following is a condensed version of the Code of Conduct. Check out the [NumFOCUS Code of Conduct](https://numfocus.org/code-of-conduct) if you want to learn more.
 
+# Reporting Procedures
 
-# Reporting Guidelines
+If you suspect someone is breaking the code of conduct, please notify us as soon as possible. Violations of the community's code of conduct lower the community's value for everyone. Conda-team forge's takes accusations of misconduct extremely seriously and is dedicated to protecting and maintaining our community's welcome atmosphere.
 
-If you believe someone is violating the code of conduct, please report this in a timely manner. Code of conduct violations reduce the value of the community for everyone. The team at conda-forge takes reports of misconduct very seriously and is committed to preserving and maintaining the welcoming nature of our community.
-
-All reports will be kept confidential. Please go through it thoroughly [Reporting Guidelines](https://numfocus.org/code-of-conduct#reporting-guidelines).
-
+All information will be kept private. Please read the [Reporting Guidelines] (https://numfocus.org/code-of-conduct#reporting-guidelines) carefully.
 
 
+# What Happens After a Report is Filed in Terms of Enforcement?
+## Recognizing and Responding to Urgent Needs
 
+We will make every effort to ensure your safety and assist you with any immediate requirements, especially if you are attending an in-person event. We'll do everything we can to acknowledge receipt within 24 hours (and we'll aim for much faster). Take a look at the [What Happens After a Report is Filed?](https://numfocus.org/code-of-conduct#enforcement) process.
+ 
+## Examining the Document
+We'll look into the matter as soon as possible and figure out:
 
+1. Whether this is a continuous scenario or if anyone's physical safety is in jeopardy.
+2. What took place?
+3. Whether or not this incident is a breach of the code of conduct
+4. If there was a horrible actor, who was it?
 
-# Enforcement: What Happens After a Report is Filed?
-## Acknowledgment and Responding to Immediate Needs
+If the incident occurred at an event or meetup, or in the community channels, the Team will contact the appropriate organizers/community managers/project leaders to follow up on the occurrence as needed.
 
-We will attempt to ensure your safety and help with any immediate needs, particularly at an in-person event. We will make every effort to acknowledge receipt within 24 hours (and we’ll aim for much more quickly than that). Have a look at the process of [What Happens After a Report is Filed?](https://numfocus.org/code-of-conduct#enforcement).
+## Getting in Touch with the Person Reported
+Someone will attempt to contact the individual who is the subject of the report after we have had time to review and discuss the report. We'll then inquire about that person's version of events.
 
  
-## Reviewing the Report
-We will review the incident as quickly as possible and determine:
+## Potential Consequences and Reaction
+We will decide how to respond after we have concluded our investigation of the report. Except inasmuch as we need to understand how to assist them feel safe, the person making the report will not generally be consulted about the proposed resolution of the issue.
 
-1. Whether this is an ongoing situation, or if there is a threat to anyone’s physical safety
-2. What happened
-3. Whether this event constitutes a code of conduct violation
-4. Who the bad actor was, if any
-If the incident took place at an event or meetup or within the community channels], the Team will reach out to the relevant organizers/community managers/project leaders as necessary to follow up on the incident.
+## Violations of our code of conduct may result in the following consequences:
 
-## Contacting the Person Reported
-After we has had time to review and discuss the report, someone will attempt to contact the person who is the subject of the report to inform them of what has been reported about them. We will then ask that person for their account of what happened.
+1. There is nothing (if we determine that no violation occurred).
+2. NumFOCUS may provide private criticism or reprimand to the individual(s) involved.
+3. The person has been warned to stop acting out and that any additional reports would result in punishment.
+4. An official statement stating that an occurrence has occurred.
+5. Mediation is a method of resolving (only if both reporter and reportee agree).
+6. An imposed vacation (for example, asking someone to "opt out" of a mailing list for a week).
+7. A prohibition from some or all NumFOCUS spaces, either permanently or temporarily (mailing lists, GitHub repos, in-person events, etc.).
+8. Assistance with a report to other bodies, such as institutional offices or competent law enforcement organisations, for the complainant.
+9. Taking someone out of our membership or other formal affiliation.
+10. Publicizing a narrative of the harassment and appealing for the accused harasser's resignation from their position (usually pursued by people without formal authority: may be called for if the person is the event leader, or refuses to stand aside from the conflict of interest, or similar).
+11. Any other action we believe necessary and appropriate under the circumstances.
 
- 
-## Response and Potential Consequences
-Once we have completed our investigation of the report, we will make a decision as to how to respond. The person making a report will not normally be consulted as to the proposed resolution of the issue, except insofar as we need to understand how to help them feel safe.
+If a participant violates this code of conduct at a NumFOCUS event, the conference organisers and staff may take any action they feel appropriate.
 
-## Potential consequences for violating the our code of conduct include:
+## Violations of the Code of Conduct at an in-person event may result in the following consequences:
 
-1. Nothing (if we determine that no violation occurred).
-2. Private feedback or reprimand from NumFOCUS to the individual(s) involved.
-3. Warning the person to cease their behavior and that any further reports will result in sanctions.
-4. A public announcement that an incident occurred.
-5. Mediation (only if both reporter and reportee agree).
-6. An imposed vacation (e.g. asking someone to “take a week off” from a mailing list).
-7. A permanent or temporary ban from some or all NumFOCUS spaces (mailing lists, GitHub repos, in-person events, etc.).
-8. Assistance to the complainant with a report to other bodies, for example, institutional offices or appropriate law enforcement agencies.
-9. Removing a person from our membership or other formal affiliation.
-10. Publishing an account of the harassment and calling for the resignation of the alleged harasser from their responsibilities (usually pursued by people without formal authority: may be called for if the person is the event leader, or refuses to stand aside from the conflict of interest, or similar).
-11. Any other response that we deem necessary and appropriate to the situation.
-At NumFOCUS events, if a participant engages in behavior that violates this code of conduct, the conference organizers and staff may take any action they deem appropriate..
+1. The person has been warned to stop acting out and that any additional reports would result in punishment.
+2. For the remainder of the event, the individual must avoid all contact with and physical closeness to the person they are bothering.
+3. Early termination of a talk that is in violation of the policy
+4. The video or slides of a talk that was in violation of the policy were not published.
+5. Not allowing a speaker who has broken the policy to speak at the event again (now or in the future).
+6. Any event volunteer responsibilities and privileges held by the reported person must be immediately terminated.
+7. Requiring the individual to refrain from volunteering for future occasions (either indefinitely or for a certain time period).
+8. Excluding the participant from the event and without providing a refund.
+9. Requiring the person to leave the event immediately and not return.
+10. Excluding the individual from future events (either indefinitely or for a certain time period).
+11. Any other action we believe necessary and appropriate under the circumstances.
 
-## Potential consequences for violating the Code of Conduct at an in-person event include:
+No one will be allowed to occupy any position representing us, including volunteer roles, if their ideas or values are in violation of our code of conduct. We reserve the right to remove, amend, or reject comments, commits, code, wiki revisions, issues, and any contributions that do not follow this code of behaviour.
 
-1. Warning the person to cease their behavior and that any further reports will result in sanctions
-2. Requiring that the person avoid any interaction with, and physical proximity to, the person they are harassing for the remainder of the event
-3. Ending a talk that violates the policy early
-4. Not publishing the video or slides of a talk that violated the policy
-5. Not allowing a speaker who violated the policy to give (further) talks at the event now or in the future
-6. Immediately ending any event volunteer responsibilities and privileges the reported person holds
-7. Requiring that the person not volunteer for future events  (either indefinitely or for a certain time period)
-8. Expelling the person from the event without a refund
-9. Requiring that the person immediately leave the event and not return
-10. Banning the person from future events (either indefinitely or for a certain time period)
-11. Any other response that we deem necessary and appropriate to the situation
-No one espousing views or values contrary to the standards of our code of conduct will be permitted to hold any position representing us, including volunteer positions. We have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned with this code of conduct.
+We'll get in touch with the individual who is the subject of the report to let them know what, if any, measures will be done as a result of it.
 
-We will contact the person who is the subject of the report to let them know what actions will be taken as a result of the report, if any.
-
-Our policy is to make sure that everyone aware of the initial incident is also made aware that official action has been taken, while still respecting the privacy of individuals. We may choose to make a public report of the incident, while maintaining the anonymity of those involved.
-
+Our policy is to make sure that everyone who was aware of the initial occurrence is likewise informed that official action has been taken, while maintaining individual privacy. We may decide to make a public report of the occurrence while keeping the identities of people involved confidential.
