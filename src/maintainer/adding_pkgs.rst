@@ -18,25 +18,30 @@ The sections below provide detailed instructions on contributing packages to con
 The staging process
 ===================
 
-Getting Started
----------------
+The staging process i.e adding a package's recipe has three steps:
 
-There are multiple ways to get started:
+#. Generating the recipe
+#. Checklist
+#. Feedback and revision
 
-#. Look at `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`_ and modify it as necessary.
+Generating the recipe
+---------------------
+
+There are, currently, three ways to generate a recipe:
+
 #. If it is an R package from `CRAN <https://cran.r-project.org/>`_, kindly
    start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_ instead.
    Then if necessary, you can make manual edits to the recipe.
 #. If it is a python package, you can generate the recipe as a starting point with ``grayskull``.
    Use ``conda install -c conda-forge grayskull`` to install ``grayskull``, followed by ``grayskull pypi your_package_name`` to generate the recipe. Note that you do *not* necessarily have to use ``grayskull``, and the
    recipes produced by ``grayskull`` might need to be reviewed and edited. Read more about ``grayskull`` and how to use it `here <https://github.com/conda-incubator/grayskull#introduction>`__.
+#. If it's none of the above, generate a recipe with the help of `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`_ and modify it as necessary.
 
 Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
 
 .. note::
 
   If there are any details you are not sure about please create a pull request anyway. The conda-forge team will review it and help you make changes to it.
-
 
 In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that will help you with a successful build is provided below.
 
@@ -49,17 +54,19 @@ Step-by-step Instructions
    should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz)
    or tagged on GitHub, to ensure that it can be verified. (For further
    detail, see :ref:`tarballs_no_repos`).
-#. Fork the `example recipes
-   <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
-   repository.
-#. Create a new branch from the staged-recipes ``master`` branch.
-#. Within your forked copy, generate a new folder in the recipes subdirectory
-   and copy the `meta.yml
+#. Fork and clone the `staged-recipes
+   <https://github.com/conda-forge/staged-recipes>`_
+   repository from GitHub.
+#. Checkout a new branch from the staged-recipes ``main`` branch.
+#. Through CLI, cd inside the 'staged-recipes/recipes' directory.
+#. Within your forked copy, create a new folder in the recipes folder, for your package. ``...staged-recipes/recipes/<name-of-package>``
+#. Copy `meta.yml
    <https://github.com/conda-forge/staged-recipes/blob/master/recipes/
-   example/meta.yaml>`_
-   file from the example directory. Please leave the example directory
-   unchanged!
-#. Edit the copied recipe (meta.yml) as needed. For details, see
+   example/meta.yaml>`_ from the example directory.
+   All the changes in the following steps will happen in the COPIED meta.yaml i.e
+   ``...staged-recipes/recipes/<name-of-package>/meta.yaml``
+   Please leave the example directory unchanged!
+#. Modify the copied recipe (meta.yml) as needed. To see how to modify meta.yaml take a look at
    :ref:`meta_yaml`.
 #. Generate the SHA256 key for your source code archive, as described in the
    example recipe using the ``openssl`` tool. As an alternative, you can also
