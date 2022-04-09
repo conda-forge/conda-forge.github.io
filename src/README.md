@@ -29,7 +29,7 @@ Thank you for your assistance in making this possible.
 The following is a condensed version of the Code of Conduct. Check out the [NumFOCUS Code of Conduct](https://numfocus.org/code-of-conduct) if you want to learn more.
 
 # Reporting Procedures
-
+f
 If you suspect someone is breaking the code of conduct, please notify us as soon as possible. Violations of the community's code of conduct lower the community's value for everyone. Conda-team forge's takes accusations of misconduct extremely seriously and is dedicated to protecting and maintaining our community's welcome atmosphere.
 
 All information will be kept private. Please read the [Reporting Guidelines](https://numfocus.org/code-of-conduct#reporting-guidelines) carefully.
