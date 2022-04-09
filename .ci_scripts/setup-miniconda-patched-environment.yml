@@ -16,4 +16,5 @@ dependencies:
   - python-dateutil
   - pip
   - python-rapidjson
+  - termcolor
   - python=3.8
