@@ -168,14 +168,13 @@ Just run the following commands:
 3. Register with the CI providers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This is important!  If you haven't done so already, you'll need to go
-to the CI providers (Travis, Circle, Azure, etc.) and enable CI
-to for your repository. Each CI provider that you use will have
+to the CI providers (Travis, Circle, Azure, etc.) and enable CI for your repository. Any CI provider that you use will have
 documentation on how to get set up with them.
 
 4. Rerender
 ~~~~~~~~~~~
 Last, but certainly not least, we need to generate the CI configuration
-scripts! This is based on the content of the recipe as well as the
+scripts. This is based on the content of the recipe as well as the
 provider selections made in the ``conda-forge.yml`` file. (Please
 refer to `these docs <https://conda-forge.org/docs/maintainer/conda_forge_yml.html#provider>`_
 for a complete list of CI providers.)
@@ -186,8 +185,8 @@ In order to generate the CI configuration files, run:
 
     ~/repo $ conda smithy rerender -c auto
 
-Pushing those changes up to the repo should now give be building and testing
-your package on CI!
+After pushing these changes to the repo, you should now see building and testing of
+your package on CI.
 
 Keeping Up-to-date
 ------------------

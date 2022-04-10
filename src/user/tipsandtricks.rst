@@ -17,8 +17,8 @@ see an error like (OS X example):
       Referenced from: .../site-packages/rpy2/rinterface/_rinterface.so
       Reason: image not found
 
-That happens because either the correct version of ``icu``,
-or any other package in the error,
+This happens because either the correct version of ``icu``,
+or any other package mentioned in the error message,
 is not present or the package is missing altogether.
 
 You can confirm this by issuing the command ``conda list`` and searching for the package in question.
@@ -27,21 +27,21 @@ Why does that happen?
 ---------------------
 
 The ``conda-forge`` and ``defaults`` are not 100% compatible.
-In the example above it is known that ``defaults`` uses ``icu 54.*`` while ``conda-forge`` relies on ``icu 56.*``,
-that mismatch can lead to errors when the install environment is mixing packages from multiple channels.
+In the example above it is known that ``defaults`` uses ``icu 54.*`` while ``conda-forge`` relies on ``icu 56.*``.
+This mismatch can lead to errors when the install environment is mixing packages from multiple channels.
 
 .. note::
-   All of conda-forge software pinning can be found at: https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml
+   All of conda-forge software pinning can be found `here <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_.
 
 How to fix it?
 --------------
 
 Newer ``conda`` versions (>=4.6) introduced a strict channel priority feature.
-Type ``conda config --describe channel_priority`` for more information.
+Run ``conda config --describe channel_priority`` for more information.
 
 
 The solution is to add the ``conda-forge`` channel on top of ``defaults`` in your ``.condarc`` file when using ``conda-forge`` packages
-and activate the strict channel priority with:
+and activate the strict channel priority with
 
 .. code-block:: shell
 
@@ -149,10 +149,21 @@ In order to override the default behavior, a user can set the environment variab
 
 .. note::
    
-   Note that you should select the cudatoolkit version most appropraite for your GPU; currently, we have "10.2", "11.0", "11.1", and "11.2" builds available, where the "11.2" builds are compatible with all cudatoolkits>=11.2. (At the time of writing, there seems to be a bug in how the cuda builds are resolved by mamba, defaulting to cudatoolkit==10.2; thus, it is prudent to be as explicit as possible like above or by adding ``cudatoolkit>=11.2`` or similar to the line above.) 
+   Note that you should select the cudatoolkit version most appropraite for your GPU; currently, we have "10.2", "11.0", "11.1", and "11.2" builds available, where the "11.2" builds are compatible with all cudatoolkits>=11.2. (At the time of writing, there seems to be a bug in how the cuda builds are resolved by mamba, defaulting to cudatoolkit==10.2; thus, it is prudent to be as explicit as possible like above or by adding ``cudatoolkit>=11.2`` or similar to the line above.)
 
-For context, installing TensorFlow 2.7.0 with ``CONDA_CUDA_OVERRIDE="11.2" mamba install "tensorflow==2.7.0=cuda*" -c conda-forge`` results in approximately 2 GB of packages to download while ``CONDA_CUDA_OVERRIDE="11.2" mamba install "tensorflow=2.7.0=cpu*" -c conda-forge`` results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the ``-cpu`` variant! 
+For context, installing TensorFlow 2.7.0 with the following command:
 
+.. code-block:: shell
+
+    CONDA_CUDA_OVERRIDE="11.2" mamba install "tensorflow==2.7.0=cuda*" -c conda-forge
+
+results in approximately 2 GB of packages to download while using this:
+
+.. code-block:: shell
+
+    CONDA_CUDA_OVERRIDE="11.2" mamba install "tensorflow=2.7.0=cpu*" -c conda-forge 
+
+results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the ``-cpu`` variant!
 
 .. _pypy:
 
@@ -185,3 +196,4 @@ pypy itself).
    $ conda config --set channel_priority strict
 
 .. _`PyPy interpreter`: https://www.pypy.org
+

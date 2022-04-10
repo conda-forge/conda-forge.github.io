@@ -5,7 +5,7 @@ FAQ
 
 :ref:`(Q) <faq_pkg_not_available>` **A package I am looking for is not on conda-forge, what can I do?**
 
-  We have an overview and step-by-step instruction on contributing packages in the section :ref:`dev_contribute_pkgs`.
+  We have an overview and step-by-step instructions on contributing packages in the section :ref:`dev_contribute_pkgs`.
 
 .. _faq_pkg_update:
 
