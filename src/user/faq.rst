@@ -85,9 +85,10 @@ FAQ
 
 :ref:`(Q) <faq_abi_incompatibility>` **How to handle breaking of a package due to ABI incompatibility?**
 
-  If your package breaks ABI with a version bump, here are a few steps you can take to fix it:
+  If your package breaks ABI with a version bump, here are a few steps you can take to fix it: 
 
-  - Rebuild the package with corrected ``run_exports``.
+  - Rebuild the new version with corrected ``run_exports``.
+  - Rebuild the old version with corrected ``run_exports``.
   - Hot-fix the repodata of dependencies to include corrected pinnings for the package.
 
   To read more on how to specify ``run_exports``, see `this <https://conda-forge.org/docs/maintainer/pinning_deps.html?highlight=run_exports#specifying-run-exports>`_.
