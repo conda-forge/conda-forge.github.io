@@ -1119,13 +1119,14 @@ Note that this requires ``conda>=4.8``. If you want to support older conda versi
 the requirement should be changed from ``run`` to ``run_constrained``. Note that
 ``conda<4.8`` will ignore the condition if it's a ``run_constrained`` on ``__osx``.
 
-Compile for Apple's Metal framework
------------------------------------
+Compiling for Apple's Metal framework
+-------------------------------------
 
 It is possible to compile against Apple's Metal framework. 
 However, you will likely need to use newer SDKs (11 and newer) for functionality.
 If in doubt, you can search the `phracker/MacOSX-SDKs <https://github.com/phracker/MacOSX-SDKs.git>`__ 
 repo for the exact symbols and their availability.
+Examples of packages compiling for Metal include `pyobjc-framework <https://github.com/conda-forge/pyobjc-framework-metal-feedstock/blob/main/recipe/conda_build_config.yaml>`__ and `libtvm <https://github.com/conda-forge/libtvm-feedstock/>`__.
 
 
 Changing the Azure vmImage
@@ -1140,6 +1141,8 @@ Note that the release after 10.15 is 11,
 but Azure pipelines only offer the latest of 11, ``macOS-11``, which 
 at the time of writing (March 2022) is 11.6. (Currently, the ``macOS-12`` vmImage is in 
 private preview.)
+For more information, see the latest `Azure pipelines documentation <https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops&tabs=yaml#software>`__.
+
 
 .. code-block:: yaml
 
@@ -1148,7 +1151,7 @@ private preview.)
         pool:
           vmImage: macOS-11
 
-As always, remember to rerender for changes to take effect.
+As always, remember to `rerender <https://conda-forge.org/docs/maintainer/updating_pkgs.html#dev-update-rerender>`__ for changes to take effect.
 
 Newer C++ features with old SDK
 -------------------------------
