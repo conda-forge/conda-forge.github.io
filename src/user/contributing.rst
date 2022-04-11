@@ -63,6 +63,5 @@ Some basic writing guidelines should be kept in mind before you start contributi
 7. Avoid ambiguous titles. The title should include a clear description of the page's subject.
 8. Check your spelling and grammar.
 
-
 Happy contributing!
 
