@@ -60,8 +60,8 @@ Some basic writing guidelines should be kept in mind before you start contributi
 5. While mentioning an action, use the “command” form of the verb: “Choose an option from the menu and press Enter.”   
 6. For references, provide links to related content. 
 7. Use headings and bullet points,which makes it easier to read.
-7. Avoid ambiguous titles. The title should include a clear description of the page's subject.
-8. Check your spelling and grammar.
+8. Avoid ambiguous titles. The title should include a clear description of the page's subject.
+9. Check your spelling and grammar.
 
 Happy contributing!
 
