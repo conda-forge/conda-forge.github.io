@@ -49,4 +49,17 @@ We are glad to know that you would like to contribute to the ``conda-forge`` doc
 5. Submit a `pull request
    <https://help.github.com/articles/about-pull-requests/>`_ to the main repository proposing your changes.
 
+
+.. _Guidelines:
+
+Writing Guidelines
+===========================
+
+Follow these guidelines for contributing or amending conda-forge documentation:
+
+1. Determine who your target audience is, their level of expertise, and how they will use the content.
+2. Match the technical jargon to the audience's degree of understanding. It's preferable to underestimate rather than overestimate your readers' knowledge. Limit the usage of technical phrases to those that the user is likely to encounter. Use a glossary to enhance definitions in the text if you need to define a large number of terms.
+3. Use the active voice (e.g., click this) and speak directly to your audience (write "you" rather than "the user"). Use the "command" form of the verb to describe an action: "Choose an option from the menu and press Enter."
+4. The format can be found in the `tutorial template <https://docs.conda.io/projects/conda-build/en/latest/resources/tutorial-template.html>`_. Do not number headings and use descriptive task and subtask names.
+
 Happy contributing!
