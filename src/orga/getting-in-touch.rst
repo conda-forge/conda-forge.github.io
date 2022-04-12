@@ -12,7 +12,7 @@ The main issue trackers that you will interact with are:
 
 * `staged-recipes <https://github.com/conda-forge/staged-recipes/issues>`__: You can use the staged-recipes repository to create a new conda package on conda-forge.
 * `conda-forge.github.io repository <https://github.com/conda-forge/conda-forge.github.io/issues>`__: You can use this repository to raise policy issues and as a catch-all for other issues where you’re unsure where to put them.
-* If you want to file an issue about an individual package, go to that package's feedstock repository. For example, if you want to raise an issue for the package ``unzip``, go to its feedstock repository `here <https://github.com/conda-forge/unzip-feedstock/issues>`__. You can search for the package you wish to open an issue for `here <https://conda-forge.org/feedstock-outputs/index.html>`_
+* If you want to file an issue about an individual package, go to that package's feedstock repository. For example, if you want to raise an issue for the package ``unzip``, go to its feedstock repository `here <https://github.com/conda-forge/unzip-feedstock/issues>`__. You can search for the package you wish to open an issue for `here <https://conda-forge.org/feedstock-outputs/index.html>`_.
 * `Our enhancement proposals repository <https://github.com/conda-forge/cfep/issues>`__: You can use the enhancement proposals repository if you're interested in substantially changing the way conda-forge operates.
 *  Issues related to Anaconda, Conda, or related tools can be reported `here <https://anaconda.org/contact/report>`_.
 
