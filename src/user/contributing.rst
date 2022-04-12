@@ -53,7 +53,7 @@ Writing guidelines:
 
 Some basic writing guidelines should be kept in mind before you start contributing:
 
-1. Identify your audience and understand their skill level
+1. Identify your audience and understand their skill level.
 2. Match the technical language with the audience's skill level proficiency.
 3. Try to keep it simple. In case you have to use a lot of complicated terms, provide a glossary of key terms.
 4. Address the audience directly as the user(s).
