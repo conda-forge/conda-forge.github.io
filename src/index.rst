@@ -1,15 +1,10 @@
-.. conda-forge documentation primary file, created by
-   sphinx-quickstart on Wed Jun  1 01:44:13 2016.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 conda-forge documentation
 =========================
 
 What is conda-forge?
 --------------------
-
-Conda-forge is a community effort that provides conda packages for a wide range of software.
+conda-forge is a community effort and a GitHub organization which contains repositories of conda recipes and thus provides conda packages for a wide range of software. 
+The built distributions are uploaded to `anaconda.org/conda-forge <https://anaconda.org/conda-forge>`__ and can be installed with `conda <https://conda.pydata.org/docs/intro.html>`_. 
 
 **Missing a package that you would love to install with conda?**
 
@@ -17,7 +12,7 @@ Chances are we have already packaged it for you. You can `search <https://anacon
 
 **Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack!
 
-- To get started contributing packages see here :ref:`becoming_involved`.
+- To get started contributing packages, see here :ref:`becoming_involved`.
 
 - To see our governance policies, see `here <https://conda-forge.org/docs/orga/governance.html>`_.
 
