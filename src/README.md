@@ -1,4 +1,4 @@
-## The docs are built on GitHub Actions and run the ``.ci_scripts/update_docs`` script.
+The docs are built on GitHub Actions and run the ``.ci_scripts/update_docs`` script.
 
 To build the docs locally, follow the steps mentioned below:
  1.  Clone the repository into your local machine.
@@ -16,13 +16,13 @@ Once the PR is merged to ``master``, you can find the auto-generated html files 
 
 # Code of conduct
 
-The [NumFOCUS Code of Conduct](https://numfocus.org/code-of-conduct) is followed by us.
+Conda-forge follows the NumFOCUS Code of Conduct-
 
-1.Be considerate of others. Don't make others feel bad by insulting or dismissing them. Behave in a professional manner.
-2.Remember that conda-forge does not tolerate harassing or sexist, racist, or exclusionary humour.
-3.Every piece of communication should be tailored to a professional audience that includes people from a variety of backgrounds. Sexual imagery and language are not suitable.
-4.Regardless of gender, sexual orientation, gender identity and expression, handicap, physical appearance, body size, race, or religion, conda-forge is committed to creating a harassment-free community. Harassment of community members in any manner is not tolerated.
-5.We endeavour to be empathic, welcoming, kind, and patient, as well as collaborative, inquiring, and cautious with our words.
+1. Be considerate of others. Don't make others feel bad by insulting or dismissing them. Behave in a professional manner.
+2. Remember that conda-forge does not tolerate harassing or sexist, racist, or exclusionary humour.
+3. Every piece of communication should be tailored to a professional audience that includes people from a variety of backgrounds. Sexual imagery and language are not suitable.
+4. Regardless of gender, sexual orientation, gender identity and expression, handicap, physical appearance, body size, race, or religion, conda-forge is committed to creating a harassment-free community. Harassment of community members in any manner is not tolerated.
+5. We endeavour to be empathic, welcoming, kind, and patient, as well as collaborative, inquiring, and cautious with our words.
 
 Thank you for your assistance in making this possible.
 
@@ -41,6 +41,7 @@ All information will be kept private. Please read the [Reporting Guidelines](htt
 We will make every effort to ensure your safety and assist you with any immediate requirements, especially if you are attending an in-person event. We'll do everything we can to acknowledge receipt within 24 hours (and we'll aim for much faster). Take a look at the [What Happens After a Report is Filed?](https://numfocus.org/code-of-conduct#enforcement) process.
  
 ## Examining the Document
+
 We'll look into the matter as soon as possible and figure out:
 
 1. Whether this is a continuous scenario or if anyone's physical safety is in jeopardy.
@@ -51,10 +52,12 @@ We'll look into the matter as soon as possible and figure out:
 If the incident occurred at an event or meetup, or in the community channels, the Team will contact the appropriate organizers/community managers/project leaders to follow up on the occurrence as needed.
 
 ## Getting in Touch with the Person Reported
+
 Someone will attempt to contact the individual who is the subject of the report after we have had time to review and discuss the report. We'll then inquire about that person's version of events.
 
  
 ## Potential Consequences and Reaction
+
 We will decide how to respond after we have concluded our investigation of the report. Except inasmuch as we need to understand how to assist them feel safe, the person making the report will not generally be consulted about the proposed resolution of the issue.
 
 ## Violations of our code of conduct may result in the following consequences:
