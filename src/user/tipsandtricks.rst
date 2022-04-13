@@ -1,3 +1,38 @@
+Cheat sheet
+===========
+
+Create a new conda environment
+------------------------------
+
+.. code-block:: shell
+
+    $ conda create --name ENVIRONMENT_NAME
+
+
+Activate new conda environment
+------------------------------
+
+.. code-block:: shell
+
+    $ conda activate ENVIRONMENT_NAME
+
+
+List conda environments
+-----------------------
+
+.. code-block:: shell
+
+    $ conda info --envs
+
+
+Install packages
+-----------------------
+
+.. code-block:: shell
+
+    $ conda install PACKAGE_NAME
+
+
 Tips & tricks
 *************
 
