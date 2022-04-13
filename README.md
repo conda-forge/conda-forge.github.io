@@ -1,5 +1,3 @@
-##Test
-
 # [conda-forge.org](https://conda-forge.org)
 [![deploy](https://github.com/conda-forge/conda-forge.github.io/workflows/deploy/badge.svg)](https://github.com/conda-forge/conda-forge.github.io/actions?query=workflow%3Adeploy)
 
