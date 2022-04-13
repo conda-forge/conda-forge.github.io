@@ -29,6 +29,8 @@ jobs:
         shell: bash -l {0}
         run: |
           source ./.ci_scripts/update_docs
+        env:
+          GHREF: ${{ github.ref }}
 
       - name: deploy
         if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
