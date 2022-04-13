@@ -20,7 +20,7 @@ function displayStatsJSON (reportText) {
   var blns = stats.downloads.all / 1e9
   div.innerHTML = (
     mlns.toFixed(0) + ' million monthly downloads<br>' +
-    blns.toFixed(0) + ' billion all-time downloads'
+    blns.toFixed(1) + ' billion all-time downloads'
   )
 
   div = document.getElementById('stats-members')
