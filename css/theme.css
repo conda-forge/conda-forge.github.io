@@ -416,3 +416,9 @@ body {
   max-width: 100%;
   height: auto;
 }
+
+/*  https://stackoverflow.com/a/25517025 */
+.vcenter {
+    display: flex;
+    align-items: center;
+}
