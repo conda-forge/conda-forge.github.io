@@ -12,7 +12,7 @@ Chances are we have already packaged it for you. You can `search <https://anacon
 
 **Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack!
 
-- To get started contributing packages, see here :ref:`becoming_involved`.
+- To get started contributing packages, see :ref:`becoming_involved`.
 
 - To see our governance policies, see `here <https://conda-forge.org/docs/orga/governance.html>`_.
 
