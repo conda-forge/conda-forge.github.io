@@ -15,6 +15,7 @@ elm-stuff
 # OS-X crap
 .DS_Store
 
+
 # Ignore RTD redirect build
 rtd/_build
 rtd/default.profraw
