@@ -59,14 +59,13 @@ Step-by-step Instructions
    repository from GitHub.
 #. Checkout a new branch from the staged-recipes ``main`` branch.
 #. Through CLI, cd inside the 'staged-recipes/recipes' directory.
-#. Within your forked copy, create a new folder in the recipes folder, for your package. ``...staged-recipes/recipes/<name-of-package>``
+#. Within your forked copy, create a new folder in the recipes folder for your package (i.e, ``...staged-recipes/recipes/<name-of-package>``)
 #. Copy `meta.yml
    <https://github.com/conda-forge/staged-recipes/blob/master/recipes/
    example/meta.yaml>`_ from the example directory.
-   All the changes in the following steps will happen in the COPIED meta.yaml i.e
-   ``...staged-recipes/recipes/<name-of-package>/meta.yaml``
+   All the changes in the following steps will happen in the COPIED meta.yaml (i.e., ``...staged-recipes/recipes/<name-of-package>/meta.yaml``).
    Please leave the example directory unchanged!
-#. Modify the copied recipe (meta.yml) as needed. To see how to modify meta.yaml take a look at
+#. Modify the copied recipe (meta.yml) as needed. To see how to modify meta.yaml, take a look at
    :ref:`meta_yaml`.
 #. Generate the SHA256 key for your source code archive, as described in the
    example recipe using the ``openssl`` tool. As an alternative, you can also
