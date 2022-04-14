@@ -16,7 +16,7 @@ Once the PR is merged to ``master``, you can find the auto-generated html files 
 
 # Code of conduct
 
-Conda-forge follows the NumFOCUS Code of Conduct-
+Conda-forge follows the NumFOCUS Code of Conduct:
 
 1. Be considerate of others. Don't make others feel bad by insulting or dismissing them. Behave in a professional manner.
 2. Remember that conda-forge does not tolerate harassing or sexist, racist, or exclusionary humour.
