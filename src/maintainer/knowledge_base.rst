@@ -270,6 +270,27 @@ A package that needs all five compilers would define
 
 .. _cdt_packages:
 
+Activation recipes
+
+  1. GCC - https://github.com/conda-forge/ctng-compiler-activation-feedstock
+  2. Clang, OSX - https://github.com/conda-forge/clang-compiler-activation-feedstock
+  3. gfortran, OSX - https://github.com/conda-forge/gfortran_osx-64-feedstock
+
+Implementation packages
+
+  1. GCC - https://github.com/conda-forge/ctng-compilers-feedstock
+
+  2. gfortran, OSX - https://github.com/conda-forge/gfortran_impl_osx-64-feedstock
+
+  3. clang
+    https://github.com/conda-forge/llvmdev-feedstock
+    https://github.com/conda-forge/libcxx-feedstock
+    https://github.com/conda-forge/clangdev-feedstock
+    https://github.com/conda-forge/openmp-feedstock
+    https://github.com/conda-forge/tapi-feedstock
+
+  4. OSX - https://github.com/conda-forge/cctools-and-ld64-feedstock
+
 Core Dependency Tree Packages (CDTs)
 ------------------------------------
 
@@ -1252,7 +1273,7 @@ Finally, note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 
 CUDA builds
 ===========
 
-Although the provisioned CI machines do not feature a GPU, Conda-Forge does provide mechanisms
+Although the provisioned CI machines do not feature a GPU, conda-forge does provide mechanisms
 to build CUDA-enabled packages. These mechanisms involve several packages:
 
 * ``cudatoolkit``: The runtime libraries for the CUDA toolkit. This is what end-users will end
@@ -1279,7 +1300,7 @@ On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CU
   **How is CUDA provided at the system level?**
 
   * On Linux, Nvidia provides official Docker images, which we then
-    `adapt <https://github.com/conda-forge/docker-images>`__ to Conda-Forge's needs.
+    `adapt <https://github.com/conda-forge/docker-images>`__ to conda-forge's needs.
 
   * On Windows, the compilers need to be installed for every CI run. This is done through the
     `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`__ scripts.

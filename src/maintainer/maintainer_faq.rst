@@ -79,7 +79,7 @@ FAQ
 
   - ``conda install boa -c conda-forge``
   - ``conda mambabuild myrecipe``
-  
+
   For more details visit `this <https://boa-build.readthedocs.io/en/latest/mambabuild.html>`__ page.
 
 .. _mfaq_conda_verify:
@@ -111,9 +111,9 @@ FAQ
 
 .. _mfaq_package_submit:
 
-:ref:`(Q) <mfaq_package_submit>` **Is it necessary for me to be an upstream maintainer of the package I submit to Conda-forge?**
+:ref:`(Q) <mfaq_package_submit>` **Is it necessary for me to be an upstream maintainer of the package I submit to conda-forge?**
 
-  Everybody can submit a package to Conda-forge, irrespective of whether they maintain the upstream version or not. Additionally, it’s not required but considered good practice to inform the upstream of a new package and invite them to be maintainers as well.
+  Everybody can submit a package to conda-forge, irrespective of whether they maintain the upstream version or not. Additionally, it’s not required but considered good practice to inform the upstream of a new package and invite them to be maintainers as well.
 
 
 .. _mfaq_libGL_so_1:

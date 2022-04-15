@@ -25,7 +25,7 @@ Smithy contains maintenance code for conda-forge, which is used by the ``conda-s
 
 ``conda-smithy`` also contains the command line tool that you should use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
 
-Smithy can be used beyond Conda-Forge's purposes. For example, it can be used to `set up self-hosted Azure agents <azure-config>` for non-Conda-Forge infrastructures.
+Smithy can be used beyond conda-forge's purposes. For example, it can be used to `set up self-hosted Azure agents <azure-config>` for non-conda-forge infrastructures.
 (You could also consider using `Azure virtual machine scale set agents <https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops>`_,
 which could be less expensive to run than permanently active agents.)
 
@@ -63,7 +63,7 @@ If you found any typo error, unclear explanations or new topics that can be cove
 Admin web services
 ==================
 
-Conda-forge is running a webservice on Heroku called `conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
+conda-forge is running a webservice on Heroku called `conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
 
 The following services are run by default on a feedstock:
 
@@ -335,7 +335,7 @@ take more serious actions, including archiving feedstocks or removing maintainer
 Compilers and Runtimes
 ======================
 
-Conda-forge builds and maintains its own set of compilers for various languages
+conda-forge builds and maintains its own set of compilers for various languages
 and/or systems (e.g., ``C``, ``FORTRAN``, ``C++``, ``CUDA``, etc.). These are used
 in all of our CI builds to build both core dependencies (e.g., ``Python``) and maintainer-contributed
 packages. While we do not have any formal policies or promises of support for these

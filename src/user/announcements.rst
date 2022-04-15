@@ -10,9 +10,9 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
 :2022-04-03: CircleCI and Drone.io Deprecated for New Feedstocks
 
-    Due to technical issues in generating new feedstocks, we have deprecated using 
-    CircleCI and Drone.io for builds of new feedstocks. Existing CircleCI builds, 
-    if any, should be moved to azure. Existing Drone.io builds can be moved to 
+    Due to technical issues in generating new feedstocks, we have deprecated using
+    CircleCI and Drone.io for builds of new feedstocks. Existing CircleCI builds,
+    if any, should be moved to azure. Existing Drone.io builds can be moved to
     Travis CI or cross-compiled/emulated builds on azure.
 
 :2022-03-28: PyPy 3.8+3.9 Migration
@@ -28,41 +28,41 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
 :2022-03-06: Travis CI Usage Deprecated for ``win_*``, ``osx_*``, and ``linux_64`` Platforms
 
-    Due to changes in how Travis CI tracks open-source build time, we are deprecating using it 
-    for the ``win_*``, ``osx_*``, and ``linux_64`` platforms. Travis CI will be available only 
+    Due to changes in how Travis CI tracks open-source build time, we are deprecating using it
+    for the ``win_*``, ``osx_*``, and ``linux_64`` platforms. Travis CI will be available only
     for platforms in their `partner queues <https://docs.travis-ci.com/user/billing-overview/#partner-queue-solution>`_.
-    These platforms currently include ``ppc64le``, ``aarch64`` and ``s390x``. Rerendering will 
+    These platforms currently include ``ppc64le``, ``aarch64`` and ``s390x``. Rerendering will
     raise an error if Travis CI is used for a non-partner queue platform in the ``conda-forge``
     GitHub organization.
 
 :2022-02-13: Default branch migration from ``master`` to ``main``
 
     We will be migrating the default branches of all feedstocks and other ``conda-forge`` repos
-    from ``master`` to ``main``. We do expect some minor hiccups while this migration is 
-    going on. You will need to change to the ``main`` branch from ``master`` on any local clones via the 
+    from ``master`` to ``main``. We do expect some minor hiccups while this migration is
+    going on. You will need to change to the ``main`` branch from ``master`` on any local clones via the
     following git commands:
-    
+
     .. code-block::
-        
+
         git branch -m master main
         git fetch origin
         git branch -u origin/main main
         git remote set-head origin -a
 
-    If you encounter any problems, please comment on this Github 
-    `issue <https://github.com/conda-forge/conda-forge.github.io/issues/1162>`_. 
+    If you encounter any problems, please comment on this Github
+    `issue <https://github.com/conda-forge/conda-forge.github.io/issues/1162>`_.
 
 2021
 ----
 
 :2021-12-02: CentOS 7 docker images are now the default
 
-    We are moving all ``conda-forge`` ``linux-64`` jobs to use CentOS 7-based docker images. 
-    This will help users avoid ``conda/mamba`` solver errors where dependencies that need 
-    CentOS 7 cannot be installed. Importantly, our compiler stack will still default to using 
-    a CentOS 6 sysroot unless the recipe explicitly lists the CentoOS 7 sysroot package. This 
+    We are moving all ``conda-forge`` ``linux-64`` jobs to use CentOS 7-based docker images.
+    This will help users avoid ``conda/mamba`` solver errors where dependencies that need
+    CentOS 7 cannot be installed. Importantly, our compiler stack will still default to using
+    a CentOS 6 sysroot unless the recipe explicitly lists the CentoOS 7 sysroot package. This
     build configuration means that our core system ABI on linux will remain largely CentOS 6-compatible,
-    keeping support for older systems largely intact. We will reconsider moving the default ABI to 
+    keeping support for older systems largely intact. We will reconsider moving the default ABI to
     CentOS 7 at a later date.
 
 :2021-11-17: ``cloud.drone.io`` no longer working
@@ -193,7 +193,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     we have switched to have ``numpy 1.16`` as the minimum supported version on all
     platforms.
 
-:2020-07-17: Conda-forge is building openblas with both pthreads and openmp on Linux
+:2020-07-17: conda-forge is building openblas with both pthreads and openmp on Linux
 
     The main change is that ``openblas`` will use pthreads for threading by default on Linux
     instead of the previous ``openmp`` default.
@@ -329,7 +329,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 :2020-03-18: Python 2.7 and ``vs2008`` Deprecation
 
    - Python 2.7 is no longer supported by the upstream developers as of 2020-01-01.
-     Conda-forge is thus deprecating its Python 2.7 support. Conda-forge will provide
+     conda-forge is thus deprecating its Python 2.7 support. conda-forge will provide
      no ongoing support for Python 2.7 builds and any existing builds are provided on an "as-is" basis.
    - A ``cf202003`` label has been applied to the ``conda-forge`` channel for those
      who need a reference to the package index with Python 2.7.
@@ -359,7 +359,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
   For more information please refer to the :ref:`documentation <knowledge:blas>`.
 
 
-:2019-01-22: It has happened! Conda-forge has migrated to the latest compilers 🎉.
+:2019-01-22: It has happened! conda-forge has migrated to the latest compilers 🎉.
 
     If you:
       * maintain a compiled feedstock, it will likely need to be rerender
@@ -386,6 +386,6 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     modernizing more than 4000 packages.  This is going to take a few months to get done so
     bear with us.
 
-:2018-09-10: Conda forge now has a magical status bar for tracking the progress of migrations.
+:2018-09-10: conda-forge now has a magical status bar for tracking the progress of migrations.
 
     You can find this at `conda-forge.org/status <https://conda-forge.org/status>`_.

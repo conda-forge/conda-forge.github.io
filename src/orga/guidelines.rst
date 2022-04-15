@@ -134,7 +134,7 @@ and thus we prefer repo data patches over labeling things as ``broken``.
 Becoming a maintainer
 =====================
 
-Conda-forge is a community project and it can therefore happen that feedstocks become temporarily abandoned.
+conda-forge is a community project and it can therefore happen that feedstocks become temporarily abandoned.
 You can join the maintainer team of a feedstock by adding your github-id to the ``recipe-maintainers`` section in the recipe's ``meta.yaml``.
 Please refer to :ref:`maint_updating_maintainers` for detailed instructions.
 
@@ -142,20 +142,20 @@ Please refer to :ref:`maint_updating_maintainers` for detailed instructions.
 Language versions
 =================
 
-Conda-forge contains packages from a number of languages including Python and R, among many others.
+conda-forge contains packages from a number of languages including Python and R, among many others.
 Each of these language-specific packaging sub-ecosystems needs to keep cadence with the language itself, making it challenging to have a blanket policy for how long to keep older versions of the language around.
 As it comes up, each group should be able to define their own policy on how long to keep older versions of their language around.
 
 Python
 ------
 For the Python language, conda-forge aims to keep package builds active and available for the current version and at least two preceding minor versions.
-Whenever Python 4.0 comes out we'll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously. 
+Whenever Python 4.0 comes out we'll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously.
 Fortunately, we can punt on that for now.
 The question of when to decide to drop an older language version remains.
 The guidance that we can provide here is two fold:
 
 1. We will move with the community.
-   When our core libraries stop supporting an old version, so too will conda forge.
+   When our core libraries stop supporting an old version, so too will conda-forge.
    The (nonexhaustive) list of core libraries that we consider when making the decision to drop an older version are:
 
    * matplotlib
