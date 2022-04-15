@@ -151,7 +151,7 @@ In order to override the default behavior, a user can set the environment variab
    
    You should select the cudatoolkit version most appropriate for your GPU; currently, we have "10.2", "11.0", "11.1", and "11.2" builds available, where the "11.2" builds are compatible with all cudatoolkits>=11.2. At the time of writing (Mar 2022), there seems to be a bug in how the CUDA builds are resolved by ``mamba``, defaulting to ``cudatoolkit==10.2``; thus, it is prudent to be as explicit as possible like above or by adding ``cudatoolkit>=11.2`` or similar to the line above. 
 
-For context, installing the TensorFlow 2.7.0 CUDA-enabled variant, ``tensorflow==2.7.0=cuda*``, results in approximately 2 GB of packages to download while the CPU variant, ``tensorflow=2.7.0=cpu*``, results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the ``-cpu`` variant!
+For context, installing the TensorFlow 2.7.0 CUDA-enabled variant, ``tensorflow==2.7.0=cuda*``, results in approximately 2 GB of packages to download while the CPU variant, ``tensorflow=2.7.0=cpu*``, results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the CPU only variant!
 
 .. _pypy:
 
