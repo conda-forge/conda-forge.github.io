@@ -1,3 +1,4 @@
+# pylint: disable=import-error
 # -*- coding: utf-8 -*-
 #
 # conda-forge documentation build configuration file, created by

@@ -1,6 +1,16 @@
+## Getting Started
+
 The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` script.
 
-To build the docs locally, follow the steps mentioned below:
+### Prerequisites
+
+#### Install
+
+You will need to have [Anaconda](https://problemsolvingwithpython.com/01-Orientation/01.03-Installing-Anaconda-on-Windows/) installed on your machine to use conda as a package manager
+
+<br >
+
+##### To build the docs locally, follow the steps mentioned below:
 
 1.  Clone the repository into your local machine.
 2.  Go into the main folder and run the following commands.
@@ -14,28 +24,66 @@ conda activate conda-forge-docs
 ```
 
 ```
-cd newsfeed && pip install --no-deps .
+conda install sphinx cloud_sptheme sphinxcontrib-fulltoc
+```
+
+```
+cd newsfeed
+```
+
+```
+pip install --no-deps
 ```
 
 ```
 cd ../src
 ```
 
+<br>
+
+##### To create the output files in `_build/html`.
+
+Linux run
+
 ```
 make html
 ```
 
-# Contributor Conda-forge Code of Conduct
+Windows run
 
-## Scope
+```
+./make.bat html
+```
+
+<br>
+
+##### To preview on broswer
+
+Google chrome run
+
+```
+google-chrome _build/html/index.html
+```
+
+Firefox run
+
+```
+firefox _build/html/index.html
+```
+
+<br>
+
+## Contributor Conda-forge Code of Conduct
+
+### Scope
 
 This code of conduct applies to all spaces managed by Conda-forge, including all public and private mailing lists, issue trackers, wikis, forums, and any other communication channel used by our community. The code of conduct equally applies at Conda-forge events and governs standards of behavior for attendees, speakers, volunteers, booth staff, and event sponsors.
 
-## Our Dedication
+### Our Dedication
 
 Conda-forge is dedicated to providing a harassment-free community for everyone, regardless of gender, sexual orientation, gender identity and expression, disability, physical appearance, body size, race, or religion. We do not tolerate harassment of community members in any form.
 
-## Our Standards
+### Our Standards
 
 Examples of behavior that contributes to creating a positive environment
 include:
@@ -57,16 +105,16 @@ Examples of unacceptable behavior by participants include:
 - Other unethical or unprofessional conduct.
 - Advocating for, or encouraging, any of the above behaviors.
 
-## Reporting Misconduct
+### Reporting Misconduct
 
 - You can reach the project maintainers [here](https://conda-forge.org/docs/orga/getting-in-touch.html).
 
-## Enforcement: What Happens After a Report is Filed
+### Enforcement: What Happens After a Report is Filed
 
 - Reviewing the report.
 - Contacting the person reported.
 
-## Response and Potential Consequences
+### Response and Potential Consequences
 
 - Nothing (if we determine that no violation occurred).
 - Private feedback or reprimand from Conda-forge to the individual(s) involved.
@@ -88,6 +136,6 @@ _This code-of-conduct is common to the following projects:_
 - _[conda-forge-ci-setup-feedstock](https://github.com/conda-forge/conda-forge-ci-setup-feedstock)_
 - _[marketing](https://github.com/conda-forge/marketing)_
 
-## Attribution
+### Attribution
 
 This Code of Conduct is adapted from the [Contributor Conda-forge](https://conda-forge.org/docs/orga/governance.html)
