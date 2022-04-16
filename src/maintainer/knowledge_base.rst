@@ -210,25 +210,14 @@ In conda_build_config.yaml file:
 
 .. code-block:: yaml
 
-    c_compiler:
-    - vs2019
-    cxx_compiler:
-    - vs2019
+c_compiler:  # [win]
+- vs2019  # [win]
+cxx_compiler:  # [win]
+- vs2019  # [win]
 
 
-In conda-forge.yml file:
-
-.. code-block:: yaml
-
-    azure:
-      settings_win:
-          pool:
-              vmImage: windows-2019
-
-
-
-For example see the changes made in the ``conda_build_config.yaml`` and ``conda-forge.yml`` files in `this
-<https://github.com/conda-forge/libignition-physics-feedstock/commit/c586d765a2f5fd0ecf6da43c53315c898c9bf6bd>`__ PR.
+For example see the changes made in the ``conda_build_config.yaml`` files in `this
+<https://github.com/conda-forge/libignition-msgs1-feedstock/pull/73/commits/81b5ee0e1d23f7f20427dd80d04cf1f7321b441d>`__ commit.
 
 After making these changes don't forget to rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line).
 
