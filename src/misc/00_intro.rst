@@ -6,12 +6,6 @@ Glossary
 
 .. glossary::
 
-  Conda package
-     **C**\ onda **P**\ ackage.A conda package is a .conda file that contains system-level libraries,Python or other modules,executable programs and other components,metadata under the info/ directory and a collection of files that are installed directly into an install prefix. `Learn More <https://en.wikipedia.org/wiki/Conda_(package_manager)>`__.
-
-  Conda channels
-     **C**\ onda **C**\hannels.Conda channels are the locations where packages are stored. They serve as the base for hosting and managing packages.Conda-Forge is a conda channels.
-     
   CI
     **C**\ ontinuous **I**\ ntegration. Continuous integration is the practice of automating the integration of code changes from multiple contributors into a single software project. `Learn More <https://en.wikipedia.org/wiki/Continuous_integration>`__.
 
