@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+
     <link rel="shortcut icon" href="img/favicon.ico">
 
     <title>conda-forge | community driven packaging for conda</title>
@@ -121,6 +121,28 @@
                   each repository, also known as a feedstock, automatically
                   builds its own recipe in a clean and repeatable way on Windows, Linux and OSX.
                 </p>
+            </div>
+        </div>
+
+        <div class="row vcenter" style="display: none;" id="stats1">
+            <div class="col-md-4 col-md-offset-2 padded">
+              <p class="text-center" id="stats-downloads"></p>
+            </div>
+            <div class="col-md-4 padded">
+              <p class="text-center" id="stats-members"></p>
+            </div>
+        </div>
+        <div class="row vcenter" style="display: none;" id="stats2">
+            <div class="col-md-4 col-md-offset-2 padded">
+              <p class="text-center" id="stats-data"></p>
+            </div>
+            <div class="col-md-4 padded">
+              <p class="text-center" id="stats-issues-prs"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 padded">
                 <p>
                   The built distributions are uploaded to <a href="http://anaconda.org/conda-forge">anaconda.org/conda-forge</a>
                   and can be <a href="http://conda.pydata.org/docs/intro.html">installed with conda</a>. For example, to install a
@@ -261,6 +283,9 @@
                           The build and upload processes take place in the feedstock, and once complete the package will be available on the conda-forge channel.</li>
                       </ul>
                     </p>
+                    <p>
+                        Please consider joining our <a href="https://gitter.im/conda-forge/conda-forge.github.io">Gitter</a> channel if you want to ask something, need help, or just want to chat with our maintainers. We would love to see you there!
+                    </p>
                 </div>
             </div>
         </div>
@@ -393,6 +418,9 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="js/theme.js"></script>
+
+    <!-- stats -->
+    <script src="js/stats.js"></script>
 
 </body>
 
