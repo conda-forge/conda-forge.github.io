@@ -60,7 +60,7 @@ Step-by-step Instructions
 #. Checkout a new branch from the staged-recipes ``main`` branch.
 #. Through CLI, cd inside the 'staged-recipes/recipes' directory.
 #. Within your forked copy, create a new folder in the recipes folder for your package (i.e, ``...staged-recipes/recipes/<name-of-package>``)
-#. Copy `meta.yml
+#. Copy `meta.yaml
    <https://github.com/conda-forge/staged-recipes/blob/master/recipes/
    example/meta.yaml>`_ from the example directory.
    All the changes in the following steps will happen in the COPIED meta.yaml (i.e., ``...staged-recipes/recipes/<name-of-package>/meta.yaml``).
