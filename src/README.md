@@ -6,7 +6,7 @@ The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` scrip
 
 #### Install
 
-You will need to have [Anaconda](https://docs.anaconda.com/anaconda/install/windows/) installed on your machine to use conda as a package manager.
+You will need to have [Miniforge](https://github.com/conda-forge/miniforge) installed on your machine to use conda as a package manager.
 
 ##### To build the docs locally, follow the steps mentioned below:
 
