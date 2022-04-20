@@ -6,14 +6,21 @@ The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` scrip
 
 #### Install
 
-You will need to have [Anaconda](https://problemsolvingwithpython.com/01-Orientation/01.03-Installing-Anaconda-on-Windows/) installed on your machine to use conda as a package manager
-
-<br >
+You will need to have [Anaconda](https://docs.anaconda.com/anaconda/install/windows/) installed on your machine to use conda as a package manager.
 
 ##### To build the docs locally, follow the steps mentioned below:
 
-1.  Clone the repository into your local machine.
-2.  Go into the main folder and run the following commands.
+###### To Clone the repository into your local machine.
+
+```
+git clone https://github.com/conda-forge/conda-forge.github.io.git
+```
+
+```
+cd conda-forge.github.io
+```
+
+###### To install dependencies run the following commands.
 
 ```
 conda env create -f ./.ci_scripts/environment.yml
@@ -39,9 +46,7 @@ pip install --no-deps
 cd ../src
 ```
 
-<br>
-
-##### To create the output files in `_build/html`.
+###### To create the output files in `_build/html`.
 
 Linux run
 
@@ -57,9 +62,9 @@ Windows run
 
 <br>
 
-##### To preview on broswer
+###### To preview on broswer
 
-Google chrome run
+Google Chrome run
 
 ```
 google-chrome _build/html/index.html
@@ -138,4 +143,4 @@ _This code-of-conduct is common to the following projects:_
 
 ### Attribution
 
-This Code of Conduct is adapted from the [Contributor Conda-forge](https://conda-forge.org/docs/orga/governance.html)
+This Code of Conduct is adapted from the [Conda-forge Governance page](https://conda-forge.org/docs/orga/governance.html).
