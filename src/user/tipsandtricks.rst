@@ -93,8 +93,8 @@ dummy package with the following command
 
 .. code-block:: shell
 
-    $ conda install mpich=x.y.z=external_*
-    $ conda install openmpi=x.y.z=external_*
+    $ conda install "mpich=x.y.z=external_*"
+    $ conda install "openmpi=x.y.z=external_*"
 
 As long as you have the local copies of the ``mpich``/``openmpi`` library in your linking paths and
 the local version matches the ``conda`` version within the proper ABI range, then this procedure should 

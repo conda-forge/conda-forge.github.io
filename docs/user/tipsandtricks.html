@@ -140,8 +140,8 @@ does not work at all or functions in unexpected ways on HPC systems.</p>
 libraries that are simply shell packages with no contents. These packages allow the <code class="docutils literal notranslate"><span class="pre">conda</span></code> solver to produce
 correct environments while avoiding installing MPI binaries from <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. You can install the
 dummy package with the following command</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ conda install <span class="nv">mpich</span><span class="o">=</span>x.y.z<span class="o">=</span>external_*
-$ conda install <span class="nv">openmpi</span><span class="o">=</span>x.y.z<span class="o">=</span>external_*
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ conda install <span class="s2">&quot;mpich=x.y.z=external_*&quot;</span>
+$ conda install <span class="s2">&quot;openmpi=x.y.z=external_*&quot;</span>
 </pre></div>
 </div>
 <p>As long as you have the local copies of the <code class="docutils literal notranslate"><span class="pre">mpich</span></code>/<code class="docutils literal notranslate"><span class="pre">openmpi</span></code> library in your linking paths and
