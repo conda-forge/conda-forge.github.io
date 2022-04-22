@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Knowledge Base &#8212; conda-forge 2022.04.20 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2022.04.22 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.04.20 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.04.22 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -243,20 +243,13 @@ requirements of the VC version. For example, python 2.7 requires <code class="do
 <h3>Using vs2019<a class="headerlink" href="#using-vs2019" title="Permalink to this headline">¶</a></h3>
 <p>To use <code class="docutils literal notranslate"><span class="pre">vs2019</span></code> make the following changes:</p>
 <p>In conda_build_config.yaml file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">c_compiler</span><span class="p">:</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vs2019</span><span class="w"></span>
-<span class="nt">cxx_compiler</span><span class="p">:</span><span class="w"></span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vs2019</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">c_compiler</span><span class="p">:</span><span class="w">    </span><span class="c1"># [win]</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vs2019</span><span class="w">       </span><span class="c1"># [win]</span><span class="w"></span>
+<span class="nt">cxx_compiler</span><span class="p">:</span><span class="w">  </span><span class="c1"># [win]</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vs2019</span><span class="w">       </span><span class="c1"># [win]</span><span class="w"></span>
 </pre></div>
 </div>
-<p>In conda-forge.yml file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">settings_win</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">pool</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="nt">vmImage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">windows-2019</span><span class="w"></span>
-</pre></div>
-</div>
-<p>For example see the changes made in the <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> files in <a class="reference external" href="https://github.com/conda-forge/libignition-physics-feedstock/commit/c586d765a2f5fd0ecf6da43c53315c898c9bf6bd">this</a> PR.</p>
+<p>For example see the changes made in the <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> files in <a class="reference external" href="https://github.com/conda-forge/libignition-msgs1-feedstock/pull/73/commits/81b5ee0e1d23f7f20427dd80d04cf1f7321b441d">this</a> commit.</p>
 <p>After making these changes don’t forget to rerender with <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> (to rerender manually use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">smithy</span> <span class="pre">rerender</span></code> from the command line).</p>
 </section>
 </section>
@@ -1529,7 +1522,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.04.20 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.04.22 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
