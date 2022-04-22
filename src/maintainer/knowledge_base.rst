@@ -210,10 +210,10 @@ In conda_build_config.yaml file:
 
 .. code-block:: yaml
 
-c_compiler:  # [win]
-- vs2019  # [win]
-cxx_compiler:  # [win]
-- vs2019  # [win]
+    c_compiler:    # [win]
+    - vs2019       # [win]
+    cxx_compiler:  # [win]
+    - vs2019       # [win]
 
 
 For example see the changes made in the ``conda_build_config.yaml`` files in `this
