@@ -1,0 +1,22 @@
+.. _funding:
+
+Funding efforts for conda-forge
+===============================
+
+.. Fundable efforts
+.. ----------------
+
+.. Please check this repository for more details (WIP).
+
+Past funding efforts
+--------------------
+
+For the sake of transparency, we have made available previous letters of intent, applications and grants
+submissions for conda-forge.
+
+* `CZI EOSS Funding Cycle 4: Fast Software Package Management for Bio and Data Science <https://chanzuckerberg.com/eoss/proposals/fast-software-package-management-for-bio-and-data-science/>`_, submitted by QuantStack
+    * `Blog post <https://wolfv.medium.com/the-mamba-project-and-the-czi-grant-ec88fb27c25>`_
+* CZI EOSS Funding Cycle 5: Adding a WebAssembly Toolchain to conda-forge, submitted by QuantStack
+    * `Letter of intent </orga/funding/czi-eoss-5-loi-wasm.pdf>`_
+* CZI EOSS Funding Cycle 5: Transparent, open & sustainable infrastructure for conda-forge and bioconda, submitted by QuantStack & Quansight
+    * `Letter of intent </orga/funding/czi-eoss-5-loi-infra.pdf>`_
