@@ -1165,6 +1165,8 @@ To skip the pypy builds, do the following,
    build:
      skip: True         # [python_impl == 'pypy']
 
+If something is failing the PyPy build when it passes the CPython one, reach
+out to @conda-forge/help-pypy.
 
 Using setuptools_scm
 ====================
