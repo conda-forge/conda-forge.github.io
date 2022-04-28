@@ -53,6 +53,7 @@ Members
 - Jannis Leidel <jleidel@anaconda.com>
 - Jaime Rodríguez-Guerra <jrodriguez@quansight.com>
 - Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
+- Filipe Fernandes <ocefpaf#gmail.com>
 
 
 Security and Systems Sub-Team
