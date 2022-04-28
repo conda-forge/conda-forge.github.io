@@ -23,6 +23,8 @@ The CoC sub-team will operate via the following rules:
 
 - It can only be comprised of ``core`` members.
 - Any ``core`` member is welcome to participate.
+- ``core`` members involved in CoC reports will use their best judgment to recuse
+  themselves in cases where there may be or even appear to be a conflict of interest.
 - The CoC team will judge CoC-related issues according to the current official
   conda-forge CoC. The ``conda-forge`` CoC is subject to change by the wider ``core`` group.
 - The team may seek guidance from NumFocus and the wider ``core`` group as needed.
