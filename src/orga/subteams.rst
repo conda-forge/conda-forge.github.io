@@ -2,6 +2,59 @@ A list of current sub-teams
 ***************************
 
 
+Code of Conduct Sub-Team
+=============================
+
+Role
+----
+The code-of-conduct (CoC) sub-team is responsible for accepting, handling
+and resolving code-of-conduct related items (including but not limited to
+CoC violations, enforcement, communications, warnings, etc.) on conda-forge's
+communication channels (including but not limited to Gitter, GitHub, Keybase, the various
+mailing lists, etc).
+
+Charter
+-------
+Static
+
+Responsibility
+--------------
+The CoC sub-team will operate via the following rules:
+
+- It can only be comprised of ``core`` members.
+- Any ``core`` member is welcome to participate.
+- The CoC team will judge CoC-related issues according to the current official
+  conda-forge CoC. The ``conda-forge`` CoC is subject to change by the wider ``core`` group.
+- The team may seek guidance from NumFocus and the wider ``core`` group as needed.
+- Due to the potentially sensitive nature of CoC violations, the CoC team will
+  strive to preserve the confidentiality of involved persons as much as possible.
+- The CoC team may issue warnings through e-mail, gitter, github etc. in order to
+  prevent situations from escalating.
+- The CoC team will maintain records of CoC reports, the CoCs findings in each case, and
+  will report them as appropriate to the wider core group promptly.
+- The CoC team will maintain secured reporting channels for potential CoC violations.
+- The CoC team may temporarily remove maintainers for a period of up to one month
+  from feedstocks through the "yes" vote of at least three CoC team members and no "no" votes.
+  Documentation of the CoC violations, the specific user in question, and the specific feedstocks
+  must be given at the vote and maintained. After one month, the user may petition the CoC team
+  to restore their access to the feedstock. The CoC team will vote on this petition under the same
+  rules. If the the petition is accepted, the user's access is restored. If the petition is rejected,
+  the user is permanently removed from the feedstock. Excessive, repeated petitions are not acceptable
+  and will be handled as a potential CoC violation.
+- Any member of the CoC team may call a vote by the wider ``core`` team to ban a user from
+  ``conda-forge``. This vote falls under the rules of votes to ban users in the ``conda-forge``
+  governance charter.
+
+Members
+-------
+- Matthew R. Becker <becker.mr@gmail.com>
+- Chris Burr <christopher.burr@cern.ch>
+- Matt Craig <mattwcraig@gmail.com>
+- Jannis Leidel <jleidel@anaconda.com>
+- Jaime Rodríguez-Guerra <jrodriguez@quansight.com>
+- Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
+
+
 Security and Systems Sub-Team
 =============================
 
