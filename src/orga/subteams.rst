@@ -60,7 +60,7 @@ Members
 - Jaime Rodríguez-Guerra <jrodriguez@quansight.com>
 - Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
 - Filipe Fernandes <ocefpaf@gmail.com>
-
+- CJ Wright <cjwright4242@gmail.com>
 
 Security and Systems Sub-Team
 =============================
