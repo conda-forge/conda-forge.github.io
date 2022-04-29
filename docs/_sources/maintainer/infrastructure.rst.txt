@@ -272,8 +272,14 @@ here `<https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/
 GitHub Actions
 --------------
 
-We use GitHub actions to rerender feedstocks and run our pull request automerge service. We do not currently support builds on 
-GitHub Actions. 
+We use GitHub actions to rerender feedstocks and run our pull request automerge service.
+Builds are supported on GitHub Actions.
+
+
+Woodpecker
+--------------
+
+We use Woodpecker to ...?
 
 
 Skipping CI builds
