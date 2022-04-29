@@ -11,7 +11,7 @@ The code-of-conduct (CoC) sub-team is responsible for accepting, handling
 and resolving code-of-conduct related items (including but not limited to
 CoC violations, enforcement, communications, warnings, etc.) on conda-forge's
 communication channels (including but not limited to Gitter, GitHub, Keybase, the various
-mailing lists, etc).
+mailing lists, etc) pursuant to conda-forge's code of conduct document(s).
 
 Charter
 -------
