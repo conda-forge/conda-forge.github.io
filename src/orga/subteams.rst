@@ -41,7 +41,10 @@ The CoC sub-team will operate via the following rules:
   must be given at the vote and maintained. After one month, the user may petition the CoC team
   to restore their access to the feedstock. The CoC team will vote on this petition under the same
   rules. If the the petition is accepted, the user's access is restored. If the petition is rejected,
-  the user is permanently removed from the feedstock. Excessive, repeated petitions are not acceptable
+  the user is permanently removed from the feedstock. Users may petition the CoC
+  sub-team for access again if at least six months have passed and circumstances 
+  have changed sufficiently. Evidence of the changed circumstances must be presented 
+  with the petition. Excessive, repeated petitions are not acceptable
   and will be handled as a potential CoC violation.
 - Any member of the CoC team may call a vote by the wider ``core`` team to ban a user from
   ``conda-forge``. This vote falls under the rules of votes to ban users in the ``conda-forge``
