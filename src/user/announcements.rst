@@ -12,8 +12,8 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
     After more than six months, the conda-forge team and contributors have managed
     to update the Qt5 packages to the latest LTS version, 5.15.2. Major changes include
-    separate packages for QtWebEngine (``qt-webengine``) and the rest of Qt in a new
-    package called ``qt-main``. This allows recipes that do not use any of the
+    separating the package for QtWebEngine (``qt-webengine``) from the rest of Qt (now in a new
+    package called ``qt-main``). This allows recipes that do not use any of the
     WebEngine components to depend only on ``qt-main``, reducing the total size of
     the downloaded binaries. As a result of this, ``qt`` will be a metapackage that
     installs both ``qt-main`` and ``qt-webengine`` as dependencies.
