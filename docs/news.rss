@@ -4,8 +4,28 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Wed, 27 Apr 2022 06:37:15 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 01 May 2022 01:05:55 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2022-04-23: Packages for Qt/PyQt 5.15.2 are now available</title>
+      <link>https://conda-forge.org/docs/user/announcements.html</link>
+      <description>&lt;p&gt;After more than six months, the conda-forge team and contributors have managed
+to update the Qt5 packages to the latest LTS version, 5.15.2. Major changes include
+separating the package for QtWebEngine (&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;qt-webengine&lt;/span&gt;&lt;/code&gt;) from the rest of Qt (now in a new
+package called &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;qt-main&lt;/span&gt;&lt;/code&gt;). This allows recipes that do not use any of the
+WebEngine components to depend only on &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;qt-main&lt;/span&gt;&lt;/code&gt;, reducing the total size of
+the downloaded binaries. As a result of this, &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;qt&lt;/span&gt;&lt;/code&gt; will be a metapackage that
+installs both &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;qt-main&lt;/span&gt;&lt;/code&gt; and &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;qt-webengine&lt;/span&gt;&lt;/code&gt; as dependencies.&lt;/p&gt;
+
+&lt;p&gt;With respect to PyQt, the new packages now are in sync with respect to their
+corresponding PyPI releases, which means that the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;pyqt&lt;/span&gt;&lt;/code&gt; package will only provide
+the core components of Qt, leaving &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;pyqtwebengine&lt;/span&gt;&lt;/code&gt; and &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;pyqtcharts&lt;/span&gt;&lt;/code&gt; as optional
+packages that extend PyQt by providing the QtWebEngine and QtCharts components,
+respectively. A migrator will be put in place to help with the transition.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html</guid>
+      <pubDate>Sat, 23 Apr 2022 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2022-04-20: New Semi-automated PR Labeling in conda-forge/staged-recipes</title>
       <link>https://conda-forge.org/docs/user/announcements.html</link>
