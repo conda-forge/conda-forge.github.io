@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Tips &amp; tricks &#8212; conda-forge 2022.05.03 documentation</title>
+    <title>Tips &amp; tricks &#8212; conda-forge 2022.05.09 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.05.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.05.09 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Tips &amp; tricks</a></li> 
@@ -155,9 +155,8 @@ local copy of <code class="docutils literal notranslate"><span class="pre">mpich
 <p>This can be enabled per environment using the following commands:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64 conda create -n your_environment_name python   <span class="c1"># Create a new environment called your_environment_name with intel packages.</span>
 conda activate your_environment_name
-conda env config vars <span class="nb">set</span> <span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64  <span class="c1"># Make sure that conda commands in this environment use intel packages.</span>
-conda deactivate
-conda activate your_environment_name
+python -c <span class="s2">&quot;import platform;print(platform.machine())&quot;</span>  <span class="c1"># Confirm that the correct values are being used.</span>
+conda config --env --set subdir osx-64  <span class="c1"># Make sure that conda commands in this environment use intel packages.</span>
 </pre></div>
 </div>
 <p>To verify that the correct platform is being used, run the following commands after the environment has been activated:</p>
@@ -311,7 +310,7 @@ installed alongside pypy.</p>
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.05.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.05.09 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Tips &amp; tricks</a></li> 
