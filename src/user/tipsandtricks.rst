@@ -115,9 +115,8 @@ This can be enabled per environment using the following commands:
 
     CONDA_SUBDIR=osx-64 conda create -n your_environment_name python   # Create a new environment called your_environment_name with intel packages.
     conda activate your_environment_name
-    conda env config vars set CONDA_SUBDIR=osx-64  # Make sure that conda commands in this environment use intel packages.
-    conda deactivate
-    conda activate your_environment_name
+    python -c "import platform;print(platform.machine())"
+    conda config --env --set subdir osx-64  # Make sure that conda commands in this environment use intel packages.
 
 To verify that the correct platform is being used, run the following commands after the environment has been activated:
 
