@@ -210,25 +210,14 @@ In conda_build_config.yaml file:
 
 .. code-block:: yaml
 
-    c_compiler:
-    - vs2019
-    cxx_compiler:
-    - vs2019
+    c_compiler:    # [win]
+    - vs2019       # [win]
+    cxx_compiler:  # [win]
+    - vs2019       # [win]
 
 
-In conda-forge.yml file:
-
-.. code-block:: yaml
-
-    azure:
-      settings_win:
-          pool:
-              vmImage: windows-2019
-
-
-
-For example see the changes made in the ``conda_build_config.yaml`` and ``conda-forge.yml`` files in `this
-<https://github.com/conda-forge/libignition-physics-feedstock/commit/c586d765a2f5fd0ecf6da43c53315c898c9bf6bd>`__ PR.
+For example see the changes made in the ``conda_build_config.yaml`` files in `this
+<https://github.com/conda-forge/libignition-msgs1-feedstock/pull/73/commits/81b5ee0e1d23f7f20427dd80d04cf1f7321b441d>`__ commit.
 
 After making these changes don't forget to rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line).
 
@@ -242,13 +231,15 @@ Compilers
 
 Compilers are dependencies with a special syntax and are always added to ``requirements/build``.
 
-There are currently three supported compilers:
+There are currently five supported compilers:
 
  - C
  - cxx
  - Fortran
+ - Go
+ - Rust
 
-A package that needs all three compilers would define
+A package that needs all five compilers would define
 
 .. code-block:: yaml
 
@@ -257,6 +248,8 @@ A package that needs all three compilers would define
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - {{ compiler('fortran') }}
+        - {{ compiler('go') }}
+        - {{ compiler('rust') }}
 
 .. note::
 
@@ -913,15 +906,43 @@ which restricts the corresponding conda-forge recipes from becoming ``noarch``.
 Therefore, some conda-forge recipes only create an actual package on specific Python versions and are otherwise an
 empty placeholder. This allows them to be safely installed under all Python versions and makes using ``skips`` unnecessary.
 
+Similarly, some packages are `only` platform-specific dependency of a package, such as ``pywin32``, and have
+helper metapackages which can help recipes stay ``noarch``. The version of the `actual` package required
+can be controlled with ``run_constrained``, even for packages not available on all platforms.
+
 Currently available packages:
 
-+-------------+-------------------+--------------+
-| Name        | Available on:     | Empty on:    |
-+=============+===================+==============+
-| dataclasses | python >=3.6,<3.7 | python >=3.7 |
-+-------------+-------------------+--------------+
-| typing      |                   | python >=3   |
-+-------------+-------------------+--------------+
++--------------------+-------------------+--------------+
+| Name               | Available on:     | Empty on:    |
++====================+===================+==============+
+| dataclasses        | python >=3.6,<3.7 | python >=3.7 |
++--------------------+-------------------+--------------+
+| enum34             | python =2.7       | python >=3.4 |
++--------------------+-------------------+--------------+
+| typing             |                   | python >=3   |
++--------------------+-------------------+--------------+
+| pywin32-on-windows | windows           | unix         |
++--------------------+-------------------+--------------+
+
+.. _knowledge:all-installs:
+
+Non-version-specific Python packages
+------------------------------------
+For some dependencies, upstream maintainers list Python versions where those packages are needed,
+even if the packages can actually be installed under all Python versions.
+
+Implementing this restriction in conda-forge is currently only possible through the use of ``skips``
+which restricts the corresponding conda-forge recipes from becoming ``noarch``.
+
+Therefore, the conda-forge community maintains a list of packages that are safe to be installed under all Python versions,
+even if the original package only requires it for some versions.
+
+For example, the package `pyquil <https://github.com/rigetti/pyquil>`__ only
+`requires <https://github.com/rigetti/pyquil/blob/497791e8108d8780109d75410be786c5f6e590ea/pyproject.toml#L30>`__ ``importlib-metadata`` for ``python <3.8`` but it is actually save to be installed under ``python >=3.8`` as well.
+
+Currently available packages:
+
+  - importlib-metadata
 
 
 Noarch builds
@@ -930,7 +951,7 @@ Noarch builds
 Noarch packages are packages that are not architecture specific and therefore only have to be built once.
 
 Declaring these packages as ``noarch`` in the ``build`` section of the meta.yaml, reduces shared CI resources.
-Therefore all packages that qualify to be noarch packages, should be declared as such.
+Therefore all packages that qualify to be noarch packages `should` be declared as such.
 
 
 .. _noarch:
@@ -950,7 +971,7 @@ In order to qualify as a noarch python package, all of the following criteria mu
     statement and add version constraint on python in ``host`` and ``run``
     section.
   - ``2to3`` is not used
-  - Scripts argument in setup.py is not used
+  - ``scripts`` argument in ``setup.py`` is not used
   - If ``console_scripts`` ``entry_points`` are defined in ``setup.py`` or ``setup.cfg``, they are also listed in
     the ``build`` section of ``meta.yaml``
   - No activate scripts
@@ -964,7 +985,7 @@ In order to qualify as a noarch python package, all of the following criteria mu
 
 .. note::
 
-  Only ``console_scripts`` entry points have to be listed in meta.yaml. Other entry points do not conflict
+  Only ``console_scripts`` entry points have to be listed in ``meta.yaml``. Other entry points do not conflict
   with ``noarch`` and therefore do not require extra treatment.
 
 .. note::
@@ -973,9 +994,16 @@ In order to qualify as a noarch python package, all of the following criteria mu
   ``noarch`` even if one of its dependencies is not available on a given platform. If this is the case, conda will
   display a helpful error message describing which dependency couldn't be found when it tries to install the package.
   If the dependency is later made available, your package will be installable on that platform without having to make
-  any changes to the feedstock. However, keep in mind that since ``noarch`` packages are built on Linux, all
-  dependencies must be available on Linux.
+  any changes to the feedstock.
 
+  By default, ``noarch`` packages are built on Linux, and all dependencies must be available on Linux.
+
+.. hint::
+
+  If a ``noarch`` package `cannot` be built on Linux, one or more ``noarch_platforms`` can be provided in
+  ``conda-forge.yml``. One example is `pywin32-on-windows <https://github.com/conda-forge/pywin32-on-windows-feedstock>`_,
+  which builds on Linux `and` Windows, with ``build_number`` offsets to create a pair packages, like
+  ``dataclasses``.
 
 If an existing python package qualifies to be converted to a noarch package, you can request the required changes
 by opening a new issue and including ``@conda-forge-admin, please add noarch: python``.
@@ -1109,23 +1137,7 @@ because these symbols are in fact available. To do so, add
 PyPy builds
 ===========
 
-To use the PyPy 3.6 or 3.7 builds you can do the following,
-
-.. code-block:: bash
-
-   conda create -n pypy36  pypy python=3.6
-   conda create -n pypy37  pypy python=3.7
-
-.. note::
-
-   As of March 8 2020, if you are using defaults as a low priority channel,
-   then you need to use strict channel priority as the metadata in defaults
-   has not been patched yet which allows cpython extension packages to be
-   installed alongside pypy.
-
-.. code-block:: bash
-
-   conda config --set channel_priority strict
+See :ref:`pypy` in the user docs for more info about PyPy and ``conda-forge``.
 
 To build your python package for pypy, wait for the bot to send a
 PR and contact ``conda-forge/bot`` team if a PR is not sent after the
@@ -1153,6 +1165,8 @@ To skip the pypy builds, do the following,
    build:
      skip: True         # [python_impl == 'pypy']
 
+If something is failing the PyPy build when it passes the CPython one, reach
+out to @conda-forge/help-pypy.
 
 Using setuptools_scm
 ====================
@@ -1448,7 +1462,7 @@ while B should have,
 .. code-block:: yaml
 
    channel_sources:
-     - conda-forge/label/A_rc,conda-forge,defaults
+     - conda-forge/label/A_rc,conda-forge
    channel_targets:
      - conda-forge B_rc
 

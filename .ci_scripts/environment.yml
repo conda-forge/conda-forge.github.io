@@ -16,6 +16,7 @@ dependencies:
   - python-dateutil
   - pip
   - python-rapidjson
+  - termcolor
   # uncomment to restore search
   # - elm
   # - nodejs

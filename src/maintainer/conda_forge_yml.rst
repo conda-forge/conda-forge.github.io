@@ -37,6 +37,7 @@ Top-level fields
 * :ref:`linux`
 * :ref:`linux_aarch64`
 * :ref:`linux_ppc64le`
+* :ref:`noarch_platforms`
 * :ref:`os_version`
 * :ref:`osx`
 * :ref:`provider`
@@ -151,7 +152,6 @@ Leaving this field empty implicitly requests to build a package natively. i.e.
       osx_64: osx_64
       osx_arm64: osx_arm64
       win_64: win_64
-
 
 .. _build_with_mambabuild:
 
@@ -270,6 +270,9 @@ defaults are as follows:
       repo_name: ""
       # branch name to execute on
       branch_name: master
+      # branch name to use for rerender+webservices github actions and
+      # conda-forge-ci-setup-feedstock references
+      tooling_branch_name: master
 
 .. _idle_timeout_minutes:
 
@@ -317,6 +320,26 @@ Currently only:
 
     linux_ppc64le:
       enabled: False
+
+.. _noarch_platforms:
+
+noarch_platforms
+----------------
+Platforms on which to build noarch packages. The preferred default is a
+single build on ``linux_64``.
+
+.. code-block:: yaml
+
+    noarch_platforms: linux_64
+
+To build on multiple platforms, e.g. for simple packages with platform-specific
+dependencies, provide a list.
+
+.. code-block:: yaml
+
+    noarch_platforms:
+      - linux_64
+      - win_64
 
 .. _os_version:
 

@@ -22,7 +22,8 @@ The ``conda-forge`` documentation is version-controlled in the
 `conda-forge.github.io repository
 <https://github.com/conda-forge/conda-forge.github.io>`_ on GitHub. The source
 text is stored in `the src/ subdirectory
-<https://github.com/conda-forge/conda-forge.github.io/tree/main/src>`_ of this repository and
+<https://github.com/conda-forge/conda-forge.github.io/tree/main/src>`_ of this repository
+(**not** the docs/ subdirectory) and
 is formatted using Python’s `reStructuredText
 <http://docutils.sourceforge.net/rst.html>`_ system.
 

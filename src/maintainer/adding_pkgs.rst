@@ -702,9 +702,63 @@ for the specification on expressions.
    MIT AND BSD-2-Clause
    PSF-2.0
 
+.. _third_party_package_licenses:
+
+Licenses of included dependencies
+.................................
+
+For some languages (Go, rust, etc.), the current policy is to include all dependencies and their dependencies in the package.
+This presents a problem when packaging the license files as each dependency needs to have its license file included in the recipe.
+
+For some languages, the community provides tools which can automate this process, enabling the automatic inclusion of all needed license files.
+
+* **Rust**
+
+  `cargo-bundle-licenses <https://github.com/sstadick/cargo-bundle-licenses>`__ can be included in the build process of a package and will automatically collect and add the license files of all dependencies of a package.
+  
+  For a detailed description, please visit the project page but a short example can be found below.
+  
+  First, include the collection of licenses as a step of the build process.
+  
+  .. code-block:: yaml
+
+    build:
+      number: 0
+      script:
+        - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
+        - build_command_goes_here
+
+  Then, include the tool as a build time dependency.
+  
+  .. code-block:: yaml
+  
+    requirements:
+      build:
+        - cargo-bundle-licenses
+
+  Finally, make sure that the generated file is included in the recipe.
+   
+  .. code-block:: yaml
+  
+    about:
+      license_file:
+        - THIRDPARTY.yml
+        - package_license.txt
+
+.. important::
+
+  We are not lawyers and cannot guarantee that the above advice is correct or that the tools are able to find all license files. 
+  Additionally, we are unable to accept any responsibility or liability.
+  It is always your responsibility to double-check that all licenses are included and verify that any generated output is correct.
+  
+.. note::
+
+   The correct and automated packaging of dependency licenses is an ongoing discussion. Please feel free to add your thoughs to `this <https://github.com/conda-forge/conda-forge.github.io/issues/1052>`__ discussion. 
 
 Miscellaneous
 =============
+
+.. _activate_scripts:
 
 Activate scripts
 ----------------

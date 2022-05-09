@@ -112,6 +112,7 @@ pygments_style = 'sphinx'
 todo_include_todos = True
 
 # ---- Options for link validation --------
+user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:25.0) Gecko/20100101 Firefox/25.0'
 
 anchor_check_fps = [
     r'https://conda-forge.org/status/#armosxaddition$',
@@ -126,6 +127,7 @@ linkcheck_ignore = [
     r'https://anaconda.org/?$',  # 403 forbidden
     r'https://cloudflare.com/learning/cdn/what-is-a-cdn/?$',  # 403 forbidden
     r'https://gitter.im/conda-forge/core$',  # private team
+    r'https://polys.me/?$',  # 403 forbidden
 ] + anchor_check_fps
 
 
