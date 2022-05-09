@@ -680,6 +680,13 @@ Without a preferred ``nompi`` variant, recipes that require mpi are much simpler
     run:
       - {{ mpi }}
 
+MPI Compilers
+^^^^^^^^^^^^^
+
+Do not use the `[openmpi,mpich]-mpicc` metapackages in the `requirements/build` section
+of a recipe; the mpi compiler wrappers are included in the main openmpi/mpich packages.
+Add openmpi/mpich to the `requirements/host` section and use compiler directives for the 
+corresponding compilers in `requirements/build` as normal.
 
 
 OpenMP
