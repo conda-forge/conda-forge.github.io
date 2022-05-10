@@ -226,7 +226,7 @@ modified.  Tools like conda-smithy may modify this, as needed.  It has a single
 
 .. code-block:: yaml
 
-    appveyor:
+    circle:
       secure:
         BINSTAR_TOKEN: <some big hash>
 
