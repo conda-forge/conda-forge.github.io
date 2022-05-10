@@ -291,7 +291,7 @@ We also support builds on GitHub Actions.
 Woodpecker
 ----------
 
-We support `Woodpecker`__ for Linux ARMv8 builds.
+We support `Woodpecker <https://github.com/woodpecker-ci/woodpecker>`__ for Linux ARMv8 builds.
 Woodpecker is a fork of Drone.io.
 
 .. _Automerge:
