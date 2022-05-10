@@ -573,9 +573,6 @@ For example:
 .. code-block:: yaml
 
     woodpecker:
-      # Flag for uploading to anaconda. (common setting)
-      upload_packages: True
-      # woodpecker specific settings
-      yum_specific_setup:
-      build_setup:
+      secure:
+        BINSTAR_TOKEN: <some big hash>
 
