@@ -289,6 +289,11 @@ For example:
     github_actions:
       # Flag for uploading to anaconda.
       upload_packages: True
+      self_hosted: False
+      # Toggle creating artifacts for conda build_artifacts dir
+      store_build_artifacts: False
+      artifact_retention_days: 14
+
 
 .. _idle_timeout_minutes:
 
