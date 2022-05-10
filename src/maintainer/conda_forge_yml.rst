@@ -283,16 +283,9 @@ For example:
 
 .. code-block:: yaml
 
-    github:
-      # name of the github organization
-      user_or_org: conda-forge
-      # repository name, usually filled in automatically
-      repo_name: ""
-      # branch name to execute on
-      branch_name: master
-      # branch name to use for rerender+webservices github actions and
-      # conda-forge-ci-setup-feedstock references
-      tooling_branch_name: master
+    github_actions:
+      # Flag for uploading to anaconda.
+      upload_packages: True
 
 .. _idle_timeout_minutes:
 
@@ -405,6 +398,8 @@ The following CI services are available:
 * ``circle``
 * ``travis``
 * ``appveyor``
+* ``github_actions``
+* ``woodpecker`` (a replacement for ``drone.io``)
 * ``None`` or ``False`` to disable a build platform.
 * ``default`` to choose an appropriate CI (only if available)
 

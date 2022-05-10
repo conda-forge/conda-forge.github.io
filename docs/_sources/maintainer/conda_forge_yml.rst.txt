@@ -32,7 +32,6 @@ Top-level fields
 * conda_forge_output_validation
 * docker
 * github
-* github_actions
 * idle_timeout_minutes
 * linux
 * linux_aarch64
@@ -47,7 +46,6 @@ Top-level fields
 * travis
 * upload_on_branch
 * win
-* woodpecker
 
 
 appveyor
@@ -206,18 +204,6 @@ defaults are as follows:
       # branch name to execute on
       branch_name: master
 
-github_actions
------
-This dictates the behavior of the Github Actions CI service.
-It is a mapping for Github-Action-specific configuration options.
-For example:
-
-.. code-block:: yaml
-
-    github_actions:
-      # Flag for uploading to anaconda.
-      upload_packages: True
-
 
 idle_timeout_minutes
 --------------------
@@ -289,8 +275,6 @@ The following CI services are available:
 * ``circle``
 * ``travis``
 * ``appveyor``
-* ``github_actions``
-* ``woodpecker`` (a replacement for ``drone``)
 * ``None`` or ``False`` to disable a platform.
 * ``default`` to enable a platform and choose an appropriate CI
 
@@ -402,19 +386,3 @@ Currently only:
     win:
       enabled: False
 
-
-woodpecker
------
-This dictates the behavior of the woodpecker CI service.
-https://github.com/woodpecker-ci/woodpecker
-It is a mapping for Woodpecker-specific configuration options.
-For example:
-
-.. code-block:: yaml
-
-    woodpecker:
-      # Flag for uploading to anaconda. (common setting)
-      upload_packages: True
-      # woodpecker specific settings
-      yum_specific_setup:
-      build_setup:
