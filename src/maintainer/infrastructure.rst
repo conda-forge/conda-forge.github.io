@@ -285,8 +285,14 @@ here `<https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/
 GitHub Actions
 --------------
 
-We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on
-GitHub Actions.
+We use GitHub actions to rerender feedstocks and also run our pull request automerge service.
+We also support builds on GitHub Actions.
+
+Woodpecker
+----------
+
+We support `Woodpecker`__ for Linux ARMv8 builds.
+Woodpecker is a fork of Drone.io.
 
 .. _Automerge:
 

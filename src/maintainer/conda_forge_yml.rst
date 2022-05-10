@@ -33,6 +33,7 @@ Top-level fields
 * :ref:`conda_forge_output_validation`
 * :ref:`docker`
 * :ref:`github`
+* :ref:`github_actions`
 * :ref:`idle_timeout_minutes`
 * :ref:`linux`
 * :ref:`linux_aarch64`
@@ -50,6 +51,7 @@ Top-level fields
 * :ref:`travis`
 * :ref:`upload_on_branch`
 * :ref:`win`
+* :ref:`woodpecker`
 
 .. _appveyor:
 
@@ -260,6 +262,24 @@ github
 ------
 This is mapping of configuration variables for GitHub. The
 defaults are as follows:
+
+.. code-block:: yaml
+
+    github:
+      # name of the github organization
+      user_or_org: conda-forge
+      # repository name, usually filled in automatically
+      repo_name: ""
+      # branch name to execute on
+      branch_name: master
+
+.. _github_actions:
+
+github_actions
+-----
+This dictates the behavior of the Github Actions CI service.
+It is a mapping for Github-Action-specific configuration options.
+For example:
 
 .. code-block:: yaml
 
@@ -537,3 +557,21 @@ Currently only:
 
     win:
       enabled: False
+
+.. _woodpecker:
+
+woodpecker
+-----
+This dictates the behavior of the woodpecker CI service (a fork of Dune).
+https://github.com/woodpecker-ci/woodpecker
+It is a mapping for Woodpecker-specific configuration options.
+For example:
+
+.. code-block:: yaml
+    woodpecker:
+      # Flag for uploading to anaconda. (common setting)
+      upload_packages: True
+      # woodpecker specific settings
+      yum_specific_setup:
+      build_setup:
+
