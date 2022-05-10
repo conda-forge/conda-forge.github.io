@@ -272,6 +272,9 @@ defaults are as follows:
       repo_name: ""
       # branch name to execute on
       branch_name: master
+      # branch name to use for rerender+webservices github actions and
+      # conda-forge-ci-setup-feedstock references
+      tooling_branch_name: master
 
 .. _github_actions:
 
