@@ -165,7 +165,7 @@ modified.  Tools like conda-smithy may modify this, as need.  It has a single
 
 .. code-block:: yaml
 
-    circle:
+    appveyor:
       secure:
         BINSTAR_TOKEN: <some big hash>
 
@@ -385,4 +385,3 @@ Currently only:
 
     win:
       enabled: False
-
