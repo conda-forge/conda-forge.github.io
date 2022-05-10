@@ -276,7 +276,7 @@ defaults are as follows:
 .. _github_actions:
 
 github_actions
------
+--------------
 This dictates the behavior of the Github Actions CI service.
 It is a mapping for Github-Action-specific configuration options.
 For example:
@@ -561,13 +561,14 @@ Currently only:
 .. _woodpecker:
 
 woodpecker
------
+----------
 This dictates the behavior of the woodpecker CI service (a fork of Dune).
 https://github.com/woodpecker-ci/woodpecker
 It is a mapping for Woodpecker-specific configuration options.
 For example:
 
 .. code-block:: yaml
+
     woodpecker:
       # Flag for uploading to anaconda. (common setting)
       upload_packages: True
