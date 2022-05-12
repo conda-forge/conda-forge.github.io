@@ -680,10 +680,10 @@ Without a preferred ``nompi`` variant, recipes that require mpi are much simpler
     run:
       - {{ mpi }}
 
-MPI Compilers
-^^^^^^^^^^^^^
+MPI Compiler Packages
+^^^^^^^^^^^^^^^^^^^^^
 
-Do not use the ``[openmpi,mpich]-[mpicc, mpicxx, mpifort]`` metapackages in the ``requirements/build`` section
+Do not use the ``[openmpi,mpich]-[mpicc,mpicxx,mpifort]`` metapackages in the ``requirements/build`` section
 of a recipe; the MPI compiler wrappers are included in the main ``openmpi``/``mpich`` packages.
 As shown above, just add ``openmpi``/``mpich`` to the ``requirements/host`` section and use compiler directives for the 
 corresponding compilers in ``requirements/build`` as normal.
