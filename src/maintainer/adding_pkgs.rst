@@ -3,33 +3,43 @@
 Contributing packages
 *********************
 
+Process
+=======
 
-To submit a package to the ``conda-forge`` channel, add its ``recipe`` and licence to the ``staged-recipes`` repository and create a pull request. Once the pull request is merged, the package becomes available
-on the ``conda-forge`` channel. Note that contributing a package makes you the ``maintainer`` of that package.
+Follow the steps given below to submit a package to conda-forge:
 
-A maintainer is responsible for maintaining the feedstock repository and packages as well as their future versions and has push access to the feedstock repositories of only the packages it maintains. 
-You can learn more about the roles of a maintainer `here. <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`__
+* Step 1. The staging process (add recipe and license).
 
-The sections below provide detailed instructions on contributing packages to conda-forge.
+ With the help of the `staging process <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-staging-process>`_, add a package’s recipe and license to the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`_ and create a PR.
 
+* Step 2. Post staging process.
+
+ Once your PR, has been merged, take a look at our `post staging process <https://conda-forge.org/docs/maintainer/adding_pkgs.html#post-staging-process>`_ to know what follows.
+
+* Step 3. Maintaining the package.
+ Contributing a package to ``conda-forge`` makes you the maintainer of that package. Learn more about the `roles of a maintainer <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`_. 
 
 .. _creating_recipes:
 
 The staging process
 ===================
 
-Getting Started
----------------
+The staging process i.e adding a package's recipe has three steps:
 
-There are multiple ways to get started:
+#. Generating the recipe
+#. Checklist
+#. Feedback and revision
 
-#. Look at `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`_ and modify it as necessary.
+Generating the recipe
+---------------------
+
+There are, currently, three ways to generate a recipe:
+
+#. If the package is a python package on the pypi repository, you can generate the recipe with the help of Grayskull.
 #. If it is an R package from `CRAN <https://cran.r-project.org/>`_, kindly
    start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_ instead.
    Then if necessary, you can make manual edits to the recipe.
-#. If it is a python package, you can generate the recipe as a starting point with ``grayskull``.
-   Use ``conda install -c conda-forge grayskull`` to install ``grayskull``, followed by ``grayskull pypi your_package_name`` to generate the recipe. Note that you do *not* necessarily have to use ``grayskull``, and the
-   recipes produced by ``grayskull`` might need to be reviewed and edited. Read more about ``grayskull`` and how to use it `here <https://github.com/conda-incubator/grayskull#introduction>`__.
+#. If it's none of the above, generate a recipe with the help of a copy of `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`_ and modify it as necessary.
 
 Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
 
@@ -37,37 +47,50 @@ Your final recipe should have no comments (unless they're actually relevant to t
 
   If there are any details you are not sure about please create a pull request anyway. The conda-forge team will review it and help you make changes to it.
 
-
-In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that will help you with a successful build is provided below.
-
 .. _staging_steps:
 
-Step-by-step Instructions
--------------------------
+.. tabs::
+   .. tab:: CRAN
 
-#. Ensure your source code can be downloaded as a single file. Source code
-   should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz)
-   or tagged on GitHub, to ensure that it can be verified. (For further
-   detail, see :ref:`tarballs_no_repos`).
-#. Fork the `example recipes
-   <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
-   repository.
-#. Create a new branch from the staged-recipes ``master`` branch.
-#. Within your forked copy, generate a new folder in the recipes subdirectory
-   and copy the `meta.yml
-   <https://github.com/conda-forge/staged-recipes/blob/master/recipes/
-   example/meta.yaml>`_
-   file from the example directory. Please leave the example directory
-   unchanged!
-#. Edit the copied recipe (meta.yml) as needed. For details, see
-   :ref:`meta_yaml`.
-#. Generate the SHA256 key for your source code archive, as described in the
-   example recipe using the ``openssl`` tool. As an alternative, you can also
-   go to the package description on `PyPi <https://pypi.org>`_ from which you
-   can directly copy the SHA256.
-#. Be sure to fill in the ``test`` section. The simplest test will simply
-   test that the module can be imported, as described in the example.
-#. Remove all irrelevant comments in the ``meta.yaml``  file.
+     #. If it is an R package from `CRAN <https://cran.r-project.org/>`_, kindly
+     start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_ instead.
+     Then if necessary, you can make manual edits to the recipe.
+
+   .. tab:: Grayskull
+
+
+      Generate a python package recipe with Grayskull:
+      --------------------------------------------------
+      #. Install grayskull using conda through the conda-forge channel with the command: ``conda install -c conda-forge grayskull``
+      #. Fork and clone the `staged-recipes <https://github.com/conda-forge/staged-recipes>`_ repository from GitHub.
+      #. Checkout a new branch from the staged-recipes ``main`` branch.
+      #. Through CLI, cd inside the 'staged-recipes/recipes' directory.
+      #. Call grayskull and pass the pypi repository, followed by the name of the package you want to contribute to conda-forge. (i.e ``grayskull pypi <name-of-package>`` **OR** Use grayskull ``pypi <name-of-package> --strict-conda-forge`` to remove some selectors which are not necessary for conda-forge and adapt recipes to fit better in the conda-forge ecosystem.
+        Grayskull will create a folder with the same name as the package in the ‘recipes’ folder of the ‘staged-recipes’ directory. This folder will contain the meta.yaml file and also the license file if the package includes a license in the PyPI distribution.
+      #. Go through the generated ``meta.yaml`` file and remove all irrelevant comments in the ``meta.yaml``  file.. For simpler packages, the generated recipes are nearly perfect, but for some packages you might need to make certain tweaks.
+      #. Commit and push the changes. git add recipe/abc/meta.yaml git commit -m "add a commit message" git push
+      #. Create a PR.
+
+      Know more about `Grayskull <https://github.com/conda-incubator/grayskull>`_
+
+   .. tab:: Example recipe
+
+      Generate a recipe with example recipe
+      -------------------------
+      #. Source code should be downloadable, as a single file– as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz) or tagged on GitHub,-- toensure that it can be verified. To know why see :ref:`tarballs_no_repos`
+      #. Fork and clone the `staged-recipes <https://github.com/conda-forge/staged-recipes>`_ repository from GitHub.
+      #. Checkout a new branch from the staged-recipes ``main`` branch.
+      #. Through CLI, cd inside the 'staged-recipes/recipes' directory.
+      #. Create a new folder within recipes, for your package (i.e., For unix: ``cp -r recipes/example recipes/<package_name>`` For windows: ``xcopy /h /e /i "recipes\example\" "recipes\<package_name>"``).
+      #. Copy `meta.yaml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/
+        example/meta.yaml>`_ from the example directory. All the changes in the following steps will happen in the COPIED meta.yaml (i.e., `..staged-recipes/recipes/<name-of-package>/meta.yaml`).
+        Please leave the example directory (i.e, ``...staged-recipes/recipes/example/meta.yaml``) unchanged!
+      #. Modify the copied recipe (meta.yaml) as needed. To see how to modify meta.yaml, take a look at :ref:`meta_yaml`.
+      #. Generate the SHA256 key for your source code archive, as described in the example recipe using the ``openssl`` tool. As an alternative, you can also go to the package description on `PyPi <https://pypi.org>`_ from which you can directly copy the SHA256.
+      #. Be sure to fill in the ``test`` section. The simplest test will simply test that the module can be imported, as described in the example.
+      #. Remove all irrelevant comments in the ``meta.yaml``  file.
+      #. Commit and push the changes.
+      #. Create a PR.
 
 .. tip::
 
@@ -101,7 +124,7 @@ After merging the :term:`PR`, our :term:`CI` infrastructure will build the packa
 
 
 Post staging process
---------------------
+====================
 
 * After the PR is merged, our :term:`CI` services will create a new git repo automatically. For example, the recipe for a package named ``pydstool`` will be moved to a new repository `https://github.com/conda-forge/pydstool-feedstock <https://github.com/conda-forge/pydstool-feedstock>`_. This process is automated through a CI job on the ``conda-forge/staged-recipes`` repo. It sometimes fails due to API rate limits and will automatically retry itself. If your feedstock has not been created after a day or so, please get in touch with the ``conda-forge/core`` team for help.
 * CI services will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to `https://anaconda.org/conda-forge <https://anaconda.org/conda-forge>`_
@@ -110,7 +133,7 @@ Post staging process
 
 
 Maintainer role
----------------
+===============
 
 The maintainer's job is to:
 
