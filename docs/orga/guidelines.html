@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Guidelines &#8212; conda-forge 2022.05.18 documentation</title>
+    <title>Guidelines &#8212; conda-forge 2022.05.24 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="00_intro.html" title="Organisation Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.05.18 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.05.24 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Organisation Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Guidelines</a></li> 
@@ -152,10 +152,12 @@ recipes.</p>
 <h2>Renaming Packages<a class="headerlink" href="#renaming-packages" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes, packages are misnamed.
 To correct the name of the package, please submit a PR into <a class="reference external" href="https://github.com/conda-forge/staged-recipes">staged-recipes</a> with the correct name.
-During the review process, please make certain to note that the package is renamed and contact a member of conda-forge/core to remove the old feedstock (and potentially package, if needed).
-Occasionally, the .gitmodules file in the <a class="reference external" href="https://github.com/conda-forge/feedstocks/blob/master/.gitmodules">feedstocks</a> needs to be updated to remove the old feedstock.
+During the review process, please make certain to note that the package is renamed and contact a member of conda-forge/core to remove the old feedstock (and potentially package, if needed).</p>
+<p>Occasionally, the .gitmodules file in the <a class="reference external" href="https://github.com/conda-forge/feedstocks/blob/master/.gitmodules">feedstocks</a> needs to be updated to remove the old feedstock.
 It’s not entirely clear what those circumstances are.
 See <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues/1070">conda-forge.github.io#1070</a>.</p>
+<p>If an existing feedstock has already created a package of the same name,
+then you may need to add the new feedstock to the <a class="reference external" href="https://github.com/conda-forge/feedstock-outputs">feedstock-outputs</a> map.</p>
 </section>
 <section id="fixing-broken-packages">
 <span id="fix-broken-packages"></span><h2>Fixing Broken Packages<a class="headerlink" href="#fixing-broken-packages" title="Permalink to this headline">¶</a></h2>
@@ -328,7 +330,7 @@ For example, we held off turning off py27 even after numpy, scipy dropped suppor
         <li class="right" >
           <a href="00_intro.html" title="Organisation Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.05.18 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.05.24 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Organisation Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Guidelines</a></li> 
