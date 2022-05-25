@@ -462,8 +462,9 @@ To do this, add <cite>nompi</cite> to the mpi matrix:</p>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">mpi</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w">  </span><span class="c1"># [mpi != &#39;nompi&#39;]</span><span class="w"></span>
 </pre></div>
 </div>
+</section>
 <section id="preferring-a-provider-usually-nompi">
-<h5>Preferring a provider (usually nompi)<a class="headerlink" href="#preferring-a-provider-usually-nompi" title="Permalink to this headline">¶</a></h5>
+<h4>Preferring a provider (usually nompi)<a class="headerlink" href="#preferring-a-provider-usually-nompi" title="Permalink to this headline">¶</a></h4>
 <p>Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual exclusivity of
 the <code class="docutils literal notranslate"><span class="pre">mpi</span></code> metapackage allows picking between mpi providers by installing an mpi provider, e.g.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install mpich ptscotch
@@ -539,7 +540,7 @@ given mpi provider requires running with that mpi:</p>
 chosen at build time (i.e. if the nompi build cannot be run against the mpich build).</p>
 </section>
 <section id="complete-example">
-<h5>Complete example<a class="headerlink" href="#complete-example" title="Permalink to this headline">¶</a></h5>
+<h4>Complete example<a class="headerlink" href="#complete-example" title="Permalink to this headline">¶</a></h4>
 <p>Combining all of the above, here is a complete recipe, with:</p>
 <ul class="simple">
 <li><p>nompi, mpich, openmpi variants</p></li>
@@ -612,7 +613,7 @@ chosen at build time (i.e. if the nompi build cannot be run against the mpich bu
 if <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">mpi</span> <span class="pre">}}</span></code> is also a direct dependency, though it’s probably nicer to be explicit.</p>
 </section>
 <section id="just-mpi-example">
-<h5>Just mpi example<a class="headerlink" href="#just-mpi-example" title="Permalink to this headline">¶</a></h5>
+<h4>Just mpi example<a class="headerlink" href="#just-mpi-example" title="Permalink to this headline">¶</a></h4>
 <p>Without a preferred <code class="docutils literal notranslate"><span class="pre">nompi</span></code> variant, recipes that require mpi are much simpler. This is all that is needed:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># conda_build_config.yaml</span><span class="w"></span>
 <span class="nt">mpi</span><span class="p">:</span><span class="w"></span>
@@ -629,6 +630,12 @@ if <code class="docutils literal notranslate"><span class="pre">{{</span> <span 
 </pre></div>
 </div>
 </section>
+<section id="mpi-compiler-packages">
+<h4>MPI Compiler Packages<a class="headerlink" href="#mpi-compiler-packages" title="Permalink to this headline">¶</a></h4>
+<p>Do not use the <code class="docutils literal notranslate"><span class="pre">[openmpi,mpich]-[mpicc,mpicxx,mpifort]</span></code> metapackages in the <code class="docutils literal notranslate"><span class="pre">requirements/build</span></code> section
+of a recipe; the MPI compiler wrappers are included in the main <code class="docutils literal notranslate"><span class="pre">openmpi</span></code>/<code class="docutils literal notranslate"><span class="pre">mpich</span></code> packages.
+As shown above, just add <code class="docutils literal notranslate"><span class="pre">openmpi</span></code>/<code class="docutils literal notranslate"><span class="pre">mpich</span></code> to the <code class="docutils literal notranslate"><span class="pre">requirements/host</span></code> section and use compiler directives for the
+corresponding compilers in <code class="docutils literal notranslate"><span class="pre">requirements/build</span></code> as normal.</p>
 </section>
 </section>
 <section id="openmp">
@@ -1397,12 +1404,11 @@ higher than the package uploaded with the <code class="docutils literal notransl
 <li class="toctree-l4"><a class="reference internal" href="#message-passing-interface-mpi">Message passing interface (MPI)</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#mpi-variants-in-conda-forge">MPI Variants in conda-forge</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#building-mpi-variants">Building MPI variants</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#including-a-no-mpi-build">Including a no-mpi build</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#preferring-a-provider-usually-nompi">Preferring a provider (usually nompi)</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#complete-example">Complete example</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#just-mpi-example">Just mpi example</a></li>
-</ul>
-</li>
+<li class="toctree-l5"><a class="reference internal" href="#including-a-no-mpi-build">Including a no-mpi build</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#preferring-a-provider-usually-nompi">Preferring a provider (usually nompi)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#complete-example">Complete example</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#just-mpi-example">Just mpi example</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#mpi-compiler-packages">MPI Compiler Packages</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#openmp">OpenMP</a><ul>

@@ -488,7 +488,7 @@ and apply the appropriate conditionals in your build:
 
 
 Preferring a provider (usually nompi)
-"""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual exclusivity of
 the ``mpi`` metapackage allows picking between mpi providers by installing an mpi provider, e.g.
@@ -580,7 +580,7 @@ Remove the ``if mpi...`` condition if all variants should create a strict runtim
 chosen at build time (i.e. if the nompi build cannot be run against the mpich build).
 
 Complete example
-""""""""""""""""
+^^^^^^^^^^^^^^^^
 
 Combining all of the above, here is a complete recipe, with:
 
@@ -660,7 +660,7 @@ mpi-metapackage exclusivity allows ``mpi_*`` to resolve the same as ``mpi_{{ mpi
 if ``{{ mpi }}`` is also a direct dependency, though it's probably nicer to be explicit.
 
 Just mpi example
-""""""""""""""""
+^^^^^^^^^^^^^^^^
 
 Without a preferred ``nompi`` variant, recipes that require mpi are much simpler. This is all that is needed:
 
@@ -680,6 +680,13 @@ Without a preferred ``nompi`` variant, recipes that require mpi are much simpler
     run:
       - {{ mpi }}
 
+MPI Compiler Packages
+^^^^^^^^^^^^^^^^^^^^^
+
+Do not use the ``[openmpi,mpich]-[mpicc,mpicxx,mpifort]`` metapackages in the ``requirements/build`` section
+of a recipe; the MPI compiler wrappers are included in the main ``openmpi``/``mpich`` packages.
+As shown above, just add ``openmpi``/``mpich`` to the ``requirements/host`` section and use compiler directives for the 
+corresponding compilers in ``requirements/build`` as normal.
 
 
 OpenMP
