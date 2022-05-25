@@ -90,6 +90,8 @@ FAQ
   - Rebuild the new version with corrected ``run_exports``.
   - Rebuild the old version with corrected ``run_exports``.
   - Hot-fix the repodata of dependencies to include corrected pinnings for the package.
+  - Add a PR to pin the old version in ``conda-forge-pinning`` (if not already present)
+  - Open a migrator following `CFEP-09 <https://github.com/conda-forge/cfep/blob/main/cfep-09.md>`_
 
   To read more on how to specify ``run_exports``, see `this <https://conda-forge.org/docs/maintainer/pinning_deps.html?highlight=run_exports#specifying-run-exports>`_.
   Some of the examples you can see for reference, where broken packages are fixed by:
