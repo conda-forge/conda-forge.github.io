@@ -6,7 +6,7 @@ Glossary
 
 .. glossary::
 
-  ENVIRONMENT  
+  Environment  
     An environment is a tool that helps to keep dependencies required by different projects separate by creating isolated spaces for them that contain per-project dependencies for them. `Learn More <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html>`__.
 
   CI
