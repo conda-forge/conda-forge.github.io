@@ -78,17 +78,23 @@ You can learn more about the roles of a maintainer <a class="reference external"
 <p>The sections below provide detailed instructions on contributing packages to conda-forge.</p>
 <section id="the-staging-process">
 <span id="creating-recipes"></span><h2>The staging process<a class="headerlink" href="#the-staging-process" title="Permalink to this headline">¶</a></h2>
-<section id="getting-started">
-<h3>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h3>
-<p>There are multiple ways to get started:</p>
+<p>The staging process i.e adding a package’s recipe has three steps:</p>
 <ol class="arabic simple">
-<li><p>Look at <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes/example">the example recipe</a> in the <a class="reference external" href="https://github.com/conda-forge/staged-recipes">staged-recipes repository</a> and modify it as necessary.</p></li>
+<li><p>Generating the recipe</p></li>
+<li><p>Checklist</p></li>
+<li><p>Feedback and revision</p></li>
+</ol>
+<section id="generating-the-recipe">
+<h3>Generating the recipe<a class="headerlink" href="#generating-the-recipe" title="Permalink to this headline">¶</a></h3>
+<p>There are, currently, three ways to generate a recipe:</p>
+<ol class="arabic simple">
 <li><p>If it is an R package from <a class="reference external" href="https://cran.r-project.org/">CRAN</a>, kindly
 start by using the <a class="reference external" href="https://github.com/bgruening/conda_r_skeleton_helper">conda-forge helper script for R recipes</a> instead.
 Then if necessary, you can make manual edits to the recipe.</p></li>
 <li><p>If it is a python package, you can generate the recipe as a starting point with <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>.
 Use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">grayskull</span></code> to install <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>, followed by <code class="docutils literal notranslate"><span class="pre">grayskull</span> <span class="pre">pypi</span> <span class="pre">your_package_name</span></code> to generate the recipe. Note that you do <em>not</em> necessarily have to use <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>, and the
 recipes produced by <code class="docutils literal notranslate"><span class="pre">grayskull</span></code> might need to be reviewed and edited. Read more about <code class="docutils literal notranslate"><span class="pre">grayskull</span></code> and how to use it <a class="reference external" href="https://github.com/conda-incubator/grayskull#introduction">here</a>.</p></li>
+<li><p>If it’s none of the above, generate a recipe with the help of <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes/example">the example recipe</a> in the <a class="reference external" href="https://github.com/conda-forge/staged-recipes">staged-recipes repository</a> and modify it as necessary.</p></li>
 </ol>
 <p>Your final recipe should have no comments (unless they’re actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.</p>
 <div class="admonition note">
@@ -104,15 +110,16 @@ recipes produced by <code class="docutils literal notranslate"><span class="pre"
 should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz)
 or tagged on GitHub, to ensure that it can be verified. (For further
 detail, see <a class="reference internal" href="#tarballs-no-repos"><span class="std std-ref">Build from tarballs, not repos</span></a>).</p></li>
-<li><p>Fork the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes">example recipes</a>
-repository.</p></li>
-<li><p>Create a new branch from the staged-recipes <code class="docutils literal notranslate"><span class="pre">master</span></code> branch.</p></li>
-<li><p>Within your forked copy, generate a new folder in the recipes subdirectory
-and copy the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yml</a>
-file from the example directory. Please leave the example directory
-unchanged!</p></li>
-<li><p>Edit the copied recipe (meta.yml) as needed. For details, see
-<a class="reference internal" href="#meta-yaml"><span class="std std-ref">The recipe meta.yaml</span></a>.</p></li>
+<li><p>Fork and clone the <a class="reference external" href="https://github.com/conda-forge/staged-recipes">staged-recipes</a>
+repository from GitHub.</p></li>
+<li><p>Checkout a new branch from the staged-recipes <code class="docutils literal notranslate"><span class="pre">main</span></code> branch.</p></li>
+<li><p>Through CLI, cd inside the ‘staged-recipes/recipes’ directory.</p></li>
+<li><p>Within your forked copy, create a new folder in the recipes folder for your package (i.e, <code class="docutils literal notranslate"><span class="pre">...staged-recipes/recipes/&lt;name-of-package&gt;</span></code>)</p></li>
+<li><p>Copy <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml">meta.yaml</a> from the example directory.
+All the changes in the following steps will happen in the COPIED meta.yaml (i.e., <code class="docutils literal notranslate"><span class="pre">...staged-recipes/recipes/&lt;name-of-package&gt;/meta.yaml</span></code>).
+Please leave the example directory unchanged!</p></li>
+<li><p>Modify the copied recipe (meta.yml) as needed. To see how to modify meta.yaml, take a look at
+<a class="reference internal" href="#id1"><span class="std std-ref">The recipe meta.yaml</span></a>.</p></li>
 <li><p>Generate the SHA256 key for your source code archive, as described in the
 example recipe using the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative, you can also
 go to the package description on <a class="reference external" href="https://pypi.org">PyPi</a> from which you
@@ -231,7 +238,7 @@ staged-recipes directory.</p>
 </section>
 </section>
 <section id="the-recipe-meta-yaml">
-<span id="meta-yaml"></span><h2>The recipe meta.yaml<a class="headerlink" href="#the-recipe-meta-yaml" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>The recipe meta.yaml<a class="headerlink" href="#the-recipe-meta-yaml" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file in the recipe directory is at the heart of every conda package.
 It defines everything that is required to build and use the package.</p>
 <p><code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> is in <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">yaml</a> format, augmented with <a class="reference external" href="http://jinja.pocoo.org/">Jinja</a> templating.</p>
@@ -315,7 +322,7 @@ Pure Python packages almost never need them.</p>
 <p>Remember to always add <code class="docutils literal notranslate"><span class="pre">pip</span></code> to the host requirements.</p>
 </section>
 <section id="use-pip">
-<span id="id2"></span><h4>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h4>
+<span id="id3"></span><h4>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this headline">¶</a></h4>
 <p>Normally Python packages should use this line:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">-vv&quot;</span><span class="w"></span>
@@ -697,7 +704,7 @@ It is always your responsibility to double-check that all licenses are included 
 <section id="miscellaneous">
 <h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
 <section id="activate-scripts">
-<span id="id3"></span><h3>Activate scripts<a class="headerlink" href="#activate-scripts" title="Permalink to this headline">¶</a></h3>
+<span id="id4"></span><h3>Activate scripts<a class="headerlink" href="#activate-scripts" title="Permalink to this headline">¶</a></h3>
 <p>Recipes are allowed to have activate scripts, which will be <code class="docutils literal notranslate"><span class="pre">source</span></code>d or
 <code class="docutils literal notranslate"><span class="pre">call</span></code>ed when the environment is activated. It is generally recommended to avoid using
 activate scripts when another option is possible because people do not always
@@ -796,7 +803,7 @@ These expressions are written in <a class="reference external" href="http://jinj
 <li class="toctree-l2"><a class="reference internal" href="infrastructure.html">Infrastructure</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Contributing packages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#the-staging-process">The staging process</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generating-the-recipe">Generating the recipe</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#step-by-step-instructions">Step-by-step Instructions</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#checklist">Checklist</a></li>
 </ul>
