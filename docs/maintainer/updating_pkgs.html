@@ -232,6 +232,19 @@ feedstock directory and run:</p>
 </div>
 <p>to save it in a text file for future inspection.</p>
 <p>Once built, you can find the finished package in the <code class="docutils literal notranslate"><span class="pre">build_artifacts</span></code> directory in your feedstock.</p>
+<section id="downloading-prebuilt-packages">
+<h3>Downloading prebuilt packages<a class="headerlink" href="#downloading-prebuilt-packages" title="Permalink to this headline">¶</a></h3>
+<p>A neat feature that feedstocks have is the ability to <a class="reference external" href="https://conda-forge.org/docs/maintainer/conda_forge_yml.html?highlight=store_build_artifacts#azure">upload packages to the CI provider for testing</a>.
+This is useful when trying out packages built in a PR. But you first need to download these prebuilt packages.</p>
+<p>To download prebuilt packages follow the steps below:</p>
+<ul class="simple">
+<li><p>Starting from your PR, navigate to the CI.</p></li>
+<li><p>Open the log corresponding to the package you want to download.</p></li>
+<li><p>In this log find a link to the <code class="docutils literal notranslate"><span class="pre">artifacts</span> <span class="pre">produced</span></code>.</p></li>
+<li><p>From the list of published artifacts that appears download your required archive.</p></li>
+<li><p>Unarchive and extract the required package.</p></li>
+</ul>
+</section>
 </section>
 <section id="removing-broken-packages">
 <span id="maint-fix-broken-packages"></span><h2>Removing broken packages<a class="headerlink" href="#removing-broken-packages" title="Permalink to this headline">¶</a></h2>
@@ -312,7 +325,10 @@ branches in addition to the default branch.</p>
 <li class="toctree-l4"><a class="reference internal" href="#when-to-rerender">When to rerender</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#testing-changes-locally">Testing changes locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-changes-locally">Testing changes locally</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#downloading-prebuilt-packages">Downloading prebuilt packages</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#removing-broken-packages">Removing broken packages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#archiving-feedstocks">Archiving feedstocks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#updating-the-maintainer-list">Updating the maintainer list</a></li>
