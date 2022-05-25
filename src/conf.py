@@ -17,7 +17,6 @@ import sys
 import datetime
 
 import cloud_sptheme as csp
-import recommonmark.parser
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -33,6 +32,7 @@ import recommonmark.parser
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'myst_parser',
     'sphinx.ext.todo',
     'sphinxcontrib.fulltoc',
     'sphinxcontrib.newsfeed',
@@ -41,10 +41,6 @@ extensions = [
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
-# Transpile markdown into rest
-source_parsers = {
-    '.md': 'recommonmark.parser.CommonMarkParser',
-}
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -86,7 +82,7 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.md']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -114,6 +110,25 @@ pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
+
+# ---- Options for link validation --------
+user_agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:25.0) Gecko/20100101 Firefox/25.0'
+
+anchor_check_fps = [
+    r'https://conda-forge.org/status/#armosxaddition$',
+    r'https://github.com/conda-forge/conda-smithy/blob/main/CHANGELOG.rst#v3130$',
+    r'https://github.com/.*#L\d+-L\d+$',
+    r'https://github.com/conda-forge/miniforge/#download$',
+    r'https://github.com/conda-incubator/grayskull#introduction$',
+]
+
+linkcheck_exclude_documents = [r'.*/minutes/.*']
+linkcheck_ignore = [
+    r'https://anaconda.org/?$',  # 403 forbidden
+    r'https://cloudflare.com/learning/cdn/what-is-a-cdn/?$',  # 403 forbidden
+    r'https://gitter.im/conda-forge/core$',  # private team
+    r'https://polys.me/?$',  # 403 forbidden
+] + anchor_check_fps
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -156,7 +171,7 @@ html_logo = '_static/logo_black_on_trans.png'
 # The name of an image file (relative to this directory) to use as a favicon of
 # the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-#html_favicon = None
+html_favicon = '_static/favicon.ico'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

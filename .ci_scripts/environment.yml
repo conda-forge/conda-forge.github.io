@@ -4,18 +4,21 @@ channels:
 dependencies:
   - python=3
   - conda-smithy
-  - sphinx<3
+  - sphinx >=4.4
   - cloud_sptheme
   - sphinxcontrib-fulltoc
   - make
   - xonsh
-  - recommonmark
+  - myst-parser
   - pyyaml
   - jinja2
   - requests
   - python-dateutil
   - pip
   - python-rapidjson
+  - termcolor
   # uncomment to restore search
   # - elm
   # - nodejs
+  #  - pip: 
+  #    - sphinxcontrib-newsfeed # this helps when using vscode locally

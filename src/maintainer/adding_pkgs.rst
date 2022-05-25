@@ -4,11 +4,13 @@ Contributing packages
 *********************
 
 
-A maintainer is an individual who is responsible for maintaining and updating one or more feedstock repositories and packages as well as their future versions. They have push access to the feedstock repositories of only the packages they maintain and can merge `PR <https://conda-forge.org/docs/misc/00_intro.html#glossary>`__ into it. See `Maintainers Role. <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`__
+To submit a package to the ``conda-forge`` channel, add its ``recipe`` and licence to the ``staged-recipes`` repository and create a pull request. Once the pull request is merged, the package becomes available
+on the ``conda-forge`` channel. Note that contributing a package makes you the ``maintainer`` of that package.
 
-The list of maintainers of a feedstock package is recorded in the recipe of that package itself. Once you create a package, as a code owner, you automatically become a maintainer of it. In case you wish to be a maintainer of a certain package, you should ask for permission from its current maintainers and
-get your `gitub-id` added to the `recipe-maintainers` section in the recipe’s `meta.yaml`. 
-`Please refer to Updating the maintainer list <https://conda-forge.org/docs/maintainer/updating_pkgs.html#updating-the-maintainer-list>`__ for detailed instructions.
+A maintainer is responsible for maintaining the feedstock repository and packages as well as their future versions and has push access to the feedstock repositories of only the packages it maintains. 
+You can learn more about the roles of a maintainer `here. <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`__
+
+The sections below provide detailed instructions on contributing packages to conda-forge.
 
 
 .. _creating_recipes:
@@ -16,30 +18,32 @@ get your `gitub-id` added to the `recipe-maintainers` section in the recipe’s 
 The staging process
 ===================
 
-This document presents an overview over how to contribute packages to conda-forge.
+The staging process i.e adding a package's recipe has three steps:
 
+#. Generating the recipe
+#. Checklist
+#. Feedback and revision
 
-Getting Started
----------------
+Generating the recipe
+---------------------
 
-There are multiple ways to get started:
+There are, currently, three ways to generate a recipe:
 
-#. Look at `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`_ and modify it as necessary.
 #. If it is an R package from `CRAN <https://cran.r-project.org/>`_, kindly
    start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_ instead.
    Then if necessary, you can make manual edits to the recipe.
-#. If it is a python package, you can generate the recipe as a starting point with
-   ``grayskull pypi your_package_name``. To install it you can use ``conda install -c conda-forge grayskull``. You do *not* have to use ``grayskull``, and the
-   recipes produced by ``grayskull`` will need to be reviewed and edited.
-   In particular, you'll at least need to check the build line to :ref:`use pip <use-pip>`,
-   add yourself as a maintainer,
-   and specify a ``license_file``.
+#. If it is a python package, you can generate the recipe as a starting point with ``grayskull``.
+   Use ``conda install -c conda-forge grayskull`` to install ``grayskull``, followed by ``grayskull pypi your_package_name`` to generate the recipe. Note that you do *not* necessarily have to use ``grayskull``, and the
+   recipes produced by ``grayskull`` might need to be reviewed and edited. Read more about ``grayskull`` and how to use it `here <https://github.com/conda-incubator/grayskull#introduction>`__.
+#. If it's none of the above, generate a recipe with the help of `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`_ and modify it as necessary.
 
 Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
 
-*If there are any details you are not sure about please open a pull request. The conda-forge team will be happy to answer your questions.*
+.. note::
 
-In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that might help you with a successful build is provided in the following.
+  If there are any details you are not sure about please create a pull request anyway. The conda-forge team will review it and help you make changes to it.
+
+In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that will help you with a successful build is provided below.
 
 .. _staging_steps:
 
@@ -50,17 +54,18 @@ Step-by-step Instructions
    should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz)
    or tagged on GitHub, to ensure that it can be verified. (For further
    detail, see :ref:`tarballs_no_repos`).
-#. Fork the `example recipes
-   <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
-   repository.
-#. Create a new branch from the staged-recipes ``master`` branch.
-#. Within your forked copy, generate a new folder in the recipes subdirectory
-   and copy the `meta.yml
+#. Fork and clone the `staged-recipes
+   <https://github.com/conda-forge/staged-recipes>`_
+   repository from GitHub.
+#. Checkout a new branch from the staged-recipes ``main`` branch.
+#. Through CLI, cd inside the 'staged-recipes/recipes' directory.
+#. Within your forked copy, create a new folder in the recipes folder for your package (i.e, ``...staged-recipes/recipes/<name-of-package>``)
+#. Copy `meta.yaml
    <https://github.com/conda-forge/staged-recipes/blob/master/recipes/
-   example/meta.yaml>`_
-   file from the example directory. Please leave the example directory
-   unchanged!
-#. Edit the copied recipe (meta.yml) as needed. For details, see
+   example/meta.yaml>`_ from the example directory.
+   All the changes in the following steps will happen in the COPIED meta.yaml (i.e., ``...staged-recipes/recipes/<name-of-package>/meta.yaml``).
+   Please leave the example directory unchanged!
+#. Modify the copied recipe (meta.yml) as needed. To see how to modify meta.yaml, take a look at
    :ref:`meta_yaml`.
 #. Generate the SHA256 key for your source code archive, as described in the
    example recipe using the ``openssl`` tool. As an alternative, you can also
@@ -636,18 +641,23 @@ Running tests locally for staged recipes
 
 If you want to run and build packages in the staged-recipes repository locally,
 go to the root repository directory and run the
-``.scripts/run_docker_build.sh`` script.  This requires that you have docker
-installed on your machine.
+``build-locally.py`` script (you need Python 3). And then you could follow the prompt to select the variant you'd like to build. This requires that you have Docker
+installed on your machine if you are building a package for Linux.
+For MacOS, it will prompt you to select a location for the SDK (e.g. ``export OSX_SDK_DIR=/opt``) to be downloaded.
 
-You need to define an environment variable named ``CONFIG``. Its value must be
-the name of one of the three YAML configuration files in the ``.ci_support``
-directory (either ``linux64``, ``osx64``, or ``win64``). As an example, you can
-invoke the command as follows.
+.. code-block:: bash
+        
+    $ cd ~/staged-recipes
+    $ python build-locally.py
 
-.. code-block:: sh
+If you know which image you want to build, you can specify it as an argument to the script.
 
-    $ cd staged-recipes
-    $ CONFIG=linux64 ./.scripts/run_docker_build.sh
+.. code-block:: bash
+        
+    $ cd ~/staged-recipes
+    $ python build-locally.py <VARIANT>
+ 
+where ``<VARIANT>`` is one of the file names in the ``.ci_support/`` directory, e.g. ``linux64``, ``osx64``, and ``linux64_cuda102``.
 
 
 About
@@ -698,9 +708,63 @@ for the specification on expressions.
    MIT AND BSD-2-Clause
    PSF-2.0
 
+.. _third_party_package_licenses:
+
+Licenses of included dependencies
+.................................
+
+For some languages (Go, rust, etc.), the current policy is to include all dependencies and their dependencies in the package.
+This presents a problem when packaging the license files as each dependency needs to have its license file included in the recipe.
+
+For some languages, the community provides tools which can automate this process, enabling the automatic inclusion of all needed license files.
+
+* **Rust**
+
+  `cargo-bundle-licenses <https://github.com/sstadick/cargo-bundle-licenses>`__ can be included in the build process of a package and will automatically collect and add the license files of all dependencies of a package.
+  
+  For a detailed description, please visit the project page but a short example can be found below.
+  
+  First, include the collection of licenses as a step of the build process.
+  
+  .. code-block:: yaml
+
+    build:
+      number: 0
+      script:
+        - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
+        - build_command_goes_here
+
+  Then, include the tool as a build time dependency.
+  
+  .. code-block:: yaml
+  
+    requirements:
+      build:
+        - cargo-bundle-licenses
+
+  Finally, make sure that the generated file is included in the recipe.
+   
+  .. code-block:: yaml
+  
+    about:
+      license_file:
+        - THIRDPARTY.yml
+        - package_license.txt
+
+.. important::
+
+  We are not lawyers and cannot guarantee that the above advice is correct or that the tools are able to find all license files. 
+  Additionally, we are unable to accept any responsibility or liability.
+  It is always your responsibility to double-check that all licenses are included and verify that any generated output is correct.
+  
+.. note::
+
+   The correct and automated packaging of dependency licenses is an ongoing discussion. Please feel free to add your thoughs to `this <https://github.com/conda-forge/conda-forge.github.io/issues/1052>`__ discussion. 
 
 Miscellaneous
 =============
+
+.. _activate_scripts:
 
 Activate scripts
 ----------------
@@ -753,10 +817,9 @@ Jinja expressions serve following purposes in the meta.yaml:
 
 - They allow defining variables to avoid code duplication. Using a variable for the ``version`` allows changing the version only once with every update.
 
-  .. code-block:: yaml
+  .. code-block:: yaml+jinja
 
       {% set version = "3.7.3" %}
-       [...]
 
       package:
         name: python
@@ -768,7 +831,7 @@ Jinja expressions serve following purposes in the meta.yaml:
 
 - They can call `conda-build functions <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#conda-build-specific-jinja2-functions>`__ for automatic code generation. Examples are the compilers, cdt packages or the ``pin_compatible`` function.
 
-  .. code-block:: yaml
+  .. code-block:: yaml+jinja
 
     requirements:
       build:

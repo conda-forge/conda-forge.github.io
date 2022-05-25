@@ -288,7 +288,7 @@ a:focus {
 }
 
 .content-section {
-  padding-top: 100px;
+  padding-top: 60px;
 }
 
 .intro {
@@ -309,7 +309,6 @@ a:focus {
 .contribute-section {
   width: 100%;
   padding: 60px 0;
-  padding-top: 120px;
   color: #fff;
   background-color: #cd5c5c;
   -webkit-background-size: cover;
@@ -320,7 +319,7 @@ a:focus {
 
 @media (min-width: 767px) {
   .content-section {
-    padding-top: 200px;
+    padding-top: 60px;
   }
 }
 
@@ -380,7 +379,7 @@ footer p {
   margin: 0;
 }
 
-:not(code):not(input)::-moz-selection {
+/* :not(code):not(input)::-moz-selection {
   text-shadow: none;
   background: #fcfcfc;
   background: rgba(255, 255, 255, 0.2);
@@ -390,7 +389,7 @@ footer p {
   text-shadow: none;
   background: #fcfcfc;
   background: rgba(255, 255, 255, 0.2);
-}
+} */
 
 img::selection {
   background: 0 0;
@@ -414,5 +413,10 @@ body {
 
 .responsive {
   max-width: 100%;
-  height: auto;
+}
+
+/*  https://stackoverflow.com/a/25517025 */
+.vcenter {
+    display: flex;
+    align-items: center;
 }

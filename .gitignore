@@ -1,6 +1,11 @@
 # Ignore doc build
 src/_build/
 src/default.profraw
+
+# Ignore newsfeed build
+newsfeed/build
+newsfeed/sphinxcontrib_newsfeed.egg-info
+
 # Ignore sphinx .buildinfo metadata
 docs/.buildinfo
 

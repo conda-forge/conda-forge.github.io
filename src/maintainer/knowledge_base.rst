@@ -19,10 +19,23 @@ On Windows, you can also use ``nmake`` to build, but that does not need to be ex
         - make  # [not win]
         - ninja  # [win]
 
-For CMake projects using the `FindPython3 <https://cmake.org/cmake/help/git-stage/module/FindPython3.html>`__
-module, you can tell CMake which Python to use by passing ``-DPython3_EXECUTABLE="$PYTHON"``
-(macOS or Linux) or ``-DPython3_EXECUTABLE="%PYTHON%"`` (Windows) as a command line option.
+For CMake projects using the `FindPython <https://cmake.org/cmake/help/git-stage/module/FindPython.html>`__
+module, you can tell CMake which Python to use by passing ``-DPython_EXECUTABLE="$PYTHON"``
+(macOS or Linux) or ``-DPython_EXECUTABLE="%PYTHON%"`` (Windows) as a command line option.
 Older CMake projects may require similar, but slightly different options.
+
+.. tip::
+
+    Don't forget that depending on which CMake module you use you have to use a different command:
+
+    -   `FindPython <https://cmake.org/cmake/help/git-stage/module/FindPython.html>`__:
+        ``-DPython_EXECUTABLE=...``.
+    -   `FindPython3 <https://cmake.org/cmake/help/git-stage/module/FindPython3.html>`__:
+        ``-DPython3_EXECUTABLE=...``.
+    -   `FindPython2 <https://cmake.org/cmake/help/git-stage/module/FindPython2.html>`__:
+        ``-DPython2_EXECUTABLE=...``.
+
+    or if you are still on the deprecated `FindPythonLibs <https://cmake.org/cmake/help/latest/module/FindPythonLibs.html>`__: ``-DPYTHON_EXECUTABLE=...``.
 
 Some optional, but useful CMake options:
 
@@ -32,6 +45,7 @@ Some optional, but useful CMake options:
     - ``-DCMAKE_INSTALL_LIBDIR=lib`` Libraries will land in $PREFIX/lib, sometimes projects install
       into lib64 or similar but on conda-forge we keep shared libraries in simply lib.
     - ``-DBUILD_SHARED_LIBS=ON`` Instruct CMake to build shared libraries instead of static ones.
+    - ``${CMAKE_ARGS}`` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like `CUDA builds <https://conda-forge.org/docs/maintainer/knowledge_base.html#cuda-builds>`__.
 
 Here are some basic commands for you to get started. These are dependent on your source
 code layout and aren't intended to be used "as is".
@@ -97,7 +111,7 @@ Local testing
 The first thing that you should know is that you can locally test Windows
 builds of your packages even if you don’t own a Windows machine. Microsoft
 makes available free, official Windows virtual machines (VMs) `at this website
-<https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/>`_. If you
+<https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/>`__. If you
 are unfamiliar with VM systems or have trouble installing Microsoft’s VMs, please
 use a general web search to explore — while these topics are beyond the
 scope of this documentation, there are ample discussions on them on the broader
@@ -107,24 +121,21 @@ In order to compile native code (C, C++, etc.) on Windows, you will need to
 install Microsoft’s Visual C++ build tools on your VM. You must install
 particular versions of these tools — this is to maintain compatibility between
 compiled libraries used in Python, `as described on this Python wiki page
-<https://wiki.python.org/moin/WindowsCompilers>`_. The current relevant
+<https://wiki.python.org/moin/WindowsCompilers>`__. The current relevant
 versions are:
 
-* For Python 2.7: Visual C++ 9.0
 * For Python 3.5–3.7: Visual C++ 14.0
 
 While you can obtain these tools by installing the right version of the full
-`Visual Studio <https://visualstudio.microsoft.com/>`_ development
+`Visual Studio <https://visualstudio.microsoft.com/>`__ development
 environment, you can save a lot of time and bandwidth by installing standalone
 “build tools” packages. The links are as follows:
 
-* For Python 2.7: `Microsoft Visual C++ Compiler for Python 2.7
-  <https://www.microsoft.com/download/details.aspx?id=44266>`_.
 * For Python 3.5–3.7: `Microsoft Build Tools for Visual Studio 2017
-  <https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017>`_.
+  <https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2017-and-other-products>`__.
 
 If you need more information. Please refer `the Python wiki page on Windows compilers
-<https://wiki.python.org/moin/WindowsCompilers>`_.
+<https://wiki.python.org/moin/WindowsCompilers>`__.
 
 Simple CMake-Based ``bld.bat``
 ------------------------------
@@ -189,35 +200,24 @@ To skip building with a particular ``vc`` version, add a skip statement.
     requirements:
       build:
         - {{ compiler('cxx') }}
-        
+
 Using vs2019
 -------------
 
-To use ``vs2019`` make the following changes: 
+To use ``vs2019`` make the following changes:
 
-In conda_build_config.yaml file:    
-
-.. code-block:: yaml
-
-    c_compiler:                    
-    - vs2019                       
-    cxx_compiler:                  
-    - vs2019                       
-
-
-In conda-forge.yml file:
+In conda_build_config.yaml file:
 
 .. code-block:: yaml
 
-    azure:
-      settings_win:
-          pool:
-              vmImage: windows-2019
-     
-      
+    c_compiler:    # [win]
+    - vs2019       # [win]
+    cxx_compiler:  # [win]
+    - vs2019       # [win]
 
-For example see the changes made in the ``conda_build_config.yaml`` and ``conda-forge.yml`` files in `this
-<https://github.com/conda-forge/libignition-physics-feedstock/commit/c586d765a2f5fd0ecf6da43c53315c898c9bf6bd>`_ PR.
+
+For example see the changes made in the ``conda_build_config.yaml`` files in `this
+<https://github.com/conda-forge/libignition-msgs1-feedstock/pull/73/commits/81b5ee0e1d23f7f20427dd80d04cf1f7321b441d>`__ commit.
 
 After making these changes don't forget to rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line).
 
@@ -231,13 +231,15 @@ Compilers
 
 Compilers are dependencies with a special syntax and are always added to ``requirements/build``.
 
-There are currently three supported compilers:
+There are currently five supported compilers:
 
  - C
  - cxx
  - Fortran
+ - Go
+ - Rust
 
-A package that needs all three compilers would define
+A package that needs all five compilers would define
 
 .. code-block:: yaml
 
@@ -246,12 +248,14 @@ A package that needs all three compilers would define
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - {{ compiler('fortran') }}
+        - {{ compiler('go') }}
+        - {{ compiler('rust') }}
 
 .. note::
 
   Appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore
   there's no need to specify ``libgcc`` or ``libgfortran``. There are additional informations about how conda-build 3 treats
-  compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html>`_.
+  compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html>`__.
 
 .. _cdt_packages:
 
@@ -259,17 +263,17 @@ Core Dependency Tree Packages (CDTs)
 ------------------------------------
 
 Dependencies outside of the ``conda-forge`` channel should be avoided (see :ref:`no_external_deps`).
-However, there are a few exceptions: 
+However, there are a few exceptions:
 
-Some dependencies are so close to the system that they are not packaged with ``conda-forge``. 
-These dependencies have to be satisfied with *Core Dependency Tree* (CDT) packages. 
+Some dependencies are so close to the system that they are not packaged with ``conda-forge``.
+These dependencies have to be satisfied with *Core Dependency Tree* (CDT) packages.
 
-A CDT package consists of repackaged CentOS binaries from the appropriate version, 
+A CDT package consists of repackaged CentOS binaries from the appropriate version,
 either 6 or 7 depending on user choice and platform. We manage the build of CDT
 packages using a centralized repo, `conda-forge/cdt-builds <https://github.com/conda-forge/cdt-builds>`_,
 as opposed to generating feedstocks for them. (Note that historically we did use feedstocks but this
 practice has been deprecated.) To add a new CDT, make a PR on the
-`conda-forge/cdt-builds <https://github.com/conda-forge/cdt-builds>`_ repo.
+`conda-forge/cdt-builds <https://github.com/conda-forge/cdt-builds>`__ repo.
 
 In ``conda-forge`` the primary usages of CDTs is currently for packages that link against libGL.
 
@@ -325,14 +329,21 @@ In the case of linking, you need to use the ``pin_compatible`` function to ensur
       - {{ pin_compatible('numpy') }}
 
 
-At the time of writing, above is equivalent to the following,
+At the time of writing (January 22, 2022), above is equivalent to the following,
 
 .. code-block:: yaml
 
     host:
-      - numpy 1.14.6
+      - numpy   1.18   # [py==37]
+      - numpy   1.18   # [py==38]
+      - numpy   1.19   # [py==39]
     run:
-      - numpy >=1.14.6,<2.0.a0
+      - numpy >=1.18.5,<2.0.a0   # [py==37]
+      - numpy >=1.18.5,<2.0.a0   # [py==38]
+      - numpy >=1.19.5,<2.0.a0   # [py==39]
+
+See the pinning repository for what the pinning corresponds to at time of writing
+https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml#L631
 
 
 .. admonition:: Notes
@@ -477,7 +488,7 @@ and apply the appropriate conditionals in your build:
 
 
 Preferring a provider (usually nompi)
-"""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual exclusivity of
 the ``mpi`` metapackage allows picking between mpi providers by installing an mpi provider, e.g.
@@ -517,6 +528,7 @@ Here is an example build section:
     # `pkg * mpi_*` for any mpi
     # `pkg * nompi_*` for no mpi
 
+    {% if mpi != 'nompi' %}
     {% set mpi_prefix = "mpi_" + mpi %}
     {% else %}
     {% set mpi_prefix = "nompi" %}
@@ -568,7 +580,7 @@ Remove the ``if mpi...`` condition if all variants should create a strict runtim
 chosen at build time (i.e. if the nompi build cannot be run against the mpich build).
 
 Complete example
-""""""""""""""""
+^^^^^^^^^^^^^^^^
 
 Combining all of the above, here is a complete recipe, with:
 
@@ -648,7 +660,7 @@ mpi-metapackage exclusivity allows ``mpi_*`` to resolve the same as ``mpi_{{ mpi
 if ``{{ mpi }}`` is also a direct dependency, though it's probably nicer to be explicit.
 
 Just mpi example
-""""""""""""""""
+^^^^^^^^^^^^^^^^
 
 Without a preferred ``nompi`` variant, recipes that require mpi are much simpler. This is all that is needed:
 
@@ -668,6 +680,13 @@ Without a preferred ``nompi`` variant, recipes that require mpi are much simpler
     run:
       - {{ mpi }}
 
+MPI Compiler Packages
+^^^^^^^^^^^^^^^^^^^^^
+
+Do not use the ``[openmpi,mpich]-[mpicc,mpicxx,mpifort]`` metapackages in the ``requirements/build`` section
+of a recipe; the MPI compiler wrappers are included in the main ``openmpi``/``mpich`` packages.
+As shown above, just add ``openmpi``/``mpich`` to the ``requirements/host`` section and use compiler directives for the 
+corresponding compilers in ``requirements/build`` as normal.
 
 
 OpenMP
@@ -799,6 +818,7 @@ You can switch your BLAS implementation by doing,
     conda install "libblas=*=*mkl"
     conda install "libblas=*=*openblas"
     conda install "libblas=*=*blis"
+    conda install "libblas=*=*accelerate"
     conda install "libblas=*=*netlib"
 
 This would change the BLAS implementation without changing the conda packages depending
@@ -811,6 +831,7 @@ The following legacy commands are also supported as well.
     conda install "blas=*=mkl"
     conda install "blas=*=openblas"
     conda install "blas=*=blis"
+    conda install "blas=*=accelerate"
     conda install "blas=*=netlib"
 
 .. note::
@@ -879,7 +900,7 @@ To use this package in a build, put it in the host environment like so
 .. _knowledge:empty:
 
 Empty Python packages
-----------
+---------------------
 For some features introduced in later Python versions, the Python community creates backports, which makes these
 features available for earlier versions of Python as well.
 One example here is `dataclasses <https://www.python.org/dev/peps/pep-0557/>`__ which was introduced with
@@ -892,15 +913,43 @@ which restricts the corresponding conda-forge recipes from becoming ``noarch``.
 Therefore, some conda-forge recipes only create an actual package on specific Python versions and are otherwise an
 empty placeholder. This allows them to be safely installed under all Python versions and makes using ``skips`` unnecessary.
 
+Similarly, some packages are `only` platform-specific dependency of a package, such as ``pywin32``, and have
+helper metapackages which can help recipes stay ``noarch``. The version of the `actual` package required
+can be controlled with ``run_constrained``, even for packages not available on all platforms.
+
 Currently available packages:
 
-+-------------+-------------------+--------------+
-| Name        | Available on:     | Empty on:    |
-+=============+===================+==============+
-| dataclasses | python >=3.6,<3.7 | python >=3.7 |
-+-------------+-------------------+--------------+
-| typing      |                   | python >=3   |
-+-------------+-------------------+--------------+
++--------------------+-------------------+--------------+
+| Name               | Available on:     | Empty on:    |
++====================+===================+==============+
+| dataclasses        | python >=3.6,<3.7 | python >=3.7 |
++--------------------+-------------------+--------------+
+| enum34             | python =2.7       | python >=3.4 |
++--------------------+-------------------+--------------+
+| typing             |                   | python >=3   |
++--------------------+-------------------+--------------+
+| pywin32-on-windows | windows           | unix         |
++--------------------+-------------------+--------------+
+
+.. _knowledge:all-installs:
+
+Non-version-specific Python packages
+------------------------------------
+For some dependencies, upstream maintainers list Python versions where those packages are needed,
+even if the packages can actually be installed under all Python versions.
+
+Implementing this restriction in conda-forge is currently only possible through the use of ``skips``
+which restricts the corresponding conda-forge recipes from becoming ``noarch``.
+
+Therefore, the conda-forge community maintains a list of packages that are safe to be installed under all Python versions,
+even if the original package only requires it for some versions.
+
+For example, the package `pyquil <https://github.com/rigetti/pyquil>`__ only
+`requires <https://github.com/rigetti/pyquil/blob/497791e8108d8780109d75410be786c5f6e590ea/pyproject.toml#L30>`__ ``importlib-metadata`` for ``python <3.8`` but it is actually save to be installed under ``python >=3.8`` as well.
+
+Currently available packages:
+
+  - importlib-metadata
 
 
 Noarch builds
@@ -909,7 +958,7 @@ Noarch builds
 Noarch packages are packages that are not architecture specific and therefore only have to be built once.
 
 Declaring these packages as ``noarch`` in the ``build`` section of the meta.yaml, reduces shared CI resources.
-Therefore all packages that qualify to be noarch packages, should be declared as such.
+Therefore all packages that qualify to be noarch packages `should` be declared as such.
 
 
 .. _noarch:
@@ -929,7 +978,7 @@ In order to qualify as a noarch python package, all of the following criteria mu
     statement and add version constraint on python in ``host`` and ``run``
     section.
   - ``2to3`` is not used
-  - Scripts argument in setup.py is not used
+  - ``scripts`` argument in ``setup.py`` is not used
   - If ``console_scripts`` ``entry_points`` are defined in ``setup.py`` or ``setup.cfg``, they are also listed in
     the ``build`` section of ``meta.yaml``
   - No activate scripts
@@ -943,7 +992,7 @@ In order to qualify as a noarch python package, all of the following criteria mu
 
 .. note::
 
-  Only ``console_scripts`` entry points have to be listed in meta.yaml. Other entry points do not conflict
+  Only ``console_scripts`` entry points have to be listed in ``meta.yaml``. Other entry points do not conflict
   with ``noarch`` and therefore do not require extra treatment.
 
 .. note::
@@ -952,9 +1001,16 @@ In order to qualify as a noarch python package, all of the following criteria mu
   ``noarch`` even if one of its dependencies is not available on a given platform. If this is the case, conda will
   display a helpful error message describing which dependency couldn't be found when it tries to install the package.
   If the dependency is later made available, your package will be installable on that platform without having to make
-  any changes to the feedstock. However, keep in mind that since ``noarch`` packages are built on Linux, all
-  dependencies must be available on Linux.
+  any changes to the feedstock.
 
+  By default, ``noarch`` packages are built on Linux, and all dependencies must be available on Linux.
+
+.. hint::
+
+  If a ``noarch`` package `cannot` be built on Linux, one or more ``noarch_platforms`` can be provided in
+  ``conda-forge.yml``. One example is `pywin32-on-windows <https://github.com/conda-forge/pywin32-on-windows-feedstock>`_,
+  which builds on Linux `and` Windows, with ``build_number`` offsets to create a pair packages, like
+  ``dataclasses``.
 
 If an existing python package qualifies to be converted to a noarch package, you can request the required changes
 by opening a new issue and including ``@conda-forge-admin, please add noarch: python``.
@@ -1058,27 +1114,37 @@ Note that this requires ``conda>=4.8``. If you want to support older conda versi
 the requirement should be changed from ``run`` to ``run_constrained``. Note that
 ``conda<4.8`` will ignore the condition if it's a ``run_constrained`` on ``__osx``.
 
+Newer C++ features with old SDK
+-------------------------------
+
+The libc++ library uses Clang availability annotations to mark certain symbols as
+unavailable when targeting versions of macOS that ship with a system libc++
+that do not contain them. Clang always assumes that the system libc++ is used.
+
+The conda-forge build infrastructure targets macOS 10.9 and some newer C++ features
+such as ``fs::path`` are marked as unavailable on that platform, so the build aborts:
+
+.. code-block:: sh
+
+  ...
+  error: 'path' is unavailable: introduced in macOS 10.15
+  ...
+  note: 'path' has been explicitly marked unavailable here
+  class _LIBCPP_TYPE_VIS path {
+
+However, since conda-forge ships its own (modern) libcxx we can ignore these checks
+because these symbols are in fact available. To do so, add
+``_LIBCPP_DISABLE_AVAILABILITY`` to the defines. For example
+
+.. code-block:: sh
+
+  CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
+
 
 PyPy builds
 ===========
 
-To use the PyPy 3.6 or 3.7 builds you can do the following,
-
-.. code-block:: bash
-
-   conda create -n pypy36  pypy python=3.6
-   conda create -n pypy37  pypy python=3.7
-
-.. note::
-
-   As of March 8 2020, if you are using defaults as a low priority channel,
-   then you need to use strict channel priority as the metadata in defaults
-   has not been patched yet which allows cpython extension packages to be
-   installed alongside pypy.
-
-.. code-block:: bash
-
-   conda config --set channel_priority strict
+See :ref:`pypy` in the user docs for more info about PyPy and ``conda-forge``.
 
 To build your python package for pypy, wait for the bot to send a
 PR and contact ``conda-forge/bot`` team if a PR is not sent after the
@@ -1106,6 +1172,8 @@ To skip the pypy builds, do the following,
    build:
      skip: True         # [python_impl == 'pypy']
 
+If something is failing the PyPy build when it passes the CPython one, reach
+out to @conda-forge/help-pypy.
 
 Using setuptools_scm
 ====================
@@ -1140,7 +1208,7 @@ There are two options for how to proceed:
             set SETUPTOOLS_SCM_PRETEND_VERSION=%PKG_VERSION%
 
         Whereby you use that ``PKG_VERSION`` has been set with the version string,
-        see `Environment variables <https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#env-vars>`_.
+        see `Environment variables <https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#env-vars>`__.
 
     -   Otherwise, if you are directly building from ``meta.yaml``, use for example:
 
@@ -1209,10 +1277,10 @@ On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CU
   **How is CUDA provided at the system level?**
 
   * On Linux, Nvidia provides official Docker images, which we then
-    `adapt <https://github.com/conda-forge/docker-images>`_ to Conda-Forge's needs.
+    `adapt <https://github.com/conda-forge/docker-images>`__ to Conda-Forge's needs.
 
   * On Windows, the compilers need to be installed for every CI run. This is done through the
-    `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`_ scripts.
+    `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`__ scripts.
     Do note that the Nvidia executable won't install the drivers because no GPU is present in the machine.
 
   **How is cudatoolkit selected at install time?**
@@ -1221,7 +1289,7 @@ On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CU
   named ``__cuda``. By default, ``conda`` will install the highest version available
   for the packages involved. To override this behaviour, you can define a ``CONDA_OVERRIDE_CUDA`` environment
   variable. More details in the
-  `Conda docs <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html#overriding-detected-packages>`_.
+  `Conda docs <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html#overriding-detected-packages>`__.
 
   Note that prior to v4.8.4, ``__cuda`` versions would not be part of the constraints, so you would always
   get the latest one, regardless the supported CUDA version.
@@ -1238,10 +1306,10 @@ of the conda recipe. That does not mean you can't test your package locally. To 
 
 1. Enable the Azure artifacts for your feedstock (see :ref:`here <azure-config>`).
 2. Include the test files and requirements in the recipe
-   `like this <https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/meta.yaml#L51-L61>`_.
+   `like this <https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/meta.yaml#L51-L61>`__.
 3. Provide the test instructions. Take into account that the GPU tests will fail in the CI run,
    so you need to ignore them to get the package built and uploaded as an artifact.
-   `Example <https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/run_test.py>`_.
+   `Example <https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/run_test.py>`__.
 4. Once you have downloaded the artifacts, you will be able to run::
 
     conda build --test <pkg file>.tar.bz2
@@ -1271,6 +1339,21 @@ For now, you will have to add ``nvcuda.dll`` to the ``missing_dso_whitelist``::
       - "*/nvcuda.dll"   # [win]
 
 
+My feedstock is not building old CUDA versions anymore
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+With the `addition of CUDA 11.1 and 11.2 <https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/1162>`_,
+the default build matrix for CUDA versions was trimmed down to versions 10.2, 11.0, 11.1, 11.2.
+
+If you really need it, you can re-add support for 9.2, 10.0 and 10.1. However, this is not recommended.
+Adding more CUDA versions to the build matrix will dramatically increase the number of jobs and will place a large
+burden on our CI resources. Only proceed if there's a known use case for the extra packages.
+
+1. Download this `migration file <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/cuda92_100_101.yaml>`__.
+2. In your feedstock fork, create a new branch and place the migration file under ``.ci_support/migrations``.
+3. Open a PR and re-render. CUDA 9.2, 10.0 and 10.1 will appear in the CI checks now. Merge when ready!
+
+
 Adding support for a new CUDA version
 -------------------------------------
 
@@ -1279,8 +1362,8 @@ Providing a new CUDA version involves five repositores:
 * `cudatoolkit-feedstock <https://github.com/conda-forge/cudatoolkit-feedstock>`_
 * `nvcc-feedstock <https://github.com/conda-forge/nvcc-feedstock>`_
 * `conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_
-* `docker-images <https://github.com/conda-forge/docker-images>`_ (Linux only)
-* `conda-forge-ci-setup-feedstock <https://github.com/conda-forge/conda-forge-ci-setup-feedstock>`_ (Windows only)
+* `docker-images <https://github.com/conda-forge/docker-images>`__ (Linux only)
+* `conda-forge-ci-setup-feedstock <https://github.com/conda-forge/conda-forge-ci-setup-feedstock>`__ (Windows only)
 
 The steps involved are, roughly:
 
@@ -1291,7 +1374,7 @@ The steps involved are, roughly:
    Copy the migration file manually to ``.ci_support/migrations``.
    This copy should not specify a timestamp. Comment it out and rerender.
 4. For Windows, add the installer URLs and hashes to the ``conda-forge-ci-setup``
-   `script <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat>`_.
+   `script <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat>`__.
    The migration file must also be manually copied here. Rerender.
 5. Create the new ``nvcc`` packages for the new version. Again, manual
    migration must be added. Rerender.
@@ -1305,7 +1388,7 @@ Apple Silicon builds
 ====================
 
 The new Apple M1 processor is the first Apple Silicon supported by conda-forge
-`osx-arm64 <https://github.com/conda-forge/conda-forge.github.io/issues/1126>`_ builds.
+`osx-arm64 <https://github.com/conda-forge/conda-forge.github.io/issues/1126>`__ builds.
 For new builds to be available, via cross-compilation, a migration is required for
 the package and its dependencies. These builds are experimental as many of them are untested.
 
@@ -1314,7 +1397,7 @@ To request a migration for a particular package and all its dependencies:
 1. Check the feedstock in question to see if there is already an issue or pull request.
    Opening an issue here is fine, as it might take a couple iterations of the below,
    especially if many dependencies need to be built as well.
-2. If nothing is under way, look at the current `conda-forge-pinning <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt>`_.
+2. If nothing is under way, look at the current `conda-forge-pinning <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt>`__.
 3. If the package is not listed there, make a PR, adding the package
    name to the end of ``osx_arm64.txt``. The migration bot should start making automated
    pull requests to the repo and its dependencies.
@@ -1335,15 +1418,15 @@ Recipe maintainers can make pre-release builds available on
 conda-forge by adding them to the ``dev`` or ``rc`` label.
 
 The semantics of these labels should generally follow the
-`guidelines <https://docs.python.org/devguide/devcycle.html#stages>`_ that Python
+`guidelines <https://docs.python.org/devguide/devcycle.html#stages>`__ that Python
 itself follows.
 
-- ``rc``: `Beta <https://docs.python.org/devguide/devcycle.html#beta>`_ and `Release
+- ``rc``: `Beta <https://docs.python.org/devguide/devcycle.html#beta>`__ and `Release
   Candidate <https://docs.python.org/devguide/devcycle.html#release-candidate-rc>`_
   (RC). No new features. Bugfix only.
 
 - ``dev``: `Pre-Alpha <https://docs.python.org/devguide/devcycle.html#pre-alpha>`_
-  and `Alpha <https://docs.python.org/devguide/devcycle.html#alpha>`_. These are
+  and `Alpha <https://docs.python.org/devguide/devcycle.html#alpha>`__. These are
   still packages that could see substantial changes
   between the dev version and the final release.
 
@@ -1386,7 +1469,7 @@ while B should have,
 .. code-block:: yaml
 
    channel_sources:
-     - conda-forge/label/A_rc,conda-forge,defaults
+     - conda-forge/label/A_rc,conda-forge
    channel_targets:
      - conda-forge B_rc
 
@@ -1416,10 +1499,10 @@ Pre-release version sorting
 ---------------------------
 
 If you wish to add numbers to your ``dev`` or ``rc`` build, you should follow the
-`guidelines <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/pkg-specs.html#version-ordering>`_ put
+`guidelines <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/pkg-specs.html#version-ordering>`__ put
 forth by Continuum regarding version sorting in ``conda``. Also see the `source
 code for conda
-4.2.13 <https://github.com/conda/conda/blob/4.2.13/conda/version.py#L93-L119>`_.
+4.2.13 <https://github.com/conda/conda/blob/4.2.13/conda/version.py#L93-L119>`__.
 The tl;dr here is that conda sorts as follows:
 
 .. code-block::

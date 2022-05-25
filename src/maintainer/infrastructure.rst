@@ -9,7 +9,7 @@ Repositories
 Staging area for recipes
 ------------------------
 
-`conda-forge/staged-recipes <https://github.com/conda-forge/staged-recipes>`_ is the entry point for new packages to join the conda-forge package collection.
+`conda-forge/staged-recipes <https://github.com/conda-forge/staged-recipes>`__ is the entry point for new packages to join the conda-forge package collection.
 You can find the detailed guide for submitting new package recipes in :ref:`creating_recipes`.
 
 Smithy
@@ -25,7 +25,7 @@ Smithy contains maintenance code for conda-forge, which is used by the ``conda-s
 
 ``conda-smithy`` also contains the command line tool that you should use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
 
-Smithy can be used beyond Conda-Forge's purposes. For example, it can be used to `set up self-hosted Azure agents <self-hosted_azure-config>`_ for non-Conda-Forge infrastructures.
+Smithy can be used beyond Conda-Forge's purposes. For example, it can be used to `set up self-hosted Azure agents <azure-config>` for non-Conda-Forge infrastructures.
 (You could also consider using `Azure virtual machine scale set agents <https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops>`_,
 which could be less expensive to run than permanently active agents.)
 
@@ -33,15 +33,15 @@ which could be less expensive to run than permanently active agents.)
 Web services
 ------------
 
-The Heroku app providing the conda-forge web services lives in `conda-forge/conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
+The Heroku app providing the conda-forge web services lives in `conda-forge/conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`__.
 Please note that the code logic provided by the app is in the ``Smithy`` repository.
 
-Bugs or suggestions regarding the service functionality should therefore be opened in ``conda-forge/conda-smithy``'s `bug tracker <https://github.com/conda-forge/conda-smithy/issues>`_.
+Bugs or suggestions regarding the service functionality should therefore be opened in ``conda-forge/conda-smithy``'s `bug tracker <https://github.com/conda-forge/conda-smithy/issues>`__.
 
 conda-forge pinning
 -------------------
 
-Package-wide dependency pins are defined in `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_  in the `conda-forge/conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_.
+Package-wide dependency pins are defined in `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`__ in the `conda-forge/conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_.
 
 For more information on conda-forge wide package pins, please refer to :ref:`globally_pinned_packages`.
 
@@ -52,7 +52,7 @@ Documentation
 
 The documentation lives in `conda-forge/conda-forge.github.io <https://github.com/conda-forge/conda-forge.github.io/>`__, and is automatically deployed to our `online version <https://conda-forge.org/docs/>`__.
 
-The documentation is built with ``Sphinx`` and the sources files are located in the `src <https://github.com/conda-forge/conda-forge.github.io/tree/master/src>`__ directory of the repository.
+The documentation is built with ``Sphinx`` and the sources files are located in the `src <https://github.com/conda-forge/conda-forge.github.io/tree/main/src>`__ directory of the repository.
 
 If you found any typo error, unclear explanations or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to :ref:`improve_docs`.
 
@@ -128,6 +128,13 @@ Entering this command in the PR of a feedstock or staged-recipes will have the a
 associated with the repo. This command can be useful for people who are not yet members of conda-forge and
 so cannot @-mention the ``staged-recipes`` team for PR reviews.
 
+@conda-forge-admin, please ping conda-forge/<team>
+--------------------------------------------------
+
+Entering this command in the PR of a feedstock or staged-recipes will have the admin bot @-mention the respective team.
+This command can be useful for people who are not yet members of conda-forge and
+so cannot @-mention someone due to the general GitHub limitations.
+
 @conda-forge-admin, please rerun bot
 ------------------------------------
 
@@ -141,7 +148,7 @@ Adding this label to non-bot issued PRs will have no effect.
 Entering this command in the title or comment of an issue will instruct the admin bot to
 open a PR enabling the automatic merging of passing PRs from the ``auto-tick``
 bot. This functionality is currently experimental. You can find more details
-`here <https://regro.github.io/cf-scripts/github_actions_infrastructure.html#automerging-prs>`_.
+:ref:`here<Automerge>`.
 Please open issue on ``regro/cf-scripts`` for any feedback, bugs, and/or questions!
 
 @conda-forge-admin, please add python 2.7
@@ -151,8 +158,16 @@ Entering this command in the title of an issue will instruct the admin bot to
 add Python 2.7 back to a feedstock. Note that this command will remove any other
 Python versions and any ``win``, ``aarch64`` or ``ppc64le`` builds. Thus you should
 merge the PR into a separate branch on your feedstock if you want to keep these
-other builds. **Python 2.7 support is deprecated and any feedstocks on Python 2.7 will 
+other builds. **Python 2.7 support is deprecated and any feedstocks on Python 2.7 will
 not be properly handled by our bots.**
+
+@conda-forge-admin, please add user @username
+---------------------------------------------
+
+Entering the above phrase in the title of an issue on a feedstock will make a PR
+that adds the given user to the feedstock. A maintainer or member of ``core`` can then merge
+this PR to add the user. Please do not modify this PR or adjust the commit message. This
+PR is designed to skip building the package.
 
 
 CI build services
@@ -162,11 +177,11 @@ Here we describe common issues with the CI Services that conda-forge builds.
 
 Azure Pipelines
 ---------------
-Azure is used to build packages for OSX, Linux (x86_64, native), Linux (ARMv8, emulated) and Linux (IBM Power8+, emulated). 
-The build queue on Azure is substantially larger than on all the other providers. 
+Azure is used to build packages for OSX, Linux (x86_64, native), Linux (ARMv8, emulated) and Linux (IBM Power8+, emulated).
+The build queue on Azure is substantially larger than on all the other providers.
 Azure builds have a maximum duration of 6 hours.
 
-To see all builds on Azure, visit `<https://dev.azure.com/conda-forge/feedstock-builds/_build>`_.
+To see all builds on Azure, visit `<https://dev.azure.com/conda-forge/feedstock-builds/_build>`__.
 
 Restarting builds
 .................
@@ -195,8 +210,8 @@ TravisCI (OSX, IBM Power 8+)
 ------------------------------
 
 TravisCI is used to build packages for IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
-force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit `<https://travis-ci.com/profile>`_ 
-and click "Sync accounts".
+force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit `<https://app.travis-ci.com/account/repositories>`__
+and click the "Sync accounts" button.
 
 Enabling Travis
 ...............
@@ -209,9 +224,9 @@ Enable a build by adding the following to ``conda-forge.yml`` in the root of the
 
     provider:
       osx: travis
-      
+
 For IBM Power 8+ builds, add the name of your feedstock to the list `here
-<https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`_
+<https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`__
 via a pull request.
 
 
@@ -239,15 +254,8 @@ CircleCI for OSX should be used for OSX, only when TravisCI resources (50 minute
 Note that you need to rerender the feedstock, once this change has been made.
 
 
-Enabling Circle on your Fork
-............................
-
-If for some reason CircleCI is not triggering build from forks,
-Circle can be manually added for each fork. Circle calls this "Adding a Project" and
-`the official CircleCI documentation is available here <https://circleci.com/docs/getting-started/#add-and-follow-more-projects>`_.
-This effectively amounts to going to the `Add Projects <https://circleci.com/add-projects>`_
-page, finding the fork that you wish to enable, and clicking the "Build Project" button.
-This is not normally needed.
+Debugging permission errors
+...........................
 
 If CircleCI lacks permissions to checkout the source code, it will produce an error as follows::
 
@@ -256,7 +264,7 @@ If CircleCI lacks permissions to checkout the source code, it will produce an er
     Permission denied (publickey).
     fatal: Could not read from remote repository.
 
-When this happens for a feedstock, it can be fixed using the `webservice <https://conda-forge.org/docs/webservice.html#conda-forge-admin-please-update-circle>`_, by posting the following comment::
+When this happens for a feedstock, it can be fixed using the `webservice <ci_update_circle>`, by posting the following comment::
 
   @conda-forge-admin, please update circle
 
@@ -270,15 +278,38 @@ Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
 Drone.io
 --------
 
-We use `Drone.io <https://drone.io>`_ for Linux ARMv8 builds. To enable these builds on your feedstock, make a pull request to add your feedstock to the list 
+We use `Drone.io <https://drone.io>`__ for Linux ARMv8 builds. To enable these builds on your feedstock, make a pull request to add your feedstock to the list
 here `<https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`_.
 
 
 GitHub Actions
 --------------
 
-We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on 
-GitHub Actions. 
+We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on
+GitHub Actions.
+
+.. _Automerge:
+
+Automerge
+.........
+
+The automerge service uses the GitHub action in this `repo <https://github.com/conda-forge/automerge-action>`__. This action runs out of a
+Docker `container <https://hub.docker.com/repository/docker/condaforge/automerge-action>`__ on the ``prod`` tag. See the
+repo `README.md <https://github.com/conda-forge/automerge-action#readme>`__ for more details. PRs are automatically merged if they satisfy either
+of the two following sets of conditions:
+
+1. are from the ``regro-cf-autotick-bot``, have ``[bot-automerge]`` in the title, all statuses are passing, and the feedstock allows automerge
+2. have the ``automerge`` label and all statuses are passing.
+
+For PRs from the ``regro-cf-autotick-bot``, it can be useful to remove the ``[bot-automerge]`` slug from the PR title if you are making
+edits to the PR.
+
+Rerendering
+...........
+
+The rerendering service is triggered by the Heroku app. It uses the GitHub action in this `repo <https://github.com/conda-forge/webservices-dispatch-action>`__.
+This action runs out of a Docker `container <https://hub.docker.com/repository/docker/condaforge/webservices-dispatch-action>`__ on the ``prod`` tag. See the
+repo `README.md <https://github.com/conda-forge/webservices-dispatch-action#readme>`__ for more details.
 
 
 Skipping CI builds
@@ -295,9 +326,9 @@ To skip a CI build for a given commit, put ``[ci skip] ***NO_CI***`` in the comm
 Third-party Use of Our CI Services
 ----------------------------------
 
-Due to its stature in the open-source community, conda-forge has enhanced access to certain CI services. This access is a community 
-resource entrusted to conda-forge for use in building packages. We thus cannot support third-party or "off-label" CI jobs in our 
-feedstocks on any of our CI services. If we find such use, we will politely ask the maintainers to rectify the situation. We may 
+Due to its stature in the open-source community, conda-forge has enhanced access to certain CI services. This access is a community
+resource entrusted to conda-forge for use in building packages. We thus cannot support third-party or "off-label" CI jobs in our
+feedstocks on any of our CI services. If we find such use, we will politely ask the maintainers to rectify the situation. We may
 take more serious actions, including archiving feedstocks or removing maintainers from the organization, if the situation cannot be rectified.
 
 
@@ -344,7 +375,7 @@ with our compilers. These ``sysroot`` files are available in the ``sysroot_linux
 These packages have version numbers that match the version of ``glibc`` they package. These
 versions are ``2.12`` for CentOS 6 and ``2.17`` for CentOS 7.
 
-For ``gcc``/``gxx``/``gfortran`` versions prior to ``8.4.0`` on ``ppc64le and ``7.5.0``
+For ``gcc``/``gxx``/``gfortran`` versions prior to ``8.4.0`` on ``ppc64le`` and ``7.5.0``
 on ``aarch64``/``x86_64``, we had been building our own versions of ``glibc``. This practice
 is now deprecated in favor of the CentOS-based ``sysroots``. Additionally, as of the same
 compiler versions above, we have removed the ``cos*`` part of the ``sysroot`` path. The new

@@ -187,6 +187,9 @@ Note that for long build logs one can do
 
 to save it in a text file for future inspection.
 
+Once built, you can find the finished package in the ``build_artifacts`` directory in your feedstock.
+
+
 Downloading prebuilt packages
 ----------------
 A neat feature that feedstocks have is the ability to `upload packages to the CI provider for testing <https://conda-forge.org/docs/maintainer/conda_forge_yml.html?highlight=store_build_artifacts#azure>`_.
@@ -218,7 +221,7 @@ remove broken packages from the ``main`` channel:
 
 1. Locate the paths to broken files on `anaconda.org <https://anaconda.org>`__, by searching for the conda-forge package and switching to the files tab.
 2. Fork `conda-forge/admin-requests <https://github.com/conda-forge/admin-requests>`__ and add a new text file in the ``broken`` directory.
-3. Add the broken files to the new text file, one path per line. See `broken/example.txt <https://github.com/conda-forge/admin-requests/blob/master/broken/example.txt>`__ for an example file.
+3. Add the broken files to the new text file, one path per line. See `broken/example.txt <https://github.com/conda-forge/admin-requests/blob/main/broken/example.txt>`__ for an example file.
 4. Open a new PR. Once merged, a bot will label all listed files as broken, thus effectively removing them from the channel.
 
 
@@ -236,24 +239,21 @@ If you believe a feedstock should be archived, please contact `@conda-forge/core
 Updating the maintainer list
 ============================
 
-The list of maintainers of a feedstock is recorded in the recipe itself. The list of maintainers can be updated with following steps:
+The list of maintainers of a feedstock is recorded in the recipe itself. A new maintainer can be added by opening
+an issue in the feedstock repository with the following title:
 
-1. Add your github-id to the ``recipe-maintainers`` section at the bottom of the ``recipe/meta.yaml`` file in the feedstock:
+``@conda-forge-admin, please add user @username``
 
-  .. code-block:: yaml
+where ``username`` is the username of the new maintainer to be added.
+A PR will be automatically created and a maintainer or a member of the ``core`` team, in case no maintainer is active anymore, can then merge this PR to add the user. 
+To contact core, ping them by mentioning @conda-forge/core in a comment or, if you haven't heard back in a while or are new to conda-forge, contact them through the community `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`__.
 
-    extra:
-      recipe-maintainers:
-        - current-maintainer
-        - your-github-id
+.. note::
 
-2. Commit and push the change to your fork and open a :term:`PR` against the feedstock you want to become a maintainer of.
 
-3. :ref:`Rerender<dev_update_rerender>` the feedstock by posting ``@conda-forge-admin, please rerender`` as a new comment in the :term:`PR`.
+   This PR is designed to skip building the package. Please do **not** modify it or adjust the commit message.
 
-4. Wait until the :term:`PR` is merged. If the current maintainer is no longer active, you can ping ``@conda-forge/core`` and ask for a merge.
-
-Once the PR is merged, our infrastructure will grant and revoke maintainer permissions.
+For an example see `this <https://github.com/conda-forge/cudnn-feedstock/issues/20>`__ issue.
 
 
 Maintaining several versions

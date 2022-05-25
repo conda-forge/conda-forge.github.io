@@ -229,8 +229,8 @@ The staging team is responsible for:
 
 Members
 -------
-In addition to `core <https://github.com/conda-forge/conda-forge.github.io/blob/master/src/core.csv>`_
-and `emeritus <https://github.com/conda-forge/conda-forge.github.io/blob/master/src/emeritus.csv>`_,
+In addition to `core <https://github.com/conda-forge/conda-forge.github.io/blob/main/src/core.csv>`_
+and `emeritus <https://github.com/conda-forge/conda-forge.github.io/blob/main/src/emeritus.csv>`_,
 the following are members of the staged-recipes team and have commit rights.
 
  - Amir Mohammadi <183.amir@gmail.com>
@@ -263,3 +263,35 @@ Members
 - Anthony Scopatz <scopatz@gmail.com>
 - Hadrien Mary <hadrien.mary@gmail.com>
 - Isuru Fernando <isuruf@gmail.com>
+
+
+Diversity and Inclusion Sub-Team
+================================
+
+Role
+----
+Develop ``conda-forge`` as a diverse community and advocate for
+actions impacting underrepresented groups in ``conda-forge``.
+
+Charter
+-------
+Dynamic
+
+Responsibility
+--------------
+One of the core strengths of ``conda-forge`` is the diversity of ecosystems it supports.
+Likewise, fostering and advancing a diverse community of users, maintainers, and infrastructure contributors
+is an important part of creating and maintaining a vibrant project.
+The mandate of this subteam is to support and increase the diversity of the ``conda-forge``
+community at all levels.
+As such this group can, but is not limited to:
+- provide a place for issues impacting diversity to be heard
+- advocate for underrepresented groups and bring their issues to the attention of core
+- run programs to maintain and grow the community's diversity and inclusiveness
+
+Members
+-------
+- Filipe Fernandes <ocefpaf@gmail.com>
+- Christopher J. "CJ" Wright <cjwright4242@gmail.com>
+- Marcelo Duarte Trevisani <marceloduartetrevisani@gmail.com>
+- Peter K. G. Williams <peter@newton.cx>

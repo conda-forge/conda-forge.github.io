@@ -24,7 +24,7 @@ Top-level fields
 * :ref:`appveyor`
 * :ref:`azure-config`
 * :ref:`build_platform`
-* :ref:`build_with_mamba`
+* :ref:`build_with_mambabuild`
 * :ref:`bot`
 * :ref:`channel_priority`
 * :ref:`channels`
@@ -37,6 +37,7 @@ Top-level fields
 * :ref:`linux`
 * :ref:`linux_aarch64`
 * :ref:`linux_ppc64le`
+* :ref:`noarch_platforms`
 * :ref:`os_version`
 * :ref:`osx`
 * :ref:`provider`
@@ -45,6 +46,7 @@ Top-level fields
 * :ref:`skip_render`
 * :ref:`templates`
 * :ref:`test_on_native_only`
+* :ref:`test`
 * :ref:`travis`
 * :ref:`upload_on_branch`
 * :ref:`win`
@@ -123,36 +125,51 @@ automatic version updates/migrations for feedstocks. The current options are
       abi_migration_branches:
         - v1.10.x
 
+The ``abi_migration_branches`` feature is useful to, for example, add a
+long-term support (LTS) branch for a package.
+
 .. _build_platform:
 
 build_platform
 --------------
-This is a mapping from the build platform to the host platform of the package
-to be built. For eg: following builds a ``osx-64`` platform from ``linux-64``
+This is a mapping from the target platform to the build platform for the package
+to be built. e.g. the following builds a ``osx-64`` package on the ``linux-64``
 build platform using cross-compiling.
 
 .. code-block:: yaml
 
     build_platform:
       osx_64: linux_64
-      
-.. _build_with_mamba:
 
-build_with_mamba
---------------
-This option, when enabled, configures the conda-forge CI to run a debug build using the ``mamba`` solver. Check `this <https://conda-forge.org/docs/maintainer/maintainer_faq.html#mfaq-mamba-local>`__ to know more.  
+Leaving this field empty implicitly requests to build a package natively. i.e.
 
 .. code-block:: yaml
 
-    build_with_mamba:
-      True   
-          
+    build_platform:
+      linux_64: linux_64
+      linux_ppc64le: linux_ppc64le
+      linux_aarch64: linux_aarch64
+      osx_64: osx_64
+      osx_arm64: osx_arm64
+      win_64: win_64
+
+.. _build_with_mambabuild:
+
+build_with_mambabuild
+---------------------
+This option, when enabled, configures the conda-forge CI to run a debug build using the ``mamba`` solver. Check `this <https://conda-forge.org/docs/maintainer/maintainer_faq.html#mfaq-mamba-local>`__ to know more.
+
+.. code-block:: yaml
+
+    build_with_mambabuild:
+      True
+
 .. _channel_priority:
 
 channel_priority
 ----------------
 
-This value sets the ``conda`` solver channel priority for feedstock builds. 
+This value sets the ``conda`` solver channel priority for feedstock builds.
 The default is ``strict``. Any valid value for the same setting in the ``.condarc`` is
 allowed here.
 
@@ -253,6 +270,9 @@ defaults are as follows:
       repo_name: ""
       # branch name to execute on
       branch_name: master
+      # branch name to use for rerender+webservices github actions and
+      # conda-forge-ci-setup-feedstock references
+      tooling_branch_name: master
 
 .. _idle_timeout_minutes:
 
@@ -301,6 +321,26 @@ Currently only:
     linux_ppc64le:
       enabled: False
 
+.. _noarch_platforms:
+
+noarch_platforms
+----------------
+Platforms on which to build noarch packages. The preferred default is a
+single build on ``linux_64``.
+
+.. code-block:: yaml
+
+    noarch_platforms: linux_64
+
+To build on multiple platforms, e.g. for simple packages with platform-specific
+dependencies, provide a list.
+
+.. code-block:: yaml
+
+    noarch_platforms:
+      - linux_64
+      - win_64
+
 .. _os_version:
 
 os_version
@@ -329,13 +369,13 @@ Currently only:
 
 provider
 --------
-The ``provider`` field is a mapping from arch (operating system) to CI service.
-This thus controls where a package is built. The following are available as
-arches:
+The ``provider`` field is a mapping from build platform (not target platform) to CI service.
+It determines which service handles each build platform. The following are available as
+build platforms:
 
-* ``linux``
-* ``osx``
-* ``win``
+* ``linux_64``
+* ``osx_64``
+* ``win_64``
 * ``linux_aarch64``
 * ``linux_ppc64le``
 
@@ -345,37 +385,41 @@ The following CI services are available:
 * ``circle``
 * ``travis``
 * ``appveyor``
-* ``None`` or ``False`` to disable a platform.
-* ``default`` to enable a platform and choose an appropriate CI
+* ``None`` or ``False`` to disable a build platform.
+* ``default`` to choose an appropriate CI (only if available)
 
-For example, switching linux & osx to build on Travis Ci, with win on Appveyor:
+For example, switching linux_64 & osx_64 to build on Travis CI, with win_64 on Appveyor:
 
 .. code-block:: yaml
 
     provider:
-      linux: travis
-      osx: travis
-      win: appveyor
+      linux_64: travis
+      osx_64: travis
+      win_64: appveyor
 
-Currently, x86_64 are enabled, but other arches are disabled by default. i.e. an empty
+Currently, x86_64 platforms are enabled, but other build platforms are disabled by default. i.e. an empty
 provider entry is equivalent to the following:
 
 .. code-block:: yaml
 
     provider:
-      linux: azure
-      osx: azure
-      win: azure
+      linux_64: azure
+      osx_64: azure
+      win_64: azure
       linux_ppc64le: None
       linux_aarch64: None
 
-To enable ``linux_ppc64le`` and ``linux_aarch64`` and the following:
+To enable ``linux_ppc64le`` and ``linux_aarch64`` add the following:
 
 .. code-block:: yaml
 
     provider:
       linux_ppc64le: default
       linux_aarch64: default
+
+If a desired build platform is not available with a selected provider
+(either natively or with emulation), the build will be disabled. Use the ``build_platform``
+field to manually specify cross-compilation when no providers offer a desired build platform.
 
 .. _recipe_dir:
 
@@ -430,6 +474,28 @@ This is used for disabling testing for cross compiling. Default is ``false``
 .. code-block:: yaml
 
     test_on_native_only: True
+
+.. note::
+
+  This has been deprecated in favor of the :ref:`test` top-level field. It is now mapped to ``test: native_and_emulated``.
+
+.. _test:
+
+test
+----
+This is used to configure on which platforms a recipe is tested. Default is ``all``.
+
+.. code-block:: yaml
+
+    test: native_and_emulated
+
+Will do testing only if the platform is native or if there is an emulator.
+
+.. code-block:: yaml
+
+    test: native
+
+Will do testing only if the platform is native.
 
 .. _travis:
 

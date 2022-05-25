@@ -5,6 +5,134 @@ Announcements
 
 Our announcements are published to an RSS feed `here <https://conda-forge.org/docs/news.rss>`_.
 
+2022
+----
+
+:2022-04-23: Packages for Qt/PyQt 5.15.2 are now available
+
+    After more than six months, the conda-forge team and contributors have managed
+    to update the Qt5 packages to the latest LTS version, 5.15.2. Major changes include
+    separating the package for QtWebEngine (``qt-webengine``) from the rest of Qt (now in a new
+    package called ``qt-main``). This allows recipes that do not use any of the
+    WebEngine components to depend only on ``qt-main``, reducing the total size of
+    the downloaded binaries. As a result of this, ``qt`` will be a metapackage that
+    installs both ``qt-main`` and ``qt-webengine`` as dependencies.
+
+    With respect to PyQt, the new packages now are in sync with respect to their
+    corresponding PyPI releases, which means that the ``pyqt`` package will only provide
+    the core components of Qt, leaving ``pyqtwebengine`` and ``pyqtcharts`` as optional
+    packages that extend PyQt by providing the QtWebEngine and QtCharts components,
+    respectively. A migrator will be put in place to help with the transition.
+
+:2022-04-20: New Semi-automated PR Labeling in conda-forge/staged-recipes
+
+    A GitHub action now monitors comments on issues in staged-recipes and will add
+    language and review labels to issues/PRs when a staged-recipes sub-team is mentioned
+    in a comment. It adds the Awaiting author contribution label if a member of
+    staged-recipes removes the review-requested label. Unlike notifications,
+    which are only sent to the users which are members of a team at the time of the mention,
+    labels are persistent and visible to everyone, so they should be very helpful for
+    identifying old PRs that need attention.
+
+:2022-04-03: CircleCI and Drone.io Deprecated for New Feedstocks
+
+    Due to technical issues in generating new feedstocks, we have deprecated using 
+    CircleCI and Drone.io for builds of new feedstocks. Existing CircleCI builds, 
+    if any, should be moved to azure. Existing Drone.io builds can be moved to 
+    Travis CI or cross-compiled/emulated builds on azure.
+
+:2022-03-28: PyPy 3.8+3.9 Migration
+
+    We have begun rolling out packages built for PyPy3.8 and PyPy3.9. This work
+    may take a few weeks. See :ref:`pypy` in the user docs for information on how to
+    set up a PyPy environment. Please report issues to the PyPy developers at
+    https://foss.heptapod.net/pypy/pypy/issues. We are also dropping PyPy3.7
+    in each feedstock as the newer versions of PyPy are added. New versions of
+    migrated feedstocks will not be built for PyPy3.7 and that version of the
+    python interpreter will not be receiving updates. As usual, you can track the
+    status of the migration on our status page.
+
+:2022-03-06: Travis CI Usage Deprecated for ``win_*``, ``osx_*``, and ``linux_64`` Platforms
+
+    Due to changes in how Travis CI tracks open-source build time, we are deprecating using it 
+    for the ``win_*``, ``osx_*``, and ``linux_64`` platforms. Travis CI will be available only 
+    for platforms in their `partner queues <https://docs.travis-ci.com/user/billing-overview/#partner-queue-solution>`_.
+    These platforms currently include ``ppc64le``, ``aarch64`` and ``s390x``. Rerendering will 
+    raise an error if Travis CI is used for a non-partner queue platform in the ``conda-forge``
+    GitHub organization.
+
+:2022-02-13: Default branch migration from ``master`` to ``main``
+
+    We will be migrating the default branches of all feedstocks and other ``conda-forge`` repos
+    from ``master`` to ``main``. We do expect some minor hiccups while this migration is 
+    going on. You will need to change to the ``main`` branch from ``master`` on any local clones via the 
+    following git commands:
+    
+    .. code-block::
+        
+        git branch -m master main
+        git fetch origin
+        git branch -u origin/main main
+        git remote set-head origin -a
+
+    If you encounter any problems, please comment on this Github 
+    `issue <https://github.com/conda-forge/conda-forge.github.io/issues/1162>`_. 
+
+2021
+----
+
+:2021-12-02: CentOS 7 docker images are now the default
+
+    We are moving all ``conda-forge`` ``linux-64`` jobs to use CentOS 7-based docker images. 
+    This will help users avoid ``conda/mamba`` solver errors where dependencies that need 
+    CentOS 7 cannot be installed. Importantly, our compiler stack will still default to using 
+    a CentOS 6 sysroot unless the recipe explicitly lists the CentoOS 7 sysroot package. This 
+    build configuration means that our core system ABI on linux will remain largely CentOS 6-compatible,
+    keeping support for older systems largely intact. We will reconsider moving the default ABI to 
+    CentOS 7 at a later date.
+
+:2021-11-17: ``cloud.drone.io`` no longer working
+
+    The ``cloud.drone.io`` service we use for ``aarch64`` builds is no longer accepting our API
+    requests for triggering builds. We have been in contact with them, but have been unable to
+    resolve the issue. Going forward, we will still be adding feedstocks to ``cloud.drone.io`` but
+    we have moved all ``aarch64`` builds to emulated builds on ``Azure``. Cross-compilers are
+    available as well for resource-intensive builds. Please rerender your feedstock as needed to
+    get the updated configuration.
+
+:2021-10-20: conda-forge now uses mambabuild as default
+
+    conda-forge now uses `mamba <https://github.com/mamba-org/mamba>`_ during the build
+    process (via ``conda mambabuild`` of the `boa <https://github.com/mamba-org/boa>`_ project). This was
+    changed in `conda-smithy 3.13.0 <https://github.com/conda-forge/conda-smithy/blob/main/CHANGELOG.rst#v3130>`_
+    and should automatically apply when re-rendering.
+
+:2021-10-13: GCC 10 and clang 12 as default compilers for Linux and macOS
+
+    These compilers will become the default for building packages in conda-forge.
+    One notable change in gcc 10 is that the -fopenmp flag in FFLAGS is dropped.
+    In clang 12, -std=c++14 explicit flag has been dropped from CXXFLAGS,
+    as it is the default compilation mode for clang 12. In gcc 11, the default
+    is -std=gnu++17. In clang>=12 and gcc>=11, we will not provide an explicit
+    C++ standard, and will defer to the compiler default.
+
+:2021-10-04: python 3.6 is now dropped when building conda-forge packages
+
+    python 3.6 is end-of-life in December 2021 and we are dropping support for it
+    early to avoid having to rebuild packages as part of python 3.10 migration
+    as that would save lots of CI resources.
+
+:2021-09-30: ``defaults`` channel is now dropped when building conda-forge packages
+
+    You can get the previous behaviour by using the ``channel_sources`` setting in
+    ``conda-forge.yml``
+
+:2020-05-22: ``conda-forge`` is now citable!
+
+    You can now cite ``conda-forge`` using our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_!
+    This entry credits the entire ``conda-forge`` community for its hard work in building our
+    amazing ecosystem.
+
 2020
 ----
 
@@ -124,7 +252,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
 :2020-07-15: ``CFEP-18:`` Removing static libraries from the main build
 
-    With `CFEP-18 <https://github.com/conda-forge/cfep/blob/master/cfep-18.md>`_
+    With `CFEP-18 <https://github.com/conda-forge/cfep/blob/main/cfep-18.md>`_
     we now have a policy on how to deal with static packages. The most important
     change here is that we will be removing static libraries from the main packages
     and moving them to ``-static`` suffixed packages. ``-static`` packages will not

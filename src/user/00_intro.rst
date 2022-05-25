@@ -11,3 +11,4 @@ User Documentation
   faq
   contributing
   how_to_get_help
+  talks

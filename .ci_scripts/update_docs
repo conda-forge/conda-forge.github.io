@@ -2,9 +2,11 @@
 
 set -ex
 
+# configure bot account
+git config --global user.email "pelson.pub+conda-forge@gmail.com"
+git config --global user.name "conda-forge-admin"
+
 git checkout -b new_site_content
-conda env create -f ./.ci_scripts/environment.yml
-conda activate conda-forge-docs
 
 pushd newsfeed
 pip install --no-deps .
@@ -24,27 +26,20 @@ rm -rf docs/
 python .ci_scripts/generate_cfep_index.py
 
 pushd src
-make html
+
+# -W --keep-going: list all warnings but fail build in case there are any
+# -n: check validity of all links
+make html SPHINXOPTS="-W --keep-going -n"
+linkcheck_failed=0
+make linkcheck > /dev/null || linkcheck_failed=1
+python ../.ci_scripts/display_linkcheck.py _build/linkcheck/output.json
+
+if [[ "${GHREF}" != "refs/heads/main" ]]; then
+  test "$linkcheck_failed" -eq 0
+fi
+
 mv _build/html ../docs
 rm -rf _build
 popd
 
 mv docs-README docs/README
-
-# git diff
-
-# # Only commit the docs for commits on master.
-# if [[ $GH_REF == refs/heads/master ]] && [[ $GH_TOKEN != "" ]]; then
-#     git add -A :/
-#     git commit -m "Re-ran make.py. [ci skip]" || true
-#     git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null
-#
-#     # Update the remotes before pushing and check the status.
-#     # This should give us more info if the push will not be
-#     # a simple fast-forward push.
-#     git fetch --all 2> /dev/null
-#     git branch -u pushable/gh-pages
-#     git status
-#     git push pushable new_site_content:gh-pages
-#     # 2> /dev/null
-# fi
