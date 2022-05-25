@@ -6,8 +6,8 @@ Glossary
 
 .. glossary::
 
-  ENV  
-    **E**\ nvironment. An environment is a tool that helps to keep dependencies required by different projects separate by creating isolated spaces for them that contain per-project dependencies for them. `Learn More <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html>`__.
+  ENVIRONMENT  
+    An environment is a tool that helps to keep dependencies required by different projects separate by creating isolated spaces for them that contain per-project dependencies for them. `Learn More <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html>`__.
 
   CI
     **C**\ ontinuous **I**\ ntegration. Continuous integration is the practice of automating the integration of code changes from multiple contributors into a single software project. `Learn More <https://en.wikipedia.org/wiki/Continuous_integration>`__.
