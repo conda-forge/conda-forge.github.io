@@ -57,9 +57,9 @@ Some basic writing guidelines should be kept in mind before you start contributi
 2. Match the technical language with the audience's skill level proficiency.
 3. Try to keep it simple. In case you have to use a lot of complicated terms, provide a glossary of key terms.
 4. Address the audience directly as the user(s).
-5. While mentioning an action, use the “command” form of the verb: “Choose an option from the menu and press Enter.”   
+5. While mentioning an action, use the "command" form of the verb: "Choose an option from the menu and press Enter."   
 6. For references, provide links to related content. 
-7. Use headings and bullet points,which makes it easier to read.
+7. Use headings and bullet points, which makes it easier to read.
 8. Avoid ambiguous titles. The title should include a clear description of the page's subject.
 9. Check your spellings and grammar.
 
