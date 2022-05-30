@@ -210,25 +210,14 @@ In conda_build_config.yaml file:
 
 .. code-block:: yaml
 
-    c_compiler:
-    - vs2019
-    cxx_compiler:
-    - vs2019
+    c_compiler:    # [win]
+    - vs2019       # [win]
+    cxx_compiler:  # [win]
+    - vs2019       # [win]
 
 
-In conda-forge.yml file:
-
-.. code-block:: yaml
-
-    azure:
-      settings_win:
-          pool:
-              vmImage: windows-2019
-
-
-
-For example see the changes made in the ``conda_build_config.yaml`` and ``conda-forge.yml`` files in `this
-<https://github.com/conda-forge/libignition-physics-feedstock/commit/c586d765a2f5fd0ecf6da43c53315c898c9bf6bd>`__ PR.
+For example see the changes made in the ``conda_build_config.yaml`` files in `this
+<https://github.com/conda-forge/libignition-msgs1-feedstock/pull/73/commits/81b5ee0e1d23f7f20427dd80d04cf1f7321b441d>`__ commit.
 
 After making these changes don't forget to rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line).
 
@@ -499,7 +488,7 @@ and apply the appropriate conditionals in your build:
 
 
 Preferring a provider (usually nompi)
-"""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual exclusivity of
 the ``mpi`` metapackage allows picking between mpi providers by installing an mpi provider, e.g.
@@ -591,7 +580,7 @@ Remove the ``if mpi...`` condition if all variants should create a strict runtim
 chosen at build time (i.e. if the nompi build cannot be run against the mpich build).
 
 Complete example
-""""""""""""""""
+^^^^^^^^^^^^^^^^
 
 Combining all of the above, here is a complete recipe, with:
 
@@ -671,7 +660,7 @@ mpi-metapackage exclusivity allows ``mpi_*`` to resolve the same as ``mpi_{{ mpi
 if ``{{ mpi }}`` is also a direct dependency, though it's probably nicer to be explicit.
 
 Just mpi example
-""""""""""""""""
+^^^^^^^^^^^^^^^^
 
 Without a preferred ``nompi`` variant, recipes that require mpi are much simpler. This is all that is needed:
 
@@ -691,6 +680,13 @@ Without a preferred ``nompi`` variant, recipes that require mpi are much simpler
     run:
       - {{ mpi }}
 
+MPI Compiler Packages
+^^^^^^^^^^^^^^^^^^^^^
+
+Do not use the ``[openmpi,mpich]-[mpicc,mpicxx,mpifort]`` metapackages in the ``requirements/build`` section
+of a recipe; the MPI compiler wrappers are included in the main ``openmpi``/``mpich`` packages.
+As shown above, just add ``openmpi``/``mpich`` to the ``requirements/host`` section and use compiler directives for the 
+corresponding compilers in ``requirements/build`` as normal.
 
 
 OpenMP
@@ -1148,23 +1144,7 @@ because these symbols are in fact available. To do so, add
 PyPy builds
 ===========
 
-To use the PyPy 3.6 or 3.7 builds you can do the following,
-
-.. code-block:: bash
-
-   conda create -n pypy36  pypy python=3.6
-   conda create -n pypy37  pypy python=3.7
-
-.. note::
-
-   As of March 8 2020, if you are using defaults as a low priority channel,
-   then you need to use strict channel priority as the metadata in defaults
-   has not been patched yet which allows cpython extension packages to be
-   installed alongside pypy.
-
-.. code-block:: bash
-
-   conda config --set channel_priority strict
+See :ref:`pypy` in the user docs for more info about PyPy and ``conda-forge``.
 
 To build your python package for pypy, wait for the bot to send a
 PR and contact ``conda-forge/bot`` team if a PR is not sent after the
@@ -1192,6 +1172,8 @@ To skip the pypy builds, do the following,
    build:
      skip: True         # [python_impl == 'pypy']
 
+If something is failing the PyPy build when it passes the CPython one, reach
+out to @conda-forge/help-pypy.
 
 Using setuptools_scm
 ====================

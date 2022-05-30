@@ -8,10 +8,67 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2022
 ----
 
-06 March
+23 April
+~~~~~~~~~
+
+**Packages for Qt/PyQt 5.15.2 are now available**
+
+    After more than six months, the conda-forge team and contributors have managed
+    to update the Qt5 packages to the latest LTS version, 5.15.2. Major changes include
+    separating the package for QtWebEngine (``qt-webengine``) from the rest of Qt (now in a new
+    package called ``qt-main``). This allows recipes that do not use any of the
+    WebEngine components to depend only on ``qt-main``, reducing the total size of
+    the downloaded binaries. As a result of this, ``qt`` will be a metapackage that
+    installs both ``qt-main`` and ``qt-webengine`` as dependencies.
+
+    With respect to PyQt, the new packages now are in sync with respect to their
+    corresponding PyPI releases, which means that the ``pyqt`` package will only provide
+    the core components of Qt, leaving ``pyqtwebengine`` and ``pyqtcharts`` as optional
+    packages that extend PyQt by providing the QtWebEngine and QtCharts components,
+    respectively. A migrator will be put in place to help with the transition.
+
+20 April
+~~~~~~~~~
+
+**New Semi-automated PR Labeling in conda-forge/staged-recipes**
+
+    A GitHub action now monitors comments on issues in staged-recipes and will add
+    language and review labels to issues/PRs when a staged-recipes sub-team is mentioned
+    in a comment. It adds the Awaiting author contribution label if a member of
+    staged-recipes removes the review-requested label. Unlike notifications,
+    which are only sent to the users which are members of a team at the time of the mention,
+    labels are persistent and visible to everyone, so they should be very helpful for
+    identifying old PRs that need attention.
+
+03 April
 ~~~~~~~~
 
+**CircleCI and Drone.io Deprecated for New Feedstocks**
+
+    Due to technical issues in generating new feedstocks, we have deprecated using 
+    CircleCI and Drone.io for builds of new feedstocks. Existing CircleCI builds, 
+    if any, should be moved to azure. Existing Drone.io builds can be moved to 
+    Travis CI or cross-compiled/emulated builds on azure.
+
+28 March
+~~~~~~~~~
+
+**PyPy 3.8+3.9 Migration**
+
+    We have begun rolling out packages built for PyPy3.8 and PyPy3.9. This work
+    may take a few weeks. See :ref:`pypy` in the user docs for information on how to
+    set up a PyPy environment. Please report issues to the PyPy developers at
+    https://foss.heptapod.net/pypy/pypy/issues. We are also dropping PyPy3.7
+    in each feedstock as the newer versions of PyPy are added. New versions of
+    migrated feedstocks will not be built for PyPy3.7 and that version of the
+    python interpreter will not be receiving updates. As usual, you can track the
+    status of the migration on our status page.
+
+06 March
+~~~~~~~~~
+
   **Travis CI Usage Deprecated for ``win_*``, ``osx_*``, and ``linux_64`` Platforms**
+
 
     Due to changes in how Travis CI tracks open-source build time, we are deprecating using it 
     for the ``win_*``, ``osx_*``, and ``linux_64`` platforms. Travis CI will be available only 
