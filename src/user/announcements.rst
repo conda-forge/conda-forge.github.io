@@ -5,6 +5,8 @@ Announcements
 
 Our announcements are published to an RSS feed `here <https://conda-forge.org/docs/news.rss>`_.
 
+.. _year_2022:
+
 2022
 ----
 
@@ -78,6 +80,8 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     If you encounter any problems, please comment on this Github 
     `issue <https://github.com/conda-forge/conda-forge.github.io/issues/1162>`_. 
 
+.. _year_2021:
+
 2021
 ----
 
@@ -132,6 +136,8 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     You can now cite ``conda-forge`` using our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_!
     This entry credits the entire ``conda-forge`` community for its hard work in building our
     amazing ecosystem.
+
+.. _year_2020:
 
 2020
 ----
@@ -366,6 +372,8 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
      generated with this admin command. Further, this admin command will only work on
      ``osx-64`` and ``linux-64`` platforms.
 
+.. _year_2019:
+
 2019
 ----
 
@@ -390,6 +398,8 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     If you:
       * maintain a compiled feedstock, it will likely need to be rerender
       * need to roll back to the old compilers, you can use the "cf201901" label
+
+.. _year_2018:
 
 2018
 ----
