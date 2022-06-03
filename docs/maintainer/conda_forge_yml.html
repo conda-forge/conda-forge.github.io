@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2022.06.02 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2022.06.03 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.02 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.03 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
@@ -286,10 +286,10 @@ defaults are as follows:</p>
 <span class="w">  </span><span class="c1"># repository name, usually filled in automatically</span><span class="w"></span>
 <span class="w">  </span><span class="nt">repo_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="c1"># branch name to execute on</span><span class="w"></span>
-<span class="w">  </span><span class="nt">branch_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">master</span><span class="w"></span>
+<span class="w">  </span><span class="nt">branch_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span><span class="w"></span>
 <span class="w">  </span><span class="c1"># branch name to use for rerender+webservices github actions and</span><span class="w"></span>
 <span class="w">  </span><span class="c1"># conda-forge-ci-setup-feedstock references</span><span class="w"></span>
-<span class="w">  </span><span class="nt">tooling_branch_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">master</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tooling_branch_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -483,8 +483,8 @@ modified.  Tools like conda-smithy may modify this, as needed.  It has a single
 same repo. Only the branch listed in <code class="docutils literal notranslate"><span class="pre">upload_on_branch</span></code> will trigger uploading
 of packages to the target channel. The default is to skip this check if the key
 <code class="docutils literal notranslate"><span class="pre">upload_on_branch</span></code> is not in <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>. To restrict uploads to the
-master branch:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">upload_on_branch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">master</span><span class="w"></span>
+main branch:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">upload_on_branch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -625,7 +625,7 @@ Currently only:</p>
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.02 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.03 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 

@@ -269,10 +269,10 @@ defaults are as follows:
       # repository name, usually filled in automatically
       repo_name: ""
       # branch name to execute on
-      branch_name: master
+      branch_name: main
       # branch name to use for rerender+webservices github actions and
       # conda-forge-ci-setup-feedstock references
-      tooling_branch_name: master
+      tooling_branch_name: main
 
 .. _idle_timeout_minutes:
 
@@ -520,11 +520,11 @@ This parameter restricts uploading access on work from certain branches of the
 same repo. Only the branch listed in ``upload_on_branch`` will trigger uploading
 of packages to the target channel. The default is to skip this check if the key
 ``upload_on_branch`` is not in ``conda-forge.yml``. To restrict uploads to the
-master branch:
+main branch:
 
 .. code-block:: yaml
 
-    upload_on_branch: master
+    upload_on_branch: main
 
 .. _win:
 
