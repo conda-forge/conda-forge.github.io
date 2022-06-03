@@ -4,11 +4,7 @@ Contributing packages
 *********************
 
 
-To submit a package to the ``conda-forge`` channel, add its ``recipe`` and licence to the ``staged-recipes`` repository and create a pull request. Once the pull request is merged, the package becomes available
-on the ``conda-forge`` channel. Note that contributing a package makes you the ``maintainer`` of that package.
-
-A maintainer is responsible for maintaining the feedstock repository and packages as well as their future versions and has push access to the feedstock repositories of only the packages it maintains. 
-You can learn more about the roles of a maintainer `here. <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`__
+To submit a package to the ``conda-forge`` channel, add its ``recipe`` and licence to the ``staged-recipes`` repository and create a pull request. Once the pull request is merged, the package becomes available on the ``conda-forge`` channel.
 
 The sections below provide detailed instructions on contributing packages to conda-forge.
 
@@ -702,6 +698,21 @@ for the specification on expressions.
    MIT AND BSD-2-Clause
    PSF-2.0
 
+Extra
+-----
+
+Recipe Maintainer
+..................
+
+A maintainer is an individual who is responsible for maintaining and updating one or more feedstock repositories and packages as well as their future versions. They have push access to the feedstock repositories of only the packages they maintain and can merge pull requests into it.
+Contributing a recipe for package makes you the ``maintainer`` of that package automatically.
+See `Maintainers Role <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`__ and `Maintaining Packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-packages>`__ to learn more about what are the things that maintainers do.
+
+If you wish to be a maintainer of a certain package, you should contact current maintainers and open an issue in that package's feedstock with the following command:
+
+``@conda-forge-admin, please add user @username``
+
+where username is the GitHub username of the new maintainer to be added. Please refer to `Becoming a maintainer <https://conda-forge.org/docs/orga/guidelines.html#becoming-a-maintainer>`__ and `Updating the maintainer <https://conda-forge.org/docs/maintainer/updating_pkgs.html#updating-the-maintainer-list>`__ for detailed instructions.
 
 Miscellaneous
 =============
