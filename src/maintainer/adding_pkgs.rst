@@ -18,25 +18,30 @@ The sections below provide detailed instructions on contributing packages to con
 The staging process
 ===================
 
-Getting Started
----------------
+The staging process i.e adding a package's recipe has three steps:
 
-There are multiple ways to get started:
+#. Generating the recipe
+#. Checklist
+#. Feedback and revision
 
-#. Look at `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`_ and modify it as necessary.
+Generating the recipe
+---------------------
+
+There are, currently, three ways to generate a recipe:
+
 #. If it is an R package from `CRAN <https://cran.r-project.org/>`_, kindly
    start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_ instead.
    Then if necessary, you can make manual edits to the recipe.
 #. If it is a python package, you can generate the recipe as a starting point with ``grayskull``.
    Use ``conda install -c conda-forge grayskull`` to install ``grayskull``, followed by ``grayskull pypi your_package_name`` to generate the recipe. Note that you do *not* necessarily have to use ``grayskull``, and the
    recipes produced by ``grayskull`` might need to be reviewed and edited. Read more about ``grayskull`` and how to use it `here <https://github.com/conda-incubator/grayskull#introduction>`__.
+#. If it's none of the above, generate a recipe with the help of `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`_ and modify it as necessary.
 
 Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
 
 .. note::
 
   If there are any details you are not sure about please create a pull request anyway. The conda-forge team will review it and help you make changes to it.
-
 
 In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that will help you with a successful build is provided below.
 
@@ -49,17 +54,18 @@ Step-by-step Instructions
    should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz)
    or tagged on GitHub, to ensure that it can be verified. (For further
    detail, see :ref:`tarballs_no_repos`).
-#. Fork the `example recipes
-   <https://github.com/conda-forge/staged-recipes/tree/master/recipes>`_
-   repository.
-#. Create a new branch from the staged-recipes ``main`` branch.
-#. Within your forked copy, generate a new folder in the recipes subdirectory
-   and copy the `meta.yml
+#. Fork and clone the `staged-recipes
+   <https://github.com/conda-forge/staged-recipes>`_
+   repository from GitHub.
+#. Checkout a new branch from the staged-recipes ``main`` branch.
+#. Through CLI, cd inside the 'staged-recipes/recipes' directory.
+#. Within your forked copy, create a new folder in the recipes folder for your package (i.e, ``...staged-recipes/recipes/<name-of-package>``)
+#. Copy `meta.yaml
    <https://github.com/conda-forge/staged-recipes/blob/master/recipes/
-   example/meta.yaml>`_
-   file from the example directory. Please leave the example directory
-   unchanged!
-#. Edit the copied recipe (meta.yml) as needed. For details, see
+   example/meta.yaml>`_ from the example directory.
+   All the changes in the following steps will happen in the COPIED meta.yaml (i.e., ``...staged-recipes/recipes/<name-of-package>/meta.yaml``).
+   Please leave the example directory unchanged!
+#. Modify the copied recipe (meta.yml) as needed. To see how to modify meta.yaml, take a look at
    :ref:`meta_yaml`.
 #. Generate the SHA256 key for your source code archive, as described in the
    example recipe using the ``openssl`` tool. As an alternative, you can also
@@ -702,9 +708,63 @@ for the specification on expressions.
    MIT AND BSD-2-Clause
    PSF-2.0
 
+.. _third_party_package_licenses:
+
+Licenses of included dependencies
+.................................
+
+For some languages (Go, rust, etc.), the current policy is to include all dependencies and their dependencies in the package.
+This presents a problem when packaging the license files as each dependency needs to have its license file included in the recipe.
+
+For some languages, the community provides tools which can automate this process, enabling the automatic inclusion of all needed license files.
+
+* **Rust**
+
+  `cargo-bundle-licenses <https://github.com/sstadick/cargo-bundle-licenses>`__ can be included in the build process of a package and will automatically collect and add the license files of all dependencies of a package.
+  
+  For a detailed description, please visit the project page but a short example can be found below.
+  
+  First, include the collection of licenses as a step of the build process.
+  
+  .. code-block:: yaml
+
+    build:
+      number: 0
+      script:
+        - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
+        - build_command_goes_here
+
+  Then, include the tool as a build time dependency.
+  
+  .. code-block:: yaml
+  
+    requirements:
+      build:
+        - cargo-bundle-licenses
+
+  Finally, make sure that the generated file is included in the recipe.
+   
+  .. code-block:: yaml
+  
+    about:
+      license_file:
+        - THIRDPARTY.yml
+        - package_license.txt
+
+.. important::
+
+  We are not lawyers and cannot guarantee that the above advice is correct or that the tools are able to find all license files. 
+  Additionally, we are unable to accept any responsibility or liability.
+  It is always your responsibility to double-check that all licenses are included and verify that any generated output is correct.
+  
+.. note::
+
+   The correct and automated packaging of dependency licenses is an ongoing discussion. Please feel free to add your thoughs to `this <https://github.com/conda-forge/conda-forge.github.io/issues/1052>`__ discussion. 
 
 Miscellaneous
 =============
+
+.. _activate_scripts:
 
 Activate scripts
 ----------------
