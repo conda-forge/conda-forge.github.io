@@ -701,18 +701,20 @@ for the specification on expressions.
 Extra
 -----
 
+.. _recipe_maintainer:
+
 Recipe Maintainer
 ..................
 
-A maintainer is an individual who is responsible for maintaining and updating one or more feedstock repositories and packages as well as their future versions. They have push access to the feedstock repositories of only the packages they maintain and can merge pull requests into it.
+A maintainer is an individual who is responsible for maintaining and updating one or more feedstock repositories and packages, as well as their future versions. They have push access to the feedstock repositories of only the packages they maintain and can merge pull requests into them.
 Contributing a recipe for package makes you the ``maintainer`` of that package automatically.
-See `Maintainers Role <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`__ and `Maintaining Packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-packages>`__ to learn more about what are the things that maintainers do.
+See `Maintainers Role <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`__ and `Maintaining Packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-packages>`__ to learn more about the things that maintainers do.
 
 If you wish to be a maintainer of a certain package, you should contact current maintainers and open an issue in that package's feedstock with the following command:
 
 ``@conda-forge-admin, please add user @username``
 
-where username is the GitHub username of the new maintainer to be added. Please refer to `Becoming a maintainer <https://conda-forge.org/docs/orga/guidelines.html#becoming-a-maintainer>`__ and `Updating the maintainer <https://conda-forge.org/docs/maintainer/updating_pkgs.html#updating-the-maintainer-list>`__ for detailed instructions.
+where username is the GitHub username of the new maintainer to be added. Please refer to `Becoming a maintainer <https://conda-forge.org/docs/orga/guidelines.html#becoming-a-maintainer>`__ and `Updating the maintainer list <https://conda-forge.org/docs/maintainer/updating_pkgs.html#updating-the-maintainer-list>`__ for detailed instructions.
 
 Miscellaneous
 =============
