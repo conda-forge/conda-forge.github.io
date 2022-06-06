@@ -5,8 +5,36 @@ Announcements
 
 Our announcements are published to an RSS feed `here <https://conda-forge.org/docs/news.rss>`_.
 
+.. _year_2022:
+
 2022
 ----
+
+:2022-04-23: Packages for Qt/PyQt 5.15.2 are now available
+
+    After more than six months, the conda-forge team and contributors have managed
+    to update the Qt5 packages to the latest LTS version, 5.15.2. Major changes include
+    separating the package for QtWebEngine (``qt-webengine``) from the rest of Qt (now in a new
+    package called ``qt-main``). This allows recipes that do not use any of the
+    WebEngine components to depend only on ``qt-main``, reducing the total size of
+    the downloaded binaries. As a result of this, ``qt`` will be a metapackage that
+    installs both ``qt-main`` and ``qt-webengine`` as dependencies.
+
+    With respect to PyQt, the new packages now are in sync with respect to their
+    corresponding PyPI releases, which means that the ``pyqt`` package will only provide
+    the core components of Qt, leaving ``pyqtwebengine`` and ``pyqtcharts`` as optional
+    packages that extend PyQt by providing the QtWebEngine and QtCharts components,
+    respectively. A migrator will be put in place to help with the transition.
+
+:2022-04-20: New Semi-automated PR Labeling in conda-forge/staged-recipes
+
+    A GitHub action now monitors comments on issues in staged-recipes and will add
+    language and review labels to issues/PRs when a staged-recipes sub-team is mentioned
+    in a comment. It adds the Awaiting author contribution label if a member of
+    staged-recipes removes the review-requested label. Unlike notifications,
+    which are only sent to the users which are members of a team at the time of the mention,
+    labels are persistent and visible to everyone, so they should be very helpful for
+    identifying old PRs that need attention.
 
 :2022-04-03: CircleCI and Drone.io Deprecated for New Feedstocks
 
@@ -51,6 +79,8 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
     If you encounter any problems, please comment on this Github 
     `issue <https://github.com/conda-forge/conda-forge.github.io/issues/1162>`_. 
+
+.. _year_2021:
 
 2021
 ----
@@ -106,6 +136,8 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     You can now cite ``conda-forge`` using our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_!
     This entry credits the entire ``conda-forge`` community for its hard work in building our
     amazing ecosystem.
+
+.. _year_2020:
 
 2020
 ----
@@ -340,6 +372,8 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
      generated with this admin command. Further, this admin command will only work on
      ``osx-64`` and ``linux-64`` platforms.
 
+.. _year_2019:
+
 2019
 ----
 
@@ -364,6 +398,8 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
     If you:
       * maintain a compiled feedstock, it will likely need to be rerender
       * need to roll back to the old compilers, you can use the "cf201901" label
+
+.. _year_2018:
 
 2018
 ----

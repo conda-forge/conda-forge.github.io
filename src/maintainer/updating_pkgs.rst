@@ -80,10 +80,10 @@ Here we assume that you would like to update the feedstock ``<feedstock>``. Feed
 
    This step is only required if you have forked some time ago and your fork is missing commits from the feedstock at conda-forge.
 
-   - Make sure you are on the master branch: ``git checkout master``
+   - Make sure you are on the main branch: ``git checkout main``
    - Register conda-forge's feedstock with ``git remote add upstream https://github.com/conda-forge/<feedstock>``
    - Fetch the latest updates with ``git fetch upstream``
-   - Pull in the latest changes into your master branch: ``git rebase upstream/master``
+   - Pull in the latest changes into your main branch: ``git rebase upstream/main``
 
 #. Creating your changes in a new branch
 
@@ -187,7 +187,22 @@ Note that for long build logs one can do
 
 to save it in a text file for future inspection.
 
-Once built, you can find the finished package in the ``build_artifacts`` directory in your feedstock.  
+Once built, you can find the finished package in the ``build_artifacts`` directory in your feedstock.
+
+
+Downloading prebuilt packages from CI
+=====================================
+A neat feature that feedstocks have is the ability to `upload packages to the CI provider for testing <https://conda-forge.org/docs/maintainer/conda_forge_yml.html?highlight=store_build_artifacts#azure>`_.
+This is useful when trying out packages built in a PR. But you first need to download these prebuilt packages.
+
+To download prebuilt packages follow the steps below:
+
+- Starting from your PR, navigate to the CI.
+- Open the log corresponding to the package you want to download.
+- In this log find a link to the ``artifacts produced``.
+- From the list of published artifacts that appears download your required archive.
+- Unarchive and extract the required package.
+
 
 .. _maint_fix_broken_packages:
 

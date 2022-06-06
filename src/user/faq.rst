@@ -130,3 +130,22 @@ FAQ
   Unfortunately, this is not possible with conda-forge's current infrastructure (``nvcc``, ``cudatoolkit``, etc) if there is no local CUDA Toolkit installation. In particular, the ``nvcc`` package provided on conda-forge is a *wrapper package* that exposes the actual ``nvcc`` compiler to our CI infrastructure in a ``conda``-friendly way; it does not contain the full ``nvcc`` compiler toolchain. One of the reasons is that CUDA headers like ``cuda.h``, ``cuda_runtime.h``, etc, which are needed at compile time, are not redistributable according to NVIDIA's EULA. Likewise, the ``cudatoolkit`` package only contains CUDA runtime libraries and not the compiler toolchain.
   
   If you need to compile CUDA code, even if it involves only CUDA host APIs, you will still need a valid CUDA Toolkit installed locally and use it. Please refer to `NVCC's documentation <https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html>`_ for the CUDA compiler usage and `CUDA Programming Guide <https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html>`_ for general CUDA programming.
+
+.. _faq_abi_incompatibility:
+
+:ref:`(Q) <faq_abi_incompatibility>` **How to handle breaking of a package due to ABI incompatibility?**
+
+  If your package breaks ABI with a version bump, here are a few steps you can take to fix it: 
+
+  - Rebuild the new version with corrected ``run_exports``.
+  - Rebuild the old version with corrected ``run_exports``.
+  - Hot-fix the repodata of dependencies to include corrected pinnings for the package.
+  - Add a PR to pin the old version in ``conda-forge-pinning`` (if not already present)
+  - Open a migrator following `CFEP-09 <https://github.com/conda-forge/cfep/blob/main/cfep-09.md>`_
+
+  To read more on how to specify ``run_exports``, see `this <https://conda-forge.org/docs/maintainer/pinning_deps.html?highlight=run_exports#specifying-run-exports>`_.
+  Some of the examples you can see for reference, where broken packages are fixed by:
+
+  - `Replacing an existing pin that was incorrect <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/pull/217>`_.
+  - `Pinning packages loosely to rely on their ABI compatibility <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/pull/132>`_.
+  - `Pinning packages strictly <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/pull/154>`_.
