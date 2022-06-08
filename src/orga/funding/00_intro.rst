@@ -17,6 +17,6 @@ submissions for conda-forge.
 * `CZI EOSS Funding Cycle 4: Fast Software Package Management for Bio and Data Science <https://chanzuckerberg.com/eoss/proposals/fast-software-package-management-for-bio-and-data-science/>`__, submitted by QuantStack
     * `Blog post <https://wolfv.medium.com/the-mamba-project-and-the-czi-grant-ec88fb27c25>`__
 * CZI EOSS Funding Cycle 5: Adding a WebAssembly Toolchain to conda-forge, submitted by QuantStack
-    * `Letter of intent </orga/funding/czi-eoss-5-loi-wasm.pdf>`__
+    * :download:`Letter of intent </src/_static/czi-eoss-5-loi-wasm.pdf>`.
 * CZI EOSS Funding Cycle 5: Transparent, open & sustainable infrastructure for conda-forge and bioconda, submitted by QuantStack & Quansight
-    * `Letter of intent </orga/funding/czi-eoss-5-loi-infra.pdf>`__
+    * :download:`Letter of intent </src/_static/czi-eoss-5-loi-infra.pdf>`.
