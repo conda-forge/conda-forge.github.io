@@ -20,3 +20,4 @@ submissions for conda-forge.
     * :download:`Letter of intent </src/_static/czi-eoss-5-loi-wasm.pdf>`.
 * CZI EOSS Funding Cycle 5: Transparent, open & sustainable infrastructure for conda-forge and bioconda, submitted by QuantStack & Quansight
     * :download:`Letter of intent </src/_static/czi-eoss-5-loi-infra.pdf>`.
+    * :download:`Full submission </src/_static/czi-eoss-5-full-infra.pdf>`.
