@@ -21,10 +21,10 @@ Submitted but not yet decided
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * 2022 - CZI EOSS Funding Cycle 5: Adding a WebAssembly Toolchain to conda-forge, submitted by QuantStack
-    * :download:`Letter of intent </src/_static/czi-eoss-5-loi-wasm.pdf>`.
+    * :download:`Letter of intent </_static/czi-eoss-5-loi-wasm.pdf>`.
 * 2022 - CZI EOSS Funding Cycle 5: Transparent, open & sustainable infrastructure for conda-forge and bioconda, submitted by QuantStack & Quansight
-    * :download:`Letter of intent </src/_static/czi-eoss-5-loi-infra.pdf>`.
-    * :download:`Full submission </src/_static/czi-eoss-5-full-infra.pdf>`.
+    * :download:`Letter of intent </_static/czi-eoss-5-loi-infra.pdf>`.
+    * :download:`Full submission </_static/czi-eoss-5-full-infra.pdf>`.
 
 Sucessfully funded
 ~~~~~~~~~~~~~~~~~~~
