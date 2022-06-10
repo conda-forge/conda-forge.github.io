@@ -4,11 +4,7 @@ Contributing packages
 *********************
 
 
-To submit a package to the ``conda-forge`` channel, add its ``recipe`` and licence to the ``staged-recipes`` repository and create a pull request. Once the pull request is merged, the package becomes available
-on the ``conda-forge`` channel. Note that contributing a package makes you the ``maintainer`` of that package.
-
-A maintainer is responsible for maintaining the feedstock repository and packages as well as their future versions and has push access to the feedstock repositories of only the packages it maintains. 
-You can learn more about the roles of a maintainer `here. <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`__
+To submit a package to the ``conda-forge`` channel, add its ``recipe`` and licence to the ``staged-recipes`` repository and create a pull request. Once the pull request is merged, the package becomes available on the ``conda-forge`` channel.
 
 The sections below provide detailed instructions on contributing packages to conda-forge.
 
@@ -760,6 +756,38 @@ For some languages, the community provides tools which can automate this process
 .. note::
 
    The correct and automated packaging of dependency licenses is an ongoing discussion. Please feel free to add your thoughs to `this <https://github.com/conda-forge/conda-forge.github.io/issues/1052>`__ discussion. 
+   
+Extra
+-----
+
+.. _recipe_maintainer:
+
+Recipe Maintainer
+..................
+
+A maintainer is an individual who is responsible for maintaining and updating one or more feedstock repositories and packages, as well as their future versions. They have push access to the feedstock repositories of only the packages they maintain and can merge pull requests into them.
+Contributing a recipe for package makes you the ``maintainer`` of that package automatically.
+See `Maintainers Role <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`__ and `Maintaining Packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-packages>`__ to learn more about the things that maintainers do.
+
+If you wish to be a maintainer of a certain package, you should contact current maintainers and open an issue in that package's feedstock with the following command:
+
+``@conda-forge-admin, please add user @username``
+
+where username is the GitHub username of the new maintainer to be added. Please refer to `Becoming a maintainer <https://conda-forge.org/docs/orga/guidelines.html#becoming-a-maintainer>`__ and `Updating the maintainer list <https://conda-forge.org/docs/maintainer/updating_pkgs.html#updating-the-maintainer-list>`__ for detailed instructions.
+
+.. _feedstock_name:
+
+Feedstock name
+..............
+
+If you would want to name the feedstock different from the package name in the staged-recipes, you can use the ``feedstock-name`` directive in the recipe of that package, like this:
+
+.. code-block:: yaml
+
+  extra:
+    feedstock-name: <name>
+
+Here, ``<name>`` is the name you would want for the feedstock.
 
 Miscellaneous
 =============
