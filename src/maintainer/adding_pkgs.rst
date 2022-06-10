@@ -759,6 +759,8 @@ For some languages, the community provides tools which can automate this process
 Extra
 -----
 
+.. _recipe_maintainer:
+
 Recipe Maintainer
 ..................
 
