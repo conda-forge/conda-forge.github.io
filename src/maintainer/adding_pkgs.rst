@@ -775,6 +775,20 @@ If you wish to be a maintainer of a certain package, you should contact current 
 
 where username is the GitHub username of the new maintainer to be added. Please refer to `Becoming a maintainer <https://conda-forge.org/docs/orga/guidelines.html#becoming-a-maintainer>`__ and `Updating the maintainer list <https://conda-forge.org/docs/maintainer/updating_pkgs.html#updating-the-maintainer-list>`__ for detailed instructions.
 
+.. _feedstock_name:
+
+Feedstock name
+..............
+
+If you would want to name the feedstock different from the package name in the staged-recipes, you can use the ``feedstock-name`` directive in the recipe of that package, like this:
+
+.. code-block:: yaml
+
+  extra:
+    feedstock-name: <name>
+
+Here, ``<name>`` is the name you would want for the feedstock.
+
 Miscellaneous
 =============
 
