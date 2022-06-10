@@ -3,12 +3,12 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Infrastructure &#8212; conda-forge 2022.06.03 documentation</title>
+    <title>Infrastructure &#8212; conda-forge 2022.06.10 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -16,6 +16,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
 
     
@@ -55,7 +56,7 @@
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Infrastructure</a></li> 
@@ -70,16 +71,16 @@
           <div class="body" role="main">
             
   <section id="infrastructure">
-<span id="id1"></span><h1>Infrastructure<a class="headerlink" href="#infrastructure" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Infrastructure<a class="headerlink" href="#infrastructure" title="Permalink to this heading">¶</a></h1>
 <section id="repositories">
-<h2>Repositories<a class="headerlink" href="#repositories" title="Permalink to this headline">¶</a></h2>
+<h2>Repositories<a class="headerlink" href="#repositories" title="Permalink to this heading">¶</a></h2>
 <section id="staging-area-for-recipes">
-<h3>Staging area for recipes<a class="headerlink" href="#staging-area-for-recipes" title="Permalink to this headline">¶</a></h3>
+<h3>Staging area for recipes<a class="headerlink" href="#staging-area-for-recipes" title="Permalink to this heading">¶</a></h3>
 <p><a class="reference external" href="https://github.com/conda-forge/staged-recipes">conda-forge/staged-recipes</a> is the entry point for new packages to join the conda-forge package collection.
 You can find the detailed guide for submitting new package recipes in <a class="reference internal" href="adding_pkgs.html#creating-recipes"><span class="std std-ref">The staging process</span></a>.</p>
 </section>
 <section id="smithy">
-<h3>Smithy<a class="headerlink" href="#smithy" title="Permalink to this headline">¶</a></h3>
+<h3>Smithy<a class="headerlink" href="#smithy" title="Permalink to this heading">¶</a></h3>
 <p>Smithy contains maintenance code for conda-forge, which is used by the <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> command line tool and the <a class="reference internal" href="#dev-admservice"><span class="std std-ref">Admin web services</span></a>. Smithy lives in the repository <a class="reference external" href="https://github.com/conda-forge/conda-smithy">conda-forge/conda-smithy</a>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">conda-forge/conda-smithy</span></code> is the right repository to report bugs for</p>
 <blockquote>
@@ -95,26 +96,26 @@ You can find the detailed guide for submitting new package recipes in <a class="
 which could be less expensive to run than permanently active agents.)</p>
 </section>
 <section id="web-services">
-<h3>Web services<a class="headerlink" href="#web-services" title="Permalink to this headline">¶</a></h3>
+<h3>Web services<a class="headerlink" href="#web-services" title="Permalink to this heading">¶</a></h3>
 <p>The Heroku app providing the conda-forge web services lives in <a class="reference external" href="https://github.com/conda-forge/conda-forge-webservices">conda-forge/conda-forge-webservices</a>.
 Please note that the code logic provided by the app is in the <code class="docutils literal notranslate"><span class="pre">Smithy</span></code> repository.</p>
 <p>Bugs or suggestions regarding the service functionality should therefore be opened in <code class="docutils literal notranslate"><span class="pre">conda-forge/conda-smithy</span></code>’s <a class="reference external" href="https://github.com/conda-forge/conda-smithy/issues">bug tracker</a>.</p>
 </section>
 <section id="conda-forge-pinning">
-<h3>conda-forge pinning<a class="headerlink" href="#conda-forge-pinning" title="Permalink to this headline">¶</a></h3>
+<h3>conda-forge pinning<a class="headerlink" href="#conda-forge-pinning" title="Permalink to this heading">¶</a></h3>
 <p>Package-wide dependency pins are defined in <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml">conda_build_config.yaml</a> in the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge/conda-forge-pinning-feedstock</a>.</p>
 <p>For more information on conda-forge wide package pins, please refer to <a class="reference internal" href="pinning_deps.html#globally-pinned-packages"><span class="std std-ref">Globally pinned packages</span></a>.</p>
 <p>Please open a <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a> and/or an issue there, if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to <a class="reference internal" href="pinning_deps.html#update-pins"><span class="std std-ref">Updating package pins</span></a>.</p>
 </section>
 <section id="documentation">
-<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
+<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading">¶</a></h3>
 <p>The documentation lives in <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/">conda-forge/conda-forge.github.io</a>, and is automatically deployed to our <a class="reference external" href="https://conda-forge.org/docs/">online version</a>.</p>
 <p>The documentation is built with <code class="docutils literal notranslate"><span class="pre">Sphinx</span></code> and the sources files are located in the <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/tree/main/src">src</a> directory of the repository.</p>
 <p>If you found any typo error, unclear explanations or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to <a class="reference internal" href="../user/contributing.html#improve-docs"><span class="std std-ref">Improve the documentation</span></a>.</p>
 </section>
 </section>
 <section id="admin-web-services">
-<span id="dev-admservice"></span><h2>Admin web services<a class="headerlink" href="#admin-web-services" title="Permalink to this headline">¶</a></h2>
+<span id="dev-admservice"></span><h2>Admin web services<a class="headerlink" href="#admin-web-services" title="Permalink to this heading">¶</a></h2>
 <p>Conda-forge is running a webservice on Heroku called <a class="reference external" href="https://github.com/conda-forge/conda-forge-webservices">conda-forge-webservices</a>.</p>
 <p>The following services are run by default on a feedstock:</p>
 <ul class="simple">
@@ -123,60 +124,60 @@ Please note that the code logic provided by the app is in the <code class="docut
 </ul>
 <p>The webservice also listens to issues and PR comments, so that you can ask for the following services to be done:</p>
 <section id="conda-forge-admin-please-rerender">
-<h3>&#64;conda-forge-admin, please rerender<a class="headerlink" href="#conda-forge-admin-please-rerender" title="Permalink to this headline">¶</a></h3>
+<h3>&#64;conda-forge-admin, please rerender<a class="headerlink" href="#conda-forge-admin-please-rerender" title="Permalink to this heading">¶</a></h3>
 <p>Entering the above phrase in a PR of a feedstock will rerender the feedstock and push the changes to your PR.
 Make sure to tick the <code class="docutils literal notranslate"><span class="pre">Allow</span> <span class="pre">edits</span> <span class="pre">from</span> <span class="pre">maintainers</span></code> button located at the bottom of the right side bar of
 the PR. If you enter this phrase in the comment for an issue, the bot will create a new pull request, with the requested
 re-rendering being completed.</p>
 </section>
 <section id="conda-forge-admin-please-add-noarch-python">
-<h3>&#64;conda-forge-admin, please add noarch: python<a class="headerlink" href="#conda-forge-admin-please-add-noarch-python" title="Permalink to this headline">¶</a></h3>
+<h3>&#64;conda-forge-admin, please add noarch: python<a class="headerlink" href="#conda-forge-admin-please-add-noarch-python" title="Permalink to this heading">¶</a></h3>
 <p>Entering the above phrase in a PR or an issue of a feedstock will add <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> to the build and rerender the feedstock
 for you.</p>
 </section>
 <section id="conda-forge-admin-please-update-for-conda-build-3">
-<h3>&#64;conda-forge-admin, please update for conda-build 3<a class="headerlink" href="#conda-forge-admin-please-update-for-conda-build-3" title="Permalink to this headline">¶</a></h3>
+<h3>&#64;conda-forge-admin, please update for conda-build 3<a class="headerlink" href="#conda-forge-admin-please-update-for-conda-build-3" title="Permalink to this heading">¶</a></h3>
 <p>This command will attempt to update a recipe to the new <code class="docutils literal notranslate"><span class="pre">conda-build</span> <span class="pre">3</span></code> format. It can be sent either in an issue or a PR.</p>
 <p>Note that this update command is kind of a hack, and things might go wrong. Make sure to look over the changes, and ask for help if you’re not sure about something.</p>
 </section>
 <section id="conda-forge-admin-please-lint">
-<h3>&#64;conda-forge-admin, please lint<a class="headerlink" href="#conda-forge-admin-please-lint" title="Permalink to this headline">¶</a></h3>
+<h3>&#64;conda-forge-admin, please lint<a class="headerlink" href="#conda-forge-admin-please-lint" title="Permalink to this heading">¶</a></h3>
 <p>Entering the above phrase in a PR of a feedstock will lint the PR again.</p>
 </section>
 <section id="conda-forge-admin-please-update-circle">
-<span id="ci-update-circle"></span><h3>&#64;conda-forge-admin, please update circle<a class="headerlink" href="#conda-forge-admin-please-update-circle" title="Permalink to this headline">¶</a></h3>
+<span id="ci-update-circle"></span><h3>&#64;conda-forge-admin, please update circle<a class="headerlink" href="#conda-forge-admin-please-update-circle" title="Permalink to this heading">¶</a></h3>
 <p>Entering the above phrase in an issue of a feedstock will update the Circle-CI SSH deploy key. This will fix the
 <code class="docutils literal notranslate"><span class="pre">permission</span> <span class="pre">denied</span> <span class="pre">(public</span> <span class="pre">key)</span></code> issue in Circle-CI’s checkout phase; it shouldn’t be needed otherwise.</p>
 </section>
 <section id="conda-forge-admin-please-update-team">
-<h3>&#64;conda-forge-admin, please update team<a class="headerlink" href="#conda-forge-admin-please-update-team" title="Permalink to this headline">¶</a></h3>
+<h3>&#64;conda-forge-admin, please update team<a class="headerlink" href="#conda-forge-admin-please-update-team" title="Permalink to this heading">¶</a></h3>
 <p>Entering the above phrase in an issue will update the team for the feedstock. This is usually done automatically.</p>
 </section>
 <section id="conda-forge-admin-please-restart-ci">
-<h3>&#64;conda-forge-admin, please restart ci<a class="headerlink" href="#conda-forge-admin-please-restart-ci" title="Permalink to this headline">¶</a></h3>
+<h3>&#64;conda-forge-admin, please restart ci<a class="headerlink" href="#conda-forge-admin-please-restart-ci" title="Permalink to this heading">¶</a></h3>
 <p>Entering this command in the PR of a feedstock or staged-recipes will close and then open the PR, causing
 all of the CI builds to restart.</p>
 </section>
 <section id="conda-forge-admin-please-ping-team">
-<h3>&#64;conda-forge-admin, please ping team<a class="headerlink" href="#conda-forge-admin-please-ping-team" title="Permalink to this headline">¶</a></h3>
+<h3>&#64;conda-forge-admin, please ping team<a class="headerlink" href="#conda-forge-admin-please-ping-team" title="Permalink to this heading">¶</a></h3>
 <p>Entering this command in the PR of a feedstock or staged-recipes will have the admin bot &#64;-mention the team
 associated with the repo. This command can be useful for people who are not yet members of conda-forge and
 so cannot &#64;-mention the <code class="docutils literal notranslate"><span class="pre">staged-recipes</span></code> team for PR reviews.</p>
 </section>
 <section id="conda-forge-admin-please-ping-conda-forge-team">
-<h3>&#64;conda-forge-admin, please ping conda-forge/&lt;team&gt;<a class="headerlink" href="#conda-forge-admin-please-ping-conda-forge-team" title="Permalink to this headline">¶</a></h3>
+<h3>&#64;conda-forge-admin, please ping conda-forge/&lt;team&gt;<a class="headerlink" href="#conda-forge-admin-please-ping-conda-forge-team" title="Permalink to this heading">¶</a></h3>
 <p>Entering this command in the PR of a feedstock or staged-recipes will have the admin bot &#64;-mention the respective team.
 This command can be useful for people who are not yet members of conda-forge and
 so cannot &#64;-mention someone due to the general GitHub limitations.</p>
 </section>
 <section id="conda-forge-admin-please-rerun-bot">
-<h3>&#64;conda-forge-admin, please rerun bot<a class="headerlink" href="#conda-forge-admin-please-rerun-bot" title="Permalink to this headline">¶</a></h3>
+<h3>&#64;conda-forge-admin, please rerun bot<a class="headerlink" href="#conda-forge-admin-please-rerun-bot" title="Permalink to this heading">¶</a></h3>
 <p>Entering this command in a PR comment will add the <code class="docutils literal notranslate"><span class="pre">bot-rerun</span></code> label to that PR. This label will cause
 the <code class="docutils literal notranslate"><span class="pre">auto-tick</span></code> bot that issues migration and version updates to close the current PR and reissue it.
 Adding this label to non-bot issued PRs will have no effect.</p>
 </section>
 <section id="conda-forge-admin-please-add-bot-automerge">
-<h3>&#64;conda-forge-admin, please add bot automerge<a class="headerlink" href="#conda-forge-admin-please-add-bot-automerge" title="Permalink to this headline">¶</a></h3>
+<h3>&#64;conda-forge-admin, please add bot automerge<a class="headerlink" href="#conda-forge-admin-please-add-bot-automerge" title="Permalink to this heading">¶</a></h3>
 <p>Entering this command in the title or comment of an issue will instruct the admin bot to
 open a PR enabling the automatic merging of passing PRs from the <code class="docutils literal notranslate"><span class="pre">auto-tick</span></code>
 bot. This functionality is currently experimental. You can find more details
@@ -184,7 +185,7 @@ bot. This functionality is currently experimental. You can find more details
 Please open issue on <code class="docutils literal notranslate"><span class="pre">regro/cf-scripts</span></code> for any feedback, bugs, and/or questions!</p>
 </section>
 <section id="conda-forge-admin-please-add-python-2-7">
-<h3>&#64;conda-forge-admin, please add python 2.7<a class="headerlink" href="#conda-forge-admin-please-add-python-2-7" title="Permalink to this headline">¶</a></h3>
+<h3>&#64;conda-forge-admin, please add python 2.7<a class="headerlink" href="#conda-forge-admin-please-add-python-2-7" title="Permalink to this heading">¶</a></h3>
 <p>Entering this command in the title of an issue will instruct the admin bot to
 add Python 2.7 back to a feedstock. Note that this command will remove any other
 Python versions and any <code class="docutils literal notranslate"><span class="pre">win</span></code>, <code class="docutils literal notranslate"><span class="pre">aarch64</span></code> or <code class="docutils literal notranslate"><span class="pre">ppc64le</span></code> builds. Thus you should
@@ -193,7 +194,7 @@ other builds. <strong>Python 2.7 support is deprecated and any feedstocks on Pyt
 not be properly handled by our bots.</strong></p>
 </section>
 <section id="conda-forge-admin-please-add-user-username">
-<h3>&#64;conda-forge-admin, please add user &#64;username<a class="headerlink" href="#conda-forge-admin-please-add-user-username" title="Permalink to this headline">¶</a></h3>
+<h3>&#64;conda-forge-admin, please add user &#64;username<a class="headerlink" href="#conda-forge-admin-please-add-user-username" title="Permalink to this heading">¶</a></h3>
 <p>Entering the above phrase in the title of an issue on a feedstock will make a PR
 that adds the given user to the feedstock. A maintainer or member of <code class="docutils literal notranslate"><span class="pre">core</span></code> can then merge
 this PR to add the user. Please do not modify this PR or adjust the commit message. This
@@ -201,21 +202,21 @@ PR is designed to skip building the package.</p>
 </section>
 </section>
 <section id="ci-build-services">
-<h2>CI build services<a class="headerlink" href="#ci-build-services" title="Permalink to this headline">¶</a></h2>
+<h2>CI build services<a class="headerlink" href="#ci-build-services" title="Permalink to this heading">¶</a></h2>
 <p>Here we describe common issues with the CI Services that conda-forge builds.</p>
 <section id="azure-pipelines">
-<h3>Azure Pipelines<a class="headerlink" href="#azure-pipelines" title="Permalink to this headline">¶</a></h3>
+<h3>Azure Pipelines<a class="headerlink" href="#azure-pipelines" title="Permalink to this heading">¶</a></h3>
 <p>Azure is used to build packages for OSX, Linux (x86_64, native), Linux (ARMv8, emulated) and Linux (IBM Power8+, emulated).
 The build queue on Azure is substantially larger than on all the other providers.
 Azure builds have a maximum duration of 6 hours.</p>
 <p>To see all builds on Azure, visit <a class="reference external" href="https://dev.azure.com/conda-forge/feedstock-builds/_build">https://dev.azure.com/conda-forge/feedstock-builds/_build</a>.</p>
 <section id="restarting-builds">
-<h4>Restarting builds<a class="headerlink" href="#restarting-builds" title="Permalink to this headline">¶</a></h4>
+<h4>Restarting builds<a class="headerlink" href="#restarting-builds" title="Permalink to this heading">¶</a></h4>
 <p>Presently Azure does not sync GitHub users. In order to restart a build you can restart it from the GitHub checks interface.
 If that doesn’t work, a close/open will kick off a new build. You can also use the web services command <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">restart</span> <span class="pre">ci</span></code>.</p>
 </section>
 <section id="using-azure-for-everything">
-<h4>Using Azure for <em>everything</em><a class="headerlink" href="#using-azure-for-everything" title="Permalink to this headline">¶</a></h4>
+<h4>Using Azure for <em>everything</em><a class="headerlink" href="#using-azure-for-everything" title="Permalink to this heading">¶</a></h4>
 <p>Azure is the default provider for Linux and OSX.  To use Azure for everything, add the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root
 of the feedstock.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span><span class="w"></span>
@@ -230,12 +231,12 @@ certain very old packages that require VC9 will fail.</p>
 </section>
 </section>
 <section id="travisci-osx-ibm-power-8">
-<h3>TravisCI (OSX, IBM Power 8+)<a class="headerlink" href="#travisci-osx-ibm-power-8" title="Permalink to this headline">¶</a></h3>
+<h3>TravisCI (OSX, IBM Power 8+)<a class="headerlink" href="#travisci-osx-ibm-power-8" title="Permalink to this heading">¶</a></h3>
 <p>TravisCI is used to build packages for IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
 force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit <a class="reference external" href="https://app.travis-ci.com/account/repositories">https://app.travis-ci.com/account/repositories</a>
 and click the “Sync accounts” button.</p>
 <section id="enabling-travis">
-<h4>Enabling Travis<a class="headerlink" href="#enabling-travis" title="Permalink to this headline">¶</a></h4>
+<h4>Enabling Travis<a class="headerlink" href="#enabling-travis" title="Permalink to this heading">¶</a></h4>
 <p>TravisCI should only be needed to build recipes on OSX, if there is a strange failure on Azure.</p>
 <p>Enable a build by adding the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root of the feedstock.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span><span class="w"></span>
@@ -247,12 +248,12 @@ via a pull request.</p>
 </section>
 </section>
 <section id="circleci-linux-osx">
-<h3>CircleCI (Linux, OSX)<a class="headerlink" href="#circleci-linux-osx" title="Permalink to this headline">¶</a></h3>
+<h3>CircleCI (Linux, OSX)<a class="headerlink" href="#circleci-linux-osx" title="Permalink to this heading">¶</a></h3>
 <p>CircleCI is a container-based CI service that conda-forge uses to build
 Linux packages. It can optionally build OSX packages.</p>
 <p>Linux builds are identical to those on Azure as both are built inside Docker containers.</p>
 <section id="using-circle-for-both-linux-and-osx">
-<h4>Using Circle for both Linux and OSX<a class="headerlink" href="#using-circle-for-both-linux-and-osx" title="Permalink to this headline">¶</a></h4>
+<h4>Using Circle for both Linux and OSX<a class="headerlink" href="#using-circle-for-both-linux-and-osx" title="Permalink to this heading">¶</a></h4>
 <p>To use CircleCI for OSX, add the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root of the feedstock.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">osx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">circle</span><span class="w"></span>
@@ -263,7 +264,7 @@ Linux packages. It can optionally build OSX packages.</p>
 <p>Note that you need to rerender the feedstock, once this change has been made.</p>
 </section>
 <section id="debugging-permission-errors">
-<h4>Debugging permission errors<a class="headerlink" href="#debugging-permission-errors" title="Permalink to this headline">¶</a></h4>
+<h4>Debugging permission errors<a class="headerlink" href="#debugging-permission-errors" title="Permalink to this heading">¶</a></h4>
 <p>If CircleCI lacks permissions to checkout the source code, it will produce an error as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cloning</span> <span class="n">into</span> <span class="s1">&#39;.&#39;</span><span class="o">...</span>
 <span class="ne">Warning</span><span class="p">:</span> <span class="n">Permanently</span> <span class="n">added</span> <span class="n">the</span> <span class="n">RSA</span> <span class="n">host</span> <span class="n">key</span> <span class="k">for</span> <span class="n">IP</span> <span class="n">address</span> <span class="s1">&#39;192.30.253.113&#39;</span> <span class="n">to</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">known</span> <span class="n">hosts</span><span class="o">.</span>
@@ -284,16 +285,16 @@ Linux packages. It can optionally build OSX packages.</p>
 </section>
 </section>
 <section id="drone-io">
-<h3>Drone.io<a class="headerlink" href="#drone-io" title="Permalink to this headline">¶</a></h3>
+<h3>Drone.io<a class="headerlink" href="#drone-io" title="Permalink to this heading">¶</a></h3>
 <p>We use <a class="reference external" href="https://drone.io">Drone.io</a> for Linux ARMv8 builds. To enable these builds on your feedstock, make a pull request to add your feedstock to the list
 here <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt">https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt</a>.</p>
 </section>
 <section id="github-actions">
-<h3>GitHub Actions<a class="headerlink" href="#github-actions" title="Permalink to this headline">¶</a></h3>
+<h3>GitHub Actions<a class="headerlink" href="#github-actions" title="Permalink to this heading">¶</a></h3>
 <p>We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on
 GitHub Actions.</p>
 <section id="automerge">
-<span id="id2"></span><h4>Automerge<a class="headerlink" href="#automerge" title="Permalink to this headline">¶</a></h4>
+<span id="id2"></span><h4>Automerge<a class="headerlink" href="#automerge" title="Permalink to this heading">¶</a></h4>
 <p>The automerge service uses the GitHub action in this <a class="reference external" href="https://github.com/conda-forge/automerge-action">repo</a>. This action runs out of a
 Docker <a class="reference external" href="https://hub.docker.com/repository/docker/condaforge/automerge-action">container</a> on the <code class="docutils literal notranslate"><span class="pre">prod</span></code> tag. See the
 repo <a class="reference external" href="https://github.com/conda-forge/automerge-action#readme">README.md</a> for more details. PRs are automatically merged if they satisfy either
@@ -306,14 +307,14 @@ of the two following sets of conditions:</p>
 edits to the PR.</p>
 </section>
 <section id="rerendering">
-<h4>Rerendering<a class="headerlink" href="#rerendering" title="Permalink to this headline">¶</a></h4>
+<h4>Rerendering<a class="headerlink" href="#rerendering" title="Permalink to this heading">¶</a></h4>
 <p>The rerendering service is triggered by the Heroku app. It uses the GitHub action in this <a class="reference external" href="https://github.com/conda-forge/webservices-dispatch-action">repo</a>.
 This action runs out of a Docker <a class="reference external" href="https://hub.docker.com/repository/docker/condaforge/webservices-dispatch-action">container</a> on the <code class="docutils literal notranslate"><span class="pre">prod</span></code> tag. See the
 repo <a class="reference external" href="https://github.com/conda-forge/webservices-dispatch-action#readme">README.md</a> for more details.</p>
 </section>
 </section>
 <section id="skipping-ci-builds">
-<h3>Skipping CI builds<a class="headerlink" href="#skipping-ci-builds" title="Permalink to this headline">¶</a></h3>
+<h3>Skipping CI builds<a class="headerlink" href="#skipping-ci-builds" title="Permalink to this heading">¶</a></h3>
 <p>To skip a CI build for a given commit, put <code class="docutils literal notranslate"><span class="pre">[ci</span> <span class="pre">skip]</span> <span class="pre">***NO_CI***</span></code> in the commit message.</p>
 <div class="admonition-related-links admonition">
 <p class="admonition-title">Related links</p>
@@ -324,7 +325,7 @@ repo <a class="reference external" href="https://github.com/conda-forge/webservi
 </div>
 </section>
 <section id="third-party-use-of-our-ci-services">
-<h3>Third-party Use of Our CI Services<a class="headerlink" href="#third-party-use-of-our-ci-services" title="Permalink to this headline">¶</a></h3>
+<h3>Third-party Use of Our CI Services<a class="headerlink" href="#third-party-use-of-our-ci-services" title="Permalink to this heading">¶</a></h3>
 <p>Due to its stature in the open-source community, conda-forge has enhanced access to certain CI services. This access is a community
 resource entrusted to conda-forge for use in building packages. We thus cannot support third-party or “off-label” CI jobs in our
 feedstocks on any of our CI services. If we find such use, we will politely ask the maintainers to rectify the situation. We may
@@ -332,7 +333,7 @@ take more serious actions, including archiving feedstocks or removing maintainer
 </section>
 </section>
 <section id="compilers-and-runtimes">
-<h2>Compilers and Runtimes<a class="headerlink" href="#compilers-and-runtimes" title="Permalink to this headline">¶</a></h2>
+<h2>Compilers and Runtimes<a class="headerlink" href="#compilers-and-runtimes" title="Permalink to this heading">¶</a></h2>
 <p>Conda-forge builds and maintains its own set of compilers for various languages
 and/or systems (e.g., <code class="docutils literal notranslate"><span class="pre">C</span></code>, <code class="docutils literal notranslate"><span class="pre">FORTRAN</span></code>, <code class="docutils literal notranslate"><span class="pre">C++</span></code>, <code class="docutils literal notranslate"><span class="pre">CUDA</span></code>, etc.). These are used
 in all of our CI builds to build both core dependencies (e.g., <code class="docutils literal notranslate"><span class="pre">Python</span></code>) and maintainer-contributed
@@ -366,7 +367,7 @@ GCC 4.8.2 as packaged in the devtoolset-2 software collection. On osx, we use cl
 Apple’s Xcode in the <code class="docutils literal notranslate"><span class="pre">toolchain_*</span></code> packages.</p></li>
 </ul>
 <section id="centos-sysroot-for-linux-platforms">
-<h3>CentOS <code class="docutils literal notranslate"><span class="pre">sysroot</span></code> for <code class="docutils literal notranslate"><span class="pre">linux-*</span></code> Platforms<a class="headerlink" href="#centos-sysroot-for-linux-platforms" title="Permalink to this headline">¶</a></h3>
+<h3>CentOS <code class="docutils literal notranslate"><span class="pre">sysroot</span></code> for <code class="docutils literal notranslate"><span class="pre">linux-*</span></code> Platforms<a class="headerlink" href="#centos-sysroot-for-linux-platforms" title="Permalink to this heading">¶</a></h3>
 <p>We currently repackage the <code class="docutils literal notranslate"><span class="pre">sysroot</span></code> from the appropriate version of CentOS for use
 with our compilers. These <code class="docutils literal notranslate"><span class="pre">sysroot</span></code> files are available in the <code class="docutils literal notranslate"><span class="pre">sysroot_linux-*</span></code> packages.
 These packages have version numbers that match the version of <code class="docutils literal notranslate"><span class="pre">glibc</span></code> they package. These
@@ -379,7 +380,7 @@ compiler versions above, we have removed the <code class="docutils literal notra
 </section>
 </section>
 <section id="output-validation-and-feedstock-tokens">
-<span id="output-validation"></span><h2>Output Validation and Feedstock Tokens<a class="headerlink" href="#output-validation-and-feedstock-tokens" title="Permalink to this headline">¶</a></h2>
+<span id="output-validation"></span><h2>Output Validation and Feedstock Tokens<a class="headerlink" href="#output-validation-and-feedstock-tokens" title="Permalink to this heading">¶</a></h2>
 <p>As of writing, <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code> does not support generating API tokens that are scoped
 to allow uploads for some packages but not others. In order to secure feedstock uploads,
 so that, e.g., the maintainers of the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> feedstock cannot push a <code class="docutils literal notranslate"><span class="pre">python</span></code> version,
@@ -515,7 +516,7 @@ will be able to upload packages with the same name.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
     
@@ -551,7 +552,7 @@ will be able to upload packages with the same name.</p>
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Infrastructure</a></li> 
@@ -561,7 +562,7 @@ will be able to upload packages with the same name.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2022, conda-forge.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

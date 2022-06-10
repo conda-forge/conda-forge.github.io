@@ -3,12 +3,12 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2019-07-24 conda-forge core meeting &#8212; conda-forge 2022.06.03 documentation</title>
+    <title>2019-07-24 conda-forge core meeting &#8212; conda-forge 2022.06.10 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -16,6 +16,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
 
     
@@ -55,7 +56,7 @@
         <li class="right" >
           <a href="2019-08-07.html" title="2019-08-07 conda-forge core meeting"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">conda-forge 2022.06.03 documentation</a> &#187;</li>
+    <li><a href="../../index.html">conda-forge 2022.06.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li>
@@ -71,17 +72,17 @@
           <div class="body" role="main">
             
   <section id="conda-forge-core-meeting">
-<h1>2019-07-24 conda-forge core meeting<a class="headerlink" href="#conda-forge-core-meeting" title="Permalink to this headline">¶</a></h1>
+<h1>2019-07-24 conda-forge core meeting<a class="headerlink" href="#conda-forge-core-meeting" title="Permalink to this heading">¶</a></h1>
 <p><a class="reference external" href="https://hackmd.io/P8on5P8wR3q3WslwrJzOEg">HackMD link</a></p>
 <section id="attendees">
-<h2>Attendees<a class="headerlink" href="#attendees" title="Permalink to this headline">¶</a></h2>
+<h2>Attendees<a class="headerlink" href="#attendees" title="Permalink to this heading">¶</a></h2>
 <p>List the attendees for the meeting</p>
 </section>
 <section id="agenda">
-<h2>Agenda<a class="headerlink" href="#agenda" title="Permalink to this headline">¶</a></h2>
+<h2>Agenda<a class="headerlink" href="#agenda" title="Permalink to this heading">¶</a></h2>
 <p>Please add new items to the meeting Agenda</p>
 <section id="scipy-sprints">
-<h3>Scipy Sprints<a class="headerlink" href="#scipy-sprints" title="Permalink to this headline">¶</a></h3>
+<h3>Scipy Sprints<a class="headerlink" href="#scipy-sprints" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>[x] Update from conda-forge Sprint (Filipe / Marius / Lori)</p>
 <ul>
@@ -111,12 +112,12 @@
 </ul>
 </section>
 <section id="subteam-updates">
-<h3>Subteam updates<a class="headerlink" href="#subteam-updates" title="Permalink to this headline">¶</a></h3>
+<h3>Subteam updates<a class="headerlink" href="#subteam-updates" title="Permalink to this heading">¶</a></h3>
 <section id="bot">
-<h4>Bot<a class="headerlink" href="#bot" title="Permalink to this headline">¶</a></h4>
+<h4>Bot<a class="headerlink" href="#bot" title="Permalink to this heading">¶</a></h4>
 </section>
 <section id="arm">
-<h4>ARM<a class="headerlink" href="#arm" title="Permalink to this headline">¶</a></h4>
+<h4>ARM<a class="headerlink" href="#arm" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>aarch64/ppc64le <a class="reference external" href="https://conda-forge.org/status/">migration</a> is nearly complete</p></li>
 <li><p>still missing a handful of key packages:</p>
@@ -143,10 +144,10 @@
 </ul>
 </section>
 <section id="docs">
-<h4>Docs<a class="headerlink" href="#docs" title="Permalink to this headline">¶</a></h4>
+<h4>Docs<a class="headerlink" href="#docs" title="Permalink to this heading">¶</a></h4>
 </section>
 <section id="staged-recipes">
-<h4>staged-recipes<a class="headerlink" href="#staged-recipes" title="Permalink to this headline">¶</a></h4>
+<h4>staged-recipes<a class="headerlink" href="#staged-recipes" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>[ ] <a class="reference external" href="https://github.com/conda-forge/staged-recipes/pull/8764">PR #8764 (sextractor)</a>. Very widely used program in astronomy, the name of the program is <code class="docutils literal notranslate"><span class="pre">sextractor</span></code>, the command line to run it is <code class="docutils literal notranslate"><span class="pre">sex</span></code>. Potential Code of Conduct violation in the name. Proposed alternatives are a different name for the conda-forge package <code class="docutils literal notranslate"><span class="pre">astromatic-sextractor</span></code> or <code class="docutils literal notranslate"><span class="pre">astromatic-source-extractor</span></code>. Even if the name of the package is not <code class="docutils literal notranslate"><span class="pre">sextractor</span></code>, the page on anaconda.org for the package would look something like this, i.e. still several references to <code class="docutils literal notranslate"><span class="pre">sextractor</span></code>:</p>
 <ul>
@@ -160,13 +161,13 @@
 </section>
 </section>
 <section id="ci-infrastructure">
-<h3>CI infrastructure<a class="headerlink" href="#ci-infrastructure" title="Permalink to this headline">¶</a></h3>
+<h3>CI infrastructure<a class="headerlink" href="#ci-infrastructure" title="Permalink to this heading">¶</a></h3>
 </section>
 <section id="please-add-your-name-here-if-you-would-like-to-stick-something-on-the-agenda">
-<h3>Please add your name here if you would like to stick something on the agenda<a class="headerlink" href="#please-add-your-name-here-if-you-would-like-to-stick-something-on-the-agenda" title="Permalink to this headline">¶</a></h3>
+<h3>Please add your name here if you would like to stick something on the agenda<a class="headerlink" href="#please-add-your-name-here-if-you-would-like-to-stick-something-on-the-agenda" title="Permalink to this heading">¶</a></h3>
 </section>
 <section id="eric">
-<h3>Eric<a class="headerlink" href="#eric" title="Permalink to this headline">¶</a></h3>
+<h3>Eric<a class="headerlink" href="#eric" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Anaconda.org maintenance is slow. How can CF push it forward or help maintain it? What are acceptable alternatives if Anaconda.org continues to have slow maintenance and there’s no pathway for CF to contribute to the maintenance?</p></li>
 </ol>
@@ -212,7 +213,7 @@ c. Filipe: Research software for audio listen only access for other members of t
 </ol>
 </section>
 <section id="marius">
-<h3>Marius<a class="headerlink" href="#marius" title="Permalink to this headline">¶</a></h3>
+<h3>Marius<a class="headerlink" href="#marius" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Intel compiler update.
 a. Spoke with David Liu at SciPy about how to use compilers safely. There’s a bit of admin involved with the licensing.
@@ -221,17 +222,17 @@ b. Marius has a repo that he’s working on that outlines this architecture. Wil
 </section>
 </section>
 <section id="discussion">
-<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
+<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this heading">¶</a></h2>
 <p>Notes from todays core meeting</p>
 </section>
 <section id="check-in-on-previous-action-items">
-<h2>Check in on previous action items<a class="headerlink" href="#check-in-on-previous-action-items" title="Permalink to this headline">¶</a></h2>
+<h2>Check in on previous action items<a class="headerlink" href="#check-in-on-previous-action-items" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>[x] Eric to take over organizing the dev meetings, making notes available, etc.</p></li>
 </ul>
 </section>
 <section id="new-action-items">
-<h2>New Action items<a class="headerlink" href="#new-action-items" title="Permalink to this headline">¶</a></h2>
+<h2>New Action items<a class="headerlink" href="#new-action-items" title="Permalink to this heading">¶</a></h2>
 <p>Copy new action items to next meetings agenda so we can check in.
 Make sure each action item is assigned to someone or it will likely not get done.</p>
 <ul class="simple">
@@ -452,7 +453,7 @@ Make sure each action item is assigned to someone or it will likely not get done
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
     
@@ -488,7 +489,7 @@ Make sure each action item is assigned to someone or it will likely not get done
         <li class="right" >
           <a href="2019-08-07.html" title="2019-08-07 conda-forge core meeting"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">conda-forge 2022.06.03 documentation</a> &#187;</li>
+    <li><a href="../../index.html">conda-forge 2022.06.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li>
@@ -499,7 +500,7 @@ Make sure each action item is assigned to someone or it will likely not get done
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2022, conda-forge.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

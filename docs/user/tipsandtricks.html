@@ -3,12 +3,12 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Tips &amp; tricks &#8212; conda-forge 2022.06.03 documentation</title>
+    <title>Tips &amp; tricks &#8212; conda-forge 2022.06.10 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -16,6 +16,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
 
     
@@ -55,7 +56,7 @@
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Tips &amp; tricks</a></li> 
@@ -70,9 +71,9 @@
           <div class="body" role="main">
             
   <section id="tips-tricks">
-<h1>Tips &amp; tricks<a class="headerlink" href="#tips-tricks" title="Permalink to this headline">¶</a></h1>
+<h1>Tips &amp; tricks<a class="headerlink" href="#tips-tricks" title="Permalink to this heading">¶</a></h1>
 <section id="using-multiple-channels">
-<span id="multiple-channels"></span><h2>Using multiple channels<a class="headerlink" href="#using-multiple-channels" title="Permalink to this headline">¶</a></h2>
+<span id="multiple-channels"></span><h2>Using multiple channels<a class="headerlink" href="#using-multiple-channels" title="Permalink to this heading">¶</a></h2>
 <p>It is quite common to install a package from conda-forge and,
 when trying to use it,
 see an error like (OS X example):</p>
@@ -86,7 +87,7 @@ or any other package in the error,
 is not present or the package is missing altogether.</p>
 <p>You can confirm this by issuing the command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> and searching for the package in question.</p>
 <section id="why-does-that-happen">
-<h3>Why does that happen?<a class="headerlink" href="#why-does-that-happen" title="Permalink to this headline">¶</a></h3>
+<h3>Why does that happen?<a class="headerlink" href="#why-does-that-happen" title="Permalink to this heading">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and <code class="docutils literal notranslate"><span class="pre">defaults</span></code> are not 100% compatible.
 In the example above it is known that <code class="docutils literal notranslate"><span class="pre">defaults</span></code> uses <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">54.*</span></code> while <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> relies on <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">56.*</span></code>,
 that mismatch can lead to errors when the install environment is mixing packages from multiple channels.</p>
@@ -96,7 +97,7 @@ that mismatch can lead to errors when the install environment is mixing packages
 </div>
 </section>
 <section id="how-to-fix-it">
-<h3>How to fix it?<a class="headerlink" href="#how-to-fix-it" title="Permalink to this headline">¶</a></h3>
+<h3>How to fix it?<a class="headerlink" href="#how-to-fix-it" title="Permalink to this heading">¶</a></h3>
 <p>Newer <code class="docutils literal notranslate"><span class="pre">conda</span></code> versions (&gt;=4.6) introduced a strict channel priority feature.
 Type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">config</span> <span class="pre">--describe</span> <span class="pre">channel_priority</span></code> for more information.</p>
 <p>The solution is to add the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel on top of <code class="docutils literal notranslate"><span class="pre">defaults</span></code> in your <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> file when using <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages
@@ -128,7 +129,7 @@ just re-add it and activate <code class="docutils literal notranslate"><span cla
 </section>
 </section>
 <section id="using-external-message-passing-interface-mpi-libraries">
-<span id="id1"></span><h2>Using External Message Passing Interface (MPI) Libraries<a class="headerlink" href="#using-external-message-passing-interface-mpi-libraries" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>Using External Message Passing Interface (MPI) Libraries<a class="headerlink" href="#using-external-message-passing-interface-mpi-libraries" title="Permalink to this heading">¶</a></h2>
 <p>On some high-performance computing (HPC) systems, users are expected to use the
 MPI binaries that are available on the system as opposed to those built by <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.
 These binaries are typically specialized for the system and interface properly with job
@@ -150,7 +151,7 @@ work. At runtime, the <code class="docutils literal notranslate"><span class="pr
 local copy of <code class="docutils literal notranslate"><span class="pre">mpich</span></code>/<code class="docutils literal notranslate"><span class="pre">openmpi</span></code> and link to it.</p>
 </section>
 <section id="installing-apple-intel-packages-on-apple-silicon">
-<span id="apple-silicon-rosetta"></span><h2>Installing Apple Intel packages on Apple Silicon<a class="headerlink" href="#installing-apple-intel-packages-on-apple-silicon" title="Permalink to this headline">¶</a></h2>
+<span id="apple-silicon-rosetta"></span><h2>Installing Apple Intel packages on Apple Silicon<a class="headerlink" href="#installing-apple-intel-packages-on-apple-silicon" title="Permalink to this heading">¶</a></h2>
 <p>Using <a class="reference external" href="https://support.apple.com/en-us/HT211861">Rosetta 2</a>, you can install packages originally compiled for Mac computers with Intel processors on Mac computers with Apple silicon processors.</p>
 <p>This can be enabled per environment using the following commands:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64 conda create -n your_environment_name python   <span class="c1"># Create a new environment called your_environment_name with intel packages.</span>
@@ -166,7 +167,7 @@ conda config --env --set subdir osx-64  <span class="c1"># Make sure that conda 
 </div>
 </section>
 <section id="installing-cuda-enabled-packages-like-tensorflow-and-pytorch">
-<span id="installing-packages-for-gpus-and-cpus"></span><h2>Installing CUDA-enabled packages like TensorFlow and PyTorch<a class="headerlink" href="#installing-cuda-enabled-packages-like-tensorflow-and-pytorch" title="Permalink to this headline">¶</a></h2>
+<span id="installing-packages-for-gpus-and-cpus"></span><h2>Installing CUDA-enabled packages like TensorFlow and PyTorch<a class="headerlink" href="#installing-cuda-enabled-packages-like-tensorflow-and-pytorch" title="Permalink to this heading">¶</a></h2>
 <p>In conda-forge, some packages are available with GPU support. These packages not only take significantly longer to compile and build, but they also result in rather large binaries that users then download. As an effort to maximize accessibility for users with lower connection and/or storage bandwidth, there is an ongoing effort to limit installing packages compiled for GPUs unnecessarily on CPU-only machines by default. This is accomplished by adding a run dependency, <code class="docutils literal notranslate"><span class="pre">__cuda</span></code>, that detects if the local machine has a GPU. However, this introduces challenges to users who may prefer to still download and use GPU-enabled packages even on a non-GPU machine. For example, login nodes on HPCs often do not have GPUs and their compute counterparts with GPUs often do not have internet access. In this case, a user can override the default setting via the environment variable <code class="docutils literal notranslate"><span class="pre">CONDA_OVERRIDE_CUDA</span></code> to install GPU packages on the login node to be used later on the compute node. At the time of writing (February 2022), we have concluded this safe default behavior is best for most of conda-forge users, with an easy override option available and documented. Please let us know if you have thoughts on or issues with this.</p>
 <p>In order to override the default behavior, a user can set the environment variable <code class="docutils literal notranslate"><span class="pre">CONDA_OVERRIDE_CUDA</span></code> like below to install TensorFlow with GPU support even on a machine with CPU only.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_OVERRIDE_CUDA</span><span class="o">=</span><span class="s2">&quot;11.2&quot;</span> conda install <span class="s2">&quot;tensorflow==2.7.0=cuda112*&quot;</span> -c conda-forge
@@ -181,7 +182,7 @@ conda config --env --set subdir osx-64  <span class="c1"># Make sure that conda 
 <p>For context, installing the TensorFlow 2.7.0 CUDA-enabled variant, <code class="docutils literal notranslate"><span class="pre">tensorflow==2.7.0=cuda*</span></code>, results in approximately 2 GB of packages to download while the CPU variant, <code class="docutils literal notranslate"><span class="pre">tensorflow=2.7.0=cpu*</span></code>, results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the CPU only variant!</p>
 </section>
 <section id="using-pypy-as-an-interpreter">
-<span id="pypy"></span><h2>Using PyPy as an interpreter<a class="headerlink" href="#using-pypy-as-an-interpreter" title="Permalink to this headline">¶</a></h2>
+<span id="pypy"></span><h2>Using PyPy as an interpreter<a class="headerlink" href="#using-pypy-as-an-interpreter" title="Permalink to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel supports creating and installing packages into
 environments using the <a class="reference external" href="https://www.pypy.org">PyPy interpreter</a>. Many packages are already
 available. You need to enable the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel and use
@@ -274,7 +275,7 @@ installed alongside pypy.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
     
@@ -310,7 +311,7 @@ installed alongside pypy.</p>
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Tips &amp; tricks</a></li> 
@@ -320,7 +321,7 @@ installed alongside pypy.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2022, conda-forge.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

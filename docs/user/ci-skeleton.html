@@ -3,12 +3,12 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Using conda-smithy to manage your CI &#8212; conda-forge 2022.06.03 documentation</title>
+    <title>Using conda-smithy to manage your CI &#8212; conda-forge 2022.06.10 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -16,6 +16,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
 
     
@@ -55,7 +56,7 @@
         <li class="right" >
           <a href="tipsandtricks.html" title="Tips &amp; tricks"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Using conda-smithy to manage your CI</a></li> 
@@ -70,7 +71,7 @@
           <div class="body" role="main">
             
   <section id="using-conda-smithy-to-manage-your-ci">
-<h1>Using conda-smithy to manage your CI<a class="headerlink" href="#using-conda-smithy-to-manage-your-ci" title="Permalink to this headline">¶</a></h1>
+<h1>Using conda-smithy to manage your CI<a class="headerlink" href="#using-conda-smithy-to-manage-your-ci" title="Permalink to this heading">¶</a></h1>
 <p>Conda-forge, and specifically <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> contains a lot of
 tools for building and deploying continuous integration (CI)
 infrastructure on a variety of different platforms and architectures.
@@ -81,7 +82,7 @@ command <code class="docutils literal notranslate"><span class="pre">ci-skeleton
 CI infrastructure. Using the conda-smithy <code class="docutils literal notranslate"><span class="pre">rerender</span></code> command, you
 can then keep your repository up-to-date with any needed changes.</p>
 <section id="getting-started">
-<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">ci-skeleton</span></code> command helps you get started by preparing a repository
 to have the proper structure such that the <code class="docutils literal notranslate"><span class="pre">rerender</span></code> command will correctly
 add the CI configurations. Let’s see an example!</p>
@@ -122,7 +123,7 @@ to your repository.</p>
 for wiring everything up properly. Luckily, they are easy to perform!
 Let’s go through them one-by-one!</p>
 <section id="fill-out-recipe-meta-yaml">
-<h3>1. Fill out recipe/meta.yaml<a class="headerlink" href="#fill-out-recipe-meta-yaml" title="Permalink to this headline">¶</a></h3>
+<h3>1. Fill out recipe/meta.yaml<a class="headerlink" href="#fill-out-recipe-meta-yaml" title="Permalink to this heading">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">ci-skeleton</span></code> command emits an example <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file for
 building <code class="docutils literal notranslate"><span class="pre">myproj</span></code>, hence the “skeleton” part of the name. If you
 don’t want the skeleton to be produced in the <code class="docutils literal notranslate"><span class="pre">recipe/</span></code> directory,
@@ -215,7 +216,7 @@ to a channel. Feel free to delete or ignore these fields.</p>
 </div>
 </section>
 <section id="commit-the-changes">
-<h3>2. Commit the changes<a class="headerlink" href="#commit-the-changes" title="Permalink to this headline">¶</a></h3>
+<h3>2. Commit the changes<a class="headerlink" href="#commit-the-changes" title="Permalink to this heading">¶</a></h3>
 <p>Once you have written your recipe, it is important to save the modifications!
 Just run the following commands:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/repo $ git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;ran conda smithy skeleton&quot;</span>
@@ -223,14 +224,14 @@ Just run the following commands:</p>
 </div>
 </section>
 <section id="register-with-the-ci-providers">
-<h3>3. Register with the CI providers<a class="headerlink" href="#register-with-the-ci-providers" title="Permalink to this headline">¶</a></h3>
+<h3>3. Register with the CI providers<a class="headerlink" href="#register-with-the-ci-providers" title="Permalink to this heading">¶</a></h3>
 <p>This is important!  If you haven’t done so already, you’ll need to go
 to the CI providers (Travis, Circle, Azure, etc.) and enable CI
 to for your repository. Each CI provider that you use will have
 documentation on how to get set up with them.</p>
 </section>
 <section id="rerender">
-<h3>4. Rerender<a class="headerlink" href="#rerender" title="Permalink to this headline">¶</a></h3>
+<h3>4. Rerender<a class="headerlink" href="#rerender" title="Permalink to this heading">¶</a></h3>
 <p>Last, but certainly not least, we need to generate the CI configuration
 scripts! This is based on the content of the recipe as well as the
 provider selections made in the <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> file. (Please
@@ -245,7 +246,7 @@ your package on CI!</p>
 </section>
 </section>
 <section id="keeping-up-to-date">
-<h2>Keeping Up-to-date<a class="headerlink" href="#keeping-up-to-date" title="Permalink to this headline">¶</a></h2>
+<h2>Keeping Up-to-date<a class="headerlink" href="#keeping-up-to-date" title="Permalink to this heading">¶</a></h2>
 <p>A major advantage of using <code class="docutils literal notranslate"><span class="pre">ci-skeleton</span></code> is that once it has been
 setup, it is very easy to keep your CI system up-to-date. If you
 modify your recipe to enable new architectures, you want to
@@ -326,7 +327,7 @@ current time and state of the recipe.  It is just that easy!</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
     
@@ -362,7 +363,7 @@ current time and state of the recipe.  It is just that easy!</p>
         <li class="right" >
           <a href="tipsandtricks.html" title="Tips &amp; tricks"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Using conda-smithy to manage your CI</a></li> 
@@ -372,7 +373,7 @@ current time and state of the recipe.  It is just that easy!</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2022, conda-forge.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

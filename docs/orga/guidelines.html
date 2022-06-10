@@ -3,12 +3,12 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Guidelines &#8212; conda-forge 2022.06.03 documentation</title>
+    <title>Guidelines &#8212; conda-forge 2022.06.10 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -16,6 +16,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
 
     
@@ -55,7 +56,7 @@
         <li class="right" >
           <a href="00_intro.html" title="Organisation Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Organisation Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Guidelines</a></li> 
@@ -70,9 +71,9 @@
           <div class="body" role="main">
             
   <section id="guidelines">
-<h1>Guidelines<a class="headerlink" href="#guidelines" title="Permalink to this headline">¶</a></h1>
+<h1>Guidelines<a class="headerlink" href="#guidelines" title="Permalink to this heading">¶</a></h1>
 <section id="transferring-to-conda-forge">
-<h2>Transferring to conda-forge<a class="headerlink" href="#transferring-to-conda-forge" title="Permalink to this headline">¶</a></h2>
+<h2>Transferring to conda-forge<a class="headerlink" href="#transferring-to-conda-forge" title="Permalink to this heading">¶</a></h2>
 <p>This document intends to layout some guidelines on the transfer of
 <a class="reference external" href="https://github.com/conda/conda-recipes">conda-recipes</a> and
 <a class="reference external" href="https://github.com/ContinuumIO/anaconda-recipes">anaconda-recipes</a>
@@ -137,7 +138,7 @@ recommendation is to open a PR with one recipe first, and to ping
 recipes.</p>
 </section>
 <section id="intended-usage">
-<h2>Intended Usage<a class="headerlink" href="#intended-usage" title="Permalink to this headline">¶</a></h2>
+<h2>Intended Usage<a class="headerlink" href="#intended-usage" title="Permalink to this heading">¶</a></h2>
 <p>Maintainers’ time and CI resources are what enable conda-forge. They are just as scarce as valuable. conda-forge has enough capacity to support releasing packages, but not developing them.</p>
 <p>Publishing a package to conda-forge signals it is suitable for users not involved with development. However, publishing does not always happen error-free. Multiple commits are acceptable when debugging issues with the release process itself.</p>
 <dl class="simple">
@@ -149,7 +150,7 @@ recipes.</p>
 </dl>
 </section>
 <section id="renaming-packages">
-<h2>Renaming Packages<a class="headerlink" href="#renaming-packages" title="Permalink to this headline">¶</a></h2>
+<h2>Renaming Packages<a class="headerlink" href="#renaming-packages" title="Permalink to this heading">¶</a></h2>
 <p>Sometimes, packages are misnamed.
 To correct the name of the package, please submit a PR into <a class="reference external" href="https://github.com/conda-forge/staged-recipes">staged-recipes</a> with the correct name.
 During the review process, please make certain to note that the package is renamed and contact a member of conda-forge/core to remove the old feedstock (and potentially package, if needed).</p>
@@ -160,7 +161,7 @@ See <a class="reference external" href="https://github.com/conda-forge/conda-for
 then you may need to add the new feedstock to the <a class="reference external" href="https://github.com/conda-forge/feedstock-outputs">feedstock-outputs</a> map.</p>
 </section>
 <section id="fixing-broken-packages">
-<span id="fix-broken-packages"></span><h2>Fixing Broken Packages<a class="headerlink" href="#fixing-broken-packages" title="Permalink to this headline">¶</a></h2>
+<span id="fix-broken-packages"></span><h2>Fixing Broken Packages<a class="headerlink" href="#fixing-broken-packages" title="Permalink to this heading">¶</a></h2>
 <p>Sometimes, you need to remove a package from the conda-forge channel on Anaconda.org.
 There can be many reasons for this, but the ones that immediately come to mind are:</p>
 <ul class="simple">
@@ -191,18 +192,18 @@ added to your package, please refer to <a class="reference internal" href="../ma
 and thus we prefer repo data patches over labeling things as <code class="docutils literal notranslate"><span class="pre">broken</span></code>.</p>
 </section>
 <section id="becoming-a-maintainer">
-<h2>Becoming a maintainer<a class="headerlink" href="#becoming-a-maintainer" title="Permalink to this headline">¶</a></h2>
+<h2>Becoming a maintainer<a class="headerlink" href="#becoming-a-maintainer" title="Permalink to this heading">¶</a></h2>
 <p>Conda-forge is a community project and it can therefore happen that feedstocks become temporarily abandoned.
 You can join the maintainer team of a feedstock by adding your github-id to the <code class="docutils literal notranslate"><span class="pre">recipe-maintainers</span></code> section in the recipe’s <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>.
 Please refer to <a class="reference internal" href="../maintainer/updating_pkgs.html#maint-updating-maintainers"><span class="std std-ref">Updating the maintainer list</span></a> for detailed instructions.</p>
 </section>
 <section id="language-versions">
-<h2>Language versions<a class="headerlink" href="#language-versions" title="Permalink to this headline">¶</a></h2>
+<h2>Language versions<a class="headerlink" href="#language-versions" title="Permalink to this heading">¶</a></h2>
 <p>Conda-forge contains packages from a number of languages including Python and R, among many others.
 Each of these language-specific packaging sub-ecosystems needs to keep cadence with the language itself, making it challenging to have a blanket policy for how long to keep older versions of the language around.
 As it comes up, each group should be able to define their own policy on how long to keep older versions of their language around.</p>
 <section id="python">
-<h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<h3>Python<a class="headerlink" href="#python" title="Permalink to this heading">¶</a></h3>
 <p>For the Python language, conda-forge aims to keep package builds active and available for the current version and at least two preceding minor versions.
 Whenever Python 4.0 comes out we’ll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously.
 Fortunately, we can punt on that for now.
@@ -294,7 +295,7 @@ For example, we held off turning off py27 even after numpy, scipy dropped suppor
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
     
@@ -330,7 +331,7 @@ For example, we held off turning off py27 even after numpy, scipy dropped suppor
         <li class="right" >
           <a href="00_intro.html" title="Organisation Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.10 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Organisation Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Guidelines</a></li> 
@@ -340,7 +341,7 @@ For example, we held off turning off py27 even after numpy, scipy dropped suppor
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2022, conda-forge.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
