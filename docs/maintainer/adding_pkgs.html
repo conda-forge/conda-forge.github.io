@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Contributing packages &#8212; conda-forge 2022.06.10 documentation</title>
+    <title>Contributing packages &#8212; conda-forge 2022.06.14 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.10 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.14 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Contributing packages</a></li> 
@@ -72,10 +72,7 @@
             
   <section id="contributing-packages">
 <span id="dev-contribute-pkgs"></span><h1>Contributing packages<a class="headerlink" href="#contributing-packages" title="Permalink to this heading">¶</a></h1>
-<p>To submit a package to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel, add its <code class="docutils literal notranslate"><span class="pre">recipe</span></code> and licence to the <code class="docutils literal notranslate"><span class="pre">staged-recipes</span></code> repository and create a pull request. Once the pull request is merged, the package becomes available
-on the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel. Note that contributing a package makes you the <code class="docutils literal notranslate"><span class="pre">maintainer</span></code> of that package.</p>
-<p>A maintainer is responsible for maintaining the feedstock repository and packages as well as their future versions and has push access to the feedstock repositories of only the packages it maintains.
-You can learn more about the roles of a maintainer <a class="reference external" href="https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role">here.</a></p>
+<p>To submit a package to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel, add its <code class="docutils literal notranslate"><span class="pre">recipe</span></code> and licence to the <code class="docutils literal notranslate"><span class="pre">staged-recipes</span></code> repository and create a pull request. Once the pull request is merged, the package becomes available on the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel.</p>
 <p>The sections below provide detailed instructions on contributing packages to conda-forge.</p>
 <section id="the-staging-process">
 <span id="creating-recipes"></span><h2>The staging process<a class="headerlink" href="#the-staging-process" title="Permalink to this heading">¶</a></h2>
@@ -701,11 +698,32 @@ It is always your responsibility to double-check that all licenses are included 
 </div>
 </section>
 </section>
+<section id="extra">
+<h3>Extra<a class="headerlink" href="#extra" title="Permalink to this heading">¶</a></h3>
+<section id="recipe-maintainer">
+<span id="id4"></span><h4>Recipe Maintainer<a class="headerlink" href="#recipe-maintainer" title="Permalink to this heading">¶</a></h4>
+<p>A maintainer is an individual who is responsible for maintaining and updating one or more feedstock repositories and packages as well as their future versions. They have push access to the feedstock repositories of only the packages they maintain and can merge pull requests into it.</p>
+<p>Contributing a recipe for package makes you the <code class="docutils literal notranslate"><span class="pre">maintainer</span></code> of that package automatically.
+See <a class="reference external" href="https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role">Maintainers Role</a> and <a class="reference external" href="https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-packages">Maintaining Packages</a> to learn more about what are the things that maintainers do.
+If you wish to be a maintainer of a certain package, you should contact current maintainers and open an issue in that package’s feedstock with the following command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">add</span> <span class="pre">user</span> <span class="pre">&#64;username</span></code></p>
+<p>where username is the GitHub username of the new maintainer to be added. Please refer to <a class="reference external" href="https://conda-forge.org/docs/orga/guidelines.html#becoming-a-maintainer">Becoming a maintainer</a> and <a class="reference external" href="https://conda-forge.org/docs/maintainer/updating_pkgs.html#updating-the-maintainer-list">Updating the maintainer</a> for detailed instructions.</p>
+</section>
+<section id="feedstock-name">
+<span id="id5"></span><h4>Feedstock name<a class="headerlink" href="#feedstock-name" title="Permalink to this heading">¶</a></h4>
+<p>If you want the name of the feedstock to be different from the package name in the staged-recipes, you can use the <code class="docutils literal notranslate"><span class="pre">feedstock-name</span></code> directive in the recipe of that package, like this:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">extra</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">feedstock-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;name&gt;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code> is the name you would want for the feedstock.</p>
+</section>
+</section>
 </section>
 <section id="miscellaneous">
 <h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this heading">¶</a></h2>
 <section id="activate-scripts">
-<span id="id4"></span><h3>Activate scripts<a class="headerlink" href="#activate-scripts" title="Permalink to this heading">¶</a></h3>
+<span id="id6"></span><h3>Activate scripts<a class="headerlink" href="#activate-scripts" title="Permalink to this heading">¶</a></h3>
 <p>Recipes are allowed to have activate scripts, which will be <code class="docutils literal notranslate"><span class="pre">source</span></code>d or
 <code class="docutils literal notranslate"><span class="pre">call</span></code>ed when the environment is activated. It is generally recommended to avoid using
 activate scripts when another option is possible because people do not always
@@ -864,6 +882,11 @@ These expressions are written in <a class="reference external" href="http://jinj
 <li class="toctree-l5"><a class="reference internal" href="#licenses-of-included-dependencies">Licenses of included dependencies</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="#extra">Extra</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#recipe-maintainer">Recipe Maintainer</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#feedstock-name">Feedstock name</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#miscellaneous">Miscellaneous</a><ul>
@@ -948,7 +971,7 @@ These expressions are written in <a class="reference external" href="http://jinj
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.10 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.14 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Contributing packages</a></li> 
