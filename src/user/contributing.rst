@@ -39,14 +39,33 @@ We are glad to know that you would like to contribute to the ``conda-forge`` doc
 1. `Fork <https://help.github.com/articles/fork-a-repo/>`_ the
    `conda-forge.github.io repository
    <https://github.com/conda-forge/conda-forge.github.io>`_.
-2. `Clone <https://help.github.com/articles/cloning-a-repository/>`_ this fork onto your computer.
-3. `Check out
-   <https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging>`_
-   a new branch deriving from ``main`` to do your work.
-4. Make and `commit
-   <https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository>`_
-   your changes.
-5. Submit a `pull request
-   <https://help.github.com/articles/about-pull-requests/>`_ to the main repository proposing your changes.
+
+2. Clone this fork onto your local machine:
+
+ - ``git clone https://github.com/<your-username>/conda-forge.github.io.git``
+
+3. Create a new branch deriving from ``main`` to do your work:
+
+ - ``git checkout -b <new-branch-name>``
+
+4. Run the following commands:
+
+ - ``conda env create -f ./.ci_scripts/environment.yml``
+ - ``conda activate conda-forge-docs``
+ - ``cd newsfeed && pip install --no-deps .``
+ - ``cd ../src``
+
+5. Make your changes and run the following command to check them:
+
+ - ``make html``
+
+ You can check the changes locally by opening the html files in ``src/_build/html``.
+
+6. Add and commit your changes:
+
+ - ``git add .``
+ - ``git commit -m "your commit message"``
+
+7. Submit a `pull request <https://help.github.com/articles/about-pull-requests/>`_ to the main repository proposing your changes.
 
 Happy contributing!
