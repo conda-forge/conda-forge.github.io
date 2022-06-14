@@ -779,7 +779,7 @@ where username is the GitHub username of the new maintainer to be added. Please 
 Feedstock name
 ..............
 
-If you want the name of the feedstock different from the package name in the staged-recipes, you can use the ``feedstock-name`` directive in the recipe of that package, like this:
+If you want the name of the feedstock to be different from the package name in the staged-recipes, you can use the ``feedstock-name`` directive in the recipe of that package, like this:
 
 .. code-block:: yaml
 
