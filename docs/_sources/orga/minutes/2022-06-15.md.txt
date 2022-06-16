@@ -23,6 +23,7 @@ Meeting info:
 | Katherine Kinnaman | KK       | @kathatherine    | Anaconda                    |
 | Mike McCarty       | MM       | @mmccarty        | NVIDIA                      |
 | Eric Dill.         | ED       | @ericdill        | Voltron Data                |
+| John Kirkham       | JK       | @jakirkham       | cf/NVIDIA                   |
 
 19 people total.
 
