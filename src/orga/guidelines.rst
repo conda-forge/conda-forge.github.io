@@ -153,7 +153,7 @@ As it comes up, each group should be able to define their own policy on how long
 Python
 ------
 For the Python language, conda-forge aims to keep package builds active and available for the current version and at least two preceding minor versions.
-Whenever Python 4.0 comes out we'll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously. 
+Whenever Python 4.0 comes out we'll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously.
 Fortunately, we can punt on that for now.
 The question of when to decide to drop an older language version remains.
 The guidance that we can provide here is two fold:
@@ -189,19 +189,15 @@ Generalities
 #. ``conda-forge-linter`` `checks <https://github.com/conda-forge/conda-smithy/blob/main/conda_smithy/lint_recipe.py>`__ pass successfully.
    Sometimes the linter will suggest modifications considered optional (hints); even if recommended, these are not required to accept the submission.
 #. The CI checks pass successfully in the required platforms. Exceptions:
-   - ``noarch: python`` can fail in platforms other than Linux (e.g. missing dependency).
-     For non-noarch packages, the failing platform should be skipped via ``skip: true  # [<platform selector>]``
-   - CI times out or runs out of storage because it tries to build all Python versions in the same job.
-     As long as one version passes, that's ok, since they will run individually in the resulting feedstock.
+   - ``noarch: python`` can fail in platforms other than Linux (e.g. missing dependency). For non-noarch packages, the failing platform should be skipped via ``skip: true  # [<platform selector>]``
+   - CI times out or runs out of storage because it tries to build all Python versions in the same job. As long as one version passes, that's ok, since they will run individually in the resulting feedstock.
 #. The submission fulfills the `pull request template checklist <https://github.com/conda-forge/staged-recipes/blob/main/.github/pull_request_template.md>`__.
 #. The license has been correctly identified and allows redistribution.
 #. Whenever possible, source should be obtained from a URL that provides a stable tarball (same SHA along time).
    Git or other SVC repositories should only be used as a last resort.
 #. The source should not contain vendored code. If it does:
-   - Package the vendored project separately and specify the needed dependency in the ``requirements`` section.
-     Preferred if the vendored code is needed at runtime.
-   - Allow the vendored code, but make sure the license files are included in the ``about.license`` field.
-     Usually ok if it's only a build-time dependency (e.g. headers-only library)
+   - Package the vendored project separately and specify the needed dependency in the ``requirements`` section. Preferred if the vendored code is needed at runtime.
+   - Allow the vendored code, but make sure the license files are included in the ``about.license`` field. Usually ok if it's only a build-time dependency (e.g. headers-only library)
 #. Host requirements contained in the :ref:`conda-forge pinnings <pinned_deps>` are *name-only*; i.e. they do not specify a separate version.
 #. Runtime requirements are not pinned too strictly without a justified reason.
    Thanks to repodata patches, we can afford to be optimistic about lower or upper bounds instead of single-version pins: ``>=1.4.2,<1.5`` is better than ``==1.4.2``.
