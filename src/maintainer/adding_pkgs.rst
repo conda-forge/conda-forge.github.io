@@ -863,6 +863,7 @@ If you want the name of the feedstock to be different from the package name in t
     feedstock-name: <name>
 
 Here, ``<name>`` is the name you would want for the feedstock.
+If not specified, the name will be taken from the top-level ``name`` field in ``meta.yaml``.
 
 Miscellaneous
 =============
