@@ -563,7 +563,11 @@ not necessarily the name of the conda package (they are sometimes different).
 Testing for an import will catch the bulk of the packaging errors, generally
 including the presence of dependencies. However, it does not assure that the
 package works correctly. In particular, it doesn't test if it works
-correctly with the versions of dependencies used.
+correctly with the versions of dependencies used. In some cases, the top level
+import name does not contain any executable code (e.g. a package with an empty
+``__init__.py``, or without any direct imports). This test would always pass!
+In these cases, it helps to add more imports explicitly targetting modules
+that do contain executable code (e.g. ``package_name.core``).
 
 It is good to run some other tests of the code itself (the test suite) if possible.
 
