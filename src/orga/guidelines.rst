@@ -224,6 +224,7 @@ Recommended:
 #. The package does not accidentally include a ``tests`` (also ``test``, ``_tests``, or similar) top-level package.
    The list of files is usually printed by ``pip install`` after the ``adding license file`` message.
    If this happens, upstream should modify their ``setuptools.find_packages()`` usage accordingly.
+   Alternatively, a patch can be applied. See `example <https://github.com/conda-forge/staged-recipes/pull/19166/commits/0284fc6da273031a4f93a1fea4533822cd4b385d>`__.
 #. The modules checked by ``test.imports`` are not empty (this can happen with placeholder ``__init__.py`` files in top-level packages).
 #. The versions reported by ``pip list`` and ``conda build`` logs match.
 #. ``pip check`` passes. See :ref:`pip_check` for more details.
@@ -240,3 +241,5 @@ Required:
 Recommended:
 
 #. SONAMEs follow naming recommendations given by upstream.
+#. If ABI compatibility is important for the package, ``run_exports`` are set accordingly.
+   See :ref:`pinned_deps` and the `conda-build docs <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#export-runtime-requirements>`__ for more information.
