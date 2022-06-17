@@ -115,7 +115,7 @@ Post staging process
 Feedstock repository structure
 ------------------------------
 
-Once the PR having the recipe for a package is merged in the ``staged-recipes`` repository, a new repository is created automatically called ``<package-name> feedstock`` which lies in the `feestock <https://github.com/conda-forge/feedstocks/>`__ repository.
+Once the PR having the recipe for a package is merged in the ``staged-recipes`` repository, a new repository is created automatically called ``<package-name> feedstock`` which lies in the `feedstock <https://github.com/conda-forge/feedstocks/>`__ repository.
 A feedstock is made up of a conda recipe (the instructions on what and how to build the package) and the necessary configuration files for automatic building using freely available continuous integration services.
 
 Each feedstock contains various files which are generated automatically using `conda-smithy <https://github.com/conda-forge/conda-smithy/>`__ which is a tool used for managing continuous integration and maintenance of the feedstocks. Broadly every feedstock has the following files : 
