@@ -181,24 +181,33 @@ To add new packages to conda-forge, users can submit a PR to ``staged-recipes`` 
 where it will undergo a series of automated checks and a code review.
 Any conda-forge member can perform a code review, but the final merge can only be done by the ``staged-recipes`` or ``core`` teams.
 The following sections suggest guidelines on how to perform a successful code review.
+We distinguish between "Required" and "Recommended", with the following meaning:
+
+- Required: These guidelines are very important and a requisite for PR acceptance. Exceptions are rare and usually require Core approval.
+- Recommended: These are considered "nice to have" features. In ideal conditions, all recipes should abide by them, but exceptions are tolerated as long as good reasons are provided.
 
 Generalities
 ------------
 
-#. Please adhere to our :ref:`code_of_conduct` in every communication.
+Required:
+
+#. All interactions in the review adhere to our :ref:`code_of_conduct`.
 #. ``conda-forge-linter`` `checks <https://github.com/conda-forge/conda-smithy/blob/main/conda_smithy/lint_recipe.py>`__ pass successfully.
-   Sometimes the linter will suggest modifications considered optional (hints); even if recommended, these are not required to accept the submission.
+   Sometimes the linter will also suggest modifications considered optional (hints); even if recommended, these are not required to accept the submission.
 #. The CI checks pass successfully in the required platforms. Exceptions:
    - ``noarch: python`` can fail in platforms other than Linux (e.g. missing dependency). For non-noarch packages, the failing platform should be skipped via ``skip: true  # [<platform selector>]``
    - CI times out or runs out of storage because it tries to build all Python versions in the same job. As long as one version passes, that's ok, since they will run individually in the resulting feedstock.
 #. The submission fulfills the `pull request template checklist <https://github.com/conda-forge/staged-recipes/blob/main/.github/pull_request_template.md>`__.
 #. The license has been correctly identified and allows redistribution.
-#. Whenever possible, source should be obtained from a URL that provides a stable tarball (same SHA along time).
-   Git or other SVC repositories should only be used as a last resort.
 #. The source should not contain vendored code. If it does:
    - Package the vendored project separately and specify the needed dependency in the ``requirements`` section. Preferred if the vendored code is needed at runtime.
    - Allow the vendored code, but make sure the license files are included in the ``about.license`` field. Usually ok if it's only a build-time dependency (e.g. headers-only library)
-#. Host requirements contained in the :ref:`conda-forge pinnings <pinned_deps>` are *name-only*; i.e. they do not specify a separate version.
+
+Recommended:
+
+#. Source should be obtained from a URL that provides a stable tarball (same SHA along time).
+   Git or other SVC repositories should only be used as a last resort.
+#. Host requirements contained in the :ref:`conda-forge pinnings <pinned_deps>` should be *name-only*; i.e. they do not specify a separate version.
 #. Runtime requirements are not pinned too strictly without a justified reason.
    Thanks to repodata patches, we can afford to be optimistic about lower or upper bounds instead of single-version pins: ``>=1.4.2,<1.5`` is better than ``==1.4.2``.
 #. The package should place its files under standard locations (e.g. executables under ``$PREFIX/bin``), unless a justified reason is provided.
@@ -206,17 +215,28 @@ Generalities
 Python-specific details
 -----------------------
 
+Required:
+
 #. ``noarch: python`` packages fulfill the :ref:`required criteria <noarch>` to be considered as such.
-#. The package does not accidentally include a ``test`` or ``tests`` top-level package.
+
+Recommended:
+
+#. The package does not accidentally include a ``tests`` (also ``test``, ``_tests``, or similar) top-level package.
    The list of files is usually printed by ``pip install`` after the ``adding license file`` message.
    If this happens, upstream should modify their ``setuptools.find_packages()`` usage accordingly.
-#. Import tests pass, and the imported modules are not empty (this can happen with placeholder ``__init__.py`` files in top-level packages).
+#. The modules checked by ``test.imports`` are not empty (this can happen with placeholder ``__init__.py`` files in top-level packages).
 #. The versions reported by ``pip list`` and ``conda build`` logs match.
+#. ``pip check`` passes. See :ref:`pip_check` for more details.
 
 Compiled objects
 ----------------
 
+Required:
+
 #. The source does not include compiled files.
    In principle, all compiled objects need to be generated in the CI, from source.
    Exceptions to this rule (e.g. binary repackaging) need to be approved explicitly.
+
+Recommended:
+
 #. SONAMEs follow naming recommendations given by upstream.

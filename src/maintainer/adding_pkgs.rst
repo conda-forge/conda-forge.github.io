@@ -571,23 +571,25 @@ that do contain executable code (e.g. ``package_name.core``).
 
 It is good to run some other tests of the code itself (the test suite) if possible.
 
+.. _pip_check:
+
 pip check
 ^^^^^^^^^
 
-For PyPI packages, it's common to include ``pip check`` as part of the
-``test.commands`` section:
+For PyPI packages, it's common to include ``pip check`` and ``pip list`` as part of the ``test.commands`` section:
 
 .. code-block:: yaml
 
     test:
       commands:
+        - pip list
         - pip check
 
 This command will check if all the dependencies specified in the Python
 metadata are satisfied. However, this command sometimes reports errors
 when nothing is wrong, mainly because differences in metadata between
-PyPI and conda-forge. If that's the case, this line can be commented out,
-silenced with ``|| true``, or replaced / complemented by ``pip list``:
+PyPI and conda-forge. If that's the case, this line can be commented out or
+silenced with ``|| true``:
 
 .. code-block:: yaml
 
