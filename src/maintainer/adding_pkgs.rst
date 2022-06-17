@@ -110,6 +110,41 @@ Post staging process
 * If you want to make a change to the recipe, send a :term:`PR` to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.
 
 
+.. _feedstock-repository-structure:
+
+Feedstock repository structure
+------------------------------
+
+Once the PR having the recipe for a package is merged in the ``staged-recipes`` repository, a new repository is created automatically called ``<package-name> feedstock`` which lies in the `feestock <https://github.com/conda-forge/feedstock>`__ repository.
+A feedstock is made up of a conda recipe (the instructions on what and how to build the package) and the necessary configuration files for automatic building using freely available continuous integration services.
+
+Each feedstock contains various files which are generated automatically using `conda-smithy <https://github.com/conda-forge/conda-smithy>`__ which is a tool used for managing continuous integration and maintenance of the feedstocks. Broadly every feedstock has the following files : 
+
+recipe
+......
+
+This folder contians the ``meta.yaml`` file in which everything is defined that is required to build and use the package.
+
+LICENSE.txt
+............
+
+This is an auto-generated license which is generated when feedstock is created. This license is different from the related package license, which you define while submitting the package recipe using ``license_file`` in the ``meta.yaml`` file.
+
+CI-files
+........
+
+These are the CI configuration files for service providers like CircleCI, AppVeyor and TravisCI, which makes it possible to build and upload installable packages to the conda-forge Anaconda-Cloud channel for Linux, Windows and OSX respectively.
+
+``.scripts``
+.............
+
+This folder contains build scripts for various environments.
+
+conda-forge.yml
+................
+
+This file is used to configure how conda-forge is set up and built. Making any changes in this files usually requires `rerending of the feedstock <https://conda-forge.org/docs/maintainer/updating_pkgs.html#dev-update-rerender>`__.
+
 Maintainer role
 ---------------
 
