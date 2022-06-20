@@ -115,10 +115,10 @@ Post staging process
 Feedstock repository structure
 ------------------------------
 
-Once the PR having the recipe for a package is merged in the ``staged-recipes`` repository, a new repository is created automatically called ``<package-name>-feedstock``.
-A feedstock is made up of a conda recipe (the instructions on what and how to build the package) and the necessary configuration files for automatic builds using freely available continuous integration services.
+Once the PR containing the recipe for a package is merged in the ``staged-recipes`` repository, a new repository is created automatically called ``<package-name>-feedstock``.
+A feedstock is made up of a conda recipe (the instructions on what and how to build the package) and the necessary configuration files for automatic builds using freely available continuous integration (CI) services.
 
-Each feedstock contains various files which are generated automatically using our automated provisioning tool `conda-smithy <https://github.com/conda-forge/conda-smithy/>`__. Broadly every feedstock has the following files:
+Each feedstock contains various files that are generated automatically using our automated provisioning tool `conda-smithy <https://github.com/conda-forge/conda-smithy/>`__. Broadly every feedstock has the following files:
 
 recipe
 ......
@@ -138,7 +138,7 @@ These are the CI configuration files for service providers like Azure and Travis
 conda-forge.yml
 ................
 
-This file is used to configure how the feedstock is set up and built. Making any changes in this file usually requires `rerending of the feedstock <https://conda-forge.org/docs/maintainer/updating_pkgs.html#dev-update-rerender>`__.
+This file is used to configure how the feedstock is set up and built. Making any changes in this file usually requires `rerending the feedstock <https://conda-forge.org/docs/maintainer/updating_pkgs.html#dev-update-rerender>`__.
 
 Maintainer role
 ---------------
