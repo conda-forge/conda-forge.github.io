@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Contributing packages &#8212; conda-forge 2022.06.17 documentation</title>
+    <title>Contributing packages &#8212; conda-forge 2022.06.23 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.17 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.23 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Contributing packages</a></li> 
@@ -117,7 +117,7 @@ repository from GitHub.</p></li>
 All the changes in the following steps will happen in the COPIED meta.yaml (i.e., <code class="docutils literal notranslate"><span class="pre">...staged-recipes/recipes/&lt;name-of-package&gt;/meta.yaml</span></code>).
 Please leave the example directory unchanged!</p></li>
 <li><p>Modify the copied recipe (meta.yml) as needed. To see how to modify meta.yaml, take a look at
-<a class="reference internal" href="#id1"><span class="std std-ref">The recipe meta.yaml</span></a>.</p></li>
+<a class="reference internal" href="#id2"><span class="std std-ref">The recipe meta.yaml</span></a>.</p></li>
 <li><p>Generate the SHA256 key for your source code archive, as described in the
 example recipe using the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> tool. As an alternative, you can also
 go to the package description on <a class="reference external" href="https://pypi.org">PyPi</a> from which you
@@ -163,6 +163,28 @@ test that the module can be imported, as described in the example.</p></li>
 <li><p>If this is your first contribution, you will be added to the conda-forge <a class="reference external" href="https://github.com/orgs/conda-forge/people">team</a> and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.</p></li>
 <li><p>If you want to make a change to the recipe, send a <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a> to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.</p></li>
 </ul>
+</section>
+<section id="feedstock-repository-structure">
+<span id="id1"></span><h3>Feedstock repository structure<a class="headerlink" href="#feedstock-repository-structure" title="Permalink to this heading">¶</a></h3>
+<p>Once the PR containing the recipe for a package is merged in the <code class="docutils literal notranslate"><span class="pre">staged-recipes</span></code> repository, a new repository is created automatically called <code class="docutils literal notranslate"><span class="pre">&lt;package-name&gt;-feedstock</span></code>.
+A feedstock is made up of a conda recipe (the instructions on what and how to build the package) and the necessary configuration files for automatic builds using freely available continuous integration (CI) services.</p>
+<p>Each feedstock contains various files that are generated automatically using our automated provisioning tool <a class="reference external" href="https://github.com/conda-forge/conda-smithy/">conda-smithy</a>. Broadly every feedstock has the following files:</p>
+<section id="recipe">
+<h4>recipe<a class="headerlink" href="#recipe" title="Permalink to this heading">¶</a></h4>
+<p>This folder contains the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file and any other files/scripts needed to build the package.</p>
+</section>
+<section id="license-txt">
+<h4>LICENSE.txt<a class="headerlink" href="#license-txt" title="Permalink to this heading">¶</a></h4>
+<p>This file is the license for the recipe itself. This license is different from the package license, which you define while submitting the package recipe using <code class="docutils literal notranslate"><span class="pre">license_file</span></code> in the <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file.</p>
+</section>
+<section id="ci-files">
+<h4>CI-files<a class="headerlink" href="#ci-files" title="Permalink to this heading">¶</a></h4>
+<p>These are the CI configuration files for service providers like Azure and TravisCI.</p>
+</section>
+<section id="conda-forge-yml">
+<h4>conda-forge.yml<a class="headerlink" href="#conda-forge-yml" title="Permalink to this heading">¶</a></h4>
+<p>This file is used to configure how the feedstock is set up and built. Making any changes in this file usually requires <a class="reference external" href="https://conda-forge.org/docs/maintainer/updating_pkgs.html#dev-update-rerender">rerendering the feedstock</a>.</p>
+</section>
 </section>
 <section id="maintainer-role">
 <h3>Maintainer role<a class="headerlink" href="#maintainer-role" title="Permalink to this heading">¶</a></h3>
@@ -236,7 +258,7 @@ staged-recipes directory.</p>
 </section>
 </section>
 <section id="the-recipe-meta-yaml">
-<span id="id1"></span><h2>The recipe meta.yaml<a class="headerlink" href="#the-recipe-meta-yaml" title="Permalink to this heading">¶</a></h2>
+<span id="id2"></span><h2>The recipe meta.yaml<a class="headerlink" href="#the-recipe-meta-yaml" title="Permalink to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file in the recipe directory is at the heart of every conda package.
 It defines everything that is required to build and use the package.</p>
 <p><code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> is in <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">yaml</a> format, augmented with <a class="reference external" href="http://jinja.pocoo.org/">Jinja</a> templating.</p>
@@ -320,7 +342,7 @@ Pure Python packages almost never need them.</p>
 <p>Remember to always add <code class="docutils literal notranslate"><span class="pre">pip</span></code> to the host requirements.</p>
 </section>
 <section id="use-pip">
-<span id="id3"></span><h4>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this heading">¶</a></h4>
+<span id="id4"></span><h4>Use pip<a class="headerlink" href="#use-pip" title="Permalink to this heading">¶</a></h4>
 <p>Normally Python packages should use this line:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">PYTHON</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">-vv&quot;</span><span class="w"></span>
@@ -701,7 +723,7 @@ It is always your responsibility to double-check that all licenses are included 
 <section id="extra">
 <h3>Extra<a class="headerlink" href="#extra" title="Permalink to this heading">¶</a></h3>
 <section id="recipe-maintainer">
-<span id="id4"></span><h4>Recipe Maintainer<a class="headerlink" href="#recipe-maintainer" title="Permalink to this heading">¶</a></h4>
+<span id="id5"></span><h4>Recipe Maintainer<a class="headerlink" href="#recipe-maintainer" title="Permalink to this heading">¶</a></h4>
 <p>A maintainer is an individual who is responsible for maintaining and updating one or more feedstock repositories and packages as well as their future versions. They have push access to the feedstock repositories of only the packages they maintain and can merge pull requests into it.</p>
 <p>Contributing a recipe for package makes you the <code class="docutils literal notranslate"><span class="pre">maintainer</span></code> of that package automatically.
 See <a class="reference external" href="https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role">Maintainers Role</a> and <a class="reference external" href="https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-packages">Maintaining Packages</a> to learn more about what are the things that maintainers do.
@@ -710,7 +732,7 @@ If you wish to be a maintainer of a certain package, you should contact current 
 <p>where username is the GitHub username of the new maintainer to be added. Please refer to <a class="reference external" href="https://conda-forge.org/docs/orga/guidelines.html#becoming-a-maintainer">Becoming a maintainer</a> and <a class="reference external" href="https://conda-forge.org/docs/maintainer/updating_pkgs.html#updating-the-maintainer-list">Updating the maintainer</a> for detailed instructions.</p>
 </section>
 <section id="feedstock-name">
-<span id="id5"></span><h4>Feedstock name<a class="headerlink" href="#feedstock-name" title="Permalink to this heading">¶</a></h4>
+<span id="id6"></span><h4>Feedstock name<a class="headerlink" href="#feedstock-name" title="Permalink to this heading">¶</a></h4>
 <p>If you want the name of the feedstock to be different from the package name in the staged-recipes, you can use the <code class="docutils literal notranslate"><span class="pre">feedstock-name</span></code> directive in the recipe of that package, like this:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">extra</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">feedstock-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;name&gt;</span><span class="w"></span>
@@ -723,7 +745,7 @@ If you wish to be a maintainer of a certain package, you should contact current 
 <section id="miscellaneous">
 <h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this heading">¶</a></h2>
 <section id="activate-scripts">
-<span id="id6"></span><h3>Activate scripts<a class="headerlink" href="#activate-scripts" title="Permalink to this heading">¶</a></h3>
+<span id="id7"></span><h3>Activate scripts<a class="headerlink" href="#activate-scripts" title="Permalink to this heading">¶</a></h3>
 <p>Recipes are allowed to have activate scripts, which will be <code class="docutils literal notranslate"><span class="pre">source</span></code>d or
 <code class="docutils literal notranslate"><span class="pre">call</span></code>ed when the environment is activated. It is generally recommended to avoid using
 activate scripts when another option is possible because people do not always
@@ -829,6 +851,13 @@ These expressions are written in <a class="reference external" href="http://jinj
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#feedback-and-revision">Feedback and revision</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#post-staging-process">Post staging process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#feedstock-repository-structure">Feedstock repository structure</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#recipe">recipe</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#license-txt">LICENSE.txt</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ci-files">CI-files</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#conda-forge-yml">conda-forge.yml</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#maintainer-role">Maintainer role</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#adding-multiple-packages-at-once">Adding multiple packages at once</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#synchronizing-fork-for-future-use">Synchronizing fork for future use</a></li>
@@ -971,7 +1000,7 @@ These expressions are written in <a class="reference external" href="http://jinj
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.17 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.23 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Contributing packages</a></li> 
