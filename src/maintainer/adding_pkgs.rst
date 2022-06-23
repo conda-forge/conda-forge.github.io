@@ -110,6 +110,36 @@ Post staging process
 * If you want to make a change to the recipe, send a :term:`PR` to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.
 
 
+.. _feedstock-repository-structure:
+
+Feedstock repository structure
+------------------------------
+
+Once the PR containing the recipe for a package is merged in the ``staged-recipes`` repository, a new repository is created automatically called ``<package-name>-feedstock``.
+A feedstock is made up of a conda recipe (the instructions on what and how to build the package) and the necessary configuration files for automatic builds using freely available continuous integration (CI) services.
+
+Each feedstock contains various files that are generated automatically using our automated provisioning tool `conda-smithy <https://github.com/conda-forge/conda-smithy/>`__. Broadly every feedstock has the following files:
+
+recipe
+......
+
+This folder contains the ``meta.yaml`` file and any other files/scripts needed to build the package.
+
+LICENSE.txt
+............
+
+This file is the license for the recipe itself. This license is different from the package license, which you define while submitting the package recipe using ``license_file`` in the ``meta.yaml`` file.
+
+CI-files
+........
+
+These are the CI configuration files for service providers like Azure and TravisCI.
+
+conda-forge.yml
+................
+
+This file is used to configure how the feedstock is set up and built. Making any changes in this file usually requires `rerendering the feedstock <https://conda-forge.org/docs/maintainer/updating_pkgs.html#dev-update-rerender>`__.
+
 Maintainer role
 ---------------
 
