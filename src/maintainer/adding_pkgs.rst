@@ -138,7 +138,7 @@ These are the CI configuration files for service providers like Azure and Travis
 conda-forge.yml
 ................
 
-This file is used to configure how the feedstock is set up and built. Making any changes in this file usually requires `rerending the feedstock <https://conda-forge.org/docs/maintainer/updating_pkgs.html#dev-update-rerender>`__.
+This file is used to configure how the feedstock is set up and built. Making any changes in this file usually requires `rerendering the feedstock <https://conda-forge.org/docs/maintainer/updating_pkgs.html#dev-update-rerender>`__.
 
 Maintainer role
 ---------------
