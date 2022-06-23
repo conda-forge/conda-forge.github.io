@@ -89,9 +89,25 @@
 <li><p>If it is an R package from <a class="reference external" href="https://cran.r-project.org/">CRAN</a>, kindly
 start by using the <a class="reference external" href="https://github.com/bgruening/conda_r_skeleton_helper">conda-forge helper script for R recipes</a> instead.
 Then if necessary, you can make manual edits to the recipe.</p></li>
-<li><p>If it is a python package, you can generate the recipe as a starting point with <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>.
-Use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">grayskull</span></code> to install <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>, followed by <code class="docutils literal notranslate"><span class="pre">grayskull</span> <span class="pre">pypi</span> <span class="pre">your_package_name</span></code> to generate the recipe. Note that you do <em>not</em> necessarily have to use <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>, and the
-recipes produced by <code class="docutils literal notranslate"><span class="pre">grayskull</span></code> might need to be reviewed and edited. Read more about <code class="docutils literal notranslate"><span class="pre">grayskull</span></code> and how to use it <a class="reference external" href="https://github.com/conda-incubator/grayskull#introduction">here</a>.</p></li>
+<li><p>If it is a python package, you can generate the recipe as a starting point with <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference external" href="https://github.com/conda-incubator/grayskull">Grayskull</a> is an automatic conda recipe generator. The goal of this project is to generate concise recipes
+for conda-forge and eventually replace conda skeleton. Presently, Grayskull can generate recipes for Python packages available on PyPI and also those not published on PyPI and only available as GitHub repositories.</p>
+<p>Installation and usage of <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>:</p>
+<ul class="simple">
+<li><p>Create a new environment using : <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">create</span> <span class="pre">--name</span> <span class="pre">MY_ENV</span></code>. Replace <code class="docutils literal notranslate"><span class="pre">MY_ENV</span></code> with the environment name.</p></li>
+<li><p>Activate this new environment : <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">MY_ENV</span></code>.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">grayskull</span></code> to install <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>.</p></li>
+<li><p>Followed by <code class="docutils literal notranslate"><span class="pre">grayskull</span> <span class="pre">pypi</span> <span class="pre">--strict-conda-forge</span> <span class="pre">YOUR_PACKAGE_NAME</span></code> to generate the recipe. Replace <code class="docutils literal notranslate"><span class="pre">YOUR_PACKAGE_NAME</span></code> with the package name.</p></li>
+</ul>
+</div>
+<p>You do <em>not</em> necessarily have to use <code class="docutils literal notranslate"><span class="pre">grayskull</span></code>, and the recipes produced by <code class="docutils literal notranslate"><span class="pre">grayskull</span></code> might need to be reviewed and edited.
+Read more about <code class="docutils literal notranslate"><span class="pre">grayskull</span></code> and how to use it <a class="reference external" href="https://github.com/conda-incubator/grayskull#introduction">here</a>.</p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
 <li><p>If it’s none of the above, generate a recipe with the help of <a class="reference external" href="https://github.com/conda-forge/staged-recipes/tree/master/recipes/example">the example recipe</a> in the <a class="reference external" href="https://github.com/conda-forge/staged-recipes">staged-recipes repository</a> and modify it as necessary.</p></li>
 </ol>
 <p>Your final recipe should have no comments (unless they’re actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.</p>
@@ -191,7 +207,7 @@ A feedstock is made up of a conda recipe (the instructions on what and how to bu
 <p>The maintainer’s job is to:</p>
 <ul class="simple">
 <li><p>Keep the feedstock updated by merging eventual maintenance <a class="reference internal" href="../misc/00_intro.html#term-PR"><span class="xref std std-term">PR</span></a>s from conda-forge’s bots.</p></li>
-<li><p>Keep the feedstock on par with new releases of the source package by</p>
+<li><p>Keep the feedstock on par with new releases of the source package by:</p>
 <ul>
 <li><p>Bumping the version number and checksum.</p></li>
 <li><p>Making sure that the feedstock’s requirements stay accurate.</p></li>
