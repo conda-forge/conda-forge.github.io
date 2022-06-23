@@ -24,13 +24,28 @@ Generating the recipe
 
 There are, currently, three ways to generate a recipe:
 
-#. If it is an R package from `CRAN <https://cran.r-project.org/>`_, kindly
+1. If it is an R package from `CRAN <https://cran.r-project.org/>`_, kindly
    start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_ instead.
    Then if necessary, you can make manual edits to the recipe.
-#. If it is a python package, you can generate the recipe as a starting point with ``grayskull``.
-   Use ``conda install -c conda-forge grayskull`` to install ``grayskull``, followed by ``grayskull pypi your_package_name`` to generate the recipe. Note that you do *not* necessarily have to use ``grayskull``, and the
-   recipes produced by ``grayskull`` might need to be reviewed and edited. Read more about ``grayskull`` and how to use it `here <https://github.com/conda-incubator/grayskull#introduction>`__.
-#. If it's none of the above, generate a recipe with the help of `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`_ and modify it as necessary.
+
+2. If it is a python package, you can generate the recipe as a starting point with ``grayskull``.
+
+  .. note::
+
+    `Grayskull <https://github.com/conda-incubator/grayskull>`_ is an automatic conda recipe generator. The goal of this project is to generate concise recipes
+    for conda-forge and eventually replace conda skeleton. Presently, Grayskull can generate recipes for Python packages available on PyPI and also those not published on PyPI and only available as GitHub repositories.
+
+    Installation and usage of ``grayskull``:
+
+    - Create a new environment using : ``conda create --name MY_ENV``. Replace ``MY_ENV`` with the environment name.
+    - Activate this new environment : ``conda activate MY_ENV``.
+    - Run ``conda install -c conda-forge grayskull`` to install ``grayskull``.
+    - Followed by ``grayskull pypi --strict-conda-forge YOUR_PACKAGE_NAME`` to generate the recipe. Replace ``YOUR_PACKAGE_NAME`` with the package name.
+
+  You do *not* necessarily have to use ``grayskull``, and the recipes produced by ``grayskull`` might need to be reviewed and edited.
+  Read more about ``grayskull`` and how to use it `here <https://github.com/conda-incubator/grayskull#introduction>`__.
+
+3. If it's none of the above, generate a recipe with the help of `the example recipe <https://github.com/conda-forge/staged-recipes/tree/master/recipes/example>`_ in the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`_ and modify it as necessary.
 
 Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
 
@@ -146,7 +161,7 @@ Maintainer role
 The maintainer's job is to:
 
 - Keep the feedstock updated by merging eventual maintenance :term:`PR`\ s from conda-forge's bots.
-- Keep the feedstock on par with new releases of the source package by
+- Keep the feedstock on par with new releases of the source package by:
 
   - Bumping the version number and checksum.
   - Making sure that the feedstock's requirements stay accurate.
