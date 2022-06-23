@@ -65,10 +65,10 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
 
 **How does regro-cf-autotick-bot create automatic version updates?**
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-The `regro-cf-autotick-bot <https://github.com/regro/autotick-bot>`__ continuously searches on loop for any PyPI releases, GitHub releases, and any other sources of versions when any updates are released. The source code that gets executed in the loop comes from `cf-scripts <https://github.com/regro/cf-scripts>`__, which contains the code to detect versions and submit PRs, you can read more about cf-scripts `here <https://regro.github.io/cf-scripts/index.html>`__.
+The `regro-cf-autotick-bot <https://github.com/regro/autotick-bot>`__ continuously searches on a loop for any PyPI releases, GitHub releases, and any other sources of versions when any updates are released. The source code that gets executed in the loop comes from `cf-scripts repository <https://github.com/regro/cf-scripts>`__, which contains the code to detect versions and submit PRs. Visit `cf-scripts <https://regro.github.io/cf-scripts/index.html>`__ to read more about it.
 
-Sometimes bot may take several hours to search for these updates. You can also check `here <https://conda-forge.org/status/#version_updates>`__ for all the pending version updates. These version updates are pending either because an updated version was found, but a PR wasn't opened or the bot might have had an error while making the PR.
-If you could not find a version here, then the chances are that the bot couldn't find it.
+Sometimes the bot may take several hours to search for these updates. You can also check `status of version updates <https://conda-forge.org/status/#version_updates>`__ for all the pending version updates. These version updates are pending either because an updated version was found, but a PR wasn't opened yet, or because the bot might have had an error while making the PR.
+If you can't find a version here, then the chances are that the bot couldn't find it either.
 
 The bot stops making version update PRs when the package feedstock has three or more open version update PRs. The package's maintainer should close or merge those PRs for the bot to work correctly for future version updates.
 
