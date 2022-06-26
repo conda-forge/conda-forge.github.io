@@ -65,7 +65,7 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
 
 **How does regro-cf-autotick-bot create automatic version updates?**
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-The `regro-cf-autotick-bot <https://github.com/regro/autotick-bot>`__ continuously searches on a loop for any PyPI releases, GitHub releases, and any other sources of versions when any updates are released. The source code that gets executed in the loop comes from `cf-scripts repository <https://github.com/regro/cf-scripts>`__, which contains the code to detect versions and submit PRs. Visit `cf-scripts <https://regro.github.io/cf-scripts/index.html>`__ to read more about it.
+The `regro-cf-autotick-bot <https://github.com/regro/autotick-bot>`__ continuously searches on a loop for any PyPI releases, GitHub releases, and any other sources of versions when any updates are released. The source code that gets executed in the loop comes from the `cf-scripts repository <https://github.com/regro/cf-scripts>`__, which contains the code to detect versions and submit PRs. Visit `cf-scripts <https://regro.github.io/cf-scripts/index.html>`__ to read more about it.
 
 Sometimes the bot may take several hours to search for these updates. You can also check `status of version updates <https://conda-forge.org/status/#version_updates>`__ for all the pending version updates. These version updates are pending either because an updated version was found, but a PR wasn't opened yet, or because the bot might have had an error while making the PR.
 If you can't find a version here, then the chances are that the bot couldn't find it either.
