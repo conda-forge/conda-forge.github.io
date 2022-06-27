@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Becoming involved &#8212; conda-forge 2022.06.23 documentation</title>
+    <title>Becoming involved &#8212; conda-forge 2022.06.27 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="faq.html" title="FAQ"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.23 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.27 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Becoming involved</a></li> 
@@ -98,11 +98,51 @@ little pencil icon in its top-right corner that lets you open it up for editing.
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://help.github.com/articles/fork-a-repo/">Fork</a> the
 <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io">conda-forge.github.io repository</a>.</p></li>
-<li><p><a class="reference external" href="https://help.github.com/articles/cloning-a-repository/">Clone</a> this fork onto your computer.</p></li>
-<li><p><a class="reference external" href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging">Check out</a>
-a new branch deriving from <code class="docutils literal notranslate"><span class="pre">main</span></code> to do your work.</p></li>
-<li><p>Make and <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository">commit</a>
-your changes.</p></li>
+<li><p>Clone this fork onto your local machine:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/&lt;your-username&gt;/conda-forge.github.io.git</span></code></p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>Create a new branch deriving from <code class="docutils literal notranslate"><span class="pre">main</span></code> to do your work:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">&lt;new-branch-name&gt;</span></code></p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>Run the following commands:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-f</span> <span class="pre">./.ci_scripts/environment.yml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">conda-forge-docs</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">newsfeed</span> <span class="pre">&amp;&amp;</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--no-deps</span> <span class="pre">.</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">../src</span></code></p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>Make your changes and run the following command to check them:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code></p></li>
+</ul>
+<p>You can check the changes locally by opening the html files in <code class="docutils literal notranslate"><span class="pre">src/_build/html</span></code>.</p>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p>Add and commit your changes:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;your</span> <span class="pre">commit</span> <span class="pre">message&quot;</span></code></p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="7">
 <li><p>Submit a <a class="reference external" href="https://help.github.com/articles/about-pull-requests/">pull request</a> to the main repository proposing your changes.</p></li>
 </ol>
 <p>Happy contributing!</p>
@@ -204,7 +244,7 @@ your changes.</p></li>
         <li class="right" >
           <a href="faq.html" title="FAQ"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.06.23 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.06.27 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Becoming involved</a></li> 
