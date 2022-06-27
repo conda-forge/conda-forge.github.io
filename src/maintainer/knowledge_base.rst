@@ -1518,3 +1518,61 @@ The tl;dr here is that conda sorts as follows:
 So make sure that you **tag** your package in such a way that the package name
 that conda-build spits out will sort the package uploaded with an ``rc`` label
 higher than the package uploaded with the ``dev`` label.
+
+Perl packages
+=============
+
+Perl has three standard install locations: **core**, **vendor**, and **site**. Here, **core** is used only for the perl itself, **vendor** is used for installing any other conda-forge packages, and **site** is used for the user to install things locally from sources other than conda-forge.
+
+The most commonly used build system for `perl packages <https://github.com/conda-forge/perl-file-which-feedstock>`__ is ``ExtUtils::MakeMaker``. For the archetypical packaging of packages of this form, you can have a look at `perl-file-which recipe <https://github.com/conda-forge/perl-file-which-feedstock/blob/main/recipe/meta.yaml>`__.
+
+A few things to note in `perl-file-which recipe <https://github.com/conda-forge/perl-file-which-feedstock/blob/main/recipe/meta.yaml>`__ are:
+
+  * The ``name`` is composed of ``perl-`` **+** the lower-cased version of the CPAN name.
+
+      .. code-block::
+
+          package:
+            name: perl-{{ name|lower }}
+            version: {{ version }}
+
+  * The requirements section contain ``make`` for build directive, ``perl`` and ``perl-extutils-makemaker`` for host directive, and ``perl`` for run directive.
+
+      .. code-block::
+
+          requirements:
+            build:
+              - make
+            host:
+              - perl
+              - perl-extutils-makemaker
+            run:
+              - perl
+
+  * The test section contains ``imports`` which lists the CPAN module that can be used in perl.
+
+      .. code-block::
+
+          test:
+            imports:
+              - File::Which
+
+
+The build section in the ``meta.yaml`` file should be something like this :
+
+.. code-block::
+
+  build:
+    number: 0
+    noarch: generic
+    script:
+      - perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1
+      - make
+      - make test
+      - make install VERBINST=1
+
+here the line with ``Makefile.PL`` is important as it guarantees installation into the vendor section, and it also helps in non-interference with the standard files by the ``NO_PERLLOCAL`` and ``NO_PACKLIST`` switches.
+
+.. note::
+
+  ``noarch: generic`` should be used only if the package is a pure perl package.
