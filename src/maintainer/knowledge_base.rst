@@ -1524,11 +1524,11 @@ Perl packages
 
 Perl has three standard install locations: **core**, **vendor**, and **site**. Here, **core** is used only for the perl itself, **vendor** is used for installing any other conda-forge packages, and **site** is used for the user to install things locally from sources other than conda-forge.
 
-The most commonly used build system for `perl packages <https://github.com/conda-forge/perl-file-which-feedstock>`__ is ``ExtUtils::MakeMaker``. For the archetypical packaging of packages of this form, you can have a look at `perl-file-which recipe <https://github.com/conda-forge/perl-file-which-feedstock/blob/main/recipe/meta.yaml>`__.
+The most commonly used build system for `perl packages <https://github.com/conda-forge/perl-file-which-feedstock>`__ is ``ExtUtils::MakeMaker``. For typical packaging of packages of this form, you can have a look at `perl-file-which recipe <https://github.com/conda-forge/perl-file-which-feedstock/blob/main/recipe/meta.yaml>`__.
 
-A few things to note in `perl-file-which recipe <https://github.com/conda-forge/perl-file-which-feedstock/blob/main/recipe/meta.yaml>`__ are:
+A few things to note in the `perl-file-which recipe <https://github.com/conda-forge/perl-file-which-feedstock/blob/main/recipe/meta.yaml>`__ are:
 
-  * The ``name`` is composed of ``perl-`` **+** the lower-cased version of the CPAN name.
+  * The ``name`` is composed of ``perl-`` **+** the lowercase version of the CPAN name.
 
       .. code-block::
 
@@ -1536,7 +1536,7 @@ A few things to note in `perl-file-which recipe <https://github.com/conda-forge/
             name: perl-{{ name|lower }}
             version: {{ version }}
 
-  * The requirements section contain ``make`` for build directive, ``perl`` and ``perl-extutils-makemaker`` for host directive, and ``perl`` for run directive.
+  * The requirements section contains ``make`` for build, ``perl`` and ``perl-extutils-makemaker`` for host, and ``perl`` for run, in addition to any other packages that the particular Perl module being bullt may require.
 
       .. code-block::
 
@@ -1549,7 +1549,7 @@ A few things to note in `perl-file-which recipe <https://github.com/conda-forge/
             run:
               - perl
 
-  * The test section contains ``imports`` which lists the CPAN module that can be used in perl.
+  * The test section contains ``imports``, which lists the CPAN module that can be used in perl.
 
       .. code-block::
 
@@ -1558,7 +1558,7 @@ A few things to note in `perl-file-which recipe <https://github.com/conda-forge/
               - File::Which
 
 
-The build section in the ``meta.yaml`` file should be something like this :
+The build section in the ``meta.yaml`` file should be something like this:
 
 .. code-block::
 
@@ -1571,8 +1571,8 @@ The build section in the ``meta.yaml`` file should be something like this :
       - make test
       - make install VERBINST=1
 
-here the line with ``Makefile.PL`` is important as it guarantees installation into the vendor section, and it also helps in non-interference with the standard files by the ``NO_PERLLOCAL`` and ``NO_PACKLIST`` switches.
+Notable here is ``INSTALLDIRS=vendor``, which selects the appropriate install location for a conda-forge package, and the ``NO_PERLLOCAL`` and ``NO_PACKLIST`` switches, which suppress various CPAN tracking files that are unnecessary when the module is being externally packaged via conda.
 
 .. note::
 
-  ``noarch: generic`` should be used only if the package is a pure perl package.
+  ``noarch: generic`` should be used only if the package is a pure Perl package.
