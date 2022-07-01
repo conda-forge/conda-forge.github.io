@@ -1524,7 +1524,7 @@ Perl packages
 
 Perl has three standard install locations: **core**, **vendor**, and **site**. Here, **core** is used only for the perl itself, **vendor** is used for installing any other conda-forge packages, and **site** is used for the user to install things locally from sources other than conda-forge.
 
-The most commonly used build system for `perl packages <https://github.com/conda-forge/perl-file-which-feedstock>`__ is ``ExtUtils::MakeMaker``. For typical packaging of packages of this form, you can have a look at `perl-file-which recipe <https://github.com/conda-forge/perl-file-which-feedstock/blob/main/recipe/meta.yaml>`__.
+The most commonly used build system for `Perl packages <https://github.com/conda-forge/perl-file-which-feedstock>`__ is ``ExtUtils::MakeMaker``. For typical packaging of packages of this form, you can have a look at the `perl-file-which recipe <https://github.com/conda-forge/perl-file-which-feedstock/blob/main/recipe/meta.yaml>`__.
 
 A few things to note in the `perl-file-which recipe <https://github.com/conda-forge/perl-file-which-feedstock/blob/main/recipe/meta.yaml>`__ are:
 
@@ -1549,7 +1549,7 @@ A few things to note in the `perl-file-which recipe <https://github.com/conda-fo
             run:
               - perl
 
-  * The test section contains ``imports``, which lists the CPAN module that can be used in perl.
+  * The test section contains ``imports``, which lists the CPAN module that can be used in Perl.
 
       .. code-block::
 
