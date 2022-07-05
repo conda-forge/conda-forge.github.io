@@ -1571,8 +1571,12 @@ The build section in the ``meta.yaml`` file should be something like this:
       - make test
       - make install VERBINST=1
 
-Notable here is ``INSTALLDIRS=vendor``, which selects the appropriate install location for a conda-forge package, and the ``NO_PERLLOCAL`` and ``NO_PACKLIST`` switches, which suppress various CPAN tracking files that are unnecessary when the module is being externally packaged via conda.
+Notable here is ``INSTALLDIRS=vendor``, which selects the appropriate install location for a conda-forge package, and the ``NO_PERLLOCAL`` and ``NO_PACKLIST`` switches, which suppress various CPAN tracking files (as described in the `ExtUtils::MakeMaker documentation <https://perldoc.perl.org/ExtUtils::MakeMaker>`__) that are unnecessary when the module is being externally packaged via conda.
 
 .. note::
 
   ``noarch: generic`` should be used only if the package is a pure Perl package.
+
+The other build system used for Perl packages is  ``Module::Build``. ``Module::Build`` is a system for building, testing, and installing Perl modules. 
+It is an alternative to ``ExtUtils::MakeMaker``. It does not require a ``make`` on your system - most of the ``Module::Build`` code is pure-perl and written in a very cross-platform way.
+To know more about ``Module::Build`` and difference between the two build systems read `Comparision <https://metacpan.org/pod/Module::Build#COMPARISON>`__ and `Module::Build <https://metacpan.org/pod/Module::Build>`__.
