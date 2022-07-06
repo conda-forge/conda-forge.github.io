@@ -565,7 +565,7 @@ Currently only:
 
 woodpecker
 ----------
-This dictates the behavior of the woodpecker CI service (a fork of Dune).
+This dictates the behavior of the woodpecker CI service (a fork of Drone).
 https://github.com/woodpecker-ci/woodpecker
 It is a mapping for Woodpecker-specific configuration options.
 For example:
