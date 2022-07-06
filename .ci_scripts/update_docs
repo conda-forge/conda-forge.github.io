@@ -14,11 +14,6 @@ popd
 
 python .ci_scripts/generate_html.py
 
-# rebuild elm
-# uncomment to restore search
-# npm install uglify-js --global
-# ./elm-compile.xsh
-
 # build docs into docs/; preserve old README file
 mv docs/README docs-README
 rm -rf docs/
