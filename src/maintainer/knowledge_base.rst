@@ -1578,5 +1578,11 @@ Notable here is ``INSTALLDIRS=vendor``, which selects the appropriate install lo
   ``noarch: generic`` should be used only if the package is a pure Perl package.
 
 The other build system used for Perl packages is  ``Module::Build``. ``Module::Build`` is a system for building, testing, and installing Perl modules. 
-It is an alternative to ``ExtUtils::MakeMaker``. It does not require a ``make`` on your system - most of the ``Module::Build`` code is pure-perl and written in a very cross-platform way.
-To know more about ``Module::Build`` and difference between the two build systems read `Comparision <https://metacpan.org/pod/Module::Build#COMPARISON>`__ and `Module::Build <https://metacpan.org/pod/Module::Build>`__.
+It is an alternative to ``ExtUtils::MakeMaker``. It does not require ``make`` - most of the ``Module::Build`` code is pure Perl and written in a very cross-platform way.
+The recipe of some of the Perl packages that uses ``Module::Build`` are :
+
+  - `perl-math-derivative <https://github.com/bioconda/bioconda-recipes/blob/master/recipes/perl-math-derivative/meta.yaml>`__
+  - `perl-graphics-colornames <https://github.com/bioconda/bioconda-recipes/blob/master/recipes/perl-graphics-colornames/meta.yaml>`__
+  - `mirnature <https://github.com/bioconda/bioconda-recipes/blob/master/recipes/mirnature/meta.yaml>`__
+
+To know more about ``Module::Build`` and difference between the two build systems read `Comparison <https://metacpan.org/pod/Module::Build#COMPARISON>`__ and `Module::Build <https://metacpan.org/pod/Module::Build>`__.
