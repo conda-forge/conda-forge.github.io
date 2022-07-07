@@ -1524,5 +1524,7 @@ higher than the package uploaded with the ``dev`` label.
 Using ``arch_rebuild.txt``
 ==========================
 
-You can add a feedstock to ``arch-rebuild.txt`` if it requires rebuilding with different architectures/platforms (such as ppc64le or aarch64).
+You can add a feedstock to ``arch-rebuild.txt`` if it requires rebuilding with different architectures/platforms (such as ppc64le or aarch64). To add the feedstock to ``arch_rebuild.txt``, you would need to open a PR to `conda-forge-pinning-feedstock repository <https://github.com/conda-forge/conda-forge-pinning-feedstock>`__.
+Once the PR is merged, your feedstock will be added to the ``arch_rebuild.txt``.
 After adding the feedstock to the ``arch_rebuild.txt`` file, the migration bot goes through the list of feedstocks and opens a migration PR for the feedstocks and their dependencies, enabling the aarch64/ppc64le builds.
+
