@@ -35,7 +35,7 @@ Generating the recipe
 
 There are, currently, three ways to generate a recipe:
 
-#. If the package is a python package on the pypi repository, you can generate the recipe with the help of Grayskull.
+#. If the package is a python package on the PyPI repository, you can generate the recipe with the help of Grayskull.
 #. If it is an R package from `CRAN <https://cran.r-project.org/>`_, kindly
    start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_ instead.
    Then if necessary, you can make manual edits to the recipe.
@@ -56,7 +56,7 @@ Your final recipe should have no comments (unless they're actually relevant to t
      start by using the `conda-forge helper script for R recipes <https://github.com/bgruening/conda_r_skeleton_helper>`_ instead.
      Then if necessary, you can make manual edits to the recipe.
 
-   .. tab:: Grayskull
+   .. tab:: PyPI
 
 
       Generate a python package recipe with Grayskull:
@@ -64,11 +64,11 @@ Your final recipe should have no comments (unless they're actually relevant to t
       #. Install grayskull using conda through the conda-forge channel with the command: ``conda install -c conda-forge grayskull``
       #. Fork and clone the `staged-recipes <https://github.com/conda-forge/staged-recipes>`_ repository from GitHub.
       #. Checkout a new branch from the staged-recipes ``main`` branch.
-      #. Through CLI, cd inside the 'staged-recipes/recipes' directory.
-      #. Call grayskull and pass the pypi repository, followed by the name of the package you want to contribute to conda-forge. (i.e ``grayskull pypi <name-of-package>`` **OR** Use grayskull ``pypi <name-of-package> --strict-conda-forge`` to remove some selectors which are not necessary for conda-forge and adapt recipes to fit better in the conda-forge ecosystem.
+      #. Using your command line or terminal, cd inside the 'staged-recipes/recipes' directory.
+      #. Call grayskull and pass the PyPI repository, followed by the name of the package you want to contribute to conda-forge. (i.e ``grayskull pypi <name-of-package>`` **OR** Use grayskull ``pypi <name-of-package> --strict-conda-forge`` to remove some selectors which are not necessary for conda-forge and adapt recipes to fit better in the conda-forge ecosystem.
         Grayskull will create a folder with the same name as the package in the ‘recipes’ folder of the ‘staged-recipes’ directory. This folder will contain the meta.yaml file and also the license file if the package includes a license in the PyPI distribution.
-      #. Go through the generated ``meta.yaml`` file and remove all irrelevant comments in the ``meta.yaml``  file.. For simpler packages, the generated recipes are nearly perfect, but for some packages you might need to make certain tweaks.
-      #. Commit and push the changes. git add recipe/abc/meta.yaml git commit -m "add a commit message" git push
+      #. Go through the generated ``meta.yaml`` file and remove all irrelevant comments in the ``meta.yaml``  file. For simpler packages, the generated recipes are nearly perfect, but for some packages you might need to make certain tweaks.
+      #. Commit and push the changes. `git add recipe/abc/meta.yaml` `git commit -m "add a commit message"` `git push``
       #. Create a PR.
 
       Know more about `Grayskull <https://github.com/conda-incubator/grayskull>`_
@@ -76,17 +76,16 @@ Your final recipe should have no comments (unless they're actually relevant to t
    .. tab:: Example recipe
 
       Generate a recipe with example recipe
-      -------------------------
-      #. Source code should be downloadable, as a single file– as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz) or tagged on GitHub,-- toensure that it can be verified. To know why see :ref:`tarballs_no_repos`
+      --------------------------------------------------
+      #. Source code should be downloadable as a single file– as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz) or tagged on GitHub,-- to ensure that it can be verified. To know why, see :ref:`tarballs_no_repos`
       #. Fork and clone the `staged-recipes <https://github.com/conda-forge/staged-recipes>`_ repository from GitHub.
-      #. Checkout a new branch from the staged-recipes ``main`` branch.
-      #. Through CLI, cd inside the 'staged-recipes/recipes' directory.
-      #. Create a new folder within recipes, for your package (i.e., For unix: ``cp -r recipes/example recipes/<package_name>`` For windows: ``xcopy /h /e /i "recipes\example\" "recipes\<package_name>"``).
+      #. Check out a new branch from the staged-recipes ``main`` branch.
+      #. Using your command line or terminal, cd inside the 'staged-recipes/recipes' directory.
+      #. Create a new folder within recipes, for your package (i.e., For Unix: ``cp -r recipes/example recipes/<package_name>`` For Windows: ``xcopy /h /e /i "recipes\example\" "recipes\<package_name>"``).
       #. Copy `meta.yaml <https://github.com/conda-forge/staged-recipes/blob/master/recipes/
-        example/meta.yaml>`_ from the example directory. All the changes in the following steps will happen in the COPIED meta.yaml (i.e., `..staged-recipes/recipes/<name-of-package>/meta.yaml`).
-        Please leave the example directory (i.e, ``...staged-recipes/recipes/example/meta.yaml``) unchanged!
+        example/meta.yaml>`_ from the example directory. All the changes in the following steps will happen in the COPIED meta.yaml (i.e. ``..staged-recipes/recipes/<name-of-package>/meta.yaml``). Please leave the example directory (i.e, ``...staged-recipes/recipes/example/meta.yaml``) unchanged!
       #. Modify the copied recipe (meta.yaml) as needed. To see how to modify meta.yaml, take a look at :ref:`meta_yaml`.
-      #. Generate the SHA256 key for your source code archive, as described in the example recipe using the ``openssl`` tool. As an alternative, you can also go to the package description on `PyPi <https://pypi.org>`_ from which you can directly copy the SHA256.
+      #. Generate the SHA256 key for your source code archive, as described in the example recipe using the ``openssl`` tool. As an alternative, you can also go to the package description on `PyPI <https://pypi.org>`_, from which you can directly copy the SHA256.
       #. Be sure to fill in the ``test`` section. The simplest test will simply test that the module can be imported, as described in the example.
       #. Remove all irrelevant comments in the ``meta.yaml``  file.
       #. Commit and push the changes.
