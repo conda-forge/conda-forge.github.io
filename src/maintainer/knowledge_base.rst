@@ -1399,8 +1399,9 @@ To request a migration for a particular package and all its dependencies:
    especially if many dependencies need to be built as well.
 2. If nothing is under way, look at the current `conda-forge-pinning <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt>`__.
 3. If the package is not listed there, make a PR, adding the package
-   name to the end of ``osx_arm64.txt``. The migration bot should start making automated
-   pull requests to the repo and its dependencies.
+   name to a random location in ``osx_arm64.txt``.
+   The migration bot should start making automated pull requests to the
+   repo and its dependencies.
 4. Within a few hours, the `status page <https://conda-forge.org/status/#armosxaddition>`_
    should reflect the progress of the package in question, and help you keep track
    of progress. Help out if you can!
