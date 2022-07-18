@@ -279,8 +279,8 @@ Drone.io
 --------
 
 We use `Drone.io <https://drone.io>`__ for Linux ARMv8 builds. To enable these builds on your feedstock, make a pull request to add your feedstock to the list
-in `arch_rebuild.txt file <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`__.
-Read :ref:`using_arch_rebuild` to learn more on how it works.
+in the `arch_rebuild.txt file <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`__.
+Read :ref:`using_arch_rebuild` to learn more.
 
 
 GitHub Actions
