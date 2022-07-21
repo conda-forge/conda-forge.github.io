@@ -1419,15 +1419,15 @@ Recipe maintainers can make pre-release builds available on
 conda-forge by adding them to the ``dev`` or ``rc`` label.
 
 The semantics of these labels should generally follow the
-`guidelines <https://docs.python.org/devguide/devcycle.html#stages>`__ that Python
+`guidelines <https://devguide.python.org/developer-workflow/development-cycle/index.html#stages>`__ that Python
 itself follows.
 
-- ``rc``: `Beta <https://docs.python.org/devguide/devcycle.html#beta>`__ and `Release
-  Candidate <https://docs.python.org/devguide/devcycle.html#release-candidate-rc>`_
+- ``rc``: `Beta <https://devguide.python.org/developer-workflow/development-cycle/index.html#beta>`__ and `Release
+  Candidate <https://devguide.python.org/developer-workflow/development-cycle/index.html#release-candidate-rc>`_
   (RC). No new features. Bugfix only.
 
-- ``dev``: `Pre-Alpha <https://docs.python.org/devguide/devcycle.html#pre-alpha>`_
-  and `Alpha <https://docs.python.org/devguide/devcycle.html#alpha>`__. These are
+- ``dev``: `Pre-Alpha <https://devguide.python.org/developer-workflow/development-cycle/index.html#pre-alpha>`_
+  and `Alpha <https://devguide.python.org/developer-workflow/development-cycle/index.html#alpha>`__. These are
   still packages that could see substantial changes
   between the dev version and the final release.
 
