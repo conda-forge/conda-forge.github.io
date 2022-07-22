@@ -4,8 +4,20 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Thu, 21 Jul 2022 12:19:52 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 22 Jul 2022 19:22:00 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2022-07-22: Azure OSX VM Image Bumped to Version 11</title>
+      <link>https://conda-forge.org/docs/user/announcements.html#azure-osx-vm-image-bumped-to-version-11</link>
+      <description>&lt;p&gt;Azure is removing their OSX 10.15 VM image and so we are bumping to 11.
+You will need to rerender your feedstock to get this change. Feedstocks
+without the new VM image specified will not build after Azure fully
+removes the old image. Please get in touch with us if you have issues
+or questions!&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html#azure-osx-vm-image-bumped-to-version-11</guid>
+      <pubDate>Fri, 22 Jul 2022 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2022-04-23: Packages for Qt/PyQt 5.15.2 are now available</title>
       <link>https://conda-forge.org/docs/user/announcements.html#packages-for-qt-pyqt-5-15-2-are-now-available</link>
