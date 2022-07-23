@@ -1519,3 +1519,71 @@ The tl;dr here is that conda sorts as follows:
 So make sure that you **tag** your package in such a way that the package name
 that conda-build spits out will sort the package uploaded with an ``rc`` label
 higher than the package uploaded with the ``dev`` label.
+
+Perl packages
+=============
+
+Perl has three standard install locations: **core**, **vendor**, and **site**. Here, **core** is used only for the perl itself, **vendor** is used for installing any other conda-forge packages, and **site** is used for the user to install things locally from sources other than conda-forge.
+
+The most commonly used build system for `Perl packages <https://github.com/conda-forge/perl-file-which-feedstock>`__ is ``ExtUtils::MakeMaker``. For typical packaging of packages of this form, you can have a look at the `perl-file-which recipe <https://github.com/conda-forge/perl-file-which-feedstock/blob/main/recipe/meta.yaml>`__.
+
+A few things to note in the `perl-file-which recipe <https://github.com/conda-forge/perl-file-which-feedstock/blob/main/recipe/meta.yaml>`__ are:
+
+  * The ``name`` is composed of ``perl-`` **+** the lowercase version of the CPAN name.
+
+      .. code-block::
+
+          package:
+            name: perl-{{ name|lower }}
+            version: {{ version }}
+
+  * The requirements section contains ``make`` for build, ``perl`` and ``perl-extutils-makemaker`` for host, and ``perl`` for run, in addition to any other packages that the particular Perl module being bullt may require.
+
+      .. code-block::
+
+          requirements:
+            build:
+              - make
+            host:
+              - perl
+              - perl-extutils-makemaker
+            run:
+              - perl
+
+  * The test section contains ``imports``, which lists the CPAN module that can be used in Perl.
+
+      .. code-block::
+
+          test:
+            imports:
+              - File::Which
+
+
+The build section in the ``meta.yaml`` file should be something like this:
+
+.. code-block::
+
+  build:
+    number: 0
+    noarch: generic
+    script:
+      - perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1
+      - make
+      - make test
+      - make install VERBINST=1
+
+Notable here is ``INSTALLDIRS=vendor``, which selects the appropriate install location for a conda-forge package, and the ``NO_PERLLOCAL`` and ``NO_PACKLIST`` switches, which suppress various CPAN tracking files (as described in the `ExtUtils::MakeMaker documentation <https://perldoc.perl.org/ExtUtils::MakeMaker>`__) that are unnecessary when the module is being externally packaged via conda.
+
+.. note::
+
+  ``noarch: generic`` should be used only if the package is a pure Perl package.
+
+The other build system used for Perl packages is  ``Module::Build``. ``Module::Build`` is a system for building, testing, and installing Perl modules. 
+It is an alternative to ``ExtUtils::MakeMaker``. It does not require ``make`` - most of the ``Module::Build`` code is pure Perl and written in a very cross-platform way.
+The recipe of some of the Perl packages that uses ``Module::Build`` are :
+
+  - `perl-math-derivative <https://github.com/bioconda/bioconda-recipes/blob/master/recipes/perl-math-derivative/meta.yaml>`__
+  - `perl-graphics-colornames <https://github.com/bioconda/bioconda-recipes/blob/master/recipes/perl-graphics-colornames/meta.yaml>`__
+  - `mirnature <https://github.com/bioconda/bioconda-recipes/blob/master/recipes/mirnature/meta.yaml>`__
+
+To know more about ``Module::Build`` and difference between the two build systems read `Comparison <https://metacpan.org/pod/Module::Build#COMPARISON>`__ and `Module::Build <https://metacpan.org/pod/Module::Build>`__.
