@@ -1519,3 +1519,11 @@ The tl;dr here is that conda sorts as follows:
 So make sure that you **tag** your package in such a way that the package name
 that conda-build spits out will sort the package uploaded with an ``rc`` label
 higher than the package uploaded with the ``dev`` label.
+
+.. _using_arch_rebuild:
+
+Using ``arch_rebuild.txt``
+==========================
+
+You can add a feedstock to ``arch-rebuild.txt`` if it requires rebuilding with different architectures/platforms (such as ppc64le or aarch64). To add the feedstock to ``arch_rebuild.txt``, open a PR to the `conda-forge-pinning-feedstock repository <https://github.com/conda-forge/conda-forge-pinning-feedstock>`__.
+Once the PR is merged, the migration bot goes through the list of feedstocks in ``arch_rebuild.txt`` and opens a migration PR for any new feedstocks and their dependencies, enabling the aarch64/ppc64le builds.
