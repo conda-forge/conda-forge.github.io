@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Knowledge Base &#8212; conda-forge 2022.07.22 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2022.07.25 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.07.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.07.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -1357,6 +1357,11 @@ that conda-build spits out will sort the package uploaded with an <code class="d
 higher than the package uploaded with the <code class="docutils literal notranslate"><span class="pre">dev</span></code> label.</p>
 </section>
 </section>
+<section id="using-arch-rebuild-txt">
+<span id="using-arch-rebuild"></span><h2>Using <code class="docutils literal notranslate"><span class="pre">arch_rebuild.txt</span></code><a class="headerlink" href="#using-arch-rebuild-txt" title="Permalink to this heading">¶</a></h2>
+<p>You can add a feedstock to <code class="docutils literal notranslate"><span class="pre">arch-rebuild.txt</span></code> if it requires rebuilding with different architectures/platforms (such as ppc64le or aarch64). To add the feedstock to <code class="docutils literal notranslate"><span class="pre">arch_rebuild.txt</span></code>, open a PR to the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge-pinning-feedstock repository</a>.
+Once the PR is merged, the migration bot goes through the list of feedstocks in <code class="docutils literal notranslate"><span class="pre">arch_rebuild.txt</span></code> and opens a migration PR for any new feedstocks and their dependencies, enabling the aarch64/ppc64le builds.</p>
+</section>
 </section>
 
 
@@ -1454,6 +1459,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
 <li class="toctree-l4"><a class="reference internal" href="#pre-release-version-sorting">Pre-release version sorting</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#using-arch-rebuild-txt">Using <code class="docutils literal notranslate"><span class="pre">arch_rebuild.txt</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
@@ -1527,7 +1533,7 @@ higher than the package uploaded with the <code class="docutils literal notransl
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.07.22 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.07.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
