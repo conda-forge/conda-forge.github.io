@@ -1522,23 +1522,26 @@ higher than the package uploaded with the ``dev`` label.
 Migrators and Migrations
 ========================
 
-When any changes are made in the global pinnings of a package, then the entire stack of the packages that depend on that package would need to be updated and rebuilt.
-Doing it manually could be quite tedious, and that's where migrations come to help. Migrations are used to change how different feedstocks/packages operate and are an integral part of ``regro-cf-autotick-bot``'s duties.
+When any changes are made in the global pinnings of a package, then the entire stack of the packages that need that package on their ``host`` section would need to be updated and rebuilt.
+Doing it manually can be quite tedious, and that's where migrations come to help. Migrations automate the process of submitting changes to a feedstock and are an integral part of the ``regro-cf-autotick-bot``'s duties.
 
-To generate these migrations, you use migrators. Migrators automatically create pull requests for the affected packages in conda-forge. 
-To propose a migration in one or more pins, a PR will be issued into the pinning feedstock using a yaml file expressing the changes to the global pinning file in the migrations folder. 
-Once the PR is squashed and merged, the bot will take the yaml file to calculate which packages need to be rebuilt and start issuing PRs with the new pinning as a local pinning file to the feedstocks.
+There are several kinds of migrations, to know about different types of migration you can read `Making Migrators <https://regro.github.io/cf-scripts/migrators.html>`__. To generate these migrations, you use migrators. Migrators automatically create pull requests for the affected packages in conda-forge.
+To propose a migration in one or more pins, a PR is issued into the pinning feedstock using a yaml file expressing the changes to the global pinning file in the migrations folder.
+Once the PR is squashed and merged, the bot takes the yaml file to calculate which packages need to be rebuilt and starts issuing PRs with the new pinning as a local pinning file to the feedstocks.
 
-Usually, the bot will generate these migrations automatically. However, when a pin is first made or added, one may need to be added by hand. To do this, you can follow the steps mentioned in `Updating package pins <https://conda-forge.org/docs/maintainer/pinning_deps.html#updating-package-pins>`__.
+Usually, the bot generates these migrations automatically. However, when a pin is first made or added, one may need to be added by hand. To do this, you can follow the steps mentioned in `Updating package pins <https://conda-forge.org/docs/maintainer/pinning_deps.html#updating-package-pins>`__.
 
 The way migrations proceed are: 
 
   1. You make a PR into the ``migrations`` folder in the `conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`__ with a new YAML file representing the migration.
   2. Once the PR is merged, the bot picks it up, builds a migrator object, and begins the migration process.
   3. A migration PR is issued for a node only if:
-      - The node depends on the changed pinnings.
-      - It has no dependencies that depend on the new pinnings and have not been migrated.
+
+    - The node depends on the changed pinnings.
+    - The node has no dependencies that depend on the new pinnings and have not been migrated.
+
   4. Process 3 continues until the migration is sufficiently complete and the change is applied to the global pinning file via a PR.
 
-Sometimes, you might get a migration PR for your package that you don't want to merge. In that case, it is advisable to put that PR in draft status rather than closing it. 
-If you will close the PR, it would make that bot consider PR as merged. And that can cause inconsistencies with downstream feedstocks.
+Sometimes, you might get a migration PR for your package that you don’t want to merge. In that case, you should put that PR in draft status but should never close it.
+If you close the PR, it makes the bot consider that another PR implementing the migration is merged instead, letting the migration continue iterating on the graph; however, the downstream dependents fails because the parent (the one we closed the PR of) didn’t really get built.
+Another reason why it is good to keep the PR open or in draft status is that people might help with it if they want in the future.
