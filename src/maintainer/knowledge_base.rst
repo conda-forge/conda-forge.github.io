@@ -1528,6 +1528,7 @@ Using ``arch_rebuild.txt``
 You can add a feedstock to ``arch-rebuild.txt`` if it requires rebuilding with different architectures/platforms (such as ppc64le or aarch64). To add the feedstock to ``arch_rebuild.txt``, open a PR to the `conda-forge-pinning-feedstock repository <https://github.com/conda-forge/conda-forge-pinning-feedstock>`__.
 Once the PR is merged, the migration bot goes through the list of feedstocks in ``arch_rebuild.txt`` and opens a migration PR for any new feedstocks and their dependencies, enabling the aarch64/ppc64le builds.
 
+.. _migrations_and_migrators:
 
 Migrators and Migrations
 ========================
@@ -1535,9 +1536,9 @@ Migrators and Migrations
 When any changes are made in the global pinnings of a package, then the entire stack of the packages that need that package on their ``host`` section would need to be updated and rebuilt.
 Doing it manually can be quite tedious, and that's where migrations come to help. Migrations automate the process of submitting changes to a feedstock and are an integral part of the ``regro-cf-autotick-bot``'s duties.
 
-There are several kinds of migrations, to know about different types of migration you can read `Making Migrators <https://regro.github.io/cf-scripts/migrators.html>`__. To generate these migrations, you use migrators. Migrators automatically create pull requests for the affected packages in conda-forge.
-To propose a migration in one or more pins, a PR is issued into the pinning feedstock using a yaml file expressing the changes to the global pinning file in the migrations folder.
-Once the PR is squashed and merged, the bot takes the yaml file to calculate which packages need to be rebuilt and starts issuing PRs with the new pinning as a local pinning file to the feedstocks.
+There are several kinds of migrations, which you can read about in `Making Migrators <https://regro.github.io/cf-scripts/migrators.html>`__. To generate these migrations, you use migrators, which are bots that automatically create pull requests for the affected packages in conda-forge.
+To propose a migration in one or more pins, the migrator issues a PR into the pinning feedstock using a yaml file expressing the changes to the global pinning file in the migrations folder.
+Once the PR is squashed and merged, the migrator bot uses the yaml file to calculate which packages need to be rebuilt and starts issuing PRs with the new pinning as a local pinning file to the feedstocks.
 
 Usually, the bot generates these migrations automatically. However, when a pin is first made or added, one may need to be added by hand. To do this, you can follow the steps mentioned in `Updating package pins <https://conda-forge.org/docs/maintainer/pinning_deps.html#updating-package-pins>`__.
 
@@ -1553,5 +1554,5 @@ The way migrations proceed are:
   4. Process 3 continues until the migration is sufficiently complete and the change is applied to the global pinning file via a PR.
 
 Sometimes, you might get a migration PR for your package that you don’t want to merge. In that case, you should put that PR in draft status but should never close it.
-If you close the PR, it makes the bot consider that another PR implementing the migration is merged instead, letting the migration continue iterating on the graph; however, the downstream dependents fails because the parent (the one we closed the PR of) didn’t really get built.
+If you close the PR, it makes the bot think that another PR implementing the migration is merged instead, letting the migration continue iterating on the graph; however, the downstream dependents fail because the parent (the one we closed the PR of) didn’t really get built.
 Another reason why it is good to keep the PR open or in draft status is that people might help with it if they want in the future.
