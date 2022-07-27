@@ -1538,21 +1538,21 @@ Doing it manually can be quite tedious, and that's where migrations come to help
 
 There are several kinds of migrations, which you can read about in `Making Migrators <https://regro.github.io/cf-scripts/migrators.html>`__. To generate these migrations, you use migrators, which are bots that automatically create pull requests for the affected packages in conda-forge.
 To propose a migration in one or more pins, the migrator issues a PR into the pinning feedstock using a yaml file expressing the changes to the global pinning file in the migrations folder.
-Once the PR is squashed and merged, the migrator bot uses the yaml file to calculate which packages need to be rebuilt and starts issuing PRs with the new pinning as a local pinning file to the feedstocks.
+Once the PR is merged, the dependency graph is built. After that, the bot walks through the graph, migrates all the nodes (feedstocks) one by one, and issues PRs for those feedstocks.
 
 Usually, the bot generates these migrations automatically. However, when a pin is first made or added, one may need to be added by hand. To do this, you can follow the steps mentioned in `Updating package pins <https://conda-forge.org/docs/maintainer/pinning_deps.html#updating-package-pins>`__.
 
 The way migrations proceed are: 
 
-  1. You make a PR into the ``migrations`` folder in the `conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`__ with a new YAML file representing the migration.
-  2. Once the PR is merged, the bot picks it up, builds a migrator object, and begins the migration process.
-  3. A migration PR is issued for a node only if:
+  1. You make a PR into the ``migrations`` folder in the `conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`__ with a new yaml file representing the migration.
+  2. Once the PR is merged, the bot picks it up, builds a migrator graph, and begins the migration process.
+  3. A migration PR is issued for a node (a feedstock) only if:
 
     - The node depends on the changed pinnings.
     - The node has no dependencies that depend on the new pinnings and have not been migrated.
 
-  4. Process 3 continues until the migration is sufficiently complete and the change is applied to the global pinning file via a PR.
+  4. Process 3 continues until the migration is complete and the change is applied to the global pinning file via a final PR. After this step, we say this migration is closed out.
 
 Sometimes, you might get a migration PR for your package that you don’t want to merge. In that case, you should put that PR in draft status but should never close it.
-If you close the PR, it makes the bot think that another PR implementing the migration is merged instead, letting the migration continue iterating on the graph; however, the downstream dependents fail because the parent (the one we closed the PR of) didn’t really get built.
+If you close the PR, it makes the bot think that another PR implementing the migration is merged instead, letting the migration continue iterating on the graph; however, the downstream dependents fail because the parent (the one we closed the PR of) didn’t really get rebuilt.
 Another reason why it is good to keep the PR open or in draft status is that people might help with it if they want in the future.
