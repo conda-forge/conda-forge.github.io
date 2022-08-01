@@ -1362,6 +1362,35 @@ higher than the package uploaded with the <code class="docutils literal notransl
 <p>You can add a feedstock to <code class="docutils literal notranslate"><span class="pre">arch-rebuild.txt</span></code> if it requires rebuilding with different architectures/platforms (such as ppc64le or aarch64). To add the feedstock to <code class="docutils literal notranslate"><span class="pre">arch_rebuild.txt</span></code>, open a PR to the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge-pinning-feedstock repository</a>.
 Once the PR is merged, the migration bot goes through the list of feedstocks in <code class="docutils literal notranslate"><span class="pre">arch_rebuild.txt</span></code> and opens a migration PR for any new feedstocks and their dependencies, enabling the aarch64/ppc64le builds.</p>
 </section>
+<section id="migrators-and-migrations">
+<span id="migrations-and-migrators"></span><h2>Migrators and Migrations<a class="headerlink" href="#migrators-and-migrations" title="Permalink to this heading">¶</a></h2>
+<p>When any changes are made in the global pinnings of a package, then the entire stack of the packages that need that package on their <code class="docutils literal notranslate"><span class="pre">host</span></code> section would need to be updated and rebuilt.
+Doing it manually can be quite tedious, and that’s where migrations come to help. Migrations automate the process of submitting changes to a feedstock and are an integral part of the <code class="docutils literal notranslate"><span class="pre">regro-cf-autotick-bot</span></code>’s duties.</p>
+<p>There are several kinds of migrations, which you can read about in <a class="reference external" href="https://regro.github.io/cf-scripts/migrators.html">Making Migrators</a>. To generate these migrations, you use migrators, which are bots that automatically create pull requests for the affected packages in conda-forge.
+To propose a migration in one or more pins, the migrator issues a PR into the pinning feedstock using a yaml file expressing the changes to the global pinning file in the migrations folder.
+Once the PR is merged, the dependency graph is built. After that, the bot walks through the graph, migrates all the nodes (feedstocks) one by one, and issues PRs for those feedstocks.</p>
+<p>Usually, the bot generates these migrations automatically. However, when a pin is first made or added, one may need to be added by hand. To do this, you can follow the steps mentioned in <a class="reference external" href="https://conda-forge.org/docs/maintainer/pinning_deps.html#updating-package-pins">Updating package pins</a>.</p>
+<p>The way migrations proceed are:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>You make a PR into the <code class="docutils literal notranslate"><span class="pre">migrations</span></code> folder in the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge-pinning-feedstock</a> with a new yaml file representing the migration.</p></li>
+<li><p>Once the PR is merged, the bot picks it up, builds a migrator graph, and begins the migration process.</p></li>
+<li><p>A migration PR is issued for a node (a feedstock) only if:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>The node depends on the changed pinnings.</p></li>
+<li><p>The node has no dependencies that depend on the new pinnings and have not been migrated.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>Process 3 continues until the migration is complete and the change is applied to the global pinning file via a final PR. After this step, we say this migration is closed out.</p></li>
+</ol>
+</div></blockquote>
+<p>Sometimes, you might get a migration PR for your package that you don’t want to merge. In that case, you should put that PR in draft status but should never close it.
+If you close the PR, it makes the bot think that another PR implementing the migration is merged instead, letting the migration continue iterating on the graph; however, the downstream dependents fail because the parent (the one we closed the PR of) didn’t really get rebuilt.
+Another reason why it is good to keep the PR open or in draft status is that people might help with it if they want in the future.</p>
+</section>
 </section>
 
 
@@ -1460,6 +1489,7 @@ Once the PR is merged, the migration bot goes through the list of feedstocks in 
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#using-arch-rebuild-txt">Using <code class="docutils literal notranslate"><span class="pre">arch_rebuild.txt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#migrators-and-migrations">Migrators and Migrations</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
