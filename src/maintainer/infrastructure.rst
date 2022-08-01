@@ -151,6 +151,12 @@ bot. This functionality is currently experimental. You can find more details
 :ref:`here<Automerge>`.
 Please open issue on ``regro/cf-scripts`` for any feedback, bugs, and/or questions!
 
+@conda-forge-admin, please remove bot automerge
+--------------------------------------------
+
+Entering this command in the title or comment of an issue will instruct the admin bot to
+open a PR to disable automerge, undoing the ``please add bot automerge`` command.
+
 @conda-forge-admin, please add python 2.7
 -----------------------------------------
 
