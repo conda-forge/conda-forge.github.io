@@ -63,6 +63,15 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
    - Checkout the correct branch with remote: ``hub pr checkout 12`` where ``12`` is the ID of the PR.
    - Commit and push on this branch, the remote is automatically set up to push to regro-cf-autotick-bot's fork.
 
+**How does regro-cf-autotick-bot create automatic version updates?**
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+The `regro-cf-autotick-bot <https://github.com/regro/autotick-bot>`__ continuously searches on a loop for any PyPI releases, GitHub releases, and any other sources of versions when any updates are released. The source code that gets executed in the loop comes from the `cf-scripts repository <https://github.com/regro/cf-scripts>`__, which contains the code to detect versions and submit PRs. Visit `cf-scripts <https://regro.github.io/cf-scripts/index.html>`__ to read more about it.
+
+Sometimes the bot may take several hours to search for these updates. You can also check `status of version updates <https://conda-forge.org/status/#version_updates>`__ for all the pending version updates. These version updates are pending either because an updated version was found, but a PR wasn't opened yet, or because the bot might have had an error while making the PR.
+If you can't find a version here, then the chances are that the bot couldn't find it either.
+
+The bot stops making version update PRs when the package feedstock has three or more open version update PRs. The package's maintainer should close or merge those PRs for the bot to work correctly for future version updates.
+
 Example workflow for updating a package
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -80,10 +89,10 @@ Here we assume that you would like to update the feedstock ``<feedstock>``. Feed
 
    This step is only required if you have forked some time ago and your fork is missing commits from the feedstock at conda-forge.
 
-   - Make sure you are on the master branch: ``git checkout master``
+   - Make sure you are on the main branch: ``git checkout main``
    - Register conda-forge's feedstock with ``git remote add upstream https://github.com/conda-forge/<feedstock>``
    - Fetch the latest updates with ``git fetch upstream``
-   - Pull in the latest changes into your master branch: ``git rebase upstream/master``
+   - Pull in the latest changes into your main branch: ``git rebase upstream/main``
 
 #. Creating your changes in a new branch
 
@@ -187,7 +196,22 @@ Note that for long build logs one can do
 
 to save it in a text file for future inspection.
 
-Once built, you can find the finished package in the ``build_artifacts`` directory in your feedstock.  
+Once built, you can find the finished package in the ``build_artifacts`` directory in your feedstock.
+
+
+Downloading prebuilt packages from CI
+=====================================
+A neat feature that feedstocks have is the ability to `upload packages to the CI provider for testing <https://conda-forge.org/docs/maintainer/conda_forge_yml.html?highlight=store_build_artifacts#azure>`_.
+This is useful when trying out packages built in a PR. But you first need to download these prebuilt packages.
+
+To download prebuilt packages follow the steps below:
+
+- Starting from your PR, navigate to the CI.
+- Open the log corresponding to the package you want to download.
+- In this log find a link to the ``artifacts produced``.
+- From the list of published artifacts that appears download your required archive.
+- Unarchive and extract the required package.
+
 
 .. _maint_fix_broken_packages:
 
@@ -244,8 +268,8 @@ For an example see `this <https://github.com/conda-forge/cudnn-feedstock/issues/
 Maintaining several versions
 ============================
 
-If you'd like to maintain more than one version of your package, you can use branches on the feedstock. To do this,
-fork your feedstock and make a meaningful branch name (e.g., `v1.X` or `v1.0`).
-Make the required changes to the recipe and rerender the feedstock. Then push this branch
-from your fork to the upstream feedstock. Our CI services will automatically build any
-branches in addition to the default branch.
+If you'd like to maintain more than one version of your package, you can use branches on the feedstock. To do this:
+
+- Fork your feedstock and make a meaningful branch name (e.g., `v1.X` or `v1.0`).
+- Make the required changes to the recipe and rerender the feedstock.
+- Then push this branch from your fork to the upstream feedstock. Our CI services will automatically build any branches in addition to the default branch.

@@ -17,8 +17,3 @@ dependencies:
   - pip
   - python-rapidjson
   - termcolor
-  # uncomment to restore search
-  # - elm
-  # - nodejs
-  #  - pip: 
-  #    - sphinxcontrib-newsfeed # this helps when using vscode locally

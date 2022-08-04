@@ -210,25 +210,14 @@ In conda_build_config.yaml file:
 
 .. code-block:: yaml
 
-    c_compiler:
-    - vs2019
-    cxx_compiler:
-    - vs2019
+    c_compiler:    # [win]
+    - vs2019       # [win]
+    cxx_compiler:  # [win]
+    - vs2019       # [win]
 
 
-In conda-forge.yml file:
-
-.. code-block:: yaml
-
-    azure:
-      settings_win:
-          pool:
-              vmImage: windows-2019
-
-
-
-For example see the changes made in the ``conda_build_config.yaml`` and ``conda-forge.yml`` files in `this
-<https://github.com/conda-forge/libignition-physics-feedstock/commit/c586d765a2f5fd0ecf6da43c53315c898c9bf6bd>`__ PR.
+For example see the changes made in the ``conda_build_config.yaml`` files in `this
+<https://github.com/conda-forge/libignition-msgs1-feedstock/pull/73/commits/81b5ee0e1d23f7f20427dd80d04cf1f7321b441d>`__ commit.
 
 After making these changes don't forget to rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line).
 
@@ -499,7 +488,7 @@ and apply the appropriate conditionals in your build:
 
 
 Preferring a provider (usually nompi)
-"""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual exclusivity of
 the ``mpi`` metapackage allows picking between mpi providers by installing an mpi provider, e.g.
@@ -591,7 +580,7 @@ Remove the ``if mpi...`` condition if all variants should create a strict runtim
 chosen at build time (i.e. if the nompi build cannot be run against the mpich build).
 
 Complete example
-""""""""""""""""
+^^^^^^^^^^^^^^^^
 
 Combining all of the above, here is a complete recipe, with:
 
@@ -671,7 +660,7 @@ mpi-metapackage exclusivity allows ``mpi_*`` to resolve the same as ``mpi_{{ mpi
 if ``{{ mpi }}`` is also a direct dependency, though it's probably nicer to be explicit.
 
 Just mpi example
-""""""""""""""""
+^^^^^^^^^^^^^^^^
 
 Without a preferred ``nompi`` variant, recipes that require mpi are much simpler. This is all that is needed:
 
@@ -691,6 +680,13 @@ Without a preferred ``nompi`` variant, recipes that require mpi are much simpler
     run:
       - {{ mpi }}
 
+MPI Compiler Packages
+^^^^^^^^^^^^^^^^^^^^^
+
+Do not use the ``[openmpi,mpich]-[mpicc,mpicxx,mpifort]`` metapackages in the ``requirements/build`` section
+of a recipe; the MPI compiler wrappers are included in the main ``openmpi``/``mpich`` packages.
+As shown above, just add ``openmpi``/``mpich`` to the ``requirements/host`` section and use compiler directives for the 
+corresponding compilers in ``requirements/build`` as normal.
 
 
 OpenMP
@@ -1176,6 +1172,8 @@ To skip the pypy builds, do the following,
    build:
      skip: True         # [python_impl == 'pypy']
 
+If something is failing the PyPy build when it passes the CPython one, reach
+out to @conda-forge/help-pypy.
 
 Using setuptools_scm
 ====================
@@ -1401,8 +1399,9 @@ To request a migration for a particular package and all its dependencies:
    especially if many dependencies need to be built as well.
 2. If nothing is under way, look at the current `conda-forge-pinning <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt>`__.
 3. If the package is not listed there, make a PR, adding the package
-   name to the end of ``osx_arm64.txt``. The migration bot should start making automated
-   pull requests to the repo and its dependencies.
+   name to a random location in ``osx_arm64.txt``.
+   The migration bot should start making automated pull requests to the
+   repo and its dependencies.
 4. Within a few hours, the `status page <https://conda-forge.org/status/#armosxaddition>`_
    should reflect the progress of the package in question, and help you keep track
    of progress. Help out if you can!
@@ -1420,15 +1419,15 @@ Recipe maintainers can make pre-release builds available on
 conda-forge by adding them to the ``dev`` or ``rc`` label.
 
 The semantics of these labels should generally follow the
-`guidelines <https://docs.python.org/devguide/devcycle.html#stages>`__ that Python
+`guidelines <https://devguide.python.org/developer-workflow/development-cycle/index.html#stages>`__ that Python
 itself follows.
 
-- ``rc``: `Beta <https://docs.python.org/devguide/devcycle.html#beta>`__ and `Release
-  Candidate <https://docs.python.org/devguide/devcycle.html#release-candidate-rc>`_
+- ``rc``: `Beta <https://devguide.python.org/developer-workflow/development-cycle/index.html#beta>`__ and `Release
+  Candidate <https://devguide.python.org/developer-workflow/development-cycle/index.html#release-candidate-rc>`_
   (RC). No new features. Bugfix only.
 
-- ``dev``: `Pre-Alpha <https://docs.python.org/devguide/devcycle.html#pre-alpha>`_
-  and `Alpha <https://docs.python.org/devguide/devcycle.html#alpha>`__. These are
+- ``dev``: `Pre-Alpha <https://devguide.python.org/developer-workflow/development-cycle/index.html#pre-alpha>`_
+  and `Alpha <https://devguide.python.org/developer-workflow/development-cycle/index.html#alpha>`__. These are
   still packages that could see substantial changes
   between the dev version and the final release.
 
@@ -1520,3 +1519,40 @@ The tl;dr here is that conda sorts as follows:
 So make sure that you **tag** your package in such a way that the package name
 that conda-build spits out will sort the package uploaded with an ``rc`` label
 higher than the package uploaded with the ``dev`` label.
+
+.. _using_arch_rebuild:
+
+Using ``arch_rebuild.txt``
+==========================
+
+You can add a feedstock to ``arch-rebuild.txt`` if it requires rebuilding with different architectures/platforms (such as ppc64le or aarch64). To add the feedstock to ``arch_rebuild.txt``, open a PR to the `conda-forge-pinning-feedstock repository <https://github.com/conda-forge/conda-forge-pinning-feedstock>`__.
+Once the PR is merged, the migration bot goes through the list of feedstocks in ``arch_rebuild.txt`` and opens a migration PR for any new feedstocks and their dependencies, enabling the aarch64/ppc64le builds.
+
+.. _migrations_and_migrators:
+
+Migrators and Migrations
+========================
+
+When any changes are made in the global pinnings of a package, then the entire stack of the packages that need that package on their ``host`` section would need to be updated and rebuilt.
+Doing it manually can be quite tedious, and that's where migrations come to help. Migrations automate the process of submitting changes to a feedstock and are an integral part of the ``regro-cf-autotick-bot``'s duties.
+
+There are several kinds of migrations, which you can read about in `Making Migrators <https://regro.github.io/cf-scripts/migrators.html>`__. To generate these migrations, you use migrators, which are bots that automatically create pull requests for the affected packages in conda-forge.
+To propose a migration in one or more pins, the migrator issues a PR into the pinning feedstock using a yaml file expressing the changes to the global pinning file in the migrations folder.
+Once the PR is merged, the dependency graph is built. After that, the bot walks through the graph, migrates all the nodes (feedstocks) one by one, and issues PRs for those feedstocks.
+
+Usually, the bot generates these migrations automatically. However, when a pin is first made or added, one may need to be added by hand. To do this, you can follow the steps mentioned in `Updating package pins <https://conda-forge.org/docs/maintainer/pinning_deps.html#updating-package-pins>`__.
+
+The way migrations proceed are: 
+
+  1. You make a PR into the ``migrations`` folder in the `conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`__ with a new yaml file representing the migration.
+  2. Once the PR is merged, the bot picks it up, builds a migrator graph, and begins the migration process.
+  3. A migration PR is issued for a node (a feedstock) only if:
+
+    - The node depends on the changed pinnings.
+    - The node has no dependencies that depend on the new pinnings and have not been migrated.
+
+  4. Process 3 continues until the migration is complete and the change is applied to the global pinning file via a final PR. After this step, we say this migration is closed out.
+
+Sometimes, you might get a migration PR for your package that you don’t want to merge. In that case, you should put that PR in draft status but should never close it.
+If you close the PR, it makes the bot think that another PR implementing the migration is merged instead, letting the migration continue iterating on the graph; however, the downstream dependents fail because the parent (the one we closed the PR of) didn’t really get rebuilt.
+Another reason why it is good to keep the PR open or in draft status is that people might help with it if they want in the future.

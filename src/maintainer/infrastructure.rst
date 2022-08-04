@@ -151,6 +151,12 @@ bot. This functionality is currently experimental. You can find more details
 :ref:`here<Automerge>`.
 Please open issue on ``regro/cf-scripts`` for any feedback, bugs, and/or questions!
 
+@conda-forge-admin, please remove bot automerge
+-----------------------------------------------
+
+Entering this command in the title or comment of an issue will instruct the admin bot to
+open a PR to disable automerge, undoing the ``please add bot automerge`` command.
+
 @conda-forge-admin, please add python 2.7
 -----------------------------------------
 
@@ -279,7 +285,8 @@ Drone.io
 --------
 
 We use `Drone.io <https://drone.io>`__ for Linux ARMv8 builds. To enable these builds on your feedstock, make a pull request to add your feedstock to the list
-here `<https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`_.
+in the `arch_rebuild.txt file <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`__.
+Read :ref:`using_arch_rebuild` to learn more.
 
 
 GitHub Actions

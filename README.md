@@ -26,13 +26,11 @@ If you have questions or need help, please check out our documentation for a [li
 4.  Make and commit your changes.
 5.  Submit a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) to the main repository proposing your changes.
 
-**Note: "All changes must be made in the `/src` folder and NOT in the `/docs` folder. Html files in the ./docs folder are auto generated "**
-
 ## conda-forge dev meetings
 
 Our documentation contains a section with [minutes from previous dev meetings]([https://conda-forge.org/docs/minutes/00_intro.html]). These meetings occur every two weeks on Wednesday from 17:00-18:00 UTC.
-A link to the google calendar item can be found [here](https://calendar.google.com/event?action=TEMPLATE&tmeid=Z2lraDk2a205cGUxdDkxYmNybXQxMGIxMGtfMjAxOTA3MjRUMTcwMDAwWiBzY29wYXR6QG0&tmsrc=scopatz%40gmail.com&scp=ALL).
+A link to the google calendar item can be found [here](https://calendar.google.com/event?action=TEMPLATE&tmeid=bTk5ZzBoMDEzaW11cmZiNWJnNmNkbThocDRfMjAyMjA1MThUMTcwMDAwWiBlcmljQHZvbHRyb25kYXRhLmNvbQ&tmsrc=eric%40voltrondata.com&scp=ALL).
 
-We use https://hackmd.io/ for taking meeting minutes and will upload the resultant markdown file after the meeting has concluded.
+We use https://hackmd.io/ for taking meeting minutes and will (eventually) upload the resultant markdown file after the meeting has concluded.
 
 There is a template provided in [`misc/DEV_MEETING_TEMPLATE.md`](https://github.com/conda-forge/conda-forge.github.io/tree/main/misc/DEV_MEETING_TEMPLATE.md) that you should use to create a new hackmd document.
