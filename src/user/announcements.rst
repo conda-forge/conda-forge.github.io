@@ -16,8 +16,8 @@ Microsoft has deprecated the Visual Studio (VS) 2017 compiler and removed it
 from all the CI they control (notably Azure Pipelines & Github Actions).
 This means that the default toolchain (== C++ compiler, linker, standard
 libraries, and related utilities) of that VS version - vc141 - is getting less
-and less use in upstream libraries (because their public CI doesn't use it
-anymore without a lot of fiddling), and therefore support for it is bitrotting
+and less use in upstream libraries (because public hosted CI doesn't use it
+anymore by default), and therefore support for it is bitrotting
 at an accelerating pace. We are therefore planning to move our toolchain on
 windows to vc142 (the default in VS2019) in two weeks, on 2022-08-25.
 
