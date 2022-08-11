@@ -4,8 +4,30 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Tue, 02 Aug 2022 10:24:03 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 11 Aug 2022 20:38:13 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2022-08-11: Moving to Visual Studio toolchain vc142</title>
+      <link>https://conda-forge.org/docs/user/announcements.html#moving-to-visual-studio-toolchain-vc142</link>
+      <description>&lt;p&gt;Microsoft has deprecated the Visual Studio (VS) 2017 compiler and removed it
+from all the CI they control (notably Azure Pipelines &amp;amp; Github Actions).
+This means that the default toolchain (== C/C++ compiler, linker, standard
+libraries, and related utilities) of that VS version - vc141 - is getting less
+and less use in upstream libraries (because public hosted CI doesn’t use it
+anymore by default), and therefore support for it is bitrotting
+at an accelerating pace. We are therefore
+&lt;a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/3167"&gt;planning&lt;/a&gt;
+to move our toolchain on windows to vc142 (the default in VS2019) in two weeks,
+on 2022-08-25.&lt;/p&gt;
+
+&lt;p&gt;This will not affect you as a general user of conda-forge packages on windows;
+the only impact is that if you are locally compiling against artefacts produced
+by conda-forge and are still using VS2017 yourself, you will need to upgrade your
+compiler (VS2019 is a drop-in replacement &amp;amp; ABI-compatible).&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html#moving-to-visual-studio-toolchain-vc142</guid>
+      <pubDate>Thu, 11 Aug 2022 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2022-07-22: Azure OSX VM Image Bumped to Version 11</title>
       <link>https://conda-forge.org/docs/user/announcements.html#azure-osx-vm-image-bumped-to-version-11</link>
