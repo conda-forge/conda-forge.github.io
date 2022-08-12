@@ -181,10 +181,10 @@ To add new packages to conda-forge, users can submit a PR to ``staged-recipes`` 
 where it will undergo a series of automated checks and a code review.
 Any conda-forge member can perform a code review, but the final merge can only be done by the ``staged-recipes`` or ``core`` teams.
 The following sections suggest guidelines on how to perform a successful code review.
-We distinguish between "Required" and "Recommended", with the following meaning:
+We distinguish between "Required" and "Recommended" as follows:
 
-- Required: These guidelines are very important and a requisite for PR acceptance. Exceptions are rare and usually require Core approval.
-- Recommended: These are considered "nice to have" features. In ideal conditions, all recipes should abide by them, but exceptions are tolerated as long as good reasons are provided.
+- Required: These guidelines are very important and a requisite for PR acceptance. Exceptions are rare and usually require  ``core`` approval.
+- Recommended: These are considered "nice to have" features. Ideally, all recipes should abide by them, but exceptions are tolerated as long as justifiable reasons are provided.
 
 Generalities
 ------------
@@ -205,12 +205,12 @@ Required:
 
 Recommended:
 
-#. Source should be obtained from a URL that provides a stable tarball (same SHA along time).
+#. Source should be obtained from a URL that provides a stable tarball (same SHA over time).
    Git or other SVC repositories should only be used as a last resort.
 #. Host requirements contained in the :ref:`conda-forge pinnings <pinned_deps>` should be *name-only*; i.e. they do not specify a separate version.
-#. Runtime requirements are not pinned too strictly without a justified reason.
+#. Runtime requirements are not pinned too strictly without justification.
    Thanks to repodata patches, we can afford to be optimistic about lower or upper bounds instead of single-version pins: ``>=1.4.2,<1.5`` is better than ``==1.4.2``.
-#. The package should place its files under standard locations (e.g. executables under ``$PREFIX/bin``), unless a justified reason is provided.
+#. The package should place its files under standard locations (e.g. executables under ``$PREFIX/bin``), unless justification is provided.
 
 Python-specific details
 -----------------------
@@ -228,6 +228,7 @@ Recommended:
 #. The modules checked by ``test.imports`` are not empty (this can happen with placeholder ``__init__.py`` files in top-level packages).
 #. The versions reported by ``pip list`` and ``conda build`` logs match.
 #. ``pip check`` passes. See :ref:`pip_check` for more details.
+#. If a project can be considered ``noarch`` (see :ref:`criteria <noarch>`), it should be packaged as such.
 
 Compiled objects
 ----------------

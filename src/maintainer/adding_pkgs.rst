@@ -576,28 +576,23 @@ It is good to run some other tests of the code itself (the test suite) if possib
 pip check
 ^^^^^^^^^
 
-For PyPI packages, it's common to include ``pip check`` and ``pip list`` as part of the ``test.commands`` section:
+For PyPI packages, we strongly recommend including ``pip check`` as part of the ``test.commands`` section:
 
 .. code-block:: yaml
 
     test:
       commands:
-        - pip list
         - pip check
 
 This command will check if all the dependencies specified in the Python
-metadata are satisfied. However, this command sometimes reports errors
-when nothing is wrong, mainly because differences in metadata between
-PyPI and conda-forge. If that's the case, this line can be commented out or
-silenced with ``|| true``:
+metadata are satisfied.
 
-.. code-block:: yaml
+.. note::
+  ``pip check`` can sometimes fail due to metadata discrepancies between
+  PyPI and conda-forge (e.g. same package with different names). In these
+  cases, the reviewer must evaluate whether the error was a false negative.
+  Tip: use ``pip list`` to show what ``pip check`` "sees".
 
-    test:
-      commands:
-        # - pip check
-        - pip check || true
-        - pip list
 
 
 Running unit tests
@@ -719,17 +714,17 @@ installed on your machine if you are building a package for Linux.
 For MacOS, it will prompt you to select a location for the SDK (e.g. ``export OSX_SDK_DIR=/opt``) to be downloaded.
 
 .. code-block:: bash
-        
+
     $ cd ~/staged-recipes
     $ python build-locally.py
 
 If you know which image you want to build, you can specify it as an argument to the script.
 
 .. code-block:: bash
-        
+
     $ cd ~/staged-recipes
     $ python build-locally.py <VARIANT>
- 
+
 where ``<VARIANT>`` is one of the file names in the ``.ci_support/`` directory, e.g. ``linux64``, ``osx64``, and ``linux64_cuda102``.
 
 
@@ -794,11 +789,11 @@ For some languages, the community provides tools which can automate this process
 * **Rust**
 
   `cargo-bundle-licenses <https://github.com/sstadick/cargo-bundle-licenses>`__ can be included in the build process of a package and will automatically collect and add the license files of all dependencies of a package.
-  
+
   For a detailed description, please visit the project page but a short example can be found below.
-  
+
   First, include the collection of licenses as a step of the build process.
-  
+
   .. code-block:: yaml
 
     build:
@@ -808,17 +803,17 @@ For some languages, the community provides tools which can automate this process
         - build_command_goes_here
 
   Then, include the tool as a build time dependency.
-  
+
   .. code-block:: yaml
-  
+
     requirements:
       build:
         - cargo-bundle-licenses
 
   Finally, make sure that the generated file is included in the recipe.
-   
+
   .. code-block:: yaml
-  
+
     about:
       license_file:
         - THIRDPARTY.yml
@@ -826,13 +821,13 @@ For some languages, the community provides tools which can automate this process
 
 .. important::
 
-  We are not lawyers and cannot guarantee that the above advice is correct or that the tools are able to find all license files. 
+  We are not lawyers and cannot guarantee that the above advice is correct or that the tools are able to find all license files.
   Additionally, we are unable to accept any responsibility or liability.
   It is always your responsibility to double-check that all licenses are included and verify that any generated output is correct.
-  
+
 .. note::
 
-   The correct and automated packaging of dependency licenses is an ongoing discussion. Please feel free to add your thoughs to `this <https://github.com/conda-forge/conda-forge.github.io/issues/1052>`__ discussion. 
+   The correct and automated packaging of dependency licenses is an ongoing discussion. Please feel free to add your thoughs to `this <https://github.com/conda-forge/conda-forge.github.io/issues/1052>`__ discussion.
 
 Extra
 -----
