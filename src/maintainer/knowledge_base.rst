@@ -1556,3 +1556,16 @@ The way migrations proceed are:
 Sometimes, you might get a migration PR for your package that you don’t want to merge. In that case, you should put that PR in draft status but should never close it.
 If you close the PR, it makes the bot think that another PR implementing the migration is merged instead, letting the migration continue iterating on the graph; however, the downstream dependents fail because the parent (the one we closed the PR of) didn’t really get rebuilt.
 Another reason why it is good to keep the PR open or in draft status is that people might help with it if they want in the future.
+
+Security considerations for conda-forge builds
+==============================================
+
+The public nature of conda-forge’s infrastructure comes with some risks and the measures that we at ``conda-forge`` take to secure our packages are :
+
+1. All the new packages are reviewed by core ``conda-forge`` members before they are accepted to be added as a feedstock. The packages use recipe-generating scripts that work downstream of other trusted repositories (e.g., PyPI, CRAN). 
+2. `Sources <https://conda-forge.org/docs/maintainer/adding_pkgs.html#source>`_ (This is where you specify where the package's source code is coming from) can be pulled from GitHub, PyPI, or other sources and sha256 hashes are always used, so moving of tags or uploading of new sdists can not cause automatic package rebuilds.
+   Also, once packages are accepted and made into feedstocks, only the maintainers of that feedstock have the right to merge PRs made to that feedstocks.
+3. Each feedstock can only upload packages for that feedstock. This is enforced by using a cf-staging channel where builds are first sent. 
+   A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the conda-forge channel.
+   This helps mitigate against a bad actor gaining access to an inconspicuous feedstock and then trying to push a build with malicious code into essential infrastructure packages (e.g., OpenSSL or python).
+4. We have a dedicated `Security and Systems Sub-Team <https://conda-forge.org/docs/orga/subteams.html?highlight=security+team#security-and-systems-sub-team>`__ who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by ``conda-forge``.
