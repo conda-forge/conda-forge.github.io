@@ -8,7 +8,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2022
 ----
 
-2022-08-11: Dropping PyPy 3.7
+2022-08-17: Dropping PyPy 3.7
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Conda-forge has supported PyPy since almost 2.5 years now, and the initial
