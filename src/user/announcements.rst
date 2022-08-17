@@ -13,7 +13,8 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
 Conda-forge has supported PyPy since almost 2.5 years now, and the initial
 PyPy 3.7 builds have been superseded in almost all aspects by the newer builds
-for 3.8 & 3.9.
+for 3.8 & 3.9. We are therefore dropping PyPy 3.7 as a supported python version,
+and will keep focussing on the more contemporary PyPy builds.
 
 2022-08-11: Moving to Visual Studio toolchain vc142
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
