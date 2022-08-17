@@ -13,9 +13,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
 Conda-forge has supported PyPy since almost 2.5 years now, and the initial
 PyPy 3.7 builds have been superseded in almost all aspects by the newer builds
-for 3.8 & 3.9. Dropping PyPy 3.7 has the consequence that we are currently
-unable to keep supporting the miniforge installer with PyPy in the base
-environment, but you can keep using PyPy for any other environment!
+for 3.8 & 3.9.
 
 2022-08-11: Moving to Visual Studio toolchain vc142
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
