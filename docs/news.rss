@@ -4,8 +4,19 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Thu, 11 Aug 2022 20:38:13 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 17 Aug 2022 04:02:12 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2022-08-17: Dropping PyPy 3.7</title>
+      <link>https://conda-forge.org/docs/user/announcements.html#dropping-pypy-3-7</link>
+      <description>&lt;p&gt;Conda-forge has supported PyPy since almost 2.5 years now, and the initial
+PyPy 3.7 builds have been superseded in almost all aspects by the newer builds
+for 3.8 &amp;amp; 3.9. We are therefore dropping PyPy 3.7 as a supported python version,
+and will keep focusing on the more contemporary PyPy builds.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html#dropping-pypy-3-7</guid>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2022-08-11: Moving to Visual Studio toolchain vc142</title>
       <link>https://conda-forge.org/docs/user/announcements.html#moving-to-visual-studio-toolchain-vc142</link>
