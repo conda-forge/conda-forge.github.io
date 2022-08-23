@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Knowledge Base &#8212; conda-forge 2022.08.17 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2022.08.23 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.08.17 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.08.23 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -1391,6 +1391,20 @@ Once the PR is merged, the dependency graph is built. After that, the bot walks 
 If you close the PR, it makes the bot think that another PR implementing the migration is merged instead, letting the migration continue iterating on the graph; however, the downstream dependents fail because the parent (the one we closed the PR of) didn’t really get rebuilt.
 Another reason why it is good to keep the PR open or in draft status is that people might help with it if they want in the future.</p>
 </section>
+<section id="security-considerations-for-conda-forge-builds">
+<h2>Security considerations for conda-forge builds<a class="headerlink" href="#security-considerations-for-conda-forge-builds" title="Permalink to this heading">¶</a></h2>
+<p>All <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages if you or your team require a high level of security.
+You are also free to download recipes and rebuild them yourself, if you would like at least that much oversight. However, many people use <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> all the time with no issues and here are some things that <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> does to help with security in some ways:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://conda-forge.org/docs/maintainer/adding_pkgs.html#source">Sources</a> (where you specify where the package’s source code is coming from) can be pulled from GitHub, PyPI, or other sources and sha256 hashes are always used, so moving of tags or uploading of new sdists can not cause automatic package rebuilds.
+Also, once packages are accepted and made into feedstocks, only the maintainers of that feedstock have the right to merge PRs made to that feedstock.</p></li>
+<li><p>Each feedstock can only upload packages for that feedstock. This is enforced by using a cf-staging channel where builds are first sent.
+A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the conda-forge channel.
+This helps mitigate against a bad actor gaining access to an inconspicuous feedstock and then trying to push a build with malicious code into essential infrastructure packages (e.g., OpenSSL or Python).</p></li>
+<li><p>We have <a class="reference external" href="https://github.com/conda-forge/artifact-validation">artifact-validation</a> for validating all the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> artifacts before they are uploaded to <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code>. This validation looks for various security-related items, such as artifacts that overwrite key pieces of certain packages.</p></li>
+<li><p>We have a dedicated <a class="reference external" href="https://conda-forge.org/docs/orga/subteams.html?highlight=security+team#security-and-systems-sub-team">Security and Systems Sub-Team</a> who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.</p></li>
+</ol>
+</section>
 </section>
 
 
@@ -1490,6 +1504,7 @@ Another reason why it is good to keep the PR open or in draft status is that peo
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#using-arch-rebuild-txt">Using <code class="docutils literal notranslate"><span class="pre">arch_rebuild.txt</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#migrators-and-migrations">Migrators and Migrations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security-considerations-for-conda-forge-builds">Security considerations for conda-forge builds</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="maintainer_faq.html">FAQ</a></li>
@@ -1563,7 +1578,7 @@ Another reason why it is good to keep the PR open or in draft status is that peo
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.08.17 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.08.23 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
