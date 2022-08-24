@@ -57,14 +57,7 @@ appveyor
 --------
 The top-level ``appveyor`` key specifies configurations for the Appveyor
 CI service.  This is usually **read-only** and should not normally be manually
-modified.  Tools like conda-smithy may modify this, as need.  It has a single
-``secure`` field which contains the binstar token.  For example:
-
-.. code-block:: yaml
-
-    appveyor:
-      secure:
-        BINSTAR_TOKEN: <some big hash>
+modified. Tools like conda-smithy may modify this, as needed.
 
 .. _azure-config:
 
@@ -221,14 +214,7 @@ circle
 --------
 The top-level ``circle`` key specifies configurations for the Circle
 CI service.  This is usually **read-only** and should not normally be manually
-modified.  Tools like conda-smithy may modify this, as needed.  It has a single
-``secure`` field which contains the binstar token.  For example:
-
-.. code-block:: yaml
-
-    appveyor:
-      secure:
-        BINSTAR_TOKEN: <some big hash>
+modified.  Tools like conda-smithy may modify this, as needed.
 
 .. _conda_forge_output_validation:
 
@@ -503,14 +489,7 @@ travis
 ------
 The top-level ``travis`` key specifies configurations for the Travis
 CI service.  This is usually **read-only** and should not normally be manually
-modified.  Tools like conda-smithy may modify this, as needed.  It has a single
-``secure`` field which contains the binstar token.  For example:
-
-.. code-block:: yaml
-
-    travis:
-      secure:
-        BINSTAR_TOKEN: <some big hash>
+modified.  Tools like conda-smithy may modify this, as needed.
 
 .. _upload_on_branch:
 
