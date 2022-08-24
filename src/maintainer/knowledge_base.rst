@@ -949,6 +949,7 @@ For example, the package `pyquil <https://github.com/rigetti/pyquil>`__ only
 
 Currently available packages:
 
+  - exceptiongroup
   - importlib-metadata
 
 
