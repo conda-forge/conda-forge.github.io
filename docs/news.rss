@@ -4,7 +4,7 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Tue, 23 Aug 2022 14:11:47 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 24 Aug 2022 17:39:24 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
     <item>
       <title>2022-08-17: Dropping PyPy 3.7</title>

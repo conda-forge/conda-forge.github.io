@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Knowledge Base &#8212; conda-forge 2022.08.23 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2022.08.24 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.08.23 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.08.24 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -1357,6 +1357,15 @@ that conda-build spits out will sort the package uploaded with an <code class="d
 higher than the package uploaded with the <code class="docutils literal notranslate"><span class="pre">dev</span></code> label.</p>
 </section>
 </section>
+<section id="how-to-update-your-feedstock-token">
+<h2>How to update your feedstock token?<a class="headerlink" href="#how-to-update-your-feedstock-token" title="Permalink to this heading">¶</a></h2>
+<p>To reset your feedstock token and fix issues with uploads, follow these steps:</p>
+<ol class="arabic simple">
+<li><p>Create a new text file in the <code class="docutils literal notranslate"><span class="pre">token_reset</span></code> directory of the <code class="docutils literal notranslate"><span class="pre">conda-forge/admin-requests</span></code> repo.</p></li>
+<li><p>Add the name of your feedstock in the text file. While adding the name, don’t add “-feedstock” to the end of it. For example: for <code class="docutils literal notranslate"><span class="pre">python-feedstock</span></code>, just add <code class="docutils literal notranslate"><span class="pre">python</span></code>.</p></li>
+</ol>
+<p>See <a class="reference external" href="https://github.com/conda-forge/admin-requests/blob/main/token_reset/example.txt">token_reset/example.txt</a> for an example.</p>
+</section>
 <section id="using-arch-rebuild-txt">
 <span id="using-arch-rebuild"></span><h2>Using <code class="docutils literal notranslate"><span class="pre">arch_rebuild.txt</span></code><a class="headerlink" href="#using-arch-rebuild-txt" title="Permalink to this heading">¶</a></h2>
 <p>You can add a feedstock to <code class="docutils literal notranslate"><span class="pre">arch-rebuild.txt</span></code> if it requires rebuilding with different architectures/platforms (such as ppc64le or aarch64). To add the feedstock to <code class="docutils literal notranslate"><span class="pre">arch_rebuild.txt</span></code>, open a PR to the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock">conda-forge-pinning-feedstock repository</a>.
@@ -1502,6 +1511,7 @@ This helps mitigate against a bad actor gaining access to an inconspicuous feeds
 <li class="toctree-l4"><a class="reference internal" href="#pre-release-version-sorting">Pre-release version sorting</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-update-your-feedstock-token">How to update your feedstock token?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-arch-rebuild-txt">Using <code class="docutils literal notranslate"><span class="pre">arch_rebuild.txt</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#migrators-and-migrations">Migrators and Migrations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#security-considerations-for-conda-forge-builds">Security considerations for conda-forge builds</a></li>
@@ -1578,7 +1588,7 @@ This helps mitigate against a bad actor gaining access to an inconspicuous feeds
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.08.23 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.08.24 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
