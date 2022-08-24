@@ -21,8 +21,7 @@ community would like to support.
 More details can be found in issue `conda-forge-pinning-feedstock#2623`_.
 Feedback is welcome there.
 
-.. _`conda-forge-pinning-feedstock#2623`:
-https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/2623
+.. _`conda-forge-pinning-feedstock#2623`: https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/2623
 
 2022-08-17: Dropping PyPy 3.7
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
