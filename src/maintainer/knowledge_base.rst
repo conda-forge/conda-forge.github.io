@@ -1524,7 +1524,7 @@ How to update your feedstock token?
 ====================================
 To reset your feedstock token and fix issues with uploads, follow these steps:
 
-1. Create a new text file in the ``token_reset`` directory.
+1. Create a new text file in the ``token_reset`` directory of the ``conda-forge/admin-requests`` repo.
 2. Add the name of your feedstock in the text file. While adding the name, don't add "-feedstock" to the end of it. For example: for ``python-feedstock``, just add ``python``.
 
 See `token_reset/example.txt <https://github.com/conda-forge/admin-requests/blob/main/token_reset/example.txt>`__ for an example.
