@@ -7,6 +7,8 @@ core, any team, or external contributors choose to participate and may
 choose to leave at any time for any reason or for no reason. We deeply
 appreciate all good faith contributions.
 
+.. _code_of_conduct:
+
 Code of Conduct
 ---------------
 Conda-forge adheres to the
