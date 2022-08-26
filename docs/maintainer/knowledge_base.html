@@ -243,7 +243,7 @@ requirements of the VC version. For example, python 2.7 requires <code class="do
 <section id="using-vs2019">
 <h3>Using vs2019<a class="headerlink" href="#using-vs2019" title="Permalink to this heading">¶</a></h3>
 <p>To use <code class="docutils literal notranslate"><span class="pre">vs2019</span></code> make the following changes:</p>
-<p>In conda_build_config.yaml file:</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">c_compiler</span><span class="p">:</span><span class="w">    </span><span class="c1"># [win]</span><span class="w"></span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vs2019</span><span class="w">       </span><span class="c1"># [win]</span><span class="w"></span>
 <span class="nt">cxx_compiler</span><span class="p">:</span><span class="w">  </span><span class="c1"># [win]</span><span class="w"></span>
@@ -284,6 +284,17 @@ requirements of the VC version. For example, python 2.7 requires <code class="do
 <p>Appropriate compiler runtime packages will be automatically added to the package’s runtime requirements and therefore
 there’s no need to specify <code class="docutils literal notranslate"><span class="pre">libgcc</span></code> or <code class="docutils literal notranslate"><span class="pre">libgfortran</span></code>. There are additional informations about how conda-build 3 treats
 compilers in the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html">conda docs</a>.</p>
+</div>
+</section>
+<section id="rust-nightly">
+<h3>Rust Nightly<a class="headerlink" href="#rust-nightly" title="Permalink to this heading">¶</a></h3>
+<p>Many rust packages rely on nightly versions of the rust compiler. Given this fast release cadence, <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> does not yet pull each release.
+Instead, rust nightly versions are pulled into the <code class="docutils literal notranslate"><span class="pre">dev</span></code> branch of the <a class="reference external" href="https://github.com/conda-forge/rust-feedstock/tree/dev">conda-forge/rust-feedstock</a> on an as-needed basis.
+For a new version, please file an issue on that feedstock.</p>
+<p>To enable the rust nightly compiler in your feedstock, follow the section above and then add the <code class="docutils literal notranslate"><span class="pre">rust_dev</span></code> channel in the <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channel_sources</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge/label/rust_dev,conda-forge</span><span class="w"></span>
+</pre></div>
 </div>
 </section>
 <section id="core-dependency-tree-packages-cdts">
@@ -1449,6 +1460,7 @@ This helps mitigate against a bad actor gaining access to an inconspicuous feeds
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#special-dependencies-and-packages">Special Dependencies and Packages</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#compilers">Compilers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rust-nightly">Rust Nightly</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#core-dependency-tree-packages-cdts">Core Dependency Tree Packages (CDTs)</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#libgl">libGL</a></li>
 </ul>
