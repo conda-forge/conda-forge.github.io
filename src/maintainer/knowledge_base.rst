@@ -264,7 +264,7 @@ Many rust packages rely on nightly versions of the rust compiler. Given this fas
 Instead, rust nightly versions are pulled into the ``dev`` branch of the `conda-forge/rust-feedstock <https://github.com/conda-forge/rust-feedstock/tree/dev>`_ on an as-needed basis.
 For a new version, please file an issue on that feedstock.
 
-To enable the rust nightly compiler in your feedstock, follow the section above and then add the ``dev`` channel in the ``conda_build_config.yaml`` file:
+To enable the rust nightly compiler in your feedstock, follow the section above and then add the ``rust_dev`` channel in the ``conda_build_config.yaml`` file:
 
 .. code-block:: yaml
 
