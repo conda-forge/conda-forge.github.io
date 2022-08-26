@@ -563,9 +563,37 @@ not necessarily the name of the conda package (they are sometimes different).
 Testing for an import will catch the bulk of the packaging errors, generally
 including the presence of dependencies. However, it does not assure that the
 package works correctly. In particular, it doesn't test if it works
-correctly with the versions of dependencies used.
+correctly with the versions of dependencies used. In some cases, the top level
+import name does not contain any executable code (e.g. a package with an empty
+``__init__.py``, or without any direct imports). This test would always pass!
+In these cases, it helps to add more imports explicitly targetting modules
+that do contain executable code (e.g. ``package_name.core``).
 
 It is good to run some other tests of the code itself (the test suite) if possible.
+
+.. _pip_check:
+
+pip check
+^^^^^^^^^
+
+For PyPI packages, we strongly recommend including ``pip check`` as part of the ``test.commands`` section:
+
+.. code-block:: yaml
+
+    test:
+      commands:
+        - pip check
+
+This command will check if all the dependencies specified in the Python
+metadata are satisfied.
+
+.. note::
+  ``pip check`` can sometimes fail due to metadata discrepancies between
+  PyPI and conda-forge (e.g. same package with different names). In these
+  cases, the reviewer must evaluate whether the error was a false negative.
+  Tip: use ``pip list`` to show what ``pip check`` "sees".
+
+
 
 Running unit tests
 ..................
@@ -686,17 +714,17 @@ installed on your machine if you are building a package for Linux.
 For MacOS, it will prompt you to select a location for the SDK (e.g. ``export OSX_SDK_DIR=/opt``) to be downloaded.
 
 .. code-block:: bash
-        
+
     $ cd ~/staged-recipes
     $ python build-locally.py
 
 If you know which image you want to build, you can specify it as an argument to the script.
 
 .. code-block:: bash
-        
+
     $ cd ~/staged-recipes
     $ python build-locally.py <VARIANT>
- 
+
 where ``<VARIANT>`` is one of the file names in the ``.ci_support/`` directory, e.g. ``linux64``, ``osx64``, and ``linux64_cuda102``.
 
 
@@ -761,11 +789,11 @@ For some languages, the community provides tools which can automate this process
 * **Rust**
 
   `cargo-bundle-licenses <https://github.com/sstadick/cargo-bundle-licenses>`__ can be included in the build process of a package and will automatically collect and add the license files of all dependencies of a package.
-  
+
   For a detailed description, please visit the project page but a short example can be found below.
-  
+
   First, include the collection of licenses as a step of the build process.
-  
+
   .. code-block:: yaml
 
     build:
@@ -775,17 +803,17 @@ For some languages, the community provides tools which can automate this process
         - build_command_goes_here
 
   Then, include the tool as a build time dependency.
-  
+
   .. code-block:: yaml
-  
+
     requirements:
       build:
         - cargo-bundle-licenses
 
   Finally, make sure that the generated file is included in the recipe.
-   
+
   .. code-block:: yaml
-  
+
     about:
       license_file:
         - THIRDPARTY.yml
@@ -793,13 +821,13 @@ For some languages, the community provides tools which can automate this process
 
 .. important::
 
-  We are not lawyers and cannot guarantee that the above advice is correct or that the tools are able to find all license files. 
+  We are not lawyers and cannot guarantee that the above advice is correct or that the tools are able to find all license files.
   Additionally, we are unable to accept any responsibility or liability.
   It is always your responsibility to double-check that all licenses are included and verify that any generated output is correct.
-  
+
 .. note::
 
-   The correct and automated packaging of dependency licenses is an ongoing discussion. Please feel free to add your thoughs to `this <https://github.com/conda-forge/conda-forge.github.io/issues/1052>`__ discussion. 
+   The correct and automated packaging of dependency licenses is an ongoing discussion. Please feel free to add your thoughs to `this <https://github.com/conda-forge/conda-forge.github.io/issues/1052>`__ discussion.
 
 Extra
 -----
@@ -832,6 +860,7 @@ If you want the name of the feedstock to be different from the package name in t
     feedstock-name: <name>
 
 Here, ``<name>`` is the name you would want for the feedstock.
+If not specified, the name will be taken from the top-level ``name`` field in ``meta.yaml``.
 
 Miscellaneous
 =============

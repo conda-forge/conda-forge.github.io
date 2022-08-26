@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Contributing packages &#8212; conda-forge 2022.08.25 documentation</title>
+    <title>Contributing packages &#8212; conda-forge 2022.08.26 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.08.25 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.08.26 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Contributing packages</a></li> 
@@ -543,8 +543,30 @@ not necessarily the name of the conda package (they are sometimes different).</p
 <p>Testing for an import will catch the bulk of the packaging errors, generally
 including the presence of dependencies. However, it does not assure that the
 package works correctly. In particular, it doesn’t test if it works
-correctly with the versions of dependencies used.</p>
+correctly with the versions of dependencies used. In some cases, the top level
+import name does not contain any executable code (e.g. a package with an empty
+<code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>, or without any direct imports). This test would always pass!
+In these cases, it helps to add more imports explicitly targetting modules
+that do contain executable code (e.g. <code class="docutils literal notranslate"><span class="pre">package_name.core</span></code>).</p>
 <p>It is good to run some other tests of the code itself (the test suite) if possible.</p>
+</section>
+<section id="pip-check">
+<span id="id5"></span><h5>pip check<a class="headerlink" href="#pip-check" title="Permalink to this heading">¶</a></h5>
+<p>For PyPI packages, we strongly recommend including <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">check</span></code> as part of the <code class="docutils literal notranslate"><span class="pre">test.commands</span></code> section:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">test</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">commands</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip check</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This command will check if all the dependencies specified in the Python
+metadata are satisfied.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">check</span></code> can sometimes fail due to metadata discrepancies between
+PyPI and conda-forge (e.g. same package with different names). In these
+cases, the reviewer must evaluate whether the error was a false negative.
+Tip: use <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">list</span></code> to show what <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">check</span></code> “sees”.</p>
+</div>
 </section>
 </section>
 <section id="running-unit-tests">
@@ -739,7 +761,7 @@ It is always your responsibility to double-check that all licenses are included 
 <section id="extra">
 <h3>Extra<a class="headerlink" href="#extra" title="Permalink to this heading">¶</a></h3>
 <section id="recipe-maintainer">
-<span id="id5"></span><h4>Recipe Maintainer<a class="headerlink" href="#recipe-maintainer" title="Permalink to this heading">¶</a></h4>
+<span id="id6"></span><h4>Recipe Maintainer<a class="headerlink" href="#recipe-maintainer" title="Permalink to this heading">¶</a></h4>
 <p>A maintainer is an individual who is responsible for maintaining and updating one or more feedstock repositories and packages as well as their future versions. They have push access to the feedstock repositories of only the packages they maintain and can merge pull requests into it.</p>
 <p>Contributing a recipe for package makes you the <code class="docutils literal notranslate"><span class="pre">maintainer</span></code> of that package automatically.
 See <a class="reference external" href="https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role">Maintainers Role</a> and <a class="reference external" href="https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-packages">Maintaining Packages</a> to learn more about what are the things that maintainers do.
@@ -748,20 +770,21 @@ If you wish to be a maintainer of a certain package, you should contact current 
 <p>where username is the GitHub username of the new maintainer to be added. Please refer to <a class="reference external" href="https://conda-forge.org/docs/orga/guidelines.html#becoming-a-maintainer">Becoming a maintainer</a> and <a class="reference external" href="https://conda-forge.org/docs/maintainer/updating_pkgs.html#updating-the-maintainer-list">Updating the maintainer</a> for detailed instructions.</p>
 </section>
 <section id="feedstock-name">
-<span id="id6"></span><h4>Feedstock name<a class="headerlink" href="#feedstock-name" title="Permalink to this heading">¶</a></h4>
+<span id="id7"></span><h4>Feedstock name<a class="headerlink" href="#feedstock-name" title="Permalink to this heading">¶</a></h4>
 <p>If you want the name of the feedstock to be different from the package name in the staged-recipes, you can use the <code class="docutils literal notranslate"><span class="pre">feedstock-name</span></code> directive in the recipe of that package, like this:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">extra</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">feedstock-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;name&gt;</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Here, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code> is the name you would want for the feedstock.</p>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code> is the name you would want for the feedstock.
+If not specified, the name will be taken from the top-level <code class="docutils literal notranslate"><span class="pre">name</span></code> field in <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>.</p>
 </section>
 </section>
 </section>
 <section id="miscellaneous">
 <h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this heading">¶</a></h2>
 <section id="activate-scripts">
-<span id="id7"></span><h3>Activate scripts<a class="headerlink" href="#activate-scripts" title="Permalink to this heading">¶</a></h3>
+<span id="id8"></span><h3>Activate scripts<a class="headerlink" href="#activate-scripts" title="Permalink to this heading">¶</a></h3>
 <p>Recipes are allowed to have activate scripts, which will be <code class="docutils literal notranslate"><span class="pre">source</span></code>d or
 <code class="docutils literal notranslate"><span class="pre">call</span></code>ed when the environment is activated. It is generally recommended to avoid using
 activate scripts when another option is possible because people do not always
@@ -907,6 +930,7 @@ These expressions are written in <a class="reference external" href="http://jinj
 <li class="toctree-l5"><a class="reference internal" href="#simple-existence-tests">Simple existence tests</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#testing-python-packages">Testing python packages</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#testing-importing">Testing importing</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pip-check">pip check</a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="#running-unit-tests">Running unit tests</a><ul>
@@ -1016,7 +1040,7 @@ These expressions are written in <a class="reference external" href="http://jinj
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.08.25 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.08.26 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Contributing packages</a></li> 

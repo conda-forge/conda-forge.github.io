@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Guidelines &#8212; conda-forge 2022.08.25 documentation</title>
+    <title>Guidelines &#8212; conda-forge 2022.08.26 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="00_intro.html" title="Organisation Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.08.25 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.08.26 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Organisation Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Guidelines</a></li> 
@@ -227,6 +227,77 @@ For example, we held off turning off py27 even after numpy, scipy dropped suppor
 </ol>
 </section>
 </section>
+<section id="reviewing-recipes">
+<span id="reviewer-guidelines"></span><h2>Reviewing recipes<a class="headerlink" href="#reviewing-recipes" title="Permalink to this heading">¶</a></h2>
+<p>To add new packages to conda-forge, users can submit a PR to <code class="docutils literal notranslate"><span class="pre">staged-recipes</span></code> (see <a class="reference internal" href="../maintainer/adding_pkgs.html#dev-contribute-pkgs"><span class="std std-ref">Contributing packages</span></a> for more details),
+where it will undergo a series of automated checks and a code review.
+Any conda-forge member can perform a code review, but the final merge can only be done by the <code class="docutils literal notranslate"><span class="pre">staged-recipes</span></code> or <code class="docutils literal notranslate"><span class="pre">core</span></code> teams.
+The following sections suggest guidelines on how to perform a successful code review.
+We distinguish between “Required” and “Recommended” as follows:</p>
+<ul class="simple">
+<li><p>Required: These guidelines are very important and a requisite for PR acceptance. Exceptions are rare and usually require  <code class="docutils literal notranslate"><span class="pre">core</span></code> approval.</p></li>
+<li><p>Recommended: These are considered “nice to have” features. Ideally, all recipes should abide by them, but exceptions are tolerated as long as justifiable reasons are provided.</p></li>
+</ul>
+<section id="generalities">
+<h3>Generalities<a class="headerlink" href="#generalities" title="Permalink to this heading">¶</a></h3>
+<p>Required:</p>
+<ol class="arabic simple">
+<li><p>All interactions in the review adhere to our <a class="reference internal" href="governance.html#code-of-conduct"><span class="std std-ref">Code of Conduct</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conda-forge-linter</span></code> <a class="reference external" href="https://github.com/conda-forge/conda-smithy/blob/main/conda_smithy/lint_recipe.py">checks</a> pass successfully.
+Sometimes the linter will also suggest modifications considered optional (hints); even if recommended, these are not required to accept the submission.</p></li>
+<li><p>The CI checks pass successfully in the required platforms. Exceptions:
+- <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> can fail in platforms other than Linux (e.g. missing dependency). For non-noarch packages, the failing platform should be skipped via <code class="docutils literal notranslate"><span class="pre">skip:</span> <span class="pre">true</span>&#160; <span class="pre">#</span> <span class="pre">[&lt;platform</span> <span class="pre">selector&gt;]</span></code>
+- CI times out or runs out of storage because it tries to build all Python versions in the same job. As long as one version passes, that’s ok, since they will run individually in the resulting feedstock.</p></li>
+<li><p>The submission fulfills the <a class="reference external" href="https://github.com/conda-forge/staged-recipes/blob/main/.github/pull_request_template.md">pull request template checklist</a>.</p></li>
+<li><p>The license has been correctly identified and allows redistribution.</p></li>
+<li><p>The source should not contain vendored code. If it does:
+- Package the vendored project separately and specify the needed dependency in the <code class="docutils literal notranslate"><span class="pre">requirements</span></code> section. Preferred if the vendored code is needed at runtime.
+- Allow the vendored code, but make sure the license files are included in the <code class="docutils literal notranslate"><span class="pre">about.license</span></code> field. Usually ok if it’s only a build-time dependency (e.g. headers-only library)</p></li>
+</ol>
+<p>Recommended:</p>
+<ol class="arabic simple">
+<li><p>Source should be obtained from a URL that provides a stable tarball (same SHA over time).
+Git or other SVC repositories should only be used as a last resort.</p></li>
+<li><p>Host requirements contained in the <a class="reference internal" href="../maintainer/pinning_deps.html#pinned-deps"><span class="std std-ref">conda-forge pinnings</span></a> should be <em>name-only</em>; i.e. they do not specify a separate version.</p></li>
+<li><p>Runtime requirements are not pinned too strictly without justification.
+Thanks to repodata patches, we can afford to be optimistic about lower or upper bounds instead of single-version pins: <code class="docutils literal notranslate"><span class="pre">&gt;=1.4.2,&lt;1.5</span></code> is better than <code class="docutils literal notranslate"><span class="pre">==1.4.2</span></code>.</p></li>
+<li><p>The package should place its files under standard locations (e.g. executables under <code class="docutils literal notranslate"><span class="pre">$PREFIX/bin</span></code>), unless justification is provided.</p></li>
+</ol>
+</section>
+<section id="python-specific-details">
+<h3>Python-specific details<a class="headerlink" href="#python-specific-details" title="Permalink to this heading">¶</a></h3>
+<p>Required:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code> packages fulfill the <a class="reference internal" href="../maintainer/knowledge_base.html#noarch"><span class="std std-ref">required criteria</span></a> to be considered as such.</p></li>
+</ol>
+<p>Recommended:</p>
+<ol class="arabic simple">
+<li><p>The package does not accidentally include a <code class="docutils literal notranslate"><span class="pre">tests</span></code> (also <code class="docutils literal notranslate"><span class="pre">test</span></code>, <code class="docutils literal notranslate"><span class="pre">_tests</span></code>, or similar) top-level package.
+The list of files is usually printed by <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> after the <code class="docutils literal notranslate"><span class="pre">adding</span> <span class="pre">license</span> <span class="pre">file</span></code> message.
+If this happens, upstream should modify their <code class="docutils literal notranslate"><span class="pre">setuptools.find_packages()</span></code> usage accordingly.
+Alternatively, a patch can be applied. See <a class="reference external" href="https://github.com/conda-forge/staged-recipes/pull/19166/commits/0284fc6da273031a4f93a1fea4533822cd4b385d">example</a>.</p></li>
+<li><p>The modules checked by <code class="docutils literal notranslate"><span class="pre">test.imports</span></code> are not empty (this can happen with placeholder <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files in top-level packages).</p></li>
+<li><p>The versions reported by <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">list</span></code> and <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">build</span></code> logs match.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">check</span></code> passes. See <a class="reference internal" href="../maintainer/adding_pkgs.html#pip-check"><span class="std std-ref">pip check</span></a> for more details.</p></li>
+<li><p>If a project can be considered <code class="docutils literal notranslate"><span class="pre">noarch</span></code> (see <a class="reference internal" href="../maintainer/knowledge_base.html#noarch"><span class="std std-ref">criteria</span></a>), it should be packaged as such.</p></li>
+</ol>
+</section>
+<section id="compiled-objects">
+<h3>Compiled objects<a class="headerlink" href="#compiled-objects" title="Permalink to this heading">¶</a></h3>
+<p>Required:</p>
+<ol class="arabic simple">
+<li><p>The source does not include compiled files.
+In principle, all compiled objects need to be generated in the CI, from source.
+Exceptions to this rule (e.g. binary repackaging) need to be approved explicitly.</p></li>
+</ol>
+<p>Recommended:</p>
+<ol class="arabic simple">
+<li><p>SONAMEs follow naming recommendations given by upstream.</p></li>
+<li><p>If ABI compatibility is important for the package, <code class="docutils literal notranslate"><span class="pre">run_exports</span></code> are set accordingly.
+See <a class="reference internal" href="../maintainer/pinning_deps.html#pinned-deps"><span class="std std-ref">Pinned dependencies</span></a> and the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#export-runtime-requirements">conda-build docs</a> for more information.</p></li>
+</ol>
+</section>
+</section>
 </section>
 
 
@@ -252,6 +323,12 @@ For example, we held off turning off py27 even after numpy, scipy dropped suppor
 <li class="toctree-l3"><a class="reference internal" href="#becoming-a-maintainer">Becoming a maintainer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#language-versions">Language versions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#python">Python</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#reviewing-recipes">Reviewing recipes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generalities">Generalities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-specific-details">Python-specific details</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compiled-objects">Compiled objects</a></li>
 </ul>
 </li>
 </ul>
@@ -332,7 +409,7 @@ For example, we held off turning off py27 even after numpy, scipy dropped suppor
         <li class="right" >
           <a href="00_intro.html" title="Organisation Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.08.25 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.08.26 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Organisation Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Guidelines</a></li> 
