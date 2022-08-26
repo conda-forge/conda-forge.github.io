@@ -983,7 +983,6 @@ In order to qualify as a noarch python package, all of the following criteria mu
   - If ``console_scripts`` ``entry_points`` are defined in ``setup.py`` or ``setup.cfg``, they are also listed in
     the ``build`` section of ``meta.yaml``
   - No activate scripts
-  - Not a dependency of conda
 
 .. note::
 
