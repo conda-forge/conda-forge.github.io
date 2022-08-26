@@ -206,7 +206,7 @@ Using vs2019
 
 To use ``vs2019`` make the following changes:
 
-In conda_build_config.yaml file:
+In ``conda_build_config.yaml`` file:
 
 .. code-block:: yaml
 
@@ -256,6 +256,21 @@ A package that needs all five compilers would define
   Appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore
   there's no need to specify ``libgcc`` or ``libgfortran``. There are additional informations about how conda-build 3 treats
   compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html>`__.
+
+Rust Nightly
+------------
+
+Many rust packages rely on nightly versions of the rust compiler. Given this fast release cadence, ``conda-forge`` does not yet pull each release.
+Instead, rust nightly versions are pulled into the ``dev`` branch of the `conda-forge/rust-feedstock <https://github.com/conda-forge/rust-feedstock/tree/dev>`_ on an as-needed basis.
+For a new version, please file an issue on that feedstock.
+
+To enable the rust nightly compiler in your feedstock, follow the section above and then add the ``dev`` channel in the ``conda_build_config.yaml`` file:
+
+.. code-block:: yaml
+
+    channel_sources:
+      - conda-forge/label/rust_dev,conda-forge
+
 
 .. _cdt_packages:
 
