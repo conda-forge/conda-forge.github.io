@@ -226,8 +226,8 @@ If this is the case, the following general guidelines should be followed:
 1. Update the feedstocks recipe to ensure future builds do not propagate the issue with a new build number.
 2. Please make a PR there to add a patch. The patch should specify as much has possible the versions
    and times when the packages were generated. It may use the following information
-    - The current timestamp, you may generate it with ``python -c "import time; print(f'{time.time():.0f}000')"``.
-    - The problematic version and build numbers of the packages to affect.
+   - The current timestamp, you may generate it with ``python -c "import time; print(f'{time.time():.0f}000')"``.
+   - The problematic version and build numbers of the packages to affect.
 
 If instead the actual contents of the package are broken, the following steps will
 remove broken packages from the ``main`` channel:
