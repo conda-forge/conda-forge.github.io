@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Maintaining packages &#8212; conda-forge 2022.08.29 documentation</title>
+    <title>Maintaining packages &#8212; conda-forge 2022.09.12 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.08.29 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.09.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Maintaining packages</a></li> 
@@ -259,8 +259,15 @@ This is useful when trying out packages built in a PR. But you first need to dow
 <p>Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel.</p>
 <p>If the only issue is in the package metadata, we can directly patch it using
 the <a class="reference external" href="https://github.com/conda-forge/conda-forge-repodata-patches-feedstock">repo data patches feedstock</a>.
-Please make a PR there to add a patch. In order to ensure future versions have the required changes, you also
-need to change the recipe to reflect the metadata changes.</p>
+If this is the case, the following general guidelines should be followed:
+1. Update the feedstocks recipe to ensure future builds do not propagate the issue with a new build number.
+2. Please make a PR there to add a patch. The patch should specify as much has possible the versions and times when the packages were generated. It may use the following information</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The current timestamp, you may generate it with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-c</span> <span class="pre">&quot;import</span> <span class="pre">time;</span> <span class="pre">print(f'{time.time():.0f}000')&quot;</span></code>.</p></li>
+<li><p>The problematic version and build numbers of the packages to affect.</p></li>
+</ul>
+</div></blockquote>
 <p>If instead the actual contents of the package are broken, the following steps will
 remove broken packages from the <code class="docutils literal notranslate"><span class="pre">main</span></code> channel:</p>
 <ol class="arabic simple">
@@ -419,7 +426,7 @@ To contact core, ping them by mentioning &#64;conda-forge/core in a comment or, 
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.08.29 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.09.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Maintaining packages</a></li> 
