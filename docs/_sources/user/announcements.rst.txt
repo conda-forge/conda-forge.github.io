@@ -8,6 +8,13 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2022
 ----
 
+2022-09-27: Conda Moving to CalVer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Conda is moving to CalVer per `CEP 8 <https://github.com/conda-incubator/ceps/blob/main/cep-8.md>`_. 
+The first CalVer and last SemVer should be ``22.9.0`` and ``4.14.0`` respectively. This change 
+maintains version order so you should not expect any issues.
+
 2022-08-24: Dropping Python 3.7
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
