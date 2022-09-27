@@ -8,7 +8,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2022
 ----
 
-2022-09-27 Conda Moving to CalVer
+2022-09-27: Conda Moving to CalVer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Conda is moving to CalVer per `CEP 8 <https://github.com/conda-incubator/ceps/blob/main/cep-8.md>`_. 
