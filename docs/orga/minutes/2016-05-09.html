@@ -6,7 +6,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>2016-05-09 Exceptional meeting regarding build customization &#8212; conda-forge 2022.09.27 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
@@ -106,12 +106,7 @@
 </div>
 </li>
 <li><p>Phil points out that global config.yaml might still need code changes for new versions of, say, Python.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   MichaelS  says no, theres surely ways we can express things like latest 2  versions - just question of how to technically achieve.
-</pre></div>
-</div>
-</li>
-<li><p>Ray:  filter things out of global config.yaml when they are not used in a  recipe (so that matrix dimensions are not needlessly added)</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Ullrich:  However, one must be careful to not filter out indirect dependencies  that are not explicitly named in meta.yaml, but were intentionally added  to config.yaml. (example: meta.yaml lists h5py as a requirement, and  config.yaml restricts the indirect hdf5 dependency to a particular  variant of the hdf5 package). It is safer to err on the too much side.
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   MichaelS  says no, theres surely ways we can express things like 
 </pre></div>
 </div>
 </li>
@@ -119,21 +114,40 @@
 </li>
 </ul>
 </li>
+</ul>
+<p>latest 2  versions</p>
+<ul>
+<li><p>just question of how to technically achieve.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> *   Ray:  filter things out of global config.yaml when they are not used in a  recipe (so that matrix dimensions are not needlessly added)
+
+         *   Ullrich:  However, one must be careful to not filter out indirect dependencies  that are not explicitly named in meta.yaml, but were intentionally added  to config.yaml. (example: meta.yaml lists h5py as a requirement, and  config.yaml restricts the indirect hdf5 dependency to a particular  variant of the hdf5 package). It is safer to err on the 
+</pre></div>
+</div>
+</li>
+</ul>
+<p>too much
+side.</p>
+<ul>
 <li><p>Build environment specification:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Conda-build 848 has bootstrap environment: user creates an env, that env is captured as build requirements for another recipe.
-
-        *   Phil: this ruins reproducibility, since it depends on the setup of the users system at build time.
-
-                *   Stuart: were already not reproducible, and this bootstrap doesnt make things worse.
-    *   MichaelS:  if this is used to hard-pin build-time dependencies, it may actually  help reproducibility.  Hard-pinnning at build time is orthogonal to this  PR, but may be easier to achieve with it.
-    *   Ullrich:  if the contents of the build environment are recorded in index.json,  one can recreate the bootstrap environment at any time (or equivalently,  create config.yaml from that information), subject to the degree of  accuracy of the recorded data (e.g. are the source channels recorded, or  only version numbers and build strings?)
-
-        *   MichaelS,  Kale concerned that people may include too many unnecessary packages in  build requirements this way, out of carelessness or ignorance
-
-                *   Ullrich: not a big deal - runtime dependencies are what really matter.
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Conda-build 848 has 
 </pre></div>
 </div>
 </li>
+</ul>
+<p>bootstrap
+environment: user creates an env, that env is captured as build requirements for another recipe.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>            *   Phil: this ruins reproducibility, since it depends on the setup of the users system at build time.
+
+                    *   Stuart: were already not reproducible, and this bootstrap doesnt make things worse.
+        *   MichaelS:  if this is used to hard-pin build-time dependencies, it may actually  help reproducibility.  Hard-pinnning at build time is orthogonal to this  PR, but may be easier to achieve with it.
+        *   Ullrich:  if the contents of the build environment are recorded in index.json,  one can recreate the bootstrap environment at any time (or equivalently,  create config.yaml from that information), subject to the degree of  accuracy of the recorded data (e.g. are the source channels recorded, or  only version numbers and build strings?)
+
+            *   MichaelS,  Kale concerned that people may include too many unnecessary packages in  build requirements this way, out of carelessness or ignorance
+
+                    *   Ullrich: not a big deal - runtime dependencies are what really matter.
+</pre></div>
+</div>
+<ul>
 <li><p>Compiler customization:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Mark: 848 is OK, but how does it address compiler and build flags?
 </pre></div>
@@ -403,7 +417,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2022, conda-forge.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.2.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

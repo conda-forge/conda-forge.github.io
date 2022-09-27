@@ -1494,7 +1494,8 @@ in ``recipe/conda_build_config.yaml`` in their respective feedstocks.
 
 .. note::
 
-  A rerender needs to happen for these changes to reflect in CI files.
+  A rerender needs to happen for these changes to reflect in CI files. The `channel_targets` entries map
+  `- <channel target> <label target>` pairs for use in the post-build upload step.
 
 Installing a pre-release build
 ------------------------------
