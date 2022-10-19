@@ -186,7 +186,7 @@ FAQ
 
 :ref:`(Q) <mfaq_changes_to_major_projects>` **Does ``conda-forge`` ever make significant changes or apply code patches to significant upstream packages?**
 
-  We generally do not make changes, but there are many notable exceptions and we have no set policy. These changes currently fall into
+  We generally try to avoid changes, but there are many notable exceptions and we have no set policy. These changes currently fall into
   a few categories. Upstream projects that violate our community norms or pose significant security risks through their policies may
   be changed so that they can be distributed on ``conda-forge``. In many cases though, these projects are not distributed at all. We
   do employ extensive changes to project build scripts in order to properly build and install projects into conda environments.
