@@ -192,4 +192,4 @@ FAQ
   do employ extensive changes to project build scripts in order to properly build and install projects into conda environments.
   Finally, in some cases we add, enable, or disable features in specific projects to ensure they are braodly compatible with the
   ``conda-forge`` package set. The set of patches/changes we apply is always located in the feedstock that built the package. We
-  also maintain a list of significant changes for some packages in our documentation
+  also maintain a list of significant changes for some packages in our documentation.
