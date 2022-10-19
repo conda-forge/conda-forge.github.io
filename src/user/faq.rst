@@ -65,12 +65,12 @@ FAQ
 
 :ref:`(Q) <faq_compiler_metapkg>` **How can I install a C/C++ compiler in my environment?**
 
-  You can use our convenient meta-packages ``c-compiler`` and ``cxx-compiler`` to install a compiler stack that fits your platform. Error messages such as 
-  
+  You can use our convenient meta-packages ``c-compiler`` and ``cxx-compiler`` to install a compiler stack that fits your platform. Error messages such as
+
   .. code-block::
 
     x86_64-apple-darwin13.4.0-clang: No such file or directory
-    
+
   are a telltale sign that you are lacking compilers.
 
 .. _faq_compiler_required_options:
@@ -98,7 +98,7 @@ FAQ
   build with some of the flags supplied by conda-forge?  What if you are building something that
   is setup for cross-compiling and expects ``CC`` to contain the name of the target toolchain but
   wants to be able to build some things for the build-host to use during the build by just calling
-  ``gcc``? 
+  ``gcc``?
 
   The :ref:`compiler metapackages mentioned above <faq_compiler_metapkg>` also install packages that
   create symlinks of the short names (like ``gcc``) to the actual toolchain binary names (like
@@ -128,14 +128,14 @@ FAQ
 :ref:`(Q) <faq_cuda_compiler_header>` **How can I compile CUDA (host or device) codes in my environment?**
 
   Unfortunately, this is not possible with conda-forge's current infrastructure (``nvcc``, ``cudatoolkit``, etc) if there is no local CUDA Toolkit installation. In particular, the ``nvcc`` package provided on conda-forge is a *wrapper package* that exposes the actual ``nvcc`` compiler to our CI infrastructure in a ``conda``-friendly way; it does not contain the full ``nvcc`` compiler toolchain. One of the reasons is that CUDA headers like ``cuda.h``, ``cuda_runtime.h``, etc, which are needed at compile time, are not redistributable according to NVIDIA's EULA. Likewise, the ``cudatoolkit`` package only contains CUDA runtime libraries and not the compiler toolchain.
-  
+
   If you need to compile CUDA code, even if it involves only CUDA host APIs, you will still need a valid CUDA Toolkit installed locally and use it. Please refer to `NVCC's documentation <https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html>`_ for the CUDA compiler usage and `CUDA Programming Guide <https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html>`_ for general CUDA programming.
 
 .. _faq_abi_incompatibility:
 
 :ref:`(Q) <faq_abi_incompatibility>` **How to handle breaking of a package due to ABI incompatibility?**
 
-  If your package breaks ABI with a version bump, here are a few steps you can take to fix it: 
+  If your package breaks ABI with a version bump, here are a few steps you can take to fix it:
 
   - Rebuild the new version with corrected ``run_exports``.
   - Rebuild the old version with corrected ``run_exports``.
