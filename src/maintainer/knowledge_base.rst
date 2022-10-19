@@ -1607,5 +1607,4 @@ Python
 ------
 
 We carry an extensive set of python patches that change some core behaviors around search paths, environment isolation
-in conda environments, and some operating system limits. Many of these patches are only applied to certain systems
-like Windows. See the `python feedstock <https://github.com/conda-forge/python-feedstock>`_ for more details.
+in conda environments, and some operating system limits. See the `python feedstock <https://github.com/conda-forge/python-feedstock>`_ for more details.
