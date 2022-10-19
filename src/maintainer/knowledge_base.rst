@@ -1606,8 +1606,6 @@ have listed some, but not all, of those changes here for specific projects along
 Python
 ------
 
-* We disable searching of registry paths on Windows in order to enable better environment isolation.
-  See this `GitHub issue <https://github.com/ContinuumIO/anaconda-issues/issues/10236>`_ and the associated
-  `patch <https://github.com/conda-forge/python-feedstock/blob/main/recipe/patches/0009-Disable-registry-lookup-unless-CONDA_PY_ALLOW_REG_PA.patch>`_ in the python feedstock.
-* We add the config var ``TZPATH`` to the output of the ``sysconfig`` module functions on Windows. The added variable points to
-  the timezone data in the current conda environment.
+We carry an extensive set of python patches that change some core behaviors around search paths, environment isolation
+in conda environments, and some operating system limits. Many of these patches are only applied to certain systems
+like Windows. See the `python feedstock <https://github.com/conda-forge/python-feedstock>`_ for more details.
