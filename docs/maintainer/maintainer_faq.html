@@ -200,6 +200,16 @@ In that case, you can ping core using the bot command <a class="reference extern
 <p>Even if the maintainer isn’t active anymore, we generally like to keep them in the list of maintainers and not remove them, in case they want to take up maintenance at a later date.</p>
 </div>
 </div></blockquote>
+<p id="mfaq-changes-to-major-projects"><a class="reference internal" href="#mfaq-changes-to-major-projects"><span class="std std-ref">(Q)</span></a> <strong>Does ``conda-forge`` ever make significant changes or apply code patches to significant upstream packages?</strong></p>
+<blockquote>
+<div><p>We generally try to avoid changes, but there are many notable exceptions and we have no set policy. These changes currently fall into
+a few categories. Upstream projects that violate our community norms or pose significant security risks through their policies may
+be changed so that they can be distributed on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. In many cases though, these projects are not distributed at all. We
+do employ extensive changes to project build scripts in order to properly build and install projects into conda environments.
+Finally, in some cases we add, enable, or disable features in specific projects to ensure they are broadly compatible with the
+<code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> package set. The set of patches/changes we apply is always located in the feedstock that built the package. We
+also maintain a list of important packages with changes in our documentation.</p>
+</div></blockquote>
 </section>
 
 

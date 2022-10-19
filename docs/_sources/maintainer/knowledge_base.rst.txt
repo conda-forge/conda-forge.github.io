@@ -700,7 +700,7 @@ MPI Compiler Packages
 
 Do not use the ``[openmpi,mpich]-[mpicc,mpicxx,mpifort]`` metapackages in the ``requirements/build`` section
 of a recipe; the MPI compiler wrappers are included in the main ``openmpi``/``mpich`` packages.
-As shown above, just add ``openmpi``/``mpich`` to the ``requirements/host`` section and use compiler directives for the 
+As shown above, just add ``openmpi``/``mpich`` to the ``requirements/host`` section and use compiler directives for the
 corresponding compilers in ``requirements/build`` as normal.
 
 
@@ -1568,7 +1568,7 @@ Once the PR is merged, the dependency graph is built. After that, the bot walks 
 
 Usually, the bot generates these migrations automatically. However, when a pin is first made or added, one may need to be added by hand. To do this, you can follow the steps mentioned in `Updating package pins <https://conda-forge.org/docs/maintainer/pinning_deps.html#updating-package-pins>`__.
 
-The way migrations proceed are: 
+The way migrations proceed are:
 
   1. You make a PR into the ``migrations`` folder in the `conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`__ with a new yaml file representing the migration.
   2. Once the PR is merged, the bot picks it up, builds a migrator graph, and begins the migration process.
@@ -1586,13 +1586,25 @@ Another reason why it is good to keep the PR open or in draft status is that peo
 Security considerations for conda-forge builds
 ==============================================
 
-All ``conda-forge`` packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use ``conda-forge`` packages if you or your team require a high level of security. 
+All ``conda-forge`` packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use ``conda-forge`` packages if you or your team require a high level of security.
 You are also free to download recipes and rebuild them yourself, if you would like at least that much oversight. However, many people use ``conda-forge`` all the time with no issues and here are some things that ``conda-forge`` does to help with security in some ways:
 
 1. `Sources <https://conda-forge.org/docs/maintainer/adding_pkgs.html#source>`_ (where you specify where the package's source code is coming from) can be pulled from GitHub, PyPI, or other sources and sha256 hashes are always used, so moving of tags or uploading of new sdists can not cause automatic package rebuilds.
    Also, once packages are accepted and made into feedstocks, only the maintainers of that feedstock have the right to merge PRs made to that feedstock.
-2. Each feedstock can only upload packages for that feedstock. This is enforced by using a cf-staging channel where builds are first sent. 
+2. Each feedstock can only upload packages for that feedstock. This is enforced by using a cf-staging channel where builds are first sent.
    A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the conda-forge channel.
    This helps mitigate against a bad actor gaining access to an inconspicuous feedstock and then trying to push a build with malicious code into essential infrastructure packages (e.g., OpenSSL or Python).
 3. We have `artifact-validation <https://github.com/conda-forge/artifact-validation>`__ for validating all the ``conda-forge`` artifacts before they are uploaded to ``anaconda.org``. This validation looks for various security-related items, such as artifacts that overwrite key pieces of certain packages.
 4. We have a dedicated `Security and Systems Sub-Team <https://conda-forge.org/docs/orga/subteams.html?highlight=security+team#security-and-systems-sub-team>`__ who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by ``conda-forge``.
+
+Significant Changes To Upstream Projects
+========================================
+
+From time to time, we make changes in upstream projects so that they better integrate into the ``conda-forge`` ecosystem. We
+have listed some, but not all, of those changes here for specific projects along with any associated documentation.
+
+Python
+------
+
+We carry an extensive set of python patches that change some core behaviors around search paths, environment isolation
+in conda environments, and some operating system limits. See the `python feedstock <https://github.com/conda-forge/python-feedstock>`_ for more details.
