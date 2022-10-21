@@ -1073,7 +1073,7 @@ have something like:
 
 We can replace it with:
 
-.. code-block:: yaml
+.. code-block:: yaml+jinja
   :caption: recipe/meta.yaml (modified)
 
   name: package
@@ -1121,7 +1121,7 @@ only one is true at a time. Perfect! All these changes require a feedstock reren
 
 Last but not least, what if you need conditional dependencies on all three operating systems? Do it like this:
 
-.. code-block:: yaml
+.. code-block:: yaml+jinja
   :caption: recipe/meta.yaml
 
   name: package
