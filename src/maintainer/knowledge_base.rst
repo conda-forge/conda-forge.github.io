@@ -1119,8 +1119,8 @@ would never be true). Fortunately, we can change the default behaviour in ``cond
   :caption: conda-forge.yml
 
   noarch_platforms:
-    - linux-64
-    - win-64
+    - linux_64
+    - win_64
 
 This will provide two runners per package! But since we are using selectors in
 ``conda_build_config.yaml``, only one is true at a time. Perfect! All these changes require a
@@ -1164,9 +1164,9 @@ like this:
   :caption: conda-forge.yml
 
   noarch_platforms:
-    - linux-64
-    - osx-64
-    - win-64
+    - linux_64
+    - osx_64
+    - win_64
 
 Again, remember to rerender after adding / modifying these files so the changes are applied.
 
