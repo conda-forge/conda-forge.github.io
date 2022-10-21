@@ -1114,8 +1114,8 @@ would never be true). Fortunately, we can change the default behaviour in ``cond
     - win-64
 
 This will provide two runners per package! But since we are using selectors in ``conda_build_config.yaml``,
-only one is true at a time. Perfect! All these changes require a feedstock rerender to be applied:
-:ref:`_dev_update_rerender`.
+only one is true at a time. Perfect! All these changes require a feedstock rerender to be applied. See
+:ref:`dev_update_rerender`.
 
 Last but not least, what if you need conditional dependencies on all three operating systems? Do it like this:
 
@@ -1158,7 +1158,8 @@ Last but not least, what if you need conditional dependencies on all three opera
     - osx-64
     - win-64
 
-Again, d
+Again, remember to rerender after adding / modifying these files so the changes are applied.
+
 Noarch generic
 --------------
 
