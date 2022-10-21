@@ -1057,15 +1057,15 @@ Python package, perfectly eligible for ``noarch: python``, but on Windows it req
 have something like:
 
 .. code-block:: yaml
+  :caption: recipe/meta.yaml (original)
 
-  # recipe/meta.yaml
   name: package
   source:
-   ...
+    # ...
   build:
     number: 0
   requirements:
-    ...
+    # ...
     run:
       - python
       - numpy
@@ -1074,16 +1074,16 @@ have something like:
 We can replace it with:
 
 .. code-block:: yaml
+  :caption: recipe/meta.yaml (modified)
 
-  # recipe/meta.yaml
   name: package
   source:
-   ...
+    # ...
   build:
     number: 0
     noarch: python
   requirements:
-    ...
+    # ...
     run:
       - python
       - numpy
@@ -1096,8 +1096,8 @@ Cool! Where does ``target_os`` come from? We need to define it in ``conda_build_
 Note how the values have been chosen carefully so they match the virtual packages names:
 
 .. code-block:: yaml
+  :caption: recipe/conda_build_config.yaml
 
-  # recipe/conda_build_config.yaml
   target_os:
     - unix  # [unix]
     - win   # [win]
@@ -1107,8 +1107,8 @@ the ``target_os`` matrix would only provide the ``unix`` value (because the ``# 
 would never be true). Fortunately, we can change the default behaviour in ``conda-forge.yml``:
 
 .. code-block:: yaml
+  :caption: conda-forge.yml
 
-  # conda-forge.yml
   noarch_platforms:
     - linux-64
     - win-64
@@ -1120,16 +1120,16 @@ only one is true at a time. Perfect! All these changes require a feedstock reren
 Last but not least, what if you need conditional dependencies on all three operating systems? Do it like this:
 
 .. code-block:: yaml
+  :caption: recipe/meta.yaml
 
-  # recipe/meta.yaml
   name: package
   source:
-   ...
+    # ...
   build:
     number: 0
     noarch: python
   requirements:
-    ...
+    # ...
     run:
       - python
       - numpy
@@ -1143,16 +1143,16 @@ Last but not least, what if you need conditional dependencies on all three opera
       {% endif %}
 
 .. code-block:: yaml
+  :caption: recipe/conda_build_config.yaml
 
-  # recipe/conda_build_config.yaml
   target_os:
     - linux  # [linux]
     - osx    # [osx]
     - win    # [win]
 
 .. code-block:: yaml
+  :caption: conda-forge.yml
 
-  # conda-forge.yml
   noarch_platforms:
     - linux-64
     - osx-64
