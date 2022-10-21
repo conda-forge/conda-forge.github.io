@@ -1041,20 +1041,25 @@ by opening a new issue and including ``@conda-forge-admin, please add noarch: py
 Noarch packages with OS-specific dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is possible to build ``noarch`` packages with runtime requirements that depend on the target OS (Linux, Windows,
-MacOS), regardless the architecture (amd64, ARM, PowerPC, etc). This approach relies on four concepts:
+It is possible to build ``noarch`` packages with runtime requirements that depend on the target OS
+(Linux, Windows, MacOS), regardless the architecture (amd64, ARM, PowerPC, etc). This approach
+relies on four concepts:
 
-1.  Virtual packages. Prefixed with a double underscore, they are used by conda to represent properties of the running system 
-    as constraints for the solver. We will use ``__linux``, ``__win`` or ``__osx``, which are only present when
-    the running platform is Linux, Windows, or MacOS, respectively. ``__unix`` is present in both Linux and MacOS. Note
-    that this feature is **only fully available on conda 4.10 or above**.
-2.  Jinja conditionals, which can be used to mimic platform selectors.
+1.  `Virtual packages <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html>`__. 
+    Prefixed with a double underscore, they are used by conda to represent system properties as
+    constraints for the solver at install-time. We will use ``__linux``, ``__win`` or ``__osx``,
+    which are only present when the running platform is Linux, Windows, or MacOS, respectively.
+    ``__unix`` is present in both Linux and MacOS. Note that this feature is **only fully available
+    on conda 4.10 or above**.
+2.  Jinja ``{% if ... %}`` conditionals, which can be used to mimic platform selectors.
 3.  ``conda-forge.ymls``'s :ref:`noarch_platforms` option.
-4.  conda-build's ``conda_build_config.yaml`` to create a matrix build that depends on the ``noarch_platforms`` values.
+4.  `conda-build variants <https://docs.conda.io/projects/conda-build/en/latest/resources/variants.html>`__.
+    We can use ``conda_build_config.yaml`` to create a matrix build that depends on the
+    ``noarch_platforms`` values.
 
-The idea is to generate OS-specific noarch packages for the OS that need different dependencies. Let's say you have a pure
-Python package, perfectly eligible for ``noarch: python``, but on Windows it requires ``windows-only-dependency``. You might
-have something like:
+The idea is to generate different noarch packages for each OS needing different dependencies.
+Let's say you have a pure Python package, perfectly eligible for ``noarch: python``, but on Windows
+it requires ``windows-only-dependency``. You might have something like:
 
 .. code-block:: yaml
   :caption: recipe/meta.yaml (original)
@@ -1071,7 +1076,9 @@ have something like:
       - numpy
       - windows-only-dependency  # [win]
 
-We can replace it with:
+Being non-noarch, this means that the build matrix will include at least 12 outputs: three platforms,
+times four Python versions. This gets worse with arm64, aarch64 and ppc64le in the mix. We can get it down
+to two outputs if replace it with this other approach!
 
 .. code-block:: yaml+jinja
   :caption: recipe/meta.yaml (modified)
@@ -1115,11 +1122,12 @@ would never be true). Fortunately, we can change the default behaviour in ``cond
     - linux-64
     - win-64
 
-This will provide two runners per package! But since we are using selectors in ``conda_build_config.yaml``,
-only one is true at a time. Perfect! All these changes require a feedstock rerender to be applied. See
-:ref:`dev_update_rerender`.
+This will provide two runners per package! But since we are using selectors in
+``conda_build_config.yaml``, only one is true at a time. Perfect! All these changes require a
+feedstock rerender to be applied. See :ref:`dev_update_rerender`.
 
-Last but not least, what if you need conditional dependencies on all three operating systems? Do it like this:
+Last but not least, what if you need conditional dependencies on all three operating systems? Do it
+like this:
 
 .. code-block:: yaml+jinja
   :caption: recipe/meta.yaml
