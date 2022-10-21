@@ -1081,6 +1081,8 @@ We can replace it with:
     # ...
   build:
     number: 0
+    # You can include target_os in the build string for easier identification of builds
+    string: "{{ target_os }}_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"
     noarch: python
   requirements:
     # ...
