@@ -1028,10 +1028,137 @@ In order to qualify as a noarch python package, all of the following criteria mu
   which builds on Linux `and` Windows, with ``build_number`` offsets to create a pair packages, like
   ``dataclasses``.
 
+.. hint::
+  
+  You can build platform-specific ``noarch`` packages to include runtime requirements depending on the target OS.
+  See mini-tutorial below.
+
 If an existing python package qualifies to be converted to a noarch package, you can request the required changes
 by opening a new issue and including ``@conda-forge-admin, please add noarch: python``.
 
+.. _os_specific_noarch:
 
+Noarch packages with OS-specific dependencies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It is possible to build ``noarch`` packages with runtime requirements that depend on the target OS (Linux, Windows,
+MacOS), regardless the architecture (amd64, ARM, PowerPC, etc). This approach relies on four concepts:
+
+1.  Virtual packages. Prefixed with a double underscore, they are used by conda to represent properties of the running system 
+    as constraints for the solver. We will use ``__linux``, ``__win`` or ``__osx``, which are only present when
+    the running platform is Linux, Windows, or MacOS, respectively. ``__unix`` is present in both Linux and MacOS. Note
+    that this feature is **only fully available on conda 4.10 or above**.
+2.  Jinja conditionals, which can be used to mimic platform selectors.
+3.  ``conda-forge.ymls``'s :ref:`noarch_platforms` option.
+4.  conda-build's ``conda_build_config.yaml`` to create a matrix build that depends on the ``noarch_platforms`` values.
+
+The idea is to generate OS-specific noarch packages for the OS that need different dependencies. Let's say you have a pure
+Python package, perfectly eligible for ``noarch: python``, but on Windows it requires ``windows-only-dependency``. You might
+have something like:
+
+.. code-block:: yaml
+
+  # recipe/meta.yaml
+  name: package
+  source:
+   ...
+  build:
+    number: 0
+  requirements:
+    ...
+    run:
+      - python
+      - numpy
+      - windows-only-dependency  # [win]
+
+We can replace it with:
+
+.. code-block:: yaml
+
+  # recipe/meta.yaml
+  name: package
+  source:
+   ...
+  build:
+    number: 0
+    noarch: python
+  requirements:
+    ...
+    run:
+      - python
+      - numpy
+      - __{{ target_os }}
+      {% if target_os == 'win' %}
+      - windows-only-dependency
+      {% endif %}
+
+Cool! Where does ``target_os`` come from? We need to define it in ``conda_build_config.yaml``.
+Note how the values have been chosen carefully so they match the virtual packages names:
+
+.. code-block:: yaml
+
+  # recipe/conda_build_config.yaml
+  target_os:
+    - unix  # [unix]
+    - win   # [win]
+
+By default, conda-forge will only build ``noarch`` packages on a ``linux-64`` CI runner, so
+the ``target_os`` matrix would only provide the ``unix`` value (because the ``# [win]`` selector
+would never be true). Fortunately, we can change the default behaviour in ``conda-forge.yml``:
+
+.. code-block:: yaml
+
+  # conda-forge.yml
+  noarch_platforms:
+    - linux-64
+    - win-64
+
+This will provide two runners per package! But since we are using selectors in ``conda_build_config.yaml``,
+only one is true at a time. Perfect! All these changes require a feedstock rerender to be applied:
+:ref:`_dev_update_rerender`.
+
+Last but not least, what if you need conditional dependencies on all three operating systems? Do it like this:
+
+.. code-block:: yaml
+
+  # recipe/meta.yaml
+  name: package
+  source:
+   ...
+  build:
+    number: 0
+    noarch: python
+  requirements:
+    ...
+    run:
+      - python
+      - numpy
+      - __{{ target_os }}
+      {% if target_os == 'osx' %}
+      - osx-only-dependency
+      {% elif target_os == 'win' %}
+      - windows-only-dependency
+      {% else %}
+      - linux-only-dependency
+      {% endif %}
+
+.. code-block:: yaml
+
+  # recipe/conda_build_config.yaml
+  target_os:
+    - linux  # [linux]
+    - osx    # [osx]
+    - win    # [win]
+
+.. code-block:: yaml
+
+  # conda-forge.yml
+  noarch_platforms:
+    - linux-64
+    - osx-64
+    - win-64
+
+Again, d
 Noarch generic
 --------------
 
