@@ -1043,7 +1043,7 @@ Noarch packages with OS-specific dependencies
 
 It is possible to build ``noarch`` packages with runtime requirements that depend on the target OS
 (Linux, Windows, MacOS), regardless the architecture (amd64, ARM, PowerPC, etc). This approach
-relies on four concepts:
+relies on three concepts:
 
 1.  `Virtual packages <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html>`__. 
     Prefixed with a double underscore, they are used by conda to represent system properties as
@@ -1051,11 +1051,7 @@ relies on four concepts:
     which are only present when the running platform is Linux, Windows, or MacOS, respectively.
     ``__unix`` is present in both Linux and MacOS. Note that this feature is **only fully available
     on conda 4.10 or above**.
-2.  Jinja ``{% if ... %}`` conditionals, which can be used to mimic platform selectors.
-3.  ``conda-forge.ymls``'s :ref:`noarch_platforms` option.
-4.  `conda-build variants <https://docs.conda.io/projects/conda-build/en/latest/resources/variants.html>`__.
-    We can use ``conda_build_config.yaml`` to create a matrix build that depends on the
-    ``noarch_platforms`` values.
+2.  ``conda-forge.ymls``'s :ref:`noarch_platforms` option.
 
 The idea is to generate different noarch packages for each OS needing different dependencies.
 Let's say you have a pure Python package, perfectly eligible for ``noarch: python``, but on Windows
@@ -1088,32 +1084,25 @@ to two outputs if replace it with this other approach!
     # ...
   build:
     number: 0
-    # You can include target_os in the build string for easier identification of builds
-    string: "{{ target_os }}_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"
+    # You NEED to include the platform in the build string to avoid hash collisions
+    string: "unix_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"  # [unix]
+    string: "win_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"   # [win]
     noarch: python
   requirements:
     # ...
     run:
       - python
       - numpy
-      - __{{ target_os }}
-      {% if target_os == 'win' %}
-      - windows-only-dependency
-      {% endif %}
+      - __unix  # [unix]
+      - __win   # [win]
+      - windows-only-dependency  # [win]
 
-Cool! Where does ``target_os`` come from? We need to define it in ``conda_build_config.yaml``.
-Note how the values have been chosen carefully so they match the virtual packages names:
+Do not forget to specify the platform virtual packages with their selectors!
+Otherwise, the solver will not be able to choose the variants correctly.
 
-.. code-block:: yaml
-  :caption: recipe/conda_build_config.yaml
-
-  target_os:
-    - unix  # [unix]
-    - win   # [win]
-
-By default, conda-forge will only build ``noarch`` packages on a ``linux-64`` CI runner, so
-the ``target_os`` matrix would only provide the ``unix`` value (because the ``# [win]`` selector
-would never be true). Fortunately, we can change the default behaviour in ``conda-forge.yml``:
+By default, conda-forge will only build ``noarch`` packages on a ``linux_64`` CI runner, so
+only the ``# [unix]`` selectors would be true. However, we can change this behaviour using
+the ``noarch_platforms`` option in ``conda-forge.yml``:
 
 .. code-block:: yaml
   :caption: conda-forge.yml
@@ -1122,12 +1111,10 @@ would never be true). Fortunately, we can change the default behaviour in ``cond
     - linux_64
     - win_64
 
-This will provide two runners per package! But since we are using selectors in
-``conda_build_config.yaml``, only one is true at a time. Perfect! All these changes require a
+This will provide two runners per package! Perfect! All these changes require a
 feedstock rerender to be applied. See :ref:`dev_update_rerender`.
 
-Last but not least, what if you need conditional dependencies on all three operating systems? Do it
-like this:
+If you need conditional dependencies on all three operating systems, this is how you do it:
 
 .. code-block:: yaml+jinja
   :caption: recipe/meta.yaml
@@ -1137,28 +1124,20 @@ like this:
     # ...
   build:
     number: 0
+    # You NEED to include the platform in the build string to avoid hash collisions
+    string: "{{ SUBDIR.split('-')[0] }}_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"
     noarch: python
   requirements:
     # ...
     run:
       - python
       - numpy
-      - __{{ target_os }}
-      {% if target_os == 'osx' %}
-      - osx-only-dependency
-      {% elif target_os == 'win' %}
-      - windows-only-dependency
-      {% else %}
-      - linux-only-dependency
-      {% endif %}
-
-.. code-block:: yaml
-  :caption: recipe/conda_build_config.yaml
-
-  target_os:
-    - linux  # [linux]
-    - osx    # [osx]
-    - win    # [win]
+      - __linux  # [linux]
+      - __osx    # [osx]
+      - __win    # [win]
+      - linux-only-dependency    # [linux]
+      - osx-only-dependency      # [osx]
+      - windows-only-dependency  # [win]
 
 .. code-block:: yaml
   :caption: conda-forge.yml
