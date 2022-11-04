@@ -11,8 +11,9 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2022-11-04: Releasing Python 3.8.14, 3.9.14, and 3.10.7
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The CPython versions 3.8.14, 3.9.14, and 3.10.7 were cut some weeks ago to mitigate `CVE-2020-10735 <https://nvd.nist.gov/vuln/detail/CVE-2020-10735>`__.
-The conda-forge team `has decided <https://github.com/conda-forge/python-feedstock/pull/579>`__ to build and publish these releases verbatim.
+The CPython versions 3.8.14, 3.9.14, and 3.10.7 were released some weeks ago to mitigate `CVE-2020-10735 <https://nvd.nist.gov/vuln/detail/CVE-2020-10735>`__.
+The conda-forge team `has decided <https://github.com/conda-forge/python-feedstock/pull/579>`__ to build and publish these releases 
+*without* removing the bug fix for this CVE.
 
 The chosen mitigation strategy might cause errors (e.g. ``ValueError: Exceeds the limit (4300) for integer string conversion``) in some libraries. 
 If you are affected, please read the `announcement <https://docs.python.org/release/3.10.7/whatsnew/3.10.html#notable-security-feature-in-3-10-7>`__ 
