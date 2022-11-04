@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Maintaining packages &#8212; conda-forge 2022.11.03 documentation</title>
+    <title>Maintaining packages &#8212; conda-forge 2022.11.04 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.11.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.11.04 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Maintaining packages</a></li> 
@@ -222,6 +222,11 @@ To do this drop <code class="docutils literal notranslate"><span class="pre">-c<
 </ul>
 </section>
 </section>
+<section id="updating-for-newly-released-python-version">
+<h2>Updating for newly released Python version<a class="headerlink" href="#updating-for-newly-released-python-version" title="Permalink to this heading">¶</a></h2>
+<p>When a new Python version is released (e.g. <code class="docutils literal notranslate"><span class="pre">3.11</span></code>), an automatic migration process is triggered that will have <code class="docutils literal notranslate"><span class="pre">&#64;regro-cf-autotick-bot</span></code> eventually automatically open pull requests to all feedstocks, updating their CI setup to include the new Python version in the build matrix. After veryfing that the PR build passes, that automatic PR can simply be merged to roll out packages for new Python version.
+This process takes time, though, and pull requests will not be opened to all feedstocks at the same time to not overload CI. The current status of the migration can be tracked on the <a class="reference external" href="https://conda-forge.org/status/#current_migrations">migration status page</a> and there maintainers can verify that their feedstock is listed under the <code class="docutils literal notranslate"><span class="pre">AWAITING-PR</span></code> dropdown list.</p>
+</section>
 <section id="testing-changes-locally">
 <h2>Testing changes locally<a class="headerlink" href="#testing-changes-locally" title="Permalink to this heading">¶</a></h2>
 <p>If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is built by our <a class="reference internal" href="../misc/00_intro.html#term-CI"><span class="xref std std-term">CI</span></a>.</p>
@@ -345,6 +350,7 @@ To contact core, ping them by mentioning &#64;conda-forge/core in a comment or, 
 <li class="toctree-l4"><a class="reference internal" href="#when-to-rerender">When to rerender</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-for-newly-released-python-version">Updating for newly released Python version</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-changes-locally">Testing changes locally</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#downloading-prebuilt-packages-from-ci">Downloading prebuilt packages from CI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#removing-broken-packages">Removing broken packages</a></li>
@@ -427,7 +433,7 @@ To contact core, ping them by mentioning &#64;conda-forge/core in a comment or, 
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.11.03 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.11.04 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Maintaining packages</a></li> 
