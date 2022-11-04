@@ -165,6 +165,11 @@ We need to re-render when there are changes in the following parts of the feedst
 - Updates in conda-forge pinning that affect the feedstock.
 - Build issues that a feedstock configuration update will fix (follow us on `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`_ to know about those).
 
+Updating for newly released Python version
+==========================================
+
+When a new Python version is released (e.g. ``3.11``), an automatic migration process is triggered that will have ``@regro-cf-autotick-bot`` eventually automatically open pull requests to all feedstocks, updating their CI setup to include the new Python version in the build matrix. After veryfing that the PR build passes, that automatic PR can simply be merged to roll out packages for new Python version.
+This process takes time, though, and pull requests will not be opened to all feedstocks at the same time to not overload CI. The current status of the migration can be tracked on the `migration status page <https://conda-forge.org/status/#current_migrations>`_ and there maintainers can verify that their feedstock is listed under the ``AWAITING-PR`` dropdown list.
 
 Testing changes locally
 =======================
