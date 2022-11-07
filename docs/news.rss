@@ -4,8 +4,22 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Fri, 04 Nov 2022 12:42:47 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 07 Nov 2022 13:28:47 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2022-11-04: Releasing Python 3.8.14, 3.9.14, and 3.10.7</title>
+      <link>https://conda-forge.org/docs/user/announcements.html#releasing-python-3-8-14-3-9-14-and-3-10-7</link>
+      <description>&lt;p&gt;The CPython versions 3.8.14, 3.9.14, and 3.10.7 were released some weeks ago to mitigate &lt;a class="reference external" href="https://nvd.nist.gov/vuln/detail/CVE-2020-10735"&gt;CVE-2020-10735&lt;/a&gt;.
+The chosen mitigation strategy might cause errors (e.g. &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;ValueError:&lt;/span&gt; &lt;span class="pre"&gt;Exceeds&lt;/span&gt; &lt;span class="pre"&gt;the&lt;/span&gt; &lt;span class="pre"&gt;limit&lt;/span&gt; &lt;span class="pre"&gt;(4300)&lt;/span&gt; &lt;span class="pre"&gt;for&lt;/span&gt; &lt;span class="pre"&gt;integer&lt;/span&gt; &lt;span class="pre"&gt;string&lt;/span&gt; &lt;span class="pre"&gt;conversion&lt;/span&gt;&lt;/code&gt;) in some libraries.
+If you are affected, please read the &lt;a class="reference external" href="https://docs.python.org/release/3.10.7/whatsnew/3.10.html#notable-security-feature-in-3-10-7"&gt;announcement&lt;/a&gt;
+and learn about the available workarounds in the  &lt;a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#integer-string-conversion-length-limitation"&gt;CPython documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The conda-forge team &lt;a class="reference external" href="https://github.com/conda-forge/python-feedstock/pull/579"&gt;has decided&lt;/a&gt; to build and publish these releases with no additional changes.
+The new packages will be made available on or after 2022-11-10, following &lt;a class="reference external" href="https://anaconda.cloud/anaconda-repo-news"&gt;Anaconda’s decision&lt;/a&gt;.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html#releasing-python-3-8-14-3-9-14-and-3-10-7</guid>
+      <pubDate>Fri, 04 Nov 2022 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2022-09-27: Conda Moving to CalVer</title>
       <link>https://conda-forge.org/docs/user/announcements.html#conda-moving-to-calver</link>
