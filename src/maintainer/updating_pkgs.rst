@@ -201,7 +201,19 @@ Note that for long build logs one can do
 
 to save it in a text file for future inspection.
 
-Once built, you can find the finished package in the ``build_artifacts`` directory in your feedstock.
+Once built, you can find the finished package in the ``build_artifacts`` directory in your feedstock, which can be used as a channel.
+
+To create a new environment ``my-new-env`` using conda, and which will contain the new built package ``my-package``, run:
+
+.. code-block:: shell
+
+    conda create -n my-new-env -c "file://${PWD}/build_artifacts" my-package
+
+If the new built package depends on another one to be working, i.e. ``other-package``, and which is available on ``conda-forge`` channel for example, you can run:
+
+.. code-block:: shell
+
+    conda create -n my-new-env -c "file://${PWD}/build_artifacts" -c conda-forge my-package other-package
 
 
 Downloading prebuilt packages from CI

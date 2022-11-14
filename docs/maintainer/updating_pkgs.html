@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Maintaining packages &#8212; conda-forge 2022.11.13 documentation</title>
+    <title>Maintaining packages &#8212; conda-forge 2022.11.14 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.11.13 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.11.14 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Maintaining packages</a></li> 
@@ -245,7 +245,15 @@ feedstock directory and run:</p>
 </pre></div>
 </div>
 <p>to save it in a text file for future inspection.</p>
-<p>Once built, you can find the finished package in the <code class="docutils literal notranslate"><span class="pre">build_artifacts</span></code> directory in your feedstock.</p>
+<p>Once built, you can find the finished package in the <code class="docutils literal notranslate"><span class="pre">build_artifacts</span></code> directory in your feedstock, which can be used as a channel.</p>
+<p>To create a new environment <code class="docutils literal notranslate"><span class="pre">my-new-env</span></code> using conda, and which will contain the new built package <code class="docutils literal notranslate"><span class="pre">my-package</span></code>, run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda create -n my-new-env -c <span class="s2">&quot;file://</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">/build_artifacts&quot;</span> my-package
+</pre></div>
+</div>
+<p>If the new built package depends on another one to be working, i.e. <code class="docutils literal notranslate"><span class="pre">other-package</span></code>, and which is available on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel for example, you can run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda create -n my-new-env -c <span class="s2">&quot;file://</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span><span class="s2">/build_artifacts&quot;</span> -c conda-forge my-package other-package
+</pre></div>
+</div>
 </section>
 <section id="downloading-prebuilt-packages-from-ci">
 <h2>Downloading prebuilt packages from CI<a class="headerlink" href="#downloading-prebuilt-packages-from-ci" title="Permalink to this heading">¶</a></h2>
@@ -433,7 +441,7 @@ To contact core, ping them by mentioning &#64;conda-forge/core in a comment or, 
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.11.13 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.11.14 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Maintaining packages</a></li> 
