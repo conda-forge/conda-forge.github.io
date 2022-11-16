@@ -229,7 +229,7 @@ artifacts. The currently supported options are
 
     conda_build:
       pkg_format: 2    # makes .conda artifacts
-      pkg_format: None # makes .atr.bz2 artifacts
+      pkg_format: None # makes .tar.bz2 artifacts
       # controls the compression level for .conda artifacts
       # conda-forge uses a default value of 16 since its artifacts
       # can be large. conda-build has a default of 22.
