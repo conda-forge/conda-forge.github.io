@@ -11,7 +11,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2022-11-16: Moving to ``.conda`` Artifacts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-``conda-forge`` is moving to producing ``conda`` artifacts in the verion 2 package
+``conda-forge`` is moving to producing ``conda`` artifacts in the version 2 package
 format (also known as ``.conda``). These artifacts allow for more efficient indexing
 and maintenance of the ecosystem. Our admin migrations bot will begin making PRs to
 feedstocks to change them over to the new artifact format. You will need ``conda``
