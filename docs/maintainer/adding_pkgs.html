@@ -467,7 +467,7 @@ The exposed interface changes when previously existing exposed symbols are delet
 <h5>Defining non-dependency restrictions<a class="headerlink" href="#defining-non-dependency-restrictions" title="Permalink to this heading">¶</a></h5>
 <p>Imagine a package can be used together with version 1 of <code class="docutils literal notranslate"><span class="pre">awesome-software</span></code> when present, but does not strictly depend on it.
 Therefore you would like to let the user choose whether he/she would like to use the package with or without <code class="docutils literal notranslate"><span class="pre">awesome-software</span></code>. Let’s assume further that the package is incompatible to version 2 of <code class="docutils literal notranslate"><span class="pre">awesome-software</span></code>.</p>
-<p>In this case <code class="docutils literal notranslate"><span class="pre">run_dependencies</span></code> can be used to restrict <code class="docutils literal notranslate"><span class="pre">awesome-software</span></code> to version 1.*, if the user chooses to install it:</p>
+<p>In this case <code class="docutils literal notranslate"><span class="pre">run_constrained</span></code> can be used to restrict <code class="docutils literal notranslate"><span class="pre">awesome-software</span></code> to version 1.*, if the user chooses to install it:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="c1"># [...]</span><span class="w"></span>
 <span class="w">  </span><span class="nt">run_constrained</span><span class="p">:</span><span class="w"></span>
