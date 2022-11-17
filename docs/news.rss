@@ -4,8 +4,22 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Mon, 14 Nov 2022 14:57:47 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 17 Nov 2022 17:44:55 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2022-11-16: Moving to .conda Artifacts</title>
+      <link>https://conda-forge.org/docs/user/announcements.html#moving-to-conda-artifacts</link>
+      <description>&lt;p&gt;&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; is moving to producing &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda&lt;/span&gt;&lt;/code&gt; artifacts in the version 2 package
+format (also known as &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;.conda&lt;/span&gt;&lt;/code&gt;). These artifacts allow for more efficient indexing
+and maintenance of the ecosystem. Our admin migrations bot will begin making PRs to
+feedstocks to change them over to the new artifact format. You will need &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda&lt;/span&gt;&lt;/code&gt;
+version 4.7 or later to use the new &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;.conda&lt;/span&gt;&lt;/code&gt; artifacts. Please leave a comment on
+&lt;a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/issues/1586"&gt;this issue&lt;/a&gt;
+if you encounter problems or have feedback.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html#moving-to-conda-artifacts</guid>
+      <pubDate>Wed, 16 Nov 2022 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2022-11-04: Releasing Python 3.8.14, 3.9.14, and 3.10.7</title>
       <link>https://conda-forge.org/docs/user/announcements.html#releasing-python-3-8-14-3-9-14-and-3-10-7</link>

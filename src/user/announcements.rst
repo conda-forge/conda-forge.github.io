@@ -8,12 +8,24 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2022
 ----
 
+2022-11-16: Moving to ``.conda`` Artifacts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+``conda-forge`` is moving to producing ``conda`` artifacts in the version 2 package
+format (also known as ``.conda``). These artifacts allow for more efficient indexing
+and maintenance of the ecosystem. Our admin migrations bot will begin making PRs to
+feedstocks to change them over to the new artifact format. You will need ``conda``
+version 4.7 or later to use the new ``.conda`` artifacts. Please leave a comment on
+`this issue <https://github.com/conda-forge/conda-forge.github.io/issues/1586>`__
+if you encounter problems or have feedback.
+
+
 2022-11-04: Releasing Python 3.8.14, 3.9.14, and 3.10.7
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The CPython versions 3.8.14, 3.9.14, and 3.10.7 were released some weeks ago to mitigate `CVE-2020-10735 <https://nvd.nist.gov/vuln/detail/CVE-2020-10735>`__.
-The chosen mitigation strategy might cause errors (e.g. ``ValueError: Exceeds the limit (4300) for integer string conversion``) in some libraries. 
-If you are affected, please read the `announcement <https://docs.python.org/release/3.10.7/whatsnew/3.10.html#notable-security-feature-in-3-10-7>`__ 
+The chosen mitigation strategy might cause errors (e.g. ``ValueError: Exceeds the limit (4300) for integer string conversion``) in some libraries.
+If you are affected, please read the `announcement <https://docs.python.org/release/3.10.7/whatsnew/3.10.html#notable-security-feature-in-3-10-7>`__
 and learn about the available workarounds in the  `CPython documentation <https://docs.python.org/3/library/stdtypes.html#integer-string-conversion-length-limitation>`__.
 
 The conda-forge team `has decided <https://github.com/conda-forge/python-feedstock/pull/579>`__ to build and publish these releases with no additional changes.
@@ -23,8 +35,8 @@ The new packages will be made available on or after 2022-11-10, following `Anaco
 2022-09-27: Conda Moving to CalVer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Conda is moving to CalVer per `CEP 8 <https://github.com/conda-incubator/ceps/blob/main/cep-8.md>`_. 
-The first CalVer and last SemVer should be ``22.9.0`` and ``4.14.0`` respectively. This change 
+Conda is moving to CalVer per `CEP 8 <https://github.com/conda-incubator/ceps/blob/main/cep-8.md>`_.
+The first CalVer and last SemVer should be ``22.9.0`` and ``4.14.0`` respectively. This change
 maintains version order so you should not expect any issues.
 
 2022-08-24: Dropping Python 3.7

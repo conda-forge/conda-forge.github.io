@@ -30,6 +30,7 @@ Top-level fields
 * :ref:`channels`
 * :ref:`choco`
 * :ref:`circle`
+* :ref:`conda_build`
 * :ref:`conda_forge_output_validation`
 * :ref:`docker`
 * :ref:`github`
@@ -215,6 +216,24 @@ circle
 The top-level ``circle`` key specifies configurations for the Circle
 CI service.  This is usually **read-only** and should not normally be manually
 modified.  Tools like conda-smithy may modify this, as needed.
+
+.. _conda_build:
+
+conda_build
+-----------
+
+Settings in this block are used to control how conda build runs and produces
+artifacts. The currently supported options are
+
+.. code-block:: yaml
+
+    conda_build:
+      pkg_format: 2    # makes .conda artifacts
+      pkg_format: None # makes .tar.bz2 artifacts
+      # controls the compression level for .conda artifacts
+      # conda-forge uses a default value of 16 since its artifacts
+      # can be large. conda-build has a default of 22.
+      zstd_compression_level: 16
 
 .. _conda_forge_output_validation:
 
