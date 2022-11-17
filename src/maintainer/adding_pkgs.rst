@@ -460,7 +460,7 @@ Defining non-dependency restrictions
 Imagine a package can be used together with version 1 of ``awesome-software`` when present, but does not strictly depend on it.
 Therefore you would like to let the user choose whether he/she would like to use the package with or without ``awesome-software``. Let's assume further that the package is incompatible to version 2 of ``awesome-software``.
 
-In this case ``run_dependencies`` can be used to restrict ``awesome-software`` to version 1.*, if the user chooses to install it:
+In this case ``run_constrained`` can be used to restrict ``awesome-software`` to version 1.*, if the user chooses to install it:
 
 .. code-block:: yaml
 
