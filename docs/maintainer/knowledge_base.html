@@ -113,6 +113,7 @@ Older CMake projects may require similar, but slightly different options.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">-DCMAKE_INSTALL_LIBDIR=lib</span></code> Libraries will land in $PREFIX/lib, sometimes projects install
 into lib64 or similar but on conda-forge we keep shared libraries in simply lib.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-DBUILD_SHARED_LIBS=ON</span></code> Instruct CMake to build shared libraries instead of static ones.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DCMAKE_FIND_FRAMEWORK=NEVER</span></code> and <code class="docutils literal notranslate"><span class="pre">-DCMAKE_FIND_APPBUNDLE=NEVER</span></code> Prevent CMake from using system-wide macOS packages.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">${CMAKE_ARGS}</span></code> Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like <a class="reference external" href="https://conda-forge.org/docs/maintainer/knowledge_base.html#cuda-builds">CUDA builds</a>.</p></li>
 </ul>
 </div></blockquote>
