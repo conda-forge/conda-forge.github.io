@@ -45,6 +45,7 @@ Some optional, but useful CMake options:
     - ``-DCMAKE_INSTALL_LIBDIR=lib`` Libraries will land in $PREFIX/lib, sometimes projects install
       into lib64 or similar but on conda-forge we keep shared libraries in simply lib.
     - ``-DBUILD_SHARED_LIBS=ON`` Instruct CMake to build shared libraries instead of static ones.
+    - ``-DCMAKE_FIND_FRAMEWORK=NEVER`` and ``-DCMAKE_FIND_APPBUNDLE=NEVER`` Prevent CMake from using system-wide macOS packages.
     - ``${CMAKE_ARGS}`` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like `CUDA builds <https://conda-forge.org/docs/maintainer/knowledge_base.html#cuda-builds>`__.
 
 Here are some basic commands for you to get started. These are dependent on your source
