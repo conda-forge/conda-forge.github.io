@@ -390,7 +390,7 @@ compiler versions above, we have removed the <code class="docutils literal notra
 <span id="output-validation"></span><h2>Output Validation and Feedstock Tokens<a class="headerlink" href="#output-validation-and-feedstock-tokens" title="Permalink to this heading">¶</a></h2>
 <p>As of writing, <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code> does not support generating API tokens that are scoped
 to allow uploads for some packages but not others. In order to secure feedstock uploads,
-so that, e.g., the maintainers of the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> feedstock cannot push a <code class="docutils literal notranslate"><span class="pre">python</span></code> version,
+so that, e.g., the maintainers of the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> feedstock cannot push a <code class="docutils literal notranslate"><span class="pre">python</span></code> package,
 we use a package staging process and issue secret tokens, unique to each feedback. This process
 works as follows.</p>
 <ol class="arabic simple">
@@ -409,6 +409,13 @@ sure <code class="docutils literal notranslate"><span class="pre">conda_forge_ou
 your feedstock with the latest version of <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code>. Finally, new packages that are added to
 feedstocks are registered automatically and once uploaded successfully, no other feedstock
 will be able to upload packages with the same name.</p>
+<p>Sometimes, however, it might make better sense to generate a package from a different
+feedstock, say, due to package renaming or re-structuring. In this case, you may need
+to add the new feedstock to the <a class="reference external" href="https://github.com/conda-forge/feedstock-outputs">feedstock-outputs</a> map.
+If this is not done, then the output validation process will block the package from being
+uploaded from the new feedstock, by design.
+Once this is done correctly and the package is uploaded,
+you can then request the conda-forge core devs to archive the old feedstock.</p>
 </section>
 </section>
 

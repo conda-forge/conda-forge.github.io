@@ -396,7 +396,7 @@ Output Validation and Feedstock Tokens
 
 As of writing, ``anaconda.org`` does not support generating API tokens that are scoped
 to allow uploads for some packages but not others. In order to secure feedstock uploads,
-so that, e.g., the maintainers of the ``numpy`` feedstock cannot push a ``python`` version,
+so that, e.g., the maintainers of the ``numpy`` feedstock cannot push a ``python`` package,
 we use a package staging process and issue secret tokens, unique to each feedback. This process
 works as follows.
 
@@ -415,3 +415,11 @@ sure ``conda_forge_output_validation: true`` is set in your ``conda-forge.yml`` 
 your feedstock with the latest version of ``conda-smithy``. Finally, new packages that are added to
 feedstocks are registered automatically and once uploaded successfully, no other feedstock
 will be able to upload packages with the same name.
+
+Sometimes, however, it might make better sense to generate a package from a different
+feedstock, say, due to package renaming or re-structuring. In this case, you may need
+to add the new feedstock to the `feedstock-outputs <https://github.com/conda-forge/feedstock-outputs>`__ map.
+If this is not done, then the output validation process will block the package from being
+uploaded from the new feedstock, by design.
+Once this is done correctly and the package is uploaded,
+you can then request the conda-forge core devs to archive the old feedstock.
