@@ -4,7 +4,7 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Tue, 22 Nov 2022 08:33:41 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 06 Dec 2022 01:11:27 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
     <item>
       <title>2022-11-16: Moving to .conda Artifacts</title>
