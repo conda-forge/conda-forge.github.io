@@ -223,7 +223,7 @@ For example see the changes made in the ``conda_build_config.yaml`` files in `th
 After making these changes don't forget to rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line).
 
 
-.. _cmd_batch_syntax::
+.. _cmd_batch_syntax:
 
 Tips & tricks for CMD/Batch syntax
 ----------------------------------
