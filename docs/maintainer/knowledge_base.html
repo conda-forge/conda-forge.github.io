@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Knowledge Base &#8212; conda-forge 2022.12.06 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2022.12.12 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.12.06 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.12.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -254,6 +254,24 @@ requirements of the VC version. For example, python 2.7 requires <code class="do
 </div>
 <p>For example see the changes made in the <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> files in <a class="reference external" href="https://github.com/conda-forge/libignition-msgs1-feedstock/pull/73/commits/81b5ee0e1d23f7f20427dd80d04cf1f7321b441d">this</a> commit.</p>
 <p>After making these changes don’t forget to rerender with <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> (to rerender manually use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">smithy</span> <span class="pre">rerender</span></code> from the command line).</p>
+</section>
+<section id="tips-tricks-for-cmd-batch-syntax">
+<span id="cmd-batch-syntax"></span><h3>Tips &amp; tricks for CMD/Batch syntax<a class="headerlink" href="#tips-tricks-for-cmd-batch-syntax" title="Permalink to this heading">¶</a></h3>
+<p>Windows recipes rely on CMD/Batch scripts (<code class="docutils literal notranslate"><span class="pre">.bat</span></code>) by default.
+Batch syntax is a bit different from Bash and friends on Unix, so we have collected some tips here to help you get started if you are not familiar with this scripting language.</p>
+<ul class="simple">
+<li><p>Check if you need to write a Batch script first!
+Simple recipes might not need shell-specific code and can be written in an agnostic way.
+Use the <code class="docutils literal notranslate"><span class="pre">build.script</span></code> item in <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> (see <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#script">conda-build docs</a>).
+This item can take a string or a list of strings (one per line).</p></li>
+<li><p><a class="reference external" href="https://ss64.com/nt/syntax.html">SS64’s CMD howto pages</a> are the best resource for any kind of question regarding CMD/Batch syntax.</p></li>
+<li><p>Search conda-forge for existing <code class="docutils literal notranslate"><span class="pre">.bat</span></code> scripts and learn with examples.
+See this <a class="reference external" href="https://github.com/search?q=org%3Aconda-forge+language%3ABatchfile&amp;type=code&amp;l=Batchfile">example query for all Batchfiles</a>.</p></li>
+<li><p>You can <a class="reference external" href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/">free trial Windows VMs from Microsoft</a>.
+Set one up with your favorite virtualization solution to debug your CMD syntax.
+There are also some minimal emulators online that might get you started with the basics, even if not all CMD features are present.
+For example, this <a class="reference external" href="https://www.pcjs.org/software/pcx86/sys/windows/win95/4.00.950/">Windows 95 emulator</a> features a more or less okay MS-DOS prompt.</p></li>
+</ul>
 </section>
 </section>
 <section id="special-dependencies-and-packages">
@@ -1470,6 +1488,7 @@ in conda environments, and some operating system limits. See the <a class="refer
 <li class="toctree-l4"><a class="reference internal" href="#simple-cmake-based-bld-bat">Simple CMake-Based <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#building-for-different-vc-versions">Building for different VC versions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-vs2019">Using vs2019</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tips-tricks-for-cmd-batch-syntax">Tips &amp; tricks for CMD/Batch syntax</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#special-dependencies-and-packages">Special Dependencies and Packages</a><ul>
@@ -1618,7 +1637,7 @@ in conda environments, and some operating system limits. See the <a class="refer
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.12.06 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2022.12.12 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
