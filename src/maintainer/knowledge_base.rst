@@ -1605,6 +1605,27 @@ Sometimes, you might get a migration PR for your package that you don’t want t
 If you close the PR, it makes the bot think that another PR implementing the migration is merged instead, letting the migration continue iterating on the graph; however, the downstream dependents fail because the parent (the one we closed the PR of) didn’t really get rebuilt.
 Another reason why it is good to keep the PR open or in draft status is that people might help with it if they want in the future.
 
+In some cases a migration PR may not get opened. Please look for
+`the migration on our status page <https://conda-forge.org/status/#current_migrations>`_
+to see if there are any issues. This may show if there are still dependencies
+needing migration, in which case the best approach is to wait (or if possible
+offer to help migrate those dependencies). If there is a bot error, there will
+be a link to the CI job to provide more details about what may have gone wrong.
+In these cases `please raise an issue <http://github.com/regro/cf-scripts/issues/new>`_
+and include as much information as possible.
+
+It is worth noting that one also has the option to create a migration PR
+themselves. This can be a good option of the bot errored and that is still
+being investigated or the migration PR got closed accidentally. To migrate a PR manually:
+
+  1. Fork the feedstock and clone it locally
+  2. Create a new branch
+  3. Create the directory ``.ci_support/migrations`` in the feedstock (if absent)
+  4. Copy the migrator from `conda-forge-pinning's migrators <https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/main/recipe/migrations>`_ to ``.ci_support/migrations`` and commit it
+  5. :ref:`Rerender <dev_update_rerender>` the feedstock
+  6. Push these changes and open a PR
+
+
 Security considerations for conda-forge builds
 ==============================================
 
