@@ -17,8 +17,8 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs">
-            Read the docs 📖
+            to="https://github.com/Quansight-Labs/czi-conda-forge-mgmt">
+            More info ➡️
           </Link>
         </div>
       </div>
@@ -31,10 +31,10 @@ export default function Home() {
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      description={`${siteConfig.description}`}>
       <HomepageHeader />
       <main>
-        <HomepageFeatures />
+        {/* <HomepageFeatures /> */}
       </main>
     </Layout>
   );

@@ -11,12 +11,12 @@ const editUrl = {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'conda-forge.org',
-  tagline: 'A rewrite using Docusaurus',
-  url: 'https://your-docusaurus-test-site.com',
+  title: 'czi-cf-docs',
+  tagline: 'Supporting docs for the CZI EOSS5 grant for conda-forge',
+  url: 'https://czi-cf-docs.netlify.app/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenMarkdownLinks: 'throw',
   favicon: 'img/logo.png',
 
   // GitHub pages deployment config.
