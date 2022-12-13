@@ -1607,7 +1607,7 @@ Another reason why it is good to keep the PR open or in draft status is that peo
 
 In some cases a migration PR may not get opened. Please look for
 `the migration on our status page <https://conda-forge.org/status/#current_migrations>`_
-to see if there are any issues. This may show if there are still dependencies
+to see if there are any issues. This may show there are still dependencies
 needing migration, in which case the best approach is to wait (or if possible
 offer to help migrate those dependencies). If there is a bot error, there will
 be a link to the CI job to provide more details about what may have gone wrong.
@@ -1615,7 +1615,7 @@ In these cases `please raise an issue <http://github.com/regro/cf-scripts/issues
 and include as much information as possible.
 
 It is worth noting that one also has the option to create a migration PR
-themselves. This can be a good option of the bot errored and that is still
+themselves. This can be a good option if the bot errored and that is still
 being investigated or the migration PR got closed accidentally. To migrate a PR manually:
 
   1. Fork the feedstock and clone it locally
