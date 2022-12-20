@@ -1125,7 +1125,9 @@ If you need conditional dependencies on all three operating systems, this is how
   build:
     number: 0
     # You NEED to include the platform in the build string to avoid hash collisions
-    string: "{{ SUBDIR.split('-')[0] }}_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"
+    string: "linux_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"  # [linux]
+    string: "osx_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"    # [osx]
+    string: "win_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"    # [win]
     noarch: python
   requirements:
     # ...
