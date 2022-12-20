@@ -1051,7 +1051,7 @@ relies on three concepts:
     which are only present when the running platform is Linux, Windows, or MacOS, respectively.
     ``__unix`` is present in both Linux and MacOS. Note that this feature is **only fully available
     on conda 4.10 or above**.
-2.  ``conda-forge.ymls``'s :ref:`noarch_platforms` option.
+2.  ``conda-forge.yml``'s :ref:`noarch_platforms` option.
 
 The idea is to generate different noarch packages for each OS needing different dependencies.
 Let's say you have a pure Python package, perfectly eligible for ``noarch: python``, but on Windows
