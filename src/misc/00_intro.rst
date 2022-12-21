@@ -19,7 +19,7 @@ Glossary
     **A**\ pplication **B**\ inary **I**\ nterface. ABI is a document that comprehensively defines the binary system interface between applications and the operating system on which they run. `Learn More <https://en.wikipedia.org/wiki/Application_binary_interface>`__.
 
   ICU
-    **I**\ nternational **C**\ omponents for **U**\ nicode. ICU is an open-source project of mature C/C++ and Java libraries for Unicode support, software internationalization, and software globalization. `Learn More <http://site.icu-project.org/>`__.
+    **I**\ nternational **C**\ omponents for **U**\ nicode. ICU is an open-source project of mature C/C++ and Java libraries for Unicode support, software internationalization, and software globalization. `Learn More <https://icu.unicode.org/>`__.
 
   CRAN
     **C**\ omprehensive **R** **A**\ rchive **N**\ etwork. CRAN is a network of FTP and web servers around the world that store identical, up-to-date, versions of code and documentation for R. `Learn More <https://cran.r-project.org/>`__.
