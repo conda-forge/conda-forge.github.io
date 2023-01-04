@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Using conda-smithy to manage your CI &#8212; conda-forge 2022.12.21 documentation</title>
+    <title>Using conda-smithy to manage your CI &#8212; conda-forge 2023.01.04 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="tipsandtricks.html" title="Tips &amp; tricks"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.01.04 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Using conda-smithy to manage your CI</a></li> 
@@ -89,29 +89,29 @@ to have the proper structure such that the <code class="docutils literal notrans
 add the CI configurations. Let’s see an example!</p>
 <p>Suppose you have a repository for a project called <code class="docutils literal notranslate"><span class="pre">myproj</span></code>.  In the
 root level of the repository, you can run the following command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/repo $ conda smithy ci-skeleton myproj
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/repo<span class="w"> </span>$<span class="w"> </span>conda<span class="w"> </span>smithy<span class="w"> </span>ci-skeleton<span class="w"> </span>myproj
 </pre></div>
 </div>
 <p>This will produce output like the following:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Generating ~/repo/conda-forge.yml
-Generating ~/repo/recipe/meta.yaml
-Updating ~/repo/.gitignore
-A CI skeleton has been generated! Please use the following steps
-to <span class="nb">complete</span> the CI setup process:
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Generating<span class="w"> </span>~/repo/conda-forge.yml
+Generating<span class="w"> </span>~/repo/recipe/meta.yaml
+Updating<span class="w"> </span>~/repo/.gitignore
+A<span class="w"> </span>CI<span class="w"> </span>skeleton<span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>generated!<span class="w"> </span>Please<span class="w"> </span>use<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>steps
+to<span class="w"> </span><span class="nb">complete</span><span class="w"> </span>the<span class="w"> </span>CI<span class="w"> </span>setup<span class="w"> </span>process:
 
-<span class="m">1</span>. Fill out recipe/meta.yaml with your install and <span class="nb">test</span> code
-<span class="m">2</span>. Commit all changes to the repo.
+<span class="m">1</span>.<span class="w"> </span>Fill<span class="w"> </span>out<span class="w"> </span>recipe/meta.yaml<span class="w"> </span>with<span class="w"> </span>your<span class="w"> </span>install<span class="w"> </span>and<span class="w"> </span><span class="nb">test</span><span class="w"> </span>code
+<span class="m">2</span>.<span class="w"> </span>Commit<span class="w"> </span>all<span class="w"> </span>changes<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>repo.
 
-        $ git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;ran conda smithy skeleton&quot;</span>
+<span class="w">        </span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;ran conda smithy skeleton&quot;</span>
 
-<span class="m">3</span>. Remember to register your repo with the CI providers.
-<span class="m">4</span>. Rerender this repo to generate the CI configurations files.
-   This can be <span class="k">done</span> with:
+<span class="m">3</span>.<span class="w"> </span>Remember<span class="w"> </span>to<span class="w"> </span>register<span class="w"> </span>your<span class="w"> </span>repo<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>CI<span class="w"> </span>providers.
+<span class="m">4</span>.<span class="w"> </span>Rerender<span class="w"> </span>this<span class="w"> </span>repo<span class="w"> </span>to<span class="w"> </span>generate<span class="w"> </span>the<span class="w"> </span>CI<span class="w"> </span>configurations<span class="w"> </span>files.
+<span class="w">   </span>This<span class="w"> </span>can<span class="w"> </span>be<span class="w"> </span><span class="k">done</span><span class="w"> </span>with:
 
-        $ conda smithy rerender -c auto
+<span class="w">        </span>$<span class="w"> </span>conda<span class="w"> </span>smithy<span class="w"> </span>rerender<span class="w"> </span>-c<span class="w"> </span>auto
 
-At any <span class="nb">time</span> <span class="k">in</span> the future, you will be able to automatically update your
-CI configuration by re-running the rerender <span class="nb">command</span> above. Happy testing!
+At<span class="w"> </span>any<span class="w"> </span><span class="nb">time</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>future,<span class="w"> </span>you<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>able<span class="w"> </span>to<span class="w"> </span>automatically<span class="w"> </span>update<span class="w"> </span>your
+CI<span class="w"> </span>configuration<span class="w"> </span>by<span class="w"> </span>re-running<span class="w"> </span>the<span class="w"> </span>rerender<span class="w"> </span><span class="nb">command</span><span class="w"> </span>above.<span class="w"> </span>Happy<span class="w"> </span>testing!
 </pre></div>
 </div>
 <p>As you can see, this generates and updates a few important files.
@@ -130,75 +130,75 @@ building <code class="docutils literal notranslate"><span class="pre">myproj</sp
 don’t want the skeleton to be produced in the <code class="docutils literal notranslate"><span class="pre">recipe/</span></code> directory,
 you can use the <code class="docutils literal notranslate"><span class="pre">-r</span></code> option to supply an alternative.</p>
 <p>The <strong>meta.yaml</strong> looks like:</p>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;myproj&quot;</span> <span class="cp">%}</span><span class="w"></span>
-<span class="cp">{%</span> <span class="k">set</span> <span class="nv">version</span> <span class="o">=</span> <span class="nv">environ.get</span><span class="o">(</span><span class="s1">&#39;GIT_DESCRIBE_TAG&#39;</span><span class="o">,</span> <span class="s1">&#39;untagged&#39;</span><span class="o">)|</span><span class="nf">string</span><span class="o">|</span><span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;-&#39;</span><span class="o">,</span><span class="s1">&#39;_&#39;</span><span class="o">)</span> <span class="cp">%}</span><span class="w"></span>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;myproj&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">set</span> <span class="nv">version</span> <span class="o">=</span> <span class="nv">environ.get</span><span class="o">(</span><span class="s1">&#39;GIT_DESCRIBE_TAG&#39;</span><span class="o">,</span> <span class="s1">&#39;untagged&#39;</span><span class="o">)|</span><span class="nf">string</span><span class="o">|</span><span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;-&#39;</span><span class="o">,</span><span class="s1">&#39;_&#39;</span><span class="o">)</span> <span class="cp">%}</span>
 
-<span class="nt">package</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">name</span><span class="o">|</span><span class="nf">lower</span> <span class="cp">}}</span><span class="w"></span>
-<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">version</span> <span class="cp">}}</span><span class="w"></span>
+<span class="nt">package</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">name</span><span class="o">|</span><span class="nf">lower</span> <span class="cp">}}</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">version</span> <span class="cp">}}</span>
 
-<span class="nt">source</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">git_url</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">environ.get</span><span class="o">(</span><span class="s1">&#39;FEEDSTOCK_ROOT&#39;</span><span class="o">,</span> <span class="s1">&#39;..&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="w"></span>
+<span class="nt">source</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">git_url</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">environ.get</span><span class="o">(</span><span class="s1">&#39;FEEDSTOCK_ROOT&#39;</span><span class="o">,</span> <span class="s1">&#39;..&#39;</span><span class="o">)</span> <span class="cp">}}</span>
 
-<span class="nt">build</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># Uncomment the following line if the package is pure Python and the recipe</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># is exactly the same for all platforms. It is okay if the dependencies are</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># not built for all platforms/versions, although selectors are still not allowed.</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># See https://conda-forge.org/docs/maintainer/knowledge_base.html#noarch-python</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># for more details.</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># noarch: python</span><span class="w"></span>
+<span class="nt">build</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># Uncomment the following line if the package is pure Python and the recipe</span>
+<span class="w">  </span><span class="c1"># is exactly the same for all platforms. It is okay if the dependencies are</span>
+<span class="w">  </span><span class="c1"># not built for all platforms/versions, although selectors are still not allowed.</span>
+<span class="w">  </span><span class="c1"># See https://conda-forge.org/docs/maintainer/knowledge_base.html#noarch-python</span>
+<span class="w">  </span><span class="c1"># for more details.</span>
+<span class="w">  </span><span class="c1"># noarch: python</span>
 
-<span class="w">  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">environ.get</span><span class="o">(</span><span class="s1">&#39;GIT_DESCRIBE_NUMBER&#39;</span><span class="o">,</span> <span class="s1">&#39;0&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="w"></span>
-<span class="w">  </span><span class="nt">string</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="o">[</span><span class="nv">build_number</span><span class="o">,</span> <span class="o">(</span><span class="s1">&#39;h&#39;</span> <span class="o">+</span> <span class="nv">PKG_HASH</span><span class="o">),</span> <span class="nv">environ.get</span><span class="o">(</span><span class="s1">&#39;GIT_DESCRIBE_HASH&#39;</span><span class="o">,</span> <span class="s1">&#39;&#39;</span><span class="o">)]|</span><span class="nf">join</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="w"></span>
+<span class="w">  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">environ.get</span><span class="o">(</span><span class="s1">&#39;GIT_DESCRIBE_NUMBER&#39;</span><span class="o">,</span> <span class="s1">&#39;0&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="w">  </span><span class="nt">string</span><span class="p">:</span><span class="w"> </span><span class="cp">{{</span> <span class="o">[</span><span class="nv">build_number</span><span class="o">,</span> <span class="o">(</span><span class="s1">&#39;h&#39;</span> <span class="o">+</span> <span class="nv">PKG_HASH</span><span class="o">),</span> <span class="nv">environ.get</span><span class="o">(</span><span class="s1">&#39;GIT_DESCRIBE_HASH&#39;</span><span class="o">,</span> <span class="s1">&#39;&#39;</span><span class="o">)]|</span><span class="nf">join</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span> <span class="cp">}}</span>
 
-<span class="w">  </span><span class="c1"># If the installation is complex, or different between Unix and Windows,</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># use separate bld.bat and build.sh files instead of this key. By default,</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># the package will be built for the Python versions supported by conda-forge</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># and for all major OSs. Add the line &quot;skip: True  # [py&lt;35]&quot; (for example)</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># to limit to Python 3.5 and newer, or &quot;skip: True  # [not win]&quot; to limit</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># to Windows.</span><span class="w"></span>
-<span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">PYTHON</span> <span class="cp">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">-vv&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># If the installation is complex, or different between Unix and Windows,</span>
+<span class="w">  </span><span class="c1"># use separate bld.bat and build.sh files instead of this key. By default,</span>
+<span class="w">  </span><span class="c1"># the package will be built for the Python versions supported by conda-forge</span>
+<span class="w">  </span><span class="c1"># and for all major OSs. Add the line &quot;skip: True  # [py&lt;35]&quot; (for example)</span>
+<span class="w">  </span><span class="c1"># to limit to Python 3.5 and newer, or &quot;skip: True  # [not win]&quot; to limit</span>
+<span class="w">  </span><span class="c1"># to Windows.</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">PYTHON</span> <span class="cp">}}</span><span class="nv"> </span><span class="s">-m</span><span class="nv"> </span><span class="s">pip</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">-vv&quot;</span>
 
-<span class="nt">requirements</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="c1"># If your project compiles code (such as a C extension) then add the required</span><span class="w"></span>
-<span class="w">    </span><span class="c1"># compilers as separate entries here. Compilers are named &#39;c&#39;, &#39;cxx&#39; and &#39;fortran&#39;.</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">compiler</span><span class="o">(</span><span class="s1">&#39;c&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="w"></span>
-<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span><span class="w"></span>
-<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w"></span>
+<span class="nt">requirements</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># If your project compiles code (such as a C extension) then add the required</span>
+<span class="w">    </span><span class="c1"># compilers as separate entries here. Compilers are named &#39;c&#39;, &#39;cxx&#39; and &#39;fortran&#39;.</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">compiler</span><span class="o">(</span><span class="s1">&#39;c&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
 
-<span class="nt">test</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># Some packages might need a `test/commands` key to check CLI.</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># List all the packages/modules that `run_test.py` imports.</span><span class="w"></span>
-<span class="w">  </span><span class="nt">imports</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myproj</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># Run your test commands here</span><span class="w"></span>
-<span class="w">  </span><span class="nt">commands</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myproj --help</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># declare any test-only requirements here</span><span class="w"></span>
-<span class="w">  </span><span class="nt">requires</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest</span><span class="w"></span>
-<span class="w">  </span><span class="c1"># copy over any needed test files here</span><span class="w"></span>
-<span class="w">  </span><span class="nt">source_files</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tests/</span><span class="w"></span>
+<span class="nt">test</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># Some packages might need a `test/commands` key to check CLI.</span>
+<span class="w">  </span><span class="c1"># List all the packages/modules that `run_test.py` imports.</span>
+<span class="w">  </span><span class="nt">imports</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myproj</span>
+<span class="w">  </span><span class="c1"># Run your test commands here</span>
+<span class="w">  </span><span class="nt">commands</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myproj --help</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest</span>
+<span class="w">  </span><span class="c1"># declare any test-only requirements here</span>
+<span class="w">  </span><span class="nt">requires</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest</span>
+<span class="w">  </span><span class="c1"># copy over any needed test files here</span>
+<span class="w">  </span><span class="nt">source_files</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tests/</span>
 
-<span class="c1"># Uncomment and fill in myproj metadata</span><span class="w"></span>
-<span class="c1">#about:</span><span class="w"></span>
-<span class="c1">#  home: https://github.com/conda-forge/conda-smithy</span><span class="w"></span>
-<span class="c1">#  license: BSD-3-Clause</span><span class="w"></span>
-<span class="c1">#  license_family: BSD</span><span class="w"></span>
-<span class="c1">#  license_file: LICENSE</span><span class="w"></span>
+<span class="c1"># Uncomment and fill in myproj metadata</span>
+<span class="c1">#about:</span>
+<span class="c1">#  home: https://github.com/conda-forge/conda-smithy</span>
+<span class="c1">#  license: BSD-3-Clause</span>
+<span class="c1">#  license_family: BSD</span>
+<span class="c1">#  license_file: LICENSE</span>
 
-<span class="c1"># Uncomment the following if this will be on a forge</span><span class="w"></span>
-<span class="c1"># Remove these lines if this is only be used for CI</span><span class="w"></span>
-<span class="c1">#extra:</span><span class="w"></span>
-<span class="c1">#  recipe-maintainers:</span><span class="w"></span>
-<span class="c1">#    - BobaFett</span><span class="w"></span>
-<span class="c1">#    - LisaSimpson</span><span class="w"></span>
+<span class="c1"># Uncomment the following if this will be on a forge</span>
+<span class="c1"># Remove these lines if this is only be used for CI</span>
+<span class="c1">#extra:</span>
+<span class="c1">#  recipe-maintainers:</span>
+<span class="c1">#    - BobaFett</span>
+<span class="c1">#    - LisaSimpson</span>
 </pre></div>
 </div>
 <p>This recipe is configured to correctly grab the source code and the version
@@ -220,7 +220,7 @@ to a channel. Feel free to delete or ignore these fields.</p>
 <h3>2. Commit the changes<a class="headerlink" href="#commit-the-changes" title="Permalink to this heading">¶</a></h3>
 <p>Once you have written your recipe, it is important to save the modifications!
 Just run the following commands:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/repo $ git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;ran conda smithy skeleton&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/repo<span class="w"> </span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;ran conda smithy skeleton&quot;</span>
 </pre></div>
 </div>
 </section>
@@ -239,7 +239,7 @@ provider selections made in the <code class="docutils literal notranslate"><span
 refer to <a class="reference external" href="https://conda-forge.org/docs/maintainer/conda_forge_yml.html#provider">these docs</a>
 for a complete list of CI providers.)</p>
 <p>In order to generate the CI configuration files, run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/repo $ conda smithy rerender -c auto
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/repo<span class="w"> </span>$<span class="w"> </span>conda<span class="w"> </span>smithy<span class="w"> </span>rerender<span class="w"> </span>-c<span class="w"> </span>auto
 </pre></div>
 </div>
 <p>Pushing those changes up to the repo should now give be building and testing
@@ -254,7 +254,7 @@ modify your recipe to enable new architectures, you want to
 run on a different provider, or even if the CI system changes out from under you,
 getting back up and running is as easy as rerendering.
 You just need to repeat step 4, above:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/repo $ conda smithy rerender -c auto
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/repo<span class="w"> </span>$<span class="w"> </span>conda<span class="w"> </span>smithy<span class="w"> </span>rerender<span class="w"> </span>-c<span class="w"> </span>auto
 </pre></div>
 </div>
 <p>This will generate and replace the CI configuration files for the
@@ -364,7 +364,7 @@ current time and state of the recipe.  It is just that easy!</p>
         <li class="right" >
           <a href="tipsandtricks.html" title="Tips &amp; tricks"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.01.04 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Using conda-smithy to manage your CI</a></li> 
@@ -373,7 +373,7 @@ current time and state of the recipe.  It is just that easy!</p>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2022, conda-forge.
+        &#169; Copyright 2016-2023, conda-forge.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
     <!-- cloud_sptheme 1.4 -->

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Tips &amp; tricks &#8212; conda-forge 2022.12.21 documentation</title>
+    <title>Tips &amp; tricks &#8212; conda-forge 2023.01.04 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.01.04 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Tips &amp; tricks</a></li> 
@@ -78,9 +78,9 @@
 <p>It is quite common to install a package from conda-forge and,
 when trying to use it,
 see an error like (OS X example):</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ImportError: dlopen<span class="o">(</span>.../site-packages/rpy2/rinterface/_rinterface.so, <span class="m">2</span><span class="o">)</span>: Library not loaded: @rpath/libicuuc.54.dylib
-  Referenced from: .../site-packages/rpy2/rinterface/_rinterface.so
-  Reason: image not found
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ImportError:<span class="w"> </span>dlopen<span class="o">(</span>.../site-packages/rpy2/rinterface/_rinterface.so,<span class="w"> </span><span class="m">2</span><span class="o">)</span>:<span class="w"> </span>Library<span class="w"> </span>not<span class="w"> </span>loaded:<span class="w"> </span>@rpath/libicuuc.54.dylib
+<span class="w">  </span>Referenced<span class="w"> </span>from:<span class="w"> </span>.../site-packages/rpy2/rinterface/_rinterface.so
+<span class="w">  </span>Reason:<span class="w"> </span>image<span class="w"> </span>not<span class="w"> </span>found
 </pre></div>
 </div>
 <p>That happens because either the correct version of <code class="docutils literal notranslate"><span class="pre">icu</span></code>,
@@ -103,16 +103,16 @@ that mismatch can lead to errors when the install environment is mixing packages
 Type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">config</span> <span class="pre">--describe</span> <span class="pre">channel_priority</span></code> for more information.</p>
 <p>The solution is to add the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel on top of <code class="docutils literal notranslate"><span class="pre">defaults</span></code> in your <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> file when using <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages
 and activate the strict channel priority with:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ conda config --set channel_priority strict
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>channel_priority<span class="w"> </span>strict
 </pre></div>
 </div>
 <p>This will ensure that all the dependencies come from the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel unless they exist only on <code class="docutils literal notranslate"><span class="pre">defaults</span></code>.</p>
 <p>Here is how a <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> file would look like:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ cat .condarc
-channel_priority: strict
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cat<span class="w"> </span>.condarc
+channel_priority:<span class="w"> </span>strict
 channels:
-  - conda-forge
-  - defaults
+<span class="w">  </span>-<span class="w"> </span>conda-forge
+<span class="w">  </span>-<span class="w"> </span>defaults
 </pre></div>
 </div>
 <p>In addition to the channel priority, we recommend always installing your packages inside a new environment instead of the <code class="docutils literal notranslate"><span class="pre">base</span></code> environment from anaconda/miniconda.
@@ -142,8 +142,8 @@ does not work at all or functions in unexpected ways on HPC systems.</p>
 libraries that are simply shell packages with no contents. These packages allow the <code class="docutils literal notranslate"><span class="pre">conda</span></code> solver to produce
 correct environments while avoiding installing MPI binaries from <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. You can install the
 dummy package with the following command</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ conda install <span class="s2">&quot;mpich=x.y.z=external_*&quot;</span>
-$ conda install <span class="s2">&quot;openmpi=x.y.z=external_*&quot;</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;mpich=x.y.z=external_*&quot;</span>
+$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;openmpi=x.y.z=external_*&quot;</span>
 </pre></div>
 </div>
 <p>As long as you have the local copies of the <code class="docutils literal notranslate"><span class="pre">mpich</span></code>/<code class="docutils literal notranslate"><span class="pre">openmpi</span></code> library in your linking paths and
@@ -155,15 +155,15 @@ local copy of <code class="docutils literal notranslate"><span class="pre">mpich
 <span id="apple-silicon-rosetta"></span><h2>Installing Apple Intel packages on Apple Silicon<a class="headerlink" href="#installing-apple-intel-packages-on-apple-silicon" title="Permalink to this heading">¶</a></h2>
 <p>Using <a class="reference external" href="https://support.apple.com/en-us/HT211861">Rosetta 2</a>, you can install packages originally compiled for Mac computers with Intel processors on Mac computers with Apple silicon processors.</p>
 <p>This can be enabled per environment using the following commands:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64 conda create -n your_environment_name python   <span class="c1"># Create a new environment called your_environment_name with intel packages.</span>
-conda activate your_environment_name
-python -c <span class="s2">&quot;import platform;print(platform.machine())&quot;</span>  <span class="c1"># Confirm that the correct values are being used.</span>
-conda config --env --set subdir osx-64  <span class="c1"># Make sure that conda commands in this environment use intel packages.</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_SUBDIR</span><span class="o">=</span>osx-64<span class="w"> </span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>your_environment_name<span class="w"> </span>python<span class="w">   </span><span class="c1"># Create a new environment called your_environment_name with intel packages.</span>
+conda<span class="w"> </span>activate<span class="w"> </span>your_environment_name
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import platform;print(platform.machine())&quot;</span><span class="w">  </span><span class="c1"># Confirm that the correct values are being used.</span>
+conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w"> </span>--set<span class="w"> </span>subdir<span class="w"> </span>osx-64<span class="w">  </span><span class="c1"># Make sure that conda commands in this environment use intel packages.</span>
 </pre></div>
 </div>
 <p>To verify that the correct platform is being used, run the following commands after the environment has been activated:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -c <span class="s2">&quot;import platform;print(platform.machine())&quot;</span>  <span class="c1"># Should print &quot;x86_64&quot;</span>
-<span class="nb">echo</span> <span class="s2">&quot;CONDA_SUBDIR: </span><span class="nv">$CONDA_SUBDIR</span><span class="s2">&quot;</span>  <span class="c1"># Should print &quot;CONDA_SUBDIR: osx-64&quot;</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import platform;print(platform.machine())&quot;</span><span class="w">  </span><span class="c1"># Should print &quot;x86_64&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;CONDA_SUBDIR: </span><span class="nv">$CONDA_SUBDIR</span><span class="s2">&quot;</span><span class="w">  </span><span class="c1"># Should print &quot;CONDA_SUBDIR: osx-64&quot;</span>
 </pre></div>
 </div>
 </section>
@@ -171,9 +171,9 @@ conda config --env --set subdir osx-64  <span class="c1"># Make sure that conda 
 <span id="installing-packages-for-gpus-and-cpus"></span><h2>Installing CUDA-enabled packages like TensorFlow and PyTorch<a class="headerlink" href="#installing-cuda-enabled-packages-like-tensorflow-and-pytorch" title="Permalink to this heading">¶</a></h2>
 <p>In conda-forge, some packages are available with GPU support. These packages not only take significantly longer to compile and build, but they also result in rather large binaries that users then download. As an effort to maximize accessibility for users with lower connection and/or storage bandwidth, there is an ongoing effort to limit installing packages compiled for GPUs unnecessarily on CPU-only machines by default. This is accomplished by adding a run dependency, <code class="docutils literal notranslate"><span class="pre">__cuda</span></code>, that detects if the local machine has a GPU. However, this introduces challenges to users who may prefer to still download and use GPU-enabled packages even on a non-GPU machine. For example, login nodes on HPCs often do not have GPUs and their compute counterparts with GPUs often do not have internet access. In this case, a user can override the default setting via the environment variable <code class="docutils literal notranslate"><span class="pre">CONDA_OVERRIDE_CUDA</span></code> to install GPU packages on the login node to be used later on the compute node. At the time of writing (February 2022), we have concluded this safe default behavior is best for most of conda-forge users, with an easy override option available and documented. Please let us know if you have thoughts on or issues with this.</p>
 <p>In order to override the default behavior, a user can set the environment variable <code class="docutils literal notranslate"><span class="pre">CONDA_OVERRIDE_CUDA</span></code> like below to install TensorFlow with GPU support even on a machine with CPU only.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_OVERRIDE_CUDA</span><span class="o">=</span><span class="s2">&quot;11.2&quot;</span> conda install <span class="s2">&quot;tensorflow==2.7.0=cuda112*&quot;</span> -c conda-forge
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">CONDA_OVERRIDE_CUDA</span><span class="o">=</span><span class="s2">&quot;11.2&quot;</span><span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;tensorflow==2.7.0=cuda112*&quot;</span><span class="w"> </span>-c<span class="w"> </span>conda-forge
 <span class="c1"># OR</span>
-<span class="nv">CONDA_OVERRIDE_CUDA</span><span class="o">=</span><span class="s2">&quot;11.2&quot;</span> mamba install <span class="s2">&quot;tensorflow==2.7.0=cuda112*&quot;</span> -c conda-forge
+<span class="nv">CONDA_OVERRIDE_CUDA</span><span class="o">=</span><span class="s2">&quot;11.2&quot;</span><span class="w"> </span>mamba<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;tensorflow==2.7.0=cuda112*&quot;</span><span class="w"> </span>-c<span class="w"> </span>conda-forge
 </pre></div>
 </div>
 <div class="admonition note">
@@ -188,8 +188,8 @@ conda config --env --set subdir osx-64  <span class="c1"># Make sure that conda 
 environments using the <a class="reference external" href="https://www.pypy.org">PyPy interpreter</a>. Many packages are already
 available. You need to enable the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel and use
 the <code class="docutils literal notranslate"><span class="pre">pypy</span></code> identifier when creating your environment:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ conda create -c conda-forge -n my-pypy-env pypy <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
-$ conda activate my-pypy-env
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>create<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>-n<span class="w"> </span>my-pypy-env<span class="w"> </span>pypy<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+$<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>my-pypy-env
 </pre></div>
 </div>
 <p>Currently supported python versions are 3.8 and 3.9. Support for <code class="docutils literal notranslate"><span class="pre">pypy3.7</span></code>
@@ -203,7 +203,7 @@ then you need to use strict channel priority as the metadata in defaults
 has not been patched yet which allows cpython extension packages to be
 installed alongside pypy.</p>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conda config --set channel_priority strict
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>channel_priority<span class="w"> </span>strict
 </pre></div>
 </div>
 </section>
@@ -312,7 +312,7 @@ installed alongside pypy.</p>
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.01.04 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Tips &amp; tricks</a></li> 
@@ -321,7 +321,7 @@ installed alongside pypy.</p>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2022, conda-forge.
+        &#169; Copyright 2016-2023, conda-forge.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
     <!-- cloud_sptheme 1.4 -->

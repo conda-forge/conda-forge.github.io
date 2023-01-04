@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>FAQ &#8212; conda-forge 2022.12.21 documentation</title>
+    <title>FAQ &#8212; conda-forge 2023.01.04 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="knowledge_base.html" title="Knowledge Base"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.01.04 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">FAQ</a></li> 
@@ -138,7 +138,7 @@ Therefore build numbers above 1000 will gradually vanish as packages get updated
 </div></blockquote>
 <p id="mfaq-conda-verify"><a class="reference internal" href="#mfaq-conda-verify"><span class="std std-ref">(Q)</span></a> <strong>I am seeing</strong> <code class="docutils literal notranslate"><span class="pre">Importing</span> <span class="pre">conda-verify</span> <span class="pre">failed.</span></code> <strong>error message during build. What do I do?</strong></p>
 <blockquote>
-<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Importing conda-verify failed. Please be sure to <span class="nb">test</span> your packages. conda install conda-verify to make this message go away.
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Importing<span class="w"> </span>conda-verify<span class="w"> </span>failed.<span class="w"> </span>Please<span class="w"> </span>be<span class="w"> </span>sure<span class="w"> </span>to<span class="w"> </span><span class="nb">test</span><span class="w"> </span>your<span class="w"> </span>packages.<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>conda-verify<span class="w"> </span>to<span class="w"> </span>make<span class="w"> </span>this<span class="w"> </span>message<span class="w"> </span>go<span class="w"> </span>away.
 </pre></div>
 </div>
 <p>You are seeing this error message because by default, conda-build uses conda-verify to ensure that your recipe and package meet some minimum sanity checks.
@@ -160,7 +160,7 @@ This message can be safely ignored as conda-forge doesn’t use conda-verify.</p
 <p id="mfaq-libgl-so-1"><a class="reference internal" href="#mfaq-libgl-so-1"><span class="std std-ref">(Q)</span></a> <strong>How do I fix the</strong> <code class="docutils literal notranslate"><span class="pre">libGL.so.1</span></code> <strong>import error?</strong></p>
 <blockquote>
 <div><p>Error:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ImportError: libGL.so.1: cannot open shared object file: No such file or directory
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ImportError:<span class="w"> </span>libGL.so.1:<span class="w"> </span>cannot<span class="w"> </span>open<span class="w"> </span>shared<span class="w"> </span>object<span class="w"> </span>file:<span class="w"> </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory
 </pre></div>
 </div>
 <p>To fix the error, create a <a class="reference external" href="https://conda-forge.org/docs/maintainer/knowledge_base.html#yum-deps">yum_requirements.txt</a> file and add <em>mesa-libGL</em>.</p>
@@ -168,17 +168,17 @@ This message can be safely ignored as conda-forge doesn’t use conda-verify.</p
 <p id="mfaq-qt-load-xcb"><a class="reference internal" href="#mfaq-qt-load-xcb"><span class="std std-ref">(Q)</span></a> <strong>How can I fix the</strong> <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">Qt</span> <span class="pre">platform</span> <span class="pre">plugin</span> <span class="pre">&quot;xcb&quot;</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">loaded</span></code> <strong>error during testing?</strong></p>
 <blockquote>
 <div><p>When testing packages that have a dependency on <code class="docutils literal notranslate"><span class="pre">pyqt</span></code>, the following error might occur under linux:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>qt.qpa.plugin: Could not load the Qt platform plugin <span class="s2">&quot;xcb&quot;</span> <span class="k">in</span> <span class="s2">&quot;&quot;</span> even though it was found.
-This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>qt.qpa.plugin:<span class="w"> </span>Could<span class="w"> </span>not<span class="w"> </span>load<span class="w"> </span>the<span class="w"> </span>Qt<span class="w"> </span>platform<span class="w"> </span>plugin<span class="w"> </span><span class="s2">&quot;xcb&quot;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span>even<span class="w"> </span>though<span class="w"> </span>it<span class="w"> </span>was<span class="w"> </span>found.
+This<span class="w"> </span>application<span class="w"> </span>failed<span class="w"> </span>to<span class="w"> </span>start<span class="w"> </span>because<span class="w"> </span>no<span class="w"> </span>Qt<span class="w"> </span>platform<span class="w"> </span>plugin<span class="w"> </span>could<span class="w"> </span>be<span class="w"> </span>initialized.<span class="w"> </span>Reinstalling<span class="w"> </span>the<span class="w"> </span>application<span class="w"> </span>may<span class="w"> </span>fix<span class="w"> </span>this<span class="w"> </span>problem.
 
-Available platform plugins are: eglfs, minimal, minimalegl, offscreen, vnc, webgl, xcb.
+Available<span class="w"> </span>platform<span class="w"> </span>plugins<span class="w"> </span>are:<span class="w"> </span>eglfs,<span class="w"> </span>minimal,<span class="w"> </span>minimalegl,<span class="w"> </span>offscreen,<span class="w"> </span>vnc,<span class="w"> </span>webgl,<span class="w"> </span>xcb.
 </pre></div>
 </div>
 <p>This comes from the CI environment being headless and can be fixed by adding the <code class="docutils literal notranslate"><span class="pre">QT_QPA_PLATFORM=offscreen</span></code> <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#inherited-environment-variables">environment variable</a>.
 The variable can either be added directly to the test command or provided in the <a class="reference external" href="https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml">meta.yaml</a> like so:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">script_env</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QT_QPA_PLATFORM=offscreen</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">script_env</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">QT_QPA_PLATFORM=offscreen</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -304,7 +304,7 @@ also maintain a list of important packages with changes in our documentation.</p
         <li class="right" >
           <a href="knowledge_base.html" title="Knowledge Base"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2022.12.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.01.04 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">FAQ</a></li> 
@@ -313,7 +313,7 @@ also maintain a list of important packages with changes in our documentation.</p
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2022, conda-forge.
+        &#169; Copyright 2016-2023, conda-forge.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
     <!-- cloud_sptheme 1.4 -->

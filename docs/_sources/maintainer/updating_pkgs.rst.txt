@@ -262,7 +262,12 @@ If a package is no longer maintained ``conda-forge`` will *archive*
 the repository. An archived repository can no longer accept PRs and issues, which prevents people and ``regro-cf-autotick-bot`` from updating the
 package (an example would be to re-render the feedstock to support new Python versions). Note that this **does not** remove the existing packages, those will still be available.
 
-If you believe a feedstock should be archived, please contact `@conda-forge/core <https://github.com/orgs/conda-forge/teams/core>`__.
+If you believe a feedstock should be archived, please do the following:
+
+1. Raise an issue on the feedstock asking if it can be archived (CC the maintainer team and @conda-forge/core)
+2. Fork `conda-forge/admin-requests <https://github.com/conda-forge/admin-requests>`__ and add a new text file in the ``archive`` directory with the repo name.
+3. Open a PR and cross-reference the issue raised in step 1.
+
 
 .. _maint_updating_maintainers:
 
