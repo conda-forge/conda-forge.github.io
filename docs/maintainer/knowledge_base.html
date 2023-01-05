@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Knowledge Base &#8212; conda-forge 2023.01.04 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2023.01.05 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.01.04 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.01.05 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -305,6 +305,52 @@ For example, this <a class="reference external" href="https://www.pcjs.org/softw
 there’s no need to specify <code class="docutils literal notranslate"><span class="pre">libgcc</span></code> or <code class="docutils literal notranslate"><span class="pre">libgfortran</span></code>. There are additional informations about how conda-build 3 treats
 compilers in the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html">conda docs</a>.</p>
 </div>
+</section>
+<section id="cross-compilation">
+<h3>Cross-compilation<a class="headerlink" href="#cross-compilation" title="Permalink to this heading">¶</a></h3>
+<p>For some other architectures (like ARM), packages can be built natively on that architecture or they can be cross-compiled.
+In other words built on a different common architecture (like x86_64) while still targeting the original architecture (ARM).
+This helps one leverage more abundant CI resources in the build architecture (x86_64).</p>
+<p>A package needs to make a few changes in their recipe to be compatible with cross-compilation. Here are a few examples.</p>
+<p>A simple C library using autotools for cross-compilation might look like this:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&quot;c&quot;)</span><span class="w"> </span><span class="p p-Indicator">}}</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg-config</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gnuconfig</span>
+</pre></div>
+</div>
+<p>In the build script, it would need to update the config files and guard any tests when cross-compiling:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get an updated config.sub and config.guess</span>
+cp<span class="w"> </span><span class="nv">$BUILD_PREFIX</span>/share/gnuconfig/config.*<span class="w"> </span>.
+
+<span class="c1"># Skip ``make check`` when cross-compiling</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONDA_BUILD_CROSS_COMPILATION</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span>make<span class="w"> </span>check
+<span class="k">fi</span>
+</pre></div>
+</div>
+<p>A simple Python extension using Cython and NumPy’s C API would look like so:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">compiler(&quot;c&quot;)</span><span class="w"> </span><span class="p p-Indicator">}}</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cross-python_{{ target_platform }}</span><span class="w">    </span><span class="c1"># [build_platform != target_platform]</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span><span class="w">                                </span><span class="c1"># [build_platform != target_platform]</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cython</span><span class="w">                                </span><span class="c1"># [build_platform != target_platform]</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy</span><span class="w">                                 </span><span class="c1"># [build_platform != target_platform]</span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cython</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">pin_compatible(&quot;numpy&quot;)</span><span class="w"> </span><span class="p p-Indicator">}}</span>
+</pre></div>
+</div>
+<p>There are more variations of this approach in the wild. So this is not meant to be exhaustive,
+but merely to provide a starting point with some guidelines. Please look at <a class="reference external" href="https://github.com/search?q=org%3Aconda-forge+path%3Arecipe%2Fmeta.yaml+%22%5Bbuild_platform+%21%3D+target_platform%5D%22&amp;type=code">other recipes for more examples</a>.</p>
 </section>
 <section id="rust-nightly">
 <h3>Rust Nightly<a class="headerlink" href="#rust-nightly" title="Permalink to this heading">¶</a></h3>
@@ -1514,6 +1560,7 @@ in conda environments, and some operating system limits. See the <a class="refer
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#special-dependencies-and-packages">Special Dependencies and Packages</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#compilers">Compilers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cross-compilation">Cross-compilation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#rust-nightly">Rust Nightly</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#core-dependency-tree-packages-cdts">Core Dependency Tree Packages (CDTs)</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#libgl">libGL</a></li>
@@ -1658,7 +1705,7 @@ in conda environments, and some operating system limits. See the <a class="refer
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.01.04 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.01.05 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 

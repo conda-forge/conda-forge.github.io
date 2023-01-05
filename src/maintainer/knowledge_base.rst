@@ -279,6 +279,63 @@ A package that needs all five compilers would define
   there's no need to specify ``libgcc`` or ``libgfortran``. There are additional informations about how conda-build 3 treats
   compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html>`__.
 
+Cross-compilation
+-----------------
+
+For some other architectures (like ARM), packages can be built natively on that architecture or they can be cross-compiled.
+In other words built on a different common architecture (like x86_64) while still targeting the original architecture (ARM).
+This helps one leverage more abundant CI resources in the build architecture (x86_64).
+
+A package needs to make a few changes in their recipe to be compatible with cross-compilation. Here are a few examples.
+
+A simple C library using autotools for cross-compilation might look like this:
+
+.. code-block:: yaml
+
+    requirements:
+      build:
+        - {{ compiler("c") }}
+        - make
+        - pkg-config
+        - gnuconfig
+
+In the build script, it would need to update the config files and guard any tests when cross-compiling:
+
+.. code-block:: sh
+
+    # Get an updated config.sub and config.guess
+    cp $BUILD_PREFIX/share/gnuconfig/config.* .
+    
+    # Skip ``make check`` when cross-compiling
+    if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
+      make check
+    fi
+
+A simple Python extension using Cython and NumPy's C API would look like so:
+
+.. code-block:: yaml
+
+    requirements:
+      build:
+        - {{ compiler("c") }}
+        - cross-python_{{ target_platform }}    # [build_platform != target_platform]
+        - python                                # [build_platform != target_platform]
+        - cython                                # [build_platform != target_platform]
+        - numpy                                 # [build_platform != target_platform]
+      host:
+        - python
+        - pip
+        - cython
+        - numpy
+      run:
+        - python
+        - {{ pin_compatible("numpy") }}
+
+There are more variations of this approach in the wild. So this is not meant to be exhaustive,
+but merely to provide a starting point with some guidelines. Please look at `other recipes for more examples`_.
+
+.. _other recipes for more examples: https://github.com/search?q=org%3Aconda-forge+path%3Arecipe%2Fmeta.yaml+%22%5Bbuild_platform+%21%3D+target_platform%5D%22&type=code
+
 Rust Nightly
 ------------
 
