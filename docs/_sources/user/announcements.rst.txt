@@ -5,6 +5,16 @@ Announcements
 
 Our announcements are published to an RSS feed `here <https://conda-forge.org/docs/news.rss>`_.
 
+2023
+----
+
+2023-01-08: ``conda-forge/staged-recipes`` Feedstock Creation Job Moved
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We have moved the CI job that makes new feedstocks to our 
+`conda-forge/admin-requests <https://github.com/conda-forge/admin-requests>`_ 
+repo. The new location is reflected in the various links on repos and our status page.
+
 2022
 ----
 

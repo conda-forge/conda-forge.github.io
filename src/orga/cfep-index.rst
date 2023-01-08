@@ -11,7 +11,7 @@ A list of conda-forge enhancement proposals (CFEP) are as follows:
 * `CFEP-00: CFEP Template <https://github.com/conda-forge/cfep/blob/main/cfep-00.md>`_ -- *Proposed*
 * `CFEP-01: CFEP Purpose and Guidelines <https://github.com/conda-forge/cfep/blob/main/cfep-01.md>`_ -- *Proposed*
 * `CFEP-02: Upgrade default macOS Travis image to xcode6.4 <https://github.com/conda-forge/cfep/blob/main/cfep-02.md>`_ -- *Accepted*
-* `CFEP-03: Providing manually uploaded builds on the conda-forge anaconda channel <https://github.com/conda-forge/cfep/blob/main/cfep-03.md>`_ -- *Proposed*
+* `CFEP-03: Providing manually uploaded builds on the conda-forge anaconda channel <https://github.com/conda-forge/cfep/blob/main/cfep-03.md>`_ -- *Accepted*
 * `CFEP-04: Policies for packaging X11-based software in conda-forge <https://github.com/conda-forge/cfep/blob/main/cfep-04.md>`_ -- *Deferred*
 * `CFEP-05: Providing pre-release builds on the conda-forge anaconda channel <https://github.com/conda-forge/cfep/blob/main/cfep-05.md>`_ -- *Accepted*
 * `CFEP-06: staged-recipes code review lifecycle <https://github.com/conda-forge/cfep/blob/main/cfep-06.md>`_ -- *Deferred*

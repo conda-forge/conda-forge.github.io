@@ -4,8 +4,18 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Thu, 05 Jan 2023 21:01:34 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 08 Jan 2023 20:39:33 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2023-01-08: conda-forge/staged-recipes Feedstock Creation Job Moved</title>
+      <link>https://conda-forge.org/docs/user/announcements.html#conda-forge-staged-recipes-feedstock-creation-job-moved</link>
+      <description>&lt;p&gt;We have moved the CI job that makes new feedstocks to our
+&lt;a class="reference external" href="https://github.com/conda-forge/admin-requests"&gt;conda-forge/admin-requests&lt;/a&gt;
+repo. The new location is reflected in the various links on repos and our status page.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html#conda-forge-staged-recipes-feedstock-creation-job-moved</guid>
+      <pubDate>Sun, 08 Jan 2023 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2022-11-16: Moving to .conda Artifacts</title>
       <link>https://conda-forge.org/docs/user/announcements.html#moving-to-conda-artifacts</link>
