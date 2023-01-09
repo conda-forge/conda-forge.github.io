@@ -4,8 +4,19 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Sun, 08 Jan 2023 20:39:33 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 09 Jan 2023 12:35:07 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2023-01-09: conda-forge Google Group is Now Read-only - Move to Discourse</title>
+      <link>https://conda-forge.org/docs/user/announcements.html#conda-forge-google-group-is-now-read-only-move-to-discourse</link>
+      <description>&lt;p&gt;We have made the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; Google Group read-only. Please use the new
+&lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; &lt;a class="reference external" href="https://conda.discourse.group/c/pkg-building/conda-forge/25"&gt;discourse forum&lt;/a&gt;,
+our &lt;a class="reference external" href="https://gitter.im/conda-forge/conda-forge.github.io"&gt;Gitter room&lt;/a&gt;, or it’s &lt;a class="reference external" href="https://app.element.io/#/room/#conda-forge-space:matrix.org"&gt;Matrix/Element
+counterpart&lt;/a&gt; instead.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html#conda-forge-google-group-is-now-read-only-move-to-discourse</guid>
+      <pubDate>Mon, 09 Jan 2023 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2023-01-08: conda-forge/staged-recipes Feedstock Creation Job Moved</title>
       <link>https://conda-forge.org/docs/user/announcements.html#conda-forge-staged-recipes-feedstock-creation-job-moved</link>
@@ -273,14 +284,14 @@ as that would save lots of CI resources.&lt;/p&gt;
       <pubDate>Thu, 30 Sep 2021 00:00:00 GMT</pubDate>
     </item>
     <item>
-      <title>2020-05-22: conda-forge is now citable!</title>
+      <title>2021-05-22: conda-forge is now citable!</title>
       <link>https://conda-forge.org/docs/user/announcements.html#conda-forge-is-now-citable</link>
       <description>&lt;p&gt;You can now cite &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; using our &lt;a class="reference external" href="https://doi.org/10.5281/zenodo.4774216"&gt;Zenodo entry&lt;/a&gt;!
 This entry credits the entire &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge&lt;/span&gt;&lt;/code&gt; community for its hard work in building our
 amazing ecosystem.&lt;/p&gt;
 </description>
       <guid>https://conda-forge.org/docs/user/announcements.html#conda-forge-is-now-citable</guid>
-      <pubDate>Fri, 22 May 2020 00:00:00 GMT</pubDate>
+      <pubDate>Sat, 22 May 2021 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title>2020-12-16: Moving to CentOS 7 and CentOS 6 End-of-Life</title>

@@ -8,6 +8,15 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2023
 ----
 
+2023-01-09: ``conda-forge`` Google Group is Now Read-only - Move to Discourse
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We have made the ``conda-forge`` Google Group read-only. Please use the new 
+``conda-forge`` `discourse forum <https://conda.discourse.group/c/pkg-building/conda-forge/25>`_, 
+our `Gitter room <https://gitter.im/conda-forge/conda-forge.github.io>`_, or it's `Matrix/Element 
+counterpart <https://app.element.io/#/room/#conda-forge-space:matrix.org>`_ instead.
+
+
 2023-01-08: ``conda-forge/staged-recipes`` Feedstock Creation Job Moved
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -243,7 +252,7 @@ You can get the previous behaviour by using the ``channel_sources`` setting in
 ``conda-forge.yml``
 
 
-2020-05-22: ``conda-forge`` is now citable!
+2021-05-22: ``conda-forge`` is now citable!
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can now cite ``conda-forge`` using our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_!
