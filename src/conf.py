@@ -129,6 +129,7 @@ linkcheck_ignore = [
     r'https://gitter.im/conda-forge/core$',  # private team
     r'https://polys.me/?$',  # 403 forbidden
     r'https://app.element.io/#/room/#conda-forge-space:matrix.org',  # needs login
+    r'https://anacondacon.io/?$',  # website is gone
 ] + anchor_check_fps
 
 
