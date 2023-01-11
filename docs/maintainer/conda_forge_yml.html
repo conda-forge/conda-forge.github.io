@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2023.01.09 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2023.01.11 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.01.09 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.01.11 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
@@ -164,6 +164,15 @@ automatic version updates/migrations for feedstocks. The current options are</p>
 
 <span class="w">  </span><span class="c1"># only open PRs if resulting environment is solvable, useful for tightly coupled packages</span>
 <span class="w">  </span><span class="nt">check_solvable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="w">  </span><span class="c1"># The bot.inspection key in the conda-forge.yml can have one of six possible values:</span>
+<span class="w">  </span><span class="nt">inspection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hint</span><span class="w">  </span><span class="c1"># generate hints using source code (backwards compatible)</span>
+<span class="w">  </span><span class="nt">inspection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hint-all</span><span class="w">  </span><span class="c1"># generate hints using all methods</span>
+<span class="w">  </span><span class="nt">inspection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hint-source</span><span class="w">  </span><span class="c1"># generate hints using only source code</span>
+<span class="w">  </span><span class="nt">inspection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hint-grayskull</span><span class="w">  </span><span class="c1"># generate hints using only grayskull</span>
+<span class="w">  </span><span class="nt">inspection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">update-all</span><span class="w">  </span><span class="c1"># update recipe using all methods</span>
+<span class="w">  </span><span class="nt">inspection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">update-source</span><span class="w">  </span><span class="c1"># update recipe using only source code</span>
+<span class="w">  </span><span class="nt">inspection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">update-grayskull</span><span class="w">  </span><span class="c1"># update recipe using only grayskull</span>
 
 <span class="w">  </span><span class="c1"># any branches listed in this section will get bot migration PRs in addition</span>
 <span class="w">  </span><span class="c1"># to the default branch</span>
@@ -625,7 +634,7 @@ Currently only:</p>
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.01.09 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.01.11 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
