@@ -114,6 +114,15 @@ automatic version updates/migrations for feedstocks. The current options are
       # only open PRs if resulting environment is solvable, useful for tightly coupled packages
       check_solvable: true
 
+      # The bot.inspection key in the conda-forge.yml can have one of six possible values:
+      inspection: hint  # generate hints using source code (backwards compatible)
+      inspection: hint-all  # generate hints using all methods
+      inspection: hint-source  # generate hints using only source code
+      inspection: hint-grayskull  # generate hints using only grayskull
+      inspection: update-all  # update recipe using all methods
+      inspection: update-source  # update recipe using only source code
+      inspection: update-grayskull  # update recipe using only grayskull
+
       # any branches listed in this section will get bot migration PRs in addition
       # to the default branch
       abi_migration_branches:
