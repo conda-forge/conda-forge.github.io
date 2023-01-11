@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>2016-05-09 Exceptional meeting regarding build customization &#8212; conda-forge 2023.01.11 documentation</title>
+    <title>conda-forge core meeting 2023-01-11 &#8212; conda-forge 2023.01.11 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -39,8 +39,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2016-04-29" href="2016-04-29.html" />
-    <link rel="prev" title="2016-05-13" href="2016-05-13.html" /> 
+    <link rel="next" title="conda-forge core meeting 2022-12-14" href="2022-12-14.html" />
+    <link rel="prev" title="Core team meeting minutes" href="00_intro.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -52,16 +52,16 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="2016-04-29.html" title="2016-04-29"
+          <a href="2022-12-14.html" title="conda-forge core meeting 2022-12-14"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2016-05-13.html" title="2016-05-13"
+          <a href="00_intro.html" title="Core team meeting minutes"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">conda-forge 2023.01.11 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">2016-05-09 Exceptional meeting regarding build customization</a></li> 
+        <li class="nav-item nav-item-this"><a href="">conda-forge core meeting 2023-01-11</a></li> 
       </ul>
     </div>
     </div>
@@ -72,110 +72,236 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="exceptional-meeting-regarding-build-customization">
-<h1>2016-05-09 Exceptional meeting regarding build customization<a class="headerlink" href="#exceptional-meeting-regarding-build-customization" title="Permalink to this heading">¶</a></h1>
-<p>14:00 UTC</p>
-<p>Hangout link: ???</p>
-<p>Attendees: Michael Sarahan, Ray Donnelly, Kale Franz, Michael Grant, Ullrich Koethe, Stuart Berg, Phil Elson, Mark Wiebe</p>
-<p>Agenda/Minutes:</p>
-<ul>
-<li><p>Version parameterization:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   MichaelS:  proposing to have dependency resolution become part of meta.yaml  rendering.  May require extra (3rd) jinja rendering pass.
-</pre></div>
-</div>
-<ul>
-<li><p>Need to know dependencies before Jinja templates can be fully expressed (main issue in #747)</p></li>
-<li><p>Phil: not good, because you cant differentiate between a manual entry of a value, and a templated entry of a value.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   Dont know which ones are important for build string
-
-            *   Build strings only matter when we have a build matrix; there to disambiguate
-*   MichaelS proposes manual specification of entries in build string
-*   Ullrich: if build strings just disambiguate, why not use hash?
-
-                    *   MichaelS: hash fine, but needs to be reproducible.
-
-    *   Heart of issue is that matrix build tools need some way to understand what parameterizes the build matrix.
-
-            *   MichaelS  offered that no matter what solution we settle on, there will be  something readily inspectable.  Maybe this can feed into automatically  creating the build string.
-</pre></div>
-</div>
-<ul>
-<li><p>If recipe-local config.yaml is needed, Kale asks why not include it directly in meta.yaml</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Not  sure what use case necessitates recipe-local config.yaml (global one is  agreed upon by all).  MichaelS OK with meta.yaml modifications if need  be.
-</pre></div>
-</div>
-</li>
-<li><p>Phil points out that global config.yaml might still need code changes for new versions of, say, Python.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   MichaelS  says no, theres surely ways we can express things like 
-</pre></div>
-</div>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>latest 2  versions</p>
-<ul>
-<li><p>just question of how to technically achieve.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> *   Ray:  filter things out of global config.yaml when they are not used in a  recipe (so that matrix dimensions are not needlessly added)
-
-         *   Ullrich:  However, one must be careful to not filter out indirect dependencies  that are not explicitly named in meta.yaml, but were intentionally added  to config.yaml. (example: meta.yaml lists h5py as a requirement, and  config.yaml restricts the indirect hdf5 dependency to a particular  variant of the hdf5 package). It is safer to err on the 
-</pre></div>
-</div>
-</li>
-</ul>
-<p>too much
-side.</p>
-<ul>
-<li><p>Build environment specification:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Conda-build 848 has 
-</pre></div>
-</div>
-</li>
-</ul>
-<p>bootstrap
-environment: user creates an env, that env is captured as build requirements for another recipe.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>            *   Phil: this ruins reproducibility, since it depends on the setup of the users system at build time.
-
-                    *   Stuart: were already not reproducible, and this bootstrap doesnt make things worse.
-        *   MichaelS:  if this is used to hard-pin build-time dependencies, it may actually  help reproducibility.  Hard-pinnning at build time is orthogonal to this  PR, but may be easier to achieve with it.
-        *   Ullrich:  if the contents of the build environment are recorded in index.json,  one can recreate the bootstrap environment at any time (or equivalently,  create config.yaml from that information), subject to the degree of  accuracy of the recorded data (e.g. are the source channels recorded, or  only version numbers and build strings?)
-
-            *   MichaelS,  Kale concerned that people may include too many unnecessary packages in  build requirements this way, out of carelessness or ignorance
-
-                    *   Ullrich: not a big deal - runtime dependencies are what really matter.
-</pre></div>
-</div>
-<ul>
-<li><p>Compiler customization:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*   Mark: 848 is OK, but how does it address compiler and build flags?
-</pre></div>
-</div>
-<ul>
-<li><p><u><a class="reference external" href="https://github.com/conda/conda/issues/1959">Conda 1959</a></u>  is example of build flags.  Uses bat/sh script at beginning of  bld.bat/build.sh.  Similar to Marks effort.  Dont like having to add  that extra shell script, though - want native support</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   MichaelS  offered integration with conda-build, when use cases are better  understood.  Some kind of hook to call standardized setup script.
-</pre></div>
-</div>
+  <section id="conda-forge-core-meeting-2023-01-11">
+<h1>conda-forge core meeting 2023-01-11<a class="headerlink" href="#conda-forge-core-meeting-2023-01-11" title="Permalink to this heading">¶</a></h1>
+<p>Add new agenda items under the <code class="docutils literal notranslate"><span class="pre">Your</span> <span class="pre">__new__()</span> <span class="pre">agenda</span> <span class="pre">items</span></code> heading</p>
+<section id="attendees">
+<h2>Attendees<a class="headerlink" href="#attendees" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Initials</p></th>
+<th class="head"><p>GitHub ID</p></th>
+<th class="head"><p>Affiliation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dave Clements</p></td>
+<td><p>DPC</p></td>
+<td><p>tnabtaf</p></td>
+<td><p>Anaconda</p></td>
+</tr>
+<tr class="row-odd"><td><p>Marcelo Trevisani</p></td>
+<td><p>MDT</p></td>
+<td><p>marcelotrevisani</p></td>
+<td><p>conda-forge</p></td>
+</tr>
+<tr class="row-even"><td><p>Jannis Leidel</p></td>
+<td><p>JL</p></td>
+<td><p>jezdez</p></td>
+<td><p>Anaconda/cf</p></td>
+</tr>
+<tr class="row-odd"><td><p>John Kirkham</p></td>
+<td><p>JK</p></td>
+<td><p>jakirkham</p></td>
+<td><p>NVIDIA/cf</p></td>
+</tr>
+<tr class="row-even"><td><p>Daniel Ching</p></td>
+<td><p>DJC</p></td>
+<td><p>carterbox</p></td>
+<td><p>Argonne</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cheng H. Lee</p></td>
+<td><p>CHL</p></td>
+<td><p>chenghlee</p></td>
+<td><p>Anaconda/cf</p></td>
+</tr>
+<tr class="row-even"><td><p>Marcel Bargull</p></td>
+<td><p>MB</p></td>
+<td><p>mbargull</p></td>
+<td><p>Bioconda/cf</p></td>
+</tr>
+<tr class="row-odd"><td><p>Filipe Fernandes</p></td>
+<td><p>FF</p></td>
+<td><p>ocefpaf</p></td>
+<td><p>conda-forge</p></td>
+</tr>
+<tr class="row-even"><td><p>Jaime Rodríguez-Guerra</p></td>
+<td><p>JRG</p></td>
+<td><p>jaimergp</p></td>
+<td><p>Quansight/cf</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wolf Vollprecht</p></td>
+<td><p>WV</p></td>
+<td><p>wolfv</p></td>
+<td><p>prefix/cf</p></td>
+</tr>
+<tr class="row-even"><td><p>Matthew Becker</p></td>
+<td><p>MRB</p></td>
+<td><p>beckermr</p></td>
+<td><p>cf</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p>15 people total (MRB arrived halfway through)</p>
+<section id="standing-items">
+<h3>Standing items<a class="headerlink" href="#standing-items" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>Ullrich:  The important aspect is that it should be easy for the conda-build user  to specify which setup script to use. Having specialized build packages  installed in a bootstrap environment seems to be an easy solution (e.g.  conda create -n my_bootstrap_env visual-studio-build=12.0 or conda  create -n my_bootstrap_env visual-studio-build=12.0.debug)</p></li>
-<li><p>Ullrich points out that these packages also need to exclude use with other packages, as they are not compatible</p></li>
+<li><p>[x] intros for new folks on the call</p>
+<ul>
+<li><p>Jesse Wiles, dev on Anaconda.org</p></li>
 </ul>
 </li>
-<li><p>Mark: would like to create easy to use instance of <a class="reference external" href="http://vfxplatform.com/"></a><u><a class="reference external" href="http://vfxplatform.com/">http://vfxplatform.com/</a></u> using conda.  Wants to be in the loop as we get that functionality worked out.</p></li>
-<li><p>Ullrich: Critical requirements for the final solution (whatever it will be):</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    *   Build dependency customization must be possible for _any_  package, although it would be OK if it were a bit more complicated for  the less common situations. It is crucial to support two cases:
-
-            *   Customize _indirect _dependencies not specified in meta.yaml.
-*   Narrow dependencies listed in meta.yaml (e.g. python 3.* =&gt; python 3.5.*).
-
-    *   Run  requirements must be specialized during the build such that version  resolution will only select compatible variants, even if active channels  offer newer, yet incompatible variants (right now I usually use -c  ukoethe --override-channels, but this is a pain).
-</pre></div>
-</div>
+<li><p>[ ] open votes
+*</p></li>
+</ul>
+</section>
+<section id="from-previous-meeting-s">
+<h3>From previous meeting(s)<a class="headerlink" href="#from-previous-meeting-s" title="Permalink to this heading">¶</a></h3>
+</section>
+<section id="your-new-agenda-items">
+<h3>Your <strong>new</strong>() agenda items<a class="headerlink" href="#your-new-agenda-items" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>[x] (DPC) Channels</p>
+<ul>
+<li><p>Google Group has been shutdown</p></li>
+<li><p>Matrix conda-forge space:</p></li>
+<li><p>Docs of all channels</p>
+<ul>
+<li><p>https://docs.google.com/spreadsheets/d/1l-djUkCUpEeGHd1DOklppi-lwHCH2yov0bUD4krOnp0/edit#gid=1720588473</p></li>
+</ul>
 </li>
+<li></li>
+</ul>
+</li>
+<li><p>[x] (JK) Tokens needing resets</p>
+<ul>
+<li><p>https://github.com/conda-forge/status/issues/137</p></li>
+<li><p>Need to start rotating tokens.  CircleCI had a leak and we use same token  Have started rotating</p>
+<ul>
+<li><p>Mitigations: https://github.com/conda-forge/conda-smithy/issues/1709, https://github.com/conda-forge/conda-smithy/issues/1708</p></li>
+</ul>
+</li>
+<li><p>All feedstocks now have broken tokens.</p></li>
+<li><p>We had a bug!</p></li>
+<li><p>Matt fixed, but still cleaning up.</p></li>
+<li><p>2/3 of packages are through with the rotation.</p></li>
+<li><p>New token requests go to Admin-requests repo</p></li>
+</ul>
+</li>
+<li><p>[x] (MB) Python prerelease</p>
+<ul>
+<li><p>Came up on the last Conda community sync meeting.</p></li>
+<li><p>This is <em>not</em> to please the ones begging for newer version being available “ASAP”</p></li>
+<li><p>Python 3.12 removes distutils from stdlib (!!)</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">distutils</span></code> currently used in <code class="docutils literal notranslate"><span class="pre">conda.common.pkg_formats.python</span></code> and <code class="docutils literal notranslate"><span class="pre">conda.auxlib.packaging</span></code>; see <a class="reference external" href="https://github.com/conda/conda/issues/11136">conda/conda#11136</a></p>
+<ul>
+<li><p>JRG: distutils still in setuptools, no? JL: yes, but there are patches to remove setuptools IIRC, e.g. https://github.com/conda/conda-build/pull/4443</p></li>
+<li><p>HV: distutils will continue to live in setuptools</p></li>
 </ul>
 </li>
 </ul>
+</li>
+<li><p>Related CEP draft about CPython support for conda: https://github.com/conda-incubator/ceps/pull/24</p></li>
+</ul>
+</li>
+<li><p>[x] (MB) R 4.2.2 (released in October) Windows builds
+*</p></li>
+<li><p>[x] (MB) MinGW-w64/MSYS2 UCRT64</p>
+<ul>
+<li><p>https://www.msys2.org/docs/environments/</p></li>
+<li><p>https://www.msys2.org/news/#2022-10-29-changing-the-default-environment-from-mingw64-to-ucrt64</p></li>
+<li><p>https://fedoraproject.org/wiki/Changes/F37MingwUCRT (Should look at other distros to see what they’ve done)</p></li>
+<li><p>(CHL) Windows &gt;=10 ships UCRT by default.  Windows 7 and 8.1 have officially reached EOL, so Anaconda (is planning to drop)/(has dropped) support for them.</p></li>
+<li><p>repo with the repackaging work:  https://github.com/conda-forge/msys2-recipes</p></li>
+</ul>
+</li>
+<li><p>[x] (MB) Travis CI w/ ppc64le</p>
+<ul>
+<li><p>No other ppc64le provider available (in the future?).</p></li>
+<li><p>Who uses ppc64le? Can we let them pay/work on supporting this platform?</p></li>
+<li><p>(CHL) Is Oregon State’s Open-Source Labs a feasible option?</p>
+<ul>
+<li><p>https://osuosl.org/services/powerdev/</p></li>
+<li><p>https://powerci.osuosl.org/</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>[x] (JRG) Updates on the GPU CI and next steps</p>
+<ul>
+<li><p>Built first GPU package on conda-forge yesterday.</p></li>
+<li><p>Need to figure access control (to our GPU server)</p></li>
+<li><p>Applies to Travis and GPU server.</p></li>
+<li><p>Could also be applied to access to future (for example) AWS credits.</p></li>
+</ul>
+</li>
+<li><p>[x] (JRG) Updates on the CZI grant</p>
+<ul>
+<li><p>$325K over next 2 years to be spent by Quansight and QuantStack.</p></li>
+<li><p>Follow progress on https://github.com/Quansight-Labs/czi-conda-forge-mgmt</p></li>
+<li><p>3 areas:</p>
+<ul>
+<li><p>Infrastructure</p></li>
+<li><p>OCI mirroring</p></li>
+<li><p>Dashboarding</p></li>
+</ul>
+</li>
+<li><p>Work done by two companies, but work benefits conda-forge, and bioconda</p></li>
+</ul>
+</li>
+<li><p>[x] (JRG) Meeting notes workflow</p>
+<ul>
+<li><p>Use singl trigger to create notes, put on HackMD, and then sync back to GitHub.</p></li>
+<li><p>Might be in place by next call.</p></li>
+</ul>
+</li>
+<li><p>[ ] updates on bots and secrets</p>
+<ul>
+<li><p>we’ve centralized most of what we use in 1password</p></li>
+<li><p>i’ve removed some of the keybase files that are old or misleading</p></li>
+<li><p>we use github apps for everything where we can</p></li>
+<li><p>will develop notes</p></li>
+</ul>
+</li>
+<li><p>[X] (HV) OpenSSL 3: https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/3838</p>
+<ul>
+<li><p>JRG: Deferred to next meeting.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="active-votes">
+<h3>Active votes<a class="headerlink" href="#active-votes" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/conda-forge/cfep/pull/47">cfep-21</a> license packages for static/header libraries</p>
+<ul>
+<li><p>Opened July 25, 2022 ends August 2, 2022</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="cfeps">
+<h3>CFEPs<a class="headerlink" href="#cfeps" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/conda-forge/cfep/pull/23">cfep-12</a> Removing packages that violate the terms of the source package</p>
+<ul>
+<li><p>Stalled since May 26, 2020</p></li>
+<li><p>Active debate about moving to “broken” vs deleting from conda-forge channel</p></li>
+<li><p>Active vote, ends on 2020-03-11</p></li>
+<li><p>What were the results of the vote?</p></li>
+<li><p>Did we hear back from NumFOCUS? they did the legal seminar which is recorded</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
 </section>
 
 
@@ -198,7 +324,17 @@ environment: user creates an env, that env is captured as build requirements for
 <li class="toctree-l2"><a class="reference internal" href="../subteams.html">A list of current sub-teams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../joining-the-team.html">Joining the team</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="2023-01-11.html">conda-forge core meeting 2023-01-11</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">conda-forge core meeting 2023-01-11</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#attendees">Attendees</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#standing-items">Standing items</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#from-previous-meeting-s">From previous meeting(s)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#your-new-agenda-items">Your <strong>new</strong>() agenda items</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#active-votes">Active votes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cfeps">CFEPs</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="2022-12-14.html">conda-forge core meeting 2022-12-14</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2022-11-30.html">conda-forge core meeting 2022-11-30</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2022-11-16.html">conda-forge core meeting 2022-11-16</a></li>
@@ -335,7 +471,7 @@ environment: user creates an env, that env is captured as build requirements for
 <li class="toctree-l3"><a class="reference internal" href="2016-06-09.html">2016-06-09: Compiler special meeting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2016-06-03.html">2016-06-03</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2016-05-13.html">2016-05-13</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">2016-05-09 Exceptional meeting regarding build customization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2016-05-09.html">2016-05-09 Exceptional meeting regarding build customization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2016-04-29.html">2016-04-29</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2016-04-22.html">2016-04-22 Exceptional meeting regarding VC pinning mechanism</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2016-04-15.html">2016-04-15</a></li>
@@ -353,18 +489,18 @@ environment: user creates an env, that env is captured as build requirements for
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="2016-05-13.html"
-                          title="Previous page">&larr; 2016-05-13</a></p>
+    <p class="topless"><a href="00_intro.html"
+                          title="Previous page">&larr; Core team meeting minutes</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="2016-04-29.html"
-                          title="Next page">&rarr; 2016-04-29</a></p>
+    <p class="topless"><a href="2022-12-14.html"
+                          title="Next page">&rarr; conda-forge core meeting 2022-12-14</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/orga/minutes/2016-05-09.md.txt"
+      <li><a href="../../_sources/orga/minutes/2023-01-11.md.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -408,16 +544,16 @@ environment: user creates an env, that env is captured as build requirements for
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="2016-04-29.html" title="2016-04-29"
+          <a href="2022-12-14.html" title="conda-forge core meeting 2022-12-14"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2016-05-13.html" title="2016-05-13"
+          <a href="00_intro.html" title="Core team meeting minutes"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">conda-forge 2023.01.11 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">2016-05-09 Exceptional meeting regarding build customization</a></li> 
+        <li class="nav-item nav-item-this"><a href="">conda-forge core meeting 2023-01-11</a></li> 
       </ul>
     </div>
     </div>
