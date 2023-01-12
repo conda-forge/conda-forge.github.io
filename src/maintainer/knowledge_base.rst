@@ -218,10 +218,23 @@ In ``conda_build_config.yaml`` file:
 
 
 For example see the changes made in the ``conda_build_config.yaml`` files in `this
-<https://github.com/conda-forge/libignition-msgs1-feedstock/pull/73/commits/81b5ee0e1d23f7f20427dd80d04cf1f7321b441d>`__ commit.
+<https://github.com/conda-forge/libignition-msgs1-feedstock/pull/73/commits/81b5ee0e1d23f7f20427dd80d04cf1f7321b441d>`_ commit.
 
 After making these changes don't forget to rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line).
 
+Using vs2022
+------------
+
+Same process as ``vs2019`` (add ``vs2022`` to your ``conda_build_config.yaml``) but you will also have to select the ``windows-2022`` Azure image. To do so, add this in your ``conda-forge.yml`` file (at the root of the feedstock):
+
+.. code-block:: yaml
+
+    azure:
+      settings_win:
+        pool:
+          vmImage: windows-2022
+
+You can look at the changes in `this PR <https://github.com/conda-forge/vcpkg-tool-feedstock/pull/41/files>`_ .
 
 .. _cmd_batch_syntax:
 
