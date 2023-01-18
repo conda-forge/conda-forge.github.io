@@ -69,7 +69,7 @@ The `regro-cf-autotick-bot <https://github.com/regro/autotick-bot>`__ continuous
 
 The bot creates updates via inspection of the upstream release and will always update the ``source`` section and build version in the `recipe metadata <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#>`_.
 As an experimental feature, the autotick bot can also be configured to verify or update the recipe's requirements for `Grayskull <https://github.com/conda-incubator/grayskull>`_-compatible recipes. 
-This may help maintain packages with frequent requirements changes or specific requirements version pins.
+This may help maintain packages with frequent requirements changes or specific requirements version pins, however this feature is not as extensively verified and proposed updates should be reviewed.
 (See the :ref:`bot` section in ``conda-forge.yml``)
 
 Sometimes the bot may take several hours to search for these updates. You can also check `status of version updates <https://conda-forge.org/status/#version_updates>`__ for all the pending version updates. These version updates are pending either because an updated version was found, but a PR wasn't opened yet, or because the bot might have had an error while making the PR.
