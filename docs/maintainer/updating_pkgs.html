@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Maintaining packages &#8212; conda-forge 2023.01.11 documentation</title>
+    <title>Maintaining packages &#8212; conda-forge 2023.01.18 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.01.11 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.01.18 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Maintaining packages</a></li> 
@@ -133,6 +133,10 @@ enabled <a class="reference external" href="https://help.github.com/en/articles/
 <section id="how-does-regro-cf-autotick-bot-create-automatic-version-updates">
 <h5><strong>How does regro-cf-autotick-bot create automatic version updates?</strong><a class="headerlink" href="#how-does-regro-cf-autotick-bot-create-automatic-version-updates" title="Permalink to this heading">¶</a></h5>
 <p>The <a class="reference external" href="https://github.com/regro/autotick-bot">regro-cf-autotick-bot</a> continuously searches on a loop for any PyPI releases, GitHub releases, and any other sources of versions when any updates are released. The source code that gets executed in the loop comes from the <a class="reference external" href="https://github.com/regro/cf-scripts">cf-scripts repository</a>, which contains the code to detect versions and submit PRs. Visit <a class="reference external" href="https://regro.github.io/cf-scripts/index.html">cf-scripts</a> to read more about it.</p>
+<p>The bot creates updates via inspection of the upstream release and will always update the <code class="docutils literal notranslate"><span class="pre">source</span></code> section and build version in the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#">recipe metadata</a>.
+As an experimental feature, the autotick bot can also be configured to verify or update the recipe’s requirements for <a class="reference external" href="https://github.com/conda-incubator/grayskull">Grayskull</a>-compatible recipes.
+This may help maintain packages with frequent requirements changes or specific requirements version pins, however this feature is not as extensively verified and proposed updates should be reviewed.
+(See the <a class="reference internal" href="conda_forge_yml.html#bot"><span class="std std-ref">bot</span></a> section in <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>)</p>
 <p>Sometimes the bot may take several hours to search for these updates. You can also check <a class="reference external" href="https://conda-forge.org/status/#version_updates">status of version updates</a> for all the pending version updates. These version updates are pending either because an updated version was found, but a PR wasn’t opened yet, or because the bot might have had an error while making the PR.
 If you can’t find a version here, then the chances are that the bot couldn’t find it either.</p>
 <p>The bot stops making version update PRs when the package feedstock has three or more open version update PRs. The package’s maintainer should close or merge those PRs for the bot to work correctly for future version updates.</p>
@@ -446,7 +450,7 @@ To contact core, ping them by mentioning &#64;conda-forge/core in a comment or, 
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.01.11 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.01.18 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Maintaining packages</a></li> 
