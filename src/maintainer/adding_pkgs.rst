@@ -775,6 +775,7 @@ for the specification on expressions.
    MIT
    MIT AND BSD-2-Clause
    PSF-2.0
+   Unlicense
 
 .. _third_party_package_licenses:
 
