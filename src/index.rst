@@ -20,7 +20,8 @@ Chances are we have already packaged it for you. You can `search <https://anacon
 
   - `GitHub issues <https://github.com/conda-forge/conda-forge.github.io/issues>`_
   - `Gitter channel <https://gitter.im/conda-forge/conda-forge.github.io>`_
-  - `Mailing list <https://groups.google.com/forum/#!forum/conda-forge>`_
+  - `Discourse group <https://conda.discourse.group>`_
+  - `Mailing list (archived) <https://groups.google.com/forum/#!forum/conda-forge>`_
 
 
 Table of Contents
