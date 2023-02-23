@@ -1579,6 +1579,9 @@ in ``recipe/conda_build_config.yaml`` in their respective feedstocks.
 Installing a pre-release build
 ------------------------------
 
+Using the `conda` CLI
+^^^^^^^^^^^^^^^^^^^^^
+
 Use the following command, but replace ``PACKAGE_NAME`` with the package you want
 to install and replace ``LABEL`` with ``rc`` or ``dev``:
 
@@ -1591,6 +1594,18 @@ For example, let's install matplotlib from the ``rc`` label:
 .. code-block:: yaml
 
    conda install -c conda-forge/label/matplotlib_rc -c conda-forge matplotlib
+
+Using `environment.yml`
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Use `MatchSpec
+<https://github.com/conda/conda/blob/c3fb8150ed4c3dabb7ca376ade208095f98ee0b9/conda/models/match_spec.py#L70-L150>`__
+to specify your package:
+
+.. code-block:: yaml
+
+   dependencies:
+     - conda-forge/label/matplotlib_rc::matplotlib=3.7.0rc1
 
 Pre-release version sorting
 ---------------------------
