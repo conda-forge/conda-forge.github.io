@@ -235,7 +235,7 @@ It defines everything that is required to build and use the package.
 
 ``meta.yaml`` is in `yaml <https://en.wikipedia.org/wiki/YAML>`__ format, augmented with `Jinja <http://jinja.pocoo.org/>`__ templating.
 
-A full reference of the structure and fields of ``meta.yaml`` file can be found in the `Defining metadata (meta.yaml) <https://conda.io/projects/conda-build/en/latest/resources/define-metadata.html>`__ section in the conda-build documentation.
+A full reference of the structure and fields of ``meta.yaml`` file can be found in the `Defining metadata (meta.yaml) <https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html>`__ section in the conda-build documentation.
 
 In the following, we highlight particularly important and conda-forge specific information and guidelines, ordered by section in ``meta.yaml``.
 
@@ -284,7 +284,7 @@ You may need the openssl package, available on conda-forge
 Downloading extra sources and data files
 ........................................
 
-``conda-build 3`` supports multiple sources per recipe. Examples are available `in the conda-build docs <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#source-from-multiple-sources>`_.
+``conda-build 3`` supports multiple sources per recipe. Examples are available `in the conda-build docs <https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#source-from-multiple-sources>`_.
 
 
 Build
@@ -312,7 +312,7 @@ You can e.g. specify not to build ...
         skip: true  # [py<35]
 
 A full description of selectors is
-`in the conda docs <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#preprocessing-selectors>`__.
+`in the conda docs <https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#preprocessing-selectors>`__.
 
 
 Optional: ``bld.bat`` and/or ``build.sh``
@@ -365,7 +365,7 @@ Build, host and run
 
 Conda-build distinguishes three different kinds of dependencies.
 In the following paragraphs, we give a very short overview what packages go where.
-For a detailed explanation please refer to the `conda-build documentation <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#requirements-section>`__.
+For a detailed explanation please refer to the `conda-build documentation <https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#requirements-section>`__.
 
 **Build**
 
@@ -541,7 +541,7 @@ Testing python packages
 .......................
 
 For the best information about testing, see the conda build docs
-`test section. <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#test-section>`_
+`test section. <https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#test-section>`_
 
 
 Testing importing
@@ -931,7 +931,7 @@ Jinja expressions serve following purposes in the meta.yaml:
         url: https://www.python.org/ftp/python/{{ version }}/Python-{{ version }}.tar.xz
         sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
 
-- They can call `conda-build functions <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#conda-build-specific-jinja2-functions>`__ for automatic code generation. Examples are the compilers, cdt packages or the ``pin_compatible`` function.
+- They can call `conda-build functions <https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#conda-build-specific-jinja2-functions>`__ for automatic code generation. Examples are the compilers, cdt packages or the ``pin_compatible`` function.
 
   .. code-block:: yaml+jinja
 
@@ -959,4 +959,4 @@ Jinja expressions serve following purposes in the meta.yaml:
 
 
 
-For more information please refer to the `Templating with Jinja <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#templating-with-jinja>`__ section in the conda-build docs.
+For more information please refer to the `Templating with Jinja <https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#templating-with-jinja>`__ section in the conda-build docs.

@@ -34,7 +34,7 @@ FAQ
 
   .. admonition:: Related links
 
-    - **Selectors in conda-build documentation** (`Preprocessing selectors <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#preprocessing-selectors>`__)
+    - **Selectors in conda-build documentation** (`Preprocessing selectors <https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#preprocessing-selectors>`__)
     - **Linter: deprecate the use of py27, py36** (`conda-smithy/#1026 <https://github.com/conda-forge/conda-smithy/issues/1026>`__)
 
 
@@ -82,7 +82,7 @@ FAQ
   - ``conda install boa -c conda-forge``
   - ``conda mambabuild myrecipe``
 
-  For more details visit `this <https://boa-build.readthedocs.io/en/latest/mambabuild.html>`__ page.
+  For more details visit `this <https://boa-build.readthedocs.io/en/stable/mambabuild.html>`__ page.
 
 .. _mfaq_conda_verify:
 
@@ -150,7 +150,7 @@ FAQ
 
 
 
-  This comes from the CI environment being headless and can be fixed by adding the ``QT_QPA_PLATFORM=offscreen`` `environment variable <https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#inherited-environment-variables>`__.
+  This comes from the CI environment being headless and can be fixed by adding the ``QT_QPA_PLATFORM=offscreen`` `environment variable <https://docs.conda.io/projects/conda-build/en/stable/user-guide/environment-variables.html#inherited-environment-variables>`__.
   The variable can either be added directly to the test command or provided in the `meta.yaml <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml>`__ like so:
 
   .. code-block:: yaml
