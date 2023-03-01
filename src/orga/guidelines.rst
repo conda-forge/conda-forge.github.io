@@ -243,4 +243,4 @@ Recommended:
 
 #. SONAMEs follow naming recommendations given by upstream.
 #. If ABI compatibility is important for the package, ``run_exports`` are set accordingly.
-   See :ref:`pinned_deps` and the `conda-build docs <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#export-runtime-requirements>`__ for more information.
+   See :ref:`pinned_deps` and the `conda-build docs <https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#export-runtime-requirements>`__ for more information.

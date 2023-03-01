@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Contributing packages &#8212; conda-forge 2023.02.23 documentation</title>
+    <title>Contributing packages &#8212; conda-forge 2023.03.01 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.02.23 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.03.01 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Contributing packages</a></li> 
@@ -279,7 +279,7 @@ staged-recipes directory.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file in the recipe directory is at the heart of every conda package.
 It defines everything that is required to build and use the package.</p>
 <p><code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> is in <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">yaml</a> format, augmented with <a class="reference external" href="http://jinja.pocoo.org/">Jinja</a> templating.</p>
-<p>A full reference of the structure and fields of <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file can be found in the <a class="reference external" href="https://conda.io/projects/conda-build/en/latest/resources/define-metadata.html">Defining metadata (meta.yaml)</a> section in the conda-build documentation.</p>
+<p>A full reference of the structure and fields of <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> file can be found in the <a class="reference external" href="https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html">Defining metadata (meta.yaml)</a> section in the conda-build documentation.</p>
 <p>In the following, we highlight particularly important and conda-forge specific information and guidelines, ordered by section in <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>.</p>
 <section id="source">
 <h3>Source<a class="headerlink" href="#source" title="Permalink to this heading">¶</a></h3>
@@ -317,7 +317,7 @@ install the necessary tools below).</p>
 </section>
 <section id="downloading-extra-sources-and-data-files">
 <h4>Downloading extra sources and data files<a class="headerlink" href="#downloading-extra-sources-and-data-files" title="Permalink to this heading">¶</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">conda-build</span> <span class="pre">3</span></code> supports multiple sources per recipe. Examples are available <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#source-from-multiple-sources">in the conda-build docs</a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">conda-build</span> <span class="pre">3</span></code> supports multiple sources per recipe. Examples are available <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#source-from-multiple-sources">in the conda-build docs</a>.</p>
 </section>
 </section>
 <section id="build">
@@ -347,7 +347,7 @@ install the necessary tools below).</p>
 </div></blockquote>
 </div></blockquote>
 <p>A full description of selectors is
-<a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#preprocessing-selectors">in the conda docs</a>.</p>
+<a class="reference external" href="https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#preprocessing-selectors">in the conda docs</a>.</p>
 </section>
 <section id="optional-bld-bat-and-or-build-sh">
 <h4>Optional: <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> and/or <code class="docutils literal notranslate"><span class="pre">build.sh</span></code><a class="headerlink" href="#optional-bld-bat-and-or-build-sh" title="Permalink to this heading">¶</a></h4>
@@ -386,7 +386,7 @@ as <code class="docutils literal notranslate"><span class="pre">host</span></cod
 <h4>Build, host and run<a class="headerlink" href="#build-host-and-run" title="Permalink to this heading">¶</a></h4>
 <p>Conda-build distinguishes three different kinds of dependencies.
 In the following paragraphs, we give a very short overview what packages go where.
-For a detailed explanation please refer to the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#requirements-section">conda-build documentation</a>.</p>
+For a detailed explanation please refer to the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#requirements-section">conda-build documentation</a>.</p>
 <p><strong>Build</strong></p>
 <blockquote>
 <div><p>Build dependencies are required in the build environment and contain all tools that are not needed on the host of the package.</p>
@@ -528,7 +528,7 @@ locations. This is called existence testing.</p>
 <section id="testing-python-packages">
 <h4>Testing python packages<a class="headerlink" href="#testing-python-packages" title="Permalink to this heading">¶</a></h4>
 <p>For the best information about testing, see the conda build docs
-<a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#test-section">test section.</a></p>
+<a class="reference external" href="https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#test-section">test section.</a></p>
 <section id="testing-importing">
 <h5>Testing importing<a class="headerlink" href="#testing-importing" title="Permalink to this heading">¶</a></h5>
 <p>The minimal test of a python package should make sure that the package
@@ -839,7 +839,7 @@ These expressions are written in <a class="reference external" href="http://jinj
 </pre></div>
 </div>
 </li>
-<li><p>They can call <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#conda-build-specific-jinja2-functions">conda-build functions</a> for automatic code generation. Examples are the compilers, cdt packages or the <code class="docutils literal notranslate"><span class="pre">pin_compatible</span></code> function.</p>
+<li><p>They can call <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#conda-build-specific-jinja2-functions">conda-build functions</a> for automatic code generation. Examples are the compilers, cdt packages or the <code class="docutils literal notranslate"><span class="pre">pin_compatible</span></code> function.</p>
 <div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nt">requirements</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">build</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">compiler</span><span class="o">(</span><span class="s1">&#39;c&#39;</span><span class="o">)</span> <span class="cp">}}</span>
@@ -863,7 +863,7 @@ These expressions are written in <a class="reference external" href="http://jinj
 </div>
 </li>
 </ul>
-<p>For more information please refer to the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#templating-with-jinja">Templating with Jinja</a> section in the conda-build docs.</p>
+<p>For more information please refer to the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#templating-with-jinja">Templating with Jinja</a> section in the conda-build docs.</p>
 </section>
 </section>
 </section>
@@ -1042,7 +1042,7 @@ These expressions are written in <a class="reference external" href="http://jinj
         <li class="right" >
           <a href="infrastructure.html" title="Infrastructure"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.02.23 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.03.01 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Contributing packages</a></li> 

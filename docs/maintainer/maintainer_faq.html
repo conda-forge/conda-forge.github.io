@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>FAQ &#8212; conda-forge 2023.02.23 documentation</title>
+    <title>FAQ &#8212; conda-forge 2023.03.01 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="knowledge_base.html" title="Knowledge Base"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.02.23 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.03.01 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">FAQ</a></li> 
@@ -98,7 +98,7 @@ While the legacy selectors <code class="docutils literal notranslate"><span clas
 <div class="admonition-related-links admonition">
 <p class="admonition-title">Related links</p>
 <ul class="simple">
-<li><p><strong>Selectors in conda-build documentation</strong> (<a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#preprocessing-selectors">Preprocessing selectors</a>)</p></li>
+<li><p><strong>Selectors in conda-build documentation</strong> (<a class="reference external" href="https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#preprocessing-selectors">Preprocessing selectors</a>)</p></li>
 <li><p><strong>Linter: deprecate the use of py27, py36</strong> (<a class="reference external" href="https://github.com/conda-forge/conda-smithy/issues/1026">conda-smithy/#1026</a>)</p></li>
 </ul>
 </div>
@@ -134,7 +134,7 @@ Therefore build numbers above 1000 will gradually vanish as packages get updated
 <li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">boa</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">mambabuild</span> <span class="pre">myrecipe</span></code></p></li>
 </ul>
-<p>For more details visit <a class="reference external" href="https://boa-build.readthedocs.io/en/latest/mambabuild.html">this</a> page.</p>
+<p>For more details visit <a class="reference external" href="https://boa-build.readthedocs.io/en/stable/mambabuild.html">this</a> page.</p>
 </div></blockquote>
 <p id="mfaq-conda-verify"><a class="reference internal" href="#mfaq-conda-verify"><span class="std std-ref">(Q)</span></a> <strong>I am seeing</strong> <code class="docutils literal notranslate"><span class="pre">Importing</span> <span class="pre">conda-verify</span> <span class="pre">failed.</span></code> <strong>error message during build. What do I do?</strong></p>
 <blockquote>
@@ -174,7 +174,7 @@ This<span class="w"> </span>application<span class="w"> </span>failed<span class
 Available<span class="w"> </span>platform<span class="w"> </span>plugins<span class="w"> </span>are:<span class="w"> </span>eglfs,<span class="w"> </span>minimal,<span class="w"> </span>minimalegl,<span class="w"> </span>offscreen,<span class="w"> </span>vnc,<span class="w"> </span>webgl,<span class="w"> </span>xcb.
 </pre></div>
 </div>
-<p>This comes from the CI environment being headless and can be fixed by adding the <code class="docutils literal notranslate"><span class="pre">QT_QPA_PLATFORM=offscreen</span></code> <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#inherited-environment-variables">environment variable</a>.
+<p>This comes from the CI environment being headless and can be fixed by adding the <code class="docutils literal notranslate"><span class="pre">QT_QPA_PLATFORM=offscreen</span></code> <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/stable/user-guide/environment-variables.html#inherited-environment-variables">environment variable</a>.
 The variable can either be added directly to the test command or provided in the <a class="reference external" href="https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml">meta.yaml</a> like so:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">script_env</span><span class="p">:</span>
@@ -304,7 +304,7 @@ also maintain a list of important packages with changes in our documentation.</p
         <li class="right" >
           <a href="knowledge_base.html" title="Knowledge Base"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.02.23 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.03.01 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">FAQ</a></li> 

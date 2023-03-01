@@ -233,7 +233,7 @@ Batch syntax is a bit different from Bash and friends on Unix, so we have collec
 
 * Check if you need to write a Batch script first! 
   Simple recipes might not need shell-specific code and can be written in an agnostic way.
-  Use the ``build.script`` item in ``meta.yaml`` (see `conda-build docs <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#script>`__).
+  Use the ``build.script`` item in ``meta.yaml`` (see `conda-build docs <https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#script>`__).
   This item can take a string or a list of strings (one per line).
 * `SS64's CMD howto pages <https://ss64.com/nt/syntax.html>`__ are the best resource for any kind of question regarding CMD/Batch syntax.
 * Search conda-forge for existing ``.bat`` scripts and learn with examples.
@@ -277,7 +277,7 @@ A package that needs all five compilers would define
 
   Appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore
   there's no need to specify ``libgcc`` or ``libgfortran``. There are additional informations about how conda-build 3 treats
-  compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html>`__.
+  compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/stable/resources/compiler-tools.html>`__.
 
 Cross-compilation
 -----------------
@@ -933,7 +933,7 @@ The following legacy commands are also supported as well.
   If you want to commit to a specific blas implementation, you can prevent conda from switching back by pinning
   the blas implementation in your environment. To commit to mkl, add ``blas=*=mkl`` to
   ``<conda-root>/envs/<env-name>/conda-meta/pinned``, as described in the
-  `conda-docs <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning>`__.
+  `conda-docs <https://docs.conda.io/projects/conda/en/stable/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning>`__.
 
 How it works
 ^^^^^^^^^^^^
@@ -1075,7 +1075,7 @@ In order to qualify as a noarch python package, all of the following criteria mu
   - ``2to3`` is not used
   - ``scripts`` argument in ``setup.py`` is not used
   - If ``console_scripts`` ``entry_points`` are defined in ``setup.py`` or ``setup.cfg``, they are also
-    `listed <https://conda.io/projects/conda-build/en/latest/resources/define-metadata.html#python-entry-points>`__
+    `listed <https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points>`__
     in the ``build`` section of ``meta.yaml``
   - No activate scripts
 
@@ -1303,7 +1303,7 @@ There are two options for how to proceed:
             set SETUPTOOLS_SCM_PRETEND_VERSION=%PKG_VERSION%
 
         Whereby you use that ``PKG_VERSION`` has been set with the version string,
-        see `Environment variables <https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#env-vars>`__.
+        see `Environment variables <https://docs.conda.io/projects/conda-build/en/stable/user-guide/environment-variables.html#env-vars>`__.
 
     -   Otherwise, if you are directly building from ``meta.yaml``, use for example:
 
@@ -1384,7 +1384,7 @@ On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CU
   named ``__cuda``. By default, ``conda`` will install the highest version available
   for the packages involved. To override this behaviour, you can define a ``CONDA_OVERRIDE_CUDA`` environment
   variable. More details in the
-  `Conda docs <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html#overriding-detected-packages>`__.
+  `Conda docs <https://docs.conda.io/projects/conda/en/stable/user-guide/tasks/manage-virtual.html#overriding-detected-packages>`__.
 
   Note that prior to v4.8.4, ``__cuda`` versions would not be part of the constraints, so you would always
   get the latest one, regardless the supported CUDA version.
@@ -1596,7 +1596,7 @@ Pre-release version sorting
 ---------------------------
 
 If you wish to add numbers to your ``dev`` or ``rc`` build, you should follow the
-`guidelines <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/pkg-specs.html#version-ordering>`__ put
+`guidelines <https://docs.conda.io/projects/conda/en/stable/user-guide/concepts/pkg-specs.html#version-ordering>`__ put
 forth by Continuum regarding version sorting in ``conda``. Also see the `source
 code for conda
 4.2.13 <https://github.com/conda/conda/blob/4.2.13/conda/version.py#L93-L119>`__.

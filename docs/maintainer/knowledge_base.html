@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Knowledge Base &#8212; conda-forge 2023.02.23 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2023.03.01 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.02.23 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.03.01 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -262,7 +262,7 @@ Batch syntax is a bit different from Bash and friends on Unix, so we have collec
 <ul class="simple">
 <li><p>Check if you need to write a Batch script first!
 Simple recipes might not need shell-specific code and can be written in an agnostic way.
-Use the <code class="docutils literal notranslate"><span class="pre">build.script</span></code> item in <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> (see <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#script">conda-build docs</a>).
+Use the <code class="docutils literal notranslate"><span class="pre">build.script</span></code> item in <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code> (see <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#script">conda-build docs</a>).
 This item can take a string or a list of strings (one per line).</p></li>
 <li><p><a class="reference external" href="https://ss64.com/nt/syntax.html">SS64’s CMD howto pages</a> are the best resource for any kind of question regarding CMD/Batch syntax.</p></li>
 <li><p>Search conda-forge for existing <code class="docutils literal notranslate"><span class="pre">.bat</span></code> scripts and learn with examples.
@@ -303,7 +303,7 @@ For example, this <a class="reference external" href="https://www.pcjs.org/softw
 <p class="admonition-title">Note</p>
 <p>Appropriate compiler runtime packages will be automatically added to the package’s runtime requirements and therefore
 there’s no need to specify <code class="docutils literal notranslate"><span class="pre">libgcc</span></code> or <code class="docutils literal notranslate"><span class="pre">libgfortran</span></code>. There are additional informations about how conda-build 3 treats
-compilers in the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html">conda docs</a>.</p>
+compilers in the <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/stable/resources/compiler-tools.html">conda docs</a>.</p>
 </div>
 </section>
 <section id="cross-compilation">
@@ -845,7 +845,7 @@ conda<span class="w"> </span>install<span class="w"> </span><span class="s2">&qu
 <p>If you want to commit to a specific blas implementation, you can prevent conda from switching back by pinning
 the blas implementation in your environment. To commit to mkl, add <code class="docutils literal notranslate"><span class="pre">blas=*=mkl</span></code> to
 <code class="docutils literal notranslate"><span class="pre">&lt;conda-root&gt;/envs/&lt;env-name&gt;/conda-meta/pinned</span></code>, as described in the
-<a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning">conda-docs</a>.</p>
+<a class="reference external" href="https://docs.conda.io/projects/conda/en/stable/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning">conda-docs</a>.</p>
 </div>
 </section>
 <section id="how-it-works">
@@ -975,7 +975,7 @@ section.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">2to3</span></code> is not used</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scripts</span></code> argument in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> is not used</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">console_scripts</span></code> <code class="docutils literal notranslate"><span class="pre">entry_points</span></code> are defined in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> or <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code>, they are also
-<a class="reference external" href="https://conda.io/projects/conda-build/en/latest/resources/define-metadata.html#python-entry-points">listed</a>
+<a class="reference external" href="https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points">listed</a>
 in the <code class="docutils literal notranslate"><span class="pre">build</span></code> section of <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code></p></li>
 <li><p>No activate scripts</p></li>
 </ul>
@@ -1161,7 +1161,7 @@ There are two ways how to do this:</p>
 </pre></div>
 </div>
 <p>Whereby you use that <code class="docutils literal notranslate"><span class="pre">PKG_VERSION</span></code> has been set with the version string,
-see <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/latest/user-guide/environment-variables.html#env-vars">Environment variables</a>.</p>
+see <a class="reference external" href="https://docs.conda.io/projects/conda-build/en/stable/user-guide/environment-variables.html#env-vars">Environment variables</a>.</p>
 </li>
 <li><p>Otherwise, if you are directly building from <code class="docutils literal notranslate"><span class="pre">meta.yaml</span></code>, use for example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
@@ -1230,7 +1230,7 @@ Do note that the Nvidia executable won’t install the drivers because no GPU is
 named <code class="docutils literal notranslate"><span class="pre">__cuda</span></code>. By default, <code class="docutils literal notranslate"><span class="pre">conda</span></code> will install the highest version available
 for the packages involved. To override this behaviour, you can define a <code class="docutils literal notranslate"><span class="pre">CONDA_OVERRIDE_CUDA</span></code> environment
 variable. More details in the
-<a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html#overriding-detected-packages">Conda docs</a>.</p>
+<a class="reference external" href="https://docs.conda.io/projects/conda/en/stable/user-guide/tasks/manage-virtual.html#overriding-detected-packages">Conda docs</a>.</p>
 <p>Note that prior to v4.8.4, <code class="docutils literal notranslate"><span class="pre">__cuda</span></code> versions would not be part of the constraints, so you would always
 get the latest one, regardless the supported CUDA version.</p>
 <p>If for some reason you want to install a specific version, you can use:</p>
@@ -1418,7 +1418,7 @@ to install and replace <code class="docutils literal notranslate"><span class="p
 <section id="pre-release-version-sorting">
 <h3>Pre-release version sorting<a class="headerlink" href="#pre-release-version-sorting" title="Permalink to this heading">¶</a></h3>
 <p>If you wish to add numbers to your <code class="docutils literal notranslate"><span class="pre">dev</span></code> or <code class="docutils literal notranslate"><span class="pre">rc</span></code> build, you should follow the
-<a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/pkg-specs.html#version-ordering">guidelines</a> put
+<a class="reference external" href="https://docs.conda.io/projects/conda/en/stable/user-guide/concepts/pkg-specs.html#version-ordering">guidelines</a> put
 forth by Continuum regarding version sorting in <code class="docutils literal notranslate"><span class="pre">conda</span></code>. Also see the <a class="reference external" href="https://github.com/conda/conda/blob/4.2.13/conda/version.py#L93-L119">source
 code for conda
 4.2.13</a>.
@@ -1705,7 +1705,7 @@ in conda environments, and some operating system limits. See the <a class="refer
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.02.23 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.03.01 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
