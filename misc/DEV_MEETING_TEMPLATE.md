@@ -1,24 +1,50 @@
-# YYYY-MM-DD conda-forge core meeting 
+---
+tags: [meeting-notes]
+---
+# conda-forge core meeting {{ date.strftime("%Y-%m-%d") }}
+
+Add new agenda items under the `Your __new__() agenda items` heading
+
+- [Zoom link](https://zoom.us/j/9138593505?pwd=SWh3dE1IK05LV01Qa0FJZ1ZpMzJLZz09)
+- [What time is the meeting in my time zone](https://dateful.com/convert/utc?t=5pm)
+- [Last week's meeting](https://hackmd.io/#REPLACE_ME#)
 
 ## Attendees
-List the attendees for the meeting
 
-## Agenda
-Pre-arranged stuff to talk about. 
-Email core team on Monday of the week of the dev meeting to ask for things to talk about.
+| Name                    | Initials | GitHub ID        | Affiliation                 |
+| ----------------------- | -------- | ---------------  | --------------------------- |
+|                         |          |                  |                             |
+|                         |          |                  |                             |
+|                         |          |                  |                             |
+|                         |          |                  |                             |
+|                         |          |                  |                             |
+|                         |          |                  |                             |
+|                         |          |                  |                             |
+|                         |          |                  |                             |
+|                         |          |                  |                             |
 
+X people total
 
-## Discussion
-Notes from todays dev meeting 
+### Standing items
 
+- [ ]
 
+### From previous meeting(s)
 
-## Check in on previous action items
-Copy previous action items from last meeting agenda.
+- [ ]
 
-## New Action items
-Copy new action items to next meetings agenda so we can check in. 
-Make sure each action item is assigned to someone or it will likely not get done.
+### Active votes
 
-[ ]  List resultant action items here
+- [ ]
 
+### Your __new__() agenda items
+
+- [ ]
+
+### Pushed to next meeting
+
+- [ ]
+
+### CFEPs
+
+- [ ]
