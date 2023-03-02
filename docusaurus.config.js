@@ -5,14 +5,14 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 const editUrl = {
-  editUrl: "https://github.com/quansight-labs/czi-cf-docs/tree/main/",
+  editUrl: "https://github.com/quansight-labs/cf-infra-docs/tree/main/",
 };
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "🚧 czi-cf-docs 🚧",
+  title: "🚧 cf-infra-docs 🚧",
   tagline: "Supporting documentation for the CZI EOSS5 grant for conda-forge",
-  url: "https://czi-cf-docs.netlify.app/",
+  url: "https://cf-infra-docs.netlify.app/",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
@@ -24,7 +24,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "Quansight-Labs", // Usually your GitHub org/user name.
-  projectName: "czi-cf-docs", // Usually your repo name.
+  projectName: "cf-infra-docs", // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -81,12 +81,18 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: "czi-cf-docs (WIP)",
+        title: "cf-infra-docs (WIP)",
         logo: {
           alt: "Under construction",
           src: "img/construction.png",
         },
         items: [
+          {
+            type: "doc",
+            docId: "index",
+            position: "left",
+            label: "Docs",
+          },
           {
             type: "doc",
             docsPluginId: "community",
@@ -95,24 +101,18 @@ const config = {
             label: "Community",
           },
           {
-            type: "doc",
-            docId: "index",
-            position: "left",
-            label: "Docs",
-          },
-          {
             to: "/blog",
             label: "Blog",
-            position: "right",
+            position: "left",
           },
           {
             to: "/news",
             label: "News",
-            position: "right",
+            position: "left",
           },
           {
-            href: "https://github.com/quansight-labs/czi-cf-docs",
-            label: "GitHub",
+            href: "https://conda-forge.org/status",
+            label: "Status",
             position: "right",
           },
         ],
@@ -125,19 +125,15 @@ const config = {
             items: [
               {
                 label: "Getting started",
-                to: "/docs/user",
+                to: "/docs/getting-started",
               },
               {
-                label: "Maintainers",
-                to: "/docs/maintainer",
+                label: "How-to guides",
+                to: "/docs/howto",
               },
               {
-                label: "Organisation",
-                to: "/docs/organisation",
-              },
-              {
-                label: "Infrastructure",
-                to: "/docs/infra",
+                label: "Reference",
+                to: "/docs/reference",
               },
             ],
           },
@@ -163,7 +159,7 @@ const config = {
             ],
           },
           {
-            title: "Stay updated",
+            title: "Stay up-to-date",
             items: [
               {
                 label: "News",
@@ -174,12 +170,12 @@ const config = {
                 to: "/blog",
               },
               {
-                label: "Dashboard",
-                to: "/dashboard",
+                label: "Status",
+                href: "https://conda-forge.org/status",
               },
               {
-                label: "Status Panel",
-                href: "https://conda-forge.org/status",
+                label: "Twitter",
+                href: "https://twitter.com/condaforge",
               },
             ],
           },
@@ -187,8 +183,16 @@ const config = {
             title: "Resources",
             items: [
               {
-                label: "Gitter",
-                href: "https://gitter.im/conda-forge/conda-forge.github.io",
+                label: "Dashboard",
+                to: "/dashboard",
+              },
+              {
+                label: "GitHub",
+                href: "https://github.com/conda-forge",
+              },
+              {
+                label: "Element",
+                href: "https://app.element.io/#/room/#conda-forge:matrix.org",
               },
               {
                 label: "Discourse",
@@ -198,18 +202,6 @@ const config = {
                 label: "Stack Overflow",
                 href: "https://stackoverflow.com/questions/tagged/conda-forge",
               },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/condaforge",
-              },
-              {
-                label: "GitHub",
-                href: "https://github.com/conda-forge",
-              },
-              {
-                label: "Anaconda.org",
-                href: "https://anaconda.org/conda-forge",
-              },
             ],
           },
         ],
@@ -218,6 +210,12 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+      },
+      docs: {
+        sidebar: {
+          autoCollapseCategories: true,
+          hideable: true,
+        },
       },
     }),
 };
