@@ -458,7 +458,7 @@ channel_alias if no prefix is given.
 
     remote_ci_setup: "conda-forge-ci-setup=3"
 
-.. shellcheck:
+.. _shellcheck:
 
 shellcheck
 -----------
