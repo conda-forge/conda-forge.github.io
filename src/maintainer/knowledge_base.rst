@@ -112,7 +112,7 @@ Local testing
 The first thing that you should know is that you can locally test Windows
 builds of your packages even if you don’t own a Windows machine. Microsoft
 makes available free, official Windows virtual machines (VMs) `at this website
-<https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/>`__. If you
+<https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/>`__. If you
 are unfamiliar with VM systems or have trouble installing Microsoft’s VMs, please
 use a general web search to explore — while these topics are beyond the
 scope of this documentation, there are ample discussions on them on the broader
