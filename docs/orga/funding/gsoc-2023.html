@@ -1,0 +1,275 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>GSoC 2023 project ideas for conda-forge &#8212; conda-forge 2023.03.21 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/cloud.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
+    
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+
+    
+    
+     
+        <script src="../../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="../../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="../../_static/cloud.js"></script>
+    
+
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+    <li><a href="../../index.html">conda-forge 2023.03.21 documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">GSoC 2023 project ideas for conda-forge</a></li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="gsoc-2023-project-ideas-for-conda-forge">
+<h1>GSoC 2023 project ideas for conda-forge<a class="headerlink" href="#gsoc-2023-project-ideas-for-conda-forge" title="Permalink to this heading">¶</a></h1>
+<p>Thanks for your interest in applying for Google Summer of Code with conda-forge. We welcome
+applications from individuals from all backgrounds, identities and abilities and encourage
+applications individuals from under-represented groups in tech.</p>
+<section id="about-conda-forge">
+<h2>About conda-forge<a class="headerlink" href="#about-conda-forge" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://conda-forge.org/">conda-forge</a> is a community effort and a <a class="reference external" href="https://github.com/conda-forge">GitHub organization</a> which contains repositories of conda recipes and thus provides
+conda packages for a wide range of software. The built distributions are uploaded to
+anaconda.org/conda-forge and can be installed with conda.</p>
+<p>2023 marks the 8th anniversary of the conda-forge organization. Over these 8 years it has served
+more than 1.2M package artifacts, which account for 10B downloads via anaconda.org. None of this
+would be possible without the work of more than 4.6K volunteers!</p>
+<section id="how-does-conda-forge-work">
+<h3>How does conda-forge work?<a class="headerlink" href="#how-does-conda-forge-work" title="Permalink to this heading">¶</a></h3>
+<p>conda-forge is built for and around the conda packaging ecosystem. A conda recipe contains the
+dependency metadata and instructions to build and package a particular project, usually from
+source.</p>
+<p>New recipes are first submitted to the <code class="docutils literal notranslate"><span class="pre">conda-forge/staged-recipes</span></code> repository via a pull request
+(PR). Once this is reviewed and approved, the recipe is merged and granted its own repository,
+called <em>feedstock</em>. A feedstock is a standard GitHub repository within the conda-forge
+organization, containing the user-provided <code class="docutils literal notranslate"><span class="pre">recipe/</span></code> and the supporting configuration and tooling
+required for the builds.</p>
+<p>For each PR merged in a feedstock, a series of artifacts is built for the package (changes such as
+releasing a new version or adding a new dependency require rebuilding the package for
+ecosystem-wide compatibility). All contributions to a feedstock happen through PRs.</p>
+</section>
+<section id="how-is-conda-forge-organized">
+<h3>How is conda-forge organized?<a class="headerlink" href="#how-is-conda-forge-organized" title="Permalink to this heading">¶</a></h3>
+<p>The conda-forge organization is led by the <em>core</em> team. The core team also receives support from
+many volunteers, like staged-recipes reviewers or the domain-specific <code class="docutils literal notranslate"><span class="pre">help-*</span></code> teams. Each
+feedstock is mainly maintained by its team of collaborators named after it. Feedstock teams are
+fluid by design: anyone can step down at any moment and join and take over as long as the feedstock
+team accepts the PR-driven application.</p>
+</section>
+<section id="what-s-the-contribution-process">
+<h3>What’s the contribution process?<a class="headerlink" href="#what-s-the-contribution-process" title="Permalink to this heading">¶</a></h3>
+<p>conda-forge is an open-source project; it is built in the open for traceability and transparency.
+Continuous integration (CI) logs are publicly available, and everyone is welcome to contribute. We
+follow a strict fork-based Github-flow workflow: the feedstock branches will build <em>and upload</em> the
+artifacts to the validation server. For this reason, pull requests must always be opened from
+personal forks. This workflow is also followed in conda-forge repositories that are not responsible
+for producing packages.</p>
+</section>
+</section>
+<section id="project-idea-1-modernization-of-the-conda-forge-org-website">
+<h2>Project Idea 1 - Modernization of the conda-forge.org website<a class="headerlink" href="#project-idea-1-modernization-of-the-conda-forge-org-website" title="Permalink to this heading">¶</a></h2>
+<section id="abstract">
+<h3>Abstract<a class="headerlink" href="#abstract" title="Permalink to this heading">¶</a></h3>
+<p>conda-forge.org was created almost 8 years ago (when the whole conda-forge project was started).
+After 8 years, the site has become outdated. For example, it has not been optimized for mobile use.
+Moreover, it is not WCAG (Web Content Accessibility Guidelines) conformant, which makes it
+inaccessible to many users, especially those with disabilities or those that rely on assistive
+technology to interact with the web.</p>
+<p>This project aims to deliver a new website for conda-forge.org that meets WCAG accessibility
+standards and improves performance while providing an excellent contributor experience.</p>
+</section>
+<section id="current-state">
+<h3>Current state<a class="headerlink" href="#current-state" title="Permalink to this heading">¶</a></h3>
+<p>The current Sphinx-based conda-forge.org website is mainly built from the <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io">conda-forge.github.io</a> repository and extended by <a class="reference external" href="https://github.com/conda-forge/status">status</a> - which generates a basic conda-forge status dashboard -
+and a conda-forge <a class="reference external" href="https://github.com/conda-forge/blog">blog</a>.</p>
+<p>A Docusaurus-based prototype website is available at <a class="reference external" href="https://cf-infra-docs.netlify.app/">cf-infra-docs.netlify.app</a>, where new documentation is being written for the
+conda-forge infrastructure. We will use this site as the playground for the website modernization.</p>
+</section>
+<section id="tasks">
+<h3>Tasks<a class="headerlink" href="#tasks" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Figma mockups for a new frontpage for desktop and mobile</p></li>
+<li><p>Design a conda-forge style guide for other web-based developments</p></li>
+<li><p>Work towards WCAG conformance during the design phase and include accessibility annotations for
+the development phase</p></li>
+<li><p>Present proposals to the community and incorporate feedback</p></li>
+</ul>
+</section>
+<section id="extended-tasks">
+<h3>Extended tasks<a class="headerlink" href="#extended-tasks" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Implement the new frontpage in Docusaurus (with the corresponding React components)</p></li>
+<li><p>Add CI pipelines for automated performance and accessibility tests to prevent regressions in
+further work</p></li>
+</ul>
+</section>
+<section id="expected-outcomes">
+<h3>Expected outcomes<a class="headerlink" href="#expected-outcomes" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>A conda-forge style guide for its new online presence.</p></li>
+<li><p>The redesigned landing page passes the SpeedPage and WAVE automated tests.</p></li>
+<li><p>The new implementation provides an intuitive and usable user experience.</p></li>
+<li><p>A prototype conda-forge.org frontpage redesign is live in cf-infra-docs.</p></li>
+</ul>
+</section>
+<section id="details">
+<h3>Details<a class="headerlink" href="#details" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Prerequisites</strong>:</p>
+<ul>
+<li><p>Previous experience with prototyping or mock-up tools such as Figma</p></li>
+<li><p>Experience creating design specs that define the user need, underlying hypotheses, and UX
+flow</p></li>
+<li><p>Some knowledge of accessibility standards</p></li>
+<li><p>Bonus points for previous experience in designing accessible experiences</p></li>
+</ul>
+</li>
+<li><p><strong>Nice to have, but not required</strong>:</p>
+<ul>
+<li><p>React and npm</p></li>
+<li><p>Comfortable with Git &amp; Github PR-driven workflows</p></li>
+<li><p>Familiar with Docusaurus</p></li>
+</ul>
+</li>
+<li><p><strong>Project length</strong>: 350 hours</p></li>
+<li><p><strong>Priority</strong>: Low</p></li>
+<li><p><strong>Complexity</strong>: Medium</p></li>
+<li><p><strong>Potential mentor(s)</strong>: &#64;jaimergp</p></li>
+</ul>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://conda-forge.org">https://conda-forge.org</a></p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io">https://github.com/conda-forge/conda-forge.github.io</a></p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/status">https://github.com/conda-forge/status</a></p></li>
+<li><p><a class="reference external" href="https://github.com/conda-forge/blog">https://github.com/conda-forge/blog</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://accessibility.digital.gov/">https://accessibility.digital.gov/</a></p></li>
+<li><p><a class="reference external" href="https://design-system.service.gov.uk/">https://design-system.service.gov.uk/</a></p></li>
+<li><p><a class="reference external" href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fconda-forge.org%2F">PageSpeed results for conda-forge.org</a></p></li>
+<li><p><a class="reference external" href="https://wave.webaim.org/report#/conda-forge.org">WAVE (accessibility) results for conda-forge.org</a></p></li>
+<li><p><a class="reference external" href="https://docusaurus.io/showcase">Docusaurus showcase</a></p></li>
+<li><p><a class="reference external" href="https://docusaurus.io/docs/styling-layout">Styling and Layout - Docusaurus documentation</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../../index.html">Overview</a></h3>
+    <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user/00_intro.html">User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../maintainer/00_intro.html">Maintainer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_intro.html">Organisation Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../misc/00_intro.html">Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contracting/00_intro.html">Contracting Information</a></li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/orga/funding/gsoc-2023.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+    <li><a href="../../index.html">conda-forge 2023.03.21 documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">GSoC 2023 project ideas for conda-forge</a></li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2023, conda-forge.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
