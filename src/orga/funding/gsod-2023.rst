@@ -211,7 +211,7 @@ Useful references
 -  Accessibility guidelines for content:
 
    -  `gov.uk resources
-      <https://www.gov.uk/government/publications/inclusive-communication/accessible-communication-format>`__
+      <https://www.gov.uk/government/publications/inclusive-communication/accessible-communication-formats>`__
    -  `Microsoft's guidelines
       <https://learn.microsoft.com/en-us/style-guide/accessibility/accessibility-guidelines-requirements>`__
    -  `Easy read guidance
