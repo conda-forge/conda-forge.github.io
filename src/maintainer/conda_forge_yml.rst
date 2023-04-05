@@ -44,6 +44,7 @@ Top-level fields
 * :ref:`provider`
 * :ref:`recipe_dir`
 * :ref:`remote_ci_setup`
+* :ref:`shellcheck`
 * :ref:`skip_render`
 * :ref:`templates`
 * :ref:`test_on_native_only`
@@ -456,6 +457,17 @@ channel_alias if no prefix is given.
 .. code-block:: yaml
 
     remote_ci_setup: "conda-forge-ci-setup=3"
+
+.. _shellcheck:
+
+shellcheck
+-----------
+Shell scripts used for builds or activation scripts can be linted with `shellcheck`. This is not enabled by default, but can be enabled like so:
+
+.. code-block:: yaml
+
+    shellcheck:
+      enabled: True
 
 .. _skip_render:
 
