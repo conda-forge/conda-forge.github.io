@@ -101,14 +101,6 @@ Note that this update command is kind of a hack, and things might go wrong. Make
 
 Entering the above phrase in a PR of a feedstock will lint the PR again.
 
-.. _ci_update_circle:
-
-@conda-forge-admin, please update circle
-----------------------------------------
-
-Entering the above phrase in an issue of a feedstock will update the Circle-CI SSH deploy key. This will fix the
-``permission denied (public key)`` issue in Circle-CI's checkout phase; it shouldn't be needed otherwise.
-
 
 @conda-forge-admin, please update team
 --------------------------------------
