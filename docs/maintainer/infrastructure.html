@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Infrastructure &#8212; conda-forge 2023.04.07 documentation</title>
+    <title>Infrastructure &#8212; conda-forge 2023.04.16 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.04.07 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.04.16 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Infrastructure</a></li> 
@@ -142,11 +142,6 @@ for you.</p>
 <h3>&#64;conda-forge-admin, please lint<a class="headerlink" href="#conda-forge-admin-please-lint" title="Permalink to this heading">¶</a></h3>
 <p>Entering the above phrase in a PR of a feedstock will lint the PR again.</p>
 </section>
-<section id="conda-forge-admin-please-update-circle">
-<span id="ci-update-circle"></span><h3>&#64;conda-forge-admin, please update circle<a class="headerlink" href="#conda-forge-admin-please-update-circle" title="Permalink to this heading">¶</a></h3>
-<p>Entering the above phrase in an issue of a feedstock will update the Circle-CI SSH deploy key. This will fix the
-<code class="docutils literal notranslate"><span class="pre">permission</span> <span class="pre">denied</span> <span class="pre">(public</span> <span class="pre">key)</span></code> issue in Circle-CI’s checkout phase; it shouldn’t be needed otherwise.</p>
-</section>
 <section id="conda-forge-admin-please-update-team">
 <h3>&#64;conda-forge-admin, please update team<a class="headerlink" href="#conda-forge-admin-please-update-team" title="Permalink to this heading">¶</a></h3>
 <p>Entering the above phrase in an issue will update the team for the feedstock. This is usually done automatically.</p>
@@ -224,9 +219,9 @@ certain very old packages that require VC9 will fail.</p>
 </div>
 </section>
 </section>
-<section id="travisci-osx-ibm-power-8">
-<h3>TravisCI (OSX, IBM Power 8+)<a class="headerlink" href="#travisci-osx-ibm-power-8" title="Permalink to this heading">¶</a></h3>
-<p>TravisCI is used to build packages for IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
+<section id="travisci-ibm-power-8-arm">
+<h3>TravisCI (IBM Power 8+, ARM)<a class="headerlink" href="#travisci-ibm-power-8-arm" title="Permalink to this heading">¶</a></h3>
+<p>TravisCI is used to build packages for IBM Power 8+ and ARM. After merging a staged-recipes pull request, it might be necessary to
 force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit <a class="reference external" href="https://app.travis-ci.com/account/repositories">https://app.travis-ci.com/account/repositories</a>
 and click the “Sync accounts” button.</p>
 <section id="enabling-travis">
@@ -237,52 +232,9 @@ and click the “Sync accounts” button.</p>
 <span class="w">  </span><span class="nt">osx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">travis</span>
 </pre></div>
 </div>
-<p>For IBM Power 8+ builds, add the name of your feedstock to the list <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt">here</a>
+<p>For IBM Power 8+ and/or ARM builds, add the name of your feedstock to the list <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt">here</a>
 via a pull request.</p>
 </section>
-</section>
-<section id="circleci-linux-osx">
-<h3>CircleCI (Linux, OSX)<a class="headerlink" href="#circleci-linux-osx" title="Permalink to this heading">¶</a></h3>
-<p>CircleCI is a container-based CI service that conda-forge uses to build
-Linux packages. It can optionally build OSX packages.</p>
-<p>Linux builds are identical to those on Azure as both are built inside Docker containers.</p>
-<section id="using-circle-for-both-linux-and-osx">
-<h4>Using Circle for both Linux and OSX<a class="headerlink" href="#using-circle-for-both-linux-and-osx" title="Permalink to this heading">¶</a></h4>
-<p>To use CircleCI for OSX, add the following to <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code> in the root of the feedstock.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">provider</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">osx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">circle</span>
-<span class="w">  </span><span class="nt">linux</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">circle</span>
-</pre></div>
-</div>
-<p>CircleCI for OSX should be used for OSX, only when TravisCI resources (50 minutes of build time per job) are not enough as CircleCI gives more resources (2 hours of build time per job).</p>
-<p>Note that you need to rerender the feedstock, once this change has been made.</p>
-</section>
-<section id="debugging-permission-errors">
-<h4>Debugging permission errors<a class="headerlink" href="#debugging-permission-errors" title="Permalink to this heading">¶</a></h4>
-<p>If CircleCI lacks permissions to checkout the source code, it will produce an error as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cloning</span> <span class="n">into</span> <span class="s1">&#39;.&#39;</span><span class="o">...</span>
-<span class="ne">Warning</span><span class="p">:</span> <span class="n">Permanently</span> <span class="n">added</span> <span class="n">the</span> <span class="n">RSA</span> <span class="n">host</span> <span class="n">key</span> <span class="k">for</span> <span class="n">IP</span> <span class="n">address</span> <span class="s1">&#39;192.30.253.113&#39;</span> <span class="n">to</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">known</span> <span class="n">hosts</span><span class="o">.</span>
-<span class="n">Permission</span> <span class="n">denied</span> <span class="p">(</span><span class="n">publickey</span><span class="p">)</span><span class="o">.</span>
-<span class="n">fatal</span><span class="p">:</span> <span class="n">Could</span> <span class="ow">not</span> <span class="n">read</span> <span class="kn">from</span> <span class="nn">remote</span> <span class="n">repository</span><span class="o">.</span>
-</pre></div>
-</div>
-<p>When this happens for a feedstock, it can be fixed using the <cite>webservice &lt;ci_update_circle&gt;</cite>, by posting the following comment:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@conda</span><span class="o">-</span><span class="n">forge</span><span class="o">-</span><span class="n">admin</span><span class="p">,</span> <span class="n">please</span> <span class="n">update</span> <span class="n">circle</span>
-</pre></div>
-</div>
-<p>Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:</p>
-<ul class="simple">
-<li><p>Log in and out of Circle CI.</p></li>
-<li><p>Revoke CircleCI’s access and then enable it again.</p></li>
-<li><p>In the “Checkout SSH keys” section of your Circle CI project settings, press “add user key”.</p></li>
-</ul>
-</section>
-</section>
-<section id="drone-io">
-<h3>Drone.io<a class="headerlink" href="#drone-io" title="Permalink to this heading">¶</a></h3>
-<p>We use <a class="reference external" href="https://drone.io">Drone.io</a> for Linux ARMv8 builds. To enable these builds on your feedstock, make a pull request to add your feedstock to the list
-in the <a class="reference external" href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt">arch_rebuild.txt file</a>.
-Read <a class="reference internal" href="knowledge_base.html#using-arch-rebuild"><span class="std std-ref">Using arch_rebuild.txt</span></a> to learn more.</p>
 </section>
 <section id="github-actions">
 <h3>GitHub Actions<a class="headerlink" href="#github-actions" title="Permalink to this heading">¶</a></h3>
@@ -432,7 +384,6 @@ you can then request the conda-forge core devs to archive the old feedstock.</p>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-add-noarch-python">&#64;conda-forge-admin, please add noarch: python</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-update-for-conda-build-3">&#64;conda-forge-admin, please update for conda-build 3</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-lint">&#64;conda-forge-admin, please lint</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-update-circle">&#64;conda-forge-admin, please update circle</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-update-team">&#64;conda-forge-admin, please update team</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-restart-ci">&#64;conda-forge-admin, please restart ci</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-admin-please-ping-team">&#64;conda-forge-admin, please ping team</a></li>
@@ -449,16 +400,10 @@ you can then request the conda-forge core devs to archive the old feedstock.</p>
 <li class="toctree-l5"><a class="reference internal" href="#using-azure-for-everything">Using Azure for <em>everything</em></a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#travisci-osx-ibm-power-8">TravisCI (OSX, IBM Power 8+)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#travisci-ibm-power-8-arm">TravisCI (IBM Power 8+, ARM)</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#enabling-travis">Enabling Travis</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#circleci-linux-osx">CircleCI (Linux, OSX)</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#using-circle-for-both-linux-and-osx">Using Circle for both Linux and OSX</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#debugging-permission-errors">Debugging permission errors</a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#drone-io">Drone.io</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#github-actions">GitHub Actions</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#automerge">Automerge</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#rerendering">Rerendering</a></li>
@@ -551,7 +496,7 @@ you can then request the conda-forge core devs to archive the old feedstock.</p>
         <li class="right" >
           <a href="00_intro.html" title="Maintainer Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.04.07 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.04.16 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Infrastructure</a></li> 
