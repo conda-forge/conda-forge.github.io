@@ -194,10 +194,10 @@ of the feedstock.
   certain very old packages that require VC9 will fail.
 
 
-TravisCI (OSX, IBM Power 8+)
+TravisCI (IBM Power 8+, ARM)
 ------------------------------
 
-TravisCI is used to build packages for IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
+TravisCI is used to build packages for IBM Power 8+ and ARM. After merging a staged-recipes pull request, it might be necessary to
 force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit `<https://app.travis-ci.com/account/repositories>`__
 and click the "Sync accounts" button.
 
@@ -213,62 +213,9 @@ Enable a build by adding the following to ``conda-forge.yml`` in the root of the
     provider:
       osx: travis
 
-For IBM Power 8+ builds, add the name of your feedstock to the list `here
+For IBM Power 8+ and/or ARM builds, add the name of your feedstock to the list `here
 <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`__
 via a pull request.
-
-
-CircleCI (Linux, OSX)
-----------------------
-CircleCI is a container-based CI service that conda-forge uses to build
-Linux packages. It can optionally build OSX packages.
-
-Linux builds are identical to those on Azure as both are built inside Docker containers.
-
-
-Using Circle for both Linux and OSX
-....................................
-
-To use CircleCI for OSX, add the following to ``conda-forge.yml`` in the root of the feedstock.
-
-.. code-block:: yaml
-
-    provider:
-      osx: circle
-      linux: circle
-
-CircleCI for OSX should be used for OSX, only when TravisCI resources (50 minutes of build time per job) are not enough as CircleCI gives more resources (2 hours of build time per job).
-
-Note that you need to rerender the feedstock, once this change has been made.
-
-
-Debugging permission errors
-...........................
-
-If CircleCI lacks permissions to checkout the source code, it will produce an error as follows::
-
-    Cloning into '.'...
-    Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
-    Permission denied (publickey).
-    fatal: Could not read from remote repository.
-
-When this happens for a feedstock, it can be fixed using the `webservice <ci_update_circle>`, by posting the following comment::
-
-  @conda-forge-admin, please update circle
-
-Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
-
-* Log in and out of Circle CI.
-* Revoke CircleCI's access and then enable it again.
-* In the "Checkout SSH keys" section of your Circle CI project settings, press "add user key".
-
-
-Drone.io
---------
-
-We use `Drone.io <https://drone.io>`__ for Linux ARMv8 builds. To enable these builds on your feedstock, make a pull request to add your feedstock to the list
-in the `arch_rebuild.txt file <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`__.
-Read :ref:`using_arch_rebuild` to learn more.
 
 
 GitHub Actions
