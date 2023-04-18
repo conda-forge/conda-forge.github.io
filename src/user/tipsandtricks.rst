@@ -101,6 +101,12 @@ the local version matches the ``conda`` version within the proper ABI range, the
 work. At runtime, the ``conda-forge`` package that depends on MPI should find the 
 local copy of ``mpich``/``openmpi`` and link to it.
 
+Another point for using your own MPI binaries specialized for the system is that
+if you care about ultimate performance, you should build/install your MPI backend yourself,
+and not rely on ``conda-forge`` packages (they are built for compatibility rather than performance).
+Due to the constrained build environment of ``conda-forge`` packages there might be the lack of such important features
+as XPMEM and CMA for ``mpich`` and ``openmpi``, respectively.
+
 
 .. _apple_silicon_rosetta:
 
