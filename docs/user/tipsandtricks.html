@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Tips &amp; tricks &#8212; conda-forge 2023.04.16 documentation</title>
+    <title>Tips &amp; tricks &#8212; conda-forge 2023.04.18 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.04.16 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.04.18 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Tips &amp; tricks</a></li> 
@@ -147,6 +147,11 @@ $<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </
 the local version matches the <code class="docutils literal notranslate"><span class="pre">conda</span></code> version within the proper ABI range, then this procedure should
 work. At runtime, the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> package that depends on MPI should find the
 local copy of <code class="docutils literal notranslate"><span class="pre">mpich</span></code>/<code class="docutils literal notranslate"><span class="pre">openmpi</span></code> and link to it.</p>
+<p>Another point for using your own MPI binaries specialized for the system is that
+if you care about ultimate performance, you should build/install your MPI backend yourself,
+and not rely on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages (they are built for compatibility rather than performance).
+Due to the constrained build environment of <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages there might be the lack of such important features
+as XPMEM and CMA for <code class="docutils literal notranslate"><span class="pre">mpich</span></code> and <code class="docutils literal notranslate"><span class="pre">openmpi</span></code>, respectively.</p>
 </section>
 <section id="installing-apple-intel-packages-on-apple-silicon">
 <span id="apple-silicon-rosetta"></span><h2>Installing Apple Intel packages on Apple Silicon<a class="headerlink" href="#installing-apple-intel-packages-on-apple-silicon" title="Permalink to this heading">¶</a></h2>
@@ -306,7 +311,7 @@ installed alongside pypy.</p>
         <li class="right" >
           <a href="announcements.html" title="Announcements"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.04.16 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.04.18 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Tips &amp; tricks</a></li> 
