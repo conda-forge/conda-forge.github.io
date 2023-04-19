@@ -130,7 +130,7 @@ linkcheck_ignore = [
     r'https://polys.me/?$',  # 403 forbidden
     r'https://app.element.io/#/room/#conda-forge-space:matrix.org',  # needs login
     r'https://anacondacon.io/.*$',  # website is gone
-    r'https://matrix.io/#.*$',  # anchors are generated dynamically
+    r'https://matrix.to/#.*$',  # anchors are generated dynamically
     r'https://app.element.io/#.*$',  # anchors are generated dynamically
     r'https://wave.webaim.org/report#.*$',  # anchors are generated dynamically
 ] + anchor_check_fps
