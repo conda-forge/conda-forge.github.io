@@ -30,6 +30,8 @@ The main chat rooms that you'll interact with are
 * `element: interns <https://app.element.io/#/room/#conda-forge_conda-forge-interns:gitter.im>`__: Public chat room for conda-forge interns to discuss projects and seek guidance from the community.
 * `element: general <https://app.element.io/#/room/#conda-forge:matrix.org>`__: Public chat room for the conda-forge community to discuss anything related to conda-forge.
 
+Note: All Gitter room links forward to Element
+
 Mailing List
 -----------------
 
