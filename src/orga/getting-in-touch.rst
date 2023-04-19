@@ -15,7 +15,7 @@ The main issue trackers that you will interact with are
 * `Our enhancement proposals repo <https://github.com/conda-forge/cfep/issues>`__: You'll use the enhancement proposals repo if you're interested in substantially changing the way conda-forge operates.
 
 Gitter and Element
------------------
+-------------------------
 
 The main chat rooms that you'll interact with are
 
