@@ -71,7 +71,7 @@ release = datetime.datetime.now().strftime("%Y.%m.%d")
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -128,6 +128,11 @@ linkcheck_ignore = [
     r'https://cloudflare.com/learning/cdn/what-is-a-cdn/?$',  # 403 forbidden
     r'https://gitter.im/conda-forge/core$',  # private team
     r'https://polys.me/?$',  # 403 forbidden
+    r'https://app.element.io/#/room/#conda-forge-space:matrix.org',  # needs login
+    r'https://anacondacon.io/.*$',  # website is gone
+    r'https://matrix.to/#.*$',  # anchors are generated dynamically
+    r'https://app.element.io/#.*$',  # anchors are generated dynamically
+    r'https://wave.webaim.org/report#.*$',  # anchors are generated dynamically
 ] + anchor_check_fps
 
 

@@ -101,6 +101,12 @@ the local version matches the ``conda`` version within the proper ABI range, the
 work. At runtime, the ``conda-forge`` package that depends on MPI should find the 
 local copy of ``mpich``/``openmpi`` and link to it.
 
+Another point for using your own MPI binaries specialized for the system is that
+if you care about ultimate performance, you should build/install your MPI backend yourself,
+and not rely on ``conda-forge`` packages (they are built for compatibility rather than performance).
+Due to the constrained build environment of ``conda-forge`` packages there might be the lack of such important features
+as XPMEM and CMA for ``mpich`` and ``openmpi``, respectively.
+
 
 .. _apple_silicon_rosetta:
 
@@ -115,9 +121,8 @@ This can be enabled per environment using the following commands:
 
     CONDA_SUBDIR=osx-64 conda create -n your_environment_name python   # Create a new environment called your_environment_name with intel packages.
     conda activate your_environment_name
-    conda env config vars set CONDA_SUBDIR=osx-64  # Make sure that conda commands in this environment use intel packages.
-    conda deactivate
-    conda activate your_environment_name
+    python -c "import platform;print(platform.machine())"  # Confirm that the correct values are being used.
+    conda config --env --set subdir osx-64  # Make sure that conda commands in this environment use intel packages.
 
 To verify that the correct platform is being used, run the following commands after the environment has been activated:
 
