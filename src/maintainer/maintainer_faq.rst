@@ -1,25 +1,6 @@
 FAQ
 ===
 
-.. _mfaq_update_circle:
-
-:ref:`(Q) <mfaq_update_circle>` **How to address** ``permission denied (publickey)`` **in circle builds?**
-
-  When you see this error in a circle build:
-  ::
-
-    Permission denied (publickey).
-
-    fatal: Could not read from remote repository.
-
-    Please make sure you have the correct access rights
-    and the repository exists.
-    Exited with code 128
-
-  Open a new issue with a comment :ref:`ci_update_circle`.
-  Once our web services have updated the circle configuration, restart the build.
-
-
 .. _mfaq_py37_selector:
 
 :ref:`(Q) <mfaq_py37_selector>` **Why does conda-build ignore the** ``py37`` **selector in meta.yaml?**
