@@ -157,6 +157,14 @@ that adds the given user to the feedstock. A maintainer or member of ``core`` ca
 this PR to add the user. Please do not modify this PR or adjust the commit message. This
 PR is designed to skip building the package.
 
+@conda-forge-admin, update version
+----------------------------------
+
+Entering the above phrase in the title of an issue on a feedstock will request the bot
+to check if there are any new versions available. If there are, it will open a PR with
+with the needed changes. Note that the bot might start by opening a PR with only partial
+changes. The rest of the contents will be added in a subsequent commit after a few minutes.
+
 
 CI build services
 =================
