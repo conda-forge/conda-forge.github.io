@@ -231,7 +231,7 @@ Tips & tricks for CMD/Batch syntax
 Windows recipes rely on CMD/Batch scripts (``.bat``) by default.
 Batch syntax is a bit different from Bash and friends on Unix, so we have collected some tips here to help you get started if you are not familiar with this scripting language.
 
-* Check if you need to write a Batch script first! 
+* Check if you need to write a Batch script first!
   Simple recipes might not need shell-specific code and can be written in an agnostic way.
   Use the ``build.script`` item in ``meta.yaml`` (see `conda-build docs <https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#script>`__).
   This item can take a string or a list of strings (one per line).
@@ -305,7 +305,7 @@ In the build script, it would need to update the config files and guard any test
 
     # Get an updated config.sub and config.guess
     cp $BUILD_PREFIX/share/gnuconfig/config.* .
-    
+
     # Skip ``make check`` when cross-compiling
     if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
       make check
@@ -1694,7 +1694,7 @@ You are also free to download recipes and rebuild them yourself, if you would li
 2. Each feedstock can only upload packages for that feedstock. This is enforced by using a cf-staging channel where builds are first sent.
    A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the conda-forge channel.
    This helps mitigate against a bad actor gaining access to an inconspicuous feedstock and then trying to push a build with malicious code into essential infrastructure packages (e.g., OpenSSL or Python).
-3. We have `artifact-validation <https://github.com/conda-forge/artifact-validation>`__ for validating all the ``conda-forge`` artifacts before they are uploaded to ``anaconda.org``. This validation looks for various security-related items, such as artifacts that overwrite key pieces of certain packages.
+3. We have `artifact-validation <https://github.com/conda-forge/artifact-validation>`__ for validating all the ``conda-forge`` artifacts uploaded to ``anaconda.org``. This validation scans for various security-related items, such as artifacts that overwrite key pieces of certain packages.
 4. We have a dedicated `Security and Systems Sub-Team <https://conda-forge.org/docs/orga/subteams.html?highlight=security+team#security-and-systems-sub-team>`__ who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by ``conda-forge``.
 
 Significant Changes To Upstream Projects
