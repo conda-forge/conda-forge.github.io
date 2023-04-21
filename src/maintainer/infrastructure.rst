@@ -281,8 +281,14 @@ Compilers and Runtimes
 
 Conda-forge builds and maintains its own set of compilers for various languages
 and/or systems (e.g., ``C``, ``FORTRAN``, ``C++``, ``CUDA``, etc.). These are used
-in all of our CI builds to build both core dependencies (e.g., ``Python``) and maintainer-contributed
-packages. While we do not have any formal policies or promises of support for these
+in all of our CI builds to build essentially all artefacts published by conda-forge.
+
+In the past, compiler upgrades often required full rebuilds of basically all of
+conda-forge due to potential ABI breaks. These breaks have become much rarer in
+frequency and scope, so it is not a current concern. However, we keep our policies
+for such ABI breaks in place for the next time it should occur.
+
+While we do not have any promises of support for a generation of ABI-compatible
 compilers, we have historically maintained them according to the following (non-binding)
 principles.
 
@@ -290,26 +296,21 @@ principles.
   and platforms is the `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_
   in the `conda-forge/conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_
   as described in :ref:`globally_pinned_packages`.
-* We provide no support of any kind in terms of the long-term stability of these pinnings.
+* We provide no support of any kind in terms of the long-term stability / support of a given compiler generation.
 * We upgrade them in an ad-hoc manner on a periodic basis as we have the time and energy to do so.
   Note that because of the way we enforce runtime constraints, these compiler upgrades will not break
   existing packages. However, if you are using the compilers outside of ``conda``, then you may find issues.
-* We generally provide notice in the form of an announcement when a compiler is going to be upgraded.
+* We will provide notice in the form of an announcement when an ABI-incompatible compiler change is going to be happen.
   Note that these changes take a bit of time to complete, so you will generally have time
   to prepare should you need to.
 * Some of the criteria we think about when considering a compiler migration include
   1) the degree of disruption to the ecosystem, 2) the amount of work for the ``core`` team,
   and 3) the amount of time it will cost our (volunteer) feedstock maintainers.
 
-We do use some unofficial names for our compiler stack internally. Note however that
-the existence of these names does not imply any level of support or stability for the compilers
+These compiler generations may or may not have some unofficial names for our
+internal use (e.g. ``comp7``). We note again that the existence of these names
+does not imply any level of support or stability for the compilers
 that form the given stack.
-
-* Our current compiler stack is referred to internally as ``comp7``.
-* The previous compiler stack based in part on the various ``toolchain_*`` packages
-  was sometimes referred to as ``comp4``. On linux the ``toolchain_*`` compilers were
-  GCC 4.8.2 as packaged in the devtoolset-2 software collection. On osx, we use clang from
-  Apple's Xcode in the ``toolchain_*`` packages.
 
 CentOS ``sysroot`` for ``linux-*`` Platforms
 ---------------------------------------------
