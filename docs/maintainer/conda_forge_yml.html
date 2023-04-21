@@ -176,6 +176,10 @@ automatic version updates/migrations for feedstocks. The current options are</p>
 <span class="w">  </span><span class="c1"># to the default branch</span>
 <span class="w">  </span><span class="nt">abi_migration_branches</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.10.x</span>
+
+<span class="w">  </span><span class="nt">version_updates</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># use this for packages that are updated too frequently</span>
+<span class="w">    </span><span class="nt">random_fraction_to_keep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w">  </span><span class="c1"># keeps 10% of versions at random</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">abi_migration_branches</span></code> feature is useful to, for example, add a
