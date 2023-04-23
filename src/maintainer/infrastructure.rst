@@ -300,7 +300,7 @@ principles.
 * We upgrade them in an ad-hoc manner on a periodic basis as we have the time and energy to do so.
   Note that because of the way we enforce runtime constraints, these compiler upgrades will not break
   existing packages. However, if you are using the compilers outside of ``conda``, then you may find issues.
-* We will provide notice in the form of an announcement when an ABI-incompatible compiler change is going to be happen.
+* We usually provide notice in the form of an announcement when an ABI-incompatible compiler change is going to happen.
   Note that these changes take a bit of time to complete, so you will generally have time
   to prepare should you need to.
 * Some of the criteria we think about when considering a compiler migration include
@@ -328,7 +328,7 @@ working also outside of conda-forge, and even provide an easy way to install the
 (through the `compilers <https://github.com/conda-forge/compilers-feedstock>`_ feedstock).
 
 In more detail, our default compiler stack is made up very differently on each platform.
-More specifically, each compiler needs an _activation_ that makes the difference
+More specifically, each compiler uses an _activation_ package that makes the difference
 between it being merely present in a build environment, and it being used by default.
 These will be installed when using ``{{ compiler('xyz') }}`` in ``meta.yaml``, where
 ``'xyz'`` is one of ``'c', 'cxx', 'fortran', 'cuda', 'rust', 'go-cgo', 'go-nocgo'``.
@@ -361,11 +361,11 @@ Windows (MSVC):
 * [Fortran] Activation & Implementation: https://github.com/conda-forge/flang-feedstock
 
 There exists an alternative, MinGW-based, compiler stack on windows, which is available
-with a ``m2w64_`` prefix (e.g. ``{{ compiler('m2w64_c') }}``), which is however falling out
+with a ``m2w64_`` prefix (e.g. ``{{ compiler('m2w64_c') }}``). However, it is falling out
 of use now that most projects will natively support compilation also with MSVC, in addition
 to several complications arising from mixing compiler stacks.
 
-Additionally, there is a possibility to use clang as a compiler also on Linux & Windows:
+Additionally, there is a possibility to use clang as a compiler on Linux & Windows:
 
 * Activation (Linux): https://github.com/conda-forge/clang-compiler-activation-feedstock/
 * Activation (Windows): https://github.com/conda-forge/clang-win-activation-feedstock/
