@@ -281,14 +281,8 @@ Compilers and Runtimes
 
 Conda-forge builds and maintains its own set of compilers for various languages
 and/or systems (e.g., ``C``, ``FORTRAN``, ``C++``, ``CUDA``, etc.). These are used
-in all of our CI builds to build essentially all artefacts published by conda-forge.
-
-In the past, compiler upgrades often required full rebuilds of basically all of
-conda-forge due to potential ABI breaks. These breaks have become much rarer in
-frequency and scope, so it is not a current concern. However, we keep our policies
-for such ABI breaks in place for the next time it should occur.
-
-While we do not have any promises of support for a generation of ABI-compatible
+in all of our CI builds to build both core dependencies (e.g., ``Python``) and maintainer-contributed
+packages. While we do not have any formal policies or promises of support for these
 compilers, we have historically maintained them according to the following (non-binding)
 principles.
 
@@ -296,97 +290,26 @@ principles.
   and platforms is the `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`_
   in the `conda-forge/conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_
   as described in :ref:`globally_pinned_packages`.
-* We provide no support of any kind in terms of the long-term stability / support of a given compiler generation.
+* We provide no support of any kind in terms of the long-term stability of these pinnings.
 * We upgrade them in an ad-hoc manner on a periodic basis as we have the time and energy to do so.
   Note that because of the way we enforce runtime constraints, these compiler upgrades will not break
   existing packages. However, if you are using the compilers outside of ``conda``, then you may find issues.
-* We generally provide notice in the form of an announcement when a conpiler is going to be upgraded.
+* We generally provide notice in the form of an announcement when a compiler is going to be upgraded.
   Note that these changes take a bit of time to complete, so you will generally have time
   to prepare should you need to.
 * Some of the criteria we think about when considering a compiler migration include
   1) the degree of disruption to the ecosystem, 2) the amount of work for the ``core`` team,
   and 3) the amount of time it will cost our (volunteer) feedstock maintainers.
 
-These compiler generations may or may not have some unofficial names for our
-internal use (e.g. ``comp7``). We note again that the existence of these names
-does not imply any level of support or stability for the compilers
+We do use some unofficial names for our compiler stack internally. Note however that
+the existence of these names does not imply any level of support or stability for the compilers
 that form the given stack.
 
-The more recent status quo is that compilers can be upgraded in an ABI-compatible manner,
-meaning that we can just increase the version in our global pinning, and it will slowly
-roll out in a compatible manner to the ecosystem as feedstocks get rerendered.
-For such ABI-compatible upgrades, similar but looser principles apply:
-
-* The pins are similarly in the global pinning, see :ref:`globally_pinned_packages`.
-* We provide no support of any kind in terms of the long-term availability of a given compiler generation.
-* We generally provide notice in the form of an announcement when a compiler is going to be upgraded.
-* In general, our compilers on Linux and OSX are using very recent compilers, whereas
-  on windows, we generally use the last supported VS version.
-
-Despite the lack of explicit support, we try to keep the compilers in their various versions
-working also outside of conda-forge, and even provide an easy way to install them
-(through the `compilers <https://github.com/conda-forge/compilers-feedstock>`_ feedstock).
-
-In more detail, our default compiler stack is made up very differently on each platform.
-More specifically, each compiler uses an _activation_ package that makes the difference
-between it being merely present in a build environment, and it being used by default.
-These will be installed when using ``{{ compiler('xyz') }}`` in ``meta.yaml``, where
-``'xyz'`` is one of ``'c', 'cxx', 'fortran', 'cuda', 'rust', 'go-cgo', 'go-nocgo'``.
-
-Linux (GCC):
-
-* [C, C++, Fortran] Activation: https://github.com/conda-forge/ctng-compiler-activation-feedstock/
-* [C, C++, Fortran] Implementation: https://github.com/conda-forge/ctng-compilers-feedstock
-* Note that when used in conjunction with CUDA, compiler versions are restricted by the
-  maximum GCC version supported by nvcc (which is also reflected in the global pinning).
-
-OSX (Clang):
-
-* [C, C++] Activation: https://github.com/conda-forge/clang-compiler-activation-feedstock/
-* [C, C++] Required feedstocks:
-  `llvmdev <https://github.com/conda-forge/llvmdev-feedstock>`_,
-  `clangdev <https://github.com/conda-forge/clangdev-feedstock>`_,
-  `compiler-rt <https://github.com/conda-forge/compiler-rt-feedstock>`_,
-  `libcxx <https://github.com/conda-forge/libcxx-feedstock>`_,
-  `openmp <https://github.com/conda-forge/openmp-feedstock>`_,
-  `lld <https://github.com/conda-forge/lld-feedstock>`_,
-  `cctools <https://github.com/conda-forge/cctools-and-ld64-feedstock>`_
-* [Fortran] Activation: https://github.com/conda-forge/gfortran_osx-64-feedstock/
-* [Fortran] Implementation: https://github.com/conda-forge/gfortran_impl_osx-64-feedstock/
-
-Windows (MSVC):
-
-* [C, C++] Activation: https://github.com/conda-forge/vc-feedstock
-  (we cannot redistribute the actual MSVC compilers due to licensing constraints)
-* [Fortran] Activation & Implementation: https://github.com/conda-forge/flang-feedstock
-
-There exists an alternative, MinGW-based, compiler stack on windows, which is available
-with a ``m2w64_`` prefix (e.g. ``{{ compiler('m2w64_c') }}``). However, it is falling out
-of use now that most projects will natively support compilation also with MSVC, in addition
-to several complications arising from mixing compiler stacks.
-
-Additionally, there is a possibility to use clang as a compiler on Linux & Windows:
-
-* Activation (Linux): https://github.com/conda-forge/clang-compiler-activation-feedstock/
-* Activation (Windows): https://github.com/conda-forge/clang-win-activation-feedstock/
-
-Aside from the main C/C++/Fortran compilers, these are the feedstocks for the other compilers:
-
-* [CUDA] https://github.com/conda-forge/nvcc-feedstock (CUDA infra currently being overhauled)
-* [Rust] `Activation <https://github.com/conda-forge/rust-activation-feedstock>`_
-  and `Implementation <https://github.com/conda-forge/rust-feedstock>`_
-* [Go] https://github.com/conda-forge/go-feedstock
-
-To upgrade the compiler version of our default compilers in the global pinning for
-Linux or OSX, ensure that the respective above-mentioned feedstocks have been rebuilt
-for the new major version, that all interrelated versions are lifted at the same time,
-and obviously that the compilers work (e.g. by testing them on some feedstocks by
-specifying the new version through the feedstock-local `conda_build_config.yaml`).
-
-For Windows, we stay on older compilers for longer, because using a newer toolchain
-would force everyone wanting to locally develop with conda-forge artefacts to use
-a toolchain that's at least as new. A more in-depth explanation can be found
-`here <https://github.com/conda-forge/conda-forge.github.io/issues/1732>`_.
+* Our current compiler stack is referred to internally as ``comp7``.
+* The previous compiler stack based in part on the various ``toolchain_*`` packages
+  was sometimes referred to as ``comp4``. On linux the ``toolchain_*`` compilers were
+  GCC 4.8.2 as packaged in the devtoolset-2 software collection. On osx, we use clang from
+  Apple's Xcode in the ``toolchain_*`` packages.
 
 CentOS ``sysroot`` for ``linux-*`` Platforms
 ---------------------------------------------
