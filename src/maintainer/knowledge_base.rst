@@ -1607,6 +1607,17 @@ to specify your package:
    dependencies:
      - conda-forge/label/matplotlib_rc::matplotlib=3.7.0rc1
 
+
+Alternately, you can use the channels section to enable the `matplotlib_rc` channel:
+
+.. code-block:: yaml
+
+   channels:
+     - conda-forge/label/matplotlib_rc
+   dependencies:
+     - matplotlib=3.7.0.rc1
+
+
 Pre-release version sorting
 ---------------------------
 
