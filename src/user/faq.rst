@@ -23,7 +23,7 @@ FAQ
 
 :ref:`(Q) <faq_contact>` **I have a question/suggestion. How can I contact you?**
 
-  Please join us on our `Element Chatroom <https://app.element.io/#/room/#conda-forge:matrix.org>`__. We are always happy to answer questions and help beginners.
+  Please join us on our `Element chatroom <https://app.element.io/#/room/#conda-forge:matrix.org>`__. We are always happy to answer questions and help beginners.
 
 .. _faq_teams:
 
