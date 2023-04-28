@@ -13,7 +13,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 
 We have made the ``conda-forge`` Google Group read-only. Please use the new 
 ``conda-forge`` `discourse forum <https://conda.discourse.group/c/pkg-building/conda-forge/25>`_, 
-our `Gitter room <https://gitter.im/conda-forge/conda-forge.github.io>`_, or it's `Matrix/Element 
+our `Element Chatroom <https://app.element.io/#/room/#conda-forge:matrix.org>`_, or it's `Matrix/Element 
 counterpart <https://app.element.io/#/room/#conda-forge-space:matrix.org>`_ instead.
 
 
@@ -313,7 +313,7 @@ We have now completed rolling out the new staging process for uploads
 to anaconda.org. Direct uploads to the ``conda-forge`` channel will no
 longer work. If you are having trouble with package uploads, please
 rerender your feedstock with the latest version of ``conda-smithy``.
-As always, if you need help, bump us on Gitter or GitHub!
+As always, if you need help, bump us on Element chatroom or GitHub!
 
 
 2020-08-06: Fixed Maintenance Process for Feedstock Teams
@@ -476,7 +476,7 @@ What will you see as a feedstock maintainer?
 
 Despite our extensive testing, we do not expect this change to be completely smooth,
 so please bear with us. As always, if you have any questions, concerns, or trouble, you
-can find us on Gitter or bump us directly on Github!
+can find us on Element chatroom or bump us directly on Github!
 
 
 2020-03-24: ``vs2015`` to ``vs2017`` Transition

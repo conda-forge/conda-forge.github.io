@@ -32,7 +32,7 @@ Announcements
     to anaconda.org. Direct uploads to the ``conda-forge`` channel will no
     longer work. If you are having trouble with package uploads, please
     rerender your feedstock with the latest version of ``conda-smithy``.
-    As always, if you need help, bump us on gitter or GitHub!
+    As always, if you need help, bump us on element chatroom or GitHub!
 
 :2020-08-06: Fixed Maintenance Process for Feedstock Teams
 
@@ -173,7 +173,7 @@ Announcements
 
     Despite our extensive testing, we do not expect this change to be completely smooth,
     so please bear with us. As always, if you have any questions, concerns, or trouble, you
-    can find us on gitter or bump us directly on github!
+    can find us on Element chatroom or bump us directly on github!
 
 :2020-03-24: ``vs2015`` to ``vs2017`` Transition
 
