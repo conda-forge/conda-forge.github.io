@@ -146,7 +146,7 @@ FAQ
 :ref:`(Q) <mfaq_contact_core>` **How can I contact conda-forge/core?**
 
   When in an issue or PR, you can contact `conda-forge/core <https://conda-forge.org/docs/orga/governance.html#teams-roles>`__ by simply mentioning ``@conda-forge/core`` in a comment.
-  If you don't receive an an answer after a couple of days, feel free to reach out to us via the public `element <https://app.element.io/#/room/#conda-forge:matrix.org>`__ chatroom.
+  If you don't receive an an answer after a couple of days, feel free to reach out to us via the public `Element <https://app.element.io/#/room/#conda-forge:matrix.org>`__ chatroom.
 
   .. note::
 
