@@ -32,11 +32,15 @@ The main chat rooms that you'll interact with are
 
 Note: All Gitter room links forward to Element
 
+Forum
+-------
+
+* `conda community discourse forum <https://conda.discourse.group/>`_: The `conda-forge section <https://conda.discourse.group/c/pkg-building/conda-forge/25>`_ is dedicated to discussions of conda-forge.
+
 Mailing List
 -----------------
 
-* `google group: conda-forge <https://groups.google.com/g/conda-forge>`__: The general mailing list for conda-forge.
-  Sees a moderate amount of traffic, though substantially lower than the public gitter room.
+* `google group: conda-forge <https://groups.google.com/g/conda-forge>`__: `Archived <https://groups.google.com/g/conda-forge/c/Iv-yGnIMEAA>`_.
 
 Other Communication Methods
 -----------------------------
