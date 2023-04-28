@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Knowledge Base &#8212; conda-forge 2023.04.24 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2023.04.28 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.04.24 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.04.28 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -1402,6 +1402,8 @@ This branch must change the <code class="docutils literal notranslate"><span cla
 </section>
 <section id="installing-a-pre-release-build">
 <h3>Installing a pre-release build<a class="headerlink" href="#installing-a-pre-release-build" title="Permalink to this heading">¶</a></h3>
+<section id="using-the-conda-cli">
+<h4>Using the <cite>conda</cite> CLI<a class="headerlink" href="#using-the-conda-cli" title="Permalink to this heading">¶</a></h4>
 <p>Use the following command, but replace <code class="docutils literal notranslate"><span class="pre">PACKAGE_NAME</span></code> with the package you want
 to install and replace <code class="docutils literal notranslate"><span class="pre">LABEL</span></code> with <code class="docutils literal notranslate"><span class="pre">rc</span></code> or <code class="docutils literal notranslate"><span class="pre">dev</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">conda install -c conda-forge/label/PACKAGE_NAME_LABEL -c conda-forge PACKAGE_NAME</span>
@@ -1411,6 +1413,23 @@ to install and replace <code class="docutils literal notranslate"><span class="p
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">conda install -c conda-forge/label/matplotlib_rc -c conda-forge matplotlib</span>
 </pre></div>
 </div>
+</section>
+<section id="using-environment-yml">
+<h4>Using <cite>environment.yml</cite><a class="headerlink" href="#using-environment-yml" title="Permalink to this heading">¶</a></h4>
+<p>Use <a class="reference external" href="https://github.com/conda/conda/blob/c3fb8150ed4c3dabb7ca376ade208095f98ee0b9/conda/models/match_spec.py#L70-L150">MatchSpec</a>
+to specify your package:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge/label/matplotlib_rc::matplotlib=3.7.0rc1</span>
+</pre></div>
+</div>
+<p>Alternately, you can use the channels section to enable the <cite>matplotlib_rc</cite> channel:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">channels</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge/label/matplotlib_rc</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">matplotlib=3.7.0.rc1</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="pre-release-version-sorting">
 <h3>Pre-release version sorting<a class="headerlink" href="#pre-release-version-sorting" title="Permalink to this heading">¶</a></h3>
@@ -1614,7 +1633,11 @@ in conda environments, and some operating system limits. See the <a class="refer
 <li class="toctree-l3"><a class="reference internal" href="#apple-silicon-builds">Apple Silicon builds</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pre-release-builds">Pre-release builds</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#creating-a-pre-release-build">Creating a pre-release build</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#installing-a-pre-release-build">Installing a pre-release build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-a-pre-release-build">Installing a pre-release build</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#using-the-conda-cli">Using the <cite>conda</cite> CLI</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#using-environment-yml">Using <cite>environment.yml</cite></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#pre-release-version-sorting">Pre-release version sorting</a></li>
 </ul>
 </li>
@@ -1699,7 +1722,7 @@ in conda environments, and some operating system limits. See the <a class="refer
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.04.24 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.04.28 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -1709,7 +1732,7 @@ in conda environments, and some operating system limits. See the <a class="refer
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2023, conda-forge.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
