@@ -160,11 +160,11 @@ To call for a standard vote, here is a template PR comment:
 
          * been open for at least 2 weeks
          * been presented and discussed at a Core team meeting
-         * been advertised on at least 3 separate occasions on the gitter core
-           channel (beginning of voting period, middle, and one day prior to
+         * been advertised on at least 3 separate occasions on the element core
+           chatroom (beginning of voting period, middle, and one day prior to
            proposed timeout)
          * been sent to core members via email.  Email reminders must have been
-           sent to the core email list in a manner similar to the gitter channel: at least 3 times,
+           sent to the core email list in a manner similar to the element chatroom: at least 3 times,
            occurring as beginning of voting period, middle, and one day
            prior to proposed timeout.
 
