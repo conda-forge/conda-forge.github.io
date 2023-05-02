@@ -19,7 +19,7 @@ Chances are we have already packaged it for you. You can `search <https://anacon
 - If you find bugs, need help, or want to talk to the developers, use our mailing lists or chat rooms:
 
   - `GitHub issues <https://github.com/conda-forge/conda-forge.github.io/issues>`_
-  - `Gitter channel <https://gitter.im/conda-forge/conda-forge.github.io>`_
+  - `Element chatroom <https://app.element.io/#/room/#conda-forge:matrix.org>`_
   - `Discourse group <https://conda.discourse.group>`_
   - `Mailing list (archived) <https://groups.google.com/forum/#!forum/conda-forge>`_
 
