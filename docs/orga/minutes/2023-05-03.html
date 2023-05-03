@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>2019-04-03 conda-forge meeting &#8212; conda-forge 2023.05.03 documentation</title>
+    <title>conda-forge core meeting 2023-05-03 &#8212; conda-forge 2023.05.03 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -36,8 +36,8 @@
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2019-03-20 conda-forge meeting" href="2019-03-20.html" />
-    <link rel="prev" title="2019-04-17 conda-forge meeting" href="2019-04-17.html" /> 
+    <link rel="next" title="conda-forge core meeting 2023-04-19" href="2023-04-19.html" />
+    <link rel="prev" title="Core team meeting minutes" href="00_intro.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -49,16 +49,16 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="2019-03-20.html" title="2019-03-20 conda-forge meeting"
+          <a href="2023-04-19.html" title="conda-forge core meeting 2023-04-19"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2019-04-17.html" title="2019-04-17 conda-forge meeting"
+          <a href="00_intro.html" title="Core team meeting minutes"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">conda-forge 2023.05.03 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="00_intro.html" accesskey="U">Core team meeting minutes</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">2019-04-03 conda-forge meeting</a></li> 
+        <li class="nav-item nav-item-this"><a href="">conda-forge core meeting 2023-05-03</a></li> 
       </ul>
     </div>
     </div>
@@ -69,148 +69,343 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="conda-forge-meeting">
-<h1>2019-04-03 conda-forge meeting<a class="headerlink" href="#conda-forge-meeting" title="Permalink to this heading">¶</a></h1>
-<p><strong>Pinned Items</strong></p>
+  <section id="conda-forge-core-meeting-2023-05-03">
+<h1>conda-forge core meeting 2023-05-03<a class="headerlink" href="#conda-forge-core-meeting-2023-05-03" title="Permalink to this heading">¶</a></h1>
+<p>Add new agenda items under the <code class="docutils literal notranslate"><span class="pre">Your</span> <span class="pre">__new__()</span> <span class="pre">agenda</span> <span class="pre">items</span></code> heading</p>
 <ul class="simple">
-<li><p>Zoom instructions: <a class="reference external" href="https://paper.dropbox.com/doc/How-to-connect-to-zoom-odl94oveHyiRv6UqTtZE5">+How to connect to zoom</a></p></li>
+<li><p><a class="reference external" href="https://zoom.us/j/9138593505?pwd=SWh3dE1IK05LV01Qa0FJZ1ZpMzJLZz09">Zoom link</a></p></li>
+<li><p><a class="reference external" href="https://dateful.com/convert/utc?t=5pm">What time is the meeting in my time zone</a></p></li>
+<li><p><a class="reference external" href="https://hackmd.io/#REPLACE_ME#">Last week’s meeting</a></p></li>
 </ul>
-<hr class="docutils" />
-<p><strong>New items</strong></p>
+<section id="attendees">
+<h2>Attendees<a class="headerlink" href="#attendees" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Initials</p></th>
+<th class="head"><p>GitHub ID</p></th>
+<th class="head"><p>Affiliation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dave Clements</p></td>
+<td><p>DPC</p></td>
+<td><p>tnabtaf</p></td>
+<td><p>Anaconda</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Filipe Fernandes</p></td>
+<td><p>FF</p></td>
+<td><p>ocefpaf</p></td>
+<td><p>conda-forge</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cheng H. Lee</p></td>
+<td><p>CHL</p></td>
+<td><p>chenghlee</p></td>
+<td><p>conda-forge/Anaconda</p></td>
+</tr>
+<tr class="row-even"><td><p>Marius van Niekerk</p></td>
+<td><p>MvN</p></td>
+<td><p>mariusvniekerk</p></td>
+<td><p>VoltronData/cf</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ryan May</p></td>
+<td><p>RMM</p></td>
+<td><p>dopplershift</p></td>
+<td><p>Unidata/cf</p></td>
+</tr>
+<tr class="row-even"><td><p>Jannis Leidel</p></td>
+<td><p>JL</p></td>
+<td><p>jezdez</p></td>
+<td><p>Anaconda/cf</p></td>
+</tr>
+<tr class="row-odd"><td><p>John Kirkham</p></td>
+<td><p>JK</p></td>
+<td><p>jakirkham</p></td>
+<td><p>NVIDIA/cf</p></td>
+</tr>
+<tr class="row-even"><td><p>Marcel Bargull</p></td>
+<td><p>MB</p></td>
+<td><p>mbargull</p></td>
+<td><p>Bioconda/cf</p></td>
+</tr>
+<tr class="row-odd"><td><p>Avalon</p></td>
+<td><p>A</p></td>
+<td><p>uwuvalon</p></td>
+<td><p>Anaconda</p></td>
+</tr>
+<tr class="row-even"><td><p>Jaime Rodríguez-Guerra</p></td>
+<td><p>JRG</p></td>
+<td><p>jaimergp</p></td>
+<td><p>Quansight/cf</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p>18 people total</p>
+<section id="introductions">
+<h3>Introductions<a class="headerlink" href="#introductions" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>Conda-forge on Open Source Directions</p></li>
-<li><p>Should we send something for the SciPy Tools plenary? https://docs.google.com/forms/d/e/1FAIpQLSdyemkK_NV1k6kp9ZakHm566nYUxrfCv7lO_MlNXKEoUv2I8w/viewform</p>
+<li><p>[x] Andrew Vallette on the packaging team at Anaconda.</p></li>
+</ul>
+</section>
+<section id="standing-items">
+<h3>Standing items<a class="headerlink" href="#standing-items" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>[ ]</p></li>
+</ul>
+</section>
+<section id="from-previous-meeting-s">
+<h3>From previous meeting(s)<a class="headerlink" href="#from-previous-meeting-s" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>[x] (WV) rattler-build - new conda package build tool: https://github.com/prefix-dev/rattler-build</p>
 <ul>
-<li><p>Not done, CJ following up on what we need to do</p></li>
+<li><p>builds conda packages from recipe format that looks a lot like BOA</p></li>
+<li><p>Writes metadata in rattler format</p></li>
+<li><p>Did a live demo.</p></li>
+<li><p>Aiming to give better diagnostics</p></li>
+<li><p>MRB: BOA Spec?</p>
+<ul>
+<li><p>We need to figure out what to do.</p></li>
+<li><p>Need a defined spec that everyone can write to</p></li>
+<li><p>JL: what do we need to do create a spec?</p>
+<ul>
+<li><p>Selectors,</p></li>
+<li><p>MVN: version number in spec.  People were in violent agreement.</p></li>
 </ul>
 </li>
-<li><p>SciPy plans and how to spend ESIP/NumFOCUS sprint grant money.</p></li>
-<li><p>Elections/Governance (let’s put an election for those two.)</p>
-<ul>
-<li><p>Staged</p>
-<ul>
-<li><p>Progress?</p></li>
-<li><p>mjscosta</p>
-<ul>
-<li><p>“I can review C++ and Python, and Python + extensions recipes.”</p></li>
+<li><p>JL: We need a spec</p></li>
+<li><p>WV: we have a JSON schema.</p></li>
+<li><p>JK: argues for a new YAML format. Would be interested in being involved in Spec writing group</p></li>
+<li><p>Some recipes will/may be left behind.</p></li>
+<li><p>ACTION: Discusss this on Conda call next week.</p></li>
 </ul>
 </li>
-<li><p>xhochy</p></li>
-<li><p>etadeu</p></li>
 </ul>
 </li>
-<li><p>Core</p>
+<li><p>[x] (JK) New CTK packages / CUDA 12</p>
 <ul>
-<li><p>pkgw</p></li>
-</ul>
-</li>
-<li><p>Split help teams from staged-recipes permissions?</p>
+<li><p>Opening CUDA 12 migrator</p>
 <ul>
-<li><p>Go forward with splitting help teams from staged</p></li>
-</ul>
-</li>
-<li><p>Staged team in Governance doc</p>
+<li><p>Package layout changes:</p>
 <ul>
-<li><p>https://github.com/conda-forge/conda-forge.github.io/pull/738</p></li>
-</ul>
-</li>
-<li><p>Add formal budget team to Governance doc</p></li>
-</ul>
-</li>
-<li><p>Should we “dogfood”  <code class="docutils literal notranslate"><span class="pre">strict</span></code>, which may be default in the next conda, in our CIs? The only known issue is <code class="docutils literal notranslate"><span class="pre">numpy</span></code> /<code class="docutils literal notranslate"><span class="pre">scipy</span></code>  on Windows because of BLAS requirements <code class="docutils literal notranslate"><span class="pre">1openblas</span></code>  (<code class="docutils literal notranslate"><span class="pre">numpy</span></code>)vs <code class="docutils literal notranslate"><span class="pre">mkl</span></code> (<code class="docutils literal notranslate"><span class="pre">scipy</span></code>). We need to either make <code class="docutils literal notranslate"><span class="pre">mkl</span></code> a first class citizen on Windows or have a <code class="docutils literal notranslate"><span class="pre">scipy</span></code> build with <code class="docutils literal notranslate"><span class="pre">openblas</span></code>.</p>
+<li><p>https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/4400</p></li>
+<li><p>Document?</p></li>
+<li><p>Message?</p></li>
+<li><p>Incremental rollout?</p></li>
+<li><p>Marius suggested bot message customization</p>
 <ul>
-<li><p>https://github.com/conda-forge/conda-forge-ci-setup-feedstock/pull/50</p></li>
-<li><p>https://github.com/conda-forge/staged-recipes/pull/8009</p></li>
-<li><p>Perform switch after blas migration is more finished</p></li>
-</ul>
-</li>
-<li><p>Azure status</p>
-<ul>
-<li><p>Need to fix windows (vc9 and cmake)</p></li>
-<li><p>Credentials issues (need pipelines account to access Azure, will move to GH auth soon)</p></li>
-<li><p>How to handle bespoke build agents (for builds taking longer than 6 hours (qt, compilers, etc.))</p></li>
-<li><p>How to restart an Azure job?</p></li>
-</ul>
-</li>
-<li><p>NVIDIA</p>
-<ul>
-<li><p>Louder communication path for large ecosystem shifts (compiler migrations)</p>
-<ul>
-<li><p>Banner on AnacondaCloud, status updates on channel</p></li>
-<li><p>Print something while using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span></code></p></li>
-<li><p>More frequent updates</p></li>
-</ul>
-</li>
-<li><p>AnacondaCloud can fall over (mirroring conda)</p></li>
-<li><p>Try to track down hard linked drivers in GPU packages.</p></li>
-</ul>
-</li>
-<li><p>Migrations</p>
-<ul>
-<li><p>Blas</p>
-<ul>
-<li><p>Underway</p></li>
-</ul>
-</li>
-<li><p>Libprotobuf</p>
-<ul>
-<li><p>Underway</p></li>
-</ul>
-</li>
-<li><p>gfortran</p>
-<ul>
-<li><p>Need to build a migrator for new osx gfortran</p></li>
-<li><p>https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/174 maybe?</p></li>
-</ul>
-</li>
-<li><p>Power and Arm</p>
-<ul>
-<li><p>Ongoing https://conda-forge.org/status/</p></li>
-<li><p>More leafs to target?</p></li>
-</ul>
-</li>
-<li><p>Openssl</p>
-<ul>
-<li><p>Underway</p></li>
-</ul>
-</li>
-<li><p>Readline</p>
-<ul>
-<li><p>ABI change</p></li>
-<li><p>Needs migrator</p></li>
-<li><p>May want to wait</p></li>
-</ul>
-</li>
-<li><p>&#64;Christopher W : Add link to migration docs for conda-forge.github.io</p></li>
-</ul>
-</li>
-<li><p>Conda-Forge miniconda (Should we mark this as resolved and proceed with conda-pack?)</p>
-<ul>
-<li><p>Sophia did some benchmarks and showed that using a conda-pack’d archive reduced CI setup time down to about 2 seconds instead of the 40 seconds it takes to install miniconda and switch out all the packages for the conda-forge ones: https://gitter.im/conda-forge/conda-forge.github.io?at=5c79a37dd2d62067b72a849d</p></li>
-<li><p>Mike’s point was who owns the support for a conda-forge miniconda distro? https://gitter.im/conda-forge/conda-forge.github.io?at=5c7992a9e1446a6ebe6871d2</p></li>
-</ul>
-</li>
-<li><p>Nvidia relationship</p>
-<ul>
-<li><p>Anaconda met with Rapids (NVIDIA) team</p></li>
-<li><p>Reach out to NVIDIA to attend meetings</p></li>
-<li><p>Add NVIDIA person to core?</p></li>
-<li><p>Add to governance discussing donations and governance.</p></li>
-<li><p>More followup with NVIDIA needed</p></li>
-<li><p>Building GPU packages using conda-forge packages, upload to their own channel after building with cudatoolkit on their own Jenkins system.</p></li>
-<li><p>Maybe form a working group?</p></li>
-</ul>
-</li>
-<li><p>Perl ecosystem?</p>
-<ul>
-<li><p>move forward with plan to incorporate perl into CF</p>
-<ul>
-<li><p>Do we have an issue or something for this?</p></li>
+<li><p>May need to go in bot code</p></li>
+<li><p>Could add change to bot code to</p></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
+</li>
+<li><p>(IF) Has question about layout</p>
+<ul>
+<li><p>(JK) Using <code class="docutils literal notranslate"><span class="pre">cuda</span></code> would be ok</p>
+<ul>
+<li><p>(IF) Changes a lot of things for CMake</p>
+<ul>
+<li><p>(JK) Discussion to have with Robert Maynard</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>(JK)</p></li>
+</ul>
+</li>
+<li><p>(Longer-term) CUDA 11 backport? (punted to later meeting)</p>
+<ul>
+<li><p>New style packages on older CUDA versions</p></li>
+<li><p>What version to start with (<code class="docutils literal notranslate"><span class="pre">nvidia</span></code> channel has <code class="docutils literal notranslate"><span class="pre">11.4</span></code>)?</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code> becomes metapackage?</p></li>
+<li><p>Potential to drop some CUDA specific things</p>
+<ul>
+<li><p>Docker images</p></li>
+<li><p>conda-forge-ci-setup simplification</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>[x] (JK) Windows MinGW &amp; UCRT</p>
+<ul>
+<li><p>https://github.com/conda-forge/r-base-feedstock/issues/248</p></li>
+<li><p>https://github.com/conda-forge/conda-forge.github.io/issues/1654</p></li>
+<li><p>https://github.com/conda-forge/conda-forge.github.io/issues/1044</p></li>
+<li><p>(AV): Anaconda is looking into ways to fix this issue</p>
+<ul>
+<li><p>Do we binary repack MSYS2 packages? Or rebuild?</p></li>
+<li><p>How can we automate UCRT-based MSYS2 Windows?</p></li>
+<li><p>Could even automate recipe generation</p>
+<ul>
+<li><p>https://github.com/conda-forge/msys2-recipes</p></li>
+</ul>
+</li>
+<li><p>(MRB) CDT approach could be reused here</p>
+<ul>
+<li><p>https://github.com/conda-forge/cdt-builds</p></li>
+</ul>
+</li>
+<li><p>(IF) What do we want packaged</p>
+<ul>
+<li><p>May need customization; e.g., <code class="docutils literal notranslate"><span class="pre">run_exports</span></code></p></li>
+<li></li>
+</ul>
+</li>
+<li><p>(AV): Will share work as it progresses</p></li>
+<li><p>(MB): Old MinGW use subfolder?</p>
+<ul>
+<li><p>Do we want to change this for UCRT? Or keep the same?</p></li>
+<li><p>(IF) Depends on what we package</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>[x] (JK) GLIBC 2.28</p>
+<ul>
+<li><p>https://github.com/conda-forge/conda-forge.github.io/issues/1941</p></li>
+<li><p>(MRB) Need review</p>
+<ul>
+<li><p>https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/pull/441</p></li>
+<li><p>https://github.com/conda-forge/linux-sysroot-feedstock/pull/47</p></li>
+</ul>
+</li>
+<li><p>(MRB) Downloaded RPM need review</p>
+<ul>
+<li><p>Directory level varies / need to confirm that is the right level</p></li>
+<li><p>(MB) Do we need language packs?</p>
+<ul>
+<li><p>(MRB) Have English in one</p></li>
+<li><p>(MRB) Have one with many languages</p></li>
+<li><p>(IF)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li></li>
+</ul>
+</li>
+<li><p>[x] (JK) Windows ARM</p>
+<ul>
+<li><p>(SD) Hi :) Happy to answer questions</p></li>
+<li><p>https://github.com/conda-forge/conda-forge.github.io/issues/1940</p></li>
+<li><p>(IF) https://github.com/conda-forge/vc-feedstock/pull/55</p></li>
+<li><p>(IF) Question for Steve: What do you plan on building in the first year?</p>
+<ul>
+<li><p>(IF) Conda / Mamba / Boa needed to build, Installer?</p></li>
+<li><p>(SD) Installer is ambitious (would be great! not required). Want attempts/CI issues visible</p></li>
+<li><p>(SD) Challenges getting more hardware atm. So just be able to build</p></li>
+<li><p>(IF) Python would be a goal? Maybe NumPy &amp; SciPy?</p></li>
+<li><p>(JK) What would be helpful for finance conversation?</p>
+<ul>
+<li><p>(SD) Ask for less? ;) Though nothing has really been asked yet.</p></li>
+<li><p>(SD) Finn can help :)</p></li>
+</ul>
+</li>
+<li><p>(IF) Can build <code class="docutils literal notranslate"><span class="pre">zlib</span></code>! :tada:</p>
+<ul>
+<li><p>Local build</p></li>
+</ul>
+</li>
+<li><p>(MvN) Maybe macOS ARM list could be a starting point</p></li>
+<li><p>(SD) Rust toolchain should work (testing with cryptography)</p></li>
+<li><p>(IF) Does Clang cross-compilation work?</p>
+<ul>
+<li><p>(SD) Using Cygwin (not Clang) atm</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>[ ] (HV) Boost Harmonization</p>
+<ul>
+<li><p>Now has PR: https://github.com/conda-forge/boost-feedstock/pull/164</p></li>
+<li><p>Discussion yielded bikeshed à la: <code class="docutils literal notranslate"><span class="pre">libboost</span></code>, <code class="docutils literal notranslate"><span class="pre">libboost-headers</span></code>, <code class="docutils literal notranslate"><span class="pre">libboost-python</span></code></p></li>
+</ul>
+</li>
+<li><p>[ ] (MB) R 4.3 migration</p>
+<ul>
+<li><p>https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/4363</p></li>
+<li><p>Any objections on kicking it off?</p></li>
+<li><p>Windows TeX build issues for 4.1 might need to be resolved due to other non-R migrations?</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="active-votes">
+<h3>Active votes<a class="headerlink" href="#active-votes" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>[ ]</p></li>
+</ul>
+</section>
+<section id="your-new-agenda-items">
+<h3>Your <strong>new</strong>() agenda items<a class="headerlink" href="#your-new-agenda-items" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>[X] (DPC) Package building tutorial at PyCon US 2023 was a success.</p>
+<ul>
+<li><p>We had ~25 participants</p></li>
+<li><p>Tutorial will be published online after some cleanup.</p></li>
+</ul>
+</li>
+<li><p>[X] (JRG) SDG for opt-in CI accepted (related to https://github.com/conda-forge/conda-forge.github.io/issues/1875 and GPU server)</p></li>
+<li><p>[X] (WV) SDG for pubgrub on rattler accepted too</p></li>
+<li><p>[ ]</p></li>
+</ul>
+</section>
+<section id="pushed-to-next-meeting">
+<h3>Pushed to next meeting<a class="headerlink" href="#pushed-to-next-meeting" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>[ ]</p></li>
+</ul>
+</section>
+<section id="cfeps">
+<h3>CFEPs<a class="headerlink" href="#cfeps" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>[ ]</p></li>
+</ul>
+</section>
+</section>
 </section>
 
 
@@ -230,7 +425,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../subteams.html">A list of current sub-teams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../joining-the-team.html">Joining the team</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="00_intro.html">Core team meeting minutes</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="2023-05-03.html">conda-forge core meeting 2023-05-03</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">conda-forge core meeting 2023-05-03</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#attendees">Attendees</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#introductions">Introductions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#standing-items">Standing items</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#from-previous-meeting-s">From previous meeting(s)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#active-votes">Active votes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#your-new-agenda-items">Your <strong>new</strong>() agenda items</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pushed-to-next-meeting">Pushed to next meeting</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cfeps">CFEPs</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="2023-04-19.html">conda-forge core meeting 2023-04-19</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2023-04-05.html">conda-forge core meeting 2023-04-05</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2023-03-22.html">conda-forge core meeting 2023-03-22</a></li>
@@ -331,7 +538,7 @@
 <li class="toctree-l3"><a class="reference internal" href="2019-05-29.html">2019-05-29 conda-forge meeting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2019-05-15.html">2019-05-15 conda-forge meeting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2019-04-17.html">2019-04-17 conda-forge meeting</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">2019-04-03 conda-forge meeting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2019-04-03.html">2019-04-03 conda-forge meeting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2019-03-20.html">2019-03-20 conda-forge meeting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2019-03-06.html">2019-03-06 conda-forge meeting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2019-02-20.html">2019-02-20 conda-forge meeting</a></li>
@@ -393,18 +600,18 @@
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="2019-04-17.html"
-                          title="Previous page">&larr; 2019-04-17 conda-forge meeting</a></p>
+    <p class="topless"><a href="00_intro.html"
+                          title="Previous page">&larr; Core team meeting minutes</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="2019-03-20.html"
-                          title="Next page">&rarr; 2019-03-20 conda-forge meeting</a></p>
+    <p class="topless"><a href="2023-04-19.html"
+                          title="Next page">&rarr; conda-forge core meeting 2023-04-19</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/orga/minutes/2019-04-03.md.txt"
+      <li><a href="../../_sources/orga/minutes/2023-05-03.md.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -448,16 +655,16 @@
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="2019-03-20.html" title="2019-03-20 conda-forge meeting"
+          <a href="2023-04-19.html" title="conda-forge core meeting 2023-04-19"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="2019-04-17.html" title="2019-04-17 conda-forge meeting"
+          <a href="00_intro.html" title="Core team meeting minutes"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">conda-forge 2023.05.03 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../00_intro.html" >Organisation Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="00_intro.html" >Core team meeting minutes</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">2019-04-03 conda-forge meeting</a></li> 
+        <li class="nav-item nav-item-this"><a href="">conda-forge core meeting 2023-05-03</a></li> 
       </ul>
     </div>
     </div>
