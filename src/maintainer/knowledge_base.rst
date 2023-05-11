@@ -119,7 +119,7 @@ scope of this documentation, there are ample discussions on them on the broader
 Internet.
 
 To bootstrap a conda environment and install ``conda-build``, consider
-`miniforge<https://github.com/conda-forge/miniforge>`__.
+`miniforge <https://github.com/conda-forge/miniforge>`__.
 
 
 Executing a build
