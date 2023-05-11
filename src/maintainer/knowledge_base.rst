@@ -156,7 +156,7 @@ While you can obtain these tools by installing the right version of the full
 `Visual Studio <https://visualstudio.microsoft.com/>`__ development
 environment, you can save a lot of time and bandwidth by installing standalone
 “build tools” packages. You can get them from `Visual Studio
-Subscriptions<https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products>`__.
+Subscriptions <https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products>`__.
 To download build tools, you'll need a Microsoft account. Once on the
 Visual Studio Subscriptions page, you may also need to join the Dev Essentials
 program. Once that's done, you can click the "Download" tab and search for
