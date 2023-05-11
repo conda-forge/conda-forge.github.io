@@ -125,8 +125,9 @@ To bootstrap a conda environment and install ``conda-build``, consider
 Executing a build
 ^^^^^^^^^^^^^^^^^
 
-The ``build-locally.py`` script does not support Windows. Use ``conda build
-recipe/``.
+The ``build-locally.py`` script does not support Windows (yet, PRs welcome!).
+You can use ``conda build recipe/ -m .ci_support/choose_your_config.yaml`` as
+a workaround for now.
 
 Using a local channel looks a bit different in Windows, too (note the
 triple-forward-slash in the channel name):
