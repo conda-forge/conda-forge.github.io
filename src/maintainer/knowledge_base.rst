@@ -237,8 +237,6 @@ To skip building with a particular ``vc`` version, add a skip statement.
 Using vs2022
 ^^^^^^^^^^^^
 
-To use ``vs2022``, you'll need to edit ``conda_build_config.yaml`` and ``conda-forge.yml``.
-
 In ``recipe/conda_build_config.yaml`` file:
 
 .. code-block:: yaml
@@ -247,15 +245,6 @@ In ``recipe/conda_build_config.yaml`` file:
     - vs2022       # [win]
     cxx_compiler:  # [win]
     - vs2022       # [win]
-
-In ``conda-forge.yml`` file (at the root of the feedstock):
-
-.. code-block:: yaml
-
-    azure:
-      settings_win:
-        pool:
-          vmImage: windows-2022
 
 You can look at the changes in `this PR <https://github.com/conda-forge/vcpkg-tool-feedstock/pull/41/files>`__.
 
