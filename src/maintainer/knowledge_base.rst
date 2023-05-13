@@ -164,7 +164,7 @@ Subscriptions <https://visualstudio.microsoft.com/vs/older-downloads/#visual-stu
 To download build tools, you'll need a Microsoft account. Once on the
 Visual Studio Subscriptions page, you may also need to join the Dev Essentials
 program. Once that's done, you can click the "Download" tab and search for
-"Build Tools for Visual Studio 2019".
+"Build Tools for Visual Studio 2022".
 
 If you need more information. Please refer `the Python wiki page on Windows compilers
 <https://wiki.python.org/moin/WindowsCompilers>`__.
@@ -234,26 +234,32 @@ To skip building with a particular ``vc`` version, add a skip statement.
       build:
         - {{ compiler('cxx') }}
 
-Using vs2019
-^^^^^^^^^^^^^
+Using vs2022
+^^^^^^^^^^^^
 
-To use ``vs2019`` make the following changes:
+To use ``vs2022``, you'll need to edit ``conda_build_config.yaml`` and ``conda-forge.yml``.
 
-In ``conda_build_config.yaml`` file:
+In ``recipe/conda_build_config.yaml`` file:
 
 .. code-block:: yaml
 
     c_compiler:    # [win]
-    - vs2019       # [win]
+    - vs2022       # [win]
     cxx_compiler:  # [win]
-    - vs2019       # [win]
+    - vs2022       # [win]
 
+In ``conda-forge.yml`` file (at the root of the feedstock):
 
-For example see the changes made in the ``conda_build_config.yaml`` files in `this
-<https://github.com/conda-forge/libignition-msgs1-feedstock/pull/73/commits/81b5ee0e1d23f7f20427dd80d04cf1f7321b441d>`__ commit.
+.. code-block:: yaml
+
+    azure:
+      settings_win:
+        pool:
+          vmImage: windows-2022
+
+You can look at the changes in `this PR <https://github.com/conda-forge/vcpkg-tool-feedstock/pull/41/files>`__.
 
 After making these changes don't forget to rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line).
-
 
 .. _cmd_batch_syntax:
 
