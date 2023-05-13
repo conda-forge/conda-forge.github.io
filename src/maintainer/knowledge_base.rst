@@ -129,12 +129,16 @@ The ``build-locally.py`` script does not support Windows (yet, PRs welcome!).
 You can use ``conda build recipe/ -m .ci_support/choose_your_config.yaml`` as
 a workaround for now.
 
-Using a local channel looks a bit different in Windows, too (note the
-triple-forward-slash in the channel name):
+
+Testing a local build
+^^^^^^^^^^^^^^^^^^^^^
+
+Using a local channel looks a bit different in Windows, too. The quotes are
+important:
 
 .. code-block::
 
-    conda create -n my-new-env -c file:///C:\Users\User\miniforge3\conda-build my-package
+    conda create -n my-new-env -c "C:\Users\User\miniforge3\conda-build" my-package
 
 If you installed from a different distribution than ``miniforge`` or to a
 different path, you'll need to alter this path.
