@@ -1052,6 +1052,7 @@ relies on three concepts:
     ``__unix`` is present in both Linux and MacOS. Note that this feature is **only fully available
     on conda 4.10 or above**.
 2.  ``conda-forge.yml``'s :ref:`noarch_platforms` option.
+3. **conda-build 3.25.0 or above** changing the build hash depending on virtual packages used.
 
 The idea is to generate different noarch packages for each OS needing different dependencies.
 Let's say you have a pure Python package, perfectly eligible for ``noarch: python``, but on Windows
@@ -1073,10 +1074,10 @@ it requires ``windows-only-dependency``. You might have something like:
       - windows-only-dependency  # [win]
 
 Being non-noarch, this means that the build matrix will include at least 12 outputs: three platforms,
-times four Python versions. This gets worse with arm64, aarch64 and ppc64le in the mix. We can get it down
-to two outputs if replace it with this other approach!
+times four Python versions. This gets worse with ``arm64``, ``aarch64`` and ``ppc64le`` in the mix.
+We can get it down to two outputs if replace it with this other approach!
 
-.. code-block:: yaml+jinja
+.. code-block:: yaml
   :caption: recipe/meta.yaml (modified)
 
   name: package
@@ -1084,9 +1085,6 @@ to two outputs if replace it with this other approach!
     # ...
   build:
     number: 0
-    # You NEED to include the platform in the build string to avoid hash collisions
-    string: "unix_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"  # [unix]
-    string: "win_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"   # [win]
     noarch: python
   requirements:
     host:
@@ -1126,10 +1124,6 @@ If you need conditional dependencies on all three operating systems, this is how
     # ...
   build:
     number: 0
-    # You NEED to include the platform in the build string to avoid hash collisions
-    string: "linux_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"  # [linux]
-    string: "osx_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"    # [osx]
-    string: "win_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"    # [win]
     noarch: python
   requirements:
     # ...
