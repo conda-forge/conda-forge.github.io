@@ -1089,9 +1089,11 @@ to two outputs if replace it with this other approach!
     string: "win_pyh{{ PKG_HASH }}_{{ PKG_BUILDNUM }}"   # [win]
     noarch: python
   requirements:
-    # ...
+    host:
+      - python >=3.7
+      # ...
     run:
-      - python
+      - python >=3.7
       - numpy
       - __unix  # [unix]
       - __win   # [win]
