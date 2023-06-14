@@ -1,14 +1,13 @@
 
 
-
 <!DOCTYPE html>
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Knowledge Base &#8212; conda-forge 2023.06.01 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2023.06.14 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -54,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.06.01 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.06.14 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -1004,8 +1003,120 @@ any changes to the feedstock.</p>
 which builds on Linux <cite>and</cite> Windows, with <code class="docutils literal notranslate"><span class="pre">build_number</span></code> offsets to create a pair packages, like
 <code class="docutils literal notranslate"><span class="pre">dataclasses</span></code>.</p>
 </div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can build platform-specific <code class="docutils literal notranslate"><span class="pre">noarch</span></code> packages to include runtime requirements depending on the target OS.
+See mini-tutorial below.</p>
+</div>
 <p>If an existing python package qualifies to be converted to a noarch package, you can request the required changes
 by opening a new issue and including <code class="docutils literal notranslate"><span class="pre">&#64;conda-forge-admin,</span> <span class="pre">please</span> <span class="pre">add</span> <span class="pre">noarch:</span> <span class="pre">python</span></code>.</p>
+<section id="noarch-packages-with-os-specific-dependencies">
+<span id="os-specific-noarch"></span><h4>Noarch packages with OS-specific dependencies<a class="headerlink" href="#noarch-packages-with-os-specific-dependencies" title="Permalink to this heading">¶</a></h4>
+<p>It is possible to build <code class="docutils literal notranslate"><span class="pre">noarch</span></code> packages with runtime requirements that depend on the target OS
+(Linux, Windows, MacOS), regardless the architecture (amd64, ARM, PowerPC, etc). This approach
+relies on three concepts:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html">Virtual packages</a>.
+Prefixed with a double underscore, they are used by conda to represent system properties as
+constraints for the solver at install-time. We will use <code class="docutils literal notranslate"><span class="pre">__linux</span></code>, <code class="docutils literal notranslate"><span class="pre">__win</span></code> or <code class="docutils literal notranslate"><span class="pre">__osx</span></code>,
+which are only present when the running platform is Linux, Windows, or MacOS, respectively.
+<code class="docutils literal notranslate"><span class="pre">__unix</span></code> is present in both Linux and MacOS. Note that this feature is <strong>only fully available
+on conda 4.10 or above</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>’s <a class="reference internal" href="conda_forge_yml.html#noarch-platforms"><span class="std std-ref">noarch_platforms</span></a> option.</p></li>
+<li><p><strong>conda-build 3.25.0 or above</strong> changing the build hash depending on virtual packages used.</p></li>
+</ol>
+<p>The idea is to generate different noarch packages for each OS needing different dependencies.
+Let’s say you have a pure Python package, perfectly eligible for <code class="docutils literal notranslate"><span class="pre">noarch:</span> <span class="pre">python</span></code>, but on Windows
+it requires <code class="docutils literal notranslate"><span class="pre">windows-only-dependency</span></code>. You might have something like:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">recipe/meta.yaml (original)</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">package</span>
+<span class="nt">source</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># ...</span>
+<span class="nt">build</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="nt">requirements</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># ...</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">windows-only-dependency</span><span class="w">  </span><span class="c1"># [win]</span>
+</pre></div>
+</div>
+</div>
+<p>Being non-noarch, this means that the build matrix will include at least 12 outputs: three platforms,
+times four Python versions. This gets worse with <code class="docutils literal notranslate"><span class="pre">arm64</span></code>, <code class="docutils literal notranslate"><span class="pre">aarch64</span></code> and <code class="docutils literal notranslate"><span class="pre">ppc64le</span></code> in the mix.
+We can get it down to two outputs if replace it with this other approach!</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">recipe/meta.yaml (modified)</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">package</span>
+<span class="nt">source</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># ...</span>
+<span class="nt">build</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">noarch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
+<span class="nt">requirements</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python &gt;=3.7</span>
+<span class="w">    </span><span class="c1"># ...</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python &gt;=3.7</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__unix</span><span class="w">  </span><span class="c1"># [unix]</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__win</span><span class="w">   </span><span class="c1"># [win]</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">windows-only-dependency</span><span class="w">  </span><span class="c1"># [win]</span>
+</pre></div>
+</div>
+</div>
+<p>Do not forget to specify the platform virtual packages with their selectors!
+Otherwise, the solver will not be able to choose the variants correctly.</p>
+<p>By default, conda-forge will only build <code class="docutils literal notranslate"><span class="pre">noarch</span></code> packages on a <code class="docutils literal notranslate"><span class="pre">linux_64</span></code> CI runner, so
+only the <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">[unix]</span></code> selectors would be true. However, we can change this behaviour using
+the <code class="docutils literal notranslate"><span class="pre">noarch_platforms</span></code> option in <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">conda-forge.yml</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">noarch_platforms</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux_64</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">win_64</span>
+</pre></div>
+</div>
+</div>
+<p>This will provide two runners per package! Perfect! All these changes require a
+feedstock rerender to be applied. See <a class="reference internal" href="updating_pkgs.html#dev-update-rerender"><span class="std std-ref">Rerendering feedstocks</span></a>.</p>
+<p>If you need conditional dependencies on all three operating systems, this is how you do it:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">recipe/meta.yaml</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">package</span>
+<span class="nt">source</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># ...</span>
+<span class="nt">build</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">noarch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
+<span class="nt">requirements</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># ...</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__linux</span><span class="w">  </span><span class="c1"># [linux]</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__osx</span><span class="w">    </span><span class="c1"># [osx]</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__win</span><span class="w">    </span><span class="c1"># [win]</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux-only-dependency</span><span class="w">    </span><span class="c1"># [linux]</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">osx-only-dependency</span><span class="w">      </span><span class="c1"># [osx]</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">windows-only-dependency</span><span class="w">  </span><span class="c1"># [win]</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">conda-forge.yml</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">noarch_platforms</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux_64</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">osx_64</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">win_64</span>
+</pre></div>
+</div>
+</div>
+<p>Again, remember to rerender after adding / modifying these files so the changes are applied.</p>
+</section>
 </section>
 <section id="noarch-generic">
 <h3>Noarch generic<a class="headerlink" href="#noarch-generic" title="Permalink to this heading">¶</a></h3>
@@ -1608,7 +1719,10 @@ in conda environments, and some operating system limits. See the <a class="refer
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#noarch-builds">Noarch builds</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#noarch-python">Noarch python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#noarch-python">Noarch python</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#noarch-packages-with-os-specific-dependencies">Noarch packages with OS-specific dependencies</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#noarch-generic">Noarch generic</a></li>
 </ul>
 </li>
@@ -1722,7 +1836,7 @@ in conda environments, and some operating system limits. See the <a class="refer
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.06.01 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.06.14 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -1732,7 +1846,7 @@ in conda environments, and some operating system limits. See the <a class="refer
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016-2023, conda-forge.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

@@ -1107,9 +1107,124 @@ In order to qualify as a noarch python package, all of the following criteria mu
   which builds on Linux `and` Windows, with ``build_number`` offsets to create a pair packages, like
   ``dataclasses``.
 
+.. hint::
+  
+  You can build platform-specific ``noarch`` packages to include runtime requirements depending on the target OS.
+  See mini-tutorial below.
+
 If an existing python package qualifies to be converted to a noarch package, you can request the required changes
 by opening a new issue and including ``@conda-forge-admin, please add noarch: python``.
 
+.. _os_specific_noarch:
+
+Noarch packages with OS-specific dependencies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It is possible to build ``noarch`` packages with runtime requirements that depend on the target OS
+(Linux, Windows, MacOS), regardless the architecture (amd64, ARM, PowerPC, etc). This approach
+relies on three concepts:
+
+1.  `Virtual packages <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html>`__. 
+    Prefixed with a double underscore, they are used by conda to represent system properties as
+    constraints for the solver at install-time. We will use ``__linux``, ``__win`` or ``__osx``,
+    which are only present when the running platform is Linux, Windows, or MacOS, respectively.
+    ``__unix`` is present in both Linux and MacOS. Note that this feature is **only fully available
+    on conda 4.10 or above**.
+2.  ``conda-forge.yml``'s :ref:`noarch_platforms` option.
+3.  **conda-build 3.25.0 or above** changing the build hash depending on virtual packages used.
+
+The idea is to generate different noarch packages for each OS needing different dependencies.
+Let's say you have a pure Python package, perfectly eligible for ``noarch: python``, but on Windows
+it requires ``windows-only-dependency``. You might have something like:
+
+.. code-block:: yaml
+  :caption: recipe/meta.yaml (original)
+
+  name: package
+  source:
+    # ...
+  build:
+    number: 0
+  requirements:
+    # ...
+    run:
+      - python
+      - numpy
+      - windows-only-dependency  # [win]
+
+Being non-noarch, this means that the build matrix will include at least 12 outputs: three platforms,
+times four Python versions. This gets worse with ``arm64``, ``aarch64`` and ``ppc64le`` in the mix.
+We can get it down to two outputs if replace it with this other approach!
+
+.. code-block:: yaml
+  :caption: recipe/meta.yaml (modified)
+
+  name: package
+  source:
+    # ...
+  build:
+    number: 0
+    noarch: python
+  requirements:
+    host:
+      - python >=3.7
+      # ...
+    run:
+      - python >=3.7
+      - numpy
+      - __unix  # [unix]
+      - __win   # [win]
+      - windows-only-dependency  # [win]
+
+Do not forget to specify the platform virtual packages with their selectors!
+Otherwise, the solver will not be able to choose the variants correctly.
+
+By default, conda-forge will only build ``noarch`` packages on a ``linux_64`` CI runner, so
+only the ``# [unix]`` selectors would be true. However, we can change this behaviour using
+the ``noarch_platforms`` option in ``conda-forge.yml``:
+
+.. code-block:: yaml
+  :caption: conda-forge.yml
+
+  noarch_platforms:
+    - linux_64
+    - win_64
+
+This will provide two runners per package! Perfect! All these changes require a
+feedstock rerender to be applied. See :ref:`dev_update_rerender`.
+
+If you need conditional dependencies on all three operating systems, this is how you do it:
+
+.. code-block:: yaml+jinja
+  :caption: recipe/meta.yaml
+
+  name: package
+  source:
+    # ...
+  build:
+    number: 0
+    noarch: python
+  requirements:
+    # ...
+    run:
+      - python
+      - numpy
+      - __linux  # [linux]
+      - __osx    # [osx]
+      - __win    # [win]
+      - linux-only-dependency    # [linux]
+      - osx-only-dependency      # [osx]
+      - windows-only-dependency  # [win]
+
+.. code-block:: yaml
+  :caption: conda-forge.yml
+
+  noarch_platforms:
+    - linux_64
+    - osx_64
+    - win_64
+
+Again, remember to rerender after adding / modifying these files so the changes are applied.
 
 Noarch generic
 --------------
