@@ -16,8 +16,4 @@ dependencies:
   - python-dateutil
   - pip
   - python-rapidjson
-  # uncomment to restore search
-  # - elm
-  # - nodejs
-  #  - pip: 
-  #    - sphinxcontrib-newsfeed # this helps when using vscode locally
+  - termcolor
