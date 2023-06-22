@@ -14,13 +14,7 @@ popd
 
 python .ci_scripts/generate_html.py
 
-# rebuild elm
-# uncomment to restore search
-# npm install uglify-js --global
-# ./elm-compile.xsh
-
-# build docs into docs/; preserve old README file
-mv docs/README docs-README
+# build docs into docs
 rm -rf docs/
 
 python .ci_scripts/generate_cfep_index.py
@@ -30,9 +24,14 @@ pushd src
 # -W --keep-going: list all warnings but fail build in case there are any
 # -n: check validity of all links
 make html SPHINXOPTS="-W --keep-going -n"
-make linkcheck
+linkcheck_failed=0
+make linkcheck > /dev/null || linkcheck_failed=1
+python ../.ci_scripts/display_linkcheck.py _build/linkcheck/output.json
+
+if [[ "${GHREF}" != "refs/heads/main" ]]; then
+  test "$linkcheck_failed" -eq 0
+fi
+
 mv _build/html ../docs
 rm -rf _build
 popd
-
-mv docs-README docs/README

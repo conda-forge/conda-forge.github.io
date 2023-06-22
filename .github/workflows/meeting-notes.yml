@@ -1,0 +1,46 @@
+name: Create PR for meeting notes
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: |
+          Date of the meeting notes. MUST be understood by `date --date`.
+          Common examples are "now", "tomorrow", "next Wednesday", "2023-03-01"...
+          See https://www.gnu.org/software/coreutils/manual/html_node/Date-input-formats.html for full details.
+        required: false
+        default: "now"
+        type: string
+  pull_request:
+    types:
+      - labeled
+
+permissions:
+  contents: write
+  pull-requests: write
+# You need to enable 'Allow GitHub Actions to create and approve pull requests'
+# in your Actions Settings too
+
+jobs:
+  create:
+    if: github.event_name != 'pull_request'
+    uses: Quansight-Labs/hackmd-meeting-notes-action/.github/workflows/create-meeting-notes-pr.yml@main
+    with:
+      date: ${{ inputs.date || 'now' }}
+      template_path: misc/DEV_MEETING_TEMPLATE.md
+      output_path: src/orga/minutes/%Y-%m-%d.md
+      hackmd_team: conda-forge
+      force_push: true
+      pr_body: |
+        New meeting notes available at ${env.hackmd_doc_url}.
+
+        Once done with the meeting, sync the note back to the repository by adding the `sync-hackmd-notes` label.
+    secrets:
+      HACKMD_TOKEN: ${{ secrets.HACKMD_TOKEN }}
+  sync:
+    if: github.event.label.name == 'sync-hackmd-notes'
+    uses: Quansight-Labs/hackmd-meeting-notes-action/.github/workflows/sync-meeting-notes-pr.yml@main
+    with:
+      pr_number: ${{ github.event.number }}
+    secrets:
+      HACKMD_TOKEN: ${{ secrets.HACKMD_TOKEN }}

@@ -9,25 +9,21 @@ A brief introduction
 What is conda-forge?
 --------------------
 
-``conda-forge`` is a community effort that provides conda packages for a wide range of software.
+Conda-forge is a community effort that provides conda packages for a wide range of software.
 
-**Missing a package that you would love to install with conda?** - Chances are we have already packaged it for you! You can `search <https://anaconda.org/>`__ for packages online as well as keep an eye out for packages from our ``conda-forge`` organization.
+**Missing a package that you would love to install with conda?** - Chances are we have already packaged it for you!
 
-We value all kinds of contributions — not just code. A few recommended ways to start contributing to ``conda-forge`` are:
+You can `search <https://anaconda.org/>`__ for packages online. Look out for packages provided by our ``conda-forge`` organization.
 
- - `Contribute new packages <https://conda-forge.org/docs/maintainer/adding_pkgs.html>`_
- - Help update and `maintain packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-pkgs>`_
- - Suggest or implement improvements for our `infrastructure <https://conda-forge.org/docs/maintainer/infrastructure.html#infrastructure>`_
- - Help `improve the documentation <https://conda-forge.org/docs/user/contributing.html#improve-docs>`_.
- 
- For a detailed overview please refer to  :ref:`becoming_involved`.
+**Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack! Please refer to :ref:`becoming_involved`, for an overview on how to start contributing.
+
 
 Why conda-forge?
 ----------------
 
-The conda team, from `Anaconda, Inc. <https://anaconda.org/>`__, packages a multitude of packages and provides them to all users free of charge in their ``default`` channel.
+The packaging team from `Anaconda, Inc. <https://anaconda.org/>`__, packages a multitude of packages and provides them to all users free of charge in their ``defaults`` channel.
 
-But what if a package you are looking for is not in the default channel?
+But what if a package you are looking for is not in the ``defaults`` channel?
 In the past users only had the option to create an `Anaconda Cloud <https://anaconda.org/>`__ account and create their own channel.
 
 This came with a list of disadvantages:
@@ -45,7 +41,6 @@ conda-forge is a community effort that tackles these issues:
  - By default, we build packages for macOS, Linux AMD64 and Windows AMD64.
  - Many packages are updated by multiple maintainers with an easy option to become a maintainer.
  - An active core developer team is trying to also maintain abandoned packages.
-
 
 How can I install packages from conda-forge?
 --------------------------------------------
