@@ -93,3 +93,5 @@ Some basic writing guidelines should be kept in mind before you start contributi
 7. Use headings and bullet points, which makes it easier to read.
 8. Avoid ambiguous titles. The title should include a clear description of the page's subject.
 9. Check your spellings and grammar.
+10. conda-forge should always be spelt in lowercase, hyphenated, and without backticks.
+  It should only be backticked when used as an identifier (e.g. the Anaconda.org channel, the Github organization, etc).
