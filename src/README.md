@@ -11,5 +11,5 @@ To build the docs locally, follow the steps mentioned below:
 
 Documentation update PRs should only change the files in ``src``. 
 
-Once the PR is merged to ``master``, you can find the auto-generated html files in ``docs`` directory.
+Once the PR is merged to ``main``, you can find the auto-generated html files in ``docs`` directory.
 

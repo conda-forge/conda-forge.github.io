@@ -26,12 +26,19 @@ If you have questions or need help, please check out our documentation for a [li
 4.  Make and commit your changes.
 5.  Submit a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) to the main repository proposing your changes.
 
-**Note: "All changes must be made in the `/src` folder and NOT in the `/docs` folder. Html files in the ./docs folder are auto generated "**
-
 ## conda-forge dev meetings
 
-We hold biweekly meetings every second Wednesday from 17:00-18:00 (UTC). Feel free to stop by with the help of this [Google Calendar invite](https://calendar.google.com/calendar/u/0/r/eventedit/copy/Z2lraDk2a205cGUxdDkxYmNybXQxMGIxMGtfMjAxOTA3MjRUMTcwMDAwWiBzY29wYXR6QG0/c2hsb2thcHJpbmNlc3MxMDFAZ21haWwuY29t?scp=ALL&sf=true).
+We hold biweekly meetings every second Wednesday from 17:00-18:00 (UTC). Feel free to stop by!
+Up-to-date invites are always available in the [conda.org community calendar](https://conda.org/community/calendar). Look for the `[conda-forge] core meeting` events!
 
 Our [meeting notes](https://conda-forge.org/docs/orga/minutes/00_intro.html) record important points discussed during the meetings and serve as a record for upcoming meetings. We make use of [HackMd](https://hackmd.io/) and a [template](https://github.com/conda-forge/conda-forge.github.io/blob/main/misc/DEV_MEETING_TEMPLATE.md) to create the meeting notes.
 
+We use a Github Actions [workflow][gha-workflow] to create an automated PR with the meeting notes
+template for each session, which is automatically published to our HackMD team account. During the
+meeting, attendees will edit the HackMD document. After the meeting, the document is saved and the
+PR is synced with the changes by adding the `sync-hackmd-notes` label. Once satisfied, the PR is
+merged and the website will be updated with the new meeting notes.
+
 We encourage contributors to join the meetings and learn more about and from the community.
+
+[gha-workflow]: https://github.com/conda-forge/conda-forge.github.io/actions/workflows/meeting-notes.yml

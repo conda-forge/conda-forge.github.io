@@ -91,9 +91,13 @@ Renaming Packages
 Sometimes, packages are misnamed.
 To correct the name of the package, please submit a PR into `staged-recipes <https://github.com/conda-forge/staged-recipes>`__ with the correct name.
 During the review process, please make certain to note that the package is renamed and contact a member of conda-forge/core to remove the old feedstock (and potentially package, if needed).
+
 Occasionally, the .gitmodules file in the `feedstocks <https://github.com/conda-forge/feedstocks/blob/master/.gitmodules>`__ needs to be updated to remove the old feedstock.
 It's not entirely clear what those circumstances are.
 See `conda-forge.github.io#1070 <https://github.com/conda-forge/conda-forge.github.io/issues/1070>`__.
+
+If an existing feedstock has already created a package of the same name,
+then you may need to add the new feedstock to the `feedstock-outputs <https://github.com/conda-forge/feedstock-outputs>`__ map.
 
 .. _fix_broken_packages:
 
@@ -149,19 +153,94 @@ As it comes up, each group should be able to define their own policy on how long
 Python
 ------
 For the Python language, conda-forge aims to keep package builds active and available for the current version and at least two preceding minor versions.
-Whenever Python 4.0 comes out we'll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously. 
+Whenever Python 4.0 comes out we'll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously.
 Fortunately, we can punt on that for now.
 The question of when to decide to drop an older language version remains.
 The guidance that we can provide here is two fold:
 
-1. We will move with the community. 
+1. We will move with the community.
    When our core libraries stop supporting an old version, so too will conda forge.
    The (nonexhaustive) list of core libraries that we consider when making the decision to drop an older version are:
+
    * matplotlib
    * numpy
    * scipy
    * pypy
+
 2. The core team can decide to keep an old version around temporarily until some specific criteria is met.
    For example, we're holding off on turning off py36 until pypy comes out with pypy3.7.
 3. If there are lots of people in the community relying on older versions, core team can decide to keep an old version around.
    For example, we held off turning off py27 even after numpy, scipy dropped support as there were many in the community interested in keeping support until the end of life of that version.
+
+.. _reviewer_guidelines:
+
+Reviewing recipes
+=================
+
+To add new packages to conda-forge, users can submit a PR to ``staged-recipes`` (see :ref:`dev_contribute_pkgs` for more details),
+where it will undergo a series of automated checks and a code review.
+Any conda-forge member can perform a code review, but the final merge can only be done by the ``staged-recipes`` or ``core`` teams.
+The following sections suggest guidelines on how to perform a successful code review.
+We distinguish between "Required" and "Recommended" as follows:
+
+- Required: These guidelines are very important and a requisite for PR acceptance. Exceptions are rare and usually require  ``core`` approval.
+- Recommended: These are considered "nice to have" features. Ideally, all recipes should abide by them, but exceptions are tolerated as long as justifiable reasons are provided.
+
+Generalities
+------------
+
+Required:
+
+#. All interactions in the review adhere to our :ref:`code_of_conduct`.
+#. ``conda-forge-linter`` `checks <https://github.com/conda-forge/conda-smithy/blob/main/conda_smithy/lint_recipe.py>`__ pass successfully.
+   Sometimes the linter will also suggest modifications considered optional (hints); even if recommended, these are not required to accept the submission.
+#. The CI checks pass successfully in the required platforms. Exceptions:
+   - ``noarch: python`` can fail in platforms other than Linux (e.g. missing dependency). For non-noarch packages, the failing platform should be skipped via ``skip: true  # [<platform selector>]``
+   - CI times out or runs out of storage because it tries to build all Python versions in the same job. As long as one version passes, that's ok, since they will run individually in the resulting feedstock.
+#. The submission fulfills the `pull request template checklist <https://github.com/conda-forge/staged-recipes/blob/main/.github/pull_request_template.md>`__.
+#. The license has been correctly identified and allows redistribution.
+#. The source should not contain vendored code. If it does:
+   - Package the vendored project separately and specify the needed dependency in the ``requirements`` section. Preferred if the vendored code is needed at runtime.
+   - Allow the vendored code, but make sure the license files are included in the ``about.license`` field. Usually ok if it's only a build-time dependency (e.g. headers-only library)
+
+Recommended:
+
+#. Source should be obtained from a URL that provides a stable tarball (same SHA over time).
+   Git or other SVC repositories should only be used as a last resort.
+#. Host requirements contained in the :ref:`conda-forge pinnings <pinned_deps>` should be *name-only*; i.e. they do not specify a separate version.
+#. Runtime requirements are not pinned too strictly without justification.
+   Thanks to repodata patches, we can afford to be optimistic about lower or upper bounds instead of single-version pins: ``>=1.4.2,<1.5`` is better than ``==1.4.2``.
+#. The package should place its files under standard locations (e.g. executables under ``$PREFIX/bin``), unless justification is provided.
+
+Python-specific details
+-----------------------
+
+Required:
+
+#. ``noarch: python`` packages fulfill the :ref:`required criteria <noarch>` to be considered as such.
+
+Recommended:
+
+#. The package does not accidentally include a ``tests`` (also ``test``, ``_tests``, or similar) top-level package.
+   The list of files is usually printed by ``pip install`` after the ``adding license file`` message.
+   If this happens, upstream should modify their ``setuptools.find_packages()`` usage accordingly.
+   Alternatively, a patch can be applied. See `example <https://github.com/conda-forge/staged-recipes/pull/19166/commits/0284fc6da273031a4f93a1fea4533822cd4b385d>`__.
+#. The modules checked by ``test.imports`` are not empty (this can happen with placeholder ``__init__.py`` files in top-level packages).
+#. The versions reported by ``pip list`` and ``conda build`` logs match.
+#. ``pip check`` passes. See :ref:`pip_check` for more details.
+#. If a project can be considered ``noarch`` (see :ref:`criteria <noarch>`), it should be packaged as such.
+
+Compiled objects
+----------------
+
+Required:
+
+#. The source does not include compiled files.
+   In principle, all compiled objects need to be generated in the CI, from source.
+   Exceptions to this rule (e.g. binary repackaging) need to be approved explicitly.
+
+Recommended:
+
+#. SONAMEs follow naming recommendations given by upstream.
+#. If ABI compatibility is important for the package, ``run_exports`` are set accordingly.
+   See :ref:`pinned_deps` and the `conda-build docs <https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#export-runtime-requirements>`__ for more information.

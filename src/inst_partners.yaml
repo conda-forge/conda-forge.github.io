@@ -147,3 +147,12 @@ Oracle:
     - https://www.oracle.com/cloud/
   contribution type:
     - infrastructure
+
+DigitalOcean:
+  Description: Provides support conda-forge metadata services.
+  Logo URL:
+    - https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/SVG/DO_Logo_horizontal_blue.svg
+  Site URL:
+    - https://www.digitalocean.com/
+  contribution type:
+    - infrastructure
