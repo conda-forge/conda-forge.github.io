@@ -7,7 +7,7 @@ Transferring to conda-forge
 This document intends to layout some guidelines on the transfer of
 `conda-recipes <https://github.com/conda/conda-recipes>`__ and
 `anaconda-recipes <https://github.com/ContinuumIO/anaconda-recipes>`__
-to ``conda-forge``. These aren't hard and fast rules, instead are open to reasonable
+to conda-forge. These aren't hard and fast rules, instead are open to reasonable
 interpretation and reviewer's judgement.
 
 It is anticipated that almost all recipes from those repos shall be
@@ -77,12 +77,12 @@ recipes.
 Intended Usage
 ==============
 
-Maintainers' time and CI resources are what enable ``conda-forge``. They are just as scarce as valuable. ``conda-forge`` has enough capacity to support releasing packages, but not developing them.
+Maintainers' time and CI resources are what enable conda-forge. They are just as scarce as valuable. conda-forge has enough capacity to support releasing packages, but not developing them.
 
-Publishing a package to ``conda-forge`` signals it is suitable for users not involved with development. However, publishing does not always happen error-free. Multiple commits are acceptable when debugging issues with the release process itself.
+Publishing a package to conda-forge signals it is suitable for users not involved with development. However, publishing does not always happen error-free. Multiple commits are acceptable when debugging issues with the release process itself.
 
 Fortunately, there are options for optimizing the development of a package.
-  - `conda-smithy <https://github.com/conda-forge/conda-smithy>`__ is a tool used by ``conda-forge`` itself to manage feedstocks. conda-smithy can be used to create an internal development feedstock that is separate from ``conda-forge``.
+  - `conda-smithy <https://github.com/conda-forge/conda-smithy>`__ is a tool used by conda-forge itself to manage feedstocks. conda-smithy can be used to create an internal development feedstock that is separate from conda-forge.
   - `ci-helpers <https://github.com/astropy/ci-helpers>`__ is a set of scripts that drive various CI services using environment variables.
 
 Renaming Packages
@@ -138,7 +138,7 @@ and thus we prefer repo data patches over labeling things as ``broken``.
 Becoming a maintainer
 =====================
 
-``conda-forge`` is a community project and it can therefore happen that feedstocks become temporarily abandoned.
+conda-forge is a community project and it can therefore happen that feedstocks become temporarily abandoned.
 You can join the maintainer team of a feedstock by adding your github-id to the ``recipe-maintainers`` section in the recipe's ``meta.yaml``.
 Please refer to :ref:`maint_updating_maintainers` for detailed instructions.
 
@@ -146,7 +146,7 @@ Please refer to :ref:`maint_updating_maintainers` for detailed instructions.
 Language versions
 =================
 
-``conda-forge`` contains packages from a number of languages including Python and R, among many others.
+conda-forge contains packages from a number of languages including Python and R, among many others.
 Each of these language-specific packaging sub-ecosystems needs to keep cadence with the language itself, making it challenging to have a blanket policy for how long to keep older versions of the language around.
 As it comes up, each group should be able to define their own policy on how long to keep older versions of their language around.
 

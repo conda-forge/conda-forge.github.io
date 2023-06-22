@@ -6,10 +6,10 @@ Maintaining packages
 Important notes
 ===============
 
-Packages on ``conda-forge`` are immutable
+Packages on conda-forge are immutable
 -----------------------------------------
 
-As a matter of policy, we do not allow edits or the deletion of packages on ``conda-forge``. This
+As a matter of policy, we do not allow edits or the deletion of packages on conda-forge. This
 policy is very important as it increases the reliability and reproducibility of ``conda`` environments
 made with the ``conda-forge`` channel. Note that because of this policy, our upload scripts will refuse to
 upload packages which already exist on the ``conda-forge`` channel.
@@ -33,7 +33,7 @@ For updates, using a branch in the main repo is discouraged because,
    This means if you push a version update to a branch and then create a :term:`PR`, conda packages will be published to anaconda.org before the PR is merged.
 
 .. important::
-  For these reasons, maintainers are asked to fork the feedstock to their personal account, push to a branch in the fork and then open a PR to the ``conda-forge`` repo.
+  For these reasons, maintainers are asked to fork the feedstock to their personal account, push to a branch in the fork and then open a PR to the conda-forge repo.
 
 Pushing to regro-cf-autotick-bot branch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -42,7 +42,7 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
 
 #. Manually setting up git remotes:
 
-   - Clone the ``conda-forge`` feedstock repository
+   - Clone the conda-forge feedstock repository
    - Add the remote of the bot: ``git remote add regro-cf-autotick-bot git@github.com:regro-cf-autotick-bot/<package>-feedstock.git``
 
      .. important::
@@ -57,9 +57,9 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
    - If there are multiple remotes with this branch name, you need to first checkout the remote branch and then turn it into a local branch: ``git checkout regro-cf-autotick-bot/<branch> && git checkout -b <branch>``
    - Commit and push on that branch, if the remote was not correctly setup, use ``git push -u regro-cf-autotick-bot <branch>``.
 
-#. Using Github's `hub <https://github.com/github/hub>`_ tool (which ``conda-forge`` ships! ``conda install hub -c conda-forge``):
+#. Using Github's `hub <https://github.com/github/hub>`_ tool (which conda-forge ships! ``conda install hub -c conda-forge``):
 
-   - Clone the ``conda-forge`` feedstock repository
+   - Clone the conda-forge feedstock repository
    - Checkout the correct branch with remote: ``hub pr checkout 12`` where ``12`` is the ID of the PR.
    - Commit and push on this branch, the remote is automatically set up to push to regro-cf-autotick-bot's fork.
 
@@ -84,15 +84,15 @@ Here we assume that you would like to update the feedstock ``<feedstock>``. Feed
 
 #. Forking the feedstock
 
-   Before you can submit your first PR, you have to fork ``conda-forge``'s feedstock.
+   Before you can submit your first PR, you have to fork conda-forge's feedstock.
 
    - Navigate to https://github.com/conda-forge/<feedstock> in your favorite web browser and click the ``fork`` button.
    - You now have a clone of the feedstock in ``https://github.com/<your-github-id>/<feedstock>`` under your control.
    - Connect to the feedstock from your computer by using ``git clone https://github.com/<your-github-id>/<feedstock>``.
 
-#. Syncing your fork with ``conda-forge``'s feedstock
+#. Syncing your fork with conda-forge's feedstock
 
-   This step is only required if you have forked some time ago and your fork is missing commits from the feedstock at ``conda-forge``.
+   This step is only required if you have forked some time ago and your fork is missing commits from the feedstock at conda-forge.
 
    - Make sure you are on the main branch: ``git checkout main``
    - Register conda-forge's feedstock with ``git remote add upstream https://github.com/conda-forge/<feedstock>``
@@ -129,7 +129,7 @@ Please follow the following guidelines while updating recipes:
 Rerendering feedstocks
 ======================
 
-Rerendering is ``conda-forge``'s way to update the files common to all feedstocks (e.g. README, :term:`CI` configuration, pinned dependencies).
+Rerendering is conda-forge's way to update the files common to all feedstocks (e.g. README, :term:`CI` configuration, pinned dependencies).
 
 Rerendering can be done in two ways:
 
@@ -254,7 +254,7 @@ If this is the case, the following general guidelines should be followed:
 If instead the actual contents of the package are broken, the following steps will
 remove broken packages from the ``main`` channel:
 
-1. Locate the paths to broken files on `anaconda.org <https://anaconda.org>`__, by searching for the ``conda-forge`` package and switching to the files tab.
+1. Locate the paths to broken files on `anaconda.org <https://anaconda.org>`__, by searching for the conda-forge package and switching to the files tab.
 2. Fork `conda-forge/admin-requests <https://github.com/conda-forge/admin-requests>`__ and add a new text file in the ``broken`` directory.
 3. Add the broken files to the new text file, one path per line. See `broken/example.txt <https://github.com/conda-forge/admin-requests/blob/main/broken/example.txt>`__ for an example file.
 4. Open a new PR. Once merged, a bot will label all listed files as broken, thus effectively removing them from the channel.
@@ -263,7 +263,7 @@ remove broken packages from the ``main`` channel:
 Archiving feedstocks
 ====================
 
-If a package is no longer maintained ``conda-forge`` will *archive*
+If a package is no longer maintained conda-forge will *archive*
 the repository. An archived repository can no longer accept PRs and issues, which prevents people and ``regro-cf-autotick-bot`` from updating the
 package (an example would be to re-render the feedstock to support new Python versions). Note that this **does not** remove the existing packages, those will still be available.
 

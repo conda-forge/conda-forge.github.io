@@ -1,8 +1,8 @@
 Governance
 ==========
-This document outlines the policies and procedures that manage the ``conda-forge``
+This document outlines the policies and procedures that manage the conda-forge
 community. This document recognizes that, while packaging is deeply important
-to all of us, ``conda-forge`` is an all-volunteer organization. Members of the
+to all of us, conda-forge is an all-volunteer organization. Members of the
 core, any team, or external contributors choose to participate and may
 choose to leave at any time for any reason or for no reason. We deeply
 appreciate all good faith contributions.
@@ -11,15 +11,15 @@ appreciate all good faith contributions.
 
 Code of Conduct
 ---------------
-``conda-forge`` adheres to the
+conda-forge adheres to the
 `NumFOCUS Code of Conduct <https://www.numfocus.org/code-of-conduct>`_.
 
 Teams & Roles
 -------------
-Here are defined the primary teams participating in ``conda-forge`` activities.
+Here are defined the primary teams participating in conda-forge activities.
 
-* **core:** The core team is the governing body over the entire ``conda-forge``
-  organization. Members of the core team have full rights over all ``conda-forge``
+* **core:** The core team is the governing body over the entire conda-forge
+  organization. Members of the core team have full rights over all conda-forge
   repositories. Members of core are the face of the project, and are responsible
   for officially interfacing with external communities, organizations, non-profits,
   and companies. The core team may create new sub-teams, as appropriate.
@@ -32,7 +32,7 @@ Here are defined the primary teams participating in ``conda-forge`` activities.
 * **external contributors:** This group encompasses all others who are not on
   core, part of staged-recipes, or maintainers. This includes first-time
   contributors, collaborators, and funders. They have no special rights within
-  the ``conda-forge`` organization itself.
+  the conda-forge organization itself.
 * **emeritus-core:** Core members that are inactive (commits, GitHub comments/issues/reviews,
   dev meetings and voting on polls) in the past six months will be asked if they want to become emeritus-core
   developers. Any core member can also request to become emeritus if they wish to do so
@@ -63,12 +63,12 @@ Sub-teams have a charter that is either *dynamic* or *static*.
   may require a static charter.
 
 All sub-teams must adhere to the governance, policies, and procedures of
-``conda-forge`` at all times.
+conda-forge at all times.
 
 Voting
 ------
 This section presents descriptions and criteria for voting items in the
-``conda-forge`` community. The core team is the only team with voting rights.
+conda-forge community. The core team is the only team with voting rights.
 Members of core may also call a vote on any topic. The restrictions on
 calling a vote are as follows:
 
@@ -199,7 +199,7 @@ To call for a standard vote, here is a template PR comment:
 ----
 
 :CFEP Approval: When ready, the proposer may call for a vote on an
-    existing ``conda-forge`` enhancement proposal (CFEP). This requires a
+    existing conda-forge enhancement proposal (CFEP). This requires a
     super-majority (60%) to pass so that the decision to accept the
     CFEP is unequivocable and we have ensured that consensus has been
     reached.
@@ -222,7 +222,7 @@ To call for a standard vote, here is a template PR comment:
 :Nominate new member of core: The proposer must provide
     a sufficient justification as to why the nominee should be welcomed
     into core. Prior service to the community, including but not limited to:
-    serving as a staged-recipes reviewer, working on critical ``conda-forge``
+    serving as a staged-recipes reviewer, working on critical conda-forge
     infrastructure, and helping to bridge disparate communities are an
     important part of the nomination process.
 
@@ -251,7 +251,7 @@ To call for a standard vote, here is a template PR comment:
 ----
 
 :Lock an Issue, Pull Request, Thread: Occasionally, discussions become
-    toxic and antithetical to the goal of fostering the ``conda-forge``
+    toxic and antithetical to the goal of fostering the conda-forge
     community. Members of core have the right to lock the thread in an
     "ask for forgiveness and not for permission" way so bad situations
     are handled quickly. The lock must be justified in the thread itself
@@ -265,7 +265,7 @@ To call for a standard vote, here is a template PR comment:
 
 :Block a Contributor: In extreme cases, such as repeated harassment,
     it may become necessary to block a user completely from participating
-    in all ``conda-forge`` activities. This should not be done lightly,
+    in all conda-forge activities. This should not be done lightly,
     but it may be necessary to do so expediently. Shorter voting periods
     (such as 24 hrs) are to be expected. The proposer of the block
     must provide ample justification as to why this is needed.

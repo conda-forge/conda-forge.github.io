@@ -9,13 +9,13 @@ Repositories
 Staging area for recipes
 ------------------------
 
-`conda-forge/staged-recipes <https://github.com/conda-forge/staged-recipes>`__ is the entry point for new packages to join the ``conda-forge`` package collection.
+`conda-forge/staged-recipes <https://github.com/conda-forge/staged-recipes>`__ is the entry point for new packages to join the conda-forge package collection.
 You can find the detailed guide for submitting new package recipes in :ref:`creating_recipes`.
 
 Smithy
 ------
 
-Smithy contains maintenance code for ``conda-forge``, which is used by the ``conda-smithy`` command line tool and the :ref:`dev_admservice`. Smithy lives in the repository `conda-forge/conda-smithy <https://github.com/conda-forge/conda-smithy>`_.
+Smithy contains maintenance code for conda-forge, which is used by the ``conda-smithy`` command line tool and the :ref:`dev_admservice`. Smithy lives in the repository `conda-forge/conda-smithy <https://github.com/conda-forge/conda-smithy>`_.
 
 ``conda-forge/conda-smithy`` is the right repository to report bugs for
 
@@ -25,7 +25,7 @@ Smithy contains maintenance code for ``conda-forge``, which is used by the ``con
 
 ``conda-smithy`` also contains the command line tool that you should use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
 
-Smithy can be used beyond ``conda-forge``'s purposes. For example, it can be used to `set up self-hosted Azure agents <azure-config>` for non-``conda-forge`` infrastructures.
+Smithy can be used beyond conda-forge's purposes. For example, it can be used to `set up self-hosted Azure agents <azure-config>` for non-conda-forge infrastructures.
 (You could also consider using `Azure virtual machine scale set agents <https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops>`_,
 which could be less expensive to run than permanently active agents.)
 
@@ -33,7 +33,7 @@ which could be less expensive to run than permanently active agents.)
 Web services
 ------------
 
-The Heroku app providing the ``conda-forge`` web services lives in `conda-forge/conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`__.
+The Heroku app providing the conda-forge web services lives in `conda-forge/conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`__.
 Please note that the code logic provided by the app is in the ``Smithy`` repository.
 
 Bugs or suggestions regarding the service functionality should therefore be opened in ``conda-forge/conda-smithy``'s `bug tracker <https://github.com/conda-forge/conda-smithy/issues>`__.
@@ -43,7 +43,7 @@ conda-forge pinning
 
 Package-wide dependency pins are defined in `conda_build_config.yaml <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml>`__ in the `conda-forge/conda-forge-pinning-feedstock <https://github.com/conda-forge/conda-forge-pinning-feedstock>`_.
 
-For more information on ``conda-forge`` wide package pins, please refer to :ref:`globally_pinned_packages`.
+For more information on conda-forge wide package pins, please refer to :ref:`globally_pinned_packages`.
 
 Please open a :term:`PR` and/or an issue there, if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to :ref:`update_pins`.
 
@@ -63,7 +63,7 @@ If you found any typo error, unclear explanations or new topics that can be cove
 Admin web services
 ==================
 
-``conda-forge`` is running a webservice on Heroku called `conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
+conda-forge is running a webservice on Heroku called `conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
 
 The following services are run by default on a feedstock:
 
@@ -117,14 +117,14 @@ all of the CI builds to restart.
 ------------------------------------
 
 Entering this command in the PR of a feedstock or staged-recipes will have the admin bot @-mention the team
-associated with the repo. This command can be useful for people who are not yet members of ``conda-forge`` and
+associated with the repo. This command can be useful for people who are not yet members of conda-forge and
 so cannot @-mention the ``staged-recipes`` team for PR reviews.
 
 @conda-forge-admin, please ping conda-forge/<team>
 --------------------------------------------------
 
 Entering this command in the PR of a feedstock or staged-recipes will have the admin bot @-mention the respective team.
-This command can be useful for people who are not yet members of ``conda-forge`` and
+This command can be useful for people who are not yet members of conda-forge and
 so cannot @-mention someone due to the general GitHub limitations.
 
 @conda-forge-admin, please rerun bot
@@ -169,7 +169,7 @@ changes. The rest of the contents will be added in a subsequent commit after a f
 CI build services
 =================
 
-Here we describe common issues with the CI Services that ``conda-forge`` builds.
+Here we describe common issues with the CI Services that conda-forge builds.
 
 Azure Pipelines
 ---------------
@@ -270,8 +270,8 @@ To skip a CI build for a given commit, put ``[ci skip] ***NO_CI***`` in the comm
 Third-party Use of Our CI Services
 ----------------------------------
 
-Due to its stature in the open-source community, ``conda-forge`` has enhanced access to certain CI services. This access is a community
-resource entrusted to ``conda-forge`` for use in building packages. We thus cannot support third-party or "off-label" CI jobs in our
+Due to its stature in the open-source community, conda-forge has enhanced access to certain CI services. This access is a community
+resource entrusted to conda-forge for use in building packages. We thus cannot support third-party or "off-label" CI jobs in our
 feedstocks on any of our CI services. If we find such use, we will politely ask the maintainers to rectify the situation. We may
 take more serious actions, including archiving feedstocks or removing maintainers from the organization, if the situation cannot be rectified.
 
@@ -279,7 +279,7 @@ take more serious actions, including archiving feedstocks or removing maintainer
 Compilers and Runtimes
 ======================
 
-``conda-forge`` builds and maintains its own set of compilers for various languages
+conda-forge builds and maintains its own set of compilers for various languages
 and/or systems (e.g., ``C``, ``FORTRAN``, ``C++``, ``CUDA``, etc.). These are used
 in all of our CI builds to build both core dependencies (e.g., ``Python``) and maintainer-contributed
 packages. While we do not have any formal policies or promises of support for these
@@ -343,7 +343,7 @@ works as follows.
    and some information about the package it is trying to upload.
 3. The webservices server validates the secret token, the integrity of the package, and
    that the package is allowed for the given feedstock.
-4. If all of the validation passes, the package is then copied to the ``conda-forge``
+4. If all of the validation passes, the package is then copied to the conda-forge
    channel.
 
 We attempt to report errors in this process to users via comments on commits/issues in the feedstocks.

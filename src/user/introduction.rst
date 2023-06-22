@@ -9,11 +9,11 @@ A brief introduction
 What is conda-forge?
 --------------------
 
-``conda-forge`` is a community effort that provides conda packages for a wide range of software.
+conda-forge is a community effort that provides conda packages for a wide range of software.
 
 **Missing a package that you would love to install with conda?** - Chances are we have already packaged it for you!
 
-You can `search <https://anaconda.org/>`__ for packages online. Look out for packages provided by our ``conda-forge`` organization.
+You can `search <https://anaconda.org/>`__ for packages online. Look out for packages provided by our conda-forge organization.
 
 **Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack! Please refer to :ref:`becoming_involved`, for an overview on how to start contributing.
 
@@ -33,9 +33,9 @@ This came with a list of disadvantages:
  - Packages were only available for architectures the developer was interested in or had access to.
  - Channels were often abandoned, updating required locating new channels.
 
-``conda-forge`` is a community effort that tackles these issues:
+conda-forge is a community effort that tackles these issues:
 
- - All packages are shared in a single channel named ``conda-forge``.
+ - All packages are shared in a single channel named conda-forge.
  - Care is taken that all packages are up-to-date.
  - Common standards ensure that all packages have compatible versions.
  - By default, we build packages for macOS, Linux AMD64 and Windows AMD64.
@@ -45,7 +45,7 @@ This came with a list of disadvantages:
 How can I install packages from conda-forge?
 --------------------------------------------
 
-Using ``conda-forge`` is easy!
+Using conda-forge is easy!
 
  - Make sure you have ``conda >=4.9``.
 
@@ -54,7 +54,7 @@ Using ``conda-forge`` is easy!
   conda --version
   conda update conda
 
- - Add ``conda-forge`` as the highest priority channel.
+ - Add conda-forge as the highest priority channel.
 
  .. code-block:: bash
 
@@ -66,7 +66,7 @@ Using ``conda-forge`` is easy!
 
   conda config --set channel_priority strict
 
-From now on using ``conda install <package-name>`` will also find packages in our ``conda-forge`` channels.
+From now on using ``conda install <package-name>`` will also find packages in our conda-forge channels.
 
 .. note::
 
@@ -78,13 +78,13 @@ From now on using ``conda install <package-name>`` will also find packages in ou
 
 .. note::
 
-  Please be aware that the order of your conda package channels is important, especially when you combine ``conda-forge`` with other channels, e.g. ``bioconda``.
+  Please be aware that the order of your conda package channels is important, especially when you combine conda-forge with other channels, e.g. ``bioconda``.
 
 .. note::
 
   `Miniforge <https://github.com/conda-forge/miniforge>`__ is a community
   effort to provide Miniconda-like installers, with the added feature that
-  ``conda-forge`` is the default channel.
+  conda-forge is the default channel.
   For certain platforms (such as ARMv8 64-bit, formally known as `aarch64`)
   Anaconda, Inc. does not provide any Miniconda installers, however Miniforge
   does.
@@ -97,14 +97,14 @@ Can I contribute packages to conda-forge?
 -----------------------------------------
 
 Anyone can contribute packages to the ``conda-forge`` channel.
-You don't have to be the upstream maintainer of a package in order to contribute it to ``conda-forge``.
+You don't have to be the upstream maintainer of a package in order to contribute it to conda-forge.
 To learn how to contribute your first package read `the staging process <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-staging-process>`_.
 
 
 How can I give credit to conda-forge?
 -----------------------------------------
 
-If you'd like to credit ``conda-forge`` in your work, please cite our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_. This citation is
+If you'd like to credit conda-forge in your work, please cite our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_. This citation is
 
 ::
 
@@ -140,4 +140,4 @@ Display conda-forge packages in Anaconda Navigator
 #. Press the **Enter key** on your keyboard.
 #. Click the **Update channels** button.
 
-From now on, whenever the **package filter** is set to **All** on the Environments tab, all ``conda-forge`` packages will be displayed.
+From now on, whenever the **package filter** is set to **All** on the Environments tab, all conda-forge packages will be displayed.

@@ -8,7 +8,7 @@ Security and Systems Sub-Team
 Role
 ----
 The purpose of the security and systems sub-team is to secure and maintain appropriate access
-to the credentials and services/systems used by ``conda-forge``. This infrastructure
+to the credentials and services/systems used by conda-forge. This infrastructure
 includes all bot accounts, all service provider accounts, and all keys, API or otherwise,
 used for various tasks. This team is also charged with provisioning new members of ``core``
 with access to the organization.
@@ -22,12 +22,12 @@ Responsibility
 The core responsibilities of this team are as follows:
 
 - Maintain secure access to the credentials to all bot accounts.
-- Maintain secure access to all keys, API or otherwise, used by ``conda-forge``.
-- Maintain secure access to all service provider accounts owned by ``conda-forge``.
+- Maintain secure access to all keys, API or otherwise, used by conda-forge.
+- Maintain secure access to all service provider accounts owned by conda-forge.
 - Maintain the infrastructure for ``CFEP-13``.
-- Maintain automated ways to recover and reprovision ``conda-forge`` systems.
+- Maintain automated ways to recover and reprovision conda-forge systems.
 - Perform ongoing security maintenance tasks.
-- Provision new members of `core` with access to all ``conda-forge`` systems, credentials
+- Provision new members of `core` with access to all conda-forge systems, credentials
   and keys.
 
 This team will operate via the following rules:
@@ -35,7 +35,7 @@ This team will operate via the following rules:
 - Only members of ``core`` can be on this sub-team.
 - This sub-team will report its activity to core at all ``core`` meetings.
 - This sub-team will consult with core at ``core`` meetings regarding all planned activity.
-- This sub-team will not limit the access by ``core`` members to any ``conda-forge`` resources
+- This sub-team will not limit the access by ``core`` members to any conda-forge resources
   including but not limited to its systems, credentials, keys, or service accounts.
 
 Members
@@ -52,7 +52,7 @@ Role
 ----
 The purpose of the finance sub-team is to provide a point of contact
 for financial and budgetary issues. This includes keeping core aware
-of the current ``conda-forge`` balance via ``core`` meetings and facilitating
+of the current conda-forge balance via ``core`` meetings and facilitating
 dispersal of funds.
 
 Charter
@@ -63,7 +63,7 @@ Responsibility
 --------------
 The core responsibilities of this team are as follows:
 
-- Keep core aware of budgetary and financial matters pertaining to ``conda-forge``.
+- Keep core aware of budgetary and financial matters pertaining to conda-forge.
 - Facilitate dispersal of funds.
 - Give core updates via the standing budget item at core meetings.
 - Work closely with the NumFOCUS point of contact to ensure smooth financial operations.
@@ -73,7 +73,7 @@ This team will operate via the following rules:
 - Only members of ``core`` can be on this sub-team.
 - This sub-team will report its activity to core at all attended ``core`` meetings.
 - This sub-team will not approve or deny access to funds unless instructed to
-  via the method specified by the ``conda-forge`` governance document.
+  via the method specified by the conda-forge governance document.
 
 Members
 -------
@@ -86,7 +86,7 @@ Bot Sub-Team
 
 Role
 ----
-Develop and manage the ``conda-forge`` migration bot and all related tooling.
+Develop and manage the conda-forge migration bot and all related tooling.
 Also manages and deploys migrations themselves.
 
 Charter
@@ -95,7 +95,7 @@ Dynamic
 
 Responsibility
 --------------
-The migration and autotick bot is now a central part of the ``conda-forge`` ecosystem.
+The migration and autotick bot is now a central part of the conda-forge ecosystem.
 This subteam has the right and responsibility to manage and develop the general
 operation of the bot.
 This includes building new migrators, fixing migration related bugs, and tooling.
@@ -139,7 +139,7 @@ ARM Sub-Team
 
 Role
 ----
-Develop and manage ARM architecture support for ``conda-forge``.
+Develop and manage ARM architecture support for conda-forge.
 
 Charter
 -------
@@ -155,7 +155,7 @@ This includes updates and enabling features to:
 - conda-smithy
 - Docker containers
 
-And other parts of the ``conda-forge`` ecosystem.
+And other parts of the conda-forge ecosystem.
 
 Members
 -------
@@ -208,7 +208,7 @@ Staging Sub-Team
 Role
 ----
 Review and merge feedstock candidates in the staged-recipes repository. Help users to create
-``conda-forge`` compatible recipes.
+conda-forge compatible recipes.
 
 Charter
 -------
@@ -216,13 +216,13 @@ Dynamic
 
 Responsibility
 --------------
-Introducing a recipe for most users is the first step of becoming involved with the development of ``conda-forge``.
+Introducing a recipe for most users is the first step of becoming involved with the development of conda-forge.
 Especially for new maintainers it is crucial to be able to ask questions and receive helpful and constructive feedback.
 
 The staging team is responsible for:
 
  - Reviewing and merging pull requests in ``conda-forge/staged-recipes``.
- - Answering questions and giving feedback regarding ``conda-forge`` requirements.
+ - Answering questions and giving feedback regarding conda-forge requirements.
  - Identifying common misconceptions and problems due to unclear documentation.
  - Help the documentation team maintain clear documentation that simplifies contributing packages.
  - Assist core in supporting feedstock maintainers when questions/issues arise during recipe maintenance.
@@ -246,7 +246,7 @@ Miniforge Sub-Team
 
 Role
 ----
-Develop and manage miniforge installers for ``conda-forge``
+Develop and manage miniforge installers for conda-forge
 
 Charter
 -------
@@ -270,8 +270,8 @@ Diversity and Inclusion Sub-Team
 
 Role
 ----
-Develop ``conda-forge`` as a diverse community and advocate for
-actions impacting underrepresented groups in ``conda-forge``.
+Develop conda-forge as a diverse community and advocate for
+actions impacting underrepresented groups in conda-forge.
 
 Charter
 -------
@@ -279,10 +279,10 @@ Dynamic
 
 Responsibility
 --------------
-One of the core strengths of ``conda-forge`` is the diversity of ecosystems it supports.
+One of the core strengths of conda-forge is the diversity of ecosystems it supports.
 Likewise, fostering and advancing a diverse community of users, maintainers, and infrastructure contributors
 is an important part of creating and maintaining a vibrant project.
-The mandate of this subteam is to support and increase the diversity of the ``conda-forge``
+The mandate of this subteam is to support and increase the diversity of the conda-forge
 community at all levels.
 As such this group can, but is not limited to:
 - provide a place for issues impacting diversity to be heard

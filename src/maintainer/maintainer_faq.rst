@@ -74,7 +74,7 @@ FAQ
     Importing conda-verify failed. Please be sure to test your packages. conda install conda-verify to make this message go away.
 
   You are seeing this error message because by default, conda-build uses conda-verify to ensure that your recipe and package meet some minimum sanity checks.
-  This message can be safely ignored as``conda-forge``doesn't use conda-verify.
+  This message can be safely ignored as conda-forge doesn't use conda-verify.
 
 
 .. _mfaq_version_update:
@@ -94,9 +94,9 @@ FAQ
 
 .. _mfaq_package_submit:
 
-:ref:`(Q) <mfaq_package_submit>` **Is it necessary for me to be an upstream maintainer of the package I submit to ``conda-forge``?**
+:ref:`(Q) <mfaq_package_submit>` **Is it necessary for me to be an upstream maintainer of the package I submit to conda-forge?**
 
-  Everybody can submit a package to ``conda-forge``, irrespective of whether they maintain the upstream version or not. Additionally, it’s not required but considered good practice to inform the upstream of a new package and invite them to be maintainers as well.
+  Everybody can submit a package to conda-forge, irrespective of whether they maintain the upstream version or not. Additionally, it’s not required but considered good practice to inform the upstream of a new package and invite them to be maintainers as well.
 
 
 .. _mfaq_libGL_so_1:
@@ -167,12 +167,12 @@ FAQ
 
 .. _mfaq_changes_to_major_projects:
 
-:ref:`(Q) <mfaq_changes_to_major_projects>` **Does ``conda-forge`` ever make significant changes or apply code patches to significant upstream packages?**
+:ref:`(Q) <mfaq_changes_to_major_projects>` **Does conda-forge ever make significant changes or apply code patches to significant upstream packages?**
 
   We generally try to avoid changes, but there are many notable exceptions and we have no set policy. These changes currently fall into
   a few categories. Upstream projects that violate our community norms or pose significant security risks through their policies may
-  be changed so that they can be distributed on ``conda-forge``. In many cases though, these projects are not distributed at all. We
+  be changed so that they can be distributed on conda-forge. In many cases though, these projects are not distributed at all. We
   do employ extensive changes to project build scripts in order to properly build and install projects into conda environments.
   Finally, in some cases we add, enable, or disable features in specific projects to ensure they are broadly compatible with the
-  ``conda-forge`` package set. The set of patches/changes we apply is always located in the feedstock that built the package. We
+  conda-forge package set. The set of patches/changes we apply is always located in the feedstock that built the package. We
   also maintain a list of important packages with changes in our documentation.

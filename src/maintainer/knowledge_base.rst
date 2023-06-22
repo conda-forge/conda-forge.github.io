@@ -43,7 +43,7 @@ Some optional, but useful CMake options:
       ``cmake`` call as some packages construct different build configurations depending on this flag.
     - ``-DCMAKE_INSTALL_PREFIX=$PREFIX`` Specify the install location.
     - ``-DCMAKE_INSTALL_LIBDIR=lib`` Libraries will land in $PREFIX/lib, sometimes projects install
-      into lib64 or similar but on ``conda-forge`` we keep shared libraries in simply lib.
+      into lib64 or similar but on conda-forge we keep shared libraries in simply lib.
     - ``-DBUILD_SHARED_LIBS=ON`` Instruct CMake to build shared libraries instead of static ones.
     - ``-DCMAKE_FIND_FRAMEWORK=NEVER`` and ``-DCMAKE_FIND_APPBUNDLE=NEVER`` Prevent CMake from using system-wide macOS packages.
     - ``${CMAKE_ARGS}`` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like `CUDA builds <https://conda-forge.org/docs/maintainer/knowledge_base.html#cuda-builds>`__.
@@ -102,7 +102,7 @@ Here are some things you should check,
 Particularities on Windows
 ==========================
 
-This document presents ``conda-forge`` and conda-build information and examples
+This document presents conda-forge and conda-build information and examples
 while building on Windows.
 
 
@@ -339,7 +339,7 @@ but merely to provide a starting point with some guidelines. Please look at `oth
 Rust Nightly
 ------------
 
-Many rust packages rely on nightly versions of the rust compiler. Given this fast release cadence, ``conda-forge`` does not yet pull each release.
+Many rust packages rely on nightly versions of the rust compiler. Given this fast release cadence, conda-forge does not yet pull each release.
 Instead, rust nightly versions are pulled into the ``dev`` branch of the `conda-forge/rust-feedstock <https://github.com/conda-forge/rust-feedstock/tree/dev>`_ on an as-needed basis.
 For a new version, please file an issue on that feedstock.
 
@@ -359,7 +359,7 @@ Core Dependency Tree Packages (CDTs)
 Dependencies outside of the ``conda-forge`` channel should be avoided (see :ref:`no_external_deps`).
 However, there are a few exceptions:
 
-Some dependencies are so close to the system that they are not packaged with ``conda-forge``.
+Some dependencies are so close to the system that they are not packaged with conda-forge.
 These dependencies have to be satisfied with *Core Dependency Tree* (CDT) packages.
 
 A CDT package consists of repackaged CentOS binaries from the appropriate version,
@@ -369,7 +369,7 @@ as opposed to generating feedstocks for them. (Note that historically we did use
 practice has been deprecated.) To add a new CDT, make a PR on the
 `conda-forge/cdt-builds <https://github.com/conda-forge/cdt-builds>`__ repo.
 
-In ``conda-forge`` the primary usages of CDTs is currently for packages that link against libGL.
+In conda-forge the primary usages of CDTs is currently for packages that link against libGL.
 
 libGL
 ^^^^^
@@ -514,7 +514,7 @@ Message passing interface (MPI)
 MPI Variants in conda-forge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-How are MPI variants best handled in ``conda-forge``?
+How are MPI variants best handled in conda-forge?
 
 
 There are a few broad cases:
@@ -523,7 +523,7 @@ There are a few broad cases:
 - the package works with any MPI provider (e.g. mpich, openmpi)
 - the package works with/without MPI
 
-Note that sometimes users want to use packages in ``conda-forge`` built against
+Note that sometimes users want to use packages in conda-forge built against
 our MPI libraries but linked to external MPI libraries at runtime. If you are interested
 in this procedure, see :ref:`Using External Message Passing Interface (MPI) Libraries`
 for details.
@@ -959,7 +959,7 @@ they like without any knowledge of the version of the BLAS implementation needed
 Matplotlib
 ----------
 
-``matplotlib`` on ``conda-forge`` comes in two parts. The core library is in ``matplotlib-base``. The
+``matplotlib`` on conda-forge comes in two parts. The core library is in ``matplotlib-base``. The
 actual ``matplotlib`` package is this core library plus ``pyqt``. Most, if not all, packages that have
 dependence at runtime on ``matplotlib`` should list this dependence as ``matplotlib-base`` unless they
 explicitly need ``pyqt``. The idea is that a user installing ``matplotlib`` explicitly would get a full
@@ -1001,10 +1001,10 @@ One example here is `dataclasses <https://www.python.org/dev/peps/pep-0557/>`__ 
 Python3.7 but is available as a `backport <https://github.com/ericvsmith/dataclasses>`__ for Python3.6 too.
 Therefore, most upstream packages make those backports only mandatory for specific versions of Python and exclude them otherwise.
 
-Implementing this restriction in ``conda-forge`` is currently only possible through the use of ``skips``
-which restricts the corresponding ``conda-forge`` recipes from becoming ``noarch``.
+Implementing this restriction in conda-forge is currently only possible through the use of ``skips``
+which restricts the corresponding conda-forge recipes from becoming ``noarch``.
 
-Therefore, some ``conda-forge`` recipes only create an actual package on specific Python versions and are otherwise an
+Therefore, some conda-forge recipes only create an actual package on specific Python versions and are otherwise an
 empty placeholder. This allows them to be safely installed under all Python versions and makes using ``skips`` unnecessary.
 
 Similarly, some packages are `only` platform-specific dependency of a package, such as ``pywin32``, and have
@@ -1032,10 +1032,10 @@ Non-version-specific Python packages
 For some dependencies, upstream maintainers list Python versions where those packages are needed,
 even if the packages can actually be installed under all Python versions.
 
-Implementing this restriction in ``conda-forge`` is currently only possible through the use of ``skips``
-which restricts the corresponding ``conda-forge`` recipes from becoming ``noarch``.
+Implementing this restriction in conda-forge is currently only possible through the use of ``skips``
+which restricts the corresponding conda-forge recipes from becoming ``noarch``.
 
-Therefore, the ``conda-forge`` community maintains a list of packages that are safe to be installed under all Python versions,
+Therefore, the conda-forge community maintains a list of packages that are safe to be installed under all Python versions,
 even if the original package only requires it for some versions.
 
 For example, the package `pyquil <https://github.com/rigetti/pyquil>`__ only
@@ -1277,7 +1277,7 @@ You need to rerender the feedstock after this change.
 Requiring newer macOS SDKs
 ==========================
 
-``conda-forge`` uses macOS SDK 10.9 to build software so that they can be deployed to
+conda-forge uses macOS SDK 10.9 to build software so that they can be deployed to
 all macOS versions newer than 10.9. Sometimes, some packages require a newer SDK
 to build with. While the default version 10.9 can be overridden using the following
 changes to the recipe, it should be done as a last resort. Please consult with
@@ -1331,7 +1331,7 @@ The libc++ library uses Clang availability annotations to mark certain symbols a
 unavailable when targeting versions of macOS that ship with a system libc++
 that do not contain them. Clang always assumes that the system libc++ is used.
 
-The ``conda-forge`` build infrastructure targets macOS 10.9 and some newer C++ features
+The conda-forge build infrastructure targets macOS 10.9 and some newer C++ features
 such as ``fs::path`` are marked as unavailable on that platform, so the build aborts:
 
 .. code-block:: sh
@@ -1342,7 +1342,7 @@ such as ``fs::path`` are marked as unavailable on that platform, so the build ab
   note: 'path' has been explicitly marked unavailable here
   class _LIBCPP_TYPE_VIS path {
 
-However, since ``conda-forge`` ships its own (modern) libcxx we can ignore these checks
+However, since conda-forge ships its own (modern) libcxx we can ignore these checks
 because these symbols are in fact available. To do so, add
 ``_LIBCPP_DISABLE_AVAILABILITY`` to the defines. For example
 
@@ -1354,7 +1354,7 @@ because these symbols are in fact available. To do so, add
 PyPy builds
 ===========
 
-See :ref:`pypy` in the user docs for more info about PyPy and ``conda-forge``.
+See :ref:`pypy` in the user docs for more info about PyPy and conda-forge.
 
 To build your python package for pypy, wait for the bot to send a
 PR and contact ``conda-forge/bot`` team if a PR is not sent after the
@@ -1460,7 +1460,7 @@ Finally, note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 
 CUDA builds
 ===========
 
-Although the provisioned CI machines do not feature a GPU, ``conda-forge`` does provide mechanisms
+Although the provisioned CI machines do not feature a GPU, conda-forge does provide mechanisms
 to build CUDA-enabled packages. These mechanisms involve several packages:
 
 * ``cudatoolkit``: The runtime libraries for the CUDA toolkit. This is what end-users will end
@@ -1487,7 +1487,7 @@ On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CU
   **How is CUDA provided at the system level?**
 
   * On Linux, Nvidia provides official Docker images, which we then
-    `adapt <https://github.com/conda-forge/docker-images>`__ to ``conda-forge``'s needs.
+    `adapt <https://github.com/conda-forge/docker-images>`__ to conda-forge's needs.
 
   * On Windows, the compilers need to be installed for every CI run. This is done through the
     `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`__ scripts.
@@ -1597,7 +1597,7 @@ The steps involved are, roughly:
 Apple Silicon builds
 ====================
 
-The new Apple M1 processor is the first Apple Silicon supported by ``conda-forge``
+The new Apple M1 processor is the first Apple Silicon supported by conda-forge
 `osx-arm64 <https://github.com/conda-forge/conda-forge.github.io/issues/1126>`__ builds.
 For new builds to be available, via cross-compilation, a migration is required for
 the package and its dependencies. These builds are experimental as many of them are untested.
@@ -1626,7 +1626,7 @@ Pre-release builds
 ==================
 
 Recipe maintainers can make pre-release builds available on
-``conda-forge`` by adding them to the ``dev`` or ``rc`` label.
+conda-forge by adding them to the ``dev`` or ``rc`` label.
 
 The semantics of these labels should generally follow the
 `guidelines <https://devguide.python.org/developer-workflow/development-cycle/index.html#stages>`__ that Python
@@ -1644,7 +1644,7 @@ itself follows.
 
 .. note::
 
-  ``alpha`` and ``beta`` labels aren't used. Given the light usage of labels on the ``conda-forge``
+  ``alpha`` and ``beta`` labels aren't used. Given the light usage of labels on the conda-forge
   channel thus far, it seems rather unnecessary to introduce many labels.
   ``dev`` and ``rc`` seem like a nice compromise.
 
@@ -1825,21 +1825,21 @@ being investigated or the migration PR got closed accidentally. To migrate a PR 
 Security considerations for conda-forge builds
 ==============================================
 
-All ``conda-forge`` packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use ``conda-forge`` packages if you or your team require a high level of security.
-You are also free to download recipes and rebuild them yourself, if you would like at least that much oversight. However, many people use ``conda-forge`` all the time with no issues and here are some things that ``conda-forge`` does to help with security in some ways:
+All conda-forge packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use conda-forge packages if you or your team require a high level of security.
+You are also free to download recipes and rebuild them yourself, if you would like at least that much oversight. However, many people use conda-forge all the time with no issues and here are some things that conda-forge does to help with security in some ways:
 
 1. `Sources <https://conda-forge.org/docs/maintainer/adding_pkgs.html#source>`_ (where you specify where the package's source code is coming from) can be pulled from GitHub, PyPI, or other sources and sha256 hashes are always used, so moving of tags or uploading of new sdists can not cause automatic package rebuilds.
    Also, once packages are accepted and made into feedstocks, only the maintainers of that feedstock have the right to merge PRs made to that feedstock.
 2. Each feedstock can only upload packages for that feedstock. This is enforced by using a cf-staging channel where builds are first sent.
-   A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the conda-forge channel.
+   A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the ``conda-forge`` channel.
    This helps mitigate against a bad actor gaining access to an inconspicuous feedstock and then trying to push a build with malicious code into essential infrastructure packages (e.g., OpenSSL or Python).
-3. We have `artifact-validation <https://github.com/conda-forge/artifact-validation>`__ for validating all the ``conda-forge`` artifacts uploaded to ``anaconda.org``. This validation scans for various security-related items, such as artifacts that overwrite key pieces of certain packages.
-4. We have a dedicated `Security and Systems Sub-Team <https://conda-forge.org/docs/orga/subteams.html?highlight=security+team#security-and-systems-sub-team>`__ who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by ``conda-forge``.
+3. We have `artifact-validation <https://github.com/conda-forge/artifact-validation>`__ for validating all the conda-forge artifacts uploaded to ``anaconda.org``. This validation scans for various security-related items, such as artifacts that overwrite key pieces of certain packages.
+4. We have a dedicated `Security and Systems Sub-Team <https://conda-forge.org/docs/orga/subteams.html?highlight=security+team#security-and-systems-sub-team>`__ who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by conda-forge.
 
 Significant Changes To Upstream Projects
 ========================================
 
-From time to time, we make changes in upstream projects so that they better integrate into the ``conda-forge`` ecosystem. We
+From time to time, we make changes in upstream projects so that they better integrate into the conda-forge ecosystem. We
 have listed some, but not all, of those changes here for specific projects along with any associated documentation.
 
 Python

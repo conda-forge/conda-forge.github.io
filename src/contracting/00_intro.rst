@@ -1,9 +1,9 @@
 Contracting Information
 #######################
 
-If you are interested in a contractual engagement to solve a specific problem that you're facing, this page details the kinds of services that are available to you. ``conda-forge``, as an entity, does not have the ability to engage in a contractual arrangement as of now.
+If you are interested in a contractual engagement to solve a specific problem that you're facing, this page details the kinds of services that are available to you. conda-forge, as an entity, does not have the ability to engage in a contractual arrangement as of now.
 However, there are a number of community members that you may engage with. 
-``conda-forge`` does not endorse anyone (individuals or companies) listed on this page.
+conda-forge does not endorse anyone (individuals or companies) listed on this page.
 
 
 If you are interested in a service that is not listed on this page, please reach out to us on our `issue tracker <https://github.com/conda-forge/conda-forge.github.io/issues>`__, on  `Element <https://app.element.io/#/room/#conda-forge:matrix.org>`__  or via emailing the core team directly at conda-forge-core@googlegroups.com and we will help to circulate your request more broadly within the community.
@@ -39,7 +39,7 @@ Background / Description: Quansight's goal is to create operational solutions to
 Becoming a Service Provider
 ***************************
 
-The ``conda-forge`` core team reserves the right to unilaterally update this list at any time for any reason.
+The conda-forge core team reserves the right to unilaterally update this list at any time for any reason.
 If you are a service provider and are interested in being added to this list please open up a pull request against the conda-forge.github.io repository.
 Add yourself to this list and detailing the services you provide. 
 Please be brief and link to existing materials on your own website where possible.
