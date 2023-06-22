@@ -154,7 +154,7 @@ compiled libraries used in Python, `as described on this Python wiki page
 <https://wiki.python.org/moin/WindowsCompilers>`__. The current relevant
 versions are:
 
-* For Python 3.5–3.10: Visual C++ 14.x
+* For Python 3.5–3.12+: Visual C++ 14.x
 
 While you can obtain these tools by installing the right version of the full
 `Visual Studio <https://visualstudio.microsoft.com/>`__ development
