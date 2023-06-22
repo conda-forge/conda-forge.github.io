@@ -242,9 +242,9 @@ In ``recipe/conda_build_config.yaml`` file:
 .. code-block:: yaml
 
     c_compiler:    # [win]
-    - vs2022       # [win]
+    - vs2022       # [win and x86_64]
     cxx_compiler:  # [win]
-    - vs2022       # [win]
+    - vs2022       # [win and x86_64]
 
 You can look at the changes in `this PR <https://github.com/conda-forge/vcpkg-tool-feedstock/pull/41/files>`__.
 
