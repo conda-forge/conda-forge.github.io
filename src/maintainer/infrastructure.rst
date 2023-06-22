@@ -101,14 +101,6 @@ Note that this update command is kind of a hack, and things might go wrong. Make
 
 Entering the above phrase in a PR of a feedstock will lint the PR again.
 
-.. _ci_update_circle:
-
-@conda-forge-admin, please update circle
-----------------------------------------
-
-Entering the above phrase in an issue of a feedstock will update the Circle-CI SSH deploy key. This will fix the
-``permission denied (public key)`` issue in Circle-CI's checkout phase; it shouldn't be needed otherwise.
-
 
 @conda-forge-admin, please update team
 --------------------------------------
@@ -151,15 +143,11 @@ bot. This functionality is currently experimental. You can find more details
 :ref:`here<Automerge>`.
 Please open issue on ``regro/cf-scripts`` for any feedback, bugs, and/or questions!
 
-@conda-forge-admin, please add python 2.7
------------------------------------------
+@conda-forge-admin, please remove bot automerge
+-----------------------------------------------
 
-Entering this command in the title of an issue will instruct the admin bot to
-add Python 2.7 back to a feedstock. Note that this command will remove any other
-Python versions and any ``win``, ``aarch64`` or ``ppc64le`` builds. Thus you should
-merge the PR into a separate branch on your feedstock if you want to keep these
-other builds. **Python 2.7 support is deprecated and any feedstocks on Python 2.7 will
-not be properly handled by our bots.**
+Entering this command in the title or comment of an issue will instruct the admin bot to
+open a PR to disable automerge, undoing the ``please add bot automerge`` command.
 
 @conda-forge-admin, please add user @username
 ---------------------------------------------
@@ -168,6 +156,14 @@ Entering the above phrase in the title of an issue on a feedstock will make a PR
 that adds the given user to the feedstock. A maintainer or member of ``core`` can then merge
 this PR to add the user. Please do not modify this PR or adjust the commit message. This
 PR is designed to skip building the package.
+
+@conda-forge-admin, update version
+----------------------------------
+
+Entering the above phrase in the title of an issue on a feedstock will request the bot
+to check if there are any new versions available. If there are, it will open a PR with
+with the needed changes. Note that the bot might start by opening a PR with only partial
+changes. The rest of the contents will be added in a subsequent commit after a few minutes.
 
 
 CI build services
@@ -206,10 +202,10 @@ of the feedstock.
   certain very old packages that require VC9 will fail.
 
 
-TravisCI (OSX, IBM Power 8+)
+TravisCI (IBM Power 8+, ARM)
 ------------------------------
 
-TravisCI is used to build packages for IBM Power 8+. After merging a staged-recipes pull request, it might be necessary to
+TravisCI is used to build packages for IBM Power 8+ and ARM. After merging a staged-recipes pull request, it might be necessary to
 force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit `<https://app.travis-ci.com/account/repositories>`__
 and click the "Sync accounts" button.
 
@@ -225,61 +221,9 @@ Enable a build by adding the following to ``conda-forge.yml`` in the root of the
     provider:
       osx: travis
 
-For IBM Power 8+ builds, add the name of your feedstock to the list `here
+For IBM Power 8+ and/or ARM builds, add the name of your feedstock to the list `here
 <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`__
 via a pull request.
-
-
-CircleCI (Linux, OSX)
-----------------------
-CircleCI is a container-based CI service that conda-forge uses to build
-Linux packages. It can optionally build OSX packages.
-
-Linux builds are identical to those on Azure as both are built inside Docker containers.
-
-
-Using Circle for both Linux and OSX
-....................................
-
-To use CircleCI for OSX, add the following to ``conda-forge.yml`` in the root of the feedstock.
-
-.. code-block:: yaml
-
-    provider:
-      osx: circle
-      linux: circle
-
-CircleCI for OSX should be used for OSX, only when TravisCI resources (50 minutes of build time per job) are not enough as CircleCI gives more resources (2 hours of build time per job).
-
-Note that you need to rerender the feedstock, once this change has been made.
-
-
-Debugging permission errors
-...........................
-
-If CircleCI lacks permissions to checkout the source code, it will produce an error as follows::
-
-    Cloning into '.'...
-    Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
-    Permission denied (publickey).
-    fatal: Could not read from remote repository.
-
-When this happens for a feedstock, it can be fixed using the `webservice <ci_update_circle>`, by posting the following comment::
-
-  @conda-forge-admin, please update circle
-
-Otherwise (e.g. in a PR to staged-recipes), here are some things you can try:
-
-* Log in and out of Circle CI.
-* Revoke CircleCI's access and then enable it again.
-* In the "Checkout SSH keys" section of your Circle CI project settings, press "add user key".
-
-
-Drone.io
---------
-
-We use `Drone.io <https://drone.io>`__ for Linux ARMv8 builds. To enable these builds on your feedstock, make a pull request to add your feedstock to the list
-here `<https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt>`_.
 
 
 GitHub Actions
@@ -389,7 +333,7 @@ Output Validation and Feedstock Tokens
 
 As of writing, ``anaconda.org`` does not support generating API tokens that are scoped
 to allow uploads for some packages but not others. In order to secure feedstock uploads,
-so that, e.g., the maintainers of the ``numpy`` feedstock cannot push a ``python`` version,
+so that, e.g., the maintainers of the ``numpy`` feedstock cannot push a ``python`` package,
 we use a package staging process and issue secret tokens, unique to each feedback. This process
 works as follows.
 
@@ -408,3 +352,11 @@ sure ``conda_forge_output_validation: true`` is set in your ``conda-forge.yml`` 
 your feedstock with the latest version of ``conda-smithy``. Finally, new packages that are added to
 feedstocks are registered automatically and once uploaded successfully, no other feedstock
 will be able to upload packages with the same name.
+
+Sometimes, however, it might make better sense to generate a package from a different
+feedstock, say, due to package renaming or re-structuring. In this case, you may need
+to add the new feedstock to the `feedstock-outputs <https://github.com/conda-forge/feedstock-outputs>`__ map.
+If this is not done, then the output validation process will block the package from being
+uploaded from the new feedstock, by design.
+Once this is done correctly and the package is uploaded,
+you can then request the conda-forge core devs to archive the old feedstock.
