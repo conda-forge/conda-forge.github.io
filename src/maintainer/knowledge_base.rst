@@ -138,7 +138,7 @@ important:
 
 .. code-block::
 
-    conda create -n my-new-env -c "C:\Users\User\miniforge3\conda-build" my-package
+    conda create -n my-new-env -c local my-package
 
 If you installed from a different distribution than ``miniforge`` or to a
 different path, you'll need to alter this path.
