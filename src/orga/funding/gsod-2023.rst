@@ -1,0 +1,226 @@
+:orphan:
+
+Google Season of Docs 2023
+==========================
+
+   Thanks for your interest in applying for Google Season of Docs with conda-forge. We welcome
+   applications from individuals from all backgrounds, identities and abilities and encourage
+   applications individuals from under-represented groups in tech.
+
+Proposal title: Restructuring the conda-forge documentation
+-----------------------------------------------------------
+
+About conda-forge
+-----------------
+
+`conda-forge <https://conda-forge.org/>`__ is a community effort and a `GitHub organization
+<https://github.com/conda-forge>`__ which contains repositories of conda recipes and thus provides
+conda packages for a wide range of open-source software and tools. The built distributions for
+these pieces of software are uploaded to anaconda.org/conda-forge and can be installed with
+``conda``, ``mamba`` and other tools.
+
+2023 marks the 8th anniversary of the conda-forge organization. Over these 8 years, it has served
+more than 1.2M package artifacts, which account for 10B downloads via anaconda.org. None of this
+would be possible without the work of more than 4.6K volunteers!
+
+How does conda-forge work?
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+conda-forge is built for and around the conda packaging ecosystem. A conda recipe contains the
+dependency metadata and instructions to build and package a particular project, usually from
+source.
+
+New recipes are first submitted to the ``conda-forge/staged-recipes`` repository via a pull request
+(PR). Once reviewed and approved, the recipe is merged and granted its own repository, called
+*feedstock*. A feedstock is a standard GitHub repository within the conda-forge organization,
+containing the user-provided ``recipe`` and the supporting configuration and tooling required for
+the builds.
+
+For each PR merged in a feedstock, a series of artifacts is built for the package (changes such as
+releasing a new version or adding a new dependency require rebuilding the package for
+ecosystem-wide compatibility). All contributions to a feedstock happen through PRs.
+
+How is conda-forge organized?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The conda-forge organization is led by the `core team
+<https://github.com/orgs/conda-forge/teams/core/members>`__. The core team also receives support
+from many volunteers, like ``staged-recipes`` reviewers or the domain-specific ``help-*`` teams.
+Anyone can contribute to conda-forge's `documentation <https://conda-forge.org/docs/>`__ through
+pull requests that are reviewed and approved by at least one member of the *core* team.
+
+Project Idea: Restructuring the conda-forge documentation
+---------------------------------------------------------
+
+The problem
+~~~~~~~~~~~
+
+conda-forge.org was created almost 8 years ago (when the conda-forge project was established).
+After 8 years, its documentation has grown organically through the contributions of many members of
+the conda-forge community (users, contributors, and the core-team). While this has helped keep some
+documentation up-to-date, it also has added several issues:
+
+-  Right now, one must know precisely what one is looking for to find its documentation. Thus
+   newcomers might find navigating and consuming the current structure problematic or confusing.
+-  Some pages (e.g. knowledge base) have grown too much and are lengthy.
+-  There is a significant overlap between some sections. The same ideas might be discussed
+   separately, with only partial agreement and out-of-date information, reducing the usability of
+   the documentation.
+-  It is often difficult to know where new information should belong, making it hard to further
+   improve the documentation and onboard new contributors.
+
+Your project's scope
+~~~~~~~~~~~~~~~~~~~~
+
+This project will:
+
+-  Audit the existing content in conda-forge.org and propose an alternative classification of the
+   content borrowing concepts from the Diátaxis framework.
+-  Migrate and adjust the existing content to follow the proposed re-organization in
+   `cf-infra-docs.netlify.app <https://cf-infra-docs.netlify.app/>`__. This will be done in
+   iterative steps and focused on better organizing existing documentation.
+-  Identify and implement accessibility best practices for technical documentation (see References
+   at the end of this document) during the migration process.
+-  Suggest a contribution workflow including review guidelines and an itemized list of critical
+   aspects that new contributions need to abide by (e.g. accessibility best practices, where and
+   how to place new content items, style guides)
+-  Identify missing content and propose an outline to fill the existing gaps.
+
+Work that is out of scope for this project:
+
+-  Write new content pieces from scratch even if identified as missing (e.g. tutorials)
+
+How would we measure success?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  A report of the existing content that discusses its weaknesses and strengths and solutions to
+   address the identified problems via Diátaxis will be published.
+-  A migration plan that reorganizes the existing content into a maintainability and
+   usability-first structure. Such a plan will be shared with the community, and we will, at the
+   same time, ensure any existing URLs can be forwarded to avoid confusion among our current users.
+-  Once approved, the old content will be migrated to the prototype website at
+   `cf-infra-docs.netlify.app <https://cf-infra-docs.netlify.app/>`__ and worked on as needed (to
+   complete the migration plan).
+-  Documentation contribution guidelines will be available and enforced during the review process.
+-  The number of open PRs and issues about documentation (57 and 61, respectively, as of March
+   2023) is at least reduced by 50% over the following calendar year.
+
+Timeline
+~~~~~~~~
+
++---------------------------+------------------------------------------+
+| Dates                     | Action items                             |
++===========================+==========================================+
+| May                       | Technical writer is hired                |
++---------------------------+------------------------------------------+
+| June-July                 | Audit existing content and propose       |
+|                           | restructuration plan                     |
++---------------------------+------------------------------------------+
+| August-October            | Migrate and adjust content following the |
+|                           | plan above                               |
++---------------------------+------------------------------------------+
+| November                  | Establish documentation contribution     |
+|                           | guidelines and review checklist          |
++---------------------------+------------------------------------------+
+
+Project budget
+~~~~~~~~~~~~~~
+
+================ ========= ============= =====
+Budget item      Amount    Running total Notes
+================ ========= ============= =====
+Technical writer 10,000.00 10,000.00     
+TOTAL                      10,000.00     
+================ ========= ============= =====
+
+Skills needed
+~~~~~~~~~~~~~
+
+Required:
+
+-  Familiarity with the Diátaxis framework
+-  Proficiency in written English
+-  Awareness (and ideally, experience in) of writing inclusive and accessible documentation or
+   content
+-  Ability to work with people from diverse backgrounds
+
+Nice to have:
+
+-  Knowledge about Python, ``conda`` and/or packaging concepts
+-  Previous contributions to Docusaurus-based websites (or websites built with a static JS
+   framework and Markdown).
+-  Comfortable with Git, GitHub and pull request driven workflows
+
+Volunteers
+~~~~~~~~~~
+
+-  Jaime Rodríguez-Guerra (`@jaimergp <https://github.com/jaimergp>`__): main person of contact
+
+Contact info
+~~~~~~~~~~~~
+
+Technical writers interested in working on this project should send an email to
+jrodriguez@quansight.com. Please include links to your technical writing work or
+portfolio/résumé/CV.
+
+Feel free to reach out via Element / Matrix (`@jaimergp:matrix.org
+<https://matrix.to/#/@jaimergp:matrix.org>`__) before sending your application.
+
+Additional information
+~~~~~~~~~~~~~~~~~~~~~~
+
+conda-forge is also participating in Google Summer of Code 2023. The chosen GSoC candidate will be
+in charge of creating a style guide for the new conda-forge website, as well as implementing best
+practices in accesibility.
+
+The Google Season of Docs work will be in charge of providing the content counterparts to this
+effort. Together, the team will end up providing a new, modern, maintainable,
+easy-to-contribute-to, accessible website for the conda-forge community.
+
+
+Addendum
+--------
+
+Additional context
+~~~~~~~~~~~~~~~~~~
+
+The current documentation can be found at Sphinx-based ```conda-forge.github.io``
+<https://github.com/conda-forge/conda-forge.github.io>`__ repository, with some blog posts coming
+from ```blog`` <https://github.com/conda-forge/blog>`__. Both use ReStructuredText syntax and are
+built with Sphinx.
+
+A new Docusaurus-based prototype website is also available at `cf-infra-docs.netlify.app
+<https://cf-infra-docs.netlify.app/>`__, where new documentation is being written for the
+conda-forge infrastructure. The idea is to use this prototype site as a playground for new content
+organization ideas and experiments. This site uses Markdown syntax.
+
+We will write the content in vanilla Markdown, which both engines support.
+
+Useful references
+~~~~~~~~~~~~~~~~~
+
+-  `conda-forge.org documentation <https://conda-forge.org/docs>`__
+
+   -  `conda-forge/conda-forge.github.io
+      <https://github.com/conda-forge/conda-forge.github.io>`__
+   -  `conda-forge/status <https://github.com/conda-forge/status>`__
+   -  `conda-forge/blog <https://github.com/conda-forge/blog>`__
+
+-  `The Diátaxis framework <https://diataxis.fr/>`__
+-  `Google's Technical Writing docs <https://developers.google.com/tech-writing/overview>`__
+-  Accessibility guidelines for content:
+
+   -  `gov.uk resources
+      <https://www.gov.uk/government/publications/inclusive-communication/accessible-communication-formats>`__
+   -  `Microsoft's guidelines
+      <https://learn.microsoft.com/en-us/style-guide/accessibility/accessibility-guidelines-requirements>`__
+   -  `Easy read guidance
+      <https://webarchive.nationalarchives.gov.uk/ukgwa/20130812104657/http://odi.dwp.gov.uk/docs/iod/easy-read-guidance.pdf>`__
+   -  `digital.gov resources <https://accessibility.digital.gov/content-design/getting-started/>`__
+
+-  `Documentation as a way to build community
+   <https://labs.quansight.org/blog/2020/03/documentation-as-a-way-to-build-community>`__
+-  `NEP (Numpy Enhancement Proposal) 44
+   <https://numpy.org/neps/nep-0044-restructuring-numpy-docs.html>`__: Restructuring Numpy docs
+-  `Daniele Procida: How documentation works, and how to make it work for your project
+   <https://www.youtube.com/watch?v=azf6yzuJt54>`__ (PyCon 2017)

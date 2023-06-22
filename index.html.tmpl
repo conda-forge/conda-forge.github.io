@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+
     <link rel="shortcut icon" href="img/favicon.ico">
 
     <title>conda-forge | community driven packaging for conda</title>
@@ -50,16 +50,11 @@
                 </a>
             </div>
 
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <div class="collapse navbar-collapse navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <li>
                         <a class="page-scroll" href="#about">About</a>
                     </li>
-                    <!-- Uncomment to restore search
-                    <li>
-                        <a href="search.html">Search</a>
-                    </li>
-                    -->
                     <li>
                         <a href="docs">Docs</a>
                     </li>
@@ -83,6 +78,13 @@
                     </li>
                     <li>
                         <a href="https://numfocus.salsalabs.org/donate-to-conda-forge/index.html">Donate!</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://github.com/conda-forge">
+                            <i class="fa fa-github"></i>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -113,6 +115,8 @@
     <section id="about" class="container content-section">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 padded">
+                <br/>
+                <br/>
                 <h2 class="text-center">About conda-forge</h2>
                 <p>
                   <a href="https://github.com/conda-forge">conda-forge</a> is a GitHub organization containing repositories of conda recipes.
@@ -121,6 +125,28 @@
                   each repository, also known as a feedstock, automatically
                   builds its own recipe in a clean and repeatable way on Windows, Linux and OSX.
                 </p>
+            </div>
+        </div>
+
+        <div class="row vcenter" style="display: none;" id="stats1">
+            <div class="col-md-4 col-md-offset-2 padded">
+              <p class="text-center" id="stats-downloads"></p>
+            </div>
+            <div class="col-md-4 padded">
+              <p class="text-center" id="stats-members"></p>
+            </div>
+        </div>
+        <div class="row vcenter" style="display: none;" id="stats2">
+            <div class="col-md-4 col-md-offset-2 padded">
+              <p class="text-center" id="stats-data"></p>
+            </div>
+            <div class="col-md-4 padded">
+              <p class="text-center" id="stats-issues-prs"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 padded">
                 <p>
                   The built distributions are uploaded to <a href="http://anaconda.org/conda-forge">anaconda.org/conda-forge</a>
                   and can be <a href="http://conda.pydata.org/docs/intro.html">installed with conda</a>. For example, to install a
@@ -168,9 +194,9 @@
                   or watching the following episode of
                   <a href="https://www.quansight.com/open-source-directions">Open Source Directions</a>.
                 </p>
-                <p align="center">
-                    <iframe width="560" class="responsive" src="https://www.youtube.com/embed/EWh-BtdYE7M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </p>
+                <div align="center">
+                    <iframe width="560" height="315" class="responsive" src="https://www.youtube.com/embed/EWh-BtdYE7M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
     </section>
@@ -178,6 +204,8 @@
         <div id="contribute" class="contribute-section">
             <div class="container">
                 <div class="col-lg-8 col-lg-offset-2">
+                    <br/>
+                    <br/>
                     <h2 class="text-center">Contributing to conda-forge</h2>
                     <div class="text">
                     <p>
@@ -221,10 +249,12 @@
                           Fork the feedstock you wish to update.
                       </li>
                       <li><i class="mega-octicon fa-3x octicon-git-branch"></i>
-                          Create a new branch from the feedstock master branch.
+                          Create a new branch from the feedstock main branch.
                       </li>
                       <li><i class="mega-octicon fa-3x octicon-pencil"></i>
                           Edit the recipe as desired. You may even consider adding yourself as a recipe maintainer.
+                          If you would like to know how to become a maintainer for a feedstock, please go <a href="https://conda-forge.org/docs/orga/guidelines.html#becoming-a-maintainer">here</a> to learn more.
+
                       </li>
                       <li><i class="mega-octicon fa-3x octicon-git-pull-request"></i>
                           Propose the change as a pull request.
@@ -236,6 +266,7 @@
                        </li>
                       </ul>
                     </p>
+
                     <h3 id="add_recipe">Add a recipe</h2>
                     <p>
                       <ul class="fa-ul ul-instructions">
@@ -243,13 +274,14 @@
                           Fork <a href="https://github.com/conda-forge/staged-recipes">conda-forge/staged-recipes</a>
                       </li>
                       <li><i class="mega-octicon fa-3x octicon-git-branch"></i>
-                          Create a new branch from the staged-recipes master branch.
+                          Create a new branch from the staged-recipes main branch.
                       </li>
                       <li><i class="mega-octicon fa-3x octicon-pencil"></i>
-                          Add a new conda recipe in a new "recipes/[your-package-name]" directory.
-                          There is an example of a well-written recipe in "recipes/example" you can copy.
-                          <a href="docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml">Further guidance on writing good recipes</a>.
-                          <a href="docs/maintainer/adding_pkgs.html#running-tests-locally-for-staged-recipes">You can also test the recipe locally.</a>
+                          Add a new conda recipe in a new "recipes/[your-package-name]" directory. Please make sure to follow these
+                          <a href="https://conda-forge.org/docs/orga/guidelines.html">guidelines</a>.
+                          You can also refer to an example of a well-written recipe in "recipes/example".
+                          Further guidance on writing good recipes can be found <a href="docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml">here</a>.
+                          Test your recipe locally using <a href="docs/maintainer/adding_pkgs.html#running-tests-locally-for-staged-recipes">these instructions.</a>
                       </li>
                       <li><i class="mega-octicon fa-3x octicon-git-pull-request"></i>
                           Propose the change as a pull request.
@@ -260,6 +292,9 @@
                           Once the recipe is ready it will be merged and a new "feedstock" repository will automatically be created for the recipe.
                           The build and upload processes take place in the feedstock, and once complete the package will be available on the conda-forge channel.</li>
                       </ul>
+                    </p>
+                    <p>
+                        Please consider joining our <a href="https://app.element.io/#/room/#conda-forge:matrix.org">Element</a> chatroom if you want to ask something, need help, or just want to chat with our maintainers. We would love to see you there!
                     </p>
                 </div>
             </div>
@@ -288,6 +323,8 @@
     <section id="partners" class="container content-section" style="padding-bottom: 100px">
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
+          <br/>
+          <br/>
           <a class="page-scroll" style="border:none; outline:none; text-decoration:none; color:inherit;" href="#partners">
             <h1 class="text-center">Institutional Partners</h1>
           </a>
@@ -393,6 +430,9 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="js/theme.js"></script>
+
+    <!-- stats -->
+    <script src="js/stats.js"></script>
 
 </body>
 

@@ -19,7 +19,7 @@ for officially interfacing with external communities, organizations, non-profits
 and companies. They are also responsible for maintaining conda-forge's infrastructure.
 
 If you are interested in joining the core team, please get in touch with us on our
-`Gitter Channel <https://gitter.im/conda-forge/conda-forge.github.io>`__.
+`Element chatroom <https://app.element.io/#/room/#conda-forge:matrix.org>`__.
 Core members are added via a vote amongst the current core team. The core team
 member who is running your vote will ask you to provide sufficient justification
 as to why you should be nominated to core. Prior service to the community, including
@@ -46,7 +46,7 @@ Generally speaking, your role is as follows:
 4. Helping recipe maintainers who bump the ``conda-forge/help-*`` teams.
 
 To join the staged-recipes team, please ask one of the core members on our
-`Gitter Channel <https://gitter.im/conda-forge/conda-forge.github.io>`__.
+`Element chatroom <https://app.element.io/#/room/#conda-forge:matrix.org>`__.
 We will then reach consensus in private and let you know our decision.
 Our decision will likely be "yes" but it could be "please get more involved
 with the review process on staged recipes first" if we have not seen you

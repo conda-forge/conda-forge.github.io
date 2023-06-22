@@ -66,40 +66,77 @@ def process_feed(app, doctree, fromdocname):
         rss_items = []
         for docname in node['entries']:
             entry = env.get_doctree(docname)
+            title = entry.next_node(nodes.section)
+            first_year = title.next_node(nodes.section)
 
-            for field in entry.traverse(nodes.field):
-                field_date = [f for f in field.traverse(nodes.field_name)][0]
-                pars = []
-                for b in field.traverse(nodes.field_body):
-                    for p in b.traverse(nodes.paragraph):
-                        pars.append(p)
+            for year in first_year.traverse(
+                nodes.section, descend=False, siblings=True
+            ):
+                first_subsection = year.next_node(nodes.section)
+                for subsection in first_subsection.traverse(
+                    nodes.section, descend=False, siblings=True
+                ):
+                    if app.builder.format == 'html':
+                        # date
+                        date = subsection.next_node(nodes.title).astext().split(":")[0]
+                        rss_item_date = dateutil.parser.parse(date.strip())
 
-                rss_item_description = nodes.compound()
-                for p in pars[1:]:
-                    rss_item_description += p.deepcopy()
+                        # link
+                        rss_item_link = node["link"] + "#" + subsection['ids'][0]
 
-                document += rss_item_description
-                app.env.resolve_references(
-                    document,
-                    node['link'],
-                    app.builder,
-                )
-                document.remove(rss_item_description)
+                        # title
+                        title = subsection.next_node(nodes.title)
 
-                if app.builder.format == 'html':
-                    rss_item_description = "\n".join(
-                        app.builder.render_partial(p)['body']
-                        for p in rss_item_description
-                    )
-                    rss_item_date = dateutil.parser.parse(field_date.astext().strip())
-                    rss_item_title = "%s: %s" % (field_date.astext(), pars[0].astext())
-                    rss_item = RSSItem(
-                        rss_item_title,
-                        node['link'],
-                        rss_item_description,
-                        rss_item_date,
-                    )
-                    rss_items.append(rss_item)
+                        document += title
+                        app.env.resolve_references(
+                            document,
+                            node['link'],
+                            app.builder,
+                        )
+                        document.remove(title)
+
+                        rss_item_title = title.astext()
+
+                        # description
+                        pars = []
+                        for b in subsection.traverse(nodes.paragraph):
+                            for p in b.traverse(nodes.paragraph):
+                                pars.append(p)
+
+                        rss_item_description = nodes.compound()
+                        for p in pars:
+                            rss_item_description += p.deepcopy()
+
+                        document += rss_item_description
+                        app.env.resolve_references(
+                            document,
+                            node['link'],
+                            app.builder,
+                        )
+                        document.remove(rss_item_description)
+
+                        rss_item_description = "\n".join(
+                            app.builder.render_partial(p)['body']
+                            for p in rss_item_description
+                        )
+                        if True:
+                            print("--------------------------------------------")
+                            print("--------------------------------------------")
+                            print("--------------------------------------------")
+                            print("newsfeed item:")
+                            print("    title:", rss_item_title)
+                            print("    date:", rss_item_date)
+                            print("    link:", rss_item_link)
+                            print("    desc:", rss_item_description)
+                            print(" ", flush=True)
+
+                        rss_item = RSSItem(
+                            rss_item_title,
+                            rss_item_link,
+                            rss_item_description,
+                            rss_item_date,
+                        )
+                        rss_items.append(rss_item)
 
         node.replace_self([])
 

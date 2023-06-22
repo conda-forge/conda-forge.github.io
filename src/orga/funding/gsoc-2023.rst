@@ -1,0 +1,150 @@
+:orphan:
+
+GSoC 2023 project ideas for conda-forge
+=======================================
+
+.. Inspired by the excellent Zarr Project Ideas document at
+   https://github.com/zarr-developers/gsoc/blob/main/2022/ideas-list.md
+
+Thanks for your interest in applying for Google Summer of Code with conda-forge. We welcome
+applications from individuals from all backgrounds, identities and abilities and encourage
+applications individuals from under-represented groups in tech.
+
+About conda-forge
+-----------------
+
+`conda-forge <https://conda-forge.org/>`__ is a community effort and a `GitHub organization
+<https://github.com/conda-forge>`__ which contains repositories of conda recipes and thus provides
+conda packages for a wide range of software. The built distributions are uploaded to
+anaconda.org/conda-forge and can be installed with conda.
+
+2023 marks the 8th anniversary of the conda-forge organization. Over these 8 years it has served
+more than 1.2M package artifacts, which account for 10B downloads via anaconda.org. None of this
+would be possible without the work of more than 4.6K volunteers!
+
+How does conda-forge work?
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+conda-forge is built for and around the conda packaging ecosystem. A conda recipe contains the
+dependency metadata and instructions to build and package a particular project, usually from
+source.
+
+New recipes are first submitted to the ``conda-forge/staged-recipes`` repository via a pull request
+(PR). Once this is reviewed and approved, the recipe is merged and granted its own repository,
+called *feedstock*. A feedstock is a standard GitHub repository within the conda-forge
+organization, containing the user-provided ``recipe/`` and the supporting configuration and tooling
+required for the builds.
+
+For each PR merged in a feedstock, a series of artifacts is built for the package (changes such as
+releasing a new version or adding a new dependency require rebuilding the package for
+ecosystem-wide compatibility). All contributions to a feedstock happen through PRs.
+
+How is conda-forge organized?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The conda-forge organization is led by the *core* team. The core team also receives support from
+many volunteers, like staged-recipes reviewers or the domain-specific ``help-*`` teams. Each
+feedstock is mainly maintained by its team of collaborators named after it. Feedstock teams are
+fluid by design: anyone can step down at any moment and join and take over as long as the feedstock
+team accepts the PR-driven application.
+
+What's the contribution process?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+conda-forge is an open-source project; it is built in the open for traceability and transparency.
+Continuous integration (CI) logs are publicly available, and everyone is welcome to contribute. We
+follow a strict fork-based Github-flow workflow: the feedstock branches will build *and upload* the
+artifacts to the validation server. For this reason, pull requests must always be opened from
+personal forks. This workflow is also followed in conda-forge repositories that are not responsible
+for producing packages.
+
+Project Idea 1 - Modernization of the conda-forge.org website
+-------------------------------------------------------------
+
+Abstract
+~~~~~~~~
+
+conda-forge.org was created almost 8 years ago (when the whole conda-forge project was started).
+After 8 years, the site has become outdated. For example, it has not been optimized for mobile use.
+Moreover, it is not WCAG (Web Content Accessibility Guidelines) conformant, which makes it
+inaccessible to many users, especially those with disabilities or those that rely on assistive
+technology to interact with the web.
+
+This project aims to deliver a new website for conda-forge.org that meets WCAG accessibility
+standards and improves performance while providing an excellent contributor experience.
+
+Current state
+~~~~~~~~~~~~~
+
+The current Sphinx-based conda-forge.org website is mainly built from the `conda-forge.github.io
+<https://github.com/conda-forge/conda-forge.github.io>`__ repository and extended by `status
+<https://github.com/conda-forge/status>`__ - which generates a basic conda-forge status dashboard -
+and a conda-forge `blog <https://github.com/conda-forge/blog>`__.
+
+A Docusaurus-based prototype website is available at `cf-infra-docs.netlify.app
+<https://cf-infra-docs.netlify.app/>`__, where new documentation is being written for the
+conda-forge infrastructure. We will use this site as the playground for the website modernization.
+
+Tasks
+~~~~~
+
+-  Figma mockups for a new frontpage for desktop and mobile
+-  Design a conda-forge style guide for other web-based developments
+-  Work towards WCAG conformance during the design phase and include accessibility annotations for
+   the development phase
+-  Present proposals to the community and incorporate feedback
+
+Extended tasks
+~~~~~~~~~~~~~~
+
+-  Implement the new frontpage in Docusaurus (with the corresponding React components)
+-  Add CI pipelines for automated performance and accessibility tests to prevent regressions in
+   further work
+
+Expected outcomes
+~~~~~~~~~~~~~~~~~
+
+-  A conda-forge style guide for its new online presence.
+-  The redesigned landing page passes the SpeedPage and WAVE automated tests.
+-  The new implementation provides an intuitive and usable user experience.
+-  A prototype conda-forge.org frontpage redesign is live in cf-infra-docs.
+
+Details
+~~~~~~~
+
+-  **Prerequisites**:
+
+   -  Previous experience with prototyping or mock-up tools such as Figma
+   -  Experience creating design specs that define the user need, underlying hypotheses, and UX
+      flow
+   -  Some knowledge of accessibility standards
+   -  Bonus points for previous experience in designing accessible experiences
+
+-  **Nice to have, but not required**:
+
+   -  React and npm
+   -  Comfortable with Git & Github PR-driven workflows
+   -  Familiar with Docusaurus
+
+-  **Project length**: 350 hours
+-  **Priority**: Low
+-  **Complexity**: Medium
+-  **Potential mentor(s)**: @jaimergp
+
+References
+~~~~~~~~~~
+
+-  https://conda-forge.org
+
+   -  https://github.com/conda-forge/conda-forge.github.io
+   -  https://github.com/conda-forge/status
+   -  https://github.com/conda-forge/blog
+
+-  https://accessibility.digital.gov/
+-  https://design-system.service.gov.uk/
+-  `PageSpeed results for conda-forge.org
+   <https://pagespeed.web.dev/report?url=https%3A%2F%2Fconda-forge.org%2F>`__
+-  `WAVE (accessibility) results for conda-forge.org
+   <https://wave.webaim.org/report#/conda-forge.org>`__
+-  `Docusaurus showcase <https://docusaurus.io/showcase>`__
+-  `Styling and Layout - Docusaurus documentation <https://docusaurus.io/docs/styling-layout>`__
