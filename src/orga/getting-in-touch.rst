@@ -40,7 +40,7 @@ Forum
 Mailing List
 -----------------
 
-* `google group: conda-forge <https://groups.google.com/g/conda-forge>`__: `Archived <https://groups.google.com/g/conda-forge/c/Iv-yGnIMEAA>`_.
+* `google group: conda-forge <https://groups.google.com/g/conda-forge>`__: `Archived <https://groups.google.com/g/conda-forge/c/Iv-yGnIMEAA>`__.
 
 Other Communication Methods
 -----------------------------
