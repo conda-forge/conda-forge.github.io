@@ -83,15 +83,20 @@
 <span id="id2"></span><h2>Improve the documentation<a class="headerlink" href="#improve-docs" title="Permalink to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> documentation is version-controlled in the
 <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io">conda-forge.github.io repository</a> on GitHub. The source
-text is stored in <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/tree/main/src">the src/ subdirectory</a> of this repository
-(<strong>not</strong> the docs/ subdirectory) and
+text is stored in <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/tree/main/src">the src/ subdirectory</a> of this repository and
 is formatted using Python’s <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructuredText</a> system.</p>
+<section id="editing-the-documentation-directly-through-github">
+<h3>Editing the documentation directly through Github<a class="headerlink" href="#editing-the-documentation-directly-through-github" title="Permalink to this heading">¶</a></h3>
 <p>You can propose quick edits directly through the GitHub website if you have
 a GitHub account — for instance, <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io/edit/main/src/user/contributing.rst">this link</a>
 will take you directly to a web-based editor for this very webpage. In
 general, the file corresponding to each page in the GitHub browser has a
 little pencil icon in its top-right corner that lets you open it up for editing.</p>
-<p>We are glad to know that you would like to contribute to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> documentation. If you are new to the conda-forge community, follow the steps below to make your first contribution:</p>
+</section>
+<section id="editing-the-documentation-locally">
+<h3>Editing the documentation locally<a class="headerlink" href="#editing-the-documentation-locally" title="Permalink to this heading">¶</a></h3>
+<p>We are glad to know that you would like to contribute to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> documentation.
+If you are new to the conda-forge community, follow the steps below to make your first contribution:</p>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://help.github.com/articles/fork-a-repo/">Fork</a> the
 <a class="reference external" href="https://github.com/conda-forge/conda-forge.github.io">conda-forge.github.io repository</a>.</p></li>
@@ -100,6 +105,7 @@ little pencil icon in its top-right corner that lets you open it up for editing.
 <blockquote>
 <div><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/&lt;your-username&gt;/conda-forge.github.io.git</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">conda-forge.github.io</span></code></p></li>
 </ul>
 </div></blockquote>
 <ol class="arabic simple" start="3">
@@ -128,7 +134,10 @@ little pencil icon in its top-right corner that lets you open it up for editing.
 <div><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code></p></li>
 </ul>
-<p>You can check the changes locally by opening the html files in <code class="docutils literal notranslate"><span class="pre">src/_build/html</span></code>.</p>
+<p>You can check the changes locally by opening the html files in <code class="docutils literal notranslate"><span class="pre">src/_build/html</span></code> or running:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">http.server</span> <span class="pre">--directory</span> <span class="pre">src/_build/html</span></code></p></li>
+</ul>
 </div></blockquote>
 <ol class="arabic simple" start="6">
 <li><p>Add and commit your changes:</p></li>
@@ -143,6 +152,22 @@ little pencil icon in its top-right corner that lets you open it up for editing.
 <li><p>Submit a <a class="reference external" href="https://help.github.com/articles/about-pull-requests/">pull request</a> to the main repository proposing your changes.</p></li>
 </ol>
 <p>Happy contributing!</p>
+</section>
+<section id="writing-guidelines">
+<h3>Writing guidelines<a class="headerlink" href="#writing-guidelines" title="Permalink to this heading">¶</a></h3>
+<p>Some basic writing guidelines should be kept in mind before you start contributing:</p>
+<ol class="arabic simple">
+<li><p>Identify your audience and understand their skill level.</p></li>
+<li><p>Match the technical language with the audience’s skill level proficiency.</p></li>
+<li><p>Try to keep it simple. In case you have to use a lot of complicated terms, provide a glossary of key terms.</p></li>
+<li><p>Address the audience directly as the user(s).</p></li>
+<li><p>While mentioning an action, use the “command” form of the verb: “Choose an option from the menu and press Enter.”</p></li>
+<li><p>For references, provide links to related content.</p></li>
+<li><p>Use headings and bullet points, which makes it easier to read.</p></li>
+<li><p>Avoid ambiguous titles. The title should include a clear description of the page’s subject.</p></li>
+<li><p>Check your spellings and grammar.</p></li>
+</ol>
+</section>
 </section>
 </section>
 
@@ -162,7 +187,12 @@ little pencil icon in its top-right corner that lets you open it up for editing.
 <li class="toctree-l2"><a class="reference internal" href="ci-skeleton.html">Using conda-smithy to manage your CI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Becoming involved</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#improve-docs">Improve the documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#improve-docs">Improve the documentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#editing-the-documentation-directly-through-github">Editing the documentation directly through Github</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#editing-the-documentation-locally">Editing the documentation locally</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#writing-guidelines">Writing guidelines</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="how_to_get_help.html">How to get help at conda-forge</a></li>
