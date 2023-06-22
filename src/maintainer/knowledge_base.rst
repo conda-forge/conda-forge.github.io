@@ -408,7 +408,7 @@ When should CDTs be used?
     all the conda package binaries.
     
 What's are some good examples?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  The OpenCL loader (``ocl-icd`` together with ``ocl-icd-system``) provides an OpenCL
     loading library. The loader will look at OpenCL implementations given in
