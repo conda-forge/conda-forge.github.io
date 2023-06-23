@@ -133,15 +133,12 @@ a workaround for now.
 Testing a local build
 ^^^^^^^^^^^^^^^^^^^^^
 
-Using a local channel looks a bit different in Windows, too. The quotes are
-important:
+Because we're using ``conda-build`` directly instead of ``build-locally.py``,
+we can use the ``local`` channel:
 
 .. code-block::
 
     conda create -n my-new-env -c local my-package
-
-If you installed from a different distribution than ``miniforge`` or to a
-different path, you'll need to alter this path.
 
 
 Notes on native code
