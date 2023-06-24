@@ -343,7 +343,7 @@ works as follows.
    and some information about the package it is trying to upload.
 3. The webservices server validates the secret token, the integrity of the package, and
    that the package is allowed for the given feedstock.
-4. If all of the validation passes, the package is then copied to the conda-forge
+4. If all of the validation passes, the package is then copied to the ``conda-forge``
    channel.
 
 We attempt to report errors in this process to users via comments on commits/issues in the feedstocks.

@@ -254,7 +254,7 @@ artifacts. The currently supported options are
 conda_forge_output_validation
 -----------------------------
 
-This field must be set to ``True`` for feedstocks in the conda-forge GitHub
+This field must be set to ``True`` for feedstocks in the ``conda-forge`` GitHub
 organization. It enables the required feedstock artifact validation as described
 in :ref:`output_validation`.
 
