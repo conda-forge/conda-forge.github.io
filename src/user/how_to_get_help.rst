@@ -1,14 +1,14 @@
 How to get help at conda-forge
 ==============================
 
-You could connect with us via **Gitter, GitHub Issues or Mailing List**. 
+You could connect with us via **Element, GitHub Issues or Discourse Group**.
 We would be happy to hear from you!
 
-Gitter
--------------------
+Element chatroom
+---------------------
 
-If you are just starting out with conda-forge and/or feel completely lost, we recommend getting in touch through `Gitter <https://gitter.im/conda-forge/conda-forge.github.io>`__. Our community members will direct
-you to the proper documentation and/or help you via the chat. 
+If you are just starting out with conda-forge and/or feel completely lost, we recommend getting in touch through `Element chatroom <https://app.element.io/#/room/#conda-forge:matrix.org>`__. Our community members will direct
+you to the proper documentation and/or help you via the chat.
 
 GitHub issues
 -------------
@@ -30,9 +30,7 @@ You can open issues at `conda-forge.github.io <https://github.com/conda-forge/co
 for long threads involving infrastructural, architectural or ecosystem wide discussions.
 Please note that some of these discussions will be turned into policy via the `CFEP process <https://github.com/conda-forge/conda-forge-enhancement-proposals>`__.
 
-Mailing list
-------------
+Discourse Group
+---------------
 
-You can subscribe to our `Mailing List <https://groups.google.com/forum/#!forum/conda-forge>`__ and post your queries there. The mailing list is a secondary home for long threads about the ecosystem.
-
-
+You can subscribe to our `Discourse group <https://conda.discourse.group>`__ and post your queries there. The Discourse group is a secondary home for long threads about the ecosystem.

@@ -34,7 +34,7 @@ function displayStatsJSON (reportText) {
   div.innerHTML = (
     (stats.n_repos / 1e3).toFixed(1) + 'k feedstocks<br>' +
     (stats.n_packages / 1e3).toFixed(1) + 'k packages<br>' +
-    (stats.n_artifacts / 1e3).toFixed(0) + 'k artifacts'
+    (stats.n_artifacts / 1e6).toFixed(1) + 'M artifacts'
   )
 
   div = document.getElementById('stats-issues-prs')
