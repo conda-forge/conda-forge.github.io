@@ -64,7 +64,7 @@ If a package is not pinned in `conda-forge-pinning <https://github.com/conda-for
       ignore_run_exports:
         - gmp
 
-There is additional documentation on this pinning scheme in `the conda docs <https://docs.conda.io/projects/conda-build/en/latest/resources/variants.html#build-variants>`_.
+There is additional documentation on this pinning scheme in `the conda docs <https://docs.conda.io/projects/conda-build/en/stable/resources/variants.html#build-variants>`_.
 
 
 Specifying run_exports

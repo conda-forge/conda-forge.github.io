@@ -12,6 +12,9 @@ Glossary
   Conda channel
      **C**\ onda **C**\hannel. Conda channels are the locations where packages are stored. They serve as the base for hosting and managing packages. ``conda-forge`` is one example of a conda channel. `Learn More <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/channels.html>`__.
      
+  Environment  
+    An environment is a tool that helps to keep dependencies required by different projects separate by creating isolated spaces where these dependencies are installed. `Learn More <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html>`__.
+
   CI
     **C**\ ontinuous **I**\ ntegration. Continuous integration is the practice of automating the integration of code changes from multiple contributors into a single software project. `Learn More <https://en.wikipedia.org/wiki/Continuous_integration>`__.
 
@@ -25,7 +28,7 @@ Glossary
     **A**\ pplication **B**\ inary **I**\ nterface. ABI is a document that comprehensively defines the binary system interface between applications and the operating system on which they run. `Learn More <https://en.wikipedia.org/wiki/Application_binary_interface>`__.
 
   ICU
-    **I**\ nternational **C**\ omponents for **U**\ nicode. ICU is an open-source project of mature C/C++ and Java libraries for Unicode support, software internationalization, and software globalization. `Learn More <http://site.icu-project.org/>`__.
+    **I**\ nternational **C**\ omponents for **U**\ nicode. ICU is an open-source project of mature C/C++ and Java libraries for Unicode support, software internationalization, and software globalization. `Learn More <https://icu.unicode.org/>`__.
 
   CRAN
     **C**\ omprehensive **R** **A**\ rchive **N**\ etwork. CRAN is a network of FTP and web servers around the world that store identical, up-to-date, versions of code and documentation for R. `Learn More <https://cran.r-project.org/>`__.
