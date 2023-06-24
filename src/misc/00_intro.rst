@@ -6,8 +6,14 @@ Glossary
 
 .. glossary::
 
+  Conda package
+     **C**\ onda **P**\ ackage. A conda package is a ``.tar.bz2`` or ``.conda`` archive that contains libraries, executable programs, data files and other components, as well as metadata under the ``info/`` directory. Its contents are unpacked in the installation prefix. `Learn More <https://en.wikipedia.org/wiki/Conda_(package_manager)>`__.
+
+  Conda channel
+     **C**\ onda **C**\hannel. Conda channels are the locations where packages are stored. They serve as the base for hosting and managing packages. ``conda-forge`` is one example of a conda channel. `Learn More <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/channels.html>`__.
+     
   Environment  
-    An environment is a tool that helps to keep dependencies required by different projects separate by creating isolated spaces for them that contain per-project dependencies for them. `Learn More <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html>`__.
+    An environment is a tool that helps to keep dependencies required by different projects separate by creating isolated spaces where these dependencies are installed. `Learn More <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html>`__.
 
   CI
     **C**\ ontinuous **I**\ ntegration. Continuous integration is the practice of automating the integration of code changes from multiple contributors into a single software project. `Learn More <https://en.wikipedia.org/wiki/Continuous_integration>`__.
