@@ -134,6 +134,7 @@ Instead, if possible, we prefer to take one of the following actions:
 Adding the ``broken`` label to a package is more destructive than patching the repo data
 and thus we prefer repo data patches over labeling things as ``broken``.
 
+.. _becoming_a_maintainer:
 
 Becoming a maintainer
 =====================
