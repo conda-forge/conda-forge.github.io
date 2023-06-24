@@ -41,6 +41,8 @@ conda-forge is a community effort that tackles these issues:
  - By default, we build packages for macOS, Linux AMD64 and Windows AMD64.
  - Many packages are updated by multiple maintainers with an easy option to become a maintainer.
  - An active core developer team is trying to also maintain abandoned packages.
+ 
+You can refer to the glossary `here<https://conda-forge.org/docs/misc/00_intro.html#glossary>`.
 
 How can I install packages from conda-forge?
 --------------------------------------------
