@@ -104,7 +104,7 @@ then you may need to add the new feedstock to the `feedstock-outputs <https://gi
 Fixing Broken Packages
 ======================
 
-Sometimes, you need to remove a package from the conda-forge channel on Anaconda.org.
+Sometimes, you need to remove a package from the ``conda-forge`` channel on Anaconda.org.
 There can be many reasons for this, but the ones that immediately come to mind are:
 
 * Incorrect pinnings or metadata
@@ -139,7 +139,7 @@ and thus we prefer repo data patches over labeling things as ``broken``.
 Becoming a maintainer
 =====================
 
-Conda-forge is a community project and it can therefore happen that feedstocks become temporarily abandoned.
+conda-forge is a community project and it can therefore happen that feedstocks become temporarily abandoned.
 You can join the maintainer team of a feedstock by adding your github-id to the ``recipe-maintainers`` section in the recipe's ``meta.yaml``.
 Please refer to :ref:`maint_updating_maintainers` for detailed instructions.
 
@@ -147,7 +147,7 @@ Please refer to :ref:`maint_updating_maintainers` for detailed instructions.
 Language versions
 =================
 
-Conda-forge contains packages from a number of languages including Python and R, among many others.
+conda-forge contains packages from a number of languages including Python and R, among many others.
 Each of these language-specific packaging sub-ecosystems needs to keep cadence with the language itself, making it challenging to have a blanket policy for how long to keep older versions of the language around.
 As it comes up, each group should be able to define their own policy on how long to keep older versions of their language around.
 

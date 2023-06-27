@@ -370,7 +370,7 @@ but merely to provide a starting point with some guidelines. Please look at <a c
 </section>
 <section id="rust-nightly">
 <h3>Rust Nightly<a class="headerlink" href="#rust-nightly" title="Permalink to this heading">¶</a></h3>
-<p>Many rust packages rely on nightly versions of the rust compiler. Given this fast release cadence, <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> does not yet pull each release.
+<p>Many rust packages rely on nightly versions of the rust compiler. Given this fast release cadence, conda-forge does not yet pull each release.
 Instead, rust nightly versions are pulled into the <code class="docutils literal notranslate"><span class="pre">dev</span></code> branch of the <a class="reference external" href="https://github.com/conda-forge/rust-feedstock/tree/dev">conda-forge/rust-feedstock</a> on an as-needed basis.
 For a new version, please file an issue on that feedstock.</p>
 <p>To enable the rust nightly compiler in your feedstock, follow the section above and then add the <code class="docutils literal notranslate"><span class="pre">rust_dev</span></code> channel in the <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file:</p>
@@ -383,7 +383,7 @@ For a new version, please file an issue on that feedstock.</p>
 <span id="cdt-packages"></span><h3>Core Dependency Tree Packages (CDTs)<a class="headerlink" href="#core-dependency-tree-packages-cdts" title="Permalink to this heading">¶</a></h3>
 <p>Dependencies outside of the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel should be avoided (see <a class="reference internal" href="adding_pkgs.html#no-external-deps"><span class="std std-ref">Avoid external dependencies</span></a>).
 However, there are a few exceptions:</p>
-<p>Some dependencies are so close to the system that they are not packaged with <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.
+<p>Some dependencies are so close to the system that they are not packaged with conda-forge.
 These dependencies have to be satisfied with <em>Core Dependency Tree</em> (CDT) packages.</p>
 <p>A CDT package consists of repackaged CentOS binaries from the appropriate version,
 either 6 or 7 depending on user choice and platform. We manage the build of CDT
@@ -391,7 +391,7 @@ packages using a centralized repo, <a class="reference external" href="https://g
 as opposed to generating feedstocks for them. (Note that historically we did use feedstocks but this
 practice has been deprecated.) To add a new CDT, make a PR on the
 <a class="reference external" href="https://github.com/conda-forge/cdt-builds">conda-forge/cdt-builds</a> repo.</p>
-<p>In <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> the primary usages of CDTs is currently for packages that link against libGL.</p>
+<p>In conda-forge the primary usages of CDTs is currently for packages that link against libGL.</p>
 <section id="libgl">
 <h4>libGL<a class="headerlink" href="#libgl" title="Permalink to this heading">¶</a></h4>
 <p>In addition to the required compilers <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">compiler('c')</span> <span class="pre">}}</span></code> and/or <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">compiler('cxx')</span> <span class="pre">}}</span></code>,
@@ -513,7 +513,7 @@ knows to build from when performing this build step.</p>
 <li><p>the package works with any MPI provider (e.g. mpich, openmpi)</p></li>
 <li><p>the package works with/without MPI</p></li>
 </ul>
-<p>Note that sometimes users want to use packages in <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> built against
+<p>Note that sometimes users want to use packages in conda-forge built against
 our MPI libraries but linked to external MPI libraries at runtime. If you are interested
 in this procedure, see <a class="reference internal" href="../user/tipsandtricks.html#using-external-message-passing-interface-mpi-libraries"><span class="std std-ref">Using External Message Passing Interface (MPI) Libraries</span></a>
 for details.</p>
@@ -882,7 +882,7 @@ they like without any knowledge of the version of the BLAS implementation needed
 </section>
 <section id="matplotlib">
 <span id="knowledge-mpl"></span><h3>Matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this heading">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> comes in two parts. The core library is in <code class="docutils literal notranslate"><span class="pre">matplotlib-base</span></code>. The
+<p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> on conda-forge comes in two parts. The core library is in <code class="docutils literal notranslate"><span class="pre">matplotlib-base</span></code>. The
 actual <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> package is this core library plus <code class="docutils literal notranslate"><span class="pre">pyqt</span></code>. Most, if not all, packages that have
 dependence at runtime on <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> should list this dependence as <code class="docutils literal notranslate"><span class="pre">matplotlib-base</span></code> unless they
 explicitly need <code class="docutils literal notranslate"><span class="pre">pyqt</span></code>. The idea is that a user installing <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> explicitly would get a full
@@ -1238,7 +1238,7 @@ because these symbols are in fact available. To do so, add
 </section>
 <section id="pypy-builds">
 <h2>PyPy builds<a class="headerlink" href="#pypy-builds" title="Permalink to this heading">¶</a></h2>
-<p>See <a class="reference internal" href="../user/tipsandtricks.html#pypy"><span class="std std-ref">Using PyPy as an interpreter</span></a> in the user docs for more info about PyPy and <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.</p>
+<p>See <a class="reference internal" href="../user/tipsandtricks.html#pypy"><span class="std std-ref">Using PyPy as an interpreter</span></a> in the user docs for more info about PyPy and conda-forge.</p>
 <p>To build your python package for pypy, wait for the bot to send a
 PR and contact <code class="docutils literal notranslate"><span class="pre">conda-forge/bot</span></code> team if a PR is not sent after the
 dependencies have been built.</p>
@@ -1324,7 +1324,7 @@ of your recipe and rerendering.</p>
 </section>
 <section id="cuda-builds">
 <span id="cuda"></span><h2>CUDA builds<a class="headerlink" href="#cuda-builds" title="Permalink to this heading">¶</a></h2>
-<p>Although the provisioned CI machines do not feature a GPU, Conda-Forge does provide mechanisms
+<p>Although the provisioned CI machines do not feature a GPU, conda-forge does provide mechanisms
 to build CUDA-enabled packages. These mechanisms involve several packages:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">cudatoolkit</span></code>: The runtime libraries for the CUDA toolkit. This is what end-users will end
@@ -1348,7 +1348,7 @@ make
 <p><strong>How is CUDA provided at the system level?</strong></p>
 <ul class="simple">
 <li><p>On Linux, Nvidia provides official Docker images, which we then
-<a class="reference external" href="https://github.com/conda-forge/docker-images">adapt</a> to Conda-Forge’s needs.</p></li>
+<a class="reference external" href="https://github.com/conda-forge/docker-images">adapt</a> to conda-forge’s needs.</p></li>
 <li><p>On Windows, the compilers need to be installed for every CI run. This is done through the
 <a class="reference external" href="https://github.com/conda-forge/conda-forge-ci-setup-feedstock/">conda-forge-ci-setup</a> scripts.
 Do note that the Nvidia executable won’t install the drivers because no GPU is present in the machine.</p></li>
@@ -1649,21 +1649,21 @@ being investigated or the migration PR got closed accidentally. To migrate a PR 
 </section>
 <section id="security-considerations-for-conda-forge-builds">
 <h2>Security considerations for conda-forge builds<a class="headerlink" href="#security-considerations-for-conda-forge-builds" title="Permalink to this heading">¶</a></h2>
-<p>All <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages if you or your team require a high level of security.
-You are also free to download recipes and rebuild them yourself, if you would like at least that much oversight. However, many people use <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> all the time with no issues and here are some things that <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> does to help with security in some ways:</p>
+<p>All conda-forge packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use conda-forge packages if you or your team require a high level of security.
+You are also free to download recipes and rebuild them yourself, if you would like at least that much oversight. However, many people use conda-forge all the time with no issues and here are some things that conda-forge does to help with security in some ways:</p>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://conda-forge.org/docs/maintainer/adding_pkgs.html#source">Sources</a> (where you specify where the package’s source code is coming from) can be pulled from GitHub, PyPI, or other sources and sha256 hashes are always used, so moving of tags or uploading of new sdists can not cause automatic package rebuilds.
 Also, once packages are accepted and made into feedstocks, only the maintainers of that feedstock have the right to merge PRs made to that feedstock.</p></li>
 <li><p>Each feedstock can only upload packages for that feedstock. This is enforced by using a cf-staging channel where builds are first sent.
-A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the conda-forge channel.
+A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel.
 This helps mitigate against a bad actor gaining access to an inconspicuous feedstock and then trying to push a build with malicious code into essential infrastructure packages (e.g., OpenSSL or Python).</p></li>
-<li><p>We have <a class="reference external" href="https://github.com/conda-forge/artifact-validation">artifact-validation</a> for validating all the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> artifacts uploaded to <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code>. This validation scans for various security-related items, such as artifacts that overwrite key pieces of certain packages.</p></li>
-<li><p>We have a dedicated <a class="reference external" href="https://conda-forge.org/docs/orga/subteams.html?highlight=security+team#security-and-systems-sub-team">Security and Systems Sub-Team</a> who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.</p></li>
+<li><p>We have <a class="reference external" href="https://github.com/conda-forge/artifact-validation">artifact-validation</a> for validating all the conda-forge artifacts uploaded to <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code>. This validation scans for various security-related items, such as artifacts that overwrite key pieces of certain packages.</p></li>
+<li><p>We have a dedicated <a class="reference external" href="https://conda-forge.org/docs/orga/subteams.html?highlight=security+team#security-and-systems-sub-team">Security and Systems Sub-Team</a> who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by conda-forge.</p></li>
 </ol>
 </section>
 <section id="significant-changes-to-upstream-projects">
 <h2>Significant Changes To Upstream Projects<a class="headerlink" href="#significant-changes-to-upstream-projects" title="Permalink to this heading">¶</a></h2>
-<p>From time to time, we make changes in upstream projects so that they better integrate into the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> ecosystem. We
+<p>From time to time, we make changes in upstream projects so that they better integrate into the conda-forge ecosystem. We
 have listed some, but not all, of those changes here for specific projects along with any associated documentation.</p>
 <section id="python">
 <h3>Python<a class="headerlink" href="#python" title="Permalink to this heading">¶</a></h3>

@@ -18,7 +18,7 @@ We encourage you to contribute to conda-forge. You can do so in several ways:
 Improve the documentation
 ===========================
 
-The ``conda-forge`` documentation is version-controlled in the
+The conda-forge documentation is version-controlled in the
 `conda-forge.github.io repository
 <https://github.com/conda-forge/conda-forge.github.io>`__ on GitHub. The source
 text is stored in `the src/ subdirectory
@@ -39,7 +39,7 @@ little pencil icon in its top-right corner that lets you open it up for editing.
 Editing the documentation locally
 ---------------------------------
 
-We are glad to know that you would like to contribute to the ``conda-forge`` documentation. 
+We are glad to know that you would like to contribute to the conda-forge documentation. 
 If you are new to the conda-forge community, follow the steps below to make your first contribution:
 
 1. `Fork <https://help.github.com/articles/fork-a-repo/>`__ the
@@ -93,3 +93,5 @@ Some basic writing guidelines should be kept in mind before you start contributi
 7. Use headings and bullet points, which makes it easier to read.
 8. Avoid ambiguous titles. The title should include a clear description of the page's subject.
 9. Check your spellings and grammar.
+10. conda-forge should always be spelt in lowercase, hyphenated, and without backticks.
+    It should only be backticked when used as an identifier (e.g. the Anaconda.org channel, the Github organization, etc).

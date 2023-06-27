@@ -73,9 +73,9 @@
 <section id="id1">
 <h2>2023<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
 <section id="conda-forge-google-group-is-now-read-only-move-to-discourse">
-<h3>2023-01-09: <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> Google Group is Now Read-only - Move to Discourse<a class="headerlink" href="#conda-forge-google-group-is-now-read-only-move-to-discourse" title="Permalink to this heading">¶</a></h3>
-<p>We have made the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> Google Group read-only. Please use the new
-<code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> <a class="reference external" href="https://conda.discourse.group/c/pkg-building/conda-forge/25">discourse forum</a>,
+<h3>2023-01-09: conda-forge Google Group is Now Read-only - Move to Discourse<a class="headerlink" href="#conda-forge-google-group-is-now-read-only-move-to-discourse" title="Permalink to this heading">¶</a></h3>
+<p>We have made the conda-forge Google Group read-only. Please use the new
+conda-forge <a class="reference external" href="https://conda.discourse.group/c/pkg-building/conda-forge/25">discourse forum</a>,
 our <a class="reference external" href="https://gitter.im/conda-forge/conda-forge.github.io">Gitter room</a>, or it’s <a class="reference external" href="https://app.element.io/#/room/#conda-forge-space:matrix.org">Matrix/Element
 counterpart</a> instead.</p>
 </section>
@@ -90,7 +90,7 @@ repo. The new location is reflected in the various links on repos and our status
 <h2>2022<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
 <section id="moving-to-conda-artifacts">
 <h3>2022-11-16: Moving to <code class="docutils literal notranslate"><span class="pre">.conda</span></code> Artifacts<a class="headerlink" href="#moving-to-conda-artifacts" title="Permalink to this heading">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> is moving to producing <code class="docutils literal notranslate"><span class="pre">conda</span></code> artifacts in the version 2 package
+<p>conda-forge is moving to producing <code class="docutils literal notranslate"><span class="pre">conda</span></code> artifacts in the version 2 package
 format (also known as <code class="docutils literal notranslate"><span class="pre">.conda</span></code>). These artifacts allow for more efficient indexing
 and maintenance of the ecosystem. Our admin migrations bot will begin making PRs to
 feedstocks to change them over to the new artifact format. You will need <code class="docutils literal notranslate"><span class="pre">conda</span></code>
@@ -205,12 +205,12 @@ status of the migration on our status page.</p>
 for the <code class="docutils literal notranslate"><span class="pre">win_*</span></code>, <code class="docutils literal notranslate"><span class="pre">osx_*</span></code>, and <code class="docutils literal notranslate"><span class="pre">linux_64</span></code> platforms. Travis CI will be available only
 for platforms in their <a class="reference external" href="https://docs.travis-ci.com/user/billing-overview/#partner-queue-solution">partner queues</a>.
 These platforms currently include <code class="docutils literal notranslate"><span class="pre">ppc64le</span></code>, <code class="docutils literal notranslate"><span class="pre">aarch64</span></code> and <code class="docutils literal notranslate"><span class="pre">s390x</span></code>. Rerendering will
-raise an error if Travis CI is used for a non-partner queue platform in the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>
+raise an error if Travis CI is used for a non-partner queue platform in the conda-forge
 GitHub organization.</p>
 </section>
 <section id="default-branch-migration-from-master-to-main">
 <h3>2022-02-13: Default branch migration from <code class="docutils literal notranslate"><span class="pre">master</span></code> to <code class="docutils literal notranslate"><span class="pre">main</span></code><a class="headerlink" href="#default-branch-migration-from-master-to-main" title="Permalink to this heading">¶</a></h3>
-<p>We will be migrating the default branches of all feedstocks and other <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> repos
+<p>We will be migrating the default branches of all feedstocks and other conda-forge repos
 from <code class="docutils literal notranslate"><span class="pre">master</span></code> to <code class="docutils literal notranslate"><span class="pre">main</span></code>. We do expect some minor hiccups while this migration is
 going on. You will need to change to the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch from <code class="docutils literal notranslate"><span class="pre">master</span></code> on any local clones via the
 following git commands:</p>
@@ -228,7 +228,7 @@ following git commands:</p>
 <h2>2021<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h2>
 <section id="centos-7-docker-images-are-now-the-default">
 <h3>2021-12-02: CentOS 7 docker images are now the default<a class="headerlink" href="#centos-7-docker-images-are-now-the-default" title="Permalink to this heading">¶</a></h3>
-<p>We are moving all <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> <code class="docutils literal notranslate"><span class="pre">linux-64</span></code> jobs to use CentOS 7-based docker images.
+<p>We are moving all conda-forge <code class="docutils literal notranslate"><span class="pre">linux-64</span></code> jobs to use CentOS 7-based docker images.
 This will help users avoid <code class="docutils literal notranslate"><span class="pre">conda/mamba</span></code> solver errors where dependencies that need
 CentOS 7 cannot be installed. Importantly, our compiler stack will still default to using
 a CentOS 6 sysroot unless the recipe explicitly lists the CentoOS 7 sysroot package. This
@@ -273,9 +273,9 @@ as that would save lots of CI resources.</p>
 <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code></p>
 </section>
 <section id="conda-forge-is-now-citable">
-<h3>2021-05-22: <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> is now citable!<a class="headerlink" href="#conda-forge-is-now-citable" title="Permalink to this heading">¶</a></h3>
-<p>You can now cite <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> using our <a class="reference external" href="https://doi.org/10.5281/zenodo.4774216">Zenodo entry</a>!
-This entry credits the entire <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> community for its hard work in building our
+<h3>2021-05-22: conda-forge is now citable!<a class="headerlink" href="#conda-forge-is-now-citable" title="Permalink to this heading">¶</a></h3>
+<p>You can now cite conda-forge using our <a class="reference external" href="https://doi.org/10.5281/zenodo.4774216">Zenodo entry</a>!
+This entry credits the entire conda-forge community for its hard work in building our
 amazing ecosystem.</p>
 </section>
 </section>
@@ -283,7 +283,7 @@ amazing ecosystem.</p>
 <h2>2020<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h2>
 <section id="moving-to-centos-7-and-centos-6-end-of-life">
 <h3>2020-12-16: Moving to CentOS 7 and CentOS 6 End-of-Life<a class="headerlink" href="#moving-to-centos-7-and-centos-6-end-of-life" title="Permalink to this heading">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>’s compiler stack uses repackaged libraries from CentOS 6
+<p>conda-forge’s compiler stack uses repackaged libraries from CentOS 6
 to supply certain libraries, notably <code class="docutils literal notranslate"><span class="pre">glibc</span></code> when building recipes. We currently
 default to using CentOS 6 with the <code class="docutils literal notranslate"><span class="pre">glibc</span></code> 2.12 ABI. However, CentOS 6 reached
 end-of-life in November 2020 and increasingly software packages require at
@@ -291,14 +291,14 @@ least CentOS 7 with the <code class="docutils literal notranslate"><span class="
 events, some communities that may have been planning to skip CentOS 7
 and move straight to CentOS 8 might be reconsidering those plans. Further, they
 may not be ready for a full-scale switch to CentOS 7. Thus the
-<code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> core team has decided to delay moving to CentOS 7 until sometime
+conda-forge core team has decided to delay moving to CentOS 7 until sometime
 early next year, likely the end of January 2021 at the earliest. We are actively
 looking for feedback from our users on this issue. Please do <a class="reference internal" href="../orga/getting-in-touch.html#getintouch"><span class="std std-ref">get in touch</span></a>
 if you have comments or concerns!</p>
 </section>
 <section id="artifact-validation">
 <h3>2020-12-02: Artifact Validation<a class="headerlink" href="#artifact-validation" title="Permalink to this heading">¶</a></h3>
-<p>In an effort to better secure <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>, we are developing a process to
+<p>In an effort to better secure conda-forge, we are developing a process to
 validate artifacts before they are uploaded to <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code>. This validation
 will look for various security-related items, such as artifacts that overwrite
 key pieces of certain packages. While this process is in development, we will not
@@ -352,7 +352,7 @@ image in your <code class="docutils literal notranslate"><span class="pre">conda
 <section id="strict-channel-priority-in-builds-for-osx-and-linux">
 <h3>2020-07-23: Strict channel priority in builds for OSX and Linux<a class="headerlink" href="#strict-channel-priority-in-builds-for-osx-and-linux" title="Permalink to this heading">¶</a></h3>
 <p>We have changed the OSX and Linux platforms to enforce strict channel priority
-in package builds. This change means that if a package is available in the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>
+in package builds. This change means that if a package is available in the conda-forge
 channels, the <code class="docutils literal notranslate"><span class="pre">conda</span></code> solver will not consider any versions of the package from other
 channels. Users can disable this by setting <code class="docutils literal notranslate"><span class="pre">channel_priority:</span> <span class="pre">flexible</span></code> in their
 <code class="docutils literal notranslate"><span class="pre">conda-forge.yml</span></code>.</p>
@@ -371,7 +371,7 @@ The <code class="docutils literal notranslate"><span class="pre">openmp</span></
 </section>
 <section id="core-dependency-tree-package-changes">
 <h3>2020-07-16: Core Dependency Tree Package Changes<a class="headerlink" href="#core-dependency-tree-package-changes" title="Permalink to this heading">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> is moving to a new system for generating Core Dependency Tree (CDT)
+<p>conda-forge is moving to a new system for generating Core Dependency Tree (CDT)
 packages. These changes include</p>
 <blockquote>
 <div><ul class="simple">
@@ -385,9 +385,9 @@ on an as-needed basis, so it may not happen right away.</p></li>
 <a class="reference external" href="https://github.com/conda-forge/cdt-builds">conda-forge/cdt-builds</a> repo.</p></li>
 </ul>
 </div></blockquote>
-<p>These changes are being made so that <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> can provide access to
+<p>These changes are being made so that conda-forge can provide access to
 CentOS 7 / glibc 2.17 for <code class="docutils literal notranslate"><span class="pre">linux-64</span></code> builds. They will also move more of the
-packages needed for <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> builds into the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channels making
+packages needed for conda-forge builds into the conda-forge channels making
 builds more reliable.</p>
 </section>
 <section id="moving-from-clang-9-to-clang-10">
@@ -439,7 +439,7 @@ etc on <code class="docutils literal notranslate"><span class="pre">anaconda.org
 <section id="new-staging-process-for-anaconda-org-uploads">
 <h3>2020-05-09: New Staging Process for <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code> Uploads<a class="headerlink" href="#new-staging-process-for-anaconda-org-uploads" title="Permalink to this heading">¶</a></h3>
 <p>Starting this week, we are changing the way we upload packages to <code class="docutils literal notranslate"><span class="pre">anaconda.org</span></code>.
-We will move from direct uploads to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> <code class="docutils literal notranslate"><span class="pre">main</span></code> channel to using a
+We will move from direct uploads to the conda-forge <code class="docutils literal notranslate"><span class="pre">main</span></code> channel to using a
 staging organization/channel combined with a copy request from the staging channel to
 the production channel. This new process will allow us to perform some validation on
 the outputs of feedstocks before they are released.</p>
@@ -593,7 +593,7 @@ This is going to take a few months to get done so bear with us.</p>
 <li class="toctree-l2"><a class="reference internal" href="introduction.html">A brief introduction</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Announcements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">2023</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#conda-forge-google-group-is-now-read-only-move-to-discourse">2023-01-09: <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> Google Group is Now Read-only - Move to Discourse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conda-forge-google-group-is-now-read-only-move-to-discourse">2023-01-09: conda-forge Google Group is Now Read-only - Move to Discourse</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-staged-recipes-feedstock-creation-job-moved">2023-01-08: <code class="docutils literal notranslate"><span class="pre">conda-forge/staged-recipes</span></code> Feedstock Creation Job Moved</a></li>
 </ul>
 </li>
@@ -620,7 +620,7 @@ This is going to take a few months to get done so bear with us.</p>
 <li class="toctree-l4"><a class="reference internal" href="#gcc-10-and-clang-12-as-default-compilers-for-linux-and-macos">2021-10-13: GCC 10 and clang 12 as default compilers for Linux and macOS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#python-3-6-is-now-dropped-when-building-conda-forge-packages">2021-10-04: python 3.6 is now dropped when building conda-forge packages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#defaults-channel-is-now-dropped-when-building-conda-forge-packages">2021-09-30: <code class="docutils literal notranslate"><span class="pre">defaults</span></code> channel is now dropped when building conda-forge packages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#conda-forge-is-now-citable">2021-05-22: <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> is now citable!</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conda-forge-is-now-citable">2021-05-22: conda-forge is now citable!</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">2020</a><ul>

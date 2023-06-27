@@ -85,8 +85,8 @@ is not present or the package is missing altogether.</p>
 <p>You can confirm this by issuing the command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> and searching for the package in question.</p>
 <section id="why-does-that-happen">
 <h3>Why does that happen?<a class="headerlink" href="#why-does-that-happen" title="Permalink to this heading">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and <code class="docutils literal notranslate"><span class="pre">defaults</span></code> are not 100% compatible.
-In the example above it is known that <code class="docutils literal notranslate"><span class="pre">defaults</span></code> uses <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">54.*</span></code> while <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> relies on <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">56.*</span></code>,
+<p>The conda-forge and <code class="docutils literal notranslate"><span class="pre">defaults</span></code> are not 100% compatible.
+In the example above it is known that <code class="docutils literal notranslate"><span class="pre">defaults</span></code> uses <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">54.*</span></code> while conda-forge relies on <code class="docutils literal notranslate"><span class="pre">icu</span> <span class="pre">56.*</span></code>,
 that mismatch can lead to errors when the install environment is mixing packages from multiple channels.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -97,7 +97,7 @@ that mismatch can lead to errors when the install environment is mixing packages
 <h3>How to fix it?<a class="headerlink" href="#how-to-fix-it" title="Permalink to this heading">¶</a></h3>
 <p>Newer <code class="docutils literal notranslate"><span class="pre">conda</span></code> versions (&gt;=4.6) introduced a strict channel priority feature.
 Type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">config</span> <span class="pre">--describe</span> <span class="pre">channel_priority</span></code> for more information.</p>
-<p>The solution is to add the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel on top of <code class="docutils literal notranslate"><span class="pre">defaults</span></code> in your <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> file when using <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages
+<p>The solution is to add the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel on top of <code class="docutils literal notranslate"><span class="pre">defaults</span></code> in your <code class="docutils literal notranslate"><span class="pre">.condarc</span></code> file when using conda-forge packages
 and activate the strict channel priority with:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>channel_priority<span class="w"> </span>strict
 </pre></div>
@@ -115,10 +115,10 @@ channels:
 Using envs make it easier to debug problems with packages and ensure the stability of your root env.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In the past <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> used to vendorize some of <code class="docutils literal notranslate"><span class="pre">defaults</span></code> dependencies that were not built in our infrastructure,
+<p>In the past conda-forge used to vendorize some of <code class="docutils literal notranslate"><span class="pre">defaults</span></code> dependencies that were not built in our infrastructure,
 like compilers run-times, to avoid the mixing channel problem.
 However, with the <code class="docutils literal notranslate"><span class="pre">strict</span></code> option, we no longer have to vendorize those (this led to its own set of problems),
-instead, we removed everything that is not built in <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and let <code class="docutils literal notranslate"><span class="pre">strict</span></code> pull those from <code class="docutils literal notranslate"><span class="pre">defaults</span></code>.</p>
+instead, we removed everything that is not built in conda-forge and let <code class="docutils literal notranslate"><span class="pre">strict</span></code> pull those from <code class="docutils literal notranslate"><span class="pre">defaults</span></code>.</p>
 <p>TL;DR if you are experiencing missing compilers run-times like <code class="docutils literal notranslate"><span class="pre">libgcc-ng</span></code>,
 that is probably because you removed <code class="docutils literal notranslate"><span class="pre">defaults</span></code>,
 just re-add it and activate <code class="docutils literal notranslate"><span class="pre">strict</span></code> for a smooth and stable experience when installing packages.</p>
@@ -128,15 +128,15 @@ just re-add it and activate <code class="docutils literal notranslate"><span cla
 <section id="using-external-message-passing-interface-mpi-libraries">
 <span id="id1"></span><h2>Using External Message Passing Interface (MPI) Libraries<a class="headerlink" href="#using-external-message-passing-interface-mpi-libraries" title="Permalink to this heading">¶</a></h2>
 <p>On some high-performance computing (HPC) systems, users are expected to use the
-MPI binaries that are available on the system as opposed to those built by <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>.
+MPI binaries that are available on the system as opposed to those built by conda-forge.
 These binaries are typically specialized for the system and interface properly with job
-schedulers, etc. However, this practice creates issues for <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> users. When you install
-a package from <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> that relies on MPI, <code class="docutils literal notranslate"><span class="pre">conda</span></code> will install the MPI binaries
-built by <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> and the package will link to those binaries. This setup often either
+schedulers, etc. However, this practice creates issues for conda-forge users. When you install
+a package from conda-forge that relies on MPI, <code class="docutils literal notranslate"><span class="pre">conda</span></code> will install the MPI binaries
+built by conda-forge and the package will link to those binaries. This setup often either
 does not work at all or functions in unexpected ways on HPC systems.</p>
-<p>To solve these issues, <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> has created special dummy builds of the <code class="docutils literal notranslate"><span class="pre">mpich</span></code> and <code class="docutils literal notranslate"><span class="pre">openmpi</span></code>
+<p>To solve these issues, conda-forge has created special dummy builds of the <code class="docutils literal notranslate"><span class="pre">mpich</span></code> and <code class="docutils literal notranslate"><span class="pre">openmpi</span></code>
 libraries that are simply shell packages with no contents. These packages allow the <code class="docutils literal notranslate"><span class="pre">conda</span></code> solver to produce
-correct environments while avoiding installing MPI binaries from <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. You can install the
+correct environments while avoiding installing MPI binaries from conda-forge. You can install the
 dummy package with the following command</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;mpich=x.y.z=external_*&quot;</span>
 $<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;openmpi=x.y.z=external_*&quot;</span>
@@ -144,12 +144,12 @@ $<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </
 </div>
 <p>As long as you have the local copies of the <code class="docutils literal notranslate"><span class="pre">mpich</span></code>/<code class="docutils literal notranslate"><span class="pre">openmpi</span></code> library in your linking paths and
 the local version matches the <code class="docutils literal notranslate"><span class="pre">conda</span></code> version within the proper ABI range, then this procedure should
-work. At runtime, the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> package that depends on MPI should find the
+work. At runtime, the conda-forge package that depends on MPI should find the
 local copy of <code class="docutils literal notranslate"><span class="pre">mpich</span></code>/<code class="docutils literal notranslate"><span class="pre">openmpi</span></code> and link to it.</p>
 <p>Another point for using your own MPI binaries specialized for the system is that
 if you care about ultimate performance, you should build/install your MPI backend yourself,
-and not rely on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages (they are built for compatibility rather than performance).
-Due to the constrained build environment of <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> packages there might be the lack of such important features
+and not rely on conda-forge packages (they are built for compatibility rather than performance).
+Due to the constrained build environment of conda-forge packages there might be the lack of such important features
 as XPMEM and CMA for <code class="docutils literal notranslate"><span class="pre">mpich</span></code> and <code class="docutils literal notranslate"><span class="pre">openmpi</span></code>, respectively.</p>
 </section>
 <section id="installing-apple-intel-packages-on-apple-silicon">

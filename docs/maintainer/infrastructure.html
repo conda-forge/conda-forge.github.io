@@ -88,7 +88,7 @@ You can find the detailed guide for submitting new package recipes in <a class="
 </ul>
 </div></blockquote>
 <p><code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> also contains the command line tool that you should use if you rerender manually from the command line (see <a class="reference internal" href="updating_pkgs.html#dev-update-rerender"><span class="std std-ref">Rerendering feedstocks</span></a>).</p>
-<p>Smithy can be used beyond Conda-Forge’s purposes. For example, it can be used to <cite>set up self-hosted Azure agents &lt;azure-config&gt;</cite> for non-Conda-Forge infrastructures.
+<p>Smithy can be used beyond conda-forge’s purposes. For example, it can be used to <cite>set up self-hosted Azure agents &lt;azure-config&gt;</cite> for non-conda-forge infrastructures.
 (You could also consider using <a class="reference external" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops">Azure virtual machine scale set agents</a>,
 which could be less expensive to run than permanently active agents.)</p>
 </section>
@@ -113,7 +113,7 @@ Please note that the code logic provided by the app is in the <code class="docut
 </section>
 <section id="admin-web-services">
 <span id="dev-admservice"></span><h2>Admin web services<a class="headerlink" href="#admin-web-services" title="Permalink to this heading">¶</a></h2>
-<p>Conda-forge is running a webservice on Heroku called <a class="reference external" href="https://github.com/conda-forge/conda-forge-webservices">conda-forge-webservices</a>.</p>
+<p>conda-forge is running a webservice on Heroku called <a class="reference external" href="https://github.com/conda-forge/conda-forge-webservices">conda-forge-webservices</a>.</p>
 <p>The following services are run by default on a feedstock:</p>
 <ul class="simple">
 <li><p>It will lint the recipes in the PRs and report back whether the recipe is in excellent condition or not.</p></li>
@@ -287,7 +287,7 @@ take more serious actions, including archiving feedstocks or removing maintainer
 </section>
 <section id="compilers-and-runtimes">
 <h2>Compilers and Runtimes<a class="headerlink" href="#compilers-and-runtimes" title="Permalink to this heading">¶</a></h2>
-<p>Conda-forge builds and maintains its own set of compilers for various languages
+<p>conda-forge builds and maintains its own set of compilers for various languages
 and/or systems (e.g., <code class="docutils literal notranslate"><span class="pre">C</span></code>, <code class="docutils literal notranslate"><span class="pre">FORTRAN</span></code>, <code class="docutils literal notranslate"><span class="pre">C++</span></code>, <code class="docutils literal notranslate"><span class="pre">CUDA</span></code>, etc.). These are used
 in all of our CI builds to build both core dependencies (e.g., <code class="docutils literal notranslate"><span class="pre">Python</span></code>) and maintainer-contributed
 packages. While we do not have any formal policies or promises of support for these

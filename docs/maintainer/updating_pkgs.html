@@ -72,8 +72,8 @@
 <section id="important-notes">
 <h2>Important notes<a class="headerlink" href="#important-notes" title="Permalink to this heading">¶</a></h2>
 <section id="packages-on-conda-forge-are-immutable">
-<h3>Packages on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> are immutable<a class="headerlink" href="#packages-on-conda-forge-are-immutable" title="Permalink to this heading">¶</a></h3>
-<p>As a matter of policy, we do not allow edits or the deletion of packages on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>. This
+<h3>Packages on conda-forge are immutable<a class="headerlink" href="#packages-on-conda-forge-are-immutable" title="Permalink to this heading">¶</a></h3>
+<p>As a matter of policy, we do not allow edits or the deletion of packages on conda-forge. This
 policy is very important as it increases the reliability and reproducibility of <code class="docutils literal notranslate"><span class="pre">conda</span></code> environments
 made with the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel. Note that because of this policy, our upload scripts will refuse to
 upload packages which already exist on the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel.</p>
@@ -94,7 +94,7 @@ For updates, using a branch in the main repo is discouraged because,</p>
 </ol>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>For these reasons, maintainers are asked to fork the feedstock to their personal account, push to a branch in the fork and then open a PR to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> repo.</p>
+<p>For these reasons, maintainers are asked to fork the feedstock to their personal account, push to a branch in the fork and then open a PR to the conda-forge repo.</p>
 </div>
 <section id="pushing-to-regro-cf-autotick-bot-branch">
 <h4>Pushing to regro-cf-autotick-bot branch<a class="headerlink" href="#pushing-to-regro-cf-autotick-bot-branch" title="Permalink to this heading">¶</a></h4>
@@ -150,7 +150,7 @@ If you can’t find a version here, then the chances are that the bot couldn’t
 <li><p>Connect to the feedstock from your computer by using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/&lt;your-github-id&gt;/&lt;feedstock&gt;</span></code>.</p></li>
 </ul>
 </li>
-<li><p>Syncing your fork with conda-forges feedstock</p>
+<li><p>Syncing your fork with conda-forge’s feedstock</p>
 <p>This step is only required if you have forked some time ago and your fork is missing commits from the feedstock at conda-forge.</p>
 <ul class="simple">
 <li><p>Make sure you are on the main branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">main</span></code></p></li>
@@ -270,7 +270,7 @@ This is useful when trying out packages built in a PR. But you first need to dow
 </section>
 <section id="removing-broken-packages">
 <span id="maint-fix-broken-packages"></span><h2>Removing broken packages<a class="headerlink" href="#removing-broken-packages" title="Permalink to this heading">¶</a></h2>
-<p>Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel.</p>
+<p>Sometimes mistakes happen and a broken package ends up being uploaded to the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel.</p>
 <p>If the only issue is in the package metadata, we can directly patch it using
 the <a class="reference external" href="https://github.com/conda-forge/conda-forge-repodata-patches-feedstock">repo data patches feedstock</a>.
 If this is the case, the following general guidelines should be followed:
@@ -293,7 +293,7 @@ remove broken packages from the <code class="docutils literal notranslate"><span
 </section>
 <section id="archiving-feedstocks">
 <h2>Archiving feedstocks<a class="headerlink" href="#archiving-feedstocks" title="Permalink to this heading">¶</a></h2>
-<p>If a package is no longer maintained <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> will <em>archive</em>
+<p>If a package is no longer maintained conda-forge will <em>archive</em>
 the repository. An archived repository can no longer accept PRs and issues, which prevents people and <code class="docutils literal notranslate"><span class="pre">regro-cf-autotick-bot</span></code> from updating the
 package (an example would be to re-render the feedstock to support new Python versions). Note that this <strong>does not</strong> remove the existing packages, those will still be available.</p>
 <p>If you believe a feedstock should be archived, please do the following:</p>
@@ -343,7 +343,7 @@ To contact core, ping them by mentioning &#64;conda-forge/core in a comment or, 
 <li class="toctree-l2"><a class="reference internal" href="adding_pkgs.html">Contributing packages</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Maintaining packages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#important-notes">Important notes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#packages-on-conda-forge-are-immutable">Packages on <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> are immutable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#packages-on-conda-forge-are-immutable">Packages on conda-forge are immutable</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#forking-and-pull-requests">Forking and pull requests</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#pushing-to-regro-cf-autotick-bot-branch">Pushing to regro-cf-autotick-bot branch</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#how-does-regro-cf-autotick-bot-create-automatic-version-updates"><strong>How does regro-cf-autotick-bot create automatic version updates?</strong></a></li>

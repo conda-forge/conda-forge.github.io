@@ -7,7 +7,6 @@ These CFEPs are similar to `Python's PEP <https://www.python.org/dev/peps/>`_ an
 
 CFEPs are stored in the `cfep GitHub repository <https://github.com/conda-forge/cfep>`_.
 A list of conda-forge enhancement proposals (CFEP) are as follows:
-
 * `CFEP-00: CFEP Template <https://github.com/conda-forge/cfep/blob/main/cfep-00.md>`_ -- *Proposed*
 * `CFEP-01: CFEP Purpose and Guidelines <https://github.com/conda-forge/cfep/blob/main/cfep-01.md>`_ -- *Proposed*
 * `CFEP-02: Upgrade default macOS Travis image to xcode6.4 <https://github.com/conda-forge/cfep/blob/main/cfep-02.md>`_ -- *Accepted*
