@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Knowledge Base &#8212; conda-forge 2023.06.24 documentation</title>
+    <title>Knowledge Base &#8212; conda-forge 2023.06.27 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.06.24 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.06.27 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 
@@ -165,25 +165,45 @@ are unfamiliar with VM systems or have trouble installing Microsoft’s VMs, ple
 use a general web search to explore — while these topics are beyond the
 scope of this documentation, there are ample discussions on them on the broader
 Internet.</p>
+<p>To bootstrap a conda environment and install <code class="docutils literal notranslate"><span class="pre">conda-build</span></code>, consider
+<a class="reference external" href="https://github.com/conda-forge/miniforge">miniforge</a>.</p>
+<section id="executing-a-build">
+<h4>Executing a build<a class="headerlink" href="#executing-a-build" title="Permalink to this heading">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">build-locally.py</span></code> script does not support Windows (yet, PRs welcome!).
+You can use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">build</span> <span class="pre">recipe/</span> <span class="pre">-m</span> <span class="pre">.ci_support/choose_your_config.yaml</span></code> as
+a workaround for now.</p>
+</section>
+<section id="testing-a-local-build">
+<h4>Testing a local build<a class="headerlink" href="#testing-a-local-build" title="Permalink to this heading">¶</a></h4>
+<p>Because we’re using <code class="docutils literal notranslate"><span class="pre">conda-build</span></code> directly instead of <code class="docutils literal notranslate"><span class="pre">build-locally.py</span></code>,
+we can use the <code class="docutils literal notranslate"><span class="pre">local</span></code> channel:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">my</span><span class="o">-</span><span class="n">new</span><span class="o">-</span><span class="n">env</span> <span class="o">-</span><span class="n">c</span> <span class="n">local</span> <span class="n">my</span><span class="o">-</span><span class="n">package</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="notes-on-native-code">
+<h3>Notes on native code<a class="headerlink" href="#notes-on-native-code" title="Permalink to this heading">¶</a></h3>
 <p>In order to compile native code (C, C++, etc.) on Windows, you will need to
 install Microsoft’s Visual C++ build tools on your VM. You must install
 particular versions of these tools — this is to maintain compatibility between
 compiled libraries used in Python, <a class="reference external" href="https://wiki.python.org/moin/WindowsCompilers">as described on this Python wiki page</a>. The current relevant
 versions are:</p>
 <ul class="simple">
-<li><p>For Python 3.5–3.7: Visual C++ 14.0</p></li>
+<li><p>For Python 3.5–3.12+: Visual C++ 14.x</p></li>
 </ul>
 <p>While you can obtain these tools by installing the right version of the full
 <a class="reference external" href="https://visualstudio.microsoft.com/">Visual Studio</a> development
 environment, you can save a lot of time and bandwidth by installing standalone
-“build tools” packages. The links are as follows:</p>
-<ul class="simple">
-<li><p>For Python 3.5–3.7: <a class="reference external" href="https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2017-and-other-products">Microsoft Build Tools for Visual Studio 2017</a>.</p></li>
-</ul>
+“build tools” packages. You can get them from <a class="reference external" href="https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products">Visual Studio
+Subscriptions</a>.
+To download build tools, you’ll need a Microsoft account. Once on the
+Visual Studio Subscriptions page, you may also need to join the Dev Essentials
+program. Once that’s done, you can click the “Download” tab and search for
+“Build Tools for Visual Studio 2022”.</p>
 <p>If you need more information. Please refer <a class="reference external" href="https://wiki.python.org/moin/WindowsCompilers">the Python wiki page on Windows compilers</a>.</p>
-</section>
 <section id="simple-cmake-based-bld-bat">
-<h3>Simple CMake-Based <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code><a class="headerlink" href="#simple-cmake-based-bld-bat" title="Permalink to this heading">¶</a></h3>
+<h4>Simple CMake-Based <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code><a class="headerlink" href="#simple-cmake-based-bld-bat" title="Permalink to this heading">¶</a></h4>
 <p>Some projects provide hooks for CMake to build the project. The following
 example <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code> file demonstrates how to build a traditional, out-of-core
 build for such projects.</p>
@@ -218,7 +238,7 @@ nmake install
 </ul>
 </section>
 <section id="building-for-different-vc-versions">
-<h3>Building for different VC versions<a class="headerlink" href="#building-for-different-vc-versions" title="Permalink to this heading">¶</a></h3>
+<h4>Building for different VC versions<a class="headerlink" href="#building-for-different-vc-versions" title="Permalink to this heading">¶</a></h4>
 <p>On Windows, different Visual C versions have different ABI and therefore a package needs to be built for different
 Visual C versions. Packages are tied to the VC version that they were built with and some packages have specific
 requirements of the VC version. For example, python 2.7 requires <code class="docutils literal notranslate"><span class="pre">vc</span> <span class="pre">9</span></code> and python 3.5 requires <code class="docutils literal notranslate"><span class="pre">vc</span> <span class="pre">14</span></code>.</p>
@@ -238,18 +258,18 @@ requirements of the VC version. For example, python 2.7 requires <code class="do
 </pre></div>
 </div>
 </section>
-<section id="using-vs2019">
-<h3>Using vs2019<a class="headerlink" href="#using-vs2019" title="Permalink to this heading">¶</a></h3>
-<p>To use <code class="docutils literal notranslate"><span class="pre">vs2019</span></code> make the following changes:</p>
-<p>In <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> file:</p>
+<section id="using-vs2022">
+<h4>Using vs2022<a class="headerlink" href="#using-vs2022" title="Permalink to this heading">¶</a></h4>
+<p>In <code class="docutils literal notranslate"><span class="pre">recipe/conda_build_config.yaml</span></code> file:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">c_compiler</span><span class="p">:</span><span class="w">    </span><span class="c1"># [win]</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vs2019</span><span class="w">       </span><span class="c1"># [win]</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vs2022</span><span class="w">       </span><span class="c1"># [win]</span>
 <span class="nt">cxx_compiler</span><span class="p">:</span><span class="w">  </span><span class="c1"># [win]</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vs2019</span><span class="w">       </span><span class="c1"># [win]</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vs2022</span><span class="w">       </span><span class="c1"># [win]</span>
 </pre></div>
 </div>
-<p>For example see the changes made in the <code class="docutils literal notranslate"><span class="pre">conda_build_config.yaml</span></code> files in <a class="reference external" href="https://github.com/conda-forge/libignition-msgs1-feedstock/pull/73/commits/81b5ee0e1d23f7f20427dd80d04cf1f7321b441d">this</a> commit.</p>
+<p>You can look at the changes in <a class="reference external" href="https://github.com/conda-forge/vcpkg-tool-feedstock/pull/41/files">this PR</a>.</p>
 <p>After making these changes don’t forget to rerender with <code class="docutils literal notranslate"><span class="pre">conda-smithy</span></code> (to rerender manually use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">smithy</span> <span class="pre">rerender</span></code> from the command line).</p>
+</section>
 </section>
 <section id="tips-tricks-for-cmd-batch-syntax">
 <span id="cmd-batch-syntax"></span><h3>Tips &amp; tricks for CMD/Batch syntax<a class="headerlink" href="#tips-tricks-for-cmd-batch-syntax" title="Permalink to this heading">¶</a></h3>
@@ -1675,10 +1695,17 @@ in conda environments, and some operating system limits. See the <a class="refer
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#particularities-on-windows">Particularities on Windows</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#local-testing">Local testing</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#simple-cmake-based-bld-bat">Simple CMake-Based <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#building-for-different-vc-versions">Building for different VC versions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#using-vs2019">Using vs2019</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#local-testing">Local testing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#executing-a-build">Executing a build</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#testing-a-local-build">Testing a local build</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#notes-on-native-code">Notes on native code</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#simple-cmake-based-bld-bat">Simple CMake-Based <code class="docutils literal notranslate"><span class="pre">bld.bat</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#building-for-different-vc-versions">Building for different VC versions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#using-vs2022">Using vs2022</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#tips-tricks-for-cmd-batch-syntax">Tips &amp; tricks for CMD/Batch syntax</a></li>
 </ul>
 </li>
@@ -1836,7 +1863,7 @@ in conda environments, and some operating system limits. See the <a class="refer
         <li class="right" >
           <a href="conda_forge_yml.html" title="Configuring conda-forge.yml"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.06.24 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.06.27 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Knowledge Base</a></li> 

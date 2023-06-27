@@ -118,6 +118,32 @@ use a general web search to explore — while these topics are beyond the
 scope of this documentation, there are ample discussions on them on the broader
 Internet.
 
+To bootstrap a conda environment and install ``conda-build``, consider
+`miniforge <https://github.com/conda-forge/miniforge>`__.
+
+
+Executing a build
+^^^^^^^^^^^^^^^^^
+
+The ``build-locally.py`` script does not support Windows (yet, PRs welcome!).
+You can use ``conda build recipe/ -m .ci_support/choose_your_config.yaml`` as
+a workaround for now.
+
+
+Testing a local build
+^^^^^^^^^^^^^^^^^^^^^
+
+Because we're using ``conda-build`` directly instead of ``build-locally.py``,
+we can use the ``local`` channel:
+
+.. code-block::
+
+    conda create -n my-new-env -c local my-package
+
+
+Notes on native code
+--------------------
+
 In order to compile native code (C, C++, etc.) on Windows, you will need to
 install Microsoft’s Visual C++ build tools on your VM. You must install
 particular versions of these tools — this is to maintain compatibility between
@@ -125,21 +151,24 @@ compiled libraries used in Python, `as described on this Python wiki page
 <https://wiki.python.org/moin/WindowsCompilers>`__. The current relevant
 versions are:
 
-* For Python 3.5–3.7: Visual C++ 14.0
+* For Python 3.5–3.12+: Visual C++ 14.x
 
 While you can obtain these tools by installing the right version of the full
 `Visual Studio <https://visualstudio.microsoft.com/>`__ development
 environment, you can save a lot of time and bandwidth by installing standalone
-“build tools” packages. The links are as follows:
-
-* For Python 3.5–3.7: `Microsoft Build Tools for Visual Studio 2017
-  <https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2017-and-other-products>`__.
+“build tools” packages. You can get them from `Visual Studio
+Subscriptions <https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products>`__.
+To download build tools, you'll need a Microsoft account. Once on the
+Visual Studio Subscriptions page, you may also need to join the Dev Essentials
+program. Once that's done, you can click the "Download" tab and search for
+"Build Tools for Visual Studio 2022".
 
 If you need more information. Please refer `the Python wiki page on Windows compilers
 <https://wiki.python.org/moin/WindowsCompilers>`__.
 
 Simple CMake-Based ``bld.bat``
-------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Some projects provide hooks for CMake to build the project. The following
 example ``bld.bat`` file demonstrates how to build a traditional, out-of-core
 build for such projects.
@@ -177,7 +206,7 @@ The following feedstocks are examples of this build structure deployed:
 
 
 Building for different VC versions
-----------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 On Windows, different Visual C versions have different ABI and therefore a package needs to be built for different
 Visual C versions. Packages are tied to the VC version that they were built with and some packages have specific
@@ -202,26 +231,21 @@ To skip building with a particular ``vc`` version, add a skip statement.
       build:
         - {{ compiler('cxx') }}
 
-Using vs2019
--------------
+Using vs2022
+^^^^^^^^^^^^
 
-To use ``vs2019`` make the following changes:
-
-In ``conda_build_config.yaml`` file:
+In ``recipe/conda_build_config.yaml`` file:
 
 .. code-block:: yaml
 
     c_compiler:    # [win]
-    - vs2019       # [win]
+    - vs2022       # [win]
     cxx_compiler:  # [win]
-    - vs2019       # [win]
+    - vs2022       # [win]
 
-
-For example see the changes made in the ``conda_build_config.yaml`` files in `this
-<https://github.com/conda-forge/libignition-msgs1-feedstock/pull/73/commits/81b5ee0e1d23f7f20427dd80d04cf1f7321b441d>`__ commit.
+You can look at the changes in `this PR <https://github.com/conda-forge/vcpkg-tool-feedstock/pull/41/files>`__.
 
 After making these changes don't forget to rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line).
-
 
 .. _cmd_batch_syntax:
 
