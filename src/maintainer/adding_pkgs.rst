@@ -195,7 +195,7 @@ the other packages being added as a requirement), the build script will be able 
 locate the dependencies that are only present within staged-recipes as long as
 the builds finish in the dependencies order. Using a single pull request
 allows you to quickly get packages set up without waiting for each package in a
-dependency chain to be reviewed, built, and added to the conda-forge channel
+dependency chain to be reviewed, built, and added to the ``conda-forge`` channel
 before starting the process over with the next recipe in the chain.
 
 .. note::

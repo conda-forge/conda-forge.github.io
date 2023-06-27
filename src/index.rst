@@ -13,7 +13,7 @@ Chances are we have already packaged it for you. You can `search <https://anacon
 
 **Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack!
 
-- We value all kinds of contributions — not just code. A few recommended ways to start contributing to ``conda-forge`` are:
+- We value all kinds of contributions — not just code. A few recommended ways to start contributing to conda-forge are:
 
  - `Contribute new packages <https://conda-forge.org/docs/maintainer/adding_pkgs.html>`__
  - Help update and `maintain packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-pkgs>`__

@@ -29,7 +29,7 @@ FAQ
 
 :ref:`(Q) <faq_teams>` **I have a set of related packages, how do I create a conda-forge team?**
 
-  Conda-forge github teams are very useful means of adding common maintainers to a set of related packages. For example, most R packages are co-maintained by the conda-forge/R team.
+  conda-forge github teams are very useful means of adding common maintainers to a set of related packages. For example, most R packages are co-maintained by the conda-forge/R team.
   To create a new team, you can just use one of the existing feedstocks from your packages. Each feedstock has automatically a team assigned (formed from the maintainers of that feedstock).
   For example, the conda-forge R team is coming from the `r-feedstock <https://github.com/conda-forge/r-feedstock>`_. Then you can just add `- conda-forge/r` in the maintainers section to
   make all maintainers of the r-feedstock also maintainers of the new package.

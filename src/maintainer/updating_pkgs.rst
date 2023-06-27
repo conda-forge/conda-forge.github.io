@@ -6,10 +6,10 @@ Maintaining packages
 Important notes
 ===============
 
-Packages on ``conda-forge`` are immutable
+Packages on conda-forge are immutable
 -----------------------------------------
 
-As a matter of policy, we do not allow edits or the deletion of packages on ``conda-forge``. This
+As a matter of policy, we do not allow edits or the deletion of packages on conda-forge. This
 policy is very important as it increases the reliability and reproducibility of ``conda`` environments
 made with the ``conda-forge`` channel. Note that because of this policy, our upload scripts will refuse to
 upload packages which already exist on the ``conda-forge`` channel.
@@ -33,7 +33,7 @@ For updates, using a branch in the main repo is discouraged because,
    This means if you push a version update to a branch and then create a :term:`PR`, conda packages will be published to anaconda.org before the PR is merged.
 
 .. important::
-  For these reasons, maintainers are asked to fork the feedstock to their personal account, push to a branch in the fork and then open a PR to the ``conda-forge`` repo.
+  For these reasons, maintainers are asked to fork the feedstock to their personal account, push to a branch in the fork and then open a PR to the conda-forge repo.
 
 Pushing to regro-cf-autotick-bot branch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -90,7 +90,7 @@ Here we assume that you would like to update the feedstock ``<feedstock>``. Feed
    - You now have a clone of the feedstock in ``https://github.com/<your-github-id>/<feedstock>`` under your control.
    - Connect to the feedstock from your computer by using ``git clone https://github.com/<your-github-id>/<feedstock>``.
 
-#. Syncing your fork with conda-forges feedstock
+#. Syncing your fork with conda-forge's feedstock
 
    This step is only required if you have forked some time ago and your fork is missing commits from the feedstock at conda-forge.
 
@@ -240,7 +240,7 @@ To download prebuilt packages follow the steps below:
 Removing broken packages
 ========================
 
-Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel.
+Sometimes mistakes happen and a broken package ends up being uploaded to the ``conda-forge`` channel.
 
 If the only issue is in the package metadata, we can directly patch it using
 the `repo data patches feedstock <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock>`__.
@@ -263,7 +263,7 @@ remove broken packages from the ``main`` channel:
 Archiving feedstocks
 ====================
 
-If a package is no longer maintained ``conda-forge`` will *archive*
+If a package is no longer maintained conda-forge will *archive*
 the repository. An archived repository can no longer accept PRs and issues, which prevents people and ``regro-cf-autotick-bot`` from updating the
 package (an example would be to re-render the feedstock to support new Python versions). Note that this **does not** remove the existing packages, those will still be available.
 
