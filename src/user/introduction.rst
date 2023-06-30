@@ -6,12 +6,24 @@
 A brief introduction
 ====================
 
+What is conda-forge?
+--------------------
+
+conda-forge is a community effort that provides conda packages for a wide range of software.
+
+**Missing a package that you would love to install with conda?** - Chances are we have already packaged it for you!
+
+You can `search <https://anaconda.org/>`__ for packages online. Look out for packages provided by our conda-forge organization.
+
+**Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack! Please refer to :ref:`becoming_involved`, for an overview on how to start contributing.
+
+
 Why conda-forge?
 ----------------
 
-The conda team, from `Anaconda, Inc. <https://anaconda.org/>`__, packages a multitude of packages and provides them to all users free of charge in their ``default`` channel.
+The packaging team from `Anaconda, Inc. <https://anaconda.org/>`__, packages a multitude of packages and provides them to all users free of charge in their ``defaults`` channel.
 
-But what if a package you are looking for is not in the default channel?
+But what if a package you are looking for is not in the ``defaults`` channel?
 In the past users only had the option to create an `Anaconda Cloud <https://anaconda.org/>`__ account and create their own channel.
 
 This came with a list of disadvantages:
@@ -23,13 +35,14 @@ This came with a list of disadvantages:
 
 conda-forge is a community effort that tackles these issues:
 
- - All packages are shared in a single channel named ``conda-forge``.
+ - All packages are shared in a single channel named conda-forge.
  - Care is taken that all packages are up-to-date.
  - Common standards ensure that all packages have compatible versions.
  - By default, we build packages for macOS, Linux AMD64 and Windows AMD64.
  - Many packages are updated by multiple maintainers with an easy option to become a maintainer.
  - An active core developer team is trying to also maintain abandoned packages.
-
+ 
+You can refer to the glossary `here<https://conda-forge.org/docs/misc/00_intro.html#glossary>`.
 
 How can I install packages from conda-forge?
 --------------------------------------------
@@ -43,7 +56,7 @@ Using conda-forge is easy!
   conda --version
   conda update conda
 
- - Add ``conda-forge`` as the highest priority channel.
+ - Add conda-forge as the highest priority channel.
 
  .. code-block:: bash
 
@@ -86,14 +99,14 @@ Can I contribute packages to conda-forge?
 -----------------------------------------
 
 Anyone can contribute packages to the ``conda-forge`` channel.
-You don't have to be the upstream maintainer of a package in order to contribute it to ``conda-forge``.
+You don't have to be the upstream maintainer of a package in order to contribute it to conda-forge.
 To learn how to contribute your first package read `the staging process <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-staging-process>`_.
 
 
 How can I give credit to conda-forge?
 -----------------------------------------
 
-If you'd like to credit ``conda-forge`` in your work, please cite our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_. This citation is
+If you'd like to credit conda-forge in your work, please cite our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_. This citation is
 
 ::
 

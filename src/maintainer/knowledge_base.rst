@@ -118,6 +118,32 @@ use a general web search to explore — while these topics are beyond the
 scope of this documentation, there are ample discussions on them on the broader
 Internet.
 
+To bootstrap a conda environment and install ``conda-build``, consider
+`miniforge <https://github.com/conda-forge/miniforge>`__.
+
+
+Executing a build
+^^^^^^^^^^^^^^^^^
+
+The ``build-locally.py`` script does not support Windows (yet, PRs welcome!).
+You can use ``conda build recipe/ -m .ci_support/choose_your_config.yaml`` as
+a workaround for now.
+
+
+Testing a local build
+^^^^^^^^^^^^^^^^^^^^^
+
+Because we're using ``conda-build`` directly instead of ``build-locally.py``,
+we can use the ``local`` channel:
+
+.. code-block::
+
+    conda create -n my-new-env -c local my-package
+
+
+Notes on native code
+--------------------
+
 In order to compile native code (C, C++, etc.) on Windows, you will need to
 install Microsoft’s Visual C++ build tools on your VM. You must install
 particular versions of these tools — this is to maintain compatibility between
@@ -125,21 +151,24 @@ compiled libraries used in Python, `as described on this Python wiki page
 <https://wiki.python.org/moin/WindowsCompilers>`__. The current relevant
 versions are:
 
-* For Python 3.5–3.7: Visual C++ 14.0
+* For Python 3.5–3.12+: Visual C++ 14.x
 
 While you can obtain these tools by installing the right version of the full
 `Visual Studio <https://visualstudio.microsoft.com/>`__ development
 environment, you can save a lot of time and bandwidth by installing standalone
-“build tools” packages. The links are as follows:
-
-* For Python 3.5–3.7: `Microsoft Build Tools for Visual Studio 2017
-  <https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2017-and-other-products>`__.
+“build tools” packages. You can get them from `Visual Studio
+Subscriptions <https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products>`__.
+To download build tools, you'll need a Microsoft account. Once on the
+Visual Studio Subscriptions page, you may also need to join the Dev Essentials
+program. Once that's done, you can click the "Download" tab and search for
+"Build Tools for Visual Studio 2022".
 
 If you need more information. Please refer `the Python wiki page on Windows compilers
 <https://wiki.python.org/moin/WindowsCompilers>`__.
 
 Simple CMake-Based ``bld.bat``
-------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Some projects provide hooks for CMake to build the project. The following
 example ``bld.bat`` file demonstrates how to build a traditional, out-of-core
 build for such projects.
@@ -177,7 +206,7 @@ The following feedstocks are examples of this build structure deployed:
 
 
 Building for different VC versions
-----------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 On Windows, different Visual C versions have different ABI and therefore a package needs to be built for different
 Visual C versions. Packages are tied to the VC version that they were built with and some packages have specific
@@ -202,26 +231,21 @@ To skip building with a particular ``vc`` version, add a skip statement.
       build:
         - {{ compiler('cxx') }}
 
-Using vs2019
--------------
+Using vs2022
+^^^^^^^^^^^^
 
-To use ``vs2019`` make the following changes:
-
-In ``conda_build_config.yaml`` file:
+In ``recipe/conda_build_config.yaml`` file:
 
 .. code-block:: yaml
 
     c_compiler:    # [win]
-    - vs2019       # [win]
+    - vs2022       # [win]
     cxx_compiler:  # [win]
-    - vs2019       # [win]
+    - vs2022       # [win]
 
-
-For example see the changes made in the ``conda_build_config.yaml`` files in `this
-<https://github.com/conda-forge/libignition-msgs1-feedstock/pull/73/commits/81b5ee0e1d23f7f20427dd80d04cf1f7321b441d>`__ commit.
+You can look at the changes in `this PR <https://github.com/conda-forge/vcpkg-tool-feedstock/pull/41/files>`__.
 
 After making these changes don't forget to rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line).
-
 
 .. _cmd_batch_syntax:
 
@@ -339,7 +363,7 @@ but merely to provide a starting point with some guidelines. Please look at `oth
 Rust Nightly
 ------------
 
-Many rust packages rely on nightly versions of the rust compiler. Given this fast release cadence, ``conda-forge`` does not yet pull each release.
+Many rust packages rely on nightly versions of the rust compiler. Given this fast release cadence, conda-forge does not yet pull each release.
 Instead, rust nightly versions are pulled into the ``dev`` branch of the `conda-forge/rust-feedstock <https://github.com/conda-forge/rust-feedstock/tree/dev>`_ on an as-needed basis.
 For a new version, please file an issue on that feedstock.
 
@@ -359,7 +383,7 @@ Core Dependency Tree Packages (CDTs)
 Dependencies outside of the ``conda-forge`` channel should be avoided (see :ref:`no_external_deps`).
 However, there are a few exceptions:
 
-Some dependencies are so close to the system that they are not packaged with ``conda-forge``.
+Some dependencies are so close to the system that they are not packaged with conda-forge.
 These dependencies have to be satisfied with *Core Dependency Tree* (CDT) packages.
 
 A CDT package consists of repackaged CentOS binaries from the appropriate version,
@@ -369,7 +393,7 @@ as opposed to generating feedstocks for them. (Note that historically we did use
 practice has been deprecated.) To add a new CDT, make a PR on the
 `conda-forge/cdt-builds <https://github.com/conda-forge/cdt-builds>`__ repo.
 
-In ``conda-forge`` the primary usages of CDTs is currently for packages that link against libGL.
+In conda-forge the primary usages of CDTs is currently for packages that link against libGL.
 
 libGL
 ^^^^^
@@ -523,7 +547,7 @@ There are a few broad cases:
 - the package works with any MPI provider (e.g. mpich, openmpi)
 - the package works with/without MPI
 
-Note that sometimes users want to use packages in ``conda-forge`` built against
+Note that sometimes users want to use packages in conda-forge built against
 our MPI libraries but linked to external MPI libraries at runtime. If you are interested
 in this procedure, see :ref:`Using External Message Passing Interface (MPI) Libraries`
 for details.
@@ -959,7 +983,7 @@ they like without any knowledge of the version of the BLAS implementation needed
 Matplotlib
 ----------
 
-``matplotlib`` on ``conda-forge`` comes in two parts. The core library is in ``matplotlib-base``. The
+``matplotlib`` on conda-forge comes in two parts. The core library is in ``matplotlib-base``. The
 actual ``matplotlib`` package is this core library plus ``pyqt``. Most, if not all, packages that have
 dependence at runtime on ``matplotlib`` should list this dependence as ``matplotlib-base`` unless they
 explicitly need ``pyqt``. The idea is that a user installing ``matplotlib`` explicitly would get a full
@@ -1354,7 +1378,7 @@ because these symbols are in fact available. To do so, add
 PyPy builds
 ===========
 
-See :ref:`pypy` in the user docs for more info about PyPy and ``conda-forge``.
+See :ref:`pypy` in the user docs for more info about PyPy and conda-forge.
 
 To build your python package for pypy, wait for the bot to send a
 PR and contact ``conda-forge/bot`` team if a PR is not sent after the
@@ -1460,7 +1484,7 @@ Finally, note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 
 CUDA builds
 ===========
 
-Although the provisioned CI machines do not feature a GPU, Conda-Forge does provide mechanisms
+Although the provisioned CI machines do not feature a GPU, conda-forge does provide mechanisms
 to build CUDA-enabled packages. These mechanisms involve several packages:
 
 * ``cudatoolkit``: The runtime libraries for the CUDA toolkit. This is what end-users will end
@@ -1487,7 +1511,7 @@ On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CU
   **How is CUDA provided at the system level?**
 
   * On Linux, Nvidia provides official Docker images, which we then
-    `adapt <https://github.com/conda-forge/docker-images>`__ to Conda-Forge's needs.
+    `adapt <https://github.com/conda-forge/docker-images>`__ to conda-forge's needs.
 
   * On Windows, the compilers need to be installed for every CI run. This is done through the
     `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`__ scripts.
@@ -1825,21 +1849,21 @@ being investigated or the migration PR got closed accidentally. To migrate a PR 
 Security considerations for conda-forge builds
 ==============================================
 
-All ``conda-forge`` packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use ``conda-forge`` packages if you or your team require a high level of security.
-You are also free to download recipes and rebuild them yourself, if you would like at least that much oversight. However, many people use ``conda-forge`` all the time with no issues and here are some things that ``conda-forge`` does to help with security in some ways:
+All conda-forge packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use conda-forge packages if you or your team require a high level of security.
+You are also free to download recipes and rebuild them yourself, if you would like at least that much oversight. However, many people use conda-forge all the time with no issues and here are some things that conda-forge does to help with security in some ways:
 
 1. `Sources <https://conda-forge.org/docs/maintainer/adding_pkgs.html#source>`_ (where you specify where the package's source code is coming from) can be pulled from GitHub, PyPI, or other sources and sha256 hashes are always used, so moving of tags or uploading of new sdists can not cause automatic package rebuilds.
    Also, once packages are accepted and made into feedstocks, only the maintainers of that feedstock have the right to merge PRs made to that feedstock.
 2. Each feedstock can only upload packages for that feedstock. This is enforced by using a cf-staging channel where builds are first sent.
-   A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the conda-forge channel.
+   A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the ``conda-forge`` channel.
    This helps mitigate against a bad actor gaining access to an inconspicuous feedstock and then trying to push a build with malicious code into essential infrastructure packages (e.g., OpenSSL or Python).
-3. We have `artifact-validation <https://github.com/conda-forge/artifact-validation>`__ for validating all the ``conda-forge`` artifacts uploaded to ``anaconda.org``. This validation scans for various security-related items, such as artifacts that overwrite key pieces of certain packages.
-4. We have a dedicated `Security and Systems Sub-Team <https://conda-forge.org/docs/orga/subteams.html?highlight=security+team#security-and-systems-sub-team>`__ who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by ``conda-forge``.
+3. We have `artifact-validation <https://github.com/conda-forge/artifact-validation>`__ for validating all the conda-forge artifacts uploaded to ``anaconda.org``. This validation scans for various security-related items, such as artifacts that overwrite key pieces of certain packages.
+4. We have a dedicated `Security and Systems Sub-Team <https://conda-forge.org/docs/orga/subteams.html?highlight=security+team#security-and-systems-sub-team>`__ who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by conda-forge.
 
 Significant Changes To Upstream Projects
 ========================================
 
-From time to time, we make changes in upstream projects so that they better integrate into the ``conda-forge`` ecosystem. We
+From time to time, we make changes in upstream projects so that they better integrate into the conda-forge ecosystem. We
 have listed some, but not all, of those changes here for specific projects along with any associated documentation.
 
 Python
