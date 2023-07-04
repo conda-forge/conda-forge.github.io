@@ -94,9 +94,14 @@ The role responsible for each step is noted at the beginning.
   - **Coordinator**: Post the release and announcement dates on the conda-forge core chat room and
     mailing list.
   - **Developer**: Merge the security fix PR
-  - **Developer**: Make a release to PyPI and/or npm with no announcement or change log
-  - **Coordinator**: Publish the security advisory on the announcement date.  GitHub will post the
-    CVE to the MITRE database
+  - **Developer**: Release the package and/or deploy the fix as appropriate
+  - **Developer & Coordinator**: Draft a [blog post](https://github.com/conda-forge/blog) and other
+    announcement texts. This can be done in parallel with the previous steps, but consider using a
+    [private advisory](https://github.com/conda-forge/blog/security/advisories) for the text.
+  - **Coordinator**: Publish the security advisory on the announcement date. If applicable, GitHub
+    will post the CVE to the MITRE database.
+  - **Coordinator**: Publish the blog post and other announcements (Element chat room, Twitter,
+    etc) as necessary.
 - **Coordinator**: Notify the **Reporter** of the releases
 - **Coordinator**: Close the issue in the tracking repository
 
@@ -110,7 +115,9 @@ The role responsible for each step is noted at the beginning.
 
 [coordinated-disclosure]: https://cheatsheetseries.owasp.org/cheatsheets/Vulnerability_Disclosure_Cheat_Sheet.html#responsible-or-coordinated-disclosure
 
-<!--
-Heavily inspired by the excellent document used by the Jupyter community
-https://github.com/jupyter/security/blob/86ec517/docs/vulnerability-handling.md
--->
+---
+
+> This document is based on the excellent [write-up](https://github.com/jupyter/security/blob/86ec517/docs/vulnerability-handling.md) used by the Jupyter community, [BSD-3 licensed](https://github.com/jupyter/security/blob/86ec517/LICENSE).
+
+
+
