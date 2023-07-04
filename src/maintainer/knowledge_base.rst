@@ -1860,6 +1860,9 @@ You are also free to download recipes and rebuild them yourself, if you would li
 3. We have `artifact-validation <https://github.com/conda-forge/artifact-validation>`__ for validating all the conda-forge artifacts uploaded to ``anaconda.org``. This validation scans for various security-related items, such as artifacts that overwrite key pieces of certain packages.
 4. We have a dedicated `Security and Systems Sub-Team <https://conda-forge.org/docs/orga/subteams.html?highlight=security+team#security-and-systems-sub-team>`__ who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by conda-forge.
 
+If you have found a security-related issue with conda-forge, please check our `Security Policy <https://github.com/conda-forge/conda-forge.github.io/security/policy>`__
+to learn how to report it responsibly.
+
 Significant Changes To Upstream Projects
 ========================================
 
