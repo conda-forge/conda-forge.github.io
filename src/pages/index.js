@@ -15,11 +15,8 @@ function HomepageHeader() {
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="https://github.com/Quansight-Labs/czi-conda-forge-mgmt"
-          >
-            More info ➡️
+          <Link className="button button--secondary button--lg" to="/docs/">
+            Start reading ➡️
           </Link>
         </div>
       </div>

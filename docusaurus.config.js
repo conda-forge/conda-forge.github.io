@@ -11,7 +11,7 @@ const editUrl = {
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "🚧 cf-infra-docs 🚧",
-  tagline: "Supporting documentation for the CZI EOSS5 grant for conda-forge",
+  tagline: "Draft documentation for conda-forge infrastructure",
   url: "https://cf-infra-docs.netlify.app/",
   baseUrl: "/",
   onBrokenLinks: "throw",
