@@ -118,6 +118,7 @@ anchor_check_fps = [
     r'https://conda-forge.org/status/#armosxaddition$',
     r'https://github.com/conda-forge/conda-smithy/blob/main/CHANGELOG.rst#v3130$',
     r'https://github.com/.*#L\d+-L\d+$',
+    r'https://github.com/.*#L\d+$',
     r'https://github.com/conda-forge/miniforge/#download$',
     r'https://github.com/conda-incubator/grayskull#introduction$',
 ]
