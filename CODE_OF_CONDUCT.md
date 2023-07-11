@@ -287,10 +287,17 @@ Except where otherwise noted, votes require a quorum and a simple majority to pa
 
 You can reach the entire CoC Committee by emailing [to.be.defined@gmail.com](mailto:to.be.defined@gmail.com).
 
-| Name | Contact | Employer / Funding | Steering Council Member | Current Term Ends |
-| ---- | ---- | ---- | ---- | --- |
-| TBA | TBA | TBA | TBA | TBA |
-| [](), [External Ombudsperson](#ombudsperson) | | [External Org]() | | |
+| Name | Contact | Core Team Member | Current Term Ends |
+| ---- | ---- | ---- | ---- |
+| Matthew R. Becker | becker.mr@gmail.com | Yes | ? |
+| Chris Burr | christopher.burr@cern.ch | Yes | ? |
+| Matt Craig | mattwcraig@gmail.com | Yes | ? |
+| Jannis Leidel | jleidel@anaconda.com | Yes | ? |
+| Jaime Rodríguez-Guerra | jrodriguez@quansight.com | Yes | ? |
+| Marcelo Duarte Trevisani | marceloduartetrevisani@gmail.com | Yes | ? |
+| Filipe Fernandes | ocefpaf@gmail.com | Yes | ? |
+| CJ Wright | cjwright4242@gmail.com | Yes | ? |
+| TBD, [External Ombudsperson](#ombudsperson) | | No | ? |
 
 # Terms and New Members
 
@@ -301,17 +308,11 @@ You can reach the entire CoC Committee by emailing [to.be.defined@gmail.com](mai
 
 # Eligibility
 
-Anyone from the community who is interested and able to do CoC Committee work is eligible to be nominated for the committee.  New committee members can be nominated by any community member, including nominating themselves.
-
-## Shared Funding
-
-Unlike the Steering Council, we are not limiting the number of Committee members who share a common source of funding. However, if a report involves someone who shares funding with CoC Committee members, then the remainder of the committee may vote to exclude some or all Committee members with that same funding, even if that excludes a majority of the CoC Committee. This should be done only if the separately funded Committee members feel that the common funding is interfering with decision making.  
-
-Note: This requires tracking the funding sources of CoC Committee members.
+Anyone from the community who is interested and able to do CoC Committee work is eligible to be nominated for the committee. New committee members can be nominated by any community member, including nominating themselves.
 
 ## Overlap with Steering Council Membership
 
-CoC Committee members can also be on the conda-forge core team. However, core members have to make up less than 50% of the Code of Conduct Committee.  
+CoC Committee members can also be on the conda-forge core team.
 
 # Ombudsperson
 
