@@ -25,7 +25,7 @@ Smithy contains maintenance code for conda-forge, which is used by the ``conda-s
 
 ``conda-smithy`` also contains the command line tool that you should use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
 
-Smithy can be used beyond Conda-Forge's purposes. For example, it can be used to `set up self-hosted Azure agents <azure-config>` for non-Conda-Forge infrastructures.
+Smithy can be used beyond conda-forge's purposes. For example, it can be used to `set up self-hosted Azure agents <azure-config>` for non-conda-forge infrastructures.
 (You could also consider using `Azure virtual machine scale set agents <https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops>`_,
 which could be less expensive to run than permanently active agents.)
 
@@ -63,7 +63,7 @@ If you found any typo error, unclear explanations or new topics that can be cove
 Admin web services
 ==================
 
-Conda-forge is running a webservice on Heroku called `conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
+conda-forge is running a webservice on Heroku called `conda-forge-webservices <https://github.com/conda-forge/conda-forge-webservices>`_.
 
 The following services are run by default on a feedstock:
 
@@ -156,6 +156,14 @@ Entering the above phrase in the title of an issue on a feedstock will make a PR
 that adds the given user to the feedstock. A maintainer or member of ``core`` can then merge
 this PR to add the user. Please do not modify this PR or adjust the commit message. This
 PR is designed to skip building the package.
+
+@conda-forge-admin, update version
+----------------------------------
+
+Entering the above phrase in the title of an issue on a feedstock will request the bot
+to check if there are any new versions available. If there are, it will open a PR with
+with the needed changes. Note that the bot might start by opening a PR with only partial
+changes. The rest of the contents will be added in a subsequent commit after a few minutes.
 
 
 CI build services
@@ -271,7 +279,7 @@ take more serious actions, including archiving feedstocks or removing maintainer
 Compilers and Runtimes
 ======================
 
-Conda-forge builds and maintains its own set of compilers for various languages
+conda-forge builds and maintains its own set of compilers for various languages
 and/or systems (e.g., ``C``, ``FORTRAN``, ``C++``, ``CUDA``, etc.). These are used
 in all of our CI builds to build both core dependencies (e.g., ``Python``) and maintainer-contributed
 packages. While we do not have any formal policies or promises of support for these

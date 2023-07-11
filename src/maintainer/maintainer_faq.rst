@@ -94,9 +94,9 @@ FAQ
 
 .. _mfaq_package_submit:
 
-:ref:`(Q) <mfaq_package_submit>` **Is it necessary for me to be an upstream maintainer of the package I submit to Conda-forge?**
+:ref:`(Q) <mfaq_package_submit>` **Is it necessary for me to be an upstream maintainer of the package I submit to conda-forge?**
 
-  Everybody can submit a package to Conda-forge, irrespective of whether they maintain the upstream version or not. Additionally, it’s not required but considered good practice to inform the upstream of a new package and invite them to be maintainers as well.
+  Everybody can submit a package to conda-forge, irrespective of whether they maintain the upstream version or not. Additionally, it’s not required but considered good practice to inform the upstream of a new package and invite them to be maintainers as well.
 
 
 .. _mfaq_libGL_so_1:
@@ -146,7 +146,7 @@ FAQ
 :ref:`(Q) <mfaq_contact_core>` **How can I contact conda-forge/core?**
 
   When in an issue or PR, you can contact `conda-forge/core <https://conda-forge.org/docs/orga/governance.html#teams-roles>`__ by simply mentioning ``@conda-forge/core`` in a comment.
-  If you don't receive an an answer after a couple of days, feel free to reach out to us via the public `gitter <https://gitter.im/conda-forge/conda-forge.github.io>`__ channel.
+  If you don't receive an an answer after a couple of days, feel free to reach out to us via the public `Element <https://app.element.io/#/room/#conda-forge:matrix.org>`__ chatroom.
 
   .. note::
 
@@ -167,12 +167,12 @@ FAQ
 
 .. _mfaq_changes_to_major_projects:
 
-:ref:`(Q) <mfaq_changes_to_major_projects>` **Does ``conda-forge`` ever make significant changes or apply code patches to significant upstream packages?**
+:ref:`(Q) <mfaq_changes_to_major_projects>` **Does conda-forge ever make significant changes or apply code patches to significant upstream packages?**
 
   We generally try to avoid changes, but there are many notable exceptions and we have no set policy. These changes currently fall into
   a few categories. Upstream projects that violate our community norms or pose significant security risks through their policies may
-  be changed so that they can be distributed on ``conda-forge``. In many cases though, these projects are not distributed at all. We
+  be changed so that they can be distributed on conda-forge. In many cases though, these projects are not distributed at all. We
   do employ extensive changes to project build scripts in order to properly build and install projects into conda environments.
   Finally, in some cases we add, enable, or disable features in specific projects to ensure they are broadly compatible with the
-  ``conda-forge`` package set. The set of patches/changes we apply is always located in the feedstock that built the package. We
+  conda-forge package set. The set of patches/changes we apply is always located in the feedstock that built the package. We
   also maintain a list of important packages with changes in our documentation.

@@ -118,6 +118,32 @@ use a general web search to explore — while these topics are beyond the
 scope of this documentation, there are ample discussions on them on the broader
 Internet.
 
+To bootstrap a conda environment and install ``conda-build``, consider
+`miniforge <https://github.com/conda-forge/miniforge>`__.
+
+
+Executing a build
+^^^^^^^^^^^^^^^^^
+
+The ``build-locally.py`` script does not support Windows (yet, PRs welcome!).
+You can use ``conda build recipe/ -m .ci_support/choose_your_config.yaml`` as
+a workaround for now.
+
+
+Testing a local build
+^^^^^^^^^^^^^^^^^^^^^
+
+Because we're using ``conda-build`` directly instead of ``build-locally.py``,
+we can use the ``local`` channel:
+
+.. code-block::
+
+    conda create -n my-new-env -c local my-package
+
+
+Notes on native code
+--------------------
+
 In order to compile native code (C, C++, etc.) on Windows, you will need to
 install Microsoft’s Visual C++ build tools on your VM. You must install
 particular versions of these tools — this is to maintain compatibility between
@@ -125,21 +151,24 @@ compiled libraries used in Python, `as described on this Python wiki page
 <https://wiki.python.org/moin/WindowsCompilers>`__. The current relevant
 versions are:
 
-* For Python 3.5–3.7: Visual C++ 14.0
+* For Python 3.5–3.12+: Visual C++ 14.x
 
 While you can obtain these tools by installing the right version of the full
 `Visual Studio <https://visualstudio.microsoft.com/>`__ development
 environment, you can save a lot of time and bandwidth by installing standalone
-“build tools” packages. The links are as follows:
-
-* For Python 3.5–3.7: `Microsoft Build Tools for Visual Studio 2017
-  <https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2017-and-other-products>`__.
+“build tools” packages. You can get them from `Visual Studio
+Subscriptions <https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products>`__.
+To download build tools, you'll need a Microsoft account. Once on the
+Visual Studio Subscriptions page, you may also need to join the Dev Essentials
+program. Once that's done, you can click the "Download" tab and search for
+"Build Tools for Visual Studio 2022".
 
 If you need more information. Please refer `the Python wiki page on Windows compilers
 <https://wiki.python.org/moin/WindowsCompilers>`__.
 
 Simple CMake-Based ``bld.bat``
-------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Some projects provide hooks for CMake to build the project. The following
 example ``bld.bat`` file demonstrates how to build a traditional, out-of-core
 build for such projects.
@@ -177,7 +206,7 @@ The following feedstocks are examples of this build structure deployed:
 
 
 Building for different VC versions
-----------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 On Windows, different Visual C versions have different ABI and therefore a package needs to be built for different
 Visual C versions. Packages are tied to the VC version that they were built with and some packages have specific
@@ -202,26 +231,21 @@ To skip building with a particular ``vc`` version, add a skip statement.
       build:
         - {{ compiler('cxx') }}
 
-Using vs2019
--------------
+Using vs2022
+^^^^^^^^^^^^
 
-To use ``vs2019`` make the following changes:
-
-In ``conda_build_config.yaml`` file:
+In ``recipe/conda_build_config.yaml`` file:
 
 .. code-block:: yaml
 
     c_compiler:    # [win]
-    - vs2019       # [win]
+    - vs2022       # [win]
     cxx_compiler:  # [win]
-    - vs2019       # [win]
+    - vs2022       # [win]
 
-
-For example see the changes made in the ``conda_build_config.yaml`` files in `this
-<https://github.com/conda-forge/libignition-msgs1-feedstock/pull/73/commits/81b5ee0e1d23f7f20427dd80d04cf1f7321b441d>`__ commit.
+You can look at the changes in `this PR <https://github.com/conda-forge/vcpkg-tool-feedstock/pull/41/files>`__.
 
 After making these changes don't forget to rerender with ``conda-smithy`` (to rerender manually use ``conda smithy rerender`` from the command line).
-
 
 .. _cmd_batch_syntax:
 
@@ -231,7 +255,7 @@ Tips & tricks for CMD/Batch syntax
 Windows recipes rely on CMD/Batch scripts (``.bat``) by default.
 Batch syntax is a bit different from Bash and friends on Unix, so we have collected some tips here to help you get started if you are not familiar with this scripting language.
 
-* Check if you need to write a Batch script first! 
+* Check if you need to write a Batch script first!
   Simple recipes might not need shell-specific code and can be written in an agnostic way.
   Use the ``build.script`` item in ``meta.yaml`` (see `conda-build docs <https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#script>`__).
   This item can take a string or a list of strings (one per line).
@@ -305,7 +329,7 @@ In the build script, it would need to update the config files and guard any test
 
     # Get an updated config.sub and config.guess
     cp $BUILD_PREFIX/share/gnuconfig/config.* .
-    
+
     # Skip ``make check`` when cross-compiling
     if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
       make check
@@ -339,7 +363,7 @@ but merely to provide a starting point with some guidelines. Please look at `oth
 Rust Nightly
 ------------
 
-Many rust packages rely on nightly versions of the rust compiler. Given this fast release cadence, ``conda-forge`` does not yet pull each release.
+Many rust packages rely on nightly versions of the rust compiler. Given this fast release cadence, conda-forge does not yet pull each release.
 Instead, rust nightly versions are pulled into the ``dev`` branch of the `conda-forge/rust-feedstock <https://github.com/conda-forge/rust-feedstock/tree/dev>`_ on an as-needed basis.
 For a new version, please file an issue on that feedstock.
 
@@ -359,7 +383,7 @@ Core Dependency Tree Packages (CDTs)
 Dependencies outside of the ``conda-forge`` channel should be avoided (see :ref:`no_external_deps`).
 However, there are a few exceptions:
 
-Some dependencies are so close to the system that they are not packaged with ``conda-forge``.
+Some dependencies are so close to the system that they are not packaged with conda-forge.
 These dependencies have to be satisfied with *Core Dependency Tree* (CDT) packages.
 
 A CDT package consists of repackaged CentOS binaries from the appropriate version,
@@ -369,7 +393,7 @@ as opposed to generating feedstocks for them. (Note that historically we did use
 practice has been deprecated.) To add a new CDT, make a PR on the
 `conda-forge/cdt-builds <https://github.com/conda-forge/cdt-builds>`__ repo.
 
-In ``conda-forge`` the primary usages of CDTs is currently for packages that link against libGL.
+In conda-forge the primary usages of CDTs is currently for packages that link against libGL.
 
 libGL
 ^^^^^
@@ -523,7 +547,7 @@ There are a few broad cases:
 - the package works with any MPI provider (e.g. mpich, openmpi)
 - the package works with/without MPI
 
-Note that sometimes users want to use packages in ``conda-forge`` built against
+Note that sometimes users want to use packages in conda-forge built against
 our MPI libraries but linked to external MPI libraries at runtime. If you are interested
 in this procedure, see :ref:`Using External Message Passing Interface (MPI) Libraries`
 for details.
@@ -959,7 +983,7 @@ they like without any knowledge of the version of the BLAS implementation needed
 Matplotlib
 ----------
 
-``matplotlib`` on ``conda-forge`` comes in two parts. The core library is in ``matplotlib-base``. The
+``matplotlib`` on conda-forge comes in two parts. The core library is in ``matplotlib-base``. The
 actual ``matplotlib`` package is this core library plus ``pyqt``. Most, if not all, packages that have
 dependence at runtime on ``matplotlib`` should list this dependence as ``matplotlib-base`` unless they
 explicitly need ``pyqt``. The idea is that a user installing ``matplotlib`` explicitly would get a full
@@ -1107,9 +1131,124 @@ In order to qualify as a noarch python package, all of the following criteria mu
   which builds on Linux `and` Windows, with ``build_number`` offsets to create a pair packages, like
   ``dataclasses``.
 
+.. hint::
+  
+  You can build platform-specific ``noarch`` packages to include runtime requirements depending on the target OS.
+  See mini-tutorial below.
+
 If an existing python package qualifies to be converted to a noarch package, you can request the required changes
 by opening a new issue and including ``@conda-forge-admin, please add noarch: python``.
 
+.. _os_specific_noarch:
+
+Noarch packages with OS-specific dependencies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It is possible to build ``noarch`` packages with runtime requirements that depend on the target OS
+(Linux, Windows, MacOS), regardless the architecture (amd64, ARM, PowerPC, etc). This approach
+relies on three concepts:
+
+1.  `Virtual packages <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html>`__. 
+    Prefixed with a double underscore, they are used by conda to represent system properties as
+    constraints for the solver at install-time. We will use ``__linux``, ``__win`` or ``__osx``,
+    which are only present when the running platform is Linux, Windows, or MacOS, respectively.
+    ``__unix`` is present in both Linux and MacOS. Note that this feature is **only fully available
+    on conda 4.10 or above**.
+2.  ``conda-forge.yml``'s :ref:`noarch_platforms` option.
+3.  **conda-build 3.25.0 or above** changing the build hash depending on virtual packages used.
+
+The idea is to generate different noarch packages for each OS needing different dependencies.
+Let's say you have a pure Python package, perfectly eligible for ``noarch: python``, but on Windows
+it requires ``windows-only-dependency``. You might have something like:
+
+.. code-block:: yaml
+  :caption: recipe/meta.yaml (original)
+
+  name: package
+  source:
+    # ...
+  build:
+    number: 0
+  requirements:
+    # ...
+    run:
+      - python
+      - numpy
+      - windows-only-dependency  # [win]
+
+Being non-noarch, this means that the build matrix will include at least 12 outputs: three platforms,
+times four Python versions. This gets worse with ``arm64``, ``aarch64`` and ``ppc64le`` in the mix.
+We can get it down to two outputs if replace it with this other approach!
+
+.. code-block:: yaml
+  :caption: recipe/meta.yaml (modified)
+
+  name: package
+  source:
+    # ...
+  build:
+    number: 0
+    noarch: python
+  requirements:
+    host:
+      - python >=3.7
+      # ...
+    run:
+      - python >=3.7
+      - numpy
+      - __unix  # [unix]
+      - __win   # [win]
+      - windows-only-dependency  # [win]
+
+Do not forget to specify the platform virtual packages with their selectors!
+Otherwise, the solver will not be able to choose the variants correctly.
+
+By default, conda-forge will only build ``noarch`` packages on a ``linux_64`` CI runner, so
+only the ``# [unix]`` selectors would be true. However, we can change this behaviour using
+the ``noarch_platforms`` option in ``conda-forge.yml``:
+
+.. code-block:: yaml
+  :caption: conda-forge.yml
+
+  noarch_platforms:
+    - linux_64
+    - win_64
+
+This will provide two runners per package! Perfect! All these changes require a
+feedstock rerender to be applied. See :ref:`dev_update_rerender`.
+
+If you need conditional dependencies on all three operating systems, this is how you do it:
+
+.. code-block:: yaml+jinja
+  :caption: recipe/meta.yaml
+
+  name: package
+  source:
+    # ...
+  build:
+    number: 0
+    noarch: python
+  requirements:
+    # ...
+    run:
+      - python
+      - numpy
+      - __linux  # [linux]
+      - __osx    # [osx]
+      - __win    # [win]
+      - linux-only-dependency    # [linux]
+      - osx-only-dependency      # [osx]
+      - windows-only-dependency  # [win]
+
+.. code-block:: yaml
+  :caption: conda-forge.yml
+
+  noarch_platforms:
+    - linux_64
+    - osx_64
+    - win_64
+
+Again, remember to rerender after adding / modifying these files so the changes are applied.
 
 Noarch generic
 --------------
@@ -1239,7 +1378,7 @@ because these symbols are in fact available. To do so, add
 PyPy builds
 ===========
 
-See :ref:`pypy` in the user docs for more info about PyPy and ``conda-forge``.
+See :ref:`pypy` in the user docs for more info about PyPy and conda-forge.
 
 To build your python package for pypy, wait for the bot to send a
 PR and contact ``conda-forge/bot`` team if a PR is not sent after the
@@ -1345,7 +1484,7 @@ Finally, note that the ``aarch64`` and ``ppc64le`` platforms already use CentOS 
 CUDA builds
 ===========
 
-Although the provisioned CI machines do not feature a GPU, Conda-Forge does provide mechanisms
+Although the provisioned CI machines do not feature a GPU, conda-forge does provide mechanisms
 to build CUDA-enabled packages. These mechanisms involve several packages:
 
 * ``cudatoolkit``: The runtime libraries for the CUDA toolkit. This is what end-users will end
@@ -1372,7 +1511,7 @@ On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CU
   **How is CUDA provided at the system level?**
 
   * On Linux, Nvidia provides official Docker images, which we then
-    `adapt <https://github.com/conda-forge/docker-images>`__ to Conda-Forge's needs.
+    `adapt <https://github.com/conda-forge/docker-images>`__ to conda-forge's needs.
 
   * On Windows, the compilers need to be installed for every CI run. This is done through the
     `conda-forge-ci-setup <https://github.com/conda-forge/conda-forge-ci-setup-feedstock/>`__ scripts.
@@ -1579,6 +1718,9 @@ in ``recipe/conda_build_config.yaml`` in their respective feedstocks.
 Installing a pre-release build
 ------------------------------
 
+Using the `conda` CLI
+^^^^^^^^^^^^^^^^^^^^^
+
 Use the following command, but replace ``PACKAGE_NAME`` with the package you want
 to install and replace ``LABEL`` with ``rc`` or ``dev``:
 
@@ -1591,6 +1733,27 @@ For example, let's install matplotlib from the ``rc`` label:
 .. code-block:: yaml
 
    conda install -c conda-forge/label/matplotlib_rc -c conda-forge matplotlib
+
+Using `environment.yml`
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Use `MatchSpec
+<https://github.com/conda/conda/blob/c3fb8150ed4c3dabb7ca376ade208095f98ee0b9/conda/models/match_spec.py#L70-L150>`__
+to specify your package:
+
+.. code-block:: yaml
+
+   dependencies:
+     - conda-forge/label/matplotlib_rc::matplotlib=3.7.0rc1
+
+Alternately, you can use the channels section to enable the `matplotlib_rc` channel:
+
+.. code-block:: yaml
+
+   channels:
+     - conda-forge/label/matplotlib_rc
+   dependencies:
+     - matplotlib=3.7.0.rc1
 
 Pre-release version sorting
 ---------------------------
@@ -1686,21 +1849,24 @@ being investigated or the migration PR got closed accidentally. To migrate a PR 
 Security considerations for conda-forge builds
 ==============================================
 
-All ``conda-forge`` packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use ``conda-forge`` packages if you or your team require a high level of security.
-You are also free to download recipes and rebuild them yourself, if you would like at least that much oversight. However, many people use ``conda-forge`` all the time with no issues and here are some things that ``conda-forge`` does to help with security in some ways:
+All conda-forge packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use conda-forge packages if you or your team require a high level of security.
+You are also free to download recipes and rebuild them yourself, if you would like at least that much oversight. However, many people use conda-forge all the time with no issues and here are some things that conda-forge does to help with security in some ways:
 
 1. `Sources <https://conda-forge.org/docs/maintainer/adding_pkgs.html#source>`_ (where you specify where the package's source code is coming from) can be pulled from GitHub, PyPI, or other sources and sha256 hashes are always used, so moving of tags or uploading of new sdists can not cause automatic package rebuilds.
    Also, once packages are accepted and made into feedstocks, only the maintainers of that feedstock have the right to merge PRs made to that feedstock.
 2. Each feedstock can only upload packages for that feedstock. This is enforced by using a cf-staging channel where builds are first sent.
-   A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the conda-forge channel.
+   A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the ``conda-forge`` channel.
    This helps mitigate against a bad actor gaining access to an inconspicuous feedstock and then trying to push a build with malicious code into essential infrastructure packages (e.g., OpenSSL or Python).
-3. We have `artifact-validation <https://github.com/conda-forge/artifact-validation>`__ for validating all the ``conda-forge`` artifacts before they are uploaded to ``anaconda.org``. This validation looks for various security-related items, such as artifacts that overwrite key pieces of certain packages.
-4. We have a dedicated `Security and Systems Sub-Team <https://conda-forge.org/docs/orga/subteams.html?highlight=security+team#security-and-systems-sub-team>`__ who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by ``conda-forge``.
+3. We have `artifact-validation <https://github.com/conda-forge/artifact-validation>`__ for validating all the conda-forge artifacts uploaded to ``anaconda.org``. This validation scans for various security-related items, such as artifacts that overwrite key pieces of certain packages.
+4. We have a dedicated `Security and Systems Sub-Team <https://conda-forge.org/docs/orga/subteams.html?highlight=security+team#security-and-systems-sub-team>`__ who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by conda-forge.
+
+If you have found a security-related issue with conda-forge, please check our `Security Policy <https://github.com/conda-forge/conda-forge.github.io/security/policy>`__
+to learn how to report it responsibly.
 
 Significant Changes To Upstream Projects
 ========================================
 
-From time to time, we make changes in upstream projects so that they better integrate into the ``conda-forge`` ecosystem. We
+From time to time, we make changes in upstream projects so that they better integrate into the conda-forge ecosystem. We
 have listed some, but not all, of those changes here for specific projects along with any associated documentation.
 
 Python

@@ -8,11 +8,11 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2023
 ----
 
-2023-01-09: ``conda-forge`` Google Group is Now Read-only - Move to Discourse
+2023-01-09: conda-forge Google Group is Now Read-only - Move to Discourse
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We have made the ``conda-forge`` Google Group read-only. Please use the new 
-``conda-forge`` `discourse forum <https://conda.discourse.group/c/pkg-building/conda-forge/25>`_, 
+We have made the conda-forge Google Group read-only. Please use the new 
+conda-forge `discourse forum <https://conda.discourse.group/c/pkg-building/conda-forge/25>`_, 
 our `Gitter room <https://gitter.im/conda-forge/conda-forge.github.io>`_, or it's `Matrix/Element 
 counterpart <https://app.element.io/#/room/#conda-forge-space:matrix.org>`_ instead.
 
@@ -30,7 +30,7 @@ repo. The new location is reflected in the various links on repos and our status
 2022-11-16: Moving to ``.conda`` Artifacts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-``conda-forge`` is moving to producing ``conda`` artifacts in the version 2 package
+conda-forge is moving to producing ``conda`` artifacts in the version 2 package
 format (also known as ``.conda``). These artifacts allow for more efficient indexing
 and maintenance of the ecosystem. Our admin migrations bot will begin making PRs to
 feedstocks to change them over to the new artifact format. You will need ``conda``
@@ -169,14 +169,14 @@ Due to changes in how Travis CI tracks open-source build time, we are deprecatin
 for the ``win_*``, ``osx_*``, and ``linux_64`` platforms. Travis CI will be available only
 for platforms in their `partner queues <https://docs.travis-ci.com/user/billing-overview/#partner-queue-solution>`_.
 These platforms currently include ``ppc64le``, ``aarch64`` and ``s390x``. Rerendering will
-raise an error if Travis CI is used for a non-partner queue platform in the ``conda-forge``
+raise an error if Travis CI is used for a non-partner queue platform in the conda-forge
 GitHub organization.
 
 
 2022-02-13: Default branch migration from ``master`` to ``main``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We will be migrating the default branches of all feedstocks and other ``conda-forge`` repos
+We will be migrating the default branches of all feedstocks and other conda-forge repos
 from ``master`` to ``main``. We do expect some minor hiccups while this migration is
 going on. You will need to change to the ``main`` branch from ``master`` on any local clones via the
 following git commands:
@@ -197,7 +197,7 @@ If you encounter any problems, please comment on this Github
 2021-12-02: CentOS 7 docker images are now the default
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We are moving all ``conda-forge`` ``linux-64`` jobs to use CentOS 7-based docker images.
+We are moving all conda-forge ``linux-64`` jobs to use CentOS 7-based docker images.
 This will help users avoid ``conda/mamba`` solver errors where dependencies that need
 CentOS 7 cannot be installed. Importantly, our compiler stack will still default to using
 a CentOS 6 sysroot unless the recipe explicitly lists the CentoOS 7 sysroot package. This
@@ -252,11 +252,11 @@ You can get the previous behaviour by using the ``channel_sources`` setting in
 ``conda-forge.yml``
 
 
-2021-05-22: ``conda-forge`` is now citable!
+2021-05-22: conda-forge is now citable!
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can now cite ``conda-forge`` using our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_!
-This entry credits the entire ``conda-forge`` community for its hard work in building our
+You can now cite conda-forge using our `Zenodo entry <https://doi.org/10.5281/zenodo.4774216>`_!
+This entry credits the entire conda-forge community for its hard work in building our
 amazing ecosystem.
 
 
@@ -266,7 +266,7 @@ amazing ecosystem.
 2020-12-16: Moving to CentOS 7 and CentOS 6 End-of-Life
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-``conda-forge``'s compiler stack uses repackaged libraries from CentOS 6
+conda-forge's compiler stack uses repackaged libraries from CentOS 6
 to supply certain libraries, notably ``glibc`` when building recipes. We currently
 default to using CentOS 6 with the ``glibc`` 2.12 ABI. However, CentOS 6 reached
 end-of-life in November 2020 and increasingly software packages require at
@@ -274,7 +274,7 @@ least CentOS 7 with the ``glibc`` 2.17 ABI. We also realize that due to recent
 events, some communities that may have been planning to skip CentOS 7
 and move straight to CentOS 8 might be reconsidering those plans. Further, they
 may not be ready for a full-scale switch to CentOS 7. Thus the
-``conda-forge`` core team has decided to delay moving to CentOS 7 until sometime
+conda-forge core team has decided to delay moving to CentOS 7 until sometime
 early next year, likely the end of January 2021 at the earliest. We are actively
 looking for feedback from our users on this issue. Please do :ref:`get in touch <getintouch>`
 if you have comments or concerns!
@@ -283,7 +283,7 @@ if you have comments or concerns!
 2020-12-02: Artifact Validation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In an effort to better secure ``conda-forge``, we are developing a process to
+In an effort to better secure conda-forge, we are developing a process to
 validate artifacts before they are uploaded to ``anaconda.org``. This validation
 will look for various security-related items, such as artifacts that overwrite
 key pieces of certain packages. While this process is in development, we will not
@@ -348,7 +348,7 @@ image in your ``conda_build_config.yaml``. See :ref:`Using CentOS 7 <centos7>` f
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We have changed the OSX and Linux platforms to enforce strict channel priority
-in package builds. This change means that if a package is available in the ``conda-forge``
+in package builds. This change means that if a package is available in the conda-forge
 channels, the ``conda`` solver will not consider any versions of the package from other
 channels. Users can disable this by setting ``channel_priority: flexible`` in their
 ``conda-forge.yml``.
@@ -373,7 +373,7 @@ The ``openmp`` builds can be recovered by installing ``libopenblas=*=*openmp*``.
 2020-07-16: Core Dependency Tree Package Changes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-``conda-forge`` is moving to a new system for generating Core Dependency Tree (CDT)
+conda-forge is moving to a new system for generating Core Dependency Tree (CDT)
 packages. These changes include
 
  * CDT packages will no longer be built using feedstocks and this
@@ -385,9 +385,9 @@ packages. These changes include
  * Requests for new CDTs should be submitted as PRs to the
    `conda-forge/cdt-builds <https://github.com/conda-forge/cdt-builds>`_ repo.
 
-These changes are being made so that ``conda-forge`` can provide access to
+These changes are being made so that conda-forge can provide access to
 CentOS 7 / glibc 2.17 for ``linux-64`` builds. They will also move more of the
-packages needed for ``conda-forge`` builds into the ``conda-forge`` channels making
+packages needed for conda-forge builds into the conda-forge channels making
 builds more reliable.
 
 
@@ -447,7 +447,7 @@ Users will notice the following changes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Starting this week, we are changing the way we upload packages to ``anaconda.org``.
-We will move from direct uploads to the ``conda-forge`` ``main`` channel to using a
+We will move from direct uploads to the conda-forge ``main`` channel to using a
 staging organization/channel combined with a copy request from the staging channel to
 the production channel. This new process will allow us to perform some validation on
 the outputs of feedstocks before they are released.

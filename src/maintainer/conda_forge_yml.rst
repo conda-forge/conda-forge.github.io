@@ -128,6 +128,10 @@ automatic version updates/migrations for feedstocks. The current options are
       # to the default branch
       abi_migration_branches:
         - v1.10.x
+      
+      version_updates:
+        # use this for packages that are updated too frequently
+        random_fraction_to_keep: 0.1  # keeps 10% of versions at random
 
 The ``abi_migration_branches`` feature is useful to, for example, add a
 long-term support (LTS) branch for a package.

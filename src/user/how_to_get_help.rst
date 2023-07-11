@@ -1,13 +1,13 @@
 How to get help at conda-forge
 ==============================
 
-You could connect with us via **Gitter, GitHub Issues or Discourse Group**.
+You could connect with us via **Element, GitHub Issues or Discourse Group**.
 We would be happy to hear from you!
 
-Gitter
--------------------
+Element chatroom
+---------------------
 
-If you are just starting out with conda-forge and/or feel completely lost, we recommend getting in touch through `Gitter <https://gitter.im/conda-forge/conda-forge.github.io>`__. Our community members will direct
+If you are just starting out with conda-forge and/or feel completely lost, we recommend getting in touch through `Element chatroom <https://app.element.io/#/room/#conda-forge:matrix.org>`__. Our community members will direct
 you to the proper documentation and/or help you via the chat.
 
 GitHub issues

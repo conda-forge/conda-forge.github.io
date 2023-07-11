@@ -118,6 +118,7 @@ anchor_check_fps = [
     r'https://conda-forge.org/status/#armosxaddition$',
     r'https://github.com/conda-forge/conda-smithy/blob/main/CHANGELOG.rst#v3130$',
     r'https://github.com/.*#L\d+-L\d+$',
+    r'https://github.com/.*#L\d+$',
     r'https://github.com/conda-forge/miniforge/#download$',
     r'https://github.com/conda-incubator/grayskull#introduction$',
 ]
@@ -126,7 +127,7 @@ linkcheck_exclude_documents = [r'.*/minutes/.*']
 linkcheck_ignore = [
     r'https://anaconda.org/?$',  # 403 forbidden
     r'https://cloudflare.com/learning/cdn/what-is-a-cdn/?$',  # 403 forbidden
-    r'https://gitter.im/conda-forge/core$',  # private team
+    r'https://app.element.io/#/room/#conda-forge_core:gitter.im$',  # private team
     r'https://polys.me/?$',  # 403 forbidden
     r'https://app.element.io/#/room/#conda-forge-space:matrix.org',  # needs login
     r'https://anacondacon.io/.*$',  # website is gone

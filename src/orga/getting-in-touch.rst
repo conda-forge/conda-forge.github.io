@@ -14,6 +14,14 @@ The main issue trackers that you will interact with are
 * `Our main docs repo <https://github.com/conda-forge/conda-forge.github.io/issues>`__: You'll use this repo as a catch-all for issues where you're not sure where else to put them
 * `Our enhancement proposals repo <https://github.com/conda-forge/cfep/issues>`__: You'll use the enhancement proposals repo if you're interested in substantially changing the way conda-forge operates.
 
+Discussion Forum
+-----------------
+
+The primary discussion areas that you will engage with is
+
+* `discourse forum <https://conda.discourse.group/c/pkg-building/conda-forge/25>`__: We are using discourse as our main communication channel. To ask a question regarding usage of conda we encourage posting to our Discourse forum.
+
+
 Gitter and Element
 -------------------------
 
@@ -32,11 +40,15 @@ The main chat rooms that you'll interact with are
 
 Note: All Gitter room links forward to Element
 
+Forum
+-------
+
+* `conda community discourse forum <https://conda.discourse.group/>`__: The `conda-forge section <https://conda.discourse.group/c/pkg-building/conda-forge/25>`__ is dedicated to discussions of conda-forge.
+
 Mailing List
 -----------------
 
-* `google group: conda-forge <https://groups.google.com/g/conda-forge>`__: The general mailing list for conda-forge.
-  Sees a moderate amount of traffic, though substantially lower than the public gitter room.
+* `google group: conda-forge <https://groups.google.com/g/conda-forge>`__: `Archived <https://groups.google.com/g/conda-forge/c/Iv-yGnIMEAA>`__.
 
 Other Communication Methods
 -----------------------------
