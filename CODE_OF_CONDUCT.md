@@ -119,11 +119,11 @@ The conda-forge Organization prioritizes marginalized people’s safety over pri
 
 The CoC Committee does not influence behavior and membership in spaces outside the conda-forge Organization. However, if you are being harassed by a member of the conda-forge community outside our spaces, you may still report it to the CoC Committee. We will take all good-faith reports of harassment by conda-forge Organization members seriously. This includes harassment outside our spaces and harassment that took place at any point in time.
 
-The CoC Committee reserves the right to exclude people from conda-forge Organization spaces based on their past behavior, including behavior outside conda-forge Organization spaces and behavior towards people who are not in the conda-forge community.  
+The CoC Committee reserves the right to exclude people from conda-forge Organization spaces based on their past behavior, including behavior outside conda-forge Organization spaces and behavior towards people who are not in the conda-forge community.
 
 # Confidentiality and Public Statements to the Community
 
-The CoC Committee will keep the identity of the reporter confidential. 
+The CoC Committee will keep the identity of the reporter confidential.
 
 All CoC cases will be reported to the community. The level of detail in reports will vary from case to case. Reports will describe at least the type of infraction that was reported, and the Committee's decision and any action taken. In most cases, the report will not include personally identifiable information.
 
@@ -131,8 +131,8 @@ All CoC cases will be reported to the community. The level of detail in reports 
 
 > **If you feel your safety is in jeopardy or the situation is an emergency, we urge you to contact local law enforcement before making a report to the event's Code of Conduct committee members, [representatives](#coc-representatives), or other staff.** (In the U.S., call 911.)
 
-Live events present particular challenges: 
-  
+Live events present particular challenges:
+
 **Code of conduct reports, and consequences that stem from them, merit a thoughtful and deliberative process. Decisions and consequences matter for the reporter, the reported, and for the community at large. However, many reports, especially at live events, require rapid action to quickly address the behavior being reported.**
 
 To better support situations where immediate action may be required, these guidelines are used *during* live events:
@@ -142,7 +142,7 @@ To better support situations where immediate action may be required, these guide
 
 ## CoC Representatives
 
-Every conda-forge Organization associated event will have named CoC Committee members or *CoC representatives* that are the first point of contact for that event.  Who these people are will be clearly and frequently communicated to event participants. CoC representatives are used when there are no committee members participating in the event.
+Every conda-forge Organization associated event will have named CoC Committee members or *CoC representatives* that are the first point of contact for that event. Who these people are will be clearly and frequently communicated to event participants. CoC representatives are used when there are no committee members participating in the event.
 
 ## Live Events: Reporting and Actions
 
@@ -150,7 +150,7 @@ At conda-forge Organization events, Code of Conduct committee members or represe
 
 For reports made during live events, or in any situation where urgent action is needed:
 
-* Any two (or more) event organizers, event staff, CoC Committee members or CoC representatives can decide if immediate action is to be taken and what that action is. In exceptionally dangerous situations, this decision can be made by a single person.  
+* Any two (or more) event organizers, event staff, CoC Committee members or CoC representatives can decide if immediate action is to be taken and what that action is. In exceptionally dangerous situations, this decision can be made by a single person.
 * These rapid decisions can be reconsidered during the event as more information becomes available.
 * The scope of any rapid decision is limited to the current event / situation.
 * The report, any related information, and any decisions and consequences will be reported to the full Code of Conduct Committee as soon as possible.
@@ -175,7 +175,7 @@ If you believe someone is violating the code of conduct, please report this in a
 
 All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The conda-forge CoC Committee commits to maintaining confidentiality with regard to the reporter of an incident.
 
-For possibly unintentional breaches of the code of conduct, you may want to respond to the person and point out this code of conduct (either in public or in private, whatever is most appropriate). If you would prefer not to do that, please report the issue to the conda-forge CoC Committee directly. 
+For possibly unintentional breaches of the code of conduct, you may want to respond to the person and point out this code of conduct (either in public or in private, whatever is most appropriate). If you would prefer not to do that, please report the issue to the conda-forge CoC Committee directly.
 
 Take care of each other. Alert someone if you notice a dangerous situation, someone in distress, or violations of this code of conduct, even if they seem inconsequential.
 
@@ -218,7 +218,7 @@ If you are concerned about making a report that will be read by all committee me
 
 ## Acknowledgment and Responding to Immediate Needs
 
-CoC Committee members and/or event staff will attempt to ensure your safety and help with any immediate needs. The CoC Committee will make every effort to **acknowledge receipt within 24 hours** (and we'll aim for much more quickly than that).  
+CoC Committee members and/or event staff will attempt to ensure your safety and help with any immediate needs. The CoC Committee will make every effort to **acknowledge receipt within 24 hours** (and we'll aim for much more quickly than that).
 
 ## Reviewing the Report
 
@@ -245,7 +245,7 @@ Potential consequences for violating the conda-forge Organization code of conduc
 - A public announcement that an incident occurred
 - Mediation (only if both reporter and reportee agree)
 - An imposed vacation (e.g. asking someone to "take a week off" from a mailing list)
-- A permanent or temporary ban from some or all the conda-forge Organization spaces (mailing lists, GitHub repos, in-person events, etc.)
+- A permanent or temporary ban from some or all the conda-forge Organization spaces (mailing lists, GitHub repositories / feedstocks, in-person events, etc.)
 - Assistance to the complainant with a report to other bodies, for example, institutional offices or appropriate law enforcement agencies
 - Removing a person from the conda-forge Organization membership or other formal affiliation
 - Publishing an account of the harassment and calling for the resignation of the alleged harasser from their responsibilities (usually pursued by people without formal authority: may be called for if the person is the event leader, or refuses to stand aside from the conflict of interest, or similar)
@@ -279,25 +279,35 @@ Except where otherwise noted, votes require a quorum and a simple majority to pa
 
 * Minimum Quorum:
   * More than 50% of eligible committee members must vote.
-    * Eligibile members do not include those excluded because of [conflicts of interest](#conflicts-of-interest).
+    * Eligible members do not include those excluded because of [conflicts of interest](#conflicts-of-interest).
 * Affirmative vote threshold:
   * More than 50% of the votes cast need to be affirmative to take action.
+
+This does not apply to:
+
+* Temporary removal of a maintainer from the conda-forge Organization (up to one month)
+  * It requires the "yes" vote of at least three CoC team members and no "no" votes.
+  * Documentation of the CoC violations, the specific user in question, and the specific feedstocks must be given at the vote and maintained.
+  * After one month, the user may petition the CoC team to restore their access to the feedstock. The CoC team will vote on this petition under the same rules.
+  * If the the petition is accepted, the user's access is restored. If the petition is rejected, the user is permanently removed from the feedstock.
+  * Users may petition the CoC sub-team for access again if at least six months have passed and circumstances have changed sufficiently. Evidence of the changed circumstances must be presented with the petition. The CoC sub-team will vote on each petition under the same rules above. Excessive, repeated petitions are not acceptable and will be handled as a potential CoC violation.
+* Any member of the CoC team may call a vote by the wider core team to ban a user from conda-forge. This vote falls under the rules of votes to ban users in the conda-forge governance charter.
 
 # Committee Membership
 
 You can reach the entire CoC Committee by emailing [to.be.defined@gmail.com](mailto:to.be.defined@gmail.com).
 
-| Name | Contact | Core Team Member | Current Term Ends |
-| ---- | ---- | ---- | ---- |
-| Matthew R. Becker | becker.mr@gmail.com | Yes | ? |
-| Chris Burr | christopher.burr@cern.ch | Yes | ? |
-| Matt Craig | mattwcraig@gmail.com | Yes | ? |
-| Jannis Leidel | jleidel@anaconda.com | Yes | ? |
-| Jaime Rodríguez-Guerra | jrodriguez@quansight.com | Yes | ? |
-| Marcelo Duarte Trevisani | marceloduartetrevisani@gmail.com | Yes | ? |
-| Filipe Fernandes | ocefpaf@gmail.com | Yes | ? |
-| CJ Wright | cjwright4242@gmail.com | Yes | ? |
-| TBD, [External Ombudsperson](#ombudsperson) | | No | ? |
+| Name | Contact | Current Term Ends |
+| ---- | ---- | ---- |
+| Matthew R. Becker | becker.mr@gmail.com | ? |
+| Chris Burr | christopher.burr@cern.ch | ? |
+| Matt Craig | mattwcraig@gmail.com | ? |
+| Jannis Leidel | jleidel@anaconda.com | ? |
+| Jaime Rodríguez-Guerra | jrodriguez@quansight.com | ? |
+| Marcelo Duarte Trevisani | marceloduartetrevisani@gmail.com | ? |
+| Filipe Fernandes | ocefpaf@gmail.com | ? |
+| CJ Wright | cjwright4242@gmail.com | ? |
+| TBD, [External Ombudsperson](#ombudsperson) | | ? |
 
 # Terms and New Members
 
@@ -308,22 +318,18 @@ You can reach the entire CoC Committee by emailing [to.be.defined@gmail.com](mai
 
 # Eligibility
 
-Anyone from the community who is interested and able to do CoC Committee work is eligible to be nominated for the committee. New committee members can be nominated by any community member, including nominating themselves.
-
-## Overlap with Steering Council Membership
-
-CoC Committee members can also be on the conda-forge core team.
+CoC Committee members must be part of the conda-forge core team, with the exception of the Ombudsperson.
 
 # Ombudsperson
 
 The Code of Conduct Committee has an external ombudsperson to provide independent and impartial oversight of the committee. The ombudsperson is only involved in situations where the committee itself is particularly conflicted, or where the involved persons believe the committee is compromised in the current situation. The ombudsperson will always be someone external to the conda-forge community.
 
-Our external ombudsperson is TO BE NAMED of the TO BE NAMED PROJECT's Code of Conduct Committee.  Please contact TO BE NAMED \<EMAIL ADDRESS\> if you believe that the committee is not doing what it should, or that it is biased in your situation.  The Ombudsperson will work with you and the committee to resolve the situation.
+Our external ombudsperson is TO BE NAMED of the TO BE NAMED PROJECT's Code of Conduct Committee. Please contact TO BE NAMED \<EMAIL ADDRESS\> if you believe that the committee is not doing what it should, or that it is biased in your situation. The Ombudsperson will work with you and the committee to resolve the situation.
 
 
 # Updating this Code of Conduct
 
-The conda-forge Organization's Code of Conduct can be updated by a [simple majority vote](#voting-and-decision-making) of the CoC Committee.
+The conda-forge Organization's Code of Conduct can be updated by the wider core team. The CoC Committee will be responsible for reviewing and updating the Code of Conduct as needed, and will propose changes to the wider core team for approval.
 
 
 # License
