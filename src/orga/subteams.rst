@@ -200,7 +200,7 @@ Members
 - Anthony Scopatz <scopatz@gmail.com>
 - Christian Roth <ch.m.roth@gmail.com>
 - Lori A. Burns <lori.burns@gmail.com>
-
+- Jaime Rodríguez-guerra <jrodriguez@quansight.com>
 
 Staging Sub-Team
 ================
