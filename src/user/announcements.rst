@@ -8,8 +8,8 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2023
 ----
 
-2023-07-12: EOL for CentOS 6
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2023-07-12: End-of-life for CentOS 6
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As you may be aware, we have delayed the deprecation of our CentOS 6 build
 system the ``linux64`` platform several times. We have now set a formal deprecation
