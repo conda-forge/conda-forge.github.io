@@ -1132,7 +1132,7 @@ In order to qualify as a noarch python package, all of the following criteria mu
   ``dataclasses``.
 
 .. hint::
-  
+
   You can build platform-specific ``noarch`` packages to include runtime requirements depending on the target OS.
   See mini-tutorial below.
 
@@ -1148,7 +1148,7 @@ It is possible to build ``noarch`` packages with runtime requirements that depen
 (Linux, Windows, MacOS), regardless the architecture (amd64, ARM, PowerPC, etc). This approach
 relies on three concepts:
 
-1.  `Virtual packages <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html>`__. 
+1.  `Virtual packages <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html>`__.
     Prefixed with a double underscore, they are used by conda to represent system properties as
     constraints for the solver at install-time. We will use ``__linux``, ``__win`` or ``__osx``,
     which are only present when the running platform is Linux, Windows, or MacOS, respectively.
@@ -1826,7 +1826,7 @@ If you close the PR, it makes the bot think that another PR implementing the mig
 Another reason why it is good to keep the PR open or in draft status is that people might help with it if they want in the future.
 
 In some cases a migration PR may not get opened. Please look for
-`the migration on our status page <https://conda-forge.org/status/#current_migrations>`_
+`the migration on our status page <https://conda-forge.org/status/#big_migrations>`_
 to see if there are any issues. This may show there are still dependencies
 needing migration, in which case the best approach is to wait (or if possible
 offer to help migrate those dependencies). If there is a bot error, there will
