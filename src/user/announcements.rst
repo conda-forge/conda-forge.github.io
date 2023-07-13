@@ -16,7 +16,7 @@ system the ``linux64`` platform several times. We have now set a formal deprecat
 date to be June 30, 2024. This date matches the
 `end of extended life-cycle support <https://endoflife.software/operating-systems/linux/red-hat-enterprise-linux-rhel>`_
 from RedHat for RHEL 6. After this date, we build packages against
-CentoOS 7 by default for ``linux64``.
+CentOS 7 by default for ``linux64``.
 
 
 2023-01-09: conda-forge Google Group is Now Read-only - Move to Discourse

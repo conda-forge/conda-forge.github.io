@@ -4,7 +4,7 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Thu, 13 Jul 2023 02:15:22 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 13 Jul 2023 03:16:21 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
     <item>
       <title>2023-07-12: End-of-life for CentOS 6</title>
@@ -14,7 +14,7 @@ system the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"
 date to be June 30, 2024. This date matches the
 &lt;a class="reference external" href="https://endoflife.software/operating-systems/linux/red-hat-enterprise-linux-rhel"&gt;end of extended life-cycle support&lt;/a&gt;
 from RedHat for RHEL 6. After this date, we build packages against
-CentoOS 7 by default for &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;linux64&lt;/span&gt;&lt;/code&gt;.&lt;/p&gt;
+CentOS 7 by default for &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;linux64&lt;/span&gt;&lt;/code&gt;.&lt;/p&gt;
 </description>
       <guid>https://conda-forge.org/docs/user/announcements.html#end-of-life-for-centos-6</guid>
       <pubDate>Wed, 12 Jul 2023 00:00:00 GMT</pubDate>
