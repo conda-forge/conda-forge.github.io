@@ -8,20 +8,31 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2023
 ----
 
+2023-07-12: EOL for CentOS 6
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As you may be aware, we have delayed the deprecation of our CentOS 6 build
+system the ``linux64`` platform several times. We have now set a formal deprecation
+date to be June 30, 2024. This date matches the
+`end of extended life-cycle support <https://endoflife.software/operating-systems/linux/red-hat-enterprise-linux-rhel>`_
+from RedHat for RHEL 6. After this date, we build packages against
+CentoOS 7 by default for ``linux64``.
+
+
 2023-01-09: conda-forge Google Group is Now Read-only - Move to Discourse
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We have made the conda-forge Google Group read-only. Please use the new 
-conda-forge `discourse forum <https://conda.discourse.group/c/pkg-building/conda-forge/25>`_, 
-our `Gitter room <https://gitter.im/conda-forge/conda-forge.github.io>`_, or it's `Matrix/Element 
+We have made the conda-forge Google Group read-only. Please use the new
+conda-forge `discourse forum <https://conda.discourse.group/c/pkg-building/conda-forge/25>`_,
+our `Gitter room <https://gitter.im/conda-forge/conda-forge.github.io>`_, or it's `Matrix/Element
 counterpart <https://app.element.io/#/room/#conda-forge-space:matrix.org>`_ instead.
 
 
 2023-01-08: ``conda-forge/staged-recipes`` Feedstock Creation Job Moved
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We have moved the CI job that makes new feedstocks to our 
-`conda-forge/admin-requests <https://github.com/conda-forge/admin-requests>`_ 
+We have moved the CI job that makes new feedstocks to our
+`conda-forge/admin-requests <https://github.com/conda-forge/admin-requests>`_
 repo. The new location is reflected in the various links on repos and our status page.
 
 2022
