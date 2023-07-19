@@ -1,0 +1,94 @@
+---
+tags: [meeting-notes]
+---
+# conda-forge core meeting 2023-07-12
+
+Add new agenda items under the `Your __new__() agenda items` heading
+
+- [Zoom link](https://zoom.us/j/9138593505?pwd=SWh3dE1IK05LV01Qa0FJZ1ZpMzJLZz09)
+- [What time is the meeting in my time zone](https://dateful.com/convert/utc?t=5pm)
+- [Last week's meeting](https://hackmd.io/#REPLACE_ME#)
+
+## Attendees
+
+| Name                    | Initials | GitHub ID        | Affiliation                 |
+| ----------------------- | -------- | ---------------  | --------------------------- |
+| Dave Clements           | DPC      | tnabtaf          | Anaconda                    |
+| Jaime Rodríguez-Guerra  | JRG      | jaimergp         | Quansight/cf                |
+| Eric Dill               | EDD      | ericdill         | Anaconda/cf                 |
+| Wolf Vollprecht         | WV       | wolfv            | prefix.dev                  |
+| Bianca Henderson        | BH       | beeankha         | Anaconda                    |
+| Katherine Kinnaman      | KK       | kathatherine     | Anaconda                    |
+| John Kirkham            | JK       | jakirkham        | NVIDIA/cf                   |
+| Matthew Becker          | MRB      |  beckermr        | cf                          |
+|                         |          |                  |                             |
+|                         |          |                  |                             |
+|                         |          |                  |                             |
+
+11 people total
+
+### Standing items
+
+- [x]
+
+### From previous meeting(s)
+
+- [x] (JK) Windows + ARM
+    - (IF) Couple packages built & uploaded: Zstd + zlib
+      - https://github.com/conda-forge/zstd-feedstock/pull/72
+      - https://github.com/conda-forge/zlib-feedstock/pull/72
+    - (IF) Need conda-build PR (to avoid workarounds)
+        - PR: https://github.com/conda/conda-build/pull/4867
+    - (IF) Need to figure out how we test packages
+    - (IF) Cross-python still needs to work
+    - (IF) CMake and simple packages compile
+    - (IF) Tests in `bld.bat` need to be skipped when cross-compiling
+        - https://github.com/conda-forge/zlib-feedstock/pull/72/files#diff-54cf74e113dd3f6d11e092fdb1d888ec82c69bdafbb15cfb6570c83ecad28f33R61-R65
+    - (JK) Question about machines
+        - (IF) Could use Microsoft hosted runners (need admin permissions on GH account)
+            - (MRB) Can we be added to their account?
+                - (IF) Can ask. Mainly they need a token
+                - (MRB) Token could work
+            - (JRG) Also happy to help setup
+            - (MRB) Do we need to gatekeep
+                - (IF) Not needed
+- [x] (JK) Drop CentOS 6 & use CentOS 7
+    - https://github.com/conda-forge/conda-forge.github.io/issues/1436
+    - Most recent discussion around Zstd
+        - https://github.com/conda-forge/conda-forge.github.io/issues/1436#issuecomment-1608454474
+    - Extra flags (needs testing)
+        - https://github.com/conda-forge/linux-sysroot-feedstock/pull/50
+    - CentOS 7 EOL is May 31 2024: https://wiki.centos.org/About/Product
+    - MRB: Announce that our EOL will correspond to EOL for CentOS 6.
+    - 
+
+### Active votes
+
+- [x] [Code of Conduct sub-team formation](https://github.com/conda-forge/conda-forge.github.io/pull/1745)
+  - Vote deferred: https://github.com/conda-forge/conda-forge.github.io/pull/1745#issuecomment-1632970553
+
+### Your `__new__()` agenda items
+
+- [x] (JK) Sunsetting old CUDAs (follow up)
+    - https://github.com/conda-forge/docker-images/pull/237
+    - https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/1708
+    - CUDA hardware support
+        - https://developer.nvidia.com/cuda-gpus
+    - (JRG) Mentioned to a couple HPC groups that CUDA minimum may be bumped & they moved to 11.2
+    - (MRB) Believe DOE would be ok with CUDA 11.2+
+    - Summary: we don't care about 11.0 and 11.1 support.
+    - (IF) but should do some final checking with others.
+- [x] (BH) Upcoming [conda](https://github.com/conda/conda/issues/12849) + [conda-build](https://github.com/conda/conda-build/issues/4926) releases
+    - Channel priorities (when will we move to strict?)
+        - https://docs.conda.io/projects/conda/en/stable/user-guide/tasks/manage-channels.html#strict
+    - (MBa) If we change this we neeed an announcement.
+    - (MRB) can follow deprecation cycle.
+    - 
+
+### Pushed to next meeting
+
+- [ ] (HV) [non-urgent] Feedback on possible [branch deletion policy](https://github.com/conda-forge/conda-forge.github.io/issues/1972)
+
+### CFEPs
+
+- [ ]

@@ -1583,7 +1583,7 @@ If you really need it, you can re-add support for 9.2, 10.0 and 10.1. However, t
 Adding more CUDA versions to the build matrix will dramatically increase the number of jobs and will place a large
 burden on our CI resources. Only proceed if there's a known use case for the extra packages.
 
-1. Download this `migration file <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/cuda92_100_101.yaml>`__.
+1. Download this `migration file <https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/b6d14bce8613d14e252e46ccee13ecb160eb6494/recipe/migrations/cuda92_100_101.yaml>`__.
 2. In your feedstock fork, create a new branch and place the migration file under ``.ci_support/migrations``.
 3. Open a PR and re-render. CUDA 9.2, 10.0 and 10.1 will appear in the CI checks now. Merge when ready!
 
