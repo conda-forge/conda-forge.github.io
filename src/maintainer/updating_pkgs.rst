@@ -6,10 +6,10 @@ Maintaining packages
 Important notes
 ===============
 
-Packages on ``conda-forge`` are immutable
+Packages on conda-forge are immutable
 -----------------------------------------
 
-As a matter of policy, we do not allow edits or the deletion of packages on ``conda-forge``. This
+As a matter of policy, we do not allow edits or the deletion of packages on conda-forge. This
 policy is very important as it increases the reliability and reproducibility of ``conda`` environments
 made with the ``conda-forge`` channel. Note that because of this policy, our upload scripts will refuse to
 upload packages which already exist on the ``conda-forge`` channel.
@@ -33,7 +33,7 @@ For updates, using a branch in the main repo is discouraged because,
    This means if you push a version update to a branch and then create a :term:`PR`, conda packages will be published to anaconda.org before the PR is merged.
 
 .. important::
-  For these reasons, maintainers are asked to fork the feedstock to their personal account, push to a branch in the fork and then open a PR to the ``conda-forge`` repo.
+  For these reasons, maintainers are asked to fork the feedstock to their personal account, push to a branch in the fork and then open a PR to the conda-forge repo.
 
 Pushing to regro-cf-autotick-bot branch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -68,7 +68,7 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
 The `regro-cf-autotick-bot <https://github.com/regro/autotick-bot>`__ continuously searches on a loop for any PyPI releases, GitHub releases, and any other sources of versions when any updates are released. The source code that gets executed in the loop comes from the `cf-scripts repository <https://github.com/regro/cf-scripts>`__, which contains the code to detect versions and submit PRs. Visit `cf-scripts <https://regro.github.io/cf-scripts/index.html>`__ to read more about it.
 
 The bot creates updates via inspection of the upstream release and will always update the ``source`` section and build version in the `recipe metadata <https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#>`_.
-As an experimental feature, the autotick bot can also be configured to verify or update the recipe's requirements for `Grayskull <https://github.com/conda-incubator/grayskull>`_-compatible recipes. 
+As an experimental feature, the autotick bot can also be configured to verify or update the recipe's requirements for `Grayskull <https://github.com/conda-incubator/grayskull>`_-compatible recipes.
 This may help maintain packages with frequent requirements changes or specific requirements version pins, however this feature is not as extensively verified and proposed updates should be reviewed.
 (See the :ref:`bot` section in ``conda-forge.yml``)
 
@@ -90,7 +90,7 @@ Here we assume that you would like to update the feedstock ``<feedstock>``. Feed
    - You now have a clone of the feedstock in ``https://github.com/<your-github-id>/<feedstock>`` under your control.
    - Connect to the feedstock from your computer by using ``git clone https://github.com/<your-github-id>/<feedstock>``.
 
-#. Syncing your fork with conda-forges feedstock
+#. Syncing your fork with conda-forge's feedstock
 
    This step is only required if you have forked some time ago and your fork is missing commits from the feedstock at conda-forge.
 
@@ -174,7 +174,7 @@ Updating for newly released Python version
 ==========================================
 
 When a new Python version is released (e.g. ``3.11``), an automatic migration process is triggered that will have ``@regro-cf-autotick-bot`` eventually automatically open pull requests to all feedstocks, updating their CI setup to include the new Python version in the build matrix. After veryfing that the PR build passes, that automatic PR can simply be merged to roll out packages for new Python version.
-This process takes time, though, and pull requests will not be opened to all feedstocks at the same time to not overload CI. The current status of the migration can be tracked on the `migration status page <https://conda-forge.org/status/#current_migrations>`_ and there maintainers can verify that their feedstock is listed under the ``AWAITING-PR`` dropdown list.
+This process takes time, though, and pull requests will not be opened to all feedstocks at the same time to not overload CI. The current status of the migration can be tracked on the `migration status page <https://conda-forge.org/status/#big_migrations>`_ and there maintainers can verify that their feedstock is listed under the ``AWAITING-PR`` dropdown list.
 
 Testing changes locally
 =======================
@@ -240,14 +240,14 @@ To download prebuilt packages follow the steps below:
 Removing broken packages
 ========================
 
-Sometimes mistakes happen and a broken package ends up being uploaded to the conda-forge channel.
+Sometimes mistakes happen and a broken package ends up being uploaded to the ``conda-forge`` channel.
 
 If the only issue is in the package metadata, we can directly patch it using
 the `repo data patches feedstock <https://github.com/conda-forge/conda-forge-repodata-patches-feedstock>`__.
 If this is the case, the following general guidelines should be followed:
 1. Update the feedstocks recipe to ensure future builds do not propagate the issue with a new build number.
 2. Please make a PR there to add a patch. The patch should specify as much has possible the versions and times when the packages were generated. It may use the following information
-   
+
    - The current timestamp, you may generate it with ``python -c "import time; print(f'{time.time():.0f}000')"``.
    - The problematic version and build numbers of the packages to affect.
 
@@ -263,7 +263,7 @@ remove broken packages from the ``main`` channel:
 Archiving feedstocks
 ====================
 
-If a package is no longer maintained ``conda-forge`` will *archive*
+If a package is no longer maintained conda-forge will *archive*
 the repository. An archived repository can no longer accept PRs and issues, which prevents people and ``regro-cf-autotick-bot`` from updating the
 package (an example would be to re-render the feedstock to support new Python versions). Note that this **does not** remove the existing packages, those will still be available.
 
@@ -285,7 +285,7 @@ an issue in the feedstock repository with the following title:
 ``@conda-forge-admin, please add user @username``
 
 where ``username`` is the username of the new maintainer to be added.
-A PR will be automatically created and a maintainer or a member of the ``core`` team, in case no maintainer is active anymore, can then merge this PR to add the user. 
+A PR will be automatically created and a maintainer or a member of the ``core`` team, in case no maintainer is active anymore, can then merge this PR to add the user.
 To contact core, ping them by mentioning @conda-forge/core in a comment or, if you haven't heard back in a while or are new to conda-forge, contact them through the community `Element <https://app.element.io/#/room/#conda-forge:matrix.org>`__.
 
 .. note::

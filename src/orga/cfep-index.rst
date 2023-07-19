@@ -7,4 +7,3 @@ These CFEPs are similar to `Python's PEP <https://www.python.org/dev/peps/>`_ an
 
 CFEPs are stored in the `cfep GitHub repository <https://github.com/conda-forge/cfep>`_.
 A list of conda-forge enhancement proposals (CFEP) are as follows:
-

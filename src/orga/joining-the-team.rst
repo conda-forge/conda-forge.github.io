@@ -1,7 +1,7 @@
 Joining the team
 ****************
 
-``conda-forge`` is a volunteer-driven community. We would love for you to help us.
+conda-forge is a volunteer-driven community. We would love for you to help us.
 
 We have three
 main groups of people who maintain the ecosystem. They are the **Core Team**, the
@@ -12,8 +12,8 @@ coming in through staged-recipes.
 The Core Team
 =====================
 
-The core team is the governing body over the entire ``conda-forge``
-organization. Members of the core team have full rights over all ``conda-forge``
+The core team is the governing body over the entire conda-forge
+organization. Members of the core team have full rights over all conda-forge
 repositories. Members of core are the face of the project, and are responsible
 for officially interfacing with external communities, organizations, non-profits,
 and companies. They are also responsible for maintaining conda-forge's infrastructure.

@@ -3,10 +3,22 @@
 Contributing packages
 *********************
 
-To submit a package to the ``conda-forge`` channel, add its ``recipe`` and licence to the ``staged-recipes`` repository and create a pull request. Once the pull request is merged, the package becomes available on the ``conda-forge`` channel.
+The contribution process can be broken down into three steps:
 
-The sections below provide detailed instructions on contributing packages to conda-forge.
+* Step 1. Staging process (add recipe and license).
 
+  With the help of :ref:`the staging process <creating_recipes>`, add a package's recipe and license to the `staged-recipes repository <https://github.com/conda-forge/staged-recipes>`__ and create a PR.
+
+* Step 2. Post staging process.
+
+  Once your PR, has been merged, take a look at our :ref:`post_staging_process` to know what follows.
+
+* Step 3. Maintaining the package.
+
+  Contributing a package to ``conda-forge`` makes you the maintainer of that package. 
+  Learn more about the :ref:`roles of a maintainer <maintainer_role>`. 
+
+The sections below will add more details about each step.
 
 .. _creating_recipes:
 
@@ -115,9 +127,10 @@ After merging the :term:`PR`, our :term:`CI` infrastructure will build the packa
 
   If you have questions or have not heard back for a while, you can notify us by including ``@conda-forge/staged-recipes`` in your GitHub message.
 
+.. _post_staging_process:
 
 Post staging process
---------------------
+====================
 
 * After the PR is merged, our :term:`CI` services will create a new git repo automatically. For example, the recipe for a package named ``pydstool`` will be moved to a new repository `https://github.com/conda-forge/pydstool-feedstock <https://github.com/conda-forge/pydstool-feedstock>`_. This process is automated through a CI job on the ``conda-forge/staged-recipes`` repo. It sometimes fails due to API rate limits and will automatically retry itself. If your feedstock has not been created after a day or so, please get in touch with the ``conda-forge/core`` team for help.
 * CI services will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to `https://anaconda.org/conda-forge <https://anaconda.org/conda-forge>`_
@@ -153,10 +166,12 @@ These are the CI configuration files for service providers like Azure and Travis
 conda-forge.yml
 ................
 
-This file is used to configure how the feedstock is set up and built. Making any changes in this file usually requires `rerendering the feedstock <https://conda-forge.org/docs/maintainer/updating_pkgs.html#dev-update-rerender>`__.
+This file is used to configure how the feedstock is set up and built. Making any changes in this file usually requires :ref:`dev_update_rerender`.
+
+.. _maintainer_role:
 
 Maintainer role
----------------
+===============
 
 The maintainer's job is to:
 
@@ -180,7 +195,7 @@ the other packages being added as a requirement), the build script will be able 
 locate the dependencies that are only present within staged-recipes as long as
 the builds finish in the dependencies order. Using a single pull request
 allows you to quickly get packages set up without waiting for each package in a
-dependency chain to be reviewed, built, and added to the conda-forge channel
+dependency chain to be reviewed, built, and added to the ``conda-forge`` channel
 before starting the process over with the next recipe in the chain.
 
 .. note::
@@ -841,12 +856,12 @@ Recipe Maintainer
 A maintainer is an individual who is responsible for maintaining and updating one or more feedstock repositories and packages as well as their future versions. They have push access to the feedstock repositories of only the packages they maintain and can merge pull requests into it.
 
 Contributing a recipe for package makes you the ``maintainer`` of that package automatically.
-See `Maintainers Role <https://conda-forge.org/docs/maintainer/adding_pkgs.html#maintainer-role>`__ and `Maintaining Packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-packages>`__ to learn more about what are the things that maintainers do.
+See :ref:`maintainer_role` and :ref:`maintaining_pkgs` to learn more about what are the things that maintainers do.
 If you wish to be a maintainer of a certain package, you should contact current maintainers and open an issue in that package's feedstock with the following command:
 
 ``@conda-forge-admin, please add user @username``
 
-where username is the GitHub username of the new maintainer to be added. Please refer to `Becoming a maintainer <https://conda-forge.org/docs/orga/guidelines.html#becoming-a-maintainer>`__ and `Updating the maintainer <https://conda-forge.org/docs/maintainer/updating_pkgs.html#updating-the-maintainer-list>`__ for detailed instructions.
+where username is the GitHub username of the new maintainer to be added. Please refer to :ref:`becoming_a_maintainer` and :ref:`maint_updating_maintainers` for detailed instructions.
 
 .. _feedstock_name:
 
