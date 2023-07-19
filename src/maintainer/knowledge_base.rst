@@ -393,6 +393,58 @@ as opposed to generating feedstocks for them. (Note that historically we did use
 practice has been deprecated.) To add a new CDT, make a PR on the
 `conda-forge/cdt-builds <https://github.com/conda-forge/cdt-builds>`__ repo.
 
+Why are CDTs bad?
+^^^^^^^^^^^^^^^^^
+
+1. CDTs repackage old versions of the library.
+2. As a result, newer functionality in the packages won't be used by downstream conda packages
+   which check for the version of the library being built against.
+   For example: OpenGL functionality from the CentOS 6/7 packaged library is available, but
+   any newer functionality cannot be used.
+3. We have no guarantees that the version provided by the user's system is compatible.
+   We only have the ``__glibc>=2.17`` constraint and we assume that CentOS 6/7's
+   lower bound of GLIBC and its corresponding lower bound of the CDT are equivalent.
+4. We have no guarantee that the library is provided by the user's system at all.
+
+When should CDTs be used?
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  When there are system specific configurations are used by the library.
+    Some examples include:
+
+    a. OpenGL: if we provided the OpenGL loader library ``libglvnd``.
+       and the user's system is not using ``libglvnd``, then we cannot load the vendor-specific
+       implementations losing out on accelerator/hardware optimized performance.
+       (This is only on old distributions and we may finally be able to package ``libglvnd``
+       ourselves)
+    b. linux-pam: This is a library that allows pluggable authentication modules and the
+       configuration files for these modules usually live in ``/etc/pam.d``. The issue is that
+       the pluggable modules live in a distro specific location. For example:
+       ``/usr/lib/x86_64-linux-gnu/security/``. The default modules are built into the
+       conda package in ``$CONDA_PREFIX/lib/security``, but custom ones for
+       system-wide configuration are installed into ``/usr/lib/x86_64-linux-gnu/security/``.
+       So, we would need to patch the module to look into both, but the directory
+       ``/usr/lib/x86_64-linux-gnu/security/`` is distro specific and will be hard to
+       detect.
+
+2.  When a conda packaged library will not work properly.
+    For example: a new ``glibc`` package means we would have to edit the elf interpreter of
+    all the conda package binaries.
+    
+What's are some good examples?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.  The OpenCL loader (``ocl-icd`` together with ``ocl-icd-system``) provides an OpenCL
+    loading library. The loader will look at OpenCL implementations given in
+    ``$CONDA_PREFIX/etc/OpenCL/vendors``. 
+    For example: Pocl is a conda packaged implementation that runs OpenCL on the CPU. Vendor
+    specific implementations like the NVIDIA OpenCL or ROCm OpenCL are not conda packaged, so we
+    have to rely on the system. By installing ``ocl-icd-system`` we enable the loader to look at
+    the configuration in ``/etc/OpenCL/vendors``, which is the configuration directory for all linux
+    distributions. This gives us the best of both worlds. You don't need a system level package to
+    run OpenCL because we have a conda packaged installation, but if there is a system wide
+    implementation that is accelerated by specific hardware, we can use those.
+
 In conda-forge the primary usages of CDTs is currently for packages that link against libGL.
 
 libGL
