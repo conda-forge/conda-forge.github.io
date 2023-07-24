@@ -303,7 +303,7 @@ A package that needs all five compilers would define
   there's no need to specify ``libgcc`` or ``libgfortran``. There are additional informations about how conda-build 3 treats
   compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/stable/resources/compiler-tools.html>`__.
 
-.. cross-compilation:
+.. _cross-compilation:
 
 Cross-compilation
 -----------------
