@@ -76,6 +76,9 @@ mapping for Azure-specific configuration options. For example:
       # toggle for storing the conda build_artifacts directory (including the
       # built packages) as an Azure pipeline artifact that can be downloaded
       store_build_artifacts: False
+      # toggle for freeing up some extra space on the default Azure Pipelines
+      # linux image before running the Docker container for building
+      free_disk_space: False
 
 .. _self-hosted_azure-config:
 
