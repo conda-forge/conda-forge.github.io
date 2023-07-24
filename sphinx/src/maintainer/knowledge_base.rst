@@ -1837,7 +1837,7 @@ Apple Silicon builds
 
 The new Apple M1 processor is the first Apple Silicon supported by conda-forge
 `osx-arm64 <https://github.com/conda-forge/conda-forge.github.io/issues/1126>`__ builds.
-For new builds to be available, via `cross-compilation <cross-compilation>`_, a migration is required for
+For new builds to be available, via :ref:`cross-compilation <cross-compilation>`, a migration is required for
 the package and its dependencies. These builds are experimental as many of them are untested.
 
 To request a migration for a particular package and all its dependencies:
