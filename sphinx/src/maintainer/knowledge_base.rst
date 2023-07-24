@@ -412,7 +412,7 @@ In the build script, it would need to update ``cmake`` call and guard any tests 
       ctest
     fi
 
-Similarly, with Meson:
+Similarly, with Meson, the ``meta.yaml`` needs:
 
 .. code-block:: yaml
 
@@ -422,6 +422,8 @@ Similarly, with Meson:
         - {{ compiler("cxx") }}
         - meson
         - make
+
+And this in ``build.sh``:
 
 .. code-block:: sh
 
@@ -470,14 +472,14 @@ On conda-forge, there are two extra metadata bits that are needed in ``meta.yaml
   so they work better with the conda-build setup. 
 - Copying some Python-related packages from ``host`` to ``build`` with a ``[build_platform !=
   target_platform]`` selector:
+
   - ``python`` itself, to support ``crossenv``. 
   - Non-pure Python packages (i.e. they ship compiled libraries) that need to be present while the
     package is being built, like ``cython`` and ``numpy``.
 
 In the terms of the `PEP720 <https://peps.python.org/pep-0720/>`__, the conda-forge setup
-implements the "faking the target environment" approach. More specifically:
-
-This will result in the following changes before the builds scripts run:
+implements the "faking the target environment" approach. More specifically, this will result in the
+following changes before the builds scripts run:
 
 - A modified ``crossenv`` installation in ``$BUILD_PREFIX/venv``, mimicking the architecture of
   ``$PREFIX``.
