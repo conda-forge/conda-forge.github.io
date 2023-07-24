@@ -453,6 +453,43 @@ but merely to provide a starting point with some guidelines. Please look at `oth
 
 .. _other recipes for more examples: https://github.com/search?q=org%3Aconda-forge+path%3Arecipe%2Fmeta.yaml+%22%5Bbuild_platform+%21%3D+target_platform%5D%22&type=code
 
+Details about cross-compiled Python packages
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cross-compiling Python packages is a bit more involved than other packages. This is because Python
+doesn't have official support for cross-compilation and a series of workarounds need to be applied
+to make it work. See `PEP720 <https://peps.python.org/pep-0720/>`__ for more details.
+
+On conda-forge, there are two extra metadata bits that are needed in ``meta.yaml``:
+
+- Adding ``cross-python_{{ target_platform }}`` in ``build`` requirements, provided by the
+  `cross-python-feedstock <https://github.com/conda-forge/cross-python-feedstock>`__. This is a
+  wrapper for the ``crossenv`` Python interpreters with `some activation logic that adjust some of
+  the crossenv workarounds
+  <https://github.com/conda-forge/cross-python-feedstock/blob/main/recipe/activate-cross-python.sh>`__
+  so they work better with the conda-build setup. 
+- Copying some Python-related packages from ``host`` to ``build`` with a ``[build_platform !=
+  target_platform]`` selector:
+  - ``python`` itself, to support ``crossenv``. 
+  - Non-pure Python packages (i.e. they ship compiled libraries) that need to be present while the
+    package is being built, like ``cython`` and ``numpy``.
+
+In the terms of the `PEP720 <https://peps.python.org/pep-0720/>`__, the conda-forge setup
+implements the "faking the target environment" approach. More specifically:
+
+This will result in the following changes before the builds scripts run:
+
+- A modified ``crossenv`` installation in ``$BUILD_PREFIX/venv``, mimicking the architecture of
+  ``$PREFIX``.
+- Forwarder binaries in ``$BUILD_PREFIX/bin`` that point to the ``crossenv`` installation.
+- Symlinks that expose the ``$BUILD_PREFIX`` site-packages in the ``crossenv`` installation, which
+  is also included in ``$PYTHONPATH``.
+- A copy of all ``$PREFIX`` site-packages to ``$BUILD_PREFIX`` (except the compiled libraries).
+
+All in all, this results in a setup where ``conda-build`` can run a ``$BUILD_PREFIX``-architecture 
+``python`` interpreter that can see the packages in ``$PREFIX`` (with the compiled bits provided by
+their corresponding counterparts in ``$BUILD_PREFIX``) and mimic that target architecture.
+
 Rust Nightly
 ------------
 
