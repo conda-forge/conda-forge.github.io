@@ -303,14 +303,68 @@ A package that needs all five compilers would define
   there's no need to specify ``libgcc`` or ``libgfortran``. There are additional informations about how conda-build 3 treats
   compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/stable/resources/compiler-tools.html>`__.
 
+.. cross-compilation:
+
 Cross-compilation
 -----------------
 
 For some other architectures (like ARM), packages can be built natively on that architecture or they can be cross-compiled.
-In other words built on a different common architecture (like x86_64) while still targeting the original architecture (ARM).
+In other words, built on a different common architecture (like x86_64) while still targeting the original architecture (ARM).
 This helps one leverage more abundant CI resources in the build architecture (x86_64).
 
-A package needs to make a few changes in their recipe to be compatible with cross-compilation. Here are a few examples.
+Cross-compilation settings depend on the ``build_platform`` and ``target_platform`` conda-build
+variables:
+
+- ``build_platform``: The platform on which ``conda-build`` is running, which defines the ``build``
+  environment in ``$BUILD_PREFIX``.
+- ``target_platform``: The platform on which the package will be installed. Defines the platform of
+  the ``host`` environment in ``$PREFIX``. Defaults to the value of ``build_platform``.
+
+To change the value of ``target_platform`` and enable cross-compilation, you must use
+the :ref:`build_platform` mapping in ``conda-forge.yml`` and then :ref:`rerender
+<dev_update_rerender>` the feedstock. This will generate the appropriate CI workflows and
+conda-build input metadata. See also :ref:`test` for how to skip the test phase when
+cross-compiling. Provided the requirements metadata and build scripts are written correctly, the
+package should just work. However, in some cases, it'll need some adjustments; see examples below
+for some common cases.
+
+.. note::
+
+  The ``build_platform`` and ``target_platform`` variables are exposed as environment variables in
+  the build scripts (e.g. ``$build_platform``), and also as Jinja variables in the ``meta.yaml``
+  selectors (e.g. ``# [build_platform != target_platform]``).
+
+In addition to these two variables, there are some more environment variables that are set by
+conda-forge's automation (e.g. ``conda-forge-ci-setup``, compiler activation packages, etc) that
+can aid in cross-compilation setups:
+
+- ``CONDA_BUILD_CROSS_COMPILATION``: set to ``1`` when ``build_platform`` and ``target_platform``
+  differ.
+- ``BUILD_PLATFORM``: the platform on which ``conda-build`` is running.
+- ``BUILD``: the autoconf triplet expected for build platform.
+- ``HOST_PLATFORM``: the platform on which the package will be installed.
+- ``HOST``: the autoconf triplet expected for host platform.
+- ``CMAKE_ARGS``: arguments needed to cross-compile with CMake. Pass it to ``cmake`` in your build
+  script.
+- ``MESON_ARGS``: arguments needed to cross-compile with Meson. Pass it to ``meson`` in your build
+  script. Note a `cross build definition file <https://mesonbuild.com/Cross-compilation.html>`__ is
+  automatically created for you too.
+- ``CC_FOR_BUILD``: C compilers targeting the build platform.
+- ``CXX_FOR_BUILD``: C++ compilers targeting the build platform.
+
+This is all supported by two main conda-build features introduced in version 3:
+
+- How `requirements metadata
+  <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#requirements-section>`__
+  is expressed in ``meta.yaml``, which distinguishes between ``build`` and ``host`` platforms.
+- The ``compiler()`` Jinja function and underlying `conventions for the compiler packages
+  <https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html>`__.
+
+Cross-compilation examples
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A package needs to make a few changes in their recipe to be compatible with cross-compilation. Here
+are a few examples.
 
 A simple C library using autotools for cross-compilation might look like this:
 
@@ -323,7 +377,8 @@ A simple C library using autotools for cross-compilation might look like this:
         - pkg-config
         - gnuconfig
 
-In the build script, it would need to update the config files and guard any tests when cross-compiling:
+In the build script, it would need to update the config files and guard any tests when
+cross-compiling:
 
 .. code-block:: sh
 
@@ -334,6 +389,44 @@ In the build script, it would need to update the config files and guard any test
     if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
       make check
     fi
+
+A simple C++ library using CMake for cross-compilation might look like this:
+
+.. code-block:: yaml
+
+    requirements:
+      build:
+        - {{ compiler("cxx") }}
+        - cmake
+        - make
+
+In the build script, it would need to update ``cmake`` call and guard any tests when cross-compiling:
+
+.. code-block:: sh
+
+    # Pass ``CMAKE_ARGS`` to ``cmake``
+    cmake ${CMAKE_ARGS} ..
+    
+    # Skip ``ctest`` when cross-compiling
+    if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
+      ctest
+    fi
+
+Similarly, with Meson:
+
+.. code-block:: yaml
+
+    requirements:
+      build:
+        - {{ compiler("c") }}
+        - {{ compiler("cxx") }}
+        - meson
+        - make
+
+.. code-block:: sh
+
+    # Pass ``MESON_ARGS`` to ``meson``
+    meson ${MESON_ARGS} builddir/
 
 A simple Python extension using Cython and NumPy's C API would look like so:
 
@@ -1705,7 +1798,7 @@ Apple Silicon builds
 
 The new Apple M1 processor is the first Apple Silicon supported by conda-forge
 `osx-arm64 <https://github.com/conda-forge/conda-forge.github.io/issues/1126>`__ builds.
-For new builds to be available, via cross-compilation, a migration is required for
+For new builds to be available, via `cross-compilation <cross-compilation>`_, a migration is required for
 the package and its dependencies. These builds are experimental as many of them are untested.
 
 To request a migration for a particular package and all its dependencies:
