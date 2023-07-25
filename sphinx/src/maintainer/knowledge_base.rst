@@ -371,8 +371,8 @@ can aid in cross-compilation setups:
   automatically created for you too.
 - ``CC_FOR_BUILD``: C compilers targeting the build platform.
 - ``CXX_FOR_BUILD``: C++ compilers targeting the build platform.
-- ``CROSSCOMPILING_EMULATOR``: Path to the ``qemu`` binary for the host platform (see
-  :ref:`emulation`).
+- ``CROSSCOMPILING_EMULATOR``: Path to the ``qemu`` binary for the host platform. Useful for running
+  tests when cross-compiling.
 
 This is all supported by two main conda-build features introduced in version 3:
 
@@ -572,14 +572,6 @@ natively supported by Azure and Travis CI, respectively, so no emulation is need
       linux_ppc64le: azure
       linux_64: azure
 
-Use this variables in your builds scripts if needed:
-
-- ``CONDA_BUILD_CROSS_COMPILATION``: Set to ``1`` when build and host platforms differ. This can
-  mean your are cross-compiling or emulating.
-- ``CROSSCOMPILING_EMULATOR``: Path to the ``qemu`` binary for the host platform.
-
-See also :ref:`cross_compilation_howto` for other variables you might find useful in your build
-scripts.
 
 Rust Nightly
 ------------
