@@ -369,6 +369,8 @@ can aid in cross-compilation setups:
   automatically created for you too.
 - ``CC_FOR_BUILD``: C compilers targeting the build platform.
 - ``CXX_FOR_BUILD``: C++ compilers targeting the build platform.
+- ``CROSSCOMPILING_EMULATOR``: the emulator to use when emulating the target platform. This is
+  usually set to the ``qemu`` binary for the host platform.
 
 This is all supported by two main conda-build features introduced in version 3:
 
