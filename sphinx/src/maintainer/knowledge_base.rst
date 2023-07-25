@@ -549,6 +549,8 @@ This key maps a ``build_platform`` to a ``provider`` that will be used to emulat
 requires emulation, and will adjust the appropriate CI steps to ensure that QEMU runs the process.
 Ensure changes are applied by :ref:`rerendering <dev_update_rerender>` the feedstock.
 
+Note that only Linux architectures are currently supported via emulation.
+
 .. warning::
 
   Emulated builds are very slow and incur an additional strain on conda-forge CI resources.
