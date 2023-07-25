@@ -406,7 +406,7 @@ In the build script, it would need to update ``cmake`` call and guard any tests 
     cmake ${CMAKE_ARGS} ..
     
     # Skip ``ctest`` when cross-compiling
-    if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
+    if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
       ctest
     fi
 
