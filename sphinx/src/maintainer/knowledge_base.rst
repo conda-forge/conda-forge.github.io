@@ -387,7 +387,8 @@ The rule of the thumb is:
 - If it needs to be available on the target host, it goes in ``host``.
 - If both conditions are true, it belongs in both.
 
-However, there are some exceptions to this rule; most notably Python cross-compilation (see below).
+However, there are some exceptions to this rule; most notably Python cross-compilation
+(:ref:`see below <python_cross_compilation>`).
 
 Cross-compilation examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -484,6 +485,8 @@ but merely to provide a starting point with some guidelines. Please look at `oth
 
 .. _other recipes for more examples: https://github.com/search?q=org%3Aconda-forge+path%3Arecipe%2Fmeta.yaml+%22%5Bbuild_platform+%21%3D+target_platform%5D%22&type=code
 
+.. _python_cross_compilation:
+
 Details about cross-compiled Python packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -525,6 +528,43 @@ All in all, this results in a setup where ``conda-build`` can run a ``$BUILD_PRE
 ``python`` interpreter that can see the packages in ``$PREFIX`` (with the compiled bits provided by
 their corresponding counterparts in ``$BUILD_PREFIX``) and sufficiently mimic that target
 architecture.
+
+.. _emulation:
+
+Emulated builds
+---------------
+
+When cross-compilation is not possible, one can resort to emulation. This is a technique that uses
+a virtual machine  (`QEMU <https://www.qemu.org/>`__) to emulate the target platform, which has a
+significant overhead. However, ``conda-build`` will see the target platform as native, so very
+little changes are usually needed in the recipe.
+
+To enable emulated builds, you must use the :ref:`provider` mapping in ``conda-forge.yml``.
+This key maps a ``build_platform`` to a ``provider`` that will be used to emulate the platform.
+``conda-smithy`` will know how to detect whether the provider supports that platform natively or
+requires emulation, and will adjust the appropriate CI steps to ensure that QEMU runs the process.
+Ensure changes are applied by :ref:`rerendering <dev_update_rerender>` the feedstock.
+
+.. warning::
+
+  Emulated builds are very slow and incur an additional strain on conda-forge CI resources.
+  Whenever possible, please consider cross-compilation instead. Only use emulated builds as a last
+  resort.
+
+Emulation examples
+^^^^^^^^^^^^^^^^^^
+
+Configure ``conda-forge.yml`` to emulate ``linux-ppc64le``, but use native runners for ``linux-64`` 
+and ``linux-aarch64``. This works because ``linux-ppc64le`` is not natively supported by Azure, so
+``conda-smithy`` will add QEMU steps to emulate it. However, ``linux-64`` and ``linux-aarch64`` are
+natively supported by Azure and Travis CI, respectively, so no emulation is needed.
+
+.. code-block:: yaml
+
+    provider:
+      linux_aarch64: travis
+      linux_ppc64le: azure
+      linux_64: azure
 
 Rust Nightly
 ------------
