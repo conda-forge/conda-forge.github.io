@@ -340,10 +340,8 @@ can aid in cross-compilation setups:
 
 - ``CONDA_BUILD_CROSS_COMPILATION``: set to ``1`` when ``build_platform`` and ``target_platform``
   differ.
-- ``BUILD_PLATFORM``: the platform on which ``conda-build`` is running.
-- ``BUILD``: the autoconf triplet expected for build platform.
-- ``HOST_PLATFORM``: the platform on which the package will be installed.
-- ``HOST``: the autoconf triplet expected for host platform.
+- ``CONDA_TOOLCHAIN_BUILD``: the autoconf triplet expected for build platform.
+- ``CONDA_TOOLCHAIN_HOST``: the autoconf triplet expected for host platform.
 - ``CMAKE_ARGS``: arguments needed to cross-compile with CMake. Pass it to ``cmake`` in your build
   script.
 - ``MESON_ARGS``: arguments needed to cross-compile with Meson. Pass it to ``meson`` in your build
