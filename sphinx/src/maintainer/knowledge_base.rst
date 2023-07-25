@@ -325,9 +325,11 @@ Cross-compilation terminology usually distinguishes between two types of machine
 .. note::
 
   Some cross-compilation documentation might also distinguish between a third type of machine, the
-  target machine. You can read more about it in `this Stack Overflow question 
+  target machine. You can read more about it in `this Stack Overflow question
   <https://stackoverflow.com/questions/47010422/cross-compilation-terminologies-build-host-and-target>`__.
   For the purposes of conda-forge, we'll consider the target machine to be the same as the host.
+
+.. _cross_compilation_howto:
 
 How to enable cross-compilation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -369,8 +371,8 @@ can aid in cross-compilation setups:
   automatically created for you too.
 - ``CC_FOR_BUILD``: C compilers targeting the build platform.
 - ``CXX_FOR_BUILD``: C++ compilers targeting the build platform.
-- ``CROSSCOMPILING_EMULATOR``: the emulator to use when emulating the target platform. This is
-  usually set to the ``qemu`` binary for the host platform.
+- ``CROSSCOMPILING_EMULATOR``: Path to the ``qemu`` binary for the host platform (see
+  :ref:`emulation`).
 
 This is all supported by two main conda-build features introduced in version 3:
 
@@ -438,7 +440,7 @@ In the build script, it would need to update ``cmake`` call and guard any tests 
 
     # Pass ``CMAKE_ARGS`` to ``cmake``
     cmake ${CMAKE_ARGS} ..
-    
+
     # Skip ``ctest`` when cross-compiling
     if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
       ctest
@@ -507,11 +509,11 @@ In practical terms, for conda-forge, this results into two extra metadata bits t
   wrapper for the ``crossenv`` Python interpreters with `some activation logic that adjust some of
   the crossenv workarounds
   <https://github.com/conda-forge/cross-python-feedstock/blob/main/recipe/activate-cross-python.sh>`__
-  so they work better with the conda-build setup. 
+  so they work better with the conda-build setup.
 - Copying some Python-related packages from ``host`` to ``build`` with a ``[build_platform !=
   target_platform]`` selector:
 
-  - ``python`` itself, to support ``crossenv``. 
+  - ``python`` itself, to support ``crossenv``.
   - Non-pure Python packages (i.e. they ship compiled libraries) that need to be present while the
     package is being built, like ``cython`` and ``numpy``.
 
@@ -526,7 +528,7 @@ following changes before the builds scripts run:
   is also included in ``$PYTHONPATH``.
 - A copy of all ``$PREFIX`` site-packages to ``$BUILD_PREFIX`` (except the compiled libraries).
 
-All in all, this results in a setup where ``conda-build`` can run a ``$BUILD_PREFIX``-architecture 
+All in all, this results in a setup where ``conda-build`` can run a ``$BUILD_PREFIX``-architecture
 ``python`` interpreter that can see the packages in ``$PREFIX`` (with the compiled bits provided by
 their corresponding counterparts in ``$BUILD_PREFIX``) and sufficiently mimic that target
 architecture.
@@ -556,7 +558,7 @@ Ensure changes are applied by :ref:`rerendering <dev_update_rerender>` the feeds
 Emulation examples
 ^^^^^^^^^^^^^^^^^^
 
-Configure ``conda-forge.yml`` to emulate ``linux-ppc64le``, but use native runners for ``linux-64`` 
+Configure ``conda-forge.yml`` to emulate ``linux-ppc64le``, but use native runners for ``linux-64``
 and ``linux-aarch64``. This works because ``linux-ppc64le`` is not natively supported by Azure, so
 ``conda-smithy`` will add QEMU steps to emulate it. However, ``linux-64`` and ``linux-aarch64`` are
 natively supported by Azure and Travis CI, respectively, so no emulation is needed.
@@ -567,6 +569,15 @@ natively supported by Azure and Travis CI, respectively, so no emulation is need
       linux_aarch64: travis
       linux_ppc64le: azure
       linux_64: azure
+
+Use this variables in your builds scripts if needed:
+
+- ``CONDA_BUILD_CROSS_COMPILATION``: Set to ``1`` when build and host platforms differ. This can
+  mean your are cross-compiling or emulating.
+- ``CROSSCOMPILING_EMULATOR``: Path to the ``qemu`` binary for the host platform.
+
+See also :ref:`cross_compilation_howto` for other variables you might find useful in your build
+scripts.
 
 Rust Nightly
 ------------
@@ -638,13 +649,13 @@ When should CDTs be used?
 2.  When a conda packaged library will not work properly.
     For example: a new ``glibc`` package means we would have to edit the elf interpreter of
     all the conda package binaries.
-    
+
 What's are some good examples?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  The OpenCL loader (``ocl-icd`` together with ``ocl-icd-system``) provides an OpenCL
     loading library. The loader will look at OpenCL implementations given in
-    ``$CONDA_PREFIX/etc/OpenCL/vendors``. 
+    ``$CONDA_PREFIX/etc/OpenCL/vendors``.
     For example: Pocl is a conda packaged implementation that runs OpenCL on the CPU. Vendor
     specific implementations like the NVIDIA OpenCL or ROCm OpenCL are not conda packaged, so we
     have to rely on the system. By installing ``ocl-icd-system`` we enable the loader to look at
