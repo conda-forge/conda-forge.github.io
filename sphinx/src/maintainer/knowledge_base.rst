@@ -308,9 +308,29 @@ A package that needs all five compilers would define
 Cross-compilation
 -----------------
 
-For some other architectures (like ARM), packages can be built natively on that architecture or they can be cross-compiled.
-In other words, built on a different common architecture (like x86_64) while still targeting the original architecture (ARM).
-This helps one leverage more abundant CI resources in the build architecture (x86_64).
+conda-forge defaults to native builds of packages for x86_64 on Linux, macOS and Windows, because
+that's the architecture powering the default CI runners. Other architectures are supported too,
+but they are not guaranteed to have native builds. In those platforms where we can't provide native
+CI runners, we can still resort to either cross-compilation or emulation.
+
+Cross-compiling means building a package for a different architecture than the one the build process
+is running on. Given how abundant x86_64 runners are, most common cross-compilation setups will target
+non-x86_64 architectures from x86_64 runners.
+
+Cross-compilation terminology usually distinguishes between two types of machine:
+
+- Build: The machine running the building process.
+- Host: The machine we are building packages for.
+
+.. note::
+
+  Some cross-compilation documentation might also distinguish between a third type of machine, the
+  target machine. You can read more about it in `this Stack Overflow question 
+  <https://stackoverflow.com/questions/47010422/cross-compilation-terminologies-build-host-and-target>`__.
+  For the purposes of conda-forge, we'll consider the target machine to be the same as the host.
+
+How to enable cross-compilation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Cross-compilation settings depend on the ``build_platform`` and ``target_platform`` conda-build
 variables:
@@ -358,6 +378,17 @@ This is all supported by two main conda-build features introduced in version 3:
 - The ``compiler()`` Jinja function and underlying `conventions for the compiler packages
   <https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html>`__.
 
+Placing requirements in build or host
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The rule of the thumb is:
+
+- If it needs to run during the build, it goes in ``build``.
+- If it needs to be available on the target host, it goes in ``host``.
+- If both conditions are true, it belongs in both.
+
+However, there are some exceptions to this rule; most notably Python cross-compilation (see below).
+
 Cross-compilation examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -384,7 +415,7 @@ cross-compiling:
     cp $BUILD_PREFIX/share/gnuconfig/config.* .
 
     # Skip ``make check`` when cross-compiling
-    if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
+    if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
       make check
     fi
 
@@ -456,11 +487,15 @@ but merely to provide a starting point with some guidelines. Please look at `oth
 Details about cross-compiled Python packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Cross-compiling Python packages is a bit more involved than other packages. This is because Python
-doesn't have official support for cross-compilation and a series of workarounds need to be applied
-to make it work. See `PEP720 <https://peps.python.org/pep-0720/>`__ for more details.
+Cross-compiling Python packages is a bit more involved than other packages. The main pain point is
+that we need an executable Python interpreter (i.e. ``python`` in ``build``) that knows how to
+provide accurate information about the target platform. Since this is not officially supported, a
+series of workarounds are required to make it work. Refer to `PEP720
+<https://peps.python.org/pep-0720/>`__ or `the discussion in this issue
+<https://github.com/conda-forge/conda-forge.github.io/issues/1841>`__ for more information.
 
-On conda-forge, there are two extra metadata bits that are needed in ``meta.yaml``:
+In practical terms, for conda-forge, this results into two extra metadata bits that are needed in
+``meta.yaml``:
 
 - Adding ``cross-python_{{ target_platform }}`` in ``build`` requirements, provided by the
   `cross-python-feedstock <https://github.com/conda-forge/cross-python-feedstock>`__. This is a
@@ -488,7 +523,8 @@ following changes before the builds scripts run:
 
 All in all, this results in a setup where ``conda-build`` can run a ``$BUILD_PREFIX``-architecture 
 ``python`` interpreter that can see the packages in ``$PREFIX`` (with the compiled bits provided by
-their corresponding counterparts in ``$BUILD_PREFIX``) and mimic that target architecture.
+their corresponding counterparts in ``$BUILD_PREFIX``) and sufficiently mimic that target
+architecture.
 
 Rust Nightly
 ------------
