@@ -79,9 +79,10 @@ mapping for Azure-specific configuration options. For example:
       # toggle for freeing up some extra space on the default Azure Pipelines
       # linux image before running the Docker container for building
       free_disk_space: False
-      # toggle for creating a 10G swap file on the default Azure Pipelines
+      # Option for creating a swap file on the default Azure Pipelines
       # linux image before running the Docker container for building
-      make_10G_swap: False
+      # for example, use 10G to create a 10G swap file
+      make_swap: 0
 
 .. _self-hosted_azure-config:
 
