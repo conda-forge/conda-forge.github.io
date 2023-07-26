@@ -83,6 +83,10 @@ mapping for Azure-specific configuration options. For example:
       # linux image before running the Docker container for building
       # for example, use 10G to create a 10G swap file
       make_swap: 0
+      # limit the amount of CI jobs running concurrently at a given time
+      # each OS will get its proportional share of the configured value
+      max_parallel: 25
+
 
 .. _self-hosted_azure-config:
 
