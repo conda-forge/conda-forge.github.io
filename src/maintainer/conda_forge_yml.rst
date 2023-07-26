@@ -79,6 +79,9 @@ mapping for Azure-specific configuration options. For example:
       # toggle for freeing up some extra space on the default Azure Pipelines
       # linux image before running the Docker container for building
       free_disk_space: False
+      # limit the amount of CI jobs running concurrently at a given time
+      # each OS will get its proportional share of the configured value
+      max_parallel: 25
 
 .. _self-hosted_azure-config:
 
