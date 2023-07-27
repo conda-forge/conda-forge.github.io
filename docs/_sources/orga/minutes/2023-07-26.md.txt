@@ -1,0 +1,83 @@
+---
+tags: [meeting-notes]
+---
+# conda-forge core meeting 2023-07-26
+
+Add new agenda items under the `Your __new__() agenda items` heading
+
+- [Zoom link](https://zoom.us/j/9138593505?pwd=SWh3dE1IK05LV01Qa0FJZ1ZpMzJLZz09)
+- [What time is the meeting in my time zone](https://dateful.com/convert/utc?t=5pm)
+- [Last week's meeting](https://hackmd.io/#REPLACE_ME#)
+
+## Attendees
+
+| Name                    | Initials | GitHub ID        | Affiliation                 |
+| ----------------------- | -------- | ---------------  | --------------------------- |
+| Dave Clements           | DPC      | tnabtaf          | Anaconda                    |
+| Katherine Kinnaman      | KK       | kathatherine     | Anaconda                    |
+| Bianca Henderson        | BH       | beeankha         | Anaconda                    |
+| Keith Kraus             | KJK      | kkraus14         | Voltron Data                |
+| Marcel Bargull          | MB       | mbargull         | Bioconda/cf                 |
+| Wolf Vollprecht         | WV       | wolfv            | prefix.dev                  |
+| Jannis Leidel           | JL       | jezdez           | Anaconda/cf                 |
+|  Matthew R Becker       | MRB      | beckermr         | cf                          |
+| Jaime Rodríguez-Guerra  | JRG      | jaimergp         | Quansight/cf                |
+| John Kirkham            | JK       | jakirkham        | NVIDIA/cf                   |
+
+12 people total
+
+### Standing items
+
+- [ ]
+
+### From previous meeting(s)
+
+- [ ]
+
+### Active votes
+
+- [ ]
+
+### Your `__new__()` agenda items
+
+- [x] (JK) GLIBC 2.28
+    - Red Hat source is no longer available, causing pain.
+    - KJK Alma Linux put out announcement about being ABI compatible.
+    - MRB: we don't yet know how this is going to shake out. Might be prudent to wait and see who wins.
+    - How concerned are we with bug-for-bug compatibility
+        - Some concern, but not enough to hold this back?
+    - CUDA 12 blocked until this is resolved.
+    - JK will create an issue
+- [x] (MRB) yank conda 23.7 `--json` flag is broken
+    - This can't be! (Or, it should not have made it through testing)
+    - https://github.com/conda/conda/issues/12928
+- [x] (JK) Windows ARM
+    - CLA holdup: https://github.com/conda/conda-build/pull/4867
+    - JL: working towards having CLA conform with governance.  Working with NumFOCUS. It's coming!
+    - Planning to patch feedstock with this change
+- [x] (BH) Feedstock updates for [conda](https://github.com/conda-forge/conda-feedstock/pull/213)/[conda-build](https://github.com/conda-forge/conda-build-feedstock/pull/204) July releases have been filed
+- [x] (DPC) [PackagingCon](https://packaging-con.org/) submission deadline is July 31.
+    - Anyone want to submit something about conda-forge?
+    - Jaime will submit somthing about conda. Conda-store also coming.
+- [x] (DPC) conda-forge presence at NumFOCUS projects meetup in Amsterdam?
+    - Meeting is 11-13 September, just after DISC, and just before PyData Amsterdam.
+    - Opening event the night of 10 Sept.
+    - Collaborative work on 13 Sept
+    - Most expenses are paid by NumFOCUS.
+    - Wolf and Jaime will represent conda-forge.
+    - Jannis is going for conda., but is willing to step aside.
+- [x] (WV) sneak peek of pixi
+    - Pixi fresh look at tooling
+    - Written in rust on top of rattler.
+    - 
+- [ ] 
+- [ ] 
+
+
+### Pushed to next meeting
+
+- [ ]
+
+### CFEPs
+
+- [ ]
