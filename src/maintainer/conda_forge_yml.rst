@@ -81,8 +81,8 @@ mapping for Azure-specific configuration options. For example:
       free_disk_space: False
       # Option for creating a swap file on the default Azure Pipelines
       # linux image before running the Docker container for building
-      # for example, use 10G to create a 10G swap file
-      make_swap: 0G
+      # for example, use 10GiB to create a 10G swap file
+      make_swap: 0GiB
       # limit the amount of CI jobs running concurrently at a given time
       # each OS will get its proportional share of the configured value
       max_parallel: 25
