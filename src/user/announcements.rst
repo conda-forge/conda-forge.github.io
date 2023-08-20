@@ -19,6 +19,9 @@ to ship an up-to-date C++ standard library in its environments, but we have now 
 the road, as several key projects in the ecosystem are breaking (despite this measure) when
 compiling against such old versions of the SDK.
 
+As most things in conda-forge, support for such old versions happens on a best-effort basis, and
+we reserve the right to drop support for old versions as it becomes necessary for various reasons.
+
 
 2023-07-12: End-of-life for CentOS 6
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
