@@ -11,7 +11,8 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2023-08-21: Miniforge and Mambaforge installers are now identical
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-With the release of ``Miniforge3-22.3.1-0``, the Miniforge and Mambaforge installers are
+With the `release <https://github.com/conda-forge/miniforge/releases/tag/23.3.1-0>`__ 
+of ``Miniforge3-22.3.1-0``, the Miniforge and Mambaforge installers are
 now identical. The only difference between the two is the name of the installer and,
 subsequently, the default installation directory.
 
