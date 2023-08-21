@@ -8,6 +8,21 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2023
 ----
 
+2023-08-21: Miniforge and Mambaforge installers are now identical
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+With the release of ``Miniforge3-22.3.1-0``, the Miniforge and Mambaforge installers are
+now identical. The only difference between the two is the name of the installer and,
+subsequently, the default installation directory.
+
+From now on, both installers will provide:
+
+- ``conda`` (23.3.1 in this release)
+- ``conda-libmamba-solver`` (23.3.0 in this release)
+- ``mamba`` (1.4.2 in this release)
+- ... plus their dependencies
+
+
 2023-07-12: End-of-life for CentOS 6
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
