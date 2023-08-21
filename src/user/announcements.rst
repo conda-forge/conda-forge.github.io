@@ -20,7 +20,7 @@ the road, as several key projects in the ecosystem are breaking (despite this me
 compiling against such old versions of the SDK.
 
 As most things in conda-forge, support for such old versions happens on a best-effort basis, and
-we reserve the right to drop support for old versions as it becomes necessary for various reasons.
+and unfortunately there comes a point when it is no longer practical to support certain systems.
 
 
 2023-07-12: End-of-life for CentOS 6
