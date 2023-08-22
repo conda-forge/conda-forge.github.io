@@ -12,12 +12,18 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Conda-forge tries to support OS versions as long as possible, often far beyond the support of the
-OS vendor. For the last seven years, we have supported a minimal MacOS version of 10.9, despite
-the fact that Apple has released new versions on a yearly basis, and aggressively pushes its users
-to upgrade. One big reason that we have been able to do this at all, is that conda-forge is able
-to ship an up-to-date C++ standard library in its environments, but we have now reached the end of
-the road, as several key projects in the ecosystem are breaking (despite this measure) when
-compiling against such old versions of the SDK.
+OS vendor. For the last seven years, we have supported a minimal MacOS version of 10.9 (released in
+Oct. 2013, end-of-life since Dec. 2016), despite the fact that Apple has released new versions on a
+yearly basis, and aggressively pushes its users to upgrade.
+
+One big reason that we have been able to do this at all, is that conda-forge is able to ship an
+up-to-date C++ standard library in its environments. However, have now reached the end of the road
+on this, as several key projects in the ecosystem are breaking despite this measure when compiling
+(or even just running!) against such old versions of the SDK.
+
+For now we are doing the absolute minimum bump which is necessary to unblock those key packages.
+It's worth noting that this does not affect already-published artifacts, but going forward, our
+builds will require at least MacOS 10.13 (released Sept. 2017, end-of-life since Dec. 2020).
 
 As most things in conda-forge, support for such old versions happens on a best-effort basis, and
 and unfortunately there comes a point when it is no longer practical to support certain systems.
