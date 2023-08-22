@@ -8,7 +8,7 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2023
 ----
 
-2023-08-xx: Dropping support for MacOS <10.13
+2023-08-24: Dropping support for MacOS <10.13
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Conda-forge tries to support OS versions as long as possible, often far beyond the support of the
