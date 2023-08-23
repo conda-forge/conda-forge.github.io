@@ -79,10 +79,6 @@ mapping for Azure-specific configuration options. For example:
       # toggle for freeing up some extra space on the default Azure Pipelines
       # linux image before running the Docker container for building
       free_disk_space: False
-      # Option for creating a swap file on the default Azure Pipelines
-      # linux image before running the Docker container for building
-      # for example, use 10GiB to create a 10G swap file
-      make_swap: 0GiB
       # limit the amount of CI jobs running concurrently at a given time
       # each OS will get its proportional share of the configured value
       max_parallel: 25
@@ -105,6 +101,13 @@ Below is an example configuration for setting up a self-hosted Azure agent for L
           strategy:
             maxParallel: 1
 
+Below is an example configuration for adding a swapfile on an Azure agent for Linux:
+
+.. code-block:: yaml
+
+      azure:
+        settings_linux:
+            swapfile_size: 10GiB
 
 .. _bot:
 
