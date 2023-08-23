@@ -11,8 +11,15 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2023-08-24: Bumping Minimum MacOS version to 10.13
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We will bump the minimum MacOS version from 10.9 (released in
-Oct. 2013, end-of-life since Dec. 2016) to 10.13 (released Sept. 2017, end-of-life since Dec. 2020). Several core packages in the ecosystem either now, or will soon, require at least 10.13. These packages include the C++ standard library for OSX itself, ``libcxx``, starting with version 17. (**TODO: link to RFC from llvm**) This change will not affect already published artifacts, but in the near future, all new builds for OSX will require at least 10.13. This constraint will be implemented through the ``__osx`` virtual package, but the details of how we will achieve this are still being worked out.
+We will bump the minimum MacOS version from 10.9 (released in Oct. 2013, end-of-life
+since Dec. 2016) to 10.13 (released Sept. 2017, end-of-life since Dec. 2020).
+Several core packages in the ecosystem either now, or will soon, require at least 10.13.
+These packages include the C++ standard library for OSX itself, ``libcxx``,
+`starting <https://discourse.llvm.org/t/libc-bumping-minimal-deployment-target-for-building-the-dylib-static-library-on-macos/68912>`_
+with version 17.0.
+This change will not affect already published artifacts, but in the near future, all new builds
+for OSX will require at least 10.13. This constraint will be implemented through the ``__osx``
+virtual package, but the details of how we will achieve this are still being worked out.
 
 
 2023-07-12: End-of-life for CentOS 6
