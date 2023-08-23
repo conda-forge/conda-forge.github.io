@@ -7,12 +7,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Announcements &#8212; conda-forge 2023.08.17 documentation</title>
+    <title>Announcements &#8212; conda-forge 2023.08.23 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css?v=259f315a" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=51aece62"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=008fa409"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
 
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="introduction.html" title="A brief introduction"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.08.17 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.08.23 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Announcements</a></li> 
@@ -72,6 +72,21 @@
 <p>Our announcements are published to an RSS feed <a class="reference external" href="https://conda-forge.org/docs/news.rss">here</a>.</p>
 <section id="id1">
 <h2>2023<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<section id="bumping-minimum-macos-version-to-10-13">
+<h3>2023-08-24: Bumping Minimum MacOS version to 10.13<a class="headerlink" href="#bumping-minimum-macos-version-to-10-13" title="Permalink to this heading">¶</a></h3>
+<p>We will bump the minimum MacOS version from 10.9 (released in Oct. 2013, end-of-life since
+Dec. 2016) to 10.13 (released Sept. 2017, end-of-life since Dec. 2020). The main reason we
+managed to support 10.9 this long at all, is that conda-forge is able to ship an up-to-date
+C++ standard library for OSX, <code class="docutils literal notranslate"><span class="pre">libcxx</span></code>, superseding the old one present in the MacOS SDK
+on the system (at least from the point-of-view of the respective conda environments).</p>
+<p>However, several core packages in the ecosystem now require at least 10.13 (or will very soon),
+in a way that we cannot be circumvent. These packages include <code class="docutils literal notranslate"><span class="pre">libcxx</span></code>,
+<a class="reference external" href="https://discourse.llvm.org/t/libc-bumping-minimal-deployment-target-for-building-the-dylib-static-library-on-macos/68912">starting</a>
+with version 17.0.
+This change will not affect already published artifacts, but in the near future, all new builds
+for OSX will require at least 10.13. This constraint will be implemented through the <code class="docutils literal notranslate"><span class="pre">__osx</span></code>
+virtual package, but the details of how we will achieve this are still being worked out. Only <code class="docutils literal notranslate"><span class="pre">conda</span></code> versions 4.8.0 or newer have this virtual package. If you are using a system with MacOS older than 10.13 and are using <code class="docutils literal notranslate"><span class="pre">conda</span></code> older than 4.8.0, you will need to either upgrade <code class="docutils literal notranslate"><span class="pre">conda</span></code> to at least 4.8.0 or upgrade your system to at least MacOS 10.13.</p>
+</section>
 <section id="end-of-life-for-centos-6">
 <h3>2023-07-12: End-of-life for CentOS 6<a class="headerlink" href="#end-of-life-for-centos-6" title="Permalink to this heading">¶</a></h3>
 <p>As you may be aware, we have delayed the deprecation of our CentOS 6 build
@@ -602,6 +617,7 @@ This is going to take a few months to get done so bear with us.</p>
 <li class="toctree-l2"><a class="reference internal" href="introduction.html">A brief introduction</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Announcements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">2023</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bumping-minimum-macos-version-to-10-13">2023-08-24: Bumping Minimum MacOS version to 10.13</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#end-of-life-for-centos-6">2023-07-12: End-of-life for CentOS 6</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-google-group-is-now-read-only-move-to-discourse">2023-01-09: conda-forge Google Group is Now Read-only - Move to Discourse</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-staged-recipes-feedstock-creation-job-moved">2023-01-08: <code class="docutils literal notranslate"><span class="pre">conda-forge/staged-recipes</span></code> Feedstock Creation Job Moved</a></li>
@@ -748,7 +764,7 @@ This is going to take a few months to get done so bear with us.</p>
         <li class="right" >
           <a href="introduction.html" title="A brief introduction"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.08.17 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.08.23 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Announcements</a></li> 
