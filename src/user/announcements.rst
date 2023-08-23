@@ -23,7 +23,7 @@ in a way that we cannot be circumvent. These packages include ``libcxx``,
 with version 17.0.
 This change will not affect already published artifacts, but in the near future, all new builds
 for OSX will require at least 10.13. This constraint will be implemented through the ``__osx``
-virtual package, but the details of how we will achieve this are still being worked out. Only conda versions 4.8.0 or newer have this virtual package. If you are using a system with MacOS older than 10.13 and are using conda older than 4.8.0, you will need to either upgrade `conda` to at least `4.8.0` or upgrade your system to at least MacOS 10.13.
+virtual package, but the details of how we will achieve this are still being worked out. Only ``conda`` versions 4.8.0 or newer have this virtual package. If you are using a system with MacOS older than 10.13 and are using ``conda`` older than 4.8.0, you will need to either upgrade ``conda`` to at least 4.8.0 or upgrade your system to at least MacOS 10.13.
 
 
 2023-07-12: End-of-life for CentOS 6
