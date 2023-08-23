@@ -11,13 +11,13 @@ Our announcements are published to an RSS feed `here <https://conda-forge.org/do
 2023-08-24: Bumping Minimum MacOS version to 10.13
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We will bump the minimum MacOS version from 10.9 (released in Oct. 2013, end-of-life
-since Dec. 2016) to 10.13 (released Sept. 2017, end-of-life since Dec. 2020).
-The main reason we managed to support 10.9 this long at all, is that conda-forge is able to ship
-an up-to-date C++ standard library for OSX, ``libcxx``, in its environments, replacing the old one
-in the SDK.
+We will bump the minimum MacOS version from 10.9 (released in Oct. 2013, end-of-life since
+Dec. 2016) to 10.13 (released Sept. 2017, end-of-life since Dec. 2020). The main reason we
+managed to support 10.9 this long at all, is that conda-forge is able to ship an up-to-date
+C++ standard library for OSX, ``libcxx``, superseding the old one present in the MacOS SDK
+on the system (at least from the point-of-view of the respective conda environments).
 
-However, several core packages in the ecosystem either now, or will soon, require at least 10.13,
+However, several core packages in the ecosystem now require at least 10.13 (or will very soon),
 in a way that we cannot be circumvent. These packages include ``libcxx``,
 `starting <https://discourse.llvm.org/t/libc-bumping-minimal-deployment-target-for-building-the-dylib-static-library-on-macos/68912>`_
 with version 17.0.
