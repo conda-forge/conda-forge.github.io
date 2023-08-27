@@ -719,7 +719,7 @@ R packages should be tested for successful library loading. All
 recipes for CRAN packages should begin from `conda_r_skeleton_helper 
 <https://github.com/bgruening/conda_r_skeleton_helper>`_ and will 
 automatically include library loading tests. However, many R packages 
-will also include ``testthat`` tests that can potentially be run. While 
+also include ``testthat`` tests that can potentially be run. While 
 optional, additional testing is encouraged when packages:
 
 - provide interaces to other (compiled) libraries (e.g., ``r-curl``, 
@@ -769,13 +769,13 @@ will look like
   We recommend including a library loading check *before* the ``testthat`` 
   tests.
 
-First, one needs to declare that test environment should have ``r-testthat``
-installed. One may need additional packages here, especially if a package
-has optional functionality that is tested.
+First, one needs to declare that the test environment have ``r-testthat``
+installed. One may need additional requirements here, especially if a 
+package has optional functionality that is tested.
 
 .. note::
   If any ``testthat`` tests fail due to missing packages, maintainers
-  are encouraged to communicate this to the upstream repository. Many R 
+  are encouraged to communicate this to the upstream repository. Some R 
   packages have optional functionality that usually involves packages
   listed under the ``Suggests:`` section of the ``DESCRIPTION`` file.
   Developers should be using ``testthat::skip_if_not_installed()`` 
@@ -792,14 +792,15 @@ present and needed for specific tests.
 The default R build procedure on conda-forge will not include the 
 ``tests/`` directory in the final build. While it is possible to do this 
 (via an ``--install-tests`` flag), it is preferable to use the 
-``tests.source_files`` in the ``meta.yaml`` to only copy the tests for the 
-testing phase.
+``tests.source_files`` in the ``meta.yaml`` to copy the tests for the 
+testing phase only.
 
 Finally, one uses the ``testthat::test_file()`` function to test the 
 ``tests/testthat.R`` file, which for most packages serves as the main entry
 point for all the other tests. By default, this function does not return
-an error on test failures, so one needs to pass the argument 
-``stop_on_failure=TRUE`` to ensure that test failures propagate to the CI.
+an error value on test failures, so one needs to pass the argument 
+``stop_on_failure=TRUE`` to ensure that test failures propagate to 
+conda-build.
 
 There are scenarios where the ``tests/testthat.R`` file does not orchestrate
 the individual tests. In that case, one can instead test the 
