@@ -83,6 +83,7 @@ mapping for Azure-specific configuration options. For example:
       # each OS will get its proportional share of the configured value
       max_parallel: 25
 
+
 .. _self-hosted_azure-config:
 
 Below is an example configuration for setting up a self-hosted Azure agent for Linux:
@@ -100,6 +101,13 @@ Below is an example configuration for setting up a self-hosted Azure agent for L
           strategy:
             maxParallel: 1
 
+Below is an example configuration for adding a swapfile on an Azure agent for Linux:
+
+.. code-block:: yaml
+
+      azure:
+        settings_linux:
+            swapfile_size: 10GiB
 
 .. _bot:
 
