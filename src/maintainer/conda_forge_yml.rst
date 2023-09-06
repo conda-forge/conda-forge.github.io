@@ -179,12 +179,10 @@ Leaving this field empty implicitly requests to build a package natively. i.e.
 
 build_with_mambabuild
 ---------------------
-This option, when enabled, configures the conda-forge CI to run a debug build using the ``mamba`` solver. Check `this <https://conda-forge.org/docs/maintainer/maintainer_faq.html#mfaq-mamba-local>`__ to know more.
 
-.. code-block:: yaml
+.. warning::
 
-    build_with_mambabuild:
-      True
+    This option has been deprecated. See :ref:`conda_build_tool` for more information.
 
 .. _channel_priority:
 
@@ -262,6 +260,18 @@ artifacts. The currently supported options are
       # conda-forge uses a default value of 16 since its artifacts
       # can be large. conda-build has a default of 22.
       zstd_compression_level: 16
+
+.. _conda_build_tool:
+
+conda_build_tool
+----------------
+
+Use this option to choose which tool is used to build your recipe. Currently allowed options are:
+
+- ``conda-build``: Vanilla ``conda build ...`` with no explicit solver configuration.
+- ``conda-build+classic``: ``conda build ...`` with the ``classic`` solver enforced.
+- ``conda-build+conda-libmamba-solver``: ``conda build ...`` with the ``conda-libmamba-solver`` solver enforced.
+- ``mambabuild``: ``conda mambabuild ...`` as provided by ``boa``.
 
 .. _conda_forge_output_validation:
 
