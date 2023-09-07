@@ -17,3 +17,5 @@ dependencies:
   - pip
   - python-rapidjson
   - termcolor
+  - pip:
+      - autodoc_pydantic

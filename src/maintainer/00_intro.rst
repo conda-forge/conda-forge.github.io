@@ -11,4 +11,5 @@ Maintainer Documentation
   conda_forge_yml
   knowledge_base
   maintainer_faq
+  conda_forge_config_api_reference
 
