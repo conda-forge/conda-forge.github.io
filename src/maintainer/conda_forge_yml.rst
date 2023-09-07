@@ -32,6 +32,7 @@ Top-level fields
 * :ref:`circle`
 * :ref:`conda_build`
 * :ref:`conda_forge_output_validation`
+* :ref:`conda_solver`
 * :ref:`docker`
 * :ref:`github`
 * :ref:`idle_timeout_minutes`
@@ -271,6 +272,14 @@ conda_forge_output_validation
 This field must be set to ``True`` for feedstocks in the ``conda-forge`` GitHub
 organization. It enables the required feedstock artifact validation as described
 in :ref:`output_validation`.
+
+.. _conda_solver:
+
+conda_solver
+------------
+
+Choose which ``conda`` solver plugin to use for feedstock builds.
+The default is ``libmamba``. Other values include ``classic`.
 
 .. _docker:
 
