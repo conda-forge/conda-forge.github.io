@@ -268,7 +268,7 @@ conda_build_tool
 
 Use this option to choose which tool is used to build your recipe. Currently allowed options are:
 
-- ``conda-build``: Vanilla ``conda build ...`` with no explicit solver configuration.
+- ``conda-build``: Vanilla ``conda build ...`` with no explicit solver configuration. Note that it will still respect the value configured in ``conda_solver``, if any.
 - ``conda-build+classic``: ``conda build ...`` with the ``classic`` solver enforced.
 - ``conda-build+conda-libmamba-solver``: ``conda build ...`` with the ``conda-libmamba-solver`` solver enforced.
 - ``mambabuild``: ``conda mambabuild ...`` as provided by ``boa``.
