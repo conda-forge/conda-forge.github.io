@@ -101,13 +101,26 @@ Below is an example configuration for setting up a self-hosted Azure agent for L
           strategy:
             maxParallel: 1
 
+.. _azure-swapfile:
+
 Below is an example configuration for adding a swapfile on an Azure agent for Linux:
 
 .. code-block:: yaml
 
       azure:
         settings_linux:
-            swapfile_size: 10GiB
+          swapfile_size: 10GiB
+
+.. _azure-pagefile:
+
+To increase the pagefile size on Windows, use this block:
+
+.. code-block:: yaml
+
+      azure:
+        settings_win:
+          variables:
+            SET_PAGEFILE: 'True'
 
 .. _bot:
 
