@@ -5,26 +5,192 @@
  */
 
 /* You can override the default Infima variables here. */
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-VariableFont_slnt,wght.ttf");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-VariableFont_wght.ttf");
+}
+
 :root {
-  --ifm-color-primary: #40806a;
-  --ifm-color-primary-dark: #336654;
-  --ifm-color-primary-darker: #264c3f;
-  --ifm-color-primary-darkest: #193229;
-  --ifm-color-primary-light: #2ab47a;
-  --ifm-color-primary-lighter: #2fc888;
-  --ifm-color-primary-lightest: #3ed294;
+  --ifm-font-heading-family: "Montserrat";
+  --ifm-font-content-family: "Inter";
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ifm-font-heading-family);
+}
+
+p {
+  font-family: var(--ifm-font-content-family);
+}
+
+a {
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:focus {
+  background: #ffff00;
+  border-radius: 5px;
+  color: #000;
+}
+
+.navbar-sidebar__item,
+.menu a {
+  text-decoration: none;
+}
+
+.navbar__items--right a {
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: var(--ifm-color-primary-lightest);
+}
+
+.gradient_text {
+  background: linear-gradient(62deg, #ff3664 0%, #ff4b2b 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.homepage_button {
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(62deg, #ff3664 0%, #ff4b2b 100%) border-box;
+  border: 2px solid transparent;
+}
+
+.homepage_button:hover {
+  background:
+    linear-gradient(#ebedf0, #ebedf0) padding-box,
+    linear-gradient(62deg, #ff3664 0%, #ff4b2b 100%) border-box;
+}
+
+[data-theme="dark"] .button.button--secondary {
+  background:
+    linear-gradient(#3a3a3a, #3a3a3a) padding-box,
+    linear-gradient(62deg, #ff3664 0%, #ff4b2b 100%) border-box;
+  border: 2px solid transparent;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .button.button--secondary:hover {
+  background:
+    linear-gradient(#4c4c4c, #4c4c4c) padding-box,
+    linear-gradient(62deg, #ff3664 0%, #ff4b2b 100%) border-box;
+  border: 2px solid transparent;
+  color: #ffffff;
+}
+
+:root {
+  --ifm-color-primary: #b34400;
+  --ifm-color-primary-dark: #a13d00;
+  --ifm-color-primary-darker: #983a00;
+  --ifm-color-primary-darkest: #7d3000;
+  --ifm-color-primary-light: #c54b00;
+  --ifm-color-primary-lighter: #ce4e00;
+  --ifm-color-primary-lightest: #e95800;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --gradient: linear-gradient(60deg, #ff3664 0%, #ff4b2b 100%);
+  --theme-card: #f6f6f6;
+  --dark-theme-bg-color: #1b1b1d;
+  --light-theme-bg-color: #fff;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme="dark"] {
-  --ifm-color-primary: #87c3ae;
-  --ifm-color-primary-dark: #79bca5;
-  --ifm-color-primary-darker: #6cb69c;
-  --ifm-color-primary-darkest: #5faf94;
-  --ifm-color-primary-light: #94c9b7;
-  --ifm-color-primary-lighter: #aed6c8;
-  --ifm-color-primary-lightest: #c8e3da;
+  --ifm-color-primary: #ff5501;
+  --ifm-color-primary-dark: #e64c00;
+  --ifm-color-primary-darker: #da4800;
+  --ifm-color-primary-darkest: #b33b00;
+  --ifm-color-primary-light: #ff661b;
+  --ifm-color-primary-lighter: #ff6f27;
+  --ifm-color-primary-lightest: #ff884e;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --theme-card: #3a3a3a;
+}
+
+.color-container {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.color {
+  height: 4rem;
+  margin: 0.5rem;
+  width: 4rem;
+  border-radius: 100%;
+  text-align: center;
+}
+
+.color-gradient {
+  height: 4rem;
+  margin: 0.5rem;
+  width: 4rem;
+  border-radius: 100%;
+  text-align: center;
+  background: var(--gradient);
+}
+
+.color-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.color-palette-theme-container {
+  padding: 1rem;
+  border-radius: 15px;
+}
+
+.color-palette-light-theme-container {
+  background: var(--light-theme-bg-color);
+  color: var(--dark-theme-bg-color);
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.color-palette-dark-theme-container {
+  background: var(--dark-theme-bg-color);
+  color: var(--light-theme-bg-color);
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.logo-container-dark {
+  background: var(--dark-theme-bg-color);
+  padding: 1rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-container-light {
+  background: var(--light-theme-bg-color);
+  padding: 1rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

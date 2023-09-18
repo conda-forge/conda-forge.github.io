@@ -16,9 +16,7 @@ const config = {
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
-  // Temporarily using Twitter's emoji for construction
-  // Copyright 2020 Twitter, Inc and other contributors, CC-BY 4.0
-  favicon: "img/construction.png",
+  favicon: "img/favicon.ico",
   trailingSlash: true,
 
   // GitHub pages deployment config.
@@ -33,6 +31,14 @@ const config = {
     defaultLocale: "en",
     locales: ["en"],
   },
+
+  stylesheets: [
+    //Add Font Awesome stylesheets
+    "/fonts/font-awesome/fontawesome.css",
+    "/fonts/font-awesome/solid.css",
+    "/fonts/font-awesome/regular.css",
+    "/fonts/font-awesome/brands.css",
+  ],
 
   // Mermaid configuration
   markdown: {
@@ -87,17 +93,36 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: "cf-infra-docs (WIP)",
         logo: {
-          alt: "Under construction",
-          src: "img/construction.png",
+          alt: "conda-forge anvil logo without text",
+          src: "img/logo.png",
         },
         items: [
+          {
+            href: "https://conda-forge.org/status",
+            label: "Status",
+            position: "left",
+          },
+          {
+            href: "https://conda-forge.org/feedstock-outputs",
+            label: "Packages",
+            position: "left",
+          },
+          {
+            to: "/news",
+            label: "News",
+            position: "left",
+          },
           {
             type: "doc",
             docId: "index",
             position: "left",
             label: "Docs",
+          },
+          {
+            to: "/blog",
+            label: "Blog",
+            position: "left",
           },
           {
             type: "doc",
@@ -107,19 +132,23 @@ const config = {
             label: "Community",
           },
           {
-            to: "/blog",
-            label: "Blog",
-            position: "left",
-          },
-          {
-            to: "/news",
-            label: "News",
-            position: "left",
-          },
-          {
-            href: "https://conda-forge.org/status",
-            label: "Status",
+            href: "https://opencollective.com/conda-forge",
+            label: "Donate",
             position: "right",
+          },
+          {
+            to: "https://github.com/conda-forge",
+            title: "GitHub",
+            position: "right",
+            target: "_blank",
+            className: "fab fa-lg fa-github",
+          },
+          {
+            to: "https://twitter.com/condaforge",
+            title: "Twitter",
+            position: "right",
+            target: "_blank",
+            className: "fab fa-lg fa-twitter",
           },
         ],
       },
@@ -191,6 +220,10 @@ const config = {
               {
                 label: "Dashboard",
                 to: "/dashboard",
+              },
+              {
+                label: "Style guide",
+                to: "/style-guide",
               },
               {
                 label: "GitHub",

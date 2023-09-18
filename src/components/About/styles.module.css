@@ -1,0 +1,146 @@
+.about {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.section_padding {
+  padding: 1rem 6rem;
+}
+
+.about_description,
+.about_video_description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.about_description {
+  margin-bottom: 1rem;
+}
+
+.about_description h1 {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 30px;
+}
+
+.about_description,
+.about_video_description p {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: justify;
+  padding: 10px;
+}
+
+.stats_container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin-bottom: 2rem;
+}
+
+.stats1_card,
+.stats2_card {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+}
+
+.card {
+  background: var(--theme-card);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 35px 20px 35px;
+  margin: 5px;
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.card:hover {
+  transform: scale(0.9);
+}
+
+.card h1,
+h3 {
+  margin: 0;
+}
+
+.card h3 {
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.conda_forge_video {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.conda_forge_video iframe {
+  aspect-ratio: 16 / 9;
+  width: 60%;
+  height: 90%;
+  padding: 10px;
+}
+
+@media screen and (max-width: 1050px) {
+  .about_description {
+    margin-bottom: 1rem;
+  }
+
+  .stats1_card,
+  .stats2_card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .conda_forge_video iframe {
+    min-height: 300px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .about_description {
+    padding: 1rem;
+  }
+
+  .about_description h1 {
+    font-size: 28px;
+    line-height: 26px;
+  }
+
+  .stats1_card,
+  .stats2_card {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .conda_forge_video iframe {
+    min-height: 250px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .section_padding {
+    padding: 1rem;
+  }
+
+  .about_description h1 {
+    font-size: 24px;
+    line-height: 22px;
+  }
+
+  .about_description p {
+    font-size: 16px;
+  }
+
+  .conda_forge_video iframe {
+    min-height: 200px;
+    min-width: 300px;
+  }
+}

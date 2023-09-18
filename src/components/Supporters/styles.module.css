@@ -1,0 +1,155 @@
+.supporters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5em;
+}
+
+.section_padding {
+  padding: 3rem 6rem;
+}
+
+.supporters_conda_forge {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.supporters_conda_forge h1 {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 30px;
+}
+
+.supporters_conda_forge p {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: justify;
+  padding: 10px;
+}
+
+.fiscal_sponsor {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+}
+
+.numfocus_card {
+  background: var(--theme-card);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  padding: 3em 5em;
+}
+
+.numfocus_card a {
+  background: none;
+}
+
+.about_numfocus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 2em;
+  width: 100%;
+}
+
+.other_supporters {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+  margin: 1.5rem;
+}
+
+.cardWrapper {
+  background: var(--theme-card);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 2.25rem;
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.cardWrapper a {
+  background: none;
+}
+
+.cardWrapper:hover {
+  transform: scale(0.9);
+}
+
+@media screen and (max-width: 1050px) {
+  .section_padding {
+    padding: 3rem;
+  }
+
+  .fiscal_sponsor {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .numfocus_card {
+    margin-bottom: 2em;
+    width: 80%;
+    align-self: center;
+  }
+
+  .about_numfocus {
+    align-self: center;
+    text-align: center;
+    padding: 0;
+  }
+
+  .card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .section_padding {
+    padding: 2rem;
+  }
+
+  .supporters_conda_forge h1 {
+    font-size: 28px;
+    line-height: 26px;
+  }
+
+  .numfocus_card {
+    padding: 2em 3em;
+  }
+
+  .card {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .section_padding {
+    padding: 1rem;
+  }
+
+  .supporters_conda_forge h1 {
+    font-size: 24px;
+    line-height: 22px;
+  }
+
+  .supporters_conda_forge p {
+    font-size: 16px;
+  }
+}

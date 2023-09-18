@@ -1,0 +1,89 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+.header {
+  display: flex;
+}
+
+.section_padding {
+  padding: 4rem 6rem;
+}
+
+.header_image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header_content {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-left: 5rem;
+}
+
+.header_content h1 {
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 60px;
+}
+
+.header_content_input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.header_content_input a {
+  text-decoration: none;
+}
+
+.header_content_input a:focus {
+  background: none;
+}
+
+@media screen and (max-width: 1050px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .header_content {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .header_image {
+    width: 50%;
+    align-self: center;
+    margin-bottom: 2em;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .header h1 {
+    font-size: 40px;
+    line-height: 50px;
+  }
+
+  .section_padding {
+    padding: 4rem;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .header h1 {
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  .section_padding {
+    padding: 3rem;
+  }
+}
