@@ -293,7 +293,7 @@ conda_install_tool
 Use this option to choose which tool is used to provision the tooling in your feedstock. 
 Currently allowed options are:
 
-- ``conda``: Vanilla ``conda install ...`` with no explicit solver configuration. Note that it will still respect the value configured in :ref:`conda_solver`, if any.
+- ``conda``: ``conda install ...``. You can change which solver to use via :ref:`conda_solver`.
 - ``mamba``: ``mamba install ...`` as provided by the `mamba project <https://github.com/mamba-org/mamba>`__. ``conda_solver`` has no effect here.
 
 .. _conda_solver:
@@ -302,7 +302,8 @@ conda_solver
 ------------
 
 Choose which ``conda`` solver plugin to use for feedstock builds.
-The default is ``libmamba``. Other values include ``classic``.
+Note this configuration might :ref:`conda_build_tool` (e.g. when set to ``conda-build``)
+and :ref:`conda_install_tool` (e.g. when set to ``conda``).
 
 .. _docker:
 
