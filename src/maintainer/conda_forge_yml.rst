@@ -302,7 +302,7 @@ conda_solver
 ------------
 
 Choose which ``conda`` solver plugin to use for feedstock builds.
-Note this configuration might :ref:`conda_build_tool` (e.g. when set to ``conda-build``)
+Note this configuration might affect :ref:`conda_build_tool` (e.g. when set to ``conda-build``)
 and :ref:`conda_install_tool` (e.g. when set to ``conda``).
 
 .. _docker:
