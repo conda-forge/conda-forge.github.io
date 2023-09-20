@@ -34,6 +34,7 @@ import cloud_sptheme as csp
 extensions = [
     "myst_parser",
     "sphinx.ext.todo",
+    "sphinx.ext.autodoc",
     "sphinxcontrib.fulltoc",
     "sphinxcontrib.newsfeed",
     "sphinxcontrib.autodoc_pydantic",
@@ -312,6 +313,11 @@ man_pages = [(master_doc, "conda-forge", "conda-forge Documentation", [author], 
 autodoc_pydantic_model_show_json = False
 autodoc_pydantic_model_show_config_summary = False
 autodoc_pydantic_model_show_field_summary = False
+autodoc_pydantic_model_show_validator_summary = False
+
+add_module_names = False
+python_use_unqualified_type_names = True
+autodoc_typehints_format = "short"
 
 # -- Options for Texinfo output -------------------------------------------
 
