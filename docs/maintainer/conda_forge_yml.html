@@ -7,12 +7,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2023.09.16 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2023.09.21 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css?v=259f315a" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=e7107661"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=81c99660"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
 
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.09.16 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.09.21 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
@@ -152,10 +152,17 @@ mapping for Azure-specific configuration options. For example:</p>
 <span class="w">      </span><span class="nt">maxParallel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 </pre></div>
 </div>
-<p>Below is an example configuration for adding a swapfile on an Azure agent for Linux:</p>
+<p id="azure-swapfile">Below is an example configuration for adding a swapfile on an Azure agent for Linux:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">settings_linux</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">swapfile_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10GiB</span>
+<span class="w">    </span><span class="nt">swapfile_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10GiB</span>
+</pre></div>
+</div>
+<p id="azure-pagefile">To increase the pagefile size on Windows, use this block:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">azure</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">settings_win</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">variables</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">SET_PAGEFILE</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;True&#39;</span>
 </pre></div>
 </div>
 </section>
@@ -653,7 +660,7 @@ Currently only:</p>
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.09.16 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.09.21 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
