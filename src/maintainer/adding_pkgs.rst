@@ -775,7 +775,7 @@ For the ``about: license`` entry in the recipe ``meta.yaml``, using a SPDX ident
 
 See `SPDX license identifiers <https://spdx.org/licenses/>`__ for the licenses.
 See `SPDX license exceptions <https://spdx.org/licenses/exceptions-index.html>`__ for license exceptions.
-See `SPDX specification <https://spdx.org/spdx-specification-21-web-version>`__ Appendix IV
+See `SPDX specification <https://spdx.github.io/spdx-spec/v2.2.2/SPDX-license-expressions/>`__ Annex D
 for the specification on expressions. Some examples of these are:
 
 .. code-block:: none
