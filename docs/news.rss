@@ -4,8 +4,26 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Thu, 21 Sep 2023 20:10:37 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 25 Sep 2023 14:41:13 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
+    <item>
+      <title>2023-09-25: Python 3.12 migration and Python 3.11 by default</title>
+      <link>https://conda-forge.org/docs/user/announcements.html#python-3-12-migration-and-python-3-11-by-default</link>
+      <description>&lt;p&gt;With the Python 3.12 release approaching, we have already started the rebuild of packages for it.
+Although, there is no offical Python 3.12 release yet, the release candidates of it will have the same ABI.
+Thus packages built with the release candidate can be safely used with the later offical release.
+To support rebuilding packages on conda-forge while ensuring Python release candidates don’t end up in end-user solves, we have uploaded the Python 3.12.0rc2 and rc3 builds to the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;conda-forge/label/python_rc&lt;/span&gt;&lt;/code&gt; channel.
+The &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;python312&lt;/span&gt;&lt;/code&gt; migration adds this channel in the feedstock builds to the Python 3.12 matrix entry.
+On the offical release of Python 3.12, we will adjust the migration and remove the channel again.
+Then (on a rerender), feedstock will only consume the main channel again.&lt;/p&gt;
+
+&lt;p&gt;Overall, this approach allows us to provide Python 3.12 for a wide range of packages already on the day of the offical Python 3.12 release.&lt;/p&gt;
+
+&lt;p&gt;At the same time, we have stopped the Python 3.11 migration and added it to the list of default Python versions on conda-forge.&lt;/p&gt;
+</description>
+      <guid>https://conda-forge.org/docs/user/announcements.html#python-3-12-migration-and-python-3-11-by-default</guid>
+      <pubDate>Mon, 25 Sep 2023 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>2023-08-24: Bumping Minimum MacOS version to 10.13</title>
       <link>https://conda-forge.org/docs/user/announcements.html#bumping-minimum-macos-version-to-10-13</link>

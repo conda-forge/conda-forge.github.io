@@ -7,12 +7,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Announcements &#8212; conda-forge 2023.09.21 documentation</title>
+    <title>Announcements &#8212; conda-forge 2023.09.25 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css?v=259f315a" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=81c99660"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=7db88cc7"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
 
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="introduction.html" title="A brief introduction"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.09.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.09.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Announcements</a></li> 
@@ -72,6 +72,18 @@
 <p>Our announcements are published to an RSS feed <a class="reference external" href="https://conda-forge.org/docs/news.rss">here</a>.</p>
 <section id="id1">
 <h2>2023<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<section id="python-3-12-migration-and-python-3-11-by-default">
+<h3>2023-09-25: Python 3.12 migration and Python 3.11 by default<a class="headerlink" href="#python-3-12-migration-and-python-3-11-by-default" title="Permalink to this heading">¶</a></h3>
+<p>With the Python 3.12 release approaching, we have already started the rebuild of packages for it.
+Although, there is no offical Python 3.12 release yet, the release candidates of it will have the same ABI.
+Thus packages built with the release candidate can be safely used with the later offical release.
+To support rebuilding packages on conda-forge while ensuring Python release candidates don’t end up in end-user solves, we have uploaded the Python 3.12.0rc2 and rc3 builds to the <code class="docutils literal notranslate"><span class="pre">conda-forge/label/python_rc</span></code> channel.
+The <code class="docutils literal notranslate"><span class="pre">python312</span></code> migration adds this channel in the feedstock builds to the Python 3.12 matrix entry.
+On the offical release of Python 3.12, we will adjust the migration and remove the channel again.
+Then (on a rerender), feedstock will only consume the main channel again.</p>
+<p>Overall, this approach allows us to provide Python 3.12 for a wide range of packages already on the day of the offical Python 3.12 release.</p>
+<p>At the same time, we have stopped the Python 3.11 migration and added it to the list of default Python versions on conda-forge.</p>
+</section>
 <section id="bumping-minimum-macos-version-to-10-13">
 <h3>2023-08-24: Bumping Minimum MacOS version to 10.13<a class="headerlink" href="#bumping-minimum-macos-version-to-10-13" title="Permalink to this heading">¶</a></h3>
 <p>We will bump the minimum MacOS version from 10.9 (released in Oct. 2013, end-of-life since
@@ -617,6 +629,7 @@ This is going to take a few months to get done so bear with us.</p>
 <li class="toctree-l2"><a class="reference internal" href="introduction.html">A brief introduction</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Announcements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">2023</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#python-3-12-migration-and-python-3-11-by-default">2023-09-25: Python 3.12 migration and Python 3.11 by default</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bumping-minimum-macos-version-to-10-13">2023-08-24: Bumping Minimum MacOS version to 10.13</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#end-of-life-for-centos-6">2023-07-12: End-of-life for CentOS 6</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conda-forge-google-group-is-now-read-only-move-to-discourse">2023-01-09: conda-forge Google Group is Now Read-only - Move to Discourse</a></li>
@@ -764,7 +777,7 @@ This is going to take a few months to get done so bear with us.</p>
         <li class="right" >
           <a href="introduction.html" title="A brief introduction"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.09.21 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.09.25 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >User Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Announcements</a></li> 
