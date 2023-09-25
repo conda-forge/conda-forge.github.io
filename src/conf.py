@@ -134,6 +134,7 @@ linkcheck_ignore = [
     r'https://matrix.to/#.*$',  # anchors are generated dynamically
     r'https://app.element.io/#.*$',  # anchors are generated dynamically
     r'https://wave.webaim.org/report#.*$',  # anchors are generated dynamically
+    r'https://endoflife.software/.*$',  # TLS certificate expired
 ] + anchor_check_fps
 
 
