@@ -88,14 +88,6 @@ Entering the above phrase in a PR or an issue of a feedstock will add ``noarch: 
 for you.
 
 
-@conda-forge-admin, please update for conda-build 3
----------------------------------------------------
-
-This command will attempt to update a recipe to the new ``conda-build 3`` format. It can be sent either in an issue or a PR.
-
-Note that this update command is kind of a hack, and things might go wrong. Make sure to look over the changes, and ask for help if you're not sure about something.
-
-
 @conda-forge-admin, please lint
 -------------------------------
 
