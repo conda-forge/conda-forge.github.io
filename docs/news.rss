@@ -4,7 +4,7 @@
     <title>conda-forge news &amp; announcements</title>
     <link>https://conda-forge.org/docs/user/announcements.html</link>
     <description>News and announcements for the conda-forge ecosystem and channel.</description>
-    <lastBuildDate>Thu, 05 Oct 2023 08:13:10 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 10 Oct 2023 18:48:51 GMT</lastBuildDate>
     <generator>sphinxcontrib-newsfeed</generator>
     <item>
       <title>2023-09-25: Python 3.12 migration and Python 3.11 by default</title>
@@ -50,7 +50,7 @@ virtual package, but the details of how we will achieve this are still being wor
       <description>&lt;p&gt;As you may be aware, we have delayed the deprecation of our CentOS 6 build
 system the &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;linux64&lt;/span&gt;&lt;/code&gt; platform several times. We have now set a formal deprecation
 date to be June 30, 2024. This date matches the
-&lt;a class="reference external" href="https://endoflife.software/operating-systems/linux/red-hat-enterprise-linux-rhel"&gt;end of extended life-cycle support&lt;/a&gt;
+&lt;a class="reference external" href="https://access.redhat.com/articles/4038291"&gt;end of extended life-cycle support&lt;/a&gt;
 from RedHat for RHEL 6. After this date, we build packages against
 CentOS 7 by default for &lt;code class="docutils literal notranslate"&gt;&lt;span class="pre"&gt;linux64&lt;/span&gt;&lt;/code&gt;.&lt;/p&gt;
 </description>

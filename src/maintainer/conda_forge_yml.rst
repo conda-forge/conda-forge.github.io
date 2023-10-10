@@ -31,7 +31,10 @@ Top-level fields
 * :ref:`choco`
 * :ref:`circle`
 * :ref:`conda_build`
+* :ref:`conda_build_tool`
 * :ref:`conda_forge_output_validation`
+* :ref:`conda_install_tool`
+* :ref:`conda_solver`
 * :ref:`docker`
 * :ref:`github`
 * :ref:`idle_timeout_minutes`
@@ -192,12 +195,10 @@ Leaving this field empty implicitly requests to build a package natively. i.e.
 
 build_with_mambabuild
 ---------------------
-This option, when enabled, configures the conda-forge CI to run a debug build using the ``mamba`` solver. Check `this <https://conda-forge.org/docs/maintainer/maintainer_faq.html#mfaq-mamba-local>`__ to know more.
 
-.. code-block:: yaml
+.. warning::
 
-    build_with_mambabuild:
-      True
+    This option has been deprecated. See :ref:`conda_build_tool` for more information.
 
 .. _channel_priority:
 
@@ -276,6 +277,18 @@ artifacts. The currently supported options are
       # can be large. conda-build has a default of 22.
       zstd_compression_level: 16
 
+.. _conda_build_tool:
+
+conda_build_tool
+----------------
+
+Use this option to choose which tool is used to build your recipe. Currently allowed options are:
+
+- ``conda-build``: Vanilla ``conda build ...`` with no explicit solver configuration. Note that it will still respect the value configured in :ref:`conda_solver`, if any.
+- ``conda-build+classic``: ``conda build ...`` with the ``classic`` solver enforced.
+- ``conda-build+conda-libmamba-solver``: ``conda build ...`` with the ``conda-libmamba-solver`` solver enforced.
+- ``mambabuild``: ``conda mambabuild ...`` as provided by ``boa``.
+
 .. _conda_forge_output_validation:
 
 conda_forge_output_validation
@@ -284,6 +297,26 @@ conda_forge_output_validation
 This field must be set to ``True`` for feedstocks in the ``conda-forge`` GitHub
 organization. It enables the required feedstock artifact validation as described
 in :ref:`output_validation`.
+
+.. _conda_install_tool:
+
+conda_install_tool
+------------------
+
+Use this option to choose which tool is used to provision the tooling in your feedstock. 
+Currently allowed options are:
+
+- ``conda``: ``conda install ...``. You can change which solver to use via :ref:`conda_solver`.
+- ``mamba``: ``mamba install ...`` as provided by the `mamba project <https://github.com/mamba-org/mamba>`__. ``conda_solver`` has no effect here.
+
+.. _conda_solver:
+
+conda_solver
+------------
+
+Choose which ``conda`` solver plugin to use for feedstock builds.
+Note this configuration might affect :ref:`conda_build_tool` (e.g. when set to ``conda-build``)
+and :ref:`conda_install_tool` (e.g. when set to ``conda``).
 
 .. _docker:
 
