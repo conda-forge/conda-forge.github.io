@@ -1,0 +1,109 @@
+---
+tags: [meeting-notes]
+---
+# conda-forge core meeting 2023-10-18
+
+Add new agenda items under the `Your __new__() agenda items` heading
+
+- [Zoom link](https://zoom.us/j/9138593505?pwd=SWh3dE1IK05LV01Qa0FJZ1ZpMzJLZz09)
+- [What time is the meeting in my time zone](https://dateful.com/convert/utc?t=5pm)
+- [Last week's meeting](https://hackmd.io/#REPLACE_ME#)
+
+## Attendees
+
+| Name                    | Initials | GitHub ID        | Affiliation                 |
+| ----------------------- | -------- | ---------------  | --------------------------- |
+| Bianca Henderson        | BH       | beeankha         | Anaconda                    |
+| Filipe Fernandes        | FF       | ocefpaf          | conda-forge                 |
+| Daniel Ching            | DJC      | carterbox        | Argonne National Laboratory |
+| Matthew R Becker        | MRB      | beckermr         | cf                          |
+| Carl Anderson           | CA       | barabo           | Anaconda                    |
+| John Kirkham            | JK       | jakirkham        | NVIDIA/cf                   |
+| Cheng H. Lee            | CHL      | chenghlee        | Anaconda/cf                 |
+| Dave Clements           | DPC      | tnabtaf          | Anaconda                    |
+| Isuru Fernando          | IF       | isuruf           | Quansight                   |
+| Wolf Vollprecht         | WV       | wolfv            | prefix.dev                  |
+| Jaime Rodríguez-Guerra  | JRG      | jaimergp         | Quansight/cf              |
+|                         |          |                  |                             |
+|                         |          |                  |                             |
+|                         |          |                  |                             |
+
+14 people total
+
+### Standing items
+
+- [ ]
+
+### From previous meeting(s)
+
+- [ ]
+
+### Active votes
+
+- [ ]
+
+### Your __new__() agenda items
+
+- [X] (JK) NumPy 2.0
+    - Discussion about how to get more info about NumPy version used in a build
+        - https://github.com/numpy/numpy/pull/24861
+        - https://github.com/conda-forge/conda-forge.github.io/issues/1997
+- [X] (HV) archspec-enabled packages
+  - leaving lots of perf on the table; distros moving to x64-v2 or [even](https://www.phoronix.com/news/CentOS-ISA-Experiment-Perform) v3 baseline ()
+  - [CF issue](https://github.com/conda-forge/conda-forge.github.io/issues/1261) open since ~2.5yrs; [CEP issue](https://github.com/conda-incubator/ceps/issues/59) a few months ago -- next steps?
+  - (IF,CHL) We could probably re-purpose the existing `__archspec` virtual package to expose/proxy the HWCAPS/feature level; would not require additional changes conda to get some support for tuned packages
+    - See https://github.com/conda-incubator/ceps/issues/59#issuecomment-1636844274
+    - https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels
+  - (CHL) CEP potentially goes way deeper and would expose things like individual CPU feature flags. (Original in-person discussion at SciPy 2023 was around discovering specific AVX-512, AES-NI, and ARM instructions.)
+- [X] (BH) Where is the best place to learn about/peek into conda-forge build automation?
+  - Feedstock builds: conda-smithy provides the starting configuration, conda-forge-ci-setup handles some stuff at runtime, docker-images creates the base image for Linux. Automation around feedstocks... regro/cf-scripts is the start.
+  - https://cf-infra-docs.netlify.app/docs/fundamentals/life-cycle/ for some big picture docs (non-official)
+- [X] (JK) m2 recipes
+    - https://github.com/conda-forge/staged-recipes/pull/24112
+    - https://github.com/conda-forge/m2-builds
+    - conda-msys2:matrix.org
+- [x] (JK) AlmaLinux 8
+    - CDTs need to be setup
+- [x] (JK) macOS 10.13
+    - https://github.com/conda-forge/conda-forge.github.io/issues/1844
+    - https://github.com/conda/conda-build/pull/4999
+        - Needs reviews
+- [x] (JK) Windows ARM
+    - compatibility status?
+    - conda-forge usage
+    - (IF) Got Windows ARM machine 
+    - (IF) Need to gen GHA token to give to them for CI setup (planned at end of month)
+    - (IF) Will need to some cross-compilation to support building some of the packages for Windows ARM (from x86_64)
+    - (MRB) Load?
+        - (IF) Not worried about this as ramp up time will be long
+        - (IF) They also will give us more if needed
+    - (JRG) Have admin service logic to add/remove CI services
+- [X] (HV) Asking Microsoft for more CI jobs
+    - (JRG) Moving to GHA as an option
+        - (MRB) Need to be careful having jobs that generate jobs on GHA (DoS risk)
+- [X] (JK) Conda/conda-build/mamba/boa/Miniforge
+    - (JRG) Can use `conda-libmamba-solver` in `conda-build` (starting w/23.9.0)
+        - This has also been tested in staged-recipes
+    - (WV) Regarding `boa`, might be best to move `conda-build` with `conda-libmamba-solver`
+        - (HV) Will this allow us to update `conda-build` in feedstocks
+            - Yes +3
+    - (JRG) Can also opt-in with `conda-forge.yml`
+        - Link: https://conda-forge.org/docs/maintainer/conda_forge_yml.html#conda-build-tool
+    - (JK) Let's test on feedstocks a bit and see how it goes
+- [X] (CA) CDN issues
+    - granular package delay monitoring coming soon
+    - some packages can't be downloaded from CDN
+        - Files were uploaded, but no release record was added
+        - Now working on fixing the 20-30 packages affected in cf
+        - Also adding logic now to track delay time
+        - 
+- [X] (JRG/WV) CZI EOSS6 LOI submission: https://github.com/conda-forge/conda-forge.github.io/pull/2019
+  
+### Pushed to next meeting
+
+- [ ] (HV) archspec-enabled packages
+- [ ] (JK) m2 recipes
+
+### CFEPs
+
+- [ ]
