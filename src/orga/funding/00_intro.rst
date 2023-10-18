@@ -17,13 +17,14 @@ For the sake of transparency, we have made available letters of intent, applicat
 Submitted but not yet decided
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* 2023 - NumFOCUS SDG Round 1: :doc:`Access control improvements for opt-in CI (Continuous Integration) services <sdg-2023-1>`
-* 2023 - Google Summer of Code: :doc:`Modernization of the conda-forge.org website <gsoc-2023>`
-* 2023 - Google Season of Docs: :doc:`Restructuring the conda-forge documentation <gsod-2023>`
+* 2023 - `CZI EOSS`_ Funding Cycle 6: Next-gen conda-build recipe format and tooling, submitted by Prefix & Quansight
+    * :download:`Letter of intent </_static/czi-eoss-6-loi-build-tools.pdf>`.
 
 Successfully funded
 ~~~~~~~~~~~~~~~~~~~
 
+* 2023 - NumFOCUS SDG Round 1: :doc:`Access control improvements for opt-in CI (Continuous Integration) services <sdg-2023-1>`
+* 2023 - Google Summer of Code: :doc:`Modernization of the conda-forge.org website <gsoc-2023>`
 * 2022 - `CZI EOSS`_ Funding Cycle 5: Transparent, open & sustainable infrastructure for conda-forge and bioconda, submitted by QuantStack & Quansight
     * :download:`Letter of intent </_static/czi-eoss-5-loi-infra.pdf>`.
     * :download:`Full submission </_static/czi-eoss-5-full-infra.pdf>`.
@@ -40,6 +41,7 @@ Successfully funded
 Submitted and not funded
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+* 2023 - Google Season of Docs: :doc:`Restructuring the conda-forge documentation <gsod-2023>`
 * 2022 - `CZI EOSS`_ Funding Cycle 5: Adding a WebAssembly Toolchain to conda-forge, submitted by QuantStack
     * :download:`Letter of intent </_static/czi-eoss-5-loi-wasm.pdf>`.
 
