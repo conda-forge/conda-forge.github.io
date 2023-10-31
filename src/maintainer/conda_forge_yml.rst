@@ -509,8 +509,14 @@ The following CI services are available:
 * ``circle``
 * ``travis``
 * ``appveyor``
+* ``github_actions``
 * ``None`` or ``False`` to disable a build platform.
 * ``default`` to choose an appropriate CI (only if available)
+
+Note that ``github_actions`` is not available for the conda-forge github organization
+except for self-hosted runs to avoid a denial of service due to other critical
+infrastructure running on Github actions. Other github organizations may use
+``github_actions`` as a CI provider.
 
 For example, switching linux_64 & osx_64 to build on Travis CI, with win_64 on Appveyor:
 
