@@ -37,6 +37,7 @@ Top-level fields
 * :ref:`conda_solver`
 * :ref:`docker`
 * :ref:`github`
+* :ref:`github_actions`
 * :ref:`idle_timeout_minutes`
 * :ref:`linux`
 * :ref:`linux_aarch64`
@@ -352,6 +353,50 @@ defaults are as follows:
       # branch name to use for rerender+webservices github actions and
       # conda-forge-ci-setup-feedstock references
       tooling_branch_name: main
+
+.. _github_actions:
+
+github_actions
+--------------
+This dictates the behavior of the Github Actions CI service. It is a
+mapping for GHA-specific configuration options. For example:
+
+.. code-block:: yaml
+
+    github_actions:
+      # Is the job using Microsoft hosted free runners or 'self-hosted'.
+      self_hosted: false
+      # triggers for actions. Defaults to `['push', 'pull_request']` for
+      # Microsoft hosted free runners and `['push']` for self-hosted
+      triggers: []
+      # Timeout for CI jobs
+      timeout_minutes: 360
+      # Cancel in progress builds. Defaults to false for Microsoft hosted
+      # free runner and true for self-hosted
+      cancel_in_progress: None
+      # Maximum number of parallel jobs per build.
+      max_parallel: None
+      # Retain build artifacts for inspection
+      store_build_artifacts: false
+      # Retention period for built artifacts
+      artifact_retention_days: 14
+
+For self-hosted runners ``recipe/conda_build_config.yaml`` is used for
+specifying labels for the runners.
+
+.. code-block:: yaml
+
+   github_actions_labels:
+     # use Microsoft free runners
+     - hosted                                   # [osx or win]
+     # Use self-hosted runner with custom label
+     - - self-hosted                            # [linux and aarch64]
+       - custom-label                           # [linux and aarch64]
+     # Use self-hosted runner from cirun
+     - cirun-openstack-cpu-large                # [linux and ppc64le]
+     # Use self-hosted gpu runner from cirun
+     - cirun-openstack-gpu-large                # [linux and x86_64]
+
 
 .. _idle_timeout_minutes:
 
