@@ -85,6 +85,14 @@ mapping for Azure-specific configuration options. For example:
       # limit the amount of CI jobs running concurrently at a given time
       # each OS will get its proportional share of the configured value
       max_parallel: 25
+      # set the timeoutInMinutes field for jobs in the azure pipeline.
+      # jobs that take longer than this will be cancelled.
+      # default: 360 (6 hours)
+      timeout_minutes: 360
+      # can also be set per-platform via
+      # settings_linux:
+      #   timeoutInMinutes: 360
+
 
 
 .. _self-hosted_azure-config:
@@ -103,6 +111,7 @@ Below is an example configuration for setting up a self-hosted Azure agent for L
             clean: all
           strategy:
             maxParallel: 1
+          timeoutInMinutes: 360
 
 .. _azure-swapfile:
 
