@@ -7,12 +7,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Configuring conda-forge.yml &#8212; conda-forge 2023.10.18 documentation</title>
+    <title>Configuring conda-forge.yml &#8212; conda-forge 2023.11.01 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css?v=259f315a" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=d2f5b236"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=2317e97e"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
 
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.10.18 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.11.01 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
@@ -140,6 +140,13 @@ mapping for Azure-specific configuration options. For example:</p>
 <span class="w">  </span><span class="c1"># limit the amount of CI jobs running concurrently at a given time</span>
 <span class="w">  </span><span class="c1"># each OS will get its proportional share of the configured value</span>
 <span class="w">  </span><span class="nt">max_parallel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25</span>
+<span class="w">  </span><span class="c1"># set the timeoutInMinutes field for jobs in the azure pipeline.</span>
+<span class="w">  </span><span class="c1"># jobs that take longer than this will be cancelled.</span>
+<span class="w">  </span><span class="c1"># default: 360 (6 hours)</span>
+<span class="w">  </span><span class="nt">timeout_minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">360</span>
+<span class="w">  </span><span class="c1"># can also be set per-platform via</span>
+<span class="w">  </span><span class="c1"># settings_linux:</span>
+<span class="w">  </span><span class="c1">#   timeoutInMinutes: 360</span>
 </pre></div>
 </div>
 <p id="self-hosted-azure-config">Below is an example configuration for setting up a self-hosted Azure agent for Linux:</p>
@@ -153,6 +160,7 @@ mapping for Azure-specific configuration options. For example:</p>
 <span class="w">      </span><span class="nt">clean</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
 <span class="w">    </span><span class="nt">strategy</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">maxParallel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">timeoutInMinutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">360</span>
 </pre></div>
 </div>
 <p id="azure-swapfile">Below is an example configuration for adding a swapfile on an Azure agent for Linux:</p>
@@ -690,7 +698,7 @@ Currently only:</p>
         <li class="right" >
           <a href="pinning_deps.html" title="Pinned dependencies"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.10.18 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.11.01 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Configuring conda-forge.yml</a></li> 
