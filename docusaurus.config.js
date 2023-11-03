@@ -96,7 +96,7 @@ const config = {
             to: "/blog/2019/12/06/cfep09/",
           },
           {
-            from: "/blog/posts/2020-02-04-gsoc/",
+            from: "/blog/posts/2020-02-04-GSoC/",
             to: "/blog/2020/02/04/gsoc/",
           },
           {
@@ -116,7 +116,7 @@ const config = {
             to: "/blog/2020/07/06/scipy-bof/",
           },
           {
-            from: "/blog/posts/2020-07-11-r-4/",
+            from: "/blog/posts/2020-07-11-R-4/",
             to: "/blog/2020/07/11/r-4/",
           },
           {
