@@ -28,7 +28,7 @@ Information page to learn more about eligibility for Outreachy.
 3. Begin by contributing to the project by looking at our [issues
    page](https://github.com/conda-forge/conda-forge.github.io/issues).
    As you make contributions, record them on the Outreachy site.
-4. Once you have made a few contributions, begin to write your application. 
+4. Once you have made a few contributions, begin to write your application.
    Ask the mentors to review the application before you submit it.
 
 ## Participant Expectations
@@ -79,10 +79,10 @@ discussions.
 Please introduce yourself on the public project chat:
 
 - Gitter - [Follow this
-link](https://gitter.im/conda-forge/conda-forge.github.io) to join this
-project's public chat.
+  link](https://gitter.im/conda-forge/conda-forge.github.io) to join this
+  project's public chat.
 - Outreachy mentors will often be in the community public chat. The
-project mentor's usernames are: `@viniciusdc`.
+  project mentor's usernames are: `@viniciusdc`.
 
 Here are some ready-to-go ways you can get started contributing on your
 own.
@@ -95,15 +95,15 @@ own.
 As this project main goal is enhancing our current documentation, here
 are some preliminary tasks that you can inspect to get ideas:
 
--   Write and improve the project's documentation;
--   Link to duplicate issues, and suggest new issue labels, to keep
-    things organized;
--   Go through open issues and suggest closing old ones;
--   Ask clarifying questions on recently opened issues to move the
-    discussion forward;
--   We also have issues regarding the main functionalities of our bot,
-    in particular the autotick bot. You could find some new information
-    or ideas for your contributing proposals.
+- Write and improve the project's documentation;
+- Link to duplicate issues, and suggest new issue labels, to keep
+  things organized;
+- Go through open issues and suggest closing old ones;
+- Ask clarifying questions on recently opened issues to move the
+  discussion forward;
+- We also have issues regarding the main functionalities of our bot,
+  in particular the autotick bot. You could find some new information
+  or ideas for your contributing proposals.
 
 ## Good starter tasks:
 
@@ -120,44 +120,44 @@ with the conda-forge environment.
 There are a few potential larger tasks that can come after a few smaller
 task contributions. These are included into our three main bases:
 
--   [Users](https://conda-forge.org/docs/user/00_intro.html): In this
-    case, some good starter tasks are mainly checking the actual
-    contents of conda-forge users documentations, and ideas to better
-    express its contents.
--   [Maintainers](https://conda-forge.org/docs/maintainer/00_intro.html):
-    There are a bunch of missed topics in this area, some information
-    have to be updated or rewritten for better understanding. Writing a
-    complete guide containing the actual steps and standard model for a
-    package recipe, building process (just a simple discussion) and how
-    conda-forge bot recognize defective licenses, recipes and packages
-    in general is highly welcomed. For further understanding of the
-    general system check [this
-    link](https://conda-forge.org/docs/maintainer/infrastructure.html).
-    -   It can be funny to say, but lots of helpful ideas and bug
-        solutions appear on our gitter channel, so if you have time to
-        write guides about them... it's also an incredible task.
--   [And organization](https://conda-forge.org/docs/orga/00_intro.html)
-    Our environment is changing everyday, because of that a lot of
-    information is lost in this process or even worse, not documented at
-    all! which leads to some difficulties inserting new members to
-    develop and further enhance the current process.
-    -   The related work on this matter is highly welcomed and for a
-        better grasp of the situation you can start with this
-        [guideline](https://conda-forge.org/docs/orga/guidelines.html)
-        and read some of our posts in our
-        [blog](https://conda-forge.org/blog/blog/)
-    -   Revitalizing ideas/projects for the conda-forge blog are
-        definitely welcomed;
-    -   Currently we have some interesting projects going on inside our
-        ecosystem, which in return will need good documentation... Some
-        of the projects conda-forge is affiliated include the [auto-tick
-        bot](https://github.com/regro/cf-scripts),
-        [symbol-exporter](https://github.com/symbol-management/symbol-exporter)
-        and a new service we are eager to start developing is the
-        [distributed-bot](https://github.com/regro/cf-scripts/issues/1367).
-        All of them have a great coverage of subjects and lots of people
-        to help and give advice about the service structure and
-        functionalities.
+- [Users](https://conda-forge.org/docs/user/00_intro.html): In this
+  case, some good starter tasks are mainly checking the actual
+  contents of conda-forge users documentations, and ideas to better
+  express its contents.
+- [Maintainers](https://conda-forge.org/docs/maintainer/00_intro.html):
+  There are a bunch of missed topics in this area, some information
+  have to be updated or rewritten for better understanding. Writing a
+  complete guide containing the actual steps and standard model for a
+  package recipe, building process (just a simple discussion) and how
+  conda-forge bot recognize defective licenses, recipes and packages
+  in general is highly welcomed. For further understanding of the
+  general system check [this
+  link](https://conda-forge.org/docs/maintainer/infrastructure.html).
+  - It can be funny to say, but lots of helpful ideas and bug
+    solutions appear on our gitter channel, so if you have time to
+    write guides about them... it's also an incredible task.
+- [And organization](https://conda-forge.org/docs/orga/00_intro.html)
+  Our environment is changing everyday, because of that a lot of
+  information is lost in this process or even worse, not documented at
+  all! which leads to some difficulties inserting new members to
+  develop and further enhance the current process.
+  - The related work on this matter is highly welcomed and for a
+    better grasp of the situation you can start with this
+    [guideline](https://conda-forge.org/docs/orga/guidelines.html)
+    and read some of our posts in our
+    [blog](https://conda-forge.org/blog/blog/)
+  - Revitalizing ideas/projects for the conda-forge blog are
+    definitely welcomed;
+  - Currently we have some interesting projects going on inside our
+    ecosystem, which in return will need good documentation... Some
+    of the projects conda-forge is affiliated include the [auto-tick
+    bot](https://github.com/regro/cf-scripts),
+    [symbol-exporter](https://github.com/symbol-management/symbol-exporter)
+    and a new service we are eager to start developing is the
+    [distributed-bot](https://github.com/regro/cf-scripts/issues/1367).
+    All of them have a great coverage of subjects and lots of people
+    to help and give advice about the service structure and
+    functionalities.
 
 ## Improving the documentation
 
@@ -178,11 +178,11 @@ editing.
 
 The more manual process is as follows:
 
--   Fork the conda-forge.github.io repository to your own GitHub user
-    account.
--   Clone that fork onto your computer.
--   Check out a new branch deriving from master to do your work.
--   Make and commit your changes.
--   Submit a pull request to the main repository proposing your changes.
+- Fork the conda-forge.github.io repository to your own GitHub user
+  account.
+- Clone that fork onto your computer.
+- Check out a new branch deriving from master to do your work.
+- Make and commit your changes.
+- Submit a pull request to the main repository proposing your changes.
 
 Happy editing!

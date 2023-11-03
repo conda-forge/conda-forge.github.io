@@ -3,6 +3,7 @@ authors:
   - beckermr
 tags: [security]
 ---
+
 # Travis CI Security Incident
 
 On September 9, 2021 one of our core devs discovered that artifacts
@@ -48,7 +49,7 @@ being public, anyone can look and verify our artifact builds. Security
 for `conda-forge` is about reducing risk and we will continue to do our
 best.
 
-Our best defense against security incidents in `conda-forge` is *you*!
+Our best defense against security incidents in `conda-forge` is _you_!
 Our feedstock maintainers are in the best position to notice incidents
 and issues. Please responsibly report anything you find to us at
 `condaforge+security@gmail.com`.

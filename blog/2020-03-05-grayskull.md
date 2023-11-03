@@ -261,16 +261,16 @@ extra:
 
 ### Major differences
 
-| Attribute | Grayskull (0.2.1) | Skeleton (3.18.11) |
-| --------- | ----------------- | ------------------ |
-  **Command**             | ✅ grayskull pypi pytest                                                                                       | ✅ conda skeleton pypi pytest |
-  **Time**                | ✅ 4 seconds                                                                                                   | ❌ 31 seconds |
-  **License**             | ✅ Added the license file and license type correctly                                                           | ❗️ Added just the license type |
-  **Host Requirements**   | ✅ Added correctly all the host requirements                                                                   | ❌ it didn't add the correctly the host dependencies. It added unnecessary dependencies and it is missing quite a few of them necessary to build the package |
-  **Run Requirements**    | ✅ Missing just setuptools from the host requirements (but this dependency is not defined on pytest package)   | ❌ incorrect dependencies added to the project |
-  **Selectors**           | ✅ Skipping correctly Python 2 and added selectors for windows and python versions                             | ❌ it didn't add any information regarding selectors. Actually conda-build added wrong information which will result in a broken recipe. For example 'sys_platform == win32' was added which is a wrong format for conda recipes |
-  **Entry points**        | ✅ Added all entry points correctly                                                                            | ❌ No entry points |
-  **Does it build?**      | ✅ YES                                                                                                         | ❌ NO |
+| Attribute             | Grayskull (0.2.1)                                                                                            | Skeleton (3.18.11)                                                                                                                                                                                                               |
+| --------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Command**           | ✅ grayskull pypi pytest                                                                                     | ✅ conda skeleton pypi pytest                                                                                                                                                                                                    |
+| **Time**              | ✅ 4 seconds                                                                                                 | ❌ 31 seconds                                                                                                                                                                                                                    |
+| **License**           | ✅ Added the license file and license type correctly                                                         | ❗️ Added just the license type                                                                                                                                                                                                  |
+| **Host Requirements** | ✅ Added correctly all the host requirements                                                                 | ❌ it didn't add the correctly the host dependencies. It added unnecessary dependencies and it is missing quite a few of them necessary to build the package                                                                     |
+| **Run Requirements**  | ✅ Missing just setuptools from the host requirements (but this dependency is not defined on pytest package) | ❌ incorrect dependencies added to the project                                                                                                                                                                                   |
+| **Selectors**         | ✅ Skipping correctly Python 2 and added selectors for windows and python versions                           | ❌ it didn't add any information regarding selectors. Actually conda-build added wrong information which will result in a broken recipe. For example 'sys_platform == win32' was added which is a wrong format for conda recipes |
+| **Entry points**      | ✅ Added all entry points correctly                                                                          | ❌ No entry points                                                                                                                                                                                                               |
+| **Does it build?**    | ✅ YES                                                                                                       | ❌ NO                                                                                                                                                                                                                            |
 
 In the case of `noarch: python`, Grayskull is smart enough to detect
 when the recipe supports it, which is not done by Skeleton. It is
@@ -348,11 +348,11 @@ grayskul pypi pytest requests=2.21.0 colorama
 
 ## Future plans
 
-> -   For the next major version (1.0.0) it is planned to add the
->     functionality to be able to load the recipe and update just parts
->     of it;
-> -   Generate Conda recipes using CRAN (R) channel (2.0.0);
-> -   Generate Conda recipes using Conan (C++) channel (3.0.0);
+> - For the next major version (1.0.0) it is planned to add the
+>   functionality to be able to load the recipe and update just parts
+>   of it;
+> - Generate Conda recipes using CRAN (R) channel (2.0.0);
+> - Generate Conda recipes using Conan (C++) channel (3.0.0);
 
 ## Issues
 
@@ -361,7 +361,7 @@ the repository: <https://github.com/marcelotrevisani/grayskull/issues>.
 
 Contributions are very welcome! :)
 
-------------------------------------------------------------------------
+---
 
 This work was possible thanks to the [NumFOCUS](https://numfocus.org/)
 Small Development Grant program.

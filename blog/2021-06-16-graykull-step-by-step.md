@@ -25,7 +25,7 @@ to generate the recipe.
 Let us get started.
 
 1.  Install `grayskull` using `conda` through the `conda-forge` channel:
-    
+
     ```
     $ conda install -c conda-forge grayskull
     ```

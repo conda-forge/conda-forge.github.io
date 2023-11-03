@@ -164,9 +164,9 @@ internship. I have learned so many things during the internship that it
 would make a long list if I were to write all of those. But the most
 important things I learned are:
 
--   The importance of documentation and how to write good documentation.
--   The best practices to follow while writing documentation.
--   More about conda-forge and packaging tools.
+- The importance of documentation and how to write good documentation.
+- The best practices to follow while writing documentation.
+- More about conda-forge and packaging tools.
 
 And above all, Outreachy helped me feel more confident about my skills
 and overcome the imposter syndrome I had before. Thanks again to my

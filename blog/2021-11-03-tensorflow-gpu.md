@@ -97,18 +97,18 @@ users with limited bandwidth and resources.
 
 ## Thanks to
 
--   Mark Harfouche (@hmaarrfk) & Ista Zahn (@izahn) for their initial
-    work on the TensorFlow GPU builds, and all other TensorFlow
-    maintainers. Uwe Korn (@xhochy) for his work on the Bazel scripts &
-    TensorFlow -- and all the other maintainers of the [TensorFlow
-    feedstock](https://github.com/conda-forge/tensorflow-feedstock)!
--   NVIDIA for pushing cudatoolkit and cudnn on conda-forge that makes
-    this possible
--   OVH for their generous sponsoring of large build machines that we
-    could use to build the recipes
--   Bloomberg for their sponsorship of QuantStack's involvement with
-    conda-forge
--   Andreas Trawoger (@atrawog) for the Ansible scripts that this is
-    based on
--   Thorsten Beier (@derthorsten) and Adrien Delsalle (@adriendelsalle)
-    for their contributions to the recipe
+- Mark Harfouche (@hmaarrfk) & Ista Zahn (@izahn) for their initial
+  work on the TensorFlow GPU builds, and all other TensorFlow
+  maintainers. Uwe Korn (@xhochy) for his work on the Bazel scripts &
+  TensorFlow -- and all the other maintainers of the [TensorFlow
+  feedstock](https://github.com/conda-forge/tensorflow-feedstock)!
+- NVIDIA for pushing cudatoolkit and cudnn on conda-forge that makes
+  this possible
+- OVH for their generous sponsoring of large build machines that we
+  could use to build the recipes
+- Bloomberg for their sponsorship of QuantStack's involvement with
+  conda-forge
+- Andreas Trawoger (@atrawog) for the Ansible scripts that this is
+  based on
+- Thorsten Beier (@derthorsten) and Adrien Delsalle (@adriendelsalle)
+  for their contributions to the recipe

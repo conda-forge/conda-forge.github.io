@@ -3,6 +3,7 @@ authors:
   - core
 tags: [security]
 ---
+
 # CircleCI Security Incident
 
 In early January 2023, CircleCI informed us that they had a large
@@ -37,24 +38,24 @@ and remain secure to our knowledge.**
 
 We took the following steps to respond to this incident.
 
--   We immediately started a token rotation of all of our feedstock
-    tokens and our staging area upload tokens as precautionary measures.
-    This token rotation hit a few bugs, but was completed as of January
-    13, 2023.
--   We produced a census of all packages uploaded between December 19,
-    2022 and January 13, 2023. This data is available for download as a
-    [JSON
-    file](https://raw.githubusercontent.com/conda-forge/conda-forge.github.io/main/misc/circle_ci_pkgs_dec2022_breach.json).
--   We examined all the artifacts built during this time period for the
-    [malicious
-    files](https://circleci.com/blog/jan-4-2023-incident-report/) listed
-    by CicleCI. We did not find any of those files in our artifacts.
--   As detailed below, we have begun retooling our system for feedstock
-    tokens to be more robust and enable greater flexibility in our
-    response to incidents like this.
--   We have begun systematically invalidating old tokens,
-    decommissioning old bots, and minimizing permissions of our current
-    tokens in order to further enhance `conda-forge`'s security.
+- We immediately started a token rotation of all of our feedstock
+  tokens and our staging area upload tokens as precautionary measures.
+  This token rotation hit a few bugs, but was completed as of January
+  13, 2023.
+- We produced a census of all packages uploaded between December 19,
+  2022 and January 13, 2023. This data is available for download as a
+  [JSON
+  file](https://raw.githubusercontent.com/conda-forge/conda-forge.github.io/main/misc/circle_ci_pkgs_dec2022_breach.json).
+- We examined all the artifacts built during this time period for the
+  [malicious
+  files](https://circleci.com/blog/jan-4-2023-incident-report/) listed
+  by CicleCI. We did not find any of those files in our artifacts.
+- As detailed below, we have begun retooling our system for feedstock
+  tokens to be more robust and enable greater flexibility in our
+  response to incidents like this.
+- We have begun systematically invalidating old tokens,
+  decommissioning old bots, and minimizing permissions of our current
+  tokens in order to further enhance `conda-forge`'s security.
 
 Rotating all of our tokens was taken as a precautionary measure.
 Unfortunately, during this token rotation, one of our bots encountered a
@@ -69,19 +70,19 @@ We learned a few things about our system for feedstock tokens and
 general maintenance of our CI service integrations. We probably should
 have known them already, but here we are.
 
--   We used the same feedstock token across multiple CI services. This
-    limited our ability to immediately invalidate tokens associated with
-    a single CI service and exposed all services if any single service
-    had an incident.
--   Our token system only allowed one valid token per feedstock. This
-    limitation means that we cannot recover from partially failed token
-    resets/rotations and are subject to race conditions during the
-    reset/rotation process that can cause failed package uploads.
--   We need to be more proactive about cleaning up deprecated/removed CI
-    services. The use of CircleCI in `conda-forge` has been deprecated
-    for quite a while. Had we taken the time, and had the foresight, to
-    remove all of our secrets from CircleCI when it was deprecated, we
-    could have avoided the security incident all together.
+- We used the same feedstock token across multiple CI services. This
+  limited our ability to immediately invalidate tokens associated with
+  a single CI service and exposed all services if any single service
+  had an incident.
+- Our token system only allowed one valid token per feedstock. This
+  limitation means that we cannot recover from partially failed token
+  resets/rotations and are subject to race conditions during the
+  reset/rotation process that can cause failed package uploads.
+- We need to be more proactive about cleaning up deprecated/removed CI
+  services. The use of CircleCI in `conda-forge` has been deprecated
+  for quite a while. Had we taken the time, and had the foresight, to
+  remove all of our secrets from CircleCI when it was deprecated, we
+  could have avoided the security incident all together.
 
 We have begun retooling our system for feedstock tokens in order to fix
 the issues identified above and allow us to have more flexibility in

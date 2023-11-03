@@ -3,6 +3,7 @@ authors:
   - core
 tags: [security]
 ---
+
 # Security updates to our installers
 
 In June 2023, software engineers from
@@ -25,19 +26,19 @@ conda-forge is committed to fix the miniforge and mambaforge installers
 equally to reduce the possible impact on conda-forge users and has
 worked with Anaconda to mitigate the issue.
 
--   As such, we are strongly recommending all users of miniforge and
-    mambaforge to **update immediately** to the latest versions of
-    miniforge and mambaforge. Please download them from the [miniforge
-    repository's main page](https://github.com/conda-forge/miniforge)
-    or the [release specific
-    page](https://github.com/conda-forge/miniforge/releases/tag/23.1.0-4).
--   For older versions, we are providing a **security patch for already
-    installed miniforge and mambaforge installations**. You can download
-    these from [release specific
-    page](https://github.com/conda-forge/miniforge/releases/tag/23.1.0-4)
-    as well, under the names
-    `Miniforge3-uninstaller-patch-Windows-x86_64.exe` and
-    `Mambaforge-uninstaller-patch-Windows-x86_64.exe`.
+- As such, we are strongly recommending all users of miniforge and
+  mambaforge to **update immediately** to the latest versions of
+  miniforge and mambaforge. Please download them from the [miniforge
+  repository's main page](https://github.com/conda-forge/miniforge)
+  or the [release specific
+  page](https://github.com/conda-forge/miniforge/releases/tag/23.1.0-4).
+- For older versions, we are providing a **security patch for already
+  installed miniforge and mambaforge installations**. You can download
+  these from [release specific
+  page](https://github.com/conda-forge/miniforge/releases/tag/23.1.0-4)
+  as well, under the names
+  `Miniforge3-uninstaller-patch-Windows-x86_64.exe` and
+  `Mambaforge-uninstaller-patch-Windows-x86_64.exe`.
 
 :::note
 To uninstall older versions of miniforge and mambaforge released before
