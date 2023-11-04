@@ -46,8 +46,7 @@ libraries.
 We are still missing Windows builds for TensorFlow (CPU & CUDA,
 unfortunately) and would love the community to help us out with that.
 There is an open PR, but it probably needs some poking in Bazel to get
-it to pass:
-<https://github.com/conda-forge/tensorflow-feedstock/pull/111>.
+it to pass: [conda-forge/tensorflow-feedstock#111](https://github.com/conda-forge/tensorflow-feedstock/pull/111).
 
 We hope that these new GPU builds will enable many more packages to be
 added to the conda-forge channel! We are already looking forward to the

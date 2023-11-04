@@ -27,7 +27,7 @@ looking for packages on [PyPI](https://pypi.org/), and it is available
 on [PyPI](https://pypi.org/project/grayskull/) and
 [conda-forge](https://github.com/conda-forge/grayskull-feedstock). The
 GitHub repository for this package is:
-<https://github.com/marcelotrevisani/grayskull>.
+[marcelotrevisani/grayskull](https://github.com/marcelotrevisani/grayskull).
 
 Before Grayskull, we just had `conda-build skeleton` to generate recipes
 for Python packages on PyPI. In all other aspects, the difference of
@@ -356,8 +356,8 @@ grayskul pypi pytest requests=2.21.0 colorama
 
 ## Issues
 
-Any problem, question, suggestions please feel free to open an issue on
-the repository: <https://github.com/marcelotrevisani/grayskull/issues>.
+Any problem, question, suggestions please feel free to open [an issue on
+the repository](https://github.com/marcelotrevisani/grayskull/issues).
 
 Contributions are very welcome! :)
 
