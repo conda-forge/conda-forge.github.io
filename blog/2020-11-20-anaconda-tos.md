@@ -38,7 +38,7 @@ employees also provide help with maintaining some of the most complex
 package recipes in conda-forge.
 
 Note that Anaconda Inc has also said that part of the revenue from the
-TOS change will be donated to OSS projects. (see this [blog 
+TOS change will be donated to OSS projects. (see this [blog
 post](https://www.anaconda.com/blog/sustaining-our-stewardship-of-the-open-source-data-science-community)).
 You should be aware that `conda-forge` is a part of NumFOCUS, and so it
 stands to benefit from the change in TOS, as do many other OSS projects.
