@@ -37,7 +37,7 @@ GitHub](https://github.com/mamba-org/build-locally-ansible) and we're
 working towards making it (more) generally useful for other long-running
 builds!
 
-![Running 3 builds in parallel on 32 cores ... still takes around 3 hours to finish](https://i.imgur.com/nvV6izV.jpg){width="600px"}
+![Running 3 builds in parallel on 32 cores ... still takes around 3 hours to finish](https://i.imgur.com/nvV6izV.jpg)
 
 With the TensorFlow builds in place, conda-forge now has CUDA-enabled
 builds for PyTorch and Tensorflow, the two most popular deep learning
