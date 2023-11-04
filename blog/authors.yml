@@ -3,3 +3,138 @@ core:
   title: The conda-forge core team
   url: https://github.com/orgs/conda-forge/teams/core
   image_url: https://github.com/conda-forge.png
+beckermr:
+  name: Matthew R. Becker
+  title: Member of conda-forge/core
+  url: https://github.com/beckermr
+  image_url: https://github.com/beckermr.png
+chenghlee:
+  name: Cheng H. Lee
+  title: Member of conda-forge/core
+  url: https://github.com/chenghlee
+  image_url: https://github.com/chenghlee.png
+chrisburr:
+  name: Chris Burr
+  title: Member of conda-forge/core
+  url: https://github.com/chrisburr
+  image_url: https://github.com/chrisburr.png
+cj-wright:
+  name: Christopher J. 'CJ' Wright
+  title: Member of conda-forge/core
+  url: https://github.com/cj-wright
+  image_url: https://github.com/cj-wright.png
+dopplershift:
+  name: Ryan May
+  title: Member of conda-forge/core
+  url: https://github.com/dopplershift
+  image_url: https://github.com/dopplershift.png
+ericdill:
+  name: Eric Dill
+  title: Member of conda-forge/core
+  url: https://github.com/ericdill
+  image_url: https://github.com/ericdill.png
+h-vetinari:
+  name: Axel Obermeier
+  title: Member of conda-forge/core
+  url: https://github.com/h-vetinari
+  image_url: https://github.com/h-vetinari.png
+isuruf:
+  name: Isuru Fernando
+  title: Member of conda-forge/core
+  url: https://github.com/isuruf
+  image_url: https://github.com/isuruf.png
+jakirkham:
+  name: John Kirkham
+  title: Member of conda-forge/core
+  url: https://github.com/jakirkham
+  image_url: https://github.com/jakirkham.png
+jezdez:
+  name: Jannis Leidel
+  title: Member of conda-forge/core
+  url: https://github.com/jezdez
+  image_url: https://github.com/jezdez.png
+loriab:
+  name: Lori A. Burns
+  title: Member of conda-forge/core
+  url: https://github.com/loriab
+  image_url: https://github.com/loriab.png
+marcelotrevisani:
+  name: Marcelo Duarte Trevisani
+  title: Member of conda-forge/core
+  url: https://github.com/marcelotrevisani
+  image_url: https://github.com/marcelotrevisani.png
+mariusvniekerk:
+  name: Marius van Niekerk
+  title: Member of conda-forge/core
+  url: https://github.com/mariusvniekerk
+  image_url: https://github.com/mariusvniekerk.png
+mbargull:
+  name: Marcel Bargull
+  title: Member of conda-forge/core
+  url: https://github.com/mbargull
+  image_url: https://github.com/mbargull.png
+minrk:
+  name: Min Ragan-Kelley
+  title: Member of conda-forge/core
+  url: https://github.com/minrk
+  image_url: https://github.com/minrk.png
+mwcraig:
+  name: Matt Craig
+  title: Member of conda-forge/core
+  url: https://github.com/mwcraig
+  image_url: https://github.com/mwcraig.png
+ocefpaf:
+  name: Filipe Pires Alvarenga Fernandes
+  title: Member of conda-forge/core
+  url: https://github.com/ocefpaf
+  image_url: https://github.com/ocefpaf.png
+pkgw:
+  name: Peter K. G. Williams
+  title: Member of conda-forge/core
+  url: https://github.com/pkgw
+  image_url: https://github.com/pkgw.png
+SylvainCorlay:
+  name: Sylvain Corlay
+  title: Member of conda-forge/core
+  url: https://github.com/SylvainCorlay
+  image_url: https://github.com/SylvainCorlay.png
+synapticarbors:
+  name: Joshua Adelman
+  title: Member of conda-forge/core
+  url: https://github.com/synapticarbors
+  image_url: https://github.com/synapticarbors.png
+sodre:
+  name: Patrick Sodré
+  title: Member of conda-forge/core
+  url: https://github.com/sodre
+  image_url: https://github.com/sodre.png
+viniciusdc:
+  name: Vinicius Douglas Cerutti
+  title: Member of conda-forge/core
+  url: https://github.com/viniciusdc
+  image_url: https://github.com/viniciusdc.png
+wolfv:
+  name: Wolf Vollprecht
+  title: Member of conda-forge/core
+  url: https://github.com/wolfv
+  image_url: https://github.com/wolfv.png
+xhochy:
+  name: Uwe L. Korn
+  title: Member of conda-forge/core
+  url: https://github.com/xhochy
+  image_url: https://github.com/xhochy.png
+kkraus14:
+  name: Keith Kraus
+  title: Member of conda-forge/core
+  url: https://github.com/kkraus14
+  image_url: https://github.com/kkraus14.png
+jaimergp:
+  name: Jaime Rodríguez-Guerra
+  title: Member of conda-forge/core
+  url: https://github.com/jaimergp
+  image_url: https://github.com/jaimergp.png
+hmaarrfk:
+  name: Mark Harfouche
+  title: Member of conda-forge/core
+  url: https://github.com/hmaarrfk
+  image_url: https://github.com/hmaarrfk.png
