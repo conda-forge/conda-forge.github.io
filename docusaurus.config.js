@@ -87,6 +87,88 @@ const config = {
         blogSidebarCount: 20,
       }),
     ],
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        redirects: [
+          {
+            from: "/blog/posts/2019-12-06-cfep09/",
+            to: "/blog/2019/12/06/cfep09/",
+          },
+          {
+            from: "/blog/posts/2020-02-04-GSoC/",
+            to: "/blog/2020/02/04/gsoc/",
+          },
+          {
+            from: "/blog/posts/2020-03-05-grayskull/",
+            to: "/blog/2020/03/05/grayskull/",
+          },
+          {
+            from: "/blog/posts/2020-03-10-pypy/",
+            to: "/blog/2020/03/10/pypy/",
+          },
+          {
+            from: "/blog/posts/2020-07-02-op-risk/",
+            to: "/blog/2020/07/02/op-risk/",
+          },
+          {
+            from: "/blog/posts/2020-07-06-scipy-bof/",
+            to: "/blog/2020/07/06/scipy-bof/",
+          },
+          {
+            from: "/blog/posts/2020-07-11-R-4/",
+            to: "/blog/2020/07/11/r-4/",
+          },
+          {
+            from: "/blog/posts/2020-10-02-versions/",
+            to: "/blog/2020/10/02/versions/",
+          },
+          {
+            from: "/blog/posts/2020-10-29-macos-arm64/",
+            to: "/blog/2020/10/29/macos-arm64/",
+          },
+          {
+            from: "/blog/posts/2020-11-20-anaconda-tos/",
+            to: "/blog/2020/11/20/anaconda-tos/",
+          },
+          {
+            from: "/blog/posts/2020-12-26-year-in-review/",
+            to: "/blog/2020/12/26/year-in-review/",
+          },
+          {
+            from: "/blog/posts/2021-02-02-outreachy/",
+            to: "/blog/2021/02/02/outreachy/",
+          },
+          {
+            from: "/blog/posts/2021-06-16-graykull-step-by-step/",
+            to: "/blog/2021/06/16/graykull-step-by-step/",
+          },
+          {
+            from: "/blog/posts/2021-09-24-travis-security/",
+            to: "/blog/2021/09/24/travis-security/",
+          },
+          {
+            from: "/blog/posts/2021-11-03-tensorflow-gpu/",
+            to: "/blog/2021/11/03/tensorflow-gpu/",
+          },
+          {
+            from: [
+              "/blog/posts/2022-08-19-outreachy-wrap-up-blog-2022/",
+              "/blog/2022/08/19/outreachy-wrap-up-blog-2022/",
+            ],
+            to: "/blog/2022/08/26/outreachy-wrap-up-blog-2022/",
+          },
+          {
+            from: "/blog/posts/2023-03-12-circle-ci-security-breach/",
+            to: "/blog/2023/03/12/circle-ci-security-breach/",
+          },
+          {
+            from: "/blog/posts/2023-07-13-installer-security-fixes/",
+            to: "/blog/2023/07/13/installer-security-fixes/",
+          },
+        ],
+      },
+    ],
   ],
 
   themeConfig:
