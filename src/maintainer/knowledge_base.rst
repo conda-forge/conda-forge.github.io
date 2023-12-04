@@ -1859,12 +1859,11 @@ higher than the package uploaded with the ``dev`` label.
 
 How to update your feedstock token?
 ====================================
+
 To reset your feedstock token and fix issues with uploads, follow these steps:
 
-1. Create a new text file in the ``token_reset`` directory of the ``conda-forge/admin-requests`` repo.
-2. Add the name of your feedstock in the text file. While adding the name, don't add "-feedstock" to the end of it. For example: for ``python-feedstock``, just add ``python``.
-
-See `token_reset/example.txt <https://github.com/conda-forge/admin-requests/blob/main/token_reset/example.txt>`__ for an example.
+1. Go to the ``conda-forge/admin-requests`` repo and copy `examples/example-broken.yml <https://github.com/conda-forge/admin-requests/blob/main/examples/example-broken.yml>`__ to the ``requests/`` folder.
+2. Add the name of your feedstock in the YML file. While adding the name, don't add "-feedstock" to the end of it. For example: for ``python-feedstock``, just add ``python``.
 
 .. _using_arch_rebuild:
 
