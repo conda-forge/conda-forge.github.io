@@ -1668,6 +1668,32 @@ The steps involved are, roughly:
    consider merging the PR opened at step 2 now so it can apply to all the downstream feedstocks.
 
 
+.. _opengpuserver:
+
+Packages that require a GPU or long-running builds 
+==================================================
+
+conda-forge has access to `an OpenStack server <https://github.com/Quansight/open-gpu-server>`__ that provides GPU builds and long-running builds (beyond the usual 6h limit).
+If your package needs a GPU to be built or tested, or its compilation times are so long that they are currently done manually off-CI, you can request access to these runners.
+To do so:
+
+1. Open a PR in `conda-forge/admin-requests <https://github.com/conda-forge/admin-requests>`__. Follow the instructions in the repository README. 
+   Note you need to request the type of resource you want access to (e.g. GPU runners, or long-running CPU builds)
+   Once merged, this will enable the self-hosted Github Actions runners for your feedstock.
+2. In order to trigger jobs for these runners, the maintainer must have read and agreed to the open-gpu-server `terms of use <https://github.com/Quansight/open-gpu-server/blob/main/TOS.md>`__.
+   You will need to open a PR in the open-gpu-server repository, as instructed in their README. 
+   You only need to do this once per maintainer (e.g. if you maintain multiple feedstocks).
+3. Finally, you can configure your feedstock to use the self-hosted runners. A PR will have been created by admin-requests after the PR in step (1) is merged.
+   However, due to security measurements imposed by Github, automated re-rendering is not possible when they modify Github Actions workflows.
+   You will need to rerender it manually by running ``conda-smithy rerender`` in your machine and then commit and push the result.
+
+.. note::
+
+  Due to some technical and legal limitations, some of the usual automation infrastructure is not available for these runners.
+  As mentioned above, the conda-forge bots won't be able to rerender your feedstock automatically anymore.
+  Automerge will not function properly either. Also note that the conda-forge bots won't be able to trigger the self-hosted runners. 
+  Closing and reopening the PR won't work, but a maintainer with sufficient permissions can trigger it manually by pushing an empty commit. 
+
 .. _osxarm64:
 
 Apple Silicon builds
