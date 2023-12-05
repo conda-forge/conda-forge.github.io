@@ -7,12 +7,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Maintaining packages &#8212; conda-forge 2023.11.27 documentation</title>
+    <title>Maintaining packages &#8212; conda-forge 2023.12.05 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/cloud.css?v=259f315a" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=85795d22"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=e82cb7f7"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
 
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.11.27 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.12.05 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" accesskey="U">Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Maintaining packages</a></li> 
@@ -286,8 +286,8 @@ If this is the case, the following general guidelines should be followed:
 remove broken packages from the <code class="docutils literal notranslate"><span class="pre">main</span></code> channel:</p>
 <ol class="arabic simple">
 <li><p>Locate the paths to broken files on <a class="reference external" href="https://anaconda.org">anaconda.org</a>, by searching for the conda-forge package and switching to the files tab.</p></li>
-<li><p>Fork <a class="reference external" href="https://github.com/conda-forge/admin-requests">conda-forge/admin-requests</a> and add a new text file in the <code class="docutils literal notranslate"><span class="pre">broken</span></code> directory.</p></li>
-<li><p>Add the broken files to the new text file, one path per line. See <a class="reference external" href="https://github.com/conda-forge/admin-requests/blob/main/broken/example.txt">broken/example.txt</a> for an example file.</p></li>
+<li><p>Fork <a class="reference external" href="https://github.com/conda-forge/admin-requests">conda-forge/admin-requests</a> and add a new YML file in the <code class="docutils literal notranslate"><span class="pre">requests</span></code> directory.</p></li>
+<li><p>Add the broken files to the new YML document.See <a class="reference external" href="https://github.com/conda-forge/admin-requests/blob/main/examples/example-broken.yml">examples/example-broken.yml</a> for an example file.</p></li>
 <li><p>Open a new PR. Once merged, a bot will label all listed files as broken, thus effectively removing them from the channel.</p></li>
 </ol>
 </section>
@@ -443,7 +443,7 @@ To contact core, ping them by mentioning &#64;conda-forge/core in a comment or, 
         <li class="right" >
           <a href="adding_pkgs.html" title="Contributing packages"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">conda-forge 2023.11.27 documentation</a> &#187;</li>
+    <li><a href="../index.html">conda-forge 2023.12.05 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="00_intro.html" >Maintainer Documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Maintaining packages</a></li> 
