@@ -760,10 +760,10 @@ will look like
       source_files:
         - tests/
       commands:
-        - $R -e "library('PackageName')"                                                   # [not win]
-        - $R -e "testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)"            # [not win]
-        - "\"%R%\" -e \"library('PackageName')\""                                          # [win]
-         - "\"%R%\" -e \"testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)\""  # [win]
+        - $R -e "library('PackageName')"                                                  # [not win]
+        - $R -e "testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)"           # [not win]
+        - "\"%R%\" -e \"library('PackageName')\""                                         # [win]
+        - "\"%R%\" -e \"testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)\""  # [win]
 
 .. note::
   We recommend including a library loading check *before* the ``testthat`` 
@@ -810,8 +810,8 @@ the individual tests. In that case, one can instead test the
 
     test:
       commands:
-        - $R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed')"            # [not win]
-         - "\"%R%\" -e \"testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed')\""  # [win]
+        - $R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed')"           # [not win]
+        - "\"%R%\" -e \"testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed')\""  # [win]
 
 In this case, the function will error on any failures by default. Again,
 the ``PackageName`` here refers to the R library name.
