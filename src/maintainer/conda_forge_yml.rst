@@ -502,6 +502,12 @@ Currently only:
 
 provider
 --------
+
+.. warning::
+
+    Feedstocks in conda-forge do not allow using self-hosted runners of other
+    GitHub organisations.
+
 The ``provider`` field is a mapping from build platform (not target platform) to CI service.
 It determines which service handles each build platform. The following are available as
 build platforms:
