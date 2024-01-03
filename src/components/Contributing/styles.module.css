@@ -53,9 +53,18 @@ h3 {
   margin-bottom: 1em;
 }
 
+.linked_card,
+.linked_card:hover,
+.linked_card:active {
+  text-decoration: none;
+  color: var(--ifm-font-color-base);
+}
 .contributing_conda_forge_card p {
   font-size: 16px;
   font-weight: 500;
+}
+.contributing_conda_forge_card a {
+  color: var(--theme-card-link-color);
 }
 
 @media screen and (max-width: 650px) {

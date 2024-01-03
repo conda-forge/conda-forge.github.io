@@ -20,6 +20,57 @@
   --ifm-font-heading-family: "Montserrat";
   --ifm-font-content-family: "Inter";
   transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  --ifm-color-primary: #008478;
+  --ifm-color-primary-dark: #007466;
+  --ifm-color-primary-darker: #00695c;
+  --ifm-color-primary-darkest: #004d40;
+  --ifm-color-primary-light: #26a69a;
+  --ifm-color-primary-lighter: #80cbc4;
+  --ifm-color-primary-lightest: #b2dfdb;
+  --ifm-color-secondary: #ebedf0;
+  --ifm-color-success: #388e3c;
+  --ifm-color-info: #1976d2;
+  --ifm-color-warning: #ef6c00;
+  --ifm-color-danger: #d84315;
+  --ifm-code-font-size: 95%;
+  --ifm-footer-link-hover-color: #4db6ac; /* Same as dark theme primary */
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --gradient: linear-gradient(
+    60deg,
+    var(--ifm-color-primary-darker) 0%,
+    var(--ifm-color-primary-light) 100%
+  );
+  --theme-card: #f6f6f6;
+  --theme-card-link-color: var(--ifm-color-primary-dark);
+  --dark-theme-bg-color: #1b1b1d;
+  --light-theme-bg-color: #fff;
+  --pydata-link-underline-thickness: max(1px, 0.0625rem);
+  --pydata-link-underline-offset: 0.1578em;
+  --pydata-link-hover-decoration-thickness: max(3px, 0.1875rem, 0.12em);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme="dark"] {
+  --ifm-color-primary: #4db6ac;
+  --ifm-color-primary-dark: #009688;
+  --ifm-color-primary-darker: #00897b;
+  --ifm-color-primary-darkest: #00796b;
+  --ifm-color-primary-light: #80cbc4;
+  --ifm-color-primary-lighter: #b2dfdb;
+  --ifm-color-primary-lightest: #e0f2f1;
+  --ifm-color-secondary: #ebedf0;
+  --ifm-color-success: #81c784;
+  --ifm-color-info: #64b5f6;
+  --ifm-color-warning: #ffb74d;
+  --ifm-color-danger: #ff8a65;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --gradient: linear-gradient(
+    60deg,
+    var(--ifm-color-primary-darker) 0%,
+    var(--ifm-color-primary) 100%
+  );
+  --theme-card: #3a3a3a;
+  --theme-card-link-color: var(--ifm-color-primary-light);
 }
 
 h1,
@@ -35,96 +86,115 @@ p {
   font-family: var(--ifm-font-content-family);
 }
 
+/*
+Hyperlink states are crucial for accessibility.
+Please double check before changing the rules below.
+*/
 a {
   text-decoration: underline;
+  text-decoration-thickness: var(--pydata-link-underline-thickness);
+  text-underline-offset: var(--pydata-link-underline-offset);
 }
 
-a:hover {
+a:hover,
+/* We need to (re)override some of the infima rules to have proper states on
+navbar links, table of contents, and docs sidebar links, respectively */
+a.navbar__link:hover,  /* Top bar navigation links */
+a.table-of-contents__link:hover, /*Right sidebar links (table of contents) */
+a[class^="sidebarItemLink"]:hover /* The docs sidebar links do not have its own class */ {
+  text-decoration: underline;
+  text-decoration-thickness: var(--pydata-link-hover-decoration-thickness);
+  text-decoration-skip-ink: none;
+  text-decoration-skip: none;
+}
+a:active,
+a.navbar__link:active,
+a.table-of-contents__link:active,
+a[class^="sidebarItemLink"]:active {
+  text-decoration-thickness: var(--pydata-link-decoration-thickness);
+}
+
+/* In some cases, we override the underlines because there are other elements that
+already report the state (e.g. borders, background colors, etc) */
+a[class^="sidebarItemLink"][aria-current="page"], /* No underline if this is the current page */
+a.navbar__link,
+.navbar-sidebar__item,
+.menu a,
+.navbar__items--right a,
+.pagination-nav__link,
+a.card, /* These cards are used in index-like documentation pages */
+a.card:hover {
   text-decoration: none;
 }
 
-a:focus {
-  background: #ffff00;
-  border-radius: 5px;
+/* On these elements, we only rely on background color changes. They are navigation items,
+so they are already assumed to be clickable anyway */
+.pagination-nav__link:active,
+a.card:active,
+a.menu__link:active {
+  background: var(--ifm-color-primary-lightest);
   color: #000;
 }
-
-.navbar-sidebar__item,
-.menu a {
-  text-decoration: none;
+[data-theme="dark"] .pagination-nav__link:active,
+[data-theme="dark"] a.card:active,
+[data-theme="dark"] a.menu__link:active {
+  background: var(--ifm-color-primary-darkest);
+  color: #fff;
 }
 
-.navbar__items--right a {
-  text-decoration: none;
+/* Animate the top navbar conda-forge logo a bit */
+.navbar__logo img:hover {
+  transform: scale(1.05);
+}
+.navbar__logo img:active {
+  transform: scale(1);
 }
 
-.footer a:hover {
-  color: var(--ifm-color-primary-lightest);
-}
-
+/* Used for accents in the frontpage */
 .gradient_text {
-  background: linear-gradient(62deg, #ff3664 0%, #ff4b2b 100%);
+  background: var(--gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* The homepage button is used only under the hero text */
 .homepage_button {
   background:
     linear-gradient(#fff, #fff) padding-box,
-    linear-gradient(62deg, #ff3664 0%, #ff4b2b 100%) border-box;
+    var(--gradient) border-box;
   border: 2px solid transparent;
 }
-
-.homepage_button:hover {
+.homepage_button:hover,
+.homepage_button:focus,
+.homepage_button:focus:active {
   background:
     linear-gradient(#ebedf0, #ebedf0) padding-box,
-    linear-gradient(62deg, #ff3664 0%, #ff4b2b 100%) border-box;
+    var(--gradient) border-box;
+}
+.homepage_button:active {
+  transform: translateY(1px);
 }
 
-[data-theme="dark"] .button.button--secondary {
+/* Use a gradient border on most buttons;
+see how we avoid the "Collapse sidebar" button of the docs sidebar via the aria-label;
+not pretty but it's the best we can do so far */
+[data-theme="dark"]
+  .button.button--secondary:not([aria-label="Collapse sidebar"]) {
   background:
     linear-gradient(#3a3a3a, #3a3a3a) padding-box,
-    linear-gradient(62deg, #ff3664 0%, #ff4b2b 100%) border-box;
+    var(--gradient) border-box;
   border: 2px solid transparent;
   color: #ffffff;
 }
 
-[data-theme="dark"] .button.button--secondary:hover {
+[data-theme="dark"]
+  .button.button--secondary:hover:not([aria-label="Collapse sidebar"]) {
   background:
     linear-gradient(#4c4c4c, #4c4c4c) padding-box,
-    linear-gradient(62deg, #ff3664 0%, #ff4b2b 100%) border-box;
+    var(--gradient) border-box;
   border: 2px solid transparent;
   color: #ffffff;
-}
-
-:root {
-  --ifm-color-primary: #b34400;
-  --ifm-color-primary-dark: #a13d00;
-  --ifm-color-primary-darker: #983a00;
-  --ifm-color-primary-darkest: #7d3000;
-  --ifm-color-primary-light: #c54b00;
-  --ifm-color-primary-lighter: #ce4e00;
-  --ifm-color-primary-lightest: #e95800;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --gradient: linear-gradient(60deg, #ff3664 0%, #ff4b2b 100%);
-  --theme-card: #f6f6f6;
-  --dark-theme-bg-color: #1b1b1d;
-  --light-theme-bg-color: #fff;
-}
-
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme="dark"] {
-  --ifm-color-primary: #ff5501;
-  --ifm-color-primary-dark: #e64c00;
-  --ifm-color-primary-darker: #da4800;
-  --ifm-color-primary-darkest: #b33b00;
-  --ifm-color-primary-light: #ff661b;
-  --ifm-color-primary-lighter: #ff6f27;
-  --ifm-color-primary-lightest: #ff884e;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  --theme-card: #3a3a3a;
 }
 
 .color-container {

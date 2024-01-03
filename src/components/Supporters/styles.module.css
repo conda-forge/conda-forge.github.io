@@ -46,10 +46,16 @@
   justify-content: center;
   border-radius: 15px;
   padding: 3em 5em;
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.numfocus_card:hover {
+  transform: scale(0.9);
 }
 
 .numfocus_card a {
   background: none;
+  color: var(--theme-card-link-color);
 }
 
 .about_numfocus {
@@ -87,6 +93,7 @@
 
 .cardWrapper a {
   background: none;
+  color: var(--theme-card-link-color);
 }
 
 .cardWrapper:hover {

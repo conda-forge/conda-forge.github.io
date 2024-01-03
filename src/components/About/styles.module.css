@@ -49,6 +49,12 @@
   grid-template-columns: repeat(4, auto);
 }
 
+.stats1_card a,
+.stats2_card a {
+  text-decoration: none;
+  color: var(--ifm-font-color-base);
+}
+
 .card {
   background: var(--theme-card);
   border-radius: 15px;
