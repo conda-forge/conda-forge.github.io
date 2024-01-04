@@ -8,7 +8,7 @@ import requests
 
 repo_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
-with open(os.path.join(repo_dir, "src", "inst_partners.yaml")) as fp:
+with open(os.path.join(repo_dir, "sphinx", "src", "inst_partners.yaml")) as fp:
     data = yaml.safe_load(fp)
 
 keys = list(data.keys())
@@ -32,7 +32,7 @@ for k in data:
                     print(f"bad logo for {k}: {e}")
                     del data[k]["Logo URL"]
 
-with open(os.path.join(repo_dir, "index.html.tmpl")) as fp:
+with open(os.path.join(repo_dir, "sphinx", "index.html.tmpl")) as fp:
     tmpl = jinja2.Template(fp.read())
 
 context = {
@@ -51,5 +51,5 @@ context = {
     ),
 }
 
-with open(os.path.join(repo_dir, 'index.html'), 'w') as fp:
+with open(os.path.join(repo_dir, 'sphinx', 'index.html'), 'w') as fp:
     fp.write(tmpl.render(context))
