@@ -199,7 +199,7 @@ Travis CI or cross-compiled/emulated builds on azure.
 We have begun rolling out packages built for PyPy3.8 and PyPy3.9. This work
 may take a few weeks. See :ref:`pypy` in the user docs for information on how to
 set up a PyPy environment. Please report issues to the PyPy developers at
-https://foss.heptapod.net/pypy/pypy/issues. We are also dropping PyPy3.7
+https://foss.heptapod.net/pypy/pypy. We are also dropping PyPy3.7
 in each feedstock as the newer versions of PyPy are added. New versions of
 migrated feedstocks will not be built for PyPy3.7 and that version of the
 python interpreter will not be receiving updates. As usual, you can track the
