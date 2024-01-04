@@ -10,19 +10,19 @@ const editUrl = {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "🚧 cf-infra-docs 🚧",
-  tagline: "Draft documentation for conda-forge infrastructure",
-  url: "https://cf-infra-docs.netlify.app/",
+  title: "conda-forge | community-driven packaging for conda",
+  url: "https://conda-forge.org/",
   baseUrl: "/",
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "throw",
+  onBrokenLinks: "warn",
+  onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
-  trailingSlash: true,
+  trailingSlash: undefined,
+  staticDirectories: ['static', 'static-sphinx'],
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "Quansight-Labs", // Usually your GitHub org/user name.
-  projectName: "cf-infra-docs", // Usually your repo name.
+  organizationName: "conda-forge", // Usually your GitHub org/user name.
+  projectName: "conda-forge.github.io", // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -51,13 +51,14 @@ const config = {
       "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
-        docs: {
-          breadcrumbs: true,
-          ...editUrl,
-        },
-        blog: {
-          showReadingTime: true,
-        },
+        docs: false,
+        // docs: {
+        //   breadcrumbs: true,
+        //   ...editUrl,
+        // },
+        // blog: {
+        //   showReadingTime: true,
+        // },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
@@ -65,110 +66,122 @@ const config = {
     ],
   ],
   plugins: [
-    [
-      "content-docs",
-      /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
-        id: "community",
-        path: "community",
-        routeBasePath: "/community",
-        breadcrumbs: false,
-      }),
-    ],
-    [
-      "content-blog",
-      /** @type {import('@docusaurus/plugin-content-blog').Options} */
-      ({
-        id: "news",
-        path: "news",
-        routeBasePath: "/news",
-        showReadingTime: false,
-        blogSidebarTitle: "Latest news",
-        blogSidebarCount: 20,
-      }),
-    ],
-    [
-      "@docusaurus/plugin-client-redirects",
-      {
-        redirects: [
-          {
-            from: "/blog/posts/2019-12-06-cfep09/",
-            to: "/blog/2019/12/06/cfep09/",
-          },
-          {
-            from: "/blog/posts/2020-02-04-GSoC/",
-            to: "/blog/2020/02/04/gsoc/",
-          },
-          {
-            from: "/blog/posts/2020-03-05-grayskull/",
-            to: "/blog/2020/03/05/grayskull/",
-          },
-          {
-            from: "/blog/posts/2020-03-10-pypy/",
-            to: "/blog/2020/03/10/pypy/",
-          },
-          {
-            from: "/blog/posts/2020-07-02-op-risk/",
-            to: "/blog/2020/07/02/op-risk/",
-          },
-          {
-            from: "/blog/posts/2020-07-06-scipy-bof/",
-            to: "/blog/2020/07/06/scipy-bof/",
-          },
-          {
-            from: "/blog/posts/2020-07-11-R-4/",
-            to: "/blog/2020/07/11/r-4/",
-          },
-          {
-            from: "/blog/posts/2020-10-02-versions/",
-            to: "/blog/2020/10/02/versions/",
-          },
-          {
-            from: "/blog/posts/2020-10-29-macos-arm64/",
-            to: "/blog/2020/10/29/macos-arm64/",
-          },
-          {
-            from: "/blog/posts/2020-11-20-anaconda-tos/",
-            to: "/blog/2020/11/20/anaconda-tos/",
-          },
-          {
-            from: "/blog/posts/2020-12-26-year-in-review/",
-            to: "/blog/2020/12/26/year-in-review/",
-          },
-          {
-            from: "/blog/posts/2021-02-02-outreachy/",
-            to: "/blog/2021/02/02/outreachy/",
-          },
-          {
-            from: "/blog/posts/2021-06-16-graykull-step-by-step/",
-            to: "/blog/2021/06/16/graykull-step-by-step/",
-          },
-          {
-            from: "/blog/posts/2021-09-24-travis-security/",
-            to: "/blog/2021/09/24/travis-security/",
-          },
-          {
-            from: "/blog/posts/2021-11-03-tensorflow-gpu/",
-            to: "/blog/2021/11/03/tensorflow-gpu/",
-          },
-          {
-            from: [
-              "/blog/posts/2022-08-19-outreachy-wrap-up-blog-2022/",
-              "/blog/2022/08/19/outreachy-wrap-up-blog-2022/",
-            ],
-            to: "/blog/2022/08/26/outreachy-wrap-up-blog-2022/",
-          },
-          {
-            from: "/blog/posts/2023-03-12-circle-ci-security-breach/",
-            to: "/blog/2023/03/12/circle-ci-security-breach/",
-          },
-          {
-            from: "/blog/posts/2023-07-13-installer-security-fixes/",
-            to: "/blog/2023/07/13/installer-security-fixes/",
-          },
-        ],
-      },
-    ],
+  //   [
+  //     "content-docs",
+  //     /** @type {import('@docusaurus/plugin-content-docs').Options} */
+  //     ({
+  //       id: "community",
+  //       path: "community",
+  //       routeBasePath: "/community",
+  //       breadcrumbs: false,
+  //     }),
+  //   ],
+  //   [
+  //     "content-blog",
+  //     /** @type {import('@docusaurus/plugin-content-blog').Options} */
+  //     ({
+  //       id: "news",
+  //       path: "news",
+  //       routeBasePath: "/docs/user/announcements.html",
+  //       showReadingTime: false,
+  //       blogSidebarTitle: "Latest news",
+  //       blogSidebarCount: 20,
+  //     }),
+  //   ],
+    // [
+    //   "@docusaurus/plugin-client-redirects",
+    //   {
+    //     createRedirects(existingPath) {
+    //       // Sphinx site tends to use 00_intro.html instead of index.html, which messes routing
+    //       if (existingPath.endsWith('/00_intro') || existingPath.endsWith('/00_intro/') || existingPath.endsWith('/00_intro.html')) {
+    //         // Redirect from /docs/team/X to /community/X and /docs/support/X to /community/X
+    //         return [
+    //           existingPath.replace('/00_intro', '/'),
+    //           existingPath.replace('/00_intro.html', '/index.html'),
+    //           existingPath.replace('/00_intro.html', '/'),
+    //         ];
+    //       }
+    //       return undefined; // Return a falsy value: no redirect created
+    //     },
+  //    redirects: [
+  //         {
+  //           from: "/blog/posts/2019-12-06-cfep09/",
+  //           to: "/blog/2019/12/06/cfep09/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2020-02-04-GSoC/",
+  //           to: "/blog/2020/02/04/gsoc/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2020-03-05-grayskull/",
+  //           to: "/blog/2020/03/05/grayskull/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2020-03-10-pypy/",
+  //           to: "/blog/2020/03/10/pypy/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2020-07-02-op-risk/",
+  //           to: "/blog/2020/07/02/op-risk/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2020-07-06-scipy-bof/",
+  //           to: "/blog/2020/07/06/scipy-bof/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2020-07-11-R-4/",
+  //           to: "/blog/2020/07/11/r-4/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2020-10-02-versions/",
+  //           to: "/blog/2020/10/02/versions/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2020-10-29-macos-arm64/",
+  //           to: "/blog/2020/10/29/macos-arm64/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2020-11-20-anaconda-tos/",
+  //           to: "/blog/2020/11/20/anaconda-tos/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2020-12-26-year-in-review/",
+  //           to: "/blog/2020/12/26/year-in-review/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2021-02-02-outreachy/",
+  //           to: "/blog/2021/02/02/outreachy/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2021-06-16-graykull-step-by-step/",
+  //           to: "/blog/2021/06/16/graykull-step-by-step/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2021-09-24-travis-security/",
+  //           to: "/blog/2021/09/24/travis-security/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2021-11-03-tensorflow-gpu/",
+  //           to: "/blog/2021/11/03/tensorflow-gpu/",
+  //         },
+  //         {
+  //           from: [
+  //             "/blog/posts/2022-08-19-outreachy-wrap-up-blog-2022/",
+  //             "/blog/2022/08/19/outreachy-wrap-up-blog-2022/",
+  //           ],
+  //           to: "/blog/2022/08/26/outreachy-wrap-up-blog-2022/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2023-03-12-circle-ci-security-breach/",
+  //           to: "/blog/2023/03/12/circle-ci-security-breach/",
+  //         },
+  //         {
+  //           from: "/blog/posts/2023-07-13-installer-security-fixes/",
+  //           to: "/blog/2023/07/13/installer-security-fixes/",
+  //         },
+  //       ],
+    //   },
+    // ],
   ],
 
   themeConfig:
@@ -181,6 +194,22 @@ const config = {
         },
         items: [
           {
+            // https://docusaurus.io/docs/advanced/routing#escaping-from-spa-redirects
+            to: "pathname:///docs/",
+            label: "Docs",
+            position: "left",
+          },
+          {
+            to: "pathname:///docs/user/announcements.html",
+            label: "News",
+            position: "left",
+          },
+          {
+            href: "https://conda-forge.org/blog/",
+            label: "Blog",
+            position: "left",
+          },
+          {
             href: "https://conda-forge.org/status",
             label: "Status",
             position: "left",
@@ -190,29 +219,13 @@ const config = {
             label: "Packages",
             position: "left",
           },
-          {
-            to: "/news",
-            label: "News",
-            position: "left",
-          },
-          {
-            type: "doc",
-            docId: "index",
-            position: "left",
-            label: "Docs",
-          },
-          {
-            to: "/blog",
-            label: "Blog",
-            position: "left",
-          },
-          {
-            type: "doc",
-            docsPluginId: "community",
-            docId: "index",
-            position: "left",
-            label: "Community",
-          },
+          // {
+          //   type: "doc",
+          //   docsPluginId: "community",
+          //   docId: "index",
+          //   position: "left",
+          //   label: "Community",
+          // },
           {
             href: "https://opencollective.com/conda-forge",
             label: "Donate",
@@ -242,15 +255,19 @@ const config = {
             items: [
               {
                 label: "Getting started",
-                to: "/docs/getting-started",
+                to: "pathname:///docs/",
               },
               {
-                label: "How-to guides",
-                to: "/docs/howto",
+                label: "User docs",
+                to: "pathname:///docs/user/00_intro.html",
               },
               {
-                label: "Reference",
-                to: "/docs/reference",
+                label: "Maintainer docs",
+                to: "pathname:///docs/maintainer/00_intro.html",
+              },
+              {
+                label: "Organisation docs",
+                to: "pathname:///docs/orga/00_intro.html",
               },
             ],
           },
@@ -259,19 +276,19 @@ const config = {
             items: [
               {
                 label: "About conda-forge",
-                to: "/community",
+                to: "pathname:///docs",
               },
               {
-                label: "Code of conduct",
-                to: "/community/code-of-conduct",
+                label: "Governance",
+                to: "pathname:///docs/orga/governance.html",
               },
               {
                 label: "Meeting minutes",
-                to: "/community/meeting-minutes",
+                to: "pathname:///docs/orga/minutes/00_intro.html",
               },
               {
                 label: "Get in touch",
-                to: "/community/get-in-touch",
+                to: "pathname:///docs/orga/getting-in-touch.html",
               },
             ],
           },
@@ -280,11 +297,11 @@ const config = {
             items: [
               {
                 label: "News",
-                to: "/news",
+                to: "pathname:///docs/user/announcements.html",
               },
               {
                 label: "Blog",
-                to: "/blog",
+                href: "https://conda-forge.org/blog/",
               },
               {
                 label: "Status",
@@ -301,11 +318,11 @@ const config = {
             items: [
               {
                 label: "Dashboard",
-                to: "/dashboard",
+                to: "/dashboard/",
               },
               {
                 label: "Style guide",
-                to: "/style-guide",
+                to: "/style-guide/",
               },
               {
                 label: "GitHub",
@@ -326,7 +343,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} conda-forge · Built with Docusaurus · Powered by <a href='https://www.netlify.com/' target='_blank' class='footer__link-item'>Netlify</a>`,
+        copyright: `Copyright © ${new Date().getFullYear()} conda-forge · Built with Docusaurus`,
       },
       prism: {
         theme: lightCodeTheme,

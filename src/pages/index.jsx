@@ -9,10 +9,7 @@ import Supporters from "@site/src/components/Supporters";
 export default function Home() {
     const { siteConfig } = useDocusaurusContext();
     return (
-        <Layout
-            title={siteConfig.title}
-            description="Documentation for conda-forge infrastructure"
-        >
+        <Layout>
             <main>
                 <Header />
                 <About />
