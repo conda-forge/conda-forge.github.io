@@ -23,13 +23,13 @@ const infrastructure = [
     dark: "img/supporters/anaconda_dark.svg",
     width: 250,
   },
-  {
-    name: "Azure Pipelines",
-    link: "https://azure.microsoft.com/products/devops/",
-    light: "img/supporters/azure.png",
-    dark: "img/supporters/azure.png",
-    width: 250,
-  },
+  // {
+  //   name: "Azure Pipelines",
+  //   link: "https://azure.microsoft.com/products/devops/",
+  //   light: "img/supporters/azure.png",
+  //   dark: "img/supporters/azure.png",
+  //   width: 250,
+  // },
   {
     name: "Cirun",
     link: "https://cirun.io",
@@ -44,13 +44,13 @@ const infrastructure = [
     dark: "img/supporters/do_dark.svg",
     width: 250,
   },
-  {
-    name: "Github",
-    link: "https://github.com",
-    light: "img/supporters/github_light.png",
-    dark: "img/supporters/github_dark.png",
-    width: 150,
-  },
+  // {
+  //   name: "Github",
+  //   link: "https://github.com",
+  //   light: "img/supporters/github_light.png",
+  //   dark: "img/supporters/github_dark.png",
+  //   width: 150,
+  // },
   {
     name: "Oracle Cloud",
     link: "https://www.oracle.com/cloud/",
