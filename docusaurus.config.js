@@ -5,7 +5,7 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 const editUrl = {
-  editUrl: "https://github.com/quansight-labs/cf-infra-docs/tree/main/",
+  editUrl: "https://github.com/conda-forge/conda-forge.github.io/tree/main/",
 };
 
 /** @type {import('@docusaurus/types').Config} */
@@ -13,8 +13,8 @@ const config = {
   title: "conda-forge | community-driven packaging for conda",
   url: "https://conda-forge.org/",
   baseUrl: "/",
-  onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
   trailingSlash: undefined,
   staticDirectories: ['static', 'static-sphinx'],
