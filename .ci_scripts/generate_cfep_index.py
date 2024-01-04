@@ -7,7 +7,7 @@ REPO_CONTENTS = "https://api.github.com/repos/conda-forge/cfep/contents/"
 TITLE_PATTERN = "<td>\s*Title\s*</td><td>\s*(.*)\s*</td>"
 STATUS_PATTERN = "<td>\s*Status\s*</td><td>\s*(.*)\s*</td>"
 REPO_DIR = Path(__file__).parents[1].absolute()
-CFEP_INDEX_RST = REPO_DIR / "src" / "orga" / "cfep-index.rst"
+CFEP_INDEX_RST = REPO_DIR / "sphinx" / "src" / "orga" / "cfep-index.rst"
 
 
 @dataclass
