@@ -51,5 +51,5 @@ context = {
     ),
 }
 
-with open(os.path.join(repo_dir, 'sphinx', 'index.html'), 'w') as fp:
+with open(os.path.join(repo_dir, 'index.html'), 'w') as fp:
     fp.write(tmpl.render(context))
