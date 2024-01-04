@@ -3,19 +3,16 @@
 set -ex
 
 # configure bot account
-git config --global user.email "pelson.pub+conda-forge@gmail.com"
-git config --global user.name "conda-forge-admin"
+if [[ "$CI" == "1" ]]; then
+  git config --global user.email "pelson.pub+conda-forge@gmail.com"
+  git config --global user.name "conda-forge-admin"
+  git checkout -b new_site_content
+fi
 
-git checkout -b new_site_content
 
 pushd sphinx/newsfeed
 pip install --no-deps .
 popd
-
-python .ci_scripts/generate_html.py
-
-# build docs into docs
-rm -rf docs/
 
 python .ci_scripts/generate_cfep_index.py
 
@@ -32,6 +29,13 @@ if [[ "${GHREF}" != "refs/heads/main" ]]; then
   test "$linkcheck_failed" -eq 0
 fi
 
-mv _build/html ../../docs
+# Move rendered Sphinx docs to a static directory for Docusaurus to use
+rm -rf ../../static-sphinx || true
+mkdir -p ../../static-sphinx
+mv _build/html ../../static-sphinx/docs
 rm -rf _build
 popd
+
+# Build docusaurus site
+npm install
+npm run build
