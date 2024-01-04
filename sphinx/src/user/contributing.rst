@@ -21,8 +21,8 @@ Improve the documentation
 The conda-forge documentation is version-controlled in the
 `conda-forge.github.io repository
 <https://github.com/conda-forge/conda-forge.github.io>`__ on GitHub. The source
-text is stored in `the src/ subdirectory
-<https://github.com/conda-forge/conda-forge.github.io/tree/main/src>`__ of this repository and
+text is stored in `the sphinx/src/ subdirectory
+<https://github.com/conda-forge/conda-forge.github.io/tree/main/sphinx/src>`__ of this repository and
 is formatted using Python's `reStructuredText
 <http://docutils.sourceforge.net/rst.html>`__ system.
 
@@ -31,7 +31,7 @@ Editing the documentation directly through Github
 
 You can propose quick edits directly through the GitHub website if you have
 a GitHub account — for instance, `this link
-<https://github.com/conda-forge/conda-forge.github.io/edit/main/src/user/contributing.rst>`__
+<https://github.com/conda-forge/conda-forge.github.io/edit/main/sphinx/src/user/contributing.rst>`__
 will take you directly to a web-based editor for this very webpage. In
 general, the file corresponding to each page in the GitHub browser has a
 little pencil icon in its top-right corner that lets you open it up for editing.
@@ -59,6 +59,7 @@ If you are new to the conda-forge community, follow the steps below to make your
 
  - ``conda env create -f ./.ci_scripts/environment.yml``
  - ``conda activate conda-forge-docs``
+ - ``cd sphinx``
  - ``cd newsfeed && pip install --no-deps .``
  - ``cd ../src``
 
