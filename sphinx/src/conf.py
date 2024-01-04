@@ -351,10 +351,10 @@ def rstjinja(app, docname, source):
     current_file = os.path.dirname(__file__)
     context = app.config.html_context
     context["core_members"] = get_formated_names(
-        os.path.join(current_file, "core.csv")
+        os.path.join(current_file, "..", "..", "src", "core.csv")
     )
     context["emeritus_members"] = get_formated_names(
-        os.path.join(current_file, "emeritus.csv")
+        os.path.join(current_file, "..", "..", "src", "emeritus.csv")
     )
     rendered = app.builder.templates.render_string(src, context)
     source[0] = rendered
