@@ -157,7 +157,7 @@ const config = {
             to: "/blog/2020/12/26/year-in-review/",
           },
           {
-            from: "/blog/posts/2021-02-02-outreachy/",
+            from: ["/blog/posts/2021-02-02-outreachy/", "/blog/2021/02/02/Outreachy/"],
             to: "/blog/2021/02/02/outreachy/",
           },
           {
