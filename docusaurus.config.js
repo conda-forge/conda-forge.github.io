@@ -16,7 +16,7 @@ const config = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
-  trailingSlash: undefined,
+  trailingSlash: true,
   staticDirectories: ['static', 'static-sphinx'],
 
   // GitHub pages deployment config.
@@ -56,9 +56,9 @@ const config = {
         //   breadcrumbs: true,
         //   ...editUrl,
         // },
-        // blog: {
-        //   showReadingTime: true,
-        // },
+        blog: {
+          showReadingTime: true,
+        },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
@@ -66,122 +66,128 @@ const config = {
     ],
   ],
   plugins: [
-  //   [
-  //     "content-docs",
-  //     /** @type {import('@docusaurus/plugin-content-docs').Options} */
-  //     ({
-  //       id: "community",
-  //       path: "community",
-  //       routeBasePath: "/community",
-  //       breadcrumbs: false,
-  //     }),
-  //   ],
-  //   [
-  //     "content-blog",
-  //     /** @type {import('@docusaurus/plugin-content-blog').Options} */
-  //     ({
-  //       id: "news",
-  //       path: "news",
-  //       routeBasePath: "/docs/user/announcements.html",
-  //       showReadingTime: false,
-  //       blogSidebarTitle: "Latest news",
-  //       blogSidebarCount: 20,
-  //     }),
-  //   ],
+    //   [
+    //     "content-docs",
+    //     /** @type {import('@docusaurus/plugin-content-docs').Options} */
+    //     ({
+    //       id: "community",
+    //       path: "community",
+    //       routeBasePath: "/community",
+    //       breadcrumbs: false,
+    //     }),
+    //   ],
     // [
-    //   "@docusaurus/plugin-client-redirects",
-    //   {
-    //     createRedirects(existingPath) {
-    //       // Sphinx site tends to use 00_intro.html instead of index.html, which messes routing
-    //       if (existingPath.endsWith('/00_intro') || existingPath.endsWith('/00_intro/') || existingPath.endsWith('/00_intro.html')) {
-    //         // Redirect from /docs/team/X to /community/X and /docs/support/X to /community/X
-    //         return [
-    //           existingPath.replace('/00_intro', '/'),
-    //           existingPath.replace('/00_intro.html', '/index.html'),
-    //           existingPath.replace('/00_intro.html', '/'),
-    //         ];
-    //       }
-    //       return undefined; // Return a falsy value: no redirect created
-    //     },
-  //    redirects: [
-  //         {
-  //           from: "/blog/posts/2019-12-06-cfep09/",
-  //           to: "/blog/2019/12/06/cfep09/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2020-02-04-GSoC/",
-  //           to: "/blog/2020/02/04/gsoc/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2020-03-05-grayskull/",
-  //           to: "/blog/2020/03/05/grayskull/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2020-03-10-pypy/",
-  //           to: "/blog/2020/03/10/pypy/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2020-07-02-op-risk/",
-  //           to: "/blog/2020/07/02/op-risk/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2020-07-06-scipy-bof/",
-  //           to: "/blog/2020/07/06/scipy-bof/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2020-07-11-R-4/",
-  //           to: "/blog/2020/07/11/r-4/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2020-10-02-versions/",
-  //           to: "/blog/2020/10/02/versions/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2020-10-29-macos-arm64/",
-  //           to: "/blog/2020/10/29/macos-arm64/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2020-11-20-anaconda-tos/",
-  //           to: "/blog/2020/11/20/anaconda-tos/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2020-12-26-year-in-review/",
-  //           to: "/blog/2020/12/26/year-in-review/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2021-02-02-outreachy/",
-  //           to: "/blog/2021/02/02/outreachy/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2021-06-16-graykull-step-by-step/",
-  //           to: "/blog/2021/06/16/graykull-step-by-step/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2021-09-24-travis-security/",
-  //           to: "/blog/2021/09/24/travis-security/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2021-11-03-tensorflow-gpu/",
-  //           to: "/blog/2021/11/03/tensorflow-gpu/",
-  //         },
-  //         {
-  //           from: [
-  //             "/blog/posts/2022-08-19-outreachy-wrap-up-blog-2022/",
-  //             "/blog/2022/08/19/outreachy-wrap-up-blog-2022/",
-  //           ],
-  //           to: "/blog/2022/08/26/outreachy-wrap-up-blog-2022/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2023-03-12-circle-ci-security-breach/",
-  //           to: "/blog/2023/03/12/circle-ci-security-breach/",
-  //         },
-  //         {
-  //           from: "/blog/posts/2023-07-13-installer-security-fixes/",
-  //           to: "/blog/2023/07/13/installer-security-fixes/",
-  //         },
-  //       ],
-    //   },
+    //   "content-blog",
+    //   /** @type {import('@docusaurus/plugin-content-blog').Options} */
+    //   ({
+    //     id: "news",
+    //     path: "news",
+    //     routeBasePath: "/docs/user/announcements.html",
+    //     showReadingTime: false,
+    //     blogSidebarTitle: "Latest news",
+    //     blogSidebarCount: 20,
+    //   }),
     // ],
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        createRedirects(existingPath) {
+          var redirects = [];
+          if (existingPath.startsWith('/blog/tags/')) {
+            redirects.push(`/blog/blog/tag/${existingPath.slice(11)}`)
+          }
+          if (existingPath == '/blog/archive/') {
+            redirects.push("/blog/2023/");
+            redirects.push("/blog/2022/");
+            redirects.push("/blog/2021/");
+            redirects.push("/blog/2020/");
+            redirects.push("/blog/2019/");
+          }
+          return redirects;
+        },
+        redirects: [
+          {
+            from: "/blog/blog/",
+            to: "/blog/",
+          },
+          {
+            from: "/blog/posts/2019-12-06-cfep09/",
+            to: "/blog/2019/12/06/cfep09/",
+          },
+          {
+            from: "/blog/posts/2020-02-04-GSoC/",
+            to: "/blog/2020/02/04/gsoc/",
+          },
+          {
+            from: "/blog/posts/2020-03-05-grayskull/",
+            to: "/blog/2020/03/05/grayskull/",
+          },
+          {
+            from: "/blog/posts/2020-03-10-pypy/",
+            to: "/blog/2020/03/10/pypy/",
+          },
+          {
+            from: "/blog/posts/2020-07-02-op-risk/",
+            to: "/blog/2020/07/02/op-risk/",
+          },
+          {
+            from: "/blog/posts/2020-07-06-scipy-bof/",
+            to: "/blog/2020/07/06/scipy-bof/",
+          },
+          {
+            from: "/blog/posts/2020-07-11-R-4/",
+            to: "/blog/2020/07/11/r-4/",
+          },
+          {
+            from: "/blog/posts/2020-10-02-versions/",
+            to: "/blog/2020/10/02/versions/",
+          },
+          {
+            from: "/blog/posts/2020-10-29-macos-arm64/",
+            to: "/blog/2020/10/29/macos-arm64/",
+          },
+          {
+            from: "/blog/posts/2020-11-20-anaconda-tos/",
+            to: "/blog/2020/11/20/anaconda-tos/",
+          },
+          {
+            from: "/blog/posts/2020-12-26-year-in-review/",
+            to: "/blog/2020/12/26/year-in-review/",
+          },
+          {
+            from: "/blog/posts/2021-02-02-outreachy/",
+            to: "/blog/2021/02/02/outreachy/",
+          },
+          {
+            from: "/blog/posts/2021-06-16-graykull-step-by-step/",
+            to: "/blog/2021/06/16/graykull-step-by-step/",
+          },
+          {
+            from: "/blog/posts/2021-09-24-travis-security/",
+            to: "/blog/2021/09/24/travis-security/",
+          },
+          {
+            from: "/blog/posts/2021-11-03-tensorflow-gpu/",
+            to: "/blog/2021/11/03/tensorflow-gpu/",
+          },
+          {
+            from: [
+              "/blog/posts/2022-08-19-outreachy-wrap-up-blog-2022/",
+              "/blog/2022/08/19/outreachy-wrap-up-blog-2022/",
+            ],
+            to: "/blog/2022/08/26/outreachy-wrap-up-blog-2022/",
+          },
+          {
+            from: "/blog/posts/2023-03-12-circle-ci-security-breach/",
+            to: "/blog/2023/03/12/circle-ci-security-breach/",
+          },
+          {
+            from: "/blog/posts/2023-07-13-installer-security-fixes/",
+            to: "/blog/2023/07/13/installer-security-fixes/",
+          },
+        ],
+      },
+    ],
   ],
 
   themeConfig:
@@ -205,7 +211,7 @@ const config = {
             position: "left",
           },
           {
-            href: "https://conda-forge.org/blog/",
+            to: "/blog/",
             label: "Blog",
             position: "left",
           },
@@ -301,7 +307,7 @@ const config = {
               },
               {
                 label: "Blog",
-                href: "https://conda-forge.org/blog/",
+                to: "/blog/",
               },
               {
                 label: "Status",
