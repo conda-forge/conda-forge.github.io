@@ -58,6 +58,8 @@ const config = {
         // },
         blog: {
           showReadingTime: true,
+          blogSidebarCount: 10,
+          ...editUrl,
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
