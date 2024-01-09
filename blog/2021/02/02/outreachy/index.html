@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="blog-wrapper blog-post-page plugin-blog plugin-id-default" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.0.1">
+<title data-rh="true">Conda-forge Outreachy | conda-forge | community-driven packaging for conda</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://conda-forge.org/blog/2021/02/02/outreachy/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Conda-forge Outreachy | conda-forge | community-driven packaging for conda"><meta data-rh="true" name="description" content="Conda-forge is participating in the upcoming round of"><meta data-rh="true" property="og:description" content="Conda-forge is participating in the upcoming round of"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2021-02-02T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/viniciusdc"><meta data-rh="true" property="article:tag" content="outreachy"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://conda-forge.org/blog/2021/02/02/outreachy/"><link data-rh="true" rel="alternate" href="https://conda-forge.org/blog/2021/02/02/outreachy/" hreflang="en"><link data-rh="true" rel="alternate" href="https://conda-forge.org/blog/2021/02/02/outreachy/" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="conda-forge | community-driven packaging for conda RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="conda-forge | community-driven packaging for conda Atom Feed">
+
+
+
+
+
+<link rel="stylesheet" href="/fonts/font-awesome/fontawesome.css">
+<link rel="stylesheet" href="/fonts/font-awesome/solid.css">
+<link rel="stylesheet" href="/fonts/font-awesome/regular.css">
+<link rel="stylesheet" href="/fonts/font-awesome/brands.css"><link rel="stylesheet" href="/assets/css/styles.4574bade.css">
+<script src="/assets/js/runtime~main.9767d3c3.js" defer="defer"></script>
+<script src="/assets/js/main.f66bcc5b.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.png" alt="conda-forge anvil logo without text" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="conda-forge anvil logo without text" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div></a><a href="/docs/" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Docs</a><a href="/docs/user/announcements.html" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">News</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/blog/">Blog</a><a href="https://conda-forge.org/status" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Status<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://conda-forge.org/feedstock-outputs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Packages<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><a href="https://opencollective.com/conda-forge" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Donate<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/conda-forge" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link fab fa-lg fa-github" title="GitHub"></a><a href="https://twitter.com/condaforge" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link fab fa-lg fa-twitter" title="Twitter"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="container margin-vert--lg"><div class="row"><aside class="col col--3"><nav class="sidebar_re4s thin-scrollbar" aria-label="Blog recent posts navigation"><div class="sidebarItemTitle_pO2u margin-bottom--md">Recent posts</div><ul class="sidebarItemList_Yudw clean-list"><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/2023/07/13/installer-security-fixes/">Security updates to our installers</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/2023/03/12/circle-ci-security-breach/">CircleCI Security Incident</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/2022/08/26/outreachy-wrap-up-blog-2022/">Outreachy 2022 Wrap-up Blog</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/2021/11/03/tensorflow-gpu/">GPU enabled TensorFlow builds on conda-forge</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/2021/09/24/travis-security/">Travis CI Security Incident</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/2021/06/16/graykull-step-by-step/">Contributing Packages To conda-forge Using Grayskull</a></li><li class="sidebarItem__DBe"><a aria-current="page" class="sidebarItemLink_mo7H sidebarItemLinkActive_I1ZP" href="/blog/2021/02/02/outreachy/">Conda-forge Outreachy</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/2020/12/26/year-in-review/">2020 in Review</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/2020/11/20/anaconda-tos/">Package Distribution and the anaconda.com Terms of Service</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/blog/2020/10/29/macos-arm64/">macOS ARM builds on conda-forge</a></li></ul></nav></aside><main class="col col--7" itemscope="" itemtype="https://schema.org/Blog"><article itemprop="blogPost" itemscope="" itemtype="https://schema.org/BlogPosting"><meta itemprop="description" content="Conda-forge is participating in the upcoming round of"><header><h1 class="title_f1Hy" itemprop="headline">Conda-forge Outreachy</h1><div class="container_mt6G margin-vert--md"><time datetime="2021-02-02T00:00:00.000Z" itemprop="datePublished">February 2, 2021</time> · <!-- -->6 min read</div><div class="margin-top--md margin-bottom--sm row"><div class="col col--6 authorCol_Hf19"><div class="avatar margin-bottom--sm"><a href="https://github.com/viniciusdc" target="_blank" rel="noopener noreferrer" class="avatar__photo-link"><img class="avatar__photo" src="https://github.com/viniciusdc.png" alt="Vinicius Douglas Cerutti" itemprop="image"></a><div class="avatar__intro" itemprop="author" itemscope="" itemtype="https://schema.org/Person"><div class="avatar__name"><a href="https://github.com/viniciusdc" target="_blank" rel="noopener noreferrer" itemprop="url"><span itemprop="name">Vinicius Douglas Cerutti</span></a></div><small class="avatar__subtitle" itemprop="description">Member of conda-forge/core</small></div></div></div></div></header><div id="__blog-post-container" class="markdown" itemprop="articleBody"><p>Conda-forge is participating in the upcoming round of
+<a href="https://www.outreachy.org/" target="_blank" rel="noopener noreferrer">Outreachy</a> i.e May 2021 to August 2021. The
+goal of this program is to increase participation from under-represented
+groups in free and open-source software. Outreachy is organized by
+<a href="https://sfconservancy.org/" target="_blank" rel="noopener noreferrer">Software Freedom Conservancy</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="participant-application-process">Participant Application Process:<a href="#participant-application-process" class="hash-link" aria-label="Direct link to Participant Application Process:" title="Direct link to Participant Application Process:">​</a></h2>
+<p>First, please review the Outreachy Eligibility and Application
+Information page to learn more about eligibility for Outreachy.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="steps-for-applicants-to-conda-forge">Steps for applicants to conda-forge:<a href="#steps-for-applicants-to-conda-forge" class="hash-link" aria-label="Direct link to Steps for applicants to conda-forge:" title="Direct link to Steps for applicants to conda-forge:">​</a></h2>
+<ol>
+<li>Confirm your eligibility on the Outreachy site</li>
+<li>Look at the Conda-forge projects available on the Outreachy site,
+consider your options, and if you have questions, communicate with the
+project mentors.</li>
+<li>Begin by contributing to the project by looking at our <a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer">issues
+page</a>.
+As you make contributions, record them on the Outreachy site.</li>
+<li>Once you have made a few contributions, begin to write your application.
+Ask the mentors to review the application before you submit it.</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="participant-expectations">Participant Expectations<a href="#participant-expectations" class="hash-link" aria-label="Direct link to Participant Expectations" title="Direct link to Participant Expectations">​</a></h2>
+<p>You will be working full-time on your project for three months. You will
+meet with your mentor(s) frequently and participate in the open-source
+development process -- writing code, reviewing code, testing, and so
+on. You will be expected to write a blog entry each week.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="project-contribution-information">Project Contribution Information<a href="#project-contribution-information" class="hash-link" aria-label="Direct link to Project Contribution Information" title="Direct link to Project Contribution Information">​</a></h2>
+<p>As part of the application process, all applicants must make at least
+one contribution to be accepted as an intern for this project. Only
+applicants who make a contribution will be eligible to be accepted as
+interns.</p>
+<p>While we don&#x27;t have one we highly recommend the first-time contributor
+to be a conda user and/or submit a package to conda-forge via
+<a href="https://github.com/conda-forge/staged-recipes" target="_blank" rel="noopener noreferrer">staged-recipes</a>. That
+will ensure the contributor understands the value of what we do and
+means that they are willing to participate in our community.</p>
+<p>Applicants can contribute to this project through the <a href="https://conda-forge.org/#contribute" target="_blank" rel="noopener noreferrer">project
+repository or contribution page</a>.
+The project uses an <a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer">issue
+tracker</a> to
+keep information about bugs to fix, project features to implement,
+documentation to write, and more. Applicants can look for
+newcomer-friendly issues to use for their first contributions by looking
+for the following issue tags in the project issue
+<a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer">tracker</a>:
+Docs, Good first issue</p>
+<p>We here at <a href="https://conda-forge.org/#contribute" target="_blank" rel="noopener noreferrer">conda-forge</a> have a
+large number of potential Outreachy endeavors around documentation,
+maintenance, and development. These tasks are high-impact, affecting the
+entire conda-forge ecosystem. They also cover multiple systems including
+databases, conda&#x27;s CDN provider, continuous integration providers, and
+user interactions on GitHub.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-do-i-work-with-the-conda-forge-community">How do I work with the conda-forge community?<a href="#how-do-i-work-with-the-conda-forge-community" class="hash-link" aria-label="Direct link to How do I work with the conda-forge community?" title="Direct link to How do I work with the conda-forge community?">​</a></h2>
+<p>Outreachy applicants can get help and feedback from both mentors and
+community members. Community members discuss their contributions in a
+public chat. Outreachy applicants can often learn from those
+discussions.</p>
+<p>Please introduce yourself on the public project chat:</p>
+<ul>
+<li>Gitter - <a href="https://gitter.im/conda-forge/conda-forge.github.io" target="_blank" rel="noopener noreferrer">Follow this
+link</a> to join this
+project&#x27;s public chat.</li>
+<li>Outreachy mentors will often be in the community public chat. The
+project mentor&#x27;s usernames are: <code>@viniciusdc</code>.</li>
+</ul>
+<p>Here are some ready-to-go ways you can get started contributing on your
+own.</p>
+<ul>
+<li>Find an open issue to tackle or report a bug to the issue tracker;</li>
+<li>Don&#x27;t be afraid to communicate: Ask if you can help write a new
+feature or help Automate project setups;</li>
+<li>Improving current tooling and testing features is always welcome.</li>
+</ul>
+<p>As this project main goal is enhancing our current documentation, here
+are some preliminary tasks that you can inspect to get ideas:</p>
+<ul>
+<li>Write and improve the project&#x27;s documentation;</li>
+<li>Link to duplicate issues, and suggest new issue labels, to keep
+things organized;</li>
+<li>Go through open issues and suggest closing old ones;</li>
+<li>Ask clarifying questions on recently opened issues to move the
+discussion forward;</li>
+<li>We also have issues regarding the main functionalities of our bot,
+in particular the autotick bot. You could find some new information
+or ideas for your contributing proposals.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="good-starter-tasks">Good starter tasks:<a href="#good-starter-tasks" class="hash-link" aria-label="Direct link to Good starter tasks:" title="Direct link to Good starter tasks:">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="small-starter-tasks">Small Starter Tasks<a href="#small-starter-tasks" class="hash-link" aria-label="Direct link to Small Starter Tasks" title="Direct link to Small Starter Tasks">​</a></h3>
+<p>As with most organizations, there are lots of small issues that need
+addressing usually related to problems such as bad recipes, old
+documentation and others. These will make good first issues to resolve
+or &quot;update&quot;. This will also be an opportunity to familiarise yourself
+with the conda-forge environment.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="larger-tasks">Larger tasks<a href="#larger-tasks" class="hash-link" aria-label="Direct link to Larger tasks" title="Direct link to Larger tasks">​</a></h3>
+<p>There are a few potential larger tasks that can come after a few smaller
+task contributions. These are included into our three main bases:</p>
+<ul>
+<li><a href="https://conda-forge.org/docs/user/00_intro.html" target="_blank" rel="noopener noreferrer">Users</a>: In this
+case, some good starter tasks are mainly checking the actual
+contents of conda-forge users documentations, and ideas to better
+express its contents.</li>
+<li><a href="https://conda-forge.org/docs/maintainer/00_intro.html" target="_blank" rel="noopener noreferrer">Maintainers</a>:
+There are a bunch of missed topics in this area, some information
+have to be updated or rewritten for better understanding. Writing a
+complete guide containing the actual steps and standard model for a
+package recipe, building process (just a simple discussion) and how
+conda-forge bot recognize defective licenses, recipes and packages
+in general is highly welcomed. For further understanding of the
+general system check <a href="https://conda-forge.org/docs/maintainer/infrastructure.html" target="_blank" rel="noopener noreferrer">this
+link</a>.<!-- -->
+<ul>
+<li>It can be funny to say, but lots of helpful ideas and bug
+solutions appear on our gitter channel, so if you have time to
+write guides about them... it&#x27;s also an incredible task.</li>
+</ul>
+</li>
+<li><a href="https://conda-forge.org/docs/orga/00_intro.html" target="_blank" rel="noopener noreferrer">And organization</a>
+Our environment is changing everyday, because of that a lot of
+information is lost in this process or even worse, not documented at
+all! which leads to some difficulties inserting new members to
+develop and further enhance the current process.<!-- -->
+<ul>
+<li>The related work on this matter is highly welcomed and for a
+better grasp of the situation you can start with this
+<a href="https://conda-forge.org/docs/orga/guidelines.html" target="_blank" rel="noopener noreferrer">guideline</a>
+and read some of our posts in our
+<a href="https://conda-forge.org/blog/blog/" target="_blank" rel="noopener noreferrer">blog</a></li>
+<li>Revitalizing ideas/projects for the conda-forge blog are
+definitely welcomed;</li>
+<li>Currently we have some interesting projects going on inside our
+ecosystem, which in return will need good documentation... Some
+of the projects conda-forge is affiliated include the <a href="https://github.com/regro/cf-scripts" target="_blank" rel="noopener noreferrer">auto-tick
+bot</a>,
+<a href="https://github.com/symbol-management/symbol-exporter" target="_blank" rel="noopener noreferrer">symbol-exporter</a>
+and a new service we are eager to start developing is the
+<a href="https://github.com/regro/cf-scripts/issues/1367" target="_blank" rel="noopener noreferrer">distributed-bot</a>.
+All of them have a great coverage of subjects and lots of people
+to help and give advice about the service structure and
+functionalities.</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="improving-the-documentation">Improving the documentation<a href="#improving-the-documentation" class="hash-link" aria-label="Direct link to Improving the documentation" title="Direct link to Improving the documentation">​</a></h2>
+<p>You can help improve the documentation as it is version-controlled in
+the conda-forge.github.io repository on GitHub. The source text is
+stored there in the <code>src/subdirectory</code> and is formatted using <a href="https://wiki.python.org/moin/reStructuredText" target="_blank" rel="noopener noreferrer">Python&#x27;s
+reStructuredText system</a>.</p>
+<p>You can propose quick edits directly through the GitHub website, if you
+have an account there --- for instance, this
+<a href="https://github.com/conda-forge/conda-forge.github.io/edit/master/src/user/contributing.rst" target="_blank" rel="noopener noreferrer">link</a>
+will take you directly to a web-based editor for this section page in
+our
+<a href="https://conda-forge.org/docs/user/contributing.html#improve-docs" target="_blank" rel="noopener noreferrer">docs</a>.
+In general, the file corresponding to each page in the GitHub browser
+has a little pencil icon in its top-right that lets you open it up for
+editing.</p>
+<p>The more manual process is as follows:</p>
+<ul>
+<li>Fork the conda-forge.github.io repository to your own GitHub user
+account.</li>
+<li>Clone that fork onto your computer.</li>
+<li>Check out a new branch deriving from master to do your work.</li>
+<li>Make and commit your changes.</li>
+<li>Submit a pull request to the main repository proposing your changes.</li>
+</ul>
+<p>Happy editing!</p></div><footer class="row docusaurus-mt-lg blogPostFooterDetailsFull_mRVl"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/blog/tags/outreachy/">outreachy</a></li></ul></div><div class="col margin-top--sm"><a href="https://github.com/conda-forge/conda-forge.github.io/tree/main/blog/2021-02-02-outreachy.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--prev" href="/blog/2021/06/16/graykull-step-by-step/"><div class="pagination-nav__sublabel">Newer Post</div><div class="pagination-nav__label">Contributing Packages To conda-forge Using Grayskull</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/blog/2020/12/26/year-in-review/"><div class="pagination-nav__sublabel">Older Post</div><div class="pagination-nav__label">2020 in Review</div></a></nav></main><div class="col col--2"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#participant-application-process" class="table-of-contents__link toc-highlight">Participant Application Process:</a></li><li><a href="#steps-for-applicants-to-conda-forge" class="table-of-contents__link toc-highlight">Steps for applicants to conda-forge:</a></li><li><a href="#participant-expectations" class="table-of-contents__link toc-highlight">Participant Expectations</a></li><li><a href="#project-contribution-information" class="table-of-contents__link toc-highlight">Project Contribution Information</a></li><li><a href="#how-do-i-work-with-the-conda-forge-community" class="table-of-contents__link toc-highlight">How do I work with the conda-forge community?</a></li><li><a href="#good-starter-tasks" class="table-of-contents__link toc-highlight">Good starter tasks:</a><ul><li><a href="#small-starter-tasks" class="table-of-contents__link toc-highlight">Small Starter Tasks</a></li><li><a href="#larger-tasks" class="table-of-contents__link toc-highlight">Larger tasks</a></li></ul></li><li><a href="#improving-the-documentation" class="table-of-contents__link toc-highlight">Improving the documentation</a></li></ul></div></div></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a href="/docs/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Getting started</a></li><li class="footer__item"><a href="/docs/user/00_intro.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">User docs</a></li><li class="footer__item"><a href="/docs/maintainer/00_intro.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">Maintainer docs</a></li><li class="footer__item"><a href="/docs/orga/00_intro.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">Organisation docs</a></li></ul></div><div class="col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="/docs" target="_blank" rel="noopener noreferrer" class="footer__link-item">About conda-forge</a></li><li class="footer__item"><a href="/docs/orga/governance.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">Governance</a></li><li class="footer__item"><a href="/docs/orga/minutes/00_intro.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">Meeting minutes</a></li><li class="footer__item"><a href="/docs/orga/getting-in-touch.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">Get in touch</a></li></ul></div><div class="col footer__col"><div class="footer__title">Stay up-to-date</div><ul class="footer__items clean-list"><li class="footer__item"><a href="/docs/user/announcements.html" target="_blank" rel="noopener noreferrer" class="footer__link-item">News</a></li><li class="footer__item"><a class="footer__link-item" href="/blog/">Blog</a></li><li class="footer__item"><a href="https://conda-forge.org/status" target="_blank" rel="noopener noreferrer" class="footer__link-item">Status<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/condaforge" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">Resources</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/dashboard/">Dashboard</a></li><li class="footer__item"><a class="footer__link-item" href="/style-guide/">Style guide</a></li><li class="footer__item"><a href="https://github.com/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://app.element.io/#/room/#conda-forge:matrix.org" target="_blank" rel="noopener noreferrer" class="footer__link-item">Element<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://conda.discourse.group/c/pkg-building/conda-forge/25" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discourse<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 conda-forge · Built with Docusaurus</div></div></div></footer></div>
+</body>
+</html>
