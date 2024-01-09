@@ -95,9 +95,9 @@ The role responsible for each step is noted at the beginning.
     mailing list.
   - **Developer**: Merge the security fix PR
   - **Developer**: Release the package and/or deploy the fix as appropriate
-  - **Developer & Coordinator**: Draft a [blog post](https://github.com/conda-forge/blog) and other
+  - **Developer & Coordinator**: Draft a [blog post](/blog) and other
     announcement texts. This can be done in parallel with the previous steps, but consider using a
-    [private advisory](https://github.com/conda-forge/blog/security/advisories) for the text.
+    [private advisory](https://github.com/conda-forge/conda-forge.github.io/security/advisories) for the text.
   - **Coordinator**: Publish the security advisory on the announcement date. If applicable, GitHub
     will post the CVE to the MITRE database.
   - **Coordinator**: Publish the blog post and other announcements (Element chat room, Twitter,
