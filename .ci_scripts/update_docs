@@ -34,3 +34,7 @@ popd
 # Build docusaurus site
 npm install
 npm run build
+
+# Serve the announcements RSS feed in this old location too
+# we can't redirect with the Docusaurus plugin, so just copy it
+cp build/news/rss.xml build/docs/news.rss

@@ -192,10 +192,6 @@ const config = {
             from: "/docs/user/announcements.html",
             to: "/news/",
           },
-          {
-            from: "/docs/news.rss",
-            to: "/news/rss.xml",
-          },
         ],
       },
     ],
