@@ -310,11 +310,11 @@ const config = {
             items: [
               {
                 label: "News",
-                to: "/news/",
+                to: "/news/archive/",
               },
               {
                 label: "Blog",
-                to: "/blog/",
+                to: "/blog/archive/",
               },
               {
                 label: "Status",
