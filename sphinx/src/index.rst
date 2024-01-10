@@ -48,7 +48,7 @@ Table of Contents
 .. feed::
    :rss: news.rss
    :title: conda-forge news & announcements
-   :link: https://conda-forge.org/docs/user/announcements.html
+   :link: https://conda-forge.org/news
    :description: News and announcements for the conda-forge ecosystem and channel.
 
    user/announcements
