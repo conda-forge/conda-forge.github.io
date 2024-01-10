@@ -9,11 +9,6 @@ if [[ "$CI" == "1" ]]; then
   git checkout -b new_site_content
 fi
 
-
-pushd sphinx/newsfeed
-pip install --no-deps .
-popd
-
 python .ci_scripts/generate_cfep_index.py
 
 pushd sphinx/src

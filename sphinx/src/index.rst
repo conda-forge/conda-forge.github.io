@@ -43,12 +43,3 @@ Table of Contents
    orga/00_intro
    misc/00_intro
    contracting/00_intro
-
-
-.. feed::
-   :rss: news.rss
-   :title: conda-forge news & announcements
-   :link: https://conda-forge.org/news
-   :description: News and announcements for the conda-forge ecosystem and channel.
-
-   user/announcements

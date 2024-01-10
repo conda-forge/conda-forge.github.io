@@ -5,7 +5,6 @@ User Documentation
 .. toctree::
 
   introduction
-  announcements
   tipsandtricks
   ci-skeleton
   faq
