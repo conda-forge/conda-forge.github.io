@@ -190,7 +190,7 @@ const config = {
           },
           {
             from: "/docs/user/announcements.html",
-            to: "/news/",
+            to: "/announcements/",
           },
         ],
       },
