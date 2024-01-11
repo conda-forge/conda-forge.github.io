@@ -233,7 +233,7 @@ Please go to [News](/news/) for the latest ones! The RSS feed is available at [/
 
 [Read more](/news/2018/10/12/the-rebuild-is-moving-along-nicely-with-almost-a-third-of-the-packages-completed/).
 
-### 2018-09-24: A minimal python 3.7 build is now available across all platforms and both compilers! {#a-minimal-python-3-7-build-is-now-available-across-all-platforms-and-both-compilers)}
+### 2018-09-24: A minimal python 3.7 build is now available across all platforms and both compilers! {#a-minimal-python-3-7-build-is-now-available-across-all-platforms-and-both-compilers}
 
 [Read more](/news/2018/09/24/deprecation-notice-for-python-35/).
 
