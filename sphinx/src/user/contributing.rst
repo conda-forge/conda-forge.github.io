@@ -59,17 +59,15 @@ If you are new to the conda-forge community, follow the steps below to make your
 
  - ``conda env create -f ./.ci_scripts/environment.yml``
  - ``conda activate conda-forge-docs``
- - ``cd sphinx``
- - ``cd newsfeed && pip install --no-deps .``
- - ``cd ../src``
+ - ``cd sphinx/src``
 
 5. Make your changes and run the following command to check them:
 
  - ``make html``
 
- You can check the changes locally by opening the html files in ``src/_build/html`` or running:
+ You can check the changes locally by opening the html files in ``_build/html`` or running:
  
- - ``python -m http.server --directory src/_build/html``
+ - ``python -m http.server --directory _build/html``
 
 6. Add and commit your changes:
 
