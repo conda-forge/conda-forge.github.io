@@ -7,7 +7,7 @@ const contributing = [
         Svg: require("@site/static/img/contributing/edit.svg").default,
         alt: "GitHub edit pen tool icon",
         title: "Update A Package",
-        href: "/docs",
+        href: "pathname:///docs",
         content:
             "Edit the recipe as desired. You may even consider adding yourself as a recipe maintainer.",
         width: 50,
