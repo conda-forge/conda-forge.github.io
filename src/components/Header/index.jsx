@@ -21,7 +21,7 @@ export default function Header() {
                     Community-led <span className="gradient_text">recipes</span>
                     , <span className="gradient_text">infrastructure</span> and{" "}
                     <span className="gradient_text">distributions</span> for
-                    Conda.
+                    <Link to="https://conda.org/">conda</Link>.
                 </h1>
                 <div className={styles.header_content_input}>
                     <Link
