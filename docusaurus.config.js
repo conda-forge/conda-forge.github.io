@@ -78,18 +78,19 @@ const config = {
     //       breadcrumbs: false,
     //     }),
     //   ],
-    // [
-    //   "content-blog",
-    //   /** @type {import('@docusaurus/plugin-content-blog').Options} */
-    //   ({
-    //     id: "news",
-    //     path: "news",
-    //     routeBasePath: "/docs/user/announcements.html",
-    //     showReadingTime: false,
-    //     blogSidebarTitle: "Latest news",
-    //     blogSidebarCount: 20,
-    //   }),
-    // ],
+    [
+      "content-blog",
+      /** @type {import('@docusaurus/plugin-content-blog').Options} */
+      {
+        id: "news",
+        path: "./news",
+        routeBasePath: "news",
+        showReadingTime: false,
+        blogSidebarTitle: "Latest announcements",
+        blogSidebarCount: 10, /* This can be set to 'ALL' if needed */
+        postsPerPage: 10, /* This can be set to 'ALL' if needed */
+      },
+    ],
     [
       "@docusaurus/plugin-client-redirects",
       {
@@ -187,6 +188,10 @@ const config = {
             from: "/blog/posts/2023-07-13-installer-security-fixes/",
             to: "/blog/2023/07/13/installer-security-fixes/",
           },
+          {
+            from: "/docs/user/announcements.html",
+            to: "/announcements/",
+          },
         ],
       },
     ],
@@ -208,7 +213,7 @@ const config = {
             position: "left",
           },
           {
-            to: "pathname:///docs/user/announcements.html",
+            to: "/news/",
             label: "News",
             position: "left",
           },
@@ -305,11 +310,11 @@ const config = {
             items: [
               {
                 label: "News",
-                to: "pathname:///docs/user/announcements.html",
+                to: "/news/archive/",
               },
               {
                 label: "Blog",
-                to: "/blog/",
+                to: "/blog/archive/",
               },
               {
                 label: "Status",

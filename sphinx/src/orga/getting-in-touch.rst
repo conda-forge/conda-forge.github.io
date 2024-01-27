@@ -63,4 +63,4 @@ Staying Up-to-date
 There are several sources that have the latest conda-forge information.
 
 * `Blog <https://conda-forge.org/blog>`__: We blog about big feature enhancements and other items. Our blog has an Atom `feed <https://conda-forge.org/blog/atom.xml>`__.
-* `News <https://conda-forge.org/docs/user/announcements.html#announcements>`__: Our :ref:`announcements <news>` page has periodic notices about technical changes to our infrastructure. It is also served as an RSS `feed <https://conda-forge.org/docs/news.rss>`__.
+* `News <https://conda-forge.org/news>`__: Our news page has periodic notices about technical changes to our infrastructure. It is also served as an RSS `feed <https://conda-forge.org/news/rss.xml>`__.

@@ -35,7 +35,6 @@ extensions = [
     'myst_parser',
     'sphinx.ext.todo',
     'sphinxcontrib.fulltoc',
-    'sphinxcontrib.newsfeed',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -137,6 +136,8 @@ linkcheck_ignore = [
     r'https://endoflife.software/.*$',  # TLS certificate expired
     r'https://github.com/conda-forge/conda-forge.github.io/tree/main/sphinx/src/.*$', # temporary; REVERT
     r'https://github.com/conda-forge/conda-forge.github.io/tree/main/sphinx/src', # temporary; REVERT
+    r'https://conda-forge.org/news', # temporary; REVERT
+    r'https://conda-forge.org/news/rss.xml', # temporary; REVERT
 ] + anchor_check_fps
 
 

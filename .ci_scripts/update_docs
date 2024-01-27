@@ -9,11 +9,6 @@ if [[ "$CI" == "1" ]]; then
   git checkout -b new_site_content
 fi
 
-
-pushd sphinx/newsfeed
-pip install --no-deps .
-popd
-
 python .ci_scripts/generate_cfep_index.py
 
 pushd sphinx/src
@@ -39,3 +34,7 @@ popd
 # Build docusaurus site
 npm install
 npm run build
+
+# Serve the announcements RSS feed in this old location too
+# we can't redirect with the Docusaurus plugin, so just copy it
+cp build/news/rss.xml build/docs/news.rss
