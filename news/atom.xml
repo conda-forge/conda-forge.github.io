@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://conda-forge.org/news</id>
+    <title>conda-forge | community-driven packaging for conda Blog</title>
+    <updated>2023-09-25T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://conda-forge.org/news"/>
+    <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
+    <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Python 3.12 migration and Python 3.11 by default]]></title>
+        <id>https://conda-forge.org/news/2023/09/25/python-312-migration-and-python-311-by-default</id>
+        <link href="https://conda-forge.org/news/2023/09/25/python-312-migration-and-python-311-by-default"/>
+        <updated>2023-09-25T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[With the Python 3.12 release approaching, we have already started the]]></summary>
+        <content type="html"><![CDATA[<p>With the Python 3.12 release approaching, we have already started the
+rebuild of packages for it. Although, there is no offical Python 3.12
+release yet, the release candidates of it will have the same ABI. Thus
+packages built with the release candidate can be safely used with the
+later offical release. To support rebuilding packages on conda-forge
+while ensuring Python release candidates don't end up in end-user
+solves, we have uploaded the Python 3.12.0rc2 and rc3 builds to the
+<code>conda-forge/label/python_rc</code> channel. The <code>python312</code> migration adds
+this channel in the feedstock builds to the Python 3.12 matrix entry. On
+the offical release of Python 3.12, we will adjust the migration and
+remove the channel again. Then (on a rerender), feedstock will only
+consume the main channel again.</p>
+<p>Overall, this approach allows us to provide Python 3.12 for a wide range
+of packages already on the day of the offical Python 3.12 release.
+At the same time, we have stopped the Python 3.11 migration and added it
+to the list of default Python versions on conda-forge.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Bumping Minimum MacOS version to 10.13]]></title>
+        <id>https://conda-forge.org/news/2023/08/24/bumping-minimum-macos-version-to-1013</id>
+        <link href="https://conda-forge.org/news/2023/08/24/bumping-minimum-macos-version-to-1013"/>
+        <updated>2023-08-24T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We will bump the minimum MacOS version from 10.9 (released in Oct. 2013,]]></summary>
+        <content type="html"><![CDATA[<p>We will bump the minimum MacOS version from 10.9 (released in Oct. 2013,
+end-of-life since Dec. 2016) to 10.13 (released Sept. 2017, end-of-life
+since Dec. 2020). The main reason we managed to support 10.9 this long
+at all, is that conda-forge is able to ship an up-to-date C++ standard
+library for OSX, <code>libcxx</code>, superseding the old one present in the MacOS
+SDK on the system (at least from the point-of-view of the respective
+conda environments).</p>
+<p>However, several core packages in the ecosystem now require at least
+10.13 (or will very soon), in a way that we cannot be circumvent. These
+packages include <code>libcxx</code>,
+<a href="https://discourse.llvm.org/t/libc-bumping-minimal-deployment-target-for-building-the-dylib-static-library-on-macos/68912" target="_blank" rel="noopener noreferrer">starting</a>
+with version 17.0. This change will not affect already published
+artifacts, but in the near future, all new builds for OSX will require
+at least 10.13. This constraint will be implemented through the <code>__osx</code>
+virtual package, but the details of how we will achieve this are still
+being worked out. Only <code>conda</code> versions 4.8.0 or newer have this virtual
+package. If you are using a system with MacOS older than 10.13 and are
+using <code>conda</code> older than 4.8.0, you will need to either upgrade <code>conda</code>
+to at least 4.8.0 or upgrade your system to at least MacOS 10.13.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[End-of-life for CentOS 6]]></title>
+        <id>https://conda-forge.org/news/2023/07/12/end-of-life-for-centos-6</id>
+        <link href="https://conda-forge.org/news/2023/07/12/end-of-life-for-centos-6"/>
+        <updated>2023-07-12T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[As you may be aware, we have delayed the deprecation of our CentOS 6 build system the linux64]]></summary>
+        <content type="html"><![CDATA[<p>As you may be aware, we have delayed the deprecation of our CentOS 6 build system the <code>linux64</code>
+platform several times. We have now set a formal deprecation date to be June 30, 2024. This date
+matches the <a href="https://access.redhat.com/articles/4038291" target="_blank" rel="noopener noreferrer">end of extended life-cycle support</a> from
+RedHat for RHEL 6. After this date, we build packages against CentOS 7 by default for <code>linux64</code>.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[conda-forge Google Group is Now Read-only - Move to Discourse]]></title>
+        <id>https://conda-forge.org/news/2023/01/09/conda-forge-google-group-is-now-read-only-move-to-discourse</id>
+        <link href="https://conda-forge.org/news/2023/01/09/conda-forge-google-group-is-now-read-only-move-to-discourse"/>
+        <updated>2023-01-09T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We have made the conda-forge Google Group read-only. Please use the new]]></summary>
+        <content type="html"><![CDATA[<p>We have made the conda-forge Google Group read-only. Please use the new
+conda-forge <a href="https://conda.discourse.group/c/pkg-building/conda-forge/25" target="_blank" rel="noopener noreferrer">discourse
+forum</a>, our
+<a href="https://gitter.im/conda-forge/conda-forge.github.io" target="_blank" rel="noopener noreferrer">Gitter room</a>, or
+it's <a href="https://app.element.io/#/room/#conda-forge-space:matrix.org" target="_blank" rel="noopener noreferrer">Matrix/Element
+counterpart</a>
+instead.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[conda-forge/staged-recipes Feedstock Creation Job Moved]]></title>
+        <id>https://conda-forge.org/news/2023/01/08/conda-forge-staged-recipes-feedstock-creation-job-moved</id>
+        <link href="https://conda-forge.org/news/2023/01/08/conda-forge-staged-recipes-feedstock-creation-job-moved"/>
+        <updated>2023-01-08T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We have moved the CI job that makes new feedstocks to our]]></summary>
+        <content type="html"><![CDATA[<p>We have moved the CI job that makes new feedstocks to our
+<a href="https://github.com/conda-forge/admin-requests" target="_blank" rel="noopener noreferrer">conda-forge/admin-requests</a>
+repo. The new location is reflected in the various links on repos and
+our status page.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Moving to .conda Artifacts]]></title>
+        <id>https://conda-forge.org/news/2022/11/16/moving-to-conda-artifacts</id>
+        <link href="https://conda-forge.org/news/2022/11/16/moving-to-conda-artifacts"/>
+        <updated>2022-11-16T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[conda-forge is moving to producing conda artifacts in the version 2]]></summary>
+        <content type="html"><![CDATA[<p>conda-forge is moving to producing <code>conda</code> artifacts in the version 2
+package format (also known as <code>.conda</code>). These artifacts allow for more
+efficient indexing and maintenance of the ecosystem. Our admin
+migrations bot will begin making PRs to feedstocks to change them over
+to the new artifact format. You will need <code>conda</code> version 4.7 or later
+to use the new <code>.conda</code> artifacts. Please leave a comment on <a href="https://github.com/conda-forge/conda-forge.github.io/issues/1586" target="_blank" rel="noopener noreferrer">this
+issue</a>
+if you encounter problems or have feedback.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Releasing Python 3.8.14, 3.9.14, and 3.10.7]]></title>
+        <id>https://conda-forge.org/news/2022/11/04/releasing-python-3814-3914-and-3107</id>
+        <link href="https://conda-forge.org/news/2022/11/04/releasing-python-3814-3914-and-3107"/>
+        <updated>2022-11-04T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[The CPython versions 3.8.14, 3.9.14, and 3.10.7 were released some weeks]]></summary>
+        <content type="html"><![CDATA[<p>The CPython versions 3.8.14, 3.9.14, and 3.10.7 were released some weeks
+ago to mitigate
+<a href="https://nvd.nist.gov/vuln/detail/CVE-2020-10735" target="_blank" rel="noopener noreferrer">CVE-2020-10735</a>. The
+chosen mitigation strategy might cause errors (e.g.
+<code>ValueError: Exceeds the limit (4300) for integer string conversion</code>) in
+some libraries. If you are affected, please read the
+<a href="https://docs.python.org/release/3.10.7/whatsnew/3.10.html#notable-security-feature-in-3-10-7" target="_blank" rel="noopener noreferrer">announcement</a>
+and learn about the available workarounds in the <a href="https://docs.python.org/3/library/stdtypes.html#integer-string-conversion-length-limitation" target="_blank" rel="noopener noreferrer">CPython
+documentation</a>.</p>
+<p>The conda-forge team <a href="https://github.com/conda-forge/python-feedstock/pull/579" target="_blank" rel="noopener noreferrer">has
+decided</a> to
+build and publish these releases with no additional changes. The new
+packages will be made available on or after 2022-11-10, following
+<a href="https://anaconda.cloud/anaconda-repo-news" target="_blank" rel="noopener noreferrer">Anaconda's decision</a>.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Conda Moving to CalVer]]></title>
+        <id>https://conda-forge.org/news/2022/09/27/conda-moving-to-calver</id>
+        <link href="https://conda-forge.org/news/2022/09/27/conda-moving-to-calver"/>
+        <updated>2022-09-27T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Conda is moving to CalVer per [CEP]]></summary>
+        <content type="html"><![CDATA[<p>Conda is moving to CalVer per <a href="https://github.com/conda-incubator/ceps/blob/main/cep-8.md" target="_blank" rel="noopener noreferrer">CEP
+8</a>. The
+first CalVer and last SemVer should be <code>22.9.0</code> and <code>4.14.0</code>
+respectively. This change maintains version order so you should not
+expect any issues.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Dropping Python 3.7]]></title>
+        <id>https://conda-forge.org/news/2022/08/24/dropping-python-37</id>
+        <link href="https://conda-forge.org/news/2022/08/24/dropping-python-37"/>
+        <updated>2022-08-24T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Conda-Forge has been providing support for Python 3.7 for 4 years now.]]></summary>
+        <content type="html"><![CDATA[<p>Conda-Forge has been providing support for Python 3.7 for 4 years now.</p>
+<p>Increasingly projects are moving off it (particularly in the PyData
+community). With Python 3.11's release coming around the corner (October
+3rd), conda-forge plans to drop Python 3.7 support when Python 3.11
+comes out. This will lighten the load on conda-forge infrastructure and
+make room for the new versions the community would like to support.</p>
+<p>More details can be found in issue
+<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/2623" target="_blank" rel="noopener noreferrer">conda-forge-pinning-feedstock#2623</a>. Feedback is welcome there.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Dropping PyPy 3.7]]></title>
+        <id>https://conda-forge.org/news/2022/08/17/dropping-pypy-37</id>
+        <link href="https://conda-forge.org/news/2022/08/17/dropping-pypy-37"/>
+        <updated>2022-08-17T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Conda-forge has supported PyPy since almost 2.5 years now, and the]]></summary>
+        <content type="html"><![CDATA[<p>Conda-forge has supported PyPy since almost 2.5 years now, and the
+initial PyPy 3.7 builds have been superseded in almost all aspects by
+the newer builds for 3.8 &amp; 3.9. We are therefore dropping PyPy 3.7 as a
+supported python version, and will keep focusing on the more
+contemporary PyPy builds.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Moving to Visual Studio toolchain vc142]]></title>
+        <id>https://conda-forge.org/news/2022/08/11/moving-to-visual-studio-toolchain-vc142</id>
+        <link href="https://conda-forge.org/news/2022/08/11/moving-to-visual-studio-toolchain-vc142"/>
+        <updated>2022-08-11T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Microsoft has deprecated the Visual Studio (VS) 2017 compiler and]]></summary>
+        <content type="html"><![CDATA[<p>Microsoft has deprecated the Visual Studio (VS) 2017 compiler and
+removed it from all the CI they control (notably Azure Pipelines &amp;
+Github Actions). This means that the default toolchain (== C/C++
+compiler, linker, standard libraries, and related utilities) of that VS
+version - vc141 - is getting less and less use in upstream libraries
+(because public hosted CI doesn't use it anymore by default), and
+therefore support for it is bitrotting at an accelerating pace. We are
+therefore
+<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/3167" target="_blank" rel="noopener noreferrer">planning</a>
+to move our toolchain on windows to vc142 (the default in VS2019) in two
+weeks, on 2022-08-25.</p>
+<p>This will not affect you as a general user of conda-forge packages on
+windows; the only impact is that if you are locally compiling against
+artefacts produced by conda-forge and are still using VS2017 yourself,
+you will need to upgrade your compiler (VS2019 is a drop-in replacement
+&amp; ABI-compatible).</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Azure OSX VM Image Bumped to Version 11]]></title>
+        <id>https://conda-forge.org/news/2022/07/22/azure-osx-vm-image-bumped-to-version-11</id>
+        <link href="https://conda-forge.org/news/2022/07/22/azure-osx-vm-image-bumped-to-version-11"/>
+        <updated>2022-07-22T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Azure is removing their OSX 10.15 VM image and so we are bumping to 11.]]></summary>
+        <content type="html"><![CDATA[<p>Azure is removing their OSX 10.15 VM image and so we are bumping to 11.
+You will need to rerender your feedstock to get this change. Feedstocks
+without the new VM image specified will not build after Azure fully
+removes the old image. Please get in touch with us if you have issues or
+questions!</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Packages for Qt/PyQt 5.15.2 are now available]]></title>
+        <id>https://conda-forge.org/news/2022/04/23/packages-for-qtpyqt-5152-are-now-available</id>
+        <link href="https://conda-forge.org/news/2022/04/23/packages-for-qtpyqt-5152-are-now-available"/>
+        <updated>2022-04-23T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[After more than six months, the conda-forge team and contributors have]]></summary>
+        <content type="html"><![CDATA[<p>After more than six months, the conda-forge team and contributors have
+managed to update the Qt5 packages to the latest LTS version, 5.15.2.
+Major changes include separating the package for QtWebEngine
+(<code>qt-webengine</code>) from the rest of Qt (now in a new package called
+<code>qt-main</code>). This allows recipes that do not use any of the WebEngine
+components to depend only on <code>qt-main</code>, reducing the total size of the
+downloaded binaries. As a result of this, <code>qt</code> will be a metapackage
+that installs both <code>qt-main</code> and <code>qt-webengine</code> as dependencies.
+With respect to PyQt, the new packages now are in sync with respect to
+their corresponding PyPI releases, which means that the <code>pyqt</code> package
+will only provide the core components of Qt, leaving <code>pyqtwebengine</code> and
+<code>pyqtcharts</code> as optional packages that extend PyQt by providing the
+QtWebEngine and QtCharts components, respectively. A migrator will be
+put in place to help with the transition.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[New Semi-automated PR Labeling in conda-forge/staged-recipes]]></title>
+        <id>https://conda-forge.org/news/2022/04/20/new-semi-automated-pr-labeling-in-conda-forgestaged-recipes</id>
+        <link href="https://conda-forge.org/news/2022/04/20/new-semi-automated-pr-labeling-in-conda-forgestaged-recipes"/>
+        <updated>2022-04-20T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A GitHub action now monitors comments on issues in staged-recipes and]]></summary>
+        <content type="html"><![CDATA[<p>A GitHub action now monitors comments on issues in staged-recipes and
+will add language and review labels to issues/PRs when a staged-recipes
+sub-team is mentioned in a comment. It adds the Awaiting author
+contribution label if a member of staged-recipes removes the
+review-requested label. Unlike notifications, which are only sent to the
+users which are members of a team at the time of the mention, labels are
+persistent and visible to everyone, so they should be very helpful for
+identifying old PRs that need attention.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[CircleCI and Drone.io Deprecated for New Feedstocks]]></title>
+        <id>https://conda-forge.org/news/2022/04/03/circleci-and-droneio-deprecated-for-new-feedstocks</id>
+        <link href="https://conda-forge.org/news/2022/04/03/circleci-and-droneio-deprecated-for-new-feedstocks"/>
+        <updated>2022-04-03T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Due to technical issues in generating new feedstocks, we have deprecated]]></summary>
+        <content type="html"><![CDATA[<p>Due to technical issues in generating new feedstocks, we have deprecated
+using CircleCI and Drone.io for builds of new feedstocks. Existing
+CircleCI builds, if any, should be moved to azure. Existing Drone.io
+builds can be moved to Travis CI or cross-compiled/emulated builds on
+azure.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[PyPy 3.8+3.9 Migration]]></title>
+        <id>https://conda-forge.org/news/2022/03/28/pypy-38-39-migration</id>
+        <link href="https://conda-forge.org/news/2022/03/28/pypy-38-39-migration"/>
+        <updated>2022-03-28T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We have begun rolling out packages built for PyPy3.8 and PyPy3.9. This]]></summary>
+        <content type="html"><![CDATA[<p>We have begun rolling out packages built for PyPy3.8 and PyPy3.9. This
+work may take a few weeks. See <code>pypy</code> in the user docs for information
+on how to set up a PyPy environment. Please report issues to the PyPy
+developers at <a href="https://foss.heptapod.net/pypy/pypy" target="_blank" rel="noopener noreferrer">https://foss.heptapod.net/pypy/pypy</a>. We are also
+dropping PyPy3.7 in each feedstock as the newer versions of PyPy are
+added. New versions of migrated feedstocks will not be built for PyPy3.7
+and that version of the python interpreter will not be receiving
+updates. As usual, you can track the status of the migration on our
+status page.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Travis CI Usage Deprecated for win_*, osx_*, and linux_64 Platforms]]></title>
+        <id>https://conda-forge.org/news/2022/03/06/travis-ci-usage-deprecated-for-win-osx-and-linux64-platforms</id>
+        <link href="https://conda-forge.org/news/2022/03/06/travis-ci-usage-deprecated-for-win-osx-and-linux64-platforms"/>
+        <updated>2022-03-06T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Due to changes in how Travis CI tracks open-source build time, we are]]></summary>
+        <content type="html"><![CDATA[<p>Due to changes in how Travis CI tracks open-source build time, we are
+deprecating using it for the <code>win_*</code>, <code>osx_*</code>, and <code>linux_64</code> platforms.</p>
+<p>Travis CI will be available only for platforms in their <a href="https://docs.travis-ci.com/user/billing-overview/#partner-queue-solution" target="_blank" rel="noopener noreferrer">partner
+queues</a>.
+These platforms currently include <code>ppc64le</code>, <code>aarch64</code> and <code>s390x</code>.</p>
+<p>Rerendering will raise an error if Travis CI is used for a non-partner
+queue platform in the conda-forge GitHub organization.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Default branch migration from master to main]]></title>
+        <id>https://conda-forge.org/news/2022/02/13/default-branch-migration-from-master-to-main</id>
+        <link href="https://conda-forge.org/news/2022/02/13/default-branch-migration-from-master-to-main"/>
+        <updated>2022-02-13T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We will be migrating the default branches of all feedstocks and other]]></summary>
+        <content type="html"><![CDATA[<p>We will be migrating the default branches of all feedstocks and other
+conda-forge repos from <code>master</code> to <code>main</code>. We do expect some minor
+hiccups while this migration is going on. You will need to change to the
+<code>main</code> branch from <code>master</code> on any local clones via the following git
+commands:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">git branch -m master main </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">git fetch origin </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">git branch -u origin/main main </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">git remote set-head origin -a</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>If you encounter any problems, please comment on this Github
+<a href="https://github.com/conda-forge/conda-forge.github.io/issues/1162" target="_blank" rel="noopener noreferrer">issue</a>.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[CentOS 7 docker images are now the default]]></title>
+        <id>https://conda-forge.org/news/2021/12/02/centos-7-docker-images-are-now-the-default</id>
+        <link href="https://conda-forge.org/news/2021/12/02/centos-7-docker-images-are-now-the-default"/>
+        <updated>2021-12-02T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We are moving all conda-forge linux-64 jobs to use CentOS 7-based]]></summary>
+        <content type="html"><![CDATA[<p>We are moving all conda-forge <code>linux-64</code> jobs to use CentOS 7-based
+docker images. This will help users avoid <code>conda/mamba</code> solver errors
+where dependencies that need CentOS 7 cannot be installed. Importantly,
+our compiler stack will still default to using a CentOS 6 sysroot unless
+the recipe explicitly lists the CentoOS 7 sysroot package. This build
+configuration means that our core system ABI on linux will remain
+largely CentOS 6-compatible, keeping support for older systems largely
+intact. We will reconsider moving the default ABI to CentOS 7 at a later
+date.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[cloud.drone.io no longer working]]></title>
+        <id>https://conda-forge.org/news/2021/11/17/clouddroneio-no-longer-working</id>
+        <link href="https://conda-forge.org/news/2021/11/17/clouddroneio-no-longer-working"/>
+        <updated>2021-11-17T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[The cloud.drone.io service we use for aarch64 builds is no longer]]></summary>
+        <content type="html"><![CDATA[<p>The <code>cloud.drone.io</code> service we use for <code>aarch64</code> builds is no longer
+accepting our API requests for triggering builds. We have been in
+contact with them, but have been unable to resolve the issue. Going
+forward, we will still be adding feedstocks to <code>cloud.drone.io</code> but we
+have moved all <code>aarch64</code> builds to emulated builds on <code>Azure</code>.
+Cross-compilers are available as well for resource-intensive builds.
+Please rerender your feedstock as needed to get the updated
+configuration.</p>]]></content>
+    </entry>
+</feed>
