@@ -110,6 +110,10 @@ const config = {
         },
         redirects: [
           {
+            from: ["/feedstock-outputs", "/feedstock-outputs/", "/feedstock-outputs/index.html"],
+            to: "/packages/",
+          },
+          {
             from: "/blog/blog/",
             to: "/blog/",
           },
