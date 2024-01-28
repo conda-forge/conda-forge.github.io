@@ -228,7 +228,7 @@ const config = {
             position: "left",
           },
           {
-            href: "https://conda-forge.org/feedstock-outputs",
+            to: "/packages/",
             label: "Packages",
             position: "left",
           },
