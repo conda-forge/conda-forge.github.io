@@ -2,11 +2,27 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/news</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2023-09-25T00:00:00.000Z</updated>
+    <updated>2024-01-29T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/news"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Rust 1.75 requires setting newer MACOSX_DEPLOYMENT_TARGET]]></title>
+        <id>https://conda-forge.org/news/2024/01/29/rust-175-osx-sdk</id>
+        <link href="https://conda-forge.org/news/2024/01/29/rust-175-osx-sdk"/>
+        <updated>2024-01-29T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[With the release of rust 1.75, we now require setting the minimal]]></summary>
+        <content type="html"><![CDATA[<p>With the release of <code>rust 1.75</code>, we now require setting the minimal
+<code>MACOSX_DEPLOYMENT_TARGET</code> to at least <code>10.12</code>. You can do this by appending
+<code>recipe/conda_build_config.yaml</code> with the following content:</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">MACOSX_DEPLOYMENT_TARGET</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">  </span><span class="token comment" style="color:#999988;font-style:italic"># [osx and x86]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'10.12'</span><span class="token plain">                </span><span class="token comment" style="color:#999988;font-style:italic"># [osx and x86]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>You should also add a run dependency on the respective OSX version:</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">run</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> __osx </span><span class="token punctuation" style="color:#393A34">&gt;</span><span class="token plain">=</span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> MACOSX_DEPLOYMENT_TARGET</span><span class="token punctuation" style="color:#393A34">|</span><span class="token plain">default("10.9") </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain">  </span><span class="token comment" style="color:#999988;font-style:italic"># [osx and x86_64]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>The latter is also set automatically via a <code>run_exports</code> of
+the <code>compiler('rust')</code> package, but we add this line if you would increase
+the deployment target later in the feedstock for unrelated reasons.</p>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python 3.12 migration and Python 3.11 by default]]></title>
         <id>https://conda-forge.org/news/2023/09/25/python-312-migration-and-python-311-by-default</id>
@@ -310,20 +326,5 @@ configuration means that our core system ABI on linux will remain
 largely CentOS 6-compatible, keeping support for older systems largely
 intact. We will reconsider moving the default ABI to CentOS 7 at a later
 date.</p>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[cloud.drone.io no longer working]]></title>
-        <id>https://conda-forge.org/news/2021/11/17/clouddroneio-no-longer-working</id>
-        <link href="https://conda-forge.org/news/2021/11/17/clouddroneio-no-longer-working"/>
-        <updated>2021-11-17T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[The cloud.drone.io service we use for aarch64 builds is no longer]]></summary>
-        <content type="html"><![CDATA[<p>The <code>cloud.drone.io</code> service we use for <code>aarch64</code> builds is no longer
-accepting our API requests for triggering builds. We have been in
-contact with them, but have been unable to resolve the issue. Going
-forward, we will still be adding feedstocks to <code>cloud.drone.io</code> but we
-have moved all <code>aarch64</code> builds to emulated builds on <code>Azure</code>.
-Cross-compilers are available as well for resource-intensive builds.
-Please rerender your feedstock as needed to get the updated
-configuration.</p>]]></content>
     </entry>
 </feed>
