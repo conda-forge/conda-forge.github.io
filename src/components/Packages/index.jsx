@@ -32,6 +32,22 @@ function levenshteinDistance(a, b) {
   return dp[m][n] / maxLen;
 }
 
+function highlightSubstring(str, substr) {
+  const substrLower = substr.toLowerCase();
+  const substrIndex = str.toLowerCase().indexOf(substrLower);
+  if (substrIndex === -1) {
+    return str;
+  }
+  const substrEndIndex = substrIndex + substr.length;
+  return (
+    <span>
+      {str.substring(0, substrIndex)}
+      <strong>{str.substring(substrIndex, substrEndIndex)}</strong>
+      {str.substring(substrEndIndex)}
+    </span>
+  );
+}
+
 const Packages = () => {
   const [packages, setPackages] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -64,7 +80,7 @@ const Packages = () => {
 
   const searchTermLower = searchTerm.toLowerCase();
   var filteredPackages = [];
-  if (searchTerm.length > 3) {
+  if (searchTerm.length >= 3) {
     // For queries with three or more characters, search the entire string for a match
     filteredPackages = packages.filter((pkg) =>
       pkg.name.toLowerCase().includes(searchTermLower)
@@ -134,15 +150,13 @@ const Packages = () => {
                 filteredPackages.map((pkg) => (
                   <tr key={pkg.name}>
                     <td>
-                      <strong>
                         <a
                           href={`https://anaconda.org/conda-forge/${pkg.name}`}
                           target="_blank"
                           title={`View ${pkg.name} on anaconda.org`}
                         >
-                          {pkg.name}
+                          {highlightSubstring(pkg.name, searchTermLower)}
                         </a>
-                      </strong>
                     </td>
                     <td>
                       {pkg.repos.map((repo) => (
