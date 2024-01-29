@@ -1,5 +1,37 @@
 import React, { useState, useEffect } from "react";
 
+// Function to calculate the Levenshtein distance between two strings
+function levenshteinDistance(a, b) {
+  const m = a.length;
+  const n = b.length;
+  const dp = Array.from(Array(m + 1), () => Array(n + 1).fill(0));
+
+  for (let i = 0; i <= m; i++) {
+    dp[i][0] = i;
+  }
+
+  for (let j = 0; j <= n; j++) {
+    dp[0][j] = j;
+  }
+
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      if (a[i - 1] === b[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1];
+      } else {
+        dp[i][j] = Math.min(
+          dp[i - 1][j - 1] + 1,
+          dp[i][j - 1] + 1,
+          dp[i - 1][j] + 1
+        );
+      }
+    }
+  }
+
+  const maxLen = Math.max(m, n);
+  return dp[m][n] / maxLen;
+}
+
 const Packages = () => {
   const [packages, setPackages] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,10 +44,11 @@ const Packages = () => {
         const data = await response.json();
 
         if (typeof data === "object" && data !== null) {
-          // Convert the object into an array of { name, repositories } objects
-          const packagesArray = Object.entries(data).map(
-            ([repo, packages]) => ({ repo, packages })
-          );
+          // Convert the object into an array of { pkg_name, repositories } objects
+          const packagesArray = Object.entries(data).map(([name, repos]) => ({
+            name,
+            repos,
+          }));
 
           setPackages(packagesArray);
         } else {
@@ -29,24 +62,43 @@ const Packages = () => {
     fetchData();
   }, []);
 
-  const filteredPackages = searchTerm.length
-    ? packages.filter(
-        (pkg) =>
-          pkg.repo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          pkg.packages.some((pkgName) =>
-            pkgName.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-      )
-    : [];
+  const searchTermLower = searchTerm.toLowerCase();
+  var filteredPackages = [];
+  if (searchTerm.length > 3) {
+    // For queries with three or more characters, search the entire string for a match
+    filteredPackages = packages.filter((pkg) =>
+      pkg.name.toLowerCase().includes(searchTermLower)
+    );
+  } else if (searchTerm.length > 0) {
+    // For queries with less than three characters,
+    // only search if the package name starts with the query for performance reasons
+    filteredPackages = packages.filter((pkg) =>
+      pkg.name.toLowerCase().startsWith(searchTermLower)
+    );
+  }
+  // Sort the filtered packages in place by their Levenshtein distance
+  filteredPackages.sort((a, b) => {
+    const aDistance = levenshteinDistance(
+      a.name.toLowerCase(),
+      searchTermLower
+    );
+    const bDistance = levenshteinDistance(
+      b.name.toLowerCase(),
+      searchTermLower
+    );
+    return aDistance - bDistance;
+  });
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
   return (
-    <main className={["container", "margin-vert--lg", "margin-horiz--lg"].join(" ")}>
+    <div
+      className={["container", "margin-vert--lg"].join(" ")}
+    >
       <div className="row">
-        <div className="col col--12">
+        <main className="col col--12">
           <h1>Packages in conda-forge</h1>
           <form className="margin-vert--md">
             <div className="navbar__search">
@@ -60,47 +112,49 @@ const Packages = () => {
                 />
                 {(searchTerm.length && (
                   <span class="badge badge--info margin-left--sm">
-                    {filteredPackages.length} feedstock(s) found  
+                    {filteredPackages.length} package(s) found
                   </span>
-                )) ||
-                <span class="badge badge--success margin-left--sm">
-                {packages.length} feedstocks loaded
-              </span>}
+                )) || (
+                  <span class="badge badge--success margin-left--sm">
+                    {packages.length} packages loaded
+                  </span>
+                )}
               </label>
             </div>
           </form>
           <table>
             <thead>
               <tr>
-                <th>Feedstock</th>
-                <th>Package(s)</th>
+                <th>Package</th>
+                <th>Feedstock(s)</th>
               </tr>
             </thead>
             <tbody>
               {(filteredPackages.length &&
-                filteredPackages.map((item) => (
-                  <tr key={item.repo}>
+                filteredPackages.map((pkg) => (
+                  <tr key={pkg.name}>
                     <td>
                       <strong>
                         <a
-                          href={`https://github.com/conda-forge/${item.repo}-feedstock`}
+                          href={`https://anaconda.org/conda-forge/${pkg.name}`}
                           target="_blank"
-                          title={`View ${item.repo}-feedstock on GitHub`}
+                          title={`View ${pkg.name} on anaconda.org`}
                         >
-                          {item.repo}-feedstock
+                          {pkg.name}
                         </a>
                       </strong>
                     </td>
                     <td>
-                      {item.packages.map((pkgName) => (
+                      {pkg.repos.map((repo) => (
                         <span>
                           <a
-                            href={`https://anaconda.org/conda-forge/${pkgName}`}
+                            href={`https://github.com/conda-forge/${repo}-feedstock`}
                             target="_blank"
-                            title={`View ${pkgName} on anaconda.org`}
+                            title={`View ${repo}-feedstock on GitHub`}
                           >
-                            {pkgName}
+                            {repo}-feedstock
                           </a>
+
                           <br />
                         </span>
                       ))}
@@ -113,9 +167,9 @@ const Packages = () => {
               )}
             </tbody>
           </table>
-        </div>
+        </main>
       </div>
-    </main>
+    </div>
   );
 };
 
