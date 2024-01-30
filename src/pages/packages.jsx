@@ -4,7 +4,10 @@ import Packages from "@site/src/components/Packages";
 
 export default function Home() {
   return (
-    <Layout>
+    <Layout 
+      title="Packages"
+      description="Search conda-forge for packages and their feedstocks"
+    >
       <Packages />
     </Layout>
   );
