@@ -56,7 +56,7 @@ const Packages = () => {
     const fetchData = async () => {
       try {
         // TODO: Update URL to production JSON payload
-        const response = await fetch("/test-feedstock-outputs.json");
+        const response = await fetch("https://raw.githubusercontent.com/conda-forge/feedstock-outputs/gh-pages/feedstock-outputs.json");
         const data = await response.json();
 
         if (typeof data === "object" && data !== null) {
