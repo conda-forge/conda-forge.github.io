@@ -110,6 +110,10 @@ const config = {
         },
         redirects: [
           {
+            from: "/feedstock-outputs",
+            to: "/packages/",
+          },
+          {
             from: "/blog/blog/",
             to: "/blog/",
           },
@@ -228,7 +232,7 @@ const config = {
             position: "left",
           },
           {
-            href: "https://conda-forge.org/feedstock-outputs",
+            to: "/packages/",
             label: "Packages",
             position: "left",
           },
