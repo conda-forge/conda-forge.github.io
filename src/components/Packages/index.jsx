@@ -55,7 +55,7 @@ const Packages = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://raw.githubusercontent.com/conda-forge/feedstock-outputs/gh-pages/feedstock-outputs.json");
+        const response = await fetch("https://raw.githubusercontent.com/conda-forge/feedstock-outputs/single-file/feedstock-outputs.json");
         const data = await response.json();
 
         if (typeof data === "object" && data !== null) {
