@@ -1,6 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+import { reverseSidebarItems } from "./community/meeting-minutes/sidebar.js";
+
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
@@ -42,6 +44,7 @@ const config = {
 
   // Mermaid configuration
   markdown: {
+    format: 'detect',
     mermaid: true,
   },
   themes: ["@docusaurus/theme-mermaid"],
@@ -68,16 +71,21 @@ const config = {
     ],
   ],
   plugins: [
-    //   [
-    //     "content-docs",
-    //     /** @type {import('@docusaurus/plugin-content-docs').Options} */
-    //     ({
-    //       id: "community",
-    //       path: "community",
-    //       routeBasePath: "/community",
-    //       breadcrumbs: false,
-    //     }),
-    //   ],
+    [
+      "content-docs",
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: "community",
+        path: "community",
+        routeBasePath: "/community",
+        breadcrumbs: false,
+        /* Sort meeting minutes by in reverse date */
+        async sidebarItemsGenerator({defaultSidebarItemsGenerator, ...args}) {
+          const sidebarItems = await defaultSidebarItemsGenerator(args);
+          return reverseSidebarItems(sidebarItems);
+        },
+      }),
+    ],
     [
       "content-blog",
       /** @type {import('@docusaurus/plugin-content-blog').Options} */
@@ -105,6 +113,13 @@ const config = {
             redirects.push("/blog/2021/");
             redirects.push("/blog/2020/");
             redirects.push("/blog/2019/");
+          }
+          if (existingPath.startsWith('/community/meeting-minutes/')) {
+            let basePath = existingPath.replace('/community/meeting-minutes/', '/docs/orga/minutes/');
+            if (existingPath !== '/community/meeting-minutes/'){
+              basePath = basePath.slice(0, -1) + '.html';
+            }
+            redirects.push(basePath);
           }
           return redirects;
         },
@@ -161,10 +176,10 @@ const config = {
             from: "/blog/posts/2020-12-26-year-in-review/",
             to: "/blog/2020/12/26/year-in-review/",
           },
-          {
-            from: ["/blog/posts/2021-02-02-outreachy/", "/blog/2021/02/02/Outreachy/"],
-            to: "/blog/2021/02/02/outreachy/",
-          },
+          // {
+          //   from: ["/blog/posts/2021-02-02-outreachy/", "/blog/2021/02/02/Outreachy/"],
+          //   to: "/blog/2021/02/02/outreachy/",
+          // },
           {
             from: "/blog/posts/2021-06-16-graykull-step-by-step/",
             to: "/blog/2021/06/16/graykull-step-by-step/",
@@ -227,6 +242,11 @@ const config = {
             position: "left",
           },
           {
+            to: "/community/",
+            label: "Community",
+            position: "left",
+          },
+          {
             href: "https://conda-forge.org/status",
             label: "Status",
             position: "left",
@@ -236,13 +256,6 @@ const config = {
             label: "Packages",
             position: "left",
           },
-          // {
-          //   type: "doc",
-          //   docsPluginId: "community",
-          //   docId: "index",
-          //   position: "left",
-          //   label: "Community",
-          // },
           {
             href: "https://opencollective.com/conda-forge",
             label: "Donate",
@@ -301,7 +314,7 @@ const config = {
               },
               {
                 label: "Meeting minutes",
-                to: "pathname:///docs/orga/minutes/00_intro.html",
+                to: "/community/meeting-minutes/",
               },
               {
                 label: "Get in touch",
