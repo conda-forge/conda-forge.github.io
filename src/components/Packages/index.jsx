@@ -63,7 +63,14 @@ const Packages = () => {
         const data = await response.json();
 
         if (typeof data === "object" && data !== null) {
-          setAllPackages(Object.fromEntries(Object.entries(data).map(([key, value]) => [key.toLowerCase(), value])));
+          setAllPackages(
+            Object.fromEntries(
+              Object.entries(data).map(([key, value]) => [
+                key.toLowerCase(),
+                value,
+              ])
+            )
+          );
         } else {
           console.error("Invalid data format. Expected an object.");
         }
