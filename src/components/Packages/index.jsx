@@ -273,8 +273,9 @@ const Packages = () => {
           <h1>Packages in conda-forge</h1>
           <form id="filterPackages" className="margin-vert--md">
             <div className="navbar__search">
-              <label htmlFor="filterPackages">
+              <label htmlFor="filterPackagesInput">
                 <input
+                  id="filterPackagesInput"
                   type="text"
                   placeholder="Filter items..."
                   value={searchTerm}
