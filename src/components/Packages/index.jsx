@@ -50,7 +50,7 @@ function highlightSubstring(str, substr) {
 }
 
 const Packages = () => {
-  const [allPackages, setAllPackages] = useState([]);
+  const [allPackages, setAllPackages] = useState({});
   const [latestPackages, setLatestPackages] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -63,13 +63,7 @@ const Packages = () => {
         const data = await response.json();
 
         if (typeof data === "object" && data !== null) {
-          // Convert the object into an array of { pkg_name, repositories } objects
-          const packagesArray = Object.entries(data).map(([name, repos]) => ({
-            name,
-            repos,
-          }));
-
-          setAllPackages(packagesArray);
+          setAllPackages(Object.fromEntries(Object.entries(data).map(([key, value]) => [key.toLowerCase(), value])));
         } else {
           console.error("Invalid data format. Expected an object.");
         }
@@ -110,28 +104,24 @@ const Packages = () => {
 
   const searchTermLower = searchTerm.toLowerCase();
   var filteredPackages = [];
-  if (searchTerm.length >= 3) {
-    // For queries with three or more characters, search the entire string for a match
-    filteredPackages = allPackages.filter((pkg) =>
-      pkg.name.toLowerCase().includes(searchTermLower)
-    );
-  } else if (searchTerm.length > 0) {
-    // For queries with less than three characters,
-    // only search if the package name starts with the query for performance reasons
-    filteredPackages = allPackages.filter((pkg) =>
-      pkg.name.toLowerCase().startsWith(searchTermLower)
-    );
+  var inclusionCriteria;
+  if (searchTerm.length > 0) {
+    if (searchTerm.length >= 3) {
+      inclusionCriteria = (name) => name.includes(searchTermLower);
+    } else {
+      inclusionCriteria = (name) => name.startsWith(searchTermLower);
+    }
+    for (const name in allPackages) {
+      if (inclusionCriteria(name)) {
+        filteredPackages.push(name);
+      }
+    }
   }
+
   // Sort the filtered packages in place by their Levenshtein distance
   filteredPackages.sort((a, b) => {
-    const aDistance = levenshteinDistance(
-      a.name.toLowerCase(),
-      searchTermLower
-    );
-    const bDistance = levenshteinDistance(
-      b.name.toLowerCase(),
-      searchTermLower
-    );
+    const aDistance = levenshteinDistance(a, searchTermLower);
+    const bDistance = levenshteinDistance(b, searchTermLower);
     return aDistance - bDistance;
   });
 
@@ -154,19 +144,19 @@ const Packages = () => {
         <tbody>
           {(filteredPackages.length &&
             filteredPackages.map((pkg) => (
-              <tr key={pkg.name}>
+              <tr key={pkg}>
                 <td>
                   <a
-                    href={`https://anaconda.org/conda-forge/${pkg.name}`}
+                    href={`https://anaconda.org/conda-forge/${pkg}`}
                     target="_blank"
-                    title={`View ${pkg.name} on anaconda.org`}
+                    title={`View ${pkg} on anaconda.org`}
                   >
-                    {highlightSubstring(pkg.name, searchTermLower)}
+                    {highlightSubstring(pkg, searchTermLower)}
                   </a>
                 </td>
                 <td>
-                  {pkg.repos.map((repo) => (
-                    <span>
+                  {allPackages[pkg].map((repo) => (
+                    <span key={`${pkg}-${repo}`}>
                       <a
                         href={`https://github.com/conda-forge/${repo}-feedstock`}
                         target="_blank"
@@ -199,16 +189,23 @@ const Packages = () => {
       <div>
         <Admonition type="tip" coll>
           <p>
-            The following packages have been published to{" "}
-            <a href="https://anaconda.org/conda-forge" target="_blank">
+            The following packages have recently received updates in{" "}
+            <a
+              href="https://anaconda.org/conda-forge"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Anaconda.org
-            </a>{" "}
-            recently.
-            Check{" "}
-            <a href="https://github.com/conda-forge/feedstock/commits">
+            </a>
+            . Check{" "}
+            <a
+              href="https://github.com/conda-forge/feedstocks/commits"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               conda-forge/feedstocks
             </a>{" "}
-            for the last updates in our feedstocks.
+            for an overview of the latest commits in our feedstocks.
           </p>
         </Admonition>
         <table>
@@ -216,7 +213,7 @@ const Packages = () => {
             <tr>
               <th>#</th>
               <th>Package</th>
-              <th>Feedstock</th>
+              <th>Feedstock(s)</th>
               <th>Last updated</th>
             </tr>
           </thead>
@@ -228,11 +225,26 @@ const Packages = () => {
                   <a
                     href={`https://anaconda.org/conda-forge/${item.name}`}
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     {item.name}
                   </a>
                 </td>
-                <td>...</td>
+                <td>
+                  {(allPackages[item.name.toLowerCase()] || []).map((repo) => (
+                    <span key={`${item.name}-${index}-${repo}`}>
+                      <a
+                        href={`https://github.com/conda-forge/${repo}-feedstock`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={`View ${repo}-feedstock on GitHub`}
+                      >
+                        {repo}-feedstock
+                      </a>
+                      <br />
+                    </span>
+                  ))}
+                </td>
                 <td>{item.date}</td>
               </tr>
             ))}
@@ -242,7 +254,7 @@ const Packages = () => {
     );
     resultsPill = (
       <span className="badge badge--success margin-left--sm">
-        {allPackages.length} packages loaded
+        {Object.keys(allPackages).length} packages loaded
       </span>
     );
   }
