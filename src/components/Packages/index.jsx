@@ -186,7 +186,7 @@ const Packages = () => {
       </table>
     );
     resultsPill = (
-      <span className="badge badge--info margin-left--sm">
+      <span className="badge badge--secondary margin-left--sm">
         {filteredPackages.length} package(s) found
       </span>
     );
@@ -260,7 +260,7 @@ const Packages = () => {
       </div>
     );
     resultsPill = (
-      <span className="badge badge--success margin-left--sm">
+      <span className="badge badge--secondary margin-left--sm">
         {Object.keys(allPackages).length} packages loaded
       </span>
     );
