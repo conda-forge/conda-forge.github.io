@@ -63,6 +63,7 @@
   --ifm-color-info: #64b5f6;
   --ifm-color-warning: #ffb74d;
   --ifm-color-danger: #ff8a65;
+  --ifm-badge-color: var(--ifm-color-black);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --gradient: linear-gradient(
     60deg,
