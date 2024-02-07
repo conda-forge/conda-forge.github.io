@@ -10,7 +10,7 @@
     bash miniforge.sh -bfp ~/miniforge &&
     rm -rf miniforge.sh &&
     source ~/miniforge/etc/profile.d/conda.sh &&
-    conda env create -f .ci_scripts/update_docs &&
+    conda env create -f .ci_scripts/environment.yml &&
     conda activate conda-forge-docs &&
     ./.ci_scripts/update_docs
   """
