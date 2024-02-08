@@ -80,8 +80,10 @@ const Packages = () => {
     };
     const fetchLatestData = async () => {
       try {
+        // Fetch the RSS feed from conda-forge. We add a cache-busting query parameter
+        // to ensure we always get the latest data. Otherwise, the data gets stuck in time.
         const response = await fetch(
-          "https://conda.anaconda.org/conda-forge/rss.xml"
+          `https://conda.anaconda.org/conda-forge/rss.xml?bustcache=${Date.now()}`
         );
         // parse the RSS feed into an XML document
         const xml = await response.text();
