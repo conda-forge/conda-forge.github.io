@@ -43,7 +43,7 @@ Thank you for helping make this a welcoming, friendly community for all.
 
 If you believe someone is violating the code of conduct, please report this in a timely manner. Code of conduct violations reduce the value of the community for everyone. The team at conda-forge takes reports of misconduct very seriously and is committed to preserving and maintaining the welcoming nature of our community.
 
-Reports should be sent to <conda-forge-core@googlegroups.com>, a private mailing list only accessible by the members of the core team. In your report involves a member of the core team, please send it to NumFOCUS following [these instructions](https://numfocus.org/code-of-conduct#how-to-report).
+Reports should be sent to <conda-forge-core@googlegroups.com>, a private mailing list only accessible by the members of the core team. If your report involves a member of the core team, please send it to NumFOCUS following [these instructions](https://numfocus.org/code-of-conduct#how-to-report).
 
 All reports will be kept confidential. Please have a look at the [Reporting guidelines](https://numfocus.org/code-of-conduct#reporting-guidelines).
 
