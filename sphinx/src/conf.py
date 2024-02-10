@@ -134,6 +134,7 @@ linkcheck_ignore = [
     r'https://app.element.io/#.*$',  # anchors are generated dynamically
     r'https://wave.webaim.org/report#.*$',  # anchors are generated dynamically
     r'https://endoflife.software/.*$',  # TLS certificate expired
+    r'https://github.com/conda-forge/conda-forge.github.io#code-of-conduct',  # anchors are generated dynamically
     r'https://github.com/conda-forge/conda-forge.github.io/tree/main/sphinx/src/.*$', # temporary; REVERT
     r'https://github.com/conda-forge/conda-forge.github.io/tree/main/sphinx/src', # temporary; REVERT
     r'https://conda-forge.org/news', # temporary; REVERT
