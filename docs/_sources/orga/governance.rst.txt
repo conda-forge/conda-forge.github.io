@@ -11,8 +11,8 @@ appreciate all good faith contributions.
 
 Code of Conduct
 ---------------
-conda-forge adheres to the
-`NumFOCUS Code of Conduct <https://www.numfocus.org/code-of-conduct>`_.
+
+Please refer to the `Code of Conduct section in our README <https://github.com/conda-forge/conda-forge.github.io#code-of-conduct>`__ for more information.
 
 Teams & Roles
 -------------
