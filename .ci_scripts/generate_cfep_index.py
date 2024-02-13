@@ -1,5 +1,6 @@
 import re
 import requests
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -57,9 +58,16 @@ def get_cfeps():
 
 
 def write_cfep_index():
-    with CFEP_INDEX_RST.open("a") as f:
-        for cfep in get_cfeps():
-            f.write(f"* {cfep.rst_link()}\n")
+    contents = CFEP_INDEX_RST.read_text()
+    if ".. REPLACE-THIS-LINE-WITH-THE-INDEX-OF-CFEPs" not in contents:
+        print("!!! Skipping writing CFEP index. Already rendered?", file=sys.stderr)
+        return
+    rst_links = [f"- {cfep.rst_link()}" for cfep in get_cfeps()]
+    contents = contents.replace(
+        ".. REPLACE-THIS-LINE-WITH-THE-INDEX-OF-CFEPs", 
+        "\n".join(rst_links)
+    )
+    CFEP_INDEX_RST.write_text(contents)
 
 
 if __name__ == "__main__":
