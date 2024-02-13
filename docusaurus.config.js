@@ -10,6 +10,11 @@ const editUrl = {
   editUrl: "https://github.com/conda-forge/conda-forge.github.io/tree/main/",
 };
 
+var copyright = `Copyright © ${new Date().getFullYear()} conda-forge · Built with Docusaurus`;
+if (process.env.NETLIFY) {
+  copyright += ` · Deployed on <a href="https://www.netlify.com/" target="_blank">Netlify</a>`;
+}
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "conda-forge | community-driven packaging for conda",
@@ -373,7 +378,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} conda-forge · Built with Docusaurus`,
+        copyright: copyright,
       },
       prism: {
         theme: lightCodeTheme,
