@@ -15,11 +15,11 @@ Chances are we have already packaged it for you. You can `search <https://anacon
 
 - We value all kinds of contributions — not just code. A few recommended ways to start contributing to conda-forge are:
 
- - `Contribute new packages <https://conda-forge.org/docs/maintainer/adding_pkgs.html>`__
- - Help update and `maintain packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-pkgs>`__
- - Suggest or implement improvements for our `infrastructure <https://conda-forge.org/docs/maintainer/infrastructure.html#infrastructure>`__
- - Help `improve the documentation <https://conda-forge.org/docs/user/contributing.html#improve-docs>`__
- - For a detailed overview please refer to :ref:`becoming_involved`.
+  - `Contribute new packages <https://conda-forge.org/docs/maintainer/adding_pkgs.html>`__
+  - Help update and `maintain packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-pkgs>`__
+  - Suggest or implement improvements for our `infrastructure <https://conda-forge.org/docs/maintainer/infrastructure.html#infrastructure>`__
+  - Help `improve the documentation <https://conda-forge.org/docs/user/contributing.html#improve-docs>`__
+  - For a detailed overview please refer to :ref:`becoming_involved`.
 
 - To see our governance policies, see `here <https://conda-forge.org/docs/orga/governance.html>`_.
 
