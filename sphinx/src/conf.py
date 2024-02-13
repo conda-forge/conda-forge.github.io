@@ -13,7 +13,6 @@
 # serve to show the default.
 import csv
 import os
-import sys
 import datetime
 
 import cloud_sptheme as csp
@@ -35,6 +34,7 @@ extensions = [
     'myst_parser',
     'sphinx.ext.todo',
     'sphinxcontrib.fulltoc',
+    'sphinx_markdown_builder',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

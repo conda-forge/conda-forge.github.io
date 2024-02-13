@@ -25,7 +25,7 @@ export default function Header() {
                 </h1>
                 <div className={styles.header_content_input}>
                     <Link
-                        to="pathname:///docs/"
+                        to="/docs/"
                         className="button button--secondary button--lg homepage_button"
                     >
                         Explore conda-forge

@@ -96,7 +96,7 @@ export default function Stats() {
             <div className={styles.about_video_description}>
                 <p>
                     Learn more about conda-forge by reading our{" "}
-                    <Link to="pathname:///docs/">docs</Link> or watching the following
+                    <Link to="/docs/">docs</Link> or watching the following
                     episode of{" "}
                     <Link to="https://www.quansight.com/open-source-directions">
                         Open Source Directions

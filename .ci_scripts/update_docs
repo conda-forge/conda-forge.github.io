@@ -2,6 +2,9 @@
 
 set -ex
 
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASE_DIR=$(dirname $HERE)
+
 # configure bot account
 if [[ "$CI" == "1" ]]; then
   git config --global user.email "pelson.pub+conda-forge@gmail.com"
@@ -9,27 +12,16 @@ if [[ "$CI" == "1" ]]; then
   git checkout -b new_site_content
 fi
 
-python .ci_scripts/generate_cfep_index.py
+python "$BASE_DIR/.ci_scripts/generate_cfep_index.py"
 
-pushd sphinx/src
-
+pushd "$BASE_DIR/sphinx/src"
+make clean
 # -W --keep-going: list all warnings but fail build in case there are any
-# -n: check validity of all links
-make html SPHINXOPTS="-W --keep-going -n"
-linkcheck_failed=0
-make linkcheck > /dev/null || linkcheck_failed=1
-python ../../.ci_scripts/display_linkcheck.py _build/linkcheck/output.json
-
-if [[ "${GHREF}" != "refs/heads/main" ]]; then
-  test "$linkcheck_failed" -eq 0
-fi
-
-# Move rendered Sphinx docs to a static directory for Docusaurus to use
-rm -rf ../../static-sphinx || true
-mkdir -p ../../static-sphinx
-mv _build/html ../../static-sphinx/docs
-rm -rf _build
+make markdown SPHINXOPTS="-W --keep-going"
 popd
+
+# Move rendered Sphinx markdown to Docusaurus
+python "$BASE_DIR/.ci_scripts/sphinx_markdown_to_docusaurus.py" "$BASE_DIR/sphinx/src/_build/markdown" docs/
 
 # Build docusaurus site
 npm install

@@ -18,3 +18,6 @@ dependencies:
   - python-rapidjson
   - termcolor
   - nodejs 20.*
+  - ruamel.yaml
+  - pip:
+    - https://github.com/jaimergp/sphinx-markdown-builder/archive/admonitions.tar.gz

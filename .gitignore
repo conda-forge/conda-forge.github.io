@@ -22,6 +22,7 @@ sphinx/newsfeed/demo/_build
 
 # Sphinx output gets moved to Docusaurus' static folder
 /static-sphinx
+/docs
 
 # Docusaurus dependencies
 /node_modules
