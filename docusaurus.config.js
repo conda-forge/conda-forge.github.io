@@ -59,7 +59,7 @@ const config = {
       ({
         docs: {
           breadcrumbs: true,
-          ...editUrl,
+          // ...editUrl,
         },
         blog: {
           showReadingTime: true,
