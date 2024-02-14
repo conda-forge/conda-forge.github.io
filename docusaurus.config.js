@@ -18,6 +18,7 @@ const config = {
   baseUrl: "/",
   onBrokenLinks: process.env.GITHUB_ACTIONS ? "throw" : "warn",
   onBrokenMarkdownLinks: process.env.GITHUB_ACTIONS ? "throw" : "warn",
+  onBrokenAnchors: process.env.GITHUB_ACTIONS ? "throw" : "warn",
   favicon: "img/favicon.ico",
   trailingSlash: true,
   staticDirectories: ['static', 'static-sphinx'],
@@ -405,9 +406,9 @@ const config = {
         indexName: 'conda-forge',
         contextualSearch: true,
         searchPagePath: 'search',
-        insights: true,
+        // insights: true,
         // Set debug to true if you want to inspect the modal
-        debug: false, 
+        debug: true, 
       },
     }),
 };
