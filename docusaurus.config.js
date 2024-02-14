@@ -11,6 +11,13 @@ if (process.env.NETLIFY) {
   copyright += ` · Deployed on <a href="https://www.netlify.com/" target="_blank">Netlify</a>`;
 }
 
+const goatcounter = {
+  // see stats at https://conda-forge.goatcounter.com/
+  src: "/js/count.js",
+  defer: true,
+  "data-goatcounter": "https://conda-forge.goatcounter.com/count",
+}
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "conda-forge | community-driven packaging for conda",
@@ -45,12 +52,8 @@ const config = {
   ],
 
   scripts: [
-    {
-      // see stats at https://conda-forge.goatcounter.com/
-      src: "/js/count.js",
-      defer: true,
-      "data-goatcounter": "https://conda-forge.goatcounter.com/count",
-    },
+    // Only deploy stats on production site, not locally or on Netlify
+    ...((process.env.GITHUB_ACTIONS) ? [goatcounter] : []),
   ],
 
   // Mermaid configuration
