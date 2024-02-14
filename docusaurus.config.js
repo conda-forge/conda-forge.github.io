@@ -402,6 +402,10 @@ const config = {
           hideable: true,
         },
       },
+      // see stats at https://conda-forge.goatcounter.com/
+      goatcounter: {
+        code: 'conda-forge',
+      },
     }),
 };
 
