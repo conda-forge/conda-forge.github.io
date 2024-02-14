@@ -7,10 +7,10 @@ conda-forge is a community-driven effort of cross-platform packaging and relies 
 
 We encourage you to contribute to conda-forge. You can do so in several ways:
 
- - `Contribute new packages <https://conda-forge.org/docs/maintainer/adding_pkgs.html>`_.
- - Help update and `maintain packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-pkgs>`_.
- - Suggest or implement improvements for our `infrastructure <https://conda-forge.org/docs/maintainer/infrastructure.html#infrastructure>`_.
- - Help `improve the documentation <https://conda-forge.org/docs/user/contributing.html#improve-docs>`_.
+- `Contribute new packages <https://conda-forge.org/docs/maintainer/adding_pkgs.html>`_.
+- Help update and `maintain packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-pkgs>`_.
+- Suggest or implement improvements for our `infrastructure <https://conda-forge.org/docs/maintainer/infrastructure.html#infrastructure>`_.
+- Help `improve the documentation <https://conda-forge.org/docs/user/contributing.html#improve-docs>`_.
 
 
 .. _improve_docs:
@@ -48,31 +48,31 @@ If you are new to the conda-forge community, follow the steps below to make your
 
 2. Clone this fork onto your local machine:
 
- - ``git clone https://github.com/<your-username>/conda-forge.github.io.git``
- - ``cd conda-forge.github.io``
+   - ``git clone https://github.com/<your-username>/conda-forge.github.io.git``
+   - ``cd conda-forge.github.io``
 
 3. Create a new branch deriving from ``main`` to do your work:
 
- - ``git checkout -b <new-branch-name>``
+   - ``git checkout -b <new-branch-name>``
 
 4. Run the following commands:
 
- - ``conda env create -f ./.ci_scripts/environment.yml``
- - ``conda activate conda-forge-docs``
- - ``cd sphinx/src``
+   - ``conda env create -f ./.ci_scripts/environment.yml``
+   - ``conda activate conda-forge-docs``
+   - ``cd sphinx/src``
 
 5. Make your changes and run the following command to check them:
 
- - ``make html``
+   - ``make html``
 
- You can check the changes locally by opening the html files in ``_build/html`` or running:
+   You can check the changes locally by opening the html files in ``_build/html`` or running:
  
- - ``python -m http.server --directory _build/html``
+   - ``python -m http.server --directory _build/html``
 
 6. Add and commit your changes:
 
- - ``git add .``
- - ``git commit -m "your commit message"``
+   - ``git add .``
+   - ``git commit -m "your commit message"``
 
 7. Submit a `pull request <https://help.github.com/articles/about-pull-requests/>`__ to the main repository proposing your changes.
 

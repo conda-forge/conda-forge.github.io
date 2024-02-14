@@ -19,9 +19,9 @@ Smithy contains maintenance code for conda-forge, which is used by the ``conda-s
 
 ``conda-forge/conda-smithy`` is the right repository to report bugs for
 
- - The rerendering process
- - The recipe linter
- - :term:`CI` support utils
+- The rerendering process
+- The recipe linter
+- :term:`CI` support utils
 
 ``conda-smithy`` also contains the command line tool that you should use if you rerender manually from the command line (see :ref:`dev_update_rerender`).
 
@@ -289,9 +289,10 @@ principles.
 * We generally provide notice in the form of an announcement when a compiler is going to be upgraded.
   Note that these changes take a bit of time to complete, so you will generally have time
   to prepare should you need to.
-* Some of the criteria we think about when considering a compiler migration include
-  1) the degree of disruption to the ecosystem, 2) the amount of work for the ``core`` team,
-  and 3) the amount of time it will cost our (volunteer) feedstock maintainers.
+* Some of the criteria we think about when considering a compiler migration include:
+  - the degree of disruption to the ecosystem,
+  - the amount of work for the ``core`` team,
+  - the amount of time it will cost our (volunteer) feedstock maintainers.
 
 We do use some unofficial names for our compiler stack internally. Note however that
 the existence of these names does not imply any level of support or stability for the compilers

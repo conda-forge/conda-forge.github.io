@@ -183,16 +183,16 @@ the core team by decreasing support requests.
 
 The documentation team is responsible for:
 
- - Keeping the documentation accurate and up-to-date.
- - Help expanding the documentation by identifying new topics of common interest.
- - Improving the documentation by reorganizing and clarifying its contents.
- - Giving feedback on community contributions to the documentation.
+- Keeping the documentation accurate and up-to-date.
+- Help expanding the documentation by identifying new topics of common interest.
+- Improving the documentation by reorganizing and clarifying its contents.
+- Giving feedback on community contributions to the documentation.
 
 As such following task are performed by the documentation team:
 
- - Reviewing and organizing documentation related issues and PRs in ``conda-forge.github.io``.
- - Proposing improvements and new content by opening issues and pull requests.
- - Engaging with the community to ensure the effectiveness of the documentation.
+- Reviewing and organizing documentation related issues and PRs in ``conda-forge.github.io``.
+- Proposing improvements and new content by opening issues and pull requests.
+- Engaging with the community to ensure the effectiveness of the documentation.
 
 
 Members
@@ -221,11 +221,11 @@ Especially for new maintainers it is crucial to be able to ask questions and rec
 
 The staging team is responsible for:
 
- - Reviewing and merging pull requests in ``conda-forge/staged-recipes``.
- - Answering questions and giving feedback regarding conda-forge requirements.
- - Identifying common misconceptions and problems due to unclear documentation.
- - Help the documentation team maintain clear documentation that simplifies contributing packages.
- - Assist core in supporting feedstock maintainers when questions/issues arise during recipe maintenance.
+- Reviewing and merging pull requests in ``conda-forge/staged-recipes``.
+- Answering questions and giving feedback regarding conda-forge requirements.
+- Identifying common misconceptions and problems due to unclear documentation.
+- Help the documentation team maintain clear documentation that simplifies contributing packages.
+- Assist core in supporting feedstock maintainers when questions/issues arise during recipe maintenance.
 
 Members
 -------
@@ -233,12 +233,12 @@ In addition to `core <https://github.com/conda-forge/conda-forge.github.io/blob/
 and `emeritus <https://github.com/conda-forge/conda-forge.github.io/blob/main/src/emeritus.csv>`_,
 the following are members of the staged-recipes team and have commit rights.
 
- - Amir Mohammadi <183.amir@gmail.com>
- - Igor T. Ghisi <>
- - Johannes Köster <>
- - Nehal J Wani <nehaljw.kkd1@gmail.com>
- - Peter M. Landwehr <>
- - Patrick Sodré <psodre@gmail.com>
+- Amir Mohammadi <183.amir@gmail.com>
+- Igor T. Ghisi <>
+- Johannes Köster <>
+- Nehal J Wani <nehaljw.kkd1@gmail.com>
+- Peter M. Landwehr <>
+- Patrick Sodré <psodre@gmail.com>
 
 
 Miniforge Sub-Team

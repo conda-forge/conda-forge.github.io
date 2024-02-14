@@ -1,6 +1,8 @@
 Miscellaneous
 #############
 
+.. _misc_glossary:
+
 Glossary
 ********
 

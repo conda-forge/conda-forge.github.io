@@ -279,11 +279,11 @@ Compilers are dependencies with a special syntax and are always added to ``requi
 
 There are currently five supported compilers:
 
- - C
- - cxx
- - Fortran
- - Go
- - Rust
+- C
+- cxx
+- Fortran
+- Go
+- Rust
 
 A package that needs all five compilers would define
 
@@ -916,8 +916,8 @@ named ``yum_requirements.txt`` in the ``recipe`` directory of a feedstock.
 
 There are only very few situations where dependencies installed by yum are acceptable. These cases include
 
-  - satisfying the requirements of :term:`CDT` packages during test phase
-  - installing packages that are only required for testing
+- satisfying the requirements of :term:`CDT` packages during test phase
+- installing packages that are only required for testing
 
 After changing ``yum_requirements.txt``, :ref:`rerender <dev_update_rerender>` to update the configuration.
 
@@ -1119,8 +1119,8 @@ For example, the package `pyquil <https://github.com/rigetti/pyquil>`__ only
 
 Currently available packages:
 
-  - exceptiongroup
-  - importlib-metadata
+- exceptiongroup
+- importlib-metadata
 
 
 Noarch builds
@@ -1141,19 +1141,19 @@ packages that only need to be built once.
 
 In order to qualify as a noarch python package, all of the following criteria must be fulfilled:
 
-  - No compiled extensions
-  - No post-link or pre-link or pre-unlink scripts
-  - No OS-specific build scripts
-  - No python version specific requirements
-  - No skips except for python version. If the recipe is py3 only, remove skip
-    statement and add version constraint on python in ``host`` and ``run``
-    section.
-  - ``2to3`` is not used
-  - ``scripts`` argument in ``setup.py`` is not used
-  - If ``console_scripts`` ``entry_points`` are defined in ``setup.py`` or ``setup.cfg``, they are also
-    `listed <https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points>`__
-    in the ``build`` section of ``meta.yaml``
-  - No activate scripts
+- No compiled extensions
+- No post-link or pre-link or pre-unlink scripts
+- No OS-specific build scripts
+- No python version specific requirements
+- No skips except for python version. If the recipe is py3 only, remove skip
+  statement and add version constraint on python in ``host`` and ``run``
+  section.
+- ``2to3`` is not used
+- ``scripts`` argument in ``setup.py`` is not used
+- If ``console_scripts`` ``entry_points`` are defined in ``setup.py`` or ``setup.cfg``, they are also
+  `listed <https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points>`__
+  in the ``build`` section of ``meta.yaml``
+- No activate scripts
 
 .. note::
 

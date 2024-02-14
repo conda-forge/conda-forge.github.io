@@ -23,45 +23,45 @@ In the past users only had the option to create an `Anaconda Cloud <https://anac
 
 This came with a list of disadvantages:
 
- - Locating packages was difficult due to them being scattered over many channels.
- - Combining packages across channels was not always possible due to binary incompatibilities.
- - Packages were only available for architectures the developer was interested in or had access to.
- - Channels were often abandoned, updating required locating new channels.
+- Locating packages was difficult due to them being scattered over many channels.
+- Combining packages across channels was not always possible due to binary incompatibilities.
+- Packages were only available for architectures the developer was interested in or had access to.
+- Channels were often abandoned, updating required locating new channels.
 
 conda-forge is a community effort that tackles these issues:
 
- - All packages are shared in a single channel named conda-forge.
- - Care is taken that all packages are up-to-date.
- - Common standards ensure that all packages have compatible versions.
- - By default, we build packages for macOS, Linux AMD64 and Windows AMD64.
- - Many packages are updated by multiple maintainers with an easy option to become a maintainer.
- - An active core developer team is trying to also maintain abandoned packages.
+- All packages are shared in a single channel named conda-forge.
+- Care is taken that all packages are up-to-date.
+- Common standards ensure that all packages have compatible versions.
+- By default, we build packages for macOS, Linux AMD64 and Windows AMD64.
+- Many packages are updated by multiple maintainers with an easy option to become a maintainer.
+- An active core developer team is trying to also maintain abandoned packages.
  
-You can refer to the glossary `here<https://conda-forge.org/docs/misc/00_intro.html#glossary>`.
+You can refer to the glossary :ref:`misc_glossary`.
 
 How can I install packages from conda-forge?
 --------------------------------------------
 
 Using conda-forge is easy!
 
- - Make sure you have ``conda >=4.9``.
+- Make sure you have ``conda >=4.9``.
 
- .. code-block:: bash
+  .. code-block:: bash
 
-  conda --version
-  conda update conda
+    conda --version
+    conda update conda
 
- - Add conda-forge as the highest priority channel.
+- Add conda-forge as the highest priority channel.
 
- .. code-block:: bash
+  .. code-block:: bash
 
-  conda config --add channels conda-forge
+    conda config --add channels conda-forge
 
- - Activate ``strict`` channel priority (``strict`` will be activated by default in conda 5.0).
+- Activate ``strict`` channel priority (``strict`` will be activated by default in conda 5.0).
 
- .. code-block:: bash
+  .. code-block:: bash
 
-  conda config --set channel_priority strict
+    conda config --set channel_priority strict
 
 From now on using ``conda install <package-name>`` will also find packages in our conda-forge channels.
 
