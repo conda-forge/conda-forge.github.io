@@ -42,6 +42,5 @@ jobs:
           user_name: conda-forge-admin
           user_email: pelson.pub+conda-forge@gmail.com
       
-      - uses: untitaker/hyperlink@0.1.32
-        with:
-          args: build/ --check-anchors
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@22134d37a1fff6c2974df9c92a7c7e1e86a08f9c # for v1.9.0
