@@ -2,7 +2,7 @@ User Documentation
 ##################
 
 - This is a `broken link <https://lgkjrlgk.com>`__.
-- This is a `broken anchor <https://github.com/#this-does-not-exist>`__.
+- This is a `broken anchor <https://conda-forge.org/#this-does-not-exist>`__.
 
 .. toctree::
 
