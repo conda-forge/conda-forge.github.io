@@ -47,11 +47,13 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: >
+            --verbose
             --no-progress
-            --base .
-            --exclude 'file://.*'
             --exclude 'https://polys.me/?$'
+            --exclude 'https://github.com/conda-forge/conda-forge.github.io/tree/main/docs/.*'
+            --exclude 'https://conda-forge.org/404.html/'
             --exclude-path './build/docs/orga/minutes/'
-            --remap "https://conda-forge.org/(.*) file://$(pwd)/\$1" 
-            './build/**/*.html'
+            --remap "https://conda-forge.org/status https://conda-forge.org/status"
+            --remap "https://conda-forge.org/(.*) file://$(pwd)/build/\$1" 
+            './build/**/*.html' 
             '*.md'
