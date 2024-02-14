@@ -56,13 +56,18 @@ def sphinx_md_to_docusaurus_md(basedir, mdpath, targetdir, ordering=None):
     target_path = Path(targetdir, relmd)
     target_path.parent.mkdir(parents=True, exist_ok=True)
     text = mdpath.read_text()
-    if text.lstrip().startswith("<a"):
-        text = "\n".join(text.split("\n")[1:])
     text = text.replace("00_intro.md", "index.md")
     text = text.replace("(/_static/", "(pathname:///_static/")
     text = re.sub(r"\]\((/\S+\.\S+)\)", r"](pathname://\1)", text)
-    if ordering is not None and not text.lstrip().startswith("---"):
-        text = f"---\nsidebar_position: {ordering}\n---\n\n{text}"
+    title = next(re.finditer(r"^# (.+)$", text, re.MULTILINE), None)
+    if not text.lstrip().startswith("---"):
+        frontmatter = []
+        if title:
+            frontmatter.append(f"title: '{title.group(1)}'")
+        if ordering is not None:
+            frontmatter.append(f"sidebar_position: {ordering}")
+        if frontmatter:
+            text = "---\n" + "\n".join(frontmatter) + "\n---\n\n" + text
     if mdpath.name == "00_intro.md":
         target_path = target_path.parent / "index.md"
     target_path.write_text(text)

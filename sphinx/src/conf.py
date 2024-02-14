@@ -37,6 +37,9 @@ extensions = [
     'sphinx_markdown_builder',
 ]
 
+# Add Sphinx calculated anchors to each header
+markdown_anchor_sections = True
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
