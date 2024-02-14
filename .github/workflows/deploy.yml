@@ -50,7 +50,6 @@ jobs:
           args: >
             --no-progress
             --exclude 'https://polys.me/?$'
-            --exclude 'https://github.com/conda-forge/conda-forge.github.io/tree/main/docs/.*'
             --exclude '.*/404.html/'
             --exclude '.*,.*'
             --exclude-path './build/docs/orga/minutes/'
