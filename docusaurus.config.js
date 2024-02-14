@@ -1,9 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
-
+const prism = require('prism-react-renderer');
 const editUrl = {
   editUrl: "https://github.com/conda-forge/conda-forge.github.io/tree/main/",
 };
@@ -384,8 +382,9 @@ const config = {
         copyright: copyright,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: prism.themes.github,
+        darkTheme: prism.themes.dracula,
+        additionalLanguages: ['bash', 'diff', 'json', 'batch', 'yaml', 'python', 'markdown', 'shell-session'],
       },
       docs: {
         sidebar: {
