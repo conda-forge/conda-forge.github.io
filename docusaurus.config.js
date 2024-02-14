@@ -218,16 +218,6 @@ const config = {
         ],
       },
     ],
-    [
-      require.resolve('docusaurus-lunr-search'),
-      {
-        highlightResult: true,
-        maxHits: 10,
-        excludeRoutes: [
-          '/docs/orga/minutes/**',
-        ]
-      }
-    ],
   ],
 
   themeConfig:
@@ -405,6 +395,19 @@ const config = {
       // see stats at https://conda-forge.goatcounter.com/
       goatcounter: {
         code: 'conda-forge',
+      },
+      // search bar engine
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'KB43FQOB7U',
+        // Public API key: it is safe to commit it
+        apiKey: '1a5d6d865203b90af8493b585bbb99dc',
+        indexName: 'conda-forge',
+        contextualSearch: true,
+        searchPagePath: 'search',
+        insights: true,
+        // Set debug to true if you want to inspect the modal
+        debug: false, 
       },
     }),
 };
