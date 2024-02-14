@@ -44,6 +44,15 @@ const config = {
     "/fonts/font-awesome/brands.css",
   ],
 
+  scripts: [
+    {
+      // see stats at https://conda-forge.goatcounter.com/
+      src: "/js/count.js",
+      defer: true,
+      "data-goatcounter": "https://conda-forge.goatcounter.com/count",
+    },
+  ],
+
   // Mermaid configuration
   markdown: {
     mermaid: true,
@@ -392,10 +401,6 @@ const config = {
           autoCollapseCategories: true,
           hideable: true,
         },
-      },
-      // see stats at https://conda-forge.goatcounter.com/
-      goatcounter: {
-        code: 'conda-forge',
       },
       // search bar engine
       algolia: {
