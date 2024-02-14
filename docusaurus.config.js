@@ -218,6 +218,16 @@ const config = {
         ],
       },
     ],
+    [
+      require.resolve('docusaurus-lunr-search'),
+      {
+        highlightResult: true,
+        maxHits: 10,
+        excludeRoutes: [
+          '/docs/orga/minutes/**',
+        ]
+      }
+    ],
   ],
 
   themeConfig:
