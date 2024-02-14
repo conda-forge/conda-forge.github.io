@@ -41,3 +41,7 @@ jobs:
           publish_dir: ./build
           user_name: conda-forge-admin
           user_email: pelson.pub+conda-forge@gmail.com
+      
+      - uses: untitaker/hyperlink@0.1.32
+        with:
+          args: build/ --check-anchors
