@@ -1,6 +1,7 @@
 """
 Given the Markdown output of a sphinx site, place it in the correct place for Docusaurus.
 """
+import re
 import sys
 from pathlib import Path
 
@@ -59,6 +60,7 @@ def sphinx_md_to_docusaurus_md(basedir, mdpath, targetdir, ordering=None):
         text = "\n".join(text.split("\n")[1:])
     text = text.replace("00_intro.md", "index.md")
     text = text.replace("(/_static/", "(pathname:///_static/")
+    text = re.sub(r"\]\((/\S+\.\S+)\)", r"](pathname://\1)", text)
     if ordering is not None and not text.lstrip().startswith("---"):
         text = f"---\nsidebar_position: {ordering}\n---\n\n{text}"
     if mdpath.name == "00_intro.md":
