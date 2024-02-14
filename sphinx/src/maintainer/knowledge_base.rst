@@ -46,7 +46,7 @@ Some optional, but useful CMake options:
       into lib64 or similar but on conda-forge we keep shared libraries in simply lib.
     - ``-DBUILD_SHARED_LIBS=ON`` Instruct CMake to build shared libraries instead of static ones.
     - ``-DCMAKE_FIND_FRAMEWORK=NEVER`` and ``-DCMAKE_FIND_APPBUNDLE=NEVER`` Prevent CMake from using system-wide macOS packages.
-    - ``${CMAKE_ARGS}`` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like `CUDA builds <https://conda-forge.org/docs/maintainer/knowledge_base.html#cuda-builds>`__.
+    - ``${CMAKE_ARGS}`` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like :ref:`CUDA builds <cuda>`.
 
 Here are some basic commands for you to get started. These are dependent on your source
 code layout and aren't intended to be used "as is".
@@ -1885,7 +1885,7 @@ There are several kinds of migrations, which you can read about in `Making Migra
 To propose a migration in one or more pins, the migrator issues a PR into the pinning feedstock using a yaml file expressing the changes to the global pinning file in the migrations folder.
 Once the PR is merged, the dependency graph is built. After that, the bot walks through the graph, migrates all the nodes (feedstocks) one by one, and issues PRs for those feedstocks.
 
-Usually, the bot generates these migrations automatically. However, when a pin is first made or added, one may need to be added by hand. To do this, you can follow the steps mentioned in `Updating package pins <https://conda-forge.org/docs/maintainer/pinning_deps.html#updating-package-pins>`__.
+Usually, the bot generates these migrations automatically. However, when a pin is first made or added, one may need to be added by hand. To do this, you can follow the steps mentioned in :ref:`Updating package pins <update_pins>`.
 
 The way migrations proceed are:
 
@@ -1929,13 +1929,13 @@ Security considerations for conda-forge builds
 All conda-forge packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use conda-forge packages if you or your team require a high level of security.
 You are also free to download recipes and rebuild them yourself, if you would like at least that much oversight. However, many people use conda-forge all the time with no issues and here are some things that conda-forge does to help with security in some ways:
 
-1. `Sources <https://conda-forge.org/docs/maintainer/adding_pkgs.html#source>`_ (where you specify where the package's source code is coming from) can be pulled from GitHub, PyPI, or other sources and sha256 hashes are always used, so moving of tags or uploading of new sdists can not cause automatic package rebuilds.
+1. :ref:`Sources <meta_yaml_source>` (where you specify where the package's source code is coming from) can be pulled from GitHub, PyPI, or other sources and sha256 hashes are always used, so moving of tags or uploading of new sdists can not cause automatic package rebuilds.
    Also, once packages are accepted and made into feedstocks, only the maintainers of that feedstock have the right to merge PRs made to that feedstock.
 2. Each feedstock can only upload packages for that feedstock. This is enforced by using a cf-staging channel where builds are first sent.
    A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the ``conda-forge`` channel.
    This helps mitigate against a bad actor gaining access to an inconspicuous feedstock and then trying to push a build with malicious code into essential infrastructure packages (e.g., OpenSSL or Python).
 3. We have `artifact-validation <https://github.com/conda-forge/artifact-validation>`__ for validating all the conda-forge artifacts uploaded to ``anaconda.org``. This validation scans for various security-related items, such as artifacts that overwrite key pieces of certain packages.
-4. We have a dedicated `Security and Systems Sub-Team <https://conda-forge.org/docs/orga/subteams.html?highlight=security+team#security-and-systems-sub-team>`__ who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by conda-forge.
+4. We have a dedicated :ref:`Security and Systems Sub-Team <security_subteam>` who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by conda-forge.
 
 If you have found a security-related issue with conda-forge, please check our `Security Policy <https://github.com/conda-forge/conda-forge.github.io/security/policy>`__
 to learn how to report it responsibly.

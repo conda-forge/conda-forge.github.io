@@ -7,10 +7,10 @@ conda-forge is a community-driven effort of cross-platform packaging and relies 
 
 We encourage you to contribute to conda-forge. You can do so in several ways:
 
-- `Contribute new packages <https://conda-forge.org/docs/maintainer/adding_pkgs.html>`_.
-- Help update and `maintain packages <https://conda-forge.org/docs/maintainer/updating_pkgs.html#maintaining-pkgs>`_.
-- Suggest or implement improvements for our `infrastructure <https://conda-forge.org/docs/maintainer/infrastructure.html#infrastructure>`_.
-- Help `improve the documentation <https://conda-forge.org/docs/user/contributing.html#improve-docs>`_.
+- :doc:`Contribute new packages </maintainer/adding_pkgs>`.
+- Help update and :doc:`maintain packages </maintainer/updating_pkgs>`.
+- Suggest or implement improvements for our :doc:`infrastructure </maintainer/infrastructure>`.
+- Help :ref:`improve the documentation <improve_docs>`.
 
 
 .. _improve_docs:

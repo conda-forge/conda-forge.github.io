@@ -254,6 +254,7 @@ A full reference of the structure and fields of ``meta.yaml`` file can be found 
 
 In the following, we highlight particularly important and conda-forge specific information and guidelines, ordered by section in ``meta.yaml``.
 
+.. _meta_yaml_source:
 
 Source
 ------

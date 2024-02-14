@@ -39,6 +39,8 @@ conda-forge is a community effort that tackles these issues:
  
 You can refer to the glossary :ref:`misc_glossary`.
 
+.. _how_to_install:
+
 How can I install packages from conda-forge?
 --------------------------------------------
 
@@ -95,7 +97,7 @@ Can I contribute packages to conda-forge?
 
 Anyone can contribute packages to the ``conda-forge`` channel.
 You don't have to be the upstream maintainer of a package in order to contribute it to conda-forge.
-To learn how to contribute your first package read `the staging process <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-staging-process>`_.
+To learn how to contribute your first package read :ref:`the staging process <creating_recipes>`.
 
 
 How can I give credit to conda-forge?

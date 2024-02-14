@@ -177,8 +177,7 @@ documentation on how to get set up with them.
 Last, but certainly not least, we need to generate the CI configuration
 scripts! This is based on the content of the recipe as well as the
 provider selections made in the ``conda-forge.yml`` file. (Please
-refer to `these docs <https://conda-forge.org/docs/maintainer/conda_forge_yml.html#provider>`_
-for a complete list of CI providers.)
+refer to :ref:`these docs <provider>` for a complete list of CI providers.)
 
 In order to generate the CI configuration files, run:
 

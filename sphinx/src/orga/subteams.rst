@@ -1,6 +1,7 @@
 A list of current sub-teams
 ***************************
 
+.. _security_subteam:
 
 Security and Systems Sub-Team
 =============================

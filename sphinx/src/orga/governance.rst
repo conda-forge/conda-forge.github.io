@@ -1,3 +1,5 @@
+.. _governance:
+
 Governance
 ==========
 This document outlines the policies and procedures that manage the conda-forge
@@ -13,6 +15,8 @@ Code of Conduct
 ---------------
 
 Please refer to the `Code of Conduct section in our README <https://github.com/conda-forge/conda-forge.github.io#code-of-conduct>`__ for more information.
+
+.. _teams_roles:
 
 Teams & Roles
 -------------

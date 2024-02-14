@@ -56,7 +56,7 @@ FAQ
 
 :ref:`(Q) <mfaq_mamba_local>` **How can I make local debugging faster?**
 
-  If you prefer to debug your recipes locally and not use the provided `scripts <https://conda-forge.org/docs/maintainer/updating_pkgs.html#testing-changes-locally>`__ but instead your own setup, you may also use the mamba solver through ``mambabuild``. It not only has a faster solve speed but also prints better error messages that make debugging simpler.
+  If you prefer to debug your recipes locally and not use the provided :ref:`scripts <testing_changes_locally>` but instead your own setup, you may also use the mamba solver through ``mambabuild``. It not only has a faster solve speed but also prints better error messages that make debugging simpler.
 
   To do this, first install the solver and then build the recipe like you normally would
 
@@ -111,7 +111,7 @@ FAQ
     ImportError: libGL.so.1: cannot open shared object file: No such file or directory
 
 
-  To fix the error, create a `yum_requirements.txt <https://conda-forge.org/docs/maintainer/knowledge_base.html#yum-deps>`__ file and add *mesa-libGL*.
+  To fix the error, create a :ref:`yum_requirements.txt <yum_deps>` file and add *mesa-libGL*.
 
 
 .. _mfaq_qt_load_xcb:
@@ -132,7 +132,7 @@ FAQ
 
 
   This comes from the CI environment being headless and can be fixed by adding the ``QT_QPA_PLATFORM=offscreen`` `environment variable <https://docs.conda.io/projects/conda-build/en/stable/user-guide/environment-variables.html#inherited-environment-variables>`__.
-  The variable can either be added directly to the test command or provided in the `meta.yaml <https://conda-forge.org/docs/maintainer/adding_pkgs.html#the-recipe-meta-yaml>`__ like so:
+  The variable can either be added directly to the test command or provided in the :ref:`meta.yaml <meta_yaml>` like so:
 
   .. code-block:: yaml
 
@@ -145,21 +145,21 @@ FAQ
 
 :ref:`(Q) <mfaq_contact_core>` **How can I contact conda-forge/core?**
 
-  When in an issue or PR, you can contact `conda-forge/core <https://conda-forge.org/docs/orga/governance.html#teams-roles>`__ by simply mentioning ``@conda-forge/core`` in a comment.
+  When in an issue or PR, you can contact :ref:`conda-forge/core <teams_roles>` by simply mentioning ``@conda-forge/core`` in a comment.
   If you don't receive an an answer after a couple of days, feel free to reach out to us via the public `Element <https://app.element.io/#/room/#conda-forge:matrix.org>`__ chatroom.
 
   .. note::
 
     Due to a GitHub limitation, this is disabled for new members.
-    In that case, you can ping core using the bot command `@conda-forge-admin, please ping conda-forge/core <https://conda-forge.org/docs/maintainer/infrastructure.html#conda-forge-admin-please-ping-conda-forge-team>`_.
+    In that case, you can ping core using the bot command :ref:`@conda-forge-admin, please ping conda-forge/core <cfa_please_ping_cf_team>`.
 
-  In case your issue is longer or you would like to contact us privately, feel free to reach out to us via the options listed `here <https://conda-forge.org/docs/orga/getting-in-touch.html>`_.
+  In case your issue is longer or you would like to contact us privately, feel free to reach out to us via the options listed at :doc:`/orga/getting-in-touch`.
 
 .. _mfaq_abandoned_feedstock:
 
 :ref:`(Q) <mfaq_abandoned_feedstock>` **A feedstock has been abandoned and I would like to take over maintenance.**
 
-  A  feedstock is generally considered abandoned when the maintainer isn't around anymore and doesn't merge new PRs or answer any issues. If that is the case, you can add yourself to the team by using the `@conda-forge-admin, please add user @username <https://conda-forge.org/docs/maintainer/infrastructure.html#conda-forge-admin-please-add-user-username>`__ command. If the maintainer doesn't merge it after roughly a week, :ref:`contact conda-forge/core<mfaq_contact_core>` to have it merged. Once added, you have full rights to the feedstock and can continue its maintenance.
+  A  feedstock is generally considered abandoned when the maintainer isn't around anymore and doesn't merge new PRs or answer any issues. If that is the case, you can add yourself to the team by using the :ref:`@conda-forge-admin, please add user @username <cfa_please_add_user>` command. If the maintainer doesn't merge it after roughly a week, :ref:`contact conda-forge/core <mfaq_contact_core>` to have it merged. Once added, you have full rights to the feedstock and can continue its maintenance.
 
   .. note::
 

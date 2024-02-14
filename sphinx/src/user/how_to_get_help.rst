@@ -21,7 +21,7 @@ Or you can open an issue about a specific package at the package feedstock via
 
 When opening issues, be sure to:
 
-* Try a new environment first following conda-forge `install instructions <https://conda-forge.org/docs/user/introduction.html#how-can-i-install-packages-from-conda-forge>`__.
+* Try a new environment first following conda-forge :ref:`install instructions <how_to_install>`.
 * Always open a new one when an issue is closed. In the packaging world symptoms may be similar but the causes are usually very different.
 * Fill in the required information. Without the output of `conda list` and `conda info -a` the team cannot debug the problem.
 

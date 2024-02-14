@@ -18,7 +18,7 @@ Conferences
 * **AnacondaCON 2020**: `The Automation of Conda-Forge <https://anacondacon.io/cj-wright-bio>`__ + :download:`slides </_static/theautomationofcondaforge_cj_wright_2020.pdf>`, by CJ Wright
 * **PyData Global 2021**: `conda-forge in 2021 <https://www.youtube.com/watch?v=N2XwK9BkJpA>`__, by Eric Dill
 * **PyCON DE & PyData Berlin 2022**: `conda-forge: supporting the growth of the volunteer-driven, community-based packaging project <https://www.youtube.com/watch?v=nTNoCM5alyE>`__, by Wolf Vollprecht, Jannis Leidel, Jaime Rodríguez-Guerra
-    * :download:`Updated slides for EuroScipy 2022 </_static/conda-forge_EuroSciPy2022.pdf>`
+  - :download:`Updated slides for EuroScipy 2022 </_static/conda-forge_EuroSciPy2022.pdf>`
 
 Other materials
 ---------------
