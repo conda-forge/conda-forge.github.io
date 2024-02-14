@@ -48,13 +48,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: >
             --no-progress
-            --base . 
+            --base .
             --exclude 'file://.*'
             --exclude 'https://polys.me/?$'
-            --exclude-path 'build/' 
-            --exclude-path 'node_modules/' 
-            --exclude-path 'docs/orga/minutes/'
-            --exclude-path 'sphinx/' 
-            './**/*.md'
-            './**/*.mdx'
-            './**/*.jsx'
+            --exclude-path './build/docs/orga/minutes/'
+            --remap "https://conda-forge.org/(.*) file://$(pwd)/\$1" 
+            './build/**/*.html'
+            '*.md'
