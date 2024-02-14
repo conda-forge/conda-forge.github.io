@@ -39,14 +39,14 @@ Older CMake projects may require similar, but slightly different options.
 
 Some optional, but useful CMake options:
 
-    - ``-DCMAKE_BUILD_TYPE=Release`` Configure as release build. This is better done on the initial
-      ``cmake`` call as some packages construct different build configurations depending on this flag.
-    - ``-DCMAKE_INSTALL_PREFIX=$PREFIX`` Specify the install location.
-    - ``-DCMAKE_INSTALL_LIBDIR=lib`` Libraries will land in $PREFIX/lib, sometimes projects install
-      into lib64 or similar but on conda-forge we keep shared libraries in simply lib.
-    - ``-DBUILD_SHARED_LIBS=ON`` Instruct CMake to build shared libraries instead of static ones.
-    - ``-DCMAKE_FIND_FRAMEWORK=NEVER`` and ``-DCMAKE_FIND_APPBUNDLE=NEVER`` Prevent CMake from using system-wide macOS packages.
-    - ``${CMAKE_ARGS}`` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like :ref:`CUDA builds <cuda>`.
+- ``-DCMAKE_BUILD_TYPE=Release`` Configure as release build. This is better done on the initial
+  ``cmake`` call as some packages construct different build configurations depending on this flag.
+- ``-DCMAKE_INSTALL_PREFIX=$PREFIX`` Specify the install location.
+- ``-DCMAKE_INSTALL_LIBDIR=lib`` Libraries will land in $PREFIX/lib, sometimes projects install
+  into lib64 or similar but on conda-forge we keep shared libraries in simply lib.
+- ``-DBUILD_SHARED_LIBS=ON`` Instruct CMake to build shared libraries instead of static ones.
+- ``-DCMAKE_FIND_FRAMEWORK=NEVER`` and ``-DCMAKE_FIND_APPBUNDLE=NEVER`` Prevent CMake from using system-wide macOS packages.
+- ``${CMAKE_ARGS}`` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like :ref:`CUDA builds <cuda>`.
 
 Here are some basic commands for you to get started. These are dependent on your source
 code layout and aren't intended to be used "as is".
@@ -683,7 +683,7 @@ only get the mpi build if explicitly requested. We use a higher build number for
 
 Here is an example build section:
 
-::
+.. code-block:: yaml
 
   {% if mpi == 'nompi' %}
   # prioritize nompi variant via build number
@@ -737,7 +737,7 @@ For example, if building against the nompi variant will work with any installed 
 given mpi provider requires running with that mpi:
 
 
-::
+.. code-block:: yaml
 
   build:
     ...
@@ -770,7 +770,7 @@ This matches what is done in `hdf5 <https://github.com/conda-forge/hdf5-feedstoc
     - mpich  # [not win]
     - openmpi  # [not win]
 
-::
+.. code-block:: yaml
 
   # meta.yaml
   {% set name = 'pkg' %}
@@ -866,7 +866,7 @@ You can enable OpenMP on macOS by adding the ``llvm-openmp`` package to the ``bu
 For Linux OpenMP support is on by default, however it's better to explicitly depend on the `libgomp` package which is the OpenMP
 implementation from the GNU project.
 
- .. code-block:: yaml
+.. code-block:: yaml
 
   # meta.yaml
   requirements:
@@ -883,15 +883,15 @@ using GNU's gfortran.
 On Linux (except aarch64), packages are linked against GNU's ``libgomp.so.1``, but the OpenMP library at install time can be
 switched from GNU to LLVM by doing the following.
 
- .. code-block:: shell
+.. code-block:: shell
 
-    conda install _openmp_mutex=*=*_llvm
+  conda install _openmp_mutex=*=*_llvm
 
 OpenMP library can be switched back to GNU's libgomp by doing the following.
 
- .. code-block:: shell
+.. code-block:: shell
 
-    conda install _openmp_mutex=*=*_gnu
+  conda install _openmp_mutex=*=*_gnu
 
 .. note::
 
@@ -1551,7 +1551,9 @@ In practice, to enable CUDA on your package, add ``{{ compiler('cuda') }}`` to t
 section of your requirements and rerender. The matching ``cudatoolkit`` will be added to the ``run``
 requirements automatically.
 
-On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CUDA correctly. For example::
+On Linux, CMake users are required to use ``${CMAKE_ARGS}`` so CMake can find CUDA correctly. For example:
+
+.. code-block:: shell
 
   mkdir build && cd build
   cmake ${CMAKE_ARGS} ${SRC_DIR}
@@ -1617,7 +1619,9 @@ As a result, you might get linking errors in the postprocessing steps of ``conda
 
   .. is this binary repackaging?
 
-For now, you will have to add ``nvcuda.dll`` to the ``missing_dso_whitelist``::
+For now, you will have to add ``nvcuda.dll`` to the ``missing_dso_whitelist``
+
+.. code-block:: yaml
 
   build:
     ...
