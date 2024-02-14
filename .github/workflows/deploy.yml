@@ -50,6 +50,7 @@ jobs:
           args: >
             --no-progress
             --exclude 'https://polys.me/?$'
+            --exclude 'https://.*.algolia.net/'
             --exclude '.*/404.html/'
             --exclude '.*,.*'
             --exclude-path './build/docs/orga/minutes/'
