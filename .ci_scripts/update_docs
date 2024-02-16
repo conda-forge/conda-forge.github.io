@@ -12,8 +12,6 @@ if [[ "$CI" == "1" ]]; then
   git checkout -b new_site_content
 fi
 
-python "$BASE_DIR/.ci_scripts/generate_cfep_index.py"
-
 pushd "$BASE_DIR/sphinx/src"
 make clean
 rm -rf "$BASE_DIR/static-sphinx"

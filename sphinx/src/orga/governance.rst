@@ -351,8 +351,11 @@ In alphabetical order,
 
 {{ core_members }}
 
-Emetirus members
------------------------
+.. keep old anchor around
+.. _emetirus_members:
+
+Emeritus members
+----------------
 In alphabetical order,
 
 {{ emeritus_members }}

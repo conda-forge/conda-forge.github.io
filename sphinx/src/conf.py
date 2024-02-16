@@ -349,21 +349,27 @@ def rstjinja(app, docname, source):
             f" <https://github.com/{m['github_username']}>`__" for m in sorted_csv
         )
 
-    if (
-            app.builder.format != "html"
-            or os.path.basename(docname) != "governance"
-    ):
+    if app.builder.format not in ("html", "markdown"):
         return
-    src = source[0]
+    src = rendered = source[0]
     current_file = os.path.dirname(__file__)
-    context = app.config.html_context
-    context["core_members"] = get_formated_names(
-        os.path.join(current_file, "..", "..", "..", "..", "src", "core.csv")
-    )
-    context["emeritus_members"] = get_formated_names(
-        os.path.join(current_file, "..", "..", "..", "..", "src", "emeritus.csv")
-    )
-    rendered = app.builder.templates.render_string(src, context)
+    repo_root = os.path.join(current_file, "..", "..")
+    filename = os.path.basename(docname)
+    if filename == "governance":
+        core_members = get_formated_names(os.path.join(repo_root, "src", "core.csv"))
+        emeritus_members = get_formated_names(os.path.join(repo_root, "src", "emeritus.csv"))
+        # this is just a simple replacement, no advanced jinja needed
+        rendered = src.replace("{{ core_members }}", core_members)
+        rendered = rendered.replace("{{ emeritus_members }}", emeritus_members)
+    elif filename == "cfep-index":
+        import importlib
+        # import cfep helper from path
+        mod_path = os.path.join(repo_root, ".ci_scripts", "generate_cfep_index.py")
+        spec = importlib.util.spec_from_file_location("generate_cfep_index", mod_path)
+        generate_cfep_index = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(generate_cfep_index)
+        rst_links = [f"- {cfep.rst_link()}" for cfep in generate_cfep_index.get_cfeps()]
+        rendered = src.replace("{{ cfep_list }}", "\n".join(rst_links))
     source[0] = rendered
 
 
