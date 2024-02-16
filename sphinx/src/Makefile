@@ -53,6 +53,12 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 
+.PHONY: markdown
+markdown:
+	$(SPHINXBUILD) -b markdown $(ALLSPHINXOPTS) $(BUILDDIR)/markdown
+	@echo
+	@echo "Build finished. The markdown pages are in $(BUILDDIR)/markdown."
+
 .PHONY: html
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html

@@ -254,6 +254,7 @@ A full reference of the structure and fields of ``meta.yaml`` file can be found 
 
 In the following, we highlight particularly important and conda-forge specific information and guidelines, ordered by section in ``meta.yaml``.
 
+.. _meta_yaml_source:
 
 Source
 ------
@@ -267,11 +268,11 @@ Packages should be built from tarballs using the ``url`` key, not from repositor
 
 There are several reasons behind this rule:
 
-  - Repositories are usually larger than tarballs, draining shared CI time and bandwidth
-  - Repositories are not checksummed.  Thus, using a tarball has a
-    stronger guarantee that the download that is obtained to build from is
-    in fact the intended package.
-  - On some systems, it is possible to not have permission to remove a repo once it is created.
+- Repositories are usually larger than tarballs, draining shared CI time and bandwidth
+- Repositories are not checksummed.  Thus, using a tarball has a
+  stronger guarantee that the download that is obtained to build from is
+  in fact the intended package.
+- On some systems, it is possible to not have permission to remove a repo once it is created.
 
 Populating the ``hash`` field
 .............................
@@ -312,14 +313,14 @@ Use the ``skip`` key in the ``build`` section along with a selector:
 
 You can e.g. specify not to build ...
 
- - on specific architectures:
+- on specific architectures:
 
   .. code-block:: yaml
 
       build:
           skip: true  # [win]
 
- - for specific python versions:
+- for specific python versions:
 
   .. code-block:: yaml
 
@@ -382,35 +383,38 @@ Conda-build distinguishes three different kinds of dependencies.
 In the following paragraphs, we give a very short overview what packages go where.
 For a detailed explanation please refer to the `conda-build documentation <https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#requirements-section>`__.
 
-**Build**
+Build
+^^^^^
 
-  Build dependencies are required in the build environment and contain all tools that are not needed on the host of the package.
+Build dependencies are required in the build environment and contain all tools that are not needed on the host of the package.
 
-  Following packages are examples of typical ``build`` dependencies:
+Following packages are examples of typical ``build`` dependencies:
 
-   - compilers (see :ref:`dep_compilers`)
-   - cmake
-   - make
-   - pkg-config
-   - CDT packages (see :ref:`cdt_packages`)
+- compilers (see :ref:`dep_compilers`)
+- cmake
+- make
+- pkg-config
+- CDT packages (see :ref:`cdt_packages`)
 
 
-**Host**
+Host
+^^^^
 
-  Host dependencies are required during build phase, but in contrast to build packages they have to be present on the host.
+Host dependencies are required during build phase, but in contrast to build packages they have to be present on the host.
 
-  Following packages are typical examples for ``host`` dependencies:
+Following packages are typical examples for ``host`` dependencies:
 
-   - shared libraries (c/c++)
-   - python/r libraries that link against c libraries (see e.g. :ref:`linking_numpy`)
-   - python, r-base
-   - setuptools, pip (see :ref:`use-pip`)
+- shared libraries (c/c++)
+- python/r libraries that link against c libraries (see e.g. :ref:`linking_numpy`)
+- python, r-base
+- setuptools, pip (see :ref:`use-pip`)
 
-**Run**
+Run
+^^^
 
-  Run dependencies are only required during run time of the package. Run dependencies typically include
+Run dependencies are only required during run time of the package. Run dependencies typically include
 
-   - most python/r libraries
+- most python/r libraries
 
 
 .. _no_external_deps:
@@ -524,9 +528,9 @@ Simple existence tests
 
 Sometimes defining tests seems to be hard, e.g. due to:
 
- - tests for the underlying code base may not exist.
- - test suites may take too long to run on limited :term:`CI` infrastructure.
- - tests may take too much bandwidth.
+- tests for the underlying code base may not exist.
+- test suites may take too long to run on limited :term:`CI` infrastructure.
+- tests may take too much bandwidth.
 
 In these cases, conda-forge may not be able to execute the prescribed test suite.
 
@@ -681,7 +685,9 @@ pytest tests
 ^^^^^^^^^^^^
 
 If the tests are installed with the package, pytest can find and run them
-for you with the following command::
+for you with the following command:
+
+.. code-block:: yaml
 
     test:
       requires:
@@ -694,7 +700,9 @@ Command Line Utilities
 ......................
 
 If a python package installs command line utilities, you probably want to test that
-they were properly installed::
+they were properly installed:
+
+.. code-block:: yaml
 
     test:
       commands:
@@ -802,38 +810,39 @@ This presents a problem when packaging the license files as each dependency need
 
 For some languages, the community provides tools which can automate this process, enabling the automatic inclusion of all needed license files.
 
-* **Rust**
+Rust
+^^^^
 
-  `cargo-bundle-licenses <https://github.com/sstadick/cargo-bundle-licenses>`__ can be included in the build process of a package and will automatically collect and add the license files of all dependencies of a package.
+`cargo-bundle-licenses <https://github.com/sstadick/cargo-bundle-licenses>`__ can be included in the build process of a package and will automatically collect and add the license files of all dependencies of a package.
 
-  For a detailed description, please visit the project page but a short example can be found below.
+For a detailed description, please visit the project page but a short example can be found below.
 
-  First, include the collection of licenses as a step of the build process.
+First, include the collection of licenses as a step of the build process.
 
-  .. code-block:: yaml
+.. code-block:: yaml
 
+  build:
+    number: 0
+    script:
+      - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
+      - build_command_goes_here
+
+Then, include the tool as a build time dependency.
+
+.. code-block:: yaml
+
+  requirements:
     build:
-      number: 0
-      script:
-        - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
-        - build_command_goes_here
+      - cargo-bundle-licenses
 
-  Then, include the tool as a build time dependency.
+Finally, make sure that the generated file is included in the recipe.
 
-  .. code-block:: yaml
+.. code-block:: yaml
 
-    requirements:
-      build:
-        - cargo-bundle-licenses
-
-  Finally, make sure that the generated file is included in the recipe.
-
-  .. code-block:: yaml
-
-    about:
-      license_file:
-        - THIRDPARTY.yml
-        - package_license.txt
+  about:
+    license_file:
+      - THIRDPARTY.yml
+      - package_license.txt
 
 .. important::
 
@@ -843,7 +852,7 @@ For some languages, the community provides tools which can automate this process
 
 .. note::
 
-   The correct and automated packaging of dependency licenses is an ongoing discussion. Please feel free to add your thoughs to `this <https://github.com/conda-forge/conda-forge.github.io/issues/1052>`__ discussion.
+   The correct and automated packaging of dependency licenses is an `ongoing discussion <https://github.com/conda-forge/conda-forge.github.io/issues/1052>`__. Please feel free to add your thoughts.
 
 Extra
 -----

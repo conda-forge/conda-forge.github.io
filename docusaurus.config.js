@@ -1,9 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
-
+const prism = require('prism-react-renderer');
 const editUrl = {
   editUrl: "https://github.com/conda-forge/conda-forge.github.io/tree/main/",
 };
@@ -13,13 +11,21 @@ if (process.env.NETLIFY) {
   copyright += ` · Deployed on <a href="https://www.netlify.com/" target="_blank">Netlify</a>`;
 }
 
+const goatcounter = {
+  // see stats at https://conda-forge.goatcounter.com/
+  src: "/js/count.js",
+  defer: true,
+  "data-goatcounter": "https://conda-forge.goatcounter.com/count",
+}
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "conda-forge | community-driven packaging for conda",
   url: "https://conda-forge.org/",
   baseUrl: "/",
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "throw",
+  onBrokenLinks: process.env.GITHUB_ACTIONS ? "throw" : "warn",
+  onBrokenMarkdownLinks: process.env.GITHUB_ACTIONS ? "throw" : "warn",
+  onBrokenAnchors: process.env.GITHUB_ACTIONS ? "throw" : "warn",
   favicon: "img/favicon.ico",
   trailingSlash: true,
   staticDirectories: ['static', 'static-sphinx'],
@@ -45,9 +51,15 @@ const config = {
     "/fonts/font-awesome/brands.css",
   ],
 
+  scripts: [
+    // Only deploy stats on production site, not locally or on Netlify
+    ...((process.env.GITHUB_ACTIONS) ? [goatcounter] : []),
+  ],
+
   // Mermaid configuration
   markdown: {
     mermaid: true,
+    format: "detect",
   },
   themes: ["@docusaurus/theme-mermaid"],
 
@@ -56,11 +68,10 @@ const config = {
       "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
-        docs: false,
-        // docs: {
-        //   breadcrumbs: true,
-        //   ...editUrl,
-        // },
+        docs: {
+          breadcrumbs: true,
+          // ...editUrl,
+        },
         blog: {
           showReadingTime: true,
           blogSidebarCount: 10,
@@ -99,6 +110,7 @@ const config = {
     [
       "@docusaurus/plugin-client-redirects",
       {
+        fromExtensions: ["html", "htm"],
         createRedirects(existingPath) {
           var redirects = [];
           if (existingPath.startsWith('/blog/tags/')) {
@@ -110,6 +122,20 @@ const config = {
             redirects.push("/blog/2021/");
             redirects.push("/blog/2020/");
             redirects.push("/blog/2019/");
+          }
+          if (
+            [
+              "/docs/",
+              "/docs/user/",
+              "/docs/orga/",
+              "/docs/orga/minutes/",
+              "/docs/orga/funding/",
+              "/docs/misc/",
+              "/docs/maintainer/",
+              "/docs/contracting/",
+            ].includes(existingPath)
+          ) {
+            redirects.push(`${existingPath}00_intro.html`);
           }
           return redirects;
         },
@@ -167,7 +193,8 @@ const config = {
             to: "/blog/2020/12/26/year-in-review/",
           },
           {
-            from: ["/blog/posts/2021-02-02-outreachy/", "/blog/2021/02/02/Outreachy/"],
+            // case sensitive only on Linux!
+            from: ["/blog/posts/2021-02-02-outreachy/", ...((process.platform === "linux") ? ["/blog/posts/2021-02-02-Outreachy/"] : [])],
             to: "/blog/2021/02/02/outreachy/",
           },
           {
@@ -217,7 +244,7 @@ const config = {
         items: [
           {
             // https://docusaurus.io/docs/advanced/routing#escaping-from-spa-redirects
-            to: "pathname:///docs/",
+            to: "/docs/",
             label: "Docs",
             position: "left",
           },
@@ -277,19 +304,19 @@ const config = {
             items: [
               {
                 label: "Getting started",
-                to: "pathname:///docs/",
+                to: "/docs/",
               },
               {
                 label: "User docs",
-                to: "pathname:///docs/user/00_intro.html",
+                to: "/docs/user/",
               },
               {
                 label: "Maintainer docs",
-                to: "pathname:///docs/maintainer/00_intro.html",
+                to: "/docs/maintainer/",
               },
               {
                 label: "Organisation docs",
-                to: "pathname:///docs/orga/00_intro.html",
+                to: "/docs/orga/",
               },
             ],
           },
@@ -298,19 +325,19 @@ const config = {
             items: [
               {
                 label: "About conda-forge",
-                to: "pathname:///docs",
+                to: "/docs",
               },
               {
                 label: "Governance",
-                to: "pathname:///docs/orga/governance.html",
+                to: "/docs/orga/governance/",
               },
               {
                 label: "Meeting minutes",
-                to: "pathname:///docs/orga/minutes/00_intro.html",
+                to: "/docs/orga/minutes/",
               },
               {
                 label: "Get in touch",
-                to: "pathname:///docs/orga/getting-in-touch.html",
+                to: "/docs/orga/getting-in-touch/",
               },
             ],
           },
@@ -368,14 +395,28 @@ const config = {
         copyright: copyright,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: prism.themes.github,
+        darkTheme: prism.themes.dracula,
+        additionalLanguages: ['bash', 'diff', 'json', 'batch', 'yaml', 'python', 'markdown', 'shell-session'],
       },
       docs: {
         sidebar: {
           autoCollapseCategories: true,
           hideable: true,
         },
+      },
+      // search bar engine
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'KB43FQOB7U',
+        // Public API key: it is safe to commit it
+        apiKey: '1a5d6d865203b90af8493b585bbb99dc',
+        indexName: 'conda-forge',
+        contextualSearch: true,
+        searchPagePath: 'search',
+        // insights: true,
+        // Set debug to true if you want to inspect the modal
+        debug: true, 
       },
     }),
 };

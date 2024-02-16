@@ -1,7 +1,6 @@
 User Documentation
 ##################
 
-
 .. toctree::
 
   introduction

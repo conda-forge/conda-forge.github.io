@@ -176,6 +176,8 @@ Updating for newly released Python version
 When a new Python version is released (e.g. ``3.11``), an automatic migration process is triggered that will have ``@regro-cf-autotick-bot`` eventually automatically open pull requests to all feedstocks, updating their CI setup to include the new Python version in the build matrix. After veryfing that the PR build passes, that automatic PR can simply be merged to roll out packages for new Python version.
 This process takes time, though, and pull requests will not be opened to all feedstocks at the same time to not overload CI. The current status of the migration can be tracked on the `migration status page <https://conda-forge.org/status/#big_migrations>`_ and there maintainers can verify that their feedstock is listed under the ``AWAITING-PR`` dropdown list.
 
+.. _testing_changes_locally:
+
 Testing changes locally
 =======================
 
@@ -223,7 +225,7 @@ If the new built package depends on another one to be working, i.e. ``other-pack
 
 Downloading prebuilt packages from CI
 =====================================
-A neat feature that feedstocks have is the ability to `upload packages to the CI provider for testing <https://conda-forge.org/docs/maintainer/conda_forge_yml.html?highlight=store_build_artifacts#azure>`_.
+A neat feature that feedstocks have is the ability to :ref:`upload packages to the CI provider for testing <azure-config>`.
 This is useful when trying out packages built in a PR. But you first need to download these prebuilt packages.
 
 To download prebuilt packages follow the steps below:

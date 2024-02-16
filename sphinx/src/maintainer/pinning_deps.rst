@@ -66,6 +66,7 @@ If a package is not pinned in `conda-forge-pinning <https://github.com/conda-for
 
 There is additional documentation on this pinning scheme in `the conda docs <https://docs.conda.io/projects/conda-build/en/stable/resources/variants.html#build-variants>`_.
 
+.. _run_exports:
 
 Specifying run_exports
 ======================
