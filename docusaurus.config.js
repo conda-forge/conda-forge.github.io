@@ -408,8 +408,10 @@ const config = {
       // search bar engine
       algolia: {
         appId: 'KB43FQOB7U',
-        apiKey: 'f2f09470d2f5109f066eda7682483206',
-        indexName: 'condaforge'
+        apiKey: '344261a16fe108b599568222ae1b2e64',
+        indexName: 'conda-forge',
+        insights: false,
+        contextualSearch: true,
       },
     }),
 };
