@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcf_infra_docs=self.webpackChunkcf_infra_docs||[]).push([[5390],{30780:s=>{s.exports=JSON.parse('{"label":"scipy","permalink":"/blog/tags/scipy","allTagsPath":"/blog/tags","count":2,"unlisted":false}')}}]);

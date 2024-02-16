@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcf_infra_docs=self.webpackChunkcf_infra_docs||[]).push([[492],{45684:a=>{a.exports=JSON.parse('{"label":"autotick-bot","permalink":"/blog/tags/autotick-bot","allTagsPath":"/blog/tags","count":2,"unlisted":false}')}}]);

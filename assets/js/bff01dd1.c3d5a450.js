@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcf_infra_docs=self.webpackChunkcf_infra_docs||[]).push([[5538],{78055:a=>{a.exports=JSON.parse('{"label":"conda-forge","permalink":"/blog/tags/conda-forge","allTagsPath":"/blog/tags","count":6,"unlisted":false}')}}]);
