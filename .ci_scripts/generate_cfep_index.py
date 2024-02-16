@@ -1,9 +1,13 @@
 import re
 import requests
 import sys
+import tarfile
 from dataclasses import dataclass
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
+REPO_URL = "https://github.com/conda-forge/cfep"
+REPO_ARCHIVE = "https://github.com/conda-forge/cfep/archive/main.tar.gz"
 REPO_CONTENTS = "https://api.github.com/repos/conda-forge/cfep/contents/"
 TITLE_PATTERN = "<td>\s*Title\s*</td><td>\s*(.*)\s*</td>"
 STATUS_PATTERN = "<td>\s*Status\s*</td><td>\s*(.*)\s*</td>"
@@ -32,7 +36,7 @@ class Cfep:
         )
 
 
-def get_cfeps():
+def get_cfeps_from_gh_api():
     """Generator that returns all CFEPs from GitHub repo"""
     response = requests.get(
         REPO_CONTENTS, headers={"Accept": "application/vnd.github.v3+json"}
@@ -55,6 +59,37 @@ def get_cfeps():
         m = re.search(STATUS_PATTERN, cfep_text)
         status = m.group(1).strip() if m else ""
         yield Cfep(content["name"], title, status, content["html_url"])
+
+
+def get_cfeps():
+    """Return a generator of CFEPs, by traversing the contents of the repo archive"""
+    r = requests.get(REPO_ARCHIVE, stream=True)
+    r.raise_for_status()
+    with TemporaryDirectory() as tmp:
+        # Write the tarball to a temporary directory
+        tarball = Path(tmp) / "cfep.tar.gz"
+        with tarball.open("wb") as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                f.write(chunk)
+        # Extract the tarball
+        extracted_dir = Path(tmp) / "cfep"
+        extracted_dir.mkdir()
+        with tarfile.open(tarball) as tar:
+            tar.extractall(extracted_dir)
+        # Traverse the extracted directory and return all CFEPs
+        for cfep in sorted(extracted_dir.rglob("cfep-*.md")):
+            name = cfep.name
+            url = f"{REPO_URL}/blob/main/{name}"
+            if name == "cfep-00.md":
+                # Hardcode title and status for CFEP-00
+                yield Cfep(name, "CFEP Template", "Proposed", url)
+                continue
+            cfep_text = cfep.read_text()
+            m = re.search(TITLE_PATTERN, cfep_text)
+            title = m.group(1).strip() if m else ""
+            m = re.search(STATUS_PATTERN, cfep_text)
+            status = m.group(1).strip() if m else ""
+            yield Cfep(name, title, status, url)
 
 
 def write_cfep_index():
