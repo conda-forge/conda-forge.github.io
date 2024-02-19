@@ -22,7 +22,7 @@ popd
 # Move rendered Sphinx markdown to Docusaurus
 python "$BASE_DIR/.ci_scripts/sphinx_markdown_to_docusaurus.py" "$BASE_DIR/sphinx/src/_build/markdown" docs/
 mkdir -p "$BASE_DIR/static-sphinx/_static"
-cp -r "$BASE_DIR/sphinx/src/_static/" "$BASE_DIR/static-sphinx/_static/"
+cp -r "$BASE_DIR/sphinx/src/_static/" "$BASE_DIR/static-sphinx/_static"
 # Build docusaurus site
 npm install
 npm run build
@@ -30,3 +30,6 @@ npm run build
 # Serve the announcements RSS feed in this old location too
 # we can't redirect with the Docusaurus plugin, so just copy it
 cp build/news/rss.xml build/docs/news.rss
+
+echo "Built website! Preview at http://localhost:8000 with:"
+echo "  python -m http.server -d build/"
