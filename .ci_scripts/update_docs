@@ -22,7 +22,7 @@ popd
 # Move rendered Sphinx markdown to Docusaurus
 python "$BASE_DIR/.ci_scripts/sphinx_markdown_to_docusaurus.py" "$BASE_DIR/sphinx/src/_build/markdown" docs/
 mkdir -p "$BASE_DIR/static-sphinx/_static"
-cp -r "$BASE_DIR/sphinx/src/_static" "$BASE_DIR/static-sphinx/"
+cp -r "$BASE_DIR/sphinx/src/_static/" "$BASE_DIR/static-sphinx/_static"
 # Build docusaurus site
 npm install
 npm run build
