@@ -49,6 +49,7 @@ jobs:
           lycheeVersion: '0.14.3'
           args: >
             --no-progress
+            --base "$(pwd)/build"
             --exclude 'https://polys.me/?$'
             --exclude 'https://kb43fqob7u-dsn.algolia.net/'
             --exclude '.*/404.html/'
