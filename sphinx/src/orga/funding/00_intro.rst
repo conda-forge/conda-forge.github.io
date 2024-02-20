@@ -1,4 +1,4 @@
-.. _funding:
+:orphan:
 
 Funding efforts for conda-forge
 ===============================

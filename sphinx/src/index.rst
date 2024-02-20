@@ -21,7 +21,7 @@ Chances are we have already packaged it for you. You can `search <https://anacon
   - Help :ref:`improve the documentation <improve_docs>`
   - For a detailed overview please refer to :doc:`/user/contributing`
 
-- To see our governance policies, see :doc:`/orga/governance`.
+- To see our governance policies, see `/community/governance`.
 
 - If you find bugs, need help, or want to talk to the developers, use our mailing lists or chat rooms:
 
@@ -40,6 +40,4 @@ Table of Contents
 
    user/00_intro
    maintainer/00_intro
-   orga/00_intro
    misc/00_intro
-   contracting/00_intro
