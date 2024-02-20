@@ -84,16 +84,16 @@ const config = {
     ],
   ],
   plugins: [
-    //   [
-    //     "content-docs",
-    //     /** @type {import('@docusaurus/plugin-content-docs').Options} */
-    //     ({
-    //       id: "community",
-    //       path: "community",
-    //       routeBasePath: "/community",
-    //       breadcrumbs: false,
-    //     }),
-    //   ],
+    [
+      "content-docs",
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: "community",
+        path: "community",
+        routeBasePath: "/community",
+        breadcrumbs: false,
+      }),
+    ],
     [
       "content-blog",
       /** @type {import('@docusaurus/plugin-content-blog').Options} */
@@ -249,6 +249,11 @@ const config = {
             position: "left",
           },
           {
+            to: "/community/",
+            label: "Community",
+            position: "left",
+          },
+          {
             to: "/news/",
             label: "News",
             position: "left",
@@ -268,13 +273,6 @@ const config = {
             label: "Packages",
             position: "left",
           },
-          // {
-          //   type: "doc",
-          //   docsPluginId: "community",
-          //   docId: "index",
-          //   position: "left",
-          //   label: "Community",
-          // },
           {
             href: "https://opencollective.com/conda-forge",
             label: "Donate",

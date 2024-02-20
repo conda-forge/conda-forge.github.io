@@ -1,8 +1,12 @@
-# Organisation Documentation
+---
+sidebar_position: 1
+---
 
-<div class="toctree">
+# About conda-forge
 
-guidelines governance subteams joining-the-team minutes/00_intro cfep-index getting-in-touch
-funding/00_intro
-
-</div>
+- [Governance](./governance)
+- [Join the team](./join)
+- [Current sub-teams](./subteams)
+- [Index of CFEPs](./cfep)
+- [Get in touch](./get-in-touch)
+- [Contracting information](./contracting)
