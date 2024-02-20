@@ -127,7 +127,8 @@ This vote will end on {date}.
 
 ------------------------------------------------------------------------
 
-Posting results  
+### Posting results
+
 To maintain the historical record, the outcome of any standard vote
 which invokes the "time out" rules below should be recorded in the
 "vote-results" folder at
@@ -144,7 +145,8 @@ and the date that the vote opened. The file should contain at least:
 
 ------------------------------------------------------------------------
 
-Quorum  
+### Quorum
+
 Quorum for votes can be met in one of three ways depending on the vote:
 the standard quorum rules, the accelerated quorum rules, and the "time
 out" quorum rules. The specific quorum rules applicable for each vote
@@ -210,7 +212,8 @@ based on their own personal records.
 
 ------------------------------------------------------------------------
 
-CFEP Approval  
+### CFEP Approval
+
 When ready, the proposer may call for a vote on an existing conda-forge
 enhancement proposal (CFEP). This requires a super-majority (60%) to
 pass so that the decision to accept the CFEP is unequivocable and we
@@ -222,7 +225,8 @@ have ensured that consensus has been reached.
 
 ------------------------------------------------------------------------
 
-Nominate new member of staged-recipes  
+### Nominate new member of staged-recipes
+
 The proposer must provide a brief justification as to why the new member
 is desirable or needed.
 
@@ -232,7 +236,8 @@ is desirable or needed.
 
 ------------------------------------------------------------------------
 
-Nominate new member of core  
+### Nominate new member of core
+
 The proposer must provide a sufficient justification as to why the
 nominee should be welcomed into core. Prior service to the community,
 including but not limited to: serving as a staged-recipes reviewer,
@@ -245,7 +250,8 @@ disparate communities are an important part of the nomination process.
 
 ------------------------------------------------------------------------
 
-Sub-team Formation  
+### Sub-team Formation
+
 Proposers must specify the name, role & responsibility, members, and
 charter (dynamic or static) of any new sub-teams.
 
@@ -255,7 +261,8 @@ charter (dynamic or static) of any new sub-teams.
 
 ------------------------------------------------------------------------
 
-Sub-team Dissolution  
+### Sub-team Dissolution
+
 Proposers must specify the name and justification for why a sub-team
 should be dissolved.
 
@@ -265,7 +272,8 @@ should be dissolved.
 
 ------------------------------------------------------------------------
 
-Lock an Issue, Pull Request, Thread  
+### Lock an Issue, Pull Request, Thread
+
 Occasionally, discussions become toxic and antithetical to the goal of
 fostering the conda-forge community. Members of core have the right to
 lock the thread in an "ask for forgiveness and not for permission" way
@@ -278,7 +286,8 @@ participants can contest it.
 
 ------------------------------------------------------------------------
 
-Block a Contributor  
+### Block a Contributor
+
 In extreme cases, such as repeated harassment, it may become necessary
 to block a user completely from participating in all conda-forge
 activities. This should not be done lightly, but it may be necessary to
@@ -292,7 +301,8 @@ to why this is needed.
 
 ------------------------------------------------------------------------
 
-Remove member of staged-recipes  
+### Remove member of staged-recipes
+
 The proposer must provide a justification as to why the member of staged
 recipes should be removed.
 
@@ -302,7 +312,8 @@ recipes should be removed.
 
 ------------------------------------------------------------------------
 
-Remove member of core  
+### Remove member of core
+
 The proposer must provide an overwhelming justification as to why the
 member core should be removed.
 
@@ -312,7 +323,8 @@ member core should be removed.
 
 ------------------------------------------------------------------------
 
-Overall workflow and packaging policies  
+### Overall workflow and packaging policies
+
 The proposer can choose to create a poll with an external tool or call
 for voting on the GH issue in question. The voting period must be open
 for at least one core member meeting cycle to allow for clarification
@@ -324,7 +336,8 @@ questions and discussions. Friendly reminders to vote are encouraged.
 
 ------------------------------------------------------------------------
 
-Spending of funds  
+### Spending of funds
+
 Proposers must specify the purpose, time limit, and source of funds that
 are to be spent. Purpose and time limit should be general enough in
 order to prevent excessive voting. For example, recurrent items (such
@@ -342,7 +355,8 @@ rest of core before doing so.
 
 ------------------------------------------------------------------------
 
-Modifying the governance document  
+### Modifying the governance document
+
 The voting should happen in the PR in question and there must be a call
 to <span class="title-ref">@conda-forge/core</span>. The voting period
 must be open for at least one core member meeting cycle to allow for
@@ -354,7 +368,9 @@ clarification questions and discussions.
 
 ------------------------------------------------------------------------
 
-All other voting items are considered to be standard, require a 50%
+### Other voting items
+
+All other voting are considered to be standard, require a 50%
 majority to pass, and use only the standard or time-out quorum rules.
 
 ## Current Members of Core

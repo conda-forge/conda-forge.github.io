@@ -13,7 +13,7 @@ the **Core Team**, the **staged-recipes Maintainers**, and the
 this ecosystem, our biggest need is help in reviewing new conda packages
 coming in through staged-recipes.
 
-## The Core Team
+## The Core Team {#core}
 
 The core team is the governing body over the entire conda-forge
 organization. Members of the core team have full rights over all
@@ -33,7 +33,7 @@ staged-recipes reviewer, working on critical conda-forge infrastructure,
 and helping to bridge disparate communities are an important part of the
 nomination process.
 
-## The staged-recipes Maintainers
+## The staged-recipes Maintainers {#staged-recipes}
 
 You are the welcoming committee for new recipes coming in to the
 conda-forge community! Please give new (and experienced) contributors a
@@ -64,7 +64,7 @@ vote yes/no and give the team seven days to vote. The person will then
 be given merge rights to conda-forge/staged-recipes so that they can
 help us review and merge submissions more quickly!
 
-## The Feedstock Maintainers
+## The Feedstock Maintainers {#feedstock}
 
 Feedstock maintainers are responsible for
 

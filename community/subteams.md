@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Current sub-teams
 
-## Security and Systems Sub-Team
+## Security and Systems Sub-Team {#security-and-systems}
 
 ### Role
 
@@ -32,7 +32,7 @@ The core responsibilities of this team are as follows:
 - Maintain automated ways to recover and reprovision conda-forge
   systems.
 - Perform ongoing security maintenance tasks.
-- Provision new members of <span class="title-ref">core</span> with
+- Provision new members of `core` with
   access to all conda-forge systems, credentials and keys.
 
 This team will operate via the following rules:
@@ -51,7 +51,7 @@ This team will operate via the following rules:
 - Christopher J. "CJ" Wright \<<cjwright4242@gmail.com>\>
 - Anthony Scopatz \<<scopatz@gmail.com>\>
 
-## Finance Sub-Team
+## Finance Sub-Team {#finance}
 
 ### Role
 
@@ -90,7 +90,7 @@ This team will operate via the following rules:
 - Filipe Fernandes \<<ocefpaf@gmail.com>\>
 - Eric Dill \<<ericdill@pm.me>\>
 
-## Bot Sub-Team
+## Bot Sub-Team {#bot}
 
 ### Role
 
@@ -118,7 +118,7 @@ migrations that can happen include:
 - Automatically version bumping of feedstocks when the package releases
   a new version.
 
-For large scale (affecting \>20% of packages) this sub-team will inform
+For large scale (affecting >20% of packages) this sub-team will inform
 and discuss with the core team about the upcoming migration prior to
 starting the migration.
 
@@ -144,7 +144,7 @@ include:
 - Anthony Scopatz \<<scopatz@gmail.com>\>
 - Christopher J. "CJ" Wright \<<cjwright4242@gmail.com>\>
 
-## ARM Sub-Team
+## ARM Sub-Team {#arm}
 
 ### Role
 
@@ -172,7 +172,7 @@ And other parts of the conda-forge ecosystem.
 - Marius van Niekerk \<<marius.v.niekerk@gmail.com>\>
 - Mark Harfouche \<<mark.harfouche@gmail.com>\>
 
-## Doc Sub-Team
+## Doc Sub-Team {#doc}
 
 ### Role
 
@@ -215,7 +215,7 @@ As such following task are performed by the documentation team:
 - Lori A. Burns \<<lori.burns@gmail.com>\>
 - Jaime Rodríguez-guerra \<<jrodriguez@quansight.com>\>
 
-## Staging Sub-Team
+## Staging Sub-Team {#staging}
 
 ### Role
 
@@ -261,7 +261,7 @@ rights.
 > - Peter M. Landwehr \<\>
 > - Patrick Sodré \<<psodre@gmail.com>\>
 
-## Miniforge Sub-Team
+## Miniforge Sub-Team {#miniforge}
 
 ### Role
 
@@ -283,7 +283,7 @@ releasing miniforge installers.
 - Hadrien Mary \<<hadrien.mary@gmail.com>\>
 - Isuru Fernando \<<isuruf@gmail.com>\>
 
-## Diversity and Inclusion Sub-Team
+## Diversity and Inclusion Sub-Team {#diversity-and-inclusion}
 
 ### Role
 

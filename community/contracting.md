@@ -23,19 +23,6 @@ and payee to hammer out on their own.
 
 ## Known Service Providers
 
-### Lab49
-
-Services Offered: Architecture and Technical Design Advisory, Cloud
-Strategy and Migrations, Outsourced Software Development, SDLC Advisory
-
-Contact Information: <sales@lab49.com>
-
-Background / Description: Lab49 is a full service strategy, design and
-technology consultancy with a global reach focused on financial
-services. We specialize in product development across the full stack,
-from data and analytics, through services, through next generation user
-interfaces.
-
 ### Quansight
 
 Services offered: Core Library Development, Data Engineering, Algorithms
@@ -59,8 +46,8 @@ leveraging legacy investments.
 
 The conda-forge core team reserves the right to unilaterally update this
 list at any time for any reason. If you are a service provider and are
-interested in being added to this list please open up a pull request
-against the conda-forge.github.io repository. Add yourself to this list
+interested in being added to this list please edit this file and open up a pull request
+against the [conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io) repository. Add yourself to this list
 and detailing the services you provide. Please be brief and link to
 existing materials on your own website where possible. Then, when ready,
 ping @conda-forge/core for review and merging.

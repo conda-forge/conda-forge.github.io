@@ -37,8 +37,7 @@ The primary discussion areas that you will engage with is
 
 The main chat rooms that you'll interact with are
 
-- [gitter:
-  general](https://gitter.im/conda-forge/conda-forge.github.io): Our
+- [gitter: general](https://gitter.im/conda-forge/conda-forge.github.io): Our
   general chat room for all things conda-forge. Pretty much any question
   can be asked here and others in the community may be able to help.
   Move stuff to an issue tracker if your question isn't getting
@@ -49,23 +48,18 @@ The main chat rooms that you'll interact with are
 - [gitter: power pc](https://gitter.im/conda-forge-ppc64le/Lobby):
   Public chat room for all things related to building for power pc (IBM)
   systems.
-- [gitter: bot
-  subteam](https://gitter.im/conda-forge/regro-cf-autotick-bot): Public
+- [gitter: bot subteam](https://gitter.im/conda-forge/regro-cf-autotick-bot): Public
   chat room for all things related to the conda-forge automation
   infrastructure. Our automation infrastructure is colloquially referred
   to as "the bot".
-- [gitter:
-  compilers](https://gitter.im/conda-forge/conda-forge-compilers):
+- [gitter: compilers](https://gitter.im/conda-forge/conda-forge-compilers):
   Public chat room focused on the conda-forge compiler stack.
-- [element:
-  conda-forge-space](https://app.element.io/#/room/#conda-forge-space:matrix.org):
+- [element: conda-forge-space](https://app.element.io/#/room/#conda-forge-space:matrix.org):
   An element space listing all conda-forge rooms.
-- [element:
-  interns](https://app.element.io/#/room/#conda-forge_conda-forge-interns:gitter.im):
+- [element: interns](https://app.element.io/#/room/#conda-forge_conda-forge-interns:gitter.im):
   Public chat room for conda-forge interns to discuss projects and seek
   guidance from the community.
-- [element:
-  general](https://app.element.io/#/room/#conda-forge:matrix.org):
+- [element: general](https://app.element.io/#/room/#conda-forge:matrix.org):
   Public chat room for the conda-forge community to discuss anything
   related to conda-forge.
 
@@ -74,8 +68,7 @@ Note: All Gitter room links forward to Element
 ## Forum
 
 - [conda community discourse forum](https://conda.discourse.group/): The
-  [conda-forge
-  section](https://conda.discourse.group/c/pkg-building/conda-forge/25)
+  [conda-forge section](https://conda.discourse.group/c/pkg-building/conda-forge/25)
   is dedicated to discussions of conda-forge.
 
 ## Mailing List

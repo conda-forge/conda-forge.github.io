@@ -195,7 +195,7 @@ Generalities
 
 Required:
 
-#. All interactions in the review adhere to our `code_of_conduct`.
+#. All interactions in the review adhere to our [code of conduct](/community/governance#code-of-conduct).
 #. ``conda-forge-linter`` `checks <https://github.com/conda-forge/conda-smithy/blob/main/conda_smithy/lint_recipe.py>`__ pass successfully.
    Sometimes the linter will also suggest modifications considered optional (hints); even if recommended, these are not required to accept the submission.
 #. The CI checks pass successfully in the required platforms. Exceptions:
