@@ -127,12 +127,10 @@ const config = {
             [
               "/docs/",
               "/docs/user/",
-              "/docs/orga/",
               "/docs/orga/minutes/",
               "/docs/orga/funding/",
               "/docs/misc/",
               "/docs/maintainer/",
-              "/docs/contracting/",
             ].includes(existingPath)
           ) {
             redirects.push(`${existingPath}00_intro.html`);
@@ -144,6 +142,7 @@ const config = {
             from: "/feedstock-outputs",
             to: "/packages/",
           },
+          /* blog redirects */
           {
             from: "/blog/blog/",
             to: "/blog/",
@@ -224,9 +223,35 @@ const config = {
             from: "/blog/posts/2023-07-13-installer-security-fixes/",
             to: "/blog/2023/07/13/installer-security-fixes/",
           },
+          /* user redirects */
           {
             from: "/docs/user/announcements.html",
             to: "/announcements/",
+          },
+          /* organization redirects */
+          {
+            from: "/docs/orga/governance.html",
+            to: "/community/governance/",
+          },
+          {
+            from: "/docs/orga/subteams.html",
+            to: "/community/subteams/",
+          },
+          {
+            from: "/docs/orga/joining-the-team.html",
+            to: "/community/join/",
+          },
+          {
+            from: "/docs/orga/cfep-index.html",
+            to: "/community/cfep/",
+          },
+          {
+            from: "/docs/orga/getting-in-touch.html",
+            to: "/community/get-in-touch/",
+          },
+          {
+            from: "/docs/contracting/00_intro.html",
+            to: "/community/contracting/",
           },
         ],
       },
@@ -312,10 +337,6 @@ const config = {
                 label: "Maintainer docs",
                 to: "/docs/maintainer/",
               },
-              {
-                label: "Organisation docs",
-                to: "/docs/orga/",
-              },
             ],
           },
           {
@@ -323,11 +344,11 @@ const config = {
             items: [
               {
                 label: "About conda-forge",
-                to: "/docs",
+                to: "/community/",
               },
               {
                 label: "Governance",
-                to: "/docs/orga/governance/",
+                to: "/community/governance/",
               },
               {
                 label: "Meeting minutes",
@@ -335,7 +356,7 @@ const config = {
               },
               {
                 label: "Get in touch",
-                to: "/docs/orga/getting-in-touch/",
+                to: "/community/get-in-touch/",
               },
             ],
           },
