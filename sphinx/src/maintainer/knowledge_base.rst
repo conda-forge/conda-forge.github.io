@@ -303,14 +303,102 @@ A package that needs all five compilers would define
   there's no need to specify ``libgcc`` or ``libgfortran``. There are additional informations about how conda-build 3 treats
   compilers in the `conda docs <https://docs.conda.io/projects/conda-build/en/stable/resources/compiler-tools.html>`__.
 
+.. _cross-compilation:
+
 Cross-compilation
 -----------------
 
-For some other architectures (like ARM), packages can be built natively on that architecture or they can be cross-compiled.
-In other words built on a different common architecture (like x86_64) while still targeting the original architecture (ARM).
-This helps one leverage more abundant CI resources in the build architecture (x86_64).
+conda-forge defaults to native builds of packages for x86_64 on Linux, macOS and Windows, because
+that's the architecture powering the default CI runners. Other architectures are supported too,
+but they are not guaranteed to have native builds. In those platforms where we can't provide native
+CI runners, we can still resort to either cross-compilation or emulation.
 
-A package needs to make a few changes in their recipe to be compatible with cross-compilation. Here are a few examples.
+Cross-compiling means building a package for a different architecture than the one the build process
+is running on. Given how abundant x86_64 runners are, most common cross-compilation setups will target
+non-x86_64 architectures from x86_64 runners.
+
+Cross-compilation terminology usually distinguishes between two types of machine:
+
+- Build: The machine running the building process.
+- Host: The machine we are building packages for.
+
+.. note::
+
+  Some cross-compilation documentation might also distinguish between a third type of machine, the
+  target machine. You can read more about it in `this Stack Overflow question
+  <https://stackoverflow.com/questions/47010422/cross-compilation-terminologies-build-host-and-target>`__.
+  For the purposes of conda-forge, we'll consider the target machine to be the same as the host.
+
+.. _cross_compilation_howto:
+
+How to enable cross-compilation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cross-compilation settings depend on the ``build_platform`` and ``target_platform`` conda-build
+variables:
+
+- ``build_platform``: The platform on which ``conda-build`` is running, which defines the ``build``
+  environment in ``$BUILD_PREFIX``.
+- ``target_platform``: The platform on which the package will be installed. Defines the platform of
+  the ``host`` environment in ``$PREFIX``. Defaults to the value of ``build_platform``.
+
+To change the value of ``target_platform`` and enable cross-compilation, you must use
+the :ref:`build_platform` mapping in ``conda-forge.yml`` and then :ref:`rerender
+<dev_update_rerender>` the feedstock. This will generate the appropriate CI workflows and
+conda-build input metadata. See also :ref:`test` for how to skip the test phase when
+cross-compiling. Provided the requirements metadata and build scripts are written correctly, the
+package should just work. However, in some cases, it'll need some adjustments; see examples below
+for some common cases.
+
+.. note::
+
+  The ``build_platform`` and ``target_platform`` variables are exposed as environment variables in
+  the build scripts (e.g. ``$build_platform``), and also as Jinja variables in the ``meta.yaml``
+  selectors (e.g. ``# [build_platform != target_platform]``).
+
+In addition to these two variables, there are some more environment variables that are set by
+conda-forge's automation (e.g. ``conda-forge-ci-setup``, compiler activation packages, etc) that
+can aid in cross-compilation setups:
+
+- ``CONDA_BUILD_CROSS_COMPILATION``: set to ``1`` when ``build_platform`` and ``target_platform``
+  differ.
+- ``CONDA_TOOLCHAIN_BUILD``: the autoconf triplet expected for build platform.
+- ``CONDA_TOOLCHAIN_HOST``: the autoconf triplet expected for host platform.
+- ``CMAKE_ARGS``: arguments needed to cross-compile with CMake. Pass it to ``cmake`` in your build
+  script.
+- ``MESON_ARGS``: arguments needed to cross-compile with Meson. Pass it to ``meson`` in your build
+  script. Note a `cross build definition file <https://mesonbuild.com/Cross-compilation.html>`__ is
+  automatically created for you too.
+- ``CC_FOR_BUILD``: C compilers targeting the build platform.
+- ``CXX_FOR_BUILD``: C++ compilers targeting the build platform.
+- ``CROSSCOMPILING_EMULATOR``: Path to the ``qemu`` binary for the host platform. Useful for running
+  tests when cross-compiling.
+
+This is all supported by two main conda-build features introduced in version 3:
+
+- How `requirements metadata
+  <https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#requirements-section>`__
+  is expressed in ``meta.yaml``, which distinguishes between ``build`` and ``host`` platforms.
+- The ``compiler()`` Jinja function and underlying `conventions for the compiler packages
+  <https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html>`__.
+
+Placing requirements in build or host
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The rule of the thumb is:
+
+- If it needs to run during the build, it goes in ``build``.
+- If it needs to be available on the target host, it goes in ``host``.
+- If both conditions are true, it belongs in both.
+
+However, there are some exceptions to this rule; most notably Python cross-compilation
+(:ref:`see below <python_cross_compilation>`).
+
+Cross-compilation examples
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A package needs to make a few changes in their recipe to be compatible with cross-compilation. Here
+are a few examples.
 
 A simple C library using autotools for cross-compilation might look like this:
 
@@ -323,7 +411,8 @@ A simple C library using autotools for cross-compilation might look like this:
         - pkg-config
         - gnuconfig
 
-In the build script, it would need to update the config files and guard any tests when cross-compiling:
+In the build script, it would need to update the config files and guard any tests when
+cross-compiling:
 
 .. code-block:: sh
 
@@ -331,9 +420,49 @@ In the build script, it would need to update the config files and guard any test
     cp $BUILD_PREFIX/share/gnuconfig/config.* .
 
     # Skip ``make check`` when cross-compiling
-    if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
+    if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
       make check
     fi
+
+A simple C++ library using CMake for cross-compilation might look like this:
+
+.. code-block:: yaml
+
+    requirements:
+      build:
+        - {{ compiler("cxx") }}
+        - cmake
+        - make
+
+In the build script, it would need to update ``cmake`` call and guard any tests when cross-compiling:
+
+.. code-block:: sh
+
+    # Pass ``CMAKE_ARGS`` to ``cmake``
+    cmake ${CMAKE_ARGS} ..
+
+    # Skip ``ctest`` when cross-compiling
+    if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
+      ctest
+    fi
+
+Similarly, with Meson, the ``meta.yaml`` needs:
+
+.. code-block:: yaml
+
+    requirements:
+      build:
+        - {{ compiler("c") }}
+        - {{ compiler("cxx") }}
+        - meson
+        - make
+
+And this in ``build.sh``:
+
+.. code-block:: sh
+
+    # Pass ``MESON_ARGS`` to ``meson``
+    meson ${MESON_ARGS} builddir/
 
 A simple Python extension using Cython and NumPy's C API would look like so:
 
@@ -359,6 +488,90 @@ There are more variations of this approach in the wild. So this is not meant to 
 but merely to provide a starting point with some guidelines. Please look at `other recipes for more examples`_.
 
 .. _other recipes for more examples: https://github.com/search?q=org%3Aconda-forge+path%3Arecipe%2Fmeta.yaml+%22%5Bbuild_platform+%21%3D+target_platform%5D%22&type=code
+
+.. _python_cross_compilation:
+
+Details about cross-compiled Python packages
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cross-compiling Python packages is a bit more involved than other packages. The main pain point is
+that we need an executable Python interpreter (i.e. ``python`` in ``build``) that knows how to
+provide accurate information about the target platform. Since this is not officially supported, a
+series of workarounds are required to make it work. Refer to `PEP720
+<https://peps.python.org/pep-0720/>`__ or `the discussion in this issue
+<https://github.com/conda-forge/conda-forge.github.io/issues/1841>`__ for more information.
+
+In practical terms, for conda-forge, this results into two extra metadata bits that are needed in
+``meta.yaml``:
+
+- Adding ``cross-python_{{ target_platform }}`` in ``build`` requirements, provided by the
+  `cross-python-feedstock <https://github.com/conda-forge/cross-python-feedstock>`__. This is a
+  wrapper for the ``crossenv`` Python interpreters with `some activation logic that adjust some of
+  the crossenv workarounds
+  <https://github.com/conda-forge/cross-python-feedstock/blob/main/recipe/activate-cross-python.sh>`__
+  so they work better with the conda-build setup.
+- Copying some Python-related packages from ``host`` to ``build`` with a ``[build_platform !=
+  target_platform]`` selector:
+
+  - ``python`` itself, to support ``crossenv``.
+  - Non-pure Python packages (i.e. they ship compiled libraries) that need to be present while the
+    package is being built, like ``cython`` and ``numpy``.
+
+In the terms of the `PEP720 <https://peps.python.org/pep-0720/>`__, the conda-forge setup
+implements the "faking the target environment" approach. More specifically, this will result in the
+following changes before the builds scripts run:
+
+- A modified ``crossenv`` installation in ``$BUILD_PREFIX/venv``, mimicking the architecture of
+  ``$PREFIX``.
+- Forwarder binaries in ``$BUILD_PREFIX/bin`` that point to the ``crossenv`` installation.
+- Symlinks that expose the ``$BUILD_PREFIX`` site-packages in the ``crossenv`` installation, which
+  is also included in ``$PYTHONPATH``.
+- A copy of all ``$PREFIX`` site-packages to ``$BUILD_PREFIX`` (except the compiled libraries).
+
+All in all, this results in a setup where ``conda-build`` can run a ``$BUILD_PREFIX``-architecture
+``python`` interpreter that can see the packages in ``$PREFIX`` (with the compiled bits provided by
+their corresponding counterparts in ``$BUILD_PREFIX``) and sufficiently mimic that target
+architecture.
+
+.. _emulation:
+
+Emulated builds
+---------------
+
+When cross-compilation is not possible, one can resort to emulation. This is a technique that uses
+a virtual machine  (`QEMU <https://www.qemu.org/>`__) to emulate the target platform, which has a
+significant overhead. However, ``conda-build`` will see the target platform as native, so very
+little changes are usually needed in the recipe.
+
+To enable emulated builds, you must use the :ref:`provider` mapping in ``conda-forge.yml``.
+This key maps a ``build_platform`` to a ``provider`` that will be used to emulate the platform.
+``conda-smithy`` will know how to detect whether the provider supports that platform natively or
+requires emulation, and will adjust the appropriate CI steps to ensure that QEMU runs the process.
+Ensure changes are applied by :ref:`rerendering <dev_update_rerender>` the feedstock.
+
+Note that only Linux architectures are currently supported via emulation.
+
+.. warning::
+
+  Emulated builds are very slow and incur an additional strain on conda-forge CI resources.
+  Whenever possible, please consider cross-compilation instead. Only use emulated builds as a last
+  resort.
+
+Emulation examples
+^^^^^^^^^^^^^^^^^^
+
+Configure ``conda-forge.yml`` to emulate ``linux-ppc64le``, but use native runners for ``linux-64``
+and ``linux-aarch64``. This works because ``linux-ppc64le`` is not natively supported by Azure, so
+``conda-smithy`` will add QEMU steps to emulate it. However, ``linux-64`` and ``linux-aarch64`` are
+natively supported by Azure and Travis CI, respectively, so no emulation is needed.
+
+.. code-block:: yaml
+
+    provider:
+      linux_aarch64: travis
+      linux_ppc64le: azure
+      linux_64: azure
+
 
 Rust Nightly
 ------------
@@ -430,13 +643,13 @@ When should CDTs be used?
 2.  When a conda packaged library will not work properly.
     For example: a new ``glibc`` package means we would have to edit the elf interpreter of
     all the conda package binaries.
-    
+
 What's are some good examples?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.  The OpenCL loader (``ocl-icd`` together with ``ocl-icd-system``) provides an OpenCL
     loading library. The loader will look at OpenCL implementations given in
-    ``$CONDA_PREFIX/etc/OpenCL/vendors``. 
+    ``$CONDA_PREFIX/etc/OpenCL/vendors``.
     For example: Pocl is a conda packaged implementation that runs OpenCL on the CPU. Vendor
     specific implementations like the NVIDIA OpenCL or ROCm OpenCL are not conda packaged, so we
     have to rely on the system. By installing ``ocl-icd-system`` we enable the loader to look at
@@ -1705,7 +1918,7 @@ Apple Silicon builds
 
 The new Apple M1 processor is the first Apple Silicon supported by conda-forge
 `osx-arm64 <https://github.com/conda-forge/conda-forge.github.io/issues/1126>`__ builds.
-For new builds to be available, via cross-compilation, a migration is required for
+For new builds to be available, via :ref:`cross-compilation <cross-compilation>`, a migration is required for
 the package and its dependencies. These builds are experimental as many of them are untested.
 
 To request a migration for a particular package and all its dependencies:
