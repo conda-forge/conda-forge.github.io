@@ -712,6 +712,110 @@ If the utility actually has a test mode, great. Otherwise simply invoking
 ``--help`` or ``--version`` or something will at least test that it is
 installed and can run.
 
+Testing R packages
+..................
+
+R packages should be tested for successful library loading. All 
+recipes for CRAN packages should begin from `conda_r_skeleton_helper 
+<https://github.com/bgruening/conda_r_skeleton_helper>`_ and will 
+automatically include library loading tests. However, many R packages 
+also include ``testthat`` tests that can potentially be run. While 
+optional, additional testing is encouraged when packages:
+
+- provide interaces to other (compiled) libraries (e.g., ``r-curl``, 
+  ``r-xml2``)
+- extend functionality of or integrate many other R libraries 
+  (e.g., ``r-vetiver``)
+- are cornerstone R packages that provide often-used functions
+  (e.g., ``r-rmarkdown``)
+
+Testing R library loading
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The minimal test of an R package should ensure that the delivered library 
+can be successfully imported. This is accomplished in the ``meta.yaml`` 
+with:
+
+.. code-block:: yaml
+
+    test:
+      commands:
+        - $R -e "library('PackageName')"           # [not win]
+        - "\"%R%\" -e \"library('PackageName')\""  # [win]
+
+Note that ``PackageName`` is the name imported by R; not necessarily 
+the name of the conda package (e.g., ``r-matrix`` delivers ``Matrix``).
+
+Running ``testthat`` tests
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A typical ``test`` section for an R package with ``testthat`` testing 
+will look like
+
+.. code-block:: yaml
+
+    test:
+      requires:
+        - r-testthat
+      source_files:
+        - tests/
+      commands:
+        - $R -e "library('PackageName')"                                                  # [not win]
+        - $R -e "testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)"           # [not win]
+        - "\"%R%\" -e \"library('PackageName')\""                                         # [win]
+        - "\"%R%\" -e \"testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)\""  # [win]
+
+.. note::
+  We recommend including a library loading check *before* the ``testthat`` 
+  tests.
+
+First, one needs to declare that the test environment have ``r-testthat``
+installed. One may need additional requirements here, especially if a 
+package has optional functionality that is tested.
+
+.. note::
+  If any ``testthat`` tests fail due to missing packages, maintainers
+  are encouraged to communicate this to the upstream repository. Some R 
+  packages have optional functionality that usually involves packages
+  listed under the ``Suggests:`` section of the ``DESCRIPTION`` file.
+  Developers should be using ``testthat::skip_if_not_installed()`` 
+  functions to guard against test failures when optional packages are
+  not installed. Posting an Issue or Pull Request when this is not 
+  done will help improve testing practices in the R ecosystem.
+
+Second, one needs to declare where to source the tests. R package tests will 
+be found in the ``tests/`` directory of the tarball. This will typically 
+include a ``tests/testthat.R`` file and additional tests under 
+``tests/testthat/test_*.R``. Auxiliary directories and files may also be 
+present and needed for specific tests.
+
+The default R build procedure on conda-forge will not include the 
+``tests/`` directory in the final build. While it is possible to do this 
+(via an ``--install-tests`` flag), it is preferable to use the 
+``tests.source_files`` in the ``meta.yaml`` to copy the tests for the 
+testing phase only.
+
+Finally, one uses the ``testthat::test_file()`` function to test the 
+``tests/testthat.R`` file, which for most packages serves as the main entry
+point for all the other tests. By default, this function does not return
+an error value on test failures, so one needs to pass the argument 
+``stop_on_failure=TRUE`` to ensure that test failures propagate to 
+conda-build.
+
+There are scenarios where the ``tests/testthat.R`` file does not orchestrate
+the individual tests. In that case, one can instead test the 
+``tests/testthat`` directory with
+
+.. code-block:: yaml
+
+    test:
+      commands:
+        - $R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed')"           # [not win]
+        - "\"%R%\" -e \"testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed')\""  # [win]
+
+In this case, the function will error on any failures by default. Again,
+the ``PackageName`` here refers to the R library name.
+
 Tests outside of the package
 ............................
 
