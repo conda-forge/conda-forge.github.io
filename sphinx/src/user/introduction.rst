@@ -34,6 +34,7 @@ conda-forge is a community effort that tackles these issues:
 - Care is taken that all packages are up-to-date.
 - Common standards ensure that all packages have compatible versions.
 - By default, we build packages for macOS, Linux AMD64 and Windows AMD64.
+  Other architectures are also available on request (e.g. Apple Silicon, PowerPC, Linux ARM).
 - Many packages are updated by multiple maintainers with an easy option to become a maintainer.
 - An active core developer team is trying to also maintain abandoned packages.
  
