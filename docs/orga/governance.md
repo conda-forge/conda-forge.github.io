@@ -350,33 +350,7 @@ majority to pass, and use only the standard or time-out quorum rules.
 
 In alphabetical order,
 
-* [Axel Obermeier, @h-vetinari](https://github.com/h-vetinari)
-* [Cheng H. Lee, @chenghlee](https://github.com/chenghlee)
-* [Chris Burr, @chrisburr](https://github.com/chrisburr)
-* [Christopher J. ‘CJ' Wright, @cj-wright](https://github.com/cj-wright)
-* [Eric Dill, @ericdill](https://github.com/ericdill)
-* [Filipe Pires Alvarenga Fernandes, @ocefpaf](https://github.com/ocefpaf)
-* [Isuru Fernando, @isuruf](https://github.com/isuruf)
-* [Jaime Rodríguez-Guerra, @jaimergp](https://github.com/jaimergp)
-* [Jannis Leidel, @jezdez](https://github.com/jezdez)
-* [John Kirkham, @jakirkham](https://github.com/jakirkham)
-* [Joshua Adelman, @synapticarbors](https://github.com/synapticarbors)
-* [Keith Kraus, @kkraus14](https://github.com/kkraus14)
-* [Lori A. Burns, @loriab](https://github.com/loriab)
-* [Marcel Bargull, @mbargull](https://github.com/mbargull)
-* [Marcelo Duarte Trevisani, @marcelotrevisani](https://github.com/marcelotrevisani)
-* [Marius van Niekerk, @mariusvniekerk](https://github.com/mariusvniekerk)
-* [Mark Harfouche, @hmaarrfk](https://github.com/hmaarrfk)
-* [Matt Craig, @mwcraig](https://github.com/mwcraig)
-* [Matthew R. Becker, @beckermr](https://github.com/beckermr)
-* [Min Ragan-Kelley, @minrk](https://github.com/minrk)
-* [Patrick Sodré, @sodre](https://github.com/sodre)
-* [Peter K. G. Williams, @pkgw](https://github.com/pkgw)
-* [Ryan May, @dopplershift](https://github.com/dopplershift)
-* [Sylvain Corlay, @SylvainCorlay](https://github.com/SylvainCorlay)
-* [Uwe L. Korn, @xhochy](https://github.com/xhochy)
-* [Vinicius Douglas Cerutti, @viniciusdc](https://github.com/viniciusdc)
-* [Wolf Vollprecht, @wolfv](https://github.com/wolfv)
+{{ core_members }}
 
 <!-- keep old anchor around -->
 
@@ -388,14 +362,7 @@ In alphabetical order,
 
 In alphabetical order,
 
-* [Anthony Scopatz, @scopatz](https://github.com/scopatz)
-* [Björn Grüning, @bgruening](https://github.com/bgruening)
-* [Danica J. Sutherland, @djsutherland](https://github.com/djsutherland)
-* [Jonathan J. Helmus, @jjhelmus](https://github.com/jjhelmus)
-* [Michael Sarahan, @msarahan](https://github.com/msarahan)
-* [Patrick Snape, @patricksnape](https://github.com/patricksnape)
-* [Phil Elson, @pelson](https://github.com/pelson)
-* [Sophia Castellarin, @soapy1](https://github.com/soapy1)
+{{ emeritus_members }}
 
 <a id="document-history"></a>
 
