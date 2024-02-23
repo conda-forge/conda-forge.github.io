@@ -12,9 +12,8 @@ if [[ "$CI" == "1" ]]; then
   git checkout -b new_site_content
 fi
 
+# Render the templated content (e.g. CFEPs, core.csv, etc)
 python "$BASE_DIR/.ci_scripts/render_templated_content.py"
-
-# - Core and emeritus teams
 
 # Build docusaurus site
 npm install
@@ -24,6 +23,7 @@ npm run build
 # we can't redirect with the Docusaurus plugin, so just copy it
 cp build/news/rss.xml build/docs/news.rss
 
+set +x
 echo "Built website! Preview with one of:"
 echo "  python -m http.server -d build/"
 echo "  npm run serve"
