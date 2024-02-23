@@ -12,8 +12,8 @@ if [[ "$CI" == "1" ]]; then
   git checkout -b new_site_content
 fi
 
-# TODO:
-# - Generate CFEP
+python "$BASE_DIR/.ci_scripts/generate_cfep_index.py"
+
 # - Core and emeritus teams
 
 # Build docusaurus site
@@ -24,5 +24,6 @@ npm run build
 # we can't redirect with the Docusaurus plugin, so just copy it
 cp build/news/rss.xml build/docs/news.rss
 
-echo "Built website! Preview at http://localhost:8000 with:"
+echo "Built website! Preview with one of:"
 echo "  python -m http.server -d build/"
+echo "  npm run serve"
