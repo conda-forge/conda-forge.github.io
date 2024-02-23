@@ -115,7 +115,7 @@ def _get_formatted_names(path_file):
         sorted_csv = sorted(dict_csv, key=lambda d: d["name"])
     return "\n".join(
         f"- [{m['name']} @{m['github_username']}]"
-        f"(https://github.com/{m['github_username']}>)" 
+        f"(https://github.com/{m['github_username']})" 
         for m in sorted_csv
     )
 
