@@ -10,7 +10,7 @@ if [[ "$CI" == "1" ]]; then
   git config --global user.email "pelson.pub+conda-forge@gmail.com"
   git config --global user.name "conda-forge-admin"
   git checkout -b new_site_content
-  python ./generate_cfep_index.py
+  python .ci_scripts/generate_cfep_index.py
 fi
 
 pushd "$BASE_DIR/sphinx/src"

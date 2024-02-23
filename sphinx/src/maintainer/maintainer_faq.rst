@@ -157,7 +157,7 @@ The variable can either be added directly to the test command or provided in the
 How can I contact conda-forge/core?
 -----------------------------------
 
-When in an issue or PR, you can contact `conda-forge/core <teams_roles>` by simply mentioning ``@conda-forge/core`` in a comment.
+When in an issue or PR, you can contact `conda-forge/core </community/governance/#teams--roles>` by simply mentioning ``@conda-forge/core`` in a comment.
 If you don't receive an an answer after a couple of days, feel free to reach out to us via the public `Element <https://app.element.io/#/room/#conda-forge:matrix.org>`__ chatroom.
 
 .. note::
@@ -165,7 +165,7 @@ If you don't receive an an answer after a couple of days, feel free to reach out
   Due to a GitHub limitation, this is disabled for new members.
   In that case, you can ping core using the bot command :ref:`@conda-forge-admin, please ping conda-forge/core <cfa_please_ping_cf_team>`.
 
-In case your issue is longer or you would like to contact us privately, feel free to reach out to us via the options listed at `/community/get-in-touch`.
+In case your issue is longer or you would like to contact us privately, feel free to reach out to us via the options listed at `Get n touch </community/get-in-touch/>`.
 
 .. _mfaq_abandoned_feedstock:
 

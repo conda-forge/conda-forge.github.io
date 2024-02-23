@@ -21,7 +21,7 @@ Chances are we have already packaged it for you. You can `search <https://anacon
   - Help :ref:`improve the documentation <improve_docs>`
   - For a detailed overview please refer to :doc:`/user/contributing`
 
-- To see our governance policies, see `/community/governance`.
+- To see our governance policies, refer to `Governance </community/governance>`__.
 
 - If you find bugs, need help, or want to talk to the developers, use our mailing lists or chat rooms:
 

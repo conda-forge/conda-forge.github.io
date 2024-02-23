@@ -1939,7 +1939,7 @@ You are also free to download recipes and rebuild them yourself, if you would li
    A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the ``conda-forge`` channel.
    This helps mitigate against a bad actor gaining access to an inconspicuous feedstock and then trying to push a build with malicious code into essential infrastructure packages (e.g., OpenSSL or Python).
 3. We have `artifact-validation <https://github.com/conda-forge/artifact-validation>`__ for validating all the conda-forge artifacts uploaded to ``anaconda.org``. This validation scans for various security-related items, such as artifacts that overwrite key pieces of certain packages.
-4. We have a dedicated `Security and Systems Sub-Team <security_subteam>` who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by conda-forge.
+4. We have a dedicated `Security and Systems Sub-Team </community/subteams/#security-and-systems>` who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by conda-forge.
 
 If you have found a security-related issue with conda-forge, please check our `Security Policy <https://github.com/conda-forge/conda-forge.github.io/security/policy>`__
 to learn how to report it responsibly.

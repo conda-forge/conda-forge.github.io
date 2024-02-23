@@ -267,7 +267,7 @@ const config = {
             to: "/community/get-in-touch/",
           },
           {
-            from: "/docs/contracting/00_intro.html",
+            from: ["/docs/contracting/index.html", "/docs/contracting/00_intro.html"],
             to: "/community/contracting/",
           },
         ],
