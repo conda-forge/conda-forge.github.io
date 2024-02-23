@@ -12,7 +12,7 @@ REPO_CONTENTS = "https://api.github.com/repos/conda-forge/cfep/contents/"
 TITLE_PATTERN = "<td>\s*Title\s*</td><td>\s*(.*)\s*</td>"
 STATUS_PATTERN = "<td>\s*Status\s*</td><td>\s*(.*)\s*</td>"
 REPO_DIR = Path(__file__).parents[1].absolute()
-CFEP_INDEX_RST = REPO_DIR / "sphinx" / "src" / "orga" / "cfep-index.rst"
+CFEP_INDEX_MD = REPO_DIR / "community" / "cfep.md"
 
 
 @dataclass
@@ -93,16 +93,16 @@ def get_cfeps():
 
 
 def write_cfep_index():
-    contents = CFEP_INDEX_RST.read_text()
-    if ".. REPLACE-THIS-LINE-WITH-THE-INDEX-OF-CFEPs" not in contents:
+    contents = CFEP_INDEX_MD.read_text()
+    if "{{ cfep_list }}" not in contents:
         print("!!! Skipping writing CFEP index. Already rendered?", file=sys.stderr)
         return
-    rst_links = [f"- {cfep.rst_link()}" for cfep in get_cfeps()]
+    md_links = [f"- {cfep.md_link()}" for cfep in get_cfeps()]
     contents = contents.replace(
-        ".. REPLACE-THIS-LINE-WITH-THE-INDEX-OF-CFEPs", 
-        "\n".join(rst_links)
+        "{{ cfep_list }}",
+        "\n".join(md_links)
     )
-    CFEP_INDEX_RST.write_text(contents)
+    CFEP_INDEX_MD.write_text(contents)
 
 
 if __name__ == "__main__":
