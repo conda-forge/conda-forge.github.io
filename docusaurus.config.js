@@ -126,7 +126,7 @@ const config = {
     [
       "@docusaurus/plugin-client-redirects",
       {
-        fromExtensions: ["html", "htm"],
+        // fromExtensions: ["html", "htm"],
         createRedirects(existingPath) {
           var redirects = [];
           if (existingPath.startsWith('/blog/tags/')) {
@@ -143,8 +143,6 @@ const config = {
             [
               "/docs/",
               "/docs/user/",
-              "/docs/orga/minutes/",
-              "/docs/orga/funding/",
               "/docs/misc/",
               "/docs/maintainer/",
             ].includes(existingPath)
@@ -246,6 +244,10 @@ const config = {
           },
           /* organization redirects */
           {
+            from: ["/docs/orga/", "/docs/orga/00_intro.html"],
+            to: "/community/",
+          },
+          {
             from: "/docs/orga/governance.html",
             to: "/community/governance/",
           },
@@ -266,7 +268,7 @@ const config = {
             to: "/community/get-in-touch/",
           },
           {
-            from: ["/docs/contracting/index.html", "/docs/contracting/00_intro.html"],
+            from: ["/docs/contracting/", "/docs/contracting/00_intro.html"],
             to: "/community/contracting/",
           },
         ],
