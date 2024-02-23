@@ -37,8 +37,8 @@ Chances are we have already packaged it for you. You can [search](https://anacon
 
 ## Table of Contents
 
-* [User Documentation](user/index.md)
-* [Maintainer Documentation](maintainer/index.md)
-* [Organisation Documentation](orga/index.md)
+* [User Documentation](user/index.mdx)
+* [Maintainer Documentation](maintainer/index.mdx)
+* [Organisation Documentation](orga/index.mdx)
 * [Miscellaneous](misc/index.md)
 * [Contracting Information](contracting/index.md)
