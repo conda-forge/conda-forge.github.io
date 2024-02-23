@@ -16,7 +16,7 @@ python .ci_scripts/generate_cfep_index.py
 
 pushd "$BASE_DIR/sphinx/src"
 make clean
-rm -rf "$BASE_DIR/static-sphinx"
+rm -rf "$BASE_DIR/static-sphinx" "$BASE_DIR/docs" || true
 # -W --keep-going: list all warnings but fail build in case there are any
 make markdown SPHINXOPTS="-W --keep-going"
 popd
@@ -33,5 +33,6 @@ npm run build
 # we can't redirect with the Docusaurus plugin, so just copy it
 cp build/news/rss.xml build/docs/news.rss
 
+set +x
 echo "Built website! Preview at http://localhost:8000 with:"
 echo "  python -m http.server -d build/"
