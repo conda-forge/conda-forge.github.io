@@ -12,7 +12,7 @@ if [[ "$CI" == "1" ]]; then
   git checkout -b new_site_content
 fi
 
-python "$BASE_DIR/.ci_scripts/generate_cfep_index.py"
+python "$BASE_DIR/.ci_scripts/render_templated_content.py"
 
 # - Core and emeritus teams
 

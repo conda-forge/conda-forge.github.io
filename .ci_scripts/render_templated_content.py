@@ -1,10 +1,12 @@
+import csv
 import re
-import requests
-import sys
 import tarfile
 from dataclasses import dataclass
 from pathlib import Path
 from tempfile import TemporaryDirectory
+
+import requests
+
 
 REPO_URL = "https://github.com/conda-forge/cfep"
 REPO_ARCHIVE = "https://github.com/conda-forge/cfep/archive/main.tar.gz"
@@ -14,6 +16,10 @@ STATUS_PATTERN = "<td>\s*Status\s*</td><td>\s*(.*)\s*</td>"
 REPO_DIR = Path(__file__).parents[1].absolute()
 CFEP_INDEX_MD_TMPL = REPO_DIR / "docs" / "orga" / "cfep-index.md.tmpl"
 CFEP_INDEX_MD = REPO_DIR / "docs" / "orga" / "cfep-index.md"
+GOVERNANCE_MD_TMPL = REPO_DIR / "docs" / "orga" / "governance.md.tmpl"
+GOVERNANCE_MD = REPO_DIR / "docs" / "orga" / "governance.md"
+CORE_CSV = REPO_DIR / "src" / "core.csv"
+EMERITUS_CSV = REPO_DIR / "src" / "emeritus.csv"
 
 
 @dataclass
@@ -103,5 +109,30 @@ def write_cfep_index():
     CFEP_INDEX_MD.write_text(contents)
 
 
+def _get_formatted_names(path_file):
+    with open(path_file, "r") as csv_file:
+        dict_csv = csv.DictReader(csv_file)
+        sorted_csv = sorted(dict_csv, key=lambda d: d["name"])
+    return "\n".join(
+        f"- [{m['name']} @{m['github_username']}]"
+        f"(https://github.com/{m['github_username']}>)" 
+        for m in sorted_csv
+    )
+
+
+def write_core_members():
+    contents = GOVERNANCE_MD_TMPL.read_text()
+    contents = contents.replace(
+        "{{ core_members }}",
+        _get_formatted_names(CORE_CSV)
+    )
+    contents = contents.replace(
+        "{{ emeritus_members }}",
+        _get_formatted_names(EMERITUS_CSV)
+    )
+    GOVERNANCE_MD.write_text(contents)
+
+
 if __name__ == "__main__":
     write_cfep_index()
+    write_core_members()
