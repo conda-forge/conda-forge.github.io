@@ -1,25 +1,10 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const path = require('path')
 const prism = require('prism-react-renderer');
 const editUrl = {
   editUrl: "https://github.com/conda-forge/conda-forge.github.io/tree/main/",
 };
-const webpackAssetSourcePlugin = () => ({
-  configureWebpack() {
-    return {
-      module: {
-        rules: [
-          {
-            resourceQuery: /raw/,
-            type: "asset/source",
-          },
-        ],
-      },
-    };
-  },
-})
 
 var copyright = `Copyright © ${new Date().getFullYear()} conda-forge · Built with Docusaurus`;
 if (process.env.NETLIFY) {
@@ -126,7 +111,7 @@ const config = {
     [
       "@docusaurus/plugin-client-redirects",
       {
-        // fromExtensions: ["html", "htm"],
+        fromExtensions: ["html", "htm"],
         createRedirects(existingPath) {
           var redirects = [];
           if (existingPath.startsWith('/blog/tags/')) {
