@@ -35,35 +35,10 @@ Chances are we have already packaged it for you. You can [search](https://anacon
 
 <a id="table-of-contents"></a>
 
-# Table of Contents
+## Table of Contents
 
 * [User Documentation](user/index.md)
-  * [A brief introduction](user/introduction.md)
-  * [Tips & tricks](user/tipsandtricks.md)
-  * [Using conda-smithy to manage your CI](user/ci-skeleton.md)
-  * [FAQ](user/faq.md)
-  * [Becoming involved](user/contributing.md)
-  * [How to get help at conda-forge](user/how_to_get_help.md)
-  * [Talks and resources about conda-forge](user/talks.md)
 * [Maintainer Documentation](maintainer/index.md)
-  * [Infrastructure](maintainer/infrastructure.md)
-  * [Contributing packages](maintainer/adding_pkgs.md)
-  * [Maintaining packages](maintainer/updating_pkgs.md)
-  * [Pinned dependencies](maintainer/pinning_deps.md)
-  * [Configuring conda-forge.yml](maintainer/conda_forge_yml.md)
-  * [Knowledge Base](maintainer/knowledge_base.md)
-  * [FAQ](maintainer/maintainer_faq.md)
 * [Organisation Documentation](orga/index.md)
-  * [Guidelines](orga/guidelines.md)
-  * [Governance](orga/governance.md)
-  * [A list of current sub-teams](orga/subteams.md)
-  * [Joining the team](orga/joining-the-team.md)
-  * [Core team meeting minutes](orga/minutes/index.md)
-  * [Index of CFEPs](orga/cfep-index.md)
-  * [Getting in Touch](orga/getting-in-touch.md)
-  * [Funding efforts for conda-forge](orga/funding/index.md)
 * [Miscellaneous](misc/index.md)
-  * [Glossary](misc/index.md#glossary)
 * [Contracting Information](contracting/index.md)
-  * [Known Service Providers](contracting/index.md#known-service-providers)
-  * [Becoming a Service Provider](contracting/index.md#becoming-a-service-provider)
