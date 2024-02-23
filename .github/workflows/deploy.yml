@@ -25,6 +25,11 @@ jobs:
           activate-environment: conda-forge-docs
           environment-file: .ci_scripts/environment.yml
 
+      - name: Run pre-commit
+        shell: bash -l {0}
+        run: |
+          pre-commit run -a
+
       - name: build
         shell: bash -l {0}
         run: |
@@ -41,12 +46,12 @@ jobs:
           publish_dir: ./build
           user_name: conda-forge-admin
           user_email: pelson.pub+conda-forge@gmail.com
-      
+
       - name: Link Checker
-        uses: lycheeverse/lychee-action@c053181aa0c3d17606addfe97a9075a32723548a  # for v1.9.3
+        uses: lycheeverse/lychee-action@c053181aa0c3d17606addfe97a9075a32723548a # for v1.9.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          lycheeVersion: '0.14.3'
+          lycheeVersion: "0.14.3"
           args: >
             --no-progress
             --base "$(pwd)/build"
@@ -56,6 +61,6 @@ jobs:
             --exclude '.*,.*'
             --exclude-path './build/docs/orga/minutes/'
             --remap "https://conda-forge.org/status https://conda-forge.org/status"
-            --remap "https://conda-forge.org/(.*) file://$(pwd)/build/\$1" 
-            './build/**/*.html' 
+            --remap "https://conda-forge.org/(.*) file://$(pwd)/build/\$1"
+            './build/**/*.html'
             '*.md'
