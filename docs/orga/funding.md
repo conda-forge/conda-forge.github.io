@@ -30,8 +30,8 @@ For the sake of transparency, we have made available letters of intent, applicat
 
 ### Successfully funded
 
-- 2023 - NumFOCUS SDG Round 1: [Access control improvements for opt-in CI (Continuous Integration) services](sdg-2023-1.md)
-- 2023 - Google Summer of Code: [Modernization of the conda-forge.org website](gsoc-2023.md)
+- 2023 - NumFOCUS SDG Round 1: [Access control improvements for opt-in CI (Continuous Integration) services](funding/sdg-2023-1.md)
+- 2023 - Google Summer of Code: [Modernization of the conda-forge.org website](funding/gsoc-2023.md)
 - 2022 - [CZI EOSS](https://chanzuckerberg.com/eoss/) Funding Cycle 5: Transparent, open & sustainable infrastructure for conda-forge and bioconda, submitted by QuantStack & Quansight
   - [`Letter of intent`](pathname:///_static/czi-eoss-5-loi-infra.pdf).
   - [`Full submission`](pathname:///_static/czi-eoss-5-full-infra.pdf).
@@ -49,7 +49,7 @@ For the sake of transparency, we have made available letters of intent, applicat
 
 ### Submitted and not funded
 
-- 2023 - Google Season of Docs: [Restructuring the conda-forge documentation](gsod-2023.md)
+- 2023 - Google Season of Docs: [Restructuring the conda-forge documentation](funding/gsod-2023.md)
 - 2022 - [CZI EOSS](https://chanzuckerberg.com/eoss/) Funding Cycle 5: Adding a WebAssembly Toolchain to conda-forge, submitted by QuantStack
   - [`Letter of intent`](pathname:///_static/czi-eoss-5-loi-wasm.pdf).
 
