@@ -99,7 +99,6 @@ const config = {
     ],
   ],
   plugins: [
-    // path.resolve(__dirname, 'plugins', 'csv-loader'),
     './plugins/csv-loader',
     [
       "content-docs",

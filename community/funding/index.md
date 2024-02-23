@@ -1,5 +1,6 @@
 ---
 title: Funding efforts
+sidebar_position: 6
 ---
 # Funding efforts for conda-forge
 
