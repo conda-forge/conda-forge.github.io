@@ -138,6 +138,36 @@ const Packages = () => {
     setSearchTerm(event.target.value);
   };
 
+  const feedstockCell = (pkgName) => {
+    return (
+      (allPackages[pkgName.toLowerCase()] || []).map((repo, index) => (
+        <span key={`${pkgName}-${index}-${repo}`}>
+          <a
+            href={`https://github.com/conda-forge/${repo}-feedstock`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={`View ${repo}-feedstock on GitHub`}
+          >
+            {repo}-feedstock
+          </a>
+          <br />
+        </span>
+      )) || <span>No feedstock found</span>
+    );
+  };
+  const metadataCell = (pkgName) => {
+    return (
+      <a
+        href={`https://conda-metadata-app.streamlit.app/?q=conda-forge/${pkgName}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        title={`Explore ${pkgName} metadata`}
+      >
+        Browse
+      </a>
+    );
+  };
+
   var renderResultsBlock;
   var resultsPill;
   if (searchTerm.length) {
@@ -148,6 +178,7 @@ const Packages = () => {
           <tr>
             <th>Package</th>
             <th>Feedstock(s)</th>
+            <th>Metadata</th>
           </tr>
         </thead>
         <tbody>
@@ -163,25 +194,14 @@ const Packages = () => {
                     {highlightSubstring(pkg, searchTermLower)}
                   </a>
                 </td>
+                <td>{feedstockCell(pkg)}</td>
                 <td>
-                  {allPackages[pkg].map((repo) => (
-                    <span key={`${pkg}-${repo}`}>
-                      <a
-                        href={`https://github.com/conda-forge/${repo}-feedstock`}
-                        target="_blank"
-                        title={`View ${repo}-feedstock on GitHub`}
-                      >
-                        {repo}-feedstock
-                      </a>
-
-                      <br />
-                    </span>
-                  ))}
+                  <center>{metadataCell(pkg)}</center>
                 </td>
               </tr>
             ))) || (
             <tr>
-              <td colSpan="2">No packages found</td>
+              <td colSpan="3">No packages found</td>
             </tr>
           )}
         </tbody>
@@ -223,6 +243,7 @@ const Packages = () => {
               <th>#</th>
               <th>Package</th>
               <th>Feedstock(s)</th>
+              <th>Metadata</th>
               <th>Last updated</th>
             </tr>
           </thead>
@@ -239,20 +260,9 @@ const Packages = () => {
                     {item.name}
                   </a>
                 </td>
+                <td>{feedstockCell(item.name)}</td>
                 <td>
-                  {(allPackages[item.name.toLowerCase()] || []).map((repo) => (
-                    <span key={`${item.name}-${index}-${repo}`}>
-                      <a
-                        href={`https://github.com/conda-forge/${repo}-feedstock`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title={`View ${repo}-feedstock on GitHub`}
-                      >
-                        {repo}-feedstock
-                      </a>
-                      <br />
-                    </span>
-                  ))}
+                  <center>{metadataCell(item.name)}</center>
                 </td>
                 <td>{item.date}</td>
               </tr>
