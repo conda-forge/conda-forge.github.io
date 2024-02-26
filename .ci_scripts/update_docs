@@ -12,17 +12,9 @@ if [[ "$CI" == "1" ]]; then
   git checkout -b new_site_content
 fi
 
-pushd "$BASE_DIR/sphinx/src"
-make clean
-rm -rf "$BASE_DIR/static-sphinx"
-# -W --keep-going: list all warnings but fail build in case there are any
-make markdown SPHINXOPTS="-W --keep-going"
-popd
+# Render the templated content (e.g. CFEPs, core.csv, etc)
+python "$BASE_DIR/.ci_scripts/render_templated_content.py"
 
-# Move rendered Sphinx markdown to Docusaurus
-python "$BASE_DIR/.ci_scripts/sphinx_markdown_to_docusaurus.py" "$BASE_DIR/sphinx/src/_build/markdown" docs/
-mkdir -p "$BASE_DIR/static-sphinx/_static"
-cp -r "$BASE_DIR/sphinx/src/_static" "$BASE_DIR/static-sphinx/"
 # Build docusaurus site
 npm install
 npm run build
@@ -31,5 +23,7 @@ npm run build
 # we can't redirect with the Docusaurus plugin, so just copy it
 cp build/news/rss.xml build/docs/news.rss
 
-echo "Built website! Preview at http://localhost:8000 with:"
+set +x
+echo "Built website! Preview with one of:"
 echo "  python -m http.server -d build/"
+echo "  npm run serve"
