@@ -45,7 +45,7 @@ conda-forge is a community effort that tackles these issues:
 - Many packages are updated by multiple maintainers with an easy option to become a maintainer.
 - An active core developer team is trying to also maintain abandoned packages.
 
-You can refer to the glossary [Glossary](../misc/index.md#misc-glossary).
+You can refer to the glossary [Glossary](../glossary.md#misc-glossary).
 
 <a id="how-to-install"></a>
 

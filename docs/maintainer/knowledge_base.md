@@ -1149,7 +1149,7 @@ named `yum_requirements.txt` in the `recipe` directory of a feedstock.
 
 There are only very few situations where dependencies installed by yum are acceptable. These cases include
 
-- satisfying the requirements of [CDT](../misc/index.md#term-CDT) packages during test phase
+- satisfying the requirements of [CDT](../glossary.md#term-CDT) packages during test phase
 - installing packages that are only required for testing
 
 After changing `yum_requirements.txt`, [rerender](updating_pkgs.md#dev-update-rerender) to update the configuration.

@@ -241,6 +241,10 @@ const config = {
             from: "/docs/user/announcements.html",
             to: "/announcements/",
           },
+          {
+            from: "/docs/misc/",
+            to: "/docs/glossary/",
+          }
         ],
       },
     ],
