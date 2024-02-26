@@ -5,4 +5,4 @@ build/
 package.json
 package-lock.json
 pnpm-lock.yaml
-sphinx/src/orga/minutes/
+docs/orga/minutes/
