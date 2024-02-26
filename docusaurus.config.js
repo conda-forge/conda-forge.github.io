@@ -28,7 +28,7 @@ const config = {
   onBrokenAnchors: process.env.GITHUB_ACTIONS ? "throw" : "warn",
   favicon: "img/favicon.ico",
   trailingSlash: true,
-  staticDirectories: ['static', 'static-sphinx'],
+  staticDirectories: ['static'],
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
