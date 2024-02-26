@@ -56,12 +56,13 @@ If you are new to the conda-forge community, follow the steps below to make your
 4. Run the following commands:
    - `conda env create -f ./.ci_scripts/environment.yml`
    - `conda activate conda-forge-docs`
-   - `cd sphinx/src`
-5. Make your changes and run the following command to check them:
-   - `make html`
-
-   You can check the changes locally by opening the html files in `_build/html` or running:
-   - `python -m http.server --directory _build/html`
+5. While writing your new documentation, you can use the live preview mode with:
+   - `npm install` to make sure `node_modules` is up-to-date
+   - `npm run start` to start the live preview. Every time you save a file, the changes will be reflected instantaneously!
+5. Once ready, you can also check how the production build would look like with the command:
+   - `.ci_scripts/update_docs`
+   You can check the changes locally by opening the html files in `build/` or running:
+   - `python -m http.server --directory build/`
 6. Add and commit your changes:
    - `git add .`
    - `git commit -m "your commit message"`
