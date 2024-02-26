@@ -63,7 +63,7 @@ Please open a [PR](../misc/index.md#term-PR) and/or an issue there, if you think
 
 The documentation website lives in [conda-forge/conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io/), and is automatically deployed to our [online version](https://conda-forge.org/).
 
-The documentation is built with `Sphinx` and the sources files are located in the [src](https://github.com/conda-forge/conda-forge.github.io/tree/main/sphinx/src) directory of the repository. These are then rendered to Markdown and placed in the Docusaurus tree. Docusaurus then renders the documentation to HTML.
+The documentation is built with Docusaurus and the sources files are located in the [`docs/`](https://github.com/conda-forge/conda-forge.github.io/tree/main/docs) directory of the repository.
 
 If you found any typo error, unclear explanations or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to [Improve the documentation](../user/contributing.md#improve-docs).
 
