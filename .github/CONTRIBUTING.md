@@ -1,8 +1,5 @@
 ## Contributing
 
 To edit the documentation pages displayed at
-[conda-forge.org/docs/][conda-forge-docs], please edit the source
-[reStructuredText][] files in `sphinx/src/`.
-
-[conda-forge-docs]: https://conda-forge.org/docs/
-[reStructuredText]: http://docutils.sourceforge.net/rst.html
+[conda-forge.org/docs/][https://conda-forge.org/docs/], please edit the source
+Markdown files in `docs/`.

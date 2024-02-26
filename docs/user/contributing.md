@@ -26,15 +26,15 @@ We encourage you to contribute to conda-forge. You can do so in several ways:
 
 The conda-forge documentation is version-controlled in the
 [conda-forge.github.io repository](https://github.com/conda-forge/conda-forge.github.io) on GitHub. The source
-text is stored in [the sphinx/src/ subdirectory](https://github.com/conda-forge/conda-forge.github.io/tree/main/sphinx/src) of this repository and
-is formatted using Python's [reStructuredText](http://docutils.sourceforge.net/rst.html) system.
+text is stored in [the `docs/` subdirectory](https://github.com/conda-forge/conda-forge.github.io/tree/main/docs of this repository and
+is formatted using [Docusaurus' Markdown](https://docusaurus.io/docs/markdown-features).
 
 <a id="editing-the-documentation-directly-through-github"></a>
 
 ### Editing the documentation directly through Github
 
 You can propose quick edits directly through the GitHub website if you have
-a GitHub account — for instance, [this link](https://github.com/conda-forge/conda-forge.github.io/edit/main/sphinx/src/user/contributing.rst)
+a GitHub account — for instance, [this link](https://github.com/conda-forge/conda-forge.github.io/edit/main/docs/index.md)
 will take you directly to a web-based editor for this very webpage. In
 general, the file corresponding to each page in the GitHub browser has a
 little pencil icon in its top-right corner that lets you open it up for editing.
