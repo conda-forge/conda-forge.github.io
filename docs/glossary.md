@@ -23,6 +23,10 @@ sidebar_position: 27
 
 **C**ore **D**ependency **T**ree. Core Dependency Tree packages take care of the dependencies which are so close to the system that they are not packaged with conda-forge. A CDT package consists of repackaged CentOS binaries from the appropriate version, either 6 or 7 depending on user choice and platform. [Learn more](maintainer/knowledge_base.md#cdt-packages).
 
+## CLI
+
+**C**ommand **L**ine **I**nterface. A program in which commands are entered as text, one line at a time, for a computer to execute. This is done in the Miniforge Prompt in Windows, and in a terminal in macOS and Linux. `conda` is executed in a CLI. [Learn More](https://en.wikipedia.org/wiki/Command-line_interface).
+
 <a id="term-CI"></a>
 
 ## CI
