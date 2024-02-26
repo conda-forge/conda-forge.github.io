@@ -43,13 +43,13 @@ sidebar_position: 27
 
 ## Conda channel
 
-**C**onda **C**hannel. Conda channels are the locations where packages are stored. They serve as the base for hosting and managing packages. `conda-forge` is one example of a conda channel. [Learn More](https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/channels.html).
+Conda channels are the locations where packages are stored. They serve as the base for hosting and managing packages. `conda-forge` is one example of a conda channel. [Learn More](https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/channels.html).
 
 <a id="term-Conda-package"></a>
 
 ## Conda package
 
-**C**onda **P**ackage. A conda package is a `.tar.bz2` or `.conda` archive that contains libraries, executable programs, data files and other components, as well as metadata under the `info/` directory. Its contents are unpacked in the installation prefix. [Learn More](https://en.wikipedia.org/wiki/Conda_(package_manager)).
+A conda package is a `.tar.bz2` or `.conda` archive that contains libraries, executable programs, data files and other components, as well as metadata under the `info/` directory. Its contents are unpacked in the installation prefix. [Learn More](https://en.wikipedia.org/wiki/Conda_(package_manager)).
 
 <a id="term-CRAN"></a>
 
