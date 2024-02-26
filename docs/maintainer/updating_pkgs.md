@@ -1,6 +1,5 @@
 ---
 title: 'Maintaining packages'
-sidebar_position: 12
 ---
 
 <a id="maintaining-pkgs"></a>

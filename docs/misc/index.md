@@ -1,6 +1,5 @@
 ---
 title: 'Miscellaneous'
-sidebar_position: 27
 ---
 
 <a id="miscellaneous"></a>

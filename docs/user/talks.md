@@ -1,6 +1,5 @@
 ---
 title: 'Talks and resources about conda-forge'
-sidebar_position: 8
 ---
 
 <a id="talks"></a>

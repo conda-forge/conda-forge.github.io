@@ -1,6 +1,5 @@
 ---
 title: 'A brief introduction'
-sidebar_position: 2
 ---
 
 <a id="a-brief-introduction"></a>

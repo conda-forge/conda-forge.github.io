@@ -1,6 +1,5 @@
 ---
 title: 'Infrastructure'
-sidebar_position: 10
 ---
 
 <a id="infrastructure"></a>
