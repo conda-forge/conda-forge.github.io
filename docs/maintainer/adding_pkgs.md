@@ -389,9 +389,16 @@ requirements:
     - pip
 ```
 
-These options should be used to ensure a clean installation of the package without its
-dependencies. This helps make sure that we're only including this package,
-and not accidentally bringing any dependencies along into the conda package.
+`conda-forge` configures `pip` to ensure a clean installation of the package
+without its dependencies so no extra flags are required to be passed. This
+helps make sure that we're only including this package, and not accidentally
+bringing any dependencies along into the conda package.
+
+:::warning
+If your package uses `outputs` you may have to manually specify the flags
+`--no-deps --no-build-isolation` due to a bug in `conda-build`. See
+[conda-build#3993](https://github.com/conda/conda-build/issues/3993).
+:::
 
 Usually pure-Python packages only require `python`, `setuptools` and `pip`
 as `host` requirements; the real package dependencies are only
