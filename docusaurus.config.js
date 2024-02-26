@@ -28,7 +28,7 @@ const config = {
   onBrokenAnchors: process.env.GITHUB_ACTIONS ? "throw" : "warn",
   favicon: "img/favicon.ico",
   trailingSlash: true,
-  staticDirectories: ['static', 'static-sphinx'],
+  staticDirectories: ['static'],
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -71,6 +71,19 @@ const config = {
         docs: {
           breadcrumbs: true,
           // ...editUrl,
+          async sidebarItemsGenerator({ defaultSidebarItemsGenerator, ...args }) {
+            var sidebarItems = await defaultSidebarItemsGenerator(args);
+            for (const item of sidebarItems) {
+              if (item.type === "category" && item.label.startsWith("Organisation")) {
+                for (const subItem of item.items) {
+                  if (subItem.type == "category" && subItem.label.includes("meeting minutes")) {
+                    subItem.items = subItem.items.reverse();
+                  }
+                }
+              }
+            }
+            return sidebarItems;
+          },
         },
         blog: {
           showReadingTime: true,
