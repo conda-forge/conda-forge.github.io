@@ -1,7 +1,9 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const prism = require('prism-react-renderer');
+const path = require("path");
+import { themes } from 'prism-react-renderer'
+
 const editUrl = {
   editUrl: "https://github.com/conda-forge/conda-forge.github.io/tree/main/",
 };
@@ -107,6 +109,18 @@ const config = {
     //       breadcrumbs: false,
     //     }),
     //   ],
+    [
+      path.resolve(__dirname, "plugin-migration-urls"),
+      {
+        routes: [
+          {
+            path: "/status/migration/",
+            exact: false,
+            component: "@site/src/components/MigrationDetails/",
+          },
+        ],
+      },
+    ],
     [
       "content-blog",
       /** @type {import('@docusaurus/plugin-content-blog').Options} */
@@ -272,7 +286,7 @@ const config = {
             position: "left",
           },
           {
-            href: "https://conda-forge.org/status",
+            href: "/status/",
             label: "Status",
             position: "left",
           },
@@ -367,7 +381,7 @@ const config = {
               },
               {
                 label: "Status",
-                href: "https://conda-forge.org/status",
+                href: "/status/",
               },
               {
                 label: "Twitter",
@@ -379,8 +393,8 @@ const config = {
             title: "Resources",
             items: [
               {
-                label: "Dashboard",
-                to: "/dashboard/",
+                label: "Status",
+                to: "/status/",
               },
               {
                 label: "Style guide",
@@ -408,8 +422,8 @@ const config = {
         copyright: copyright,
       },
       prism: {
-        theme: prism.themes.github,
-        darkTheme: prism.themes.dracula,
+        theme: themes.github,
+        darkTheme: themes.dracula,
         additionalLanguages: ['bash', 'diff', 'json', 'batch', 'yaml', 'python', 'markdown', 'shell-session'],
       },
       docs: {

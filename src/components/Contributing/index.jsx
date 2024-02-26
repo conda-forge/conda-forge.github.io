@@ -63,11 +63,8 @@ export default function Contributing() {
                 <p>For a package on conda-forge, I want to ...</p>
             </div>
             {contributing.map(({ Svg, alt, title, href, content, width }, index) => (
-                <Link to={href} className={styles.linked_card}>
-                    <div
-                        className={styles.contributing_conda_forge_card}
-                        key={index}
-                        >
+                <Link to={href} className={styles.linked_card} key={index}>
+                    <div className={styles.contributing_conda_forge_card}>
                         <Svg width={width} alt={alt} role="img" />
                         <h3>{title}</h3>
                         <p>{content}</p>

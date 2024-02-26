@@ -1,0 +1,158 @@
+.migration_details {
+  margin: 0;
+  max-width: 100%;
+  min-height: 500px;
+  overflow: auto;
+}
+
+.migration_details_bar {
+  cursor: pointer;
+  height: 30px;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.migration_details_toggle {
+  float: right;
+}
+
+.migration_details_filter {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.migration_details_filter_button {
+  background-color: inherit;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: smaller;
+  font-weight: 600;
+  margin: 3px;
+  margin-bottom: 10px;
+  width: 195px;
+  user-select: none;
+  text-align: right;
+  padding: 2px;
+  padding-right: 8px;
+}
+
+.migration_details_filter_button:hover:active {
+  background-color: var(--ifm-color-primary-darkest);
+  border-color: var(--ifm-color-primary-darkest);
+  color: var(--ifm-color-primary-lightest);
+}
+
+.migration_details_filter_button:hover {
+  text-decoration: underline;
+}
+
+.migration_details_filter_done {
+  background-color: rgb(60, 1, 74);
+  border: 3px solid rgb(60, 1, 74, 0.4);
+  color: var(--ifm-color-secondary);
+}
+
+.migration_details_filter_done_on {
+  background-color: rgb(60, 1, 74, 0.4);
+  border: 3px solid rgb(60, 1, 74);
+  color: var(--ifm-color-primary-darkest);
+}
+
+.migration_details_filter_awaiting_parents {
+  background-color: rgb(253, 227, 33);
+  border: 3px solid rgb(253, 227, 33, 0.9);
+  color: var(--ifm-color-primary-darker);
+}
+
+.migration_details_filter_awaiting_parents_on {
+  background-color: rgb(253, 227, 33, 0.4);
+  border: 3px solid rgb(253, 227, 33);
+  color: var(--ifm-color-primary-darker);
+}
+
+.migration_details_filter_awaiting_pr {
+  background-color: rgb(47, 174, 110);
+  border: 3px solid rgb(47, 174, 110, 0.4);
+  color: var(--ifm-color-secondary);
+}
+
+.migration_details_filter_awaiting_pr_on {
+  background-color: rgb(47, 174, 110, 0.4);
+  border: 3px solid rgb(47, 174, 110);
+  color: var(--ifm-color-primary-dark);
+}
+
+.migration_details_filter_bot_error {
+  background-color: rgb(242, 59, 47);
+  border: 3px solid rgb(242, 59, 47, 0.4);
+  color: var(--ifm-color-secondary);
+}
+
+.migration_details_filter_bot_error_on {
+  background-color: rgb(242, 59, 47, 0.4);
+  border: 3px solid rgb(242, 59, 47);
+  color: var(--ifm-color-primary-dark);
+}
+
+.migration_details_filter_in_pr {
+  background-color: rgb(43, 93, 131);
+  border: 3px solid rgb(43, 93, 131, 0.4);
+  color: var(--ifm-color-secondary);
+}
+
+.migration_details_filter_in_pr_on {
+  background-color: rgb(43, 93, 131, 0.4);
+  border: 3px solid rgb(43, 93, 131);
+  color: var(--ifm-color-primary-dark);
+}
+
+.migration_details_filter_not_solvable {
+  background-color: rgb(255, 129, 0);
+  border: 3px solid rgb(255, 129, 0, 0.4);
+  color: var(--ifm-color-secondary);
+}
+
+.migration_details_filter_not_solvable_on {
+  background-color: rgb(255, 129, 0, 0.4);
+  border: 3px solid rgb(255, 129, 0);
+  color: var(--ifm-color-primary-dark);
+}
+
+.migration_details_filter_icon {
+  width: 16px;
+  float: left;
+  margin-top: 5px;
+  margin-left: 8px;
+}
+
+.migration_details table {
+  font-size: small;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.migration_details table td {
+  vertical-align: top;
+  padding: 3px;
+}
+
+.migration_details td a {
+  border-width: var(--ifm-badge-border-width);
+  border-color: transparent;
+  color: var(--ifm-color-primary);
+  font-size: small;
+  font-weight: 600;
+  min-width: 100%;
+  text-decoration: none;
+}
+
+.migration_details td a:hover {
+  border-width: var(--ifm-badge-border-width);
+  border-color: var(--ifm-color-primary);
+}

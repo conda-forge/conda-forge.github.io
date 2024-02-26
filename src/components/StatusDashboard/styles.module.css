@@ -1,0 +1,303 @@
+.badge {
+  vertical-align: bottom;
+}
+
+.incident {
+  padding: 10px;
+}
+
+.incident_body {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 0.5px solid var(--ifm-color-secondary);
+  border-top: 0;
+}
+
+.incident_link {
+  background-color: var(--ifm-color-primary-lightest);
+  display: block;
+  font-weight: 500;
+  margin-top: 5px;
+  padding: 2px 5px;
+  text-decoration: none;
+}
+
+.incident_status {
+  border: 0.5px solid var(--ifm-color-secondary);
+  border-radius: 5px;
+  color: var(--ifm-color-secondary);
+  font-weight: 500;
+  margin-right: 20px;
+  padding: 5px;
+}
+
+.incidents {
+  background-color: transparent;
+}
+
+.migrations_table {
+  font-size: small;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.migrations_table thead {
+  text-wrap: nowrap;
+}
+
+.migrations_table tr.collapsed,
+.migrations_table tbody.collapsed {
+  display: none;
+}
+
+.migrations_table th:only-child {
+  text-align: left;
+}
+
+.migrations_table th {
+  position: relative;
+  cursor: pointer;
+  display: table-cell;
+  padding: 3px 8px;
+  text-align: center;
+  user-select: none;
+}
+
+.migrations_table th[colspan]::after {
+  position: inherit;
+  content: " ▿";
+  right: auto;
+  top: auto;
+}
+
+.migrations_table thead th[colspan].collapsed::after {
+  content: " ▹";
+}
+
+.migrations_table th:not(colspan)::after {
+  font-size: smaller;
+  position: absolute;
+  right: 1px;
+  top: 6px;
+}
+
+.migrations_table th.ascending::after {
+  content: "△";
+}
+
+.migrations_table th.descending::after {
+  content: "▽";
+}
+
+.migrations_table td:first-child {
+  text-align: left;
+}
+
+.migrations_table td {
+  display: table-cell;
+  padding: 3px;
+  text-align: right;
+}
+
+.migrations_table td a {
+  border-width: var(--ifm-badge-border-width);
+  border-color: transparent;
+  color: var(--ifm-color-primary);
+  font-size: small;
+  font-weight: 600;
+  min-width: 100%;
+  text-decoration: none;
+}
+
+.migrations_table td a:hover {
+  border-width: var(--ifm-badge-border-width);
+  border-color: var(--ifm-color-primary);
+}
+
+.migrations_table .button-group {
+  float: right;
+}
+
+.migrations_table .migration {
+  background-color: #ccc;
+  cursor: pointer;
+  text-align: center;
+  margin: 2px;
+  padding: 3px;
+}
+
+.status_dashboard {
+  margin: 0;
+  max-width: 100%;
+}
+
+.status_dashboard_toc {
+  border: var(--ifm-table-border-width) solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  position: sticky;
+  top: 80px;
+  max-width: 250px;
+}
+
+.status_dashboard_toc a {
+  display: inline-block;
+  min-width: 100%;
+  text-decoration: none;
+}
+
+.status_dashboard_toc ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.status_dashboard_toc li {
+  background-color: var(--ifm-table-stripe-background);
+  border-radius: 5px;
+  padding: 1px 5px;
+  user-select: none;
+}
+
+.status_dashboard_toc li:hover {
+  background-color: transparent;
+}
+
+.toc_anchor {
+  display: block;
+  position: relative;
+  top: -50px;
+  visibility: hidden;
+}
+
+.status_pill {
+  border-radius: 8px;
+  display: inline-block;
+  font-size: smaller;
+  font-weight: 600;
+  min-width: 195px;
+  padding: 2px;
+  text-align: center;
+}
+
+.operational {
+  background-color: var(--ifm-color-success);
+  color: var(--ifm-color-secondary);
+}
+
+.degraded {
+  background-color: var(--ifm-color-warning);
+  color: var(--ifm-color-secondary);
+}
+
+.outage {
+  background-color: var(--ifm-color-danger);
+  color: var(--ifm-color-secondary);
+}
+
+.version_updates .collapsed::after {
+  font-size: smaller;
+  content: " ▹";
+}
+
+.version_updates .expanded::after {
+  font-size: smaller;
+  content: " ▿";
+}
+
+.version_updates_title {
+  background-color: var(--ifm-table-stripe-background);
+  border: var(--ifm-table-border-width) solid #ccc;
+  cursor: pointer;
+  font-size: smaller;
+  font-weight: 600;
+  margin: 2px;
+  padding: 2px 8px;
+  user-select: none;
+}
+
+.version_updates_content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 5px 0;
+  padding: 0 2px;
+}
+
+.version_updates_content a {
+  font-size: small;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.version_updates_content .badge:hover {
+  border-width: var(--ifm-badge-border-width);
+  border-color: var(--ifm-color-primary);
+}
+
+.errored_item {
+  border: var(--ifm-table-border-width) solid transparent;
+  cursor: pointer;
+  margin-left: 20px;
+  max-width: calc(100% - 20px);
+  padding: 2px 0px;
+}
+
+.errored_item:hover,
+.errored_item.expanded {
+  background-color: var(--ifm-table-stripe-background);
+  border: var(--ifm-table-border-width) solid #ccc;
+}
+
+.errored_item .errored_item_ellipsis {
+  display: none;
+}
+
+.errored_item:hover .errored_item_ellipsis {
+  display: inline;
+}
+
+.errored_item .errored_item_spacer {
+  display: inline;
+}
+
+.errored_item:hover .errored_item_spacer {
+  display: none;
+}
+
+.errored_item_content {
+  border: 1px solid var(--ifm-color-secondary);
+  border-top: 0px;
+  overflow: auto;
+  padding: 10px;
+  margin: -5px 0 0 20px;
+  max-width: 100%;
+}
+
+.errored_item_content pre {
+  font-size: smaller;
+  margin: 0;
+  overflow: auto;
+  text-wrap: wrap;
+  max-width: calc(100% - 10px);
+}
+
+.status_dashboard_graph canvas {
+  max-height: 200px;
+}
+
+.progress_bar {
+  position: relative;
+  float: left;
+  width: 100%;
+  text-align: justify;
+  padding-left: 5px;
+}
+
+.progress_bar .ratio {
+  float: right;
+  right: 0;
+  text-align: right;
+}
