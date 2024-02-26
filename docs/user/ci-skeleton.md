@@ -73,7 +73,7 @@ Let's go through them one-by-one!
 ### 1. Fill out recipe/meta.yaml
 
 The `ci-skeleton` command emits an example `meta.yaml` file for
-building `myproj`, hence the “skeleton” part of the name. If you
+building `myproj`, hence the "skeleton" part of the name. If you
 don't want the skeleton to be produced in the `recipe/` directory,
 you can use the `-r` option to supply an alternative.
 

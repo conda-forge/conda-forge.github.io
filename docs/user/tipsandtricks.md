@@ -162,7 +162,7 @@ CONDA_OVERRIDE_CUDA="11.2" mamba install "tensorflow==2.7.0=cuda112*" -c conda-f
 
 :::note
 
-You should select the cudatoolkit version most appropriate for your GPU; currently, we have “10.2”, “11.0”, “11.1”, and “11.2” builds available, where the “11.2” builds are compatible with all cudatoolkits>=11.2. At the time of writing (Mar 2022), there seems to be a bug in how the CUDA builds are resolved by `mamba`, defaulting to `cudatoolkit==10.2`; thus, it is prudent to be as explicit as possible like above or by adding `cudatoolkit>=11.2` or similar to the line above.
+You should select the cudatoolkit version most appropriate for your GPU; currently, we have "10.2", "11.0", "11.1", and "11.2" builds available, where the "11.2" builds are compatible with all cudatoolkits>=11.2. At the time of writing (Mar 2022), there seems to be a bug in how the CUDA builds are resolved by `mamba`, defaulting to `cudatoolkit==10.2`; thus, it is prudent to be as explicit as possible like above or by adding `cudatoolkit>=11.2` or similar to the line above.
 
 :::
 

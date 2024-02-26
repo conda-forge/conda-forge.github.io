@@ -193,10 +193,10 @@ To add new packages to conda-forge, users can submit a PR to `staged-recipes` (s
 where it will undergo a series of automated checks and a code review.
 Any conda-forge member can perform a code review, but the final merge can only be done by the `staged-recipes` or `core` teams.
 The following sections suggest guidelines on how to perform a successful code review.
-We distinguish between “Required” and “Recommended” as follows:
+We distinguish between "Required" and "Recommended" as follows:
 
 - Required: These guidelines are very important and a requisite for PR acceptance. Exceptions are rare and usually require  `core` approval.
-- Recommended: These are considered “nice to have” features. Ideally, all recipes should abide by them, but exceptions are tolerated as long as justifiable reasons are provided.
+- Recommended: These are considered "nice to have" features. Ideally, all recipes should abide by them, but exceptions are tolerated as long as justifiable reasons are provided.
 
 <a id="generalities"></a>
 

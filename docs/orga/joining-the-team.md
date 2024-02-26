@@ -55,10 +55,10 @@ Generally speaking, your role is as follows:
 To join the staged-recipes team, please ask one of the core members on our
 [Element chatroom](https://app.element.io/#/room/#conda-forge:matrix.org).
 We will then reach consensus in private and let you know our decision.
-Our decision will likely be “yes” but it could be “please get more involved
-with the review process on staged recipes first” if we have not seen you
+Our decision will likely be "yes" but it could be "please get more involved
+with the review process on staged recipes first" if we have not seen you
 take much interest in the staged-recipes review process.
-For transparency, our process is to have the core team “vote” on adding new
+For transparency, our process is to have the core team "vote" on adding new
 members. When we have a new member candidate, we ask the core team to vote
 yes/no and give the team seven days to vote. The person will then be given merge
 rights to conda-forge/staged-recipes so that they can help us review and merge

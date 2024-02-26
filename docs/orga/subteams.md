@@ -57,7 +57,7 @@ This team will operate via the following rules:
 ### Members
 
 - Matthew R. Becker <[becker.mr@gmail.com](mailto:becker.mr@gmail.com)>
-- Christopher J. “CJ” Wright <[cjwright4242@gmail.com](mailto:cjwright4242@gmail.com)>
+- Christopher J. "CJ" Wright <[cjwright4242@gmail.com](mailto:cjwright4242@gmail.com)>
 - Anthony Scopatz <[scopatz@gmail.com](mailto:scopatz@gmail.com)>
 
 <a id="finance-sub-team"></a>
@@ -101,7 +101,7 @@ This team will operate via the following rules:
 
 ### Members
 
-- Christopher J. “CJ” Wright <[cjwright4242@gmail.com](mailto:cjwright4242@gmail.com)>
+- Christopher J. "CJ" Wright <[cjwright4242@gmail.com](mailto:cjwright4242@gmail.com)>
 - Filipe Fernandes <[ocefpaf@gmail.com](mailto:ocefpaf@gmail.com)>
 - Eric Dill <[ericdill@pm.me](mailto:ericdill@pm.me)>
 
@@ -164,7 +164,7 @@ Packages and tools that fall under the purview of the bot subteam include:
 - Marius van Niekerk <[marius.v.niekerk@gmail.com](mailto:marius.v.niekerk@gmail.com)>
 - Michael Sarahan <[msarahan@gmail.com](mailto:msarahan@gmail.com)>
 - Anthony Scopatz <[scopatz@gmail.com](mailto:scopatz@gmail.com)>
-- Christopher J. “CJ” Wright <[cjwright4242@gmail.com](mailto:cjwright4242@gmail.com)>
+- Christopher J. "CJ" Wright <[cjwright4242@gmail.com](mailto:cjwright4242@gmail.com)>
 
 <a id="arm-sub-team"></a>
 
@@ -365,6 +365,6 @@ As such this group can, but is not limited to:
 ### Members
 
 - Filipe Fernandes <[ocefpaf@gmail.com](mailto:ocefpaf@gmail.com)>
-- Christopher J. “CJ” Wright <[cjwright4242@gmail.com](mailto:cjwright4242@gmail.com)>
+- Christopher J. "CJ" Wright <[cjwright4242@gmail.com](mailto:cjwright4242@gmail.com)>
 - Marcelo Duarte Trevisani <[marceloduartetrevisani@gmail.com](mailto:marceloduartetrevisani@gmail.com)>
 - Peter K. G. Williams <[peter@newton.cx](mailto:peter@newton.cx)>

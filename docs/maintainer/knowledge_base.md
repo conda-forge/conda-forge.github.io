@@ -58,7 +58,7 @@ Some optional, but useful CMake options:
 - `${CMAKE_ARGS}` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like [CUDA builds](#cuda).
 
 Here are some basic commands for you to get started. These are dependent on your source
-code layout and aren't intended to be used “as is”.
+code layout and aren't intended to be used "as is".
 
 **CMake lines for build.sh (macOS/Linux):**
 
@@ -159,12 +159,12 @@ versions are:
 While you can obtain these tools by installing the right version of the full
 [Visual Studio](https://visualstudio.microsoft.com/) development
 environment, you can save a lot of time and bandwidth by installing standalone
-“build tools” packages. You can get them from [Visual Studio
+"build tools" packages. You can get them from [Visual Studio
 Subscriptions](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products).
 To download build tools, you'll need a Microsoft account. Once on the
 Visual Studio Subscriptions page, you may also need to join the Dev Essentials
-program. Once that's done, you can click the “Download” tab and search for
-“Build Tools for Visual Studio 2022”.
+program. Once that's done, you can click the "Download" tab and search for
+"Build Tools for Visual Studio 2022".
 
 If you need more information. Please refer [the Python wiki page on Windows compilers](https://wiki.python.org/moin/WindowsCompilers).
 
@@ -526,7 +526,7 @@ In practical terms, for conda-forge, this results into two extra metadata bits t
     package is being built, like `cython` and `numpy`.
 
 In the terms of the [PEP720](https://peps.python.org/pep-0720/), the conda-forge setup
-implements the “faking the target environment” approach. More specifically, this will result in the
+implements the "faking the target environment" approach. More specifically, this will result in the
 following changes before the builds scripts run:
 
 - A modified `crossenv` installation in `$BUILD_PREFIX/venv`, mimicking the architecture of
@@ -2134,7 +2134,7 @@ higher than the package uploaded with the `dev` label.
 To reset your feedstock token and fix issues with uploads, follow these steps:
 
 1. Go to the `conda-forge/admin-requests` repo and copy [examples/example-broken.yml](https://github.com/conda-forge/admin-requests/blob/main/examples/example-broken.yml) to the `requests/` folder.
-2. Add the name of your feedstock in the YML file. While adding the name, don't add “-feedstock” to the end of it. For example: for `python-feedstock`, just add `python`.
+2. Add the name of your feedstock in the YML file. While adding the name, don't add "-feedstock" to the end of it. For example: for `python-feedstock`, just add `python`.
 
 <a id="using-arch-rebuild"></a>
 

@@ -635,7 +635,7 @@ metadata are satisfied.
 `pip check` can sometimes fail due to metadata discrepancies between
 PyPI and conda-forge (e.g. same package with different names). In these
 cases, the reviewer must evaluate whether the error was a false negative.
-Tip: use `pip list` to show what `pip check` “sees”.
+Tip: use `pip list` to show what `pip check` "sees".
 
 :::
 

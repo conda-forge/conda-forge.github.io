@@ -40,7 +40,7 @@ The main chat rooms that you'll interact with are
 * [gitter: core/private](https://gitter.im/conda-forge/core): Private chat for the @conda-forge/core team to discuss continued operations and improvements to conda-forge.
 * [gitter: power pc](https://gitter.im/conda-forge-ppc64le/Lobby): Public chat room for all things related to building for power pc (IBM) systems.
 * [gitter: bot subteam](https://gitter.im/conda-forge/regro-cf-autotick-bot): Public chat room for all things related to the conda-forge automation infrastructure.
-  Our automation infrastructure is colloquially referred to as “the bot”.
+  Our automation infrastructure is colloquially referred to as "the bot".
 * [gitter: compilers](https://gitter.im/conda-forge/conda-forge-compilers): Public chat room focused on the conda-forge compiler stack.
 * [element: conda-forge-space](https://app.element.io/#/room/#conda-forge-space:matrix.org): An element space listing all conda-forge rooms.
 * [element: interns](https://app.element.io/#/room/#conda-forge_conda-forge-interns:gitter.im): Public chat room for conda-forge interns to discuss projects and seek guidance from the community.

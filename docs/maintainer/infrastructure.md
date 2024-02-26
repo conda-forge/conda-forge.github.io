@@ -230,7 +230,7 @@ certain very old packages that require VC9 will fail.
 
 TravisCI is used to build packages for IBM Power 8+ and ARM. After merging a staged-recipes pull request, it might be necessary to
 force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit [https://app.travis-ci.com/account/repositories](https://app.travis-ci.com/account/repositories)
-and click the “Sync accounts” button.
+and click the "Sync accounts" button.
 
 <a id="enabling-travis"></a>
 
@@ -297,7 +297,7 @@ To skip a CI build for a given commit, put `[ci skip] ***NO_CI***` in the commit
 ### Third-party Use of Our CI Services
 
 Due to its stature in the open-source community, conda-forge has enhanced access to certain CI services. This access is a community
-resource entrusted to conda-forge for use in building packages. We thus cannot support third-party or “off-label” CI jobs in our
+resource entrusted to conda-forge for use in building packages. We thus cannot support third-party or "off-label" CI jobs in our
 feedstocks on any of our CI services. If we find such use, we will politely ask the maintainers to rectify the situation. We may
 take more serious actions, including archiving feedstocks or removing maintainers from the organization, if the situation cannot be rectified.
 
