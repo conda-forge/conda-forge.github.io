@@ -1364,6 +1364,89 @@ Currently available packages:
 - exceptiongroup
 - importlib-metadata
 
+## Python PEP517 Build Isolation {#pep517}
+
+[PEP517](https://www.python.org/dev/peps/pep-0517/) paves the way for building python wheels in a well-defined, isolated environment, and is generally a good step forward. However, `conda-build` already performs this function, even distinguishing between the `host` and `build` environments, and supporting additional, heavyweight dependencies like compilers and other build-time language runtimes.
+
+### Common PEP517 Problems
+
+A number of symptoms of PEP517 build isolation conflicts with `conda-build` manifest in different ways.
+
+#### `ModuleNotFoundError` during test
+
+When problems occur at the interaction of `pip` and more exotic build tools like e.g. `poetry` and `flit`, the expected output can leave the as-installed package in a bad state, which might leave the following `meta.yaml` excerpt like this...
+
+```yaml
+package:
+  name: foopkg
+  version: 0.1.0
+
+build:
+  script: {{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host: 
+    - poetry-core
+    - python
+  run:
+    - python
+
+test:
+  requires:
+    - pip
+  imports:
+    - foopkg
+  commands:
+    - pip check
+```
+
+...showing an error like this:
+
+```sh
+File "~/conda/feedstock_root/build_artifacts/foopkg_1635435591741/test_tmp/run_test.py", line 2, in <module>
+import foopkg
+ModuleNotFoundError: No module named 'foopkg'
+import: 'foopkg'
+```
+
+#### Version `0.0.0` reported
+
+Further, some other tools such as `setuptools_scm` might leave the version observed by e.g. `pip check` or `entry_points` at `0.0.0`.
+
+### PEP517 Workarounds
+
+:::note
+Some workarounds are available for the above problems, but eventually this will have to be fixed in `conda-build` itself
+:::
+
+#### Use Deprecated Out-of-Tree Build (preferred)
+
+```yaml
+build:
+  script: {{ PYTHON }} -m pip install . -vv --use-deprecated=out-of-tree-build
+```
+
+This falls back to some previous `pip` behavior, and allows many builds to continue normally
+
+:::tip[Hint]
+While this is a deprecated feature which will be removed in the future, it has the advantage of being a <span class="title-ref">well-known string</span> for which it might be possible to write an automated migration once a real fix is available.
+:::
+
+#### Delete `pyproject.toml`
+
+```yaml
+build:
+  script: 
+    - {{ PYTHON }} -c "__import__('os').unlink('pyproject.toml')"
+    - {{ PYTHON }} -m pip install . -vv
+```
+
+In the absence of a `pyproject.toml`, installation will fall back on legacy metadata files such as `setup.py` and/or `setup.cfg`.
+
+:::warning
+This relies on most PEP517-compliant tools generating these files to include in `.tar.gz` during the build process. It is unknown how long this will be supported, and is likely to introduce other, unknown issues as more build/test tools make use of `pyproject.toml`.
+:::
+
 <a id="noarch-builds"></a>
 
 ## Noarch builds
