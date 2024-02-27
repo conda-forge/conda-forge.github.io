@@ -1,6 +1,5 @@
 ---
 title: 'Contributing packages'
-sidebar_position: 11
 ---
 
 <a id="dev-contribute-pkgs"></a>

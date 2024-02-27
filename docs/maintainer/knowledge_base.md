@@ -1,6 +1,5 @@
 ---
 title: 'Knowledge Base'
-sidebar_position: 15
 ---
 
 <a id="knowledge-base"></a>

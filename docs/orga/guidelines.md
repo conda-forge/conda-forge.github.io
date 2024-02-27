@@ -1,6 +1,5 @@
 ---
 title: 'Guidelines'
-sidebar_position: 18
 ---
 
 <a id="guidelines"></a>

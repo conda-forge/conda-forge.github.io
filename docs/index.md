@@ -1,6 +1,5 @@
 ---
 title: 'conda-forge documentation'
-sidebar_position: 0
 ---
 
 <a id="conda-forge-documentation"></a>
