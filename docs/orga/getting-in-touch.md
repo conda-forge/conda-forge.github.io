@@ -1,6 +1,5 @@
 ---
 title: 'Getting in Touch'
-sidebar_position: 25
 ---
 
 <a id="getintouch"></a>

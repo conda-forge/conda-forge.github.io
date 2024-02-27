@@ -1,6 +1,5 @@
 ---
 title: 'FAQ'
-sidebar_position: 16
 ---
 
 <a id="faq"></a>

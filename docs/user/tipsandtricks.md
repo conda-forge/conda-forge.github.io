@@ -1,6 +1,5 @@
 ---
 title: 'Tips & tricks'
-sidebar_position: 3
 ---
 
 <a id="tips-tricks"></a>

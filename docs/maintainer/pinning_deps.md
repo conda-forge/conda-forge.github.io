@@ -1,6 +1,5 @@
 ---
 title: 'Pinned dependencies'
-sidebar_position: 13
 ---
 
 <a id="pinned-deps"></a>

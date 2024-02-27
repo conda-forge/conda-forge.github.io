@@ -1,6 +1,5 @@
 ---
 title: 'Configuring conda-forge.yml'
-sidebar_position: 14
 ---
 
 <a id="configuring-conda-forge-yml"></a>
