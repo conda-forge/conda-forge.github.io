@@ -182,7 +182,7 @@ function Graph(props) {
 
 function Table({ details }) {
   const [filters, setState] = useState(ORDERED
-      .reduce((filters, [key]) => ({ ...filters, [key]: 0 })));
+      .reduce((filters, [status]) => ({ ...filters, [status]: true }), {}));
   const feedstock = details._feedstock_status;
   const rows = ORDERED.reduce((rows, [status]) => (
     filters[status] ? rows :
