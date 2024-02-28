@@ -142,13 +142,17 @@
   padding: 3px;
 }
 
+.migration_details td a,
+.migration_details td span {
+  font-size: small;
+  font-weight: 600;
+  min-width: 100%;
+}
+
 .migration_details td a {
   border-width: var(--ifm-badge-border-width);
   border-color: transparent;
   color: var(--ifm-color-primary);
-  font-size: small;
-  font-weight: 600;
-  min-width: 100%;
   text-decoration: none;
 }
 

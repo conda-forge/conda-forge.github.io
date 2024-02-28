@@ -1,4 +1,3 @@
-import Link from "@docusaurus/Link";
 import { Redirect, useLocation } from "@docusaurus/router";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { urls } from "@site/src/constants";
@@ -217,11 +216,18 @@ function Table({ details }) {
 function Row({ children }) {
   const { feedstock, name, status } = children;
   const immediate = feedstock["immediate_children"];
+  const href = feedstock["pr_url"];
   return (
   <tr>
     <td>
-    <a className="badge badge--secondary" href={feedstock["pr_url"]}
-      style={{ minWidth: "100%" }}>{name}</a>
+    {href ? (
+      <a className="badge badge--secondary"
+        href={href} style={{ minWidth: "100%" }}>{name}</a>
+    ) : (
+      <span className="badge badge--secondary" style={{ minWidth: "100%" }}>
+        {name}
+      </span>
+    )}
     </td>
     <td>{TITLES[status]}</td>
     <td>
