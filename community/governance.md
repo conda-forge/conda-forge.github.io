@@ -1,11 +1,7 @@
 ---
 title: 'Governance'
-sidebar_position: 19
+custom_edit_url: 'https://github.com/conda-forge/conda-forge.github.io/blob/main/docs/orga/governance.md.tmpl'
 ---
-
-<a id="governance"></a>
-
-<a id="id1"></a>
 
 # Governance
 
@@ -16,17 +12,12 @@ core, any team, or external contributors choose to participate and may
 choose to leave at any time for any reason or for no reason. We deeply
 appreciate all good faith contributions.
 
-<a id="code-of-conduct"></a>
-
-<a id="id2"></a>
-
 ## Code of Conduct
 
-Please refer to the [Code of Conduct section in our README](https://github.com/conda-forge/conda-forge.github.io#code-of-conduct) for more information.
+Please refer to the [Code of Conduct section](./code-of-conduct.md) for more information.
+
 
 <a id="teams-roles"></a>
-
-<a id="id3"></a>
 
 ## Teams & Roles
 
@@ -56,8 +47,6 @@ Here are defined the primary teams participating in conda-forge activities.
   the active core group. The `core.csv` list should be updated when a change in the status
   of a member occurs.
 
-<a id="sub-teams"></a>
-
 ## Sub-Teams
 
 The core team may elect to create new sub-teams for managing the daily business
@@ -81,8 +70,6 @@ Sub-teams have a charter that is either *dynamic* or *static*.
 All sub-teams must adhere to the governance, policies, and procedures of
 conda-forge at all times.
 
-<a id="voting"></a>
-
 ## Voting
 
 This section presents descriptions and criteria for voting items in the
@@ -98,7 +85,7 @@ calling a vote are as follows:
   violating the code of conduct.
 * Voting yes moves the proposal forward;
   voting no is the only way to express opposition to the proposal;
-  not voting is discouraged, but non-votes do not count as “no”.
+  not voting is discouraged, but non-votes do not count as "no".
 * There should always be an option to abstain from voting.
 
 Voting items are labeled as either **standard** or **sensitive**.
@@ -118,7 +105,7 @@ as the authoritative list of emails to use.
 The default voting period is 1 week (7 days). This may be modified at
 the time when a vote is called, but may never be less than 24 hrs.
 
-Additional requirements may apply in case low turnouts have to be handled, see “Quorum” below.
+Additional requirements may apply in case low turnouts have to be handled, see "Quorum" below.
 
 To call for a standard vote, here is a template PR comment:
 
@@ -134,7 +121,7 @@ This vote will end on {date}.
 ---
 * **Posting results:**
   To maintain the historical record, the outcome of any standard vote which invokes the
-  “time out” rules below should be recorded in the “vote-results” folder at
+  "time out" rules below should be recorded in the "vote-results" folder at
   [https://github.com/conda-forge/conda-forge.github.io/tree/main/vote-results](https://github.com/conda-forge/conda-forge.github.io/tree/main/vote-results)
 
   Each vote should be its own file.  The filename should reflect the topic and the
@@ -149,7 +136,7 @@ This vote will end on {date}.
 * **Quorum:**
   Quorum for votes can be met in one of three ways depending on the
   vote: the standard quorum rules, the accelerated quorum rules, and the
-  “time out” quorum rules. The specific quorum rules applicable
+  "time out" quorum rules. The specific quorum rules applicable
   for each vote are listed below.
 
   **Standard Quorum Rules**: All percentages below express *both*
@@ -162,12 +149,12 @@ This vote will end on {date}.
 
   **Accelerated Quorum Rules**: For certain votes, we allow a lower quorum level.
   For these votes,
-  if the voting period is longer than a week and there are no “no” votes, a quorum
+  if the voting period is longer than a week and there are no "no" votes, a quorum
   of half of the size
   needed for a **standard quorum** above is acceptable. For example, for a vote
   requiring 50% with 18
-  active core members, at least 5 people must vote “yes” and exactly 0 people
-  must vote “no”.
+  active core members, at least 5 people must vote "yes" and exactly 0 people
+  must vote "no".
 
   **Time-out Quorum Rules**: Votes not achieving quorum will eventually time out on their set end date.
   When this happens,
@@ -203,7 +190,7 @@ This vote will end on {date}.
       reviews.
       ```
 
-  To declare a standard vote “timed out,” the person making such a declaration
+  To declare a standard vote "timed out," the person making such a declaration
   must post a pull-request adding
   a vote record to the [vote-results folder](https://github.com/conda-forge/conda-forge.github.io/tree/main/vote-results).
   The declaration PR should be merged by the first core member
@@ -263,7 +250,7 @@ This vote will end on {date}.
   Occasionally, discussions become
   toxic and antithetical to the goal of fostering the conda-forge
   community. Members of core have the right to lock the thread in an
-  “ask for forgiveness and not for permission” way so bad situations
+  "ask for forgiveness and not for permission" way so bad situations
   are handled quickly. The lock must be justified in the thread itself
   with a text explaining the reasons for locking and how the participants
   can contest it.
@@ -344,60 +331,54 @@ This vote will end on {date}.
 All other voting items are considered to be standard, require a 50%
 majority to pass, and use only the standard or time-out quorum rules.
 
-<a id="current-members-of-core"></a>
-
 ## Current Members of Core
 
 In alphabetical order,
 
-- [Axel Obermeier @h-vetinari](https://github.com/h-vetinari>)
-- [Cheng H. Lee @chenghlee](https://github.com/chenghlee>)
-- [Chris Burr @chrisburr](https://github.com/chrisburr>)
-- [Christopher J. 'CJ' Wright @cj-wright](https://github.com/cj-wright>)
-- [Eric Dill @ericdill](https://github.com/ericdill>)
-- [Filipe Pires Alvarenga Fernandes @ocefpaf](https://github.com/ocefpaf>)
-- [Isuru Fernando @isuruf](https://github.com/isuruf>)
-- [Jaime Rodríguez-Guerra @jaimergp](https://github.com/jaimergp>)
-- [Jannis Leidel @jezdez](https://github.com/jezdez>)
-- [John Kirkham @jakirkham](https://github.com/jakirkham>)
-- [Joshua Adelman @synapticarbors](https://github.com/synapticarbors>)
-- [Keith Kraus @kkraus14](https://github.com/kkraus14>)
-- [Lori A. Burns @loriab](https://github.com/loriab>)
-- [Marcel Bargull @mbargull](https://github.com/mbargull>)
-- [Marcelo Duarte Trevisani @marcelotrevisani](https://github.com/marcelotrevisani>)
-- [Marius van Niekerk @mariusvniekerk](https://github.com/mariusvniekerk>)
-- [Mark Harfouche @hmaarrfk](https://github.com/hmaarrfk>)
-- [Matt Craig @mwcraig](https://github.com/mwcraig>)
-- [Matthew R. Becker @beckermr](https://github.com/beckermr>)
-- [Min Ragan-Kelley @minrk](https://github.com/minrk>)
-- [Patrick Sodré @sodre](https://github.com/sodre>)
-- [Peter K. G. Williams @pkgw](https://github.com/pkgw>)
-- [Ryan May @dopplershift](https://github.com/dopplershift>)
-- [Sylvain Corlay @SylvainCorlay](https://github.com/SylvainCorlay>)
-- [Uwe L. Korn @xhochy](https://github.com/xhochy>)
-- [Vinicius Douglas Cerutti @viniciusdc](https://github.com/viniciusdc>)
-- [Wolf Vollprecht @wolfv](https://github.com/wolfv>)
+- [Axel Obermeier @h-vetinari](https://github.com/h-vetinari)
+- [Cheng H. Lee @chenghlee](https://github.com/chenghlee)
+- [Chris Burr @chrisburr](https://github.com/chrisburr)
+- [Christopher J. 'CJ' Wright @cj-wright](https://github.com/cj-wright)
+- [Eric Dill @ericdill](https://github.com/ericdill)
+- [Filipe Pires Alvarenga Fernandes @ocefpaf](https://github.com/ocefpaf)
+- [Isuru Fernando @isuruf](https://github.com/isuruf)
+- [Jaime Rodríguez-Guerra @jaimergp](https://github.com/jaimergp)
+- [Jannis Leidel @jezdez](https://github.com/jezdez)
+- [John Kirkham @jakirkham](https://github.com/jakirkham)
+- [Joshua Adelman @synapticarbors](https://github.com/synapticarbors)
+- [Keith Kraus @kkraus14](https://github.com/kkraus14)
+- [Lori A. Burns @loriab](https://github.com/loriab)
+- [Marcel Bargull @mbargull](https://github.com/mbargull)
+- [Marcelo Duarte Trevisani @marcelotrevisani](https://github.com/marcelotrevisani)
+- [Marius van Niekerk @mariusvniekerk](https://github.com/mariusvniekerk)
+- [Mark Harfouche @hmaarrfk](https://github.com/hmaarrfk)
+- [Matt Craig @mwcraig](https://github.com/mwcraig)
+- [Matthew R. Becker @beckermr](https://github.com/beckermr)
+- [Min Ragan-Kelley @minrk](https://github.com/minrk)
+- [Patrick Sodré @sodre](https://github.com/sodre)
+- [Peter K. G. Williams @pkgw](https://github.com/pkgw)
+- [Ryan May @dopplershift](https://github.com/dopplershift)
+- [Sylvain Corlay @SylvainCorlay](https://github.com/SylvainCorlay)
+- [Uwe L. Korn @xhochy](https://github.com/xhochy)
+- [Vinicius Douglas Cerutti @viniciusdc](https://github.com/viniciusdc)
+- [Wolf Vollprecht @wolfv](https://github.com/wolfv)
 
 <!-- keep old anchor around -->
 
 <a id="emetirus-members"></a>
 
-<a id="emeritus-members"></a>
-
 ## Emeritus members
 
 In alphabetical order,
 
-- [Anthony Scopatz @scopatz](https://github.com/scopatz>)
-- [Björn Grüning @bgruening](https://github.com/bgruening>)
-- [Danica J. Sutherland @djsutherland](https://github.com/djsutherland>)
-- [Jonathan J. Helmus @jjhelmus](https://github.com/jjhelmus>)
-- [Michael Sarahan @msarahan](https://github.com/msarahan>)
-- [Patrick Snape @patricksnape](https://github.com/patricksnape>)
-- [Phil Elson @pelson](https://github.com/pelson>)
-- [Sophia Castellarin @soapy1](https://github.com/soapy1>)
-
-<a id="document-history"></a>
+- [Anthony Scopatz @scopatz](https://github.com/scopatz)
+- [Björn Grüning @bgruening](https://github.com/bgruening)
+- [Danica J. Sutherland @djsutherland](https://github.com/djsutherland)
+- [Jonathan J. Helmus @jjhelmus](https://github.com/jjhelmus)
+- [Michael Sarahan @msarahan](https://github.com/msarahan)
+- [Patrick Snape @patricksnape](https://github.com/patricksnape)
+- [Phil Elson @pelson](https://github.com/pelson)
+- [Sophia Castellarin @soapy1](https://github.com/soapy1)
 
 ## Document History
 

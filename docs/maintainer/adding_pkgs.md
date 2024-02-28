@@ -1023,7 +1023,7 @@ If you wish to be a maintainer of a certain package, you should contact current 
 
 `@conda-forge-admin, please add user @username`
 
-where username is the GitHub username of the new maintainer to be added. Please refer to [Becoming a maintainer](../orga/guidelines.md#becoming-a-maintainer) and [Updating the maintainer list](updating_pkgs.md#maint-updating-maintainers) for detailed instructions.
+where username is the GitHub username of the new maintainer to be added. Please refer to [Becoming a maintainer](guidelines.md#becoming-a-maintainer) and [Updating the maintainer list](updating_pkgs.md#maint-updating-maintainers) for detailed instructions.
 
 <a id="feedstock-name"></a>
 
