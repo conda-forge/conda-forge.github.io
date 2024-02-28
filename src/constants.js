@@ -116,7 +116,7 @@ export const urls = {
       },
       {
         name: "admin migrations",
-        link: "https://github.com/regro/libcfgraph",
+        link: "https://github.com/conda-forge/admin-migrations",
         badge:
           "https://github.com/conda-forge/admin-migrations/actions/workflows/migrate.yml/badge.svg",
         badgeLink:
