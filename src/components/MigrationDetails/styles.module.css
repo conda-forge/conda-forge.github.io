@@ -164,3 +164,13 @@
   border-width: var(--ifm-badge-border-width);
   border-color: var(--ifm-color-primary);
 }
+
+.migration_details .collapsed::after {
+  font-size: smaller;
+  content: " ▹";
+}
+
+.migration_details .expanded::after {
+  font-size: smaller;
+  content: " ▿";
+}

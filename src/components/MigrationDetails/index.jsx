@@ -214,30 +214,41 @@ function Table({ details }) {
 }
 
 function Row({ children }) {
+  const [collapsed, setState] = useState(true);
   const { feedstock, name, status } = children;
   const immediate = feedstock["immediate_children"];
   const href = feedstock["pr_url"];
-  return (
-  <tr>
-    <td>
-    {href ? (
-      <a className="badge badge--secondary"
-        href={href} style={{ minWidth: "100%" }}>{name}</a>
-    ) : (
-      <span className="badge badge--secondary" style={{ minWidth: "100%" }}>
-        {name}
-      </span>
-    )}
-    </td>
-    <td>{TITLES[status]}</td>
-    <td>
-      {(immediate || []).map((name, index) => (
-        <span className="badge badge--secondary" key={index}
-          style={{ margin: 2 }}>
-          {name}
-        </span>
-      ))}
-    </td>
-  </tr>
-  );
+  const details = feedstock["pre_pr_migrator_status"];
+  if (details) console.log('details');
+  return (<>
+    <tr>
+      <td>
+      {href ? (
+        <a className="badge badge--secondary" href={href}>{name}</a>
+      ) : (
+        details ? (
+          <span className={
+            `badge badge--secondary ${collapsed ?
+                styles.collapsed :
+                styles.expanded}`}
+            onClick={() => setState(!collapsed)}>
+            {name}
+          </span>) : (
+          <span className={`badge badge--secondary`}>{name}</span>)
+      )}
+      </td>
+      <td>{TITLES[status]}</td>
+      <td>
+        {(immediate || []).map((name, index) => (
+          <span className="badge badge--secondary" key={index}
+            style={{ margin: 2 }}>
+            {name}
+          </span>
+        ))}
+      </td>
+    </tr>
+    {details && !collapsed && (<tr>
+      <td colSpan={3}><pre>{details}</pre></td>
+    </tr>)}
+  </>);
 }
