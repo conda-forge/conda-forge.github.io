@@ -2002,21 +2002,26 @@ the package and its dependencies. These builds are experimental as many of them 
 
 To request a migration for a particular package and all its dependencies:
 
-1. Check the feedstock in question to see if there is already an issue or pull request.
+1. It may be that your package is already in the process of being migrated. Please check
+   the status of the
+   [arm osx addition migration](https://conda-forge.org/status/#armosxaddition).
+   If your package is already in the process of being migrated, it will appear
+   under the appropriate heading (done, in-pr, awaiting-parents, etc.).
+2. Check the feedstock in question to see if there is already an issue or pull request.
    Opening an issue here is fine, as it might take a couple iterations of the below,
    especially if many dependencies need to be built as well.
-2. If nothing is under way, look at the current [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt).
-3. If the package is not listed there, make a PR, adding the package
+3. If nothing is under way, look at the current [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt).
+4. If the package is not listed there, make a PR, adding the package
    name to a random location in `osx_arm64.txt`.
    The migration bot should start making automated pull requests to the
    repo and its dependencies.
-4. Within a few hours, the [status page](https://conda-forge.org/status/#armosxaddition)
+5. Within a few hours, the [status page](https://conda-forge.org/status/#armosxaddition)
    should reflect the progress of the package in question, and help you keep track
    of progress. Help out if you can!
-5. The feedstock maintainers (who very likely *do not* have an M1) will work to make
+6. The feedstock maintainers (who very likely *do not* have an M1) will work to make
    any changes required to pass continuous intgration. If you have insight into
    the particular package, **please** chime in, but most of all **be patient and polite**.
-6. Once the new builds are available from `anaconda.org`, please help the maintainers
+7. Once the new builds are available from `anaconda.org`, please help the maintainers
    by testing the packages, and reporting back with any problems… but also successes!
 
 <a id="pre-release-builds"></a>
@@ -2166,7 +2171,7 @@ higher than the package uploaded with the `dev` label.
 
 To reset your feedstock token and fix issues with uploads, follow these steps:
 
-1. Go to the `conda-forge/admin-requests` repo and copy [examples/example-broken.yml](https://github.com/conda-forge/admin-requests/blob/main/examples/example-broken.yml) to the `requests/` folder.
+1. Go to the `conda-forge/admin-requests` repo and copy [examples/example-token-reset.yml](https://github.com/conda-forge/admin-requests/blob/main/examples/example-token-reset.yml) to the `requests/` folder.
 2. Add the name of your feedstock in the YML file. While adding the name, don't add "-feedstock" to the end of it. For example: for `python-feedstock`, just add `python`.
 
 <a id="using-arch-rebuild"></a>
@@ -2175,7 +2180,9 @@ To reset your feedstock token and fix issues with uploads, follow these steps:
 
 ## Using `arch_rebuild.txt`
 
-You can add a feedstock to `arch-rebuild.txt` if it requires rebuilding with different architectures/platforms (such as ppc64le or aarch64). To add the feedstock to `arch_rebuild.txt`, open a PR to the [conda-forge-pinning-feedstock repository](https://github.com/conda-forge/conda-forge-pinning-feedstock).
+You can add a feedstock to `arch_rebuild.txt` if it requires rebuilding with different architectures/platforms (such as `ppc64le` or `aarch64`). 
+Check the [migration status](https://conda-forge.org/status/#aarch64andppc64leaddition) to see if your package is already in the queue to get migrated. 
+If not, you can add the feedstock to `arch_rebuild.txt` by opening a PR to the [conda-forge-pinning-feedstock repository](https://github.com/conda-forge/conda-forge-pinning-feedstock).
 Once the PR is merged, the migration bot goes through the list of feedstocks in `arch_rebuild.txt` and opens a migration PR for any new feedstocks and their dependencies, enabling the aarch64/ppc64le builds.
 
 <a id="migrations-and-migrators"></a>
