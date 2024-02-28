@@ -107,7 +107,7 @@ export const urls = {
         badgeLink: "https://github.com/regro/cf-scripts/actions",
       },
       {
-        name: "staged-recipes migrations",
+        name: "Feedstock creation",
         link: "https://github.com/conda-forge/staged-recipes",
         badge:
           "https://github.com/conda-forge/admin-requests/actions/workflows/create_feedstocks.yml/badge.svg",
