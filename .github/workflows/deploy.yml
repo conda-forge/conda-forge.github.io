@@ -12,6 +12,11 @@ jobs:
     name: deploy
     runs-on: "ubuntu-latest"
     steps:
+      - name: Dump github context
+        run:   echo "$GITHUB_CONTEXT"
+        shell: bash
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
       - uses: actions/checkout@v4
 
       - uses: conda-incubator/setup-miniconda@v3
@@ -31,6 +36,7 @@ jobs:
           source ./.ci_scripts/update_docs
         env:
           GHREF: ${{ github.ref }}
+          GHREPO: ${{ github.head.repo.full_name || github.repository }}
 
       - name: deploy
         if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
