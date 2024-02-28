@@ -131,23 +131,22 @@ const config = {
           if (existingPath.startsWith('/blog/tags/')) {
             redirects.push(`/blog/blog/tag/${existingPath.slice(11)}`)
           }
-          if (existingPath == '/blog/archive/') {
+          if (existingPath === '/blog/archive/') {
             redirects.push("/blog/2023/");
             redirects.push("/blog/2022/");
             redirects.push("/blog/2021/");
             redirects.push("/blog/2020/");
             redirects.push("/blog/2019/");
           }
+          if (existingPath.startsWith('/community/minutes/') && existingPath.length > 19) {
+            redirects.push(`/docs/orga/minutes/${existingPath.slice(19)}`)
+            redirects.push(`/docs/orga/minutes/${existingPath.slice(19, -1)}.html`)
+          }
           if (
             [
               "/docs/",
               "/docs/user/",
-              "/docs/orga/",
-              "/docs/orga/minutes/",
-              "/docs/orga/funding/",
-              "/docs/misc/",
               "/docs/maintainer/",
-              "/docs/contracting/",
             ].includes(existingPath)
           ) {
             redirects.push(`${existingPath}00_intro.html`);
@@ -283,8 +282,12 @@ const config = {
             to: "/community/contracting/",
           },
           {
-            from: ["/docs/funding/", "/docs/funding/00_intro.html"],
+            from: ["/docs/orga/funding/", "/docs/orga/funding/00_intro.html"],
             to: "/community/funding/",
+          },
+          {
+            from: ["/docs/orga/minutes/", "/docs/orga/minutes/00_intro.html"],
+            to: "/community/minutes/",
           },
         ],
       },
