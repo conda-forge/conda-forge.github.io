@@ -1271,6 +1271,40 @@ which has `openblas` as a dependency and has a symlink from `libblas.so.3` to `l
 BLAS `3.8.0` API.  This means that, at install time, the user can select what BLAS implementation
 they like without any knowledge of the version of the BLAS implementation needed.
 
+### Microarchitecture-optimized builds {#microarch}
+
+conda [virtual packages](../glossary.md#virtual-package) include `__archspec`, which expose the processor architecture to the solver. However, `__archspec` should not be used directly in recipes; instead, users should rely on the [`microarch-level`](https://github.com/conda-forge/microarch-level-feedstock) helper packages (contributed in [staged-recipes#24306](https://github.com/conda-forge/staged-recipes/pull/24306)).
+
+Before learning how to use it, please read these considerations:
+
+- Adding microarchitecture variants can result in too many entries in the build matrix. Do not overuse it.
+- These optimized builds should only be used when the performance improvements are significant.
+- Preferrably, the project should rely on runtime dispatch for arch-specific optimizations.
+- If the package is already too large, consider using smaller outputs for the arch-optimized variants.
+
+To implement microarchitecture-optimized builds in your feedstock, you'll end up with something like:
+
+```yaml title="recipe/conda_build_config.yaml"
+microarch_level:  # [unix and x86_64]
+  - 1  # [unix and x86_64]
+  - 3  # [unix and x86_64]
+  - 4  # [unix and x86_64]
+```
+
+```yaml title="recipe/meta.yaml"
+# ...
+requirements:
+  build:
+    - x86_64-microarch-level {{ microarch_level }}  # [unix and x86_64]
+    - {{ compiler('c') }}
+    # ...
+# ...
+```
+
+That's it. Note that the activation scripts behind the `microarch-level` packages are already injecting the necessary compiler flags for you. Since they also have `run_exports` entries, your
+package will have the necessary runtime requirements to ensure the most adequate variant gets installed. Refer to [this comment](https://github.com/conda-forge/staged-recipes/pull/24306#issuecomment-1800095471) for more information.
+
+
 <a id="knowledge-mpl"></a>
 
 <a id="matplotlib"></a>
