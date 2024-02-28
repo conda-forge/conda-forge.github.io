@@ -3,7 +3,7 @@
 
 const prism = require('prism-react-renderer');
 
-const _repo = process.env.GITHUB_REPOSITORY || 'conda-forge/conda-forge.github.io';
+const _repo = process.env.GHREPO || 'conda-forge/conda-forge.github.io';
 const _branch = process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF || 'main';
 const editUrl = {
   editUrl: `https://github.com/${_repo}/tree/${_branch}/`,
