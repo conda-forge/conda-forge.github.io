@@ -78,3 +78,7 @@ An environment is a tool that helps to keep dependencies required by different p
 ## Recipe
 
 A recipe is a collection of files required to build a conda package. This includes, at minimum, a [`meta.yaml`](maintainer/adding_pkgs.md#the-recipe-meta-yaml) file, but can also include license files, patches, build scripts, test scripts etc. [Learn More](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html).
+
+## Virtual package
+
+Virtual packages are not real packages that can be downloaded. They are injected by the conda clients at runtime so the solver can consider that metadata as part of the constraints of the problem. By convention, they always start with a double underscore (`__`). Some examples include the type of operating system (Linux, Windows, macOS), or the CUDA version supported by the system (if any). [Learn More](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html).
