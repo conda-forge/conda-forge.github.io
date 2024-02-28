@@ -1560,6 +1560,40 @@ add some information on r packages which make heavy use of `noarch: generic`
 
 :::
 
+## Multi-output recipes
+
+`conda-build` has the ability to create multiple package artifacts from a single recipe via the `outputs` section in `meta.yaml`. This is useful in several scenarios, including:
+
+- Distributing a project (which share the same source code) in separate artifacts. For example:
+  - A compiled C++ library and its Python bindings:
+    - [mamba-feedstock](https://github.com/conda-forge/mamba-feedstock/blob/main/recipe/meta.yaml)
+  - A runtime library and its headers:
+    - [cpp-opentelemetry-sdk](https://github.com/conda-forge/cpp-opentelemetry-sdk-feedstock/blob/main/recipe/meta.yaml)
+  - A dynamic library and a static version:
+    - [libarchive](https://github.com/conda-forge/libarchive-feedstock/blob/main/recipe/meta.yaml)
+- Distributing the same project with different sets of dependencies. For example:
+  - The project with the minimal dependencies to run, and a separate output that extends that list:
+    - [geopandas-base and geopandas](https://github.com/conda-forge/geopandas-feedstock/blob/main/recipe/meta.yaml)
+    - [matplotlib-base and matplotlib](https://github.com/conda-forge/matplotlib-feedstock/blob/main/recipe/meta.yaml)
+  - CPU vs GPU versions of a package (this can also be done with package variants):
+    - [pytorch-cpu, pytorch-gpu and pytorch](https://github.com/conda-forge/pytorch-cpu-feedstock/blob/main/recipe/meta.yaml)
+  - A package with different strictness levels for its dependencies:
+    - [opencv](https://github.com/conda-forge/opencv-feedstock/blob/main/recipe/meta.yaml)
+- Distributing the same project under two different names (alias packags). For example:
+  - A package that changed names but wants to keep existing users up-to-date:
+  - A package that uses dashes and underscores and expects users to use either:
+    - [importlib_metadata and importlib-metadata](https://github.com/conda-forge/importlib_metadata-feedstock/blob/main/recipe/meta.yaml)
+    - [typing_extensions and typing-extensions](https://github.com/conda-forge/typing_extensions-feedstock/blob/main/recipe/meta.yaml)
+
+### Common pitfalls with `outputs`
+
+This is a non-exhaustive list of common pitfalls when using `outputs`.
+
+- It's usually simpler to use a top-level name that does not match any output names. If the top-level name is different than the feedstock name, make sure to set the `extra.feedstock-name` in `meta.yaml`. See [rich-feedstock](https://github.com/conda-forge/rich-feedstock/blob/0d745692c1bcf/recipe/meta.yaml#L110-L111). Note how the top-level name is `rich-split`, the feedstock name is `rich` and the main output is `rich` too.
+- The `build.sh` and `bld.bat` scripts are only automatically used for the top-level package. Consider using other file names for the scripts in the outputs. See [gdal-feedstock](https://github.com/conda-forge/gdal-feedstock/blob/66ba0a2284476/recipe/meta.yaml#L70-L73) for an example.
+- The `outputs[].script` field can only be set to a script name. If you prefer passing shell commands, you have to use `outputs[].build.script`. Compare [geopandas-feedstock](https://github.com/conda-forge/geopandas-feedstock/blob/8b985635a8538af1ee213900bd563085e3cdbd92/recipe/meta.yaml#L17) to [gym-feedstock](https://github.com/conda-forge/gym-feedstock/blob/2b47e0479923b7d49a39e9860ba30a28e263480b/recipe/meta.yaml#L31), respectively.
+- Some `PIP_*` environment variables that are usually set for the top-level scripts are not automatically set for the outputs. If you are invoking `pip` in an output, you may need to pass additional flags. See [napari-feedstock](https://github.com/conda-forge/napari-feedstock/blob/32a4eb04ca7b6ccd2c4e146bde204f1dd5425a17/recipe/meta.yaml#L26). This issue is tracked in [conda/conda-build#3993](https://github.com/conda/conda-build/issues/3993).
+
 <a id="build-matrices"></a>
 
 ## Build matrices
