@@ -2018,8 +2018,8 @@ To request a migration for a particular package and all its dependencies:
 5. Within a few hours, the [status page](https://conda-forge.org/status/#armosxaddition)
    should reflect the progress of the package in question, and help you keep track
    of progress. Help out if you can!
-6. The feedstock maintainers (who very likely *do not* have an M1) will work to make
-   any changes required to pass continuous intgration. If you have insight into
+6. The feedstock maintainers (who might not have an M1) will work to make
+   any changes required to pass continuous integration. If you have insight into
    the particular package, **please** chime in, but most of all **be patient and polite**.
 7. Once the new builds are available from `anaconda.org`, please help the maintainers
    by testing the packages, and reporting back with any problems… but also successes!
