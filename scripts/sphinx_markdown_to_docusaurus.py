@@ -35,7 +35,7 @@ SIDEBAR_ORDERING = [
     "/docs/orga/cfep-index.md",
     "/docs/orga/getting-in-touch.md",
     "/docs/orga/funding/index.md",
-    "/docs/misc/index.md",
+    "/docs/glossary.md",
     "/docs/contracting/index.md",
 ]
 # Note we also ignore the /minutes/.* files later in the code

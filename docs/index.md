@@ -39,5 +39,5 @@ Chances are we have already packaged it for you. You can [search](https://anacon
 * [User Documentation](user/index.mdx)
 * [Maintainer Documentation](maintainer/index.mdx)
 * [Organisation Documentation](orga/index.mdx)
-* [Miscellaneous](misc/index.md)
+* [Miscellaneous](glossary.md)
 * [Contracting Information](contracting/index.md)
