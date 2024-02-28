@@ -2,8 +2,11 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const prism = require('prism-react-renderer');
+
+const _repo = process.env.GITHUB_REPOSITORY || 'conda-forge/conda-forge.github.io';
+const _branch = process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF || 'main';
 const editUrl = {
-  editUrl: "https://github.com/conda-forge/conda-forge.github.io/tree/main/",
+  editUrl: `https://github.com/${_repo}/tree/${_branch}/`,
 };
 
 var copyright = `Copyright © ${new Date().getFullYear()} conda-forge · Built with Docusaurus`;
