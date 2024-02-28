@@ -142,11 +142,15 @@
   padding: 3px;
 }
 
+.migration_details td:first-child a,
+.migration_details td:first-child span {
+  min-width: 100%;
+}
+
 .migration_details td a,
 .migration_details td span {
   font-size: small;
   font-weight: 600;
-  min-width: 100%;
 }
 
 .migration_details td a {
