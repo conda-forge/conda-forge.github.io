@@ -110,7 +110,7 @@ const config = {
     //     }),
     //   ],
     [
-      path.resolve(__dirname, "plugin-migration-urls"),
+      path.resolve(__dirname, "plugins", "migration-urls"),
       {
         routes: [
           {
