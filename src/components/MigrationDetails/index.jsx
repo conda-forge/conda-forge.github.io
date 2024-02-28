@@ -219,7 +219,6 @@ function Row({ children }) {
   const immediate = feedstock["immediate_children"];
   const href = feedstock["pr_url"];
   const details = feedstock["pre_pr_migrator_status"];
-  if (details) console.log('details');
   return (<>
     <tr>
       <td>

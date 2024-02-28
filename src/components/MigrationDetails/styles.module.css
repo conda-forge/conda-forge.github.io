@@ -164,6 +164,10 @@
   border-width: var(--ifm-badge-border-width);
   border-color: var(--ifm-color-primary);
 }
+.migration_details .collapsed,
+.migration_details .expanded {
+  cursor: pointer;
+}
 
 .migration_details .collapsed::after {
   font-size: smaller;
