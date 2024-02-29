@@ -1293,6 +1293,14 @@ microarch_level:  # [unix and x86_64]
 
 ```yaml title="recipe/meta.yaml"
 # ...
+{% set build = 0 %}
+
+build:
+  number: {{ build }}          # [not (unix and x86_64)]
+  number: {{ build + 100 }}    # [unix and x86_64 and microarch_level == 1]
+  number: {{ build + 300 }}    # [unix and x86_64 and microarch_level == 3]
+  number: {{ build + 400 }}    # [unix and x86_64 and microarch_level == 4]
+
 requirements:
   build:
     - x86_64-microarch-level {{ microarch_level }}  # [unix and x86_64]
@@ -1301,8 +1309,14 @@ requirements:
 # ...
 ```
 
-That's it. Note that the activation scripts behind the `microarch-level` packages are already injecting the necessary compiler flags for you. Since they also have `run_exports` entries, your
-package will have the necessary runtime requirements to ensure the most adequate variant gets installed. Refer to [this comment](https://github.com/conda-forge/staged-recipes/pull/24306#issuecomment-1800095471) for more information.
+:::note[Prioritize your preferred microarchitecture]
+The `run_exports` metadata is only set up with lower bounds to allow in-CI testing.
+This means that `level=2` package can be installed in a `level=3` machine. Make sure
+to assign a higher build number to the preferred microarchitecture (usually the highest level).
+:::
+
+That's it! The activation scripts behind the `microarch-level` packages are already injecting the necessary compiler flags for you. Since they also have `run_exports` entries, your
+package will have the necessary runtime requirements to ensure the most adequate variant gets installed. Refer to [this comment](https://github.com/conda-forge/staged-recipes/pull/24306#issuecomment-1800095471) and the [`microarch-level-feedstock` README](https://github.com/conda-forge/microarch-level-feedstock) for more information.
 
 
 <a id="knowledge-mpl"></a>
