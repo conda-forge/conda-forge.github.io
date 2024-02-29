@@ -6,3 +6,8 @@ package.json
 package-lock.json
 pnpm-lock.yaml
 docs/orga/minutes/
+scripts/
+static/
+.github/
+vote-results/
+misc/
