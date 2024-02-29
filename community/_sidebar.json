@@ -1,12 +1,21 @@
 [
     "index",
-    "governance",
-    "code-of-conduct",
-    "joining-the-team",
-    "subteams",
     "getting-in-touch",
-    "cfep-index",
-    "funding",
+    {
+        "type": "category",
+        "label": "Governance",
+        "link": {
+            "type": "doc",
+            "id": "governance"
+        },
+        "items": [
+            "cfep-index",
+            "subteams",
+            "code-of-conduct",
+            "funding"
+        ]
+    },
+    "joining-the-team",
     "contracting",
     {
         "type": "category",

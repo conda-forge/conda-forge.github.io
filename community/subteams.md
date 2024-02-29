@@ -1,8 +1,8 @@
 ---
-title: 'A list of current sub-teams'
+title: 'Sub-teams'
 ---
 
-# A list of current sub-teams
+# Current sub-teams
 
 <a id="security-subteam"></a>
 
