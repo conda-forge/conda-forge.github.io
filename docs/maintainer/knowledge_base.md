@@ -1293,6 +1293,14 @@ microarch_level:  # [unix and x86_64]
 
 ```yaml title="recipe/meta.yaml"
 # ...
+{% set build = 0 %}
+
+build:
+  number: {{ build }}          # [not (unix and x86_64)]
+  number: {{ build + 100 }}    # [unix and x86_64 and microarch_level == 1]
+  number: {{ build + 300 }}    # [unix and x86_64 and microarch_level == 3]
+  number: {{ build + 400 }}    # [unix and x86_64 and microarch_level == 4]
+
 requirements:
   build:
     - x86_64-microarch-level {{ microarch_level }}  # [unix and x86_64]
