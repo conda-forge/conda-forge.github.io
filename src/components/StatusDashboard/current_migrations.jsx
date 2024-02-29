@@ -3,6 +3,7 @@ import { urls } from "@site/src/constants";
 import React, { useEffect, useState } from "react";
 import { measureProgress } from "../MigrationDetails";
 import styles from "./styles.module.css";
+import Link from "@docusaurus/Link";
 
 const COLLAPSED_KEY = "migration-collapsed";
 const SORT_KEY = "migration-sort";
@@ -96,7 +97,7 @@ export default function CurrentMigrations({ onLoad }) {
 
 function TableContent({ collapsed, name, resort, rows, select, sort }) {
   const [redirect, setState] = useState('');
-  if (redirect) return (<Redirect to={redirect} />);
+  if (redirect) return (<Redirect to={redirect} replace />);
   return (
     <>
       <thead>
@@ -158,14 +159,14 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
           return (
             <tr key={row.name}>
               <td>
-                <a className="badge badge--secondary"
+                <Link className="badge badge--secondary"
                   href={href}
                   style={{ minWidth: "100%" }}
                   onClick={event => {
                     // Use app router instead defaulting to browser request.
                     event.preventDefault();
                     setState(href);
-                  }}>{row.name}</a>
+                  }}>{row.name}</Link>
               </td>
               <td>
                 <label className={styles.progress_bar}>
