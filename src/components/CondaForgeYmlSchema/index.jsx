@@ -167,10 +167,10 @@ function Type({ value }) {
   return (
     <>
       {types.length ? <span>Type: {types}</span> : null}
-      {types.length && value.default ? <span>, </span> : null}
-      {value.default ? (
+      {types.length && value.default !== undefined ? <span>, </span> : null}
+      {value.default !== undefined ? (
         <span>
-          default: <code>{value.default}</code>
+          default: <code>{JSON.stringify(value.default)}</code>
         </span>
       ) : null}
       {Object.entries(customTypes).map(([key, value]) =>
