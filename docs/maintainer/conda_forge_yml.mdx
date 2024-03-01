@@ -1,0 +1,27 @@
+---
+title: 'Configuring conda-forge.yml'
+---
+
+# Configuring conda-forge.yml
+
+import CondaForgeYmlSchema from '@site/src/components/CondaForgeYmlSchema';
+
+You can configure how conda-forge is set up and built via the `conda-forge.yml`
+file that is present in the root directory of a feedstock.
+
+Rerendering the feedstock after you modify this file is usually required and always a good idea (see [Rerendering feedstocks](updating_pkgs.md#dev-update-rerender)).
+
+The next section describes in detail the top-level fields in  `conda-forge.yml`.
+
+Note that each top-level CI provider field supports the `upload_packages` option.
+When set to False this will override the default behaviour of attempting to
+upload packages to anaconda.org, which can be useful for testing. For example:
+
+```yaml
+azure:
+  upload_packages: False
+```
+
+## conda-forge.yml schema
+
+<CondaForgeYmlSchema toc={toc} />

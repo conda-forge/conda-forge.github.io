@@ -354,8 +354,8 @@ variables:
   the `host` environment in `$PREFIX`. Defaults to the value of `build_platform`.
 
 To change the value of `target_platform` and enable cross-compilation, you must use
-the [build_platform](conda_forge_yml.md#build-platform) mapping in `conda-forge.yml` and then [rerender](updating_pkgs.md#dev-update-rerender) the feedstock. This will generate the appropriate CI workflows and
-conda-build input metadata. See also [test](conda_forge_yml.md#test) for how to skip the test phase when
+the [build_platform](conda_forge_yml.mdx#build-platform) mapping in `conda-forge.yml` and then [rerender](updating_pkgs.md#dev-update-rerender) the feedstock. This will generate the appropriate CI workflows and
+conda-build input metadata. See also [test](conda_forge_yml.mdx#test) for how to skip the test phase when
 cross-compiling. Provided the requirements metadata and build scripts are written correctly, the
 package should just work. However, in some cases, it'll need some adjustments; see examples below
 for some common cases.
@@ -551,7 +551,7 @@ a virtual machine  ([QEMU](https://www.qemu.org/)) to emulate the target platfor
 significant overhead. However, `conda-build` will see the target platform as native, so very
 little changes are usually needed in the recipe.
 
-To enable emulated builds, you must use the [provider](conda_forge_yml.md#provider) mapping in `conda-forge.yml`.
+To enable emulated builds, you must use the [provider](conda_forge_yml.mdx#provider) mapping in `conda-forge.yml`.
 This key maps a `build_platform` to a `provider` that will be used to emulate the platform.
 `conda-smithy` will know how to detect whether the provider supports that platform natively or
 requires emulation, and will adjust the appropriate CI steps to ensure that QEMU runs the process.
@@ -1459,7 +1459,7 @@ relies on three concepts:
    which are only present when the running platform is Linux, Windows, or MacOS, respectively.
    `__unix` is present in both Linux and MacOS. Note that this feature is **only fully available
    on conda 4.10 or above**.
-2. `conda-forge.yml`'s [noarch_platforms](conda_forge_yml.md#noarch-platforms) option.
+2. `conda-forge.yml`'s [noarch_platforms](conda_forge_yml.mdx#noarch-platforms) option.
 3. **conda-build 3.25.0 or above** changing the build hash depending on virtual packages used.
 
 The idea is to generate different noarch packages for each OS needing different dependencies.
@@ -1843,7 +1843,7 @@ conda install your-gpu-package cudatoolkit=10.1
 Since the CI machines do not feature a GPU, you won't be able to test the built packages as part
 of the conda recipe. That does not mean you can't test your package locally. To do so:
 
-1. Enable the Azure artifacts for your feedstock (see [here](conda_forge_yml.md#azure-config)).
+1. Enable the Azure artifacts for your feedstock (see [here](conda_forge_yml.mdx#azure-config)).
 2. Include the test files and requirements in the recipe
    [like this](https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/meta.yaml#L51-L61).
 3. Provide the test instructions. Take into account that the GPU tests will fail in the CI run,
