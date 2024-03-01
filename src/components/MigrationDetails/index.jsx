@@ -3,7 +3,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { urls } from "@site/src/constants";
 import Layout from "@theme/Layout";
 import { React, useEffect, useState } from "react";
-import { ReactSVG } from 'react-svg';
+import SVG from 'react-inlinesvg';
 import styles from "./styles.module.css";
 
 const ORDERED = [
@@ -177,7 +177,7 @@ function Graph(props) {
     <div>
       {error ?
         `Graph is unavailable.` :
-        <ReactSVG onError={onError} src={url} />}
+        <SVG onError={onError} src={url} />}
     </div>
   );
 }
