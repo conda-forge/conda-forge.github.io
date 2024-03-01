@@ -30,6 +30,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
+    "react-svg": "^16.1.33",
     "remark-gfm": "^4.0.0"
   },
   "devDependencies": {

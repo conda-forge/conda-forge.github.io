@@ -3,8 +3,8 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { urls } from "@site/src/constants";
 import Layout from "@theme/Layout";
 import { React, useEffect, useState } from "react";
+import { ReactSVG } from 'react-svg';
 import styles from "./styles.module.css";
-
 
 const ORDERED = [
   ["done", "Done"],
@@ -175,7 +175,9 @@ function Graph(props) {
   const onError = (error) => setState(error);
   return (
     <div>
-      {error ? `Graph is unavailable.` : <img onError={onError} src={url} />}
+      {error ?
+        `Graph is unavailable.` :
+        <ReactSVG onError={onError} src={url} />}
     </div>
   );
 }
