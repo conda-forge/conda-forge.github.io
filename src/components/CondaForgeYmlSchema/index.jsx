@@ -6,12 +6,13 @@ import remarkGfm from "remark-gfm";
 import CodeBlock from "@theme/CodeBlock";
 import Admonition from "@theme/Admonition";
 import Details from "@theme/Details";
+import prefetchedJsonSchema from "@site/static/conda-forge.schema.json";
 
-export default function CondaForgeYmlSchema() {
-  const [resolvedSchema, setResolvedSchema] = useState();
+export default function CondaForgeYmlSchema({ toc = null }) {
   const schemaURL =
     "https://raw.githubusercontent.com/viniciusdc/conda-smithy/pydantic-schema-cf-yaml/conda_smithy/data/conda-forge.json";
-
+  const [schema, setSchema] = useState(prefetchedJsonSchema);
+  const [resolved, setResolved] = useState(false);
   useEffect(() => {
     fetch(schemaURL, {
       headers: {
@@ -21,13 +22,10 @@ export default function CondaForgeYmlSchema() {
       .then((response) => response.json())
       .then((rawSchema) => new Resolver().resolve(rawSchema, {}))
       .then((resolved) => {
-        setResolvedSchema(resolved.result);
+        setSchema(resolved.result);
+        setResolved(true);
       });
   }, []);
-
-  if (!resolvedSchema) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <>
@@ -38,25 +36,26 @@ export default function CondaForgeYmlSchema() {
         </a>
         .
       </Admonition>
-      <SchemaToc schema={resolvedSchema} />
-      <Markdown>{resolvedSchema.description}</Markdown>
+      <SchemaToc schema={schema} toc={toc} />
+      <Markdown>{schema.description}</Markdown>
       <p></p>
-      {Object.entries(resolvedSchema.properties)
+      {Object.entries(schema.properties)
         .sort()
         .map(([key, value]) => (
-          <Setting key={key} name={key} value={value} />
+          <Setting key={key} name={key} value={value} withTypes={resolved} />
         ))}
     </>
   );
 }
 
-function SchemaToc({ schema }) {
+function SchemaToc({ schema, toc = null }) {
   return (
     <ul>
       {Object.entries(schema.properties)
         .sort()
         .map(([key, value]) => (
           <li key={key}>
+            {toc && toc.push({ value: key, id: key, level: 3 }) && null}
             <a href={`#${key}`} key={key}>
               {(value.deprecated && (
                 <span style={{ textDecoration: "line-through" }}>{key}</span>
@@ -69,7 +68,7 @@ function SchemaToc({ schema }) {
   );
 }
 
-function Setting({ name, value, level = 1 }) {
+function Setting({ name, value, level = 1, withTypes = true }) {
   return (
     <>
       <Heading as={`h${level + 2}`} id={name}>
@@ -85,8 +84,10 @@ function Setting({ name, value, level = 1 }) {
           </span>
         </p>
       )}
-      {value.description?.length && <Markdown>{value.description.trim()}</Markdown>}
-      <Type value={value} />
+      {value.description?.length && (
+        <Markdown>{value.description.trim()}</Markdown>
+      )}
+      {withTypes && <Type value={value} />}
       {value.examples && (
         <details>
           <summary>Examples</summary>
@@ -107,11 +108,13 @@ function Type({ value }) {
         if (v.title) {
           customTypes.options.push(
             <Details key={v.title} summary={v.title} closed>
-            {Object.entries(v.properties)
-            .sort()
-            .map(([key, value]) => (
-              <p><Setting key={key} name={key} value={value} level={2} /></p>
-            ))}
+              {Object.entries(v.properties)
+                .sort()
+                .map(([key, value]) => (
+                  <p>
+                    <Setting key={key} name={key} value={value} level={2} />
+                  </p>
+                ))}
             </Details>
           );
         }
@@ -120,12 +123,16 @@ function Type({ value }) {
           if (v.items.title) {
             types.push(<code>{`list of ${v.items.title}`}</code>);
             if (v.items.enum) {
-              customTypes[v.items.title] = v.items.enum.map((e) => <code>{e}</code>);
+              customTypes[v.items.title] = v.items.enum.map((e) => (
+                <code>{e}</code>
+              ));
             }
           } else {
             types.push(<code>{`list of ${v.items.type}`}</code>);
             if (v.items.enum) {
-              customTypes.options.push(... v.items.enum.map((e) => <code>{e}</code>));
+              customTypes.options.push(
+                ...v.items.enum.map((e) => <code>{e}</code>)
+              );
             }
           }
         } else {
@@ -149,12 +156,19 @@ function Type({ value }) {
     <>
       {types.length ? <span>Type: {types}</span> : null}
       {types.length && value.default ? <span>, </span> : null}
-      {value.default ? <span>default: <code>{value.default}</code></span> : null}
+      {value.default ? (
+        <span>
+          default: <code>{value.default}</code>
+        </span>
+      ) : null}
       {Object.entries(customTypes).map(([key, value]) =>
         value.length ? (
           <>
             <br />
-            <span>With {key === "options" && <span>{key}</span> || <code>{key}</code>}: </span>
+            <span>
+              With{" "}
+              {(key === "options" && <span>{key}</span>) || <code>{key}</code>}:{" "}
+            </span>
             {value}
           </>
         ) : null

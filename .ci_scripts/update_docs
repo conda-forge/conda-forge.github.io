@@ -12,6 +12,11 @@ if [[ "$CI" == "1" ]]; then
   git checkout -b new_site_content
 fi
 
+# Fetch conda-smithy JSON schema
+curl -sL \
+  -o "$BASE_DIR/static/conda-forge.schema.json" \
+  "https://raw.githubusercontent.com/viniciusdc/conda-smithy/pydantic-schema-cf-yaml/conda_smithy/data/conda-forge.json"
+
 # Render the templated content (e.g. CFEPs, core.csv, etc)
 python "$BASE_DIR/.ci_scripts/render_templated_content.py"
 
