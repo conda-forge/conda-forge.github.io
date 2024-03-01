@@ -36,27 +36,32 @@ export default function CondaForgeYmlSchema({ toc = null }) {
         </a>
         .
       </Admonition>
-      <SchemaToc schema={schema} toc={toc} />
+      <SchemaToc schema={schema} />
       <Markdown>{schema.description}</Markdown>
       <p></p>
       {Object.entries(schema.properties)
         .sort()
         .map(([key, value]) => (
-          <Setting key={key} name={key} value={value} withTypes={resolved} />
+          <Setting
+            key={key}
+            name={key}
+            value={value}
+            withTypes={resolved}
+            toc={toc}
+          />
         ))}
     </>
   );
 }
 
-function SchemaToc({ schema, toc = null }) {
+function SchemaToc({ schema }) {
   return (
     <ul>
       {Object.entries(schema.properties)
         .sort()
         .map(([key, value]) => (
           <li key={key}>
-            {toc && toc.push({ value: key, id: key, level: 3 }) && null}
-            <a href={`#${key}`} key={key}>
+            <a href={`#${key.replaceAll("_", "-")}`} key={key}>
               {(value.deprecated && (
                 <span style={{ textDecoration: "line-through" }}>{key}</span>
               )) ||
@@ -68,10 +73,18 @@ function SchemaToc({ schema, toc = null }) {
   );
 }
 
-function Setting({ name, value, level = 1, withTypes = true }) {
+function Setting({ name, value, level = 1, withTypes = true, toc = null }) {
+  if (toc) {
+    toc.push({
+      value: name,
+      id: name.replaceAll("_", "-"),
+      level: level + 2,
+    });
+  }
   return (
     <>
-      <Heading as={`h${level + 2}`} id={name}>
+      <a id={name}></a>
+      <Heading as={`h${level + 2}`} id={name.replaceAll("_", "-")}>
         {(value.deprecated && (
           <span style={{ textDecoration: "line-through" }}>{name}</span>
         )) ||
@@ -89,10 +102,9 @@ function Setting({ name, value, level = 1, withTypes = true }) {
       )}
       {withTypes && <Type value={value} />}
       {value.examples && (
-        <details>
-          <summary>Examples</summary>
+        <Details summary={Examples} closed>
           <Markdown>{value.examples.join(", ")}</Markdown>
-        </details>
+        </Details>
       )}
     </>
   );

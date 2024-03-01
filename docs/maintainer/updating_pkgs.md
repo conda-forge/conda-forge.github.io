@@ -227,7 +227,7 @@ conda create -n my-new-env -c "file://${PWD}/build_artifacts" -c conda-forge my-
 
 ## Downloading prebuilt packages from CI
 
-A neat feature that feedstocks have is the ability to [upload packages to the CI provider for testing](conda_forge_yml.mdx#azure-config).
+A neat feature that feedstocks have is the ability to [upload packages to the CI provider for testing](conda_forge_yml.mdx#azure).
 This is useful when trying out packages built in a PR. But you first need to download these prebuilt packages.
 
 To download prebuilt packages follow the steps below:

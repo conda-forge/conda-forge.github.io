@@ -1843,7 +1843,7 @@ conda install your-gpu-package cudatoolkit=10.1
 Since the CI machines do not feature a GPU, you won't be able to test the built packages as part
 of the conda recipe. That does not mean you can't test your package locally. To do so:
 
-1. Enable the Azure artifacts for your feedstock (see [here](conda_forge_yml.mdx#azure-config)).
+1. Enable the Azure artifacts for your feedstock (see [here](conda_forge_yml.mdx#azure)).
 2. Include the test files and requirements in the recipe
    [like this](https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/meta.yaml#L51-L61).
 3. Provide the test instructions. Take into account that the GPU tests will fail in the CI run,
