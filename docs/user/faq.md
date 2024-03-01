@@ -104,7 +104,7 @@ All of our toolchains are built as cross-compilers (even when they are built to 
 architecture that they are targeting).  We do this because it makes it possible to then install
 them anywhere like any other conda package.  As a result, the builtin search path for the
 compilers only contains the sysroot they were built with. The compiler binary names are also
-‘prefixed' with more complete information about the architecture and [ABI](../misc/index.md#term-ABI) they target.  So, instead
+‘prefixed' with more complete information about the architecture and [ABI](../glossary.md#term-ABI) they target.  So, instead
 of `gcc`, the actual binary will be named something like `x86_64-conda-linux-gnu-cc`.
 
 The conda-forge infrastructure provides [activation scripts](../maintainer/adding_pkgs.md#activate-scripts) which are run when

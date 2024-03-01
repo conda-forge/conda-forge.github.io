@@ -84,7 +84,7 @@ There is additional documentation on this pinning scheme in [the conda docs](htt
 
 ## Specifying run_exports
 
-The `run_exports` feature can be used to specify the versions that are [ABI](../misc/index.md#term-ABI) compatible with the built version. This leads to higher flexibility of choosable packages, without breakages due to incompatibilities.
+The `run_exports` feature can be used to specify the versions that are [ABI](../glossary.md#term-ABI) compatible with the built version. This leads to higher flexibility of choosable packages, without breakages due to incompatibilities.
 
 Packages that depend on a package with `run_exports` can choose to overwrite this behavior using the `build/ignore_run_exports` key.
 
@@ -123,7 +123,7 @@ be added by hand. To do this, follow these steps:
 1. Create a new migration yaml by copying [example.exyaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/example.exyaml) in the `conda-forge/conda-forge-pinning` repository.
 2. Change the migration yaml to reflect the package and version to be migrated
 3. Write a migrator for propagating the pin changes.
-4. Propose the changes as a [PR](../misc/index.md#term-PR) to [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock).
+4. Propose the changes as a [PR](../glossary.md#term-PR) to [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock).
 5. Once accepted the migration will begin. The migration status can be monitored at [https://conda-forge.org/status](https://conda-forge.org/status).
 6. After the migration is complete, a new PR can be issued to [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock) to:
    - Remove the migrator yaml for the completed migration
