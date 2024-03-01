@@ -198,7 +198,7 @@ function Table({ details }) {
       {rows.length > 0 && <table>
         <thead>
           <tr>
-            <th style={{ width: 150 }}>Name</th>
+            <th style={{ width: 200 }}>Name</th>
             <th style={{ width: 115 }}>Status</th>
             <th style={{ flex: 1 }}>Immediate Children</th>
           </tr>
@@ -247,7 +247,7 @@ function Row({ children }) {
       </td>
     </tr>
     {details && !collapsed && (<tr>
-      <td colSpan={3}><pre>{details}</pre></td>
+      <td colSpan={3}><pre dangerouslySetInnerHTML={{ __html: details}} /></td>
     </tr>)}
   </>);
 }
