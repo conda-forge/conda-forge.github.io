@@ -1,6 +1,5 @@
 ---
 title: 'Contracting Information'
-sidebar_position: 28
 ---
 
 <a id="contracting-information"></a>

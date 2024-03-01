@@ -1,6 +1,5 @@
 ---
 title: 'Configuring conda-forge.yml'
-sidebar_position: 14
 ---
 
 <a id="configuring-conda-forge-yml"></a>
@@ -241,22 +240,18 @@ allowed here.
 
 ### channels
 
-This represents the channels to grab packages from during builds and
-which channels/labels to push to on anaconda.org after a package
-has been built.  The `channels` variable is a mapping with
-`sources` and `targets`, as follows:
+:::warning
+This parameter has been deprecated. Instead, specify channels in `recipe/conda_build_config.yaml`
+using `channel_sources` and `channel_targets`. Note that all channels go on a single
+line because each line represents a build variant.
 
-```yaml
-channels:
-  # sources selects the channels to pull packages from, in order.
-  sources:
-    - conda-forge
-    - defaults
-  # targets is a list of 2-lists, where the first element is the
-  # channel to push to and the second element is the label on that channel
-  targets:
-    - ["conda-forge", "main"]
+```yaml title="recipe/conda_build_config.yaml"
+channel_sources:
+  - mysourcechannel1,mysourcechannel2,conda-forge,defaults
+channel_targets:
+  - target_channel target_label
 ```
+:::
 
 <a id="choco"></a>
 

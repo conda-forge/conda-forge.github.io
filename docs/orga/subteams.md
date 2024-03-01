@@ -1,6 +1,5 @@
 ---
 title: 'A list of current sub-teams'
-sidebar_position: 20
 ---
 
 <a id="a-list-of-current-sub-teams"></a>

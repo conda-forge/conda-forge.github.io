@@ -1,6 +1,5 @@
 ---
 title: 'Funding efforts for conda-forge'
-sidebar_position: 26
 ---
 
 <a id="funding"></a>

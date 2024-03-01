@@ -1,6 +1,5 @@
 ---
 title: 'Knowledge Base'
-sidebar_position: 15
 ---
 
 <a id="knowledge-base"></a>
@@ -1149,7 +1148,7 @@ named `yum_requirements.txt` in the `recipe` directory of a feedstock.
 
 There are only very few situations where dependencies installed by yum are acceptable. These cases include
 
-- satisfying the requirements of [CDT](../misc/index.md#term-CDT) packages during test phase
+- satisfying the requirements of [CDT](../glossary.md#term-CDT) packages during test phase
 - installing packages that are only required for testing
 
 After changing `yum_requirements.txt`, [rerender](updating_pkgs.md#dev-update-rerender) to update the configuration.
@@ -1271,6 +1270,54 @@ which has `openblas` as a dependency and has a symlink from `libblas.so.3` to `l
 `libblas=3.8.0=*openblas` pins the `openblas` dependency to a version that is known to support the
 BLAS `3.8.0` API.  This means that, at install time, the user can select what BLAS implementation
 they like without any knowledge of the version of the BLAS implementation needed.
+
+### Microarchitecture-optimized builds {#microarch}
+
+conda [virtual packages](../glossary.md#virtual-package) include `__archspec`, which expose the processor architecture to the solver. However, `__archspec` should not be used directly in recipes; instead, users should rely on the [`microarch-level`](https://github.com/conda-forge/microarch-level-feedstock) helper packages (contributed in [staged-recipes#24306](https://github.com/conda-forge/staged-recipes/pull/24306)).
+
+Before learning how to use it, please read these considerations:
+
+- Adding microarchitecture variants can result in too many entries in the build matrix. Do not overuse it.
+- These optimized builds should only be used when the performance improvements are significant.
+- Preferrably, the project should rely on runtime dispatch for arch-specific optimizations.
+- If the package is already too large, consider using smaller outputs for the arch-optimized variants.
+
+To implement microarchitecture-optimized builds in your feedstock, you'll end up with something like:
+
+```yaml title="recipe/conda_build_config.yaml"
+microarch_level:  # [unix and x86_64]
+  - 1  # [unix and x86_64]
+  - 3  # [unix and x86_64]
+  - 4  # [unix and x86_64]
+```
+
+```yaml title="recipe/meta.yaml"
+# ...
+{% set build = 0 %}
+
+build:
+  number: {{ build }}          # [not (unix and x86_64)]
+  number: {{ build + 100 }}    # [unix and x86_64 and microarch_level == 1]
+  number: {{ build + 300 }}    # [unix and x86_64 and microarch_level == 3]
+  number: {{ build + 400 }}    # [unix and x86_64 and microarch_level == 4]
+
+requirements:
+  build:
+    - x86_64-microarch-level {{ microarch_level }}  # [unix and x86_64]
+    - {{ compiler('c') }}
+    # ...
+# ...
+```
+
+:::note[Prioritize your preferred microarchitecture]
+The `run_exports` metadata is only set up with lower bounds to allow in-CI testing.
+This means that `level=2` package can be installed in a `level=3` machine. Make sure
+to assign a higher build number to the preferred microarchitecture (usually the highest level).
+:::
+
+That's it! The activation scripts behind the `microarch-level` packages are already injecting the necessary compiler flags for you. Since they also have `run_exports` entries, your
+package will have the necessary runtime requirements to ensure the most adequate variant gets installed. Refer to [this comment](https://github.com/conda-forge/staged-recipes/pull/24306#issuecomment-1800095471) and the [`microarch-level-feedstock` README](https://github.com/conda-forge/microarch-level-feedstock) for more information.
+
 
 <a id="knowledge-mpl"></a>
 
@@ -1560,6 +1607,40 @@ Again, remember to rerender after adding / modifying these files so the changes 
 add some information on r packages which make heavy use of `noarch: generic`
 
 :::
+
+## Multi-output recipes
+
+`conda-build` has the ability to create multiple package artifacts from a single recipe via the `outputs` section in `meta.yaml`. This is useful in several scenarios, including:
+
+- Distributing a project (which share the same source code) in separate artifacts. For example:
+  - A compiled C++ library and its Python bindings:
+    - [mamba-feedstock](https://github.com/conda-forge/mamba-feedstock/blob/main/recipe/meta.yaml)
+  - A runtime library and its headers:
+    - [cpp-opentelemetry-sdk](https://github.com/conda-forge/cpp-opentelemetry-sdk-feedstock/blob/main/recipe/meta.yaml)
+  - A dynamic library and a static version:
+    - [libarchive](https://github.com/conda-forge/libarchive-feedstock/blob/main/recipe/meta.yaml)
+- Distributing the same project with different sets of dependencies. For example:
+  - The project with the minimal dependencies to run, and a separate output that extends that list:
+    - [geopandas-base and geopandas](https://github.com/conda-forge/geopandas-feedstock/blob/main/recipe/meta.yaml)
+    - [matplotlib-base and matplotlib](https://github.com/conda-forge/matplotlib-feedstock/blob/main/recipe/meta.yaml)
+  - CPU vs GPU versions of a package (this can also be done with package variants):
+    - [pytorch-cpu, pytorch-gpu and pytorch](https://github.com/conda-forge/pytorch-cpu-feedstock/blob/main/recipe/meta.yaml)
+  - A package with different strictness levels for its dependencies:
+    - [opencv](https://github.com/conda-forge/opencv-feedstock/blob/main/recipe/meta.yaml)
+- Distributing the same project under two different names (alias packags). For example:
+  - A package that changed names but wants to keep existing users up-to-date:
+  - A package that uses dashes and underscores and expects users to use either:
+    - [importlib_metadata and importlib-metadata](https://github.com/conda-forge/importlib_metadata-feedstock/blob/main/recipe/meta.yaml)
+    - [typing_extensions and typing-extensions](https://github.com/conda-forge/typing_extensions-feedstock/blob/main/recipe/meta.yaml)
+
+### Common pitfalls with `outputs`
+
+This is a non-exhaustive list of common pitfalls when using `outputs`.
+
+- It's usually simpler to use a top-level name that does not match any output names. If the top-level name is different than the feedstock name, make sure to set the `extra.feedstock-name` in `meta.yaml`. See [rich-feedstock](https://github.com/conda-forge/rich-feedstock/blob/0d745692c1bcf/recipe/meta.yaml#L110-L111). Note how the top-level name is `rich-split`, the feedstock name is `rich` and the main output is `rich` too.
+- The `build.sh` and `bld.bat` scripts are only automatically used for the top-level package. Consider using other file names for the scripts in the outputs. See [gdal-feedstock](https://github.com/conda-forge/gdal-feedstock/blob/66ba0a2284476/recipe/meta.yaml#L70-L73) for an example.
+- The `outputs[].script` field can only be set to a script name. If you prefer passing shell commands, you have to use `outputs[].build.script`. Compare [geopandas-feedstock](https://github.com/conda-forge/geopandas-feedstock/blob/8b985635a8538af1ee213900bd563085e3cdbd92/recipe/meta.yaml#L17) to [gym-feedstock](https://github.com/conda-forge/gym-feedstock/blob/2b47e0479923b7d49a39e9860ba30a28e263480b/recipe/meta.yaml#L31), respectively.
+- Some `PIP_*` environment variables that are usually set for the top-level scripts are not automatically set for the outputs. If you are invoking `pip` in an output, you may need to pass additional flags. See [napari-feedstock](https://github.com/conda-forge/napari-feedstock/blob/32a4eb04ca7b6ccd2c4e146bde204f1dd5425a17/recipe/meta.yaml#L26). This issue is tracked in [conda/conda-build#3993](https://github.com/conda/conda-build/issues/3993).
 
 <a id="build-matrices"></a>
 
@@ -1969,21 +2050,26 @@ the package and its dependencies. These builds are experimental as many of them 
 
 To request a migration for a particular package and all its dependencies:
 
-1. Check the feedstock in question to see if there is already an issue or pull request.
+1. It may be that your package is already in the process of being migrated. Please check
+   the status of the
+   [arm osx addition migration](https://conda-forge.org/status/#armosxaddition).
+   If your package is already in the process of being migrated, it will appear
+   under the appropriate heading (done, in-pr, awaiting-parents, etc.).
+2. Check the feedstock in question to see if there is already an issue or pull request.
    Opening an issue here is fine, as it might take a couple iterations of the below,
    especially if many dependencies need to be built as well.
-2. If nothing is under way, look at the current [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt).
-3. If the package is not listed there, make a PR, adding the package
+3. If nothing is under way, look at the current [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt).
+4. If the package is not listed there, make a PR, adding the package
    name to a random location in `osx_arm64.txt`.
    The migration bot should start making automated pull requests to the
    repo and its dependencies.
-4. Within a few hours, the [status page](https://conda-forge.org/status/#armosxaddition)
+5. Within a few hours, the [status page](https://conda-forge.org/status/#armosxaddition)
    should reflect the progress of the package in question, and help you keep track
    of progress. Help out if you can!
-5. The feedstock maintainers (who very likely *do not* have an M1) will work to make
-   any changes required to pass continuous intgration. If you have insight into
+6. The feedstock maintainers (who might not have an M1) will work to make
+   any changes required to pass continuous integration. If you have insight into
    the particular package, **please** chime in, but most of all **be patient and polite**.
-6. Once the new builds are available from `anaconda.org`, please help the maintainers
+7. Once the new builds are available from `anaconda.org`, please help the maintainers
    by testing the packages, and reporting back with any problems… but also successes!
 
 <a id="pre-release-builds"></a>
@@ -2133,7 +2219,7 @@ higher than the package uploaded with the `dev` label.
 
 To reset your feedstock token and fix issues with uploads, follow these steps:
 
-1. Go to the `conda-forge/admin-requests` repo and copy [examples/example-broken.yml](https://github.com/conda-forge/admin-requests/blob/main/examples/example-broken.yml) to the `requests/` folder.
+1. Go to the `conda-forge/admin-requests` repo and copy [examples/example-token-reset.yml](https://github.com/conda-forge/admin-requests/blob/main/examples/example-token-reset.yml) to the `requests/` folder.
 2. Add the name of your feedstock in the YML file. While adding the name, don't add "-feedstock" to the end of it. For example: for `python-feedstock`, just add `python`.
 
 <a id="using-arch-rebuild"></a>
@@ -2142,7 +2228,9 @@ To reset your feedstock token and fix issues with uploads, follow these steps:
 
 ## Using `arch_rebuild.txt`
 
-You can add a feedstock to `arch-rebuild.txt` if it requires rebuilding with different architectures/platforms (such as ppc64le or aarch64). To add the feedstock to `arch_rebuild.txt`, open a PR to the [conda-forge-pinning-feedstock repository](https://github.com/conda-forge/conda-forge-pinning-feedstock).
+You can add a feedstock to `arch_rebuild.txt` if it requires rebuilding with different architectures/platforms (such as `ppc64le` or `aarch64`). 
+Check the [migration status](https://conda-forge.org/status/#aarch64andppc64leaddition) to see if your package is already in the queue to get migrated. 
+If not, you can add the feedstock to `arch_rebuild.txt` by opening a PR to the [conda-forge-pinning-feedstock repository](https://github.com/conda-forge/conda-forge-pinning-feedstock).
 Once the PR is merged, the migration bot goes through the list of feedstocks in `arch_rebuild.txt` and opens a migration PR for any new feedstocks and their dependencies, enabling the aarch64/ppc64le builds.
 
 <a id="migrations-and-migrators"></a>

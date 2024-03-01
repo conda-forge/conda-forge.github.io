@@ -1,6 +1,5 @@
 ---
 title: 'Joining the team'
-sidebar_position: 21
 ---
 
 <a id="joining-the-team"></a>

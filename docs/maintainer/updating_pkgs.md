@@ -1,6 +1,5 @@
 ---
 title: 'Maintaining packages'
-sidebar_position: 12
 ---
 
 <a id="maintaining-pkgs"></a>
@@ -32,12 +31,12 @@ All maintainers are given push access to the feedstocks that they maintain.
 This means that a maintainer can create branches in the main repo.
 For updates, using a branch in the main repo is discouraged because,
 
-1. [CI](../misc/index.md#term-CI) is run on both the branch and the PR.
+1. [CI](../glossary.md#term-CI) is run on both the branch and the PR.
 
-   This wastes [CI](../misc/index.md#term-CI) resources
+   This wastes [CI](../glossary.md#term-CI) resources
 2. Branches are automatically published.
 
-   This means if you push a version update to a branch and then create a [PR](../misc/index.md#term-PR), conda packages will be published to anaconda.org before the PR is merged.
+   This means if you push a version update to a branch and then create a [PR](../glossary.md#term-PR), conda packages will be published to anaconda.org before the PR is merged.
 
 :::warning[Important]
 
@@ -132,7 +131,7 @@ Please follow the following guidelines while updating recipes:
 
 ## Rerendering feedstocks
 
-Rerendering is conda-forge's way to update the files common to all feedstocks (e.g. README, [CI](../misc/index.md#term-CI) configuration, pinned dependencies).
+Rerendering is conda-forge's way to update the files common to all feedstocks (e.g. README, [CI](../glossary.md#term-CI) configuration, pinned dependencies).
 
 Rerendering can be done in two ways:
 
@@ -185,7 +184,7 @@ This process takes time, though, and pull requests will not be opened to all fee
 
 ## Testing changes locally
 
-If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is built by our [CI](../misc/index.md#term-CI).
+If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is built by our [CI](../glossary.md#term-CI).
 
 If you want to build and test updates to a feedstock locally, go to the root
 feedstock directory and run:
