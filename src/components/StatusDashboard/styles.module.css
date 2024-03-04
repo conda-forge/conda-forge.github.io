@@ -122,11 +122,6 @@
   padding: 3px;
 }
 
-.status_dashboard {
-  margin: 0;
-  max-width: 100%;
-}
-
 .status_dashboard_toc {
   border: var(--ifm-table-border-width) solid #ccc;
   border-radius: 5px;

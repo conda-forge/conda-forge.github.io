@@ -50,7 +50,7 @@ export default function StatusDashboard() {
   const onLoadIncidents = incident =>
     setState((prev) => ({ ...prev, incident, loaded: prev.loaded + 1 }));
   return (
-    <main className={["container", styles.status_dashboard].join(" ")}>
+    <main className="container">
       <div className="row row--no-gutters">
         <div className="col col--2">
           <TOC incident={incident} />
