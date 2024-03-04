@@ -13,6 +13,11 @@
   border-top: 0;
 }
 
+.incident_date {
+  float: right;
+  margin-right: 5px;
+}
+
 .incident_link {
   background-color: var(--ifm-color-primary-lightest);
   display: block;
@@ -20,15 +25,6 @@
   margin-top: 5px;
   padding: 2px 5px;
   text-decoration: none;
-}
-
-.incident_status {
-  border: 0.5px solid var(--ifm-color-secondary);
-  border-radius: 5px;
-  color: var(--ifm-color-secondary);
-  font-weight: 500;
-  margin-right: 20px;
-  padding: 5px;
 }
 
 .incidents {
