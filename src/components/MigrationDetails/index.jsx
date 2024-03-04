@@ -73,7 +73,7 @@ export default function MigrationDetails() {
       }
     })();
   }, []);
-  if (state.redirect) return <Redirect to="/status" />;
+  if (state.redirect) return <Redirect to="/status" replace />;
   const { details, name, view } = state;
   return (
     <Layout

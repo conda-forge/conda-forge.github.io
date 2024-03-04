@@ -97,12 +97,12 @@ export default function CurrentMigrations({ onLoad }) {
 
 function TableContent({ collapsed, name, resort, rows, select, sort }) {
   const [redirect, setState] = useState('');
-  if (redirect) return (<Redirect to={redirect} replace />);
+  if (redirect) return (<Redirect to={redirect} replace={false} push={true} />);
   return (
     <>
       <thead>
         <tr onClick={select}>
-          <th colSpan="7" className={collapsed ? styles.collapsed : undefined}>
+          <th colSpan={7} className={collapsed ? styles.collapsed : undefined}>
             {name}{" "}
             <span className="badge badge--secondary">{rows.length || "…"}</span>
           </th>
@@ -163,7 +163,6 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
                   href={href}
                   style={{ minWidth: "100%" }}
                   onClick={event => {
-                    // Use app router instead defaulting to browser request.
                     event.preventDefault();
                     setState(href);
                   }}>{row.name}</Link>
