@@ -102,9 +102,7 @@
   border-color: transparent;
   color: var(--ifm-color-primary);
   font-size: small;
-  font-weight: 600;
   min-width: 100%;
-  text-decoration: none;
 }
 
 .migrations_table td a:hover {
