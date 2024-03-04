@@ -43,8 +43,10 @@
         },
         "items": [
             "orga/guidelines",
+            "orga/governance",
             "orga/subteams",
             "orga/joining-the-team",
+            "orga/cfep-index",
             "orga/getting-in-touch",
             "orga/funding",
             {
