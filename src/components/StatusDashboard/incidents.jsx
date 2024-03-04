@@ -82,8 +82,9 @@ export default function Incidents({ onLoad }) {
 
 function Incident({ children }) {
   const issue = children;
-  const date = moment(issue.open ? issue.updated_at : issue.closed_at);
-  const status = issue.open ? "Ongoing" : "Resolved";
+  const open = issue.state === "open";
+  const date = moment(open ? issue.updated_at : issue.closed_at);
+  const status = open ? "Ongoing" : "Resolved";
   return (
     <div className={styles.incident}>
       <div>
