@@ -114,7 +114,7 @@ function WebServices() {
       <td>
         <a href={urls.repos.services.link}
           style={{ display: "inline-block", minWidth: "100%" }}>
-          admin web services
+          conda-forge-webservices
         </a>
       </td>
       <td>
