@@ -85,15 +85,19 @@ export default function Incidents({ ongoing, onLoad, ...props }) {
 
 function Incident({ children }) {
   const issue = children;
+  console.log('issue', issue);
   const open = issue.state === "open";
   const date = moment(open ? issue.updated_at : issue.closed_at);
-  const status = open ? "Ongoing" : "Resolved";
-  const severity = open ?
-    issue.severity === MAJOR ? "danger" : "warning" : "success";
+  const status = open ? "ongoing" : "resolved";
+  const severity = issue.severity === MAJOR ? "danger" : "warning";
   return (
     <div className={styles.incident}>
       <div>
-        <span className={`badge badge--${severity}`}>{status}</span>
+        <span className={`badge badge--${open ? severity : "success"}`}>
+          {status}
+        </span>
+        {" "}
+        <span className={`badge badge--${severity}`}>{issue.severity}</span>
         <em className={styles.incident_date}>{date.format(DATE)}</em>
       </div>
       <Link className={styles.incident_link} to={issue.html_url}>
