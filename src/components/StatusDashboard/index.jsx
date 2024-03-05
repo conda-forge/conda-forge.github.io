@@ -57,7 +57,9 @@ export default function StatusDashboard() {
         </div>
         <div className="col col--10">
           {incidents &&
-            <div className="col col--12"><Incidents {...incidents} /></div>}
+            <div className="row row--no-gutters">
+              <div className="col col--12"><Incidents {...incidents} /></div>
+            </div>}
           <div className="row row--no-gutters">
             <div className="col col--6" style={{ flex: 1 }}>
               <div id="repos" className={styles.toc_anchor}></div>

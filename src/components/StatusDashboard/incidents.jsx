@@ -85,7 +85,6 @@ export default function Incidents({ ongoing, onLoad, ...props }) {
 
 function Incident({ children }) {
   const issue = children;
-  console.log('issue', issue);
   const open = issue.state === "open";
   const date = moment(open ? issue.updated_at : issue.closed_at);
   const status = open ? "ongoing" : "resolved";
