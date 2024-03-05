@@ -15,7 +15,8 @@
 
 .incident_date {
   float: right;
-  margin-right: 5px;
+  font-size: smaller;
+  margin: 5px;
 }
 
 .incident_link {

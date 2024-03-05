@@ -5,23 +5,31 @@ import { React, useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import styles from "./styles.module.css";
 
-// Date format string.
-const DATE = "YYYY/M/D HH:mm:ss";
-
-// The GitHub repository with relevant issues.
-const REPO = { owner: "conda-forge", repo: "status" };
+// This label indicates warning.
+const DEGRADED = "degraded performance";
 
 // This label indicates danger.
 const MAJOR = "major outage";
 
-// This label indicates warning.
-const DEGRADED = "degraded performance";
-
 // Incident labels we care about.
 const BAD_LABELS = new Set(["investigating", DEGRADED, MAJOR, "maintenance"]);
 
+// Date format string.
+const DATE = "YYYY/M/D HH:mm:ss";
+
 // Time period we care about: 90 days – in milliseconds.
 const PERIOD = 90 * 24 * 60 * 60 * 1000;
+
+// The GitHub repository with relevant issues.
+const REPO = { owner: "conda-forge", repo: "status" };
+
+// The badge color for each severity level.
+const SEVERITY = {
+  "investigating": "info",
+  [DEGRADED]: "warning",
+  [MAJOR]: "danger",
+  "maintenance": "info"
+};
 
 export default function Incidents({ ongoing, onLoad, ...props }) {
   const [{ closed, current, open }, setState] = useState(() => {
@@ -61,9 +69,6 @@ export default function Incidents({ ongoing, onLoad, ...props }) {
       onLoad?.(current.size && { current, ongoing: true, open });
     })();
   }, []);
-  const outage = !!current.size;
-  const severity = outage && current.has(MAJOR) ? "danger" : "warning";
-  const label = severity ? severity === "danger" ? MAJOR : DEGRADED : "";
   return (
     <div className="card margin-top--xs">
       <div className="card__header">
@@ -71,7 +76,10 @@ export default function Incidents({ ongoing, onLoad, ...props }) {
           Incidents
           {" "}
           {current.size && (
-            <span className={`badge badge--${severity}`}>{label}</span>
+            <span className={
+              `badge badge--${current.has(MAJOR) ? "danger" : "warning"}`}>
+              {current.has(MAJOR) ? MAJOR : DEGRADED}
+            </span>
           )}
         </h3>
       </div>
@@ -96,7 +104,9 @@ function Incident({ children }) {
           {status}
         </span>
         {" "}
-        <span className={`badge badge--${severity}`}>{issue.severity}</span>
+        <span className={`badge badge--${SEVERITY[issue.severity]}`}>
+          {issue.severity}
+        </span>
         <em className={styles.incident_date}>{date.format(DATE)} UTC</em>
       </div>
       <Link className={styles.incident_link} to={issue.html_url}>
