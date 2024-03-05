@@ -1,3 +1,4 @@
+import Link from "@docusaurus/Link";
 import { urls } from "@site/src/constants";
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
@@ -57,7 +58,9 @@ export default function VersionUpdates({ onLoad }) {
             <div key={index}
               style={{ margin: 2 }}
               className={`${styles.badge} badge badge--secondary`}>
-              <a href={urls.versions.pr.replace("<NAME>", item)}>{item}</a>
+              <Link href={urls.versions.pr.replace("<NAME>", item)}>
+                {item}
+              </Link>
             </div>
           ))}
         </div>
@@ -82,8 +85,9 @@ export default function VersionUpdates({ onLoad }) {
                 <HoverEllipsis />
                 <div className={`${styles.badge} badge badge--secondary`}>
                   {/* Prevent link clicks from expanding/collapsing. */}
-                  <a onClick={event => event.stopPropagation()}
-                    href={urls.versions.pr.replace("<NAME>", item)}>{item}</a>
+                  <Link onClick={event => event.stopPropagation()}
+                    href={urls.versions.pr.replace("<NAME>", item)}>{item}
+                  </Link>
                 </div>
               </div>
               <div className={styles.errored_item_content}

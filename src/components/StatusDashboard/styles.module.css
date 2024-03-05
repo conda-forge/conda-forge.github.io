@@ -219,7 +219,6 @@
 .version_updates_content a {
   font-size: small;
   font-weight: 600;
-  text-decoration: none;
 }
 
 .version_updates_content .badge:hover {
