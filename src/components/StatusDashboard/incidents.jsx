@@ -20,21 +20,24 @@ const DEGRADED = "degraded performance";
 // Incident labels we care about.
 const BAD_LABELS = new Set(["investigating", DEGRADED, MAJOR, "maintenance"]);
 
-// Time period  we care about: 90 days – in milliseconds.
+// Time period we care about: 90 days – in milliseconds.
 const PERIOD = 90 * 24 * 60 * 60 * 1000;
 
-export default function Incidents({ ongoing, onLoad }) {
-  const [{ closed, current, open }, setState] = useState(
-    { closed: [], current: new Set(), open: [] }
-  );
+export default function Incidents({ ongoing, onLoad, ...props }) {
+  const [{ closed, current, open }, setState] = useState(() => {
+    const { current, open } = props;
+    return { closed: [], current: current ?? new Set(), open: open ?? [] }
+  });
   useEffect(() => {
-    const octokit = new Octokit({});
-    // If we only want ongoing incidents, set the era in the future.
-    const era = ongoing ? Date.now() + PERIOD : Date.now() - PERIOD;
-    const open = [];
-    const closed = [];
-    let current = new Set();
-    void (async () => {
+    void (async (initialized = current.size && ongoing && open.length) => {
+      // If everything we need came from the props, bail.
+      if (initialized) return;
+      const octokit = new Octokit({});
+      // If we only want ongoing incidents, set the era in the future.
+      const era = ongoing ? Date.now() + PERIOD : Date.now() - PERIOD;
+      const open = [];
+      const closed = [];
+      let current = new Set();
       try {
         const issues = await octokit.rest.issues.listForRepo({
           ...REPO, per_page: 100, state: "all"
@@ -55,7 +58,7 @@ export default function Incidents({ ongoing, onLoad }) {
       } catch (error) {
         console.warn(`error loading github issues`, error);
       }
-      onLoad?.(!!current.size);
+      onLoad?.(ongoing && { current, ongoing, open });
     })();
   }, []);
   const outage = !!current.size;

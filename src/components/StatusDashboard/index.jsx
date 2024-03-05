@@ -34,7 +34,7 @@ ChartJS.register(
 
 export default function StatusDashboard() {
   const total = 8; // Total number of dashboard components.
-  const [{ jumped, loaded, ongoing }, setState] = useState({
+  const [{ incidents, jumped, loaded }, setState] = useState({
     jumped: false, loaded: 0, ongoing: false
   });
   const { hash } = useLocation();
@@ -47,8 +47,8 @@ export default function StatusDashboard() {
   });
   const onLoad = () =>
     setState((prev) => ({ ...prev, loaded: prev.loaded + 1 }));
-  const onLoadIncidents = ongoing =>
-    setState((prev) => ({ ...prev, loaded: prev.loaded + 1, ongoing }));
+  const onLoadIncidents = incidents =>
+    setState((prev) => ({ ...prev, incidents, loaded: prev.loaded + 1 }));
   return (
     <main className="container">
       <div className="row row--no-gutters">
@@ -56,7 +56,8 @@ export default function StatusDashboard() {
           <TOC />
         </div>
         <div className="col col--10">
-          {ongoing && <div className="col col--12"><Incidents ongoing /></div>}
+          {incidents &&
+            <div className="col col--12"><Incidents {...incidents} /></div>}
           <div className="row row--no-gutters">
             <div className="col col--6" style={{ flex: 1 }}>
               <div id="repos" className={styles.toc_anchor}></div>
