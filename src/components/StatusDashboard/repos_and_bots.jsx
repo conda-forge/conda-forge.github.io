@@ -11,25 +11,22 @@ const DEGRADED_WINDOW = 40 * 60 * 1000;
 export default function ReposAndBots({ onLoad, style }) {
   useEffect(() => onLoad?.(), []);
   return (
-    <>
-      <div id="repos" className={styles.toc_anchor}></div>
-      <div className="card margin-top--xs" style={style}>
-        <div className="card__header">
-          <h3>Repos and Bots</h3>
-        </div>
-        <div className="card__body">
-          <table style={{ fontSize: "small" }}>
-            <tbody>
-              <CDNStatus />
-              <WebServices />
-              {urls.repos.badges.map(({ name, ...badge }, index) =>
-                <Badge key={index} {...badge}>{name}</Badge>
-              )}
-            </tbody>
-          </table>
-        </div>
+    <div className="card margin-top--xs" style={style}>
+      <div className="card__header">
+        <h3>Repos and Bots</h3>
       </div>
-    </>
+      <div className="card__body">
+        <table style={{ fontSize: "small" }}>
+          <tbody>
+            <CDNStatus />
+            <WebServices />
+            {urls.repos.badges.map(({ name, ...badge }, index) =>
+              <Badge key={index} {...badge}>{name}</Badge>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
 

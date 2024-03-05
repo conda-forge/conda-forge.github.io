@@ -24,22 +24,16 @@ export default function TravisCIUsage({ onLoad }) {
     return moment(rate).local();
   });
   return (
-    <>
-      <div id="travis" className={styles.toc_anchor}></div>
-      <div
-        id="travis_ci_usage"
-        className="card margin-top--xs margin-bottom--xs"
-      >
-        <div className="card__header">
-          <h3>
-            Travis CI Usage{" "}
-            <span className="badge badge--secondary">{state.total}</span>
-          </h3>
-        </div>
-        <div className={`card__body ${styles.status_dashboard_graph}`}>
-          <Bar data={{ labels, datasets: [{ data }] }} options={options} />
-        </div>
+    <div className="card margin-top--xs margin-bottom--xs">
+      <div className="card__header">
+        <h3>
+          Travis CI Usage{" "}
+          <span className="badge badge--secondary">{state.total}</span>
+        </h3>
       </div>
-    </>
+      <div className={`card__body ${styles.status_dashboard_graph}`}>
+        <Bar data={{ labels, datasets: [{ data }] }} options={options} />
+      </div>
+    </div>
   );
 }

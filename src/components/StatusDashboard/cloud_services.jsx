@@ -7,23 +7,20 @@ const OPERATIONAL = "All Systems Operational";
 export default function CloudServices({ onLoad, style }) {
   useEffect(() => onLoad?.(), []);
   return (
-    <>
-      <div id="cloud" className={styles.toc_anchor}></div>
-      <div id="cloud_services" className="card margin-top--xs" style={style}>
-        <div className="card__header">
-          <h3>Cloud Services</h3>
-        </div>
-        <div className="card__body">
-          <table style={{ fontSize: "small" }}>
-            <tbody>
-              {Object.keys(urls.cloud).map((service, index) =>
-                <Status key={index} {...urls.cloud[service]} />
-              )}
-            </tbody>
-          </table>
-        </div>
+    <div className="card margin-top--xs" style={style}>
+      <div className="card__header">
+        <h3>Cloud Services</h3>
       </div>
-    </>
+      <div className="card__body">
+        <table style={{ fontSize: "small" }}>
+          <tbody>
+            {Object.keys(urls.cloud).map((service, index) =>
+              <Status key={index} {...urls.cloud[service]} />
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
 

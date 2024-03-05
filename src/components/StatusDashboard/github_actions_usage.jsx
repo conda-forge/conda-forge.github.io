@@ -24,19 +24,16 @@ export default function GitHubActionsUsage({ onLoad }) {
     return moment(rate).local();
   });
   return (
-    <>
-      <div id="github" className={styles.toc_anchor}></div>
-      <div id="github_actions_usage" className="card margin-top--xs">
-        <div className="card__header">
-          <h3>
-            GitHub Actions Usage{" "}
-            <span className="badge badge--secondary">{state.total}</span>
-          </h3>
-        </div>
-        <div className={`card__body ${styles.status_dashboard_graph}`}>
-          <Bar data={{ labels, datasets: [{ data }] }} options={options} />
-        </div>
+    <div className="card margin-top--xs">
+      <div className="card__header">
+        <h3>
+          GitHub Actions Usage{" "}
+          <span className="badge badge--secondary">{state.total}</span>
+        </h3>
       </div>
-    </>
+      <div className={`card__body ${styles.status_dashboard_graph}`}>
+        <Bar data={{ labels, datasets: [{ data }] }} options={options} />
+      </div>
+    </div>
   );
 }

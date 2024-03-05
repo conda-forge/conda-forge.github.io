@@ -24,19 +24,16 @@ export default function AzurePipelinesUsage({ onLoad }) {
     labels.push(moment(rate).local());
   });
   return (
-    <>
-      <div id="azure" className={styles.toc_anchor}></div>
-      <div id="azure_pipelines_usage" className="card margin-top--xs">
-        <div className="card__header">
-          <h3>
-            Azure Pipelines Usage{" "}
-            <span className="badge badge--secondary">{state.total}</span>
-          </h3>
-        </div>
-        <div className={`card__body ${styles.status_dashboard_graph}`}>
-          <Bar data={{ labels, datasets }} options={charts.usage.options} />
-        </div>
+    <div className="card margin-top--xs">
+      <div className="card__header">
+        <h3>
+          Azure Pipelines Usage{" "}
+          <span className="badge badge--secondary">{state.total}</span>
+        </h3>
       </div>
-    </>
+      <div className={`card__body ${styles.status_dashboard_graph}`}>
+        <Bar data={{ labels, datasets }} options={charts.usage.options} />
+      </div>
+    </div>
   );
 }

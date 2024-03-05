@@ -59,37 +59,45 @@ export default function StatusDashboard() {
           {ongoing && <div className="col col--12"><Incidents ongoing /></div>}
           <div className="row row--no-gutters">
             <div className="col col--6" style={{ flex: 1 }}>
+              <div id="repos" className={styles.toc_anchor}></div>
               <ReposAndBots onLoad={onLoad} style={{ height: "100%" }} />
             </div>
             <div className="col col--6" style={{ flex: 1 }}>
+              <div id="cloud" className={styles.toc_anchor}></div>
               <CloudServices onLoad={onLoad} style={{ height: "100%" }} />
             </div>
           </div>
           <div className="row row--no-gutters">
             <div className="col col--12">
+              <div id="migrations" className={styles.toc_anchor}></div>
               <CurrentMigrations onLoad={onLoad} />
             </div>
           </div>
           <div className="row row--no-gutters">
             <div className="col col--12">
+              <div id="azure" className={styles.toc_anchor}></div>
               <AzurePipelineUsage onLoad={onLoad} />
             </div>
           </div>
           <div className="row row--no-gutters">
             <div className="col col--12">
+              <div id="github" className={styles.toc_anchor}></div>
               <GitHubActionsUsage onLoad={onLoad} />
             </div>
           </div>
           <div className="row row--no-gutters">
             <div className="col col--12">
+              <div id="travis" className={styles.toc_anchor}></div>
               <TravisCIUsage onLoad={onLoad} />
             </div>
           </div>
           <div className="row row--no-gutters">
             <div className="col col--6">
+              <div id="incidents" className={styles.toc_anchor}></div>
               <Incidents onLoad={onLoadIncidents} />
             </div>
             <div className="col col--6">
+              <div id="version" className={styles.toc_anchor}></div>
               <VersionUpdates onLoad={onLoad} />
             </div>
           </div>

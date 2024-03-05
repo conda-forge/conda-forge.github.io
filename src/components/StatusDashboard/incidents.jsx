@@ -62,25 +62,21 @@ export default function Incidents({ ongoing, onLoad }) {
   const severity = outage && current.has(MAJOR) ? "danger" : "warning";
   const label = severity ? severity === "danger" ? MAJOR : DEGRADED : "";
   return (
-    <>
-      {!ongoing && // TOC anchor is for normal incident display, not ongoing.
-        <div id="incidents" className={styles.toc_anchor}></div>}
-      <div className="card margin-top--xs">
-        <div className="card__header">
-          <h3>
-            Incidents
-            {" "}
-            {current.size && (
-              <span className={`badge badge--${severity}`}>{label}</span>
-            )}
-          </h3>
-        </div>
-        <div className={`card__body ${styles.incidents}`}>
-          {open.map((issue, i) => <Incident key={i}>{issue}</Incident>)}
-          {closed.map((issue, i) => <Incident key={i}>{issue}</Incident>)}
-        </div>
+    <div className="card margin-top--xs">
+      <div className="card__header">
+        <h3>
+          Incidents
+          {" "}
+          {current.size && (
+            <span className={`badge badge--${severity}`}>{label}</span>
+          )}
+        </h3>
       </div>
-    </>
+      <div className={`card__body ${styles.incidents}`}>
+        {open.map((issue, i) => <Incident key={i}>{issue}</Incident>)}
+        {closed.map((issue, i) => <Incident key={i}>{issue}</Incident>)}
+      </div>
+    </div>
   );
 }
 
