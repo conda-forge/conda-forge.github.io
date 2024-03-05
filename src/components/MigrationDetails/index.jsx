@@ -6,13 +6,14 @@ import { React, useEffect, useState } from "react";
 import SVG from 'react-inlinesvg';
 import styles from "./styles.module.css";
 
+// { Done, In PR, Awaiting PR, Awaiting parents, Not solvable, Bot error }
 const ORDERED = [
   ["done", "Done"],
-  ["awaiting-parents", "Awaiting parents"],
-  ["awaiting-pr", "Awaiting PR"],
-  ["bot-error", "Bot error"],
   ["in-pr", "In PR"],
-  ["not-solvable", "Not solvable"]
+  ["awaiting-pr", "Awaiting PR"],
+  ["awaiting-parents", "Awaiting parents"],
+  ["not-solvable", "Not solvable"],
+  ["bot-error", "Bot error"],
 ];
 
 const TITLES = ORDERED.reduce((titles, [key, title]) =>
