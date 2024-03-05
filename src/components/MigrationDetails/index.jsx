@@ -219,7 +219,7 @@ function Table({ details }) {
 function Row({ children }) {
   const [collapsed, setState] = useState(true);
   const { feedstock, name, status } = children;
-  const immediate = feedstock["immediate_children"];
+  const immediate = feedstock["immediate_children"] || [];
   const href = feedstock["pr_url"];
   const details = feedstock["pre_pr_migrator_status"];
   return (<>
@@ -241,12 +241,10 @@ function Row({ children }) {
       </td>
       <td>{TITLES[status]}</td>
       <td>
-        {(immediate || []).map((name, index) => (
-          <span className="badge badge--secondary" key={index}
-            style={{ margin: 2 }}>
-            {name}
-          </span>
-        ))}
+        {immediate.map((name, index) => (<>
+          <span className="badge badge--secondary" key={index}>{name}</span>
+          {immediate.length - 1 === index ? "" : " "}
+        </>))}
       </td>
     </tr>
     {details && !collapsed && (<tr>
