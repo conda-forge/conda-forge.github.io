@@ -58,7 +58,7 @@ export default function Incidents({ ongoing, onLoad, ...props }) {
       } catch (error) {
         console.warn(`error loading github issues`, error);
       }
-      onLoad?.(ongoing && { current, ongoing, open });
+      onLoad?.(current.size && { current, ongoing: true, open });
     })();
   }, []);
   const outage = !!current.size;
