@@ -52,9 +52,7 @@ export default function StatusDashboard() {
   return (
     <main className="container">
       <div className="row row--no-gutters">
-        <div className="col col--2">
-          <TOC />
-        </div>
+        <div className="col col--2"><TOC /></div>
         <div className="col col--10">
           {incidents &&
             <div className="row row--no-gutters">

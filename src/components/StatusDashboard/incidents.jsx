@@ -77,8 +77,10 @@ export default function Incidents({ ongoing, onLoad, ...props }) {
           {" "}
           {current.size && (
             <span className={
-              `badge badge--${current.has(MAJOR) ? "danger" : "warning"}`}>
-              {current.has(MAJOR) ? MAJOR : DEGRADED}
+              `badge badge--${
+                current.has(MAJOR) ? "danger" : current.has(DEGRADED) ? "warning" : "info"
+              }`}>
+              {current.has(MAJOR) ? MAJOR : current.has(DEGRADED) ? DEGRADED : issue.severity}
             </span>
           )}
         </h3>
@@ -95,13 +97,13 @@ function Incident({ children }) {
   const issue = children;
   const open = issue.state === "open";
   const date = moment(issue.created_at);
-  const status = open ? "ongoing" : "resolved";
-  const severity = issue.severity === MAJOR ? "danger" : "warning";
   return (
     <div className={styles.incident}>
       <div>
-        <span className={`badge badge--${open ? severity : "success"}`}>
-          {status}
+        <span className={
+          `badge badge--${open ? SEVERITY[issue.severity] : "success"}
+        `}>
+          {open ? "ongoing" : "resolved"}
         </span>
         {" "}
         <span className={`badge badge--${SEVERITY[issue.severity]}`}>
