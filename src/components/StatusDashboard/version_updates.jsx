@@ -25,7 +25,7 @@ export default function VersionUpdates({ onLoad }) {
       } catch (error) {
         console.warn("error loading version updates", error);
       }
-      onLoad();
+      onLoad?.();
     })();
   }, []);
   return (

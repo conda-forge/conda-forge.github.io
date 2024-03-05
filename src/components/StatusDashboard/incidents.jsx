@@ -23,13 +23,14 @@ const BAD_LABELS = new Set(["investigating", DEGRADED, MAJOR, "maintenance"]);
 // Time period  we care about: 90 days – in milliseconds.
 const PERIOD = 90 * 24 * 60 * 60 * 1000;
 
-export default function Incidents({ onLoad }) {
+export default function Incidents({ ongoing, onLoad }) {
   const [{ closed, current, open }, setState] = useState(
     { closed: [], current: new Set(), open: [] }
   );
   useEffect(() => {
     const octokit = new Octokit({});
-    const era = Date.now() - PERIOD;
+    // If we only want ongoing incidents, set the era in the future.
+    const era = ongoing ? Date.now() + PERIOD : Date.now() - PERIOD;
     const open = [];
     const closed = [];
     let current = new Set();
@@ -62,8 +63,9 @@ export default function Incidents({ onLoad }) {
   const label = severity ? severity === "danger" ? MAJOR : DEGRADED : "";
   return (
     <>
-      <div id="incidents" className={styles.toc_anchor}></div>
-      <div className={`card margin-top--xs`}>
+      {!ongoing && // TOC anchor is for normal incident display, not ongoing.
+        <div id="incidents" className={styles.toc_anchor}></div>}
+      <div className="card margin-top--xs">
         <div className="card__header">
           <h3>
             Incidents

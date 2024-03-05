@@ -34,8 +34,8 @@ ChartJS.register(
 
 export default function StatusDashboard() {
   const total = 8; // Total number of dashboard components.
-  const [{ incident, jumped, loaded }, setState] = useState({
-    incident: false, loaded: 0, jumped: false
+  const [{ jumped, loaded, ongoing }, setState] = useState({
+    jumped: false, loaded: 0, ongoing: false
   });
   const { hash } = useLocation();
   useEffect(() => {
@@ -47,20 +47,16 @@ export default function StatusDashboard() {
   });
   const onLoad = () =>
     setState((prev) => ({ ...prev, loaded: prev.loaded + 1 }));
-  const onLoadIncidents = incident =>
-    setState((prev) => ({ ...prev, incident, loaded: prev.loaded + 1 }));
+  const onLoadIncidents = ongoing =>
+    setState((prev) => ({ ...prev, loaded: prev.loaded + 1, ongoing }));
   return (
     <main className="container">
       <div className="row row--no-gutters">
         <div className="col col--2">
-          <TOC incident={incident} />
+          <TOC />
         </div>
         <div className="col col--10">
-          {incident && (
-          <div className="col col--12">
-            <Incidents />
-          </div>
-          )}
+          {ongoing && <div className="col col--12"><Incidents ongoing /></div>}
           <div className="row row--no-gutters">
             <div className="col col--6" style={{ flex: 1 }}>
               <ReposAndBots onLoad={onLoad} style={{ height: "100%" }} />
@@ -90,12 +86,10 @@ export default function StatusDashboard() {
             </div>
           </div>
           <div className="row row--no-gutters">
-            {!incident && (
             <div className="col col--6">
               <Incidents onLoad={onLoadIncidents} />
             </div>
-            )}
-            <div className={`col ${incident ? "col--12" : "col--6"}`}>
+            <div className="col col--6">
               <VersionUpdates onLoad={onLoad} />
             </div>
           </div>

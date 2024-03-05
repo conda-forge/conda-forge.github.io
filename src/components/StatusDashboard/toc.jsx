@@ -5,9 +5,6 @@ export default function TOC({ incident }) {
   return (
     <aside className={styles.status_dashboard_toc}>
       <ul>
-        {incident && <li className="menu__list-item">
-          <a className="menu__link" href="#incidents">Incidents</a>
-        </li>}
         <li className="menu__list-item">
           <a className="menu__link" href="#repos">Repos and Bots</a>
         </li>
@@ -26,9 +23,9 @@ export default function TOC({ incident }) {
         <li className="menu__list-item">
           <a className="menu__link" href="#travis">Travis CI Usage</a>
         </li>
-        {!incident && <li className="menu__list-item">
+        <li className="menu__list-item">
           <a className="menu__link" href="#incidents">Incidents</a>
-        </li>}
+        </li>
         <li className="menu__list-item">
           <a className="menu__link" href="#version">Version Updates</a>
         </li>

@@ -5,9 +5,7 @@ import styles from "./styles.module.css";
 const OPERATIONAL = "All Systems Operational";
 
 export default function CloudServices({ onLoad, style }) {
-  useEffect(() => {
-    void onLoad();
-  }, []);
+  useEffect(() => onLoad?.(), []);
   return (
     <>
       <div id="cloud" className={styles.toc_anchor}></div>

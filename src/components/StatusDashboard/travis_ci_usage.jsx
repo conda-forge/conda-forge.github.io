@@ -14,7 +14,7 @@ export default function TravisCIUsage({ onLoad }) {
       } catch (error) {
         console.warn("error loading travis ci usage", error);
       }
-      onLoad();
+      onLoad?.();
     })();
   }, []);
   const data = [];

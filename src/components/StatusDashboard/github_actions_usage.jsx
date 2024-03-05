@@ -14,7 +14,7 @@ export default function GitHubActionsUsage({ onLoad }) {
       } catch (error) {
         console.warn("error loading github actions", error);
       }
-      onLoad();
+      onLoad?.();
     })();
   }, []);
   const data = [];

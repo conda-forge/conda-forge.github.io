@@ -262,7 +262,7 @@ function fetchContent(onLoad, setState) {
           regular: fetched.regular.sort(compare(by, order)),
         };
       });
-      onLoad();
+      onLoad?.();
     })(local);
   };
 }

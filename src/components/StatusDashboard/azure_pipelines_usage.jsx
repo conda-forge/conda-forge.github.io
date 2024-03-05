@@ -14,7 +14,7 @@ export default function AzurePipelinesUsage({ onLoad }) {
       } catch (error) {
         console.warn("error loading azure pipelines", error);
       }
-      onLoad();
+      onLoad?.();
     })();
   }, []);
   const datasets = [{ data: [] }];

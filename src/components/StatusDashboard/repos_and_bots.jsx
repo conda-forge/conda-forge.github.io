@@ -9,7 +9,7 @@ const OPERATIONAL_WINDOW = 20 * 60 * 1000;
 const DEGRADED_WINDOW = 40 * 60 * 1000;
 
 export default function ReposAndBots({ onLoad, style }) {
-  useEffect(() => void onLoad(), []);
+  useEffect(() => onLoad?.(), []);
   return (
     <>
       <div id="repos" className={styles.toc_anchor}></div>
