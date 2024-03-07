@@ -153,18 +153,18 @@ automatic version updates/migrations for feedstocks. The current options are
 
 ```yaml
 bot:
-  # can the bot automerge PRs it makes on this feedstock
+  # can the bot automerge PRs it makes on this feedstock (default: false)
   automerge: true
   # only automerge on successful version PRs, migrations are not automerged
   automerge: 'version'
   # only automerge on successful migration PRs, versions are not automerged
   automerge: 'migration'
 
-  # only open PRs if resulting environment is solvable, useful for tightly coupled packages
+  # only open PRs if resulting environment is solvable, useful for tightly coupled packages (default: false)
   check_solvable: true
 
   # The bot.inspection key in the conda-forge.yml can have one of six possible values:
-  inspection: hint  # generate hints using source code (backwards compatible)
+  inspection: hint  # generate hints using source code (backwards compatible) (default)
   inspection: hint-all  # generate hints using all methods
   inspection: hint-source  # generate hints using only source code
   inspection: hint-grayskull  # generate hints using only grayskull
@@ -172,14 +172,28 @@ bot:
   inspection: update-source  # update recipe using only source code
   inspection: update-grayskull  # update recipe using only grayskull
 
+  # try to detect new dependencies from PyPI wheel files (default: false) 
+  run_deps_from_wheel: true
+
   # any branches listed in this section will get bot migration PRs in addition
   # to the default branch
   abi_migration_branches:
     - v1.10.x
 
   version_updates:
-    # use this for packages that are updated too frequently
+    # use this for packages that are updated too frequently (default: 0)
     random_fraction_to_keep: 0.1  # keeps 10% of versions at random
+
+    # A list of upstream sources to consider for upstream updates.
+    # Valid values are: pypi, cran, npm, rosdistro, rawurl, github, incrementalpharawurl, nvidia
+    # Defaults to all of the above.
+    sources:
+      - github
+      - pypi
+
+    # versions listed in this section will not be considered for automatic version updates
+    exclude:
+      - 0.9.1
 ```
 
 The `abi_migration_branches` feature is useful to, for example, add a
