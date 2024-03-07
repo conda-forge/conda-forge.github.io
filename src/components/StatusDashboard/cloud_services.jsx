@@ -31,8 +31,8 @@ function Status({ api, link, title }) {
     "Everything is looking good": OPERATIONAL,
     "operational": OPERATIONAL
   })[state.status] || state.status;
-  const className = styles.status_pill + " " +
-    styles[status === OPERATIONAL ? "operational" : "degraded"]
+  const className = "badge " +
+    (status === OPERATIONAL ? "badge--success" : "badge--warning")
   useEffect(() => {
     void (async () => {
       try {
@@ -51,7 +51,13 @@ function Status({ api, link, title }) {
           {title}
         </a>
       </td>
-      <td><span className={className}>{status}</span></td>
+      <td>
+        <span className={className} style={{
+          display: "inline-block",
+          minWidth: "100%",
+          textAlign: "center"
+        }}>{status}</span>
+      </td>
     </tr>
   );
 }

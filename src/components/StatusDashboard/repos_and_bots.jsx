@@ -50,7 +50,8 @@ function Image({ alt, link, children }) {
   const onError = () => setState(true);
   if (error) return (<>No status available</>);
   const image = (
-    <img alt={alt} className={styles.badge} onError={onError} src={children} />
+    <img alt={alt}
+      style={{ verticalAlign: "bottom" }} onError={onError} src={children} />
   );
   return link ? <a href={link}>{image}</a> : image;
 }
@@ -80,11 +81,11 @@ function CDNStatus() {
         </a>
       </td>
       <td>
-        <div style={{ display: "block" }} className={
-          styles.status_pill +
-          (status === "operational" ? " " + styles.operational : "") +
-          (status === "degraded" ? " " + styles.degraded : "") +
-          (status === "major outage" ? " " + styles.outage : "")
+        <div style={{ display: "block", textAlign: "center" }} className={
+          "badge" +
+          (status === "operational" ? " badge--success" : "") +
+          (status === "degraded" ? " badge--warning" : "") +
+          (status === "major outage" ? " badge--danger" : "")
         }>{status}</div>
         <div style={{ fontStyle: "italic", textAlign: "right" }}>
           (last updated {minutes} min ago)
@@ -115,11 +116,11 @@ function WebServices() {
         </a>
       </td>
       <td>
-        <div style={{ display: "block" }} className={
-          styles.status_pill +
-          (status === "operational" ? " " + styles.operational : "") +
-          (status === "degraded" ? " " + styles.degraded : "") +
-          (status === "major outage" ? " " + styles.outage : "")
+        <div style={{ display: "block", textAlign: "center" }} className={
+          "badge" +
+          (status === "operational" ? " badge--success" : "") +
+          (status === "degraded" ? " badge--warning" : "") +
+          (status === "major outage" ? " badge--danger" : "")
         }>{status}</div>
       </td>
     </tr>
