@@ -2,7 +2,7 @@ import { Redirect, useLocation } from "@docusaurus/router";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { urls } from "@site/src/constants";
 import Layout from "@theme/Layout";
-import { React, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SVG from 'react-inlinesvg';
 import styles from "./styles.module.css";
 
@@ -238,12 +238,12 @@ function Row({ children }) {
       </td>
       <td>{TITLES[status]}</td>
       <td>
-        {immediate.map((name, index) => (<>
+        {immediate.map((name, index) => (<React.Fragment key={index}>
           <span
             style={{ marginBottom: 1 }}
-            className="badge badge--secondary" key={index}>{name}</span>
+            className="badge badge--secondary">{name}</span>
           {immediate.length - 1 === index ? "" : " "}
-        </>))}
+        </React.Fragment>))}
       </td>
     </tr>
     {details && !collapsed && (<tr>
