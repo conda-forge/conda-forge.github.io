@@ -115,13 +115,13 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
             onClick={() => resort("status")}
             className={sort.by === "status" ? styles[sort.order] : undefined}
           >
-            Status
+            PRs made
           </th>
           <th
-            onClick={() => resort("awaiting-parents")}
-            className={sort.by === "awaiting-parents" ? styles[sort.order] : undefined}
+            onClick={() => resort("in-pr")}
+            className={sort.by === "in-pr" ? styles[sort.order] : undefined}
           >
-            Awaiting parents
+            In PR
           </th>
           <th
             onClick={() => resort("awaiting-pr")}
@@ -130,10 +130,10 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
             Awaiting PR
           </th>
           <th
-            onClick={() => resort("in-pr")}
-            className={sort.by === "in-pr" ? styles[sort.order] : undefined}
+            onClick={() => resort("awaiting-parents")}
+            className={sort.by === "awaiting-parents" ? styles[sort.order] : undefined}
           >
-            In PR
+            Awaiting parents
           </th>
           <th
             onClick={() => resort("not-solvable")}
@@ -173,9 +173,9 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
                   </span>
                 </label>
               </td>
-              <td>{row.details["awaiting-parents"].length}</td>
-              <td>{row.details["awaiting-pr"].length}</td>
               <td>{row.details["in-pr"].length}</td>
+              <td>{row.details["awaiting-pr"].length}</td>
+              <td>{row.details["awaiting-parents"].length}</td>
               <td>{row.details["not-solvable"].length}</td>
               <td>{row.details["bot-error"].length}</td>
             </tr>
