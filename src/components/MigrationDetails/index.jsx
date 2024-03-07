@@ -202,7 +202,7 @@ function Table({ details }) {
         <thead>
           <tr>
             <th style={{ width: 200 }}>Name</th>
-            <th style={{ width: 115 }}>Status</th>
+            <th style={{ width: 115 }}>PRs made</th>
             <th style={{ flex: 1 }}>Immediate Children</th>
           </tr>
         </thead>
