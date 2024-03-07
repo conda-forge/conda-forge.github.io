@@ -226,23 +226,22 @@ function Row({ children }) {
     <tr>
       <td>
       {href ? (
-        <a className="badge badge--secondary" href={href}>{name}</a>
+        <a href={href}>{name}</a>
       ) : (
         details ? (
-          <span className={
-            `badge badge--secondary ${collapsed ?
-                styles.collapsed :
-                styles.expanded}`}
+          <span className={`${collapsed ? styles.collapsed : styles.expanded}`}
             onClick={() => setState(!collapsed)}>
             {name}
           </span>) : (
-          <span className={`badge badge--secondary`}>{name}</span>)
+          <span>{name}</span>)
       )}
       </td>
       <td>{TITLES[status]}</td>
       <td>
         {immediate.map((name, index) => (<>
-          <span className="badge badge--secondary" key={index}>{name}</span>
+          <span
+            style={{ marginBottom: 1 }}
+            className="badge badge--secondary" key={index}>{name}</span>
           {immediate.length - 1 === index ? "" : " "}
         </>))}
       </td>

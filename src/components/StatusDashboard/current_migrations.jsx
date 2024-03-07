@@ -156,9 +156,8 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
           return (
             <tr key={row.name}>
               <td>
-                <Link className="badge badge--secondary"
-                  href={href}
-                  style={{ minWidth: "100%" }}
+                <Link href={href}
+                  style={{ display: "block" }}
                   onClick={event => {
                     event.preventDefault();
                     setState(href);

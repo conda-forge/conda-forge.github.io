@@ -158,19 +158,14 @@
 }
 
 .migration_details td a {
-  border-width: var(--ifm-badge-border-width);
-  border-color: transparent;
-  color: var(--ifm-color-primary);
-  text-decoration: none;
+  display: block;
 }
 
-.migration_details td a:hover {
-  border-width: var(--ifm-badge-border-width);
-  border-color: var(--ifm-color-primary);
-}
 .migration_details .collapsed,
 .migration_details .expanded {
   cursor: pointer;
+  display: block;
+  width: 100%;
 }
 
 .migration_details .collapsed::after {
