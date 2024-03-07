@@ -16,7 +16,9 @@
 }
 
 .incident_link {
-  background-color: var(--ifm-color-primary-lightest);
+  background-color: var(--theme-card);
+  border: 0.5px solid var(--ifm-color-secondary);
+  color: var(--theme-card-link-color);
   display: block;
   font-weight: 500;
   margin-top: 5px;
