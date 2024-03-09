@@ -48,20 +48,13 @@ export default function StatusDashboard() {
       for (const mutation of mutations) {
         changed = changed || mutation.attributeName === "data-theme"
       }
-      if (changed) {
-        setTimeout(() => { // If changed, wait half a second for CSS resolution.
-          const div = document.createElement("div");
-          div.style.backgroundColor = "var(--ifm-color-primary)";
-          document.body.appendChild(div);
-          const computed = window.getComputedStyle(div);
-          const backgroundColor = computed.getPropertyValue('background-color');
-          ChartJS.defaults.backgroundColor = backgroundColor;
-          document.body.removeChild(div);
-        }, 500);
+      if (changed) { // Set the chart color and trigger a render.
+        setChartColor();
+        setState(prev => ({ ...prev }));
       }
     });
+    setChartColor();
     observer.observe(document.documentElement, { attributes: true });
-
     return () => observer.disconnect();
   }, [isBrowser]);
   useEffect(() => { // NB: This effect runs on every render.
@@ -132,4 +125,13 @@ export default function StatusDashboard() {
       </div>
     </main>
   );
+}
+
+function setChartColor() {
+  const div = document.createElement("div");
+  div.style.backgroundColor = "var(--ifm-color-primary)";
+  document.body.appendChild(div);
+  ChartJS.defaults.backgroundColor = window.getComputedStyle(div)
+    .getPropertyValue('background-color');
+  document.body.removeChild(div);
 }
