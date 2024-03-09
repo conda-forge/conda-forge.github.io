@@ -2,7 +2,6 @@ import { useLocation } from "@docusaurus/router";
 import {
   Chart as ChartJS,
   CategoryScale,
-  Colors,
   LinearScale,
   BarElement,
   TimeScale,
@@ -30,8 +29,7 @@ ChartJS.register(
   TimeScale,
   Title,
   Tooltip,
-  Legend,
-  Colors
+  Legend
 );
 
 export default function StatusDashboard() {
@@ -40,7 +38,17 @@ export default function StatusDashboard() {
     jumped: false, loaded: 0, ongoing: false
   });
   const { hash } = useLocation();
-  useEffect(() => {
+  useEffect(() => { // NB: This effect runs on every render.
+    // Make sure Chart colors respect dark/light themes.
+    ((div) => {
+      if (!div) return; // If we are not in the DOM, this is superfluous.
+      div.style.backgroundColor = "var(--ifm-color-primary)";
+      document.body.appendChild(div);
+      const computed = window.getComputedStyle(div);
+      const backgroundColor = computed.getPropertyValue('background-color');
+      ChartJS.defaults.backgroundColor = backgroundColor;
+      document.body.removeChild(div);
+    })(window && document && document.createElement('div'));
     // When all components finish loading, scroll if necessary.
     if (jumped || loaded !== total) return;
     setState((prev) => ({ ...prev, jumped: true }));
