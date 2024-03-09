@@ -1,18 +1,18 @@
-import { charts, urls } from "@site/src/constants";
+import { charts } from "@site/src/constants";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import styles from "./styles.module.css";
 
-export default function AzurePipelinesUsage({ onLoad }) {
+export default function UsageChart({ onLoad, title, url }) {
   const [state, setState] = useState({ rates: {}, repos: {}, total: 0 });
   useEffect(() => {
     void (async () => {
       try {
-        const fetched = await (await fetch(urls.azure.pipelines)).json();
+        const fetched = await (await fetch(url)).json();
         setState((prev) => ({ ...prev, ...fetched }));
       } catch (error) {
-        console.warn("error loading azure pipelines", error);
+        console.warn("error loading usage chart", error);
       }
       onLoad?.();
     })();
@@ -27,7 +27,7 @@ export default function AzurePipelinesUsage({ onLoad }) {
     <div className="card margin-top--xs">
       <div className="card__header">
         <h3>
-          Azure Pipelines Usage{" "}
+          {`${title} `}
           <span className="badge badge--secondary">{state.total}</span>
         </h3>
       </div>

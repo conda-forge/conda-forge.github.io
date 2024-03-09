@@ -1,4 +1,5 @@
 import { useLocation } from "@docusaurus/router";
+import { urls } from "@site/src/constants";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,15 +12,13 @@ import {
 } from "chart.js";
 import "chartjs-adapter-moment";
 import { React, useEffect, useState } from "react";
-import AzurePipelineUsage from "./azure_pipelines_usage";
 import CloudServices from "./cloud_services";
 import CurrentMigrations from "./current_migrations";
-import GitHubActionsUsage from "./github_actions_usage";
 import Incidents from "./incidents";
 import ReposAndBots from "./repos_and_bots";
 import styles from "./styles.module.css";
 import TOC from "./toc";
-import TravisCIUsage from "./travis_ci_usage";
+import UsageChart from "./usage_chart";
 import VersionUpdates from "./version_updates";
 import useIsBrowser from "@docusaurus/useIsBrowser";
 
@@ -96,19 +95,28 @@ export default function StatusDashboard() {
           <div className="row row--no-gutters">
             <div className="col col--12">
               <div id="azure" className={styles.toc_anchor}></div>
-              <AzurePipelineUsage onLoad={onLoad} />
+              <UsageChart
+                onLoad={onLoad}
+                url={urls.azure.pipelines}
+                title="Azure Pipelines Usage" />
             </div>
           </div>
           <div className="row row--no-gutters">
             <div className="col col--12">
               <div id="github" className={styles.toc_anchor}></div>
-              <GitHubActionsUsage onLoad={onLoad} />
+              <UsageChart
+                onLoad={onLoad}
+                url={urls.github.actions}
+                title="GitHub Actions Usage" />
             </div>
           </div>
           <div className="row row--no-gutters">
             <div className="col col--12">
               <div id="travis" className={styles.toc_anchor}></div>
-              <TravisCIUsage onLoad={onLoad} />
+              <UsageChart
+                onLoad={onLoad}
+                url={urls.travis.usage}
+                title="Travis CI Usage" />
             </div>
           </div>
           <div className="row row--no-gutters">

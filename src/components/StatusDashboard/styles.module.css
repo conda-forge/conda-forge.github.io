@@ -122,9 +122,8 @@
 }
 
 .status_dashboard_toc {
-  border: var(--ifm-table-border-width) solid gray;
-  border-radius: 5px;
   font-size: 16px;
+  margin-right: 5px;
   position: sticky;
   top: 80px;
   max-width: 250px;

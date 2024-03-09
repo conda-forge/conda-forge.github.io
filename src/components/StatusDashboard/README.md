@@ -10,9 +10,10 @@ There are 8 informational top-level components in the status dashboard and 1 nav
 - `<ReposAndBots>` – [`repos_and_bots.jsx`](repos_and_bots.jsx)
 - `<CloudServices>` – [`cloud_services.jsx`](cloud_services.jsx)
 - `<CurrentMigrations>` – [`current_migrations.jsx`](current_migrations.jsx)
-- `<AzurePipelinesUsage>` – [`azure_pipelines_usage.jsx`](azure_pipelines_usage.jsx)
-- `<GitHubActionsUsage>` – [`github_actions_usage.jsx`](github_actions_usage.jsx)
-- `<TravisCIUsage>` – [`travis_ci_usage.jsx`](travis_ci_usage.jsx)
+- `<UsageChart>` – [`usage_chart.jsx`](usage_chart.jsx), used to render:
+  - Azure Pipelines chart
+  - GitHub Actions chart
+  - Travis CI chart
 - `<Incidents>` – [`incidents.jsx`](incidents.jsx)
 - `<VersionUpdates>` – [`version_updates.jsx`](version_updates.jsx)
 
