@@ -1,7 +1,7 @@
 import Link from "@docusaurus/Link";
 import moment from "moment";
 import { Octokit } from "octokit";
-import { React, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import styles from "./styles.module.css";
 
@@ -54,6 +54,7 @@ export default function Incidents({ ongoing, onLoad, ...props }) {
           const labels = new Set(issue.labels.map(({ name }) => name));
           const incident = intersection(labels, BAD_LABELS);
           if (!incident.size) continue; // Bail if the issue is not an incident.
+          if (typeof issue === "undefined") debugger;
           const severity = incident.keys().next().value;
           if (issue.state === "open") {
             open.push({ ...issue, severity });
@@ -80,7 +81,10 @@ export default function Incidents({ ongoing, onLoad, ...props }) {
               `badge badge--${
                 current.has(MAJOR) ? "danger" : current.has(DEGRADED) ? "warning" : "info"
               }`}>
-              {current.has(MAJOR) ? MAJOR : current.has(DEGRADED) ? DEGRADED : issue.severity}
+              {
+                current.has(MAJOR) ? MAJOR :
+                current.has(DEGRADED) ? DEGRADED :
+                current.values().next().value}
             </span>
           )}
         </h3>
