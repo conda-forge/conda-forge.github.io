@@ -67,7 +67,7 @@ export default function Incidents({ ongoing, onLoad, ...props }) {
       } catch (error) {
         console.warn(`error loading github issues`, error);
       }
-      onLoad?.(current.size && { current, ongoing: true, open });
+      onLoad?.(current.size ? { current, ongoing: true, open } : undefined);
     })();
   }, []);
   return (
@@ -76,7 +76,7 @@ export default function Incidents({ ongoing, onLoad, ...props }) {
         <h3>
           Incidents
           {" "}
-          {current.size && (
+          {!!current.size && (
             <span className={
               `badge badge--${
                 current.has(MAJOR) ? "danger" : current.has(DEGRADED) ? "warning" : "info"
