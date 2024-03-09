@@ -2,6 +2,7 @@ import { useLocation } from "@docusaurus/router";
 import {
   Chart as ChartJS,
   CategoryScale,
+  Colors,
   LinearScale,
   BarElement,
   TimeScale,
@@ -29,7 +30,8 @@ ChartJS.register(
   TimeScale,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Colors
 );
 
 export default function StatusDashboard() {
