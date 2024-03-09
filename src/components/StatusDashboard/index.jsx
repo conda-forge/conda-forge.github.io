@@ -21,6 +21,7 @@ import styles from "./styles.module.css";
 import TOC from "./toc";
 import TravisCIUsage from "./travis_ci_usage";
 import VersionUpdates from "./version_updates";
+import useIsBrowser from "@docusaurus/useIsBrowser";
 
 ChartJS.register(
   CategoryScale,
@@ -38,17 +39,32 @@ export default function StatusDashboard() {
     jumped: false, loaded: 0, ongoing: false
   });
   const { hash } = useLocation();
+  const isBrowser = useIsBrowser();
+  useEffect(() => {
+    if (!isBrowser) return; // Set Chart.js colors at browser runtime.
+    // Listen for `date-theme` changes in the `html` document element.
+    const observer = new MutationObserver((mutations) => {
+      let changed = false;
+      for (const mutation of mutations) {
+        changed = changed || mutation.attributeName === "data-theme"
+      }
+      if (changed) {
+        setTimeout(() => { // If changed, wait half a second for CSS resolution.
+          const div = document.createElement("div");
+          div.style.backgroundColor = "var(--ifm-color-primary)";
+          document.body.appendChild(div);
+          const computed = window.getComputedStyle(div);
+          const backgroundColor = computed.getPropertyValue('background-color');
+          ChartJS.defaults.backgroundColor = backgroundColor;
+          document.body.removeChild(div);
+        }, 500);
+      }
+    });
+    observer.observe(document.documentElement, { attributes: true });
+
+    return () => observer.disconnect();
+  }, [isBrowser]);
   useEffect(() => { // NB: This effect runs on every render.
-    // Make sure Chart colors respect dark/light themes.
-    ((div) => {
-      if (!div) return; // If we are not in the DOM, this is superfluous.
-      div.style.backgroundColor = "var(--ifm-color-primary)";
-      document.body.appendChild(div);
-      const computed = window.getComputedStyle(div);
-      const backgroundColor = computed.getPropertyValue('background-color');
-      ChartJS.defaults.backgroundColor = backgroundColor;
-      document.body.removeChild(div);
-    })(window && document && document.createElement('div'));
     // When all components finish loading, scroll if necessary.
     if (jumped || loaded !== total) return;
     setState((prev) => ({ ...prev, jumped: true }));
