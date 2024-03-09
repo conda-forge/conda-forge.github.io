@@ -571,6 +571,8 @@ The following CI services are available:
 * `github_actions`
 * `None` or `False` to disable a build platform.
 * `default` to choose an appropriate CI (only if available)
+* `native` to choose an appropriate CI for native compiling (only if available)
+* `emulated` to choose an appropriate CI for compiling inside an emulation of the target platform (only if available)
 
 Note that `github_actions` is not available for the conda-forge github organization
 except for self-hosted runs to avoid a denial of service due to other critical
