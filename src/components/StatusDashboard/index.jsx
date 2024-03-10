@@ -32,6 +32,8 @@ ChartJS.register(
   Legend
 );
 
+const THEME_ATTR = "data-theme";
+
 export default function StatusDashboard() {
   const total = 8; // Total number of dashboard components.
   const [{ incidents, jumped, loaded }, setState] = useState({
@@ -43,11 +45,8 @@ export default function StatusDashboard() {
     if (!isBrowser) return; // Set Chart.js colors at browser runtime.
     // Listen for `date-theme` changes in the `html` document element.
     const observer = new MutationObserver((mutations) => {
-      let changed = false;
-      for (const mutation of mutations) {
-        changed = changed || mutation.attributeName === "data-theme"
-      }
-      if (changed) { // Set the chart color and trigger a render.
+      // If the theme changed, set the chart color and trigger a render.
+      if (mutations.some(({ attributeName }) => attributeName === THEME_ATTR)) {
         setChartColor();
         setState(prev => ({ ...prev }));
       }
