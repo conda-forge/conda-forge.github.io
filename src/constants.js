@@ -122,13 +122,6 @@ export const urls = {
         badgeLink:
           "https://github.com/conda-forge/admin-migrations/actions/workflows/migrate.yml",
       },
-      {
-        name: "libcfgraph",
-        link: "https://github.com/regro/libcfgraph",
-        badge:
-          "https://dl.circleci.com/status-badge/img/gh/regro/libcfgraph/tree/master.svg?style=svg",
-        badgeLink: "https://circleci.com/gh/regro/libcfgraph",
-      },
     ],
     cdn: {
       api: "https://s3.amazonaws.com/conda-static.anaconda.org/conda-forge/last-updated",
