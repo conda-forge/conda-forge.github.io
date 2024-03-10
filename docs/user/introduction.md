@@ -74,7 +74,7 @@ From now on using `conda install <package-name>` will also find packages in our 
 
 In addition to the channel priority,
 we recommend always installing your packages inside a new environment instead of the `base` (formerly known as `root`) environment,
-and we also recommend the use of `miniconda` instead of the Anaconda Distribution.
+and we also recommend the use of [`miniforge`](https://github.com/conda-forge/miniforge) instead of the Anaconda Distribution.
 Using environments make it easier to debug problems with packages and ensure the stability of your `base` environment.
 Avoiding the Anaconda Distribution reduces chances of unsolvable/conflicting installations, it is also a smaller download.
 
@@ -91,10 +91,7 @@ Please be aware that the order of your conda package channels is important, espe
 [Miniforge](https://github.com/conda-forge/miniforge) is a community
 effort to provide Miniconda-like installers, with the added feature that
 conda-forge is the default channel.
-For certain platforms (such as ARMv8 64-bit, formally known as aarch64)
-Anaconda, Inc. does not provide any Miniconda installers, however Miniforge
-does.
-Miniforge installers are available here: [https://github.com/conda-forge/miniforge/#download](https://github.com/conda-forge/miniforge/#download)
+Miniforge is the easiest way to get started with conda-forge!
 
 Please refer to [Using multiple channels](tipsandtricks.md#multiple-channels) for pitfalls and more information.
 
