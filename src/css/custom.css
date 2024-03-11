@@ -20,7 +20,7 @@
   /*
     These two variables are defined in root and used at runtime for calculating
     the light mode and dark mode values of the primary color variable in order
-    to populate `backgroundColor` prop `<UsageChart>`.
+    to populate `backgroundColor` prop of `<UsageChart>`.
   */
   --ifm-color-primary-light-mode: #008478;
   --ifm-color-primary-dark-mode: #4db6ac;
