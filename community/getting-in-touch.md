@@ -2,33 +2,17 @@
 title: 'Getting in Touch'
 ---
 
-<a id="getintouch"></a>
-
-<a id="getting-in-touch"></a>
-
 # Getting in Touch
 
 The community at conda-forge would be happy to connect with you. We have got several ways for you to communicate with us, primarily through issue trackers, mailing lists, and real-time chat.
-
-<a id="issue-trackers"></a>
 
 ## Issue Trackers
 
 The main issue trackers that you will interact with are
 
 * [staged-recipes](https://github.com/conda-forge/staged-recipes/issues): You'll use staged-recipes to create a new conda package on conda-forge
-* [Our main docs repo](https://github.com/conda-forge/conda-forge.github.io/issues): You'll use this repo as a catch-all for issues where you're not sure where else to put them
+* [Our main website repo](https://github.com/conda-forge/conda-forge.github.io/issues): You'll use this repo as a catch-all for issues where you're not sure where else to put them
 * [Our enhancement proposals repo](https://github.com/conda-forge/cfep/issues): You'll use the enhancement proposals repo if you're interested in substantially changing the way conda-forge operates.
-
-<a id="discussion-forum"></a>
-
-## Discussion Forum
-
-The primary discussion areas that you will engage with is
-
-* [discourse forum](https://conda.discourse.group/c/pkg-building/conda-forge/25): We are using discourse as our main communication channel. To ask a question regarding usage of conda we encourage posting to our Discourse forum.
-
-<a id="gitter-and-element"></a>
 
 ## Gitter and Element
 
@@ -47,26 +31,13 @@ The main chat rooms that you'll interact with are
 
 Note: All Gitter room links forward to Element
 
-<a id="forum"></a>
-
 ## Forum
 
 * [conda community discourse forum](https://conda.discourse.group/): The [conda-forge section](https://conda.discourse.group/c/pkg-building/conda-forge/25) is dedicated to discussions of conda-forge.
 
-<a id="mailing-list"></a>
+## Online meetings
 
-## Mailing List
-
-* [google group: conda-forge](https://groups.google.com/g/conda-forge): [Archived](https://groups.google.com/g/conda-forge/c/Iv-yGnIMEAA).
-
-<a id="other-communication-methods"></a>
-
-## Other Communication Methods
-
-* The core team is also on Keybase for security related stuff. If you're part of the core team and don't have
-  access, ping someone on the core team for access.
-
-<a id="staying-up-to-date"></a>
+* Check [Meeting minutes](./minutes.mdx) to see how to join our calls.
 
 ## Staying Up-to-date
 
