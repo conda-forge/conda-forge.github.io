@@ -1,16 +1,6 @@
 import { useLocation } from "@docusaurus/router";
+import { useColorMode } from '@docusaurus/theme-common';
 import { urls } from "@site/src/constants";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  TimeScale,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import "chartjs-adapter-moment";
 import { React, useEffect, useState } from "react";
 import CloudServices from "./cloud_services";
 import CurrentMigrations from "./current_migrations";
@@ -20,19 +10,6 @@ import styles from "./styles.module.css";
 import TOC from "./toc";
 import UsageChart from "./usage_chart";
 import VersionUpdates from "./version_updates";
-import useIsBrowser from "@docusaurus/useIsBrowser";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  TimeScale,
-  Title,
-  Tooltip,
-  Legend
-);
-
-const THEME_ATTR = "data-theme";
 
 export default function StatusDashboard() {
   const total = 8; // Total number of dashboard components.
@@ -40,21 +17,12 @@ export default function StatusDashboard() {
     jumped: false, loaded: 0, ongoing: false
   });
   const { hash } = useLocation();
-  const isBrowser = useIsBrowser();
-  useEffect(() => {
-    if (!isBrowser) return; // Set Chart.js colors at browser runtime.
-    // Listen for `date-theme` changes in the `html` document element.
-    const observer = new MutationObserver((mutations) => {
-      // If the theme changed, set the chart color and trigger a render.
-      if (mutations.some(({ attributeName }) => attributeName === THEME_ATTR)) {
-        setChartColor();
-        setState(prev => ({ ...prev }));
-      }
-    });
-    setChartColor();
-    observer.observe(document.documentElement, { attributes: true });
-    return () => observer.disconnect();
-  }, [isBrowser]);
+  const [chartColors, setChartColors] = useState({
+    dark: "white",
+    light: "black"
+  });
+  const { colorMode } = useColorMode();
+  useEffect(() => computeChartColors(setChartColors), []);
   useEffect(() => { // NB: This effect runs on every render.
     // When all components finish loading, scroll if necessary.
     if (jumped || loaded !== total) return;
@@ -95,6 +63,7 @@ export default function StatusDashboard() {
             <div className="col col--12">
               <div id="azure" className={styles.toc_anchor}></div>
               <UsageChart
+                backgroundColor={chartColors[colorMode]}
                 onLoad={onLoad}
                 url={urls.azure.pipelines}
                 title="Azure Pipelines Usage" />
@@ -104,6 +73,7 @@ export default function StatusDashboard() {
             <div className="col col--12">
               <div id="github" className={styles.toc_anchor}></div>
               <UsageChart
+                backgroundColor={chartColors[colorMode]}
                 onLoad={onLoad}
                 url={urls.github.actions}
                 title="GitHub Actions Usage" />
@@ -113,6 +83,7 @@ export default function StatusDashboard() {
             <div className="col col--12">
               <div id="travis" className={styles.toc_anchor}></div>
               <UsageChart
+                backgroundColor={chartColors[colorMode]}
                 onLoad={onLoad}
                 url={urls.travis.usage}
                 title="Travis CI Usage" />
@@ -134,11 +105,21 @@ export default function StatusDashboard() {
   );
 }
 
-function setChartColor() {
-  const div = document.createElement("div");
-  div.style.backgroundColor = "var(--ifm-color-primary)";
-  document.body.appendChild(div);
-  ChartJS.defaults.backgroundColor = window.getComputedStyle(div)
-    .getPropertyValue('background-color');
-  document.body.removeChild(div);
+/**
+ * Compute the color defined by the theme CSS variables at runtime.
+ */
+function computeChartColors(setChartColors) {
+  if (typeof window === "undefined") return;
+  const dark = document.createElement("div");
+  const light = document.createElement("div");
+  dark.style.backgroundColor = "var(--ifm-color-primary-dark-mode)"
+  light.style.backgroundColor = "var(--ifm-color-primary-light-mode)";
+  document.body.appendChild(dark);
+  document.body.appendChild(light);
+  setChartColors({
+    dark: window.getComputedStyle(dark).getPropertyValue('background-color'),
+    light: window.getComputedStyle(light).getPropertyValue('background-color')
+  });
+  document.body.removeChild(dark);
+  document.body.removeChild(light);
 }
