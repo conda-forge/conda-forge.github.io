@@ -99,7 +99,7 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
     <>
       <thead>
         <tr onClick={select}>
-          <th colSpan={7} className={collapsed ? styles.collapsed : undefined}>
+          <th colSpan={8} className={collapsed ? styles.collapsed : undefined}>
             {name}{" "}
             <span className="badge badge--secondary">{rows.length || "…"}</span>
           </th>
@@ -116,6 +116,12 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
             className={sort.by === "status" ? styles[sort.order] : undefined}
           >
             PRs made
+          </th>
+          <th
+            onClick={() => resort("done")}
+            className={sort.by === "done" ? styles[sort.order] : undefined}
+          >
+            Done
           </th>
           <th
             onClick={() => resort("in-pr")}
@@ -173,6 +179,7 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
                   </span>
                 </label>
               </td>
+              <td>{row.details["done"].length}</td>
               <td>{row.details["in-pr"].length}</td>
               <td>{row.details["awaiting-pr"].length}</td>
               <td>{row.details["awaiting-parents"].length}</td>
