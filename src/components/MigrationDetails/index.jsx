@@ -107,7 +107,7 @@ function Bar({ details }) {
   const prefix = "migration_details_filter_";
   return (
     <>
-      <h4>Completion rate {details.progress.percentage.toFixed(0)}%</h4>
+      <h4>PRs made {details.progress.percentage.toFixed(0)}%</h4>
       <div className={styles.migration_details_bar}>
         {ORDERED.filter(([key]) => details[key]?.length)
           .map(([key], index) => (
