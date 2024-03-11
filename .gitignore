@@ -33,6 +33,8 @@ sphinx/newsfeed/demo/_build
 /docs/orga/cfep-index.md
 /docs/orga/governance.md
 /static/conda-forge.schema.json
+/community/cfep-index.md
+/community/governance.md
 
 # Generated files
 .docusaurus

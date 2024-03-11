@@ -28,7 +28,7 @@ jobs:
     with:
       date: ${{ inputs.date || 'now' }}
       template_path: misc/DEV_MEETING_TEMPLATE.md
-      output_path: docs/orga/minutes/%Y-%m-%d.md
+      output_path: community/minutes/%Y-%m-%d.md
       hackmd_team: conda-forge
       force_push: true
       pr_body: |
