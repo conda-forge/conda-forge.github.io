@@ -118,6 +118,12 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
             PRs made
           </th>
           <th
+            onClick={() => resort("done")}
+            className={sort.by === "done" ? styles[sort.order] : undefined}
+          >
+            Done
+          </th>
+          <th
             onClick={() => resort("in-pr")}
             className={sort.by === "in-pr" ? styles[sort.order] : undefined}
           >
@@ -173,6 +179,7 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
                   </span>
                 </label>
               </td>
+              <td>{row.details["done"].length}</td>
               <td>{row.details["in-pr"].length}</td>
               <td>{row.details["awaiting-pr"].length}</td>
               <td>{row.details["awaiting-parents"].length}</td>
