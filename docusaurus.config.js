@@ -1,6 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+const path = require("path");
 const prism = require('prism-react-renderer');
 
 const _repo = process.env.GHREPO || 'conda-forge/conda-forge.github.io';
@@ -109,6 +110,18 @@ const config = {
           ...editUrl,
         }),
       ],
+    [
+      path.resolve(__dirname, "plugins", "migration-urls"),
+      {
+        routes: [
+          {
+            path: "/status/migration/",
+            exact: false,
+            component: "@site/src/components/MigrationDetails/",
+          },
+        ],
+      },
+    ],
     [
       "content-blog",
       /** @type {import('@docusaurus/plugin-content-blog').Options} */
@@ -324,7 +337,7 @@ const config = {
             position: "left",
           },
           {
-            href: "https://conda-forge.org/status",
+            href: "/status/",
             label: "Status",
             position: "left",
           },
@@ -412,7 +425,7 @@ const config = {
               },
               {
                 label: "Status",
-                href: "https://conda-forge.org/status",
+                href: "/status/",
               },
               {
                 label: "Twitter",
@@ -424,8 +437,8 @@ const config = {
             title: "Resources",
             items: [
               {
-                label: "Dashboard",
-                to: "/dashboard/",
+                label: "Status",
+                to: "/status/",
               },
               {
                 label: "Style guide",
