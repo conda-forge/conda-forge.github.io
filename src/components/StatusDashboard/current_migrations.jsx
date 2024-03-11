@@ -99,7 +99,7 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
     <>
       <thead>
         <tr onClick={select}>
-          <th colSpan={7} className={collapsed ? styles.collapsed : undefined}>
+          <th colSpan={8} className={collapsed ? styles.collapsed : undefined}>
             {name}{" "}
             <span className="badge badge--secondary">{rows.length || "…"}</span>
           </th>
