@@ -6,7 +6,7 @@ import remarkGfm from "remark-gfm";
 import CodeBlock from "@theme/CodeBlock";
 import Admonition from "@theme/Admonition";
 import Details from "@theme/Details";
-import prefetchedJsonSchema from "@site/static/conda-forge.schema.json";
+import prefetchedJsonSchema from "@site/static/schema/conda-forge.schema.json";
 
 export default function CondaForgeYmlSchema({ toc = null }) {
   const schemaURL =
