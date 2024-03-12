@@ -22,6 +22,10 @@ curl -sL \
 # Render the templated content (e.g. CFEPs, core.csv, etc)
 python "$BASE_DIR/.ci_scripts/render_templated_content.py"
 
+if [[ ${1:-} == "pre-build-only" ]]; then
+  exit 0
+fi
+
 # Ensure that all docs/ items are in the sidebar
 python "$BASE_DIR/.ci_scripts/check_sidebars.py"
 

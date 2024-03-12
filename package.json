@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "python .ci_scripts/render_templated_content.py && docusaurus start",
+    "start": ".ci_scripts/update_docs pre-build-only && docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
