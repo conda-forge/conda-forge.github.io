@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Link from "@docusaurus/Link";
 import styles from "./styles.module.css";
+import { urls } from "../../constants";
 
 export default function Stats() {
     const [stats, setStats] = useState(null);
-
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(
-                    "https://raw.githubusercontent.com/conda-forge/by-the-numbers/main/data/live_counts.json"
-                );
-                const data = await response.json();
-                setStats(data);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-
-        fetchData();
-    }, []);
+        void (async () => {
+          try {
+            const response = await fetch(urls.stats);
+            const data = await response.json();
+            setStats(data);
+          } catch (error) {
+            console.warn(`error loading about page stats`, error);
+          }
+        })();
+      }, []);
 
     const stats1 = [
         {

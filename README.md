@@ -4,6 +4,7 @@
 ## Overview
 This repository
 - is the home of the source code of conda-forge's documentation.
+- is the home of the source code of conda-forge's [status dashboard](src/components/StatusDashboard/README.md).
 - provides an [issue tracker](https://github.com/conda-forge/conda-forge.github.io/issues) for conda-forge related questions and issues that are **not specific to individual feedstocks**.
 
 If you have questions or need help, please check out our documentation for a [list of ways to interact with us](https://conda-forge.org/docs/user/how_to_get_help.html).
@@ -18,7 +19,7 @@ If you have questions or need help, please check out our documentation for a [li
 1.  [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the [conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io) repository to your own GitHub user account.
 2.  [Clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) this fork onto your computer.
 3.  Go into the main folder.
-    Run the following commands.  
+    Run the following commands.
       *  `conda env create -f ./.ci_scripts/environment.yml`
       *  `conda activate conda-forge-docs`
       * For live builds, `npm install && npm run start`
@@ -31,9 +32,9 @@ If you have questions or need help, please check out our documentation for a [li
 We at conda-forge adhere to the [NumFOCUS Code of Conduct](https://numfocus.org/code-of-conduct):
 
 > * Be kind to others. Do not insult or put down others. Behave professionally. Remember that harassment and sexist, racist, or exclusionary jokes are not appropriate for conda-forge.
-> 
+>
 > * All communication should be appropriate for a professional audience, including people of many different backgrounds. Sexual language and imagery is not appropriate.
-> 
+>
 > * conda-forge is dedicated to providing a harassment-free community for everyone, regardless of gender, sexual orientation, gender identity and expression, disability, physical appearance, body size, race, or religion. We do not tolerate harassment of community members in any form.
 
 Thank you for helping make this a welcoming, friendly community for all.
