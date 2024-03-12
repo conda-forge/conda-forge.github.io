@@ -61,29 +61,29 @@ export default function Download() {
             />
         </div>
         <div className={styles.header_content}>
-            <div className={styles.card}>
-            {downloads.map(({ arch, dark, href, light, os }, index) => (
+          {downloads.map(({ arch, dark, href, light, os }, index) => (
             <Link to={href} key={index}>
                 <div className={styles.cardWrapper}>
-                <ThemedImage
-                    className={styles.image}
-                    alt={`${os} logo`}
-                    title={`Download miniforge installer for ${os} ${arch}`}
-                    sources={{
-                      dark: useBaseUrl(`${dark}`),
-                      light: useBaseUrl(`${light}`),
-                    }}
-                    height={75}
-                    style={{ paddingRight: 20 }}
-                />
-                <div>
-                    <p className={styles.os}>{os}</p>
-                    <code className={styles.arch}>{arch}</code>
-                </div>
+                  <div className={styles.card}>
+                    <ThemedImage
+                      className={styles.image}
+                      alt={`${os} logo`}
+                      title={`Download miniforge installer for ${os} ${arch}`}
+                      sources={{
+                        dark: useBaseUrl(`${dark}`),
+                        light: useBaseUrl(`${light}`),
+                      }}
+                      height={75}
+                      style={{ paddingRight: 20 }}
+                  />
+                  <div>
+                      <p className={styles.os}>{os}</p>
+                      <code className={styles.arch}>{arch}</code>
+                  </div>
+                  </div>
                 </div>
             </Link>
-            ))}
-            </div>
+          ))}
         </div>
     </div>
   );

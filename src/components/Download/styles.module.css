@@ -8,21 +8,15 @@
   width: 100%;
 }
 
-.card {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1em;
-  margin: 1.5rem;
-}
-
 .cardWrapper {
   background: var(--theme-card);
-  display: flex;
-  height: 100%;
   align-items: center;
   border-radius: 10px;
+  flex: 1;
+  margin: 1.5rem;
   padding: 2.25rem;
   transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  width: 350px;
 }
 
 .cardWrapper:hover {
@@ -44,7 +38,8 @@
   flex: 4;
   display: flex;
   align-items: flex-start;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .header_content h1 {
