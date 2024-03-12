@@ -70,8 +70,9 @@ export default function Stats() {
             <div className={styles.stats_container}>
                 <div className={styles.stats1_card}>
                     {stats1.map(({ number, content }, index) => (
-                        <Link to="https://github.com/conda-forge/by-the-numbers">
-                            <div className={styles.card} key={index}>
+                        <Link key={index}
+                            to="https://github.com/conda-forge/by-the-numbers">
+                            <div className={styles.card}>
                                 <h1 className="gradient_text">{number}</h1>
                                 <h3>{content}</h3>
                             </div>
@@ -80,8 +81,9 @@ export default function Stats() {
                 </div>
                 <div className={styles.stats2_card}>
                     {stats2.map(({ number, content }, index) => (
-                        <Link to="https://github.com/conda-forge/by-the-numbers">
-                            <div className={styles.card} key={index}>
+                        <Link key={index}
+                            to="https://github.com/conda-forge/by-the-numbers">
+                            <div className={styles.card}>
                                 <h1 className="gradient_text">{number}</h1>
                                 <h3>{content}</h3>
                             </div>
@@ -104,9 +106,9 @@ export default function Stats() {
                 <iframe
                     src="https://www.youtube.com/embed/EWh-BtdYE7M"
                     title="Episode 23: conda-forge - Open Source Directions hosted By Quansight"
-                    frameborder="0"
+                    style={{ border: 0 }}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen
+                    allowFullScreen
                 ></iframe>
             </div>
         </div>
