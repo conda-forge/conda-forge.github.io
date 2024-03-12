@@ -30,7 +30,8 @@ export default function Header() {
                     </Link>
                     <Link to="/download/"
                         className="button button--secondary button--lg homepage_button">
-                        Download conda-forge
+                        Download Miniforge
+
                     </Link>
                 </div>
             </div>
