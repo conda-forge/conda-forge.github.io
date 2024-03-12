@@ -7,10 +7,10 @@ import CodeBlock from "@theme/CodeBlock";
 import Admonition from "@theme/Admonition";
 import Details from "@theme/Details";
 import prefetchedJsonSchema from "@site/static/schema/conda-forge.schema.json";
+import { urls } from "@site/src/constants";
 
 export default function CondaForgeYmlSchema({ toc = null }) {
-  const schemaURL =
-    "https://raw.githubusercontent.com/viniciusdc/conda-smithy/pydantic-schema-cf-yaml/conda_smithy/data/conda-forge.json";
+  const schemaURL = urls.schemas["conda-forge.yml"];
   const [schema, setSchema] = useState(prefetchedJsonSchema);
   const [resolved, setResolved] = useState(false);
   useEffect(() => {
