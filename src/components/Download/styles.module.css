@@ -68,6 +68,10 @@
   width: 100%;
 }
 
+[data-theme="dark"] .os_image {
+  filter: invert(1);
+}
+
 @media screen and (max-width: 1050px) {
   .header {
     flex-direction: column;
