@@ -2,28 +2,49 @@
  * CSS files with the .module.css suffix will be treated as CSS modules
  * and scoped locally.
  */
+.arch {
+  font-size: 1em;
+  font-weight: bold;
+  width: 100%;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+  margin: 1.5rem;
+}
+
+.cardWrapper {
+  background: var(--theme-card);
+  display: flex;
+  height: 100%;
+  align-items: center;
+  border-radius: 10px;
+  padding: 2.25rem;
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.cardWrapper:hover {
+  transform: scale(0.9);
+}
+
 .header {
   display: flex;
 }
 
-.section_padding {
-  padding: 4rem 6rem;
-}
-
 .header_image {
+  padding: 0 30px;
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .header_content {
-  flex: 2;
+  flex: 4;
   display: flex;
-  justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  margin-left: 5rem;
 }
 
 .header_content h1 {
@@ -32,22 +53,24 @@
   line-height: 60px;
 }
 
-.header_content_input {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2em;
-}
-
-.header_content_input a {
-  margin-right: 5px;
+.header_content a {
   text-decoration: none;
-  width: 280px;
 }
 
-.header_content_input a:focus {
-  background: none;
+.header_content button {
+  background-color: transparent;
+  border-radius: 12px;
+  font-size: 1.3em;
+  padding: 10px;
+  margin: 10px;
+  text-align: justify;
+  width: 350px;
+}
+
+.os {
+  font-size: 1.2em;
+  font-weight: bold;
+  width: 100%;
 }
 
 @media screen and (max-width: 1050px) {
