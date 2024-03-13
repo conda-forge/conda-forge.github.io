@@ -1,19 +1,12 @@
 ---
-title: 'A list of current sub-teams'
-sidebar_position: 20
+title: 'Sub-teams'
 ---
 
-<a id="a-list-of-current-sub-teams"></a>
-
-# A list of current sub-teams
+# Current sub-teams
 
 <a id="security-subteam"></a>
 
-<a id="security-and-systems-sub-team"></a>
-
 ## Security and Systems Sub-Team
-
-<a id="role"></a>
 
 ### Role
 
@@ -23,13 +16,9 @@ includes all bot accounts, all service provider accounts, and all keys, API or o
 used for various tasks. This team is also charged with provisioning new members of `core`
 with access to the organization.
 
-<a id="charter"></a>
-
 ### Charter
 
 Static
-
-<a id="responsibility"></a>
 
 ### Responsibility
 
@@ -52,7 +41,6 @@ This team will operate via the following rules:
 - This sub-team will not limit the access by `core` members to any conda-forge resources
   including but not limited to its systems, credentials, keys, or service accounts.
 
-<a id="members"></a>
 
 ### Members
 
@@ -60,11 +48,7 @@ This team will operate via the following rules:
 - Christopher J. "CJ" Wright <[cjwright4242@gmail.com](mailto:cjwright4242@gmail.com)>
 - Anthony Scopatz <[scopatz@gmail.com](mailto:scopatz@gmail.com)>
 
-<a id="finance-sub-team"></a>
-
 ## Finance Sub-Team
-
-<a id="id1"></a>
 
 ### Role
 
@@ -73,13 +57,9 @@ for financial and budgetary issues. This includes keeping core aware
 of the current conda-forge balance via `core` meetings and facilitating
 dispersal of funds.
 
-<a id="id2"></a>
-
 ### Charter
 
 Static
-
-<a id="id3"></a>
 
 ### Responsibility
 
@@ -97,32 +77,22 @@ This team will operate via the following rules:
 - This sub-team will not approve or deny access to funds unless instructed to
   via the method specified by the conda-forge governance document.
 
-<a id="id4"></a>
-
 ### Members
 
 - Christopher J. "CJ" Wright <[cjwright4242@gmail.com](mailto:cjwright4242@gmail.com)>
 - Filipe Fernandes <[ocefpaf@gmail.com](mailto:ocefpaf@gmail.com)>
 - Eric Dill <[ericdill@pm.me](mailto:ericdill@pm.me)>
 
-<a id="bot-sub-team"></a>
-
 ## Bot Sub-Team
-
-<a id="id5"></a>
 
 ### Role
 
 Develop and manage the conda-forge migration bot and all related tooling.
 Also manages and deploys migrations themselves.
 
-<a id="id6"></a>
-
 ### Charter
 
 Dynamic
-
-<a id="id7"></a>
 
 ### Responsibility
 
@@ -151,8 +121,6 @@ Packages and tools that fall under the purview of the bot subteam include:
 - cf-graph
 - circle-worker
 
-<a id="id8"></a>
-
 ### Members
 
 - Matthew R. Becker <[becker.mr@gmail.com](mailto:becker.mr@gmail.com)>
@@ -166,23 +134,15 @@ Packages and tools that fall under the purview of the bot subteam include:
 - Anthony Scopatz <[scopatz@gmail.com](mailto:scopatz@gmail.com)>
 - Christopher J. "CJ" Wright <[cjwright4242@gmail.com](mailto:cjwright4242@gmail.com)>
 
-<a id="arm-sub-team"></a>
-
 ## ARM Sub-Team
-
-<a id="id9"></a>
 
 ### Role
 
 Develop and manage ARM architecture support for conda-forge.
 
-<a id="id10"></a>
-
 ### Charter
 
 Dynamic
-
-<a id="id11"></a>
 
 ### Responsibility
 
@@ -196,31 +156,21 @@ This includes updates and enabling features to:
 
 And other parts of the conda-forge ecosystem.
 
-<a id="id12"></a>
-
 ### Members
 
 - Jonathan Helmus <[jjhelmus@gmail.com](mailto:jjhelmus@gmail.com)>
 - Marius van Niekerk <[marius.v.niekerk@gmail.com](mailto:marius.v.niekerk@gmail.com)>
 - Mark Harfouche <[mark.harfouche@gmail.com](mailto:mark.harfouche@gmail.com)>
 
-<a id="doc-sub-team"></a>
-
 ## Doc Sub-Team
-
-<a id="id13"></a>
 
 ### Role
 
 Maintain and improve the documentation. Review, organize and help with documentation related issues.
 
-<a id="id14"></a>
-
 ### Charter
 
 Dynamic
-
-<a id="id15"></a>
 
 ### Responsibility
 
@@ -241,8 +191,6 @@ As such following task are performed by the documentation team:
 - Proposing improvements and new content by opening issues and pull requests.
 - Engaging with the community to ensure the effectiveness of the documentation.
 
-<a id="id16"></a>
-
 ### Members
 
 - Anthony Scopatz <[scopatz@gmail.com](mailto:scopatz@gmail.com)>
@@ -250,24 +198,16 @@ As such following task are performed by the documentation team:
 - Lori A. Burns <[lori.burns@gmail.com](mailto:lori.burns@gmail.com)>
 - Jaime Rodríguez-guerra <[jrodriguez@quansight.com](mailto:jrodriguez@quansight.com)>
 
-<a id="staging-sub-team"></a>
-
 ## Staging Sub-Team
-
-<a id="id17"></a>
 
 ### Role
 
 Review and merge feedstock candidates in the staged-recipes repository. Help users to create
 conda-forge compatible recipes.
 
-<a id="id18"></a>
-
 ### Charter
 
 Dynamic
-
-<a id="id19"></a>
 
 ### Responsibility
 
@@ -282,8 +222,6 @@ The staging team is responsible for:
 - Help the documentation team maintain clear documentation that simplifies contributing packages.
 - Assist core in supporting feedstock maintainers when questions/issues arise during recipe maintenance.
 
-<a id="id20"></a>
-
 ### Members
 
 In addition to [core](https://github.com/conda-forge/conda-forge.github.io/blob/main/src/core.csv)
@@ -297,30 +235,20 @@ the following are members of the staged-recipes team and have commit rights.
 - Peter M. Landwehr <>
 - Patrick Sodré <[psodre@gmail.com](mailto:psodre@gmail.com)>
 
-<a id="miniforge-sub-team"></a>
-
 ## Miniforge Sub-Team
-
-<a id="id21"></a>
 
 ### Role
 
 Develop and manage miniforge installers for conda-forge
 
-<a id="id22"></a>
-
 ### Charter
 
 Dynamic
-
-<a id="id23"></a>
 
 ### Responsibility
 
 This sub-team is broadly responsible for developing, maintaining and releasing
 miniforge installers.
-
-<a id="id24"></a>
 
 ### Members
 
@@ -329,24 +257,16 @@ miniforge installers.
 - Hadrien Mary <[hadrien.mary@gmail.com](mailto:hadrien.mary@gmail.com)>
 - Isuru Fernando <[isuruf@gmail.com](mailto:isuruf@gmail.com)>
 
-<a id="diversity-and-inclusion-sub-team"></a>
-
 ## Diversity and Inclusion Sub-Team
-
-<a id="id25"></a>
 
 ### Role
 
 Develop conda-forge as a diverse community and advocate for
 actions impacting underrepresented groups in conda-forge.
 
-<a id="id26"></a>
-
 ### Charter
 
 Dynamic
-
-<a id="id27"></a>
 
 ### Responsibility
 
@@ -359,8 +279,6 @@ As such this group can, but is not limited to:
 - provide a place for issues impacting diversity to be heard
 - advocate for underrepresented groups and bring their issues to the attention of core
 - run programs to maintain and grow the community's diversity and inclusiveness
-
-<a id="id28"></a>
 
 ### Members
 

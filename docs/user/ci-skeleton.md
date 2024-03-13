@@ -1,6 +1,5 @@
 ---
 title: 'Using conda-smithy to manage your CI'
-sidebar_position: 4
 ---
 
 <a id="using-conda-smithy-to-manage-your-ci"></a>

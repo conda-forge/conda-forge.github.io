@@ -36,6 +36,7 @@ jobs:
           source ./.ci_scripts/update_docs
         env:
           GHREF: ${{ github.ref }}
+          GHREPO: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
 
       - name: deploy
         if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
@@ -55,12 +56,12 @@ jobs:
           args: >
             --no-progress
             --base "$(pwd)/build"
+            --accept 100..399,401,403,429
             --exclude 'https://polys.me/?$'
             --exclude 'https://kb43fqob7u-dsn.algolia.net/'
             --exclude '.*/404.html/'
             --exclude '.*,.*'
-            --exclude-path './build/docs/orga/minutes/'
-            --remap "https://conda-forge.org/status https://conda-forge.org/status"
-            --remap "https://conda-forge.org/(.*) file://$(pwd)/build/\$1"
-            './build/**/*.html'
+            --exclude-path './build/community/minutes/'
+            --remap "https://conda-forge.org/(.*) file://$(pwd)/build/\$1" 
+            './build/**/*.html' 
             '*.md'

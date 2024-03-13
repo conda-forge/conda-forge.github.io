@@ -1,9 +1,6 @@
 ---
 title: 'Joining the team'
-sidebar_position: 21
 ---
-
-<a id="joining-the-team"></a>
 
 # Joining the team
 
@@ -14,8 +11,6 @@ main groups of people who maintain the ecosystem. They are the **Core Team**, th
 **staged-recipes Maintainers**, and the **Feedstock Maintainers**. If you are interested in
 helping us maintain this ecosystem, our biggest need is help in reviewing new conda packages
 coming in through staged-recipes.
-
-<a id="the-core-team"></a>
 
 ## The Core Team
 
@@ -34,8 +29,6 @@ as to why you should be nominated to core. Prior service to the community, inclu
 infrastructure, and helping to bridge disparate communities are an important part of
 the nomination process.
 
-<a id="the-staged-recipes-maintainers"></a>
-
 ## The staged-recipes Maintainers
 
 You are the welcoming committee for new recipes coming in to the conda-forge
@@ -44,7 +37,7 @@ Generally speaking, your role is as follows:
 
 1. Keep up to date with the current best practices for conda packaging standards
 2. Provide recipe review which generally means making sure that the recipe
-   under review adheres to what we list on the [Contributing packages](../maintainer/adding_pkgs.md#dev-contribute-pkgs) page.
+   under review adheres to what we list on the [Contributing packages](/docs/maintainer/adding_pkgs/#dev-contribute-pkgs) page.
 3. Open issues as needed, both on staged and on the other flagship repos
    ([smithy](https://github.com/conda-forge/conda-smithy),
    [webservices](https://github.com/conda-forge/conda-forge-webservices),
@@ -63,8 +56,6 @@ members. When we have a new member candidate, we ask the core team to vote
 yes/no and give the team seven days to vote. The person will then be given merge
 rights to conda-forge/staged-recipes so that they can help us review and merge
 submissions more quickly!
-
-<a id="the-feedstock-maintainers"></a>
 
 ## The Feedstock Maintainers
 

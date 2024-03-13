@@ -1,6 +1,5 @@
 ---
 title: 'How to get help at conda-forge'
-sidebar_position: 7
 ---
 
 <a id="how-to-get-help-at-conda-forge"></a>

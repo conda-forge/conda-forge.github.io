@@ -1,6 +1,5 @@
 ---
 title: 'Guidelines'
-sidebar_position: 18
 ---
 
 <a id="guidelines"></a>
@@ -138,7 +137,7 @@ Instead, if possible, we prefer to take one of the following actions:
    to the package. Packages with this extra label are removed from the repo data on the
    `main` label. Thus they are not considered by the solver
    but their binaries are still available on Anaconda.org. To get the `broken` label
-   added to your package, please refer to [Removing broken packages](../maintainer/updating_pkgs.md#maint-fix-broken-packages).
+   added to your package, please refer to [Removing broken packages](updating_pkgs.md#maint-fix-broken-packages).
 
 Adding the `broken` label to a package is more destructive than patching the repo data
 and thus we prefer repo data patches over labeling things as `broken`.
@@ -151,7 +150,7 @@ and thus we prefer repo data patches over labeling things as `broken`.
 
 conda-forge is a community project and it can therefore happen that feedstocks become temporarily abandoned.
 You can join the maintainer team of a feedstock by adding your github-id to the `recipe-maintainers` section in the recipe's `meta.yaml`.
-Please refer to [Updating the maintainer list](../maintainer/updating_pkgs.md#maint-updating-maintainers) for detailed instructions.
+Please refer to [Updating the maintainer list](updating_pkgs.md#maint-updating-maintainers) for detailed instructions.
 
 <a id="language-versions"></a>
 
@@ -189,7 +188,7 @@ The guidance that we can provide here is two fold:
 
 ## Reviewing recipes
 
-To add new packages to conda-forge, users can submit a PR to `staged-recipes` (see [Contributing packages](../maintainer/adding_pkgs.md#dev-contribute-pkgs) for more details),
+To add new packages to conda-forge, users can submit a PR to `staged-recipes` (see [Contributing packages](adding_pkgs.md#dev-contribute-pkgs) for more details),
 where it will undergo a series of automated checks and a code review.
 Any conda-forge member can perform a code review, but the final merge can only be done by the `staged-recipes` or `core` teams.
 The following sections suggest guidelines on how to perform a successful code review.
@@ -204,7 +203,7 @@ We distinguish between "Required" and "Recommended" as follows:
 
 Required:
 
-1. All interactions in the review adhere to our [Code of Conduct](governance.md#code-of-conduct).
+1. All interactions in the review adhere to our [Code of Conduct](/community/governance/#code-of-conduct).
 2. `conda-forge-linter` [checks](https://github.com/conda-forge/conda-smithy/blob/main/conda_smithy/lint_recipe.py) pass successfully.
    Sometimes the linter will also suggest modifications considered optional (hints); even if recommended, these are not required to accept the submission.
 3. The CI checks pass successfully in the required platforms. Exceptions:
@@ -220,7 +219,7 @@ Recommended:
 
 1. Source should be obtained from a URL that provides a stable tarball (same SHA over time).
    Git or other SVC repositories should only be used as a last resort.
-2. Host requirements contained in the [conda-forge pinnings](../maintainer/pinning_deps.md#pinned-deps) should be *name-only*; i.e. they do not specify a separate version.
+2. Host requirements contained in the [conda-forge pinnings](pinning_deps.md#pinned-deps) should be *name-only*; i.e. they do not specify a separate version.
 3. Runtime requirements are not pinned too strictly without justification.
    Thanks to repodata patches, we can afford to be optimistic about lower or upper bounds instead of single-version pins: `>=1.4.2,<1.5` is better than `==1.4.2`.
 4. The package should place its files under standard locations (e.g. executables under `$PREFIX/bin`), unless justification is provided.
@@ -231,7 +230,7 @@ Recommended:
 
 Required:
 
-1. `noarch: python` packages fulfill the [required criteria](../maintainer/knowledge_base.md#noarch) to be considered as such.
+1. `noarch: python` packages fulfill the [required criteria](knowledge_base.md#noarch) to be considered as such.
 
 Recommended:
 
@@ -241,8 +240,8 @@ Recommended:
    Alternatively, a patch can be applied. See [example](https://github.com/conda-forge/staged-recipes/pull/19166/commits/0284fc6da273031a4f93a1fea4533822cd4b385d).
 2. The modules checked by `test.imports` are not empty (this can happen with placeholder `__init__.py` files in top-level packages).
 3. The versions reported by `pip list` and `conda build` logs match.
-4. `pip check` passes. See [pip check](../maintainer/adding_pkgs.md#pip-check) for more details.
-5. If a project can be considered `noarch` (see [criteria](../maintainer/knowledge_base.md#noarch)), it should be packaged as such.
+4. `pip check` passes. See [pip check](adding_pkgs.md#pip-check) for more details.
+5. If a project can be considered `noarch` (see [criteria](knowledge_base.md#noarch)), it should be packaged as such.
 
 <a id="compiled-objects"></a>
 
@@ -258,4 +257,4 @@ Recommended:
 
 1. SONAMEs follow naming recommendations given by upstream.
 2. If ABI compatibility is important for the package, `run_exports` are set accordingly.
-   See [Pinned dependencies](../maintainer/pinning_deps.md#pinned-deps) and the [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#export-runtime-requirements) for more information.
+   See [Pinned dependencies](pinning_deps.md#pinned-deps) and the [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#export-runtime-requirements) for more information.

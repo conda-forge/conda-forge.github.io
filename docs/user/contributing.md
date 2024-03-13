@@ -1,6 +1,5 @@
 ---
 title: 'Becoming involved'
-sidebar_position: 6
 ---
 
 <a id="becoming-involved"></a>

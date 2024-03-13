@@ -1,9 +1,6 @@
 ---
-title: 'Contracting Information'
-sidebar_position: 28
+title: 'Contracting '
 ---
-
-<a id="contracting-information"></a>
 
 # Contracting Information
 
@@ -21,16 +18,6 @@ That is between the payer and payee to hammer out on their own.
 <a id="known-service-providers"></a>
 
 ## Known Service Providers
-
-<a id="lab49"></a>
-
-### Lab49
-
-Services Offered: Architecture and Technical Design Advisory, Cloud Strategy and Migrations, Outsourced Software Development, SDLC Advisory
-
-Contact Information: [sales@lab49.com](mailto:sales@lab49.com)
-
-Background / Description: Lab49 is a full service strategy, design and technology consultancy with a global reach focused on financial services. We specialize in product development across the full stack, from data and analytics, through services, through next generation user interfaces.
 
 <a id="quansight"></a>
 
