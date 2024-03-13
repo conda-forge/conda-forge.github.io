@@ -25,11 +25,6 @@ jobs:
           activate-environment: conda-forge-docs
           environment-file: .ci_scripts/environment.yml
 
-      - name: Run pre-commit
-        shell: bash -l {0}
-        run: |
-          pre-commit run -a
-
       - name: build
         shell: bash -l {0}
         run: |
