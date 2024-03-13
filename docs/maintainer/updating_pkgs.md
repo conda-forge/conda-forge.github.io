@@ -78,7 +78,7 @@ The [regro-cf-autotick-bot](https://github.com/regro/autotick-bot) continuously 
 The bot creates updates via inspection of the upstream release and will always update the `source` section and build version in the [recipe metadata](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#).
 As an experimental feature, the autotick bot can also be configured to verify or update the recipe's requirements for [Grayskull](https://github.com/conda-incubator/grayskull)-compatible recipes.
 This may help maintain packages with frequent requirements changes or specific requirements version pins, however this feature is not as extensively verified and proposed updates should be reviewed.
-(See the [bot](conda_forge_yml.md#bot) section in `conda-forge.yml`)
+(See the [bot](conda_forge_yml.mdx#bot) section in `conda-forge.yml`)
 
 Sometimes the bot may take several hours to search for these updates. You can also check [status of version updates](https://conda-forge.org/status/#version_updates) for all the pending version updates. These version updates are pending either because an updated version was found, but a PR wasn't opened yet, or because the bot might have had an error while making the PR.
 If you can't find a version here, then the chances are that the bot couldn't find it either.
@@ -227,7 +227,7 @@ conda create -n my-new-env -c "file://${PWD}/build_artifacts" -c conda-forge my-
 
 ## Downloading prebuilt packages from CI
 
-A neat feature that feedstocks have is the ability to [upload packages to the CI provider for testing](conda_forge_yml.md#azure-config).
+A neat feature that feedstocks have is the ability to [upload packages to the CI provider for testing](conda_forge_yml.mdx#azure).
 This is useful when trying out packages built in a PR. But you first need to download these prebuilt packages.
 
 To download prebuilt packages follow the steps below:

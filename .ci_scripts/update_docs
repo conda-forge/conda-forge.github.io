@@ -12,8 +12,18 @@ if [[ "$CI" == "1" ]]; then
   git checkout -b new_site_content
 fi
 
+# Fetch conda-smithy JSON schema
+mkdir -p "$BASE_DIR/static/schema/"
+curl -sL \
+  -o "$BASE_DIR/static/schema/conda-forge.schema.json" \
+  "https://raw.githubusercontent.com/conda-forge/conda-smithy/main/conda_smithy/data/conda-forge.json"
+
 # Render the templated content (e.g. CFEPs, core.csv, etc)
 python "$BASE_DIR/.ci_scripts/render_templated_content.py"
+
+if [[ ${1:-} == "pre-build-only" ]]; then
+  exit 0
+fi
 
 # Ensure that all docs/ items are in the sidebar
 python "$BASE_DIR/.ci_scripts/check_sidebars.py"
