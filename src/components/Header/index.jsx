@@ -24,11 +24,14 @@ export default function Header() {
                     <Link to="https://conda.org/">conda</Link>.
                 </h1>
                 <div className={styles.header_content_input}>
-                    <Link
-                        to="/docs/"
-                        className="button button--secondary button--lg homepage_button"
-                    >
+                    <Link to="/docs/"
+                        className="button button--secondary button--lg homepage_button">
                         Explore conda-forge
+                    </Link>
+                    <Link to="/download/"
+                        className="button button--secondary button--lg homepage_button">
+                        Download Miniforge
+
                     </Link>
                 </div>
             </div>
