@@ -2,24 +2,17 @@
 title: 'Infrastructure'
 ---
 
-<a id="infrastructure"></a>
-
-<a id="id1"></a>
-
 # Infrastructure
 
-<a id="repositories"></a>
 
 ## Repositories
 
-<a id="staging-area-for-recipes"></a>
 
 ### Staging area for recipes
 
 [conda-forge/staged-recipes](https://github.com/conda-forge/staged-recipes) is the entry point for new packages to join the conda-forge package collection.
 You can find the detailed guide for submitting new package recipes in [The staging process](adding_pkgs.md#creating-recipes).
 
-<a id="smithy"></a>
 
 ### Smithy
 
@@ -37,16 +30,12 @@ Smithy can be used beyond conda-forge's purposes. For example, it can be used to
 (You could also consider using [Azure virtual machine scale set agents](https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops),
 which could be less expensive to run than permanently active agents.)
 
-<a id="web-services"></a>
-
 ### Web services
 
 The Heroku app providing the conda-forge web services lives in [conda-forge/conda-forge-webservices](https://github.com/conda-forge/conda-forge-webservices).
 Please note that the code logic provided by the app is in the `Smithy` repository.
 
 Bugs or suggestions regarding the service functionality should therefore be opened in `conda-forge/conda-smithy`'s [bug tracker](https://github.com/conda-forge/conda-smithy/issues).
-
-<a id="conda-forge-pinning"></a>
 
 ### conda-forge pinning
 
@@ -56,7 +45,6 @@ For more information on conda-forge wide package pins, please refer to [Globally
 
 Please open a [PR](../glossary.md#term-PR) and/or an issue there, if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to [Updating package pins](pinning_deps.md#update-pins).
 
-<a id="documentation"></a>
 
 ### Documentation
 
@@ -66,9 +54,7 @@ The documentation is built with Docusaurus and the sources files are located in 
 
 If you found any typo error, unclear explanations or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to [Improve the documentation](../user/contributing.md#improve-docs).
 
-<a id="dev-admservice"></a>
 
-<a id="admin-web-services"></a>
 
 ## Admin web services
 
@@ -81,8 +67,6 @@ The following services are run by default on a feedstock:
 
 The webservice also listens to issues and PR comments, so that you can ask for the following services to be done:
 
-<a id="conda-forge-admin-please-rerender"></a>
-
 ### @conda-forge-admin, please rerender
 
 Entering the above phrase in a PR of a feedstock will rerender the feedstock and push the changes to your PR.
@@ -90,35 +74,23 @@ Make sure to tick the `Allow edits from maintainers` button located at the botto
 the PR. If you enter this phrase in the comment for an issue, the bot will create a new pull request, with the requested
 re-rendering being completed.
 
-<a id="conda-forge-admin-please-add-noarch-python"></a>
-
 ### @conda-forge-admin, please add noarch: python
 
 Entering the above phrase in a PR or an issue of a feedstock will add `noarch: python` to the build and rerender the feedstock
 for you.
 
-<a id="conda-forge-admin-please-lint"></a>
-
 ### @conda-forge-admin, please lint
 
 Entering the above phrase in a PR of a feedstock will lint the PR again.
-
-<a id="conda-forge-admin-please-update-team"></a>
 
 ### @conda-forge-admin, please update team
 
 Entering the above phrase in an issue will update the team for the feedstock. This is usually done automatically.
 
-<a id="conda-forge-admin-please-restart-ci"></a>
-
 ### @conda-forge-admin, please restart ci
 
 Entering this command in the PR of a feedstock or staged-recipes will close and then open the PR, causing
 all of the CI builds to restart.
-
-<a id="cfa-please-ping-team"></a>
-
-<a id="conda-forge-admin-please-ping-team"></a>
 
 ### @conda-forge-admin, please ping team
 
@@ -126,25 +98,17 @@ Entering this command in the PR of a feedstock or staged-recipes will have the a
 associated with the repo. This command can be useful for people who are not yet members of conda-forge and
 so cannot @-mention the `staged-recipes` team for PR reviews.
 
-<a id="cfa-please-ping-cf-team"></a>
-
-<a id="conda-forge-admin-please-ping-conda-forge-team"></a>
-
 ### @conda-forge-admin, please ping conda-forge/<team>
 
 Entering this command in the PR of a feedstock or staged-recipes will have the admin bot @-mention the respective team.
 This command can be useful for people who are not yet members of conda-forge and
 so cannot @-mention someone due to the general GitHub limitations.
 
-<a id="conda-forge-admin-please-rerun-bot"></a>
-
 ### @conda-forge-admin, please rerun bot
 
 Entering this command in a PR comment will add the `bot-rerun` label to that PR. This label will cause
 the `auto-tick` bot that issues migration and version updates to close the current PR and reissue it.
 Adding this label to non-bot issued PRs will have no effect.
-
-<a id="conda-forge-admin-please-add-bot-automerge"></a>
 
 ### @conda-forge-admin, please add bot automerge
 
@@ -154,16 +118,10 @@ bot. This functionality is currently experimental. You can find more details
 [here](#automerge).
 Please open issue on `regro/cf-scripts` for any feedback, bugs, and/or questions!
 
-<a id="conda-forge-admin-please-remove-bot-automerge"></a>
-
 ### @conda-forge-admin, please remove bot automerge
 
 Entering this command in the title or comment of an issue will instruct the admin bot to
 open a PR to disable automerge, undoing the `please add bot automerge` command.
-
-<a id="cfa-please-add-user"></a>
-
-<a id="conda-forge-admin-please-add-user-username"></a>
 
 ### @conda-forge-admin, please add user @username
 
@@ -172,8 +130,6 @@ that adds the given user to the feedstock. A maintainer or member of `core` can 
 this PR to add the user. Please do not modify this PR or adjust the commit message. This
 PR is designed to skip building the package.
 
-<a id="conda-forge-admin-please-update-version"></a>
-
 ### @conda-forge-admin, please update version
 
 Entering the above phrase in the title of an issue on a feedstock will request the bot
@@ -181,13 +137,9 @@ to check if there are any new versions available. If there are, it will open a P
 with the needed changes. Note that the bot might start by opening a PR with only partial
 changes. The rest of the contents will be added in a subsequent commit after a few minutes.
 
-<a id="ci-build-services"></a>
-
 ## CI build services
 
 Here we describe common issues with the CI Services that conda-forge builds.
-
-<a id="azure-pipelines"></a>
 
 ### Azure Pipelines
 
@@ -197,14 +149,10 @@ Azure builds have a maximum duration of 6 hours.
 
 To see all builds on Azure, visit [https://dev.azure.com/conda-forge/feedstock-builds/_build](https://dev.azure.com/conda-forge/feedstock-builds/_build).
 
-<a id="restarting-builds"></a>
-
 #### Restarting builds
 
 Presently Azure does not sync GitHub users. In order to restart a build you can restart it from the GitHub checks interface.
 If that doesn't work, a close/open will kick off a new build. You can also use the web services command `@conda-forge-admin, please restart ci`.
-
-<a id="using-azure-for-everything"></a>
 
 #### Using Azure for *everything*
 
@@ -223,15 +171,11 @@ certain very old packages that require VC9 will fail.
 
 :::
 
-<a id="travisci-ibm-power-8-arm"></a>
-
 ### TravisCI (IBM Power 8+, ARM)
 
 TravisCI is used to build packages for IBM Power 8+ and ARM. After merging a staged-recipes pull request, it might be necessary to
 force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit [https://app.travis-ci.com/account/repositories](https://app.travis-ci.com/account/repositories)
 and click the "Sync accounts" button.
-
-<a id="enabling-travis"></a>
 
 #### Enabling Travis
 
@@ -247,16 +191,10 @@ provider:
 For IBM Power 8+ and/or ARM builds, add the name of your feedstock to the list [here](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt)
 via a pull request.
 
-<a id="github-actions"></a>
-
 ### GitHub Actions
 
 We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on
 GitHub Actions.
-
-<a id="automerge"></a>
-
-<a id="id2"></a>
 
 #### Automerge
 
@@ -271,15 +209,11 @@ of the two following sets of conditions:
 For PRs from the `regro-cf-autotick-bot`, it can be useful to remove the `[bot-automerge]` slug from the PR title if you are making
 edits to the PR.
 
-<a id="rerendering"></a>
-
 #### Rerendering
 
 The rerendering service is triggered by the Heroku app. It uses the GitHub action in this [repo](https://github.com/conda-forge/webservices-dispatch-action).
 This action runs out of a Docker [container](https://hub.docker.com/repository/docker/condaforge/webservices-dispatch-action) on the `prod` tag. See the
 repo [README.md](https://github.com/conda-forge/webservices-dispatch-action) for more details.
-
-<a id="skipping-ci-builds"></a>
 
 ### Skipping CI builds
 
@@ -291,16 +225,12 @@ To skip a CI build for a given commit, put `[ci skip] ***NO_CI***` in the commit
 
 :::
 
-<a id="third-party-use-of-our-ci-services"></a>
-
 ### Third-party Use of Our CI Services
 
 Due to its stature in the open-source community, conda-forge has enhanced access to certain CI services. This access is a community
 resource entrusted to conda-forge for use in building packages. We thus cannot support third-party or "off-label" CI jobs in our
 feedstocks on any of our CI services. If we find such use, we will politely ask the maintainers to rectify the situation. We may
 take more serious actions, including archiving feedstocks or removing maintainers from the organization, if the situation cannot be rectified.
-
-<a id="compilers-and-runtimes"></a>
 
 ## Compilers and Runtimes
 
@@ -337,8 +267,6 @@ that form the given stack.
   GCC 4.8.2 as packaged in the devtoolset-2 software collection. On osx, we use clang from
   Apple's Xcode in the `toolchain_*` packages.
 
-<a id="centos-sysroot-for-linux-platforms"></a>
-
 ### CentOS `sysroot` for `linux-*` Platforms
 
 We currently repackage the `sysroot` from the appropriate version of CentOS for use
@@ -351,10 +279,6 @@ on `aarch64`/`x86_64`, we had been building our own versions of `glibc`. This pr
 is now deprecated in favor of the CentOS-based `sysroots`. Additionally, as of the same
 compiler versions above, we have removed the `cos*` part of the `sysroot` path. The new
 `sysroot` path has in it simply `conda` as opposed to `conda_cos6` or `conda_cos7`.
-
-<a id="output-validation"></a>
-
-<a id="output-validation-and-feedstock-tokens"></a>
 
 ## Output Validation and Feedstock Tokens
 
