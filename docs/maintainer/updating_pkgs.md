@@ -135,7 +135,7 @@ Rerendering is conda-forge's way to update the files common to all feedstocks (e
 
 Rerendering can be done in two ways:
 
-> 1. Using the webservice to run conda-smithy on the cloud by adding the comment `@conda-forge-admin please rerender` (See [Admin web services](infrastructure.md#dev-admservice)).
+> 1. Using the webservice to run conda-smithy on the cloud by adding the comment `@conda-forge-admin please rerender` (See [Admin web services](infrastructure.md#admin-web-services)).
 > 2. Run conda-smithy locally on your machine (See [Rerendering with conda-smithy locally](#dev-rerender-local)).
 
 <a id="dev-rerender-local"></a>
