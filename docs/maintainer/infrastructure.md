@@ -7,16 +7,74 @@ title: 'Infrastructure'
 
 ## Repositories
 
+### Staged-recipes
 
-### Staging area for recipes
-
-[conda-forge/staged-recipes](https://github.com/conda-forge/staged-recipes) is the entry point for new packages to join the conda-forge package collection.
+This repository is the gateway to conda-forge and where users can submit new recipes which, once reviewed and accepted, will generate a new feedstock and team.
 You can find the detailed guide for submitting new package recipes in [The staging process](adding_pkgs.md#creating-recipes).
+
+- ⚙️ Deployed in [`conda-forge/staged-recipes`](https://github.com/conda-forge/staged-recipes)
+- 🔒 Has access to Azure Pipelines, Github Actions, Travis CI, Anaconda.org (cf-staging)
+- 🤖 Integrated with [`webservices`](#webservices)
+
+#### Anatomy of staged-recipes
+
+`recipes/` contains one or more _subdirectories_ with user-submitted recipes.
+Most cases will only submit one recipe at a time, but if several subdirectories are present, the `build_all.py` script will build them in the right order so dependencies are satisfied.
+
+`.ci_support` contains the conda-build YAML configuration files, but in this case (if compared to feedstocks), you will also find some scripts:
+
+- `build_all.py`: Calls conda-build in the right (topographically sorted) order.
+- `compute_build_graph.py`: Supports `build_all.py` by providing the job graph with all the submitted recipes.
+
+The YAML files included in `.ci_support` are minimal and not rendered like the ones you find in feedstocks.
+Instead, conda-build will take these and combine them with the pinnings from `conda-forge-pinning` at runtime.
+Also note that `staged-recipes` only builds for x64. Support for additional architectures can only be done once a feedstock has been provided.
+
+- Linux: `linux64.yaml` plus the CUDA (10.2, 11.0, 11.1 and 11.2) variants.
+- macOS: `osx64.yaml`.
+- Windows `win64.yaml`.
+
+The directory `.scripts` contains roughly the same shell scripts that would be used in a feedstock for the CI pipelines.
+However, since `staged-recipes` does not support rerendering, these are kept in sync manually and it is common to see some differences.
+
+#### Workflows
+Two main jobs run on `staged-recipes``:
+
+- The `conda-build` jobs that run on every PR (and push to `main`) check whether the recipes build packages correctly.
+  These jobs run on Azure Pipelines defined in [`.azure-pipelines/`](https://github.com/conda-forge/staged-recipes/tree/main/.azure-pipelines).
+- The [`create_feedstocks` workflow](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/create_feedstocks.yml) runs after each push to `main` (and every 10 minutes) to create the new feedstock repositories on the `conda-forge` organization.
+  The core logic is defined in the Python script [`.github/workflows/scripts/create_feedstocks.py`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/scripts/create_feedstocks.py).
+
+Additional workflows help users set up their recipes correctly. They react to events in PRs:
+
+- [`automate-review-labels`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/automate-review-labels.yml): Updates PR labels to streamline reviews and requests for help.
+- [`correct_directory`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/correct_directory.yml): Posts a PR comment if `meta.yaml` and friends were not added in a `recipes/` subdirectory.
+- [`do_not_edit_example`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/do_not_edit_example.yml): Posts a PR comment if the `recipes/example/` recipe was edited.
+
+External services connect to `staged-recipes` too:
+
+- The `@conda-forge-linter` bot (deployed at [`webservices`](#webservices)) will lint and provide hints in PRs based on the contents of the recipe.
 
 
 ### Smithy
 
-Smithy contains maintenance code for conda-forge, which is used by the `conda-smithy` command line tool and the [Admin web services](#dev-admservice). Smithy lives in the repository [conda-forge/conda-smithy](https://github.com/conda-forge/conda-smithy).
+This is the main feedstock creation and maintenance tool.
+
+- 📜 Source at [`conda-forge/conda-smithy`](https://github.com/conda-forge/conda-smithy)
+- 📦 Packaged at [`conda-forge/conda-smithy-feedstock`](https://github.com/conda-forge/conda-smithy-feedstock)
+- 📖 [Documentation](https://github.com/conda-forge/conda-smithy/blob/main/README.md)
+
+Most of its usage is automated by our infrastructure:
+
+- Feedstock creation and services registration at [`staged-recipes`](#staged-recipes)
+- Regeneration (rerendering), linting and hinting in PRs done by `conda-forge-linter` on [`webservices`](#web-services)
+
+However, you can also use it locally or on your forge-like deployments. For local debugging, you will find these commands useful:
+
+- `conda-smithy rerender`
+- `conda-smithy recipe-lint`
+
+Smithy contains maintenance code for conda-forge, which is used by the `conda-smithy` command line tool and the [Admin web services](#admin-web-services).
 
 `conda-forge/conda-smithy` is the right repository to report bugs for
 
@@ -26,7 +84,7 @@ Smithy contains maintenance code for conda-forge, which is used by the `conda-sm
 
 `conda-smithy` also contains the command line tool that you should use if you rerender manually from the command line (see [Rerendering feedstocks](updating_pkgs.md#dev-update-rerender)).
 
-Smithy can be used beyond conda-forge's purposes. For example, it can be used to set up self-hosted Azure agents <azure-config> for non-conda-forge infrastructures.
+Smithy can be used beyond conda-forge's purposes. For example, it can be used to set up self-hosted Azure agents for non-conda-forge infrastructures.
 (You could also consider using [Azure virtual machine scale set agents](https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops),
 which could be less expensive to run than permanently active agents.)
 
@@ -39,22 +97,88 @@ Bugs or suggestions regarding the service functionality should therefore be open
 
 ### conda-forge pinning
 
+Hosts the global pinnings for conda-forge, and the ongoing migrations.
+
+- ⚙️ Deployed in [Anaconda.org](https://anaconda.org/conda-forge/conda-forge-pinning) via [`conda-forge/conda-forge-pinning-feedstock`](https://github.com/conda-forge/conda-forge-pinning-feedstock)
+- 🔒 Has access to Azure, Anaconda.org (cf-staging)
+
 Package-wide dependency pins are defined in [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml) in the [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock).
 
 For more information on conda-forge wide package pins, please refer to [Globally pinned packages](pinning_deps.md#globally-pinned-packages).
 
 Please open a [PR](../glossary.md#term-PR) and/or an issue there, if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to [Updating package pins](pinning_deps.md#update-pins).
 
+### conda-forge-repodata-patches
+
+This repository creates the `repodata.json` patches used by the Anaconda.org to amend the metadata coming from the published packages.
+
+- ⚙️ Deployed in [Anaconda.org](https://anaconda.org/conda-forge/conda-forge-repodata-patches) via [`conda-forge/conda-forge-repodata-patches`](https://github.com/conda-forge/conda-forge-repodata-patches)
+- 🔒 Has access to Azure, Anaconda.org (cf-staging)
+
+### conda-forge-ci-setup
+
+This special feedstock provides a package that defines the logic to install and configure a common CI setup across providers.
+
+- ⚙️ Deployed in [Anaconda.org](https://anaconda.org/conda-forge/conda-forge-ci-setup) via [`conda-forge/conda-forge-ci-setup-feedstock`](https://github.com/conda-forge/conda-forge-ci-setup-feedstock)
+- 🔒 Has access to Azure, Anaconda.org (cf-staging)
 
 ### Documentation
 
-The documentation website lives in [conda-forge/conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io/), and is automatically deployed to our [online version](https://conda-forge.org/).
+The current [conda-forge.org](https://conda-forge.org) is a statically generated website published to Github Pages.
 
-The documentation is built with Docusaurus and the sources files are located in the [`docs/`](https://github.com/conda-forge/conda-forge.github.io/tree/main/docs) directory of the repository.
+- 📜 Source at [conda-forge/conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io/)
+- ⚙️ Deployed in [conda-forge.org](https://conda-forge.org/)
 
-If you found any typo error, unclear explanations or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to [Improve the documentation](../user/contributing.md#improve-docs).
+The documentation is built with Docusaurus and the source files are located in the [`docs/`](https://github.com/conda-forge/conda-forge.github.io/tree/main/docs) directory of the repository.
 
+If you find any typos, errors, unclear explanations, or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to [Improve the documentation](../user/contributing.md#improve-docs).
 
+### docker-images
+
+This repository builds the Docker images used to provide a unified system on all Linux builds.
+
+- ⚙️ Deployed in [`conda-forge/docker-images`](https://github.com/conda-forge/docker-images)
+- 🔒 Has access to [DockerHub](#docker-hub) and [Quay.io](#quay)
+- ⛓ Needed by `staged-recipes`, feedstocks.
+
+### regro/cf-scripts
+
+The code and logic behind [`autotick-bot`](#autotick-bot).
+
+- 📜 Source at [`regro/cf-scripts`](https://github.com/regro/cf-scripts)
+- 📖 [Documentation](https://regro.github.io/cf-scripts/)
+
+### regro/cf-graph-countyfair
+
+This is the graph data used by [`autotick-bot`](#autotick-bot).
+
+- ⚙️ Deployed in [Github Actions via `regro/cf-graph-countyfair`](https://github.com/regro/cf-graph-countyfair)
+- ⛓ Needs [`regro/cf-scripts`](#regrocf-scripts), [`conda-forge/conda-forge-pinning-feedstock`](#conda-forge-pinning)
+- 🤖 Uses [`@regro-cf-autotick-bot`](#bot-accounts)
+- 🔒 Has access to Github API
+
+The logic to build the graph is provided by [`cf-scripts`](#regrocf-scripts).
+
+### regro/libcfgraph
+
+The libcfgraph data is similar to [`cf-graph-countyfair`](#regrocf-graph-countyfair).
+
+- ⚙️ Deployed in [Circle CI](https://app.circleci.com/pipelines/github/regro/libcfgraph) via [`regro/libcfgraph`](https://github.com/regro/libcfgraph)
+- ⛓ Needs [`regro/libcflib`](#regrolibcflib)
+- 🤖 Commits as `circleci` (fake username)
+- 🔒 Has access to Github API, Circle CI
+
+### regro/libcflib
+
+This is the code that builds the data served at [`libcfgraph`](#regrolibcfgraph).
+
+- 📜 Source at [`regro/libcflib`](https://github.com/regro/libcflib)
+- 📦 Packaged at [`conda-forge/libcflib-feedstock`](https://github.com/conda-forge/libcflib-feedstock)
+- 📖 Not documented
+
+### Others
+
+- [`regro/conda-suggest-conda-forge`](https://github.com/regro/conda-suggest-conda-forge) provides [`conda-suggest`](https://github.com/conda-incubator/conda-suggest) files that map executables to package names.
 
 ## Admin web services
 
