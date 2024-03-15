@@ -116,9 +116,9 @@ then you may need to add the new feedstock to the [feedstock-outputs](https://gi
 Sometimes, you need to remove a package from the `conda-forge` channel on Anaconda.org.
 There can be many reasons for this, but the ones that immediately come to mind are:
 
-* Incorrect pinnings or metadata
-* Packages being renamed
-* Broken package contents
+- Incorrect pinnings or metadata
+- Packages being renamed
+- Broken package contents
 
 We prefer to not remove packages for the following reasons:
 
@@ -173,10 +173,10 @@ The guidance that we can provide here is two fold:
 1. We will move with the community.
    When our core libraries stop supporting an old version, so too will conda forge.
    The (nonexhaustive) list of core libraries that we consider when making the decision to drop an older version are:
-   * matplotlib
-   * numpy
-   * scipy
-   * pypy
+   - matplotlib
+   - numpy
+   - scipy
+   - pypy
 2. The core team can decide to keep an old version around temporarily until some specific criteria is met.
    For example, we're holding off on turning off py36 until pypy comes out with pypy3.7.
 3. If there are lots of people in the community relying on older versions, core team can decide to keep an old version around.
@@ -194,7 +194,7 @@ Any conda-forge member can perform a code review, but the final merge can only b
 The following sections suggest guidelines on how to perform a successful code review.
 We distinguish between "Required" and "Recommended" as follows:
 
-- Required: These guidelines are very important and a requisite for PR acceptance. Exceptions are rare and usually require  `core` approval.
+- Required: These guidelines are very important and a requisite for PR acceptance. Exceptions are rare and usually require `core` approval.
 - Recommended: These are considered "nice to have" features. Ideally, all recipes should abide by them, but exceptions are tolerated as long as justifiable reasons are provided.
 
 <a id="generalities"></a>
@@ -219,7 +219,7 @@ Recommended:
 
 1. Source should be obtained from a URL that provides a stable tarball (same SHA over time).
    Git or other SVC repositories should only be used as a last resort.
-2. Host requirements contained in the [conda-forge pinnings](pinning_deps.md#pinned-deps) should be *name-only*; i.e. they do not specify a separate version.
+2. Host requirements contained in the [conda-forge pinnings](pinning_deps.md#pinned-deps) should be _name-only_; i.e. they do not specify a separate version.
 3. Runtime requirements are not pinned too strictly without justification.
    Thanks to repodata patches, we can afford to be optimistic about lower or upper bounds instead of single-version pins: `>=1.4.2,<1.5` is better than `==1.4.2`.
 4. The package should place its files under standard locations (e.g. executables under `$PREFIX/bin`), unless justification is provided.

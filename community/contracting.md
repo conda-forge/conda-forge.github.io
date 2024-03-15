@@ -8,7 +8,7 @@ If you are interested in a contractual engagement to solve a specific problem th
 However, there are a number of community members that you may engage with.
 conda-forge does not endorse anyone (individuals or companies) listed on this page.
 
-If you are interested in a service that is not listed on this page, please reach out to us on our [issue tracker](https://github.com/conda-forge/conda-forge.github.io/issues), on  [Element](https://app.element.io/#/room/#conda-forge:matrix.org)  or via emailing the core team directly at [conda-forge-core@googlegroups.com](mailto:conda-forge-core@googlegroups.com) and we will help to circulate your request more broadly within the community.
+If you are interested in a service that is not listed on this page, please reach out to us on our [issue tracker](https://github.com/conda-forge/conda-forge.github.io/issues), on [Element](https://app.element.io/#/room/#conda-forge:matrix.org) or via emailing the core team directly at [conda-forge-core@googlegroups.com](mailto:conda-forge-core@googlegroups.com) and we will help to circulate your request more broadly within the community.
 
 Our intent with this page is to communicate whom you should contact and negotiate a contract with.
 We hold no liability for the outcome of those negotiations or the results of any work that is done under those terms.

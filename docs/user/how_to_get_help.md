@@ -28,9 +28,9 @@ Or you can open an issue about a specific package at the package feedstock via
 
 When opening issues, be sure to:
 
-* Try a new environment first following conda-forge [install instructions](introduction.md#how-to-install).
-* Always open a new one when an issue is closed. In the packaging world symptoms may be similar but the causes are usually very different.
-* Fill in the required information. Without the output of conda list and conda info -a the team cannot debug the problem.
+- Try a new environment first following conda-forge [install instructions](introduction.md#how-to-install).
+- Always open a new one when an issue is closed. In the packaging world symptoms may be similar but the causes are usually very different.
+- Fill in the required information. Without the output of conda list and conda info -a the team cannot debug the problem.
 
 You can open issues at [conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io/issues)
 for long threads involving infrastructural, architectural or ecosystem wide discussions.

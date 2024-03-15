@@ -49,7 +49,7 @@ Conda channels are the locations where packages are stored. They serve as the ba
 
 ## Conda package
 
-A conda package is a `.tar.bz2` or `.conda` archive that contains libraries, executable programs, data files and other components, as well as metadata under the `info/` directory. Its contents are unpacked in the installation prefix. [Learn More](https://en.wikipedia.org/wiki/Conda_(package_manager)).
+A conda package is a `.tar.bz2` or `.conda` archive that contains libraries, executable programs, data files and other components, as well as metadata under the `info/` directory. Its contents are unpacked in the installation prefix. [Learn More](<https://en.wikipedia.org/wiki/Conda_(package_manager)>).
 
 <a id="term-CRAN"></a>
 
