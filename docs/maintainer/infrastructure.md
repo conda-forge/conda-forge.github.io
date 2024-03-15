@@ -127,7 +127,12 @@ This repository builds the Docker images used to provide a unified system on all
 - 🔒 Has access to [DockerHub](#docker-hub) and [Quay.io](#quay)
 - ⛓ Needed by `staged-recipes`, feedstocks.
 
-### Smithy
+### Code repositories
+
+These are repositories that hold programs and other codes that define behavior.
+However, their actions are often not triggered here, but rather used by other parts of the conda-forge ecosystem.
+
+#### Smithy
 
 This is the main feedstock creation and maintenance tool.
 
@@ -159,14 +164,14 @@ Smithy can be used beyond conda-forge's purposes. For example, it can be used to
 (You could also consider using [Azure virtual machine scale set agents](https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops),
 which could be less expensive to run than permanently active agents.)
 
-### Web services
+#### Web services
 
 The Heroku app providing the conda-forge web services lives in [conda-forge/conda-forge-webservices](https://github.com/conda-forge/conda-forge-webservices).
 Please note that the code logic provided by the app is in the `Smithy` repository.
 
 Bugs or suggestions regarding the service functionality should therefore be opened in `conda-forge/conda-smithy`'s [bug tracker](https://github.com/conda-forge/conda-smithy/issues).
 
-### regro/cf-scripts
+#### regro/cf-scripts
 
 The code and logic behind [`autotick-bot`](#autotick-bot).
 
