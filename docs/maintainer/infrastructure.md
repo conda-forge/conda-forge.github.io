@@ -159,23 +159,6 @@ This is the graph data used by [`autotick-bot`](#autotick-bot).
 
 The logic to build the graph is provided by [`cf-scripts`](#regrocf-scripts).
 
-### regro/libcfgraph
-
-The libcfgraph data is similar to [`cf-graph-countyfair`](#regrocf-graph-countyfair).
-
-- ⚙️ Deployed in [Circle CI](https://app.circleci.com/pipelines/github/regro/libcfgraph) via [`regro/libcfgraph`](https://github.com/regro/libcfgraph)
-- ⛓ Needs [`regro/libcflib`](#regrolibcflib)
-- 🤖 Commits as `circleci` (fake username)
-- 🔒 Has access to Github API, Circle CI
-
-### regro/libcflib
-
-This is the code that builds the data served at [`libcfgraph`](#regrolibcfgraph).
-
-- 📜 Source at [`regro/libcflib`](https://github.com/regro/libcflib)
-- 📦 Packaged at [`conda-forge/libcflib-feedstock`](https://github.com/conda-forge/libcflib-feedstock)
-- 📖 Not documented
-
 ### Others
 
 - [`regro/conda-suggest-conda-forge`](https://github.com/regro/conda-suggest-conda-forge) provides [`conda-suggest`](https://github.com/conda-incubator/conda-suggest) files that map executables to package names.
