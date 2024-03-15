@@ -53,6 +53,26 @@ External services connect to `staged-recipes` too:
 
 - The `@conda-forge-linter` bot (deployed at [`webservices`](#webservices)) will lint and provide hints in PRs based on the contents of the recipe.
 
+### Website
+
+The current [conda-forge.org](https://conda-forge.org) is a statically generated website published to Github Pages.
+
+- 📜 Source at [conda-forge/conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io/)
+- ⚙️ Deployed in [conda-forge.org](https://conda-forge.org/)
+- 🤖 to enhance the utility of the documentation we also use
+  - PR previews at [Netlify](https://app.netlify.com/sites/conda-forge-previews)
+  - Statistics at [GoatCounter](https://conda-forge.goatcounter.com/)
+  - Search powered by [Algolia](https://dashboard.algolia.com/apps/KB43FQOB7U/dashboard)
+
+The documentation is built with Docusaurus and the source files are located in the [`docs/`](https://github.com/conda-forge/conda-forge.github.io/tree/main/docs) directory of the repository.
+
+If you find any typos, errors, unclear explanations, or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to [Improve the documentation](../user/contributing.md#improve-docs).
+
+In addition to the static documentation, the website also offers information on the current status of conda-forge as well as a mapping of packages to feedstocks.
+
+- Status: [conda-forge.org/status](https://conda-forge.org/status)
+- Packages-to-feedstock mapping: [conda-forge.org/feedstock-outputs](https://conda-forge.org/feedstock-outputs)
+
 ### Smithy
 
 This is the main feedstock creation and maintenance tool.
@@ -118,26 +138,6 @@ This special feedstock provides a package that defines the logic to install and 
 
 - ⚙️ Deployed in [Anaconda.org](https://anaconda.org/conda-forge/conda-forge-ci-setup) via [`conda-forge/conda-forge-ci-setup-feedstock`](https://github.com/conda-forge/conda-forge-ci-setup-feedstock)
 - 🔒 Has access to Azure, Anaconda.org (cf-staging)
-
-### Documentation
-
-The current [conda-forge.org](https://conda-forge.org) is a statically generated website published to Github Pages.
-
-- 📜 Source at [conda-forge/conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io/)
-- ⚙️ Deployed in [conda-forge.org](https://conda-forge.org/)
-- 🤖 to enhance the utility of the documentation we also use
-  - PR previews at [Netlify](https://app.netlify.com/sites/conda-forge-previews)
-  - Statistics at [GoatCounter](https://conda-forge.goatcounter.com/)
-  - Search powered by [Algolia](https://dashboard.algolia.com/apps/KB43FQOB7U/dashboard)
-
-The documentation is built with Docusaurus and the source files are located in the [`docs/`](https://github.com/conda-forge/conda-forge.github.io/tree/main/docs) directory of the repository.
-
-If you find any typos, errors, unclear explanations, or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to [Improve the documentation](../user/contributing.md#improve-docs).
-
-In addition to the static documentation, the website also offers information on the current status of conda-forge as well as a mapping of packages to feedstocks.
-
-- Status: [conda-forge.org/status](https://conda-forge.org/status)
-- Packages-to-feedstock mapping: [conda-forge.org/feedstock-outputs](https://conda-forge.org/feedstock-outputs)
 
 ### docker-images
 
