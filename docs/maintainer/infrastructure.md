@@ -427,7 +427,7 @@ These components perform actions in automated ways, either triggered by a specif
 
 - ⚙️ Deployed in [Github Actions via `conda-forge/admin-migrations`](https://github.com/conda-forge/admin-migrations)
 - 🤖 Uses [`@conda-forge-curator`](https://github.com/apps/conda-forge-curator)
-- 🔒 Has access to Github API, Anaconda.org (conda-forge and cf-staging), Circle, Travis, Azure, Drone
+- 🔒 Has access to Github API, Anaconda.org (conda-forge and cf-staging), Circle, Travis, Azure
 
 This repository hosts workflows that are running 24/7.
 Its job is to procure an automation loop where some maintenance tasks are added.
@@ -437,30 +437,21 @@ Its main user is the core team.
 
 - ⚙️ Deployed in [Github Actions via `conda-forge/admin-requests`](https://github.com/conda-forge/admin-requests)
 - 🤖 Uses [`@conda-forge-curator`](https://github.com/apps/conda-forge-curator)
-- 🔒 Has access to Github API, Anaconda.org
+- 🔒 Has access to Github API, Anaconda.org (conda-forge and cf-staging), Circle, Travis, Azure
 
 This repository hosts workflows that mainly run when triggered by a user-initiated action.
 This is usually done via a PR that, once approved, is merged and triggers the requested action (mark a package as broken, archive a feedstock, etc).
 
-### artifact-validation
-
-- ⚙️ Deployed in [Github Actions via `conda-forge/artifact-validation`](https://github.com/conda-forge/artifact-validation)
-- ⛓ Needs [`regro/libcfgraph`](https://github.com/regro/libcfgraph)
-- 🤖 Uses [`@conda-forge-curator`](https://github.com/apps/conda-forge-curator)
-- 🔒 Has access to Github API, Anaconda.org API
-
-The workflows (and code) to scan artifacts uploaded to [anaconda.org/conda-forge](https://anaconda.org/conda-forge).
-Its main output comes in the form of [issues in `conda-forge/artifact-validation`](https://github.com/conda-forge/artifact-validation/issues)
-
 ### autotick-bot
 
-- ⚙️ Deployed in [Github Actions via `regro/autotick-bot`](https://github.com/regro/autotick-bot)
+- ⚙️ Deployed in [`regro/cf-scripts`](https://github.com/regro/cf-scripts)
 - ⛓ Needs [`regro/cf-scripts`](https://github.com/regro/cf-scripts), [`regro/cf-graph-countyfair`](https://github.com/regro/cf-graph-countyfair), [`conda-forge/conda-forge-pinning-feedstock`](https://github.com/conda-forge/conda-forge-pinning-feedstock)
 - 🤖 Uses [`@regro-cf-autotick-bot`](https://github.com/regro-cf-autotick-bot)
-- 🔒 Has access to Github API
 
-This is the repository running the `regro-cf-autotick-bot` workflows.
-There are several pipelines in place (see [workflows](https://github.com/regro/autotick-bot/tree/master/.github/workflows)).
+:::note
+The older repo [`regro/autotick-bot`](https://github.com/regro/autotick-bot) is no longer in use;
+the bot now runs directly in `regro/cf-scripts`.
+:::
 
 ### webservices
 
