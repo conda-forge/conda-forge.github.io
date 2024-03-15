@@ -8,13 +8,13 @@ export default function Home() {
     return (
         <Layout
             title={siteConfig.title}
-            description="Download page for conda-forge infrastructure"
+            description="Download page for the conda-forge installer"
         >
             <main>
                 <h1 style={{
                     marginTop: 10, textAlign: "center"
                 }}>
-                    Download conda-forge installer
+                    Download the conda-forge Installer
                 </h1>
                 <Download />
             </main>
