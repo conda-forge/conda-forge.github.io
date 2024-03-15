@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "python .ci_scripts/render_templated_content.py && docusaurus start",
+    "start": ".ci_scripts/update_docs pre-build-only && docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -19,17 +19,20 @@
     "@docusaurus/preset-classic": "^3.1.1",
     "@docusaurus/theme-mermaid": "^3.1.1",
     "@mdx-js/react": "^3.0.0",
+    "@stoplight/json-ref-resolver": "^3.1.6",
     "chart.js": "^4.4.0",
     "chartjs-adapter-moment": "^1.0.1",
+    "clsx": "^1.2.1",
     "install": "^0.13.0",
     "moment": "^2.29.4",
     "octokit": "^3.1.2",
     "prism-react-renderer": "^2.3.1",
-    "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-inlinesvg": "^4.1.3",
-    "react-markdown": "^9.0.1"
+    "react-markdown": "^9.0.1",
+    "react": "^18.2.0",
+    "remark-gfm": "^4.0.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.1.1",

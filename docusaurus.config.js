@@ -347,6 +347,11 @@ const config = {
             position: "left",
           },
           {
+            href: "/download",
+            label: "Download",
+            position: "left",
+          },
+          {
             href: "https://opencollective.com/conda-forge",
             label: "Donate",
             position: "right",
