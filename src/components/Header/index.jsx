@@ -30,7 +30,8 @@ export default function Header() {
                     </Link>
                     <Link to="/download/"
                         className="button button--secondary button--lg homepage_button">
-                        Download installer
+                        Download Installer
+
                     </Link>
                 </div>
             </div>
