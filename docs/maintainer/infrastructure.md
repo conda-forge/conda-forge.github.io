@@ -111,7 +111,7 @@ Please open a [PR](../glossary.md#term-PR) and/or an issue there, if you think a
 
 This repository creates the `repodata.json` patches used by the Anaconda.org to amend the metadata coming from the published packages.
 
-- ⚙️ Deployed in [Anaconda.org](https://anaconda.org/conda-forge/conda-forge-repodata-patches) via [`conda-forge/conda-forge-repodata-patches`](https://github.com/conda-forge/conda-forge-repodata-patches)
+- ⚙️ Deployed in [Anaconda.org](https://anaconda.org/conda-forge/conda-forge-repodata-patches) via [`conda-forge/conda-forge-repodata-patches-feedstock`](https://github.com/conda-forge/conda-forge-repodata-patches-feedstock)
 - 🔒 Has access to Azure, Anaconda.org (cf-staging)
 
 ### conda-forge-ci-setup
