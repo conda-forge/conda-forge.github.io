@@ -102,10 +102,7 @@ def get_cfeps():
 def write_cfep_index():
     contents = CFEP_INDEX_MD_TMPL.read_text()
     md_links = [f"- {cfep.md_link()}" for cfep in get_cfeps()]
-    contents = contents.replace(
-        "{{ cfep_list }}",
-        "\n".join(md_links)
-    )
+    contents = contents.replace("{{ cfep_list }}", "\n".join(md_links))
     CFEP_INDEX_MD.write_text(contents)
 
 
@@ -115,20 +112,16 @@ def _get_formatted_names(path_file):
         sorted_csv = sorted(dict_csv, key=lambda d: d["name"])
     return "\n".join(
         f"- [{m['name']} @{m['github_username']}]"
-        f"(https://github.com/{m['github_username']})" 
+        f"(https://github.com/{m['github_username']})"
         for m in sorted_csv
     )
 
 
 def write_core_members():
     contents = GOVERNANCE_MD_TMPL.read_text()
+    contents = contents.replace("{{ core_members }}", _get_formatted_names(CORE_CSV))
     contents = contents.replace(
-        "{{ core_members }}",
-        _get_formatted_names(CORE_CSV)
-    )
-    contents = contents.replace(
-        "{{ emeritus_members }}",
-        _get_formatted_names(EMERITUS_CSV)
+        "{{ emeritus_members }}", _get_formatted_names(EMERITUS_CSV)
     )
     GOVERNANCE_MD.write_text(contents)
 

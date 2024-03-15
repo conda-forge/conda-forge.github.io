@@ -271,16 +271,16 @@ Azure is used to build packages for OSX, Linux (x86_64, native), Linux (ARMv8, e
 The build queue on Azure is substantially larger than on all the other providers.
 Azure builds have a maximum duration of 6 hours.
 
-To see all builds on Azure, visit [https://dev.azure.com/conda-forge/feedstock-builds/_build](https://dev.azure.com/conda-forge/feedstock-builds/_build).
+To see all builds on Azure, visit [https://dev.azure.com/conda-forge/feedstock-builds/\_build](https://dev.azure.com/conda-forge/feedstock-builds/_build).
 
 #### Restarting builds
 
 Presently Azure does not sync GitHub users. In order to restart a build you can restart it from the GitHub checks interface.
 If that doesn't work, a close/open will kick off a new build. You can also use the web services command `@conda-forge-admin, please restart ci`.
 
-#### Using Azure for *everything*
+#### Using Azure for _everything_
 
-Azure is the default provider for Linux and OSX.  To use Azure for everything, add the following to `conda-forge.yml` in the root
+Azure is the default provider for Linux and OSX. To use Azure for everything, add the following to `conda-forge.yml` in the root
 of the feedstock.
 
 ```yaml
@@ -344,6 +344,7 @@ repo [README.md](https://github.com/conda-forge/webservices-dispatch-action) for
 To skip a CI build for a given commit, put `[ci skip] ***NO_CI***` in the commit message.
 
 :::note[Related links]
+
 - **Abort builds with [skip ci]/etc** [(conda-forge.github.io/#629)](https://github.com/conda-forge/conda-forge.github.io/issues/629)
 - **Skip CI requests** [(staged-recipes/#1148)](https://github.com/conda-forge/staged-recipes/issues/1148)
 
@@ -365,18 +366,18 @@ packages. While we do not have any formal policies or promises of support for th
 compilers, we have historically maintained them according to the following (non-binding)
 principles.
 
-* The authoritative source of the current compilers and versions for various languages
+- The authoritative source of the current compilers and versions for various languages
   and platforms is the [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml)
   in the [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock)
   as described in [Globally pinned packages](pinning_deps.md#globally-pinned-packages).
-* We provide no support of any kind in terms of the long-term stability of these pinnings.
-* We upgrade them in an ad-hoc manner on a periodic basis as we have the time and energy to do so.
+- We provide no support of any kind in terms of the long-term stability of these pinnings.
+- We upgrade them in an ad-hoc manner on a periodic basis as we have the time and energy to do so.
   Note that because of the way we enforce runtime constraints, these compiler upgrades will not break
   existing packages. However, if you are using the compilers outside of `conda`, then you may find issues.
-* We generally provide notice in the form of an announcement when a compiler is going to be upgraded.
+- We generally provide notice in the form of an announcement when a compiler is going to be upgraded.
   Note that these changes take a bit of time to complete, so you will generally have time
   to prepare should you need to.
-* Some of the criteria we think about when considering a compiler migration include:
+- Some of the criteria we think about when considering a compiler migration include:
   - the degree of disruption to the ecosystem,
   - the amount of work for the `core` team,
   - the amount of time it will cost our (volunteer) feedstock maintainers.
@@ -385,8 +386,8 @@ We do use some unofficial names for our compiler stack internally. Note however 
 the existence of these names does not imply any level of support or stability for the compilers
 that form the given stack.
 
-* Our current compiler stack is referred to internally as `comp7`.
-* The previous compiler stack based in part on the various `toolchain_*` packages
+- Our current compiler stack is referred to internally as `comp7`.
+- The previous compiler stack based in part on the various `toolchain_*` packages
   was sometimes referred to as `comp4`. On linux the `toolchain_*` compilers were
   GCC 4.8.2 as packaged in the devtoolset-2 software collection. On osx, we use clang from
   Apple's Xcode in the `toolchain_*` packages.

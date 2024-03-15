@@ -34,13 +34,16 @@
 
 .header_content_input {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   margin-top: 2em;
 }
 
 .header_content_input a {
+  margin-right: 5px;
   text-decoration: none;
+  width: 280px;
 }
 
 .header_content_input a:focus {

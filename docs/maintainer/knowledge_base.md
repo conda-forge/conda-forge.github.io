@@ -92,11 +92,13 @@ Here are some things you should check,
 1. Check that both libraries have the same SONAME on linux
 
    Run `readelf -d /path/to/lib.so`
+
 2. Check that both libraries have the same install name and have the same
    compatibility and current versions.
 
    Run `otool -L /path/to/lib.dylib`. The second line should give you
    the three pieces of information
+
 3. Check that the file list is the same in both.
 4. Check that you use the same options as the same autoconf build.
 5. Check that the symbols exported are the same.
@@ -153,7 +155,7 @@ particular versions of these tools — this is to maintain compatibility between
 compiled libraries used in Python, [as described on this Python wiki page](https://wiki.python.org/moin/WindowsCompilers). The current relevant
 versions are:
 
-* For Python 3.5–3.12+: Visual C++ 14.x
+- For Python 3.5–3.12+: Visual C++ 14.x
 
 While you can obtain these tools by installing the right version of the full
 [Visual Studio](https://visualstudio.microsoft.com/) development
@@ -203,8 +205,8 @@ if errorlevel 1 exit 1
 
 The following feedstocks are examples of this build structure deployed:
 
-* [libpng](https://github.com/conda-forge/libpng-feedstock/blob/master/recipe/bld.bat)
-* [Pugixml](https://github.com/conda-forge/pugixml-feedstock/blob/master/recipe/bld.bat)
+- [libpng](https://github.com/conda-forge/libpng-feedstock/blob/master/recipe/bld.bat)
+- [Pugixml](https://github.com/conda-forge/pugixml-feedstock/blob/master/recipe/bld.bat)
 
 <a id="building-for-different-vc-versions"></a>
 
@@ -259,14 +261,14 @@ After making these changes don't forget to rerender with `conda-smithy` (to rere
 Windows recipes rely on CMD/Batch scripts (`.bat`) by default.
 Batch syntax is a bit different from Bash and friends on Unix, so we have collected some tips here to help you get started if you are not familiar with this scripting language.
 
-* Check if you need to write a Batch script first!
+- Check if you need to write a Batch script first!
   Simple recipes might not need shell-specific code and can be written in an agnostic way.
   Use the `build.script` item in `meta.yaml` (see [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#script)).
   This item can take a string or a list of strings (one per line).
-* [SS64's CMD howto pages](https://ss64.com/nt/syntax.html) are the best resource for any kind of question regarding CMD/Batch syntax.
-* Search conda-forge for existing `.bat` scripts and learn with examples.
+- [SS64's CMD howto pages](https://ss64.com/nt/syntax.html) are the best resource for any kind of question regarding CMD/Batch syntax.
+- Search conda-forge for existing `.bat` scripts and learn with examples.
   See this [example query for all Batchfiles](https://github.com/search?q=org%3Aconda-forge+language%3ABatchfile&type=code&l=Batchfile).
-* You can [free trial Windows VMs from Microsoft](https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/).
+- You can [free trial Windows VMs from Microsoft](https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/).
   Set one up with your favorite virtualization solution to debug your CMD syntax.
   There are also some minimal emulators online that might get you started with the basics, even if not all CMD features are present.
   For example, this [Windows 95 emulator](https://www.pcjs.org/software/pcx86/sys/windows/win95/4.00.950/) features a more or less okay MS-DOS prompt.
@@ -519,7 +521,7 @@ In practical terms, for conda-forge, this results into two extra metadata bits t
   the crossenv workarounds](https://github.com/conda-forge/cross-python-feedstock/blob/main/recipe/activate-cross-python.sh)
   so they work better with the conda-build setup.
 - Copying some Python-related packages from `host` to `build` with a `[build_platform !=
-  target_platform]` selector:
+target_platform]` selector:
   - `python` itself, to support `crossenv`.
   - Non-pure Python packages (i.e. they ship compiled libraries) that need to be present while the
     package is being built, like `cython` and `numpy`.
@@ -547,7 +549,7 @@ architecture.
 ### Emulated builds
 
 When cross-compilation is not possible, one can resort to emulation. This is a technique that uses
-a virtual machine  ([QEMU](https://www.qemu.org/)) to emulate the target platform, which has a
+a virtual machine ([QEMU](https://www.qemu.org/)) to emulate the target platform, which has a
 significant overhead. However, `conda-build` will see the target platform as native, so very
 little changes are usually needed in the recipe.
 
@@ -608,7 +610,7 @@ Dependencies outside of the `conda-forge` channel should be avoided (see [Avoid 
 However, there are a few exceptions:
 
 Some dependencies are so close to the system that they are not packaged with conda-forge.
-These dependencies have to be satisfied with *Core Dependency Tree* (CDT) packages.
+These dependencies have to be satisfied with _Core Dependency Tree_ (CDT) packages.
 
 A CDT package consists of repackaged CentOS binaries from the appropriate version,
 either 6 or 7 depending on user choice and platform. We manage the build of CDT
@@ -743,8 +745,8 @@ See the pinning repository for what the pinning corresponds to at time of writin
 :::note[Notes]
 
 1. You still need to respect minimum supported version of `numpy` for the package!
-That means you cannot use `numpy 1.9` if the project requires at least `numpy 1.12`,
-adjust the minimum version accordingly!
+   That means you cannot use `numpy 1.9` if the project requires at least `numpy 1.12`,
+   adjust the minimum version accordingly!
 
 ```yaml
 host:
@@ -754,7 +756,7 @@ run:
 ```
 
 2. if your package supports `numpy 1.7`, and you are brave enough :-),
-there are `numpy` packages for `1.7` available for Python 2.7 in the channel.
+   there are `numpy` packages for `1.7` available for Python 2.7 in the channel.
 
 :::
 
@@ -798,7 +800,7 @@ cp ${PKG_NAME}-${PKG_VERSION}.tgz ${PREFIX}/share/jupyter/lab/extensions/js
 ```
 
 Since this is a noarch recipe, the build script only needs to run on `linux-64`.
-Also note that we do not need to run `jupyter labextension install`  or
+Also note that we do not need to run `jupyter labextension install` or
 `jupyter lab build` as part of the package build or in any post-link scripts.
 This is because JupyterLab will run the build step itself when it is next run.
 The `${PREFIX}/share/jupyter/lab/extensions/js` directory which JupyterLab
@@ -901,7 +903,7 @@ conda install openmpi ptscotch
 ```
 
 This doesn't extend to `nompi`, because there is no `nompi` variant of the mpi metapackage. And there probably
-shouldn't be, because some packages built with mpi don't preclude other packages in the env that *may* have an mpi variant
+shouldn't be, because some packages built with mpi don't preclude other packages in the env that _may_ have an mpi variant
 from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no
 parallel hdf5 yet. This works fine, though some features may not be available).
 
@@ -934,7 +936,7 @@ build:
 
 :::note
 
-`{{ PKG_HASH }}` avoids build string collisions on *most* variants,
+`{{ PKG_HASH }}` avoids build string collisions on _most_ variants,
 but not on packages that are excluded from the default build string,
 e.g. Python itself. If the package is built for multiple Python versions, use:
 
@@ -1268,7 +1270,7 @@ time of writing is `3.8.0`. Since the BLAS API is stable, a downstream package w
 In addition to the above netlib package, there are other variants like `libblas=*=*openblas`,
 which has `openblas` as a dependency and has a symlink from `libblas.so.3` to `libopenblas.so`.
 `libblas=3.8.0=*openblas` pins the `openblas` dependency to a version that is known to support the
-BLAS `3.8.0` API.  This means that, at install time, the user can select what BLAS implementation
+BLAS `3.8.0` API. This means that, at install time, the user can select what BLAS implementation
 they like without any knowledge of the version of the BLAS implementation needed.
 
 ### Microarchitecture-optimized builds {#microarch}
@@ -1317,7 +1319,6 @@ to assign a higher build number to the preferred microarchitecture (usually the 
 
 That's it! The activation scripts behind the `microarch-level` packages are already injecting the necessary compiler flags for you. Since they also have `run_exports` entries, your
 package will have the necessary runtime requirements to ensure the most adequate variant gets installed. Refer to [this comment](https://github.com/conda-forge/staged-recipes/pull/24306#issuecomment-1800095471) and the [`microarch-level-feedstock` README](https://github.com/conda-forge/microarch-level-feedstock) for more information.
-
 
 <a id="knowledge-mpl"></a>
 
@@ -1382,7 +1383,7 @@ can be controlled with `run_constrained`, even for packages not available on all
 Currently available packages:
 
 | Name               | Available on:     | Empty on:    |
-|--------------------|-------------------|--------------|
+| ------------------ | ----------------- | ------------ |
 | dataclasses        | python >=3.6,<3.7 | python >=3.7 |
 | enum34             | python =2.7       | python >=3.4 |
 | typing             |                   | python >=3   |
@@ -1808,24 +1809,28 @@ For conda-build this means that `setuptools_scm` must be included as a `host` de
 Additionally, some attention because the metadata is often not available in the sources.
 There are two options for how to proceed:
 
-* For Python package also available on PyPI:
+- For Python package also available on PyPI:
   Use the PyPi tarball as a source, as it will have the metadata encoded
   (in such a way that `setuptools_scm` knows how to find it).
-* Specify the environment variable `SETUPTOOLS_SCM_PRETEND_VERSION` with the version string.
+- Specify the environment variable `SETUPTOOLS_SCM_PRETEND_VERSION` with the version string.
   If specified this environment variable is the principle source for `setuptools_scm`.
   There are two ways how to do this:
+
   - If you are using build scripts, in `build.sh` specify:
+
     ```bash
     export SETUPTOOLS_SCM_PRETEND_VERSION="$PKG_VERSION"
     ```
 
     and in `bld.bat` specify:
+
     ```bash
     set SETUPTOOLS_SCM_PRETEND_VERSION=%PKG_VERSION%
     ```
 
     Whereby you use that `PKG_VERSION` has been set with the version string,
     see [Environment variables](https://docs.conda.io/projects/conda-build/en/stable/user-guide/environment-variables.html#env-vars).
+
   - Otherwise, if you are directly building from `meta.yaml`, use for example:
     ```yaml
     build:
@@ -1870,9 +1875,9 @@ Finally, note that the `aarch64` and `ppc64le` platforms already use CentOS 7.
 Although the provisioned CI machines do not feature a GPU, conda-forge does provide mechanisms
 to build CUDA-enabled packages. These mechanisms involve several packages:
 
-* `cudatoolkit`: The runtime libraries for the CUDA toolkit. This is what end-users will end
+- `cudatoolkit`: The runtime libraries for the CUDA toolkit. This is what end-users will end
   up installing next to your package.
-* `nvcc`: Nvidia's EULA does not allow the redistribution of compilers and drivers. Instead, we
+- `nvcc`: Nvidia's EULA does not allow the redistribution of compilers and drivers. Instead, we
   provide a wrapper package that locates the CUDA installation in the system. The main role of this
   package is to set some environment variables (`CUDA_HOME`, `CUDA_PATH`, `CFLAGS` and others),
   as well as wrapping the real `nvcc` executable to set some extra command line arguments.
@@ -1893,9 +1898,9 @@ make
 
 **How is CUDA provided at the system level?**
 
-* On Linux, Nvidia provides official Docker images, which we then
+- On Linux, Nvidia provides official Docker images, which we then
   [adapt](https://github.com/conda-forge/docker-images) to conda-forge's needs.
-* On Windows, the compilers need to be installed for every CI run. This is done through the
+- On Windows, the compilers need to be installed for every CI run. This is done through the
   [conda-forge-ci-setup](https://github.com/conda-forge/conda-forge-ci-setup-feedstock/) scripts.
   Do note that the Nvidia executable won't install the drivers because no GPU is present in the machine.
 
@@ -1986,11 +1991,11 @@ burden on our CI resources. Only proceed if there's a known use case for the ext
 
 Providing a new CUDA version involves five repositores:
 
-* [cudatoolkit-feedstock](https://github.com/conda-forge/cudatoolkit-feedstock)
-* [nvcc-feedstock](https://github.com/conda-forge/nvcc-feedstock)
-* [conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock)
-* [docker-images](https://github.com/conda-forge/docker-images) (Linux only)
-* [conda-forge-ci-setup-feedstock](https://github.com/conda-forge/conda-forge-ci-setup-feedstock) (Windows only)
+- [cudatoolkit-feedstock](https://github.com/conda-forge/cudatoolkit-feedstock)
+- [nvcc-feedstock](https://github.com/conda-forge/nvcc-feedstock)
+- [conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock)
+- [docker-images](https://github.com/conda-forge/docker-images) (Linux only)
+- [conda-forge-ci-setup-feedstock](https://github.com/conda-forge/conda-forge-ci-setup-feedstock) (Windows only)
 
 The steps involved are, roughly:
 
@@ -2102,8 +2107,8 @@ channel thus far, it seems rather unnecessary to introduce many labels.
 :::note
 
 Certain packages (for example [black](https://pypi.org/project/black/#history)) follow
-a release cycle in which they have never had a non-beta/alpha release.  In these cases
-the conda packages for those do *not* need to be published to a prerelease label.
+a release cycle in which they have never had a non-beta/alpha release. In these cases
+the conda packages for those do _not_ need to be published to a prerelease label.
 
 :::
 
@@ -2143,6 +2148,7 @@ in `recipe/conda_build_config.yaml` in their respective feedstocks.
 :::note
 
 A rerender needs to happen for these changes to reflect in CI files. The channel_targets entries map
+
 - <channel target> <label target> pairs for use in the post-build upload step.
 
 :::
@@ -2228,8 +2234,8 @@ To reset your feedstock token and fix issues with uploads, follow these steps:
 
 ## Using `arch_rebuild.txt`
 
-You can add a feedstock to `arch_rebuild.txt` if it requires rebuilding with different architectures/platforms (such as `ppc64le` or `aarch64`). 
-Check the [migration status](https://conda-forge.org/status/#aarch64andppc64leaddition) to see if your package is already in the queue to get migrated. 
+You can add a feedstock to `arch_rebuild.txt` if it requires rebuilding with different architectures/platforms (such as `ppc64le` or `aarch64`).
+Check the [migration status](https://conda-forge.org/status/#aarch64andppc64leaddition) to see if your package is already in the queue to get migrated.
 If not, you can add the feedstock to `arch_rebuild.txt` by opening a PR to the [conda-forge-pinning-feedstock repository](https://github.com/conda-forge/conda-forge-pinning-feedstock).
 Once the PR is merged, the migration bot goes through the list of feedstocks in `arch_rebuild.txt` and opens a migration PR for any new feedstocks and their dependencies, enabling the aarch64/ppc64le builds.
 
@@ -2256,6 +2262,7 @@ The way migrations proceed are:
 
 >     - The node depends on the changed pinnings.
 >     - The node has no dependencies that depend on the new pinnings and have not been migrated.
+>
 > 1. Process 3 continues until the migration is complete and the change is applied to the global pinning file via a final PR. After this step, we say this migration is closed out.
 
 Sometimes, you might get a migration PR for your package that you don't want to merge. In that case, you should put that PR in draft status but should never close it.

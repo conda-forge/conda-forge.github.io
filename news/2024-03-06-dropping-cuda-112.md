@@ -16,7 +16,7 @@ migrated. Issues have been raised on those feedstock to make maintainers aware
 of this deprecation plan. Until they are updated users can still install the
 CUDA 11.2 packages they produced previously. These should continue to work.
 However there will be no way to rebuild these packages without also updating to
-CUDA 11.8. 
+CUDA 11.8.
 
 To upgrade an older feedstock to CUDA 11.8, simply re-render. If the recipe has
 a `skip` or other logic that blocks this from happening, simply remove this
@@ -24,8 +24,7 @@ logic and re-render to add CUDA 11.8.
 
 The date has been sent to ensure 1 full work week for maintainers to do any
 remaining updates to move to CUDA 11.8+. In 2024 May, [NVIDIA plans to delete
-the CUDA 11.2 Docker image](
-https://gitlab.com/nvidia/container-images/cuda/-/issues/209#note_1641845842 )
+the CUDA 11.2 Docker image](https://gitlab.com/nvidia/container-images/cuda/-/issues/209#note_1641845842)
 that conda-forge has been using to build for CUDA 11.2. So it will not be
 possible for conda-forge to update the CUDA 11.2 Docker image, which will make
 it much harder to maintain. Feedstock maintainers are encouraged to update

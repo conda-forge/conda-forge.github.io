@@ -34,6 +34,7 @@ For updates, using a branch in the main repo is discouraged because,
 1. [CI](../glossary.md#term-CI) is run on both the branch and the PR.
 
    This wastes [CI](../glossary.md#term-CI) resources
+
 2. Branches are automatically published.
 
    This means if you push a version update to a branch and then create a [PR](../glossary.md#term-PR), conda packages will be published to anaconda.org before the PR is merged.
@@ -51,19 +52,22 @@ For these reasons, maintainers are asked to fork the feedstock to their personal
 When a new version of a package is released on PyPI/CRAN/.., we have a bot that automatically creates version updates for the feedstock. In most cases you can simply merge this PR and it should include all changes. When certain things have changed upstream, e.g. the dependencies, you will still have to do changes to the created PR. As feedstock maintainer, you don't have to create a new PR for that but can simply push to the branch the bot created. There are two alternatives to push to the branch of the bot:
 
 1. Manually setting up git remotes:
+
    - Clone the conda-forge feedstock repository
    - Add the remote of the bot: `git remote add regro-cf-autotick-bot git@github.com:regro-cf-autotick-bot/<package>-feedstock.git`
      :::warning[Important]
 
      It is not possible to push to a GitHub repository using the
-     `git://` protocol.  See [Which remote URL should I use?](https://help.github.com/en/github/using-git/which-remote-url-should-i-use)
+     `git://` protocol. See [Which remote URL should I use?](https://help.github.com/en/github/using-git/which-remote-url-should-i-use)
      for instructions on using the `https://` protocol if you have
      enabled [two-factor authentication](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa).
      :::
+
    - Fetch the remote: `git fetch regro-cf-autotick-bot`
    - Checkout the branch of the PR, git should automatically link it to the regro-cf-autotick-bot remote if this is the only remote with a branch of that name.
    - If there are multiple remotes with this branch name, you need to first checkout the remote branch and then turn it into a local branch: `git checkout regro-cf-autotick-bot/<branch> && git checkout -b <branch>`
    - Commit and push on that branch, if the remote was not correctly setup, use `git push -u regro-cf-autotick-bot <branch>`.
+
 2. Using Github's [hub](https://github.com/github/hub) tool (which conda-forge ships! `conda install hub -c conda-forge`):
    - Clone the conda-forge feedstock repository
    - Checkout the correct branch with remote: `hub pr checkout 12` where `12` is the ID of the PR.
@@ -94,25 +98,31 @@ Here we assume that you would like to update the feedstock `<feedstock>`. Feedst
 1. Forking the feedstock
 
    Before you can submit your first PR, you have to fork conda-forge's feedstock.
+
    - Navigate to [https://github.com/conda-forge](https://github.com/conda-forge)/<feedstock> in your favorite web browser and click the `fork` button.
    - You now have a clone of the feedstock in `https://github.com/<your-github-id>/<feedstock>` under your control.
    - Connect to the feedstock from your computer by using `git clone https://github.com/<your-github-id>/<feedstock>`.
+
 2. Syncing your fork with conda-forge's feedstock
 
    This step is only required if you have forked some time ago and your fork is missing commits from the feedstock at conda-forge.
+
    - Make sure you are on the main branch: `git checkout main`
    - Register conda-forge's feedstock with `git remote add upstream https://github.com/conda-forge/<feedstock>`
    - Fetch the latest updates with `git fetch upstream`
    - Pull in the latest changes into your main branch: `git rebase upstream/main`
+
 3. Creating your changes in a new branch
 
    Now you are ready to update the recipe
+
    - Create and switch to a new branch: `git checkout -b <branch-name>`. `<branch-name>` can be e.g. `update_1_0_1`.
    - Make your changes locally
    - Review your changes then use `git add <changed-files>`. Where `<changed-files>` are a whitespace separated list of filenames you changed.
    - Create a commit by `git commit -m <commit-msg>`, where `<commit-msg>` can be `updated feedstock to version 1.0.1`
+
 4. Pushing your changes to GitHub and propose a PR
-   - Push the branch with changes to your fork on GitHub:  `git push origin <branch-name>`
+   - Push the branch with changes to your fork on GitHub: `git push origin <branch-name>`
    - Create a pull request via the web interface by navigating to `https://github.com/<your-github-id>/<feedstock>` with your web browser and clicking the button `create pull request`.
 
 <a id="updating-recipes"></a>
@@ -249,6 +259,7 @@ Sometimes mistakes happen and a broken package ends up being uploaded to the `co
 If the only issue is in the package metadata, we can directly patch it using
 the [repo data patches feedstock](https://github.com/conda-forge/conda-forge-repodata-patches-feedstock).
 If this is the case, the following general guidelines should be followed:
+
 1. Update the feedstocks recipe to ensure future builds do not propagate the issue with a new build number.
 2. Please make a PR there to add a patch. The patch should specify as much has possible the versions and times when the packages were generated. It may use the following information
 
@@ -267,7 +278,7 @@ remove broken packages from the `main` channel:
 
 ## Archiving feedstocks
 
-If a package is no longer maintained conda-forge will *archive*
+If a package is no longer maintained conda-forge will _archive_
 the repository. An archived repository can no longer accept PRs and issues, which prevents people and `regro-cf-autotick-bot` from updating the
 package (an example would be to re-render the feedstock to support new Python versions). Note that this **does not** remove the existing packages, those will still be available.
 

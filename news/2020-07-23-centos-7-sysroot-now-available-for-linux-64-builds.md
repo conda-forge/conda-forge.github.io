@@ -1,4 +1,4 @@
-# CentOS 7 ``sysroot`` Now Available for ``linux-64`` Builds
+# CentOS 7 `sysroot` Now Available for `linux-64` Builds
 
 We are very excited to announce that new compilers based on repackaged
 `sysroot`'s from CentOS 7 are now available for all `linux-*` platforms.
