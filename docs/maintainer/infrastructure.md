@@ -4,7 +4,6 @@ title: 'Infrastructure'
 
 # Infrastructure
 
-
 ## Repositories
 
 ### Staged-recipes
@@ -38,6 +37,7 @@ The directory `.scripts` contains roughly the same shell scripts that would be u
 However, since `staged-recipes` does not support rerendering, these are kept in sync manually and it is common to see some differences.
 
 #### Workflows
+
 Two main jobs run on `staged-recipes``:
 
 - The `conda-build` jobs that run on every PR (and push to `main`) check whether the recipes build packages correctly.
@@ -54,7 +54,6 @@ Additional workflows help users set up their recipes correctly. They react to ev
 External services connect to `staged-recipes` too:
 
 - The `@conda-forge-linter` bot (deployed at [`webservices`](#webservices)) will lint and provide hints in PRs based on the contents of the recipe.
-
 
 ### Smithy
 
