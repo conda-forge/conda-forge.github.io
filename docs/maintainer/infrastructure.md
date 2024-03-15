@@ -426,7 +426,7 @@ These components perform actions in automated ways, either triggered by a specif
 ### admin-migrations
 
 - ⚙️ Deployed in [Github Actions via `conda-forge/admin-migrations`](https://github.com/conda-forge/admin-migrations)
-- 🤖 Uses [`@conda-forge-curator`](https://github.com/conda-forge-curator)
+- 🤖 Uses [`@conda-forge-curator`](https://github.com/apps/conda-forge-curator)
 - 🔒 Has access to Github API, Anaconda.org (conda-forge and cf-staging), Circle, Travis, Azure, Drone
 
 This repository hosts workflows that are running 24/7.
@@ -436,7 +436,7 @@ Its main user is the core team.
 ### admin-requests
 
 - ⚙️ Deployed in [Github Actions via `conda-forge/admin-requests`](https://github.com/conda-forge/admin-requests)
-- 🤖 Uses [`@conda-forge-curator`](https://github.com/conda-forge-curator)
+- 🤖 Uses [`@conda-forge-curator`](https://github.com/apps/conda-forge-curator)
 - 🔒 Has access to Github API, Anaconda.org
 
 This repository hosts workflows that mainly run when triggered by a user-initiated action.
@@ -446,7 +446,7 @@ This is usually done via a PR that, once approved, is merged and triggers the re
 
 - ⚙️ Deployed in [Github Actions via `conda-forge/artifact-validation`](https://github.com/conda-forge/artifact-validation)
 - ⛓ Needs [`regro/libcfgraph`](https://github.com/regro/libcfgraph)
-- 🤖 Uses [`@conda-forge-curator`](https://github.com/conda-forge-curator)
+- 🤖 Uses [`@conda-forge-curator`](https://github.com/apps/conda-forge-curator)
 - 🔒 Has access to Github API, Anaconda.org API
 
 The workflows (and code) to scan artifacts uploaded to [anaconda.org/conda-forge](https://anaconda.org/conda-forge).
@@ -466,7 +466,7 @@ There are several pipelines in place (see [workflows](https://github.com/regro/a
 
 - ⚙️ Deployed in Heroku Dyno (`conda-forge.herokuapp.com`)
 - ⛓ Needs [`conda-forge/conda-forge-webservices`](https://github.com/conda-forge/conda-forge-webservices)
-- 🤖 Uses [`@conda-forge-webservices`](https://github.com/conda-forge-webservices), [`@conda-forge-admin`](https://github.com/conda-forge-admin), [`@conda-forge-linter`](https://github.com/conda-forge-linter)
+- 🤖 Uses [`@conda-forge-webservices`](https://github.com/apps/conda-forge-webservices), [`@conda-forge-admin`](https://github.com/conda-forge-admin), [`@conda-forge-linter`](https://github.com/conda-forge-linter)
 - 🔒 Has access to Github API, Anaconda.org (cf-staging and conda-forge), Heroku
 
 This web application powers several services, like:
