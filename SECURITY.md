@@ -17,7 +17,7 @@ task list for conda-forge members on how to handle security related issues.
 
 ## Scope
 
-This process applies to *all projects* governed by conda-forge. This includes:
+This process applies to _all projects_ governed by conda-forge. This includes:
 
 - conda-forge feedstock machinery
 - conda-forge infrastructure and bots
@@ -54,6 +54,7 @@ vulnerability.
 ### Roles
 
 This process defines these roles:
+
 - **Reporter** The individual(s) who report the vulnerability
 - **Coordinator** A conda-forge core member who facilitates the tracking of the vulnerability
   through this process
@@ -118,6 +119,3 @@ The role responsible for each step is noted at the beginning.
 ---
 
 > This document is based on the excellent [write-up](https://github.com/jupyter/security/blob/86ec517/docs/vulnerability-handling.md) used by the Jupyter community, [BSD-3 licensed](https://github.com/jupyter/security/blob/86ec517/LICENSE).
-
-
-

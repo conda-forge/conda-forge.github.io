@@ -58,14 +58,14 @@ If you are new to the conda-forge community, follow the steps below to make your
 5. While writing your new documentation, you can use the live preview mode with:
    - `npm install` to make sure `node_modules` is up-to-date
    - `npm run start` to start the live preview. Every time you save a file, the changes will be reflected instantaneously!
-5. Once ready, you can also check how the production build would look like with the command:
+6. Once ready, you can also check how the production build would look like with the command:
    - `.ci_scripts/update_docs`
-   You can check the changes locally by opening the html files in `build/` or running:
+     You can check the changes locally by opening the html files in `build/` or running:
    - `python -m http.server --directory build/`
-6. Add and commit your changes:
+7. Add and commit your changes:
    - `git add .`
    - `git commit -m "your commit message"`
-7. Submit a [pull request](https://help.github.com/articles/about-pull-requests/) to the main repository proposing your changes.
+8. Submit a [pull request](https://help.github.com/articles/about-pull-requests/) to the main repository proposing your changes.
 
 Happy contributing!
 

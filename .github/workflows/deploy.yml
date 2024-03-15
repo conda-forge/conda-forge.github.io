@@ -57,6 +57,6 @@ jobs:
             --exclude '.*/404.html/'
             --exclude '.*,.*'
             --exclude-path './build/community/minutes/'
-            --remap "https://conda-forge.org/(.*) file://$(pwd)/build/\$1" 
-            './build/**/*.html' 
+            --remap "https://conda-forge.org/(.*) file://$(pwd)/build/\$1"
+            './build/**/*.html'
             '*.md'
