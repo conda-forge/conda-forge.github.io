@@ -476,7 +476,6 @@ This web application powers several services, like:
 - the `cf-staging` to `conda-forge` validation (plus copy)
 - status monitoring
 
-
 ## Services & providers
 
 ### Github resources
@@ -613,7 +612,7 @@ Organization-wide configuration can be found in the [`.cirun` repository](https:
 #### Anaconda.org
 
 - 🌐 Channels/organizations: [`cf-staging`](https://anaconda.org/cf-staging/dashboard), [`conda-forge`](https://anaconda.org/conda-forge/dashboard)
-- ⛓ Used by [feedstocks](#feedstocks)
+- ⛓ Used by feedstocks
 
 #### Docker Hub
 
