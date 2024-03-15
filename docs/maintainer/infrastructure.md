@@ -38,12 +38,10 @@ However, since `staged-recipes` does not support rerendering, these are kept in 
 
 #### Workflows
 
-Two main jobs run on `staged-recipes``:
+The main job run on `staged-recipes` is the `conda-build` job that runs on every PR (and push to `main`) to check whether the recipes build packages correctly.
+These jobs run on Azure Pipelines defined in [`.azure-pipelines/`](https://github.com/conda-forge/staged-recipes/tree/main/.azure-pipelines).
 
-- The `conda-build` jobs that run on every PR (and push to `main`) check whether the recipes build packages correctly.
-  These jobs run on Azure Pipelines defined in [`.azure-pipelines/`](https://github.com/conda-forge/staged-recipes/tree/main/.azure-pipelines).
-- The [`create_feedstocks` workflow](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/create_feedstocks.yml) runs after each push to `main` (and every 10 minutes) to create the new feedstock repositories on the `conda-forge` organization.
-  The core logic is defined in the Python script [`.github/workflows/scripts/create_feedstocks.py`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/scripts/create_feedstocks.py).
+The actual creation of the feedstock is run in [conda-forge/admin-requests](#admin-requests).
 
 Additional workflows help users set up their recipes correctly. They react to events in PRs:
 
@@ -193,6 +191,10 @@ Its main user is the core team.
 
 This repository hosts workflows that mainly run when triggered by a user-initiated action.
 This is usually done via a PR that, once approved, is merged and triggers the requested action (mark a package as broken, archive a feedstock, etc).
+
+It also does the job of creating new feedstocks for recipes that have been merged in [`conda-forge/staged-recipes`](#staged-recipes).
+The [`create_feedstocks` workflow](https://github.com/conda-forge/admin-requests/blob/main/.github/workflows/create_feedstocks.yml) runs every 10 minutes to create the new feedstock repositories on the `conda-forge` organization.
+The core logic is defined in the Python script [`.github/workflows/scripts/create_feedstocks.py`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/scripts/create_feedstocks.py).
 
 #### autotick-bot
 
