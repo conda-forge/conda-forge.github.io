@@ -514,6 +514,7 @@ Most of them are associated with a feedstock, but there are a few special ones t
 #### Configuration
 
 - [`conda-forge/.github`](https://github.com/conda-forge/.github): Organization-wide configuration, profile information, etc.
+- [`conda-forge/.cirun`](https://github.com/conda-forge/.cirun): Organization-wide configuration for special ci runners (e.g. GPU), c.f. [Cirun](#cirun).
 
 #### Bot accounts
 
@@ -584,6 +585,10 @@ conda-forge benefits from the generously offered Microsoft-hosted runners.
 Configured with `@conda-forge-daemon`.
 
 Organization-wide configuration can be found in the [`.cirun` repository](https://github.com/conda-forge/.cirun).
+
+:::info
+This allows, for example, access to GPU enabled runners for selected feedstocks as described in https://github.com/Quansight/open-gpu-server.
+:::
 
 #### Github Actions
 
