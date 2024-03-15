@@ -12,7 +12,7 @@ This repository is the gateway to conda-forge and where users can submit new rec
 You can find the detailed guide for submitting new package recipes in [The staging process](adding_pkgs.md#creating-recipes).
 
 - ⚙️ Deployed in [`conda-forge/staged-recipes`](https://github.com/conda-forge/staged-recipes)
-- 🔒 Has access to Azure Pipelines, Github Actions, Travis CI, Anaconda.org (cf-staging)
+- 🔒 Has access to Anaconda.org (cf-staging)
 - 🤖 Integrated with [`webservices`](#webservices)
 
 #### Anatomy of staged-recipes
