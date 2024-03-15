@@ -643,7 +643,7 @@ This allows, for example, access to GPU enabled runners for selected feedstocks 
 
 #### Heroku
 
-- 🌐 https://hub.docker.com/u/condaforge/
+- 🌐 https://conda-forge.herokuapp.com/status-monitor
 - ⛓ Used by [`webservices`](#webservices)
 
 ### Other services
