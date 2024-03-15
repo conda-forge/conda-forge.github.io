@@ -73,6 +73,60 @@ In addition to the static documentation, the website also offers information on 
 - Status: [conda-forge.org/status](https://conda-forge.org/status)
 - Packages-to-feedstock mapping: [conda-forge.org/feedstock-outputs](https://conda-forge.org/feedstock-outputs)
 
+### Metadata repositories
+
+These are repositories that primarily hold metadata used by other parts of the conda-forge ecosystem.
+
+#### conda-forge pinning
+
+Hosts the global pinnings for conda-forge, and the ongoing migrations.
+
+- ⚙️ Deployed in [Anaconda.org](https://anaconda.org/conda-forge/conda-forge-pinning) via [`conda-forge/conda-forge-pinning-feedstock`](https://github.com/conda-forge/conda-forge-pinning-feedstock)
+- 🔒 Has access to Azure, Anaconda.org (cf-staging)
+
+Package-wide dependency pins are defined in [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml) in the [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock).
+
+For more information on conda-forge wide package pins, please refer to [Globally pinned packages](pinning_deps.md#globally-pinned-packages).
+
+Please open a [PR](../glossary.md#term-PR) and/or an issue there, if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to [Updating package pins](pinning_deps.md#update-pins).
+
+#### conda-forge-repodata-patches
+
+This repository creates the `repodata.json` patches used by the Anaconda.org to amend the metadata coming from the published packages.
+
+- ⚙️ Deployed in [Anaconda.org](https://anaconda.org/conda-forge/conda-forge-repodata-patches) via [`conda-forge/conda-forge-repodata-patches-feedstock`](https://github.com/conda-forge/conda-forge-repodata-patches-feedstock)
+- 🔒 Has access to Azure, Anaconda.org (cf-staging)
+
+#### conda-forge-ci-setup
+
+This special feedstock provides a package that defines the logic to install and configure a common CI setup across providers.
+
+- ⚙️ Deployed in [Anaconda.org](https://anaconda.org/conda-forge/conda-forge-ci-setup) via [`conda-forge/conda-forge-ci-setup-feedstock`](https://github.com/conda-forge/conda-forge-ci-setup-feedstock)
+- 🔒 Has access to Azure, Anaconda.org (cf-staging)
+
+#### regro/cf-graph-countyfair
+
+This is the graph data used by [`autotick-bot`](#autotick-bot).
+
+- ⚙️ Deployed in [Github Actions via `regro/cf-graph-countyfair`](https://github.com/regro/cf-graph-countyfair)
+- ⛓ Needs [`regro/cf-scripts`](#regrocf-scripts), [`conda-forge/conda-forge-pinning-feedstock`](#conda-forge-pinning)
+- 🤖 Uses [`@regro-cf-autotick-bot`](#bot-accounts)
+- 🔒 Has access to Github API
+
+The logic to build the graph is provided by [`cf-scripts`](#regrocf-scripts).
+
+#### regro/conda-suggest-conda-forge
+
+- [`regro/conda-suggest-conda-forge`](https://github.com/regro/conda-suggest-conda-forge) provides [`conda-suggest`](https://github.com/conda-incubator/conda-suggest) files that map executables to package names.
+
+#### docker-images
+
+This repository builds the Docker images used to provide a unified system on all Linux builds.
+
+- ⚙️ Deployed in [`conda-forge/docker-images`](https://github.com/conda-forge/docker-images)
+- 🔒 Has access to [DockerHub](#docker-hub) and [Quay.io](#quay)
+- ⛓ Needed by `staged-recipes`, feedstocks.
+
 ### Smithy
 
 This is the main feedstock creation and maintenance tool.
@@ -112,62 +166,12 @@ Please note that the code logic provided by the app is in the `Smithy` repositor
 
 Bugs or suggestions regarding the service functionality should therefore be opened in `conda-forge/conda-smithy`'s [bug tracker](https://github.com/conda-forge/conda-smithy/issues).
 
-### conda-forge pinning
-
-Hosts the global pinnings for conda-forge, and the ongoing migrations.
-
-- ⚙️ Deployed in [Anaconda.org](https://anaconda.org/conda-forge/conda-forge-pinning) via [`conda-forge/conda-forge-pinning-feedstock`](https://github.com/conda-forge/conda-forge-pinning-feedstock)
-- 🔒 Has access to Azure, Anaconda.org (cf-staging)
-
-Package-wide dependency pins are defined in [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml) in the [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock).
-
-For more information on conda-forge wide package pins, please refer to [Globally pinned packages](pinning_deps.md#globally-pinned-packages).
-
-Please open a [PR](../glossary.md#term-PR) and/or an issue there, if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to [Updating package pins](pinning_deps.md#update-pins).
-
-### conda-forge-repodata-patches
-
-This repository creates the `repodata.json` patches used by the Anaconda.org to amend the metadata coming from the published packages.
-
-- ⚙️ Deployed in [Anaconda.org](https://anaconda.org/conda-forge/conda-forge-repodata-patches) via [`conda-forge/conda-forge-repodata-patches-feedstock`](https://github.com/conda-forge/conda-forge-repodata-patches-feedstock)
-- 🔒 Has access to Azure, Anaconda.org (cf-staging)
-
-### conda-forge-ci-setup
-
-This special feedstock provides a package that defines the logic to install and configure a common CI setup across providers.
-
-- ⚙️ Deployed in [Anaconda.org](https://anaconda.org/conda-forge/conda-forge-ci-setup) via [`conda-forge/conda-forge-ci-setup-feedstock`](https://github.com/conda-forge/conda-forge-ci-setup-feedstock)
-- 🔒 Has access to Azure, Anaconda.org (cf-staging)
-
-### docker-images
-
-This repository builds the Docker images used to provide a unified system on all Linux builds.
-
-- ⚙️ Deployed in [`conda-forge/docker-images`](https://github.com/conda-forge/docker-images)
-- 🔒 Has access to [DockerHub](#docker-hub) and [Quay.io](#quay)
-- ⛓ Needed by `staged-recipes`, feedstocks.
-
 ### regro/cf-scripts
 
 The code and logic behind [`autotick-bot`](#autotick-bot).
 
 - 📜 Source at [`regro/cf-scripts`](https://github.com/regro/cf-scripts)
 - 📖 [Documentation](https://regro.github.io/cf-scripts/)
-
-### regro/cf-graph-countyfair
-
-This is the graph data used by [`autotick-bot`](#autotick-bot).
-
-- ⚙️ Deployed in [Github Actions via `regro/cf-graph-countyfair`](https://github.com/regro/cf-graph-countyfair)
-- ⛓ Needs [`regro/cf-scripts`](#regrocf-scripts), [`conda-forge/conda-forge-pinning-feedstock`](#conda-forge-pinning)
-- 🤖 Uses [`@regro-cf-autotick-bot`](#bot-accounts)
-- 🔒 Has access to Github API
-
-The logic to build the graph is provided by [`cf-scripts`](#regrocf-scripts).
-
-### Others
-
-- [`regro/conda-suggest-conda-forge`](https://github.com/regro/conda-suggest-conda-forge) provides [`conda-suggest`](https://github.com/conda-incubator/conda-suggest) files that map executables to package names.
 
 ### Automated maintenance
 
