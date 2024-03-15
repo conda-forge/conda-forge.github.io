@@ -171,6 +171,54 @@ The logic to build the graph is provided by [`cf-scripts`](#regrocf-scripts).
 
 - [`regro/conda-suggest-conda-forge`](https://github.com/regro/conda-suggest-conda-forge) provides [`conda-suggest`](https://github.com/conda-incubator/conda-suggest) files that map executables to package names.
 
+### Automated maintenance
+
+These components perform actions in automated ways, either triggered by a specific event or continuously as part of a loop.
+
+#### admin-migrations
+
+- ⚙️ Deployed in [Github Actions via `conda-forge/admin-migrations`](https://github.com/conda-forge/admin-migrations)
+- 🤖 Uses [`@conda-forge-curator`](https://github.com/apps/conda-forge-curator)
+- 🔒 Has access to Github API, Anaconda.org (conda-forge and cf-staging), Circle, Travis, Azure
+
+This repository hosts workflows that are running 24/7.
+Its job is to procure an automation loop where some maintenance tasks are added.
+Its main user is the core team.
+
+#### admin-requests
+
+- ⚙️ Deployed in [Github Actions via `conda-forge/admin-requests`](https://github.com/conda-forge/admin-requests)
+- 🤖 Uses [`@conda-forge-curator`](https://github.com/apps/conda-forge-curator)
+- 🔒 Has access to Github API, Anaconda.org (conda-forge and cf-staging), Circle, Travis, Azure
+
+This repository hosts workflows that mainly run when triggered by a user-initiated action.
+This is usually done via a PR that, once approved, is merged and triggers the requested action (mark a package as broken, archive a feedstock, etc).
+
+#### autotick-bot
+
+- ⚙️ Deployed in [`regro/cf-scripts`](https://github.com/regro/cf-scripts)
+- ⛓ Needs [`regro/cf-scripts`](https://github.com/regro/cf-scripts), [`regro/cf-graph-countyfair`](https://github.com/regro/cf-graph-countyfair), [`conda-forge/conda-forge-pinning-feedstock`](https://github.com/conda-forge/conda-forge-pinning-feedstock)
+- 🤖 Uses [`@regro-cf-autotick-bot`](https://github.com/regro-cf-autotick-bot)
+
+:::note
+The older repo [`regro/autotick-bot`](https://github.com/regro/autotick-bot) is no longer in use;
+the bot now runs directly in `regro/cf-scripts`.
+:::
+
+#### webservices
+
+- ⚙️ Deployed in Heroku Dyno (`conda-forge.herokuapp.com`)
+- ⛓ Needs [`conda-forge/conda-forge-webservices`](https://github.com/conda-forge/conda-forge-webservices)
+- 🤖 Uses [`@conda-forge-webservices`](https://github.com/apps/conda-forge-webservices), [`@conda-forge-admin`](https://github.com/conda-forge-admin), [`@conda-forge-linter`](https://github.com/conda-forge-linter)
+- 🔒 Has access to Github API, Anaconda.org (cf-staging and conda-forge), Heroku
+
+This web application powers several services, like:
+
+- the `@conda-forge-admin, please ...` commands
+- the `@conda-forge-linter` bot
+- the `cf-staging` to `conda-forge` validation (plus copy)
+- status monitoring
+
 ## Admin web services
 
 conda-forge is running a webservice on Heroku called [conda-forge-webservices](https://github.com/conda-forge/conda-forge-webservices).
@@ -427,54 +475,6 @@ If this is not done, then the output validation process will block the package f
 uploaded from the new feedstock, by design.
 Once this is done correctly and the package is uploaded,
 you can then request the conda-forge core devs to archive the old feedstock.
-
-## Automated maintenance
-
-These components perform actions in automated ways, either triggered by a specific event or continuously as part of a loop.
-
-### admin-migrations
-
-- ⚙️ Deployed in [Github Actions via `conda-forge/admin-migrations`](https://github.com/conda-forge/admin-migrations)
-- 🤖 Uses [`@conda-forge-curator`](https://github.com/apps/conda-forge-curator)
-- 🔒 Has access to Github API, Anaconda.org (conda-forge and cf-staging), Circle, Travis, Azure
-
-This repository hosts workflows that are running 24/7.
-Its job is to procure an automation loop where some maintenance tasks are added.
-Its main user is the core team.
-
-### admin-requests
-
-- ⚙️ Deployed in [Github Actions via `conda-forge/admin-requests`](https://github.com/conda-forge/admin-requests)
-- 🤖 Uses [`@conda-forge-curator`](https://github.com/apps/conda-forge-curator)
-- 🔒 Has access to Github API, Anaconda.org (conda-forge and cf-staging), Circle, Travis, Azure
-
-This repository hosts workflows that mainly run when triggered by a user-initiated action.
-This is usually done via a PR that, once approved, is merged and triggers the requested action (mark a package as broken, archive a feedstock, etc).
-
-### autotick-bot
-
-- ⚙️ Deployed in [`regro/cf-scripts`](https://github.com/regro/cf-scripts)
-- ⛓ Needs [`regro/cf-scripts`](https://github.com/regro/cf-scripts), [`regro/cf-graph-countyfair`](https://github.com/regro/cf-graph-countyfair), [`conda-forge/conda-forge-pinning-feedstock`](https://github.com/conda-forge/conda-forge-pinning-feedstock)
-- 🤖 Uses [`@regro-cf-autotick-bot`](https://github.com/regro-cf-autotick-bot)
-
-:::note
-The older repo [`regro/autotick-bot`](https://github.com/regro/autotick-bot) is no longer in use;
-the bot now runs directly in `regro/cf-scripts`.
-:::
-
-### webservices
-
-- ⚙️ Deployed in Heroku Dyno (`conda-forge.herokuapp.com`)
-- ⛓ Needs [`conda-forge/conda-forge-webservices`](https://github.com/conda-forge/conda-forge-webservices)
-- 🤖 Uses [`@conda-forge-webservices`](https://github.com/apps/conda-forge-webservices), [`@conda-forge-admin`](https://github.com/conda-forge-admin), [`@conda-forge-linter`](https://github.com/conda-forge-linter)
-- 🔒 Has access to Github API, Anaconda.org (cf-staging and conda-forge), Heroku
-
-This web application powers several services, like:
-
-- the `@conda-forge-admin, please ...` commands
-- the `@conda-forge-linter` bot
-- the `cf-staging` to `conda-forge` validation (plus copy)
-- status monitoring
 
 ## Services & providers
 
