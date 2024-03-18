@@ -498,7 +498,7 @@ requirements:
     - {{ pin_compatible("numpy") }}
 ```
 
-With MPI, openmpi is required for the build platform, but mpich is not required:
+With MPI, openmpi is required for the build platform, but mpich is not required (see [example](https://github.com/conda-forge/mpi4py-feedstock/blob/743d379c4a04/recipe/meta.yaml#L37)):
 
 ```yaml
 requirements:
