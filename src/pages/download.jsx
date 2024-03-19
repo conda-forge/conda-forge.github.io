@@ -10,14 +10,20 @@ export default function Home() {
             title={siteConfig.title}
             description="Download page for the conda-forge installer"
         >
-            <main>
-                <h1 style={{
-                    marginTop: 10, textAlign: "center"
-                }}>
-                    Download the conda-forge Installer
-                </h1>
+            <div className="container margin-vert--lg" >
+                <main>
+                    <h1>
+                        Download the conda-forge Installer
+                    </h1>
+                    <p>
+                        Miniforge is a minimal installer for a conda-forge-based distribution, including conda, mamba, and their dependencies.
+                    </p>
+                    <p>
+                        If more packages are needed, use the <code>conda install</code> or <code>mamba install</code> command to install from the thousands of packages available in the conda-forge distribution.
+                    </p>
                 <Download />
-            </main>
+                </main>
+            </div>
         </Layout>
     );
 }

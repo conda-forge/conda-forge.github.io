@@ -51,15 +51,6 @@ export default function Download() {
   ];
   return (
     <div className={[styles.header, styles.section_padding].join(" ")}>
-        <div className={styles.header_image}>
-            <ThemedImage
-                alt="3D-Anvil illustration for conda-forge"
-                sources={{
-                  light: useBaseUrl("/img/anvil-light.svg"),
-                  dark: useBaseUrl("/img/anvil-dark.svg"),
-                }}
-            />
-        </div>
         <div className={styles.header_content}>
           {downloads.map(({ arch, dark, href, light, os }, index) => (
             <Link to={href} key={index}>
