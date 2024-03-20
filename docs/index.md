@@ -36,6 +36,6 @@ Chances are we have already packaged it for you. You can [search](https://anacon
 
 ## Table of Contents
 
-* [User Documentation](user/index.mdx)
-* [Maintainer Documentation](maintainer/index.mdx)
-* [Glossary](glossary.md)
+- [User Documentation](user/index.mdx)
+- [Maintainer Documentation](maintainer/index.mdx)
+- [Glossary](glossary.md)

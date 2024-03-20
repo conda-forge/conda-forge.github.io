@@ -41,7 +41,6 @@ This team will operate via the following rules:
 - This sub-team will not limit the access by `core` members to any conda-forge resources
   including but not limited to its systems, credentials, keys, or service accounts.
 
-
 ### Members
 
 - Matthew R. Becker <[becker.mr@gmail.com](mailto:becker.mr@gmail.com)>
@@ -276,6 +275,7 @@ is an important part of creating and maintaining a vibrant project.
 The mandate of this subteam is to support and increase the diversity of the conda-forge
 community at all levels.
 As such this group can, but is not limited to:
+
 - provide a place for issues impacting diversity to be heard
 - advocate for underrepresented groups and bring their issues to the attention of core
 - run programs to maintain and grow the community's diversity and inclusiveness

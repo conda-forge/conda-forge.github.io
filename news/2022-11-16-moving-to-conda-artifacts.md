@@ -1,4 +1,4 @@
-# Moving to ``.conda`` Artifacts
+# Moving to `.conda` Artifacts
 
 conda-forge is moving to producing `conda` artifacts in the version 2
 package format (also known as `.conda`). These artifacts allow for more

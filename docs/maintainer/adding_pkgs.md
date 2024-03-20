@@ -10,13 +10,15 @@ title: 'Contributing packages'
 
 The contribution process can be broken down into three steps:
 
-* Step 1. Staging process (add recipe and license).
+- Step 1. Staging process (add recipe and license).
 
   With the help of [the staging process](#creating-recipes), add a package's recipe and license to the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and create a PR.
-* Step 2. Post staging process.
+
+- Step 2. Post staging process.
 
   Once your PR, has been merged, take a look at our [Post staging process](#post-staging-process) to know what follows.
-* Step 3. Maintaining the package.
+
+- Step 3. Maintaining the package.
 
   Contributing a package to `conda-forge` makes you the maintainer of that package.
   Learn more about the [roles of a maintainer](#maintainer-role).
@@ -46,23 +48,24 @@ There are, currently, three ways to generate a recipe:
    Then if necessary, you can make manual edits to the recipe.
 2. If it is a python package, you can generate the recipe as a starting point with `grayskull`.
 
-    :::note
+   :::note
 
-    [Grayskull](https://github.com/conda-incubator/grayskull) is an automatic conda recipe generator. The goal of this project is to generate concise recipes
-    for conda-forge and eventually replace conda skeleton. Presently, Grayskull can generate recipes for Python packages available on PyPI and also those not published on PyPI and only available as GitHub repositories.
+   [Grayskull](https://github.com/conda-incubator/grayskull) is an automatic conda recipe generator. The goal of this project is to generate concise recipes
+   for conda-forge and eventually replace conda skeleton. Presently, Grayskull can generate recipes for Python packages available on PyPI and also those not published on PyPI and only available as GitHub repositories.
 
-    Installation and usage of `grayskull`:
+   Installation and usage of `grayskull`:
 
-    - Create a new environment using : `conda create --name MY_ENV`. Replace `MY_ENV` with the environment name.
-    - Activate this new environment : `conda activate MY_ENV`.
-    - Run `conda install -c conda-forge grayskull` to install `grayskull`.
-    - Followed by `grayskull pypi --strict-conda-forge YOUR_PACKAGE_NAME` to generate the recipe. Replace `YOUR_PACKAGE_NAME` with the package name.
+   - Create a new environment using : `conda create --name MY_ENV`. Replace `MY_ENV` with the environment name.
+   - Activate this new environment : `conda activate MY_ENV`.
+   - Run `conda install -c conda-forge grayskull` to install `grayskull`.
+   - Followed by `grayskull pypi --strict-conda-forge YOUR_PACKAGE_NAME` to generate the recipe. Replace `YOUR_PACKAGE_NAME` with the package name.
 
-    :::
+   :::
 
-    You do *not* necessarily have to use `grayskull`, and the recipes produced by `grayskull` might need to be reviewed and edited.
-    Read more about `grayskull` and how to use it [here](https://github.com/conda-incubator/grayskull#introduction).
-1. If it's none of the above, generate a recipe with the help of [the example recipe](https://github.com/conda-forge/staged-recipes/tree/master/recipes/example) in the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and modify it as necessary.
+   You do _not_ necessarily have to use `grayskull`, and the recipes produced by `grayskull` might need to be reviewed and edited.
+   Read more about `grayskull` and how to use it [here](https://github.com/conda-incubator/grayskull#introduction).
+
+3. If it's none of the above, generate a recipe with the help of [the example recipe](https://github.com/conda-forge/staged-recipes/tree/master/recipes/example) in the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and modify it as necessary.
 
 Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
 
@@ -100,7 +103,7 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
    can directly copy the SHA256.
 9. Be sure to fill in the `test` section. The simplest test will simply
    test that the module can be imported, as described in the example.
-10. Remove all irrelevant comments in the `meta.yaml`  file.
+10. Remove all irrelevant comments in the `meta.yaml` file.
 
 :::tip
 
@@ -116,12 +119,12 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 
 #### Checklist
 
-* Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache-2.0 rather than APACHE 2.0). Using SPDX identifiers for license field is recommended. (see [SPDX Identifiers and Expressions](#spdx))
-* Ensure that you have included a license file if your license requires one – most do. (see [here](https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55))
-* In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
-* Make sure that all tests pass successfully at least on your development machine.
-* Recommended: run the test locally on your source code to ensure the recipe works locally (see  [Running tests locally for staged recipes](#staging-test-locally)).
-* Make sure that your changes do not interfere with other recipes that are in the `recipes` folder (e.g. the `example` recipe).
+- Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache-2.0 rather than APACHE 2.0). Using SPDX identifiers for license field is recommended. (see [SPDX Identifiers and Expressions](#spdx))
+- Ensure that you have included a license file if your license requires one – most do. (see [here](https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55))
+- In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
+- Make sure that all tests pass successfully at least on your development machine.
+- Recommended: run the test locally on your source code to ensure the recipe works locally (see [Running tests locally for staged recipes](#staging-test-locally)).
+- Make sure that your changes do not interfere with other recipes that are in the `recipes` folder (e.g. the `example` recipe).
 
 <a id="feedback-and-revision"></a>
 
@@ -145,10 +148,10 @@ If you have questions or have not heard back for a while, you can notify us by i
 
 ## Post staging process
 
-* After the PR is merged, our [CI](../glossary.md#term-CI) services will create a new git repo automatically. For example, the recipe for a package named `pydstool` will be moved to a new repository [https://github.com/conda-forge/pydstool-feedstock](https://github.com/conda-forge/pydstool-feedstock). This process is automated through a CI job on the `conda-forge/staged-recipes` repo. It sometimes fails due to API rate limits and will automatically retry itself. If your feedstock has not been created after a day or so, please get in touch with the `conda-forge/core` team for help.
-* CI services will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to [https://anaconda.org/conda-forge](https://anaconda.org/conda-forge)
-* If this is your first contribution, you will be added to the conda-forge [team](https://github.com/orgs/conda-forge/people) and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.
-* If you want to make a change to the recipe, send a [PR](../glossary.md#term-PR) to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.
+- After the PR is merged, our [CI](../glossary.md#term-CI) services will create a new git repo automatically. For example, the recipe for a package named `pydstool` will be moved to a new repository [https://github.com/conda-forge/pydstool-feedstock](https://github.com/conda-forge/pydstool-feedstock). This process is automated through a CI job on the `conda-forge/staged-recipes` repo. It sometimes fails due to API rate limits and will automatically retry itself. If your feedstock has not been created after a day or so, please get in touch with the `conda-forge/core` team for help.
+- CI services will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to [https://anaconda.org/conda-forge](https://anaconda.org/conda-forge)
+- If this is your first contribution, you will be added to the conda-forge [team](https://github.com/orgs/conda-forge/people) and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.
+- If you want to make a change to the recipe, send a [PR](../glossary.md#term-PR) to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.
 
 <a id="feedstock-repository-structure"></a>
 
@@ -290,7 +293,7 @@ Packages should be built from tarballs using the `url` key, not from repositorie
 There are several reasons behind this rule:
 
 - Repositories are usually larger than tarballs, draining shared CI time and bandwidth
-- Repositories are not checksummed.  Thus, using a tarball has a
+- Repositories are not checksummed. Thus, using a tarball has a
   stronger guarantee that the download that is obtained to build from is
   in fact the intended package.
 - On some systems, it is possible to not have permission to remove a repo once it is created.
@@ -543,7 +546,7 @@ In this example, `awesome-db` cannot be installed together with `amazing-db` as 
 All recipes need tests. Here are some tips, tricks, and justifications.
 How you should test depends on the type of package (python, c-lib,
 command-line tool, … ), and what tests are available for that package.
-But every conda package must have at least *some* tests.
+But every conda package must have at least _some_ tests.
 
 <a id="simple-existence-tests"></a>
 
@@ -798,7 +801,7 @@ test:
 
 :::note
 
-We recommend including a library loading check *before* the `testthat`
+We recommend including a library loading check _before_ the `testthat`
 tests.
 
 :::
@@ -859,7 +862,7 @@ the `PackageName` here refers to the R library name.
 
 Note that conda-build runs the tests in an isolated environment after installing
 the package – thus, at this point it does not have access to the original source
-tarball.  This is to ensure that the test environment is as close as possible to
+tarball. This is to ensure that the test environment is as close as possible to
 what an end-user will see.
 
 This makes it very hard to run tests that are not installed with the package.
@@ -902,7 +905,7 @@ where `<VARIANT>` is one of the file names in the `.ci_support/` directory, e.g.
 
 Sometimes upstream maintainers do not include a license file in their tarball despite being demanded by the license.
 
-If this is the case, you can add the license to the `recipe` directory (here named `LICENSE.txt`)  and reference it inside the meta.yaml:
+If this is the case, you can add the license to the `recipe` directory (here named `LICENSE.txt`) and reference it inside the meta.yaml:
 
 ```yaml
 about:
@@ -1099,6 +1102,7 @@ These expressions are written in [Jinja](http://jinja.pocoo.org/) syntax.
 Jinja expressions serve following purposes in the meta.yaml:
 
 - They allow defining variables to avoid code duplication. Using a variable for the `version` allows changing the version only once with every update.
+
   ```yaml
   {% set version = "3.7.3" %}
 
@@ -1110,7 +1114,9 @@ Jinja expressions serve following purposes in the meta.yaml:
     url: https://www.python.org/ftp/python/{{ version }}/Python-{{ version }}.tar.xz
     sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
   ```
+
 - They can call [conda-build functions](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#conda-build-specific-jinja2-functions) for automatic code generation. Examples are the compilers, cdt packages or the `pin_compatible` function.
+
   ```yaml
   requirements:
     build:
@@ -1121,6 +1127,7 @@ Jinja expressions serve following purposes in the meta.yaml:
   ```
 
   or
+
   ```yaml
   requirements:
     build:

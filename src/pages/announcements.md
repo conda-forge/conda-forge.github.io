@@ -1,10 +1,10 @@
 <!--
-This page is just a landing page for folks trying to reach 
+This page is just a landing page for folks trying to reach
 the old /docs/user/announcements.html page. Instead of
 redirecting that page directly to /news, we have this static
 one to list the pre-2024 announcements, along with their old
-#anchor-links. This way, old links that point to 
-/docs/user/announcements.html#some-announcement are still 
+#anchor-links. This way, old links that point to
+/docs/user/announcements.html#some-announcement are still
 valid and useful.
 -->
 
@@ -89,7 +89,7 @@ Please go to [News](/news/) for the latest ones! The RSS feed is available at [/
 
 [Read more](/news/2022/03/28/pypy-38-39-migration/).
 
-### 2022-03-06: Travis CI Usage Deprecated for win_*, osx_*, and linux_64 Platforms {#travis-ci-usage-deprecated-for-win-osx-and-linux-64-platforms}
+### 2022-03-06: Travis CI Usage Deprecated for win*\*, osx*\*, and linux_64 Platforms {#travis-ci-usage-deprecated-for-win-osx-and-linux-64-platforms}
 
 [Read more](/news/2022/03/06/travis-ci-usage-deprecated-for-win-osx-and-linux64-platforms/).
 

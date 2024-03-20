@@ -20,7 +20,7 @@ We have an overview and step-by-step instruction on contributing packages in the
 
 ## The feedstock for a package from conda-forge is updated, how long should it take to update on Anaconda Cloud?
 
-It depends on the queue, but a good rule of thumb is to wait at least 30 mins - 2 hours.  If you don't see it after 24 hrs, please raise an issue.
+It depends on the queue, but a good rule of thumb is to wait at least 30 mins - 2 hours. If you don't see it after 24 hrs, please raise an issue.
 
 <a id="faq-report-issue"></a>
 
@@ -101,24 +101,24 @@ are a telltale sign that you are lacking compilers.
 ## Why don't the C/C++ compilers automatically know how to find libraries installed by conda?
 
 All of our toolchains are built as cross-compilers (even when they are built to run on the same
-architecture that they are targeting).  We do this because it makes it possible to then install
-them anywhere like any other conda package.  As a result, the builtin search path for the
+architecture that they are targeting). We do this because it makes it possible to then install
+them anywhere like any other conda package. As a result, the builtin search path for the
 compilers only contains the sysroot they were built with. The compiler binary names are also
-‘prefixed' with more complete information about the architecture and [ABI](../glossary.md#term-ABI) they target.  So, instead
+‘prefixed' with more complete information about the architecture and [ABI](../glossary.md#term-ABI) they target. So, instead
 of `gcc`, the actual binary will be named something like `x86_64-conda-linux-gnu-cc`.
 
 The conda-forge infrastructure provides [activation scripts](../maintainer/adding_pkgs.md#activate-scripts) which are run when
-you `conda activate` an environment that contains the compiler toolchain.  Those scripts set
+you `conda activate` an environment that contains the compiler toolchain. Those scripts set
 many environment variables that are typically used by GNU `autotools` and `make` in the
-`standard` (i.e. builtin) build rules.  For example, you would see the variable `CC` set to
-the long compiler name `x86_64-conda-linux-gnu-cc`.  The activation scripts also set a
+`standard` (i.e. builtin) build rules. For example, you would see the variable `CC` set to
+the long compiler name `x86_64-conda-linux-gnu-cc`. The activation scripts also set a
 `CMAKE_ARGS` variable with many arguments the conda-forge community finds helpful for
-configuring cmake build flows.  Of particular note, the activation scripts add the
+configuring cmake build flows. Of particular note, the activation scripts add the
 `CONDA_PREFIX/include` and `CONDA_PREFIX/lib` paths to the appropriate `FLAGS` environment
 variables (`CLAGS`, `CPPFLAGS`, `LDFLAGS`, etc) so that many build systems will pick them up correctly.
 
 What do you do if you have custom `FLAGS` that your project requires for it's build or you can't
-build with some of the flags supplied by conda-forge?  What if you are building something that
+build with some of the flags supplied by conda-forge? What if you are building something that
 is setup for cross-compiling and expects `CC` to contain the name of the target toolchain but
 wants to be able to build some things for the build-host to use during the build by just calling
 `gcc`?
@@ -128,9 +128,9 @@ create symlinks of the short names (like `gcc`) to the actual toolchain binary n
 `x86_64-conda-linux-gnu-cc`) for toolchains that are targeting the system they are running on.
 
 A new optional package called `conda-gcc-specs` can also be installed that adds:
-<br />* `-include $CONDA_PREFIX/include` to compile commands
-      * `-rpath $CONDA_PREFIX/lib -rpath-link $CONDA_PREFIX/lib -disable-new-dtags -L $CONDA_PREFIX/lib` to link
-        commands
+<br />_ `-include $CONDA_PREFIX/include` to compile commands
+_ `-rpath $CONDA_PREFIX/lib -rpath-link $CONDA_PREFIX/lib -disable-new-dtags -L $CONDA_PREFIX/lib` to link
+commands
 
 Using the compiler metapackage with `conda-gcc-specs` you can incude and link libraries installed
 in `CONDA_PREFIX` without having to provide any conda-specific cmdline arguments.
@@ -146,7 +146,7 @@ libraries, otherwise the dependencies betweeen packages quickly become incomplet
 
 However, as an end user, when not building something that will be packaged and distributed via
 conda-forge, you may need to link against libraries on your system instead of libraries in your
-conda environment.  This can be accomplished (for gcc) by passing `-sysroot=/` on the cmdline.
+conda environment. This can be accomplished (for gcc) by passing `-sysroot=/` on the cmdline.
 
 <a id="faq-cuda-compiler-header"></a>
 
@@ -154,7 +154,7 @@ conda environment.  This can be accomplished (for gcc) by passing `-sysroot=/` o
 
 ## How can I compile CUDA (host or device) codes in my environment?
 
-Unfortunately, this is not possible with conda-forge's current infrastructure (`nvcc`, `cudatoolkit`, etc) if there is no local CUDA Toolkit installation. In particular, the `nvcc` package provided on conda-forge is a *wrapper package* that exposes the actual `nvcc` compiler to our CI infrastructure in a `conda`-friendly way; it does not contain the full `nvcc` compiler toolchain. One of the reasons is that CUDA headers like `cuda.h`, `cuda_runtime.h`, etc, which are needed at compile time, are not redistributable according to NVIDIA's EULA. Likewise, the `cudatoolkit` package only contains CUDA runtime libraries and not the compiler toolchain.
+Unfortunately, this is not possible with conda-forge's current infrastructure (`nvcc`, `cudatoolkit`, etc) if there is no local CUDA Toolkit installation. In particular, the `nvcc` package provided on conda-forge is a _wrapper package_ that exposes the actual `nvcc` compiler to our CI infrastructure in a `conda`-friendly way; it does not contain the full `nvcc` compiler toolchain. One of the reasons is that CUDA headers like `cuda.h`, `cuda_runtime.h`, etc, which are needed at compile time, are not redistributable according to NVIDIA's EULA. Likewise, the `cudatoolkit` package only contains CUDA runtime libraries and not the compiler toolchain.
 
 If you need to compile CUDA code, even if it involves only CUDA host APIs, you will still need a valid CUDA Toolkit installed locally and use it. Please refer to [NVCC's documentation](https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html) for the CUDA compiler usage and [CUDA Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html) for general CUDA programming.
 

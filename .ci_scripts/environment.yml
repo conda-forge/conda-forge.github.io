@@ -6,3 +6,4 @@ dependencies:
   - requests
   - pip
   - nodejs 20.*
+  - pre-commit

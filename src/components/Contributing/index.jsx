@@ -37,16 +37,8 @@ const contributing = [
         href: "https://app.element.io/#/room/#conda-forge:matrix.org",
         content: (
             <>
-                Join the{" "}
-                <a
-                    href="https://app.element.io/#/room/#conda-forge:matrix.org"
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    {" "}
-                    conda-forge community{" "}
-                </a>{" "}
-                on Element and reach out for assistance whenever needed.
+                Join the conda-forge community on Element and reach out for{" "}
+                assistance whenever needed.
             </>
         ),
         width: 50,

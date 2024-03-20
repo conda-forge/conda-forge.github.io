@@ -7,6 +7,7 @@ The conda-forge status dashboard is integrated into the Docusaurus application t
 There are 8 informational top-level components in the status dashboard and 1 navigational (table of contents) top-level component:
 
 ### Informational components
+
 - `<ReposAndBots>` – [`repos_and_bots.jsx`](repos_and_bots.jsx)
 - `<CloudServices>` – [`cloud_services.jsx`](cloud_services.jsx)
 - `<CurrentMigrations>` – [`current_migrations.jsx`](current_migrations.jsx)
@@ -18,8 +19,9 @@ There are 8 informational top-level components in the status dashboard and 1 nav
 - `<VersionUpdates>` – [`version_updates.jsx`](version_updates.jsx)
 
 ### Navigational component
+
 - `<TOC>` – [`toc.jsx`](toc.jsx)
 
 ## Status Dashboard conventions
 
-*All* of the API endpoints (whether they are images/badges or REST endpoints serving JSON) are defined in the `urls` dictionary in the [`contants.js`](/src/constants.js) file in the `src` directory.
+_All_ of the API endpoints (whether they are images/badges or REST endpoints serving JSON) are defined in the `urls` dictionary in the [`contants.js`](/src/constants.js) file in the `src` directory.
