@@ -414,7 +414,7 @@ to several complications arising from mixing compiler stacks.
 
 Additionally, there is a possibility to use `clang` as a compiler on Linux & Windows:
 
-- Activation (Linux): https://github.com/conda-forge/clang-compiler-activation-feedstock/
+- Activation (Linux): https://github.com/conda-forge/ctng-compiler-activation-feedstock/
 - Activation (Windows): https://github.com/conda-forge/clang-win-activation-feedstock/
 
 Aside from the main C/C++/Fortran compilers, these are the feedstocks for the other compilers:
