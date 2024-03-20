@@ -21,6 +21,7 @@ While the legacy selectors `py27` and `py36` are still valid, selectors `py37` a
 Please use the new syntax `py==27`, `py==36` and `py==37` to avoid confusion.
 
 :::note[Related links]
+
 - **Selectors in conda-build documentation** ([Preprocessing selectors](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#preprocessing-selectors))
 - **Linter: deprecate the use of py27, py36** ([conda-smithy/#1026](https://github.com/conda-forge/conda-smithy/issues/1026))
 
@@ -60,7 +61,7 @@ Sadly in the Azure Windows images, MSBuild.exe is not correctly setup for CMake 
 
 ## Why does my new version appear on Anaconda Cloud, but is not installable with conda?
 
-For certain, high-traffic channels (main & conda-forge), Anaconda uses a [CDN](https://cloudflare.com/learning/cdn/what-is-a-cdn/) to decrease costs. Therefore, packages will show up on the [Anaconda Cloud](https://anaconda.org) about 10 minutes before they are downloadable via conda.  You can use `conda search <pkg>`  to see if the package is installable, because this command reads from the CDN.
+For certain, high-traffic channels (main & conda-forge), Anaconda uses a [CDN](https://cloudflare.com/learning/cdn/what-is-a-cdn/) to decrease costs. Therefore, packages will show up on the [Anaconda Cloud](https://anaconda.org) about 10 minutes before they are downloadable via conda. You can use `conda search <pkg>` to see if the package is installable, because this command reads from the CDN.
 
 If the CDN sync is not happening timely, please check the [status page](https://conda-forge.org/status/) for the CDN cloning status and see if any problem occurs. If the clone is not sync'ing, you can open a CDN Issue in the [Anaconda Issues repo](https://github.com/ContinuumIO/anaconda-issues).
 
@@ -130,7 +131,7 @@ Error:
 ImportError: libGL.so.1: cannot open shared object file: No such file or directory
 ```
 
-To fix the error, create a [yum_requirements.txt](knowledge_base.md#yum-deps) file and add *mesa-libGL*.
+To fix the error, create a [yum_requirements.txt](knowledge_base.md#yum-deps) file and add _mesa-libGL_.
 
 <a id="mfaq-qt-load-xcb"></a>
 
@@ -162,7 +163,7 @@ build:
 
 ## How can I contact conda-forge/core?
 
-When in an issue or PR, you can contact [conda-forge/core](../orga/governance.md#teams-roles) by simply mentioning `@conda-forge/core` in a comment.
+When in an issue or PR, you can contact [conda-forge/core](/community/governance/#teams-roles) by simply mentioning `@conda-forge/core` in a comment.
 If you don't receive an an answer after a couple of days, feel free to reach out to us via the public [Element](https://app.element.io/#/room/#conda-forge:matrix.org) chatroom.
 
 :::note
@@ -172,7 +173,7 @@ In that case, you can ping core using the bot command [@conda-forge-admin, pleas
 
 :::
 
-In case your issue is longer or you would like to contact us privately, feel free to reach out to us via the options listed at [Getting in Touch](../orga/getting-in-touch.md).
+In case your issue is longer or you would like to contact us privately, feel free to reach out to us via the options listed at [Getting in Touch](/community/getting-in-touch/).
 
 <a id="mfaq-abandoned-feedstock"></a>
 
@@ -180,7 +181,7 @@ In case your issue is longer or you would like to contact us privately, feel fre
 
 ## A feedstock has been abandoned and I would like to take over maintenance.
 
-A  feedstock is generally considered abandoned when the maintainer isn't around anymore and doesn't merge new PRs or answer any issues. If that is the case, you can add yourself to the team by using the [@conda-forge-admin, please add user @username](infrastructure.md#cfa-please-add-user) command. If the maintainer doesn't merge it after roughly a week, [contact conda-forge/core](#mfaq-contact-core) to have it merged. Once added, you have full rights to the feedstock and can continue its maintenance.
+A feedstock is generally considered abandoned when the maintainer isn't around anymore and doesn't merge new PRs or answer any issues. If that is the case, you can add yourself to the team by using the [@conda-forge-admin, please add user @username](infrastructure.md#cfa-please-add-user) command. If the maintainer doesn't merge it after roughly a week, [contact conda-forge/core](#mfaq-contact-core) to have it merged. Once added, you have full rights to the feedstock and can continue its maintenance.
 
 :::note
 

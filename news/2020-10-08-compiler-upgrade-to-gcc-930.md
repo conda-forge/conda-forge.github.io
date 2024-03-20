@@ -1,4 +1,4 @@
-# Compiler Upgrade to ``GCC`` ``9.3.0``
+# Compiler Upgrade to `GCC` `9.3.0`
 
 We will be upgrading all `GCC`-based compilers to version `9.3.0` on all
 platforms. This upgrade will not affect `C` or `C++` code, but will

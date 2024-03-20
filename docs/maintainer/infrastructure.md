@@ -195,7 +195,7 @@ Azure is used to build packages for OSX, Linux (x86_64, native), Linux (ARMv8, e
 The build queue on Azure is substantially larger than on all the other providers.
 Azure builds have a maximum duration of 6 hours.
 
-To see all builds on Azure, visit [https://dev.azure.com/conda-forge/feedstock-builds/_build](https://dev.azure.com/conda-forge/feedstock-builds/_build).
+To see all builds on Azure, visit [https://dev.azure.com/conda-forge/feedstock-builds/\_build](https://dev.azure.com/conda-forge/feedstock-builds/_build).
 
 <a id="restarting-builds"></a>
 
@@ -206,9 +206,9 @@ If that doesn't work, a close/open will kick off a new build. You can also use t
 
 <a id="using-azure-for-everything"></a>
 
-#### Using Azure for *everything*
+#### Using Azure for _everything_
 
-Azure is the default provider for Linux and OSX.  To use Azure for everything, add the following to `conda-forge.yml` in the root
+Azure is the default provider for Linux and OSX. To use Azure for everything, add the following to `conda-forge.yml` in the root
 of the feedstock.
 
 ```yaml
@@ -286,6 +286,7 @@ repo [README.md](https://github.com/conda-forge/webservices-dispatch-action) for
 To skip a CI build for a given commit, put `[ci skip] ***NO_CI***` in the commit message.
 
 :::note[Related links]
+
 - **Abort builds with [skip ci]/etc** [(conda-forge.github.io/#629)](https://github.com/conda-forge/conda-forge.github.io/issues/629)
 - **Skip CI requests** [(staged-recipes/#1148)](https://github.com/conda-forge/staged-recipes/issues/1148)
 
@@ -331,18 +332,18 @@ While we do not have any promises of support for a generation of ABI-compatible
 compilers, we have historically maintained them according to the following (non-binding)
 principles.
 
-* The authoritative source of the current compilers and versions for various languages
+- The authoritative source of the current compilers and versions for various languages
   and platforms is the [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml)
   in the [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock)
   as described in [Globally pinned packages](pinning_deps.md#globally-pinned-packages).
-* We provide no support of any kind in terms of the long-term stability/support of a given compiler generation.
-* We upgrade them in an ad-hoc manner on a periodic basis as we have the time and energy to do so.
+- We provide no support of any kind in terms of the long-term stability/support of a given compiler generation.
+- We upgrade them in an ad-hoc manner on a periodic basis as we have the time and energy to do so.
   Note that because of the way we enforce runtime constraints, these compiler upgrades will not break
   existing packages. However, if you are using the compilers outside of `conda`, then you may find issues.
-* We generally provide notice in the form of an announcement when an ABI-incompatible compiler change is going to happen.
+- We generally provide notice in the form of an announcement when an ABI-incompatible compiler change is going to happen.
   Note that these changes take a bit of time to complete, so you will generally have time
   to prepare should you need to.
-* Some of the criteria we think about when considering a compiler migration include:
+- Some of the criteria we think about when considering a compiler migration include:
   - the degree of disruption to the ecosystem,
   - the amount of work for the `core` team,
   - the amount of time it will cost our (volunteer) feedstock maintainers.
@@ -358,10 +359,10 @@ pinning, and it will slowly roll out to the ecosystem as feedstocks get rerender
 
 For such ABI-compatible upgrades, similar but looser principles apply:
 
-* The pins are similarly defined in the global pinning, see [Globally Pinned Packages](pinning_deps.md#globally-pinned-packages).
-* We provide no support of any kind in terms of the long-term availability of a given compiler version.
-* We generally provide notice in the form of an announcement when a compiler is going to be upgraded.
-* Without promising any timelines, our compilers on Linux and OSX are normally
+- The pins are similarly defined in the global pinning, see [Globally Pinned Packages](pinning_deps.md#globally-pinned-packages).
+- We provide no support of any kind in terms of the long-term availability of a given compiler version.
+- We generally provide notice in the form of an announcement when a compiler is going to be upgraded.
+- Without promising any timelines, our compilers on Linux and OSX are normally
   very recent; on Windows, we generally use the last supported VS version.
 
 Despite the lack of explicit support, we try to keep the compilers in their various versions
@@ -381,15 +382,15 @@ Fortran is considered part of the default, not least because GCC compiles all th
 
 Linux (GCC):
 
-* [C, C++, Fortran] Activation: https://github.com/conda-forge/ctng-compiler-activation-feedstock/
-* [C, C++, Fortran] Implementation: https://github.com/conda-forge/ctng-compilers-feedstock
-* Note that when used in conjunction with CUDA, compiler versions are restricted by the
+- [C, C++, Fortran] Activation: https://github.com/conda-forge/ctng-compiler-activation-feedstock/
+- [C, C++, Fortran] Implementation: https://github.com/conda-forge/ctng-compilers-feedstock
+- Note that when used in conjunction with CUDA, compiler versions are restricted by the
   maximum GCC version supported by nvcc (which is also reflected in the global pinning).
 
 OSX (Clang):
 
-* [C, C++] Activation: https://github.com/conda-forge/clang-compiler-activation-feedstock/
-* [C, C++] Required feedstocks:
+- [C, C++] Activation: https://github.com/conda-forge/clang-compiler-activation-feedstock/
+- [C, C++] Required feedstocks:
   [llvmdev](https://github.com/conda-forge/llvmdev-feedstock),
   [clangdev](https://github.com/conda-forge/clangdev-feedstock),
   [compiler-rt](https://github.com/conda-forge/compiler-rt-feedstock),
@@ -397,14 +398,14 @@ OSX (Clang):
   [openmp](https://github.com/conda-forge/openmp-feedstock),
   [lld](https://github.com/conda-forge/lld-feedstock),
   [cctools](https://github.com/conda-forge/cctools-and-ld64-feedstock)
-* [Fortran] Activation: https://github.com/conda-forge/gfortran_osx-64-feedstock/
-* [Fortran] Implementation: https://github.com/conda-forge/gfortran_impl_osx-64-feedstock/
+- [Fortran] Activation: https://github.com/conda-forge/gfortran_osx-64-feedstock/
+- [Fortran] Implementation: https://github.com/conda-forge/gfortran_impl_osx-64-feedstock/
 
 Windows (MSVC):
 
-* [C, C++] Activation: https://github.com/conda-forge/vc-feedstock
+- [C, C++] Activation: https://github.com/conda-forge/vc-feedstock
   (we cannot redistribute the actual MSVC compilers due to licensing constraints)
-* [Fortran] Activation & Implementation: https://github.com/conda-forge/flang-feedstock
+- [Fortran] Activation & Implementation: https://github.com/conda-forge/flang-feedstock
 
 There exists an alternative, MinGW-based, compiler stack on Windows, which is available
 with a `m2w64_` prefix (e.g. `{{ compiler('m2w64_c') }}`). However, it is falling out
@@ -413,15 +414,15 @@ to several complications arising from mixing compiler stacks.
 
 Additionally, there is a possibility to use `clang` as a compiler on Linux & Windows:
 
-* Activation (Linux): https://github.com/conda-forge/clang-compiler-activation-feedstock/
-* Activation (Windows): https://github.com/conda-forge/clang-win-activation-feedstock/
+- Activation (Linux): https://github.com/conda-forge/clang-compiler-activation-feedstock/
+- Activation (Windows): https://github.com/conda-forge/clang-win-activation-feedstock/
 
 Aside from the main C/C++/Fortran compilers, these are the feedstocks for the other compilers:
 
-* [CUDA] https://github.com/conda-forge/nvcc-feedstock (CUDA infra currently being overhauled)
-* [Rust] [Activation](https://github.com/conda-forge/rust-activation-feedstock)
+- [CUDA] https://github.com/conda-forge/nvcc-feedstock (CUDA infra currently being overhauled)
+- [Rust] [Activation](https://github.com/conda-forge/rust-activation-feedstock)
   and [Implementation](https://github.com/conda-forge/rust-feedstock)
-* [Go] [Activation](https://github.com/conda-forge/go-activation-feedstock)
+- [Go] [Activation](https://github.com/conda-forge/go-activation-feedstock)
   and [Implementation](https://github.com/conda-forge/go-feedstock)
 
 To upgrade the compiler version of our default compilers in the global pinning for

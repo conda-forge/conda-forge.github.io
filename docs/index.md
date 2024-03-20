@@ -25,7 +25,7 @@ Chances are we have already packaged it for you. You can [search](https://anacon
   - Suggest or implement improvements for our [infrastructure](maintainer/infrastructure.md)
   - Help [improve the documentation](user/contributing.md#improve-docs)
   - For a detailed overview please refer to [Becoming involved](user/contributing.md)
-- To see our governance policies, see [Governance](orga/governance.md).
+- To see our governance policies, see [Governance](/community/governance/).
 - If you find bugs, need help, or want to talk to the developers, use our mailing lists or chat rooms:
   - [GitHub issues](https://github.com/conda-forge/conda-forge.github.io/issues)
   - [Element chatroom](https://app.element.io/#/room/#conda-forge:matrix.org)
@@ -36,8 +36,6 @@ Chances are we have already packaged it for you. You can [search](https://anacon
 
 ## Table of Contents
 
-* [User Documentation](user/index.mdx)
-* [Maintainer Documentation](maintainer/index.mdx)
-* [Organisation Documentation](orga/index.mdx)
-* [Miscellaneous](glossary.md)
-* [Contracting Information](contracting/index.md)
+- [User Documentation](user/index.mdx)
+- [Maintainer Documentation](maintainer/index.mdx)
+- [Glossary](glossary.md)

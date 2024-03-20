@@ -1,0 +1,39 @@
+[
+  "index",
+  {
+    "type": "category",
+    "label": "User Documentation",
+    "link": {
+      "type": "doc",
+      "id": "user/index"
+    },
+    "items": [
+      "user/introduction",
+      "user/tipsandtricks",
+      "user/ci-skeleton",
+      "user/faq",
+      "user/contributing",
+      "user/how_to_get_help",
+      "user/talks"
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Maintainer Documentation",
+    "link": {
+      "type": "doc",
+      "id": "maintainer/index"
+    },
+    "items": [
+      "maintainer/infrastructure",
+      "maintainer/guidelines",
+      "maintainer/adding_pkgs",
+      "maintainer/updating_pkgs",
+      "maintainer/pinning_deps",
+      "maintainer/conda_forge_yml",
+      "maintainer/knowledge_base",
+      "maintainer/maintainer_faq"
+    ]
+  },
+  "glossary"
+]
