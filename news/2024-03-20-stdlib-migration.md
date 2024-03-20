@@ -26,21 +26,22 @@ migrations in conda-forge.
 The logic of the piggyback migrator tries to correctly handle most scenarios,
 but it is impossible to cover all corner cases. As for some general rules that
 all feedstock maintainers are free to apply independently:
-  * if a feedstock uses a `- {{ compiler(...) }}` jinja in the build section,
-    add a line with `- {{ stdlib("c") }}` to the build environment.
-  * if a feedstock uses `- sysroot_linux-64 2.17  # [linux64]` (or a variation),
-    remove this line and add the following to your `conda_build_config.yaml`:
-    ```
-    c_stdlib_version:              # [linux]
-      - 2.17                       # [linux]
-    ```
-  * if a feedstock sets `MACOSX_DEPLOYMENT_TARGET` in `conda_build_config.yaml`,
-    for example to 10.13 for `x86_64`, replace that section with the following
-    (note, this does _not_ apply to `MACOSX_SDK_VERSION`!):
-    ```
-    c_stdlib_version:              # [osx and x86_64]
-      - 10.13                      # [osx and x86_64]
-    ```
-    You should then also remove any line involving `__osx` from `meta.yaml`.
+
+- if a feedstock uses a `- {{ compiler(...) }}` jinja in the build section,
+  add a line with `- {{ stdlib("c") }}` to the build environment.
+- if a feedstock uses `- sysroot_linux-64 2.17  # [linux64]` (or a variation),
+  remove this line and add the following to your `conda_build_config.yaml`:
+  ```
+  c_stdlib_version:              # [linux]
+    - 2.17                       # [linux]
+  ```
+- if a feedstock sets `MACOSX_DEPLOYMENT_TARGET` in `conda_build_config.yaml`,
+  for example to 10.13 for `x86_64`, replace that section with the following
+  (note, this does _not_ apply to `MACOSX_SDK_VERSION`!):
+  ```
+  c_stdlib_version:              # [osx and x86_64]
+    - 10.13                      # [osx and x86_64]
+  ```
+  You should then also remove any line involving `__osx` from `meta.yaml`.
 
 For more details, see this [issue](https://github.com/conda-forge/conda-forge.github.io/issues/2102).
