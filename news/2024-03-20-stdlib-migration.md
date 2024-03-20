@@ -1,4 +1,4 @@
-# Upcoming migration for `{{ stdlib("c") }}`
+# Upcoming migration for stdlib("c")
 
 Almost since the inception of conda-forge, the baseline version of our standard
 library ("stdlib") for C has not changed. This library comes with extra
