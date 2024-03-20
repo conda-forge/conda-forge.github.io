@@ -19,7 +19,7 @@ export default function Home() {
                         Miniforge is a minimal installer for a conda-forge-based distribution, including conda, mamba, and their dependencies.
                     </p>
                     <p>
-                        If more packages are needed, use the <code>conda install</code> or <code>mamba install</code> command to install from the thousands of packages available in the conda-forge distribution.
+                        If more packages are needed, use the <code>conda install</code> or <code>mamba install</code> command to install from the thousands of packages available in the conda-forge distribution. Isolated environments can be created with <code>conda create</code> or <code>mamba create</code>.
                     </p>
                 <Download />
                 </main>
