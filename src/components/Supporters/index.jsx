@@ -52,6 +52,13 @@ const infrastructure = [
   //   width: 150,
   // },
   {
+    name: "MetroStar",
+    link: "https://www.metrostar.com/company/",
+    light: "img/supporters/metrostar_light.svg",
+    dark: "img/supporters/metrostar_dark.svg",
+    width: 210,
+  },
+  {
     name: "Oracle Cloud",
     link: "https://www.oracle.com/cloud/",
     light: "img/supporters/oracle_light.svg",
@@ -77,7 +84,7 @@ const infrastructure = [
     link: "https://www.quansight.com/",
     light: "img/supporters/quansight_light.svg",
     dark: "img/supporters/quansight_dark.svg",
-    width: 80,
+    width: 200,
   },
   {
     name: "Travis CI",
