@@ -65,7 +65,7 @@ export default function Download() {
               }
           });
           console.log(latest);
-          if (latest.data ) {
+          if (latest.data) {
               setDescription(latest.data.body);
               setVersion(latest.data.tag_name);
           }
