@@ -419,7 +419,7 @@ Additionally, there is a possibility to use `clang` as a compiler on Linux & Win
 
 Aside from the main C/C++/Fortran compilers, these are the feedstocks for the other compilers:
 
-- [CUDA] https://github.com/conda-forge/nvcc-feedstock (CUDA infra currently being overhauled)
+- [CUDA] [CUDA 12.0+](https://github.com/conda-forge/cuda-nvcc-feedstock) & [CUDA <12](https://github.com/conda-forge/nvcc-feedstock) (legacy)
 - [Rust] [Activation](https://github.com/conda-forge/rust-activation-feedstock)
   and [Implementation](https://github.com/conda-forge/rust-feedstock)
 - [Go] [Activation](https://github.com/conda-forge/go-activation-feedstock)
