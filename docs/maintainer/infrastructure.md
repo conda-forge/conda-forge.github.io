@@ -316,19 +316,26 @@ packages have a so-called [Application Binary Interface](../glossary.md#abi)
 to crashes, miscalculations, etc. Generally speaking, using a consistent compiler
 version greatly reduces the risk of ABI breaks.
 
-In the past, changes in the compiler upgrades in conda-forge sometimes required a
-full rebuild of basically all compiled packages, to avoid breakage between packages
-that have been compiled to different ABIs. Compilers also have different policies in
-this regard: GCC promises to never break ABI, while MSVC changed (=broke) ABI with
-every compiler release (although this is not the case anymore for the `vc14` series
-currently covering VS2015-VS2022).
+Compilers generally strive to maintain ABI-compatibility across versions, meaning that
+combining artefacts for the same target produced by different versions of the same
+compiler will work together without issue. Due to the nature of the ABI (i.e. a vast
+interface between software and hardware, with innumerable corner cases), it still
+happens that unintentional changes for some specific aspect are introduced across
+compiler versions, though in practice this does not lead to wide-spread issues.
 
-While it is likely that large-scale ABI breaks will happen again which require
-a full rebuild of conda-forge (e.g. MSVC is planning a vNext after `vc14`), in recent
-years we have managed to use more targetted rebuilds with less disruptive roll-outs.
+In contrast, when compilers do intentionally change the ABI (as MSVC did with each
+release before the `vc14` series currently covering VS2015-VS2022), _every_ compiled
+package needs to be rebuilt for that new ABI, and cannot be mixed with builds for the
+old ABI. While less likely nowadays, in principle it's also possible that a major
+infrastructural overhaul in the compiler stack similarly forces a complete rebuild.
 
-We keep our policies for full rebuilds in place for the next time it will occur.
-While we do not have any promises of support for a generation of ABI-compatible
+Such large-scale changes -- requiring +/- all of conda-forge to be rebuilt -- take a
+lot of effort, though thankfully, in recent years such full rebuilds have not been
+necessary and we managed to do less disruptive compiler upgrades.
+
+However, large-scale ABI breaks remain a possibility (e.g. MSVC is planning a vNext
+after `vc14`), and so we keep our policies for such a scenario in place.
+While we do not have any formal promises of support for a generation of ABI-compatible
 compilers, we have historically maintained them according to the following (non-binding)
 principles.
 
@@ -354,8 +361,9 @@ does not imply any level of support or stability for the compilers
 that form the given stack.
 
 For the cases that do not require a complete rebuild of conda-forge (i.e. if the ABI
-of a new compiler remains compatible), we can just increase the version in our global
-pinning, and it will slowly roll out to the ecosystem as feedstocks get rerendered.
+of a new compiler remains compatible, up to rare corner cases), we can just increase
+the version in our global pinning, and it will slowly roll out to the ecosystem as
+feedstocks get rerendered.
 
 For such ABI-compatible upgrades, similar but looser principles apply:
 
