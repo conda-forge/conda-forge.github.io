@@ -19,9 +19,8 @@ stdlib versions per feedstock, as well as in our global pinning.
 
 Up until now, the stdlib was handled implicitly as part of the compiler stack.
 In order to allow this transition to happen, we need to introduce this function
-to essentially all compiled (i.e. not pure-Python) packages. This will be done
-in stages, first for a single migration, and then attached to _all_ ongoing
-migrations in conda-forge.
+to essentially all compiled recipes. This will be done in stages, first for a
+single migration, and then attached to _all_ ongoing migrations in conda-forge.
 
 The logic of the piggyback migrator tries to correctly handle most scenarios,
 but it is impossible to cover all corner cases. As for some general rules that
