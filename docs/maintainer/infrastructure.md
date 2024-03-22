@@ -329,7 +329,7 @@ package needs to be rebuilt for that new ABI, and cannot be mixed with builds fo
 old ABI. While less likely nowadays, in principle it's also possible that a major
 infrastructural overhaul in the compiler stack similarly forces a complete rebuild.
 
-Such large-scale changes -- requiring +/- all of conda-forge to be rebuilt -- take a
+Such large-scale changes – requiring +/- all of conda-forge to be rebuilt – take a
 lot of effort, though thankfully, in recent years such full rebuilds have not been
 necessary and we managed to do less disruptive compiler upgrades.
 
