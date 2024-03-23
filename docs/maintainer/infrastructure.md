@@ -513,6 +513,7 @@ Most of them are associated with a feedstock, but there are a few special ones t
 - [`help-python-c`](https://github.com/orgs/conda-forge/teams/help-python-c)
 - [`help-r`](https://github.com/orgs/conda-forge/teams/help-r)
 - [`help-ruby`](https://github.com/orgs/conda-forge/teams/help-ruby)
+- [`help-rust`](https://github.com/orgs/conda-forge/teams/help-rust)
 - [`miniforge`](https://github.com/orgs/conda-forge/teams/miniforge)
 - [`all-members`](https://github.com/orgs/conda-forge/teams/all-members)
 
