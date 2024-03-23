@@ -328,23 +328,6 @@ To see all builds on Azure, visit [https://dev.azure.com/conda-forge/feedstock-b
 Presently Azure does not sync GitHub users. In order to restart a build you can restart it from the GitHub checks interface.
 If that doesn't work, a close/open will kick off a new build. You can also use the web services command `@conda-forge-admin, please restart ci`.
 
-#### Using Azure for _everything_
-
-Azure is the default provider for Linux and OSX. To use Azure for everything, add the following to `conda-forge.yml` in the root
-of the feedstock.
-
-```yaml
-provider:
-  win: azure
-```
-
-:::note
-
-Presently Azure has some issues building libraries using cmake on Windows. Azure does not have a VS2008 installation, so building
-certain very old packages that require VC9 will fail.
-
-:::
-
 ### TravisCI (IBM Power 8+, ARM)
 
 TravisCI is used to build packages for IBM Power 8+ and ARM. After merging a staged-recipes pull request, it might be necessary to
