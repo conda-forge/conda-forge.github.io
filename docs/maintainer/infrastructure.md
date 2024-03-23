@@ -497,6 +497,8 @@ These organizations exist but they are not in active use anymore:
 The `conda-forge` Github organization has thousands of teams.
 Most of them are associated with a feedstock, but there are a few special ones that are not!
 
+<!-- TODO: The following list is prone to getting out of date. We should generate it automatically. -->
+
 - [`Core`](https://github.com/orgs/conda-forge/teams/Core)
 - [`staged-recipes`](https://github.com/orgs/conda-forge/teams/staged-recipes)
 - [`help-c-cpp`](https://github.com/orgs/conda-forge/teams/help-c-cpp)
