@@ -338,11 +338,13 @@ and click the "Sync accounts" button.
 
 TravisCI should only be needed to build recipes on OSX, if there is a strange failure on Azure.
 
-Enable a build by adding the following to `conda-forge.yml` in the root of the feedstock.
+Enable a build by adding the corresponding line from the following to `conda-forge.yml` in the root of the feedstock.
 
 ```yaml
 provider:
   osx: travis
+  linux_ppc64le: travis
+  linux_aarch64: travis
 ```
 
 For IBM Power 8+ and/or ARM builds, add the name of your feedstock to the list [here](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt)
