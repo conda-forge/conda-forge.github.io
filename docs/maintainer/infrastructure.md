@@ -336,7 +336,7 @@ and click the "Sync accounts" button.
 
 #### Enabling Travis
 
-TravisCI should only be needed to build recipes on OSX, if there is a strange failure on Azure.
+TravisCI should only be needed to build recipes on native Linux aarch64 and ppc64le.
 
 Enable a build by adding the corresponding line from the following to `conda-forge.yml` in the root of the feedstock.
 
@@ -472,7 +472,7 @@ uploaded from the new feedstock, by design.
 Once this is done correctly and the package is uploaded,
 you can then request the conda-forge core devs to archive the old feedstock.
 
-## Services & providers
+## Inventory of services & providers
 
 ### Github resources
 
