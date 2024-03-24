@@ -4,10 +4,57 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/news</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Wed, 06 Mar 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 24 Mar 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Upcoming migration for stdlib("c")]]></title>
+            <link>https://conda-forge.org/news/2024/03/24/stdlib-migration</link>
+            <guid>https://conda-forge.org/news/2024/03/24/stdlib-migration</guid>
+            <pubDate>Sun, 24 Mar 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Almost since the inception of conda-forge, the baseline version of our standard]]></description>
+            <content:encoded><![CDATA[<p>Almost since the inception of conda-forge, the baseline version of our standard
+library ("stdlib") for C has not changed. This library comes with extra
+complications because it is an essential part of the operating system, and one
+of the few things that conda/mamba/etc. cannot ship safely.</p>
+<p>As the ecosystem has moved on and many packages are starting to require newer
+baseline versions, we need to follow suit at some point. However, to avoid
+breaking users on older systems, we need to have infrastructure in place that
+allows our packages to have sufficiently accurate metadata, such that conda can
+avoid the installation of a package requiring a newer stdlib on an old system.</p>
+<p>After many discussions across conda-forge stakeholders, the solution we arrived
+at is the introduction of a new Jinja2-function <code>{{ stdlib("c") }}</code>, which
+reflects that a given recipe requires a C stdlib. Making this relationship
+explicit will make it easy to correctly reflect the requirement for newer
+stdlib versions per feedstock, as well as in our global pinning.</p>
+<p>Up until now, the stdlib was handled implicitly as part of the compiler stack.
+In order to allow this transition to happen, we need to introduce this function
+to essentially all compiled recipes. This will be done in stages, first for a
+single migration, and then attached to <em>all</em> ongoing migrations in conda-forge.</p>
+<p>The logic of the piggyback migrator tries to correctly handle most scenarios,
+but it is impossible to cover all corner cases. As for some general rules that
+all feedstock maintainers are free to apply independently:</p>
+<ul>
+<li>if a feedstock uses a <code>- {{ compiler(...) }}</code> jinja in the build section,
+add a line with <code>- {{ stdlib("c") }}</code> to the build environment.</li>
+<li>if a feedstock uses <code>- sysroot_linux-64 2.17  # [linux64]</code> (or a variation),
+remove this line and add the following to your <code>conda_build_config.yaml</code>:
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">c_stdlib_version:              # [linux]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  - 2.17                       # [linux]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>if a feedstock sets <code>MACOSX_DEPLOYMENT_TARGET</code> in <code>conda_build_config.yaml</code>,
+for example to 10.13 for <code>x86_64</code>, replace that section with the following
+(note, this does <em>not</em> apply to <code>MACOSX_SDK_VERSION</code>!):
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">c_stdlib_version:              # [osx and x86_64]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  - 10.13                      # [osx and x86_64]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>In <code>meta.yaml</code>, you can then remove any variations of <code>- __glibc &gt;=2.17</code> or
+<code>- __osx &gt;={{ MACOSX_DEPLOYMENT_TARGET }}  # [osx and x86_64]</code>, as this will
+henceforth be handled through <code>- {{ stdlib("c") }}</code>.</li>
+</ul>
+<p>As these mechanisms begin rolling out, we will also update the maintainer
+documentation in the conda-forge knowledge base. For more details, see this
+<a href="https://github.com/conda-forge/conda-forge.github.io/issues/2102" target="_blank" rel="noopener noreferrer">issue</a>.</p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Dropping CUDA 11.2 on 2024 April 22]]></title>
             <link>https://conda-forge.org/news/2024/03/06/dropping-cuda-112</link>
@@ -327,21 +374,6 @@ queues</a>.
 These platforms currently include <code>ppc64le</code>, <code>aarch64</code> and <code>s390x</code>.</p>
 <p>Rerendering will raise an error if Travis CI is used for a non-partner
 queue platform in the conda-forge GitHub organization.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Default branch migration from master to main]]></title>
-            <link>https://conda-forge.org/news/2022/02/13/default-branch-migration-from-master-to-main</link>
-            <guid>https://conda-forge.org/news/2022/02/13/default-branch-migration-from-master-to-main</guid>
-            <pubDate>Sun, 13 Feb 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[We will be migrating the default branches of all feedstocks and other]]></description>
-            <content:encoded><![CDATA[<p>We will be migrating the default branches of all feedstocks and other
-conda-forge repos from <code>master</code> to <code>main</code>. We do expect some minor
-hiccups while this migration is going on. You will need to change to the
-<code>main</code> branch from <code>master</code> on any local clones via the following git
-commands:</p>
-<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">git branch -m master main</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">git fetch origin</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">git branch -u origin/main main</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">git remote set-head origin -a</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>If you encounter any problems, please comment on this Github
-<a href="https://github.com/conda-forge/conda-forge.github.io/issues/1162" target="_blank" rel="noopener noreferrer">issue</a>.</p>]]></content:encoded>
         </item>
     </channel>
 </rss>

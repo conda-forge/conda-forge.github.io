@@ -363,17 +363,6 @@
       "title": "BotConfigInspectionChoice",
       "type": "string"
     },
-    "BotConfigSkipRenderChoices": {
-      "enum": [
-        ".gitignore",
-        ".gitattributes",
-        "README.md",
-        "LICENSE.txt",
-        ".github/workflows"
-      ],
-      "title": "BotConfigSkipRenderChoices",
-      "type": "string"
-    },
     "BotConfigVersionUpdates": {
       "additionalProperties": false,
       "description": "This dictates the behavior of the conda-forge auto-tick bot for version\nupdates",
@@ -620,6 +609,33 @@
           "default": true,
           "description": "Whether to cancel jobs in the same build if one fails.",
           "title": "Cancel In Progress"
+        },
+        "free_disk_space": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/$defs/Nullable"
+            },
+            {
+              "items": {
+                "enum": [
+                  "apt",
+                  "cache",
+                  "docker"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": false,
+          "description": "Free up disk space before running the Docker container for building on Linux.\nThe following components can be cleaned up: `apt`, `cache`, `docker`.\nWhen set to `true`, only `apt` and `cache` are cleaned up.\nSet it to the full list to clean up all components.",
+          "title": "Free Disk Space"
         },
         "max_parallel": {
           "anyOf": [
@@ -1837,6 +1853,9 @@
     "noarch_platforms": {
       "anyOf": [
         {
+          "$ref": "#/$defs/Platforms"
+        },
+        {
           "items": {
             "$ref": "#/$defs/Platforms"
           },
@@ -1903,6 +1922,9 @@
     "remote_ci_setup": {
       "anyOf": [
         {
+          "type": "string"
+        },
+        {
           "items": {
             "type": "string"
           },
@@ -1934,7 +1956,7 @@
       "anyOf": [
         {
           "items": {
-            "$ref": "#/$defs/BotConfigSkipRenderChoices"
+            "type": "string"
           },
           "type": "array"
         },
@@ -1942,7 +1964,7 @@
           "type": "null"
         }
       ],
-      "description": "This option specifies a list of files which `conda smithy` will skip rendering.\nThis is useful for files that are not templates, but are still in the recipe\ndirectory. The default value is an empty list [ ], which will consider that\nall files can be rendered. For example, if you want to skip rendering\nthe .gitignore and LICENSE.txt files, you can add the following:\n\n```yaml\nskip_render:\n    - .gitignore\n    - LICENSE.txt\n```",
+      "description": "This option specifies a list of files which `conda smithy` will skip rendering.\nThis is useful for files that are not templates, but are still in the recipe\ndirectory. The default value is an empty list `[]`, which will consider that\nall files can be rendered. For example, if you want to skip rendering\nthe `.gitignore` and `LICENSE.txt` files, you can add the following:\n\n```yaml\nskip_render:\n    - .gitignore\n    - LICENSE.txt\n```",
       "title": "Skip Render"
     },
     "templates": {
