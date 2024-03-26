@@ -50,12 +50,11 @@ export default function Download() {
           os: "Windows",
       }
   ];
-  const [description, setDescription] = useState(null);
   const [version, setVersion] = useState(null);
 
   useEffect(() => {
-      async function getDescription() {
-          setDescription(null);
+      async function getVersion() {
+          setVersion(null);
           const octokit = new Octokit({});
           const latest = await octokit.request('GET /repos/conda-forge/miniforge/releases/latest', {
               owner: 'conda-forge',
@@ -66,11 +65,10 @@ export default function Download() {
           });
           console.log(latest);
           if (latest.data) {
-              setDescription(latest.data.body);
               setVersion(latest.data.tag_name);
           }
       }
-      getDescription();
+      getVersion();
   }, [])
 
   return (
@@ -78,9 +76,6 @@ export default function Download() {
         <h2>
             Miniforge Latest Release (Version {version})
         </h2>
-        <p>
-            This version includes: {description}.
-        </p>
         <div className={[styles.header, styles.section_padding].join(" ")}>
           <div className={styles.header_content}>
            {downloads.map(({ arch, dark, href, light, os }, index) => (
