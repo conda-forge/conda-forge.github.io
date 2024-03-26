@@ -176,9 +176,25 @@ function Graph(props) {
   const onError = (error) => setState(error);
   return (
     <div>
-      {error ?
-        `Graph is unavailable.` :
-        <SVG onError={onError} src={url} />}
+      <p style={{textAlign: "center"}}>
+        <a href={url} target="blank" rel="noopener noreferrer">
+          <code>{props.children}.svg</code>
+        </a>
+      </p>
+      {
+        error ?
+        <p style={{textAlign: "center"}}>
+          Graph is unavailable.
+        </p> :
+        <div style={{ overflowX: "scroll" }}>
+          <SVG 
+            onError={onError} 
+            src={url}
+            title={props.children}
+            description={`Migration graph for ${props.children}`}
+          />
+        </div>
+      }
     </div>
   );
 }
