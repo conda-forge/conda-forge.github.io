@@ -104,7 +104,7 @@ export default function Stats() {
             </div>
             <div className={styles.conda_forge_video}>
                 <iframe
-                    src="https://www.youtube.com/embed/EWh-BtdYE7M"
+                    src="https://www.youtube-nocookie.com/embed/EWh-BtdYE7M"
                     title="Episode 23: conda-forge - Open Source Directions hosted By Quansight"
                     style={{ border: 0 }}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
