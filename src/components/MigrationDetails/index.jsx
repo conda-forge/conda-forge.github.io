@@ -187,8 +187,8 @@ function Graph(props) {
           Graph is unavailable.
         </p> :
         <div style={{ overflowX: "scroll" }}>
-          <SVG 
-            onError={onError} 
+          <SVG
+            onError={onError}
             src={url}
             title={props.children}
             description={`Migration graph for ${props.children}`}
