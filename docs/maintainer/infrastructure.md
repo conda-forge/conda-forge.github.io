@@ -216,7 +216,7 @@ the bot now runs directly in `regro/cf-scripts`.
 
 - ⚙️ Deployed in Heroku Dyno (`conda-forge.herokuapp.com`)
 - ⛓ Needs [`conda-forge/conda-forge-webservices`](https://github.com/conda-forge/conda-forge-webservices)
-- 🤖 Uses [`@conda-forge-webservices`](https://github.com/apps/conda-forge-webservices), [`@conda-forge-admin`](https://github.com/conda-forge-admin), [`@conda-forge-linter`](https://github.com/conda-forge-linter)
+- 🤖 Uses [`@conda-forge-webservices`](https://github.com/apps/conda-forge-webservices), [`@conda-forge-admin`](https://github.com/conda-forge-admin)
 - 🔒 Has access to Github API, Anaconda.org (cf-staging and conda-forge), Heroku
 
 This web application powers several services, like:
