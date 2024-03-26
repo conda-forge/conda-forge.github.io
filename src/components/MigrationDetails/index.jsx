@@ -186,7 +186,7 @@ function Graph(props) {
         <p style={{textAlign: "center"}}>
           Graph is unavailable.
         </p> :
-        <div style={{ overflowX: "scroll" }}>
+        <div style={{ overflowX: "auto" }}>
           <SVG
             onError={onError}
             src={url}
