@@ -524,18 +524,18 @@ Most of them are associated with a feedstock, but there are a few special ones t
 #### Bot accounts
 
 - [`conda-forge-admin`](https://github.com/conda-forge-admin)
-- [`conda-forge-bot`](https://github.com/conda-forge-bot)
-- [`conda-forge-coordinator`](https://github.com/conda-forge-coordinator)
 - [`conda-forge-daemon`](https://github.com/conda-forge-daemon)
 - [`conda-forge-linter`](https://github.com/conda-forge-linter)
-- [`conda-forge-manager`](https://github.com/conda-forge-manager)
-- [`conda-forge-status`](https://github.com/conda-forge-status)
 - [`regro-cf-autotick-bot`](https://github.com/regro-cf-autotick-bot)
 
 :::info
 These accounts exist but are not in active usage anymore:
 
 - [`conda-forge-drone-ci`](https://github.com/conda-forge-drone-ci)
+- [`conda-forge-bot`](https://github.com/conda-forge-bot)
+- [`conda-forge-coordinator`](https://github.com/conda-forge-coordinator)
+- [`conda-forge-manager`](https://github.com/conda-forge-manager)
+- [`conda-forge-status`](https://github.com/conda-forge-status)
 
 :::
 
