@@ -514,6 +514,7 @@ Most of them are associated with a feedstock, but there are a few special ones t
 - [`help-rust`](https://github.com/orgs/conda-forge/teams/help-rust)
 - [`miniforge`](https://github.com/orgs/conda-forge/teams/miniforge)
 - [`all-members`](https://github.com/orgs/conda-forge/teams/all-members)
+- [`bot`](https://github.com/orgs/conda-forge/teams/bot)
 
 #### Configuration
 
