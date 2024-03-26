@@ -115,10 +115,6 @@ This is the graph data used by [`autotick-bot`](#autotick-bot).
 
 The logic to build the graph is provided by [`cf-scripts`](#regrocf-scripts).
 
-#### regro/conda-suggest-conda-forge
-
-- [`regro/conda-suggest-conda-forge`](https://github.com/regro/conda-suggest-conda-forge) provides [`conda-suggest`](https://github.com/conda-incubator/conda-suggest) files that map executables to package names.
-
 #### docker-images
 
 This repository builds the Docker images used to provide a unified system on all Linux builds.
