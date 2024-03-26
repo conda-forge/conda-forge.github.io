@@ -1,8 +1,9 @@
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import Link from "@docusaurus/Link";
 import ThemedImage from "@theme/ThemedImage";
-import React from "react";
+import React, { setState, useState, useEffect } from "react";
 import styles from "./styles.module.css";
+import { Octokit } from "octokit";
 
 export default function Download() {
   const downloads = [
@@ -49,41 +50,63 @@ export default function Download() {
           os: "Windows",
       }
   ];
+  const [description, setDescription] = useState(null);
+  const [version, setVersion] = useState(null);
+
+  useEffect(() => {
+      async function getDescription() {
+          setDescription(null);
+          const octokit = new Octokit({});
+          const latest = await octokit.request('GET /repos/conda-forge/miniforge/releases/latest', {
+              owner: 'conda-forge',
+              repo: 'miniforge',
+              headers: {
+                  'X-GitHub-Api-Version': '2022-11-28'
+              }
+          });
+          console.log(latest);
+          if (latest.data) {
+              setDescription(latest.data.body);
+              setVersion(latest.data.tag_name);
+          }
+      }
+      getDescription();
+  }, [])
+
   return (
-    <div className={[styles.header, styles.section_padding].join(" ")}>
-        <div className={styles.header_image}>
-            <ThemedImage
-                alt="3D-Anvil illustration for conda-forge"
-                sources={{
-                  light: useBaseUrl("/img/anvil-light.svg"),
-                  dark: useBaseUrl("/img/anvil-dark.svg"),
-                }}
-            />
-        </div>
-        <div className={styles.header_content}>
-          {downloads.map(({ arch, dark, href, light, os }, index) => (
-            <Link to={href} key={index}>
-                <div className={styles.cardWrapper}>
-                  <div className={styles.card}>
-                    <ThemedImage
-                      className={styles.os_image}
-                      alt={`${os} logo`}
-                      title={`Download miniforge installer for ${os} ${arch}`}
-                      sources={{
-                        dark: useBaseUrl(`${dark}`),
-                        light: useBaseUrl(`${light}`),
-                      }}
-                      height={75}
-                      style={{ paddingRight: 20 }}
-                  />
-                  <div>
-                      <p className={styles.os}>{os}</p>
-                      <code className={styles.arch}>{arch}</code>
-                  </div>
-                  </div>
-                </div>
-            </Link>
-          ))}
+    <div>
+        <h2>
+            Miniforge Latest Release (Version {version})
+        </h2>
+        <p>
+            This version includes: {description}.
+        </p>
+        <div className={[styles.header, styles.section_padding].join(" ")}>
+          <div className={styles.header_content}>
+           {downloads.map(({ arch, dark, href, light, os }, index) => (
+             <Link to={href} key={index}>
+                 <div className={styles.cardWrapper}>
+                   <div className={styles.card}>
+                     <ThemedImage
+                       className={styles.os_image}
+                       alt={`${os} logo`}
+                       title={`Download miniforge installer for ${os} ${arch}`}
+                       sources={{
+                         dark: useBaseUrl(`${dark}`),
+                         light: useBaseUrl(`${light}`),
+                       }}
+                       height={75}
+                       style={{ paddingRight: 20 }}
+                   />
+                   <div>
+                       <p className={styles.os}>{os}</p>
+                       <code className={styles.arch}>{arch}</code>
+                   </div>
+                   </div>
+                 </div>
+             </Link>
+           ))}
+          </div>
         </div>
     </div>
   );
