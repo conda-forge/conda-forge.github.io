@@ -1402,12 +1402,13 @@ can be controlled with `run_constrained`, even for packages not available on all
 
 Currently available packages:
 
-| Name               | Available on:     | Empty on:    |
-| ------------------ | ----------------- | ------------ |
-| dataclasses        | python >=3.6,<3.7 | python >=3.7 |
-| enum34             | python =2.7       | python >=3.4 |
-| typing             |                   | python >=3   |
-| pywin32-on-windows | windows           | unix         |
+| Name               | Available on:      | Empty on:     |
+| ------------------ | ------------------ | ------------- |
+| backports.strenum  | python >=3.8,<3.11 | python >=3.12 |
+| dataclasses        | python >=3.6,<3.7  | python >=3.7  |
+| enum34             | python =2.7        | python >=3.4  |
+| pywin32-on-windows | windows            | unix          |
+| typing             |                    | python >=3    |
 
 <a id="knowledge-all-installs"></a>
 
