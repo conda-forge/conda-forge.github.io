@@ -1,5 +1,5 @@
 ---
-title: 'Talks and resources about conda-forge'
+title: 'Talks and resources'
 ---
 
 <a id="talks"></a>
