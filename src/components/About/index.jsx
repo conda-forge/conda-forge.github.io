@@ -91,26 +91,6 @@ export default function Stats() {
                     ))}
                 </div>
             </div>
-            <div className={styles.about_video_description}>
-                <p>
-                    Learn more about conda-forge by reading our{" "}
-                    <Link to="/docs/">docs</Link> or watching the following
-                    episode of{" "}
-                    <Link to="https://www.quansight.com/open-source-directions">
-                        Open Source Directions
-                    </Link>
-                    .
-                </p>
-            </div>
-            <div className={styles.conda_forge_video}>
-                <iframe
-                    src="https://www.youtube-nocookie.com/embed/EWh-BtdYE7M"
-                    title="Episode 23: conda-forge - Open Source Directions hosted By Quansight"
-                    style={{ border: 0 }}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                ></iframe>
-            </div>
         </div>
     );
 }
