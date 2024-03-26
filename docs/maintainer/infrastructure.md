@@ -135,6 +135,7 @@ This is the main feedstock creation and maintenance tool.
 - 📜 Source at [`conda-forge/conda-smithy`](https://github.com/conda-forge/conda-smithy)
 - 📦 Packaged at [`conda-forge/conda-smithy-feedstock`](https://github.com/conda-forge/conda-smithy-feedstock)
 - 📖 [Documentation](https://github.com/conda-forge/conda-smithy/blob/main/README.md)
+- 📖 [conda-forge.yml Documentation](https://conda-forge.org/docs/maintainer/conda_forge_yml/)
 
 Most of its usage is automated by our infrastructure:
 
