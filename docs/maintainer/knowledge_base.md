@@ -498,6 +498,26 @@ requirements:
     - {{ pin_compatible("numpy") }}
 ```
 
+With MPI, openmpi is required for the build platform as the compiler wrappers are binaries, but mpich is not required as the compiler wrappers are scripts (see [example](https://github.com/conda-forge/mpi4py-feedstock/blob/743d379c4a04/recipe/meta.yaml#L37)):
+
+```yaml
+requirements:
+  build:
+    - {{ mpi }}                             # [build_platform != target_platform and mpi == "openmpi"]
+  host:
+    - {{ mpi }}
+  run:
+    - {{ mpi }}
+```
+
+In the build script, openmpi compiler wrappers can use host libraries by setting the environmental variable `OPAL_PREFIX` to `$PREFIX`.
+
+```sh
+if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" && "${mpi}" == "openmpi" ]]; then
+  export OPAL_PREFIX="$PREFIX"
+fi
+```
+
 There are more variations of this approach in the wild. So this is not meant to be exhaustive,
 but merely to provide a starting point with some guidelines. Please look at [other recipes for more examples](https://github.com/search?q=org%3Aconda-forge+path%3Arecipe%2Fmeta.yaml+%22%5Bbuild_platform+%21%3D+target_platform%5D%22&type=code).
 
