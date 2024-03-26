@@ -51,7 +51,7 @@ Additional workflows help users set up their recipes correctly. They react to ev
 
 External services connect to `staged-recipes` too:
 
-- The `@conda-forge-linter` bot (deployed at [`webservices`](#webservices)) will lint and provide hints in PRs based on the contents of the recipe.
+- The `@conda-forge-admin` bot (deployed at [`webservices`](#webservices)) will lint and provide hints in PRs based on the contents of the recipe.
 
 ### Website
 
@@ -143,7 +143,7 @@ This is the main feedstock creation and maintenance tool.
 Most of its usage is automated by our infrastructure:
 
 - Feedstock creation and services registration at [`staged-recipes`](#staged-recipes)
-- Regeneration (rerendering), linting and hinting in PRs done by `conda-forge-linter` on [`webservices`](#web-services)
+- Regeneration (rerendering), linting and hinting in PRs done by `conda-forge-admin` on [`webservices`](#web-services)
 
 However, you can also use it locally or on your forge-like deployments. For local debugging, you will find these commands useful:
 
@@ -202,7 +202,7 @@ This repository hosts workflows that mainly run when triggered by a user-initiat
 This is usually done via a PR that, once approved, is merged and triggers the requested action (mark a package as broken, archive a feedstock, etc).
 
 It also does the job of creating new feedstocks for recipes that have been merged in [`conda-forge/staged-recipes`](#staged-recipes).
-The [`create_feedstocks` workflow](https://github.com/conda-forge/admin-requests/blob/main/.github/workflows/create_feedstocks.yml) runs every 10 minutes to create the new feedstock repositories on the `conda-forge` organization.
+The [`create_feedstocks` workflow](https://github.com/conda-forge/admin-requests/blob/main/.github/workflows/create_feedstocks.yml) runs several times per hour to create the new feedstock repositories on the `conda-forge` organization.
 The core logic is defined in the Python script [`.github/workflows/scripts/create_feedstocks.py`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/scripts/create_feedstocks.py).
 
 #### autotick-bot
