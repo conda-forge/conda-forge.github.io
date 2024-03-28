@@ -15,7 +15,7 @@ sidebar_position: 27
 
 ## ABI
 
-**A**pplication **B**inary **I**nterface. ABI is a document that comprehensively defines the binary system interface between applications and the operating system on which they run. [Learn More](https://en.wikipedia.org/wiki/Application_binary_interface).
+**A**pplication **B**inary **I**nterface. ABI is a document that comprehensively defines the binary system interface between applications and the operating system on which they run. [Learn More at Wikipedia](https://en.wikipedia.org/wiki/Application_binary_interface) or [pypackaging-native](https://pypackaging-native.github.io/background/binary_interface).
 
 <a id="term-CDT"></a>
 
