@@ -556,7 +556,6 @@ These apps exist but are not in active usage anymore:
 
 - [`beckermr/turnstyle-python`](https://github.com/beckermr/turnstyle-python): Prevents multiple CI jobs from running in parallel to avoid race conditions.
 - [`conda-forge/automerge-action`](https://github.com/conda-forge/automerge-action)
-- [`conda-forge/github-app-token`](https://github.com/conda-forge/github-app-token) (fork)
 - [`conda-forge/webservices-dispatch-action`](https://github.com/conda-forge/webservices-dispatch-action)
 
 ### Continuous integration
