@@ -3,9 +3,10 @@ authors:
   - core
 tags: [security]
 ---
+
 # About the `xz` backdoor
 
-On March 29th, 2024, at 18:07 UTC, the core team learnt about the [recently disclosed  `xz` backdoor](https://www.openwall.com/lists/oss-security/2024/03/29/4), now labeled as [`CVE-2024-3094`](https://nvd.nist.gov/vuln/detail/CVE-2024-3094).
+On March 29th, 2024, at 18:07 UTC, the core team learnt about the [recently disclosed `xz` backdoor](https://www.openwall.com/lists/oss-security/2024/03/29/4), now labeled as [`CVE-2024-3094`](https://nvd.nist.gov/vuln/detail/CVE-2024-3094).
 
 To the best of our knowledge, conda-forge's artifacts for `xz` are _not_ affected.
 
