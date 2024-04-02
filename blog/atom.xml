@@ -2,11 +2,36 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/blog</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2023-07-13T00:00:00.000Z</updated>
+    <updated>2024-04-02T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/blog"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[About the xz backdoor]]></title>
+        <id>https://conda-forge.org/blog/2024/04/02/xz-backdoor</id>
+        <link href="https://conda-forge.org/blog/2024/04/02/xz-backdoor"/>
+        <updated>2024-04-02T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[On March 29th, 2024, at 18:07 UTC, the core team learnt about the recently disclosed xz backdoor, now labeled as CVE-2024-3094.]]></summary>
+        <content type="html"><![CDATA[<p>On March 29th, 2024, at 18:07 UTC, the core team learnt about the <a href="https://www.openwall.com/lists/oss-security/2024/03/29/4" target="_blank" rel="noopener noreferrer">recently disclosed <code>xz</code> backdoor</a>, now labeled as <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-3094" target="_blank" rel="noopener noreferrer"><code>CVE-2024-3094</code></a>.</p>
+<p>To the best of our knowledge, conda-forge's artifacts for <code>xz</code> are <em>not</em> affected.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="our-response">Our response<a href="https://conda-forge.org/blog/2024/04/02/xz-backdoor#our-response" class="hash-link" aria-label="Direct link to Our response" title="Direct link to Our response">​</a></h2>
+<p>We immediately checked which <code>xz</code> artifacts had been published in our channel:</p>
+<ul>
+<li>Our latest build for <code>xz</code> (recipe source available in the <a href="https://github.com/conda-forge/xz-feedstock/blob/main/recipe/meta.yaml" target="_blank" rel="noopener noreferrer"><code>xz-feedstock</code></a>) is for version <code>5.2.9</code> and was uploaded on 2022-12-08. See artifacts in <a href="https://anaconda.org/conda-forge/xz/files" target="_blank" rel="noopener noreferrer">anaconda.org</a>.</li>
+<li>The backdoored versions of <code>xz</code> belong to the <code>5.6.x</code> series.</li>
+</ul>
+<p>We are monitoring the situation develop and will update this announcement accordingly if needed.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="closing-thoughts">Closing thoughts<a href="https://conda-forge.org/blog/2024/04/02/xz-backdoor#closing-thoughts" class="hash-link" aria-label="Direct link to Closing thoughts" title="Direct link to Closing thoughts">​</a></h2>
+<p>We, the conda-forge core dev team, want to thank everyone for their patience and support as we have responded to the various security incidents and bugs detailed above. It goes without saying that the public nature of conda-forge's infrastructure carries risks. On the other hand, by being public, anyone can look and verify our artifact builds. Security for conda-forge is about reducing risk, and we will continue to do our best.</p>
+<p>As a reminder, we do not recommend that you use conda-forge in environments with sensitive information. conda-forge's software is built by our users and the core dev team cannot verify or guarantee that this software is not malicious or has not been tampered with.</p>
+<p>Our best defense against security incidents in conda-forge is you! Our feedstock maintainers are in the best position to notice incidents and issues. Please responsibly report anything you find to us at <a href="mailto:condaforge+security@gmail.com" target="_blank" rel="noopener noreferrer">condaforge+security@gmail.com</a> or using the process described in our <a href="https://github.com/conda-forge/conda-forge.github.io/security/policy" target="_blank" rel="noopener noreferrer">Security policy</a>.</p>]]></content>
+        <author>
+            <name>conda-forge/core</name>
+            <uri>https://github.com/orgs/conda-forge/teams/core</uri>
+        </author>
+        <category label="security" term="security"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Security updates to our installers]]></title>
         <id>https://conda-forge.org/blog/2023/07/13/installer-security-fixes</id>
