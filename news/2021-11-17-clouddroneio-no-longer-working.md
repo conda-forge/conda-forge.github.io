@@ -1,4 +1,4 @@
-# ``cloud.drone.io`` no longer working
+# `cloud.drone.io` no longer working
 
 The `cloud.drone.io` service we use for `aarch64` builds is no longer
 accepting our API requests for triggering builds. We have been in

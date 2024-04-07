@@ -14,10 +14,10 @@ REPO_CONTENTS = "https://api.github.com/repos/conda-forge/cfep/contents/"
 TITLE_PATTERN = "<td>\s*Title\s*</td><td>\s*(.*)\s*</td>"
 STATUS_PATTERN = "<td>\s*Status\s*</td><td>\s*(.*)\s*</td>"
 REPO_DIR = Path(__file__).parents[1].absolute()
-CFEP_INDEX_MD_TMPL = REPO_DIR / "docs" / "orga" / "cfep-index.md.tmpl"
-CFEP_INDEX_MD = REPO_DIR / "docs" / "orga" / "cfep-index.md"
-GOVERNANCE_MD_TMPL = REPO_DIR / "docs" / "orga" / "governance.md.tmpl"
-GOVERNANCE_MD = REPO_DIR / "docs" / "orga" / "governance.md"
+CFEP_INDEX_MD_TMPL = REPO_DIR / "community" / "cfep-index.md.tmpl"
+CFEP_INDEX_MD = REPO_DIR / "community" / "cfep-index.md"
+GOVERNANCE_MD_TMPL = REPO_DIR / "community" / "governance.md.tmpl"
+GOVERNANCE_MD = REPO_DIR / "community" / "governance.md"
 CORE_CSV = REPO_DIR / "src" / "core.csv"
 EMERITUS_CSV = REPO_DIR / "src" / "emeritus.csv"
 
@@ -102,10 +102,7 @@ def get_cfeps():
 def write_cfep_index():
     contents = CFEP_INDEX_MD_TMPL.read_text()
     md_links = [f"- {cfep.md_link()}" for cfep in get_cfeps()]
-    contents = contents.replace(
-        "{{ cfep_list }}",
-        "\n".join(md_links)
-    )
+    contents = contents.replace("{{ cfep_list }}", "\n".join(md_links))
     CFEP_INDEX_MD.write_text(contents)
 
 
@@ -115,20 +112,16 @@ def _get_formatted_names(path_file):
         sorted_csv = sorted(dict_csv, key=lambda d: d["name"])
     return "\n".join(
         f"- [{m['name']} @{m['github_username']}]"
-        f"(https://github.com/{m['github_username']})" 
+        f"(https://github.com/{m['github_username']})"
         for m in sorted_csv
     )
 
 
 def write_core_members():
     contents = GOVERNANCE_MD_TMPL.read_text()
+    contents = contents.replace("{{ core_members }}", _get_formatted_names(CORE_CSV))
     contents = contents.replace(
-        "{{ core_members }}",
-        _get_formatted_names(CORE_CSV)
-    )
-    contents = contents.replace(
-        "{{ emeritus_members }}",
-        _get_formatted_names(EMERITUS_CSV)
+        "{{ emeritus_members }}", _get_formatted_names(EMERITUS_CSV)
     )
     GOVERNANCE_MD.write_text(contents)
 

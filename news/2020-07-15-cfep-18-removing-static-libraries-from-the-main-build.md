@@ -1,4 +1,4 @@
-# ``CFEP-18:`` Removing static libraries from the main build
+# `CFEP-18:` Removing static libraries from the main build
 
 With [CFEP-18](https://github.com/conda-forge/cfep/blob/main/cfep-18.md)
 we now have a policy on how to deal with static packages. The most

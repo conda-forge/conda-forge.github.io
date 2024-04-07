@@ -25,7 +25,7 @@ The `ci-skeleton` command helps you get started by preparing a repository
 to have the proper structure such that the `rerender` command will correctly
 add the CI configurations. Let's see an example!
 
-Suppose you have a repository for a project called `myproj`.  In the
+Suppose you have a repository for a project called `myproj`. In the
 root level of the repository, you can run the following command:
 
 ```bash
@@ -57,7 +57,7 @@ CI configuration by re-running the rerender command above. Happy testing!
 ```
 
 As you can see, this generates and updates a few important files.
-The first file it creates is the `conda-forge.yml` file.  This is
+The first file it creates is the `conda-forge.yml` file. This is
 specifically constructed to tell `conda smithy rerender` that we are
 not running `myproj` CI as a regular feedstock. The `.gitignore` is
 modified to not accidentally add unwanted conda-smithy temporary files
@@ -151,7 +151,7 @@ test:
 ```
 
 This recipe is configured to correctly grab the source code and the version
-information from git.  It also stubs out adding any test files that you might
+information from git. It also stubs out adding any test files that you might
 want to have `conda-build` use when it runs the test suite.
 
 :::note
@@ -184,7 +184,7 @@ Just run the following commands:
 
 ### 3. Register with the CI providers
 
-This is important!  If you haven't done so already, you'll need to go
+This is important! If you haven't done so already, you'll need to go
 to the CI providers (Travis, Circle, Azure, etc.) and enable CI
 to for your repository. Each CI provider that you use will have
 documentation on how to get set up with them.
@@ -196,7 +196,7 @@ documentation on how to get set up with them.
 Last, but certainly not least, we need to generate the CI configuration
 scripts! This is based on the content of the recipe as well as the
 provider selections made in the `conda-forge.yml` file. (Please
-refer to [these docs](../maintainer/conda_forge_yml.md#provider) for a complete list of CI providers.)
+refer to [these docs](../maintainer/conda_forge_yml.mdx#provider) for a complete list of CI providers.)
 
 In order to generate the CI configuration files, run:
 
@@ -223,4 +223,4 @@ You just need to repeat step 4, above:
 ```
 
 This will generate and replace the CI configuration files for the
-current time and state of the recipe.  It is just that easy!
+current time and state of the recipe. It is just that easy!

@@ -104,7 +104,7 @@ In general, it is not necessary to split up packages. At conda-forge, we only ad
 :::
 
 The global pins and `run_exports` are two sides of the same coin.
-If there is an ABI break, as determined by the `run_exports`, then the global pins *may* need to be updated. It is possible that conda-forge skips that ABI.
+If there is an ABI break, as determined by the `run_exports`, then the global pins _may_ need to be updated. It is possible that conda-forge skips that ABI.
 Once the pins are updated, via a migration yaml, then all the packages that are linked are rebuilt.
 
 <a id="update-pins"></a>
