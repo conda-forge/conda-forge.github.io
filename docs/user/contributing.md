@@ -23,7 +23,7 @@ We encourage you to contribute to conda-forge. You can do so in several ways:
 
 The conda-forge website is version-controlled in the
 [conda-forge.github.io repository](https://github.com/conda-forge/conda-forge.github.io) on GitHub.
-It is built with [Docusaurus](https://docusaurus.io). 
+It is built with [Docusaurus](https://docusaurus.io).
 
 ### Website repository structure
 
@@ -56,7 +56,6 @@ Read more about in the ["MDX and React" docs from Docusaurus](https://docusaurus
 - These rely on [`plugin-content-pages`](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-pages).
 - They can be simple Markdown pages or more elaborate React applications.
 - Find them under `/src/pages`. MDX and JSX pages will usually call components defined in `/src/components`.
-
 
 ### Editing the documentation directly through Github
 
