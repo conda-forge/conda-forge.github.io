@@ -32,8 +32,8 @@ The new website has been rewritten using the [Docusaurus](https://docusaurus.io/
 
 - Learn how to use and maintain packages from conda-forge in the [main documentation section](/docs).
 - Read about how our community is set up in the [Community section](/community)
-- The most recent changes to our infrastructure will be announced in [News](/news). You can also subscribe to the [RSS feed](/news/rss.xml) and browse the [archive](/news/archive/).
-- Important information about the ecosystem is discussed in the [Blog](/blog). You can also subscribe to the [RSS feed](/blog/rss.xml) and browse the [archive](/blog/archive/). The posts are sometimes categorized with [tags](/blog/tags/) too.
+- The most recent changes to our infrastructure will be announced in [News](/news). You can also subscribe to the [RSS feed](pathname:///news/rss.xml) and browse the [archive](/news/archive/).
+- Important information about the ecosystem is discussed in the [Blog](/blog). You can also subscribe to the [RSS feed](pathname:///blog/rss.xml) and browse the [archive](/blog/archive/). The posts are sometimes categorized with [tags](/blog/tags/) too.
 - Use the search bar to locate any document in the website! It should be smart enough to remember the content you need more often. Use the <kbd>Cmd/Ctrl</kbd>+<kbd>K</kbd> shortcut for faster access.
 - The [Status dashboard](/status) will inform you about the latest incidents and ongoing migrations. Each migration has now a permalink you can explore and share!
 - The [Packages](/packages) section will help you find all the packages in conda-forge. If you don't type anything in the search bar, it will list the last 100 uploads to the Anaconda.org channel. The metadata link in each row will take you to the [`conda-metadata-app` dashboard](https://conda-metadata-app.streamlit.app/).
