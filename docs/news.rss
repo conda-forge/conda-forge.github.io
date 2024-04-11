@@ -51,7 +51,7 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-to-help-and-contribute">How to help and contribute<a href="https://conda-forge.org/news/2024/04/09/new-website#how-to-help-and-contribute" class="hash-link" aria-label="Direct link to How to help and contribute" title="Direct link to How to help and contribute">​</a></h2>
 <p>We have changed a lot of things, so there's a chance we missed something somewhere. If you have suggestions or errors to report, please let us know in the <a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer">website issue tracker</a>. Feel free to check the <a href="https://conda-forge.org/docs/user/contributing/#improve-the-website">documentation contribution guidelines</a> too.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="acknowledgements">Acknowledgements<a href="https://conda-forge.org/news/2024/04/09/new-website#acknowledgements" class="hash-link" aria-label="Direct link to Acknowledgements" title="Direct link to Acknowledgements">​</a></h2>
-<p>This revamp was a months-long effort (read ). The core team would like to take a moment to thank to all the contributors that made it possible (in alphabetical order): Afshin Darian, Asmit Malakannawar, Gabriela Vives, Isabela Presedo-Floyd, Klaus Zimmermann, Tania Allard.</p>]]></content:encoded>
+<p>This revamp was a months-long effort. The core team would like to take a moment to thank to all the contributors that made it possible (in alphabetical order): Afshin Darian, Asmit Malakannawar, Gabriela Vives, Isabela Presedo-Floyd, Klaus Zimmermann, Tania Allard.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Upcoming migration for stdlib("c")]]></title>
