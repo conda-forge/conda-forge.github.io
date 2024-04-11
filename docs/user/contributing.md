@@ -15,20 +15,47 @@ We encourage you to contribute to conda-forge. You can do so in several ways:
 - [Contribute new packages](../maintainer/adding_pkgs.md).
 - Help update and [maintain packages](../maintainer/updating_pkgs.md).
 - Suggest or implement improvements for our [infrastructure](../maintainer/infrastructure.md).
-- Help [improve the documentation](#improve-docs).
+- Help [improve the website and documentation](#improve-the-website).
 
 <a id="improve-docs"></a>
 
-<a id="improve-the-documentation"></a>
+## Improve the website
 
-## Improve the documentation
+The conda-forge website is version-controlled in the
+[conda-forge.github.io repository](https://github.com/conda-forge/conda-forge.github.io) on GitHub.
+It is built with [Docusaurus](https://docusaurus.io).
 
-The conda-forge documentation is version-controlled in the
-[conda-forge.github.io repository](https://github.com/conda-forge/conda-forge.github.io) on GitHub. The source
-text is stored in [the `docs/` subdirectory](https://github.com/conda-forge/conda-forge.github.io/tree/main/docs of this repository and
-is formatted using [Docusaurus' Markdown](https://docusaurus.io/docs/markdown-features).
+### Website repository structure
 
-<a id="editing-the-documentation-directly-through-github"></a>
+:::info MD, MDX and JSX
+While most of the content is written with
+[Docusaurus' Markdown](https://docusaurus.io/docs/markdown-features) (`*.md` files),
+some specific pages and sections include dynamic blocks (`*.mdx` files) or are straight JSX files
+(`*.jsx` files). This allows you to mix Markdown and JavaScript/React in the same document,
+depending on the file extension. In MDX mode, the parser is much stricter though.
+Read more about in the ["MDX and React" docs from Docusaurus](https://docusaurus.io/docs/markdown-features/react).
+:::
+
+#### Docs & Community
+
+- These two sections use [`plugin-content-docs`](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs).
+- The **Docs** section corresponds to the `/docs` directory. Most of the pages use regular Markdown
+  (`*.md`), but some are dynamic pages with some JavaScript (`*.mdx`).
+- The **Community** section comes from the `/community` directory.
+
+#### News & blog
+
+- These two sections use [`plugin-content-blog`](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog).
+- The **News** section comes from the `/news` directory.
+  It is considered a changelog of important changes in our infrastructure and packages.
+- The **Blog** section corresponds to the `/blog` directory.
+  It usually discusses important updates from the extended ecosystem.
+
+#### Standalone pages and sections
+
+- These rely on [`plugin-content-pages`](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-pages).
+- They can be simple Markdown pages or more elaborate React applications.
+- Find them under `/src/pages`. MDX and JSX pages will usually call components defined in `/src/components`.
 
 ### Editing the documentation directly through Github
 
@@ -38,8 +65,6 @@ will take you directly to a web-based editor for this very webpage. In
 general, the file corresponding to each page in the GitHub browser has a
 little pencil icon in its top-right corner that lets you open it up for editing.
 
-<a id="editing-the-documentation-locally"></a>
-
 ### Editing the documentation locally
 
 We are glad to know that you would like to contribute to the conda-forge documentation.
@@ -48,28 +73,36 @@ If you are new to the conda-forge community, follow the steps below to make your
 1. [Fork](https://help.github.com/articles/fork-a-repo/) the
    [conda-forge.github.io repository](https://github.com/conda-forge/conda-forge.github.io).
 2. Clone this fork onto your local machine:
-   - `git clone https://github.com/<your-username>/conda-forge.github.io.git`
-   - `cd conda-forge.github.io`
+   ```
+   git clone https://github.com/<your-username>/conda-forge.github.io.git
+   cd conda-forge.github.io
+   ```
 3. Create a new branch deriving from `main` to do your work:
-   - `git checkout -b <new-branch-name>`
+   ```
+   git checkout -b <new-branch-name>
+   ```
 4. Run the following commands:
-   - `conda env create -f ./.ci_scripts/environment.yml`
-   - `conda activate conda-forge-docs`
+   ```
+   conda env create -f ./.ci_scripts/environment.yml
+   ```
+   conda activate conda-forge-docs
 5. While writing your new documentation, you can use the live preview mode with:
    - `npm install` to make sure `node_modules` is up-to-date
-   - `npm run start` to start the live preview. Every time you save a file, the changes will be reflected instantaneously!
-6. Once ready, you can also check how the production build would look like with the command:
-   - `.ci_scripts/update_docs`
-     You can check the changes locally by opening the html files in `build/` or running:
-   - `python -m http.server --directory build/`
+   - `npm run start` to start the live preview. Every time you save a file, the changes will be reflected instantaneously.
+6. Once ready, you can also check how the production build would look like with the commands:
+   ```
+   .ci_scripts/update_docs
+   python -m http.server --directory build/
+   ```
 7. Add and commit your changes:
-   - `git add .`
-   - `git commit -m "your commit message"`
+   ```
+   git add .
+   git commit -m "your commit message"
+   ```
 8. Submit a [pull request](https://help.github.com/articles/about-pull-requests/) to the main repository proposing your changes.
+   The CI pipelines will include a PR preview on Netlify.
 
 Happy contributing!
-
-<a id="writing-guidelines"></a>
 
 ### Writing guidelines
 
