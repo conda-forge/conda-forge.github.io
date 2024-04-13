@@ -237,7 +237,7 @@ Bugs or suggestions regarding the service functionality should therefore be open
 The code and logic behind [`autotick-bot`](#autotick-bot).
 
 - 📜 Source at [`regro/cf-scripts`](https://github.com/regro/cf-scripts)
-- 📖 [Documentation](https://regro.github.io/cf-scripts/)
+- 📖 [Documentation](https://github.com/regro/cf-scripts/blob/master/README.md)
 
 ### Automated maintenance
 

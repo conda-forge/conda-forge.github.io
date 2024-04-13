@@ -132,4 +132,4 @@ be added by hand. To do this, follow these steps:
      - Bump the version in meta.yaml to the current date
 
 Details of how the migration yaml is setup are provided in an [example](https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations/example.exyaml)
-and documentation [here](https://regro.github.io/cf-scripts/migrators.html#making-migrators).
+and documentation [here](https://github.com/regro/cf-scripts/blob/master/README.md#making-migrators).

@@ -2269,7 +2269,7 @@ Once the PR is merged, the migration bot goes through the list of feedstocks in 
 When any changes are made in the global pinnings of a package, then the entire stack of the packages that need that package on their `host` section would need to be updated and rebuilt.
 Doing it manually can be quite tedious, and that's where migrations come to help. Migrations automate the process of submitting changes to a feedstock and are an integral part of the `regro-cf-autotick-bot`'s duties.
 
-There are several kinds of migrations, which you can read about in [Making Migrators](https://regro.github.io/cf-scripts/migrators.html). To generate these migrations, you use migrators, which are bots that automatically create pull requests for the affected packages in conda-forge.
+There are several kinds of migrations, which you can read about in [Making Migrators](https://github.com/regro/cf-scripts/blob/master/README.md#making-migrators). To generate these migrations, you use migrators, which are bots that automatically create pull requests for the affected packages in conda-forge.
 To propose a migration in one or more pins, the migrator issues a PR into the pinning feedstock using a yaml file expressing the changes to the global pinning file in the migrations folder.
 Once the PR is merged, the dependency graph is built. After that, the bot walks through the graph, migrates all the nodes (feedstocks) one by one, and issues PRs for those feedstocks.
 
