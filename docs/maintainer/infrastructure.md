@@ -598,6 +598,7 @@ However, in some cases, maintainers might need to perform some actions on the pu
 
 The metadata for `conda` packages is initially contained in each package archive (under `info/`).
 `conda index` iterates over the published `conda` packages, extracts the metadata and consolidates all the found JSON blobs into a single JSON file: `repodata.json`.
+This is where the hashes and file sizes are added too.
 This is the metadata file that the CLI clients download initially to _solve_ the environment.
 
 Since the metadata is external to the package files, some details can be modified without rebuilding packages, which simplifies some maintenance tasks notably.
@@ -605,10 +606,9 @@ Since the metadata is external to the package files, some details can be modifie
 Repodata patches are created in `conda-forge/conda-forge-repodata-patches-feedstock`, which generates (and uploads) a regular `conda` package as a result:
 [`conda-forge-repodata-patches`](https://anaconda.org/conda-forge/conda-forge-repodata-patches/files).
 Each of these timestamped packages contains the patch instructions for each channel subdir on conda-forge.
-The Anaconda infrastructure takes the JSON files from these packages and applies them on top of the vanilla `repodata.json`.
+The Anaconda infrastructure takes the JSON files from these packages and applies them on top of the vanilla `repodata.json` (which remains available for download as `repodata_from_packages.json`).
 
-Since this operates as a regular feedstock for package publication,
-there are no further infrastructural details to cover.
+Since `conda-forge-repodata-patches-feedstock` operates as a regular feedstock for package publication, there are no further infrastructural details to cover.
 
 #### Mark a package as broken
 
@@ -616,6 +616,8 @@ Sometimes a package is faulty in ways that a repodata patch cannot amend (e.g. b
 In these cases, conda-forge does not remove packages from Anaconda.org.
 Instead, it marks them with the `broken` label, which has a special meaning:
 packages labeled as such will be removed from the repodata via automated patches.
+This action is reversible and doesn't change the direct URL of the artifact, which
+can always be downloaded from e.g. a lockfile.
 
 The main repository handling this is `conda-forge/admin-requests`, which features different
 Github Actions workflows running every 15 minutes.
