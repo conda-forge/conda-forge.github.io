@@ -566,21 +566,19 @@ Authenticated services involved:
 ### Package validation and publication
 
 Once built on `main` (or other branches), the conda packages are uploaded to an intermediary channel named `cf-staging`.
-From there, the packages are downloaded by the validation server and, if successful, copied over to `conda-forge` itself.
+From there, our webservices (`conda-forge/conda-forge-webservices`) does the following:
 
-- The validation logic is defined at `conda-forge/artifact-validation`
-- If problematic, the results of the validation are posted as issues in the same repo.
-- This logic runs at `conda-forge/conda-forge-webservices`.
-  This web app also copies the artifacts from `cf-staging` to `conda-forge`.
-- Part of the validation includes checking for cross-package clobbering.
-  The list of authorized feedstocks per package name is maintained at `conda-forge/feedstock-outputs`.
-- Some further analysis might be performed _after_ publication.
+- The logic checks the feedstock token to authenticate a legitimate request.
+- The logic checks that the hash sum of the package on `cf-staging` against 
+  the value computed in the CI to ensure the artifact to be copied is the same.
+- The logic checks that the feedstock is allowed to push the package using 
+  the `conda-forge/feedstock-outputs` repo.
+- If all three checks pass, the webservices copies the artifacts from `cf-staging` to `conda-forge`.
 
 Authenticated services involved:
 
-- Anaconda.org uploads to `conda-forge`
+- Anaconda.org uploads to `conda-forge` and `cf-staging`
 - The `conda-forge-webservices` app deployment itself (currently at Heroku)
-- (?) Post new issues to `conda-forge/artifact-validation`
 
 ### Post-publication
 
