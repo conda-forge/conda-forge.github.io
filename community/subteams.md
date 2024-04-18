@@ -43,7 +43,6 @@ This team will operate via the following rules:
 
 ### Members
 
-- Matthew R. Becker <[becker.mr@gmail.com](mailto:becker.mr@gmail.com)>
 - Christopher J. "CJ" Wright <[cjwright4242@gmail.com](mailto:cjwright4242@gmail.com)>
 - Anthony Scopatz <[scopatz@gmail.com](mailto:scopatz@gmail.com)>
 
