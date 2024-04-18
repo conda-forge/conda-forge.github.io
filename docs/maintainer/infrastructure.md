@@ -741,9 +741,9 @@ Once built on `main` (or other branches), the conda packages are uploaded to an 
 From there, our webservices (`conda-forge/conda-forge-webservices`) does the following:
 
 - The logic checks the feedstock token to authenticate a legitimate request.
-- The logic checks that the hash sum of the package on `cf-staging` against 
+- The logic checks that the hash sum of the package on `cf-staging` against
   the value computed in the CI to ensure the artifact to be copied is the same.
-- The logic checks that the feedstock is allowed to push the package using 
+- The logic checks that the feedstock is allowed to push the package using
   the `conda-forge/feedstock-outputs` repo.
 - If all three checks pass, the webservices copies the artifacts from `cf-staging` to `conda-forge`.
 
