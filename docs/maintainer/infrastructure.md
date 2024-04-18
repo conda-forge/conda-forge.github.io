@@ -490,17 +490,14 @@ On pull requests:
 - The linter is provided by `conda-smithy recipe-lint`, run by `@conda-forge-admin`.
 - Auto-labeling logic, run by Github Actions workflows.
 
-On pushes to `main`:
-
-- Create and initialize the new feedstocks.
-
 Authenticated services involved:
 
 - Github, with permissions for:
-  - Repository creation
+  - PR labeling
 - Azure Pipelines
-- Travis CI
-- Other CI providers?
+
+The conversion of new recipes in `staged-recipes` to their respective feedstocks
+happens in a cron job run by `admin-requests`. For more details see [admin-requests](#admin-requests).
 
 ### Feedstock changes
 
