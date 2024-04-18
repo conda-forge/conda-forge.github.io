@@ -550,6 +550,7 @@ The pipelines can run on several CI providers supported by `conda-smithy`, inclu
 - Travis CI
 - Circle CI
 - Appveyor
+- Self-hosted Github Actions runners
 
 Registration of hooks and triggers is also done by the `conda-smithy` app.
 
