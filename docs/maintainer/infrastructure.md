@@ -468,7 +468,7 @@ uploaded from the new feedstock, by design.
 Once this is done correctly and the package is uploaded,
 you can then request the conda-forge core devs to archive the old feedstock.
 
-## How package building interacts with infrastructure
+## Stages of package building and involved infrastructure
 
 Packages in conda-forge are almost[^manual-builds] always built through CI.
 However, when a new package enters conda-forge for the first time, it does so via a pull request in the [`staged-recipes` repository](#staged-recipes), whereas every new build of the package after that is built in its repository, the so-called feedstock.
