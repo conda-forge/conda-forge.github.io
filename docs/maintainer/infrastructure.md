@@ -586,7 +586,7 @@ Authenticated services involved:
 
 Once uploaded to anaconda.org/conda-forge, packages are not immediately available to CLI clients.
 They have to be replicated in the Content Distribution Network (CDN).
-This step usually takes less than 15 minutes.
+This step should ideally take around 15 minutes. In some circumstances, longer delays are possible. Check [conda-forge.org/status](https://conda-forge.org/status) in case of doubt.
 
 After CDN replication, most packages available on anaconda.org/conda-forge won't suffer any further modifications.
 However, in some cases, maintainers might need to perform some actions on the published packages:
