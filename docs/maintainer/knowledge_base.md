@@ -1875,7 +1875,9 @@ requirements:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
 ```
+
 and add the following to `recipe/conda_build_config.yaml`:
+
 ```yaml
 c_stdlib_version:          # [linux]
   - "2.17"                 # [linux]
