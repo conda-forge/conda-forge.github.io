@@ -9,6 +9,12 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
+            <title><![CDATA[Clang now available as compiler for all platforms]]></title>
+            <link>https://conda-forge.org/news/2024/04/09/clang-everywhere</link>
+            <guid>https://conda-forge.org/news/2024/04/09/clang-everywhere</guid>
+            <pubDate>Tue, 09 Apr 2024 00:00:00 GMT</pubDate>
+        </item>
+        <item>
             <title><![CDATA[The new conda-forge.org]]></title>
             <link>https://conda-forge.org/news/2024/04/09/new-website</link>
             <guid>https://conda-forge.org/news/2024/04/09/new-website</guid>
@@ -140,12 +146,12 @@ before then (if they have not already done so).</p>]]></content:encoded>
             <content:encoded><![CDATA[<p>With the release of <code>rust 1.75</code>, we now require setting the minimal
 <code>MACOSX_DEPLOYMENT_TARGET</code> to at least <code>10.12</code>. You can do this by appending
 <code>recipe/conda_build_config.yaml</code> with the following content:</p>
-<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">MACOSX_DEPLOYMENT_TARGET</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">  </span><span class="token comment" style="color:#999988;font-style:italic"># [osx and x86]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'10.12'</span><span class="token plain">                </span><span class="token comment" style="color:#999988;font-style:italic"># [osx and x86]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>You should also add a run dependency on the respective OSX version:</p>
-<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">run</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> __osx </span><span class="token punctuation" style="color:#393A34">&gt;</span><span class="token plain">=</span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> MACOSX_DEPLOYMENT_TARGET</span><span class="token punctuation" style="color:#393A34">|</span><span class="token plain">default("10.9") </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain">  </span><span class="token comment" style="color:#999988;font-style:italic"># [osx and x86_64]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-<p>The latter is also set automatically via a <code>run_exports</code> of
-the <code>compiler('rust')</code> package, but we add this line if you would increase
-the deployment target later in the feedstock for unrelated reasons.</p>]]></content:encoded>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">c_stdlib_version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">       </span><span class="token comment" style="color:#999988;font-style:italic"># [osx and x86]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'10.12'</span><span class="token plain">             </span><span class="token comment" style="color:#999988;font-style:italic"># [osx and x86]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>and adding <code>{{ stdlib("c") }}</code> as build dependency next to your compiler jinja:</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">build</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> compiler("rust") </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> stdlib("c") </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Note: This entry was update in April 2024 to reflect the new infrastructure for
+setting <code>MACOSX_DEPLOYMENT_TARGET</code>, see
+<a href="https://conda-forge.org/news/2024/03/24/stdlib-migration/" target="_blank" rel="noopener noreferrer">here</a>.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Python 3.12 migration and Python 3.11 by default]]></title>
@@ -389,22 +395,6 @@ using CircleCI and Drone.io for builds of new feedstocks. Existing
 CircleCI builds, if any, should be moved to azure. Existing Drone.io
 builds can be moved to Travis CI or cross-compiled/emulated builds on
 azure.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[PyPy 3.8+3.9 Migration]]></title>
-            <link>https://conda-forge.org/news/2022/03/28/pypy-38-39-migration</link>
-            <guid>https://conda-forge.org/news/2022/03/28/pypy-38-39-migration</guid>
-            <pubDate>Mon, 28 Mar 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[We have begun rolling out packages built for PyPy3.8 and PyPy3.9. This]]></description>
-            <content:encoded><![CDATA[<p>We have begun rolling out packages built for PyPy3.8 and PyPy3.9. This
-work may take a few weeks. See <code>pypy</code> in the user docs for information
-on how to set up a PyPy environment. Please report issues to the PyPy
-developers at <a href="https://foss.heptapod.net/pypy/pypy" target="_blank" rel="noopener noreferrer">https://foss.heptapod.net/pypy/pypy</a>. We are also
-dropping PyPy3.7 in each feedstock as the newer versions of PyPy are
-added. New versions of migrated feedstocks will not be built for PyPy3.7
-and that version of the python interpreter will not be receiving
-updates. As usual, you can track the status of the migration on our
-status page.</p>]]></content:encoded>
         </item>
     </channel>
 </rss>
