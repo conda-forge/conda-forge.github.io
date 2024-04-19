@@ -1727,15 +1727,15 @@ but with `10.9` as the deployment target.
 WARNING: some packages might use features from `10.12` if you do the above due to
 buggy symbol availability checks. For example packages looking for `clock_gettime`
 will see it as it will be a weak symbol, but the package might not have a codepath
-to handle the weak symbol, in that case, you need to update the `MACOSX_DEPLOYMENT_TARGET`
-as described below.
+to handle the weak symbol, in that case, you need to update the `c_stdlib_version`
+(previously `MACOSX_DEPLOYMENT_TARGET`) as described below.
 
 After increasing the SDK version, if you are getting an error that says that a function
 is available only for macOS x.x, then do the following in `recipe/conda_build_config.yaml`,
 
 ```yaml
 # Please consult conda-forge/core before doing this
-MACOSX_DEPLOYMENT_TARGET:  # [osx and x86_64]
+c_stdlib_version:          # [osx and x86_64]
   - "10.12"                # [osx and x86_64]
 MACOSX_SDK_VERSION:        # [osx and x86_64]
   - "10.12"                # [osx and x86_64]
@@ -1745,13 +1745,12 @@ In `recipe/meta.yaml`, add the following to ensure that the user's system is com
 
 ```yaml
 requirements:
-  run:
-    - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.9") }}  # [osx and x86_64]
+  build:
+    - {{ stdlib("c") }}
 ```
 
-Note that this requires `conda>=4.8`. If you want to support older conda versions
-the requirement should be changed from `run` to `run_constrained`. Note that
-`conda<4.8` will ignore the condition if it's a `run_constrained` on `__osx`.
+Note that the run-export on `__osx` that's produced by the stdlib metapackages
+requires `conda>=4.8`.
 
 <a id="newer-c-features-with-old-sdk"></a>
 
@@ -1874,10 +1873,18 @@ put the following in your build section.
 requirements:
   build:
     - {{ compiler('c') }}
-    - sysroot_linux-64 2.17  # [linux64]
+    - {{ stdlib('c') }}
+```
+and add the following to `recipe/conda_build_config.yaml`:
+```yaml
+c_stdlib_version:          # [linux]
+  - "2.17"                 # [linux]
 ```
 
-You also need to use a newer docker image by setting the following in the `conda-forge.yml`
+This covers the headers/library present at build-time, and will also create
+a corresponding run-export on the `__glibc` virtual package.
+
+You may also need to use a newer docker image by setting the following in the `conda-forge.yml`
 of your recipe and rerendering.
 
 ```yaml
