@@ -25,7 +25,7 @@ That is between the payer and payee to hammer out on their own.
 
 Services offered: Core Library Development, Open Source Consulting, Rapid application development, AI/ML applications, Big Data Visualization, Packaging, Migration
 
-Contact Info: [sales@anaconda.com](mailto:sales@anaconda.com) ;  [anaconda.com/professional-services](https://www.anaconda.com/professional-services)
+Contact Info: [sales@anaconda.com](mailto:sales@anaconda.com) ; [anaconda.com/professional-services](https://www.anaconda.com/professional-services)
 
 Background / Description: Anaconda is the original creator of Conda and the original host of conda-forge, and we are happy to work on applying these and other open-source tools to solve your own specific challenges. Anaconda's open-source professionals are the experts at identifying the most appropriate OSS tools, adapting them to your particular situation, and extending or augmenting them to solve new and bigger problems. We have specialists in reproducible science, working with petabyte-scale datasets using python compilation and distributed computation, adapting AI techniques to your particular problems, visualizing even the largest datasets in any web browser, working efficiently with datasets in any format or location, and adding browser-based interactivity to any workflow.
 
