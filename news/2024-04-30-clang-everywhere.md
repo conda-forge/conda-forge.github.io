@@ -4,6 +4,7 @@ Our compiler stack per platform generally uses the "default" compiler for that
 platform, see e.g. [here](https://conda-forge.org/docs/maintainer/infrastructure/#compilers-and-runtimes).
 
 In practice, this meant that
+
 ```
 c_compiler:
   - gcc         # [linux]
@@ -14,6 +15,7 @@ cxx_compiler:
   - clangxx     # [osx]
   - vs2019      # [win]
 ```
+
 was the only possible choice for C/C++ compilers.
 
 Recently, we finished adding preliminary support `clang` / `clangxx` as
@@ -23,6 +25,7 @@ the default compilers on feedstocks unless there are compelling reasons.
 
 In any case, it is now possible to use the following configuration in
 `recipe/conda_build_config.yaml`:
+
 ```
 # please consult @conda-forge/core before doing this
 c_compiler:
