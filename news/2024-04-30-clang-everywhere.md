@@ -5,7 +5,7 @@ platform, see e.g. [here](https://conda-forge.org/docs/maintainer/infrastructure
 
 In practice, this meant that
 
-```
+```yaml
 c_compiler:
   - gcc         # [linux]
   - clang       # [osx]
@@ -26,7 +26,7 @@ the default compilers on feedstocks unless there are compelling reasons.
 In any case, it is now possible to use the following configuration in
 `recipe/conda_build_config.yaml`:
 
-```
+```yaml
 # please consult @conda-forge/core before doing this
 c_compiler:
   - clang
