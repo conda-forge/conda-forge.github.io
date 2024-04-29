@@ -19,13 +19,23 @@ That is between the payer and payee to hammer out on their own.
 
 ## Known Service Providers
 
+<a id="anaconda"></a>
+
+### Anaconda
+
+Services offered: Core Library Development, Open Source Consulting, Rapid application development, AI/ML applications, Big Data Visualization, Packaging, Migration
+
+Contact Info: [sales@anaconda.com](mailto:sales@anaconda.com) ; [anaconda.com/professional-services](https://www.anaconda.com/professional-services)
+
+Background / Description: Anaconda is the original creator of Conda and the original host of conda-forge, and we are happy to work on applying these and other open-source tools to solve your own specific challenges. Anaconda's open-source professionals are the experts at identifying the most appropriate OSS tools, adapting them to your particular situation, and extending or augmenting them to solve new and bigger problems. We have specialists in reproducible science, working with petabyte-scale datasets using python compilation and distributed computation, adapting AI techniques to your particular problems, visualizing even the largest datasets in any web browser, working efficiently with datasets in any format or location, and adding browser-based interactivity to any workflow.
+
 <a id="quansight"></a>
 
 ### Quansight
 
 Services offered: Core Library Development, Data Engineering, Algorithms / AI / ML, Infrastructure / Big Data, Visualization / Dashboards, Open Source Support, Packaging, Integration
 
-Contact Info: [https://www.quansight.com/consulting](https://www.quansight.com/consulting)
+Contact Info: [quansight.com/consulting](https://www.quansight.com/consulting)
 
 Background / Description: Quansight's goal is to create operational solutions to support your analytic and visualization needs. We automate the data-science process in a way that works for your business use cases. Quansight has the experience to assess an organization's needs and provide the best integrated solution to turn raw data into actionable quantitative insights. By employing the maintainers and contributors to many open source projects worldwide, including core aspects of the Conda ecosystem and community, we provide top talent to ensure our customers have access to the latest technology while also leveraging legacy investments.
 
