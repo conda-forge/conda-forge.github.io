@@ -262,7 +262,7 @@ const config = {
           },
           {
             from: "/news/2024/04/09/clang-everywhere/",
-            to: "/news/2024/04/30/clang-everywhere/"
+            to: "/news/2024/04/30/clang-everywhere/",
           },
           /* Docs redirects */
           {
