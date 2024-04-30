@@ -24,10 +24,9 @@ This is still very fresh, so bugs are possible, and we ask not to change
 the default compilers on feedstocks unless there are compelling reasons.
 
 In any case, it is now possible to use the following configuration in
-`recipe/conda_build_config.yaml`:
+`recipe/conda_build_config.yaml` (note the lack of platform selectors):
 
 ```yaml
-# please consult @conda-forge/core before doing this
 c_compiler:
   - clang
 c_compiler_version:
