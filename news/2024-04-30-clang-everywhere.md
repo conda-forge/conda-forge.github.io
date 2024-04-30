@@ -19,7 +19,7 @@ cxx_compiler:
 was the only possible choice for C/C++ compilers.
 
 Recently, we finished adding preliminary support `clang` / `clangxx` as
-C/C++ compilers also on osx and windows, starting from clang 18.
+C/C++ compilers also on linux and windows, starting from clang 18.
 This is still very fresh, so bugs are possible, and we ask not to change
 the default compilers on feedstocks unless there are compelling reasons.
 
