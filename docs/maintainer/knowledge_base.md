@@ -1426,7 +1426,7 @@ Therefore, the conda-forge community maintains a list of packages that are safe 
 even if the original package only requires it for some versions.
 
 For example, the package [pyquil](https://github.com/rigetti/pyquil) only
-[requires](https://github.com/rigetti/pyquil/blob/497791e8108d8780109d75410be786c5f6e590ea/pyproject.toml#L30) `importlib-metadata` for `python <3.8` but it is actually save to be installed under `python >=3.8` as well.
+[requires](https://github.com/rigetti/pyquil/blob/497791e8108d8780109d75410be786c5f6e590ea/pyproject.toml#L30) `importlib-metadata` for `python <3.8` but it is actually safe to be installed under `python >=3.8` as well.
 
 Currently available packages:
 
