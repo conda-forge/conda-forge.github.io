@@ -260,6 +260,10 @@ const config = {
             from: "/blog/posts/2023-07-13-installer-security-fixes/",
             to: "/blog/2023/07/13/installer-security-fixes/",
           },
+          {
+            from: "/news/2024/04/09/clang-everywhere/",
+            to: "/news/2024/04/30/clang-everywhere/",
+          },
           /* Docs redirects */
           {
             from: "/docs/user/announcements.html",
