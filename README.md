@@ -25,7 +25,7 @@ If you have questions or need help, please check out our documentation for a [li
     Run the following commands.
     - `conda env create -f ./.ci_scripts/environment.yml`
     - `conda activate conda-forge-docs`
-    - enable pre-commit hooks with `pre-commit install`
+    - Optional. Enable pre-commit hooks with `pre-commit install`.
     - For live builds, `npm install && npm run start` - you can view the docs at `http://localhost:3000`
     - For production builds, run `.ci_scripts/update_docs`
 4.  Make and commit your changes.
