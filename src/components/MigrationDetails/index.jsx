@@ -207,7 +207,7 @@ function Table({ details }) {
     filters[status] ? rows :
       rows.concat((details[status]).map(name => ([name, status])))
   ), []).sort((a, b) => (
-    ORDERED.findIndex(x => x[0] == a[1]) - ORDERED.findIndex(x => x[0] == b[1]) 
+    ORDERED.findIndex(x => x[0] == a[1]) - ORDERED.findIndex(x => x[0] == b[1])
     || a[0].localeCompare(b[0]))
   );
   return (
