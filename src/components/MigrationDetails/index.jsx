@@ -206,7 +206,10 @@ function Table({ details }) {
   const rows = ORDERED.reduce((rows, [status]) => (
     filters[status] ? rows :
       rows.concat((details[status]).map(name => ([name, status])))
-  ), []);
+  ), []).sort((a, b) => (
+    ORDERED.findIndex(x => x[0] == a[1]) - ORDERED.findIndex(x => x[0] == b[1]) 
+    || a[0].localeCompare(b[0]))
+  );
   return (
     <>
       <Filters
@@ -219,6 +222,7 @@ function Table({ details }) {
           <tr>
             <th style={{ width: 200 }}>Name</th>
             <th style={{ width: 115 }}>PRs made</th>
+            <th style={{ width: 90 }}># children</th>
             <th style={{ flex: 1 }}>Immediate Children</th>
           </tr>
         </thead>
@@ -253,6 +257,7 @@ function Row({ children }) {
       )}
       </td>
       <td>{TITLES[status]}</td>
+      <td style={{ textAlign: "center" }}>{immediate.length || null}</td>
       <td>
         {immediate.map((name, index) => (<React.Fragment key={index}>
           <span
