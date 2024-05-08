@@ -222,9 +222,9 @@ function Table({ details }) {
         <thead>
           <tr>
             <th style={{ width: 200 }}>Name</th>
-            <th style={{ width: 115 }}>PRs made</th>
-            <th style={{ width: 115 }}>Descendants</th>
-            <th style={{ flex: 1 }}>Immediate Children</th>
+            <th style={{ width: 115 }}>Status</th>
+            <th style={{ width: 115 }}>Total number of children</th>
+            <th style={{ flex: 1 }}>Immediate children</th>
           </tr>
         </thead>
         <tbody>
