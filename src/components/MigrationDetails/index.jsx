@@ -206,7 +206,11 @@ function Table({ details }) {
   const rows = ORDERED.reduce((rows, [status]) => (
     filters[status] ? rows :
       rows.concat((details[status]).map(name => ([name, status])))
-  ), []);
+  ), []).sort((a, b) => (
+    feedstock[b[0]]["num_descendants"] - feedstock[a[0]]["num_descendants"]
+    || ORDERED.findIndex(x => x[0] == a[1]) - ORDERED.findIndex(x => x[0] == b[1])
+    || a[0].localeCompare(b[0]))
+  );
   return (
     <>
       <Filters
@@ -218,8 +222,9 @@ function Table({ details }) {
         <thead>
           <tr>
             <th style={{ width: 200 }}>Name</th>
-            <th style={{ width: 115 }}>PRs made</th>
-            <th style={{ flex: 1 }}>Immediate Children</th>
+            <th style={{ width: 115 }}>Status</th>
+            <th style={{ width: 115 }}>Total number of children</th>
+            <th style={{ flex: 1 }}>Immediate children</th>
           </tr>
         </thead>
         <tbody>
@@ -235,7 +240,8 @@ function Table({ details }) {
 function Row({ children }) {
   const [collapsed, setState] = useState(true);
   const { feedstock, name, status } = children;
-  const immediate = feedstock["immediate_children"] || [];
+  const immediate_children = feedstock["immediate_children"] || [];
+  const total_children = feedstock["num_descendants"];
   const href = feedstock["pr_url"];
   const details = feedstock["pre_pr_migrator_status"];
   return (<>
@@ -252,13 +258,14 @@ function Row({ children }) {
           <span>{name}</span>)
       )}
       </td>
-      <td>{TITLES[status]}</td>
+      <td style={{ textAlign: "center" }}>{TITLES[status]}</td>
+      <td style={{ textAlign: "center" }}>{total_children || null}</td>
       <td>
-        {immediate.map((name, index) => (<React.Fragment key={index}>
+        {immediate_children.map((name, index) => (<React.Fragment key={index}>
           <span
             style={{ marginBottom: 1 }}
             className="badge badge--secondary">{name}</span>
-          {immediate.length - 1 === index ? "" : " "}
+          {immediate_children.length - 1 === index ? "" : " "}
         </React.Fragment>))}
       </td>
     </tr>
