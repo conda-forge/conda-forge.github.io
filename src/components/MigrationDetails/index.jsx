@@ -240,8 +240,8 @@ function Table({ details }) {
 function Row({ children }) {
   const [collapsed, setState] = useState(true);
   const { feedstock, name, status } = children;
-  const immediate = feedstock["immediate_children"] || [];
-  const num_descendants = feedstock["num_descendants"];
+  const immediate_children = feedstock["immediate_children"] || [];
+  const total_children = feedstock["num_descendants"];
   const href = feedstock["pr_url"];
   const details = feedstock["pre_pr_migrator_status"];
   return (<>
@@ -258,14 +258,14 @@ function Row({ children }) {
           <span>{name}</span>)
       )}
       </td>
-      <td>{TITLES[status]}</td>
-      <td style={{ textAlign: "center" }}>{num_descendants || null}</td>
+      <td style={{ textAlign: "center" }}>{TITLES[status]}</td>
+      <td style={{ textAlign: "center" }}>{total_children || null}</td>
       <td>
-        {immediate.map((name, index) => (<React.Fragment key={index}>
+        {immediate_children.map((name, index) => (<React.Fragment key={index}>
           <span
             style={{ marginBottom: 1 }}
             className="badge badge--secondary">{name}</span>
-          {immediate.length - 1 === index ? "" : " "}
+          {immediate_children.length - 1 === index ? "" : " "}
         </React.Fragment>))}
       </td>
     </tr>
