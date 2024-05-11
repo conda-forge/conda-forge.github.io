@@ -1188,6 +1188,7 @@ host of the recipe,
 requirements:
   host:
     - libblas
+    - blas-devel
     - libcblas
     - liblapack
     - liblapacke
