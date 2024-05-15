@@ -22,14 +22,6 @@ Core Dependency Tree. Core Dependency Tree packages take care of the dependencie
 
 [Learn more](https://conda-forge.org/docs/maintainer/knowledge_base.html#cdt-packages).
 
-## CLI {#term-CLI}
-
-Command Line Interface. A program in which commands are entered as text, one line at a time, for a computer to execute. This is done in the Miniforge Prompt in Windows, and in a terminal in macOS and Linux. `conda` is executed in a CLI. [Learn More](https://en.wikipedia.org/wiki/Command-line_interface).
-
-## CI {#term-CI}
-
-Continuous Integration. Continuous integration is the practice of automating the integration of code changes from multiple contributors into a single software project. [Learn More](https://en.wikipedia.org/wiki/Continuous_integration).
-
 ## CFEP {#term-CFEP}
 
 Conda Forge Enhancement Proposal. A CFEP is a document which outlines a suggested change to how the conda-forge project operates, from a technical standpoint as well as to address social topics such as governance and expected conduct.
@@ -41,6 +33,12 @@ Conda Forge Enhancement Proposal. A CFEP is a document which outlines a suggeste
 Continuous Integration. Continuous integration is the practice of automating the integration of code changes from multiple contributors into a single software project.
 
 [Learn More](https://en.wikipedia.org/wiki/Continuous_integration).
+
+## CLI {#term-CLI}
+
+Command Line Interface. A program in which commands are entered as text, one line at a time, for a computer to execute. This is done in the Miniforge Prompt in Windows, and in a terminal in macOS and Linux. `conda` is executed in a CLI.
+
+[Learn More](https://en.wikipedia.org/wiki/Command-line_interface).
 
 ## Conda channel {#term-Conda-channel}
 
