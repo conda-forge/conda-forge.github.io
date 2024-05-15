@@ -469,7 +469,7 @@ in all of our CI builds to build essentially all artefacts published by conda-fo
 
 This compiler infrastructure has a critical role beyond building everything, which
 is to ensure that packages stay compatible with each other. This is due to how compiled
-packages have a so-called [Application Binary Interface](../glossary.md#abi)
+packages have a so-called [Application Binary Interface](../glossary.md#term-ABI)
 (ABI), and how changes in the compiler infrastructure may break this ABI, leading
 to crashes, miscalculations, etc. Generally speaking, using a consistent compiler
 version greatly reduces the risk of ABI breaks.

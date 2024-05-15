@@ -1296,7 +1296,7 @@ they like without any knowledge of the version of the BLAS implementation needed
 
 ### Microarchitecture-optimized builds {#microarch}
 
-conda [virtual packages](../glossary.md#virtual-package) include `__archspec`, which expose the processor architecture to the solver. However, `__archspec` should not be used directly in recipes; instead, users should rely on the [`microarch-level`](https://github.com/conda-forge/microarch-level-feedstock) helper packages (contributed in [staged-recipes#24306](https://github.com/conda-forge/staged-recipes/pull/24306)).
+conda [virtual packages](../glossary.md#term-Virtual-package) include `__archspec`, which expose the processor architecture to the solver. However, `__archspec` should not be used directly in recipes; instead, users should rely on the [`microarch-level`](https://github.com/conda-forge/microarch-level-feedstock) helper packages (contributed in [staged-recipes#24306](https://github.com/conda-forge/staged-recipes/pull/24306)).
 
 Before learning how to use it, please read these considerations:
 
