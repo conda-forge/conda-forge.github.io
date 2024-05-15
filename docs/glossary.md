@@ -10,21 +10,19 @@ Application Binary Interface. ABI is a document that comprehensively defines the
 
 ## CDN {#term-CDN}
 
-Content Delivery Network. CDNs are geographically distributed networks of servers that mirror
-contents of a primary source. Having multiple servers offering the same content increases
-performance (reduced latency, higher download speeds) and availability.
+Content Delivery Network. CDNs are geographically distributed networks of servers that mirror the contents of a primary source. Having multiple servers offering the same content increases performance (reduced latency, higher download speeds) and availability.
 
 [Learn more](https://en.wikipedia.org/wiki/Content_delivery_network).
 
 ## CDT {#term-CDT}
 
-Core Dependency Tree. Core Dependency Tree packages take care of the dependencies which are so close to the system that they are not packaged with conda-forge. A CDT package consists of repackaged CentOS binaries from the appropriate version, either 6 or 7 depending on user choice and platform.
+Core Dependency Tree. Core Dependency Tree packages take care of the dependencies that are so close to the system that they are not packaged with conda-forge. A CDT package consists of repackaged CentOS binaries from the appropriate version, either 6 or 7 depending on user choice and platform.
 
 [Learn more](https://conda-forge.org/docs/maintainer/knowledge_base.html#cdt-packages).
 
 ## CFEP {#term-CFEP}
 
-Conda Forge Enhancement Proposal. A CFEP is a document which outlines a suggested change to how the conda-forge project operates, from a technical standpoint as well as to address social topics such as governance and expected conduct.
+Conda Forge Enhancement Proposal. A CFEP is a document that outlines a suggested change to how the conda-forge project operates, from a technical standpoint as well as to address social topics such as governance and expected conduct.
 
 [Learn More](https://github.com/conda-forge/cfep/blob/main/cfep-01.md/).
 
@@ -42,21 +40,27 @@ Command Line Interface. A program in which commands are entered as text, one lin
 
 ## Conda channel {#term-Conda-channel}
 
-Conda channels are the locations where packages are stored. They serve as the base for hosting and managing packages. `conda-forge` is one example of a conda channel. [Learn More](https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/channels.html).
+Conda channels are the locations where packages are stored. They serve as the base for hosting and managing packages. `conda-forge` is one example of a conda channel.
+
+[Learn More](https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/channels.html).
 
 ## Conda package {#term-Conda-package}
 
-A conda package is a `.tar.bz2` or `.conda` archive that contains libraries, executable programs, data files and other components, as well as metadata under the `info/` directory. Its contents are unpacked in the installation prefix. [Learn More](<https://en.wikipedia.org/wiki/Conda_(package_manager)>).
+A conda package is a `.tar.bz2` or `.conda` archive that contains libraries, executable programs, data files and other components, as well as metadata under the `info/` directory. Its contents are unpacked in the installation prefix.
+
+[Learn More](<https://en.wikipedia.org/wiki/Conda_(package_manager)>).
 
 ## CRAN {#term-CRAN}
 
-Comprehensive R Archive Network. CRAN is a network of FTP and web servers around the world that store identical, up-to-date, versions of code and documentation for R.
+Comprehensive R Archive Network. CRAN is a network of FTP and web servers around the world that store identical, up-to-date versions of code and documentation for R.
 
 [Learn More](https://cran.r-project.org/).
 
 ## Environment {#term-Environment}
 
-An environment is a tool that helps to keep dependencies required by different projects separate by creating isolated spaces where these dependencies are installed. [Learn More](https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html).
+An environment is a tool that helps to keep dependencies required by different projects separate by creating isolated spaces where these dependencies are installed.
+
+[Learn More](https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html).
 
 ## ICU {#term-ICU}
 
@@ -66,14 +70,18 @@ International Components for Unicode. ICU is an open-source project of mature C/
 
 ## PR {#term-PR}
 
-Pull Request. Pull Request is a workflow method to submit contributions to an open development project in which the developer asks for changes committed to an external repository to be considered for inclusion in a project’s main repository.
+Pull Request. A Pull Request is a workflow method to submit contributions to an open development project in which the developer asks for changes committed to an external repository to be considered for inclusion in a project's main repository.
 
 [Learn More](https://help.github.com/articles/about-pull-requests/).
 
 ## Recipe {#term-Recipe}
 
-A recipe is a collection of files required to build a conda package. This includes, at minimum, a [`meta.yaml`](maintainer/adding_pkgs.md#the-recipe-meta-yaml) file, but can also include license files, patches, build scripts, test scripts etc. [Learn More](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html).
+A recipe is a collection of files required to build a conda package. This includes, at minimum, a [`meta.yaml`](maintainer/adding_pkgs.md#the-recipe-meta-yaml) file, but can also include license files, patches, build scripts, test scripts etc.
+
+[Learn More](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html).
 
 ## Virtual package {#term-Virtual-package}
 
-Virtual packages are not real packages that can be downloaded. They are injected by the conda clients at runtime so the solver can consider that metadata as part of the constraints of the problem. By convention, they always start with a double underscore (`__`). Some examples include the type of operating system (Linux, Windows, macOS), or the CUDA version supported by the system (if any). [Learn More](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html).
+Virtual packages are not real packages that can be downloaded. They are injected by the conda clients at runtime so the solver can consider that metadata as part of the constraints of the problem. By convention, they always start with a double underscore (`__`). Some examples include the type of operating system (Linux, Windows, macOS), or the CUDA version supported by the system (if any).
+
+[Learn More](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html).
