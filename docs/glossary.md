@@ -1,79 +1,76 @@
----
-title: 'Glossary'
-sidebar_position: 27
----
-
-<a id="miscellaneous"></a>
-
-<a id="misc-glossary"></a>
-
-<a id="glossary"></a>
-
 # Glossary
 
-<a id="term-ABI"></a>
+List of frequently used terms and acronyms.
 
 ## ABI
 
-**A**pplication **B**inary **I**nterface. ABI is a document that comprehensively defines the binary system interface between applications and the operating system on which they run. [Learn More at Wikipedia](https://en.wikipedia.org/wiki/Application_binary_interface) or [pypackaging-native](https://pypackaging-native.github.io/background/binary_interface).
+Application Binary Interface. ABI is a document that comprehensively defines the binary system interface between applications and the operating system on which they run.
 
-<a id="term-CDT"></a>
+[Learn more](https://en.wikipedia.org/wiki/Application_binary_interface).
+
+## CDN
+
+Content Delivery Network. CDNs are geographically distributed networks of servers that mirror
+contents of a primary source. Having multiple servers offering the same content increases
+performance (reduced latency, higher download speeds) and availability.
+
+[Learn more](https://en.wikipedia.org/wiki/Content_delivery_network).
 
 ## CDT
 
-**C**ore **D**ependency **T**ree. Core Dependency Tree packages take care of the dependencies which are so close to the system that they are not packaged with conda-forge. A CDT package consists of repackaged CentOS binaries from the appropriate version, either 6 or 7 depending on user choice and platform. [Learn more](maintainer/knowledge_base.md#cdt-packages).
+Core Dependency Tree. Core Dependency Tree packages take care of the dependencies which are so close to the system that they are not packaged with conda-forge. A CDT package consists of repackaged CentOS binaries from the appropriate version, either 6 or 7 depending on user choice and platform.
+
+[Learn more](https://conda-forge.org/docs/maintainer/knowledge_base.html#cdt-packages).
 
 ## CLI
 
-**C**ommand **L**ine **I**nterface. A program in which commands are entered as text, one line at a time, for a computer to execute. This is done in the Miniforge Prompt in Windows, and in a terminal in macOS and Linux. `conda` is executed in a CLI. [Learn More](https://en.wikipedia.org/wiki/Command-line_interface).
-
-<a id="term-CI"></a>
+Command Line Interface. A program in which commands are entered as text, one line at a time, for a computer to execute. This is done in the Miniforge Prompt in Windows, and in a terminal in macOS and Linux. `conda` is executed in a CLI. [Learn More](https://en.wikipedia.org/wiki/Command-line_interface).
 
 ## CI
 
-**C**ontinuous **I**ntegration. Continuous integration is the practice of automating the integration of code changes from multiple contributors into a single software project. [Learn More](https://en.wikipedia.org/wiki/Continuous_integration).
-
-<a id="term-CFEP"></a>
+Continuous Integration. Continuous integration is the practice of automating the integration of code changes from multiple contributors into a single software project. [Learn More](https://en.wikipedia.org/wiki/Continuous_integration).
 
 ## CFEP
 
-**C**onda **F**orge **E**nhancement **P**roposal. A CFEP is a document which outlines a suggested change to how the conda-forge project operates, from a technical standpoint as well as to address social topics such as governance and expected conduct. [Learn More](https://github.com/conda-forge/cfep/blob/main/cfep-01.md/).
+Conda Forge Enhancement Proposal. A CFEP is a document which outlines a suggested change to how the conda-forge project operates, from a technical standpoint as well as to address social topics such as governance and expected conduct.
 
-<a id="term-Conda-channel"></a>
+[Learn More](https://github.com/conda-forge/cfep/blob/main/cfep-01.md/).
+
+## CI
+
+Continuous Integration. Continuous integration is the practice of automating the integration of code changes from multiple contributors into a single software project.
+
+[Learn More](https://en.wikipedia.org/wiki/Continuous_integration).
 
 ## Conda channel
 
 Conda channels are the locations where packages are stored. They serve as the base for hosting and managing packages. `conda-forge` is one example of a conda channel. [Learn More](https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/channels.html).
 
-<a id="term-Conda-package"></a>
-
 ## Conda package
 
 A conda package is a `.tar.bz2` or `.conda` archive that contains libraries, executable programs, data files and other components, as well as metadata under the `info/` directory. Its contents are unpacked in the installation prefix. [Learn More](<https://en.wikipedia.org/wiki/Conda_(package_manager)>).
 
-<a id="term-CRAN"></a>
-
 ## CRAN
 
-**C**omprehensive **R** **A**rchive **N**etwork. CRAN is a network of FTP and web servers around the world that store identical, up-to-date, versions of code and documentation for R. [Learn More](https://cran.r-project.org/).
+Comprehensive R Archive Network. CRAN is a network of FTP and web servers around the world that store identical, up-to-date, versions of code and documentation for R.
 
-<a id="term-Environment"></a>
+[Learn More](https://cran.r-project.org/).
 
 ## Environment
 
 An environment is a tool that helps to keep dependencies required by different projects separate by creating isolated spaces where these dependencies are installed. [Learn More](https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html).
 
-<a id="term-ICU"></a>
-
 ## ICU
 
-**I**nternational **C**omponents for **U**nicode. ICU is an open-source project of mature C/C++ and Java libraries for Unicode support, software internationalization, and software globalization. [Learn More](https://icu.unicode.org/).
+International Components for Unicode. ICU is an open-source project of mature C/C++ and Java libraries for Unicode support, software internationalization, and software globalization.
 
-<a id="term-PR"></a>
+[Learn More](https://icu.unicode.org/).
 
 ## PR
 
-**P**ull **R**equest. Pull Request is a workflow method to submit contributions to an open development project in which the developer asks for changes committed to an external repository to be considered for inclusion in a project's main repository. [Learn More](https://help.github.com/articles/about-pull-requests/).
+Pull Request. Pull Request is a workflow method to submit contributions to an open development project in which the developer asks for changes committed to an external repository to be considered for inclusion in a project’s main repository.
+
+[Learn More](https://help.github.com/articles/about-pull-requests/).
 
 ## Recipe
 
