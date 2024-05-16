@@ -1,4 +1,4 @@
-# NumPy 2 migration
+# NumPy 2 Migration
 
 In preparation for the NumPy 2 release, we have begun a migration of all
 conda-forge packages that depend on `numpy` during the build (so in
