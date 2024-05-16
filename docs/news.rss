@@ -124,6 +124,8 @@ for example to 10.13 for <code>x86_64</code>, replace that section with the foll
 <code>- __osx &gt;={{ MACOSX_DEPLOYMENT_TARGET }}  # [osx and x86_64]</code>, as this will
 henceforth be handled through <code>- {{ stdlib("c") }}</code>.</li>
 </ul>
+<p>Following the application of any of the above changes, the feedstock should be
+<a href="https://conda-forge.org/docs/maintainer/updating_pkgs/#rerendering-feedstocks" target="_blank" rel="noopener noreferrer">rerendered</a>.</p>
 <p>As these mechanisms begin rolling out, we will also update the maintainer
 documentation in the conda-forge knowledge base. For more details, see this
 <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2102" target="_blank" rel="noopener noreferrer">issue</a>.</p>]]></content:encoded>
