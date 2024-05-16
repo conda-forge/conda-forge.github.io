@@ -46,7 +46,7 @@ all feedstock maintainers are free to apply independently:
   henceforth be handled through `- {{ stdlib("c") }}`.
 
 Following the application of any of the above changes, the feedstock should be
-rerendered.
+[rerendered](https://conda-forge.org/docs/maintainer/updating_pkgs/#rerendering-feedstocks).
 
 As these mechanisms begin rolling out, we will also update the maintainer
 documentation in the conda-forge knowledge base. For more details, see this
