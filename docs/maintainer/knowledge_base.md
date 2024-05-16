@@ -1188,7 +1188,6 @@ host of the recipe,
 requirements:
   host:
     - libblas
-    - blas-devel
     - libcblas
     - liblapack
     - liblapacke
@@ -1215,7 +1214,9 @@ If a package needs a specific implementation's internal API for more control you
 ```yaml
 requirements:
   host:
-    - {{ blas_impl }}
+    # Keep mkl-devel here for pinning
+    - mkl-devel         {{ blas_impl == "mkl" }}
+    - {{ blas_impl }}   {{ blas_impl != "mkl" }}
   run:
     - libblas * *{{ blas_impl }}
     - {{ blas_impl }}
