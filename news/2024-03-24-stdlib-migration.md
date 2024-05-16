@@ -45,6 +45,9 @@ all feedstock maintainers are free to apply independently:
   `- __osx >={{ MACOSX_DEPLOYMENT_TARGET }}  # [osx and x86_64]`, as this will
   henceforth be handled through `- {{ stdlib("c") }}`.
 
+Following the application of any of the above changes, the feedstock should be
+rerendered.
+
 As these mechanisms begin rolling out, we will also update the maintainer
 documentation in the conda-forge knowledge base. For more details, see this
 [issue](https://github.com/conda-forge/conda-forge.github.io/issues/2102).
