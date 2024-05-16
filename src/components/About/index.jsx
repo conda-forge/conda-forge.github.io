@@ -19,7 +19,7 @@ export default function Stats() {
 
     const stats1 = [
         {
-            number: stats ? `${(stats.downloads.month / 1e6).toFixed(0)}M` : "",
+            number: stats ? `${(stats.downloads.month / 1e9).toFixed(2)}B` : "",
             content: "Monthly downloads",
         },
         {
