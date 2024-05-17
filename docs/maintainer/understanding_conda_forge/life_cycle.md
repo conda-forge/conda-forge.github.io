@@ -25,7 +25,7 @@ The solver will process all the metadata and will provide the most adequate sele
 For most packages, the paragraphs above are enough to describe their life cycle.
 However, the repodata-first approach followed in the conda ecosystem allows for some unique features in the post-publication stages.
 
-For large volume channels like conda-forge, Anaconda.org delivers the artifacts through a [CDN](/docs/reference/glossary.md#cdn) network for faster access.
+For large volume channels like conda-forge, Anaconda.org delivers the artifacts through a [CDN](/docs/glossary#cdn) network for faster access.
 The CDN network is synced with the channels periodically.
 As a result, packages take around 15 minutes to be available for installation after their publication.
 
@@ -67,7 +67,7 @@ Any subsequent pushes to `main` (e.g. merged PRs) or other enabled branches will
 
 :::info
 For existing feedstocks, conda-forge bots will often send automated PRs for new project releases or maintenance tasks.
-You can find more details about it in [Automation & bots](/docs/advanced/automation.md).
+You can find more details about it in [Automation & bots](/docs/maintainer/infrastructure#automated-maintenance).
 :::
 
 The validation server will detect the new uploads on `cf-staging` and will perform some checks on those artifacts.
@@ -83,11 +83,11 @@ In an ideal world, that would be the end of the life cycle. However, in some cas
 
 If the package metadata is found to be wrong or out-of-date, it can be modified without rebuilding the package.
 The channel server can apply patches to the repodata files directly.
-The patch instructions are published in [`conda-forge-repodata-patches`](/docs/reference/infrastructure/tooling-data.md#conda-forge-repodata-patches) and processed weekly.
+The patch instructions are published in [`conda-forge-repodata-patches`](/docs/maintainer/infrastructure#conda-forge-repodata-patches) and processed weekly.
 
 Sometimes, there are issues with a published package that cannot be amended with a repodata patch (e.g. libraries were built wrong and segfault).
 In these cases, the packages can be retired by labeling them as `broken`.
-This is done through the [`admin-requests` repository](/docs/reference/infrastructure/automated-maintenance.md#admin-requests).
+This is done through the [`admin-requests` repository](/docs/maintainer/infrastructure#admin-requests).
 As part of the CDN-driven metadata patching, packages labeled as `broken` are not included in the final repodata index.
 However, they are still available via direct URL access.
 This allows organizations to retire packages from normal, solver-driven installs without compromising the reproducibility offered by lockfiles.
@@ -100,7 +100,7 @@ If the maintainers want to, these feedstocks can be archived and marked as read-
 These stages are key concepts in the conda-forge documentation.
 Feel free to refer to this list any time as you check the rest of the material.
 
-1. [Initial submission to `staged-recipes`](/docs/fundamentals/staged-recipes.md)
+1. [Initial submission to `staged-recipes`](/docs/maintainer/understanding_conda_forge/staged_recipes)
 2. Feedstock changes:
    - A. Repository initialization
    - B. Automated maintenance updates
@@ -115,11 +115,12 @@ Feel free to refer to this list any time as you check the rest of the material.
 
 :::info
 If you want to read on the infrastructure details behind these stages,
-consider reading our [Infrastructure guide](/docs/reference/infrastructure/).
+consider reading our [Infrastructure guide](/docs/maintainer/infrastructure).
 :::
 
 <!-- LINKS -->
 
 [anaconda-org-labels]: https://docs.anaconda.com/anacondaorg/user-guide/tutorials/
-[staged-recipes]: /docs/reference/infrastructure/staged-recipes.md
-[feedstocks]: /docs/reference/infrastructure/feedstocks.md
+[staged-recipes]: /docs/maintainer/infrastructure.md#staged-recipes
+
+<!-- [feedstocks]: /docs/reference/infrastructure/feedstocks.md -->

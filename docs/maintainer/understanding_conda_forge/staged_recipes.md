@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Submission to staged-recipes
 
-[`staged-recipes`](/docs/reference/infrastructure/staged-recipes.md) is the gateway to conda-forge.
+[`staged-recipes`](/docs/maintainer/infrastructure#staged-recipes) is the gateway to conda-forge.
 Every package published has gone through this repository as part of the submission process.
 
 Users normally follow these steps:
