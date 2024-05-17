@@ -528,6 +528,15 @@ const config = {
         insights: false,
         contextualSearch: true,
       },
+      mermaid: {
+        theme: { light: "base", dark: "forest" },
+        options: {
+          themeVariables: {
+            primaryColor: "#b2dfdb",
+            primaryBorderColor: "#00695c",
+          },
+        },
+      },
     }),
 };
 
