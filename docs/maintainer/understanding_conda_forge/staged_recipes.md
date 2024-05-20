@@ -19,33 +19,35 @@ When the PR is approved and merged to `main`, the new directory under `recipes/`
 ```mermaid
 sequenceDiagram
     actor c as contributor
-    participant r as staged-recipes repo
-    actor a as admin
-    c->>r: submit PR
-    activate r
+    participant repo as staged-recipes repo
+    c->>repo: submit PR
+    activate repo
+    rect rgb(178, 223, 219)
     loop
-        r->>c: report failing CI
-        deactivate r
-        c->>r: add commits
-        activate r
+        repo->>c: report failing CI
+        deactivate repo
+        c->>repo: add commits
+        activate repo
     end
-    r->>c: report successful CI
-    deactivate r
+    end
+    repo->>c: report successful CI
+    deactivate repo
     loop
-        c->>r: mark as ready for review
-        r->>a: request review
-        a->>r: provide comments
-        c->>r: address comments
-        activate r
+        c->>repo: mark as ready for review
+        create actor reviewer
+        repo->>reviewer: request review
+        reviewer->>repo: provide comments
+        c->>repo: address comments
+        activate repo
         loop
-            r->>c: report failing CI
-            deactivate r
-            c->>r: add commits
-            activate r
+            repo->>c: report failing CI
+            deactivate repo
+            c->>repo: add commits
+            activate repo
         end
-        r->>c: report successful CI
-        deactivate r
+        repo->>c: report successful CI
+        deactivate repo
     end
-    a->>r: accept PR
-    a->>r: merge PR
+    reviewer->>repo: accept PR
+    reviewer->>repo: merge PR
 ```
