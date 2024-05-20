@@ -20,24 +20,9 @@ When the PR is approved and merged to `main`, the new directory under `recipes/`
 sequenceDiagram
     actor c as contributor
     participant repo as staged-recipes repo
-    c->>repo: submit PR
-    activate repo
     rect rgb(178, 223, 219)
-    loop
-        repo->>c: report failing CI
-        deactivate repo
-        c->>repo: add commits
-        activate repo
-    end
-    end
-    repo->>c: report successful CI
-    deactivate repo
-    loop
-        c->>repo: mark as ready for review
-        create actor reviewer
-        repo->>reviewer: request review
-        reviewer->>repo: provide comments
-        c->>repo: address comments
+        Note right of c: 1: Prepare PR
+        c->>repo: submit PR
         activate repo
         loop
             repo->>c: report failing CI
@@ -48,6 +33,28 @@ sequenceDiagram
         repo->>c: report successful CI
         deactivate repo
     end
-    reviewer->>repo: accept PR
-    reviewer->>repo: merge PR
+    rect rgb(178, 223, 219)
+        Note right of c: 2: Solicit and address reviews
+        loop
+            c->>repo: mark as ready for review
+            create actor reviewer
+            repo->>reviewer: request review
+            reviewer->>repo: provide comments
+            c->>repo: address comments
+            activate repo
+            loop
+                repo->>c: report failing CI
+                deactivate repo
+                c->>repo: add commits
+                activate repo
+            end
+            repo->>c: report successful CI
+            deactivate repo
+        end
+    end
+    rect rgb(178, 223, 219)
+        Note right of repo: Integrate new package into conda-forge
+        reviewer->>repo: accept PR
+        reviewer->>repo: merge PR
+    end
 ```
