@@ -1170,7 +1170,7 @@ named `yum_requirements.txt` in the `recipe` directory of a feedstock.
 
 There are only very few situations where dependencies installed by yum are acceptable. These cases include
 
-- satisfying the requirements of [CDT](../glossary.md#term-CDT) packages during test phase
+- satisfying the requirements of [CDT](../glossary.md#cdt) packages during test phase
 - installing packages that are only required for testing
 
 After changing `yum_requirements.txt`, [rerender](updating_pkgs.md#dev-update-rerender) to update the configuration.
@@ -1296,7 +1296,7 @@ they like without any knowledge of the version of the BLAS implementation needed
 
 ### Microarchitecture-optimized builds {#microarch}
 
-conda [virtual packages](../glossary.md#term-Virtual-package) include `__archspec`, which expose the processor architecture to the solver. However, `__archspec` should not be used directly in recipes; instead, users should rely on the [`microarch-level`](https://github.com/conda-forge/microarch-level-feedstock) helper packages (contributed in [staged-recipes#24306](https://github.com/conda-forge/staged-recipes/pull/24306)).
+conda [virtual packages](../glossary.md#virtual-package) include `__archspec`, which expose the processor architecture to the solver. However, `__archspec` should not be used directly in recipes; instead, users should rely on the [`microarch-level`](https://github.com/conda-forge/microarch-level-feedstock) helper packages (contributed in [staged-recipes#24306](https://github.com/conda-forge/staged-recipes/pull/24306)).
 
 Before learning how to use it, please read these considerations:
 

@@ -161,7 +161,7 @@ Package-wide dependency pins are defined in [conda_build_config.yaml](https://gi
 
 For more information on conda-forge wide package pins, please refer to [Globally pinned packages](pinning_deps.md#globally-pinned-packages).
 
-Please open a [PR](../glossary.md#term-PR) and/or an issue there, if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to [Updating package pins](pinning_deps.md#update-pins).
+Please open a [PR](../glossary.md#pr) and/or an issue there, if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to [Updating package pins](pinning_deps.md#update-pins).
 
 #### conda-forge-repodata-patches
 
@@ -226,7 +226,7 @@ Smithy contains maintenance code for conda-forge, which is used by the `conda-sm
 
 - The rerendering process
 - The recipe linter
-- [CI](../glossary.md#term-CI) support utils
+- [CI](../glossary.md#ci) support utils
 
 `conda-smithy` also contains the command line tool that you should use if you rerender manually from the command line (see [Rerendering feedstocks](updating_pkgs.md#dev-update-rerender)).
 
@@ -469,7 +469,7 @@ in all of our CI builds to build essentially all artefacts published by conda-fo
 
 This compiler infrastructure has a critical role beyond building everything, which
 is to ensure that packages stay compatible with each other. This is due to how compiled
-packages have a so-called [Application Binary Interface](../glossary.md#term-ABI)
+packages have a so-called [Application Binary Interface](../glossary.md#abi)
 (ABI), and how changes in the compiler infrastructure may break this ABI, leading
 to crashes, miscalculations, etc. Generally speaking, using a consistent compiler
 version greatly reduces the risk of ABI breaks.

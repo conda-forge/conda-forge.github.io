@@ -134,7 +134,7 @@ Once you finished your PR, all you have to do is wait for feedback from our revi
 
 The review team will assist you by pointing out improvements and answering questions. Once the package is ready, the reviewers will approve and merge your pull request.
 
-After merging the [PR](../glossary.md#term-PR), our [CI](../glossary.md#term-CI) infrastructure will build the package and make it available in the conda-channel.
+After merging the [PR](../glossary.md#pr), our [CI](../glossary.md#ci) infrastructure will build the package and make it available in the conda-channel.
 
 :::note
 
@@ -148,10 +148,10 @@ If you have questions or have not heard back for a while, you can notify us by i
 
 ## Post staging process
 
-- After the PR is merged, our [CI](../glossary.md#term-CI) services will create a new git repo automatically. For example, the recipe for a package named `pydstool` will be moved to a new repository [https://github.com/conda-forge/pydstool-feedstock](https://github.com/conda-forge/pydstool-feedstock). This process is automated through a CI job on the `conda-forge/staged-recipes` repo. It sometimes fails due to API rate limits and will automatically retry itself. If your feedstock has not been created after a day or so, please get in touch with the `conda-forge/core` team for help.
+- After the PR is merged, our [CI](../glossary.md#ci) services will create a new git repo automatically. For example, the recipe for a package named `pydstool` will be moved to a new repository [https://github.com/conda-forge/pydstool-feedstock](https://github.com/conda-forge/pydstool-feedstock). This process is automated through a CI job on the `conda-forge/staged-recipes` repo. It sometimes fails due to API rate limits and will automatically retry itself. If your feedstock has not been created after a day or so, please get in touch with the `conda-forge/core` team for help.
 - CI services will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to [https://anaconda.org/conda-forge](https://anaconda.org/conda-forge)
 - If this is your first contribution, you will be added to the conda-forge [team](https://github.com/orgs/conda-forge/people) and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.
-- If you want to make a change to the recipe, send a [PR](../glossary.md#term-PR) to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.
+- If you want to make a change to the recipe, send a [PR](../glossary.md#pr) to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.
 
 <a id="feedstock-repository-structure"></a>
 
@@ -196,7 +196,7 @@ This file is used to configure how the feedstock is set up and built. Making any
 
 The maintainer's job is to:
 
-- Keep the feedstock updated by merging eventual maintenance [PR](../glossary.md#term-PR)s from conda-forge's bots.
+- Keep the feedstock updated by merging eventual maintenance [PR](../glossary.md#pr)s from conda-forge's bots.
 - Keep the feedstock on par with new releases of the source package by:
   - Bumping the version number and checksum.
   - Making sure that the feedstock's requirements stay accurate.
@@ -452,26 +452,26 @@ Run dependencies are only required during run time of the package. Run dependenc
 
 #### Avoid external dependencies
 
-As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure [ABI](../glossary.md#term-ABI) compatibility for all our packages.
+As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure [ABI](../glossary.md#abi) compatibility for all our packages.
 
 There are only a few exceptions to this rule:
 
-1. Some dependencies have to be satisfied with [CDT](../glossary.md#term-CDT) packages (see [Core Dependency Tree Packages (CDTs)](knowledge_base.md#cdt-packages)).
+1. Some dependencies have to be satisfied with [CDT](../glossary.md#cdt) packages (see [Core Dependency Tree Packages (CDTs)](knowledge_base.md#cdt-packages)).
 2. Some packages require root access (e.g. device drivers) that cannot be distributed by conda-forge. These dependencies should be avoided whenever possible.
 
 <a id="pinning"></a>
 
 #### Pinning
 
-Linking shared c/c++ libraries creates dependence on the [ABI](../glossary.md#term-ABI) of the library that was used at build time on the package.
+Linking shared c/c++ libraries creates dependence on the [ABI](../glossary.md#abi) of the library that was used at build time on the package.
 The exposed interface changes when previously existing exposed symbols are deleted or modified in a newer version.
 
-It is therefore crucial to ensure that only library versions with a compatible [ABI](../glossary.md#term-ABI) are used after linking.
+It is therefore crucial to ensure that only library versions with a compatible [ABI](../glossary.md#abi) are used after linking.
 
 In the best case, the shared library you depend on:
 
 - defines a pin in the [list of globally pinned packages](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml)
-- exports its [ABI](../glossary.md#term-ABI) compatible requirements by defining `run_exports` in it's meta.yaml
+- exports its [ABI](../glossary.md#abi) compatible requirements by defining `run_exports` in it's meta.yaml
 
 In these cases you do not have to worry about version requirements:
 
@@ -483,7 +483,7 @@ requirements:
     - libpng
 ```
 
-In other cases you have to specify [ABI](../glossary.md#term-ABI) compatible versions manually.
+In other cases you have to specify [ABI](../glossary.md#abi) compatible versions manually.
 
 ```yaml
 requirements:
@@ -555,7 +555,7 @@ But every conda package must have at least _some_ tests.
 Sometimes defining tests seems to be hard, e.g. due to:
 
 - tests for the underlying code base may not exist.
-- test suites may take too long to run on limited [CI](../glossary.md#term-CI) infrastructure.
+- test suites may take too long to run on limited [CI](../glossary.md#ci) infrastructure.
 - tests may take too much bandwidth.
 
 In these cases, conda-forge may not be able to execute the prescribed test suite.
