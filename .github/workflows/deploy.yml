@@ -52,7 +52,7 @@ jobs:
             --no-progress
             --base "$(pwd)/build"
             --accept 100..399,401,403,429
-            --exclude 'https://conda-forge/status/'
+            --exclude '^.*/status/migration/.*$'
             --exclude 'https://polys.me/?$'
             --exclude 'https://conda-metadata-app.streamlit.app/?$'
             --exclude 'https://kb43fqob7u-dsn.algolia.net/'
