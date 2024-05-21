@@ -58,3 +58,27 @@ sequenceDiagram
         reviewer->>repo: merge PR
     end
 ```
+
+```mermaid
+sequenceDiagram
+    participant sr as staged-recipes repo
+    participant ar as admin-requests repo
+    loop Several times per hour
+        ar->>sr: check for new recipes
+        loop for every new recipe
+            create participant cs as conda-smithy
+            ar->>cs: register github
+            create participant fs as feedstock repo
+            participant cf as conda-forge organization
+            participant ci as ci providers
+            cs->>fs: create feedstock repo
+            cs->>cf: create maintainers team
+            cs->>fs: add maintainers team
+            ar->>cs: register ci
+            cs->>ci: register builds
+            destroy cs
+            cs->>ar: finish
+            ar->>sr: remove recipe from staged-recipes
+        end
+    end
+```
