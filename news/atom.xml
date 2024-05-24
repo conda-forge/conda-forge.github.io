@@ -2,11 +2,25 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/news</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2024-05-02T00:00:00.000Z</updated>
+    <updated>2024-05-15T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/news"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[NumPy 2 Migration]]></title>
+        <id>https://conda-forge.org/news/2024/05/15/numpy-2-migration</id>
+        <link href="https://conda-forge.org/news/2024/05/15/numpy-2-migration"/>
+        <updated>2024-05-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[In preparation for the NumPy 2 release, we have begun a migration of all]]></summary>
+        <content type="html"><![CDATA[<p>In preparation for the NumPy 2 release, we have begun a migration of all
+conda-forge packages that depend on <code>numpy</code> during the build (so in
+<code>requirements/host</code>). The migration status is tracked
+<a href="https://conda-forge.org/status/migration/numpy2/">on our status page</a>.
+Particular package's status can be found there. Specific recommendations for
+maintainers updating packages can be found in the migration PRs themselves.
+Please reach out through the usual channels if you have any questions.</p>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Azure macOS x64 runners will now default to macos-12]]></title>
         <id>https://conda-forge.org/news/2024/05/02/bump-macos-12</id>
@@ -391,20 +405,5 @@ will only provide the core components of Qt, leaving <code>pyqtwebengine</code> 
 <code>pyqtcharts</code> as optional packages that extend PyQt by providing the
 QtWebEngine and QtCharts components, respectively. A migrator will be
 put in place to help with the transition.</p>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[New Semi-automated PR Labeling in conda-forge/staged-recipes]]></title>
-        <id>https://conda-forge.org/news/2022/04/20/new-semi-automated-pr-labeling-in-conda-forgestaged-recipes</id>
-        <link href="https://conda-forge.org/news/2022/04/20/new-semi-automated-pr-labeling-in-conda-forgestaged-recipes"/>
-        <updated>2022-04-20T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[A GitHub action now monitors comments on issues in staged-recipes and]]></summary>
-        <content type="html"><![CDATA[<p>A GitHub action now monitors comments on issues in staged-recipes and
-will add language and review labels to issues/PRs when a staged-recipes
-sub-team is mentioned in a comment. It adds the Awaiting author
-contribution label if a member of staged-recipes removes the
-review-requested label. Unlike notifications, which are only sent to the
-users which are members of a team at the time of the mention, labels are
-persistent and visible to everyone, so they should be very helpful for
-identifying old PRs that need attention.</p>]]></content>
     </entry>
 </feed>
