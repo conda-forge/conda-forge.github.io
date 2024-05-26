@@ -622,12 +622,12 @@ compiler versions above, we have removed the `cos*` part of the `sysroot` path. 
 As of writing, `anaconda.org` does not support generating API tokens that are scoped
 to allow uploads for some packages but not others. In order to secure feedstock uploads,
 so that, e.g., the maintainers of the `numpy` feedstock cannot push a `python` package,
-we use a package staging process and issue secret tokens, unique to each feedback. This process
+we use a package staging process and issue secret tokens, unique to each feedstock. This process
 works as follows.
 
 1. When a CI job on a feedstock is building packages to be uploaded to `anaconda.org`, it
    first uploads them to a staging channel, `cf-staging`.
-2. Then the feedback CI job makes an API call to our admin webservices server with its secret token
+2. Then the feedstock CI job makes an API call to our admin webservices server with its secret token
    and some information about the package it is trying to upload.
 3. The webservices server validates the secret token, the integrity of the package, and
    that the package is allowed for the given feedstock.
