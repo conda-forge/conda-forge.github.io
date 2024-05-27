@@ -25,7 +25,6 @@ That's it, with those two modifiers, you can get a lot done! Some examples inclu
 - [Scripts that use CMake on Windows](https://github.com/search?type=code&q=org%3Aconda-forge+cmake+path%3Arecipe%2F*.bat).
 - [Recipes that use cross-compilation](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22target_platform+%21%3D+build_platform%22+OR+%22build_platform+%21%3D+target_platform%22).
 
-
 :::tip Configure your browser to have a search shortcut
 
 For example, in Chrome you can go to [`chrome://settings/searchEngines`](chrome://settings/searchEngines) and add a new entry with:
@@ -36,7 +35,6 @@ For example, in Chrome you can go to [`chrome://settings/searchEngines`](chrome:
 
 And with that you can simply type `cf your-search-here` for super fast queries!
 :::
-
 
 <a id="using-cmake"></a>
 
