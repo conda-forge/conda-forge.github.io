@@ -6,6 +6,38 @@ title: 'Knowledge Base'
 
 # Knowledge Base
 
+## Finding examples with Github Code Search {#search-github}
+
+Github's [Code Search](https://github.com/features/code-search) is an incredibly useful tool to find examples of recipes in conda-forge.
+There are a couple tricks you can use to make the most out of your searches.
+
+- Limit the search to `org:conda-forge`.
+- Limit the path to the type of file you want. This usually means:
+  - `path:meta.yaml` for the main metadata file.
+  - `path:recipe/*.sh` for Unix build scripts.
+  - `path:recipe/*.bat` for Windows build scripts.
+
+That's it, with those two modifiers, you can get a lot done! Some examples include:
+
+- [All `noarch: python` recipes](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22noarch%3A+python%22).
+- Recipes that depend on... [`cuda`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22-+cuda%22), [`pytorch`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22-+pytorch%22), [`__virtual` packages](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%2F-+__%5CS%2B%2F), etc.
+- [Scripts that use CMake on Unix](https://github.com/search?type=code&q=org%3Aconda-forge+cmake+path%3Arecipe%2F*.sh).
+- [Scripts that use CMake on Windows](https://github.com/search?type=code&q=org%3Aconda-forge+cmake+path%3Arecipe%2F*.bat).
+- [Recipes that use cross-compilation](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22target_platform+%21%3D+build_platform%22+OR+%22build_platform+%21%3D+target_platform%22).
+
+
+:::tip Configure your browser to have a search shortcut
+
+For example, in Chrome you can go to [`chrome://settings/searchEngines`](chrome://settings/searchEngines) and add a new entry with:
+
+- Name: conda-forge recipes
+- Shortcut: `cf`
+- URL: `https://github.com/search?type=code&q=org%3Aconda-forge+%s`
+
+And with that you can simply type `cf your-search-here` for super fast queries!
+:::
+
+
 <a id="using-cmake"></a>
 
 ## Using CMake
