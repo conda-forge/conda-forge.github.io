@@ -18,7 +18,7 @@ List of frequently used terms and acronyms.
 
 Application Binary Interface. ABI is a document that comprehensively defines the binary system interface between applications and the operating system on which they run.
 
-[Learn more](https://en.wikipedia.org/wiki/Application_binary_interface).
+Learn More at [Wikipedia](https://en.wikipedia.org/wiki/Application_binary_interface) or [pypackaging-native](https://pypackaging-native.github.io/background/binary_interface).
 
 <a id="term-CDN"></a>
 
