@@ -32,7 +32,7 @@ Content Delivery Network. CDNs are geographically distributed networks of server
 
 ## CDT
 
-Core Dependency Tree. Core Dependency Tree packages take care of the dependencies that are so close to the system that they are not packaged with conda-forge. A CDT package consists of repackaged CentOS binaries from the appropriate version, either 6 or 7 depending on user choice and platform.
+Core Dependency Tree. Core Dependency Tree packages take care of the dependencies that are so close to the system that they are not packaged with conda-forge. For example, in conda-forge, we have used repackaged CentOS 6 or 7 binaries for some time.
 
 [Learn more](https://conda-forge.org/docs/maintainer/knowledge_base.html#cdt-packages).
 
