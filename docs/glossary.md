@@ -1,3 +1,7 @@
+---
+title: 'Glossary'
+---
+
 <a id="miscellaneous"></a>
 
 <a id="misc-glossary"></a>
