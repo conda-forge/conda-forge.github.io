@@ -56,7 +56,7 @@ Continuous Integration. Continuous integration is the practice of automating the
 
 ## CLI
 
-Command Line Interface. A program in which commands are entered as text, one line at a time, for a computer to execute. This is done in the Miniforge Prompt in Windows, and in a terminal in macOS and Linux. `conda` is executed in a CLI.
+Command Line Interface. A textual interface of a program that allows the user to control the program with a single command line, which is entered in a command-line environment, such as the Miniforge Prompt on Windows, or a terminal on MacOS and Linux. An example of a program offering a CLI is `conda`.
 
 [Learn More](https://en.wikipedia.org/wiki/Command-line_interface).
 
