@@ -131,7 +131,9 @@ Error:
 ImportError: libGL.so.1: cannot open shared object file: No such file or directory
 ```
 
-To fix the error, create a [yum_requirements.txt](knowledge_base.md#yum-deps) file and add _mesa-libGL_.
+If you saw this error while building a package in your feedstock, create a [yum_requirements.txt](knowledge_base.md#yum-deps) file and add `mesa-libGL`. See also [CDTs: `libgl`](./knowledge_base.md#libgl).
+
+If you are seeing this error after installing a package locally, then you are missing an [OpenGL](https://en.wikipedia.org/wiki/OpenGL) provider in your system dependencies. This is more likely to happen in headless systems with no graphics (servers, Docker images, etc). To fix it, you must install a provider like [Mesa](https://www.mesa3d.org/) with your system package manager.
 
 <a id="mfaq-qt-load-xcb"></a>
 
