@@ -20,7 +20,7 @@ When the PR is approved and merged to `main`, the new directory under `recipes/`
 sequenceDiagram
     actor c as contributor
     participant repo as staged-recipes repo
-    rect rgb(178, 223, 219)
+    rect var(--ifm-color-primary-contrast-background)
         Note right of c: 1: Prepare PR
         c->>repo: submit PR
         activate repo
@@ -33,7 +33,7 @@ sequenceDiagram
         repo->>c: report successful CI
         deactivate repo
     end
-    rect rgb(178, 223, 219)
+    rect var(--ifm-color-primary-contrast-background)
         Note right of c: 2: Solicit and address reviews
         loop
             c->>repo: mark as ready for review
@@ -52,7 +52,7 @@ sequenceDiagram
             deactivate repo
         end
     end
-    rect rgb(178, 223, 219)
+    rect var(--ifm-color-primary-contrast-background)
         Note right of repo: Integrate new package into conda-forge
         reviewer->>repo: accept PR
         reviewer->>repo: merge PR

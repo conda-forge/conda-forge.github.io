@@ -529,11 +529,46 @@ const config = {
         contextualSearch: true,
       },
       mermaid: {
-        theme: { light: "base", dark: "forest" },
+        theme: { light: "base", dark: "base" },
         options: {
           themeVariables: {
-            primaryColor: "#b2dfdb",
-            primaryBorderColor: "#00695c",
+            // Here, we set mermaid theme variables, mostly for color and fonts.
+            // Due to the way that mermaid derives colors from other colors,
+            // currently not all variables can be used with the infima variables.
+            // Those that cannot be set in this way are commented out and marked with !!.
+            // General variables
+            // darkMode: set by docusaurus
+            // !! background: "var(--ifm-background-color)",
+            fontFamily: "var(--ifm-font-content-family)",
+            // fontSize
+            // !! primaryColor: "var(--ifm-color-primary-contrast-background)",
+            // !! primaryTextColor: "var(--ifm-color-primary-contrast-background)",
+            // secondaryColor
+            primaryBorderColor: "var(--ifm-color-primary-contrast-foreground)",
+            secondaryBorderColor:
+              "var(--ifm-color-secondary-contrast-foreground)",
+            secondaryTextColor: "var(--ifm-color-content)",
+            // tertiaryColor
+            // tertiaryBorderColor
+            // tertiaryTextColor
+            // From the following three lines about notes, the first (bkg), does not work.
+            // Consequently, we also leave the second alone because it would lead to poor contrast.
+            // !! noteBkgColor: "var(--ifm-color-primary-contrast-background)",
+            // noteTextColor: "var(--ifm-color-content)",
+            noteBorderColor: "var(--ifm-color-secondary-contrast-foreground)",
+            // !! lineColor: "var(--ifm-color-primary-contrast-foreground)",
+            textColor: "var(--ifm-color-content)",
+            // !! mainBkg: "var(--ifm-color-primary-contrast-background)",
+            errorBkgColor: "var(--ifm-color-danger-contrast-background)",
+            // errorTextColor
+            //primaryColor: "#b2dfdb",
+            // Sequence diagram variables
+            actorBkg: "var(--ifm-color-primary-contrast-background)",
+            actorTextColor: "var(--ifm-color-content)",
+            // The following will work only with the next mermaid release,
+            // c.f. https://github.com/mermaid-js/mermaid/pull/5338
+            actorLineColor: "var(--ifm-color-content)",
+            labelBoxBkgColor: "var(--ifm-color-primary-contrast-background)",
           },
         },
       },
