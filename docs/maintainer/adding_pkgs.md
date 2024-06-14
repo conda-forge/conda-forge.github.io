@@ -994,6 +994,42 @@ about:
     - package_license.txt
 ```
 
+<a id="Go"></a>
+
+##### Go
+
+[go-licenses](https://github.com/google/go-licenses) can be included in the build process of a package and will automatically collect and add the license files of all dependencies of a package.
+
+For a detailed description, please visit the project page but a short example can be found below.
+
+First, include the collection of licenses as a step of the build process.
+
+```yaml
+build:
+  number: 0
+  script:
+    - go build [...]
+    - go-licenses save . --save_path="./license-files/"
+```
+
+Then, include the tool as a build time dependency.
+
+```yaml
+requirements:
+  build:
+    - {{ compiler('go') }}
+    - go-licenses
+```
+
+Finally, make sure that the generated file is included in the recipe.
+
+```yaml
+about:
+  license_file:
+    - LICENSE
+    - license-files/
+```
+
 :::warning[Important]
 
 We are not lawyers and cannot guarantee that the above advice is correct or that the tools are able to find all license files.
