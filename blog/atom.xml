@@ -1721,7 +1721,7 @@ Small Development Grant program.</p>]]></content>
 infrastructure. It enables automatic maintenance of <code>conda-forge</code>
 packages by pushing version updates to the underlying software and
 enabling large migrations of packages from one dependency to another
-(e.g., Python 3.7 to Python 3.8). As <code>conda-forg</code> grows in size, with
+(e.g., Python 3.7 to Python 3.8). As <code>conda-forge</code> grows in size, with
 over 9,000 packages to date, automatic maintenance of the <code>conda-forge</code>
 ecosystem will become even more important.</p>
 <p>We here at <code>conda-forge</code> have a large number of potential Google Sumer
