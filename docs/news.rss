@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>conda-forge | community-driven packaging for conda Blog</title>
-        <link>https://conda-forge.org/news</link>
+        <link>https://conda-forge.org/news/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
         <lastBuildDate>Wed, 15 May 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
@@ -10,8 +10,8 @@
         <language>en</language>
         <item>
             <title><![CDATA[NumPy 2 Migration]]></title>
-            <link>https://conda-forge.org/news/2024/05/15/numpy-2-migration</link>
-            <guid>https://conda-forge.org/news/2024/05/15/numpy-2-migration</guid>
+            <link>https://conda-forge.org/news/2024/05/15/numpy-2-migration/</link>
+            <guid>https://conda-forge.org/news/2024/05/15/numpy-2-migration/</guid>
             <pubDate>Wed, 15 May 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[In preparation for the NumPy 2 release, we have begun a migration of all]]></description>
             <content:encoded><![CDATA[<p>In preparation for the NumPy 2 release, we have begun a migration of all
@@ -24,8 +24,8 @@ Please reach out through the usual channels if you have any questions.</p>]]></c
         </item>
         <item>
             <title><![CDATA[Azure macOS x64 runners will now default to macos-12]]></title>
-            <link>https://conda-forge.org/news/2024/05/02/bump-macos-12</link>
-            <guid>https://conda-forge.org/news/2024/05/02/bump-macos-12</guid>
+            <link>https://conda-forge.org/news/2024/05/02/bump-macos-12/</link>
+            <guid>https://conda-forge.org/news/2024/05/02/bump-macos-12/</guid>
             <pubDate>Thu, 02 May 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[Azure Pipelines has deprecated the macos-11 images. As a result we have bumped the default Azure vmImage setting to macos-12.]]></description>
             <content:encoded><![CDATA[<p>Azure Pipelines has deprecated the <a href="https://github.com/actions/runner-images/blob/81eb448ee02647a9634bbba21d902b1424b31915/images/macos/macos-11-Readme.md" target="_blank" rel="noopener noreferrer"><code>macos-11</code> images</a>. As a result we have <a href="https://github.com/conda-forge/conda-smithy/releases/tag/v3.35.0" target="_blank" rel="noopener noreferrer">bumped</a> the default Azure <code>vmImage</code> setting to <a href="https://github.com/actions/runner-images/blob/c7efc0685d959677c603acf49604c13396d854a3/images/macos/macos-12-Readme.md" target="_blank" rel="noopener noreferrer"><code>macos-12</code></a>.
@@ -33,8 +33,8 @@ You can check <a href="https://github.com/conda-forge/conda-forge.github.io/issu
         </item>
         <item>
             <title><![CDATA[Clang now available as compiler for all platforms]]></title>
-            <link>https://conda-forge.org/news/2024/04/30/clang-everywhere</link>
-            <guid>https://conda-forge.org/news/2024/04/30/clang-everywhere</guid>
+            <link>https://conda-forge.org/news/2024/04/30/clang-everywhere/</link>
+            <guid>https://conda-forge.org/news/2024/04/30/clang-everywhere/</guid>
             <pubDate>Tue, 30 Apr 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[Our compiler stack per platform generally uses the "default" compiler for that]]></description>
             <content:encoded><![CDATA[<p>Our compiler stack per platform generally uses the "default" compiler for that
@@ -52,12 +52,12 @@ the default compilers on feedstocks unless there are compelling reasons.</p>
         </item>
         <item>
             <title><![CDATA[The new conda-forge.org]]></title>
-            <link>https://conda-forge.org/news/2024/04/09/new-website</link>
-            <guid>https://conda-forge.org/news/2024/04/09/new-website</guid>
+            <link>https://conda-forge.org/news/2024/04/09/new-website/</link>
+            <guid>https://conda-forge.org/news/2024/04/09/new-website/</guid>
             <pubDate>Tue, 09 Apr 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[As you might have noticed, for the last few months we have been changing different parts of the conda-forge.org website. Read more to learn more about what we changed, how it works and how to contribute.]]></description>
             <content:encoded><![CDATA[<p>As you might have noticed, for the last few months we have been changing different parts of the conda-forge.org website. Read more to learn more about what we changed, how it works and how to contribute.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="old-vs-new">Old vs new<a href="https://conda-forge.org/news/2024/04/09/new-website#old-vs-new" class="hash-link" aria-label="Direct link to Old vs new" title="Direct link to Old vs new">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="old-vs-new">Old vs new<a class="hash-link" aria-label="Direct link to Old vs new" title="Direct link to Old vs new" href="https://conda-forge.org/news/2024/04/09/new-website/#old-vs-new">​</a></h2>
 <p>The <a href="https://github.com/conda-forge/conda-forge.github.io/tree/1d3214c295a46a249434de4fcf48c6b8d747a07f" target="_blank" rel="noopener noreferrer">old conda-forge.org</a> documentation was written with <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener noreferrer">Sphinx</a>. Some extra extensions were responsible for the other parts of the website; e.g. the <a href="https://github.com/conda-forge/blog" target="_blank" rel="noopener noreferrer">blog</a>, the <a href="https://github.com/conda-forge/conda-forge.github.io/tree/1d3214c295a46a249434de4fcf48c6b8d747a07f/newsfeed" target="_blank" rel="noopener noreferrer">RSS feed</a>, the <a href="https://github.com/conda-forge/conda-forge.github.io/blob/1d3214c295a46a249434de4fcf48c6b8d747a07f/index.html.tmpl" target="_blank" rel="noopener noreferrer">frontpage</a>, <a href="https://github.com/conda-forge/conda-forge.github.io/blob/1d3214c295a46a249434de4fcf48c6b8d747a07f/feedstock_outputs.html.tmpl" target="_blank" rel="noopener noreferrer">feedstock outputs</a>, or the <a href="https://github.com/conda-forge/status/tree/bde62db0bc9de460f533d60ca6218604c3e42fa5/site" target="_blank" rel="noopener noreferrer">status page</a>.</p>
 <p>The new website has been rewritten using the <a href="https://docusaurus.io/" target="_blank" rel="noopener noreferrer">Docusaurus</a> project. This allows us to have a single framework for all the sections of the site. There are some big differences if we compare the new site with the old one:</p>
 <ul>
@@ -65,7 +65,7 @@ the default compilers on feedstocks unless there are compelling reasons.</p>
 <li>Most of our docs were written in RST. Docusaurus handles Markdown and MDX (Markdown + JSX).</li>
 <li>Instead of generating static HTML from Jinja templates, we now prefer fetching the JSON payloads and render the relevant pages at build time (i.e. when we run <code>npm run build</code>) or at load time (when the user visits the website). This allows to have all the website rendering logic in the same repository with a unified theme, search engine and statistics.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-we-have-changed">What we have changed<a href="https://conda-forge.org/news/2024/04/09/new-website#what-we-have-changed" class="hash-link" aria-label="Direct link to What we have changed" title="Direct link to What we have changed">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-we-have-changed">What we have changed<a class="hash-link" aria-label="Direct link to What we have changed" title="Direct link to What we have changed" href="https://conda-forge.org/news/2024/04/09/new-website/#what-we-have-changed">​</a></h2>
 <ul>
 <li>The theme for the whole site is responsive, accessible, mobile friendly and supports dark/light modes. A style guide is available too.</li>
 <li>The Status dashboard fetches data dynamically and provides detailed views for each migration.</li>
@@ -79,7 +79,7 @@ the default compilers on feedstocks unless there are compelling reasons.</p>
 <li>The conda-forge.yml docs are autogenerated from the conda-smithy schemas.</li>
 <li>... and a bunch of smaller changes in the documentation. Refer to the <a href="https://github.com/conda-forge/conda-forge.github.io/issues/1971" target="_blank" rel="noopener noreferrer">meta-issue</a> for more information!</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features-you-can-use">New features you can use<a href="https://conda-forge.org/news/2024/04/09/new-website#new-features-you-can-use" class="hash-link" aria-label="Direct link to New features you can use" title="Direct link to New features you can use">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features-you-can-use">New features you can use<a class="hash-link" aria-label="Direct link to New features you can use" title="Direct link to New features you can use" href="https://conda-forge.org/news/2024/04/09/new-website/#new-features-you-can-use">​</a></h2>
 <ul>
 <li>Learn how to use and maintain packages from conda-forge in the <a href="https://conda-forge.org/docs/">main documentation section</a>.</li>
 <li>Read about how our community is set up in the <a href="https://conda-forge.org/community/">Community section</a></li>
@@ -90,15 +90,15 @@ the default compilers on feedstocks unless there are compelling reasons.</p>
 <li>The <a href="https://conda-forge.org/packages/">Packages</a> section will help you find all the packages in conda-forge. If you don't type anything in the search bar, it will list the last 100 uploads to the Anaconda.org channel. The metadata link in each row will take you to the <a href="https://conda-metadata-app.streamlit.app/" target="_blank" rel="noopener noreferrer"><code>conda-metadata-app</code> dashboard</a>.</li>
 <li>Use the <a href="https://conda-forge.org/download/">Download page</a> to get the latest Miniforge installers.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-to-help-and-contribute">How to help and contribute<a href="https://conda-forge.org/news/2024/04/09/new-website#how-to-help-and-contribute" class="hash-link" aria-label="Direct link to How to help and contribute" title="Direct link to How to help and contribute">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-to-help-and-contribute">How to help and contribute<a class="hash-link" aria-label="Direct link to How to help and contribute" title="Direct link to How to help and contribute" href="https://conda-forge.org/news/2024/04/09/new-website/#how-to-help-and-contribute">​</a></h2>
 <p>We have changed a lot of things, so there's a chance we missed something somewhere. If you have suggestions or errors to report, please let us know in the <a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer">website issue tracker</a>. Feel free to check the <a href="https://conda-forge.org/docs/user/contributing/#improve-the-website">documentation contribution guidelines</a> too.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="acknowledgements">Acknowledgements<a href="https://conda-forge.org/news/2024/04/09/new-website#acknowledgements" class="hash-link" aria-label="Direct link to Acknowledgements" title="Direct link to Acknowledgements">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="acknowledgements">Acknowledgements<a class="hash-link" aria-label="Direct link to Acknowledgements" title="Direct link to Acknowledgements" href="https://conda-forge.org/news/2024/04/09/new-website/#acknowledgements">​</a></h2>
 <p>This revamp was a months-long effort. The core team would like to take a moment to thank to all the contributors that made it possible (in alphabetical order): Afshin Darian, Asmit Malakannawar, Gabriela Vives, Isabela Presedo-Floyd, Klaus Zimmermann, Tania Allard.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Upcoming migration for stdlib("c")]]></title>
-            <link>https://conda-forge.org/news/2024/03/24/stdlib-migration</link>
-            <guid>https://conda-forge.org/news/2024/03/24/stdlib-migration</guid>
+            <link>https://conda-forge.org/news/2024/03/24/stdlib-migration/</link>
+            <guid>https://conda-forge.org/news/2024/03/24/stdlib-migration/</guid>
             <pubDate>Sun, 24 Mar 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[Almost since the inception of conda-forge, the baseline version of our standard]]></description>
             <content:encoded><![CDATA[<p>Almost since the inception of conda-forge, the baseline version of our standard
@@ -146,8 +146,8 @@ documentation in the conda-forge knowledge base. For more details, see this
         </item>
         <item>
             <title><![CDATA[Dropping CUDA 11.2 on 2024 April 22]]></title>
-            <link>https://conda-forge.org/news/2024/03/06/dropping-cuda-112</link>
-            <guid>https://conda-forge.org/news/2024/03/06/dropping-cuda-112</guid>
+            <link>https://conda-forge.org/news/2024/03/06/dropping-cuda-112/</link>
+            <guid>https://conda-forge.org/news/2024/03/06/dropping-cuda-112/</guid>
             <pubDate>Wed, 06 Mar 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[Conda-forge is dropping support for CUDA 11.2.]]></description>
             <content:encoded><![CDATA[<p>Conda-forge is dropping support for CUDA 11.2.</p>
@@ -177,8 +177,8 @@ before then (if they have not already done so).</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Rust 1.75 requires setting newer MACOSX_DEPLOYMENT_TARGET]]></title>
-            <link>https://conda-forge.org/news/2024/01/29/rust-175-osx-sdk</link>
-            <guid>https://conda-forge.org/news/2024/01/29/rust-175-osx-sdk</guid>
+            <link>https://conda-forge.org/news/2024/01/29/rust-175-osx-sdk/</link>
+            <guid>https://conda-forge.org/news/2024/01/29/rust-175-osx-sdk/</guid>
             <pubDate>Mon, 29 Jan 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[With the release of rust 1.75, we now require setting the minimal]]></description>
             <content:encoded><![CDATA[<p>With the release of <code>rust 1.75</code>, we now require setting the minimal
@@ -193,8 +193,8 @@ setting <code>MACOSX_DEPLOYMENT_TARGET</code>, see
         </item>
         <item>
             <title><![CDATA[Python 3.12 migration and Python 3.11 by default]]></title>
-            <link>https://conda-forge.org/news/2023/09/25/python-312-migration-and-python-311-by-default</link>
-            <guid>https://conda-forge.org/news/2023/09/25/python-312-migration-and-python-311-by-default</guid>
+            <link>https://conda-forge.org/news/2023/09/25/python-312-migration-and-python-311-by-default/</link>
+            <guid>https://conda-forge.org/news/2023/09/25/python-312-migration-and-python-311-by-default/</guid>
             <pubDate>Mon, 25 Sep 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[With the Python 3.12 release approaching, we have already started the]]></description>
             <content:encoded><![CDATA[<p>With the Python 3.12 release approaching, we have already started the
@@ -216,8 +216,8 @@ to the list of default Python versions on conda-forge.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Bumping Minimum MacOS version to 10.13]]></title>
-            <link>https://conda-forge.org/news/2023/08/24/bumping-minimum-macos-version-to-1013</link>
-            <guid>https://conda-forge.org/news/2023/08/24/bumping-minimum-macos-version-to-1013</guid>
+            <link>https://conda-forge.org/news/2023/08/24/bumping-minimum-macos-version-to-1013/</link>
+            <guid>https://conda-forge.org/news/2023/08/24/bumping-minimum-macos-version-to-1013/</guid>
             <pubDate>Thu, 24 Aug 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[We will bump the minimum MacOS version from 10.9 (released in Oct. 2013,]]></description>
             <content:encoded><![CDATA[<p>We will bump the minimum MacOS version from 10.9 (released in Oct. 2013,
@@ -242,8 +242,8 @@ to at least 4.8.0 or upgrade your system to at least MacOS 10.13.</p>]]></conten
         </item>
         <item>
             <title><![CDATA[End-of-life for CentOS 6]]></title>
-            <link>https://conda-forge.org/news/2023/07/12/end-of-life-for-centos-6</link>
-            <guid>https://conda-forge.org/news/2023/07/12/end-of-life-for-centos-6</guid>
+            <link>https://conda-forge.org/news/2023/07/12/end-of-life-for-centos-6/</link>
+            <guid>https://conda-forge.org/news/2023/07/12/end-of-life-for-centos-6/</guid>
             <pubDate>Wed, 12 Jul 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[As you may be aware, we have delayed the deprecation of our CentOS 6 build system the linux64]]></description>
             <content:encoded><![CDATA[<p>As you may be aware, we have delayed the deprecation of our CentOS 6 build system the <code>linux64</code>
@@ -253,8 +253,8 @@ RedHat for RHEL 6. After this date, we build packages against CentOS 7 by defaul
         </item>
         <item>
             <title><![CDATA[conda-forge Google Group is Now Read-only - Move to Discourse]]></title>
-            <link>https://conda-forge.org/news/2023/01/09/conda-forge-google-group-is-now-read-only-move-to-discourse</link>
-            <guid>https://conda-forge.org/news/2023/01/09/conda-forge-google-group-is-now-read-only-move-to-discourse</guid>
+            <link>https://conda-forge.org/news/2023/01/09/conda-forge-google-group-is-now-read-only-move-to-discourse/</link>
+            <guid>https://conda-forge.org/news/2023/01/09/conda-forge-google-group-is-now-read-only-move-to-discourse/</guid>
             <pubDate>Mon, 09 Jan 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[We have made the conda-forge Google Group read-only. Please use the new]]></description>
             <content:encoded><![CDATA[<p>We have made the conda-forge Google Group read-only. Please use the new
@@ -267,8 +267,8 @@ instead.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[conda-forge/staged-recipes Feedstock Creation Job Moved]]></title>
-            <link>https://conda-forge.org/news/2023/01/08/conda-forge-staged-recipes-feedstock-creation-job-moved</link>
-            <guid>https://conda-forge.org/news/2023/01/08/conda-forge-staged-recipes-feedstock-creation-job-moved</guid>
+            <link>https://conda-forge.org/news/2023/01/08/conda-forge-staged-recipes-feedstock-creation-job-moved/</link>
+            <guid>https://conda-forge.org/news/2023/01/08/conda-forge-staged-recipes-feedstock-creation-job-moved/</guid>
             <pubDate>Sun, 08 Jan 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[We have moved the CI job that makes new feedstocks to our]]></description>
             <content:encoded><![CDATA[<p>We have moved the CI job that makes new feedstocks to our
@@ -278,8 +278,8 @@ our status page.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Moving to .conda Artifacts]]></title>
-            <link>https://conda-forge.org/news/2022/11/16/moving-to-conda-artifacts</link>
-            <guid>https://conda-forge.org/news/2022/11/16/moving-to-conda-artifacts</guid>
+            <link>https://conda-forge.org/news/2022/11/16/moving-to-conda-artifacts/</link>
+            <guid>https://conda-forge.org/news/2022/11/16/moving-to-conda-artifacts/</guid>
             <pubDate>Wed, 16 Nov 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[conda-forge is moving to producing conda artifacts in the version 2]]></description>
             <content:encoded><![CDATA[<p>conda-forge is moving to producing <code>conda</code> artifacts in the version 2
@@ -293,8 +293,8 @@ if you encounter problems or have feedback.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Releasing Python 3.8.14, 3.9.14, and 3.10.7]]></title>
-            <link>https://conda-forge.org/news/2022/11/04/releasing-python-3814-3914-and-3107</link>
-            <guid>https://conda-forge.org/news/2022/11/04/releasing-python-3814-3914-and-3107</guid>
+            <link>https://conda-forge.org/news/2022/11/04/releasing-python-3814-3914-and-3107/</link>
+            <guid>https://conda-forge.org/news/2022/11/04/releasing-python-3814-3914-and-3107/</guid>
             <pubDate>Fri, 04 Nov 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[The CPython versions 3.8.14, 3.9.14, and 3.10.7 were released some weeks]]></description>
             <content:encoded><![CDATA[<p>The CPython versions 3.8.14, 3.9.14, and 3.10.7 were released some weeks
@@ -314,8 +314,8 @@ packages will be made available on or after 2022-11-10, following
         </item>
         <item>
             <title><![CDATA[Conda Moving to CalVer]]></title>
-            <link>https://conda-forge.org/news/2022/09/27/conda-moving-to-calver</link>
-            <guid>https://conda-forge.org/news/2022/09/27/conda-moving-to-calver</guid>
+            <link>https://conda-forge.org/news/2022/09/27/conda-moving-to-calver/</link>
+            <guid>https://conda-forge.org/news/2022/09/27/conda-moving-to-calver/</guid>
             <pubDate>Tue, 27 Sep 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[Conda is moving to CalVer per [CEP]]></description>
             <content:encoded><![CDATA[<p>Conda is moving to CalVer per <a href="https://github.com/conda-incubator/ceps/blob/main/cep-8.md" target="_blank" rel="noopener noreferrer">CEP
@@ -326,8 +326,8 @@ expect any issues.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Dropping Python 3.7]]></title>
-            <link>https://conda-forge.org/news/2022/08/24/dropping-python-37</link>
-            <guid>https://conda-forge.org/news/2022/08/24/dropping-python-37</guid>
+            <link>https://conda-forge.org/news/2022/08/24/dropping-python-37/</link>
+            <guid>https://conda-forge.org/news/2022/08/24/dropping-python-37/</guid>
             <pubDate>Wed, 24 Aug 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[Conda-Forge has been providing support for Python 3.7 for 4 years now.]]></description>
             <content:encoded><![CDATA[<p>Conda-Forge has been providing support for Python 3.7 for 4 years now.</p>
@@ -341,8 +341,8 @@ make room for the new versions the community would like to support.</p>
         </item>
         <item>
             <title><![CDATA[Dropping PyPy 3.7]]></title>
-            <link>https://conda-forge.org/news/2022/08/17/dropping-pypy-37</link>
-            <guid>https://conda-forge.org/news/2022/08/17/dropping-pypy-37</guid>
+            <link>https://conda-forge.org/news/2022/08/17/dropping-pypy-37/</link>
+            <guid>https://conda-forge.org/news/2022/08/17/dropping-pypy-37/</guid>
             <pubDate>Wed, 17 Aug 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[Conda-forge has supported PyPy since almost 2.5 years now, and the]]></description>
             <content:encoded><![CDATA[<p>Conda-forge has supported PyPy since almost 2.5 years now, and the
@@ -353,8 +353,8 @@ contemporary PyPy builds.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Moving to Visual Studio toolchain vc142]]></title>
-            <link>https://conda-forge.org/news/2022/08/11/moving-to-visual-studio-toolchain-vc142</link>
-            <guid>https://conda-forge.org/news/2022/08/11/moving-to-visual-studio-toolchain-vc142</guid>
+            <link>https://conda-forge.org/news/2022/08/11/moving-to-visual-studio-toolchain-vc142/</link>
+            <guid>https://conda-forge.org/news/2022/08/11/moving-to-visual-studio-toolchain-vc142/</guid>
             <pubDate>Thu, 11 Aug 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[Microsoft has deprecated the Visual Studio (VS) 2017 compiler and]]></description>
             <content:encoded><![CDATA[<p>Microsoft has deprecated the Visual Studio (VS) 2017 compiler and
@@ -376,8 +376,8 @@ you will need to upgrade your compiler (VS2019 is a drop-in replacement
         </item>
         <item>
             <title><![CDATA[Azure OSX VM Image Bumped to Version 11]]></title>
-            <link>https://conda-forge.org/news/2022/07/22/azure-osx-vm-image-bumped-to-version-11</link>
-            <guid>https://conda-forge.org/news/2022/07/22/azure-osx-vm-image-bumped-to-version-11</guid>
+            <link>https://conda-forge.org/news/2022/07/22/azure-osx-vm-image-bumped-to-version-11/</link>
+            <guid>https://conda-forge.org/news/2022/07/22/azure-osx-vm-image-bumped-to-version-11/</guid>
             <pubDate>Fri, 22 Jul 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[Azure is removing their OSX 10.15 VM image and so we are bumping to 11.]]></description>
             <content:encoded><![CDATA[<p>Azure is removing their OSX 10.15 VM image and so we are bumping to 11.
@@ -388,8 +388,8 @@ questions!</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Packages for Qt/PyQt 5.15.2 are now available]]></title>
-            <link>https://conda-forge.org/news/2022/04/23/packages-for-qtpyqt-5152-are-now-available</link>
-            <guid>https://conda-forge.org/news/2022/04/23/packages-for-qtpyqt-5152-are-now-available</guid>
+            <link>https://conda-forge.org/news/2022/04/23/packages-for-qtpyqt-5152-are-now-available/</link>
+            <guid>https://conda-forge.org/news/2022/04/23/packages-for-qtpyqt-5152-are-now-available/</guid>
             <pubDate>Sat, 23 Apr 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[After more than six months, the conda-forge team and contributors have]]></description>
             <content:encoded><![CDATA[<p>After more than six months, the conda-forge team and contributors have

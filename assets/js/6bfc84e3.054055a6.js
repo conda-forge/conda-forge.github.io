@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcf_infra_docs=self.webpackChunkcf_infra_docs||[]).push([[6135],{15844:s=>{s.exports=JSON.parse('{"blogBasePath":"/news","blogTitle":"Blog"}')}}]);
