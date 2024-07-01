@@ -32,7 +32,19 @@
       "maintainer/pinning_deps",
       "maintainer/conda_forge_yml",
       "maintainer/knowledge_base",
-      "maintainer/maintainer_faq"
+      "maintainer/maintainer_faq",
+      {
+        "type": "category",
+        "label": "Understanding conda-forge",
+        "link": {
+          "type": "doc",
+          "id": "maintainer/understanding_conda_forge/index"
+        },
+        "items": [
+          "maintainer/understanding_conda_forge/life_cycle",
+          "maintainer/understanding_conda_forge/staged_recipes"
+        ]
+      }
     ]
   },
   "glossary"
