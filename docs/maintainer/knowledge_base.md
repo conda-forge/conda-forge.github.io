@@ -1339,8 +1339,8 @@ Before learning how to use it, please read these considerations:
 To implement microarchitecture-optimized builds in your feedstock, you'll end up with something like:
 
 ```yaml title="recipe/conda_build_config.yaml"
-microarch_level:  # [unix and x86_64]
-  - 1  # [unix and x86_64]
+microarch_level:
+  - 1
   - 3  # [unix and x86_64]
   - 4  # [unix and x86_64]
 ```
