@@ -195,7 +195,10 @@ Subscriptions](https://visualstudio.microsoft.com/vs/older-downloads/#visual-stu
 To download build tools, you'll need a Microsoft account. Once on the
 Visual Studio Subscriptions page, you may also need to join the Dev Essentials
 program. Once that's done, you can click the "Download" tab and search for
-"Build Tools for Visual Studio 2022".
+"Build Tools for Visual Studio 2022". Until conda-forge has completely
+[migrated to Visual Studio 2022](https://github.com/conda-forge/conda-forge.github.io/issues/2138),
+you may still need to install ["Build Tools for Visual Studio 2019"](https://aka.ms/vs/16/release/vs_BuildTools.exe)
+to locally build a feedstock.
 
 If you need more information. Please refer [the Python wiki page on Windows compilers](https://wiki.python.org/moin/WindowsCompilers).
 
