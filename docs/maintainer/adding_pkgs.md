@@ -56,7 +56,7 @@ There are, currently, three ways to generate a recipe:
    Installation and usage of `grayskull`:
 
    - Create a new environment named e.g. "grayskull" with grayskull installed : `conda create --name grayskull -c conda-forge grayskull`
-   - Run the grayskull command in the newly created environment through `conda run -n grayskull grayskull pypi --strict-conda-forge YOUR_PACKAGE_NAME` to generate the recipe. Replace `YOUR_PACKAGE_NAME` with the package name. The package will be in the folder `YOUR_PACKAGE_NAME` in the working directory.
+   - Run the grayskull command in the newly created environment through `conda run --no-capture-output -n grayskull grayskull pypi --strict-conda-forge YOUR_PACKAGE_NAME` to generate the recipe. Replace `YOUR_PACKAGE_NAME` with the package name. The package will be in the folder `YOUR_PACKAGE_NAME` in the working directory.
 
    :::
 
