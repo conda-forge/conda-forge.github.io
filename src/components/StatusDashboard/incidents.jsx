@@ -25,16 +25,16 @@ const REPO = { owner: "conda-forge", repo: "status" };
 
 // The badge color for each severity level.
 const SEVERITY = {
-  investigating: "info",
+  "investigating": "info",
   [DEGRADED]: "warning",
   [MAJOR]: "danger",
-  maintenance: "info",
+  "maintenance": "info"
 };
 
 export default function Incidents({ ongoing, onLoad, ...props }) {
   const [{ closed, current, open }, setState] = useState(() => {
     const { current, open } = props;
-    return { closed: [], current: current ?? new Set(), open: open ?? [] };
+    return { closed: [], current: current ?? new Set(), open: open ?? [] }
   });
   useEffect(() => {
     void (async (initialized = current.size && ongoing && open.length) => {
@@ -48,9 +48,7 @@ export default function Incidents({ ongoing, onLoad, ...props }) {
       let current = new Set();
       try {
         const issues = await octokit.rest.issues.listForRepo({
-          ...REPO,
-          per_page: 100,
-          state: "all",
+          ...REPO, per_page: 100, state: "all"
         });
         for (const issue of issues.data) {
           const labels = new Set(issue.labels.map(({ name }) => name));
@@ -76,33 +74,24 @@ export default function Incidents({ ongoing, onLoad, ...props }) {
     <div className="card margin-top--xs">
       <div className="card__header">
         <h3>
-          Incidents{" "}
+          Incidents
+          {" "}
           {!!current.size && (
-            <span
-              className={`badge badge--${
-                current.has(MAJOR)
-                  ? "danger"
-                  : current.has(DEGRADED)
-                  ? "warning"
-                  : "info"
-              }`}
-            >
-              {current.has(MAJOR)
-                ? MAJOR
-                : current.has(DEGRADED)
-                ? DEGRADED
-                : current.values().next().value}
+            <span className={
+              `badge badge--${
+                current.has(MAJOR) ? "danger" : current.has(DEGRADED) ? "warning" : "info"
+              }`}>
+              {
+                current.has(MAJOR) ? MAJOR :
+                current.has(DEGRADED) ? DEGRADED :
+                current.values().next().value}
             </span>
           )}
         </h3>
       </div>
       <div className={`card__body ${styles.incidents}`}>
-        {open.map((issue, i) => (
-          <Incident key={i}>{issue}</Incident>
-        ))}
-        {closed.map((issue, i) => (
-          <Incident key={i}>{issue}</Incident>
-        ))}
+        {open.map((issue, i) => <Incident key={i}>{issue}</Incident>)}
+        {closed.map((issue, i) => <Incident key={i}>{issue}</Incident>)}
       </div>
     </div>
   );
@@ -115,31 +104,26 @@ function Incident({ children }) {
   return (
     <div className={styles.incident}>
       <div>
-        <span
-          className={`badge badge--${
-            open ? SEVERITY[issue.severity] : "success"
-          }
-        `}
-        >
+        <span className={
+          `badge badge--${open ? SEVERITY[issue.severity] : "success"}
+        `}>
           {open ? "ongoing" : "resolved"}
-        </span>{" "}
+        </span>
+        {" "}
         <span className={`badge badge--${SEVERITY[issue.severity]}`}>
           {issue.severity}
         </span>
         <em className={styles.incident_date}>{date.format(DATE)} UTC</em>
       </div>
       <Link className={styles.incident_link} to={issue.html_url}>
-        <Markdown
-          components={{
-            p(props) {
-              const { children } = props;
-              return <>{children}</>;
-            },
-          }}
-        >
-          {issue.title}
-        </Markdown>
-        (#{issue.number})
+      <Markdown
+        components={{
+          p(props) {
+            const { children } = props
+            return <>{children}</>
+            }
+          }}>{issue.title}
+        </Markdown> (#{issue.number})
       </Link>
       <div className={styles.incident_body}>
         <Markdown>{issue.body}</Markdown>
@@ -153,4 +137,4 @@ const intersection = (one, two) => {
   const [bigger, smaller] = one.size >= two.size ? [one, two] : [two, one];
   for (const item of smaller) if (bigger.has(item)) intersection.add(item);
   return intersection;
-};
+}
