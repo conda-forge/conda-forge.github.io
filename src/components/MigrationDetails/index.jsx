@@ -270,7 +270,7 @@ function Row({ children }) {
       </td>
     </tr>
     {details && !collapsed && (<tr>
-      <td colSpan={3}><pre dangerouslySetInnerHTML={{ __html: details}} /></td>
+      <td colSpan={4}><pre dangerouslySetInnerHTML={{ __html: details}} /></td>
     </tr>)}
   </>);
 }
