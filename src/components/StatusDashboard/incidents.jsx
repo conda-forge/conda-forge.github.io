@@ -116,7 +116,14 @@ function Incident({ children }) {
         <em className={styles.incident_date}>{date.format(DATE)} UTC</em>
       </div>
       <Link className={styles.incident_link} to={issue.html_url}>
-        {issue.title} (#{issue.number})
+      <Markdown
+        components={{
+          p(props) {
+            const { children } = props
+            return <>{children}</>
+            }
+          }}>{issue.title}
+        </Markdown> (#{issue.number})
       </Link>
       <div className={styles.incident_body}>
         <Markdown>{issue.body}</Markdown>
