@@ -2,6 +2,8 @@ import Link from "@docusaurus/Link";
 import { urls } from "@site/src/constants";
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function VersionUpdates({ onLoad }) {
   const [{ collapsed, errored, expanded, errors, queued }, setState] =
@@ -92,8 +94,17 @@ export default function VersionUpdates({ onLoad }) {
               </div>
               <div className={styles.errored_item_content}
                 style={{ display: !expanded[item] && "none" }}>
-                <pre>{errors[item]}</pre>
-              </div>
+                <Markdown 
+                  components={{
+                    p(props) {
+                   const { children } = props
+                    return <>{children}</>
+                    }
+                  }}
+                  remarkPlugins={[remarkGfm]}
+                  >{errors[item]}
+                </Markdown>
+                </div>
             </React.Fragment>
           ))}
         </div>
