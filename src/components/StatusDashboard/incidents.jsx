@@ -4,6 +4,7 @@ import { Octokit } from "octokit";
 import React, { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import styles from "./styles.module.css";
+import remarkGfm from 'remark-gfm'
 
 // This label indicates warning.
 const DEGRADED = "degraded performance";
@@ -126,7 +127,11 @@ function Incident({ children }) {
         </Markdown> (#{issue.number})
       </Link>
       <div className={styles.incident_body}>
-        <Markdown>{issue.body}</Markdown>
+        <Markdown
+          remarkPlugins={[remarkGfm]}
+        >
+          {issue.body}
+        </Markdown>
       </div>
     </div>
   );
