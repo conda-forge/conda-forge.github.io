@@ -50,6 +50,7 @@ jobs:
           lycheeVersion: "0.14.3"
           args: >
             --no-progress
+            --timeout 60
             --base "$(pwd)/build"
             --accept 100..399,401,403,429
             --exclude '.*/status/migration/.*'
