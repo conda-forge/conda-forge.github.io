@@ -237,7 +237,7 @@
   max-width: 100%;
 }
 
-.errored_item_content {
+.errored_item_content pre {
   font-size: smaller;
   margin: 0;
   overflow: auto;
