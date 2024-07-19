@@ -37,7 +37,7 @@ export default function MigrationDetails() {
   const location = useLocation();
   const { siteConfig } = useDocusaurusContext();
   const [state, setState] = useState({
-    name: location.pathname.replace("/status/migration", "").split("/").pop(),
+    name: new URLSearchParams(location.search).get("name"),
     details: null,
     redirect: false,
     view: "table",

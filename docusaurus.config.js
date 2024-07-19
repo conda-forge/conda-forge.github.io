@@ -111,18 +111,6 @@ const config = {
       }),
     ],
     [
-      path.resolve(__dirname, "plugins", "migration-urls"),
-      {
-        routes: [
-          {
-            path: "/status/migration/",
-            exact: false,
-            component: "@site/src/components/MigrationDetails/",
-          },
-        ],
-      },
-    ],
-    [
       "content-blog",
       /** @type {import('@docusaurus/plugin-content-blog').Options} */
       {
