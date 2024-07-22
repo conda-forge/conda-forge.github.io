@@ -205,6 +205,8 @@ function Graph(props) {
 function Table({ details }) {
   const defaultFilters = ORDERED.reduce((filters, [status]) => ({ ...filters, [status]: DEFAULT_FILTERING_STATE }), {});
   const [filters, setState] = useState(defaultFilters);
+  filters['done'] = !DEFAULT_FILTERING_STATE;
+  console.log('filters:', filters)
   const feedstock = details._feedstock_status;
   const rows = ORDERED.reduce((rows, [status]) => (
     filters[status] ? rows :
