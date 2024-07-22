@@ -7,6 +7,8 @@ import SVG from 'react-inlinesvg';
 import styles from "./styles.module.css";
 
 // { Done, In PR, Awaiting PR, Awaiting parents, Not solvable, Bot error }
+// The third value is a boolean representing the default display state on load
+// 'true' means visible, 'false' means hidden
 const ORDERED = [
   ["done", "Done", true],
   ["in-pr", "In PR", false],
@@ -14,7 +16,7 @@ const ORDERED = [
   ["awaiting-parents", "Awaiting parents", false],
   ["not-solvable", "Not solvable", false],
   ["bot-error", "Bot error", false],
-]
+];
 
 const TITLES = ORDERED.reduce((titles, [key, title]) =>
   ({ ...titles, [key]: title }), {});
