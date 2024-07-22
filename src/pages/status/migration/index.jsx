@@ -8,17 +8,14 @@ import styles from "./styles.module.css";
 
 // { Done, In PR, Awaiting PR, Awaiting parents, Not solvable, Bot error }
 const ORDERED = [
-  ["done", "Done"],
-  ["in-pr", "In PR"],
-  ["awaiting-pr", "Awaiting PR"],
-  ["awaiting-parents", "Awaiting parents"],
-  ["not-solvable", "Not solvable"],
-  ["bot-error", "Bot error"],
-];
+  ["done", "Done", true],
+  ["in-pr", "In PR", false],
+  ["awaiting-pr", "Awaiting PR", false],
+  ["awaiting-parents", "Awaiting parents", false],
+  ["not-solvable", "Not solvable", false],
+  ["bot-error", "Bot error", false],
+]
 
-// Default filtering is defined such as all recipes repositories/ migration PRs are displayed in the dedicated table 
-// when loading the migration details page
-const DEFAULT_FILTERING_STATE = false
 const TITLES = ORDERED.reduce((titles, [key, title]) =>
   ({ ...titles, [key]: title }), {});
 
@@ -203,10 +200,8 @@ function Graph(props) {
 }
 
 function Table({ details }) {
-  const defaultFilters = ORDERED.reduce((filters, [status]) => ({ ...filters, [status]: DEFAULT_FILTERING_STATE }), {});
+  const defaultFilters = ORDERED.reduce((filters, [status], index) => ({ ...filters, [status]: ORDERED[index][2] }), {});
   const [filters, setState] = useState(defaultFilters);
-  filters['done'] = !DEFAULT_FILTERING_STATE;
-  console.log('filters:', filters)
   const feedstock = details._feedstock_status;
   const rows = ORDERED.reduce((rows, [status]) => (
     filters[status] ? rows :
