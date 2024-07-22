@@ -4,17 +4,17 @@ after merging this PR: https://github.com/conda-forge/conda-forge.github.io/pull
 We can probably remove this at some point when enough migrations have been closed and
 they are not as relevant.
 */
-import React from 'react';
-import NotFound from '@theme-original/NotFound';
+import React from "react";
+import NotFound from "@theme-original/NotFound";
 import { useLocation } from "@docusaurus/router";
-import Layout from '@theme/Layout';
-import Heading from '@theme/Heading';
+import Layout from "@theme/Layout";
+import Heading from "@theme/Heading";
 
 export default function NotFoundWrapper(props) {
   const location = useLocation().pathname;
-  if (location.match("/status/migration/[a-zA-Z0-9\-_+]+")) {
+  if (location.match("/status/migration/[a-zA-Z0-9-_+]+")) {
     const parts = location.split("/");
-    parts.pop();  // last element is empty due to trailing slash
+    parts.pop(); // last element is empty due to trailing slash
     const target = "/status/migration/?name=" + parts.pop();
     return (
       <Layout title="Page has moved">
@@ -25,13 +25,16 @@ export default function NotFoundWrapper(props) {
                 <h1>This page has moved</h1>
               </Heading>
               <p>
-                Please visit the new location at <a href={target}><code>{target}</code></a>
+                Please visit the new location at{" "}
+                <a href={target}>
+                  <code>{target}</code>
+                </a>
               </p>
             </div>
           </div>
         </main>
       </Layout>
-    )
+    );
   }
   // Regular 404 component
   return (
