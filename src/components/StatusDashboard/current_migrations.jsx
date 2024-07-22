@@ -1,7 +1,7 @@
 import { Redirect } from "@docusaurus/router";
 import { urls } from "@site/src/constants";
 import React, { useEffect, useState } from "react";
-import { measureProgress } from "../MigrationDetails";
+import { measureProgress } from "@site/src/pages/status/migration";
 import styles from "./styles.module.css";
 import Link from "@docusaurus/Link";
 
@@ -158,7 +158,7 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
       <tbody className={collapsed ? styles.collapsed  : undefined}>
         {rows.map((row) => {
           const { progress } = row;
-          const href = `/status/migration/${row.name}`;
+          const href = `/status/migration/?name=${row.name}`;
           return (
             <tr key={row.name}>
               <td>
