@@ -16,7 +16,7 @@ const ORDERED = [
   ["bot-error", "Bot error"],
 ];
 
-// Default filtering is defined such as all the migrations are displayed in the dedicated table 
+// Default filtering is defined such as all recipes repositories/ migration PRs are displayed in the dedicated table 
 // when loading the migration details page
 const DEFAULT_FILTERING_STATE = false
 const TITLES = ORDERED.reduce((titles, [key, title]) =>
