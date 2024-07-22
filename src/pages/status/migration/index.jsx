@@ -16,6 +16,9 @@ const ORDERED = [
   ["bot-error", "Bot error"],
 ];
 
+// Default filtering is defined such as all the migrations are displayed in the dedicated table 
+// when loading the migration details page
+const DEFAULT_FILTERING_STATE = false
 const TITLES = ORDERED.reduce((titles, [key, title]) =>
   ({ ...titles, [key]: title }), {});
 
@@ -200,8 +203,8 @@ function Graph(props) {
 }
 
 function Table({ details }) {
-  const [filters, setState] = useState(ORDERED
-      .reduce((filters, [status]) => ({ ...filters, [status]: true }), {}));
+  const defaultFilters = ORDERED.reduce((filters, [status]) => ({ ...filters, [status]: DEFAULT_FILTERING_STATE }), {});
+  const [filters, setState] = useState(defaultFilters);
   const feedstock = details._feedstock_status;
   const rows = ORDERED.reduce((rows, [status]) => (
     filters[status] ? rows :
