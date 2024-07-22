@@ -48,11 +48,10 @@ const config = {
   },
 
   stylesheets: [
-    //Add Font Awesome stylesheets
-    "/fonts/font-awesome/fontawesome.css",
-    "/fonts/font-awesome/solid.css",
-    "/fonts/font-awesome/regular.css",
-    "/fonts/font-awesome/brands.css",
+    {
+      href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css",
+      type: "text/css",
+    },
   ],
 
   scripts: [
