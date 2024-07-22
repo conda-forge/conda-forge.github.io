@@ -14,8 +14,7 @@ export default function NotFoundWrapper(props) {
   const location = useLocation().pathname;
   if (location.match("/status/migration/[a-zA-Z0-9-_+]+")) {
     const parts = location.split("/");
-    parts.pop(); // last element is empty due to trailing slash
-    const target = "/status/migration/?name=" + parts.pop();
+    const target = "/status/migration/?name=" + parts[parts.indexOf("migration") + 1];
     return (
       <Layout title="Page has moved">
         <main className="container margin-vert--xl">
