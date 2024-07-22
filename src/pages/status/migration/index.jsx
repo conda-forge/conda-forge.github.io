@@ -8,7 +8,7 @@ import styles from "./styles.module.css";
 
 // { Done, In PR, Awaiting PR, Awaiting parents, Not solvable, Bot error }
 // The third value is a boolean representing the default display state on load
-// 'true' means visible, 'false' means hidden
+// 'true' means hidden, 'false' means visible
 const ORDERED = [
   ["done", "Done", true],
   ["in-pr", "In PR", false],
