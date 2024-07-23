@@ -53,15 +53,15 @@
 }
 
 .migration_details_filter_in_pr {
-  background-color: var(--ifm-color-grey-light);
+  background-color: var(--ifm-color-gray-500);
 }
 
 .migration_details_filter_awaiting_pr {
-  background-color: var(--ifm-color-grey-medium);
+  background-color: var(--ifm-color-gray-600);
 }
 
 .migration_details_filter_awaiting_parents {
-  background-color: var(--ifm-color-grey-dark);
+  background-color: var(--ifm-color-gray-800);
 }
 
 .migration_details_filter_not_solvable {
