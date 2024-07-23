@@ -7,13 +7,15 @@ import SVG from 'react-inlinesvg';
 import styles from "./styles.module.css";
 
 // { Done, In PR, Awaiting PR, Awaiting parents, Not solvable, Bot error }
+// The third value is a boolean representing the default display state on load
+// 'true' means hidden, 'false' means visible
 const ORDERED = [
-  ["done", "Done"],
-  ["in-pr", "In PR"],
-  ["awaiting-pr", "Awaiting PR"],
-  ["awaiting-parents", "Awaiting parents"],
-  ["not-solvable", "Not solvable"],
-  ["bot-error", "Bot error"],
+  ["done", "Done", true],
+  ["in-pr", "In PR", false],
+  ["awaiting-pr", "Awaiting PR", false],
+  ["awaiting-parents", "Awaiting parents", false],
+  ["not-solvable", "Not solvable", false],
+  ["bot-error", "Bot error", false],
 ];
 
 const TITLES = ORDERED.reduce((titles, [key, title]) =>
@@ -200,8 +202,8 @@ function Graph(props) {
 }
 
 function Table({ details }) {
-  const [filters, setState] = useState(ORDERED
-      .reduce((filters, [status]) => ({ ...filters, [status]: true }), {}));
+  const defaultFilters = ORDERED.reduce((filters, [status, _, toggled]) => ({ ...filters, [status]: toggled }), {});
+  const [filters, setState] = useState(defaultFilters);
   const feedstock = details._feedstock_status;
   const rows = ORDERED.reduce((rows, [status]) => (
     filters[status] ? rows :
