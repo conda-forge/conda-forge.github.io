@@ -202,7 +202,7 @@ function Graph(props) {
 }
 
 function Table({ details }) {
-  const defaultFilters = ORDERED.reduce((filters, [status], index) => ({ ...filters, [status]: ORDERED[index][2] }), {});
+  const defaultFilters = ORDERED.reduce((filters, [status, _, toggled]) => ({ ...filters, [status]: toggled }), {});
   const [filters, setState] = useState(defaultFilters);
   const feedstock = details._feedstock_status;
   const rows = ORDERED.reduce((rows, [status]) => (
