@@ -28,7 +28,6 @@
   --ifm-font-content-family: "Inter";
   transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
   --ifm-color-primary: var(--ifm-color-primary-light-mode);
-  --ifm-color-text-on-primary:  var(--ifm-color-text-on-primary-light-mode);
   --ifm-color-primary-dark: #007466;
   --ifm-color-primary-darker: #00695c;
   --ifm-color-primary-darkest: #004d40;

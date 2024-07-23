@@ -24,8 +24,6 @@
   text-align: center;
 }
 
-
-
 .migration_details_filter_button {
   border-radius: 25px;
   cursor: pointer;
@@ -46,6 +44,9 @@
   color: var(--ifm-color-primary-lightest);
 }
 
+.migration_details_filter_button:hover {
+  text-decoration: underline;
+}
 /*
   Filter buttons in order:
   { Done, In PR, Awaiting PR, Awaiting parents, Not solvable, Bot error }
@@ -122,10 +123,6 @@
   border: 3px solid rgb(242, 59, 47);
   color: var(--ifm-color-primary-dark);
 }
-
-
-
-
 
 .migration_details_filter_icon {
   width: 16px;
