@@ -115,16 +115,19 @@ function Bar({ details }) {
         {ORDERED.filter(([key]) => details[key]?.length).map(([key], index) => (
           <>
           <a
-            id={"migration-bar-element" + "-" + key}
+            id={`migration-bar-element-${key}`}
             className={styles[`${prefix}${key.replace("-", "_")}`]}
             style={{ flex: details[key].length }}
             key={index}
             alt={TITLES[key]}
           ></a>
-         <Tooltip anchorSelect={"#migration-bar-element" + "-" + key}
-                  style={{color: "white", backgroundColor: "var(--ifm-color-gray-700)"}} place="top" className={styles.migration_details_bar_tooltip}>
-          <div>{TITLES[key]}</div>
-        </Tooltip>
+          <Tooltip
+            anchorSelect={`#migration-bar-element-${key}`}
+            place="top"
+            className={styles.migration_details_bar_tooltip}
+          >
+            <div>{TITLES[key]}</div>
+          </Tooltip>
           </>
         ))}
       </div>

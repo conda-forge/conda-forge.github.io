@@ -124,3 +124,8 @@
   font-size: smaller;
   content: " ▿";
 }
+
+.migration_details_bar .migration_details_bar_tooltip {
+  color: var(--ifm-color-emphasis-100);
+  background-color: var(--ifm-color-emphasis-900);
+}
