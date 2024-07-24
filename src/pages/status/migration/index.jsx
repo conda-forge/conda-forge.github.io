@@ -5,6 +5,7 @@ import Layout from "@theme/Layout";
 import React, { useEffect, useState } from "react";
 import SVG from 'react-inlinesvg';
 import styles from "./styles.module.css";
+import { Tooltip } from "react-tooltip";
 
 // { Done, In PR, Awaiting PR, Awaiting parents, Not solvable, Bot error }
 // The third value is a boolean representing the default display state on load
@@ -111,13 +112,20 @@ function Bar({ details }) {
     <>
       <h4>PRs made {details.progress.percentage.toFixed(0)}%</h4>
       <div className={styles.migration_details_bar}>
-        {ORDERED.filter(([key]) => details[key]?.length)
-          .map(([key], index) => (
-            <div
-              title={TITLES[key]}
-              className={styles[`${prefix}${key.replace("-", "_")}`]}
-              style={{ flex: details[key].length }} key={index}></div>
-          ))}
+        {ORDERED.filter(([key]) => details[key]?.length).map(([key], index) => (
+          <>
+          <a
+            id={"migration-bar-element" + "-" + key}
+            className={styles[`${prefix}${key.replace("-", "_")}`]}
+            style={{ flex: details[key].length }}
+            key={index}
+          ></a>
+         <Tooltip anchorSelect={"#migration-bar-element" + "-" + key} 
+                  style={{color: "white", backgroundColor: "var(--ifm-color-gray-700)"}} place="top" className={styles.migration_details_bar_tooltip}>
+          <div>{TITLES[key]}</div>
+        </Tooltip>
+          </>
+        ))}
       </div>
     </>
   );
