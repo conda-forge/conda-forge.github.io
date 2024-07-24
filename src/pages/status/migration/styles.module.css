@@ -65,14 +65,12 @@
 }
 
 .migration_details_filter_not_solvable {
-  background-color: var(--ifm-color-warning)
+  background-color: var(--ifm-color-warning);
 }
-
 
 .migration_details_filter_bot_error {
   background-color: var(--ifm-color-danger);
 }
-
 
 .migration_details_filter_icon {
   width: 16px;
