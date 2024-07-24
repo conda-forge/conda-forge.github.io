@@ -120,7 +120,7 @@ function Bar({ details }) {
             style={{ flex: details[key].length }}
             key={index}
           ></a>
-         <Tooltip anchorSelect={"#migration-bar-element" + "-" + key} 
+         <Tooltip anchorSelect={"#migration-bar-element" + "-" + key}
                   style={{color: "white", backgroundColor: "var(--ifm-color-gray-700)"}} place="top" className={styles.migration_details_bar_tooltip}>
           <div>{TITLES[key]}</div>
         </Tooltip>
