@@ -119,7 +119,7 @@ function Bar({ details }) {
             className={styles[`${prefix}${key.replace("-", "_")}`]}
             style={{ flex: details[key].length }}
             key={index}
-            alt={TITLES[key]}
+            alt={TITLES[key] + " " + parseFloat(details[key].length*100/measureProgress(details).total).toFixed(1) + "% (" + details[key].length+" PRs over "+measureProgress(details).total + ")"}
           ></a>
           <Tooltip
             anchorSelect={`#migration-bar-element-${key}`}
