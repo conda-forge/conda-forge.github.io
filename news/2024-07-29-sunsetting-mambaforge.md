@@ -16,5 +16,5 @@ The deprecation process will roughly follow this calendar:
 
 - August 2024: The Mambaforge installers will warn about the deprecation and make the user wait 30
   seconds before continuing.
-- October 2024: The Mambaforge installers will refuse to install during several pre-specified date ranges (i.e., ["brownouts"](https://en.wikipedia.org/wiki/Brownout_(software_engineering))) in order to encourage users to switch to Miniforge.
+- October 2024: The Mambaforge installers will refuse to install during several pre-specified date ranges (i.e., ["brownouts"](<https://en.wikipedia.org/wiki/Brownout_(software_engineering)>)) in order to encourage users to switch to Miniforge.
 - January 2025: The Mambaforge installers will stop being built and distributed.
