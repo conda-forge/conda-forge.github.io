@@ -1,6 +1,6 @@
 # Sunsetting Mambaforge
 
-With the [Miniforge 23.3.1 release](https://github.com/conda-forge/miniforge/releases/tag/23.3.1-0), 
+With the [Miniforge 23.3.1 release](https://github.com/conda-forge/miniforge/releases/tag/23.3.1-0),
 the Miniforge and Mambaforge installers became essentially **identical**. The only difference
 between the two was their name and, subsequently, the default installation directory.
 
