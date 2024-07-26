@@ -32,7 +32,7 @@
   font-weight: 600;
   margin: 3px;
   margin-bottom: 10px;
-  width: 210px;
+  width: 200px;
   user-select: none;
   text-align: right;
   padding: 2px;
@@ -168,7 +168,10 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  padding: 2px;
+  position: relative;
+  left: 8px;
+  top: 2px;
+
 }
 
 .migration_details_filter_dot_on {
@@ -178,15 +181,12 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  padding: 2px;
-}
-
-.migration_details_filter_icons_container {
-  width: 40px;
+  left: 8px;
+  top: 2px;
 }
 
 .migration_details_filter_title_container {
-  width: 150px;
+  display: inline;
   position: relative;
-  left: 10px;
+  left: 14px;
 }

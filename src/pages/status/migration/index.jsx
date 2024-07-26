@@ -175,21 +175,15 @@ function Filters({ counts, filters, onFilter }) {
           key={index}
           onClick={() => onFilter(key)}>
           {filters[key] ?
-          <div className={styles.migration_details_filter_icons_container}>
-           <i className={`${icon} fa-solid fa-filter-circle-xmark`}></i>
             <span className={[
               styles[`${base}_on`],
               styles.migration_details_filter_dot_on
             ].join(" ")}></span>
-            </div>
             :
-          <div className={styles.migration_details_filter_icons_container}>
-            <i className={`${icon} fa-solid fa-filter`}></i>
             <span className={[
               styles[base],
               styles.migration_details_filter_dot].join(" ")}>
             </span>
-          </div>
           }
           <div className={styles.migration_details_filter_title_container}>
             {title} ({counts[key]})
