@@ -20,8 +20,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  text-align: center;
+  text-align: left;
 }
 
 .migration_details_filter_button {
