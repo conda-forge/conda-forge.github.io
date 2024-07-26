@@ -177,20 +177,20 @@ function Filters({ counts, filters, onFilter }) {
           {filters[key] ?
           <div className={styles.migration_details_filter_icons_container}>
            <i className={`${icon} fa-solid fa-filter-circle-xmark`}></i>
-            <span className={[ 
+            <span className={[
               styles[`${base}_on`],
               styles.migration_details_filter_dot_on
-            ].join(" ")}></span> 
+            ].join(" ")}></span>
             </div>
             :
           <div className={styles.migration_details_filter_icons_container}>
             <i className={`${icon} fa-solid fa-filter`}></i>
-            <span className={[ 
+            <span className={[
               styles[base],
               styles.migration_details_filter_dot].join(" ")}>
-            </span> 
+            </span>
           </div>
-          } 
+          }
           <div className={styles.migration_details_filter_title_container}>
             {title} ({counts[key]})
           </div>
