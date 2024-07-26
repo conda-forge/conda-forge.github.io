@@ -38,7 +38,7 @@
   --ifm-color-success: #388e3c;
   --ifm-color-info: #1976d2;
   --ifm-color-warning: #ef6c00;
-  --ifm-color-danger: #d84315;
+  --ifm-color-danger: var(--ifm-color-danger-darkest);
   --ifm-code-font-size: 95%;
   --ifm-footer-link-hover-color: #4db6ac; /* Same as dark theme primary */
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
@@ -69,7 +69,7 @@
   --ifm-color-success: #81c784;
   --ifm-color-info: #64b5f6;
   --ifm-color-warning: #ffb74d;
-  --ifm-color-danger: #ff8a65;
+  --ifm-color-danger: var(--ifm-color-danger-light);
   --ifm-badge-color: var(--ifm-color-black);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --gradient: linear-gradient(

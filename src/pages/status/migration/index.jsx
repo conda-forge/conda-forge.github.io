@@ -5,6 +5,7 @@ import Layout from "@theme/Layout";
 import React, { useEffect, useState } from "react";
 import SVG from 'react-inlinesvg';
 import styles from "./styles.module.css";
+import { Tooltip } from "react-tooltip";
 
 // { Done, In PR, Awaiting PR, Awaiting parents, Not solvable, Bot error }
 // The third value is a boolean representing the default display state on load
@@ -111,13 +112,24 @@ function Bar({ details }) {
     <>
       <h4>PRs made {details.progress.percentage.toFixed(0)}%</h4>
       <div className={styles.migration_details_bar}>
-        {ORDERED.filter(([key]) => details[key]?.length)
-          .map(([key], index) => (
-            <div
-              title={TITLES[key]}
-              className={styles[`${prefix}${key.replace("-", "_")}`]}
-              style={{ flex: details[key].length }} key={index}></div>
-          ))}
+        {ORDERED.filter(([key]) => details[key]?.length).map(([key], index) => (
+          <>
+          <a
+            id={`migration-bar-element-${key}`}
+            className={styles[`${prefix}${key.replace("-", "_")}`]}
+            style={{ flex: details[key].length }}
+            key={index}
+            alt={TITLES[key] + " " + parseFloat(details[key].length*100/measureProgress(details).total).toFixed(1) + "% (" + details[key].length+" PRs over "+measureProgress(details).total + ")"}
+          ></a>
+          <Tooltip
+            anchorSelect={`#migration-bar-element-${key}`}
+            place="top"
+            className={styles.migration_details_bar_tooltip}
+          >
+            <div>{TITLES[key]}</div>
+          </Tooltip>
+          </>
+        ))}
       </div>
     </>
   );
@@ -156,16 +168,26 @@ function Filters({ counts, filters, onFilter }) {
         return (
         <div
           className={[
+            "button",
             styles.migration_details_filter_button,
-            styles[base],
-            filters[key] && styles[`${base}_on`]
-          ].join(" ")}
+            filters[key] ? "button--secondary" : "button--primary"
+            ].join(" ")}
           key={index}
           onClick={() => onFilter(key)}>
           {filters[key] ?
-            <i className={`${icon} fa-solid fa-filter-circle-xmark`}></i> :
-            <i className={`${icon} fa-solid fa-filter`}></i>
-          } {title} ({counts[key]})
+            <span className={[
+              styles[`${base}_on`],
+              styles.migration_details_filter_dot_on
+            ].join(" ")}></span>
+            :
+            <span className={[
+              styles[base],
+              styles.migration_details_filter_dot].join(" ")}>
+            </span>
+          }
+          <div className={styles.migration_details_filter_title_container}>
+            {title} ({counts[key]})
+          </div>
         </div>);
       })}
     </div>

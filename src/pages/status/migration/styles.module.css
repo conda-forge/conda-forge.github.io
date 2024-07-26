@@ -20,19 +20,18 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  text-align: center;
+  text-align: left;
 }
 
 .migration_details_filter_button {
-  background-color: inherit;
+  display: flex;
   border-radius: 25px;
   cursor: pointer;
   font-size: smaller;
   font-weight: 600;
   margin: 3px;
   margin-bottom: 10px;
-  width: 195px;
+  width: 200px;
   user-select: none;
   text-align: right;
   padding: 2px;
@@ -48,81 +47,59 @@
 .migration_details_filter_button:hover {
   text-decoration: underline;
 }
-/*
-  Filter buttons in order:
-  { Done, In PR, Awaiting PR, Awaiting parents, Not solvable, Bot error }
-*/
 
 .migration_details_filter_done {
-  background-color: rgb(60, 1, 74);
-  border: 3px solid rgb(60, 1, 74, 0.4);
-  color: var(--ifm-color-secondary);
+  background-color: var(--ifm-color-success);
 }
 
 .migration_details_filter_done_on {
-  background-color: rgb(60, 1, 74, 0.4);
-  border: 3px solid rgb(60, 1, 74);
-  color: var(--ifm-color-primary-darkest);
+  background-color: var(--ifm-color-success);
+  opacity: 0.6;
 }
 
 .migration_details_filter_in_pr {
-  background-color: rgb(43, 93, 131);
-  border: 3px solid rgb(43, 93, 131, 0.4);
-  color: var(--ifm-color-secondary);
+  background-color: var(--ifm-color-emphasis-400);
 }
 
 .migration_details_filter_in_pr_on {
-  background-color: rgb(43, 93, 131, 0.4);
-  border: 3px solid rgb(43, 93, 131);
-  color: var(--ifm-color-primary-dark);
+  background-color: var(--ifm-color-emphasis-400);
+  opacity: 0.6;
 }
 
 .migration_details_filter_awaiting_pr {
-  background-color: rgb(47, 174, 110);
-  border: 3px solid rgb(47, 174, 110, 0.4);
-  color: var(--ifm-color-secondary);
+  background-color: var(--ifm-color-emphasis-600);
 }
 
 .migration_details_filter_awaiting_pr_on {
-  background-color: rgb(47, 174, 110, 0.4);
-  border: 3px solid rgb(47, 174, 110);
-  color: var(--ifm-color-primary-dark);
+  background-color: var(--ifm-color-emphasis-600);
+  opacity: 0.6;
 }
 
 .migration_details_filter_awaiting_parents {
-  background-color: rgb(253, 227, 33);
-  border: 3px solid rgb(253, 227, 33, 0.9);
-  color: var(--ifm-color-primary-darker);
+  background-color: var(--ifm-color-emphasis-800);
 }
 
 .migration_details_filter_awaiting_parents_on {
-  background-color: rgb(253, 227, 33, 0.4);
-  border: 3px solid rgb(253, 227, 33);
-  color: var(--ifm-color-primary-darker);
+  background-color: var(--ifm-color-emphasis-800);
+  opacity: 0.6;
 }
 
 .migration_details_filter_not_solvable {
-  background-color: rgb(255, 129, 0);
-  border: 3px solid rgb(255, 129, 0, 0.4);
-  color: var(--ifm-color-secondary);
+  background-color: var(--ifm-color-warning);
 }
 
 .migration_details_filter_not_solvable_on {
-  background-color: rgb(255, 129, 0, 0.4);
-  border: 3px solid rgb(255, 129, 0);
-  color: var(--ifm-color-primary-dark);
+  background-color: var(--ifm-color-warning);
+  opacity: 0.6;
 }
 
 .migration_details_filter_bot_error {
-  background-color: rgb(242, 59, 47);
-  border: 3px solid rgb(242, 59, 47, 0.4);
-  color: var(--ifm-color-secondary);
+  background-color: var(--ifm-color-danger);
 }
 
 .migration_details_filter_bot_error_on {
-  background-color: rgb(242, 59, 47, 0.4);
-  border: 3px solid rgb(242, 59, 47);
-  color: var(--ifm-color-primary-dark);
+  background-color: var(--ifm-color-danger);
+  opacity: 0.6;
 }
 
 .migration_details_filter_icon {
@@ -176,4 +153,38 @@
 .migration_details .expanded::after {
   font-size: smaller;
   content: " ▿";
+}
+
+.migration_details_bar .migration_details_bar_tooltip {
+  color: var(--ifm-color-emphasis-100);
+  background-color: var(--ifm-color-emphasis-900);
+}
+
+.migration_details_filter_dot {
+  display: flex;
+  position: relative;
+  border: solid 2px var(--ifm-button-color);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  position: relative;
+  left: 8px;
+  top: 2px;
+}
+
+.migration_details_filter_dot_on {
+  display: flex;
+  position: relative;
+  border: solid 2px red;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  left: 8px;
+  top: 2px;
+}
+
+.migration_details_filter_title_container {
+  display: inline;
+  position: relative;
+  left: 14px;
 }
