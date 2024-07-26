@@ -25,13 +25,14 @@
 }
 
 .migration_details_filter_button {
+  display: flex;
   border-radius: 25px;
   cursor: pointer;
   font-size: smaller;
   font-weight: 600;
   margin: 3px;
   margin-bottom: 10px;
-  width: 195px;
+  width: 210px;
   user-select: none;
   text-align: right;
   padding: 2px;
@@ -52,24 +53,54 @@
   background-color: var(--ifm-color-success);
 }
 
+.migration_details_filter_done_on {
+  background-color: var(--ifm-color-success);
+  opacity: 0.6;
+}
+
 .migration_details_filter_in_pr {
   background-color: var(--ifm-color-emphasis-500);
+}
+
+.migration_details_filter_in_pr_on {
+  background-color: var(--ifm-color-emphasis-500);
+  opacity: 0.6;
 }
 
 .migration_details_filter_awaiting_pr {
   background-color: var(--ifm-color-emphasis-600);
 }
 
+.migration_details_filter_awaiting_pr_on {
+  background-color: var(--ifm-color-emphasis-600);
+  opacity: 0.6;
+}
+
 .migration_details_filter_awaiting_parents {
   background-color: var(--ifm-color-emphasis-800);
+}
+
+.migration_details_filter_awaiting_parents_on {
+  background-color: var(--ifm-color-emphasis-800);
+  opacity: 0.6;
 }
 
 .migration_details_filter_not_solvable {
   background-color: var(--ifm-color-warning);
 }
 
+.migration_details_filter_not_solvable_on {
+  background-color: var(--ifm-color-warning);
+  opacity: 0.6;
+}
+
 .migration_details_filter_bot_error {
   background-color: var(--ifm-color-danger);
+}
+
+.migration_details_filter_bot_error_on {
+  background-color: var(--ifm-color-danger);
+  opacity: 0.6;
 }
 
 .migration_details_filter_icon {
@@ -128,4 +159,34 @@
 .migration_details_bar .migration_details_bar_tooltip {
   color: var(--ifm-color-emphasis-100);
   background-color: var(--ifm-color-emphasis-900);
+}
+
+.migration_details_filter_dot {
+  display: flex;
+  position: relative;
+  border: solid 2px var(--ifm-button-color);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.migration_details_filter_dot_on {
+  display: flex;
+  position: relative;
+  border: solid 2px red;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.migration_details_filter_icons_container {
+  width: 40px;
+}
+
+.migration_details_filter_title_container {
+  width: 150px;
+  position: relative;
+  left: 10px;
 }

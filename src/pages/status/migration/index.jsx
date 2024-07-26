@@ -163,19 +163,37 @@ function Filters({ counts, filters, onFilter }) {
   return (
     <div className={styles.migration_details_filter}>
       {ORDERED.map(([key, title], index) => {
+        const prefix = "migration_details_filter_";
+        const base = `${prefix}${key.replace("-", "_")}`;
         return (
         <div
           className={[
             "button",
             styles.migration_details_filter_button,
             filters[key] ? "button--secondary" : "button--primary"
-          ].join(" ")}
+            ].join(" ")}
           key={index}
           onClick={() => onFilter(key)}>
           {filters[key] ?
-            <i className={`${icon} fa-solid fa-filter-circle-xmark`}></i> :
+          <div className={styles.migration_details_filter_icons_container}>
+           <i className={`${icon} fa-solid fa-filter-circle-xmark`}></i>
+            <span className={[ 
+              styles[`${base}_on`],
+              styles.migration_details_filter_dot_on
+            ].join(" ")}></span> 
+            </div>
+            :
+          <div className={styles.migration_details_filter_icons_container}>
             <i className={`${icon} fa-solid fa-filter`}></i>
-          } {title} ({counts[key]})
+            <span className={[ 
+              styles[base],
+              styles.migration_details_filter_dot].join(" ")}>
+            </span> 
+          </div>
+          } 
+          <div className={styles.migration_details_filter_title_container}>
+            {title} ({counts[key]})
+          </div>
         </div>);
       })}
     </div>
