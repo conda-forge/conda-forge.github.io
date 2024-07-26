@@ -58,11 +58,11 @@
 }
 
 .migration_details_filter_in_pr {
-  background-color: var(--ifm-color-emphasis-500);
+  background-color: var(--ifm-color-emphasis-400);
 }
 
 .migration_details_filter_in_pr_on {
-  background-color: var(--ifm-color-emphasis-500);
+  background-color: var(--ifm-color-emphasis-400);
   opacity: 0.6;
 }
 
