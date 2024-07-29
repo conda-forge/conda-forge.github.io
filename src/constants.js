@@ -141,6 +141,6 @@ export const urls = {
   },
   schemas: {
     "conda-forge.yml":
-      "https://raw.githubusercontent.com/conda-forge/conda-smithy/main/conda_smithy/data/conda-forge.json",
+      "https://raw.githubusercontent.com/ytausch/conda-smithy/version-sources-docs/conda_smithy/data/conda-forge.json",
   },
 };
