@@ -159,7 +159,6 @@ function Breadcrumbs({ children }) {
 }
 
 function Filters({ counts, filters, onFilter }) {
-  const icon = styles.migration_details_filter_icon;
   return (
     <div className={styles.migration_details_filter}>
       {ORDERED.map(([key, title], index) => {
@@ -176,13 +175,16 @@ function Filters({ counts, filters, onFilter }) {
           onClick={() => onFilter(key)}>
           {filters[key] ?
             <span className={[
-              styles[`${base}_on`],
-              styles.migration_details_filter_dot_on
+              styles[`${base}_hidden`],
+              styles.migration_details_filter_dot,
+              styles[`${base}_dot`],
             ].join(" ")}></span>
             :
             <span className={[
               styles[base],
-              styles.migration_details_filter_dot].join(" ")}>
+              styles.migration_details_filter_dot,
+              styles[`${base}_dot`],
+            ].join(" ")}>
             </span>
           }
           <div className={styles.migration_details_filter_title_container}>
