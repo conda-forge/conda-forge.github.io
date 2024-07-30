@@ -49,7 +49,7 @@ export default function CurrentMigrations({ onLoad, collapsed, name, rows, sort 
       }
       return { ...prev, collapsed: updated };
     });
-  
+
   useEffect(fetchContent(onLoad, setState), []);
   const { closed, longterm, regular } = state;
   const total = closed.length + longterm.length + regular.length;
@@ -65,8 +65,8 @@ export default function CurrentMigrations({ onLoad, collapsed, name, rows, sort 
         <table className={styles.migrations_table}>
         <thead>
         <tr>
-          <th colSpan={1} 
-         
+          <th colSpan={1}
+
             onClick={() => resort("name")}
             className={state.sort.by === "name" ? styles[state.sort.order] : undefined}
           >
@@ -84,39 +84,39 @@ export default function CurrentMigrations({ onLoad, collapsed, name, rows, sort 
           >
             Done
           </th>
-          <th colSpan={1}     
+          <th colSpan={1}
             onClick={() => resort("in-pr")}
             className={state.sort.by === "in-pr" ? styles[state.sort.order] : undefined}
           >
             In PR
           </th>
-          <th colSpan={1}   
+          <th colSpan={1}
             onClick={() => resort("awaiting-pr")}
             className={state.sort.by === "awaiting-pr" ? styles[state.sort.order] : undefined}
           >
             Awaiting PR
           </th>
-          <th colSpan={1}  
+          <th colSpan={1}
             onClick={() => resort("awaiting-parents")}
             className={state.sort.by === "awaiting-parents" ? styles[state.sort.order] : undefined}
           >
             Awaiting parents
           </th>
-          <th colSpan={1} 
+          <th colSpan={1}
             onClick={() => resort("not-solvable")}
             className={state.sort.by === "not-solvable" ? styles[state.sort.order] : undefined}
           >
             Not solvable
           </th>
-          <th colSpan={1}  
+          <th colSpan={1}
             onClick={() => resort("bot-error")}
             className={state.sort.by === "bot-error" ? styles[state.sort.order] : undefined}
           >
             Bot error
           </th>
         </tr>
-       
-     
+
+
       </thead>
           <TableContent
             collapsed={state.collapsed.longterm}
