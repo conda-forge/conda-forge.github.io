@@ -4,10 +4,39 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/news/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Wed, 15 May 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 29 Jul 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Sunsetting Mambaforge]]></title>
+            <link>https://conda-forge.org/news/2024/07/29/sunsetting-mambaforge/</link>
+            <guid>https://conda-forge.org/news/2024/07/29/sunsetting-mambaforge/</guid>
+            <pubDate>Mon, 29 Jul 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[With the Miniforge 23.3.1 release,]]></description>
+            <content:encoded><![CDATA[<p>With the <a href="https://github.com/conda-forge/miniforge/releases/tag/23.3.1-0" target="_blank" rel="noopener noreferrer">Miniforge 23.3.1 release</a>,
+the Miniforge and Mambaforge installers became essentially <strong>identical</strong>. The only difference
+between the two was their name and, subsequently, the default installation directory.</p>
+<p>Maintaining both installers adds unnecessary burden to our support infrastructure and creates
+confusion among end users. As a result, last year we decided to <em>discourage</em> the usage of
+Mambaforge in favor of Miniforge.</p>
+<p>A year later, we would like to formally sunset Mambaforge. All users are encouraged to switch to
+Miniforge. Remember they contain the same packages, so the only difference is the default
+installation directory.</p>
+<p>The deprecation process will roughly follow this calendar:</p>
+<ul>
+<li>August 2024: The Mambaforge installers will warn about the deprecation and make the user wait 30
+seconds before continuing.</li>
+<li>October 2024: The Mambaforge installers will refuse to install during several pre-specified date ranges (i.e., <a href="https://en.wikipedia.org/wiki/Brownout_(software_engineering)" target="_blank" rel="noopener noreferrer">"brownouts"</a>) in order to encourage users to switch to Miniforge. These dates are
+<ul>
+<li>Every two weeks in October 2024 (2024-10-01, 2024-10-15)</li>
+<li>Every ten days in November 2024 (2024-11-01, 2024-11-10, 2024-11-20, 2024-11-30)</li>
+<li>Every five days in December 2024 (2024-12-05, 2024-12-10, 2024-12-15, 2024-12-20, 2024-12-25, 2024-12-30, 2024-12-31)</li>
+</ul>
+</li>
+<li>January 2025: The Mambaforge installers will stop being built and distributed.</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[NumPy 2 Migration]]></title>
             <link>https://conda-forge.org/news/2024/05/15/numpy-2-migration/</link>
@@ -385,27 +414,6 @@ You will need to rerender your feedstock to get this change. Feedstocks
 without the new VM image specified will not build after Azure fully
 removes the old image. Please get in touch with us if you have issues or
 questions!</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Packages for Qt/PyQt 5.15.2 are now available]]></title>
-            <link>https://conda-forge.org/news/2022/04/23/packages-for-qtpyqt-5152-are-now-available/</link>
-            <guid>https://conda-forge.org/news/2022/04/23/packages-for-qtpyqt-5152-are-now-available/</guid>
-            <pubDate>Sat, 23 Apr 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[After more than six months, the conda-forge team and contributors have]]></description>
-            <content:encoded><![CDATA[<p>After more than six months, the conda-forge team and contributors have
-managed to update the Qt5 packages to the latest LTS version, 5.15.2.
-Major changes include separating the package for QtWebEngine
-(<code>qt-webengine</code>) from the rest of Qt (now in a new package called
-<code>qt-main</code>). This allows recipes that do not use any of the WebEngine
-components to depend only on <code>qt-main</code>, reducing the total size of the
-downloaded binaries. As a result of this, <code>qt</code> will be a metapackage
-that installs both <code>qt-main</code> and <code>qt-webengine</code> as dependencies.
-With respect to PyQt, the new packages now are in sync with respect to
-their corresponding PyPI releases, which means that the <code>pyqt</code> package
-will only provide the core components of Qt, leaving <code>pyqtwebengine</code> and
-<code>pyqtcharts</code> as optional packages that extend PyQt by providing the
-QtWebEngine and QtCharts components, respectively. A migrator will be
-put in place to help with the transition.</p>]]></content:encoded>
         </item>
     </channel>
 </rss>
