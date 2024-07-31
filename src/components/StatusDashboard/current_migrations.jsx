@@ -8,7 +8,7 @@ import Link from "@docusaurus/Link";
 const COLLAPSED_KEY = "migration-collapsed";
 const SORT_KEY = "migration-sort";
 
-export default function CurrentMigrations({ onLoad, collapsed, name, rows, sort }) {
+export default function CurrentMigrations({ onLoad }) {
   const [state, setState] = useState({
     closed: [],
     collapsed: { closed: true, longterm: true, regular: true },
@@ -115,8 +115,6 @@ export default function CurrentMigrations({ onLoad, collapsed, name, rows, sort 
             Bot error
           </th>
         </tr>
-
-
       </thead>
           <TableContent
             collapsed={state.collapsed.longterm}
