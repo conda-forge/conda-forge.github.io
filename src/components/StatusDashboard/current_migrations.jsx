@@ -93,7 +93,7 @@ export default function CurrentMigrations({ onLoad }) {
         <table className={styles.migrations_table}>
           <TableContent
             collapsed={state.collapsed.closed}
-            name="Closed migrations"
+            name="Recently closed migrations"
             resort={resort("closed")}
             rows={closed}
             select={() => select("closed")}
