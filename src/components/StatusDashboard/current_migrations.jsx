@@ -14,27 +14,36 @@ export default function CurrentMigrations({ onLoad, collapsed, name, rows, sort 
     collapsed: { closed: true, longterm: true, regular: true },
     longterm: [],
     regular: [],
-    sort: { by: "name", order: "ascending" }
+    sort: {
+      closed: { by: "name", order: "ascending" },
+      longterm: { by: "name", order: "ascending" },
+      regular: { by: "name", order: "ascending" }
+    }
   });
-  const resort = (by) => {
-    setState(({ closed, longterm, regular, sort, ...prev }) => {
-      let order = "ascending";
-      order = by === sort.by && order === sort.order ? "descending" : order;
-      if (window && window.localStorage) {
-        try {
-          window.localStorage.setItem(SORT_KEY, JSON.stringify({ by, order }));
-        } catch (error) {
-          console.warn(`error writing to local storage`, error);
+  const resort = (group) => {
+    return (by) => {
+      setState((prev) => {
+        const sort = prev.sort[group];
+        let order = "ascending";
+        order = by === sort.by && order === sort.order ? "descending" : order;
+        if (window && window.localStorage) {
+          try {
+            const key = `${SORT_KEY}-${group}`;
+            window.localStorage.setItem(key, JSON.stringify({ by, order }));
+          } catch (error) {
+            console.warn(`error writing to local storage`, error);
+          }
         }
-      }
-      return {
-        ...prev,
-        closed: closed.sort(compare(by, order)),
-        longterm: longterm.sort(compare(by, order)),
-        regular: regular.sort(compare(by, order)),
-        sort: { by, order },
-      };
-    });
+        return {
+          ...prev,
+          [group]: prev[group].sort(compare(by, order)),
+          sort: {
+            ...prev.sort,
+            [group]: { by, order }
+          },
+        };
+      });
+    }
   };
   const select = (status) =>
     setState(({ collapsed, ...prev }) => {
@@ -121,26 +130,30 @@ export default function CurrentMigrations({ onLoad, collapsed, name, rows, sort 
           <TableContent
             collapsed={state.collapsed.longterm}
             name="Long-running migrations"
-            resort={resort}
+            resort={resort("longterm")}
             rows={longterm}
             select={() => select("longterm")}
-            sort={state.sort}
+            sort={state.sort.longterm}
           />
+        </table>
+        <table className={styles.migrations_table}>
           <TableContent
             collapsed={state.collapsed.regular}
             name="Regular migrations"
-            resort={resort}
+            resort={resort("regular")}
             rows={regular}
             select={() => select("regular")}
-            sort={state.sort}
+            sort={state.sort.regular}
           />
+        </table>
+        <table className={styles.migrations_table}>
           <TableContent
             collapsed={state.collapsed.closed}
-            name="Closed migrations"
-            resort={resort}
+            name="Recently closed migrations"
+            resort={resort("closed")}
             rows={closed}
             select={() => select("closed")}
-            sort={state.sort}
+            sort={state.sort.closed}
           />
         </table>
       </div>
@@ -220,13 +233,21 @@ function compare(by, order) {
 // Returns a function that fetches local and remote content then sets state.
 function fetchContent(onLoad, setState) {
   return () => {
-    const local = {};
+    const local = { };
     if (window && window.localStorage) {
       try {
         const collapsed = window.localStorage.getItem(COLLAPSED_KEY);
-        const sort = window.localStorage.getItem(SORT_KEY);
+        const sort = {
+          closed: window.localStorage.getItem(`${SORT_KEY}-closed`),
+          longterm: window.localStorage.getItem(`${SORT_KEY}-longterm`),
+          regular: window.localStorage.getItem(`${SORT_KEY}-regular`)
+        };
         if (collapsed) local.collapsed = JSON.parse(collapsed);
-        if (sort) local.sort = JSON.parse(sort);
+        ["closed", "longterm", "regular"].forEach(group => {
+          if (!sort[group]) return;
+          local.sort = local.sort || {};
+          local.sort[group] = JSON.parse(sort[group])
+        });
       } catch (error) {
         console.warn(`error reading from local storage`, error);
       }
@@ -262,14 +283,20 @@ function fetchContent(onLoad, setState) {
       }
       await Promise.all(promises);
       setState((prev) => {
-        const { by, order } = patch.sort || prev.sort;
-        return {
+        const sort = {
+          closed: patch.sort?.closed || prev.sort.closed,
+          longterm: patch.sort?.longterm || prev.sort.longterm,
+          regular: patch.sort?.regular || prev.sort.regular
+        };
+        const result = {
           ...prev,
           ...patch,
-          closed: fetched.closed.sort(compare(by, order)),
-          longterm: fetched.longterm.sort(compare(by, order)),
-          regular: fetched.regular.sort(compare(by, order)),
+          sort,
+          closed: fetched.closed.sort(compare(sort.closed.by, sort.closed.order)),
+          longterm: fetched.longterm.sort(compare(sort.longterm.by, sort.longterm.order)),
+          regular: fetched.regular.sort(compare(sort.regular.by, sort.regular.order)),
         };
+        return result;
       });
       onLoad?.();
     })(local);
