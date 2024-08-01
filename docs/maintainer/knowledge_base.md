@@ -1935,15 +1935,15 @@ Finally, note that the `aarch64` and `ppc64le` platforms already use CentOS 7.
 If a library links a newer version of `c_stdlib_version`,
 the _runtime_ requirement on `__glibc` is applied
 but it does not mean downstream dependencies will (or should) be built against the same version.
-The default `c_stdlib_version` is still `2.12` on linux-64.
+The _runtime_ `__glibc` on the build system must still satisfy the exported requirement.
+The default `c_stdlib_version` is  `2.17` on linux-64.
 **A dependency on a newer `c_stdlib_version` does not mean dependents must also use that version**.
-However, to build a package with `c_stdlib_version=2.12` that links a library built with `c_stdlib_version=2.17`,
+However, to build a package with `c_stdlib_version=2.17` that links a library built with `c_stdlib_version=2.28`,
 the linker flag `-Wl,--allow-shlib-undefined` must be specified.
 Without `--allow-shlib-undefined`, you may see errors like:
 
 ```
-ld: $PREFIX/lib/libc++abi.so: undefined reference to `memcpy@GLIBC_2.14'
-ld: $PREFIX/lib/libpmix.so.2: undefined reference to `clock_gettime@GLIBC_2.17'
+ld: $PREFIX/lib/libsomething.so: undefined reference to `glob@@GLIBC_2.27'
 ```
 
 This flag is in conda-forge's default $LDFLAGS set by the `{{ compiler("c") }}` package,
@@ -1952,10 +1952,10 @@ If they do, it means $LDFLAGS is not being handled consistently,
 which is probably something feedstock and/or package maintainers should consider fixing.
 
 There is more nuance in runtime compilation in user environments,
-which are also affected by the default version of `sysroot_linux-64` being 2.12.
+which are also affected by the default version of `sysroot_linux-64` being the old 2.17.
 The `gcc` package does not set environment variables $CC, $LDFLAGS, etc..
 To set these variables on environment activation, install the `c-compiler` package (or `gcc_linux-64` on linux-64),
-or set them by hand in the environment, or avoid the issue by specifying `sysroot_linux-64>=2.17` in the environment.
+or set them by hand in the environment, or avoid the issue by specifying `sysroot_linux-64>=2.28` in the environment.
 
 <a id="cuda"></a>
 
