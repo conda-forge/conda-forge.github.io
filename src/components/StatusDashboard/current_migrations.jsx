@@ -8,7 +8,7 @@ import Link from "@docusaurus/Link";
 const COLLAPSED_KEY = "migration-collapsed";
 const SORT_KEY = "migration-sort";
 
-export default function CurrentMigrations({ onLoad, collapsed, name, rows, sort }) {
+export default function CurrentMigrations({ onLoad }) {
   const [state, setState] = useState({
     closed: [],
     collapsed: { closed: true, longterm: true, regular: true },
@@ -58,7 +58,6 @@ export default function CurrentMigrations({ onLoad, collapsed, name, rows, sort 
       }
       return { ...prev, collapsed: updated };
     });
-
   useEffect(fetchContent(onLoad, setState), []);
   const { closed, longterm, regular } = state;
   const total = closed.length + longterm.length + regular.length;
@@ -72,61 +71,6 @@ export default function CurrentMigrations({ onLoad, collapsed, name, rows, sort 
       </div>
       <div className="card__body">
         <table className={styles.migrations_table}>
-        <thead>
-        <tr>
-          <th colSpan={1}
-
-            onClick={() => resort("name")}
-            className={state.sort.by === "name" ? styles[state.sort.order] : undefined}
-          >
-            Name
-          </th>
-          <th colSpan={1}
-            onClick={() => resort("status")}
-            className={state.sort.by === "status" ? styles[state.sort.order] : undefined}
-          >
-            PRs made
-          </th>
-          <th colSpan={1}
-            onClick={() => resort("done")}
-            className={state.sort.by === "done" ? styles[state.sort.order] : undefined}
-          >
-            Done
-          </th>
-          <th colSpan={1}
-            onClick={() => resort("in-pr")}
-            className={state.sort.by === "in-pr" ? styles[state.sort.order] : undefined}
-          >
-            In PR
-          </th>
-          <th colSpan={1}
-            onClick={() => resort("awaiting-pr")}
-            className={state.sort.by === "awaiting-pr" ? styles[state.sort.order] : undefined}
-          >
-            Awaiting PR
-          </th>
-          <th colSpan={1}
-            onClick={() => resort("awaiting-parents")}
-            className={state.sort.by === "awaiting-parents" ? styles[state.sort.order] : undefined}
-          >
-            Awaiting parents
-          </th>
-          <th colSpan={1}
-            onClick={() => resort("not-solvable")}
-            className={state.sort.by === "not-solvable" ? styles[state.sort.order] : undefined}
-          >
-            Not solvable
-          </th>
-          <th colSpan={1}
-            onClick={() => resort("bot-error")}
-            className={state.sort.by === "bot-error" ? styles[state.sort.order] : undefined}
-          >
-            Bot error
-          </th>
-        </tr>
-
-
-      </thead>
           <TableContent
             collapsed={state.collapsed.longterm}
             name="Long-running migrations"
@@ -171,6 +115,56 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
           <th colSpan={8} className={collapsed ? styles.collapsed : undefined}>
             {name}{" "}
             <span className="badge badge--secondary">{rows.length || "…"}</span>
+          </th>
+        </tr>
+        <tr className={collapsed ? styles.collapsed : undefined}>
+          <th
+            onClick={() => resort("name")}
+            className={sort.by === "name" ? styles[sort.order] : undefined}
+          >
+            Name
+          </th>
+          <th
+            onClick={() => resort("status")}
+            className={sort.by === "status" ? styles[sort.order] : undefined}
+          >
+            PRs made
+          </th>
+          <th
+            onClick={() => resort("done")}
+            className={sort.by === "done" ? styles[sort.order] : undefined}
+          >
+            Done
+          </th>
+          <th
+            onClick={() => resort("in-pr")}
+            className={sort.by === "in-pr" ? styles[sort.order] : undefined}
+          >
+            In PR
+          </th>
+          <th
+            onClick={() => resort("awaiting-pr")}
+            className={sort.by === "awaiting-pr" ? styles[sort.order] : undefined}
+          >
+            Awaiting PR
+          </th>
+          <th
+            onClick={() => resort("awaiting-parents")}
+            className={sort.by === "awaiting-parents" ? styles[sort.order] : undefined}
+          >
+            Awaiting parents
+          </th>
+          <th
+            onClick={() => resort("not-solvable")}
+            className={sort.by === "not-solvable" ? styles[sort.order] : undefined}
+          >
+            Not solvable
+          </th>
+          <th
+            onClick={() => resort("bot-error")}
+            className={sort.by === "bot-error" ? styles[sort.order] : undefined}
+          >
+            Bot error
           </th>
         </tr>
       </thead>
