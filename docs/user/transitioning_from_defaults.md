@@ -2,11 +2,11 @@
 
 Users wishing to transition from Anaconda's default channel should do so with
 care so as not to break their working environments. The first thing to realize
-is that conda-forge is incompatible with the packages provided in Anaconda's
-default channel. Often, the packages on conda-forge will require newer versions
-of a particular package, or, may simply be organized in a different fashion.
-The only workflow we can support as a community is one where the conda-forge
-channel takes priority over all other channels.
+is that in 2024 conda-forge is incompatible with the packages provided in
+Anaconda's default channel. Often, the packages on conda-forge will require
+newer versions of a particular package, or, may simply be organized in a
+different fashion. The only workflow we can support as a community is one where
+the conda-forge channel takes priority over all other channels.
 
 If you were using `miniconda3` or `Anaconda3` and wish to move to use
 conda-forge, we outline two workflow. The first allows you to try packages from
@@ -16,11 +16,9 @@ channels.
 
 ## Trying conda-forge in an isolated environment
 
-1. Create a conda-environment with very dependencies. The following command
-   will only use packages from conda-forge to install Python 3.11. In March
-   2024, Python 3.11, was chosen due to the fact that it has broad
-   compatibility with many packages in the conda-forge ecosystem.
-   You may adjust the version of python to the one of your liking.
+1. Create a conda-environment with very strict dependencies. The following
+   command will only use packages from conda-forge to install Python 3.11. You
+   may adjust the version of python to the one of your liking.
 
 ```bash
 conda create --name new_cf python=3.11 --channel conda-forge --override-channels
@@ -94,8 +92,8 @@ You should now be in a position to use conda-forge packages.
 
 ## A historical note
 
-Until 2021????, conda-forge held strong compatibility with Anaconda's default
-channel. However, due to the reasons outlined in XXXXXX, we decided to
+Until roughly 2021, conda-forge held strong compatibility with Anaconda's
+default channel. However, due to the reasons outlined in XXXXXX, we decided to
 ultimately move away from dependency on Anaconda's default packages. Over the
 years, this has lead for more divergence between package versions, and names
 between conda-forge and Anaconda's default channel.
@@ -110,5 +108,6 @@ conda list --show-channel-urls
 ```
 
 All packages should specify that they have been installed from the conda-forge
-channel.
-
+channel. In 2024, there still exist a few bugs where conda packages will
+claim that they have been installed from PyPi even though they have been
+installed from conda-forge.
