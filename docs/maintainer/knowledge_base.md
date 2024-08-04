@@ -1695,6 +1695,8 @@ add some information on r packages which make heavy use of `noarch: generic`
     - [importlib_metadata and importlib-metadata](https://github.com/conda-forge/importlib_metadata-feedstock/blob/main/recipe/meta.yaml)
     - [typing_extensions and typing-extensions](https://github.com/conda-forge/typing_extensions-feedstock/blob/main/recipe/meta.yaml)
 
+
+
 ### Common pitfalls with `outputs`
 
 This is a non-exhaustive list of common pitfalls when using `outputs`.
@@ -1703,6 +1705,37 @@ This is a non-exhaustive list of common pitfalls when using `outputs`.
 - The `build.sh` and `bld.bat` scripts are only automatically used for the top-level package. Consider using other file names for the scripts in the outputs. See [gdal-feedstock](https://github.com/conda-forge/gdal-feedstock/blob/66ba0a2284476/recipe/meta.yaml#L70-L73) for an example.
 - The `outputs[].script` field can only be set to a script name. If you prefer passing shell commands, you have to use `outputs[].build.script`. Compare [geopandas-feedstock](https://github.com/conda-forge/geopandas-feedstock/blob/8b985635a8538af1ee213900bd563085e3cdbd92/recipe/meta.yaml#L17) to [gym-feedstock](https://github.com/conda-forge/gym-feedstock/blob/2b47e0479923b7d49a39e9860ba30a28e263480b/recipe/meta.yaml#L31), respectively.
 - Some `PIP_*` environment variables that are usually set for the top-level scripts are not automatically set for the outputs. If you are invoking `pip` in an output, you may need to pass additional flags. See [napari-feedstock](https://github.com/conda-forge/napari-feedstock/blob/32a4eb04ca7b6ccd2c4e146bde204f1dd5425a17/recipe/meta.yaml#L26). This issue is tracked in [conda/conda-build#3993](https://github.com/conda/conda-build/issues/3993).
+
+- Pin as much as possible each output to the exact version of the subpackages. Pinning to the same minor version is often not enough since it may allow for different build numbers of packages built from the same recipe to be co-installed.
+
+  ```yaml
+  requirements:
+    run:
+      - {{ pin_subpackage('subpackage_name', exact=True) }}
+  ```
+
+- Often multi-output recipes are used when maintainers wish to split the runtime files from the build time files. The runtime package will often include shared library files and any runtime configuration files, while the development package will include compilation time headers, and other compilation files. The intention is to make it necessary to have both the development and runtime package installed at compilation time, but at runtime, only the runtime package would be installed. We wish that maintainers of downstream packages depend on the "developement" package at build time in the host section. Thus the development package should have a run_export on the runtime package. This is done by adding the following to the development package's meta.yaml:
+
+  ```yaml
+  outputs:
+    - name: runtime_package_name
+      # no run_export should be added here. This package is missing the
+      # development headers and other compilation files.
+    - name: development_package_name
+      build:
+        run_exports:
+          # the max_pin should be adjusted
+          - {{ pin_subpackage('runtime_package_name', max_pin='x.x') }}
+      requirements:
+        run:
+          - runtime_package_name
+          - other
+          - required
+          - compilation
+          - dependencies
+  ```
+
+  Once the package is created, it the development package should be added to the list of global pinnings for conda forge in the [`conda_build_config.yaml`](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml) file.
 
 <a id="build-matrices"></a>
 
