@@ -1,6 +1,4 @@
----
-title: "Transitionning from Anaconda's default packages"
----
+# Transitioning from Anaconda's default packages
 
 Users wishing to transition from Anaconda's default channel should do so with
 care so as not to break their working environments. The first thing to realize
