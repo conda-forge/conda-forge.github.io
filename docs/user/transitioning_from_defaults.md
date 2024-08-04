@@ -106,7 +106,7 @@ conda-forge is no longer supported.
 To check if you have packages installed from both sources, use the command
 
 ```bash
-conda list
+conda list --show-channel-urls
 ```
 
 All packages should specify that they have been installed from the conda-forge
