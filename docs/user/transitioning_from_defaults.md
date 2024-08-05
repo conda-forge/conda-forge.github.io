@@ -39,7 +39,7 @@ conda create --name new_cf python=3.11 --channel conda-forge --override-channels
 conda config --show
 ```
 
-   Should list out that conda-forge is the top most channel in your list.
+Should list out that conda-forge is the top most channel in your list.
 
 4. You are now in a position to use command likes
 
@@ -85,8 +85,7 @@ conda clean --all
 conda info
 ```
 
-   and notice that the conda-forge is the channel with the topmost priority.
-
+and notice that the conda-forge is the channel with the topmost priority.
 
 You should now be in a position to use conda-forge packages.
 
