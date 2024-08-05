@@ -103,19 +103,23 @@ sequenceDiagram
     participant cfs as cf-scripts
     participant gha as github actions
     participant cft as conda_forge_tick
-    participant ups as upstream
+    participant fs as feedstock
     participant cfg as cf-graph-countyfair
     loop self renewing
         cfs->>gha: bot-bot
         gha->>cft: auto-tick
+        note right of cfg: the graph now contains<br/>the new version information
         cft->>cfg: load package information from `graph.json`
         loop for every package
-            cft->>ups: query version
-            ups->>cft: return version
-            cft->>cfg: write new version
+            opt if new version
+                cft->>fs: rewrite recipe and open pr
+            end
         end
+        gha->>gha: re-trigger bot-bot
     end
 ```
+
+After that, it is up to the feedstock maintainers to check the PR, make any necessary adjustments, and merge it into the feedstock branch.
 
 #### Rebuilds for migrators
 
