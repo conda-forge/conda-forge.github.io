@@ -1,11 +1,9 @@
----
-sidebar_position: 2
----
-
-# Submission to staged-recipes
+# Staged-recipes
 
 [`staged-recipes`](/docs/maintainer/infrastructure#staged-recipes) is the gateway to conda-forge.
 Every package published has gone through this repository as part of the submission process.
+
+## Submission to staged-recipes
 
 Users normally follow these steps:
 
@@ -59,6 +57,13 @@ sequenceDiagram
     end
 ```
 
+## Feedstock creation
+
+Once a new recipe has been merged into `staged-recipes`, it will be converted to a feedstock.
+This creates the home of the recipe as a new repository under the `conda-forge` organization.
+It also creates the associated team and registers the recipe with the ci providers that are used for building packages,
+as well as with the distribution infrastructure to allow for uploads.
+
 ```mermaid
 sequenceDiagram
     participant sr as staged-recipes repo
@@ -82,3 +87,6 @@ sequenceDiagram
         end
     end
 ```
+
+Once the feedstock creation is completed successfully, all future events are handled through the feedstock;
+the `staged-recipes` repository no longer plays a role.

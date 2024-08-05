@@ -42,7 +42,8 @@
         },
         "items": [
           "maintainer/understanding_conda_forge/life_cycle",
-          "maintainer/understanding_conda_forge/staged_recipes"
+          "maintainer/understanding_conda_forge/staged_recipes",
+          "maintainer/understanding_conda_forge/feedstocks"
         ]
       }
     ]
