@@ -97,6 +97,7 @@ sequenceDiagram
 ```
 
 Second, the main bot ci job, the `bot-bot` action in [`cf-scripts`](/docs/maintainer/infrastructure/#regrocf-scripts) creates PRs for all packages that have a new version available upstream.
+Here is a simplified diagram of how that is done. For the full picture, read [below](#rebuilds-for-migrators).
 
 ```mermaid
 sequenceDiagram
@@ -121,7 +122,42 @@ sequenceDiagram
 
 After that, it is up to the feedstock maintainers to check the PR, make any necessary adjustments, and merge it into the feedstock branch.
 
+This version update is an example of a migrator. Read more about migrators in the following section.
+
 #### Rebuilds for migrators
+
+The version update is one example of a migrator.
+In reality, there are more occasions and reasons to update recipes, for example, to recompile an otherwise unchanged binary program or library to link against a newer version of a dependency or to add support for a new architecture.
+This kind of use case is handled by migrators, which are a general recipe rewriting tool.
+
+A more complete picture of what `auto-tick` does is the following:
+
+```mermaid
+sequenceDiagram
+    participant cfs as cf-scripts
+    participant gha as github actions
+    participant cft as conda_forge_tick
+    participant fs as feedstock
+    participant cfg as cf-graph-countyfair
+    loop self renewing
+        cfs->>gha: bot-bot
+        gha->>cft: auto-tick
+        note right of cfg: the graph now contains<br/>the new version information
+        cft->>cfg: load package information from `graph.json`
+        loop for every migrator
+            create participant mg as migrator
+            cft->>mg: run migrator on graph
+            note right of mg: 1. filter applicable package to produce effective graph<br/>2. determine migration order<br/>3. run migrator on every possible node
+            destroy mg
+            mg->>fs: create migration PR
+        end
+        gha->>cfs: deploy, i.e. commit changed pr information
+        gha->>gha: re-trigger bot-bot
+    end
+```
+
+Migrators are a powerful mechanism that can do almost arbitrary recipe changes because they are written in Python.
+The current set of migrators can be found [here](https://github.com/regro/cf-scripts/tree/master/conda_forge_tick/migrators).
 
 ## Non-package building events
 
