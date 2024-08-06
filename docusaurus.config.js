@@ -536,6 +536,8 @@ const config = {
             // Due to the way that mermaid derives colors from other colors,
             // currently not all variables can be used with the infima variables.
             // Those that cannot be set in this way are commented out and marked with !!.
+            // A good reference for the available infima variables (in lieu of documentation) is
+            // https://github.com/facebookincubator/infima/blob/main/packages/core/styles/common/variables.pcss
             // General variables
             // darkMode: set by docusaurus
             // !! background: "var(--ifm-background-color)",
