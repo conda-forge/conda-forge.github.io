@@ -158,7 +158,3 @@ sequenceDiagram
 
 Migrators are a powerful mechanism that can do almost arbitrary recipe changes because they are written in Python.
 The current set of migrators can be found [here](https://github.com/regro/cf-scripts/tree/master/conda_forge_tick/migrators).
-
-## Non-package building events
-
-### `add maintainer`
