@@ -28,6 +28,14 @@ Content Delivery Network. CDNs are geographically distributed networks of server
 
 [Learn more](https://en.wikipedia.org/wiki/Content_delivery_network).
 
+## CDN
+
+**C**ontent **D**elivery **N**etwork. CDNs are geographically distributed networks of servers that mirror
+contents of a primary source. Having multiple servers offering the same content increases
+performance (reduced latency, higher download speeds) and availability.
+
+[Learn more](https://en.wikipedia.org/wiki/Content_delivery_network).
+
 <a id="term-CDT"></a>
 
 ## CDT
