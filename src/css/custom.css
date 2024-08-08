@@ -273,8 +273,3 @@ not pretty but it's the best we can do so far */
   align-items: center;
   justify-content: center;
 }
-
-p em {
-  font-style: italic;
-  transform: skewX(-20deg);
-}
