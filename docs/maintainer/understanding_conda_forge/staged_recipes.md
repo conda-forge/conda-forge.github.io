@@ -8,7 +8,7 @@ Every package published has gone through this repository as part of the submissi
 Users normally follow these steps:
 
 1. Fork the `conda-forge/staged-recipes` repository and create a new branch from `main`.
-2. Add `meta.yaml` (and other files as needed) in a new subdirectory under `recipes/`.
+2. Add a `meta.yaml` or `recipe.yaml` file (plus other files as needed) in a new subdirectory under `recipes/`.
 3. Open a new pull request and pass the CI checks, which include building the recipe under different operating systems and some static analysis of the recipe files (linting).
 4. Ask for a review and apply the suggestions.
 
@@ -61,8 +61,7 @@ sequenceDiagram
 
 Once a new recipe has been merged into `staged-recipes`, it will be converted to a feedstock.
 This creates the home of the recipe as a new repository under the `conda-forge` organization.
-It also creates the associated team and registers the recipe with the ci providers that are used for building packages,
-as well as with the distribution infrastructure to allow for uploads.
+It also creates the associated team and registers the recipe with the CI providers that are used for building packages, as well as with the distribution infrastructure to allow for uploads.
 
 ```mermaid
 sequenceDiagram

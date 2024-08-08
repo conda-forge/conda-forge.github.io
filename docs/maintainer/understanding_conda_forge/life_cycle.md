@@ -9,14 +9,14 @@ However, the core concepts are the same for any conda packaging solution.
 
 ## General concepts about conda packaging
 
-`conda` packages are built off `conda` _recipes_, which consist of a `meta.yaml` file, and optionally supporting scripts and data.
-A build tool (usually [`conda-build`](https://github.com/conda/conda-build)) takes the recipe and produces one or more packages (also referred to as _outputs_ and/or _artifacts_, depending on the context).
+`conda` packages are built off `conda` _recipes_, which consist of a metadata file (like `meta.yaml` or `recipe.yaml`), and optionally supporting scripts and data.
+A build tool (usually [`conda-build`](https://github.com/conda/conda-build) or [`rattler-build`](https://github.com/prefix-dev/rattler-build/)) takes the recipe and produces one or more packages (also referred to as _outputs_ and/or _artifacts_, depending on the context).
 
-While you can distribute the artifacts on your own, the conda packages are usually uploaded to a `conda` _channel_ hosted in a server like [Anaconda.org](https://anaconda.org/conda-forge) or [Quetz](https://github.com/mamba-org/quetz).
+While you can distribute the artifacts on your own, the conda packages are usually uploaded to a `conda` _channel_ hosted in a server like [Anaconda.org](https://anaconda.org/conda-forge).
 This channel _server_ processes all uploaded packages and aggregates the metadata contained in the packages in a single `repodata.json` file per platform or _subdir_.
 For example, this is a subset of the `conda-forge` repodata for Linux x64 systems: [`current_repodata.json`](https://conda.anaconda.org/conda-forge/linux-64/current_repodata.json).
 
-These are the metadata files that the `conda` client fetches when the user types `conda install ...`.
+These are the metadata files that the `conda` client fetches when the user types `conda install ...` or similar commands.
 The solver will process all the metadata and will provide the most adequate selection of packages to the user, which are then downloaded, extracted and linked into the target conda environment.
 
 ### Post-publication particularities
@@ -28,7 +28,7 @@ For large volume channels like conda-forge, Anaconda.org delivers the artifacts 
 The CDN network is synced with the channels periodically.
 As a result, packages take around 15 minutes to be available for installation after their publication.
 
-This CDN process offers a unique opportunity to post-process the repodata files.
+This repodata-first approach offers a unique opportunity to post-process the repodata files.
 This way, we can fix metadata issues without rebuilding packages.
 Note that these changes do not propagate back to the metadata contained in the packages.
 
@@ -59,7 +59,7 @@ To be given a conda-forge feedstock, contributors must first submit their recipe
 Once reviewed and approved, the PR is merged to `main`, which triggers the feedstock creation.
 
 After accepting the invitations to the `conda-forge` organization, the submitting contributor(s) will have been given commit rights to that repository.
-By then, the [`staged-recipes` machinery][staged-recipes] will have populated the feedstock with the submitted recipe, plus the supporting scripts, configuration files and CI pipelines.
+By then, the [feedstock creation machinery][staged-recipes] will have registered the new repository with the required CI services and populated its contents with the submitted recipe, plus the supporting scripts, configuration files and CI pipelines.
 
 These pipelines will process the initial commits to produce and upload the conda artifacts to the `cf-staging` channel.
 Any subsequent pushes to `main` (e.g. merged PRs) or other enabled branches will undergo the same process.
@@ -74,7 +74,7 @@ If successful, the artifacts will then be copied to the actual `conda-forge` cha
 
 At this point, the channel server will process the contents of the new packages to retrieve their metadata and update the repodata files.
 On the next CDN sync cycle, the artifacts will be distributed to the delivery network for faster access.
-Validation and CDN sync usually take less than 15 minutes after the CI is passing on `main`. From this moment on, users can install the new packages from the CLI.
+Validation and CDN sync usually takes around 15 minutes after the CI is passing on `main`. From this moment on, users can install the new packages from the CLI.
 
 ### Post-publication particularities
 
@@ -91,12 +91,12 @@ However, they are still available via direct URL access.
 This allows organizations to retire packages from normal, solver-driven installs without compromising the reproducibility offered by lock files.
 
 Finally, a project might have reached a status where no further updates are needed or expected (e.g. it has been superseded by a new project).
-If the maintainers want to, these feedstocks can be archived and marked as read-only.
+If the maintainers want to, these feedstocks can be archived and marked as read-only. This is also done via [`admin-requests`](/docs/maintainer/infrastructure#admin-requests).
 
 ## Summary of stages
 
 These stages are key concepts in the conda-forge documentation.
-Feel free to refer to this list at any time as you check the rest of the material.
+Feel free to refer to this list at any time as you check the rest of the documentation.
 
 1. [Initial submission to `staged-recipes`](/docs/maintainer/understanding_conda_forge/staged_recipes)
 2. Feedstock changes:
@@ -119,6 +119,7 @@ consider reading our [Infrastructure guide](/docs/maintainer/infrastructure).
 <!-- LINKS -->
 
 [anaconda-org-labels]: https://docs.anaconda.com/anacondaorg/user-guide/tutorials/
-[staged-recipes]: /docs/maintainer/infrastructure.md#staged-recipes
+[staged-recipes]: /docs/maintainer/understanding_conda_forge/staged_recipes/
+[feedstock-creation]: /docs/maintainer/understanding_conda_forge/staged_recipes/#feedstock-creation
 
 <!-- [feedstocks]: /docs/reference/infrastructure/feedstocks.md -->
