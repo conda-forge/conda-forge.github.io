@@ -66,6 +66,7 @@ This is occasionally used to re-trigger a failed CI run with an empty commit:
 ```console
 git commit --allow-empty -m "Retrigger CI"
 ```
+
 :::
 
 ### Manually submitted PRs
@@ -141,6 +142,7 @@ sequenceDiagram
         gha->>gha: re-trigger bot-bot
     end
 ```
+
 :::
 
 Once submitted, it is up to the feedstock maintainers to check the PR, make any necessary adjustments, and merge it into the feedstock branch.
