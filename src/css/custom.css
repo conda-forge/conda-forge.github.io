@@ -8,7 +8,8 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("/fonts/Inter-VariableFont_slnt,wght.ttf");
+  src: url("/fonts/Inter-VariableFont_opsz,wght.ttf"),
+       url("/fonts/Inter-Italic-VariableFont_opsz,wght.ttf");
 }
 
 @font-face {
@@ -271,4 +272,9 @@ not pretty but it's the best we can do so far */
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+p em {
+  font-style: italic;
+  transform: skewX(-20deg);
 }
