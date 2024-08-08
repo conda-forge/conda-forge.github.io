@@ -78,14 +78,14 @@ It is up to the feedstock maintainers and/or the conda-forge/core team to review
 During the lifetime of the PR, some automated operations will take place:
 
 - The linter will scan the state of the recipe to require changes and suggest improvements. If not fulfilled, this will result in a failed CI run. Linter failures must **not** be ignored without explicit core approval.
-- The PR template will ask you to rerender the feedstock at least once per PR. This will ensure that the CI configuration is up-to-date, among other things. You can use the bot command `@conda-forge-admin please rerender` in any comment, or do it locally via `conda-smithy rerender`.
+- The PR template will ask you to rerender the feedstock at least once per PR. This will ensure that the CI configuration is up-to-date, among other things. You can use the bot command [`@conda-forge-admin, please rerender`](/docs/maintainer/infrastructure/#conda-forge-admin-please-rerender) in any comment, or do it locally via `conda-smithy rerender`.
 
 ### Automated PRs
 
 There is a variety of situations in which the conda-forge automation will create PRs.
 In these cases, it is generally the privilege of the feedstock maintainers to review and merge the PR, triggering the action on the repository.
 
-Every commit on a branch will trigger the ci _unless_ its commit message contains the tag `[ci skip]`, which can be achieved for PRs by including it in the PR title. Some providers ignore this tag during PRs but do obey in runs triggered by a branch like `main`.
+Every commit on a branch will trigger the ci _unless_ its commit message contains the tag `[ci skip]`, which can be achieved for PRs by including it in the PR title. Some providers ignore this tag during PRs but do obey it in runs triggered by a branch like `main`.
 
 #### Version updates
 
@@ -181,4 +181,5 @@ sequenceDiagram
     end
 ```
 
-Migrators are a powerful mechanism that can do almost arbitrary recipe changes. They are written in Python. The current set of migrators can be found in the [`regro/cf-scripts` repository](https://github.com/regro/cf-scripts/tree/master/conda_forge_tick/migrators).
+Migrators are a powerful mechanism that can do almost arbitrary recipe changes.
+They are written in Python and the current set of migrators can be found in the [`regro/cf-scripts` repository](https://github.com/regro/cf-scripts/tree/master/conda_forge_tick/migrators).

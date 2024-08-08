@@ -74,7 +74,8 @@ If successful, the artifacts will then be copied to the actual `conda-forge` cha
 
 At this point, the channel server will process the contents of the new packages to retrieve their metadata and update the repodata files.
 On the next CDN sync cycle, the artifacts will be distributed to the delivery network for faster access.
-Validation and CDN sync usually takes around 15 minutes after the CI is passing on `main`. From this moment on, users can install the new packages from the CLI.
+Validation and CDN sync usually take around 15 minutes after the CI is passing on `main`.
+From this moment on, users can install the new packages from the CLI.
 
 ### Post-publication particularities
 
@@ -91,7 +92,7 @@ However, they are still available via direct URL access.
 This allows organizations to retire packages from normal, solver-driven installs without compromising the reproducibility offered by lock files.
 
 Finally, a project might have reached a status where no further updates are needed or expected (e.g. it has been superseded by a new project).
-If the maintainers want to, these feedstocks can be archived and marked as read-only. This is also done via [`admin-requests`](/docs/maintainer/infrastructure#admin-requests).
+If the maintainers want to, these feedstocks can be archived and marked as read-only, which is also done via [`admin-requests`](/docs/maintainer/infrastructure#admin-requests).
 
 ## Summary of stages
 
