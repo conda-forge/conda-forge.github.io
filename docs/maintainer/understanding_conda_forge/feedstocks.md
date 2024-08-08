@@ -1,7 +1,7 @@
 # The feedstock
 
 A feedstock is the home of one recipe; it may produce more than one conda artifact in the case of a multi-output recipe.
-The feedstock is the stage for most events about a recipe.
+The feedstock is where for most events in the life of a recipe take place.
 
 ## Initialization
 
@@ -77,7 +77,7 @@ It is up to the feedstock maintainers and/or the conda-forge/core team to review
 
 During the lifetime of the PR, some automated operations will take place:
 
-- The linter will scan the state of the recipe to require changes and suggest improvements. If not fulfilled, this will result in a failed CI run. Linter failures must **not** be ignored without explicit core approval.
+- The linter will scan the state of the recipe to require changes and suggest improvements. If not fulfilled, this will result in a failed CI run. Linter failures must _not_ be ignored without explicit core approval.
 - The PR template will ask you to rerender the feedstock at least once per PR. This will ensure that the CI configuration is up-to-date, among other things. You can use the bot command [`@conda-forge-admin, please rerender`](/docs/maintainer/infrastructure/#conda-forge-admin-please-rerender) in any comment, or do it locally via `conda-smithy rerender`.
 
 ### Automated PRs
