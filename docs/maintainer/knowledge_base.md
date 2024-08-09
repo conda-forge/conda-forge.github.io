@@ -1721,6 +1721,7 @@ This is a non-exhaustive list of common pitfalls when using `outputs`.
     - name: runtime_package_name
       # no run_export should be added here. This package is missing the
       # development headers and other compilation files.
+   # Typically this package is suffixed with `-devel`
     - name: development_package_name
       build:
         run_exports:
