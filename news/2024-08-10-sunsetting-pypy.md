@@ -27,11 +27,13 @@ If you are depending on PyPy builds in some way, please let us know about the
 specifics of your situation in the discussion issue for the
 [RFC](https://github.com/conda-forge/conda-forge.github.io/issues/2255).
 
-If you _really_ want PyPy to continue to be supported in conda-forge, we will
-need competent help, either from the PyPy developers directly, or through a
-funded effort to attract their help.
+There is a possibility that we receive the necessary support from the PyPy
+developers, if it turns out that enough people depend on PyPy support in
+conda-forge for it to be worth their time. As such, please speak up if you
+fall into this category!
 
-Finally, we want to congratulate the PyPy developers for their important
-contributions and exploration of what is possible in the Python ecosystem! 👏
+Finally, no matter the outcome, we want to congratulate the PyPy developers
+for their important contributions and exploration of what is possible in the
+Python ecosystem! 👏
 
 It has been a pleasure to collaborate!
