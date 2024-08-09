@@ -1728,7 +1728,7 @@ This is a non-exhaustive list of common pitfalls when using `outputs`.
           - {{ pin_subpackage('runtime_package_name', max_pin='x.x') }}
       requirements:
         run:
-          - runtime_package_name
+          - {{ pin_subpackage('runtime_package_name', exact=True) }}
           - other
           - required
           - compilation
