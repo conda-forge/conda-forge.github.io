@@ -1,5 +1,10 @@
 # Sunsetting PyPy support
 
+TL;DR: We are planning to remove all PyPy builds in conda-forge in a few weeks,
+unless there is substantial enough interest to justify the maintenance effort.
+
+<!-- truncate -->
+
 Conda-forge introduced [support](https://conda-forge.org/blog/2020/03/10/pypy/)
 for [PyPy](https://pypy.org/index.html) as an alternative implementation of
 Python about 4.5 years ago.
