@@ -1728,6 +1728,9 @@ This is a non-exhaustive list of common pitfalls when using `outputs`.
           # the max_pin should be adjusted
           - {{ pin_subpackage('runtime_package_name', max_pin='x.x') }}
       requirements:
+        # Add the runtime package as a host dependency to ensure that files are deduplicated between the packages.
+        host:
+          - {{ pin_subpackage('runtime_package_name', exact=True) }}
         run:
           - {{ pin_subpackage('runtime_package_name', exact=True) }}
           - other
