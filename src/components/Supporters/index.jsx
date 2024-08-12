@@ -93,6 +93,13 @@ const infrastructure = [
     dark: "img/supporters/travis_dark.png",
     width: 200,
   },
+  {
+    name: "Prefix.dev",
+    link: "https://prefix.dev/",
+    light: "img/supporters/prefix_light.svg",
+    dark: "img/supporters/prefix_dark.svg",
+    width: 250,
+  },
 ];
 
 const developer = [
@@ -136,6 +143,13 @@ const developer = [
     link: "https://quantstack.net/",
     light: "img/supporters/quantstack_light.svg",
     dark: "img/supporters/quantstack_dark.svg",
+    width: 250,
+  },
+  {
+    name: "Prefix.dev",
+    link: "https://prefix.dev/",
+    light: "img/supporters/prefix_light.svg",
+    dark: "img/supporters/prefix_dark.svg",
     width: 250,
   },
 ];
