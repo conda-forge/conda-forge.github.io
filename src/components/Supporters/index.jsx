@@ -138,6 +138,13 @@ const developer = [
     dark: "img/supporters/quantstack_dark.svg",
     width: 250,
   },
+  {
+    name: "Prefix.dev",
+    link: "https://prefix.dev/",
+    light: "img/supporters/prefix_light.svg",
+    dark: "img/supporters/prefix_dark.svg",
+    width: 250,
+  },
 ];
 
 export default function Supporters() {
