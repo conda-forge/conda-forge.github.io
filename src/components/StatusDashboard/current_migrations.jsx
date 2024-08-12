@@ -22,7 +22,6 @@ export default function CurrentMigrations({ onLoad }) {
       regular: { by: "name", order: "ascending" },
     }
   });
-  console.log('state:', state)
   const resort = (group) => {
     return (by) => {
       setState((prev) => {
