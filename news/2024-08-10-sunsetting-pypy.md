@@ -1,6 +1,7 @@
 # Sunsetting PyPy support
 
-TL;DR: We are planning to remove all PyPy builds in conda-forge in a few weeks,
+TL;DR: We are planning to stop building new releases of packages for PyPy and
+remove PyPy from conda-forge feedstock recipes in a few weeks,
 unless there is substantial enough interest to justify the maintenance effort.
 
 <!-- truncate -->
