@@ -119,7 +119,6 @@ export default function CurrentMigrations({ onLoad }) {
 
 function TableContent({ collapsed, name, resort, rows, select, sort }) {
   const [redirect, setState] = useState('');
-  console.log('name:', name);
   if (redirect) return (<Redirect to={redirect} replace={false} push={true} />);
   return (
     <>
