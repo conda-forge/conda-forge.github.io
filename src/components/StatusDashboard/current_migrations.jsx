@@ -119,6 +119,7 @@ export default function CurrentMigrations({ onLoad }) {
 
 function TableContent({ collapsed, name, resort, rows, select, sort }) {
   const [redirect, setState] = useState('');
+  console.log('name:', name);
   if (redirect) return (<Redirect to={redirect} replace={false} push={true} />);
   return (
     <>
@@ -126,7 +127,7 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
         <tr onClick={select}>
           <th colSpan={8} className={collapsed ? styles.collapsed : undefined}>
             {name}{" "}
-            <span className="badge badge--secondary">{rows.length || "…"}</span>
+            <span className="badge badge--secondary">{name!=="Paused migrations" ? rows.length || "..." : rows.length || "0"}</span>
           </th>
         </tr>
         <tr className={collapsed ? styles.collapsed : undefined}>
