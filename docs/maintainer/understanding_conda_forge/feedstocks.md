@@ -26,11 +26,11 @@ sequenceDiagram
     participant cdn as CDN
     end
     f->>+c: trigger build
-    Note right of c: 1. build<br/>2. validate
+    Note right of c: 1. build<br/>2. local validate
     opt if valid and required (4.)
     c->>s: upload packages
     s->>c: report reception success/failure
-    Note right of s: 3. validate
+    Note right of s: 3. remote validate
     s->>cf: upload packages
     cf->>cdn: upload packages
     end
@@ -40,9 +40,9 @@ sequenceDiagram
 :::note
 
 1. For Linux and `noarch` packages, the build itself is carried out in a Docker container on the CI. On macOS and Windows, the CI runner system image is used after tuning it a bit.
-2. The validation checks that the artifacts produced during the build are permissible for this feedstock by consulting [the `feedstock-outputs` repository](/docs/maintainer/infrastructure/#feedstock-outputs).
-3. The server-side validation is essentially the same as 2. It is repeated to guard against potential intentional or unintentional interference at the feedstock level, which is easier to access.
-4. The upload is only triggered if the validation (3.) was successful. Additionally, it is only performed under certain conditions, for example for commits in `main`, but _not_ in PRs.
+2. The local validation happens on the CI and checks that the artifacts produced during the build are permissible for this feedstock by consulting [the `feedstock-outputs` repository](/docs/maintainer/infrastructure/#feedstock-outputs).
+3. The server-side validation is essentially the same as 2. It is repeated inside the distribution infrastructure to guard against potential intentional or unintentional interference at the feedstock level, which is easier to access.
+4. The upload is only triggered if the local validation (2.) was successful. Additionally, it is only performed under certain conditions, for example for commits in `main`, but _not_ in PRs. Note that the package may also fail to transfer from `cf-staging` to `conda-forge` if the server-side validation (3.) fails. If 2. succeeds and 3. fails, this is usually due to an outdated token.
 
 :::
 
