@@ -107,7 +107,7 @@ export default function CurrentMigrations({ onLoad }) {
             collapsed={state.collapsed.paused}
             name="Paused migrations"
             resort={resort("paused")}
-            rows={paused || []}
+            rows={paused}
             select={() => select("paused")}
             sort={state.sort.paused}
           />
