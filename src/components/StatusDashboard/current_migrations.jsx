@@ -63,7 +63,8 @@ export default function CurrentMigrations({ onLoad }) {
   useEffect(fetchContent(onLoad, setState), []);
   const { closed, longterm, paused, regular } = state;
   const total = closed.length + longterm.length + paused.length + regular.length;
-  return (
+  const fetched = total > 0;
+    return (
     <div className="card" style={{ overflow: 'auto' }}>
       <div className="card__header">
         <h3>
@@ -80,6 +81,7 @@ export default function CurrentMigrations({ onLoad }) {
             rows={longterm}
             select={() => select("longterm")}
             sort={state.sort.longterm}
+            fetched={fetched}
           />
         </table>
         <table className={styles.migrations_table}>
@@ -90,6 +92,7 @@ export default function CurrentMigrations({ onLoad }) {
             rows={regular}
             select={() => select("regular")}
             sort={state.sort.regular}
+            fetched={fetched}
           />
         </table>
         <table className={styles.migrations_table}>
@@ -100,6 +103,7 @@ export default function CurrentMigrations({ onLoad }) {
             rows={closed}
             select={() => select("closed")}
             sort={state.sort.closed}
+            fetched={fetched}
           />
         </table>
         <table className={styles.migrations_table}>
@@ -110,6 +114,7 @@ export default function CurrentMigrations({ onLoad }) {
             rows={paused}
             select={() => select("paused")}
             sort={state.sort.paused}
+            fetched={fetched}
           />
         </table>
       </div>
@@ -117,7 +122,7 @@ export default function CurrentMigrations({ onLoad }) {
   );
 }
 
-function TableContent({ collapsed, name, resort, rows, select, sort }) {
+function TableContent({ collapsed, name, resort, rows, select, sort, fetched }) {
   const [redirect, setState] = useState('');
   if (redirect) return (<Redirect to={redirect} replace={false} push={true} />);
   return (
@@ -126,7 +131,7 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
         <tr onClick={select}>
           <th colSpan={8} className={collapsed ? styles.collapsed : undefined}>
             {name}{" "}
-            <span className="badge badge--secondary">{name!=="Paused migrations" ? rows.length || "..." : rows.length || "0"}</span>
+            <span className="badge badge--secondary">{fetched ? rows.length : "…" }</span>
           </th>
         </tr>
         <tr className={collapsed ? styles.collapsed : undefined}>
