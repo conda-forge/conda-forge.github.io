@@ -1695,8 +1695,6 @@ add some information on r packages which make heavy use of `noarch: generic`
     - [importlib_metadata and importlib-metadata](https://github.com/conda-forge/importlib_metadata-feedstock/blob/main/recipe/meta.yaml)
     - [typing_extensions and typing-extensions](https://github.com/conda-forge/typing_extensions-feedstock/blob/main/recipe/meta.yaml)
 
-
-
 ### Common pitfalls with `outputs`
 
 This is a non-exhaustive list of common pitfalls when using `outputs`.
