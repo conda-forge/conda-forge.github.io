@@ -1737,7 +1737,7 @@ This is a non-exhaustive list of common pitfalls when using `outputs`.
           - dependencies
   ```
 
-  Once the package is created, it the development package should be added to the list of global pinnings for conda forge in the [`conda_build_config.yaml`](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml) file.
+Once the package is created, the development package should be added to the list of pinnings for conda-forge in the [global `conda_build_config.yaml`](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml) file.
 
 <a id="build-matrices"></a>
 
