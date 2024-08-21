@@ -9,6 +9,18 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
+            <title><![CDATA[Removing build in favor of python-build]]></title>
+            <link>https://conda-forge.org/news/2024/08/21/remove-build/</link>
+            <guid>https://conda-forge.org/news/2024/08/21/remove-build/</guid>
+            <pubDate>Wed, 21 Aug 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[For nearly two years now, we have favored the use python-build as the package name for the PyPA build]]></description>
+            <content:encoded><![CDATA[<p>For nearly two years now, we have favored the use <code>python-build</code> as the package name for the PyPA <a href="https://github.com/pypa/build" target="_blank" rel="noopener noreferrer"><code>build</code></a>
+project over <code>build</code>. In fact, the <code>build</code> feedstock on <code>conda-forge</code> is archived and has not had its version
+updated. To complete this transition, we are going to mark all existing <code>build</code> packages as broken, provide
+a more detailed linter hint, and turn off the migration infrastructure we've been using to help move feedstocks.
+Any questions or comments can be directed to the <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2269" target="_blank" rel="noopener noreferrer">GitHub issue</a> on this work.</p>]]></content:encoded>
+        </item>
+        <item>
             <title><![CDATA[Removing wheel and setuptools as Dependencies for pip]]></title>
             <link>https://conda-forge.org/news/2024/08/21/sunsetting-pip-deps/</link>
             <guid>https://conda-forge.org/news/2024/08/21/sunsetting-pip-deps/</guid>
@@ -421,18 +433,6 @@ comes out. This will lighten the load on conda-forge infrastructure and
 make room for the new versions the community would like to support.</p>
 <p>More details can be found in issue
 <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/2623" target="_blank" rel="noopener noreferrer">conda-forge-pinning-feedstock#2623</a>. Feedback is welcome there.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Dropping PyPy 3.7]]></title>
-            <link>https://conda-forge.org/news/2022/08/17/dropping-pypy-37/</link>
-            <guid>https://conda-forge.org/news/2022/08/17/dropping-pypy-37/</guid>
-            <pubDate>Wed, 17 Aug 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Conda-forge has supported PyPy since almost 2.5 years now, and the]]></description>
-            <content:encoded><![CDATA[<p>Conda-forge has supported PyPy since almost 2.5 years now, and the
-initial PyPy 3.7 builds have been superseded in almost all aspects by
-the newer builds for 3.8 &amp; 3.9. We are therefore dropping PyPy 3.7 as a
-supported python version, and will keep focusing on the more
-contemporary PyPy builds.</p>]]></content:encoded>
         </item>
     </channel>
 </rss>
