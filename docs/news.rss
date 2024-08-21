@@ -4,10 +4,25 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/news/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Wed, 14 Aug 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 21 Aug 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Removing wheel and setuptools as Dependencies for pip]]></title>
+            <link>https://conda-forge.org/news/2024/08/21/sunsetting-pip-deps/</link>
+            <guid>https://conda-forge.org/news/2024/08/21/sunsetting-pip-deps/</guid>
+            <pubDate>Wed, 21 Aug 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Starting with Python 3.13, pip will no longer have setuptools and wheel as dependencies]]></description>
+            <content:encoded><![CDATA[<p>Starting with Python 3.13, <code>pip</code> will no longer have <code>setuptools</code> and <code>wheel</code> as dependencies
+by default. While this default made sense at the time <code>conda-forge</code> was started (over 8 years ago!),
+with the advent of Python packaging build backends (e.g., <code>flit</code>, <code>poetry</code>, <code>hatchling</code>, etc.),
+this default is no longer correct. Instead, you will need to specify <code>wheel</code> and/or <code>setuptools</code> explicitly in the <code>host</code>
+section of your recipe if you need them. At first, <code>pip</code> for versions of Python before 3.13 will be unaffected.
+However, after the completion of the Python 3.13 migration, we will remove these dependencies from <code>pip</code> for all
+versions of Python. Follow GitHub issue <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2252" target="_blank" rel="noopener noreferrer">#2252</a>
+for more information and updates.</p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Sunsetting PyPy support]]></title>
             <link>https://conda-forge.org/news/2024/08/14/sunsetting-pypy/</link>
@@ -418,29 +433,6 @@ initial PyPy 3.7 builds have been superseded in almost all aspects by
 the newer builds for 3.8 &amp; 3.9. We are therefore dropping PyPy 3.7 as a
 supported python version, and will keep focusing on the more
 contemporary PyPy builds.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Moving to Visual Studio toolchain vc142]]></title>
-            <link>https://conda-forge.org/news/2022/08/11/moving-to-visual-studio-toolchain-vc142/</link>
-            <guid>https://conda-forge.org/news/2022/08/11/moving-to-visual-studio-toolchain-vc142/</guid>
-            <pubDate>Thu, 11 Aug 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Microsoft has deprecated the Visual Studio (VS) 2017 compiler and]]></description>
-            <content:encoded><![CDATA[<p>Microsoft has deprecated the Visual Studio (VS) 2017 compiler and
-removed it from all the CI they control (notably Azure Pipelines &amp;
-Github Actions). This means that the default toolchain (== C/C++
-compiler, linker, standard libraries, and related utilities) of that VS
-version - vc141 - is getting less and less use in upstream libraries
-(because public hosted CI doesn't use it anymore by default), and
-therefore support for it is bitrotting at an accelerating pace. We are
-therefore
-<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/3167" target="_blank" rel="noopener noreferrer">planning</a>
-to move our toolchain on windows to vc142 (the default in VS2019) in two
-weeks, on 2022-08-25.</p>
-<p>This will not affect you as a general user of conda-forge packages on
-windows; the only impact is that if you are locally compiling against
-artefacts produced by conda-forge and are still using VS2017 yourself,
-you will need to upgrade your compiler (VS2019 is a drop-in replacement
-&amp; ABI-compatible).</p>]]></content:encoded>
         </item>
     </channel>
 </rss>

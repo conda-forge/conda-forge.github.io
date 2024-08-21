@@ -2,11 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/news/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2024-08-14T00:00:00.000Z</updated>
+    <updated>2024-08-21T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/news/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Removing wheel and setuptools as Dependencies for pip]]></title>
+        <id>https://conda-forge.org/news/2024/08/21/sunsetting-pip-deps/</id>
+        <link href="https://conda-forge.org/news/2024/08/21/sunsetting-pip-deps/"/>
+        <updated>2024-08-21T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Starting with Python 3.13, pip will no longer have setuptools and wheel as dependencies]]></summary>
+        <content type="html"><![CDATA[<p>Starting with Python 3.13, <code>pip</code> will no longer have <code>setuptools</code> and <code>wheel</code> as dependencies
+by default. While this default made sense at the time <code>conda-forge</code> was started (over 8 years ago!),
+with the advent of Python packaging build backends (e.g., <code>flit</code>, <code>poetry</code>, <code>hatchling</code>, etc.),
+this default is no longer correct. Instead, you will need to specify <code>wheel</code> and/or <code>setuptools</code> explicitly in the <code>host</code>
+section of your recipe if you need them. At first, <code>pip</code> for versions of Python before 3.13 will be unaffected.
+However, after the completion of the Python 3.13 migration, we will remove these dependencies from <code>pip</code> for all
+versions of Python. Follow GitHub issue <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2252" target="_blank" rel="noopener noreferrer">#2252</a>
+for more information and updates.</p>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Sunsetting PyPy support]]></title>
         <id>https://conda-forge.org/news/2024/08/14/sunsetting-pypy/</id>
@@ -417,28 +432,5 @@ initial PyPy 3.7 builds have been superseded in almost all aspects by
 the newer builds for 3.8 &amp; 3.9. We are therefore dropping PyPy 3.7 as a
 supported python version, and will keep focusing on the more
 contemporary PyPy builds.</p>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Moving to Visual Studio toolchain vc142]]></title>
-        <id>https://conda-forge.org/news/2022/08/11/moving-to-visual-studio-toolchain-vc142/</id>
-        <link href="https://conda-forge.org/news/2022/08/11/moving-to-visual-studio-toolchain-vc142/"/>
-        <updated>2022-08-11T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Microsoft has deprecated the Visual Studio (VS) 2017 compiler and]]></summary>
-        <content type="html"><![CDATA[<p>Microsoft has deprecated the Visual Studio (VS) 2017 compiler and
-removed it from all the CI they control (notably Azure Pipelines &amp;
-Github Actions). This means that the default toolchain (== C/C++
-compiler, linker, standard libraries, and related utilities) of that VS
-version - vc141 - is getting less and less use in upstream libraries
-(because public hosted CI doesn't use it anymore by default), and
-therefore support for it is bitrotting at an accelerating pace. We are
-therefore
-<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/3167" target="_blank" rel="noopener noreferrer">planning</a>
-to move our toolchain on windows to vc142 (the default in VS2019) in two
-weeks, on 2022-08-25.</p>
-<p>This will not affect you as a general user of conda-forge packages on
-windows; the only impact is that if you are locally compiling against
-artefacts produced by conda-forge and are still using VS2017 yourself,
-you will need to upgrade your compiler (VS2019 is a drop-in replacement
-&amp; ABI-compatible).</p>]]></content>
     </entry>
 </feed>
