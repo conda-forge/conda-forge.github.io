@@ -1,6 +1,6 @@
 # Removing `wheel` and `setuptools` as Dependencies for `pip`
 
-Starting with Python 3.13, `pip` on Python 3.13 will no longer have `setuptools` and `wheel` as dependencies
+Starting with Python 3.13, `pip` will no longer have `setuptools` and `wheel` as dependencies
 by default. While this default made sense at the time `conda-forge` was started (over 8 years ago!),
 with the advent of Python packaging build backends (e.g., `flit`, `poetry`, `hatchling`, etc.),
 this default is no longer correct. Instead, you will need to specify `wheel` and/or `setuptools` explicitly in the `host`
