@@ -126,8 +126,8 @@ export const urls = {
       },
     ],
     cdn: {
-      api: "https://s3.amazonaws.com/conda-static.anaconda.org/conda-forge/last-updated",
-      link: "https://conda-static.anaconda.org/conda-forge/rss.xml",
+      api: "https://conda.anaconda.org/conda-forge/last-updated.json",
+      link: "https://conda.anaconda.org/conda-forge/rss.xml",
     },
     services: {
       api: "https://conda-forge.herokuapp.com/alive",
