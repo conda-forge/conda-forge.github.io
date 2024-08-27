@@ -11,13 +11,15 @@ const SORT_KEY = "migration-sort";
 export default function CurrentMigrations({ onLoad }) {
   const [state, setState] = useState({
     closed: [],
-    collapsed: { closed: true, longterm: true, regular: true },
+    collapsed: { closed: true, longterm: true, paused: true, regular: true},
     longterm: [],
+    paused: [],
     regular: [],
     sort: {
       closed: { by: "name", order: "ascending" },
       longterm: { by: "name", order: "ascending" },
-      regular: { by: "name", order: "ascending" }
+      paused: { by: "name", order: "ascending" },
+      regular: { by: "name", order: "ascending" },
     }
   });
   const resort = (group) => {
@@ -59,9 +61,10 @@ export default function CurrentMigrations({ onLoad }) {
       return { ...prev, collapsed: updated };
     });
   useEffect(fetchContent(onLoad, setState), []);
-  const { closed, longterm, regular } = state;
-  const total = closed.length + longterm.length + regular.length;
-  return (
+  const { closed, longterm, paused, regular } = state;
+  const total = closed.length + longterm.length + paused.length + regular.length;
+  const fetched = total > 0;
+    return (
     <div className="card" style={{ overflow: 'auto' }}>
       <div className="card__header">
         <h3>
@@ -78,6 +81,7 @@ export default function CurrentMigrations({ onLoad }) {
             rows={longterm}
             select={() => select("longterm")}
             sort={state.sort.longterm}
+            fetched={fetched}
           />
         </table>
         <table className={styles.migrations_table}>
@@ -88,6 +92,7 @@ export default function CurrentMigrations({ onLoad }) {
             rows={regular}
             select={() => select("regular")}
             sort={state.sort.regular}
+            fetched={fetched}
           />
         </table>
         <table className={styles.migrations_table}>
@@ -98,6 +103,18 @@ export default function CurrentMigrations({ onLoad }) {
             rows={closed}
             select={() => select("closed")}
             sort={state.sort.closed}
+            fetched={fetched}
+          />
+        </table>
+        <table className={styles.migrations_table}>
+          <TableContent
+            collapsed={state.collapsed.paused}
+            name="Paused migrations"
+            resort={resort("paused")}
+            rows={paused}
+            select={() => select("paused")}
+            sort={state.sort.paused}
+            fetched={fetched}
           />
         </table>
       </div>
@@ -105,7 +122,7 @@ export default function CurrentMigrations({ onLoad }) {
   );
 }
 
-function TableContent({ collapsed, name, resort, rows, select, sort }) {
+function TableContent({ collapsed, name, resort, rows, select, sort, fetched }) {
   const [redirect, setState] = useState('');
   if (redirect) return (<Redirect to={redirect} replace={false} push={true} />);
   return (
@@ -114,7 +131,7 @@ function TableContent({ collapsed, name, resort, rows, select, sort }) {
         <tr onClick={select}>
           <th colSpan={8} className={collapsed ? styles.collapsed : undefined}>
             {name}{" "}
-            <span className="badge badge--secondary">{rows.length || "…"}</span>
+            <span className="badge badge--secondary">{fetched ? rows.length : "…" }</span>
           </th>
         </tr>
         <tr className={collapsed ? styles.collapsed : undefined}>
@@ -234,10 +251,11 @@ function fetchContent(onLoad, setState) {
         const sort = {
           closed: window.localStorage.getItem(`${SORT_KEY}-closed`),
           longterm: window.localStorage.getItem(`${SORT_KEY}-longterm`),
-          regular: window.localStorage.getItem(`${SORT_KEY}-regular`)
+          regular: window.localStorage.getItem(`${SORT_KEY}-regular`),
+          paused: window.localStorage.getItem(`${SORT_KEY}-paused`)
         };
         if (collapsed) local.collapsed = JSON.parse(collapsed);
-        ["closed", "longterm", "regular"].forEach(group => {
+        ["closed", "longterm", "regular", "paused"].forEach(group => {
           if (!sort[group]) return;
           local.sort = local.sort || {};
           local.sort[group] = JSON.parse(sort[group])
@@ -280,7 +298,8 @@ function fetchContent(onLoad, setState) {
         const sort = {
           closed: patch.sort?.closed || prev.sort.closed,
           longterm: patch.sort?.longterm || prev.sort.longterm,
-          regular: patch.sort?.regular || prev.sort.regular
+          regular: patch.sort?.regular || prev.sort.regular,
+          paused: patch.sort?.paused || prev.sort.paused
         };
         const result = {
           ...prev,
@@ -289,6 +308,7 @@ function fetchContent(onLoad, setState) {
           closed: fetched.closed.sort(compare(sort.closed.by, sort.closed.order)),
           longterm: fetched.longterm.sort(compare(sort.longterm.by, sort.longterm.order)),
           regular: fetched.regular.sort(compare(sort.regular.by, sort.regular.order)),
+          paused: fetched.paused.sort(compare(sort.paused.by, sort.paused.order)),
         };
         return result;
       });
