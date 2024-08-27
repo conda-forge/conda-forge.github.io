@@ -1,6 +1,7 @@
 import { Redirect, useLocation } from "@docusaurus/router";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { urls } from "@site/src/constants";
+import Admonition from "@theme/Admonition";
 import Layout from "@theme/Layout";
 import React, { useEffect, useState } from "react";
 import SVG from 'react-inlinesvg';
@@ -70,6 +71,7 @@ export default function MigrationDetails() {
         const url = urls.migrations.details.replace("<NAME>", state.name);
         const details = await (await fetch(url)).json();
         details.progress = measureProgress(details);
+        details.paused_or_closed = await checkPausedOrClosed(name);
         setState((prev) => ({ ...prev, details, view: view || prev.view }));
       } catch (error) {
         console.warn(`error loading migration: ${state.name}`, error);
@@ -95,10 +97,15 @@ export default function MigrationDetails() {
             <div style={{ clear: "both" }}></div>
           </div>
           <div className="card__body" style={{ overflow: "auto" }}>
-            {details && <Bar details={details} />}
+            {(details && details.paused_or_closed === "paused") ?
+              <Admonition type="note">This migration is currently paused.</Admonition> : null}
+            {(details && details.paused_or_closed === "closed") ?
+              <Admonition type="note">This migration has been closed recently.</Admonition> : null}
+            {details && <Bar details={details} /> || null}
             {view === "graph" ?
               <Graph>{name}</Graph> :
-              (details && <Table details={details} />)}
+              (details && <Table details={details} />)
+            }
           </div>
         </div>
       </main>
@@ -114,20 +121,29 @@ function Bar({ details }) {
       <div className={styles.migration_details_bar}>
         {ORDERED.filter(([key]) => details[key]?.length).map(([key], index) => (
           <>
-          <a
-            id={`migration-bar-element-${key}`}
-            className={styles[`${prefix}${key.replace("-", "_")}`]}
-            style={{ flex: details[key].length }}
-            key={index}
-            alt={TITLES[key] + " " + parseFloat(details[key].length*100/measureProgress(details).total).toFixed(1) + "% (" + details[key].length+" PRs over "+measureProgress(details).total + ")"}
-          ></a>
-          <Tooltip
-            anchorSelect={`#migration-bar-element-${key}`}
-            place="top"
-            className={styles.migration_details_bar_tooltip}
-          >
-            <div>{TITLES[key]}</div>
-          </Tooltip>
+            <a
+              id={`migration-bar-element-${key}`}
+              className={styles[`${prefix}${key.replace("-", "_")}`]}
+              style={{ flex: details[key].length }}
+              key={`migration-bar-element-href-${key}`}
+              alt={
+                TITLES[key]
+                + " "
+                + parseFloat(details[key].length*100/measureProgress(details).total).toFixed(1)
+                + "% (" + details[key].length
+                + " PRs over "
+                + measureProgress(details).total
+                + ")"
+              }
+            ></a>
+            <Tooltip
+              anchorSelect={`#migration-bar-element-${key}`}
+              place="top"
+              key={`migration-bar-element-tooltip-${key}`}
+              className={styles.migration_details_bar_tooltip}
+            >
+              <div>{TITLES[key]}</div>
+            </Tooltip>
           </>
         ))}
       </div>
@@ -299,4 +315,16 @@ function Row({ children }) {
       <td colSpan={4}><pre dangerouslySetInnerHTML={{ __html: details}} /></td>
     </tr>)}
   </>);
+}
+
+async function checkPausedOrClosed(name) {
+  for (const status of ["paused", "closed"]) {
+    try {
+      const response = await fetch(urls.migrations.status[status]);
+      const data = await response.json();
+      if (name in data) return status;
+    } catch (error) {
+      console.warn(`error checking status for ${name}:`, error);
+    }
+  }
 }
