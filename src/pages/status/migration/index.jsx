@@ -97,9 +97,9 @@ export default function MigrationDetails() {
             <div style={{ clear: "both" }}></div>
           </div>
           <div className="card__body" style={{ overflow: "auto" }}>
-            {(details && details.paused_or_closed === "paused") ? 
+            {(details && details.paused_or_closed === "paused") ?
               <Admonition type="note">This migration is currently paused.</Admonition> : null}
-            {(details && details.paused_or_closed === "closed") ? 
+            {(details && details.paused_or_closed === "closed") ?
               <Admonition type="note">This migration has been closed recently.</Admonition> : null}
             {details && <Bar details={details} /> || null}
             {view === "graph" ?
