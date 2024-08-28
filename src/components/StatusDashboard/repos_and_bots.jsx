@@ -57,12 +57,12 @@ function Image({ alt, link, children }) {
 }
 
 function CDNStatus() {
-  const [{ minutes, status }, setState] = useState({ minutes: 0, status: "…" });
+  const [{ minutes, status }, setState] = useState({ minutes: "…", status: "…" });
   useEffect(() => {
     void (async () => {
       try {
-        const response = await (await fetch(urls.repos.cdn.api)).text();
-        const updated = new Date(response.trim()).getTime();
+        const response = await (await fetch(`${urls.repos.cdn.api}?bustcache=${Date.now()}`)).json();
+        const updated = new Date(response.timestamp.iso8601).getTime();
         const delta = (new Date()).getTime() - updated;
         const status = delta < OPERATIONAL_WINDOW ? "operational" :
           delta < DEGRADED_WINDOW ? "degraded" : "major outage";
