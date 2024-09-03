@@ -152,6 +152,13 @@ const developer = [
     dark: "img/supporters/prefix_dark.svg",
     width: 250,
   },
+  {
+    name: "QuantCo",
+    link: "https://www.quantco.com/",
+    light: "img/supporters/quantco_light.svg",
+    dark: "img/supporters/quantco_dark.svg",
+    width: 210,
+  },
 ];
 
 export default function Supporters() {
