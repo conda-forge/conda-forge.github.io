@@ -80,6 +80,7 @@ const config = {
         blog: {
           showReadingTime: true,
           blogSidebarCount: 10,
+          onInlineAuthors: 'ignore',
           ...editUrl,
         },
         theme: {
@@ -120,6 +121,7 @@ const config = {
         blogSidebarTitle: "Latest announcements",
         blogSidebarCount: 10 /* This can be set to 'ALL' if needed */,
         postsPerPage: 10 /* This can be set to 'ALL' if needed */,
+        onUntruncatedBlogPosts: 'ignore',
       },
     ],
     [
