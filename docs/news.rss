@@ -4,10 +4,26 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/news/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Wed, 21 Aug 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 08 Sep 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Changes Feedstock Output Validation Procedure]]></title>
+            <link>https://conda-forge.org/news/2024/09/08/output-validation-changes/</link>
+            <guid>https://conda-forge.org/news/2024/09/08/output-validation-changes/</guid>
+            <pubDate>Sun, 08 Sep 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[We have changed our feedstock output validation procedure. Instead of automatically]]></description>
+            <content:encoded><![CDATA[<p>We have changed our feedstock output validation procedure. Instead of automatically
+adding new packages to existing feedstocks (e.g., when a new output is added), we will now
+require that maintainers submit a PR to add the new output via our
+<a href="https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock" target="_blank" rel="noopener noreferrer">admin-requests repository</a>.
+New feedstocks created via <code>staged-recipes</code> will have their outputs added automatically. If you maintain a feedstock
+that regularly adds new outputs (e.g., <code>llvmdev</code> has <code>libllvm18</code>, <code>libllvm19</code>, etc.), we have created a
+<a href="https://github.com/conda-forge/admin-requests/blob/main/.feedstock_outputs_autoreg_allowlist.yml" target="_blank" rel="noopener noreferrer">list of feedstocks with allowed glob patterns</a>. These feedstocks will have any outputs matching their glob patterns
+added automatically. If you would like to add your feedstock to this list, please submit a PR. Further
+details on package output validation cna be found in our <a href="https://conda-forge.org/docs/maintainer/infrastructure/#output-validation-and-feedstock-tokens" target="_blank" rel="noopener noreferrer">documentation</a>.</p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Removing build in favor of python-build]]></title>
             <link>https://conda-forge.org/news/2024/08/21/remove-build/</link>
@@ -418,21 +434,6 @@ packages will be made available on or after 2022-11-10, following
 first CalVer and last SemVer should be <code>22.9.0</code> and <code>4.14.0</code>
 respectively. This change maintains version order so you should not
 expect any issues.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Dropping Python 3.7]]></title>
-            <link>https://conda-forge.org/news/2022/08/24/dropping-python-37/</link>
-            <guid>https://conda-forge.org/news/2022/08/24/dropping-python-37/</guid>
-            <pubDate>Wed, 24 Aug 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Conda-Forge has been providing support for Python 3.7 for 4 years now.]]></description>
-            <content:encoded><![CDATA[<p>Conda-Forge has been providing support for Python 3.7 for 4 years now.</p>
-<p>Increasingly projects are moving off it (particularly in the PyData
-community). With Python 3.11's release coming around the corner (October
-3rd), conda-forge plans to drop Python 3.7 support when Python 3.11
-comes out. This will lighten the load on conda-forge infrastructure and
-make room for the new versions the community would like to support.</p>
-<p>More details can be found in issue
-<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/2623" target="_blank" rel="noopener noreferrer">conda-forge-pinning-feedstock#2623</a>. Feedback is welcome there.</p>]]></content:encoded>
         </item>
     </channel>
 </rss>
