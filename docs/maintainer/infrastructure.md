@@ -647,7 +647,7 @@ the following things:
 
 New packages that are added to existing feedstocks are not registered automatically in order to prevent
 typo squatting and other malicious activities. Package outputs are added during feedstock creation.
-If you move a package from one feedstock to another, add an output, or change the name of package name,
+If you move a package from one feedstock to another, add an output package, or change the name of a package,
 you will need to request that the new package name be added to your feedstock via the
 [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock).
 
