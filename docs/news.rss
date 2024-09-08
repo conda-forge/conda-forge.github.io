@@ -9,7 +9,7 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
-            <title><![CDATA[Changes Feedstock Output Validation Procedure]]></title>
+            <title><![CDATA[Changes to the Feedstock Output Validation Procedure]]></title>
             <link>https://conda-forge.org/news/2024/09/08/output-validation-changes/</link>
             <guid>https://conda-forge.org/news/2024/09/08/output-validation-changes/</guid>
             <pubDate>Sun, 08 Sep 2024 00:00:00 GMT</pubDate>

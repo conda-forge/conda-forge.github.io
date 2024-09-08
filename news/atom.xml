@@ -8,7 +8,7 @@
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[Changes Feedstock Output Validation Procedure]]></title>
+        <title type="html"><![CDATA[Changes to the Feedstock Output Validation Procedure]]></title>
         <id>https://conda-forge.org/news/2024/09/08/output-validation-changes/</id>
         <link href="https://conda-forge.org/news/2024/09/08/output-validation-changes/"/>
         <updated>2024-09-08T00:00:00.000Z</updated>
