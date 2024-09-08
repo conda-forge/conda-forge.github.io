@@ -1,4 +1,4 @@
-# Changes Feedstock Output Validation Procedure
+# Changes to the Feedstock Output Validation Procedure
 
 We have changed our feedstock output validation procedure. Instead of automatically
 adding new packages to existing feedstocks (e.g., when a new output is added), we will now
