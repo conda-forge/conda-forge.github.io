@@ -635,19 +635,25 @@ works as follows.
    channel.
 
 We attempt to report errors in this process to users via comments on commits/issues in the feedstocks.
-Note however that sometimes these fail. If you think you are having trouble with uploads, make
-sure `conda_forge_output_validation: true` is set in your `conda-forge.yml` and rerender
-your feedstock with the latest version of `conda-smithy`. Finally, new packages that are added to
-feedstocks are registered automatically and once uploaded successfully, no other feedstock
-will be able to upload packages with the same name.
+Sometimes these reports fail. If you think you are having trouble with uploads, make sure to check/try
+the following things:
 
-Sometimes, however, it might make better sense to generate a package from a different
-feedstock, say, due to package renaming or re-structuring. In this case, you may need
-to add the new feedstock to the [feedstock-outputs](https://github.com/conda-forge/feedstock-outputs) map.
-If this is not done, then the output validation process will block the package from being
-uploaded from the new feedstock, by design.
-Once this is done correctly and the package is uploaded,
-you can then request the conda-forge core devs to archive the old feedstock.
+- Ensure that `conda_forge_output_validation: true` is set in your `conda-forge.yml`.
+- Retry the package build and upload by pushing an empty commit to the feedstock.
+- Rerender the feedstock in a PR from a fork of the feedstock and merge.
+- Request a feedstock token reset via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#reset-your-feedstock-token).
+- Request that any new packages be added to the allowed outputs for the feedstock
+  via our [admin-requests-repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock).
+
+New packages that are added to existing feedstocks are not registered automatically in order to prevent
+typo squatting and other malicious activities. Package outputs are added during feedstock creation.
+If you move a package from one feedstock to another, add an output, or change the name of package name,
+you will need to request that the new package name be added to your feedstock via the
+[admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock).
+
+In rare cases, the package name may change regularly in a well-defined way (e.g., `libllvm18`, `libllvm19`, etc.).
+In this case, please submit a PR updating our [list of feedstocks with allowed glob patterns](https://github.com/conda-forge/admin-requests/blob/main/.feedstock_outputs_autoreg_allowlist.yml). Output packages that match
+these patterns will be automatically registered for your feedstock.
 
 ## Stages of package building and involved infrastructure
 
