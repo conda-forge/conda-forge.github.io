@@ -19,7 +19,7 @@ require that maintainers submit a PR to add the new output via our
 <a href="https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock" target="_blank" rel="noopener noreferrer">admin-requests repository</a>.
 New feedstocks created via <code>staged-recipes</code> will have their outputs added automatically. If you maintain a feedstock
 that regularly adds new outputs (e.g., <code>llvmdev</code> has <code>libllvm18</code>, <code>libllvm19</code>, etc.), we have created a
-<a href="https://github.com/conda-forge/admin-requests/blob/main/.feedstock_outputs_autoreg_allowlist.yml" target="_blank" rel="noopener noreferrer">list of feedstocks with allowed glob patterns</a>. These feedstocks will have any outputs matching their glob patterns
+<a href="https://github.com/conda-forge/feedstock-outputs/blob/main/feedstock_outputs_autoreg_allowlist.yml" target="_blank" rel="noopener noreferrer">list of feedstocks with allowed glob patterns</a>. These feedstocks will have any outputs matching their glob patterns
 added automatically. If you would like to add your feedstock to this list, please submit a PR. Further
 details on package output validation can be found in our <a href="https://conda-forge.org/docs/maintainer/infrastructure/#output-validation-and-feedstock-tokens" target="_blank" rel="noopener noreferrer">documentation</a>.</p>]]></content>
     </entry>
