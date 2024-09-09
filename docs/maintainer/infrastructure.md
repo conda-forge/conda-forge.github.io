@@ -652,7 +652,7 @@ you will need to request that the new package name be added to your feedstock vi
 [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock).
 
 In rare cases, the package name may change regularly in a well-defined way (e.g., `libllvm18`, `libllvm19`, etc.).
-In this case, please submit a PR updating our [list of feedstocks with allowed glob patterns](https://github.com/conda-forge/admin-requests/blob/main/.feedstock_outputs_autoreg_allowlist.yml). Output packages that match
+In this case, please submit a PR updating our [list of feedstocks with allowed glob patterns](https://github.com/conda-forge/feedstock-outputs/blob/main/feedstock_outputs_autoreg_allowlist.yml). Output packages that match
 these patterns will be automatically registered for your feedstock.
 
 ## Stages of package building and involved infrastructure
