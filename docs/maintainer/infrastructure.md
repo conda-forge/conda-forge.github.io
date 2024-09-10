@@ -643,7 +643,7 @@ the following things:
 - Rerender the feedstock in a PR from a fork of the feedstock and merge.
 - Request a feedstock token reset via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#reset-your-feedstock-token).
 - Request that any new packages be added to the allowed outputs for the feedstock
-  via our [admin-requests-repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock).
+  via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock).
 
 New packages that are added to existing feedstocks are not registered automatically in order to prevent
 typo squatting and other malicious activities. Package outputs are added during feedstock creation.
@@ -652,8 +652,9 @@ you will need to request that the new package name be added to your feedstock vi
 [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock).
 
 In rare cases, the package name may change regularly in a well-defined way (e.g., `libllvm18`, `libllvm19`, etc.).
-In this case, please submit a PR updating our [list of feedstocks with allowed glob patterns](https://github.com/conda-forge/feedstock-outputs/blob/main/feedstock_outputs_autoreg_allowlist.yml). Output packages that match
-these patterns will be automatically registered for your feedstock.
+In this case, you can use our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock)
+to add a glob pattern that matches the new package name pattern. We use the Python `fnmatch` module syntax.
+Output packages that match these patterns will be automatically registered for your feedstock.
 
 ## Stages of package building and involved infrastructure
 
