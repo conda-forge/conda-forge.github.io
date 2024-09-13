@@ -15,6 +15,9 @@ export default function TOC({ incident }) {
           <a className="menu__link" href="#migrations">Current Migrations</a>
         </li>
         <li className="menu__list-item">
+          <a className="menu__link" href="#version">Version Updates</a>
+        </li>
+        <li className="menu__list-item">
           <a className="menu__link" href="#azure">Azure Pipelines Usage</a>
         </li>
         <li className="menu__list-item">
@@ -25,9 +28,6 @@ export default function TOC({ incident }) {
         </li>
         <li className="menu__list-item">
           <a className="menu__link" href="#incidents">Incidents</a>
-        </li>
-        <li className="menu__list-item">
-          <a className="menu__link" href="#version">Version Updates</a>
         </li>
       </ul>
     </aside>

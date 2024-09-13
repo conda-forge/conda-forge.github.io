@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 export default function VersionUpdates({ onLoad }) {
   const [{ collapsed, errored, expanded, errors, queued }, setState] =
     useState({
-      collapsed: { queued: true, errored: true },
+      collapsed: { queued: false, errored: true },
       expanded: {},
       errored: [],
       errors: {},
