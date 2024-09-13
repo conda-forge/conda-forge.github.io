@@ -4,13 +4,12 @@ import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 
 export default function VersionUpdates({ onLoad }) {
-  const [{ collapsed, errored, expanded, errors, queued }, setState] =
+  const [{ collapsed, expanded, errors, queued }, setState] =
     useState({
-      collapsed: { queued: true, errored: true },
+      collapsed: { queued: false, errored: true },
       expanded: {},
-      errored: [],
       errors: {},
-      queued: []
+      queued: {}
     });
   const toggleItem = item => () => setState(prev => (
     { ...prev, expanded: { ...prev.expanded, [item]: !prev.expanded[item] } }
@@ -35,9 +34,9 @@ export default function VersionUpdates({ onLoad }) {
         <h3>
           Version Updates
             {" "}
-            <span className="badge badge--secondary">{queued.length}</span>
+            <span className="badge badge--secondary">{Object.keys(queued).length}</span>
             {" "}
-            <span className="badge badge--warning">{errored.length}</span>
+            <span className="badge badge--warning">{Object.keys(errors).length}</span>
         </h3>
       </div>
       <div className="card__body">
@@ -47,19 +46,19 @@ export default function VersionUpdates({ onLoad }) {
             (collapsed.queued ? styles.collapsed : styles.expanded)
           }>
           Queued Version Updates{" "}
-          <span className="badge badge--secondary">{queued.length}</span>
+          <span className="badge badge--secondary">{Object.keys(queued).length}</span>
         </div>
         <div className={styles.version_updates_content}
           style={collapsed.queued ?
             { display: "none" } :
             { display: "flex", flexDirection: "row" }
           }>
-          {queued.map((item, index) => (
+          {Object.entries(queued).map(([name, version], index) => (
             <div key={index}
               style={{ margin: 2 }}
               className={`${styles.badge} badge badge--secondary`}>
-              <Link href={urls.versions.pr.replace("<NAME>", item)}>
-                {item}
+              <Link href={urls.versions.pr.replace("<NAME>", name)}>
+                {`${name} ${version}`}
               </Link>
             </div>
           ))}
@@ -70,29 +69,29 @@ export default function VersionUpdates({ onLoad }) {
             (collapsed.errored ? styles.collapsed : styles.expanded)
           }>
           Errored Version Updates{" "}
-          <span className="badge badge--warning">{errored.length}</span>
+          <span className="badge badge--warning">{Object.keys(errors).length}</span>
         </div>
         <div className={styles.version_updates_content}
           style={collapsed.errored ?
             { display: "none" } :
             { display: "flex", flexDirection: "column" }}>
-          {errored.map((item, index) => (
+          {Object.entries(errors).map(([name, message], index) => (
             <React.Fragment key={index}>
               <div className={
                 styles.errored_item + " " +
-                (expanded[item] ? styles.expanded : styles.collapsed)}
-                onClick={toggleItem(item)}>
+                (expanded[name] ? styles.expanded : styles.collapsed)}
+                onClick={toggleItem(name)}>
                 <HoverEllipsis />
                 <div className={`${styles.badge} badge badge--secondary`}>
                   {/* Prevent link clicks from expanding/collapsing. */}
                   <Link onClick={event => event.stopPropagation()}
-                    href={urls.versions.pr.replace("<NAME>", item)}>{item}
+                    href={urls.versions.pr.replace("<NAME>", name)}>{name}
                   </Link>
                 </div>
               </div>
               <div className={styles.errored_item_content}
-                style={{ display: !expanded[item] && "none" }}>
-                <pre dangerouslySetInnerHTML={{ __html: errors[item]}} />
+                style={{ display: !expanded[name] && "none" }}>
+                <pre dangerouslySetInnerHTML={{ __html: message}} />
               </div>
             </React.Fragment>
           ))}
