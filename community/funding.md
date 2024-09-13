@@ -4,9 +4,12 @@ title: 'Funding'
 
 # Funding efforts
 
-<!-- Fundable efforts -->
-<!-- ---------------- -->
-<!-- Please check this repository for more details (WIP). -->
+If you want to fund some work in conda-forge, please check our list of "fundable items".
+These issues are marked with the `fundable` label and can be found across all the conda-forge repositories.
+
+The quickest way to find them is to use this [Github issue search for `org:conda-forge label:fundable`](https://github.com/search?q=label%3Afundable+org%3Aconda-forge+&ref=opensearch&type=issues).
+
+If you want to propose a new fundable item for a particular part of the project, find the relevant repository and fill up the "Fundable" template. If you are not sure of which repository is the most adequate, default to [`conda-forge/conda-forge.github.io`](https://github.com/conda-forge/conda-forge.github.io/issues/new/choose).
 
 <a id="current-and-past-funding-efforts"></a>
 
