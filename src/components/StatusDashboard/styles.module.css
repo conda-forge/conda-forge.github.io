@@ -193,9 +193,18 @@
   font-weight: 600;
 }
 
+[data-theme="dark"] .version_updates_content .badge a {
+  color: var(--ifm-color-primary-darkest);
+}
+
 .version_updates_content .badge:hover {
   border-width: var(--ifm-badge-border-width);
   border-color: var(--ifm-color-primary);
+}
+
+[data-theme="dark"] .version_updates_content .badge:hover {
+  border-width: var(--ifm-badge-border-width);
+  border-color: var(--ifm-color-primary-light);
 }
 
 .errored_item {
