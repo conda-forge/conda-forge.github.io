@@ -271,3 +271,7 @@
   right: 0;
   text-align: right;
 }
+
+.progress_bar progress {
+  accent-color: var(--ifm-color-primary);
+}
