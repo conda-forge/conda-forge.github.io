@@ -19,8 +19,7 @@ For the sake of transparency, we have made available letters of intent, applicat
 
 ### Submitted but not yet decided
 
-- 2023 - [CZI EOSS](https://chanzuckerberg.com/eoss/) Funding Cycle 6: Next-gen conda-build recipe format and tooling, submitted by Prefix & Quansight
-  - [Letter of intent](pathname:///_static/czi-eoss-6-loi-build-tools.pdf).
+> Nothing to report so far.
 
 ### Successfully funded
 
@@ -41,6 +40,8 @@ For the sake of transparency, we have made available letters of intent, applicat
 
 ### Submitted and not funded
 
+- 2023 - [CZI EOSS](https://chanzuckerberg.com/eoss/) Funding Cycle 6: Next-gen conda-build recipe format and tooling, submitted by Prefix & Quansight
+  - [Letter of intent](pathname:///_static/czi-eoss-6-loi-build-tools.pdf).
 - 2023 - Google Season of Docs: [Restructuring the conda-forge documentation](funding/gsod-2023.md)
 - 2022 - [CZI EOSS](https://chanzuckerberg.com/eoss/) Funding Cycle 5: Adding a WebAssembly Toolchain to conda-forge, submitted by QuantStack
   - [Letter of intent](pathname:///_static/czi-eoss-5-loi-wasm.pdf).
