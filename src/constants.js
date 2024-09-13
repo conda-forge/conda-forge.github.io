@@ -138,8 +138,8 @@ export const urls = {
     usage: "https://conda-forge.herokuapp.com/status-monitor/report/travis-ci",
   },
   versions: {
-    api: "https://raw.githubusercontent.com/regro/cf-graph-countyfair/master/status/version_status.json",
-    pr: "https://github.com/conda-forge/<NAME>-feedstock/blob/main/recipe/meta.yaml",
+    api: "https://raw.githubusercontent.com/regro/cf-graph-countyfair/master/status/version_status.v2.json",
+    pr: "https://github.com/conda-forge/<NAME>-feedstock/tree/main/recipe",
   },
   schemas: {
     "conda-forge.yml":
