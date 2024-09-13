@@ -92,7 +92,12 @@ export default function Incidents({ ongoing, onLoad, ...props }) {
       </div>
       <div className={`card__body ${styles.incidents}`}>
         {open.map((issue, i) => <Incident key={i}>{issue}</Incident>)}
-        {closed.map((issue, i) => <Incident key={i}>{issue}</Incident>)}
+        {closed.length ? (
+          <details>
+            <summary>See previous incidents</summary>
+            {closed.map((issue, i) => <Incident key={i}>{issue}</Incident>)}
+          </details>
+        ) : null}
       </div>
     </div>
   );
