@@ -18,7 +18,6 @@ you can:
 - Subscribe with [recurring contributions](https://opencollective.com/conda-forge/contribute/backer-30154/checkout?interval=month&amount=5)
 - Make [one-time donations](https://opencollective.com/conda-forge/donate?interval=oneTime&amount=20&name=&legalName=&email=)
 
-
 <a id="current-and-past-funding-efforts"></a>
 
 ## Current and past funding efforts
