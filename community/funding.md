@@ -11,6 +11,14 @@ The quickest way to find them is to use this [Github issue search for `org:conda
 
 If you want to propose a new fundable item for a particular part of the project, find the relevant repository and fill up the "Fundable" template. If you are not sure of which repository is the most adequate, default to [`conda-forge/conda-forge.github.io`](https://github.com/conda-forge/conda-forge.github.io/issues/new/choose).
 
+conda-forge can also be found in [OpenCollective](https://opencollective.com/conda-forge), where
+you can:
+
+- Browse current and past [transactions](https://opencollective.com/conda-forge/transactions)
+- Subscribe with [recurring contributions](https://opencollective.com/conda-forge/contribute/backer-30154/checkout?interval=month&amount=5)
+- Make [one-time donations](https://opencollective.com/conda-forge/donate?interval=oneTime&amount=20&name=&legalName=&email=)
+
+
 <a id="current-and-past-funding-efforts"></a>
 
 ## Current and past funding efforts
