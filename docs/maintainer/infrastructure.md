@@ -445,7 +445,7 @@ repo [README.md](https://github.com/conda-forge/webservices-dispatch-action) for
 
 ### Skipping CI builds
 
-To skip a CI build for a given commit, put `[ci skip] ***NO_CI***` in the commit message.
+To skip a CI build for a given commit, put `[ci skip]` in the commit message.
 
 :::note[Related links]
 
