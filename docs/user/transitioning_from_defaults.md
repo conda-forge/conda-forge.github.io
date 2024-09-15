@@ -1,3 +1,6 @@
+---
+title: Transitioning from defaults
+---
 # Transitioning from Anaconda's `defaults` channels
 
 Users wishing to transition from Anaconda's `defaults` (i.e. those hosted under
