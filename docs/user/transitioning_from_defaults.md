@@ -1,10 +1,11 @@
 ---
 title: Transitioning from defaults
 ---
+
 # Transitioning from Anaconda's `defaults` channels
 
 Users wishing to transition from Anaconda's `defaults` (i.e. those hosted under
-https://repo.anaconda.com/pkgs) channels should do so with care so as not to 
+https://repo.anaconda.com/pkgs) channels should do so with care so as not to
 break their working environments. The first thing to realize
 is that in 2024 conda-forge is incompatible with the packages provided in
 `defaults`. Often, the packages on conda-forge will require
@@ -56,7 +57,7 @@ Miniforge.
 ## Uninstalling Anaconda and installing Miniforge
 
 If you are ready to fully switch to conda-forge, we recommend uninstalling
-Anaconda / Miniconda and then installing [Miniforge](/download). The following steps 
+Anaconda / Miniconda and then installing [Miniforge](/download). The following steps
 are guidelines on how to go about this, while backing up your work and your environments.
 
 1. Clean your existing conda installation. This should remove unused files from
@@ -75,9 +76,11 @@ are guidelines on how to go about this, while backing up your work and your envi
    `conda info --envs`. Back those up too, if necessary.
 
    - Alternatively, you can also export lockfiles for all your environments, if preferred:
+
      ```shell
      conda list --explicit --md5 --prefix /path/to/environment-name > environment-name.txt
      ```
+
      Note these lockfiles will only include the conda packages. If you `pip install`ed packages
      on top, those won't be captured. Check [`conda-lock`](https://conda.github.io/conda-lock/)
      for those use cases.
@@ -90,7 +93,7 @@ are guidelines on how to go about this, while backing up your work and your envi
      will tell `conda` what packages to look for and then find a solution that satisfies
      the request.
 
-3. On Windows, use the uninstaller suggested by the system control panel. 
+3. On Windows, use the uninstaller suggested by the system control panel.
    On Linux and macOS, you can delete the folder called `anaconda3`, or `miniconda3`
    (usually located in your home directory).
 
