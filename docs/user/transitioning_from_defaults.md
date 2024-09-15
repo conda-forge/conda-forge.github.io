@@ -122,9 +122,9 @@ You should now be in a position to use conda-forge packages.
 ## A historical note
 
 Until roughly 2021, conda-forge held strong compatibility with Anaconda's
-default channel. However, due to the reasons outlined in XXXXXX, we decided to
-ultimately move away from dependency on Anaconda's `defaults` packages. Over the
-years, this has led for more divergence between package versions, and names
+default channel. However, as [announced in September 2021][defaults-announcement], 
+we decided toultimately move away from dependency on Anaconda's `defaults` packages. 
+Over the years, this has led for more divergence between package versions, and names
 between conda-forge and Anaconda's `defaults` channel.
 
 In 2024, the workflow that has packages co-installed from Anaconda's channel and
@@ -140,3 +140,5 @@ All packages should specify that they have been installed from the conda-forge
 channel. In 2024, there still exist a few bugs where conda packages will
 claim that they have been installed from PyPI even though they have been
 installed from conda-forge.
+
+[defaults-announcement]: /news/2021/09/30/defaults-channel-is-now-dropped-when-building-conda-forge-packages/
