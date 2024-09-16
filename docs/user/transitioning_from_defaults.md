@@ -26,7 +26,7 @@ Miniforge.
    may adjust the version of Python to the one of your liking:
 
    ```bash
-   conda create --name conda-forge-env python=3.11 --channel conda-forge --override-channels
+   conda create --name conda-forge-env python=3 --channel conda-forge --override-channels
    ```
 
 2. Activate your environment and add `conda-forge` with strict priority to
