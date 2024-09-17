@@ -71,17 +71,6 @@ channels:
 In addition to the channel priority, we recommend always installing your packages inside a new environment instead of the `base` environment from anaconda/miniconda.
 Using envs make it easier to debug problems with packages and ensure the stability of your root env.
 
-:::note
-
-In the past conda-forge used to vendorize some of `defaults` dependencies that were not built in our infrastructure,
-like compilers run-times, to avoid the mixing channel problem.
-However, with the `strict` option, we no longer have to vendorize those (this led to its own set of problems),
-instead, we removed everything that is not built in conda-forge and let `strict` pull those from `defaults`.
-
-TL;DR if you are experiencing missing compilers run-times like `libgcc-ng`,
-that is probably because you removed `defaults`,
-just re-add it and activate `strict` for a smooth and stable experience when installing packages.
-
 :::
 
 <a id="using-external-message-passing-interface-mpi-libraries"></a>
