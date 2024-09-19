@@ -55,8 +55,7 @@ The actual creation of the feedstock is run in [conda-forge/admin-requests](#adm
 Additional workflows help users set up their recipes correctly. They react to events in PRs:
 
 - [`automate-review-labels`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/automate-review-labels.yml): Updates PR labels to streamline reviews and requests for help.
-- [`correct_directory`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/correct_directory.yml): Posts a PR comment if `meta.yaml` and friends were not added in a `recipes/` subdirectory.
-- [`do_not_edit_example`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/do_not_edit_example.yml): Posts a PR comment if the `recipes/example/` recipe was edited.
+- [`linter`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/linter.yml): General recipe linting plus some staged-recipes specific checks, like not editing the examples.
 
 External services connect to `staged-recipes` too:
 
