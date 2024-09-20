@@ -11,7 +11,7 @@ body:
 
         Please refrain from using this template if you don't have the necessary details to
         fill in all the required fields below.
-        
+
         If you just have a feature request, open a regular issue.
 
   - type: checkboxes
@@ -69,7 +69,7 @@ body:
         - [ ] ...
     validations:
       required: true
-  
+
   - type: textarea
     id: skills
     attributes:
