@@ -1,0 +1,91 @@
+name: Fundable
+description: Propose a task that would require external funding and/or resources.
+labels: [fundable]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        With this template you can propose a complex task that would require external
+        funding and/or resources. This is usually the case for organization-wide changes,
+        large infrastructure improvements or low-level packaging work (e.g. compilers).
+
+        Please refrain from using this template if you don't have the necessary details to
+        fill in all the required fields below.
+        
+        If you just have a feature request, open a regular issue.
+
+  - type: checkboxes
+    id: submitted
+    attributes:
+      label: This fundable has not been submitted yet.
+      description: |
+        I [searched conda-forge](https://github.com/search?type=code&q=org%3Aconda-forge+label%3Afundable)
+        for similar items and could not find issues marked as 'fundable'.
+      options:
+        - label: This fundable has not been submitted yet.
+          required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: |
+        Please describe why this idea is interesting or important.
+    validations:
+      required: true
+
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected result
+      description: |
+        Please describe how the final result would look like.
+    validations:
+      required: true
+
+  - type: textarea
+    id: items
+    attributes:
+      label: Work items
+      description: |
+        Enumerate the necessary steps to achieve the intended result.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: xrefs
+    attributes:
+      label: References
+      description: |
+        Please take some time to collect any useful references (issues, PRs, code blocks...)
+        that might apply to this task.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+  
+  - type: textarea
+    id: skills
+    attributes:
+      label: Skills / personnel
+      description: |
+        State which skills would be needed to complete this task.
+        If you have specific personnel in mind, write a brief introduction for them.
+    validations:
+      required: false
+
+  - type: textarea
+    id: costs
+    attributes:
+      label: Estimated costs and/or resources needed (optional)
+      description: |
+        If there are associated costs or resources needed, please state them here. This would help
+        funding agencies estimate the budget needed to tackle this proposal.
+    validations:
+      required: false
