@@ -123,7 +123,7 @@ You should now be in a position to use conda-forge packages.
 
 Until roughly 2021, conda-forge held strong compatibility with Anaconda's
 default channel. However, as [announced in September 2021][defaults-announcement],
-we decided toultimately move away from dependency on Anaconda's `defaults` packages.
+we decided to ultimately move away from dependency on Anaconda's `defaults` packages.
 Over the years, this has led for more divergence between package versions, and names
 between conda-forge and Anaconda's `defaults` channel.
 
