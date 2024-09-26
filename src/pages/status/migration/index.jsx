@@ -7,6 +7,8 @@ import React, { useEffect, useState } from "react";
 import SVG from 'react-inlinesvg';
 import styles from "./styles.module.css";
 import { Tooltip } from "react-tooltip";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 // { Done, In PR, Awaiting PR, Awaiting parents, Not solvable, Bot error }
 // The third value is a boolean representing the default display state on load
@@ -90,8 +92,37 @@ export default function MigrationDetails() {
         <div className={`card margin-top--xs`}>
           <div className="card__header">
             <div className={styles.migration_details_toggle}>
-              <button onClick={() => toggle("table")}>Table View</button>{" "}
-              <button onClick={() => toggle("graph")}>Graph View</button>
+              <div class="tabs-container">
+                <ul role="tablist" aria-orientation="horizontal" class="tabs">
+                  <li
+                    key="table"
+                    role="tab"
+                    class={["tabs__item", (view == "table" ? "tabs__item--active" : null)].join(" ")}
+                    onClick={() => toggle("table")}
+                  >
+                    Table
+                  </li>
+                  <li
+                    key="graph"
+                    role="tab"
+                    class={["tabs__item", (view == "graph" ? "tabs__item--active" : null)].join(" ")}
+                    onClick={() => toggle("graph")}
+                  >
+                    Graph
+                  </li>
+                  {name &&
+                    <a href={urls.migrations.details.replace("<NAME>", name)} target="_blank">
+                      <li
+                        key="raw"
+                        role="tab"
+                        class="tabs__item"
+                      >
+                        <span>Raw <i className="fa fa-fw fa-arrow-up-right-from-square"></i></span>
+                      </li>
+                    </a>
+                  }
+                </ul>
+              </div>
             </div>
             <Breadcrumbs>{name}</Breadcrumbs>
             <div style={{ clear: "both" }}></div>
