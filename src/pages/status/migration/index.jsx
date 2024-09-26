@@ -100,25 +100,27 @@ export default function MigrationDetails() {
                     class={["tabs__item", (view == "table" ? "tabs__item--active" : null)].join(" ")} 
                     onClick={() => toggle("table")}
                   >
-                      Table
-                    </li>
+                    Table
+                  </li>
                   <li 
                     key="graph" 
                     role="tab"
                     class={["tabs__item", (view == "graph" ? "tabs__item--active" : null)].join(" ")} 
                     onClick={() => toggle("graph")}
                   >
-                      Graph
-                    </li>
-                  <li 
-                    key="raw" 
-                    role="tab"
-                    class="tabs__item"
-                  >
-                    <a href={urls.migrations.details.replace("<NAME>", name)} target="_blank">
-                      <span>Raw <i className="fa fa-fw fa-arrow-up-right-from-square"></i></span>
-                    </a>
+                    Graph
                   </li>
+                  {name &&
+                    <a href={urls.migrations.details.replace("<NAME>", name)} target="_blank">
+                      <li 
+                        key="raw" 
+                        role="tab"
+                        class="tabs__item"
+                      >
+                        <span>Raw <i className="fa fa-fw fa-arrow-up-right-from-square"></i></span>
+                      </li>
+                    </a>
+                  }
                 </ul>
               </div>
             </div>
