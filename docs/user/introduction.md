@@ -44,7 +44,7 @@ conda-forge is a community effort that tackles these issues:
 - Many packages are updated by multiple maintainers with an easy option to become a maintainer.
 - An active core developer team is trying to also maintain abandoned packages.
 
-You can refer to the glossary [Glossary](../glossary.md).
+You can refer to the [Glossary](../glossary.md).
 
 <a id="how-to-install"></a>
 
@@ -54,16 +54,16 @@ You can refer to the glossary [Glossary](../glossary.md).
 
 Using conda-forge is easy!
 
-- Make sure you have `conda >=4.9`.
+- Make sure you have `conda >=4.9`:
   ```bash
   conda --version
   conda update conda
   ```
-- Add conda-forge as the highest priority channel.
+- Add conda-forge as the highest priority channel:
   ```bash
   conda config --add channels conda-forge
   ```
-- Activate `strict` channel priority (`strict` will be activated by default in conda 5.0).
+- Activate `strict` channel priority (`strict` will be activated by default in conda 5.0):
   ```bash
   conda config --set channel_priority strict
   ```
