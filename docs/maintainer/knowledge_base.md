@@ -559,6 +559,21 @@ fi
 There are more variations of this approach in the wild. So this is not meant to be exhaustive,
 but merely to provide a starting point with some guidelines. Please look at [other recipes for more examples](https://github.com/search?q=org%3Aconda-forge+path%3Arecipe%2Fmeta.yaml+%22%5Bbuild_platform+%21%3D+target_platform%5D%22&type=code).
 
+#### Finding NumPy in cross-compiled Python packages using CMake
+
+If  you are building a Python extension via CMake with NumPy and you want it work in cross-compilation, you need to preprend to the CMake invocation in your build script the following lines:
+
+~~~sh
+Python_INCLUDE_DIR="$(python -c 'import sysconfig; print(sysconfig.get_path("include"))')"
+Python_NumPy_INCLUDE_DIR="$(python -c 'import numpy;print(numpy.get_include())')"
+CMAKE_ARGS="${CMAKE_ARGS} -DPython_EXECUTABLE:PATH=${PYTHON}"
+CMAKE_ARGS="${CMAKE_ARGS} -DPython_INCLUDE_DIR:PATH=${Python_INCLUDE_DIR}"
+CMAKE_ARGS="${CMAKE_ARGS} -DPython_NumPy_INCLUDE_DIR=${Python_NumPy_INCLUDE_DIR}"
+CMAKE_ARGS="${CMAKE_ARGS} -DPython3_EXECUTABLE:PATH=${PYTHON}"
+CMAKE_ARGS="${CMAKE_ARGS} -DPython3_INCLUDE_DIR:PATH=${Python_INCLUDE_DIR}"
+CMAKE_ARGS="${CMAKE_ARGS} -DPython3_NumPy_INCLUDE_DIR=${Python_NumPy_INCLUDE_DIR}"
+~~~
+
 <a id="python-cross-compilation"></a>
 
 <a id="details-about-cross-compiled-python-packages"></a>
