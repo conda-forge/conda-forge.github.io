@@ -561,7 +561,7 @@ but merely to provide a starting point with some guidelines. Please look at [oth
 
 #### Finding NumPy in cross-compiled Python packages using CMake
 
-If you are building a Python extension via CMake with NumPy and you want it work in cross-compilation, you need to preprend to the CMake invocation in your build script the following lines:
+If you are building a Python extension via CMake with NumPy and you want it work in cross-compilation, you need to prepend to the CMake invocation in your build script the following lines:
 
 ```sh
 Python_INCLUDE_DIR="$(python -c 'import sysconfig; print(sysconfig.get_path("include"))')"
