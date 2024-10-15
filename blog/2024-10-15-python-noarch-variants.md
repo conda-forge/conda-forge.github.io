@@ -19,7 +19,7 @@ code against a much simpler python implementation and is also
 useful for platforms like PyPy where the C/C++/Cython implementation
 can be slower than the python reference implementation due to the
 emulation of the Python C/C++ API by PyPy. For eg: for the Cython
-package, setting ``CYTHON_NO_COMPILE`` environment variable
+package, setting `CYTHON_NO_COMPILE` environment variable
 when building the cython wheel itself, it will use the python reference
 implementation.
 
@@ -43,10 +43,10 @@ Another issue is that some packages have cyclic dependencies at build
 or test time and this requires manual handling to reduce dependencies
 before the migration and add the dependencies later on.
 
-We have been adding ``noarch: python`` variants for some feedstocks
+We have been adding `noarch: python` variants for some feedstocks
 so that the compiled extension has higher priority and the pure
 python extension has lower priority which makes the conda solver
-use the ``noarch: python`` variant. One issue is that the linter
+use the `noarch: python` variant. One issue is that the linter
 might not like selectors on noarch recipes. We added an option
 
 ```yaml
@@ -54,7 +54,8 @@ linter:
   skip:
     - lint_noarch_selectors
 ```
-to ``conda-forge.yml`` that will make the linter skip this warning/error.
+
+to `conda-forge.yml` that will make the linter skip this warning/error.
 
 We list some PRs here as a reference for conda-forge maintainers who
 want to help out with this effort.
