@@ -6,6 +6,13 @@ tags: [infrastructure]
 
 # Noarch variant packages for Python packages on conda-forge
 
+We introduce noarch variants for python packages on conda-forge
+that have compiled extensions but with pure python reference
+implementations to make life easier for early adoopters of
+new python variants.
+
+<!-- truncate -->
+
 conda-forge packages have always been batteries included. When
 a package has some build options turned off by default to reduce
 dependencies, we have enabled these options to give the most
