@@ -8,7 +8,7 @@ tags: [infrastructure]
 
 We introduce noarch variants for python packages on conda-forge
 that have compiled extensions but with pure python reference
-implementations to make life easier for early adoopters of
+implementations to make life easier for early adopters of
 new python variants.
 
 <!-- truncate -->
