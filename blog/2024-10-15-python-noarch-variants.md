@@ -7,9 +7,9 @@ tags: [infrastructure]
 # Noarch variant packages for python packages on conda-forge
 
 conda-forge packages have always been batteries included. When
-a package has some build options by default to reduce dependencies
-we have enabled these options to give the most functionality and
-and performance to our users.
+a package has some build options turned off by default to reduce
+dependencies we have enabled these options to give the most
+functionality and performance to our users.
 
 In the python world, some packages are written in C/C++/Cython
 to get the most performance out of a package. However these packages
