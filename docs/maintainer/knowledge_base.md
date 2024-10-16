@@ -697,12 +697,7 @@ practice has been deprecated.) To add a new CDT, make a PR on the
 
 1. When there are system specific configurations are used by the library.
    Some examples include:
-   1. OpenGL: if we provided the OpenGL loader library `libglvnd`.
-      and the user's system is not using `libglvnd`, then we cannot load the vendor-specific
-      implementations losing out on accelerator/hardware optimized performance.
-      (This is only on old distributions and we may finally be able to package `libglvnd`
-      ourselves)
-   2. linux-pam: This is a library that allows pluggable authentication modules and the
+   1. linux-pam: This is a library that allows pluggable authentication modules and the
       configuration files for these modules usually live in `/etc/pam.d`. The issue is that
       the pluggable modules live in a distro specific location. For example:
       `/usr/lib/x86_64-linux-gnu/security/`. The default modules are built into the
@@ -715,9 +710,9 @@ practice has been deprecated.) To add a new CDT, make a PR on the
    For example: a new `glibc` package means we would have to edit the elf interpreter of
    all the conda package binaries.
 
-<a id="what-s-are-some-good-examples"></a>
+<a id="what-are-some-good-examples"></a>
 
-#### What's are some good examples?
+#### What are some good examples?
 
 1. The OpenCL loader (`ocl-icd` together with `ocl-icd-system`) provides an OpenCL
    loading library. The loader will look at OpenCL implementations given in
@@ -730,41 +725,17 @@ practice has been deprecated.) To add a new CDT, make a PR on the
    run OpenCL because we have a conda packaged installation, but if there is a system wide
    implementation that is accelerated by specific hardware, we can use those.
 
-In conda-forge the primary usages of CDTs is currently for packages that link against libGL.
-
 <a id="libgl"></a>
 
-#### libGL
+### libGL
 
-In addition to the required compilers `{{ compiler('c') }}` and/or `{{ compiler('cxx') }}`,
-the following CDT packages are required for linking against libGL:
+Note that packages dependent on libGL should no longer use CDTs. Instead, use the host dependency `libgl-devel` from the [libglvnd-feedstock](https://github.com/conda-forge/libglvnd-feedstock).
 
 ```yaml
 requirements:
-  build:
-    - {{ cdt('mesa-libgl-devel') }}  # [linux]
-    - {{ cdt('mesa-dri-drivers') }}  # [linux]
-    - {{ cdt('libselinux') }}  # [linux]
-    - {{ cdt('libxdamage') }}  # [linux]
-    - {{ cdt('libxxf86vm') }}  # [linux]
-    - {{ cdt('libxext') }}     # [linux]
   host:
-    - xorg-libxfixes  # [linux]
+    - libgl-devel  # [linux]
 ```
-
-If you need a fully functional binary in the test phase, you have to also provide the shared
-libraries via `yum_requirements.txt` (see [yum_requirements.txt](#yum-deps)).
-
-```text
-mesa-libGL
-mesa-dri-drivers
-libselinux
-libXdamage
-libXxf86vm
-libXext
-```
-
-You will need to re-render the feedstock after making these changes.
 
 <a id="linking-numpy"></a>
 
