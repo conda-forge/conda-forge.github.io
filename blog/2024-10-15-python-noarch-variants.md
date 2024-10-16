@@ -20,7 +20,7 @@ functionality and performance to our users.
 
 In the Python world, some packages are written in C/C++/Cython
 to get the most performance out of a package. However these packages
-have a reference implementation written in Python. The Python
+sometimes have a reference implementation written in Python. The Python
 reference implementation is a good way to check the C/C++/Cython
 code against a much simpler python implementation and is also
 useful for platforms like PyPy where the C/C++/Cython implementation
@@ -28,7 +28,10 @@ can be slower than the Python reference implementation due to the
 emulation of the Python C/C++ API by PyPy. For eg: for the Cython
 package, setting `CYTHON_NO_COMPILE` environment variable
 when building the Cython wheel itself, it will use the Python reference
-implementation.
+implementation. The only way to figure out if a package has a Python
+reference implementation is to look at `setup.py` on packages that
+provide such a file to see if `extensions` are built always or
+with a switch.
 
 To support platforms like PyPy, Some packages build wheels with
 compiled extensions for the platforms that are
