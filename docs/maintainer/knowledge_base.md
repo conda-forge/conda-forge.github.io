@@ -710,9 +710,9 @@ practice has been deprecated.) To add a new CDT, make a PR on the
    For example: a new `glibc` package means we would have to edit the elf interpreter of
    all the conda package binaries.
 
-<a id="what-are-some-good-examples"></a>
+<a id="what-s-are-some-good-examples"></a>
 
-#### What are some good examples?
+#### What's are some good examples?
 
 1. The OpenCL loader (`ocl-icd` together with `ocl-icd-system`) provides an OpenCL
    loading library. The loader will look at OpenCL implementations given in
