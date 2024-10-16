@@ -729,7 +729,7 @@ practice has been deprecated.) To add a new CDT, make a PR on the
 
 ### libGL
 
-Note that packages dependent on libGL should no longer use CDTs. Instead, use the host dependency `libgl-devel` from the [libglvnd-feedstock](https://github.com/conda-forge/libglvnd-feedstock).
+Note that packages dependent on OpenGL and/or libGL should no longer use CDTs. Instead, use the host dependency `libgl-devel` from the [libglvnd-feedstock](https://github.com/conda-forge/libglvnd-feedstock).
 
 ```yaml
 requirements:
