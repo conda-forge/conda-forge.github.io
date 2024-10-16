@@ -139,6 +139,8 @@ requirements:
     - libgl-devel  # [linux]
 ```
 
+Other OpenGL API variants such as `libegl-devel`, `libgles-devel`, `libglx-devel`, and `libopengl-devel` are also available, and will automatically add non-development `run_exports` dependencies.
+
 If you are seeing this error after installing a package locally, then you are missing an [OpenGL](https://en.wikipedia.org/wiki/OpenGL) provider in your system dependencies. This is more likely to happen in headless systems with no graphics (servers, Docker images, etc). To fix it, you must install a provider like [Mesa](https://www.mesa3d.org/) with your system package manager.
 
 <a id="mfaq-qt-load-xcb"></a>

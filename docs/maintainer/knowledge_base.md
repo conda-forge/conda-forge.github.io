@@ -737,6 +737,8 @@ requirements:
     - libgl-devel  # [linux]
 ```
 
+Other OpenGL API variants such as `libegl-devel`, `libgles-devel`, `libglx-devel`, and `libopengl-devel` are also available, and will automatically add non-development `run_exports` dependencies.
+
 <a id="linking-numpy"></a>
 
 <a id="building-against-numpy"></a>
