@@ -809,11 +809,11 @@ build:
 
 requirements:
   host:
-    - python
+    - python {{ python_min }}.*
     - nodejs
     - pip
   run:
-    - python
+    - python >={{ python_min }}
     - nodejs
     - jupyterlab >=2
 ```
@@ -1480,6 +1480,31 @@ In order to qualify as a noarch python package, all of the following criteria mu
   in the `build` section of `meta.yaml`
 - No activate scripts
 
+All recipes employing `noarch: python` should use the `python_min` variable per the following example:
+
+```yaml title="recipe/meta.yaml"
+name: package
+source:
+  # ...
+build:
+  noarch: python
+  # ...
+requirements:
+  host:
+    - python {{ python_min }}.*
+    # ...
+  run:
+    - python >={{ python_min }}
+    # ...
+
+test:
+  requires:
+    - python ={{ python_min }}
+    # ...
+```
+
+See [CFEP-25](https://github.com/conda-forge/cfep/blob/main/cfep-25.md) for more details on this syntax.
+
 :::note
 
 While `noarch: python` does not work with selectors, it does work with version constraints.
@@ -1576,10 +1601,10 @@ build:
   noarch: python
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}.*
     # ...
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - numpy
     - __unix  # [unix]
     - __win   # [win]
@@ -1614,7 +1639,7 @@ build:
 requirements:
   # ...
   run:
-    - python
+    - python >={{ python_min }}
     - numpy
     - __linux  # [linux]
     - __osx    # [osx]
