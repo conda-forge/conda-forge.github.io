@@ -11,7 +11,7 @@ We would be happy to hear from you!
 
 <a id="element-chatroom"></a>
 
-## Zulip[Zulip chatroom](https://conda-forge.zulipchat.com/) chatroom
+## [Zulip chatroom](https://conda-forge.zulipchat.com/) chatroom
 
 If you are just starting out with conda-forge and/or feel completely lost, we recommend getting in touch through [Zulip chatroom](https://conda-forge.zulipchat.com/). Our community members will direct
 you to the proper documentation and/or help you via the chat.
