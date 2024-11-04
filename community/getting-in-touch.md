@@ -14,7 +14,19 @@ The main issue trackers that you will interact with are
 - [Our main website repo](https://github.com/conda-forge/conda-forge.github.io/issues): You'll use this repo as a catch-all for issues where you're not sure where else to put them
 - [Our enhancement proposals repo](https://github.com/conda-forge/cfep/issues): You'll use the enhancement proposals repo if you're interested in substantially changing the way conda-forge operates.
 
+## Zulip
+
+The main chat platform in use. Sign up at [conda-forge.zulipchat.com](https://conda-forge.zulipchat.com/).
+
 ## Gitter and Element
+
+:::{warning}
+As per CFEP-23, the Gitter/Matrix/Element rooms are no longer in use. Please use [Zulip](#zulip) instead.
+:::
+
+<details>
+
+<summary>Links to deprecated Matrix.io rooms</summary>
 
 The main chat rooms that you'll interact with are
 
@@ -30,6 +42,8 @@ The main chat rooms that you'll interact with are
 - [element: general](https://app.element.io/#/room/#conda-forge:matrix.org): Public chat room for the conda-forge community to discuss anything related to conda-forge.
 
 Note: All Gitter room links forward to Element
+
+</details>
 
 ## Forum
 
