@@ -383,11 +383,11 @@ const config = {
             className: "fab fa-lg fa-github",
           },
           {
-            to: "https://twitter.com/condaforge",
-            title: "Twitter",
+            to: "https://conda-forge.zulipchat.com",
+            title: "Zulip",
             position: "right",
             target: "_blank",
-            className: "fab fa-lg fa-twitter",
+            className: "fa-solid fa-comments",
           },
         ],
       },
@@ -473,8 +473,8 @@ const config = {
                 href: "https://github.com/conda-forge",
               },
               {
-                label: "Element",
-                href: "https://app.element.io/#/room/#conda-forge:matrix.org",
+                label: "Zulip",
+                href: "https://conda-forge.zulipchat.com",
               },
               {
                 label: "Discourse",

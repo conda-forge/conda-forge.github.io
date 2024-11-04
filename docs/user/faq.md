@@ -36,7 +36,7 @@ You can open an issue in the packages feedstock repository on GitHub. Search for
 
 ## I have a question/suggestion. How can I contact you?
 
-Please join us on our [Element chatroom](https://app.element.io/#/room/#conda-forge:matrix.org). We are always happy to answer questions and help beginners.
+Please join us on our [Zulip chatroom](https://conda-forge.zulipchat.com/). We are always happy to answer questions and help beginners.
 
 <a id="faq-teams"></a>
 

@@ -179,7 +179,7 @@ We need to re-render when there are changes in the following parts of the feedst
 - `yum_requirements.txt` or `conda-forge.yml`.
 - Updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.
 - Updates in conda-forge pinning that affect the feedstock.
-- Build issues that a feedstock configuration update will fix (follow us on [Element](https://app.element.io/#/room/#conda-forge:matrix.org) to know about those).
+- Build issues that a feedstock configuration update will fix (follow us on [Zulip](https://conda-forge.zulipchat.com/) to know about those).
 
 <a id="updating-for-newly-released-python-version"></a>
 
@@ -301,7 +301,7 @@ an issue in the feedstock repository with the following title:
 
 where `username` is the username of the new maintainer to be added.
 A PR will be automatically created and a maintainer or a member of the `core` team, in case no maintainer is active anymore, can then merge this PR to add the user.
-To contact core, ping them by mentioning @conda-forge/core in a comment or, if you haven't heard back in a while or are new to conda-forge, contact them through the community [Element](https://app.element.io/#/room/#conda-forge:matrix.org).
+To contact core, ping them by mentioning @conda-forge/core in a comment or, if you haven't heard back in a while or are new to conda-forge, contact them through the community [Zulip chatroom](https://conda-forge.zulipchat.com/).
 
 :::note
 
