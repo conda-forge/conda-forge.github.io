@@ -4,10 +4,20 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/news/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Sun, 08 Sep 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 04 Oct 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Moving to Zulip]]></title>
+            <link>https://conda-forge.org/news/2024/10/04/moving-to-zulip/</link>
+            <guid>https://conda-forge.org/news/2024/10/04/moving-to-zulip/</guid>
+            <pubDate>Fri, 04 Oct 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Two weeks ago we called a vote on CFEP-23 to decide whether we move our Element/Matrix chat rooms to Zulip.]]></description>
+            <content:encoded><![CDATA[<p>Two weeks ago we called a <a href="https://github.com/conda-forge/cfep/pull/54" target="_blank" rel="noopener noreferrer">vote</a> on <a href="https://github.com/conda-forge/cfep/blob/main/cfep-23.md" target="_blank" rel="noopener noreferrer">CFEP-23</a> to decide whether we move our <a href="https://matrix.to/#/#conda-forge:matrix.org" target="_blank" rel="noopener noreferrer">Element/Matrix chat rooms</a> to Zulip.</p>
+<p>This vote has passed and now we are opening the doors to our Zulip instance: <a href="https://conda-forge.zulipchat.com/" target="_blank" rel="noopener noreferrer">https://conda-forge.zulipchat.com/</a>. Please sign up to stay in touch!</p>
+<p>As per <a href="https://github.com/conda-forge/cfep/blob/main/cfep-23.md" target="_blank" rel="noopener noreferrer">CFEP-23</a> (read it for more details), this means that we will stop using our <a href="https://matrix.to/#/#conda-forge:matrix.org" target="_blank" rel="noopener noreferrer">Element chat rooms</a>. Instead all chat activity will continue in Zulip.</p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Changes to the Feedstock Output Validation Procedure]]></title>
             <link>https://conda-forge.org/news/2024/09/08/output-validation-changes/</link>
@@ -422,18 +432,6 @@ decided</a> to
 build and publish these releases with no additional changes. The new
 packages will be made available on or after 2022-11-10, following
 <a href="https://anaconda.cloud/anaconda-repo-news" target="_blank" rel="noopener noreferrer">Anaconda's decision</a>.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Conda Moving to CalVer]]></title>
-            <link>https://conda-forge.org/news/2022/09/27/conda-moving-to-calver/</link>
-            <guid>https://conda-forge.org/news/2022/09/27/conda-moving-to-calver/</guid>
-            <pubDate>Tue, 27 Sep 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Conda is moving to CalVer per [CEP]]></description>
-            <content:encoded><![CDATA[<p>Conda is moving to CalVer per <a href="https://github.com/conda-incubator/ceps/blob/main/cep-8.md" target="_blank" rel="noopener noreferrer">CEP
-8</a>. The
-first CalVer and last SemVer should be <code>22.9.0</code> and <code>4.14.0</code>
-respectively. This change maintains version order so you should not
-expect any issues.</p>]]></content:encoded>
         </item>
     </channel>
 </rss>
