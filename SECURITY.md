@@ -101,7 +101,7 @@ The role responsible for each step is noted at the beginning.
     [private advisory](https://github.com/conda-forge/conda-forge.github.io/security/advisories) for the text.
   - **Coordinator**: Publish the security advisory on the announcement date. If applicable, GitHub
     will post the CVE to the MITRE database.
-  - **Coordinator**: Publish the blog post and other announcements (Element chat room, Twitter,
+  - **Coordinator**: Publish the blog post and other announcements (Zulip, Twitter,
     etc) as necessary.
 - **Coordinator**: Notify the **Reporter** of the releases
 - **Coordinator**: Close the issue in the tracking repository
