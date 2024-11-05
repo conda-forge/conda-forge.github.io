@@ -1483,6 +1483,8 @@ In order to qualify as a noarch python package, all of the following criteria mu
 All recipes employing `noarch: python` should use the `python_min` variable per the following example:
 
 ```yaml title="recipe/meta.yaml"
+{% set python_min = python_min|default("0.1a0") %}
+
 name: package
 source:
   # ...
