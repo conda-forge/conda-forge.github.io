@@ -46,7 +46,6 @@ jobs:
         uses: lycheeverse/lychee-action@7cd0af4c74a61395d455af97419279d86aafaede # v2.0.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          lycheeVersion: "0.14.3"
           args: >
             --no-progress
             --timeout 60
