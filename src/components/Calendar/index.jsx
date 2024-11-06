@@ -19,7 +19,6 @@ export default function Calendar() {
       width="100%"
       height="500"
       frameborder="0"
-      style={{ "margin-bottom": "2em", "margin-top": "1em" }}
     ></iframe>
   );
 }
