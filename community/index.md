@@ -8,4 +8,4 @@ title: 'conda-forge community'
 - [Governance](governance.md)
 - [Joining the team](joining-the-team.md)
 - [Contracting](contracting.md)
-- [Meeting minutes](minutes.mdx)
+- [Meetings](meetings.mdx)
