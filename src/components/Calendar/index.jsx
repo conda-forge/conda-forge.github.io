@@ -9,7 +9,12 @@ export default function Calendar() {
   useEffect(() => {
     if (Intl) {
       const locale = Intl.DateTimeFormat().resolvedOptions().locale;
-      setFirstDay((new Intl.Locale(locale)?.weekInfo?.firstDay ?? 0) + 1);
+      // firstDay API returns 1 for Monday and 7 for Sunday
+      // Google Calendar expects 1 for Sunday and 6 for Saturday
+      let day = (new Intl.Locale(locale)?.weekInfo?.firstDay ?? 0) + 1;
+      if (day === 7) day = 6; // Saturday
+      if (day === 8) day = 1; // Sunday
+      setFirstDay(day);
       setTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
     }
     setThemeMode(colorMode);
