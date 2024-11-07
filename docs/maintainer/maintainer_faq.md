@@ -174,7 +174,7 @@ build:
 ## How can I contact conda-forge/core?
 
 When in an issue or PR, you can contact [conda-forge/core](/community/governance/#teams-roles) by simply mentioning `@conda-forge/core` in a comment.
-If you don't receive an an answer after a couple of days, feel free to reach out to us via the public [Element](https://app.element.io/#/room/#conda-forge:matrix.org) chatroom.
+If you don't receive an an answer after a couple of days, feel free to reach out to us via the public [Zulip chatroom](https://conda-forge.zulipchat.com/).
 
 :::note
 
