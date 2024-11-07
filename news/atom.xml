@@ -2,16 +2,34 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/news/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2024-10-04T00:00:00.000Z</updated>
+    <updated>2024-11-07T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/news/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
     <entry>
+        <title type="html"><![CDATA[New time available for conda-forge core meetings]]></title>
+        <id>https://conda-forge.org/news/2024/11/07/new-time-core-meetings/</id>
+        <link href="https://conda-forge.org/news/2024/11/07/new-time-core-meetings/"/>
+        <updated>2024-11-07T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[The core team has decided to change the time when core meetings happen to accommodate more attendees across different timezones. It will still happen every two Wednesdays, but starting next Wednesday, November 13th 2024, it will alternate between 1700 UTC and 1400 UTC.]]></summary>
+        <content type="html"><![CDATA[<p>The core team has decided to change the time when core meetings happen to accommodate more attendees across different timezones. It will still happen every two Wednesdays, but starting next Wednesday, November 13th 2024, it will alternate between 17:00-18:00 UTC and 14:00-15:00 UTC.</p>
+<p>For clarity, these are the next dates:</p>
+<ul>
+<li>November 13th, 2024 at 17:00 UTC</li>
+<li>November 27th, 2024 at 14:00 UTC</li>
+<li>December 11th, 2024 at 17:00 UTC</li>
+<li><del>December 25th, 2024 at 14:00 UTC</del></li>
+<li>January 8th, 2025, at 17:00 UTC</li>
+<li>... and so on.</li>
+</ul>
+<p>A new calendar is now available in the <a href="https://conda-forge.org/community/meetings/">Community &gt; Meetings</a> section to help find the dates.</p>]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Moving to Zulip]]></title>
-        <id>https://conda-forge.org/news/2024/10/04/moving-to-zulip/</id>
-        <link href="https://conda-forge.org/news/2024/10/04/moving-to-zulip/"/>
-        <updated>2024-10-04T00:00:00.000Z</updated>
+        <id>https://conda-forge.org/news/2024/11/04/moving-to-zulip/</id>
+        <link href="https://conda-forge.org/news/2024/11/04/moving-to-zulip/"/>
+        <updated>2024-11-04T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Two weeks ago we called a vote on CFEP-23 to decide whether we move our Element/Matrix chat rooms to Zulip.]]></summary>
         <content type="html"><![CDATA[<p>Two weeks ago we called a <a href="https://github.com/conda-forge/cfep/pull/54" target="_blank" rel="noopener noreferrer">vote</a> on <a href="https://github.com/conda-forge/cfep/blob/main/cfep-23.md" target="_blank" rel="noopener noreferrer">CFEP-23</a> to decide whether we move our <a href="https://matrix.to/#/#conda-forge:matrix.org" target="_blank" rel="noopener noreferrer">Element/Matrix chat rooms</a> to Zulip.</p>
 <p>This vote has passed and now we are opening the doors to our Zulip instance: <a href="https://conda-forge.zulipchat.com/" target="_blank" rel="noopener noreferrer">https://conda-forge.zulipchat.com/</a>. Please sign up to stay in touch!</p>
@@ -410,26 +428,5 @@ to the new artifact format. You will need <code>conda</code> version 4.7 or late
 to use the new <code>.conda</code> artifacts. Please leave a comment on <a href="https://github.com/conda-forge/conda-forge.github.io/issues/1586" target="_blank" rel="noopener noreferrer">this
 issue</a>
 if you encounter problems or have feedback.</p>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Releasing Python 3.8.14, 3.9.14, and 3.10.7]]></title>
-        <id>https://conda-forge.org/news/2022/11/04/releasing-python-3814-3914-and-3107/</id>
-        <link href="https://conda-forge.org/news/2022/11/04/releasing-python-3814-3914-and-3107/"/>
-        <updated>2022-11-04T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[The CPython versions 3.8.14, 3.9.14, and 3.10.7 were released some weeks]]></summary>
-        <content type="html"><![CDATA[<p>The CPython versions 3.8.14, 3.9.14, and 3.10.7 were released some weeks
-ago to mitigate
-<a href="https://nvd.nist.gov/vuln/detail/CVE-2020-10735" target="_blank" rel="noopener noreferrer">CVE-2020-10735</a>. The
-chosen mitigation strategy might cause errors (e.g.
-<code>ValueError: Exceeds the limit (4300) for integer string conversion</code>) in
-some libraries. If you are affected, please read the
-<a href="https://docs.python.org/release/3.10.7/whatsnew/3.10.html#notable-security-feature-in-3-10-7" target="_blank" rel="noopener noreferrer">announcement</a>
-and learn about the available workarounds in the <a href="https://docs.python.org/3/library/stdtypes.html#integer-string-conversion-length-limitation" target="_blank" rel="noopener noreferrer">CPython
-documentation</a>.</p>
-<p>The conda-forge team <a href="https://github.com/conda-forge/python-feedstock/pull/579" target="_blank" rel="noopener noreferrer">has
-decided</a> to
-build and publish these releases with no additional changes. The new
-packages will be made available on or after 2022-11-10, following
-<a href="https://anaconda.cloud/anaconda-repo-news" target="_blank" rel="noopener noreferrer">Anaconda's decision</a>.</p>]]></content>
     </entry>
 </feed>
