@@ -11,4 +11,4 @@ For clarity, these are the next dates:
 - January 8th, 2025, at 17:00 UTC
 - ... and so on.
 
-A new calendar is now available in the [Community > Meetings](/community/meetings.mdx) section to help find the dates.
+A new calendar is now available in the [Community > Meetings](/community/meetings/) section to help find the dates.
