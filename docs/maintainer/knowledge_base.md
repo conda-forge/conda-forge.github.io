@@ -1504,14 +1504,16 @@ test:
 ```
 
 See [CFEP-25](https://github.com/conda-forge/cfep/blob/main/cfep-25.md) for more details on this syntax. If you
-need to override this syntax, you can add a `conda_build_config.yaml` file in your recipe like this:
+need to override this syntax, you can add a Jinja2 `set` statement (or equivalent `context` variable for v1 recipes)
+at the top of your recipe like this
 
-```yaml title="recipe/conda_build_config.yaml"
-python_min:
-  - 3.10
+```yaml title="recipe/meta.yaml"
+{% set python_min = "3.10" %}
 ```
 
-You will need to [rerender the feedstock](../infrastructure/#conda-forge-admin-please-rerender) after making this change.
+It also possible to achieve the same effect by adding a `conda_build_config.yaml` file to your recipe. If you go that route,
+you will need to [rerender the feedstock](../infrastructure/#conda-forge-admin-please-rerender) after adding the
+`conda_build_config.yaml` file.
 
 :::note
 
