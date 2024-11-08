@@ -4,10 +4,18 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/news/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Thu, 07 Nov 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 08 Nov 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Migration to Unique Feedstock Tokens per Provider]]></title>
+            <link>https://conda-forge.org/news/2024/11/08/unique-feedstock-token-per-provider-migration/</link>
+            <guid>https://conda-forge.org/news/2024/11/08/unique-feedstock-token-per-provider-migration/</guid>
+            <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[We will be slowly migrating conda-forge to use unique feedstock tokens per provider. The feedstock token is used to allow maintainers to copy packages from our staging area to the main conda-forge channel. This change will improve our security posture and help us limit the impact of any leaked tokens. During this migration we will also be using newly implemented feedstock token expiration times to avoid race conditions between token changes and running builds.]]></description>
+            <content:encoded><![CDATA[<p>We will be slowly migrating <code>conda-forge</code> to use unique feedstock tokens per provider. The feedstock token is used to allow maintainers to copy packages from our staging area to the main <code>conda-forge</code> channel. This change will improve our security posture and help us limit the impact of any leaked tokens. During this migration we will also be using newly implemented feedstock token expiration times to avoid race conditions between token changes and running builds.</p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[New time available for conda-forge core meetings]]></title>
             <link>https://conda-forge.org/news/2024/11/07/new-time-core-meetings/</link>
@@ -414,21 +422,6 @@ instead.</p>]]></content:encoded>
 <a href="https://github.com/conda-forge/admin-requests" target="_blank" rel="noopener noreferrer">conda-forge/admin-requests</a>
 repo. The new location is reflected in the various links on repos and
 our status page.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Moving to .conda Artifacts]]></title>
-            <link>https://conda-forge.org/news/2022/11/16/moving-to-conda-artifacts/</link>
-            <guid>https://conda-forge.org/news/2022/11/16/moving-to-conda-artifacts/</guid>
-            <pubDate>Wed, 16 Nov 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[conda-forge is moving to producing conda artifacts in the version 2]]></description>
-            <content:encoded><![CDATA[<p>conda-forge is moving to producing <code>conda</code> artifacts in the version 2
-package format (also known as <code>.conda</code>). These artifacts allow for more
-efficient indexing and maintenance of the ecosystem. Our admin
-migrations bot will begin making PRs to feedstocks to change them over
-to the new artifact format. You will need <code>conda</code> version 4.7 or later
-to use the new <code>.conda</code> artifacts. Please leave a comment on <a href="https://github.com/conda-forge/conda-forge.github.io/issues/1586" target="_blank" rel="noopener noreferrer">this
-issue</a>
-if you encounter problems or have feedback.</p>]]></content:encoded>
         </item>
     </channel>
 </rss>
