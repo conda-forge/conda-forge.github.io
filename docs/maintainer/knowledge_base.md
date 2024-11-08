@@ -1504,7 +1504,7 @@ test:
 ```
 
 See [CFEP-25](https://github.com/conda-forge/cfep/blob/main/cfep-25.md) for more details on this syntax. If you
-need to override this syntax, you can add a ``conda_build_config.yaml`` file in your recipe like this:
+need to override this syntax, you can add a `conda_build_config.yaml` file in your recipe like this:
 
 ```yaml title="recipe/conda_build_config.yaml"
 python_min:
