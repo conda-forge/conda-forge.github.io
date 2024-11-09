@@ -372,6 +372,23 @@ that adds the given user to the feedstock. A maintainer or member of `core` can 
 this PR to add the user. Please do not modify this PR or adjust the commit message. This
 PR is designed to skip building the package.
 
+:::note[Using this command]
+
+This is not the recommended way to start to help with a feedstock.
+If you are interested in helping with a particular recipe, it is better to start by
+submitting a PR with a new version or a fix. This way, you can get feedback on your
+work and learn about some of the historical context of the feedstock.
+
+Once you have established a working relationship with the maintainers, you can ask
+them to add you to the feedstock team. They can then use this command
+to add you to the team. There isn't any official requirement for how to add new
+maintainers so it may take a while for concensus to be reached
+on when to add new maintainers. Do not let this discourage you from contributing!
+
+PRs are free to be opened by anyone!!! Thank you for your time and effort!!!
+
+:::
+
 ### @conda-forge-admin, please update version
 
 Entering the above phrase in the title of an issue on a feedstock will request the bot
