@@ -1511,9 +1511,24 @@ at the top of your recipe like this
 {% set python_min = "3.10" %}
 ```
 
-It also possible to achieve the same effect by adding a `conda_build_config.yaml` file to your recipe. If you go that route,
-you will need to [rerender the feedstock](../infrastructure/#conda-forge-admin-please-rerender) after adding the
-`conda_build_config.yaml` file.
+It also possible to achieve the same effect by adding a `conda_build_config.yaml` file to your recipe that
+contains a map like
+
+```yaml title="recipe/conda_build_config.yaml"
+python_min:
+- "3.10"
+```
+
+If you go that route, you will need to [rerender the feedstock](../infrastructure/#conda-forge-admin-please-rerender)
+after adding the `conda_build_config.yaml` file.
+
+:::tip[Hint]
+
+Adding an explicit `python_min` to your `noarch: python` recipe can be an effective way to ensure the required
+Python in your package's metadata is enforced at `conda-build` time, as the build will fail if the package's
+required Python version is newer than `python_min`.
+
+:::
 
 :::note
 
