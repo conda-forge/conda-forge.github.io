@@ -6,7 +6,7 @@
 
 /* You can override the default Infima variables here. */
 
-@font-face {
+ @font-face {
   font-family: "Inter";
   src: url("/fonts/Inter-VariableFont_opsz,wght.ttf"),
     url("/fonts/Inter-Italic-VariableFont_opsz,wght.ttf");
@@ -114,14 +114,14 @@ a {
   text-underline-offset: var(--pydata-link-underline-offset);
 }
 
-/* Remove underlines ONLY from GitHub and Zulip icons */
-.navbar__items--right a.fab.fa-lg.fa-github,
-.navbar__items--right a.fa-solid.fa-comments {
+/* Remove underlines from GitHub and Zulip icons in both desktop and mobile views */
+.navbar__items--right a[class*="fa-"],
+.navbar-sidebar__items a[class*="fa-"] {
   text-decoration: none !important;
 }
 
-.navbar__items--right a.fab.fa-lg.fa-github:hover,
-.navbar__items--right a.fa-solid.fa-comments:hover {
+.navbar__items--right a[class*="fa-"]:hover,
+.navbar-sidebar__items a[class*="fa-"]:hover {
   text-decoration: none !important;
   opacity: 0.7;
   transition: opacity 0.2s ease-in-out;
