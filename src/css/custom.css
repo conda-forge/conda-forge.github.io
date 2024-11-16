@@ -6,7 +6,7 @@
 
 /* You can override the default Infima variables here. */
 
-@font-face {
+ @font-face {
   font-family: "Inter";
   src: url("/fonts/Inter-VariableFont_opsz,wght.ttf"),
     url("/fonts/Inter-Italic-VariableFont_opsz,wght.ttf");
@@ -104,51 +104,27 @@ a {
   text-decoration-thickness: var(--pydata-link-underline-thickness);
   text-underline-offset: var(--pydata-link-underline-offset);
 }
-
-a:hover,
-/* We need to (re)override some of the infima rules to have proper states on
-navbar links, table of contents, and docs sidebar links, respectively */
-a.navbar__link:hover,  /* Top bar navigation links */
-a.table-of-contents__link:hover, /*Right sidebar links (table of contents) */
-a[class^="sidebarItemLink"]:hover /* The docs sidebar links do not have its own class */ {
-  text-decoration: underline;
-  text-decoration-thickness: var(--pydata-link-hover-decoration-thickness);
-  text-decoration-skip-ink: none;
-  text-decoration-skip: none;
-}
-a:active,
-a.navbar__link:active,
-a.table-of-contents__link:active,
-a[class^="sidebarItemLink"]:active {
-  text-decoration-thickness: var(--pydata-link-decoration-thickness);
-}
-
-/* In some cases, we override the underlines because there are other elements that
-already report the state (e.g. borders, background colors, etc) */
-a[class^="sidebarItemLink"][aria-current="page"], /* No underline if this is the current page */
-a.navbar__link,
-.navbar-sidebar__item,
-.menu a,
-.navbar__items--right a,
-.pagination-nav__link,
-a.card, /* These cards are used in index-like documentation pages */
-a.card:hover {
+/* Base link styles */
+.navbar__link {
   text-decoration: none;
 }
-
-/* On these elements, we only rely on background color changes. They are navigation items,
-so they are already assumed to be clickable anyway */
-.pagination-nav__link:active,
-a.card:active,
-a.menu__link:active {
-  background: var(--ifm-color-primary-lightest);
-  color: #000;
+.navbar__link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: var(--pydata-link-hover-decoration-thickness);
+  text-underline-offset: var(--pydata-link-underline-offset);
 }
-[data-theme="dark"] .pagination-nav__link:active,
-[data-theme="dark"] a.card:active,
-[data-theme="dark"] a.menu__link:active {
-  background: var(--ifm-color-primary-darkest);
-  color: #fff;
+
+/* Remove underlines ONLY from GitHub and Zulip icons */
+.navbar__items--right a.fab.fa-lg.fa-github,
+.navbar__items--right a.fa-solid.fa-comments {
+  text-decoration: none !important;
+}
+
+.navbar__items--right a.fab.fa-lg.fa-github:hover,
+.navbar__items--right a.fa-solid.fa-comments:hover {
+  text-decoration: none !important;
+  opacity: 0.7;
+  transition: opacity 0.2s ease-in-out;
 }
 
 /* Animate the top navbar conda-forge logo a bit */
