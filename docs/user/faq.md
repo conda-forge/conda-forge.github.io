@@ -94,6 +94,12 @@ x86_64-apple-darwin13.4.0-clang: No such file or directory
 
 are a telltale sign that you are lacking compilers.
 
+Depending on the specific tools that you use for building C/C++ code, you may need some additional tools, for example:
+
+~~~
+compilers cmake pkg-config make ninja meson
+~~~
+
 <a id="faq-compiler-required-options"></a>
 
 <a id="why-don-t-the-c-c-compilers-automatically-know-how-to-find-libraries-installed-by-conda"></a>
