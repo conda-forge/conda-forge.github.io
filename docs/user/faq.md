@@ -97,7 +97,7 @@ are a telltale sign that you are lacking compilers.
 Depending on the specific tools that you use for building C/C++ code, you may need some additional tools, for example:
 
 ```
-compilers cmake pkg-config make ninja meson
+c-compiler cxx-compiler cmake pkg-config make ninja meson
 ```
 
 <a id="faq-compiler-required-options"></a>
