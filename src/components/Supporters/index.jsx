@@ -100,6 +100,13 @@ const infrastructure = [
     dark: "img/supporters/prefix_dark.svg",
     width: 250,
   },
+  {
+    name: "Zulip",
+    link: "https://zulip.com",
+    light: "img/supporters/zulip.svg",
+    dark: "img/supporters/zulip.svg",
+    width: 250,
+  },
 ];
 
 const developer = [
