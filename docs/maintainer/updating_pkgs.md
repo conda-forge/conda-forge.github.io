@@ -307,6 +307,19 @@ To contact core, ping them by mentioning @conda-forge/core in a comment or, if y
 
 This PR is designed to skip building the package. Please do **not** modify it or adjust the commit message.
 
+This is not the recommended way to start to help with a feedstock.
+If you are interested in helping with a particular recipe, it is better to start by
+submitting a PR with a new version or a fix. This way, you can get feedback on your
+work and learn about some of the historical context of the feedstock.
+
+Once you have established a working relationship with the maintainers, you can ask
+them to add you to the feedstock team. They can then use this command
+to add you to the team. There isn't any official requirement for how to add new
+maintainers so it may take a while for concensus to be reached
+on when to add new maintainers. Do not let this discourage you from contributing!
+
+PRs are free to be opened by anyone!!! Thank you for your time and effort!!!
+
 :::
 
 For an example see [this](https://github.com/conda-forge/cudnn-feedstock/issues/20) issue.
