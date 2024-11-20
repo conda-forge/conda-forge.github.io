@@ -685,8 +685,8 @@ However, there are a few exceptions:
 Some dependencies are so close to the system that they are not packaged with conda-forge.
 These dependencies have to be satisfied with _Core Dependency Tree_ (CDT) packages.
 
-A CDT package consists of repackaged CentOS binaries from the appropriate version,
-either 6 or 7 depending on user choice and platform. We manage the build of CDT
+A CDT package consists of repackaged CentOS/AlmaLinux binaries from the appropriate version,
+either 7, 8 or 9 depending on user choice and platform. We manage the build of CDT
 packages using a centralized repo, [conda-forge/cdt-builds](https://github.com/conda-forge/cdt-builds),
 as opposed to generating feedstocks for them. (Note that historically we did use feedstocks but this
 practice has been deprecated.) To add a new CDT, make a PR on the
@@ -699,10 +699,10 @@ practice has been deprecated.) To add a new CDT, make a PR on the
 1. CDTs repackage old versions of the library.
 2. As a result, newer functionality in the packages won't be used by downstream conda packages
    which check for the version of the library being built against.
-   For example: OpenGL functionality from the CentOS 6/7 packaged library is available, but
+   For example: OpenGL functionality from the CentOS 7 packaged library is available, but
    any newer functionality cannot be used.
 3. We have no guarantees that the version provided by the user's system is compatible.
-   We only have the `__glibc>=2.17` constraint and we assume that CentOS 6/7's
+   We only have the `__glibc>=2.17` constraint and we assume that CentOS 7's
    lower bound of GLIBC and its corresponding lower bound of the CDT are equivalent.
 4. We have no guarantee that the library is provided by the user's system at all.
 
@@ -1942,9 +1942,14 @@ There are two options for how to proceed:
 
 <a id="using-centos-7"></a>
 
-## Using CentOS 7
+## Requiring newer `glibc` versions
 
-To use the newer CentOS 7 `sysroot` with `glibc` `2.17` on `linux-64`,
+Conda-forge aims to build for as many users as possible, which means
+that we target `glibc 2.17` from CentOS 7, which allows packages to be
+installed on essentially any linux system (newer than 2014).
+
+However, some feedstocks may already require newer `glibc` versions.
+To use the newer `sysroot` with `glibc` `2.28` or `2.34` on `linux`,
 put the following in your build section.
 
 ```yaml
@@ -1958,21 +1963,32 @@ and add the following to `recipe/conda_build_config.yaml`:
 
 ```yaml
 c_stdlib_version:          # [linux]
-  - "2.17"                 # [linux]
+  - "2.28"                 # [linux]
 ```
 
 This covers the headers/library present at build-time, and will also create
 a corresponding run-export on the `__glibc` virtual package.
 
-You may also need to use a newer docker image by setting the following in the `conda-forge.yml`
-of your recipe and rerendering.
+By default, conda-forge will default to old sysroots on new images, meaning that
+the `glibc` present in the docker image is not what we compile against. This has
+several advantages, and also means that generally you don't have to concern
+yourself with changing the image manually.
+
+However, if for some reason you want to override the image versions, you can do so
+by setting the following in the `conda-forge.yml` of your recipe and rerendering.
 
 ```yaml
-os_version:
+os_version:             # example of possible values
   linux_64: cos7
+  linux_aarch64: alma8
+  linux_ppc64le: alma9
 ```
 
-Finally, note that the `aarch64` and `ppc64le` platforms already use CentOS 7.
+In the exceptional case that a feedstock does _binary repackaging_ (i.e. no
+compilation from source), please ensure that you use the oldest-possible image,
+matching the `c_stdlib_version` of your recipe. For example, if you use the
+default `c_stdlib_version` of `2.17`, then set `os_version: linux_*: cos7`;
+if you're using a `c_stdlib_version` of `2.28`, set it to `alma8`.
 
 <a id="cuda"></a>
 

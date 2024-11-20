@@ -622,16 +622,10 @@ a toolchain that's at least as new. You can find more details about this topic i
 
 ### CentOS `sysroot` for `linux-*` Platforms
 
-We currently repackage the `sysroot` from the appropriate version of CentOS for use
+We currently repackage the `sysroot` from the appropriate version of CentOS/AlmaLinux for use
 with our compilers. These `sysroot` files are available in the `sysroot_linux-*` packages.
 These packages have version numbers that match the version of `glibc` they package. These
-versions are `2.12` for CentOS 6 and `2.17` for CentOS 7.
-
-For `gcc`/`gxx`/`gfortran` versions prior to `8.4.0` on `ppc64le` and `7.5.0`
-on `aarch64`/`x86_64`, we had been building our own versions of `glibc`. This practice
-is now deprecated in favor of the CentOS-based `sysroots`. Additionally, as of the same
-compiler versions above, we have removed the `cos*` part of the `sysroot` path. The new
-`sysroot` path has in it simply `conda` as opposed to `conda_cos6` or `conda_cos7`.
+versions are `2.17` for CentOS 7, `2.27` for AlmaLinux 8 and `2.34` for AlmaLinux 9.
 
 ## Output Validation and Feedstock Tokens
 
