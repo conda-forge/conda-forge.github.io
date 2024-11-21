@@ -2,11 +2,14 @@
 
 TL;DR: We've updated our default docker images to be based on alma9, and we've
 consolidated our image names to follow a consistent pattern:
+
 ```
 linux-anvil-{x86_64,aarch64,ppc64le}:{cos7,alma8,alma9}
 ```
+
 In general, it won't be necessary in the vast majority of cases to override the
 docker-image, but if you need to do so, you can add the following to `conda-forge.yml`
+
 ```
 os_version:             # just to demo different values;
   linux_64: cos7        # whenever possible, please use
@@ -19,10 +22,11 @@ os_version:             # just to demo different values;
 Linux builds in conda-forge run on infrastructure derived from RHEL and its clones
 -- previously CentOS, now AlmaLinux. Primarily we need this for four different
 interrelated but distinct pieces:
-* the docker images (containing the OS which will execute our builds)
-* the sysroot (mainly the C standard library, `glibc`)
-* the CDTs (pieces from the distribution we cannot package ourselves)
-* feedstock usage of `yum_requirements.txt`
+
+- the docker images (containing the OS which will execute our builds)
+- the sysroot (mainly the C standard library, `glibc`)
+- the CDTs (pieces from the distribution we cannot package ourselves)
+- feedstock usage of `yum_requirements.txt`
 
 A first key observation is that the glibc appears twice -- once explicitly in the
 sysroot we package (and compile against!), and once implicitly in the image that
@@ -72,10 +76,12 @@ of the newest images: for any feedstocks doing binary repackaging on linux (i.e.
 compiling the package from source), please ensure that your image version (as specified
 in `conda-forge.yml`, see above) matches the `c_stdlib_version` that you are using.
 By default this is 2.17, which means you'd have to do
+
 ```
 os_version:
   linux_64: cos7
   linux_aarch64: cos7
   linux_ppc64le: cos7
 ```
+
 If you require a `c_stdlib_version` of 2.28 for a given platform, then set `alma8`.
