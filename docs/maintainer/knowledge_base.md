@@ -1969,7 +1969,7 @@ c_stdlib_version:          # [linux]
 This covers the headers/library present at build-time, and will also create
 a corresponding run-export on the `__glibc` virtual package.
 
-By default, conda-forge will default to old sysroots on new images, meaning that
+By default, conda-forge build infrastructure uses old sysroots on new images, meaning that
 the `glibc` present in the docker image is not what we compile against. This has
 several advantages, and also means that generally you don't have to concern
 yourself with changing the image manually.
