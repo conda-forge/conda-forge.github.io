@@ -1,7 +1,11 @@
 # Updating our default docker images
 
-TL;DR: We've updated our default docker images to be based on alma9, and we've
-consolidated our image names to follow a consistent pattern:
+TL;DR: We have made some updates to our Docker images and build time GLIBC selection. 
+
+1. We've updated our default docker images to be based on alma9
+2. Our default GLIBC version during builds remains 2.17 (ensuring broad compatibility).
+3. When necessary, it is now possible to build against a newer GLIBC.
+4. We've consolidated our image names to follow a consistent pattern:
 
 ```
 linux-anvil-{x86_64,aarch64,ppc64le}:{cos7,alma8,alma9}
