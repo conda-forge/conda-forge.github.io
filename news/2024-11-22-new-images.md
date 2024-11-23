@@ -3,8 +3,8 @@
 TL;DR: We have made some updates to our Docker images and build time GLIBC selection.
 
 1. We've updated our default docker images to be based on alma9
-2. Our default GLIBC version during builds remains 2.17 (ensuring broad compatibility).
-3. When necessary, it is now possible to build against a newer GLIBC.
+2. It is now easier to override `c_stdlib_version` (especially for CUDA-enabled feedstocks), though our baseline of 2.17 hasn't changed.
+3. Where necessary, you can more easily switch images by setting `os_version: ...` (see below).
 4. We've consolidated our image names to follow a consistent pattern:
 
 ```
