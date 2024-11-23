@@ -1,6 +1,6 @@
 # Updating our default docker images
 
-TL;DR: We have made some updates to our Docker images and build time GLIBC selection. 
+TL;DR: We have made some updates to our Docker images and build time GLIBC selection.
 
 1. We've updated our default docker images to be based on alma9
 2. Our default GLIBC version during builds remains 2.17 (ensuring broad compatibility).
