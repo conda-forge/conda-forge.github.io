@@ -2,11 +2,76 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/news/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2024-11-08T00:00:00.000Z</updated>
+    <updated>2024-11-22T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/news/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Updating our default docker images]]></title>
+        <id>https://conda-forge.org/news/2024/11/22/new-images/</id>
+        <link href="https://conda-forge.org/news/2024/11/22/new-images/"/>
+        <updated>2024-11-22T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[TL;DR: We've updated our default docker images to be based on alma9, and we've]]></summary>
+        <content type="html"><![CDATA[<p>TL;DR: We've updated our default docker images to be based on alma9, and we've
+consolidated our image names to follow a consistent pattern:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">linux-anvil-{x86_64,aarch64,ppc64le}:{cos7,alma8,alma9}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>In general, it won't be necessary in the vast majority of cases to override the
+docker-image, but if you need to do so, you can add the following to <code>conda-forge.yml</code></p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">os_version:             # just to demo different values;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  linux_64: cos7        # whenever possible, please use</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  linux_aarch64: alma8  # homogeneous distro versions</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  linux_ppc64le: alma9  # across platforms</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Linux builds in conda-forge run on infrastructure derived from RHEL and its clones
+-- previously CentOS, now AlmaLinux. Primarily we need this for four different
+interrelated but distinct pieces:</p>
+<ul>
+<li>the docker images (containing the OS which will execute our builds)</li>
+<li>the sysroot (mainly the C standard library, <code>glibc</code>)</li>
+<li>the CDTs (pieces from the distribution we cannot package ourselves)</li>
+<li>feedstock usage of <code>yum_requirements.txt</code></li>
+</ul>
+<p>A first key observation is that the glibc appears twice -- once explicitly in the
+sysroot we package (and compile against!), and once implicitly in the image that
+our CI runs on. This setup is essential to provide highly compatible packages by
+default (by compiling against a cos7 baseline), while avoiding constant hassles
+for feedstocks where <em>any</em> of the build/host/run dependencies requires a newer
+glibc than the baseline.</p>
+<p>This is because, for packages requiring a newer <code>c_stdlib_version</code> (and thus compiling
+against a newer sysroot through the <code>{{ stdlib("c") }}</code> infrastructure), will inherit
+a runtime-requirement of <code>__glibc &gt;=c_stdlib_version</code>, which would be unsatisfiable on
+docker-images with a too-old glibc present at runtime.</p>
+<p>We've already had this setup since 2021 (when our glibc baseline was 2.12 from cos6,
+yet we already used cos7 images), but after increasing the glibc baseline to 2.17, our
+images had lost their lead again. This is mostly related due to the third component from
+above, the CDTs (core dependency trees). These represent packages from the distribution
+itself that are hard or impossible for us to provide, yet need a systematic way to
+interact with. You can read more about <em>why we want to avoid them as much as possible</em>
+<a href="https://conda-forge.org/docs/maintainer/knowledge_base/#why-are-cdts-bad" target="_blank" rel="noopener noreferrer">here</a>.</p>
+<p>Due to the end of CentOS-as-we-knew it, we already had to rewrite a lot of the logic
+there in any case to switch to Alma, which we took as an opportunity to pare down the
+set of CDTs we provide going forward. In a large majority of cases, we have regular
+conda packages for some things that only used to be available as CDTs.</p>
+<p>CDTs and packages in <code>yum_requirements.txt</code> are closely related; in many ways it can
+be considered a similar compilation-vs.-runtime split as is the case with our sysroot
+(that we compile against) vs. the glibc in the image at runtime. The split here being
+that CDTs are what we use to compile against a given distro package, and <code>yum_requirements.txt</code>
+are how we tell the infrastructure to install them into the image, if they're also
+necessary at runtime (which is not always the case).</p>
+<p>In other words, using our own packages generally allows feedstocks to avoid <em>both</em> use
+of CDTs and <code>yum_requirements.txt</code>. You can check out the CDTs we removed
+<a href="https://github.com/conda-forge/cdt-builds/issues/66#issuecomment-1833417828" target="_blank" rel="noopener noreferrer">here</a>
+and how <code>yum_requirements.txt</code> translate from CentOS to Alma (resp. our own packages)
+<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/6283#issuecomment-2440281086" target="_blank" rel="noopener noreferrer">here</a>.</p>
+<p>The change of the image might mean that CDTs we have not repackaged for Alma do not
+match what's actually in the image anymore, or -- in rare cases -- that a package name
+under <code>yum_requirements.txt</code> needs to be updated. Please let us know if you run into
+problems there (after checking out the two links above how to transition a given package).</p>
+<p>Finally, there is one rare case where we explicitly ask feedstock authors to opt out
+of the newest images: for any feedstocks doing binary repackaging on linux (i.e. not
+compiling the package from source), please ensure that your image version (as specified
+in <code>conda-forge.yml</code>, see above) matches the <code>c_stdlib_version</code> that you are using.
+By default this is 2.17, which means you'd have to do</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">os_version:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  linux_64: cos7</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  linux_aarch64: cos7</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  linux_ppc64le: cos7</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>If you require a <code>c_stdlib_version</code> of 2.28 for a given platform, then set <code>alma8</code>.</p>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Migration to Unique Feedstock Tokens per Provider]]></title>
         <id>https://conda-forge.org/news/2024/11/08/unique-feedstock-token-per-provider-migration/</id>
@@ -410,16 +475,5 @@ forum</a>, our
 it's <a href="https://app.element.io/#/room/#conda-forge-space:matrix.org" target="_blank" rel="noopener noreferrer">Matrix/Element
 counterpart</a>
 instead.</p>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[conda-forge/staged-recipes Feedstock Creation Job Moved]]></title>
-        <id>https://conda-forge.org/news/2023/01/08/conda-forge-staged-recipes-feedstock-creation-job-moved/</id>
-        <link href="https://conda-forge.org/news/2023/01/08/conda-forge-staged-recipes-feedstock-creation-job-moved/"/>
-        <updated>2023-01-08T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[We have moved the CI job that makes new feedstocks to our]]></summary>
-        <content type="html"><![CDATA[<p>We have moved the CI job that makes new feedstocks to our
-<a href="https://github.com/conda-forge/admin-requests" target="_blank" rel="noopener noreferrer">conda-forge/admin-requests</a>
-repo. The new location is reflected in the various links on repos and
-our status page.</p>]]></content>
     </entry>
 </feed>
