@@ -1,7 +1,11 @@
 # Updating our default docker images
 
-TL;DR: We've updated our default docker images to be based on alma9, and we've
-consolidated our image names to follow a consistent pattern:
+TL;DR: We have made some updates to our Docker images and build time GLIBC selection.
+
+1. We've updated our default docker images to be based on alma9
+2. It is now easier to override `c_stdlib_version` (especially for CUDA-enabled feedstocks), though our baseline of 2.17 hasn't changed.
+3. Where necessary, you can more easily switch images by setting `os_version: ...` (see below).
+4. We've consolidated our image names to follow a consistent pattern:
 
 ```
 linux-anvil-{x86_64,aarch64,ppc64le}:{cos7,alma8,alma9}
