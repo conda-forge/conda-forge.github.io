@@ -43,7 +43,7 @@ The section order should go `package`, `source`, `build`,
 `requirements`, `test`, `about`, `extra/recipe-maintainers`. It
 is recommended to add a `build` section with the `number` set to
 `0` explicitly even if the rest is unneeded. If there is no build for
-Windows, make sure to add `skip: True  # [win]` to the `build`
+Windows, make sure to add `skip: true  # [win]` to the `build`
 section. The `about` section must have the `home` URL (verify if the
 URL is still correct), `license` (verify if the correct license is present),
 and a one sentence (or few words) `summary`. When specifying the version, it
