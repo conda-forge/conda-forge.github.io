@@ -1537,6 +1537,15 @@ python_min:
 If you go that route, you will need to [rerender the feedstock](../infrastructure/#conda-forge-admin-please-rerender)
 after adding the `conda_build_config.yaml` file.
 
+Using `noarch: python` packages, with `python {{ python_min }}` pins in their `test.requires` section, as
+`donstream` tests can cause failures for the `upstream` package if the Python version required for the test
+conflicts with `upstream` package's Python version. There are two fixes, depending on what is more important.
+
+1. Constrain the `downstream` tests in the `upstream` package to only run on `python_min`.
+2. Remove the `python_min` requirement from the `downstream` package's test requirements.
+
+More or less, you prefer the first solution when testing the `downstream` package on `python_min` is the most important thing. You prefer the second solution when testing all Python versions of the `upstream` package with the `downstream` package is the most important thing.
+
 :::tip[Hint]
 
 Adding an explicit `python_min` to your `noarch: python` recipe can be an effective way to ensure the required
