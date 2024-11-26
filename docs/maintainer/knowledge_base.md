@@ -689,7 +689,7 @@ A CDT package consists of repackaged CentOS/AlmaLinux binaries from the appropri
 either 7, 8 or 9 depending on user choice and platform. We manage the build of CDT
 packages using a centralized repo, [conda-forge/cdt-builds](https://github.com/conda-forge/cdt-builds),
 as opposed to generating feedstocks for them. (Note that historically we did use feedstocks but this
-practice has been deprecated.) To add a new CDT, make a PR on the
+practice has been deprecated). To add a new CDT, make a PR on the
 [conda-forge/cdt-builds](https://github.com/conda-forge/cdt-builds) repo.
 
 <a id="why-are-cdts-bad"></a>
