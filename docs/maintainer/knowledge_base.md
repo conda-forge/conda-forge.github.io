@@ -1538,7 +1538,7 @@ If you go that route, you will need to [rerender the feedstock](../infrastructur
 after adding the `conda_build_config.yaml` file.
 
 Using `noarch: python` packages, with `python {{ python_min }}` pins in their `test.requires` section, as
-`donstream` tests can cause failures for the `upstream` package if the Python version required for the test
+`downstream` tests can cause failures for the `upstream` package if the Python version required for the test
 conflicts with `upstream` package's Python version. There are two fixes, depending on what is more important.
 
 1. Constrain the `downstream` tests in the `upstream` package to only run on `python_min`.
