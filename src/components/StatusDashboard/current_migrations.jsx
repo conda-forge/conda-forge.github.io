@@ -192,12 +192,18 @@ function TableContent({ collapsed, name, resort, rows, select, sort, fetched }) 
           return (
             <tr key={row.name}>
               <td>
-                <Link href={href}
-                  style={{ display: "block" }}
-                  onClick={event => {
-                    event.preventDefault();
-                    setState(href);
-                  }}>{row.name}</Link>
+                {row.success ?
+                  <Link href={href}
+                    style={{ display: "block" }}
+                    onClick={event => {
+                      event.preventDefault();
+                      setState(href);
+                    }}>{row.name}</Link>
+                : <>
+                    <span title="Failed to load. Refresh the page to try again." style={{cursor: "pointer"}}>⚠️</span>
+                    {" "}{row.name}
+                  </>
+                }
               </td>
               <td>
                 <label className={styles.progress_bar}>
@@ -277,15 +283,27 @@ function fetchContent(onLoad, setState) {
           for (const { name } of fetched[status]) {
             promises.push(
               (async (index) => {
+                let details, success;
                 try {
                   const url = urls.migrations.details.replace("<NAME>", name);
                   const response = await fetch(url);
-                  const details = await response.json();
-                  fetched[status][index].details = details;
-                  fetched[status][index].progress = measureProgress(details);
+                  details = await response.json();
+                  success = true;
                 } catch (error) {
                   console.warn(`error loading migration: ${name}`, error);
+                  details = {
+                    "done": [],
+                    "in-pr": [],
+                    "awaiting-pr": [],
+                    "awaiting-parents": [],
+                    "not-solvable": [],
+                    "bot-error": [],
+                  }
+                  success = false;
                 }
+                fetched[status][index].details = details;
+                fetched[status][index].progress = measureProgress(details);
+                fetched[status][index].success = success;
               })(count++)
             );
           }
