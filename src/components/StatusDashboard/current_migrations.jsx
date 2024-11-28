@@ -200,7 +200,7 @@ function TableContent({ collapsed, name, resort, rows, select, sort, fetched }) 
                       setState(href);
                     }}>{row.name}</Link>
                 : <>
-                    <span title="Failed to load. Check console." style={{cursor: "pointer"}}>⚠️</span>
+                    <span title="Failed to load. Refresh the page to try again." style={{cursor: "pointer"}}>⚠️</span>
                     {" "}{row.name}
                   </>
                 }
