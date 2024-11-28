@@ -192,7 +192,7 @@ function TableContent({ collapsed, name, resort, rows, select, sort, fetched }) 
           return (
             <tr key={row.name}>
               <td>
-                {progress.details ?
+                {row.success ?
                   <Link href={href}
                     style={{ display: "block" }}
                     onClick={event => {
@@ -283,11 +283,12 @@ function fetchContent(onLoad, setState) {
           for (const { name } of fetched[status]) {
             promises.push(
               (async (index) => {
-                let details;
+                let details, success;
                 try {
                   const url = urls.migrations.details.replace("<NAME>", name);
                   const response = await fetch(url);
                   details = await response.json();
+                  success = true;
                 } catch (error) {
                   console.warn(`error loading migration: ${name}`, error);
                   details = {
@@ -298,9 +299,11 @@ function fetchContent(onLoad, setState) {
                     "not-solvable": [],
                     "bot-error": [],
                   }
+                  success = false;
                 }
                 fetched[status][index].details = details;
                 fetched[status][index].progress = measureProgress(details);
+                fetched[status][index].success = success;
               })(count++)
             );
           }
@@ -316,7 +319,6 @@ function fetchContent(onLoad, setState) {
           regular: patch.sort?.regular || prev.sort.regular,
           paused: patch.sort?.paused || prev.sort.paused
         };
-        console.log(fetched);
         const result = {
           ...prev,
           ...patch,
