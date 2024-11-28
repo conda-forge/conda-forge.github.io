@@ -277,15 +277,24 @@ function fetchContent(onLoad, setState) {
           for (const { name } of fetched[status]) {
             promises.push(
               (async (index) => {
+                let details;
                 try {
                   const url = urls.migrations.details.replace("<NAME>", name);
                   const response = await fetch(url);
-                  const details = await response.json();
-                  fetched[status][index].details = details;
-                  fetched[status][index].progress = measureProgress(details);
+                  details = await response.json();
                 } catch (error) {
                   console.warn(`error loading migration: ${name}`, error);
+                  details = {
+                    "done": [],
+                    "in-pr": [],
+                    "awaiting-pr": [],
+                    "awaiting-parents": [],
+                    "not-solvable": [],
+                    "bot-error": [],
+                  }
                 }
+                fetched[status][index].details = details;
+                fetched[status][index].progress = measureProgress(details);
               })(count++)
             );
           }
@@ -301,6 +310,7 @@ function fetchContent(onLoad, setState) {
           regular: patch.sort?.regular || prev.sort.regular,
           paused: patch.sort?.paused || prev.sort.paused
         };
+        console.log(fetched);
         const result = {
           ...prev,
           ...patch,
