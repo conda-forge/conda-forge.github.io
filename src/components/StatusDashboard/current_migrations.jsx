@@ -192,12 +192,18 @@ function TableContent({ collapsed, name, resort, rows, select, sort, fetched }) 
           return (
             <tr key={row.name}>
               <td>
-                <Link href={href}
-                  style={{ display: "block" }}
-                  onClick={event => {
-                    event.preventDefault();
-                    setState(href);
-                  }}>{row.name}</Link>
+                {progress.details ?
+                  <Link href={href}
+                    style={{ display: "block" }}
+                    onClick={event => {
+                      event.preventDefault();
+                      setState(href);
+                    }}>{row.name}</Link>
+                : <>
+                    <span title="Failed to load. Check console." style={{cursor: "pointer"}}>⚠️</span>
+                    {" "}{row.name}
+                  </>
+                }
               </td>
               <td>
                 <label className={styles.progress_bar}>
