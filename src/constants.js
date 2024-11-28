@@ -82,7 +82,7 @@ export const urls = {
     "https://raw.githubusercontent.com/conda-forge/by-the-numbers/main/data/live_counts.json",
   migrations: {
     details:
-      "https://raw.githubusercontent.com/regro/cf-graph-countyfair/master/status/migration_json/<NAME>2.json", // REVERT
+      "https://raw.githubusercontent.com/regro/cf-graph-countyfair/master/status/migration_json/<NAME>.json",
     graph:
       "https://raw.githubusercontent.com/regro/cf-graph-countyfair/master/status/migration_svg/<NAME>.svg?sanitize=true",
     status: {
