@@ -477,6 +477,35 @@ resource entrusted to conda-forge for use in building packages. We thus cannot s
 feedstocks on any of our CI services. If we find such use, we will politely ask the maintainers to rectify the situation. We may
 take more serious actions, including archiving feedstocks or removing maintainers from the organization, if the situation cannot be rectified.
 
+### External Runners (for GitHub Actions)
+
+conda-forge provides feedstock maintainers a way to contribute/sponsor external runners via [Cirun](#cirun), when
+their CI needs are not fulfilled with the current infrastructure. These external runners (i.e. specialized runners)
+can be used for building packages on one or more feedstocks, depending on the maintainer. They are runners on a particular
+cloud or a set of clouds, i.e. facilitating provisioning of external runners is basically committing sponsoring of
+provisioning of ephemeral virtual machines on a [supported cloud](https://docs.cirun.io/cloud/). The process for the
+same is described below:
+
+- Get in touch with `conda-forge/core` to discuss your use case. This can be done with an issue in the relevant feedstock or via [Zulip](https://conda-forge.zulipchat.com).
+- Once discussed, share credentials for a supported cloud with a `conda-forge/core` member, so that it can be added to conda-forge's Cirun account, alternatively
+  the user can sponsor cloud credits for an existing conda-forge's cloud account.
+- Add configuration for the runner's virtual machine in [`conda-forge/.cirun`](https://github.com/conda-forge/.cirun/blob/master/.cirun.global.yml)
+  add a policy entry in [`.access.yml`](https://github.com/conda-forge/.cirun/blob/master/.access.yml) to allow access to the runner for
+  a feedstock.
+- Add the labels defined above in your `<package-feedstock>/recipe/conda_build_config.yaml`, under `github_actions_labels` and re-render the
+  feedstock. See links below for some examples.
+
+After the above steps are complete, the feedstock maintainer's should be able to use the defined runner for feedstock
+repository's CI jobs.
+
+#### External runner usage example
+
+Pytorch currently uses a custom windows runner on Azure provisioned via [cirun](https://cirun.io) to build on windows.
+This was sponsored by Prefix.dev. Below are the relevant pull requests for the same:
+
+- https://github.com/conda-forge/.cirun/pull/14
+- https://github.com/conda-forge/pytorch-cpu-feedstock/pull/231
+
 ## Compilers and Runtimes
 
 conda-forge builds and maintains its own set of compilers for various languages
