@@ -80,6 +80,13 @@ const infrastructure = [
     width: 220,
   },
   {
+    name: "Pulumi",
+    link: "https://www.pulumi.com/",
+    light: "img/supporters/pulumi_light.svg",
+    dark: "img/supporters/pulumi_dark.svg",
+    width: 220,
+  },
+  {
     name: "Quansight",
     link: "https://www.quansight.com/",
     light: "img/supporters/quansight_light.svg",
