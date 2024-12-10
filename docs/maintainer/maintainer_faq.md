@@ -144,7 +144,7 @@ Other OpenGL API variants such as `libegl-devel`, `libgles-devel`, `libglx-devel
 If you are seeing this error after installing a package locally, then you are missing an [OpenGL](https://en.wikipedia.org/wiki/OpenGL) provider in your system dependencies. This is more likely to happen in headless systems with no graphics (servers, Docker images, etc). To fix it, you must install a provider like [Mesa](https://www.mesa3d.org/) with your system package manager, for example (check your distro documentation for exact packages):
 
 - Debian/Ubuntu-based distributions: `sudo apt-get install libgl1-mesa-dri libglx-mesa0 libegl-mesa0`
-- Fedora-based distributions: `sudo dnf install `sudo dnf install mesa-libGL mesa-libEGL mesa-dri-drivers`
+- Fedora-based distributions: `sudo dnf install mesa-libGL mesa-libEGL mesa-dri-drivers`
 
 <a id="mfaq-qt-load-xcb"></a>
 
