@@ -285,7 +285,24 @@ package (an example would be to re-render the feedstock to support new Python ve
 If you believe a feedstock should be archived, please do the following:
 
 1. Raise an issue on the feedstock asking if it can be archived (CC the maintainer team and @conda-forge/core)
-2. Fork [conda-forge/admin-requests](https://github.com/conda-forge/admin-requests) and add a new text file in the `archive` directory with the repo name.
+2. Fork [conda-forge/admin-requests](https://github.com/conda-forge/admin-requests) and add a new `yml` file in the `requests` directory , names `<package>-archive.yml` and containing:
+
+```
+action: archive
+feedstocks:
+  - <name of the feedstock to archive without the -feedstock suffix>
+```
+
+Example:
+
+```
+action: archive
+feedstocks:
+  - or-datasets
+```
+
+You can list multiple feedstocks in the same request.
+
 3. Open a PR and cross-reference the issue raised in step 1.
 
 <a id="maint-updating-maintainers"></a>
