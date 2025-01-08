@@ -893,7 +893,7 @@ $ cd ~/staged-recipes
 $ python build-locally.py <VARIANT>
 ```
 
-where `<VARIANT>` is one of the file names in the `.ci_support/` directory, e.g. `linux64`, `osx64`, and `linux64_cuda102`.
+where `<VARIANT>` is one of the file names in the `.ci_support/` directory, e.g. `linux64`, `osx64`, and `linux64_cuda<version>`.
 
 <a id="about"></a>
 

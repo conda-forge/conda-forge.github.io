@@ -38,7 +38,7 @@ The YAML files included in `.ci_support` are minimal and not rendered like the o
 Instead, conda-build will take these and combine them with the pinnings from `conda-forge-pinning` at runtime.
 Also note that `staged-recipes` only builds for x64. Support for additional architectures can only be done once a feedstock has been provided.
 
-- Linux: `linux64.yaml` plus the CUDA (10.2, 11.0, 11.1 and 11.2) variants.
+- Linux: `linux64.yaml` plus the CUDA variants.
 - macOS: `osx64.yaml`.
 - Windows `win64.yaml`.
 
