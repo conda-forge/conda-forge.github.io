@@ -2045,16 +2045,12 @@ build:
 
 #### My feedstock is not building old CUDA versions anymore
 
-With the [addition of CUDA 11.1 and 11.2](https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/1162),
-the default build matrix for CUDA versions was trimmed down to versions 10.2, 11.0, 11.1, 11.2.
+As new CUDA versions come out regularly, periodically conda-forge needs to
+decide how many versions will be supported within resource constraints.
+As of January 2025, conda-forge supports CUDA 11.8 and 12.
 
-If you really need it, you can re-add support for 9.2, 10.0 and 10.1. However, this is not recommended.
-Adding more CUDA versions to the build matrix will dramatically increase the number of jobs and will place a large
-burden on our CI resources. Only proceed if there's a known use case for the extra packages.
-
-1. Download this [migration file](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/b6d14bce8613d14e252e46ccee13ecb160eb6494/recipe/migrations/cuda92_100_101.yaml).
-2. In your feedstock fork, create a new branch and place the migration file under `.ci_support/migrations`.
-3. Open a PR and re-render. CUDA 9.2, 10.0 and 10.1 will appear in the CI checks now. Merge when ready!
+To update to the latest supported versions [rerender the feedstock](updating_pkgs.md#dev-update-rerender).
+There may be other fixes needed for the feedstock depending on when it was last updated.
 
 <a id="opengpuserver"></a>
 
