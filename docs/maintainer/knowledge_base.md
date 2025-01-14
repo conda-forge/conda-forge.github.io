@@ -2009,7 +2009,7 @@ Although the provisioned CI machines do not feature a GPU, conda-forge does prov
 to build CUDA-enabled packages.
 See the [guide for maintainers of recipes that use CUDA](https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/doc/recipe_guide.md)
 for more information.
-If a feedstock does need access to additional resource (like GPUs), please see the following
+If a feedstock does need access to additional resources (like GPUs), please see the following
 [section](#packages-that-require-a-gpu-or-long-running-builds).
 
 <a id="common-problems-and-known-issues"></a>
@@ -2047,7 +2047,7 @@ build:
 
 As new CUDA versions come out regularly, periodically conda-forge needs to
 decide how many versions will be supported within resource constraints.
-As of January 2025, conda-forge supports CUDA 11.8 and 12.
+As of January 2025, conda-forge supports CUDA 11 and 12.
 
 To update to the latest supported versions [rerender the feedstock](updating_pkgs.md#dev-update-rerender).
 There may be other fixes needed for the feedstock depending on when it was last updated.
