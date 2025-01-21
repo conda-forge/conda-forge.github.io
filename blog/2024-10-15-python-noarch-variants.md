@@ -53,9 +53,10 @@ or test time and this requires some manual handling.
 
 We have been adding `noarch: python` variants for some feedstocks
 so that the compiled extension has higher priority and the pure
-Python extension has lower priority which makes the conda solver
-use the `noarch: python` variant. One issue is that the linter
-might not like selectors on noarch recipes. We added an option
+Python extension has lower priority, which makes the conda solver
+use the `noarch: python` variant if no suitable compiled variant
+is not available. One issue is that the linter might not like selectors
+on noarch recipes. We added an option
 
 ```yaml
 linter:
