@@ -65,9 +65,58 @@ linter:
 
 to `conda-forge.yml` that will make the linter skip this warning/error.
 
+We build the two variants using a `recipe/conda_build_config.yaml`
+with the contents,
+
+```yaml
+use_noarch:
+- true       # [linux64]
+- false
+```
+
+Then in `recipe/meta.yaml` we make the following changes
+```yaml
+build:
+  noarch: python           # [use_noarch]
+  track_features:          # [use_noarch]
+    - pyyaml_no_compile    # [use_noarch]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ stdlib("c") }}
+  host:
+    - python                        # [not use_noarch]
+    - python {{ python_min }}.*     # [use_noarch]
+    - setuptools
+    - pip
+  run:
+    - python                        # [not use_noarch]
+    - python >={{ python_min }}.*   # [use_noarch]
+    - yaml
+
+test:
+  requires:
+    - pip
+    - python {{ python_min }}.*     # [use_noarch]
+```
+
+Finally in the build script, we use the env variable `use_noarch`
+to set an option to force the extension to be pure python.
+In the case of pyyaml, we can force that by setting the env variable
+`PYYAML_NO_LIBYAML`. A `recipe/build.sh` might look like,
+
+```bash
+if [[ "$use_noarch" == "true" ]]; then
+  export PYYAML_NO_LIBYAML=1
+fi
+$PYTHON -m pip install .
+```
+
 We list some PRs here as a reference for conda-forge maintainers who
 want to help out with this effort.
 
+- [pyyaml](https://github.com/conda-forge/pyyaml-feedstock/pull/55)
 - [coverage](https://github.com/conda-forge/coverage-feedstock/pull/123)
 - [cython](https://github.com/conda-forge/cython-feedstock/pull/147)
 - [aiohttp](https://github.com/conda-forge/aiohttp-feedstock/pull/99)
