@@ -32,7 +32,7 @@ implementation. The only way to figure out if a package has a Python
 reference implementation is to look at the library's source code
 to see if `extensions` are optional.
 
-To support platforms like PyPy, Some packages build wheels with
+To support platforms like PyPy, some packages build wheels with
 compiled extensions for the platforms that are
 known to be more performant with the compiled extension, but also
 provide a universal pure Python wheel for the other platforms.
@@ -115,7 +115,7 @@ $PYTHON -m pip install .
 ```
 
 We list some PRs here as a reference for conda-forge maintainers who
-want to help out with this effort.
+want to experiment.
 
 - [pyyaml](https://github.com/conda-forge/pyyaml-feedstock/pull/55)
 - [coverage](https://github.com/conda-forge/coverage-feedstock/pull/123)
