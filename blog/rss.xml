@@ -4,10 +4,82 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/blog/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Thu, 26 Sep 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 15 Oct 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Noarch variant packages for Python packages on conda-forge]]></title>
+            <link>https://conda-forge.org/blog/2024/10/15/python-noarch-variants/</link>
+            <guid>https://conda-forge.org/blog/2024/10/15/python-noarch-variants/</guid>
+            <pubDate>Tue, 15 Oct 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[We introduce noarch variants for python packages on conda-forge]]></description>
+            <content:encoded><![CDATA[<p>We introduce noarch variants for python packages on conda-forge
+that have compiled extensions but with pure python reference
+implementations to make life easier for early adopters of
+new python variants.</p>
+<p>conda-forge packages have always been batteries included. When
+a package has some build options turned off by default to reduce
+dependencies, we have enabled these options to give the most
+functionality and performance to our users.</p>
+<p>In the Python world, some packages are written in C/C++/Cython
+to get the most performance out of a package. However these packages
+sometimes have a reference implementation written in Python. The Python
+reference implementation is a good way to check the C/C++/Cython
+code against a much simpler python implementation and is also
+useful for platforms like PyPy where the C/C++/Cython implementation
+can be slower than the Python reference implementation due to the
+emulation of the Python C/C++ API by PyPy. For example for the Cython
+package, setting the <code>CYTHON_NO_COMPILE</code> environment variable
+when building the Cython wheel itself, it will use the Python reference
+implementation. The only way to figure out if a package has a Python
+reference implementation is to look at the library's source code
+to see if <code>extensions</code> are optional.</p>
+<p>To support platforms like PyPy, some packages build wheels with
+compiled extensions for the platforms that are
+known to be more performant with the compiled extension, but also
+provide a universal pure Python wheel for the other platforms.
+This also provides a way for new Python versions and variants
+like the free-threading Python build to use these packages by the
+early adopters of these Python versions.</p>
+<p>On conda-forge we usually have compiled Python packages, but provide
+no reference implementation. This means early adopters of new Python
+versions need to wait for the conda-forge bot managed by @conda-forge/bot
+team to start the migration and rebuild the packages. For example the
+free-threading Python 3.13 build is still paused as
+conda-forge has decided to focus on the default (GIL enabled)
+Python 3.13 build first while upstream packages work on
+supporting free-threading.
+Another issue is that some packages have cyclic dependencies at build
+or test time and this requires some manual handling.</p>
+<p>We have been adding <code>noarch: python</code> variants for some feedstocks
+so that the compiled extension has higher priority and the pure
+Python extension has lower priority, which makes the conda solver
+use the <code>noarch: python</code> variant if no suitable compiled variant
+is available. One issue is that the linter might not like selectors
+on noarch recipes. We added an option</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">linter</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">skip</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> lint_noarch_selectors</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>to <code>conda-forge.yml</code> that will make the linter skip this warning/error.</p>
+<p>We build the two variants using a <code>recipe/conda_build_config.yaml</code>
+with the contents,</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">use_noarch</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token boolean important" style="color:#36acaa">true</span><span class="token plain">       </span><span class="token comment" style="color:#999988;font-style:italic"># [linux64]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token boolean important" style="color:#36acaa">false</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Then in <code>recipe/meta.yaml</code> we make the following changes</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">build</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">noarch</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> python           </span><span class="token comment" style="color:#999988;font-style:italic"># [use_noarch]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">track_features</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">          </span><span class="token comment" style="color:#999988;font-style:italic"># [use_noarch]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> pyyaml_no_compile    </span><span class="token comment" style="color:#999988;font-style:italic"># [use_noarch]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">requirements</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">build</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> compiler('c') </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> stdlib("c") </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">host</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> python                        </span><span class="token comment" style="color:#999988;font-style:italic"># [not use_noarch]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> python </span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> python_min </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain">.*     </span><span class="token comment" style="color:#999988;font-style:italic"># [use_noarch]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> setuptools</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> pip</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">run</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> python                        </span><span class="token comment" style="color:#999988;font-style:italic"># [not use_noarch]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> python </span><span class="token punctuation" style="color:#393A34">&gt;</span><span class="token plain">=</span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> python_min </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain">.*   </span><span class="token comment" style="color:#999988;font-style:italic"># [use_noarch]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> yaml</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">test</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">requires</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> pip</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> python </span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> python_min </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain">.*     </span><span class="token comment" style="color:#999988;font-style:italic"># [use_noarch]</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Finally in the build script, we use the env variable <code>use_noarch</code>
+to set an option to force the extension to be pure python.
+In the case of pyyaml, we can force that by setting the env variable
+<code>PYYAML_NO_LIBYAML</code>. A <code>recipe/build.sh</code> might look like,</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">if</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"</span><span class="token string variable" style="color:#36acaa">$use_noarch</span><span class="token string" style="color:#e3116c">"</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">==</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"true"</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">then</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token builtin class-name">export</span><span class="token plain"> </span><span class="token assign-left variable" style="color:#36acaa">PYYAML_NO_LIBYAML</span><span class="token operator" style="color:#393A34">=</span><span class="token number" style="color:#36acaa">1</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">fi</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token variable" style="color:#36acaa">$PYTHON</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-m</span><span class="token plain"> pip </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> </span><span class="token builtin class-name">.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>We list some PRs here as a reference for conda-forge maintainers who
+want to experiment.</p>
+<ul>
+<li><a href="https://github.com/conda-forge/pyyaml-feedstock/pull/55" target="_blank" rel="noopener noreferrer">pyyaml</a></li>
+<li><a href="https://github.com/conda-forge/coverage-feedstock/pull/123" target="_blank" rel="noopener noreferrer">coverage</a></li>
+<li><a href="https://github.com/conda-forge/cython-feedstock/pull/147" target="_blank" rel="noopener noreferrer">cython</a></li>
+<li><a href="https://github.com/conda-forge/aiohttp-feedstock/pull/99" target="_blank" rel="noopener noreferrer">aiohttp</a></li>
+</ul>]]></content:encoded>
+            <category>infrastructure</category>
+        </item>
         <item>
             <title><![CDATA[Python 3.13 Release candidate builds on conda-forge]]></title>
             <link>https://conda-forge.org/blog/2024/09/26/python-313/</link>
@@ -1789,50 +1861,6 @@ packages.</p>
 </ol>]]></content:encoded>
             <category>autotick-bot</category>
             <category>gsoc</category>
-        </item>
-        <item>
-            <title><![CDATA[Automatically Deployed ABI Migrations]]></title>
-            <link>https://conda-forge.org/blog/2019/12/06/cfep09/</link>
-            <guid>https://conda-forge.org/blog/2019/12/06/cfep09/</guid>
-            <pubDate>Fri, 06 Dec 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[Handling application binary interface (ABI) migrations has always been a]]></description>
-            <content:encoded><![CDATA[<p>Handling application binary interface (ABI) migrations has always been a
-hassle for Conda-Forge. Maintaining ABI consistency helps enable the
-"just use conda-forge" experience for many of our users, making
-certain that numpy's blas is the same as scipy's. As libraries update
-their code, the new versions may be ABI incompatible, as function
-signatures and other symbols may have changed, leading to the dreaded
-<code>SegmentationFault</code> and other errors.</p>
-<p>Conda-Forge handles this by having a pinning file that tracks all the
-currently supported ABIs. These pinned ABIs are then used to build the
-downstream packages, making certain that all are consistent. As new
-versions of pinned software are released the pins are updated, causing a
-migration of the pin, and the rebuilding of all packages which rely on
-the pinned package. In the past, this was handled by a change to the
-global pinnings and a subsequent migration via the auto-tick bot. While
-this worked, there were issues that this created. Firstly, this approach
-could cause unsatisfiable build dependencies for new packages, as some
-of the new package's dependencies had been compiled with the new pins,
-but not all. Secondly, migrations happened in series, if a second pin
-was moved while the first was being migrated then the migration could go
-wrong as packages which were being rebuilt for the first pin got the
-second pin before they were ready.</p>
-<p>Conda-Forge Core has recently approved CFEP-9, a migration policy to fix
-these issues. With CFEP-9 pinnings are proposed as small yaml snippets
-which contain the new pins. The auto-tick bot then starts migrating the
-packages in order, applying the yaml snippet to each package in turn. If
-a second pinning change is issued then the bot starts the migration for
-that package too, enabling the two migrations to work independently. If
-a package needs a change in both pins then the maintainers can choose
-the order in which they apply the pins by merging one pin before the
-other.</p>
-<p>This approach will yield much greater stability in migrations and will
-enable more maintainers to issue migrations. Migrations can be issued by
-putting a PR into
-<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock" target="_blank" rel="noopener noreferrer">conda-forge/conda-forge-pinning-feedstock</a>,
-adding a file to the <code>migrations</code> folder, PRs into the auto-tick bot are
-not needed anymore.</p>]]></content:encoded>
-            <category>autotick-bot</category>
         </item>
     </channel>
 </rss>
