@@ -26,7 +26,7 @@ code against a much simpler python implementation and is also
 useful for platforms like PyPy where the C/C++/Cython implementation
 can be slower than the Python reference implementation due to the
 emulation of the Python C/C++ API by PyPy. For example for the Cython
-package, setting `CYTHON_NO_COMPILE` environment variable
+package, setting the `CYTHON_NO_COMPILE` environment variable
 when building the Cython wheel itself, it will use the Python reference
 implementation. The only way to figure out if a package has a Python
 reference implementation is to look at the library's source code
