@@ -76,6 +76,7 @@ use_noarch:
 ```
 
 Then in `recipe/meta.yaml` we make the following changes
+
 ```yaml
 build:
   noarch: python           # [use_noarch]
