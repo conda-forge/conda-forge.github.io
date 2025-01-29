@@ -673,16 +673,9 @@ works as follows.
 4. If all of the validation passes, the package is then copied to the `conda-forge`
    channel.
 
-We attempt to report errors in this process to users via comments on commits/issues in the feedstocks.
-Sometimes these reports fail. If you think you are having trouble with uploads, make sure to check/try
-the following things:
+There are two scenarios we consider:
 
-- Ensure that `conda_forge_output_validation: true` is set in your `conda-forge.yml`.
-- Retry the package build and upload by pushing an empty commit to the feedstock.
-- Rerender the feedstock in a PR from a fork of the feedstock and merge.
-- Request a feedstock token reset via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#reset-your-feedstock-token).
-- Request that any new packages be added to the allowed outputs for the feedstock
-  via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock).
+### Package validation failed for a new output name
 
 New packages that are added to existing feedstocks are not registered automatically in order to prevent
 typo squatting and other malicious activities. Package outputs are added during feedstock creation.
@@ -694,6 +687,19 @@ In rare cases, the package name may change regularly in a well-defined way (e.g.
 In this case, you can use our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock)
 to add a glob pattern that matches the new package name pattern. We use the Python `fnmatch` module syntax.
 Output packages that match these patterns will be automatically registered for your feedstock.
+
+### Package validation failed for an existing output name
+
+We attempt to report errors in this process to users via comments on commits/issues in the feedstocks.
+Sometimes these reports fail. If you think you are having trouble with uploads, make sure to check/try
+the following things:
+
+- Ensure that `conda_forge_output_validation: true` is set in your `conda-forge.yml`.
+- Retry the package build and upload by pushing an empty commit to the feedstock.
+- Rerender the feedstock in a PR from a fork of the feedstock and merge.
+- Request a feedstock token reset via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#reset-your-feedstock-token).
+- Request that any new packages be added to the allowed outputs for the feedstock
+  via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock).
 
 ## Stages of package building and involved infrastructure
 
