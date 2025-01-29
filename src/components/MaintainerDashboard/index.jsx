@@ -2,7 +2,7 @@ import { useLocation } from "@docusaurus/router";
 import { useColorMode } from '@docusaurus/theme-common';
 import { urls } from "@site/src/constants";
 import { React, useEffect, useState } from "react";
-import { gql, useQuery, useApolloClient } from '@apollo/client';
+import { gql, useApolloClient, useLazyQuery, useQuery  } from '@apollo/client';
 
 const GET_USER = gql`
   query {
@@ -41,19 +41,19 @@ const GET_TEAMS = gql`
 `;
 
 export default function MaintainerDashboard() {
-  // const {loading, error, data} = useQuery(GET_USER);
-  // if (loading) return 'Loading...';
-  // if (error) return `Error! ${error.message}`;
+  const user = useQuery(GET_USER);
 
-  // const login = data.viewer.login;
+  const [getTeams, teamData] = useLazyQuery(GET_TEAMS);
 
-  const login = "zklaus";
+  useEffect(() => {
+    if (user?.data?.viewer?.login) {
+      getTeams({ variables: { login: user.data.viewer.login } });
+    }
+  }, [user]);
 
-  const {loading, error, data} = useQuery(GET_TEAMS, {variables: { login } });
-  if (loading) return 'Loading...';
-  if (error) return `Error! ${error.message}`;
+  if (teamData.loading || !teamData.called) return 'Loading...';
 
-  const all_teams = data.organization.teams.nodes;
+  const all_teams = teamData.data.organization.teams.nodes;
   const empty_teams = all_teams.filter(team => team.repositories.edges.length === 0);
   const overfull_teams = all_teams.filter(team => team.repositories.edges.length > 1);
   const regular_teams = all_teams.filter(team => (
