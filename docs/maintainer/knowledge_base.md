@@ -779,8 +779,10 @@ host:
   - numpy   1.23   # [py==311]
   - numpy   1.26   # [py==312]
 ```
+
 though the ongoing migration for numpy 2.0 has already been applied to many
 feedstocks, in which case the pinning looks like
+
 ```yaml
 host:
   - numpy   2.0    # [py==39]
@@ -794,11 +796,13 @@ See the pinning repository for what the pinning corresponds to at time of writin
 
 In either case, the actual runtime requirements are determined through numpy's
 run-export, which is:
-* `>=1.2x,<2` if you're building against numpy 1.2x
-* `>=1.19,<3` if you're building against numpy 2.0
-* `>=1.21,<3` if you're building against numpy 2.1 or 2.2
+
+- `>=1.2x,<2` if you're building against numpy 1.2x
+- `>=1.19,<3` if you're building against numpy 2.0
+- `>=1.21,<3` if you're building against numpy 2.1 or 2.2
 
 If the package you are building has a higher minimum requirement for numpy, please add this under `run`:
+
 ```yaml
 host:
   # leave this unpinned!
