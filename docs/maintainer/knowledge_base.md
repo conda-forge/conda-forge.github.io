@@ -768,43 +768,48 @@ In the case of linking, you need to use the `pin_compatible` function to ensure 
 ```yaml
 host:
   - numpy
-run:
-  - {{ pin_compatible('numpy') }}
 ```
 
-At the time of writing (January 22, 2022), above is equivalent to the following,
+At the time of writing (January, 2025), above is equivalent to the following,
 
 ```yaml
 host:
-  - numpy   1.18   # [py==37]
-  - numpy   1.18   # [py==38]
-  - numpy   1.19   # [py==39]
-run:
-  - numpy >=1.18.5,<2.0.a0   # [py==37]
-  - numpy >=1.18.5,<2.0.a0   # [py==38]
-  - numpy >=1.19.5,<2.0.a0   # [py==39]
+  - numpy   1.22   # [py==39]
+  - numpy   1.22   # [py==310]
+  - numpy   1.23   # [py==311]
+  - numpy   1.26   # [py==312]
+```
+
+though the ongoing migration for numpy 2.0 has already been applied to many
+feedstocks, in which case the pinning looks like
+
+```yaml
+host:
+  - numpy   2.0    # [py==39]
+  - numpy   2.0    # [py==310]
+  - numpy   2.0    # [py==311]
+  - numpy   2.0    # [py==312]
 ```
 
 See the pinning repository for what the pinning corresponds to at time of writing
-[https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml#L631](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml#L631)
+[https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml#L742](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml#L742)
 
-:::note[Notes]
+In either case, the actual runtime requirements are determined through numpy's
+run-export, which is:
 
-1. You still need to respect minimum supported version of `numpy` for the package!
-   That means you cannot use `numpy 1.9` if the project requires at least `numpy 1.12`,
-   adjust the minimum version accordingly!
+- `>=1.2x,<2` if you're building against numpy 1.2x
+- `>=1.19,<3` if you're building against numpy 2.0
+- `>=1.21,<3` if you're building against numpy 2.1 or 2.2
+
+If the package you are building has a higher minimum requirement for numpy, please add this under `run`:
 
 ```yaml
 host:
-  - numpy 1.12.*
+  # leave this unpinned!
+  - numpy
 run:
-  - {{ pin_compatible('numpy') }}
+  - numpy >={{ the_lower_bound_your_package_needs }}
 ```
-
-2. if your package supports `numpy 1.7`, and you are brave enough :-),
-   there are `numpy` packages for `1.7` available for Python 2.7 in the channel.
-
-:::
 
 <a id="jupyterlab-extension"></a>
 
