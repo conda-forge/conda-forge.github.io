@@ -371,6 +371,11 @@ const config = {
             position: "left",
           },
           {
+            href: "/maintainer/",
+            label: "Maintainer",
+            position: "right",
+          },
+          {
             href: "https://opencollective.com/conda-forge",
             label: "Donate",
             position: "right",
