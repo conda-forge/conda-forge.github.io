@@ -792,7 +792,7 @@ host:
 See the pinning repository for what the pinning corresponds to at time of writing
 [https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml#L742](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml#L742)
 
-In either case, the actual runtime requirements are determined through numpy's-are-some-good-examples
+In either case, the actual runtime requirements are determined through numpy's
 run-export, which is:
 * `>=1.2x,<2` if you're building against numpy 1.2x
 * `>=1.19,<3` if you're building against numpy 2.0
