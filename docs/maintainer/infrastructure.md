@@ -440,12 +440,16 @@ via a pull request.
 We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on
 GitHub Actions.
 
-#### Webservices Rerendering, Version Updates, and Automerge
+#### Webservices Background Jobs
 
-The webservices Heroku app uses GitHub Actions to run compute-intensive background jobs, including rerendering, version updates,
+The webservices Heroku app dispatches to GitHub Actions to run compute-intensive background jobs, including rerendering, version updates,
 and automerge jobs. The GitHub actions runs happen on the [conda-forge-webservices repo](https://github.com/conda-forge/conda-forge-webservices).
 These runs use the [webservices-dispatch-action Docker container](https://hub.docker.com/r/condaforge/webservices-dispatch-action) for some
 operations. This container is tagged with the latest webservices version.
+
+#### Automerge
+
+Our automerge service runs via GitHub Actions in the [conda-forge-webservices repo](https://github.com/conda-forge/conda-forge-webservices).
 
 PRs are automatically merged if they satisfy either of the two following sets of conditions:
 
