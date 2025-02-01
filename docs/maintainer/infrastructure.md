@@ -440,24 +440,24 @@ via a pull request.
 We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on
 GitHub Actions.
 
+#### Webservices Background Jobs
+
+The webservices Heroku app dispatches to GitHub Actions to run compute-intensive background jobs, including rerendering, version updates,
+and automerge jobs. The GitHub actions runs happen on the [conda-forge-webservices repo](https://github.com/conda-forge/conda-forge-webservices).
+These runs use the [webservices-dispatch-action Docker container](https://hub.docker.com/r/condaforge/webservices-dispatch-action) for some
+operations. This container is tagged with the latest webservices version.
+
 #### Automerge
 
-The automerge service uses the GitHub action in this [repo](https://github.com/conda-forge/automerge-action). This action runs out of a
-Docker [container](https://hub.docker.com/repository/docker/condaforge/automerge-action) on the `prod` tag. See the
-repo [README.md](https://github.com/conda-forge/automerge-action#) for more details. PRs are automatically merged if they satisfy either
-of the two following sets of conditions:
+Our automerge service runs via GitHub Actions in the [conda-forge-webservices repo](https://github.com/conda-forge/conda-forge-webservices).
+
+PRs are automatically merged if they satisfy either of the two following sets of conditions:
 
 1. are from the `regro-cf-autotick-bot`, have `[bot-automerge]` in the title, all statuses are passing, and the feedstock allows automerge
 2. have the `automerge` label and all statuses are passing.
 
 For PRs from the `regro-cf-autotick-bot`, it can be useful to remove the `[bot-automerge]` slug from the PR title if you are making
 edits to the PR.
-
-#### Rerendering
-
-The rerendering service is triggered by the Heroku app. It uses the GitHub action in this [repo](https://github.com/conda-forge/webservices-dispatch-action).
-This action runs out of a Docker [container](https://hub.docker.com/repository/docker/condaforge/webservices-dispatch-action) on the `prod` tag. See the
-repo [README.md](https://github.com/conda-forge/webservices-dispatch-action) for more details.
 
 ### Skipping CI builds
 
