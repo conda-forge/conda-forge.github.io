@@ -610,7 +610,7 @@ package works correctly. In particular, it doesn't test if it works
 correctly with the versions of dependencies used. In some cases, the top level
 import name does not contain any executable code (e.g. a package with an empty
 `__init__.py`, or without any direct imports). This test would always pass!
-In these cases, it helps to add more imports explicitly targetting modules
+In these cases, it helps to add more imports explicitly targeting modules
 that do contain executable code (e.g. `package_name.core`).
 
 It is good to run some other tests of the code itself (the test suite) if possible.
