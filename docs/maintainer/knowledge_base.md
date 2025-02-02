@@ -1334,7 +1334,7 @@ Before learning how to use it, please read these considerations:
 
 - Adding microarchitecture variants can result in too many entries in the build matrix. Do not overuse it.
 - These optimized builds should only be used when the performance improvements are significant.
-- Preferrably, the project should rely on runtime dispatch for arch-specific optimizations.
+- Preferably, the project should rely on runtime dispatch for arch-specific optimizations.
 - If the package is already too large, consider using smaller outputs for the arch-optimized variants.
 
 To implement microarchitecture-optimized builds in your feedstock, you'll end up with something like:

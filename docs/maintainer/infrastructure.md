@@ -382,7 +382,7 @@ work and learn about some of the historical context of the feedstock.
 Once you have established a working relationship with the maintainers, you can ask
 them to add you to the feedstock team. They can then use this command
 to add you to the team. There isn't any official requirement for how to add new
-maintainers so it may take a while for concensus to be reached
+maintainers so it may take a while for consensus to be reached
 on when to add new maintainers. Do not let this discourage you from contributing!
 
 PRs are free to be opened by anyone!!! Thank you for your time and effort!!!
