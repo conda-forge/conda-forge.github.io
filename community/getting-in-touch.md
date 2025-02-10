@@ -21,7 +21,7 @@ The main chat platform in use. Sign up at [conda-forge.zulipchat.com](https://co
 ## Gitter and Element
 
 :::warning
-As per CFEP-23, the Gitter/Matrix/Element rooms are no longer in use. Please use [Zulip](#zulip) instead.
+As per [CFEP-23](https://github.com/conda-forge/cfep/blob/main/cfep-23.md), the Gitter/Matrix/Element rooms are no longer in use. Please use [Zulip](#zulip) instead.
 :::
 
 <details>
