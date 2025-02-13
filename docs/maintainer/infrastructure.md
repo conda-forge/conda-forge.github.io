@@ -698,8 +698,6 @@ the following things:
 - Retry the package build and upload by pushing an empty commit to the feedstock.
 - Rerender the feedstock in a PR from a fork of the feedstock and merge.
 - Request a feedstock token reset via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#reset-your-feedstock-token).
-- Request that any new packages be added to the allowed outputs for the feedstock
-  via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock).
 
 ## Stages of package building and involved infrastructure
 
