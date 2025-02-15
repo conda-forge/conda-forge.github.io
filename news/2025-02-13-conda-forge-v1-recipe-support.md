@@ -55,7 +55,12 @@ If you are adding a new recipe on staged-recipes, then it's easy: just submit a 
 In case you already maintain a feedstock, then the conversion can be semi-automated with a tool created by [Hadrien Mary](https://github.com/hadim) called [`feedrattler`](https://github.com/hadim/feedrattler). The tool will take care of the basic conversions steps and uses [`conda-recipe-manager`](https://github.com/conda-incubator/conda-recipe-manager) by Anaconda / [Schuyler Martin](https://github.com/schuylermartin45) under the hood to parse the recipe and convert it to the new format.
 
 ```shell
+# One liner with Pixi
 pixi exec feedrattler my-awesome-package-feedstock gh_user
+# With conda or mamba (as $CONDA)
+$CONDA create -n feedrattler feedrattler
+$CONDA activate feedrattler
+feedrattler my-awesome-package-feedstock gh_user
 ```
 
 To do the conversion by hand, you need to do the following things:
