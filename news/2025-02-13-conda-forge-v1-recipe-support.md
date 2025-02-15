@@ -2,6 +2,8 @@
 
 The conda-forge team is excited to announce that the v1 recipe format is available on conda-forge. The v1 recipe format is a community initiative dating back over 3 years to improve the recipe format for conda packages. If you are a maintainer of a feedstock on conda-forge, you have probably dealt with `meta.yaml` files that conda-build utilizes. The file format has some limitations which is why the community has come together to come up with an improved version of the format: the v1 format.
 
+<!--truncate-->
+
 ## rattler-build and the v1 spec
 
 The v1 recipe format has a number of benefits:
