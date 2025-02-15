@@ -62,7 +62,7 @@ To do the conversion by hand, you need to do the following things:
 
 - In the `conda-forge.yml`, add `conda_build_tool: rattler-build`
 - Remove the `meta.yaml` file and add a `recipe.yaml` file following the v1 spec
-- Rerender the feedstock using `conda smithy rerender`
+- Rerender the feedstock using `conda-smithy rerender`
 - Push your changes to your fork and open a PR to see the CI build your package
 
 ## Transition plans
