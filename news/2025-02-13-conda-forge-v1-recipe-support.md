@@ -52,7 +52,7 @@ about:
 ## How to use the v1 recipe format on conda-forge
 
 If you are adding a new recipe on staged-recipes, then it's easy: just submit a `recipe.yaml` file instead of a `meta.yaml` file.
-In case you already maintain a feedstock, then the conversion can be semi-automated with a tool created by [Hadrien Mary](https://github.com/hadim) called ["feedrattler"](https://github.com/hadim/feedrattler). The tool will take care of the basic conversions steps and uses the `conda-recipe-manager` by Anaconda / Schuyler Martin under the hood to parse the recipe and convert it to the new format.
+In case you already maintain a feedstock, then the conversion can be semi-automated with a tool created by [Hadrien Mary](https://github.com/hadim) called [`feedrattler`](https://github.com/hadim/feedrattler). The tool will take care of the basic conversions steps and uses [`conda-recipe-manager`](https://github.com/conda-incubator/conda-recipe-manager) by Anaconda / [Schuyler Martin](https://github.com/schuylermartin45) under the hood to parse the recipe and convert it to the new format.
 
 ```shell
 pixi exec feedrattler my-awesome-package-feedstock gh_user
