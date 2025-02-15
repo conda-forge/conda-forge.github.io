@@ -72,7 +72,7 @@ To do the conversion by hand, you need to do the following things:
 
 ## Transition plans
 
-For the foreseeable future, conda-forge is going to support both formats, v1 and v0. We envision a gradual transition over at least one year to the new spec. There are a couple of places where the v1 spec also needs to finalize / stabilize. One notable place is the `cache` output where CEP discussions are ongoing. This stabilization in the format should happen within Q1 of 2025.
+For the foreseeable future, conda-forge is going to support both formats, v1 and v0. We envision a gradual transition over at least one year to the new spec. There are a couple of places where the v1 spec also needs to finalize / stabilize. One notable place is the `cache`-based multi-output feature, where CEP discussions are ongoing. This stabilization in the format should happen within Q1 of 2025.
 
 Since the beginning of 2025, the bot has gained more capabilities for the v1 format, such as automatically bumping versions (the "autotick-bot"). There are a number of other migrators and mini-migrators that need to be fully ported to the v1 spec before we can claim 100% compatibility with the conda-forge infrastructure.
 
