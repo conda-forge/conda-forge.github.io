@@ -1,3 +1,9 @@
+---
+authors:
+  - wolfv
+tags: [infrastructure]
+---
+
 # Announcing the new recipe format on conda-forge
 
 The conda-forge team is excited to announce that the v1 recipe format is available on conda-forge. The v1 recipe format is a community initiative dating back over 3 years to improve the recipe format for conda packages. If you are a maintainer of a feedstock on conda-forge, you have probably dealt with `meta.yaml` files that conda-build utilizes. The file format has some limitations which is why the community has come together to come up with an improved version of the format: the v1 format.
@@ -13,7 +19,8 @@ The v1 recipe format has a number of benefits:
 - The log output of rattler-build is greatly improved, always showing the user what the final files in the package are and the final metadata.
 - Some features of conda-build, such as multiple outputs, had a lot of implicit behavior. We are fixing that in the v1 recipe.
 
-You can read much more about the v1 recipe format in the [https://rattler.build](https://rattler.build) docs and [CEPs](https://github.com/conda/ceps/).
+You can read much more about the v1 recipe format in the [https://rattler.build](https://rattler.build) docs and the two CEPs [CEP-0013](https://github.com/conda/ceps/blob/main/cep-0013.md) and [CEP-0014](https://github.com/conda/ceps/blob/main/cep-0014.md). With the new format comes also a new build tool called [`rattler-build`](https://github.com/prefix-dev/rattler-build) which is developed by [`prefix.dev`](https://prefix.dev). It is a reimplementation of conda-build in Rust, on top of the [`rattler`](https://github.com/conda/rattler) libraries.
+
 
 A simple v1 recipe looks something like the following:
 
