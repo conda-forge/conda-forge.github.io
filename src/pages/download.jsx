@@ -23,7 +23,6 @@ export default function Home() {
                     </h2>
                     <p>
                         Miniforge is the preferred conda-forge installer.
-                        It is used by the recommended scripts used for managing projects admitted into conda-forge.
                         Miniforge includes python, conda, mamba, micromamba, pip, and their dependencies.
                         It also configures the primary shell to be conda aware.
                         At present miniforge does not include pixi.
@@ -59,19 +58,21 @@ export default function Home() {
                     </h2>
                     <p>
                         Pixi is also a conda-forge installer.
-                        It is used by the recommended scripts used for managing projects admitted into conda-forge.
                         Pixi replaces conda, mamba, micromamba, pip, and their dependencies, and does not require python.
                         It also configures the primary shell to be conda aware.
                         At present miniforge does not include pixi.
                     </p>
                     <p>
-                        Pixi-build is still under active development including its use as a conda-forge installer.
-                        The conda-forge project will have a pixi.toml file which will describe all the depencencies.
-                        The pixi.toml file may be updated manually or via pixi commands, like <code>pixi add</code>.
-                        The pixi.toml also defines the targets for publication,
-                        conda-forge is one candidate target.
+                        Pixi remains under active development.
+                        As a conda-forge installer pixi is feature complete.
                         Thousands of packages available in the conda-forge distribution and thousands more from pypi.
-                        Isolated managed project environments can be created with <code>pixi init</code>.
+                    </p>
+                    <p>
+                        A pixi project has a pixi.toml file in which its package dependencies are specified.
+                        These packages are available from repositories of which conda-forge is one.
+                        An isolated managed project environment is created with <code>pixi init</code>.
+                        The pixi.toml file may be updated manually.
+                        It may also be upded via pixi commands, using commands like <code>pixi add</code>.
                     </p>
                     <Download />
                     <h3>
@@ -92,6 +93,15 @@ export default function Home() {
                     </h4>
                     <p>
                         Download the Windows installer and run <code>powershell -ExecutionPolicy ByPass -c "irm -useb https://pixi.sh/install.ps1 | iex"</code>.
+                    </p>
+                    <h3>
+                        Publishing (under development)
+                    </h3>
+                    <p>
+                        When developing a conda derived project it is likely that it will need to be published.
+                        The pixi.toml can define targets for publication,
+                        conda-forge is one such target.
+                        When properly configured the package can be published with <code>pixi build</code>.
                     </p>
                 </main>
             </div>
