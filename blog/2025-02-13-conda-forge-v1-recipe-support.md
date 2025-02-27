@@ -15,12 +15,15 @@ The conda-forge team is excited to announce that the v1 recipe format is availab
 The v1 recipe format has a number of benefits:
 
 - It always parses as valid YAML which makes it much easier to modify it with the bot infrastructure of conda-forge. While meta.yaml looks like YAML, it can contain Jinja logic incompatible with the YAML specification, which make significantly complicates parsing and automated manipulation. Additionally, the new recipe format has [a published JSON schema](https://github.com/prefix-dev/recipe-format/blob/main/schema.json) which means that the editing experience in VS Code is greatly improved with contextual help.
-- The new recipe executes much faster, which is partially due to some design decisions (no more recursive evaluation) as well as due to rattler-build building on top of a modern re-implementation of the conda standards in Rust.
-- The log output of rattler-build is greatly improved, always showing the user what the final files in the package are and the final metadata.
+- The new recipe format enables much faster builds due to design decisions that eliminate the need for recursive parsing.
 - Some features of conda-build, such as multiple outputs, had a lot of implicit behavior. We are fixing that in the v1 recipe.
 
-You can read much more about the v1 recipe format in the [https://rattler.build](https://rattler.build) docs and the two CEPs [CEP-0013](https://github.com/conda/ceps/blob/main/cep-0013.md) and [CEP-0014](https://github.com/conda/ceps/blob/main/cep-0014.md). With the new format comes also a new build tool called [`rattler-build`](https://github.com/prefix-dev/rattler-build) which is developed by [`prefix.dev`](https://prefix.dev). It is a reimplementation of conda-build in Rust, on top of the [`rattler`](https://github.com/conda/rattler) libraries.
+conda-forge uses rattler-build as its default build tool for the v1 recipe format. rattler-build currently has some significant benefits:
 
+- rattler-build is built on top of rattler, a modern re-implementation of the conda standards in Rust, enabling extremely fast recipe builds.
+- The log output of rattler-build is greatly improved, always showing the user what the final files in the package are and the final metadata.
+
+You can read much more about the v1 recipe format in the [https://rattler.build](https://rattler.build) docs and the two CEPs [CEP-0013](https://github.com/conda/ceps/blob/main/cep-0013.md) and [CEP-0014](https://github.com/conda/ceps/blob/main/cep-0014.md). With the new format comes also a new build tool called [`rattler-build`](https://github.com/prefix-dev/rattler-build) which is developed by [`prefix.dev`](https://prefix.dev). It is a reimplementation of conda-build in Rust, on top of the [`rattler`](https://github.com/conda/rattler) libraries.
 
 A simple v1 recipe looks something like the following:
 
