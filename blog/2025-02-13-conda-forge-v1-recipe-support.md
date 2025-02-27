@@ -14,7 +14,7 @@ The conda-forge team is excited to announce that the v1 recipe format is availab
 
 The v1 recipe format has a number of benefits:
 
-- It always parses as valid YAML which makes it much easier to modify it with the bot infrastructure of conda-forge. While meta.yaml looks like YAML, it can contain Jinja logic incompatible with the YAML specification, which make significantly complicates parsing and automated manipulation. Additionally, the new recipe format has [a published JSON schema](https://github.com/prefix-dev/recipe-format/blob/main/schema.json) which means that the editing experience in VS Code is greatly improved with contextual help.
+- It always parses as valid YAML which makes it much easier to modify it with the bot infrastructure of conda-forge. While meta.yaml looks like YAML, it can contain Jinja logic that is incompatible with the YAML specification, which significantly complicates parsing and automated manipulation. Additionally, the new recipe format has [a published JSON schema](https://github.com/prefix-dev/recipe-format/blob/main/schema.json) which means that the editing experience in VS Code is greatly improved with contextual help.
 - The new recipe format enables much faster builds due to design decisions that eliminate the need for recursive parsing.
 - Some features of conda-build, such as multiple outputs, had a lot of implicit behavior. We are fixing that in the v1 recipe.
 
