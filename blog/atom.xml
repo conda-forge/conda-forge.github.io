@@ -2,11 +2,63 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/blog/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2024-10-15T00:00:00.000Z</updated>
+    <updated>2025-02-13T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/blog/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Announcing the new recipe format on conda-forge]]></title>
+        <id>https://conda-forge.org/blog/2025/02/13/conda-forge-v1-recipe-support/</id>
+        <link href="https://conda-forge.org/blog/2025/02/13/conda-forge-v1-recipe-support/"/>
+        <updated>2025-02-13T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[The conda-forge team is excited to announce that the v1 recipe format is available on conda-forge. The v1 recipe format is a community initiative dating back over 3 years to improve the recipe format for conda packages. If you are a maintainer of a feedstock on conda-forge, you have probably dealt with meta.yaml files that conda-build utilizes. The file format has some limitations which is why the community has come together to come up with an improved version of the format: the v1 format.]]></summary>
+        <content type="html"><![CDATA[<p>The conda-forge team is excited to announce that the v1 recipe format is available on conda-forge. The v1 recipe format is a community initiative dating back over 3 years to improve the recipe format for conda packages. If you are a maintainer of a feedstock on conda-forge, you have probably dealt with <code>meta.yaml</code> files that conda-build utilizes. The file format has some limitations which is why the community has come together to come up with an improved version of the format: the v1 format.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rattler-build-and-the-v1-spec">rattler-build and the v1 spec<a href="https://conda-forge.org/blog/2025/02/13/conda-forge-v1-recipe-support/#rattler-build-and-the-v1-spec" class="hash-link" aria-label="Direct link to rattler-build and the v1 spec" title="Direct link to rattler-build and the v1 spec">​</a></h2>
+<p>The v1 recipe format has a number of benefits:</p>
+<ul>
+<li>It always parses as valid YAML which makes it much easier to modify it with the bot infrastructure of conda-forge. While meta.yaml looks like YAML, it can contain Jinja logic that is incompatible with the YAML specification, which significantly complicates parsing and automated manipulation. Additionally, the new recipe format has <a href="https://github.com/prefix-dev/recipe-format/blob/main/schema.json" target="_blank" rel="noopener noreferrer">a published JSON schema</a> which means that the editing experience in VS Code is greatly improved with contextual help.</li>
+<li>The new recipe format enables much faster builds due to design decisions that eliminate the need for recursive parsing.</li>
+<li>Some features of conda-build, such as multiple outputs, had a lot of implicit behavior. We are fixing that in the v1 recipe.</li>
+</ul>
+<p>conda-forge uses rattler-build as its default build tool for the v1 recipe format. rattler-build currently has some significant benefits:</p>
+<ul>
+<li>rattler-build is built on top of rattler, a modern re-implementation of the conda standards in Rust, enabling extremely fast recipe builds.</li>
+<li>The log output of rattler-build is greatly improved, always showing the user what the final files in the package are and the final metadata.</li>
+</ul>
+<p>You can read much more about the v1 recipe format in the <a href="https://rattler.build/" target="_blank" rel="noopener noreferrer">https://rattler.build</a> docs and the two CEPs <a href="https://github.com/conda/ceps/blob/main/cep-0013.md" target="_blank" rel="noopener noreferrer">CEP-0013</a> and <a href="https://github.com/conda/ceps/blob/main/cep-0014.md" target="_blank" rel="noopener noreferrer">CEP-0014</a>. With the new format comes also a new build tool called <a href="https://github.com/prefix-dev/rattler-build" target="_blank" rel="noopener noreferrer"><code>rattler-build</code></a> which is developed by <a href="https://prefix.dev/" target="_blank" rel="noopener noreferrer"><code>prefix.dev</code></a>. It is a reimplementation of conda-build in Rust, on top of the <a href="https://github.com/conda/rattler" target="_blank" rel="noopener noreferrer"><code>rattler</code></a> libraries.</p>
+<p>A simple v1 recipe looks something like the following:</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">context</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token comment" style="color:#999988;font-style:italic"># we define named variables in the context instead of `{$ set ... %}` directives</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"23.0.0"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">package</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"boltons"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token comment" style="color:#999988;font-style:italic"># note that we use "GitHub" inspired syntax to access context / Jinja variables</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> $</span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> version </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">source</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">url</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> https</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">//github.com/mahmoud/boltons/archive/refs/tags/$</span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> version </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain">.tar.gz</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">sha256</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> 9b2998cd9525ed472079c7dd90fbd216a887202e8729d5969d4f33878f0ff668</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">build</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">noarch</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> python</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">script</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> python </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">m pip install . </span><span class="token punctuation" style="color:#393A34">-</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">no</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">deps </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">vv</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">requirements</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">host</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> python</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> pip</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> setuptools</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">run</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> pip</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">about</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">license</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> BSD</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">3</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">Clause</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">license_file</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> LICENSE</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-to-use-the-v1-recipe-format-on-conda-forge">How to use the v1 recipe format on conda-forge<a href="https://conda-forge.org/blog/2025/02/13/conda-forge-v1-recipe-support/#how-to-use-the-v1-recipe-format-on-conda-forge" class="hash-link" aria-label="Direct link to How to use the v1 recipe format on conda-forge" title="Direct link to How to use the v1 recipe format on conda-forge">​</a></h2>
+<p>If you are adding a new recipe on staged-recipes, then it's easy: just submit a <code>recipe.yaml</code> file instead of a <code>meta.yaml</code> file.
+In case you already maintain a feedstock, then the conversion can be semi-automated with a tool created by <a href="https://github.com/hadim" target="_blank" rel="noopener noreferrer">Hadrien Mary</a> called <a href="https://github.com/hadim/feedrattler" target="_blank" rel="noopener noreferrer"><code>feedrattler</code></a>. The tool will take care of the basic conversions steps and uses <a href="https://github.com/conda-incubator/conda-recipe-manager" target="_blank" rel="noopener noreferrer"><code>conda-recipe-manager</code></a> by Anaconda / <a href="https://github.com/schuylermartin45" target="_blank" rel="noopener noreferrer">Schuyler Martin</a> under the hood to parse the recipe and convert it to the new format.</p>
+<div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># One liner with Pixi</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">pixi </span><span class="token builtin class-name">exec</span><span class="token plain"> feedrattler my-awesome-package-feedstock gh_user</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># With conda or mamba (as $CONDA)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token variable" style="color:#36acaa">$CONDA</span><span class="token plain"> create </span><span class="token parameter variable" style="color:#36acaa">-n</span><span class="token plain"> feedrattler feedrattler</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token variable" style="color:#36acaa">$CONDA</span><span class="token plain"> activate feedrattler</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">feedrattler my-awesome-package-feedstock gh_user</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>To do the conversion by hand, you need to do the following things:</p>
+<ul>
+<li>In the feedstock's <code>conda-forge.yml</code>, add <code>conda_build_tool: rattler-build</code></li>
+<li>Remove the <code>meta.yaml</code> file and add a <code>recipe.yaml</code> file following the v1 spec</li>
+<li>Rerender the feedstock using <code>conda-smithy rerender</code></li>
+<li>Push your changes to your fork and open a PR to see the CI build your package</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="transition-plans">Transition plans<a href="https://conda-forge.org/blog/2025/02/13/conda-forge-v1-recipe-support/#transition-plans" class="hash-link" aria-label="Direct link to Transition plans" title="Direct link to Transition plans">​</a></h2>
+<p>For the foreseeable future, conda-forge is going to support both formats, v1 and v0. We envision a gradual transition over at least one year to the new spec. There are a couple of places where the v1 spec also needs to finalize / stabilize. One notable place is the <code>cache</code>-based multi-output feature, where CEP discussions are ongoing. This stabilization in the format should happen within Q1 of 2025.</p>
+<p>Since the beginning of 2025, the bot has gained more capabilities for the v1 format, such as automatically bumping versions (the "autotick-bot"). There are a number of other migrators and mini-migrators that need to be fully ported to the v1 spec before we can claim 100% compatibility with the conda-forge infrastructure.</p>
+<p>As of today, over 700 of the 25000 recipes on conda-forge have been converted.</p>
+<p>For now, the recommendation on staged-recipes is: if it's a simple <code>noarch: python</code> recipe, it should probably be a <code>v1</code> recipe. The same goes for <code>Rust</code> or <code>Go</code> projects that have a simple structure.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="where-to-learn-more">Where to learn more<a href="https://conda-forge.org/blog/2025/02/13/conda-forge-v1-recipe-support/#where-to-learn-more" class="hash-link" aria-label="Direct link to Where to learn more" title="Direct link to Where to learn more">​</a></h3>
+<p>There are very helpful docs located at <a href="https://rattler.build/" target="_blank" rel="noopener noreferrer">https://rattler.build</a> that explain the differences of the new recipe format pretty well. You are also very welcome to chat with us on the <a href="https://conda-forge.zulipchat.com/" target="_blank" rel="noopener noreferrer">conda-forge Zulip</a>, or chat with the rattler-build developers on <a href="https://discord.gg/kKV8ZxyzY4" target="_blank" rel="noopener noreferrer">their Discord</a>.</p>
+<p>You can also read more about rattler-build and the v1 format in the following blog posts:</p>
+<ul>
+<li><a href="https://prefix.dev/blog/rattler_build_on_conda_forge" target="_blank" rel="noopener noreferrer">https://prefix.dev/blog/rattler_build_on_conda_forge</a></li>
+<li><a href="https://prefix.dev/blog/the_love_of_building_conda_packages" target="_blank" rel="noopener noreferrer">https://prefix.dev/blog/the_love_of_building_conda_packages</a></li>
+<li><a href="https://prefix.dev/blog/rattler_build_a_new_parser" target="_blank" rel="noopener noreferrer">https://prefix.dev/blog/rattler_build_a_new_parser</a></li>
+</ul>]]></content>
+        <author>
+            <name>Wolf Vollprecht</name>
+            <uri>https://github.com/wolfv</uri>
+        </author>
+        <category label="infrastructure" term="infrastructure"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Noarch variant packages for Python packages on conda-forge]]></title>
         <id>https://conda-forge.org/blog/2024/10/15/python-noarch-variants/</id>
@@ -1835,112 +1887,5 @@ Small Development Grant program.</p>]]></content>
             <uri>https://github.com/marcelotrevisani</uri>
         </author>
         <category label="conda" term="conda"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Google Summer of Code 2020 improved automatic maintenance of conda-forge]]></title>
-        <id>https://conda-forge.org/blog/2020/02/04/gsoc/</id>
-        <link href="https://conda-forge.org/blog/2020/02/04/gsoc/"/>
-        <updated>2020-02-04T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[The conda-forge "autotick" bot is a crucial part of conda-forge's]]></summary>
-        <content type="html"><![CDATA[<p>The <code>conda-forge</code> "autotick" bot is a crucial part of <code>conda-forge</code>'s
-infrastructure. It enables automatic maintenance of <code>conda-forge</code>
-packages by pushing version updates to the underlying software and
-enabling large migrations of packages from one dependency to another
-(e.g., Python 3.7 to Python 3.8). As <code>conda-forge</code> grows in size, with
-over 9,000 packages to date, automatic maintenance of the <code>conda-forge</code>
-ecosystem will become even more important.</p>
-<p>We here at <code>conda-forge</code> have a large number of potential Google Sumer
-of Code projects around maintenance and development of the autotick bot
-infrastructure. These projects are high-impact, affecting the entire
-<code>conda-forge</code> ecosystem. They also cover multiple systems including
-databases, <code>conda</code>'s CDN provider, continuous integration providers,
-and user interactions on GitHub.</p>
-<p>Want to be a part of the team? Great! Take a look at the projects below
-and get in touch with us on GitHub! You can check the <a href="https://github.com/regro/cf-scripts/labels/GSOC" target="_blank" rel="noopener noreferrer">GSoC
-label</a> for a
-detailed listing of the issues that need work.</p>
-<ol>
-<li>
-<p>Maintenance and Refactoring</p>
-<p>We have a large backlog of maintenance and refactoring issues that
-are great for people with a range of experience from beginners to
-true code ninjas.</p>
-<ul>
-<li>
-<p>Integration Testing for the Autotick Bot</p>
-<blockquote>
-<p>Run true integration testing on a copy of the graph to better
-test code changes and improve our CI process.</p>
-<p><strong>Issue</strong>: <a href="https://github.com/regro/cf-scripts/issues/261" target="_blank" rel="noopener noreferrer">regro/cf-scripts261</a></p>
-<p><strong>Experience Level</strong>: advanced</p>
-</blockquote>
-</li>
-<li>
-<p>Work on the "code hardening"
-<a href="https://github.com/regro/cf-scripts/milestone/4" target="_blank" rel="noopener noreferrer">Milestone</a></p>
-<p>Address any of the issues in the milestone above related to code
-refactoring and cleanup.</p>
-<p><strong>Issues</strong>: <a href="https://github.com/regro/cf-scripts/milestone/4" target="_blank" rel="noopener noreferrer">regro/cf-scripts milestone #4</a></p>
-<p><strong>Experience Level</strong>: beginner to advanced</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Automated PRs for Globally Pinned Packages</p>
-<p><code>conda-forge</code> maintains a list of globally pinned packages. These
-are typically dependencies whose version needs to be the same across
-all of <code>conda-forge</code> (e.g., the compiler versions or packages like
-<code>HDF5</code>). While we have infrastructure to run a migration of the
-downstream packages from a given pinned package, we do not have
-automated infrastructure to propose the migration of the pin itself.
-The project here is to add this functionality to our infrastructure.</p>
-<p><strong>Issue</strong>: <a href="https://github.com/regro/cf-scripts/issues/665" target="_blank" rel="noopener noreferrer">regro/cf-scripts#665</a></p>
-<p><strong>Experience Level</strong>: advanced</p>
-</li>
-<li>
-<p>Check the <code>conda</code> CDN for Updated Packages before Issuing PRs in a
-Migration</p>
-<p><code>conda</code> relies on a CDN provider to serve the index of available
-packages. There is a moderate ~30 minute delay between when a
-package is uploaded to <code>anaconda.org</code> and when it will appear in the
-<code>conda</code> index. We currently do not take this delay into account when
-issuing PRs in a migration.</p>
-<p><strong>Issue</strong>: <a href="https://github.com/regro/cf-scripts/issues/595" target="_blank" rel="noopener noreferrer">regro/cf-scripts#595</a></p>
-<p><strong>Experience Level</strong>: beginner</p>
-</li>
-<li>
-<p>Finish Migrations with PR into the <code>conda-forge</code> Pinnings File</p>
-<p>Right now, when the migration of say package <code>ABC</code> to version <code>X</code>
-from version <code>Y</code> is done, we do not automatically merge the change
-in the globally pinned value of <code>ABC</code> into our listing of global
-pinnings. We should be issuing a PR to the pinnings file once we
-have determined that a suitable fraction of the packages effected by
-a migration have been properly rebuilt.</p>
-<p><strong>Issue</strong>: <a href="https://github.com/regro/cf-scripts/issues/595" target="_blank" rel="noopener noreferrer">regro/cf-scripts#595</a></p>
-<p><strong>Experience Level</strong>: moderate</p>
-</li>
-<li>
-<p>Fully Render <code>conda</code> Packages in order to Determine Migration
-Dependencies</p>
-<p>Determining the dependencies of a given package is actually a
-computation expensive task due to the way <code>conda</code> recipes are
-structured and parametrized through the use of <code>Jinja2</code> and
-<code>conda-build-config.yaml</code> files. Currently, the autotick bot
-examines the static metadata in the <code>meta.yaml</code> file and not the
-fully rendered metadata. For this reason, we sometimes miss
-dependencies of a given package that need to be migrated first.
-Addressing this issue involves both calling the rendering process
-and also scaling that process to the entire set of <code>conda-forge</code>
-packages.</p>
-<p><strong>Issue</strong>: <a href="https://github.com/regro/cf-scripts/issues/664" target="_blank" rel="noopener noreferrer">regro/cf-scripts#664</a></p>
-<p><strong>Experience Level</strong>: moderate</p>
-</li>
-</ol>]]></content>
-        <author>
-            <name>Filipe Pires Alvarenga Fernandes</name>
-            <uri>https://github.com/ocefpaf</uri>
-        </author>
-        <category label="autotick-bot" term="autotick-bot"/>
-        <category label="gsoc" term="gsoc"/>
     </entry>
 </feed>
