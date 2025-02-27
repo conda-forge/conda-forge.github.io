@@ -31,21 +31,21 @@ A simple v1 recipe looks something like the following:
 context:
   # we define named variables in the context instead of `{$ set ... %}` directives
   version: "23.0.0"
- 
+
 package:
   name: "boltons"
   # note that we use "GitHub" inspired syntax to access context / Jinja variables
   version: ${{ version }}
- 
+
 source:
   url: https://github.com/mahmoud/boltons/archive/refs/tags/${{ version }}.tar.gz
   sha256: 9b2998cd9525ed472079c7dd90fbd216a887202e8729d5969d4f33878f0ff668
- 
+
 build:
   noarch: python
   script:
     - python -m pip install . --no-deps -vv
- 
+
 requirements:
   host:
     - python
@@ -53,7 +53,7 @@ requirements:
     - setuptools
   run:
     - pip
- 
+
 about:
   license: BSD-3-Clause
   license_file: LICENSE
