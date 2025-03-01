@@ -21,24 +21,24 @@
     "@docusaurus/theme-mermaid": "^3.7.0",
     "@mdx-js/react": "^3.1.0",
     "@stoplight/json-ref-resolver": "^3.1.6",
-    "chart.js": "^4.4.7",
+    "chart.js": "^4.4.8",
     "chartjs-adapter-moment": "^1.0.1",
     "clsx": "^2.1.1",
     "install": "^0.13.0",
     "moment": "^2.29.4",
-    "octokit": "^4.1.1",
+    "octokit": "^4.1.2",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.0.0",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.0.0",
-    "react-inlinesvg": "^4.1.8",
-    "react-markdown": "^9.0.3",
+    "react-inlinesvg": "^4.2.0",
+    "react-markdown": "^10.0.0",
     "react-tooltip": "^5.28.0",
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.5.2",
-    "prettier": "^3.5.1"
+    "prettier": "^3.5.2"
   },
   "browserslist": {
     "production": [
