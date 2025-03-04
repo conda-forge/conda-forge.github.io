@@ -20,7 +20,15 @@ export default function CondaForgeYmlSchema({ toc = null }) {
       },
     })
       .then((response) => response.json())
-      .then((rawSchema) => new Resolver().resolve(rawSchema, {}))
+      .then((rawSchema) => new Resolver({
+        resolvers: {
+          // this resolver will be invoked for refs with the https protocol
+          https: {
+            async resolve(ref) {
+              return fetch(ref).then((response) => response.json())
+            }
+          }
+      }}).resolve(rawSchema, {}))
       .then((resolved) => {
         setSchema(resolved.result);
         setResolved(true);
