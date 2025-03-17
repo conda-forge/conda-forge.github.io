@@ -56,7 +56,7 @@ jobs:
             --exclude 'https://conda-metadata-app.streamlit.app/?$'
             --exclude 'https://kb43fqob7u-dsn.algolia.net/'
             --exclude 'https://ss64.com/nt/syntax.html'
-            --exclude 'https://mesa3d.org/'
+            --exclude 'https://www.mesa3d.org/'
             --exclude '.*/404.html/'
             --exclude '.*,.*'
             --exclude-path './build/community/minutes/'
