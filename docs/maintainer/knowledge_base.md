@@ -1730,7 +1730,7 @@ add some information on r packages which make heavy use of `noarch: generic`
   - A compiled C++ library and its Python bindings:
     - [mamba-feedstock](https://github.com/conda-forge/mamba-feedstock/blob/e13e667edd0e9efb5091444c11307ddb2bd8fa5e/recipe/meta.yaml)
   - A runtime library and its headers:
-    - [cpp-opentelemetry-sdk](https://github.com/conda-forge/cpp-opentelemetry-sdk-feedstock/blob/642a473daf5cfc84598ed7fde1016c243e359e3b/recipe/meta.yaml)
+    - [cpp-opentelemetry-sdk](https://github.com/conda-forge/cpp-opentelemetry-sdk-feedstock/blob/6c9f81074f0343f2fb41a4491e91b7b84e962cc1/recipe/meta.yaml)
   - A dynamic library and a static version:
     - [libarchive](https://github.com/conda-forge/libarchive-feedstock/blob/642a473daf5cfc84598ed7fde1016c243e359e3b/recipe/meta.yaml)
 - Distributing the same project with different sets of dependencies. For example:
