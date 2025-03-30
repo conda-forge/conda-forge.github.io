@@ -68,7 +68,7 @@ function SchemaToc({ schema }) {
       {Object.entries(schema.properties)
         .sort()
         .map(([key, value]) => (
-          <li key={key}>
+          <li key={`toc-${key}`}>
             <a href={`#${key.replaceAll("_", "-")}`} key={key}>
               {(value.deprecated && (
                 <span style={{ textDecoration: "line-through" }}>{key}</span>
@@ -110,7 +110,7 @@ function Setting({ name, value, level = 1, withTypes = true, toc = null }) {
       )}
       {withTypes && <Type value={value} />}
       {value.examples && (
-        <Details summary={Examples} closed>
+        <Details summary={Examples} closed="true">
           <Markdown>{value.examples.join(", ")}</Markdown>
         </Details>
       )}
@@ -128,13 +128,11 @@ function Type({ value }) {
         types.push(<code>dict</code>);
         if (v.title) {
           customTypes.options.push(
-            <Details key={v.title} summary={v.title} closed>
+            <Details key={v.title} summary={v.title} closed="true">
               {Object.entries(v.properties)
                 .sort()
                 .map(([key, value]) => (
-                  <p>
-                    <Setting key={key} name={key} value={value} level={2} />
-                  </p>
+                  <Setting key={`${v.title}-${key}`} name={key} value={value} level={2} />
                 ))}
             </Details>
           );
@@ -194,6 +192,7 @@ function Type({ value }) {
           </>
         ) : null
       )}
+      <p></p>
     </>
   );
 }
