@@ -1728,24 +1728,24 @@ add some information on r packages which make heavy use of `noarch: generic`
 
 - Distributing a project (which share the same source code) in separate artifacts. For example:
   - A compiled C++ library and its Python bindings:
-    - [mamba-feedstock](https://github.com/conda-forge/mamba-feedstock/blob/main/recipe/meta.yaml)
+    - [mamba-feedstock](https://github.com/conda-forge/mamba-feedstock/blob/e13e667edd0e9efb5091444c11307ddb2bd8fa5e/recipe/meta.yaml)
   - A runtime library and its headers:
-    - [cpp-opentelemetry-sdk](https://github.com/conda-forge/cpp-opentelemetry-sdk-feedstock/blob/main/recipe/meta.yaml)
+    - [cpp-opentelemetry-sdk](https://github.com/conda-forge/cpp-opentelemetry-sdk-feedstock/blob/642a473daf5cfc84598ed7fde1016c243e359e3b/recipe/meta.yaml)
   - A dynamic library and a static version:
-    - [libarchive](https://github.com/conda-forge/libarchive-feedstock/blob/main/recipe/meta.yaml)
+    - [libarchive](https://github.com/conda-forge/libarchive-feedstock/blob/642a473daf5cfc84598ed7fde1016c243e359e3b/recipe/meta.yaml)
 - Distributing the same project with different sets of dependencies. For example:
   - The project with the minimal dependencies to run, and a separate output that extends that list:
-    - [geopandas-base and geopandas](https://github.com/conda-forge/geopandas-feedstock/blob/main/recipe/meta.yaml)
-    - [matplotlib-base and matplotlib](https://github.com/conda-forge/matplotlib-feedstock/blob/main/recipe/meta.yaml)
+    - [geopandas-base and geopandas](https://github.com/conda-forge/geopandas-feedstock/blob/d6a3efdf12408f1875f1aa0b7cc2393f877a73e8/recipe/meta.yaml)
+    - [matplotlib-base and matplotlib](https://github.com/conda-forge/matplotlib-feedstock/blob/dc89bb11d502475b7bb71d8600b2eeaff4c185bd/recipe/meta.yaml)
   - CPU vs GPU versions of a package (this can also be done with package variants):
-    - [pytorch-cpu, pytorch-gpu and pytorch](https://github.com/conda-forge/pytorch-cpu-feedstock/blob/main/recipe/meta.yaml)
+    - [pytorch-cpu, pytorch-gpu and pytorch](https://github.com/conda-forge/pytorch-cpu-feedstock/blob/b629af608e13eb180dab698b1e44ac0991ab1135/recipe/meta.yaml)
   - A package with different strictness levels for its dependencies:
-    - [opencv](https://github.com/conda-forge/opencv-feedstock/blob/main/recipe/meta.yaml)
+    - [opencv](https://github.com/conda-forge/opencv-feedstock/blob/850a09ec4e4e1a34e2619c5b937bfdc8ffe8bbbd/recipe/meta.yaml)
 - Distributing the same project under two different names (alias packags). For example:
   - A package that changed names but wants to keep existing users up-to-date:
   - A package that uses dashes and underscores and expects users to use either:
-    - [importlib_metadata and importlib-metadata](https://github.com/conda-forge/importlib_metadata-feedstock/blob/main/recipe/meta.yaml)
-    - [typing_extensions and typing-extensions](https://github.com/conda-forge/typing_extensions-feedstock/blob/main/recipe/meta.yaml)
+    - [importlib_metadata and importlib-metadata](https://github.com/conda-forge/importlib_metadata-feedstock/blob/e4595fd73bba559d248f97896aff89a762073f2a/recipe/meta.yaml)
+    - [typing_extensions and typing-extensions](https://github.com/conda-forge/typing_extensions-feedstock/blob/d9d0d1161d5ded886a272c0e4907f62d9272c7a8/recipe/meta.yaml)
 
 ### Common pitfalls with `outputs`
 
