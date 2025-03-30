@@ -121,7 +121,8 @@ function Setting({ name, value, level = 1, withTypes = true, toc = null }) {
 function Type({ value }) {
   var types = [];
   var customTypes = { options: [] };
-  value.anyOf?.map((v) => {
+  var values = value.anyOf || [value];
+  values.map((v) => {
     if (v.type) {
       if (v.type === "object") {
         types.push(<code>dict</code>);
