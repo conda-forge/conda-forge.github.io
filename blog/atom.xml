@@ -195,7 +195,7 @@ for the hard work in getting the Python 3.13 migration underway.</p>]]></content
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="our-response">Our response<a href="https://conda-forge.org/blog/2024/04/02/xz-backdoor/#our-response" class="hash-link" aria-label="Direct link to Our response" title="Direct link to Our response">​</a></h2>
 <p>We immediately checked which <code>xz</code> artifacts had been published in our channel:</p>
 <ul>
-<li>Our latest build for <code>xz</code> (recipe source available in the <a href="https://github.com/conda-forge/xz-feedstock/blob/main/recipe/meta.yaml" target="_blank" rel="noopener noreferrer"><code>xz-feedstock</code></a>) is for version <code>5.2.9</code> and was uploaded on 2022-12-08. See artifacts in <a href="https://anaconda.org/conda-forge/xz/files" target="_blank" rel="noopener noreferrer">anaconda.org</a>.</li>
+<li>Our latest build for <code>xz</code> (recipe source available in the <a href="https://github.com/conda-forge/xz-feedstock/blob/8b8001268eb4eb7f9dcab4166ba88926e5ed6e91/recipe/meta.yaml" target="_blank" rel="noopener noreferrer"><code>xz-feedstock</code></a>) is for version <code>5.2.9</code> and was uploaded on 2022-12-08. See artifacts in <a href="https://anaconda.org/conda-forge/xz/files" target="_blank" rel="noopener noreferrer">anaconda.org</a>.</li>
 <li>The backdoored versions of <code>xz</code> belong to the <code>5.6.x</code> series.</li>
 </ul>
 <p>We are monitoring the situation develop and will update this announcement accordingly if needed.</p>
