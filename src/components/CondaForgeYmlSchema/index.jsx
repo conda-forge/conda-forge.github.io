@@ -190,7 +190,7 @@ function Type({ value }) {
               With{" "}
               {(key === "options" && <span>{key}</span>) || <code>{key}</code>}:{" "}
             </span>
-            {value}
+            {value.reduce((prev, curr) => [prev, ', ', curr])}
           </>
         ) : null
       )}
