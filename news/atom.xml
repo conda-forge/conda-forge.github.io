@@ -2,16 +2,16 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/news/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2025-04-01T00:00:00.000Z</updated>
+    <updated>2025-04-02T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/news/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Security Incident with Package Uploads]]></title>
-        <id>https://conda-forge.org/news/2025/04/01/Security-Incident-with-Package-Uploads/</id>
-        <link href="https://conda-forge.org/news/2025/04/01/Security-Incident-with-Package-Uploads/"/>
-        <updated>2025-04-01T00:00:00.000Z</updated>
+        <id>https://conda-forge.org/news/2025/04/02/Security-Incident-with-Package-Uploads/</id>
+        <link href="https://conda-forge.org/news/2025/04/02/Security-Incident-with-Package-Uploads/"/>
+        <updated>2025-04-02T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Yesterday, `conda-forge was notified of a security incident reporting that the anaconda.org` upload token]]></summary>
         <content type="html"><![CDATA[<p>Yesterday, <code>conda-forge</code> was notified of a security incident reporting that the <code>anaconda.org</code> upload token
 for the <code>conda-forge</code> channel had been accidentally leaked between on or about 2025-02-10 to 2025-04-01. Our
@@ -19,7 +19,7 @@ investigation resulted in the temporary artifact upload shutdown you observed ye
 of our analysis show that, as best as can reasonably be determined, the token was not used by any 3rd party to
 upload malicious artifacts.</p>
 <p>More details below the fold.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="report-details">Report details<a href="https://conda-forge.org/news/2025/04/01/Security-Incident-with-Package-Uploads/#report-details" class="hash-link" aria-label="Direct link to Report details" title="Direct link to Report details">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="report-details">Report details<a href="https://conda-forge.org/news/2025/04/02/Security-Incident-with-Package-Uploads/#report-details" class="hash-link" aria-label="Direct link to Report details" title="Direct link to Report details">​</a></h2>
 <p>In the past few months, <code>conda-forge</code> has been engaging with an external security audit in collaboration with
 the <a href="https://ostif.org/" target="_blank" rel="noopener noreferrer">Open Source Technology Improvement Fund</a> (OSTIF). The full results of this audit will be
 made public once it is complete per OSTIF responsible disclosure policies.</p>
@@ -35,7 +35,7 @@ have further questions, and please follow our <a href="https://github.com/conda-
 for responsible reporting of vulnerabilities.</p>
 <p><strong>Finally, as a reminder, <code>conda-forge</code> packages are built by strangers on the internet (our wonderful feedstock
 maintainers!) and are not suitable for use cases that require secure software provenance.</strong></p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="response-timeline">Response timeline<a href="https://conda-forge.org/news/2025/04/01/Security-Incident-with-Package-Uploads/#response-timeline" class="hash-link" aria-label="Direct link to Response timeline" title="Direct link to Response timeline">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="response-timeline">Response timeline<a href="https://conda-forge.org/news/2025/04/02/Security-Incident-with-Package-Uploads/#response-timeline" class="hash-link" aria-label="Direct link to Response timeline" title="Direct link to Response timeline">​</a></h2>
 <p>The timeline and details of our response to this security incident are as follows:</p>
 <ul>
 <li>2025-04-01 13:35 UTC: OSTIF and their contractor notified <code>conda-forge</code> of the leaked token.</li>
