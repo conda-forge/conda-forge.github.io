@@ -8,11 +8,11 @@
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[Security Incident with Package Uploads]]></title>
+        <title type="html"><![CDATA[Security Incident with Package Uploads (CVE-2025-31484)]]></title>
         <id>https://conda-forge.org/news/2025/04/02/Security-Incident-with-Package-Uploads/</id>
         <link href="https://conda-forge.org/news/2025/04/02/Security-Incident-with-Package-Uploads/"/>
         <updated>2025-04-02T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Yesterday, `conda-forge was notified of a security incident reporting that the anaconda.org` upload token]]></summary>
+        <summary type="html"><![CDATA[Yesterday, conda-forge was notified of a security incident reporting that the anaconda.org upload token]]></summary>
         <content type="html"><![CDATA[<p>Yesterday, <code>conda-forge</code> was notified of a security incident reporting that the <code>anaconda.org</code> upload token
 for the <code>conda-forge</code> channel had been accidentally leaked between on or about 2025-02-10 to 2025-04-01. Our
 investigation resulted in the temporary artifact upload shutdown you observed yesterday (2025-04-01). The results
@@ -53,8 +53,7 @@ when people commonly engage in practical jokes).</li>
 <li>2025-04-01 21:39 UTC: We deployed a fix to our infrastructure.</li>
 <li>2025-04-01 22:20 UTC: We then deployed a new token to our infrastructure and restarted uploads.</li>
 <li>2025-04-01 23:02 UTC: The status page <a href="https://github.com/conda-forge/status/issues/194" target="_blank" rel="noopener noreferrer">incident</a> was marked as resolved.</li>
-<li>2025-04-02: We published this announcement and the advisory. We requested a CVE from GitHub and will update this
-notice when we get the number.</li>
+<li>2025-04-02: We published this announcement and the advisory. GitHub produced CVE-2025-31484 for us based on our security advisory.</li>
 </ul>]]></content>
     </entry>
     <entry>
