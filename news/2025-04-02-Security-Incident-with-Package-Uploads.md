@@ -1,4 +1,4 @@
-# Security Incident with Package Uploads
+# Security Incident with Package Uploads (CVE-2025-31484)
 
 Yesterday, ``conda-forge`` was notified of a security incident reporting that the ``anaconda.org`` upload token
 for the ``conda-forge`` channel had been accidentally leaked between on or about 2025-02-10 to 2025-04-01. Our
@@ -51,5 +51,4 @@ The timeline and details of our response to this security incident are as follow
 - 2025-04-01 21:39 UTC: We deployed a fix to our infrastructure.
 - 2025-04-01 22:20 UTC: We then deployed a new token to our infrastructure and restarted uploads.
 - 2025-04-01 23:02 UTC: The status page [incident](https://github.com/conda-forge/status/issues/194) was marked as resolved.
-- 2025-04-02: We published this announcement and the advisory. We requested a CVE from GitHub and will update this
-  notice when we get the number.
+- 2025-04-02: We published this announcement and the advisory. GitHub produced CVE-2025-31484 for us based on our security advisory.
