@@ -4,10 +4,60 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/news/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Fri, 22 Nov 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 01 Apr 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Security Incident with Package Uploads]]></title>
+            <link>https://conda-forge.org/news/2025/04/01/Security-Incident-with-Package-Uploads/</link>
+            <guid>https://conda-forge.org/news/2025/04/01/Security-Incident-with-Package-Uploads/</guid>
+            <pubDate>Tue, 01 Apr 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Yesterday, `conda-forge was notified of a security incident reporting that the anaconda.org` upload token]]></description>
+            <content:encoded><![CDATA[<p>Yesterday, <code>conda-forge</code> was notified of a security incident reporting that the <code>anaconda.org</code> upload token
+for the <code>conda-forge</code> channel had been accidentally leaked between on or about 2025-02-10 to 2025-04-01. Our
+investigation resulted in the temporary artifact upload shutdown you observed yesterday (2025-04-01). The results
+of our analysis show that, as best as can reasonably be determined, the token was not used by any 3rd party to
+upload malicious artifacts.</p>
+<p>More details below the fold.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="report-details">Report details<a href="https://conda-forge.org/news/2025/04/01/Security-Incident-with-Package-Uploads/#report-details" class="hash-link" aria-label="Direct link to Report details" title="Direct link to Report details">​</a></h2>
+<p>In the past few months, <code>conda-forge</code> has been engaging with an external security audit in collaboration with
+the <a href="https://ostif.org/" target="_blank" rel="noopener noreferrer">Open Source Technology Improvement Fund</a> (OSTIF). The full results of this audit will be
+made public once it is complete per OSTIF responsible disclosure policies.</p>
+<p>During this process, OSTIF and their contractor uncovered misconfigured infrastructure which exposed the <code>anaconda.org</code>
+token for the <code>conda-forge</code> channel to all feedstock maintainers. The token was exposed from on or about 2025-02-10 through
+2025-04-01. See our <a href="https://github.com/conda-forge/infrastructure/security/advisories/GHSA-m4h2-49xf-vq72" target="_blank" rel="noopener noreferrer">GitHub Security Advisory</a>
+for more details.</p>
+<p>We have requested a CVE from GitHub and will amend this announcement once it is issued. Our response to this
+incident is detailed below, but TL;DR, as best as can reasonably be determined, <strong>no packages were compromised
+during this time</strong>.</p>
+<p>Thank you for using <code>conda-forge</code>, please <a href="https://conda-forge.org/community/getting-in-touch/" target="_blank" rel="noopener noreferrer">contact us</a> if you
+have further questions, and please follow our <a href="https://github.com/conda-forge/conda-forge.github.io/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer">security process</a>
+for responsible reporting of vulnerabilities.</p>
+<p><strong>Finally, as a reminder, <code>conda-forge</code> packages are built by strangers on the internet (our wonderful feedstock
+maintainers!) and are not suitable for use cases that require secure software provenance.</strong></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="response-timeline">Response timeline<a href="https://conda-forge.org/news/2025/04/01/Security-Incident-with-Package-Uploads/#response-timeline" class="hash-link" aria-label="Direct link to Response timeline" title="Direct link to Response timeline">​</a></h2>
+<p>The timeline and details of our response to this security incident are as follows:</p>
+<ul>
+<li>2025-04-01 13:35 UTC: OSTIF and their contractor notified <code>conda-forge</code> of the leaked token.</li>
+<li>2025-04-01 14:00 UTC: The <code>conda-forge/core</code> team acknowledged receipt of the report and
+started conducting the investigation.</li>
+<li>2025-04-01 14:15 UTC: The <code>conda-forge/core</code> team disabled the token and stopped uploads to <code>anaconda.org</code>.</li>
+<li>2025-04-01 14:20 UTC: We posted an <a href="https://github.com/conda-forge/status/issues/194" target="_blank" rel="noopener noreferrer">incident</a>
+to our status page reporting that uploads were temporarily paused.</li>
+<li>2025-04-01 15:19 UTC: We audited all uploads to the <code>conda-forge</code> channel, looking for uploads that
+bypassed our upload staging process. We did not find any. This check is not completely robust, but it
+does indicate that nothing was obviously compromised.</li>
+<li>2025-04-01 15:53 UTC: We decided to delay disclosure by one day to 2025-04-02 in order to not generate
+confusion (2025-04-01 is <a href="https://en.wikipedia.org/wiki/April_Fools%27_Day" target="_blank" rel="noopener noreferrer">April Fools' Day</a> in some countries
+when people commonly engage in practical jokes).</li>
+<li>2025-04-01 21:39 UTC: We deployed a fix to our infrastructure.</li>
+<li>2025-04-01 22:20 UTC: We then deployed a new token to our infrastructure and restarted uploads.</li>
+<li>2025-04-01 23:02 UTC: The status page <a href="https://github.com/conda-forge/status/issues/194" target="_blank" rel="noopener noreferrer">incident</a> was marked as resolved.</li>
+<li>2025-04-02: We published this announcement and the advisory. We requested a CVE from GitHub and will update this
+notice when we get the number.</li>
+</ul>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Updating our default docker images]]></title>
             <link>https://conda-forge.org/news/2024/11/22/new-images/</link>
@@ -467,20 +517,6 @@ to at least 4.8.0 or upgrade your system to at least MacOS 10.13.</p>]]></conten
 platform several times. We have now set a formal deprecation date to be June 30, 2024. This date
 matches the <a href="https://access.redhat.com/articles/4038291" target="_blank" rel="noopener noreferrer">end of extended life-cycle support</a> from
 RedHat for RHEL 6. After this date, we build packages against CentOS 7 by default for <code>linux64</code>.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[conda-forge Google Group is Now Read-only - Move to Discourse]]></title>
-            <link>https://conda-forge.org/news/2023/01/09/conda-forge-google-group-is-now-read-only-move-to-discourse/</link>
-            <guid>https://conda-forge.org/news/2023/01/09/conda-forge-google-group-is-now-read-only-move-to-discourse/</guid>
-            <pubDate>Mon, 09 Jan 2023 00:00:00 GMT</pubDate>
-            <description><![CDATA[We have made the conda-forge Google Group read-only. Please use the new]]></description>
-            <content:encoded><![CDATA[<p>We have made the conda-forge Google Group read-only. Please use the new
-conda-forge <a href="https://conda.discourse.group/c/pkg-building/conda-forge/25" target="_blank" rel="noopener noreferrer">discourse
-forum</a>, our
-<a href="https://gitter.im/conda-forge/conda-forge.github.io" target="_blank" rel="noopener noreferrer">Gitter room</a>, or
-it's <a href="https://app.element.io/#/room/#conda-forge-space:matrix.org" target="_blank" rel="noopener noreferrer">Matrix/Element
-counterpart</a>
-instead.</p>]]></content:encoded>
         </item>
     </channel>
 </rss>
