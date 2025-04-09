@@ -46,7 +46,7 @@ $ curl "https://api.github.com/orgs/conda-forge"
   "followers": 1103,
   "following": 0,
   "html_url": "https://github.com/conda-forge",
-  "created_at": "2015-04-11T07:37:06Z", // <----------------- See here! 
+  "created_at": "2015-04-11T07:37:06Z", // <----------------- See here!
   "updated_at": "2025-03-13T11:32:03Z",
   "archived_at": null,
   "type": "Organization"
