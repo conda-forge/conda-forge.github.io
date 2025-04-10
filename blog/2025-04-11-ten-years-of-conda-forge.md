@@ -11,6 +11,18 @@ Join us in our Zulip instance and share how you got involved with conda-forge, h
 
 To many more years! 🎉
 
+## One billion downloads per month
+
+While there are too many important milestones to name across those 10 years, just
+[a few days ago](https://github.com/conda-forge/by-the-numbers/commit/09eefe47d4cd1c4d9bc29c2ea5f9b07cc9100433),
+we passed 1'000'000'000 monthly downloads across all packages for the first time ever. 🥳 
+
+In total, we have served almost 27 billion downloads, and that's not even counting all
+those that happen behind various institutional caching layers. This tells us that the
+fruits of this community collaboration are having an enormous impact. If you'd like to
+share where conda-forge has saved you hours of work, streamlined your processes,
+or made some ideas possible at all, please also jump in on the zulip link above!
+
 <!-- truncate -->
 
 ## Why today?
@@ -69,4 +81,6 @@ $ curl -s "https://api.anaconda.org/user/conda-forge" | jq
 }
 ```
 
-If you want to learn more about the early history of conda-forge, check this [draft PR](https://github.com/conda-forge/conda-forge.github.io/pull/2298).
+If you want to learn more about the early history of conda-forge, check this [draft PR](https://github.com/conda-forge/conda-forge.github.io/pull/2298),
+where we're in the process of crystallizing the collective memories of many current and prior
+contributors into a cohesive account of the most important events and milestones.
