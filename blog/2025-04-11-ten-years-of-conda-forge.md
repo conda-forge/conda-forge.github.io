@@ -19,7 +19,7 @@ To many more years! 🎉
 
 While there are too many important milestones to name across those 10 years, just [a few days
 ago](https://github.com/conda-forge/by-the-numbers/commit/09eefe47d4cd1c4d9bc29c2ea5f9b07cc9100433),
-we passed 1,000,000,000 monthly downloads across all packages for the first time ever. 🥳 
+we passed 1,000,000,000 monthly downloads across all packages for the first time ever. 🥳
 
 In total, we have served almost 27 billion downloads, and that's not even counting all those that
 happen behind various institutional caching layers. This tells us that the fruits of this community
