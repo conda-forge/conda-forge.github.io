@@ -154,7 +154,7 @@ See the [relevant CUDA user guides](https://github.com/conda-forge/cuda-feedstoc
 
 :::
 
-For context, installing the TensorFlow 2.7.0 CUDA-enabled variant, `tensorflow==2.7.0=cuda*`, results in approximately 2 GB of packages to download while the CPU variant, `tensorflow=2.7.0=cpu*`, results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the CPU only variant!
+For context, installing the TensorFlow 2.7.0 CUDA-enabled variant, `tensorflow=2.7.0=cuda*`, results in approximately 2 GB of packages to download while the CPU variant, `tensorflow=2.7.0=cpu*`, results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the CPU only variant!
 
 <a id="pypy"></a>
 
