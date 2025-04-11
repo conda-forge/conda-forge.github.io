@@ -23,40 +23,47 @@ Travis Oliphant, on [Why I promote conda](https://technicaldiscovery.blogspot.co
 
 Conda packages were not only able to ship pre-compiled Python packages across platforms. They were agnostic enough to ship Python itself, as well as the underlying shared libraries without having to statically vendor them. This was particularly convenient for projects that relied on both compiled dependencies (e.g. C++ or Fortran libraries) and Python "glue code".
 
-By June 2013, conda is using a SAT solver and includes the `conda build` subcommand [^new-advances-in-conda], along with the concept of recipes [^conda-recipes-repo] [^early-conda-build-docs]. This is also when the first Miniconda release and Binstar.org [^binstar], the predecessor of the Anaconda.org channels, are announced. This meant that now any user could build their software stack as conda packages and redistribute them online at no cost.
+By June 2013, conda is using a SAT solver and includes the `conda build` subcommand [^new-advances-in-conda]. This is also when the first Miniconda release and Binstar.org [^binstar], the predecessor of the Anaconda.org channels, are announced. This meant that now any user could build their software stack as conda packages and redistribute them online at no cost.
 
-By 2015, several institutes and groups were using Binstar to distribute software packages they used daily: the [Omnia Molecular Dynamics](https://github.com/omnia-md) project started as early as March 2014 [^binstar-omnia], UK Met Office supported [SciTools project](https://scitools.org.uk/) joined in June 2014 [^binstar-scitools], the [US Integrated Ocean Observing System (IOOS)](http://www.ioos.noaa.gov/) started using it in July 2014 [^binstar-ioos]. The channel for conda-forge was not created until April 2015 [^binstar-conda-forge], and [Bioconda](https://anaconda.org/bioconda) waited until September of the same year.
+With `conda build` came along the concept of recipes [^early-conda-build-docs]. The [`ContinuumIO/conda-recipes`](https://github.com/conda-archive/conda-recipes) repository was _the_
+place where people would contribute their conda recipes. It was really successful, but the recipes were of various quality, and typically only worked on one or two platforms. There was a high chance that a recipe you found there would no longer build, and you had to tweak it to get it to work.
 
 In 2015, Binstar.org became Anaconda.org, and in 2017 Continuum Analytics rebranded as Anaconda Inc [^anaconda-rebrand].
 
 ## How conda-forge came to be
 
-In 2014, Filipe Fernandes ([@ocefpaf](https://github.com/ocefpaf)) and Phil Elson ([@pelson](https://github.com/pelson)) get in touch [^chatting-ocefpaf]. They are maintaining the Binstar channels for IOOS and Scitools, respectively.
+By 2015, several institutes and groups were using Binstar/Anaconda.org to distribute software packages they used daily: the [Omnia Molecular Dynamics](https://github.com/omnia-md) project started as early as March 2014 [^binstar-omnia], UK Met Office supported [SciTools project](https://scitools.org.uk/) joined in June 2014 [^binstar-scitools], the [US Integrated Ocean Observing System (IOOS)](http://www.ioos.noaa.gov/) started using it in July 2014 [^binstar-ioos].
+
+In 2014, Filipe Fernandes ([@ocefpaf](https://github.com/ocefpaf)) and Phil Elson ([@pelson](https://github.com/pelson)) are maintaining the Binstar channels for IOOS and SciTools, respectively. Phil had implemented CI pipelines and [special tooling](https://github.com/conda-tools/conda-build-all) to build conda packages for SciTools efficiently, and Filipe borrowed it for IOOS. There was also a healthy exchange of recipes between the two groups. It was a successful collaborative effort, but it was inefficient since they were working in separate repos, duplicated recipes, etc.
+
+Given the success of the `ContinuumIO/conda-recipes` repository, it was obvious there was a demand for high quality conda recipes and more efficient collaboration under a single umbrella. On April 11th, 2015, `conda-forge` is registered as a Github organization [^github-api-conda-forge] and an Anaconda.org channel [^binstar-conda-forge].
+
 
 <!-- to be continued -->
 
 ## References
 
-[^cgohlke]: https://www.cgohlke.com/, 2025.
-[^cgohlke-shutdown]: [What to do when Gohlke's python wheel service shuts down?](https://stackoverflow.com/questions/72581592/what-to-do-when-gohlkes-python-wheel-service-shuts-down), 2022.
+[^activepython]: https://www.activestate.com/platform/supported-languages/python/
 [^anaconda-history]: [The Early History of the Anaconda Distribution](http://ilan.schnell-web.net/prog/anaconda-history/), Ilan Schnell, 2018.
-[^lex-fridman-podcast]: [Travis Oliphant: NumPy, SciPy, Anaconda, Python & Scientific Programming](https://www.youtube.com/watch?v=gFEE3w7F0ww&t=7596s), Lex Fridman Podcast #224, 2022.
-[^conda-changelog-1.0]: [`conda` 1.0 release notes](https://github.com/conda/conda/blob/24.7.1/CHANGELOG.md#100-2012-09-06), 2012.
-[^early-conda-build-docs]: [Conda build framework documentation](https://web.archive.org/web/20141006141927/http://conda.pydata.org/docs/build.html), 2014.
-[^conda-recipes-repo]: [ContinuumIO/conda-recipes](https://github.com/conda-archive/conda-recipes)
-[^packaging-and-deployment-with-conda]: [Packaging and deployment with conda](https://speakerdeck.com/teoliphant/packaging-and-deployment-with-conda), Travis Oliphant, 2013.
-[^new-advances-in-conda]: [New Advances in Conda](https://web.archive.org/web/20140331190645/http://continuum.io/blog/new-advances-in-conda), Ilan Schnell, 2013.
-[^binstar-scitools]: https://anaconda.org/scitools, 2014.
+[^anaconda-rebrand]: https://www.anaconda.com/blog/continuum-analytics-officially-becomes-anaconda, 2017.
+[^binstar-conda-forge]: https://anaconda.org/conda-forge, 2015.
 [^binstar-ioos]: https://anaconda.org/ioos, 2014.
 [^binstar-omnia]: https://anaconda.org/omnia, 2014.
-[^binstar-conda-forge]: https://anaconda.org/conda-forge, 2015.
-[^chatting-ocefpaf]: [Filipe Fernandes on the Evolution of conda-forge](https://www.youtube.com/watch?v=U2oa_RLbTVA), Chatting with the Conda Community #1, 2024.
-[^wheels]: [PEP 427 – The Wheel Binary Package Format 1.0](https://peps.python.org/pep-0427/)
-[^eggs]: [The Internal Structure of Python Eggs](https://setuptools.pypa.io/en/latest/deprecated/python_eggs.html).
-[^legacy-python-downloads]: [Download Python for Windows (legacy docs)](https://legacy.python.org/download/windows/).
-[^pythonxy]: https://python-xy.github.io/, 2015.
-[^activepython]: https://www.activestate.com/platform/supported-languages/python/
-[^enthought]: https://docs.enthought.com/canopy/
-[^anaconda-rebrand]: https://www.anaconda.com/blog/continuum-analytics-officially-becomes-anaconda, 2017.
-[^technical-discovery]: https://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html, 2013.
+[^binstar-scitools]: https://anaconda.org/scitools, 2014.
 [^binstar]: [SciPy 2013 Lightning Talks, Thu June 27](https://youtu.be/ywHqIEv3xXg?list=PLYx7XA2nY5GeTWcUQTbXVdllyp-Ie3r-y&t=850).
+[^cgohlke-shutdown]: [What to do when Gohlke's python wheel service shuts down?](https://stackoverflow.com/questions/72581592/what-to-do-when-gohlkes-python-wheel-service-shuts-down), 2022.
+[^cgohlke]: https://www.cgohlke.com/, 2025.
+[^chatting-ocefpaf]: [Filipe Fernandes on the Evolution of conda-forge](https://www.youtube.com/watch?v=U2oa_RLbTVA), Chatting with the Conda Community #1, 2024.
+[^conda-changelog-1.0]: [`conda` 1.0 release notes](https://github.com/conda/conda/blob/24.7.1/CHANGELOG.md#100-2012-09-06), 2012.
+[^conda-recipes-repo]: [ContinuumIO/conda-recipes](https://github.com/conda-archive/conda-recipes)
+[^early-conda-build-docs]: [Conda build framework documentation](https://web.archive.org/web/20141006141927/http://conda.pydata.org/docs/build.html), 2014.
+[^eggs]: [The Internal Structure of Python Eggs](https://setuptools.pypa.io/en/latest/deprecated/python_eggs.html).
+[^enthought]: https://docs.enthought.com/canopy/
+[^github-api-conda-forge]: https://api.github.com/orgs/conda-forge
+[^legacy-python-downloads]: [Download Python for Windows (legacy docs)](https://legacy.python.org/download/windows/).
+[^lex-fridman-podcast]: [Travis Oliphant: NumPy, SciPy, Anaconda, Python & Scientific Programming](https://www.youtube.com/watch?v=gFEE3w7F0ww&t=7596s), Lex Fridman Podcast #224, 2022.
+[^new-advances-in-conda]: [New Advances in Conda](https://web.archive.org/web/20140331190645/http://continuum.io/blog/new-advances-in-conda), Ilan Schnell, 2013.
+[^packaging-and-deployment-with-conda]: [Packaging and deployment with conda](https://speakerdeck.com/teoliphant/packaging-and-deployment-with-conda), Travis Oliphant, 2013.
+[^pythonxy]: https://python-xy.github.io/, 2015.
+[^technical-discovery]: https://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html, 2013.
+[^wheels]: [PEP 427 – The Wheel Binary Package Format 1.0](https://peps.python.org/pep-0427/)
