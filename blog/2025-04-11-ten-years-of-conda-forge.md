@@ -7,7 +7,7 @@ authors:
 
 Today, 2025-04-11, marks the 10th anniversary of the conda-forge community.
 
-Join us in our Zulip instance and share how you got involved with conda-forge, how this community
+Join us in [this Zulip thread](https://conda-forge.zulipchat.com/#narrow/channel/457337-general/topic/10.20years.20of.20conda-forge/with/511579313) and share how you got involved with conda-forge, how this community
 has helped you, or just to show appreciation to the thousands of volunteers that make this effort
 possible!
 
@@ -25,7 +25,7 @@ In total, we have served almost 27 billion downloads, and that's not even counti
 happen behind various institutional caching layers. This tells us that the fruits of this community
 collaboration are having an enormous impact. If you'd like to share where conda-forge has saved you
 hours of work, streamlined your processes, or made some ideas possible at all, please also jump in
-on the zulip link above!
+on the Zulip link above!
 
 ## Why today?
 
