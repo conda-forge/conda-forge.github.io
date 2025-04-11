@@ -8,11 +8,11 @@ conda-forge's origins are best understood in the context of Python packaging bac
 
 Python 2.x was the norm. To install it, you'd get the official installers from Python.org, use the system-provided interpreter in Linux, or resort to options like Python(x,y) [^pythonxy], ActiveState ActivePython [^activepython] or Enthought's distributions [^enthought] in macOS and Windows [^legacy-python-downloads].
 
-If you wanted to install additional packages, the community was transitioning from `easy_install` to `pip`, and there was no easy way to ship or install pre-compiled Python packages. An alternative to Python eggs [^eggs] wouldn't emerge until 2013 with the formalization of wheels [^wheels]. These were useful for Windows, where Christoph Gohlke's wheels [^cgohlke]<sup>,</sup>[^cgohlke-shutdown] were your only choice.
+If you wanted to install additional packages, the community was transitioning from `easy_install` to `pip`, and there was no easy way to ship or install pre-compiled Python packages. An alternative to Python eggs [^eggs] wouldn't emerge until 2013 with the formalization of wheels [^wheels]. These were useful for Windows, where Christoph Gohlke's exes and wheels [^cgohlke]<sup>,</sup>[^cgohlke-shutdown] were your only choice.
 
-However, for Linux, you would have to wait until 2016, when `manylinux` wheels were introduced. Before then, PyPI wouldn't even allow compiled Linux wheels and your only alternative was to compile every package from source.
+However, for Linux, you would have to wait until 2016, when [`manylinux` wheels were introduced](https://peps.python.org/pep-0513/). Before then, PyPI wouldn't even allow compiled Linux wheels and your only alternative was to compile every package from source.
 
-As an example, take a look at the [PyPI download page for `numpy` 1.7.0](https://pypi.org/project/numpy/1.7.0/#files), released in Feb 2013. The build distributions section only shows a few `.exe` files for Windows (!), and some `manylinux1` wheels. However, the `manylinux1` wheels were not uploaded until April 2016. There was no mention whatsoever of macOS. Now compare it to [`numpy` 1.11.0](https://pypi.org/project/numpy/1.11.0/#files), released in March 2016: wheels for all platforms!
+As an example, take a look at the [PyPI download page for `numpy` 1.7.0](https://pypi.org/project/numpy/1.7.0/#files), released in Feb 2013. The "Built Distributions" section only shows a few `.exe` files for Windows (!), and some `manylinux1` wheels. However, the `manylinux1` wheels were not uploaded until April 2016. There was no mention whatsoever of macOS. Now compare it to [`numpy` 1.11.0](https://pypi.org/project/numpy/1.11.0/#files), released in March 2016: wheels for all platforms!
 
 ## The origins of `conda`
 
