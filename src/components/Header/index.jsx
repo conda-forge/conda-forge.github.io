@@ -11,8 +11,8 @@ export default function Header() {
                 <ThemedImage
                     alt="3D-Anvil illustration for conda-forge"
                     sources={{
-                        light: useBaseUrl("/img/anvil-light.svg"),
-                        dark: useBaseUrl("/img/anvil-dark.svg"),
+                        light: useBaseUrl("/img/anvil-light-10.svg"),
+                        dark: useBaseUrl("/img/anvil-dark-10.svg"),
                     }}
                 />
             </div>
