@@ -15,9 +15,13 @@ Before then, there was no easy way to ship pre-compiled Python packages: you wou
 
 ## The origins of `conda`
 
-In 2012, Continuum Analytics announces Anaconda 0.8 in the SciPy conference [^anaconda-history]. Later that year, in September, Continuum would release `conda` 1.0, the cross-platform, language-agnostic package manager for pre-compiled artifacts [^conda-changelog-1.0]. The motivation behind these efforts was to provide an easy way to ship all the compiled libraries and Python packages that users of the SciPy and numpy stacks needed [^packaging-and-deployment-with-conda] [^lex-fridman-podcast].
+In 2012, Continuum Analytics announces Anaconda 0.8 in the SciPy conference [^anaconda-history]. Later that year, in September, Continuum would release `conda` 1.0, the cross-platform, language-agnostic package manager for pre-compiled artifacts [^conda-changelog-1.0]. The motivation behind these efforts was to provide an easy way to ship all the compiled libraries and Python packages that users of the SciPy and numpy stacks neede [^packaging-and-deployment-with-conda]<sup>,</sup>[^lex-fridman-podcast]:
 
-Conda packages were not only able to ship pre-compiled Python packages across platforms. They were agnostic enough to ship Python itself, as well as the underlying shared libraries without having to statically vendor them under each Python package. This was particularly convenient for projects that relied on both compiled dependencies (e.g. C++ or Fortran libraries) and Python "glue code".
+Travis Oliphant, on [Why I promote conda](https://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html) (2013):
+
+> [...] at the first PyData meetup at Google HQ, where several of us asked Guido what we can do to fix Python packaging for the NumPy stack. Guido's answer was to "solve the problem ourselves". We at Continuum took him at his word. We looked at dpkg, rpm, pip/virtualenv, brew, nixos, and 0installer, and used our past experience with EPD. We thought hard about the fundamental issues, and created the conda package manager and conda environments.
+
+Conda packages were not only able to ship pre-compiled Python packages across platforms. They were agnostic enough to ship Python itself, as well as the underlying shared libraries without having to statically vendor them. This was particularly convenient for projects that relied on both compiled dependencies (e.g. C++ or Fortran libraries) and Python "glue code".
 
 By June 2013, conda is using a SAT solver and includes the `conda build` subcommand [^new-advances-in-conda], along with the concept of recipes [^conda-recipes-repo] [^early-conda-build-docs]. This is also when the first Miniconda release is announced. By the end of the year, Continuum Analytics announces Binstar.org, the predecessor of the Anaconda.org channels. This meant that now any user could build their software stack as conda packages and redistribute them online at no cost.
 
@@ -54,3 +58,4 @@ In 2014, Filipe Fernandes ([@ocefpaf](https://github.com/ocefpaf)) and Phil Elso
 [^activepython]: https://www.activestate.com/platform/supported-languages/python/
 [^enthought]: https://docs.enthought.com/canopy/
 [^anaconda-rebrand]: https://www.anaconda.com/blog/continuum-analytics-officially-becomes-anaconda, 2017.
+[^technical-discovery]: https://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html, 2013.
