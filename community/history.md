@@ -23,7 +23,7 @@ By June 2013, conda is using a SAT solver and includes the `conda build` subcomm
 
 By 2015, several institutes and groups were using Binstar to distribute software packages they used daily: the [Omnia Molecular Dynamics](https://github.com/omnia-md) project started as early as March 2014 [^binstar-omnia], UK's [Scitools](https://scitools.org.uk/) joined in June 2014 [^binstar-scitools], the [US Integrated Ocean Observing System (IOOS)](http://www.ioos.noaa.gov/) started using it in July 2014 [^binstar-ioos]. The channel for conda-forge was not created until April 2015 [^binstar-conda-forge], and [Bioconda](https://anaconda.org/bioconda) waited until September of the same year.
 
-In 2015, Continuum Analytics rebranded as Anaconda Inc, and Binstar.org became Anaconda.org.
+In 2015, Binstar.org became Anaconda.org, and in 2017 Continuum Analytics rebranded as Anaconda Inc [^anaconda-rebrand].
 
 ## How conda-forge came to be
 
@@ -53,3 +53,4 @@ In 2014, Filipe Fernandes ([@ocefpaf](https://github.com/ocefpaf)) and Phil Elso
 [^pythonxy]: https://python-xy.github.io/, 2015.
 [^activepython]: https://www.activestate.com/platform/supported-languages/python/
 [^enthought]: https://docs.enthought.com/canopy/
+[^anaconda-rebrand]: https://www.anaconda.com/blog/continuum-analytics-officially-becomes-anaconda, 2017.
