@@ -8,10 +8,11 @@ conda-forge's origins cannot be explained without understanding the context of P
 
 Python 2.x was the norm. To install it, you'd get the official installers from Python.org, stick to the system provided one in Linux, or resort to options like Python(x,y) [^pythonxy], ActiveState ActivePython [^activepython] or Enthought's distributions [^enthought] in macOS and Windows [^legacy-python-downloads].
 
-If you wanted to install additional packages, you would find that the community was transitioning from `easy_install` to `pip`, and there wouldn't be an alternative for Python eggs [^eggs] until 2013, when wheels are formalized [^wheels].
-Realistically, you would have to wait until 2016, when `manylinux` wheels were introduced. For Windows, 
+If you wanted to install additional packages, you would find that the community was transitioning from `easy_install` to `pip`, and there was no easy way to ship or install pre-compiled Python packages. There wouldn't be an alternative for Python eggs [^eggs] until 2013, when wheels are formalized [^wheels]. These were useful for Windows, where Christoph Gohlke's wheels [^cgohlke]<sup>,</sup>[^cgohlke-shutdown] were your only choice.
 
-Before then, there was no easy way to ship pre-compiled Python packages: you would need to compile from source. If you were on Windows, Christoph Gohlke's wheels [^cgohlke]<sup>,</sup>[^cgohlke-shutdown] were your only choice.
+However, for Linux, you would have to wait until 2016, when `manylinux` wheels were introduced. Before then PyPI wouldn't even allow compiled Linux wheels and your only alternative was to compile every package from source.
+
+As an example, take a look at the [PyPI download page for `numpy` 1.7.0](https://pypi.org/project/numpy/1.7.0/#files), released in Feb 2013. The build distributions section only shows a few `.exe` files for Windows (!), and some `manylinux1` wheels. But if you pay attention, the `manylinux1` wheels were not uploaded until Apr 2016. No mention whatsoever of macOS. Now compare it to [`numpy` 1.11.0](https://pypi.org/project/numpy/1.11.0/#files), released in March 2016: wheels for all platforms!
 
 ## The origins of `conda`
 
@@ -37,7 +38,6 @@ By 2015, several institutes and groups were using Binstar/Anaconda.org to distri
 In 2014, Filipe Fernandes ([@ocefpaf](https://github.com/ocefpaf)) and Phil Elson ([@pelson](https://github.com/pelson)) are maintaining the Binstar channels for IOOS and SciTools, respectively. Phil had implemented CI pipelines and [special tooling](https://github.com/conda-tools/conda-build-all) to build conda packages for SciTools efficiently, and Filipe borrowed it for IOOS. There was also a healthy exchange of recipes between the two groups. It was a successful collaborative effort, but it was inefficient since they were working in separate repos, duplicated recipes, etc.
 
 Given the success of the `ContinuumIO/conda-recipes` repository, it was obvious there was a demand for high quality conda recipes and more efficient collaboration under a single umbrella. On April 11th, 2015, `conda-forge` is registered as a Github organization [^github-api-conda-forge] and an Anaconda.org channel [^binstar-conda-forge].
-
 
 <!-- to be continued -->
 
