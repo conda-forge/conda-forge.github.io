@@ -23,7 +23,7 @@ Travis Oliphant, on [Why I promote conda](https://technicaldiscovery.blogspot.co
 
 Conda packages were not only able to ship pre-compiled Python packages across platforms. They were agnostic enough to ship Python itself, as well as the underlying shared libraries without having to statically vendor them. This was particularly convenient for projects that relied on both compiled dependencies (e.g. C++ or Fortran libraries) and Python "glue code".
 
-By June 2013, conda is using a SAT solver and includes the `conda build` subcommand [^new-advances-in-conda], along with the concept of recipes [^conda-recipes-repo] [^early-conda-build-docs]. This is also when the first Miniconda release is announced. By the end of the year, Continuum Analytics announces Binstar.org, the predecessor of the Anaconda.org channels. This meant that now any user could build their software stack as conda packages and redistribute them online at no cost.
+By June 2013, conda is using a SAT solver and includes the `conda build` subcommand [^new-advances-in-conda], along with the concept of recipes [^conda-recipes-repo] [^early-conda-build-docs]. This is also when the first Miniconda release and Binstar.org [^binstar], the predecessor of the Anaconda.org channels, are announced. This meant that now any user could build their software stack as conda packages and redistribute them online at no cost.
 
 By 2015, several institutes and groups were using Binstar to distribute software packages they used daily: the [Omnia Molecular Dynamics](https://github.com/omnia-md) project started as early as March 2014 [^binstar-omnia], UK Met Office supported [SciTools project](https://scitools.org.uk/) joined in June 2014 [^binstar-scitools], the [US Integrated Ocean Observing System (IOOS)](http://www.ioos.noaa.gov/) started using it in July 2014 [^binstar-ioos]. The channel for conda-forge was not created until April 2015 [^binstar-conda-forge], and [Bioconda](https://anaconda.org/bioconda) waited until September of the same year.
 
@@ -59,3 +59,4 @@ In 2014, Filipe Fernandes ([@ocefpaf](https://github.com/ocefpaf)) and Phil Elso
 [^enthought]: https://docs.enthought.com/canopy/
 [^anaconda-rebrand]: https://www.anaconda.com/blog/continuum-analytics-officially-becomes-anaconda, 2017.
 [^technical-discovery]: https://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html, 2013.
+[^binstar]: [SciPy 2013 Lightning Talks, Thu June 27](https://youtu.be/ywHqIEv3xXg?list=PLYx7XA2nY5GeTWcUQTbXVdllyp-Ie3r-y&t=850).
