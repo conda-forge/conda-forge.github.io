@@ -1,7 +1,7 @@
 exclude: ^community/minutes/|^misc/|^scripts/|^static/|^vote-results/|^CNAME$
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-yaml
       - id: end-of-file-fixer
@@ -15,8 +15,16 @@ repos:
       - id: prettier
         types_or: [markdown, mdx, json, yaml, css, javascript]
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.4
+    rev: v0.11.4
     hooks:
       - id: ruff-format
+  - repo: local
+    hooks:
+      - id: sort-csv
+        name: Sort core and emeritus lists
+        entry: scripts/sort_csv.py
+        language: python
+        types: [text]
+        files: src/(core|emeritus)\.csv
 ci:
   autofix_prs: false

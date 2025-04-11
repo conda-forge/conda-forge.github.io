@@ -22,7 +22,7 @@ You can [search](https://anaconda.org/) for packages online. Look out for packag
 
 ## Why conda-forge?
 
-The packaging team from [Anaconda, Inc.](https://anaconda.org/), packages a multitude of packages and provides them to all users free of charge in their `defaults` channel.
+The packaging team from [Anaconda, Inc.](https://anaconda.org/) provides a multitude of packages on their `defaults` channel.
 
 But what if a package you are looking for is not in the `defaults` channel?
 In the past users only had the option to create an [Anaconda Cloud](https://anaconda.org/) account and create their own channel.
@@ -44,7 +44,7 @@ conda-forge is a community effort that tackles these issues:
 - Many packages are updated by multiple maintainers with an easy option to become a maintainer.
 - An active core developer team is trying to also maintain abandoned packages.
 
-You can refer to the glossary [Glossary](../glossary.md).
+You can refer to the [Glossary](../glossary.md).
 
 <a id="how-to-install"></a>
 
@@ -54,16 +54,16 @@ You can refer to the glossary [Glossary](../glossary.md).
 
 Using conda-forge is easy!
 
-- Make sure you have `conda >=4.9`.
+- Make sure you have `conda >=4.9`:
   ```bash
   conda --version
   conda update conda
   ```
-- Add conda-forge as the highest priority channel.
+- Add conda-forge as the highest priority channel:
   ```bash
   conda config --add channels conda-forge
   ```
-- Activate `strict` channel priority (`strict` will be activated by default in conda 5.0).
+- Activate `strict` channel priority (`strict` will be activated by default in conda 5.0):
   ```bash
   conda config --set channel_priority strict
   ```

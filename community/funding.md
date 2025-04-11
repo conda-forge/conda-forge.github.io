@@ -4,9 +4,19 @@ title: 'Funding'
 
 # Funding efforts
 
-<!-- Fundable efforts -->
-<!-- ---------------- -->
-<!-- Please check this repository for more details (WIP). -->
+If you want to fund some work in conda-forge, please check our list of "fundable items".
+These issues are marked with the `fundable` label and can be found across all the conda-forge repositories.
+
+The quickest way to find them is to use this [Github issue search for `org:conda-forge label:fundable`](https://github.com/search?q=label%3Afundable+org%3Aconda-forge+&ref=opensearch&type=issues).
+
+If you want to propose a new fundable item for a particular part of the project, find the relevant repository and fill up the "Fundable" template. If you are not sure of which repository is the most adequate, default to [`conda-forge/conda-forge.github.io`](https://github.com/conda-forge/conda-forge.github.io/issues/new/choose).
+
+conda-forge can also be found in [OpenCollective](https://opencollective.com/conda-forge), where
+you can:
+
+- Browse current and past [transactions](https://opencollective.com/conda-forge/transactions)
+- Subscribe with [recurring contributions](https://opencollective.com/conda-forge/contribute/backer-30154/checkout?interval=month&amount=5)
+- Make [one-time donations](https://opencollective.com/conda-forge/donate?interval=oneTime&amount=20&name=&legalName=&email=)
 
 <a id="current-and-past-funding-efforts"></a>
 
@@ -16,8 +26,7 @@ For the sake of transparency, we have made available letters of intent, applicat
 
 ### Submitted but not yet decided
 
-- 2023 - [CZI EOSS](https://chanzuckerberg.com/eoss/) Funding Cycle 6: Next-gen conda-build recipe format and tooling, submitted by Prefix & Quansight
-  - [Letter of intent](pathname:///_static/czi-eoss-6-loi-build-tools.pdf).
+> Nothing to report so far.
 
 ### Successfully funded
 
@@ -38,6 +47,8 @@ For the sake of transparency, we have made available letters of intent, applicat
 
 ### Submitted and not funded
 
+- 2023 - [CZI EOSS](https://chanzuckerberg.com/eoss/) Funding Cycle 6: Next-gen conda-build recipe format and tooling, submitted by Prefix & Quansight
+  - [Letter of intent](pathname:///_static/czi-eoss-6-loi-build-tools.pdf).
 - 2023 - Google Season of Docs: [Restructuring the conda-forge documentation](funding/gsod-2023.md)
 - 2022 - [CZI EOSS](https://chanzuckerberg.com/eoss/) Funding Cycle 5: Adding a WebAssembly Toolchain to conda-forge, submitted by QuantStack
   - [Letter of intent](pathname:///_static/czi-eoss-5-loi-wasm.pdf).

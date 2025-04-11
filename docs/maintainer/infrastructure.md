@@ -38,7 +38,7 @@ The YAML files included in `.ci_support` are minimal and not rendered like the o
 Instead, conda-build will take these and combine them with the pinnings from `conda-forge-pinning` at runtime.
 Also note that `staged-recipes` only builds for x64. Support for additional architectures can only be done once a feedstock has been provided.
 
-- Linux: `linux64.yaml` plus the CUDA (10.2, 11.0, 11.1 and 11.2) variants.
+- Linux: `linux64.yaml` plus the CUDA variants.
 - macOS: `osx64.yaml`.
 - Windows `win64.yaml`.
 
@@ -55,8 +55,7 @@ The actual creation of the feedstock is run in [conda-forge/admin-requests](#adm
 Additional workflows help users set up their recipes correctly. They react to events in PRs:
 
 - [`automate-review-labels`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/automate-review-labels.yml): Updates PR labels to streamline reviews and requests for help.
-- [`correct_directory`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/correct_directory.yml): Posts a PR comment if `meta.yaml` and friends were not added in a `recipes/` subdirectory.
-- [`do_not_edit_example`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/do_not_edit_example.yml): Posts a PR comment if the `recipes/example/` recipe was edited.
+- [`linter`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/linter.yml): General recipe linting plus some staged-recipes specific checks, like not editing the examples.
 
 External services connect to `staged-recipes` too:
 
@@ -373,6 +372,23 @@ that adds the given user to the feedstock. A maintainer or member of `core` can 
 this PR to add the user. Please do not modify this PR or adjust the commit message. This
 PR is designed to skip building the package.
 
+:::note[Using this command]
+
+This is not the recommended way to start to help with a feedstock.
+If you are interested in helping with a particular recipe, it is better to start by
+submitting a PR with a new version or a fix. This way, you can get feedback on your
+work and learn about some of the historical context of the feedstock.
+
+Once you have established a working relationship with the maintainers, you can ask
+them to add you to the feedstock team. They can then use this command
+to add you to the team. There isn't any official requirement for how to add new
+maintainers so it may take a while for consensus to be reached
+on when to add new maintainers. Do not let this discourage you from contributing!
+
+PRs are free to be opened by anyone!!! Thank you for your time and effort!!!
+
+:::
+
 ### @conda-forge-admin, please update version
 
 Entering the above phrase in the title of an issue on a feedstock will request the bot
@@ -424,24 +440,24 @@ via a pull request.
 We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on
 GitHub Actions.
 
+#### Webservices Background Jobs
+
+The webservices Heroku app dispatches to GitHub Actions to run compute-intensive background jobs, including rerendering, version updates,
+and automerge jobs. The GitHub actions runs happen on the [conda-forge-webservices repo](https://github.com/conda-forge/conda-forge-webservices).
+These runs use the [webservices-dispatch-action Docker container](https://hub.docker.com/r/condaforge/webservices-dispatch-action) for some
+operations. This container is tagged with the latest webservices version.
+
 #### Automerge
 
-The automerge service uses the GitHub action in this [repo](https://github.com/conda-forge/automerge-action). This action runs out of a
-Docker [container](https://hub.docker.com/repository/docker/condaforge/automerge-action) on the `prod` tag. See the
-repo [README.md](https://github.com/conda-forge/automerge-action#) for more details. PRs are automatically merged if they satisfy either
-of the two following sets of conditions:
+Our automerge service runs via GitHub Actions in the [conda-forge-webservices repo](https://github.com/conda-forge/conda-forge-webservices).
+
+PRs are automatically merged if they satisfy either of the two following sets of conditions:
 
 1. are from the `regro-cf-autotick-bot`, have `[bot-automerge]` in the title, all statuses are passing, and the feedstock allows automerge
 2. have the `automerge` label and all statuses are passing.
 
 For PRs from the `regro-cf-autotick-bot`, it can be useful to remove the `[bot-automerge]` slug from the PR title if you are making
 edits to the PR.
-
-#### Rerendering
-
-The rerendering service is triggered by the Heroku app. It uses the GitHub action in this [repo](https://github.com/conda-forge/webservices-dispatch-action).
-This action runs out of a Docker [container](https://hub.docker.com/repository/docker/condaforge/webservices-dispatch-action) on the `prod` tag. See the
-repo [README.md](https://github.com/conda-forge/webservices-dispatch-action) for more details.
 
 ### Skipping CI builds
 
@@ -460,6 +476,35 @@ Due to its stature in the open-source community, conda-forge has enhanced access
 resource entrusted to conda-forge for use in building packages. We thus cannot support third-party or "off-label" CI jobs in our
 feedstocks on any of our CI services. If we find such use, we will politely ask the maintainers to rectify the situation. We may
 take more serious actions, including archiving feedstocks or removing maintainers from the organization, if the situation cannot be rectified.
+
+### External Runners (for GitHub Actions)
+
+conda-forge provides feedstock maintainers a way to contribute/sponsor external runners via [Cirun](#cirun), when
+their CI needs are not fulfilled with the current infrastructure. These external runners (i.e. specialized runners)
+can be used for building packages on one or more feedstocks, depending on the maintainer. They are runners on a particular
+cloud or a set of clouds, i.e. facilitating provisioning of external runners is basically committing sponsoring of
+provisioning of ephemeral virtual machines on a [supported cloud](https://docs.cirun.io/cloud/). The process for the
+same is described below:
+
+- Get in touch with `conda-forge/core` to discuss your use case. This can be done with an issue in the relevant feedstock or via [Zulip](https://conda-forge.zulipchat.com).
+- Once discussed, share credentials for a supported cloud with a `conda-forge/core` member, so that it can be added to conda-forge's Cirun account, alternatively
+  the user can sponsor cloud credits for an existing conda-forge's cloud account.
+- Add configuration for the runner's virtual machine in [`conda-forge/.cirun`](https://github.com/conda-forge/.cirun/blob/master/.cirun.global.yml)
+  add a policy entry in [`.access.yml`](https://github.com/conda-forge/.cirun/blob/master/.access.yml) to allow access to the runner for
+  a feedstock.
+- Add the labels defined above in your `<package-feedstock>/recipe/conda_build_config.yaml`, under `github_actions_labels` and re-render the
+  feedstock. See links below for some examples.
+
+After the above steps are complete, the feedstock maintainer's should be able to use the defined runner for feedstock
+repository's CI jobs.
+
+#### External runner usage example
+
+Pytorch currently uses a custom windows runner on Azure provisioned via [cirun](https://cirun.io) to build on windows.
+This was sponsored by Prefix.dev. Below are the relevant pull requests for the same:
+
+- https://github.com/conda-forge/.cirun/pull/14
+- https://github.com/conda-forge/pytorch-cpu-feedstock/pull/231
 
 ## Compilers and Runtimes
 
@@ -606,16 +651,10 @@ a toolchain that's at least as new. You can find more details about this topic i
 
 ### CentOS `sysroot` for `linux-*` Platforms
 
-We currently repackage the `sysroot` from the appropriate version of CentOS for use
+We currently repackage the `sysroot` from the appropriate version of CentOS/AlmaLinux for use
 with our compilers. These `sysroot` files are available in the `sysroot_linux-*` packages.
 These packages have version numbers that match the version of `glibc` they package. These
-versions are `2.12` for CentOS 6 and `2.17` for CentOS 7.
-
-For `gcc`/`gxx`/`gfortran` versions prior to `8.4.0` on `ppc64le` and `7.5.0`
-on `aarch64`/`x86_64`, we had been building our own versions of `glibc`. This practice
-is now deprecated in favor of the CentOS-based `sysroots`. Additionally, as of the same
-compiler versions above, we have removed the `cos*` part of the `sysroot` path. The new
-`sysroot` path has in it simply `conda` as opposed to `conda_cos6` or `conda_cos7`.
+versions are `2.17` for CentOS 7, `2.27` for AlmaLinux 8 and `2.34` for AlmaLinux 9.
 
 ## Output Validation and Feedstock Tokens
 
@@ -634,16 +673,9 @@ works as follows.
 4. If all of the validation passes, the package is then copied to the `conda-forge`
    channel.
 
-We attempt to report errors in this process to users via comments on commits/issues in the feedstocks.
-Sometimes these reports fail. If you think you are having trouble with uploads, make sure to check/try
-the following things:
+There are two scenarios we consider:
 
-- Ensure that `conda_forge_output_validation: true` is set in your `conda-forge.yml`.
-- Retry the package build and upload by pushing an empty commit to the feedstock.
-- Rerender the feedstock in a PR from a fork of the feedstock and merge.
-- Request a feedstock token reset via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#reset-your-feedstock-token).
-- Request that any new packages be added to the allowed outputs for the feedstock
-  via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock).
+### Package validation failed for a new output name
 
 New packages that are added to existing feedstocks are not registered automatically in order to prevent
 typo squatting and other malicious activities. Package outputs are added during feedstock creation.
@@ -655,6 +687,17 @@ In rare cases, the package name may change regularly in a well-defined way (e.g.
 In this case, you can use our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock)
 to add a glob pattern that matches the new package name pattern. We use the Python `fnmatch` module syntax.
 Output packages that match these patterns will be automatically registered for your feedstock.
+
+### Package validation failed for an existing output name
+
+We attempt to report errors in this process to users via comments on commits/issues in the feedstocks.
+Sometimes these reports fail. If you think you are having trouble with uploads, make sure to check/try
+the following things:
+
+- Ensure that `conda_forge_output_validation: true` is set in your `conda-forge.yml`.
+- Retry the package build and upload by pushing an empty commit to the feedstock.
+- Rerender the feedstock in a PR from a fork of the feedstock and merge.
+- Request a feedstock token reset via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#reset-your-feedstock-token).
 
 ## Stages of package building and involved infrastructure
 

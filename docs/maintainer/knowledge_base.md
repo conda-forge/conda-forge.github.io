@@ -559,6 +559,21 @@ fi
 There are more variations of this approach in the wild. So this is not meant to be exhaustive,
 but merely to provide a starting point with some guidelines. Please look at [other recipes for more examples](https://github.com/search?q=org%3Aconda-forge+path%3Arecipe%2Fmeta.yaml+%22%5Bbuild_platform+%21%3D+target_platform%5D%22&type=code).
 
+#### Finding NumPy in cross-compiled Python packages using CMake
+
+If you are building a Python extension via CMake with NumPy and you want it work in cross-compilation, you need to prepend to the CMake invocation in your build script the following lines:
+
+```sh
+Python_INCLUDE_DIR="$(python -c 'import sysconfig; print(sysconfig.get_path("include"))')"
+Python_NumPy_INCLUDE_DIR="$(python -c 'import numpy;print(numpy.get_include())')"
+CMAKE_ARGS="${CMAKE_ARGS} -DPython_EXECUTABLE:PATH=${PYTHON}"
+CMAKE_ARGS="${CMAKE_ARGS} -DPython_INCLUDE_DIR:PATH=${Python_INCLUDE_DIR}"
+CMAKE_ARGS="${CMAKE_ARGS} -DPython_NumPy_INCLUDE_DIR=${Python_NumPy_INCLUDE_DIR}"
+CMAKE_ARGS="${CMAKE_ARGS} -DPython3_EXECUTABLE:PATH=${PYTHON}"
+CMAKE_ARGS="${CMAKE_ARGS} -DPython3_INCLUDE_DIR:PATH=${Python_INCLUDE_DIR}"
+CMAKE_ARGS="${CMAKE_ARGS} -DPython3_NumPy_INCLUDE_DIR=${Python_NumPy_INCLUDE_DIR}"
+```
+
 <a id="python-cross-compilation"></a>
 
 <a id="details-about-cross-compiled-python-packages"></a>
@@ -670,11 +685,11 @@ However, there are a few exceptions:
 Some dependencies are so close to the system that they are not packaged with conda-forge.
 These dependencies have to be satisfied with _Core Dependency Tree_ (CDT) packages.
 
-A CDT package consists of repackaged CentOS binaries from the appropriate version,
-either 6 or 7 depending on user choice and platform. We manage the build of CDT
+A CDT package consists of repackaged CentOS/AlmaLinux binaries from the appropriate version,
+either 7, 8 or 9 depending on user choice and platform. We manage the build of CDT
 packages using a centralized repo, [conda-forge/cdt-builds](https://github.com/conda-forge/cdt-builds),
 as opposed to generating feedstocks for them. (Note that historically we did use feedstocks but this
-practice has been deprecated.) To add a new CDT, make a PR on the
+practice has been deprecated). To add a new CDT, make a PR on the
 [conda-forge/cdt-builds](https://github.com/conda-forge/cdt-builds) repo.
 
 <a id="why-are-cdts-bad"></a>
@@ -684,10 +699,10 @@ practice has been deprecated.) To add a new CDT, make a PR on the
 1. CDTs repackage old versions of the library.
 2. As a result, newer functionality in the packages won't be used by downstream conda packages
    which check for the version of the library being built against.
-   For example: OpenGL functionality from the CentOS 6/7 packaged library is available, but
+   For example: OpenGL functionality from the CentOS 7 packaged library is available, but
    any newer functionality cannot be used.
 3. We have no guarantees that the version provided by the user's system is compatible.
-   We only have the `__glibc>=2.17` constraint and we assume that CentOS 6/7's
+   We only have the `__glibc>=2.17` constraint and we assume that CentOS 7's
    lower bound of GLIBC and its corresponding lower bound of the CDT are equivalent.
 4. We have no guarantee that the library is provided by the user's system at all.
 
@@ -697,12 +712,7 @@ practice has been deprecated.) To add a new CDT, make a PR on the
 
 1. When there are system specific configurations are used by the library.
    Some examples include:
-   1. OpenGL: if we provided the OpenGL loader library `libglvnd`.
-      and the user's system is not using `libglvnd`, then we cannot load the vendor-specific
-      implementations losing out on accelerator/hardware optimized performance.
-      (This is only on old distributions and we may finally be able to package `libglvnd`
-      ourselves)
-   2. linux-pam: This is a library that allows pluggable authentication modules and the
+   1. linux-pam: This is a library that allows pluggable authentication modules and the
       configuration files for these modules usually live in `/etc/pam.d`. The issue is that
       the pluggable modules live in a distro specific location. For example:
       `/usr/lib/x86_64-linux-gnu/security/`. The default modules are built into the
@@ -730,41 +740,19 @@ practice has been deprecated.) To add a new CDT, make a PR on the
    run OpenCL because we have a conda packaged installation, but if there is a system wide
    implementation that is accelerated by specific hardware, we can use those.
 
-In conda-forge the primary usages of CDTs is currently for packages that link against libGL.
-
 <a id="libgl"></a>
 
-#### libGL
+### libGL
 
-In addition to the required compilers `{{ compiler('c') }}` and/or `{{ compiler('cxx') }}`,
-the following CDT packages are required for linking against libGL:
+Note that packages dependent on OpenGL and/or libGL should no longer use CDTs. Instead, use the host dependency `libgl-devel` from the [libglvnd-feedstock](https://github.com/conda-forge/libglvnd-feedstock).
 
 ```yaml
 requirements:
-  build:
-    - {{ cdt('mesa-libgl-devel') }}  # [linux]
-    - {{ cdt('mesa-dri-drivers') }}  # [linux]
-    - {{ cdt('libselinux') }}  # [linux]
-    - {{ cdt('libxdamage') }}  # [linux]
-    - {{ cdt('libxxf86vm') }}  # [linux]
-    - {{ cdt('libxext') }}     # [linux]
   host:
-    - xorg-libxfixes  # [linux]
+    - libgl-devel  # [linux]
 ```
 
-If you need a fully functional binary in the test phase, you have to also provide the shared
-libraries via `yum_requirements.txt` (see [yum_requirements.txt](#yum-deps)).
-
-```text
-mesa-libGL
-mesa-dri-drivers
-libselinux
-libXdamage
-libXxf86vm
-libXext
-```
-
-You will need to re-render the feedstock after making these changes.
+Other OpenGL API variants such as `libegl-devel`, `libgles-devel`, `libglx-devel`, and `libopengl-devel` are also available, and will automatically add non-development `run_exports` dependencies.
 
 <a id="linking-numpy"></a>
 
@@ -780,43 +768,48 @@ In the case of linking, you need to use the `pin_compatible` function to ensure 
 ```yaml
 host:
   - numpy
-run:
-  - {{ pin_compatible('numpy') }}
 ```
 
-At the time of writing (January 22, 2022), above is equivalent to the following,
+At the time of writing (January, 2025), above is equivalent to the following,
 
 ```yaml
 host:
-  - numpy   1.18   # [py==37]
-  - numpy   1.18   # [py==38]
-  - numpy   1.19   # [py==39]
-run:
-  - numpy >=1.18.5,<2.0.a0   # [py==37]
-  - numpy >=1.18.5,<2.0.a0   # [py==38]
-  - numpy >=1.19.5,<2.0.a0   # [py==39]
+  - numpy   1.22   # [py==39]
+  - numpy   1.22   # [py==310]
+  - numpy   1.23   # [py==311]
+  - numpy   1.26   # [py==312]
+```
+
+though the ongoing migration for numpy 2.0 has already been applied to many
+feedstocks, in which case the pinning looks like
+
+```yaml
+host:
+  - numpy   2.0    # [py==39]
+  - numpy   2.0    # [py==310]
+  - numpy   2.0    # [py==311]
+  - numpy   2.0    # [py==312]
 ```
 
 See the pinning repository for what the pinning corresponds to at time of writing
-[https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml#L631](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml#L631)
+[https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml#L742](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml#L742)
 
-:::note[Notes]
+In either case, the actual runtime requirements are determined through numpy's
+run-export, which is:
 
-1. You still need to respect minimum supported version of `numpy` for the package!
-   That means you cannot use `numpy 1.9` if the project requires at least `numpy 1.12`,
-   adjust the minimum version accordingly!
+- `>=1.2x,<2` if you're building against numpy 1.2x
+- `>=1.19,<3` if you're building against numpy 2.0
+- `>=1.21,<3` if you're building against numpy 2.1 or 2.2
+
+If the package you are building has a higher minimum requirement for numpy, please add this under `run`:
 
 ```yaml
 host:
-  - numpy 1.12.*
+  # leave this unpinned!
+  - numpy
 run:
-  - {{ pin_compatible('numpy') }}
+  - numpy >={{ the_lower_bound_your_package_needs }}
 ```
-
-2. if your package supports `numpy 1.7`, and you are brave enough :-),
-   there are `numpy` packages for `1.7` available for Python 2.7 in the channel.
-
-:::
 
 <a id="jupyterlab-extension"></a>
 
@@ -836,11 +829,11 @@ build:
 
 requirements:
   host:
-    - python
+    - python {{ python_min }}.*
     - nodejs
     - pip
   run:
-    - python
+    - python >={{ python_min }}
     - nodejs
     - jupyterlab >=2
 ```
@@ -1341,14 +1334,14 @@ Before learning how to use it, please read these considerations:
 
 - Adding microarchitecture variants can result in too many entries in the build matrix. Do not overuse it.
 - These optimized builds should only be used when the performance improvements are significant.
-- Preferrably, the project should rely on runtime dispatch for arch-specific optimizations.
+- Preferably, the project should rely on runtime dispatch for arch-specific optimizations.
 - If the package is already too large, consider using smaller outputs for the arch-optimized variants.
 
 To implement microarchitecture-optimized builds in your feedstock, you'll end up with something like:
 
 ```yaml title="recipe/conda_build_config.yaml"
-microarch_level:  # [unix and x86_64]
-  - 1  # [unix and x86_64]
+microarch_level:
+  - 1
   - 3  # [unix and x86_64]
   - 4  # [unix and x86_64]
 ```
@@ -1507,6 +1500,65 @@ In order to qualify as a noarch python package, all of the following criteria mu
   in the `build` section of `meta.yaml`
 - No activate scripts
 
+All recipes employing `noarch: python` should usually use the `python_min` variable per the following example:
+
+```yaml title="recipe/meta.yaml"
+name: package
+source:
+  # ...
+build:
+  noarch: python
+  # ...
+requirements:
+  host:
+    - python {{ python_min }}
+    # ...
+  run:
+    - python >={{ python_min }}
+    # ...
+
+test:
+  requires:
+    - python {{ python_min }}
+    # ...
+```
+
+See [CFEP-25](https://github.com/conda-forge/cfep/blob/main/cfep-25.md) for more details on this syntax. If you
+need to override this syntax, you can add a Jinja2 `set` statement (or equivalent `context` variable for v1 recipes)
+at the top of your recipe like this
+
+```yaml title="recipe/meta.yaml"
+{% set python_min = "3.10" %}
+```
+
+It also possible to achieve the same effect by adding a `conda_build_config.yaml` file to your recipe that
+contains a map like
+
+```yaml title="recipe/conda_build_config.yaml"
+python_min:
+- "3.10"
+```
+
+If you go that route, you will need to [rerender the feedstock](../infrastructure/#conda-forge-admin-please-rerender)
+after adding the `conda_build_config.yaml` file.
+
+Using `noarch: python` packages, with `python {{ python_min }}` pins in their `test.requires` section, as
+`downstream` tests can cause failures for the `upstream` package if the Python version required for the test
+conflicts with `upstream` package's Python version. There are two fixes, depending on what is more important.
+
+1. Constrain the `downstream` tests in the `upstream` package to only run on `python_min`.
+2. Remove the `python_min` requirement from the `downstream` package's test requirements.
+
+More or less, you prefer the first solution when testing the `downstream` package on `python_min` is the most important thing. You prefer the second solution when testing all Python versions of the `upstream` package with the `downstream` package is the most important thing.
+
+:::tip[Hint]
+
+Adding an explicit `python_min` to your `noarch: python` recipe can be an effective way to ensure the required
+Python in your package's metadata is enforced at `conda-build` time, as the build will fail if the package's
+required Python version is newer than `python_min`.
+
+:::
+
 :::note
 
 While `noarch: python` does not work with selectors, it does work with version constraints.
@@ -1603,10 +1655,10 @@ build:
   noarch: python
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}.*
     # ...
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - numpy
     - __unix  # [unix]
     - __win   # [win]
@@ -1641,7 +1693,7 @@ build:
 requirements:
   # ...
   run:
-    - python
+    - python >={{ python_min }}
     - numpy
     - __linux  # [linux]
     - __osx    # [osx]
@@ -1676,24 +1728,24 @@ add some information on r packages which make heavy use of `noarch: generic`
 
 - Distributing a project (which share the same source code) in separate artifacts. For example:
   - A compiled C++ library and its Python bindings:
-    - [mamba-feedstock](https://github.com/conda-forge/mamba-feedstock/blob/main/recipe/meta.yaml)
+    - [mamba-feedstock](https://github.com/conda-forge/mamba-feedstock/blob/e13e667edd0e9efb5091444c11307ddb2bd8fa5e/recipe/meta.yaml)
   - A runtime library and its headers:
-    - [cpp-opentelemetry-sdk](https://github.com/conda-forge/cpp-opentelemetry-sdk-feedstock/blob/main/recipe/meta.yaml)
+    - [cpp-opentelemetry-sdk](https://github.com/conda-forge/cpp-opentelemetry-sdk-feedstock/blob/6c9f81074f0343f2fb41a4491e91b7b84e962cc1/recipe/meta.yaml)
   - A dynamic library and a static version:
-    - [libarchive](https://github.com/conda-forge/libarchive-feedstock/blob/main/recipe/meta.yaml)
+    - [libarchive](https://github.com/conda-forge/libarchive-feedstock/blob/642a473daf5cfc84598ed7fde1016c243e359e3b/recipe/meta.yaml)
 - Distributing the same project with different sets of dependencies. For example:
   - The project with the minimal dependencies to run, and a separate output that extends that list:
-    - [geopandas-base and geopandas](https://github.com/conda-forge/geopandas-feedstock/blob/main/recipe/meta.yaml)
-    - [matplotlib-base and matplotlib](https://github.com/conda-forge/matplotlib-feedstock/blob/main/recipe/meta.yaml)
+    - [geopandas-base and geopandas](https://github.com/conda-forge/geopandas-feedstock/blob/d6a3efdf12408f1875f1aa0b7cc2393f877a73e8/recipe/meta.yaml)
+    - [matplotlib-base and matplotlib](https://github.com/conda-forge/matplotlib-feedstock/blob/dc89bb11d502475b7bb71d8600b2eeaff4c185bd/recipe/meta.yaml)
   - CPU vs GPU versions of a package (this can also be done with package variants):
-    - [pytorch-cpu, pytorch-gpu and pytorch](https://github.com/conda-forge/pytorch-cpu-feedstock/blob/main/recipe/meta.yaml)
+    - [pytorch-cpu, pytorch-gpu and pytorch](https://github.com/conda-forge/pytorch-cpu-feedstock/blob/b629af608e13eb180dab698b1e44ac0991ab1135/recipe/meta.yaml)
   - A package with different strictness levels for its dependencies:
-    - [opencv](https://github.com/conda-forge/opencv-feedstock/blob/main/recipe/meta.yaml)
+    - [opencv](https://github.com/conda-forge/opencv-feedstock/blob/850a09ec4e4e1a34e2619c5b937bfdc8ffe8bbbd/recipe/meta.yaml)
 - Distributing the same project under two different names (alias packags). For example:
   - A package that changed names but wants to keep existing users up-to-date:
   - A package that uses dashes and underscores and expects users to use either:
-    - [importlib_metadata and importlib-metadata](https://github.com/conda-forge/importlib_metadata-feedstock/blob/main/recipe/meta.yaml)
-    - [typing_extensions and typing-extensions](https://github.com/conda-forge/typing_extensions-feedstock/blob/main/recipe/meta.yaml)
+    - [importlib_metadata and importlib-metadata](https://github.com/conda-forge/importlib_metadata-feedstock/blob/e4595fd73bba559d248f97896aff89a762073f2a/recipe/meta.yaml)
+    - [typing_extensions and typing-extensions](https://github.com/conda-forge/typing_extensions-feedstock/blob/d9d0d1161d5ded886a272c0e4907f62d9272c7a8/recipe/meta.yaml)
 
 ### Common pitfalls with `outputs`
 
@@ -1904,9 +1956,14 @@ There are two options for how to proceed:
 
 <a id="using-centos-7"></a>
 
-## Using CentOS 7
+## Requiring newer `glibc` versions
 
-To use the newer CentOS 7 `sysroot` with `glibc` `2.17` on `linux-64`,
+Conda-forge aims to build for as many users as possible, which means
+that we target `glibc 2.17` from CentOS 7, which allows packages to be
+installed on essentially any linux system (newer than 2014).
+
+However, some feedstocks may already require newer `glibc` versions.
+To use the newer `sysroot` with `glibc` `2.28` or `2.34` on `linux`,
 put the following in your build section.
 
 ```yaml
@@ -1920,21 +1977,32 @@ and add the following to `recipe/conda_build_config.yaml`:
 
 ```yaml
 c_stdlib_version:          # [linux]
-  - "2.17"                 # [linux]
+  - "2.28"                 # [linux]
 ```
 
 This covers the headers/library present at build-time, and will also create
 a corresponding run-export on the `__glibc` virtual package.
 
-You may also need to use a newer docker image by setting the following in the `conda-forge.yml`
-of your recipe and rerendering.
+By default, conda-forge build infrastructure uses old sysroots on new images, meaning that
+the `glibc` present in the docker image is not what we compile against. This has
+several advantages, and also means that generally you don't have to concern
+yourself with changing the image manually.
+
+However, if for some reason you want to override the image versions, you can do so
+by setting the following in the `conda-forge.yml` of your recipe and rerendering.
 
 ```yaml
-os_version:
+os_version:             # example of possible values
   linux_64: cos7
+  linux_aarch64: alma8
+  linux_ppc64le: alma9
 ```
 
-Finally, note that the `aarch64` and `ppc64le` platforms already use CentOS 7.
+In the exceptional case that a feedstock does _binary repackaging_ (i.e. no
+compilation from source), please ensure that you use the oldest-possible image,
+matching the `c_stdlib_version` of your recipe. For example, if you use the
+default `c_stdlib_version` of `2.17`, then set `os_version: linux_*: cos7`;
+if you're using a `c_stdlib_version` of `2.28`, set it to `alma8`.
 
 <a id="cuda"></a>
 
@@ -1943,73 +2011,11 @@ Finally, note that the `aarch64` and `ppc64le` platforms already use CentOS 7.
 ## CUDA builds
 
 Although the provisioned CI machines do not feature a GPU, conda-forge does provide mechanisms
-to build CUDA-enabled packages. These mechanisms involve several packages:
-
-- `cudatoolkit`: The runtime libraries for the CUDA toolkit. This is what end-users will end
-  up installing next to your package.
-- `nvcc`: Nvidia's EULA does not allow the redistribution of compilers and drivers. Instead, we
-  provide a wrapper package that locates the CUDA installation in the system. The main role of this
-  package is to set some environment variables (`CUDA_HOME`, `CUDA_PATH`, `CFLAGS` and others),
-  as well as wrapping the real `nvcc` executable to set some extra command line arguments.
-
-In practice, to enable CUDA on your package, add `{{ compiler('cuda') }}` to the `build`
-section of your requirements and rerender. The matching `cudatoolkit` will be added to the `run`
-requirements automatically.
-
-On Linux, CMake users are required to use `${CMAKE_ARGS}` so CMake can find CUDA correctly. For example:
-
-```shell-session
-mkdir build && cd build
-cmake ${CMAKE_ARGS} ${SRC_DIR}
-make
-```
-
-:::note
-
-**How is CUDA provided at the system level?**
-
-- On Linux, Nvidia provides official Docker images, which we then
-  [adapt](https://github.com/conda-forge/docker-images) to conda-forge's needs.
-- On Windows, the compilers need to be installed for every CI run. This is done through the
-  [conda-forge-ci-setup](https://github.com/conda-forge/conda-forge-ci-setup-feedstock/) scripts.
-  Do note that the Nvidia executable won't install the drivers because no GPU is present in the machine.
-
-**How is cudatoolkit selected at install time?**
-
-Conda exposes the maximum CUDA version supported by the installed Nvidia drivers through a virtual package
-named `__cuda`. By default, `conda` will install the highest version available
-for the packages involved. To override this behaviour, you can define a `CONDA_OVERRIDE_CUDA` environment
-variable. More details in the
-[Conda docs](https://docs.conda.io/projects/conda/en/stable/user-guide/tasks/manage-virtual.html#overriding-detected-packages).
-
-Note that prior to v4.8.4, `__cuda` versions would not be part of the constraints, so you would always
-get the latest one, regardless the supported CUDA version.
-
-If for some reason you want to install a specific version, you can use:
-
-```default
-conda install your-gpu-package cudatoolkit=10.1
-```
-
-:::
-
-<a id="testing-the-packages"></a>
-
-### Testing the packages
-
-Since the CI machines do not feature a GPU, you won't be able to test the built packages as part
-of the conda recipe. That does not mean you can't test your package locally. To do so:
-
-1. Enable the Azure artifacts for your feedstock (see [here](conda_forge_yml.mdx#azure)).
-2. Include the test files and requirements in the recipe
-   [like this](https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/meta.yaml#L51-L61).
-3. Provide the test instructions. Take into account that the GPU tests will fail in the CI run,
-   so you need to ignore them to get the package built and uploaded as an artifact.
-   [Example](https://github.com/conda-forge/cupy-feedstock/blob/a1e9cdf47775f90d3153a26913068c6df942d54b/recipe/run_test.py).
-4. Once you have downloaded the artifacts, you will be able to run:
-   ```default
-   conda build --test <pkg file>.tar.bz2
-   ```
+to build CUDA-enabled packages.
+See the [guide for maintainers of recipes that use CUDA](https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/doc/recipe_guide.md)
+for more information.
+If a feedstock does need access to additional resources (like GPUs), please see the following
+[section](#packages-that-require-a-gpu-or-long-running-builds).
 
 <a id="common-problems-and-known-issues"></a>
 
@@ -2044,44 +2050,12 @@ build:
 
 #### My feedstock is not building old CUDA versions anymore
 
-With the [addition of CUDA 11.1 and 11.2](https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/1162),
-the default build matrix for CUDA versions was trimmed down to versions 10.2, 11.0, 11.1, 11.2.
+As new CUDA versions come out regularly, periodically conda-forge needs to
+decide how many versions will be supported within resource constraints.
+As of January 2025, conda-forge supports CUDA 11 and 12.
 
-If you really need it, you can re-add support for 9.2, 10.0 and 10.1. However, this is not recommended.
-Adding more CUDA versions to the build matrix will dramatically increase the number of jobs and will place a large
-burden on our CI resources. Only proceed if there's a known use case for the extra packages.
-
-1. Download this [migration file](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/b6d14bce8613d14e252e46ccee13ecb160eb6494/recipe/migrations/cuda92_100_101.yaml).
-2. In your feedstock fork, create a new branch and place the migration file under `.ci_support/migrations`.
-3. Open a PR and re-render. CUDA 9.2, 10.0 and 10.1 will appear in the CI checks now. Merge when ready!
-
-<a id="adding-support-for-a-new-cuda-version"></a>
-
-### Adding support for a new CUDA version
-
-Providing a new CUDA version involves five repositores:
-
-- [cudatoolkit-feedstock](https://github.com/conda-forge/cudatoolkit-feedstock)
-- [nvcc-feedstock](https://github.com/conda-forge/nvcc-feedstock)
-- [conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock)
-- [docker-images](https://github.com/conda-forge/docker-images) (Linux only)
-- [conda-forge-ci-setup-feedstock](https://github.com/conda-forge/conda-forge-ci-setup-feedstock) (Windows only)
-
-The steps involved are, roughly:
-
-1. Add the `cudatoolkit` packages in `cudatoolkit-feedstock`.
-2. Submit the version migrator to `conda-forge-pinning-feedstock`.
-   This will stay open during the following steps.
-3. For Linux, add the corresponding Docker images at `docker-images`.
-   Copy the migration file manually to `.ci_support/migrations`.
-   This copy should not specify a timestamp. Comment it out and rerender.
-4. For Windows, add the installer URLs and hashes to the `conda-forge-ci-setup`
-   [script](https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat).
-   The migration file must also be manually copied here. Rerender.
-5. Create the new `nvcc` packages for the new version. Again, manual
-   migration must be added. Rerender.
-6. When everything else has been merged and testing has taken place,
-   consider merging the PR opened at step 2 now so it can apply to all the downstream feedstocks.
+To update to the latest supported versions [rerender the feedstock](updating_pkgs.md#dev-update-rerender).
+There may be other fixes needed for the feedstock depending on when it was last updated.
 
 <a id="opengpuserver"></a>
 

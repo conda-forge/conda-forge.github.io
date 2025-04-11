@@ -179,7 +179,7 @@ We need to re-render when there are changes in the following parts of the feedst
 - `yum_requirements.txt` or `conda-forge.yml`.
 - Updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.
 - Updates in conda-forge pinning that affect the feedstock.
-- Build issues that a feedstock configuration update will fix (follow us on [Element](https://app.element.io/#/room/#conda-forge:matrix.org) to know about those).
+- Build issues that a feedstock configuration update will fix (follow us on [Zulip](https://conda-forge.zulipchat.com/) to know about those).
 
 <a id="updating-for-newly-released-python-version"></a>
 
@@ -285,7 +285,24 @@ package (an example would be to re-render the feedstock to support new Python ve
 If you believe a feedstock should be archived, please do the following:
 
 1. Raise an issue on the feedstock asking if it can be archived (CC the maintainer team and @conda-forge/core)
-2. Fork [conda-forge/admin-requests](https://github.com/conda-forge/admin-requests) and add a new text file in the `archive` directory with the repo name.
+2. Fork [conda-forge/admin-requests](https://github.com/conda-forge/admin-requests) and add a new `yml` file in the `requests` directory , named `<package>-archive.yml` and containing:
+
+```
+action: archive
+feedstocks:
+  - <name of the feedstock to archive without the -feedstock suffix>
+```
+
+Example:
+
+```
+action: archive
+feedstocks:
+  - or-datasets
+```
+
+You can list multiple feedstocks in the same request.
+
 3. Open a PR and cross-reference the issue raised in step 1.
 
 <a id="maint-updating-maintainers"></a>
@@ -301,11 +318,24 @@ an issue in the feedstock repository with the following title:
 
 where `username` is the username of the new maintainer to be added.
 A PR will be automatically created and a maintainer or a member of the `core` team, in case no maintainer is active anymore, can then merge this PR to add the user.
-To contact core, ping them by mentioning @conda-forge/core in a comment or, if you haven't heard back in a while or are new to conda-forge, contact them through the community [Element](https://app.element.io/#/room/#conda-forge:matrix.org).
+To contact core, ping them by mentioning @conda-forge/core in a comment or, if you haven't heard back in a while or are new to conda-forge, contact them through the community [Zulip chatroom](https://conda-forge.zulipchat.com/).
 
 :::note
 
 This PR is designed to skip building the package. Please do **not** modify it or adjust the commit message.
+
+This is not the recommended way to start to help with a feedstock.
+If you are interested in helping with a particular recipe, it is better to start by
+submitting a PR with a new version or a fix. This way, you can get feedback on your
+work and learn about some of the historical context of the feedstock.
+
+Once you have established a working relationship with the maintainers, you can ask
+them to add you to the feedstock team. They can then use this command
+to add you to the team. There isn't any official requirement for how to add new
+maintainers so it may take a while for consensus to be reached
+on when to add new maintainers. Do not let this discourage you from contributing!
+
+PRs are free to be opened by anyone!!! Thank you for your time and effort!!!
 
 :::
 

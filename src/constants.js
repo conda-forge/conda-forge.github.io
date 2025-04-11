@@ -43,6 +43,11 @@ export const urls = {
       link: "https://status.circleci.com",
       title: "Circle CI",
     },
+    docker: {
+      api: "https://conda-forge.herokuapp.com/status-monitor/docker",
+      link: "https://dockerstatus.com",
+      title: "Docker",
+    },
     github: {
       api: "https://www.githubstatus.com/api/v2/status.json",
       link: "https://www.githubstatus.com/",

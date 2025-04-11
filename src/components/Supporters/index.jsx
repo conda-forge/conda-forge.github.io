@@ -80,6 +80,13 @@ const infrastructure = [
     width: 220,
   },
   {
+    name: "Pulumi",
+    link: "https://www.pulumi.com/",
+    light: "img/supporters/pulumi_light.svg",
+    dark: "img/supporters/pulumi_dark.svg",
+    width: 220,
+  },
+  {
     name: "Quansight",
     link: "https://www.quansight.com/",
     light: "img/supporters/quansight_light.svg",
@@ -98,6 +105,13 @@ const infrastructure = [
     link: "https://prefix.dev/",
     light: "img/supporters/prefix_light.svg",
     dark: "img/supporters/prefix_dark.svg",
+    width: 250,
+  },
+  {
+    name: "Zulip",
+    link: "https://zulip.com",
+    light: "img/supporters/zulip.svg",
+    dark: "img/supporters/zulip.svg",
     width: 250,
   },
 ];

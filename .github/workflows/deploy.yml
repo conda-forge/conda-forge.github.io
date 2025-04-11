@@ -12,9 +12,9 @@ jobs:
     name: deploy
     runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - uses: conda-incubator/setup-miniconda@a4260408e20b96e80095f42ff7f1a15b27dd94ca # v3.0.4
+      - uses: conda-incubator/setup-miniconda@505e6394dae86d6a5c7fbb6e3fb8938e3e863830 # v3.1.1
         with:
           python-version: 3.8
           channels: conda-forge
@@ -43,10 +43,9 @@ jobs:
           user_email: pelson.pub+conda-forge@gmail.com
 
       - name: Link Checker
-        uses: lycheeverse/lychee-action@2b973e86fc7b1f6b36a93795fe2c9c6ae1118621 # v1.10.0
+        uses: lycheeverse/lychee-action@7cd0af4c74a61395d455af97419279d86aafaede # v2.0.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          lycheeVersion: "0.14.3"
           args: >
             --no-progress
             --timeout 60
@@ -56,6 +55,8 @@ jobs:
             --exclude 'https://polys.me/?$'
             --exclude 'https://conda-metadata-app.streamlit.app/?$'
             --exclude 'https://kb43fqob7u-dsn.algolia.net/'
+            --exclude 'https://ss64.com/nt/syntax.html'
+            --exclude 'https://www.mesa3d.org/'
             --exclude '.*/404.html/'
             --exclude '.*,.*'
             --exclude-path './build/community/minutes/'

@@ -107,7 +107,7 @@ There is no need to approve the PR. Every maintainer can verify and merge the bo
 
 ## How to fix "build-locally.py fails with exit code 139"?
 
-With Linux Kernel 4.11 there were some changes in the `vsyscall` linking. Depending on your distribution this may cause the above error. You can fix that on Debian by editing `/etc/default/grub` and specifiy `GRUB_CMDLINE_LINUX_DEFAULT="vsyscall=emulate"` in this file. Afterwards, you need to run `update-grub` and reboot your system. On other Linux distributions the fix is similar but you need to edit a different configuration file to change the Linux kernel cmdline. This workaround is only needed for images based on CentOS 6 (`cos6`). You could also workaround this by forcing the CentOS 7 based images using `DOCKER_IMAGE=quay.io/condaforge/linux-anvil-cos7-x86_64 ./build-locally.py`.
+With Linux Kernel 4.11 there were some changes in the `vsyscall` linking. Depending on your distribution this may cause the above error. You can fix that on Debian by editing `/etc/default/grub` and specify `GRUB_CMDLINE_LINUX_DEFAULT="vsyscall=emulate"` in this file. Afterwards, you need to run `update-grub` and reboot your system. On other Linux distributions the fix is similar but you need to edit a different configuration file to change the Linux kernel cmdline. This workaround is only needed for images based on CentOS 6 (`cos6`). You could also workaround this by forcing the CentOS 7 based images using `DOCKER_IMAGE=quay.io/condaforge/linux-anvil-cos7-x86_64 ./build-locally.py`.
 
 The exit code 139 itself actually is the general exit code for a segmentation fault. This could also mean that you have run into a different issue but the above issue is the most likely one with our CentOS 6-based images.
 
@@ -131,9 +131,20 @@ Error:
 ImportError: libGL.so.1: cannot open shared object file: No such file or directory
 ```
 
-If you saw this error while building a package in your feedstock, create a [yum_requirements.txt](knowledge_base.md#yum-deps) file and add `mesa-libGL`. See also [CDTs: `libgl`](./knowledge_base.md#libgl).
+If you saw this error while building a package in your feedstock, add the Linux host dependency `libgl-devel`, provided by the [libglvnd-feedstock](https://github.com/conda-forge/libglvnd-feedstock).
 
-If you are seeing this error after installing a package locally, then you are missing an [OpenGL](https://en.wikipedia.org/wiki/OpenGL) provider in your system dependencies. This is more likely to happen in headless systems with no graphics (servers, Docker images, etc). To fix it, you must install a provider like [Mesa](https://www.mesa3d.org/) with your system package manager.
+```yaml
+requirements:
+  host:
+    - libgl-devel  # [linux]
+```
+
+Other OpenGL API variants such as `libegl-devel`, `libgles-devel`, `libglx-devel`, and `libopengl-devel` are also available, and will automatically add non-development `run_exports` dependencies.
+
+If you are seeing this error after installing a package locally, then you are missing an [OpenGL](https://en.wikipedia.org/wiki/OpenGL) provider in your system dependencies. This is more likely to happen in headless systems with no graphics (servers, Docker images, etc). To fix it, you must install a provider like [Mesa](https://www.mesa3d.org/) with your system package manager, for example (check your distro documentation for exact packages):
+
+- Debian/Ubuntu-based distributions: `sudo apt-get install libgl1-mesa-dri libglx-mesa0 libegl-mesa0`
+- Fedora-based distributions: `sudo dnf install mesa-libGL mesa-libEGL mesa-dri-drivers`
 
 <a id="mfaq-qt-load-xcb"></a>
 
@@ -166,7 +177,7 @@ build:
 ## How can I contact conda-forge/core?
 
 When in an issue or PR, you can contact [conda-forge/core](/community/governance/#teams-roles) by simply mentioning `@conda-forge/core` in a comment.
-If you don't receive an an answer after a couple of days, feel free to reach out to us via the public [Element](https://app.element.io/#/room/#conda-forge:matrix.org) chatroom.
+If you don't receive an an answer after a couple of days, feel free to reach out to us via the public [Zulip chatroom](https://conda-forge.zulipchat.com/).
 
 :::note
 

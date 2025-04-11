@@ -8,7 +8,9 @@ export default function Stats() {
     useEffect(() => {
         void (async () => {
           try {
-            const response = await fetch(urls.stats);
+            const now = new Date();
+            const ts = `${now.getYear()}${now.getMonth()}${now.getDay()}${now.getHours()}`;
+            const response = await fetch(`${urls.stats}?timestamp=${ts}`);
             const data = await response.json();
             setStats(data);
           } catch (error) {
