@@ -16,7 +16,7 @@ As an example, take a look at the [PyPI download page for `numpy` 1.7.0](https:/
 
 ## The origins of `conda`
 
-In 2012, Continuum Analytics announces Anaconda 0.8 in the SciPy conference [^anaconda-history]. Later that year, in September, Continuum would release `conda` 1.0, the cross-platform, language-agnostic package manager for pre-compiled artifacts [^conda-changelog-1.0]. The motivation behind these efforts was to provide an easy way to ship all the compiled libraries and Python packages that users of the SciPy and numpy stacks neede [^packaging-and-deployment-with-conda]<sup>,</sup>[^lex-fridman-podcast]:
+In 2012, Continuum Analytics announces Anaconda 0.8 in the SciPy conference [^anaconda-history]. Later that year, in September, Continuum would release `conda` 1.0, the cross-platform, language-agnostic package manager for pre-compiled artifacts [^conda-changelog-1.0]. The motivation behind these efforts was to provide an easy way to ship all the compiled libraries and Python packages that users of the SciPy and numpy stacks needed [^packaging-and-deployment-with-conda]<sup>,</sup>[^lex-fridman-podcast].
 
 Travis Oliphant, on [Why I promote conda](https://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html) (2013):
 
