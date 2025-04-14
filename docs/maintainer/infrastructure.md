@@ -669,9 +669,11 @@ works as follows.
 2. Then the feedstock CI job makes an API call to our admin webservices server with its secret token
    and some information about the package it is trying to upload.
 3. The webservices server validates the secret token, the integrity of the package, and
-   that the package is allowed for the given feedstock.
-4. If all of the validation passes, the package is then copied to the `conda-forge`
-   channel.
+   that the package is allowed for the given feedstock. As a part of the validation process, the
+   package is copied from `cf-staging` to a secured, intermediate staging channel, `cf-post-staging`.
+   This step prevents changes to the package while it is being validated.
+4. If all of the validation passes, the package is then copied from `cf-post-staging` to the
+   `conda-forge` channel.
 
 There are two scenarios we consider:
 
@@ -797,18 +799,24 @@ Authenticated services involved:
 ### Package validation and publication
 
 Once built on `main` (or other branches), the conda packages are uploaded to an intermediary channel named `cf-staging`.
+The CI job then makes a copy request to the webservices with the feedstock token and other metadata about the package.
 From there, our webservices (`conda-forge/conda-forge-webservices`) does the following:
 
-- The logic checks the feedstock token to authenticate a legitimate request.
-- The logic checks that the hash sum of the package on `cf-staging` against
-  the value computed in the CI to ensure the artifact to be copied is the same.
-- The logic checks that the feedstock is allowed to push the package using
-  the `conda-forge/feedstock-outputs` repo.
-- If all three checks pass, the webservices copies the artifacts from `cf-staging` to `conda-forge`.
+1. The webservices validates the package and copy request by
+   - using the feedstock token to authenticate the copy request by the CI job
+   - checking that the hash sum of the package on `cf-staging` from the `anaconda.org` API
+     is the same as the value sent in the copy request by the CI job
+   - checking that the feedstock is allowed to push the package using the
+     `conda-forge/feedstock-outputs` repo
+2. If all three check pass, the webservices copies the package to a secured, intermediate
+   staging channel, `cf-post-staging` in order to ensure the package is not changed further during validation.
+3. The webservices repeats the check of the package hash sum on `cf-post-staging` to ensure no changes were made
+   during the initial validation step.
+4. If the second hash sum check passes, the webservices copies the package to the `conda-forge` channel.
 
 Authenticated services involved:
 
-- Anaconda.org uploads to `conda-forge` and `cf-staging`
+- Anaconda.org uploads to `conda-forge`, `cf-post-staging`, and `cf-staging`
 - The `conda-forge-webservices` app deployment itself (currently at Heroku)
 
 ### Post-publication
