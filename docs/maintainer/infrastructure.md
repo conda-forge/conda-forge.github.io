@@ -808,8 +808,8 @@ From there, our webservices (`conda-forge/conda-forge-webservices`) does the fol
      is the same as the value sent in the copy request by the CI job
    - checking that the feedstock is allowed to push the package using the
      `conda-forge/feedstock-outputs` repo
-2. If all three check pass, the webservices copies the package to a secured, intermediate
-   staging channel, `cf-post-staging` in order to ensure the package is not changed further during validation.
+2. If all three checks pass, the webservices copies the package to a secured, intermediate
+   staging channel, `cf-post-staging`, in order to ensure the package is not changed further during validation.
 3. The webservices repeats the check of the package hash sum on `cf-post-staging` to ensure no changes were made
    during the initial validation step.
 4. If the second hash sum check passes, the webservices copies the package to the `conda-forge` channel.
