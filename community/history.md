@@ -91,5 +91,6 @@ As more and more conflicts with `free` channel packages occurred, conda-forge gr
 [^wheels]: [PEP 427 – The Wheel Binary Package Format 1.0](https://peps.python.org/pep-0427/)
 
 <!-- links -->
+
 [free-channel]: https://anaconda.org/free
 [gcc-5]: https://gcc.gnu.org/gcc-5/changes.html
