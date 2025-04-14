@@ -43,7 +43,7 @@ By 2015, several institutes and groups were using Binstar/Anaconda.org to distri
 
 In 2014, Filipe Fernandes ([@ocefpaf](https://github.com/ocefpaf)) and Phil Elson ([@pelson](https://github.com/pelson)) were maintaining the Binstar channels for IOOS and SciTools, respectively. Phil had [implemented CI pipelines](https://github.com/SciTools/conda-recipes-scitools/blob/995fc231967719db0dd6321ba8a502390a2f192c/.travis.yml) and [special tooling](https://github.com/conda-tools/conda-build-all) to build conda packages for SciTools efficiently, and Filipe borrowed it for IOOS. There was also a healthy exchange of recipes between the two groups, often assisted by members of other communities. For example, Christophe Gohlke and David Cournapeau were instrumental in getting Windows builds of the whole SciPy stack to work on AppVeyor.
 
-There was a lot of cross-pollination between projects/channels, but projects were still working in separate repos, duplicating recipes, and with differing build toolchains (so mixing channels was unpredictable). Given the success of the `ContinuumIO/conda-recipes` repository, it became clear there was a demand for high quality conda recipes and more efficient collaboration under a single umbrella. On April 11th, 2015, `conda-forge` was registered as a Github organization [^github-api-conda-forge] and an Anaconda.org channel [^binstar-conda-forge].
+There was a lot of cross-pollination between projects/channels, but projects were still working in separate repos, duplicating recipes, and with differing build toolchains (so mixing channels was unpredictable). Given the success of the `ContinuumIO/conda-recipes` repository, it became clear there was a demand for high quality conda recipes and more efficient community-driven collaboration under a single umbrella [^talkpython-conda]. On April 11th, 2015, `conda-forge` was registered as a Github organization [^github-api-conda-forge] and an Anaconda.org channel [^binstar-conda-forge].
 
 ## Meanwhile at Continuum
 
@@ -89,6 +89,7 @@ As more and more conflicts with `free` channel packages occurred, conda-forge gr
 [^new-advances-in-conda]: [New Advances in Conda](https://web.archive.org/web/20140331190645/http://continuum.io/blog/new-advances-in-conda), Ilan Schnell, 2013.
 [^packaging-and-deployment-with-conda]: [Packaging and deployment with conda](https://speakerdeck.com/teoliphant/packaging-and-deployment-with-conda), Travis Oliphant, 2013.
 [^pythonxy]: https://python-xy.github.io/, 2015.
+[^talkpython-conda]: [Guaranteed packages via Conda and Conda-Forge](https://talkpython.fm/episodes/show/94/guarenteed-packages-via-conda-and-conda-forge), 2016.
 [^technical-discovery]: https://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html, 2013.
 [^wheels]: [PEP 427 – The Wheel Binary Package Format 1.0](https://peps.python.org/pep-0427/)
 
