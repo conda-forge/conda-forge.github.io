@@ -18,7 +18,7 @@ However, for Linux, you would have to wait until 2016, when [`manylinux` wheels 
 
 As an example, take a look at the [PyPI download page for `numpy` 1.7.0](https://pypi.org/project/numpy/1.7.0/#files), released in Feb 2013. The "Built Distributions" section only shows a few `.exe` files for Windows (!), and some `manylinux1` wheels. However, the `manylinux1` wheels were not uploaded until April 2016. There was no mention whatsoever of macOS. Now compare it to [`numpy` 1.11.0](https://pypi.org/project/numpy/1.11.0/#files), released in March 2016: wheels for all platforms!
 
-The reason why it is hard to find packages for a specific system, and why compilation was the preferred option for many, is binary compatibility. Binary compatibility is a window of compatibility where each combination of compiler version, core libraries such as `glibc`, and dependency libraries present on the build machine are compatible on destination systems. Linux distributions achieve this by freezing compiler versions and library versions for a particular release cycle. Windows achieves this relatively easily because Python standardized on particular Visual Studio compiler versions for each Python release. Where a Windows package executable was reliably redistributable across versions of Windows, so long as Python version was the same, Linux presented a more difficult target because it was (and is) so much harder to account for all of the little details that must line up.
+The reason why it is hard to find packages for a specific system, and why compilation was the preferred option for many, is [binary compatibility][abi]. Binary compatibility is a window of compatibility where each combination of compiler version, core libraries such as `glibc`, and dependency libraries present on the build machine are compatible on destination systems. Linux distributions achieve this by freezing compiler versions and library versions for a particular release cycle. Windows achieves this relatively easily because Python standardized on particular Visual Studio compiler versions for each Python release. Where a Windows package executable was reliably redistributable across versions of Windows, so long as Python version was the same, Linux presented a more difficult target because it was (and is) so much harder to account for all of the little details that must line up.
 
 ## The origins of `conda`
 
@@ -119,5 +119,6 @@ As more and more conflicts with `free` channel packages occurred, conda-forge gr
 
 <!-- links -->
 
+[abi]: https://pypackaging-native.github.io/background/binary_interface/
 [free-channel]: https://anaconda.org/free
 [gcc-5]: https://gcc.gnu.org/gcc-5/changes.html
