@@ -34,8 +34,8 @@ source.
 As an example, take a look at the [PyPI download page for `numpy`
 1.7.0](https://pypi.org/project/numpy/1.7.0/#files), released in Feb 2013. The "Built
 Distributions" section only shows a few `.exe` files for Windows (!), and some
-`manylinux1` wheels. However, the `manylinux1` wheels were not uploaded until April
-2016. There was no mention whatsoever of macOS. Now compare it to [`numpy`
+`manylinux1` wheels. However, the `manylinux1` wheels were not uploaded until April 2016.
+There was no mention whatsoever of macOS. Now compare it to [`numpy`
 1.11.0](https://pypi.org/project/numpy/1.11.0/#files), released in March 2016: wheels
 for all platforms!
 
@@ -258,12 +258,11 @@ development and slower enterprise-focused development.
 
 [^anaconda-compilers]: https://www.anaconda.com/blog/utilizing-the-new-compilers-in-anaconda-distribution-5
 
-[^anaconda-history]: [The Early History of the Anaconda
-    Distribution](http://ilan.schnell-web.net/prog/anaconda-history/), Ilan Schnell,
-    2018.
+[^anaconda-history]:
+    [The Early History of the Anaconda
+    Distribution](http://ilan.schnell-web.net/prog/anaconda-history/), Ilan Schnell, 2018.
 
-[^anaconda-rebrand]: https://www.anaconda.com/blog/continuum-analytics-officially-becomes-anaconda,
-    2017.
+[^anaconda-rebrand]: https://www.anaconda.com/blog/continuum-analytics-officially-becomes-anaconda, 2017.
 
 [^binstar-conda-forge]: https://anaconda.org/conda-forge, 2015.
 
@@ -273,63 +272,70 @@ development and slower enterprise-focused development.
 
 [^binstar-scitools]: https://anaconda.org/scitools, 2014.
 
-[^binstar]: [SciPy 2013 Lightning Talks, Thu June
+[^binstar]:
+    [SciPy 2013 Lightning Talks, Thu June
     27](https://youtu.be/ywHqIEv3xXg?list=PLYx7XA2nY5GeTWcUQTbXVdllyp-Ie3r-y&t=850).
 
-[^cgohlke-shutdown]: [What to do when Gohlke's python wheel service shuts
-    down?](https://stackoverflow.com/questions/72581592/what-to-do-when-gohlkes-python-wheel-service-shuts-down),
-    2022.
+[^cgohlke-shutdown]:
+    [What to do when Gohlke's python wheel service shuts
+    down?](https://stackoverflow.com/questions/72581592/what-to-do-when-gohlkes-python-wheel-service-shuts-down), 2022.
 
 [^cgohlke]: https://www.cgohlke.com/, 2025.
 
-[^chatting-ocefpaf]: [Filipe Fernandes on the Evolution of
+[^chatting-ocefpaf]:
+    [Filipe Fernandes on the Evolution of
     conda-forge](https://www.youtube.com/watch?v=U2oa_RLbTVA), Chatting with the Conda
     Community #1, 2024.
 
 [^conda-build-3]: [`conda-build` 3](https://github.com/conda/conda-build/tree/3.0.0)
 
-[^conda-changelog-1.0]: [`conda` 1.0 release
-    notes](https://github.com/conda/conda/blob/24.7.1/CHANGELOG.md#100-2012-09-06),
-    2012.
+[^conda-changelog-1.0]:
+    [`conda` 1.0 release
+    notes](https://github.com/conda/conda/blob/24.7.1/CHANGELOG.md#100-2012-09-06), 2012.
 
 [^conda-recipes-repo]: [ContinuumIO/conda-recipes](https://github.com/conda-archive/conda-recipes)
 
-[^early-conda-build-docs]: [Conda build framework
-    documentation](https://web.archive.org/web/20141006141927/http://conda.pydata.org/docs/build.html),
-    2014.
+[^early-conda-build-docs]:
+    [Conda build framework
+    documentation](https://web.archive.org/web/20141006141927/http://conda.pydata.org/docs/build.html), 2014.
 
-[^eggs]: [The Internal Structure of Python
+[^eggs]:
+    [The Internal Structure of Python
     Eggs](https://setuptools.pypa.io/en/latest/deprecated/python_eggs.html).
 
 [^enthought]: https://docs.enthought.com/canopy/
 
 [^github-api-conda-forge]: https://api.github.com/orgs/conda-forge
 
-[^legacy-python-downloads]: [Download Python for Windows (legacy
+[^legacy-python-downloads]:
+    [Download Python for Windows (legacy
     docs)](https://legacy.python.org/download/windows/).
 
-[^lex-fridman-podcast]: [Travis Oliphant: NumPy, SciPy, Anaconda, Python & Scientific
+[^lex-fridman-podcast]:
+    [Travis Oliphant: NumPy, SciPy, Anaconda, Python & Scientific
     Programming](https://www.youtube.com/watch?v=gFEE3w7F0ww&t=7596s), Lex Fridman
     Podcast #224, 2022.
 
-[^new-advances-in-conda]: [New Advances in
+[^new-advances-in-conda]:
+    [New Advances in
     Conda](https://web.archive.org/web/20140331190645/http://continuum.io/blog/new-advances-in-conda),
     Ilan Schnell, 2013.
 
-[^packaging-and-deployment-with-conda]: [Packaging and deployment with
+[^packaging-and-deployment-with-conda]:
+    [Packaging and deployment with
     conda](https://speakerdeck.com/teoliphant/packaging-and-deployment-with-conda),
     Travis Oliphant, 2013.
 
 [^pythonxy]: https://python-xy.github.io/, 2015.
 
-[^talkpython-conda]: [Guaranteed packages via Conda and
-    Conda-Forge](https://talkpython.fm/episodes/show/94/guarenteed-packages-via-conda-and-conda-forge),
-    2016.
+[^talkpython-conda]:
+    [Guaranteed packages via Conda and
+    Conda-Forge](https://talkpython.fm/episodes/show/94/guarenteed-packages-via-conda-and-conda-forge), 2016.
 
-[^technical-discovery]: https://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html,
-    2013.
+[^technical-discovery]: https://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html, 2013.
 
-[^wheels]: [PEP 427 – The Wheel Binary Package Format
+[^wheels]:
+    [PEP 427 – The Wheel Binary Package Format
     1.0](https://peps.python.org/pep-0427/)
 
 <!-- links -->
