@@ -12,7 +12,7 @@ conda-forge's origins are best understood in the context of Python packaging bac
 
 Python 2.x was the norm. To install it, you'd get the official installers from Python.org, use the system-provided interpreter in Linux, or resort to options like Python(x,y) [^pythonxy], ActiveState ActivePython [^activepython] or Enthought's distributions (EPD, later Canopy) [^enthought] in macOS and Windows [^legacy-python-downloads].
 
-If you wanted to install additional packages, the community was transitioning from `easy_install` to `pip`, and there was no easy way to ship or install pre-compiled Python packages. An alternative to Python eggs [^eggs] wouldn't emerge until 2013 with the formalization of wheels [^wheels]. These were useful for Windows, where Christoph Gohlke's exes and wheels [^cgohlke]<sup>,</sup>[^cgohlke-shutdown] were your only choice.
+If you wanted to install additional packages, the community was transitioning from `easy_install` to `pip`, and there was no easy way to ship or install pre-compiled Python packages. An alternative to the Python eggs [^eggs] used by `easy_install` wouldn't emerge until 2013 with the formalization of wheels [^wheels]. These were useful for Windows, where Christoph Gohlke's exes and wheels [^cgohlke]<sup>,</sup>[^cgohlke-shutdown] were your only choice.
 
 However, for Linux, you would have to wait until 2016, when [`manylinux` wheels were introduced](https://peps.python.org/pep-0513/). Before then, PyPI wouldn't even allow compiled Linux wheels and your only alternative was to compile every package from source.
 
