@@ -86,7 +86,7 @@ As more and more conflicts with `free` channel packages occurred, conda-forge gr
 - Samsung wanted to use conda packages to manage their internal toolchains, and Ray suggested that this was complementary to our own internal needs to update our toolchain. Samsung's contract supported development to conda-build that greatly expanded its ability to support explicit variants of recipes.
 - Intel was working on developing their own Python distribution at the time, which they based on Anaconda and added their accelerated math libraries and patches to. Part of the Intel contract was that Anaconda would move all of their internal recipes into public-facing GitHub repositories.
 
-Rather than putting another set of repositories (another set of changes to merge) in between internal and external sources, such as `conda-forge`, Michael and Ray pushed for a design where conda-forge would be the reference source of recipes. Anaconda would only carry local changes if they were not able to be incorporated into the conda-forge recipe for social, licensing, or technical reasons. The combination of these conda-forge based recipes and the new toolchain are what made up the `main` channel, which was also part of `defaults`.
+Rather than putting another set of repositories (another set of changes to merge) in between internal and external sources, such as `conda-forge`, Michael and Ray pushed for a design where conda-forge would be the reference source of recipes. Anaconda would only carry local changes if they were not able to be incorporated into the conda-forge recipe for social, licensing, or technical reasons. The combination of these conda-forge based recipes and the new toolchain are what made up the `main` channel [^anaconda-5], which was also part of `defaults`.
 
 The `main` channel represented a major step forward in keeping conda-forge and Anaconda aligned, which equates to smooth operation and happy users. The joined recipe base and toolchain has sometimes been contentious, with conda-forge wanting to move faster than Anaconda or vice-versa. The end result has been a compromise between cutting-edge development and slower enterprise-focused development.
 
@@ -99,6 +99,8 @@ The `main` channel represented a major step forward in keeping conda-forge and A
 ## References
 
 [^activepython]: https://www.activestate.com/platform/supported-languages/python/
+
+[^anaconda-5]: https://www.anaconda.com/blog/announcing-the-release-of-anaconda-distribution-5-0
 
 [^anaconda-compilers]: https://www.anaconda.com/blog/utilizing-the-new-compilers-in-anaconda-distribution-5
 
