@@ -204,10 +204,11 @@ behavior.
 
 The result of this overhaul crystallized in the `compiler(...)` Jinja function and the
 `build`/`host`/`run` dependencies split in `conda-build` 3.x [^conda-build-3], and the
-publication of the GCC 7 toolchain built from source in `defaults` [^anaconda-compilers].
-`conda-build` 3.x also introduced dynamic pinning expressions that made it easier to
-maintain compatibility boundaries. ABI documentation from [^abilab] helped establish
-whether a given package should be pinned to major, minor, or bugfix versions.
+publication of the GCC 7 toolchain built from source in `defaults`
+[^conda-build-compiler-docs]<sup>,</sup>[^anaconda-compilers]. `conda-build` 3.x also
+introduced dynamic pinning expressions that made it easier to maintain compatibility
+boundaries. ABI documentation from [^abilab] helped establish whether a given package
+should be pinned to major, minor, or bugfix versions.
 
 ## From `free` to `main`
 
@@ -292,6 +293,8 @@ development and slower enterprise-focused development.
 [^conda-changelog-1.0]:
     [`conda` 1.0 release
     notes](https://github.com/conda/conda/blob/24.7.1/CHANGELOG.md#100-2012-09-06), 2012.
+
+[^conda-build-compiler-docs]: https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html#anaconda-compiler-tools
 
 [^conda-recipes-repo]: [ContinuumIO/conda-recipes](https://github.com/conda-archive/conda-recipes)
 
