@@ -202,12 +202,12 @@ toolchain as a conda package instead of a system dependency, so we could now exp
 toolchain requirements in our recipes and have better control over compiler flags and
 behavior.
 
-The result of this overhaul crystallized in the `compiler(...)` Jinja function in
-`conda-build` 3.x [^conda-build-3] and the publication of the GCC 7 toolchain built from
-source in `defaults` [^anaconda-compilers]. `conda-build` 3.x also introduced dynamic
-pinning expressions that made it easier to maintain compatibility boundaries. ABI
-documentation from [^abilab] helped establish whether a given package should be pinned
-to major, minor, or bugfix versions.
+The result of this overhaul crystallized in the `compiler(...)` Jinja function and the
+`build`/`host`/`run` dependencies split in `conda-build` 3.x [^conda-build-3], and the
+publication of the GCC 7 toolchain built from source in `defaults` [^anaconda-compilers].
+`conda-build` 3.x also introduced dynamic pinning expressions that made it easier to
+maintain compatibility boundaries. ABI documentation from [^abilab] helped establish
+whether a given package should be pinned to major, minor, or bugfix versions.
 
 ## From `free` to `main`
 
