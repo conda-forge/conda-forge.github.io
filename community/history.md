@@ -205,8 +205,8 @@ so we could now express toolchain requirements in our recipes and have better
 control over compiler flags and behavior.
 
 The result of this overhaul crystallized in the `compiler(...)` Jinja function
-in [^conda-build-3] and the publication of the GCC 7 toolchain
-built from source in `defaults` [^anaconda-compilers]. Conda-build 3 also
+in `conda-build` 3.x [^conda-build-3] and the publication of the GCC 7 toolchain
+built from source in `defaults` [^anaconda-compilers]. `conda-build` 3.x also
 introduced dynamic pinning expressions that made it easier to maintain
 compatibility boundaries. ABI documentation from [^abilab] helped
 establish whether a given package should be pinned to major, minor, or bugfix
@@ -283,7 +283,7 @@ development.
 
 [^chatting-ocefpaf]: [Filipe Fernandes on the Evolution of conda-forge](https://www.youtube.com/watch?v=U2oa_RLbTVA), Chatting with the Conda Community #1, 2024.
 
-[^conda-build-3]: [Conda-build 3](https://github.com/conda/conda-build/tree/3.0.0)
+[^conda-build-3]: [`conda-build` 3](https://github.com/conda/conda-build/tree/3.0.0)
 
 [^conda-changelog-1.0]: [`conda` 1.0 release notes](https://github.com/conda/conda/blob/24.7.1/CHANGELOG.md#100-2012-09-06), 2012.
 
