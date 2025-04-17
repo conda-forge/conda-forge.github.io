@@ -2,11 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/news/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2025-04-02T00:00:00.000Z</updated>
+    <updated>2025-05-16T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/news/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Updating our Ubuntu base for Miniforge Docker images (20.04 → 24.04)]]></title>
+        <id>https://conda-forge.org/news/2025/05/16/new-ubuntu-base-for-miniforge-docker-images/</id>
+        <link href="https://conda-forge.org/news/2025/05/16/new-ubuntu-base-for-miniforge-docker-images/"/>
+        <updated>2025-05-16T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[The base image for our Ubuntu Dockerfiles has been upgraded from Ubuntu 20.04]]></summary>
+        <content type="html"><![CDATA[<p>The base image for our Ubuntu Dockerfiles has been upgraded from Ubuntu 20.04
+(focal) to Ubuntu 24.04 (noble) in
+<a href="https://github.com/conda-forge/miniforge-images/pull/145" target="_blank" rel="noopener noreferrer">PR #145</a>.
+This change ensures continued support and access to newer packages and system
+libraries.</p>
+<p>Downstream users building on top of the Ubuntu variant of our containers should
+verify compatibility with the updated environment.</p>
+<p>Thanks to @rpanai for the contribution and to the reviewers for their input.</p>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Security Incident with Package Uploads (CVE-2025-31484)]]></title>
         <id>https://conda-forge.org/news/2025/04/02/Security-Incident-with-Package-Uploads/</id>
@@ -468,16 +483,5 @@ being worked out. Only <code>conda</code> versions 4.8.0 or newer have this virt
 package. If you are using a system with MacOS older than 10.13 and are
 using <code>conda</code> older than 4.8.0, you will need to either upgrade <code>conda</code>
 to at least 4.8.0 or upgrade your system to at least MacOS 10.13.</p>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[End-of-life for CentOS 6]]></title>
-        <id>https://conda-forge.org/news/2023/07/12/end-of-life-for-centos-6/</id>
-        <link href="https://conda-forge.org/news/2023/07/12/end-of-life-for-centos-6/"/>
-        <updated>2023-07-12T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[As you may be aware, we have delayed the deprecation of our CentOS 6 build system the linux64]]></summary>
-        <content type="html"><![CDATA[<p>As you may be aware, we have delayed the deprecation of our CentOS 6 build system the <code>linux64</code>
-platform several times. We have now set a formal deprecation date to be June 30, 2024. This date
-matches the <a href="https://access.redhat.com/articles/4038291" target="_blank" rel="noopener noreferrer">end of extended life-cycle support</a> from
-RedHat for RHEL 6. After this date, we build packages against CentOS 7 by default for <code>linux64</code>.</p>]]></content>
     </entry>
 </feed>
