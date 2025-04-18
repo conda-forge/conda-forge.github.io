@@ -1717,9 +1717,9 @@ add some information on r packages which make heavy use of `noarch: generic`
 
 :::
 
-#### Noarch packages with abi3 extensions
+#### Packages with abi3 extensions
 
-It is not currently officially supported to build packages using CPython's stable [`abi3` mode](https://docs.python.org/3/c-api/stable.html), but support is being tracked in [conda-forge/conda-forge.github.io#1865](https://github.com/conda-forge/conda-forge.github.io/issues/1865) and [CEP 20](https://github.com/conda/ceps/blob/main/cep-0020.md).
+Packages can be built using CPython's stable [`abi3` mode](https://docs.python.org/3/c-api/stable.html) by adding a few conditionals to the `build`, `requirements`, and (optionally) `test` sections, see [this `meta.yaml` example](https://github.com/conda-forge/python-abi3-feedstock/blob/main/recipe/example-meta.yaml) from the `python-abi3-feedstock`, in particular the parts that depend on the `is_abi3`, as well as the relevant [conda-build documentation](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-version-independent-packages).
 
 ## Multi-output recipes
 
