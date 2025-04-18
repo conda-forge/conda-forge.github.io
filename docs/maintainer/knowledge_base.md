@@ -1721,7 +1721,7 @@ Again, remember to rerender after adding / modifying these files so the changes 
 
 <a id="noarch-generic"></a>
 
-#### Noarch generic
+### Noarch generic
 
 :::info[Todo]
 
