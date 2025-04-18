@@ -94,7 +94,12 @@ x86_64-apple-darwin13.4.0-clang: No such file or directory
 
 are a telltale sign that you are lacking compilers.
 
-Depending on the specific tools that you use for building C/C++ code, you may need some additional tools, for example:
+The actual orchestration of the various compilation and linking steps is almost always done
+by some build orchestrator (e.g. `CMake`, `meson`, ...), which will generally require a
+build system (e.g. `ninja`, `make`), or possibly other supporting tools like `pkg-config`.
+
+We package several tools that can be used for building C/C++ code; a selection that covers
+the most common scenarios would be:
 
 ```
 cxx-compiler cmake pkg-config make ninja meson
