@@ -1726,6 +1726,9 @@ add some information on r packages which make heavy use of `noarch: generic`
 
 Packages can be built using CPython's stable [`abi3` mode](https://docs.python.org/3/c-api/stable.html) by adding a few conditionals to the `build`, `requirements`, and (optionally) `test` sections, see [this `meta.yaml` example](https://github.com/conda-forge/python-abi3-feedstock/blob/main/recipe/example-meta.yaml) from the `python-abi3-feedstock`, in particular the parts that depend on the `is_abi3`, as well as the relevant [conda-build documentation](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-version-independent-packages).
 
+Note that the python extension that is being packaged needs to support building the extension as an ABI3 package. For setuptools
+based projects, the keyword argument `py_limited_api=True` needs to be passed to the `setup` function.
+
 ## Multi-output recipes
 
 `conda-build` has the ability to create multiple package artifacts from a single recipe via the `outputs` section in `meta.yaml`. This is useful in several scenarios, including:
