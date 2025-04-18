@@ -22,7 +22,7 @@ You can [search](https://anaconda.org/) for packages online. Look out for packag
 
 ## Why conda-forge?
 
-The packaging team from [Anaconda, Inc.](https://anaconda.org/), packages a multitude of packages and provides them to all users free of charge in their `defaults` channel.
+The packaging team from [Anaconda, Inc.](https://anaconda.org/) provides a multitude of packages on their `defaults` channel.
 
 But what if a package you are looking for is not in the `defaults` channel?
 In the past users only had the option to create an [Anaconda Cloud](https://anaconda.org/) account and create their own channel.

@@ -38,7 +38,7 @@ The YAML files included in `.ci_support` are minimal and not rendered like the o
 Instead, conda-build will take these and combine them with the pinnings from `conda-forge-pinning` at runtime.
 Also note that `staged-recipes` only builds for x64. Support for additional architectures can only be done once a feedstock has been provided.
 
-- Linux: `linux64.yaml` plus the CUDA (10.2, 11.0, 11.1 and 11.2) variants.
+- Linux: `linux64.yaml` plus the CUDA variants.
 - macOS: `osx64.yaml`.
 - Windows `win64.yaml`.
 
@@ -382,7 +382,7 @@ work and learn about some of the historical context of the feedstock.
 Once you have established a working relationship with the maintainers, you can ask
 them to add you to the feedstock team. They can then use this command
 to add you to the team. There isn't any official requirement for how to add new
-maintainers so it may take a while for concensus to be reached
+maintainers so it may take a while for consensus to be reached
 on when to add new maintainers. Do not let this discourage you from contributing!
 
 PRs are free to be opened by anyone!!! Thank you for your time and effort!!!
@@ -440,24 +440,24 @@ via a pull request.
 We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on
 GitHub Actions.
 
+#### Webservices Background Jobs
+
+The webservices Heroku app dispatches to GitHub Actions to run compute-intensive background jobs, including rerendering, version updates,
+and automerge jobs. The GitHub actions runs happen on the [conda-forge-webservices repo](https://github.com/conda-forge/conda-forge-webservices).
+These runs use the [webservices-dispatch-action Docker container](https://hub.docker.com/r/condaforge/webservices-dispatch-action) for some
+operations. This container is tagged with the latest webservices version.
+
 #### Automerge
 
-The automerge service uses the GitHub action in this [repo](https://github.com/conda-forge/automerge-action). This action runs out of a
-Docker [container](https://hub.docker.com/repository/docker/condaforge/automerge-action) on the `prod` tag. See the
-repo [README.md](https://github.com/conda-forge/automerge-action#) for more details. PRs are automatically merged if they satisfy either
-of the two following sets of conditions:
+Our automerge service runs via GitHub Actions in the [conda-forge-webservices repo](https://github.com/conda-forge/conda-forge-webservices).
+
+PRs are automatically merged if they satisfy either of the two following sets of conditions:
 
 1. are from the `regro-cf-autotick-bot`, have `[bot-automerge]` in the title, all statuses are passing, and the feedstock allows automerge
 2. have the `automerge` label and all statuses are passing.
 
 For PRs from the `regro-cf-autotick-bot`, it can be useful to remove the `[bot-automerge]` slug from the PR title if you are making
 edits to the PR.
-
-#### Rerendering
-
-The rerendering service is triggered by the Heroku app. It uses the GitHub action in this [repo](https://github.com/conda-forge/webservices-dispatch-action).
-This action runs out of a Docker [container](https://hub.docker.com/repository/docker/condaforge/webservices-dispatch-action) on the `prod` tag. See the
-repo [README.md](https://github.com/conda-forge/webservices-dispatch-action) for more details.
 
 ### Skipping CI builds
 
@@ -669,20 +669,15 @@ works as follows.
 2. Then the feedstock CI job makes an API call to our admin webservices server with its secret token
    and some information about the package it is trying to upload.
 3. The webservices server validates the secret token, the integrity of the package, and
-   that the package is allowed for the given feedstock.
-4. If all of the validation passes, the package is then copied to the `conda-forge`
-   channel.
+   that the package is allowed for the given feedstock. As a part of the validation process, the
+   package is copied from `cf-staging` to a secured, intermediate staging channel, `cf-post-staging`.
+   This step prevents changes to the package while it is being validated.
+4. If all of the validation passes, the package is then copied from `cf-post-staging` to the
+   `conda-forge` channel.
 
-We attempt to report errors in this process to users via comments on commits/issues in the feedstocks.
-Sometimes these reports fail. If you think you are having trouble with uploads, make sure to check/try
-the following things:
+There are two scenarios we consider:
 
-- Ensure that `conda_forge_output_validation: true` is set in your `conda-forge.yml`.
-- Retry the package build and upload by pushing an empty commit to the feedstock.
-- Rerender the feedstock in a PR from a fork of the feedstock and merge.
-- Request a feedstock token reset via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#reset-your-feedstock-token).
-- Request that any new packages be added to the allowed outputs for the feedstock
-  via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock).
+### Package validation failed for a new output name
 
 New packages that are added to existing feedstocks are not registered automatically in order to prevent
 typo squatting and other malicious activities. Package outputs are added during feedstock creation.
@@ -694,6 +689,17 @@ In rare cases, the package name may change regularly in a well-defined way (e.g.
 In this case, you can use our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock)
 to add a glob pattern that matches the new package name pattern. We use the Python `fnmatch` module syntax.
 Output packages that match these patterns will be automatically registered for your feedstock.
+
+### Package validation failed for an existing output name
+
+We attempt to report errors in this process to users via comments on commits/issues in the feedstocks.
+Sometimes these reports fail. If you think you are having trouble with uploads, make sure to check/try
+the following things:
+
+- Ensure that `conda_forge_output_validation: true` is set in your `conda-forge.yml`.
+- Retry the package build and upload by pushing an empty commit to the feedstock.
+- Rerender the feedstock in a PR from a fork of the feedstock and merge.
+- Request a feedstock token reset via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#reset-your-feedstock-token).
 
 ## Stages of package building and involved infrastructure
 
@@ -793,18 +799,24 @@ Authenticated services involved:
 ### Package validation and publication
 
 Once built on `main` (or other branches), the conda packages are uploaded to an intermediary channel named `cf-staging`.
+The CI job then makes a copy request to the webservices with the feedstock token and other metadata about the package.
 From there, our webservices (`conda-forge/conda-forge-webservices`) does the following:
 
-- The logic checks the feedstock token to authenticate a legitimate request.
-- The logic checks that the hash sum of the package on `cf-staging` against
-  the value computed in the CI to ensure the artifact to be copied is the same.
-- The logic checks that the feedstock is allowed to push the package using
-  the `conda-forge/feedstock-outputs` repo.
-- If all three checks pass, the webservices copies the artifacts from `cf-staging` to `conda-forge`.
+1. The webservices validates the package and copy request by
+   - using the feedstock token to authenticate the copy request by the CI job
+   - checking that the hash sum of the package on `cf-staging` from the `anaconda.org` API
+     is the same as the value sent in the copy request by the CI job
+   - checking that the feedstock is allowed to push the package using the
+     `conda-forge/feedstock-outputs` repo
+2. If all three checks pass, the webservices copies the package to a secured, intermediate
+   staging channel, `cf-post-staging`, in order to ensure the package is not changed further during validation.
+3. The webservices repeats the check of the package hash sum on `cf-post-staging` to ensure no changes were made
+   during the initial validation step.
+4. If the second hash sum check passes, the webservices copies the package to the `conda-forge` channel.
 
 Authenticated services involved:
 
-- Anaconda.org uploads to `conda-forge` and `cf-staging`
+- Anaconda.org uploads to `conda-forge`, `cf-post-staging`, and `cf-staging`
 - The `conda-forge-webservices` app deployment itself (currently at Heroku)
 
 ### Post-publication
