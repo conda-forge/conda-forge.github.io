@@ -272,7 +272,7 @@ This is usually done via a PR that, once approved, is merged and triggers the re
 
 It also does the job of creating new feedstocks for recipes that have been merged in [`conda-forge/staged-recipes`](#staged-recipes).
 The [`create_feedstocks` workflow](https://github.com/conda-forge/admin-requests/blob/main/.github/workflows/create_feedstocks.yml) runs several times per hour to create the new feedstock repositories on the `conda-forge` organization.
-The core logic is defined in the Python script [`.github/workflows/scripts/create_feedstocks.py`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/scripts/create_feedstocks.py).
+The core logic is defined in the Python script [`.github/workflows/scripts/create_feedstocks.py`](https://github.com/conda-forge/admin-requests/blob/main/scripts/create_feedstocks.py).
 
 #### autotick-bot
 
