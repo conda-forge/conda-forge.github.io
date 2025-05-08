@@ -253,6 +253,10 @@ const config = {
             from: "/news/2024/04/09/clang-everywhere/",
             to: "/news/2024/04/30/clang-everywhere/",
           },
+          {
+            from: "/news/2025/05/16/new-ubuntu-base-for-miniforge-docker-images/",
+            to: "/news/2025/04/17/new-ubuntu-base-for-miniforge-docker-images/",
+          },
           /* Docs redirects */
           {
             from: "/docs/user/announcements.html",
