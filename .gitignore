@@ -35,6 +35,7 @@ sphinx/newsfeed/demo/_build
 /static/schema/conda-forge.schema.json
 /community/cfep-index.md
 /community/governance.md
+/community/code-of-conduct.md
 
 # Generated files
 .docusaurus
