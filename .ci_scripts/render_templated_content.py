@@ -1,4 +1,5 @@
 import csv
+import io
 import re
 import tarfile
 from dataclasses import dataclass
@@ -8,9 +9,10 @@ from tempfile import TemporaryDirectory
 import requests
 
 
-REPO_URL = "https://github.com/conda-forge/cfep"
-REPO_ARCHIVE = "https://github.com/conda-forge/cfep/archive/main.tar.gz"
-REPO_CONTENTS = "https://api.github.com/repos/conda-forge/cfep/contents/"
+CFEP_REPO_URL = "https://github.com/conda-forge/cfep"
+CFEP_REPO_ARCHIVE = "https://github.com/conda-forge/cfep/archive/main.tar.gz"
+CFEP_REPO_CONTENTS = "https://api.github.com/repos/conda-forge/cfep/contents/"
+GOVERNANCE_REPO_URL = "https://github.com/conda-forge/governance"
 TITLE_PATTERN = "<td>\s*Title\s*</td><td>\s*(.*)\s*</td>"
 STATUS_PATTERN = "<td>\s*Status\s*</td><td>\s*(.*)\s*</td>"
 REPO_DIR = Path(__file__).parents[1].absolute()
@@ -18,8 +20,8 @@ CFEP_INDEX_MD_TMPL = REPO_DIR / "community" / "cfep-index.md.tmpl"
 CFEP_INDEX_MD = REPO_DIR / "community" / "cfep-index.md"
 GOVERNANCE_MD_TMPL = REPO_DIR / "community" / "governance.md.tmpl"
 GOVERNANCE_MD = REPO_DIR / "community" / "governance.md"
-CORE_CSV = REPO_DIR / "src" / "core.csv"
-EMERITUS_CSV = REPO_DIR / "src" / "emeritus.csv"
+CODE_OF_CONDUCT_MD_TMPL = REPO_DIR / "community" / "code-of-conduct.md.tmpl"
+CODE_OF_CONDUCT_MD = REPO_DIR / "community" / "code-of-conduct.md"
 
 
 @dataclass
@@ -46,7 +48,7 @@ class Cfep:
 def get_cfeps_from_gh_api():
     """Generator that returns all CFEPs from GitHub repo"""
     response = requests.get(
-        REPO_CONTENTS, headers={"Accept": "application/vnd.github.v3+json"}
+        CFEP_REPO_CONTENTS, headers={"Accept": "application/vnd.github.v3+json"}
     )
     response.raise_for_status()
     for content in response.json():
@@ -70,7 +72,7 @@ def get_cfeps_from_gh_api():
 
 def get_cfeps():
     """Return a generator of CFEPs, by traversing the contents of the repo archive"""
-    r = requests.get(REPO_ARCHIVE, stream=True)
+    r = requests.get(CFEP_REPO_ARCHIVE, stream=True)
     r.raise_for_status()
     with TemporaryDirectory() as tmp:
         # Write the tarball to a temporary directory
@@ -86,7 +88,7 @@ def get_cfeps():
         # Traverse the extracted directory and return all CFEPs
         for cfep in sorted(extracted_dir.rglob("cfep-*.md")):
             name = cfep.name
-            url = f"{REPO_URL}/blob/main/{name}"
+            url = f"{CFEP_REPO_URL}/blob/main/{name}"
             if name == "cfep-00.md":
                 # Hardcode title and status for CFEP-00
                 yield Cfep(name, "CFEP Template", "Proposed", url)
@@ -106,10 +108,10 @@ def write_cfep_index():
     CFEP_INDEX_MD.write_text(contents)
 
 
-def _get_formatted_names(path_file):
-    with open(path_file, "r") as csv_file:
-        dict_csv = csv.DictReader(csv_file)
-        sorted_csv = sorted(dict_csv, key=lambda d: d["name"])
+def _get_formatted_names(csv_contents):
+    memfile = io.StringIO(csv_contents)
+    dict_csv = csv.DictReader(memfile)
+    sorted_csv = sorted(dict_csv, key=lambda d: d["name"])
     return "\n".join(
         f"- [{m['name']} @{m['github_username']}]"
         f"(https://github.com/{m['github_username']})"
@@ -117,15 +119,32 @@ def _get_formatted_names(path_file):
     )
 
 
-def write_core_members():
+def write_code_of_conduct():
+    r = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/CODE_OF_CONDUCT.md")
+    r.raise_for_status()
+    contents = CODE_OF_CONDUCT_MD_TMPL.read_text()
+    contents += r.text
+    CODE_OF_CONDUCT_MD.write_text(contents)
+
+
+def write_governance():
+    readme = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/README.md")
+    readme.raise_for_status()
+    core = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/teams/core.csv")
+    core.raise_for_status()
+    emeritus = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/teams/emeritus.csv")
+    emeritus.raise_for_status()
     contents = GOVERNANCE_MD_TMPL.read_text()
-    contents = contents.replace("{{ core_members }}", _get_formatted_names(CORE_CSV))
+    contents += readme.text
+    contents = contents.replace("{{ core_members }}", _get_formatted_names(core.text))
     contents = contents.replace(
-        "{{ emeritus_members }}", _get_formatted_names(EMERITUS_CSV)
+        "{{ emeritus_members }}", _get_formatted_names(emeritus.text)
     )
+    contents = contents.replace("(./CODE_OF_CONDUCT.md)", "(./code-of-conduct.md)")
     GOVERNANCE_MD.write_text(contents)
 
 
 if __name__ == "__main__":
     write_cfep_index()
-    write_core_members()
+    write_governance()
+    write_code_of_conduct()
