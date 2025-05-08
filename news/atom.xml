@@ -23,6 +23,14 @@ verify compatibility with the updated environment.</p>
 <p>Thanks to @rpanai for the contribution and to the reviewers for their input.</p>]]></content>
     </entry>
     <entry>
+        <title type="html"><![CDATA[Governance document moved to conda-forge/governance]]></title>
+        <id>https://conda-forge.org/news/2025/05/08/governance-moved/</id>
+        <link href="https://conda-forge.org/news/2025/05/08/governance-moved/"/>
+        <updated>2025-05-08T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Following a change in our governance, this document lives now in conda-forge/governance, along with the CSV files that list the core and emeritus members.]]></summary>
+        <content type="html"><![CDATA[<p>Following a <a href="https://github.com/conda-forge/conda-forge.github.io/pull/2501" target="_blank" rel="noopener noreferrer">change</a> in our governance, this document lives now in <a href="https://github.com/conda-forge/governance" target="_blank" rel="noopener noreferrer"><code>conda-forge/governance</code></a>, along with the CSV files that list the <code>core</code> and <code>emeritus</code> members.</p>]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Security Incident with Package Uploads (CVE-2025-31484)]]></title>
         <id>https://conda-forge.org/news/2025/04/02/Security-Incident-with-Package-Uploads/</id>
         <link href="https://conda-forge.org/news/2025/04/02/Security-Incident-with-Package-Uploads/"/>
@@ -457,31 +465,5 @@ consume the main channel again.</p>
 of packages already on the day of the offical Python 3.12 release.
 At the same time, we have stopped the Python 3.11 migration and added it
 to the list of default Python versions on conda-forge.</p>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Bumping Minimum MacOS version to 10.13]]></title>
-        <id>https://conda-forge.org/news/2023/08/24/bumping-minimum-macos-version-to-1013/</id>
-        <link href="https://conda-forge.org/news/2023/08/24/bumping-minimum-macos-version-to-1013/"/>
-        <updated>2023-08-24T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[We will bump the minimum MacOS version from 10.9 (released in Oct. 2013,]]></summary>
-        <content type="html"><![CDATA[<p>We will bump the minimum MacOS version from 10.9 (released in Oct. 2013,
-end-of-life since Dec. 2016) to 10.13 (released Sept. 2017, end-of-life
-since Dec. 2020). The main reason we managed to support 10.9 this long
-at all, is that conda-forge is able to ship an up-to-date C++ standard
-library for OSX, <code>libcxx</code>, superseding the old one present in the MacOS
-SDK on the system (at least from the point-of-view of the respective
-conda environments).</p>
-<p>However, several core packages in the ecosystem now require at least
-10.13 (or will very soon), in a way that we cannot be circumvent. These
-packages include <code>libcxx</code>,
-<a href="https://discourse.llvm.org/t/libc-bumping-minimal-deployment-target-for-building-the-dylib-static-library-on-macos/68912" target="_blank" rel="noopener noreferrer">starting</a>
-with version 17.0. This change will not affect already published
-artifacts, but in the near future, all new builds for OSX will require
-at least 10.13. This constraint will be implemented through the <code>__osx</code>
-virtual package, but the details of how we will achieve this are still
-being worked out. Only <code>conda</code> versions 4.8.0 or newer have this virtual
-package. If you are using a system with MacOS older than 10.13 and are
-using <code>conda</code> older than 4.8.0, you will need to either upgrade <code>conda</code>
-to at least 4.8.0 or upgrade your system to at least MacOS 10.13.</p>]]></content>
     </entry>
 </feed>
