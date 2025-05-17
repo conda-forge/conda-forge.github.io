@@ -533,7 +533,6 @@ requirements:
     - numpy
   run:
     - python
-    - {{ pin_compatible("numpy") }}
 ```
 
 With MPI, openmpi is required for the build platform as the compiler wrappers are binaries, but mpich is not required as the compiler wrappers are scripts (see [example](https://github.com/conda-forge/mpi4py-feedstock/blob/743d379c4a04/recipe/meta.yaml#L37)):
@@ -770,28 +769,14 @@ host:
   - numpy
 ```
 
-At the time of writing (January, 2025), above is equivalent to the following,
+At the time of writing (June 2025), above is equivalent to the following,
 
 ```yaml
 host:
-  - numpy   1.22   # [py==39]
-  - numpy   1.22   # [py==310]
-  - numpy   1.23   # [py==311]
-  - numpy   1.26   # [py==312]
+  - numpy 2.*
 ```
 
-though the ongoing migration for numpy 2.0 has already been applied to many
-feedstocks, in which case the pinning looks like
-
-```yaml
-host:
-  - numpy   2.0    # [py==39]
-  - numpy   2.0    # [py==310]
-  - numpy   2.0    # [py==311]
-  - numpy   2.0    # [py==312]
-```
-
-See the pinning repository for what the pinning corresponds to at time of writing
+See the pinning repository for what the pinning corresponds to at any given time
 [https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml#L742](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml#L742)
 
 In either case, the actual runtime requirements are determined through numpy's
@@ -800,6 +785,7 @@ run-export, which is:
 - `>=1.2x,<2` if you're building against numpy 1.2x
 - `>=1.19,<3` if you're building against numpy 2.0
 - `>=1.21,<3` if you're building against numpy 2.1 or 2.2
+- `>=1.23,<3` if you're building against numpy 2.3
 
 If the package you are building has a higher minimum requirement for numpy, please add this under `run`:
 
