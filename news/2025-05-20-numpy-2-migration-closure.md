@@ -5,8 +5,10 @@ have been migrating feedstocks from NumPy 1.x to NumPy 2.x, and while not every 
 feedstock has been done, we are planning to conclude the migration at the end of May.
 
 For feedstocks that are not compatible with v2.x yet, this means you will have to add
+
 ```yaml
 numpy:
   - 1.26  # or similar
 ```
+
 to your `recipe/conda_build_config.yaml`, and then rerender.
