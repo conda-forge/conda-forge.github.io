@@ -13,7 +13,7 @@ numpy:
   - 1.26  # or 1.25
 ```
 
-to your `recipe/conda_build_config.yaml`, and then rerender.Pins below 1.25 are not possible
+to your `recipe/conda_build_config.yaml`, and then rerender. Pins below 1.25 are not possible
 if your feedstock supports Python 3.12, as NumPy 1.25 was the first version with support for
 that Python version (and it will not be possible going forward to pin different NumPy versions
 for different Python versions).
