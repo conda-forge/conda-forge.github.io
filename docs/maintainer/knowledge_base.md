@@ -534,6 +534,7 @@ requirements:
   run:
     - python
 ```
+For more details about numpy see the dedicated [section](#building-against-numpy).
 
 With MPI, openmpi is required for the build platform as the compiler wrappers are binaries, but mpich is not required as the compiler wrappers are scripts (see [example](https://github.com/conda-forge/mpi4py-feedstock/blob/743d379c4a04/recipe/meta.yaml#L37)):
 
@@ -771,7 +772,7 @@ host:
 
 At the time of writing (June 2025), above is equivalent to the following,
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 host:
   - numpy 2.*
 ```
