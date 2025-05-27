@@ -89,7 +89,7 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
    detail, see [Build from tarballs, not repos](#tarballs-no-repos)).
 2. Fork and clone the [staged-recipes](https://github.com/conda-forge/staged-recipes)
    repository from GitHub.
-3. Checkout a new branch from the staged-recipes `main` branch.
+3. On your fork of staged-recipes, create a new branch from the `main` branch.
 4. Through CLI, cd inside the ‘staged-recipes/recipes' directory.
 5. Within your forked copy, create a new folder in the recipes folder for your package (i.e, `...staged-recipes/recipes/<name-of-package>`)
 6. Copy [meta.yaml](https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml) from the example directory.
@@ -104,6 +104,7 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
 9. Be sure to fill in the `test` section. The simplest test will simply
    test that the module can be imported, as described in the example.
 10. Remove all irrelevant comments in the `meta.yaml` file.
+11. Double check the checklist (below) and then make a pull request from the new branch on your fork to the main branch of [staged-recipes](https://github.com/conda-forge/staged-recipes)
 
 :::tip
 
