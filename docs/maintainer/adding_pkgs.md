@@ -12,7 +12,7 @@ The contribution process can be broken down into three steps:
 
 - Step 1. Staging process (add recipe and license).
 
-  With the help of [the staging process](#creating-recipes), add a package's recipe and license to the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and create a pull request (PR).
+  With the help of [the staging process](#creating-recipes), add a package's recipe and license to the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and create a pull request ( [PR](../glossary.md#pr) ).
 
 - Step 2. Post staging process.
 
