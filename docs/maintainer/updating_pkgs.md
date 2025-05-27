@@ -47,9 +47,9 @@ For these reasons, maintainers are asked to fork the feedstock to their personal
 
 <a id="pushing-to-regro-cf-autotick-bot-branch"></a>
 
-#### Pushing to regro-cf-autotick-bot branch
+#### Pushing/Pulling to regro-cf-autotick-bot branch
 
-When a new version of a package is released on PyPI/CRAN/.., we have a bot that automatically creates version updates for the feedstock. In most cases you can simply merge this PR and it should include all changes. When certain things have changed upstream, e.g. the dependencies, you will still have to do changes to the created PR. As feedstock maintainer, you don't have to create a new PR for that but can simply push to the branch the bot created. There are two alternatives to push to the branch of the bot:
+When a new version of a package is released on PyPI/CRAN/.., we have a bot that automatically creates version updates for the feedstock. In most cases you can simply merge this PR and it should include all changes. When certain things have changed upstream, e.g. the dependencies, you will still have to do changes to the created PR. As feedstock maintainer, you don't have to create a new PR for that but can simply push to the branch the bot created. These bots are checking tens of thousands of packages, so it may be more than a few hours before the bot detects a change and makes an automatic pull request. One procedure is to wait for up to 24 hours to see if you receive an email with the automatic pull request, which may occur at https://github.com/conda-forge/package-you-maintain with a subject line like package-you-maintain Version X.Z. With default github settings, you will get an email notificaiton. You can follow the checklist on the pull request and then click to merge.  There are two alternatives to push to the branch of the bot:
 
 1. Manually setting up git remotes:
 
