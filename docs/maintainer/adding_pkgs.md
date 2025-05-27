@@ -12,7 +12,7 @@ The contribution process can be broken down into three steps:
 
 - Step 1. Staging process (add recipe and license).
 
-  With the help of [the staging process](#creating-recipes), add a package's recipe and license to the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and create a PR.
+  With the help of [the staging process](#creating-recipes), add a package's recipe and license to the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and create a pull request (PR).
 
 - Step 2. Post staging process.
 
@@ -131,7 +131,7 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 
 ### Feedback and revision
 
-Once you finished your PR, all you have to do is wait for feedback from our review team.
+Once you finished your pull request PR, all you have to do is wait for feedback from our review team.
 
 The review team will assist you by pointing out improvements and answering questions. Once the package is ready, the reviewers will approve and merge your pull request.
 
