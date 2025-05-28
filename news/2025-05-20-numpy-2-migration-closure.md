@@ -2,7 +2,7 @@
 
 NumPy 2.0 was a big change (the first major version in 15 years). For more than a year, we
 have been migrating feedstocks from NumPy 1.x to NumPy 2.x, and while not every affected
-feedstock has been done, we are planning to conclude the migration at the end of May.
+feedstock has been done, we are planning to conclude the migration in one week.
 Note that NumPy 2 support is required for feedstocks that intend to support Python 3.13
 and above.
 
