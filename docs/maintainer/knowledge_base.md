@@ -771,7 +771,7 @@ host:
   - numpy
 ```
 
-At the time of writing (June 2025), above is equivalent to the following,
+At the time of writing (May 2025), above is equivalent to the following,
 
 ```yaml title="recipe/conda_build_config.yaml"
 host:
