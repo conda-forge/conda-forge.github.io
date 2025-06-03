@@ -761,17 +761,16 @@ Other OpenGL API variants such as `libegl-devel`, `libgles-devel`, `libglx-devel
 
 ### Building Against NumPy
 
-Packages that link against NumPy need special treatment in the dependency section.
 Finding `numpy.get_include()` in `setup.py` or `cimport` statements in `.pyx` or `.pyd` files are a telltale sign that the package links against NumPy.
 
-In the case of linking, you need to use the `pin_compatible` function to ensure having a compatible numpy version at run time:
+Adding `numpy` in the `host:` section is sufficient to have a compatible NumPy version at run time:
 
 ```yaml
 host:
   - numpy
 ```
 
-At the time of writing (June 2025), above is equivalent to the following,
+At the time of writing (June 2025), the above is equivalent to the following:
 
 ```yaml title="recipe/conda_build_config.yaml"
 host:
@@ -779,7 +778,7 @@ host:
 ```
 
 See the pinning repository for
-[what the pinning corresponds to](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml#L742) at any given time.
+[what the pinning corresponds to](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml) at any given time.
 
 In either case, the actual runtime requirements are determined through numpy's
 run-export, which is:
