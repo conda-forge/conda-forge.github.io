@@ -50,10 +50,6 @@ requirements:
 
 When there's a new ABI version of gmp (say 7.0), then conda-forge-pinning will be updated. A re-rendering of a package using gmp will change. Therefore to check that a recipe needs to be rebuilt for updated pinnings, you only need to check if the package needs a rerender.
 
-:::note
-
-`NumPy` is an exception to this (See [Building Against NumPy](knowledge_base.md#linking-numpy)).
-
 :::
 
 If a package is not pinned in [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml), then the pinning needs to be done manually. If the package is a `C/C++` library with a `C/C++` API that is consumed and linked to by other libraries, then that package is a candidate to be added to `conda-forge-pinning`. Please open an issue in [conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock) for discussion.

@@ -1174,7 +1174,6 @@ Jinja expressions serve following purposes in the meta.yaml:
       - numpy
     run:
       - python
-      - {{ pin_compatible('numpy') }}
   ```
 
 For more information please refer to the [Templating with Jinja](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#templating-with-jinja) section in the conda-build docs.
