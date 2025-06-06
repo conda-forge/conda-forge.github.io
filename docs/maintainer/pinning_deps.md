@@ -44,8 +44,22 @@ Should be replaced by
 requirements:
   host:
     - gmp
+  # most libraries will automatically add the corresponding runtime requirement using
+  # a so-called "run-export" from the gmp build pulled into the host environment.
+  # In that case you can leave out the following run-requirement:
   run:
     - gmp
+```
+
+The run-export mechanism (see below) additionally ensures the correct version constraints
+(corresponding to the expected API/ABI stability of `gmp`) are added, so a recipe with an
+unpinned `gmp` dependency in the host environment will, in the end, work as follows:
+```yaml
+requirements:
+  host:
+    - gmp {{ version_from_global_pinning }}.*
+  run:
+    - gmp >={{ version_from_global_pinning }},<{{ next_version_with_breaking_changes }}
 ```
 
 When there's a new ABI version of gmp (say 7.0), then conda-forge-pinning will be updated. A re-rendering of a package using gmp will change. Therefore to check that a recipe needs to be rebuilt for updated pinnings, you only need to check if the package needs a rerender.
@@ -56,7 +70,11 @@ If a package is not pinned in [conda-forge-pinning](https://github.com/conda-for
 
 :::note
 
-If the constraints in `conda-forge-pinning` are not strict enough, you can override them by changing back to pinning the package with a version manually. You can make a pinning stricter by adding `{{ pin_compatible('gmp', max_pin='x.x.x') }}` to run requirements.
+If the constraints in `conda-forge-pinning` (resp. those coming from the package's run-exports)
+are not strict enough, you can override them by changing back to pinning the package with
+a version manually.
+You can make a pinning stricter by adding `{{ pin_compatible('gmp', max_pin='x.x.x') }}`
+to run requirements.
 
 :::
 
