@@ -15,7 +15,7 @@ repos:
       - id: prettier
         types_or: [markdown, mdx, json, yaml, css, javascript]
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.12
+    rev: v0.11.13
     hooks:
       - id: ruff-format
 ci:
