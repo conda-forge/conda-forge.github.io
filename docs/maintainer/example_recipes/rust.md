@@ -19,8 +19,8 @@ source:
 
 build:
   env:
-      CARGO_PROFILE_RELEASE_STRIP: symbols
-      CARGO_PROFILE_RELEASE_LTO: fat
+    CARGO_PROFILE_RELEASE_STRIP: symbols
+    CARGO_PROFILE_RELEASE_LTO: fat
   script:
     - if: unix
       then:
