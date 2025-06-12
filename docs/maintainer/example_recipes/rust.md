@@ -18,26 +18,25 @@ source:
   sha256: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
 
 build:
+  env:
+      CARGO_PROFILE_RELEASE_STRIP: symbols
+      CARGO_PROFILE_RELEASE_LTO: fat
   script:
     - if: unix
       then:
-        - export CARGO_PROFILE_RELEASE_STRIP=symbols
-        - export CARGO_PROFILE_RELEASE_LTO=fat
         - cargo auditable install --locked --no-track --bins --root "$PREFIX" --path .
       else:
-        - set CARGO_PROFILE_RELEASE_STRIP=symbols
-        - set CARGO_PROFILE_RELEASE_LTO=fat
         - cargo auditable install --locked --no-track --bins --root %PREFIX% --path .
     - cargo-bundle-licenses --format yaml --output ./THIRDPARTY.yml
   number: 0
 
 requirements:
   build:
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
     - ${{ compiler('rust') }}
     - cargo-bundle-licenses
     - cargo-auditable
-    - ${{ compiler('c') }}
-    - ${{ stdlib('c') }}
 
 tests:
   - script: example-package --help
