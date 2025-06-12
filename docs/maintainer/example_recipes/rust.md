@@ -24,11 +24,7 @@ build:
       CARGO_PROFILE_RELEASE_STRIP: symbols
       CARGO_PROFILE_RELEASE_LTO: fat
     content:
-      - if: unix
-        then:
-          - cargo auditable install --locked --no-track --bins --root "$PREFIX" --path .
-        else:
-          - cargo auditable install --locked --no-track --bins --root %PREFIX% --path .
+      - cargo auditable install --locked --no-track --bins --root ${{ PREFIX }} --path .
       - cargo-bundle-licenses --format yaml --output ./THIRDPARTY.yml
 
 requirements:
