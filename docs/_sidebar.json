@@ -46,6 +46,15 @@
           "maintainer/understanding_conda_forge/staged_recipes",
           "maintainer/understanding_conda_forge/feedstocks"
         ]
+      },
+      {
+        "type": "category",
+        "label": "Example recipes",
+        "link": {
+          "type": "doc",
+          "id": "maintainer/example_recipes/index"
+        },
+        "items": ["maintainer/example_recipes/rust"]
       }
     ]
   },
