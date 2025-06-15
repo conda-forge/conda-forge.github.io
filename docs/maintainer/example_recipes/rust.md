@@ -10,11 +10,11 @@ context:
   version: "0.1.0"
 
 package:
-  name: ${{ name|lower }}
-  version: ${{ version }}
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: https://github.com/example-package/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  url: https://github.com/example-package/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
 
 build:
@@ -24,14 +24,14 @@ build:
       CARGO_PROFILE_RELEASE_STRIP: symbols
       CARGO_PROFILE_RELEASE_LTO: fat
     content:
-      - cargo auditable install --locked --no-track --bins --root ${{ PREFIX }} --path .
+      - cargo auditable install --locked --no-track --bins --root {{ PREFIX }} --path .
       - cargo-bundle-licenses --format yaml --output ./THIRDPARTY.yml
 
 requirements:
   build:
-    - ${{ stdlib('c') }}
-    - ${{ compiler('c') }}
-    - ${{ compiler('rust') }}
+    - {{ stdlib('c') }}
+    - {{ compiler('c') }}
+    - {{ compiler('rust') }}
     - cargo-bundle-licenses
     - cargo-auditable
 
