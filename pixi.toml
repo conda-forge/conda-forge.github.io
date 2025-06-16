@@ -1,0 +1,17 @@
+[workspace]
+authors = ["Wolf Vollprecht <w.vollprecht@gmail.com>"]
+channels = ["conda-forge"]
+name = "conda-forge-docs"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+install-npm = "npm install"
+start = { cmd = "npm run start", depends-on = ["install-npm"] }
+
+[dependencies]
+python = "3.*"
+requests = "*"
+pip = "*"
+nodejs = "20.*"
+pre-commit = "*"
