@@ -256,11 +256,11 @@ often used as a shorthand for the compiler generation, but what's really relevan
 toolchain version, which, since VS2015 has been 14.x, and which is referred to as `vc`.
 
 | VS Year | VS Version | Compiler Version | Toolchain Version | Runtime Version |
-|--------|--------|--------|--------|--------|
-| 2015 | 14.0 | 19.0  | 14.0 | 14.0.zzzzz  |
-| 2017 | 15.x | 19.1y | 14.1 | 14.1y.zzzzz |
-| 2019 | 16.x | 19.2x | 14.2 | 14.2x.zzzzz |
-| 2022 | 17.x | 19.3x | 14.3 | 14.3x.zzzzz |
+| ------- | ---------- | ---------------- | ----------------- | --------------- |
+| 2015    | 14.0       | 19.0             | 14.0              | 14.0.zzzzz      |
+| 2017    | 15.x       | 19.1y            | 14.1              | 14.1y.zzzzz     |
+| 2019    | 16.x       | 19.2x            | 14.2              | 14.2x.zzzzz     |
+| 2022    | 17.x       | 19.3x            | 14.3              | 14.3x.zzzzz     |
 
 In the table above, `x` and `y` on the same line are referring to the same digit, though there
 are various deviations from this schema. For example, the minor versions for the 2022 line went
