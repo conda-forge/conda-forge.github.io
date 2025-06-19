@@ -64,3 +64,22 @@ This recipe template supports different features:
 If your package requires `cgo` instead of `go-nocgo`, you can use `${{ compiler("go-cgo") }}` instead to build the package. By default, the `go-nocgo` compiler [is used](https://github.com/conda-forge/staged-recipes/blob/main/.ci_support/linux64.yaml).
 
 Sometimes, `go-licenses` might fail to detect licenses for some packages. In such cases, you can manually download the license file from the official source and add `--ignore github.com/bad-package/bad-package` to the `go-licenses` invokation. See [here](https://github.com/conda-forge/k9s-feedstock/blob/7929e0d86c829ba2ca172f08926f9fb7e6398247/recipe/recipe.yaml) for an example.
+
+Some packages ship multiple binaries. Then, the `go build` command needs to be run for each binary.
+It is increasingly common for the go build command to require specifying a subdirectory, so it would look something like:
+
+```bash
+go-licenses save ./cmd/example-package --save-path ../library_licenses
+go build -v -o ${PREFIX}/bin/example-package -ldflags="-s -w" ./cmd/example-package
+```
+
+This can vary from project to project.
+
+Some older Go packages that are not using Go modules yet can be converted by using:
+
+```bash
+go mod init
+go mod tidy
+```
+
+Maybe some additional work is required to make older packages buildable with Go modules.
