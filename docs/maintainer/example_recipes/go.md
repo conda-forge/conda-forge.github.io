@@ -24,8 +24,8 @@ build:
     - cd src
     - go-licenses save . --save_path ../library_licenses
     - if: unix
-      then: go build -v -o $PREFIX/bin/example-package
-      else: go build -v -o %LIBRARY_BIN%\example-package.exe
+      then: go build -v -o $PREFIX/bin/example-package -ldflags="-s -w"
+      else: go build -v -o %LIBRARY_BIN%\example-package.exe -ldflags="-s"
 
 requirements:
   build:
