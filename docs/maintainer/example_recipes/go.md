@@ -61,7 +61,7 @@ This recipe template supports different features:
 - Package licenses of statically linked libraries.
 - Ensure only binary is created by using `strict: true` in the `package_contents` tests.
 
-If your package requires `cgo` instead of `go-nocgo`, you can use `${{ compiler("go-cgo") }}` instead to build the package. By default, the `go-nocgo` compiler [is used](https://github.com/conda-forge/staged-recipes/blob/main/.ci_support/linux64.yaml).  Using `${{ compiler("go-cgo")) }}` also requires `${{ compiler("c") }}` and `${{ stdlib("c") }}` and may require `${{ compiler("cxx") }}` if C++ code is compiled.  C/C++ build tools such as `make`, `autoconf`, `automake`, `libtool` or `cmake` may also be needed.
+If your package requires `cgo` instead of `go-nocgo`, you can use `${{ compiler("go-cgo") }}` instead to build the package. By default, the `go-nocgo` compiler [is used](https://github.com/conda-forge/staged-recipes/blob/main/.ci_support/linux64.yaml). Using `${{ compiler("go-cgo")) }}` also requires `${{ compiler("c") }}` and `${{ stdlib("c") }}` and may require `${{ compiler("cxx") }}` if C++ code is compiled. C/C++ build tools such as `make`, `autoconf`, `automake`, `libtool` or `cmake` may also be needed.
 
 Sometimes, `go-licenses` might fail to detect licenses for some packages. In such cases, you can manually download the license file from the official source and add `--ignore github.com/bad-package/bad-package` to the `go-licenses` invokation. See [here](https://github.com/conda-forge/k9s-feedstock/blob/7929e0d86c829ba2ca172f08926f9fb7e6398247/recipe/recipe.yaml) for an example.
 
