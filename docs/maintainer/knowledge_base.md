@@ -86,6 +86,14 @@ Some optional, but useful CMake options:
 - `-DCMAKE_FIND_FRAMEWORK=NEVER` and `-DCMAKE_FIND_APPBUNDLE=NEVER` Prevent CMake from using system-wide macOS packages.
 - `${CMAKE_ARGS}` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like [CUDA builds](#cuda).
 
+:::warning
+
+As `${CMAKE_ARGS}` is a space separated list of options, quoting `${CMAKE_ARGS}`
+(`"${CMAKE_ARGS}"`) in recipes can lead to build errors as quoting makes the shell
+treat the contents of the variable as a single argument.
+
+:::
+
 Here are some basic commands for you to get started. These are dependent on your source
 code layout and aren't intended to be used "as is".
 
