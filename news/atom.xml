@@ -2,11 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/news/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2025-06-11T00:00:00.000Z</updated>
+    <updated>2025-07-01T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/news/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Moving to GCC 14 and Clang 19 as default compiler versions]]></title>
+        <id>https://conda-forge.org/news/2025/07/01/moving-to-gcc-14-clang-19/</id>
+        <link href="https://conda-forge.org/news/2025/07/01/moving-to-gcc-14-clang-19/"/>
+        <updated>2025-07-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[As part of our regular toolchain updates, we're planning to update the default]]></summary>
+        <content type="html"><![CDATA[<p>As part of our regular toolchain updates, we're planning to update the default
+versions of GCC (for linux) to v14 and of Clang (for OSX) to v19, in one week.</p>
+<p>For more details, see <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/7421" target="_blank" rel="noopener noreferrer">https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/7421</a>.</p>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Moving to Visual Studio 2022 as default windows compiler]]></title>
         <id>https://conda-forge.org/news/2025/06/11/moving-to-vs2022/</id>
@@ -423,54 +433,5 @@ the default compilers on feedstocks unless there are compelling reasons.</p>
 <p>We have changed a lot of things, so there's a chance we missed something somewhere. If you have suggestions or errors to report, please let us know in the <a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer">website issue tracker</a>. Feel free to check the <a href="https://conda-forge.org/docs/user/contributing/#improve-the-website">documentation contribution guidelines</a> too.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="acknowledgements">Acknowledgements<a href="https://conda-forge.org/news/2024/04/09/new-website/#acknowledgements" class="hash-link" aria-label="Direct link to Acknowledgements" title="Direct link to Acknowledgements">​</a></h2>
 <p>This revamp was a months-long effort. The core team would like to take a moment to thank to all the contributors that made it possible (in alphabetical order): Afshin Darian, Asmit Malakannawar, Gabriela Vives, Isabela Presedo-Floyd, Klaus Zimmermann, Tania Allard.</p>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Upcoming migration for stdlib("c")]]></title>
-        <id>https://conda-forge.org/news/2024/03/24/stdlib-migration/</id>
-        <link href="https://conda-forge.org/news/2024/03/24/stdlib-migration/"/>
-        <updated>2024-03-24T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Almost since the inception of conda-forge, the baseline version of our standard]]></summary>
-        <content type="html"><![CDATA[<p>Almost since the inception of conda-forge, the baseline version of our standard
-library ("stdlib") for C has not changed. This library comes with extra
-complications because it is an essential part of the operating system, and one
-of the few things that conda/mamba/etc. cannot ship safely.</p>
-<p>As the ecosystem has moved on and many packages are starting to require newer
-baseline versions, we need to follow suit at some point. However, to avoid
-breaking users on older systems, we need to have infrastructure in place that
-allows our packages to have sufficiently accurate metadata, such that conda can
-avoid the installation of a package requiring a newer stdlib on an old system.</p>
-<p>After many discussions across conda-forge stakeholders, the solution we arrived
-at is the introduction of a new Jinja2-function <code>{{ stdlib("c") }}</code>, which
-reflects that a given recipe requires a C stdlib. Making this relationship
-explicit will make it easy to correctly reflect the requirement for newer
-stdlib versions per feedstock, as well as in our global pinning.</p>
-<p>Up until now, the stdlib was handled implicitly as part of the compiler stack.
-In order to allow this transition to happen, we need to introduce this function
-to essentially all compiled recipes. This will be done in stages, first for a
-single migration, and then attached to <em>all</em> ongoing migrations in conda-forge.</p>
-<p>The logic of the piggyback migrator tries to correctly handle most scenarios,
-but it is impossible to cover all corner cases. As for some general rules that
-all feedstock maintainers are free to apply independently:</p>
-<ul>
-<li>if a feedstock uses a <code>- {{ compiler(...) }}</code> jinja in the build section,
-add a line with <code>- {{ stdlib("c") }}</code> to the build environment.</li>
-<li>if a feedstock uses <code>- sysroot_linux-64 2.17  # [linux64]</code> (or a variation),
-remove this line and add the following to your <code>conda_build_config.yaml</code>:
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">c_stdlib_version:              # [linux]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  - 2.17                       # [linux]</span><br></span></code></pre></div></div>
-</li>
-<li>if a feedstock sets <code>MACOSX_DEPLOYMENT_TARGET</code> in <code>conda_build_config.yaml</code>,
-for example to 10.13 for <code>x86_64</code>, replace that section with the following
-(note, this does <em>not</em> apply to <code>MACOSX_SDK_VERSION</code>!):
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">c_stdlib_version:              # [osx and x86_64]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  - 10.13                      # [osx and x86_64]</span><br></span></code></pre></div></div>
-</li>
-<li>In <code>meta.yaml</code>, you can then remove any variations of <code>- __glibc &gt;=2.17</code> or
-<code>- __osx &gt;={{ MACOSX_DEPLOYMENT_TARGET }}  # [osx and x86_64]</code>, as this will
-henceforth be handled through <code>- {{ stdlib("c") }}</code>.</li>
-</ul>
-<p>Following the application of any of the above changes, the feedstock should be
-<a href="https://conda-forge.org/docs/maintainer/updating_pkgs/#rerendering-feedstocks" target="_blank" rel="noopener noreferrer">rerendered</a>.</p>
-<p>As these mechanisms begin rolling out, we will also update the maintainer
-documentation in the conda-forge knowledge base. For more details, see this
-<a href="https://github.com/conda-forge/conda-forge.github.io/issues/2102" target="_blank" rel="noopener noreferrer">issue</a>.</p>]]></content>
     </entry>
 </feed>
