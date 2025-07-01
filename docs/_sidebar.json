@@ -54,7 +54,10 @@
           "type": "doc",
           "id": "maintainer/example_recipes/index"
         },
-        "items": ["maintainer/example_recipes/rust"]
+        "items": [
+          "maintainer/example_recipes/go",
+          "maintainer/example_recipes/rust"
+        ]
       }
     ]
   },
