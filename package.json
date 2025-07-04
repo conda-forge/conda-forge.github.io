@@ -14,14 +14,14 @@
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.8.0",
-    "@docusaurus/plugin-client-redirects": "^3.8.0",
-    "@docusaurus/preset-classic": "^3.8.0",
+    "@docusaurus/core": "^3.8.1",
+    "@docusaurus/plugin-client-redirects": "^3.8.1",
+    "@docusaurus/preset-classic": "^3.8.1",
     "@docusaurus/plugin-content-blog": "^3.5.2",
-    "@docusaurus/theme-mermaid": "^3.8.0",
+    "@docusaurus/theme-mermaid": "^3.8.1",
     "@mdx-js/react": "^3.1.0",
     "@stoplight/json-ref-resolver": "^3.1.6",
-    "chart.js": "^4.4.9",
+    "chart.js": "^4.5.0",
     "chartjs-adapter-moment": "^1.0.1",
     "clsx": "^2.1.1",
     "install": "^0.13.0",
@@ -33,12 +33,12 @@
     "react-dom": "^19.1.0",
     "react-inlinesvg": "^4.2.0",
     "react-markdown": "^10.1.0",
-    "react-tooltip": "^5.28.1",
+    "react-tooltip": "^5.29.1",
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.5.2",
-    "prettier": "^3.5.3"
+    "prettier": "^3.6.2"
   },
   "browserslist": {
     "production": [

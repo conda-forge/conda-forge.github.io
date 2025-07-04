@@ -86,6 +86,14 @@ Some optional, but useful CMake options:
 - `-DCMAKE_FIND_FRAMEWORK=NEVER` and `-DCMAKE_FIND_APPBUNDLE=NEVER` Prevent CMake from using system-wide macOS packages.
 - `${CMAKE_ARGS}` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like [CUDA builds](#cuda).
 
+:::warning
+
+As `${CMAKE_ARGS}` is a space separated list of options, quoting `${CMAKE_ARGS}`
+(`"${CMAKE_ARGS}"`) in recipes can lead to build errors as quoting makes the shell
+treat the contents of the variable as a single argument.
+
+:::
+
 Here are some basic commands for you to get started. These are dependent on your source
 code layout and aren't intended to be used "as is".
 
@@ -191,19 +199,12 @@ While you can obtain these tools by installing the right version of the full
 [Visual Studio](https://visualstudio.microsoft.com/) development
 environment, you can save a lot of time and bandwidth by installing standalone
 "build tools" packages. You can get them from [Visual Studio
-Subscriptions](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products).
+Subscriptions](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2022-and-other-products).
 To download build tools, you'll need a Microsoft account. Once on the
 Visual Studio Subscriptions page, you may also need to join the Dev Essentials
 program. Once that's done, you can click the "Download" tab and search for
-"Build Tools for Visual Studio 2022". Until conda-forge has completely
-[migrated to Visual Studio 2022](https://github.com/conda-forge/conda-forge.github.io/issues/2138),
-you may still need to install "Build Tools for Visual Studio 2019" to locally
-build a feedstock. Depending on your needs and available hard drive space, you
-can either directly install VC-2019 using the
-[Visual Studio Build Tools 2019 installer](https://aka.ms/vs/16/release/vs_BuildTools.exe),
-or you can install both VC-2022 and VC-2019 using the
-[Visual Studio Build Tools 2022 installer](https://aka.ms/vs/17/release/vs_BuildTools.exe),
-making sure to check the optional box for "MSVC v142 - VS 2019 C++ x64/x86 build tools (v14.29)".
+"Build Tools for Visual Studio 2022". You can directly install VC-2022 using the
+[Visual Studio Build Tools 2022 installer](https://aka.ms/vs/17/release/vs_BuildTools.exe).
 
 If you need more information. Please refer [the Python wiki page on Windows compilers](https://wiki.python.org/moin/WindowsCompilers).
 
@@ -248,25 +249,50 @@ The following feedstocks are examples of this build structure deployed:
 
 <a id="building-for-different-vc-versions"></a>
 
-#### Building for different VC versions
+#### Versions of Microsoft Visual C++ (MSVC)
 
-On Windows, different Visual C versions have different ABI and therefore a package needs to be built for different
-Visual C versions. Packages are tied to the VC version that they were built with and some packages have specific
-requirements of the VC version. For example, python 2.7 requires `vc 9` and python 3.5 requires `vc 14`.
+Up until Visual Studio (VS) 2013, the MSVC compiler changed ABI on every major release,
+meaning packages that communicated through a C/C++ API had to be built with a consistent
+version. This meant for example that python 2.7 required `vs2008` for the duration of its lifetime.
 
-With `conda-build 3.x`, `vc` can be used as a selector when using the `compiler` jinja syntax.
+Since VS2015, the ABI has been kept stable though, meaning that packages do not have to be
+built with the same MSVC version. This allows us to avoid complicated migrations for ~all
+compiled packages, or getting stuck on old compiler versions.
 
-```yaml
-requirements:
-  build:
-    - {{ compiler('cxx') }}
-```
+Speaking of versions, the situation with MSVC can be very confusing. The Visual Studio year is
+often used as a shorthand for the compiler generation, but what's really relevant is the
+toolchain version, which, since VS2015 has been 14.x, and which is referred to as `vc`.
 
-To skip building with a particular `vc` version, add a skip statement.
+| VS Year | VS Version | Compiler Version | Toolchain Version | Runtime Version |
+| ------- | ---------- | ---------------- | ----------------- | --------------- |
+| 2015    | 14.0       | 19.0             | 14.0              | 14.0.zzzzz      |
+| 2017    | 15.x       | 19.1y            | 14.1              | 14.1y.zzzzz     |
+| 2019    | 16.x       | 19.2x            | 14.2              | 14.2x.zzzzz     |
+| 2022    | 17.x       | 19.3x            | 14.3              | 14.3x.zzzzz     |
+
+In the table above, `x` and `y` on the same line are referring to the same digit, though there
+are various deviations from this schema. For example, the minor versions for the 2022 line went
+beyond 9, so 17.14 corresponds to compiler 19.44 (30+14) and runtime 14.44.
+
+We are always able to use the newest runtime in an environment, so we always satisfy the respective
+lower bound imposed by the compiler version. However, there are other situations where the toolchain
+version becomes "viral", in the sense that certain artefacts like static libraries have to be
+consumed by a toolchain that's at least as new as the one that produced it. We therefore try to
+not raise our default compiler version too quickly.
+
+As of June 2025, we are now on the most recent VS2022 (because VS2019 had reached end-of-life already
+in mid 2024), though the next major version of Visual Studio is already on the horizon. It will
+still be ABI-compatible, such that we will not have to rebuild everything. In other words, the
+toolchain version will remain `14.x`.
+
+If the day ever comes where MSVC breaks the ABI again (codename "vNext"), then we will have to rebuild
+all compiled packages in conda-forge on windows. After such a migration has taken place, you can then
+choose to skip building for one or the other by using `vc` in a selector, e.g.
 
 ```yaml
 build:
-    skip: true  # [win and vc<14]
+    # to demonstrate mechanism: only build vNext
+    skip: true  # [win and vc<15]
 
 requirements:
   build:
@@ -275,18 +301,22 @@ requirements:
 
 <a id="using-vs2022"></a>
 
-#### Using vs2022
+#### Using newer MSVC versions
+
+Given that conda-forge is currently (June 2025) on the latest VS line, it's currently not possible
+to use even newer versions. However, we expect a new Visual Studio major version within the next year
+or so, and once it becomes available in the runner-images for Azure Pipelines and then in conda-forge,
+it will be possible to opt into newer compilers (e.g. for C++23 support) as follows.
 
 In `recipe/conda_build_config.yaml` file:
 
 ```yaml
+# note: future VS version is speculative!
 c_compiler:    # [win]
-- vs2022       # [win]
+- vs2026       # [win]
 cxx_compiler:  # [win]
-- vs2022       # [win]
+- vs2026       # [win]
 ```
-
-You can look at the changes in [this PR](https://github.com/conda-forge/vcpkg-tool-feedstock/pull/41/files).
 
 After making these changes don't forget to rerender with `conda-smithy` (to rerender manually use `conda smithy rerender` from the command line).
 
