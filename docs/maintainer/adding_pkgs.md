@@ -41,33 +41,30 @@ The staging process i.e adding a package's recipe has three steps:
 
 ### Generating the recipe
 
-There are, currently, three ways to generate a recipe:
-
-1. If it is an R package from [CRAN](https://cran.r-project.org/), kindly
-   start by using the [conda-forge helper script for R recipes](https://github.com/bgruening/conda_r_skeleton_helper) instead.
+1. If it is an R package from [CRAN](https://cran.r-project.org/), a Python package from [PyPI](https://pypi.org),
+   a Perl package from [CPAN](https://www.cpan.org), or a Lua package from [Luarocks](https://luarocks.org),
+   generate a recipe with `rattler-build generate-recipe`.
    Then if necessary, you can make manual edits to the recipe.
-2. If it is a python package, you can generate the recipe as a starting point with `grayskull`.
 
    :::note
 
-   [Grayskull](https://github.com/conda-incubator/grayskull) is an automatic conda recipe generator. The goal of this project is to generate concise recipes
-   for conda-forge and eventually replace conda skeleton. Presently, Grayskull can generate recipes for Python packages available on PyPI and also those not published on PyPI and only available as GitHub repositories.
+   Installation and usage of `rattler-build`:
 
-   Installation and usage of `grayskull`:
+   - [Install Pixi](https://pixi.sh/latest/installation/).
 
-   - Create a new environment using : `conda create --name MY_ENV`. Replace `MY_ENV` with the environment name.
-   - Activate this new environment : `conda activate MY_ENV`.
-   - Run `conda install -c conda-forge grayskull` to install `grayskull`.
-   - Followed by `grayskull pypi --strict-conda-forge YOUR_PACKAGE_NAME` to generate the recipe. Replace `YOUR_PACKAGE_NAME` with the package name.
+   - `pixi exec rattler-build generate-recipe INDEX_NAME PACKAGE_NAME`.
+     Replace `INDEX_NAME` with the name of the index (e.g. `cran`) and `PACKAGE_NAME` with the name of the package.
 
    :::
 
-   You do _not_ necessarily have to use `grayskull`, and the recipes produced by `grayskull` might need to be reviewed and edited.
-   Read more about `grayskull` and how to use it [here](https://github.com/conda-incubator/grayskull#introduction).
+   You do _not_ have to use `rattler-build`, and the recipes produced by `rattler-build` might need to be
+   reviewed and edited.
+   Read more in the [rattler-build recipe generation documentation](https://rattler.build/latest/recipe_generation/).
 
-3. If it's none of the above, generate a recipe with the help of [the example recipe](https://github.com/conda-forge/staged-recipes/tree/master/recipes/example) in the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and modify it as necessary.
+2. If it's none of the above, generate a recipe with the help of [the example recipe](https://github.com/conda-forge/staged-recipes/tree/main/recipes/example-v1/recipe.yaml) in the [staged-recipes repository](https://github.com/conda-forge/staged-recipes), and [the rattler-build documentation](https://rattler.build/latest/),
+   including [the full recipe specification](https://rattler.build/latest/reference/recipe_file/).
 
-Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
+Your final recipe should have no comments (unless they're actually relevant to the recipe, not just generic instruction comments), and follow the order in the example.
 
 :::note
 
@@ -90,20 +87,19 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
 2. Fork and clone the [staged-recipes](https://github.com/conda-forge/staged-recipes)
    repository from GitHub.
 3. Checkout a new branch from the staged-recipes `main` branch.
-4. Through CLI, cd inside the ‘staged-recipes/recipes' directory.
+4. Through CLI, `cd` inside the `staged-recipes/recipes` directory.
 5. Within your forked copy, create a new folder in the recipes folder for your package (i.e, `...staged-recipes/recipes/<name-of-package>`)
-6. Copy [meta.yaml](https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml) from the example directory.
-   All the changes in the following steps will happen in the COPIED meta.yaml (i.e., `...staged-recipes/recipes/<name-of-package>/meta.yaml`).
+6. Copy [`recipe.yaml`](https://github.com/conda-forge/staged-recipes/blob/main/recipes/example-v1/recipe.yaml) from the example directory.
+   All the changes in the following steps will happen in the COPIED recipe.yaml (i.e., `...staged-recipes/recipes/<name-of-package>/recipe.yaml`).
    Please leave the example directory unchanged!
-7. Modify the copied recipe (meta.yml) as needed. To see how to modify meta.yaml, take a look at
-   [The recipe meta.yaml](#id4).
+7. Modify the copied recipe (`recipe.yml`) as needed. To see how to modify `recipe.yaml`, take a look at
+   [the rattler-build documentation](https://rattler.build/latest/).
 8. Generate the SHA256 key for your source code archive, as described in the
-   example recipe using the `openssl` tool. As an alternative, you can also
-   go to the package description on [PyPi](https://pypi.org) from which you
-   can directly copy the SHA256.
+   example recipe using the `openssl` tool. Alternatively, for packages from [PyPI](https://pypi.org),
+   you can also go to the package description on PyPI, from which you can directly copy the SHA256.
 9. Be sure to fill in the `test` section. The simplest test will simply
    test that the module can be imported, as described in the example.
-10. Remove all irrelevant comments in the `meta.yaml` file.
+10. Remove all irrelevant comments in the `recipe.yaml` file.
 
 :::tip
 
@@ -120,10 +116,10 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 #### Checklist
 
 - Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache-2.0 rather than APACHE 2.0). Using SPDX identifiers for license field is recommended. (see [SPDX Identifiers and Expressions](#spdx))
-- Ensure that you have included a license file if your license requires one – most do. (see [here](https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55))
+- Ensure that you have included a license file if your license requires one – most do. (see [this section of the example recipe](https://github.com/conda-forge/staged-recipes/blob/3b151310e299162760033b9a165349fc255d28b7/recipes/example-v1/recipe.yaml#L88-L92))
 - In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
 - Make sure that all tests pass successfully at least on your development machine.
-- Recommended: run the test locally on your source code to ensure the recipe works locally (see [Running tests locally for staged recipes](#staging-test-locally)).
+- Recommended: run the tests locally on your source code to ensure the recipe works locally (see [Running tests locally for staged recipes](#staging-test-locally)).
 - Make sure that your changes do not interfere with other recipes that are in the `recipes` folder (e.g. the `example` recipe).
 
 <a id="feedback-and-revision"></a>
@@ -150,7 +146,7 @@ If you have questions or have not heard back for a while, you can notify us by i
 
 - After the PR is merged, our [CI](../glossary.md#ci) services will create a new git repo automatically. For example, the recipe for a package named `pydstool` will be moved to a new repository [https://github.com/conda-forge/pydstool-feedstock](https://github.com/conda-forge/pydstool-feedstock). This process is automated through a CI job on the `conda-forge/staged-recipes` repo. It sometimes fails due to API rate limits and will automatically retry itself. If your feedstock has not been created after a day or so, please get in touch with the `conda-forge/core` team for help.
 - CI services will be enabled automatically and a build will be triggered automatically which will build the conda package and upload to [https://anaconda.org/conda-forge](https://anaconda.org/conda-forge)
-- If this is your first contribution, you will be added to the conda-forge [team](https://github.com/orgs/conda-forge/people) and given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.
+- If this is your first contribution, you will be added to the conda-forge [team](https://github.com/orgs/conda-forge/people) and be given access to the CI services so that you can stop and restart builds. You will also be given commit rights to the new git repository.
 - If you want to make a change to the recipe, send a [PR](../glossary.md#pr) to the git repository from a fork. Branches of the main repository are used for maintaining different versions only.
 
 <a id="feedstock-repository-structure"></a>
@@ -168,13 +164,13 @@ Each feedstock contains various files that are generated automatically using our
 
 #### recipe
 
-This folder contains the `meta.yaml` file and any other files/scripts needed to build the package.
+This folder contains the `recipe.yaml` file and any other files/scripts needed to build the package.
 
 <a id="license-txt"></a>
 
 #### LICENSE.txt
 
-This file is the license for the recipe itself. This license is different from the package license, which you define while submitting the package recipe using `license_file` in the `meta.yaml` file.
+This file is the license for the recipe itself. This license is different from the package license, which you define while submitting the package recipe using `license_file` in the `recipe.yaml` file.
 
 <a id="ci-files"></a>
 
@@ -207,7 +203,7 @@ The maintainer's job is to:
 
 ### Adding multiple packages at once
 
-If you would like to add more than one related packages, they can be added to
+If you would like to add multiple related packages, they can be added to
 staged-recipes in a single pull request (in separate directories). If the
 packages are interdependent (i.e. one package being added lists one or more of
 the other packages being added as a requirement), the build script will be able to
@@ -263,20 +259,19 @@ Once these steps are complete, you can continue with the steps in [Step-by-step 
 
 <a id="id4"></a>
 
-<a id="the-recipe-meta-yaml"></a>
+<a id="the-recipe-yaml"></a>
 
-## The recipe meta.yaml
+## The `recipe.yaml`
 
-The `meta.yaml` file in the recipe directory is at the heart of every conda package.
+The `recipe.yaml` file in the recipe directory is at the heart of every conda package.
 It defines everything that is required to build and use the package.
 
-`meta.yaml` is in [yaml](https://en.wikipedia.org/wiki/YAML) format, augmented with [Jinja](http://jinja.pocoo.org/) templating.
+A full reference of the structure and fields of `recipe.yaml` file can be found in the
+[rattler-build recipe file documentation](https://rattler.build/latest/reference/recipe_file/).
 
-A full reference of the structure and fields of `meta.yaml` file can be found in the [Defining metadata (meta.yaml)](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html) section in the conda-build documentation.
+In the following, we highlight particularly important and conda-forge specific information and guidelines, ordered by section in `recipe.yaml`.
 
-In the following, we highlight particularly important and conda-forge specific information and guidelines, ordered by section in `meta.yaml`.
-
-<a id="meta-yaml-source"></a>
+<a id="recipe-yaml-source"></a>
 
 <a id="source"></a>
 
@@ -288,11 +283,11 @@ In the following, we highlight particularly important and conda-forge specific i
 
 #### Build from tarballs, not repos
 
-Packages should be built from tarballs using the `url` key, not from repositories directly by using e.g. `git_url`.
+Packages should be built from tarballs using the `url` key, not from repositories directly by using e.g. `git`.
 
 There are several reasons behind this rule:
 
-- Repositories are usually larger than tarballs, draining shared CI time and bandwidth
+- Repositories are usually larger than tarballs, draining shared CI time and bandwidth.
 - Repositories are not checksummed. Thus, using a tarball has a
   stronger guarantee that the download that is obtained to build from is
   in fact the intended package.
@@ -302,24 +297,21 @@ There are several reasons behind this rule:
 
 #### Populating the `hash` field
 
-If your package is on [PyPi](https://pypi.org), you can get the sha256 hash from your package's page
+If your package is on [PyPI](https://pypi.org), you can get the sha256 hash from your package's page
 on PyPI; look for the `SHA256` link next to the download link on your package's
 files page, e.g. `https://pypi.org/project/<your-project>/#files`.
 
 You can also generate a hash from the command line on Linux (and Mac if you
 install the necessary tools below).
 
-To generate the `sha256` hash: `openssl sha256 your_sdist.tar.gz`
-
-You may need the openssl package, available on conda-forge
-`conda install openssl -c conda-forge`.
+To generate the `sha256` hash: `pixi exec openssl sha256 your_sdist.tar.gz`
 
 :::tip
 
 Be sure not to checksum the redirection page. Therefore use, for example,:
 
 ```default
-curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sha256
+pixi exec --with openssl curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sha256
 ```
 
 :::
@@ -328,7 +320,8 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 
 #### Downloading extra sources and data files
 
-`conda-build 3` supports multiple sources per recipe. Examples are available [in the conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#source-from-multiple-sources).
+`rattler-build` supports multiple sources per recipe: see
+[the relevant documentation section](https://rattler.build/latest/reference/recipe_file/#source-from-multiple-sources).
 
 <a id="build"></a>
 
@@ -338,23 +331,16 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 
 #### Skipping builds
 
-Use the `skip` key in the `build` section along with a selector:
+Use the `skip` key in the `build` section.
 
-You can e.g. specify not to build …
+You can e.g. specify not to build on specific architectures:
 
-- on specific architectures:
-  ```yaml
-  build:
-      skip: true  # [win]
-  ```
-- for specific python versions:
-  ```yaml
-  build:
-      skip: true  # [py<35]
-  ```
-
-A full description of selectors is
-[in the conda docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#preprocessing-selectors).
+```yaml
+build:
+  skip:
+    - win
+    ...
+```
 
 <a id="optional-bld-bat-and-or-build-sh"></a>
 
@@ -364,7 +350,7 @@ In many cases, `bld.bat` and/or `build.sh` files are not required.
 Pure Python packages almost never need them.
 
 If the build can be executed with one line, you may put this line in the
-`script` entry of the `build` section of the `meta.yaml` file with:
+`script` entry of the `build` section of the `recipe.yaml` file with:
 `script: "{{ PYTHON }} -m pip install . -vv"`.
 
 Remember to always add `pip` to the host requirements.
@@ -382,7 +368,7 @@ build:
   script: "{{ PYTHON }} -m pip install . -vv"
 ```
 
-as the installation script in the `meta.yml` file or `bld.bat/build.sh` script files,
+as the installation script in the `recipe.yml` file or `bld.bat/build.sh` script files,
 while adding `pip` to the host requirements:
 
 ```yaml
@@ -390,10 +376,6 @@ requirements:
   host:
     - pip
 ```
-
-These options should be used to ensure a clean installation of the package without its
-dependencies. This helps make sure that we're only including this package,
-and not accidentally bringing any dependencies along into the conda package.
 
 Usually pure-Python packages only require `python`, `setuptools` and `pip`
 as `host` requirements; the real package dependencies are only
@@ -407,9 +389,9 @@ as `host` requirements; the real package dependencies are only
 
 #### Build, host and run
 
-Conda-build distinguishes three different kinds of dependencies.
-In the following paragraphs, we give a very short overview what packages go where.
-For a detailed explanation please refer to the [conda-build documentation](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#requirements-section).
+rattler-build distinguishes three different kinds of dependencies.
+In the following paragraphs, we give a very short overview of which packages go where.
+For a detailed explanation please refer to the [rattler-build documentation](https://rattler.build/latest/reference/recipe_file/#requirements-section).
 
 <a id="id7"></a>
 
@@ -417,7 +399,7 @@ For a detailed explanation please refer to the [conda-build documentation](https
 
 Build dependencies are required in the build environment and contain all tools that are not needed on the host of the package.
 
-Following packages are examples of typical `build` dependencies:
+The following packages are examples of typical `build` dependencies:
 
 - compilers (see [Compilers](knowledge_base.md#dep-compilers))
 - cmake
@@ -429,9 +411,9 @@ Following packages are examples of typical `build` dependencies:
 
 ##### Host
 
-Host dependencies are required during build phase, but in contrast to build packages they have to be present on the host.
+Host dependencies are required during the build phase, but in contrast to build packages they have to be present on the host.
 
-Following packages are typical examples for `host` dependencies:
+The following packages are typical examples for `host` dependencies:
 
 - shared libraries (c/c++)
 - python/r libraries that link against c libraries (see e.g. [Building Against NumPy](knowledge_base.md#linking-numpy))
@@ -452,7 +434,7 @@ Run dependencies are only required during run time of the package. Run dependenc
 
 #### Avoid external dependencies
 
-As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure [ABI](../glossary.md#abi) compatibility for all our packages.
+As a general rule: all dependencies have to be packaged by conda-forge as well. This is necessary to assure [ABI](../glossary.md#abi) compatibility for all of our packages.
 
 There are only a few exceptions to this rule:
 
@@ -489,7 +471,7 @@ In other cases you have to specify [ABI](../glossary.md#abi) compatible versions
 requirements:
   # [...]
   host:
-    - libawesome 1.1.*
+    - libawesome ==1.1.*
 ```
 
 For more information on pinning, please refer to [Pinned dependencies](pinning_deps.md#pinned-deps).
@@ -498,7 +480,7 @@ For more information on pinning, please refer to [Pinned dependencies](pinning_d
 
 #### Constraining packages at runtime
 
-The `run_constrained` section allows defining restrictions on packages at runtime without depending on the package. It can be used to restrict allowed versions of optional dependencies and defining incompatible packages.
+The `run_constraints` section allows defining restrictions on packages at runtime without depending on the package. It can be used to restrict allowed versions of optional dependencies and define incompatible packages.
 
 <a id="defining-non-dependency-restrictions"></a>
 
@@ -507,23 +489,23 @@ The `run_constrained` section allows defining restrictions on packages at runtim
 Imagine a package can be used together with version 1 of `awesome-software` when present, but does not strictly depend on it.
 Therefore you would like to let the user choose whether he/she would like to use the package with or without `awesome-software`. Let's assume further that the package is incompatible to version 2 of `awesome-software`.
 
-In this case `run_constrained` can be used to restrict `awesome-software` to version 1.\*, if the user chooses to install it:
+In this case `run_constraints` can be used to restrict `awesome-software` to version 1.\*, if the user chooses to install it:
 
 ```yaml
 requirements:
   # [...]
-  run_constrained:
-    - awesome-software 1.*
+  run_constraints:
+    - awesome-software ==1.*
 ```
 
-Here `run_constrained` acts as a means to protect users from incompatible versions without introducing an unwanted dependency.
+Here `run_constraints` acts as a means to protect users from incompatible versions without introducing an unwanted dependency.
 
 <a id="defining-conflicts"></a>
 
 ##### Defining conflicts
 
 Sometimes packages interfere with each other and therefore only one of them can be installed at any time.
-In combination with an unsatisfiable version, `run_constrained` can define blockers:
+In combination with an unsatisfiable version, `run_constraints` can define blockers:
 
 ```yaml
 package:
@@ -531,7 +513,7 @@ name: awesome-db
 
 requirements:
   # [...]
-  run_constrained:
+  run_constraints:
     - amazing-db ==9999999999
 ```
 
@@ -564,23 +546,9 @@ However, this is no reason for the recipe to not have tests. At the very least,
 we want to verify that the package has installed the desired files in the desired
 locations. This is called existence testing.
 
-Existence testing can be accomplished in the `meta.yaml` file in the
-`test/commands` block.
+Read more in [the rattler-build documentation for package contents tests](https://rattler.build/latest/reference/recipe_file/#check-for-package-contents).
 
-On posix systems, use the `test` utility and the `$PREFIX` variable.
-
-On Windows, use the `exist` command. See below for an example.
-
-Simple existence testing example:
-
-```yaml
-test:
-  commands:
-    - test -f $PREFIX/lib/libboost_log$SHLIB_EXT  # [unix]
-    - if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1  # [win]
-```
-
-<a id="testing-python-packages"></a>
+<!-- <a id="testing-python-packages"></a>
 
 #### Testing python packages
 
@@ -742,9 +710,9 @@ test:
 
 If the utility actually has a test mode, great. Otherwise simply invoking
 `--help` or `--version` or something will at least test that it is
-installed and can run.
+installed and can run. -->
 
-<a id="testing-r-packages"></a>
+<!-- <a id="testing-r-packages"></a>
 
 #### Testing R packages
 
@@ -865,7 +833,7 @@ the package – thus, at this point it does not have access to the original sour
 tarball. This is to ensure that the test environment is as close as possible to
 what an end-user will see.
 
-This makes it very hard to run tests that are not installed with the package.
+This makes it very hard to run tests that are not installed with the package. -->
 
 <!-- **NOTE** if anyone has good ideas as to how to do that, please put it here! -->
 
@@ -876,21 +844,22 @@ This makes it very hard to run tests that are not installed with the package.
 #### Running tests locally for staged recipes
 
 If you want to run and build packages in the staged-recipes repository locally,
-go to the root repository directory and run the
-`build-locally.py` script (you need Python 3). And then you could follow the prompt to select the variant you'd like to build. This requires that you have Docker
-installed on your machine if you are building a package for Linux.
+go to the root repository directory and execute `pixi run build-linux` or `pixi run build-osx`, matching your
+operating system.
+Then, follow the prompt to select the variant you'd like to build.
+This requires that you have Docker installed on your machine if you are building a package for Linux.
 For MacOS, it will prompt you to select a location for the SDK (e.g. `export OSX_SDK_DIR=/opt`) to be downloaded.
 
 ```bash
 $ cd ~/staged-recipes
-$ python build-locally.py
+$ pixi run build-osx
 ```
 
 If you know which image you want to build, you can specify it as an argument to the script.
 
 ```bash
 $ cd ~/staged-recipes
-$ python build-locally.py <VARIANT>
+$ pixi run build-osx <VARIANT>
 ```
 
 where `<VARIANT>` is one of the file names in the `.ci_support/` directory, e.g. `linux64`, `osx64`, and `linux64_cuda<version>`.
@@ -903,9 +872,9 @@ where `<VARIANT>` is one of the file names in the `.ci_support/` directory, e.g.
 
 #### Packaging the license manually
 
-Sometimes upstream maintainers do not include a license file in their tarball despite being demanded by the license.
+Sometimes upstream maintainers do not include a license file in their tarball despite it being demanded by the license.
 
-If this is the case, you can add the license to the `recipe` directory (here named `LICENSE.txt`) and reference it inside the meta.yaml:
+If this is the case, you can add the license to the `recipe` directory (here named `LICENSE.txt`) and reference it inside the recipe.yaml:
 
 ```yaml
 about:
@@ -927,7 +896,7 @@ If there is a license file in the archive, please set `license_file` to the path
 
 #### SPDX Identifiers and Expressions
 
-For the `about: license` entry in the recipe `meta.yaml`, using a SPDX identifier or expression is recommended.
+For the `about: license` entry in the `recipe.yaml`, using a SPDX identifier or expression is recommended.
 
 See [SPDX license identifiers](https://spdx.org/licenses/) for the licenses.
 See [SPDX license exceptions](https://spdx.org/licenses/exceptions-index.html) for license exceptions.
@@ -1017,7 +986,7 @@ Then, include the tool as a build time dependency.
 ```yaml
 requirements:
   build:
-    - {{ compiler('go') }}
+    - ${{ compiler('go') }}
     - go-licenses
 ```
 
@@ -1056,8 +1025,8 @@ The correct and automated packaging of dependency licenses is an [ongoing discus
 
 A maintainer is an individual who is responsible for maintaining and updating one or more feedstock repositories and packages as well as their future versions. They have push access to the feedstock repositories of only the packages they maintain and can merge pull requests into it.
 
-Contributing a recipe for package makes you the `maintainer` of that package automatically.
-See [Maintainer role](#maintainer-role) and [Maintaining packages](updating_pkgs.md#maintaining-pkgs) to learn more about what are the things that maintainers do.
+Contributing a recipe for a package makes you the `maintainer` of that package automatically.
+See [Maintainer role](#maintainer-role) and [Maintaining packages](updating_pkgs.md#maintaining-pkgs) to learn more about the things that maintainers do.
 If you wish to be a maintainer of a certain package, you should contact current maintainers and open an issue in that package's feedstock with the following command:
 
 `@conda-forge-admin, please add user @username`
@@ -1132,48 +1101,5 @@ for %%F in (activate deactivate) DO (
 
 ### Jinja templating
 
-The recipe `meta.yaml` can contain expressions that are evaluated during build time.
-These expressions are written in [Jinja](http://jinja.pocoo.org/) syntax.
-
-Jinja expressions serve following purposes in the meta.yaml:
-
-- They allow defining variables to avoid code duplication. Using a variable for the `version` allows changing the version only once with every update.
-
-  ```yaml
-  {% set version = "3.7.3" %}
-
-  package:
-    name: python
-    version: {{ version }}
-
-  source:
-    url: https://www.python.org/ftp/python/{{ version }}/Python-{{ version }}.tar.xz
-    sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
-  ```
-
-- They can call [conda-build functions](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#conda-build-specific-jinja2-functions) for automatic code generation. Examples are the compilers, cdt packages or the `pin_compatible` function.
-
-  ```yaml
-  requirements:
-    build:
-      - {{ compiler('c') }}
-      - {{ compiler('cxx') }}
-      - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
-      - {{ cdt('libx11-devel') }}          # [linux]
-  ```
-
-  or
-
-  ```yaml
-  requirements:
-    build:
-      - {{ compiler('c') }}
-      - {{ compiler('cxx') }}
-    host:
-      - python
-      - numpy
-    run:
-      - python
-  ```
-
-For more information please refer to the [Templating with Jinja](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#templating-with-jinja) section in the conda-build docs.
+See [the Jinja section of the rattler-build documentation](https://rattler.build/latest/reference/jinja/)
+for information on simplifying recipes with templating.
