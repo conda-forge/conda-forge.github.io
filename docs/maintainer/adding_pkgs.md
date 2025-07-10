@@ -49,6 +49,7 @@ The staging process i.e adding a package's recipe has three steps:
    :::note
 
    Installation and usage of `rattler-build`:
+
    - [Install Pixi](https://pixi.sh/latest/installation/).
 
    - `pixi exec rattler-build generate-recipe INDEX_NAME PACKAGE_NAME`.

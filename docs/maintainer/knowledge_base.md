@@ -1953,6 +1953,7 @@ There are two options for how to proceed:
 - Specify the environment variable `SETUPTOOLS_SCM_PRETEND_VERSION` with the version string.
   If specified this environment variable is the principle source for `setuptools_scm`.
   There are two ways how to do this:
+
   - If you are using build scripts, in `build.sh` specify:
 
     ```bash

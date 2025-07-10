@@ -52,6 +52,7 @@ For these reasons, maintainers are asked to fork the feedstock to their personal
 When a new version of a package is released on PyPI/CRAN/.., we have a bot that automatically creates version updates for the feedstock. In most cases you can simply merge this PR and it should include all changes. When certain things have changed upstream, e.g. the dependencies, you will still have to do changes to the created PR. As feedstock maintainer, you don't have to create a new PR for that but can simply push to the branch the bot created. There are two alternatives to push to the branch of the bot:
 
 1. Manually setting up git remotes:
+
    - Clone the conda-forge feedstock repository
    - Add the remote of the bot: `git remote add regro-cf-autotick-bot git@github.com:regro-cf-autotick-bot/<package>-feedstock.git`
      :::warning[Important]
@@ -97,6 +98,7 @@ Here we assume that you would like to update the feedstock `<feedstock>`. Feedst
 1. Forking the feedstock
 
    Before you can submit your first PR, you have to fork conda-forge's feedstock.
+
    - Navigate to [https://github.com/conda-forge](https://github.com/conda-forge)/<feedstock> in your favorite web browser and click the `fork` button.
    - You now have a clone of the feedstock in `https://github.com/<your-github-id>/<feedstock>` under your control.
    - Connect to the feedstock from your computer by using `git clone https://github.com/<your-github-id>/<feedstock>`.
@@ -104,6 +106,7 @@ Here we assume that you would like to update the feedstock `<feedstock>`. Feedst
 2. Syncing your fork with conda-forge's feedstock
 
    This step is only required if you have forked some time ago and your fork is missing commits from the feedstock at conda-forge.
+
    - Make sure you are on the main branch: `git checkout main`
    - Register conda-forge's feedstock with `git remote add upstream https://github.com/conda-forge/<feedstock>`
    - Fetch the latest updates with `git fetch upstream`
@@ -112,6 +115,7 @@ Here we assume that you would like to update the feedstock `<feedstock>`. Feedst
 3. Creating your changes in a new branch
 
    Now you are ready to update the recipe
+
    - Create and switch to a new branch: `git checkout -b <branch-name>`. `<branch-name>` can be e.g. `update_1_0_1`.
    - Make your changes locally
    - Review your changes then use `git add <changed-files>`. Where `<changed-files>` are a whitespace separated list of filenames you changed.
