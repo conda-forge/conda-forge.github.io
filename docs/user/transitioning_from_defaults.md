@@ -74,7 +74,6 @@ are guidelines on how to go about this, while backing up your work and your envi
    to right click on the Anaconda / Miniconda installation folder. Check if you have
    created additional environments outside the installation root by running
    `conda info --envs`. Back those up too, if necessary.
-
    - Alternatively, you can also export lockfiles for all your environments, if preferred:
 
      ```shell
