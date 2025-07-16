@@ -4,10 +4,38 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/blog/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Fri, 11 Apr 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 16 Jul 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Security audit]]></title>
+            <link>https://conda-forge.org/blog/2025/07/16/security-audit/</link>
+            <guid>https://conda-forge.org/blog/2025/07/16/security-audit/</guid>
+            <pubDate>Wed, 16 Jul 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[During the first half of the year, conda-forge has been subject to a security audit in partnership with Open Source Technology Improvement Fund (OSTIF), Sovereign Tech Agency (STA) and the security firm 7ASecurity. This effort has resulted in the identification and remediation of 13 findings with security impact, a custom threat model, and a supply chain security analysis. Full details are now publicly available in the final report.]]></description>
+            <content:encoded><![CDATA[<p>During the first half of the year, conda-forge has been subject to a security audit in partnership with <a href="https://ostif.org/" target="_blank" rel="noopener noreferrer">Open Source Technology Improvement Fund</a> (OSTIF), <a href="https://www.sovereign.tech/" target="_blank" rel="noopener noreferrer">Sovereign Tech Agency</a> (STA) and the security firm <a href="https://7asecurity.com/" target="_blank" rel="noopener noreferrer">7ASecurity</a>. This effort has resulted in the identification and remediation of 13 findings with security impact, a custom threat model, and a supply chain security analysis. Full details are now publicly available in the <a href="https://conda-forge.org/assets/files/CON-01-conda-forge-Audit-Public_RC1.0-e913f5d3acc96c2155f8b7dd94328ead.pdf/" target="_blank">final report</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="details">Details<a href="https://conda-forge.org/blog/2025/07/16/security-audit/#details" class="hash-link" aria-label="Direct link to Details" title="Direct link to Details">​</a></h2>
+<p>Back in April 2024, we started a conversation with <a href="https://ostif.org/" target="_blank" rel="noopener noreferrer">OSTIF</a> that would result in a partnership with <a href="https://7asecurity.com/" target="_blank" rel="noopener noreferrer">7ASecurity</a>. The security audit took part from February to May, where 7ASecurity reported all their findings. The <code>conda-forge/core</code> team assessed the reports and submitted the necessary fixes to our infrastructure and involved tooling, from which we highlight:</p>
+<ul>
+<li>Three incidents in <code>conda/conda-build</code>.</li>
+<li>Two incidents in <code>conda-forge/conda-forge-webservices</code>.</li>
+<li>Two incidents in <code>conda-forge/conda-smithy</code>.</li>
+<li>One incident in <code>conda/constructor</code>.</li>
+<li>One incident in <code>conda-forge/conda-forge-ci-setup</code>.</li>
+<li>One incident in <code>conda-forge/infrastructure</code>.</li>
+</ul>
+<p>7ASecurity also contributed a detailed threat model and a supply chain security analysis. CVEs, Github Advisories and related contributions are available in the <a href="https://conda-forge.org/assets/files/CON-01-conda-forge-Audit-Public_RC1.0-e913f5d3acc96c2155f8b7dd94328ead.pdf/" target="_blank">final report</a>.</p>
+<p>We are incredibly grateful for the support offered by OSTIF and STA, and we are delighted to have worked with 7ASecurity during all these months! You can read their blog posts at:</p>
+<ul>
+<li><a href="https://ostif.org/conda-forge-audit-complete/" target="_blank" rel="noopener noreferrer">conda-forge Audit Complete!</a>, ostif.org.</li>
+<li><a href="https://7asecurity.com/blog/2025/07/conda-forge-security-audit-by-7asecurity/" target="_blank" rel="noopener noreferrer">Conda-Forge Security Audit by 7ASecurity</a>, 7asecurity.com.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="final-notes">Final notes<a href="https://conda-forge.org/blog/2025/07/16/security-audit/#final-notes" class="hash-link" aria-label="Direct link to Final notes" title="Direct link to Final notes">​</a></h2>
+<p>We want to take this opportunity to remind our users that we do not recommend that you use conda-forge in environments with sensitive information. conda-forge's software is built by our users and the core dev team cannot verify or guarantee that this software is not malicious or has not been tampered with.</p>
+<p>Our best defense against security incidents in conda-forge is you! Our feedstock maintainers are in the best position to notice incidents and issues. Please responsibly report anything you find to us by following our <a href="https://github.com/conda-forge/conda-forge.github.io/security/policy" target="_blank" rel="noopener noreferrer">security policy</a>.</p>]]></content:encoded>
+            <category>security</category>
+        </item>
         <item>
             <title><![CDATA[Ten years of conda-forge!]]></title>
             <link>https://conda-forge.org/blog/2025/04/11/ten-years-of-conda-forge/</link>
@@ -1567,104 +1595,6 @@ can get involved?</li>
 <li>What feedback do audience members have?</li>
 </ul>]]></content:encoded>
             <category>scipy</category>
-        </item>
-        <item>
-            <title><![CDATA[Conda-Forge Operational Risk]]></title>
-            <link>https://conda-forge.org/blog/2020/07/02/op-risk/</link>
-            <guid>https://conda-forge.org/blog/2020/07/02/op-risk/</guid>
-            <pubDate>Thu, 02 Jul 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Recently I've been thinking about operational risk (op. risk).]]></description>
-            <content:encoded><![CDATA[<p>Recently I've been thinking about operational risk (op. risk).
-Operational risks arise from failures of processes, for instance a
-missing email, or an automated software system not running properly.
-Many commercial institutions are interested in minimizing op. risk,
-since it is risk that produces no value, as opposed to risks associated
-with investing. This is also something I think about in my job at
-<a href="https://www.lab49.com/" target="_blank" rel="noopener noreferrer">Lab49</a>, where I'm a software engineering
-consultant focusing on financial institutions. I think there is also a
-good analogy for Conda-Forge, even though we are not a commercial
-outfit. In this case the risk we incur isn't the potential for lost
-earnings but frustration for our users and maintainers in the form of
-bugs and lackluster user experience. In this post I explore three main
-sources of operational risk for Conda-Forge: Automation, Top-Down
-Control, and Self-Service Structure.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="a-brief-conda-forge-primer">A brief conda-forge primer<a href="https://conda-forge.org/blog/2020/07/02/op-risk/#a-brief-conda-forge-primer" class="hash-link" aria-label="Direct link to A brief conda-forge primer" title="Direct link to A brief conda-forge primer">​</a></h2>
-<p>Conda-Forge is an ecosystem and community that grew around building
-packages for the conda package manager. Conda-Forge uses continuous
-integration services to build packages from GitHub repos called
-feedstocks. This structure enables teams of contributors to maintain
-packages via a pull request based workflow. At time of writing
-Conda-Forge has over 10000 feedstocks and ships more than 120 million
-packages a month.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="self-service-structure">Self-Service Structure<a href="https://conda-forge.org/blog/2020/07/02/op-risk/#self-service-structure" class="hash-link" aria-label="Direct link to Self-Service Structure" title="Direct link to Self-Service Structure">​</a></h2>
-<p>Conda-Forge is built around a self-service structure for each stage in a
-feedstock's lifecyle. The creation of new feedstocks relies on would be
-maintainers to submit PRs to staged-recipes. Although language specific
-help teams and staged-recipes reviewers provide some assistance and
-oversight, the PR submitter plays the most important role in proposing
-the package and shepherding it to acceptance. Once the feedstock is
-accepted the maintenance is federated with most upkeep being performed
-by the maintainers, who have extensive permissions and control over the
-feedstock. If fixes or updates are needed for a package, maintainers and
-users are encouraged to open their own pull requests.</p>
-<p>This structure can present a few challenges for minimizing op. risk. The
-most important challenge is the disconnect between feedstock maintainers
-and users. While most maintainers are package users, most of our users
-are not maintainers, and are unlikely to become maintainers. The
-disparity between maintainers and users can come from a few sources,
-some under our control and others not. For instance we can write better
-documentation, lowering the barrier to entry, but we don't have control
-over how our user's incentive structures value Conda-Forge
-contributions. This produces a gap in representation in the Conda-Forge
-organizational structure, where non-maintainer users' issues and
-desires are not communicated to maintainers and Core.</p>
-<p>For instance, are we servicing the needs of developers using our
-binaries as dependencies to code they are compiling locally. As another
-example, are there support gaps for developers and scientists using
-Conda-Forge in academic and government laboratories, who might not have
-the skills or capacity to fix feedstocks. Our reliance on the public
-GitHub platform may prevent some users without access from raising their
-concerns. Since these users may be under-represented we don't even know
-if we are meeting their needs and how best to help.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="top-down-control">Top-Down Control<a href="https://conda-forge.org/blog/2020/07/02/op-risk/#top-down-control" class="hash-link" aria-label="Direct link to Top-Down Control" title="Direct link to Top-Down Control">​</a></h2>
-<p>While the majority of Conda-Forge's permissions structure is federated,
-certain important parts are centralized, with the Core developers making
-key decisions. Often these decisions are focused on stability of the
-ecosystem, for instance what versions of languages to support.
-Additionally, maintenance and enhancements to the Conda-Forge
-infrastructure are mostly performed by Core developers.</p>
-<p>However, the Core developers are usually experienced feedstock
-maintainers, expert conda users, and have bought into the Conda-Forge
-ecosystem and mission. This means that decisions can be made without the
-perspective of new users or maintainers, or from potential users that
-are skeptical of the Conda-Forge approach.</p>
-<p>For instance, decisions about application binary interface pins are
-usually made by core, although these changes have impacts on downstream
-maintainers. It is possible that most maintainers don't know about what
-these pins are, how they are changed and how that affects their
-feedstocks.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="automation">Automation<a href="https://conda-forge.org/blog/2020/07/02/op-risk/#automation" class="hash-link" aria-label="Direct link to Automation" title="Direct link to Automation">​</a></h2>
-<p>Automation has been used to great effect to make Conda-Forge possible.
-The various bots and web services enable Conda-Forge's current scale,
-providing help and support from running builds, bumping versions, and
-checking feedstock quality. However, this automation presents its own
-operational risks and magnifies existing operational risks.</p>
-<p>Automation has a tendency to fail when we least expect it and often we
-lack the ability to fix it. The January 2018 Travis-CI outage is a great
-example of this, where the CI service we were using for macOS builds
-experienced reduced capacity and then a complete outage, causing builds
-to queue for days. Recently there was a sudden decrease in the number of
-parallel builds on Azure causing a similar queue of builds. Automation
-can cause issues by enabling users to make decisions without all the
-needed information. While many feedstocks have effective smoke tests for
-their packages the autotick bot doesn't currently check for new
-dependencies, potentially leading to missing or incorrect package
-metadata.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="https://conda-forge.org/blog/2020/07/02/op-risk/#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>
-<p>Overall Conda-Forge has managed its operational risk well. Most
-importantly Conda-Forge's transparent open source nature allows us to
-address these issues head on by engaging with the community.</p>]]></content:encoded>
-            <category>conda-forge</category>
         </item>
     </channel>
 </rss>
