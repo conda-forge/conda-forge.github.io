@@ -1,6 +1,7 @@
 ---
 authors:
   - core
+tags: [security]
 ---
 
 # Security audit
