@@ -6,7 +6,7 @@ tags: [security]
 
 # Security audit
 
-During the first half of the year, conda-forge has been subject to a security audit in partnership with [Open Source Technology Improvement Fund](https://ostif.org/) (OSTIF), [Sovereign Tech Agency](https://www.sovereign.tech/) (STA) and the security firm [7ASecurity](https://7asecurity.com/). This effort has resulted in the identification and remediation of 13 findings with security impact, a custom threat model, and a supply chain security analysis. Full details are now publicly available in the [final report](/_static/CON-01-conda-forge-Audit-Public_RC1.0.pdf).
+During the first half of the year, conda-forge has been subject to a security audit in partnership with [Open Source Technology Improvement Fund](https://ostif.org/) (OSTIF), [Sovereign Tech Agency](https://www.sovereign.tech/) (STA) and the security firm [7ASecurity](https://7asecurity.com/). This effort has resulted in the identification and remediation of 13 findings with security impact, a custom threat model, and a supply chain security analysis. Full details are now publicly available in the [final report](pathname:///_static/CON-01-conda-forge-Audit-Public_RC1.0.pdf).
 
 <!-- truncate -->
 
@@ -21,7 +21,7 @@ Back in April 2024, we started a conversation with [OSTIF](https://ostif.org/) t
 - One incident in `conda-forge/conda-forge-ci-setup`.
 - One incident in `conda-forge/infrastructure`.
 
-7ASecurity also contributed a detailed threat model and a supply chain security analysis. CVEs, Github Advisories and related contributions are available in the [final report](/_static/CON-01-conda-forge-Audit-Public_RC1.0.pdf).
+7ASecurity also contributed a detailed threat model and a supply chain security analysis. CVEs, Github Advisories and related contributions are available in the [final report](pathname:///_static/CON-01-conda-forge-Audit-Public_RC1.0.pdf).
 
 We are incredibly grateful for the support offered by OSTIF and STA, and we are delighted to have worked with 7ASecurity during all these months! You can read their blog posts at:
 
