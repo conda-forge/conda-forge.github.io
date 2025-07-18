@@ -358,6 +358,7 @@ It does that by monitoring the source url named in the recipe in an appropriate 
 i.e. for Pypi sources it queries the API, for Github source releases it monitors the release page
 or the tags in the upstream repository.
 Sometimes an erroneous release happens or an unrelated tag is misidentified as a release.
+For example, project-a usually releases under a semver scheme like 4.0.2, but a typo in the release process ended up creating a tag with 40.3 (missing period).
 In these cases, the bot can be confused, consider subsequent releases as older than the misidentified one, and stop issuing automatic update PRs.
 The solution in this case is to let the bot know that it should ignore a certain version.
 This can be done in the `conda-forge.yml` configuration file, with [more details](../conda_forge_yml/#bot) in the documentation, the simple snippet boils down to
