@@ -346,3 +346,28 @@ If you'd like to maintain more than one version of your package, you can use bra
 - Fork your feedstock and make a meaningful branch name (e.g., v1.X or v1.0).
 - Make the required changes to the recipe and rerender the feedstock.
 - Then push this branch from your fork to the upstream feedstock. Our CI services will automatically build any branches in addition to the default branch.
+
+## Troubleshooting
+
+Sometimes things go wrong, particularly with the automation. This section aims to provide guidance on these problems.
+
+### Automatic version updates don't work
+
+Usually, the bot detects automatically when a new version of a package is released.
+It does that by monitoring the source url named in the recipe in an appropriate way,
+i.e. for Pypi sources it queries the API, for Github source releases it monitors the release page
+or the tags in the upstream repository.
+Sometimes an erroneous release happens or an unrelated tag is misidentified as a release.
+For example, project-a usually releases under a semver scheme like 4.0.2, but a typo in the release process ended up creating a tag with 40.3 (missing period).
+In these cases, the bot can be confused, consider subsequent releases as older than the misidentified one, and stop issuing automatic update PRs.
+The solution in this case is to let the bot know that it should ignore a certain version.
+This can be done in the `conda-forge.yml` configuration file, with [more details](../conda_forge_yml/#bot) in the documentation, the simple snippet boils down to
+
+```
+bot:
+  version_updates:
+    exclude:
+      - '08.14'
+```
+
+where `'08.14'` represents the erroneous version.
