@@ -360,6 +360,30 @@ or the tags in the upstream repository.
 Sometimes an erroneous release happens or an unrelated tag is misidentified as a release.
 For example, `project-a` usually releases under a semver scheme like 4.0.2, but a typo in the release process ended up creating a tag with 40.3 (missing period).
 In these cases, the bot can be confused, consider subsequent releases as older than the misidentified one, and stop issuing automatic update PRs.
+
+You can check which version the bot detected by looking in the metadata that it collected, which is conveniently available in its own Github repo.
+To deal with the large number of packages, the information is sharded (i.e. split into several subdirectories) according to some hash function,
+which makes it a bit challenging to find.
+The best way is to use Github search with the query [`repo:regro/cf-graph-countyfair path:version_pr_info/**/amrex.json`](https://github.com/search?q=repo%3Aregro%2Fcf-graph-countyfair+path%3Aversion_pr_info%2F**%2Famrex.json&type=code), where you should replace `amrex` with the name of your own package.
+This will lead you to a file looking like:
+```json
+{
+  "bad": false,
+  "new_version": "25.07",
+  "new_version_attempts": {
+    "2024": 0,
+    "23.11": 1,
+    "23.12": 1,
+    "24.01": 1,
+    "24.02": 1,
+    "24.03": 1
+  },
+  "new_version_errors": {}
+}
+```
+
+Here, look for the `"new_version"` field. If that contains a wrong value, note it down for fixing in the next step.
+
 The solution in this case is to let the bot know that it should ignore a certain version.
 This can be done in the `conda-forge.yml` configuration file, with [more details](../conda_forge_yml/#bot) in the documentation, the simple snippet boils down to
 
