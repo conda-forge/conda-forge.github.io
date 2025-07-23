@@ -366,6 +366,7 @@ To deal with the large number of packages, the information is sharded (i.e. spli
 which makes it a bit challenging to find.
 The best way is to use Github search with the query [`repo:regro/cf-graph-countyfair path:version_pr_info/**/amrex.json`](https://github.com/search?q=repo%3Aregro%2Fcf-graph-countyfair+path%3Aversion_pr_info%2F**%2Famrex.json&type=code), where you should replace `amrex` with the name of your own package.
 This will lead you to a file looking like:
+
 ```json
 {
   "bad": false,
@@ -387,7 +388,7 @@ Here, look for the `"new_version"` field. If that contains a wrong value, note i
 The solution in this case is to let the bot know that it should ignore a certain version.
 This can be done in the `conda-forge.yml` configuration file, with [more details](../conda_forge_yml/#bot) in the documentation, the simple snippet boils down to
 
-```
+```yaml
 bot:
   version_updates:
     exclude:
