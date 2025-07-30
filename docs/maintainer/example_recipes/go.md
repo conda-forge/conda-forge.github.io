@@ -35,9 +35,9 @@ requirements:
 tests:
   - script: example-package -help
   - package_contents:
-    bin:
-      - example-package
-    strict: true
+      bin:
+        - example-package
+      strict: true
 
 about:
   homepage: https://github.com/example-package/example-package
