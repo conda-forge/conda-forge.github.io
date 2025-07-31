@@ -1311,7 +1311,6 @@ on BLAS.
 For macOS 13.3+, you can use `newaccelerate` to use the new BLAS/LAPACK
 support in Accelerate.
 
-
 The following legacy commands are also supported as well.
 
 ```bash
