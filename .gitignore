@@ -54,3 +54,7 @@ yarn-error.log*
 # pyc files
 *.pyc
 __pycache__/
+
+# pixi environments
+.pixi
+*.egg-info
