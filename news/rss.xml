@@ -4,10 +4,29 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/news/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Tue, 01 Jul 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 31 Jul 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[New Accelerate support for macOS 13.3+]]></title>
+            <link>https://conda-forge.org/news/2025/07/31/new-accelerate-macos/</link>
+            <guid>https://conda-forge.org/news/2025/07/31/new-accelerate-macos/</guid>
+            <pubDate>Thu, 31 Jul 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[conda-forge by default uses OpenBLAS as its BLAS and LAPACK]]></description>
+            <content:encoded><![CDATA[<p>conda-forge by default uses <code>OpenBLAS</code> as its BLAS and LAPACK
+provider on macOS as it was updated regularly and is the least
+buggiest performant BLAS/LAPACK implementation.</p>
+<p>macOS 13.3 updated the Accelerate framework after a long time with
+improved support for LAPACK APIs and has fixes for long-time known
+bugs in the older Accelerate's BLAS and LAPACK APIs.
+conda-forge has added support for this
+new Accelerate framework by using a shim library to expose its
+functionality to most conda-forge packages including <code>numpy</code>,
+<code>scipy</code> and <code>pytorch</code>.</p>
+<p>You can use it by doing</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">conda install libblas=*=*_newaccelerate</span><br></span></code></pre></div></div>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Moving to GCC 14 and Clang 19 as default compiler versions]]></title>
             <link>https://conda-forge.org/news/2025/07/01/moving-to-gcc-14-clang-19/</link>
@@ -389,51 +408,6 @@ the default compilers on feedstocks unless there are compelling reasons.</p>
 <p>In any case, it is now possible to use the following configuration in
 <code>recipe/conda_build_config.yaml</code> (note the lack of platform selectors):</p>
 <div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">c_compiler</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> clang</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">c_compiler_version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">18</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">cxx_compiler</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> clangxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">cxx_compiler_version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">18</span><br></span></code></pre></div></div>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[The new conda-forge.org]]></title>
-            <link>https://conda-forge.org/news/2024/04/09/new-website/</link>
-            <guid>https://conda-forge.org/news/2024/04/09/new-website/</guid>
-            <pubDate>Tue, 09 Apr 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[As you might have noticed, for the last few months we have been changing different parts of the conda-forge.org website. Read more to learn more about what we changed, how it works and how to contribute.]]></description>
-            <content:encoded><![CDATA[<p>As you might have noticed, for the last few months we have been changing different parts of the conda-forge.org website. Read more to learn more about what we changed, how it works and how to contribute.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="old-vs-new">Old vs new<a href="https://conda-forge.org/news/2024/04/09/new-website/#old-vs-new" class="hash-link" aria-label="Direct link to Old vs new" title="Direct link to Old vs new">​</a></h2>
-<p>The <a href="https://github.com/conda-forge/conda-forge.github.io/tree/1d3214c295a46a249434de4fcf48c6b8d747a07f" target="_blank" rel="noopener noreferrer">old conda-forge.org</a> documentation was written with <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener noreferrer">Sphinx</a>. Some extra extensions were responsible for the other parts of the website; e.g. the <a href="https://github.com/conda-forge/blog" target="_blank" rel="noopener noreferrer">blog</a>, the <a href="https://github.com/conda-forge/conda-forge.github.io/tree/1d3214c295a46a249434de4fcf48c6b8d747a07f/newsfeed" target="_blank" rel="noopener noreferrer">RSS feed</a>, the <a href="https://github.com/conda-forge/conda-forge.github.io/blob/1d3214c295a46a249434de4fcf48c6b8d747a07f/index.html.tmpl" target="_blank" rel="noopener noreferrer">frontpage</a>, <a href="https://github.com/conda-forge/conda-forge.github.io/blob/1d3214c295a46a249434de4fcf48c6b8d747a07f/feedstock_outputs.html.tmpl" target="_blank" rel="noopener noreferrer">feedstock outputs</a>, or the <a href="https://github.com/conda-forge/status/tree/bde62db0bc9de460f533d60ca6218604c3e42fa5/site" target="_blank" rel="noopener noreferrer">status page</a>.</p>
-<p>The new website has been rewritten using the <a href="https://docusaurus.io/" target="_blank" rel="noopener noreferrer">Docusaurus</a> project. This allows us to have a single framework for all the sections of the site. There are some big differences if we compare the new site with the old one:</p>
-<ul>
-<li>Sphinx was written in Python. Docusaurus uses the Node.js stack.</li>
-<li>Most of our docs were written in RST. Docusaurus handles Markdown and MDX (Markdown + JSX).</li>
-<li>Instead of generating static HTML from Jinja templates, we now prefer fetching the JSON payloads and render the relevant pages at build time (i.e. when we run <code>npm run build</code>) or at load time (when the user visits the website). This allows to have all the website rendering logic in the same repository with a unified theme, search engine and statistics.</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-we-have-changed">What we have changed<a href="https://conda-forge.org/news/2024/04/09/new-website/#what-we-have-changed" class="hash-link" aria-label="Direct link to What we have changed" title="Direct link to What we have changed">​</a></h2>
-<ul>
-<li>The theme for the whole site is responsive, accessible, mobile friendly and supports dark/light modes. A style guide is available too.</li>
-<li>The Status dashboard fetches data dynamically and provides detailed views for each migration.</li>
-<li>The Packages section lists latest updates in addition to mapping packages to feedstocks.</li>
-<li>A new Download page displays links to the latest Miniforge installers.</li>
-<li>The documentation has been split in two top-level categories: Docs and Community.</li>
-<li>Algolia generously serves the backend for the search bar.</li>
-<li>Netlify will render previews on each opened PR for a smoother contribution process.</li>
-<li>The blog posts and the announcements feed are served natively by Docusaurus.</li>
-<li>We converted all the Sphinx-native ReStructuredText documents to Docusaurus-friendly Markdown.</li>
-<li>The conda-forge.yml docs are autogenerated from the conda-smithy schemas.</li>
-<li>... and a bunch of smaller changes in the documentation. Refer to the <a href="https://github.com/conda-forge/conda-forge.github.io/issues/1971" target="_blank" rel="noopener noreferrer">meta-issue</a> for more information!</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features-you-can-use">New features you can use<a href="https://conda-forge.org/news/2024/04/09/new-website/#new-features-you-can-use" class="hash-link" aria-label="Direct link to New features you can use" title="Direct link to New features you can use">​</a></h2>
-<ul>
-<li>Learn how to use and maintain packages from conda-forge in the <a href="https://conda-forge.org/docs/">main documentation section</a>.</li>
-<li>Read about how our community is set up in the <a href="https://conda-forge.org/community/">Community section</a></li>
-<li>The most recent changes to our infrastructure will be announced in <a href="https://conda-forge.org/news/">News</a>. You can also subscribe to the <a href="https://conda-forge.org/news/rss.xml" target="_blank" rel="noopener noreferrer">RSS feed</a> and browse the <a href="https://conda-forge.org/news/archive/">archive</a>.</li>
-<li>Important information about the ecosystem is discussed in the <a href="https://conda-forge.org/blog/">Blog</a>. You can also subscribe to the <a href="https://conda-forge.org/blog/rss.xml" target="_blank" rel="noopener noreferrer">RSS feed</a> and browse the <a href="https://conda-forge.org/blog/archive/">archive</a>. The posts are sometimes categorized with <a href="https://conda-forge.org/blog/tags/">tags</a> too.</li>
-<li>Use the search bar to locate any document in the website! It should be smart enough to remember the content you need more often. Use the <kbd>Cmd/Ctrl</kbd>+<kbd>K</kbd> shortcut for faster access.</li>
-<li>The <a href="https://conda-forge.org/status/">Status dashboard</a> will inform you about the latest incidents and ongoing migrations. Each migration has now a permalink you can explore and share!</li>
-<li>The <a href="https://conda-forge.org/packages/">Packages</a> section will help you find all the packages in conda-forge. If you don't type anything in the search bar, it will list the last 100 uploads to the Anaconda.org channel. The metadata link in each row will take you to the <a href="https://conda-metadata-app.streamlit.app/" target="_blank" rel="noopener noreferrer"><code>conda-metadata-app</code> dashboard</a>.</li>
-<li>Use the <a href="https://conda-forge.org/download/">Download page</a> to get the latest Miniforge installers.</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-to-help-and-contribute">How to help and contribute<a href="https://conda-forge.org/news/2024/04/09/new-website/#how-to-help-and-contribute" class="hash-link" aria-label="Direct link to How to help and contribute" title="Direct link to How to help and contribute">​</a></h2>
-<p>We have changed a lot of things, so there's a chance we missed something somewhere. If you have suggestions or errors to report, please let us know in the <a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer">website issue tracker</a>. Feel free to check the <a href="https://conda-forge.org/docs/user/contributing/#improve-the-website">documentation contribution guidelines</a> too.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="acknowledgements">Acknowledgements<a href="https://conda-forge.org/news/2024/04/09/new-website/#acknowledgements" class="hash-link" aria-label="Direct link to Acknowledgements" title="Direct link to Acknowledgements">​</a></h2>
-<p>This revamp was a months-long effort. The core team would like to take a moment to thank to all the contributors that made it possible (in alphabetical order): Afshin Darian, Asmit Malakannawar, Gabriela Vives, Isabela Presedo-Floyd, Klaus Zimmermann, Tania Allard.</p>]]></content:encoded>
         </item>
     </channel>
 </rss>
