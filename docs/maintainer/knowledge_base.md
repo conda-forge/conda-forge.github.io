@@ -1295,15 +1295,21 @@ requirements:
 You can switch your BLAS implementation by doing,
 
 ```bash
-conda install "libblas=*=*mkl"
-conda install "libblas=*=*openblas"
-conda install "libblas=*=*blis"
-conda install "libblas=*=*accelerate"
-conda install "libblas=*=*netlib"
+conda install "libblas=*=*_mkl"
+conda install "libblas=*=*_openblas"
+conda install "libblas=*=*_blis"
+conda install "libblas=*=*_accelerate"
+conda install "libblas=*=*_newaccelerate"
+conda install "libblas=*=*_netlib"
 ```
 
 This would change the BLAS implementation without changing the conda packages depending
 on BLAS.
+
+:::note
+
+For macOS 13.3+, you can use `newaccelerate` to use the new BLAS/LAPACK
+support in Accelerate.
 
 The following legacy commands are also supported as well.
 
@@ -1312,6 +1318,7 @@ conda install "blas=*=mkl"
 conda install "blas=*=openblas"
 conda install "blas=*=blis"
 conda install "blas=*=accelerate"
+conda install "blas=*=newaccelerate"
 conda install "blas=*=netlib"
 ```
 
