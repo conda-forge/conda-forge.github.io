@@ -5,8 +5,9 @@ provider on macOS as it was updated regularly and is the least
 buggiest performant BLAS/LAPACK implementation.
 
 macOS 13.3 updated the Accelerate framework after a long time with
-improved support for LAPACK APIs and has long-time known bugs in
-its BLAS and LAPACK APIs. conda-forge has added support for this
+improved support for LAPACK APIs and has fixes for long-time known
+bugs in the older Accelerate's BLAS and LAPACK APIs.
+conda-forge has added support for this
 new Accelerate framework by using a shim library to expose its
 functionality to most conda-forge packages including `numpy`,
 `scipy` and `pytorch`.
