@@ -4,10 +4,24 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/news/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Thu, 31 Jul 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 18 Aug 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Dropping Python 3.9 support in conda-forge]]></title>
+            <link>https://conda-forge.org/news/2025/08/18/python-3-9/</link>
+            <guid>https://conda-forge.org/news/2025/08/18/python-3-9/</guid>
+            <pubDate>Mon, 18 Aug 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[With Python 3.9 reaching end-of-life in Oct 2025 and Python]]></description>
+            <content:encoded><![CDATA[<p>With Python 3.9 reaching end-of-life in Oct 2025 and Python
+3.14 being released the same month, we have decided to drop
+3.9 from our default build matrix. This will be reflected
+in your feedstock configuration on the next rerender.
+The decision to drop support 1.5 months before its EOL is
+to avoid the strain on conda-forge CI while we add support
+for 3.14.</p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[New Accelerate support for macOS 13.3+]]></title>
             <link>https://conda-forge.org/news/2025/07/31/new-accelerate-macos/</link>
@@ -389,25 +403,6 @@ Please reach out through the usual channels if you have any questions.</p>]]></c
             <description><![CDATA[Azure Pipelines has deprecated the macos-11 images. As a result we have bumped the default Azure vmImage setting to macos-12.]]></description>
             <content:encoded><![CDATA[<p>Azure Pipelines has deprecated the <a href="https://github.com/actions/runner-images/blob/81eb448ee02647a9634bbba21d902b1424b31915/images/macos/macos-11-Readme.md" target="_blank" rel="noopener noreferrer"><code>macos-11</code> images</a>. As a result we have <a href="https://github.com/conda-forge/conda-smithy/releases/tag/v3.35.0" target="_blank" rel="noopener noreferrer">bumped</a> the default Azure <code>vmImage</code> setting to <a href="https://github.com/actions/runner-images/blob/c7efc0685d959677c603acf49604c13396d854a3/images/macos/macos-12-Readme.md" target="_blank" rel="noopener noreferrer"><code>macos-12</code></a>.
 You can check <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2067" target="_blank" rel="noopener noreferrer">this issue</a> for more details.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Clang now available as compiler for all platforms]]></title>
-            <link>https://conda-forge.org/news/2024/04/30/clang-everywhere/</link>
-            <guid>https://conda-forge.org/news/2024/04/30/clang-everywhere/</guid>
-            <pubDate>Tue, 30 Apr 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[Our compiler stack per platform generally uses the "default" compiler for that]]></description>
-            <content:encoded><![CDATA[<p>Our compiler stack per platform generally uses the "default" compiler for that
-platform, see e.g. <a href="https://conda-forge.org/docs/maintainer/infrastructure/#compilers-and-runtimes" target="_blank" rel="noopener noreferrer">here</a>.</p>
-<p>In practice, this meant that</p>
-<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">c_compiler</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> gcc         </span><span class="token comment" style="color:#999988;font-style:italic"># [linux]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> clang       </span><span class="token comment" style="color:#999988;font-style:italic"># [osx]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> vs2019      </span><span class="token comment" style="color:#999988;font-style:italic"># [win]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">cxx_compiler</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> gxx         </span><span class="token comment" style="color:#999988;font-style:italic"># [linux]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> clangxx     </span><span class="token comment" style="color:#999988;font-style:italic"># [osx]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> vs2019      </span><span class="token comment" style="color:#999988;font-style:italic"># [win]</span><br></span></code></pre></div></div>
-<p>was the only possible choice for C/C++ compilers.</p>
-<p>Recently, we finished adding preliminary support <code>clang</code> / <code>clangxx</code> as
-C/C++ compilers also on linux and windows, starting from clang 18.
-This is still very fresh, so bugs are possible, and we ask not to change
-the default compilers on feedstocks unless there are compelling reasons.</p>
-<p>In any case, it is now possible to use the following configuration in
-<code>recipe/conda_build_config.yaml</code> (note the lack of platform selectors):</p>
-<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">c_compiler</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> clang</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">c_compiler_version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">18</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">cxx_compiler</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> clangxx</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">cxx_compiler_version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">18</span><br></span></code></pre></div></div>]]></content:encoded>
         </item>
     </channel>
 </rss>
