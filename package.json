@@ -19,7 +19,7 @@
     "@docusaurus/preset-classic": "^3.8.1",
     "@docusaurus/plugin-content-blog": "^3.5.2",
     "@docusaurus/theme-mermaid": "^3.8.1",
-    "@mdx-js/react": "^3.1.0",
+    "@mdx-js/react": "^3.1.1",
     "@stoplight/json-ref-resolver": "^3.1.6",
     "chart.js": "^4.5.0",
     "chartjs-adapter-moment": "^1.0.1",
