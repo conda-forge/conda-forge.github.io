@@ -504,6 +504,74 @@ packages have a so-called [Application Binary Interface](../glossary.md#abi)
 to crashes, miscalculations, etc. Generally speaking, using a consistent compiler
 version greatly reduces the risk of ABI breaks.
 
+### Using compilers in feedstocks
+
+More specifically, each compiler uses an _activation_ package that makes the difference
+between it being merely present in a build environment, and it being used by default.
+These will be installed when using `{{ compiler('xyz') }}` in `meta.yaml`, where
+`'xyz'` is one of `'c', 'cxx', 'fortran', 'cuda', 'rust', 'go-cgo', 'go-nocgo'`.
+
+### Installing compilers manually
+
+Despite the lack of explicit support, we try to keep the compilers in their various versions
+working also outside of conda-forge, and even provide an easy way to install them
+(through the [compilers feedstock](https://github.com/conda-forge/compilers-feedstock)).
+
+### Compilers supplied by conda-forge
+
+Our default compiler stack is made up very differently on each platform; each platform
+has its own default compiler, with its own set of feedstocks that provide them. Due to historical
+reasons (the way compilers are integrated with their OS, and the amount of
+software written in them, etc.), the most impactful languages are C & C++ (though
+Fortran is considered part of the default, not least because GCC compiles all three).
+
+Linux (GCC):
+
+- [C, C++, Fortran] Activation: https://github.com/conda-forge/ctng-compiler-activation-feedstock/
+- [C, C++, Fortran] Implementation: https://github.com/conda-forge/ctng-compilers-feedstock
+- Note that when used in conjunction with CUDA, compiler versions are restricted by the
+  maximum GCC version supported by nvcc (which is also reflected in the global pinning).
+
+OSX (Clang):
+
+- [C, C++] Activation: https://github.com/conda-forge/clang-compiler-activation-feedstock/
+- [C, C++] Required feedstocks:
+  [llvmdev](https://github.com/conda-forge/llvmdev-feedstock),
+  [clangdev](https://github.com/conda-forge/clangdev-feedstock),
+  [compiler-rt](https://github.com/conda-forge/compiler-rt-feedstock),
+  [libcxx](https://github.com/conda-forge/libcxx-feedstock),
+  [openmp](https://github.com/conda-forge/openmp-feedstock),
+  [lld](https://github.com/conda-forge/lld-feedstock),
+  [cctools](https://github.com/conda-forge/cctools-and-ld64-feedstock)
+- [Fortran] Activation: https://github.com/conda-forge/gfortran_osx-64-feedstock/
+- [Fortran] Implementation: https://github.com/conda-forge/gfortran_impl_osx-64-feedstock/
+
+Windows (MSVC):
+
+- [C, C++] Activation: https://github.com/conda-forge/vc-feedstock
+  (we cannot redistribute the actual MSVC compilers due to licensing constraints)
+- [Fortran] Activation & Implementation: https://github.com/conda-forge/flang-feedstock
+
+There exists an alternative, MinGW-based, compiler stack on Windows, which is available
+with a `m2w64_` prefix (e.g. `{{ compiler('m2w64_c') }}`). However, it is falling out
+of use now that most projects will natively support compilation also with MSVC, in addition
+to several complications arising from mixing compiler stacks.
+
+Additionally, there is a possibility to use `clang` as a compiler on Linux & Windows:
+
+- Activation (Linux): https://github.com/conda-forge/ctng-compiler-activation-feedstock/
+- Activation (Windows): https://github.com/conda-forge/clang-win-activation-feedstock/
+
+Aside from the main C/C++/Fortran compilers, these are the feedstocks for the other compilers:
+
+- [CUDA] [CUDA 12.0+](https://github.com/conda-forge/cuda-nvcc-feedstock) & [CUDA <12](https://github.com/conda-forge/nvcc-feedstock) (legacy)
+- [Rust] [Activation](https://github.com/conda-forge/rust-activation-feedstock)
+  and [Implementation](https://github.com/conda-forge/rust-feedstock)
+- [Go] [Activation](https://github.com/conda-forge/go-activation-feedstock)
+  and [Implementation](https://github.com/conda-forge/go-feedstock)
+
+### Compiler ABI stability policy
+
 Compilers generally strive to maintain ABI-compatibility across versions, meaning that
 combining artefacts for the same target produced by different versions of the same
 compiler will work together without issue. Due to the nature of the ABI (i.e. a vast
@@ -561,65 +629,9 @@ For such ABI-compatible upgrades, similar but looser principles apply:
 - Without promising any timelines, our compilers on Linux and OSX are normally
   very recent; on Windows, we generally use the last supported VS version.
 
-Despite the lack of explicit support, we try to keep the compilers in their various versions
-working also outside of conda-forge, and even provide an easy way to install them
-(through the [compilers feedstock](https://github.com/conda-forge/compilers-feedstock)).
+### More on compiler activation feedstocks
 
-More specifically, each compiler uses an _activation_ package that makes the difference
-between it being merely present in a build environment, and it being used by default.
-These will be installed when using `{{ compiler('xyz') }}` in `meta.yaml`, where
-`'xyz'` is one of `'c', 'cxx', 'fortran', 'cuda', 'rust', 'go-cgo', 'go-nocgo'`.
-
-Our default compiler stack is made up very differently on each platform; each platform
-has its own default compiler, with its own set of feedstocks that provide them. Due to historical
-reasons (the way compilers are integrated with their OS, and the amount of
-software written in them, etc.), the most impactful languages are C & C++ (though
-Fortran is considered part of the default, not least because GCC compiles all three).
-
-Linux (GCC):
-
-- [C, C++, Fortran] Activation: https://github.com/conda-forge/ctng-compiler-activation-feedstock/
-- [C, C++, Fortran] Implementation: https://github.com/conda-forge/ctng-compilers-feedstock
-- Note that when used in conjunction with CUDA, compiler versions are restricted by the
-  maximum GCC version supported by nvcc (which is also reflected in the global pinning).
-
-OSX (Clang):
-
-- [C, C++] Activation: https://github.com/conda-forge/clang-compiler-activation-feedstock/
-- [C, C++] Required feedstocks:
-  [llvmdev](https://github.com/conda-forge/llvmdev-feedstock),
-  [clangdev](https://github.com/conda-forge/clangdev-feedstock),
-  [compiler-rt](https://github.com/conda-forge/compiler-rt-feedstock),
-  [libcxx](https://github.com/conda-forge/libcxx-feedstock),
-  [openmp](https://github.com/conda-forge/openmp-feedstock),
-  [lld](https://github.com/conda-forge/lld-feedstock),
-  [cctools](https://github.com/conda-forge/cctools-and-ld64-feedstock)
-- [Fortran] Activation: https://github.com/conda-forge/gfortran_osx-64-feedstock/
-- [Fortran] Implementation: https://github.com/conda-forge/gfortran_impl_osx-64-feedstock/
-
-Windows (MSVC):
-
-- [C, C++] Activation: https://github.com/conda-forge/vc-feedstock
-  (we cannot redistribute the actual MSVC compilers due to licensing constraints)
-- [Fortran] Activation & Implementation: https://github.com/conda-forge/flang-feedstock
-
-There exists an alternative, MinGW-based, compiler stack on Windows, which is available
-with a `m2w64_` prefix (e.g. `{{ compiler('m2w64_c') }}`). However, it is falling out
-of use now that most projects will natively support compilation also with MSVC, in addition
-to several complications arising from mixing compiler stacks.
-
-Additionally, there is a possibility to use `clang` as a compiler on Linux & Windows:
-
-- Activation (Linux): https://github.com/conda-forge/ctng-compiler-activation-feedstock/
-- Activation (Windows): https://github.com/conda-forge/clang-win-activation-feedstock/
-
-Aside from the main C/C++/Fortran compilers, these are the feedstocks for the other compilers:
-
-- [CUDA] [CUDA 12.0+](https://github.com/conda-forge/cuda-nvcc-feedstock) & [CUDA <12](https://github.com/conda-forge/nvcc-feedstock) (legacy)
-- [Rust] [Activation](https://github.com/conda-forge/rust-activation-feedstock)
-  and [Implementation](https://github.com/conda-forge/rust-feedstock)
-- [Go] [Activation](https://github.com/conda-forge/go-activation-feedstock)
-  and [Implementation](https://github.com/conda-forge/go-feedstock)
+### Conda-forge compiler maintenance
 
 To upgrade the compiler version of our default compilers in the global pinning for
 Linux or OSX, ensure that the respective above-mentioned feedstocks have been rebuilt
