@@ -506,18 +506,57 @@ version greatly reduces the risk of ABI breaks.
 
 ### Using compilers in feedstocks
 
-More specifically, each compiler uses an _activation_ package that makes the difference
-between it being merely present in a build environment, and it being used by default.
-These will be installed when using `{{ compiler('xyz') }}` in `meta.yaml`, where
-`'xyz'` is one of `'c', 'cxx', 'fortran', 'cuda', 'rust', 'go-cgo', 'go-nocgo'`.
+Each set of compilers is split into two kinds of packages: the implementation packages
+that install the compiler itself, and an _activation_ package that installs scripts
+that set the build environment to use the respective compiler by default. These
+scripts set up a number of standard environment variables such as `CC`, and perform
+setup actions for the common build systems such as CMake and Meson.
+
+Recipes provide a `compiler` macro that is used to generate the correct dependency
+on a compiler for the language specified. For example, to depend on a C and C++
+compilers, one would specify:
+
+```yaml
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ stdlib('c') }}
+```
+
+<!-- TODO: explain stdlib -->
+
+The possible parameter values are listed in the [compilers supplied by conda-forge
+](#compilers-supplied-by-conda-forge) section.
 
 ### Installing compilers manually
 
-Despite the lack of explicit support, we try to keep the compilers in their various versions
-working also outside of conda-forge, and even provide an easy way to install them
-(through the [compilers feedstock](https://github.com/conda-forge/compilers-feedstock)).
+While the primary use case for conda-forge compiler packages is to provide build tools
+for feedstocks, we try to keep the compilers in their various versions
+working also for direct usage in Conda environments. In fact, we also provide a few
+convenience packages to install the respective compilers. For example, [compilers feedstock
+](https://github.com/conda-forge/compilers-feedstock) provides packages installing the same
+C, C++ and Fortran compilers as normally used in build environments.
+
+For example, to install a C++ compiler, one could invoke:
+
+```bash
+conda install cxx-compiler
+```
+
 
 ### Compilers supplied by conda-forge
+
+Currently conda-forge providers compilers for the following languages, that
+can be specified as arguments to the `{{ compiler(...) }}` macro:
+
+- `c`, also provided by `c-compiler` package
+- `cxx` (C++), also provided by `cxx-compiler`
+- `fortran`, also provided by `fortran-compiler`
+- `cuda`, also provided by `cuda-compiler`; see also [Guide for Maintainers of
+   Recipes That Use CUDA](https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/doc/recipe_guide.md)
+- `rust`; see [Rust packages](/docs/maintainer/example_recipes/rust/)
+- `go-cgo` and `go-nocgo`; see [Go packages](/docs/maintainer/example_recipes/go/)
 
 Our default compiler stack is made up very differently on each platform; each platform
 has its own default compiler, with its own set of feedstocks that provide them. Due to historical
