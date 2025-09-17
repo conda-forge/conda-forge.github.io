@@ -25,7 +25,8 @@ If you have questions or need help, please check out our documentation for a [li
     Run the following commands.
     - `conda env create -f ./.ci_scripts/environment.yml`
     - `conda activate conda-forge-docs`
-    - For live builds, `npm install && npm run start`
+    - Optional. Enable pre-commit hooks with `pre-commit install`.
+    - For live builds, `npm install && npm run start` - you can view the docs at `http://localhost:3000`
     - For production builds, run `.ci_scripts/update_docs`
 4.  Make and commit your changes.
 5.  Submit a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) to the main repository proposing your changes.
