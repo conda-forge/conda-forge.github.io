@@ -413,28 +413,6 @@ To see all builds on Azure, visit [https://dev.azure.com/conda-forge/feedstock-b
 Presently Azure does not sync GitHub users. In order to restart a build you can restart it from the GitHub checks interface.
 If that doesn't work, a close/open will kick off a new build. You can also use the web services command `@conda-forge-admin, please restart ci`.
 
-### TravisCI (IBM Power 8+, ARM)
-
-TravisCI is used to build packages for IBM Power 8+ and ARM. After merging a staged-recipes pull request, it might be necessary to
-force sync your repositories in TravisCI to see the reload and cancel buttons. To do this please visit [https://app.travis-ci.com/account/repositories](https://app.travis-ci.com/account/repositories)
-and click the "Sync accounts" button.
-
-#### Enabling Travis
-
-TravisCI should only be needed to build recipes on native Linux aarch64 and ppc64le.
-
-Enable a build by adding the corresponding line from the following to `conda-forge.yml` in the root of the feedstock.
-
-```yaml
-provider:
-  osx: travis
-  linux_ppc64le: travis
-  linux_aarch64: travis
-```
-
-For IBM Power 8+ and/or ARM builds, add the name of your feedstock to the list [here](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/arch_rebuild.txt)
-via a pull request.
-
 ### GitHub Actions
 
 We use GitHub actions to rerender feedstocks and also run our pull request automerge service. We do not currently support builds on
@@ -780,9 +758,6 @@ Maintaining these up-to-date across all feedstocks involves several repositories
 The pipelines can run on several CI providers supported by `conda-smithy`, including:
 
 - Azure DevOps Pipelines
-- Travis CI
-- Circle CI
-- Appveyor
 - Self-hosted Github Actions runners
 
 Registration of hooks and triggers is also done by the `conda-smithy` app.
@@ -967,13 +942,6 @@ Refer to the [`conda-forge.yml` documentation](/docs/maintainer/conda_forge_yml/
 - 🔒 Needs access to Anaconda.org (cf-staging)
 
 conda-forge benefits from the generously offered Microsoft-hosted runners.
-
-#### Travis CI
-
-- 🌐 https://app.travis-ci.com/github/conda-forge
-- 📍 Available on all feedstocks
-- 🛠 Provides [native Linux aarch64 and ppc64le runners](https://docs.travis-ci.com/user/reference/overview/)
-- 🔒 Needs access to Anaconda.org (cf-staging)
 
 #### Cirun
 

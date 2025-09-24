@@ -179,7 +179,7 @@ This file is the license for the recipe itself. This license is different from t
 
 #### CI-files
 
-These are the CI configuration files for service providers like Azure and TravisCI.
+These are the CI configuration files for service providers like Azure.
 
 <a id="conda-forge-yml"></a>
 

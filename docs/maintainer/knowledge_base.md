@@ -677,14 +677,15 @@ resort.
 
 #### Emulation examples
 
-Configure `conda-forge.yml` to emulate `linux-ppc64le`, but use native runners for `linux-64`
-and `linux-aarch64`. This works because `linux-ppc64le` is not natively supported by Azure, so
-`conda-smithy` will add QEMU steps to emulate it. However, `linux-64` and `linux-aarch64` are
-natively supported by Azure and Travis CI, respectively, so no emulation is needed.
+Configure `conda-forge.yml` to emulate `linux-ppc64le` and `linux-aarch64`,
+but use native runners for `linux-64`. This works because `linux-ppc64le`
+and `linux-aarch64` are not natively supported by Azure, so
+`conda-smithy` will add QEMU steps to emulate it. However, `linux-64` is
+natively supported by Azure, so no emulation is needed.
 
 ```yaml
 provider:
-  linux_aarch64: travis
+  linux_aarch64: azure
   linux_ppc64le: azure
   linux_64: azure
 ```
