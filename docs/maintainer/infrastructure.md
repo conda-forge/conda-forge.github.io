@@ -967,6 +967,7 @@ This allows, for example, access to GPU enabled runners for selected feedstocks 
 
 #### Retired services
 
+- [Travis CI](https://app.travis-ci.com/github/conda-forge)
 - [AppVeyor](https://ci.appveyor.com/account/conda-forge/projects)
 - Circle CI
 - Drone.io
