@@ -244,8 +244,8 @@ if errorlevel 1 exit 1
 
 The following feedstocks are examples of this build structure deployed:
 
-- [libpng](https://github.com/conda-forge/libpng-feedstock/blob/master/recipe/bld.bat)
-- [Pugixml](https://github.com/conda-forge/pugixml-feedstock/blob/master/recipe/bld.bat)
+- [libpng](https://github.com/conda-forge/libpng-feedstock/blob/main/recipe/build.bat)
+- [Pugixml](https://github.com/conda-forge/pugixml-feedstock/blob/main/recipe/bld.bat)
 
 <a id="building-for-different-vc-versions"></a>
 
