@@ -389,6 +389,13 @@ PRs are free to be opened by anyone!!! Thank you for your time and effort!!!
 
 :::
 
+### @conda-forge-admin, please remove user @username
+
+Entering the above phrase in the title of an issue on a feedstock will make a PR
+that _removes_ the given user from the feedstock. A maintainer or member of `core` can then merge
+this PR to add the user. Please do not modify this PR or adjust the commit message. This
+PR is designed to skip building the package.
+
 ### @conda-forge-admin, please update version
 
 Entering the above phrase in the title of an issue on a feedstock will request the bot
