@@ -502,12 +502,12 @@ is to ensure that packages stay compatible with each other. This is due to how c
 packages have a so-called [Application Binary Interface](../glossary.md#abi)
 (ABI), and how changes in the compiler infrastructure may break this ABI, leading
 to crashes, miscalculations, etc. Generally speaking, using a consistent compiler
-version greatly reduces the risk of ABI breaks.
+setup greatly reduces the risk of ABI breaks.
 
 ### Using compilers in feedstocks
 
-Each set of compilers is split into two kinds of packages: the implementation packages
-that install the compiler itself, and an _activation_ package that installs scripts
+There are two kinds of compiler-related packages in Conda-forge: implementation packages
+that install the compiler itself, and _activation_ packages that install scripts
 that set the build environment to use the respective compiler by default. These
 scripts set up a number of standard environment variables such as `CC`, and perform
 setup actions for the common build systems such as CMake and Meson.
@@ -567,13 +567,17 @@ for feedstocks, we try to keep the compilers in their various versions
 working also for direct usage in Conda environments. In fact, we also provide a few
 convenience packages to install the respective compilers. For example, [compilers feedstock
 ](https://github.com/conda-forge/compilers-feedstock) provides packages installing the same
-C, C++ and Fortran compilers as normally used in build environments.
+C, C++ and Fortran compilers as normally used in build environments, along with their
+activation scripts.
 
 For example, to install a C++ compiler, one could invoke:
 
 ```bash
 conda install cxx-compiler
 ```
+
+Please note that these packages must not be used in feedstock; instead the macros
+listed in `Using compilers in feedstocks`\_ must be used.
 
 ### Compilers supplied by conda-forge
 
@@ -588,9 +592,23 @@ can be specified as arguments to the `{{ compiler(...) }}` macro:
 - `rust`; see [Rust packages](/docs/maintainer/example_recipes/rust/)
 - `go-cgo` and `go-nocgo`; see [Go packages](/docs/maintainer/example_recipes/go/)
 
+There exists an alternative, MinGW-based, compiler stack on Windows:
+
+- `m2w64_c` for the C compiler
+- `m2w64_cxx` for the C++ compiler
+- `m2w64_fortran` for the Fortran compiler
+
+However, it is falling out
+of use now that most projects will natively support compilation also with MSVC, in addition
+to several complications arising from mixing compiler stacks.
+
+Furthermore, compiler names can also be passed explicitly to the `compiler()` macro,
+for example `compiler('clang')` or `compiler('gcc')`, in which case they override
+the platform defaults.
+
 The authoritative source of the current compilers and versions for various languages
-and platforms is the [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml)
-in the [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock)
+and platforms is the [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml) file
+in the [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock) repository
 as described in [Globally pinned packages](pinning_deps.md#globally-pinned-packages).
 
 The default C and C++ compilers are GCC on Linux, Clang on macOS and VS2022
@@ -659,7 +677,8 @@ For such ABI-compatible upgrades, similar but looser principles apply:
 
 The compiler activation and implementation packages are built by two separate
 feedstocks, with a few exceptions. The activation packages install scripts
-into `/etc/conda/activate.d` and `/etc/conda/deactivate.d` directories. These
+into `/etc/conda/activate.d` and `/etc/conda/deactivate.d` directories, which
+are invoked automatically by the conda-build tool when those environments are activated. These
 scripts are then used by the build tool to respectively prepare for building
 with the given compiler, and clean up afterwards. The implementation packages
 install the compilers themselves. More details can be found in the [Anaconda compiler tools
@@ -694,11 +713,6 @@ Windows (MSVC + Flang):
 - [C, C++] Activation: https://github.com/conda-forge/vc-feedstock
   (we cannot redistribute the actual MSVC compilers due to licensing constraints)
 - [Fortran] Activation & Implementation: https://github.com/conda-forge/flang-feedstock
-
-There exists an alternative, MinGW-based, compiler stack on Windows, which is available
-with a `m2w64_` prefix (e.g. `{{ compiler('m2w64_c') }}`). However, it is falling out
-of use now that most projects will natively support compilation also with MSVC, in addition
-to several complications arising from mixing compiler stacks.
 
 Additionally, there is a possibility to use `clang` as a compiler on Linux & Windows:
 
