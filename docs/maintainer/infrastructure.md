@@ -598,7 +598,7 @@ There exists an alternative, MinGW-based, compiler stack on Windows:
 - `m2w64_cxx` for the C++ compiler
 - `m2w64_fortran` for the Fortran compiler
 
-However, it is falling out
+Along with these compilers, `stdlib('m2w64_c')` needs to be used. However, this stack is falling out
 of use now that most projects will natively support compilation also with MSVC, in addition
 to several complications arising from mixing compiler stacks.
 
