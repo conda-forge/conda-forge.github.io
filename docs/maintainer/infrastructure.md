@@ -546,7 +546,7 @@ requirements:
 Our default compiler stack is made up very differently on each platform; each platform
 has its own default compiler, with its own set of feedstocks that provide them.
 However, it is often possible to use a different compiler if necessary. For example,
-to use Clang 21 as the C and C++ compiler, one would additionally specify
+to use Clang 21 as the C and C++ compiler *on all platforms* (and not just macOS), one would additionally specify
 in `recipe/conda_build_config.yaml`:
 
 ```yaml
