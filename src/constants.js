@@ -28,21 +28,21 @@ export const urls = {
       link: "https://anaconda.statuspage.io/",
       title: "Anaconda",
     },
-    appveyor: {
-      api: "https://status.appveyor.com/api/v2/status.json",
-      link: "https://status.appveyor.com/",
-      title: "AppVeyor",
-    },
+    // appveyor: {
+    //   api: "https://status.appveyor.com/api/v2/status.json",
+    //   link: "https://status.appveyor.com/",
+    //   title: "AppVeyor",
+    // },
     azure: {
       api: "https://conda-forge.herokuapp.com/status-monitor/azure",
       link: "https://status.dev.azure.com/",
       title: "Azure DevOps",
     },
-    circle: {
-      api: "https://status.circleci.com/api/v2/status.json",
-      link: "https://status.circleci.com",
-      title: "Circle CI",
-    },
+    // circle: {
+    //   api: "https://status.circleci.com/api/v2/status.json",
+    //   link: "https://status.circleci.com",
+    //   title: "Circle CI",
+    // },
     docker: {
       api: "https://conda-forge.herokuapp.com/status-monitor/docker",
       link: "https://dockerstatus.com",
@@ -63,11 +63,11 @@ export const urls = {
       link: "https://status.redhat.com/",
       title: "Quay.io",
     },
-    travis: {
-      api: "https://www.traviscistatus.com/api/v2/status.json",
-      link: "https://www.traviscistatus.com/",
-      title: "Travis CI",
-    },
+    // travis: {
+    //   api: "https://www.traviscistatus.com/api/v2/status.json",
+    //   link: "https://www.traviscistatus.com/",
+    //   title: "Travis CI",
+    // },
   },
   azure: {
     pipelines:
