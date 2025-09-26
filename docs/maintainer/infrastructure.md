@@ -560,6 +560,16 @@ cxx_compiler_version:
   - 21
 ```
 
+Alternatively, the specific compiler name can be used as an argument to
+the `{{ compiler(...) }}` macro, e.g.:
+
+```yaml
+requirements:
+  build:
+    - {{ compiler('clang') }}
+    - {{ stdlib('c') }}
+```
+
 ### Installing standard compilers manually
 
 While the primary use case for conda-forge compiler packages is to provide build tools
@@ -570,16 +580,36 @@ convenience packages to install the respective compilers. For example, [compiler
 C, C++ and Fortran compilers as normally used in build environments, along with their
 activation scripts.
 
-For example, to install a C++ compiler, one could invoke:
+For example, to install these three compilers, one could invoke:
 
 ```bash
-conda install cxx-compiler
+conda install compilers
 ```
 
-Please note that these packages must not be used in feedstock; instead the macros
-listed in `Using compilers in feedstocks`\_ must be used.
+Alternatively, specific compilers can be requested:
+
+```bash
+conda install cxx-compiler fortran-compiler
+```
+
+Other available convenience packages are listed in the [platform-default
+compilers](#platform-default-compilers) list.
+
+Please note that these packages must not be used in a feedstock; instead the macros
+listed in [Using compilers in feedstocks](#using-compilers-in-feedstocks) must be used.
+
+### MSVC compiler on Windows
+
+Conda-forge is not allowed to redistribute the MSVC compiler used on Windows,
+and therefore only provides the activation scripts for an externally installed
+compiler. Users who wish to compile code using MSVC, both for local use
+and feedstock builds, have to install Microsoft Visual Studio manually.
+For more information, see [Notes on native code](/docs/maintainer/knowledge_base/#notes-on-native-code)
+in Knowledge Base.
 
 ### Compilers supplied by conda-forge
+
+#### Platform-default compilers
 
 Currently conda-forge providers compilers for the following languages, that
 can be specified as arguments to the `{{ compiler(...) }}` macro:
@@ -591,20 +621,6 @@ can be specified as arguments to the `{{ compiler(...) }}` macro:
   Recipes That Use CUDA](https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/doc/recipe_guide.md)
 - `rust`; see [Rust packages](/docs/maintainer/example_recipes/rust/)
 - `go-cgo` and `go-nocgo`; see [Go packages](/docs/maintainer/example_recipes/go/)
-
-There exists an alternative, MinGW-based, compiler stack on Windows:
-
-- `m2w64_c` for the C compiler
-- `m2w64_cxx` for the C++ compiler
-- `m2w64_fortran` for the Fortran compiler
-
-Along with these compilers, `stdlib('m2w64_c')` needs to be used. However, this stack is falling out
-of use now that most projects will natively support compilation also with MSVC, in addition
-to several complications arising from mixing compiler stacks.
-
-Furthermore, compiler names can also be passed explicitly to the `compiler()` macro,
-for example `compiler('clang')` or `compiler('gcc')`, in which case they override
-the platform defaults.
 
 The authoritative source of the current compilers and versions for various languages
 and platforms is the [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml) file
@@ -618,6 +634,30 @@ and Flang on Windows.
 
 Note that when used in conjunction with CUDA, the GCC version is restricted by the
 maximum version supported by nvcc (which is also reflected in the global pinning).
+
+#### clang vs. clang-cl on Windows
+
+The `clang` compiler package installs two frontends, and conda-forge
+provides separate activation scripts for Windows, for each of them. Therefore,
+the following arguments can be used in `recipe/conda_build_config.yaml`
+or passed to the `{{ compiler(...) }}` macro:
+
+- `clang` to use the `clang` frontend using GCC argument syntax
+- `clang-cl` to use the `clang-cl` frontend with MSVC argument syntax
+
+#### MinGW-based compiler stack for Windows
+
+There exists an alternative, MinGW-based, compiler stack on Windows:
+
+- `m2w64_c` for the C compiler
+- `m2w64_cxx` for the C++ compiler
+- `m2w64_fortran` for the Fortran compiler
+
+Along with these compilers, `stdlib('m2w64_c')` needs to be used.
+
+However, this stack is falling out of use now that most projects will natively
+support compilation also with MSVC, in addition to several complications
+arising from mixing compiler stacks.
 
 ### Compiler ABI stability policy
 
