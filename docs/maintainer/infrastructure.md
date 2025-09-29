@@ -546,7 +546,7 @@ requirements:
 Our default compiler stack is made up very differently on each platform; each platform
 has its own default compiler, with its own set of feedstocks that provide them.
 However, it is often possible to use a different compiler if necessary. For example,
-to use Clang 21 as the C and C++ compiler *on all platforms* (and not just macOS), one would additionally specify
+to use Clang 21 as the C and C++ compiler _on all platforms_ (and not just macOS), one would additionally specify
 in `recipe/conda_build_config.yaml`:
 
 ```yaml
@@ -655,9 +655,9 @@ There exists an alternative, MinGW-based, compiler stack on Windows:
 
 Along with these compilers, `stdlib('m2w64_c')` needs to be used.
 
-However, this stack is falling out of use now that most projects will natively
-support compilation also with MSVC, in addition to several complications
-arising from mixing compiler stacks.
+Please note that the MinGW C++ and Fortran compilers are not ABI-compatible
+with the default stack, and therefore special care needs to be taken when
+performing cross-library calls.
 
 ### Compiler ABI stability policy
 
