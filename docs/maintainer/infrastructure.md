@@ -513,8 +513,8 @@ scripts set up a number of standard environment variables such as `CC`, and perf
 setup actions for the common build systems such as CMake and Meson.
 
 Recipes provide a `compiler` macro that is used to generate the correct dependency
-on a compiler for the language specified. For example, to depend on a C and C++
-compilers, one would specify:
+on a compiler for the language specified. Compilers are always added to `build`
+dependencies. For example, to depend on a C and C++ compilers, one would specify:
 
 ```yaml
 requirements:
