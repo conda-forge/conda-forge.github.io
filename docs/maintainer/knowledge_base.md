@@ -351,35 +351,7 @@ Batch syntax is a bit different from Bash and friends on Unix, so we have collec
 
 ### Compilers
 
-Compilers are dependencies with a special syntax and are always added to `requirements/build`.
-
-There are currently five supported compilers:
-
-- C
-- cxx
-- Fortran
-- Go
-- Rust
-
-A package that needs all five compilers would define
-
-```yaml
-requirements:
-  build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - {{ compiler('fortran') }}
-    - {{ compiler('go') }}
-    - {{ compiler('rust') }}
-```
-
-:::note
-
-Appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore
-there's no need to specify `libgcc` or `libgfortran`. There are additional informations about how conda-build 3 treats
-compilers in the [conda docs](https://docs.conda.io/projects/conda-build/en/stable/resources/compiler-tools.html).
-
-:::
+Dependencies on compilers are explained in detail in [Compilers and Runtimes](/docs/maintainer/infrastructure/#compilers-and-runtimes) infrastructure documentation.
 
 <a id="cross-compilation"></a>
 
