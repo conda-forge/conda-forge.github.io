@@ -494,7 +494,7 @@ This was sponsored by Prefix.dev. Below are the relevant pull requests for the s
 ## Compilers and Runtimes
 
 conda-forge builds and maintains its own set of compilers for various languages
-and/or systems (e.g., `C`, `FORTRAN`, `C++`, `CUDA`, etc.). These are used
+and/or systems (e.g., C, Fortran, C++, CUDA, etc.). These are used
 in all of our CI builds to build essentially all artefacts published by conda-forge.
 
 This compiler infrastructure has a critical role beyond building everything, which
