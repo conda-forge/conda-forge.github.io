@@ -24,7 +24,7 @@ permissions:
 jobs:
   create:
     if: github.event_name != 'pull_request'
-    uses: Quansight-Labs/hackmd-meeting-notes-action/.github/workflows/create-meeting-notes-pr.yml@ea8656941b46e915d2727b11072cd45d8b3aaffc # @main
+    uses: Quansight-Labs/hackmd-meeting-notes-action/.github/workflows/create-meeting-notes-pr.yml@7b2bc03a0eda5ef2297b19d58b71cd3adafbf076 # @main
     with:
       date: ${{ inputs.date || 'now' }}
       template_path: misc/DEV_MEETING_TEMPLATE.md
@@ -39,7 +39,7 @@ jobs:
       HACKMD_TOKEN: ${{ secrets.HACKMD_TOKEN }}
   sync:
     if: github.event.label.name == 'sync-hackmd-notes'
-    uses: Quansight-Labs/hackmd-meeting-notes-action/.github/workflows/sync-meeting-notes-pr.yml@ea8656941b46e915d2727b11072cd45d8b3aaffc # pin@main
+    uses: Quansight-Labs/hackmd-meeting-notes-action/.github/workflows/sync-meeting-notes-pr.yml@7b2bc03a0eda5ef2297b19d58b71cd3adafbf076 # pin@main
     with:
       pr_number: ${{ github.event.number }}
       hackmd_team: conda-forge
