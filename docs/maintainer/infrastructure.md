@@ -574,8 +574,8 @@ requirements:
 
 While the primary use case for conda-forge compiler packages is to provide build tools
 for feedstocks, we try to keep the compilers in their various versions
-working also for direct usage in Conda environments. In fact, we also provide a few
-convenience packages to install the respective compilers. For example, [compilers feedstock
+working also for direct usage in conda environments. In fact, we also provide a few
+convenience packages to install the respective compilers. For example, the [compilers feedstock
 ](https://github.com/conda-forge/compilers-feedstock) provides packages installing the same
 C, C++ and Fortran compilers as normally used in build environments, along with their
 activation scripts.
@@ -600,7 +600,7 @@ listed in [Using compilers in feedstocks](#using-compilers-in-feedstocks) must b
 
 ### MSVC compiler on Windows
 
-Conda-forge is not allowed to redistribute the MSVC compiler used on Windows,
+conda-forge is not allowed to redistribute the MSVC compiler used on Windows,
 and therefore only provides the activation scripts for an externally installed
 compiler. Users who wish to compile code using MSVC, both for local use
 and feedstock builds, have to install Microsoft Visual Studio manually.
