@@ -506,7 +506,7 @@ setup greatly reduces the risk of ABI breaks.
 
 ### Using compilers in feedstocks
 
-There are two kinds of compiler-related packages in Conda-forge: implementation packages
+There are two kinds of compiler-related packages in conda-forge: implementation packages
 that install the compiler itself, and _activation_ packages that install scripts
 that set the build environment to use the respective compiler by default. These
 scripts set up a number of standard environment variables such as `CC`, and perform
