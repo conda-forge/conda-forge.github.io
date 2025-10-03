@@ -718,7 +718,7 @@ For such ABI-compatible upgrades, similar but looser principles apply:
 The compiler activation and implementation packages are built by two separate
 feedstocks, with a few exceptions. The activation packages install scripts
 into `/etc/conda/activate.d` and `/etc/conda/deactivate.d` directories, which
-are invoked automatically by the conda-build tool when those environments are activated. These
+are invoked automatically when those environments are activated during the build. These
 scripts are then used by the build tool to respectively prepare for building
 with the given compiler, and clean up afterwards. The implementation packages
 install the compilers themselves. More details can be found in the [Anaconda compiler tools
