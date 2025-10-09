@@ -4,10 +4,55 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/blog/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Wed, 16 Jul 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 09 Oct 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Python 3.14 is already usable on conda-forge (not just available)]]></title>
+            <link>https://conda-forge.org/blog/2025/10/09/python-314/</link>
+            <guid>https://conda-forge.org/blog/2025/10/09/python-314/</guid>
+            <pubDate>Thu, 09 Oct 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[With yesterday's release of Python 3.14 (insert release link), we not only have Python 3.14 itself available on conda-forge,]]></description>
+            <content:encoded><![CDATA[<p>With yesterday's release of Python 3.14 (insert release link), we not only have Python 3.14 itself available on conda-forge,
+but also a wide selection of packages to make use of it.
+As the conda ecosystem is based on binary packages, this means that several packages are already built for Python 3.14.</p>
+<p>You can create a new environment by using:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">conda create -n py314 python=3.14 -c conda-forge</span><br></span></code></pre></div></div>
+<p>At the time of writing, the Python 3.14 migration is 77% progressed. This means that:</p>
+<ul>
+<li>1273 (41%) packages that needed a rebuild were built for Python 3.14</li>
+<li>1115 (36%) have an open PR to get rebuilt for Python 3.14</li>
+<li>704 (23%) packages are still waiting for a dependency to be rebuilt.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-is-already-usable">What is already usable?<a href="https://conda-forge.org/blog/2025/10/09/python-314/#what-is-already-usable" class="hash-link" aria-label="Direct link to What is already usable?" title="Direct link to What is already usable?" translate="no">​</a></h2>
+<p>While most binary packages needed to be rebuilt for Python 3.14,
+we did not need to rebuild packages that are <code>abi3</code>-compatible.
+Here, you can use the builds that were done with previous Python versions.
+Similarly, all pure Python packages (i.e. the ones we call <code>noarch: python</code> in the conda world) didn't need to be rebuilt and can be used directly.</p>
+<p>Still, as the statistics above show, not all packages are available for Python 3.14 yet.
+The most prominent here include <code>pytorch</code>, <code>numba</code>, and <code>cytoolz</code>.
+For the latter two, we need to wait for them to provide new releases that make them compatible with 3.14.
+In the case of PyTorch, we either need to wait for the new <code>2.10.0</code> release or may be able to backport changes to the <code>2.9.0</code> release.
+You can track the progress on the upstream side in <a href="https://github.com/pytorch/pytorch/issues/156856" target="_blank" rel="noopener noreferrer">pytorch#156856</a> and on the conda-forge side in <a href="https://github.com/conda-forge/pytorch-cpu-feedstock/pull/420" target="_blank" rel="noopener noreferrer">pytorch-cpu-feedstock#420</a>.
+For <code>numba</code>, we expect the necessary changes to land in <code>0.63</code>.
+As a there is already <a href="https://github.com/numba/numba/releases/tag/0.63.0b1" target="_blank" rel="noopener noreferrer">a beta</a> available, we will wait here for the final release and won't backport any changes.
+For other packages, similar approaches will be taken.
+You can track the progress for each of them if you click on <a href="https://conda-forge.org/status/migration/?name=python314" target="_blank" rel="noopener noreferrer">the respective link on the status page</a>.</p>
+<p>If you face any issue with the Python package itself, please report that on the <a href="https://github.com/conda-forge/python-feedstock/issues" target="_blank" rel="noopener noreferrer">python-feedstock</a>.
+For problems with individual packages, please do so on the respective <code>conda-forge/&lt;package&gt;-feedstock</code> repository.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-was-conda-forge-able-to-provide-release-day-availability">How was conda-forge able to provide release day availability?<a href="https://conda-forge.org/blog/2025/10/09/python-314/#how-was-conda-forge-able-to-provide-release-day-availability" class="hash-link" aria-label="Direct link to How was conda-forge able to provide release day availability?" title="Direct link to How was conda-forge able to provide release day availability?" translate="no">​</a></h2>
+<p>Like we already did in the releases for <a href="https://conda-forge.org/blog/2024/09/26/python-313/" target="_blank" rel="noopener noreferrer">Python 3.13</a> and <a href="https://conda-forge.org/news/2023/09/25/python-312-migration-and-python-311-by-default/" target="_blank" rel="noopener noreferrer">Python 3.12</a>, we have started building packages for Python 3.14 once the release candidate was available.
+As ABI-stability is guaranteed between release candidates, these packages are also usable with the final Python release.
+Thus, we were able to start building packages for this release already on <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/7598" target="_blank" rel="noopener noreferrer">August 20</a>.
+Unfortunately, as part of this release process, the <a href="https://discuss.python.org/t/python-3-14-0rc3-is-go/103815" target="_blank" rel="noopener noreferrer">magic number stored in Python bytecode (<code>.pyc</code>) was bumped</a> in RC2 and RC3.
+This means that the bytecode will be regenerated on the first run for packages built with a version earlier than RC3.
+As the impact of this has been minor, we did not rebuild the respective packages and expect that through package updates, this will quickly become unnoticeable.</p>
+<p>Note that the current migration only includes the "default" flavour of Python.
+We have not yet started building packages for the <code>freethreading</code> version.
+Once work on making the migrator more selective has progressed, we will start to build packages.</p>]]></content:encoded>
+            <category>infrastructure</category>
+        </item>
         <item>
             <title><![CDATA[Security audit]]></title>
             <link>https://conda-forge.org/blog/2025/07/16/security-audit/</link>
@@ -1556,44 +1601,6 @@ produced. Faster migrations will help to provide the latest features to
 downstream users and keep transition times to a minimum, helping to
 foster greater stability of the ecosystem and the seamless experience
 users have come to expect from <code>conda-forge</code>.</p>]]></content:encoded>
-            <category>scipy</category>
-        </item>
-        <item>
-            <title><![CDATA[Scipy 2020 Packaging BOF]]></title>
-            <link>https://conda-forge.org/blog/2020/07/06/scipy-bof/</link>
-            <guid>https://conda-forge.org/blog/2020/07/06/scipy-bof/</guid>
-            <pubDate>Mon, 06 Jul 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Abstract:]]></description>
-            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="abstract">Abstract:<a href="https://conda-forge.org/blog/2020/07/06/scipy-bof/#abstract" class="hash-link" aria-label="Direct link to Abstract:" title="Direct link to Abstract:" translate="no">​</a></h2>
-<p>Have some thoughts about conda-forge and how it can be expanded in a way
-that is sustainable? Join us in this virtual Birds of a Feather
-discussion where we'll discuss maintenance, pain points, opportunities
-within conda-forge. Any and all are welcome, and we especially are
-seeking new viewpoints and opinions!</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="bof-questions">BOF questions:<a href="https://conda-forge.org/blog/2020/07/06/scipy-bof/#bof-questions" class="hash-link" aria-label="Direct link to BOF questions:" title="Direct link to BOF questions:" translate="no">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="state-of-packaging">State of Packaging<a href="https://conda-forge.org/blog/2020/07/06/scipy-bof/#state-of-packaging" class="hash-link" aria-label="Direct link to State of Packaging" title="Direct link to State of Packaging" translate="no">​</a></h3>
-<ul>
-<li>What is the state of conda-forge today?</li>
-<li>What improvements are in the works?</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-featuresideas">New features/ideas<a href="https://conda-forge.org/blog/2020/07/06/scipy-bof/#new-featuresideas" class="hash-link" aria-label="Direct link to New features/ideas" title="Direct link to New features/ideas" translate="no">​</a></h3>
-<ul>
-<li>What is something that's not in the works that you'd like to see
-updated/improved?</li>
-<li>What are ways that folks who are interested but new to the community
-can get involved?</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="maintenance">Maintenance<a href="https://conda-forge.org/blog/2020/07/06/scipy-bof/#maintenance" class="hash-link" aria-label="Direct link to Maintenance" title="Direct link to Maintenance" translate="no">​</a></h3>
-<ul>
-<li>What is the maintenance burden and what pain points does it create?</li>
-<li>What are strategies to mitigate this burden?</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="questions-to-the-audience">Questions to the audience<a href="https://conda-forge.org/blog/2020/07/06/scipy-bof/#questions-to-the-audience" class="hash-link" aria-label="Direct link to Questions to the audience" title="Direct link to Questions to the audience" translate="no">​</a></h3>
-<ul>
-<li>What are your pain points when engaging with conda forge?</li>
-<li>What is something new you'd like to see happen?</li>
-<li>What feedback do audience members have?</li>
-</ul>]]></content:encoded>
             <category>scipy</category>
         </item>
     </channel>
