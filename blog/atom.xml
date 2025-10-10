@@ -12,8 +12,8 @@
         <id>https://conda-forge.org/blog/2025/10/09/python-314/</id>
         <link href="https://conda-forge.org/blog/2025/10/09/python-314/"/>
         <updated>2025-10-09T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[With yesterday's release of Python 3.14 (insert release link), we not only have Python 3.14 itself available on conda-forge,]]></summary>
-        <content type="html"><![CDATA[<p>With yesterday's release of Python 3.14 (insert release link), we not only have Python 3.14 itself available on conda-forge,
+        <summary type="html"><![CDATA[With yesterday's release of Python 3.14, we not only have Python 3.14 itself available on conda-forge,]]></summary>
+        <content type="html"><![CDATA[<p>With yesterday's <a href="https://pythoninsider.blogspot.com/2025/10/python-3140-final-is-here.html" target="_blank" rel="noopener noreferrer">release of Python 3.14</a>, we not only have Python 3.14 itself available on conda-forge,
 but also a wide selection of packages to make use of it.
 As the conda ecosystem is based on binary packages, this means that several packages are already built for Python 3.14.</p>
 <p>You can create a new environment by using:</p>
