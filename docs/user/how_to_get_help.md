@@ -6,7 +6,7 @@ title: 'How to get help at conda-forge'
 
 # How to get help at conda-forge
 
-You could connect with us via **Zulip, GitHub Issues or Discourse Group**.
+You could connect with us via **Zulip or GitHub Issues**.
 We would be happy to hear from you!
 
 <a id="element-chatroom"></a>
@@ -35,9 +35,3 @@ When opening issues, be sure to:
 You can open issues at [conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io/issues)
 for long threads involving infrastructural, architectural or ecosystem wide discussions.
 Please note that some of these discussions will be turned into policy via the [CFEP process](https://github.com/conda-forge/conda-forge-enhancement-proposals).
-
-<a id="discourse-group"></a>
-
-## Discourse Group
-
-You can subscribe to our [Discourse group](https://conda.discourse.group) and post your queries there. The Discourse group is a secondary home for long threads about the ecosystem.
