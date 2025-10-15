@@ -29,7 +29,7 @@ Chances are we have already packaged it for you. You can [search](https://anacon
 - If you find bugs, need help, or want to talk to the developers, use our mailing lists or chat rooms:
   - [GitHub issues](https://github.com/conda-forge/conda-forge.github.io/issues)
   - [Zulip chatroom](https://conda-forge.zulipchat.com/)
-  - [Discourse group](https://conda.discourse.group)
+  - [Discourse group (archived)](https://conda.discourse.group)
   - [Mailing list (archived)](https://groups.google.com/forum/#!forum/conda-forge)
 
 <a id="table-of-contents"></a>

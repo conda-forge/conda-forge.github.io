@@ -54,6 +54,7 @@ There are, currently, three ways to generate a recipe:
    for conda-forge and eventually replace conda skeleton. Presently, Grayskull can generate recipes for Python packages available on PyPI and also those not published on PyPI and only available as GitHub repositories.
 
    Installation and usage of `grayskull`:
+
    - Create a new environment using : `conda create --name MY_ENV`. Replace `MY_ENV` with the environment name.
    - Activate this new environment : `conda activate MY_ENV`.
    - Run `conda install -c conda-forge grayskull` to install `grayskull`.
