@@ -2,11 +2,19 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/news/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2025-08-18T00:00:00.000Z</updated>
+    <updated>2025-10-15T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/news/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[conda-forge Discourse forum is now read-only]]></title>
+        <id>https://conda-forge.org/news/2025/10/15/conda-forge-discourse-read-only/</id>
+        <link href="https://conda-forge.org/news/2025/10/15/conda-forge-discourse-read-only/"/>
+        <updated>2025-10-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We have made the conda-forge Discourse forum read-only. Please use the conda-forge Zulip chat instead.]]></summary>
+        <content type="html"><![CDATA[<p>We have made the <a href="https://conda.discourse.group/c/pkg-building/conda-forge/25" target="_blank" rel="noopener noreferrer">conda-forge Discourse forum</a> read-only. Please use the conda-forge <a href="https://conda-forge.zulipchat.com/" target="_blank" rel="noopener noreferrer">Zulip chat</a> instead.</p>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Dropping Python 3.9 support in conda-forge]]></title>
         <id>https://conda-forge.org/news/2025/08/18/python-3-9/</id>
@@ -393,14 +401,5 @@ conda-forge packages that depend on <code>numpy</code> during the build (so in
 Particular package's status can be found there. Specific recommendations for
 maintainers updating packages can be found in the migration PRs themselves.
 Please reach out through the usual channels if you have any questions.</p>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Azure macOS x64 runners will now default to macos-12]]></title>
-        <id>https://conda-forge.org/news/2024/05/02/bump-macos-12/</id>
-        <link href="https://conda-forge.org/news/2024/05/02/bump-macos-12/"/>
-        <updated>2024-05-02T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Azure Pipelines has deprecated the macos-11 images. As a result we have bumped the default Azure vmImage setting to macos-12.]]></summary>
-        <content type="html"><![CDATA[<p>Azure Pipelines has deprecated the <a href="https://github.com/actions/runner-images/blob/81eb448ee02647a9634bbba21d902b1424b31915/images/macos/macos-11-Readme.md" target="_blank" rel="noopener noreferrer"><code>macos-11</code> images</a>. As a result we have <a href="https://github.com/conda-forge/conda-smithy/releases/tag/v3.35.0" target="_blank" rel="noopener noreferrer">bumped</a> the default Azure <code>vmImage</code> setting to <a href="https://github.com/actions/runner-images/blob/c7efc0685d959677c603acf49604c13396d854a3/images/macos/macos-12-Readme.md" target="_blank" rel="noopener noreferrer"><code>macos-12</code></a>.
-You can check <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2067" target="_blank" rel="noopener noreferrer">this issue</a> for more details.</p>]]></content>
     </entry>
 </feed>
