@@ -560,15 +560,11 @@ cxx_compiler_version:
   - 21
 ```
 
-Alternatively, the specific compiler name can be used as an argument to
-the `{{ compiler(...) }}` macro, e.g.:
-
-```yaml
-requirements:
-  build:
-    - {{ compiler('clang') }}
-    - {{ stdlib('c') }}
-```
+Technically, the `{{ compiler(...) }}` macro may accept arbitrary compiler names
+as an argument. However, this only works as an incident of the current implementation.
+Names other than the listed in this document or the
+[conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock)
+repository should not be used.
 
 ### Installing standard compilers manually
 
@@ -639,15 +635,15 @@ maximum version supported by nvcc (which is also reflected in the global pinning
 
 The `clang` compiler package installs two frontends, and conda-forge
 provides separate activation scripts for Windows, for each of them. Therefore,
-the following arguments can be used in `recipe/conda_build_config.yaml`
-or passed to the `{{ compiler(...) }}` macro:
+the following arguments can be used in `recipe/conda_build_config.yaml`:
 
 - `clang` to use the `clang` frontend using GCC argument syntax
 - `clang-cl` to use the `clang-cl` frontend with MSVC argument syntax
 
 #### MinGW-based compiler stack for Windows
 
-There exists an alternative, MinGW-based, compiler stack on Windows:
+There exists an alternative, MinGW-based, compiler stack on Windows. To use it,
+the following arguments can be passed to the `{[ compiler(...) }}` macro:
 
 - `m2w64_c` for the C compiler
 - `m2w64_cxx` for the C++ compiler
