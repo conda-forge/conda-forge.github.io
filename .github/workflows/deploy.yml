@@ -48,6 +48,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: >
             --no-progress
+            --max-retries 10
             --timeout 60
             --base "$(pwd)/build"
             --accept 100..399,401,403,429
