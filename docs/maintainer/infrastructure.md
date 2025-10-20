@@ -651,9 +651,14 @@ the following arguments can be passed to the `{[ compiler(...) }}` macro:
 
 Along with these compilers, `stdlib('m2w64_c')` needs to be used.
 
-Please note that the MinGW C++ and Fortran compilers are not ABI-compatible
-with the default stack, and therefore special care needs to be taken when
-performing cross-library calls.
+These compilers correspond to the `gcc`, `gxx` and `gfortran` packages,
+respectively. The `m2w64-*` compiler packages (with the exception of
+`m2w64-sysroot`) are obsolete and no longer updated.
+
+The MinGW C++ and Fortran compilers are not ABI-compatible with the default
+stack, and therefore special care needs to be taken when performing
+cross-library calls. The executables produced by them may link to the MinGW
+compiler libraries, notably `libgcc`, `libwinpthread` and `libgomp`.
 
 ### Compiler ABI stability policy
 
