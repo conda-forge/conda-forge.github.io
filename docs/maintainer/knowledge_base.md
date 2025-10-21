@@ -1191,7 +1191,7 @@ using GNU's gfortran.
 On Windows, switching between different OpenMP implemnentations is not supported. Every package uses the implementation
 it was built against.
 
-On Linux, when packages are linked against GNU's `libgomp.so.1`, but the OpenMP library at install time can be
+On Linux, when packages are linked against GNU's `libgomp.so.1`, the OpenMP library at install time can be
 switched from GNU to LLVM by doing the following.
 
 ```shell-session
