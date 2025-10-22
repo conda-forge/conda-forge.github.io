@@ -1170,13 +1170,13 @@ a different runtime through their build system configuration.
 On Linux, building against `libgomp` is recommended as the other OpenMP providers are backwards compatible with it.
 When packages are built against `libgomp`, it is possible to use both `libgomp` and `llvm-openmp` provider at runtime.
 
-Dependencies on OpenMP providers belong in the `build` section of recipe dependencies. The following snippet corresponds
+Dependencies on OpenMP providers belong in the `host` section of recipe dependencies. The following snippet corresponds
 to the defaults, though individual packages may require a different set:
 
 ```yaml
 # meta.yaml
 requirements:
-  build:
+  host:
     - llvm-openmp  # [osx]
     - libgomp      # [linux]
 ```
