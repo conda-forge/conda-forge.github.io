@@ -637,8 +637,14 @@ The `clang` compiler package installs two frontends, and conda-forge
 provides separate activation scripts for Windows, for each of them. Therefore,
 the following arguments can be used in `recipe/conda_build_config.yaml`:
 
-- `clang` to use the `clang` frontend using GCC argument syntax
+- `clang` to use the `clang` frontend with GCC argument syntax
 - `clang-cl` to use the `clang-cl` frontend with MSVC argument syntax
+
+To use the `clang-cl` frontend on Windows, and the `clang` frontend on other
+systems, the following dependencies can be used:
+
+- `{{ compiler('clang') }}` for the C compiler
+- `{{ compiler('clangxx') }}` for the C++ compiler
 
 #### MinGW-based compiler stack for Windows
 
