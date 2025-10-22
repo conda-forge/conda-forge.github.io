@@ -1165,7 +1165,7 @@ corresponding compilers in `requirements/build` as normal.
 The default OpenMP runtime used depends on the compiler and platform used. GCC (on Linux and the Windows MinGW
 toolchain) uses the `libgomp` runtime. Clang (on all platforms) and GNU Fortran on macOS default to the `llvm-openmp`
 runtime. MSVC may use its own runtime or `llvm-openmp`. However, individual projects may force building against
-a different runtime.
+a different runtime through their build system configuration.
 
 On Linux, building against `libgomp` is recommended as the other OpenMP providers are backwards compatible with it.
 When packages are built against `libgomp`, it is possible to use both `libgomp` and `llvm-openmp` provider at runtime.
