@@ -1,0 +1,13 @@
+[
+  "diataxis",
+  {
+    "type": "category",
+    "label": "How-to guides",
+    "link": {
+      "type": "doc",
+      "id": "how-to/index"
+    },
+    "items": []
+  },
+  { "type": "ref", "id": "glossary" }
+]

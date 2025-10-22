@@ -417,6 +417,10 @@ const config = {
                 label: "CFEPs",
                 to: "/community/cfep/",
               },
+              {
+                label: "Reorganized docs",
+                to: "/docs/diataxis",
+              },
             ],
           },
           {
