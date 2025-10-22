@@ -1162,14 +1162,21 @@ corresponding compilers in `requirements/build` as normal.
 
 ### OpenMP
 
-You can enable OpenMP on macOS by adding the `llvm-openmp` package to the `build` section of the `meta.yaml`.
-For Linux OpenMP support is on by default, however it's better to explicitly depend on the libgomp package which is the OpenMP
-implementation from the GNU project.
+The default OpenMP runtime used depends on the compiler and platform used. GCC (on Linux and the Windows MinGW
+toolchain) uses the `libgomp` runtime. Clang (on all platforms) and GNU Fortran on macOS default to the `llvm-openmp`
+runtime. MSVC may use its own runtime or `llvm-openmp`. However, individual projects may force building against
+a different runtime through their build system configuration.
+
+On Linux, building against `libgomp` is recommended as the other OpenMP providers are backwards compatible with it.
+When packages are built against `libgomp`, it is possible to use both `libgomp` and `llvm-openmp` provider at runtime.
+
+Dependencies on OpenMP providers belong in the `host` section of recipe dependencies. The following snippet corresponds
+to the defaults, though individual packages may require a different set:
 
 ```yaml
 # meta.yaml
 requirements:
-  build:
+  host:
     - llvm-openmp  # [osx]
     - libgomp      # [linux]
 ```
@@ -1181,7 +1188,10 @@ requirements:
 On macOS, only LLVM's OpenMP implementation `llvm-openmp` is supported. This implementation is used even in Fortran code compiled
 using GNU's gfortran.
 
-On Linux (except aarch64), packages are linked against GNU's `libgomp.so.1`, but the OpenMP library at install time can be
+On Windows, switching between different OpenMP implemnentations is not supported. Every package uses the implementation
+it was built against.
+
+On Linux, when packages are linked against GNU's `libgomp.so.1`, the OpenMP library at install time can be
 switched from GNU to LLVM by doing the following.
 
 ```shell-session
