@@ -2,12 +2,306 @@
   "diataxis",
   {
     "type": "category",
+    "label": "End-user guide",
+    "collapsed": true,
+    "items": [
+      "user/introduction",
+      {
+        "type": "link",
+        "label": "Miniforge",
+        "href": "/download"
+      },
+      {
+        "type": "link",
+        "label": "Get help",
+        "href": "/docs/user/how_to_get_help/"
+      },
+      {
+        "type": "link",
+        "label": "Get involved",
+        "href": "/docs/user/contributing/"
+      },
+      {
+        "type": "link",
+        "label": "Become a maintainer",
+        "href": "/docs/maintainer/guidelines/#becoming-a-maintainer"
+      }
+    ]
+  },
+  {
+    "type": "html",
+    "value": "<span>For maintainers:</span>",
+    "defaultStyle": true
+  },
+  {
+    "type": "category",
+    "label": "Tutorials",
+    "link": {
+      "type": "doc",
+      "id": "tutorials/index"
+    },
+    "items": [
+      {
+        "type": "link",
+        "label": "Contribute your first recipe",
+        "href": "/docs/maintainer/adding_pkgs/#the-staging-process"
+      }
+    ]
+  },
+  {
+    "type": "category",
     "label": "How-to guides",
     "link": {
       "type": "doc",
       "id": "how-to/index"
     },
-    "items": []
+    "items": [
+      {
+        "type": "category",
+        "label": "Basics",
+        "link": {
+          "type": "doc",
+          "id": "how-to/basics"
+        },
+        "items": [
+          {
+            "type": "link",
+            "label": "Rerender a feedstock",
+            "href": "/docs/maintainer/updating_pkgs/#rerendering-feedstocks"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Advanced",
+        "link": {
+          "type": "doc",
+          "id": "how-to/advanced"
+        },
+        "items": [
+          {
+            "type": "link",
+            "label": "Deal with numpy",
+            "href": "/docs/maintainer/knowledge_base/#building-against-numpy"
+          },
+          {
+            "type": "link",
+            "label": "Enable osx-arm64",
+            "href": "/docs/maintainer/knowledge_base/#apple-silicon-builds"
+          },
+          {
+            "type": "link",
+            "label": "Talk to the bots",
+            "href": "/docs/maintainer/conda_forge_yml/"
+          },
+          {
+            "type": "link",
+            "label": "Cross-compile",
+            "href": "/docs/maintainer/knowledge_base/#cross-compilation"
+          },
+          {
+            "type": "link",
+            "label": "Enable CUDA",
+            "href": "/docs/maintainer/knowledge_base/#cuda-builds"
+          },
+          {
+            "type": "link",
+            "label": "Create multi-output recipes",
+            "href": "/docs/maintainer/knowledge_base/#multi-output-recipes"
+          },
+          {
+            "type": "link",
+            "label": "Maintain several versions",
+            "href": "/docs/maintainer/updating_pkgs/#maintaining-several-versions"
+          },
+          {
+            "type": "link",
+            "label": "Rename packages",
+            "href": "#work-in-progress"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Emergencies",
+        "link": {
+          "type": "doc",
+          "id": "how-to/emergencies"
+        },
+        "items": [
+          {
+            "type": "link",
+            "label": "Patch repodata",
+            "href": "https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/blob/main/recipe/README.md"
+          },
+          {
+            "type": "link",
+            "label": "Remove broken packages",
+            "href": "/docs/maintainer/updating_pkgs/#removing-broken-packages"
+          }
+        ]
+      }
+    ]
   },
-  { "type": "ref", "id": "glossary" }
+  {
+    "type": "category",
+    "label": "Understanding conda-forge",
+    "items": [
+      {
+        "type": "link",
+        "label": "The life cycle of a package",
+        "href": "/docs/maintainer/understanding_conda_forge/life_cycle/"
+      },
+      {
+        "type": "ref",
+        "id": "maintainer/understanding_conda_forge/staged_recipes"
+      },
+      {
+        "type": "ref",
+        "id": "maintainer/understanding_conda_forge/feedstocks"
+      },
+      {
+        "type": "category",
+        "label": "Building packages",
+        "items": [
+          {
+            "type": "link",
+            "label": "Compilation concepts",
+            "href": "#work-in-progress"
+          },
+          {
+            "type": "link",
+            "label": "Build environments",
+            "href": "/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host"
+          },
+          {
+            "type": "link",
+            "label": "Compilers",
+            "href": "/docs/maintainer/infrastructure/#compilers-and-runtimes"
+          },
+          {
+            "type": "link",
+            "label": "Global pinning",
+            "href": "/docs/maintainer/pinning_deps/"
+          },
+          {
+            "type": "link",
+            "label": "Run exports",
+            "href": "/docs/maintainer/pinning_deps/#specifying-run_exports"
+          },
+          {
+            "type": "link",
+            "label": "Jinja functions",
+            "href": "/docs/maintainer/adding_pkgs/#jinja-templating"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Bots & automation",
+        "items": [
+          {
+            "type": "link",
+            "label": "Overview",
+            "href": "#work-in-progress"
+          },
+          {
+            "type": "link",
+            "label": "Migrations",
+            "href": "/docs/maintainer/knowledge_base/#migrators-and-migrations"
+          },
+          {
+            "type": "link",
+            "label": "Version updates",
+            "href": "/docs/maintainer/updating_pkgs/#how-does-regro-cf-autotick-bot-create-automatic-version-updates"
+          },
+          {
+            "type": "link",
+            "label": "Infrastructure",
+            "href": "#work-in-progress"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Security",
+        "items": [
+          {
+            "type": "link",
+            "label": "General considerations",
+            "href": "/docs/maintainer/knowledge_base/#security-considerations-for-conda-forge-builds"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Maintainer's handbook",
+        "items": [
+          {
+            "type": "link",
+            "label": "Transferring a package",
+            "href": "/docs/maintainer/guidelines/#transferring-to-conda-forge"
+          },
+          {
+            "type": "link",
+            "label": "Intended usage",
+            "href": "/docs/maintainer/guidelines/#intended-usage"
+          },
+          {
+            "type": "link",
+            "label": "Renaming packages",
+            "href": "/docs/maintainer/guidelines/#intended-usage"
+          },
+          {
+            "type": "link",
+            "label": "Fixing broken packages",
+            "href": "/docs/maintainer/guidelines/#fixing-broken-packages"
+          },
+          {
+            "type": "link",
+            "label": "Becoming a maintainer",
+            "href": "/docs/maintainer/guidelines/#becoming-a-maintainer"
+          },
+          {
+            "type": "link",
+            "label": "Responsibilities",
+            "href": "/docs/maintainer/adding_pkgs/#maintainer-role"
+          },
+          {
+            "type": "link",
+            "label": "Best practices",
+            "href": "#work-in-progress"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Reference",
+    "items": [
+      {
+        "type": "ref",
+        "id": "maintainer/infrastructure"
+      },
+      {
+        "type": "ref",
+        "id": "maintainer/conda_forge_yml"
+      },
+      {
+        "type": "link",
+        "label": "Current pins",
+        "href": "https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml"
+      },
+      {
+        "type": "link",
+        "label": "Ongoing migrations",
+        "href": "/status/#migrations"
+      },
+      {
+        "type": "ref",
+        "id": "glossary"
+      }
+    ]
+  }
 ]
