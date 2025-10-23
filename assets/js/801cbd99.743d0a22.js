@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcf_infra_docs=self.webpackChunkcf_infra_docs||[]).push([[26935],{37659:t=>{t.exports=JSON.parse('{"tag":{"label":"tutorial","permalink":"/docs/tags/tutorial","allTagsPath":"/docs/tags","count":1,"items":[{"id":"tutorials/index","title":"Tutorials","description":"What to expect","permalink":"/docs/tutorials/"}],"unlisted":false}}')}}]);
