@@ -117,7 +117,7 @@
           {
             "type": "link",
             "label": "Rename packages",
-            "href": "#work-in-progress"
+            "href": "#"
           }
         ]
       },
@@ -167,7 +167,7 @@
           {
             "type": "link",
             "label": "Compilation concepts",
-            "href": "#work-in-progress"
+            "href": "#"
           },
           {
             "type": "link",
@@ -203,7 +203,7 @@
           {
             "type": "link",
             "label": "Overview",
-            "href": "#work-in-progress"
+            "href": "#"
           },
           {
             "type": "link",
@@ -218,7 +218,7 @@
           {
             "type": "link",
             "label": "Infrastructure",
-            "href": "#work-in-progress"
+            "href": "#"
           }
         ]
       },
@@ -270,7 +270,7 @@
           {
             "type": "link",
             "label": "Best practices",
-            "href": "#work-in-progress"
+            "href": "#"
           }
         ]
       }
