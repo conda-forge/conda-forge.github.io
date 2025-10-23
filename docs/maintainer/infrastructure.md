@@ -494,7 +494,7 @@ This was sponsored by Prefix.dev. Below are the relevant pull requests for the s
 ## Compilers and Runtimes
 
 conda-forge builds and maintains its own set of compilers for various languages
-and/or systems (e.g., `C`, `FORTRAN`, `C++`, `CUDA`, etc.). These are used
+and/or systems (e.g., C, Fortran, C++, CUDA, etc.). These are used
 in all of our CI builds to build essentially all artefacts published by conda-forge.
 
 This compiler infrastructure has a critical role beyond building everything, which
@@ -502,7 +502,171 @@ is to ensure that packages stay compatible with each other. This is due to how c
 packages have a so-called [Application Binary Interface](../glossary.md#abi)
 (ABI), and how changes in the compiler infrastructure may break this ABI, leading
 to crashes, miscalculations, etc. Generally speaking, using a consistent compiler
-version greatly reduces the risk of ABI breaks.
+setup greatly reduces the risk of ABI breaks.
+
+### Using compilers in feedstocks
+
+There are two kinds of compiler-related packages in conda-forge: implementation packages
+that install the compiler itself, and _activation_ packages that install scripts
+that set the build environment to use the respective compiler by default. These
+scripts set up a number of standard environment variables such as `CC`, and perform
+setup actions for the common build systems such as CMake and Meson.
+
+Recipes provide a `compiler` macro that is used to generate the correct dependency
+on a compiler for the language specified. Compilers are always added to `build`
+dependencies. For example, to depend on a C and C++ compilers, one would specify:
+
+```yaml
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ stdlib('c') }}
+```
+
+The possible parameter values are listed in the [compilers supplied by conda-forge
+](#compilers-supplied-by-conda-forge) section.
+
+Almost always, in addition to a compiler of any programming language, you will
+also need to depend on the C standard library via the `stdlib('c')` macro.
+Note that currently this macro is only used to refer to the C standard library
+and in the vast majority of cases all programming languages use that library,
+therefore the macro is always used with the `'c'` parameter. For example,
+a regular Rust package would use:
+
+```yaml
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ stdlib('c') }}
+```
+
+### Using non-default compilers in feedstocks
+
+Our default compiler stack is made up very differently on each platform; each platform
+has its own default compiler, with its own set of feedstocks that provide them.
+However, it is often possible to use a different compiler if necessary. For example,
+to use Clang 21 as the C and C++ compiler _on all platforms_ (and not just macOS), one would additionally specify
+in `recipe/conda_build_config.yaml`:
+
+```yaml
+c_compiler:
+  - clang
+c_compiler_version:
+  - 21
+cxx_compiler:
+  - clangxx
+cxx_compiler_version:
+  - 21
+```
+
+Technically, the `{{ compiler(...) }}` macro may accept arbitrary compiler names
+as an argument. However, this only works as an incident of the current implementation.
+Names other than the listed in this document or the
+[conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock)
+repository should not be used.
+
+### Installing standard compilers manually
+
+While the primary use case for conda-forge compiler packages is to provide build tools
+for feedstocks, we try to keep the compilers in their various versions
+working also for direct usage in conda environments. In fact, we also provide a few
+convenience packages to install the respective compilers. For example, the [compilers feedstock
+](https://github.com/conda-forge/compilers-feedstock) provides packages installing the same
+C, C++ and Fortran compilers as normally used in build environments, along with their
+activation scripts.
+
+For example, to install these three compilers, one could invoke:
+
+```bash
+conda install compilers
+```
+
+Alternatively, specific compilers can be requested:
+
+```bash
+conda install cxx-compiler fortran-compiler
+```
+
+Other available convenience packages are listed in the [platform-default
+compilers](#platform-default-compilers) list.
+
+Please note that these packages must not be used in a feedstock; instead the macros
+listed in [Using compilers in feedstocks](#using-compilers-in-feedstocks) must be used.
+
+### MSVC compiler on Windows
+
+conda-forge is not allowed to redistribute the MSVC compiler used on Windows,
+and therefore only provides the activation scripts for an externally installed
+compiler. Users who wish to compile code using MSVC, both for local use
+and feedstock builds, have to install Microsoft Visual Studio manually.
+For more information, see [Notes on native code](/docs/maintainer/knowledge_base/#notes-on-native-code)
+in Knowledge Base.
+
+### Compilers supplied by conda-forge
+
+#### Platform-default compilers
+
+Currently conda-forge providers compilers for the following languages, that
+can be specified as arguments to the `{{ compiler(...) }}` macro:
+
+- `c`, also provided by `c-compiler` package
+- `cxx` (C++), also provided by `cxx-compiler`
+- `fortran`, also provided by `fortran-compiler`
+- `cuda`, also provided by `cuda-compiler`; see also [Guide for Maintainers of
+  Recipes That Use CUDA](https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/doc/recipe_guide.md)
+- `rust`; see [Rust packages](/docs/maintainer/example_recipes/rust/)
+- `go-cgo` and `go-nocgo`; see [Go packages](/docs/maintainer/example_recipes/go/)
+
+The authoritative source of the current compilers and versions for various languages
+and platforms is the [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml) file
+in the [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock) repository
+as described in [Globally pinned packages](pinning_deps.md#globally-pinned-packages).
+
+The default C and C++ compilers are GCC on Linux, Clang on macOS and VS2022
+on Windows. Clang can also be used as the compiler on Linux and Windows.
+The default Fortran compiler is the GNU Fortran compiler on Linux and macOS,
+and Flang on Windows.
+
+Note that when used in conjunction with CUDA, the GCC version is restricted by the
+maximum version supported by nvcc (which is also reflected in the global pinning).
+
+#### clang vs. clang-cl on Windows
+
+The `clang` compiler package installs two frontends, and conda-forge
+provides separate activation scripts for Windows, for each of them. Therefore,
+the following arguments can be used in `recipe/conda_build_config.yaml`:
+
+- `clang` to use the `clang` frontend with GCC argument syntax
+- `clang-cl` to use the `clang-cl` frontend with MSVC argument syntax
+
+To use the `clang-cl` frontend on Windows, and the `clang` frontend on other
+systems, the following dependencies can be used:
+
+- `{{ compiler('clang') }}` for the C compiler
+- `{{ compiler('clangxx') }}` for the C++ compiler
+
+#### MinGW-based compiler stack for Windows
+
+There exists an alternative, MinGW-based, compiler stack on Windows. To use it,
+the following arguments can be passed to the `{[ compiler(...) }}` macro:
+
+- `m2w64_c` for the C compiler
+- `m2w64_cxx` for the C++ compiler
+- `m2w64_fortran` for the Fortran compiler
+
+Along with these compilers, `stdlib('m2w64_c')` needs to be used.
+
+These compilers correspond to the `gcc`, `gxx` and `gfortran` packages,
+respectively. The `m2w64-*` compiler packages (with the exception of
+`m2w64-sysroot`) are obsolete and no longer updated.
+
+The MinGW C++ and Fortran compilers are not ABI-compatible with the default
+stack, and therefore special care needs to be taken when performing
+cross-library calls. The executables produced by them may link to the MinGW
+compiler libraries, notably `libgcc`, `libwinpthread` and `libgomp`.
+
+### Compiler ABI stability policy
 
 Compilers generally strive to maintain ABI-compatibility across versions, meaning that
 combining artefacts for the same target produced by different versions of the same
@@ -527,10 +691,6 @@ While we do not have any formal promises of support for a generation of ABI-comp
 compilers, we have historically maintained them according to the following (non-binding)
 principles.
 
-- The authoritative source of the current compilers and versions for various languages
-  and platforms is the [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml)
-  in the [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock)
-  as described in [Globally pinned packages](pinning_deps.md#globally-pinned-packages).
 - We provide no support of any kind in terms of the long-term stability/support of a given compiler generation.
 - We upgrade them in an ad-hoc manner on a periodic basis as we have the time and energy to do so.
   Note that because of the way we enforce runtime constraints, these compiler upgrades will not break
@@ -555,23 +715,23 @@ feedstocks get rerendered.
 
 For such ABI-compatible upgrades, similar but looser principles apply:
 
-- The pins are similarly defined in the global pinning, see [Globally Pinned Packages](pinning_deps.md#globally-pinned-packages).
 - We provide no support of any kind in terms of the long-term availability of a given compiler version.
 - We generally provide notice in the form of an announcement when a compiler is going to be upgraded.
 - Without promising any timelines, our compilers on Linux and OSX are normally
   very recent; on Windows, we generally use the last supported VS version.
 
-Despite the lack of explicit support, we try to keep the compilers in their various versions
-working also outside of conda-forge, and even provide an easy way to install them
-(through the [compilers feedstock](https://github.com/conda-forge/compilers-feedstock)).
+### More on compiler feedstocks
 
-More specifically, each compiler uses an _activation_ package that makes the difference
-between it being merely present in a build environment, and it being used by default.
-These will be installed when using `{{ compiler('xyz') }}` in `meta.yaml`, where
-`'xyz'` is one of `'c', 'cxx', 'fortran', 'cuda', 'rust', 'go-cgo', 'go-nocgo'`.
+The compiler activation and implementation packages are built by two separate
+feedstocks, with a few exceptions. The activation packages install scripts
+into `/etc/conda/activate.d` and `/etc/conda/deactivate.d` directories, which
+are invoked automatically when those environments are activated during the build. These
+scripts are then used by the build tool to respectively prepare for building
+with the given compiler, and clean up afterwards. The implementation packages
+install the compilers themselves. More details can be found in the [Anaconda compiler tools
+section of conda-build documentation](https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html).
 
-Our default compiler stack is made up very differently on each platform; each platform
-has its own default compiler, with its own set of feedstocks that provide them. Due to historical
+Due to historical
 reasons (the way compilers are integrated with their OS, and the amount of
 software written in them, etc.), the most impactful languages are C & C++ (though
 Fortran is considered part of the default, not least because GCC compiles all three).
@@ -580,10 +740,8 @@ Linux (GCC):
 
 - [C, C++, Fortran] Activation: https://github.com/conda-forge/ctng-compiler-activation-feedstock/
 - [C, C++, Fortran] Implementation: https://github.com/conda-forge/ctng-compilers-feedstock
-- Note that when used in conjunction with CUDA, compiler versions are restricted by the
-  maximum GCC version supported by nvcc (which is also reflected in the global pinning).
 
-OSX (Clang):
+OSX (Clang + GNU Fortran):
 
 - [C, C++] Activation: https://github.com/conda-forge/clang-compiler-activation-feedstock/
 - [C, C++] Required feedstocks:
@@ -597,16 +755,11 @@ OSX (Clang):
 - [Fortran] Activation: https://github.com/conda-forge/gfortran_osx-64-feedstock/
 - [Fortran] Implementation: https://github.com/conda-forge/gfortran_impl_osx-64-feedstock/
 
-Windows (MSVC):
+Windows (MSVC + Flang):
 
 - [C, C++] Activation: https://github.com/conda-forge/vc-feedstock
   (we cannot redistribute the actual MSVC compilers due to licensing constraints)
 - [Fortran] Activation & Implementation: https://github.com/conda-forge/flang-feedstock
-
-There exists an alternative, MinGW-based, compiler stack on Windows, which is available
-with a `m2w64_` prefix (e.g. `{{ compiler('m2w64_c') }}`). However, it is falling out
-of use now that most projects will natively support compilation also with MSVC, in addition
-to several complications arising from mixing compiler stacks.
 
 Additionally, there is a possibility to use `clang` as a compiler on Linux & Windows:
 
@@ -620,6 +773,8 @@ Aside from the main C/C++/Fortran compilers, these are the feedstocks for the ot
   and [Implementation](https://github.com/conda-forge/rust-feedstock)
 - [Go] [Activation](https://github.com/conda-forge/go-activation-feedstock)
   and [Implementation](https://github.com/conda-forge/go-feedstock)
+
+### Conda-forge compiler maintenance
 
 To upgrade the compiler version of our default compilers in the global pinning for
 Linux or OSX, ensure that the respective above-mentioned feedstocks have been rebuilt
