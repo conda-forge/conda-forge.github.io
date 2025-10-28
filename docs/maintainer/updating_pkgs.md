@@ -159,7 +159,7 @@ conda install -c conda-forge conda-smithy
 Commit all changes and from the root directory of the feedstock, type:
 
 ```shell-session
-conda smithy rerender -c auto
+conda-smithy rerender -c auto
 ```
 
 Optionally one can commit the changes manually.
