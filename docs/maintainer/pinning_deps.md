@@ -138,7 +138,7 @@ Usually, the bot will generate these migrations automatically. However, when a p
 be added by hand. To do this, follow these steps:
 
 1. Create a new migration yaml by copying [example.exyaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migrations/example.exyaml)
-in the `conda-forge/conda-forge-pinning` repository.
+   in the `conda-forge/conda-forge-pinning` repository.
 2. Change the migration yaml to reflect the package and version to be migrated
 3. Write a migrator for propagating the pin changes.
 4. Propose the changes as a [PR](../glossary.md#pr) to [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock).
