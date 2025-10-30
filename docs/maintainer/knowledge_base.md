@@ -2040,7 +2040,7 @@ If a feedstock does need access to additional resources (like GPUs), please see 
 
 #### `nvcuda.dll` cannot be found on Windows
 
-The [scripts](https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat)
+The [scripts](https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/main/recipe/install_cuda.bat)
 used to install the CUDA Toolkit on Windows cannot provide `nvcuda.dll`
 as part of the installation because no GPU is physically present in the CI machines.
 As a result, you might get linking errors in the postprocessing steps of `conda build`:
@@ -2122,7 +2122,7 @@ To request a migration for a particular package and all its dependencies:
 2. Check the feedstock in question to see if there is already an issue or pull request.
    Opening an issue here is fine, as it might take a couple iterations of the below,
    especially if many dependencies need to be built as well.
-3. If nothing is under way, look at the current [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt).
+3. If nothing is under way, look at the current [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migrations/osx_arm64.txt).
 4. If the package is not listed there, make a PR, adding the package
    name to `osx_arm64.txt` (preserving the alphabetical ordering).
    The migration bot should start making automated pull requests to the
@@ -2307,7 +2307,7 @@ Once the PR is merged, the migration bot goes through the list of feedstocks in 
 When any changes are made in the global pinnings of a package, then the entire stack of the packages that need that package on their `host` section would need to be updated and rebuilt.
 Doing it manually can be quite tedious, and that's where migrations come to help. Migrations automate the process of submitting changes to a feedstock and are an integral part of the `regro-cf-autotick-bot`'s duties.
 
-There are several kinds of migrations, which you can read about in [Making Migrators](https://github.com/regro/cf-scripts/blob/master/README.md#making-migrators). To generate these migrations, you use migrators, which are bots that automatically create pull requests for the affected packages in conda-forge.
+There are several kinds of migrations, which you can read about in [Making Migrators](https://github.com/regro/cf-scripts/blob/main/README.md#making-migrators). To generate these migrations, you use migrators, which are bots that automatically create pull requests for the affected packages in conda-forge.
 To propose a migration in one or more pins, the migrator issues a PR into the pinning feedstock using a yaml file expressing the changes to the global pinning file in the migrations folder.
 Once the PR is merged, the dependency graph is built. After that, the bot walks through the graph, migrates all the nodes (feedstocks) one by one, and issues PRs for those feedstocks.
 

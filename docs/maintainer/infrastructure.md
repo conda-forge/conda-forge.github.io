@@ -122,8 +122,8 @@ Instead, it has its own Azure Pipelines workflow and a well-documented README.
 
 - ⚙️ Deployed manually from [`conda-forge/msys2-recipes`](https://github.com/conda-forge/msys2-recipes)
 
-This is a fork of the old community recipes repository at Anaconda, which includes the `msys2` recipes under the [`msys2/`](https://github.com/conda-forge/msys2-recipes/tree/master/msys2) directory.
-Note also the supporting scripts in the [`common-scripts/`](https://github.com/conda-forge/msys2-recipes/tree/master/common-scripts) folder.
+This is a fork of the old community recipes repository at Anaconda, which includes the `msys2` recipes under the [`msys2/`](https://github.com/conda-forge/msys2-recipes/tree/main/msys2) directory.
+Note also the supporting scripts in the [`common-scripts/`](https://github.com/conda-forge/msys2-recipes/tree/main/common-scripts) folder.
 
 ### Website
 
@@ -156,7 +156,7 @@ Hosts the global pinnings for conda-forge, and the ongoing migrations.
 - ⚙️ Deployed in [Anaconda.org](https://anaconda.org/conda-forge/conda-forge-pinning) via [`conda-forge/conda-forge-pinning-feedstock`](https://github.com/conda-forge/conda-forge-pinning-feedstock)
 - 🔒 Has access to Azure, Anaconda.org (cf-staging)
 
-Package-wide dependency pins are defined in [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml) in the [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock).
+Package-wide dependency pins are defined in [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml) in the [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock).
 
 For more information on conda-forge wide package pins, please refer to [Globally pinned packages](pinning_deps.md#globally-pinned-packages).
 
@@ -245,7 +245,7 @@ Bugs or suggestions regarding the service functionality should therefore be open
 The code and logic behind [`autotick-bot`](#autotick-bot).
 
 - 📜 Source at [`regro/cf-scripts`](https://github.com/regro/cf-scripts)
-- 📖 [Documentation](https://github.com/regro/cf-scripts/blob/master/README.md)
+- 📖 [Documentation](https://github.com/regro/cf-scripts/blob/main/README.md)
 
 ### Automated maintenance
 
@@ -474,8 +474,8 @@ same is described below:
 - Get in touch with `conda-forge/core` to discuss your use case. This can be done with an issue in the relevant feedstock or via [Zulip](https://conda-forge.zulipchat.com).
 - Once discussed, share credentials for a supported cloud with a `conda-forge/core` member, so that it can be added to conda-forge's Cirun account, alternatively
   the user can sponsor cloud credits for an existing conda-forge's cloud account.
-- Add configuration for the runner's virtual machine in [`conda-forge/.cirun`](https://github.com/conda-forge/.cirun/blob/master/.cirun.global.yml)
-  add a policy entry in [`.access.yml`](https://github.com/conda-forge/.cirun/blob/master/.access.yml) to allow access to the runner for
+- Add configuration for the runner's virtual machine in [`conda-forge/.cirun`](https://github.com/conda-forge/.cirun/blob/main/.cirun.global.yml)
+  add a policy entry in [`.access.yml`](https://github.com/conda-forge/.cirun/blob/main/.access.yml) to allow access to the runner for
   a feedstock.
 - Add the labels defined above in your `<package-feedstock>/recipe/conda_build_config.yaml`, under `github_actions_labels` and re-render the
   feedstock. See links below for some examples.
@@ -619,7 +619,7 @@ can be specified as arguments to the `{{ compiler(...) }}` macro:
 - `go-cgo` and `go-nocgo`; see [Go packages](/docs/maintainer/example_recipes/go/)
 
 The authoritative source of the current compilers and versions for various languages
-and platforms is the [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml) file
+and platforms is the [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml) file
 in the [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock) repository
 as described in [Globally pinned packages](pinning_deps.md#globally-pinned-packages).
 

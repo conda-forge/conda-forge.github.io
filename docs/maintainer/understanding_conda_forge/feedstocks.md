@@ -182,4 +182,4 @@ sequenceDiagram
 ```
 
 Migrators are a powerful mechanism that can do almost arbitrary recipe changes.
-They are written in Python and the current set of migrators can be found in the [`regro/cf-scripts` repository](https://github.com/regro/cf-scripts/tree/master/conda_forge_tick/migrators).
+They are written in Python and the current set of migrators can be found in the [`regro/cf-scripts` repository](https://github.com/regro/cf-scripts/tree/main/conda_forge_tick/migrators).

@@ -19,7 +19,8 @@ Especially widely used libraries with restricted version compatibilities increas
 By fixing crucial libraries to specific dependency version shared by all packages in conda-forge, we avoid fractioning of our packages in incompatible islands.
 The following paragraphs give a short introduction about how this global version pinning is realized in conda-forge.
 
-The current versions of globally pinned packages are defined in the [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml) file located in the `conda-forge-pinning` feedstock.
+The current versions of globally pinned packages are defined in the [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml)
+file located in the `conda-forge-pinning` feedstock.
 These pinned versions represent the ABIs that conda-forge is currently supporting, with almost all available packages built against that version.
 
 When a rerendering happens, conda-smithy will render the recipe using conda-build and output configuration files for each job and save them in a yaml file in `.ci_support` folder. For example, there's an output configuration file for each OS, each python version, etc.
@@ -67,7 +68,8 @@ When there's a new ABI version of gmp (say 7.0), then conda-forge-pinning will b
 
 :::
 
-If a package is not pinned in [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml), then the pinning needs to be done manually. If the package is a `C/C++` library with a `C/C++` API that is consumed and linked to by other libraries, then that package is a candidate to be added to `conda-forge-pinning`. Please open an issue in [conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock) for discussion.
+If a package is not pinned in [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml),
+then the pinning needs to be done manually. If the package is a `C/C++` library with a `C/C++` API that is consumed and linked to by other libraries, then that package is a candidate to be added to `conda-forge-pinning`. Please open an issue in [conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock) for discussion.
 
 :::note
 
@@ -110,7 +112,7 @@ For example, numpy may be used either as a python package, and it also has a C l
 The former usage would not require `run_exports`, but the latter would.
 
 In this scenario, it may be advantageous to split the package into distinct metapackages that may share a common parent containing the actual files, but with each metapackage defining different pinning behavior.
-Anaconda does this for numpy (see the [recipe](https://github.com/AnacondaRecipes/numpy-feedstock/blob/master/recipe/meta.yaml)).
+Anaconda does this for numpy (see the [recipe](https://github.com/AnacondaRecipes/numpy-feedstock/blob/main/recipe/meta.yaml)).
 
 The general idea is that the `numpy-devel` package should be used when a package is building against the C interface (i.e. it needs the compatibility bound), and the numpy package should be used when a package is using only the python interface.
 
@@ -135,7 +137,8 @@ for the affected packages in conda-forge.
 Usually, the bot will generate these migrations automatically. However, when a pin is first made or added, one may need to
 be added by hand. To do this, follow these steps:
 
-1. Create a new migration yaml by copying [example.exyaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/example.exyaml) in the `conda-forge/conda-forge-pinning` repository.
+1. Create a new migration yaml by copying [example.exyaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migrations/example.exyaml)
+in the `conda-forge/conda-forge-pinning` repository.
 2. Change the migration yaml to reflect the package and version to be migrated
 3. Write a migrator for propagating the pin changes.
 4. Propose the changes as a [PR](../glossary.md#pr) to [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock).
@@ -146,5 +149,5 @@ be added by hand. To do this, follow these steps:
      - Update the version in conda_build_config.yaml
      - Bump the version in meta.yaml to the current date
 
-Details of how the migration yaml is setup are provided in an [example](https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/master/recipe/migrations/example.exyaml)
-and documentation [here](https://github.com/regro/cf-scripts/blob/master/README.md#making-migrators).
+Details of how the migration yaml is setup are provided in an [example](https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/main/recipe/migrations/example.exyaml)
+and documentation [here](https://github.com/regro/cf-scripts/blob/main/README.md#making-migrators).
