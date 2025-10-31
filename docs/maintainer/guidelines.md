@@ -100,7 +100,7 @@ Sometimes, packages are misnamed.
 To correct the name of the package, please submit a PR into [staged-recipes](https://github.com/conda-forge/staged-recipes) with the correct name.
 During the review process, please make certain to note that the package is renamed and contact a member of conda-forge/core to remove the old feedstock (and potentially package, if needed).
 
-Occasionally, the .gitmodules file in the [feedstocks](https://github.com/conda-forge/feedstocks/blob/master/.gitmodules) needs to be updated to remove the old feedstock.
+Occasionally, the .gitmodules file in the [feedstocks](https://github.com/conda-forge/feedstocks/blob/main/.gitmodules) needs to be updated to remove the old feedstock.
 It's not entirely clear what those circumstances are.
 See [conda-forge.github.io#1070](https://github.com/conda-forge/conda-forge.github.io/issues/1070).
 
