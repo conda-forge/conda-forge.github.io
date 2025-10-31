@@ -38,7 +38,8 @@ that mismatch can lead to errors when the install environment is mixing packages
 
 :::note
 
-All of conda-forge software pinning can be found at: [https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml)
+All of conda-forge software pinning can be found at:
+[https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml)
 
 :::
 
