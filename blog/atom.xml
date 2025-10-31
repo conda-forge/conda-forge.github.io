@@ -1314,7 +1314,7 @@ bootstrapper.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-to-add-a-osx-arm64-build-to-a-feedstock">How to add a <code>osx-arm64</code> build to a feedstock<a href="https://conda-forge.org/blog/2020/10/29/macos-arm64/#how-to-add-a-osx-arm64-build-to-a-feedstock" class="hash-link" aria-label="Direct link to how-to-add-a-osx-arm64-build-to-a-feedstock" title="Direct link to how-to-add-a-osx-arm64-build-to-a-feedstock" translate="no">​</a></h2>
 <p>All the below changes will be done by a bot and the packages the bot
 will send PRs to is determined by the list of packages at
-<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt" target="_blank" rel="noopener noreferrer">conda-forge-pinning</a>
+<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migration_support/osx_arm64.txt" target="_blank" rel="noopener noreferrer">conda-forge-pinning</a>
 and their dependences. If you would like to add support, please send a
 PR adding the feedstock name to the above list. After that PR is merged,
 you can monitor the status at <a href="https://conda-forge.org/status/#armosxaddition" target="_blank" rel="noopener noreferrer">conda-forge
