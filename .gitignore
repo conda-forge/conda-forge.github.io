@@ -54,3 +54,6 @@ yarn-error.log*
 # pyc files
 *.pyc
 __pycache__/
+
+# vscode stuff
+.vscode
