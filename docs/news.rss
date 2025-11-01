@@ -14,7 +14,7 @@
             <guid>https://conda-forge.org/news/2025/10/15/conda-forge-discourse-read-only/</guid>
             <pubDate>Wed, 15 Oct 2025 00:00:00 GMT</pubDate>
             <description><![CDATA[We have made the conda-forge Discourse forum read-only. Please use the conda-forge Zulip chat instead.]]></description>
-            <content:encoded><![CDATA[<p>We have made the <a href="https://conda.discourse.group/c/pkg-building/conda-forge/25" target="_blank" rel="noopener noreferrer">conda-forge Discourse forum</a> read-only. Please use the conda-forge <a href="https://conda-forge.zulipchat.com/" target="_blank" rel="noopener noreferrer">Zulip chat</a> instead.</p>]]></content:encoded>
+            <content:encoded><![CDATA[<p>We have made the <a href="https://conda.discourse.group/c/pkg-building/conda-forge/25" target="_blank" rel="noopener noreferrer" class="">conda-forge Discourse forum</a> read-only. Please use the conda-forge <a href="https://conda-forge.zulipchat.com/" target="_blank" rel="noopener noreferrer" class="">Zulip chat</a> instead.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Dropping Python 3.9 support in conda-forge]]></title>
@@ -57,7 +57,7 @@ functionality to most conda-forge packages including <code>numpy</code>,
             <description><![CDATA[As part of our regular toolchain updates, we're planning to update the default]]></description>
             <content:encoded><![CDATA[<p>As part of our regular toolchain updates, we're planning to update the default
 versions of GCC (for linux) to v14 and of Clang (for OSX) to v19, in one week.</p>
-<p>For more details, see <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/7421" target="_blank" rel="noopener noreferrer">https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/7421</a>.</p>]]></content:encoded>
+<p>For more details, see <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/7421" target="_blank" rel="noopener noreferrer" class="">https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/7421</a>.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Moving to Visual Studio 2022 as default windows compiler]]></title>
@@ -66,7 +66,7 @@ versions of GCC (for linux) to v14 and of Clang (for OSX) to v19, in one week.</
             <pubDate>Wed, 11 Jun 2025 00:00:00 GMT</pubDate>
             <description><![CDATA[Microsoft's Visual Studio (VS) 2019 compiler has reached its]]></description>
             <content:encoded><![CDATA[<p>Microsoft's Visual Studio (VS) 2019 compiler has reached its
-<a href="https://learn.microsoft.com/en-us/lifecycle/products/visual-studio-2019" target="_blank" rel="noopener noreferrer">end of life</a>
+<a href="https://learn.microsoft.com/en-us/lifecycle/products/visual-studio-2019" target="_blank" rel="noopener noreferrer" class="">end of life</a>
 over a year ago. In the meantime, several projects have moved on and
 fail to compile with VS2019.</p>
 <p>We are planning to update our default compilers on windows to the (fully compatible)
@@ -74,7 +74,7 @@ successor VS2022 in one week from now.</p>
 <p>This will not affect you as a general user of conda-forge packages on windows;
 the only potential impact is that if you are compiling locally with VS2019 against
 artefacts produced by conda-forge, you might be required to upgrade.</p>
-<p>For more details see <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2138" target="_blank" rel="noopener noreferrer">https://github.com/conda-forge/conda-forge.github.io/issues/2138</a>.</p>]]></content:encoded>
+<p>For more details see <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2138" target="_blank" rel="noopener noreferrer" class="">https://github.com/conda-forge/conda-forge.github.io/issues/2138</a>.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Dropping CUDA 11.8 as a default CUDA version]]></title>
@@ -83,7 +83,7 @@ artefacts produced by conda-forge, you might be required to upgrade.</p>
             <pubDate>Thu, 29 May 2025 00:00:00 GMT</pubDate>
             <description><![CDATA[CUDA 11.8 is the last holdover from the old days before conda-forge]]></description>
             <content:encoded><![CDATA[<p>CUDA 11.8 is the last holdover from the old days before conda-forge
-<a href="https://github.com/conda-forge/conda-forge.github.io/issues/1963" target="_blank" rel="noopener noreferrer">switched</a>
+<a href="https://github.com/conda-forge/conda-forge.github.io/issues/1963" target="_blank" rel="noopener noreferrer" class="">switched</a>
 to the new and shiny CUDA 12+ infrastructure, where the CUDA toolchain
 is provided as native conda-packages, rather than a blob in an image.</p>
 <p>For CUDA-enabled feedstocks, we've been building both 11.8 and 12.6 by default
@@ -94,26 +94,26 @@ version in our global pinning on June 5th. It will still be possible to opt into
 building CUDA 11.8 on a per-feedstock basis where this is necessary or beneficial.</p>
 <p>The above-mentioned contraints are mainly:</p>
 <ul>
-<li>it <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/6967" target="_blank" rel="noopener noreferrer">complicates our pinning</a> due to needing to switch images and compilers with 11.8.</li>
-<li>it keeps us from <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/7005" target="_blank" rel="noopener noreferrer">migrating</a>
+<li class="">it <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/6967" target="_blank" rel="noopener noreferrer" class="">complicates our pinning</a> due to needing to switch images and compilers with 11.8.</li>
+<li class="">it keeps us from <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/7005" target="_blank" rel="noopener noreferrer" class="">migrating</a>
 to newer CUDA 12.x versions necessary to support new architectures.</li>
-<li>it's <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2138#issuecomment-2916743741" target="_blank" rel="noopener noreferrer">not compatible with VS2022</a>, which is due to become the default toolchain on windows
+<li class="">it's <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2138#issuecomment-2916743741" target="_blank" rel="noopener noreferrer" class="">not compatible with VS2022</a>, which is due to become the default toolchain on windows
 in conda-forge soon (the previous VS2019 has reached end-of-life more than a year ago).</li>
-<li>it complicates our infrastructure in several places, due to the big differences between the
+<li class="">it complicates our infrastructure in several places, due to the big differences between the
 before/after of the new CUDA architecture.</li>
 </ul>
 <p>After we have removed CUDA 11.8 from the pinning, any feedstock still building that version
 will drop the respective CI jobs upon rerendering. For feedstocks wanting to keep building
 CUDA 11.8 a bit longer, we have provided a custom migrator.</p>
 <p>The way to make use of this is to copy
-<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migrations/cuda118.yaml" target="_blank" rel="noopener noreferrer"><code>cuda118.yaml</code></a>
+<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migrations/cuda118.yaml" target="_blank" rel="noopener noreferrer" class=""><code>cuda118.yaml</code></a>
 from the global pinning into <code>.ci_support/migrations</code> on your feedstock.
 If the <code>migrations</code> subfolder doesn't exist, please create it. Once that's committed
 (and there are no skips in the recipe for CUDA 11.8), rerendering the feedstock
 will reinstate the builds for CUDA 11.8. If you have trouble with that, please open
-a thread on <a href="https://conda-forge.zulipchat.com/" target="_blank" rel="noopener noreferrer">https://conda-forge.zulipchat.com/</a>.</p>
+a thread on <a href="https://conda-forge.zulipchat.com/" target="_blank" rel="noopener noreferrer" class="">https://conda-forge.zulipchat.com/</a>.</p>
 <p>Finally, please let us
-know in the <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/7404" target="_blank" rel="noopener noreferrer">issue</a>
+know in the <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/7404" target="_blank" rel="noopener noreferrer" class="">issue</a>
 if your feedstock still needs to support CUDA 11.8 and why (later down the line we'll want to
 drop support also in conda-forge-ci-setup, and knowing what feedstocks - if any - still need
 CUDA 11.8 will help guide the decision on timing).</p>]]></content:encoded>
@@ -142,7 +142,7 @@ for different Python versions).</p>]]></content:encoded>
             <guid>https://conda-forge.org/news/2025/05/08/governance-moved/</guid>
             <pubDate>Thu, 08 May 2025 00:00:00 GMT</pubDate>
             <description><![CDATA[Following a change in our governance, this document lives now in conda-forge/governance, along with the CSV files that list the core and emeritus members.]]></description>
-            <content:encoded><![CDATA[<p>Following a <a href="https://github.com/conda-forge/conda-forge.github.io/pull/2501" target="_blank" rel="noopener noreferrer">change</a> in our governance, this document lives now in <a href="https://github.com/conda-forge/governance" target="_blank" rel="noopener noreferrer"><code>conda-forge/governance</code></a>, along with the CSV files that list the <code>core</code> and <code>emeritus</code> members.</p>]]></content:encoded>
+            <content:encoded><![CDATA[<p>Following a <a href="https://github.com/conda-forge/conda-forge.github.io/pull/2501" target="_blank" rel="noopener noreferrer" class="">change</a> in our governance, this document lives now in <a href="https://github.com/conda-forge/governance" target="_blank" rel="noopener noreferrer" class=""><code>conda-forge/governance</code></a>, along with the CSV files that list the <code>core</code> and <code>emeritus</code> members.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Updating our Ubuntu base for Miniforge Docker images (20.04 → 24.04)]]></title>
@@ -152,7 +152,7 @@ for different Python versions).</p>]]></content:encoded>
             <description><![CDATA[The base image for our Ubuntu Dockerfiles has been upgraded from Ubuntu 20.04]]></description>
             <content:encoded><![CDATA[<p>The base image for our Ubuntu Dockerfiles has been upgraded from Ubuntu 20.04
 (focal) to Ubuntu 24.04 (noble) in
-<a href="https://github.com/conda-forge/miniforge-images/pull/145" target="_blank" rel="noopener noreferrer">PR #145</a>.
+<a href="https://github.com/conda-forge/miniforge-images/pull/145" target="_blank" rel="noopener noreferrer" class="">PR #145</a>.
 This change ensures continued support and access to newer packages and system
 libraries.</p>
 <p>Downstream users building on top of the Ubuntu variant of our containers should
@@ -170,7 +170,7 @@ for the <code>conda-forge</code> channel had been accidentally leaked between on
 investigation resulted in the temporary artifact upload shutdown you observed yesterday (2025-04-01). The results
 of our analysis show that, as best as can reasonably be determined, the token was not used by any 3rd party to
 upload malicious artifacts.</p>
-<p>More details in the <a href="https://conda-forge.org/blog/2025/04/02/security-incident-with-package-uploads/">corresponding blog post</a>.</p>]]></content:encoded>
+<p>More details in the <a class="" href="https://conda-forge.org/blog/2025/04/02/security-incident-with-package-uploads/">corresponding blog post</a>.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Updating our default docker images]]></title>
@@ -180,10 +180,10 @@ upload malicious artifacts.</p>
             <description><![CDATA[TL;DR: We have made some updates to our Docker images and build time GLIBC selection.]]></description>
             <content:encoded><![CDATA[<p>TL;DR: We have made some updates to our Docker images and build time GLIBC selection.</p>
 <ol>
-<li>We've updated our default docker images to be based on alma9</li>
-<li>It is now easier to override <code>c_stdlib_version</code> (especially for CUDA-enabled feedstocks), though our baseline of 2.17 hasn't changed.</li>
-<li>Where necessary, you can more easily switch images by setting <code>os_version: ...</code> (see below).</li>
-<li>We've consolidated our image names to follow a consistent pattern:</li>
+<li class="">We've updated our default docker images to be based on alma9</li>
+<li class="">It is now easier to override <code>c_stdlib_version</code> (especially for CUDA-enabled feedstocks), though our baseline of 2.17 hasn't changed.</li>
+<li class="">Where necessary, you can more easily switch images by setting <code>os_version: ...</code> (see below).</li>
+<li class="">We've consolidated our image names to follow a consistent pattern:</li>
 </ol>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">linux-anvil-{x86_64,aarch64,ppc64le}:{cos7,alma8,alma9}</span><br></span></code></pre></div></div>
 <p>In general, it won't be necessary in the vast majority of cases to override the
@@ -193,10 +193,10 @@ docker-image, but if you need to do so, you can add the following to <code>conda
 -- previously CentOS, now AlmaLinux. Primarily we need this for four different
 interrelated but distinct pieces:</p>
 <ul>
-<li>the docker images (containing the OS which will execute our builds)</li>
-<li>the sysroot (mainly the C standard library, <code>glibc</code>)</li>
-<li>the CDTs (pieces from the distribution we cannot package ourselves)</li>
-<li>feedstock usage of <code>yum_requirements.txt</code></li>
+<li class="">the docker images (containing the OS which will execute our builds)</li>
+<li class="">the sysroot (mainly the C standard library, <code>glibc</code>)</li>
+<li class="">the CDTs (pieces from the distribution we cannot package ourselves)</li>
+<li class="">feedstock usage of <code>yum_requirements.txt</code></li>
 </ul>
 <p>A first key observation is that the glibc appears twice -- once explicitly in the
 sysroot we package (and compile against!), and once implicitly in the image that
@@ -214,7 +214,7 @@ images had lost their lead again. This is mostly related due to the third compon
 above, the CDTs (core dependency trees). These represent packages from the distribution
 itself that are hard or impossible for us to provide, yet need a systematic way to
 interact with. You can read more about <em>why we want to avoid them as much as possible</em>
-<a href="https://conda-forge.org/docs/maintainer/knowledge_base/#why-are-cdts-bad" target="_blank" rel="noopener noreferrer">here</a>.</p>
+<a href="https://conda-forge.org/docs/maintainer/knowledge_base/#why-are-cdts-bad" target="_blank" rel="noopener noreferrer" class="">here</a>.</p>
 <p>Due to the end of CentOS-as-we-knew it, we already had to rewrite a lot of the logic
 there in any case to switch to Alma, which we took as an opportunity to pare down the
 set of CDTs we provide going forward. In a large majority of cases, we have regular
@@ -227,9 +227,9 @@ are how we tell the infrastructure to install them into the image, if they're al
 necessary at runtime (which is not always the case).</p>
 <p>In other words, using our own packages generally allows feedstocks to avoid <em>both</em> use
 of CDTs and <code>yum_requirements.txt</code>. You can check out the CDTs we removed
-<a href="https://github.com/conda-forge/cdt-builds/issues/66#issuecomment-1833417828" target="_blank" rel="noopener noreferrer">here</a>
+<a href="https://github.com/conda-forge/cdt-builds/issues/66#issuecomment-1833417828" target="_blank" rel="noopener noreferrer" class="">here</a>
 and how <code>yum_requirements.txt</code> translate from CentOS to Alma (resp. our own packages)
-<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/6283#issuecomment-2440281086" target="_blank" rel="noopener noreferrer">here</a>.</p>
+<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/6283#issuecomment-2440281086" target="_blank" rel="noopener noreferrer" class="">here</a>.</p>
 <p>The change of the image might mean that CDTs we have not repackaged for Alma do not
 match what's actually in the image anymore, or -- in rare cases -- that a package name
 under <code>yum_requirements.txt</code> needs to be updated. Please let us know if you run into
@@ -259,14 +259,14 @@ By default this is 2.17, which means you'd have to do</p>
             <content:encoded><![CDATA[<p>The core team has decided to change the time when core meetings happen to accommodate more attendees across different timezones. It will still happen every two Wednesdays, but starting next Wednesday, November 13th 2024, it will alternate between 17:00-18:00 UTC and 14:00-15:00 UTC.</p>
 <p>For clarity, these are the next dates:</p>
 <ul>
-<li>November 13th, 2024 at 17:00 UTC</li>
-<li>November 27th, 2024 at 14:00 UTC</li>
-<li>December 11th, 2024 at 17:00 UTC</li>
-<li><del>December 25th, 2024 at 14:00 UTC</del></li>
-<li>January 8th, 2025, at 17:00 UTC</li>
-<li>... and so on.</li>
+<li class="">November 13th, 2024 at 17:00 UTC</li>
+<li class="">November 27th, 2024 at 14:00 UTC</li>
+<li class="">December 11th, 2024 at 17:00 UTC</li>
+<li class=""><del>December 25th, 2024 at 14:00 UTC</del></li>
+<li class="">January 8th, 2025, at 17:00 UTC</li>
+<li class="">... and so on.</li>
 </ul>
-<p>A new calendar is now available in the <a href="https://conda-forge.org/community/meetings/">Community &gt; Meetings</a> section to help find the dates.</p>]]></content:encoded>
+<p>A new calendar is now available in the <a class="" href="https://conda-forge.org/community/meetings/">Community &gt; Meetings</a> section to help find the dates.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Moving to Zulip]]></title>
@@ -274,9 +274,9 @@ By default this is 2.17, which means you'd have to do</p>
             <guid>https://conda-forge.org/news/2024/11/04/moving-to-zulip/</guid>
             <pubDate>Mon, 04 Nov 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[Two weeks ago we called a vote on CFEP-23 to decide whether we move our Element/Matrix chat rooms to Zulip.]]></description>
-            <content:encoded><![CDATA[<p>Two weeks ago we called a <a href="https://github.com/conda-forge/cfep/pull/54" target="_blank" rel="noopener noreferrer">vote</a> on <a href="https://github.com/conda-forge/cfep/blob/main/cfep-23.md" target="_blank" rel="noopener noreferrer">CFEP-23</a> to decide whether we move our <a href="https://matrix.to/#/#conda-forge:matrix.org" target="_blank" rel="noopener noreferrer">Element/Matrix chat rooms</a> to Zulip.</p>
-<p>This vote has passed and now we are opening the doors to our Zulip instance: <a href="https://conda-forge.zulipchat.com/" target="_blank" rel="noopener noreferrer">https://conda-forge.zulipchat.com/</a>. Please sign up to stay in touch!</p>
-<p>As per <a href="https://github.com/conda-forge/cfep/blob/main/cfep-23.md" target="_blank" rel="noopener noreferrer">CFEP-23</a> (read it for more details), this means that we will stop using our <a href="https://matrix.to/#/#conda-forge:matrix.org" target="_blank" rel="noopener noreferrer">Element chat rooms</a>. Instead all chat activity will continue in Zulip.</p>]]></content:encoded>
+            <content:encoded><![CDATA[<p>Two weeks ago we called a <a href="https://github.com/conda-forge/cfep/pull/54" target="_blank" rel="noopener noreferrer" class="">vote</a> on <a href="https://github.com/conda-forge/cfep/blob/main/cfep-23.md" target="_blank" rel="noopener noreferrer" class="">CFEP-23</a> to decide whether we move our <a href="https://matrix.to/#/#conda-forge:matrix.org" target="_blank" rel="noopener noreferrer" class="">Element/Matrix chat rooms</a> to Zulip.</p>
+<p>This vote has passed and now we are opening the doors to our Zulip instance: <a href="https://conda-forge.zulipchat.com/" target="_blank" rel="noopener noreferrer" class="">https://conda-forge.zulipchat.com/</a>. Please sign up to stay in touch!</p>
+<p>As per <a href="https://github.com/conda-forge/cfep/blob/main/cfep-23.md" target="_blank" rel="noopener noreferrer" class="">CFEP-23</a> (read it for more details), this means that we will stop using our <a href="https://matrix.to/#/#conda-forge:matrix.org" target="_blank" rel="noopener noreferrer" class="">Element chat rooms</a>. Instead all chat activity will continue in Zulip.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Changes to the Feedstock Output Validation Procedure]]></title>
@@ -287,12 +287,12 @@ By default this is 2.17, which means you'd have to do</p>
             <content:encoded><![CDATA[<p>We have changed our feedstock output validation procedure. Instead of automatically
 adding new packages to existing feedstocks (e.g., when a new output is added), we will now
 require that maintainers submit a PR to add the new output via our
-<a href="https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock" target="_blank" rel="noopener noreferrer">admin-requests repository</a>.
+<a href="https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock" target="_blank" rel="noopener noreferrer" class="">admin-requests repository</a>.
 New feedstocks created via <code>staged-recipes</code> will have their outputs added automatically. If you maintain a feedstock
 that regularly adds new outputs (e.g., <code>llvmdev</code> has <code>libllvm18</code>, <code>libllvm19</code>, etc.), you can use the <code>admin-requsts</code> repo
 to add a glob pattern that matches the pattern of your new outputs. We test these patterns aginst new outputs from the feedstock
 using the Python <code>fnmatch</code> module. Outputs from the feedstock that match a glob pattern will added automatically. Further
-details on package output validation can be found in our <a href="https://conda-forge.org/docs/maintainer/infrastructure/#output-validation-and-feedstock-tokens" target="_blank" rel="noopener noreferrer">documentation</a>.</p>]]></content:encoded>
+details on package output validation can be found in our <a href="https://conda-forge.org/docs/maintainer/infrastructure/#output-validation-and-feedstock-tokens" target="_blank" rel="noopener noreferrer" class="">documentation</a>.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Removing build in favor of python-build]]></title>
@@ -300,11 +300,11 @@ details on package output validation can be found in our <a href="https://conda-
             <guid>https://conda-forge.org/news/2024/08/21/remove-build/</guid>
             <pubDate>Wed, 21 Aug 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[For nearly two years now, we have favored the use python-build as the package name for the PyPA build]]></description>
-            <content:encoded><![CDATA[<p>For nearly two years now, we have favored the use <code>python-build</code> as the package name for the PyPA <a href="https://github.com/pypa/build" target="_blank" rel="noopener noreferrer"><code>build</code></a>
+            <content:encoded><![CDATA[<p>For nearly two years now, we have favored the use <code>python-build</code> as the package name for the PyPA <a href="https://github.com/pypa/build" target="_blank" rel="noopener noreferrer" class=""><code>build</code></a>
 project over <code>build</code>. In fact, the <code>build</code> feedstock on <code>conda-forge</code> is archived and has not had its version
 updated. To complete this transition, we are going to mark all existing <code>build</code> packages as broken, provide
 a more detailed linter hint, and turn off the migration infrastructure we've been using to help move feedstocks.
-Any questions or comments can be directed to the <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2269" target="_blank" rel="noopener noreferrer">GitHub issue</a> on this work.</p>]]></content:encoded>
+Any questions or comments can be directed to the <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2269" target="_blank" rel="noopener noreferrer" class="">GitHub issue</a> on this work.</p>]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Removing wheel and setuptools as Dependencies for pip]]></title>
@@ -318,7 +318,7 @@ with the advent of Python packaging build backends (e.g., <code>flit</code>, <co
 this default is no longer correct. Instead, you will need to specify <code>wheel</code> and/or <code>setuptools</code> explicitly in the <code>host</code>
 section of your recipe if you need them. At first, <code>pip</code> for versions of Python before 3.13 will be unaffected.
 However, after the completion of the Python 3.13 migration, we will remove these dependencies from <code>pip</code> for all
-versions of Python. Follow GitHub issue <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2252" target="_blank" rel="noopener noreferrer">#2252</a>
+versions of Python. Follow GitHub issue <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2252" target="_blank" rel="noopener noreferrer" class="">#2252</a>
 for more information and updates.</p>]]></content:encoded>
         </item>
         <item>
@@ -330,8 +330,8 @@ for more information and updates.</p>]]></content:encoded>
             <content:encoded><![CDATA[<p>TL;DR: We are planning to remove PyPy from conda-forge feedstock recipes in a
 few weeks (and thus to stop building new releases of packages for PyPy), unless
 there is substantial enough interest to justify the continued maintenance effort.</p>
-<p>Conda-forge introduced <a href="https://conda-forge.org/blog/2020/03/10/pypy/" target="_blank" rel="noopener noreferrer">support</a>
-for <a href="https://pypy.org/index.html" target="_blank" rel="noopener noreferrer">PyPy</a> as an alternative implementation of
+<p>Conda-forge introduced <a href="https://conda-forge.org/blog/2020/03/10/pypy/" target="_blank" rel="noopener noreferrer" class="">support</a>
+for <a href="https://pypy.org/index.html" target="_blank" rel="noopener noreferrer" class="">PyPy</a> as an alternative implementation of
 Python about 4.5 years ago.</p>
 <p>In that time we have worked hard together with developers from PyPy to provide
 easily installable pre-compiled builds of the most common libraries also for PyPy.</p>
@@ -350,7 +350,7 @@ at the latest on October 1st, or when we begin migrating for CPython 3.13
 (whichever comes earlier).</p>
 <p>If you are depending on PyPy builds in some way, please let us know about the
 specifics of your situation in the discussion issue for the
-<a href="https://github.com/conda-forge/conda-forge.github.io/issues/2255" target="_blank" rel="noopener noreferrer">RFC</a>.</p>
+<a href="https://github.com/conda-forge/conda-forge.github.io/issues/2255" target="_blank" rel="noopener noreferrer" class="">RFC</a>.</p>
 <p>There is a possibility that we receive the necessary support from the PyPy
 developers, if it turns out that enough people depend on PyPy support in
 conda-forge for it to be worth their time. As such, please speak up if you
@@ -366,7 +366,7 @@ Python ecosystem! 👏</p>
             <guid>https://conda-forge.org/news/2024/07/29/sunsetting-mambaforge/</guid>
             <pubDate>Mon, 29 Jul 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[With the Miniforge 23.3.1 release,]]></description>
-            <content:encoded><![CDATA[<p>With the <a href="https://github.com/conda-forge/miniforge/releases/tag/23.3.1-0" target="_blank" rel="noopener noreferrer">Miniforge 23.3.1 release</a>,
+            <content:encoded><![CDATA[<p>With the <a href="https://github.com/conda-forge/miniforge/releases/tag/23.3.1-0" target="_blank" rel="noopener noreferrer" class="">Miniforge 23.3.1 release</a>,
 the Miniforge and Mambaforge installers became essentially <strong>identical</strong>. The only difference
 between the two was their name and, subsequently, the default installation directory.</p>
 <p>Maintaining both installers adds unnecessary burden to our support infrastructure and creates
@@ -377,16 +377,16 @@ Miniforge. Remember they contain the same packages, so the only difference is th
 installation directory.</p>
 <p>The deprecation process will roughly follow this calendar:</p>
 <ul>
-<li>August 2024: The Mambaforge installers will warn about the deprecation and make the user wait 30
+<li class="">August 2024: The Mambaforge installers will warn about the deprecation and make the user wait 30
 seconds before continuing.</li>
-<li>October 2024: The Mambaforge installers will refuse to install during several pre-specified date ranges (i.e., <a href="https://en.wikipedia.org/wiki/Brownout_(software_engineering)" target="_blank" rel="noopener noreferrer">"brownouts"</a>) in order to encourage users to switch to Miniforge. These dates are
+<li class="">October 2024: The Mambaforge installers will refuse to install during several pre-specified date ranges (i.e., <a href="https://en.wikipedia.org/wiki/Brownout_(software_engineering)" target="_blank" rel="noopener noreferrer" class="">"brownouts"</a>) in order to encourage users to switch to Miniforge. These dates are
 <ul>
-<li>Every two weeks in October 2024 (2024-10-01, 2024-10-15)</li>
-<li>Every ten days in November 2024 (2024-11-01, 2024-11-10, 2024-11-20, 2024-11-30)</li>
-<li>Every five days in December 2024 (2024-12-05, 2024-12-10, 2024-12-15, 2024-12-20, 2024-12-25, 2024-12-30, 2024-12-31)</li>
+<li class="">Every two weeks in October 2024 (2024-10-01, 2024-10-15)</li>
+<li class="">Every ten days in November 2024 (2024-11-01, 2024-11-10, 2024-11-20, 2024-11-30)</li>
+<li class="">Every five days in December 2024 (2024-12-05, 2024-12-10, 2024-12-15, 2024-12-20, 2024-12-25, 2024-12-30, 2024-12-31)</li>
 </ul>
 </li>
-<li>January 2025: The Mambaforge installers will stop being built and distributed.</li>
+<li class="">January 2025: The Mambaforge installers will stop being built and distributed.</li>
 </ul>]]></content:encoded>
         </item>
         <item>
@@ -398,7 +398,7 @@ seconds before continuing.</li>
             <content:encoded><![CDATA[<p>In preparation for the NumPy 2 release, we have begun a migration of all
 conda-forge packages that depend on <code>numpy</code> during the build (so in
 <code>requirements/host</code>). The migration status is tracked
-<a href="https://conda-forge.org/status/migration/?name=numpy2">on our status page</a>.
+<a class="" href="https://conda-forge.org/status/migration/?name=numpy2">on our status page</a>.
 Particular package's status can be found there. Specific recommendations for
 maintainers updating packages can be found in the migration PRs themselves.
 Please reach out through the usual channels if you have any questions.</p>]]></content:encoded>

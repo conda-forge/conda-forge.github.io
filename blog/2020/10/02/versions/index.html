@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr" class="blog-wrapper blog-post-page plugin-blog plugin-id-default" data-has-hydrated="false">
 <head>
 <meta charset="UTF-8">
-<meta name="generator" content="Docusaurus v3.9.1">
+<meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">The API Territory and Version Number Map | conda-forge | community-driven packaging for conda</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://conda-forge.org/blog/2020/10/02/versions/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="The API Territory and Version Number Map | conda-forge | community-driven packaging for conda"><meta data-rh="true" name="description" content="tl;dr Depending on specific version numbers of underlying libraries may"><meta data-rh="true" property="og:description" content="tl;dr Depending on specific version numbers of underlying libraries may"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2020-10-02T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/cj-wright"><meta data-rh="true" property="article:tag" content="conda-forge"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://conda-forge.org/blog/2020/10/02/versions/"><link data-rh="true" rel="alternate" href="https://conda-forge.org/blog/2020/10/02/versions/" hreflang="en"><link data-rh="true" rel="alternate" href="https://conda-forge.org/blog/2020/10/02/versions/" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://KB43FQOB7U-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://conda-forge.org/blog/2020/10/02/versions","mainEntityOfPage":"https://conda-forge.org/blog/2020/10/02/versions","url":"https://conda-forge.org/blog/2020/10/02/versions","headline":"The API Territory and Version Number Map","name":"The API Territory and Version Number Map","description":"tl;dr Depending on specific version numbers of underlying libraries may","datePublished":"2020-10-02T00:00:00.000Z","author":{"@type":"Person","name":"Christopher J. 'CJ' Wright","description":"Member of conda-forge/core","url":"https://github.com/cj-wright","image":"https://github.com/cj-wright.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://conda-forge.org/blog","name":"Blog"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="conda-forge | community-driven packaging for conda RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="conda-forge | community-driven packaging for conda Atom Feed">
 
@@ -16,9 +16,9 @@
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-<script src="/js/count.js" defer="defer" data-goatcounter="https://conda-forge.goatcounter.com/count"></script><link rel="stylesheet" href="/assets/css/styles.94fad51b.css">
-<script src="/assets/js/runtime~main.d57bdc1e.js" defer="defer"></script>
-<script src="/assets/js/main.de57cebf.js" defer="defer"></script>
+<script src="/js/count.js" defer="defer" data-goatcounter="https://conda-forge.goatcounter.com/count"></script><link rel="stylesheet" href="/assets/css/styles.9fc82550.css">
+<script src="/assets/js/runtime~main.4615f944.js" defer="defer"></script>
+<script src="/assets/js/main.9aca7053.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -29,12 +29,12 @@ be too inaccurate and cause headaches as upstream libraries evolve and
 change. A more detailed approach is needed. In this post I outline
 current and potential work on a path towards a more complete inspection
 of requirements based on APIs and dynamic pinning of libraries.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-constitutes-a-good-version-number">What Constitutes a Good Version Number<a href="#what-constitutes-a-good-version-number" class="hash-link" aria-label="Direct link to What Constitutes a Good Version Number" title="Direct link to What Constitutes a Good Version Number" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-constitutes-a-good-version-number">What Constitutes a Good Version Number<a href="#what-constitutes-a-good-version-number" class="hash-link" aria-label="Direct link to What Constitutes a Good Version Number" title="Direct link to What Constitutes a Good Version Number" translate="no">​</a></h2>
 <p>Version numbers should constitute a set that has the following
 properties</p>
 <ol>
-<li>The set must be unbounded</li>
-<li>The set must be orderable (maybe)</li>
+<li class="">The set must be unbounded</li>
+<li class="">The set must be orderable (maybe)</li>
 </ol>
 <p>Of course sets that meet these requirements might not convey a lot of
 information about the software they represent other than if two things
@@ -43,11 +43,11 @@ be orderable may not be needed, but is generally useful when considering
 the idea of an &quot;upgrade&quot; since it provides a clear delineation between
 older and newer packages. In many cases, the structure of the version
 number provides additional information. For some projects the version
-number includes the date of the release, often using <a href="https://calver.org/" target="_blank" rel="noopener noreferrer">cal
-ver</a>. Many projects use <a href="https://semver.org/" target="_blank" rel="noopener noreferrer">semantic
+number includes the date of the release, often using <a href="https://calver.org/" target="_blank" rel="noopener noreferrer" class="">cal
+ver</a>. Many projects use <a href="https://semver.org/" target="_blank" rel="noopener noreferrer" class="">semantic
 versioning</a>, which attempts to encode information
 about the underlying source code&#x27;s API in the version number.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="version-numbers-and-api-pinning">Version Numbers and API Pinning<a href="#version-numbers-and-api-pinning" class="hash-link" aria-label="Direct link to Version Numbers and API Pinning" title="Direct link to Version Numbers and API Pinning" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="version-numbers-and-api-pinning">Version Numbers and API Pinning<a href="#version-numbers-and-api-pinning" class="hash-link" aria-label="Direct link to Version Numbers and API Pinning" title="Direct link to Version Numbers and API Pinning" translate="no">​</a></h2>
 <p>One of the most important places where version numbers are specified is
 during the pinning of APIs. Source code often requires specific APIs
 from the libraries it uses. This requires a pin specifying which
@@ -65,14 +65,14 @@ be false as new versions of the pinned library restore the missing API.
 These issues are particularly problematic for dependency systems that
 tie the pins to a particular version of the source code, requiring a new
 version to be created to update the pins. Conda-Forge is able to avoid
-some of these issues via <a href="https://github.com/conda-forge/conda-forge-repodata-patches-feedstock" target="_blank" rel="noopener noreferrer">repodata
+some of these issues via <a href="https://github.com/conda-forge/conda-forge-repodata-patches-feedstock" target="_blank" rel="noopener noreferrer" class="">repodata
 patching</a>,
 dynamically updating a package&#x27;s stated requirements. Overall this
 process is fraught, as each package depends on different portions of a
 library&#x27;s API, a version bump that breaks one package may leave others
 unscathed.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="a-potential-path-forward">A Potential Path Forward<a href="#a-potential-path-forward" class="hash-link" aria-label="Direct link to A Potential Path Forward" title="Direct link to A Potential Path Forward" translate="no">​</a></h2>
-<p>All of the above issues are caused by the confusion of <a href="https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation" target="_blank" rel="noopener noreferrer">the map for the
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-potential-path-forward">A Potential Path Forward<a href="#a-potential-path-forward" class="hash-link" aria-label="Direct link to A Potential Path Forward" title="Direct link to A Potential Path Forward" translate="no">​</a></h2>
+<p>All of the above issues are caused by the confusion of <a href="https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation" target="_blank" rel="noopener noreferrer" class="">the map for the
 territory</a>.
 The map, in this case the version number of a library, can not
 accurately represent the territory, the API itself. To fix this issue we
@@ -86,25 +86,25 @@ difficulty of implementation. Note that in the steps below, I&#x27;m using
 python packaging as an example, but I imagine that these steps are
 general enough to apply to other languages and ecosystems.</p>
 <ol>
-<li>Determine which libraries are requirements of the code, this is
+<li class="">Determine which libraries are requirements of the code, this is
 provided by tools like
-<a href="https://github.com/ericdill/depfinder" target="_blank" rel="noopener noreferrer">depfinder</a> and are starting
+<a href="https://github.com/ericdill/depfinder" target="_blank" rel="noopener noreferrer" class="">depfinder</a> and are starting
 to be integrated into the Conda-Forge bot systems (although they are
 still highly experimental and being worked on).</li>
-<li>Determine if the a version of the library provides the needed
+<li class="">Determine if the a version of the library provides the needed
 modules. This could be accomplished by using depfinder to find the
 imports and use the mapping provided by
-<a href="https://github.com/regro/libcfgraph/tree/master/import_maps" target="_blank" rel="noopener noreferrer">libcfgraph</a>
+<a href="https://github.com/regro/libcfgraph/tree/master/import_maps" target="_blank" rel="noopener noreferrer" class="">libcfgraph</a>
 between the import names and the versions of packages that ship
 those imports.</li>
-<li>Determine if an imported module provides the symbols being imported.
+<li class="">Determine if an imported module provides the symbols being imported.
 This would require a listing of all the symbols in a given python
 module, including top level scoped variables, function names, class
 names, methods, etc.</li>
-<li>For callables determine if the used call signature matches the
+<li class="">For callables determine if the used call signature matches the
 method or function definition.</li>
 </ol>
-<p>The <a href="https://github.com/ericdill/depfinder" target="_blank" rel="noopener noreferrer">depfinder</a> project has made
+<p>The <a href="https://github.com/ericdill/depfinder" target="_blank" rel="noopener noreferrer" class="">depfinder</a> project has made
 significant advances along this path, providing an easy to use tool to
 extract accurate import and package requirement data from source code.
 Depfinder even has cases to handle imports that are within code blocks
@@ -135,11 +135,11 @@ lines force the use of older or newer versions of dependencies. This
 could enable large scale migrations of source code with surgical
 precision, enabling developers to extract and re-write the few lines of
 code preventing the use of a new version of a library.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="caveats">Caveats<a href="#caveats" class="hash-link" aria-label="Direct link to Caveats" title="Direct link to Caveats" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="caveats">Caveats<a href="#caveats" class="hash-link" aria-label="Direct link to Caveats" title="Direct link to Caveats" translate="no">​</a></h2>
 <p>There are some important caveats to this approach that need to be kept
 in mind.</p>
 <ol>
-<li>All of this work is aimed at understanding the API of a given
+<li class="">All of this work is aimed at understanding the API of a given
 library, this approach can not provide insight into the code inside
 of the API, or if changes there impact downstream consumers. For
 instance, version updates that fix bugs and security flaws in
@@ -149,14 +149,14 @@ different. Of course there is a strong reason to upgrade in this
 case, since buggy or vulnerable libraries could be a huge headache
 and liability for downstream code and should be removed as quickly
 as possible.</li>
-<li>Some features may depend on broader adoption by the community. For
+<li class="">Some features may depend on broader adoption by the community. For
 instance, this approach would benefit greatly from python type
 hints, since the API could be constrained down to the expected
 types. Such type constraints would provide much more accuracy to the
 API version range as any changes could be detected. However, type
 hints may not be adopted in the python community at a high enough
 rate to truly be useful for this application.</li>
-<li>Source code is fundamentally flexible. There may be knots of code
+<li class="">Source code is fundamentally flexible. There may be knots of code
 that even this approach could not cut through, especially as
 multiple languages and runtime module loading come into the picture.
 My personal hope would be that the code recognizes when these
@@ -166,12 +166,12 @@ decreased accuracy of the results. Fundamentally the tooling can
 only provide very educated guesses and context to users, who then
 need to go figure out what is actually going on inside the code.</li>
 </ol>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="conclusion">Conclusion<a href="#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion" translate="no">​</a></h2>
 <p>Version number based pins are imprecise representations of API
 compatibility. More accurate representations based on source code
 inspection would make the Conda-Forge ecosystem more robust and flexible
 while reducing maintenance burden. Some of the path to achieving this is
 built, and near future steps can be achieved with current tooling and
-databases.</p></div><footer class="docusaurus-mt-lg"><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/blog/tags/conda-forge/">conda-forge</a></li></ul></div></div><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><a href="https://github.com/conda-forge/conda-forge.github.io/tree/refs/heads/main/blog/2020-10-02-versions.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--prev" href="/blog/2020/10/29/macos-arm64/"><div class="pagination-nav__sublabel">Newer post</div><div class="pagination-nav__label">macOS ARM builds on conda-forge</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/blog/2020/07/11/r-4/"><div class="pagination-nav__sublabel">Older post</div><div class="pagination-nav__label">R 4.0 Migration Retrospective</div></a></nav></main><div class="col col--2"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#what-constitutes-a-good-version-number" class="table-of-contents__link toc-highlight">What Constitutes a Good Version Number</a></li><li><a href="#version-numbers-and-api-pinning" class="table-of-contents__link toc-highlight">Version Numbers and API Pinning</a></li><li><a href="#a-potential-path-forward" class="table-of-contents__link toc-highlight">A Potential Path Forward</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li><li><a href="#conclusion" class="table-of-contents__link toc-highlight">Conclusion</a></li></ul></div></div></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/">Getting started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/user/">User docs</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/maintainer/">Maintainer docs</a></li><li class="footer__item"><a class="footer__link-item" href="/community/cfep/">CFEPs</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/diataxis/">Reorganized docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/community/">About conda-forge</a></li><li class="footer__item"><a class="footer__link-item" href="/community/governance/">Governance</a></li><li class="footer__item"><a class="footer__link-item" href="/community/minutes/">Meeting minutes</a></li><li class="footer__item"><a class="footer__link-item" href="/community/getting-in-touch/">Get in touch</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Stay up-to-date</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/news/archive/">News</a></li><li class="footer__item"><a class="footer__link-item" href="/blog/archive/">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/status/">Status</a></li><li class="footer__item"><a href="https://bsky.app/profile/conda-forge.org" target="_blank" rel="noopener noreferrer" class="footer__link-item">Bluesky<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Resources</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/status/">Status</a></li><li class="footer__item"><a class="footer__link-item" href="/style-guide/">Style guide</a></li><li class="footer__item"><a href="https://github.com/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://conda-forge.zulipchat.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Zulip<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 conda-forge · Built with Docusaurus</div></div></div></footer></div>
+databases.</p></div><footer class="docusaurus-mt-lg"><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/blog/tags/conda-forge/">conda-forge</a></li></ul></div></div><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/conda-forge/conda-forge.github.io/tree/refs/heads/main/blog/2020-10-02-versions.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--prev" href="/blog/2020/10/29/macos-arm64/"><div class="pagination-nav__sublabel">Newer post</div><div class="pagination-nav__label">macOS ARM builds on conda-forge</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/blog/2020/07/11/r-4/"><div class="pagination-nav__sublabel">Older post</div><div class="pagination-nav__label">R 4.0 Migration Retrospective</div></a></nav></main><div class="col col--2"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#what-constitutes-a-good-version-number" class="table-of-contents__link toc-highlight">What Constitutes a Good Version Number</a></li><li><a href="#version-numbers-and-api-pinning" class="table-of-contents__link toc-highlight">Version Numbers and API Pinning</a></li><li><a href="#a-potential-path-forward" class="table-of-contents__link toc-highlight">A Potential Path Forward</a></li><li><a href="#caveats" class="table-of-contents__link toc-highlight">Caveats</a></li><li><a href="#conclusion" class="table-of-contents__link toc-highlight">Conclusion</a></li></ul></div></div></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/">Getting started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/user/">User docs</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/maintainer/">Maintainer docs</a></li><li class="footer__item"><a class="footer__link-item" href="/community/cfep/">CFEPs</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/diataxis/">Reorganized docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/community/">About conda-forge</a></li><li class="footer__item"><a class="footer__link-item" href="/community/governance/">Governance</a></li><li class="footer__item"><a class="footer__link-item" href="/community/minutes/">Meeting minutes</a></li><li class="footer__item"><a class="footer__link-item" href="/community/getting-in-touch/">Get in touch</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Stay up-to-date</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/news/archive/">News</a></li><li class="footer__item"><a class="footer__link-item" href="/blog/archive/">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/status/">Status</a></li><li class="footer__item"><a href="https://bsky.app/profile/conda-forge.org" target="_blank" rel="noopener noreferrer" class="footer__link-item">Bluesky<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Resources</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/status/">Status</a></li><li class="footer__item"><a class="footer__link-item" href="/style-guide/">Style guide</a></li><li class="footer__item"><a href="https://github.com/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://conda-forge.zulipchat.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Zulip<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 conda-forge · Built with Docusaurus</div></div></div></footer></div>
 </body>
 </html>

@@ -14,18 +14,18 @@
             <guid>https://conda-forge.org/blog/2025/10/09/python-314/</guid>
             <pubDate>Thu, 09 Oct 2025 00:00:00 GMT</pubDate>
             <description><![CDATA[With yesterday's release of Python 3.14, we not only have Python 3.14 itself available on conda-forge,]]></description>
-            <content:encoded><![CDATA[<p>With yesterday's <a href="https://pythoninsider.blogspot.com/2025/10/python-3140-final-is-here.html" target="_blank" rel="noopener noreferrer">release of Python 3.14</a>, we not only have Python 3.14 itself available on conda-forge,
+            <content:encoded><![CDATA[<p>With yesterday's <a href="https://pythoninsider.blogspot.com/2025/10/python-3140-final-is-here.html" target="_blank" rel="noopener noreferrer" class="">release of Python 3.14</a>, we not only have Python 3.14 itself available on conda-forge,
 but also a wide selection of packages to make use of it.
 As the conda ecosystem is based on binary packages, this means that several packages are already built for Python 3.14.</p>
 <p>You can create a new environment by using:</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">conda create -n py314 python=3.14 -c conda-forge</span><br></span></code></pre></div></div>
-<p>At the time of writing, the <a href="https://conda-forge.org/status/migration/?name=python314" target="_blank" rel="noopener noreferrer">Python 3.14 migration is 77% progressed</a>. This means that:</p>
+<p>At the time of writing, the <a href="https://conda-forge.org/status/migration/?name=python314" target="_blank" rel="noopener noreferrer" class="">Python 3.14 migration is 77% progressed</a>. This means that:</p>
 <ul>
-<li>1273 (41%) packages that needed a rebuild were built for Python 3.14</li>
-<li>1115 (36%) have an open PR to get rebuilt for Python 3.14</li>
-<li>704 (23%) packages are still waiting for a dependency to be rebuilt.</li>
+<li class="">1273 (41%) packages that needed a rebuild were built for Python 3.14</li>
+<li class="">1115 (36%) have an open PR to get rebuilt for Python 3.14</li>
+<li class="">704 (23%) packages are still waiting for a dependency to be rebuilt.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-is-already-usable">What is already usable?<a href="https://conda-forge.org/blog/2025/10/09/python-314/#what-is-already-usable" class="hash-link" aria-label="Direct link to What is already usable?" title="Direct link to What is already usable?" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-is-already-usable">What is already usable?<a href="https://conda-forge.org/blog/2025/10/09/python-314/#what-is-already-usable" class="hash-link" aria-label="Direct link to What is already usable?" title="Direct link to What is already usable?" translate="no">​</a></h2>
 <p>While most binary packages needed to be rebuilt for Python 3.14,
 we did not need to rebuild packages that are <code>abi3</code>-compatible.
 Here, you can use the builds that were done with previous Python versions.
@@ -34,18 +34,18 @@ Similarly, all pure Python packages (i.e. the ones we call <code>noarch: python<
 The most prominent here include <code>pytorch</code>, <code>numba</code>, and <code>cytoolz</code>.
 For the latter two, we need to wait for them to provide new releases that make them compatible with 3.14.
 In the case of PyTorch, we either need to wait for the new <code>2.10.0</code> release or may be able to backport changes to the <code>2.9.0</code> release.
-You can track the progress on the upstream side in <a href="https://github.com/pytorch/pytorch/issues/156856" target="_blank" rel="noopener noreferrer">pytorch#156856</a> and on the conda-forge side in <a href="https://github.com/conda-forge/pytorch-cpu-feedstock/pull/420" target="_blank" rel="noopener noreferrer">pytorch-cpu-feedstock#420</a>.
+You can track the progress on the upstream side in <a href="https://github.com/pytorch/pytorch/issues/156856" target="_blank" rel="noopener noreferrer" class="">pytorch#156856</a> and on the conda-forge side in <a href="https://github.com/conda-forge/pytorch-cpu-feedstock/pull/420" target="_blank" rel="noopener noreferrer" class="">pytorch-cpu-feedstock#420</a>.
 For <code>numba</code>, we expect the necessary changes to land in <code>0.63</code>.
-As a there is already <a href="https://github.com/numba/numba/releases/tag/0.63.0b1" target="_blank" rel="noopener noreferrer">a beta</a> available, we will wait here for the final release and won't backport any changes.
+As a there is already <a href="https://github.com/numba/numba/releases/tag/0.63.0b1" target="_blank" rel="noopener noreferrer" class="">a beta</a> available, we will wait here for the final release and won't backport any changes.
 For other packages, similar approaches will be taken.
-You can track the progress for each of them if you click on <a href="https://conda-forge.org/status/migration/?name=python314" target="_blank" rel="noopener noreferrer">the respective link on the status page</a>.</p>
-<p>If you face any issue with the Python package itself, please report that on the <a href="https://github.com/conda-forge/python-feedstock/issues" target="_blank" rel="noopener noreferrer">python-feedstock</a>.
+You can track the progress for each of them if you click on <a href="https://conda-forge.org/status/migration/?name=python314" target="_blank" rel="noopener noreferrer" class="">the respective link on the status page</a>.</p>
+<p>If you face any issue with the Python package itself, please report that on the <a href="https://github.com/conda-forge/python-feedstock/issues" target="_blank" rel="noopener noreferrer" class="">python-feedstock</a>.
 For problems with individual packages, please do so on the respective <code>conda-forge/&lt;package&gt;-feedstock</code> repository.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-was-conda-forge-able-to-provide-release-day-availability">How was conda-forge able to provide release day availability?<a href="https://conda-forge.org/blog/2025/10/09/python-314/#how-was-conda-forge-able-to-provide-release-day-availability" class="hash-link" aria-label="Direct link to How was conda-forge able to provide release day availability?" title="Direct link to How was conda-forge able to provide release day availability?" translate="no">​</a></h2>
-<p>Like we already did in the releases for <a href="https://conda-forge.org/blog/2024/09/26/python-313/" target="_blank" rel="noopener noreferrer">Python 3.13</a> and <a href="https://conda-forge.org/news/2023/09/25/python-312-migration-and-python-311-by-default/" target="_blank" rel="noopener noreferrer">Python 3.12</a>, we have started building packages for Python 3.14 once the release candidate was available.
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-was-conda-forge-able-to-provide-release-day-availability">How was conda-forge able to provide release day availability?<a href="https://conda-forge.org/blog/2025/10/09/python-314/#how-was-conda-forge-able-to-provide-release-day-availability" class="hash-link" aria-label="Direct link to How was conda-forge able to provide release day availability?" title="Direct link to How was conda-forge able to provide release day availability?" translate="no">​</a></h2>
+<p>Like we already did in the releases for <a href="https://conda-forge.org/blog/2024/09/26/python-313/" target="_blank" rel="noopener noreferrer" class="">Python 3.13</a> and <a href="https://conda-forge.org/news/2023/09/25/python-312-migration-and-python-311-by-default/" target="_blank" rel="noopener noreferrer" class="">Python 3.12</a>, we have started building packages for Python 3.14 once the release candidate was available.
 As ABI-stability is guaranteed between release candidates, these packages are also usable with the final Python release.
-Thus, we were able to start building packages for this release already on <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/7598" target="_blank" rel="noopener noreferrer">August 20</a>.
-Unfortunately, as part of this release process, the <a href="https://discuss.python.org/t/python-3-14-0rc3-is-go/103815" target="_blank" rel="noopener noreferrer">magic number stored in Python bytecode (<code>.pyc</code>) was bumped</a> in RC2 and RC3.
+Thus, we were able to start building packages for this release already on <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/7598" target="_blank" rel="noopener noreferrer" class="">August 20</a>.
+Unfortunately, as part of this release process, the <a href="https://discuss.python.org/t/python-3-14-0rc3-is-go/103815" target="_blank" rel="noopener noreferrer" class="">magic number stored in Python bytecode (<code>.pyc</code>) was bumped</a> in RC2 and RC3.
 This means that the bytecode will be regenerated on the first run for packages built with a version earlier than RC3.
 As the impact of this has been minor, we did not rebuild the respective packages and expect that through package updates, this will quickly become unnoticeable.</p>
 <p>Note that the current migration only includes the "default" flavour of Python.
@@ -59,26 +59,26 @@ Once work on making the migrator more selective has progressed, we will start to
             <guid>https://conda-forge.org/blog/2025/07/16/security-audit/</guid>
             <pubDate>Wed, 16 Jul 2025 00:00:00 GMT</pubDate>
             <description><![CDATA[During the first half of the year, conda-forge has been subject to a security audit in partnership with Open Source Technology Improvement Fund (OSTIF), Sovereign Tech Agency (STA) and the security firm 7ASecurity. This effort has resulted in the identification and remediation of 13 findings with security impact, a custom threat model, and a supply chain security analysis. Full details are now publicly available in the final report.]]></description>
-            <content:encoded><![CDATA[<p>During the first half of the year, conda-forge has been subject to a security audit in partnership with <a href="https://ostif.org/" target="_blank" rel="noopener noreferrer">Open Source Technology Improvement Fund</a> (OSTIF), <a href="https://www.sovereign.tech/" target="_blank" rel="noopener noreferrer">Sovereign Tech Agency</a> (STA) and the security firm <a href="https://7asecurity.com/" target="_blank" rel="noopener noreferrer">7ASecurity</a>. This effort has resulted in the identification and remediation of 13 findings with security impact, a custom threat model, and a supply chain security analysis. Full details are now publicly available in the <a href="https://conda-forge.org/_static/CON-01-conda-forge-Audit-Public_RC1.0.pdf" target="_blank" rel="noopener noreferrer">final report</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="details">Details<a href="https://conda-forge.org/blog/2025/07/16/security-audit/#details" class="hash-link" aria-label="Direct link to Details" title="Direct link to Details" translate="no">​</a></h2>
-<p>Back in April 2024, we started a conversation with <a href="https://ostif.org/" target="_blank" rel="noopener noreferrer">OSTIF</a> that would result in a partnership with <a href="https://7asecurity.com/" target="_blank" rel="noopener noreferrer">7ASecurity</a>. The security audit took part from February to May, where 7ASecurity reported all their findings. The <code>conda-forge/core</code> team assessed the reports and submitted the necessary fixes to our infrastructure and involved tooling, from which we highlight:</p>
+            <content:encoded><![CDATA[<p>During the first half of the year, conda-forge has been subject to a security audit in partnership with <a href="https://ostif.org/" target="_blank" rel="noopener noreferrer" class="">Open Source Technology Improvement Fund</a> (OSTIF), <a href="https://www.sovereign.tech/" target="_blank" rel="noopener noreferrer" class="">Sovereign Tech Agency</a> (STA) and the security firm <a href="https://7asecurity.com/" target="_blank" rel="noopener noreferrer" class="">7ASecurity</a>. This effort has resulted in the identification and remediation of 13 findings with security impact, a custom threat model, and a supply chain security analysis. Full details are now publicly available in the <a href="https://conda-forge.org/_static/CON-01-conda-forge-Audit-Public_RC1.0.pdf" target="_blank" rel="noopener noreferrer" class="">final report</a>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="details">Details<a href="https://conda-forge.org/blog/2025/07/16/security-audit/#details" class="hash-link" aria-label="Direct link to Details" title="Direct link to Details" translate="no">​</a></h2>
+<p>Back in April 2024, we started a conversation with <a href="https://ostif.org/" target="_blank" rel="noopener noreferrer" class="">OSTIF</a> that would result in a partnership with <a href="https://7asecurity.com/" target="_blank" rel="noopener noreferrer" class="">7ASecurity</a>. The security audit took part from February to May, where 7ASecurity reported all their findings. The <code>conda-forge/core</code> team assessed the reports and submitted the necessary fixes to our infrastructure and involved tooling, from which we highlight:</p>
 <ul>
-<li>Three incidents in <code>conda/conda-build</code>.</li>
-<li>Two incidents in <code>conda-forge/conda-forge-webservices</code>.</li>
-<li>Two incidents in <code>conda-forge/conda-smithy</code>.</li>
-<li>One incident in <code>conda/constructor</code>.</li>
-<li>One incident in <code>conda-forge/conda-forge-ci-setup</code>.</li>
-<li>One incident in <code>conda-forge/infrastructure</code>.</li>
+<li class="">Three incidents in <code>conda/conda-build</code>.</li>
+<li class="">Two incidents in <code>conda-forge/conda-forge-webservices</code>.</li>
+<li class="">Two incidents in <code>conda-forge/conda-smithy</code>.</li>
+<li class="">One incident in <code>conda/constructor</code>.</li>
+<li class="">One incident in <code>conda-forge/conda-forge-ci-setup</code>.</li>
+<li class="">One incident in <code>conda-forge/infrastructure</code>.</li>
 </ul>
-<p>7ASecurity also contributed a detailed threat model and a supply chain security analysis. CVEs, Github Advisories and related contributions are available in the <a href="https://conda-forge.org/_static/CON-01-conda-forge-Audit-Public_RC1.0.pdf" target="_blank" rel="noopener noreferrer">final report</a>.</p>
+<p>7ASecurity also contributed a detailed threat model and a supply chain security analysis. CVEs, Github Advisories and related contributions are available in the <a href="https://conda-forge.org/_static/CON-01-conda-forge-Audit-Public_RC1.0.pdf" target="_blank" rel="noopener noreferrer" class="">final report</a>.</p>
 <p>We are incredibly grateful for the support offered by OSTIF and STA, and we are delighted to have worked with 7ASecurity during all these months! You can read their blog posts at:</p>
 <ul>
-<li><a href="https://ostif.org/conda-forge-audit-complete/" target="_blank" rel="noopener noreferrer">conda-forge Audit Complete!</a>, ostif.org.</li>
-<li><a href="https://7asecurity.com/blog/2025/07/conda-forge-security-audit-by-7asecurity/" target="_blank" rel="noopener noreferrer">Conda-Forge Security Audit by 7ASecurity</a>, 7asecurity.com.</li>
+<li class=""><a href="https://ostif.org/conda-forge-audit-complete/" target="_blank" rel="noopener noreferrer" class="">conda-forge Audit Complete!</a>, ostif.org.</li>
+<li class=""><a href="https://7asecurity.com/blog/2025/07/conda-forge-security-audit-by-7asecurity/" target="_blank" rel="noopener noreferrer" class="">Conda-Forge Security Audit by 7ASecurity</a>, 7asecurity.com.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="final-notes">Final notes<a href="https://conda-forge.org/blog/2025/07/16/security-audit/#final-notes" class="hash-link" aria-label="Direct link to Final notes" title="Direct link to Final notes" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="final-notes">Final notes<a href="https://conda-forge.org/blog/2025/07/16/security-audit/#final-notes" class="hash-link" aria-label="Direct link to Final notes" title="Direct link to Final notes" translate="no">​</a></h2>
 <p>We want to take this opportunity to remind our users that we do not recommend that you use conda-forge in environments with sensitive information. conda-forge's software is built by our users and the core dev team cannot verify or guarantee that this software is not malicious or has not been tampered with.</p>
-<p>Our best defense against security incidents in conda-forge is you! Our feedstock maintainers are in the best position to notice incidents and issues. Please responsibly report anything you find to us by following our <a href="https://github.com/conda-forge/conda-forge.github.io/security/policy" target="_blank" rel="noopener noreferrer">security policy</a>.</p>]]></content:encoded>
+<p>Our best defense against security incidents in conda-forge is you! Our feedstock maintainers are in the best position to notice incidents and issues. Please responsibly report anything you find to us by following our <a href="https://github.com/conda-forge/conda-forge.github.io/security/policy" target="_blank" rel="noopener noreferrer" class="">security policy</a>.</p>]]></content:encoded>
             <category>security</category>
         </item>
         <item>
@@ -88,12 +88,12 @@ Once work on making the migrator more selective has progressed, we will start to
             <pubDate>Fri, 11 Apr 2025 00:00:00 GMT</pubDate>
             <description><![CDATA[Today, 2025-04-11, marks the 10th anniversary of the conda-forge community.]]></description>
             <content:encoded><![CDATA[<p>Today, 2025-04-11, marks the 10th anniversary of the conda-forge community.</p>
-<p>Join us in <a href="https://conda-forge.zulipchat.com/#narrow/channel/457337-general/topic/10.20years.20of.20conda-forge/with/511579313" target="_blank" rel="noopener noreferrer">this Zulip thread</a> and share how you got involved with conda-forge, how this community
+<p>Join us in <a href="https://conda-forge.zulipchat.com/#narrow/channel/457337-general/topic/10.20years.20of.20conda-forge/with/511579313" target="_blank" rel="noopener noreferrer" class="">this Zulip thread</a> and share how you got involved with conda-forge, how this community
 has helped you, or just to show appreciation to the thousands of volunteers that make this effort
 possible!</p>
 <p>To many more years! 🎉</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="one-billion-downloads-per-month">One billion downloads per month<a href="https://conda-forge.org/blog/2025/04/11/ten-years-of-conda-forge/#one-billion-downloads-per-month" class="hash-link" aria-label="Direct link to One billion downloads per month" title="Direct link to One billion downloads per month" translate="no">​</a></h2>
-<p>While there are too many important milestones to name across those 10 years, just <a href="https://github.com/conda-forge/by-the-numbers/commit/09eefe47d4cd1c4d9bc29c2ea5f9b07cc9100433" target="_blank" rel="noopener noreferrer">a few days
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="one-billion-downloads-per-month">One billion downloads per month<a href="https://conda-forge.org/blog/2025/04/11/ten-years-of-conda-forge/#one-billion-downloads-per-month" class="hash-link" aria-label="Direct link to One billion downloads per month" title="Direct link to One billion downloads per month" translate="no">​</a></h2>
+<p>While there are too many important milestones to name across those 10 years, just <a href="https://github.com/conda-forge/by-the-numbers/commit/09eefe47d4cd1c4d9bc29c2ea5f9b07cc9100433" target="_blank" rel="noopener noreferrer" class="">a few days
 ago</a>,
 we passed 1,000,000,000 monthly downloads across all packages for the first time ever. 🥳</p>
 <p>In total, we have served almost 27 billion downloads, and that's not even counting all those that
@@ -101,12 +101,12 @@ happen behind various institutional caching layers. This tells us that the fruit
 collaboration are having an enormous impact. If you'd like to share where conda-forge has saved you
 hours of work, streamlined your processes, or made some ideas possible at all, please also jump in
 on the Zulip link above!</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="why-today">Why today?<a href="https://conda-forge.org/blog/2025/04/11/ten-years-of-conda-forge/#why-today" class="hash-link" aria-label="Direct link to Why today?" title="Direct link to Why today?" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-today">Why today?<a href="https://conda-forge.org/blog/2025/04/11/ten-years-of-conda-forge/#why-today" class="hash-link" aria-label="Direct link to Why today?" title="Direct link to Why today?" translate="no">​</a></h2>
 <p>This date can be found as the creation date of the <code>conda-forge</code> Github organization:</p>
 <div class="language-js codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-js codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$ curl </span><span class="token string" style="color:#e3116c">"https://api.github.com/orgs/conda-forge"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"login"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"conda-forge"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"id"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">11897326</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"node_id"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"MDEyOk9yZ2FuaXphdGlvbjExODk3MzI2"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"url"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"https://api.github.com/orgs/conda-forge"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"repos_url"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"https://api.github.com/orgs/conda-forge/repos"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"events_url"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"https://api.github.com/orgs/conda-forge/events"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"hooks_url"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"https://api.github.com/orgs/conda-forge/hooks"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"issues_url"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"https://api.github.com/orgs/conda-forge/issues"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"members_url"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"https://api.github.com/orgs/conda-forge/members{/member}"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"public_members_url"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"https://api.github.com/orgs/conda-forge/public_members{/member}"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"avatar_url"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"https://avatars.githubusercontent.com/u/11897326?v=4"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"description"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"A community led collection of recipes, build infrastructure and distributions for the conda package manager."</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"name"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"conda-forge"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"company"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token keyword null nil" style="color:#00009f">null</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"blog"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"https://conda-forge.org"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"location"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token keyword null nil" style="color:#00009f">null</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"email"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token keyword null nil" style="color:#00009f">null</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"twitter_username"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"condaforge"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"is_verified"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">false</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"has_organization_projects"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">false</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"has_repository_projects"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">true</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"public_repos"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">25378</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"public_gists"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"followers"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1103</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"following"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"html_url"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"https://github.com/conda-forge"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"created_at"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"2015-04-11T07:37:06Z"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token comment" style="color:#999988;font-style:italic">// &lt;----------------- See here!</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"updated_at"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"2025-03-13T11:32:03Z"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"archived_at"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token keyword null nil" style="color:#00009f">null</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"type"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"Organization"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
 <p>And the anaconda.org production channel:</p>
 <div class="language-js codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-js codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$ curl </span><span class="token operator" style="color:#393A34">-</span><span class="token plain">s </span><span class="token string" style="color:#e3116c">"https://api.anaconda.org/user/conda-forge"</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">|</span><span class="token plain"> jq</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"company"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">""</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"created_at"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"2015-04-11 10:15:08.727000+00:00"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"description"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"A community-led collection of recipes, build infrastructure, and distributions for the conda package manager."</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"location"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">""</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"login"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"conda-forge"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"name"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"conda-forge"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"url"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">""</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token string-property property" style="color:#36acaa">"user_type"</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"org"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
-<p>If you want to learn more about the early history of conda-forge, check this <a href="https://github.com/conda-forge/conda-forge.github.io/pull/2298" target="_blank" rel="noopener noreferrer">draft
+<p>If you want to learn more about the early history of conda-forge, check this <a href="https://github.com/conda-forge/conda-forge.github.io/pull/2298" target="_blank" rel="noopener noreferrer" class="">draft
 PR</a>, where we're in the process of
 crystallizing the collective memories of many current and prior contributors into a cohesive
 account of the most important events and milestones.</p>]]></content:encoded>
@@ -118,39 +118,39 @@ account of the most important events and milestones.</p>]]></content:encoded>
             <pubDate>Wed, 02 Apr 2025 00:00:00 GMT</pubDate>
             <description><![CDATA[In the past few months, conda-forge has been engaging with an external security audit in collaboration with]]></description>
             <content:encoded><![CDATA[<p>In the past few months, <code>conda-forge</code> has been engaging with an external security audit in collaboration with
-the <a href="https://ostif.org/" target="_blank" rel="noopener noreferrer">Open Source Technology Improvement Fund</a> (OSTIF). The full results of this audit will be
+the <a href="https://ostif.org/" target="_blank" rel="noopener noreferrer" class="">Open Source Technology Improvement Fund</a> (OSTIF). The full results of this audit will be
 made public once it is complete per OSTIF responsible disclosure policies.</p>
 <p>During this process, OSTIF and their contractor uncovered misconfigured infrastructure which exposed the <code>anaconda.org</code>
 token for the <code>conda-forge</code> channel to all feedstock maintainers. The token was exposed from on or about 2025-02-10 through
-2025-04-01. See our <a href="https://github.com/conda-forge/infrastructure/security/advisories/GHSA-m4h2-49xf-vq72" target="_blank" rel="noopener noreferrer">GitHub Security Advisory</a>
+2025-04-01. See our <a href="https://github.com/conda-forge/infrastructure/security/advisories/GHSA-m4h2-49xf-vq72" target="_blank" rel="noopener noreferrer" class="">GitHub Security Advisory</a>
 for more details.</p>
 <p>We have requested a CVE from GitHub and will amend this announcement once it is issued. Our response to this
 incident is detailed below, but TL;DR, as best as can reasonably be determined, <strong>no packages were compromised
 during this time</strong>.</p>
-<p>Thank you for using <code>conda-forge</code>, please <a href="https://conda-forge.org/community/getting-in-touch/" target="_blank" rel="noopener noreferrer">contact us</a> if you
-have further questions, and please follow our <a href="https://github.com/conda-forge/conda-forge.github.io/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer">security process</a>
+<p>Thank you for using <code>conda-forge</code>, please <a href="https://conda-forge.org/community/getting-in-touch/" target="_blank" rel="noopener noreferrer" class="">contact us</a> if you
+have further questions, and please follow our <a href="https://github.com/conda-forge/conda-forge.github.io/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer" class="">security process</a>
 for responsible reporting of vulnerabilities.</p>
 <p><strong>Finally, as a reminder, <code>conda-forge</code> packages are built by strangers on the internet (our wonderful feedstock
 maintainers!) and are not suitable for use cases that require secure software provenance.</strong></p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="response-timeline">Response timeline<a href="https://conda-forge.org/blog/2025/04/02/security-incident-with-package-uploads/#response-timeline" class="hash-link" aria-label="Direct link to Response timeline" title="Direct link to Response timeline" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="response-timeline">Response timeline<a href="https://conda-forge.org/blog/2025/04/02/security-incident-with-package-uploads/#response-timeline" class="hash-link" aria-label="Direct link to Response timeline" title="Direct link to Response timeline" translate="no">​</a></h2>
 <p>The timeline and details of our response to this security incident are as follows:</p>
 <ul>
-<li>2025-04-01 13:35 UTC: OSTIF and their contractor notified <code>conda-forge</code> of the leaked token.</li>
-<li>2025-04-01 14:00 UTC: The <code>conda-forge/core</code> team acknowledged receipt of the report and
+<li class="">2025-04-01 13:35 UTC: OSTIF and their contractor notified <code>conda-forge</code> of the leaked token.</li>
+<li class="">2025-04-01 14:00 UTC: The <code>conda-forge/core</code> team acknowledged receipt of the report and
 started conducting the investigation.</li>
-<li>2025-04-01 14:15 UTC: The <code>conda-forge/core</code> team disabled the token and stopped uploads to <code>anaconda.org</code>.</li>
-<li>2025-04-01 14:20 UTC: We posted an <a href="https://github.com/conda-forge/status/issues/194" target="_blank" rel="noopener noreferrer">incident</a>
+<li class="">2025-04-01 14:15 UTC: The <code>conda-forge/core</code> team disabled the token and stopped uploads to <code>anaconda.org</code>.</li>
+<li class="">2025-04-01 14:20 UTC: We posted an <a href="https://github.com/conda-forge/status/issues/194" target="_blank" rel="noopener noreferrer" class="">incident</a>
 to our status page reporting that uploads were temporarily paused.</li>
-<li>2025-04-01 15:19 UTC: We audited all uploads to the <code>conda-forge</code> channel, looking for uploads that
+<li class="">2025-04-01 15:19 UTC: We audited all uploads to the <code>conda-forge</code> channel, looking for uploads that
 bypassed our upload staging process. We did not find any. This check is not completely robust, but it
 does indicate that nothing was obviously compromised.</li>
-<li>2025-04-01 15:53 UTC: We decided to delay disclosure by one day to 2025-04-02 in order to not generate
-confusion (2025-04-01 is <a href="https://en.wikipedia.org/wiki/April_Fools%27_Day" target="_blank" rel="noopener noreferrer">April Fools' Day</a> in some countries
+<li class="">2025-04-01 15:53 UTC: We decided to delay disclosure by one day to 2025-04-02 in order to not generate
+confusion (2025-04-01 is <a href="https://en.wikipedia.org/wiki/April_Fools%27_Day" target="_blank" rel="noopener noreferrer" class="">April Fools' Day</a> in some countries
 when people commonly engage in practical jokes).</li>
-<li>2025-04-01 21:39 UTC: We deployed a fix to our infrastructure.</li>
-<li>2025-04-01 22:20 UTC: We then deployed a new token to our infrastructure and restarted uploads.</li>
-<li>2025-04-01 23:02 UTC: The status page <a href="https://github.com/conda-forge/status/issues/194" target="_blank" rel="noopener noreferrer">incident</a> was marked as resolved.</li>
-<li>2025-04-02: We published this announcement and the advisory. GitHub produced CVE-2025-31484 for us based on our security advisory.</li>
+<li class="">2025-04-01 21:39 UTC: We deployed a fix to our infrastructure.</li>
+<li class="">2025-04-01 22:20 UTC: We then deployed a new token to our infrastructure and restarted uploads.</li>
+<li class="">2025-04-01 23:02 UTC: The status page <a href="https://github.com/conda-forge/status/issues/194" target="_blank" rel="noopener noreferrer" class="">incident</a> was marked as resolved.</li>
+<li class="">2025-04-02: We published this announcement and the advisory. GitHub produced CVE-2025-31484 for us based on our security advisory.</li>
 </ul>]]></content:encoded>
             <category>security</category>
         </item>
@@ -161,44 +161,44 @@ when people commonly engage in practical jokes).</li>
             <pubDate>Thu, 27 Feb 2025 00:00:00 GMT</pubDate>
             <description><![CDATA[The conda-forge team is excited to announce that the v1 recipe format is available on conda-forge. The v1 recipe format is a community initiative dating back over 3 years to improve the recipe format for conda packages. If you are a maintainer of a feedstock on conda-forge, you have probably dealt with meta.yaml files that conda-build utilizes. The file format has some limitations which is why the community has come together to come up with an improved version of the format: the v1 format.]]></description>
             <content:encoded><![CDATA[<p>The conda-forge team is excited to announce that the v1 recipe format is available on conda-forge. The v1 recipe format is a community initiative dating back over 3 years to improve the recipe format for conda packages. If you are a maintainer of a feedstock on conda-forge, you have probably dealt with <code>meta.yaml</code> files that conda-build utilizes. The file format has some limitations which is why the community has come together to come up with an improved version of the format: the v1 format.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rattler-build-and-the-v1-spec">rattler-build and the v1 spec<a href="https://conda-forge.org/blog/2025/02/27/conda-forge-v1-recipe-support/#rattler-build-and-the-v1-spec" class="hash-link" aria-label="Direct link to rattler-build and the v1 spec" title="Direct link to rattler-build and the v1 spec" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="rattler-build-and-the-v1-spec">rattler-build and the v1 spec<a href="https://conda-forge.org/blog/2025/02/27/conda-forge-v1-recipe-support/#rattler-build-and-the-v1-spec" class="hash-link" aria-label="Direct link to rattler-build and the v1 spec" title="Direct link to rattler-build and the v1 spec" translate="no">​</a></h2>
 <p>The v1 recipe format has a number of benefits:</p>
 <ul>
-<li>It always parses as valid YAML which makes it much easier to modify it with the bot infrastructure of conda-forge. While meta.yaml looks like YAML, it can contain Jinja logic that is incompatible with the YAML specification, which significantly complicates parsing and automated manipulation. Additionally, the new recipe format has <a href="https://github.com/prefix-dev/recipe-format/blob/main/schema.json" target="_blank" rel="noopener noreferrer">a published JSON schema</a> which means that the editing experience in VS Code is greatly improved with contextual help.</li>
-<li>The new recipe format enables much faster builds due to design decisions that eliminate the need for recursive parsing.</li>
-<li>Some features of conda-build, such as multiple outputs, had a lot of implicit behavior. We are fixing that in the v1 recipe.</li>
+<li class="">It always parses as valid YAML which makes it much easier to modify it with the bot infrastructure of conda-forge. While meta.yaml looks like YAML, it can contain Jinja logic that is incompatible with the YAML specification, which significantly complicates parsing and automated manipulation. Additionally, the new recipe format has <a href="https://github.com/prefix-dev/recipe-format/blob/main/schema.json" target="_blank" rel="noopener noreferrer" class="">a published JSON schema</a> which means that the editing experience in VS Code is greatly improved with contextual help.</li>
+<li class="">The new recipe format enables much faster builds due to design decisions that eliminate the need for recursive parsing.</li>
+<li class="">Some features of conda-build, such as multiple outputs, had a lot of implicit behavior. We are fixing that in the v1 recipe.</li>
 </ul>
 <p>conda-forge uses rattler-build as its default build tool for the v1 recipe format. rattler-build currently has some significant benefits:</p>
 <ul>
-<li>rattler-build is built on top of rattler, a modern re-implementation of the conda standards in Rust, enabling extremely fast recipe builds.</li>
-<li>The log output of rattler-build is greatly improved, always showing the user what the final files in the package are and the final metadata.</li>
+<li class="">rattler-build is built on top of rattler, a modern re-implementation of the conda standards in Rust, enabling extremely fast recipe builds.</li>
+<li class="">The log output of rattler-build is greatly improved, always showing the user what the final files in the package are and the final metadata.</li>
 </ul>
-<p>You can read much more about the v1 recipe format in the <a href="https://rattler.build/" target="_blank" rel="noopener noreferrer">https://rattler.build</a> docs and the two CEPs <a href="https://github.com/conda/ceps/blob/main/cep-0013.md" target="_blank" rel="noopener noreferrer">CEP-0013</a> and <a href="https://github.com/conda/ceps/blob/main/cep-0014.md" target="_blank" rel="noopener noreferrer">CEP-0014</a>. With the new format comes also a new build tool called <a href="https://github.com/prefix-dev/rattler-build" target="_blank" rel="noopener noreferrer"><code>rattler-build</code></a> which is developed by <a href="https://prefix.dev/" target="_blank" rel="noopener noreferrer"><code>prefix.dev</code></a>. It is a reimplementation of conda-build in Rust, on top of the <a href="https://github.com/conda/rattler" target="_blank" rel="noopener noreferrer"><code>rattler</code></a> libraries.</p>
+<p>You can read much more about the v1 recipe format in the <a href="https://rattler.build/" target="_blank" rel="noopener noreferrer" class="">https://rattler.build</a> docs and the two CEPs <a href="https://github.com/conda/ceps/blob/main/cep-0013.md" target="_blank" rel="noopener noreferrer" class="">CEP-0013</a> and <a href="https://github.com/conda/ceps/blob/main/cep-0014.md" target="_blank" rel="noopener noreferrer" class="">CEP-0014</a>. With the new format comes also a new build tool called <a href="https://github.com/prefix-dev/rattler-build" target="_blank" rel="noopener noreferrer" class=""><code>rattler-build</code></a> which is developed by <a href="https://prefix.dev/" target="_blank" rel="noopener noreferrer" class=""><code>prefix.dev</code></a>. It is a reimplementation of conda-build in Rust, on top of the <a href="https://github.com/conda/rattler" target="_blank" rel="noopener noreferrer" class=""><code>rattler</code></a> libraries.</p>
 <p>A simple v1 recipe looks something like the following:</p>
 <div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">context</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token comment" style="color:#999988;font-style:italic"># we define named variables in the context instead of `{$ set ... %}` directives</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"23.0.0"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">package</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"boltons"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token comment" style="color:#999988;font-style:italic"># note that we use "GitHub" inspired syntax to access context / Jinja variables</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> $</span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> version </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">source</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">url</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> https</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">//github.com/mahmoud/boltons/archive/refs/tags/$</span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> version </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain">.tar.gz</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">sha256</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> 9b2998cd9525ed472079c7dd90fbd216a887202e8729d5969d4f33878f0ff668</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">build</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">noarch</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> python</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">script</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> python </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">m pip install . </span><span class="token punctuation" style="color:#393A34">-</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">no</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">deps </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">vv</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">requirements</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">host</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> python</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> pip</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> setuptools</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">run</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> pip</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">about</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">license</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> BSD</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">3</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">Clause</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">license_file</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> LICENSE</span><br></span></code></pre></div></div>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-to-use-the-v1-recipe-format-on-conda-forge">How to use the v1 recipe format on conda-forge<a href="https://conda-forge.org/blog/2025/02/27/conda-forge-v1-recipe-support/#how-to-use-the-v1-recipe-format-on-conda-forge" class="hash-link" aria-label="Direct link to How to use the v1 recipe format on conda-forge" title="Direct link to How to use the v1 recipe format on conda-forge" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-to-use-the-v1-recipe-format-on-conda-forge">How to use the v1 recipe format on conda-forge<a href="https://conda-forge.org/blog/2025/02/27/conda-forge-v1-recipe-support/#how-to-use-the-v1-recipe-format-on-conda-forge" class="hash-link" aria-label="Direct link to How to use the v1 recipe format on conda-forge" title="Direct link to How to use the v1 recipe format on conda-forge" translate="no">​</a></h2>
 <p>If you are adding a new recipe on staged-recipes, then it's easy: just submit a <code>recipe.yaml</code> file instead of a <code>meta.yaml</code> file.
-In case you already maintain a feedstock, then the conversion can be semi-automated with a tool created by <a href="https://github.com/hadim" target="_blank" rel="noopener noreferrer">Hadrien Mary</a> called <a href="https://github.com/hadim/feedrattler" target="_blank" rel="noopener noreferrer"><code>feedrattler</code></a>. The tool will take care of the basic conversions steps and uses <a href="https://github.com/conda-incubator/conda-recipe-manager" target="_blank" rel="noopener noreferrer"><code>conda-recipe-manager</code></a> by Anaconda / <a href="https://github.com/schuylermartin45" target="_blank" rel="noopener noreferrer">Schuyler Martin</a> under the hood to parse the recipe and convert it to the new format.</p>
+In case you already maintain a feedstock, then the conversion can be semi-automated with a tool created by <a href="https://github.com/hadim" target="_blank" rel="noopener noreferrer" class="">Hadrien Mary</a> called <a href="https://github.com/hadim/feedrattler" target="_blank" rel="noopener noreferrer" class=""><code>feedrattler</code></a>. The tool will take care of the basic conversions steps and uses <a href="https://github.com/conda-incubator/conda-recipe-manager" target="_blank" rel="noopener noreferrer" class=""><code>conda-recipe-manager</code></a> by Anaconda / <a href="https://github.com/schuylermartin45" target="_blank" rel="noopener noreferrer" class="">Schuyler Martin</a> under the hood to parse the recipe and convert it to the new format.</p>
 <div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># One liner with Pixi</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">pixi </span><span class="token builtin class-name">exec</span><span class="token plain"> feedrattler my-awesome-package-feedstock gh_user</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># With conda or mamba (as $CONDA)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token variable" style="color:#36acaa">$CONDA</span><span class="token plain"> create </span><span class="token parameter variable" style="color:#36acaa">-n</span><span class="token plain"> feedrattler feedrattler</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token variable" style="color:#36acaa">$CONDA</span><span class="token plain"> activate feedrattler</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">feedrattler my-awesome-package-feedstock gh_user</span><br></span></code></pre></div></div>
 <p>To do the conversion by hand, you need to do the following things:</p>
 <ul>
-<li>In the feedstock's <code>conda-forge.yml</code>, add <code>conda_build_tool: rattler-build</code></li>
-<li>Remove the <code>meta.yaml</code> file and add a <code>recipe.yaml</code> file following the v1 spec</li>
-<li>Rerender the feedstock using <code>conda-smithy rerender</code></li>
-<li>Push your changes to your fork and open a PR to see the CI build your package</li>
+<li class="">In the feedstock's <code>conda-forge.yml</code>, add <code>conda_build_tool: rattler-build</code></li>
+<li class="">Remove the <code>meta.yaml</code> file and add a <code>recipe.yaml</code> file following the v1 spec</li>
+<li class="">Rerender the feedstock using <code>conda-smithy rerender</code></li>
+<li class="">Push your changes to your fork and open a PR to see the CI build your package</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="transition-plans">Transition plans<a href="https://conda-forge.org/blog/2025/02/27/conda-forge-v1-recipe-support/#transition-plans" class="hash-link" aria-label="Direct link to Transition plans" title="Direct link to Transition plans" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="transition-plans">Transition plans<a href="https://conda-forge.org/blog/2025/02/27/conda-forge-v1-recipe-support/#transition-plans" class="hash-link" aria-label="Direct link to Transition plans" title="Direct link to Transition plans" translate="no">​</a></h2>
 <p>For the foreseeable future, conda-forge is going to support both formats, v1 and v0. We envision a gradual transition over at least one year to the new spec. There are a couple of places where the v1 spec also needs to finalize / stabilize. One notable place is the <code>cache</code>-based multi-output feature, where CEP discussions are ongoing. This stabilization in the format should happen within Q1 of 2025.</p>
 <p>Since the beginning of 2025, the bot has gained more capabilities for the v1 format, such as automatically bumping versions (the "autotick-bot"). There are a number of other migrators and mini-migrators that need to be fully ported to the v1 spec before we can claim 100% compatibility with the conda-forge infrastructure.</p>
 <p>As of today, over 700 of the 25000 recipes on conda-forge have been converted.</p>
 <p>For now, the recommendation on staged-recipes is: if it's a simple <code>noarch: python</code> recipe, it should probably be a <code>v1</code> recipe. The same goes for <code>Rust</code> or <code>Go</code> projects that have a simple structure.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="where-to-learn-more">Where to learn more<a href="https://conda-forge.org/blog/2025/02/27/conda-forge-v1-recipe-support/#where-to-learn-more" class="hash-link" aria-label="Direct link to Where to learn more" title="Direct link to Where to learn more" translate="no">​</a></h3>
-<p>There are very helpful docs located at <a href="https://rattler.build/" target="_blank" rel="noopener noreferrer">https://rattler.build</a> that explain the differences of the new recipe format pretty well. You are also very welcome to chat with us on the <a href="https://conda-forge.zulipchat.com/" target="_blank" rel="noopener noreferrer">conda-forge Zulip</a>, or chat with the rattler-build developers on <a href="https://discord.gg/kKV8ZxyzY4" target="_blank" rel="noopener noreferrer">their Discord</a>.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="where-to-learn-more">Where to learn more<a href="https://conda-forge.org/blog/2025/02/27/conda-forge-v1-recipe-support/#where-to-learn-more" class="hash-link" aria-label="Direct link to Where to learn more" title="Direct link to Where to learn more" translate="no">​</a></h3>
+<p>There are very helpful docs located at <a href="https://rattler.build/" target="_blank" rel="noopener noreferrer" class="">https://rattler.build</a> that explain the differences of the new recipe format pretty well. You are also very welcome to chat with us on the <a href="https://conda-forge.zulipchat.com/" target="_blank" rel="noopener noreferrer" class="">conda-forge Zulip</a>, or chat with the rattler-build developers on <a href="https://discord.gg/kKV8ZxyzY4" target="_blank" rel="noopener noreferrer" class="">their Discord</a>.</p>
 <p>You can also read more about rattler-build and the v1 format in the following blog posts:</p>
 <ul>
-<li><a href="https://prefix.dev/blog/rattler_build_on_conda_forge" target="_blank" rel="noopener noreferrer">https://prefix.dev/blog/rattler_build_on_conda_forge</a></li>
-<li><a href="https://prefix.dev/blog/the_love_of_building_conda_packages" target="_blank" rel="noopener noreferrer">https://prefix.dev/blog/the_love_of_building_conda_packages</a></li>
-<li><a href="https://prefix.dev/blog/rattler_build_a_new_parser" target="_blank" rel="noopener noreferrer">https://prefix.dev/blog/rattler_build_a_new_parser</a></li>
+<li class=""><a href="https://prefix.dev/blog/rattler_build_on_conda_forge" target="_blank" rel="noopener noreferrer" class="">https://prefix.dev/blog/rattler_build_on_conda_forge</a></li>
+<li class=""><a href="https://prefix.dev/blog/the_love_of_building_conda_packages" target="_blank" rel="noopener noreferrer" class="">https://prefix.dev/blog/the_love_of_building_conda_packages</a></li>
+<li class=""><a href="https://prefix.dev/blog/rattler_build_a_new_parser" target="_blank" rel="noopener noreferrer" class="">https://prefix.dev/blog/rattler_build_a_new_parser</a></li>
 </ul>]]></content:encoded>
             <category>infrastructure</category>
         </item>
@@ -267,10 +267,10 @@ In the case of pyyaml, we can force that by setting the env variable
 <p>We list some PRs here as a reference for conda-forge maintainers who
 want to experiment.</p>
 <ul>
-<li><a href="https://github.com/conda-forge/pyyaml-feedstock/pull/55" target="_blank" rel="noopener noreferrer">pyyaml</a></li>
-<li><a href="https://github.com/conda-forge/coverage-feedstock/pull/123" target="_blank" rel="noopener noreferrer">coverage</a></li>
-<li><a href="https://github.com/conda-forge/cython-feedstock/pull/147" target="_blank" rel="noopener noreferrer">cython</a></li>
-<li><a href="https://github.com/conda-forge/aiohttp-feedstock/pull/99" target="_blank" rel="noopener noreferrer">aiohttp</a></li>
+<li class=""><a href="https://github.com/conda-forge/pyyaml-feedstock/pull/55" target="_blank" rel="noopener noreferrer" class="">pyyaml</a></li>
+<li class=""><a href="https://github.com/conda-forge/coverage-feedstock/pull/123" target="_blank" rel="noopener noreferrer" class="">coverage</a></li>
+<li class=""><a href="https://github.com/conda-forge/cython-feedstock/pull/147" target="_blank" rel="noopener noreferrer" class="">cython</a></li>
+<li class=""><a href="https://github.com/conda-forge/aiohttp-feedstock/pull/99" target="_blank" rel="noopener noreferrer" class="">aiohttp</a></li>
 </ul>]]></content:encoded>
             <category>infrastructure</category>
         </item>
@@ -287,7 +287,7 @@ command:</p>
 <p>This will create a new environment with Python 3.13 with the global
 interpreter lock (GIL) enabled. A migration is underway that builds
 Python extensions like those included in <code>numpy</code> and <code>scipy</code> as conda packages. The migration
-is <a href="https://conda-forge.org/status/migration/?name=python313">55% complete</a> at the time of writing.</p>
+is <a class="" href="https://conda-forge.org/status/migration/?name=python313">55% complete</a> at the time of writing.</p>
 <p>New in this Python release is the <code>python-freethreading</code> build which
 removes the GIL and enables free threading. To install a <code>freethreading</code>
 build, you can do:</p>
@@ -311,10 +311,10 @@ variable for you:</p>
 conda.</p>
 <p>You can also use debug builds of Python on conda-forge for non-Windows
 systems by using the <code>conda-forge/label/python_debug</code> label.</p>
-<p>Any issues with python conda package itself can be reported at <a href="https://github.com/conda-forge/python-feedstock" target="_blank" rel="noopener noreferrer"><code>python-feedstock</code></a>.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="acknowledgements">Acknowledgements<a href="https://conda-forge.org/blog/2024/09/26/python-313/#acknowledgements" class="hash-link" aria-label="Direct link to Acknowledgements" title="Direct link to Acknowledgements" translate="no">​</a></h3>
-<p>Thanks to Uwe Korn (<a href="https://github.com/xhochy" target="_blank" rel="noopener noreferrer">@xhochy</a>) for getting us started
-and for Jonathan Helmus (<a href="https://github.com/jjhelmus" target="_blank" rel="noopener noreferrer">@jjhelmus</a>) for guidance.
+<p>Any issues with python conda package itself can be reported at <a href="https://github.com/conda-forge/python-feedstock" target="_blank" rel="noopener noreferrer" class=""><code>python-feedstock</code></a>.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="acknowledgements">Acknowledgements<a href="https://conda-forge.org/blog/2024/09/26/python-313/#acknowledgements" class="hash-link" aria-label="Direct link to Acknowledgements" title="Direct link to Acknowledgements" translate="no">​</a></h3>
+<p>Thanks to Uwe Korn (<a href="https://github.com/xhochy" target="_blank" rel="noopener noreferrer" class="">@xhochy</a>) for getting us started
+and for Jonathan Helmus (<a href="https://github.com/jjhelmus" target="_blank" rel="noopener noreferrer" class="">@jjhelmus</a>) for guidance.
 Also thanks to conda-forge/core and all the maintainers of feedstocks in conda-forge
 for the hard work in getting the Python 3.13 migration underway.</p>]]></content:encoded>
             <category>infrastructure</category>
@@ -325,19 +325,19 @@ for the hard work in getting the Python 3.13 migration underway.</p>]]></content
             <guid>https://conda-forge.org/blog/2024/04/02/xz-backdoor/</guid>
             <pubDate>Tue, 02 Apr 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[On March 29th, 2024, at 18:07 UTC, the core team learnt about the recently disclosed xz backdoor, now labeled as CVE-2024-3094.]]></description>
-            <content:encoded><![CDATA[<p>On March 29th, 2024, at 18:07 UTC, the core team learnt about the <a href="https://www.openwall.com/lists/oss-security/2024/03/29/4" target="_blank" rel="noopener noreferrer">recently disclosed <code>xz</code> backdoor</a>, now labeled as <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-3094" target="_blank" rel="noopener noreferrer"><code>CVE-2024-3094</code></a>.</p>
+            <content:encoded><![CDATA[<p>On March 29th, 2024, at 18:07 UTC, the core team learnt about the <a href="https://www.openwall.com/lists/oss-security/2024/03/29/4" target="_blank" rel="noopener noreferrer" class="">recently disclosed <code>xz</code> backdoor</a>, now labeled as <a href="https://nvd.nist.gov/vuln/detail/CVE-2024-3094" target="_blank" rel="noopener noreferrer" class=""><code>CVE-2024-3094</code></a>.</p>
 <p>To the best of our knowledge, conda-forge's artifacts for <code>xz</code> are <em>not</em> affected.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="our-response">Our response<a href="https://conda-forge.org/blog/2024/04/02/xz-backdoor/#our-response" class="hash-link" aria-label="Direct link to Our response" title="Direct link to Our response" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="our-response">Our response<a href="https://conda-forge.org/blog/2024/04/02/xz-backdoor/#our-response" class="hash-link" aria-label="Direct link to Our response" title="Direct link to Our response" translate="no">​</a></h2>
 <p>We immediately checked which <code>xz</code> artifacts had been published in our channel:</p>
 <ul>
-<li>Our latest build for <code>xz</code> (recipe source available in the <a href="https://github.com/conda-forge/xz-feedstock/blob/8b8001268eb4eb7f9dcab4166ba88926e5ed6e91/recipe/meta.yaml" target="_blank" rel="noopener noreferrer"><code>xz-feedstock</code></a>) is for version <code>5.2.9</code> and was uploaded on 2022-12-08. See artifacts in <a href="https://anaconda.org/conda-forge/xz/files" target="_blank" rel="noopener noreferrer">anaconda.org</a>.</li>
-<li>The backdoored versions of <code>xz</code> belong to the <code>5.6.x</code> series.</li>
+<li class="">Our latest build for <code>xz</code> (recipe source available in the <a href="https://github.com/conda-forge/xz-feedstock/blob/8b8001268eb4eb7f9dcab4166ba88926e5ed6e91/recipe/meta.yaml" target="_blank" rel="noopener noreferrer" class=""><code>xz-feedstock</code></a>) is for version <code>5.2.9</code> and was uploaded on 2022-12-08. See artifacts in <a href="https://anaconda.org/conda-forge/xz/files" target="_blank" rel="noopener noreferrer" class="">anaconda.org</a>.</li>
+<li class="">The backdoored versions of <code>xz</code> belong to the <code>5.6.x</code> series.</li>
 </ul>
 <p>We are monitoring the situation develop and will update this announcement accordingly if needed.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="closing-thoughts">Closing thoughts<a href="https://conda-forge.org/blog/2024/04/02/xz-backdoor/#closing-thoughts" class="hash-link" aria-label="Direct link to Closing thoughts" title="Direct link to Closing thoughts" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="closing-thoughts">Closing thoughts<a href="https://conda-forge.org/blog/2024/04/02/xz-backdoor/#closing-thoughts" class="hash-link" aria-label="Direct link to Closing thoughts" title="Direct link to Closing thoughts" translate="no">​</a></h2>
 <p>We, the conda-forge core dev team, want to thank everyone for their patience and support as we have responded to the various security incidents and bugs detailed above. It goes without saying that the public nature of conda-forge's infrastructure carries risks. On the other hand, by being public, anyone can look and verify our artifact builds. Security for conda-forge is about reducing risk, and we will continue to do our best.</p>
 <p>As a reminder, we do not recommend that you use conda-forge in environments with sensitive information. conda-forge's software is built by our users and the core dev team cannot verify or guarantee that this software is not malicious or has not been tampered with.</p>
-<p>Our best defense against security incidents in conda-forge is you! Our feedstock maintainers are in the best position to notice incidents and issues. Please responsibly report anything you find to us at <a href="mailto:condaforge+security@gmail.com" target="_blank" rel="noopener noreferrer">condaforge+security@gmail.com</a> or using the process described in our <a href="https://github.com/conda-forge/conda-forge.github.io/security/policy" target="_blank" rel="noopener noreferrer">Security policy</a>.</p>]]></content:encoded>
+<p>Our best defense against security incidents in conda-forge is you! Our feedstock maintainers are in the best position to notice incidents and issues. Please responsibly report anything you find to us at <a href="mailto:condaforge+security@gmail.com" target="_blank" rel="noopener noreferrer" class="">condaforge+security@gmail.com</a> or using the process described in our <a href="https://github.com/conda-forge/conda-forge.github.io/security/policy" target="_blank" rel="noopener noreferrer" class="">Security policy</a>.</p>]]></content:encoded>
             <category>security</category>
         </item>
         <item>
@@ -347,30 +347,30 @@ for the hard work in getting the Python 3.13 migration underway.</p>]]></content
             <pubDate>Thu, 13 Jul 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[In June 2023, software engineers from]]></description>
             <content:encoded><![CDATA[<p>In June 2023, software engineers from
-<a href="https://www.anaconda.com/" target="_blank" rel="noopener noreferrer">Anaconda</a> have reported a security issue in
+<a href="https://www.anaconda.com/" target="_blank" rel="noopener noreferrer" class="">Anaconda</a> have reported a security issue in
 the uninstallers that are included in the Windows versions of the
-<a href="https://github.com/conda-forge/miniforge" target="_blank" rel="noopener noreferrer">miniforge and mambaforge
+<a href="https://github.com/conda-forge/miniforge" target="_blank" rel="noopener noreferrer" class="">miniforge and mambaforge
 installers</a>, one of the main
 ways to bootstrap conda-forge based conda and mamba distributions.</p>
 <p>The issue could, under specific conditions, unintentionally delete files
 from your system during the uninstallation process. Anaconda has
 published more details in the related
-<a href="https://www.anaconda.com/blog/windows-installer-security-fix" target="_blank" rel="noopener noreferrer">blogpost</a>
+<a href="https://www.anaconda.com/blog/windows-installer-security-fix" target="_blank" rel="noopener noreferrer" class="">blogpost</a>
 about the security fix for the miniconda and Anaconda Distribution
 Windows installers as well.</p>
 <p>conda-forge is committed to fix the miniforge and mambaforge installers
 equally to reduce the possible impact on conda-forge users and has
 worked with Anaconda to mitigate the issue.</p>
 <ul>
-<li>As such, we are strongly recommending all users of miniforge and
+<li class="">As such, we are strongly recommending all users of miniforge and
 mambaforge to <strong>update immediately</strong> to the latest versions of
-miniforge and mambaforge. Please download them from the <a href="https://github.com/conda-forge/miniforge" target="_blank" rel="noopener noreferrer">miniforge
+miniforge and mambaforge. Please download them from the <a href="https://github.com/conda-forge/miniforge" target="_blank" rel="noopener noreferrer" class="">miniforge
 repository's main page</a>
-or the <a href="https://github.com/conda-forge/miniforge/releases/tag/23.1.0-4" target="_blank" rel="noopener noreferrer">release specific
+or the <a href="https://github.com/conda-forge/miniforge/releases/tag/23.1.0-4" target="_blank" rel="noopener noreferrer" class="">release specific
 page</a>.</li>
-<li>For older versions, we are providing a <strong>security patch for already
+<li class="">For older versions, we are providing a <strong>security patch for already
 installed miniforge and mambaforge installations</strong>. You can download
-these from <a href="https://github.com/conda-forge/miniforge/releases/tag/23.1.0-4" target="_blank" rel="noopener noreferrer">release specific
+these from <a href="https://github.com/conda-forge/miniforge/releases/tag/23.1.0-4" target="_blank" rel="noopener noreferrer" class="">release specific
 page</a>
 as well, under the names
 <code>Miniforge3-uninstaller-patch-Windows-x86_64.exe</code> and
@@ -392,7 +392,7 @@ mambaforge.</p>]]></content:encoded>
             <pubDate>Sun, 12 Mar 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[In early January 2023, CircleCI informed us that they had a large]]></description>
             <content:encoded><![CDATA[<p>In early January 2023, CircleCI informed us that they had a large
-<a href="https://circleci.com/blog/jan-4-2023-incident-report/" target="_blank" rel="noopener noreferrer">security breach</a>
+<a href="https://circleci.com/blog/jan-4-2023-incident-report/" target="_blank" rel="noopener noreferrer" class="">security breach</a>
 where a third party had gained access to all the environment secrets
 stored in the service. For <code>conda-forge</code>, these secrets are the API
 token used to upload built packages to our staging area on
@@ -405,32 +405,32 @@ the bulk of the secrets being exfiltrated in plain text from their
 servers a few days later. A malicious third-party with access to these
 secrets could potentially upload compromised versions of any package on
 <code>conda-forge</code> in a so-called "supply chain" attack.</p>
-<p><strong>We have produced a</strong> <a href="https://raw.githubusercontent.com/conda-forge/conda-forge.github.io/main/misc/circle_ci_pkgs_dec2022_breach.json" target="_blank" rel="noopener noreferrer">list of all possibly compromised
+<p><strong>We have produced a</strong> <a href="https://raw.githubusercontent.com/conda-forge/conda-forge.github.io/main/misc/circle_ci_pkgs_dec2022_breach.json" target="_blank" rel="noopener noreferrer" class="">list of all possibly compromised
 artifacts</a>.</p>
 <p><strong>If you use</strong> <code>conda-forge</code> <strong>in very sensitive environments (which we
 do not recommend!), please remove these artifacts from your system.</strong></p>
 <p><strong>To date, we know of no compromised artifacts in</strong> <code>conda-forge</code>.</p>
 <p><strong>API tokens for the main</strong> <code>conda-forge</code> <strong>channel were never exposed
 and remain secure to our knowledge.</strong></p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="our-response">Our Response<a href="https://conda-forge.org/blog/2023/03/12/circle-ci-security-breach/#our-response" class="hash-link" aria-label="Direct link to Our Response" title="Direct link to Our Response" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="our-response">Our Response<a href="https://conda-forge.org/blog/2023/03/12/circle-ci-security-breach/#our-response" class="hash-link" aria-label="Direct link to Our Response" title="Direct link to Our Response" translate="no">​</a></h2>
 <p>We took the following steps to respond to this incident.</p>
 <ul>
-<li>We immediately started a token rotation of all of our feedstock
+<li class="">We immediately started a token rotation of all of our feedstock
 tokens and our staging area upload tokens as precautionary measures.
 This token rotation hit a few bugs, but was completed as of January
 13, 2023.</li>
-<li>We produced a census of all packages uploaded between December 19,
+<li class="">We produced a census of all packages uploaded between December 19,
 2022 and January 13, 2023. This data is available for download as a
-<a href="https://raw.githubusercontent.com/conda-forge/conda-forge.github.io/main/misc/circle_ci_pkgs_dec2022_breach.json" target="_blank" rel="noopener noreferrer">JSON
+<a href="https://raw.githubusercontent.com/conda-forge/conda-forge.github.io/main/misc/circle_ci_pkgs_dec2022_breach.json" target="_blank" rel="noopener noreferrer" class="">JSON
 file</a>.</li>
-<li>We examined all the artifacts built during this time period for the
-<a href="https://circleci.com/blog/jan-4-2023-incident-report/" target="_blank" rel="noopener noreferrer">malicious
+<li class="">We examined all the artifacts built during this time period for the
+<a href="https://circleci.com/blog/jan-4-2023-incident-report/" target="_blank" rel="noopener noreferrer" class="">malicious
 files</a> listed
 by CicleCI. We did not find any of those files in our artifacts.</li>
-<li>As detailed below, we have begun retooling our system for feedstock
+<li class="">As detailed below, we have begun retooling our system for feedstock
 tokens to be more robust and enable greater flexibility in our
 response to incidents like this.</li>
-<li>We have begun systematically invalidating old tokens,
+<li class="">We have begun systematically invalidating old tokens,
 decommissioning old bots, and minimizing permissions of our current
 tokens in order to further enhance <code>conda-forge</code>'s security.</li>
 </ul>
@@ -440,20 +440,20 @@ bug which resulted in us losing the tokens for a very large fraction of
 feedstocks. This situation resulted in an extended outage that lasted
 about five days and was resolved on January 13, 2023, when the full
 token rotation was completed.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-did-we-learn">What did we learn?<a href="https://conda-forge.org/blog/2023/03/12/circle-ci-security-breach/#what-did-we-learn" class="hash-link" aria-label="Direct link to What did we learn?" title="Direct link to What did we learn?" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-did-we-learn">What did we learn?<a href="https://conda-forge.org/blog/2023/03/12/circle-ci-security-breach/#what-did-we-learn" class="hash-link" aria-label="Direct link to What did we learn?" title="Direct link to What did we learn?" translate="no">​</a></h2>
 <p>We learned a few things about our system for feedstock tokens and
 general maintenance of our CI service integrations. We probably should
 have known them already, but here we are.</p>
 <ul>
-<li>We used the same feedstock token across multiple CI services. This
+<li class="">We used the same feedstock token across multiple CI services. This
 limited our ability to immediately invalidate tokens associated with
 a single CI service and exposed all services if any single service
 had an incident.</li>
-<li>Our token system only allowed one valid token per feedstock. This
+<li class="">Our token system only allowed one valid token per feedstock. This
 limitation means that we cannot recover from partially failed token
 resets/rotations and are subject to race conditions during the
 reset/rotation process that can cause failed package uploads.</li>
-<li>We need to be more proactive about cleaning up deprecated/removed CI
+<li class="">We need to be more proactive about cleaning up deprecated/removed CI
 services. The use of CircleCI in <code>conda-forge</code> has been deprecated
 for quite a while. Had we taken the time, and had the foresight, to
 remove all of our secrets from CircleCI when it was deprecated, we
@@ -465,7 +465,7 @@ responding to security incidents. We have also started the process of
 decommissioning several of our old CI services. These changes will take
 time to implement. You can follow the progress on our various public
 issue trackers.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="closing-thoughts--what-can-you-do">Closing Thoughts &amp; What can you do?<a href="https://conda-forge.org/blog/2023/03/12/circle-ci-security-breach/#closing-thoughts--what-can-you-do" class="hash-link" aria-label="Direct link to Closing Thoughts &amp; What can you do?" title="Direct link to Closing Thoughts &amp; What can you do?" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="closing-thoughts--what-can-you-do">Closing Thoughts &amp; What can you do?<a href="https://conda-forge.org/blog/2023/03/12/circle-ci-security-breach/#closing-thoughts--what-can-you-do" class="hash-link" aria-label="Direct link to Closing Thoughts &amp; What can you do?" title="Direct link to Closing Thoughts &amp; What can you do?" translate="no">​</a></h2>
 <p>We, the <code>conda-forge</code> core dev team, want to thank everyone for their
 patience and support as we have responded to the various security
 incidents and bugs detailed above. It goes without saying that the
@@ -490,41 +490,41 @@ issues. Please responsibly report anything you find to us at
             <pubDate>Fri, 26 Aug 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[This blog is about my work during my Outreachy internship with]]></description>
             <content:encoded><![CDATA[<p>This blog is about my work during my Outreachy internship with
-<a href="https://conda-forge.github.io/" target="_blank" rel="noopener noreferrer">conda-forge</a>. Before that a little about
-me - I am <a href="https://github.com/ssurbhi560" target="_blank" rel="noopener noreferrer">Surbhi</a>, an Outreachy intern
+<a href="https://conda-forge.github.io/" target="_blank" rel="noopener noreferrer" class="">conda-forge</a>. Before that a little about
+me - I am <a href="https://github.com/ssurbhi560" target="_blank" rel="noopener noreferrer" class="">Surbhi</a>, an Outreachy intern
 with conda-forge for the May-August 2022 cohort and I worked on
 documenting the conda-forge ecosystem.</p>
 <p>The first issue I started working on when the internship began was
-<a href="https://github.com/conda-forge/conda-forge.github.io/issues/1611" target="_blank" rel="noopener noreferrer">Better anchoring of
+<a href="https://github.com/conda-forge/conda-forge.github.io/issues/1611" target="_blank" rel="noopener noreferrer" class="">Better anchoring of
 announcements(#1611)</a>.
 The goal of this issue was to fix the anchor for each year and also
 specific announcements in the Announcements section so as to provide
-better navigation of the <a href="https://conda-forge.org/docs/user/announcements.html" target="_blank" rel="noopener noreferrer">Announcements
+better navigation of the <a href="https://conda-forge.org/docs/user/announcements.html" target="_blank" rel="noopener noreferrer" class="">Announcements
 page</a>. This was
 also the time when I was feeling quite overwhelmed and anxious since I
 was just starting and was unsure if I would be able to give my best. But
 thanks to my awesome mentors
-<a href="https://github.com/kathatherine" target="_blank" rel="noopener noreferrer">@Katherine</a> and
-<a href="https://github.com/beckermr" target="_blank" rel="noopener noreferrer">@Matt</a>, who have always been so helpful,
+<a href="https://github.com/kathatherine" target="_blank" rel="noopener noreferrer" class="">@Katherine</a> and
+<a href="https://github.com/beckermr" target="_blank" rel="noopener noreferrer" class="">@Matt</a>, who have always been so helpful,
 I was able to have a good start. We solved this issue in two parts. The
-first part was to add anchors to each year which is solved with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1766" target="_blank" rel="noopener noreferrer">Improve
+first part was to add anchors to each year which is solved with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1766" target="_blank" rel="noopener noreferrer" class="">Improve
 anchors for each year in the Announcements section.
 (#1766)</a>,
 and the second part was adding anchors to each announcement and fixing
 the RSS feed.</p>
 <p>The part of the documentation I focused on after completing the first
-issue was <a href="https://conda-forge.org/docs/maintainer/00_intro.html" target="_blank" rel="noopener noreferrer">Maintainers'
+issue was <a href="https://conda-forge.org/docs/maintainer/00_intro.html" target="_blank" rel="noopener noreferrer" class="">Maintainers'
 Documentation</a>.
 Many open issues needed to be taken care of to make the Maintainers'
 documentation more useful and accessible for new maintainers. The open
 tickets that we have worked on are:</p>
 <ol>
-<li>
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1769" target="_blank" rel="noopener noreferrer">Document extras feedstock-name
+<li class="">
+<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1769" target="_blank" rel="noopener noreferrer" class="">Document extras feedstock-name
 (#1769)</a>
-and <a href="https://github.com/conda-forge/conda-forge.github.io/issues/1331" target="_blank" rel="noopener noreferrer">Explain how to become a maintainer
+and <a href="https://github.com/conda-forge/conda-forge.github.io/issues/1331" target="_blank" rel="noopener noreferrer" class="">Explain how to become a maintainer
 (#1331)</a>.
-Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1772" target="_blank" rel="noopener noreferrer">add extra section-recipe maintainer and feedstock-name
+Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1772" target="_blank" rel="noopener noreferrer" class="">add extra section-recipe maintainer and feedstock-name
 (#1772)</a>.</p>
 <blockquote>
 <p>As we started with improving the Maintainer documentation, these
@@ -535,10 +535,10 @@ staged recipes. The second issue was documenting how one should
 become a package maintainer.</p>
 </blockquote>
 </li>
-<li>
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1651" target="_blank" rel="noopener noreferrer">Add more steps in Improve the documentation section
+<li class="">
+<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1651" target="_blank" rel="noopener noreferrer" class="">Add more steps in Improve the documentation section
 (#1651)</a>.
-Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1776" target="_blank" rel="noopener noreferrer">Update "Improve the documentation" section with more
+Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1776" target="_blank" rel="noopener noreferrer" class="">Update "Improve the documentation" section with more
 steps
 (#1776)</a>.</p>
 <blockquote>
@@ -547,11 +547,11 @@ like to start contributing to conda-forge, especially to
 documentation.</p>
 </blockquote>
 </li>
-<li>
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1655" target="_blank" rel="noopener noreferrer">Add more information about Grayskull in the documentation itself
+<li class="">
+<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1655" target="_blank" rel="noopener noreferrer" class="">Add more information about Grayskull in the documentation itself
 (#1655)</a>.
 Closed with
-<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1777" target="_blank" rel="noopener noreferrer">#1777</a>.</p>
+<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1777" target="_blank" rel="noopener noreferrer" class="">#1777</a>.</p>
 <blockquote>
 <p>The documentation on Grayskull in docs lacked the answers to
 questions like what exactly Grayskull is and how one should use
@@ -559,10 +559,10 @@ Grayskull to generate a recipe. With this issue, we added more
 documentation on Grayskull for users.</p>
 </blockquote>
 </li>
-<li>
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/803" target="_blank" rel="noopener noreferrer">Clarify feedstock LICENSE.txt
+<li class="">
+<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/803" target="_blank" rel="noopener noreferrer" class="">Clarify feedstock LICENSE.txt
 (#803)</a>.
-Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1786" target="_blank" rel="noopener noreferrer">Add Feedstock repository structure section
+Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1786" target="_blank" rel="noopener noreferrer" class="">Add Feedstock repository structure section
 (#1786)</a>.</p>
 <blockquote>
 <p>The docs for contributing and maintaining conda recipes discuss
@@ -574,10 +574,10 @@ those two licenses and briefly explained the feedstock repository
 structure.</p>
 </blockquote>
 </li>
-<li>
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1117" target="_blank" rel="noopener noreferrer">DOC: New maintainer
+<li class="">
+<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1117" target="_blank" rel="noopener noreferrer" class="">DOC: New maintainer
 (#1117)</a>.
-Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1788" target="_blank" rel="noopener noreferrer">Add "How regro-cf-autotick-bot create version update
+Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1788" target="_blank" rel="noopener noreferrer" class="">Add "How regro-cf-autotick-bot create version update
 PR?" section.
 (#1788)</a>.</p>
 <blockquote>
@@ -588,21 +588,21 @@ explains the whole process of creating an automated version update
 PRs by bot.</p>
 </blockquote>
 </li>
-<li>
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1536" target="_blank" rel="noopener noreferrer">Add Perl package hints to documentation
+<li class="">
+<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1536" target="_blank" rel="noopener noreferrer" class="">Add Perl package hints to documentation
 (#1536)</a>.
 Working on this
-<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1790" target="_blank" rel="noopener noreferrer">#1790</a>.</p>
+<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1790" target="_blank" rel="noopener noreferrer" class="">#1790</a>.</p>
 <blockquote>
 <p>With this issue we added ​​packaging instructions for Perl packages
 with different build systems in the documentation.</p>
 </blockquote>
 </li>
-<li>
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1532" target="_blank" rel="noopener noreferrer">DOC: Update documentation about tokens
+<li class="">
+<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1532" target="_blank" rel="noopener noreferrer" class="">DOC: Update documentation about tokens
 (#1532)</a>.
 Closed with
-<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1793" target="_blank" rel="noopener noreferrer">#1793</a>.</p>
+<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1793" target="_blank" rel="noopener noreferrer" class="">#1793</a>.</p>
 <blockquote>
 <p>Feedstocks have stopped storing encrypted tokens to upload
 packages, but outdated information on tokens was still present in
@@ -611,11 +611,11 @@ information and also added a new section "How to update your
 feedstock token?" for maintainers.</p>
 </blockquote>
 </li>
-<li>
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1668" target="_blank" rel="noopener noreferrer">Improve the documentation on arch_rebuild.txt
+<li class="">
+<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1668" target="_blank" rel="noopener noreferrer" class="">Improve the documentation on arch_rebuild.txt
 (#1668)</a>.
 Closed with
-<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1794" target="_blank" rel="noopener noreferrer">#1794</a>.</p>
+<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1794" target="_blank" rel="noopener noreferrer" class="">#1794</a>.</p>
 <blockquote>
 <p>With this issue we improved the documentation on
 <code>arch_rebuild.txt</code> and how maintainers can add a feedstock to
@@ -623,14 +623,14 @@ Closed with
 architectures/platforms (such as ppc64le or aarch64).</p>
 </blockquote>
 </li>
-<li>
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1355" target="_blank" rel="noopener noreferrer">Document migrators
+<li class="">
+<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1355" target="_blank" rel="noopener noreferrer" class="">Document migrators
 (#1355)</a>,
-<a href="https://github.com/conda-forge/conda-forge.github.io/issues/862" target="_blank" rel="noopener noreferrer">Update migration docs
+<a href="https://github.com/conda-forge/conda-forge.github.io/issues/862" target="_blank" rel="noopener noreferrer" class="">Update migration docs
 (#862)</a>,
-and <a href="https://github.com/conda-forge/conda-forge.github.io/issues/737" target="_blank" rel="noopener noreferrer">document migrators
+and <a href="https://github.com/conda-forge/conda-forge.github.io/issues/737" target="_blank" rel="noopener noreferrer" class="">document migrators
 (#737)</a>
-. Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1801" target="_blank" rel="noopener noreferrer">Documenting Migrators and Migrations.
+. Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1801" target="_blank" rel="noopener noreferrer" class="">Documenting Migrators and Migrations.
 (#1801)</a>.</p>
 <blockquote>
 <p>With these, we added more documentation on migrations and
@@ -639,11 +639,11 @@ like - What is a migrator/migration, and what does it do? When can
 (and why would) they should reject a migration PR? And so on.</p>
 </blockquote>
 </li>
-<li>
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1808" target="_blank" rel="noopener noreferrer">Add a section in docs on security aspects of conda-forge
+<li class="">
+<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1808" target="_blank" rel="noopener noreferrer" class="">Add a section in docs on security aspects of conda-forge
 (#1808)</a>.
 Closed with
-<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1812" target="_blank" rel="noopener noreferrer">#1812</a>.</p>
+<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1812" target="_blank" rel="noopener noreferrer" class="">#1812</a>.</p>
 <blockquote>
 <p>Currently, information regarding the security considerations of
 conda-forge builds is scattered throughout the documentation, and
@@ -661,9 +661,9 @@ internship. I have learned so many things during the internship that it
 would make a long list if I were to write all of those. But the most
 important things I learned are:</p>
 <ul>
-<li>The importance of documentation and how to write good documentation.</li>
-<li>The best practices to follow while writing documentation.</li>
-<li>More about conda-forge and packaging tools.</li>
+<li class="">The importance of documentation and how to write good documentation.</li>
+<li class="">The best practices to follow while writing documentation.</li>
+<li class="">More about conda-forge and packaging tools.</li>
 </ul>
 <p>And above all, Outreachy helped me feel more confident about my skills
 and overcome the imposter syndrome I had before. Thanks again to my
@@ -680,7 +680,7 @@ awesome mentors and the kind people of the conda-forge community! :)</p>]]></con
 <p>Recently we've been able to add GPU-enabled TensorFlow builds to
 conda-forge! This was quite a journey, with multiple contributors trying
 different ways to convince the Bazel-based build system of TensorFlow to
-build CUDA-enabled packages. But we managed, <a href="https://github.com/conda-forge/tensorflow-feedstock/pull/157" target="_blank" rel="noopener noreferrer">and the pull request got
+build CUDA-enabled packages. But we managed, <a href="https://github.com/conda-forge/tensorflow-feedstock/pull/157" target="_blank" rel="noopener noreferrer" class="">and the pull request got
 merged</a>.</p>
 <p>We now have a configuration in place that creates CUDA-enabled
 TensorFlow builds for all conda-forge supported configurations (CUDA
@@ -695,7 +695,7 @@ up cloud machines which then build the feedstock (using the
 <code>build-locally.py</code> script). Thanks to the generous support
 of OVH we were able to boot multiple 32-core virtual machines
 simultaneously to build the different TensorFlow variants.</p>
-<p>We have open-sourced the <a href="https://github.com/mamba-org/build-locally-ansible" target="_blank" rel="noopener noreferrer">Ansible playbook in
+<p>We have open-sourced the <a href="https://github.com/mamba-org/build-locally-ansible" target="_blank" rel="noopener noreferrer" class="">Ansible playbook in
 GitHub</a> and we're
 working towards making it (more) generally useful for other long-running
 builds!</p>
@@ -706,12 +706,12 @@ libraries.</p>
 <p>We are still missing Windows builds for TensorFlow (CPU &amp; CUDA,
 unfortunately) and would love the community to help us out with that.
 There is an open PR, but it probably needs some poking in Bazel to get
-it to pass: <a href="https://github.com/conda-forge/tensorflow-feedstock/pull/111" target="_blank" rel="noopener noreferrer">conda-forge/tensorflow-feedstock#111</a>.</p>
+it to pass: <a href="https://github.com/conda-forge/tensorflow-feedstock/pull/111" target="_blank" rel="noopener noreferrer" class="">conda-forge/tensorflow-feedstock#111</a>.</p>
 <p>We hope that these new GPU builds will enable many more packages to be
 added to the conda-forge channel! We are already looking forward to the
 2.6.2 and 2.7 releases of TensorFlow and to adding Windows support in
 the future. We hope you enjoy this work.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="installation">Installation<a href="https://conda-forge.org/blog/2021/11/03/tensorflow-gpu/#installation" class="hash-link" aria-label="Direct link to Installation" title="Direct link to Installation" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="installation">Installation<a href="https://conda-forge.org/blog/2021/11/03/tensorflow-gpu/#installation" class="hash-link" aria-label="Direct link to Installation" title="Direct link to Installation" translate="no">​</a></h2>
 <p>You can now select between GPU enabled (default) and CPU packages using
 the <code>tensorflow-gpu</code> and <code>tensorflow-cpu</code> packages. Just run</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">mamba </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> tensorflow-gpu </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># OR</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">conda </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> tensorflow-gpu </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge</span><br></span></code></pre></div></div>
@@ -738,22 +738,22 @@ the time of writing (February 2022), on a machine without a GPU, one
 would always get the <code>-cpu</code> variant unless overriden like
 above. This decision has been made to allow greater accessibility for
 users with limited bandwidth and resources.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="thanks-to">Thanks to<a href="https://conda-forge.org/blog/2021/11/03/tensorflow-gpu/#thanks-to" class="hash-link" aria-label="Direct link to Thanks to" title="Direct link to Thanks to" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="thanks-to">Thanks to<a href="https://conda-forge.org/blog/2021/11/03/tensorflow-gpu/#thanks-to" class="hash-link" aria-label="Direct link to Thanks to" title="Direct link to Thanks to" translate="no">​</a></h2>
 <ul>
-<li>Mark Harfouche (@hmaarrfk) &amp; Ista Zahn (@izahn) for their initial
+<li class="">Mark Harfouche (@hmaarrfk) &amp; Ista Zahn (@izahn) for their initial
 work on the TensorFlow GPU builds, and all other TensorFlow
 maintainers. Uwe Korn (@xhochy) for his work on the Bazel scripts &amp;
-TensorFlow -- and all the other maintainers of the <a href="https://github.com/conda-forge/tensorflow-feedstock" target="_blank" rel="noopener noreferrer">TensorFlow
+TensorFlow -- and all the other maintainers of the <a href="https://github.com/conda-forge/tensorflow-feedstock" target="_blank" rel="noopener noreferrer" class="">TensorFlow
 feedstock</a>!</li>
-<li>NVIDIA for pushing cudatoolkit and cudnn on conda-forge that makes
+<li class="">NVIDIA for pushing cudatoolkit and cudnn on conda-forge that makes
 this possible</li>
-<li>OVH for their generous sponsoring of large build machines that we
+<li class="">OVH for their generous sponsoring of large build machines that we
 could use to build the recipes</li>
-<li>Bloomberg for their sponsorship of QuantStack's involvement with
+<li class="">Bloomberg for their sponsorship of QuantStack's involvement with
 conda-forge</li>
-<li>Andreas Trawoger (@atrawog) for the Ansible scripts that this is
+<li class="">Andreas Trawoger (@atrawog) for the Ansible scripts that this is
 based on</li>
-<li>Thorsten Beier (@derthorsten) and Adrien Delsalle (@adriendelsalle)
+<li class="">Thorsten Beier (@derthorsten) and Adrien Delsalle (@adriendelsalle)
 for their contributions to the recipe</li>
 </ul>]]></content:encoded>
             <category>conda-forge</category>
@@ -771,30 +771,30 @@ Travis CI was passing encrypted secrets to PR builds on forks. Further
 examination of our logs and artifacts indicated that this had been
 happening since about September 3, 2021. This security bug was
 subsequently confirmed by Travis CI. See this
-<a href="https://nvd.nist.gov/vuln/detail/CVE-2021-41077" target="_blank" rel="noopener noreferrer">CVE</a> for more details
+<a href="https://nvd.nist.gov/vuln/detail/CVE-2021-41077" target="_blank" rel="noopener noreferrer" class="">CVE</a> for more details
 on this incident. <strong>As far as we know, there were no actual exploits
 against conda-forge which used this vulnerability.</strong></p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="our-response">Our Response<a href="https://conda-forge.org/blog/2021/09/24/travis-security/#our-response" class="hash-link" aria-label="Direct link to Our Response" title="Direct link to Our Response" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="our-response">Our Response<a href="https://conda-forge.org/blog/2021/09/24/travis-security/#our-response" class="hash-link" aria-label="Direct link to Our Response" title="Direct link to Our Response" translate="no">​</a></h2>
 <p>We took the following steps to respond to this incident.</p>
 <ol>
-<li>We immediately turned off all builds on Travis CI by suspending the
+<li class="">We immediately turned off all builds on Travis CI by suspending the
 Travis CI GitHub App.</li>
-<li>We immediately disclosed the bug to Travis CI through our contacts
+<li class="">We immediately disclosed the bug to Travis CI through our contacts
 there.</li>
-<li>Once Travis CI indicated to us that they were ready, we rotated all
+<li class="">Once Travis CI indicated to us that they were ready, we rotated all
 feedstock tokens and later our anaconda.org token for our staging
 channel. The anaconda.org token for the main <code>conda-forge</code> channel
 was never disclosed in this incident. Further, only ~70 feedstocks
 had their tokens exposed in this incident.</li>
-<li>We examined our artifacts and marked as broken any artifacts that
+<li class="">We examined our artifacts and marked as broken any artifacts that
 were uploaded from PRs. We think we found everything, but we are not
 completely sure. Our criterion for marking things broken was more
 generous than it needed to be.</li>
-<li>We issued PRs to rebuild any broken artifacts via our bots.</li>
-<li>We put in changes to <code>conda-smithy</code> to help prevent inadvertent
+<li class="">We issued PRs to rebuild any broken artifacts via our bots.</li>
+<li class="">We put in changes to <code>conda-smithy</code> to help prevent inadvertent
 uploads of artifacts from PRs in the future.</li>
 </ol>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="closing-thoughts--what-can-you-do">Closing Thoughts &amp; What can you do?<a href="https://conda-forge.org/blog/2021/09/24/travis-security/#closing-thoughts--what-can-you-do" class="hash-link" aria-label="Direct link to Closing Thoughts &amp; What can you do?" title="Direct link to Closing Thoughts &amp; What can you do?" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="closing-thoughts--what-can-you-do">Closing Thoughts &amp; What can you do?<a href="https://conda-forge.org/blog/2021/09/24/travis-security/#closing-thoughts--what-can-you-do" class="hash-link" aria-label="Direct link to Closing Thoughts &amp; What can you do?" title="Direct link to Closing Thoughts &amp; What can you do?" translate="no">​</a></h2>
 <p>I (MRB) want to recognize the quick work of our core dev team in
 handling this incident. It goes without saying that the public nature of
 <code>conda-forge</code>'s infrastructure carries risks. On the other hand, by
@@ -817,29 +817,29 @@ and issues. Please responsibly report anything you find to us at
 much easier. Grayskull generates recipes for Python packages hosted on
 PyPI.</p>
 <p>As the
-<a href="https://github.com/conda-incubator/grayskull#introduction" target="_blank" rel="noopener noreferrer">introduction</a>
+<a href="https://github.com/conda-incubator/grayskull#introduction" target="_blank" rel="noopener noreferrer" class="">introduction</a>
 for Grayskull reads; "The main goal of this project is to generate
 concise recipes for conda-forge." In this tutorial we learn how to
 contribute a Python package to the conda-forge channel using Grayskull
 to generate the recipe.</p>
 <p>Let us get started.</p>
 <ol>
-<li>
+<li class="">
 <p>Install <code>grayskull</code> using <code>conda</code> through the <code>conda-forge</code> channel:</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$ conda install -c conda-forge grayskull</span><br></span></code></pre></div></div>
 </li>
-<li>
-<p>Fork and clone the conda-forge <a href="https://github.com/conda-forge/staged-recipes" target="_blank" rel="noopener noreferrer">staged-recipes
+<li class="">
+<p>Fork and clone the conda-forge <a href="https://github.com/conda-forge/staged-recipes" target="_blank" rel="noopener noreferrer" class="">staged-recipes
 repository</a> from
 GitHub.</p>
 </li>
-<li>
+<li class="">
 <p>Checkout a new branch from the <code>master branch</code>.</p>
 </li>
-<li>
+<li class="">
 <p>Through CLI, cd inside the 'staged-recipes/recipes' directory.</p>
 </li>
-<li>
+<li class="">
 <p>Call <code>grayskull</code> and pass the <code>pypi</code> repository, followed by the
 name of the package you want to contribute to conda-forge. For
 example: <code>grayskull pypi abc</code></p>
@@ -852,19 +852,19 @@ directory. This folder will contain the <code>meta.yaml</code> file and also
 the license file if the package includes a license in the PyPI
 distribution.</p>
 </li>
-<li>
+<li class="">
 <p>Go through the generated <code>meta.yaml</code> file. For simpler packages, the
 generated recipes are nearly perfect, but for some packages you
 might need to make certain tweaks.</p>
 </li>
-<li>
+<li class="">
 <p>Commit and push the changes. <code>git add recipe/abc/meta.yaml</code>
 <code>git commit -m "add a commit message"</code> <code>git push</code></p>
 </li>
-<li>
+<li class="">
 <p>Create a PR.</p>
 </li>
-<li>
+<li class="">
 <p>Once the CI is passing, post a comment saying:
 <code>This is ready for review</code> <code>@conda-forge-admin, please ping team</code></p>
 </li>
@@ -881,168 +881,168 @@ conda-forge channel. Tada! It's that easy.</p>]]></content:encoded>
             <pubDate>Tue, 02 Feb 2021 00:00:00 GMT</pubDate>
             <description><![CDATA[Conda-forge is participating in the upcoming round of]]></description>
             <content:encoded><![CDATA[<p>Conda-forge is participating in the upcoming round of
-<a href="https://www.outreachy.org/" target="_blank" rel="noopener noreferrer">Outreachy</a> i.e May 2021 to August 2021. The
+<a href="https://www.outreachy.org/" target="_blank" rel="noopener noreferrer" class="">Outreachy</a> i.e May 2021 to August 2021. The
 goal of this program is to increase participation from under-represented
 groups in free and open-source software. Outreachy is organized by
-<a href="https://sfconservancy.org/" target="_blank" rel="noopener noreferrer">Software Freedom Conservancy</a>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="participant-application-process">Participant Application Process:<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#participant-application-process" class="hash-link" aria-label="Direct link to Participant Application Process:" title="Direct link to Participant Application Process:" translate="no">​</a></h2>
+<a href="https://sfconservancy.org/" target="_blank" rel="noopener noreferrer" class="">Software Freedom Conservancy</a>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="participant-application-process">Participant Application Process:<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#participant-application-process" class="hash-link" aria-label="Direct link to Participant Application Process:" title="Direct link to Participant Application Process:" translate="no">​</a></h2>
 <p>First, please review the Outreachy Eligibility and Application
 Information page to learn more about eligibility for Outreachy.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="steps-for-applicants-to-conda-forge">Steps for applicants to conda-forge:<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#steps-for-applicants-to-conda-forge" class="hash-link" aria-label="Direct link to Steps for applicants to conda-forge:" title="Direct link to Steps for applicants to conda-forge:" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="steps-for-applicants-to-conda-forge">Steps for applicants to conda-forge:<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#steps-for-applicants-to-conda-forge" class="hash-link" aria-label="Direct link to Steps for applicants to conda-forge:" title="Direct link to Steps for applicants to conda-forge:" translate="no">​</a></h2>
 <ol>
-<li>Confirm your eligibility on the Outreachy site</li>
-<li>Look at the Conda-forge projects available on the Outreachy site,
+<li class="">Confirm your eligibility on the Outreachy site</li>
+<li class="">Look at the Conda-forge projects available on the Outreachy site,
 consider your options, and if you have questions, communicate with the
 project mentors.</li>
-<li>Begin by contributing to the project by looking at our <a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer">issues
+<li class="">Begin by contributing to the project by looking at our <a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer" class="">issues
 page</a>.
 As you make contributions, record them on the Outreachy site.</li>
-<li>Once you have made a few contributions, begin to write your application.
+<li class="">Once you have made a few contributions, begin to write your application.
 Ask the mentors to review the application before you submit it.</li>
 </ol>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="participant-expectations">Participant Expectations<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#participant-expectations" class="hash-link" aria-label="Direct link to Participant Expectations" title="Direct link to Participant Expectations" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="participant-expectations">Participant Expectations<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#participant-expectations" class="hash-link" aria-label="Direct link to Participant Expectations" title="Direct link to Participant Expectations" translate="no">​</a></h2>
 <p>You will be working full-time on your project for three months. You will
 meet with your mentor(s) frequently and participate in the open-source
 development process -- writing code, reviewing code, testing, and so
 on. You will be expected to write a blog entry each week.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="project-contribution-information">Project Contribution Information<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#project-contribution-information" class="hash-link" aria-label="Direct link to Project Contribution Information" title="Direct link to Project Contribution Information" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="project-contribution-information">Project Contribution Information<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#project-contribution-information" class="hash-link" aria-label="Direct link to Project Contribution Information" title="Direct link to Project Contribution Information" translate="no">​</a></h2>
 <p>As part of the application process, all applicants must make at least
 one contribution to be accepted as an intern for this project. Only
 applicants who make a contribution will be eligible to be accepted as
 interns.</p>
 <p>While we don't have one we highly recommend the first-time contributor
 to be a conda user and/or submit a package to conda-forge via
-<a href="https://github.com/conda-forge/staged-recipes" target="_blank" rel="noopener noreferrer">staged-recipes</a>. That
+<a href="https://github.com/conda-forge/staged-recipes" target="_blank" rel="noopener noreferrer" class="">staged-recipes</a>. That
 will ensure the contributor understands the value of what we do and
 means that they are willing to participate in our community.</p>
-<p>Applicants can contribute to this project through the <a href="https://conda-forge.org/#contribute" target="_blank" rel="noopener noreferrer">project
+<p>Applicants can contribute to this project through the <a href="https://conda-forge.org/#contribute" target="_blank" rel="noopener noreferrer" class="">project
 repository or contribution page</a>.
-The project uses an <a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer">issue
+The project uses an <a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer" class="">issue
 tracker</a> to
 keep information about bugs to fix, project features to implement,
 documentation to write, and more. Applicants can look for
 newcomer-friendly issues to use for their first contributions by looking
 for the following issue tags in the project issue
-<a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer">tracker</a>:
+<a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer" class="">tracker</a>:
 Docs, Good first issue</p>
-<p>We here at <a href="https://conda-forge.org/#contribute" target="_blank" rel="noopener noreferrer">conda-forge</a> have a
+<p>We here at <a href="https://conda-forge.org/#contribute" target="_blank" rel="noopener noreferrer" class="">conda-forge</a> have a
 large number of potential Outreachy endeavors around documentation,
 maintenance, and development. These tasks are high-impact, affecting the
 entire conda-forge ecosystem. They also cover multiple systems including
 databases, conda's CDN provider, continuous integration providers, and
 user interactions on GitHub.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-do-i-work-with-the-conda-forge-community">How do I work with the conda-forge community?<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#how-do-i-work-with-the-conda-forge-community" class="hash-link" aria-label="Direct link to How do I work with the conda-forge community?" title="Direct link to How do I work with the conda-forge community?" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-do-i-work-with-the-conda-forge-community">How do I work with the conda-forge community?<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#how-do-i-work-with-the-conda-forge-community" class="hash-link" aria-label="Direct link to How do I work with the conda-forge community?" title="Direct link to How do I work with the conda-forge community?" translate="no">​</a></h2>
 <p>Outreachy applicants can get help and feedback from both mentors and
 community members. Community members discuss their contributions in a
 public chat. Outreachy applicants can often learn from those
 discussions.</p>
 <p>Please introduce yourself on the public project chat:</p>
 <ul>
-<li>Gitter - <a href="https://gitter.im/conda-forge/conda-forge.github.io" target="_blank" rel="noopener noreferrer">Follow this
+<li class="">Gitter - <a href="https://gitter.im/conda-forge/conda-forge.github.io" target="_blank" rel="noopener noreferrer" class="">Follow this
 link</a> to join this
 project's public chat.</li>
-<li>Outreachy mentors will often be in the community public chat. The
+<li class="">Outreachy mentors will often be in the community public chat. The
 project mentor's usernames are: <code>@viniciusdc</code>.</li>
 </ul>
 <p>Here are some ready-to-go ways you can get started contributing on your
 own.</p>
 <ul>
-<li>Find an open issue to tackle or report a bug to the issue tracker;</li>
-<li>Don't be afraid to communicate: Ask if you can help write a new
+<li class="">Find an open issue to tackle or report a bug to the issue tracker;</li>
+<li class="">Don't be afraid to communicate: Ask if you can help write a new
 feature or help Automate project setups;</li>
-<li>Improving current tooling and testing features is always welcome.</li>
+<li class="">Improving current tooling and testing features is always welcome.</li>
 </ul>
 <p>As this project main goal is enhancing our current documentation, here
 are some preliminary tasks that you can inspect to get ideas:</p>
 <ul>
-<li>Write and improve the project's documentation;</li>
-<li>Link to duplicate issues, and suggest new issue labels, to keep
+<li class="">Write and improve the project's documentation;</li>
+<li class="">Link to duplicate issues, and suggest new issue labels, to keep
 things organized;</li>
-<li>Go through open issues and suggest closing old ones;</li>
-<li>Ask clarifying questions on recently opened issues to move the
+<li class="">Go through open issues and suggest closing old ones;</li>
+<li class="">Ask clarifying questions on recently opened issues to move the
 discussion forward;</li>
-<li>We also have issues regarding the main functionalities of our bot,
+<li class="">We also have issues regarding the main functionalities of our bot,
 in particular the autotick bot. You could find some new information
 or ideas for your contributing proposals.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="good-starter-tasks">Good starter tasks:<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#good-starter-tasks" class="hash-link" aria-label="Direct link to Good starter tasks:" title="Direct link to Good starter tasks:" translate="no">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="small-starter-tasks">Small Starter Tasks<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#small-starter-tasks" class="hash-link" aria-label="Direct link to Small Starter Tasks" title="Direct link to Small Starter Tasks" translate="no">​</a></h3>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="good-starter-tasks">Good starter tasks:<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#good-starter-tasks" class="hash-link" aria-label="Direct link to Good starter tasks:" title="Direct link to Good starter tasks:" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="small-starter-tasks">Small Starter Tasks<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#small-starter-tasks" class="hash-link" aria-label="Direct link to Small Starter Tasks" title="Direct link to Small Starter Tasks" translate="no">​</a></h3>
 <p>As with most organizations, there are lots of small issues that need
 addressing usually related to problems such as bad recipes, old
 documentation and others. These will make good first issues to resolve
 or "update". This will also be an opportunity to familiarise yourself
 with the conda-forge environment.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="larger-tasks">Larger tasks<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#larger-tasks" class="hash-link" aria-label="Direct link to Larger tasks" title="Direct link to Larger tasks" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="larger-tasks">Larger tasks<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#larger-tasks" class="hash-link" aria-label="Direct link to Larger tasks" title="Direct link to Larger tasks" translate="no">​</a></h3>
 <p>There are a few potential larger tasks that can come after a few smaller
 task contributions. These are included into our three main bases:</p>
 <ul>
-<li><a href="https://conda-forge.org/docs/user/00_intro.html" target="_blank" rel="noopener noreferrer">Users</a>: In this
+<li class=""><a href="https://conda-forge.org/docs/user/00_intro.html" target="_blank" rel="noopener noreferrer" class="">Users</a>: In this
 case, some good starter tasks are mainly checking the actual
 contents of conda-forge users documentations, and ideas to better
 express its contents.</li>
-<li><a href="https://conda-forge.org/docs/maintainer/00_intro.html" target="_blank" rel="noopener noreferrer">Maintainers</a>:
+<li class=""><a href="https://conda-forge.org/docs/maintainer/00_intro.html" target="_blank" rel="noopener noreferrer" class="">Maintainers</a>:
 There are a bunch of missed topics in this area, some information
 have to be updated or rewritten for better understanding. Writing a
 complete guide containing the actual steps and standard model for a
 package recipe, building process (just a simple discussion) and how
 conda-forge bot recognize defective licenses, recipes and packages
 in general is highly welcomed. For further understanding of the
-general system check <a href="https://conda-forge.org/docs/maintainer/infrastructure.html" target="_blank" rel="noopener noreferrer">this
+general system check <a href="https://conda-forge.org/docs/maintainer/infrastructure.html" target="_blank" rel="noopener noreferrer" class="">this
 link</a>.
 <ul>
-<li>It can be funny to say, but lots of helpful ideas and bug
+<li class="">It can be funny to say, but lots of helpful ideas and bug
 solutions appear on our gitter channel, so if you have time to
 write guides about them... it's also an incredible task.</li>
 </ul>
 </li>
-<li><a href="https://conda-forge.org/docs/orga/00_intro.html" target="_blank" rel="noopener noreferrer">And organization</a>
+<li class=""><a href="https://conda-forge.org/docs/orga/00_intro.html" target="_blank" rel="noopener noreferrer" class="">And organization</a>
 Our environment is changing everyday, because of that a lot of
 information is lost in this process or even worse, not documented at
 all! which leads to some difficulties inserting new members to
 develop and further enhance the current process.
 <ul>
-<li>The related work on this matter is highly welcomed and for a
+<li class="">The related work on this matter is highly welcomed and for a
 better grasp of the situation you can start with this
-<a href="https://conda-forge.org/docs/orga/guidelines.html" target="_blank" rel="noopener noreferrer">guideline</a>
+<a href="https://conda-forge.org/docs/orga/guidelines.html" target="_blank" rel="noopener noreferrer" class="">guideline</a>
 and read some of our posts in our
-<a href="https://conda-forge.org/blog/blog/" target="_blank" rel="noopener noreferrer">blog</a></li>
-<li>Revitalizing ideas/projects for the conda-forge blog are
+<a href="https://conda-forge.org/blog/blog/" target="_blank" rel="noopener noreferrer" class="">blog</a></li>
+<li class="">Revitalizing ideas/projects for the conda-forge blog are
 definitely welcomed;</li>
-<li>Currently we have some interesting projects going on inside our
+<li class="">Currently we have some interesting projects going on inside our
 ecosystem, which in return will need good documentation... Some
-of the projects conda-forge is affiliated include the <a href="https://github.com/regro/cf-scripts" target="_blank" rel="noopener noreferrer">auto-tick
+of the projects conda-forge is affiliated include the <a href="https://github.com/regro/cf-scripts" target="_blank" rel="noopener noreferrer" class="">auto-tick
 bot</a>,
-<a href="https://github.com/symbol-management/symbol-exporter" target="_blank" rel="noopener noreferrer">symbol-exporter</a>
+<a href="https://github.com/symbol-management/symbol-exporter" target="_blank" rel="noopener noreferrer" class="">symbol-exporter</a>
 and a new service we are eager to start developing is the
-<a href="https://github.com/regro/cf-scripts/issues/1367" target="_blank" rel="noopener noreferrer">distributed-bot</a>.
+<a href="https://github.com/regro/cf-scripts/issues/1367" target="_blank" rel="noopener noreferrer" class="">distributed-bot</a>.
 All of them have a great coverage of subjects and lots of people
 to help and give advice about the service structure and
 functionalities.</li>
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="improving-the-documentation">Improving the documentation<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#improving-the-documentation" class="hash-link" aria-label="Direct link to Improving the documentation" title="Direct link to Improving the documentation" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="improving-the-documentation">Improving the documentation<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#improving-the-documentation" class="hash-link" aria-label="Direct link to Improving the documentation" title="Direct link to Improving the documentation" translate="no">​</a></h2>
 <p>You can help improve the documentation as it is version-controlled in
 the conda-forge.github.io repository on GitHub. The source text is
-stored there in the <code>src/subdirectory</code> and is formatted using <a href="https://wiki.python.org/moin/reStructuredText" target="_blank" rel="noopener noreferrer">Python's
+stored there in the <code>src/subdirectory</code> and is formatted using <a href="https://wiki.python.org/moin/reStructuredText" target="_blank" rel="noopener noreferrer" class="">Python's
 reStructuredText system</a>.</p>
 <p>You can propose quick edits directly through the GitHub website, if you
 have an account there --- for instance, this
-<a href="https://github.com/conda-forge/conda-forge.github.io/edit/master/src/user/contributing.rst" target="_blank" rel="noopener noreferrer">link</a>
+<a href="https://github.com/conda-forge/conda-forge.github.io/edit/master/src/user/contributing.rst" target="_blank" rel="noopener noreferrer" class="">link</a>
 will take you directly to a web-based editor for this section page in
 our
-<a href="https://conda-forge.org/docs/user/contributing.html#improve-docs" target="_blank" rel="noopener noreferrer">docs</a>.
+<a href="https://conda-forge.org/docs/user/contributing.html#improve-docs" target="_blank" rel="noopener noreferrer" class="">docs</a>.
 In general, the file corresponding to each page in the GitHub browser
 has a little pencil icon in its top-right that lets you open it up for
 editing.</p>
 <p>The more manual process is as follows:</p>
 <ul>
-<li>Fork the conda-forge.github.io repository to your own GitHub user
+<li class="">Fork the conda-forge.github.io repository to your own GitHub user
 account.</li>
-<li>Clone that fork onto your computer.</li>
-<li>Check out a new branch deriving from master to do your work.</li>
-<li>Make and commit your changes.</li>
-<li>Submit a pull request to the main repository proposing your changes.</li>
+<li class="">Clone that fork onto your computer.</li>
+<li class="">Check out a new branch deriving from master to do your work.</li>
+<li class="">Make and commit your changes.</li>
+<li class="">Submit a pull request to the main repository proposing your changes.</li>
 </ul>
 <p>Happy editing!</p>]]></content:encoded>
             <category>outreachy</category>
@@ -1055,53 +1055,53 @@ account.</li>
             <description><![CDATA[As 2020 winds down, the Core team thought it'd be fun to review some of]]></description>
             <content:encoded><![CDATA[<p>As 2020 winds down, the Core team thought it'd be fun to review some of
 the big accomplishments our community has made this year.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="strong-growth">Strong Growth<a href="https://conda-forge.org/blog/2020/12/26/year-in-review/#strong-growth" class="hash-link" aria-label="Direct link to Strong Growth" title="Direct link to Strong Growth" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="strong-growth">Strong Growth<a href="https://conda-forge.org/blog/2020/12/26/year-in-review/#strong-growth" class="hash-link" aria-label="Direct link to Strong Growth" title="Direct link to Strong Growth" translate="no">​</a></h2>
 <p>The <code>conda-forge</code> community has grown immensely this year. Here are some
 numbers to help give you an idea of the scale of our growth.</p>
 <ul>
-<li>The community has added 3,751 new, unique <code>conda</code> packages this
+<li class="">The community has added 3,751 new, unique <code>conda</code> packages this
 year, along with a corresponding number of new feedstocks.</li>
-<li>For the majority of 2020, the <code>conda-forge</code> channel on
+<li class="">For the majority of 2020, the <code>conda-forge</code> channel on
 <code>anaconda.org</code> exceeded 100 million downloads per month.</li>
-<li>In July of 2020, the <code>conda-forge</code> channel passed 2 billion total,
+<li class="">In July of 2020, the <code>conda-forge</code> channel passed 2 billion total,
 all-time downloads.</li>
-<li>We've grown our core developer community, adding seven new members
+<li class="">We've grown our core developer community, adding seven new members
 to the <code>conda-forge</code> Core team and at least two members to the
 <code>staged-recipes</code> team.</li>
-<li>We now have over 2,500 recipe maintainers in the <code>conda-forge</code>
+<li class="">We now have over 2,500 recipe maintainers in the <code>conda-forge</code>
 GitHub organization.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="big-new-features">Big New Features<a href="https://conda-forge.org/blog/2020/12/26/year-in-review/#big-new-features" class="hash-link" aria-label="Direct link to Big New Features" title="Direct link to Big New Features" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="big-new-features">Big New Features<a href="https://conda-forge.org/blog/2020/12/26/year-in-review/#big-new-features" class="hash-link" aria-label="Direct link to Big New Features" title="Direct link to Big New Features" translate="no">​</a></h2>
 <p>We've also shipped a ton of big updates to our core infrastructure this
 year. These updates include</p>
 <ul>
-<li><code>PyPy</code> <strong>support</strong>: We added support for <code>PyPy</code> 3.6 and now supply
+<li class=""><code>PyPy</code> <strong>support</strong>: We added support for <code>PyPy</code> 3.6 and now supply
 one of the biggest stacks of <code>PyPy</code>-enabled packages in the <code>PyPy</code>
 ecosystem.</li>
-<li><strong>automerge</strong>: We now support the automatic merging of PRs on
+<li class=""><strong>automerge</strong>: We now support the automatic merging of PRs on
 feedstocks using the <code>automerge</code> label or through an opt-in setting
 in the <code>conda-forge.yml</code>.</li>
-<li><code>R</code> <strong>4.0 migration</strong>: This migration was the first one to use our
+<li class=""><code>R</code> <strong>4.0 migration</strong>: This migration was the first one to use our
 <code>automerge</code> infrastructure at scale. With it, we completed a
 complete rebuild/upgrade of the <code>R</code> ecosystem in about a week.</li>
-<li><code>Python</code> <strong>updates</strong>: We deprecated <code>Python</code> 2.7, completed the
+<li class=""><code>Python</code> <strong>updates</strong>: We deprecated <code>Python</code> 2.7, completed the
 <code>Python</code> 3.8 migration, and got about 75% of the way through the
 <code>Python</code> 3.9 migration.</li>
-<li><strong>compiler upgrades</strong>: We upgraded our compiler infrastructure to
+<li class=""><strong>compiler upgrades</strong>: We upgraded our compiler infrastructure to
 <code>GCC</code> 9 and <code>clang</code> 11.</li>
-<li><strong>CentOS 7 and CentOS 6 EOL</strong>: We shipped an option to enable our
+<li class=""><strong>CentOS 7 and CentOS 6 EOL</strong>: We shipped an option to enable our
 compilers to use the CentOS 7 <code>sysroot</code> in preparation for the
 CentOS 6 EOL. We hope to complete the move to CentOS 7 early next
 year.</li>
-<li><strong>miniforge</strong>: We built our own standalone, <code>miniconda</code>-like
+<li class=""><strong>miniforge</strong>: We built our own standalone, <code>miniconda</code>-like
 installers. These support a broad range of platforms, including
 <code>osx-arm64</code> and <code>linux-aarch64</code>.</li>
-<li><strong>standalone Windows stack</strong>: We fully decoupled our Windows recipes
+<li class=""><strong>standalone Windows stack</strong>: We fully decoupled our Windows recipes
 from the <code>defaults</code> channel by rebuilding the <code>msys2</code> recipes.</li>
-<li><strong>Apple silicon support</strong>: We added support for Apple silicon with
+<li class=""><strong>Apple silicon support</strong>: We added support for Apple silicon with
 our <code>osx-arm64</code> platform. This platform is our first one to use a
 fully cross-compiled infrastructure.</li>
-<li><strong>CUDA support</strong>: We added support for building CUDA packages on
+<li class=""><strong>CUDA support</strong>: We added support for building CUDA packages on
 windows and added CUDA 11.0 support.</li>
 </ul>
 <hr>
@@ -1146,7 +1146,7 @@ donation and <code>conda-forge</code> would not exist without it. Anaconda Inc
 employees also provide help with maintaining some of the most complex
 package recipes in conda-forge.</p>
 <p>Note that Anaconda Inc has also said that part of the revenue from the
-TOS change will be donated to OSS projects. (see this <a href="https://www.anaconda.com/blog/sustaining-our-stewardship-of-the-open-source-data-science-community" target="_blank" rel="noopener noreferrer">blog
+TOS change will be donated to OSS projects. (see this <a href="https://www.anaconda.com/blog/sustaining-our-stewardship-of-the-open-source-data-science-community" target="_blank" rel="noopener noreferrer" class="">blog
 post</a>).
 You should be aware that <code>conda-forge</code> is a part of NumFOCUS, and so it
 stands to benefit from the change in TOS, as do many other OSS projects.</p>
@@ -1167,7 +1167,7 @@ you'd like to help out!</p>]]></content:encoded>
 conda-forge. <code>osx-arm64</code> packages are built to run on upcoming macOS
 arm64 processors marketed as <code>Apple Silicon</code>. An installer for this
 platform can be found
-<a href="https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh" target="_blank" rel="noopener noreferrer">here</a>.</p>
+<a href="https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh" target="_blank" rel="noopener noreferrer" class="">here</a>.</p>
 <p>This will install a conda environment with python and conda in it.
 Installed conda will be able to install packages like <code>numpy, scipy</code>.
 Currently there are about 100 packages out of 10000 packages pre-built
@@ -1187,13 +1187,13 @@ environment on the new platform. With cross-compiling, when the
 compilers and a sysroot is set up on a different platform, an existing
 conda-build installation (on <code>osx-64</code> and <code>linux-64</code> in this case) will
 be able to start building packages right away.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="cross-compiling-builds-for-osx-arm64">Cross-compiling builds for <code>osx-arm64</code><a href="https://conda-forge.org/blog/2020/10/29/macos-arm64/#cross-compiling-builds-for-osx-arm64" class="hash-link" aria-label="Direct link to cross-compiling-builds-for-osx-arm64" title="Direct link to cross-compiling-builds-for-osx-arm64" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="cross-compiling-builds-for-osx-arm64">Cross-compiling builds for <code>osx-arm64</code><a href="https://conda-forge.org/blog/2020/10/29/macos-arm64/#cross-compiling-builds-for-osx-arm64" class="hash-link" aria-label="Direct link to cross-compiling-builds-for-osx-arm64" title="Direct link to cross-compiling-builds-for-osx-arm64" translate="no">​</a></h2>
 <p>In order to cross compile packages for <code>osx-arm64</code> we need compilers.
 So, we first built <code>clang=11.0.0.rc1</code> which has support for targetting
 <code>osx-arm64</code>. We also built <code>compiler-rt=11.0.0.rc1</code> as a universal build
 support both <code>osx-64</code> and <code>osx-arm64</code>.</p>
 <p>Linker, archiver, <code>otool</code>, <code>install_name_tool</code> was built using the
-<a href="https://github.com/tpoechtrager/cctools-port" target="_blank" rel="noopener noreferrer">cctools-port project</a> by
+<a href="https://github.com/tpoechtrager/cctools-port" target="_blank" rel="noopener noreferrer" class="">cctools-port project</a> by
 Thomas Pöchtrager.</p>
 <p>One issue we ran into was that the macOS 11.0 Big Sur Beta 7 required
 that all executables and shared libraries be ad-hoc signed which is
@@ -1206,7 +1206,7 @@ facilitate C++ builds. For the <code>osx-arm64</code> sysroot we used the
 to licensing issues, we cannot distribute this, but it can be downloaded
 from the Apple developer website even on Linux.</p>
 <p>With clang we have a C/C++ compiler, but lack a Fortran compiler. We
-used the <a href="https://github.com/iains/gcc-darwin-arm64" target="_blank" rel="noopener noreferrer">GCC fork for
+used the <a href="https://github.com/iains/gcc-darwin-arm64" target="_blank" rel="noopener noreferrer" class="">GCC fork for
 darwin-arm64</a>. First, a cross
 compiler (<code>build == host != target</code>) was built. Using that compiler, we
 built a <code>cross-native</code> compiler (<code>build != host == target</code>) which gave
@@ -1225,7 +1225,7 @@ building were also disabled by guarding commands like <code>make check</code>,
 <code>CONDA_BUILD_CROSS_COMPILATION</code>.</p>
 <p>Cross-compiling python extensions is quite tricky as <code>distutils</code> is not
 really setup to do this. Thanks to the project
-<a href="https://github.com/benfogle/crossenv" target="_blank" rel="noopener noreferrer">crossenv</a> this is unofficially
+<a href="https://github.com/benfogle/crossenv" target="_blank" rel="noopener noreferrer" class="">crossenv</a> this is unofficially
 supported with a few quirks. With <code>crossenv</code>, we can run a python on the
 build machine (<code>osx-64</code> or <code>linux-64</code> in this case) that acts like it is
 on <code>osx-arm64</code>. <code>crossenv</code> monkey-patches a few functions like
@@ -1244,13 +1244,13 @@ created using <code>pyinstaller</code>. Since <code>pyinstaller</code> does not 
 cross-compile, we decided to use <code>micromamba</code> as the bootstrapper and
 added features to <code>micromamba</code> so that it can function as the
 bootstrapper.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-to-add-a-osx-arm64-build-to-a-feedstock">How to add a <code>osx-arm64</code> build to a feedstock<a href="https://conda-forge.org/blog/2020/10/29/macos-arm64/#how-to-add-a-osx-arm64-build-to-a-feedstock" class="hash-link" aria-label="Direct link to how-to-add-a-osx-arm64-build-to-a-feedstock" title="Direct link to how-to-add-a-osx-arm64-build-to-a-feedstock" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-to-add-a-osx-arm64-build-to-a-feedstock">How to add a <code>osx-arm64</code> build to a feedstock<a href="https://conda-forge.org/blog/2020/10/29/macos-arm64/#how-to-add-a-osx-arm64-build-to-a-feedstock" class="hash-link" aria-label="Direct link to how-to-add-a-osx-arm64-build-to-a-feedstock" title="Direct link to how-to-add-a-osx-arm64-build-to-a-feedstock" translate="no">​</a></h2>
 <p>All the below changes will be done by a bot and the packages the bot
 will send PRs to is determined by the list of packages at
-<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migration_support/osx_arm64.txt" target="_blank" rel="noopener noreferrer">conda-forge-pinning</a>
+<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migration_support/osx_arm64.txt" target="_blank" rel="noopener noreferrer" class="">conda-forge-pinning</a>
 and their dependences. If you would like to add support, please send a
 PR adding the feedstock name to the above list. After that PR is merged,
-you can monitor the status at <a href="https://conda-forge.org/status/#armosxaddition" target="_blank" rel="noopener noreferrer">conda-forge
+you can monitor the status at <a href="https://conda-forge.org/status/#armosxaddition" target="_blank" rel="noopener noreferrer" class="">conda-forge
 status-page</a> and if a
 particular PR is stalled you can send a PR to the feedstock to fix it.</p>
 <p>Following instructions are for when you want to add support manually.</p>
@@ -1271,7 +1271,7 @@ if they are used in <code>host:</code> as well,</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">cmake </span><span class="token variable" style="color:#36acaa">${CMAKE_ARGS}</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">..</span><br></span></code></pre></div></div>
 <p>For <code>meson</code> packages, add the following to <code>recipe/build.sh</code>,</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">meson </span><span class="token variable" style="color:#36acaa">${MESON_ARGS}</span><span class="token plain"> builddir/</span><br></span></code></pre></div></div>
-<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Conda automatically creates a <a href="https://mesonbuild.com/Cross-compilation.html" target="_blank" rel="noopener noreferrer">cross build definition
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Conda automatically creates a <a href="https://mesonbuild.com/Cross-compilation.html" target="_blank" rel="noopener noreferrer" class="">cross build definition
 file</a> when
 cross-compiling, and adds the necessary argument to <code>${MESON_ARGS}</code> to
 point <code>meson</code> to that file. <code>${MESON_ARGS}</code> is only defined when
@@ -1284,37 +1284,37 @@ run when cross-compiling, do the following,</p>
 <p>After these changes, another rerendering might be required.</p>
 <p>Some useful jinja variables,</p>
 <ol>
-<li><code>build_platform</code> - conda subdir for <code>BUILD_PREFIX</code>. eg:
+<li class=""><code>build_platform</code> - conda subdir for <code>BUILD_PREFIX</code>. eg:
 <code>linux-64</code></li>
-<li><code>target_platform</code> - conda subdir for <code>PREFIX</code>. eg: <code>osx-arm64</code></li>
+<li class=""><code>target_platform</code> - conda subdir for <code>PREFIX</code>. eg: <code>osx-arm64</code></li>
 </ol>
 <p>Some useful environment variables,</p>
 <ol>
-<li><code>build_platform</code></li>
-<li><code>target_platform</code></li>
-<li><code>CONDA_BUILD_CROSS_COMPILATION</code> - 1 if cross compiling</li>
-<li><code>CMAKE_ARGS</code> - arguments to pass to cmake</li>
-<li><code>CC_FOR_BUILD</code> - C compiler for build platform</li>
-<li><code>CXX_FOR_BUILD</code> - C++ compiler for build platform</li>
-<li><code>HOST</code> - a triplet for host passed to autoconf. eg:
+<li class=""><code>build_platform</code></li>
+<li class=""><code>target_platform</code></li>
+<li class=""><code>CONDA_BUILD_CROSS_COMPILATION</code> - 1 if cross compiling</li>
+<li class=""><code>CMAKE_ARGS</code> - arguments to pass to cmake</li>
+<li class=""><code>CC_FOR_BUILD</code> - C compiler for build platform</li>
+<li class=""><code>CXX_FOR_BUILD</code> - C++ compiler for build platform</li>
+<li class=""><code>HOST</code> - a triplet for host passed to autoconf. eg:
 <code>arm64-apple-darwin20.0.0</code></li>
-<li><code>BUILD</code> - a triplet for build passed to autoconf. eg:
+<li class=""><code>BUILD</code> - a triplet for build passed to autoconf. eg:
 <code>x86_64-conda-linux-gnu</code></li>
 </ol>
 <p>Some useful configure options in <code>conda-forge.yml</code></p>
 <ol>
-<li>
+<li class="">
 <p><code>build_platform</code> - a dictionary mapping <code>build</code> subdir to <code>host</code> subdir. eg:</p>
 <div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">build_platform</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">osx_arm64</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> osx_64</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">linux_ppc64le</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> linux_64</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">linux_aarch64</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> linux_64</span><br></span></code></pre></div></div>
 </li>
-<li>
+<li class="">
 <p><code>test_on_native_only</code> - a boolean to turn off testing on cross
 compiling. If the tests don't require emulation (for eg: check
 that a file exists), then <code>test_on_native_only: false</code> will run
 the tests even when cross compiling.</p>
 </li>
 </ol>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="building-locally">Building locally<a href="https://conda-forge.org/blog/2020/10/29/macos-arm64/#building-locally" class="hash-link" aria-label="Direct link to Building locally" title="Direct link to Building locally" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="building-locally">Building locally<a href="https://conda-forge.org/blog/2020/10/29/macos-arm64/#building-locally" class="hash-link" aria-label="Direct link to Building locally" title="Direct link to Building locally" translate="no">​</a></h2>
 <p>For building locally add the following in
 <code>$HOME/conda_build_config.yaml</code>.</p>
 <div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">SDKROOT</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> /path/to/MacOSX11.0.sdk</span><br></span></code></pre></div></div>
@@ -1323,7 +1323,7 @@ in the root of the feedstock For eg: <code>.ci_support/osx_arm64_.yaml</code>. T
 run,</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">conda build recipe </span><span class="token parameter variable" style="color:#36acaa">-m</span><span class="token plain"> .ci_support/osx_arm64_.yaml </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge/label/rust_dev</span><br></span></code></pre></div></div>
 <p>This should start a new build for <code>osx-arm64</code>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="testing-packages">Testing packages<a href="https://conda-forge.org/blog/2020/10/29/macos-arm64/#testing-packages" class="hash-link" aria-label="Direct link to Testing packages" title="Direct link to Testing packages" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testing-packages">Testing packages<a href="https://conda-forge.org/blog/2020/10/29/macos-arm64/#testing-packages" class="hash-link" aria-label="Direct link to Testing packages" title="Direct link to Testing packages" translate="no">​</a></h2>
 <p>In order to test packages intended to run on future Apple Silicon
 hardware, Apple provides a machine called Developer Transition Kit
 (DTK). Jonathan Helmus and Eli Rykoff has helped with testing these
@@ -1355,12 +1355,12 @@ be too inaccurate and cause headaches as upstream libraries evolve and
 change. A more detailed approach is needed. In this post I outline
 current and potential work on a path towards a more complete inspection
 of requirements based on APIs and dynamic pinning of libraries.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-constitutes-a-good-version-number">What Constitutes a Good Version Number<a href="https://conda-forge.org/blog/2020/10/02/versions/#what-constitutes-a-good-version-number" class="hash-link" aria-label="Direct link to What Constitutes a Good Version Number" title="Direct link to What Constitutes a Good Version Number" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-constitutes-a-good-version-number">What Constitutes a Good Version Number<a href="https://conda-forge.org/blog/2020/10/02/versions/#what-constitutes-a-good-version-number" class="hash-link" aria-label="Direct link to What Constitutes a Good Version Number" title="Direct link to What Constitutes a Good Version Number" translate="no">​</a></h2>
 <p>Version numbers should constitute a set that has the following
 properties</p>
 <ol>
-<li>The set must be unbounded</li>
-<li>The set must be orderable (maybe)</li>
+<li class="">The set must be unbounded</li>
+<li class="">The set must be orderable (maybe)</li>
 </ol>
 <p>Of course sets that meet these requirements might not convey a lot of
 information about the software they represent other than if two things
@@ -1369,11 +1369,11 @@ be orderable may not be needed, but is generally useful when considering
 the idea of an "upgrade" since it provides a clear delineation between
 older and newer packages. In many cases, the structure of the version
 number provides additional information. For some projects the version
-number includes the date of the release, often using <a href="https://calver.org/" target="_blank" rel="noopener noreferrer">cal
-ver</a>. Many projects use <a href="https://semver.org/" target="_blank" rel="noopener noreferrer">semantic
+number includes the date of the release, often using <a href="https://calver.org/" target="_blank" rel="noopener noreferrer" class="">cal
+ver</a>. Many projects use <a href="https://semver.org/" target="_blank" rel="noopener noreferrer" class="">semantic
 versioning</a>, which attempts to encode information
 about the underlying source code's API in the version number.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="version-numbers-and-api-pinning">Version Numbers and API Pinning<a href="https://conda-forge.org/blog/2020/10/02/versions/#version-numbers-and-api-pinning" class="hash-link" aria-label="Direct link to Version Numbers and API Pinning" title="Direct link to Version Numbers and API Pinning" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="version-numbers-and-api-pinning">Version Numbers and API Pinning<a href="https://conda-forge.org/blog/2020/10/02/versions/#version-numbers-and-api-pinning" class="hash-link" aria-label="Direct link to Version Numbers and API Pinning" title="Direct link to Version Numbers and API Pinning" translate="no">​</a></h2>
 <p>One of the most important places where version numbers are specified is
 during the pinning of APIs. Source code often requires specific APIs
 from the libraries it uses. This requires a pin specifying which
@@ -1391,14 +1391,14 @@ be false as new versions of the pinned library restore the missing API.
 These issues are particularly problematic for dependency systems that
 tie the pins to a particular version of the source code, requiring a new
 version to be created to update the pins. Conda-Forge is able to avoid
-some of these issues via <a href="https://github.com/conda-forge/conda-forge-repodata-patches-feedstock" target="_blank" rel="noopener noreferrer">repodata
+some of these issues via <a href="https://github.com/conda-forge/conda-forge-repodata-patches-feedstock" target="_blank" rel="noopener noreferrer" class="">repodata
 patching</a>,
 dynamically updating a package's stated requirements. Overall this
 process is fraught, as each package depends on different portions of a
 library's API, a version bump that breaks one package may leave others
 unscathed.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="a-potential-path-forward">A Potential Path Forward<a href="https://conda-forge.org/blog/2020/10/02/versions/#a-potential-path-forward" class="hash-link" aria-label="Direct link to A Potential Path Forward" title="Direct link to A Potential Path Forward" translate="no">​</a></h2>
-<p>All of the above issues are caused by the confusion of <a href="https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation" target="_blank" rel="noopener noreferrer">the map for the
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-potential-path-forward">A Potential Path Forward<a href="https://conda-forge.org/blog/2020/10/02/versions/#a-potential-path-forward" class="hash-link" aria-label="Direct link to A Potential Path Forward" title="Direct link to A Potential Path Forward" translate="no">​</a></h2>
+<p>All of the above issues are caused by the confusion of <a href="https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation" target="_blank" rel="noopener noreferrer" class="">the map for the
 territory</a>.
 The map, in this case the version number of a library, can not
 accurately represent the territory, the API itself. To fix this issue we
@@ -1412,25 +1412,25 @@ difficulty of implementation. Note that in the steps below, I'm using
 python packaging as an example, but I imagine that these steps are
 general enough to apply to other languages and ecosystems.</p>
 <ol>
-<li>Determine which libraries are requirements of the code, this is
+<li class="">Determine which libraries are requirements of the code, this is
 provided by tools like
-<a href="https://github.com/ericdill/depfinder" target="_blank" rel="noopener noreferrer">depfinder</a> and are starting
+<a href="https://github.com/ericdill/depfinder" target="_blank" rel="noopener noreferrer" class="">depfinder</a> and are starting
 to be integrated into the Conda-Forge bot systems (although they are
 still highly experimental and being worked on).</li>
-<li>Determine if the a version of the library provides the needed
+<li class="">Determine if the a version of the library provides the needed
 modules. This could be accomplished by using depfinder to find the
 imports and use the mapping provided by
-<a href="https://github.com/regro/libcfgraph/tree/master/import_maps" target="_blank" rel="noopener noreferrer">libcfgraph</a>
+<a href="https://github.com/regro/libcfgraph/tree/master/import_maps" target="_blank" rel="noopener noreferrer" class="">libcfgraph</a>
 between the import names and the versions of packages that ship
 those imports.</li>
-<li>Determine if an imported module provides the symbols being imported.
+<li class="">Determine if an imported module provides the symbols being imported.
 This would require a listing of all the symbols in a given python
 module, including top level scoped variables, function names, class
 names, methods, etc.</li>
-<li>For callables determine if the used call signature matches the
+<li class="">For callables determine if the used call signature matches the
 method or function definition.</li>
 </ol>
-<p>The <a href="https://github.com/ericdill/depfinder" target="_blank" rel="noopener noreferrer">depfinder</a> project has made
+<p>The <a href="https://github.com/ericdill/depfinder" target="_blank" rel="noopener noreferrer" class="">depfinder</a> project has made
 significant advances along this path, providing an easy to use tool to
 extract accurate import and package requirement data from source code.
 Depfinder even has cases to handle imports that are within code blocks
@@ -1461,11 +1461,11 @@ lines force the use of older or newer versions of dependencies. This
 could enable large scale migrations of source code with surgical
 precision, enabling developers to extract and re-write the few lines of
 code preventing the use of a new version of a library.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="caveats">Caveats<a href="https://conda-forge.org/blog/2020/10/02/versions/#caveats" class="hash-link" aria-label="Direct link to Caveats" title="Direct link to Caveats" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="caveats">Caveats<a href="https://conda-forge.org/blog/2020/10/02/versions/#caveats" class="hash-link" aria-label="Direct link to Caveats" title="Direct link to Caveats" translate="no">​</a></h2>
 <p>There are some important caveats to this approach that need to be kept
 in mind.</p>
 <ol>
-<li>All of this work is aimed at understanding the API of a given
+<li class="">All of this work is aimed at understanding the API of a given
 library, this approach can not provide insight into the code inside
 of the API, or if changes there impact downstream consumers. For
 instance, version updates that fix bugs and security flaws in
@@ -1475,14 +1475,14 @@ different. Of course there is a strong reason to upgrade in this
 case, since buggy or vulnerable libraries could be a huge headache
 and liability for downstream code and should be removed as quickly
 as possible.</li>
-<li>Some features may depend on broader adoption by the community. For
+<li class="">Some features may depend on broader adoption by the community. For
 instance, this approach would benefit greatly from python type
 hints, since the API could be constrained down to the expected
 types. Such type constraints would provide much more accuracy to the
 API version range as any changes could be detected. However, type
 hints may not be adopted in the python community at a high enough
 rate to truly be useful for this application.</li>
-<li>Source code is fundamentally flexible. There may be knots of code
+<li class="">Source code is fundamentally flexible. There may be knots of code
 that even this approach could not cut through, especially as
 multiple languages and runtime module loading come into the picture.
 My personal hope would be that the code recognizes when these
@@ -1492,7 +1492,7 @@ decreased accuracy of the results. Fundamentally the tooling can
 only provide very educated guesses and context to users, who then
 need to go figure out what is actually going on inside the code.</li>
 </ol>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="https://conda-forge.org/blog/2020/10/02/versions/#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="conclusion">Conclusion<a href="https://conda-forge.org/blog/2020/10/02/versions/#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion" translate="no">​</a></h2>
 <p>Version number based pins are imprecise representations of API
 compatibility. More accurate representations based on source code
 inspection would make the Conda-Forge ecosystem more robust and flexible
@@ -1535,7 +1535,7 @@ many PRs being merged in 30 minutes or less from when they were issued.
 These enhancements to the autotick bot and <code>conda-forge</code> infrastructure
 can be used to enhance future migrations (e.g., Python 3.9) and reduce
 maintenance burdens for feedstocks.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="automerging-conda-forge-prs">Automerging conda-forge PRs<a href="https://conda-forge.org/blog/2020/07/11/r-4/#automerging-conda-forge-prs" class="hash-link" aria-label="Direct link to Automerging conda-forge PRs" title="Direct link to Automerging conda-forge PRs" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="automerging-conda-forge-prs">Automerging conda-forge PRs<a href="https://conda-forge.org/blog/2020/07/11/r-4/#automerging-conda-forge-prs" class="hash-link" aria-label="Direct link to Automerging conda-forge PRs" title="Direct link to Automerging conda-forge PRs" translate="no">​</a></h2>
 <p>In a typical migration on <code>conda-forge</code>, we issue a PR to a feedstock
 and then ask the feedstock maintainers to make sure it passes and merge
 it. In the case of the R 4.0 migration, the maintainers of R packages on
@@ -1549,7 +1549,7 @@ linter, the continuous integration services, and has the special
 <code>[bot automerge]</code> slug in the PR title. This feature removed the
 bottleneck of waiting for maintainers to merge PRs and reduced the
 maintenance burden on the R maintenance team.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="checking-solvability-with-mamba">Checking Solvability with mamba<a href="https://conda-forge.org/blog/2020/07/11/r-4/#checking-solvability-with-mamba" class="hash-link" aria-label="Direct link to Checking Solvability with mamba" title="Direct link to Checking Solvability with mamba" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="checking-solvability-with-mamba">Checking Solvability with mamba<a href="https://conda-forge.org/blog/2020/07/11/r-4/#checking-solvability-with-mamba" class="hash-link" aria-label="Direct link to Checking Solvability with mamba" title="Direct link to Checking Solvability with mamba" translate="no">​</a></h2>
 <p>While being able to automatically merge PRs removed much of the work of
 performing the R 4.0 migration, it relied on the PR building correctly
 the first time it was issued. Due to the CDN delays and the build times
@@ -1570,7 +1570,7 @@ for every variant produced by the feedstock to be migrated. With this
 check in place, the autotick bot was able to issue migration PRs that
 passed on the first try and were thus automatically merged, many within
 30 minutes or less.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="improving-the-autotick-bots-efficiency">Improving the Autotick Bot's Efficiency<a href="https://conda-forge.org/blog/2020/07/11/r-4/#improving-the-autotick-bots-efficiency" class="hash-link" aria-label="Direct link to Improving the Autotick Bot's Efficiency" title="Direct link to Improving the Autotick Bot's Efficiency" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="improving-the-autotick-bots-efficiency">Improving the Autotick Bot's Efficiency<a href="https://conda-forge.org/blog/2020/07/11/r-4/#improving-the-autotick-bots-efficiency" class="hash-link" aria-label="Direct link to Improving the Autotick Bot's Efficiency" title="Direct link to Improving the Autotick Bot's Efficiency" translate="no">​</a></h2>
 <p>Finally, we made several upgrades to the autotick bot infrastructure to
 increase the uptime of the bot and its efficiency. First, we moved from
 an hourly cron job to a set of chained CI jobs. This change eliminated

@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr" class="blog-wrapper blog-post-page plugin-blog plugin-id-default" data-has-hydrated="false">
 <head>
 <meta charset="UTF-8">
-<meta name="generator" content="Docusaurus v3.9.1">
+<meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Contributing Packages To conda-forge Using Grayskull | conda-forge | community-driven packaging for conda</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://conda-forge.org/blog/2021/06/16/graykull-step-by-step/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Contributing Packages To conda-forge Using Grayskull | conda-forge | community-driven packaging for conda"><meta data-rh="true" name="description" content="When contributing packages to conda-forge, Grayskull can make your life"><meta data-rh="true" property="og:description" content="When contributing packages to conda-forge, Grayskull can make your life"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2021-06-16T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/ForgottenProgramme"><meta data-rh="true" property="article:tag" content="grayskull,outreachy"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://conda-forge.org/blog/2021/06/16/graykull-step-by-step/"><link data-rh="true" rel="alternate" href="https://conda-forge.org/blog/2021/06/16/graykull-step-by-step/" hreflang="en"><link data-rh="true" rel="alternate" href="https://conda-forge.org/blog/2021/06/16/graykull-step-by-step/" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://KB43FQOB7U-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://conda-forge.org/blog/2021/06/16/graykull-step-by-step","mainEntityOfPage":"https://conda-forge.org/blog/2021/06/16/graykull-step-by-step","url":"https://conda-forge.org/blog/2021/06/16/graykull-step-by-step","headline":"Contributing Packages To conda-forge Using Grayskull","name":"Contributing Packages To conda-forge Using Grayskull","description":"When contributing packages to conda-forge, Grayskull can make your life","datePublished":"2021-06-16T00:00:00.000Z","author":{"@type":"Person","name":"Mahe","description":"Outreachy intern","url":"https://github.com/ForgottenProgramme","image":"https://github.com/ForgottenProgramme.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://conda-forge.org/blog","name":"Blog"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="conda-forge | community-driven packaging for conda RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="conda-forge | community-driven packaging for conda Atom Feed">
 
@@ -16,9 +16,9 @@
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-<script src="/js/count.js" defer="defer" data-goatcounter="https://conda-forge.goatcounter.com/count"></script><link rel="stylesheet" href="/assets/css/styles.94fad51b.css">
-<script src="/assets/js/runtime~main.d57bdc1e.js" defer="defer"></script>
-<script src="/assets/js/main.de57cebf.js" defer="defer"></script>
+<script src="/js/count.js" defer="defer" data-goatcounter="https://conda-forge.goatcounter.com/count"></script><link rel="stylesheet" href="/assets/css/styles.9fc82550.css">
+<script src="/assets/js/runtime~main.4615f944.js" defer="defer"></script>
+<script src="/assets/js/main.9aca7053.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -28,29 +28,29 @@
 much easier. Grayskull generates recipes for Python packages hosted on
 PyPI.</p>
 <p>As the
-<a href="https://github.com/conda-incubator/grayskull#introduction" target="_blank" rel="noopener noreferrer">introduction</a>
+<a href="https://github.com/conda-incubator/grayskull#introduction" target="_blank" rel="noopener noreferrer" class="">introduction</a>
 for Grayskull reads; &quot;The main goal of this project is to generate
 concise recipes for conda-forge.&quot; In this tutorial we learn how to
 contribute a Python package to the conda-forge channel using Grayskull
 to generate the recipe.</p>
 <p>Let us get started.</p>
 <ol>
-<li>
+<li class="">
 <p>Install <code>grayskull</code> using <code>conda</code> through the <code>conda-forge</code> channel:</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$ conda install -c conda-forge grayskull</span><br></span></code></pre></div></div>
 </li>
-<li>
-<p>Fork and clone the conda-forge <a href="https://github.com/conda-forge/staged-recipes" target="_blank" rel="noopener noreferrer">staged-recipes
+<li class="">
+<p>Fork and clone the conda-forge <a href="https://github.com/conda-forge/staged-recipes" target="_blank" rel="noopener noreferrer" class="">staged-recipes
 repository</a> from
 GitHub.</p>
 </li>
-<li>
+<li class="">
 <p>Checkout a new branch from the <code>master branch</code>.</p>
 </li>
-<li>
+<li class="">
 <p>Through CLI, cd inside the &#x27;staged-recipes/recipes&#x27; directory.</p>
 </li>
-<li>
+<li class="">
 <p>Call <code>grayskull</code> and pass the <code>pypi</code> repository, followed by the
 name of the package you want to contribute to conda-forge. For
 example: <code>grayskull pypi abc</code></p>
@@ -63,24 +63,24 @@ directory. This folder will contain the <code>meta.yaml</code> file and also
 the license file if the package includes a license in the PyPI
 distribution.</p>
 </li>
-<li>
+<li class="">
 <p>Go through the generated <code>meta.yaml</code> file. For simpler packages, the
 generated recipes are nearly perfect, but for some packages you
 might need to make certain tweaks.</p>
 </li>
-<li>
+<li class="">
 <p>Commit and push the changes. <code>git add recipe/abc/meta.yaml</code>
 <code>git commit -m &quot;add a commit message&quot;</code> <code>git push</code></p>
 </li>
-<li>
+<li class="">
 <p>Create a PR.</p>
 </li>
-<li>
+<li class="">
 <p>Once the CI is passing, post a comment saying:
 <code>This is ready for review</code> <code>@conda-forge-admin, please ping team</code></p>
 </li>
 </ol>
 <p>Once the PR gets merged, your package will be available on the
-conda-forge channel. Tada! It&#x27;s that easy.</p></div><footer class="docusaurus-mt-lg"><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/blog/tags/grayskull/">grayskull</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/blog/tags/outreachy/">outreachy</a></li></ul></div></div><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><a href="https://github.com/conda-forge/conda-forge.github.io/tree/refs/heads/main/blog/2021-06-16-graykull-step-by-step.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--prev" href="/blog/2021/09/24/travis-security/"><div class="pagination-nav__sublabel">Newer post</div><div class="pagination-nav__label">Travis CI Security Incident</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/blog/2021/02/02/outreachy/"><div class="pagination-nav__sublabel">Older post</div><div class="pagination-nav__label">Conda-forge Outreachy</div></a></nav></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/">Getting started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/user/">User docs</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/maintainer/">Maintainer docs</a></li><li class="footer__item"><a class="footer__link-item" href="/community/cfep/">CFEPs</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/diataxis/">Reorganized docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/community/">About conda-forge</a></li><li class="footer__item"><a class="footer__link-item" href="/community/governance/">Governance</a></li><li class="footer__item"><a class="footer__link-item" href="/community/minutes/">Meeting minutes</a></li><li class="footer__item"><a class="footer__link-item" href="/community/getting-in-touch/">Get in touch</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Stay up-to-date</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/news/archive/">News</a></li><li class="footer__item"><a class="footer__link-item" href="/blog/archive/">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/status/">Status</a></li><li class="footer__item"><a href="https://bsky.app/profile/conda-forge.org" target="_blank" rel="noopener noreferrer" class="footer__link-item">Bluesky<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Resources</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/status/">Status</a></li><li class="footer__item"><a class="footer__link-item" href="/style-guide/">Style guide</a></li><li class="footer__item"><a href="https://github.com/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://conda-forge.zulipchat.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Zulip<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 conda-forge · Built with Docusaurus</div></div></div></footer></div>
+conda-forge channel. Tada! It&#x27;s that easy.</p></div><footer class="docusaurus-mt-lg"><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/blog/tags/grayskull/">grayskull</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/blog/tags/outreachy/">outreachy</a></li></ul></div></div><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/conda-forge/conda-forge.github.io/tree/refs/heads/main/blog/2021-06-16-graykull-step-by-step.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--prev" href="/blog/2021/09/24/travis-security/"><div class="pagination-nav__sublabel">Newer post</div><div class="pagination-nav__label">Travis CI Security Incident</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/blog/2021/02/02/outreachy/"><div class="pagination-nav__sublabel">Older post</div><div class="pagination-nav__label">Conda-forge Outreachy</div></a></nav></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/">Getting started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/user/">User docs</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/maintainer/">Maintainer docs</a></li><li class="footer__item"><a class="footer__link-item" href="/community/cfep/">CFEPs</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/diataxis/">Reorganized docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/community/">About conda-forge</a></li><li class="footer__item"><a class="footer__link-item" href="/community/governance/">Governance</a></li><li class="footer__item"><a class="footer__link-item" href="/community/minutes/">Meeting minutes</a></li><li class="footer__item"><a class="footer__link-item" href="/community/getting-in-touch/">Get in touch</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Stay up-to-date</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/news/archive/">News</a></li><li class="footer__item"><a class="footer__link-item" href="/blog/archive/">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/status/">Status</a></li><li class="footer__item"><a href="https://bsky.app/profile/conda-forge.org" target="_blank" rel="noopener noreferrer" class="footer__link-item">Bluesky<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Resources</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/status/">Status</a></li><li class="footer__item"><a class="footer__link-item" href="/style-guide/">Style guide</a></li><li class="footer__item"><a href="https://github.com/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://conda-forge.zulipchat.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Zulip<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 conda-forge · Built with Docusaurus</div></div></div></footer></div>
 </body>
 </html>

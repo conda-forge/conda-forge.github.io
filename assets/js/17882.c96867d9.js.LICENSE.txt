@@ -1,0 +1,1 @@
+/* v8 ignore next no need to test internals of the throttle plugin -- @preserve */
