@@ -22,7 +22,7 @@ Miniforge.
 ## Trying conda-forge in an isolated environment
 
 1. Create a conda environment with very few dependencies. The following
-   command will only use packages from `conda-forge` to install Python 3.11. You
+   command will only use packages from `conda-forge` to install Python. You
    may adjust the version of Python to the one of your liking:
 
    ```bash
