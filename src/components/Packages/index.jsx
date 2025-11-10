@@ -49,6 +49,10 @@ function highlightSubstring(str, substr) {
   );
 }
 
+function feedstockName(repo) {
+  return repo === "cdt-builds" ? repo : `${repo}-feedstock`;
+}
+
 const Packages = () => {
   const [allPackages, setAllPackages] = useState({});
   const [latestPackages, setLatestPackages] = useState([]);
@@ -143,12 +147,12 @@ const Packages = () => {
       (allPackages[pkgName.toLowerCase()] || []).map((repo, index) => (
         <span key={`${pkgName}-${index}-${repo}`}>
           <a
-            href={`https://github.com/conda-forge/${repo}-feedstock`}
+            href={`https://github.com/conda-forge/${feedstockName(repo)}`}
             target="_blank"
             rel="noopener noreferrer"
-            title={`View ${repo}-feedstock on GitHub`}
+            title={`View ${feedstockName(repo)} on GitHub`}
           >
-            {repo}-feedstock
+            {feedstockName(repo)}
           </a>
           <br />
         </span>
