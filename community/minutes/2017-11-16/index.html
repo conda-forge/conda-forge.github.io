@@ -17,8 +17,8 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 <script src="/js/count.js" defer="defer" data-goatcounter="https://conda-forge.goatcounter.com/count"></script><link rel="stylesheet" href="/assets/css/styles.9fc82550.css">
-<script src="/assets/js/runtime~main.fc98d3c7.js" defer="defer"></script>
-<script src="/assets/js/main.5357148d.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.0d9282b9.js" defer="defer"></script>
+<script src="/assets/js/main.bf15d08d.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -67,30 +67,83 @@
 <ul>
 <li class="">toolchain: <a href="https://github.com/conda-forge/toolchain-feedstock/blob/master/recipe/activate.sh" target="_blank" rel="noopener noreferrer" class="">https://github.com/conda-forge/toolchain-feedstock/blob/master/recipe/activate.sh</a></li>
 <li class="">toolchain3: <a href="https://github.com/conda-forge/toolchain3-feedstock/blob/master/recipe/activate.sh" target="_blank" rel="noopener noreferrer" class="">https://github.com/conda-forge/toolchain3-feedstock/blob/master/recipe/activate.sh</a></li>
-<li class="">anaconda: <a href="https://github.com/AnacondaRecipes/aggregate/blob/master/ctng-compilers-activation-feedstock/recipe/conda_build_config.cos6.x86_64.yaml#L41-L54" target="_blank" rel="noopener noreferrer" class="">https://github.com/AnacondaRecipes/aggregate/blob/master/ctng-compilers-activation-feedstock/recipe/conda_build_config.cos6.x86_64.yaml#L41-L54</a>
-| Variable | toolchain only                          | anaconda only                                                                                                                                             |  |
-| -------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |  |
-| CFLAGS   | -m${ARCH}                               | march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe                                                            |  |
-| CPPFLAGS |                                         | -D_FORTIFY_SOURCE=2 -O2                                                                                                                                   |  |
-| CXXFLAGS | -DBOOST_MATH_DISABLE_FLOAT128 -m${ARCH} | -fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe |  |
-| LDFLAGS  | -Wl,-rpath,$PREFIX/lib                  | Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now                                                                                          |  |</li>
+<li class="">anaconda: <a href="https://github.com/AnacondaRecipes/aggregate/blob/master/ctng-compilers-activation-feedstock/recipe/conda_build_config.cos6.x86_64.yaml#L41-L54" target="_blank" rel="noopener noreferrer" class="">https://github.com/AnacondaRecipes/aggregate/blob/master/ctng-compilers-activation-feedstock/recipe/conda_build_config.cos6.x86_64.yaml#L41-L54</a></li>
 </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Variable</th><th>toolchain only</th><th>anaconda only</th></tr></thead><tbody><tr><td>CFLAGS</td><td>-m${ARCH}</td><td>march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe</td></tr><tr><td>CPPFLAGS</td><td></td><td>-D_FORTIFY_SOURCE=2 -O2</td></tr><tr><td>CXXFLAGS</td><td>-DBOOST_MATH_DISABLE_FLOAT128 -m${ARCH}</td><td>-fvisibility-inlines-hidden -std=c++17 -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -pipe</td></tr><tr><td>LDFLAGS</td><td>-Wl,-rpath,$PREFIX/lib</td><td>Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now</td></tr></tbody></table>
 </li>
 <li class="">
 <p>LLVM/clang</p>
 <ul>
 <li class="">toolchain: <a href="https://github.com/conda-forge/toolchain-feedstock/blob/master/recipe/activate.sh" target="_blank" rel="noopener noreferrer" class="">https://github.com/conda-forge/toolchain-feedstock/blob/master/recipe/activate.sh</a></li>
 <li class="">toolchain3: <a href="https://github.com/conda-forge/toolchain3-feedstock/blob/master/recipe/activate.sh" target="_blank" rel="noopener noreferrer" class="">https://github.com/conda-forge/toolchain3-feedstock/blob/master/recipe/activate.sh</a></li>
-<li class="">anaconda: <a href="https://github.com/AnacondaRecipes/aggregate/blob/master/clang/build.sh" target="_blank" rel="noopener noreferrer" class="">https://github.com/AnacondaRecipes/aggregate/blob/master/clang/build.sh</a>
-| Variable   | toolchain only                                                          | anaconda only                                                                                                                                                                |
-| ---------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CPPFLAGS   |                                                                         | -mmacosx-version-min=${MACOSX_VERSION_MIN}                                                                                                                                   |
-| CFLAGS     | -mmacosx-version-min=${MACOSX_VERSION_MIN} -m${ARCH}                    | -march=core2 -mtune=haswell -mssse3 -ftree-vectorize -fPIC -fPIE -fstack-protector-strong -O2 -pipe                                                                          |
-| CXXFLAGS   | -mmacosx-version-min=${MACOSX_VERSION_MIN} -m${ARCH}                    | -march=core2 -mtune=haswell -mssse3 -ftree-vectorize -fPIC -fPIE -fstack-protector-strong -O2 -pipe -stdlib=libc++ -fvisibility-inlines-hidden -std=c++14 -fmessage-length=0 |
-| LDFLAGS    | -mmacosx-version-min=${MACOSX_VERSION_MIN} -lc++ -Wl,-rpath,$PREFIX/lib | -pie                                                                                                                                                                         |
-| LDFLAGS_CC |                                                                         | -Wl,-pie -Wl,-headerpad_max_install_names                                                                                                                                    |
-|            |                                                                         |                                                                                                                                                                              |</li>
+<li class="">anaconda: <a href="https://github.com/AnacondaRecipes/aggregate/blob/master/clang/build.sh" target="_blank" rel="noopener noreferrer" class="">https://github.com/AnacondaRecipes/aggregate/blob/master/clang/build.sh</a></li>
 </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Variable</th><th>toolchain only</th><th>anaconda only</th></tr></thead><tbody><tr><td>CPPFLAGS</td><td></td><td>-mmacosx-version-min=${MACOSX_VERSION_MIN}</td></tr><tr><td>CFLAGS</td><td>-mmacosx-version-min=${MACOSX_VERSION_MIN} -m${ARCH}</td><td>-march=core2 -mtune=haswell -mssse3 -ftree-vectorize -fPIC -fPIE -fstack-protector-strong -O2 -pipe</td></tr><tr><td>CXXFLAGS</td><td>-mmacosx-version-min=${MACOSX_VERSION_MIN} -m${ARCH}</td><td>-march=core2 -mtune=haswell -mssse3 -ftree-vectorize -fPIC -fPIE -fstack-protector-strong -O2 -pipe -stdlib=libc++ -fvisibility-inlines-hidden -std=c++14 -fmessage-length=0</td></tr><tr><td>LDFLAGS</td><td>-mmacosx-version-min=${MACOSX_VERSION_MIN} -lc++ -Wl,-rpath,$PREFIX/lib</td><td>-pie</td></tr><tr><td>LDFLAGS_CC</td><td></td><td>-Wl,-pie -Wl,-headerpad_max_install_names</td></tr></tbody></table>
 </li>
 <li class="">
 <p>Fortran</p>
@@ -106,12 +159,29 @@
 </ul>
 </li>
 <li class="">
-<p>Windows: flags that affect some things (cmake)
-| Variable       | anaconda value                  |
-| -------------- | ------------------------------- |
-| CFLAGS         | %CFLAGS% -MD -GL                |
-| CXXFLAGS       | %CXXFLAGS% -MD -GL              |
-| LDFLAGS_SHARED | %LDFLAGS_SHARED% -LTCG ucrt.lib |</p>
+<p>Windows: flags that affect some things (cmake)</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Variable</th><th>anaconda value</th></tr></thead><tbody><tr><td>CFLAGS</td><td>%CFLAGS% -MD -GL</td></tr><tr><td>CXXFLAGS</td><td>%CXXFLAGS% -MD -GL</td></tr><tr><td>LDFLAGS_SHARED</td><td>%LDFLAGS_SHARED% -LTCG ucrt.lib</td></tr></tbody></table>
 </li>
 </ul>
 <p>Overall: everyone receptive to new compilers.  Mike to provide way of keeping host and build prefix separate, even when not cross compiling.  This would avoid need for things like &quot;always_include_files&quot; and would facilitate conda-forge keeping their llvmdev recipe as is (for cling usage).</p>
@@ -162,6 +232,6 @@
 <ul>
 <li class="">Currently, needs extra package on mac, but is included on Linux (not active in flags, though)</li>
 <li class="">What is desirable default behavior?</li>
-</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/conda-forge/conda-forge.github.io/tree/refs/heads/main/community/minutes/2017-11-16.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">Last updated<!-- --> on <b><time datetime="2025-11-12T10:03:53.000Z" itemprop="dateModified">Nov 12, 2025</time></b></span></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/community/minutes/2018-02-20/"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">2018-02-20</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/community/minutes/2017-08-11/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">2017-08-11</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#adopting-anaconda-compilers" class="table-of-contents__link toc-highlight">Adopting Anaconda compilers</a></li><li><a href="#compiler-flag-unification" class="table-of-contents__link toc-highlight">Compiler flag unification</a></li><li><a href="#conda-build-3-strategy-for-moving" class="table-of-contents__link toc-highlight">Conda-build 3: strategy for moving</a></li><li><a href="#fortran-support-on-windows" class="table-of-contents__link toc-highlight">Fortran support on Windows</a></li><li><a href="#openmp-behavior" class="table-of-contents__link toc-highlight">OpenMP behavior</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/">Getting started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/user/">User docs</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/maintainer/">Maintainer docs</a></li><li class="footer__item"><a class="footer__link-item" href="/community/cfep/">CFEPs</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/diataxis/">Reorganized docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/community/">About conda-forge</a></li><li class="footer__item"><a class="footer__link-item" href="/community/governance/">Governance</a></li><li class="footer__item"><a class="footer__link-item" href="/community/minutes/">Meeting minutes</a></li><li class="footer__item"><a class="footer__link-item" href="/community/getting-in-touch/">Get in touch</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Stay up-to-date</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/news/archive/">News</a></li><li class="footer__item"><a class="footer__link-item" href="/blog/archive/">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/status/">Status</a></li><li class="footer__item"><a href="https://bsky.app/profile/conda-forge.org" target="_blank" rel="noopener noreferrer" class="footer__link-item">Bluesky<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Resources</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/status/">Status</a></li><li class="footer__item"><a class="footer__link-item" href="/style-guide/">Style guide</a></li><li class="footer__item"><a href="https://github.com/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://conda-forge.zulipchat.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Zulip<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 conda-forge · Built with Docusaurus</div></div></div></footer></div>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/conda-forge/conda-forge.github.io/tree/refs/heads/main/community/minutes/2017-11-16.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">Last updated<!-- --> on <b><time datetime="2025-11-12T18:25:36.000Z" itemprop="dateModified">Nov 12, 2025</time></b></span></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/community/minutes/2018-02-20/"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">2018-02-20</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/community/minutes/2017-08-11/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">2017-08-11</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#adopting-anaconda-compilers" class="table-of-contents__link toc-highlight">Adopting Anaconda compilers</a></li><li><a href="#compiler-flag-unification" class="table-of-contents__link toc-highlight">Compiler flag unification</a></li><li><a href="#conda-build-3-strategy-for-moving" class="table-of-contents__link toc-highlight">Conda-build 3: strategy for moving</a></li><li><a href="#fortran-support-on-windows" class="table-of-contents__link toc-highlight">Fortran support on Windows</a></li><li><a href="#openmp-behavior" class="table-of-contents__link toc-highlight">OpenMP behavior</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/">Getting started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/user/">User docs</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/maintainer/">Maintainer docs</a></li><li class="footer__item"><a class="footer__link-item" href="/community/cfep/">CFEPs</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/diataxis/">Reorganized docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/community/">About conda-forge</a></li><li class="footer__item"><a class="footer__link-item" href="/community/governance/">Governance</a></li><li class="footer__item"><a class="footer__link-item" href="/community/minutes/">Meeting minutes</a></li><li class="footer__item"><a class="footer__link-item" href="/community/getting-in-touch/">Get in touch</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Stay up-to-date</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/news/archive/">News</a></li><li class="footer__item"><a class="footer__link-item" href="/blog/archive/">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/status/">Status</a></li><li class="footer__item"><a href="https://bsky.app/profile/conda-forge.org" target="_blank" rel="noopener noreferrer" class="footer__link-item">Bluesky<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Resources</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/status/">Status</a></li><li class="footer__item"><a class="footer__link-item" href="/style-guide/">Style guide</a></li><li class="footer__item"><a href="https://github.com/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://conda-forge.zulipchat.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Zulip<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 conda-forge · Built with Docusaurus</div></div></div></footer></div>
 </body>
 </html>
