@@ -12,7 +12,7 @@ The contribution process can be broken down into three steps:
 
 - Step 1. Staging process (add recipe and license).
 
-  With the help of [the staging process](#creating-recipes), add a package's recipe and license to the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and create a PR.
+  With the help of [the staging process](#creating-recipes), add a package's recipe and license to the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and create a pull request ( [PR](../glossary.md#pr) ).
 
 - Step 2. Post staging process.
 
@@ -88,7 +88,7 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
    detail, see [Build from tarballs, not repos](#tarballs-no-repos)).
 2. Fork and clone the [staged-recipes](https://github.com/conda-forge/staged-recipes)
    repository from GitHub.
-3. Checkout a new branch from the staged-recipes `main` branch.
+3. On your fork of staged-recipes, create a new branch from the `main` branch.
 4. Through CLI, cd inside the ‘staged-recipes/recipes' directory.
 5. Within your forked copy, create a new folder in the recipes folder for your package (i.e, `...staged-recipes/recipes/<name-of-package>`)
 6. Copy [meta.yaml](https://github.com/conda-forge/staged-recipes/blob/main/recipes/example/meta.yaml) from the example directory.
@@ -103,6 +103,7 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
 9. Be sure to fill in the `test` section. The simplest test will simply
    test that the module can be imported, as described in the example.
 10. Remove all irrelevant comments in the `meta.yaml` file.
+11. Double check the checklist (below) and then make a pull request from the new branch on your fork to the main branch of [staged-recipes](https://github.com/conda-forge/staged-recipes)
 
 :::tip
 
@@ -129,7 +130,7 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 
 ### Feedback and revision
 
-Once you finished your PR, all you have to do is wait for feedback from our review team.
+Once you finished your pull request PR, all you have to do is wait for feedback from our review team.
 
 The review team will assist you by pointing out improvements and answering questions. Once the package is ready, the reviewers will approve and merge your pull request.
 
