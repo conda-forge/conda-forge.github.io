@@ -341,6 +341,14 @@ Batch syntax is a bit different from Bash and friends on Unix, so we have collec
   There are also some minimal emulators online that might get you started with the basics, even if not all CMD features are present.
   For example, this [Windows 95 emulator](https://www.pcjs.org/software/pcx86/sys/windows/win95/4.00.950/) features a more or less okay MS-DOS prompt.
 
+<a id="building-packages-using-configure-scripts-written-in-shell-script"></a>
+
+### Building packages using configure scripts written in shell script
+
+Some packages do not provide build systems with first-hand support for Windows, in particular these using `configure` scripts using autotools, or hand-written in shell scripts.
+You can use the [autotools_clang_conda](https://github.com/conda-forge/autotools_clang_conda-feedstock?tab=readme-ov-file#about-autotools_clang_conda-feedstock) to provide a build environment with a set of MSYS2 packages and a Clang toolchain configured to build packages compatible with MSVC.
+The feedstock's description provides example instructions.
+
 <a id="special-dependencies-and-packages"></a>
 
 ## Special Dependencies and Packages
