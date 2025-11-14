@@ -373,6 +373,8 @@ If a static library is installed as well, it is usually prefixed with `lib` to d
 
 - `lib{name}.lib`, the static library
 
+Some packages use `{name}-static.lib` instead, though it is considered a historical artifact.
+
 <a id="special-dependencies-and-packages"></a>
 
 ## Special Dependencies and Packages
