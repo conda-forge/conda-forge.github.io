@@ -359,9 +359,9 @@ For the convenience of writing build scripts, both conda-build and rattler-build
 | Variable         | Value                      | Use                            |
 | ---------------- | -------------------------- | ------------------------------ |
 | `LIBRARY_PREFIX` | `%PREFIX%\Library`         | Prefix for installing packages |
-| `LIBRARY_BIN`    | `%PREFIX%\Library\bin`     | Executables and DLL libraries  |
+| `LIBRARY_BIN`    | `%PREFIX%\Library\bin`     | Executables and DLL libraries  (`.exe` and `.dll` files) |
 | `LIBRARY_INC`    | `%PREFIX%\Library\include` | Header files                   |
-| `LIBRARY_LIB`    | `%PREFIX%\Library\lib`     | Import and static libraries    |
+| `LIBRARY_LIB`    | `%PREFIX%\Library\lib`     | Import and static libraries    (`.lib` files) |
 | `SCRIPTS`        | `%PREFIX%\Scripts`         | Python scripts                 |
 
 Shared libraries on Windows generally follows the MSVC convention, and therefore are distributed as pairs of two files, usually without a `lib` prefix:
