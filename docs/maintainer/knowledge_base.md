@@ -349,6 +349,30 @@ Some packages do not provide build systems with first-hand support for Windows, 
 You can use the [autotools_clang_conda](https://github.com/conda-forge/autotools_clang_conda-feedstock?tab=readme-ov-file#about-autotools_clang_conda-feedstock) to provide a build environment with a set of MSYS2 packages and a Clang toolchain configured to build packages compatible with MSVC.
 The feedstock's description provides example instructions.
 
+<a id="install-paths-and-naming-conventions"></a>
+
+### Install paths and naming conventions
+
+Unix-style packages in conda-forge are installed into a special `Library` directory tree under the build prefix.
+For the convenience of writing build scripts, both conda-build and rattler-build define the following variables:
+
+| Variable         | Value                      | Use                            |
+| ---------------- | -------------------------- | ------------------------------ |
+| `LIBRARY_PREFIX` | `%PREFIX%\Library`         | Prefix for installing packages |
+| `LIBRARY_BIN`    | `%PREFIX%\Library\bin`     | Executables and DLL libraries  |
+| `LIBRARY_INC`    | `%PREFIX%\Library\include` | Header files                   |
+| `LIBRARY_LIB`    | `%PREFIX%\Library\lib`     | Import and static libraries    |
+| `SCRIPTS`        | `%PREFIX%\Scripts`         | Python scripts                 |
+
+Shared libraries on Windows generally follows the MSVC convention, and therefore are distributed as pairs of two files, usually without a `lib` prefix:
+
+- `{name}.dll`, the actual dynamic library that is used by compiled executables
+- `{name}.lib`, the so-called import library that is used to link against the dynamic library when building packages
+
+If a static library is installed as well, it is usually prefixed with `lib` to distinguish it from the import library:
+
+- `lib{name}.lib`, the static library
+
 <a id="special-dependencies-and-packages"></a>
 
 ## Special Dependencies and Packages
