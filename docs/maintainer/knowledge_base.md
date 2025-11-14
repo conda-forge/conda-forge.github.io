@@ -356,13 +356,13 @@ The feedstock's description provides example instructions.
 Unix-style packages in conda-forge are installed into a special `Library` directory tree under the build prefix.
 For the convenience of writing build scripts, both conda-build and rattler-build define the following variables:
 
-| Variable         | Value                      | Use                            |
-| ---------------- | -------------------------- | ------------------------------ |
-| `LIBRARY_PREFIX` | `%PREFIX%\Library`         | Prefix for installing packages |
-| `LIBRARY_BIN`    | `%PREFIX%\Library\bin`     | Executables and DLL libraries  (`.exe` and `.dll` files) |
-| `LIBRARY_INC`    | `%PREFIX%\Library\include` | Header files                   |
-| `LIBRARY_LIB`    | `%PREFIX%\Library\lib`     | Import and static libraries    (`.lib` files) |
-| `SCRIPTS`        | `%PREFIX%\Scripts`         | Python scripts                 |
+| Variable         | Value                      | Use                                                     |
+| ---------------- | -------------------------- | ------------------------------------------------------- |
+| `LIBRARY_PREFIX` | `%PREFIX%\Library`         | Prefix for installing packages                          |
+| `LIBRARY_BIN`    | `%PREFIX%\Library\bin`     | Executables and DLL libraries (`.exe` and `.dll` files) |
+| `LIBRARY_INC`    | `%PREFIX%\Library\include` | Header files                                            |
+| `LIBRARY_LIB`    | `%PREFIX%\Library\lib`     | Import and static libraries (`.lib` files)              |
+| `SCRIPTS`        | `%PREFIX%\Scripts`         | Python scripts                                          |
 
 Shared libraries on Windows generally follows the MSVC convention, and therefore are distributed as pairs of two files, usually without a `lib` prefix:
 
