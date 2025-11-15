@@ -364,16 +364,29 @@ For the convenience of writing build scripts, both conda-build and rattler-build
 | `LIBRARY_LIB`    | `%PREFIX%\Library\lib`     | Import and static libraries (`.lib` files)              |
 | `SCRIPTS`        | `%PREFIX%\Scripts`         | Python scripts                                          |
 
-Shared libraries on Windows generally follows the MSVC convention, and therefore are distributed as pairs of two files, usually without a `lib` prefix:
+On Windows, it is not possible to link directly to dynamic libraries (`.dll` files); the linker needs to use so-called import libraries instead.
+Import libraries have the same format and generally use the same suffix (`.lib`) as static libraries.
+Therefore, whenever both dynamic and static libraries are installed, the import library and the static library must use different names.
+There are two main naming conventions for installing libraries on Windows: the MSVC convention and the GCC/MinGW convention.
 
-- `{name}.dll`, the actual dynamic library that is used by compiled executables
-- `{name}.lib`, the so-called import library that is used to link against the dynamic library when building packages
+The MSVC convention uses the following names:
 
-If a static library is installed as well, it is usually prefixed with `lib` to distinguish it from the import library:
+- dynamic library: `{name}.dll` (e.g. `zlib.dll`)
+- import library: `{name}.lib` (e.g. `zlib.lib`)
+- static library: no standard convention, often `lib{name}.lib` or `{name}-static.lib` (e.g. `zlibstatic.lib`)
 
-- `lib{name}.lib`, the static library
+Usually, `{name}` does not include a `lib` prefix.
+Following this convention ensures that `-l{name}` works for dynamic linking, same as on Unix.
+However, some packages do use `lib` prefix for historical reasons, e.g. `libprotobuf.dll` + `libprotobuf.lib`.
 
-Some packages use `{name}-static.lib` instead, though it is considered a historical artifact.
+The GCC/MinGW convention uses the following names:
+
+- dynamic library: `lib{name}.dll`
+- import library: `lib{name}.dll.a`
+- static library: `lib{name}.a`
+
+There is no standard convention for providing SONAME-style versioning for libraries.
+Some packages do not provide versioning at all, others embed the version into the `.dll` name (but not the import library name, to preserve `-l{name}` behavior).
 
 <a id="special-dependencies-and-packages"></a>
 
