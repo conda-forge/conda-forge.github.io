@@ -85,9 +85,9 @@
             "href": "/docs/maintainer/knowledge_base/#building-against-numpy"
           },
           {
-            "type": "link",
-            "label": "Enable osx-arm64",
-            "href": "/docs/maintainer/knowledge_base/#apple-silicon-builds"
+            "type": "doc",
+            "label": "Enable additional architectures",
+            "id": "how-to/advanced/enable-archs"
           },
           {
             "type": "link",
