@@ -6,6 +6,14 @@ tags: [how-to, advanced]
 
 By default, feedstocks are created with support for the main platforms (e.g. `linux-64`, `osx-64`, `win-64`). New architectures can be added by changing the default configuration in `conda-forge.yml` and rerendering. However, since building a new architecture requires that your dependencies are also available for that architecture, this is usually controlled by migrations triggered by changes on specific files available in the `conda-forge-pinning-feedstock` repository.
 
+Before submitting a build request for a new architecure, follow these steps:
+
+1. Make sure the package is not yet built for that architecture. Consult the package page in anaconda.org: `https://anaconda.org/conda-forge/<package-name>`.
+2. Check if your package is already in the process of being migrated in the [corresponding migration status page](https://conda-forge.org/status/).
+3. Check the feedstock in question to see if there is already an issue or pull request.
+4. Once a PR is submitted, you can help the feedstock maintainers make the build pass. If you have insight into the particular package, **please** chime in, but most of all **be patient and polite**.
+5. Once the new builds are available from `anaconda.org`, please help the maintainers by testing the packages, and reporting back with any problems… but also successes!
+
 ## Enable osx-arm64
 
 1. Fork `conda-forge-pinning-feedstock` and create a fresh new branch.
