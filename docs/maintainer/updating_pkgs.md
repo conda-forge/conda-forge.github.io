@@ -138,45 +138,7 @@ Please follow the following guidelines while updating recipes:
 
 ## Rerendering feedstocks
 
-Rerendering is conda-forge's way to update the files common to all feedstocks (e.g. README, [CI](../glossary.md#ci) configuration, pinned dependencies).
-
-Rerendering can be done in two ways:
-
-> 1. Using the webservice to run conda-smithy on the cloud by adding the comment `@conda-forge-admin, please rerender` (See [Admin web services](infrastructure.md#admin-web-services)).
-> 2. Run conda-smithy locally on your machine (See [Rerendering with conda-smithy locally](#dev-rerender-local)).
-
-<a id="dev-rerender-local"></a>
-
-<a id="rerendering-with-conda-smithy-locally"></a>
-
-### Rerendering with conda-smithy locally
-
-The first step is to install `conda-smithy` in your root environment.
-
-```shell-session
-conda install -c conda-forge conda-smithy
-```
-
-Commit all changes and from the root directory of the feedstock, type:
-
-```shell-session
-conda smithy rerender -c auto
-```
-
-Optionally one can commit the changes manually.
-To do this drop `-c auto` from the command.
-
-<a id="when-to-rerender"></a>
-
-### When to rerender
-
-We need to re-render when there are changes in the following parts of the feedstock:
-
-- Platform configuration (`skip` sections).
-- `yum_requirements.txt` or `conda-forge.yml`.
-- Updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.
-- Updates in conda-forge pinning that affect the feedstock.
-- Build issues that a feedstock configuration update will fix (follow us on [Zulip](https://conda-forge.zulipchat.com/) to know about those).
+See [How to rerender a feedstock](/docs/how-to/basics/rerender.md).
 
 <a id="updating-for-newly-released-python-version"></a>
 

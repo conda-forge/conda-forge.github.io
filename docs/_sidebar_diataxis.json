@@ -65,9 +65,9 @@
         },
         "items": [
           {
-            "type": "link",
+            "type": "doc",
             "label": "Rerender a feedstock",
-            "href": "/docs/maintainer/updating_pkgs/#rerendering-feedstocks"
+            "id": "how-to/basics/rerender"
           }
         ]
       },
