@@ -110,9 +110,9 @@
             "href": "/docs/maintainer/knowledge_base/#multi-output-recipes"
           },
           {
-            "type": "link",
+            "type": "doc",
             "label": "Maintain several versions",
-            "href": "/docs/maintainer/updating_pkgs/#maintaining-several-versions"
+            "id": "how-to/advanced/several-versions"
           },
           {
             "type": "link",
