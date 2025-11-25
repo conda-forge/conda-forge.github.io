@@ -212,8 +212,8 @@ to load, the following tools can be helpful:
   can be used when debugging the dreaded "DLL load failed" errors. For example to debug a numpy import error:
   - `"C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\gflags.exe" -i python.exe +sls`
   - `"C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\cdb.exe" -logo log.txt -g -G -o -xn av python -c "import numpy"`
-  The log file saved in `log.txt` will display information about where the DLLs were loaded from,
-  which DLLs are missing and which symbols are missing from a DLL.
+    The log file saved in `log.txt` will display information about where the DLLs were loaded from,
+    which DLLs are missing and which symbols are missing from a DLL.
 
 - [Dependency Walker](https://www.dependencywalker.com/) can display a tree
   diagram of all dependent modules.
