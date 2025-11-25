@@ -183,6 +183,44 @@ we can use the `local` channel:
 conda create -n my-new-env -c local my-package
 ```
 
+<a id="testing-using-wine"></a>
+
+#### Testing using wine
+
+Some degree of testing and debugging can also be performed without a Windows
+system, using [wine](https://www.winehq.org/).
+[miniforge](https://github.com/conda-forge/miniforge) works correctly
+in the wine's `cmd` shell, and can be used to create and run Conda environments.
+In fact, sometimes Wine is able to provide more insightful error messages,
+for example:
+
+```
+wine: Call from 00006FFFFFF999EA to unimplemented function libblas.dll.cdotc_, aborting
+```
+
+It may be necessary to manipulate the `WINEDEBUG` variable to obtain more
+debugging logs.
+
+<a id="debugging-dll-issues"></a>
+
+#### Debugging DLL issues
+
+When debugging issues related to dynamically-linked libraries (DLLs) failing
+to load, the following tools can be helpful:
+
+- [Dependency Walker](https://www.dependencywalker.com/) can display a tree
+  diagram of all dependent modules.
+
+- [Dependencies](https://github.com/lucasg/Dependencies) is a more modern
+  replacement for Dependency Walker, with both console and GUI interface.
+  It also works better on Wine.
+
+- [dumpbin](https://learn.microsoft.com/en-us/cpp/build/reference/dumpbin-reference)
+  tool from MSVC can be used to obtain information about Windows binaries.
+  On Unix,
+  [winedump](https://gitlab.winehq.org/wine/wine/-/wikis/Man-Pages/winedump)
+  tool can be used instead.
+
 <a id="notes-on-native-code"></a>
 
 ### Notes on native code
