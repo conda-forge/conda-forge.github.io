@@ -208,6 +208,13 @@ debugging logs.
 When debugging issues related to dynamically-linked libraries (DLLs) failing
 to load, the following tools can be helpful:
 
+- [Windows Debugger](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools)
+  can be used when debugging the dreaded "DLL load failed" errors. For example to debug a numpy import error:
+  - `"C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\gflags.exe" -i python.exe +sls`
+  - `"C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\cdb.exe" -logo log.txt -g -G -o -xn av python -c "import numpy"`
+  The log file saved in `log.txt` will display information about where the DLLs were loaded from,
+  which DLLs are missing and which symbols are missing from a DLL.
+
 - [Dependency Walker](https://www.dependencywalker.com/) can display a tree
   diagram of all dependent modules.
 
@@ -217,9 +224,8 @@ to load, the following tools can be helpful:
 
 - [dumpbin](https://learn.microsoft.com/en-us/cpp/build/reference/dumpbin-reference)
   tool from MSVC can be used to obtain information about Windows binaries.
-  On Unix,
-  [winedump](https://gitlab.winehq.org/wine/wine/-/wikis/Man-Pages/winedump)
-  tool can be used instead.
+  On Unix, [gendef](https://sourceforge.net/p/mingw-w64/wiki2/gendef)
+  tool can be used instead by installing the conda package.
 
 <a id="notes-on-native-code"></a>
 
