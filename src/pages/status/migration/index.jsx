@@ -25,7 +25,7 @@ import {
   applyHighlight,
   createZoomedGraphData,
   getNodeIdFromSvgElement
-} from "./graphUtils";
+} from "@site/src/utils/migrationGraphUtils";
 
 // GitHub GraphQL MergeStateStatus documentation
 // Reference: https://docs.github.com/en/graphql/reference/enums#mergestatestatus
