@@ -12,7 +12,20 @@ import TabItem from '@theme/TabItem';
 import moment from 'moment';
 import { compare } from '@site/src/components/StatusDashboard/current_migrations';
 import { useSorting, SortableHeader } from '@site/src/components/SortableTable';
+import * as dagreD3 from "dagre-d3-es";
 import * as d3 from "d3";
+import {
+  getPrunedFeedstockStatus,
+  buildGraphDataStructure,
+  buildInitialGraph,
+  getStatusColor,
+  getStatusTextColor,
+  filterNodesBySearchTerm,
+  getAwaitingParentsWithNoParent,
+  applyHighlight,
+  createZoomedGraphData,
+  getNodeIdFromSvgElement
+} from "./graphUtils";
 
 // GitHub GraphQL MergeStateStatus documentation
 // Reference: https://docs.github.com/en/graphql/reference/enums#mergestatestatus
@@ -138,6 +151,14 @@ export default function MigrationDetails() {
   }, []);
   if (state.redirect) return <Redirect to="/status" replace />;
   const { details, name, view } = state;
+
+  // Build graph data structure from pruned feedstock status
+  const graphDataStructure = React.useMemo(() => {
+    if (!details) return { nodeMap: {}, edgeMap: {}, allNodeIds: [] };
+    const prunedFeedstock = getPrunedFeedstockStatus(details._feedstock_status, details);
+    return buildGraphDataStructure(prunedFeedstock);
+  }, [details]);
+
   return (
     <Layout
       title={siteConfig.title}
@@ -165,6 +186,14 @@ export default function MigrationDetails() {
                   >
                     Graph
                   </li>
+                  <li
+                    key="dependencies"
+                    role="tab"
+                    class={["tabs__item", (view == "dependencies" ? "tabs__item--active" : null)].join(" ")}
+                    onClick={() => toggle("dependencies")}
+                  >
+                    Dependencies
+                  </li>
                   {name &&
                     <a href={urls.migrations.details.replace("<NAME>", name)} target="_blank">
                       <li
@@ -190,7 +219,9 @@ export default function MigrationDetails() {
             {details && <Bar details={details} /> || null}
             {view === "graph" ?
               <Graph>{name}</Graph> :
-              (details && <Table details={details} />)
+              view === "dependencies" ?
+                (details && <DependencyGraph graphDataStructure={graphDataStructure} details={details} />) :
+                (details && <Table details={details} />)
             }
           </div>
         </div>
@@ -597,4 +628,314 @@ async function checkPausedOrClosed(name) {
       console.warn(`error checking status for ${name}:`, error);
     }
   }
+}
+
+function DependencyGraph({ graphDataStructure, details }) {
+  const [graph, setGraph] = useState(null);
+  const svgRef = React.useRef();
+  const [selectedNodeId, setSelectedNodeId] = React.useState(null);
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [showDropdown, setShowDropdown] = React.useState(false);
+  const [graphDirection, setGraphDirection] = React.useState("TB");
+  const [graphRanker, setGraphRanker] = React.useState("network-simplex");
+  const [graphAlign, setGraphAlign] = React.useState("");
+
+  // Create zoomed graph data based on selected node
+  const zoomedGraphData = React.useMemo(() => {
+    return createZoomedGraphData(selectedNodeId, graphDataStructure);
+  }, [selectedNodeId, graphDataStructure]);
+
+  const { nodeMap, edgeMap, allNodeIds } = zoomedGraphData;
+
+  useEffect(() => {
+    const g = buildInitialGraph(zoomedGraphData, graphDirection, graphRanker, graphAlign || undefined);
+    setGraph(g);
+  }, [zoomedGraphData, graphDirection, graphRanker, graphAlign]);
+
+  // Get searchable nodes (only nodes with children or parents)
+  const searchableNodeIds = React.useMemo(() => {
+    return graphDataStructure.allNodeIds.filter(nodeId => {
+      const node = graphDataStructure.nodeMap[nodeId];
+      if (!node) return false;
+      const hasChildren = node.outgoing && node.outgoing.length > 0;
+      const hasParents = node.incoming && node.incoming.length > 0;
+      return hasChildren || hasParents;
+    });
+  }, [graphDataStructure]);
+
+  // Filter nodes based on search term
+  const filteredNodes = React.useMemo(() => {
+    return filterNodesBySearchTerm(searchableNodeIds, searchTerm);
+  }, [searchTerm, searchableNodeIds]);
+
+  // Identify nodes in "awaiting-parents" that have no parents in the graph
+  const awaitingParentsNoParent = React.useMemo(() => {
+    return getAwaitingParentsWithNoParent(nodeMap, details);
+  }, [nodeMap, details]);
+
+  useEffect(() => {
+    if (!graph || !svgRef.current) return;
+
+    const svg = d3.select(svgRef.current);
+    svg.selectAll("*").remove();
+
+    const svgGroup = svg.append("g");
+
+    const render = new dagreD3.render();
+    render(svgGroup, graph);
+
+    svgGroup.selectAll("g.node").each(function () {
+      const nodeId = getNodeIdFromSvgElement(this);
+      d3.select(this).attr("data-node-id", nodeId);
+
+      // Highlight selected node
+      if (selectedNodeId === nodeId) {
+        d3.select(this).selectAll("rect")
+          .style("stroke-width", "3px")
+          .style("fill", "#ADD8E6");
+      }
+
+      // Mark nodes in awaiting-parents with no parents with a light red background
+      if (awaitingParentsNoParent.has(nodeId)) {
+        d3.select(this).selectAll("rect")
+          .style("fill", "#ffe6e6")
+          .style("stroke-dasharray", "5,5")
+          .style("stroke-width", "2px");
+      }
+    });
+
+    // Set edge IDs from graph data
+    svgGroup.selectAll("g.edgePath").each(function () {
+      const edgeElement = d3.select(this);
+      const edges = graph.edges();
+      const edgeIndex = Array.from(svgGroup.selectAll("g.edgePath").nodes()).indexOf(this);
+
+      if (edgeIndex >= 0 && edgeIndex < edges.length) {
+        const edge = edges[edgeIndex];
+        const edgeData = graph.edge(edge);
+
+        if (edgeData && edgeData.edgeId) {
+          edgeElement.attr("data-edge-id", edgeData.edgeId);
+        }
+      }
+    });
+
+    svgGroup.selectAll("g.node").style("cursor", "pointer");
+
+    svgGroup.selectAll("g.node").on("mouseenter", function () {
+      const nodeId = d3.select(this).attr("data-node-id");
+      applyHighlight(svgGroup, nodeId, zoomedGraphData);
+    });
+
+    svgGroup.selectAll("g.node").on("mouseleave", function () {
+      applyHighlight(svgGroup, null, zoomedGraphData);
+    });
+
+    svgGroup.selectAll("g.node").on("click", function () {
+      const nodeId = d3.select(this).attr("data-node-id");
+
+      if (selectedNodeId === nodeId) {
+        setSelectedNodeId(null);
+        return;
+      }
+
+      setSelectedNodeId(nodeId);
+    });
+
+    // Click on background (void) to reset view
+    svg.on("click", function (event) {
+      if (event.target === this) {
+        setSelectedNodeId(null);
+        applyHighlight(svgGroup, null, zoomedGraphData);
+      }
+    });
+
+    const zoom = d3.zoom().on("zoom", (event) => {
+      svgGroup.attr("transform", event.transform);
+    });
+
+    svg.call(zoom);
+
+    // Center the graph initially
+    const graphWidth = graph.graph().width;
+    const graphHeight = graph.graph().height;
+    const svgWidth = svgRef.current.clientWidth;
+    const svgHeight = svgRef.current.clientHeight;
+
+    const initialScale = Math.min(
+      svgWidth / graphWidth,
+      svgHeight / graphHeight,
+      1
+    ) * 0.85;
+
+    const initialTranslate = [
+      (svgWidth - graphWidth * initialScale) / 2,
+      (svgHeight - graphHeight * initialScale) / 2,
+    ];
+
+    svg.call(
+      zoom.transform,
+      d3.zoomIdentity
+        .translate(initialTranslate[0], initialTranslate[1])
+        .scale(initialScale)
+    );
+  }, [graph, selectedNodeId, awaitingParentsNoParent, zoomedGraphData]);
+
+  const handleSelectNode = (nodeName) => {
+    setSelectedNodeId(nodeName);
+    setSearchTerm("");
+    setShowDropdown(false);
+  };
+
+  return (
+    <div className={styles.dependencyGraphContainer}>
+      <div className={styles.graphHeader}>
+        <div style={{ position: "relative" }}>
+          <h3>Dependency Graph</h3>
+          <div style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
+            <div style={{ position: "relative", width: "300px" }}>
+              <input
+                type="text"
+                placeholder="Search for package..."
+                value={searchTerm}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                  setShowDropdown(true);
+                }}
+                onFocus={() => setShowDropdown(true)}
+                onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
+                style={{
+                  padding: "8px 12px",
+                  fontSize: "14px",
+                  borderRadius: "4px",
+                  border: "1px solid var(--ifm-color-emphasis-300)",
+                  marginTop: "8px",
+                  width: "100%",
+                  boxSizing: "border-box"
+                }}
+              />
+              {showDropdown && filteredNodes.length > 0 && (
+                <ul
+                  style={{
+                    position: "absolute",
+                    top: "100%",
+                    left: 0,
+                    right: 0,
+                    border: "1px solid var(--ifm-color-emphasis-300)",
+                    borderTop: "none",
+                    borderRadius: "0 0 4px 4px",
+                    backgroundColor: "var(--ifm-color-emphasis-0)",
+                    listStyle: "none",
+                    margin: 0,
+                    padding: "8px 0",
+                    maxHeight: "200px",
+                    overflowY: "auto",
+                    zIndex: 1000
+                  }}
+                >
+                  {filteredNodes.slice(0, 10).map((nodeName) => (
+                    <li
+                      key={nodeName}
+                      onClick={() => handleSelectNode(nodeName)}
+                      style={{
+                        padding: "8px 12px",
+                        cursor: "pointer",
+                        hover: { backgroundColor: "var(--ifm-color-emphasis-100)" }
+                      }}
+                      onMouseEnter={(e) => e.target.style.backgroundColor = "var(--ifm-color-emphasis-100)"}
+                      onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}
+                    >
+                      {nodeName}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div style={{ position: "relative", width: "180px" }}>
+              <select
+                id="graph-direction"
+                value={graphDirection}
+                onChange={(e) => {
+                  setGraphDirection(e.target.value);
+                }}
+                style={{
+                  padding: "8px 12px",
+                  fontSize: "14px",
+                  borderRadius: "4px",
+                  border: "1px solid var(--ifm-color-emphasis-300)",
+                  marginTop: "8px",
+                  width: "100%",
+                  boxSizing: "border-box",
+                  backgroundColor: "var(--ifm-color-emphasis-0)",
+                  cursor: "pointer"
+                }}
+              >
+                <option value="TB">Top to Bottom</option>
+                <option value="BT">Bottom to Top</option>
+                <option value="LR">Left to Right</option>
+                <option value="RL">Right to Left</option>
+              </select>
+            </div>
+            <div style={{ position: "relative", width: "180px" }}>
+              <select
+                id="graph-ranker"
+                value={graphRanker}
+                onChange={(e) => {
+                  setGraphRanker(e.target.value);
+                }}
+                style={{
+                  padding: "8px 12px",
+                  fontSize: "14px",
+                  borderRadius: "4px",
+                  border: "1px solid var(--ifm-color-emphasis-300)",
+                  marginTop: "8px",
+                  width: "100%",
+                  boxSizing: "border-box",
+                  backgroundColor: "var(--ifm-color-emphasis-0)",
+                  cursor: "pointer"
+                }}
+              >
+                <option value="network-simplex">Network Simplex</option>
+                <option value="tight-tree">Tight Tree</option>
+                <option value="longest-path">Longest Path</option>
+              </select>
+            </div>
+            <div style={{ position: "relative", width: "180px" }}>
+              <select
+                id="graph-align"
+                value={graphAlign}
+                onChange={(e) => {
+                  setGraphAlign(e.target.value);
+                }}
+                style={{
+                  padding: "8px 12px",
+                  fontSize: "14px",
+                  borderRadius: "4px",
+                  border: "1px solid var(--ifm-color-emphasis-300)",
+                  marginTop: "8px",
+                  width: "100%",
+                  boxSizing: "border-box",
+                  backgroundColor: "var(--ifm-color-emphasis-0)",
+                  cursor: "pointer"
+                }}
+              >
+                <option value="">Center (default)</option>
+                <option value="UL">Upper Left</option>
+                <option value="UR">Upper Right</option>
+                <option value="DL">Down Left</option>
+                <option value="DR">Down Right</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={styles.graphContainer}>
+        <svg ref={svgRef}></svg>
+      </div>
+      <span className={styles.instructions}>
+        Arrows point from package to its immediate children (dependents).
+        Use mouse wheel to zoom, drag to pan, click on a node to zoom to its subgraph, or click on the background to reset the view.
+      </span>
+    </div>
+  );
 }
