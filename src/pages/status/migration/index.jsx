@@ -386,6 +386,7 @@ function Graph(props) {
       const svgHeight = viewBox ? viewBox.height : (svgElement.getBoundingClientRect().height || containerRef.current.clientHeight || 600);
 
       const bbox = svgElement.getBBox();
+
       const initialScale = Math.min(
         svgWidth / bbox.width,
         svgHeight / bbox.height,
