@@ -5,7 +5,6 @@
 import * as dagreD3 from "dagre-d3-es";
 import * as d3 from "d3";
 
-// Constants for graph styling
 const DEFAULT_GRAPH_SETTINGS = {
   nodesep: 50,
   ranksep: 100,
@@ -29,13 +28,11 @@ const EDGE_STYLE = {
   style: "stroke: #333; stroke-width: 2px;",
 };
 
-// Helper function to extract node ID from SVG element
 export const getNodeIdFromSvgElement = (element) => {
   const fullText = d3.select(element).select("text").text().split("\n")[0];
   return fullText.split("(")[0].trim();
 };
 
-// Remove any done node for a smaller graph
 export const getPrunedFeedstockStatus = (feedstockStatus, details) => {
   if (!feedstockStatus || !details?.done) return feedstockStatus;
 
@@ -56,7 +53,19 @@ export const getStatusColor = (prStatus) => {
     case "clean":
       return "#28a745"; // Green
     case "unstable":
-      return "#ffc107"; // Yellow
+      return "#dc3545"; // Red for failing
+    case "bot-error":
+      return "#ffc107"; // Orange for bot errors
+    case "not-solvable":
+      return "#ffc107"; // Orange for not solvable
+    case "done":
+      return "#28a745"; // Green for done
+    case "in-pr":
+      return "#17a2b8"; // Blue for in-pr (will be overridden by PR status)
+    case "awaiting-pr":
+      return "#adb5bd"; // Gray for awaiting-pr
+    case "awaiting-parents":
+      return "#6c757d"; // Darker gray for awaiting-parents
     case "unknown":
       return "#adb5bd"; // Lighter gray
     default:
@@ -65,7 +74,10 @@ export const getStatusColor = (prStatus) => {
 };
 
 export const getStatusTextColor = (prStatus) => {
-  return prStatus === "clean" ? "#ffffff" : "#000000";
+  if (["clean", "done", "unstable", "awaiting-parents", "in-pr"].includes(prStatus)) {
+    return "#ffffff";
+  }
+  return "#000000";
 };
 
 export const filterNodesBySearchTerm = (nodeNames, searchTerm) => {
@@ -75,13 +87,10 @@ export const filterNodesBySearchTerm = (nodeNames, searchTerm) => {
   );
 };
 
-// some node are awaiting parent, but have no current parent in the graph
-// eg.pyside2 on 3.14t I'm guessing this is awaiting external changes (PyPI?)
 export const getAwaitingParentsWithNoParent = (nodeMap, details) => {
   const noParents = new Set();
   const allChildren = new Set();
 
-  // Collect all nodes that are children of any node
   Object.values(nodeMap).forEach((nodeInfo) => {
     const children = nodeInfo.data?.immediate_children || [];
     children.forEach((childId) => {
@@ -89,7 +98,6 @@ export const getAwaitingParentsWithNoParent = (nodeMap, details) => {
     });
   });
 
-  // Find packages in awaiting-parents that are not children of any node
   const awaitingParents = details?.["awaiting-parents"] || [];
   awaitingParents.forEach((name) => {
     if (!allChildren.has(name)) {
@@ -202,7 +210,7 @@ export const findConnectedComponents = (
   return components;
 };
 
-export const buildGraphDataStructure = (feedstockStatus) => {
+export const buildGraphDataStructure = (feedstockStatus, details = null) => {
   if (!feedstockStatus || Object.keys(feedstockStatus).length === 0) {
     return { nodeMap: {}, edgeMap: {}, allNodeIds: [] };
   }
@@ -210,10 +218,25 @@ export const buildGraphDataStructure = (feedstockStatus) => {
   const nodeMap = {};
   const edgeMap = {};
 
+  // Build category map from details for quick lookup
+  const nodeCategoryMap = {};
+  if (details) {
+    ["done", "in-pr", "awaiting-pr", "awaiting-parents", "not-solvable", "bot-error"].forEach(category => {
+      if (details[category]) {
+        details[category].forEach(nodeName => {
+          nodeCategoryMap[nodeName] = category;
+        });
+      }
+    });
+  }
+
   // Initialize all nodes
   Object.keys(feedstockStatus).forEach((nodeId) => {
     nodeMap[nodeId] = {
-      data: feedstockStatus[nodeId],
+      data: {
+        ...feedstockStatus[nodeId],
+        category: nodeCategoryMap[nodeId] || "unknown", // Add category to data
+      },
       incoming: [],
       outgoing: [],
     };
@@ -379,16 +402,26 @@ const addNodeToGraph = (g, nodeId, nodeMap, nodeToComponent, addedNodes) => {
   const nodeInfo = nodeMap[nodeId];
   if (!nodeInfo) return;
 
-  const status = nodeInfo.data.pr_status || "unknown";
+  const category = nodeInfo.data.category || "unknown";
+  const prStatus = nodeInfo.data.pr_status || "unknown";
   const componentId = nodeToComponent[nodeId];
+
+  // Determine color based on category first, then PR status
+  let colorStatus = category;
+  if (category === "in-pr" && prStatus !== "unknown") {
+    // For in-PR nodes, use the PR status for color
+    colorStatus = prStatus;
+  }
 
   g.setNode(nodeId, {
     label: nodeId,
+    prUrl: nodeInfo.data.pr_url, // Store PR URL for later use
+    statusColor: getStatusColor(colorStatus), // Store status color
     rx: 5,
     ry: 5,
-    padding: 10,
-    style: `fill: ${getStatusColor(status)}; stroke: #333; stroke-width: 1px;`,
-    labelStyle: `fill: ${getStatusTextColor(status)}; font-size: 12px; font-weight: bold;`,
+    padding: 15,
+    style: `fill: ${getStatusColor(colorStatus)}; stroke: #333; stroke-width: 1px;`,
+    labelStyle: `fill: ${getStatusTextColor(colorStatus)}; font-size: 12px; font-weight: bold;`,
   });
 
   if (componentId) {

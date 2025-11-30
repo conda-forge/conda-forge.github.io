@@ -40,6 +40,9 @@ const CI_STATUS_DESCRIPTIONS = {
   unknown: "The state cannot currently be determined."
 };
 
+// Threshold for showing large graph warning
+const LARGE_GRAPH_THRESHOLD = 1000;
+
 // { Done, In PR, Awaiting PR, Awaiting parents, Not solvable, Bot error }
 // The third value is a boolean representing the default display state on load
 // 'true' means hidden, 'false' means visible
@@ -116,6 +119,7 @@ export default function MigrationDetails() {
     redirect: false,
     view: "table",
   });
+  const [showDoneNodes, setShowDoneNodes] = useState(false);
   const toggle = (view) => {
     if (window && window.localStorage) {
       try {
@@ -152,12 +156,11 @@ export default function MigrationDetails() {
   if (state.redirect) return <Redirect to="/status" replace />;
   const { details, name, view } = state;
 
-  // Build graph data structure from pruned feedstock status
   const graphDataStructure = React.useMemo(() => {
     if (!details) return { nodeMap: {}, edgeMap: {}, allNodeIds: [] };
-    const prunedFeedstock = getPrunedFeedstockStatus(details._feedstock_status, details);
-    return buildGraphDataStructure(prunedFeedstock);
-  }, [details]);
+    const feedstock = showDoneNodes ? details._feedstock_status : getPrunedFeedstockStatus(details._feedstock_status, details);
+    return buildGraphDataStructure(feedstock, details);
+  }, [details, showDoneNodes]);
 
   return (
     <Layout
@@ -220,7 +223,7 @@ export default function MigrationDetails() {
             {view === "graph" ?
               <Graph>{name}</Graph> :
               view === "dependencies" ?
-                (details && <DependencyGraph graphDataStructure={graphDataStructure} details={details} />) :
+                (details && <DependencyGraph graphDataStructure={graphDataStructure} details={details} showDoneNodes={showDoneNodes} setShowDoneNodes={setShowDoneNodes} />) :
                 (details && <Table details={details} />)
             }
           </div>
@@ -629,29 +632,38 @@ async function checkPausedOrClosed(name) {
   }
 }
 
-function DependencyGraph({ graphDataStructure, details }) {
+function DependencyGraph({ graphDataStructure, details, showDoneNodes, setShowDoneNodes }) {
   const [graph, setGraph] = useState(null);
   const svgRef = React.useRef();
   const [selectedNodeId, setSelectedNodeId] = React.useState(null);
   const [searchTerm, setSearchTerm] = React.useState("");
   const [showDropdown, setShowDropdown] = React.useState(false);
+  const [showSettings, setShowSettings] = React.useState(false);
   const [graphDirection, setGraphDirection] = React.useState("TB");
   const [graphRanker, setGraphRanker] = React.useState("network-simplex");
   const [graphAlign, setGraphAlign] = React.useState("");
+  const [userConfirmedLargeGraph, setUserConfirmedLargeGraph] = React.useState(false);
 
-  // Create zoomed graph data based on selected node
   const zoomedGraphData = React.useMemo(() => {
     return createZoomedGraphData(selectedNodeId, graphDataStructure);
   }, [selectedNodeId, graphDataStructure]);
 
   const { nodeMap, edgeMap, allNodeIds } = zoomedGraphData;
 
+  const nodeCount = allNodeIds.length;
+  const isLargeGraph = nodeCount > LARGE_GRAPH_THRESHOLD;
+  const shouldShowWarning = isLargeGraph && !userConfirmedLargeGraph;
+
   useEffect(() => {
+    setUserConfirmedLargeGraph(false);
+  }, [graphDataStructure, showDoneNodes]);
+
+  useEffect(() => {
+    if (shouldShowWarning) return;
     const g = buildInitialGraph(zoomedGraphData, graphDirection, graphRanker, graphAlign || undefined);
     setGraph(g);
-  }, [zoomedGraphData, graphDirection, graphRanker, graphAlign]);
+  }, [zoomedGraphData, graphDirection, graphRanker, graphAlign, shouldShowWarning]);
 
-  // Get searchable nodes (only nodes with children or parents)
   const searchableNodeIds = React.useMemo(() => {
     return graphDataStructure.allNodeIds.filter(nodeId => {
       const node = graphDataStructure.nodeMap[nodeId];
@@ -662,12 +674,10 @@ function DependencyGraph({ graphDataStructure, details }) {
     });
   }, [graphDataStructure]);
 
-  // Filter nodes based on search term
   const filteredNodes = React.useMemo(() => {
     return filterNodesBySearchTerm(searchableNodeIds, searchTerm);
   }, [searchTerm, searchableNodeIds]);
 
-  // Identify nodes in "awaiting-parents" that have no parents in the graph
   const awaitingParentsNoParent = React.useMemo(() => {
     return getAwaitingParentsWithNoParent(nodeMap, details);
   }, [nodeMap, details]);
@@ -686,15 +696,55 @@ function DependencyGraph({ graphDataStructure, details }) {
     svgGroup.selectAll("g.node").each(function () {
       const nodeId = getNodeIdFromSvgElement(this);
       d3.select(this).attr("data-node-id", nodeId);
+      const graphNode = graph.node(nodeId);
 
-      // Highlight selected node
       if (selectedNodeId === nodeId) {
         d3.select(this).selectAll("rect")
-          .style("stroke-width", "3px")
-          .style("fill", "#ADD8E6");
+          .style("stroke", "#0066cc")
+          .style("stroke-width", "4px");
+
+        if (graphNode?.prUrl) {
+          const prMatch = graphNode.prUrl.match(/\/pull\/(\d+)/);
+          if (prMatch) {
+            const prNumber = prMatch[1];
+            const textElement = d3.select(this).select("text");
+
+            if (!textElement.attr("data-original-text")) {
+              textElement.attr("data-original-text", textElement.text());
+            }
+
+            textElement.text("");
+
+            textElement.append("tspan")
+              .attr("x", 0)
+              .attr("dy", 0)
+              .text(nodeId);
+
+            textElement.append("tspan")
+              .attr("class", "pr-number")
+              .attr("x", 0)
+              .attr("dy", "1.2em")
+              .attr("fill", "#0066cc")
+              .attr("font-size", "11px")
+              .style("text-decoration", "underline")
+              .style("cursor", "pointer")
+              .text(`#${prNumber}`)
+              .on("click", function(event) {
+                event.stopPropagation();
+                window.open(graphNode.prUrl, '_blank');
+              });
+          }
+        }
+      } else {
+        const textElement = d3.select(this).select("text");
+        const originalText = textElement.attr("data-original-text");
+        if (originalText && textElement.selectAll("tspan").size() > 0) {
+          textElement.selectAll("tspan").remove();
+          textElement.text(originalText);
+          textElement.attr("data-original-text", null);
+        }
       }
 
-      // Mark nodes in awaiting-parents with no parents with a light red background
       if (awaitingParentsNoParent.has(nodeId)) {
         d3.select(this).selectAll("rect")
           .style("fill", "#ffe6e6")
@@ -703,7 +753,6 @@ function DependencyGraph({ graphDataStructure, details }) {
       }
     });
 
-    // Set edge IDs from graph data
     svgGroup.selectAll("g.edgePath").each(function () {
       const edgeElement = d3.select(this);
       const edges = graph.edges();
@@ -741,7 +790,6 @@ function DependencyGraph({ graphDataStructure, details }) {
       setSelectedNodeId(nodeId);
     });
 
-    // Click on background (void) to reset view
     svg.on("click", function (event) {
       if (event.target === this) {
         setSelectedNodeId(null);
@@ -755,7 +803,6 @@ function DependencyGraph({ graphDataStructure, details }) {
 
     svg.call(zoom);
 
-    // Center the graph initially
     const graphWidth = graph.graph().width;
     const graphHeight = graph.graph().height;
     const svgWidth = svgRef.current.clientWidth;
@@ -789,12 +836,72 @@ function DependencyGraph({ graphDataStructure, details }) {
   return (
     <div className={styles.dependencyGraphContainer}>
       <div className={styles.graphHeader}>
-        <div style={{ position: "relative" }}>
-          <h3>Dependency Graph</h3>
-          <div style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
-            <div style={{ position: "relative", width: "300px" }}>
+        <div className={styles.headerContainer}>
+          {showSettings && (
+            <div className={styles.settingsPanel}>
+              <div className={styles.toggleContainer}>
+                <label className={styles.toggleLabel}>
+                  <span>Include completed packages</span>
+                  <input
+                    type="checkbox"
+                    className={styles.toggleInput}
+                    checked={showDoneNodes}
+                    onChange={(e) => setShowDoneNodes(e.target.checked)}
+                  />
+                  <span className={styles.toggleSlider}></span>
+                </label>
+              </div>
+              <div className={styles.settingsGrid}>
+                <div>
+                  <label className={styles.settingLabel}>Direction</label>
+                  <select
+                    id="graph-direction"
+                    className={styles.settingSelect}
+                    value={graphDirection}
+                    onChange={(e) => setGraphDirection(e.target.value)}
+                  >
+                    <option value="TB">Top to Bottom</option>
+                    <option value="BT">Bottom to Top</option>
+                    <option value="LR">Left to Right</option>
+                    <option value="RL">Right to Left</option>
+                  </select>
+                </div>
+                <div>
+                  <label className={styles.settingLabel}>Ranker</label>
+                  <select
+                    id="graph-ranker"
+                    className={styles.settingSelect}
+                    value={graphRanker}
+                    onChange={(e) => setGraphRanker(e.target.value)}
+                  >
+                    <option value="network-simplex">Network Simplex</option>
+                    <option value="tight-tree">Tight Tree</option>
+                    <option value="longest-path">Longest Path</option>
+                  </select>
+                </div>
+                <div>
+                  <label className={styles.settingLabel}>Alignment</label>
+                  <select
+                    id="graph-align"
+                    className={styles.settingSelect}
+                    value={graphAlign}
+                    onChange={(e) => setGraphAlign(e.target.value)}
+                  >
+                    <option value="">Center (default)</option>
+                    <option value="UL">Upper Left</option>
+                    <option value="UR">Upper Right</option>
+                    <option value="DL">Down Left</option>
+                    <option value="DR">Down Right</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          )}
+          <div className={styles.headerControls}>
+            <div className={styles.searchContainer}>
               <input
                 type="text"
+                className={styles.searchInput}
                 placeholder="Search for package..."
                 value={searchTerm}
                 onChange={(e) => {
@@ -803,46 +910,14 @@ function DependencyGraph({ graphDataStructure, details }) {
                 }}
                 onFocus={() => setShowDropdown(true)}
                 onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
-                style={{
-                  padding: "8px 12px",
-                  fontSize: "14px",
-                  borderRadius: "4px",
-                  border: "1px solid var(--ifm-color-emphasis-300)",
-                  marginTop: "8px",
-                  width: "100%",
-                  boxSizing: "border-box"
-                }}
               />
               {showDropdown && filteredNodes.length > 0 && (
-                <ul
-                  style={{
-                    position: "absolute",
-                    top: "100%",
-                    left: 0,
-                    right: 0,
-                    border: "1px solid var(--ifm-color-emphasis-300)",
-                    borderTop: "none",
-                    borderRadius: "0 0 4px 4px",
-                    backgroundColor: "var(--ifm-color-emphasis-0)",
-                    listStyle: "none",
-                    margin: 0,
-                    padding: "8px 0",
-                    maxHeight: "200px",
-                    overflowY: "auto",
-                    zIndex: 1000
-                  }}
-                >
+                <ul className={styles.searchDropdown}>
                   {filteredNodes.slice(0, 10).map((nodeName) => (
                     <li
                       key={nodeName}
+                      className={styles.searchDropdownItem}
                       onClick={() => handleSelectNode(nodeName)}
-                      style={{
-                        padding: "8px 12px",
-                        cursor: "pointer",
-                        hover: { backgroundColor: "var(--ifm-color-emphasis-100)" }
-                      }}
-                      onMouseEnter={(e) => e.target.style.backgroundColor = "var(--ifm-color-emphasis-100)"}
-                      onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}
                     >
                       {nodeName}
                     </li>
@@ -850,87 +925,56 @@ function DependencyGraph({ graphDataStructure, details }) {
                 </ul>
               )}
             </div>
-            <div style={{ position: "relative", width: "180px" }}>
-              <select
-                id="graph-direction"
-                value={graphDirection}
-                onChange={(e) => {
-                  setGraphDirection(e.target.value);
-                }}
-                style={{
-                  padding: "8px 12px",
-                  fontSize: "14px",
-                  borderRadius: "4px",
-                  border: "1px solid var(--ifm-color-emphasis-300)",
-                  marginTop: "8px",
-                  width: "100%",
-                  boxSizing: "border-box",
-                  backgroundColor: "var(--ifm-color-emphasis-0)",
-                  cursor: "pointer"
-                }}
-              >
-                <option value="TB">Top to Bottom</option>
-                <option value="BT">Bottom to Top</option>
-                <option value="LR">Left to Right</option>
-                <option value="RL">Right to Left</option>
-              </select>
-            </div>
-            <div style={{ position: "relative", width: "180px" }}>
-              <select
-                id="graph-ranker"
-                value={graphRanker}
-                onChange={(e) => {
-                  setGraphRanker(e.target.value);
-                }}
-                style={{
-                  padding: "8px 12px",
-                  fontSize: "14px",
-                  borderRadius: "4px",
-                  border: "1px solid var(--ifm-color-emphasis-300)",
-                  marginTop: "8px",
-                  width: "100%",
-                  boxSizing: "border-box",
-                  backgroundColor: "var(--ifm-color-emphasis-0)",
-                  cursor: "pointer"
-                }}
-              >
-                <option value="network-simplex">Network Simplex</option>
-                <option value="tight-tree">Tight Tree</option>
-                <option value="longest-path">Longest Path</option>
-              </select>
-            </div>
-            <div style={{ position: "relative", width: "180px" }}>
-              <select
-                id="graph-align"
-                value={graphAlign}
-                onChange={(e) => {
-                  setGraphAlign(e.target.value);
-                }}
-                style={{
-                  padding: "8px 12px",
-                  fontSize: "14px",
-                  borderRadius: "4px",
-                  border: "1px solid var(--ifm-color-emphasis-300)",
-                  marginTop: "8px",
-                  width: "100%",
-                  boxSizing: "border-box",
-                  backgroundColor: "var(--ifm-color-emphasis-0)",
-                  cursor: "pointer"
-                }}
-              >
-                <option value="">Center (default)</option>
-                <option value="UL">Upper Left</option>
-                <option value="UR">Upper Right</option>
-                <option value="DL">Down Left</option>
-                <option value="DR">Down Right</option>
-              </select>
-            </div>
+            <button
+              onClick={() => setShowSettings(!showSettings)}
+              className={`button button--secondary ${styles.settingsButton}`}
+              title="Graph Settings"
+            >
+              <i className="fa fa-cog"></i>
+            </button>
           </div>
         </div>
       </div>
-      <div className={styles.graphContainer}>
-        <svg ref={svgRef}></svg>
-      </div>
+      {shouldShowWarning ? (
+        <div className={`${styles.graphContainer} ${styles.warningContainer}`}>
+          <div className={styles.warningContent}>
+            <div className={styles.warningIcon}>⚠️</div>
+            <h3>Large Graph Warning</h3>
+            <p className={styles.warningText}>
+              This graph contains <strong>{nodeCount.toLocaleString()} nodes</strong>.
+              Rendering more than {LARGE_GRAPH_THRESHOLD.toLocaleString()} nodes may slow down your browser and affect performance.
+            </p>
+            <div className={styles.warningButtons}>
+              <button
+                onClick={() => setUserConfirmedLargeGraph(true)}
+                className="button button--primary"
+              >
+                Continue Anyway
+              </button>
+              {showDoneNodes && (
+                <button
+                  onClick={() => setShowDoneNodes(false)}
+                  className="button button--secondary"
+                >
+                  Hide Completed Nodes
+                </button>
+              )}
+              {!showDoneNodes && (
+                <button
+                  disabled
+                  className="button button--secondary"
+                >
+                  Completed Nodes Already Hidden
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.graphContainer}>
+          <svg ref={svgRef}></svg>
+        </div>
+      )}
       <span className={styles.instructions}>
         Arrows point from package to its immediate children (dependents).
         Use mouse wheel to zoom, drag to pan, click on a node to zoom to its subgraph, or click on the background to reset the view.
