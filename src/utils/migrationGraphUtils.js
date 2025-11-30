@@ -74,7 +74,11 @@ export const getStatusColor = (prStatus) => {
 };
 
 export const getStatusTextColor = (prStatus) => {
-  if (["clean", "done", "unstable", "awaiting-parents", "in-pr"].includes(prStatus)) {
+  if (
+    ["clean", "done", "unstable", "awaiting-parents", "in-pr"].includes(
+      prStatus,
+    )
+  ) {
     return "#ffffff";
   }
   return "#000000";
@@ -221,9 +225,16 @@ export const buildGraphDataStructure = (feedstockStatus, details = null) => {
   // Build category map from details for quick lookup
   const nodeCategoryMap = {};
   if (details) {
-    ["done", "in-pr", "awaiting-pr", "awaiting-parents", "not-solvable", "bot-error"].forEach(category => {
+    [
+      "done",
+      "in-pr",
+      "awaiting-pr",
+      "awaiting-parents",
+      "not-solvable",
+      "bot-error",
+    ].forEach((category) => {
       if (details[category]) {
-        details[category].forEach(nodeName => {
+        details[category].forEach((nodeName) => {
           nodeCategoryMap[nodeName] = category;
         });
       }
