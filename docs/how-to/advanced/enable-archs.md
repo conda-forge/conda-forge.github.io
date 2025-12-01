@@ -21,11 +21,11 @@ Once the new builds are available from `anaconda.org`, please help the maintaine
 Adding a new architecture usually means following the same steps, but targeting different configuration files:
 
 1. Fork `conda-forge-pinning-feedstock` and create a fresh new branch. See [How to fork your feedstock](../basics/fork-sync.md) for more details.
-2. Edit the migration file for your architecture (see [sections below](#architecture-specific-information)) to add the name of your feedstock, sans the `-feedstock` suffix. Make sure to insert it in the right position to respect alphabetical order, or run `pre-commit run -a`.
+2. Edit the migration file for your architecture (see [architecture-specific information](#architecture-specific-information)) to add the name of your feedstock, sans the `-feedstock` suffix. Make sure to insert it in the right position to respect alphabetical order, or run `pre-commit run -a`.
 3. Commit the changes, push the branch to your fork (`origin`) and open the pull request.
 4. Wait for a member of `@conda-forge/core` to review and merge your pull request.
 
-Once merged, the feedstock will be added to the corresponding migration, which can be tracked in its status page (see [below](#architecture-specific-information) for the relevant links). When all dependencies are available, the bot will open a new PR with the necessary changes.
+Once merged, the feedstock will be added to the corresponding migration, which can be tracked in its status page (see [architecture-specific information](#architecture-specific-information) for the relevant links). When all dependencies are available, the bot will open a new PR with the necessary changes.
 
 ## Architecture-specific information
 
