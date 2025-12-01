@@ -30,9 +30,9 @@ Locally, you can follow these steps:
 
 1. If not available on disk yet, clone your fork and change into its directory.
 2. Change the branch to `main`: `git checkout main`.
-3. Pull from upstream: `git pull upstream main`.
+3. Pull from upstream: `git pull --ff-only upstream main`.
 
-If this results in merge conflicts, check the section below.
+If this results in a "not possible to fast-forward" error, check the section below.
 
 Once `main` is synced, you can create a new branch with `git checkout -b new-branch-name`.
 
