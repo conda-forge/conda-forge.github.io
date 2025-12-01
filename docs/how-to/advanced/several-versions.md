@@ -33,7 +33,7 @@ Now, this branch can be selected as a target branch in the following steps.
 
 ## Open a PR with the necessary changes
 
-From the same branch, create a new one to add some extra changes that will need to be reviewed in a PR:
+From the same branch, create another one to add some extra changes that will need to be reviewed in a PR:
 
 ```bash
 git checkout -b setup-3.10.x
