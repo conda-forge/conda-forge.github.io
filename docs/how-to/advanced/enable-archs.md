@@ -10,7 +10,7 @@ Before submitting a build request for a new architecure, check whether:
 
 1. The package is already built for that architecture. Consult the package page in anaconda.org: `https://anaconda.org/conda-forge/<package-name>`.
 2. Your package is already in the process of being migrated in the [corresponding migration status page](https://conda-forge.org/status/).
-3. The feedstock in question has already an issue or pull request for that architecture, which contain information why the package is not yet available.
+3. The feedstock in question has already an issue or pull request for that architecture, which may contain information why the package is not yet available.
 
 If you do see an open PR (or once a PR is submitted by the migration), you can help the feedstock maintainers make the build pass. If you have insight into the particular package, **please** chime in, but most of all **be patient and polite**.
 
@@ -21,7 +21,7 @@ Once the new builds are available from `anaconda.org`, please help the maintaine
 Adding a new architecture usually means following the same steps, but targeting different configuration files, which are listed in the sections below.
 
 1. Fork `conda-forge-pinning-feedstock` and create a fresh new branch. See [How to fork your feedstock](../basics/fork-sync.md) for more details.
-2. Edit the migration file for your architecture (see sections below) to add the name of your feedstock, sans the `-feedstock` suffix. Make sure to insert in the right position to respect alphabetical order, or run `pre-commit run -a`.
+2. Edit the migration file for your architecture (see sections below) to add the name of your feedstock, sans the `-feedstock` suffix. Make sure to insert it in the right position to respect alphabetical order, or run `pre-commit run -a`.
 3. Commit the changes, push the branch to your fork (`origin`) and open the pull request.
 4. Wait for a member of `@conda-forge/core` to review and merge your pull request.
 
