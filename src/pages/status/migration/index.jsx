@@ -9,6 +9,20 @@ import styles from "./styles.module.css";
 import { Tooltip } from "react-tooltip";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import moment from 'moment';
+
+// GitHub GraphQL MergeStateStatus documentation
+// Reference: https://docs.github.com/en/graphql/reference/enums#mergestatestatus
+const CI_STATUS_DESCRIPTIONS = {
+  clean: "Mergeable and passing commit status.",
+  unstable: "Mergeable with non-passing commit status.",
+  behind: "The head ref is out of date.",
+  blocked: "The merge is blocked.",
+  dirty: "The merge commit cannot be cleanly created.",
+  draft: "The merge is blocked due to the pull request being a draft.",
+  has_hooks: "Mergeable with passing commit status and pre-receive hooks.",
+  unknown: "The state cannot currently be determined."
+};
 
 // { Done, In PR, Awaiting PR, Awaiting parents, Not solvable, Bot error }
 // The third value is a boolean representing the default display state on load
@@ -37,6 +51,44 @@ export function measureProgress(details) {
     details["not-solvable"].length;
   const percentage = (done / (total || 1)) * 100;
   return { done, percentage, total };
+}
+
+// Mapping of GitHub PR status to UI display properties
+const STATUS_DISPLAY_MAP = {
+  clean: { text: "Passing", badgeClass: "success" },
+  unstable: { text: "Failing", badgeClass: "danger" },
+  dirty: { text: "Conflicts", badgeClass: "warning" },
+  blocked: { text: "Blocked", badgeClass: "danger" },
+  behind: { text: "Passing*", badgeClass: "success" },
+  draft: { text: "Draft", badgeClass: "secondary" },
+  has_hooks: { text: "Unknown*", badgeClass: "secondary" },
+  unknown: { text: "Unknown", badgeClass: "secondary" },
+};
+
+function getStatusBadgeClass(prStatus) {
+  if (!STATUS_DISPLAY_MAP[prStatus]) {
+    console.warn(`Unknown PR status: "${prStatus}". Expected one of: ${Object.keys(STATUS_DISPLAY_MAP).join(", ")}`);
+    return "secondary";
+  }
+  return STATUS_DISPLAY_MAP[prStatus].badgeClass;
+}
+
+function getStatusDisplayText(prStatus) {
+  if (!STATUS_DISPLAY_MAP[prStatus]) {
+    console.warn(`Unknown PR status: "${prStatus}". Expected one of: ${Object.keys(STATUS_DISPLAY_MAP).join(", ")}`);
+    return prStatus;
+  }
+  return STATUS_DISPLAY_MAP[prStatus].text;
+}
+
+function formatRelativeTime(timestamp) {
+  if (!timestamp) return null;
+  return moment(timestamp).fromNow();
+}
+
+function formatExactDateTime(timestamp) {
+  if (!timestamp) return null;
+  return moment(timestamp).format('LLLL');
 }
 
 export default function MigrationDetails() {
@@ -139,6 +191,16 @@ export default function MigrationDetails() {
             }
           </div>
         </div>
+        {view === "table" && (
+          <div className={`card margin-top--md`}>
+            <div className="card__header">
+              <h3>CI Status Legend</h3>
+            </div>
+            <div className="card__body">
+              <CIStatusLegend />
+            </div>
+          </div>
+        )}
       </main>
     </Layout>
   );
@@ -284,6 +346,7 @@ function Table({ details }) {
     || ORDERED.findIndex(x => x[0] == a[1]) - ORDERED.findIndex(x => x[0] == b[1])
     || a[0].localeCompare(b[0]))
   );
+
   return (
     <>
       <Filters
@@ -295,7 +358,9 @@ function Table({ details }) {
         <thead>
           <tr>
             <th style={{ width: 200 }}>Name</th>
-            <th style={{ width: 115 }}>Status</th>
+            <th style={{ width: 115 }}>Migration Status</th>
+            <th style={{ width: 115 }}>CI Status</th>
+            <th style={{ width: 115 }}>Last Updated</th>
             <th style={{ width: 115 }}>Total number of children</th>
             <th style={{ flex: 1 }}>Immediate children</th>
           </tr>
@@ -317,6 +382,9 @@ function Row({ children }) {
   const total_children = feedstock["num_descendants"];
   const href = feedstock["pr_url"];
   const details = feedstock["pre_pr_migrator_status"];
+  const pr_status = feedstock["pr_status"];
+
+
   return (<>
     <tr>
       <td>
@@ -332,6 +400,23 @@ function Row({ children }) {
       )}
       </td>
       <td style={{ textAlign: "center" }}>{TITLES[status]}</td>
+      <td style={{ textAlign: "center" }}>
+        {pr_status ? (
+          <span
+            className={`badge badge--${getStatusBadgeClass(pr_status)}`}
+            title={CI_STATUS_DESCRIPTIONS[pr_status] || pr_status}
+          >
+            {getStatusDisplayText(pr_status)}
+          </span>
+        ) : (
+          <span>—</span>
+        )}
+      </td>
+      <td style={{ textAlign: "center" }}>
+        <span title={formatExactDateTime(feedstock["updated_at"])}>
+          {formatRelativeTime(feedstock["updated_at"]) || "—"}
+        </span>
+      </td>
       <td style={{ textAlign: "center" }}>{total_children || null}</td>
       <td>
         {immediate_children.map((name, index) => (<React.Fragment key={index}>
@@ -343,9 +428,32 @@ function Row({ children }) {
       </td>
     </tr>
     {details && !collapsed && (<tr>
-      <td colSpan={4}><pre dangerouslySetInnerHTML={{ __html: details}} /></td>
+      <td colSpan={6}><pre dangerouslySetInnerHTML={{ __html: details}} /></td>
     </tr>)}
   </>);
+}
+
+function CIStatusLegend() {
+  const colorOrder = { danger: 0, success: 1, secondary: 2 };
+  const sortedStatuses = Object.entries(CI_STATUS_DESCRIPTIONS).sort(
+    ([statusA], [statusB]) => {
+      const classA = getStatusBadgeClass(statusA);
+      const classB = getStatusBadgeClass(statusB);
+      return (colorOrder[classA] ?? 3) - (colorOrder[classB] ?? 3);
+    }
+  );
+
+  return (
+    <div className={styles.ci_status_legend}>
+      {sortedStatuses.map(([status, description]) => (
+        <div key={status} className={styles.ci_status_item}>
+          <span className={`badge badge--${getStatusBadgeClass(status)}`}>{getStatusDisplayText(status)}</span>
+          <span>{description}</span>
+        </div>
+      ))}
+      <a href="https://docs.github.com/en/graphql/reference/enums#mergestatestatus" target="_blank" rel="noopener noreferrer">See GitHub Docs</a>
+    </div>
+  );
 }
 
 async function checkPausedOrClosed(name) {
