@@ -22,11 +22,11 @@ git pull upstream main
 git checkout -b v3.10.x
 ```
 
-Add an empty commit with the `[ci skip]` message so the new branch does not result in a new build process, and push it to `origin`. This is one of the rare ocassions where you must push directly to the feedstock, not your fork!
+Add an empty commit with the `[ci skip]` message so the new branch does not result in a new build process, and push it to `upstream`. This is one of the rare ocassions where you must push directly to the feedstock, not your fork!
 
 ```bash
 git commit --allow-empty -m "[ci skip] Create new branch for v3.10.x release series"
-git push -u origin v3.10.x
+git push -u upstream v3.10.x
 ```
 
 Now, this branch can be selected as a target branch in the following steps.
@@ -42,7 +42,9 @@ git checkout -b setup-3.10.x
 Open your `conda-forge.yml` file and add these lines:
 
 ```yaml
-abi_migration_branches:  # TODO
+bot:
+  abi_migration_branches:
+    - "v3.10.x"  # or the branch name you picked
 ```
 
 And [rerender](../basics/rerender.md). Now, make sure to adjust the recipe file so the correct version is being built.
