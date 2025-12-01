@@ -341,6 +341,53 @@ Batch syntax is a bit different from Bash and friends on Unix, so we have collec
   There are also some minimal emulators online that might get you started with the basics, even if not all CMD features are present.
   For example, this [Windows 95 emulator](https://www.pcjs.org/software/pcx86/sys/windows/win95/4.00.950/) features a more or less okay MS-DOS prompt.
 
+<a id="building-packages-using-configure-scripts-written-in-shell-script"></a>
+
+### Building packages using configure scripts written in shell script
+
+Some packages do not provide build systems with first-hand support for Windows, in particular these using `configure` scripts using autotools, or hand-written in shell scripts.
+You can use the [autotools_clang_conda](https://github.com/conda-forge/autotools_clang_conda-feedstock?tab=readme-ov-file#about-autotools_clang_conda-feedstock) to provide a build environment with a set of MSYS2 packages and a Clang toolchain configured to build packages compatible with MSVC.
+The feedstock's description provides example instructions.
+
+<a id="install-paths-and-naming-conventions"></a>
+
+### Install paths and naming conventions
+
+Unix-style packages in conda-forge are installed into a special `Library` directory tree under the build prefix.
+For the convenience of writing build scripts, both conda-build and rattler-build define the following variables:
+
+| Variable         | Value                      | Use                                                     |
+| ---------------- | -------------------------- | ------------------------------------------------------- |
+| `LIBRARY_PREFIX` | `%PREFIX%\Library`         | Prefix for installing packages                          |
+| `LIBRARY_BIN`    | `%PREFIX%\Library\bin`     | Executables and DLL libraries (`.exe` and `.dll` files) |
+| `LIBRARY_INC`    | `%PREFIX%\Library\include` | Header files                                            |
+| `LIBRARY_LIB`    | `%PREFIX%\Library\lib`     | Import and static libraries (`.lib` files)              |
+| `SCRIPTS`        | `%PREFIX%\Scripts`         | Python scripts                                          |
+
+On Windows, it is not possible to link directly to dynamic libraries (`.dll` files); the linker needs to use so-called import libraries instead.
+Import libraries have the same format and generally use the same suffix (`.lib`) as static libraries.
+Therefore, whenever both dynamic and static libraries are installed, the import library and the static library must use different names.
+There are two main naming conventions for installing libraries on Windows: the MSVC convention and the GCC/MinGW convention.
+
+The MSVC convention uses the following names:
+
+- dynamic library: `{name}.dll` (e.g. `zlib.dll`)
+- import library: `{name}.lib` (e.g. `zlib.lib`)
+- static library: no standard convention, often `lib{name}.lib` or `{name}-static.lib` (e.g. `zlibstatic.lib`)
+
+Usually, `{name}` does not include a `lib` prefix.
+Following this convention ensures that `-l{name}` works for dynamic linking, same as on Unix.
+However, some packages do use `lib` prefix for historical reasons, e.g. `libprotobuf.dll` + `libprotobuf.lib`.
+
+The GCC/MinGW convention uses the following names:
+
+- dynamic library: `lib{name}.dll`
+- import library: `lib{name}.dll.a`
+- static library: `lib{name}.a`
+
+There is no standard convention for providing SONAME-style versioning for libraries.
+Some packages do not provide versioning at all, others embed the version into the `.dll` name (but not the import library name, to preserve `-l{name}` behavior).
+
 <a id="special-dependencies-and-packages"></a>
 
 ## Special Dependencies and Packages
