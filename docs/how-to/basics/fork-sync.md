@@ -31,6 +31,20 @@ Locally, you can follow these steps:
 1. If not available on disk yet, clone your fork and change into its directory.
 2. Change the branch to `main`: `git checkout main`.
 3. Pull from upstream: `git pull upstream main`.
-   - If this results in merge conflicts, abort with `git merge --abort` and hard-reset `main`. This WILL lose all the changes made in `main` that were not part of upstream. The command is: `git reset --hard upstream/main`.
+
+If this results in merge conflicts, check the section below.
 
 Once `main` is synced, you can create a new branch with `git checkout -b new-branch-name`.
+
+## How to resolve conflicts in `main`
+
+When pulling from `upstream`, you might run into merge conflicts. This can happen if you pushed to your fork's `main` and opened a PR from that branch instead of creating a new one.
+
+To make your fork's `main` look like `upstream`'s:
+
+1. If you just tried to `pull`, abort with `git merge --abort`. Otherwise, check the info in `git status` and make sure you are you are in the `main` branch: `git checkout main`.
+2. Park your local `main` in separate branch, as a backup: `git checkout -b parked-changes`.
+3. Ensure your remotes are fresh: `git fetch upstream`.
+4. Go back to `main` and reset it to `upstream`'s: `git reset --hard upstream/main`.
+
+Alternatively, create a backup of your `main` branch with `git checkout main && git checkout -b parked-changes` and then try to pull with a rebase strategy with `git pull --rebase upstream main`. The idea here is to keep only the commits from `upstream` and drop the ones you added yourself. [Gitlab's docs on `git rebase`](https://docs.gitlab.com/topics/git/git_rebase/) contain more details on this type of workflow.
