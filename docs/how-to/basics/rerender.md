@@ -4,7 +4,7 @@ tags: [how-to, basic]
 
 # How to rerender a feedstock
 
-Rerendering is the process of regenerating the templated contents of your feedstock, according to the contents of `conda-forge.yml` and the recipe itself. 
+Rerendering is the process of regenerating the templated contents of your feedstock, according to the contents of `conda-forge.yml` and the recipe itself.
 
 <!-- PENDING: Read more about it in [Rerendering a feedstock](#TODO). -->
 
@@ -17,11 +17,12 @@ We need to re-render when there are changes in the following parts of the feedst
 - Updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.
 - Updates in conda-forge pinning that affect the feedstock.
 - Build issues that a feedstock configuration update will fix (follow us on [Zulip](https://conda-forge.zulipchat.com/) to know about those).
+
 :::
 
 There are two ways of rerendering a feedstock:
 
-- Via bot commands in the feedstock issue tracker
+- Via bot commands on the feedstock issue tracker
 - Using `conda-smithy` locally
 
 ## With bot commands
@@ -36,8 +37,7 @@ Behind the bot command, our automation ran `conda-smithy rerender` on your feeds
 
 If you haven't already, fork the feedstock to your personal account. Then clone the fork to disk and [create a fresh branch out of your synced `main`](fork-sync.md):
 
-```bash
-git clone git@github.com:username/name-feedstock.git
+```
 cd name-feedstock
 git checkout main
 git pull upstream main
@@ -49,10 +49,9 @@ Depending on your `conda-forge.yml` configuration, from now on you will need to 
 - Option A: With `conda_install_tool: pixi`, you only need to install Pixi and run `pixi run rerender`.
 - Option B: With other `conda_install_tool` settings you need to install `conda-smithy` on your own.
 
-
 ### 2a. Rerender with `conda_install_tool: pixi`
 
-1. Download and install `pixi` (check [their documentation](#TODO)).
+1. Download and install `pixi` (check [their documentation](https://pixi.sh/latest/installation/)).
 2. Go to the cloned repository and run `pixi run rerender`.
 
 ### 2b. Rerender with other `conda_install_tool` settings
@@ -60,7 +59,7 @@ Depending on your `conda-forge.yml` configuration, from now on you will need to 
 Create a new environment with `conda-smithy`:
 
 ```bash
-conda create -n conda-smithy -c conda-forge conda-smithy
+conda create -n conda-smithy -c conda-forge conda-smithy shellcheck
 ```
 
 Activate it and run `conda-smithy` from the cloned repository directory:
@@ -91,4 +90,8 @@ Please update your local conda-smithy version:
 - `conda update -n conda-smithy conda-smithy`
 - `pixi run --force-reinstall rerender`
 
-If you are intentionally using an older version, then pass `--no-check-uptodate`.
+If you are intentionally using an older version, then pass `--no-check-uptodate` to `conda-smithy:
+
+```
+conda-smithy rerender --no-check-uptodate
+```
