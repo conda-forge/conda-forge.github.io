@@ -4,7 +4,7 @@ tags: [how-to, advanced]
 
 # How to maintain several versions
 
-The conda-forge workflow assumes that all pushes to a branch in the feedstock repository will result in a build being uploaded to the conda-forge channel (and that's why PRs must always be opened from a fork!).
+The conda-forge workflow assumes that a push to any branch in the feedstock repository will result in a build being uploaded to the conda-forge channel (and that's why PRs must always be opened from a fork!).
 
 Most feedstocks only need `main` for their builds, since the package has a single release line, and new releases always imply a later version. However, some packages may maintain a few release lines in parallel. If you wish to maintain those in your feedstock, you will need to create a branch for each.
 
@@ -14,7 +14,7 @@ Most feedstocks only need `main` for their builds, since the package has a singl
 This operation can only be performed by users with write acccess to the feedstock.
 :::
 
-In the local copy of your [forked repository](../basics/fork-sync.md), create a branch named after the version you want to maintain. For example, for `3.10`, it could be:
+In the local copy of your [forked repository](../basics/fork-sync.md), create a branch named after the release line you want to maintain. For example, for `3.10`, it could be:
 
 ```bash
 git checkout main
