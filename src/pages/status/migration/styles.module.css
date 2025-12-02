@@ -495,7 +495,7 @@
 }
 
 .graphContainer :global(g.node.nodeAwaitingParents rect) {
-  fill: var(--ifm-color-emphasis-800) !important;
+  fill: var(--ifm-color-emphasis-500) !important;
   stroke: var(--ifm-color-emphasis-800) !important;
   stroke-width: 1px !important;
 }
@@ -516,7 +516,6 @@
 .graphContainer :global(g.node.nodeClean text),
 .graphContainer :global(g.node.nodeDone text),
 .graphContainer :global(g.node.nodeUnstable text),
-.graphContainer :global(g.node.nodeAwaitingParents text),
 .graphContainer :global(g.node.nodeInPr text) {
   fill: #ffffff !important;
   font-size: 12px !important;
@@ -526,6 +525,7 @@
 .graphContainer :global(g.node.nodeBotError text),
 .graphContainer :global(g.node.nodeNotSolvable text),
 .graphContainer :global(g.node.nodeAwaitingPr text),
+.graphContainer :global(g.node.nodeAwaitingParents text),
 .graphContainer :global(g.node.nodeUnknown text),
 .graphContainer :global(g.node.nodeDefault text) {
   fill: #000000 !important;

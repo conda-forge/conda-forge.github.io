@@ -73,17 +73,6 @@ export const getStatusClass = (prStatus) => {
   }
 };
 
-export const getStatusTextColor = (prStatus) => {
-  if (
-    ["clean", "done", "unstable", "awaiting-parents", "in-pr"].includes(
-      prStatus,
-    )
-  ) {
-    return "#ffffff";
-  }
-  return "#000000";
-};
-
 export const filterNodesBySearchTerm = (nodeNames, searchTerm) => {
   if (!searchTerm) return [];
   return nodeNames.filter((name) =>
@@ -427,19 +416,10 @@ const addNodeToGraph = (g, nodeId, nodeMap, nodeToComponent, addedNodes) => {
   g.setNode(nodeId, {
     label: nodeId,
     prUrl: nodeInfo.data.pr_url, // Store PR URL for later use
-    statusClass: getStatusClass(colorStatus), // Store status class
-    textClass:
-      getStatusTextColor(colorStatus) === "#ffffff"
-        ? "nodeTextLight"
-        : "nodeTextDark",
     rx: 5,
     ry: 5,
     padding: 15,
     class: getStatusClass(colorStatus),
-    labelClass:
-      getStatusTextColor(colorStatus) === "#ffffff"
-        ? "nodeTextLight"
-        : "nodeTextDark",
   });
 
   if (componentId) {
