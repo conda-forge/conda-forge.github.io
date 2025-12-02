@@ -6,6 +6,7 @@ import Layout from "@theme/Layout";
 import React, { useEffect, useState } from "react";
 import SVG from 'react-inlinesvg';
 import styles from "./styles.module.css";
+import graphStyles from "./graphStyles.module.css";
 import { Tooltip } from "react-tooltip";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -833,29 +834,29 @@ function DependencyGraph({ graphDataStructure, details, showDoneNodes, setShowDo
   };
 
   return (
-    <div className={styles.dependencyGraphContainer}>
-      <div className={styles.graphHeader}>
-        <div className={styles.headerContainer}>
+    <div className={graphStyles.dependencyGraphContainer}>
+      <div className={graphStyles.graphHeader}>
+        <div className={graphStyles.headerContainer}>
           {showSettings && (
-            <div className={styles.settingsPanel}>
-              <div className={styles.toggleContainer}>
-                <label className={styles.toggleLabel}>
+            <div className={graphStyles.settingsPanel}>
+              <div className={graphStyles.toggleContainer}>
+                <label className={graphStyles.toggleLabel}>
                   <span>Include completed packages</span>
                   <input
                     type="checkbox"
-                    className={styles.toggleInput}
+                    className={graphStyles.toggleInput}
                     checked={showDoneNodes}
                     onChange={(e) => setShowDoneNodes(e.target.checked)}
                   />
-                  <span className={styles.toggleSlider}></span>
+                  <span className={graphStyles.toggleSlider}></span>
                 </label>
               </div>
-              <div className={styles.settingsGrid}>
+              <div className={graphStyles.settingsGrid}>
                 <div>
-                  <label className={styles.settingLabel}>Direction</label>
+                  <label className={graphStyles.settingLabel}>Direction</label>
                   <select
                     id="graph-direction"
-                    className={styles.settingSelect}
+                    className={graphStyles.settingSelect}
                     value={graphDirection}
                     onChange={(e) => setGraphDirection(e.target.value)}
                   >
@@ -866,10 +867,10 @@ function DependencyGraph({ graphDataStructure, details, showDoneNodes, setShowDo
                   </select>
                 </div>
                 <div>
-                  <label className={styles.settingLabel}>Ranker</label>
+                  <label className={graphStyles.settingLabel}>Ranker</label>
                   <select
                     id="graph-ranker"
-                    className={styles.settingSelect}
+                    className={graphStyles.settingSelect}
                     value={graphRanker}
                     onChange={(e) => setGraphRanker(e.target.value)}
                   >
@@ -879,10 +880,10 @@ function DependencyGraph({ graphDataStructure, details, showDoneNodes, setShowDo
                   </select>
                 </div>
                 <div>
-                  <label className={styles.settingLabel}>Alignment</label>
+                  <label className={graphStyles.settingLabel}>Alignment</label>
                   <select
                     id="graph-align"
-                    className={styles.settingSelect}
+                    className={graphStyles.settingSelect}
                     value={graphAlign}
                     onChange={(e) => setGraphAlign(e.target.value)}
                   >
@@ -896,11 +897,11 @@ function DependencyGraph({ graphDataStructure, details, showDoneNodes, setShowDo
               </div>
             </div>
           )}
-          <div className={styles.headerControls}>
-            <div className={styles.searchContainer}>
+          <div className={graphStyles.headerControls}>
+            <div className={graphStyles.searchContainer}>
               <input
                 type="text"
-                className={styles.searchInput}
+                className={graphStyles.searchInput}
                 placeholder="Search for package..."
                 value={searchTerm}
                 onChange={(e) => {
@@ -911,11 +912,11 @@ function DependencyGraph({ graphDataStructure, details, showDoneNodes, setShowDo
                 onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
               />
               {showDropdown && filteredNodes.length > 0 && (
-                <ul className={styles.searchDropdown}>
+                <ul className={graphStyles.searchDropdown}>
                   {filteredNodes.slice(0, 10).map((nodeName) => (
                     <li
                       key={nodeName}
-                      className={styles.searchDropdownItem}
+                      className={graphStyles.searchDropdownItem}
                       onClick={() => handleSelectNode(nodeName)}
                     >
                       {nodeName}
@@ -926,7 +927,7 @@ function DependencyGraph({ graphDataStructure, details, showDoneNodes, setShowDo
             </div>
             <button
               onClick={() => setShowSettings(!showSettings)}
-              className={`button button--secondary ${styles.settingsButton}`}
+              className={`button button--secondary ${graphStyles.settingsButton}`}
               title="Graph Settings"
             >
               <i className="fa fa-cog"></i>
@@ -935,15 +936,15 @@ function DependencyGraph({ graphDataStructure, details, showDoneNodes, setShowDo
         </div>
       </div>
       {shouldShowWarning ? (
-        <div className={`${styles.graphContainer} ${styles.warningContainer}`}>
-          <div className={styles.warningContent}>
-            <div className={styles.warningIcon}>⚠️</div>
+        <div className={`${graphStyles.graphContainer} ${graphStyles.warningContainer}`}>
+          <div className={graphStyles.warningContent}>
+            <div className={graphStyles.warningIcon}>⚠️</div>
             <h3>Large Graph Warning</h3>
-            <p className={styles.warningText}>
+            <p className={graphStyles.warningText}>
               This graph contains <strong>{nodeCount.toLocaleString()} nodes</strong>.
               Rendering more than {LARGE_GRAPH_THRESHOLD.toLocaleString()} nodes may slow down your browser and affect performance.
             </p>
-            <div className={styles.warningButtons}>
+            <div className={graphStyles.warningButtons}>
               <button
                 onClick={() => setUserConfirmedLargeGraph(true)}
                 className="button button--primary"
@@ -970,11 +971,11 @@ function DependencyGraph({ graphDataStructure, details, showDoneNodes, setShowDo
           </div>
         </div>
       ) : (
-        <div className={styles.graphContainer}>
+        <div className={graphStyles.graphContainer}>
           <svg ref={svgRef}></svg>
         </div>
       )}
-      <span className={styles.instructions}>
+      <span className={graphStyles.instructions}>
         Arrows point from package to its immediate children (dependents).
         Use mouse wheel to zoom, drag to pan, click on a node to zoom to its subgraph, or click on the background to reset the view.
       </span>
