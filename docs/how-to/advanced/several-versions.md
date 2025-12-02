@@ -50,3 +50,9 @@ bot:
 And [rerender](../basics/rerender.md). Now, make sure to adjust the recipe file so the correct version is being built.
 
 Once ready, push the branch to your fork (`origin`) and open the corresponding pull request. Don't forget to pick `v3.10.x` as the target branch!
+
+:::note
+
+In some cases, the `abi_migration_branches` may receive migration PRs that have already been processed. This is being looked into at [regro/cf-scripts#2500](https://github.com/regro/cf-scripts/issues/2500). In the meantime, you can ignore these redundant PRs by closing them.
+
+:::
