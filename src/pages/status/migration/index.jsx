@@ -18,7 +18,6 @@ import {
   getPrunedFeedstockStatus,
   buildGraphDataStructure,
   buildInitialGraph,
-  getStatusColor,
   getStatusTextColor,
   filterNodesBySearchTerm,
   getAwaitingParentsWithNoParent,

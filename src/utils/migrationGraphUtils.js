@@ -73,31 +73,6 @@ export const getStatusClass = (prStatus) => {
   }
 };
 
-export const getStatusColor = (prStatus) => {
-  switch (prStatus) {
-    case "clean":
-      return "var(--ifm-color-success)";
-    case "unstable":
-      return "var(--ifm-color-danger)";
-    case "bot-error":
-      return "var(--ifm-color-warning)";
-    case "not-solvable":
-      return "var(--ifm-color-warning)";
-    case "done":
-      return "var(--ifm-color-success)";
-    case "in-pr":
-      return "var(--ifm-color-info)";
-    case "awaiting-pr":
-      return "var(--ifm-color-emphasis-600)";
-    case "awaiting-parents":
-      return "var(--ifm-color-emphasis-800)";
-    case "unknown":
-      return "var(--ifm-color-emphasis-400)";
-    default:
-      return "var(--ifm-color-emphasis-200)";
-  }
-};
-
 export const getStatusTextColor = (prStatus) => {
   if (
     ["clean", "done", "unstable", "awaiting-parents", "in-pr"].includes(
