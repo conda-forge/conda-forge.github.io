@@ -246,14 +246,14 @@
 }
 
 .graphContainer :global(svg g.edgePath path) {
-  stroke: #333 !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
   stroke-width: 2px !important;
   fill: none !important;
 }
 
 .graphContainer :global(svg g.edgeLabel) {
   font-size: 12px;
-  fill: #333;
+  fill: var(--ifm-color-emphasis-800);
 }
 
 .graphInfo {
@@ -449,4 +449,86 @@
 
 .toggleContainer {
   margin-bottom: 12px;
+}
+
+/* SVG Node Status Colors - using style guide colors */
+.graphContainer :global(g.node.nodeClean rect) {
+  fill: var(--ifm-color-success) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeUnstable rect) {
+  fill: var(--ifm-color-danger) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeBotError rect) {
+  fill: var(--ifm-color-warning) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeNotSolvable rect) {
+  fill: var(--ifm-color-warning) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeDone rect) {
+  fill: var(--ifm-color-success) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeInPr rect) {
+  fill: var(--ifm-color-info) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeAwaitingPr rect) {
+  fill: var(--ifm-color-emphasis-600) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeAwaitingParents rect) {
+  fill: var(--ifm-color-emphasis-800) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeUnknown rect) {
+  fill: var(--ifm-color-emphasis-400) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeDefault rect) {
+  fill: var(--ifm-color-emphasis-200) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+/* Text colors for contrast */
+.graphContainer :global(g.node.nodeClean text),
+.graphContainer :global(g.node.nodeDone text),
+.graphContainer :global(g.node.nodeUnstable text),
+.graphContainer :global(g.node.nodeAwaitingParents text),
+.graphContainer :global(g.node.nodeInPr text) {
+  fill: #ffffff !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+
+.graphContainer :global(g.node.nodeBotError text),
+.graphContainer :global(g.node.nodeNotSolvable text),
+.graphContainer :global(g.node.nodeAwaitingPr text),
+.graphContainer :global(g.node.nodeUnknown text),
+.graphContainer :global(g.node.nodeDefault text) {
+  fill: #000000 !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
 }

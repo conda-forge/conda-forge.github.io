@@ -24,8 +24,8 @@ export const getGraphSettings = (
 });
 
 const EDGE_STYLE = {
-  arrowheadStyle: "fill: #333;",
-  style: "stroke: #333; stroke-width: 2px;",
+  arrowheadStyle: "fill: var(--ifm-color-emphasis-800);",
+  style: "stroke: var(--ifm-color-emphasis-800); stroke-width: 2px;",
 };
 
 export const getNodeIdFromSvgElement = (element) => {
@@ -48,28 +48,53 @@ export const getPrunedFeedstockStatus = (feedstockStatus, details) => {
   return pruned;
 };
 
+export const getStatusClass = (prStatus) => {
+  switch (prStatus) {
+    case "clean":
+      return "nodeClean";
+    case "unstable":
+      return "nodeUnstable";
+    case "bot-error":
+      return "nodeBotError";
+    case "not-solvable":
+      return "nodeNotSolvable";
+    case "done":
+      return "nodeDone";
+    case "in-pr":
+      return "nodeInPr";
+    case "awaiting-pr":
+      return "nodeAwaitingPr";
+    case "awaiting-parents":
+      return "nodeAwaitingParents";
+    case "unknown":
+      return "nodeUnknown";
+    default:
+      return "nodeDefault";
+  }
+};
+
 export const getStatusColor = (prStatus) => {
   switch (prStatus) {
     case "clean":
-      return "#28a745"; // Green
+      return "var(--ifm-color-success)";
     case "unstable":
-      return "#dc3545"; // Red for failing
+      return "var(--ifm-color-danger)";
     case "bot-error":
-      return "#ffc107"; // Orange for bot errors
+      return "var(--ifm-color-warning)";
     case "not-solvable":
-      return "#ffc107"; // Orange for not solvable
+      return "var(--ifm-color-warning)";
     case "done":
-      return "#28a745"; // Green for done
+      return "var(--ifm-color-success)";
     case "in-pr":
-      return "#17a2b8"; // Blue for in-pr (will be overridden by PR status)
+      return "var(--ifm-color-info)";
     case "awaiting-pr":
-      return "#adb5bd"; // Gray for awaiting-pr
+      return "var(--ifm-color-emphasis-600)";
     case "awaiting-parents":
-      return "#6c757d"; // Darker gray for awaiting-parents
+      return "var(--ifm-color-emphasis-800)";
     case "unknown":
-      return "#adb5bd"; // Lighter gray
+      return "var(--ifm-color-emphasis-400)";
     default:
-      return "#e9ecef"; // Light gray for awaiting
+      return "var(--ifm-color-emphasis-200)";
   }
 };
 
@@ -320,7 +345,7 @@ export const applyHighlight = (svgGroup, nodeId, graphDataStructure) => {
     svgGroup.selectAll("g.edgePath").style("opacity", 1);
     svgGroup
       .selectAll("g.edgePath path")
-      .style("stroke", "#333")
+      .style("stroke", "var(--ifm-color-emphasis-800)")
       .style("stroke-width", "2px");
     return;
   }
@@ -353,7 +378,7 @@ export const applyHighlight = (svgGroup, nodeId, graphDataStructure) => {
       d3.select(this)
         .style("opacity", 1)
         .selectAll("path")
-        .style("stroke", "#FF6B35")
+        .style("stroke", "var(--ifm-color-warning)")
         .style("stroke-width", "4px");
     }
   });
@@ -427,12 +452,19 @@ const addNodeToGraph = (g, nodeId, nodeMap, nodeToComponent, addedNodes) => {
   g.setNode(nodeId, {
     label: nodeId,
     prUrl: nodeInfo.data.pr_url, // Store PR URL for later use
-    statusColor: getStatusColor(colorStatus), // Store status color
+    statusClass: getStatusClass(colorStatus), // Store status class
+    textClass:
+      getStatusTextColor(colorStatus) === "#ffffff"
+        ? "nodeTextLight"
+        : "nodeTextDark",
     rx: 5,
     ry: 5,
     padding: 15,
-    style: `fill: ${getStatusColor(colorStatus)}; stroke: #333; stroke-width: 1px;`,
-    labelStyle: `fill: ${getStatusTextColor(colorStatus)}; font-size: 12px; font-weight: bold;`,
+    class: getStatusClass(colorStatus),
+    labelClass:
+      getStatusTextColor(colorStatus) === "#ffffff"
+        ? "nodeTextLight"
+        : "nodeTextDark",
   });
 
   if (componentId) {
@@ -462,7 +494,7 @@ export const buildGraph = (
       label: "",
       clusterLabelPos: "top",
       style:
-        "fill: none; stroke: #ccc; stroke-width: 1px; stroke-dasharray: 5,5;",
+        "fill: none; stroke: var(--ifm-color-emphasis-300); stroke-width: 1px; stroke-dasharray: 5,5;",
     });
   });
 

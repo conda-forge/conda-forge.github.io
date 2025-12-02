@@ -701,7 +701,7 @@ function DependencyGraph({ graphDataStructure, details, showDoneNodes, setShowDo
 
       if (selectedNodeId === nodeId) {
         d3.select(this).selectAll("rect")
-          .style("stroke", "#0066cc")
+          .style("stroke", "var(--ifm-color-primary)")
           .style("stroke-width", "4px");
 
         if (graphNode?.prUrl) {
@@ -725,7 +725,7 @@ function DependencyGraph({ graphDataStructure, details, showDoneNodes, setShowDo
               .attr("class", "pr-number")
               .attr("x", 0)
               .attr("dy", "1.2em")
-              .attr("fill", "#0066cc")
+              .attr("fill", "var(--ifm-color-info)")
               .attr("font-size", "11px")
               .style("text-decoration", "underline")
               .style("cursor", "pointer")
@@ -748,7 +748,7 @@ function DependencyGraph({ graphDataStructure, details, showDoneNodes, setShowDo
 
       if (awaitingParentsNoParent.has(nodeId)) {
         d3.select(this).selectAll("rect")
-          .style("fill", "#ffe6e6")
+          .style("fill", "var(--ifm-color-danger-contrast-background)")
           .style("stroke-dasharray", "5,5")
           .style("stroke-width", "2px");
       }
