@@ -10,6 +10,8 @@ import { Tooltip } from "react-tooltip";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import moment from 'moment';
+import { compare } from '@site/src/components/StatusDashboard/current_migrations';
+import { useSorting, SortableHeader } from '@site/src/components/SortableTable';
 
 // GitHub GraphQL MergeStateStatus documentation
 // Reference: https://docs.github.com/en/graphql/reference/enums#mergestatestatus
@@ -337,15 +339,26 @@ function Graph(props) {
 function Table({ details }) {
   const defaultFilters = ORDERED.reduce((filters, [status, _, toggled]) => ({ ...filters, [status]: toggled }), {});
   const [filters, setState] = useState(defaultFilters);
+  const { sort, previousSort, resort } = useSorting("num_descendants", "descending");
   const feedstock = details._feedstock_status;
+
+  const CI_STATUS_ORDER = { clean: 0, behind: 1, has_hooks: 2, unknown: 3, unstable: 4, blocked: 5, dirty: 6, draft: 7, "": 999 };
+
+  // Transform data to match expected structure for compare function
   const rows = ORDERED.reduce((rows, [status]) => (
     filters[status] ? rows :
-      rows.concat((details[status]).map(name => ([name, status])))
-  ), []).sort((a, b) => (
-    feedstock[b[0]]["num_descendants"] - feedstock[a[0]]["num_descendants"]
-    || ORDERED.findIndex(x => x[0] == a[1]) - ORDERED.findIndex(x => x[0] == b[1])
-    || a[0].localeCompare(b[0]))
-  );
+      rows.concat((details[status]).map(name => {
+        const feedstockData = feedstock[name];
+        return {
+          name,
+          status,
+          migration_status_order: ORDERED.findIndex(x => x[0] == status),
+          ci_status_order: CI_STATUS_ORDER[feedstockData["pr_status"] || ""] ?? 8,
+          num_descendants: feedstockData["num_descendants"] ?? 0,
+          updated_at_timestamp: feedstockData["updated_at"] ? new Date(feedstockData["updated_at"]).getTime() : 0,
+        };
+      }))
+  ), []).sort(compare(sort.by, sort.order, previousSort));
 
   return (
     <>
@@ -357,17 +370,27 @@ function Table({ details }) {
       {rows.length > 0 && <table>
         <thead>
           <tr>
-            <th style={{ width: 200 }}>Name</th>
-            <th style={{ width: 115 }}>Migration Status</th>
-            <th style={{ width: 115 }}>CI Status</th>
-            <th style={{ width: 115 }}>Last Updated</th>
-            <th style={{ width: 115 }}>Total number of children</th>
+            <SortableHeader sortKey="name" currentSort={sort} onSort={resort} styles={styles} style={{ width: 200 }}>
+              Name
+            </SortableHeader>
+            <SortableHeader sortKey="migration_status" currentSort={sort} onSort={resort} styles={styles} style={{ width: 115 }}>
+              Migration Status
+            </SortableHeader>
+            <SortableHeader sortKey="ci_status" currentSort={sort} onSort={resort} styles={styles} style={{ width: 115 }}>
+              CI Status
+            </SortableHeader>
+            <SortableHeader sortKey="updated_at" currentSort={sort} onSort={resort} styles={styles} style={{ width: 115 }}>
+              Last Updated
+            </SortableHeader>
+            <SortableHeader sortKey="num_descendants" currentSort={sort} onSort={resort} styles={styles} style={{ width: 115 }}>
+              Total number of children
+            </SortableHeader>
             <th style={{ flex: 1 }}>Immediate children</th>
           </tr>
         </thead>
         <tbody>
-          {rows.map(([name, status], i) =>
-            <Row key={i}>{{ feedstock: feedstock[name], name, status }}</Row>
+          {rows.map((row, i) =>
+            <Row key={i}>{{ feedstock: feedstock[row.name], name: row.name, status: row.status }}</Row>
           )}
         </tbody>
       </table>}
