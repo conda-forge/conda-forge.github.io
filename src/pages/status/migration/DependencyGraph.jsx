@@ -3,6 +3,8 @@ import * as dagreD3 from "dagre-d3-es";
 import * as d3 from "d3";
 import graphStyles from "./graphStyles.module.css";
 import {
+  getPrunedFeedstockStatus,
+  buildGraphDataStructure,
   buildInitialGraph,
   filterNodesBySearchTerm,
   getAwaitingParentsWithNoParent,
@@ -14,7 +16,14 @@ import {
 // Threshold for showing large graph warning
 const LARGE_GRAPH_THRESHOLD = 1000;
 
-export default function DependencyGraph({ graphDataStructure, details, showDoneNodes, setShowDoneNodes }) {
+export default function DependencyGraph({ details }) {
+  const [showDoneNodes, setShowDoneNodes] = useState(false);
+
+  const graphDataStructure = React.useMemo(() => {
+    if (!details) return { nodeMap: {}, edgeMap: {}, allNodeIds: [] };
+    const feedstock = showDoneNodes ? details._feedstock_status : getPrunedFeedstockStatus(details._feedstock_status, details);
+    return buildGraphDataStructure(feedstock, details);
+  }, [details, showDoneNodes]);
   const [graph, setGraph] = useState(null);
   const svgRef = React.useRef();
   const [selectedNodeId, setSelectedNodeId] = React.useState(null);

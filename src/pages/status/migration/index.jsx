@@ -13,10 +13,6 @@ import moment from 'moment';
 import { compare } from '@site/src/components/StatusDashboard/current_migrations';
 import { useSorting, SortableHeader } from '@site/src/components/SortableTable';
 import * as d3 from "d3";
-import {
-  getPrunedFeedstockStatus,
-  buildGraphDataStructure,
-} from "@site/src/utils/migrationGraphUtils";
 import DependencyGraph from "./DependencyGraph";
 
 // GitHub GraphQL MergeStateStatus documentation
@@ -108,7 +104,6 @@ export default function MigrationDetails() {
     redirect: false,
     view: "table",
   });
-  const [showDoneNodes, setShowDoneNodes] = useState(false);
   const toggle = (view) => {
     if (window && window.localStorage) {
       try {
@@ -144,12 +139,6 @@ export default function MigrationDetails() {
   }, []);
   if (state.redirect) return <Redirect to="/status" replace />;
   const { details, name, view } = state;
-
-  const graphDataStructure = React.useMemo(() => {
-    if (!details) return { nodeMap: {}, edgeMap: {}, allNodeIds: [] };
-    const feedstock = showDoneNodes ? details._feedstock_status : getPrunedFeedstockStatus(details._feedstock_status, details);
-    return buildGraphDataStructure(feedstock, details);
-  }, [details, showDoneNodes]);
 
   return (
     <Layout
@@ -212,7 +201,7 @@ export default function MigrationDetails() {
             {view === "graph" ?
               <Graph>{name}</Graph> :
               view === "dependencies" ?
-                (details && <DependencyGraph graphDataStructure={graphDataStructure} details={details} showDoneNodes={showDoneNodes} setShowDoneNodes={setShowDoneNodes} />) :
+                (details && <DependencyGraph details={details} />) :
                 (details && <Table details={details} />)
             }
           </div>
