@@ -50,5 +50,6 @@ If you want to save your changes but still make your fork's `main` identical to 
 
 Alternatively, create a backup of your `main` branch with `git checkout main && git checkout -b parked-changes`
 and then try to pull with a rebase strategy with `git rebase -i upstream/main`.
-The idea here is to keep only the commits from `upstream` and drop the ones you added yourself.
+The idea here is to replay the commits you want to keep on top of the `upstream/main` branch, while dropping
+those that have become obsolete (or are otherwise conflict-prone, like rerender commits).
 [Gitlab's docs on `git rebase`](https://docs.gitlab.com/topics/git/git_rebase/) contain more details on this type of workflow.
