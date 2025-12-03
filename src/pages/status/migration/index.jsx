@@ -314,6 +314,8 @@ function Graph(props) {
   const url = urls.migrations.graph.replace("<NAME>", props.children);
   const onError = (error) => setState(error);
 
+  // This effect allows zooming and panning in the SVG container;
+  // The target div must use the provided `containerRef` reference
   useEffect(() => {
     if (!containerRef.current || error) return;
 
