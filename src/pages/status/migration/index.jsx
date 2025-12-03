@@ -12,6 +12,7 @@ import TabItem from '@theme/TabItem';
 import moment from 'moment';
 import { compare } from '@site/src/components/StatusDashboard/current_migrations';
 import { useSorting, SortableHeader } from '@site/src/components/SortableTable';
+import * as d3 from "d3";
 
 // GitHub GraphQL MergeStateStatus documentation
 // Reference: https://docs.github.com/en/graphql/reference/enums#mergestatestatus
@@ -309,8 +310,106 @@ function Filters({ counts, filters, onFilter }) {
 
 function Graph(props) {
   const [error, setState] = useState("");
+  const containerRef = React.useRef(null);
   const url = urls.migrations.graph.replace("<NAME>", props.children);
   const onError = (error) => setState(error);
+
+  // This effect allows zooming and panning in the SVG container;
+  // The target div must use the provided `containerRef` reference
+  useEffect(() => {
+    if (!containerRef.current || error) return;
+
+    const container = d3.select(containerRef.current);
+    let timer = null;
+
+    const setupZoom = () => {
+      const svgElement = container.select('svg').node();
+      if (!svgElement) {
+        // Wait a bit for SVG to load
+        timer = setTimeout(setupZoom, 100);
+        return;
+      }
+
+      const svg = d3.select(svgElement);
+
+      // Check if group already exists
+      let svgGroup = svg.select('g.zoom-group');
+      if (svgGroup.empty()) {
+        svgGroup = svg.append('g').attr('class', 'zoom-group');
+
+        // Move all existing children into the group (except the group itself)
+        svg.selectAll('*').each(function() {
+          const node = this;
+          if (node !== svgGroup.node() && node.parentNode === svgElement) {
+            svgGroup.node().appendChild(node);
+          }
+        });
+      }
+
+      // Get SVG dimensions (use viewBox if available, otherwise use bounding rect)
+      const viewBox = svgElement.viewBox?.baseVal;
+      const svgWidth = viewBox ? viewBox.width : (svgElement.getBoundingClientRect().width || containerRef.current.clientWidth);
+      const svgHeight = viewBox ? viewBox.height : (svgElement.getBoundingClientRect().height || containerRef.current.clientHeight || 600);
+
+      const bbox = svgElement.getBBox();
+
+      const initialScale = Math.min(
+        svgWidth / bbox.width,
+        svgHeight / bbox.height,
+        1
+      ) * 0.9;
+
+      const centerX = svgWidth / 2;
+      const centerY = svgHeight / 2;
+
+      const bboxCenterX = bbox.x + bbox.width / 2;
+      const bboxCenterY = bbox.y + bbox.height / 2;
+
+      const initialTranslate = [
+        centerX - bboxCenterX * initialScale,
+        centerY - bboxCenterY * initialScale,
+      ];
+
+      // Store initial transform for reset
+      const initialTransform = d3.zoomIdentity
+        .translate(initialTranslate[0], initialTranslate[1])
+        .scale(initialScale);
+
+      // Set up zoom behavior - apply to SVG element for proper drag sensitivity
+      const zoom = d3.zoom()
+        .scaleExtent([0.1, 4])
+        .on("zoom", (event) => {
+          svgGroup.attr("transform", event.transform);
+        });
+
+      svg.call(zoom);
+
+      if (!svgGroup.attr("transform")) {
+        svg.call(zoom.transform, initialTransform);
+      }
+
+      // Double-click to reset zoom/pan to initial state
+      svg.on("dblclick.zoom", null); // Remove default double-click zoom
+      svg.on("dblclick", function() {
+        svg.transition()
+          .duration(750)
+          .call(zoom.transform, initialTransform);
+      });
+    };
+
+    setupZoom();
+
+    return () => {
+      if (timer) clearTimeout(timer);
+      const svgElement = container.select('svg').node();
+      if (svgElement) {
+        const svg = d3.select(svgElement);
+        svg.on(".zoom", null);
+        svg.on("dblclick", null);
+      }
+    };
+  }, [error, url]);
+
   return (
     <div>
       <p style={{textAlign: "center"}}>
@@ -323,12 +422,21 @@ function Graph(props) {
         <p style={{textAlign: "center"}}>
           Graph is unavailable.
         </p> :
-        <div style={{ overflowX: "auto" }}>
+        <div
+          ref={containerRef}
+          style={{
+            width: "100%",
+            height: "600px",
+            overflow: "hidden",
+            cursor: "move"
+          }}
+        >
           <SVG
             onError={onError}
             src={url}
             title={props.children}
             description={`Migration graph for ${props.children}`}
+            style={{ width: "100%", height: "100%" }}
           />
         </div>
       }
