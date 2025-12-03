@@ -29,12 +29,7 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
   const [graph, setGraph] = useState(null);
   const svgRef = React.useRef();
   const [selectedNodeId, setSelectedNodeId] = React.useState(null);
-
-  useEffect(() => {
-    if (initialSelectedNode && graphDataStructure.nodeMap[initialSelectedNode]) {
-      setSelectedNodeId(initialSelectedNode);
-    }
-  }, [initialSelectedNode, graphDataStructure]);
+  const [isInitialized, setIsInitialized] = React.useState(false);
   const [searchTerm, setSearchTerm] = React.useState("");
   const [showDropdown, setShowDropdown] = React.useState(false);
   const [showSettings, setShowSettings] = React.useState(false);
@@ -44,6 +39,15 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
   const [userConfirmedLargeGraph, setUserConfirmedLargeGraph] = React.useState(false);
 
   useEffect(() => {
+    if (initialSelectedNode && graphDataStructure.nodeMap[initialSelectedNode]) {
+      setSelectedNodeId(initialSelectedNode);
+    }
+    setIsInitialized(true);
+  }, [initialSelectedNode, graphDataStructure]);
+
+  useEffect(() => {
+    if (!isInitialized) return;
+
     const searchParams = new URLSearchParams(location.search);
 
     if (selectedNodeId) {
@@ -58,7 +62,7 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
     if (newUrl !== `${location.pathname}${location.search}`) {
       history.replace(newUrl);
     }
-  }, [selectedNodeId, history, location.pathname]);
+  }, [selectedNodeId, history, location.pathname, isInitialized]);
 
   const zoomedGraphData = React.useMemo(() => {
     return createZoomedGraphData(selectedNodeId, graphDataStructure);
