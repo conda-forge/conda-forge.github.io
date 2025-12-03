@@ -98,11 +98,15 @@ function formatExactDateTime(timestamp) {
 export default function MigrationDetails() {
   const location = useLocation();
   const { siteConfig } = useDocusaurusContext();
+  const urlParams = new URLSearchParams(location.search);
+  const dependencyParam = urlParams.get("dependency");
+
   const [state, setState] = useState({
-    name: new URLSearchParams(location.search).get("name"),
+    name: urlParams.get("name"),
     details: null,
     redirect: false,
     view: "table",
+    selectedDependency: dependencyParam,
   });
   const toggle = (view) => {
     if (window && window.localStorage) {
@@ -124,6 +128,9 @@ export default function MigrationDetails() {
         console.warn(`error reading from local storage`, error);
       }
     }
+    if (dependencyParam) {
+      view = "dependencies";
+    }
     void (async () => {
       try {
         const url = urls.migrations.details.replace("<NAME>", state.name);
@@ -138,7 +145,7 @@ export default function MigrationDetails() {
     })();
   }, []);
   if (state.redirect) return <Redirect to="/status" replace />;
-  const { details, name, view } = state;
+  const { details, name, view, selectedDependency } = state;
 
   return (
     <Layout
@@ -201,7 +208,7 @@ export default function MigrationDetails() {
             {view === "graph" ?
               <Graph>{name}</Graph> :
               view === "dependencies" ?
-                (details && <DependencyGraph details={details} />) :
+                (details && <DependencyGraph details={details} initialSelectedNode={selectedDependency} />) :
                 (details && <Table details={details} />)
             }
           </div>

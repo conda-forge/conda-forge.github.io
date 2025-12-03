@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as dagreD3 from "dagre-d3-es";
 import * as d3 from "d3";
+import { useHistory, useLocation } from "@docusaurus/router";
 import graphStyles from "./graphStyles.module.css";
 import {
   getPrunedFeedstockStatus,
@@ -13,10 +14,11 @@ import {
   getNodeIdFromSvgElement
 } from "@site/src/utils/migrationGraphUtils";
 
-// Threshold for showing large graph warning
 const LARGE_GRAPH_THRESHOLD = 1000;
 
-export default function DependencyGraph({ details }) {
+export default function DependencyGraph({ details, initialSelectedNode = null }) {
+  const history = useHistory();
+  const location = useLocation();
   const [showDoneNodes, setShowDoneNodes] = useState(false);
 
   const graphDataStructure = React.useMemo(() => {
@@ -27,6 +29,12 @@ export default function DependencyGraph({ details }) {
   const [graph, setGraph] = useState(null);
   const svgRef = React.useRef();
   const [selectedNodeId, setSelectedNodeId] = React.useState(null);
+
+  useEffect(() => {
+    if (initialSelectedNode && graphDataStructure.nodeMap[initialSelectedNode]) {
+      setSelectedNodeId(initialSelectedNode);
+    }
+  }, [initialSelectedNode, graphDataStructure]);
   const [searchTerm, setSearchTerm] = React.useState("");
   const [showDropdown, setShowDropdown] = React.useState(false);
   const [showSettings, setShowSettings] = React.useState(false);
@@ -34,6 +42,23 @@ export default function DependencyGraph({ details }) {
   const [graphRanker, setGraphRanker] = React.useState("network-simplex");
   const [graphAlign, setGraphAlign] = React.useState("");
   const [userConfirmedLargeGraph, setUserConfirmedLargeGraph] = React.useState(false);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+
+    if (selectedNodeId) {
+      searchParams.set("dependency", selectedNodeId);
+    } else {
+      searchParams.delete("dependency");
+    }
+
+    const newSearch = searchParams.toString();
+    const newUrl = `${location.pathname}${newSearch ? `?${newSearch}` : ""}`;
+
+    if (newUrl !== `${location.pathname}${location.search}`) {
+      history.replace(newUrl);
+    }
+  }, [selectedNodeId, history, location.pathname]);
 
   const zoomedGraphData = React.useMemo(() => {
     return createZoomedGraphData(selectedNodeId, graphDataStructure);
@@ -90,9 +115,7 @@ export default function DependencyGraph({ details }) {
       const graphNode = graph.node(nodeId);
 
       if (selectedNodeId === nodeId) {
-        d3.select(this).selectAll("rect")
-          .style("stroke", "var(--ifm-color-primary)")
-          .style("stroke-width", "4px");
+        d3.select(this).classed("nodeSelected", true);
 
         if (graphNode?.prUrl) {
           const prMatch = graphNode.prUrl.match(/\/pull\/(\d+)/);
@@ -115,7 +138,7 @@ export default function DependencyGraph({ details }) {
               .attr("class", "pr-number")
               .attr("x", 0)
               .attr("dy", "1.2em")
-              .attr("fill", "var(--ifm-color-info)")
+              .attr("fill", "#ffffff")
               .attr("font-size", "11px")
               .style("text-decoration", "underline")
               .style("cursor", "pointer")
@@ -137,8 +160,9 @@ export default function DependencyGraph({ details }) {
       }
 
       if (awaitingParentsNoParent.has(nodeId)) {
-        d3.select(this).selectAll("rect")
-          .style("fill", "var(--ifm-color-danger-contrast-background)")
+        d3.select(this)
+          .classed("nodeAwaitingParentsNoParent", true)
+          .selectAll("rect")
           .style("stroke-dasharray", "5,5")
           .style("stroke-width", "2px");
       }
@@ -174,7 +198,6 @@ export default function DependencyGraph({ details }) {
       const nodeId = d3.select(this).attr("data-node-id");
 
       if (selectedNodeId === nodeId) {
-        setSelectedNodeId(null);
         return;
       }
 
@@ -216,6 +239,18 @@ export default function DependencyGraph({ details }) {
         .translate(initialTranslate[0], initialTranslate[1])
         .scale(initialScale)
     );
+
+    svg.on("dblclick.zoom", null);
+    svg.on("dblclick", function (event) {
+      if (event.target === this) {
+        svg.transition().duration(750).call(
+          zoom.transform,
+          d3.zoomIdentity
+            .translate(initialTranslate[0], initialTranslate[1])
+            .scale(initialScale)
+        );
+      }
+    });
   }, [graph, selectedNodeId, awaitingParentsNoParent, zoomedGraphData]);
 
   const handleSelectNode = (nodeName) => {
@@ -366,6 +401,34 @@ export default function DependencyGraph({ details }) {
           <svg ref={svgRef}></svg>
         </div>
       )}
+      <div className={graphStyles.legend}>
+        <div className={graphStyles.legendItems}>
+          <div className={graphStyles.legendItem}>
+            <span className={`${graphStyles.legendCircle} ${graphStyles.legendSuccess}`}></span>
+            <span className={graphStyles.legendLabel}>CI Passing</span>
+          </div>
+          <div className={graphStyles.legendItem}>
+            <span className={`${graphStyles.legendCircle} ${graphStyles.legendDanger}`}></span>
+            <span className={graphStyles.legendLabel}>CI Failing</span>
+          </div>
+          <div className={graphStyles.legendItem}>
+            <span className={`${graphStyles.legendCircle} ${graphStyles.legendWarning}`}></span>
+            <span className={graphStyles.legendLabel}>Bot/Solver Error or Status Unknown</span>
+          </div>
+          <div className={graphStyles.legendItem}>
+            <span className={`${graphStyles.legendCircle} ${graphStyles.legendAwaitingPr}`}></span>
+            <span className={graphStyles.legendLabel}>Awaiting PR</span>
+          </div>
+          <div className={graphStyles.legendItem}>
+            <span className={`${graphStyles.legendCircle} ${graphStyles.legendAwaitingParents}`}></span>
+            <span className={graphStyles.legendLabel}>Awaiting Parents</span>
+          </div>
+          <div className={graphStyles.legendItem}>
+            <span className={`${graphStyles.legendCircle} ${graphStyles.legendDashed}`}></span>
+            <span className={graphStyles.legendLabel}>Awaiting Parent in Another Migration</span>
+          </div>
+        </div>
+      </div>
       <span className={graphStyles.instructions}>
         Arrows point from package to its immediate children (dependents).
         Use mouse wheel to zoom, drag to pan, click on a node to zoom to its subgraph, or click on the background to reset the view.

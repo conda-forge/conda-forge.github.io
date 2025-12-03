@@ -1,7 +1,7 @@
 /* Migration Dependency Graph Styles */
 
 .dependencyGraphContainer {
-  padding: 20px 0;
+  padding: 20px 0 0 0;
 }
 
 .graphHeader {
@@ -27,7 +27,8 @@
   width: 100%;
   height: 600px;
   border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 8px;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
   background-color: var(--ifm-color-emphasis-0);
   overflow: hidden;
 }
@@ -275,7 +276,7 @@
 }
 
 .graphContainer :global(g.node.nodeInPr rect) {
-  fill: var(--ifm-color-info) !important;
+  fill: var(--ifm-color-warning) !important;
   stroke: var(--ifm-color-emphasis-800) !important;
   stroke-width: 1px !important;
 }
@@ -290,6 +291,15 @@
   fill: var(--ifm-color-emphasis-500) !important;
   stroke: var(--ifm-color-emphasis-800) !important;
   stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeAwaitingParentsNoParent rect) {
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 2px !important;
+}
+
+.graphContainer :global(g.node.nodeSelected rect) {
+  stroke-width: 4px !important;
 }
 
 .graphContainer :global(g.node.nodeUnknown rect) {
@@ -307,8 +317,7 @@
 /* Text colors for contrast */
 .graphContainer :global(g.node.nodeClean text),
 .graphContainer :global(g.node.nodeDone text),
-.graphContainer :global(g.node.nodeUnstable text),
-.graphContainer :global(g.node.nodeInPr text) {
+.graphContainer :global(g.node.nodeUnstable text) {
   fill: #ffffff !important;
   font-size: 12px !important;
   font-weight: bold !important;
@@ -316,6 +325,7 @@
 
 .graphContainer :global(g.node.nodeBotError text),
 .graphContainer :global(g.node.nodeNotSolvable text),
+.graphContainer :global(g.node.nodeInPr text),
 .graphContainer :global(g.node.nodeAwaitingPr text),
 .graphContainer :global(g.node.nodeAwaitingParents text),
 .graphContainer :global(g.node.nodeUnknown text),
@@ -323,4 +333,68 @@
   fill: #000000 !important;
   font-size: 12px !important;
   font-weight: bold !important;
+}
+
+/* Legend styles */
+.legend {
+  padding: 10px 12px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  background-color: var(--ifm-color-emphasis-0);
+}
+
+.legendItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.legendCircle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--ifm-color-emphasis-800);
+  flex-shrink: 0;
+}
+
+.legendSuccess {
+  background-color: var(--ifm-color-success);
+}
+
+.legendDanger {
+  background-color: var(--ifm-color-danger);
+}
+
+.legendWarning {
+  background-color: var(--ifm-color-warning);
+}
+
+.legendInfo {
+  background-color: var(--ifm-color-info);
+}
+
+.legendAwaitingPr {
+  background-color: var(--ifm-color-emphasis-600);
+}
+
+.legendAwaitingParents {
+  background-color: var(--ifm-color-emphasis-500);
+}
+
+.legendDashed {
+  background-color: var(--ifm-color-emphasis-500);
+  border: 1px dashed var(--ifm-color-emphasis-800);
+  box-sizing: border-box;
+}
+
+.legendLabel {
+  color: var(--ifm-color-emphasis-800);
 }
