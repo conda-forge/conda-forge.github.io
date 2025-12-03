@@ -40,11 +40,15 @@ Once `main` is synced, you can create a new branch with `git checkout -b new-bra
 
 When pulling from `upstream`, you might run into merge conflicts or "not possible to fast-forward" errors. This can happen if you pushed to your fork's `main` branch instead of creating a new one.
 
-To make your fork's `main` identical to `upstream`'s:
+If you don't care about your local changes, you can simply do `git reset --hard upstream/main`.
+If you want to save your changes but still make your fork's `main` identical to `upstream`'s:
 
 1. If you just tried to `pull` and got merge conflicts, abort with `git merge --abort`. Otherwise, check the info in `git status` and make sure you are you are in the `main` branch: `git checkout main`.
 2. Park your local `main` in separate branch, as a backup: `git checkout -b parked-changes`.
 3. Ensure your remotes are fresh: `git fetch upstream`.
 4. Go back to `main` and reset it to `upstream`'s: `git checkout main && git reset --hard upstream/main`.
 
-Alternatively, create a backup of your `main` branch with `git checkout main && git checkout -b parked-changes` and then try to pull with a rebase strategy with `git pull --rebase upstream main`. The idea here is to keep only the commits from `upstream` and drop the ones you added yourself. [Gitlab's docs on `git rebase`](https://docs.gitlab.com/topics/git/git_rebase/) contain more details on this type of workflow.
+Alternatively, create a backup of your `main` branch with `git checkout main && git checkout -b parked-changes`
+and then try to pull with a rebase strategy with `git rebase -i upstream/main`.
+The idea here is to keep only the commits from `upstream` and drop the ones you added yourself.
+[Gitlab's docs on `git rebase`](https://docs.gitlab.com/topics/git/git_rebase/) contain more details on this type of workflow.
