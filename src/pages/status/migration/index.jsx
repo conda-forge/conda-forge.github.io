@@ -9,6 +9,23 @@ import styles from "./styles.module.css";
 import { Tooltip } from "react-tooltip";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import moment from 'moment';
+import { compare } from '@site/src/components/StatusDashboard/current_migrations';
+import { useSorting, SortableHeader } from '@site/src/components/SortableTable';
+import * as d3 from "d3";
+
+// GitHub GraphQL MergeStateStatus documentation
+// Reference: https://docs.github.com/en/graphql/reference/enums#mergestatestatus
+const CI_STATUS_DESCRIPTIONS = {
+  clean: "Mergeable and passing commit status.",
+  unstable: "Mergeable with non-passing commit status.",
+  behind: "The head ref is out of date.",
+  blocked: "The merge is blocked.",
+  dirty: "The merge commit cannot be cleanly created.",
+  draft: "The merge is blocked due to the pull request being a draft.",
+  has_hooks: "Mergeable with passing commit status and pre-receive hooks.",
+  unknown: "The state cannot currently be determined."
+};
 
 // { Done, In PR, Awaiting PR, Awaiting parents, Not solvable, Bot error }
 // The third value is a boolean representing the default display state on load
@@ -37,6 +54,44 @@ export function measureProgress(details) {
     details["not-solvable"].length;
   const percentage = (done / (total || 1)) * 100;
   return { done, percentage, total };
+}
+
+// Mapping of GitHub PR status to UI display properties
+const STATUS_DISPLAY_MAP = {
+  clean: { text: "Passing", badgeClass: "success" },
+  unstable: { text: "Failing", badgeClass: "danger" },
+  dirty: { text: "Conflicts", badgeClass: "warning" },
+  blocked: { text: "Blocked", badgeClass: "danger" },
+  behind: { text: "Passing*", badgeClass: "success" },
+  draft: { text: "Draft", badgeClass: "secondary" },
+  has_hooks: { text: "Unknown*", badgeClass: "secondary" },
+  unknown: { text: "Unknown", badgeClass: "secondary" },
+};
+
+function getStatusBadgeClass(prStatus) {
+  if (!STATUS_DISPLAY_MAP[prStatus]) {
+    console.warn(`Unknown PR status: "${prStatus}". Expected one of: ${Object.keys(STATUS_DISPLAY_MAP).join(", ")}`);
+    return "secondary";
+  }
+  return STATUS_DISPLAY_MAP[prStatus].badgeClass;
+}
+
+function getStatusDisplayText(prStatus) {
+  if (!STATUS_DISPLAY_MAP[prStatus]) {
+    console.warn(`Unknown PR status: "${prStatus}". Expected one of: ${Object.keys(STATUS_DISPLAY_MAP).join(", ")}`);
+    return prStatus;
+  }
+  return STATUS_DISPLAY_MAP[prStatus].text;
+}
+
+function formatRelativeTime(timestamp) {
+  if (!timestamp) return null;
+  return moment(timestamp).fromNow();
+}
+
+function formatExactDateTime(timestamp) {
+  if (!timestamp) return null;
+  return moment(timestamp).format('LLLL');
 }
 
 export default function MigrationDetails() {
@@ -139,6 +194,16 @@ export default function MigrationDetails() {
             }
           </div>
         </div>
+        {view === "table" && (
+          <div className={`card margin-top--md`}>
+            <div className="card__header">
+              <h3>CI Status Legend</h3>
+            </div>
+            <div className="card__body">
+              <CIStatusLegend />
+            </div>
+          </div>
+        )}
       </main>
     </Layout>
   );
@@ -245,8 +310,106 @@ function Filters({ counts, filters, onFilter }) {
 
 function Graph(props) {
   const [error, setState] = useState("");
+  const containerRef = React.useRef(null);
   const url = urls.migrations.graph.replace("<NAME>", props.children);
   const onError = (error) => setState(error);
+
+  // This effect allows zooming and panning in the SVG container;
+  // The target div must use the provided `containerRef` reference
+  useEffect(() => {
+    if (!containerRef.current || error) return;
+
+    const container = d3.select(containerRef.current);
+    let timer = null;
+
+    const setupZoom = () => {
+      const svgElement = container.select('svg').node();
+      if (!svgElement) {
+        // Wait a bit for SVG to load
+        timer = setTimeout(setupZoom, 100);
+        return;
+      }
+
+      const svg = d3.select(svgElement);
+
+      // Check if group already exists
+      let svgGroup = svg.select('g.zoom-group');
+      if (svgGroup.empty()) {
+        svgGroup = svg.append('g').attr('class', 'zoom-group');
+
+        // Move all existing children into the group (except the group itself)
+        svg.selectAll('*').each(function() {
+          const node = this;
+          if (node !== svgGroup.node() && node.parentNode === svgElement) {
+            svgGroup.node().appendChild(node);
+          }
+        });
+      }
+
+      // Get SVG dimensions (use viewBox if available, otherwise use bounding rect)
+      const viewBox = svgElement.viewBox?.baseVal;
+      const svgWidth = viewBox ? viewBox.width : (svgElement.getBoundingClientRect().width || containerRef.current.clientWidth);
+      const svgHeight = viewBox ? viewBox.height : (svgElement.getBoundingClientRect().height || containerRef.current.clientHeight || 600);
+
+      const bbox = svgElement.getBBox();
+
+      const initialScale = Math.min(
+        svgWidth / bbox.width,
+        svgHeight / bbox.height,
+        1
+      ) * 0.9;
+
+      const centerX = svgWidth / 2;
+      const centerY = svgHeight / 2;
+
+      const bboxCenterX = bbox.x + bbox.width / 2;
+      const bboxCenterY = bbox.y + bbox.height / 2;
+
+      const initialTranslate = [
+        centerX - bboxCenterX * initialScale,
+        centerY - bboxCenterY * initialScale,
+      ];
+
+      // Store initial transform for reset
+      const initialTransform = d3.zoomIdentity
+        .translate(initialTranslate[0], initialTranslate[1])
+        .scale(initialScale);
+
+      // Set up zoom behavior - apply to SVG element for proper drag sensitivity
+      const zoom = d3.zoom()
+        .scaleExtent([0.1, 4])
+        .on("zoom", (event) => {
+          svgGroup.attr("transform", event.transform);
+        });
+
+      svg.call(zoom);
+
+      if (!svgGroup.attr("transform")) {
+        svg.call(zoom.transform, initialTransform);
+      }
+
+      // Double-click to reset zoom/pan to initial state
+      svg.on("dblclick.zoom", null); // Remove default double-click zoom
+      svg.on("dblclick", function() {
+        svg.transition()
+          .duration(750)
+          .call(zoom.transform, initialTransform);
+      });
+    };
+
+    setupZoom();
+
+    return () => {
+      if (timer) clearTimeout(timer);
+      const svgElement = container.select('svg').node();
+      if (svgElement) {
+        const svg = d3.select(svgElement);
+        svg.on(".zoom", null);
+        svg.on("dblclick", null);
+      }
+    };
+  }, [error, url]);
+
   return (
     <div>
       <p style={{textAlign: "center"}}>
@@ -259,12 +422,21 @@ function Graph(props) {
         <p style={{textAlign: "center"}}>
           Graph is unavailable.
         </p> :
-        <div style={{ overflowX: "auto" }}>
+        <div
+          ref={containerRef}
+          style={{
+            width: "100%",
+            height: "600px",
+            overflow: "hidden",
+            cursor: "move"
+          }}
+        >
           <SVG
             onError={onError}
             src={url}
             title={props.children}
             description={`Migration graph for ${props.children}`}
+            style={{ width: "100%", height: "100%" }}
           />
         </div>
       }
@@ -275,15 +447,27 @@ function Graph(props) {
 function Table({ details }) {
   const defaultFilters = ORDERED.reduce((filters, [status, _, toggled]) => ({ ...filters, [status]: toggled }), {});
   const [filters, setState] = useState(defaultFilters);
+  const { sort, previousSort, resort } = useSorting("num_descendants", "descending");
   const feedstock = details._feedstock_status;
+
+  const CI_STATUS_ORDER = { clean: 0, behind: 1, has_hooks: 2, unknown: 3, unstable: 4, blocked: 5, dirty: 6, draft: 7, "": 999 };
+
+  // Transform data to match expected structure for compare function
   const rows = ORDERED.reduce((rows, [status]) => (
     filters[status] ? rows :
-      rows.concat((details[status]).map(name => ([name, status])))
-  ), []).sort((a, b) => (
-    feedstock[b[0]]["num_descendants"] - feedstock[a[0]]["num_descendants"]
-    || ORDERED.findIndex(x => x[0] == a[1]) - ORDERED.findIndex(x => x[0] == b[1])
-    || a[0].localeCompare(b[0]))
-  );
+      rows.concat((details[status]).map(name => {
+        const feedstockData = feedstock[name];
+        return {
+          name,
+          status,
+          migration_status_order: ORDERED.findIndex(x => x[0] == status),
+          ci_status_order: CI_STATUS_ORDER[feedstockData["pr_status"] || ""] ?? 8,
+          num_descendants: feedstockData["num_descendants"] ?? 0,
+          updated_at_timestamp: feedstockData["updated_at"] ? new Date(feedstockData["updated_at"]).getTime() : 0,
+        };
+      }))
+  ), []).sort(compare(sort.by, sort.order, previousSort));
+
   return (
     <>
       <Filters
@@ -294,15 +478,27 @@ function Table({ details }) {
       {rows.length > 0 && <table>
         <thead>
           <tr>
-            <th style={{ width: 200 }}>Name</th>
-            <th style={{ width: 115 }}>Status</th>
-            <th style={{ width: 115 }}>Total number of children</th>
+            <SortableHeader sortKey="name" currentSort={sort} onSort={resort} styles={styles} style={{ width: 200 }}>
+              Name
+            </SortableHeader>
+            <SortableHeader sortKey="migration_status" currentSort={sort} onSort={resort} styles={styles} style={{ width: 115 }}>
+              Migration Status
+            </SortableHeader>
+            <SortableHeader sortKey="ci_status" currentSort={sort} onSort={resort} styles={styles} style={{ width: 115 }}>
+              CI Status
+            </SortableHeader>
+            <SortableHeader sortKey="updated_at" currentSort={sort} onSort={resort} styles={styles} style={{ width: 115 }}>
+              Last Updated
+            </SortableHeader>
+            <SortableHeader sortKey="num_descendants" currentSort={sort} onSort={resort} styles={styles} style={{ width: 115 }}>
+              Total number of children
+            </SortableHeader>
             <th style={{ flex: 1 }}>Immediate children</th>
           </tr>
         </thead>
         <tbody>
-          {rows.map(([name, status], i) =>
-            <Row key={i}>{{ feedstock: feedstock[name], name, status }}</Row>
+          {rows.map((row, i) =>
+            <Row key={i}>{{ feedstock: feedstock[row.name], name: row.name, status: row.status }}</Row>
           )}
         </tbody>
       </table>}
@@ -317,6 +513,9 @@ function Row({ children }) {
   const total_children = feedstock["num_descendants"];
   const href = feedstock["pr_url"];
   const details = feedstock["pre_pr_migrator_status"];
+  const pr_status = feedstock["pr_status"];
+
+
   return (<>
     <tr>
       <td>
@@ -332,6 +531,23 @@ function Row({ children }) {
       )}
       </td>
       <td style={{ textAlign: "center" }}>{TITLES[status]}</td>
+      <td style={{ textAlign: "center" }}>
+        {pr_status ? (
+          <span
+            className={`badge badge--${getStatusBadgeClass(pr_status)}`}
+            title={CI_STATUS_DESCRIPTIONS[pr_status] || pr_status}
+          >
+            {getStatusDisplayText(pr_status)}
+          </span>
+        ) : (
+          <span>—</span>
+        )}
+      </td>
+      <td style={{ textAlign: "center" }}>
+        <span title={formatExactDateTime(feedstock["updated_at"])}>
+          {formatRelativeTime(feedstock["updated_at"]) || "—"}
+        </span>
+      </td>
       <td style={{ textAlign: "center" }}>{total_children || null}</td>
       <td>
         {immediate_children.map((name, index) => (<React.Fragment key={index}>
@@ -343,9 +559,32 @@ function Row({ children }) {
       </td>
     </tr>
     {details && !collapsed && (<tr>
-      <td colSpan={4}><pre dangerouslySetInnerHTML={{ __html: details}} /></td>
+      <td colSpan={6}><pre dangerouslySetInnerHTML={{ __html: details}} /></td>
     </tr>)}
   </>);
+}
+
+function CIStatusLegend() {
+  const colorOrder = { danger: 0, success: 1, secondary: 2 };
+  const sortedStatuses = Object.entries(CI_STATUS_DESCRIPTIONS).sort(
+    ([statusA], [statusB]) => {
+      const classA = getStatusBadgeClass(statusA);
+      const classB = getStatusBadgeClass(statusB);
+      return (colorOrder[classA] ?? 3) - (colorOrder[classB] ?? 3);
+    }
+  );
+
+  return (
+    <div className={styles.ci_status_legend}>
+      {sortedStatuses.map(([status, description]) => (
+        <div key={status} className={styles.ci_status_item}>
+          <span className={`badge badge--${getStatusBadgeClass(status)}`}>{getStatusDisplayText(status)}</span>
+          <span>{description}</span>
+        </div>
+      ))}
+      <a href="https://docs.github.com/en/graphql/reference/enums#mergestatestatus" target="_blank" rel="noopener noreferrer">See GitHub Docs</a>
+    </div>
+  );
 }
 
 async function checkPausedOrClosed(name) {
