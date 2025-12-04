@@ -649,7 +649,7 @@ systems, the following dependencies can be used:
 #### MinGW-based compiler stack for Windows
 
 There exists an alternative, MinGW-based, compiler stack on Windows. To use it,
-the following arguments can be passed to the `{[ compiler(...) }}` macro:
+the following arguments can be passed to the `{{ compiler(...) }}` macro:
 
 - `m2w64_c` for the C compiler
 - `m2w64_cxx` for the C++ compiler
