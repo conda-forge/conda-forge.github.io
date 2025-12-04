@@ -24,6 +24,58 @@ This decision does <em>not</em> impact R packages in conda-forge, which continue
         <category label="infrastructure" term="infrastructure"/>
     </entry>
     <entry>
+        <title type="html"><![CDATA[gcc, g++ builds on macos]]></title>
+        <id>https://conda-forge.org/blog/2025/11/21/gcc-macos/</id>
+        <link href="https://conda-forge.org/blog/2025/11/21/gcc-macos/"/>
+        <updated>2025-11-21T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[On macOS, conda-forge has provided clang, clangxx as the sole compiler]]></summary>
+        <content type="html"><![CDATA[<p>On macOS, conda-forge has provided <code>clang</code>, <code>clangxx</code> as the sole compiler
+for C and C++ sources. We have also provided <code>gfortran</code> to compile FORTRAN
+sources. Unlike other package managers like homebrew we have not
+provided <code>gcc</code> nor <code>g++</code> on macos. The reason to not provide those have been
+to avoid incompatibility with the clang based toolchain and also the
+maintenance burden. There are two main incompatibilities. First,
+<code>clang++</code> uses <code>libc++</code> as the standard C++ library and <code>g++</code> uses
+<code>libstdc++</code> as the standard C++ library. Second, <code>clang</code> uses <code>libomp</code>
+as the OpenMP library whereas <code>gcc</code> uses <code>libgomp</code> as the OpenMP library.</p>
+<p>Today, we announce the availability of <code>gcc</code>, <code>g++</code> compilers on macos.
+You can install them using</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">conda </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> gcc gxx</span><br></span></code></pre></div></div>
+<p>Currently we support only gcc 15 and will not support gcc 14 or previous
+versions.</p>
+<p>The main difference between these packages and a vanilla gcc installation
+or the installation from Homebew is that they use <code>libomp</code> as the default
+OpenMP library and <code>libc++</code> as the default standard C++ library.
+This difference makes binaries compiled with <code>gcc</code>, <code>g++</code> compatible with
+binaries compiled with <code>clang</code>, <code>clang++</code>.</p>
+<p>Another interesting consequence of the infrastructure work done to enable
+this is that this enables cross compilation of C/C++ sources using <code>gcc</code>,
+<code>g++</code> to cross-compile macOS binaries from Linux (previously only <code>clang</code>
+supported this) and also cross-compile windows binaries from macOS using
+the GCC/MinGW compilers.</p>
+<p>To use them in conda-build recipes, you can use</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">requirements</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">build</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> compiler('gcc') </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain">   </span><span class="token comment" style="color:#999988;font-style:italic"># [osx]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> compiler('gxx') </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain">   </span><span class="token comment" style="color:#999988;font-style:italic"># [osx]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> stdlib('c') </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p>You can also do</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">c_compiler</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">             </span><span class="token comment" style="color:#999988;font-style:italic"># [osx]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> gcc                 </span><span class="token comment" style="color:#999988;font-style:italic"># [osx]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">c_compiler_version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">     </span><span class="token comment" style="color:#999988;font-style:italic"># [osx]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">15</span><span class="token plain">                  </span><span class="token comment" style="color:#999988;font-style:italic"># [osx]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">cxx_compiler</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">           </span><span class="token comment" style="color:#999988;font-style:italic"># [osx]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> gxx                 </span><span class="token comment" style="color:#999988;font-style:italic"># [osx]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">cxx_compiler_version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">   </span><span class="token comment" style="color:#999988;font-style:italic"># [osx]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">15</span><span class="token plain">                  </span><span class="token comment" style="color:#999988;font-style:italic"># [osx]</span><br></span></code></pre></div></div>
+<p>in <code>conda_build_config.yaml</code> and continue to use the well-established
+<code>{{ compiler("c") }}</code> and <code>{{ compiler("cxx") }}</code> macros in the recipe;
+be aware that you're then responsible for updating the version roughly once
+per year (to keep pace with the rest of conda-forge).</p>
+<p>When you are using <code>gcc</code> locally, similar to <code>clang</code>, we make some guesses
+about where the macOS SDK is located. This might fail sometimes and setting
+the environment variable <code>SDKROOT</code> to the root of the macOS SDK should make
+<code>gcc</code> look in that folder.</p>
+<p>We also add by default <code>-L $CONDA_PREFIX/lib -Wl,-rpath,$CONDA_PREFIX/lib</code>
+when linkingfor local builds with the <code>conda-gcc-specs</code> package that is
+installed by deault with <code>gcc</code> package. If you want to avoid that you can
+install the <code>gcc-no-conda-specs</code> package alongside <code>gcc</code>.</p>]]></content>
+        <author>
+            <name>Isuru Fernando</name>
+            <uri>https://github.com/isuruf</uri>
+        </author>
+        <category label="infrastructure" term="infrastructure"/>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Python 3.14 is already usable on conda-forge (not just available)]]></title>
         <id>https://conda-forge.org/blog/2025/10/09/python-314/</id>
         <link href="https://conda-forge.org/blog/2025/10/09/python-314/"/>
@@ -1428,167 +1480,6 @@ fixed PRs.</p>
         <author>
             <name>Isuru Fernando</name>
             <uri>https://github.com/isuruf</uri>
-        </author>
-        <category label="conda-forge" term="conda-forge"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[The API Territory and Version Number Map]]></title>
-        <id>https://conda-forge.org/blog/2020/10/02/versions/</id>
-        <link href="https://conda-forge.org/blog/2020/10/02/versions/"/>
-        <updated>2020-10-02T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[tl;dr Depending on specific version numbers of underlying libraries may]]></summary>
-        <content type="html"><![CDATA[<p>tl;dr Depending on specific version numbers of underlying libraries may
-be too inaccurate and cause headaches as upstream libraries evolve and
-change. A more detailed approach is needed. In this post I outline
-current and potential work on a path towards a more complete inspection
-of requirements based on APIs and dynamic pinning of libraries.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-constitutes-a-good-version-number">What Constitutes a Good Version Number<a href="https://conda-forge.org/blog/2020/10/02/versions/#what-constitutes-a-good-version-number" class="hash-link" aria-label="Direct link to What Constitutes a Good Version Number" title="Direct link to What Constitutes a Good Version Number" translate="no">​</a></h2>
-<p>Version numbers should constitute a set that has the following
-properties</p>
-<ol>
-<li class="">The set must be unbounded</li>
-<li class="">The set must be orderable (maybe)</li>
-</ol>
-<p>Of course sets that meet these requirements might not convey a lot of
-information about the software they represent other than if two things
-are equivalent and their comparative ages. Note that the requirement to
-be orderable may not be needed, but is generally useful when considering
-the idea of an "upgrade" since it provides a clear delineation between
-older and newer packages. In many cases, the structure of the version
-number provides additional information. For some projects the version
-number includes the date of the release, often using <a href="https://calver.org/" target="_blank" rel="noopener noreferrer" class="">cal
-ver</a>. Many projects use <a href="https://semver.org/" target="_blank" rel="noopener noreferrer" class="">semantic
-versioning</a>, which attempts to encode information
-about the underlying source code's API in the version number.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="version-numbers-and-api-pinning">Version Numbers and API Pinning<a href="https://conda-forge.org/blog/2020/10/02/versions/#version-numbers-and-api-pinning" class="hash-link" aria-label="Direct link to Version Numbers and API Pinning" title="Direct link to Version Numbers and API Pinning" translate="no">​</a></h2>
-<p>One of the most important places where version numbers are specified is
-during the pinning of APIs. Source code often requires specific APIs
-from the libraries it uses. This requires a pin specifying which
-versions of the underlying libraries can be used. The package manager
-then uses these pins to make certain a compatible environment is
-created.</p>
-<p>However, these pins (or even the lack of pins) produce problems.
-Firstly, the pins are a one-time, local statement about the current and
-future, global ecosystem of packages. For instance a pin of <code>scipy</code> to
-the current major version number may not hold up over time, newer
-versions of <code>scipy</code> may break the API while not changing the major
-version number. Similarly the lack of pin for <code>scipy</code> could be false as
-the API breaks. Even pins that establish firm upper and lower bounds may
-be false as new versions of the pinned library restore the missing API.
-These issues are particularly problematic for dependency systems that
-tie the pins to a particular version of the source code, requiring a new
-version to be created to update the pins. Conda-Forge is able to avoid
-some of these issues via <a href="https://github.com/conda-forge/conda-forge-repodata-patches-feedstock" target="_blank" rel="noopener noreferrer" class="">repodata
-patching</a>,
-dynamically updating a package's stated requirements. Overall this
-process is fraught, as each package depends on different portions of a
-library's API, a version bump that breaks one package may leave others
-unscathed.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-potential-path-forward">A Potential Path Forward<a href="https://conda-forge.org/blog/2020/10/02/versions/#a-potential-path-forward" class="hash-link" aria-label="Direct link to A Potential Path Forward" title="Direct link to A Potential Path Forward" translate="no">​</a></h2>
-<p>All of the above issues are caused by the confusion of <a href="https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation" target="_blank" rel="noopener noreferrer" class="">the map for the
-territory</a>.
-The map, in this case the version number of a library, can not
-accurately represent the territory, the API itself. To fix this issue we
-need a more accurate description of the territory. Achieving this will
-not be easy, but I think there is an approach that gets close enough to
-limit the number of errors.</p>
-<p>We need a programmatic way to check if a particular library, for a
-particular version, provides the required API. I think this can be
-achieved iteratively, with each step providing additional clarity and
-difficulty of implementation. Note that in the steps below, I'm using
-python packaging as an example, but I imagine that these steps are
-general enough to apply to other languages and ecosystems.</p>
-<ol>
-<li class="">Determine which libraries are requirements of the code, this is
-provided by tools like
-<a href="https://github.com/ericdill/depfinder" target="_blank" rel="noopener noreferrer" class="">depfinder</a> and are starting
-to be integrated into the Conda-Forge bot systems (although they are
-still highly experimental and being worked on).</li>
-<li class="">Determine if the a version of the library provides the needed
-modules. This could be accomplished by using depfinder to find the
-imports and use the mapping provided by
-<a href="https://github.com/regro/libcfgraph/tree/master/import_maps" target="_blank" rel="noopener noreferrer" class="">libcfgraph</a>
-between the import names and the versions of packages that ship
-those imports.</li>
-<li class="">Determine if an imported module provides the symbols being imported.
-This would require a listing of all the symbols in a given python
-module, including top level scoped variables, function names, class
-names, methods, etc.</li>
-<li class="">For callables determine if the used call signature matches the
-method or function definition.</li>
-</ol>
-<p>The <a href="https://github.com/ericdill/depfinder" target="_blank" rel="noopener noreferrer" class="">depfinder</a> project has made
-significant advances along this path, providing an easy to use tool to
-extract accurate import and package requirement data from source code.
-Depfinder even has cases to handle imports that are within code blocks
-that might make the requirement optional or use the python standard
-library. Future work on depfinder, including using more accurate maps
-between imports and package names and providing metadata on package
-requirements that are collectively exhaustive (for instance imports of
-<code>pyqt4</code> vs. <code>pyqt5</code> in a <code>try: except:</code> block), will provide even more
-accurate information on requirements.</p>
-<p>At each one of the above stages we can provide significant value to
-users, maintainers and source code authors by helping them to keep their
-requirements consistent and warning when there are conflicts.
-Conda-Forge can update its repodata as new versions of imported
-libraries are created, to properly represent if that version is API
-compatible with it's downstream consumers. Additionally the tables that
-list all the symbols and call signatures can be provided to 3rd party
-consumers that may want to patch their own metadata or check if a piece
-of source code is self consistent in its requirements. This will also
-help with the loosening of pins, creating more solvable environments for
-Conda-Forge and other packaging ecosystems. Furthermore, as this tooling
-matures and becomes more accurate it can be incorporated into the
-Conda-Forge bot systems to automatically update dependencies during
-version bumps and repodata patches, helping reduce maintenance burden.</p>
-<p>Tools built from the symbol table can also have impacts far beyond
-Conda-Forge. For instance, the symbol tables could allow source code
-authors to have a line by line inspection of their code, revealing which
-lines force the use of older or newer versions of dependencies. This
-could enable large scale migrations of source code with surgical
-precision, enabling developers to extract and re-write the few lines of
-code preventing the use of a new version of a library.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="caveats">Caveats<a href="https://conda-forge.org/blog/2020/10/02/versions/#caveats" class="hash-link" aria-label="Direct link to Caveats" title="Direct link to Caveats" translate="no">​</a></h2>
-<p>There are some important caveats to this approach that need to be kept
-in mind.</p>
-<ol>
-<li class="">All of this work is aimed at understanding the API of a given
-library, this approach can not provide insight into the code inside
-of the API, or if changes there impact downstream consumers. For
-instance, version updates that fix bugs and security flaws in
-library code may not change the API at all. From this tooling's
-perspective there is no reason to upgrade since the API is not
-different. Of course there is a strong reason to upgrade in this
-case, since buggy or vulnerable libraries could be a huge headache
-and liability for downstream code and should be removed as quickly
-as possible.</li>
-<li class="">Some features may depend on broader adoption by the community. For
-instance, this approach would benefit greatly from python type
-hints, since the API could be constrained down to the expected
-types. Such type constraints would provide much more accuracy to the
-API version range as any changes could be detected. However, type
-hints may not be adopted in the python community at a high enough
-rate to truly be useful for this application.</li>
-<li class="">Source code is fundamentally flexible. There may be knots of code
-that even this approach could not cut through, especially as
-multiple languages and runtime module loading come into the picture.
-My personal hope would be that the code recognizes when these
-situations occur, provides its best guess of what is going on, and
-provides sufficient metadata to users so that they understand the
-decreased accuracy of the results. Fundamentally the tooling can
-only provide very educated guesses and context to users, who then
-need to go figure out what is actually going on inside the code.</li>
-</ol>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="conclusion">Conclusion<a href="https://conda-forge.org/blog/2020/10/02/versions/#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion" translate="no">​</a></h2>
-<p>Version number based pins are imprecise representations of API
-compatibility. More accurate representations based on source code
-inspection would make the Conda-Forge ecosystem more robust and flexible
-while reducing maintenance burden. Some of the path to achieving this is
-built, and near future steps can be achieved with current tooling and
-databases.</p>]]></content>
-        <author>
-            <name>Christopher J. 'CJ' Wright</name>
-            <uri>https://github.com/cj-wright</uri>
         </author>
         <category label="conda-forge" term="conda-forge"/>
     </entry>
