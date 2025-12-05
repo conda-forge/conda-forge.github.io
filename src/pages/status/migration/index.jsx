@@ -13,6 +13,7 @@ import moment from 'moment';
 import { compare } from '@site/src/components/StatusDashboard/current_migrations';
 import { useSorting, SortableHeader } from '@site/src/components/SortableTable';
 import * as d3 from "d3";
+import DependencyGraph from "./DependencyGraph";
 
 // GitHub GraphQL MergeStateStatus documentation
 // Reference: https://docs.github.com/en/graphql/reference/enums#mergestatestatus
@@ -97,11 +98,15 @@ function formatExactDateTime(timestamp) {
 export default function MigrationDetails() {
   const location = useLocation();
   const { siteConfig } = useDocusaurusContext();
+  const urlParams = new URLSearchParams(location.search);
+  const dependencyParam = urlParams.get("dependency");
+
   const [state, setState] = useState({
-    name: new URLSearchParams(location.search).get("name"),
+    name: urlParams.get("name"),
     details: null,
     redirect: false,
     view: "table",
+    selectedDependency: dependencyParam,
   });
   const toggle = (view) => {
     if (window && window.localStorage) {
@@ -123,6 +128,9 @@ export default function MigrationDetails() {
         console.warn(`error reading from local storage`, error);
       }
     }
+    if (dependencyParam) {
+      view = "dependencies";
+    }
     void (async () => {
       try {
         const url = urls.migrations.details.replace("<NAME>", state.name);
@@ -137,7 +145,8 @@ export default function MigrationDetails() {
     })();
   }, []);
   if (state.redirect) return <Redirect to="/status" replace />;
-  const { details, name, view } = state;
+  const { details, name, view, selectedDependency } = state;
+
   return (
     <Layout
       title={siteConfig.title}
@@ -165,6 +174,14 @@ export default function MigrationDetails() {
                   >
                     Graph
                   </li>
+                  <li
+                    key="dependencies"
+                    role="tab"
+                    class={["tabs__item", (view == "dependencies" ? "tabs__item--active" : null)].join(" ")}
+                    onClick={() => toggle("dependencies")}
+                  >
+                    Dependencies
+                  </li>
                   {name &&
                     <a href={urls.migrations.details.replace("<NAME>", name)} target="_blank">
                       <li
@@ -190,7 +207,9 @@ export default function MigrationDetails() {
             {details && <Bar details={details} /> || null}
             {view === "graph" ?
               <Graph>{name}</Graph> :
-              (details && <Table details={details} />)
+              view === "dependencies" ?
+                (details && <DependencyGraph details={details} initialSelectedNode={selectedDependency} />) :
+                (details && <Table details={details} />)
             }
           </div>
         </div>
