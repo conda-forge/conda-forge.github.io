@@ -180,3 +180,30 @@
   position: relative;
   left: 14px;
 }
+
+.ci_status_legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.ci_status_item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.migration_details table th {
+  position: relative;
+}
+
+.migration_details table th.ascending::after {
+  content: " △";
+  font-size: smaller;
+}
+
+.migration_details table th.descending::after {
+  content: " ▽";
+  font-size: smaller;
+}
