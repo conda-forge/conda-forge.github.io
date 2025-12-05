@@ -488,7 +488,17 @@ variables:
 
 To change the value of `target_platform` and enable cross-compilation, you must use
 the [build_platform](conda_forge_yml.mdx#build-platform) mapping in `conda-forge.yml` and then [rerender](updating_pkgs.md#dev-update-rerender) the feedstock. This will generate the appropriate CI workflows and
-conda-build input metadata. See also [test](conda_forge_yml.mdx#test) for how to skip the test phase when
+conda-build input metadata.
+
+For example, to cross-compile `linux-aarch64` and `linux-ppc64le` from `linux-64`:
+
+```yaml
+build_platform:
+  linux_aarch64: linux_64
+  linux_ppc64le: linux_64
+```
+
+See also [test](conda_forge_yml.mdx#test) for how to skip the test phase when
 cross-compiling. Provided the requirements metadata and build scripts are written correctly, the
 package should just work. However, in some cases, it'll need some adjustments; see examples below
 for some common cases.
