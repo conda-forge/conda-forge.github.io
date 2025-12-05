@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { measureProgress } from "@site/src/pages/status/migration";
 import styles from "./styles.module.css";
 import Link from "@docusaurus/Link";
+import { SortableHeader } from "@site/src/components/SortableTable";
 
 const COLLAPSED_KEY = "migration-collapsed";
 const SORT_KEY = "migration-sort";
@@ -135,54 +136,30 @@ function TableContent({ collapsed, name, resort, rows, select, sort, fetched }) 
           </th>
         </tr>
         <tr className={collapsed ? styles.collapsed : undefined}>
-          <th
-            onClick={() => resort("name")}
-            className={sort.by === "name" ? styles[sort.order] : undefined}
-          >
+          <SortableHeader sortKey="name" currentSort={sort} onSort={resort} styles={styles}>
             Name
-          </th>
-          <th
-            onClick={() => resort("status")}
-            className={sort.by === "status" ? styles[sort.order] : undefined}
-          >
+          </SortableHeader>
+          <SortableHeader sortKey="status" currentSort={sort} onSort={resort} styles={styles}>
             PRs made
-          </th>
-          <th
-            onClick={() => resort("done")}
-            className={sort.by === "done" ? styles[sort.order] : undefined}
-          >
+          </SortableHeader>
+          <SortableHeader sortKey="done" currentSort={sort} onSort={resort} styles={styles}>
             Done
-          </th>
-          <th
-            onClick={() => resort("in-pr")}
-            className={sort.by === "in-pr" ? styles[sort.order] : undefined}
-          >
+          </SortableHeader>
+          <SortableHeader sortKey="in-pr" currentSort={sort} onSort={resort} styles={styles}>
             In PR
-          </th>
-          <th
-            onClick={() => resort("awaiting-pr")}
-            className={sort.by === "awaiting-pr" ? styles[sort.order] : undefined}
-          >
+          </SortableHeader>
+          <SortableHeader sortKey="awaiting-pr" currentSort={sort} onSort={resort} styles={styles}>
             Awaiting PR
-          </th>
-          <th
-            onClick={() => resort("awaiting-parents")}
-            className={sort.by === "awaiting-parents" ? styles[sort.order] : undefined}
-          >
+          </SortableHeader>
+          <SortableHeader sortKey="awaiting-parents" currentSort={sort} onSort={resort} styles={styles}>
             Awaiting parents
-          </th>
-          <th
-            onClick={() => resort("not-solvable")}
-            className={sort.by === "not-solvable" ? styles[sort.order] : undefined}
-          >
+          </SortableHeader>
+          <SortableHeader sortKey="not-solvable" currentSort={sort} onSort={resort} styles={styles}>
             Not solvable
-          </th>
-          <th
-            onClick={() => resort("bot-error")}
-            className={sort.by === "bot-error" ? styles[sort.order] : undefined}
-          >
+          </SortableHeader>
+          <SortableHeader sortKey="bot-error" currentSort={sort} onSort={resort} styles={styles}>
             Bot error
-          </th>
+          </SortableHeader>
         </tr>
       </thead>
       <tbody className={collapsed ? styles.collapsed  : undefined}>
@@ -230,20 +207,81 @@ function TableContent({ collapsed, name, resort, rows, select, sort, fetched }) 
 }
 
 // Returns a comparator function for sorting table columns.
-function compare(by, order) {
+// Supports secondary sorting: when primary values are equal, falls back to previousSort
+export function compare(by, order, previousSort = null) {
+  const secondaryComparator = previousSort ? compare(previousSort.by, previousSort.order, null) : null;
+
+  const applySecondarySort = (primaryResult, a, b) => {
+    if (primaryResult !== 0 || !secondaryComparator) return primaryResult;
+    return secondaryComparator(a, b);
+  };
+
   switch (by) {
     case "name":
-      return order === "ascending"
-        ? (a, b) => a.name.localeCompare(b.name)
-        : (a, b) => b.name.localeCompare(a.name);
+      return (a, b) => {
+        const result = order === "ascending"
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name);
+        return applySecondarySort(result, a, b);
+      };
     case "status":
-      return order === "ascending"
-        ? (a, b) => a.progress.percentage - b.progress.percentage
-        : (a, b) => b.progress.percentage - a.progress.percentage;
+      return (a, b) => {
+        const result = order === "ascending"
+          ? a.progress.percentage - b.progress.percentage
+          : b.progress.percentage - a.progress.percentage;
+        return applySecondarySort(result, a, b);
+      };
+    case "migration_status":
+      return (a, b) => {
+        const result = order === "ascending"
+          ? (a.migration_status_order ?? 999) - (b.migration_status_order ?? 999)
+          : (b.migration_status_order ?? 999) - (a.migration_status_order ?? 999);
+        return applySecondarySort(result, a, b);
+      };
+    case "ci_status":
+      return (a, b) => {
+        const aOrder = a.ci_status_order ?? 999;
+        const bOrder = b.ci_status_order ?? 999;
+        let result;
+        // Always put items with no CI status (order >= 999) last
+        if (aOrder >= 999 && bOrder < 999) result = 1;
+        else if (aOrder < 999 && bOrder >= 999) result = -1;
+        else if (aOrder >= 999 && bOrder >= 999) result = 0;
+        else {
+          // Normal sorting for items with CI status
+          result = order === "ascending" ? aOrder - bOrder : bOrder - aOrder;
+        }
+        return applySecondarySort(result, a, b);
+      };
+    case "num_descendants":
+      return (a, b) => {
+        const result = order === "ascending"
+          ? (a.num_descendants ?? 0) - (b.num_descendants ?? 0)
+          : (b.num_descendants ?? 0) - (a.num_descendants ?? 0);
+        return applySecondarySort(result, a, b);
+      };
+    case "updated_at":
+      return (a, b) => {
+        const aTimestamp = a.updated_at_timestamp ?? 0;
+        const bTimestamp = b.updated_at_timestamp ?? 0;
+        let result;
+        // Always put items with no timestamp (0) last
+        if (aTimestamp === 0 && bTimestamp !== 0) result = 1;
+        else if (aTimestamp !== 0 && bTimestamp === 0) result = -1;
+        else if (aTimestamp === 0 && bTimestamp === 0) result = 0;
+        else {
+          // Normal sorting for items with timestamps
+          result = order === "ascending" ? aTimestamp - bTimestamp : bTimestamp - aTimestamp;
+        }
+        return applySecondarySort(result, a, b);
+      };
     default:
-      return order === "ascending"
-        ? (a, b) => a.details[by].length - b.details[by].length
-        : (a, b) => b.details[by].length - a.details[by].length;
+      return (a, b) => {
+        const result = order === "ascending"
+          ? a.details[by].length - b.details[by].length
+          : b.details[by].length - a.details[by].length;
+        return applySecondarySort(result, a, b);
+      };
   }
 }
 

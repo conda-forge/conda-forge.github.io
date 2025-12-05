@@ -68,6 +68,11 @@
             "type": "link",
             "label": "Rerender a feedstock",
             "href": "/docs/maintainer/updating_pkgs/#rerendering-feedstocks"
+          },
+          {
+            "type": "doc",
+            "label": "Keep your fork in sync",
+            "id": "how-to/basics/fork-sync"
           }
         ]
       },
@@ -90,9 +95,9 @@
             "href": "/docs/maintainer/knowledge_base/#apple-silicon-builds"
           },
           {
-            "type": "link",
+            "type": "doc",
             "label": "Talk to the bots",
-            "href": "/docs/maintainer/conda_forge_yml/"
+            "id": "how-to/advanced/talk-to-the-bots"
           },
           {
             "type": "link",
