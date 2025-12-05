@@ -488,7 +488,17 @@ variables:
 
 To change the value of `target_platform` and enable cross-compilation, you must use
 the [build_platform](conda_forge_yml.mdx#build-platform) mapping in `conda-forge.yml` and then [rerender](updating_pkgs.md#dev-update-rerender) the feedstock. This will generate the appropriate CI workflows and
-conda-build input metadata. See also [test](conda_forge_yml.mdx#test) for how to skip the test phase when
+conda-build input metadata.
+
+For example, to cross-compile `linux-aarch64` and `linux-ppc64le` from `linux-64`:
+
+```yaml
+build_platform:
+  linux_aarch64: linux_64
+  linux_ppc64le: linux_64
+```
+
+See also [test](conda_forge_yml.mdx#test) for how to skip the test phase when
 cross-compiling. Provided the requirements metadata and build scripts are written correctly, the
 package should just work. However, in some cases, it'll need some adjustments; see examples below
 for some common cases.
@@ -2209,34 +2219,7 @@ Closing and reopening the PR won't work, but a maintainer with sufficient permis
 
 ## Apple Silicon builds
 
-The new Apple M1 processor is the first Apple Silicon supported by conda-forge
-[osx-arm64](https://github.com/conda-forge/conda-forge.github.io/issues/1126) builds.
-For new builds to be available, via [cross-compilation](#cross-compilation), a migration is required for
-the package and its dependencies. These builds are experimental as many of them are untested.
-
-To request a migration for a particular package and all its dependencies:
-
-1. It may be that your package is already in the process of being migrated. Please check
-   the status of the
-   [arm osx addition migration](https://conda-forge.org/status/#armosxaddition).
-   If your package is already in the process of being migrated, it will appear
-   under the appropriate heading (done, in-pr, awaiting-parents, etc.).
-2. Check the feedstock in question to see if there is already an issue or pull request.
-   Opening an issue here is fine, as it might take a couple iterations of the below,
-   especially if many dependencies need to be built as well.
-3. If nothing is under way, look at the current [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migration_support/osx_arm64.txt).
-4. If the package is not listed there, make a PR, adding the package
-   name to `osx_arm64.txt` (preserving the alphabetical ordering).
-   The migration bot should start making automated pull requests to the
-   repo and its dependencies.
-5. Within a few hours, the [status page](https://conda-forge.org/status/#armosxaddition)
-   should reflect the progress of the package in question, and help you keep track
-   of progress. Help out if you can!
-6. The feedstock maintainers (who might not have an M1) will work to make
-   any changes required to pass continuous integration. If you have insight into
-   the particular package, **please** chime in, but most of all **be patient and polite**.
-7. Once the new builds are available from `anaconda.org`, please help the maintainers
-   by testing the packages, and reporting back with any problems… but also successes!
+See [How to enable additional architectures](/docs/how-to/advanced/enable-archs.md).
 
 <a id="pre-release-builds"></a>
 
