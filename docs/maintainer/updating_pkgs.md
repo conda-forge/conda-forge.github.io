@@ -304,11 +304,7 @@ For an example see [this](https://github.com/conda-forge/cudnn-feedstock/issues/
 
 ## Maintaining several versions
 
-If you'd like to maintain more than one version of your package, you can use branches on the feedstock. To do this:
-
-- Fork your feedstock and make a meaningful branch name (e.g., v1.X or v1.0).
-- Make the required changes to the recipe and rerender the feedstock.
-- Then push this branch from your fork to the upstream feedstock. Our CI services will automatically build any branches in addition to the default branch.
+See [How to maintain several versions](/docs/how-to/advanced/several-versions.md).
 
 ## Troubleshooting
 
