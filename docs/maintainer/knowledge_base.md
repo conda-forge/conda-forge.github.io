@@ -1865,6 +1865,37 @@ add some information on r packages which make heavy use of `noarch: generic`
     - [importlib_metadata and importlib-metadata](https://github.com/conda-forge/importlib_metadata-feedstock/blob/e4595fd73bba559d248f97896aff89a762073f2a/recipe/meta.yaml)
     - [typing_extensions and typing-extensions](https://github.com/conda-forge/typing_extensions-feedstock/blob/d9d0d1161d5ded886a272c0e4907f62d9272c7a8/recipe/meta.yaml)
 
+### Common patterns
+
+#### Splitting out heavy optional dependencies
+
+When a package has especially large optional dependencies it can be useful to split the package into a "lite" version that depends only on the core dependencies and a "full" version that depends on the "lite" version and all optional dependencies. The `pin_subpackage` function helps to ensure that the "full" version will pull the exact version of the "lite" version. As an example consider the [seaborn recipe](https://github.com/conda-forge/seaborn-feedstock/blob/eec88f0116a26c2e205daab10193e38e96407cab/recipe/meta.yaml) with optional statsmodels dependency:
+
+```yaml
+  - name: seaborn
+    build:
+      noarch: python
+    requirements:
+      run:
+        - statsmodels >=0.12
+        - {{ pin_subpackage('seaborn-base', exact=True) }}
+```
+
+In order to prevent the "lite" version `seaborn-base` to pull in seaborn versions before the package split, `run_constrained` will ensure that the `seaborn-base` package can only be installed together with the matching version of the `seaborn` package.
+
+```yaml
+  - name: seaborn-base
+    build:
+      noarch: python
+    requirements:
+      run_constrained:
+        - seaborn ={{ version }}=*_{{ build }}
+```
+
+:::important
+Counter-intuitively `{{ pin_subpackage('seaborn-base', exact=True) }}` will only work in the requirements section but not in `run_constrained` (see [conda-build#4415](https://github.com/conda/conda-build/issues/4415)). Use `seaborn ={{ version }}=*_{{ build }}` to ensure that the `seaborn-base` package can only be installed with the matching version of the `seaborn` package.
+:::
+
 ### Common pitfalls with `outputs`
 
 This is a non-exhaustive list of common pitfalls when using `outputs`.
