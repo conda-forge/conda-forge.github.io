@@ -169,7 +169,6 @@ requirements:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
     - meson
-    - make
 ```
 
 And this in `build.sh`:
