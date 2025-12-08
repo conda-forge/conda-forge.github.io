@@ -229,7 +229,7 @@ With MPI, openmpi is required for the build platform as the compiler wrappers ar
 ```yaml
 requirements:
   build:
-    - {{ mpi }}                             # [build_platform != target_platform and mpi == "openmpi"]
+    - {{ mpi }}  # [build_platform != target_platform and mpi == "openmpi"]
   host:
     - {{ mpi }}
   run:
