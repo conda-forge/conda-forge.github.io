@@ -186,6 +186,9 @@ requirements:
     - {{ compiler("cxx") }}
     - {{ stdlib("c") }}
     - meson
+    - pkg-config
+  host:
+    - libogg
 ```
 
 And this in `build.sh`:
@@ -217,7 +220,7 @@ requirements:
     - python
 ```
 
-For more details about numpy see the dedicated [section](#building-against-numpy).
+For more details about NumPy see [Building against NumPy](/docs/maintainer/knowledge_base/#building-against-numpy).
 
 ### MPI
 
