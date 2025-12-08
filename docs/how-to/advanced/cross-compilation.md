@@ -38,9 +38,10 @@ Cross-compilation settings depend on the `build_platform` and `target_platform` 
 variables:
 
 - `build_platform`: The platform on which `conda-build` is running, which defines the `build`
-  environment in `$BUILD_PREFIX`.
+  environment that is made available in `$BUILD_PREFIX`.
 - `target_platform`: The platform on which the package will be installed. Defines the platform of
-  the `host` environment in `$PREFIX`. Defaults to the value of `build_platform`.
+  the `host` environment that is made available in `$PREFIX`. Defaults to the value of
+  `build_platform`.
 
 To change the value of `target_platform` and enable cross-compilation, you must use
 the [build_platform](/docs/maintainer/conda_forge_yml/#build-platform) mapping in `conda-forge.yml`
