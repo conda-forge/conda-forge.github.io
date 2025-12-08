@@ -2,14 +2,11 @@
 title: 'Cross-compilation'
 ---
 
-conda-forge defaults to native builds of packages for x86_64 on Linux, macOS and Windows, because
-that's the architecture powering the default CI runners. Other architectures are supported too,
-but they are not guaranteed to have native builds. In those platforms where we can't provide native
-CI runners, we can still resort to either cross-compilation or emulation.
-
 Cross-compiling means building a package for a different architecture than the one the build process
-is running on. Given how abundant x86_64 runners are, most common cross-compilation setups will target
-non-x86_64 architectures from x86_64 runners.
+is running on. It is a common way of obtaining packages for an architecture that conda-forge does
+not provide any runners for (the other available technique is
+[emulation](/docs/maintainer/knowledge_base/#emulated-builds)). Given how abundant x86_64 runners
+are, most common cross-compilation setups will target non-x86_64 architectures from x86_64 runners.
 
 Cross-compilation terminology usually distinguishes between two types of machine:
 
