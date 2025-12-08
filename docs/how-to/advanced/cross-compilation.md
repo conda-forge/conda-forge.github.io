@@ -123,9 +123,12 @@ A simple C library using autotools for cross-compilation might look like this:
 requirements:
   build:
     - {{ compiler("c") }}
+    - {{ stdlib("c") }}
     - make
     - pkg-config
     - gnuconfig
+  host:
+    - libogg
 ```
 
 In the build script, it would need to update the config files and guard any tests when
@@ -135,9 +138,12 @@ cross-compiling:
 # Get an updated config.sub and config.guess
 cp $BUILD_PREFIX/share/gnuconfig/config.* .
 
+./configure
+make -j${CPU_COUNT}
+
 # Skip ``make check`` when cross-compiling
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
-  make check
+  make check -j${CPU_COUNT}
 fi
 ```
 
@@ -149,15 +155,19 @@ A simple C++ library using CMake for cross-compilation might look like this:
 requirements:
   build:
     - {{ compiler("cxx") }}
+    - {{ stdlib("c") }}
     - cmake
-    - make
+    - ninja
+  host:
+    - libboost-devel
 ```
 
 In the build script, it would need to update `cmake` call and guard any tests when cross-compiling:
 
 ```bash
 # Pass ``CMAKE_ARGS`` to ``cmake``
-cmake ${CMAKE_ARGS} ..
+cmake ${CMAKE_ARGS} -G Ninja ..
+cmake --build .
 
 # Skip ``ctest`` when cross-compiling
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
@@ -174,6 +184,7 @@ requirements:
   build:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
+    - {{ stdlib("c") }}
     - meson
 ```
 
@@ -181,7 +192,8 @@ And this in `build.sh`:
 
 ```bash
 # Pass ``MESON_ARGS`` to ``meson``
-meson ${MESON_ARGS} builddir/
+meson setup ${MESON_ARGS} ..
+meson compile
 ```
 
 ### Python
