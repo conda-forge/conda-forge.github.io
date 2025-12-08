@@ -115,6 +115,8 @@ However, there are some exceptions to this rule; most notably Python cross-compi
 A package needs to make a few changes in their recipe to be compatible with cross-compilation. Here
 are a few examples.
 
+### Autotools
+
 A simple C library using autotools for cross-compilation might look like this:
 
 ```yaml
@@ -139,6 +141,8 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:
 fi
 ```
 
+### CMake
+
 A simple C++ library using CMake for cross-compilation might look like this:
 
 ```yaml
@@ -161,6 +165,8 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:
 fi
 ```
 
+### Meson
+
 Similarly, with Meson, the `meta.yaml` needs:
 
 ```yaml
@@ -177,6 +183,8 @@ And this in `build.sh`:
 # Pass ``MESON_ARGS`` to ``meson``
 meson ${MESON_ARGS} builddir/
 ```
+
+### Python
 
 A simple Python extension using Cython and NumPy's C API would look like so:
 
@@ -198,6 +206,8 @@ requirements:
 ```
 
 For more details about numpy see the dedicated [section](#building-against-numpy).
+
+### MPI
 
 With MPI, openmpi is required for the build platform as the compiler wrappers are binaries, but mpich is not required as the compiler wrappers are scripts (see [example](https://github.com/conda-forge/mpi4py-feedstock/blob/743d379c4a04/recipe/meta.yaml#L37)):
 
