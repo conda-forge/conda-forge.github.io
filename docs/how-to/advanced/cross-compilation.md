@@ -22,6 +22,10 @@ target machine. This is used primarily when building cross-compilers, and indica
 for which the built package will generate code for. For the purposes of this documentation, we'll
 consider this to be irrelevant and the target machine to be the same as the host.
 
+Note that some resources may use the term "host" to refer to the build machine, and the term
+"target" to refer to the host machine. This is usually the case if they are not referring to
+building compilers.
+
 :::
 
 <a id="cross-compilation-howto"></a>
