@@ -18,8 +18,9 @@ Cross-compilation terminology usually distinguishes between two types of machine
 :::note
 
 Some cross-compilation documentation might also distinguish between a third type of machine, the
-target machine. You can read more about it in [this Stack Overflow question](https://stackoverflow.com/questions/47010422/cross-compilation-terminologies-build-host-and-target).
-For the purposes of conda-forge, we'll consider the target machine to be the same as the host.
+target machine. This is used primarily when building cross-compilers, and indicates the architecture
+for which the built package will generate code for. For the purposes of this documentation, we'll
+consider this to be irrelevant and the target machine to be the same as the host.
 
 :::
 
