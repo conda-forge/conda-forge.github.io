@@ -8,6 +8,8 @@ not provide any runners for (the other available technique is
 [emulation](/docs/maintainer/knowledge_base/#emulated-builds)). Given how abundant x86_64 runners
 are, most common cross-compilation setups will target non-x86_64 architectures from x86_64 runners.
 
+## Terminology
+
 Cross-compilation terminology usually distinguishes between two types of machine:
 
 - Build: The machine running the building process.
@@ -25,7 +27,7 @@ For the purposes of conda-forge, we'll consider the target machine to be the sam
 
 <a id="how-to-enable-cross-compilation"></a>
 
-#### How to enable cross-compilation
+## How to enable cross-compilation
 
 Cross-compilation settings depend on the `build_platform` and `target_platform` conda-build
 variables:
@@ -86,7 +88,7 @@ This is all supported by two main conda-build features introduced in version 3:
 
 <a id="placing-requirements-in-build-or-host"></a>
 
-#### Placing requirements in build or host
+## Placing requirements in build or host
 
 The rule of the thumb is:
 
@@ -99,7 +101,7 @@ However, there are some exceptions to this rule; most notably Python cross-compi
 
 <a id="cross-compilation-examples"></a>
 
-#### Cross-compilation examples
+## Cross-compilation examples
 
 A package needs to make a few changes in their recipe to be compatible with cross-compilation. Here
 are a few examples.
@@ -212,7 +214,7 @@ fi
 There are more variations of this approach in the wild. So this is not meant to be exhaustive,
 but merely to provide a starting point with some guidelines. Please look at [other recipes for more examples](https://github.com/search?q=org%3Aconda-forge+path%3Arecipe%2Fmeta.yaml+%22%5Bbuild_platform+%21%3D+target_platform%5D%22&type=code).
 
-#### Finding NumPy in cross-compiled Python packages using CMake
+## Finding NumPy in cross-compiled Python packages using CMake
 
 If you are building a Python extension via CMake with NumPy and you want it work in cross-compilation, you need to prepend to the CMake invocation in your build script the following lines:
 
@@ -231,7 +233,7 @@ CMAKE_ARGS="${CMAKE_ARGS} -DPython3_NumPy_INCLUDE_DIR=${Python_NumPy_INCLUDE_DIR
 
 <a id="details-about-cross-compiled-python-packages"></a>
 
-#### Details about cross-compiled Python packages
+## Details about cross-compiled Python packages
 
 Cross-compiling Python packages is a bit more involved than other packages. The main pain point is
 that we need an executable Python interpreter (i.e. `python` in `build`) that knows how to
