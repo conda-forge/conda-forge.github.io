@@ -207,6 +207,7 @@ A simple Python extension using Cython and NumPy's C API would look like so:
 requirements:
   build:
     - {{ compiler("c") }}
+    - {{ stdlib("c") }}
     - cross-python_{{ target_platform }}    # [build_platform != target_platform]
     - python                                # [build_platform != target_platform]
     - cython                                # [build_platform != target_platform]
