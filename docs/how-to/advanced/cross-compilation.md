@@ -251,17 +251,20 @@ but merely to provide a starting point with some guidelines. Please look at [oth
 
 ## Finding NumPy in cross-compiled Python packages using CMake
 
-If you are building a Python extension via CMake with NumPy and you want it work in cross-compilation, you need to prepend to the CMake invocation in your build script the following lines:
+If you are building a Python extension via CMake with NumPy and you want it to work in
+cross-compilation, you need to prepend to the CMake invocation in your build script the following
+lines:
 
 ```sh
 Python_INCLUDE_DIR="$(python -c 'import sysconfig; print(sysconfig.get_path("include"))')"
-Python_NumPy_INCLUDE_DIR="$(python -c 'import numpy;print(numpy.get_include())')"
-CMAKE_ARGS="${CMAKE_ARGS} -DPython_EXECUTABLE:PATH=${PYTHON}"
-CMAKE_ARGS="${CMAKE_ARGS} -DPython_INCLUDE_DIR:PATH=${Python_INCLUDE_DIR}"
-CMAKE_ARGS="${CMAKE_ARGS} -DPython_NumPy_INCLUDE_DIR=${Python_NumPy_INCLUDE_DIR}"
-CMAKE_ARGS="${CMAKE_ARGS} -DPython3_EXECUTABLE:PATH=${PYTHON}"
-CMAKE_ARGS="${CMAKE_ARGS} -DPython3_INCLUDE_DIR:PATH=${Python_INCLUDE_DIR}"
-CMAKE_ARGS="${CMAKE_ARGS} -DPython3_NumPy_INCLUDE_DIR=${Python_NumPy_INCLUDE_DIR}"
+Python_NumPy_INCLUDE_DIR="$(python -c 'import numpy; print(numpy.get_include())')"
+# usually either Python_* or Python3_* lines are sufficient
+CMAKE_ARGS+=" -DPython_EXECUTABLE:PATH=${PYTHON}"
+CMAKE_ARGS+=" -DPython_INCLUDE_DIR:PATH=${Python_INCLUDE_DIR}"
+CMAKE_ARGS+=" -DPython_NumPy_INCLUDE_DIR=${Python_NumPy_INCLUDE_DIR}"
+CMAKE_ARGS+=" -DPython3_EXECUTABLE:PATH=${PYTHON}"
+CMAKE_ARGS+=" -DPython3_INCLUDE_DIR:PATH=${Python_INCLUDE_DIR}"
+CMAKE_ARGS+=" -DPython3_NumPy_INCLUDE_DIR=${Python_NumPy_INCLUDE_DIR}"
 ```
 
 <a id="python-cross-compilation"></a>
