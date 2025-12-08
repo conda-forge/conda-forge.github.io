@@ -43,12 +43,12 @@ variables:
   the `host` environment that is made available in `$PREFIX`. Defaults to the value of
   `build_platform`.
 
-To change the value of `target_platform` and enable cross-compilation, you must use
-the [build_platform](/docs/maintainer/conda_forge_yml/#build-platform) mapping in `conda-forge.yml`
-and then [rerender](/docs/how-to/basics/rerender/) the feedstock. This will generate the appropriate CI workflows and
-conda-build input metadata.
-
-For example, to cross-compile `linux-aarch64` and `linux-ppc64le` from `linux-64`:
+The build scripts default to performing native builds, that is they only expose the
+`target_platform`s that have a corresponding runner. To enable cross-compilation, you need to
+extend the [build_platform](/docs/maintainer/conda_forge_yml/#build-platform) mapping
+in `conda-forge.yml`. It maps `target_platform` values to `build_platform` values used to build
+the respective packages. For example, to cross-compile `linux-aarch64` and `linux-ppc64le` from
+`linux-64`:
 
 ```yaml
 build_platform:
@@ -56,7 +56,9 @@ build_platform:
   linux_ppc64le: linux_64
 ```
 
-See also [test](conda_forge_yml.mdx#test) for how to skip the test phase when
+
+Then [rerender](/docs/how-to/basics/rerender/) the feedstock. This will generate the appropriate CI workflows and
+conda-build input metadata. See also [test](/docs/maintainer/conda_forge_yml/#test) for how to skip the test phase when
 cross-compiling. Provided the requirements metadata and build scripts are written correctly, the
 package should just work. However, in some cases, it'll need some adjustments; see examples below
 for some common cases.
