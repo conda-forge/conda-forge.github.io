@@ -43,7 +43,8 @@ variables:
   the `host` environment in `$PREFIX`. Defaults to the value of `build_platform`.
 
 To change the value of `target_platform` and enable cross-compilation, you must use
-the [build_platform](conda_forge_yml.mdx#build-platform) mapping in `conda-forge.yml` and then [rerender](updating_pkgs.md#dev-update-rerender) the feedstock. This will generate the appropriate CI workflows and
+the [build_platform](/docs/maintainer/conda_forge_yml/#build-platform) mapping in `conda-forge.yml`
+and then [rerender](/docs/how-to/basics/rerender/) the feedstock. This will generate the appropriate CI workflows and
 conda-build input metadata.
 
 For example, to cross-compile `linux-aarch64` and `linux-ppc64le` from `linux-64`:
