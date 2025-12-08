@@ -31,10 +31,6 @@ building compilers.
 
 :::
 
-<a id="cross-compilation-howto"></a>
-
-<a id="how-to-enable-cross-compilation"></a>
-
 ## How to enable cross-compilation
 
 Cross-compilation settings depend on the `build_platform` and `target_platform` conda-build
@@ -98,8 +94,6 @@ This is all supported by two main conda-build features introduced in version 3:
   is expressed in `meta.yaml`, which distinguishes between `build` and `host` platforms.
 - The `compiler()` Jinja function and underlying [conventions for the compiler packages](https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html).
 
-<a id="placing-requirements-in-build-or-host"></a>
-
 ## Placing requirements in build or host
 
 The rule of the thumb is:
@@ -110,8 +104,6 @@ The rule of the thumb is:
 
 However, there are some exceptions to this rule; most notably Python cross-compilation
 ([see below](#python-cross-compilation)).
-
-<a id="cross-compilation-examples"></a>
 
 ## Cross-compilation examples
 
@@ -376,10 +368,6 @@ CMAKE_ARGS+=" -DPython3_EXECUTABLE:PATH=${PYTHON}"
 CMAKE_ARGS+=" -DPython3_INCLUDE_DIR:PATH=${Python_INCLUDE_DIR}"
 CMAKE_ARGS+=" -DPython3_NumPy_INCLUDE_DIR=${Python_NumPy_INCLUDE_DIR}"
 ```
-
-<a id="python-cross-compilation"></a>
-
-<a id="details-about-cross-compiled-python-packages"></a>
 
 ## Details about cross-compiled Python packages
 
