@@ -100,9 +100,9 @@
             "id": "how-to/advanced/talk-to-the-bots"
           },
           {
-            "type": "link",
+            "type": "doc",
             "label": "Cross-compile",
-            "href": "/docs/maintainer/knowledge_base/#cross-compilation"
+            "id": "how-to/advanced/cross-compilation"
           },
           {
             "type": "link",
