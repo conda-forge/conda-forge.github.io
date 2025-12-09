@@ -185,6 +185,11 @@
             "href": "/docs/maintainer/infrastructure/#compilers-and-runtimes"
           },
           {
+            "type": "doc",
+            "label": "Cross-compilation",
+            "id": "maintainer/understanding_conda_forge/cross-compilation"
+          },
+          {
             "type": "link",
             "label": "Global pinning",
             "href": "/docs/maintainer/pinning_deps/"
