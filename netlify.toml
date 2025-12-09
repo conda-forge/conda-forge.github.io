@@ -5,15 +5,7 @@
   publish = "build"
 
   # Default build command.
-  command = """
-    curl -L -o miniforge.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh &&
-    bash miniforge.sh -bfp ~/miniforge &&
-    rm -rf miniforge.sh &&
-    source ~/miniforge/etc/profile.d/conda.sh &&
-    conda env create -f .ci_scripts/environment.yml &&
-    conda activate conda-forge-docs &&
-    ./.ci_scripts/update_docs
-  """
+  command = "curl -fsSL https://pixi.sh/install.sh | sh && pixi build-production"
 
   # We only want to build PR previews.
   # Exit code == 0 means that the build is ignored.
