@@ -6,7 +6,8 @@ platforms = ["linux-64", "osx-arm64", "win-64"]
 version = "0.1.0"
 
 [tasks]
-start = { cmd = "npm run start", description = "Live-reload deployment for local development." }
+install = { cmd = "npm install", description = "Install Node packages."}
+start = { cmd = "npm run start", description = "Live-reload deployment for local development.", depends-on = ["install"]}
 build-production = { cmd = "bash ./.ci_scripts/update_docs", description = "Build site for production." }
 
 [dependencies]
