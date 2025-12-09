@@ -54,3 +54,12 @@ jobs:
             --remap "https://conda-forge.org/(.*) file://$(pwd)/build/\$1"
             './build/**/*.html'
             '*.md'
+
+      - name: Check Pixi and environment.yml are in sync
+        run: |
+          pixi workspace export conda-environment > .ci_scripts/environment.yml
+          sed -i -e 's/name: default/name: conda-forge-docs/g' -e '/^$/d' .ci_scripts/environment.yml
+          if ! git diff --exit-code .ci_scripts/environment.yml; then
+            echo "error: pixi.toml and environment.yml are out of sync"
+            exit 1
+          fi
