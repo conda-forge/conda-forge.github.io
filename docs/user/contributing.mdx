@@ -2,7 +2,8 @@
 title: 'Becoming involved'
 ---
 
-<a id="becoming-involved"></a>
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 <a id="id1"></a>
 
@@ -81,25 +82,30 @@ If you are new to the conda-forge community, follow the steps below to make your
    ```
    git checkout -b <new-branch-name>
    ```
-4. Run the following commands:
-   ```
-   conda env create -f ./.ci_scripts/environment.yml
-   ```
-   conda activate conda-forge-docs
-5. While writing your new documentation, you can use the live preview mode with:
-   - `npm install` to make sure `node_modules` is up-to-date
-   - `npm run start` to start the live preview. Every time you save a file, the changes will be reflected instantaneously.
-6. Once ready, you can also check how the production build would look like with the commands:
-   ```
-   .ci_scripts/update_docs
-   python -m http.server --directory build/
-   ```
-7. Add and commit your changes:
+4. Depending on your tool of choice, run these commands to obtain a live preview of the changes:
+
+   <Tabs>
+      <TabItem label="conda, mamba" value="conda">
+         ```
+         conda env create -f ./.ci_scripts/environment.yml
+         conda activate conda-forge-docs
+         npm install
+         npm run start
+         ```
+      </TabItem>
+      <TabItem label="pixi" value="pixi" default="True">
+         ```
+         pixi run start
+         ```
+      </TabItem>
+   </Tabs>
+
+5. Once ready, add and commit your changes:
    ```
    git add .
    git commit -m "your commit message"
    ```
-8. Submit a [pull request](https://help.github.com/articles/about-pull-requests/) to the main repository proposing your changes.
+6. Submit a [pull request](https://help.github.com/articles/about-pull-requests/) to the main repository proposing your changes.
    The CI pipelines will include a PR preview on Netlify.
 
 Happy contributing!

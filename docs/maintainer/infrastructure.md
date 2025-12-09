@@ -138,7 +138,7 @@ The current [conda-forge.org](https://conda-forge.org) is a statically generated
 
 The documentation is built with Docusaurus and the source files are located in the [`docs/`](https://github.com/conda-forge/conda-forge.github.io/tree/main/docs) directory of the repository.
 
-If you find any typos, errors, unclear explanations, or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to [Improve the documentation](../user/contributing.md#improve-docs).
+If you find any typos, errors, unclear explanations, or new topics that can be covered, you can suggest changes to the documentation. For more details, please refer to [Improve the documentation](/docs/user/contributing/#improve-the-website).
 
 In addition to the static documentation, the website also offers information on the current status of conda-forge as well as a mapping of packages to feedstocks.
 
