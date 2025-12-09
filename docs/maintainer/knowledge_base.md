@@ -485,7 +485,7 @@ Cross-compiling means building a package for a different architecture than the o
 is running on. Given how abundant x86_64 runners are, most common cross-compilation setups will target
 non-x86_64 architectures from x86_64 runners.
 
-For more details on cross-compilation, see [cross-compilation](../how-to/advanced/cross-compilation.mdx).
+For more details on cross-compilation, see [cross-compilation](/docs/how-to/advanced/cross-compilation/).
 
 <a id="emulation"></a>
 
