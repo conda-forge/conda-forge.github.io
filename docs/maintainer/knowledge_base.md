@@ -86,6 +86,14 @@ Some optional, but useful CMake options:
 - `-DCMAKE_FIND_FRAMEWORK=NEVER` and `-DCMAKE_FIND_APPBUNDLE=NEVER` Prevent CMake from using system-wide macOS packages.
 - `${CMAKE_ARGS}` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like [CUDA builds](#cuda).
 
+:::warning
+
+As `${CMAKE_ARGS}` is a space separated list of options, quoting `${CMAKE_ARGS}`
+(`"${CMAKE_ARGS}"`) in recipes can lead to build errors as quoting makes the shell
+treat the contents of the variable as a single argument.
+
+:::
+
 Here are some basic commands for you to get started. These are dependent on your source
 code layout and aren't intended to be used "as is".
 
@@ -175,6 +183,50 @@ we can use the `local` channel:
 conda create -n my-new-env -c local my-package
 ```
 
+<a id="testing-using-wine"></a>
+
+#### Testing using wine
+
+Some degree of testing and debugging can also be performed without a Windows
+system, using [wine](https://www.winehq.org/).
+[miniforge](https://github.com/conda-forge/miniforge) works correctly
+in the wine's `cmd` shell, and can be used to create and run Conda environments.
+In fact, sometimes Wine is able to provide more insightful error messages,
+for example:
+
+```
+wine: Call from 00006FFFFFF999EA to unimplemented function libblas.dll.cdotc_, aborting
+```
+
+It may be necessary to manipulate the `WINEDEBUG` variable to obtain more
+debugging logs.
+
+<a id="debugging-dll-issues"></a>
+
+#### Debugging DLL issues
+
+When debugging issues related to dynamically-linked libraries (DLLs) failing
+to load, the following tools can be helpful:
+
+- [Windows Debugger](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools)
+  can be used when debugging the dreaded "DLL load failed" errors. For example to debug a numpy import error:
+  - `"C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\gflags.exe" -i python.exe +sls`
+  - `"C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\cdb.exe" -logo log.txt -g -G -o -xn av python -c "import numpy"`
+    The log file saved in `log.txt` will display information about where the DLLs were loaded from,
+    which DLLs are missing and which symbols are missing from a DLL.
+
+- [Dependency Walker](https://www.dependencywalker.com/) can display a tree
+  diagram of all dependent modules.
+
+- [Dependencies](https://github.com/lucasg/Dependencies) is a more modern
+  replacement for Dependency Walker, with both console and GUI interface.
+  It also works better on Wine.
+
+- [dumpbin](https://learn.microsoft.com/en-us/cpp/build/reference/dumpbin-reference)
+  tool from MSVC can be used to obtain information about Windows binaries.
+  On Unix, [gendef](https://sourceforge.net/p/mingw-w64/wiki2/gendef)
+  tool can be used instead by installing the conda package.
+
 <a id="notes-on-native-code"></a>
 
 ### Notes on native code
@@ -191,19 +243,12 @@ While you can obtain these tools by installing the right version of the full
 [Visual Studio](https://visualstudio.microsoft.com/) development
 environment, you can save a lot of time and bandwidth by installing standalone
 "build tools" packages. You can get them from [Visual Studio
-Subscriptions](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products).
+Subscriptions](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2022-and-other-products).
 To download build tools, you'll need a Microsoft account. Once on the
 Visual Studio Subscriptions page, you may also need to join the Dev Essentials
 program. Once that's done, you can click the "Download" tab and search for
-"Build Tools for Visual Studio 2022". Until conda-forge has completely
-[migrated to Visual Studio 2022](https://github.com/conda-forge/conda-forge.github.io/issues/2138),
-you may still need to install "Build Tools for Visual Studio 2019" to locally
-build a feedstock. Depending on your needs and available hard drive space, you
-can either directly install VC-2019 using the
-[Visual Studio Build Tools 2019 installer](https://aka.ms/vs/16/release/vs_BuildTools.exe),
-or you can install both VC-2022 and VC-2019 using the
-[Visual Studio Build Tools 2022 installer](https://aka.ms/vs/17/release/vs_BuildTools.exe),
-making sure to check the optional box for "MSVC v142 - VS 2019 C++ x64/x86 build tools (v14.29)".
+"Build Tools for Visual Studio 2022". You can directly install VC-2022 using the
+[Visual Studio Build Tools 2022 installer](https://aka.ms/vs/17/release/vs_BuildTools.exe).
 
 If you need more information. Please refer [the Python wiki page on Windows compilers](https://wiki.python.org/moin/WindowsCompilers).
 
@@ -243,30 +288,55 @@ if errorlevel 1 exit 1
 
 The following feedstocks are examples of this build structure deployed:
 
-- [libpng](https://github.com/conda-forge/libpng-feedstock/blob/master/recipe/bld.bat)
-- [Pugixml](https://github.com/conda-forge/pugixml-feedstock/blob/master/recipe/bld.bat)
+- [libpng](https://github.com/conda-forge/libpng-feedstock/blob/main/recipe/build.bat)
+- [Pugixml](https://github.com/conda-forge/pugixml-feedstock/blob/main/recipe/bld.bat)
 
 <a id="building-for-different-vc-versions"></a>
 
-#### Building for different VC versions
+#### Versions of Microsoft Visual C++ (MSVC)
 
-On Windows, different Visual C versions have different ABI and therefore a package needs to be built for different
-Visual C versions. Packages are tied to the VC version that they were built with and some packages have specific
-requirements of the VC version. For example, python 2.7 requires `vc 9` and python 3.5 requires `vc 14`.
+Up until Visual Studio (VS) 2013, the MSVC compiler changed ABI on every major release,
+meaning packages that communicated through a C/C++ API had to be built with a consistent
+version. This meant for example that python 2.7 required `vs2008` for the duration of its lifetime.
 
-With `conda-build 3.x`, `vc` can be used as a selector when using the `compiler` jinja syntax.
+Since VS2015, the ABI has been kept stable though, meaning that packages do not have to be
+built with the same MSVC version. This allows us to avoid complicated migrations for ~all
+compiled packages, or getting stuck on old compiler versions.
 
-```yaml
-requirements:
-  build:
-    - {{ compiler('cxx') }}
-```
+Speaking of versions, the situation with MSVC can be very confusing. The Visual Studio year is
+often used as a shorthand for the compiler generation, but what's really relevant is the
+toolchain version, which, since VS2015 has been 14.x, and which is referred to as `vc`.
 
-To skip building with a particular `vc` version, add a skip statement.
+| VS Year | VS Version | Compiler Version | Toolchain Version | Runtime Version |
+| ------- | ---------- | ---------------- | ----------------- | --------------- |
+| 2015    | 14.0       | 19.0             | 14.0              | 14.0.zzzzz      |
+| 2017    | 15.x       | 19.1y            | 14.1              | 14.1y.zzzzz     |
+| 2019    | 16.x       | 19.2x            | 14.2              | 14.2x.zzzzz     |
+| 2022    | 17.x       | 19.3x            | 14.3              | 14.3x.zzzzz     |
+
+In the table above, `x` and `y` on the same line are referring to the same digit, though there
+are various deviations from this schema. For example, the minor versions for the 2022 line went
+beyond 9, so 17.14 corresponds to compiler 19.44 (30+14) and runtime 14.44.
+
+We are always able to use the newest runtime in an environment, so we always satisfy the respective
+lower bound imposed by the compiler version. However, there are other situations where the toolchain
+version becomes "viral", in the sense that certain artefacts like static libraries have to be
+consumed by a toolchain that's at least as new as the one that produced it. We therefore try to
+not raise our default compiler version too quickly.
+
+As of June 2025, we are now on the most recent VS2022 (because VS2019 had reached end-of-life already
+in mid 2024), though the next major version of Visual Studio is already on the horizon. It will
+still be ABI-compatible, such that we will not have to rebuild everything. In other words, the
+toolchain version will remain `14.x`.
+
+If the day ever comes where MSVC breaks the ABI again (codename "vNext"), then we will have to rebuild
+all compiled packages in conda-forge on windows. After such a migration has taken place, you can then
+choose to skip building for one or the other by using `vc` in a selector, e.g.
 
 ```yaml
 build:
-    skip: true  # [win and vc<14]
+    # to demonstrate mechanism: only build vNext
+    skip: true  # [win and vc<15]
 
 requirements:
   build:
@@ -275,18 +345,22 @@ requirements:
 
 <a id="using-vs2022"></a>
 
-#### Using vs2022
+#### Using newer MSVC versions
+
+Given that conda-forge is currently (June 2025) on the latest VS line, it's currently not possible
+to use even newer versions. However, we expect a new Visual Studio major version within the next year
+or so, and once it becomes available in the runner-images for Azure Pipelines and then in conda-forge,
+it will be possible to opt into newer compilers (e.g. for C++23 support) as follows.
 
 In `recipe/conda_build_config.yaml` file:
 
 ```yaml
+# note: future VS version is speculative!
 c_compiler:    # [win]
-- vs2022       # [win]
+- vs2026       # [win]
 cxx_compiler:  # [win]
-- vs2022       # [win]
+- vs2026       # [win]
 ```
-
-You can look at the changes in [this PR](https://github.com/conda-forge/vcpkg-tool-feedstock/pull/41/files).
 
 After making these changes don't forget to rerender with `conda-smithy` (to rerender manually use `conda smithy rerender` from the command line).
 
@@ -311,6 +385,53 @@ Batch syntax is a bit different from Bash and friends on Unix, so we have collec
   There are also some minimal emulators online that might get you started with the basics, even if not all CMD features are present.
   For example, this [Windows 95 emulator](https://www.pcjs.org/software/pcx86/sys/windows/win95/4.00.950/) features a more or less okay MS-DOS prompt.
 
+<a id="building-packages-using-configure-scripts-written-in-shell-script"></a>
+
+### Building packages using configure scripts written in shell script
+
+Some packages do not provide build systems with first-hand support for Windows, in particular these using `configure` scripts using autotools, or hand-written in shell scripts.
+You can use the [autotools_clang_conda](https://github.com/conda-forge/autotools_clang_conda-feedstock?tab=readme-ov-file#about-autotools_clang_conda-feedstock) to provide a build environment with a set of MSYS2 packages and a Clang toolchain configured to build packages compatible with MSVC.
+The feedstock's description provides example instructions.
+
+<a id="install-paths-and-naming-conventions"></a>
+
+### Install paths and naming conventions
+
+Unix-style packages in conda-forge are installed into a special `Library` directory tree under the build prefix.
+For the convenience of writing build scripts, both conda-build and rattler-build define the following variables:
+
+| Variable         | Value                      | Use                                                     |
+| ---------------- | -------------------------- | ------------------------------------------------------- |
+| `LIBRARY_PREFIX` | `%PREFIX%\Library`         | Prefix for installing packages                          |
+| `LIBRARY_BIN`    | `%PREFIX%\Library\bin`     | Executables and DLL libraries (`.exe` and `.dll` files) |
+| `LIBRARY_INC`    | `%PREFIX%\Library\include` | Header files                                            |
+| `LIBRARY_LIB`    | `%PREFIX%\Library\lib`     | Import and static libraries (`.lib` files)              |
+| `SCRIPTS`        | `%PREFIX%\Scripts`         | Python scripts                                          |
+
+On Windows, it is not possible to link directly to dynamic libraries (`.dll` files); the linker needs to use so-called import libraries instead.
+Import libraries have the same format and generally use the same suffix (`.lib`) as static libraries.
+Therefore, whenever both dynamic and static libraries are installed, the import library and the static library must use different names.
+There are two main naming conventions for installing libraries on Windows: the MSVC convention and the GCC/MinGW convention.
+
+The MSVC convention uses the following names:
+
+- dynamic library: `{name}.dll` (e.g. `zlib.dll`)
+- import library: `{name}.lib` (e.g. `zlib.lib`)
+- static library: no standard convention, often `lib{name}.lib` or `{name}-static.lib` (e.g. `zlibstatic.lib`)
+
+Usually, `{name}` does not include a `lib` prefix.
+Following this convention ensures that `-l{name}` works for dynamic linking, same as on Unix.
+However, some packages do use `lib` prefix for historical reasons, e.g. `libprotobuf.dll` + `libprotobuf.lib`.
+
+The GCC/MinGW convention uses the following names:
+
+- dynamic library: `lib{name}.dll`
+- import library: `lib{name}.dll.a`
+- static library: `lib{name}.a`
+
+There is no standard convention for providing SONAME-style versioning for libraries.
+Some packages do not provide versioning at all, others embed the version into the `.dll` name (but not the import library name, to preserve `-l{name}` behavior).
+
 <a id="special-dependencies-and-packages"></a>
 
 ## Special Dependencies and Packages
@@ -321,35 +442,7 @@ Batch syntax is a bit different from Bash and friends on Unix, so we have collec
 
 ### Compilers
 
-Compilers are dependencies with a special syntax and are always added to `requirements/build`.
-
-There are currently five supported compilers:
-
-- C
-- cxx
-- Fortran
-- Go
-- Rust
-
-A package that needs all five compilers would define
-
-```yaml
-requirements:
-  build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - {{ compiler('fortran') }}
-    - {{ compiler('go') }}
-    - {{ compiler('rust') }}
-```
-
-:::note
-
-Appropriate compiler runtime packages will be automatically added to the package's runtime requirements and therefore
-there's no need to specify `libgcc` or `libgfortran`. There are additional informations about how conda-build 3 treats
-compilers in the [conda docs](https://docs.conda.io/projects/conda-build/en/stable/resources/compiler-tools.html).
-
-:::
+Dependencies on compilers are explained in detail in [Compilers and Runtimes](/docs/maintainer/infrastructure/#compilers-and-runtimes) infrastructure documentation.
 
 <a id="cross-compilation"></a>
 
@@ -647,14 +740,15 @@ resort.
 
 #### Emulation examples
 
-Configure `conda-forge.yml` to emulate `linux-ppc64le`, but use native runners for `linux-64`
-and `linux-aarch64`. This works because `linux-ppc64le` is not natively supported by Azure, so
-`conda-smithy` will add QEMU steps to emulate it. However, `linux-64` and `linux-aarch64` are
-natively supported by Azure and Travis CI, respectively, so no emulation is needed.
+Configure `conda-forge.yml` to emulate `linux-ppc64le` and `linux-aarch64`,
+but use native runners for `linux-64`. This works because `linux-ppc64le`
+and `linux-aarch64` are not natively supported by Azure, so
+`conda-smithy` will add QEMU steps to emulate it. However, `linux-64` is
+natively supported by Azure, so no emulation is needed.
 
 ```yaml
 provider:
-  linux_aarch64: travis
+  linux_aarch64: azure
   linux_ppc64le: azure
   linux_64: azure
 ```
@@ -1131,14 +1225,21 @@ corresponding compilers in `requirements/build` as normal.
 
 ### OpenMP
 
-You can enable OpenMP on macOS by adding the `llvm-openmp` package to the `build` section of the `meta.yaml`.
-For Linux OpenMP support is on by default, however it's better to explicitly depend on the libgomp package which is the OpenMP
-implementation from the GNU project.
+The default OpenMP runtime used depends on the compiler and platform used. GCC (on Linux and the Windows MinGW
+toolchain) uses the `libgomp` runtime. Clang (on all platforms) and GNU Fortran on macOS default to the `llvm-openmp`
+runtime. MSVC may use its own runtime or `llvm-openmp`. However, individual projects may force building against
+a different runtime through their build system configuration.
+
+On Linux, building against `libgomp` is recommended as the other OpenMP providers are backwards compatible with it.
+When packages are built against `libgomp`, it is possible to use both `libgomp` and `llvm-openmp` provider at runtime.
+
+Dependencies on OpenMP providers belong in the `host` section of recipe dependencies. The following snippet corresponds
+to the defaults, though individual packages may require a different set:
 
 ```yaml
 # meta.yaml
 requirements:
-  build:
+  host:
     - llvm-openmp  # [osx]
     - libgomp      # [linux]
 ```
@@ -1150,7 +1251,10 @@ requirements:
 On macOS, only LLVM's OpenMP implementation `llvm-openmp` is supported. This implementation is used even in Fortran code compiled
 using GNU's gfortran.
 
-On Linux (except aarch64), packages are linked against GNU's `libgomp.so.1`, but the OpenMP library at install time can be
+On Windows, switching between different OpenMP implemnentations is not supported. Every package uses the implementation
+it was built against.
+
+On Linux, when packages are linked against GNU's `libgomp.so.1`, the OpenMP library at install time can be
 switched from GNU to LLVM by doing the following.
 
 ```shell-session
@@ -1265,15 +1369,21 @@ requirements:
 You can switch your BLAS implementation by doing,
 
 ```bash
-conda install "libblas=*=*mkl"
-conda install "libblas=*=*openblas"
-conda install "libblas=*=*blis"
-conda install "libblas=*=*accelerate"
-conda install "libblas=*=*netlib"
+conda install "libblas=*=*_mkl"
+conda install "libblas=*=*_openblas"
+conda install "libblas=*=*_blis"
+conda install "libblas=*=*_accelerate"
+conda install "libblas=*=*_newaccelerate"
+conda install "libblas=*=*_netlib"
 ```
 
 This would change the BLAS implementation without changing the conda packages depending
 on BLAS.
+
+:::note
+
+For macOS 13.3+, you can use `newaccelerate` to use the new BLAS/LAPACK
+support in Accelerate.
 
 The following legacy commands are also supported as well.
 
@@ -1282,6 +1392,7 @@ conda install "blas=*=mkl"
 conda install "blas=*=openblas"
 conda install "blas=*=blis"
 conda install "blas=*=accelerate"
+conda install "blas=*=newaccelerate"
 conda install "blas=*=netlib"
 ```
 
@@ -1367,10 +1478,10 @@ package will have the necessary runtime requirements to ensure the most adequate
 ### Matplotlib
 
 `matplotlib` on conda-forge comes in two parts. The core library is in `matplotlib-base`. The
-actual `matplotlib` package is this core library plus `pyqt`. Most, if not all, packages that have
+actual `matplotlib` package is this core library plus `pyside6`. Most, if not all, packages that have
 dependence at runtime on `matplotlib` should list this dependence as `matplotlib-base` unless they
-explicitly need `pyqt`. The idea is that a user installing `matplotlib` explicitly would get a full
-featured installation with `pyqt`. However, `pyqt` is a rather large package, so not requiring it
+explicitly need `pyside6`. The idea is that a user installing `matplotlib` explicitly would get a full
+featured installation with `pyside6`. However, `pyside6` is a rather large package, so not requiring it
 indirectly is better for performance. Note that you may need to include a `yum_requirements.txt` file
 in your recipe with
 
@@ -1382,13 +1493,16 @@ if you import parts of `matplotlib` that link to `libX11`.
 
 <a id="pybind11-abi-constraints"></a>
 
-### `pybind11` ABI Constraints
+<a id="pybind11-swig-abi-constraints"></a>
 
-Sometimes when different python libraries using `pybind11` interact via lower-level C++ interfaces,
-the underlying ABI between the two libraries has to match. To ease this use case, we have a `pybind11-abi`
-metapackage that can be used in the `host` section of a build. Its version is pinned globally and it has a
+### `pybind11` and `swig` ABI Constraints
+
+Sometimes when different python libraries using `pybind11`/`swig` interact via lower-level interfaces,
+the underlying ABI between the two libraries has to match. To ease this use case, we have a `pybind11-abi`/`swig-abi`
+metapackage that can be used in the `host` section of a build. Its version is pinned globally, and it has a
 run export on itself, meaning that builds with this package in `host` will have a runtime constraint on it.
-Further, the `pybind11` has a run constraint on the ABI metapackage to help ensure consistent usage.
+Further, the `pybind11`/`swig` has a run constraint on the respective ABI metapackage to help ensure
+consistent usage.
 
 To use this package in a build, put it in the host environment like so
 
@@ -1396,6 +1510,14 @@ To use this package in a build, put it in the host environment like so
 requirements:
   host:
     - pybind11-abi
+```
+
+or
+
+```yaml
+requirements:
+  host:
+    - swig-abi
 ```
 
 <a id="knowledge-empty"></a>
@@ -1923,7 +2045,6 @@ There are two options for how to proceed:
 - Specify the environment variable `SETUPTOOLS_SCM_PRETEND_VERSION` with the version string.
   If specified this environment variable is the principle source for `setuptools_scm`.
   There are two ways how to do this:
-
   - If you are using build scripts, in `build.sh` specify:
 
     ```bash
@@ -2021,7 +2142,7 @@ If a feedstock does need access to additional resources (like GPUs), please see 
 
 #### `nvcuda.dll` cannot be found on Windows
 
-The [scripts](https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/install_cuda.bat)
+The [scripts](https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/main/recipe/install_cuda.bat)
 used to install the CUDA Toolkit on Windows cannot provide `nvcuda.dll`
 as part of the installation because no GPU is physically present in the CI machines.
 As a result, you might get linking errors in the postprocessing steps of `conda build`:
@@ -2103,9 +2224,9 @@ To request a migration for a particular package and all its dependencies:
 2. Check the feedstock in question to see if there is already an issue or pull request.
    Opening an issue here is fine, as it might take a couple iterations of the below,
    especially if many dependencies need to be built as well.
-3. If nothing is under way, look at the current [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/migrations/osx_arm64.txt).
+3. If nothing is under way, look at the current [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migration_support/osx_arm64.txt).
 4. If the package is not listed there, make a PR, adding the package
-   name to a random location in `osx_arm64.txt`.
+   name to `osx_arm64.txt` (preserving the alphabetical ordering).
    The migration bot should start making automated pull requests to the
    repo and its dependencies.
 5. Within a few hours, the [status page](https://conda-forge.org/status/#armosxaddition)
@@ -2276,7 +2397,8 @@ To reset your feedstock token and fix issues with uploads, follow these steps:
 
 You can add a feedstock to `arch_rebuild.txt` if it requires rebuilding with different architectures/platforms (such as `ppc64le` or `aarch64`).
 Check the [migration status](https://conda-forge.org/status/#aarch64andppc64leaddition) to see if your package is already in the queue to get migrated.
-If not, you can add the feedstock to `arch_rebuild.txt` by opening a PR to the [conda-forge-pinning-feedstock repository](https://github.com/conda-forge/conda-forge-pinning-feedstock).
+If not, you can add the feedstock to [`arch_rebuild.txt`](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migration_support/arch_rebuild.txt)
+by opening a PR to the [conda-forge-pinning-feedstock repository](https://github.com/conda-forge/conda-forge-pinning-feedstock).
 Once the PR is merged, the migration bot goes through the list of feedstocks in `arch_rebuild.txt` and opens a migration PR for any new feedstocks and their dependencies, enabling the aarch64/ppc64le builds.
 
 <a id="migrations-and-migrators"></a>
@@ -2288,7 +2410,7 @@ Once the PR is merged, the migration bot goes through the list of feedstocks in 
 When any changes are made in the global pinnings of a package, then the entire stack of the packages that need that package on their `host` section would need to be updated and rebuilt.
 Doing it manually can be quite tedious, and that's where migrations come to help. Migrations automate the process of submitting changes to a feedstock and are an integral part of the `regro-cf-autotick-bot`'s duties.
 
-There are several kinds of migrations, which you can read about in [Making Migrators](https://github.com/regro/cf-scripts/blob/master/README.md#making-migrators). To generate these migrations, you use migrators, which are bots that automatically create pull requests for the affected packages in conda-forge.
+There are several kinds of migrations, which you can read about in [Making Migrators](https://github.com/regro/cf-scripts/blob/main/README.md#making-migrators). To generate these migrations, you use migrators, which are bots that automatically create pull requests for the affected packages in conda-forge.
 To propose a migration in one or more pins, the migrator issues a PR into the pinning feedstock using a yaml file expressing the changes to the global pinning file in the migrations folder.
 Once the PR is merged, the dependency graph is built. After that, the bot walks through the graph, migrates all the nodes (feedstocks) one by one, and issues PRs for those feedstocks.
 

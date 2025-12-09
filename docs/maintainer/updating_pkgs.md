@@ -52,7 +52,6 @@ For these reasons, maintainers are asked to fork the feedstock to their personal
 When a new version of a package is released on PyPI/CRAN/.., we have a bot that automatically creates version updates for the feedstock. In most cases you can simply merge this PR and it should include all changes. When certain things have changed upstream, e.g. the dependencies, you will still have to do changes to the created PR. As feedstock maintainer, you don't have to create a new PR for that but can simply push to the branch the bot created. There are two alternatives to push to the branch of the bot:
 
 1. Manually setting up git remotes:
-
    - Clone the conda-forge feedstock repository
    - Add the remote of the bot: `git remote add regro-cf-autotick-bot git@github.com:regro-cf-autotick-bot/<package>-feedstock.git`
      :::warning[Important]
@@ -77,7 +76,8 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
 
 ##### **How does regro-cf-autotick-bot create automatic version updates?**
 
-The [regro-cf-autotick-bot](https://github.com/regro/autotick-bot) continuously searches on a loop for any PyPI releases, GitHub releases, and any other sources of versions when any updates are released. The source code that gets executed in the loop comes from the [cf-scripts repository](https://github.com/regro/cf-scripts), which contains the code to detect versions and submit PRs. Visit [cf-scripts](https://github.com/regro/cf-scripts/blob/master/README.md) to read more about it.
+The [regro-cf-autotick-bot](https://github.com/regro/autotick-bot) continuously searches on a loop for any PyPI releases, GitHub releases, and any other sources of versions when any updates are released. The source code that gets executed in the loop comes from the [cf-scripts repository](https://github.com/regro/cf-scripts), which contains the code to detect versions and submit PRs.
+Visit [cf-scripts](https://github.com/regro/cf-scripts/blob/main/README.md) to read more about it.
 
 The bot creates updates via inspection of the upstream release and will always update the `source` section and build version in the [recipe metadata](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#).
 As an experimental feature, the autotick bot can also be configured to verify or update the recipe's requirements for [Grayskull](https://github.com/conda-incubator/grayskull)-compatible recipes.
@@ -98,7 +98,6 @@ Here we assume that you would like to update the feedstock `<feedstock>`. Feedst
 1. Forking the feedstock
 
    Before you can submit your first PR, you have to fork conda-forge's feedstock.
-
    - Navigate to [https://github.com/conda-forge](https://github.com/conda-forge)/<feedstock> in your favorite web browser and click the `fork` button.
    - You now have a clone of the feedstock in `https://github.com/<your-github-id>/<feedstock>` under your control.
    - Connect to the feedstock from your computer by using `git clone https://github.com/<your-github-id>/<feedstock>`.
@@ -106,7 +105,6 @@ Here we assume that you would like to update the feedstock `<feedstock>`. Feedst
 2. Syncing your fork with conda-forge's feedstock
 
    This step is only required if you have forked some time ago and your fork is missing commits from the feedstock at conda-forge.
-
    - Make sure you are on the main branch: `git checkout main`
    - Register conda-forge's feedstock with `git remote add upstream https://github.com/conda-forge/<feedstock>`
    - Fetch the latest updates with `git fetch upstream`
@@ -115,7 +113,6 @@ Here we assume that you would like to update the feedstock `<feedstock>`. Feedst
 3. Creating your changes in a new branch
 
    Now you are ready to update the recipe
-
    - Create and switch to a new branch: `git checkout -b <branch-name>`. `<branch-name>` can be e.g. `update_1_0_1`.
    - Make your changes locally
    - Review your changes then use `git add <changed-files>`. Where `<changed-files>` are a whitespace separated list of filenames you changed.
@@ -141,45 +138,7 @@ Please follow the following guidelines while updating recipes:
 
 ## Rerendering feedstocks
 
-Rerendering is conda-forge's way to update the files common to all feedstocks (e.g. README, [CI](../glossary.md#ci) configuration, pinned dependencies).
-
-Rerendering can be done in two ways:
-
-> 1. Using the webservice to run conda-smithy on the cloud by adding the comment `@conda-forge-admin please rerender` (See [Admin web services](infrastructure.md#admin-web-services)).
-> 2. Run conda-smithy locally on your machine (See [Rerendering with conda-smithy locally](#dev-rerender-local)).
-
-<a id="dev-rerender-local"></a>
-
-<a id="rerendering-with-conda-smithy-locally"></a>
-
-### Rerendering with conda-smithy locally
-
-The first step is to install `conda-smithy` in your root environment.
-
-```shell-session
-conda install -c conda-forge conda-smithy
-```
-
-Commit all changes and from the root directory of the feedstock, type:
-
-```shell-session
-conda smithy rerender -c auto
-```
-
-Optionally one can commit the changes manually.
-To do this drop `-c auto` from the command.
-
-<a id="when-to-rerender"></a>
-
-### When to rerender
-
-We need to re-render when there are changes in the following parts of the feedstock:
-
-- Platform configuration (`skip` sections).
-- `yum_requirements.txt` or `conda-forge.yml`.
-- Updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.
-- Updates in conda-forge pinning that affect the feedstock.
-- Build issues that a feedstock configuration update will fix (follow us on [Zulip](https://conda-forge.zulipchat.com/) to know about those).
+See [How to rerender a feedstock](/docs/how-to/basics/rerender.md).
 
 <a id="updating-for-newly-released-python-version"></a>
 
@@ -345,8 +304,54 @@ For an example see [this](https://github.com/conda-forge/cudnn-feedstock/issues/
 
 ## Maintaining several versions
 
-If you'd like to maintain more than one version of your package, you can use branches on the feedstock. To do this:
+See [How to maintain several versions](/docs/how-to/advanced/several-versions.md).
 
-- Fork your feedstock and make a meaningful branch name (e.g., v1.X or v1.0).
-- Make the required changes to the recipe and rerender the feedstock.
-- Then push this branch from your fork to the upstream feedstock. Our CI services will automatically build any branches in addition to the default branch.
+## Troubleshooting
+
+Sometimes things go wrong, particularly with the automation. This section aims to provide guidance on these problems.
+
+### Automatic version updates don't work
+
+Usually, the bot detects automatically when a new version of a package is released.
+It does that by monitoring the source url named in the recipe in an appropriate way,
+i.e. for PyPI sources it queries the API, for Github source releases it monitors the release page
+or the tags in the upstream repository.
+Sometimes an erroneous release happens or an unrelated tag is misidentified as a release.
+For example, `project-a` usually releases under a semver scheme like 4.0.2, but a typo in the release process ended up creating a tag with 40.3 (missing period).
+In these cases, the bot can be confused, consider subsequent releases as older than the misidentified one, and stop issuing automatic update PRs.
+
+You can check which version the bot detected by looking in the metadata that it collected, which is conveniently available in its own Github repo.
+To deal with the large number of packages, the information is sharded (i.e. split into several subdirectories) according to some hash function,
+which makes it a bit challenging to find.
+The best way is to use Github search with the query [`repo:regro/cf-graph-countyfair path:version_pr_info/**/amrex.json`](https://github.com/search?q=repo%3Aregro%2Fcf-graph-countyfair+path%3Aversion_pr_info%2F**%2Famrex.json&type=code), where you should replace `amrex` with the name of your own package.
+This will lead you to a file looking like:
+
+```json
+{
+  "bad": false,
+  "new_version": "25.07",
+  "new_version_attempts": {
+    "2024": 0,
+    "23.11": 1,
+    "23.12": 1,
+    "24.01": 1,
+    "24.02": 1,
+    "24.03": 1
+  },
+  "new_version_errors": {}
+}
+```
+
+Here, look for the `"new_version"` field. If that contains a wrong value, note it down for fixing in the next step.
+
+The solution in this case is to let the bot know that it should ignore a certain version.
+This can be done in the `conda-forge.yml` configuration file, with [more details](../conda_forge_yml/#bot) in the documentation, the simple snippet boils down to
+
+```yaml
+bot:
+  version_updates:
+    exclude:
+      - '08.14'
+```
+
+where `'08.14'` represents the erroneous version.

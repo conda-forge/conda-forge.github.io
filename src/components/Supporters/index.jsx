@@ -139,13 +139,6 @@ const developer = [
     width: 250,
   },
   {
-    name: "Voltron Data",
-    link: "https://voltrondata.com/",
-    light: "img/supporters/voltron_light.svg",
-    dark: "img/supporters/voltron_dark.svg",
-    width: 250,
-  },
-  {
     name: "Quansight Labs",
     link: "https://labs.quansight.org/",
     light: "img/supporters/quansightlabs_light.svg",

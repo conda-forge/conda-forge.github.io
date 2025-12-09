@@ -55,7 +55,11 @@ def main():
         print("Checking", dirname, "sidebar...")
         directory = REPO_ROOT / dirname
         docs_files = set(get_all_documents(directory))
-        initial_items = json.loads((directory / "_sidebar.json").read_text())
+        initial_items = [
+            item
+            for json_path in directory.glob("_sidebar*.json")
+            for item in json.loads(json_path.read_text())
+        ]
         sidebar_files = set(get_sidebar_files(initial_items))
         missing_files_from_sidebar = docs_files - sidebar_files
         if missing_files_from_sidebar:

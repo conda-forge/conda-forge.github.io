@@ -417,6 +417,10 @@ const config = {
                 label: "CFEPs",
                 to: "/community/cfep/",
               },
+              {
+                label: "Reorganized docs",
+                to: "/docs/diataxis",
+              },
             ],
           },
           {
@@ -456,8 +460,8 @@ const config = {
                 href: "/status/",
               },
               {
-                label: "Twitter",
-                href: "https://twitter.com/condaforge",
+                label: "Bluesky",
+                href: "https://bsky.app/profile/conda-forge.org",
               },
             ],
           },
@@ -479,10 +483,6 @@ const config = {
               {
                 label: "Zulip",
                 href: "https://conda-forge.zulipchat.com",
-              },
-              {
-                label: "Discourse",
-                href: "https://conda.discourse.group/c/pkg-building/conda-forge/25",
               },
               {
                 label: "Stack Overflow",

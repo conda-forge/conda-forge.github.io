@@ -185,7 +185,7 @@ Just run the following commands:
 ### 3. Register with the CI providers
 
 This is important! If you haven't done so already, you'll need to go
-to the CI providers (Travis, Circle, Azure, etc.) and enable CI
+to the CI providers (Azure, etc.) and enable CI
 to for your repository. Each CI provider that you use will have
 documentation on how to get set up with them.
 

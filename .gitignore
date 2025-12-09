@@ -58,3 +58,6 @@ __pycache__/
 # pixi environments
 .pixi
 *.egg-info
+
+# vscode stuff
+.vscode

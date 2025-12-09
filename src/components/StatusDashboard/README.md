@@ -14,7 +14,6 @@ There are 8 informational top-level components in the status dashboard and 1 nav
 - `<UsageChart>` – [`usage_chart.jsx`](usage_chart.jsx), used to render:
   - Azure Pipelines chart
   - GitHub Actions chart
-  - Travis CI chart
 - `<Incidents>` – [`incidents.jsx`](incidents.jsx)
 - `<VersionUpdates>` – [`version_updates.jsx`](version_updates.jsx)
 

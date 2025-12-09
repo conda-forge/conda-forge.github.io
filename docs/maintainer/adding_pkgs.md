@@ -54,7 +54,6 @@ There are, currently, three ways to generate a recipe:
    for conda-forge and eventually replace conda skeleton. Presently, Grayskull can generate recipes for Python packages available on PyPI and also those not published on PyPI and only available as GitHub repositories.
 
    Installation and usage of `grayskull`:
-
    - Create a new environment using : `conda create --name MY_ENV`. Replace `MY_ENV` with the environment name.
    - Activate this new environment : `conda activate MY_ENV`.
    - Run `conda install -c conda-forge grayskull` to install `grayskull`.
@@ -65,7 +64,7 @@ There are, currently, three ways to generate a recipe:
    You do _not_ necessarily have to use `grayskull`, and the recipes produced by `grayskull` might need to be reviewed and edited.
    Read more about `grayskull` and how to use it [here](https://github.com/conda-incubator/grayskull#introduction).
 
-3. If it's none of the above, generate a recipe with the help of [the example recipe](https://github.com/conda-forge/staged-recipes/tree/master/recipes/example) in the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and modify it as necessary.
+3. If it's none of the above, generate a recipe with the help of [the example recipe](https://github.com/conda-forge/staged-recipes/tree/main/recipes/example) in the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and modify it as necessary.
 
 Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
 
@@ -92,7 +91,7 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
 3. Checkout a new branch from the staged-recipes `main` branch.
 4. Through CLI, cd inside the ‘staged-recipes/recipes' directory.
 5. Within your forked copy, create a new folder in the recipes folder for your package (i.e, `...staged-recipes/recipes/<name-of-package>`)
-6. Copy [meta.yaml](https://github.com/conda-forge/staged-recipes/blob/master/recipes/example/meta.yaml) from the example directory.
+6. Copy [meta.yaml](https://github.com/conda-forge/staged-recipes/blob/main/recipes/example/meta.yaml) from the example directory.
    All the changes in the following steps will happen in the COPIED meta.yaml (i.e., `...staged-recipes/recipes/<name-of-package>/meta.yaml`).
    Please leave the example directory unchanged!
 7. Modify the copied recipe (meta.yml) as needed. To see how to modify meta.yaml, take a look at
@@ -180,7 +179,7 @@ This file is the license for the recipe itself. This license is different from t
 
 #### CI-files
 
-These are the CI configuration files for service providers like Azure and TravisCI.
+These are the CI configuration files for service providers like Azure.
 
 <a id="conda-forge-yml"></a>
 
@@ -470,7 +469,7 @@ It is therefore crucial to ensure that only library versions with a compatible [
 
 In the best case, the shared library you depend on:
 
-- defines a pin in the [list of globally pinned packages](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml)
+- defines a pin in the [list of globally pinned packages](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml)
 - exports its [ABI](../glossary.md#abi) compatible requirements by defining `run_exports` in it's meta.yaml
 
 In these cases you do not have to worry about version requirements:
