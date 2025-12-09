@@ -32,7 +32,6 @@
       "maintainer/updating_pkgs",
       "maintainer/pinning_deps",
       "maintainer/conda_forge_yml",
-      "how-to/advanced/cross-compilation",
       "maintainer/knowledge_base",
       "maintainer/maintainer_faq",
       {
