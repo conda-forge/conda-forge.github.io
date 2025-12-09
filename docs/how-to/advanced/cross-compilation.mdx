@@ -25,8 +25,7 @@ for which the built package will generate code for. For the purposes of this doc
 consider this to be irrelevant and the target platform to be the same as the host.
 
 Note that some resources may use the term "host" to refer to the build platform, and the term
-"target" to refer to the host platform. This is usually the case if they are not referring to
-building compilers.
+"target" to refer to the host platform. This convention is notably used by cmake, but we will not use this convention in this document.
 
 :::
 
@@ -97,7 +96,7 @@ This is all supported by two main conda-build features introduced in version 3:
 The rule of the thumb is:
 
 - If it needs to run during the build, it goes in `build`.
-- If it needs to be available on the target host, it goes in `host`.
+- If it needs to be available during the build, is specific to the `host` machine, but is not run, it goes in `host`. (Eg: headers, libraries, etc)
 - If both conditions are true, it belongs in both.
 
 However, there are some exceptions to this rule; most notably [Python cross-compilation](#details-about-cross-compiled-python-packages).
