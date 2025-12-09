@@ -5,7 +5,7 @@
   publish = "build"
 
   # Default build command.
-  command = 'curl -fsSL https://pixi.sh/install.sh | PIXI_HOME=~/.pixi sh && ~/.pixi/bin/pixi run build'
+  command = 'curl -fsSL https://pixi.sh/install.sh | PIXI_HOME=~/.pixi sh && ~/.pixi/bin/pixi run build-production'
 
   # We only want to build PR previews.
   # Exit code == 0 means that the build is ignored.
