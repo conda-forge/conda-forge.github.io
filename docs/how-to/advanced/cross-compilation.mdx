@@ -2,8 +2,7 @@
 title: 'Cross-compilation'
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
 
 Cross-compiling means building a package for a different architecture than the one the build process
 is running on. It is a common way of obtaining packages for an architecture that conda-forge does
@@ -114,9 +113,8 @@ are a few examples.
 
 A simple C library using autotools for cross-compilation might look like this:
 
-<Tabs groupId="recipe">
+<RecipeTabs>
 
-<TabItem label="v0 (meta.yaml)" value="v0">
 ```yaml
 requirements:
   build:
@@ -128,9 +126,7 @@ requirements:
   host:
     - libogg
 ```
-</TabItem>
 
-<TabItem label="v1 (recipe.yaml)" value="v1">
 ```yaml
 requirements:
   build:
@@ -142,9 +138,8 @@ requirements:
   host:
     - libogg
 ```
-</TabItem>
 
-</Tabs>
+</RecipeTabs>
 
 In the build script, it would need to update the config files and guard any tests when
 cross-compiling:
@@ -166,9 +161,8 @@ fi
 
 A simple C++ library using CMake for cross-compilation might look like this:
 
-<Tabs groupId="recipe">
+<RecipeTabs>
 
-<TabItem label="v0 (meta.yaml)" value="v0">
 ```yaml
 requirements:
   build:
@@ -179,9 +173,7 @@ requirements:
   host:
     - libboost-devel
 ```
-</TabItem>
 
-<TabItem label="v1 (recipe.yaml)" value="v1">
 ```yaml
 requirements:
   build:
@@ -192,9 +184,8 @@ requirements:
   host:
     - libboost-devel
 ```
-</TabItem>
 
-</Tabs>
+</RecipeTabs>
 
 In the build script, it would need to update `cmake` call and guard any tests when cross-compiling:
 
@@ -213,9 +204,8 @@ fi
 
 Similarly, with Meson, the `meta.yaml` needs:
 
-<Tabs groupId="recipe">
+<RecipeTabs>
 
-<TabItem label="v0 (meta.yaml)" value="v0">
 ```yaml
 requirements:
   build:
@@ -227,9 +217,7 @@ requirements:
   host:
     - libogg
 ```
-</TabItem>
 
-<TabItem label="v1 (recipe.yaml)" value="v1">
 ```yaml
 requirements:
   build:
@@ -241,9 +229,8 @@ requirements:
   host:
     - libogg
 ```
-</TabItem>
 
-</Tabs>
+</RecipeTabs>
 
 And this in `build.sh`:
 
@@ -257,9 +244,8 @@ meson compile
 
 A simple Python extension using Cython and NumPy's C API would look like so:
 
-<Tabs groupId="recipe">
+<RecipeTabs>
 
-<TabItem label="v0 (meta.yaml)" value="v0">
 ```yaml
 requirements:
   build:
@@ -277,9 +263,7 @@ requirements:
   run:
     - python
 ```
-</TabItem>
 
-<TabItem label="v1 (recipe.yaml)" value="v1">
 ```yaml
 requirements:
   build:
@@ -299,9 +283,8 @@ requirements:
   run:
     - python
 ```
-</TabItem>
 
-</Tabs>
+</RecipeTabs>
 
 For more details about NumPy see [Building against NumPy](/docs/maintainer/knowledge_base/#building-against-numpy).
 
@@ -309,9 +292,8 @@ For more details about NumPy see [Building against NumPy](/docs/maintainer/knowl
 
 With MPI, openmpi is required for the build platform as the compiler wrappers are binaries, but mpich is not required as the compiler wrappers are scripts (see [example](https://github.com/conda-forge/mpi4py-feedstock/blob/743d379c4a04/recipe/meta.yaml#L37)):
 
-<Tabs groupId="recipe">
+<RecipeTabs>
 
-<TabItem label="v0 (meta.yaml)" value="v0">
 ```yaml
 requirements:
   build:
@@ -321,9 +303,7 @@ requirements:
   run:
     - {{ mpi }}
 ```
-</TabItem>
 
-<TabItem label="v1 (recipe.yaml)" value="v1">
 ```yaml
 requirements:
   build:
@@ -334,9 +314,8 @@ requirements:
   run:
     - ${{ mpi }}
 ```
-</TabItem>
 
-</Tabs>
+</RecipeTabs>
 
 In the build script, openmpi compiler wrappers can use host libraries by setting the environmental variable `OPAL_PREFIX` to `$PREFIX`.
 
