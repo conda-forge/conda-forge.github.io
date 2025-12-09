@@ -268,9 +268,9 @@ requirements:
   build:
     - ${{ compiler("c") }}
     - ${{ stdlib("c") }}
-    - if: build_platform != target_platform
+    - if: build_platform != host_platform
       then:
-        - cross-python_${{ target_platform }}
+        - cross-python_${{ host_platform }}
         - python
         - cython
         - numpy
@@ -306,7 +306,7 @@ requirements:
 ```yaml
 requirements:
   build:
-    - if: build_platform != target_platform and mpi == "openmpi"
+    - if: build_platform != host_platform and mpi == "openmpi"
       then: ${{ mpi }}
   host:
     - ${{ mpi }}
