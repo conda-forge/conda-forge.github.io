@@ -65,7 +65,7 @@ const config = {
     hooks: {
       onBrokenMarkdownImages: process.env.GITHUB_ACTIONS ? "throw" : "warn",
       onBrokenMarkdownLinks: process.env.GITHUB_ACTIONS ? "throw" : "warn",
-    }
+    },
   },
   themes: ["@docusaurus/theme-mermaid"],
 
