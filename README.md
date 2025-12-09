@@ -23,8 +23,8 @@ If you have questions or need help, please check out our documentation for a [li
 2.  [Clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) this fork onto your computer.
 3.  Go into the cloned folder and:
     - If you are using `pixi`:
-      - Use `pixi run start` for live builds.
-      - Use `pixi run build-production` for production builds.
+      - Use `pixi run start` for live builds
+      - Use `pixi run build-production` for production builds
     - If you are using `conda` or `mamba` (replace command accordingly):
       - `conda env create -f ./.ci_scripts/environment.yml`
       - `conda activate conda-forge-docs`
