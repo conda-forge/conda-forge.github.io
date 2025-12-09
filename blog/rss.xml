@@ -36,7 +36,7 @@ maintenance burden. There are two main incompatibilities. First,
 <code>libstdc++</code> as the standard C++ library. Second, <code>clang</code> uses <code>libomp</code>
 as the OpenMP library whereas <code>gcc</code> uses <code>libgomp</code> as the OpenMP library.</p>
 <p>Today, we announce the availability of <code>gcc</code>, <code>g++</code> compilers on macos.
-You can install them using</p>
+You can install them using:</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">conda </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> gcc gxx</span><br></span></code></pre></div></div>
 <p>Currently we support only gcc 15 and will not support gcc 14 or previous
 versions.</p>
