@@ -4,28 +4,28 @@ title: 'Cross-compilation'
 
 import { RecipeTabs } from "@site/src/components/RecipeTabs";
 
-Cross-compiling means building a package for a different architecture than the one the build process
-is running on. It is a common way of obtaining packages for an architecture that conda-forge does
-not provide any runners for (the other available technique is
+Cross-compiling means building a package for a different architecture or a different operating
+system than the one the build process is running on. It is a common way of obtaining packages for an
+architecture that conda-forge does not provide any runners for (the other available technique is
 [emulation](/docs/maintainer/knowledge_base/#emulated-builds)). Given how abundant x86_64 runners
 are, most common cross-compilation setups will target non-x86_64 architectures from x86_64 runners.
 
 ## Terminology
 
-Cross-compilation terminology usually distinguishes between two types of machine:
+Cross-compilation terminology usually distinguishes between two types of platform:
 
-- Build: The machine running the building process.
-- Host: The machine we are building packages for.
+- Build: The platform running the building process.
+- Host: The platform we are building packages for.
 
 :::note
 
-Some cross-compilation documentation might also distinguish between a third type of machine, the
-target machine. This is used primarily when building cross-compilers, and indicates the architecture
+Some cross-compilation documentation might also distinguish between a third type of platform, the
+target platform. This is used primarily when building cross-compilers, and indicates the platform
 for which the built package will generate code for. For the purposes of this documentation, we'll
-consider this to be irrelevant and the target machine to be the same as the host.
+consider this to be irrelevant and the target platform to be the same as the host.
 
-Note that some resources may use the term "host" to refer to the build machine, and the term
-"target" to refer to the host machine. This is usually the case if they are not referring to
+Note that some resources may use the term "host" to refer to the build platform, and the term
+"target" to refer to the host platform. This is usually the case if they are not referring to
 building compilers.
 
 :::
