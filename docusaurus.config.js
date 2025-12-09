@@ -28,7 +28,6 @@ const config = {
   url: "https://conda-forge.org/",
   baseUrl: "/",
   onBrokenLinks: process.env.GITHUB_ACTIONS ? "throw" : "warn",
-  onBrokenMarkdownLinks: process.env.GITHUB_ACTIONS ? "throw" : "warn",
   onBrokenAnchors: process.env.GITHUB_ACTIONS ? "throw" : "warn",
   favicon: "img/favicon.ico",
   trailingSlash: true,
@@ -63,6 +62,10 @@ const config = {
   markdown: {
     mermaid: true,
     format: "detect",
+    hooks: {
+      onBrokenMarkdownImages: process.env.GITHUB_ACTIONS ? "throw" : "warn",
+      onBrokenMarkdownLinks: process.env.GITHUB_ACTIONS ? "throw" : "warn",
+    }
   },
   themes: ["@docusaurus/theme-mermaid"],
 
