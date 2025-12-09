@@ -12,3 +12,4 @@ static/
 vote-results/
 misc/
 *.mdx
+.ci_scripts/environment.yml
