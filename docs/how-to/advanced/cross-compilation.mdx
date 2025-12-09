@@ -32,21 +32,12 @@ building compilers.
 
 ## How to enable cross-compilation
 
-Cross-compilation settings depend on the `build_platform` and `target_platform` conda-build
-variables:
+By default, the build scripts only enable building for platforms that feature native conda-forge
+runners. To enable cross-compilation, you need to extend the
+[build_platform](/docs/maintainer/conda_forge_yml/#build-platform) mapping in `conda-forge.yml`
+that specifies which build platform to use to cross-compile for a specific platform.
 
-- `build_platform`: The platform on which `conda-build` is running, which defines the `build`
-  environment that is made available in `$BUILD_PREFIX`.
-- `target_platform`: The platform on which the package will be installed. Defines the platform of
-  the `host` environment that is made available in `$PREFIX`. Defaults to the value of
-  `build_platform`.
-
-The build scripts default to performing native builds, that is they only expose the
-`target_platform`s that have a corresponding runner. To enable cross-compilation, you need to
-extend the [build_platform](/docs/maintainer/conda_forge_yml/#build-platform) mapping
-in `conda-forge.yml`. It maps `target_platform` values to `build_platform` values used to build
-the respective packages. For example, to cross-compile `linux-aarch64` and `linux-ppc64le` from
-`linux-64`:
+For example, to cross-compile `linux-aarch64` and `linux-ppc64le` from `linux-64`:
 
 ```yaml
 build_platform:
@@ -54,18 +45,26 @@ build_platform:
   linux_ppc64le: linux_64
 ```
 
-
 Then [rerender](/docs/how-to/basics/rerender/) the feedstock. This will generate the appropriate CI workflows and
 conda-build input metadata. See also [test](/docs/maintainer/conda_forge_yml/#test) for how to skip the test phase when
 cross-compiling. Provided the requirements metadata and build scripts are written correctly, the
 package should just work. However, in some cases, it'll need some adjustments; see examples below
 for some common cases.
 
+The used platforms are exposed in recipes as selectors and in the build scripts as environment
+variables. For v1 recipes, the following variables are used:
+
+- `build_platform`: The platform on which `conda-build` is running, corresponding to the `build`
+  environment that is made available in `$BUILD_PREFIX`.
+- `host_platform`: The platform on which the package will be installed, corresponding to the `host`
+  environment that is made available in `$PREFIX`. For native builds, matches `build_platform`.
+
+In v0 recipes, `target_platform` is used in place of `host_platform`.
+
 :::note
 
-The `build_platform` and `target_platform` variables are exposed as environment variables in
-the build scripts (e.g. `$build_platform`), and also as Jinja variables in the `meta.yaml`
-selectors (e.g. `# [build_platform != target_platform]`).
+Many existing v1 recipes are using `target_platform` instead of `host_platform`. This works because
+target platform is almost always the same as host platform, though it is technically incorrect.
 
 :::
 
