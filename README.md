@@ -21,12 +21,15 @@ If you have questions or need help, please check out our documentation for a [li
 
 1.  [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the [conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io) repository to your own GitHub user account.
 2.  [Clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) this fork onto your computer.
-3.  Go into the main folder.
-    Run the following commands.
-    - `conda env create -f ./.ci_scripts/environment.yml`
-    - `conda activate conda-forge-docs`
-    - For live builds, `npm install && npm run start`
-    - For production builds, run `.ci_scripts/update_docs`
+3.  Go into the cloned folder and:
+    - If you are using `pixi`:
+      - Use `pixi run start` for live builds.
+      - Use `pixi run build-production` for production builds.
+    - If you are using `conda` or `mamba` (replace command accordingly):
+      - `conda env create -f ./.ci_scripts/environment.yml`
+      - `conda activate conda-forge-docs`
+      - For live builds, `npm install && npm run start`
+      - For production builds, run `.ci_scripts/update_docs`
 4.  Make and commit your changes.
 5.  Submit a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) to the main repository proposing your changes.
 

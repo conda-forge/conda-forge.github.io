@@ -11,3 +11,4 @@ static/
 .github/
 vote-results/
 misc/
+*.mdx
