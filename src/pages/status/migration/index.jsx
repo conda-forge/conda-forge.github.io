@@ -144,66 +144,70 @@ export default function MigrationDetails() {
       description="Status dashboard for conda-forge"
     >
       <main className={`container ${styles.migration_details}`}>
-        <div className={`card margin-top--xs`}>
-          <div className="card__header">
-            <div className={styles.migration_details_toggle}>
-              <div class="tabs-container">
-                <ul role="tablist" aria-orientation="horizontal" class="tabs">
-                  <li
-                    key="table"
-                    role="tab"
-                    class={["tabs__item", (view == "table" ? "tabs__item--active" : null)].join(" ")}
-                    onClick={() => toggle("table")}
-                  >
-                    Table
-                  </li>
-                  <li
-                    key="graph"
-                    role="tab"
-                    class={["tabs__item", (view == "graph" ? "tabs__item--active" : null)].join(" ")}
-                    onClick={() => toggle("graph")}
-                  >
-                    Graph
-                  </li>
-                  {name &&
-                    <a href={urls.migrations.details.replace("<NAME>", name)} target="_blank">
+        <div className="row row--no-gutters">
+          <div className="col col--12">
+            <div className={`card margin-top--xs`}>
+              <div className="card__header">
+                <div className={styles.migration_details_toggle}>
+                  <div class="tabs-container">
+                    <ul role="tablist" aria-orientation="horizontal" class="tabs">
                       <li
-                        key="raw"
+                        key="table"
                         role="tab"
-                        class="tabs__item"
+                        class={["tabs__item", (view == "table" ? "tabs__item--active" : null)].join(" ")}
+                        onClick={() => toggle("table")}
                       >
-                        <span>Raw <i className="fa fa-fw fa-arrow-up-right-from-square"></i></span>
+                        Table
                       </li>
-                    </a>
-                  }
-                </ul>
+                      <li
+                        key="graph"
+                        role="tab"
+                        class={["tabs__item", (view == "graph" ? "tabs__item--active" : null)].join(" ")}
+                        onClick={() => toggle("graph")}
+                      >
+                        Graph
+                      </li>
+                      {name &&
+                        <a href={urls.migrations.details.replace("<NAME>", name)} target="_blank">
+                          <li
+                            key="raw"
+                            role="tab"
+                            class="tabs__item"
+                          >
+                            <span>Raw <i className="fa fa-fw fa-arrow-up-right-from-square"></i></span>
+                          </li>
+                        </a>
+                      }
+                    </ul>
+                  </div>
+                </div>
+                <Breadcrumbs>{name}</Breadcrumbs>
+                <div style={{ clear: "both" }}></div>
+              </div>
+              <div className="card__body" style={{ overflow: "auto" }}>
+                {(details && details.paused_or_closed === "paused") ?
+                  <Admonition type="note">This migration is currently paused.</Admonition> : null}
+                {(details && details.paused_or_closed === "closed") ?
+                  <Admonition type="note">This migration has been closed recently.</Admonition> : null}
+                {details && <Bar details={details} /> || null}
+                {view === "graph" ?
+                  <Graph>{name}</Graph> :
+                  (details && <Table details={details} />)
+                }
               </div>
             </div>
-            <Breadcrumbs>{name}</Breadcrumbs>
-            <div style={{ clear: "both" }}></div>
-          </div>
-          <div className="card__body" style={{ overflow: "auto" }}>
-            {(details && details.paused_or_closed === "paused") ?
-              <Admonition type="note">This migration is currently paused.</Admonition> : null}
-            {(details && details.paused_or_closed === "closed") ?
-              <Admonition type="note">This migration has been closed recently.</Admonition> : null}
-            {details && <Bar details={details} /> || null}
-            {view === "graph" ?
-              <Graph>{name}</Graph> :
-              (details && <Table details={details} />)
-            }
+            {view === "table" && (
+              <div className={`card margin-top--md`}>
+                <div className="card__header">
+                  <h3>CI Status Legend</h3>
+                </div>
+                <div className="card__body">
+                  <CIStatusLegend />
+                </div>
+              </div>
+            )}
           </div>
         </div>
-        {view === "table" && (
-          <div className={`card margin-top--md`}>
-            <div className="card__header">
-              <h3>CI Status Legend</h3>
-            </div>
-            <div className="card__body">
-              <CIStatusLegend />
-            </div>
-          </div>
-        )}
       </main>
     </Layout>
   );
