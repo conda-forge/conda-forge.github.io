@@ -81,6 +81,7 @@ const config = {
           showReadingTime: true,
           blogSidebarCount: 10,
           onInlineAuthors: "ignore",
+          onUntruncatedBlogPosts: "throw",
           ...editUrl,
         },
         theme: {
