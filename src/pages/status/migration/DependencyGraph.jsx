@@ -111,6 +111,23 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
 
     const svgGroup = svg.append("g");
 
+    // WORKAROUND-PR-2670: Add marker definitions for arrowheads BEFORE rendering
+    // dagre-d3 doesn't automatically create SVG marker defs for arrowheads,
+    // so we need to manually define them before render. This is referenced in
+    // migrationGraphUtils.js:28
+    const defs = svgGroup.append("defs");
+    defs
+      .append("marker")
+      .attr("id", "arrowhead")
+      .attr("markerWidth", 10)
+      .attr("markerHeight", 10)
+      .attr("refX", 8)
+      .attr("refY", 3)
+      .attr("orient", "auto")
+      .append("polygon")
+      .attr("points", "0 0, 10 3, 0 6")
+      .style("fill", "var(--ifm-color-emphasis-800)");
+
     const render = new dagreD3.render();
     render(svgGroup, graph);
 
