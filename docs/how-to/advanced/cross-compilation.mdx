@@ -71,8 +71,7 @@ In addition to these two variables, there are some more environment variables th
 conda-forge's automation (e.g. `conda-forge-ci-setup`, compiler activation packages, etc) that
 can aid in cross-compilation setups:
 
-- `CONDA_BUILD_CROSS_COMPILATION`: set to `1` when `build_platform` and `target_platform`
-  differ.
+- `CONDA_BUILD_CROSS_COMPILATION`: set to `1` when the build platform and the host platform differ.
 - `CONDA_TOOLCHAIN_BUILD`: the autoconf triplet expected for build platform.
 - `CONDA_TOOLCHAIN_HOST`: the autoconf triplet expected for host platform.
 - `CMAKE_ARGS`: arguments needed to cross-compile with CMake. Pass it to `cmake` in your build
@@ -80,8 +79,8 @@ can aid in cross-compilation setups:
 - `MESON_ARGS`: arguments needed to cross-compile with Meson. Pass it to `meson` in your build
   script. Note a [cross build definition file](https://mesonbuild.com/Cross-compilation.html) is
   automatically created for you too.
-- `CC_FOR_BUILD`: C compilers targeting the build platform.
-- `CXX_FOR_BUILD`: C++ compilers targeting the build platform.
+- `CC_FOR_BUILD`: a C compiler targeting the build platform.
+- `CXX_FOR_BUILD`: a C++ compiler targeting the build platform.
 - `CROSSCOMPILING_EMULATOR`: Path to the `qemu` binary for the host platform. Useful for running
   tests when cross-compiling.
 
@@ -99,7 +98,14 @@ The rule of the thumb is:
 - If it needs to be available during the build, is specific to the `host` machine, but is not run, it goes in `host`. (for example, headers, libraries, etc.)
 - If both conditions are true, it belongs in both.
 
-However, there are some exceptions to this rule; most notably [Python cross-compilation](#details-about-cross-compiled-python-packages).
+In some cases, additional packages may be needed only when cross-compiling. To cover that, you can
+use an appropriate selectors to cover for the build platform and the host platform being different.
+These are:
+
+- for v0 recipes, `[build_platform != target_platform]`.
+- for v1 recipes, `if: build_platform != host_platform`.
+
+However, there are some cases requiring special handling; most notably [Python cross-compilation](#details-about-cross-compiled-python-packages).
 
 ## Cross-compilation examples
 
