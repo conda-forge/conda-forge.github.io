@@ -23,9 +23,14 @@ export const getGraphSettings = (
   align: align,
 });
 
+// WORKAROUND-PR-2670: marker-end references SVG marker def created in DependencyGraph.jsx:117-130
+// dagre-d3 create marker defs, but they are after the <path> instead of before, or
+// something else is happening.
+// hence the custom extra marker-end: url(#arrowhead); because arrowheadStyle does not work.
 const EDGE_STYLE = {
   arrowheadStyle: "fill: var(--ifm-color-emphasis-800);",
-  style: "stroke: var(--ifm-color-emphasis-800); stroke-width: 2px;",
+  style:
+    "stroke: var(--ifm-color-emphasis-800); stroke-width: 2px; marker-end: url(#arrowhead);",
 };
 
 export const getNodeIdFromSvgElement = (element) => {
