@@ -330,7 +330,7 @@ export const applyHighlight = (svgGroup, nodeId, graphDataStructure) => {
   });
 
   // Dim all edges
-  svgGroup.selectAll("g.edgePath").style("opacity", 0.05);
+  svgGroup.selectAll("g.edgePath").style("opacity", 0.2);
 
   // Highlight related edges (both incoming and outgoing)
   svgGroup.selectAll("g.edgePath").each(function () {
