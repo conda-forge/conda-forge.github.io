@@ -37,6 +37,7 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
   const [graphRanker, setGraphRanker] = React.useState("network-simplex");
   const [graphAlign, setGraphAlign] = React.useState("");
   const [userConfirmedLargeGraph, setUserConfirmedLargeGraph] = React.useState(false);
+  const [highlightedIndex, setHighlightedIndex] = React.useState(-1);
 
   useEffect(() => {
     if (initialSelectedNode && graphDataStructure.nodeMap[initialSelectedNode]) {
@@ -261,6 +262,13 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
     setSelectedNodeId(nodeName);
     setSearchTerm("");
     setShowDropdown(false);
+    setHighlightedIndex(-1);
+  };
+
+  const handleClearSelection = () => {
+    setSelectedNodeId(null);
+    setSearchTerm("");
+    setHighlightedIndex(-1);
   };
 
   return (
@@ -329,25 +337,60 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
           )}
           <div className={graphStyles.headerControls}>
             <div className={graphStyles.searchContainer}>
-              <input
-                type="text"
-                className={graphStyles.searchInput}
-                placeholder="Search for package..."
-                value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setShowDropdown(true);
-                }}
-                onFocus={() => setShowDropdown(true)}
-                onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
-              />
+              <div className={graphStyles.searchInputWrapper}>
+                <input
+                  type="text"
+                  className={graphStyles.searchInput}
+                  placeholder="Search for package..."
+                  value={searchTerm}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    setShowDropdown(true);
+                    setHighlightedIndex(-1);
+                  }}
+                  onFocus={() => setShowDropdown(true)}
+                  onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
+                  onKeyDown={(e) => {
+                    if (!showDropdown || filteredNodes.length === 0) return;
+
+                    switch (e.key) {
+                      case "ArrowDown":
+                        e.preventDefault();
+                        setHighlightedIndex((prev) =>
+                          prev < filteredNodes.length - 1 ? prev + 1 : prev
+                        );
+                        break;
+                      case "ArrowUp":
+                        e.preventDefault();
+                        setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : -1));
+                        break;
+                      case "Enter":
+                        e.preventDefault();
+                        if (highlightedIndex >= 0) {
+                          handleSelectNode(filteredNodes[highlightedIndex]);
+                        }
+                        break;
+                      case "Escape":
+                        e.preventDefault();
+                        setShowDropdown(false);
+                        break;
+                      default:
+                        break;
+                    }
+                  }}
+                />
+              </div>
               {showDropdown && filteredNodes.length > 0 && (
                 <ul className={graphStyles.searchDropdown}>
-                  {filteredNodes.slice(0, 10).map((nodeName) => (
+                  {filteredNodes.slice(0, 10).map((nodeName, index) => (
                     <li
                       key={nodeName}
-                      className={graphStyles.searchDropdownItem}
+                      className={`${graphStyles.searchDropdownItem} ${
+                        index === highlightedIndex ? graphStyles.searchDropdownItemHighlighted : ""
+                      }`}
                       onClick={() => handleSelectNode(nodeName)}
+                      onMouseEnter={() => setHighlightedIndex(index)}
+                      onMouseLeave={() => setHighlightedIndex(-1)}
                     >
                       {nodeName}
                     </li>
