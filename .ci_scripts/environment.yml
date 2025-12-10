@@ -1,9 +1,10 @@
 name: conda-forge-docs
 channels:
-  - conda-forge
+- conda-forge
+- nodefaults
 dependencies:
-  - python=3
-  - requests
-  - pip
-  - nodejs 20.*
-  - pre-commit
+- curl *
+- nodejs 24.*
+- pre-commit *
+- python 3.*
+- requests *

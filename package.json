@@ -16,14 +16,15 @@
   "dependencies": {
     "@docusaurus/core": "^3.9.2",
     "@docusaurus/plugin-client-redirects": "^3.9.2",
+    "@docusaurus/plugin-content-blog": "^3.9.2",
     "@docusaurus/preset-classic": "^3.9.2",
-    "@docusaurus/plugin-content-blog": "^3.5.2",
     "@docusaurus/theme-mermaid": "^3.9.2",
     "@mdx-js/react": "^3.1.1",
     "@stoplight/json-ref-resolver": "^3.1.6",
     "chart.js": "^4.5.1",
     "chartjs-adapter-moment": "^1.0.1",
     "clsx": "^2.1.1",
+    "d3": "^7.9.0",
     "install": "^0.13.0",
     "moment": "^2.29.4",
     "octokit": "^5.0.5",
@@ -37,7 +38,7 @@
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.5.2",
+    "@docusaurus/module-type-aliases": "^3.9.2",
     "prettier": "^3.7.3"
   },
   "browserslist": {

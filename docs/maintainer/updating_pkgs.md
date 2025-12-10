@@ -138,45 +138,7 @@ Please follow the following guidelines while updating recipes:
 
 ## Rerendering feedstocks
 
-Rerendering is conda-forge's way to update the files common to all feedstocks (e.g. README, [CI](../glossary.md#ci) configuration, pinned dependencies).
-
-Rerendering can be done in two ways:
-
-> 1. Using the webservice to run conda-smithy on the cloud by adding the comment `@conda-forge-admin, please rerender` (See [Admin web services](infrastructure.md#admin-web-services)).
-> 2. Run conda-smithy locally on your machine (See [Rerendering with conda-smithy locally](#dev-rerender-local)).
-
-<a id="dev-rerender-local"></a>
-
-<a id="rerendering-with-conda-smithy-locally"></a>
-
-### Rerendering with conda-smithy locally
-
-The first step is to install `conda-smithy` in your root environment.
-
-```shell-session
-conda install -c conda-forge conda-smithy
-```
-
-Commit all changes and from the root directory of the feedstock, type:
-
-```shell-session
-conda smithy rerender -c auto
-```
-
-Optionally one can commit the changes manually.
-To do this drop `-c auto` from the command.
-
-<a id="when-to-rerender"></a>
-
-### When to rerender
-
-We need to re-render when there are changes in the following parts of the feedstock:
-
-- Platform configuration (`skip` sections).
-- `yum_requirements.txt` or `conda-forge.yml`.
-- Updates in the build matrix due to new versions of Python, NumPy, PERL, R, etc.
-- Updates in conda-forge pinning that affect the feedstock.
-- Build issues that a feedstock configuration update will fix (follow us on [Zulip](https://conda-forge.zulipchat.com/) to know about those).
+See [How to rerender a feedstock](/docs/how-to/basics/rerender.md).
 
 <a id="updating-for-newly-released-python-version"></a>
 
@@ -342,11 +304,7 @@ For an example see [this](https://github.com/conda-forge/cudnn-feedstock/issues/
 
 ## Maintaining several versions
 
-If you'd like to maintain more than one version of your package, you can use branches on the feedstock. To do this:
-
-- Fork your feedstock and make a meaningful branch name (e.g., v1.X or v1.0).
-- Make the required changes to the recipe and rerender the feedstock.
-- Then push this branch from your fork to the upstream feedstock. Our CI services will automatically build any branches in addition to the default branch.
+See [How to maintain several versions](/docs/how-to/advanced/several-versions.md).
 
 ## Troubleshooting
 

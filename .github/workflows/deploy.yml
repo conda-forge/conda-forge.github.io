@@ -14,20 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
 
-      - uses: conda-incubator/setup-miniconda@835234971496cad1653abb28a638a281cf32541f # v3.2.0
-        with:
-          python-version: 3.8
-          channels: conda-forge
-          channel-priority: strict
-          show-channel-urls: true
-          miniforge-version: latest
-          activate-environment: conda-forge-docs
-          environment-file: .ci_scripts/environment.yml
+      - uses: prefix-dev/setup-pixi@82d477f15f3a381dbcc8adc1206ce643fe110fb7 # v0.9.3
 
       - name: build
-        shell: bash -l {0}
-        run: |
-          source ./.ci_scripts/update_docs
+        run: pixi run build-production
         env:
           GHREF: ${{ github.ref }}
           GHREPO: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
@@ -64,3 +54,12 @@ jobs:
             --remap "https://conda-forge.org/(.*) file://$(pwd)/build/\$1"
             './build/**/*.html'
             '*.md'
+
+      - name: Check Pixi and environment.yml are in sync
+        run: |
+          pixi workspace export conda-environment > .ci_scripts/environment.yml
+          sed -i -e 's/name: default/name: conda-forge-docs/g' -e '/^$/d' .ci_scripts/environment.yml
+          if ! git diff --exit-code .ci_scripts/environment.yml; then
+            echo "error: pixi.toml and environment.yml are out of sync"
+            exit 1
+          fi
