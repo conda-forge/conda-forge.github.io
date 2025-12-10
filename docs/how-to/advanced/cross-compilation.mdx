@@ -289,6 +289,8 @@ requirements:
 
 </RecipeTabs>
 
+This example is discussed in greater detail in [details about cross-compiled Python
+packages](#details-about-cross-compiled-python-packages).
 For more details about NumPy see [Building against NumPy](/docs/maintainer/knowledge_base/#building-against-numpy).
 
 ### MPI
@@ -356,34 +358,21 @@ CMAKE_ARGS+=" -DPython3_NumPy_INCLUDE_DIR=${Python_NumPy_INCLUDE_DIR}"
 Cross-compiling Python packages is a bit more involved than other packages. The main pain point is
 that we need an executable Python interpreter (i.e. `python` in `build`) that knows how to
 provide accurate information about the target platform. Since this is not officially supported, a
-series of workarounds are required to make it work. Refer to [PEP720](https://peps.python.org/pep-0720/) or [the discussion in this issue](https://github.com/conda-forge/conda-forge.github.io/issues/1841) for more information.
+series of workarounds are required to make it work.
 
-In practical terms, for conda-forge, this results into two extra metadata bits that are needed in
-`meta.yaml`:
+In practical terms, it means that in conda-forge you need to:
 
-- Adding `cross-python_{{ target_platform }}` in `build` requirements, provided by the
-  [cross-python-feedstock](https://github.com/conda-forge/cross-python-feedstock). This is a
-  wrapper for the `crossenv` Python interpreters with [some activation logic that adjust some of
-  the crossenv workarounds](https://github.com/conda-forge/cross-python-feedstock/blob/main/recipe/activate-cross-python.sh)
-  so they work better with the conda-build setup.
-- Copying some Python-related packages from `host` to `build` with a `[build_platform !=
-target_platform]` selector:
-  - `python` itself, to support `crossenv`.
-  - Non-pure Python packages (i.e. they ship compiled libraries) that need to be present while the
-    package is being built, like `cython` and `numpy`.
+1. Add `cross-python_${{ host_platform }}` (or `cross-python_{{ target_platform }}` for v0 recipes)
+   to `build` requirements, conditionally to the cross-compiling selector.
+2. Copy `python` itself and non-pure Python packages (i.e. these that ship compiled extensions)
+   that need to be present while the package is being built, such as `cython` and `numpy`, from
+   `host` to `build` requirements, conditionally to the cross-compiling selector.
 
-In the terms of the [PEP720](https://peps.python.org/pep-0720/), the conda-forge setup
-implements the "faking the target environment" approach. More specifically, this will result in the
-following changes before the builds scripts run:
+This is demonstrated in the [Python example](#python).
 
-- A modified `crossenv` installation in `$BUILD_PREFIX/venv`, mimicking the architecture of
-  `$PREFIX`.
-- Forwarder binaries in `$BUILD_PREFIX/bin` that point to the `crossenv` installation.
-- Symlinks that expose the `$BUILD_PREFIX` site-packages in the `crossenv` installation, which
-  is also included in `$PYTHONPATH`.
-- A copy of all `$PREFIX` site-packages to `$BUILD_PREFIX` (except the compiled libraries).
+:::note
 
-All in all, this results in a setup where `conda-build` can run a `$BUILD_PREFIX`-architecture
-`python` interpreter that can see the packages in `$PREFIX` (with the compiled bits provided by
-their corresponding counterparts in `$BUILD_PREFIX`) and sufficiently mimic that target
-architecture.
+Since Python historically did not support cross-compilation, it always needs to be present in `host`
+requirements, even though it is technically run during the build process.
+
+:::

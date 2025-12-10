@@ -98,3 +98,26 @@ for host platform. This has various implications, such as:
   also implies that their dependencies need to be present in the `build` requirements section.
 - Some platform checks cannot be performed. The correct values for the relevant platform
   characteristics need then to be provided directly to the build system.
+
+## Specific cases
+
+### Cross-compiled Python packages
+
+Conda-forge employs a series of workarounds to make cross-compilation work for Python packages.
+The problem is discussed in greater detail in [PEP720](https://peps.python.org/pep-0720/) and
+[conda-forge.github.io#1841](https://github.com/conda-forge/conda-forge.github.io/issues/1841).
+
+In the terms of the PEP720, the conda-forge setup implements the "faking the target environment"
+approach. More specifically, this will result in the following changes before the builds scripts
+run:
+
+- A modified `crossenv` installation in `$BUILD_PREFIX/venv`, mimicking the architecture of
+  `$PREFIX`.
+- Forwarder binaries in `$BUILD_PREFIX/bin` that point to the `crossenv` installation.
+- Symlinks that expose the `$BUILD_PREFIX` site-packages in the `crossenv` installation, which
+  is also included in `$PYTHONPATH`.
+- A copy of all `$PREFIX` site-packages to `$BUILD_PREFIX` (except the compiled libraries).
+
+All in all, this results in a setup where `conda-build` can run a `$BUILD_PREFIX`-architecture
+`python` interpreter that can see the packages in `$PREFIX` (with the compiled bits provided by
+their corresponding counterparts in `$BUILD_PREFIX`) and sufficiently mimic that target
