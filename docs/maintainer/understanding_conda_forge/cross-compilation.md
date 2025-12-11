@@ -108,6 +108,26 @@ for host platform. This has various implications, such as:
 - Some platform checks cannot be performed. The correct values for the relevant platform
   characteristics need then to be provided directly to the build system.
 
+## Toolchain setup
+
+In conda-forge packages, the toolchain packages are always listed in the `build` requirements
+section. They are generally declared using the `compiler` and `stdlib` macros that map them through
+conda-forge-pinning and then expand into packages appropriate for the host platform. For example,
+a `compiler("c")` entry will be [mapped to one of the appropriate compiler
+names](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/38b2437526e47309199fc18ca05596e20ceaf05c/recipe/conda_build_config.yaml#L1-L4)
+such as `gcc`, then expanded into a platform-suffixed package such as `gcc_linux-aarch64`.
+
+When built for a native environment, this package pulls the native toolchain and sysroot for the
+platform in question. However, when built for a cross-compilation environment, it pulls both the
+native and cross-toolchain, effectively making it possible both to compile the host binaries, and
+any binaries needed for the build process itself. So `gcc_linux-aarch64` on `linux-64` pulls in both
+`*_linux-aarch64` packages and `*_linux-64` packages.
+
+In addition to that, the activation scripts installed by these packages ensure that the environment
+is set correctly for cross-compiling. This includes setting generic variables for use of
+cross-compiler (such as `CC`) and for the native compiler (`CC_FOR_BUILD`), as well as best-effort
+setup needed for different build systems such as CMake and Meson.
+
 ## Specific cases
 
 ### Cross-compiled Python packages
