@@ -98,6 +98,15 @@ The rule of the thumb is:
 - If it needs to be available during the build, is specific to the `host` machine, but is not run, it goes in `host`. (for example, headers, libraries, etc.)
 - If both conditions are true, it belongs in both.
 
+:::note
+
+Conda builds are using the `${BUILD_PREFIX}` / `${PREFIX}` split even when not cross-compiling,
+therefore splitting the dependencies correctly is always necessary. However, the non
+cross-compilation cases are generally more tolerant of errors, such as running binaries from
+`${PREFIX}` or building against libraries in `${BUILD_PREFIX}`.
+
+:::
+
 In some cases, additional packages may be needed only when cross-compiling. To cover that, you can
 use an appropriate selectors to cover for the build platform and the host platform being different.
 These are:
