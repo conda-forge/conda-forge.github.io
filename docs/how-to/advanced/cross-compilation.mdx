@@ -169,6 +169,20 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:
 fi
 ```
 
+If the configure scripts needs to run programs in order to determine the system features, it will
+fail indicating that you need to provide the appropriate check results for the host platform. This
+can be done, for example, by setting the respective environment variables prior to running
+configure:
+
+```bash
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" && "${CROSSCOMPILING_EMULATOR:-}" == "" ]]; then
+    export gl_cv_func_getgroups_works=yes
+    export gl_cv_func_gettimeofday_clobber=no
+fi
+
+./configure
+```
+
 ### CMake
 
 A simple C++ library using CMake for cross-compilation might look like this:
@@ -212,6 +226,15 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:
 fi
 ```
 
+Similarly, additional check results may need to be provided:
+
+```bash
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == 1 && "${CMAKE_CROSSCOMPILING_EMULATOR:-}" == "" ]]; then
+    # Assume that netcdf works
+    export CMAKE_ARGS="${CMAKE_ARGS} -DNetCDF_F90_WORKS_EXITCODE=0"
+fi
+```
+
 ### Meson
 
 Similarly, with Meson, the `meta.yaml` needs:
@@ -250,6 +273,24 @@ And this in `build.sh`:
 # Pass ``MESON_ARGS`` to ``meson``
 meson setup ${MESON_ARGS} ..
 meson compile
+```
+
+Additional properties or program paths may need to be written to a cross-file. Meson accepts
+multiple `--cross-file` arguments, so you may add one in addition the one preprovided by compiler
+activation scripts:
+
+```bash
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == 1 && "${CMAKE_CROSSCOMPILING_EMULATOR:-}" == "" ]]; then
+    cat > local-cross-file.txt <<-EOF
+        [binaries]
+        glib-mkenums = '${BUILD_PREFIX}/bin/glib-mkenums'
+
+        [properties]
+        longdouble_format = 'IEEE_DOUBLE_LE'
+    EOF
+
+    MESON_ARGS+=" --cross-file ${PWD}/local-cross-file.txt"
+fi
 ```
 
 ### Python
