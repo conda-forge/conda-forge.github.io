@@ -1,0 +1,35 @@
+/* GraphTooLargeWarning component styles */
+
+.warningContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 600px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background-color: var(--ifm-color-emphasis-0);
+  overflow: hidden;
+}
+
+.warningContent {
+  text-align: center;
+  padding: 40px;
+}
+
+.warningIcon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.warningText {
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+
+.warningButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
