@@ -61,7 +61,7 @@ using that compiler afterwards, `x86_64-conda-linux-gnu` will be the build platf
 
 ## Cross-compilation environment
 
-A cross-compilation environment requires two components:
+A cross-compilation environment requires a number of components:
 
 1. A cross-toolchain, i.e. compiler, linker and other tools that run on the build platform and are
    capable of producing binaries for the host platform. In some cases (such as GCC) a dedicated
@@ -69,9 +69,18 @@ A cross-compilation environment requires two components:
    capable of producing binaries for multiple targets. The prefix containing these executables
    is designated by the `${BUILD_PREFIX}` variable, and the tools themselves are frequently prefixed
    by the host triplet.
-2. The sysroot built for the host platform, including all the libraries and header files needed by
-   the built package. This sysroot is designated by the `${PREFIX}` variable. In conda-forge, it is
-   also used as the install location for the built package files.
+2. Other binaries that are run throughout the build process, such as the build system executables,
+   shell tools, etc. These are also installed into the `${BUILD_PREFIX}`.
+3. The sysroot built for the host platform, including the system libraries or system library stubs,
+   and system header files. While conda-forge packages use the underlying operating system libraries
+   at runtime, packages are built against prepackaged fixed versions of these libraries for
+   backwards compatibility; this is also naturally a necessity when system libraries are provided
+   for the different platform. The sysroot is installed into a subdirectory of `${BUILD_PREFIX}`,
+   and are used by the compiler automatically.
+4. The files specific to host platform that are needed during the build process, such as libraries,
+   header files, pkg-config files, etc. These files are installed into the location designated
+   by the `${PREFIX}` variable, which is also used as the install location for the built package
+   files.
 
 The distinction between the two prefixes is essential while cross-compiling. The build process can
 only run programs built for the build platform, and therefore all the tools needed at build time
