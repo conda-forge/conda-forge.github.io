@@ -5,12 +5,6 @@
 import * as dagreD3 from "dagre-d3-es";
 import * as d3 from "d3";
 
-const DEFAULT_GRAPH_SETTINGS = {
-  nodesep: 50,
-  ranksep: 100,
-  rankdir: "TB",
-};
-
 export const getGraphSettings = (
   rankdir = "TB",
   ranker = "network-simplex",
@@ -60,9 +54,11 @@ export const getStatusClass = (prStatus) => {
     case "unstable":
       return "nodeUnstable";
     case "bot-error":
-      return "nodeBotError";
+      return "nodeBotErrorOrConflict";
     case "not-solvable":
       return "nodeNotSolvable";
+    case "dirty": // Conflicts - treat as bot/solver error
+      return "nodeBotErrorOrConflict";
     case "done":
       return "nodeDone";
     case "in-pr":

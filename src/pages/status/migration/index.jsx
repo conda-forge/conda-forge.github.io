@@ -13,7 +13,7 @@ import moment from 'moment';
 import { compare } from '@site/src/components/StatusDashboard/current_migrations';
 import { useSorting, SortableHeader } from '@site/src/components/SortableTable';
 import * as d3 from "d3";
-import DependencyGraph from "./DependencyGraph";
+import DependencyGraph from "@site/src/components/DependencyGraph";
 
 // GitHub GraphQL MergeStateStatus documentation
 // Reference: https://docs.github.com/en/graphql/reference/enums#mergestatestatus
@@ -207,12 +207,17 @@ export default function MigrationDetails() {
                 {(details && details.paused_or_closed === "closed") ?
                   <Admonition type="note">This migration has been closed recently.</Admonition> : null}
                 {details && <Bar details={details} /> || null}
-                {view === "graph" ?
-                  <Graph>{name}</Graph> :
-                  view === "dependencies" ?
-                    (details && <DependencyGraph details={details} initialSelectedNode={selectedDependency} />) :
-                    (details && <Table details={details} />)
-                }
+                {(() => {
+                  switch (view) {
+                    case "graph":
+                      return <Graph>{name}</Graph>;
+                    case "dependencies":
+                      return <DependencyGraph details={details} initialSelectedNode={selectedDependency} />;
+                    case "table":
+                    default:
+                      return <Table details={details} />;
+                  }
+                })()}
               </div>
             </div>
             {view === "table" && (
@@ -468,6 +473,8 @@ function Graph(props) {
 }
 
 function Table({ details }) {
+  if (!details) return null;
+
   const defaultFilters = ORDERED.reduce((filters, [status, _, toggled]) => ({ ...filters, [status]: toggled }), {});
   const [filters, setState] = useState(defaultFilters);
   const { sort, previousSort, resort } = useSorting("num_descendants", "descending");
