@@ -100,9 +100,9 @@
             "id": "how-to/advanced/talk-to-the-bots"
           },
           {
-            "type": "link",
+            "type": "doc",
             "label": "Cross-compile",
-            "href": "/docs/maintainer/knowledge_base/#cross-compilation"
+            "id": "how-to/advanced/cross-compilation"
           },
           {
             "type": "link",
@@ -183,6 +183,11 @@
             "type": "link",
             "label": "Compilers",
             "href": "/docs/maintainer/infrastructure/#compilers-and-runtimes"
+          },
+          {
+            "type": "doc",
+            "label": "Cross-compilation",
+            "id": "maintainer/understanding_conda_forge/cross-compilation"
           },
           {
             "type": "link",
