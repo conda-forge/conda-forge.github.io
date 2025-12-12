@@ -1,0 +1,167 @@
+/* Migration Dependency Graph - Main Shared Styles */
+
+.dependencyGraphContainer {
+  padding: 20px 0 0 0;
+}
+
+.graphHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.graphHeader h3 {
+  margin: 0;
+}
+
+.instructions {
+  font-size: 14px;
+  color: var(--ifm-color-emphasis-700);
+  font-style: italic;
+  margin-top: 12px;
+  display: block;
+}
+
+.graphContainer {
+  width: 100%;
+  height: 600px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background-color: var(--ifm-color-emphasis-0);
+  overflow: hidden;
+}
+
+.graphContainer svg {
+  width: 100%;
+  height: 100%;
+}
+
+.graphContainer :global(svg g.edgePath path) {
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 2px !important;
+  fill: none !important;
+}
+
+.graphContainer :global(svg g.edgeLabel) {
+  font-size: 12px;
+  fill: var(--ifm-color-emphasis-800);
+}
+
+.graphInfo {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: var(--ifm-color-info-light);
+  border-left: 4px solid var(--ifm-color-info);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.graphInfo p {
+  margin: 0;
+}
+
+.headerContainer {
+  position: relative;
+  width: 100%;
+}
+
+.headerControls {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* SVG Node Status Colors - using style guide colors */
+.graphContainer :global(g.node.nodeClean rect) {
+  fill: var(--ifm-color-success) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeUnstable rect) {
+  fill: var(--ifm-color-danger) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeBotErrorOrConflict rect) {
+  fill: var(--ifm-color-warning) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeNotSolvable rect) {
+  fill: var(--ifm-color-warning) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeDone rect) {
+  fill: var(--ifm-color-success) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeInPr rect) {
+  fill: var(--ifm-color-warning) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeAwaitingPr rect) {
+  fill: var(--ifm-color-emphasis-600) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeAwaitingParents rect) {
+  fill: var(--ifm-color-emphasis-500) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeAwaitingParentsNoParent rect) {
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 2px !important;
+}
+
+.graphContainer :global(g.node.nodeSelected rect) {
+  stroke-width: 4px !important;
+}
+
+.graphContainer :global(g.node.nodeUnknown rect) {
+  fill: var(--ifm-color-emphasis-400) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+.graphContainer :global(g.node.nodeDefault rect) {
+  fill: var(--ifm-color-emphasis-200) !important;
+  stroke: var(--ifm-color-emphasis-800) !important;
+  stroke-width: 1px !important;
+}
+
+/* Text colors for contrast */
+.graphContainer :global(g.node.nodeClean text),
+.graphContainer :global(g.node.nodeDone text),
+.graphContainer :global(g.node.nodeUnstable text) {
+  fill: #ffffff !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+
+.graphContainer :global(g.node.nodeBotErrorOrConflict text),
+.graphContainer :global(g.node.nodeNotSolvable text),
+.graphContainer :global(g.node.nodeInPr text),
+.graphContainer :global(g.node.nodeAwaitingPr text),
+.graphContainer :global(g.node.nodeAwaitingParents text),
+.graphContainer :global(g.node.nodeUnknown text),
+.graphContainer :global(g.node.nodeDefault text) {
+  fill: #000000 !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
