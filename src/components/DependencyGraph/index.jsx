@@ -73,7 +73,8 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
   }, [selectedNodeId, history, location.pathname, isInitialized]);
 
   const zoomedGraphData = React.useMemo(() => {
-    return createZoomedGraphData(selectedNodeId, graphDataStructure);
+    const validSelectedNodeId = selectedNodeId && graphDataStructure.nodeMap[selectedNodeId] ? selectedNodeId : null;
+    return createZoomedGraphData(validSelectedNodeId, graphDataStructure);
   }, [selectedNodeId, graphDataStructure]);
 
   const { nodeMap, edgeMap, allNodeIds } = zoomedGraphData;
@@ -85,6 +86,13 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
   useEffect(() => {
     setUserConfirmedLargeGraph(false);
   }, [graphDataStructure, showDoneNodes]);
+
+  useEffect(() => {
+    if (selectedNodeId && !graphDataStructure.nodeMap[selectedNodeId]) {
+      setSelectedNodeId(null);
+      setSearchTerm("");
+    }
+  }, [graphDataStructure, selectedNodeId]);
 
   useEffect(() => {
     if (shouldShowWarning) return;
@@ -216,7 +224,9 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
 
     svgGroup.selectAll("g.node").on("mouseenter", function () {
       const nodeId = d3.select(this).attr("data-node-id");
-      applyHighlight(svgGroup, nodeId, zoomedGraphData);
+      if (nodeId && zoomedGraphData.nodeMap[nodeId]) {
+        applyHighlight(svgGroup, nodeId, zoomedGraphData);
+      }
     });
 
     svgGroup.selectAll("g.node").on("mouseleave", function () {

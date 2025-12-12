@@ -278,7 +278,8 @@ export const buildInitialGraph = (
   // Identify nodes that have direct children using nodeMap
   const nodesWithChildren = new Set();
   allNodeIds.forEach((nodeId) => {
-    if (nodeMap[nodeId].outgoing && nodeMap[nodeId].outgoing.length > 0) {
+    const node = nodeMap[nodeId];
+    if (node && node.outgoing && node.outgoing.length > 0) {
       nodesWithChildren.add(nodeId);
     }
   });
@@ -374,6 +375,7 @@ export const createZoomedGraphData = (nodeIdToZoom, graphDataStructure) => {
 
   // Create filtered nodeMap with only visible nodes and filtered edge references
   const filteredNodeMap = {};
+  const actualVisibleNodes = [];
   visibleNodes.forEach((nodeId) => {
     if (nodeMapData[nodeId]) {
       const originalNode = nodeMapData[nodeId];
@@ -386,13 +388,14 @@ export const createZoomedGraphData = (nodeIdToZoom, graphDataStructure) => {
           filteredEdgeIds.has(edgeId),
         ),
       };
+      actualVisibleNodes.push(nodeId);
     }
   });
 
   return {
     nodeMap: filteredNodeMap,
     edgeMap: filteredEdgeMap,
-    allNodeIds: Array.from(visibleNodes),
+    allNodeIds: actualVisibleNodes,
   };
 };
 
