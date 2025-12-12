@@ -1,14 +1,12 @@
-/* SettingsPanel component styles */
-
-/* Toggle switch styles */
+/* iOS-style toggle switch */
 .toggleLabel {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 12px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: bold;
-  position: relative;
+  margin-top: 8px;
+  flex-shrink: 0;
   user-select: none;
 }
 
@@ -52,45 +50,4 @@
 
 .toggleInput:focus + .toggleSlider {
   box-shadow: 0 0 0 2px var(--ifm-color-primary-lighter);
-}
-
-.settingsPanel {
-  position: absolute;
-  top: 40px;
-  right: 0;
-  padding: 16px;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 4px;
-  background-color: var(--ifm-color-emphasis-0);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  min-width: 400px;
-}
-
-.settingsGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.settingLabel {
-  display: block;
-  font-size: 12px;
-  margin-bottom: 4px;
-  font-weight: bold;
-}
-
-.settingSelect {
-  padding: 8px 12px;
-  font-size: 14px;
-  border-radius: 4px;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  width: 100%;
-  box-sizing: border-box;
-  background-color: var(--ifm-color-emphasis-0);
-  cursor: pointer;
-}
-
-.toggleContainer {
-  margin-bottom: 12px;
 }
