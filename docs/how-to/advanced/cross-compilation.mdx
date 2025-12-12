@@ -92,11 +92,23 @@ This is all supported by two main conda-build features introduced in version 3:
 
 ## Placing requirements in build or host
 
-The rule of the thumb is:
+The dependencies that need to be present during the build process need to be split between the
+`build` and `host` requirement sections, corresponding appropriately to the build and host
+environments.
 
-- If it needs to run during the build, it goes in `build`.
-- If it needs to be available during the build, is specific to the `host` machine, but is not run, it goes in `host`. (for example, headers, libraries, etc.)
-- If both conditions are true, it belongs in both.
+The rule of thumb for splitting them is:
+
+- If the package provides binaries that need to be run during the build process, it goes into
+  `build`. Examples include the compiler, `make`, `meson`, `pkg-config`, `sed` and so on.
+- If the package provides libraries or headers that are used to build the installed binaries, it
+  goes into `host`. Examples include `eigen`, `libxml2-devel`, `zlib` and so on. For historical
+  reasons, `python` also belongs in `host` dependencies, but see [Python
+  cross-compilation](#details-about-cross-compiled-python-packages).
+- If both conditions are true, it belongs in both sections (possibly in `build` conditional to
+  cross-compiling). An example of such a package is `llvmdev`.
+
+Note that these rules are oversimplified. For example, if additional binaries need to be compiled
+that are used only during the build, their dependencies go into the `build` section as well.
 
 :::note
 
