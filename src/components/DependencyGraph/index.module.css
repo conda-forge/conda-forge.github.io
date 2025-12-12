@@ -75,11 +75,6 @@
   justify-content: space-between;
 }
 
-.settingsButton {
-  margin-top: 8px;
-  flex-shrink: 0;
-}
-
 /* SVG Node Status Colors - using style guide colors */
 .graphContainer :global(g.node.nodeClean rect) {
   fill: var(--ifm-color-success) !important;

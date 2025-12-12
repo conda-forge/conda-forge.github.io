@@ -6,7 +6,7 @@ import graphStyles from "./index.module.css";
 import SearchFilter from "./SearchFilter";
 import GraphTooLargeWarning from "./GraphTooLargeWarning";
 import Legend from "./Legend";
-import SettingsPanel from "./SettingsPanel";
+import Toggle from "./Toggle";
 import {
   getPrunedFeedstockStatus,
   buildGraphDataStructure,
@@ -36,11 +36,15 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
   const [selectedNodeId, setSelectedNodeId] = React.useState(null);
   const [isInitialized, setIsInitialized] = React.useState(false);
   const [searchTerm, setSearchTerm] = React.useState("");
-  const [showSettings, setShowSettings] = React.useState(false);
-  const [graphDirection, setGraphDirection] = React.useState("TB");
-  const [graphRanker, setGraphRanker] = React.useState("network-simplex");
-  const [graphAlign, setGraphAlign] = React.useState("");
   const [userConfirmedLargeGraph, setUserConfirmedLargeGraph] = React.useState(false);
+
+  // Graph layout settings - possible values:
+  // graphDirection: "TB" (top-to-bottom), "BT" (bottom-to-top), "LR" (left-to-right), "RL" (right-to-left)
+  // graphRanker: "network-simplex", "tight-tree", "longest-path"
+  // graphAlign: "" (center/default), "UL" (upper-left), "UR" (upper-right), "DL" (down-left), "DR" (down-right)
+  const graphDirection = "TB";
+  const graphRanker = "network-simplex";
+  const graphAlign = "";
 
   useEffect(() => {
     if (initialSelectedNode && graphDataStructure.nodeMap[initialSelectedNode]) {
@@ -86,7 +90,7 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
     if (shouldShowWarning) return;
     const g = buildInitialGraph(zoomedGraphData, graphDirection, graphRanker, graphAlign || undefined);
     setGraph(g);
-  }, [zoomedGraphData, graphDirection, graphRanker, graphAlign, shouldShowWarning]);
+  }, [zoomedGraphData, shouldShowWarning]);
 
   const searchableNodeIds = React.useMemo(() => {
     return graphDataStructure.allNodeIds.filter(nodeId => {
@@ -289,18 +293,6 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
     <div className={graphStyles.dependencyGraphContainer}>
       <div className={graphStyles.graphHeader}>
         <div className={graphStyles.headerContainer}>
-          {showSettings && (
-            <SettingsPanel
-              showDoneNodes={showDoneNodes}
-              onShowDoneNodesChange={setShowDoneNodes}
-              graphDirection={graphDirection}
-              onGraphDirectionChange={setGraphDirection}
-              graphRanker={graphRanker}
-              onGraphRankerChange={setGraphRanker}
-              graphAlign={graphAlign}
-              onGraphAlignChange={setGraphAlign}
-            />
-          )}
           <div className={graphStyles.headerControls}>
             <SearchFilter
               searchTerm={searchTerm}
@@ -308,13 +300,11 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
               filteredNodes={filteredNodes}
               onSelectNode={handleSelectNode}
             />
-            <button
-              onClick={() => setShowSettings(!showSettings)}
-              className={`button button--secondary ${graphStyles.settingsButton}`}
-              title="Graph Settings"
-            >
-              <i className="fa fa-cog"></i>
-            </button>
+            <Toggle
+              label="Include completed packages"
+              checked={showDoneNodes}
+              onChange={setShowDoneNodes}
+            />
           </div>
         </div>
       </div>
