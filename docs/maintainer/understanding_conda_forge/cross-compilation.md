@@ -128,9 +128,7 @@ is set correctly for cross-compiling. This includes setting generic variables fo
 cross-compiler (such as `CC`) and for the native compiler (`CC_FOR_BUILD`), as well as best-effort
 setup needed for different build systems such as CMake and Meson.
 
-## Specific cases
-
-### Cross-compiled Python packages
+## Cross-compiled Python packages
 
 Conda-forge employs a series of workarounds to make cross-compilation work for Python packages.
 The problem is discussed in greater detail in [PEP720](https://peps.python.org/pep-0720/) and
