@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./SearchFilter.module.css";
 
 /**
@@ -7,27 +7,48 @@ import styles from "./SearchFilter.module.css";
  * - Real-time filtering as the user types
  * - Native HTML datalist autocomplete
  * - Browser-native suggestion UI
- * - Selection updates the input field with the selected package name
+ * - Selection updates the graph selection via selectedNodeId
+ *
+ * Props:
+ * - selectedNodeId: The currently selected node (used for display value)
+ * - onSelectNode: Called when user selects from datalist (updates selectedNodeId)
+ * - onFilterChange: Called when user types to update filter term
+ * - filteredNodes: List of nodes matching the current filter
  */
 export default function SearchFilter({
-  searchTerm,
-  onSearchChange,
-  filteredNodes,
+  selectedNodeId,
   onSelectNode,
+  onFilterChange,
+  filteredNodes,
 }) {
+  // Local filterTerm state for current input value during typing
+  const [filterTerm, setFilterTerm] = useState("");
   const dataListId = "package-suggestions";
+
+  // Sync local filterTerm to selectedNodeId when it changes
+  // This keeps the input displaying the selected node
+  useEffect(() => {
+    if (selectedNodeId) {
+      setFilterTerm(selectedNodeId);
+    } else {
+      setFilterTerm("");
+    }
+  }, [selectedNodeId]);
 
   const handleChange = (e) => {
     const value = e.target.value;
-    onSearchChange(value);
+    // Update both local state and parent state for filtering
+    setFilterTerm(value);
+    onFilterChange(value);
   };
 
   const handleInput = (e) => {
     // Detect when user selects an option from datalist
     const value = e.target.value;
     // If the input value exactly matches one of our filtered nodes, it was selected from datalist
-    if (filteredNodes.includes(value) && value !== searchTerm) {
+    if (filteredNodes.includes(value) && value !== filterTerm) {
       onSelectNode(value);
+      // Keep filter term - don't clear it so user sees the selected node in the input
     }
   };
 
@@ -39,7 +60,7 @@ export default function SearchFilter({
           type="text"
           className={styles.searchInput}
           placeholder="Search for package..."
-          value={searchTerm}
+          value={filterTerm}
           onChange={handleChange}
           onInput={handleInput}
           list={dataListId}
