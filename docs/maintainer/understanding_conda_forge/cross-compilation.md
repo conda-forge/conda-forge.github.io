@@ -45,8 +45,9 @@ When discussing toolchains, three types of platform are referenced:
 
 - The build platform, referring to the platform on which the cross-toolchain is being run.
 - The host platform, referring to the platform for which the binaries are being produced.
-- The target platform, relevant to building a cross-toolchain itself, and referring to the platform
-  for which the resulting toolchain will produce binaries.
+- The target platform, which is only relevant if the binaries being produced will _themselves_ target
+  some specific architecture. This is generally only needed when building a cross-toolchain, in which
+  case it refers to the platform for which the resulting toolchain will produce binaries.
 
 Toolchain executables are often prefixed by the host platform triplet, e.g.
 `x86_64-conda-linux-gnu-gcc` indicates a compiler producing binaries for `x86_64-conda-linux-gnu`
