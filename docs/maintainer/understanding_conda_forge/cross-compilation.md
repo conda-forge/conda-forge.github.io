@@ -98,7 +98,7 @@ correct locations.
 ## Limitations of cross-compilation
 
 While performing cross-builds, the build process cannot run executables built by the cross-compiler,
-for host platform. This has various implications, such as:
+since they are built for a different platform. This has various implications, such as:
 
 - Programs are unable to run their test suites. Testing is often skipped when cross-compiling, or
   emulators are used to run tests.
@@ -149,3 +149,4 @@ run:
 All in all, this results in a setup where `conda-build` can run a `$BUILD_PREFIX`-architecture
 `python` interpreter that can see the packages in `$PREFIX` (with the compiled bits provided by
 their corresponding counterparts in `$BUILD_PREFIX`) and sufficiently mimic that target
+architecture.
