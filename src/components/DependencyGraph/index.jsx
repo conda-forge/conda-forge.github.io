@@ -20,10 +20,11 @@ import {
 
 const LARGE_GRAPH_THRESHOLD = 1000;
 
-export default function DependencyGraph({ details, initialSelectedNode = null }) {
+export default function DependencyGraph({ details }) {
   const history = useHistory();
   const location = useLocation();
   const [showDoneNodes, setShowDoneNodes] = useState(false);
+  const [filterTerm, setFilterTerm] = useState(""); // For autocomplete filtering only
 
   if (!details) return null;
 
@@ -35,7 +36,6 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
   const svgRef = React.useRef();
   const [selectedNodeId, setSelectedNodeId] = React.useState(null);
   const [isInitialized, setIsInitialized] = React.useState(false);
-  const [searchTerm, setSearchTerm] = React.useState("");
   const [userConfirmedLargeGraph, setUserConfirmedLargeGraph] = React.useState(false);
 
   // Graph layout settings - possible values:
@@ -47,11 +47,15 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
   const graphAlign = "";
 
   useEffect(() => {
-    if (initialSelectedNode && graphDataStructure.nodeMap[initialSelectedNode]) {
-      setSelectedNodeId(initialSelectedNode);
+    // Initialize from URL parameter
+    const searchParams = new URLSearchParams(location.search);
+    const urlDependency = searchParams.get("dependency");
+
+    if (urlDependency && graphDataStructure.nodeMap[urlDependency]) {
+      setSelectedNodeId(urlDependency);
     }
     setIsInitialized(true);
-  }, [initialSelectedNode, graphDataStructure]);
+  }, [graphDataStructure, location.search]);
 
   useEffect(() => {
     if (!isInitialized) return;
@@ -111,8 +115,8 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
   }, [graphDataStructure]);
 
   const filteredNodes = React.useMemo(() => {
-    return filterNodesBySearchTerm(searchableNodeIds, searchTerm);
-  }, [searchTerm, searchableNodeIds]);
+    return filterNodesBySearchTerm(searchableNodeIds, filterTerm);
+  }, [filterTerm, searchableNodeIds]);
 
   const awaitingParentsNoParent = React.useMemo(() => {
     return getAwaitingParentsWithNoParent(nodeMap, details);
@@ -241,13 +245,11 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
       }
 
       setSelectedNodeId(nodeId);
-      setSearchTerm(nodeId);
     });
 
     svg.on("click", function (event) {
       if (event.target === this) {
         setSelectedNodeId(null);
-        setSearchTerm("");
         applyHighlight(svgGroup, null, zoomedGraphData);
       }
     });
@@ -294,21 +296,16 @@ export default function DependencyGraph({ details, initialSelectedNode = null })
     });
   }, [graph, selectedNodeId, awaitingParentsNoParent, zoomedGraphData]);
 
-  const handleSelectNode = (nodeName) => {
-    setSelectedNodeId(nodeName);
-    setSearchTerm(nodeName);
-  };
-
   return (
     <div className={graphStyles.dependencyGraphContainer}>
       <div className={graphStyles.graphHeader}>
         <div className={graphStyles.headerContainer}>
           <div className={graphStyles.headerControls}>
             <SearchFilter
-              searchTerm={searchTerm}
-              onSearchChange={setSearchTerm}
+              selectedNodeId={selectedNodeId}
+              onSelectNode={setSelectedNodeId}
+              onFilterChange={setFilterTerm}
               filteredNodes={filteredNodes}
-              onSelectNode={handleSelectNode}
             />
             <Toggle
               label="Include completed packages"
