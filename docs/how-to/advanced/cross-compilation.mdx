@@ -3,6 +3,7 @@ title: 'Cross-compilation'
 ---
 
 import { RecipeTabs } from "@site/src/components/RecipeTabs";
+import { BuildScriptTabs } from "@site/src/components/RecipeTabs";
 
 Cross-compiling means building a package for a different architecture or a different operating
 system than the one the build process is running on. It is a common way of obtaining packages for an
@@ -137,11 +138,21 @@ not rely on that, and be able to build successfully without the emulator being p
 script commands relying on the emulator being available need to be guarded using the following
 condition:
 
+<BuildScriptTabs>
+
 ```bash
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
   ...
 fi
 ```
+
+```
+if not "%CONDA_BUILD_SKIP_TESTS%"=="1" (
+  ...
+)
+```
+
+</BuildScriptTabs>
 
 There is no equivalent selector for recipes, all dependencies of unit tests should be placed in the
 `host` section unconditionally.
@@ -245,7 +256,14 @@ requirements:
 
 In the build script, it would need to update `cmake` call and guard any tests when cross-compiling:
 
+<BuildScriptTabs>
+
 ```bash
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == 1 && "${CMAKE_CROSSCOMPILING_EMULATOR:-}" == "" ]]; then
+  # Assume that netcdf works
+  export CMAKE_ARGS="${CMAKE_ARGS} -DNetCDF_F90_WORKS_EXITCODE=0"
+fi
+
 # Pass ``CMAKE_ARGS`` to ``cmake``
 cmake ${CMAKE_ARGS} -G Ninja ..
 cmake --build .
@@ -256,14 +274,23 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:
 fi
 ```
 
-Similarly, additional check results may need to be provided:
-
-```bash
-if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == 1 && "${CMAKE_CROSSCOMPILING_EMULATOR:-}" == "" ]]; then
-    # Assume that netcdf works
-    export CMAKE_ARGS="${CMAKE_ARGS} -DNetCDF_F90_WORKS_EXITCODE=0"
-fi
 ```
+if "%CONDA_BUILD_SKIP_TESTS%"=="1" (
+  :: Assume that netcdf works
+  set CMAKE_ARGS=%CMAKE_ARGS% -DNetCDF_F90_WORKS_EXITCODE=0
+)
+
+:: Pass ``CMAKE_ARGS`` to ``cmake``
+cmake %CMAKE_ARGS% -G Ninja ..
+cmake --build .
+
+:: Skip ``ctest`` when cross-compiling
+if not "%CONDA_BUILD_SKIP_TESTS%"=="1" (
+  ctest
+)
+```
+
+</BuildScriptTabs>
 
 ### Meson
 
@@ -297,7 +324,9 @@ requirements:
 
 </RecipeTabs>
 
-And this in `build.sh`:
+And this in the build script:
+
+<BuildScriptTabs>
 
 ```bash
 # Pass ``MESON_ARGS`` to ``meson``
@@ -305,9 +334,19 @@ meson setup ${MESON_ARGS} ..
 meson compile
 ```
 
+```
+:: Pass ``MESON_ARGS`` to ``meson``
+meson setup %MESON_ARGS% ..
+meson compile
+```
+
+</BuildScriptTabs>
+
 Additional properties or program paths may need to be written to a cross-file. Meson accepts
 multiple `--cross-file` arguments, so you may add one in addition the one preprovided by compiler
 activation scripts:
+
+<!-- TODO: port this to cmd -->
 
 ```bash
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == 1 && "${CMAKE_CROSSCOMPILING_EMULATOR:-}" == "" ]]; then
