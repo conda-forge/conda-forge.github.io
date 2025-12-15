@@ -26,3 +26,27 @@ export function RecipeTabs({ children }) {
     </Tabs>
   );
 }
+
+/*
+Creates a two-tab container expecting two children, in this order:
+- a bash code block for build.sh
+- a batch script block for bld.bat
+*/
+export function BuildScriptTabs({ children }) {
+  if (children.length !== 2) {
+    throw new Error(
+      `BuildScriptTabs must have exactly two children, but received ${children.length}.`
+    );
+  }
+
+  return (
+    <Tabs groupId="synced-build-script-tabs">
+        <TabItem label="build.sh" value="build-sh">
+            {children[0]}
+        </TabItem>
+        <TabItem label="bld.bat" value="bld-bat">
+            {children[1]}
+        </TabItem>
+    </Tabs>
+  );
+}
