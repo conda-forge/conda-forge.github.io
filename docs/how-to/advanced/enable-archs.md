@@ -40,7 +40,7 @@ The sections below specify the configuration details for each platform.
 - Migration file: [`osx_arm64.txt`](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migration_support/osx_arm64.txt).
 - Status page: [`armosxaddition`](/status/migration/?name=armosxaddition).
 
-Note that this migration involves [cross-compiled builds](/docs/maintainer/knowledge_base/#cross-compilation), which may get tricky if the build system has not been configured with those options in mind. Emulation is not available on this platform.
+Note that this migration involves [cross-compiled builds](/docs/how-to/advanced/cross-compilation/), which may get tricky if the build system has not been configured with those options in mind. Emulation is not available on this platform.
 
 ### Enable linux-aarch64 and linux-ppc64le
 
@@ -52,7 +52,7 @@ Note that this migration will enable both architectures in your feedstock. If yo
 - Remove the corresponding line from `conda-forge.yml` and rerender.
 - Add a `skip:` directive to your recipe by matching the non-desired platform, and rerender.
 
-This migration uses [emulated builds](/docs/maintainer/knowledge_base/#emulated-builds) by default, which are easier to configure but offer far worse performance. [Cross-compiled builds](/docs/maintainer/knowledge_base/#cross-compilation) requires extra configuration steps but it uses resources more efficiently (6-7x faster).
+This migration uses [emulated builds](/docs/maintainer/knowledge_base/#emulated-builds) by default, which are easier to configure but offer far worse performance. [Cross-compiled builds](/docs/how-to/advanced/cross-compilation/) requires extra configuration steps but it uses resources more efficiently (6-7x faster).
 
 To change to cross-compiled builds, use this configuration in `conda-forge.yml` and [rerender](../basics/rerender.md):
 
