@@ -105,8 +105,8 @@ The rule of thumb for splitting them is:
   test suite, it goes into `host`. Examples include `eigen`, `libxml2-devel`, `zlib` and so on. For
   historical reasons, `python` also belongs in `host` dependencies, but see [Python
   cross-compilation](#details-about-cross-compiled-python-packages).
-- If both conditions are true, it belongs in both sections (possibly in `build` conditional to
-  cross-compiling). An example of such a package is `llvmdev`.
+- If both conditions are true, the package belongs in both sections (in the `build` section, it may
+  need to be made conditional to cross-compiling). An example of such a package is `llvmdev`.
 
 Note that these rules are oversimplified. For example, if additional binaries need to be compiled
 that are used only during the build, their dependencies go into the `build` section as well.
