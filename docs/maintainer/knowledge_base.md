@@ -469,18 +469,6 @@ CI runners, we can still resort to either cross-compilation or emulation.
 
 <a id="details-about-cross-compiled-python-packages"></a>
 
-<a id="cross-compilation-howto"></a>
-
-<a id="how-to-enable-cross-compilation"></a>
-
-<a id="placing-requirements-in-build-or-host"></a>
-
-<a id="cross-compilation-examples"></a>
-
-<a id="python-cross-compilation"></a>
-
-<a id="details-about-cross-compiled-python-packages"></a>
-
 Cross-compiling means building a package for a different architecture than the one the build process
 is running on. Given how abundant x86_64 runners are, most common cross-compilation setups will target
 non-x86_64 architectures from x86_64 runners.
