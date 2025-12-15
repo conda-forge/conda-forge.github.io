@@ -45,8 +45,8 @@ build_platform:
 ```
 
 Then [rerender](/docs/how-to/basics/rerender/) the feedstock. This will generate the appropriate CI workflows and
-conda-build input metadata. See also [test](/docs/maintainer/conda_forge_yml/#test) for how to skip the test phase when
-cross-compiling. Provided the requirements metadata and build scripts are written correctly, the
+conda-build input metadata. The [test](/docs/maintainer/conda_forge_yml/#test) key can be used to skip the test phase when
+cross-compiling, if necessary. Provided the requirements metadata and build scripts are written correctly, the
 package should just work. However, in some cases, it'll need some adjustments; see examples below
 for some common cases.
 
@@ -101,9 +101,9 @@ The rule of thumb for splitting them is:
 
 - If the package provides binaries that need to be run during the build process, it goes into
   `build`. Examples include the compiler, `make`, `meson`, `pkg-config`, `sed` and so on.
-- If the package provides libraries or headers that are used to build the installed binaries, it
-  goes into `host`. Examples include `eigen`, `libxml2-devel`, `zlib` and so on. For historical
-  reasons, `python` also belongs in `host` dependencies, but see [Python
+- If the package provides libraries or headers that are used to build the installed binaries or the
+  test suite, it goes into `host`. Examples include `eigen`, `libxml2-devel`, `zlib` and so on. For
+  historical reasons, `python` also belongs in `host` dependencies, but see [Python
   cross-compilation](#details-about-cross-compiled-python-packages).
 - If both conditions are true, it belongs in both sections (possibly in `build` conditional to
   cross-compiling). An example of such a package is `llvmdev`.
@@ -128,6 +128,23 @@ These are:
 - for v1 recipes, `if: build_platform != host_platform`.
 
 However, there are some cases requiring special handling; most notably [Python cross-compilation](#details-about-cross-compiled-python-packages).
+
+## Testing
+
+Running the test suites of the packages generally requires executing binaries built for the host
+platform. To accommodate this, build environments usually provide a emulator. However, recipes must
+not rely on that, and be able to build successfully without the emulator being provided. The build
+script commands relying on the emulator being available need to be guarded using the following
+condition:
+
+```bash
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
+  ...
+fi
+```
+
+There is no equivalent selector for recipes, all dependencies of unit tests should be placed in the
+`host` section unconditionally.
 
 ## Cross-compilation examples
 
