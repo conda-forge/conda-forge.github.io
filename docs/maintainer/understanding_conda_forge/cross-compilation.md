@@ -97,8 +97,9 @@ correct locations.
 
 ## Limitations of cross-compilation
 
-While performing cross-builds, the build process cannot run executables built by the cross-compiler,
-since they are built for a different platform. This has various implications, such as:
+While performing cross-builds without an emulator, the build process cannot run executables built by
+the cross-compiler, since they are built for a different platform. This has various implications,
+such as:
 
 - Programs are unable to run their test suites. Testing is often skipped when cross-compiling, or
   emulators are used to run tests.
@@ -108,6 +109,24 @@ since they are built for a different platform. This has various implications, su
   also implies that their dependencies need to be present in the `build` requirements section.
 - Some platform checks cannot be performed. The correct values for the relevant platform
   characteristics need then to be provided directly to the build system.
+
+## Emulator use
+
+Many of the aforementioned limitations can be overcome by using an emulator. The conda-forge CI
+setups usually provide one on Linux, using `qemu-user`. The path to the emulator is provided in the
+`CROSSCOMPILING_EMULATOR` variable. However, usually there is no need to use it directly, as
+`binfmt_misc` permits executing non-native executables directly.
+
+That said, there is no guarantee that an emulator will actually be available. Therefore, it is
+important that the recipe can be built successfully without an emulator. Parts such as tests can
+require an emulator, but they must be guarded accordingly, and run only for native builds or when
+`CROSSCOMPILING_EMULATOR` is not empty.
+
+Furthermore, the emulator introduces an overhead for running binaries, and does not guarantee 100%
+correctness for all cases. Therefore, whenever it makes sense, binaries built for the build platform
+should be preferred. To ensure correct test results, unittests should be compiled for the host
+platform and run via the emulator. However, helpers that don't influence the test results directly
+can be built for the build platform instead.
 
 ## Toolchain setup
 
