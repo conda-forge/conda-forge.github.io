@@ -112,21 +112,30 @@ such as:
 
 ## Emulator use
 
-Many of the aforementioned limitations can be overcome by using an emulator. The conda-forge CI
-setups usually provide one on Linux, using `qemu-user`. The path to the emulator is provided in the
-`CROSSCOMPILING_EMULATOR` variable. However, usually there is no need to use it directly, as
-`binfmt_misc` permits executing non-native executables directly.
+Many of the aforementioned limitations can be overcome by using an emulator. Conda-forge supports
+two kinds of emulation: full-system emulation and userspace emulation. The former is covered in
+[Emulated builds](/docs/maintainer/knowledge_base/#emulated-builds), but it is generally discouraged
+because it is substantially slower (roughly 5x-6x longer runtime) than cross-compiling. On the other
+hand, the latter can be successfully combined with cross-compilation to limit its overhead.
 
-That said, there is no guarantee that an emulator will actually be available. Therefore, it is
-important that the recipe can be built successfully without an emulator. Parts such as tests can
-require an emulator, but they must be guarded accordingly, and run only for native builds or when
-`CROSSCOMPILING_EMULATOR` is not empty.
+The conda-forge CI setups provide userspace emulation support on Linux, using `qemu-user`. The path
+to the emulator is then provided in the `CROSSCOMPILING_EMULATOR` variable. However, usually there
+is no need to use it directly, as `binfmt_misc` permits executing non-native executables directly.
 
-Furthermore, the emulator introduces an overhead for running binaries, and does not guarantee 100%
-correctness for all cases. Therefore, whenever it makes sense, binaries built for the build platform
-should be preferred. To ensure correct test results, unittests should be compiled for the host
-platform and run via the emulator. However, helpers that don't influence the test results directly
-can be built for the build platform instead.
+This could eliminate the need to build executables for the build platform, as the executables built
+for the host platform can be run in CI. This is useful if the executable queries some information
+about the system it runs on. However, if the executable does not query system information, or if the
+build system and the host system are sufficiently similar for the queries run, it's advisable to
+build the executable for the build platform, and for two reasons:
+
+1. Userspace emulation is not available on all platforms. At the moment, it is limited to Linux
+   targets, so for example emulation cannot be used while cross-compiling from `osx-64` to
+   `osx-arm64`.
+2. Enabling userspace emulation requires superuser privileges, which may make it harder for users to
+   build the package locally, in particular to build the build process.
+
+Parts of the recipe such as tests can require an emulator, but they must be guarded accordingly, and
+run only for native builds or when `CROSSCOMPILING_EMULATOR` is not empty.
 
 ## Toolchain setup
 
