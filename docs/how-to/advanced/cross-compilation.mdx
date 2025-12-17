@@ -1,0 +1,497 @@
+---
+title: 'Cross-compilation'
+---
+
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+import { BuildScriptTabs } from "@site/src/components/RecipeTabs";
+
+Cross-compiling means building a package for a different architecture or a different operating
+system than the one the build process is running on. It is a common way of obtaining packages for an
+architecture that conda-forge does not provide any runners for (the other available technique is
+[emulation](/docs/maintainer/knowledge_base/#emulated-builds)). Given how abundant x86_64 runners
+are, most common cross-compilation setups will target non-x86_64 architectures from x86_64 runners.
+
+## Terminology
+
+Cross-compilation terminology usually distinguishes between two types of platform:
+
+- Build: The platform running the building process.
+- Host: The platform we are building packages for.
+
+:::note
+
+Some cross-compilation documentation might also distinguish between a third type of platform, the
+target platform. This is used primarily when building cross-compilers, and indicates the platform
+for which the built package will generate code for. For the purposes of this documentation, we'll
+consider this to be irrelevant and the target platform to be the same as the host.
+
+Note that some resources may use the term "host" to refer to the build platform, and the term
+"target" to refer to the host platform. This convention is notably used by cmake, but we will not use this convention in this document.
+
+:::
+
+## How to enable cross-compilation
+
+By default, the build scripts only enable building for platforms that feature native conda-forge
+runners. To enable cross-compilation, you need to extend the
+[build_platform](/docs/maintainer/conda_forge_yml/#build-platform) mapping in `conda-forge.yml`
+that specifies which build platform to use to cross-compile for a specific platform.
+
+For example, to cross-compile `linux-aarch64` and `linux-ppc64le` from `linux-64`:
+
+```yaml
+build_platform:
+  linux_aarch64: linux_64
+  linux_ppc64le: linux_64
+```
+
+Then [rerender](/docs/how-to/basics/rerender/) the feedstock. This will generate the appropriate CI workflows and
+conda-build input metadata. The [test](/docs/maintainer/conda_forge_yml/#test) key can be used to skip the test phase when
+cross-compiling, if necessary. Provided the requirements metadata and build scripts are written correctly, the
+package should just work. However, in some cases, it'll need some adjustments; see examples below
+for some common cases.
+
+The used platforms are exposed in recipes as selectors and in the build scripts as environment
+variables. For v1 recipes, the following variables are used:
+
+- `build_platform`: The platform on which `conda-build` is running, corresponding to the `build`
+  environment that is made available in `$BUILD_PREFIX`.
+- `host_platform`: The platform on which the package will be installed, corresponding to the `host`
+  environment that is made available in `$PREFIX`. For native builds, matches `build_platform`.
+
+In v0 recipes, `target_platform` is used in place of `host_platform`.
+
+:::note
+
+As a result of 1:1 conversion from v0 recipes, many existing v1 recipes are using `target_platform`
+instead of `host_platform`. This works because target platform is almost always the same as host
+platform, though it is technically incorrect.
+
+:::
+
+In addition to these two variables, there are some more environment variables that are set by
+conda-forge's automation (e.g. `conda-forge-ci-setup`, compiler activation packages, etc) that
+can aid in cross-compilation setups:
+
+- `CONDA_BUILD_CROSS_COMPILATION`: set to `1` when the build platform and the host platform differ.
+- `CONDA_TOOLCHAIN_BUILD`: the autoconf triplet expected for build platform.
+- `CONDA_TOOLCHAIN_HOST`: the autoconf triplet expected for host platform.
+- `CMAKE_ARGS`: arguments needed to cross-compile with CMake. Pass it to `cmake` in your build
+  script.
+- `MESON_ARGS`: arguments needed to cross-compile with Meson. Pass it to `meson` in your build
+  script. Note a [cross build definition file](https://mesonbuild.com/Cross-compilation.html) is
+  automatically created for you too.
+- `CC_FOR_BUILD`: a C compiler targeting the build platform.
+- `CXX_FOR_BUILD`: a C++ compiler targeting the build platform.
+- `CROSSCOMPILING_EMULATOR`: Path to the `qemu` binary for the host platform. Useful for running
+  tests when cross-compiling.
+
+This is all supported by two main conda-build features introduced in version 3:
+
+- How [requirements metadata](https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#requirements-section)
+  is expressed in `meta.yaml`, which distinguishes between `build` and `host` platforms.
+- The `compiler()` Jinja function and underlying [conventions for the compiler packages](https://docs.conda.io/projects/conda-build/en/latest/resources/compiler-tools.html).
+
+## Placing requirements in build or host
+
+The dependencies that need to be present during the build process need to be split between the
+`build` and `host` requirement sections, corresponding appropriately to the build and host
+environments.
+
+The rule of thumb for splitting them is:
+
+- If the package provides binaries that need to be run during the build process, it goes into
+  `build`. Examples include the compiler, `make`, `meson`, `pkg-config`, `sed` and so on.
+- If the package provides libraries or headers that are used to build the installed binaries or the
+  test suite, it goes into `host`. Examples include `eigen`, `libxml2-devel`, `zlib` and so on. For
+  historical reasons, `python` also belongs in `host` dependencies, but see [Python
+  cross-compilation](#details-about-cross-compiled-python-packages).
+- If both conditions are true, the package belongs in both sections (in the `build` section, it may
+  need to be made conditional to cross-compiling). An example of such a package is `llvmdev`.
+
+Note that these rules are oversimplified. For example, if additional binaries need to be compiled
+that are used only during the build, their dependencies go into the `build` section as well.
+
+:::note
+
+Conda builds are using the `${BUILD_PREFIX}` / `${PREFIX}` split even when not cross-compiling,
+therefore splitting the dependencies correctly is always necessary. However, the non
+cross-compilation cases are generally more tolerant of errors, such as running binaries from
+`${PREFIX}` or building against libraries in `${BUILD_PREFIX}`.
+
+:::
+
+In some cases, additional packages may be needed only when cross-compiling. To cover that, you can
+use an appropriate selectors to cover for the build platform and the host platform being different.
+These are:
+
+- for v0 recipes, `[build_platform != target_platform]`.
+- for v1 recipes, `if: build_platform != host_platform`.
+
+However, there are some cases requiring special handling; most notably [Python cross-compilation](#details-about-cross-compiled-python-packages).
+
+## Testing
+
+Running the test suites of the packages generally requires executing binaries built for the host
+platform. To accommodate this, build environments usually provide a emulator. However, recipes must
+not rely on that, and be able to build successfully without the emulator being provided. The build
+script commands relying on the emulator being available need to be guarded using the following
+condition:
+
+<BuildScriptTabs>
+
+```bash
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
+  ...
+fi
+```
+
+```
+if not "%CONDA_BUILD_SKIP_TESTS%"=="1" (
+  ...
+)
+```
+
+</BuildScriptTabs>
+
+There is no equivalent selector for recipes, all dependencies of unit tests should be placed in the
+`host` section unconditionally.
+
+## Cross-compilation examples
+
+A package needs to make a few changes in their recipe to be compatible with cross-compilation. Here
+are a few examples.
+
+### Autotools
+
+A simple C library using autotools for cross-compilation might look like this:
+
+<RecipeTabs>
+
+```yaml
+requirements:
+  build:
+    - {{ compiler("c") }}
+    - {{ stdlib("c") }}
+    - make
+    - pkg-config
+    - gnuconfig
+  host:
+    - libogg
+```
+
+```yaml
+requirements:
+  build:
+    - ${{ compiler("c") }}
+    - ${{ stdlib("c") }}
+    - make
+    - pkg-config
+    - gnuconfig
+  host:
+    - libogg
+```
+
+</RecipeTabs>
+
+In the build script, it would need to update the config files and guard any tests when
+cross-compiling:
+
+```bash
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* .
+
+./configure
+make -j${CPU_COUNT}
+
+# Skip ``make check`` when cross-compiling
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
+  make check -j${CPU_COUNT}
+fi
+```
+
+If the configure scripts needs to run programs in order to determine the system features, it will
+fail indicating that you need to provide the appropriate check results for the host platform. This
+can be done, for example, by setting the respective environment variables prior to running
+configure:
+
+```bash
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" && "${CROSSCOMPILING_EMULATOR:-}" == "" ]]; then
+    export gl_cv_func_getgroups_works=yes
+    export gl_cv_func_gettimeofday_clobber=no
+fi
+
+./configure
+```
+
+### CMake
+
+A simple C++ library using CMake for cross-compilation might look like this:
+
+<RecipeTabs>
+
+```yaml
+requirements:
+  build:
+    - {{ compiler("cxx") }}
+    - {{ stdlib("c") }}
+    - cmake
+    - ninja
+  host:
+    - libboost-devel
+```
+
+```yaml
+requirements:
+  build:
+    - ${{ compiler("cxx") }}
+    - ${{ stdlib("c") }}
+    - cmake
+    - ninja
+  host:
+    - libboost-devel
+```
+
+</RecipeTabs>
+
+In the build script, it would need to update `cmake` call and guard any tests when cross-compiling:
+
+<BuildScriptTabs>
+
+```bash
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == 1 && "${CMAKE_CROSSCOMPILING_EMULATOR:-}" == "" ]]; then
+  # Assume that netcdf works
+  export CMAKE_ARGS="${CMAKE_ARGS} -DNetCDF_F90_WORKS_EXITCODE=0"
+fi
+
+# Pass ``CMAKE_ARGS`` to ``cmake``
+cmake ${CMAKE_ARGS} -G Ninja ..
+cmake --build .
+
+# Skip ``ctest`` when cross-compiling
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:-}" != "" ]]; then
+  ctest
+fi
+```
+
+```
+if "%CONDA_BUILD_SKIP_TESTS%"=="1" (
+  :: Assume that netcdf works
+  set CMAKE_ARGS=%CMAKE_ARGS% -DNetCDF_F90_WORKS_EXITCODE=0
+)
+
+:: Pass ``CMAKE_ARGS`` to ``cmake``
+cmake %CMAKE_ARGS% -G Ninja ..
+cmake --build .
+
+:: Skip ``ctest`` when cross-compiling
+if not "%CONDA_BUILD_SKIP_TESTS%"=="1" (
+  ctest
+)
+```
+
+</BuildScriptTabs>
+
+### Meson
+
+Similarly, with Meson, the `meta.yaml` needs:
+
+<RecipeTabs>
+
+```yaml
+requirements:
+  build:
+    - {{ compiler("c") }}
+    - {{ compiler("cxx") }}
+    - {{ stdlib("c") }}
+    - meson
+    - pkg-config
+  host:
+    - libogg
+```
+
+```yaml
+requirements:
+  build:
+    - ${{ compiler("c") }}
+    - ${{ compiler("cxx") }}
+    - ${{ stdlib("c") }}
+    - meson
+    - pkg-config
+  host:
+    - libogg
+```
+
+</RecipeTabs>
+
+And this in the build script:
+
+<BuildScriptTabs>
+
+```bash
+# Pass ``MESON_ARGS`` to ``meson``
+meson setup ${MESON_ARGS} ..
+meson compile
+```
+
+```
+:: Pass ``MESON_ARGS`` to ``meson``
+meson setup %MESON_ARGS% ..
+meson compile
+```
+
+</BuildScriptTabs>
+
+Additional properties or program paths may need to be written to a cross-file. Meson accepts
+multiple `--cross-file` arguments, so you may add one in addition the one preprovided by compiler
+activation scripts:
+
+<!-- TODO: port this to cmd -->
+
+```bash
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == 1 && "${CMAKE_CROSSCOMPILING_EMULATOR:-}" == "" ]]; then
+    cat > local-cross-file.txt <<-EOF
+        [binaries]
+        glib-mkenums = '${BUILD_PREFIX}/bin/glib-mkenums'
+
+        [properties]
+        longdouble_format = 'IEEE_DOUBLE_LE'
+    EOF
+
+    MESON_ARGS+=" --cross-file ${PWD}/local-cross-file.txt"
+fi
+```
+
+### Python
+
+A simple Python extension using Cython and NumPy's C API would look like so:
+
+<RecipeTabs>
+
+```yaml
+requirements:
+  build:
+    - {{ compiler("c") }}
+    - {{ stdlib("c") }}
+    - cross-python_{{ target_platform }}    # [build_platform != target_platform]
+    - python                                # [build_platform != target_platform]
+    - cython                                # [build_platform != target_platform]
+    - numpy                                 # [build_platform != target_platform]
+  host:
+    - python
+    - pip
+    - cython
+    - numpy
+  run:
+    - python
+```
+
+```yaml
+requirements:
+  build:
+    - ${{ compiler("c") }}
+    - ${{ stdlib("c") }}
+    - if: build_platform != host_platform
+      then:
+        - cross-python_${{ host_platform }}
+        - python
+        - cython
+        - numpy
+  host:
+    - python
+    - pip
+    - cython
+    - numpy
+  run:
+    - python
+```
+
+</RecipeTabs>
+
+This example is discussed in greater detail in [details about cross-compiled Python
+packages](#details-about-cross-compiled-python-packages).
+For more details about NumPy see [Building against NumPy](/docs/maintainer/knowledge_base/#building-against-numpy).
+
+### MPI
+
+With MPI, openmpi is required for the build platform as the compiler wrappers are binaries, but mpich is not required as the compiler wrappers are scripts (see [example](https://github.com/conda-forge/mpi4py-feedstock/blob/743d379c4a04/recipe/meta.yaml#L37)):
+
+<RecipeTabs>
+
+```yaml
+requirements:
+  build:
+    - {{ mpi }}  # [build_platform != target_platform and mpi == "openmpi"]
+  host:
+    - {{ mpi }}
+  run:
+    - {{ mpi }}
+```
+
+```yaml
+requirements:
+  build:
+    - if: build_platform != host_platform and mpi == "openmpi"
+      then: ${{ mpi }}
+  host:
+    - ${{ mpi }}
+  run:
+    - ${{ mpi }}
+```
+
+</RecipeTabs>
+
+In the build script, openmpi compiler wrappers can use host libraries by setting the environmental variable `OPAL_PREFIX` to `$PREFIX`.
+
+```sh
+if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" && "${mpi}" == "openmpi" ]]; then
+  export OPAL_PREFIX="$PREFIX"
+fi
+```
+
+### Other examples
+
+There are more variations of this approach in the wild. So this is not meant to be exhaustive,
+but merely to provide a starting point with some guidelines. Please look at [other recipes for more examples](https://github.com/search?q=org%3Aconda-forge+path%3Arecipe%2Fmeta.yaml+%22%5Bbuild_platform+%21%3D+target_platform%5D%22&type=code).
+
+## Finding NumPy in cross-compiled Python packages using CMake
+
+If you are building a Python extension via CMake with NumPy and you want it to work in
+cross-compilation, you need to prepend to the CMake invocation in your build script the following
+lines:
+
+```sh
+Python_INCLUDE_DIR="$(python -c 'import sysconfig; print(sysconfig.get_path("include"))')"
+Python_NumPy_INCLUDE_DIR="$(python -c 'import numpy; print(numpy.get_include())')"
+# usually either Python_* or Python3_* lines are sufficient
+CMAKE_ARGS+=" -DPython_EXECUTABLE:PATH=${PYTHON}"
+CMAKE_ARGS+=" -DPython_INCLUDE_DIR:PATH=${Python_INCLUDE_DIR}"
+CMAKE_ARGS+=" -DPython_NumPy_INCLUDE_DIR=${Python_NumPy_INCLUDE_DIR}"
+CMAKE_ARGS+=" -DPython3_EXECUTABLE:PATH=${PYTHON}"
+CMAKE_ARGS+=" -DPython3_INCLUDE_DIR:PATH=${Python_INCLUDE_DIR}"
+CMAKE_ARGS+=" -DPython3_NumPy_INCLUDE_DIR=${Python_NumPy_INCLUDE_DIR}"
+```
+
+## Details about cross-compiled Python packages
+
+Cross-compiling Python packages is a bit more involved than other packages. The main pain point is
+that we need an executable Python interpreter (i.e. `python` in `build`) that knows how to
+provide accurate information about the target platform. Since this is not officially supported, a
+series of workarounds are required to make it work.
+
+In practical terms, it means that in conda-forge you need to:
+
+1. Add `cross-python_${{ host_platform }}` (or `cross-python_{{ target_platform }}` for v0 recipes)
+   to `build` requirements, conditionally to the cross-compiling selector.
+2. Copy `python` itself and non-pure Python packages (i.e. these that ship compiled extensions)
+   that need to be present while the package is being built, such as `cython` and `numpy`, from
+   `host` to `build` requirements, conditionally to the cross-compiling selector.
+
+This is demonstrated in the [Python example](#python).
+
+:::note
+
+Since Python historically did not support cross-compilation, it always needs to be present in `host`
+requirements, even though it is technically run during the build process.
+
+:::
