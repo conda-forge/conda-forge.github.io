@@ -2,6 +2,8 @@
 title: 'Contributing packages'
 ---
 
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
 <a id="dev-contribute-pkgs"></a>
 
 <a id="contributing-packages"></a>
@@ -337,20 +339,46 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 
 #### Skipping builds
 
-Use the `skip` key in the `build` section along with a selector:
+Use the `skip` key in the `build` section. In v1 recipes, it accepts any of:
+
+- a boolean value, such as `true` to skip the build unconditionally;
+- a selector expression to skip the build when it evaluates to true;
+- a list of selector expressions, in which case the build is skipped if any of the expressions
+  evaluates to true.
+
+In v0 recipes, only a boolean value is directly accepted, and it needs to be combined with
+a selector expression via templating.
 
 You can e.g. specify not to build …
 
 - on specific architectures:
+  <RecipeTabs>
+
   ```yaml
   build:
-      skip: true  # [win]
+    skip: true  # [win or osx-arm64]
   ```
+
+  ```yaml
+  build:
+    skip:
+      - win
+      - osx-arm64
+  ```
+  </RecipeTabs>
 - for specific python versions:
+  <RecipeTabs>
+
   ```yaml
   build:
       skip: true  # [py<35]
   ```
+
+  ```yaml
+  build:
+      skip: match(python, "<3.5")
+  ```
+  </RecipeTabs>
 
 A full description of selectors is
 [in the conda docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#preprocessing-selectors).
