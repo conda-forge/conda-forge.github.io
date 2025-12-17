@@ -266,16 +266,26 @@ Once these steps are complete, you can continue with the steps in [Step-by-step 
 
 <a id="the-recipe-meta-yaml"></a>
 
-## The recipe meta.yaml
+## The recipe (recipe.yaml or meta.yaml)
 
-The `meta.yaml` file in the recipe directory is at the heart of every conda package.
+The recipe file is at the heart of every conda package. It is located in the `recipe` directory,
+and is named either:
+
+- `recipe.yaml` for the newer v1 recipes
+- `meta.yaml` for the older v0 recipes
+
 It defines everything that is required to build and use the package.
 
-`meta.yaml` is in [yaml](https://en.wikipedia.org/wiki/YAML) format, augmented with [Jinja](http://jinja.pocoo.org/) templating.
+Both files use the [yaml](https://en.wikipedia.org/wiki/YAML) format, augmented with [Jinja](http://jinja.pocoo.org/) templating.
 
-A full reference of the structure and fields of `meta.yaml` file can be found in the [Defining metadata (meta.yaml)](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html) section in the conda-build documentation.
+The full reference of the formats can be found in the following sources:
+- `recipe.yaml`: [rattler-build: the recipe spec](https://rattler-build.prefix.dev/latest/reference/recipe_file/)
+- `meta.yaml`: [conda-build: defining metadata (meta.yaml)](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html)
 
-In the following, we highlight particularly important and conda-forge specific information and guidelines, ordered by section in `meta.yaml`.
+In the following, we highlight particularly important and conda-forge specific information and
+guidelines, ordered by the section in the YAML file. Whenever the syntax between v0 and v1 recipes
+differs, examples for both versions are provided. Otherwise, the provided snippet works for both
+recipe versions.
 
 <a id="meta-yaml-source"></a>
 
@@ -329,7 +339,7 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 
 #### Downloading extra sources and data files
 
-`conda-build 3` supports multiple sources per recipe. Examples are available [in the conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#source-from-multiple-sources).
+`conda-build 3` and `rattler-build` support multiple sources per recipe. Examples are available in the [rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#source-section) and [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#source-from-multiple-sources).
 
 <a id="build"></a>
 
@@ -380,15 +390,21 @@ You can e.g. specify not to build …
   ```
   </RecipeTabs>
 
-A full description of selectors is
-[in the conda docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#preprocessing-selectors).
+A full description of selectors is in the [rattler-build](https://rattler-build.prefix.dev/latest/selectors/) and
+[conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#preprocessing-selectors).
 
 <a id="optional-bld-bat-and-or-build-sh"></a>
 
-#### Optional: `bld.bat` and/or `build.sh`
+#### Optional: build scripts
 
-In many cases, `bld.bat` and/or `build.sh` files are not required.
+In many cases, explicit build scripts are not required.
 Pure Python packages almost never need them.
+
+The build scripts are named:
+
+- `build.sh` for Unix
+- `build.bat` for Windows, in v1 recipes
+- `bld.bat` for Windows, in v0 recipes
 
 If the build can be executed with one line, you may put this line in the
 `script` entry of the `build` section of the `meta.yaml` file with:
@@ -443,9 +459,9 @@ as `host` requirements; the real package dependencies are only
 
 #### Build, host and run
 
-Conda-build distinguishes three different kinds of dependencies.
+Three primary kinds of dependencies are recognized.
 In the following paragraphs, we give a very short overview what packages go where.
-For a detailed explanation please refer to the [conda-build documentation](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#requirements-section).
+For a detailed explanation please refer to the [rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#requirements-section) or [conda-build documentation](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#requirements-section), respectively.
 
 <a id="id7"></a>
 
@@ -660,8 +676,9 @@ test:
 
 #### Testing python packages
 
-For the best information about testing, see the conda build docs
-[test section.](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#test-section)
+For the best information about testing, see the test sectios in the
+[rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#tests-section)
+or [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#test-section)
 
 <a id="testing-importing"></a>
 
@@ -669,7 +686,7 @@ For the best information about testing, see the conda build docs
 
 The minimal test of a python package should make sure that the package
 can be successfully imported. This can be accomplished with this
-stanza in the `meta.yaml`:
+stanza:
 
 ```yaml
 test:
