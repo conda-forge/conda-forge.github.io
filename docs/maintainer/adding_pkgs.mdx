@@ -404,10 +404,19 @@ Remember to always add `pip` to the host requirements.
 
 Normally Python packages should use this line:
 
+<RecipeTabs>
+
 ```yaml
 build:
   script: "{{ PYTHON }} -m pip install . -vv"
 ```
+
+```yaml
+build:
+  script: "${{ PYTHON }} -m pip install . -vv"
+```
+
+</RecipeTabs>
 
 as the installation script in the `meta.yml` file or `bld.bat/build.sh` script files,
 while adding `pip` to the host requirements:
@@ -627,12 +636,25 @@ On Windows, use the `exist` command. See below for an example.
 
 Simple existence testing example:
 
+<RecipeTabs>
+
 ```yaml
 test:
   commands:
     - test -f $PREFIX/lib/libboost_log$SHLIB_EXT  # [unix]
     - if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1  # [win]
 ```
+
+```yaml
+test:
+  commands:
+    - if: unix
+      then: test -f $PREFIX/lib/libboost_log$SHLIB_EXT
+    - if: win
+      then: if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1
+```
+
+</RecipeTabs>
 
 <a id="testing-python-packages"></a>
 
