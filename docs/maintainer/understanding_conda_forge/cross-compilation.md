@@ -128,9 +128,8 @@ about the system it runs on. However, if the executable does not query system in
 build system and the host system are sufficiently similar for the queries run, it's advisable to
 build the executable for the build platform, and for two reasons:
 
-1. Userspace emulation is not available on all platforms. At the moment, it is limited to Linux
-   targets, so for example emulation cannot be used while cross-compiling from `osx-64` to
-   `osx-arm64`.
+1. Userspace emulation is not available on all platforms. For example, emulation cannot be used
+   while cross-compiling from `osx-64` to `osx-arm64`.
 2. Enabling userspace emulation requires superuser privileges, which may make it harder for users to
    build the package locally, in particular to build the build process.
 
