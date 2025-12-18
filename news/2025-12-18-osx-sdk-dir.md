@@ -1,6 +1,6 @@
 # macOS SDK directory changed
 
-Starting with conda-smithy 3.53.4, the build scripts will no longer use
+Starting with conda-smithy 3.54.0, the build scripts will no longer use
 the system macOS SDK directory by default. The CI systems will use a
 dedicated `/opt/conda-sdks` directory, while users performing local
 builds will need to choose a writable directory, and provide the path to
