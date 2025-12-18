@@ -12,4 +12,4 @@ Feedstocks will need to substitute the stored paths with path-agnostic
 solutions (for example, see [substitutions in
 openpmd-api-feedstock](https://github.com/conda-forge/openpmd-api-feedstock/blob/15f9b3648f087d3e06331d6ec9ddff0710300593/recipe/build.sh#L100-L107))
 or the correct sysroot paths (for example, see [substitutions in
-cartographer-feedstock](https://github.com/conda-forge/cartographer-feedstock/blame/1812f8c13bccbad20daf6ba079f7722cace93a15/recipe/conda_build_config.yaml#L19-L23).
+cartographer-feedstock](https://github.com/conda-forge/cartographer-feedstock/blob/1812f8c13bccbad20daf6ba079f7722cace93a15/recipe/conda_build_config.yaml#L19-L23)).
