@@ -54,6 +54,11 @@ yarn-error.log*
 # pyc files
 *.pyc
 __pycache__/
+*.egg-info
+
+# pixi environments and lockfiles
+.pixi
+pixi.lock
 
 # vscode stuff
 .vscode

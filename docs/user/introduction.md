@@ -16,7 +16,7 @@ conda-forge is a community effort that provides conda packages for a wide range 
 
 You can [search](https://anaconda.org/) for packages online. Look out for packages provided by our conda-forge organization.
 
-**Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack! Please refer to [Becoming involved](contributing.md#becoming-involved), for an overview on how to start contributing.
+**Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack! Please refer to [Becoming involved](contributing.mdx), for an overview on how to start contributing.
 
 <a id="why-conda-forge"></a>
 

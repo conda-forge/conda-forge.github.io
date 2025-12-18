@@ -65,9 +65,14 @@
         },
         "items": [
           {
-            "type": "link",
+            "type": "doc",
             "label": "Rerender a feedstock",
-            "href": "/docs/maintainer/updating_pkgs/#rerendering-feedstocks"
+            "id": "how-to/basics/rerender"
+          },
+          {
+            "type": "doc",
+            "label": "Keep your fork in sync",
+            "id": "how-to/basics/fork-sync"
           }
         ]
       },
@@ -85,9 +90,9 @@
             "href": "/docs/maintainer/knowledge_base/#building-against-numpy"
           },
           {
-            "type": "link",
-            "label": "Enable osx-arm64",
-            "href": "/docs/maintainer/knowledge_base/#apple-silicon-builds"
+            "type": "doc",
+            "label": "Enable additional architectures",
+            "id": "how-to/advanced/enable-archs"
           },
           {
             "type": "doc",
@@ -95,9 +100,9 @@
             "id": "how-to/advanced/talk-to-the-bots"
           },
           {
-            "type": "link",
+            "type": "doc",
             "label": "Cross-compile",
-            "href": "/docs/maintainer/knowledge_base/#cross-compilation"
+            "id": "how-to/advanced/cross-compilation"
           },
           {
             "type": "link",
@@ -110,9 +115,9 @@
             "href": "/docs/maintainer/knowledge_base/#multi-output-recipes"
           },
           {
-            "type": "link",
+            "type": "doc",
             "label": "Maintain several versions",
-            "href": "/docs/maintainer/updating_pkgs/#maintaining-several-versions"
+            "id": "how-to/advanced/several-versions"
           },
           {
             "type": "link",
@@ -178,6 +183,11 @@
             "type": "link",
             "label": "Compilers",
             "href": "/docs/maintainer/infrastructure/#compilers-and-runtimes"
+          },
+          {
+            "type": "doc",
+            "label": "Cross-compilation",
+            "id": "maintainer/understanding_conda_forge/cross-compilation"
           },
           {
             "type": "link",
