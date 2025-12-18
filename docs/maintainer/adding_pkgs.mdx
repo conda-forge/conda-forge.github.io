@@ -643,8 +643,8 @@ However, this is no reason for the recipe to not have tests. At the very least,
 we want to verify that the package has installed the desired files in the desired
 locations. This is called existence testing.
 
-Existence testing can be accomplished in the `meta.yaml` file in the
-`test/commands` block.
+Existence testing can be accomplished using `script` tests in v1 recipes, or `commands` subsection
+of the `test` section of v0 recipe.
 
 On posix systems, use the `test` utility and the `$PREFIX` variable.
 
@@ -662,39 +662,56 @@ test:
 ```
 
 ```yaml
-test:
-  commands:
-    - if: unix
-      then: test -f $PREFIX/lib/libboost_log$SHLIB_EXT
-    - if: win
-      then: if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1
+tests:
+  - script:
+      - if: unix
+        then: test -f $PREFIX/lib/libboost_log$SHLIB_EXT
+      - if: win
+        then: if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1
 ```
 
 </RecipeTabs>
 
 <a id="testing-python-packages"></a>
+<a id="testing-importing"></a>
+<a id="pip-check"></a>
+<a id="id8"></a>
 
-#### Testing python packages
+#### Testing Python packages
 
 For the best information about testing, see the test sectios in the
 [rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#tests-section)
-or [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#test-section)
+or [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#test-section).
 
-<a id="testing-importing"></a>
+The recommended minimum of testing for Python packages involves the following tests:
 
-##### Testing importing
+- testing whether one or more installed Python modules can be imported correctly,
+- running `pip check` to ensure that all dependencies specified in the Python metadata are met.
 
-The minimal test of a python package should make sure that the package
-can be successfully imported. This can be accomplished with this
-stanza:
+In v1 recipes, this is accomplished using a `python` test which combines both `imports` testing
+and an automatic `pip check` test. In v0 recipes, a combination of `imports` test with an explicit
+command test needs to be used:
+
+<RecipeTabs>
 
 ```yaml
 test:
   imports:
     - package_name
+  commands:
+    - pip check
 ```
 
-Note that `package_name` is the name imported by python;
+```yaml
+tests:
+  - python:
+      imports:
+        - package_name
+```
+
+</RecipeTabs>
+
+Note that `package_name` is the name imported by Python;
 not necessarily the name of the conda package (they are sometimes different).
 
 Testing for an import will catch the bulk of the packaging errors, generally
@@ -707,23 +724,6 @@ In these cases, it helps to add more imports explicitly targeting modules
 that do contain executable code (e.g. `package_name.core`).
 
 It is good to run some other tests of the code itself (the test suite) if possible.
-
-<a id="pip-check"></a>
-
-<a id="id8"></a>
-
-##### pip check
-
-For PyPI packages, we strongly recommend including `pip check` as part of the `test.commands` section:
-
-```yaml
-test:
-  commands:
-    - pip check
-```
-
-This command will check if all the dependencies specified in the Python
-metadata are satisfied.
 
 :::note
 
@@ -754,14 +754,31 @@ to simply use the package. This is usually a test-running framework, such as
 nose or pytest. You can ensure that it is included by adding it to requirements
 in the test stanza:
 
+<RecipeTabs>
+
 ```yaml
 test:
   imports:
     - package_name
-...
   requires:
     - pytest
+  commands:
+    - python -m pytest --pyargs package_name
 ```
+
+```yaml
+tests:
+  - python:
+      imports:
+        - package_name
+  - requirements:
+      run:
+        - pytest
+    script:
+      - python -m pytest --pyargs package_name
+```
+
+</RecipeTabs>
 
 <a id="copying-test-files"></a>
 
@@ -771,7 +788,10 @@ Often test files are not installed alongside packages. Conda creates a fresh
 working copy to execute the test stage of build recipes, which don't contain
 the files of source package.
 
-You can include files required for testing with the `source_files` section:
+You can include files required for testing with the `files/source` section in v1 recipes,
+or `source_files` section in v0 recipes:
+
+<RecipeTabs>
 
 ```yaml
 test:
@@ -783,10 +803,28 @@ test:
     - tests
     - test_pkg_integration.py
   commands:
-    - pytest tests test_pkg_integration.py
+    - python -m pytest tests test_pkg_integration.py
 ```
 
-The `source_files` section works for files and directories.
+```yaml
+tests:
+  - python:
+      imports:
+        - package_name
+  - requirements:
+      run:
+        - pytest
+    files:
+      source:
+        - tests
+        - test_pkg_integration.py
+    script:
+      - python -m pytest tests test_pkg_integration.py
+```
+
+</RecipeTabs>
+
+They work for files and directories.
 
 <a id="built-in-tests"></a>
 
@@ -795,12 +833,23 @@ The `source_files` section works for files and directories.
 Some packages have testing built-in. In this case, you can put a test command
 directly in the test stanza:
 
+<RecipeTabs>
+
 ```yaml
 test:
   ...
   commands:
-     python -c "import package_name; package_name.tests.runall()"
+     - python -c "import package_name; package_name.tests.runall()"
 ```
+
+```yaml
+tests:
+  ...
+  - script:
+      - python -c "import package_name; package_name.tests.runall()"
+```
+
+</RecipeTabs>
 
 Alternatively, you can add a file called `run_test.py` in the recipe that
 will be run at test time. This allows an arbitrarily complicated test script.
@@ -812,13 +861,26 @@ will be run at test time. This allows an arbitrarily complicated test script.
 If the tests are installed with the package, pytest can find and run them
 for you with the following command:
 
+<RecipeTabs>
+
 ```yaml
 test:
   requires:
     - pytest
   commands:
-    - pytest --pyargs package_name
+    - python -m pytest --pyargs package_name
 ```
+
+```yaml
+tests:
+  - requirements:
+      run:
+        - pytest
+    script:
+      - python -m pytest --pyargs package_name
+```
+
+</RecipeTabs>
 
 <a id="command-line-utilities"></a>
 
@@ -827,11 +889,21 @@ test:
 If a python package installs command line utilities, you probably want to test that
 they were properly installed:
 
+<RecipeTabs>
+
 ```yaml
 test:
   commands:
     - util_1 --help
 ```
+
+```yaml
+tests:
+  - script:
+      - util_1 --help
+```
+
+</RecipeTabs>
 
 If the utility actually has a test mode, great. Otherwise simply invoking
 `--help` or `--version` or something will at least test that it is
@@ -859,8 +931,9 @@ optional, additional testing is encouraged when packages:
 ##### Testing R library loading
 
 The minimal test of an R package should ensure that the delivered library
-can be successfully imported. This is accomplished in the `meta.yaml`
-with:
+can be successfully imported. This is accomplished with:
+
+<RecipeTabs>
 
 ```yaml
 test:
@@ -868,6 +941,15 @@ test:
     - $R -e "library('PackageName')"           # [not win]
     - "\"%R%\" -e \"library('PackageName')\""  # [win]
 ```
+
+```yaml
+tests:
+  - r:
+      libraries:
+        - PackageName
+```
+
+</RecipeTabs>
 
 Note that `PackageName` is the name imported by R; not necessarily
 the name of the conda package (e.g., `r-matrix` delivers `Matrix`).
