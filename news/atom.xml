@@ -2,11 +2,30 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/news/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2025-10-15T00:00:00.000Z</updated>
+    <updated>2025-12-18T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/news/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[macOS SDK directory changed]]></title>
+        <id>https://conda-forge.org/news/2025/12/18/osx-sdk-dir/</id>
+        <link href="https://conda-forge.org/news/2025/12/18/osx-sdk-dir/"/>
+        <updated>2025-12-18T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Starting with conda-smithy 3.54.0, the generated build scripts for macOS]]></summary>
+        <content type="html"><![CDATA[<p>Starting with conda-smithy 3.54.0, the generated build scripts for macOS
+will no longer use the system SDK directory for downloading the SDK versions
+we require, but will use a dedicated <code>/opt/conda-sdks</code> directory instead.
+Users performing local builds will need to choose a writable directory,
+and provide the path to it via the environment variable <code>OSX_SDK_DIR</code>.</p>
+<p>This change may result in some build systems, particularly CMake,
+storing paths to this temporary build directory in installed metadata.
+Feedstocks will need to substitute the stored paths with path-agnostic
+solutions (for example, see <a href="https://github.com/conda-forge/openpmd-api-feedstock/blob/15f9b3648f087d3e06331d6ec9ddff0710300593/recipe/build.sh#L100-L107" target="_blank" rel="noopener noreferrer" class="">substitutions in
+openpmd-api-feedstock</a>)
+or the correct sysroot paths (for example, see <a href="https://github.com/conda-forge/cartographer-feedstock/blob/1812f8c13bccbad20daf6ba079f7722cace93a15/recipe/conda_build_config.yaml#L19-L23" target="_blank" rel="noopener noreferrer" class="">substitutions in
+cartographer-feedstock</a>).</p>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[conda-forge Discourse forum is now read-only]]></title>
         <id>https://conda-forge.org/news/2025/10/15/conda-forge-discourse-read-only/</id>
@@ -387,19 +406,5 @@ seconds before continuing.</li>
 </li>
 <li class="">January 2025: The Mambaforge installers will stop being built and distributed.</li>
 </ul>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[NumPy 2 Migration]]></title>
-        <id>https://conda-forge.org/news/2024/05/15/numpy-2-migration/</id>
-        <link href="https://conda-forge.org/news/2024/05/15/numpy-2-migration/"/>
-        <updated>2024-05-15T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[In preparation for the NumPy 2 release, we have begun a migration of all]]></summary>
-        <content type="html"><![CDATA[<p>In preparation for the NumPy 2 release, we have begun a migration of all
-conda-forge packages that depend on <code>numpy</code> during the build (so in
-<code>requirements/host</code>). The migration status is tracked
-<a class="" href="https://conda-forge.org/status/migration/?name=numpy2">on our status page</a>.
-Particular package's status can be found there. Specific recommendations for
-maintainers updating packages can be found in the migration PRs themselves.
-Please reach out through the usual channels if you have any questions.</p>]]></content>
     </entry>
 </feed>
