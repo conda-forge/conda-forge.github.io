@@ -1045,14 +1045,14 @@ the individual tests. In that case, one can instead test the
 ```yaml
 test:
   commands:
-    - $R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed')"           # [not win]
-    - "\"%R%\" -e \"testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed')\""  # [win]
+    - $R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed', stop_on_failure=TRUE)"           # [not win]
+    - "\"%R%\" -e \"testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed', stop_on_failure=TRUE)\""  # [win]
 ```
 
 ```yaml
 tests:
   - script:
-      - R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed')"
+      - R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed', stop_on_failure=TRUE)"
 ```
 
 </RecipeTabs>
