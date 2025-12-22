@@ -146,7 +146,7 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:
 fi
 ```
 
-```
+```batch
 if not "%CONDA_BUILD_SKIP_TESTS%"=="1" (
   ...
 )
@@ -274,7 +274,7 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR:
 fi
 ```
 
-```
+```batch
 if "%CONDA_BUILD_SKIP_TESTS%"=="1" (
   :: Assume that netcdf works
   set CMAKE_ARGS=%CMAKE_ARGS% -DNetCDF_F90_WORKS_EXITCODE=0
@@ -334,7 +334,7 @@ meson setup ${MESON_ARGS} ..
 meson compile
 ```
 
-```
+```batch
 :: Pass ``MESON_ARGS`` to ``meson``
 meson setup %MESON_ARGS% ..
 meson compile
