@@ -407,7 +407,7 @@ The build scripts are named:
 - `bld.bat` for Windows, in v0 recipes
 
 If the build can be executed with one line, you may put this line in the
-`script` entry of the `build` section of the `meta.yaml` file with:
+`script` entry of the `build` section of the recipe file with:
 `script: "{{ PYTHON }} -m pip install . -vv"`.
 
 Remember to always add `pip` to the host requirements.
@@ -434,7 +434,7 @@ build:
 
 </RecipeTabs>
 
-as the installation script in the `meta.yml` file or `bld.bat/build.sh` script files,
+as the installation script in the recipe file or the build script files,
 while adding `pip` to the host requirements:
 
 ```yaml
@@ -523,7 +523,7 @@ It is therefore crucial to ensure that only library versions with a compatible [
 In the best case, the shared library you depend on:
 
 - defines a pin in the [list of globally pinned packages](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml)
-- exports its [ABI](../glossary.md#abi) compatible requirements by defining `run_exports` in it's meta.yaml
+- exports its [ABI](../glossary.md#abi) compatible requirements by defining `run_exports` in its recipe file
 
 In these cases you do not have to worry about version requirements:
 
@@ -1281,7 +1281,7 @@ extra:
 ```
 
 Here, `<name>` is the name you would want for the feedstock.
-If not specified, the name will be taken from the top-level `name` field in `meta.yaml`.
+If not specified, the name will be taken from the top-level `name` field in the recipe file.
 
 <a id="miscellaneous"></a>
 
