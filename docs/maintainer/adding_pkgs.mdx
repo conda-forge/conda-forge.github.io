@@ -1336,12 +1336,14 @@ for %%F in (activate deactivate) DO (
 
 ### Jinja templating
 
-The recipe `meta.yaml` can contain expressions that are evaluated during build time.
+The recipe file can contain expressions that are evaluated during build time.
 These expressions are written in [Jinja](http://jinja.pocoo.org/) syntax.
 
-Jinja expressions serve following purposes in the meta.yaml:
+Jinja expressions serve following purposes in the recipe file:
 
 - They allow defining variables to avoid code duplication. Using a variable for the `version` allows changing the version only once with every update.
+
+  <RecipeTabs>
 
   ```yaml
   {% set version = "3.7.3" %}
@@ -1355,7 +1357,24 @@ Jinja expressions serve following purposes in the meta.yaml:
     sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
   ```
 
-- They can call [conda-build functions](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#conda-build-specific-jinja2-functions) for automatic code generation. Examples are the compilers, cdt packages or the `pin_compatible` function.
+  ```yaml
+  context:
+    version: "3.7.3"
+
+  package:
+    name: python
+    version: ${{ version }}
+
+  source:
+    url: https://www.python.org/ftp/python/${{ version }}/Python-${{ version }}.tar.xz
+    sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
+  ```
+
+  </RecipeTabs>
+
+- They can call [rattler-build](https://rattler-build.prefix.dev/latest/reference/jinja/) or [conda-build functions](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#conda-build-specific-jinja2-functions) for automatic code generation. Examples are the compilers, cdt packages or the `pin_compatible` function.
+
+  <RecipeTabs>
 
   ```yaml
   requirements:
@@ -1366,7 +1385,22 @@ Jinja expressions serve following purposes in the meta.yaml:
       - {{ cdt('libx11-devel') }}          # [linux]
   ```
 
+  ```yaml
+  requirements:
+    build:
+      - ${{ compiler('c') }}
+      - ${{ compiler('cxx') }}
+      - if: linux
+        then:
+          - ${{ cdt('xorg-x11-proto-devel') }}
+          - ${{ cdt('libx11-devel') }}
+  ```
+
+  </RecipeTabs>
+
   or
+
+  <RecipeTabs>
 
   ```yaml
   requirements:
@@ -1380,4 +1414,18 @@ Jinja expressions serve following purposes in the meta.yaml:
       - python
   ```
 
-For more information please refer to the [Templating with Jinja](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#templating-with-jinja) section in the conda-build docs.
+  ```yaml
+  requirements:
+    build:
+      - ${{ compiler('c') }}
+      - ${{ compiler('cxx') }}
+    host:
+      - python
+      - numpy
+    run:
+      - python
+  ```
+
+  </RecipeTabs>
+
+For more information please refer to the "Templating with Jinja" section in the [rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#templating-with-jinja) or [conda-build](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#templating-with-jinja) docs.
