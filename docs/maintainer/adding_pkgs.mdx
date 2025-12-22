@@ -961,6 +961,8 @@ the name of the conda package (e.g., `r-matrix` delivers `Matrix`).
 A typical `test` section for an R package with `testthat` testing
 will look like
 
+<RecipeTabs>
+
 ```yaml
 test:
   requires:
@@ -973,6 +975,23 @@ test:
     - "\"%R%\" -e \"library('PackageName')\""                                         # [win]
     - "\"%R%\" -e \"testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)\""  # [win]
 ```
+
+```yaml
+tests:
+  - r:
+      libraries:
+        - PackageName
+  - files:
+      source:
+        - tests/
+    requirements:
+      run:
+        - r-testthat
+    script:
+      - R -e "testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)"
+```
+
+</RecipeTabs>
 
 :::note
 
@@ -1007,7 +1026,7 @@ present and needed for specific tests.
 The default R build procedure on conda-forge will not include the
 `tests/` directory in the final build. While it is possible to do this
 (via an `--install-tests` flag), it is preferable to use the
-`tests.source_files` in the `meta.yaml` to copy the tests for the
+`files.source` or `source_files` keys to copy the tests for the
 testing phase only.
 
 Finally, one uses the `testthat::test_file()` function to test the
@@ -1021,12 +1040,22 @@ There are scenarios where the `tests/testthat.R` file does not orchestrate
 the individual tests. In that case, one can instead test the
 `tests/testthat` directory with
 
+<RecipeTabs>
+
 ```yaml
 test:
   commands:
     - $R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed')"           # [not win]
     - "\"%R%\" -e \"testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed')\""  # [win]
 ```
+
+```yaml
+tests:
+  - script:
+      - R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed')"
+```
+
+</RecipeTabs>
 
 In this case, the function will error on any failures by default. Again,
 the `PackageName` here refers to the R library name.
