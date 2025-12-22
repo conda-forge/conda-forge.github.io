@@ -1109,7 +1109,7 @@ where `<VARIANT>` is one of the file names in the `.ci_support/` directory, e.g.
 
 Sometimes upstream maintainers do not include a license file in their tarball despite being demanded by the license.
 
-If this is the case, you can add the license to the `recipe` directory (here named `LICENSE.txt`) and reference it inside the meta.yaml:
+If this is the case, you can add the license to the `recipe` directory (here named `LICENSE.txt`) and reference it inside the recipe file:
 
 ```yaml
 about:
@@ -1131,7 +1131,7 @@ If there is a license file in the archive, please set `license_file` to the path
 
 #### SPDX Identifiers and Expressions
 
-For the `about: license` entry in the recipe `meta.yaml`, using a SPDX identifier or expression is recommended.
+For the `about: license` entry in the recipe file, using a SPDX identifier or expression is recommended.
 
 See [SPDX license identifiers](https://spdx.org/licenses/) for the licenses.
 See [SPDX license exceptions](https://spdx.org/licenses/exceptions-index.html) for license exceptions.
@@ -1221,7 +1221,6 @@ Then, include the tool as a build time dependency.
 ```yaml
 requirements:
   build:
-    - {{ compiler('go') }}
     - go-licenses
 ```
 
