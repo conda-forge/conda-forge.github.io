@@ -20,7 +20,7 @@ Chances are we have already packaged it for you. You can [search](https://anacon
 **Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack!
 
 - We value all kinds of contributions — not just code. A few recommended ways to start contributing to conda-forge are:
-  - [Contribute new packages](maintainer/adding_pkgs.md)
+  - [Contribute new packages](maintainer/adding_pkgs)
   - Help update and [maintain packages](maintainer/updating_pkgs.md)
   - Suggest or implement improvements for our [infrastructure](maintainer/infrastructure.md)
   - Help [improve the documentation](/docs/user/contributing/#improve-the-website)
