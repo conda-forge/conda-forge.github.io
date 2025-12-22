@@ -44,7 +44,37 @@ The staging process i.e adding a package's recipe has three steps:
 
 ### Generating the recipe
 
-There are, currently, three ways to generate a recipe:
+#### v1 recipe (recommended)
+
+Whenever possible, you will want to start with an automatically generated recipe using
+[rattler-build generate-recipe command](https://rattler-build.prefix.dev/latest/recipe_generation/).
+At the time of writing, the tool supports generating recipes for:
+
+- Python packages from PyPI
+- R packages from CRAN
+- Perl packages from CPAN
+- Lua packages from LuaRocks
+
+For a full list, consult the output of `rattler-build generate-recipe`. Note that the generated
+recipe needs to be reviewed and modified as necessary.
+
+If no generator is available for the package type in question, start with
+[the example recipe](https://github.com/conda-forge/staged-recipes/tree/main/recipes/example-v1)
+in the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and modify it.
+Your final recipe should have no comments (unless they're actually relevant to the recipe, and not
+generic instruction comments), and follow the order in the example.
+
+:::note
+
+If there are any details you are not sure about please create a pull request anyway. The conda-forge team will review it and help you make changes to it.
+
+:::
+
+In case you are building your first recipe using conda-forge, a step-by-step instruction and checklist that will help you with a successful build is provided below.
+
+#### v0 recipe
+
+There are, currently, three ways to generate a v0 recipe:
 
 1. If it is an R package from [CRAN](https://cran.r-project.org/), kindly
    start by using the [conda-forge helper script for R recipes](https://github.com/bgruening/conda_r_skeleton_helper) instead.
@@ -92,20 +122,22 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
 2. Fork and clone the [staged-recipes](https://github.com/conda-forge/staged-recipes)
    repository from GitHub.
 3. Checkout a new branch from the staged-recipes `main` branch.
-4. Through CLI, cd inside the ‘staged-recipes/recipes' directory.
+4. Through CLI, cd inside the `staged-recipes/recipes` directory.
 5. Within your forked copy, create a new folder in the recipes folder for your package (i.e, `...staged-recipes/recipes/<name-of-package>`)
-6. Copy [meta.yaml](https://github.com/conda-forge/staged-recipes/blob/main/recipes/example/meta.yaml) from the example directory.
-   All the changes in the following steps will happen in the COPIED meta.yaml (i.e., `...staged-recipes/recipes/<name-of-package>/meta.yaml`).
+6. [Generate the recipe](#generating-the-recipe) or copy the example `recipe.yaml` (or `meta.yaml`)
+   into this folder.
+   All the changes in the following steps will happen in the COPIED `recipe.yaml` or `meta.yaml`
+   (i.e., `...staged-recipes/recipes/<name-of-package>/recipe.yaml`).
    Please leave the example directory unchanged!
-7. Modify the copied recipe (meta.yml) as needed. To see how to modify meta.yaml, take a look at
+7. Modify the copied recipe file as needed. To see how to modify it, take a look at
    [The recipe (recipe.yaml or meta.yaml)](#the-recipe-recipeyaml-or-metayaml).
-8. Generate the SHA256 key for your source code archive, as described in the
+8. Generate the SHA256 hash for your source code archive, as described in the
    example recipe using the `openssl` tool. As an alternative, you can also
-   go to the package description on [PyPi](https://pypi.org) from which you
+   go to the package description on [PyPI](https://pypi.org) from which you
    can directly copy the SHA256.
 9. Be sure to fill in the `test` section. The simplest test will simply
    test that the module can be imported, as described in the example.
-10. Remove all irrelevant comments in the `meta.yaml` file.
+10. Remove all irrelevant comments in the recipe file.
 
 :::tip
 
@@ -121,7 +153,7 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 
 #### Checklist
 
-- Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache-2.0 rather than APACHE 2.0). Using SPDX identifiers for license field is recommended. (see [SPDX Identifiers and Expressions](#spdx-identifiers-and-expressions))
+- Ensure that the license has the right case and that the license is correct. Note that case sensitive inputs are required (e.g. `Apache-2.0` rather than `APACHE 2.0`). Using SPDX identifiers for license field is recommended. (see [SPDX Identifiers and Expressions](#spdx-identifiers-and-expressions))
 - Ensure that you have included a license file if your license requires one – most do. (see [here](https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55))
 - In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
 - Make sure that all tests pass successfully at least on your development machine.
@@ -170,7 +202,7 @@ Each feedstock contains various files that are generated automatically using our
 
 #### recipe
 
-This folder contains the `meta.yaml` file and any other files/scripts needed to build the package.
+This folder contains the recipe file (`recipe.yaml` or `meta.yaml`) and any other files/scripts needed to build the package.
 
 <a id="license-txt"></a>
 
