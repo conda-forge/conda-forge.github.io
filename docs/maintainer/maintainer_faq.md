@@ -162,7 +162,7 @@ Available platform plugins are: eglfs, minimal, minimalegl, offscreen, vnc, webg
 ```
 
 This comes from the CI environment being headless and can be fixed by adding the `QT_QPA_PLATFORM=offscreen` [environment variable](https://docs.conda.io/projects/conda-build/en/stable/user-guide/environment-variables.html#inherited-environment-variables).
-The variable can either be added directly to the test command or provided in the [meta.yaml](adding_pkgs.md#id4) like so:
+The variable can either be added directly to the test command or provided in the [meta.yaml](../adding_pkgs#the-recipe-recipeyaml-or-metayaml) like so:
 
 ```yaml
 build:
