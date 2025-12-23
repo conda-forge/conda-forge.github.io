@@ -170,9 +170,9 @@
         "label": "Building packages",
         "items": [
           {
-            "type": "link",
+            "type": "doc",
             "label": "Compilation concepts",
-            "href": "#"
+            "id": "maintainer/understanding_conda_forge/compilation-concepts"
           },
           {
             "type": "link",
