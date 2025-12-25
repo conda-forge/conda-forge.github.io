@@ -161,24 +161,48 @@ tool-specific directories.
 
 ## Shared library versioning
 
-When shared library versioning is used on Unix systems, the installed library usually consists of
-three files:
+Shared libraries are often versioned to indicate compatibility. Typically, at least two version
+components are used: a minor version that is incremented whenever backwards-compatible ABI changes
+occur (e.g. new interaces are added), and a major version that is incremented whenever
+backwards-incompatible changes happen. Often additional version components are used to indicate
+library updates without ABI changes.
 
-- the actual library containing full version string, such as `lib{name}.so.1.2.3` or
+When such a scheme is used, the installed library usually consists of three files:
+
+- the actual library with a full version string, such as `lib{name}.so.1.2.3` or
   `lib{name}.1.2.3.dylib`,
-- a partially versioned symbolic link, such as `lib{name}.so.1` or `lib{name}.1.dylib`,
+- a symbolic link including the major version, such as `lib{name}.so.1` or `lib{name}.1.dylib`,
 - an unversioned symbolic link, such as `lib{name}.so` or `lib{name}.dylib`.
 
-When building a new program, the linker -- if passed `-l{name}` -- finds the unversioned symbolic
-link, and reaches the actual library through resolving it. From that library, it reads the
-`DT_SONAME` entry on Linux, or the install name on macOS. Commonly, it references the partially
-versioned name -- and that name is stored in the resulting binary, and therefore used when the
-binary is loaded. As a result, the binary is pinned to particular "soversion", and when the library
-is upgraded to a newer version that's backwards compatible (i.e. has the same "soversion"), all
-programs start using the new version without being rebuilt. Conversely, an upgrade to an
-incompatible version (i.e. one having a different "soversion") requires rebuilding binaries.
+When building a new program, the linker -- if passed `-l{name}` -- uses the unversioned library
+name. If it is a symbolic link, it is resolved to the actual library. That library is used during
+the linking process, and dynamic library information is taken from it.
 
-TODO: research and document macOS version checking
+On Linux, this information primarily involves the `DT_SONAME` entry that contains the filename used
+to load the library at runtime. Typically, it corresponds to the filename with the major version,
+though it can be any filename, and e.g. libraries that do not provide cross-version compatibility at
+all often use the full version.
+
+On macOS, library [version
+information](https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/DynamicLibraryDesignGuidelines.html#//apple_ref/doc/uid/TP40002013-SW23)
+is used instead. It consists of a major version number, a minor (current) version number and a
+compatibility version number. The major version number functions much like `DT_SONAME` -- it is used
+to construct the "major version" symbolic link and the install name, it can be any string and it
+needs to change whenever backwards-incompatible changes occur. The minor version number consists of
+one to three version components, and indicates the current library version; it usually starts with
+the major number. The compatibility version number indicates the earliest version of the library
+that remains compatible with programs compiled against the current version.
+
+When a program is started, the library is loaded based on the major version number. Then, the loader
+compares the current version number of the loaded library against the compatibility version of the
+library used at link time (stored in the program). If the current version is older than the
+compatibility version, the program refuses to start.
+
+For example, a GNU-style `lib{name}.so.1.2.3` would correspond to a major version of `1`, current
+version of `1.2.3` and compatibility version of `1.2.0`. Programs compiled against that version
+would be compatible with `>=1.2.0,<2`, but the library would also remain compatible with programs
+compiled against earlier versions. While Linux technically encodes the equivalent of compatibility
+versions in the filename, they aren't strictly enforced.
 
 ## Finding shared libraries at runtime
 
