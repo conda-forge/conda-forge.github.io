@@ -45,6 +45,31 @@ solutions such as CMake or Meson. These often split compilation and linking step
 object file separately to enable running multiple compiler processes simultaneously to benefit from
 multiple logical CPUs.
 
+## Build systems
+
+While for trivial projects, compiling software manually may be feasible, more realistically software
+involves a degree of complexity that justifies using a build system. A build system provides a layer
+of automation that takes care of compiling, testing and installing the software, at the same time
+providing a degree of configurability for end users and providing support for multiple platforms and
+toolchains.
+
+The build system pipeline typically involves four stages:
+
+1. Configuration -- which covers accepting user input as to how the package should be built,
+   discovering the necessary tooling and dependencies, and preparing the actual build.
+2. Compilation -- which covers compiling all source files into binaries, as well as any other
+   necessary processing. Many software packages can be run from the build directory after this
+   stage.
+3. Testing -- which covers running the package's test suite to verify that is working correctly. In
+   some build system, tests are compiled in this stage; in others, they need to be enabled at
+   configuration stage and built at compilation stage.
+4. Installation -- which covers installing compiled files and package's data files to the actual
+   system, or a staging directory.
+
+Projects usually adapt one of the existing build systems, such as GNU autotools, CMake or Meson.
+These build systems in turn generate Makefiles, Ninja build scripts or project files for IDEs to use
+and perform the actual build.
+
 ## Libraries
 
 Modern programs almost always link to libraries, that is collections of shared code. This includes
@@ -100,7 +125,7 @@ like static libraries.
 
 Finally, packages often provide additional files that are used at build time to determine how to use
 the library in question. For example, these can include pkg-config files, CMake files, autotools
-macros.
+macros. These files are usually used by the build systems.
 
 ## Binaries
 
@@ -121,20 +146,7 @@ Executables are usually installed into the `bin` directory.
 
 Shared libraries use `lib` prefix on Unixes, and `.so` suffix, except for macOS where they use
 `.dylib` suffix instead. They are installed into the `lib` directory. They often include a version
-string to indicate compatibility between different library versions. If that is the case, the
-installed library usually consists of three files:
-
-- the actual library containing full version string, such as `lib{name}.so.1.2.3` or
-  `lib{name}.1.2.3.dylib`,
-- a partially versioned symbolic link, such as `lib{name}.so.1` or `lib{name}.1.dylib`,
-- an unversioned symbolic link, such as `lib{name}.so` or `lib{name}.dylib`.
-
-When building a new program, the linker uses the unversioned symbolic link to select the library
-to link to. From it, the linker reads the library `SONAME` (or install name, on macOS) that
-corresponds to the partially versioned name, and stores that in the resulting executable. When run,
-the executable loads the library using its partially versioned name. When the library is upgraded
-to a newer version that is backwards compatible (i.e. has the same partially versioned name), all
-executables start using the new version.
+string to indicate compatibility between different library versions.
 
 On Windows, shared libraries use `.dll` suffix, and no obligatory prefix. They are installed into
 the `bin` directory, along with programs. There is also no standard filename versioning scheme,
@@ -146,3 +158,80 @@ On most systems, loadable modules use the same format as shared libraries. Darwi
 to that, where loadable modules are "bundles". The recommended suffix for these files is `.bundle`,
 though much software (including Python) uses `.so` instead. They are usually installed into
 tool-specific directories.
+
+## Shared library versioning
+
+When shared library versioning is used on Unix systems, the installed library usually consists of
+three files:
+
+- the actual library containing full version string, such as `lib{name}.so.1.2.3` or
+  `lib{name}.1.2.3.dylib`,
+- a partially versioned symbolic link, such as `lib{name}.so.1` or `lib{name}.1.dylib`,
+- an unversioned symbolic link, such as `lib{name}.so` or `lib{name}.dylib`.
+
+When building a new program, the linker -- if passed `-l{name}` -- finds the unversioned symbolic
+link, and reaches the actual library through resolving it. From that library, it reads the
+`DT_SONAME` entry on Linux, or the install name on macOS. Commonly, it references the partially
+versioned name -- and that name is stored in the resulting binary, and therefore used when the
+binary is loaded. As a result, the binary is pinned to particular "soversion", and when the library
+is upgraded to a newer version that's backwards compatible (i.e. has the same "soversion"), all
+programs start using the new version without being rebuilt. Conversely, an upgrade to an
+incompatible version (i.e. one having a different "soversion") requires rebuilding binaries.
+
+TODO: research and document macOS version checking
+
+## Finding shared libraries at runtime
+
+Typically, a binary linked to a shared library does not embed the complete path to the library, but
+rather the library name. When a program is started, the dynamic loader is responsible for finding
+all the needed libraries, recursively, and loading them. The exact behavior differs from platform to
+platform. Appropriately, the ways conda-forge builds binaries account for these differences.
+
+The behavior of GNU/Linux dynamic loader is documented in the
+[ld.so(8) manpage](https://manpages.debian.org/testing/manpages/ld.so.8.en.html). The following
+directories are searched for dependent libraries (provided they do not specify a full path):
+
+1. The directories specified in the `DT_RPATH` entry of the program, provided `DT_RUNPATH` is not
+   present. Specifying `DT_RPATH` is discouraged, since the resulting behavior is suboptimal.
+2. The directories specified in the `LD_LIBRARY_PATH` environment variable. This variable is
+   typically set locally when library search paths need to be overridden.
+3. The directories specified in the `DT_RUNPATH` entry of the binary. Note that these paths do not
+   apply recursively -- the program's `DT_RUNPATH` is used for the libraries used directly by the
+   program, and these libraries's entries are used for their own dependent libraries, and so on.
+4. The standard system search paths.
+
+Furthermore, the paths in `DT_RPATH` and `DT_RUNPATH` can use the `$ORIGIN` placeholder to reference
+the directory containing the binary. Conda-forge packages typically ensure that the correct
+libraries are used by embedding a `DT_RUNPATH` pointing to the appropriate directory within the
+conda-forge environment, usually `$ORIGIN/../lib`. This can be done e.g. by linking with
+`-Wl,-rpath,\$ORIGIN/../lib` flag.
+
+On macOS, the equivalent behavior is achieved using [Run-Path Dependent
+Libraries](https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/RunpathDependentLibraries.html).
+Libraries are created with install names conaining a `@rpath/` path prefix, e.g.
+`@rpath/libpython3.15.dylib`, and therefore such names are embedded in the binaries linking to them.
+As described in the [library search
+process](https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/DynamicLibraryUsageGuidelines.html#//apple_ref/doc/uid/TP40001928-SW21),
+the dynamic loader searches in the following directories (since the name contains a slash):
+
+1. The directories specified in the `DYLD_LIBRARY_PATH` environment variable.
+2. The specified path, with `@rpath` being substituted for the library's run path.
+3. The directories specified in the `DYLD_FALLBACK_LIBRARY_PATH` environment variable, that defaults
+   to system library directories.
+
+The run paths in binaries specify the appropriate conda-forge environment directory using a
+`@loader_path` placeholder, such as `@loader_path/../lib`.
+
+The [Windows Dynamic-link library search
+order](https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order) is
+quite complex. However, for our purposes it suffices to list the following variants:
+
+1. A number of overrides such as "DLL Redirection" and "Known DLLs".
+2. The directory containing the application.
+3. A number of system directories.
+4. The current directory.
+5. The directories listed in the `PATH` environment variable.
+
+Note that steps 2. and 5. specifically focus on program directories. To account for this,
+conda-forge generally installs `.dll` libraries into program directories such as the `bin` directory
+rather than the `lib` directory used on Unixes.
