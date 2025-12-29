@@ -73,6 +73,11 @@
             "type": "doc",
             "label": "Keep your fork in sync",
             "id": "how-to/basics/fork-sync"
+          },
+          {
+            "type": "doc",
+            "label": "Populate package dependencies",
+            "id": "how-to/basics/populate-dependencies"
           }
         ]
       },
