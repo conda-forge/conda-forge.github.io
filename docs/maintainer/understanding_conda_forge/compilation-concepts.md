@@ -259,3 +259,26 @@ quite complex. However, for our purposes it suffices to list the following varia
 Note that steps 2. and 5. specifically focus on program directories. To account for this,
 conda-forge generally installs `.dll` libraries into program directories such as the `bin` directory
 rather than the `lib` directory used on Unixes.
+
+## Native builds, cross builds and emulation
+
+Compiling binaries to machine code implies that they can only run on a single platform. In the
+simplest case, this is the same platform that the compiler is being run on. Such a case is called a
+native build. Naturally, the limitation of native builds is that you can only target platforms that
+you have hardware with a suitable build environment on. In some cases, this could be particularly
+problematic, for example if the hardware in question is not very performant or has limited memory
+available.
+
+Conda-forge provides two options to build packages for another platform that the one being used to
+perform the build. These are:
+
+1. [Cross-compilation](../cross-compilation/), which uses a specially built cross-compiler to
+   produce machine code for another platform than the one used on the build machine.
+2. [Emulation](../../knowledge_base/#emulated-builds), which uses a virtual machine to run an
+   emulated system to perform the build on.
+
+In general, cross-compilation is preferable. Emulation could be convenient, as it internally follows
+the native build path, but it has significant overhead. On the other hand, cross-compiler and other
+build tools are native executables, therefore most of the cross-compilation happens natively, with
+no additional overhead (userspace emulation could be used to run host executables, such as tests).
+For more information, please see the linked explanation.
