@@ -260,6 +260,40 @@ Note that steps 2. and 5. specifically focus on program directories. To account 
 conda-forge generally installs `.dll` libraries into program directories such as the `bin` directory
 rather than the `lib` directory used on Unixes.
 
+## Dependencies
+
+Conda splits package dependencies into three classes:
+
+- `build` -- indicating dependencies that need to be available while building the package, and that
+  are compatible with the build platform. This primarily involves programs being run at build time,
+  but also "sysroot" and CDT packages.
+- `host` -- indicating dependencies that need to be available while building the package, and that
+  are compatible with the host platform. This primarily involves dependent libraries, but also
+  interpreters like `python`.
+- `run` -- indicating dependencies that need to be installed in the system along with the package.
+  This primarily involves programs and libraries used at runtime.
+
+The build and host platforms are discussed in [cross-compilation
+concepts](../cross-compilation/#platform-types).
+
+However, shared library dependencies normally are not added to `run` dependencies in recipes.
+Instead, they are exported from `host` dependencies via a mechanism called "run exports". For
+example, if your package links to `libgit2`, you list it as a `host` dependency in the recipe, and
+an appropriately pinned `run` dependency is automatically added to the built package.
+
+There also exist strong run exports. When packages using them are listed in `build` dependencies,
+their exports are added both to `host` and to `run` dependencies. For example, if you use the `gcc`
+compiler, it automatically adds `libgcc` to both `host` and `run` dependencies.
+
+There are also cases when run exports are undesirable. For example, if a library is linked
+statically or only used to build tests. In these cases, there is also a mechanism to ignore run
+exports, and prevent the dependency from being added to `run` dependencies.
+
+When packages are being built, both conda-build and rattler-build perform linkage analysis on the
+built binaries. They list all the libraries that every binary links against, and map them to the
+respective conda-forge packages. This output can cross-referenced to the final package `run`
+dependencies, to check for missing dependencies (usually belonging in `host` class).
+
 ## Native builds, cross builds and emulation
 
 Compiling binaries to machine code implies that they can only run on a single platform. In the
