@@ -1759,38 +1759,7 @@ CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 
 ## PyPy builds
 
-See [Using PyPy as an interpreter](../user/tipsandtricks.md#pypy) in the user docs for more info about PyPy and conda-forge.
-
-To build your python package for pypy, wait for the bot to send a
-PR and contact `conda-forge/bot` team if a PR is not sent after the
-dependencies have been built.
-
-To add a dependency just for pypy or cpython, do,
-
-```yaml
-requirements:
-  run:
-    - spam           # [python_impl == 'cpython']
-    - ham            # [python_impl == 'pypy']
-```
-
-:::note
-
-You'll need to rerender the feedstocks after making the above
-change in order for the `python_impl` variable to be available to
-conda-build
-
-:::
-
-To skip the pypy builds, do the following,
-
-```yaml
-build:
-  skip: True         # [python_impl == 'pypy']
-```
-
-If something is failing the PyPy build when it passes the CPython one, reach
-out to @conda-forge/help-pypy.
+As of August 2024, [PyPy support in conda-forge has been subset](/news/2024/08/14/sunsetting-pypy/).
 
 <a id="using-setuptools-scm"></a>
 
