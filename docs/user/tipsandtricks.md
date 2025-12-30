@@ -166,8 +166,9 @@ For context, installing the TensorFlow 2.7.0 CUDA-enabled variant, `tensorflow=2
 :::warning
 
 As of August 2024, [PyPy support in conda-forge has been sunset](/news/2024/08/14/sunsetting-pypy/).
-It still may be possible to create an environment using an old version of PyPy, but you will not be
-getting updates as new package versions are released.
+It still may be possible to create an environment using an old version of PyPy, but (with the
+exception of noarch packages still compatible with python 3.9), you will be constrained to the
+packages that were built for PyPy until mid-2024.
 
 :::
 
