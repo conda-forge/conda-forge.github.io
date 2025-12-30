@@ -36,7 +36,7 @@ helpful in that. Note that some upstream packages may be split into multiple pac
 conda-forge, and others may be merged into a single package. Search for specific files, and consult
 feedstock documentation when in doubt.
 
-### Look at the final dependency lists
+### Final dependency lists
 
 The dependency lists specified in recipe files provide only the initial lists of `host` and `run`
 dependencies. When packages are built, the builders include additional dependencies from run exports
@@ -106,3 +106,38 @@ dependent libraries into packages. For example, for `libgit2` on Linux:
 These results can be used to verify the final `run` dependency lists. In particular, they may be
 helpful in noticing unnecessary dependencies or missing run exports. However, note that they will
 not be able to detect dependencies that were missing at build time.
+
+## General-purpose build systems
+
+This section is focused on build systems that are not limited to a specific ecosystem, but include
+support for multiple programming languages.
+
+### GNU autoconf
+
+[Autoconf](https://www.gnu.org/software/autoconf/) is a macro-based generator for `configure`
+scripts. As these scripts are often used to find package's dependencies, they often serve as a good
+starting point for checking dependencies. The input file is called `configure.ac` (or `configure.in`
+in very old scripts).
+
+Unfortunately, the methods used to check for dependencies can vary a lot, and in some cases the
+checks could be deferred to separate `.m4` files. However, common macros to look for are:
+
+- `PKG_CHECK_MODULES` to search for pkg-config packages
+- `AC_CHECK_HEADER` and `AC_CHECK_HEADERS` to search for include files
+- `AC_CHECK_LIB` and `AC_SEARCH_LIBS` to search for libraries
+- `AC_CHECK_PROG`, `AC_PATH_PROG` and similar, to search for programs (usually indicating `build`
+  dependency)
+
+For example:
+
+```
+PKG_CHECK_MODULES(LIBXML2_PC, [libxml-2.0])
+```
+
+indicates a dependency on `libxml-2.0.pc` file, provided by `libxml2`, whereas:
+
+```
+AC_CHECK_LIB(bz2, BZ2_bzDecompressInit)
+```
+
+check for `bz2` library (e.g. `libbz2.so`), provided by `bzip2`.
