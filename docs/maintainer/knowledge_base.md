@@ -1759,7 +1759,7 @@ CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 
 ## PyPy builds
 
-As of August 2024, [PyPy support in conda-forge has been subset](/news/2024/08/14/sunsetting-pypy/).
+As of August 2024, [PyPy support in conda-forge has been sunset](/news/2024/08/14/sunsetting-pypy/).
 
 <a id="using-setuptools-scm"></a>
 
