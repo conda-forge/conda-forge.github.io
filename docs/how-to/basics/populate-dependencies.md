@@ -125,7 +125,7 @@ checks could be deferred to separate `.m4` files. However, common macros to look
 - `PKG_CHECK_MODULES` to search for pkg-config packages
 - `AC_CHECK_HEADER` and `AC_CHECK_HEADERS` to search for include files
 - `AC_CHECK_LIB` and `AC_SEARCH_LIBS` to search for libraries
-- `AC_CHECK_PROG`, `AC_PATH_PROG` and similar, to search for programs (usually indicating `build`
+- `AC_CHECK_PROG`, `AC_PATH_PROG` and similar, to search for programs (usually indicating a `build`
   dependency)
 
 For example:
@@ -141,3 +141,36 @@ AC_CHECK_LIB(bz2, BZ2_bzDecompressInit)
 ```
 
 check for `bz2` library (e.g. `libbz2.so`), provided by `bzip2`.
+
+### CMake
+
+[CMake](https://cmake.org/) is a build system focused on building C++ code. Dependency checks are
+primarily done in top-level `CMakeLists.txt` file, but projects often intersperse them with actual
+build rules and spread across multiple `CMakeLists.txt` files in a project tree, and sometimes
+other `*.cmake` files included from these.
+
+The primary dependency lookup method is the `find_package()` function. It can use either CMake files
+installed by the projects themselves, included in the CMake distribution or along with the build
+system in question. Other frequently used functions include:
+
+- `pkg_check_modules()` to search for pkg-config packages
+- `find_path()` to search for include files
+- `find_library()` to search for libraries
+- `find_program()` to search for programs (usually indicating a `build` dependency)
+
+For example:
+
+```
+FIND_PACKAGE(ZLIB 1.2.1)
+```
+
+checks for `zlib` 1.2.1 or newer, whereas:
+
+```
+FIND_PATH(LZO2_INCLUDE_DIR lzo/lzoconf.h)
+FIND_LIBRARY(LZO2_LIBRARY NAMES lzo2 liblzo2)
+```
+
+searches for `lzo/lzoconf.h` and `lzo2` library, corresponding to `lzo` package.
+
+Note that CMake function calls are case-insensitive.
