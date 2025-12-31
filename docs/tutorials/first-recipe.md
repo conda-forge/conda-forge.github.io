@@ -4,10 +4,11 @@ tags: [tutorial]
 
 # Creating and building your first recipe
 
-This tutorial will teach you how to:
+In this tutorial, we will:
 
 - generate your first recipe for a pure Python package
 - build the package from the recipe
+- modify the recipe to run the test suite
 
 It assumes that you have a working conda installation, and that you are running Linux or macOS.
 In case of Linux, you also need to have a working Docker installation.
@@ -55,7 +56,7 @@ Let's try to create a recipe for [humanize 4.15.0](https://pypi.org/project/huma
 Since it is a PyPI package, we can use rattler-build to generate the initial recipe for us. Enter
 the `recipes` directory, create a git branch for your work and generate the recipe:
 
-```
+```bash
 git checkout -b humanize
 cd recipes
 rattler-build generate-recipe pypi --version 4.15.0 -w humanize
@@ -66,7 +67,7 @@ We are using a specific version to obtain a predictable result here. Rattler-bui
 `humanize` subdirectory and write the initial `recipe.yaml` there. At this point, we already have a
 working recipe and can use it to build a package. We can use the `build-locally.py` script for that:
 
-```
+```bash
 python build-locally.py
 ```
 
@@ -136,8 +137,81 @@ about:
     ...
 ```
 
-These sections specify how to test the built package. The default method involves checking if
-`humanize` can be imported successfully and that `pip check` succeeds. Then a lengthy package
-description is included.
+These sections specify how to test the built package, and provide additional package information.
+The default test method involves checking if `humanize` can be imported successfully and that `pip
+check` succeeds. Then a lengthy package description is included.
 
-## Modify the recipe
+## Run the test suite
+
+The generated recipe includes absolutely minimal level of package testing. Let's see if we can do
+better than that.
+
+As noted in the previous section, the package contained a bunch of dependencies marked `tests`.
+The build process should have left the source distribution in `build_artifacts/src_cache`. Let's
+inspect it:
+
+```
+tar -t -f build_artifacts/src_cache/humanize-4_15_0_1dd09848.tar.gz
+```
+
+You should be able to see that the source distribution includes a `tests` directory! Let's add a new
+`tests` entry that attempts to run the package's tests. We will use the dependencies from the
+`tests` extra, and since `pytest` is among them, assume that the tests are run via pytest.
+
+Again, open `recipes/humanize/reicpe.yaml` in your favorite editor. Locate the `tests:` section, and
+change it to:
+
+```yaml
+tests:
+- python:
+    imports:
+    - humanize
+    pip_check: true
+- requirements:
+    run:
+      - freezegun
+      - pytest
+  script:
+    - pytest
+  files:
+    source:
+      - tests
+```
+
+The new list entry adds a test run that:
+
+- requires `pytest` and `freezegun` packages, in addition to the tested `humanize` package (we are
+  skipping `pytest-cov` dependency, as test coverage isn't significant to us)
+- runs `pytest` as the test script
+- includes `tests` directory from the sources
+
+Now, try building the package:
+
+```bash
+python build-locally.py
+```
+
+You may notice a pytest invocation in the middle of the build output:
+
+```
+ │ ============================= test session starts ==============================
+ │ platform linux -- Python 3.14.2, pytest-9.0.2, pluggy-1.6.0
+ │ rootdir: $PREFIX/etc/conda/test-files/humanize/1
+ │ collected 737 items
+ │ tests/test_filesize.py ................................................. [  6%]
+ │ .....................                                                    [  9%]
+ │ tests/test_i18n.py ..................................................... [ 16%]
+ │ ......                                                                   [ 17%]
+ │ tests/test_lists.py .......                                              [ 18%]
+ │ tests/test_number.py ................................................... [ 25%]
+ │ ........................................................................ [ 35%]
+ │ ........................................................................ [ 44%]
+ │ ........................                                                 [ 48%]
+ │ tests/test_time.py ..................................................... [ 55%]
+ │ ........................................................................ [ 65%]
+ │ ........................................................................ [ 74%]
+ │ ........................................................................ [ 84%]
+ │ ........................................................................ [ 94%]
+ │ .........................................                                [100%]
+ │ ============================= 737 passed in 1.24s ==============================
+```
