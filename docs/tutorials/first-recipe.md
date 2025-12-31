@@ -78,3 +78,66 @@ package verbosely. Once the build completes, the new package will be found in
 ```
 -rw------- 1 user user 74K 12-31 13:58 build_artifacts/noarch/humanize-4.15.0-pyh1d6dcf3_0.conda
 ```
+
+## Look at the recipe file
+
+Now is a good opportunity to take a look at the recipe file we've obtained. Open
+`recipes/humanize/reicpe.yaml` in your favorite editor. You should see something along the lines of:
+
+```yaml
+context:
+  version: 4.15.0
+
+package:
+  name: humanize
+  version: ${{ version }}
+
+source:
+- url: https://pypi.org/packages/source/h/humanize/humanize-${{ version }}.tar.gz
+  sha256: 1dd098483eb1c7ee8e32eb2e99ad1910baefa4b75c3aff3a82f4d78688993b10
+```
+
+These sections declare a helper variable `${{ version }}`, and then specify the package's name
+and version, and the source distribution used to build it. These are going to be pretty standard,
+and you'll see them often in recipes for PyPI packages.
+
+```yaml
+build:
+  script: ${{ PYTHON }} -m pip install .
+  noarch: python
+
+requirements:
+  host:
+  - python >=3.10
+  - hatch-vcs
+  - hatchling>=1.27
+  - pip
+  run:
+  - python >=3.10
+  # - freezegun  # extra == "tests"
+  # - pytest  # extra == "tests"
+  # - pytest-cov  # extra == "tests"
+```
+
+These sections specify the command used to build the package, that it is a pure Python (hence
+`noarch`) package and the dependencies needed to build and run it. Note that the generator has left
+a few "extra" dependencies commented out, in case you needed them.
+
+```yaml
+tests:
+- python:
+    imports:
+    - humanize
+    pip_check: true
+
+about:
+  summary: Python humanize utilities
+  description: |
+    ...
+```
+
+These sections specify how to test the built package. The default method involves checking if
+`humanize` can be imported successfully and that `pip check` succeeds. Then a lengthy package
+description is included.
+
+## Modify the recipe
