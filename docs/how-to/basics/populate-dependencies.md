@@ -171,6 +171,34 @@ FIND_PATH(LZO2_INCLUDE_DIR lzo/lzoconf.h)
 FIND_LIBRARY(LZO2_LIBRARY NAMES lzo2 liblzo2)
 ```
 
-searches for `lzo/lzoconf.h` and `lzo2` library, corresponding to `lzo` package.
+searches for `lzo/lzoconf.h` and `lzo2` library, corresponding to the `lzo` package.
 
 Note that CMake function calls are case-insensitive.
+
+### Meson
+
+[Meson](https://mesonbuild.com/) is a general-purpose build system. Dependency checks are primarily
+done in top-level `meson.build` file, though they can also be interspersed with build rules and
+spread across different `meson.build` files across the source tree.
+
+The primary dependency lookup method is the `dependency()` function. It can use either pkg-config,
+CMake files or built-in rules provided in Meson itself. Other frequently used methods include:
+
+- `.has_header() method of a compiler object, to search for header files
+- `.find_library()` method of a compiler object, to search for libraries
+- `find_program()` function to search for progams (usually indicating a `build` dependency)
+
+For example:
+
+```
+libcrypt = dependency('libcrypt', 'libxcrypt', required : false)
+```
+
+indicates an optional dependency, accepting either `libcrypt` (system library, using built-in Meson
+rule) or `libxcrypt` (via `libxcrypt.pc`, provided by `libxcrypt` package), whereas:
+
+```
+libbzip2 = cc.find_library('bz2', required : get_option('bzip2'))
+```
+
+search for `bz2` library, provided by `bzip2` package.
