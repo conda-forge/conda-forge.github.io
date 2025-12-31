@@ -2,6 +2,8 @@
 tags: [how-to, basic]
 ---
 
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
 # How to populate package dependencies
 
 Perhaps one of the hardest tasks of package maintenance is ensuring that the recipe specifies
@@ -106,6 +108,67 @@ dependent libraries into packages. For example, for `libgit2` on Linux:
 These results can be used to verify the final `run` dependency lists. In particular, they may be
 helpful in noticing unnecessary dependencies or missing run exports. However, note that they will
 not be able to detect dependencies that were missing at build time.
+
+### Dealing with extraneous run exports
+
+In some cases, you're going to notice that the final `run` dependencies of a package contains
+dependencies that are only used at build time, and are not found in the linkage report. `gtest` is a
+common example. To avoid that, you need to ignore the run exports from the package:
+
+<RecipeTabs>
+
+```yaml
+build:
+  ignore_run_exports_from:
+    - gtest
+
+requirements:
+  host:
+    - gtest
+```
+
+```yaml
+requirements:
+  host:
+    - gtest
+  ignore_run_exports:
+    from_package:
+      - gtest
+```
+
+</RecipeTabs>
+
+It is also possible to ignore specific run exports by dependency name, rather than all exports from
+a package:
+
+<RecipeTabs>
+
+```yaml
+build:
+  ignore_run_exports:
+    # 'vs' run export left
+    - ucrt
+    - vc14_runtime
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib("c") }}
+```
+
+```yaml
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib("c") }}
+  ignore_run_exports:
+    by_name:
+      # 'vs' run export left
+      - ucrt
+      - vc14_runtime
+```
+
+</RecipeTabs>
 
 ## General-purpose build systems
 
