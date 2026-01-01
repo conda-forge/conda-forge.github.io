@@ -29,9 +29,9 @@
     "moment": "^2.29.4",
     "octokit": "^5.0.5",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.0",
+    "react": "^19.2.3",
     "react-chartjs-2": "^5.3.1",
-    "react-dom": "^19.2.0",
+    "react-dom": "^19.2.3",
     "react-inlinesvg": "^4.2.0",
     "react-markdown": "^10.1.0",
     "react-tooltip": "^5.30.0",
@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.9.2",
-    "prettier": "^3.7.3"
+    "prettier": "^3.7.4"
   },
   "browserslist": {
     "production": [
