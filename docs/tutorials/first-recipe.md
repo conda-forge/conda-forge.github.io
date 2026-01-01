@@ -52,20 +52,29 @@ the repository's history.
 
 ## Generate the initial recipe and build it
 
-Let's try to create a recipe for [humanize 4.15.0](https://pypi.org/project/humanize/4.15.0/).
-Since it is a PyPI package, we can use rattler-build to generate the initial recipe for us. Enter
-the `recipes` directory, create a git branch for your work and generate the recipe:
+Let's try to create a recipe for [pylast 7.0.1](https://pypi.org/project/pylast/7.0.1/). Since it
+is a PyPI package, we can start with an automatically generated recipe. We'll need to:
+
+1. Create a git branch for our work, so that the `main` branch remains intact.
+2. Run `rattler-build generate-recipe` in the `recipes` directory.
+
+Type in the terminal:
 
 ```bash
-git checkout -b humanize
+git checkout -b pylast
 cd recipes
-rattler-build generate-recipe pypi --version 4.15.0 -w humanize
+rattler-build generate-recipe pypi -w --version 7.0.1 pylast
 cd ..
 ```
 
-We are using a specific version to obtain a predictable result here. Rattler-build will create a
-`humanize` subdirectory and write the initial `recipe.yaml` there. At this point, we already have a
-working recipe and can use it to build a package. We can use the `build-locally.py` script for that:
+The `pypi` argument tells `rattler-build` to generate a recipe for a PyPI package. `-w` tells it to
+write it into a file rather than print. `--version` specifies the version to use; normally you
+wouldn't pass it, we use it here so that we get predictable output. The final argument is the
+package name.
+
+This command will write a `pylast/recipe.yaml` file. This file is the recipe, containing the
+instructions for building a package. It is already working, and we can use the `build-locally.py`
+script to build the package:
 
 ```bash
 python build-locally.py
@@ -77,36 +86,54 @@ package verbosely. Once the build completes, the new package will be found in
 `build_artifacts/noarch` directory, e.g.:
 
 ```
--rw------- 1 user user 74K 12-31 13:58 build_artifacts/noarch/humanize-4.15.0-pyh1d6dcf3_0.conda
+-rw------- 1 user user  35K 01-01 14:00 pylast-7.0.1-pyh1d6dcf3_0.conda
 ```
 
 ## Look at the recipe file
 
 Now is a good opportunity to take a look at the recipe file we've obtained. Open
-`recipes/humanize/reicpe.yaml` in your favorite editor. You should see something along the lines of:
+`recipes/pylast/recipe.yaml` in your favorite text editor. We will go over the YAML file section by
+section:
 
 ```yaml
 context:
-  version: 4.15.0
-
-package:
-  name: humanize
-  version: ${{ version }}
-
-source:
-- url: https://pypi.org/packages/source/h/humanize/humanize-${{ version }}.tar.gz
-  sha256: 1dd098483eb1c7ee8e32eb2e99ad1910baefa4b75c3aff3a82f4d78688993b10
+  version: 7.0.1
 ```
 
-These sections declare a helper variable `${{ version }}`, and then specify the package's name
-and version, and the source distribution used to build it. These are going to be pretty standard,
-and you'll see them often in recipes for PyPI packages.
+This section defines helper variables that can be used elsewhere in the recipe. Here, a `version` is
+declared, so that we can update it in one place, and reference elsewhere in the recipe.
+
+```yaml
+package:
+  name: pylast
+  version: ${{ version }}
+```
+
+This section specifies the name and version for the package that is built from this recipe. Note
+that the `${{ version }}` variable specified before is used here.
+
+```yaml
+source:
+- url: https://pypi.org/packages/source/p/pylast/pylast-${{ version }}.tar.gz
+  sha256: 319251236ba5c3e907232aacf1d6a7ff831f2243e85ace6ec6623a552ec2e0eb
+```
+
+This section specifies how to download the source distribution to build. It specifies the URL, again
+using the `${{ version }}` variable to avoid having to constantly update it, and a SHA256 hash used
+to verify its authenticity.
 
 ```yaml
 build:
   script: ${{ PYTHON }} -m pip install .
   noarch: python
+```
 
+Here, two important bits are specified: how to build the package, and that we're dealing with a
+`noarch`, i.e. a pure Python package that does not need to be built separately for different
+platforms. For the former, we're using the special `${{ PYTHON }}` variable that is substituted for
+the correct Python version.
+
+```yaml
 requirements:
   host:
   - python >=3.10
@@ -115,75 +142,90 @@ requirements:
   - pip
   run:
   - python >=3.10
-  # - freezegun  # extra == "tests"
-  # - pytest  # extra == "tests"
+  - httpx >=0.26
+  # - flaky  # extra == "tests"
   # - pytest-cov  # extra == "tests"
+  # - pytest-random-order  # extra == "tests"
+  # - pytest-recording  # extra == "tests"
+  # - pytest >=9 # extra == "tests"
+  # - pyyaml  # extra == "tests"
 ```
 
-These sections specify the command used to build the package, that it is a pure Python (hence
-`noarch`) package and the dependencies needed to build and run it. Note that the generator has left
-a few "extra" dependencies commented out, in case you needed them.
+This section specifies the package's dependencies. These are split into two parts: `host`
+dependencies are packages that are needed to build the package, while `run` dependencies are needed
+to run it once it's installed. Note that the generator also included a number of "extra"
+dependencies that are commented out; this is a hint to us that while these dependencies are not
+normally installed by `pip`, we may find them useful.
 
 ```yaml
 tests:
 - python:
     imports:
-    - humanize
+    - pylast
     pip_check: true
+```
 
+This section specifies how to test the package. In this case, it performs the absolute minimum
+testing expected of Python package: checking if `pylast` can be imported successfully, and running
+`pip check` to verify that the needed dependencies were installed.
+
+```yaml
 about:
-  summary: Python humanize utilities
+  summary: A Python interface to Last.fm and Libre.fm
   description: |
     ...
 ```
 
-These sections specify how to test the built package, and provide additional package information.
-The default test method involves checking if `humanize` can be imported successfully and that `pip
-check` succeeds. Then a lengthy package description is included.
+Finally, the `about` section provides additional package information. Notably, a lengthy
+`description` has been copied from PyPI; if we were to actually contribute the recipe to
+conda-forge, we'd want to replace it with something shorter.
 
 ## Run the test suite
 
-The generated recipe includes absolutely minimal level of package testing. Let's see if we can do
-better than that.
+As noted before, the generatede recipe contained absolute minimum level of testing. Let's try if we
+can enable additional upstream tests.
 
-As noted in the previous section, the package contained a bunch of dependencies marked `tests`.
 The build process should have left the source distribution in `build_artifacts/src_cache`. Let's
 inspect it:
 
 ```
-tar -t -f build_artifacts/src_cache/humanize-4_15_0_1dd09848.tar.gz
+tar -t -f build_artifacts/src_cache/pylast-7_0_1_31925123.tar.gz
 ```
 
-You should be able to see that the source distribution includes a `tests` directory! Let's add a new
-`tests` entry that attempts to run the package's tests. We will use the dependencies from the
-`tests` extra, and since `pytest` is among them, assume that the tests are run via pytest.
+There's a fair number of files contained inside the `tests` directory. These are probably the tests
+we are looking for. Again, open `recipes/pylast/recipe.yaml` in your favorite editor. Locate the
+`tests:` section. We will append a new set of "script tests", i.e. tests consisting of calling
+external commands. We will need to specify three keys:
 
-Again, open `recipes/humanize/reicpe.yaml` in your favorite editor. Locate the `tests:` section, and
-change it to:
+1. Files to include so that the tests can be run. We already found them: the `tests` directory.
+2. Dependencies to install for the test suite. These are the `extra == "tests"` dependencies that
+   the generator left us as a hint. The tested package (and its `run` dependencies) will be added
+   automatically, so we don't need to list it.
+3. The command used to run the test suite. From the `pytest` dependency, we can infer that the
+   `pytest` runner will be a good choice.
+
+To append these three bits, change the `tests:` section to:
 
 ```yaml
 tests:
 - python:
     imports:
-    - humanize
+    - pylast
     pip_check: true
-- requirements:
-    run:
-      - freezegun
-      - pytest
-  script:
-    - pytest
+- script: pytest
   files:
     source:
       - tests
+  requirements:
+    run:
+      - flaky
+      - pytest-recording
+      - pytest >=9
+      - pyyaml
 ```
 
-The new list entry adds a test run that:
-
-- requires `pytest` and `freezegun` packages, in addition to the tested `humanize` package (we are
-  skipping `pytest-cov` dependency, as test coverage isn't significant to us)
-- runs `pytest` as the test script
-- includes `tests` directory from the sources
+Note two changes in the test dependencies: `pytest-cov` and `pytest-random-order` were removed, as
+they are not really necessary to run tests.
 
 Now, try building the package:
 
@@ -195,23 +237,23 @@ You may notice a pytest invocation in the middle of the build output:
 
 ```
  │ ============================= test session starts ==============================
- │ platform linux -- Python 3.14.2, pytest-9.0.2, pluggy-1.6.0
- │ rootdir: $PREFIX/etc/conda/test-files/humanize/1
- │ collected 737 items
- │ tests/test_filesize.py ................................................. [  6%]
- │ .....................                                                    [  9%]
- │ tests/test_i18n.py ..................................................... [ 16%]
- │ ......                                                                   [ 17%]
- │ tests/test_lists.py .......                                              [ 18%]
- │ tests/test_number.py ................................................... [ 25%]
- │ ........................................................................ [ 35%]
- │ ........................................................................ [ 44%]
- │ ........................                                                 [ 48%]
- │ tests/test_time.py ..................................................... [ 55%]
- │ ........................................................................ [ 65%]
- │ ........................................................................ [ 74%]
- │ ........................................................................ [ 84%]
- │ ........................................................................ [ 94%]
- │ .........................................                                [100%]
- │ ============================= 737 passed in 1.24s ==============================
+ │ platform linux -- Python 3.13.11, pytest-9.0.2, pluggy-1.6.0
+ │ rootdir: $PREFIX/etc/conda/test-files/pylast/1
+ │ plugins: anyio-4.12.0, recording-0.13.4, flaky-3.8.1
+ │ collected 147 items
+ │ tests/test_album.py ...........                                          [  7%]
+ │ tests/test_artist.py .............sssss.....                             [ 23%]
+ │ tests/test_country.py ..                                                 [ 24%]
+ │ tests/test_library.py .....                                              [ 27%]
+ │ tests/test_librefm.py ..                                                 [ 29%]
+ │ tests/test_network.py ss............................                     [ 49%]
+ │ tests/test_request.py ......                                             [ 53%]
+ │ tests/test_tag.py ....                                                   [ 56%]
+ │ tests/test_track.py ss.................                                  [ 69%]
+ │ tests/test_user.py ..............x.....................                  [ 93%]
+ │ tests/unicode_test.py .........                                          [100%]
+[...]
+ │ ================== 137 passed, 9 skipped, 1 xfailed in 4.85s ===================
 ```
+
+So the recipe now runs tests and they pass!
