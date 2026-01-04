@@ -2,11 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/news/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2025-12-18T00:00:00.000Z</updated>
+    <updated>2025-12-22T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/news/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[New community meetings schedule for 2026]]></title>
+        <id>https://conda-forge.org/news/2025/12/22/new-meetings-schedule/</id>
+        <link href="https://conda-forge.org/news/2025/12/22/new-meetings-schedule/"/>
+        <updated>2025-12-22T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Starting in 2026, the conda-forge core calls will merge with the conda community calls in a single timeslot. Instead of alternating weeks, from now on, both communities will share the same space every Wednesday. There are two rotating timeslots:]]></summary>
+        <content type="html"><![CDATA[<p>Starting in 2026, the conda-forge core calls will merge with the <a href="https://conda.org/community/calendar" target="_blank" rel="noopener noreferrer" class="">conda community calls</a> in a single timeslot. Instead of alternating weeks, from now on, both communities will share the same space every Wednesday. There are two rotating timeslots:</p>
+<ul>
+<li class="">2PM UTC</li>
+<li class="">5PM UTC</li>
+</ul>
+<p>The first meeting in 2026 will take place on January 7th, at 5PM UTC. For more details consult <a class="" href="https://conda-forge.org/community/meetings/">our calendar</a>.</p>
+<p>The meeting minutes will be available in both conda.org and conda-forge.org, in the usual places.</p>
+<p>This is one of our first steps towards reducing the administrative duplication existing between these overlapping communities.</p>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[macOS SDK directory changed]]></title>
         <id>https://conda-forge.org/news/2025/12/18/osx-sdk-dir/</id>
@@ -377,34 +392,5 @@ fall into this category!</p>
 for their important contributions and exploration of what is possible in the
 Python ecosystem! 👏</p>
 <p>It has been a pleasure to collaborate!</p>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Sunsetting Mambaforge]]></title>
-        <id>https://conda-forge.org/news/2024/07/29/sunsetting-mambaforge/</id>
-        <link href="https://conda-forge.org/news/2024/07/29/sunsetting-mambaforge/"/>
-        <updated>2024-07-29T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[With the Miniforge 23.3.1 release,]]></summary>
-        <content type="html"><![CDATA[<p>With the <a href="https://github.com/conda-forge/miniforge/releases/tag/23.3.1-0" target="_blank" rel="noopener noreferrer" class="">Miniforge 23.3.1 release</a>,
-the Miniforge and Mambaforge installers became essentially <strong>identical</strong>. The only difference
-between the two was their name and, subsequently, the default installation directory.</p>
-<p>Maintaining both installers adds unnecessary burden to our support infrastructure and creates
-confusion among end users. As a result, last year we decided to <em>discourage</em> the usage of
-Mambaforge in favor of Miniforge.</p>
-<p>A year later, we would like to formally sunset Mambaforge. All users are encouraged to switch to
-Miniforge. Remember they contain the same packages, so the only difference is the default
-installation directory.</p>
-<p>The deprecation process will roughly follow this calendar:</p>
-<ul>
-<li class="">August 2024: The Mambaforge installers will warn about the deprecation and make the user wait 30
-seconds before continuing.</li>
-<li class="">October 2024: The Mambaforge installers will refuse to install during several pre-specified date ranges (i.e., <a href="https://en.wikipedia.org/wiki/Brownout_(software_engineering)" target="_blank" rel="noopener noreferrer" class="">"brownouts"</a>) in order to encourage users to switch to Miniforge. These dates are
-<ul>
-<li class="">Every two weeks in October 2024 (2024-10-01, 2024-10-15)</li>
-<li class="">Every ten days in November 2024 (2024-11-01, 2024-11-10, 2024-11-20, 2024-11-30)</li>
-<li class="">Every five days in December 2024 (2024-12-05, 2024-12-10, 2024-12-15, 2024-12-20, 2024-12-25, 2024-12-30, 2024-12-31)</li>
-</ul>
-</li>
-<li class="">January 2025: The Mambaforge installers will stop being built and distributed.</li>
-</ul>]]></content>
     </entry>
 </feed>
