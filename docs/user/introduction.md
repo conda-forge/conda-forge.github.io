@@ -103,7 +103,7 @@ Please refer to [Using multiple channels](tipsandtricks.md#multiple-channels) fo
 
 Anyone can contribute packages to the `conda-forge` channel.
 You don't have to be the upstream maintainer of a package in order to contribute it to conda-forge.
-To learn how to contribute your first package read [the staging process](../maintainer/adding_pkgs.md#creating-recipes).
+To learn how to contribute your first package read [the staging process](../../maintainer/adding_pkgs#the-staging-process).
 
 <a id="how-can-i-give-credit-to-conda-forge"></a>
 
