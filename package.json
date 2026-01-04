@@ -25,6 +25,7 @@
     "chartjs-adapter-moment": "^1.0.1",
     "clsx": "^2.1.1",
     "d3": "^7.9.0",
+    "dagre-d3-es": "^7.0.13",
     "install": "^0.13.0",
     "moment": "^2.29.4",
     "octokit": "^5.0.5",

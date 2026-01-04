@@ -13,6 +13,7 @@ import moment from 'moment';
 import { compare } from '@site/src/components/StatusDashboard/current_migrations';
 import { useSorting, SortableHeader } from '@site/src/components/SortableTable';
 import * as d3 from "d3";
+import DependencyGraph from "@site/src/components/DependencyGraph";
 
 // GitHub GraphQL MergeStateStatus documentation
 // Reference: https://docs.github.com/en/graphql/reference/enums#mergestatestatus
@@ -97,11 +98,15 @@ function formatExactDateTime(timestamp) {
 export default function MigrationDetails() {
   const location = useLocation();
   const { siteConfig } = useDocusaurusContext();
+  const urlParams = new URLSearchParams(location.search);
+  const dependencyParam = urlParams.get("dependency");
+
   const [state, setState] = useState({
-    name: new URLSearchParams(location.search).get("name"),
+    name: urlParams.get("name"),
     details: null,
     redirect: false,
     view: "table",
+    selectedDependency: dependencyParam,
   });
   const toggle = (view) => {
     if (window && window.localStorage) {
@@ -123,6 +128,9 @@ export default function MigrationDetails() {
         console.warn(`error reading from local storage`, error);
       }
     }
+    if (dependencyParam) {
+      view = "dependencies";
+    }
     void (async () => {
       try {
         const url = urls.migrations.details.replace("<NAME>", state.name);
@@ -137,7 +145,8 @@ export default function MigrationDetails() {
     })();
   }, []);
   if (state.redirect) return <Redirect to="/status" replace />;
-  const { details, name, view } = state;
+  const { details, name, view, selectedDependency } = state;
+
   return (
     <Layout
       title={siteConfig.title}
@@ -158,6 +167,14 @@ export default function MigrationDetails() {
                         onClick={() => toggle("table")}
                       >
                         Table
+                      </li>
+                      <li
+                        key="dependencies"
+                        role="tab"
+                        class={["tabs__item", (view == "dependencies" ? "tabs__item--active" : null)].join(" ")}
+                        onClick={() => toggle("dependencies")}
+                      >
+                        Dependencies
                       </li>
                       <li
                         key="graph"
@@ -190,10 +207,17 @@ export default function MigrationDetails() {
                 {(details && details.paused_or_closed === "closed") ?
                   <Admonition type="note">This migration has been closed recently.</Admonition> : null}
                 {details && <Bar details={details} /> || null}
-                {view === "graph" ?
-                  <Graph>{name}</Graph> :
-                  (details && <Table details={details} />)
-                }
+                {(() => {
+                  switch (view) {
+                    case "graph":
+                      return <Graph>{name}</Graph>;
+                    case "dependencies":
+                      return <DependencyGraph details={details} initialSelectedNode={selectedDependency} />;
+                    case "table":
+                    default:
+                      return <Table details={details} />;
+                  }
+                })()}
               </div>
             </div>
             {view === "table" && (
@@ -449,6 +473,8 @@ function Graph(props) {
 }
 
 function Table({ details }) {
+  if (!details) return null;
+
   const defaultFilters = ORDERED.reduce((filters, [status, _, toggled]) => ({ ...filters, [status]: toggled }), {});
   const [filters, setState] = useState(defaultFilters);
   const { sort, previousSort, resort } = useSorting("num_descendants", "descending");
