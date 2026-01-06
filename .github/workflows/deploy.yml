@@ -49,6 +49,7 @@ jobs:
             --exclude 'https://ss64.com/nt/syntax.html'
             --exclude 'https://www.mesa3d.org/'
             --exclude 'https://www.quansight.com/'
+            --exclude 'https://conda-forge.herokuapp.com/status-monitor'
             --exclude '.*/404.html/'
             --exclude '.*,.*'
             --exclude-path './build/community/minutes/'
