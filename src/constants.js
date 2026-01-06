@@ -61,7 +61,7 @@ export const urls = {
     prefix_dev: {
       api: "https://status.prefix.dev/api/getMonitorDetails/status.conda-forge.org?m=798888560",
       link: "https://status.prefix.dev",
-      title: "repo.prefix.dev",
+      title: "conda-forge mirror on prefix.dev",
     },
     quay: {
       api: "https://status.redhat.com/api/v2/status.json",
