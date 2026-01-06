@@ -288,3 +288,136 @@ You may notice a pytest invocation in the middle of the build output:
 ```
 
 So the recipe now runs tests and they pass!
+
+## Lint the recipe
+
+Now let's see if the recipe passes all quality checks. To do this, we're going to use the
+`conda-smithy` tool. Type the following:
+
+```bash
+conda smithy recipe-lint --conda-forge recipes/pylast
+```
+
+This will perform all the basic quality checks, plus additional conda-forge quality checks, on the
+recipe in `recipes/pylast`. This is going to yield some suggestions:
+
+```
+recipes/pylast has some lint:
+  The homepage item is expected in the about section.
+recipes/pylast also has some suggestions:
+  `noarch: python` recipes should usually follow the syntax in our [documentation](https://conda-forge.org/docs/maintainer/knowledge_base/#noarch-python) for specifying the Python version.
+       - For the `host` section of the recipe, you should usually use the pin python ${{ python_min }}.* for the `python` entry.
+       - For the `run` section of the recipe, you should usually use the pin python >=${{ python_min }} for the `python` entry.
+       - For the `tests[].python.python_version` or `tests[].requirements.run` section of the recipe, you should usually use the pin `python_version: ${{ python_min }}.*` or `python ${{ python_min }}.*` for the `python_version` or `python` entry.
+       - If the package requires a newer Python version than the currently supported minimum version on `conda-forge`, you can override the `python_min` variable by adding a Jinja2 `set` statement at the top of your recipe (or using an equivalent `context` variable for v1 recipes).
+```
+
+Let's address these one by one. Again, open the recipe file `recipes/pylast/recipe.yaml` in your
+favorite text editor.
+
+The first message is pointing out that no `homepage` is defined in the `about:` section. And indeed,
+there is none, just the `repository` URL. If we look at [pylast project page on
+PyPI](https://pypi.org/project/pylast/), we see that the "Homepage" link points to the GitHub
+repository. So we can just copy that, changing the `about:` section to:
+
+```yaml
+about:
+  summary: A Python interface to Last.fm and Libre.fm
+  license: Apache-2.0
+  license_file:
+    - LICENSE.txt
+    - COPYING
+  repository: https://github.com/pylast/pylast
+  homepage: https://github.com/pylast/pylast
+```
+
+The other message is more complex. If you look at our requirements section, you'd notice that it's
+listing `python >=3.10`. The conda-forge recommendation is to use a variable rather than inline
+version. To resolve that, let's start by adding a new variable to the `context:` section on top.
+It will now look like:
+
+```yaml
+context:
+  name: pylast
+  version: 7.0.1
+  python_min: "3.10"
+```
+
+Note that we're adding double quotes around the version number. This is to prevent the YAML format
+from misinterpreting the version string as a floating-point number.
+
+Now, let's modify the `requirements:` section to use the new variable, as recommended in the message
+given by the linter. It will now look like:
+
+```yaml
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - hatch-vcs
+    - hatchling >=1.27
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - httpx >=0.26  #
+```
+
+Finally, let's add the dependency to the `tests` section, as suggested by the linter. It will now
+look like:
+
+```yaml
+tests:
+  - python:
+      imports:
+        - pylast
+      pip_check: true
+      python_version: ${{ python_min }}.*
+  - script: pytest
+    files:
+      source:
+        - tests
+    requirements:
+      run:
+        - python ${{ python_min }}.*
+        - flaky
+        - pytest-recording
+        - pytest >=9
+        - pyyaml
+```
+
+With these changes applied, let's run the linter again:
+
+```bash
+conda-smithy recipe-lint --conda-forge recipes/pylast
+```
+
+It should approve of our modifications, saying:
+
+```
+recipes/pylast is in fine form
+```
+
+Let's build it again, to make sure we did not break anything:
+
+```bash
+python build-locally.py
+```
+
+## Commit the changes
+
+Now that everything is ready, let's commit the changes into the repository. To do that, type:
+
+```bash
+git add recipes/pylast/recipe.yaml
+git commit
+```
+
+Git will start a text editor, asking you to provide a commit message for the change. At the very
+minimum, let's say what we did:
+
+```
+Add a recipe for pylast package
+```
+
+At this point, the recipe is ready for submission. Normally, you'd fork the GitHub repository and
+create a pull request. However, we aren't going to be doing that now, as pylast is already packaged
+in conda-forge.
