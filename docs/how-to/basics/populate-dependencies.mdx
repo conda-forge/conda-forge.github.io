@@ -265,3 +265,23 @@ libbzip2 = cc.find_library('bz2', required : get_option('bzip2'))
 ```
 
 search for `bz2` library, provided by `bzip2` package.
+
+## Python
+
+### Package metadata
+
+The primary source of dependency information for Python packages is the generated dependency
+metadata. It can be found in the built wheels, in `*.dist-info/METADATA` file, and in source
+distributions as `PKG-INFO` file. The relevant entries are `Requires-Dist`. For example, the
+following entries:
+
+```
+Requires-Dist: tomli; python_version < "3.11"
+Requires-Dist: tomli-w
+```
+
+indicate that `tomli` package is required for Python 3.10 and older, and `tomli-w` is required
+unconditionally.
+
+Note that package metadata includes only runtime (`run`) dependencies and not build-time (`host`)
+dependencies.
