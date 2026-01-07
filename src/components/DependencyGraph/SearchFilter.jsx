@@ -46,7 +46,7 @@ export default function SearchFilter({
     // Detect when user selects an option from datalist
     const value = e.target.value;
     // If the input value exactly matches one of our filtered nodes, it was selected from datalist
-    if (filteredNodes.includes(value) && value !== filterTerm) {
+    if ((filteredNodes.includes(value) && value !== filterTerm) || (value === "")) {
       onSelectNode(value);
       // Keep filter term - don't clear it so user sees the selected node in the input
     }
