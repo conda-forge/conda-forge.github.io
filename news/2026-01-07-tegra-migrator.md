@@ -7,6 +7,6 @@ earlier. Non-NVIDIA feedstock maintainers may now build Tegra variants for their
 packages if they choose by following [these
 directions](https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/doc/recipe_guide.md#building-for-arm-tegra-devices).
 
-This special Tegra variant is only releveant for packages still targeting CUDA 12.9
+This special Tegra variant is only relevant for packages still targeting CUDA 12.9
 because starting with CUDA 13.0, supported Tegra devices are SBSA-compliant, so they
 do not need to be targeted separately.
