@@ -22,7 +22,20 @@ git pull upstream main
 git checkout -b v3.10.x
 ```
 
-Add an empty commit with the `[ci skip]` message so the new branch does not result in a new build process, and push it to `upstream`. This is one of the rare ocassions where you must push directly to the feedstock, not your fork!
+The above is for branching off from the `main` branch directly; in many cases though you may want
+to branch off at an earlier point of the repo history. For example, if the `main` branch is already
+on version 3.11 or beyond, but you want to publish a new patch release 3.10.18. In this case, you
+should go `https://github.com/conda-forge/<your_pkg>-feedstock/commits/main/` and find the commit
+for the last _published_ builds of the 3.10.x series (usually: the last merge before any of the
+commits from the PR that did the update to 3.11). Then, instead of `git checkout -b v3.10.x`, do:
+
+```bash
+git checkout <sha_hash_of_commit_from_above> -b v3.10.x
+```
+
+In either case, add an empty commit with the `[ci skip]` message so that the act of pushing the new
+branch does not result in a new build process, and push it to `upstream`. This is one of the rare
+ocassions where you must push directly to the feedstock, not your fork!
 
 ```bash
 git commit --allow-empty -m "[ci skip] Create new branch for v3.10.x release series"
