@@ -163,6 +163,15 @@ For context, installing the TensorFlow 2.7.0 CUDA-enabled variant, `tensorflow=2
 
 ## Using PyPy as an interpreter
 
+:::warning
+
+As of August 2024, [PyPy support in conda-forge has been sunset](/news/2024/08/14/sunsetting-pypy/).
+It still may be possible to create an environment using an old version of PyPy, but (with the
+exception of noarch packages still compatible with python 3.9), you will be constrained to the
+packages that were built for PyPy until mid-2024.
+
+:::
+
 The `conda-forge` channel supports creating and installing packages into
 environments using the [PyPy interpreter](https://www.pypy.org). Many packages are already
 available. You need to enable the `conda-forge` channel and use
@@ -172,11 +181,6 @@ the `pypy` identifier when creating your environment:
 $ conda create -c conda-forge -n my-pypy-env pypy python=3.8
 $ conda activate my-pypy-env
 ```
-
-Currently supported python versions are 3.8 and 3.9. Support for `pypy3.7`
-has been dropped. While you can still create a python 3.7 environment, you
-you will not be getting updates as new package versions are released (including
-pypy itself).
 
 :::note
 
