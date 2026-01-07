@@ -29,15 +29,21 @@ function Status({ api, link, title }) {
   const status = ({
     OPERATIONAL,
     "Everything is looking good": OPERATIONAL,
-    "operational": OPERATIONAL
+    "operational": OPERATIONAL,
+    "success": OPERATIONAL
   })[state.status] || state.status;
   const className = "badge " +
     (status === OPERATIONAL ? "badge--success" : "badge--warning")
   useEffect(() => {
     void (async () => {
       try {
-        const parsed = (await (await fetch(api)).json()).status;
-        const status = typeof parsed === "object" ? parsed.description : parsed;
+        const json = (await (await fetch(api)).json());
+        const status =
+          typeof json.status === "object"      // support StatusPage API
+            ? json.status.description
+            : typeof json.monitor === "object" // support UptimeRobot API
+              ? json.monitor.statusClass
+              : json.status || "unknown";
         setState({ status });
       } catch (error) {
         console.warn(`error fetching data for ${title} – ${api}`, error);

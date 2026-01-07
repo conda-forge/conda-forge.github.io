@@ -58,6 +58,11 @@ export const urls = {
       link: "https://ci-status.quansight.dev/",
       title: "Open GPU Server",
     },
+    prefix_dev: {
+      api: "https://status.prefix.dev/api/getMonitorDetails/status.conda-forge.org?m=798888560",
+      link: "https://status.prefix.dev",
+      title: "conda-forge mirror on prefix.dev",
+    },
     quay: {
       api: "https://status.redhat.com/api/v2/status.json",
       link: "https://status.redhat.com/",
