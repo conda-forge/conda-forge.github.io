@@ -284,4 +284,104 @@ indicate that `tomli` package is required for Python 3.10 and older, and `tomli-
 unconditionally.
 
 Note that package metadata includes only runtime (`run`) dependencies and not build-time (`host`)
-dependencies.
+dependencies. Extra dependencies are listed as well, and they are decorated with an `extra`
+environment marker, for example:
+
+```
+Requires-Dist: redis>=3.0.0; extra == "cache"
+```
+
+indicates that the `cache` extra requires `redis` package, no older than 3.0.0.
+
+### pyproject.toml
+
+Modern Python packages specify their metadata in a `pyproject.toml` file in their source
+distribution and repositories. The standardized format is specified in [pyproject.toml
+specification](https://packaging.python.org/en/latest/specifications/pyproject-toml/), though some
+packages may be using older build systems that use custom metadata format (Flit &lt;3.1, Poetry
+&lt;2). Some packages may also be using `pyproject.toml` to declare other metadata, while keeping
+project metadata elsewhere.
+
+In `pyproject.toml`:
+
+- Build-time (`host`) dependencies are listed in `build-system.requires` table. Note that some
+  dependencies may be extraneous, in particular `wheel` is almost always unnecessary.
+- Runtime (`run`) dependencies are listed in `project.dependencies`.
+- Optional ("extra") runtime dependencies are listed in `project.optional-dependencies` table.
+- Additional dependencies may also be listed in `dependency-groups`, per the [Dependency
+  Groups](https://packaging.python.org/en/latest/specifications/dependency-groups/) specification.
+
+Test dependencies are often listed either as an "extra" or a dependency group.
+
+For example:
+
+```toml
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+dependencies = ["lxml", "beautifulsoup4"]
+
+[project.optional-dependencies]
+cache = ["redis>=3.0.0"]
+
+[dependency-groups]
+test = ["pytest>7"]
+```
+
+This corresponds to `host` dependency on `setuptools` (note unnecessary `wheel` dependency), `run`
+dependencies on `lxml` and `beautifulsoup4`, and possibly `run` dependency on `redis>=3.0.0` if the
+optional dependency is desired. Tests additionally require `pytest>7`.
+
+### setup.cfg and setup.py
+
+Some projects using the setuptools build system may be declaring dependencies in `setup.cfg` and/or
+`setup.py` files instead. The former uses a special format based on `configparser`, with
+dependency-related keys in the `[options]` section. The latter is a Python script, and
+dependency-related options are passed as keyword arguments to `setuptools.setup()` function call.
+
+In both cases, `install_requires` to list `run` dependencies, and `extras_require` to list groups of
+extra dependencies. Sometimes `setup_requires` is used to list `host` dependencies, in other cases
+they are listed in `pyproject.toml` instead. Test dependencies are usually listed as an "extra",
+though old packages may use `tests_require` instead.
+
+For example, the following `setup.cfg` file:
+
+```
+[options]
+install_requires =
+  numpy >= 1.12.0
+  ruamel.yaml >= 0.15.34
+
+[options.extras_require]
+hdf5 = h5py
+pandas = pandas
+```
+
+specifies `run` dependencies on `numpy` and `ruamel.yaml`, and optional runtime dependencies on
+`h5py` and `pandas`.
+
+The following `setup.py` snippet:
+
+```python
+
+setup(
+  install_requires=[
+    "Twisted>=17.5",
+  ],
+  extras_require={
+    "autoscaler": [
+      "txzookeeper",
+    ],
+  },
+  tests_require=[
+    "mock",
+  ],
+  ...
+)
+```
+
+specifies `run` dependency on `Twisted>=17.5`, optional runtime dependency on `txzookeeper`, and a
+test dependency on `mock`. Note that since `setup.py` are Python scripts, they can use arbitrary
+Python logic to obtain and pass the values.
