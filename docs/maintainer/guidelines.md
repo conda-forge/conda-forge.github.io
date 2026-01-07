@@ -168,7 +168,7 @@ For the Python language, conda-forge aims to keep package builds active and avai
 However, the support for the oldest `3.{n}` version may be disabled a few months before it reaches its end-of-life, once migration for the `3.{n+5}rc` starts.
 Whenever Python 4.0 comes out we'll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously.
 Fortunately, we can punt on that for now.
-The current policy can be found in [python-feedstock#794](https://github.com/conda-forge/python-feedstock/issues/794).
+The current de facto policy can be found in [python-feedstock#794](https://github.com/conda-forge/python-feedstock/issues/794).
 
 <a id="reviewer-guidelines"></a>
 
