@@ -4,10 +4,26 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/news/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Mon, 22 Dec 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 07 Jan 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[NVIDIA Tegra Migrator Ready for General Use]]></title>
+            <link>https://conda-forge.org/news/2026/01/07/tegra-migrator/</link>
+            <guid>https://conda-forge.org/news/2026/01/07/tegra-migrator/</guid>
+            <pubDate>Wed, 07 Jan 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Tegra devices are system on chip (SOC) devices used in robotics and other mobile]]></description>
+            <content:encoded><![CDATA[<p>Tegra devices are system on chip (SOC) devices used in robotics and other mobile
+applications. They are a Linux ARM (aarch64) platform variant which must be targeted
+separately from Server Base System Architecture (SBSA) ARM when compiling for CUDA 12.x and
+earlier. Non-NVIDIA feedstock maintainers may now build Tegra variants for their CUDA 12.9
+packages if they choose by following <a href="https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/doc/recipe_guide.md#building-for-arm-tegra-devices" target="_blank" rel="noopener noreferrer" class="">these
+directions</a>.</p>
+<p>This special Tegra variant is only relevant for packages still targeting CUDA 12.9
+because starting with CUDA 13.0, supported Tegra devices are SBSA-compliant, so they
+do not need to be targeted separately.</p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[New community meetings schedule for 2026]]></title>
             <link>https://conda-forge.org/news/2025/12/22/new-meetings-schedule/</link>
@@ -354,45 +370,6 @@ section of your recipe if you need them. At first, <code>pip</code> for versions
 However, after the completion of the Python 3.13 migration, we will remove these dependencies from <code>pip</code> for all
 versions of Python. Follow GitHub issue <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2252" target="_blank" rel="noopener noreferrer" class="">#2252</a>
 for more information and updates.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Sunsetting PyPy support]]></title>
-            <link>https://conda-forge.org/news/2024/08/14/sunsetting-pypy/</link>
-            <guid>https://conda-forge.org/news/2024/08/14/sunsetting-pypy/</guid>
-            <pubDate>Wed, 14 Aug 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[TL;DR: We are planning to remove PyPy from conda-forge feedstock recipes in a]]></description>
-            <content:encoded><![CDATA[<p>TL;DR: We are planning to remove PyPy from conda-forge feedstock recipes in a
-few weeks (and thus to stop building new releases of packages for PyPy), unless
-there is substantial enough interest to justify the continued maintenance effort.</p>
-<p>Conda-forge introduced <a href="https://conda-forge.org/blog/2020/03/10/pypy/" target="_blank" rel="noopener noreferrer" class="">support</a>
-for <a href="https://pypy.org/index.html" target="_blank" rel="noopener noreferrer" class="">PyPy</a> as an alternative implementation of
-Python about 4.5 years ago.</p>
-<p>In that time we have worked hard together with developers from PyPy to provide
-easily installable pre-compiled builds of the most common libraries also for PyPy.</p>
-<p>As a very positive side-effect, the infrastructure of conda-forge is now fully
-equipped to deal with alternative implementations of the Python interpreter,
-which will continue to be useful (for example for supporting the experimental
-free-threading builds of CPython 3.13).</p>
-<p>However, due to a lack of resources – both in terms of expertise for PyPy, as
-well as available time of those who can help – the conda-forge builds for PyPy
-packages have been in minimal maintenance for a while (for example, we never
-migrated for PyPy 3.10, nor did PyPy participate in the NumPy 2.0 migration).</p>
-<p>As a consequence, we unfortunately need to announce that we are sunsetting
-support for PyPy. This means we will stop the long-running migrator to add
-PyPy to new feedstocks, and we will begin removing PyPy builds from feedstocks
-at the latest on October 1st, or when we begin migrating for CPython 3.13
-(whichever comes earlier).</p>
-<p>If you are depending on PyPy builds in some way, please let us know about the
-specifics of your situation in the discussion issue for the
-<a href="https://github.com/conda-forge/conda-forge.github.io/issues/2255" target="_blank" rel="noopener noreferrer" class="">RFC</a>.</p>
-<p>There is a possibility that we receive the necessary support from the PyPy
-developers, if it turns out that enough people depend on PyPy support in
-conda-forge for it to be worth their time. As such, please speak up if you
-fall into this category!</p>
-<p>Finally, no matter the outcome, we want to congratulate the PyPy developers
-for their important contributions and exploration of what is possible in the
-Python ecosystem! 👏</p>
-<p>It has been a pleasure to collaborate!</p>]]></content:encoded>
         </item>
     </channel>
 </rss>
