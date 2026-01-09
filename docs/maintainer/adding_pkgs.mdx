@@ -282,7 +282,7 @@ It defines everything that is required to build and use the package.
 Both files use the [yaml](https://en.wikipedia.org/wiki/YAML) format, augmented with [Jinja](http://jinja.pocoo.org/) templating.
 
 The full reference of the formats can be found in the following sources:
-- `recipe.yaml`: [rattler-build: the recipe spec](https://rattler-build.prefix.dev/latest/reference/recipe_file/)
+- `recipe.yaml`: improved recipe format as specified by [CEP 13](https://github.com/conda/ceps/blob/main/cep-0013.md) & [CEP 14](https://github.com/conda/ceps/blob/main/cep-0014.md). As of early 2026, it is only implemented by rattler-build, which also provides a more readable [overview](https://rattler-build.prefix.dev/latest/reference/recipe_file).
 - `meta.yaml`: [conda-build: defining metadata (meta.yaml)](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html)
 
 In the following, we highlight particularly important and conda-forge specific information and
@@ -403,7 +403,7 @@ A full description of selectors is in the [rattler-build](https://rattler-build.
 In many cases, explicit build scripts are not required.
 Pure Python packages almost never need them.
 
-The build scripts are named:
+The default names for the build scripts are
 
 - `build.sh` for Unix
 - `build.bat` for Windows, in v1 recipes
@@ -602,7 +602,7 @@ package:
 requirements:
   # [...]
   run_constrained:
-    - amazing-db ==9999999999
+    - amazing-db <0.0a0
 ```
 
 ```yaml
@@ -1419,6 +1419,7 @@ Jinja expressions serve following purposes in the recipe file:
   ```yaml
   requirements:
     build:
+      - ${{ stdlib('c') }}
       - ${{ compiler('c') }}
       - ${{ compiler('cxx') }}
     host:
