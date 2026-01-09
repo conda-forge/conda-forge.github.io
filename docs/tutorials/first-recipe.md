@@ -201,8 +201,7 @@ extra:
 ```
 
 Finally, the `extra` section specifies the package maintainers. It will normally contain your user
-name. If it's different from your GitHub username, you will want to update it before submitting a
-recipe.
+Github user name.
 
 ## Run the test suite
 
