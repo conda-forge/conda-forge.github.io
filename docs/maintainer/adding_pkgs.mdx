@@ -1223,11 +1223,23 @@ build:
 
 Then, include the tool as a build time dependency.
 
+<RecipeTabs>
+
 ```yaml
 requirements:
   build:
+    - {{ compiler('go') }}
     - go-licenses
 ```
+
+```yaml
+requirements:
+  build:
+    - ${{ compiler('go') }}
+    - go-licenses
+```
+
+</RecipeTabs>
 
 Finally, make sure that the generated file is included in the recipe.
 
