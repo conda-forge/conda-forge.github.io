@@ -647,12 +647,11 @@ However, this is no reason for the recipe to not have tests. At the very least,
 we want to verify that the package has installed the desired files in the desired
 locations. This is called existence testing.
 
-Existence testing can be accomplished using `script` tests in v1 recipes, or `commands` subsection
-of the `test` section of v0 recipe.
+In v1 recipes, existence testing can be accomplished `package_contents` tests. In v0 recipes, it
+needs to be done manually in the `commands` subsection of the `test` section.
 
-On posix systems, use the `test` utility and the `$PREFIX` variable.
-
-On Windows, use the `exist` command. See below for an example.
+On POSIX systems, use the `test` utility and the `$PREFIX` variable. On Windows, use the `exist`
+command. See below for an example.
 
 Simple existence testing example:
 
@@ -661,17 +660,19 @@ Simple existence testing example:
 ```yaml
 test:
   commands:
-    - test -f $PREFIX/lib/libboost_log$SHLIB_EXT  # [unix]
-    - if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1  # [win]
+    - test -f $PREFIX/lib/libboost_log$SHLIB_EXT        # [unix]
+    - if not exist %LIBRARY_BIN%\\boost_log.dll exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\boost_log.lib exit 1  # [win]
 ```
 
 ```yaml
 tests:
-  - script:
-      - if: unix
-        then: test -f $PREFIX/lib/libboost_log$SHLIB_EXT
-      - if: win
-        then: if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1
+  - package_contents:
+      lib:
+        # $PREFIX/lib/libboost_log.so on Linux
+        # $PREFIX/lib/libboost_log.dylib on macOS
+        # %LIBRARY_BIN%/boost_log.dll and %LIBRARY_LIB%/boost_log.lib on Windows
+        - boost_log
 ```
 
 </RecipeTabs>
