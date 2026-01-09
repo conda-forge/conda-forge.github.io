@@ -1388,7 +1388,7 @@ Jinja expressions serve following purposes in the recipe file:
 
   </RecipeTabs>
 
-- They can call [rattler-build](https://rattler-build.prefix.dev/latest/reference/jinja/) or [conda-build functions](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#conda-build-specific-jinja2-functions) for automatic code generation. Examples are the compilers, cdt packages or the `pin_compatible` function.
+- They can call [rattler-build](https://rattler-build.prefix.dev/latest/reference/jinja/) or [conda-build functions](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#conda-build-specific-jinja2-functions) for automatic code generation. Examples are the compilers or the `pin_compatible` function.
 
   <RecipeTabs>
 
@@ -1397,8 +1397,6 @@ Jinja expressions serve following purposes in the recipe file:
     build:
       - {{ compiler('c') }}
       - {{ compiler('cxx') }}
-      - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
-      - {{ cdt('libx11-devel') }}          # [linux]
   ```
 
   ```yaml
@@ -1406,10 +1404,6 @@ Jinja expressions serve following purposes in the recipe file:
     build:
       - ${{ compiler('c') }}
       - ${{ compiler('cxx') }}
-      - if: linux
-        then:
-          - ${{ cdt('xorg-x11-proto-devel') }}
-          - ${{ cdt('libx11-devel') }}
   ```
 
   </RecipeTabs>
