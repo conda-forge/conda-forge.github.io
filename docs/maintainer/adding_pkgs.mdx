@@ -806,7 +806,8 @@ test:
     - tests
     - test_pkg_integration.py
   commands:
-    - pytest tests/ test_pkg_integration.py
+    - pytest tests/
+    - pytest test_pkg_integration.py
 ```
 
 ```yaml
@@ -822,7 +823,8 @@ tests:
         - tests
         - test_pkg_integration.py
     script:
-      - pytest tests/ test_pkg_integration.py
+      - pytest tests/
+      - pytest test_pkg_integration.py
 ```
 
 </RecipeTabs>
