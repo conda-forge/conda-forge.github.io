@@ -742,7 +742,7 @@ Tip: use `pip list` to show what `pip check` "sees".
 #### Running unit tests
 
 The trick here is that there are multiple ways to run unit tests in Python,
-including nose, pytest, etc.
+including pytest, etc.
 
 Also, some packages install the tests with the package, and thus they can be
 run in place, while others keep the tests with the source code, and thus can
@@ -754,7 +754,7 @@ not be run straight from an installed package.
 
 Sometimes there are packages required to run the tests that are not required
 to simply use the package. This is usually a test-running framework, such as
-nose or pytest. You can ensure that it is included by adding it to requirements
+pytest. You can ensure that it is included by adding it to requirements
 in the test stanza:
 
 <RecipeTabs>
