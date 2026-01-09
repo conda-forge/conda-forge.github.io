@@ -944,8 +944,7 @@ can be successfully imported. This is accomplished with:
 ```yaml
 test:
   commands:
-    - $R -e "library('PackageName')"           # [not win]
-    - "\"%R%\" -e \"library('PackageName')\""  # [win]
+    - R -e "library('PackageName')"
 ```
 
 ```yaml
@@ -976,10 +975,8 @@ test:
   source_files:
     - tests/
   commands:
-    - $R -e "library('PackageName')"                                                  # [not win]
-    - $R -e "testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)"           # [not win]
-    - "\"%R%\" -e \"library('PackageName')\""                                         # [win]
-    - "\"%R%\" -e \"testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)\""  # [win]
+    - R -e "library('PackageName')"
+    - R -e "testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)"
 ```
 
 ```yaml
@@ -1051,8 +1048,7 @@ the individual tests. In that case, one can instead test the
 ```yaml
 test:
   commands:
-    - $R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed', stop_on_failure=TRUE)"           # [not win]
-    - "\"%R%\" -e \"testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed', stop_on_failure=TRUE)\""  # [win]
+    - R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed', stop_on_failure=TRUE)"
 ```
 
 ```yaml
