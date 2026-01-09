@@ -612,12 +612,13 @@ package:
 requirements:
   # [...]
   run_constraints:
-    - amazing-db ==9999999999
+    - amazing-db <0.0a0
 ```
 
 </RecipeTabs>
 
-In this example, `awesome-db` cannot be installed together with `amazing-db` as there is no package `amazing-db-9999999999`.
+In this example, `awesome-db` cannot be installed together with `amazing-db` as there cannot be
+an `amazing-db <0.0a0` package.
 
 <a id="testing-in-recipes"></a>
 
@@ -1397,6 +1398,7 @@ Jinja expressions serve following purposes in the recipe file:
     build:
       - {{ compiler('c') }}
       - {{ compiler('cxx') }}
+      - {{ stdlib('c') }}
   ```
 
   ```yaml
@@ -1404,6 +1406,7 @@ Jinja expressions serve following purposes in the recipe file:
     build:
       - ${{ compiler('c') }}
       - ${{ compiler('cxx') }}
+      - ${{ stdlib('c') }}
   ```
 
   </RecipeTabs>
@@ -1417,6 +1420,7 @@ Jinja expressions serve following purposes in the recipe file:
     build:
       - {{ compiler('c') }}
       - {{ compiler('cxx') }}
+      - {{ stdlib('c') }}
     host:
       - python
       - numpy
@@ -1427,9 +1431,9 @@ Jinja expressions serve following purposes in the recipe file:
   ```yaml
   requirements:
     build:
-      - ${{ stdlib('c') }}
       - ${{ compiler('c') }}
       - ${{ compiler('cxx') }}
+      - ${{ stdlib('c') }}
     host:
       - python
       - numpy
