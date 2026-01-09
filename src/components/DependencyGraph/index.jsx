@@ -16,7 +16,7 @@ import {
   applyHighlight,
   createZoomedGraphData,
   getNodeIdFromSvgElement
-} from "@site/src/utils/migrationGraphUtils";
+} from "./migrationGraphUtils";
 
 const LARGE_GRAPH_THRESHOLD = 1000;
 
