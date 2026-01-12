@@ -98,7 +98,7 @@ library versions to be compatible in the Application Binary Interface (ABI) expo
 
 In conda-forge, dynamic linking to libraries provided by conda-forge packages is strongly preferred. Many of
 the concerns related to dynamic linking do not apply here, as proper packaging practices
-ensure that library dependencies are installed in compatible versions.
+ensure that library dependencies are annotated and installed in compatible versions.
 
 ## Development files
 
