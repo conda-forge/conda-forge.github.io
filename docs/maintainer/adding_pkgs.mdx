@@ -106,7 +106,7 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
    go to the package description on [PyPI](https://pypi.org) from which you
    can directly copy the SHA256.
 9. Be sure to fill in the `test` section. The simplest test will simply
-   test that the top-level package or module can be imported, as described in the example. 
+   test that the top-level package or module can be imported, as described in the example.
    Some projects have an empty top-level package; in those cases, make sure to select also
    some other modules that do contain runnable code.
 10. Remove all irrelevant comments in the recipe file.
@@ -126,7 +126,7 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 #### Checklist
 
 - Ensure that the license has the right case and that the license is correct. Note that case sensitive inputs are required (e.g. `Apache-2.0` rather than `APACHE 2.0`). Using SPDX identifiers for license field is recommended. (see [SPDX Identifiers and Expressions](#spdx-identifiers-and-expressions))
-- Ensure that you have included a license file if your license requires one – most do. (see [here](https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55))
+- Ensure that you have included a license file if your license requires one – most do. (see [v0 example](https://github.com/conda-forge/staged-recipes/blob/f12772fa1d8c71c1028c2a41ef41c8278520ae5b/recipes/example/meta.yaml#L84-L88) or [v1 example](https://github.com/conda-forge/staged-recipes/blob/f12772fa1d8c71c1028c2a41ef41c8278520ae5b/recipes/example-v1/recipe.yaml#L88-L92))
 - In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
 - Make sure that all tests pass successfully at least on your development machine.
 - Recommended: run the test locally on your source code to ensure the recipe works locally (see [Running tests locally for staged recipes](#running-tests-locally-for-staged-recipes)).
