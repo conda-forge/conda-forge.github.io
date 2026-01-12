@@ -719,7 +719,7 @@ tests:
 </RecipeTabs>
 
 Note that `package_name` is the name imported by Python;
-not necessarily the name of the conda package (they are sometimes different).
+not necessarily the name of the conda package (they are sometimes different), or even the wheel name.
 
 Testing for an import will catch the bulk of the packaging errors, generally
 including the presence of dependencies. However, it does not assure that the
@@ -758,7 +758,7 @@ not be run straight from an installed package.
 
 Sometimes there are packages required to run the tests that are not required
 to simply use the package. This is usually a test-running framework, such as
-pytest. You can ensure that it is included by adding it to requirements
+`pytest`. You can ensure that it is included by adding it to requirements
 in the test stanza:
 
 <RecipeTabs>
@@ -895,7 +895,7 @@ tests:
 
 #### Command Line Utilities
 
-If a python package installs command line utilities, you probably want to test that
+If a Python package installs command line utilities, you probably want to test that
 they were properly installed:
 
 <RecipeTabs>
@@ -1032,7 +1032,7 @@ present and needed for specific tests.
 The default R build procedure on conda-forge will not include the
 `tests/` directory in the final build. While it is possible to do this
 (via an `--install-tests` flag), it is preferable to use the
-`files.source` or `source_files` keys to copy the tests for the
+`files.source` or `source_files` keys (for `recipe.yaml` or `meta.yaml`, respectively) to copy the tests for the
 testing phase only.
 
 Finally, one uses the `testthat::test_file()` function to test the
