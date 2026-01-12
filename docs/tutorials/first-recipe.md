@@ -56,7 +56,7 @@ Let's try to create a recipe for [pylast 7.0.1](https://pypi.org/project/pylast/
 is a PyPI package, we can start with an automatically generated recipe. We'll need to:
 
 1. Create a git branch for our work, so that the `main` branch remains intact.
-2. Run `rattler-build generate-recipe` in the `recipes` directory.
+2. Run `grayskull` to create the recipe.
 
 Type in the terminal:
 
