@@ -146,7 +146,8 @@ a package:
 ```yaml
 build:
   ignore_run_exports:
-    # 'vs' run export left
+    # 'vs2022_win-64' run-exports ['ucrt', 'vc', 'vc14_runtime']
+    # we want to ignore everything but 'vc'
     - ucrt
     - vc14_runtime
 
@@ -163,7 +164,8 @@ requirements:
     - ${{ stdlib("c") }}
   ignore_run_exports:
     by_name:
-      # 'vs' run export left
+      # 'vs2022_win-64' run-exports ['ucrt', 'vc', 'vc14_runtime']
+      # we want to ignore everything but 'vc'
       - ucrt
       - vc14_runtime
 ```
