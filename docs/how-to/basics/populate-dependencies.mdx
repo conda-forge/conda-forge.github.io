@@ -185,36 +185,6 @@ requirements:
 This section is focused on build systems that are not limited to a specific ecosystem, but include
 support for multiple programming languages.
 
-### GNU autoconf
-
-[Autoconf](https://www.gnu.org/software/autoconf/) is a macro-based generator for `configure`
-scripts. As these scripts are often used to find package's dependencies, they often serve as a good
-starting point for checking dependencies. The input file is called `configure.ac` (or `configure.in`
-in very old scripts).
-
-Unfortunately, the methods used to check for dependencies can vary a lot, and in some cases the
-checks could be deferred to separate `.m4` files. However, common macros to look for are:
-
-- `PKG_CHECK_MODULES` to search for pkg-config packages
-- `AC_CHECK_HEADER` and `AC_CHECK_HEADERS` to search for include files
-- `AC_CHECK_LIB` and `AC_SEARCH_LIBS` to search for libraries
-- `AC_CHECK_PROG`, `AC_PATH_PROG` and similar, to search for programs (usually indicating a `build`
-  dependency)
-
-For example:
-
-```
-PKG_CHECK_MODULES(LIBXML2_PC, [libxml-2.0])
-```
-
-indicates a dependency on `libxml-2.0.pc` file, provided by `libxml2`, whereas:
-
-```
-AC_CHECK_LIB(bz2, BZ2_bzDecompressInit)
-```
-
-check for `bz2` library (e.g. `libbz2.so`), provided by `bzip2`.
-
 ### CMake
 
 [CMake](https://cmake.org/) is a build system focused on building C++ code. Dependency checks are
@@ -275,6 +245,36 @@ libbzip2 = cc.find_library('bz2', required : get_option('bzip2'))
 ```
 
 search for `bz2` library, provided by `bzip2` package.
+
+### GNU autoconf
+
+[Autoconf](https://www.gnu.org/software/autoconf/) is a macro-based generator for `configure`
+scripts. As these scripts are often used to find package's dependencies, they often serve as a good
+starting point for checking dependencies. The input file is called `configure.ac` (or `configure.in`
+in very old scripts).
+
+Unfortunately, the methods used to check for dependencies can vary a lot, and in some cases the
+checks could be deferred to separate `.m4` files. However, common macros to look for are:
+
+- `PKG_CHECK_MODULES` to search for pkg-config packages
+- `AC_CHECK_HEADER` and `AC_CHECK_HEADERS` to search for include files
+- `AC_CHECK_LIB` and `AC_SEARCH_LIBS` to search for libraries
+- `AC_CHECK_PROG`, `AC_PATH_PROG` and similar, to search for programs (usually indicating a `build`
+  dependency)
+
+For example:
+
+```
+PKG_CHECK_MODULES(LIBXML2_PC, [libxml-2.0])
+```
+
+indicates a dependency on `libxml-2.0.pc` file, provided by `libxml2`, whereas:
+
+```
+AC_CHECK_LIB(bz2, BZ2_bzDecompressInit)
+```
+
+check for `bz2` library (e.g. `libbz2.so`), provided by `bzip2`.
 
 ## Python
 
