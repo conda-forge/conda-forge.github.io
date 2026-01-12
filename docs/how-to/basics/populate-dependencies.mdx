@@ -388,7 +388,6 @@ specifies `run` dependencies on `numpy` and `ruamel.yaml`, and optional runtime 
 The following `setup.py` snippet:
 
 ```python
-
 setup(
   install_requires=[
     "Twisted>=17.5",
@@ -409,3 +408,7 @@ setup(
 specifies `run` dependency on `Twisted>=17.5`, optional runtime dependency on `txzookeeper`, and a
 test dependency on `mock`. Note that since `setup.py` are Python scripts, they can use arbitrary
 Python logic to obtain and pass the values. Python is constrainted to `>=3.8`.
+
+Some legacy packages may `import` Python modules from some of their dependencies without explicitly
+declaring them via `build-system.requires` or `setup_requires`. These dependencies also need to be
+manually added to the `host` group.
