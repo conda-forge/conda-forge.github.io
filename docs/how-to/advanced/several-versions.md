@@ -59,6 +59,7 @@ bot:
 ```
 
 You can incorporate this in your next PR to the `main` branch, or do a push with
+
 ```bash
 git checkout main
 git pull upstream main
