@@ -42,27 +42,39 @@ git commit --allow-empty -m "[ci skip] Create new branch for v3.10.x release ser
 git push -u upstream v3.10.x
 ```
 
-Now, this branch can be selected as a target branch in the following steps.
+Now this branch can be selected as a target in the drop-down when opening a PR (e.g. to publish
+a new patch version of v3.10.x in the example above).
 
-## Open a PR with the necessary changes
+## Ensure the branch participates in migration infrastructure
 
-From the main branch, create another one to add some extra changes that will need to be reviewed in a PR:
-
-```bash
-git checkout -b setup-3.10.x
-```
-
-Open your `conda-forge.yml` file and add these lines:
+For the duration of the lifetime of your LTS version, you'll want it to participate in the relevant
+migrations that are happening in conda-forge, e.g. if there's a rebuild for a new version of one of
+your dependencies. The configuration for this must be on the `main` branch in the `conda-forge.yml`
+file and add these lines:
 
 ```yaml
 bot:
   abi_migration_branches:
-    - "v3.10.x"  # or the branch name you picked
+    - "v3.10.x"  # the branch name you picked
 ```
 
-And [rerender](../basics/rerender.md). Now, make sure to adjust the recipe file so the correct version is being built.
+You can incorporate this in your next PR to the `main` branch, or do a push with
+```bash
+git checkout main
+git pull upstream main
+git add conda-forge.yml
+git commit -m "[ci skip] update abi_migration_branches"
+git show                    # sanity check that the commit contains nothing else
+git push -u upstream main
+```
 
-Once ready, push the branch to your fork (`origin`) and open the corresponding pull request. Don't forget to pick `main` as the target branch!
+Note that the bot infrastructure for `abi_migration_branches:` only does migrations; it will not
+automatically pick up new patch versions, which you have to do manually (e.g. by subscribing to
+notifications for new releases in the upstream repo).
+
+Eventually, you'll want to stop receiving bot PRs to a given branch (because the version has become
+too old); at that point, you simply remove the branch from `abi_migration_branches:` again. Again, the
+only bot config (in `conda-forge.yml`) that's being taken into account is the one on the `main` branch.
 
 :::note
 
