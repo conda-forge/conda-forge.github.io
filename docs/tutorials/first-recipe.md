@@ -143,13 +143,13 @@ build:
 
 Here, three important bits of information are specified:
 
-1. The build number, which is a number indicating the recipe revision. Whenever you change the recipe
-   in a way that the content of what's being packaged changes (i.e. not just cosmetic things like fixing
-   a typo somewhere), you increment it.
+1. The build number, which is a number indicating the recipe revision for a given package version. Whenever you change the recipe
+   in a way that the content or metadata of what's being packaged changes (i.e. not just cosmetic things like fixing
+   a typo in a comment), you increment it.
 2. The `noarch` key that indicates that we're building a pure Python package, and so we do not need
-   to build separate packages for different conda-forge platforms.
+   to build separate packages for different conda-forge platforms and Python versions.
 3. The actual build command invocation. We're using the Python package manager `pip` here to build
-   and install our package. We are passing `--no-deps` to avoid automatically installing its
+   and install our package into the workspace. We are passing `--no-deps` to avoid automatically installing its
    dependencies, and `--no-build-isolation` to make the build use our build environment rather than
    creating a new one.
 
