@@ -862,8 +862,21 @@ tests:
 
 </RecipeTabs>
 
-Alternatively, you can add a file called `run_test.py` in the recipe that
-will be run at test time. This allows an arbitrarily complicated test script.
+##### Custom test script
+
+Alternatively, a custom test script can be created and placed in the `recipe`
+directory. This allows an arbitrarily complicated test script. For v1 recipes,
+the script is listed via a `script` test with a `file` key:
+
+```yaml
+tests:
+  - script:
+      file: run_test.py
+```
+
+For v0 recipes, the file is always called `run_test.py`, and it is used
+automatically when present. However, note that it will override the `test:`
+section of the recipe entirely and cause it to be silently ignored.
 
 <a id="pytest-tests"></a>
 
