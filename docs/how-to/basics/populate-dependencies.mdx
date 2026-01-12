@@ -255,14 +255,14 @@ CMake files or built-in rules provided in Meson itself. Other frequently used me
 
 For example:
 
-```
+```python
 libcrypt = dependency('libcrypt', 'libxcrypt', required : false)
 ```
 
 indicates an optional dependency, accepting either `libcrypt` (system library, using built-in Meson
 rule) or `libxcrypt` (via `libxcrypt.pc`, provided by `libxcrypt` package), whereas:
 
-```
+```python
 libbzip2 = cc.find_library('bz2', required : get_option('bzip2'))
 ```
 
@@ -285,7 +285,7 @@ Requires-Dist: tomli-w
 indicate that `tomli` package is required for Python 3.10 and older, and `tomli-w` is required
 unconditionally.
 
-Note that package metadata includes only runtime (`run`) dependencies and not build-time (`host`)
+Note that package metadata includes only runtime (`run`) dependencies and not build-time (`build`, `host`)
 dependencies. Extra dependencies are listed as well, and they are decorated with an `extra`
 environment marker, for example:
 
