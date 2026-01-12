@@ -17,9 +17,13 @@ instructions on how to determine the correct dependencies to list in your recipe
 
 ### Where to find dependencies?
 
-Unfortunately, there is no single standard for declaring package dependencies. A few ideas on where
-to start:
+Unfortunately, there is no single standard for declaring package dependencies. This section provides
+a generic set of guidelines for any package or project; the remaining sections in this document
+provide specific guidelines for particular build systems and programming language. A few good ways
+to look for dependency information are:
 
+- Look through upstream build system files. A few of these are illustrated in the subsequent
+  sections.
 - Look through upstream documentation. Many projects include sections on building, with detailed
   explanations where to find dependencies.
 - Look through build system files. Some of these are covered in other sections of this how-to.
@@ -29,6 +33,8 @@ to start:
   in locating these. However, note that they may not be up-to-date.
 - If the package is installing binaries, look at the libraries they link to. This is described in
   detail in [checking binary linkage](#checking-binary-linkage) section.
+- Look at the Continuos Integration and Continuos Deployment workflows. They can often provide hints
+  at how upstream installs dependencies.
 - As a last resort, in some cases you can resort to checking the source code. There are tools that
   can help with this, e.g. [findimports](https://pypi.org/project/findimports/) for Python.
 
