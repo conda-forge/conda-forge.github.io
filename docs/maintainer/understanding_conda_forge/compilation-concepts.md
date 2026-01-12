@@ -116,7 +116,7 @@ The necessary development files include:
 
 Include files are installed into the `include` directory or its subdirectories. They usually use
 `.h` or `.inc` suffix for C. For C++, sometimes names without a suffix are used to follow the
-standard library `#include` scheme.
+standard library `#include` scheme, or `.hpp` suffix.
 
 Static libraries are installed into the `lib` directory and carry an `.a` suffix on Unix, or `.lib`
 on Windows. On Unix, shared libraries are used directly for linking, and they are described in the
