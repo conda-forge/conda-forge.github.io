@@ -46,7 +46,7 @@ Now, this branch can be selected as a target branch in the following steps.
 
 ## Open a PR with the necessary changes
 
-From the same branch, create another one to add some extra changes that will need to be reviewed in a PR:
+From the main branch, create another one to add some extra changes that will need to be reviewed in a PR:
 
 ```bash
 git checkout -b setup-3.10.x
@@ -62,7 +62,7 @@ bot:
 
 And [rerender](../basics/rerender.md). Now, make sure to adjust the recipe file so the correct version is being built.
 
-Once ready, push the branch to your fork (`origin`) and open the corresponding pull request. Don't forget to pick `v3.10.x` as the target branch!
+Once ready, push the branch to your fork (`origin`) and open the corresponding pull request. Don't forget to pick `main` as the target branch!
 
 :::note
 
