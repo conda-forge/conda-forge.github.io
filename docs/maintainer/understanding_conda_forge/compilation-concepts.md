@@ -72,13 +72,13 @@ and perform the actual build.
 
 ## Libraries
 
-Modern programs almost always link to libraries, that is collections of shared code. This includes
+Modern programs almost always link to libraries, that is, collections of shared code. This includes
 system libraries and compiler runtimes that provide the basic programming language functionality,
 and third-party libraries provided by various packages.
 
 Programs link to libraries either statically or dynamically. Static linking means that the library
-code is embedded into the program directly, and the library is no longer needed at runtime. Dynamic
-linking means that the program merely carries a reference to an external library, and the library is
+code is embedded into the program directly, and the library _file_ is no longer needed at runtime. Dynamic
+linking means that the program merely carries a reference to an external library, and the library file is
 loaded when the program starts. Both approaches to linking have their use cases, and their
 proponents.
 
@@ -87,18 +87,18 @@ additional optimization as the optimizer is able to determine how the library is
 However, statically linked programs are less space efficient, especially if the same library is used
 across multiple programs. Since a specific library version is embedded into the program, the risk of
 breakage on updates is minimized. However, this means that in order to update the library, the whole
-package needs to be rebuilt, which may negative impact security response time if the library turns
+package needs to be rebuilt, which may negatively impact security response time if the library turns
 out to be vulnerable.
 
 Dynamic linking creates programs that reuse a shared copy of the library. As such, the library
-either needs to be installed separately or distributed along the program. However, their main
+either needs to be installed separately or distributed along with the program. However, their main
 advantage is that the same library is shared across multiple packages, and can be quickly swapped
-for another version as necessary. However, this requires one to take special care for different
+for another version as necessary. Unfortunately, this requires one to take special care for different
 library versions to be compatible in the Application Binary Interface (ABI) exposed to programs.
 
-In conda-forge, dynamic linking to libraries provided by conda-forge packages is preferred. Many of
-the concerns related to dynamic linking do not apply here, as packages take care of installing the
-library dependencies in compatible versions.
+In conda-forge, dynamic linking to libraries provided by conda-forge packages is strongly preferred. Many of
+the concerns related to dynamic linking do not apply here, as proper packaging practices
+ensure that library dependencies are installed in compatible versions.
 
 ## Development files
 
@@ -123,7 +123,7 @@ on Windows. On Unix, shared libraries are used directly for linking, and they ar
 [binaries](#binaries) section. On Windows, import libraries are used instead. They use `.lib` suffix
 like static libraries.
 
-Finally, packages often provide additional files that are used at build time to determine how to use
+Finally, packages often provide additional files that are used at build time to determine how to compile against
 the library in question. For example, these can include pkg-config files, CMake files, autotools
 macros. These files are usually used by the build systems.
 
@@ -144,7 +144,7 @@ when their filename matches the specified command exactly. On Windows, executabl
 `python` on Unixes, and `python.exe` on Windows; in both cases, typing `python` will execute it.
 Executables are usually installed into the `bin` directory.
 
-Shared libraries use `lib` prefix on Unixes, and `.so` suffix, except for macOS where they use
+Shared libraries use filenames with a `lib` prefix on Unixes, and `.so` suffix, except for macOS where they use
 `.dylib` suffix instead. They are installed into the `lib` directory. They often include a version
 string to indicate compatibility between different library versions.
 
@@ -152,9 +152,9 @@ On Windows, shared libraries use `.dll` suffix, and no obligatory prefix. They a
 the `bin` directory, along with programs. There is also no standard filename versioning scheme,
 though many libraries include a version in the filename. The `.dll` files are only used at runtime.
 To build programs against a shared library, an additional import library of `.lib` format must be
-used, which also specifies the `.dll` file to use.
+used, which essentially describes the (visible) content of a `.dll` file to use.
 
-On most systems, loadable modules use the same format as shared libraries. Darwin is an exception
+On most systems, loadable modules use the same format as shared libraries. macOS is an exception
 to that, where loadable modules are "bundles". The recommended suffix for these files is `.bundle`,
 though much software (including Python) uses `.so` instead. They are usually installed into
 tool-specific directories.
@@ -163,7 +163,7 @@ tool-specific directories.
 
 Shared libraries are often versioned to indicate compatibility. Typically, at least two version
 components are used: a minor version that is incremented whenever backwards-compatible ABI changes
-occur (e.g. new interaces are added), and a major version that is incremented whenever
+occur (e.g. new interfaces are added), and a major version that is incremented whenever
 backwards-incompatible changes happen. Often additional version components are used to indicate
 library updates without ABI changes.
 
@@ -171,7 +171,7 @@ When such a scheme is used, the installed library usually consists of three file
 
 - the actual library with a full version string, such as `lib{name}.so.1.2.3` or
   `lib{name}.1.2.3.dylib`,
-- a symbolic link including the major version, such as `lib{name}.so.1` or `lib{name}.1.dylib`,
+- a symbolic link including only the major version, such as `lib{name}.so.1` or `lib{name}.1.dylib`,
 - an unversioned symbolic link, such as `lib{name}.so` or `lib{name}.dylib`.
 
 When building a new program, the linker -- if passed `-l{name}` -- uses the unversioned library
