@@ -304,6 +304,13 @@ Requires-Dist: redis>=3.0.0; extra == "cache"
 
 indicates that the `cache` extra requires `redis` package, no older than 3.0.0.
 
+Additionally, the `Requires-Python` entry indicates constraints on the Python version supported.
+These should be transferred to the `python` dependency in the `host` section:
+
+```
+Requires-Python: >=3.10
+```
+
 ### pyproject.toml
 
 Modern Python packages specify their metadata in a `pyproject.toml` file in their source
@@ -321,6 +328,7 @@ In `pyproject.toml`:
 - Optional ("extra") runtime dependencies are listed in `project.optional-dependencies` table.
 - Additional dependencies may also be listed in `dependency-groups`, per the [Dependency
   Groups](https://packaging.python.org/en/latest/specifications/dependency-groups/) specification.
+- Python version constraints are listed in `requires-python` key.
 
 Test dependencies are often listed either as an "extra" or a dependency group.
 
@@ -333,6 +341,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 dependencies = ["lxml", "beautifulsoup4"]
+requires-python = ">=3.10"
 
 [project.optional-dependencies]
 cache = ["redis>=3.0.0"]
@@ -343,7 +352,8 @@ test = ["pytest>7"]
 
 This corresponds to `host` dependency on `setuptools` (note unnecessary `wheel` dependency), `run`
 dependencies on `lxml` and `beautifulsoup4`, and possibly `run` dependency on `redis>=3.0.0` if the
-optional dependency is desired. Tests additionally require `pytest>7`.
+optional dependency is desired. Tests additionally require `pytest>7`. Python is constrained to
+version `>=3.10`.
 
 ### setup.cfg and setup.py
 
@@ -355,7 +365,8 @@ dependency-related options are passed as keyword arguments to `setuptools.setup(
 In both cases, `install_requires` to list `run` dependencies, and `extras_require` to list groups of
 extra dependencies. Sometimes `setup_requires` is used to list `host` dependencies, in other cases
 they are listed in `pyproject.toml` instead. Test dependencies are usually listed as an "extra",
-though old packages may use `tests_require` instead.
+though old packages may use `tests_require` instead. Python version constraints are listed in
+`python_requires`.
 
 For example, the following `setup.cfg` file:
 
@@ -364,6 +375,7 @@ For example, the following `setup.cfg` file:
 install_requires =
   numpy >= 1.12.0
   ruamel.yaml >= 0.15.34
+python_requires = >=3.8
 
 [options.extras_require]
 hdf5 = h5py
@@ -371,7 +383,7 @@ pandas = pandas
 ```
 
 specifies `run` dependencies on `numpy` and `ruamel.yaml`, and optional runtime dependencies on
-`h5py` and `pandas`.
+`h5py` and `pandas`. Python is constrainted to `>=3.8`.
 
 The following `setup.py` snippet:
 
@@ -389,10 +401,11 @@ setup(
   tests_require=[
     "mock",
   ],
+  python_requires=">=3.8",
   ...
 )
 ```
 
 specifies `run` dependency on `Twisted>=17.5`, optional runtime dependency on `txzookeeper`, and a
 test dependency on `mock`. Note that since `setup.py` are Python scripts, they can use arbitrary
-Python logic to obtain and pass the values.
+Python logic to obtain and pass the values. Python is constrainted to `>=3.8`.
