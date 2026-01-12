@@ -92,7 +92,7 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
 2. Fork and clone the [staged-recipes](https://github.com/conda-forge/staged-recipes)
    repository from GitHub.
 3. Checkout a new branch from the staged-recipes `main` branch.
-4. Through CLI, cd inside the `staged-recipes/recipes` directory.
+4. In the same terminal, go to the `staged-recipes/recipes` directory.
 5. Within your forked copy, create a new folder in the recipes folder for your package (i.e, `...staged-recipes/recipes/<name-of-package>`)
 6. [Generate the recipe](#generating-the-recipe) or copy the example `recipe.yaml` (or `meta.yaml`)
    into this folder.
@@ -100,13 +100,15 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
    (i.e., `...staged-recipes/recipes/<name-of-package>/recipe.yaml`).
    Please leave the example directory unchanged!
 7. Modify the copied recipe file as needed. To see how to modify it, take a look at
-   [The recipe (recipe.yaml or meta.yaml)](#the-recipe-recipeyaml-or-metayaml).
+   [The recipe (recipe.yaml or meta.yaml)](#the-recipe-recipeyaml-or-metayaml) section.
 8. Generate the SHA256 hash for your source code archive, as described in the
    example recipe using the `openssl` tool. As an alternative, you can also
    go to the package description on [PyPI](https://pypi.org) from which you
    can directly copy the SHA256.
 9. Be sure to fill in the `test` section. The simplest test will simply
-   test that the module can be imported, as described in the example.
+   test that the top-level package or module can be imported, as described in the example. 
+   Some projects have an empty top-level package; in those cases, make sure to select also
+   some other modules that do contain runnable code.
 10. Remove all irrelevant comments in the recipe file.
 
 :::tip
@@ -279,7 +281,7 @@ and is named either:
 
 It defines everything that is required to build and use the package.
 
-Both files use the [yaml](https://en.wikipedia.org/wiki/YAML) format, augmented with [Jinja](http://jinja.pocoo.org/) templating.
+Both files use [YAML](https://en.wikipedia.org/wiki/YAML) syntax, augmented with [Jinja](http://jinja.pocoo.org/) templating.
 
 The full reference of the formats can be found in the following sources:
 - `recipe.yaml`: improved recipe format as specified by [CEP 13](https://github.com/conda/ceps/blob/main/cep-0013.md) & [CEP 14](https://github.com/conda/ceps/blob/main/cep-0014.md). As of early 2026, it is only implemented by rattler-build, which also provides a more readable [overview](https://rattler-build.prefix.dev/latest/reference/recipe_file).
@@ -342,7 +344,7 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 
 #### Downloading extra sources and data files
 
-`conda-build 3` and `rattler-build` support multiple sources per recipe. Examples are available in the [rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#source-section) and [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#source-from-multiple-sources).
+`conda-build` (v3 and above) and `rattler-build` support multiple sources per recipe. Examples are available in the [rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#source-section) and [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#source-from-multiple-sources).
 
 <a id="build"></a>
 
