@@ -362,7 +362,8 @@ Use the `skip` key in the `build` section. In v1 recipes, it accepts any of:
   evaluates to true.
 
 In v0 recipes, only a boolean value is directly accepted, and it needs to be combined with
-a selector expression via templating.
+a selector expression via templating. Different selectors can either be combined using `or`
+clauses or multiple `skip: true` can be used.
 
 You can e.g. specify not to build …
 
@@ -371,7 +372,8 @@ You can e.g. specify not to build …
 
   ```yaml
   build:
-    skip: true  # [win or osx-arm64]
+    skip: true  # [win]
+    skip: true  # [osx-arm64]
   ```
 
   ```yaml
