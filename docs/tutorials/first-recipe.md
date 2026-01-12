@@ -420,4 +420,5 @@ Add a recipe for pylast package
 
 At this point, the recipe is ready for submission. Normally, you'd fork the GitHub repository and
 create a pull request. However, we aren't going to be doing that now, as pylast is already packaged
-in conda-forge.
+in conda-forge. The submission process is described in detail in the [contributing packages
+how-to](/docs/maintainer/adding_pkgs/).
