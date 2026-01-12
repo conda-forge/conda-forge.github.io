@@ -279,6 +279,31 @@ check for `bz2` library (e.g. `libbz2.so`), provided by `bzip2`.
 
 ## Python
 
+Python packages generally function within the [PyPI](https://pypi.org) ecosystem, and declare their
+dependencies against other packages on PyPI, using metadata specified in the next subsection. These
+packages are usually added to conda-forge using the same names as on PyPI, but there are many
+exceptions, either due to name collisions or explicit renames (for example, the PyPI package `torch`
+corresponds to `pytorch` in conda-forge).
+
+The final package metadata can be found in wheels and source distributions, but it does not cover
+build-time dependencies. Therefore, you will generally prefer to look at the other project files,
+notably:
+
+1. `pyproject.toml` file that is used to declare the build system, build-time dependencies and often
+   project metadata.
+
+2. `setup.cfg` and `setup.py` files in projects using the `setuptools` build system.
+
+3. Various `requirements*.txt` and similar files, listing custom dependency groups.
+
+These files are illustrated in greater detail in the subsequent sections.
+
+Python packages can also have "external" dependencies. The standardized approach to declaring them
+is currently worked on as [PEP 725](https://peps.python.org/pep-0725/). These packages sometimes
+use general purpose build systems declared in the earlier sections, and their external dependencies
+can be obtained from them. In some cases, these dependencies are additionally packaged on PyPI (for
+example, `cmake` and `ninja` are).
+
 ### Package metadata
 
 The primary source of dependency information for Python packages is the generated dependency
@@ -355,6 +380,16 @@ dependencies on `lxml` and `beautifulsoup4`, and possibly `run` dependency on `r
 optional dependency is desired. Tests additionally require `pytest>7`. Python is constrained to
 version `>=3.10`.
 
+In some cases, `dependencies` may be listed under the `dynamic` key instead. For example, the
+following snippet indicates that the dependencies are not listed directly in the `[project]` table
+but instead are defined in the build backend-specific manner (for `setuptools`, this usually means
+`setup.py`):
+
+```toml
+[project]
+dynamic = ["dependencies"]
+```
+
 ### setup.cfg and setup.py
 
 Some projects using the setuptools build system may be declaring dependencies in `setup.cfg` and/or
@@ -408,6 +443,10 @@ setup(
 specifies `run` dependency on `Twisted>=17.5`, optional runtime dependency on `txzookeeper`, and a
 test dependency on `mock`. Note that since `setup.py` are Python scripts, they can use arbitrary
 Python logic to obtain and pass the values. Python is constrainted to `>=3.8`.
+
+When a particular key is found both in `setup.cfg` and `setup.py`, the latter takes precedence. When
+the `pyproject.toml` files contains a `[project]` table, metadata from other files is ignored,
+unless the key is explicitly listed as `dynamic`.
 
 Some legacy packages may `import` Python modules from some of their dependencies without explicitly
 declaring them via `build-system.requires` or `setup_requires`. These dependencies also need to be
