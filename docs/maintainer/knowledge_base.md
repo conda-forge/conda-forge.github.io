@@ -1951,9 +1951,9 @@ of CUDA 12.5.
 The following CUDA components are not available as conda packages:
 
 - Driver libraries, such as (but not limited to)
-    - `libcuda`
-    - `libnvidia-ml` library
-    - GPUDirect Storage (GDS)
+  - `libcuda`
+  - `libnvidia-ml` library
+  - GPUDirect Storage (GDS)
 - Documentation and Samples
 - Fabric Manager
 - IMEX
@@ -1966,19 +1966,24 @@ The following CUDA components are not available as conda packages:
 
 Rather than installing all of CUDA at once, users may instead install just the packages that
 they need. For example, to install just `libcublas` and `libcusparse` one may run:
+
 ```
 conda install -c conda-forge libcublas libcusparse cuda-version=<CUDA version>
 ```
+
 The best way to get a current listing is to run:
+
 ```
 conda install --dry-run -c conda-forge cuda cuda-version=<CUDA version>
 ```
+
 For a complete listing of the packages that were originally created, see [this
 issue](https://github.com/conda-forge/staged-recipes/issues/21382).
 
 ##### Metapackages
 
 For convenience, a number of additional metapackages are available:
+
 - `cuda-runtime`: All CUDA runtime libraries needed to run a CUDA application
 - `cuda-libraries`: All libraries required to run a CUDA application requiring libraries beyond the CUDA runtime (such as the CUDA math libraries) as well as packages needed to perform JIT compilation
 - `cuda-visual-tools`: GUIs for visualizing and profiling such as Nsight Compute
@@ -2002,8 +2007,7 @@ means that only Orin (sm_87) and later devices are supported.
 
 #### CUDA C++ Core Libraries (CCCL)
 
-CCCL is a special case among CUDA packages. Due to 1) being header-only, 2) fast-moving, and
-3) independently-evolving, consumers may want a different (newer) version of CCCL than the
+CCCL is a special case among CUDA packages. Due to 1) being header-only, 2) fast-moving, and 3) independently-evolving, consumers may want a different (newer) version of CCCL than the
 one corresponding to their CTK version. Instructions on how to install a suitable CCCL
 package from conda can be found
 [in the CCCL README](https://github.com/NVIDIA/cccl/?tab=readme-ov-file#conda).
@@ -2026,9 +2030,9 @@ The above discussion of naming also applies to metapackages. For instance, the
 `cuda-libraries` package contains all the runtime libraries, while `cuda-libraries-dev` also
 includes dependencies on the corresponding `*-dev` packages. In addition, for the purposes
 of development there are a few additional key metapackages:
+
 - `cuda-compiler`: All packages required to compile a minimal CUDA program (one that does
   not require e.g. extra math libraries like cuBLAS or cuSPARSE).
-
 
 #### Compatibility between the `conda-forge` vs `nvidia` channels
 
@@ -2054,6 +2058,7 @@ metapackage that installs a partially overlapping set of components to the origi
 to pull packages from both `conda-forge` and the `nvidia` channel. Therefore, in a CUDA 11
 world the `conda-forge` and `nvidia` channels were difficult to use in the same environment
 without some care.
+
 </details>
 <details>
 <summary>CUDA 12.0-12.4</summary>
@@ -2073,6 +2078,7 @@ with the same core contents like libraries and headers), the `nvidia` channel di
 include many of the incremental fixes made on `conda-forge` to improve things like symlinks,
 static library handling, proper package constraints, etc. As a result, `nvidia` and
 `conda-forge` CUDA packages remained incompatible from CUDA 12.0-12.4.
+
 </details>
 <details>
 <summary>CUDA 12.5+</summary>
@@ -2083,6 +2089,7 @@ environment.
 
 Going forward, CUDA packages on the `conda-forge` and `nvidia` channels should be expected
 to remain compatible.
+
 </details>
 
 ### CUDA for Maintainers
@@ -2106,6 +2113,7 @@ packages](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-virt
 for more information.
 
 To update the `__cuda` virtual package, you must install a newer driver:
+
 - [Linux instructions](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#driver-installation)
 - [Windows instructions](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#installing-cuda-development-tools)
 
