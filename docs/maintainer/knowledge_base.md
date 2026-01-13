@@ -1922,7 +1922,7 @@ The easiest one-step solution to install the full CUDA Toolkit is to install the
 metapackage](https://github.com/conda-forge/cuda-feedstock/) with this command:
 
 ```
-conda install -c conda-forge cuda cuda-version=12.5
+conda install -c conda-forge cuda cuda-version=12
 ```
 
 Let's break down this command. We are requesting the installation of two metapackages:
@@ -2030,7 +2030,7 @@ of development there are a few additional key metapackages:
   not require e.g. extra math libraries like cuBLAS or cuSPARSE).
 
 
-#### Compatability between the `conda-forge` vs `nvidia` channels
+#### Compatibility between the `conda-forge` vs `nvidia` channels
 
 Understanding the difference between the CUDA packages on the `conda-forge` and `nvidia`
 channels requires a bit of history because of how the relationship has evolved over time. In
@@ -2063,7 +2063,7 @@ indicate the breaking nature of these changes compared to the prior CUDA 11.x pa
 `conda-forge`. These packages became the standard mechanism for delivering CUDA conda
 packages. Due to the scale of the reorganization, the CUDA 12.0, 12.1, and 12.2 releases
 also involved numerous additional fixes to the packaging structure to better integrate them
-in the Conda ecosystem. Due to the number of such changes that were required and the focus
+in the conda ecosystem. Due to the number of such changes that were required and the focus
 on improving the quality of these installations, during this time period no corresponding
 updates were provided for packages on the `nvidia` channel. While the `conda-forge` and
 `nvidia` channel package lists were the same (i.e. the same packages existed in both places
