@@ -2037,7 +2037,8 @@ channels requires a bit of history because of how the relationship has evolved o
 particular, how these channels may or may not coexist will depend on the versions of CUDA
 that you need support for.
 
-##### Pre-CUDA 12:
+<details>
+<summary>Pre-CUDA 12</summary>
 
 Prior to CUDA 12, the only package available on `conda-forge` was the `cudatoolkit` package,
 a community-maintained, monolithic package containing the entire repackaged CTK. During the
@@ -2053,8 +2054,9 @@ metapackage that installs a partially overlapping set of components to the origi
 to pull packages from both `conda-forge` and the `nvidia` channel. Therefore, in a CUDA 11
 world the `conda-forge` and `nvidia` channels were difficult to use in the same environment
 without some care.
-
-##### CUDA 12.0-12.4
+</details>
+<details>
+<summary>CUDA 12.0-12.4</summary>
 
 With the CUDA 12 release, NVIDIA contributed the new packaging structure to `conda-forge`,
 introducing the same set of packages that existed on the `nvidia` channel as a replacement
@@ -2071,8 +2073,9 @@ with the same core contents like libraries and headers), the `nvidia` channel di
 include many of the incremental fixes made on `conda-forge` to improve things like symlinks,
 static library handling, proper package constraints, etc. As a result, `nvidia` and
 `conda-forge` CUDA packages remained incompatible from CUDA 12.0-12.4.
-
-##### CUDA 12.5+
+</details>
+<details>
+<summary>CUDA 12.5+</summary>
 
 With CUDA 12.5, the `nvidia` channel was fully aligned with `conda-forge`. Packages on both
 channels are identical, ensuring safe coexistence of the two channels within the same conda
@@ -2080,6 +2083,7 @@ environment.
 
 Going forward, CUDA packages on the `conda-forge` and `nvidia` channels should be expected
 to remain compatible.
+</details>
 
 ### CUDA for Maintainers
 
