@@ -35,7 +35,7 @@ git checkout <sha_hash_of_commit_from_above> -b v3.10.x
 
 In either case, add an empty commit with the `[ci skip]` message so that the act of pushing the new
 branch does not result in a new build process, and push it to `upstream`. This is one of the rare
-ocassions where you must push directly to the feedstock, not your fork!
+ocassions where you must push directly to the feedstock repository, not your fork!
 
 ```bash
 git commit --allow-empty -m "[ci skip] Create new branch for v3.10.x release series"
@@ -63,6 +63,7 @@ You can incorporate this in your next PR to the `main` branch, or do a push with
 ```bash
 git checkout main
 git pull upstream main
+# modify conda-forge.yml and save
 git add conda-forge.yml
 git commit -m "[ci skip] update abi_migration_branches"
 git show                    # sanity check that the commit contains nothing else
@@ -74,7 +75,7 @@ automatically pick up new patch versions, which you have to do manually (e.g. by
 notifications for new releases in the upstream repo).
 
 Eventually, you'll want to stop receiving bot PRs to a given branch (because the version has become
-too old); at that point, you simply remove the branch from `abi_migration_branches:` again. Again, the
+too old); at that point, you simply remove the branch from `abi_migration_branches:`. Again, the
 only bot config (in `conda-forge.yml`) that's being taken into account is the one on the `main` branch.
 
 :::note
