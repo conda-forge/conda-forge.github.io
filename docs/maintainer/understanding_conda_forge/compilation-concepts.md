@@ -93,6 +93,45 @@ Note that in some cases the header files may contain implementation in addition 
 example, the implementation of inline functions is provided in header files, so that the compiler
 can use it while compiling other programs.
 
+## API and ABI
+
+A C-style library essentially defines two related interfaces: an Application Programming Interface
+(API) that is used by the compiler, and an Application Binary Interface (ABI) that is used at
+runtime. Generally, the API is defined by the header files, and ABI is inferred from it. Both
+concepts are critical for compatibility between libraries and the programs using them.
+
+APi defines the interface that is used in the source code of programs. Conversely, ABI is used by
+compiled binaries. For example, consider a library with the following prototype:
+
+```c
+void foo(int a);
+```
+
+Such a function accepts a single `int` parameter. From programmer's perspective, it can accept any
+parameter that can be converted into an `int`. However, from binary perspective the library has a
+strict contract with the program that an `int` value must be passed.
+
+Now consider that the library changes prototype into:
+
+```c
+void foo(int64_t a);
+```
+
+From programmer's perspective this can be fine, as long as the previous `int` input can be converted
+into `int64_t`. However, the binary contract changes -- a previously compiled program passes an
+`int` type where a wider `int64_t` type is expected now. This is a trivial example of an ABI
+breakage. If a program was compiled against the old prototype but used the new library, it could
+lead to arbitrary results, from crashes to hard-to-debug bugs affecting other code (so-called
+Heisenbugs).
+
+Systems often feature mechanisms to protect against this class of issues. For example, shared
+libraries often use various versioning schemes to ensure that the programs remain linked to a single
+compatible version, and need to be recompiled to use the ABI from a new version.
+
+Note that ABI incompatibilities are not limited to deliberate changes of program interface. They can
+also be caused by using different compilation parameters, different compilers or even compiler
+versions.
+
 ## Linking to libraries
 
 In order to use a library, the program needs to link to it. It can link either statically or
