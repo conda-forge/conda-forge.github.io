@@ -67,8 +67,9 @@ The build system pipeline typically involves four stages:
    system, or a staging directory.
 
 Projects usually adapt one of the existing build systems, such as GNU autotools, CMake or Meson.
-These build systems in turn generate Makefiles, Ninja build scripts or project files for IDEs to use
-and perform the actual build.
+These often are not entirely standalone tools but rather serve the purpose of configuring the build
+and generating build scripts for other tools, such as make, ninja or various Integrated Development
+Environments. These tools in turn consume the build scripts to perform the actual build.
 
 ## Libraries
 
