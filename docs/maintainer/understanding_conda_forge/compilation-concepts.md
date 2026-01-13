@@ -71,17 +71,35 @@ These often are not entirely standalone tools but rather serve the purpose of co
 and generating build scripts for other tools, such as make, ninja or various Integrated Development
 Environments. These tools in turn consume the build scripts to perform the actual build.
 
-## Libraries
+## Symbols
 
-Modern programs almost always link to libraries, that is, collections of shared code. This includes
-system libraries and compiler runtimes that provide the basic programming language functionality,
-and third-party libraries provided by various packages.
+The code written in C-style languages contains functions, global variables, etc. that are compiled
+into what is collectively called symbols. The compiled binaries contain symbol tables that map the
+symbol names into their compiled counterpart, and therefore enable programs to reference them across
+code units and across different binaries. This enables not only splitting individual programs into
+separate code files, but also creating libraries of code that can be used across different projects.
 
-Programs link to libraries either statically or dynamically. Static linking means that the library
-code is embedded into the program directly, and the library _file_ is no longer needed at runtime. Dynamic
-linking means that the program merely carries a reference to an external library, and the library file is
-loaded when the program starts. Both approaches to linking have their use cases, and their
-proponents.
+These programming languages split interface and implementation. The compiled objects and binaries
+contain the implementation, which is sufficient for already compiled programs to use them. However,
+in order to compile a new program, the compiler needs to additionally know the interface; for
+example, the function prototype that provides the function name, arguments and return type.
+
+Typically, this split is accomplished through splitting the program code across two types of files:
+header files specifying the interface, and source files containing the implementation. The source
+files are compiled into the actual binary, while header files are used during the compilation but
+also distributed along with the compiled library afterwards.
+
+Note that in some cases the header files may contain implementation in addition to interface. For
+example, the implementation of inline functions is provided in header files, so that the compiler
+can use it while compiling other programs.
+
+## Linking to libraries
+
+In order to use a library, the program needs to link to it. It can link either statically or
+dynamically. Static linking means that the library code is embedded into the program directly, and
+the library _file_ is no longer needed at runtime. Dynamic linking means that the program merely
+carries a reference to an external library, and the library file is loaded when the program starts.
+Both approaches to linking have their use cases, and their proponents.
 
 Static linking creates a standalone program that is easier to distribute, and may benefit from
 additional optimization as the optimizer is able to determine how the library is used exactly.
