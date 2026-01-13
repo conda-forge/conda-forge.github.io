@@ -1953,9 +1953,9 @@ The following CUDA components are not available as conda packages:
 - Driver libraries, such as (but not limited to)
     - `libcuda`
     - `libnvidia-ml` library
+    - GPUDirect Storage (GDS)
 - Documentation and Samples
 - Fabric Manager
-- GPUDirect Storage (GDS)
 - IMEX
 - NVSwitch Configuration and Query (NSCQ)
 - Nsight Systems
