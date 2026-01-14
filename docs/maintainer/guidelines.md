@@ -164,23 +164,11 @@ As it comes up, each group should be able to define their own policy on how long
 
 ### Python
 
-For the Python language, conda-forge aims to keep package builds active and available for the current version and at least two preceding minor versions.
+For the Python language, conda-forge aims to keep package builds active and available for [all the Python versions currently supported upstream](https://devguide.python.org/versions/).
+However, the support for the oldest `3.{n}` version may be disabled a few months before it reaches its end-of-life, once migration for the `3.{n+5}rc` starts.
 Whenever Python 4.0 comes out we'll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously.
 Fortunately, we can punt on that for now.
-The question of when to decide to drop an older language version remains.
-The guidance that we can provide here is two fold:
-
-1. We will move with the community.
-   When our core libraries stop supporting an old version, so too will conda forge.
-   The (nonexhaustive) list of core libraries that we consider when making the decision to drop an older version are:
-   - matplotlib
-   - numpy
-   - scipy
-   - pypy
-2. The core team can decide to keep an old version around temporarily until some specific criteria is met.
-   For example, we're holding off on turning off py36 until pypy comes out with pypy3.7.
-3. If there are lots of people in the community relying on older versions, core team can decide to keep an old version around.
-   For example, we held off turning off py27 even after numpy, scipy dropped support as there were many in the community interested in keeping support until the end of life of that version.
+The current de facto policy can be found in [python-feedstock#794](https://github.com/conda-forge/python-feedstock/issues/794).
 
 <a id="reviewer-guidelines"></a>
 

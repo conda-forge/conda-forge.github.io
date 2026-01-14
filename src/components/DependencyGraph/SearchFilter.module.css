@@ -1,0 +1,50 @@
+/* SearchFilter component styles */
+
+.searchContainer {
+  position: relative;
+  max-width: 400px;
+  flex: 0 1 400px;
+}
+
+.searchInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.searchInput {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Datalist styling */
+.datalist {
+  display: none;
+}
+
+/* Style option elements within datalist (works in Firefox and some other browsers) */
+.datalist option {
+  padding: 8px 12px;
+  background-color: var(--ifm-color-emphasis-0);
+  color: var(--ifm-color-emphasis-800);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.datalist option:hover,
+.datalist option:focus {
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.datalist option:checked,
+.datalist option:selected {
+  background: linear-gradient(
+    var(--ifm-color-primary),
+    var(--ifm-color-primary)
+  );
+  color: white;
+}

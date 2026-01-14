@@ -12,7 +12,7 @@ jobs:
     name: deploy
     runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - uses: prefix-dev/setup-pixi@82d477f15f3a381dbcc8adc1206ce643fe110fb7 # v0.9.3
 
@@ -48,6 +48,8 @@ jobs:
             --exclude 'https://kb43fqob7u-dsn.algolia.net/'
             --exclude 'https://ss64.com/nt/syntax.html'
             --exclude 'https://www.mesa3d.org/'
+            --exclude 'https://www.quansight.com/'
+            --exclude 'https://conda-forge.herokuapp.com/status-monitor'
             --exclude '.*/404.html/'
             --exclude '.*,.*'
             --exclude-path './build/community/minutes/'
