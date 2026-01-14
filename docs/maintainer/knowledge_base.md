@@ -1913,7 +1913,7 @@ component corresponding to a given version of the CTK. This way, you never have 
 particular version of any CTK package; you just specify the `cuda-version` that you want,
 then list packages you want installed and conda will take care of finding the right versions
 for you. The above command will install all components of CUDA from the latest patch release
-of CUDA 12.5.
+of the CUDA 12.x series.
 
 :::warning
 
