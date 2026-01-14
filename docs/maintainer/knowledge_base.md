@@ -2015,7 +2015,7 @@ that you need support for.
 
 Prior to CUDA 12, the only package available on `conda-forge` was the `cudatoolkit` package,
 a community-maintained, monolithic package containing the entire repackaged CTK. During the
-CUDA 11 release cycle, NVIDIA began maintaining a set of CUDA Toolkit packages in the
+CUDA 11 release cycle, NVIDIA began developing a set of CUDA Toolkit packages in the
 `nvidia` channel. Unlike the monolithic `conda-forge` package, the `nvidia` channel
 distributed the CTK split into components such that each library was given its own package.
 This package organization made it possible to install separate components independently and
@@ -2033,7 +2033,7 @@ without some care.
 <summary>CUDA 12.0-12.4</summary>
 
 With the CUDA 12 release, NVIDIA contributed the new packaging structure to `conda-forge`,
-introducing the same set of packages that existed on the `nvidia` channel as a replacement
+introducing the CUDA Toolkit packages that existed on the `nvidia` channel as a replacement
 for the old `cudatoolkit` package on `conda-forge`. This was done starting with CUDA 12.0 to
 indicate the breaking nature of these changes compared to the prior CUDA 11.x packaging in
 `conda-forge`. These packages became the standard mechanism for delivering CUDA conda
@@ -2055,6 +2055,8 @@ static library handling, proper package constraints, etc. As a result, `nvidia` 
 With CUDA 12.5, the `nvidia` channel was fully aligned with `conda-forge`. Packages on both
 channels are identical, ensuring safe coexistence of the two channels within the same conda
 environment.
+
+Additionally [Anaconda has incorporated compatible CUDA 12 packages in its `defaults` channel]( https://www.anaconda.com/blog/anaconda-accelerates-ai-development-and-deployment-with-nvidia-cuda-toolkit).
 
 Going forward, CUDA packages on the `conda-forge` and `nvidia` channels should be expected
 to remain compatible.
