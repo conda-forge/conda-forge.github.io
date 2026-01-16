@@ -2,11 +2,106 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/blog/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2025-11-22T00:00:00.000Z</updated>
+    <updated>2026-01-15T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/blog/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[100 Days of Python 3.14 on conda-forge]]></title>
+        <id>https://conda-forge.org/blog/2026/01/15/100-days-python314/</id>
+        <link href="https://conda-forge.org/blog/2026/01/15/100-days-python314/"/>
+        <updated>2026-01-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Today marks 100 days since the official release of Python 3.14, and we're thrilled to report that conda-forge has achieved its fastest Python version adoption ever. With 1,932 binary packages available at the 100-day mark, Python 3.14 has surpassed all previous Python releases in early availability.]]></summary>
+        <content type="html"><![CDATA[<p>Today marks 100 days since the official release of Python 3.14, and we're thrilled to report that conda-forge has achieved its fastest Python version adoption ever. With <strong>1,932 binary packages</strong> available at the 100-day mark, Python 3.14 has surpassed all previous Python releases in early availability.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-numbers">The Numbers<a href="https://conda-forge.org/blog/2026/01/15/100-days-python314/#the-numbers" class="hash-link" aria-label="Direct link to The Numbers" title="Direct link to The Numbers" translate="no">​</a></h2>
+<p>Let's look at how Python 3.14 compares to previous releases at the 100-day milestone:</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="binary-packages-only">Binary Packages Only<a href="https://conda-forge.org/blog/2026/01/15/100-days-python314/#binary-packages-only" class="hash-link" aria-label="Direct link to Binary Packages Only" title="Direct link to Binary Packages Only" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Python Version</th><th>Packages at Day 100</th></tr></thead><tbody><tr><td>Python 3.10</td><td>1,588</td></tr><tr><td>Python 3.11</td><td>1,835</td></tr><tr><td>Python 3.12</td><td>1,576</td></tr><tr><td>Python 3.13</td><td>1,435</td></tr><tr><td><strong>Python 3.14</strong></td><td><strong>1,932</strong></td></tr></tbody></table>
+<p>Python 3.14 leads with <strong>1,932 binary packages</strong>, beating the previous record holder (Python 3.11) by nearly 100 packages.</p>
+<p><img decoding="async" loading="lazy" alt="Python 3.14 binary package availability" src="https://conda-forge.org/assets/images/package_availability_combined_100days-d78e9c5b5a933ef8a8c76d3704593f29.png" width="4168" height="2366" class="img_ev3q"></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="including-noarch-and-abi3-packages">Including noarch and ABI3 Packages<a href="https://conda-forge.org/blog/2026/01/15/100-days-python314/#including-noarch-and-abi3-packages" class="hash-link" aria-label="Direct link to Including noarch and ABI3 Packages" title="Direct link to Including noarch and ABI3 Packages" translate="no">​</a></h3>
+<p>When we count packages that transitioned to <code>noarch: python</code> or ABI3 (stable ABI) builds since the Python 3.10 migration, the numbers are even more impressive:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Python Version</th><th>Packages at Day 100 (with noarch + ABI3)</th></tr></thead><tbody><tr><td>Python 3.10</td><td>1,669</td></tr><tr><td>Python 3.11</td><td>2,098</td></tr><tr><td>Python 3.12</td><td>1,945</td></tr><tr><td>Python 3.13</td><td>1,947</td></tr><tr><td><strong>Python 3.14</strong></td><td><strong>2,609</strong></td></tr></tbody></table>
+<p><img decoding="async" loading="lazy" alt="Python 3.14 binary, ABI3 and noarch package availability" src="https://conda-forge.org/assets/images/package_availability_with_noarch_abi3_combined_100days-6731206df8f93a16e9c595a3a5c1f5b3.png" width="4168" height="2366" class="img_ev3q"></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-python-314-adoption-was-so-fast">Why Python 3.14 Adoption Was So Fast<a href="https://conda-forge.org/blog/2026/01/15/100-days-python314/#why-python-314-adoption-was-so-fast" class="hash-link" aria-label="Direct link to Why Python 3.14 Adoption Was So Fast" title="Direct link to Why Python 3.14 Adoption Was So Fast" translate="no">​</a></h2>
+<p>Several factors contributed to this record-breaking adoption:</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-better-utilization-of-release-candidates">1. Better Utilization of Release Candidates<a href="https://conda-forge.org/blog/2026/01/15/100-days-python314/#1-better-utilization-of-release-candidates" class="hash-link" aria-label="Direct link to 1. Better Utilization of Release Candidates" title="Direct link to 1. Better Utilization of Release Candidates" translate="no">​</a></h3>
+<p>The migration started much earlier than previous versions. Around 40 days before the final release, the migration really kicked into gear. By the time Python 3.14 was officially released, over 1,000 packages were already built and waiting.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-improved-tooling-and-automation">2. Improved Tooling and Automation<a href="https://conda-forge.org/blog/2026/01/15/100-days-python314/#2-improved-tooling-and-automation" class="hash-link" aria-label="Direct link to 2. Improved Tooling and Automation" title="Direct link to 2. Improved Tooling and Automation" translate="no">​</a></h3>
+<p>The <code>regro-cf-autotick-bot</code> has become increasingly effective at opening "Rebuild for Python 3.14" PRs on feedstocks where all dependencies are ready. This automation significantly reduces the burden on maintainers.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-growing-use-of-noarch-and-abi3">3. Growing Use of noarch and ABI3<a href="https://conda-forge.org/blog/2026/01/15/100-days-python314/#3-growing-use-of-noarch-and-abi3" class="hash-link" aria-label="Direct link to 3. Growing Use of noarch and ABI3" title="Direct link to 3. Growing Use of noarch and ABI3" translate="no">​</a></h3>
+<p>More packages have transitioned to <code>noarch: python</code> or ABI3 builds, which work across Python versions without rebuilding. This means that once Python 3.14 was released, these packages were immediately available without any additional work.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="using-python-314">Using Python 3.14<a href="https://conda-forge.org/blog/2026/01/15/100-days-python314/#using-python-314" class="hash-link" aria-label="Direct link to Using Python 3.14" title="Direct link to Using Python 3.14" translate="no">​</a></h2>
+<p>If you're looking to try Python 3.14 on conda-forge, you can create a new environment using:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">conda create </span><span class="token parameter variable" style="color:#36acaa">-n</span><span class="token plain"> py314 </span><span class="token assign-left variable" style="color:#36acaa">python</span><span class="token operator" style="color:#393A34">=</span><span class="token number" style="color:#36acaa">3.14</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">conda activate py314</span><br></span></code></pre></div></div>
+<p>If a package is missing, you can lookup on the <a href="https://conda-forge.org/status/migration/?name=python314" target="_blank" rel="noopener noreferrer" class="">Status page of the Python 3.14</a> what is blocking it.</p>
+<hr>
+<p><em>Data for this analysis was generated using conda-forge repodata from January 15, 2026. The analysis tracks packages that have <code>python_abi</code> dependencies for specific Python versions, as well as packages that transitioned from version-specific builds to noarch or ABI3 builds.</em></p>]]></content>
+        <author>
+            <name>Uwe L. Korn</name>
+            <uri>https://github.com/xhochy</uri>
+        </author>
+        <category label="infrastructure" term="infrastructure"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[R support in conda-forge]]></title>
         <id>https://conda-forge.org/blog/2025/11/22/r-support/</id>
@@ -1289,197 +1384,6 @@ you'd like to help out!</p>]]></content>
         <author>
             <name>conda-forge/core</name>
             <uri>https://github.com/orgs/conda-forge/teams/core</uri>
-        </author>
-        <category label="conda-forge" term="conda-forge"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[macOS ARM builds on conda-forge]]></title>
-        <id>https://conda-forge.org/blog/2020/10/29/macos-arm64/</id>
-        <link href="https://conda-forge.org/blog/2020/10/29/macos-arm64/"/>
-        <updated>2020-10-29T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[A new platform osx-arm64 has been added to the build matrix of]]></summary>
-        <content type="html"><![CDATA[<p>A new platform <code>osx-arm64</code> has been added to the build matrix of
-conda-forge. <code>osx-arm64</code> packages are built to run on upcoming macOS
-arm64 processors marketed as <code>Apple Silicon</code>. An installer for this
-platform can be found
-<a href="https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh" target="_blank" rel="noopener noreferrer" class="">here</a>.</p>
-<p>This will install a conda environment with python and conda in it.
-Installed conda will be able to install packages like <code>numpy, scipy</code>.
-Currently there are about 100 packages out of 10000 packages pre-built
-for this platform.</p>
-<p>All these packages are built on conda-forge's current macOS <code>x86_64</code>
-infrastructure. In order to do so, we have made lots of changes to the
-infrastructure including,
-<code>conda, conda-build, conda-smithy, constructor, conda-forge-ci-setup</code> to
-facilitate cross-compiling which is the process of compiling a package
-that will run on a <code>host</code> platform (<code>osx-arm64</code> in our case), with the
-compilation done on a <code>build</code> platform (<code>osx-64</code> or <code>linux-64</code> in our
-case).</p>
-<p><code>osx-arm64</code> is the first conda platform that is completely bootstrapped
-using conda-build's cross-compiling facility. Previously, when adding a
-new platform, conda-build was built with an existing python and pip
-environment on the new platform. With cross-compiling, when the
-compilers and a sysroot is set up on a different platform, an existing
-conda-build installation (on <code>osx-64</code> and <code>linux-64</code> in this case) will
-be able to start building packages right away.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="cross-compiling-builds-for-osx-arm64">Cross-compiling builds for <code>osx-arm64</code><a href="https://conda-forge.org/blog/2020/10/29/macos-arm64/#cross-compiling-builds-for-osx-arm64" class="hash-link" aria-label="Direct link to cross-compiling-builds-for-osx-arm64" title="Direct link to cross-compiling-builds-for-osx-arm64" translate="no">​</a></h2>
-<p>In order to cross compile packages for <code>osx-arm64</code> we need compilers.
-So, we first built <code>clang=11.0.0.rc1</code> which has support for targetting
-<code>osx-arm64</code>. We also built <code>compiler-rt=11.0.0.rc1</code> as a universal build
-support both <code>osx-64</code> and <code>osx-arm64</code>.</p>
-<p>Linker, archiver, <code>otool</code>, <code>install_name_tool</code> was built using the
-<a href="https://github.com/tpoechtrager/cctools-port" target="_blank" rel="noopener noreferrer" class="">cctools-port project</a> by
-Thomas Pöchtrager.</p>
-<p>One issue we ran into was that the macOS 11.0 Big Sur Beta 7 required
-that all executables and shared libraries be ad-hoc signed which is
-signing without a verified signature. On suggestion of <code>cctools-port</code>
-developer we added support to <code>cctools-port</code> to sign these executables
-using <code>ldid</code> which can be used on Linux as well as macOS to sign.</p>
-<p>Using these, the first cross compiled package we built was <code>libcxx</code> to
-facilitate C++ builds. For the <code>osx-arm64</code> sysroot we used the
-<code>MacOSX11.0.sdk</code> already installed on Azure pipelines and Travis-CI. Due
-to licensing issues, we cannot distribute this, but it can be downloaded
-from the Apple developer website even on Linux.</p>
-<p>With clang we have a C/C++ compiler, but lack a Fortran compiler. We
-used the <a href="https://github.com/iains/gcc-darwin-arm64" target="_blank" rel="noopener noreferrer" class="">GCC fork for
-darwin-arm64</a>. First, a cross
-compiler (<code>build == host != target</code>) was built. Using that compiler, we
-built a <code>cross-native</code> compiler (<code>build != host == target</code>) which gave
-use the shared libraries like <code>libgfortran.dylib</code>.</p>
-<p>We also added support for cross compiling rust programs to the rust
-packages in conda and installing <code>rust_osx-64</code> on Linux will give you a
-compiler that will build packages for <code>osx-64</code>.</p>
-<p>As we haven't done cross-compilation before, many packages needed to be
-updated. Most were trivial changes that we automated later on. These
-included getting a newer <code>config.sub</code> to identify the new autotools
-platform <code>arm64-apple-darwin20.0.0</code>, adding options to CMake with the
-environment variable <code>CMAKE_ARGS</code> to correctly set up the toolchain and
-recipes were update to use <code>cmake ${CMAKE_ARGS} ..</code>. Running tests when
-building were also disabled by guarding commands like <code>make check</code>,
-<code>make test</code>, <code>ctest</code> with the env variable
-<code>CONDA_BUILD_CROSS_COMPILATION</code>.</p>
-<p>Cross-compiling python extensions is quite tricky as <code>distutils</code> is not
-really setup to do this. Thanks to the project
-<a href="https://github.com/benfogle/crossenv" target="_blank" rel="noopener noreferrer" class="">crossenv</a> this is unofficially
-supported with a few quirks. With <code>crossenv</code>, we can run a python on the
-build machine (<code>osx-64</code> or <code>linux-64</code> in this case) that acts like it is
-on <code>osx-arm64</code>. <code>crossenv</code> monkey-patches a few functions like
-<code>os.uname</code> and sets up values like <code>_PYTHON_SYSCONFIG_DATA</code> to make
-python running on <code>osx-64</code> or <code>linux-64</code> behave like <code>osx-arm64</code>. One
-issue is that, monkey-patching <code>sys.platform</code> doesn't work and
-therefore if a python package in it's <code>setup.py</code> uses <code>sys.platform</code> to
-differentiate OSes this will lead to unintended consequences if you are
-cross-compiling from <code>linux-64</code>. Therefore, we have to use <code>osx-64</code> as
-our <code>build</code> system when cross-compiling for <code>osx-arm64</code>. Note that
-packages using <code>sysconfig.get_platform()</code> will get the correct platform.</p>
-<p>For creating an installer for conda, we needed a standalone conda
-executable to bootstrap the conda environment. For other platforms we
-relied on <code>conda-standalone</code> which is a standalone conda executable
-created using <code>pyinstaller</code>. Since <code>pyinstaller</code> does not support
-cross-compile, we decided to use <code>micromamba</code> as the bootstrapper and
-added features to <code>micromamba</code> so that it can function as the
-bootstrapper.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-to-add-a-osx-arm64-build-to-a-feedstock">How to add a <code>osx-arm64</code> build to a feedstock<a href="https://conda-forge.org/blog/2020/10/29/macos-arm64/#how-to-add-a-osx-arm64-build-to-a-feedstock" class="hash-link" aria-label="Direct link to how-to-add-a-osx-arm64-build-to-a-feedstock" title="Direct link to how-to-add-a-osx-arm64-build-to-a-feedstock" translate="no">​</a></h2>
-<p>All the below changes will be done by a bot and the packages the bot
-will send PRs to is determined by the list of packages at
-<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migration_support/osx_arm64.txt" target="_blank" rel="noopener noreferrer" class="">conda-forge-pinning</a>
-and their dependences. If you would like to add support, please send a
-PR adding the feedstock name to the above list. After that PR is merged,
-you can monitor the status at <a href="https://conda-forge.org/status/#armosxaddition" target="_blank" rel="noopener noreferrer" class="">conda-forge
-status-page</a> and if a
-particular PR is stalled you can send a PR to the feedstock to fix it.</p>
-<p>Following instructions are for when you want to add support manually.</p>
-<p>Add the following to <code>conda-forge.yml</code> (on Linux or OSX),</p>
-<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">build_platform</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">osx_arm64</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> osx_64</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">test</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> native_and_emulated</span><br></span></code></pre></div></div>
-<p>You can rerender using,</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">conda smithy rerender</span><br></span></code></pre></div></div>
-<p>For python packages, add one or more of the following to
-<code>recipe/meta.yaml</code> as needed, noting that you <em>must</em> only add
-<code>numpy</code>, <code>cython</code>, and/or <code>pybind11</code>
-if they are used in <code>host:</code> as well,</p>
-<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">requirements</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">build</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> python                                 </span><span class="token comment" style="color:#999988;font-style:italic"># [build_platform != target_platform]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> cross</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">python_</span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> target_platform </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain">     </span><span class="token comment" style="color:#999988;font-style:italic"># [build_platform != target_platform]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> cython                                 </span><span class="token comment" style="color:#999988;font-style:italic"># [build_platform != target_platform]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> numpy                                  </span><span class="token comment" style="color:#999988;font-style:italic"># [build_platform != target_platform]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> pybind11                               </span><span class="token comment" style="color:#999988;font-style:italic"># [build_platform != target_platform]</span><br></span></code></pre></div></div>
-<p>For autotools package, add the following to <code>recipe/meta.yaml</code>,</p>
-<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">requirements</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">build</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> gnuconfig   </span><span class="token comment" style="color:#999988;font-style:italic"># [unix]</span><br></span></code></pre></div></div>
-<p>and to <code>recipe/build.sh</code>,</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Get an updated config.sub and config.guess</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">cp</span><span class="token plain"> </span><span class="token variable" style="color:#36acaa">$BUILD_PREFIX</span><span class="token plain">/share/gnuconfig/config.* </span><span class="token builtin class-name">.</span><br></span></code></pre></div></div>
-<p>For cmake packages, add the following to <code>recipe/build.sh</code>,</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">cmake </span><span class="token variable" style="color:#36acaa">${CMAKE_ARGS}</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">..</span><br></span></code></pre></div></div>
-<p>For <code>meson</code> packages, add the following to <code>recipe/build.sh</code>,</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">meson </span><span class="token variable" style="color:#36acaa">${MESON_ARGS}</span><span class="token plain"> builddir/</span><br></span></code></pre></div></div>
-<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Conda automatically creates a <a href="https://mesonbuild.com/Cross-compilation.html" target="_blank" rel="noopener noreferrer" class="">cross build definition
-file</a> when
-cross-compiling, and adds the necessary argument to <code>${MESON_ARGS}</code> to
-point <code>meson</code> to that file. <code>${MESON_ARGS}</code> is only defined when
-cross-compiling, not for normal builds.</p></div></div>
-<p>For rust packages, add the following to <code>recipe/meta.yaml</code>,</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">requirements:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  build:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    - </span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> compiler</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'rust'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
-<p>If there's a line like <code>make check</code> in <code>recipe/build.sh</code> that cannot be
-run when cross-compiling, do the following,</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">if</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"</span><span class="token string variable" style="color:#36acaa">$CONDA_BUILD_CROSS_COMPILATION</span><span class="token string" style="color:#e3116c">"</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">!=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"1"</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">then</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token function" style="color:#d73a49">make</span><span class="token plain"> check</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">fi</span><br></span></code></pre></div></div>
-<p>After these changes, another rerendering might be required.</p>
-<p>Some useful jinja variables,</p>
-<ol>
-<li class=""><code>build_platform</code> - conda subdir for <code>BUILD_PREFIX</code>. eg:
-<code>linux-64</code></li>
-<li class=""><code>target_platform</code> - conda subdir for <code>PREFIX</code>. eg: <code>osx-arm64</code></li>
-</ol>
-<p>Some useful environment variables,</p>
-<ol>
-<li class=""><code>build_platform</code></li>
-<li class=""><code>target_platform</code></li>
-<li class=""><code>CONDA_BUILD_CROSS_COMPILATION</code> - 1 if cross compiling</li>
-<li class=""><code>CMAKE_ARGS</code> - arguments to pass to cmake</li>
-<li class=""><code>CC_FOR_BUILD</code> - C compiler for build platform</li>
-<li class=""><code>CXX_FOR_BUILD</code> - C++ compiler for build platform</li>
-<li class=""><code>HOST</code> - a triplet for host passed to autoconf. eg:
-<code>arm64-apple-darwin20.0.0</code></li>
-<li class=""><code>BUILD</code> - a triplet for build passed to autoconf. eg:
-<code>x86_64-conda-linux-gnu</code></li>
-</ol>
-<p>Some useful configure options in <code>conda-forge.yml</code></p>
-<ol>
-<li class="">
-<p><code>build_platform</code> - a dictionary mapping <code>build</code> subdir to <code>host</code> subdir. eg:</p>
-<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">build_platform</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">osx_arm64</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> osx_64</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">linux_ppc64le</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> linux_64</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">linux_aarch64</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> linux_64</span><br></span></code></pre></div></div>
-</li>
-<li class="">
-<p><code>test_on_native_only</code> - a boolean to turn off testing on cross
-compiling. If the tests don't require emulation (for eg: check
-that a file exists), then <code>test_on_native_only: false</code> will run
-the tests even when cross compiling.</p>
-</li>
-</ol>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="building-locally">Building locally<a href="https://conda-forge.org/blog/2020/10/29/macos-arm64/#building-locally" class="hash-link" aria-label="Direct link to Building locally" title="Direct link to Building locally" translate="no">​</a></h2>
-<p>For building locally add the following in
-<code>$HOME/conda_build_config.yaml</code>.</p>
-<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">SDKROOT</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> /path/to/MacOSX11.0.sdk</span><br></span></code></pre></div></div>
-<p>After that, look for the config you want to run in <code>.ci_support</code> folder
-in the root of the feedstock For eg: <code>.ci_support/osx_arm64_.yaml</code>. Then
-run,</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">conda build recipe </span><span class="token parameter variable" style="color:#36acaa">-m</span><span class="token plain"> .ci_support/osx_arm64_.yaml </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge/label/rust_dev</span><br></span></code></pre></div></div>
-<p>This should start a new build for <code>osx-arm64</code>.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="testing-packages">Testing packages<a href="https://conda-forge.org/blog/2020/10/29/macos-arm64/#testing-packages" class="hash-link" aria-label="Direct link to Testing packages" title="Direct link to Testing packages" translate="no">​</a></h2>
-<p>In order to test packages intended to run on future Apple Silicon
-hardware, Apple provides a machine called Developer Transition Kit
-(DTK). Jonathan Helmus and Eli Rykoff has helped with testing these
-packages on DTKs. Thanks to Eli Rykoff, we are now running tests for
-these packages as a daily cron job which has led to finding several bugs
-in our cross compiling infrastructure and also bugs in our recipes.</p>
-<p>To test cross compiled recipes, transfer the built conda package to the
-<code>host</code> and run,</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">conda build </span><span class="token parameter variable" style="color:#36acaa">--test</span><span class="token plain"> /path/to/package </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge</span><br></span></code></pre></div></div>
-<p>This work would not have been possible without the help of many people
-including the upstream maintainers of compiler infrastructure (which
-includes conda, conda-build, cctools, tapi, cctools-port, ldid, llvm,
-clang, compiler-rt, openmp, libcxx, crossenv, rust, gcc-darwin-arm64),
-<code>conda-forge/help-osx-arm64</code> team including Matt Becker, Eli Rykoff and
-Uwe Korn who sent PRs to fix recipes, <code>conda-forge/bot</code> team and also
-all the conda-forge maintainers of the 100 feedstocks who reviewed and
-fixed PRs.</p>
-<p>Isuru Fernando</p>]]></content>
-        <author>
-            <name>Isuru Fernando</name>
-            <uri>https://github.com/isuruf</uri>
         </author>
         <category label="conda-forge" term="conda-forge"/>
     </entry>
