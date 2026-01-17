@@ -172,7 +172,7 @@ export default function Supporters() {
   return (
     <div className={[styles.supporters, styles.section_padding].join(" ")}>
       <div className={styles.supporters_conda_forge}>
-        <h1><a href="#supporters">Supporters</a></h1>
+        <h1 id="supporters"><a href="#supporters">Supporters</a></h1>
         <p>
           If you like conda-forge and want to support our mission, please
           consider making a{" "}
@@ -286,3 +286,4 @@ export default function Supporters() {
     </div>
   );
 }
+
