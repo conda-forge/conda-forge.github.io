@@ -9,7 +9,7 @@ context:
   version: "0.1.0"
 
 package:
-  name: ${{ name|lower }}
+  name: example-package
   version: ${{ version }}
 
 source:
