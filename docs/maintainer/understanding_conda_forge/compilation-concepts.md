@@ -161,8 +161,9 @@ ensure that library dependencies are annotated and installed in compatible versi
 ## Development files
 
 Building against libraries requires additional development files to be available. In conda-forge,
-these files are usually installed as part of the package installing the library itself; in some
-cases they are split to separate "development" packages though.
+these files may be distributed as part of the package installing the library itself; or split into
+separate "development" packages, depending on criteria such as their complexity, popularity and
+size.
 
 The necessary development files include:
 
