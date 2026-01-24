@@ -26,8 +26,16 @@ The above is for branching off from the `main` branch directly; in many cases th
 to branch off at an earlier point of the repo history. For example, if the `main` branch is already
 on version 3.11 or beyond, but you want to publish a new patch release 3.10.18. In this case, you
 should go `https://github.com/conda-forge/<your_pkg>-feedstock/commits/main/` and find the commit
-for the last _published_ builds of the 3.10.x series (usually: the last merge before any of the
-commits from the PR that did the update to 3.11). Then, instead of `git checkout -b v3.10.x`, do:
+for the last _published_ builds of the 3.10.x series -- in other words, a commit where there is some
+indication that the CI ran successfully (green check or, more rarely, a red X where _some_ jobs still
+succeeded). Usually this is the last merge before any of the commits from the PR that did the update
+to 3.11.
+
+Alternatively, you can go to the conda-forge [metadata app](https://conda-metadata-app.streamlit.app),
+navigate to the last 3.10.x build of your package, and look for the "Provenance" section. It contains
+a reference to the exact commit that produced the package you're looking at.
+
+Once you've found the right commit hash, instead of the `git checkout -b v3.10.x` described above, do:
 
 ```bash
 git checkout <sha_hash_of_commit_from_above> -b v3.10.x
@@ -55,10 +63,10 @@ file and add these lines:
 ```yaml
 bot:
   abi_migration_branches:
-    - "v3.10.x"  # the branch name you picked
+    - "v3.10.x"  # the branch name you picked; use a consistent scheme across versions
 ```
 
-You can incorporate this in your next PR to the `main` branch, or do a push with
+You can incorporate this change into your next PR to the `main` branch, or do a push with
 
 ```bash
 git checkout main
@@ -71,8 +79,8 @@ git push -u upstream main
 ```
 
 Note that the bot infrastructure for `abi_migration_branches:` only does migrations; it will not
-automatically pick up new patch versions, which you have to do manually (e.g. by subscribing to
-notifications for new releases in the upstream repo).
+automatically pick up new patch versions, which you have to do manually (e.g. it helps to subscribe
+to notifications for new releases in the upstream repo).
 
 Eventually, you'll want to stop receiving bot PRs to a given branch (because the version has become
 too old); at that point, you simply remove the branch from `abi_migration_branches:`. Again, the
