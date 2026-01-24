@@ -201,17 +201,19 @@ On Unix platforms, executables don't feature any suffix, and common shells only 
 when their filename matches the specified command exactly. On Windows, executables commonly use
 `.exe` suffix, and shells account for that. For example, the Python executable will be named
 `python` on Unixes, and `python.exe` on Windows; in both cases, typing `python` will execute it.
-Executables are usually installed into the `bin` directory.
+Executables are usually installed into the `bin` directory, except on Windows where there may be
+installed into a variety of directories, including top-level Prefix directory and `Scripts` tree.
 
 Shared libraries use filenames with a `lib` prefix on Unixes, and `.so` suffix, except for macOS where they use
 `.dylib` suffix instead. They are installed into the `lib` directory. They often include a version
 string to indicate compatibility between different library versions.
 
-On Windows, shared libraries use `.dll` suffix, and no obligatory prefix. They are installed into
-the `bin` directory, along with programs. There is also no standard filename versioning scheme,
-though many libraries include a version in the filename. The `.dll` files are only used at runtime.
-To build programs against a shared library, an additional import library of `.lib` format must be
-used, which essentially describes the (visible) content of a `.dll` file to use.
+On Windows, shared libraries use `.dll` suffix, and no obligatory prefix. They are installed along
+with the executable programs (usually under `bin` directory or equivalent). There is also no
+standard filename versioning scheme, though many libraries include a version in the filename. The
+`.dll` files are only used at runtime. To build programs against a shared library, an additional
+import library of `.lib` format must be used, which essentially describes the (visible) content of a
+`.dll` file to use.
 
 On most systems, loadable modules use the same format as shared libraries. macOS is an exception
 to that, where loadable modules are "bundles". The recommended suffix for these files is `.bundle`,
