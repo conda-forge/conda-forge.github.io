@@ -104,12 +104,12 @@ APi defines the interface that is used in the source code of programs. Conversel
 compiled binaries. For example, consider a library with the following prototype:
 
 ```c
-void foo(int a);
+void foo(int32_t a);
 ```
 
-Such a function accepts a single `int` parameter. From programmer's perspective, it can accept any
-parameter that can be converted into an `int`. However, from binary perspective the library has a
-strict contract with the program that an `int` value must be passed.
+Such a function accepts a single `int32_t` parameter. From programmer's perspective, it can accept
+any parameter that can be converted into an `int32_t`. However, from binary perspective the library
+has a strict contract with the program that an `int32_t` value must be passed.
 
 Now consider that the library changes prototype into:
 
@@ -117,12 +117,12 @@ Now consider that the library changes prototype into:
 void foo(int64_t a);
 ```
 
-From programmer's perspective this can be fine, as long as the previous `int` input can be converted
-into `int64_t`. However, the binary contract changes -- a previously compiled program passes an
-`int` type where a wider `int64_t` type is expected now. This is a trivial example of an ABI
-breakage. If a program was compiled against the old prototype but used the new library, it could
-lead to arbitrary results, from crashes to hard-to-debug bugs affecting other code (so-called
-Heisenbugs).
+From programmer's perspective this can be fine, as long as the previous `int32_t` input can be
+converted into `int64_t`. However, the binary contract changes -- a previously compiled program
+passes an `int32_t` type where a wider `int64_t` type is expected now. This is a trivial example of
+an ABI breakage. If a program was compiled against the old prototype but used the new library,
+running it could lead to arbitrary results, from crashes to hard-to-debug bugs affecting other code
+(so-called Heisenbugs).
 
 Systems often feature mechanisms to protect against this class of issues. For example, shared
 libraries often use various versioning schemes to ensure that the programs remain linked to a single
