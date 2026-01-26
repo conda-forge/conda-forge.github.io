@@ -230,6 +230,20 @@ confusing overlap, as plugins may be distributed as bundle directories.
 
 :::
 
+## macOS Frameworks
+
+In addition to the traditional Unix filesystem hierarchy where binaries and development files from
+different packages are installed into shared `bin`, `include`, `lib`, etc. directories, macOS
+features a concept known as "frameworks". Frameworks constitute integrated packages combining
+shared libraries, development files and other resources in a single `.framework` directory.
+
+Frameworks are installed into `/Library/Frameworks` and `~/Library/Frameworks` directories.
+Multiple versions of the same framework can be installed simultaneously. They need to be explicitly
+included in projects (for example, using the `-framework` compiler option).
+
+Conda-forge packages do not install frameworks. However, individual software may include system
+frameworks when built on macOS.
+
 ## Shared library versioning
 
 Shared libraries are often versioned to indicate [ABI compatibility](#api-and-abi). Typically, at
