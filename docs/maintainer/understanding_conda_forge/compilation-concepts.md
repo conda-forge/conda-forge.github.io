@@ -206,7 +206,8 @@ installed into a variety of directories, including top-level Prefix directory an
 
 Shared libraries use filenames with a `lib` prefix on Unixes, and `.so` suffix, except for macOS where they use
 `.dylib` suffix instead. They are installed into the `lib` directory. They often include a version
-string to indicate compatibility between different library versions.
+string to indicate ABI compatibility between different library versions, as explained in [shared
+library versioning](#shared-library-versioning).
 
 On Windows, shared libraries use `.dll` suffix, and no obligatory prefix. They are installed along
 with the executable programs (usually under `bin` directory or equivalent). There is also no
@@ -222,11 +223,11 @@ tool-specific directories.
 
 ## Shared library versioning
 
-Shared libraries are often versioned to indicate compatibility. Typically, at least two version
-components are used: a minor version that is incremented whenever backwards-compatible ABI changes
-occur (e.g. new interfaces are added), and a major version that is incremented whenever
-backwards-incompatible changes happen. Often additional version components are used to indicate
-library updates without ABI changes.
+Shared libraries are often versioned to indicate [ABI compatibility](#api-and-abi). Typically, at
+least two version components are used: a minor version that is incremented whenever
+backwards-compatible ABI changes occur (e.g. new interfaces are added), and a major version that is
+incremented whenever backwards-incompatible changes happen. Often additional version components are
+used to indicate library updates without ABI changes.
 
 When such a scheme is used, the installed library usually consists of three files:
 
@@ -237,17 +238,19 @@ When such a scheme is used, the installed library usually consists of three file
 
 When building a new program, the linker -- if passed `-l{name}` -- uses the unversioned library
 name. If it is a symbolic link, it is resolved to the actual library. That library is used during
-the linking process, and dynamic library information is taken from it.
+the linking process, and its _contents_ (not the filename pointed by the symbolic link) are used to
+determine the used library version.
 
-On Linux, this information primarily involves the `DT_SONAME` entry that contains the filename used
-to load the library at runtime. Typically, it corresponds to the filename with the major version,
-though it can be any filename, and e.g. libraries that do not provide cross-version compatibility at
-all often use the full version.
+On Linux, an entry in the file, called `DT_SONAME` specifies what filename should be used to load
+the library at runtime. Typically, it corresponds to the filename with the major version, though it
+can be any filename, and e.g. libraries that do not provide cross-version compatibility at all often
+use the full version. This name is often called "soname", and the version part itself is called
+"soversion".
 
 On macOS, library [version
 information](https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/DynamicLibraryDesignGuidelines.html#//apple_ref/doc/uid/TP40002013-SW23)
 is used instead. It consists of a major version number, a minor (current) version number and a
-compatibility version number. The major version number functions much like `DT_SONAME` -- it is used
+compatibility version number. The major version number functions much like "soversion" -- it is used
 to construct the "major version" symbolic link and the install name, it can be any string and it
 needs to change whenever backwards-incompatible changes occur. The minor version number consists of
 one to three version components, and indicates the current library version; it usually starts with
