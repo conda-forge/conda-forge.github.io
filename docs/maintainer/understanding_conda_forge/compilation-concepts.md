@@ -346,3 +346,43 @@ quite complex. However, for our purposes it suffices to list the following varia
 Note that steps 2. and 5. specifically focus on program directories. To account for this,
 conda-forge generally installs `.dll` libraries into program directories such as the `bin` directory
 rather than the `lib` directory used on Unixes.
+
+## Architecture-dependent and architecture-independent packages
+
+Conda-forge packages can be built for specific architectures, or made architecture-independent, also
+known as `noarch`.
+
+When C code is compiled into binaries containing machine code and installs them needs to be
+separately built for every supported platform. Therefore, it is distributed as
+architecture-dependent packages. The Python language interpreter is an example of such software.
+
+A package that installs only data files and interpreted scripts can be made
+architecture-independent. It can be built on any supported platform, and the build should always
+result in the same files being installed, irrespective of platform used to perform it. An example of
+this is a so-called pure Python package, i.e. a distribution that installs `.py` modules and
+no compiled extensions. The equivalent Python packaging concept is a `*-none-any.whl` package.
+
+A special case of this are pure Python packages with entry points. Installed entry points are
+platform-specific: on Unixes they are pure Python scripts, but on Windows they are compiled
+executables. In order to facilitate `noarch: python` packaging for them, entry points are stored not
+as final executables, but as the original list. When the package is installed, they are recreated in
+the appropriate platform-specific format.
+
+Conversely, a Python distribution that installs compiled extension modules in addition to `.py`
+modules needs to be built for every platform separately, and requires using arch-dependent packages.
+Furthermore, since Python extensions interface with the Python interpreter, they also need to be
+concerned about ABI compatibility with it. Python exposes two kinds of ABI: the regular extension
+ABI and the stable ABI.
+
+The regular extension ABI preserves compatibility across patch releases of the Python interpreter,
+but is not compatible across major or minor versions. For example, an extension compiled against
+Python 3.12 cannot be used on 3.11 or 3.13. Appropriately, the respective conda-forge package needs
+to be built not only for all supported platforms, but also as separate variants for all supported
+Python versions. At the time of writing, NumPy is an example of such a package.
+
+The stable ABI, on the other hand, guarantees forward compatibility with future minor releases of
+Python. Therefore, an extension built for the stable ABI of Python 3.12 can be successfully used on
+Python 3.13 and 3.14 (but not 3.11). This is represented by `*-abi3-*.whl` Python packages. In
+conda-forge, such packages are built for the oldest supported Python version, and therefore are
+independent of Python version. However, they are still architecture-dependent. An example of such a
+package is rustworkx.
