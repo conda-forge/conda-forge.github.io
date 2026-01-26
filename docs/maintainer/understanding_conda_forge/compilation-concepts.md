@@ -216,10 +216,19 @@ standard filename versioning scheme, though many libraries include a version in 
 import library of `.lib` format must be used, which essentially describes the (visible) content of a
 `.dll` file to use.
 
-On most systems, loadable modules use the same format as shared libraries. macOS is an exception
-to that, where loadable modules are "bundles". The recommended suffix for these files is `.bundle`,
-though much software (including Python) uses `.so` instead. They are usually installed into
-tool-specific directories.
+On most systems, loadable modules are the same file type as shared libraries. macOS is an exception
+to that: the binaries explicitly distinguish between shared libraries and "bundles", as loadable
+modules are called. The recommended suffix for these files is `.bundle`, though much software
+(including Python) uses `.so` instead. They are usually installed into tool-specific directories.
+
+:::note
+
+The term "bundle" can be used both to refer to loadable binary files discussed here, and [bundle
+directories](https://developer.apple.com/library/archive/documentation/CoreFoundation/Conceptual/CFBundles/Introduction/Introduction.html#//apple_ref/doc/uid/10000123i-CH1-SW1)
+used to encapsulate code and resources. These are distinct concepts, though there can be some
+confusing overlap, as plugins may be distributed as bundle directories.
+
+:::
 
 ## Shared library versioning
 
