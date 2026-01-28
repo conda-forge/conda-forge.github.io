@@ -2,16 +2,13 @@
 tags: [tutorial]
 ---
 
-# Creating and building your first recipe
+# Generating and building your first recipe
 
-In this tutorial, we will:
+In this tutorial, we will generate your first recipe for a pure Python package, test it by building
+the package and use a linter to verify that it follows the conda-forge best practices.
 
-- generate your first recipe for a pure Python package
-- build the package from the recipe
-- modify the recipe to run the test suite
-
-It assumes that you have a working conda installation, and that you are running Linux or macOS.
-In case of Linux, you also need to have a working Docker installation.
+The tutorial assumes that you have a working conda installation, and that you are running Linux or
+macOS. In case of Linux, you also need to have a working Docker installation.
 
 ## Prepare the development environment
 
@@ -88,7 +85,8 @@ package verbosely. Once the build completes, the new package will be found in
 `build_artifacts/noarch` directory, e.g.:
 
 ```
--rw------- 1 user user  35K 01-01 14:00 pylast-7.0.1-pyh1d6dcf3_0.conda
+-rw------- 1 user user  36K 01-28 18:57 pylast-7.0.1-pyhcb3b5b4_0.conda
+
 ```
 
 ## Look at the recipe file
@@ -106,33 +104,33 @@ files.
 
 ```yaml
 context:
-  name: pylast
   version: 7.0.1
+  python_min: 3.10
 ```
 
-This section defines helper variables that can be used elsewhere in the recipe. Here, `name` and
-`version` are declared, so that we can update them in one place, and reference elsewhere in the
-recipe.
+This section defines helper variables that can be used elsewhere in the recipe. Here two variables
+are declared: `version` that references the current package version, and `python_min` that specifies
+the minimal Python version required by it. By defining them here, we can easily update the values
+in the future without having to modify multiple sites where they are used.
 
 ```yaml
 package:
-  name: ${{ name|lower }}
+  name: pylast
   version: ${{ version }}
 ```
 
 This section specifies the name and version for the package that is built from this recipe. Note
-that we're using the variables that were defined earlier here. On top of that, a Jinja filter
-`lower` is used to lowercase the package name.
+that we're using the `version` variable that was defined earlier.
 
 ```yaml
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/pylast-${{ version }}.tar.gz
+  url: https://pypi.org/packages/source/p/pylast/pylast-${{ version }}.tar.gz
   sha256: 319251236ba5c3e907232aacf1d6a7ff831f2243e85ace6ec6623a552ec2e0eb
 ```
 
 This section specifies how to download the source distribution to build. It specifies the URL and a
-SHA256 hash that is used to verify its authenticity. Again, variables are used to replace some
-repeating bits.
+SHA256 hash that is used to verify its authenticity. The `version` variable is used again here; when
+you change the version, you won't have to update both the package version and the URL.
 
 ```yaml
 build:
@@ -148,206 +146,11 @@ Here, three important bits of information are specified:
    a typo in a comment), you increment it.
 2. The `noarch` key that indicates that we're building a pure Python package, and so we do not need
    to build separate packages for different conda-forge platforms and Python versions.
-3. The actual build command invocation. We're using the Python package manager `pip` here to build
-   and install our package into the workspace. We are passing `--no-deps` to avoid automatically installing its
-   dependencies, and `--no-build-isolation` to make the build use our build environment rather than
-   creating a new one.
-
-```yaml
-requirements:
-  host:
-    - python >=3.10
-    - hatch-vcs
-    - hatchling >=1.27
-    - pip
-  run:
-    - python >=3.10
-    - httpx >=0.26
-```
-
-This section specifies the package's dependencies. These are split into two parts: `host`
-dependencies are needed to build the package, while `run` dependencies are needed to run it once
-it's installed.
-
-```yaml
-tests:
-  - python:
-      imports:
-        - pylast
-      pip_check: true
-```
-
-This section specifies how to test the package. In this case, it performs the absolute minimum
-testing expected of Python package: checking if `pylast` can be imported successfully, and running
-`pip check` to verify that the needed dependencies were installed.
-
-```yaml
-about:
-  summary: A Python interface to Last.fm and Libre.fm
-  license: Apache-2.0
-  license_file:
-    - LICENSE.txt
-    - COPYING
-  repository: https://github.com/pylast/pylast
-```
-
-The `about` section provides additional package information. Notably, it includes a short package
-description, its license information along with a list of files containing the license inside the
-source archive, and the repository URL.
-
-```yaml
-extra:
-  recipe-maintainers:
-    - your-name
-```
-
-Finally, the `extra` section specifies the package maintainers. It will normally contain your user
-Github user name.
-
-## Run the test suite
-
-As noted before, the generatede recipe contained absolute minimum level of testing. Let's try if we
-can enable additional upstream tests.
-
-The build process should have left the source distribution in `build_artifacts/src_cache`. Let's
-inspect it:
-
-```
-tar -t -f build_artifacts/src_cache/pylast-7_0_1_31925123.tar.gz
-```
-
-There's a fair number of files contained inside the `tests` directory. These are probably the tests
-we are looking for. There is also a `pyproject.toml` file containing the project metadata. Let's
-unpack it:
-
-```
-tar -x -f build_artifacts/src_cache/pylast-7_0_1_31925123.tar.gz pylast-7.0.1/pyproject.toml
-```
-
-Again, open `recipes/pylast/recipe.yaml` in your favorite editor, as well as the
-`pylast-7.0.1/pyproject.toml` file. Locate the `tests:` section. We will append a new set of "script
-tests", i.e. tests consisting of calling external commands. We will need to specify three keys:
-
-1. Files to include so that the tests can be run. We already found them: the `tests` directory.
-2. Dependencies to install for the test suite. These are listed in `pyproject.toml` file under
-   `optional-dependencies.tests`. The tested package (and its `run` dependencies) will be added
-   automatically, so we don't need to list it.
-3. The command used to run the test suite. From the `pytest` dependency, we can infer that the
-   `pytest` runner will be a good choice.
-
-To append these three bits, change the `tests:` section to:
-
-```yaml
-tests:
-  - python:
-      imports:
-        - pylast
-      pip_check: true
-  - script: pytest
-    files:
-      source:
-        - tests
-    requirements:
-      run:
-        - flaky
-        - pytest-recording
-        - pytest >=9
-        - pyyaml
-```
-
-Note two changes in the test dependencies: `pytest-cov` and `pytest-random-order` were omitted, as
-they are not really necessary to run tests.
-
-Now, try building the package:
-
-```bash
-python build-locally.py
-```
-
-You may notice a pytest invocation in the middle of the build output:
-
-```
- │ ============================= test session starts ==============================
- │ platform linux -- Python 3.13.11, pytest-9.0.2, pluggy-1.6.0
- │ rootdir: $PREFIX/etc/conda/test-files/pylast/1
- │ plugins: anyio-4.12.0, recording-0.13.4, flaky-3.8.1
- │ collected 147 items
- │ tests/test_album.py ...........                                          [  7%]
- │ tests/test_artist.py .............sssss.....                             [ 23%]
- │ tests/test_country.py ..                                                 [ 24%]
- │ tests/test_library.py .....                                              [ 27%]
- │ tests/test_librefm.py ..                                                 [ 29%]
- │ tests/test_network.py ss............................                     [ 49%]
- │ tests/test_request.py ......                                             [ 53%]
- │ tests/test_tag.py ....                                                   [ 56%]
- │ tests/test_track.py ss.................                                  [ 69%]
- │ tests/test_user.py ..............x.....................                  [ 93%]
- │ tests/unicode_test.py .........                                          [100%]
-[...]
- │ ================== 137 passed, 9 skipped, 1 xfailed in 4.85s ===================
-```
-
-So the recipe now runs tests and they pass!
-
-## Lint the recipe
-
-Now let's see if the recipe passes all quality checks. To do this, we're going to use the
-`conda-smithy` tool. Type the following:
-
-```bash
-conda smithy recipe-lint --conda-forge recipes/pylast
-```
-
-This will perform all the basic quality checks, plus additional conda-forge quality checks, on the
-recipe in `recipes/pylast`. This is going to yield some suggestions:
-
-```
-recipes/pylast has some lint:
-  The homepage item is expected in the about section.
-recipes/pylast also has some suggestions:
-  `noarch: python` recipes should usually follow the syntax in our [documentation](https://conda-forge.org/docs/maintainer/knowledge_base/#noarch-python) for specifying the Python version.
-       - For the `host` section of the recipe, you should usually use the pin python ${{ python_min }}.* for the `python` entry.
-       - For the `run` section of the recipe, you should usually use the pin python >=${{ python_min }} for the `python` entry.
-       - For the `tests[].python.python_version` or `tests[].requirements.run` section of the recipe, you should usually use the pin `python_version: ${{ python_min }}.*` or `python ${{ python_min }}.*` for the `python_version` or `python` entry.
-       - If the package requires a newer Python version than the currently supported minimum version on `conda-forge`, you can override the `python_min` variable by adding a Jinja2 `set` statement at the top of your recipe (or using an equivalent `context` variable for v1 recipes).
-```
-
-Let's address these one by one. Again, open the recipe file `recipes/pylast/recipe.yaml` in your
-favorite text editor.
-
-The first message is pointing out that no `homepage` is defined in the `about:` section. And indeed,
-there is none, just the `repository` URL. If we look at [pylast project page on
-PyPI](https://pypi.org/project/pylast/), we see that the "Homepage" link points to the GitHub
-repository. So we can just copy that, changing the `about:` section to:
-
-```yaml
-about:
-  summary: A Python interface to Last.fm and Libre.fm
-  license: Apache-2.0
-  license_file:
-    - LICENSE.txt
-    - COPYING
-  repository: https://github.com/pylast/pylast
-  homepage: https://github.com/pylast/pylast
-```
-
-The other message is more complex. If you look at our requirements section, you'd notice that it's
-listing `python >=3.10`. The conda-forge recommendation is to use a variable rather than inline
-version. To resolve that, let's start by adding a new variable to the `context:` section on top.
-It will now look like:
-
-```yaml
-context:
-  name: pylast
-  version: 7.0.1
-  python_min: "3.10"
-```
-
-Note that we're adding double quotes around the version number. This is to prevent the YAML format
-from misinterpreting the version string as a floating-point number.
-
-Now, let's modify the `requirements:` section to use the new variable, as recommended in the message
-given by the linter. It will now look like:
+3. The actual build command invocation. We're using the Python package manager `pip` to build
+   and install our package into the workspace. We are passing `--no-deps` to stop `pip` from trying
+   to automatically install its dependencies (they are already preinstalled in the environment), and
+   `--no-build-isolation` to make the build use our build environment rather than creating a new
+   one.
 
 ```yaml
 requirements:
@@ -358,11 +161,15 @@ requirements:
     - pip
   run:
     - python >=${{ python_min }}
-    - httpx >=0.26  #
+    - httpx >=0.26
 ```
 
-Finally, let's add the dependency to the `tests` section, as suggested by the linter. It will now
-look like:
+This section specifies the package's dependencies. These are split into two parts: `host`
+dependencies are needed to build the package, while `run` dependencies are needed to run it once
+it's installed. In both cases, we're using the `python_min` variable to use the same version
+consistently across the file. Note that while we permit running the software against any Python
+no older than `python_min`, we deliberately build it using the oldest supported version to ensure
+that it will work with it.
 
 ```yaml
 tests:
@@ -371,35 +178,52 @@ tests:
         - pylast
       pip_check: true
       python_version: ${{ python_min }}.*
-  - script: pytest
-    files:
-      source:
-        - tests
-    requirements:
-      run:
-        - python ${{ python_min }}.*
-        - flaky
-        - pytest-recording
-        - pytest >=9
-        - pyyaml
 ```
 
-With these changes applied, let's run the linter again:
+This section specifies how to test the package. In this case, it performs the absolute minimum
+testing expected of Python package: checking if `pylast` can be imported successfully, and running
+`pip check` to verify that the needed dependencies were installed. The testing is also done using
+the oldest Python version, to ensure that the compatibility with it remains tested.
+
+```yaml
+about:
+  summary: A Python interface to Last.fm and Libre.fm
+  license: Apache-2.0
+  license_file:
+    - LICENSE.txt
+    - COPYING
+  homepage: https://github.com/pylast/pylast
+  repository: https://github.com/pylast/pylast
+```
+
+The `about` section provides additional package information. Notably, it includes a short package
+description, its license information along with a list of files containing the license inside the
+source archive, and the homepage and repository URLs.
+
+```yaml
+extra:
+  recipe-maintainers:
+    - your-name
+```
+
+Finally, the `extra` section specifies the package maintainers. It will normally contain your user
+Github user name.
+
+## Lint the recipe
+
+Now let's see if the recipe passes all quality checks. You'd usually be doing this after making and
+testing any changes to the recipe. To do this, we're going to use the `conda-smithy` tool. Type the
+following:
 
 ```bash
-conda-smithy recipe-lint --conda-forge recipes/pylast
+conda smithy recipe-lint --conda-forge recipes/pylast
 ```
 
-It should approve of our modifications, saying:
+This will perform all the basic quality checks, plus additional conda-forge quality checks, on the
+recipe in `recipes/pylast`. We should get a confirmation:
 
 ```
 recipes/pylast is in fine form
-```
-
-Let's build it again, to make sure we did not break anything:
-
-```bash
-python build-locally.py
 ```
 
 ## Commit the changes
