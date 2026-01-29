@@ -4,10 +4,22 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/news/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Wed, 07 Jan 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 29 Jan 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[New Syntax for External MPI Packages]]></title>
+            <link>https://conda-forge.org/news/2026/01/29/new-mpi-external-syntax/</link>
+            <guid>https://conda-forge.org/news/2026/01/29/new-mpi-external-syntax/</guid>
+            <pubDate>Thu, 29 Jan 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Due to ongoing issues with the solver pulling in the external MPI builds ahead of the real packages,]]></description>
+            <content:encoded><![CDATA[<p>Due to ongoing issues with the solver pulling in the <code>external</code> MPI builds ahead of the real packages,
+we have moved the external builds to a new label, <code>conda-forge/label/mpi-external</code>. The packages on this
+label replace the old MPI packages with <code>external</code> in their build strings. These old packages have been labeled
+as broken. Follow our <a href="https://conda-forge.org/docs/user/tipsandtricks/#using-external-message-passing-interface-mpi-libraries" target="_blank" rel="noopener noreferrer" class="">documentation</a>
+to update to the new syntax.</p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[NVIDIA Tegra Migrator Ready for General Use]]></title>
             <link>https://conda-forge.org/news/2026/01/07/tegra-migrator/</link>
@@ -355,21 +367,6 @@ project over <code>build</code>. In fact, the <code>build</code> feedstock on <c
 updated. To complete this transition, we are going to mark all existing <code>build</code> packages as broken, provide
 a more detailed linter hint, and turn off the migration infrastructure we've been using to help move feedstocks.
 Any questions or comments can be directed to the <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2269" target="_blank" rel="noopener noreferrer" class="">GitHub issue</a> on this work.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Removing wheel and setuptools as Dependencies for pip]]></title>
-            <link>https://conda-forge.org/news/2024/08/21/sunsetting-pip-deps/</link>
-            <guid>https://conda-forge.org/news/2024/08/21/sunsetting-pip-deps/</guid>
-            <pubDate>Wed, 21 Aug 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[Starting with Python 3.13, pip will no longer have setuptools and wheel as dependencies]]></description>
-            <content:encoded><![CDATA[<p>Starting with Python 3.13, <code>pip</code> will no longer have <code>setuptools</code> and <code>wheel</code> as dependencies
-by default. While this default made sense at the time <code>conda-forge</code> was started (over 8 years ago!),
-with the advent of Python packaging build backends (e.g., <code>flit</code>, <code>poetry</code>, <code>hatchling</code>, etc.),
-this default is no longer correct. Instead, you will need to specify <code>wheel</code> and/or <code>setuptools</code> explicitly in the <code>host</code>
-section of your recipe if you need them. At first, <code>pip</code> for versions of Python before 3.13 will be unaffected.
-However, after the completion of the Python 3.13 migration, we will remove these dependencies from <code>pip</code> for all
-versions of Python. Follow GitHub issue <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2252" target="_blank" rel="noopener noreferrer" class="">#2252</a>
-for more information and updates.</p>]]></content:encoded>
         </item>
     </channel>
 </rss>
