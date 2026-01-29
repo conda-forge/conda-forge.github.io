@@ -59,7 +59,7 @@ a new patch version of v3.10.x in the example above).
 
 For the duration of the lifetime of your LTS version, you'll want it to participate in the relevant
 migrations that are happening in conda-forge, e.g. if there's a rebuild for a new version of one of
-your dependencies. 
+your dependencies.
 
 If you're making a one-off backport release you can skip this section.
 
