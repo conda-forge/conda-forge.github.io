@@ -50,6 +50,8 @@ jobs:
             --exclude 'https://www.mesa3d.org/'
             --exclude 'https://www.quansight.com/'
             --exclude 'https://conda-forge.herokuapp.com/status-monitor'
+            --exclude 'https://osuosl.org/'
+            --exclude 'https://cf-infra-docs.netlify.app/'
             --exclude '.*/404.html/'
             --exclude '.*,.*'
             --exclude-path './build/community/minutes/'
