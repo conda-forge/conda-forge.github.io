@@ -65,7 +65,7 @@ grayskull pypi --use-v1-format --strict-conda-forge -o recipes pylast==7.0.1
 Here's a quick wraparound of the arguments passed:
 
 - `pypi` indicates that a recipe should be generated for a package from PyPI.
-- `--use-v1-format` uses the modern v1 recipe format.
+- `--use-v1-format` uses v1 recipe format (v0 is the `meta.yaml` format, now considered legacy).
 - `--strict-conda-forge` follows conda-forge rules more strictly.
 - `-o recipes` causes the recipe to be output into a subdirectory of `recipes` directory.
 - `pylast==7.0.1` specifies the package name and version. Normally, you'd only specify a package
@@ -216,7 +216,7 @@ testing any changes to the recipe. To do this, we're going to use the `conda-smi
 following:
 
 ```bash
-conda smithy recipe-lint --conda-forge recipes/pylast
+conda smithy lint --conda-forge recipes/pylast
 ```
 
 This will perform all the basic quality checks, plus additional conda-forge quality checks, on the
