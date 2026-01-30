@@ -6,15 +6,14 @@ If you want to package a Go package to conda-forge, you can use this recipe temp
 
 ```yaml
 context:
-  name: example-package
   version: "0.1.0"
 
 package:
-  name: ${{ name|lower }}
+  name: example-package
   version: ${{ version }}
 
 source:
-  url: https://github.com/example-package/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  url: https://github.com/example-package/example-package/archive/refs/tags/v${{ version }}.tar.gz
   sha256: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
   target_directory: src
 
