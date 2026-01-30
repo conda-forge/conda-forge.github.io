@@ -225,9 +225,9 @@ spread across different `meson.build` files across the source tree.
 The primary dependency lookup method is the `dependency()` function. It can use either pkg-config,
 CMake files or built-in rules provided in Meson itself. Other frequently used methods include:
 
-- `.has_header() method of a compiler object, to search for header files
+- `.has_header()` method of a compiler object, to search for header files
 - `.find_library()` method of a compiler object, to search for libraries
-- `find_program()` function to search for progams (usually indicating a `build` dependency)
+- `find_program()` function to search for programs (usually indicating a `build` dependency)
 
 For example:
 
@@ -288,24 +288,25 @@ notably:
 
 1. `pyproject.toml` file that is used to declare the build system, build-time dependencies and often
    project metadata.
-
 2. `setup.cfg` and `setup.py` files in projects using the `setuptools` build system.
-
 3. Various `requirements*.txt` and similar files, listing custom dependency groups.
 
 These files are illustrated in greater detail in the subsequent sections.
 
-Python packages can also have "external" dependencies. The standardized approach to declaring them
-is currently worked on as [PEP 725](https://peps.python.org/pep-0725/). These packages sometimes
-use general purpose build systems declared in the earlier sections, and their external dependencies
-can be obtained from them. In some cases, these dependencies are additionally packaged on PyPI (for
-example, `cmake` and `ninja` are).
+Python packages can also have dependencies on non-Python packages. The standardized approach to declaring them
+is currently worked on as [PEP 725](https://peps.python.org/pep-0725/). In some cases,
+general purpose build are used, as explained in the earlier sections, in which case the external dependencies
+can be obtained from the build system files. In other cases, such dependencies are listed in custom
+requirement list files or the documentation.
+
+Furthermore, sometimes external dependencies are additionally
+packaged on PyPI (for example, `cmake` and `ninja` are).
 
 ### Package metadata
 
 The primary source of dependency information for Python packages is the generated dependency
-metadata. It can be found in the built wheels, in `*.dist-info/METADATA` file, and in source
-distributions as `PKG-INFO` file. The relevant entries are `Requires-Dist`. For example, the
+metadata. It can be found in the built wheels, in the `*.dist-info/METADATA` file, and in source
+distributions as the `PKG-INFO` file. The relevant entries are `Requires-Dist`. For example, the
 following entries:
 
 ```
@@ -317,7 +318,7 @@ indicate that `tomli` package is required for Python 3.10 and older, and `tomli-
 unconditionally.
 
 Note that package metadata includes only runtime (`run`) dependencies and not build-time (`build`, `host`)
-dependencies. Extra dependencies are listed as well, and they are decorated with an `extra`
+dependencies. Optional dependencies ("extras") are listed as well, and they are decorated with an `extra`
 environment marker, for example:
 
 ```
@@ -394,7 +395,7 @@ Some projects using the setuptools build system may be declaring dependencies in
 dependency-related keys in the `[options]` section. The latter is a Python script, and
 dependency-related options are passed as keyword arguments to `setuptools.setup()` function call.
 
-In both cases, `install_requires` to list `run` dependencies, and `extras_require` to list groups of
+In both cases, `install_requires` is used to list `run` dependencies, and `extras_require` to list groups of
 extra dependencies. Sometimes `setup_requires` is used to list `host` dependencies, in other cases
 they are listed in `pyproject.toml` instead. Test dependencies are usually listed as an "extra",
 though old packages may use `tests_require` instead. Python version constraints are listed in
