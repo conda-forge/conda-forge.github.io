@@ -4,11 +4,11 @@ tags: [tutorial]
 
 # Generating and building your first recipe
 
-In this tutorial, we will generate your first recipe for a pure Python package, test it by building
-the package and use a linter to verify that it follows the conda-forge best practices.
+In this tutorial, we will generate your first recipe for a pure Python package, use a linter to
+verify that it follows the conda-forge best practices and prepare it for initial submission.
 
-The tutorial assumes that you have a working conda installation, and that you are running Linux or
-macOS. In case of Linux, you also need to have a working Docker installation.
+The tutorial assumes that you have a working conda installation, and are familiar with using conda
+via a terminal.
 
 ## Prepare the development environment
 
@@ -47,7 +47,7 @@ cd staged-recipes
 We are using `--depth=1` to reduce the download size and disk space consumption, as we do not need
 the repository's history.
 
-## Generate the initial recipe and build it
+## Generate the initial recipe
 
 Let's try to create a recipe for [pylast 7.0.1](https://pypi.org/project/pylast/7.0.1/). Since it
 is a PyPI package, we can start with an automatically generated recipe. We'll need to:
@@ -72,22 +72,7 @@ Here's a quick wraparound of the arguments passed:
   name, but we're using a specific version here to make the results more predictable.
 
 This command will write a `recipes/pylast/recipe.yaml` file. This file is the recipe, containing the
-instructions for building a package. It is already working, and we can use the `build-locally.py`
-script to build the package:
-
-```bash
-python build-locally.py
-```
-
-The script will ask you to select the config appropriate for the system you're running. Once you
-type the correct number and push enter, the script will create a build environment and build the
-package verbosely. Once the build completes, the new package will be found in
-`build_artifacts/noarch` directory, e.g.:
-
-```
--rw------- 1 user user  36K 01-28 18:57 pylast-7.0.1-pyhcb3b5b4_0.conda
-
-```
+instructions for building a package.
 
 ## Look at the recipe file
 
