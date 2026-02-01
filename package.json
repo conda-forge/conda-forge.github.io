@@ -25,14 +25,14 @@
     "chartjs-adapter-moment": "^1.0.1",
     "clsx": "^2.1.1",
     "d3": "^7.9.0",
-    "dagre-d3-es": "^7.0.13",
+    "dagre-d3-es": "^7.0.14",
     "install": "^0.13.0",
     "moment": "^2.29.4",
     "octokit": "^5.0.5",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.3",
+    "react": "^19.2.4",
     "react-chartjs-2": "^5.3.1",
-    "react-dom": "^19.2.3",
+    "react-dom": "^19.2.4",
     "react-inlinesvg": "^4.2.0",
     "react-markdown": "^10.1.0",
     "react-tooltip": "^5.30.0",
@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.9.2",
-    "prettier": "^3.7.4"
+    "prettier": "^3.8.1"
   },
   "browserslist": {
     "production": [
