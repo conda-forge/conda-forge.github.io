@@ -2,6 +2,8 @@
 tags: [how-to, basic]
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import { RecipeTabs } from "@site/src/components/RecipeTabs";
 
 # How to populate package dependencies
@@ -58,9 +60,24 @@ tar -xf info-libgit2-1.9.2-hc20babb_0.tar.zst
 ${EDITOR} info/index.json
 ```
 
-When building v1 recipes, `rattler-build` outputs finalized run dependencies, along with their
-sources, e.g.:
+When building recipes, both conda-build and rattler-build output finalized run dependencies, e.g.:
 
+<Tabs groupId="synced-recipe-tabs">
+
+<TabItem label="conda-build" value="v0">
+```
+  run:
+    - libstdcxx >=14
+    - libzlib >=1.3.1,<2.0a0
+    - openssl >=3.5.5,<4.0a0
+    - libgcc >=14
+    - pcre2 >=10.47,<10.48.0a0
+    - libssh2 >=1.11.1,<2.0a0
+    - __glibc >=2.17,<3.0.a0
+```
+</TabItem>
+
+<TabItem label="rattler-build" value="v1" default="True">
 ```
  │ │ Finalized run dependencies (libgit2-1.9.2-hc20babb_0):
  │ │ ╭────────────────────┬──────────────────────────────────────────────────╮
@@ -80,8 +97,11 @@ sources, e.g.:
  │ │ │ libgit2            ┆ >=1.9.2,<1.10.0a0                                │
  │ │ ╰────────────────────┴──────────────────────────────────────────────────╯
 ```
+</TabItem>
 
-In the output, "RE" stands for "run export".
+</Tabs>
+
+Rattler-build additionally indicates their sources: in the output, "RE" stands for "run export".
 
 ### Checking binary linkage
 
@@ -89,6 +109,30 @@ When compiled binaries link against shared libraries, the list of these dependen
 from these binaries themselves. Conda-build and rattler-build do this automatically, and map the
 dependent libraries into packages. For example, for `libgit2` on Linux:
 
+<Tabs groupId="synced-recipe-tabs">
+
+<TabItem label="conda-build" value="v0">
+```
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO lib/libssl.so.3 found in conda-forge/linux-64::openssl==3.5.5=h35e630c_1
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO lib/libcrypto.so.3 found in conda-forge/linux-64::openssl==3.5.5=h35e630c_1
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO lib/libpcre2-8.so.0 found in conda-forge/linux-64::pcre2==10.47=haa7fec5_0
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO lib/libssh2.so.1 found in conda-forge/linux-64::libssh2==1.11.1=hcf80075_0
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO lib/libz.so.1 found in conda-forge/linux-64::libzlib==1.3.1=hb9d3cd8_2
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO x86_64-conda-linux-gnu/sysroot/lib64/librt.so.1 found in CDT/compiler package conda-forge/noarch::sysroot_linux-64==2.17=h0157908_18
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO x86_64-conda-linux-gnu/sysroot/lib64/libpthread.so.0 found in CDT/compiler package conda-forge/noarch::sysroot_linux-64==2.17=h0157908_18
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO x86_64-conda-linux-gnu/sysroot/lib64/libc.so.6 found in CDT/compiler package conda-forge/noarch::sysroot_linux-64==2.17=h0157908_18
+   INFO (libgit2,bin/git2): Needed DSO lib/libssl.so.3 found in conda-forge/linux-64::openssl==3.5.5=h35e630c_1
+   INFO (libgit2,bin/git2): Needed DSO lib/libcrypto.so.3 found in conda-forge/linux-64::openssl==3.5.5=h35e630c_1
+   INFO (libgit2,bin/git2): Needed DSO lib/libpcre2-8.so.0 found in conda-forge/linux-64::pcre2==10.47=haa7fec5_0
+   INFO (libgit2,bin/git2): Needed DSO lib/libssh2.so.1 found in conda-forge/linux-64::libssh2==1.11.1=hcf80075_0
+   INFO (libgit2,bin/git2): Needed DSO lib/libz.so.1 found in conda-forge/linux-64::libzlib==1.3.1=hb9d3cd8_2
+   INFO (libgit2,bin/git2): Needed DSO x86_64-conda-linux-gnu/sysroot/lib64/librt.so.1 found in CDT/compiler package conda-forge/noarch::sysroot_linux-64==2.17=h0157908_18
+   INFO (libgit2,bin/git2): Needed DSO x86_64-conda-linux-gnu/sysroot/lib64/libpthread.so.0 found in CDT/compiler package conda-forge/noarch::sysroot_linux-64==2.17=h0157908_18
+   INFO (libgit2,bin/git2): Needed DSO x86_64-conda-linux-gnu/sysroot/lib64/libc.so.6 found in CDT/compiler package conda-forge/noarch::sysroot_linux-64==2.17=h0157908_18
+```
+</TabItem>
+
+<TabItem label="rattler-build" value="v1" default="True">
 ```
  │ │ [lib/libgit2.so.1.9.2] links against:
  │ │  ├─ lib/libpcre2-8.so.0.15.0 (pcre2)
@@ -110,6 +154,9 @@ dependent libraries into packages. For example, for `libgit2` on Linux:
  │ │  ├─ lib/libcrypto.so.3 (openssl)
  │ │  └─ libc.so.6 (system)
 ```
+</TabItem>
+
+</Tabs>
 
 These results can be used to verify the final `run` dependency lists. In particular, they may be
 helpful in noticing unnecessary dependencies or missing run exports. However, note that they will
