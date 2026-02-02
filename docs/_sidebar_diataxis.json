@@ -44,11 +44,6 @@
       {
         "type": "doc",
         "id": "tutorials/first-recipe"
-      },
-      {
-        "type": "link",
-        "label": "Contribute your first recipe",
-        "href": "/docs/maintainer/adding_pkgs/#the-staging-process"
       }
     ]
   },
