@@ -2,6 +2,9 @@
 title: 'Contributing packages'
 ---
 
+import { BuildScriptTabs } from "@site/src/components/RecipeTabs";
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
 <a id="dev-contribute-pkgs"></a>
 
 <a id="contributing-packages"></a>
@@ -12,7 +15,7 @@ The contribution process can be broken down into three steps:
 
 - Step 1. Staging process (add recipe and license).
 
-  With the help of [the staging process](#creating-recipes), add a package's recipe and license to the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and create a PR.
+  With the help of [the staging process](#the-staging-process), add a package's recipe and license to the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and create a PR.
 
 - Step 2. Post staging process.
 
@@ -57,14 +60,14 @@ There are, currently, three ways to generate a recipe:
    - Create a new environment using : `conda create --name MY_ENV`. Replace `MY_ENV` with the environment name.
    - Activate this new environment : `conda activate MY_ENV`.
    - Run `conda install -c conda-forge grayskull` to install `grayskull`.
-   - Followed by `grayskull pypi --strict-conda-forge YOUR_PACKAGE_NAME` to generate the recipe. Replace `YOUR_PACKAGE_NAME` with the package name.
+   - Followed by `grayskull pypi --use-v1-format --strict-conda-forge YOUR_PACKAGE_NAME` to generate the recipe. Replace `YOUR_PACKAGE_NAME` with the package name.
 
    :::
 
    You do _not_ necessarily have to use `grayskull`, and the recipes produced by `grayskull` might need to be reviewed and edited.
    Read more about `grayskull` and how to use it [here](https://github.com/conda-incubator/grayskull#introduction).
 
-3. If it's none of the above, generate a recipe with the help of [the example recipe](https://github.com/conda-forge/staged-recipes/tree/main/recipes/example) in the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and modify it as necessary.
+3. If it's none of the above, generate a recipe with the help of [the example v1 recipe](https://github.com/conda-forge/staged-recipes/tree/main/recipes/example-v1) (or [the example v0 recipe](https://github.com/conda-forge/staged-recipes/tree/main/recipes/example), if you wish to use the v0 format) in the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and modify it as necessary.
 
 Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
 
@@ -85,24 +88,28 @@ In case you are building your first recipe using conda-forge, a step-by-step ins
 1. Ensure your source code can be downloaded as a single file. Source code
    should be downloadable as an archive (.tar.gz, .zip, .tar.bz2, .tar.xz)
    or tagged on GitHub, to ensure that it can be verified. (For further
-   detail, see [Build from tarballs, not repos](#tarballs-no-repos)).
+   detail, see [Build from tarballs, not repos](#build-from-tarballs-not-repos)).
 2. Fork and clone the [staged-recipes](https://github.com/conda-forge/staged-recipes)
    repository from GitHub.
 3. Checkout a new branch from the staged-recipes `main` branch.
-4. Through CLI, cd inside the ‘staged-recipes/recipes' directory.
+4. In the same terminal, go to the `staged-recipes/recipes` directory.
 5. Within your forked copy, create a new folder in the recipes folder for your package (i.e, `...staged-recipes/recipes/<name-of-package>`)
-6. Copy [meta.yaml](https://github.com/conda-forge/staged-recipes/blob/main/recipes/example/meta.yaml) from the example directory.
-   All the changes in the following steps will happen in the COPIED meta.yaml (i.e., `...staged-recipes/recipes/<name-of-package>/meta.yaml`).
+6. [Generate the recipe](#generating-the-recipe) or copy the example `recipe.yaml` (or `meta.yaml`)
+   into this folder.
+   All the changes in the following steps will happen in the COPIED `recipe.yaml` or `meta.yaml`
+   (i.e., `...staged-recipes/recipes/<name-of-package>/recipe.yaml`).
    Please leave the example directory unchanged!
-7. Modify the copied recipe (meta.yml) as needed. To see how to modify meta.yaml, take a look at
-   [The recipe meta.yaml](#id4).
-8. Generate the SHA256 key for your source code archive, as described in the
+7. Modify the copied recipe file as needed. To see how to modify it, take a look at
+   [The recipe (recipe.yaml or meta.yaml)](#the-recipe-recipeyaml-or-metayaml) section.
+8. Generate the SHA256 hash for your source code archive, as described in the
    example recipe using the `openssl` tool. As an alternative, you can also
-   go to the package description on [PyPi](https://pypi.org) from which you
+   go to the package description on [PyPI](https://pypi.org) from which you
    can directly copy the SHA256.
 9. Be sure to fill in the `test` section. The simplest test will simply
-   test that the module can be imported, as described in the example.
-10. Remove all irrelevant comments in the `meta.yaml` file.
+   test that the top-level package or module can be imported, as described in the example.
+   Some projects have an empty top-level package; in those cases, make sure to select also
+   some other modules that do contain runnable code.
+10. Remove all irrelevant comments in the recipe file.
 
 :::tip
 
@@ -118,11 +125,11 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 
 #### Checklist
 
-- Ensure that the license and license family descriptors (optional) have the right case and that the license is correct. Note that case sensitive inputs are required (e.g. Apache-2.0 rather than APACHE 2.0). Using SPDX identifiers for license field is recommended. (see [SPDX Identifiers and Expressions](#spdx))
-- Ensure that you have included a license file if your license requires one – most do. (see [here](https://github.com/conda-forge/staged-recipes/blob/a504af81c05491bf7b0b018b2fa1efe64767985c/recipes/example/meta.yaml#L52-L55))
+- Ensure that the license has the right case and that the license is correct. Note that case sensitive inputs are required (e.g. `Apache-2.0` rather than `APACHE 2.0`). Using SPDX identifiers for license field is recommended. (see [SPDX Identifiers and Expressions](#spdx-identifiers-and-expressions))
+- Ensure that you have included a license file if your license requires one – most do. (see [v0 example](https://github.com/conda-forge/staged-recipes/blob/f12772fa1d8c71c1028c2a41ef41c8278520ae5b/recipes/example/meta.yaml#L84-L88) or [v1 example](https://github.com/conda-forge/staged-recipes/blob/f12772fa1d8c71c1028c2a41ef41c8278520ae5b/recipes/example-v1/recipe.yaml#L88-L92))
 - In case your project has tests included, you need to decide if these tests should be executed while building the conda-forge feedstock.
 - Make sure that all tests pass successfully at least on your development machine.
-- Recommended: run the test locally on your source code to ensure the recipe works locally (see [Running tests locally for staged recipes](#staging-test-locally)).
+- Recommended: run the test locally on your source code to ensure the recipe works locally (see [Running tests locally for staged recipes](#running-tests-locally-for-staged-recipes)).
 - Make sure that your changes do not interfere with other recipes that are in the `recipes` folder (e.g. the `example` recipe).
 
 <a id="feedback-and-revision"></a>
@@ -167,7 +174,7 @@ Each feedstock contains various files that are generated automatically using our
 
 #### recipe
 
-This folder contains the `meta.yaml` file and any other files/scripts needed to build the package.
+This folder contains the recipe file (`recipe.yaml` or `meta.yaml`) and any other files/scripts needed to build the package.
 
 <a id="license-txt"></a>
 
@@ -258,22 +265,32 @@ staged-recipes directory.
    git push origin main --force
    ```
 
-Once these steps are complete, you can continue with the steps in [Step-by-step Instructions](#staging-steps) to stage your new package recipe using your existing staged-recipes fork.
+Once these steps are complete, you can continue with the steps in [Step-by-step Instructions](#step-by-step-instructions) to stage your new package recipe using your existing staged-recipes fork.
 
 <a id="id4"></a>
 
 <a id="the-recipe-meta-yaml"></a>
 
-## The recipe meta.yaml
+## The recipe (recipe.yaml or meta.yaml)
 
-The `meta.yaml` file in the recipe directory is at the heart of every conda package.
+The recipe file is at the heart of every conda package. It is located in the `recipe` directory,
+and is named either:
+
+- `recipe.yaml` for the newer v1 recipes
+- `meta.yaml` for the older v0 recipes
+
 It defines everything that is required to build and use the package.
 
-`meta.yaml` is in [yaml](https://en.wikipedia.org/wiki/YAML) format, augmented with [Jinja](http://jinja.pocoo.org/) templating.
+Both files use [YAML](https://en.wikipedia.org/wiki/YAML) syntax, augmented with [Jinja](http://jinja.pocoo.org/) templating.
 
-A full reference of the structure and fields of `meta.yaml` file can be found in the [Defining metadata (meta.yaml)](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html) section in the conda-build documentation.
+The full reference of the formats can be found in the following sources:
+- `recipe.yaml`: improved recipe format as specified by [CEP 13](https://github.com/conda/ceps/blob/main/cep-0013.md) & [CEP 14](https://github.com/conda/ceps/blob/main/cep-0014.md). As of early 2026, it is only implemented by rattler-build, which also provides a more readable [overview](https://rattler-build.prefix.dev/latest/reference/recipe_file).
+- `meta.yaml`: [conda-build: defining metadata (meta.yaml)](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html)
 
-In the following, we highlight particularly important and conda-forge specific information and guidelines, ordered by section in `meta.yaml`.
+In the following, we highlight particularly important and conda-forge specific information and
+guidelines, ordered by the section in the YAML file. Whenever the syntax between v0 and v1 recipes
+differs, examples for both versions are provided. Otherwise, the provided snippet works for both
+recipe versions.
 
 <a id="meta-yaml-source"></a>
 
@@ -327,7 +344,7 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 
 #### Downloading extra sources and data files
 
-`conda-build 3` supports multiple sources per recipe. Examples are available [in the conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#source-from-multiple-sources).
+`conda-build` (v3 and above) and `rattler-build` support multiple sources per recipe. Examples are available in the [rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#source-section) and [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#source-from-multiple-sources).
 
 <a id="build"></a>
 
@@ -337,33 +354,67 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 
 #### Skipping builds
 
-Use the `skip` key in the `build` section along with a selector:
+Use the `skip` key in the `build` section. In v1 recipes, it accepts any of:
+
+- a boolean value, such as `true` to skip the build unconditionally;
+- a selector expression to skip the build when it evaluates to true;
+- a list of selector expressions, in which case the build is skipped if any of the expressions
+  evaluates to true.
+
+In v0 recipes, only a boolean value is directly accepted, and it needs to be combined with
+a selector expression via templating. Different selectors can either be combined using `or`
+clauses or multiple `skip: true` can be used.
 
 You can e.g. specify not to build …
 
 - on specific architectures:
+  <RecipeTabs>
+
   ```yaml
   build:
-      skip: true  # [win]
-  ```
-- for specific python versions:
-  ```yaml
-  build:
-      skip: true  # [py<35]
+    skip: true  # [win]
+    skip: true  # [osx-arm64]
   ```
 
-A full description of selectors is
-[in the conda docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#preprocessing-selectors).
+  ```yaml
+  build:
+    skip:
+      - win
+      - osx-arm64
+  ```
+  </RecipeTabs>
+- for specific python versions:
+  <RecipeTabs>
+
+  ```yaml
+  build:
+      skip: true  # [py<312]
+  ```
+
+  ```yaml
+  build:
+      skip: match(python, "<3.12)
+  ```
+  </RecipeTabs>
+
+A full description of selectors is in the [rattler-build](https://rattler-build.prefix.dev/latest/selectors/) and
+[conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#preprocessing-selectors).
 
 <a id="optional-bld-bat-and-or-build-sh"></a>
 
-#### Optional: `bld.bat` and/or `build.sh`
+#### Optional: build scripts
 
-In many cases, `bld.bat` and/or `build.sh` files are not required.
+In many cases, explicit build scripts are not required.
 Pure Python packages almost never need them.
 
+The default names for the build scripts are
+
+- `build.sh` for Unix
+- `build.bat` for Windows, in v1 recipes
+- `bld.bat` for Windows, in v0 recipes
+
 If the build can be executed with one line, you may put this line in the
-`script` entry of the `build` section of the `meta.yaml` file with:
+`script` entry of the `build` section of the recipe file with:
 `script: "{{ PYTHON }} -m pip install . -vv"`.
 
 Remember to always add `pip` to the host requirements.
@@ -376,12 +427,21 @@ Remember to always add `pip` to the host requirements.
 
 Normally Python packages should use this line:
 
+<RecipeTabs>
+
 ```yaml
 build:
   script: "{{ PYTHON }} -m pip install . -vv"
 ```
 
-as the installation script in the `meta.yml` file or `bld.bat/build.sh` script files,
+```yaml
+build:
+  script: "${{ PYTHON }} -m pip install . -vv"
+```
+
+</RecipeTabs>
+
+as the installation script in the recipe file or the build script files,
 while adding `pip` to the host requirements:
 
 ```yaml
@@ -406,9 +466,9 @@ as `host` requirements; the real package dependencies are only
 
 #### Build, host and run
 
-Conda-build distinguishes three different kinds of dependencies.
+Three primary kinds of dependencies are recognized.
 In the following paragraphs, we give a very short overview what packages go where.
-For a detailed explanation please refer to the [conda-build documentation](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#requirements-section).
+For a detailed explanation please refer to the [rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#requirements-section) or [conda-build documentation](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#requirements-section), respectively.
 
 <a id="id7"></a>
 
@@ -470,7 +530,7 @@ It is therefore crucial to ensure that only library versions with a compatible [
 In the best case, the shared library you depend on:
 
 - defines a pin in the [list of globally pinned packages](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml)
-- exports its [ABI](../glossary.md#abi) compatible requirements by defining `run_exports` in it's meta.yaml
+- exports its [ABI](../glossary.md#abi) compatible requirements by defining `run_exports` in its recipe file
 
 In these cases you do not have to worry about version requirements:
 
@@ -506,7 +566,11 @@ The `run_constrained` section allows defining restrictions on packages at runtim
 Imagine a package can be used together with version 1 of `awesome-software` when present, but does not strictly depend on it.
 Therefore you would like to let the user choose whether he/she would like to use the package with or without `awesome-software`. Let's assume further that the package is incompatible to version 2 of `awesome-software`.
 
-In this case `run_constrained` can be used to restrict `awesome-software` to version 1.\*, if the user chooses to install it:
+In this case run constraints can be used to restrict `awesome-software` to version 1.\*, if the user
+chooses to install it. In v1 recipes, the key `run_constraints` is used, whereas in v0 recipes it's
+`run_contrained`:
+
+<RecipeTabs>
 
 ```yaml
 requirements:
@@ -515,6 +579,15 @@ requirements:
     - awesome-software 1.*
 ```
 
+```yaml
+requirements:
+  # [...]
+  run_constraints:
+    - awesome-software 1.*
+```
+
+</RecipeTabs>
+
 Here `run_constrained` acts as a means to protect users from incompatible versions without introducing an unwanted dependency.
 
 <a id="defining-conflicts"></a>
@@ -522,19 +595,34 @@ Here `run_constrained` acts as a means to protect users from incompatible versio
 ##### Defining conflicts
 
 Sometimes packages interfere with each other and therefore only one of them can be installed at any time.
-In combination with an unsatisfiable version, `run_constrained` can define blockers:
+In combination with an unsatisfiable version, run constraints can define blockers:
+
+<RecipeTabs>
 
 ```yaml
 package:
-name: awesome-db
+  name: awesome-db
 
 requirements:
   # [...]
   run_constrained:
-    - amazing-db ==9999999999
+    - amazing-db <0.0a0
 ```
 
-In this example, `awesome-db` cannot be installed together with `amazing-db` as there is no package `amazing-db-9999999999`.
+```yaml
+package:
+  name: awesome-db
+
+requirements:
+  # [...]
+  run_constraints:
+    - amazing-db <0.0a0
+```
+
+</RecipeTabs>
+
+In this example, `awesome-db` cannot be installed together with `amazing-db` as the constraint
+`amazing-db <0.0a0` is impossible to satisfy.
 
 <a id="testing-in-recipes"></a>
 
@@ -563,45 +651,77 @@ However, this is no reason for the recipe to not have tests. At the very least,
 we want to verify that the package has installed the desired files in the desired
 locations. This is called existence testing.
 
-Existence testing can be accomplished in the `meta.yaml` file in the
-`test/commands` block.
+In v1 recipes, existence testing can be accomplished `package_contents` tests. In v0 recipes, it
+needs to be done manually in the `commands` subsection of the `test` section.
 
-On posix systems, use the `test` utility and the `$PREFIX` variable.
-
-On Windows, use the `exist` command. See below for an example.
+On POSIX systems, use the `test` utility and the `$PREFIX` variable. On Windows, use the `exist`
+command. See below for an example.
 
 Simple existence testing example:
+
+<RecipeTabs>
 
 ```yaml
 test:
   commands:
-    - test -f $PREFIX/lib/libboost_log$SHLIB_EXT  # [unix]
-    - if not exist %LIBRARY_LIB%\\boost_log-vc140-mt.lib exit 1  # [win]
+    - test -f $PREFIX/lib/libboost_log$SHLIB_EXT        # [unix]
+    - if not exist %LIBRARY_BIN%\\boost_log.dll exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\boost_log.lib exit 1  # [win]
 ```
 
+```yaml
+tests:
+  - package_contents:
+      lib:
+        # $PREFIX/lib/libboost_log.so on Linux
+        # $PREFIX/lib/libboost_log.dylib on macOS
+        # %LIBRARY_BIN%/boost_log.dll and %LIBRARY_LIB%/boost_log.lib on Windows
+        - boost_log
+```
+
+</RecipeTabs>
+
 <a id="testing-python-packages"></a>
-
-#### Testing python packages
-
-For the best information about testing, see the conda build docs
-[test section.](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#test-section)
-
 <a id="testing-importing"></a>
+<a id="pip-check"></a>
+<a id="id8"></a>
 
-##### Testing importing
+#### Testing Python packages
 
-The minimal test of a python package should make sure that the package
-can be successfully imported. This can be accomplished with this
-stanza in the `meta.yaml`:
+For the best information about testing, see the test sectios in the
+[rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#tests-section)
+or [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#test-section).
+
+The recommended minimum of testing for Python packages involves the following tests:
+
+- testing whether one or more installed Python modules can be imported correctly,
+- running `pip check` to ensure that all dependencies specified in the Python metadata are met.
+
+In v1 recipes, this is accomplished using a `python` test which combines both `imports` testing
+and an automatic `pip check` test. In v0 recipes, a combination of `imports` test with an explicit
+command test needs to be used:
+
+<RecipeTabs>
 
 ```yaml
 test:
   imports:
     - package_name
+  commands:
+    - pip check
 ```
 
-Note that `package_name` is the name imported by python;
-not necessarily the name of the conda package (they are sometimes different).
+```yaml
+tests:
+  - python:
+      imports:
+        - package_name
+```
+
+</RecipeTabs>
+
+Note that `package_name` is the name imported by Python;
+not necessarily the name of the conda package (they are sometimes different), or even the wheel name.
 
 Testing for an import will catch the bulk of the packaging errors, generally
 including the presence of dependencies. However, it does not assure that the
@@ -613,23 +733,6 @@ In these cases, it helps to add more imports explicitly targeting modules
 that do contain executable code (e.g. `package_name.core`).
 
 It is good to run some other tests of the code itself (the test suite) if possible.
-
-<a id="pip-check"></a>
-
-<a id="id8"></a>
-
-##### pip check
-
-For PyPI packages, we strongly recommend including `pip check` as part of the `test.commands` section:
-
-```yaml
-test:
-  commands:
-    - pip check
-```
-
-This command will check if all the dependencies specified in the Python
-metadata are satisfied.
 
 :::note
 
@@ -645,7 +748,7 @@ Tip: use `pip list` to show what `pip check` "sees".
 #### Running unit tests
 
 The trick here is that there are multiple ways to run unit tests in Python,
-including nose, pytest, etc.
+including pytest, etc.
 
 Also, some packages install the tests with the package, and thus they can be
 run in place, while others keep the tests with the source code, and thus can
@@ -657,17 +760,34 @@ not be run straight from an installed package.
 
 Sometimes there are packages required to run the tests that are not required
 to simply use the package. This is usually a test-running framework, such as
-nose or pytest. You can ensure that it is included by adding it to requirements
+`pytest`. You can ensure that it is included by adding it to requirements
 in the test stanza:
+
+<RecipeTabs>
 
 ```yaml
 test:
   imports:
     - package_name
-...
   requires:
     - pytest
+  commands:
+    - ...  # details below
 ```
+
+```yaml
+tests:
+  - python:
+      imports:
+        - package_name
+  - requirements:
+      run:
+        - pytest
+    script:
+      - ...  # details below
+```
+
+</RecipeTabs>
 
 <a id="copying-test-files"></a>
 
@@ -677,7 +797,10 @@ Often test files are not installed alongside packages. Conda creates a fresh
 working copy to execute the test stage of build recipes, which don't contain
 the files of source package.
 
-You can include files required for testing with the `source_files` section:
+You can include files required for testing with the `files/source` section in v1 recipes,
+or `source_files` section in v0 recipes:
+
+<RecipeTabs>
 
 ```yaml
 test:
@@ -686,13 +809,33 @@ test:
   requires:
     - pytest
   source_files:
-    - tests
+    - tests/
     - test_pkg_integration.py
   commands:
-    - pytest tests test_pkg_integration.py
+    - pytest tests/
+    - pytest test_pkg_integration.py
 ```
 
-The `source_files` section works for files and directories.
+```yaml
+tests:
+  - python:
+      imports:
+        - package_name
+  - requirements:
+      run:
+        - pytest
+    files:
+      source:
+        - tests/
+        - test_pkg_integration.py
+    script:
+      - pytest tests/
+      - pytest test_pkg_integration.py
+```
+
+</RecipeTabs>
+
+They work for files and directories.
 
 <a id="built-in-tests"></a>
 
@@ -701,15 +844,39 @@ The `source_files` section works for files and directories.
 Some packages have testing built-in. In this case, you can put a test command
 directly in the test stanza:
 
+<RecipeTabs>
+
 ```yaml
 test:
   ...
   commands:
-     python -c "import package_name; package_name.tests.runall()"
+     - python -c "import package_name; package_name.tests.runall()"
 ```
 
-Alternatively, you can add a file called `run_test.py` in the recipe that
-will be run at test time. This allows an arbitrarily complicated test script.
+```yaml
+tests:
+  ...
+  - script:
+      - python -c "import package_name; package_name.tests.runall()"
+```
+
+</RecipeTabs>
+
+##### Custom test script
+
+Alternatively, a custom test script can be created and placed in the `recipe`
+directory. This allows an arbitrarily complicated test script. For v1 recipes,
+the script is listed via a `script` test with a `file` key:
+
+```yaml
+tests:
+  - script:
+      file: run_test.py
+```
+
+For v0 recipes, the file is always called `run_test.py`, and it is used
+automatically when present. However, note that it will override the `test:`
+section of the recipe entirely and cause it to be silently ignored.
 
 <a id="pytest-tests"></a>
 
@@ -717,6 +884,8 @@ will be run at test time. This allows an arbitrarily complicated test script.
 
 If the tests are installed with the package, pytest can find and run them
 for you with the following command:
+
+<RecipeTabs>
 
 ```yaml
 test:
@@ -726,18 +895,39 @@ test:
     - pytest --pyargs package_name
 ```
 
+```yaml
+tests:
+  - requirements:
+      run:
+        - pytest
+    script:
+      - pytest --pyargs package_name
+```
+
+</RecipeTabs>
+
 <a id="command-line-utilities"></a>
 
 #### Command Line Utilities
 
-If a python package installs command line utilities, you probably want to test that
+If a Python package installs command line utilities, you probably want to test that
 they were properly installed:
+
+<RecipeTabs>
 
 ```yaml
 test:
   commands:
     - util_1 --help
 ```
+
+```yaml
+tests:
+  - script:
+      - util_1 --help
+```
+
+</RecipeTabs>
 
 If the utility actually has a test mode, great. Otherwise simply invoking
 `--help` or `--version` or something will at least test that it is
@@ -765,15 +955,24 @@ optional, additional testing is encouraged when packages:
 ##### Testing R library loading
 
 The minimal test of an R package should ensure that the delivered library
-can be successfully imported. This is accomplished in the `meta.yaml`
-with:
+can be successfully imported. This is accomplished with:
+
+<RecipeTabs>
 
 ```yaml
 test:
   commands:
-    - $R -e "library('PackageName')"           # [not win]
-    - "\"%R%\" -e \"library('PackageName')\""  # [win]
+    - R -e "library('PackageName')"
 ```
+
+```yaml
+tests:
+  - r:
+      libraries:
+        - PackageName
+```
+
+</RecipeTabs>
 
 Note that `PackageName` is the name imported by R; not necessarily
 the name of the conda package (e.g., `r-matrix` delivers `Matrix`).
@@ -785,6 +984,8 @@ the name of the conda package (e.g., `r-matrix` delivers `Matrix`).
 A typical `test` section for an R package with `testthat` testing
 will look like
 
+<RecipeTabs>
+
 ```yaml
 test:
   requires:
@@ -792,11 +993,26 @@ test:
   source_files:
     - tests/
   commands:
-    - $R -e "library('PackageName')"                                                  # [not win]
-    - $R -e "testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)"           # [not win]
-    - "\"%R%\" -e \"library('PackageName')\""                                         # [win]
-    - "\"%R%\" -e \"testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)\""  # [win]
+    - R -e "library('PackageName')"
+    - R -e "testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)"
 ```
+
+```yaml
+tests:
+  - r:
+      libraries:
+        - PackageName
+  - files:
+      source:
+        - tests/
+    requirements:
+      run:
+        - r-testthat
+    script:
+      - R -e "testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)"
+```
+
+</RecipeTabs>
 
 :::note
 
@@ -831,7 +1047,7 @@ present and needed for specific tests.
 The default R build procedure on conda-forge will not include the
 `tests/` directory in the final build. While it is possible to do this
 (via an `--install-tests` flag), it is preferable to use the
-`tests.source_files` in the `meta.yaml` to copy the tests for the
+`files.source` or `source_files` keys (for `recipe.yaml` or `meta.yaml`, respectively) to copy the tests for the
 testing phase only.
 
 Finally, one uses the `testthat::test_file()` function to test the
@@ -845,12 +1061,21 @@ There are scenarios where the `tests/testthat.R` file does not orchestrate
 the individual tests. In that case, one can instead test the
 `tests/testthat` directory with
 
+<RecipeTabs>
+
 ```yaml
 test:
   commands:
-    - $R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed')"           # [not win]
-    - "\"%R%\" -e \"testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed')\""  # [win]
+    - R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed', stop_on_failure=TRUE)"
 ```
+
+```yaml
+tests:
+  - script:
+      - R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed', stop_on_failure=TRUE)"
+```
+
+</RecipeTabs>
 
 In this case, the function will error on any failures by default. Again,
 the `PackageName` here refers to the R library name.
@@ -904,7 +1129,7 @@ where `<VARIANT>` is one of the file names in the `.ci_support/` directory, e.g.
 
 Sometimes upstream maintainers do not include a license file in their tarball despite being demanded by the license.
 
-If this is the case, you can add the license to the `recipe` directory (here named `LICENSE.txt`) and reference it inside the meta.yaml:
+If this is the case, you can add the license to the `recipe` directory (here named `LICENSE.txt`) and reference it inside the recipe file:
 
 ```yaml
 about:
@@ -926,7 +1151,7 @@ If there is a license file in the archive, please set `license_file` to the path
 
 #### SPDX Identifiers and Expressions
 
-For the `about: license` entry in the recipe `meta.yaml`, using a SPDX identifier or expression is recommended.
+For the `about: license` entry in the recipe file, using a SPDX identifier or expression is recommended.
 
 See [SPDX license identifiers](https://spdx.org/licenses/) for the licenses.
 See [SPDX license exceptions](https://spdx.org/licenses/exceptions-index.html) for license exceptions.
@@ -1013,12 +1238,23 @@ build:
 
 Then, include the tool as a build time dependency.
 
+<RecipeTabs>
+
 ```yaml
 requirements:
   build:
     - {{ compiler('go') }}
     - go-licenses
 ```
+
+```yaml
+requirements:
+  build:
+    - ${{ compiler('go') }}
+    - go-licenses
+```
+
+</RecipeTabs>
 
 Finally, make sure that the generated file is included in the recipe.
 
@@ -1077,7 +1313,7 @@ extra:
 ```
 
 Here, `<name>` is the name you would want for the feedstock.
-If not specified, the name will be taken from the top-level `name` field in `meta.yaml`.
+If not specified, the name will be taken from the top-level `name` field in the recipe file.
 
 <a id="miscellaneous"></a>
 
@@ -1100,7 +1336,7 @@ installed scripts are recommended to be prefixed by the package name and a
 separating `-`. Below is some sample code for Unix and Windows that will make
 this install process easier. Please feel free to lift it.
 
-In `build.sh`:
+<BuildScriptTabs>
 
 ```bash
 # Copy the [de]activate scripts to $PREFIX/etc/conda/[de]activate.d.
@@ -1111,8 +1347,6 @@ do
     cp "${RECIPE_DIR}/${CHANGE}.sh" "${PREFIX}/etc/conda/${CHANGE}.d/${PKG_NAME}_${CHANGE}.sh"
 done
 ```
-
-In `build.bat`:
 
 ```batch
 setlocal EnableDelayedExpansion
@@ -1127,16 +1361,20 @@ for %%F in (activate deactivate) DO (
 )
 ```
 
+</BuildScriptTabs>
+
 <a id="jinja-templating"></a>
 
 ### Jinja templating
 
-The recipe `meta.yaml` can contain expressions that are evaluated during build time.
+The recipe file can contain expressions that are evaluated during build time.
 These expressions are written in [Jinja](http://jinja.pocoo.org/) syntax.
 
-Jinja expressions serve following purposes in the meta.yaml:
+Jinja expressions serve following purposes in the recipe file:
 
 - They allow defining variables to avoid code duplication. Using a variable for the `version` allows changing the version only once with every update.
+
+  <RecipeTabs>
 
   ```yaml
   {% set version = "3.7.3" %}
@@ -1150,24 +1388,53 @@ Jinja expressions serve following purposes in the meta.yaml:
     sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
   ```
 
-- They can call [conda-build functions](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#conda-build-specific-jinja2-functions) for automatic code generation. Examples are the compilers, cdt packages or the `pin_compatible` function.
+  ```yaml
+  context:
+    version: "3.7.3"
+
+  package:
+    name: python
+    version: ${{ version }}
+
+  source:
+    url: https://www.python.org/ftp/python/${{ version }}/Python-${{ version }}.tar.xz
+    sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
+  ```
+
+  </RecipeTabs>
+
+- They can call [rattler-build](https://rattler-build.prefix.dev/latest/reference/jinja/) or [conda-build functions](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#conda-build-specific-jinja2-functions) for automatic code generation. Examples are the compilers or the `pin_compatible` function.
+
+  <RecipeTabs>
 
   ```yaml
   requirements:
     build:
       - {{ compiler('c') }}
       - {{ compiler('cxx') }}
-      - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
-      - {{ cdt('libx11-devel') }}          # [linux]
+      - {{ stdlib('c') }}
   ```
+
+  ```yaml
+  requirements:
+    build:
+      - ${{ compiler('c') }}
+      - ${{ compiler('cxx') }}
+      - ${{ stdlib('c') }}
+  ```
+
+  </RecipeTabs>
 
   or
 
+  <RecipeTabs>
+
   ```yaml
   requirements:
     build:
       - {{ compiler('c') }}
       - {{ compiler('cxx') }}
+      - {{ stdlib('c') }}
     host:
       - python
       - numpy
@@ -1175,4 +1442,19 @@ Jinja expressions serve following purposes in the meta.yaml:
       - python
   ```
 
-For more information please refer to the [Templating with Jinja](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#templating-with-jinja) section in the conda-build docs.
+  ```yaml
+  requirements:
+    build:
+      - ${{ compiler('c') }}
+      - ${{ compiler('cxx') }}
+      - ${{ stdlib('c') }}
+    host:
+      - python
+      - numpy
+    run:
+      - python
+  ```
+
+  </RecipeTabs>
+
+For more information please refer to the "Templating with Jinja" section in the [rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#templating-with-jinja) or [conda-build](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#templating-with-jinja) docs.
