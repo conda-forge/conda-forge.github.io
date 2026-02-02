@@ -95,7 +95,8 @@ context:
 
 This section defines helper variables that can be used elsewhere in the recipe. Here two variables
 are declared: `version` that references the current package version, and `python_min` that specifies
-the minimal Python version required by it. By defining them here, we can easily update the values
+the minimal Python version required by it, per [CFEP 25](https://github.com/conda-forge/cfep/blob/main/cfep-25.md).
+By defining them here, we can easily update the values
 in the future without having to modify multiple sites where they are used.
 
 ```yaml
