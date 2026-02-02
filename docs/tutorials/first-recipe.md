@@ -2,7 +2,7 @@
 tags: [tutorial]
 ---
 
-# Generating and building your first recipe
+# Generating your first recipe
 
 In this tutorial, we will generate your first recipe for a pure Python package, use a linter to
 verify that it follows the conda-forge best practices and prepare it for initial submission.
