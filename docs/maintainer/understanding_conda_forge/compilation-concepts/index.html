@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-maintainer/understanding_conda_forge/compilation-concepts" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">Compilation concepts | conda-forge | community-driven packaging for conda</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://conda-forge.org/docs/maintainer/understanding_conda_forge/compilation-concepts/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Compilation concepts | conda-forge | community-driven packaging for conda"><meta data-rh="true" name="description" content="There are two main models for source code to be executed on a particular system: it can either be"><meta data-rh="true" property="og:description" content="There are two main models for source code to be executed on a particular system: it can either be"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://conda-forge.org/docs/maintainer/understanding_conda_forge/compilation-concepts/"><link data-rh="true" rel="alternate" href="https://conda-forge.org/docs/maintainer/understanding_conda_forge/compilation-concepts/" hreflang="en"><link data-rh="true" rel="alternate" href="https://conda-forge.org/docs/maintainer/understanding_conda_forge/compilation-concepts/" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://KB43FQOB7U-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Compilation concepts","item":"https://conda-forge.org/docs/maintainer/understanding_conda_forge/compilation-concepts"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="conda-forge | community-driven packaging for conda RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="conda-forge | community-driven packaging for conda Atom Feed">
+
+
+
+
+<link rel="search" type="application/opensearchdescription+xml" title="conda-forge | community-driven packaging for conda" href="/opensearch.xml">
+
+<link rel="alternate" type="application/rss+xml" href="/news/rss.xml" title="conda-forge | community-driven packaging for conda RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/news/atom.xml" title="conda-forge | community-driven packaging for conda Atom Feed">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+<script src="/js/count.js" defer="defer" data-goatcounter="https://conda-forge.goatcounter.com/count"></script><link rel="stylesheet" href="/assets/css/styles.0e5cde1e.css">
+<script src="/assets/js/runtime~main.c1262b3c.js" defer="defer"></script>
+<script src="/assets/js/main.60484d81.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"light"),document.documentElement.setAttribute("data-theme-choice",t||"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.png"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.png" alt="conda-forge anvil logo without text" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="conda-forge anvil logo without text" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/">Docs</a><a class="navbar__item navbar__link" href="/community/">Community</a><a class="navbar__item navbar__link" href="/news/">News</a><a class="navbar__item navbar__link" href="/blog/">Blog</a><a class="navbar__item navbar__link" href="/status/">Status</a><a class="navbar__item navbar__link" href="/packages/">Packages</a><a class="navbar__item navbar__link" href="/download/">Download</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://opencollective.com/conda-forge" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Donate<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><a href="https://github.com/conda-forge" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link fab fa-lg fa-github" title="GitHub"></a><a href="https://conda-forge.zulipchat.com" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link fa-solid fa-comments" title="Zulip"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><button type="button" class="DocSearch DocSearch-Button" aria-label="Search (Meta+k)" aria-keyshortcuts="Meta+k"><span class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8" stroke="currentColor" fill="none" stroke-width="1.4"></circle><path d="m21 21-4.3-4.3" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"></span></button></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/diataxis/"><span title="Reorganized documentation" class="linkLabel_WmDU">Reorganized documentation</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/user/introduction/"><span title="End-user guide" class="categoryLinkLabel_W154">End-user guide</span></a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menuHtmlItem_M9Kj menu__list-item"><span>For maintainers:</span></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/tutorials/"><span title="Tutorials" class="categoryLinkLabel_W154">Tutorials</span></a><button aria-label="Expand sidebar category &#x27;Tutorials&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/docs/how-to/"><span title="How-to guides" class="categoryLinkLabel_W154">How-to guides</span></a><button aria-label="Expand sidebar category &#x27;How-to guides&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/maintainer/understanding_conda_forge/life_cycle/"><span title="Understanding conda-forge" class="categoryLinkLabel_W154">Understanding conda-forge</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/maintainer/understanding_conda_forge/life_cycle/"><span title="The life cycle of a package" class="linkLabel_WmDU">The life cycle of a package</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/maintainer/understanding_conda_forge/staged_recipes/"><span title="Staged-recipes" class="linkLabel_WmDU">Staged-recipes</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/maintainer/understanding_conda_forge/feedstocks/"><span title="The feedstock" class="linkLabel_WmDU">The feedstock</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/maintainer/understanding_conda_forge/compilation-concepts/"><span title="Building packages" class="categoryLinkLabel_W154">Building packages</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/maintainer/understanding_conda_forge/compilation-concepts/"><span title="Compilation concepts" class="linkLabel_WmDU">Compilation concepts</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host"><span title="Build environments" class="linkLabel_WmDU">Build environments</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/maintainer/infrastructure/#compilers-and-runtimes"><span title="Compilers" class="linkLabel_WmDU">Compilers</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/maintainer/understanding_conda_forge/cross-compilation/"><span title="Cross-compilation" class="linkLabel_WmDU">Cross-compilation</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/maintainer/pinning_deps/"><span title="Global pinning" class="linkLabel_WmDU">Global pinning</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/maintainer/pinning_deps/#specifying-run_exports"><span title="Run exports" class="linkLabel_WmDU">Run exports</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/maintainer/adding_pkgs/#jinja-templating"><span title="Jinja functions" class="linkLabel_WmDU">Jinja functions</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a href="#" class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0"><span title="Bots &amp; automation" class="categoryLinkLabel_W154">Bots &amp; automation</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/maintainer/knowledge_base/#security-considerations-for-conda-forge-builds"><span title="Security" class="categoryLinkLabel_W154">Security</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/maintainer/guidelines/#transferring-to-conda-forge"><span title="Maintainer&#x27;s handbook" class="categoryLinkLabel_W154">Maintainer&#x27;s handbook</span></a></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/maintainer/infrastructure/"><span title="Reference" class="categoryLinkLabel_W154">Reference</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Understanding conda-forge</span></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Building packages</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Compilation concepts</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Compilation concepts</h1></header><p>There are two main models for source code to be executed on a particular system: it can either be
+compiled into machine code, or interpreted. Programming languages such as C, C++ and Rust usually
+follow the former path, requiring the source code to be compiled into machine code and then linked
+into binaries that can be used directly, irrespective of the original sources. On the other hand,
+languages such as Python or shell script tend to be run via an interpreter that processes and runs
+them directly from the source code. Both approaches have their advantages: compiling into machine
+code can produce efficient stand-alone executables, at the cost of portability; on the other hand,
+an intepreter can run programs straight from sources and handle code changes immediately, at the
+cost of worse performance.</p>
+<p>Strictly speaking, programming languages aren&#x27;t bound into compiler-interpreter dichotomy. There do
+exist interpreters for programming languages like C, and there do exist compilers that can turn
+Python code into stand-alone native executables. Nevertheless, they primarily follow a single model
+and packagers rarely need to be concerned about the alternative possibilities.</p>
+<p>Many programming languages fall somewhere across the compiler-interpreter spectrum. Many interpreted
+languages use Just-in-Time (JIT) compilation: rather than interpreting the input directly, they
+compile it into machine code upon loading, achieving better performance with one-time startup cost.
+Python interpreters commonly compile source code into more efficient bytecode upon loading. On the
+other hand, Java sources need to be manually compiled into bytecode that is afterwards interpreted
+by a Java Virtual Machine.</p>
+<p>This document specifically focuses on the concepts related to languages compiled into machine code,
+such as C, C++ and Rust.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-compilation-pipeline">The compilation pipeline<a href="#the-compilation-pipeline" class="hash-link" aria-label="Direct link to The compilation pipeline" title="Direct link to The compilation pipeline" translate="no">​</a></h2>
+<p>A typical pipeline in a C-style language consists of three elements:</p>
+<ol>
+<li class="">A preprocessor, that is responsible for performing initial processing of the source code,
+handling <code>#include</code> statements and substituting macros. Preprocessing is usually done as part of
+the compilation and is not visible to the user.</li>
+<li class="">A compiler backend, that is responsible for processing the source code and outputting object
+files (<code>.o</code> on Unix, <code>.obj</code> on Windows), containing a compiled machine code or bytecode.</li>
+<li class="">A linker (or link editor), that is responsible for combining multiple object files together,
+along with the program&#x27;s dependent libraries, and outputting the actual binary.</li>
+</ol>
+<p>Typically, these programs are not run separately, but rather invoked automatically via the compiler
+frontend. Usually, compiler frontends are invoked by build systems, from simple Makefiles to complex
+solutions such as CMake or Meson. These often split compilation and linking steps, compiling every
+object file separately to enable running multiple compiler processes simultaneously to benefit from
+multiple logical CPUs.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="build-systems">Build systems<a href="#build-systems" class="hash-link" aria-label="Direct link to Build systems" title="Direct link to Build systems" translate="no">​</a></h2>
+<p>While for trivial projects, compiling software manually may be feasible, more realistically software
+involves a degree of complexity that justifies using a build system. A build system provides a layer
+of automation that takes care of compiling, testing and installing the software, at the same time
+providing a degree of configurability for end users and providing support for multiple platforms and
+toolchains.</p>
+<p>The build system pipeline typically involves four stages:</p>
+<ol>
+<li class="">Configuration -- which covers accepting user input as to how the package should be built,
+discovering the necessary tooling and dependencies, and preparing the actual build.</li>
+<li class="">Compilation -- which covers compiling all source files into binaries, as well as any other
+necessary processing. Many software packages can be run from the build directory after this
+stage.</li>
+<li class="">Testing -- which covers running the package&#x27;s test suite to verify that is working correctly. In
+some build system, tests are compiled in this stage; in others, they need to be enabled at
+configuration stage and built at compilation stage.</li>
+<li class="">Installation -- which covers installing compiled files and package&#x27;s data files to the actual
+system, or a staging directory.</li>
+</ol>
+<p>Projects usually adapt one of the existing build systems, such as GNU autotools, CMake or Meson.
+These often are not entirely standalone tools but rather serve the purpose of configuring the build
+and generating build scripts for other tools, such as make, ninja or various Integrated Development
+Environments. These tools in turn consume the build scripts to perform the actual build.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="symbols">Symbols<a href="#symbols" class="hash-link" aria-label="Direct link to Symbols" title="Direct link to Symbols" translate="no">​</a></h2>
+<p>The code written in C-style languages contains functions, global variables, etc. that are compiled
+into what is collectively called symbols. The compiled binaries contain symbol tables that map the
+symbol names into their compiled counterpart, and therefore enable programs to reference them across
+code units and across different binaries. This enables not only splitting individual programs into
+separate code files, but also creating libraries of code that can be used across different projects.</p>
+<p>These programming languages split interface and implementation. The compiled objects and binaries
+contain the implementation, which is sufficient for already compiled programs to use them. However,
+in order to compile a new program, the compiler needs to additionally know the interface; for
+example, the function prototype that provides the function name, arguments and return type.</p>
+<p>Typically, this split is accomplished through splitting the program code across two types of files:
+header files specifying the interface, and source files containing the implementation. The source
+files are compiled into the actual binary, while header files are used during the compilation but
+also distributed along with the compiled library afterwards.</p>
+<p>Note that in some cases the header files may contain implementation in addition to interface. For
+example, the implementation of inline functions is provided in header files, so that the compiler
+can use it while compiling other programs.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="api-and-abi">API and ABI<a href="#api-and-abi" class="hash-link" aria-label="Direct link to API and ABI" title="Direct link to API and ABI" translate="no">​</a></h2>
+<p>A C-style library essentially defines two related interfaces: an Application Programming Interface
+(API) that is used by the compiler, and an Application Binary Interface (ABI) that is used at
+runtime. Generally, the API is defined by the header files, and ABI is inferred from it. Both
+concepts are critical for compatibility between libraries and the programs using them.</p>
+<p>APi defines the interface that is used in the source code of programs. Conversely, ABI is used by
+compiled binaries. For example, consider a library with the following prototype:</p>
+<div class="language-c codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-c codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">void</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">foo</span><span class="token punctuation" style="color:#393A34">(</span><span class="token class-name">int32_t</span><span class="token plain"> a</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>Such a function accepts a single <code>int32_t</code> parameter. From programmer&#x27;s perspective, it can accept
+any parameter that can be converted into an <code>int32_t</code>. However, from binary perspective the library
+has a strict contract with the program that an <code>int32_t</code> value must be passed.</p>
+<p>Now consider that the library changes prototype into:</p>
+<div class="language-c codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-c codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">void</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">foo</span><span class="token punctuation" style="color:#393A34">(</span><span class="token class-name">int64_t</span><span class="token plain"> a</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre></div></div>
+<p>From programmer&#x27;s perspective this can be fine, as long as the previous <code>int32_t</code> input can be
+converted into <code>int64_t</code>. However, the binary contract changes -- a previously compiled program
+passes an <code>int32_t</code> type where a wider <code>int64_t</code> type is expected now. This is a trivial example of
+an ABI breakage. If a program was compiled against the old prototype but used the new library,
+running it could lead to arbitrary results, from crashes to hard-to-debug bugs affecting other code
+(so-called Heisenbugs).</p>
+<p>Systems often feature mechanisms to protect against this class of issues. For example, shared
+libraries often use various versioning schemes to ensure that the programs remain linked to a single
+compatible version, and need to be recompiled to use the ABI from a new version.</p>
+<p>Note that ABI incompatibilities are not limited to deliberate changes of program interface. They can
+also be caused by using different compilation parameters, different compilers or even compiler
+versions.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="linking-to-libraries">Linking to libraries<a href="#linking-to-libraries" class="hash-link" aria-label="Direct link to Linking to libraries" title="Direct link to Linking to libraries" translate="no">​</a></h2>
+<p>In order to use a library, the program needs to link to it. It can link either statically or
+dynamically. Static linking means that the library code is embedded into the program directly, and
+the library <em>file</em> is no longer needed at runtime. Dynamic linking means that the program merely
+carries a reference to an external library, and the library file is loaded when the program starts.
+Both approaches to linking have their use cases, and their proponents.</p>
+<p>Static linking creates a standalone program that is easier to distribute, and may benefit from
+additional optimization as the optimizer is able to determine how the library is used exactly.
+However, statically linked programs are less space efficient, especially if the same library is used
+across multiple programs. Since a specific library version is embedded into the program, the risk of
+breakage on updates is minimized. However, this means that in order to update the library, the whole
+package needs to be rebuilt, which may negatively impact security response time if the library turns
+out to be vulnerable.</p>
+<p>Dynamic linking creates programs that reuse a shared copy of the library. As such, the library
+either needs to be installed separately or distributed along with the program. However, their main
+advantage is that the same library is shared across multiple packages, and can be quickly swapped
+for another version as necessary. Unfortunately, this requires one to take special care for different
+library versions to be compatible in the Application Binary Interface (ABI) exposed to programs.</p>
+<p>In conda-forge, dynamic linking to libraries provided by conda-forge packages is strongly preferred. Many of
+the concerns related to dynamic linking do not apply here, as proper packaging practices
+ensure that library dependencies are annotated and installed in compatible versions.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="development-files">Development files<a href="#development-files" class="hash-link" aria-label="Direct link to Development files" title="Direct link to Development files" translate="no">​</a></h2>
+<p>Building against libraries requires additional development files to be available. In conda-forge,
+these files may be distributed as part of the package installing the library itself; or split into
+separate &quot;development&quot; packages, depending on criteria such as their complexity, popularity and
+size.</p>
+<p>The necessary development files include:</p>
+<ul>
+<li class="">header files and include files, providing function prototypes and inline code from the library,</li>
+<li class="">static libraries, needed for static linking,</li>
+<li class="">shared libraries or import libraries, needed for dynamic linking,</li>
+<li class="">pkg-config files or build system-specific files, used to indicate how to build against the
+library.</li>
+</ul>
+<p>Include files are installed into the <code>include</code> directory or its subdirectories. They usually use
+<code>.h</code> or <code>.inc</code> suffix for C. For C++, sometimes names without a suffix are used to follow the
+standard library <code>#include</code> scheme, or <code>.hpp</code> suffix.</p>
+<p>Static libraries are installed into the <code>lib</code> directory and carry an <code>.a</code> suffix on Unix, or <code>.lib</code>
+on Windows. On Unix, shared libraries are used directly for linking, and they are described in the
+<a href="#binaries" class="">binaries</a> section. On Windows, import libraries are used instead. They use <code>.lib</code> suffix
+like static libraries.</p>
+<p>Finally, packages often provide additional files that are used at build time to determine how to compile against
+the library in question. For example, these can include pkg-config files, CMake files, autotools
+macros. These files are usually used by the build systems.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="binaries">Binaries<a href="#binaries" class="hash-link" aria-label="Direct link to Binaries" title="Direct link to Binaries" translate="no">​</a></h2>
+<p>The primary kind of artifacts produced by compiled programming languages are binaries. In this
+context, binaries mean files containing machine code. There are two main kind of binaries:</p>
+<ol>
+<li class="">Executables: programs that can be run directly by the user.</li>
+<li class="">Shared libraries: collections of compiled code that programs usually link to and therefore they
+are loaded by programs at start time.</li>
+<li class="">Loadable modules: collections of compiled code that are loaded by programs at runtime (e.g.
+plugins).</li>
+</ol>
+<p>On Unix platforms, executables don&#x27;t feature any suffix, and common shells only start executables
+when their filename matches the specified command exactly. On Windows, executables commonly use
+<code>.exe</code> suffix, and shells account for that. For example, the Python executable will be named
+<code>python</code> on Unixes, and <code>python.exe</code> on Windows; in both cases, typing <code>python</code> will execute it.
+Executables are usually installed into the <code>bin</code> directory, except on Windows where there may be
+installed into a variety of directories, including top-level Prefix directory and <code>Scripts</code> tree.</p>
+<p>Shared libraries use filenames with a <code>lib</code> prefix on Unixes, and <code>.so</code> suffix, except for macOS where they use
+<code>.dylib</code> suffix instead. They are installed into the <code>lib</code> directory. They often include a version
+string to indicate ABI compatibility between different library versions, as explained in <a href="#shared-library-versioning" class="">shared
+library versioning</a>.</p>
+<p>On Windows, shared libraries use <code>.dll</code> suffix, and no obligatory prefix. They are installed along
+with the executable programs (usually under <code>bin</code> directory or equivalent). There is also no
+standard filename versioning scheme, though many libraries include a version in the filename. The
+<code>.dll</code> files are only used at runtime. To build programs against a shared library, an additional
+import library of <code>.lib</code> format must be used, which essentially describes the (visible) content of a
+<code>.dll</code> file to use.</p>
+<p>On most systems, loadable modules are the same file type as shared libraries. macOS is an exception
+to that: the binaries explicitly distinguish between shared libraries and &quot;bundles&quot;, as loadable
+modules are called. The recommended suffix for these files is <code>.bundle</code>, though much software
+(including Python) uses <code>.so</code> instead. They are usually installed into tool-specific directories.</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>The term &quot;bundle&quot; can be used both to refer to loadable binary files discussed here, and <a href="https://developer.apple.com/library/archive/documentation/CoreFoundation/Conceptual/CFBundles/Introduction/Introduction.html#//apple_ref/doc/uid/10000123i-CH1-SW1" target="_blank" rel="noopener noreferrer" class="">bundle
+directories</a>
+used to encapsulate code and resources. These are distinct concepts, though there can be some
+confusing overlap, as plugins may be distributed as bundle directories.</p></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="macos-frameworks">macOS Frameworks<a href="#macos-frameworks" class="hash-link" aria-label="Direct link to macOS Frameworks" title="Direct link to macOS Frameworks" translate="no">​</a></h2>
+<p>In addition to the traditional Unix filesystem hierarchy where binaries and development files from
+different packages are installed into shared <code>bin</code>, <code>include</code>, <code>lib</code>, etc. directories, macOS
+features a concept known as &quot;frameworks&quot;. Frameworks constitute integrated packages combining
+shared libraries, development files and other resources in a single <code>.framework</code> directory.</p>
+<p>Frameworks are installed into <code>/Library/Frameworks</code> and <code>~/Library/Frameworks</code> directories.
+Multiple versions of the same framework can be installed simultaneously. They need to be explicitly
+included in projects (for example, using the <code>-framework</code> compiler option).</p>
+<p>Conda-forge packages do not install frameworks. However, individual software may include system
+frameworks when built on macOS.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="shared-library-versioning">Shared library versioning<a href="#shared-library-versioning" class="hash-link" aria-label="Direct link to Shared library versioning" title="Direct link to Shared library versioning" translate="no">​</a></h2>
+<p>Shared libraries are often versioned to indicate <a href="#api-and-abi" class="">ABI compatibility</a>. Typically, at
+least two version components are used: a minor version that is incremented whenever
+backwards-compatible ABI changes occur (e.g. new interfaces are added), and a major version that is
+incremented whenever backwards-incompatible changes happen. Often additional version components are
+used to indicate library updates without ABI changes.</p>
+<p>When such a scheme is used, the installed library usually consists of three files:</p>
+<ul>
+<li class="">the actual library with a full version string, such as <code>lib{name}.so.1.2.3</code> or
+<code>lib{name}.1.2.3.dylib</code>,</li>
+<li class="">a symbolic link including only the major version, such as <code>lib{name}.so.1</code> or <code>lib{name}.1.dylib</code>,</li>
+<li class="">an unversioned symbolic link, such as <code>lib{name}.so</code> or <code>lib{name}.dylib</code>.</li>
+</ul>
+<p>When building a new program, the linker -- if passed <code>-l{name}</code> -- uses the unversioned library
+name. If it is a symbolic link, it is resolved to the actual library. That library is used during
+the linking process, and its <em>contents</em> (not the filename pointed by the symbolic link) are used to
+determine the used library version.</p>
+<p>On Linux, an entry in the file, called <code>DT_SONAME</code> specifies what filename should be used to load
+the library at runtime. Typically, it corresponds to the filename with the major version, though it
+can be any filename, and e.g. libraries that do not provide cross-version compatibility at all often
+use the full version. This name is often called &quot;soname&quot;, and the version part itself is called
+&quot;soversion&quot;.</p>
+<p>On macOS, library <a href="https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/DynamicLibraryDesignGuidelines.html#//apple_ref/doc/uid/TP40002013-SW23" target="_blank" rel="noopener noreferrer" class="">version
+information</a>
+is used instead. It consists of a major version number, a minor (current) version number and a
+compatibility version number. The major version number functions much like &quot;soversion&quot; -- it is used
+to construct the &quot;major version&quot; symbolic link and the install name, it can be any string and it
+needs to change whenever backwards-incompatible changes occur. The minor version number consists of
+one to three version components, and indicates the current library version; it usually starts with
+the major number. The compatibility version number indicates the earliest version of the library
+that remains compatible with programs compiled against the current version.</p>
+<p>When a program is started, the library is loaded based on the major version number. Then, the loader
+compares the current version number of the loaded library against the compatibility version of the
+library used at link time (stored in the program). If the current version is older than the
+compatibility version, the program refuses to start.</p>
+<p>For example, a GNU-style <code>lib{name}.so.1.2.3</code> would correspond to a major version of <code>1</code>, current
+version of <code>1.2.3</code> and compatibility version of <code>1.2.0</code>. Programs compiled against that version
+would be compatible with <code>&gt;=1.2.0,&lt;2</code>, but the library would also remain compatible with programs
+compiled against earlier versions. While Linux technically encodes the equivalent of compatibility
+versions in the filename, they aren&#x27;t strictly enforced.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="finding-shared-libraries-at-runtime">Finding shared libraries at runtime<a href="#finding-shared-libraries-at-runtime" class="hash-link" aria-label="Direct link to Finding shared libraries at runtime" title="Direct link to Finding shared libraries at runtime" translate="no">​</a></h2>
+<p>Typically, a binary linked to a shared library does not embed the complete path to the library, but
+rather the library name. When a program is started, the dynamic loader is responsible for finding
+all the needed libraries, recursively, and loading them. The exact behavior differs from platform to
+platform. Appropriately, the ways conda-forge builds binaries account for these differences.</p>
+<p>The behavior of GNU/Linux dynamic loader is documented in the
+<a href="https://manpages.debian.org/testing/manpages/ld.so.8.en.html" target="_blank" rel="noopener noreferrer" class="">ld.so(8) manpage</a>. The following
+directories are searched for dependent libraries (provided they do not specify a full path):</p>
+<ol>
+<li class="">The directories specified in the <code>DT_RPATH</code> entry of the program, provided <code>DT_RUNPATH</code> is not
+present. Specifying <code>DT_RPATH</code> is discouraged, since the resulting behavior is suboptimal.</li>
+<li class="">The directories specified in the <code>LD_LIBRARY_PATH</code> environment variable. This variable is
+typically set locally when library search paths need to be overridden.</li>
+<li class="">The directories specified in the <code>DT_RUNPATH</code> entry of the binary. Note that these paths do not
+apply recursively -- the program&#x27;s <code>DT_RUNPATH</code> is used for the libraries used directly by the
+program, and these libraries&#x27;s entries are used for their own dependent libraries, and so on.</li>
+<li class="">The standard system search paths.</li>
+</ol>
+<p>Furthermore, the paths in <code>DT_RPATH</code> and <code>DT_RUNPATH</code> can use the <code>$ORIGIN</code> placeholder to reference
+the directory containing the binary. Conda-forge packages typically ensure that the correct
+libraries are used by embedding a <code>DT_RUNPATH</code> pointing to the appropriate directory within the
+conda-forge environment, usually <code>$ORIGIN/../lib</code>. This can be done e.g. by linking with
+<code>-Wl,-rpath,\$ORIGIN/../lib</code> flag.</p>
+<p>On macOS, the equivalent behavior is achieved using <a href="https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/RunpathDependentLibraries.html" target="_blank" rel="noopener noreferrer" class="">Run-Path Dependent
+Libraries</a>.
+Libraries are created with install names conaining a <code>@rpath/</code> path prefix, e.g.
+<code>@rpath/libpython3.15.dylib</code>, and therefore such names are embedded in the binaries linking to them.
+As described in the <a href="https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/DynamicLibraryUsageGuidelines.html#//apple_ref/doc/uid/TP40001928-SW21" target="_blank" rel="noopener noreferrer" class="">library search
+process</a>,
+the dynamic loader searches in the following directories (since the name contains a slash):</p>
+<ol>
+<li class="">The directories specified in the <code>DYLD_LIBRARY_PATH</code> environment variable.</li>
+<li class="">The specified path, with <code>@rpath</code> being substituted for the library&#x27;s run path.</li>
+<li class="">The directories specified in the <code>DYLD_FALLBACK_LIBRARY_PATH</code> environment variable, that defaults
+to system library directories.</li>
+</ol>
+<p>The run paths in binaries specify the appropriate conda-forge environment directory using a
+<code>@loader_path</code> placeholder, such as <code>@loader_path/../lib</code>.</p>
+<p>The <a href="https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order" target="_blank" rel="noopener noreferrer" class="">Windows Dynamic-link library search
+order</a> is
+quite complex. However, for our purposes it suffices to list the following variants:</p>
+<ol>
+<li class="">A number of overrides such as &quot;DLL Redirection&quot; and &quot;Known DLLs&quot;.</li>
+<li class="">The directory containing the application.</li>
+<li class="">A number of system directories.</li>
+<li class="">The current directory.</li>
+<li class="">The directories listed in the <code>PATH</code> environment variable.</li>
+</ol>
+<p>Note that steps 2. and 5. specifically focus on program directories. To account for this,
+conda-forge generally installs <code>.dll</code> libraries into program directories such as the <code>bin</code> directory
+rather than the <code>lib</code> directory used on Unixes.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="architecture-dependent-and-architecture-independent-packages">Architecture-dependent and architecture-independent packages<a href="#architecture-dependent-and-architecture-independent-packages" class="hash-link" aria-label="Direct link to Architecture-dependent and architecture-independent packages" title="Direct link to Architecture-dependent and architecture-independent packages" translate="no">​</a></h2>
+<p>Conda-forge packages can be built for specific architectures, or made architecture-independent, also
+known as <code>noarch</code>.</p>
+<p>When C code is compiled into binaries containing machine code and installs them needs to be
+separately built for every supported platform. Therefore, it is distributed as
+architecture-dependent packages. The Python language interpreter is an example of such software.</p>
+<p>A package that installs only data files and interpreted scripts can be made
+architecture-independent. It can be built on any supported platform, and the build should always
+result in the same files being installed, irrespective of platform used to perform it. An example of
+this is a so-called pure Python package, i.e. a distribution that installs <code>.py</code> modules and
+no compiled extensions. The equivalent Python packaging concept is a <code>*-none-any.whl</code> package.</p>
+<p>A special case of this are pure Python packages with entry points. Installed entry points are
+platform-specific: on Unixes they are pure Python scripts, but on Windows they are compiled
+executables. In order to facilitate <code>noarch: python</code> packaging for them, entry points are stored not
+as final executables, but as the original list. When the package is installed, they are recreated in
+the appropriate platform-specific format.</p>
+<p>Conversely, a Python distribution that installs compiled extension modules in addition to <code>.py</code>
+modules needs to be built for every platform separately, and requires using arch-dependent packages.
+Furthermore, since Python extensions interface with the Python interpreter, they also need to be
+concerned about ABI compatibility with it. Python exposes two kinds of ABI: the regular extension
+ABI and the stable ABI.</p>
+<p>The regular extension ABI preserves compatibility across patch releases of the Python interpreter,
+but is not compatible across major or minor versions. For example, an extension compiled against
+Python 3.12 cannot be used on 3.11 or 3.13. Appropriately, the respective conda-forge package needs
+to be built not only for all supported platforms, but also as separate variants for all supported
+Python versions. At the time of writing, NumPy is an example of such a package.</p>
+<p>The stable ABI, on the other hand, guarantees forward compatibility with future minor releases of
+Python. Therefore, an extension built for the stable ABI of Python 3.12 can be successfully used on
+Python 3.13 and 3.14 (but not 3.11). This is represented by <code>*-abi3-*.whl</code> Python packages. In
+conda-forge, such packages are built for the oldest supported Python version, and therefore are
+independent of Python version. However, they are still architecture-dependent. An example of such a
+package is rustworkx.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/conda-forge/conda-forge.github.io/tree/refs/heads/main/docs/maintainer/understanding_conda_forge/compilation-concepts.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">Last updated<!-- --> on <b><time datetime="2026-02-02T15:55:24.000Z" itemprop="dateModified">Feb 2, 2026</time></b></span></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/how-to/emergencies/"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Emergencies</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/maintainer/understanding_conda_forge/cross-compilation/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Cross-compilation</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#the-compilation-pipeline" class="table-of-contents__link toc-highlight">The compilation pipeline</a></li><li><a href="#build-systems" class="table-of-contents__link toc-highlight">Build systems</a></li><li><a href="#symbols" class="table-of-contents__link toc-highlight">Symbols</a></li><li><a href="#api-and-abi" class="table-of-contents__link toc-highlight">API and ABI</a></li><li><a href="#linking-to-libraries" class="table-of-contents__link toc-highlight">Linking to libraries</a></li><li><a href="#development-files" class="table-of-contents__link toc-highlight">Development files</a></li><li><a href="#binaries" class="table-of-contents__link toc-highlight">Binaries</a></li><li><a href="#macos-frameworks" class="table-of-contents__link toc-highlight">macOS Frameworks</a></li><li><a href="#shared-library-versioning" class="table-of-contents__link toc-highlight">Shared library versioning</a></li><li><a href="#finding-shared-libraries-at-runtime" class="table-of-contents__link toc-highlight">Finding shared libraries at runtime</a></li><li><a href="#architecture-dependent-and-architecture-independent-packages" class="table-of-contents__link toc-highlight">Architecture-dependent and architecture-independent packages</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/">Getting started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/user/">User docs</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/maintainer/">Maintainer docs</a></li><li class="footer__item"><a class="footer__link-item" href="/community/cfep/">CFEPs</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/diataxis/">Reorganized docs</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/community/">About conda-forge</a></li><li class="footer__item"><a class="footer__link-item" href="/community/governance/">Governance</a></li><li class="footer__item"><a class="footer__link-item" href="/community/minutes/">Meeting minutes</a></li><li class="footer__item"><a class="footer__link-item" href="/community/getting-in-touch/">Get in touch</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Stay up-to-date</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/news/archive/">News</a></li><li class="footer__item"><a class="footer__link-item" href="/blog/archive/">Blog</a></li><li class="footer__item"><a class="footer__link-item" href="/status/">Status</a></li><li class="footer__item"><a href="https://bsky.app/profile/conda-forge.org" target="_blank" rel="noopener noreferrer" class="footer__link-item">Bluesky<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Resources</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/status/">Status</a></li><li class="footer__item"><a class="footer__link-item" href="/style-guide/">Style guide</a></li><li class="footer__item"><a href="https://github.com/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://conda-forge.zulipchat.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Zulip<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/conda-forge" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 conda-forge · Built with Docusaurus</div></div></div></footer></div>
+</body>
+</html>
