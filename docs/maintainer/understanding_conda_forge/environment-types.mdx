@@ -2,6 +2,8 @@
 title: 'Environment types'
 ---
 
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
 One of the least intuitive things to grasp when beginning to work with conda recipes is what the
 roles of the different environments are. Questions such as "does it go into `build:` or `host:`?"
 or "what's the difference between those two?" are very common. This page provides a high-level
@@ -70,6 +72,41 @@ the fact that if `mypkg` depends on a shared library (here: `zlib` & `zstd`), th
 to be present both at build time (for the linker to find the symbols therein, and register where to
 find them), as well as at runtime (when the dynamic linker goes looking for the symbols that have
 been marked as externally provided during the build of `mypkg`).
+
+It's worth noting that the `run:` environment is never actually created during the build of `mypkg`.
+That's why testing packages is essential, not least to find if the resulting artefact can actually
+be installed as-is. Here, the recipe formats v0 (`meta.yaml`) and v1 (`recipe.yaml`) behave slightly
+differently:
+
+<RecipeTabs>
+
+```yaml
+requirements:       # build/host/run as above
+  [...]
+
+
+test:
+  requires:         # [runtime] linux-aarch64; the package we built above
+    - pytest        # ... plus (optionally) additional test-only dependencies
+    - coverage
+
+
+```
+
+```yaml
+requirements:       # build/host/run as above
+  [...]
+
+tests:
+  - requirements:
+      run:          # [runtime] linux-aarch64; the package we built above
+        - pytest    # ... plus (optionally) additional test-only dependencies
+        - coverage
+      build:        # not currently necessary in conda-forge, but future use-cases
+        - ...       # may need this (e.g., if conda-forge ever builds for emscripten)
+```
+
+</RecipeTabs>
 
 ### Native builds
 
