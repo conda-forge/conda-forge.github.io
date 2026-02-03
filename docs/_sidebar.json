@@ -56,7 +56,8 @@
         },
         "items": [
           "maintainer/example_recipes/go",
-          "maintainer/example_recipes/rust"
+          "maintainer/example_recipes/rust",
+          "maintainer/example_recipes/python"
         ]
       }
     ]
