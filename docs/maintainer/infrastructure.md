@@ -18,7 +18,7 @@ We close out with a brief [listing of involved entities](#inventory-of-services-
 ### Staged-recipes
 
 This repository is the gateway to conda-forge and where users can submit new recipes which, once reviewed and accepted, will generate a new feedstock and team.
-You can find the detailed guide for submitting new package recipes in [The staging process](adding_pkgs.md#creating-recipes).
+You can find the detailed guide for submitting new package recipes in [The staging process](../adding_pkgs#the-staging-process).
 
 - ⚙️ Deployed in [`conda-forge/staged-recipes`](https://github.com/conda-forge/staged-recipes)
 - 🔒 Has access to Anaconda.org (cf-staging)

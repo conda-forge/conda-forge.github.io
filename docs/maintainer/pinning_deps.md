@@ -112,7 +112,7 @@ For example, numpy may be used either as a python package, and it also has a C l
 The former usage would not require `run_exports`, but the latter would.
 
 In this scenario, it may be advantageous to split the package into distinct metapackages that may share a common parent containing the actual files, but with each metapackage defining different pinning behavior.
-Anaconda does this for numpy (see the [recipe](https://github.com/AnacondaRecipes/numpy-feedstock/blob/main/recipe/meta.yaml)).
+Anaconda does this for numpy (see the [recipe](https://github.com/AnacondaRecipes/numpy-feedstock/blob/67c05421596390629611fc2bd55233071eb00b1e/recipe/meta.yaml)).
 
 The general idea is that the `numpy-devel` package should be used when a package is building against the C interface (i.e. it needs the compatibility bound), and the numpy package should be used when a package is using only the python interface.
 

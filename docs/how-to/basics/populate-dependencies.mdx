@@ -1,0 +1,498 @@
+---
+tags: [how-to, basic]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+# How to populate package dependencies
+
+Perhaps one of the hardest tasks of package maintenance is ensuring that the recipe specifies
+correct dependencies. Missing or incorrect dependencies can have various consequences, such as build
+failures, runtime errors, missing features or loss of performance. On the other hand, extraneous
+dependencies can unnecessarily increase build time, disk space and bandwidth usage, and in extreme
+cases cause dependency conflicts. This guide aims to provide both generic hints, and specific
+instructions on how to determine the correct dependencies to list in your recipe.
+
+## Generic instructions
+
+### Where to find dependencies?
+
+Unfortunately, there is no single standard for declaring package dependencies. This section provides
+a generic set of guidelines for any package or project; the remaining sections in this document
+provide specific guidelines for particular build systems and programming language. A few good ways
+to look for dependency information are:
+
+- Look through upstream build system files. A few of these are illustrated in the subsequent
+  sections.
+- Look through upstream documentation. Many projects include sections on building, with detailed
+  explanations where to find dependencies.
+- Look at the recipes used by other distributions. [Repology](https://repology.org/) can be helpful
+  in locating these. However, note that they may not be up-to-date.
+- If the package is installing binaries, look at the libraries they link to. This is described in
+  detail in [checking binary linkage](#checking-binary-linkage) section.
+- Look at the Continuous Integration and Continuous Deployment workflows. They can often provide hints
+  at how upstream installs dependencies.
+- As a last resort, in some cases you can resort to checking the source code. There are tools that
+  can help with this, e.g. [findimports](https://pypi.org/project/findimports/) for Python.
+
+Once you determine the dependency list, you need to map the dependencies into conda-forge packages.
+[Conda metadata browser](https://conda-metadata-app.streamlit.app/?q=conda-forge) can be quite
+helpful in that. Note that some upstream packages may be split into multiple packages in
+conda-forge, and others may be merged into a single package. [Search for specific
+files](https://conda-metadata-app.streamlit.app/Search_by_file_path), and consult
+feedstock documentation when in doubt.
+
+### Final dependency lists
+
+The dependency lists specified in recipe files provide only the initial lists of `host` and `run`
+dependencies. When packages are built, the tooling includes additional dependencies from run exports
+of `build` and `host` dependencies. To verify the final dependency list, either open the built
+package or consult the build logs.
+
+For example, to inspect the `run` dependencies of a `libgit2` package:
+
+```shell
+unzip libgit2-1.9.2-hc20babb_0.conda
+tar -xf info-libgit2-1.9.2-hc20babb_0.tar.zst
+# "depends" in index.json are run dependencies
+${EDITOR} info/index.json
+```
+
+When building recipes, both conda-build and rattler-build output finalized run dependencies, e.g.:
+
+<Tabs groupId="synced-recipe-tabs">
+
+<TabItem label="conda-build" value="v0">
+```
+  run:
+    - libstdcxx >=14
+    - libzlib >=1.3.1,<2.0a0
+    - openssl >=3.5.5,<4.0a0
+    - libgcc >=14
+    - pcre2 >=10.47,<10.48.0a0
+    - libssh2 >=1.11.1,<2.0a0
+    - __glibc >=2.17,<3.0.a0
+```
+</TabItem>
+
+<TabItem label="rattler-build" value="v1" default="True">
+```
+ │ │ Finalized run dependencies (libgit2-1.9.2-hc20babb_0):
+ │ │ ╭────────────────────┬──────────────────────────────────────────────────╮
+ │ │ │ Name               ┆ Spec                                             │
+ │ │ ╞════════════════════╪══════════════════════════════════════════════════╡
+ │ │ │ Run dependencies   ┆                                                  │
+ │ │ │ __glibc            ┆ >=2.17,<3.0.a0 (RE of [build: sysroot_linux-64]) │
+ │ │ │ libgcc             ┆ >=14 (RE of [build: gxx_linux-64])               │
+ │ │ │                    ┆ >=14 (RE of [build: gcc_linux-64])               │
+ │ │ │ libssh2            ┆ >=1.11.1,<2.0a0 (RE of [host: libssh2])          │
+ │ │ │ libstdcxx          ┆ >=14 (RE of [build: gxx_linux-64])               │
+ │ │ │ libzlib            ┆ >=1.3.1,<2.0a0 (RE of [host: zlib])              │
+ │ │ │ openssl            ┆ >=3.5.4,<4.0a0 (RE of [host: openssl])           │
+ │ │ │ pcre2              ┆ >=10.47,<10.48.0a0 (RE of [host: pcre2])         │
+ │ │ │                    ┆                                                  │
+ │ │ │ Run exports (Weak) ┆                                                  │
+ │ │ │ libgit2            ┆ >=1.9.2,<1.10.0a0                                │
+ │ │ ╰────────────────────┴──────────────────────────────────────────────────╯
+```
+</TabItem>
+
+</Tabs>
+
+Rattler-build additionally indicates their sources: in the output, "RE" stands for "run export".
+
+### Checking binary linkage
+
+When compiled binaries link against shared libraries, the list of these dependencies can be read
+from these binaries themselves. Conda-build and rattler-build do this automatically, and map the
+dependent libraries into packages. For example, for `libgit2` on Linux:
+
+<Tabs groupId="synced-recipe-tabs">
+
+<TabItem label="conda-build" value="v0">
+```
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO lib/libssl.so.3 found in conda-forge/linux-64::openssl==3.5.5=h35e630c_1
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO lib/libcrypto.so.3 found in conda-forge/linux-64::openssl==3.5.5=h35e630c_1
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO lib/libpcre2-8.so.0 found in conda-forge/linux-64::pcre2==10.47=haa7fec5_0
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO lib/libssh2.so.1 found in conda-forge/linux-64::libssh2==1.11.1=hcf80075_0
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO lib/libz.so.1 found in conda-forge/linux-64::libzlib==1.3.1=hb9d3cd8_2
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO x86_64-conda-linux-gnu/sysroot/lib64/librt.so.1 found in CDT/compiler package conda-forge/noarch::sysroot_linux-64==2.17=h0157908_18
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO x86_64-conda-linux-gnu/sysroot/lib64/libpthread.so.0 found in CDT/compiler package conda-forge/noarch::sysroot_linux-64==2.17=h0157908_18
+   INFO (libgit2,lib/libgit2.so.1.9.2): Needed DSO x86_64-conda-linux-gnu/sysroot/lib64/libc.so.6 found in CDT/compiler package conda-forge/noarch::sysroot_linux-64==2.17=h0157908_18
+   INFO (libgit2,bin/git2): Needed DSO lib/libssl.so.3 found in conda-forge/linux-64::openssl==3.5.5=h35e630c_1
+   INFO (libgit2,bin/git2): Needed DSO lib/libcrypto.so.3 found in conda-forge/linux-64::openssl==3.5.5=h35e630c_1
+   INFO (libgit2,bin/git2): Needed DSO lib/libpcre2-8.so.0 found in conda-forge/linux-64::pcre2==10.47=haa7fec5_0
+   INFO (libgit2,bin/git2): Needed DSO lib/libssh2.so.1 found in conda-forge/linux-64::libssh2==1.11.1=hcf80075_0
+   INFO (libgit2,bin/git2): Needed DSO lib/libz.so.1 found in conda-forge/linux-64::libzlib==1.3.1=hb9d3cd8_2
+   INFO (libgit2,bin/git2): Needed DSO x86_64-conda-linux-gnu/sysroot/lib64/librt.so.1 found in CDT/compiler package conda-forge/noarch::sysroot_linux-64==2.17=h0157908_18
+   INFO (libgit2,bin/git2): Needed DSO x86_64-conda-linux-gnu/sysroot/lib64/libpthread.so.0 found in CDT/compiler package conda-forge/noarch::sysroot_linux-64==2.17=h0157908_18
+   INFO (libgit2,bin/git2): Needed DSO x86_64-conda-linux-gnu/sysroot/lib64/libc.so.6 found in CDT/compiler package conda-forge/noarch::sysroot_linux-64==2.17=h0157908_18
+```
+</TabItem>
+
+<TabItem label="rattler-build" value="v1" default="True">
+```
+ │ │ [lib/libgit2.so.1.9.2] links against:
+ │ │  ├─ lib/libpcre2-8.so.0.15.0 (pcre2)
+ │ │  ├─ libc.so.6 (system)
+ │ │  ├─ lib/libssl.so.3 (openssl)
+ │ │  ├─ lib/libssh2.so.1.0.1 (libssh2)
+ │ │  ├─ lib/libz.so.1.3.1 (libzlib)
+ │ │  ├─ librt.so.1 (system)
+ │ │  ├─ lib/libcrypto.so.3 (openssl)
+ │ │  └─ libpthread.so.0 (system)
+ │ │
+ │ │ [bin/git2] links against:
+ │ │  ├─ libpthread.so.0 (system)
+ │ │  ├─ lib/libssh2.so.1.0.1 (libssh2)
+ │ │  ├─ lib/libpcre2-8.so.0.15.0 (pcre2)
+ │ │  ├─ lib/libssl.so.3 (openssl)
+ │ │  ├─ lib/libz.so.1.3.1 (libzlib)
+ │ │  ├─ librt.so.1 (system)
+ │ │  ├─ lib/libcrypto.so.3 (openssl)
+ │ │  └─ libc.so.6 (system)
+```
+</TabItem>
+
+</Tabs>
+
+These results can be used to verify the final `run` dependency lists. In particular, they may be
+helpful in noticing unnecessary dependencies or missing run exports. However, note that they will
+not be able to detect dependencies that were missing at build time.
+
+### Dealing with extraneous run exports
+
+In some cases, you're going to notice that the final `run` dependencies of a package contains
+dependencies that are only used at build time, and are not found in the linkage report. `gtest` is a
+common example. To avoid that, you need to ignore the run exports from the package:
+
+<RecipeTabs>
+
+```yaml
+build:
+  ignore_run_exports_from:
+    - gtest
+
+requirements:
+  host:
+    - gtest
+```
+
+```yaml
+requirements:
+  host:
+    - gtest
+  ignore_run_exports:
+    from_package:
+      - gtest
+```
+
+</RecipeTabs>
+
+It is also possible to ignore specific run exports by dependency name, rather than all exports from
+a package:
+
+<RecipeTabs>
+
+```yaml
+build:
+  ignore_run_exports:
+    # 'vs2022_win-64' run-exports ['ucrt', 'vc', 'vc14_runtime']
+    # we want to ignore everything but 'vc'
+    - ucrt
+    - vc14_runtime
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib("c") }}
+```
+
+```yaml
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib("c") }}
+  ignore_run_exports:
+    by_name:
+      # 'vs2022_win-64' run-exports ['ucrt', 'vc', 'vc14_runtime']
+      # we want to ignore everything but 'vc'
+      - ucrt
+      - vc14_runtime
+```
+
+</RecipeTabs>
+
+## General-purpose build systems
+
+This section is focused on build systems that are not limited to a specific ecosystem, but include
+support for multiple programming languages.
+
+### CMake
+
+[CMake](https://cmake.org/) is a build system focused on building C++ code. Dependency checks are
+primarily done in top-level `CMakeLists.txt` file, but projects often intersperse them with actual
+build rules and spread across multiple `CMakeLists.txt` files in a project tree, and sometimes
+other `*.cmake` files included from these.
+
+The primary dependency lookup method is the `find_package()` function. It can use either CMake files
+installed by the projects themselves, included in the CMake distribution or along with the build
+system in question. Other frequently used functions include:
+
+- `pkg_check_modules()` to search for pkg-config packages
+- `find_path()` to search for include files
+- `find_library()` to search for libraries
+- `find_program()` to search for programs (usually indicating a `build` dependency)
+
+For example:
+
+```
+FIND_PACKAGE(ZLIB 1.2.1)
+```
+
+checks for `zlib` 1.2.1 or newer, whereas:
+
+```
+FIND_PATH(LZO2_INCLUDE_DIR lzo/lzoconf.h)
+FIND_LIBRARY(LZO2_LIBRARY NAMES lzo2 liblzo2)
+```
+
+searches for `lzo/lzoconf.h` and `lzo2` library, corresponding to the `lzo` package.
+
+Note that CMake function calls are case-insensitive.
+
+### Meson
+
+[Meson](https://mesonbuild.com/) is a general-purpose build system. Dependency checks are primarily
+done in top-level `meson.build` file, though they can also be interspersed with build rules and
+spread across different `meson.build` files across the source tree.
+
+The primary dependency lookup method is the `dependency()` function. It can use either pkg-config,
+CMake files or built-in rules provided in Meson itself. Other frequently used methods include:
+
+- `.has_header()` method of a compiler object, to search for header files
+- `.find_library()` method of a compiler object, to search for libraries
+- `find_program()` function to search for programs (usually indicating a `build` dependency)
+
+For example:
+
+```python
+libcrypt = dependency('libcrypt', 'libxcrypt', required : false)
+```
+
+indicates an optional dependency, accepting either `libcrypt` (system library, using built-in Meson
+rule) or `libxcrypt` (via `libxcrypt.pc`, provided by `libxcrypt` package), whereas:
+
+```python
+libbzip2 = cc.find_library('bz2', required : get_option('bzip2'))
+```
+
+search for `bz2` library, provided by `bzip2` package.
+
+### GNU autoconf
+
+[Autoconf](https://www.gnu.org/software/autoconf/) is a macro-based generator for `configure`
+scripts. As these scripts are often used to find package's dependencies, they often serve as a good
+starting point for checking dependencies. The input file is called `configure.ac` (or `configure.in`
+in very old scripts).
+
+Unfortunately, the methods used to check for dependencies can vary a lot, and in some cases the
+checks could be deferred to separate `.m4` files. However, common macros to look for are:
+
+- `PKG_CHECK_MODULES` to search for pkg-config packages
+- `AC_CHECK_HEADER` and `AC_CHECK_HEADERS` to search for include files
+- `AC_CHECK_LIB` and `AC_SEARCH_LIBS` to search for libraries
+- `AC_CHECK_PROG`, `AC_PATH_PROG` and similar, to search for programs (usually indicating a `build`
+  dependency)
+
+For example:
+
+```
+PKG_CHECK_MODULES(LIBXML2_PC, [libxml-2.0])
+```
+
+indicates a dependency on `libxml-2.0.pc` file, provided by `libxml2`, whereas:
+
+```
+AC_CHECK_LIB(bz2, BZ2_bzDecompressInit)
+```
+
+check for `bz2` library (e.g. `libbz2.so`), provided by `bzip2`.
+
+## Python
+
+Python packages generally function within the [PyPI](https://pypi.org) ecosystem, and declare their
+dependencies against other packages on PyPI, using metadata specified in the next subsection. These
+packages are usually added to conda-forge using the same names as on PyPI, but there are many
+exceptions, either due to name collisions or explicit renames (for example, the PyPI package `torch`
+corresponds to `pytorch` in conda-forge).
+
+The final package metadata can be found in wheels and source distributions, but it does not cover
+build-time dependencies. Therefore, you will generally prefer to look at the other project files,
+notably:
+
+1. `pyproject.toml` file that is used to declare the build system, build-time dependencies and often
+   project metadata.
+2. `setup.cfg` and `setup.py` files in projects using the `setuptools` build system.
+3. Various `requirements*.txt` and similar files, listing custom dependency groups.
+
+These files are illustrated in greater detail in the subsequent sections.
+
+Python packages can also have dependencies on non-Python packages. The standardized approach to declaring them
+is currently worked on as [PEP 725](https://peps.python.org/pep-0725/). In some cases,
+general purpose build are used, as explained in the earlier sections, in which case the external dependencies
+can be obtained from the build system files. In other cases, such dependencies are listed in custom
+requirement list files or the documentation.
+
+Furthermore, sometimes external dependencies are additionally
+packaged on PyPI (for example, `cmake` and `ninja` are).
+
+### Package metadata
+
+The primary source of dependency information for Python packages is the generated dependency
+metadata. It can be found in the built wheels, in the `*.dist-info/METADATA` file, and in source
+distributions as the `PKG-INFO` file. The relevant entries are `Requires-Dist`. For example, the
+following entries:
+
+```
+Requires-Dist: tomli; python_version < "3.11"
+Requires-Dist: tomli-w
+```
+
+indicate that `tomli` package is required for Python 3.10 and older, and `tomli-w` is required
+unconditionally.
+
+Note that package metadata includes only runtime (`run`) dependencies and not build-time (`build`, `host`)
+dependencies. Optional dependencies ("extras") are listed as well, and they are decorated with an `extra`
+environment marker, for example:
+
+```
+Requires-Dist: redis>=3.0.0; extra == "cache"
+```
+
+indicates that the `cache` extra requires `redis` package, no older than 3.0.0.
+
+Additionally, the `Requires-Python` entry indicates constraints on the Python version supported.
+These should be transferred to the `python` dependency in the `host` section:
+
+```
+Requires-Python: >=3.10
+```
+
+### pyproject.toml
+
+Modern Python packages specify their metadata in a `pyproject.toml` file in their source
+distribution and repositories. The standardized format is specified in [pyproject.toml
+specification](https://packaging.python.org/en/latest/specifications/pyproject-toml/), though some
+packages may be using older build systems that use custom metadata format (Flit &lt;3.1, Poetry
+&lt;2). Some packages may also be using `pyproject.toml` to declare other metadata, while keeping
+project metadata elsewhere.
+
+In `pyproject.toml`:
+
+- Build-time (`host`) dependencies are listed in `build-system.requires` table. Note that some
+  dependencies may be extraneous, in particular `wheel` is almost always unnecessary.
+- Runtime (`run`) dependencies are listed in `project.dependencies`.
+- Optional ("extra") runtime dependencies are listed in `project.optional-dependencies` table.
+- Additional dependencies may also be listed in `dependency-groups`, per the [Dependency
+  Groups](https://packaging.python.org/en/latest/specifications/dependency-groups/) specification.
+- Python version constraints are listed in `requires-python` key.
+
+Test dependencies are often listed either as an "extra" or a dependency group.
+
+For example:
+
+```toml
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+dependencies = ["lxml", "beautifulsoup4"]
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+cache = ["redis>=3.0.0"]
+
+[dependency-groups]
+test = ["pytest>7"]
+```
+
+This corresponds to `host` dependency on `setuptools` (note unnecessary `wheel` dependency), `run`
+dependencies on `lxml` and `beautifulsoup4`, and possibly `run` dependency on `redis>=3.0.0` if the
+optional dependency is desired. Tests additionally require `pytest>7`. Python is constrained to
+version `>=3.10`.
+
+In some cases, `dependencies` may be listed under the `dynamic` key instead. For example, the
+following snippet indicates that the dependencies are not listed directly in the `[project]` table
+but instead are defined in the build backend-specific manner (for `setuptools`, this usually means
+`setup.py`):
+
+```toml
+[project]
+dynamic = ["dependencies"]
+```
+
+### setup.cfg and setup.py
+
+Some projects using the setuptools build system may be declaring dependencies in `setup.cfg` and/or
+`setup.py` files instead. The former uses a special format based on `configparser`, with
+dependency-related keys in the `[options]` section. The latter is a Python script, and
+dependency-related options are passed as keyword arguments to `setuptools.setup()` function call.
+
+In both cases, `install_requires` is used to list `run` dependencies, and `extras_require` to list groups of
+extra dependencies. Sometimes `setup_requires` is used to list `host` dependencies, in other cases
+they are listed in `pyproject.toml` instead. Test dependencies are usually listed as an "extra",
+though old packages may use `tests_require` instead. Python version constraints are listed in
+`python_requires`.
+
+For example, the following `setup.cfg` file:
+
+```
+[options]
+install_requires =
+  numpy >= 1.12.0
+  ruamel.yaml >= 0.15.34
+python_requires = >=3.8
+
+[options.extras_require]
+hdf5 = h5py
+pandas = pandas
+```
+
+specifies `run` dependencies on `numpy` and `ruamel.yaml`, and optional runtime dependencies on
+`h5py` and `pandas`. Python is constrainted to `>=3.8`.
+
+The following `setup.py` snippet:
+
+```python
+setup(
+  install_requires=[
+    "Twisted>=17.5",
+  ],
+  extras_require={
+    "autoscaler": [
+      "txzookeeper",
+    ],
+  },
+  tests_require=[
+    "mock",
+  ],
+  python_requires=">=3.8",
+  ...
+)
+```
+
+specifies `run` dependency on `Twisted>=17.5`, optional runtime dependency on `txzookeeper`, and a
+test dependency on `mock`. Note that since `setup.py` are Python scripts, they can use arbitrary
+Python logic to obtain and pass the values. Python is constrainted to `>=3.8`.
+
+When a particular key is found both in `setup.cfg` and `setup.py`, the latter takes precedence. When
+the `pyproject.toml` files contains a `[project]` table, metadata from other files is ignored,
+unless the key is explicitly listed as `dynamic`.
+
+Some legacy packages may `import` Python modules from some of their dependencies without explicitly
+declaring them via `build-system.requires` or `setup_requires`. These dependencies also need to be
+manually added to the `host` group.
