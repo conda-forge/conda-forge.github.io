@@ -74,7 +74,7 @@ about:
   homepage: https://example.com/example-package
   license: BSD-3-Clause
   license_file: LICENSE
-  summary: Short summary of the package.
+  summary: Single-line summary of the package.
   description: |
     One or two paragraphs with more information about the package.
   repository: https://github.com/example/example-package/
