@@ -94,8 +94,8 @@ correct environments while avoiding installing MPI binaries from conda-forge. Yo
 dummy package with the following command
 
 ```shell-session
-$ conda install "mpich=x.y.z=external_*"
-$ conda install "openmpi=x.y.z=external_*"
+$ conda install -c conda-forge/label/mpi-external mpich
+$ conda install -c conda-forge/label/mpi-external openmpi
 ```
 
 As long as you have the local copies of the `mpich`/`openmpi` library in your linking paths and
