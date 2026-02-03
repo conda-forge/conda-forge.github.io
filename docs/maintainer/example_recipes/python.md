@@ -49,7 +49,7 @@ requirements:
     # Add pip to be able to run the pip install command in the build script
     - pip
   run:
-    # Define the python version dependency as minumum version and higher
+    # Define the python version dependency as minimum version and higher
     # Don't specify an upper bound unless absolutely necessary to avoid future conflicts.
     - python >=${{ python_min }}
     # Add the dependencies of your package here e.g.:
