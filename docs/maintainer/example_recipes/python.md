@@ -76,7 +76,7 @@ about:
   license_file: LICENSE
   summary: Short summary of the package.
   description: |
-    Multi line description, e.g. the README file content.
+    One or two paragraphs with more information about the package.
   repository: https://github.com/example/example-package/
   documentation: https://example.com/example-package-docs/
   
