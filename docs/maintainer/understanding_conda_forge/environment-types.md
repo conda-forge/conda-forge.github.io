@@ -1,0 +1,180 @@
+---
+title: 'Environment types'
+---
+
+One of the least intuitive things to grasp when beginning to work with conda recipes is what the
+roles of the different environments are. Questions such as "does it go into `build:` or `host:`?"
+or "what's the difference between those two?" are very common. This page provides a high-level
+summary of the environment types and what distinguishes their different roles.
+
+## For compiled packages
+
+Although the topic of cross-compilation is somewhat of an advanced topic (we leave the details to
+[a separate page](../cross-compilation)), the constraints
+it imposes are very instructive about why things are as they are. For the purpose of this
+discussion, the only relevant thing to know is that there are two different CPU architectures in
+play: the one we're building _for_, and the one we're building _on_.
+
+In `conda-forge.yml`, this is expressed as follows:
+
+```yaml
+build_platform:
+  linux_aarch64: linux_64
+  linux_ppc64le: linux_64
+  osx_arm64: osx_64
+```
+
+The left side is the architecture we want to build packages for, and the right side is the platform
+we will use to build those packages (sidenote: due to restrictions of the yaml format, hyphens have
+to be replaced with underscores; we will continue using `linux-aarch64` etc. below).
+
+Because packages that have been compiled for `linux-aarch64` cannot run on `linux-64` (for more
+details see [compilation concepts](../compilation-concepts)), this forces us to be very precise
+about separating the necessary ingredients for building a package.
+
+Let's take a simple recipe for `mypkg` and annotate what happens for `host_platform: linux-aarch64`
+and `build_platform: linux-64`:
+
+```yaml
+requirements:
+  build:                      # [build time] `linux-64`; where compilers and other tools get executed
+    - ${{ stdlib("c") }}      # - desugars to `sysroot_linux-aarch64`; mostly the C standard library
+    - ${{ compiler("cxx") }}  # - desugars to `gxx_linux-aarch64`; the actual compiler
+    - cmake                   # - regular build tools
+    - ninja
+
+  host:                       # [build time] `linux-aarch64`, where compile-time dependencies are placed
+    - zlib                    # - libraries `zlib.so` & `libzstd.so` (and their headers), which are
+    - zstd                    #   necessary for compilation (i.e. the linker to find the right symbols)
+    - libboost-headers        # - a header-only dependency (may still be architecture-dependent through
+                              #   values that got hard-coded during its build)
+
+  run:                        # [runtime] `linux-aarch64`; what will be installed alongside mypkg
+    # - libzlib               # - dependencies that get injected by "run-exports" (see below);
+    # - zstd                  #   note also that the header-only dependency did not inject anything
+```
+
+Let us unpack what is happening here. During the build, there are _two_ environments in play, as
+indicated by the `[build time]` tag. The `build:` environment is where we place anything that needs
+to be _executed_ (rather than just _present_); it is a normal environment placed under `$BUILD_PREFIX`.
+
+The `host:` environment (under `$PREFIX`) contains dependencies that we will be necessary for
+building `mypkg`, for example because we need to find the correct header files when compiling,
+and symbols when linking. Anything in `host:` cannot be executed during the build phase, because
+binaries compiled for `linux-aarch64` cannot run on our `linux-64` build agent.
+
+Finally, the `run:` environment forgets about what happened at build time; here we just specify
+what dependencies need to be present for `mypkg` to be functional. In many case, libraries from
+the host environment will inject dependencies into the `run:` environment. This is a consequence of
+the fact that if `mypkg` depends on a shared library (here: `zlib` & `zstd`), these libraries need
+to be present both at build time (for the linker to find the symbols therein, and register where to
+find them), as well as at runtime (when the dynamic linker goes looking for the symbols that have
+been marked as externally provided during the build of `mypkg`).
+
+### Native builds
+
+When the architectures between `build:` and `host:` match, the situation is simplified, because
+now both environments are free to execute code on the machine. Do not let yourself be confused by
+this additional freedom; the separation into the different _roles_ of `build:` and `host:` remains
+exactly the same as for cross-compiled builds: things that are only necessary to be executed
+(without otherwise affecting the result) are in `build:`, while compile-time dependencies go into
+`host:`. Let us explore the latter some more below.
+
+### ABI-tracking
+
+In many ways, the `host:` environment is the "heart" of a package's dependencies. While compilers,
+build tools in `build:` (and their versions) can often be changed relatively freely, the packages
+in `host:` imply a much tighter contract, i.e. `mypkg` depends on the Application _Binary_ Interface
+([ABI](../../../glossary/#abi)) of that host dependency, and if this ABI changes, we need to rebuild
+`mypkg`.
+
+This mechanism is one of the core tasks of conda-forge's infrastructure, as we continuously rebuild
+feedstocks if any one of their dependencies has released a version with a new ABI. In particular,
+any bare `host:` dependency ("bare" meaning without `>/>=/==/<=/<` constraints) that matches one of
+the packages in the global [pinning](../../adding_pkgs/#pinning) will participate in this
+orchestration.
+
+This is essential, because otherwise `mypkg` would eventually end up in a situation where it depends
+on versions of its dependencies that are incompatible with pretty much all other contemporary
+conda-forge builds.
+
+Note that in contrast to the usual way dependencies work transitively (if I install `foo` that
+depends on `bar` which depends on `baz`, then any environment with `foo` must have `baz` too), the
+ABI-tracking in `host:` is **not transitive**.
+
+This is why the link check will warn you if you are "overdepending" on libraries: you should not
+declare `host:` dependencies that your package doesn't actually need (though be aware that
+for various reasons, the overdepending check can have false positives).
+
+### Run-exports
+
+As described above, run-exports ensure that shared libraries in host are _also_ present in `run:`.
+In addition to the mere _presence_, the ABI-tracking will often imply concrete version constraints
+based on the version of the library that was present in the `host:` environment at build time. For
+example, `zlib` has a run-export
+
+```yaml
+    requirements:
+      run_exports:
+        - ${{ pin_subpackage('libzlib', max_pin='x') }}
+```
+
+For `zlib 1.3.1` in our `host:` environment, the `run:` requirement looks like `libzlib >=1.3.1,<2`
+(`libzlib` is a subset of `zlib` that only contains the library, and avoids undesirable interactions
+from dependent packages picking up `zlib`'s development files unintentionally -- if downstream
+packages require `zlib` to build, they should declare that dependency themselves; not every library
+in conda-forge follows such a stringent split at the moment; for example, `zstd` run-exports `zstd`).
+
+Some select packages (especially compilers and the C standard library) may also contribute to `run:`
+dependencies from the `build:` environment; these are so-called "strong" run-exports. These have not
+been added in the above example for brevity, but look like `libgcc` / `libstdcxx` / `__glibc` etc.
+
+## Interpreted languages
+
+Many packages in conda-forge are aimed at `python` or `R`. These languages have an interpreter that
+has _itself_ been compiled (e.g. from C/C++), but allows other code (in `python`/`R`) to run without
+compilation. For packages (like `numpy`) that have both compiled code that interacts directly with
+the python runtime (using `python` like a library), as well as code that passes through the
+interpreter, we are in the situation that:
+
+- the package is exposed to `python`'s ABI because we're compiling against it.
+- `python` gets run during the build (e.g. `python -m pip install ...`).
+
+So here the situation shifts a little from purely compiled languages. Let's look at `numpy`'s recipe
+(slightly simplified):
+
+```yaml
+requirements:
+  build:
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}    # compilers as usual
+    - ninja
+    - pkg-config
+  host:
+    # ABI-relevant
+    - libblas
+    - libcblas
+    - liblapack
+    - python
+    # interpreted py-libs used during installation
+    - cython
+    - meson-python
+    - pip
+    - python-build
+  run:
+    - python                    # with matching minor version as in `host:`
+    # - libblas >=3.9.0,<4.0a0
+    # - libcblas >=3.9.0,<4.0a0
+    # - liblapack >=3.9.0,<4.0a0
+  run_exports:
+    - numpy >=${{ default_abi_level }},<3
+```
+
+You can see how the `host:` section effectively splits into two; the ABI-tracking aspect remains as
+above, but we need to put python packages themselves next to their interpreter, otherwise we would
+not be able to actually run anything once the build process wants to call into python.
+
+The fact that `python` is arguably both a `host:` as well as a `build:` dependency creates some
+obvious issues for cross-compilation. How those are solved is described
+[here](../../../how-to/advanced/cross-compilation/#details-about-cross-compiled-python-packages).

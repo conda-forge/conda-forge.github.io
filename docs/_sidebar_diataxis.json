@@ -174,9 +174,9 @@
             "id": "maintainer/understanding_conda_forge/compilation-concepts"
           },
           {
-            "type": "link",
-            "label": "Build environments",
-            "href": "/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host"
+            "type": "doc",
+            "label": "Environment types",
+            "id": "maintainer/understanding_conda_forge/environment-types"
           },
           {
             "type": "link",
