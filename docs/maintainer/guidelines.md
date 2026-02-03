@@ -238,7 +238,7 @@ Recommended:
 Required:
 
 1. The source does not include compiled files.
-   In principle, all compiled objects need to be generated in the CI, from source.
+   In principle, all compiled objects need to be generated in the conda-forge CI, from source.
    Exceptions to this rule (e.g. binary repackaging) need to be approved explicitly.
 
 Recommended:
