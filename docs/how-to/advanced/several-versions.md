@@ -9,9 +9,10 @@ The conda-forge workflow assumes that a push to any branch in the feedstock repo
 Most feedstocks only need `main` for their builds, since the package has a single release line, and new releases always imply a later version. However, some packages may maintain a few release lines in parallel. If you wish to maintain those in your feedstock, you will need to create a branch for each.
 
 Important reasons why it can be necessary to keep publishing packages for older versions:
-* The package continues to receive upstream support, and new patch versions need to be published.
-* The package depends on libraries that are versioned in the global pinning, which need to be rebuilt by our bot infrastructure to stay compatible with the rest of conda-forge.
-* The package needs a backport of an upstream patch, security fix, etc.
+
+- The package continues to receive upstream support, and new patch versions need to be published.
+- The package depends on libraries that are versioned in the global pinning, which need to be rebuilt by our bot infrastructure to stay compatible with the rest of conda-forge.
+- The package needs a backport of an upstream patch, security fix, etc.
 
 ## Create the new branch
 
