@@ -12,7 +12,7 @@ title: 'FAQ'
 
 ## A package I am looking for is not on conda-forge, what can I do?
 
-We have an overview and step-by-step instruction on contributing packages in the section [Contributing packages](../maintainer/adding_pkgs.md#dev-contribute-pkgs).
+We have an overview and step-by-step instruction on contributing packages in the section [Contributing packages](../../maintainer/adding_pkgs).
 
 <a id="faq-pkg-update"></a>
 
@@ -107,7 +107,7 @@ compilers only contains the sysroot they were built with. The compiler binary na
 ‘prefixed' with more complete information about the architecture and [ABI](../glossary.md#abi) they target. So, instead
 of `gcc`, the actual binary will be named something like `x86_64-conda-linux-gnu-cc`.
 
-The conda-forge infrastructure provides [activation scripts](../maintainer/adding_pkgs.md#activate-scripts) which are run when
+The conda-forge infrastructure provides [activation scripts](../../maintainer/adding_pkgs#activate-scripts) which are run when
 you `conda activate` an environment that contains the compiler toolchain. Those scripts set
 many environment variables that are typically used by GNU `autotools` and `make` in the
 `standard` (i.e. builtin) build rules. For example, you would see the variable `CC` set to
