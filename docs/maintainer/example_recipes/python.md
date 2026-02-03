@@ -14,7 +14,6 @@ Rattler-build documentation for the v1 recipe format can be found [here](https:/
 schema_version: 1
 
 context:
-  name: example-package
   version: 1.2.3
   python_min: "3.10"
 
