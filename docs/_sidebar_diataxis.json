@@ -42,9 +42,8 @@
     },
     "items": [
       {
-        "type": "link",
-        "label": "Contribute your first recipe",
-        "href": "/docs/maintainer/adding_pkgs/#the-staging-process"
+        "type": "doc",
+        "id": "tutorials/first-recipe"
       }
     ]
   },
@@ -73,6 +72,11 @@
             "type": "doc",
             "label": "Keep your fork in sync",
             "id": "how-to/basics/fork-sync"
+          },
+          {
+            "type": "doc",
+            "label": "Populate package dependencies",
+            "id": "how-to/basics/populate-dependencies"
           }
         ]
       },
@@ -170,9 +174,9 @@
         "label": "Building packages",
         "items": [
           {
-            "type": "link",
+            "type": "doc",
             "label": "Compilation concepts",
-            "href": "#"
+            "id": "maintainer/understanding_conda_forge/compilation-concepts"
           },
           {
             "type": "link",

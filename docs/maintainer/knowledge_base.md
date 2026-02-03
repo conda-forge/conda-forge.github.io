@@ -540,7 +540,7 @@ channel_sources:
 
 ### Core Dependency Tree Packages (CDTs)
 
-Dependencies outside of the `conda-forge` channel should be avoided (see [Avoid external dependencies](adding_pkgs.md#no-external-deps)).
+Dependencies outside of the `conda-forge` channel should be avoided (see [Avoid external dependencies](../adding_pkgs#avoid-external-dependencies)).
 However, there are a few exceptions:
 
 Some dependencies are so close to the system that they are not packaged with conda-forge.
@@ -2166,7 +2166,7 @@ being investigated or the migration PR got closed accidentally. To migrate a PR 
 All conda-forge packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use conda-forge packages if you or your team require a high level of security.
 You are also free to download recipes and rebuild them yourself, if you would like at least that much oversight. However, many people use conda-forge all the time with no issues and here are some things that conda-forge does to help with security in some ways:
 
-1. [Sources](adding_pkgs.md#meta-yaml-source) (where you specify where the package's source code is coming from) can be pulled from GitHub, PyPI, or other sources and sha256 hashes are always used, so moving of tags or uploading of new sdists can not cause automatic package rebuilds.
+1. [Sources](../adding_pkgs#source) (where you specify where the package's source code is coming from) can be pulled from GitHub, PyPI, or other sources and SHA256 hashes are always used, so moving of tags or uploading of new sdists can not cause automatic package rebuilds.
    Also, once packages are accepted and made into feedstocks, only the maintainers of that feedstock have the right to merge PRs made to that feedstock.
 2. Each feedstock can only upload packages for that feedstock. This is enforced by using a cf-staging channel where builds are first sent.
    A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the `conda-forge` channel.

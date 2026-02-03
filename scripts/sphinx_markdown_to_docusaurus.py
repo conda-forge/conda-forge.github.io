@@ -19,7 +19,7 @@ SIDEBAR_ORDERING = [
     "/docs/user/talks.md",
     "/docs/maintainer/index.md",
     "/docs/maintainer/infrastructure.md",
-    "/docs/maintainer/adding_pkgs.md",
+    "/docs/maintainer/adding_pkgs.mdx",
     "/docs/maintainer/updating_pkgs.md",
     "/docs/maintainer/pinning_deps.md",
     "/docs/maintainer/conda_forge_yml.md",
