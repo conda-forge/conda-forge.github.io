@@ -18,11 +18,11 @@ context:
   python_min: "3.10"
 
 package:
-  name: ${{ name }}
+  name: example-package
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  url: https://pypi.org/packages/source/e/example-package/example_package-${{ version }}.tar.gz
   # Run `openssl sha256 <artifact>` to get its hash
   sha256: 12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a
 
