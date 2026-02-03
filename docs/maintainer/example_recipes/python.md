@@ -33,7 +33,7 @@ build:
   # The build script is a minimal pip install command.
   # `${{ PYTHON }} -m`: ensures the correct python interpreter is used.
   # `--no-deps`: dependencies need to be specified in the `requirements.run` section. This avoids vendoring dependencies.
-  # `--no-build-isolation`: ensures that the build dependencies are installed in the host environment.  
+  # `--no-build-isolation`: ensures that the `host` environment is used to build the package (instead of creating a new virtualenv).  
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   # When you package has a command line interface, you can also add entry points here.
   # entry_points:
