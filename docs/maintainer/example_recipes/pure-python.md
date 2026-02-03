@@ -174,4 +174,3 @@ tests:
   - [click](https://github.com/conda-forge/click-feedstock/blob/main/recipe/recipe.yaml)
   - [requests](https://github.com/conda-forge/requests-feedstock/blob/main/recipe/recipe.yaml)
   - [rich](https://github.com/conda-forge/rich-feedstock/blob/main/recipe/recipe.yaml): Multi output example
-  
