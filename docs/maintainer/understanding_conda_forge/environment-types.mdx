@@ -29,17 +29,18 @@ The left side is the architecture we want to build packages for, and the right s
 we will use to build those packages (sidenote: due to limitations of the YAML format, hyphens have
 to be replaced with underscores; we will continue using `linux-aarch64` etc. below).
 
-Because packages that have been compiled for `linux-aarch64` cannot run on `linux-64` (for more
-details see [compilation concepts](../compilation-concepts)), we are forced to be very precise
-about separating the necessary ingredients for building a package.
+In general, packages compiled for one architecture can only run on that architecture (e.g. a package
+built for linux-aarch64 can only be executed in that type of machine, but not `linux-64` or
+`linux-ppc64le`; for more details see [compilation concepts](../compilation-concepts)), we are forced
+to be very precise about separating the necessary ingredients for building a package.
 
 Let's take a simple recipe for `mypkg` and annotate what happens when we build it for `linux-aarch64` on a `linux-64` machine (`host_platform: linux-aarch64`, `build_platform: linux-64`).
 
 ```yaml
 requirements:
   build:                      # [build time] `linux-64`; where compilers and other tools get executed
-    - ${{ stdlib("c") }}      # - desugars to `sysroot_linux-aarch64`; mostly the C standard library
-    - ${{ compiler("cxx") }}  # - desugars to `gxx_linux-aarch64`; the actual compiler
+    - ${{ stdlib("c") }}      # - translates to `sysroot_linux-aarch64`; mostly the C standard library
+    - ${{ compiler("cxx") }}  # - translates to `gxx_linux-aarch64`; the actual compiler
     - cmake                   # - regular build tools
     - ninja
 
@@ -55,16 +56,20 @@ requirements:
 ```
 
 Let us unpack what is happening here. During the build, there are _two_ environments in play, as
-indicated by the presence of two sections annotated by the `[build time]` tag. The `build:` environment is where we place anything that needs
-to be _executed_ (rather than just _present_); it is a normal environment placed under `$BUILD_PREFIX`.
+indicated by the presence of two occurrences of the `[build time]` marker. As a rule of thumb, the
+`build:` environment is where we place binaries that need to be _executed_ (rather than just
+_present_); other than that it is a regular conda environment, whose path is reachable during the
+build using `$BUILD_PREFIX`.
 
 The `host:` environment (under `$PREFIX`) contains dependencies that we will be necessary for
-building `mypkg`, for example because we need to find the correct header files when compiling,
-and symbols when linking. Anything in `host:` cannot be executed during the build phase, because
-binaries compiled for `linux-aarch64` cannot run on our `linux-64` build machine.
+building `mypkg`, for example because we need to find the correct header files when compiling, and
+symbols when linking. With the very few exceptions, things in `host:` cannot be executed during the
+build phase, because binaries compiled for a different architecture (here `linux-aarch64`) cannot
+run on our `linux-64` build machine. An important special case here is `python`, which is explained
+further down.
 
-Finally, the `run:` environment does not have any role at build time. It only specifies
-what dependencies need to be present for `mypkg` to be functional once installed. In many cases, libraries from
+Finally, the `run:` environment does not have any role at build time. It only specifies which
+dependencies need to be present for `mypkg` to be functional once installed. In many cases, libraries from
 the `host:` environment will inject dependencies into the `run:` environment. This is a consequence of
 the fact that if `mypkg` depends on a shared library (here: `zlib` & `zstd`), these libraries need
 to be present both at build time (for the linker to find the symbols therein, and register where to
@@ -72,6 +77,7 @@ find them), as well as at runtime (when the dynamic linker goes looking for the 
 been marked as externally provided during the build of `mypkg`).
 
 It's worth noting that the `run:` environment is never actually created during the build of `mypkg`.
+It is, however, created at test time as part of the check stages in conda-build and rattler-build.
 That's why testing packages is essential, even if only to find if the resulting artifact can actually
 be installed as-is. Here, the recipe formats v0 (`meta.yaml`) and v1 (`recipe.yaml`) behave slightly
 differently:
@@ -100,17 +106,17 @@ tests:
       run:          # [runtime] linux-aarch64; the package we built above
         - pytest    # ... plus (optionally) additional test-only dependencies
         - coverage
-      build:        # not currently necessary in conda-forge, but future use-cases
-        - ...       # may need this (e.g., if conda-forge ever builds for emscripten)
+      # build:      # not currently necessary in conda-forge, but future use-cases
+      #   - ...     # may need this (e.g., if conda-forge ever builds for emscripten)
 ```
 
 </RecipeTabs>
 
 ### Native builds
 
-When the architectures between `build:` and `host:` match, the situation is simplified, because
-now both environments are free to execute code on the machine. Do not let yourself be confused by
-this additional freedom; the separation into the different _roles_ of `build:` and `host:` remains
+When the architectures between `build:` and `host:` match, the situation is simpler, because in that
+case, both environments are able to execute code on the machine. Do not be confused by this additional
+degree of freedom; the separation into the different _roles_ of `build:` and `host:` remains
 exactly the same as for cross-compiled builds: things that are only necessary to be executed
 (without otherwise affecting the result) are in `build:`, while compile-time dependencies go into
 `host:`. Let us explore the latter some more below.
@@ -154,11 +160,16 @@ example, `zlib` has a run-export:
         - ${{ pin_subpackage('libzlib', max_pin='x') }}
 ```
 
-For `zlib 1.3.1` in our `host:` environment, the `run:` requirement looks like `libzlib >=1.3.1,<2`
-(`libzlib` is a subset of `zlib` that only contains the library, and avoids undesirable interactions
-from dependent packages picking up `zlib`'s development files unintentionally -- if downstream
-packages require `zlib` to build, they should declare that dependency themselves; not every library
-in conda-forge follows such a stringent split at the moment; for example, `zstd` run-exports `zstd`).
+For `zlib 1.3.1` in our `host:` environment, `pin_subpackage` translates to `libzlib >=1.3.1,<2.0a0`,
+which is what packages building against `zlib` in `host:` will thus inherit as a `run:` dependency.
+
+As an aside to explain the difference why `zstd` run-exports itself, but `zlib` exports `libzlib`:
+libraries can generally be split into development and runtime components. For examples, headers,
+package metadata, etc. are all not necessary (and may be unwanted) at runtime. In this case, `zlib`
+corresponds to the complete set of files (for development), whereas `libzlib` contains only the
+library itself (i.e. all that's necessary at runtime). Not every library in conda-forge currently
+follows such a stringent split though; in particular, `zstd` doesn't. Therefore, it has to run-export
+the only thing available to ensure the library is present at runtime, which is again `zstd`.
 
 Some select packages (especially compilers and the C standard library) may also contribute to `run:`
 dependencies from the `build:` environment; these are so-called "strong" run-exports. These have not
