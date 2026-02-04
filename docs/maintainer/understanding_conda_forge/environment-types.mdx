@@ -175,11 +175,41 @@ breaks (crashes, etc.) down the line. In conda-build's terminology, this is call
 On the other hand, the link check will also warn you if you are "overdepending" on libraries, which
 is the case if your package has `host:` dependencies that aren't actually used. This is less severe
 than overlinking, because it "just" means that your package has unnecessarily tight constraints and
-may be rebuilt more often than strictly necessary.
+may be rebuilt more often than strictly necessary. You should always address those warnings.
 
 Note also that the overdepending warning can have false positives, because the link check cannot
 statically determine all ways that a given library may be loaded. In particular, things that are
-only loaded at runtime cannot be determined ahead-of-time (`numpy` is an example of this).
+only loaded at runtime cannot be determined ahead-of-time (`numpy` is an example of this). As a rule
+of thumb, if removing the dependency causes the build to break (e.g. because the build process
+expects to find the library), you can try ignoring its run-exports:
+
+<RecipeTabs>
+
+```yaml
+build:  # top-level key per output, not under `requirements:`!
+  ignore_run_exports_from:
+    - zlib
+  # and / or
+  ignore_run_exports:
+    - libzlib
+
+```
+
+```yaml
+  requirements:
+    ignore_run_exports:
+      from_package:
+        - zlib
+      # and / or
+      by_name:
+        - libzlib
+```
+
+If this breaks the package (e.g. the tests fails), then you have found a false positive of the
+overdepending warning, and should simply ignore it.
+
+</RecipeTabs>
+
 
 ## Interpreted languages
 
