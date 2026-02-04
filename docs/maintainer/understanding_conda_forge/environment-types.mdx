@@ -24,7 +24,7 @@ we are forced to cross-compile packages for this platform from `linux-64`. That 
 
 In general, packages compiled for one architecture can only run on that CPU architecture (e.g. a
 package built for `linux-aarch64` can only be executed on that type of machine, but not on `linux-64`
-or `linux-ppc64le`; for more details see [compilation concepts](../compilation-concepts)), we are
+or `linux-ppc64le`; for more details see [compilation concepts](../compilation-concepts)), so we are
 forced to be very precise about separating the necessary ingredients for building a package.
 
 Let's take a simple recipe for `mypkg` and annotate what happens when we build it for `linux-aarch64`
@@ -133,13 +133,25 @@ This is essential, because otherwise different packages would eventually end up 
 incompatible versions of the same dependencies, preventing them from being installed
 simultaneously.
 
-Note that in contrast to the usual way dependencies work transitively (if I install `foo` that
+Note that in contrast to the usual way dependencies work transitively (if one installs `foo` that
 depends on `bar` which depends on `baz`, then any environment with `foo` must have `baz` too), the
-ABI-tracking in `host:` is **not transitive**: `foo` tracks `bar` but not `baz`.
+ABI tracking in `host:` is **not transitive**: if `foo` declares a `host:` dependency only on `bar`,
+it is _not_ assumed to depend on the ABI of `baz` (and would not be rebuilt if `baz` releases a new
+ABI-changing version; only `bar` would be rebuilt in that case).
 
-This is why the link check will warn you if you are "overdepending" on libraries: you should not
-declare `host:` dependencies that your package doesn't use directly (though be aware that
-for various reasons, the overdepending check can have false positives).
+This is why the link check at the end of the build has an essential role. It will warn if the package
+has not declared all dependencies (in terms of which libraries the final artefact links against),
+which means that changes to the ABI of that package are not being tracked, which may lead to ABI
+breaks (crashes, etc.) down the line. In conda-build's terminology, this is called "overlinking".
+
+On the other hand, the link check will also warn you if you are "overdepending" on libraries, which
+is the case if your package has `host:` dependencies that aren't actually used. This is less severe
+than overlinking, because it "just" means that your package has unnecessarily tight constraints and
+may be rebuilt more often than strictly necessary.
+
+Note also that the overdepending warning can have false positives, because the link check cannot
+statically determine all ways that a given library may be loaded. In particular, things that are
+only loaded at runtime cannot be determined ahead-of-time (`numpy` is an example of this).
 
 ### Run-exports
 
