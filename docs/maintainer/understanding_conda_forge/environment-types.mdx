@@ -182,7 +182,7 @@ Note also that the overdepending warning can have false positives, because the l
 statically determine all ways that a given library may be loaded. In particular, things that are
 only loaded at runtime cannot be determined ahead-of-time (`numpy` is an example of this). As a rule
 of thumb, if removing the dependency causes the build to break (e.g. because the build process
-expects to find the library), you can try ignoring its run-exports:
+expects to find the library), you may try ignoring its run-exports:
 
 <RecipeTabs>
 
@@ -208,6 +208,10 @@ build:  # top-level key per output, not under `requirements:`!
 
 If this breaks the package (e.g. the tests fails), then you have found a false positive of the
 overdepending warning, and should simply ignore it.
+
+Due to the way that the link check cannot capture all relevant scenarios (also around meta-packages,
+compiler infrastructure, etc.), please do not add excessive `ignore_run_exports:`. In case of doubt,
+start a discussion on Zulip.
 
 </RecipeTabs>
 
