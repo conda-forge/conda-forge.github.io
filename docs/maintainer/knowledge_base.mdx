@@ -2,6 +2,9 @@
 title: 'Knowledge Base'
 ---
 
+import { BuildScriptTabs } from "@site/src/components/RecipeTabs";
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
 <a id="knowledge-base"></a>
 
 # Knowledge Base
@@ -97,14 +100,12 @@ treat the contents of the variable as a single argument.
 Here are some basic commands for you to get started. These are dependent on your source
 code layout and aren't intended to be used "as is".
 
-**CMake lines for build.sh (macOS/Linux):**
+<BuildScriptTabs>
 
 ```default
 cmake CMakeLists.txt -DPython3_EXECUTABLE="$PYTHON"
 cmake --build . --config Release
 ```
-
-**CMake lines for bld.bat (Windows):**
 
 ```default
 cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DPython3_EXECUTABLE="%PYTHON%"
@@ -112,6 +113,8 @@ if errorlevel 1 exit /b 1
 cmake --build . --config Release
 if errorlevel 1 exit /b 1
 ```
+
+</BuildScriptTabs>
 
 See also the `bld.bat` in the Windows section below for an additional example.
 
@@ -333,6 +336,8 @@ If the day ever comes where MSVC breaks the ABI again (codename "vNext"), then w
 all compiled packages in conda-forge on windows. After such a migration has taken place, you can then
 choose to skip building for one or the other by using `vc` in a selector, e.g.
 
+<RecipeTabs>
+
 ```yaml
 build:
     # to demonstrate mechanism: only build vNext
@@ -342,6 +347,18 @@ requirements:
   build:
     - {{ compiler('cxx') }}
 ```
+
+```yaml
+build:
+    # to demonstrate mechanism: only build vNext
+    skip: win and vc<15
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+```
+
+</RecipeTabs>
 
 <a id="using-vs2022"></a>
 
@@ -607,11 +624,22 @@ practice has been deprecated). To add a new CDT, make a PR on the
 
 Note that packages dependent on OpenGL and/or libGL should no longer use CDTs. Instead, use the host dependency `libgl-devel` from the [libglvnd-feedstock](https://github.com/conda-forge/libglvnd-feedstock).
 
+<RecipeTabs>
+
 ```yaml
 requirements:
   host:
     - libgl-devel  # [linux]
 ```
+
+```yaml
+requirements:
+  host:
+    - if: linux
+      then: libgl-devel
+```
+
+</RecipeTabs>
 
 Other OpenGL API variants such as `libegl-devel`, `libgles-devel`, `libglx-devel`, and `libopengl-devel` are also available, and will automatically add non-development `run_exports` dependencies.
 
@@ -669,6 +697,8 @@ These should be packaged together, to prevent node from being needing to
 grab the JavaScript side of the package on the user's machine. To package
 an extension, the build should have the following `meta.yaml` snippet:
 
+<RecipeTabs>
+
 ```yaml
 build:
   noarch: python
@@ -684,6 +714,24 @@ requirements:
     - nodejs
     - jupyterlab >=2
 ```
+
+```yaml
+build:
+  noarch: python
+
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - nodejs
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - nodejs
+    - jupyterlab >=2
+```
+
+</RecipeTabs>
 
 Please use the following `build.sh` script in your recipe:
 
@@ -743,13 +791,23 @@ mpi:
   - openmpi
 ```
 
-In meta.yaml:
+In the recipe file:
+
+<RecipeTabs>
 
 ```yaml
 requirements:
   host:
     - {{ mpi }}
 ```
+
+```yaml
+requirements:
+  host:
+    - ${{ mpi }}
+```
+
+</RecipeTabs>
 
 And rerender with:
 
@@ -775,6 +833,8 @@ mpi:
 
 and apply the appropriate conditionals in your build:
 
+<RecipeTabs>
+
 ```yaml
 requirements:
   host:
@@ -782,6 +842,18 @@ requirements:
   run:
     - {{ mpi }}  # [mpi != 'nompi']
 ```
+
+```yaml
+requirements:
+  host:
+    - if: mpi != 'nompi'
+      then: ${{ mpi }}
+  run:
+    - if: mpi != 'nompi'
+      then: ${{ mpi }}
+```
+
+</RecipeTabs>
 
 <a id="preferring-a-provider-usually-nompi"></a>
 
@@ -808,9 +880,13 @@ parallel hdf5 yet. This works fine, though some features may not be available).
 Typically, if there is a preference it will be for the serial build, such that installers/requirers of the package
 only get the mpi build if explicitly requested. We use a higher build number for the `nompi` variant in this case.
 
-Here is an example build section:
+Here is an example part of the recipe:
+
+<RecipeTabs>
 
 ```yaml
+{% set build = 0 %}
+
 {% if mpi == 'nompi' %}
 # prioritize nompi variant via build number
 {% set build = build + 100 %}
@@ -832,15 +908,41 @@ build:
   string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
 ```
 
+```yaml
+context:
+  build_base: 0
+  build: ${{ build_base if mpi != 'nompi' else build_base + 100 }}
+  # add build string so packages can depend on
+  # mpi or nompi variants explicitly:
+  # `pkg * mpi_mpich_*` for mpich
+  # `pkg * mpi_*` for any mpi
+  # `pkg * nompi_*` for no mpi
+  mpi_prefix: ${{ 'mpi_' + mpi if mpi != 'nompi' else 'nompi' }}
+
+build:
+  number: ${{ build }}
+  string: ${{ mpi_prefix }}_h${{ hash }}_${{ build }}
+```
+
+</RecipeTabs>
+
 :::note
 
-`{{ PKG_HASH }}` avoids build string collisions on _most_ variants,
+Variant hash avoids build string collisions on _most_ variants,
 but not on packages that are excluded from the default build string,
 e.g. Python itself. If the package is built for multiple Python versions, use:
+
+<RecipeTabs>
 
 ```yaml
 string: "{{ mpi_prefix }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
 ```
+
+```yaml
+string: "${{ mpi_prefix }}_py${{ python | version_to_buildstring }}h${{ hash }}_${{ build }}"
+```
+
+</RecipeTabs>
 
 as seen in [mpi4py](https://github.com/conda-forge/h5py-feedstock/pull/49/commits/b08ee9307d16864e775f1a7f9dd10f25c83b5974)
 
@@ -864,14 +966,24 @@ If building with this library creates a runtime dependency on the variant, the b
 For example, if building against the nompi variant will work with any installed version, but building with a
 given mpi provider requires running with that mpi:
 
+<RecipeTabs>
+
 ```yaml
 build:
   ...
-  {% if mpi != 'nompi' %}
   run_exports:
-    - {{ name }} * {{ mpi_prefix }}_*
-  {% endif %}
+    - {{ name }} * {{ mpi_prefix }}_*  # [mpi != 'nompi']
 ```
+
+```yaml
+requirements:
+  ...
+  run_exports:
+    - if: mpi != 'nompi'
+      then: ${{ name }} * ${{ mpi_prefix }}_*
+```
+
+</RecipeTabs>
 
 Remove the `if mpi...` condition if all variants should create a strict runtime dependency based on the variant
 chosen at build time (i.e. if the nompi build cannot be run against the mpich build).
@@ -896,6 +1008,8 @@ mpi:
   - mpich  # [not win]
   - openmpi  # [not win]
 ```
+
+<RecipeTabs>
 
 ```yaml
 # meta.yaml
@@ -926,10 +1040,8 @@ build:
   {% endif %}
   string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
 
-  {% if mpi != 'nompi' %}
   run_exports:
-    - {{ name }} * {{ mpi_prefix }}_*
-  {% endif %}
+    - {{ name }} * {{ mpi_prefix }}_*  # [mpi != 'nompi']
 
 requirements:
   host:
@@ -938,11 +1050,40 @@ requirements:
     - {{ mpi }}  # [mpi != 'nompi']
 ```
 
+```yaml
+context:
+  build_base: 0
+  build: ${{ build_base if mpi != 'nompi' else build_base + 100 }}
+  # add build string so packages can depend on
+  # mpi or nompi variants explicitly:
+  # `pkg * mpi_mpich_*` for mpich
+  # `pkg * mpi_*` for any mpi
+  # `pkg * nompi_*` for no mpi
+  mpi_prefix: ${{ 'mpi_' + mpi if mpi != 'nompi' else 'nompi' }}
+
+build:
+  number: ${{ build }}
+  string: ${{ mpi_prefix }}_h${{ hash }}_${{ build }}
+
+requirements:
+  host:
+    - if: mpi != 'nompi'
+      then: ${{ mpi }}
+  run:
+    - if: mpi != 'nompi'
+      then: ${{ mpi }}
+  run_exports:
+    - if: mpi != 'nompi'
+      then: ${{ name }} * ${{ mpi_prefix }}_*
+```
+
+</RecipeTabs>
+
 And then a package that depends on this one can explicitly pick the appropriate mpi builds:
 
-```yaml
-# meta.yaml
+<RecipeTabs>
 
+```yaml
 requirements:
   host:
     - {{ mpi }}  # [mpi != 'nompi']
@@ -952,6 +1093,23 @@ requirements:
     - {{ mpi }}  # [mpi != 'nompi']
     - pkg * mpi_{{ mpi }}_*  # [mpi != 'nompi']
 ```
+
+```yaml
+requirements:
+  host:
+    - if: mpi != 'nompi'
+      then:
+        - ${{ mpi }}
+        - pkg * mpi_${{ mpi }}_*
+    - pkg
+  run:
+    - if: mpi != 'nompi'
+      then:
+        - ${{ mpi }}
+        - pkg * mpi_${{ mpi }}_*
+```
+
+</RecipeTabs>
 
 mpi-metapackage exclusivity allows `mpi_*` to resolve the same as `mpi_{{ mpi }}_*`
 if `{{ mpi }}` is also a direct dependency, though it's probably nicer to be explicit.
@@ -969,14 +1127,25 @@ mpi:
   - openmpi
 ```
 
+<RecipeTabs>
+
 ```yaml
-# meta.yaml
 requirements:
   host:
     - {{ mpi }}
   run:
     - {{ mpi }}
 ```
+
+```yaml
+requirements:
+  host:
+    - ${{ mpi }}
+  run:
+    - ${{ mpi }}
+```
+
+</RecipeTabs>
 
 <a id="mpi-compiler-packages"></a>
 
