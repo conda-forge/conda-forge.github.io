@@ -6,13 +6,12 @@ import { RecipeTabs } from "@site/src/components/RecipeTabs";
 
 One of the least intuitive things to grasp when beginning to work with conda recipes is what the
 roles of the different environments are. Questions such as "does it go into `build:` or `host:`?"
-or "what's the difference between those two?" are very common. This page provides a high-level
+or "what's the difference between these two?" are very common. This page provides a high-level
 summary of the environment types and what distinguishes their different roles.
 
 ## For compiled packages
 
-Although the topic of cross-compilation is somewhat of an advanced topic (we leave the details to
-[a separate page](../cross-compilation)), the constraints
+Although the topic of [cross-compilation](../cross-compilation) is somewhat of an advanced topic, the constraints
 it imposes are very instructive about why things are as they are. For the purpose of this
 discussion, the only relevant thing to know is that there are two different CPU architectures in
 play: the one we're building _for_, and the one we're building _on_.
@@ -27,15 +26,14 @@ build_platform:
 ```
 
 The left side is the architecture we want to build packages for, and the right side is the platform
-we will use to build those packages (sidenote: due to restrictions of the yaml format, hyphens have
+we will use to build those packages (sidenote: due to limitations of the YAML format, hyphens have
 to be replaced with underscores; we will continue using `linux-aarch64` etc. below).
 
 Because packages that have been compiled for `linux-aarch64` cannot run on `linux-64` (for more
-details see [compilation concepts](../compilation-concepts)), this forces us to be very precise
+details see [compilation concepts](../compilation-concepts)), we are forced to be very precise
 about separating the necessary ingredients for building a package.
 
-Let's take a simple recipe for `mypkg` and annotate what happens for `host_platform: linux-aarch64`
-and `build_platform: linux-64`:
+Let's take a simple recipe for `mypkg` and annotate what happens when we build it for `linux-aarch64` on a `linux-64` machine (`host_platform: linux-aarch64`, `build_platform: linux-64`).
 
 ```yaml
 requirements:
@@ -57,24 +55,24 @@ requirements:
 ```
 
 Let us unpack what is happening here. During the build, there are _two_ environments in play, as
-indicated by the `[build time]` tag. The `build:` environment is where we place anything that needs
+indicated by the presence of two sections annotated by the `[build time]` tag. The `build:` environment is where we place anything that needs
 to be _executed_ (rather than just _present_); it is a normal environment placed under `$BUILD_PREFIX`.
 
 The `host:` environment (under `$PREFIX`) contains dependencies that we will be necessary for
 building `mypkg`, for example because we need to find the correct header files when compiling,
 and symbols when linking. Anything in `host:` cannot be executed during the build phase, because
-binaries compiled for `linux-aarch64` cannot run on our `linux-64` build agent.
+binaries compiled for `linux-aarch64` cannot run on our `linux-64` build machine.
 
-Finally, the `run:` environment forgets about what happened at build time; here we just specify
-what dependencies need to be present for `mypkg` to be functional. In many case, libraries from
-the host environment will inject dependencies into the `run:` environment. This is a consequence of
+Finally, the `run:` environment does not have any role at build time. It only specifies
+what dependencies need to be present for `mypkg` to be functional once installed. In many cases, libraries from
+the `host:` environment will inject dependencies into the `run:` environment. This is a consequence of
 the fact that if `mypkg` depends on a shared library (here: `zlib` & `zstd`), these libraries need
 to be present both at build time (for the linker to find the symbols therein, and register where to
 find them), as well as at runtime (when the dynamic linker goes looking for the symbols that have
 been marked as externally provided during the build of `mypkg`).
 
 It's worth noting that the `run:` environment is never actually created during the build of `mypkg`.
-That's why testing packages is essential, not least to find if the resulting artefact can actually
+That's why testing packages is essential, even if only to find if the resulting artifact can actually
 be installed as-is. Here, the recipe formats v0 (`meta.yaml`) and v1 (`recipe.yaml`) behave slightly
 differently:
 
@@ -117,7 +115,7 @@ exactly the same as for cross-compiled builds: things that are only necessary to
 (without otherwise affecting the result) are in `build:`, while compile-time dependencies go into
 `host:`. Let us explore the latter some more below.
 
-### ABI-tracking
+### ABI tracking
 
 In many ways, the `host:` environment is the "heart" of a package's dependencies. While compilers,
 build tools in `build:` (and their versions) can often be changed relatively freely, the packages
@@ -125,30 +123,30 @@ in `host:` imply a much tighter contract, i.e. `mypkg` depends on the Applicatio
 ([ABI](../../../glossary/#abi)) of that host dependency, and if this ABI changes, we need to rebuild
 `mypkg`.
 
-This mechanism is one of the core tasks of conda-forge's infrastructure, as we continuously rebuild
-feedstocks if any one of their dependencies has released a version with a new ABI. In particular,
-any bare `host:` dependency ("bare" meaning without `>/>=/==/<=/<` constraints) that matches one of
-the packages in the global [pinning](../../adding_pkgs/#pinning) will participate in this
+Addressing this problem is one of the core goals of conda-forge's infrastructure, as we continuously rebuild
+feedstocks if any one of their dependencies releases a version with a new ABI. In particular,
+any name-only `host:` dependency (i.e. without any version or build constraints) that matches one of
+the packages in the [global pinning](../../adding_pkgs/#pinning) will participate in this
 orchestration.
 
-This is essential, because otherwise `mypkg` would eventually end up in a situation where it depends
-on versions of its dependencies that are incompatible with pretty much all other contemporary
-conda-forge builds.
+This is essential, because otherwise different packages would eventually end up depending on
+incompatible versions of the same dependencies, preventing them from being installed
+simultaneously.
 
 Note that in contrast to the usual way dependencies work transitively (if I install `foo` that
 depends on `bar` which depends on `baz`, then any environment with `foo` must have `baz` too), the
-ABI-tracking in `host:` is **not transitive**.
+ABI-tracking in `host:` is **not transitive**: `foo` tracks `bar` but not `baz`.
 
 This is why the link check will warn you if you are "overdepending" on libraries: you should not
-declare `host:` dependencies that your package doesn't actually need (though be aware that
+declare `host:` dependencies that your package doesn't use directly (though be aware that
 for various reasons, the overdepending check can have false positives).
 
 ### Run-exports
 
-As described above, run-exports ensure that shared libraries in host are _also_ present in `run:`.
-In addition to the mere _presence_, the ABI-tracking will often imply concrete version constraints
+As described above, run-exports ensure that shared libraries in `host:` are _also_ present in `run:`.
+In addition to the mere _presence_, the ABI tracking will often imply concrete version constraints
 based on the version of the library that was present in the `host:` environment at build time. For
-example, `zlib` has a run-export
+example, `zlib` has a run-export:
 
 ```yaml
     requirements:
