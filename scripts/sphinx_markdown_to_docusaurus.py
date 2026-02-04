@@ -18,7 +18,7 @@ SIDEBAR_ORDERING = [
     "/docs/user/how_to_get_help.md",
     "/docs/user/talks.md",
     "/docs/maintainer/index.md",
-    "/docs/maintainer/infrastructure.md",
+    "/docs/maintainer/infrastructure.mdx",
     "/docs/maintainer/adding_pkgs.mdx",
     "/docs/maintainer/updating_pkgs.md",
     "/docs/maintainer/pinning_deps.md",
