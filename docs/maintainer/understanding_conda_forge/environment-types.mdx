@@ -171,11 +171,12 @@ This is why the link check at the end of the build has an essential role. It wil
 has not declared all dependencies (in terms of which libraries the final artefact links against),
 which means that changes to the ABI of that package are not being tracked, which may lead to ABI
 breaks (crashes, etc.) down the line. In conda-build's terminology, this is called "overlinking".
+You should always address those warnings.
 
 On the other hand, the link check will also warn you if you are "overdepending" on libraries, which
 is the case if your package has `host:` dependencies that aren't actually used. This is less severe
 than overlinking, because it "just" means that your package has unnecessarily tight constraints and
-may be rebuilt more often than strictly necessary. You should always address those warnings.
+may be rebuilt more often than strictly necessary.
 
 Note also that the overdepending warning can have false positives, because the link check cannot
 statically determine all ways that a given library may be loaded. In particular, things that are
