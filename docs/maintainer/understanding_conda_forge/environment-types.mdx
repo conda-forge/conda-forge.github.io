@@ -206,14 +206,14 @@ build:  # top-level key per output, not under `requirements:`!
         - libzlib
 ```
 
+</RecipeTabs>
+
 If this breaks the package (e.g. the tests fails), then you have found a false positive of the
 overdepending warning, and should simply ignore it.
 
 Due to the way that the link check cannot capture all relevant scenarios (also around meta-packages,
 compiler infrastructure, etc.), please do not add excessive `ignore_run_exports:`. In case of doubt,
 start a discussion on Zulip.
-
-</RecipeTabs>
 
 
 ## Interpreted languages
