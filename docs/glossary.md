@@ -36,7 +36,7 @@ performance (reduced latency, higher download speeds) and availability.
 
 Core Dependency Tree. Core Dependency Tree packages take care of the dependencies that are so close to the system that they are not packaged with conda-forge. For example, in conda-forge, we have used repackaged CentOS 6 or 7 binaries for some time.
 
-[Learn more](https://conda-forge.org/docs/maintainer/knowledge_base.html#cdt-packages).
+[Learn more](https://conda-forge.org/docs/maintainer/knowledge_base.html#core-dependency-tree-packages-cdts).
 
 <a id="term-CFEP"></a>
 

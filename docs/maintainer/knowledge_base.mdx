@@ -84,7 +84,7 @@ Some optional, but useful CMake options:
   into lib64 or similar but on conda-forge we keep shared libraries in simply lib.
 - `-DBUILD_SHARED_LIBS=ON` Instruct CMake to build shared libraries instead of static ones.
 - `-DCMAKE_FIND_FRAMEWORK=NEVER` and `-DCMAKE_FIND_APPBUNDLE=NEVER` Prevent CMake from using system-wide macOS packages.
-- `${CMAKE_ARGS}` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like [CUDA builds](#cuda).
+- `${CMAKE_ARGS}` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like [CUDA builds](#cuda-builds).
 
 :::warning
 
@@ -115,7 +115,7 @@ if errorlevel 1 exit /b 1
 
 See also the `bld.bat` in the Windows section below for an additional example.
 
-Other useful `cmake` options are `-B<directory>` and `-S<directory>` to specify build and source
+Other useful `cmake` options are `-B&lt;directory&gt;` and `-S&lt;directory&gt;` to specify build and source
 directories.
 
 <a id="moving-from-an-autotools-build-to-a-cmake-build"></a>
@@ -1310,13 +1310,13 @@ can be controlled with `run_constrained`, even for packages not available on all
 
 Currently available packages:
 
-| Name               | Available on:      | Empty on:     |
-| ------------------ | ------------------ | ------------- |
-| backports.strenum  | python >=3.8,<3.11 | python >=3.12 |
-| dataclasses        | python >=3.6,<3.7  | python >=3.7  |
-| enum34             | python =2.7        | python >=3.4  |
-| pywin32-on-windows | windows            | unix          |
-| typing             |                    | python >=3    |
+| Name               | Available on:            | Empty on:        |
+| ------------------ | ------------------------ | ---------------- |
+| backports.strenum  | python &gt;=3.8,&lt;3.11 | python &gt;=3.12 |
+| dataclasses        | python &gt;=3.6,&lt;3.7  | python &gt;=3.7  |
+| enum34             | python =2.7              | python &gt;=3.4  |
+| pywin32-on-windows | windows                  | unix             |
+| typing             |                          | python &gt;=3    |
 
 <a id="knowledge-all-installs"></a>
 
@@ -2018,7 +2018,7 @@ in `recipe/conda_build_config.yaml` in their respective feedstocks.
 
 A rerender needs to happen for these changes to reflect in CI files. The channel_targets entries map
 
-- <channel target> <label target> pairs for use in the post-build upload step.
+- &lt;channel target&gt; &lt;label target&gt; pairs for use in the post-build upload step.
 
 :::
 

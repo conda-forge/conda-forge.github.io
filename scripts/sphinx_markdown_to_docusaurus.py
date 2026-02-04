@@ -23,7 +23,7 @@ SIDEBAR_ORDERING = [
     "/docs/maintainer/updating_pkgs.md",
     "/docs/maintainer/pinning_deps.md",
     "/docs/maintainer/conda_forge_yml.md",
-    "/docs/maintainer/knowledge_base.md",
+    "/docs/maintainer/knowledge_base.mdx",
     "/docs/maintainer/maintainer_faq.md",
     "/docs/orga/index.md",
     "/docs/orga/guidelines.md",
