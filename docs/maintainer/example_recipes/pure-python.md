@@ -164,8 +164,9 @@ If your package provides CLI tools, you can add command line tests:
 
 ```yaml
 tests:
-  - script: example-cli --help
-  - script: example-cli --version
+  - script:
+      - example-cli --help
+      - example-cli --version
 ```
 
 ## More information
