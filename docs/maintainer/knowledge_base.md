@@ -1683,9 +1683,9 @@ You need to rerender the feedstock after this change.
 
 ## Requiring newer macOS SDKs
 
-conda-forge uses macOS SDK 10.13 to build software so that they can be deployed to
-all macOS versions newer than 10.13. Sometimes, some packages require a newer SDK
-to build with. While the default version 10.13 can be overridden using the following
+conda-forge uses macOS SDK 11.0 to build software so that they can be deployed to
+all macOS versions newer than 11.0. Sometimes, some packages require a newer SDK
+to build with. While the default version 11.0 can be overridden using the following
 changes to the recipe, it should be done as a last resort. Please consult with
 core team if this is something you think you need.
 
@@ -1694,17 +1694,12 @@ To use a new SDK, add the following in `recipe/conda_build_config.yaml`
 ```yaml
 # Please consult conda-forge/core before doing this
 MACOSX_SDK_VERSION:        # [osx and x86_64]
-  - "10.15"                # [osx and x86_64]
+  - "15.5"                 # [osx and x86_64]
 ```
 
 Note that this should be done if the error you are getting says that a header is not
 found or a macro is not defined. This will make your package compile with a newer SDK
-but with `10.13` as the deployment target.
-WARNING: some packages might use features from `10.15` if you do the above due to
-buggy symbol availability checks. For example packages looking for `clock_gettime`
-will see it as it will be a weak symbol, but the package might not have a codepath
-to handle the weak symbol, in that case, you need to update the `c_stdlib_version`
-(previously `MACOSX_DEPLOYMENT_TARGET`) as described below.
+but with `11.0` as the deployment target.
 
 After increasing the SDK version, if you are getting an error that says that a function
 is available only for macOS x.x, then do the following in `recipe/conda_build_config.yaml`,
@@ -1712,10 +1707,11 @@ is available only for macOS x.x, then do the following in `recipe/conda_build_co
 ```yaml
 # Please consult conda-forge/core before doing this
 c_stdlib_version:          # [osx and x86_64]
-  - "10.15"                # [osx and x86_64]
-MACOSX_SDK_VERSION:        # [osx and x86_64]
-  - "10.15"                # [osx and x86_64]
+  - "12.0"                 # [osx and x86_64]
 ```
+
+In this case you don't need to set `MACOSX_SDK_VERSION` (unless it needs to be newer than
+12.0), because the SDK version will always be _at least_ the deployment target.
 
 In `recipe/meta.yaml`, add the following to ensure that the user's system is compatible.
 
@@ -1736,15 +1732,14 @@ The libc++ library uses Clang availability annotations to mark certain symbols a
 unavailable when targeting versions of macOS that ship with a system libc++
 that do not contain them. Clang always assumes that the system libc++ is used.
 
-The conda-forge build infrastructure targets macOS 10.13 and some newer C++ features
+The conda-forge build infrastructure targets macOS 11.0 and some newer C++ features
 such as `fs::path` are marked as unavailable on that platform, so the build aborts:
 
 ```bash
 ...
-error: 'path' is unavailable: introduced in macOS 10.15
+error: 'foo' is unavailable: introduced in macOS 12.3
 ...
-note: 'path' has been explicitly marked unavailable here
-class _LIBCPP_TYPE_VIS path {
+note: 'foo' has been explicitly marked unavailable here
 ```
 
 However, since conda-forge ships its own (modern) libcxx we can ignore these checks
