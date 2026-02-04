@@ -17,12 +17,13 @@ Note that the generated recipe is a starting point and may need adjustments base
 
 ## Recipe template
 
+Here is a minimal template for a pure-Python package v1 recipe:
+
 ```yaml title="recipe.yaml"
 schema_version: 1
 
 context:
   version: 1.2.3
-  python_min: "3.10"
 
 package:
   name: example-package
@@ -40,13 +41,9 @@ build:
 requirements:
   host:
     - python ${{ python_min }}.*
-    - hatchling
     - pip
   run:
     - python >=${{ python_min }}
-    - click >=7.0
-    - requests
-    - numpy
 
 tests:
   - python:
@@ -69,12 +66,33 @@ about:
 
 extra:
   recipe-maintainers:
-    - you
-    - the-package-maintainer
-    - another-maintainer
+    - LandoCalrissian
 ```
 
-### The source section
+### The `context` section
+
+This section defines variables that can be reused throughout the recipe.
+For conda-forge recipes, you should at least define the `version` variable:
+
+```yaml
+context:
+  version: 1.2.3
+```
+
+These variables can be referenced using the `${{ variable_name }}` syntax elsewhere in the recipe.
+
+### The `package` section
+
+```yaml
+package:
+  name: example-package
+  version: ${{ version }}
+```
+
+- `name`: The conda package name, typically the PyPI package name with hyphens.
+- `version`: Use the `version` variable defined in the `context` section.
+
+### The `source` section
 
 ```yaml
 source:
@@ -85,7 +103,7 @@ source:
 - `url`: The PyPI source URL follows the pattern `https://pypi.org/packages/source/<first-letter>/<package-name>/<package-name>-<version>.tar.gz`. Note that the package name in the URL may use underscores instead of hyphens (e.g., `example_package` vs `example-package`).
 - `sha256`: The SHA256 hash of the source archive. Run `openssl sha256 <artifact>` to get its hash after downloading the source file.
 
-### The build section
+### The `build` section
 
 ```yaml
 build:
@@ -114,7 +132,7 @@ build:
 
 This creates a `example-cli` command that calls the `main` function from `example_package.cli`.
 
-### The requirements section
+### The `requirements` section
 
 ```yaml
 requirements:
@@ -143,19 +161,21 @@ Add your package's runtime dependencies here. These should match what's specifie
 
 - `python >=${{ python_min }}`: Define the Python version dependency as minimum version and higher. Don't specify an upper bound unless absolutely necessary to avoid future conflicts.
 
-### The tests section
+### The `tests` section
 
 ```yaml
 tests:
   - python:
       imports:
         - example-package
-      python_version: ${{ python_min }}.*
+      python_version:
+        - ${{ python_min }}.*
+        - *
       pip_check: true
 ```
 
 - `imports`: List the Python modules to import to verify the package installed correctly. This ensures basic functionality.
-- `python_version`: Test against the minimum supported Python version to ensure compatibility.
+- `python_version`: Test against the minimum supported Python version to ensure compatibility. Also test against the latest Python version (`*`) to catch any issues with newer releases.
 - `pip_check`: Runs `pip check` to ensure all dependencies are satisfied and there are no conflicts.
 
 #### Command line tests
@@ -167,6 +187,17 @@ tests:
   - script:
       - example-cli --help
       - example-cli --version
+```
+
+### The `extra` section
+
+A schema-free area for storing non-conda-specific metadata in standard YAML form.
+In conda-forge recipes, you have to add at least the `recipe-maintainers` field with the GitHub usernames of the maintainers:
+
+```yaml
+extra:
+  recipe-maintainers:
+    - LandoCalrissian
 ```
 
 ## More information
