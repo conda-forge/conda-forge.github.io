@@ -113,7 +113,35 @@ case, both environments are able to execute code on the machine. Do not be confu
 degree of freedom; the separation into the different _roles_ of `build:` and `host:` remains
 exactly the same as for cross-compiled builds: things that are only necessary to be executed
 (without otherwise affecting the result) are in `build:`, while compile-time dependencies go into
-`host:`. Let us explore the latter some more below.
+`host:`. We will explore the latter some more below, but first need to introduce another mechanism.
+
+### Run-exports
+
+As described above, run-exports ensure that shared libraries in `host:` are _also_ present in `run:`.
+In addition to the mere _presence_, the ABI tracking will often imply concrete version constraints
+based on the version of the library that was present in the `host:` environment at build time. For
+example, `zlib` has a run-export:
+
+```yaml
+    requirements:
+      run_exports:
+        - ${{ pin_subpackage('libzlib', max_pin='x') }}
+```
+
+For `zlib 1.3.1` in our `host:` environment, `pin_subpackage` translates to `libzlib >=1.3.1,<2.0a0`,
+which is what packages building against `zlib` in `host:` will thus inherit as a `run:` dependency.
+
+As an aside to explain the difference why `zstd` run-exports itself, but `zlib` exports `libzlib`:
+libraries can generally be split into development and runtime components. For examples, headers,
+package metadata, etc. are all not necessary (and may be unwanted) at runtime. In this case, `zlib`
+corresponds to the complete set of files (for development), whereas `libzlib` contains only the
+library itself (i.e. all that's necessary at runtime). Not every library in conda-forge currently
+follows such a stringent split though; in particular, `zstd` doesn't. Therefore, it has to run-export
+the only thing available to ensure the library is present at runtime, which is again `zstd`.
+
+Some select packages (especially compilers and the C standard library) may also contribute to `run:`
+dependencies from the `build:` environment; these are so-called "strong" run-exports. These have not
+been added in the above example for brevity, but look like `libgcc` / `libstdcxx` / `__glibc` etc.
 
 ### ABI tracking
 
@@ -152,34 +180,6 @@ may be rebuilt more often than strictly necessary.
 Note also that the overdepending warning can have false positives, because the link check cannot
 statically determine all ways that a given library may be loaded. In particular, things that are
 only loaded at runtime cannot be determined ahead-of-time (`numpy` is an example of this).
-
-### Run-exports
-
-As described above, run-exports ensure that shared libraries in `host:` are _also_ present in `run:`.
-In addition to the mere _presence_, the ABI tracking will often imply concrete version constraints
-based on the version of the library that was present in the `host:` environment at build time. For
-example, `zlib` has a run-export:
-
-```yaml
-    requirements:
-      run_exports:
-        - ${{ pin_subpackage('libzlib', max_pin='x') }}
-```
-
-For `zlib 1.3.1` in our `host:` environment, `pin_subpackage` translates to `libzlib >=1.3.1,<2.0a0`,
-which is what packages building against `zlib` in `host:` will thus inherit as a `run:` dependency.
-
-As an aside to explain the difference why `zstd` run-exports itself, but `zlib` exports `libzlib`:
-libraries can generally be split into development and runtime components. For examples, headers,
-package metadata, etc. are all not necessary (and may be unwanted) at runtime. In this case, `zlib`
-corresponds to the complete set of files (for development), whereas `libzlib` contains only the
-library itself (i.e. all that's necessary at runtime). Not every library in conda-forge currently
-follows such a stringent split though; in particular, `zstd` doesn't. Therefore, it has to run-export
-the only thing available to ensure the library is present at runtime, which is again `zstd`.
-
-Some select packages (especially compilers and the C standard library) may also contribute to `run:`
-dependencies from the `build:` environment; these are so-called "strong" run-exports. These have not
-been added in the above example for brevity, but look like `libgcc` / `libstdcxx` / `__glibc` etc.
 
 ## Interpreted languages
 
