@@ -11,30 +11,24 @@ summary of the environment types and what distinguishes their different roles.
 
 ## For compiled packages
 
-Although the topic of [cross-compilation](../cross-compilation) is somewhat of an advanced topic, the constraints
-it imposes are very instructive about why things are as they are. For the purpose of this
-discussion, the only relevant thing to know is that there are two different CPU architectures in
+Although the topic of [cross-compilation](../cross-compilation) is somewhat of an advanced topic,
+the constraints it imposes are very instructive about why things are as they are. For the purpose
+of this discussion, the only relevant thing to know is that there are two different platforms in
 play: the one we're building _for_, and the one we're building _on_.
 
-In `conda-forge.yml`, this is expressed as follows:
+In almost all cases, the difference in platforms is actually "only" a difference in CPU architectures.
+For example, our CI providers do not offer native `linux-aarch64` machines at scale for free, and so
+we are forced to cross-compile packages for this platform from `linux-64`. That said, it is possible
+(both conceptually and in terms of tooling) to do full cross-platform compilation, e.g. building for
+`osx-arm64` or `win-64` from `linux-64`, though this is very rarely necessary.
 
-```yaml
-build_platform:
-  linux_aarch64: linux_64
-  linux_ppc64le: linux_64
-  osx_arm64: osx_64
-```
+In general, packages compiled for one architecture can only run on that CPU architecture (e.g. a
+package built for `linux-aarch64` can only be executed on that type of machine, but not on `linux-64`
+or `linux-ppc64le`; for more details see [compilation concepts](../compilation-concepts)), we are
+forced to be very precise about separating the necessary ingredients for building a package.
 
-The left side is the architecture we want to build packages for, and the right side is the platform
-we will use to build those packages (sidenote: due to limitations of the YAML format, hyphens have
-to be replaced with underscores; we will continue using `linux-aarch64` etc. below).
-
-In general, packages compiled for one architecture can only run on that architecture (e.g. a package
-built for linux-aarch64 can only be executed in that type of machine, but not `linux-64` or
-`linux-ppc64le`; for more details see [compilation concepts](../compilation-concepts)), we are forced
-to be very precise about separating the necessary ingredients for building a package.
-
-Let's take a simple recipe for `mypkg` and annotate what happens when we build it for `linux-aarch64` on a `linux-64` machine (`host_platform: linux-aarch64`, `build_platform: linux-64`).
+Let's take a simple recipe for `mypkg` and annotate what happens when we build it for `linux-aarch64`
+(we will say: `host_platform: linux-aarch64`) on a `linux-64` machine (`build_platform: linux-64`).
 
 ```yaml
 requirements:
