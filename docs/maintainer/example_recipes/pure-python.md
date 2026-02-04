@@ -52,7 +52,9 @@ tests:
   - python:
       imports:
         - example-package
-      python_version: ${{ python_min }}.*
+      python_version:
+        - ${{ python_min }}.*
+        - *
       pip_check: true
 
 about:
