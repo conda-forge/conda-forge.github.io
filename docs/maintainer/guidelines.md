@@ -218,7 +218,7 @@ Recommended:
 
 Required:
 
-1. `noarch: python` packages fulfill the [required criteria](knowledge_base.md#noarch) to be considered as such.
+1. `noarch: python` packages fulfill the [required criteria](../knowledge_base#noarch-python) to be considered as such.
 
 Recommended:
 
@@ -229,7 +229,7 @@ Recommended:
 2. The modules checked by `test.imports` are not empty (this can happen with placeholder `__init__.py` files in top-level packages).
 3. The versions reported by `pip list` and `conda build` logs match.
 4. `pip check` passes. See [pip check](../adding_pkgs#testing-python-packages) for more details.
-5. If a project can be considered `noarch` (see [criteria](knowledge_base.md#noarch)), it should be packaged as such.
+5. If a project can be considered `noarch` (see [criteria](../knowledge_base#noarch-python)), it should be packaged as such.
 
 <a id="compiled-objects"></a>
 
