@@ -194,7 +194,7 @@ requirements:
   build:
     - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
-    - ${{ compiler('cxx') }}    # compilers as usual
+    - ${{ compiler('cxx') }}        # compilers as usual
     - ninja
     - pkg-config
   host:
@@ -209,9 +209,10 @@ requirements:
     - pip
     - python-build
   run:
-    - python                    # with matching minor version as in `host:`
+    - python                        # not shown here: run-export from python that
+                                    # enforces matching minor version as in `host:`
     # - libblas >=3.9.0,<4.0a0
-    # - libcblas >=3.9.0,<4.0a0
+    # - libcblas >=3.9.0,<4.0a0     # run-exports from BLAS/LAPACK packages
     # - liblapack >=3.9.0,<4.0a0
   run_exports:
     - numpy >=${{ default_abi_level }},<3
