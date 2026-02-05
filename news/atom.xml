@@ -2,11 +2,47 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/news/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2026-01-29T00:00:00.000Z</updated>
+    <updated>2026-02-06T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/news/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Bumping Minimum MacOS version to 11.0]]></title>
+        <id>https://conda-forge.org/news/2026/02/06/macOS-11/</id>
+        <link href="https://conda-forge.org/news/2026/02/06/macOS-11/"/>
+        <updated>2026-02-06T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We will bump the minimum MacOS version from 10.13 (released in Sept. 2017, end-of-life since]]></summary>
+        <content type="html"><![CDATA[<p>We will bump the minimum MacOS version from 10.13 (released in Sept. 2017, end-of-life since
+Dec. 2020) to 11.0 (released Nov. 2020, end-of-life since Sept. 2023) sometime next week.</p>
+<p>This will not affect already-published artefacts, and you will not receive incompatible builds
+even when still using an older Mac. However, going forward, to be able to keep using the most
+recent packages from conda-forge, you will need to update your OS to at least 11.0.</p>
+<p>The reason conda-forge is able to support macOS versions far beyond their end-of-life is due to the
+fact that -- unlike many other paradigms -- we are able to always ship an up-to-date C++ standard
+library (<code>libcxx</code> on OSX) in user environments, superseding the system library (at least from the
+point of view of packages in the respective conda environments) that's usually too outdated for
+contemporary packaging needs.</p>
+<p>However, several core packages in the ecosystem have begun requiring 11.0 or newer, in a way
+that we cannot be circumvent. The key driver for this is <code>libcxx</code> itself; it has a foundational
+role in our infrastructure, and many aspects depend on this library being up-to-date. Given that
+<code>libcxx</code> itself will begin requiring macOS 11.0 as of v22.1, we need to follow suit.</p>
+<p>Other fundamental packages that already require a newer deployment target is the <code>qt</code> ecosystem,
+languages like <code>go</code>, <code>nodejs</code>, <code>dotnet</code>, <code>zig</code>, and key libraries like <code>libabseil</code> and <code>libprotobuf</code>.
+Since <code>go</code> already requires a deployment target of at least 12.0, we have added a custom
+<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migrations/go_macos.yaml" target="_blank" rel="noopener noreferrer" class="">migrator</a>
+that will send PRs to update <code>go</code>-feedstocks without having to do manual modifications.</p>
+<p>As soon as we make the switch, all new builds (on properly rerendered feedstocks) in conda-forge
+for OSX will require at least 11.0. This constraint is implemented via the <code>{{ stdlib("c") }}</code>
+meta-package, which picks up <code>c_stdlib_version</code> from our global pinning (unless
+<a href="https://conda-forge.org/docs/maintainer/knowledge_base/#requiring-newer-macos-sdks" target="_blank" rel="noopener noreferrer" class="">overridden</a>
+on the feedstock in <code>recipe/conda_build_config.yaml</code>), and will inject (on OSX) a corresponding constraint
+on <code>__osx &gt;=11</code> in the package metadata. This instructs the resolver to ignore such artefacts on
+older systems, ensuring that no incompatible packages get installed.</p>
+<p>If you are overriding <code>c_stdlib_version</code> or <code>MACOSX_SDK_VERSION</code> to values &lt;=11.0 in your feedstock,
+please remove that configuration, as it has become redundant.</p>
+<p>For more details (or questions) about this, see <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2467" target="_blank" rel="noopener noreferrer" class="">https://github.com/conda-forge/conda-forge.github.io/issues/2467</a>.</p>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[New Syntax for External MPI Packages]]></title>
         <id>https://conda-forge.org/news/2026/01/29/new-mpi-external-syntax/</id>
@@ -354,17 +390,5 @@ that regularly adds new outputs (e.g., <code>llvmdev</code> has <code>libllvm18<
 to add a glob pattern that matches the pattern of your new outputs. We test these patterns aginst new outputs from the feedstock
 using the Python <code>fnmatch</code> module. Outputs from the feedstock that match a glob pattern will added automatically. Further
 details on package output validation can be found in our <a href="https://conda-forge.org/docs/maintainer/infrastructure/#output-validation-and-feedstock-tokens" target="_blank" rel="noopener noreferrer" class="">documentation</a>.</p>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Removing build in favor of python-build]]></title>
-        <id>https://conda-forge.org/news/2024/08/21/remove-build/</id>
-        <link href="https://conda-forge.org/news/2024/08/21/remove-build/"/>
-        <updated>2024-08-21T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[For nearly two years now, we have favored the use python-build as the package name for the PyPA build]]></summary>
-        <content type="html"><![CDATA[<p>For nearly two years now, we have favored the use <code>python-build</code> as the package name for the PyPA <a href="https://github.com/pypa/build" target="_blank" rel="noopener noreferrer" class=""><code>build</code></a>
-project over <code>build</code>. In fact, the <code>build</code> feedstock on <code>conda-forge</code> is archived and has not had its version
-updated. To complete this transition, we are going to mark all existing <code>build</code> packages as broken, provide
-a more detailed linter hint, and turn off the migration infrastructure we've been using to help move feedstocks.
-Any questions or comments can be directed to the <a href="https://github.com/conda-forge/conda-forge.github.io/issues/2269" target="_blank" rel="noopener noreferrer" class="">GitHub issue</a> on this work.</p>]]></content>
     </entry>
 </feed>
