@@ -265,3 +265,59 @@ not be able to actually run anything once the build process wants to call into p
 The fact that `python` is arguably both a `host:` as well as a `build:` dependency creates some
 obvious issues for cross-compilation. This is explained in
 [details about cross-compiled Python packages](../../../how-to/advanced/cross-compilation/#details-about-cross-compiled-python-packages).
+
+## What about `target_platform`?
+
+There is a long history of ambiguous use of terminology related to cross-compilation. From the
+point-of-view of compiler authors, there's a third architecture that becomes relevant:
+
+- the platform where the artefact is being built ("build")
+- the platform where the built artefact will be executed ("host")
+- the platform that the built artefact will generate binaries for ("target")
+
+The third point is almost only ever necessary for _building_ a cross-compiler, because said compiler
+may have the parameters related to the target platform (for which it is generating binaries) baked
+into its own executable. Other cross-compilers leave the target platform as a runtime property that
+can be configured, but the case remains that there is potentially a third platform in play.
+
+This most general case is also commonly known as a "[Canadian Cross](https://en.wikipedia.org/wiki/Cross_compiler#Canadian_Cross)".
+Over many years, the predominant naming pattern that emerged matches the naming presented next to
+the bullet points above (e.g.
+[GCC](https://gcc.gnu.org/onlinedocs/gccint/Configure-Terms.html),
+[meson](https://mesonbuild.com/Cross-compilation.html)
+[Debian](https://manpages.debian.org/trixie/dpkg-dev/dpkg-architecture.1.en.html#TERMS)).
+However, there are many toolchains that have (either historically or presently) have had less of a
+need or focus for cross-compilation, where the same names might be used in different ways.
+
+Even the v0 recipe format falls prey to some inconsistencies, in the sense that the variable
+`{{ target_platform }}` (or `$target_platform` in build scripts) actually represents the `host:`.
+The v1 recipe format has fixed this, but still allows the old, less accurate, naming for reasons of
+compatibility. That said, v1 recipes should always prefer to use `host_platform` instead of
+`target_platform`. Coming back to the bits from the numpy example (related to python cross-compilation)
+that we omitted above, this is how the formulation differs between v0 and v1:
+
+<RecipeTabs>
+
+```yaml
+requirements:
+  build:
+    - if: build_platform != host_platform
+      then:
+        - python
+        - cross-python_${{ host_platform }}
+        - cython
+    - ${{ stdlib('c') }}    # and so forth
+```
+
+```yaml
+
+
+requirements:
+  build:
+    - python                                # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}    # [build_platform != target_platform]
+    - cython                                # [build_platform != target_platform]
+    - {{ stdlib('c') }}     # and so forth
+```
+
+</RecipeTabs>
