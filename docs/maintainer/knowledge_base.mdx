@@ -1558,19 +1558,39 @@ consistent usage.
 
 To use this package in a build, put it in the host environment like so
 
+<RecipeTabs>
+
 ```yaml
 requirements:
   host:
     - pybind11-abi
 ```
 
+```yaml
+requirements:
+  host:
+    - pybind11-abi
+```
+
+</RecipeTabs>
+
 or
+
+<RecipeTabs>
 
 ```yaml
 requirements:
   host:
     - swig-abi
 ```
+
+```yaml
+requirements:
+  host:
+    - swig-abi
+```
+
+</RecipeTabs>
 
 <a id="knowledge-empty"></a>
 
@@ -1672,7 +1692,9 @@ In order to qualify as a noarch python package, all of the following criteria mu
 
 All recipes employing `noarch: python` should usually use the `python_min` variable per the following example:
 
-```yaml title="recipe/meta.yaml"
+<RecipeTabs>
+
+```yaml
 name: package
 source:
   # ...
@@ -1693,13 +1715,50 @@ test:
     # ...
 ```
 
+```yaml
+name: package
+source:
+  # ...
+build:
+  noarch: python
+  # ...
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    # ...
+  run:
+    - python >=${{ python_min }}
+    # ...
+
+tests:
+  - python:
+      python_version: ${{ python_min }}.*
+      # ...
+  - requirements:
+      run:
+        - python ${{ python_min }}.*
+      script:
+        # ...
+```
+
+</RecipeTabs>
+
 See [CFEP-25](https://github.com/conda-forge/cfep/blob/main/cfep-25.md) for more details on this syntax. If you
 need to override this syntax, you can add a Jinja2 `set` statement (or equivalent `context` variable for v1 recipes)
 at the top of your recipe like this
 
-```yaml title="recipe/meta.yaml"
+<RecipeTabs>
+
+```yaml
 {% set python_min = "3.10" %}
 ```
+
+```yaml
+context:
+  python_min: "3.10"
+```
+
+</RecipeTabs>
 
 It also possible to achieve the same effect by adding a `conda_build_config.yaml` file to your recipe that
 contains a map like
