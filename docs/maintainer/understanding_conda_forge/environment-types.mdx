@@ -17,15 +17,14 @@ of this discussion, the only relevant thing to know is that there are two differ
 play: the one we're building _for_, and the one we're building _on_.
 
 In almost all cases, the difference in platforms is actually "only" a difference in CPU architectures.
-For example, our CI providers do not offer native `linux-aarch64` machines at scale for free, and so
-we are forced to cross-compile packages for this platform from `linux-64`. That said, it is possible
+For example, we currently do not have native `linux-aarch64` builders, so we have to cross-compile packages for this platform from `linux-64`. That said, it is possible
 (both conceptually and in terms of tooling) to do full cross-platform compilation, e.g. building for
 `osx-arm64` or `win-64` from `linux-64`, though this is very rarely necessary.
 
 In general, packages compiled for one architecture can only run on that CPU architecture (e.g. a
 package built for `linux-aarch64` can only be executed on that type of machine, but not on `linux-64`
-or `linux-ppc64le`; for more details see [compilation concepts](../compilation-concepts)), so we are
-forced to be very precise about separating the necessary ingredients for building a package.
+or `linux-ppc64le`; for more details see [compilation concepts](../compilation-concepts)), so we need
+ to be very precise about separating the necessary ingredients for building a package.
 
 Let's take a simple recipe for `mypkg` and annotate what happens when we build it for `linux-aarch64`
 (we will say: `host_platform: linux-aarch64`) on a `linux-64` machine (`build_platform: linux-64`).
@@ -52,17 +51,17 @@ requirements:
 Let us unpack what is happening here. During the build, there are _two_ environments in play, as
 indicated by the presence of two occurrences of the `[build time]` marker. As a rule of thumb, the
 `build:` environment is where we place binaries that need to be _executed_ (rather than just
-_present_); other than that it is a regular conda environment, whose path is reachable during the
+_present_); it is a conda environment, whose path is reachable during the
 build using `$BUILD_PREFIX`.
 
 The `host:` environment (under `$PREFIX`) contains dependencies that we will be necessary for
 building `mypkg`, for example because we need to find the correct header files when compiling, and
-symbols when linking. With the very few exceptions, things in `host:` cannot be executed during the
+symbols when linking. With very few exceptions, things in `host:` cannot be executed during the
 build phase, because binaries compiled for a different architecture (here `linux-aarch64`) cannot
 run on our `linux-64` build machine. An important special case here is `python`, which is explained
 further down.
 
-Finally, the `run:` environment does not have any role at build time. It only specifies which
+Finally, the `run:` environment does not have any role at build time. It specifies which
 dependencies need to be present for `mypkg` to be functional once installed. In many cases, libraries from
 the `host:` environment will inject dependencies into the `run:` environment. This is a consequence of
 the fact that if `mypkg` depends on a shared library (here: `zlib` & `zstd`), these libraries need
@@ -213,7 +212,7 @@ overdepending warning, and should simply ignore it.
 
 Due to the way that the link check cannot capture all relevant scenarios (also around meta-packages,
 compiler infrastructure, etc.), please do not add excessive `ignore_run_exports:`. In case of doubt,
-start a discussion on Zulip.
+start a discussion on [Zulip](https://conda-forge.zulipchat.com/).
 
 
 ## Interpreted languages
@@ -264,5 +263,5 @@ above, but we need to put python packages themselves next to their interpreter, 
 not be able to actually run anything once the build process wants to call into python.
 
 The fact that `python` is arguably both a `host:` as well as a `build:` dependency creates some
-obvious issues for cross-compilation. How those are solved is described
-[here](../../../how-to/advanced/cross-compilation/#details-about-cross-compiled-python-packages).
+obvious issues for cross-compilation. This is explained in
+[details about cross-compiled Python packages](../../../how-to/advanced/cross-compilation/#details-about-cross-compiled-python-packages).
