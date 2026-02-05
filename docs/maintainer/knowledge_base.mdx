@@ -653,17 +653,39 @@ Finding `numpy.get_include()` in `setup.py` or `cimport` statements in `.pyx` or
 
 Adding `numpy` in the `host:` section is sufficient to have a compatible NumPy version at run time:
 
+<RecipeTabs>
+
 ```yaml
-host:
-  - numpy
+requirements:
+  host:
+    - numpy
 ```
+
+```yaml
+requirements:
+  host:
+    - numpy
+```
+
+</RecipeTabs>
 
 At the time of writing (June 2025), the above is equivalent to the following:
 
-```yaml title="recipe/conda_build_config.yaml"
-host:
-  - numpy 2.*
+<RecipeTabs>
+
+```yaml
+requirements:
+  host:
+    - numpy 2.*
 ```
+
+```yaml
+requirements:
+  host:
+    - numpy 2.*
+```
+
+</RecipeTabs>
 
 See the pinning repository for
 [what the pinning corresponds to](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml) at any given time.
@@ -678,13 +700,27 @@ run-export, which is:
 
 If the package you are building has a higher minimum requirement for numpy, please add this under `run`:
 
+<RecipeTabs>
+
 ```yaml
-host:
-  # leave this unpinned!
-  - numpy
-run:
-  - numpy >={{ the_lower_bound_your_package_needs }}
+requirements:
+  host:
+    # leave this unpinned!
+    - numpy
+  run:
+    - numpy >={{ the_lower_bound_your_package_needs }}
 ```
+
+```yaml
+requirements:
+  host:
+    # leave this unpinned!
+    - numpy
+  run:
+    - numpy >={{ the_lower_bound_your_package_needs }}
+```
+
+</RecipeTabs>
 
 <a id="jupyterlab-extension"></a>
 
