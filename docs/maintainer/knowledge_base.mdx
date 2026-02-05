@@ -1477,23 +1477,42 @@ microarch_level:
   - 4  # [unix and x86_64]
 ```
 
-```yaml title="recipe/meta.yaml"
+<RecipeTabs>
+
+```yaml
 # ...
 {% set build = 0 %}
 
 build:
-  number: {{ build }}          # [not (unix and x86_64)]
-  number: {{ build + 100 }}    # [unix and x86_64 and microarch_level == 1]
-  number: {{ build + 300 }}    # [unix and x86_64 and microarch_level == 3]
-  number: {{ build + 400 }}    # [unix and x86_64 and microarch_level == 4]
+  number: {{ build + 100 * (microarch_level|default(1)|int - 1) }}
 
 requirements:
   build:
-    - x86_64-microarch-level {{ microarch_level }}  # [unix and x86_64]
+    - x86_64-microarch-level =={{ microarch_level }}  # [unix and x86_64]
     - {{ compiler('c') }}
     # ...
 # ...
 ```
+
+```yaml
+context:
+  build: 0
+
+# ...
+
+build:
+  number: ${{ build + 100 * (microarch_level|default(1)|int - 1) }}
+
+requirements:
+  build:
+    - if: unix and x86_64
+      then: x86_64-microarch-level ==${{ microarch_level }}
+    - ${{ compiler('c') }}
+    # ...
+# ...
+```
+
+</RecipeTabs>
 
 :::note[Prioritize your preferred microarchitecture]
 The `run_exports` metadata is only set up with lower bounds to allow in-CI testing.
