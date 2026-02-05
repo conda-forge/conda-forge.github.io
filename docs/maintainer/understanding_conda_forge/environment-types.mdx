@@ -54,7 +54,7 @@ indicated by the presence of two occurrences of the `[build time]` marker. As a 
 _present_); it is a conda environment, whose path is reachable during the
 build using `$BUILD_PREFIX`.
 
-The `host:` environment (under `$PREFIX`) contains dependencies that we will be necessary for
+The `host:` environment (under `$PREFIX`) contains dependencies that will be necessary for
 building `mypkg`, for example because we need to find the correct header files when compiling, and
 symbols when linking. With very few exceptions, things in `host:` cannot be executed during the
 build phase, because binaries compiled for a different architecture (here `linux-aarch64`) cannot
