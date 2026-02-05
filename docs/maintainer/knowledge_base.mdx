@@ -371,7 +371,7 @@ it will be possible to opt into newer compilers (e.g. for C++23 support) as foll
 
 In `recipe/conda_build_config.yaml` file:
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 # note: future VS version is speculative!
 c_compiler:    # [win]
 - vs2026       # [win]
@@ -529,7 +529,7 @@ and `linux-aarch64` are not natively supported by Azure, so
 `conda-smithy` will add QEMU steps to emulate it. However, `linux-64` is
 natively supported by Azure, so no emulation is needed.
 
-```yaml
+```yaml title="conda-forge.yml"
 provider:
   linux_aarch64: azure
   linux_ppc64le: azure
@@ -546,7 +546,7 @@ For a new version, please file an issue on that feedstock.
 
 To enable the rust nightly compiler in your feedstock, follow the section above and then add the `rust_dev` channel in the `conda_build_config.yaml` file:
 
-```yaml
+```yaml title="conda-forge.yml"
 channel_sources:
   - conda-forge/label/rust_dev,conda-forge
 ```
@@ -735,7 +735,7 @@ requirements:
 
 Please use the following `build.sh` script in your recipe:
 
-```bash
+```bash title="recipe/build.sh"
 #!/usr/bin/env bash
 set -ex
 
@@ -785,7 +785,7 @@ for details.
 
 In conda_build_config.yaml:
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 mpi:
   - mpich
   - openmpi
@@ -824,7 +824,7 @@ to produce the build matrices.
 Some packages (e.g. hdf5) may want a no-mpi build, in addition to the mpi builds.
 To do this, add nompi to the mpi matrix:
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 mpi:
   - nompi
   - mpich
@@ -1001,8 +1001,7 @@ Combining all of the above, here is a complete recipe, with:
 
 This matches what is done in [hdf5](https://github.com/conda-forge/hdf5-feedstock/pull/90).
 
-```yaml
-# conda_build_config.yaml
+```yaml title="recipe/conda_build_config.yaml"
 mpi:
   - nompi
   - mpich  # [not win]
@@ -1120,8 +1119,7 @@ if `{{ mpi }}` is also a direct dependency, though it's probably nicer to be exp
 
 Without a preferred `nompi` variant, recipes that require mpi are much simpler. This is all that is needed:
 
-```yaml
-# conda_build_config.yaml
+```yaml title="recipe/conda_build_config.yaml"
 mpi:
   - mpich
   - openmpi
@@ -1171,13 +1169,25 @@ When packages are built against `libgomp`, it is possible to use both `libgomp` 
 Dependencies on OpenMP providers belong in the `host` section of recipe dependencies. The following snippet corresponds
 to the defaults, though individual packages may require a different set:
 
+<RecipeTabs>
+
 ```yaml
-# meta.yaml
 requirements:
   host:
     - llvm-openmp  # [osx]
     - libgomp      # [linux]
 ```
+
+```yaml
+requirements:
+  host:
+    - if: osx
+      then: llvm-openmp
+    - if: linux
+      then: libgomp
+```
+
+</RecipeTabs>
 
 <a id="switching-openmp-implementation"></a>
 
@@ -1241,6 +1251,8 @@ After changing `yum_requirements.txt`, [rerender](updating_pkgs.md#dev-update-re
 If a package needs one of BLAS, CBLAS, LAPACK, LAPACKE, use the following in the
 host of the recipe,
 
+<RecipeTabs>
+
 ```yaml
 requirements:
   host:
@@ -1249,6 +1261,17 @@ requirements:
     - liblapack
     - liblapacke
 ```
+
+```yaml
+requirements:
+  host:
+    - libblas
+    - libcblas
+    - liblapack
+    - liblapacke
+```
+
+</RecipeTabs>
 
 :::note
 
@@ -1261,12 +1284,24 @@ At runtime, by default the following packages will be used.
 
 :::
 
+<RecipeTabs>
+
 ```yaml
 - openblas   # [not win]
 - mkl        # [win]
 ```
 
+```yaml
+- if: not win
+  then: openblas
+  else: mkl
+```
+
+</RecipeTabs>
+
 If a package needs a specific implementation's internal API for more control you can have,
+
+<RecipeTabs>
 
 ```yaml
 requirements:
@@ -1279,8 +1314,24 @@ requirements:
     - {{ blas_impl }}
 ```
 
+```yaml
+requirements:
+  host:
+    # Keep mkl-devel here for pinning
+    - if: blas_impl == "mkl"
+      then: mkl-devel
+      else: ${{ blas_impl }}
+  run:
+    - libblas * *${{ blas_impl }}
+    - ${{ blas_impl }}
+```
+
+</RecipeTabs>
+
 This would give you a matrix builds for different blas implementations. If you only want to support
 a specific blas implementation,
+
+<RecipeTabs>
 
 ```yaml
 requirements:
@@ -1290,6 +1341,17 @@ requirements:
     - libblas * *openblas
     - openblas
 ```
+
+```yaml
+requirements:
+  host:
+    - openblas
+  run:
+    - libblas * *openblas
+    - openblas
+```
+
+</RecipeTabs>
 
 :::note
 
