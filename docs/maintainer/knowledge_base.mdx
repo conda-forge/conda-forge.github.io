@@ -1857,6 +1857,8 @@ The idea is to generate different noarch packages for each OS needing different 
 Let's say you have a pure Python package, perfectly eligible for `noarch: python`, but on Windows
 it requires `windows-only-dependency`. You might have something like:
 
+<RecipeTabs>
+
 ```yaml title="recipe/meta.yaml (original)"
 name: package
 source:
@@ -1871,9 +1873,28 @@ requirements:
     - windows-only-dependency  # [win]
 ```
 
+```yaml title="recipe/recipe.yaml (original)"
+name: package
+source:
+  # ...
+build:
+  number: 0
+requirements:
+  # ...
+  run:
+    - python
+    - numpy
+    - if: win
+      then: windows-only-dependency
+```
+
+</RecipeTabs>
+
 Being non-noarch, this means that the build matrix will include at least 12 outputs: three platforms,
 times four Python versions. This gets worse with `arm64`, `aarch64` and `ppc64le` in the mix.
 We can get it down to two outputs if replace it with this other approach!
+
+<RecipeTabs>
 
 ```yaml title="recipe/meta.yaml (modified)"
 name: package
@@ -1894,11 +1915,35 @@ requirements:
     - windows-only-dependency  # [win]
 ```
 
+```yaml title="recipe/recipe.yaml (modified)"
+name: package
+source:
+  # ...
+build:
+  number: 0
+  noarch: python
+requirements:
+  host:
+    - python {{ python_min }}.*
+    # ...
+  run:
+    - python >={{ python_min }}
+    - numpy
+    - if: unix
+      then:
+        - __unix
+      else:
+        - __win
+        - windows-only-dependency
+```
+
+</RecipeTabs>
+
 Do not forget to specify the platform virtual packages with their selectors!
 Otherwise, the solver will not be able to choose the variants correctly.
 
 By default, conda-forge will only build `noarch` packages on a `linux_64` CI runner, so
-only the `# [unix]` selectors would be true. However, we can change this behaviour using
+only the `unix` selector would be true. However, we can change this behaviour using
 the `noarch_platforms` option in `conda-forge.yml`:
 
 ```yaml title="conda-forge.yml"
@@ -1912,7 +1957,9 @@ feedstock rerender to be applied. See [Rerendering feedstocks](updating_pkgs.md#
 
 If you need conditional dependencies on all three operating systems, this is how you do it:
 
-```yaml title="recipe/meta.yaml"
+<RecipeTabs>
+
+```yaml
 name: package
 source:
   # ...
@@ -1931,6 +1978,34 @@ requirements:
     - osx-only-dependency      # [osx]
     - windows-only-dependency  # [win]
 ```
+
+```yaml
+name: package
+source:
+  # ...
+build:
+  number: 0
+  noarch: python
+requirements:
+  # ...
+  run:
+    - python >={{ python_min }}
+    - numpy
+    - if: linux
+      then:
+        - __linux
+        - linux-only-dependency
+    - if: osx
+      then:
+        - __osx
+        - osx-only-dependency
+    - if: win
+      then:
+        - __win
+        - windows-only-dependency
+```
+
+</RecipeTabs>
 
 ```yaml title="conda-forge.yml"
 noarch_platforms:
@@ -1995,28 +2070,52 @@ package is not dependent on Python), use `build` section
 
 Following implies that `python` is only a build dependency and no Python matrix will be created.
 
+<RecipeTabs>
+
 ```yaml
-build:
-  - python
-host:
-  - some_other_package
+requirements:
+  build:
+    - python
+  host:
+    - some_other_package
 ```
+
+```yaml
+requirements:
+  build:
+    - python
+  host:
+    - some_other_package
+```
+
+</RecipeTabs>
 
 Note that `host` should be non-empty or `compiler` jinja syntax used or `build/merge_build_host` set to
 True for the `build` section to be treated as different from `host`.
 
 Following implies that `python` is a runtime dependency and a Python matrix for each supported Python version will be created.
 
+<RecipeTabs>
+
 ```yaml
-host:
-  - python
+requirements:
+  host:
+    - python
 ```
+
+```yaml
+requirements:
+  host:
+    - python
+```
+
+</RecipeTabs>
 
 `conda-forge.yml`'s build matrices is removed in conda-smithy=3. To get a build matrix,
 create a `conda_build_config.yaml` file inside the recipe folder. For example, the following will give you 2
 builds and you can use the selector `vtk_with_osmesa` in the `meta.yaml`
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 vtk_with_osmesa:
   - False
   - True
@@ -2036,7 +2135,7 @@ core team if this is something you think you need.
 
 To use a new SDK, add the following in `recipe/conda_build_config.yaml`
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 # Please consult conda-forge/core before doing this
 MACOSX_SDK_VERSION:        # [osx and x86_64]
   - "10.15"                # [osx and x86_64]
@@ -2054,7 +2153,7 @@ to handle the weak symbol, in that case, you need to update the `c_stdlib_versio
 After increasing the SDK version, if you are getting an error that says that a function
 is available only for macOS x.x, then do the following in `recipe/conda_build_config.yaml`,
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 # Please consult conda-forge/core before doing this
 c_stdlib_version:          # [osx and x86_64]
   - "10.15"                # [osx and x86_64]
@@ -2062,13 +2161,23 @@ MACOSX_SDK_VERSION:        # [osx and x86_64]
   - "10.15"                # [osx and x86_64]
 ```
 
-In `recipe/meta.yaml`, add the following to ensure that the user's system is compatible.
+In the recipe file, add the following to ensure that the user's system is compatible.
+
+<RecipeTabs>
 
 ```yaml
 requirements:
   build:
     - {{ stdlib("c") }}
 ```
+
+```yaml
+requirements:
+  build:
+    - ${{ stdlib("c") }}
+```
+
+</RecipeTabs>
 
 Note that the run-export on `__osx` that's produced by the stdlib metapackages
 requires `conda>=4.8`.
@@ -2125,22 +2234,27 @@ There are two options for how to proceed:
 - Specify the environment variable `SETUPTOOLS_SCM_PRETEND_VERSION` with the version string.
   If specified this environment variable is the principle source for `setuptools_scm`.
   There are two ways how to do this:
-  - If you are using build scripts, in `build.sh` specify:
+  - If you are using build scripts, specify in the build script:
+
+    <BuildScriptTabs>
 
     ```bash
     export SETUPTOOLS_SCM_PRETEND_VERSION="$PKG_VERSION"
     ```
 
-    and in `bld.bat` specify:
-
-    ```bash
+    ```batch
     set SETUPTOOLS_SCM_PRETEND_VERSION=%PKG_VERSION%
     ```
+
+    </BuildScriptTabs>
 
     Whereby you use that `PKG_VERSION` has been set with the version string,
     see [Environment variables](https://docs.conda.io/projects/conda-build/en/stable/user-guide/environment-variables.html#env-vars).
 
   - Otherwise, if you are directly building from `meta.yaml`, use for example:
+
+    <RecipeTabs>
+
     ```yaml
     build:
       # [...]
@@ -2148,6 +2262,18 @@ There are two options for how to proceed:
         - SETUPTOOLS_SCM_PRETEND_VERSION={{version}}
       script: "{{ PYTHON }} -m pip install . -vv"
     ```
+
+    ```yaml
+    build:
+      # [...]
+      script:
+        env:
+          SETUPTOOLS_SCM_PRETEND_VERSION: ${{version}}
+        content:
+          - "${{ PYTHON }} -m pip install . -vv"
+    ```
+
+    </RecipeTabs>
 
 <a id="centos7"></a>
 
@@ -2163,6 +2289,8 @@ However, some feedstocks may already require newer `glibc` versions.
 To use the newer `sysroot` with `glibc` `2.28` or `2.34` on `linux`,
 put the following in your build section.
 
+<RecipeTabs>
+
 ```yaml
 requirements:
   build:
@@ -2170,9 +2298,18 @@ requirements:
     - {{ stdlib('c') }}
 ```
 
+```yaml
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+```
+
+</RecipeTabs>
+
 and add the following to `recipe/conda_build_config.yaml`:
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 c_stdlib_version:          # [linux]
   - "2.28"                 # [linux]
 ```
@@ -2188,7 +2325,7 @@ yourself with changing the image manually.
 However, if for some reason you want to override the image versions, you can do so
 by setting the following in the `conda-forge.yml` of your recipe and rerendering.
 
-```yaml
+```yaml title="conda-forge.yml"
 os_version:             # example of possible values
   linux_64: cos7
   linux_aarch64: alma8
@@ -2236,12 +2373,25 @@ sysroot(s) nor the missing_dso_whitelist.
 
 For now, you will have to add `nvcuda.dll` to the `missing_dso_whitelist`
 
+<RecipeTabs>
+
 ```yaml
 build:
   ...
   missing_dso_whitelist:
     - "*/nvcuda.dll"   # [win]
 ```
+
+```yaml
+build:
+  ...
+  dynamic_linking:
+    missing_dso_allowlist:
+      - if: win
+        then: "*/nvcuda.dll"
+```
+
+</RecipeTabs>
 
 <a id="my-feedstock-is-not-building-old-cuda-versions-anymore"></a>
 
@@ -2336,21 +2486,21 @@ This branch must change the `recipe/conda_build_config.yaml` file to point to th
 
 For example, matplotlib rc releases would include:
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 channel_targets:
   - conda-forge matplotlib_rc
 ```
 
 If a pre-release build of B depends on a pre-release build of A, then A should have,
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 channel_targets:
   - conda-forge A_rc
 ```
 
 while B should have,
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 channel_sources:
   - conda-forge/label/A_rc,conda-forge
 channel_targets:
@@ -2395,14 +2545,14 @@ conda install -c conda-forge/label/matplotlib_rc -c conda-forge matplotlib
 Use [MatchSpec](https://github.com/conda/conda/blob/c3fb8150ed4c3dabb7ca376ade208095f98ee0b9/conda/models/match_spec.py#L70-L150)
 to specify your package:
 
-```yaml
+```yaml title="environment.yml"
 dependencies:
   - conda-forge/label/matplotlib_rc::matplotlib=3.7.0rc1
 ```
 
 Alternately, you can use the channels section to enable the matplotlib_rc channel:
 
-```yaml
+```yaml title="environment.yml"
 channels:
   - conda-forge/label/matplotlib_rc
 dependencies:
