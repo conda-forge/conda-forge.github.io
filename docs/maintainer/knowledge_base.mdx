@@ -51,13 +51,26 @@ If you are using cmake, be sure to make it a build requirement in the `build` se
 may also need to include `make` or `ninja` depending on your platform and build tools.
 On Windows, you can also use `nmake` to build, but that does not need to be explicitly included.
 
+<RecipeTabs>
+
 ```yaml
 requirements:
   build:
     - cmake
-    - make  # [not win]
     - ninja  # [win]
+    - make  # [not win]
 ```
+
+```yaml
+requirements:
+  build:
+    - cmake
+    - if: win
+      then: ninja
+      else: make
+```
+
+</RecipeTabs>
 
 For CMake projects using the [FindPython](https://cmake.org/cmake/help/git-stage/module/FindPython.html)
 module, you can tell CMake which Python to use by passing `-DPython_EXECUTABLE="$PYTHON"`
