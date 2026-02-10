@@ -36,6 +36,14 @@ For example, in Chrome you can go to [`chrome://settings/searchEngines`](chrome:
 And with that you can simply type `cf your-search-here` for super fast queries!
 :::
 
+<a id="environment-types"></a>
+
+## Environment Types
+
+Usually one of the first questions that comes up when starting to contribute is: "what are all these
+environments?" or "what's the difference between `build:` and `host:`?". If you'd like to know more
+about this, see [environment types](/docs/how-to/advanced/environment-types).
+
 <a id="using-cmake"></a>
 
 ## Using CMake
