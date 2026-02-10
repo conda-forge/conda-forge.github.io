@@ -4,10 +4,62 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/blog/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Thu, 15 Jan 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 09 Feb 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[python builds on win-arm64]]></title>
+            <link>https://conda-forge.org/blog/2026/02/09/win-arm64/</link>
+            <guid>https://conda-forge.org/blog/2026/02/09/win-arm64/</guid>
+            <pubDate>Mon, 09 Feb 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[conda-forge now has partial experimental support for Windows on Arm64]]></description>
+            <content:encoded><![CDATA[<p>conda-forge now has partial experimental support for Windows on Arm64
+platform. To use the conda-forge packages on an arm64 machine running
+windows, you first have to install Miniforge for Windows x86_64 since
+miniforge does not support Windows arm64 yet. Then you can do</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">set "CONDA_SUBDIR=win-arm64"</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">conda create -n newenv python</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">conda activate newenv</span><br></span></code></pre></div></div>
+<p>This gives you a minimal python environment. You can play around with
+this untested python binary and provide feedback.</p>
+<p>Here's some thoughts on the development so far:</p>
+<p>On conda-forge CI, we are cross-compiling builds for win-arm64 from
+win-64 platform. Therefore these are untested so far. Microsoft
+has generously donated VMs for these packages to be tested, but
+they are not setup yet as we need more support in conda/conda-build.</p>
+<p>When bootstrapping a new platform, we first cross-compile from
+another platform until we get to a point where we have conda,
+conda-build, and build-tools like ninja. This lets us run conda-build
+natively on the new platform and we do not need cross-compilation
+anymore. On osx-arm64, we kept on doing cross-compilation as we did
+not have any CI for osx-arm64 natively.</p>
+<p>For win-arm64 we do have VMs donated by Microsoft, but we are not at
+the point where we have conda, conda-build and build-tools like ninja
+built yet. That requires more support for cross-compilation on windows
+in conda-forge as most of our infrastructure is focused on UNIX-like
+platforms. For example: cross-python package is a series of hacks that
+are hung together by a thread to make cross-compiling work since
+python does not support cross-compiling by default. It'd be quite a
+lot of work to make it work on windows.</p>
+<p>Some build systems like autotools do work, but it was a challenge to
+get things like CC_FOR_BUILD working since usually Visual Studio
+only keeps one VS build system active at one time. This was fixed
+by calculating paths manually to set CC_FOR_BUILD. Another issue was
+that some build systems don't really like spaces in the path of the
+compiler in CC_FOR_BUILD. This was fixed by creating virtual drive
+to avoid spaces.</p>
+<p>Some packages do require MinGW gcc builds, but upstream support
+for Windows on Arm64 platform is still not complete.</p>
+<p>We have a migration for windows-arm64 platform in the conda-forge
+<a href="https://conda-forge.org/status/migration/?name=supportwindowsarm64platform" target="_blank" rel="noopener noreferrer" class="">status page</a>.
+Currently we only try to build conda,conda-build,mamba,rattler-build
+and pixi as given in the
+<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migration_support/win_arm64.txt" target="_blank" rel="noopener noreferrer" class="">explicit list</a>.</p>
+<p>Looking at the graph, there are nodes that are clearly unneeded for
+the packages given in the list. Help is welcome to debug the bot
+on trimming down the graph here so we can focus on the packages
+actually needed for getting the build tools out.</p>]]></content:encoded>
+            <category>infrastructure</category>
+        </item>
         <item>
             <title><![CDATA[100 Days of Python 3.14 on conda-forge]]></title>
             <link>https://conda-forge.org/blog/2026/01/15/100-days-python314/</link>
@@ -1263,49 +1315,6 @@ our community. <strong>Thank you everyone so much for the work you put into</str
 <code>conda-forge</code> <strong>this year, making it the wonderful, community-led
 resource that it is.</strong></p>
 <p>We wish everyone a happy, healthy, and peaceful new year!</p>]]></content:encoded>
-            <category>conda-forge</category>
-        </item>
-        <item>
-            <title><![CDATA[Package Distribution and the anaconda.com Terms of Service]]></title>
-            <link>https://conda-forge.org/blog/2020/11/20/anaconda-tos/</link>
-            <guid>https://conda-forge.org/blog/2020/11/20/anaconda-tos/</guid>
-            <pubDate>Fri, 20 Nov 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Various members of the community have raised questions publicly and]]></description>
-            <content:encoded><![CDATA[<p>Various members of the community have raised questions publicly and
-privately about the implications of Anaconda's new Terms of Service
-(TOS) on <code>anaconda.com</code>. First of all, we understand your concerns. We
-would like to explain a bit how <code>conda-forge</code> works, how the TOS change
-affects us and <code>conda-forge</code> users, and what our plans as a community
-are for the future.</p>
-<p>What makes it non-surprising [that no other free conda package
-distribution services have appeared] is that, at the moment, any third
-party channel like <code>conda-forge</code> is free. The TOS change does not apply
-to <code>conda-forge</code>, nor to other channels hosted on anaconda.org; the TOS
-change in question applies only to the "defaults" channel and other
-software hosted on repo.anaconda.com.</p>
-<p>While having alternative hosting is in our plans, we cannot afford the
-costs. We are just a community of volunteers. We have experimented with
-uploading the <code>conda-forge</code> artifacts to GitHub and continue to do so
-(see <code>regro/releases</code>). We also have put those artifacts behind an
-experimental repodata server. One of our core devs (@wolfv) is working
-to setup <code>quetz</code> with <code>conda-forge</code> artifacts as well.</p>
-<p>It is very important to recognize that Anaconda Inc kindly donates use
-of their hosting and employee time to us, absorbing all of these costs.
-They host about 1.8 TB of our data and serve over 100 million downloads
-of artifacts from that data each month. This is a highly significant
-donation and <code>conda-forge</code> would not exist without it. Anaconda Inc
-employees also provide help with maintaining some of the most complex
-package recipes in conda-forge.</p>
-<p>Note that Anaconda Inc has also said that part of the revenue from the
-TOS change will be donated to OSS projects. (see this <a href="https://www.anaconda.com/blog/sustaining-our-stewardship-of-the-open-source-data-science-community" target="_blank" rel="noopener noreferrer" class="">blog
-post</a>).
-You should be aware that <code>conda-forge</code> is a part of NumFOCUS, and so it
-stands to benefit from the change in TOS, as do many other OSS projects.</p>
-<p>We absolutely welcome help from the community to move our efforts on
-building out more hosting infrastructure for <code>conda-forge</code> forward. This
-could be anything from spending time developing <code>quetz</code> to providing
-hosting/mirroring for our data. Please do get in contact with us if
-you'd like to help out!</p>]]></content:encoded>
             <category>conda-forge</category>
         </item>
     </channel>
