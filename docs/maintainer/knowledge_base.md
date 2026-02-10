@@ -1856,6 +1856,35 @@ matching the `c_stdlib_version` of your recipe. For example, if you use the
 default `c_stdlib_version` of `2.17`, then set `os_version: linux_*: cos7`;
 if you're using a `c_stdlib_version` of `2.28`, set it to `alma8`.
 
+<a id="consequences-of-newer-c-stdlib-version"></a>
+
+### Consequences of newer c_stdlib_version
+
+If a library links a newer version of `c_stdlib_version`,
+the _runtime_ requirement on `__glibc` is applied
+but it does not mean downstream dependencies will (or should) be built against the same version.
+The _runtime_ `__glibc` on the build system must still satisfy the exported requirement.
+The default `c_stdlib_version` is  `2.17` on linux-64.
+**A dependency on a newer `c_stdlib_version` does not mean dependents must also use that version**.
+However, to build a package with `c_stdlib_version=2.17` that links a library built with `c_stdlib_version=2.28`,
+the linker flag `-Wl,--allow-shlib-undefined` must be specified.
+Without `--allow-shlib-undefined`, you may see errors like:
+
+```
+ld: $PREFIX/lib/libsomething.so: undefined reference to `glob@@GLIBC_2.27'
+```
+
+This flag is in conda-forge's default $LDFLAGS set by the `{{ compiler("c") }}` package,
+so most recipes should not need to be aware that a dependency has updated to newer `c_stdlib_version`.
+If they do, it means $LDFLAGS is not being handled consistently,
+which is probably something feedstock and/or package maintainers should consider fixing.
+
+There is more nuance in runtime compilation in user environments,
+which are also affected by the default version of `sysroot_linux-64` being the old 2.17.
+The `gcc` package does not set environment variables $CC, $LDFLAGS, etc..
+To set these variables on environment activation, install the `c-compiler` package (or `gcc_linux-64` on linux-64),
+or set them by hand in the environment, or avoid the issue by specifying `sysroot_linux-64>=2.28` in the environment.
+
 <a id="cuda"></a>
 
 <a id="cuda-builds"></a>
