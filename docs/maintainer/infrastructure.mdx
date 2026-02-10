@@ -2,6 +2,8 @@
 title: 'Infrastructure'
 ---
 
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
 # Infrastructure
 
 This page gives an overview of the conda-forge infrastructure, that is, an account of the various pieces maintained by the conda-forge contributors as well as third-party providers that collectively form the basis for the operation of conda-forge.
@@ -340,7 +342,9 @@ Entering this command in the PR of a feedstock or staged-recipes will have the a
 associated with the repo. This command can be useful for people who are not yet members of conda-forge and
 so cannot @-mention the `staged-recipes` team for PR reviews.
 
-### @conda-forge-admin, please ping conda-forge/<team>
+<a id="conda-forge-admin-please-ping-conda-forge"></a>
+
+### @conda-forge-admin, please ping conda-forge/&lt;team&gt;
 
 Entering this command in the PR of a feedstock or staged-recipes will have the admin bot @-mention the respective team.
 This command can be useful for people who are not yet members of conda-forge and
@@ -516,6 +520,8 @@ Recipes provide a `compiler` macro that is used to generate the correct dependen
 on a compiler for the language specified. Compilers are always added to `build`
 dependencies. For example, to depend on a C and C++ compilers, one would specify:
 
+<RecipeTabs>
+
 ```yaml
 requirements:
   build:
@@ -523,6 +529,16 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ stdlib('c') }}
 ```
+
+```yaml
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+```
+
+</RecipeTabs>
 
 The possible parameter values are listed in the [compilers supplied by conda-forge
 ](#compilers-supplied-by-conda-forge) section.
@@ -534,12 +550,23 @@ and in the vast majority of cases all programming languages use that library,
 therefore the macro is always used with the `'c'` parameter. For example,
 a regular Rust package would use:
 
+<RecipeTabs>
+
 ```yaml
 requirements:
   build:
     - {{ compiler('rust') }}
     - {{ stdlib('c') }}
 ```
+
+```yaml
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ stdlib('c') }}
+```
+
+</RecipeTabs>
 
 ### Using non-default compilers in feedstocks
 
@@ -549,7 +576,7 @@ However, it is often possible to use a different compiler if necessary. For exam
 to use Clang 21 as the C and C++ compiler _on all platforms_ (and not just macOS), one would additionally specify
 in `recipe/conda_build_config.yaml`:
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 c_compiler:
   - clang
 c_compiler_version:
@@ -560,7 +587,7 @@ cxx_compiler_version:
   - 21
 ```
 
-Technically, the `{{ compiler(...) }}` macro may accept arbitrary compiler names
+Technically, the `compiler(...)` macro may accept arbitrary compiler names
 as an argument. However, this only works as an incident of the current implementation.
 Names other than the listed in this document or the
 [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock)
@@ -608,7 +635,7 @@ in Knowledge Base.
 #### Platform-default compilers
 
 Currently conda-forge providers compilers for the following languages, that
-can be specified as arguments to the `{{ compiler(...) }}` macro:
+can be specified as arguments to the `compiler(...)` macro:
 
 - `c`, also provided by `c-compiler` package
 - `cxx` (C++), also provided by `cxx-compiler`
@@ -643,13 +670,13 @@ the following arguments can be used in `recipe/conda_build_config.yaml`:
 To use the `clang-cl` frontend on Windows, and the `clang` frontend on other
 systems, the following dependencies can be used:
 
-- `{{ compiler('clang') }}` for the C compiler
-- `{{ compiler('clangxx') }}` for the C++ compiler
+- `compiler('clang')` for the C compiler
+- `compiler('clangxx')` for the C++ compiler
 
 #### MinGW-based compiler stack for Windows
 
 There exists an alternative, MinGW-based, compiler stack on Windows. To use it,
-the following arguments can be passed to the `{{ compiler(...) }}` macro:
+the following arguments can be passed to the `compiler(...)` macro:
 
 - `m2w64_c` for the C compiler
 - `m2w64_cxx` for the C++ compiler
@@ -768,7 +795,7 @@ Additionally, there is a possibility to use `clang` as a compiler on Linux & Win
 
 Aside from the main C/C++/Fortran compilers, these are the feedstocks for the other compilers:
 
-- [CUDA] [CUDA 12.0+](https://github.com/conda-forge/cuda-nvcc-feedstock) & [CUDA <12](https://github.com/conda-forge/nvcc-feedstock) (legacy)
+- [CUDA] [CUDA 12.0+](https://github.com/conda-forge/cuda-nvcc-feedstock) & [CUDA &lt;12](https://github.com/conda-forge/nvcc-feedstock) (legacy)
 - [Rust] [Activation](https://github.com/conda-forge/rust-activation-feedstock)
   and [Implementation](https://github.com/conda-forge/rust-feedstock)
 - [Go] [Activation](https://github.com/conda-forge/go-activation-feedstock)
