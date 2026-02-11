@@ -1017,7 +1017,7 @@ requirements:
 On macOS, only LLVM's OpenMP implementation `llvm-openmp` is supported. This implementation is used even in Fortran code compiled
 using GNU's gfortran.
 
-On Windows, switching between different OpenMP implemnentations is not supported. Every package uses the implementation
+On Windows, switching between different OpenMP implementations is not supported. Every package uses the implementation
 it was built against.
 
 On Linux, when packages are linked against GNU's `libgomp.so.1`, the OpenMP library at install time can be
