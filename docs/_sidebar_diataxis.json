@@ -194,6 +194,11 @@
             "id": "maintainer/understanding_conda_forge/cross-compilation"
           },
           {
+            "type": "doc",
+            "label": "The directory structure",
+            "id": "maintainer/understanding_conda_forge/directory-structure"
+          },
+          {
             "type": "link",
             "label": "Global pinning",
             "href": "/docs/maintainer/pinning_deps/"
