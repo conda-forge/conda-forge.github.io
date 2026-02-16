@@ -729,7 +729,7 @@ requirements:
     # leave this unpinned!
     - numpy
   run:
-    - numpy >={{ the_lower_bound_your_package_needs }}
+    - numpy >=${{ the_lower_bound_your_package_needs }}
 ```
 
 </RecipeTabs>
@@ -1340,9 +1340,9 @@ At runtime, by default the following packages will be used.
 ```
 
 ```yaml
-- if: not win
-  then: openblas
-  else: mkl
+- if: win
+  then: mkl
+  else: openblas
 ```
 
 </RecipeTabs>
