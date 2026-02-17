@@ -37,14 +37,14 @@ their executables over `bin/` and `sbin/`, following the traditional Unix distin
 install manpages or documentation into top-level `man/` and `doc/` directories rather than the
 subdirectories of `share/`.
 
-The same structure is also used by various scripting languages such as Python, permitting Conda
+The same structure is also used by various scripting languages such as Python, permitting conda
 environments to act akin to Python virtual environments.
 
 ## Windows directory structure
 
 On Windows, the environment uses a hybrid layout that combines multiple layouts, namely:
 
-- `Library/` top-level directory is used by regular Conda-forge packages. Its contents follow the
+- `Library/` top-level directory is used by regular conda-forge packages. Its contents follow the
   Unix layout, with two differences:
   - `Library/bin/` is used for programs (`.exe` files) and dynamically-linked libraries (`.dll`
     files).
@@ -58,7 +58,7 @@ On Windows, the environment uses a hybrid layout that combines multiple layouts,
       modules and `.pyd` extensions.
   - `libs/`: Python link libraries (`.lib` files).
   - `Scripts/`: Python entry points (`.exe` trampolines and the corresponding `-script.py` files).
-  - `Tools/`: Miscallaneous Python tools.
+  - `Tools/`: Miscellaneous Python tools.
   - The Python interpeter itself and its DLLs are installed in the top-level directory.
 - Other programming languages also interpose their layouts:
   - Node.js places its executables in the root level, and leaves everything else under
