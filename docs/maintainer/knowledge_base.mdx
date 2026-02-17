@@ -23,11 +23,13 @@ There are a couple tricks you can use to make the most out of your searches.
 
 That's it, with those two modifiers, you can get a lot done! Some examples include:
 
-- [All `noarch: python` recipes](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22noarch%3A+python%22).
-- Recipes that depend on... [`cuda`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22-+cuda%22), [`pytorch`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22-+pytorch%22), [`__virtual` packages](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%2F-+__%5CS%2B%2F), etc.
+- [All `noarch: python` v0 recipes](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22noarch%3A+python%22).
+- [All `noarch: python` v1 recipes](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Arecipe.yaml+%22noarch%3A+python%22).
+- Recipes that depend on... [`cuda`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+OR+path%3Arecipe.yaml+%22-+cuda%22), [`pytorch`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+OR+path%3Arecipe.yaml+%22-+pytorch%22), [`__virtual` packages](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+OR+path%3Arecipe.yaml+%2F-+__%5CS%2B%2F), etc.
 - [Scripts that use CMake on Unix](https://github.com/search?type=code&q=org%3Aconda-forge+cmake+path%3Arecipe%2F*.sh).
 - [Scripts that use CMake on Windows](https://github.com/search?type=code&q=org%3Aconda-forge+cmake+path%3Arecipe%2F*.bat).
-- [Recipes that use cross-compilation](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22target_platform+%21%3D+build_platform%22+OR+%22build_platform+%21%3D+target_platform%22).
+- [v0 recipes with cross-compilation conditions](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22target_platform+%21%3D+build_platform%22+OR+%22build_platform+%21%3D+target_platform%22).
+- [v1 recipes with cross-compilation conditions](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Arecipe.yaml+build_platform).
 
 :::tip Configure your browser to have a search shortcut
 
