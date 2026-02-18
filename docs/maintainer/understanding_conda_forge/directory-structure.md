@@ -48,7 +48,7 @@ On Windows, the environment uses a hybrid layout that combines multiple layouts,
   Unix layout, with two differences:
   - `Library/bin/` is used for programs (`.exe` files) and dynamically-linked libraries (`.dll`
     files).
-  - `Library/lib/` is used for link libraries and static libraries (`.lib` files).
+  - `Library/lib/` is used for import libraries and static libraries (`.lib` files).
 - `Library/usr/` tree is used by MSYS2 packages.
 - Python packages use layout similar to virtual environments:
   - `DLLs/`: core Python extensions (`.pyd` files).
@@ -56,7 +56,7 @@ On Windows, the environment uses a hybrid layout that combines multiple layouts,
   - `Lib/`: core Python modules (`.py` files).
     - `Lib/site-packages/`: equivalent to `lib/pythonX.Y/site-packages/` on Unix, contains `.py`
       modules and `.pyd` extensions.
-  - `libs/`: Python link libraries (`.lib` files).
+  - `libs/`: Python import libraries (`.lib` files).
   - `Scripts/`: Python entry points (`.exe` trampolines and the corresponding `-script.py` files).
   - `Tools/`: Miscellaneous Python tools.
   - The Python interpeter itself and its DLLs are installed in the top-level directory.
@@ -72,7 +72,9 @@ On Windows, the environment uses a hybrid layout that combines multiple layouts,
 In addition to the files normally installed by software, conda-forge packages install some files for
 the internal use of conda clients, namely:
 
-- `conda-meta/`: the metadata for installed packages.
+- `conda-meta/`: the metadata for installed packages, including the recipe used to build the
+  package, and anything needed to run the test section for the package as defined in the recipe
+  (which may include test-specific files that have been requested in the test section).
 - `etc/conda/`: conda activation scripts and other files used by conda clients. The same path is
   also used on Windows (not `Library/etc/`).
 - `Menu/`: `*.json` files (as defined by [CEP
