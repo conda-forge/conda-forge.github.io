@@ -22,7 +22,7 @@ Chances are we have already packaged it for you. You can [search](https://anacon
 - We value all kinds of contributions — not just code. A few recommended ways to start contributing to conda-forge are:
   - [Contribute new packages](maintainer/adding_pkgs)
   - Help update and [maintain packages](maintainer/updating_pkgs.md)
-  - Suggest or implement improvements for our [infrastructure](maintainer/infrastructure.md)
+  - Suggest or implement improvements for our [infrastructure](maintainer/infrastructure)
   - Help [improve the documentation](/docs/user/contributing/#improve-the-website)
   - For a detailed overview please refer to [Becoming involved](user/contributing.mdx)
 - To see our governance policies, see [Governance](/community/governance/).
