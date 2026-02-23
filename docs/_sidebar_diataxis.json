@@ -152,6 +152,11 @@
             "type": "doc",
             "label": "Fix a security vulnerability",
             "id": "how-to/emergencies/fix-a-security-vulnerability"
+          },
+          {
+            "type": "doc",
+            "label": "Fix a packaging error",
+            "id": "how-to/emergencies/fix-a-packaging-error"
           }
         ]
       }
