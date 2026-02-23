@@ -25,6 +25,12 @@ build:
     - if: unix
       then: go build -v -o $PREFIX/bin/example-package -ldflags="-s -w"
       else: go build -v -o %LIBRARY_BIN%\example-package.exe -ldflags="-s"
+    - if: unix
+      then:
+        - mkdir -p $PREFIX/share/zsh/site-functions $PREFIX/share/bash-completion/completions $PREFIX/share/fish/vendor_completions.d
+        - $PREFIX/bin/example-package completion --shell zsh > $PREFIX/share/zsh/site-functions/_example-package
+        - $PREFIX/bin/example-package completion --shell bash > $PREFIX/share/bash-completion/completions/example-package
+        - $PREFIX/bin/example-package completion --shell fish > $PREFIX/share/fish/vendor_completions.d/example-package.fish
 
 requirements:
   build:
@@ -36,6 +42,10 @@ tests:
   - package_contents:
       bin:
         - example-package
+      files:
+        - share/bash-completion/completions/example-package
+        - share/fish/vendor_completions.d/example-package.fish
+        - share/zsh/site-functions/_example-package
       strict: true
 
 about:
@@ -58,7 +68,10 @@ extra:
 This recipe template supports different features:
 
 - Package licenses of statically linked libraries.
-- Ensure only binary is created by using `strict: true` in the `package_contents` tests.
+- Generate shell completions for bash, zsh, and fish on Unix platforms. This assumes the binary supports a `completion --shell <shell>` subcommand.
+  The completion files are installed to the [standard locations](https://pixi.sh/latest/global_tools/introduction/#shell-completions) under `$PREFIX/share/`.
+  If your tool does not support generating completions, you can remove those build and test lines.
+- Verify that both the binary and the shell completion files are present using `package_contents` tests, with `strict: true` to ensure no unexpected files are installed.
 
 If your package requires `cgo` instead of `go-nocgo`, you can use `${{ compiler("go-cgo") }}` instead to build the package. By default, the `go-nocgo` compiler [is used](https://github.com/conda-forge/staged-recipes/blob/main/.ci_support/linux64.yaml). Using `${{ compiler("go-cgo")) }}` also requires `${{ compiler("c") }}` and `${{ stdlib("c") }}` and may require `${{ compiler("cxx") }}` if C++ code is compiled. C/C++ build tools such as `make`, `autoconf`, `automake`, `libtool` or `cmake` may also be needed.
 
@@ -80,3 +93,12 @@ go mod tidy
 ```
 
 Additional steps maybe required depending on which Go dependency manager the project has been using.
+
+You might need to set the following in `conda-forge.yml` to ensure that the `$PREFIX/bin/example-package completion --shell ...` steps work:
+
+```yml
+provider:
+  osx_arm64: azure
+```
+
+Generating the completions only works when running the native binary which doesn't work with `osx-64 -> osx-arm64` cross-compilation.

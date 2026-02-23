@@ -29,6 +29,12 @@ build:
         else:
           - cargo auditable install --locked --no-track --bins --root %LIBRARY_PREFIX% --path .
       - cargo-bundle-licenses --format yaml --output ./THIRDPARTY.yml
+      - if: unix
+        then:
+          - mkdir -p $PREFIX/share/zsh/site-functions $PREFIX/share/bash-completion/completions $PREFIX/share/fish/vendor_completions.d
+          - $PREFIX/bin/example-package completion --shell zsh > $PREFIX/share/zsh/site-functions/_example-package
+          - $PREFIX/bin/example-package completion --shell bash > $PREFIX/share/bash-completion/completions/example-package
+          - $PREFIX/bin/example-package completion --shell fish > $PREFIX/share/fish/vendor_completions.d/example-package.fish
 
 requirements:
   build:
@@ -43,6 +49,10 @@ tests:
   - package_contents:
       bin:
         - example-package
+      files:
+        - share/bash-completion/completions/example-package
+        - share/fish/vendor_completions.d/example-package.fish
+        - share/zsh/site-functions/_example-package
       strict: true
 
 about:
@@ -70,3 +80,16 @@ This recipe template supports different features:
 - `cargo auditable install` in order to ensure the package is auditable.
 - Bundle licenses of statically linked libraries.
 - Use `--no-track` to not create `$PREFIX/.crates.toml` and `$PREFIX/.crates2.json`.
+- Generate shell completions for bash, zsh, and fish on Unix platforms. This assumes the binary supports a `completion --shell <shell>` subcommand.
+  The completion files are installed to the [standard locations](https://pixi.sh/latest/global_tools/introduction/#shell-completions) under `$PREFIX/share/`.
+  If your tool does not support generating completions, you can remove those build and test lines.
+- Verify that both the binary and the shell completion files are present using `package_contents` tests, with `strict: true` to ensure no unexpected files are installed.
+
+You might need to set the following in `conda-forge.yml` to ensure that the `$PREFIX/bin/example-package completion --shell ...` steps work:
+
+```yml
+provider:
+  osx_arm64: azure
+```
+
+Generating the completions only works when running the native binary which doesn't work with `osx-64 -> osx-arm64` cross-compilation.
