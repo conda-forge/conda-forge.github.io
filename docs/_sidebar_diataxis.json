@@ -147,6 +147,11 @@
             "type": "link",
             "label": "Remove broken packages",
             "href": "/docs/maintainer/updating_pkgs/#removing-broken-packages"
+          },
+          {
+            "type": "doc",
+            "label": "Fix a security vulnerability",
+            "id": "how-to/emergencies/fix-a-security-vulnerability"
           }
         ]
       }
