@@ -44,6 +44,10 @@
       {
         "type": "doc",
         "id": "tutorials/first-recipe"
+      },
+      {
+        "type": "doc",
+        "id": "tutorials/building-locally"
       }
     ]
   },
