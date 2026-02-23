@@ -43,9 +43,11 @@ tests:
       bin:
         - example-package
       files:
-        - share/bash-completion/completions/example-package
-        - share/fish/vendor_completions.d/example-package.fish
-        - share/zsh/site-functions/_example-package
+        - if: unix
+          then:
+            - share/bash-completion/completions/example-package
+            - share/fish/vendor_completions.d/example-package.fish
+            - share/zsh/site-functions/_example-package
       strict: true
 
 about:
