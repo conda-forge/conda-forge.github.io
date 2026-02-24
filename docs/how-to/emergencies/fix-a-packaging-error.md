@@ -11,9 +11,7 @@ broken packages to prevent users from installing them.
 
 ## Pushing a fixed version
 
-Ideally, the issue should be fixed in the same version and the build number incremented. Once
-pushed, new packages will be built and the next upgrade will ensure that the fixed version is
-installed.
+Ideally, the issue should be fixed by issuing a new build for the same release version. By bumping the build number only (and not the version), a new set of artifacts will be made available with the packaging issue corrected. This way, end-users will be able to reinstall the affected package and the new (fixed) builds will be picked.
 
 ## Removing the broken version
 
