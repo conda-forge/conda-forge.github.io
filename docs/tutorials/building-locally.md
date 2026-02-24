@@ -35,7 +35,7 @@ python build-locally.py
 
 Normally, the script would ask you to choose a configuration to build at this point. However, pure
 Python packages such as `xmltodict` have only one configuration, so the script proceeds immediately.
-It creates a Docker container, uses it to create a build environment and builds the package, while
+It will pull the [conda-forge Docker image](link to the docker-images repo here), use it to provision all the build tools and then will build the package, while
 outputting the build process to the console.
 
 Near the end of the process, output validation will be performed and the packages produced will be
