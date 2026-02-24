@@ -152,6 +152,11 @@
             "type": "doc",
             "label": "Fix a security vulnerability",
             "id": "how-to/emergencies/fix-a-security-vulnerability"
+          },
+          {
+            "type": "doc",
+            "label": "Update a dependency in published packages",
+            "id": "how-to/emergencies/update-a-dependency-in-published-packages"
           }
         ]
       }
