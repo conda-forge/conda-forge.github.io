@@ -6,7 +6,9 @@ tags: [how-to, emergency]
 
 Sometimes a serious packaging error may be discovered once the packages are built and published.
 For example, some necessary files may be missing, and part of the functionality may stop working
-correctly after an upgrade. Besides publishing a fixed version, it may be desirable to remove the
+correctly after an upgrade. Provided this is not a problem with the source code itself, but a
+problem in the recipe, it can be fixed by publishing a new build using the same upstream archive
+and version. Besides publishing the fix, it may be desirable to remove the
 broken packages to prevent users from installing them.
 
 ## Pushing a fixed version
