@@ -14,8 +14,8 @@ installed.
 
 Once a new recipe is accepted for conda-forge, a new feedstock repository is created for it. All
 subsequent work on the recipe happens in that repository. Let's start by cloning the
-[xmltodict-feedstock](https://github.com/conda-forge/xmltodict-feedstock/) repository at a known
-good commit.
+[xmltodict-feedstock](https://github.com/conda-forge/xmltodict-feedstock/) repository at a commit
+corresponding to version 1.0.4, build 0.
 
 Enter a directory of your choice, clone the repository and then enter it:
 
@@ -35,8 +35,12 @@ python build-locally.py
 
 Normally, the script would ask you to choose a configuration to build at this point. However, pure
 Python packages such as `xmltodict` have only one configuration, so the script proceeds immediately.
-It will pull the [conda-forge Docker image](link to the docker-images repo here), use it to provision all the build tools and then will build the package, while
+It will pull the [conda-forge Docker image](https://github.com/conda-forge/docker-images), use it to
+provision all the build tools and then will build the package, while
 outputting the build process to the console.
+
+Alternatively, for feedstocks having `conda_install_tool: pixi` in `conda-forge.yml`, you may use
+`pixi run build` instead.
 
 Near the end of the process, output validation will be performed and the packages produced will be
 printed as part of that, for example:
