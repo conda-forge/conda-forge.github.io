@@ -87,7 +87,7 @@ This recipe template supports different features:
   If your tool does not support generating completions, you can remove those build and test lines.
 - Verify that both the binary and the shell completion files are present using `package_contents` tests, with `strict: true` to ensure no unexpected files are installed.
 
-You might need to set the following in `conda-forge.yml` to ensure that the `$PREFIX/bin/example-package completion --shell ...` steps work:
+Until [native macOS Arm runners are the default for conda-forge](https://github.com/conda-forge/conda-forge.github.io/issues/1781), you might need to set the following in `conda-forge.yml` to ensure that the `$PREFIX/bin/example-package completion --shell ...` steps work:
 
 ```yml
 provider:

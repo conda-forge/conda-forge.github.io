@@ -96,7 +96,7 @@ go mod tidy
 
 Additional steps maybe required depending on which Go dependency manager the project has been using.
 
-You might need to set the following in `conda-forge.yml` to ensure that the `$PREFIX/bin/example-package completion --shell ...` steps work:
+Until [native macOS Arm runners are the default for conda-forge](https://github.com/conda-forge/conda-forge.github.io/issues/1781), you might need to set the following in `conda-forge.yml` to ensure that the `$PREFIX/bin/example-package completion --shell ...` steps work:
 
 ```yml
 provider:
