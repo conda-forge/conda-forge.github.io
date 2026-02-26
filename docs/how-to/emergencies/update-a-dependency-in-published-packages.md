@@ -80,11 +80,15 @@ Once ready, test the patch:
 
 ```bash
 cd recipe/
-python show_diff.py | tee show_diff_result.txt
+pixi run diff
 ```
 
-Note that this command may take a few minutes to execute, and may print a few false positives if new
-packages are published while it is running.
+You need to install `pixi` beforehand if you don't have it installed yet.
+
+Note that this command may take a few minutes to execute. It will write a `show_diff_result.txt`
+file that will list all the changes to package metadata that will be performed. It may also include
+the metadata for a few extraneous packages (false positives) if new packages are published while the
+process is ongoing.
 
 Once you confirm that the changes look correct, create a branch, commit them and open a pull
 request. Remember to include the contents of `show_diff_result.txt` in the pull request.
