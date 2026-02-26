@@ -62,7 +62,7 @@ jobs:
             --accept 100..399,401,403,429
             --exclude '.*/status/migration/.*'
             --exclude 'https://polys.me/?$'
-            --exclude 'https://conda-metadata-app.streamlit.app/?$'
+            --exclude 'https://conda-metadata-app.streamlit.app/.*'
             --exclude 'https://kb43fqob7u-dsn.algolia.net/'
             --exclude 'https://ss64.com/nt/syntax.html'
             --exclude 'https://www.mesa3d.org/'
