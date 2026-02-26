@@ -2590,6 +2590,43 @@ So make sure that you **tag** your package in such a way that the package name
 that conda-build spits out will sort the package uploaded with an `rc` label
 higher than the package uploaded with the `dev` label.
 
+<a id="packages-without-upstream-versions"></a>
+
+## Packages without upstream versions
+
+The preferred approach is always to **ask upstream to add version tags** to
+their repository. Proper upstream versioning benefits the entire packaging
+ecosystem and avoids ambiguity.
+
+However, when this is impractical — for example, when the upstream repository
+only uses platform-specific release tags (e.g. Android release versions) that
+don't reflect the package's own versioning, or the project is unlikely to
+adopt conventional versioning — use the **`0.0.0.YYYY.MM.DD`** version format,
+where `YYYY.MM.DD` is the date of the pinned commit.
+
+This format is preferred because:
+
+- **All segments are numeric**, which is required by conda's
+  `apply_pin_expressions()` for compatibility specifications.
+- **Any future real release** (e.g. `0.0.1`) will automatically sort higher.
+- It clearly communicates that this is not an official upstream version.
+
+When packaging from a specific commit, always pin the source using `rev:` with
+the full commit hash rather than a branch name. This ensures reproducible
+builds.
+
+```yaml title="recipe.yaml"
+context:
+  version: "0.0.0.2026.01.22"
+
+source:
+  git: https://example.com/project.git
+  rev: abc123def456  # pin to a specific commit
+```
+
+For more context, see the discussion on
+[conda-forge/staged-recipes#30713](https://github.com/conda-forge/staged-recipes/pull/30713).
+
 <a id="how-to-update-your-feedstock-token"></a>
 
 ## How to update your feedstock token?
