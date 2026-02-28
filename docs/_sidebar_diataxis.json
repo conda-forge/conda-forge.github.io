@@ -148,9 +148,9 @@
             "href": "https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/blob/main/recipe/README.md"
           },
           {
-            "type": "link",
+            "type": "doc",
             "label": "Remove broken packages",
-            "href": "/docs/maintainer/updating_pkgs/#removing-broken-packages"
+            "id": "how-to/emergencies/remove-broken-packages"
           },
           {
             "type": "doc",
