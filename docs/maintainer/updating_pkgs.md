@@ -213,7 +213,7 @@ To download prebuilt packages follow the steps below:
 
 ## Removing broken packages
 
-Moved to [Removing broken packages](/docs/how-to-advanced/remove-broken-packages).
+Moved to [Removing broken packages](/docs/how-to/emergencies/remove-broken-packages).
 
 <a id="archiving-feedstocks"></a>
 
