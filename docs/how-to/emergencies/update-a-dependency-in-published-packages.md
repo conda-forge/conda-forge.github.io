@@ -83,7 +83,7 @@ cd recipe/
 pixi run diff
 ```
 
-You need to install `pixi` beforehand if you don't have it installed yet.
+You need to [install `pixi`](https://pixi.prefix.dev/latest/installation/) beforehand if you don't have it installed yet.
 
 Note that this command may take a few minutes to execute. It will write a `show_diff_result.txt`
 file that will list all the changes to package metadata that will be performed. It may also include
@@ -93,5 +93,5 @@ process is ongoing.
 Once you confirm that the changes look correct, create a branch, commit them and open a pull
 request. Remember to include the contents of `show_diff_result.txt` in the pull request.
 
-Alternatively, you can open the pull request first and then copy the relevant bits from the logs
-(using raw logs is recommended).
+Alternatively, you can open the pull request first (as draft), let the CI run and then copy the
+relevant bits from the logs (using raw logs is recommended).
