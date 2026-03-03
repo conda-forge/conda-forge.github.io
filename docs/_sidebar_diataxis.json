@@ -48,6 +48,10 @@
       {
         "type": "doc",
         "id": "tutorials/building-locally"
+      },
+      {
+        "type": "doc",
+        "id": "tutorials/adding-tests"
       }
     ]
   },
