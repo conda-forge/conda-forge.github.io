@@ -157,6 +157,11 @@
             "type": "doc",
             "label": "Fix a packaging error",
             "id": "how-to/emergencies/fix-a-packaging-error"
+          },
+          {
+            "type": "doc",
+            "label": "Update a dependency in published packages",
+            "id": "how-to/emergencies/update-a-dependency-in-published-packages"
           }
         ]
       }
