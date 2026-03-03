@@ -7,6 +7,12 @@ hybrid of Python virtual environment with the equivalent structures used by othe
 These do not necessarily follow the same conventions as the underlying operating system, and they
 differ significantly between Unix and Windows installations.
 
+:::note
+This document describes the directories currently in use by a variety of conda-forge packages. It
+is not prescriptive. The use of some of the directories listed here is seen as controversial, and
+they may be explicitly discouraged in a future CFEP.
+:::
+
 ## Unix directory structure
 
 On Unix systems (Linux and macOS), conda-forge packages aim to follow a subset of the [Filesystem
