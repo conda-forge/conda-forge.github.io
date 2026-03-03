@@ -19,7 +19,7 @@ Ideally, the issue should be fixed by issuing a new build for the same release v
 
 To prevent the broken packages from being downloaded, they can be marked broken. This requires
 marking all the artifacts broken artifacts appropriately, following the guide to [removing broken
-packages](/docs/maintainer/updating_pkgs/#removing-broken-packages).
+packages](/docs/how-to/emergencies/remove-broken-packages/).
 
 Once the packages are marked broken, they are no longer available from the `conda-forge` channel. Users
 will no longer be able to install them by default. However, it will still be possible to download
