@@ -12,8 +12,13 @@ installed.
 
 ## Clone the feedstock
 
-Once a new recipe is accepted for conda-forge, a new feedstock repository is created for it. All
-subsequent work on the recipe happens in that repository. Let's start by cloning the
+Once a new recipe is accepted for conda-forge (as outlined in [contributing
+documentation](https://conda-forge.org/docs/maintainer/adding_pkgs/), a new feedstock repository is
+created for it. All the subsequent work on the recipe happens in that repository. In this tutorial,
+we will be working in a selected feedstock repository, similarly to how you'd work on your own
+feedstock.
+
+Let's start by cloning the
 [xmltodict-feedstock](https://github.com/conda-forge/xmltodict-feedstock/) repository at a commit
 corresponding to version 1.0.4, build 0.
 
