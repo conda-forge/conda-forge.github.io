@@ -6,6 +6,7 @@ Sometimes mistakes happen and a broken package ends up being uploaded to the `co
 
 If the only issue is in the package metadata, we can directly patch it via repodata patching.
 Refer to [repodata-patches-feedstock documentation](https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/tree/main/recipe) for specific instructions.
+We also provide a specific how-to on [updating a dependency in published packages](/docs/how-to/emergencies/update-a-dependency-in-published-packages/).
 
 If instead the actual contents of the package are broken, the following steps will
 remove broken packages from the `main` channel:
