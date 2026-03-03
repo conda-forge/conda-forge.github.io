@@ -66,6 +66,41 @@ total 28K
 -rw------- 1 user user 21K 02-23 16:33 xmltodict-1.0.4-pyhcf101f3_0.conda
 ```
 
+## Try installing the recipe
+
+After building the package, we can create a local conda environment and try to install it. Type
+in a conda-enabled prompt:
+
+```bash
+conda create -p ./build_artifacts/xmltodict-tests/ --override-channels -c ./build_artifacts -c conda-forge xmltodict
+```
+
+This will request creating a new conda environment in the directory specified by the `-p` argument.
+`--override-channels` specifies that the channels found in default configuration should be ignored,
+while the `-c` arguments specify that packages should be taken from `./build_artifacts` directory
+first, and then from the `conda-forge` channel. The options are followed by the list of packages
+to install; here: `xmltodict`. The command will print a list of packages to install. Among them, you
+should be able to notice that `xmltodict` is taken from the local artifacts:
+
+```
+  xmltodict          build_artifacts/noarch::xmltodict-1.0.4-pyhcf101f3_0
+```
+
+Confirm creating the environment, activate it and start Python <abbr
+title="read-eval-print loop">REPL</abbr>:
+
+```bash
+conda activate ./build_artifacts/xmltodict-tests/
+python
+```
+
+Now you can import the newly installed module and confirm that it works:
+
+```python
+>>> xmltodict.unparse({"html": {"body": {"@style": "color: red", "#text": "hello world"}}})
+'<?xml version="1.0" encoding="utf-8"?>\n<html><body style="color: red">hello world</body></html>'
+```
+
 ## Clean up
 
 Once you are done working with a feedstock, you want to remove the build artifacts, as they can take
