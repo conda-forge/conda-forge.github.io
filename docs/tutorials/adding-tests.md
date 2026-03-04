@@ -145,6 +145,11 @@ the package itself, as it will be installed automatically (along with its run de
 Finally, the `files:` subsection specifies which additional files need to be available in the test
 environment; in this case, it is the `tests/` directory that contains the test suite itself.
 
+:::note
+You should keep an eye on the size of directories included in the `files:`. They will be included in
+the built package, and therefore big test suites may increase the package size significantly.
+:::
+
 ## Bump the build number
 
 After making any significant change to the recipe, it is important to update its build number. This
