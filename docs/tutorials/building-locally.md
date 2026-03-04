@@ -66,7 +66,7 @@ total 28K
 -rw------- 1 user user 21K 02-23 16:33 xmltodict-1.0.4-pyhcf101f3_0.conda
 ```
 
-## Try installing the recipe
+## Try installing the built package
 
 After building the package, we can create a local conda environment and try to install it. Type
 in a conda-enabled prompt:
@@ -97,6 +97,7 @@ python
 Now you can import the newly installed module and confirm that it works:
 
 ```python
+>>> import xmltodict
 >>> xmltodict.unparse({"html": {"body": {"@style": "color: red", "#text": "hello world"}}})
 '<?xml version="1.0" encoding="utf-8"?>\n<html><body style="color: red">hello world</body></html>'
 ```
