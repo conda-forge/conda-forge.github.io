@@ -7,6 +7,9 @@ hybrid of Python virtual environment with the equivalent structures used by othe
 These do not necessarily follow the same conventions as the underlying operating system, and they
 differ significantly between Unix and Windows installations.
 
+The directory structure is currently governed by
+[CEP 34](https://github.com/conda/ceps/blob/main/cep-0034.md).
+
 :::note
 This document describes the directories currently in use by a variety of conda-forge packages. It
 is not prescriptive. The use of some of the directories listed here is seen as controversial, and
