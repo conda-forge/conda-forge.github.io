@@ -19,7 +19,7 @@ corresponding to version 1.0.4, build 0.
 Enter a directory of your choice, clone the repository and then enter it:
 
 ```bash
-git clone --revision=728537f91186b70e7ac27cc7d5c036c82486d942 https://github.com/conda-forge/xmltodict-feedstock/
+git clone --revision=f3d4a70843abf9b915cdbb20d73eabfb9fed21b7 https://github.com/conda-forge/xmltodict-feedstock/
 cd xmltodict-feedstock/
 ```
 
@@ -32,13 +32,12 @@ from PyPI to build the package:
 schema_version: 1
 
 context:
-  name: xmltodict
   version: "1.0.4"
 
 # ...
 
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/xmltodict-${{ version }}.tar.gz
+  url: https://pypi.org/packages/source/x/xmltodict/xmltodict-${{ version }}.tar.gz
   sha256: 6d94c9f834dd9e44514162799d344d815a3a4faec913717a9ecbfa5be1bb8e61
 ```
 
