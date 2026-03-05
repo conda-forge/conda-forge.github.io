@@ -208,7 +208,8 @@ automatically.
 ## Test the build
 
 If you are running a Linux or macOS system, and have Docker installed, you can build the recipe
-locally to test the changes:
+locally to test the changes. Building packages was covered in the
+[Building a package locally](/docs/tutorials/building-locally/) tutorial. To recap shortly:
 
 ```bash
 python build-locally.py
