@@ -1,6 +1,6 @@
 # Moving All Feedstocks to GitHub Actions
 
-`conda-forge` is now able to enjoy extended concurrency limits for Github Actions, and thus we can finally use it as CI provider for package builds. 
+`conda-forge` is now able to enjoy extended concurrency limits for Github Actions, and thus we can finally use it as CI provider for package builds.
 
 <!-- truncate -->
 
