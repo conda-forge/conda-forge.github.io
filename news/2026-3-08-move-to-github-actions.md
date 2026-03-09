@@ -1,6 +1,6 @@
 # Github-hosted Actions Runners for `conda-forge`
 
-`conda-forge` is now able to enjoy extended concurrency limits for Github Actions, and thus we can finally use it as CI provider for package builds. To enable this functionality, rerender your feedstock with `conda-smithy` 3.56.0 or later.
+`conda-forge` is now able to enjoy extended concurrency limits for Github Actions, and thus we can finally use it as CI provider for package builds. To enable this functionality, rerender your feedstock with `conda-smithy` 3.56.1 or later.
 
 <!-- truncate -->
 
