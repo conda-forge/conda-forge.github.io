@@ -1,0 +1,10 @@
+[global]
+disable = [
+  "MD013",  # line length
+  "MD014",  # command should show output (removes '$' immediately)
+  "MD026",  # heading ends with punctuation
+  "MD030",  # spaces after list marker
+  "MD033",  # inline HTML
+  "MD040",  # code block missing language (gets fixed to "text")
+  "MD059",  # nondescriptive link text
+]
