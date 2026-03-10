@@ -7,6 +7,8 @@ disable = [
   "MD034",  # URL without angle brackets
   "MD036",  # emphasis used instead of heading
   "MD040",  # code block missing language (gets fixed to "text")
-  "MD041",  # first line in file should be a h1
   "MD059",  # nondescriptive link text
 ]
+
+[per-file-ignores]
+".github/*.md" = ["MD041"]
