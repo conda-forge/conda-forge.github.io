@@ -27,4 +27,4 @@ We, the conda-forge core dev team, want to thank everyone for their patience and
 
 As a reminder, we do not recommend that you use conda-forge in environments with sensitive information. conda-forge's software is built by our users and the core dev team cannot verify or guarantee that this software is not malicious or has not been tampered with.
 
-Our best defense against security incidents in conda-forge is you! Our feedstock maintainers are in the best position to notice incidents and issues. Please responsibly report anything you find to us at condaforge+security@gmail.com or using the process described in our [Security policy](https://github.com/conda-forge/conda-forge.github.io/security/policy).
+Our best defense against security incidents in conda-forge is you! Our feedstock maintainers are in the best position to notice incidents and issues. Please responsibly report anything you find to us at <condaforge+security@gmail.com> or using the process described in our [Security policy](https://github.com/conda-forge/conda-forge.github.io/security/policy).

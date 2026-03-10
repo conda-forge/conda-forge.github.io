@@ -55,15 +55,20 @@ You can refer to the [Glossary](../glossary.md).
 Using conda-forge is easy!
 
 - Make sure you have `conda >=4.9`:
+
   ```bash
   conda --version
   conda update conda
   ```
+
 - Add conda-forge as the highest priority channel:
+
   ```bash
   conda config --add channels conda-forge
   ```
+
 - Activate `strict` channel priority (`strict` will be activated by default in conda 5.0):
+
   ```bash
   conda config --set channel_priority strict
   ```

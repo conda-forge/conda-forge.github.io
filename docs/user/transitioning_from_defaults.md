@@ -5,7 +5,7 @@ title: Transitioning from defaults
 # Transitioning from Anaconda's `defaults` channels
 
 Users wishing to transition from Anaconda's `defaults` (i.e. those hosted under
-https://repo.anaconda.com/pkgs) channels should do so with care so as not to
+<https://repo.anaconda.com/pkgs>) channels should do so with care so as not to
 break their working environments. The first thing to realize
 is that in 2024 conda-forge is incompatible with the packages provided in
 `defaults`. Often, the packages on conda-forge will require
@@ -85,9 +85,11 @@ are guidelines on how to go about this, while backing up your work and your envi
      for those use cases.
 
    - Another useful file to create is the input `environment.yml` for each environment:
+
      ```shell
      conda env export --from-history --prefix --prefix /path/to/environment-name > environment-name.yml
      ```
+
      This file won't capture the exact same state you had in your environment. Instead it
      will tell `conda` what packages to look for and then find a solution that satisfies
      the request.
