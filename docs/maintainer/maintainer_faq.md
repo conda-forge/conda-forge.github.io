@@ -192,7 +192,7 @@ In case your issue is longer or you would like to contact us privately, feel fre
 
 <a id="a-feedstock-has-been-abandoned-and-i-would-like-to-take-over-maintenance"></a>
 
-## A feedstock has been abandoned and I would like to take over maintenance.
+## A feedstock has been abandoned and I would like to take over maintenance
 
 A feedstock is generally considered abandoned when the maintainer isn't around anymore and doesn't merge new PRs or answer any issues.
 If that is the case, you can add yourself to the team by using the [@conda-forge-admin, please add user @username](/docs/maintainer/infrastructure#conda-forge-admin-please-add-user-username) command.
