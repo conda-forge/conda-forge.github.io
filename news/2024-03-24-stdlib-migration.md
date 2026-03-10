@@ -30,17 +30,21 @@ all feedstock maintainers are free to apply independently:
   add a line with `- {{ stdlib("c") }}` to the build environment.
 - if a feedstock uses `- sysroot_linux-64 2.17  # [linux64]` (or a variation),
   remove this line and add the following to your `conda_build_config.yaml`:
+
   ```
   c_stdlib_version:              # [linux]
     - 2.17                       # [linux]
   ```
+
 - if a feedstock sets `MACOSX_DEPLOYMENT_TARGET` in `conda_build_config.yaml`,
   for example to 10.13 for `x86_64`, replace that section with the following
   (note, this does _not_ apply to `MACOSX_SDK_VERSION`!):
+
   ```
   c_stdlib_version:              # [osx and x86_64]
     - 10.13                      # [osx and x86_64]
   ```
+
 - In `meta.yaml`, you can then remove any variations of `- __glibc >=2.17` or
   `- __osx >={{ MACOSX_DEPLOYMENT_TARGET }}  # [osx and x86_64]`, as this will
   henceforth be handled through `- {{ stdlib("c") }}`.
