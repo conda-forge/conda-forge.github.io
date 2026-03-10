@@ -18,5 +18,10 @@ repos:
     rev: v0.15.5
     hooks:
       - id: ruff-format
+  - repo: https://github.com/rvben/rumdl-pre-commit
+    rev: v0.0.222
+    hooks:
+      - id: rumdl-fmt
+        types_or: [markdown, mdx]
 ci:
   autofix_prs: false
