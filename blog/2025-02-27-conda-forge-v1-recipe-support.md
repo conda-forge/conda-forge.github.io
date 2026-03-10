@@ -96,6 +96,6 @@ There are very helpful docs located at [https://rattler.build](https://rattler.b
 
 You can also read more about rattler-build and the v1 format in the following blog posts:
 
-- <https://prefix.dev/blog/rattler_build_on_conda_forge>
-- <https://prefix.dev/blog/the_love_of_building_conda_packages>
-- <https://prefix.dev/blog/rattler_build_a_new_parser>
+- https://prefix.dev/blog/rattler_build_on_conda_forge
+- https://prefix.dev/blog/the_love_of_building_conda_packages
+- https://prefix.dev/blog/rattler_build_a_new_parser

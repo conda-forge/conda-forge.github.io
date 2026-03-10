@@ -27,7 +27,7 @@ Conversely, this process does NOT apply to the software packaged by conda-forge 
 
 ## Reporting Vulnerabilities
 
-If you believe you’ve found a security vulnerability in a conda-forge project, please responsibly report it to <condaforge+security@gmail.com>. conda-forge will try to will respond within 7 days to all new reports.
+If you believe you’ve found a security vulnerability in a conda-forge project, please responsibly report it to condaforge+security@gmail.com. conda-forge will try to will respond within 7 days to all new reports.
 
 We are also testing GitHub Private vulnerability reporting, you can try to submit a security advisory on [conda-forge/conda-forge.github.io using this link](https://github.com/conda-forge/conda-forge.github.io/security/advisories/new).
 

@@ -202,7 +202,7 @@ extra:
 
 ## More information
 
-- Rattler-build Python tutorial: <https://rattler-build.prefix.dev/latest/tutorials/python/>
+- Rattler-build Python tutorial: https://rattler-build.prefix.dev/latest/tutorials/python/
 - Examples of Python recipes on conda-forge:
   - [attrs](https://github.com/conda-forge/attrs-feedstock/blob/main/recipe/recipe.yaml)
   - [click](https://github.com/conda-forge/click-feedstock/blob/main/recipe/recipe.yaml)
