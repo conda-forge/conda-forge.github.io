@@ -279,7 +279,7 @@ export const buildInitialGraph = (
   const nodesWithChildren = new Set();
   allNodeIds.forEach((nodeId) => {
     const node = nodeMap[nodeId];
-    if (node?.outgoing && node.outgoing.length > 0) {
+    if (node?.outgoing?.length > 0) {
       nodesWithChildren.add(nodeId);
     }
   });
