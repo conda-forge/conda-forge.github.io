@@ -327,7 +327,7 @@ This will lead you to a file looking like:
 Here, look for the `"new_version"` field. If that contains a wrong value, note it down for fixing in the next step.
 
 The solution in this case is to let the bot know that it should ignore a certain version.
-This can be done in the `conda-forge.yml` configuration file, with [more details](../conda_forge_yml/#bot) in the documentation, the simple snippet boils down to
+This can be done in the `conda-forge.yml` configuration file, with [more details](conda_forge_yml.mdx#bot) in the documentation, the simple snippet boils down to
 
 ```yaml
 bot:
