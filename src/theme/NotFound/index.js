@@ -9,7 +9,6 @@ import { useLocation } from "@docusaurus/router";
 import Heading from "@theme/Heading";
 import Layout from "@theme/Layout";
 import NotFound from "@theme-original/NotFound";
-import React from "react";
 
 export default function NotFoundWrapper(props) {
   const location = useLocation().pathname;
@@ -38,9 +37,5 @@ export default function NotFoundWrapper(props) {
     );
   }
   // Regular 404 component
-  return (
-    <>
-      <NotFound {...props} />
-    </>
-  );
+  return <NotFound {...props} />;
 }

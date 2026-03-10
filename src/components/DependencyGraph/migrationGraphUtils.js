@@ -279,7 +279,7 @@ export const buildInitialGraph = (
   const nodesWithChildren = new Set();
   allNodeIds.forEach((nodeId) => {
     const node = nodeMap[nodeId];
-    if (node && node.outgoing && node.outgoing.length > 0) {
+    if (node?.outgoing && node.outgoing.length > 0) {
       nodesWithChildren.add(nodeId);
     }
   });
@@ -447,7 +447,7 @@ export const buildGraph = (
     .setDefaultEdgeLabel(() => ({}));
 
   // Add compound nodes (subgraphs) for each component
-  components.forEach((component, componentIndex) => {
+  components.forEach((_component, componentIndex) => {
     const componentId = `component-${componentIndex}`;
     g.setNode(componentId, {
       label: "",
