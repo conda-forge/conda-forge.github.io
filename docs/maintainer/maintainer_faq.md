@@ -162,7 +162,7 @@ Available platform plugins are: eglfs, minimal, minimalegl, offscreen, vnc, webg
 ```
 
 This comes from the CI environment being headless and can be fixed by adding the `QT_QPA_PLATFORM=offscreen` [environment variable](https://docs.conda.io/projects/conda-build/en/stable/user-guide/environment-variables.html#inherited-environment-variables).
-The variable can either be added directly to the test command or provided in the [meta.yaml](../adding_pkgs#the-recipe-recipeyaml-or-metayaml) like so:
+The variable can either be added directly to the test command or provided in the [meta.yaml](/docs/maintainer/adding_pkgs#the-recipe-recipeyaml-or-metayaml) like so:
 
 ```yaml
 build:
@@ -182,7 +182,7 @@ If you don't receive an an answer after a couple of days, feel free to reach out
 :::note
 
 Due to a GitHub limitation, this is disabled for new members.
-In that case, you can ping core using the bot command [@conda-forge-admin, please ping conda-forge/core](../infrastructure#conda-forge-admin-please-ping-conda-forgeteam).
+In that case, you can ping core using the bot command [@conda-forge-admin, please ping conda-forge/core](/docs/maintainer/infrastructure#conda-forge-admin-please-ping-conda-forgeteam).
 
 :::
 
@@ -192,10 +192,10 @@ In case your issue is longer or you would like to contact us privately, feel fre
 
 <a id="a-feedstock-has-been-abandoned-and-i-would-like-to-take-over-maintenance"></a>
 
-## A feedstock has been abandoned and I would like to take over maintenance.
+## A feedstock has been abandoned and I would like to take over maintenance
 
 A feedstock is generally considered abandoned when the maintainer isn't around anymore and doesn't merge new PRs or answer any issues.
-If that is the case, you can add yourself to the team by using the [@conda-forge-admin, please add user @username](../infrastructure#conda-forge-admin-please-add-user-username) command.
+If that is the case, you can add yourself to the team by using the [@conda-forge-admin, please add user @username](/docs/maintainer/infrastructure#conda-forge-admin-please-add-user-username) command.
 If the maintainer doesn't merge it after roughly a week, [contact conda-forge/core](#mfaq-contact-core) to have it merged.
 Once added, you have full rights to the feedstock and can continue its maintenance.
 

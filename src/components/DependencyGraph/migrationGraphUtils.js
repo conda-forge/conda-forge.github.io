@@ -2,8 +2,8 @@
  * Utility functions for graph operations in the migration status page
  */
 
-import * as dagreD3 from "dagre-d3-es";
 import * as d3 from "d3";
+import * as dagreD3 from "dagre-d3-es";
 
 export const getGraphSettings = (
   rankdir = "TB",
@@ -279,7 +279,7 @@ export const buildInitialGraph = (
   const nodesWithChildren = new Set();
   allNodeIds.forEach((nodeId) => {
     const node = nodeMap[nodeId];
-    if (node && node.outgoing && node.outgoing.length > 0) {
+    if (node?.outgoing?.length > 0) {
       nodesWithChildren.add(nodeId);
     }
   });
@@ -447,7 +447,7 @@ export const buildGraph = (
     .setDefaultEdgeLabel(() => ({}));
 
   // Add compound nodes (subgraphs) for each component
-  components.forEach((component, componentIndex) => {
+  components.forEach((_component, componentIndex) => {
     const componentId = `component-${componentIndex}`;
     g.setNode(componentId, {
       label: "",

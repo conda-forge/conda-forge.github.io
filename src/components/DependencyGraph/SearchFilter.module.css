@@ -40,8 +40,7 @@
   background-color: var(--ifm-color-emphasis-100);
 }
 
-.datalist option:checked,
-.datalist option:selected {
+.datalist option:checked {
   background: linear-gradient(
     var(--ifm-color-primary),
     var(--ifm-color-primary)

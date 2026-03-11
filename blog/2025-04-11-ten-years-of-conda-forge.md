@@ -3,7 +3,7 @@ authors:
   - core
 ---
 
-# Ten years of conda-forge!
+# Ten years of conda-forge
 
 Today, 2025-04-11, marks the 10th anniversary of the conda-forge community.
 

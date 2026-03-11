@@ -71,7 +71,7 @@
   content: " ▹";
 }
 
-.migrations_table th:not(colspan)::after {
+.migrations_table th:not([colspan])::after {
   font-size: smaller;
   position: absolute;
   right: 1px;

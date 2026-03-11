@@ -39,8 +39,7 @@
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.9.2",
-    "prettier": "^3.8.1"
+    "@docusaurus/module-type-aliases": "^3.9.2"
   },
   "browserslist": {
     "production": [

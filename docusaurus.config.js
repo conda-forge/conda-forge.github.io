@@ -1,7 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const path = require("path");
 const prism = require("prism-react-renderer");
 
 const _repo = process.env.GHREPO || "conda-forge/conda-forge.github.io";

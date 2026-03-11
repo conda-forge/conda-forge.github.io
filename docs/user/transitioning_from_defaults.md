@@ -85,9 +85,11 @@ are guidelines on how to go about this, while backing up your work and your envi
      for those use cases.
 
    - Another useful file to create is the input `environment.yml` for each environment:
+
      ```shell
      conda env export --from-history --prefix --prefix /path/to/environment-name > environment-name.yml
      ```
+
      This file won't capture the exact same state you had in your environment. Instead it
      will tell `conda` what packages to look for and then find a solution that satisfies
      the request.
