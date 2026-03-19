@@ -1,0 +1,90 @@
+---
+tags: [how-to, advanced]
+---
+
+import { BuildScriptTabs } from "@site/src/components/RecipeTabs";
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+# How to configure self-hosted runners
+
+conda-forge has access to external CI resources that can provide GPU-equipped and/or long-running builds (beyond the usual 6h limit).
+If your package needs a GPU to be built or tested, or its compilation times are so long that they are currently done manually off-CI, you can request access to these runners.
+
+## Request access
+
+Open a PR in [conda-forge/admin-requests](https://github.com/conda-forge/admin-requests) by following the instructions in the repository README.
+
+Note you need to request the type of resource you want access to (e.g. GPU runners, or long-running CPU builds).
+Once merged, this will enable the requested self-hosted Github Actions runners for your feedstock.
+
+## Configure your feedstock
+
+1. In `conda-forge.yml`, ensure that the `provider` setting for the required build platform is set to `github_actions`
+2. In `recipe/conda_build_config.yaml`, use `github_actions_labels` to configure the `runs-on` value needed for each platform, using selectors as needed.
+3. Make sure that `github_actions_labels` is mentioned somewhere in the recipe file to make sure it participates in the rerender process.
+
+`github_actions_labels` accepts several types of values:
+
+- A non-empty string will be taken as is for the `runs-on` field(s) matching that selector. Use this to configure self-hosted runners as needed.
+- A non-empty string that starts with `self-hosted@` will be dealt with in the same way, but:
+    - The `self-hosted@` prefix will be removed.
+    - Generic self-hosted labels will be appended to `runs-on`.
+      This is needed in some providers that expect additional labels like `self-hosted` and `Linux`.
+      Other providers don't need it, and others fail with them.
+      Use as needed.
+- If absent, null or `"default"`, `runs-on` will use the pre-configured Github-hosted runner (e.g. `ubuntu-latest` for Linux x64).
+
+:::note
+
+Some of the usual automation infrastructure is not available for self-hosted runners:
+
+- Due to security measurements imposed by Github, automated re-rendering is not possible when they modify Github Actions workflows.
+  You will need to rerender it manually by running `conda-smithy rerender` in your machine and then commit and push the result.
+- Automerge will not function properly either.
+- The conda-forge bots may not be able to trigger the self-hosted runners.
+- Closing and reopening the PR may not work, but a maintainer with sufficient permissions can trigger it manually by pushing an empty commit.
+
+:::
+
+:::info
+
+Prior to `conda-smithy 3.57`, `conda-forge.yml` needed a `github_actions.self_hosted: true` field in `conda-forge.yml`.
+This is now deprecated and has no effect, so please remove it.
+
+:::
+
+## Example
+
+For example, to configure `a-custom-self-hosted-provider` for `linux-64`:
+
+```yaml title="conda-forge.yml"
+provider:
+  linux_64: github_actions
+  linux_aarch64: github_actions
+```
+
+```yaml title="recipe/conda_build_config.yaml"
+github_actions_labels:
+- a-custom-self-hosted-provider  # [linux64]
+# absent value for linux-aarch64 means it will use the default; same as:
+# - default  # [linux and aarch64]
+```
+
+Ensure that this variable is used in the recipe with a dummy statement like:
+
+<RecipeTabs>
+
+```yaml
+{% set github_actions_labels = github_actions_labels %}
+```
+
+```yaml
+context:
+  github_actions_labels: ${{ github_actions_labels }}
+```
+
+</RecipeTabs>
+
+## Real world examples
+
+Use [this search query](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Aconda_build_config.yaml+github_actions_labels) to find some real world examples in conda-forge.

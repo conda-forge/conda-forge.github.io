@@ -113,6 +113,11 @@
             "id": "how-to/advanced/cross-compilation"
           },
           {
+            "type": "doc",
+            "label": "Self-hosted runners",
+            "id": "how-to/advanced/self-hosted-runners"
+          },
+          {
             "type": "link",
             "label": "Enable CUDA",
             "href": "/docs/maintainer/knowledge_base/#cuda-builds"
