@@ -182,7 +182,7 @@ If you don't receive an an answer after a couple of days, feel free to reach out
 :::note
 
 Due to a GitHub limitation, this is disabled for new members.
-In that case, you can ping core using the bot command [@conda-forge-admin, please ping conda-forge/core](infrastructure.md#conda-forge-admin-please-ping-conda-forge).
+In that case, you can ping core using the bot command [@conda-forge-admin, please ping conda-forge/core](../infrastructure#conda-forge-admin-please-ping-conda-forgeteam).
 
 :::
 
@@ -195,7 +195,7 @@ In case your issue is longer or you would like to contact us privately, feel fre
 ## A feedstock has been abandoned and I would like to take over maintenance.
 
 A feedstock is generally considered abandoned when the maintainer isn't around anymore and doesn't merge new PRs or answer any issues.
-If that is the case, you can add yourself to the team by using the [@conda-forge-admin, please add user @username](infrastructure.md#conda-forge-admin-please-add-user-username) command.
+If that is the case, you can add yourself to the team by using the [@conda-forge-admin, please add user @username](../infrastructure#conda-forge-admin-please-add-user-username) command.
 If the maintainer doesn't merge it after roughly a week, [contact conda-forge/core](#mfaq-contact-core) to have it merged.
 Once added, you have full rights to the feedstock and can continue its maintenance.
 

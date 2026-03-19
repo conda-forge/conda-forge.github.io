@@ -22,14 +22,14 @@ Chances are we have already packaged it for you. You can [search](https://anacon
 - We value all kinds of contributions — not just code. A few recommended ways to start contributing to conda-forge are:
   - [Contribute new packages](maintainer/adding_pkgs)
   - Help update and [maintain packages](maintainer/updating_pkgs.md)
-  - Suggest or implement improvements for our [infrastructure](maintainer/infrastructure.md)
+  - Suggest or implement improvements for our [infrastructure](maintainer/infrastructure)
   - Help [improve the documentation](/docs/user/contributing/#improve-the-website)
   - For a detailed overview please refer to [Becoming involved](user/contributing.mdx)
 - To see our governance policies, see [Governance](/community/governance/).
 - If you find bugs, need help, or want to talk to the developers, use our mailing lists or chat rooms:
   - [GitHub issues](https://github.com/conda-forge/conda-forge.github.io/issues)
   - [Zulip chatroom](https://conda-forge.zulipchat.com/)
-  - [Discourse group (archived)](https://conda.discourse.group)
+  - [Discourse group (archived)](https://web.archive.org/web/20260210234447/https://conda.discourse.group/c/pkg-building/conda-forge/25)
   - [Mailing list (archived)](https://groups.google.com/forum/#!forum/conda-forge)
 
 <a id="table-of-contents"></a>

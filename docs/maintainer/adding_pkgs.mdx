@@ -478,11 +478,11 @@ Build dependencies are required in the build environment and contain all tools t
 
 Following packages are examples of typical `build` dependencies:
 
-- compilers (see [Compilers](knowledge_base.md#dep-compilers))
+- compilers (see [Compilers](../knowledge_base#compilers))
 - cmake
 - make
 - pkg-config
-- CDT packages (see [Core Dependency Tree Packages (CDTs)](knowledge_base.md#cdt-packages))
+- CDT packages (see [Core Dependency Tree Packages (CDTs)](../knowledge_base#core-dependency-tree-packages-cdts))
 
 <a id="host"></a>
 
@@ -493,7 +493,7 @@ Host dependencies are required during build phase, but in contrast to build pack
 Following packages are typical examples for `host` dependencies:
 
 - shared libraries (c/c++)
-- python/r libraries that link against c libraries (see e.g. [Building Against NumPy](knowledge_base.md#linking-numpy))
+- python/r libraries that link against c libraries (see e.g. [Building Against NumPy](../knowledge_base#building-against-numpy))
 - python, r-base
 - setuptools, pip (see [Use pip](#use-pip))
 
@@ -515,7 +515,7 @@ As a general rule: all dependencies have to be packaged by conda-forge as well. 
 
 There are only a few exceptions to this rule:
 
-1. Some dependencies have to be satisfied with [CDT](../glossary.md#cdt) packages (see [Core Dependency Tree Packages (CDTs)](knowledge_base.md#cdt-packages)).
+1. Some dependencies have to be satisfied with [CDT](../glossary.md#cdt) packages (see [Core Dependency Tree Packages (CDTs)](../knowledge_base#core-dependency-tree-packages-cdts)).
 2. Some packages require root access (e.g. device drivers) that cannot be distributed by conda-forge. These dependencies should be avoided whenever possible.
 
 <a id="pinning"></a>
