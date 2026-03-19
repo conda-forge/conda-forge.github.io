@@ -1,17 +1,72 @@
 ---
-title: 'Configuring conda-forge.yml'
+title: 'Configuring your feedstock'
 ---
 
-# Configuring conda-forge.yml
+# Configuring your feedstock
 
 import CondaForgeYmlSchema from '@site/src/components/CondaForgeYmlSchema';
 
-You can configure how conda-forge is set up and built via the `conda-forge.yml`
-file that is present in the root directory of a feedstock.
+You can configure how your feedstock is set up and built via the `conda-forge.yml` file that is present in its root directory.
+A small subset of options are configured in `recipe/conda_build_config.yaml`.
 
 Rerendering the feedstock after you modify this file is usually required and always a good idea (see [Rerendering feedstocks](updating_pkgs.md#dev-update-rerender)).
 
-The next section describes in detail the top-level fields in `conda-forge.yml`.
+## conda_build_config.yaml
+
+While most settings are configured via [`conda-forge.yml`](#conda-forgeyml-schema),
+some settings are defined in this other file for added flexibility in the rerender process, since they can use selectors to match specific job configurations (e.g. CPU vs GPU jobs).
+
+### `channel_sources`
+
+List of strings.
+
+A comma-separated list of channels to use as sources for the recipe.
+Only `conda-forge` and its labels are supported.
+
+Example:
+
+```yaml title="recipe/conda_build_config.yaml"
+channel_sources:
+  - conda-forge/label/A_rc,conda-forge
+```
+
+### `channel_targets`
+
+List of strings.
+
+Each string must be space-separated channel, label pair.
+
+Example:
+
+```yaml title="recipe/conda_build_config.yaml"
+channel_targets:
+  - conda-forge A_rc
+```
+
+### `github_actions_labels`
+
+List of strings. Optional.
+
+Each string must be one of:
+
+- A non-empty string will be taken as is for the `runs-on` field(s) matching that selector. Use this to configure self-hosted runners as needed.
+- A non-empty string that starts with `self-hosted@` will be dealt with in the same way, but:
+    - The `self-hosted@` prefix will be removed.
+    - Generic self-hosted labels will be appended to `runs-on`.
+      This is needed in some providers that expect additional labels like `self-hosted` and `Linux`.
+      Other providers don't need it, and others fail with them.
+      Use as needed.
+- If absent or set to `default`, `runs-on` will use the pre-configured Github-hosted runner (e.g. `ubuntu-latest` for Linux x64).
+
+Example:
+
+```yaml title="recipe/conda_build_config.yaml"
+github_actions_labels:
+- a-custom-self-hosted-provider  # [linux64]
+# absent value for linux-aarch64 means it will use the default; same as:
+# - default  # [linux and aarch64]
+```
+
 
 ## conda-forge.yml schema
 
