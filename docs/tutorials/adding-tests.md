@@ -128,21 +128,21 @@ script-based, that will run our test suite.
 Add the following to the `tests:` section:
 
 ```yaml
-  - script:
-      - pytest tests/
-    requirements:
+  - requirements:
       run:
         - pytest
     files:
       source:
         - tests/
+    script:
+      - pytest tests/
 ```
 
-The `script:` subsection lists commands that are executed to test the package. The `requirements:`
-section specifies additional packages that need to be installed to run these commands; we do not add
-the package itself, as it will be installed automatically (along with its run dependencies).
-Finally, the `files:` subsection specifies which additional files need to be available in the test
-environment; in this case, it is the `tests/` directory that contains the test suite itself.
+The `requirements:` subsection specifies additional packages that need to be installed to run the test
+commands; we do not add the package itself here, as it will be installed automatically (along with
+its run dependencies). The `files:` subsection specifies which additional files need to be available
+in the test environment; in this case, it is the `tests/` directory that contains the test suite
+itself. Finally, the `script:` subsection lists commands that are executed to test the package.
 
 :::note
 You should keep an eye on the size of directories included in the `files:`. They will be included in
