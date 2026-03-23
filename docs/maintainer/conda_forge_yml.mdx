@@ -14,7 +14,7 @@ Rerendering the feedstock after you modify this file is usually required and alw
 ## recipe/conda_build_config.yaml
 
 While most settings are configured via [`conda-forge.yml`](#conda-forgeyml-schema),
-some settings are defined in this other file for added flexibility in the rerender process, since they can use selectors to match specific job configurations (e.g. CPU vs GPU jobs).
+some settings are defined in `recipe/conda_build_config.yaml`. Unlike the former, this file can take advantage of selectors to match specific job configurations (e.g. CPU vs. GPU jobs).
 
 ### channel_sources
 
