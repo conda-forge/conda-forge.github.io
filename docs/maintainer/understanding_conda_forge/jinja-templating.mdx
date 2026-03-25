@@ -3,93 +3,95 @@ import { RecipeTabs } from "@site/src/components/RecipeTabs";
 # Jinja templating
 
 The recipe file can contain expressions that are evaluated during build time.
-These expressions are written in [Jinja](http://jinja.pocoo.org/) syntax.
+These expressions are written using a subset of [Jinja](http://jinja.pocoo.org/) syntax.
 
-Jinja expressions serve following purposes in the recipe file:
+The v0 recipes were Jinja templates entirely and needed to be preprocessed before being read as YAML.
+This enabled quite powerful customization, but it meant that the unprocessed recipes were not valid YAML.
+The resulting recipe may have differed significantly depending on the state of Jinja environment, and this caused issues for a variety of tools such as linters or migrators.
 
-- They allow defining variables to avoid code duplication. Using a variable for the `version` allows changing the version only once with every update.
+The v1 recipes are plain YAML files, and Jinja expression support is added in the value processing layer.
+As a result, no control structures (such as `{% for ... %}` blocks) are supported.
 
-  <RecipeTabs>
+## Defining variables
 
-  ```yaml
-  {% set version = "3.7.3" %}
+The primary use of Jinja expressions is to define variables that can be used elsewhere in the recipe file.
+They can be used to avoid duplication and to keep frequently changing values in a single block.
 
-  package:
-    name: python
-    version: {{ version }}
+In the v0 recipe format, variables can be set anywhere in the recipe using the `{% set ... %}` Jinja structure, though it is recommended to keep them on top of the recipe file.
+They can be referenced using the standard Jinja `{{ ... }}` syntax after being declared.
 
-  source:
-    url: https://www.python.org/ftp/python/{{ version }}/Python-{{ version }}.tar.xz
-    sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
-  ```
+In the v1 recipe format, they are defined in a `context:` section.
+They can be referenced using a modified `${{ ... }}` syntax (with a `$` prepended).
+In the `context:` section, later keys can reference variables defined in earlier keys.
+The values can either be scalars or lists.
 
-  ```yaml
-  context:
-    version: "3.7.3"
+<RecipeTabs>
 
-  package:
-    name: python
-    version: ${{ version }}
+```yaml
+{% set version = "3.7.3" %}
 
-  source:
-    url: https://www.python.org/ftp/python/${{ version }}/Python-${{ version }}.tar.xz
-    sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
-  ```
+package:
+  name: python
+  version: "{{ version }}"
 
-  </RecipeTabs>
+source:
+  url: https://www.python.org/ftp/python/{{ version }}/Python-{{ version }}.tar.xz
+  sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
+```
 
-- They can call [rattler-build](https://rattler-build.prefix.dev/latest/reference/jinja/) or [conda-build functions](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#conda-build-specific-jinja2-functions) for automatic code generation. Examples are the compilers or the `pin_compatible` function.
+```yaml
+context:
+  version: "3.7.3"
 
-  <RecipeTabs>
+package:
+  name: python
+  version: ${{ version }}
 
-  ```yaml
-  requirements:
-    build:
-      - {{ compiler('c') }}
-      - {{ compiler('cxx') }}
-      - {{ stdlib('c') }}
-  ```
+source:
+  url: https://www.python.org/ftp/python/${{ version }}/Python-${{ version }}.tar.xz
+  sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
+```
 
-  ```yaml
-  requirements:
-    build:
-      - ${{ compiler('c') }}
-      - ${{ compiler('cxx') }}
-      - ${{ stdlib('c') }}
-  ```
+</RecipeTabs>
 
-  </RecipeTabs>
+## Using Jinja filters
 
-  or
+## Additional Jinja functions
 
-  <RecipeTabs>
+Both recipe formats provide a few additional functions that can be called using the variable reference syntax.
 
-  ```yaml
-  requirements:
-    build:
-      - {{ compiler('c') }}
-      - {{ compiler('cxx') }}
-      - {{ stdlib('c') }}
-    host:
-      - python
-      - numpy
-    run:
-      - python
-  ```
+### The `compiler` and `stdlib` functions
 
-  ```yaml
-  requirements:
-    build:
-      - ${{ compiler('c') }}
-      - ${{ compiler('cxx') }}
-      - ${{ stdlib('c') }}
-    host:
-      - python
-      - numpy
-    run:
-      - python
-  ```
+The `compiler()` and `stdlib()` functions take the identifier of a programming language or toolchain as an argument, and output appropriate dependency string for it.
+Notably, this streamlines per-platform toolchain specifics.
+The use of these functions is described in greater detail in [compilers and runtimes](/docs/maintainer/infrastructure/#compilers-and-runtimes).
 
-  </RecipeTabs>
+<RecipeTabs>
+
+```yaml
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ stdlib('c') }}
+```
+
+```yaml
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+```
+
+</RecipeTabs>
+
+### The `pin_compatible()` function
+
+### The `pin_subpackage()` function
+
+## Conditional blocks
+
+## More information
 
 For more information please refer to the "Templating with Jinja" section in the [rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#templating-with-jinja) or [conda-build](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#templating-with-jinja) docs.
