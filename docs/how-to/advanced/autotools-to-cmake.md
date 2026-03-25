@@ -2,9 +2,7 @@
 tags: [howto, advanced]
 ---
 
-<a id="moving-from-an-autotools-build-to-a-cmake-build"></a>
-
-### Moving from an autotools build to a CMake build
+# Moving from an autotools build to a CMake build
 
 Some packages maintain an autotools build and a cmake build. Some maintainers
 would like to switch to a cmake build because that provides windows builds
