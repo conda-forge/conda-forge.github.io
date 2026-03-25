@@ -81,6 +81,11 @@
             "type": "doc",
             "label": "Populate package dependencies",
             "id": "how-to/basics/populate-dependencies"
+          },
+          {
+            "type": "doc",
+            "label": "Use CMake",
+            "id": "how-to/basics/cmake"
           }
         ]
       },
@@ -111,6 +116,11 @@
             "type": "doc",
             "label": "Cross-compile",
             "id": "how-to/advanced/cross-compilation"
+          },
+          {
+            "type": "doc",
+            "label": "Move from autotools to CMake",
+            "id": "how-to/advanced/autotools-to-cmake"
           },
           {
             "type": "link",
