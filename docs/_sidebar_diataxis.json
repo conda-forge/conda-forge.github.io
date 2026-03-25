@@ -147,6 +147,11 @@
             "id": "how-to/advanced/self-hosted-runners"
           },
           {
+            "type": "doc",
+            "label": "Package a fork",
+            "id": "how-to/advanced/package-a-fork"
+          },
+          {
             "type": "link",
             "label": "Rename packages",
             "href": "#"
