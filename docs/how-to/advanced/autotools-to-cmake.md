@@ -26,6 +26,7 @@ Here are some things you should check,
    For example, on Linux you can compare the sorted output of
    `nm -D --defined-only /path/to/lib.so | c++filt` from both builds.
    On macOS, use `nm -gU /path/to/lib.dylib` similarly.
+
 6. Check that additional packaging information stays the same, e.g. is the same pkg-config information provided.
 
 :::note
