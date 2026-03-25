@@ -247,9 +247,8 @@
             "href": "/docs/maintainer/pinning_deps/#specifying-run_exports"
           },
           {
-            "type": "link",
-            "label": "Jinja functions",
-            "href": "/docs/maintainer/adding_pkgs/#jinja-templating"
+            "type": "doc",
+            "id": "maintainer/understanding_conda_forge/jinja-templating"
           }
         ]
       },
