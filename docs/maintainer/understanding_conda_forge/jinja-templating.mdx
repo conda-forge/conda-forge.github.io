@@ -62,7 +62,7 @@ Both recipe formats provide a few additional functions that can be called using 
 
 ### The `compiler` and `stdlib` functions
 
-The `compiler()` and `stdlib()` functions take the identifier of a programming language or toolchain as an argument, and output appropriate dependency string for it.
+The `compiler()` and `stdlib()` functions take the identifier of a programming language or toolchain as an argument, and output appropriate dependency string for the respective compiler or standard library.
 Notably, this streamlines per-platform toolchain specifics.
 The use of these functions is described in greater detail in [compilers and runtimes](/docs/maintainer/infrastructure/#compilers-and-runtimes).
 
@@ -86,9 +86,87 @@ requirements:
 
 </RecipeTabs>
 
-### The `pin_compatible()` function
+### The `pin_compatible()` and `pin_subpackage()` function
 
-### The `pin_subpackage()` function
+The `pin_compatible()` function outputs a dependency string that is pinned to a version compatible with the package used at build time.
+It is usually used to construct `run` dependencies when run exports are not sufficient.
+
+The `pin_subpackage()` function outputs a similar dependency string, but pinned to a another output of the same recipe.
+It is often used to construct `run_exports`.
+
+Both functions take a package name as the only positional argument.
+In case of `pin_compatible()`, the package must be a `host` or a `build` dependency.
+In case of `pin_subpackage()`, it must be one of the outputs of the recipe.
+
+#### Pinning to version ranges
+
+By default, the functions output a dependency string with upper and lower bounds.
+The bounds can be adjusted using keyword arguments, and normally are expression using a pin expression such as `x.x.x`, where each `x` refers to the determined package version.
+The default bounds are `x.x.x.x.x.x` for the lower bound, and `x` for the upper bound.
+For example, if the current package version is `1.2.3`, then the resulting depenendency string then would be `>=1.2.3,<2`.
+
+In v1 recipes, the keyword arguments are named `lower_bound` and `upper_bound`, respectively.
+They can accept either pin expressions or fixed version numbers.
+
+In v0 recipes, pin expressions can be specified using `min_pin` and `max_pin` arguments, or fixed version numbers can be specified via `lower_bound` and `upper_bound`.
+
+<RecipeTabs>
+
+```yaml
+requirements:
+  host:
+    - numpy
+    - plotly
+  run:
+    # if numpy 1.11.2 were installed, this would output >=1.11,<2
+    - {{ pin_compatible('numpy', min_pin='x.x', max_pin='x') }}
+    # if plotly 4.1.2 were installed, this would otuput >=4.1.2,<6.0
+    - {{ pin_compatible('plotly', upper_bound='6.0') }}
+build:
+  run_exports:
+    # pins to exact patch version
+    - {{ pin_subpackage('libopencv', max_pin='x.x.x') }}
+```
+
+```yaml
+requirements:
+  host:
+    - numpy
+    - plotly
+  run:
+    # if numpy 1.11.2 were installed, this would output >=1.11,<2
+    - ${{ pin_compatible('numpy', lower_bound='x.x', upper_bound='x') }}
+    # if plotly 4.1.2 were installed, this would otuput >=4.1.2,<6.0
+    - ${{ pin_compatible('plotly', upper_bound='6.0') }}
+
+  run_exports:
+    # pins to exact patch version
+    - ${{ pin_subpackage('libopencv', upper_bound='x.x.x') }}
+```
+
+</RecipeTabs>
+
+#### Pinning to an exact version
+
+Alternatively, an `exact=true` keyword argument can be used to pin to the exact package version.
+Note that this includes the full build string.
+If you need to pin on version without the build string, use an appropriately long pin expression instead.
+
+<RecipeTabs>
+
+```yaml
+build:
+  run_exports:
+    - {{ pin_subpackage('vtk-base', exact=true) }}
+```
+
+```yaml
+requirements:
+  run_exports:
+    - ${{ pin_subpackage('vtk-base', exact=true) }}
+```
+
+</RecipeTabs>
 
 ## Conditional blocks
 
