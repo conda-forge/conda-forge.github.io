@@ -56,6 +56,93 @@ source:
 
 ## Using Jinja filters
 
+Filters are used to modify the value of Jinja variables.
+Filters are appended to variable references using the pipe (`|`) character.
+Filters may take arguments.
+Multiple filters can be chained together.
+
+Filters commonly used in recipes include:
+- `| default(...)` to provide a default value if variable is undefined
+- `| int` to convert a string to integer
+- `| join(...)` to join a list into a string using specified separator
+- `| length` to obtain the length of the value
+- `| lower` to convert the value into lowercase
+- `| title` to convert the value to title case
+- `| trim` to trim a string (remove whitespace from both ends)
+- `| upper` to convert the value to uppercase
+
+The full list of available filters depends on the recipe version:
+- for v0 recipes, it can be found in [Jinja2 builtin filters](https://jinja.palletsprojects.com/en/stable/templates/#list-of-builtin-filters)
+- for v1 recipes, it can be found in [minijinja builtin filters](https://docs.rs/minijinja/latest/minijinja/filters/index.html#functions)
+
+<RecipeTabs>
+
+```yaml
+source:
+  # for version 3.1.1, the filename becomes "openbabel-3-1-1.tar.gz"
+  url: https://github.com/openbabel/openbabel/archive/openbabel-{{ version | replace('.','-') }}.tar.gz
+  sha256: c97023ac6300d26176c97d4ef39957f06e68848d64f1a04b0b284ccff2744f02
+```
+
+```yaml
+source:
+  # for version 3.1.1, the filename becomes "openbabel-3-1-1.tar.gz"
+  url: https://github.com/openbabel/openbabel/archive/openbabel-${{ version | replace('.','-') }}.tar.gz
+  sha256: c97023ac6300d26176c97d4ef39957f06e68848d64f1a04b0b284ccff2744f02
+```
+
+</RecipeTabs>
+
+## List variables
+
+Jinja (and the v1 recipe `context` key) supports declaring list variables.
+Such variables need to be converted to scalar strings to be used in a value.
+For example, this can be used to conveniently construct a test skip filter for pytest.
+
+<RecipeTabs>
+
+```yaml
+
+{% set tests_to_skip = [
+    # skip test_url_is_accessible instead of hitting 20+ servers per run, since
+    # each server might be occasionally unresponsive and end up failing our CI
+    'test_url_is_accessible',
+    # skip classes inheriting from `datasets_utils.VideoDatasetTestCase`, which
+    # are very prone to hanging, especially on osx & windows; see
+    # https://github.com/pytorch/vision/blob/v0.25.0/test/test_datasets.py
+    'HMDB51TestCase',
+    'KineticsTestCase',
+    'UCF101TestCase',
+] %}
+
+test:
+  commands:
+    - pytest {{ tests_to_skip | join(' OR ') }}
+```
+
+```yaml
+context:
+  tests_to_skip:
+    # skip test_url_is_accessible instead of hitting 20+ servers per run, since
+    # each server might be occasionally unresponsive and end up failing our CI
+    - test_url_is_accessible
+    # skip classes inheriting from `datasets_utils.VideoDatasetTestCase`, which
+    # are very prone to hanging, especially on osx & windows; see
+    # https://github.com/pytorch/vision/blob/v0.25.0/test/test_datasets.py
+    - HMDB51TestCase
+    - KineticsTestCase
+    - UCF101TestCase
+
+
+tests:
+  - script:
+      - pytest ${{ tests_to_skip | join(' OR ') }}
+```
+
+</RecipeTabs>
+
+## Conditional blocks
+
 ## Additional Jinja functions
 
 Both recipe formats provide a few additional functions that can be called using the variable reference syntax.
@@ -168,7 +255,40 @@ requirements:
 
 </RecipeTabs>
 
-## Conditional blocks
+### The `cdt()` function
+
+The `cdt()` function takes a single CDT name as an argument and outputs appropriate CDT dependency.
+CDTs are described in greater detail in [Core Dependency Tree Packages (CDTs)]/docs/maintainer/knowledge_base/#core-dependency-tree-packages-cdts).
+
+<RecipeTabs>
+
+```yaml
+
+
+requirements:
+  build:
+    - {{ cdt('mesa-libgl-devel') }}  # [linux]
+    - {{ cdt('mesa-dri-drivers') }}  # [linux]
+    - {{ cdt('libselinux') }}        # [linux]
+    - {{ cdt('libxdamage') }}        # [linux]
+    - {{ cdt('libxxf86vm') }}        # [linux]
+    - {{ cdt('libxext') }}           # [linux]
+```
+
+```yaml
+requirements:
+  build:
+    - if: linux
+      then:
+        - ${{ cdt('mesa-libgl-devel') }}
+        - ${{ cdt('mesa-dri-drivers') }}
+        - ${{ cdt('libselinux') }}
+        - ${{ cdt('libxdamage') }}
+        - ${{ cdt('libxxf86vm') }}
+        - ${{ cdt('libxext') }}
+```
+
+</RecipeTabs>
 
 ## More information
 
