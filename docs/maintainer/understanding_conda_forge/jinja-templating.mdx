@@ -247,6 +247,36 @@ requirements:
 
 </RecipeTabs>
 
+### The `match()` function (v1 recipes)
+
+The v1 recipe format features an additional `match()` function that can be used to match version strings against version specifications.
+It is commonly used to match against `python` versions, as a v1 recipe replacement for `py...` selectors.
+
+<RecipeTabs>
+
+```yaml
+build:
+  skip: true  # [py<311]
+
+requirements:
+  host:
+    - typing_extensions # [py<312]
+
+```
+
+```yaml
+build:
+  skip: match(python, "<3.11")
+
+requirements:
+  host:
+    - if: match(python, "<3.12")
+      then: typing_extensions
+```
+
+</RecipeTabs>
+
+
 ### The `pin_compatible()` and `pin_subpackage()` function
 
 The `pin_compatible()` function outputs a dependency string that is pinned to a version compatible with the package used at build time.
