@@ -54,6 +54,43 @@ source:
 
 </RecipeTabs>
 
+## Jinja expressions
+
+The `{{ ... }}` and `${{ ... }}` blocks contain Jinja expressions.
+Aside from variable references, expressions may use a number of arithmetic and logical operators.
+
+The following Python operators are supported:
+
+- arithmetic operators: `+`, `-`, `/`, `//`, `%`, `*`, `**`
+- comparison operators: `==`, `!=`, `>`, `>=`, `<`, `<=`
+- logical operators: `and`, `or`, `not`
+- containtment test operator: `in`
+- if expressions: `... if ...` and `... if ... else ...`
+
+Additionally, the following Jinja-specific operators are supported:
+
+- test operator: `is` (usually used with `true` or `false`)
+- string concatenation operator: `~` (like `+` but converts all operands into strings)
+- filter application: `|` (see [using Jinja filters](#using-jinja-filters))
+
+Expressions can be grouped using parentheses.
+
+<RecipeTabs>
+
+```yaml
+
+{% set build_base = 0 %}
+{% set build_number = build_base + 100 if mpi == "nompi" else build_base %}
+```
+
+```yaml
+context:
+  build_base: 0
+  build_number: ${{ build_base + 100 if mpi == "nompi" else build_base }}
+```
+
+</RecipeTabs>
+
 ## Using Jinja filters
 
 Filters are used to modify the value of Jinja variables.
