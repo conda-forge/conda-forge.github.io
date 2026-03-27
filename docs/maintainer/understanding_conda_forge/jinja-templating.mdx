@@ -143,6 +143,80 @@ tests:
 
 ## Conditional blocks
 
+In addition to selectors, v0 recipes can use the Jinja `{% if ... %}` conditional blocks to make parts of the recipe conditional.
+While powerful, these blocks are discouraged as they prevent many tools from processing the recipe, most notably the version migrator.
+
+The v1 recipe format has preprocessing selectors as a replacement for both selectors and Jinja conditional blocks.
+They can also be used to introduce conditional sections, to some degree.
+
+<RecipeTabs>
+
+```yaml
+requirements:
+  host:
+    - openssl
+    {% if license_family == 'gpl' %}
+
+    - x264
+    - x265
+    {% endif %}
+    - libvpx  # [not win]
+    - zlib
+```
+
+```yaml
+requirements:
+  host:
+    - openssl
+    - if: license_family == 'gpl'
+      then:
+        - x264
+        - x265
+    - if: not win
+      then: libvpx
+    - zlib
+```
+
+</RecipeTabs>
+
+<RecipeTabs>
+
+```yaml
+test:
+
+  imports:
+    - spam
+
+
+
+  requires:
+    - pip
+    - abi3audit                      # [is_abi3]
+  commands:
+    - pip check
+    - abi3audit $SP_DIR/spam.abi3.so -s -v --assume-minimum-abi3 {{ python_min }}   # [unix and is_abi3]
+    - abi3audit %SP_DIR%/spam.pyd -s -v --assume-minimum-abi3 {{ python_min }}      # [win and is_abi3]
+```
+
+```yaml
+tests:
+  - python:
+      imports:
+        - spam
+      pip_check: true
+  - if: is_abi3
+    then:
+      requirements:
+        run:
+          - abi3audit
+      script:
+        - if: unix
+          then: abi3audit $SP_DIR/spam.abi3.so -s -v --assume-minimum-abi3 ${{ python_min }}
+          else: abi3audit %SP_DIR%/spam.pyd -s -v --assume-minimum-abi3 ${{ python_min }}
+```
+
+</RecipeTabs>
+
 ## Additional Jinja functions
 
 Both recipe formats provide a few additional functions that can be called using the variable reference syntax.
