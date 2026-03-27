@@ -175,6 +175,78 @@ build:
 
 </RecipeTabs>
 
+### Selector variables
+
+A number of variables is provided for use in selectors.
+
+The following variables expose platform identifiers as strings:
+
+- `build_platform` for the build platform
+- `host_platform` for the host platform (v1 recipe only)
+- `target_platform` for the target platform
+
+These concepts are described in greater detail in [cross-compilation](/docs/how-to/advanced/cross-compilation/).
+
+The following variables are provided for checking the platform the package is being built for (the host platform), as booleans:
+
+- `linux`, `osx`, `win` are true when building for the specified operating system
+- `unix` is true when building for a Unix system (macOS or Linux)
+- `x86_64` is true when building for 64-bit x86
+- `aarch64` is true when building for AArch64 Linux (use `arm64` for other systems)
+- `arm64` is true when building for ARM64 macOS / Windows (use `aarch64` for Linux)
+- `ppc64le`, `s390x` are true when building for PowerPC64 little-endian and s390x architectures (Linux only)
+
+Additionally, variables used to define variants can be referenced.
+For example, in a package with Python-version variants, the `python` variable will contain the version specifier for the `python` package.
+In v1 recipes, the [match()](#the-match-function-v1-recipes) function is provided to test against such version.
+In v0 recipes, an additional `py` variable is provided that exposes the Python version as an integer (e.g. 3.11 is exposed as 311).
+
+<RecipeTabs>
+
+```yaml
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ stdlib('c') }}
+
+    - {{ compiler('cuda') }}            # [cuda_compiler_version != "None"]
+
+
+    - python                            # [build_platform != target_platform]
+    - cross-python_{{ host_platform }}  # [build_platform != target_platform]
+    - numpy                             # [build_platform != target_platform]
+  host:
+    - python
+    - numpy
+
+    - onednn                            # [(osx and x86_64) or linux]
+
+    - onednn-cpu-threadpool             # [linux and x86_64]
+```
+
+```yaml
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - if: cuda_compiler_version != "None"
+      then: ${{ compiler('cuda') }}
+    - if: build_platform != host_platform
+      then:
+        - python
+        - cross-python_${{ host_platform }}
+        - numpy
+  host:
+    - python
+    - numpy
+    - if: (osx and x86_64) or linux
+      then: onednn
+    - if: linux and x86_64
+      then: onednn-cpu-threadpool
+```
+
+</RecipeTabs>
+
 ## Conditional blocks
 
 In addition to selectors, v0 recipes can use the Jinja `{% if ... %}` conditional blocks to make parts of the recipe conditional.
