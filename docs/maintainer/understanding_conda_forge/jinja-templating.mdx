@@ -141,6 +141,40 @@ tests:
 
 </RecipeTabs>
 
+## Special variables
+
+A number of special variables are made available for use in variable references and selector expressions.
+The most common are listed in this section.
+
+### Build string variables
+
+The build strings for a package usually contain the build number and a package hash.
+In v0 recipes, the build number (as defined in the recipe) is exposed as `{{ PKG_BUILDNUM }}` variable, while the package hash is exposed as `{{ PKG_HASH }}`.
+In v1 recipes, only package hash is exposed, as `${{ hash }}`.
+It is recommended to store the build number as a custom variable instead.
+
+<RecipeTabs>
+
+```yaml
+
+
+
+build:
+  number: 0
+  string: abc_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+```
+
+```yaml
+context:
+  build_number: 0
+
+build:
+  number: 0
+  string: abc_h{{ hash }}_{{ build_number }}
+```
+
+</RecipeTabs>
+
 ## Conditional blocks
 
 In addition to selectors, v0 recipes can use the Jinja `{% if ... %}` conditional blocks to make parts of the recipe conditional.
