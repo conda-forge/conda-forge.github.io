@@ -129,6 +129,34 @@ source:
 
 </RecipeTabs>
 
+### The `version_to_buildstring` filter (v1 recipes)
+
+The v1 recipe format features an additional `version_to_buildstring` filter that converts a version into a form suitable for use in build string.
+More specifically, it takes the first two version components (major and minor), and removes the version separator (`.`).
+This is specifically useful for Python versions (as a replacement for the `CONDA_PY` variable in v0 format), but may be used for other versions where pinning on minor version is desired.
+
+<RecipeTabs>
+
+```yaml
+build:
+  number: {{ build_number }}
+  # cuda_compiler_version = 12.9
+  # CONDA_PY = 312
+  # gives: cuda129py312h...
+  string: cuda{{ cuda_compiler_version | replace('.', '') }}py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+```
+
+```yaml
+build:
+  number: ${{ build_number }}
+  # cuda_compiler_version = 12.9
+  # python = 3.12.13
+  # gives: cuda129py312h...
+  string: cuda${{ cuda_compiler_version | version_to_buildstring }}py${{ python | version_to_buildstring }}h${{ hash }}_${{ build_number }}
+```
+
+</RecipeTabs>
+
 ## List variables
 
 Jinja (and the v1 recipe `context` key) supports declaring list variables.
@@ -417,7 +445,6 @@ requirements:
 ```
 
 </RecipeTabs>
-
 
 ### The `pin_compatible()` and `pin_subpackage()` function
 
