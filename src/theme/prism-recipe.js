@@ -32,6 +32,7 @@
 
   yaml_extensions = {
     ...Prism.languages.jinja,
+
     selector_comment: {
       pattern: /# \[.*\]/,
       alias: "comment",
@@ -40,6 +41,19 @@
           pattern: /\[.*\]/,
           inside: Prism.languages.jinja.jinja_tag.inside,
         },
+      },
+    },
+
+    v1_selector: {
+      pattern: /(if|skip):.*/,
+      alias: "atrule",
+      inside: {
+        selector: {
+          pattern: /(:).*/,
+          lookbehind: true,
+          inside: Prism.languages.jinja.jinja_tag.inside,
+        },
+        punctuation: /:/,
       },
     },
   };
