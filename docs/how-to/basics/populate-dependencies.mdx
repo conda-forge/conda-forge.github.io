@@ -170,7 +170,7 @@ common example. To avoid that, you need to ignore the run exports from the packa
 
 <RecipeTabs>
 
-```yaml
+```recipe
 build:
   ignore_run_exports_from:
     - gtest
@@ -180,7 +180,7 @@ requirements:
     - gtest
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - gtest
@@ -196,7 +196,7 @@ a package:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 build:
   ignore_run_exports:
     # 'vs2022_win-64' run-exports ['ucrt', 'vc', 'vc14_runtime']
@@ -210,7 +210,7 @@ requirements:
     - ${{ stdlib("c") }}
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - ${{ compiler('cxx') }}
