@@ -30,22 +30,10 @@
     },
   };
 
-  Prism.languages.recipe = Prism.languages.extend("jinja", {
-    scalar: Prism.languages.yaml.scalar,
-    comment: Prism.languages.yaml.comment,
-    key: Prism.languages.yaml.key,
-    directive: Prism.languages.yaml.directive,
-    datetime: Prism.languages.yaml.datetime,
-    boolean: Prism.languages.yaml.boolean,
-    null: Prism.languages.yaml.null,
-    string: {
-      pattern: Prism.languages.yaml.string.pattern,
-      lookbehind: Prism.languages.yaml.string.lookbehind,
-      greedy: Prism.languages.yaml.string.greedy,
-      inside: Prism.languages.jinja,
-    },
-    number: Prism.languages.yaml.number,
-    tag: Prism.languages.yaml.tag,
-    important: Prism.languages.yaml.important,
-  });
+  Prism.languages.recipe = Prism.languages.insertBefore(
+    "yaml",
+    "scalar",
+    Prism.languages.jinja,
+  );
+  Prism.languages.recipe.string.inside = Prism.languages.jinja;
 })(Prism);
