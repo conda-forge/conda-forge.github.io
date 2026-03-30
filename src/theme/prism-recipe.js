@@ -56,6 +56,11 @@
         punctuation: /:/,
       },
     },
+
+    inline_shell_var: {
+      pattern: /\$\w+|\$\{.*?\}|%\w+%/,
+      alias: "selector",
+    },
   };
 
   Prism.languages.recipe = Prism.languages.insertBefore(
