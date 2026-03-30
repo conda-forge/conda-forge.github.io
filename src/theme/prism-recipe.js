@@ -34,8 +34,9 @@
     ...Prism.languages.jinja,
 
     selector_comment: {
-      pattern: /# \[.*\]/,
+      pattern: /(\S.*)# \[.*\]/,
       alias: "comment",
+      lookbehind: true,
       inside: {
         selector: {
           pattern: /\[.*\]/,
