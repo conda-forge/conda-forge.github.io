@@ -1,12 +1,12 @@
 (function (Prism) {
   // Roughly based on prism-twig.js from Prism.
   Prism.languages.jinja = {
-    "jinja-comment": {
+    jinja_comment: {
       pattern: /^\{#[\s\S]*?#\}$/,
       alias: "comment",
     },
 
-    "jinja-tag": {
+    jinja_tag: {
       pattern: /\$?\{([\{%])[\s\S]*?[\}%]\}/,
       alias: "tag",
       greedy: true,
@@ -30,10 +30,24 @@
     },
   };
 
+  yaml_extensions = {
+    ...Prism.languages.jinja,
+    selector_comment: {
+      pattern: /# \[.*\]/,
+      alias: "comment",
+      inside: {
+        selector: {
+          pattern: /\[.*\]/,
+          inside: Prism.languages.jinja.jinja_tag.inside,
+        },
+      },
+    },
+  };
+
   Prism.languages.recipe = Prism.languages.insertBefore(
     "yaml",
     "scalar",
-    Prism.languages.jinja,
+    yaml_extensions,
   );
   Prism.languages.recipe.string.inside = Prism.languages.jinja;
 })(Prism);
