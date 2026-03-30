@@ -63,10 +63,10 @@
     },
   };
 
-  Prism.languages.recipe = Prism.languages.insertBefore(
-    "yaml",
-    "scalar",
-    yaml_extensions,
-  );
+  Prism.languages.recipe = {
+    ...yaml_extensions,
+    ...Prism.languages.yaml,
+  };
+  Prism.languages.recipe.string = { ...Prism.languages.yaml.string };
   Prism.languages.recipe.string.inside = Prism.languages.jinja;
 })(Prism);
