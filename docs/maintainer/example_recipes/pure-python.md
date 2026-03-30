@@ -19,7 +19,7 @@ Note that the generated recipe is a starting point and may need adjustments base
 
 Here is a minimal template for a pure-Python package v1 recipe:
 
-```yaml title="recipe.yaml"
+```recipe title="recipe.yaml"
 schema_version: 1
 
 context:
@@ -74,7 +74,7 @@ extra:
 This section defines variables that can be reused throughout the recipe.
 For conda-forge recipes, you should at least define the `version` variable:
 
-```yaml
+```recipe
 context:
   version: 1.2.3
 ```
@@ -83,7 +83,7 @@ These variables can be referenced using the `${{ variable_name }}` syntax elsewh
 
 ### The `package` section
 
-```yaml
+```recipe
 package:
   name: example-package
   version: ${{ version }}
@@ -94,7 +94,7 @@ package:
 
 ### The `source` section
 
-```yaml
+```recipe
 source:
   url: https://pypi.org/packages/source/e/example-package/example_package-${{ version }}.tar.gz
   sha256: 12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a
@@ -105,7 +105,7 @@ source:
 
 ### The `build` section
 
-```yaml
+```recipe
 build:
   noarch: python
   number: 0
@@ -124,7 +124,7 @@ build:
 
 If your package has a command line interface, you can add entry points to the build section:
 
-```yaml
+```recipe
 build:
   entry_points:
     - example-cli=example_package.cli:main
@@ -134,7 +134,7 @@ This creates a `example-cli` command that calls the `main` function from `exampl
 
 ### The `requirements` section
 
-```yaml
+```recipe
 requirements:
   host:
     - python ${{ python_min }}.*
@@ -163,7 +163,7 @@ Add your package's runtime dependencies here. These should match what's specifie
 
 ### The `tests` section
 
-```yaml
+```recipe
 tests:
   - python:
       imports:
@@ -182,7 +182,7 @@ tests:
 
 If your package provides CLI tools, you can add command line tests:
 
-```yaml
+```recipe
 tests:
   - script:
       - example-cli --help
@@ -194,7 +194,7 @@ tests:
 A schema-free area for storing non-conda-specific metadata in standard YAML form.
 In conda-forge recipes, you have to add at least the `recipe-maintainers` field with the GitHub usernames of the maintainers:
 
-```yaml
+```recipe
 extra:
   recipe-maintainers:
     - LandoCalrissian

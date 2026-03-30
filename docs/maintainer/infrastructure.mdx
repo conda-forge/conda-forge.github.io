@@ -522,7 +522,7 @@ dependencies. For example, to depend on a C and C++ compilers, one would specify
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   build:
     - {{ compiler('c') }}
@@ -530,7 +530,7 @@ requirements:
     - {{ stdlib('c') }}
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - ${{ compiler('c') }}
@@ -552,14 +552,14 @@ a regular Rust package would use:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   build:
     - {{ compiler('rust') }}
     - {{ stdlib('c') }}
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - ${{ compiler('rust') }}

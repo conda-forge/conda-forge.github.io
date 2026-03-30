@@ -4,7 +4,7 @@ title: 'Rust packages'
 
 If you want to package a Rust package to conda-forge, you can use this recipe template:
 
-```yaml
+```recipe
 context:
   version: "0.1.0"
 
