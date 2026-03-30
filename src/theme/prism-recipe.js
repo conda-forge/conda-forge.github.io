@@ -45,6 +45,19 @@
       },
     },
 
+    multiline_v1_skip: {
+      pattern: /skip:(\n\s*-.*)+/,
+      alias: "atrule",
+      inside: {
+        selector: {
+          pattern: /(-).*/,
+          lookbehind: true,
+          inside: Prism.languages.jinja.jinja_tag.inside,
+        },
+        punctuation: /:|-/,
+      },
+    },
+
     v1_selector: {
       pattern: /(if|skip):.*/,
       alias: "atrule",
