@@ -81,6 +81,11 @@
             "type": "doc",
             "label": "Populate package dependencies",
             "id": "how-to/basics/populate-dependencies"
+          },
+          {
+            "type": "doc",
+            "label": "Use CMake",
+            "id": "how-to/basics/cmake"
           }
         ]
       },
@@ -114,8 +119,8 @@
           },
           {
             "type": "doc",
-            "label": "Self-hosted runners",
-            "id": "how-to/advanced/self-hosted-runners"
+            "label": "Move from autotools to CMake",
+            "id": "how-to/advanced/autotools-to-cmake"
           },
           {
             "type": "link",
@@ -131,6 +136,11 @@
             "type": "doc",
             "label": "Maintain several versions",
             "id": "how-to/advanced/several-versions"
+          },
+          {
+            "type": "doc",
+            "label": "Self-hosted runners",
+            "id": "how-to/advanced/self-hosted-runners"
           },
           {
             "type": "link",
