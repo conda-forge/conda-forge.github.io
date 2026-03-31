@@ -1,6 +1,6 @@
 # Github-hosted Actions Runners for `conda-forge`
 
-`conda-forge` is now able to enjoy extended concurrency limits for Github Actions, and thus we can finally use it as CI provider for package builds. To enable this functionality on Linux, rerender your feedstock with `conda-smithy` 3.57.0 or later. Windows and macOS still default to Azure for the time being (check [conda-forge.github.io#2771](https://github.com/conda-forge/conda-forge.github.io/issues/2771) for updates).
+`conda-forge` is now able to enjoy extended concurrency limits for Github Actions, and thus we can finally use it as CI provider for package builds. To enable this functionality on Linux, rerender your feedstock with `conda-smithy` 3.57.1 or later. Windows and macOS still default to Azure for the time being (check [conda-forge.github.io#2771](https://github.com/conda-forge/conda-forge.github.io/issues/2771) for updates).
 
 <!-- truncate -->
 
