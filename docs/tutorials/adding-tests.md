@@ -82,6 +82,14 @@ real consequence to us, it hints that the package can be tested using `pytest` (
 `pytest-cov` dependency here; it is a plugin used to report test coverage which we don't need; but
 including it would not be a big issue either).
 
+:::note
+
+More generally, packages may not include the necessary test files in the source distribution. If
+running the tests is desirable in these cases, you may need to use the GitHub source archive created
+for a tag, for example.
+
+:::
+
 To test our theory, we can create a new virtual environment with `pytest` installed, and try running
 them:
 
