@@ -14,13 +14,15 @@ Rerendering the feedstock after you modify this file is usually required and alw
 ## recipe/conda_build_config.yaml
 
 While most settings are configured via [`conda-forge.yml`](#conda-forgeyml-schema),
-some settings are defined in `recipe/conda_build_config.yaml`. Unlike the former, this file can take advantage of selectors to match specific job configurations (e.g. CPU vs. GPU jobs).
+some settings are defined in `recipe/conda_build_config.yaml`.
+Unlike the former, this file can take advantage of selectors to match specific job configurations (e.g. CPU vs. GPU jobs).
+
+Note that `conda_build_config.yaml` conventions specify that all values must be a list of strings, even if they only take one item.
+Multiple items are often only needed when filtering conditions with selectors.
 
 ### channel_sources
 
-List of strings.
-
-A comma-separated list of channels to use to install dependencies for the recipe.
+Each item must be a comma-separated list of channels to use to install dependencies for the recipe.
 Only `conda-forge` and its labels are supported.
 
 Example:
@@ -30,11 +32,14 @@ channel_sources:
   - conda-forge/label/A_rc,conda-forge
 ```
 
+[Search query for real-world examples](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Arecipe%2Fconda_build_config.yaml+channel_sources).
+
 ### channel_targets
 
-List of strings.
+The channel where the packages will be uploaded to, expressed as a space-separated `channel label` pair.
+Defaults to `["conda-forge main"]`.
 
-Each string must be space-separated channel, label pair.
+You only need to define this if you need to upload packages to a different label (e.g. RCs).
 
 Example:
 
@@ -43,9 +48,14 @@ channel_targets:
   - conda-forge A_rc
 ```
 
+[Search query for real-world examples](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Arecipe%2Fconda_build_config.yaml+channel_targets)
+
 ### github_actions_labels
 
-List of strings.
+Defines the value that will populate the `runs-on` field on Github Actions build workflows (e.g. `ubuntu-latest`).
+
+You can use it to configure custom runners on self-hosted infrastructure, or override the default Github-hosted runner / VM image.
+Refer to [conda-forge/admin-requests](https://github.com/conda-forge/admin-requests) for possible values.
 
 Each string must be one of:
 
@@ -67,6 +77,8 @@ github_actions_labels:
 # absent value for linux-aarch64 means it will use the default; same as:
 # - default  # [linux and aarch64]
 ```
+
+[Search query for real-world examples](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Arecipe%2Fconda_build_config.yaml+github_actions_labels)
 
 ## conda-forge.yml schema
 
