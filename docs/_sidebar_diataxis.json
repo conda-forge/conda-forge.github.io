@@ -127,6 +127,11 @@
             "id": "how-to/advanced/autotools-to-cmake"
           },
           {
+            "type": "doc",
+            "label": "Build on Windows",
+            "id": "how-to/advanced/windows-builds"
+          },
+          {
             "type": "link",
             "label": "Enable CUDA",
             "href": "/docs/maintainer/knowledge_base/#cuda-builds"
