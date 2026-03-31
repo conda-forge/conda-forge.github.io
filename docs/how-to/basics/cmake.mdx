@@ -1,0 +1,97 @@
+---
+tags: [howto, basic]
+---
+# Using CMake
+
+import { BuildScriptTabs } from "@site/src/components/RecipeTabs";
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+[CMake](https://cmake.org/) can be used to build more complex projects in `build.sh`
+or `bld.bat` scripts.
+
+If you are using CMake, be sure to make it a build requirement in the `build` section. You
+may also need to include `make` or `ninja` depending on your platform and build tools.
+On Windows, `nmake` can also be used, but that is not explicitly included.
+
+<RecipeTabs>
+
+```yaml
+requirements:
+  build:
+    - cmake
+    - ninja  # [win]
+    - make   # [not win]
+```
+
+```yaml
+requirements:
+  build:
+    - cmake
+    - if: win
+      then: ninja
+      else: make
+```
+
+</RecipeTabs>
+
+For CMake projects using the [FindPython](https://cmake.org/cmake/help/git-stage/module/FindPython.html)
+module, you can tell CMake which Python to use by passing `-DPython_EXECUTABLE="$PYTHON"`
+(macOS or Linux) or `-DPython_EXECUTABLE="%PYTHON%"` (Windows) as a command line option.
+Older CMake projects may require similar, but slightly different options.
+
+:::tip
+
+Don't forget that depending on which CMake module is used, you have to use a different option:
+
+- [FindPython](https://cmake.org/cmake/help/git-stage/module/FindPython.html):
+  `-DPython_EXECUTABLE=...`.
+- [FindPython3](https://cmake.org/cmake/help/git-stage/module/FindPython3.html):
+  `-DPython3_EXECUTABLE=...`.
+- [FindPython2](https://cmake.org/cmake/help/git-stage/module/FindPython2.html):
+  `-DPython2_EXECUTABLE=...`.
+
+or if you are still on the deprecated [FindPythonLibs](https://cmake.org/cmake/help/latest/module/FindPythonLibs.html): `-DPYTHON_EXECUTABLE=...`.
+
+:::
+
+Some optional, but useful CMake options:
+
+- `-DCMAKE_BUILD_TYPE=Release` Configure as release build. This is better done on the initial
+  `cmake` call as some packages construct different build configurations depending on this flag.
+- `-DCMAKE_INSTALL_PREFIX=$PREFIX` Specify the install location.
+- `-DCMAKE_INSTALL_LIBDIR=lib` Libraries will land in `$PREFIX/lib`. Sometimes projects install
+  into `lib64` or similar directories, but on conda-forge we keep libraries in plain `lib`.
+- `-DBUILD_SHARED_LIBS=ON` Instruct CMake to build shared libraries instead of static ones.
+- `-DCMAKE_FIND_FRAMEWORK=NEVER` and `-DCMAKE_FIND_APPBUNDLE=NEVER` Prevent CMake from using system-wide macOS packages.
+- `-G Ninja` Build the project using `ninja`.
+- `-B<directory>` and `-S<directory>` Specify the build and source directories, respectively.
+- `${CMAKE_ARGS}` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like [CUDA builds](/docs/maintainer/knowledge_base/#cuda-builds).
+
+:::warning
+
+As `${CMAKE_ARGS}` is a space separated list of options, it needs to be passed without
+quoting. Quoting it (`"${CMAKE_ARGS}"`) can lead to build errors as it makes the shell
+treat the contents of the variable as a single argument.
+
+:::
+
+Here are some basic commands for you to get started. These are dependent on your source
+code layout and aren't intended to be used "as is".
+
+<BuildScriptTabs>
+
+```bash
+cmake -S . -B build -G Ninja -DPython3_EXECUTABLE="$PYTHON" $CMAKE_ARGS
+cmake --build build --config Release
+```
+
+```batch
+cmake -S . -B build -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DPython3_EXECUTABLE="%PYTHON%" %CMAKE_ARGS%
+if errorlevel 1 exit /b 1
+cmake --build build --config Release
+if errorlevel 1 exit /b 1
+```
+
+</BuildScriptTabs>
+
+See also the `bld.bat` example in the [Particularities on Windows](/docs/maintainer/knowledge_base/#particularities-on-windows) section.

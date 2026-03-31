@@ -53,11 +53,6 @@ export const urls = {
       link: "https://www.githubstatus.com/",
       title: "GitHub",
     },
-    open_gpu_server: {
-      api: "https://conda-forge.herokuapp.com/status-monitor/open-gpu-server",
-      link: "https://ci-status.quansight.dev/",
-      title: "Open GPU Server",
-    },
     prefix_dev: {
       api: "https://status.prefix.dev/api/getMonitorDetails/status.conda-forge.org?m=798888560",
       link: "https://status.prefix.dev",
