@@ -20,7 +20,7 @@ Once merged, this will enable the requested self-hosted Github Actions runners f
 ## Configure your feedstock
 
 1. In `conda-forge.yml`, ensure that the `provider` setting for the required build platform is set to `github_actions`
-2. In `recipe/conda_build_config.yaml`, use [`github_actions_labels`](/docs/maintainer/conda_forge_yml.mdx#github_actions_labels) to configure the `runs-on` value needed for each platform, using selectors as needed.
+2. In `recipe/conda_build_config.yaml`, configure the [`github_actions_labels`](/docs/maintainer/conda_forge_yml.mdx#github_actions_labels) field to specify the `runs-on` value for each platform, using selectors as needed. The exact values depend on which runner type you requested and are listed in [conda-forge/admin-requests](https://github.com/conda-forge/admin-requests).
 
 :::note
 
