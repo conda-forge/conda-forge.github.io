@@ -1,5 +1,5 @@
 ---
-title: 'Particularities on Windows'
+title: 'Build packages on Windows'
 ---
 
 import { RecipeTabs } from "@site/src/components/RecipeTabs";
@@ -7,7 +7,7 @@ import { RecipeTabs } from "@site/src/components/RecipeTabs";
 <a id="particularities-on-windows"></a>
 
 This document presents conda-forge and conda-build information and examples
-while building on Windows.
+related to building on Windows.
 
 <a id="local-testing"></a>
 
@@ -15,7 +15,7 @@ while building on Windows.
 
 The first thing that you should know is that you can locally test Windows
 builds of your packages even if you don't own a Windows machine. Microsoft
-makes available free, official Windows virtual machines (VMs) [at this website](https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/). If you
+makes available free trial Windows virtual machines (VMs). If you
 are unfamiliar with VM systems or have trouble installing Microsoft's VMs, please
 use a general web search to explore — while these topics are beyond the
 scope of this documentation, there are ample discussions on them on the broader
@@ -146,7 +146,6 @@ if errorlevel 1 exit 1
 
 The following feedstocks are examples of this build structure deployed:
 
-- [libpng](https://github.com/conda-forge/libpng-feedstock/blob/main/recipe/build.bat)
 - [Pugixml](https://github.com/conda-forge/pugixml-feedstock/blob/main/recipe/bld.bat)
 
 <a id="building-for-different-vc-versions"></a>
@@ -252,7 +251,7 @@ Batch syntax is a bit different from Bash and friends on Unix, so we have collec
 - [SS64's CMD howto pages](https://ss64.com/nt/syntax.html) are the best resource for any kind of question regarding CMD/Batch syntax.
 - Search conda-forge for existing `.bat` scripts and learn with examples.
   See this [example query for all Batchfiles](https://github.com/search?q=org%3Aconda-forge+language%3ABatchfile&type=code&l=Batchfile).
-- You can [free trial Windows VMs from Microsoft](https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/).
+- You can get free trial Windows VMs from Microsoft.
   Set one up with your favorite virtualization solution to debug your CMD syntax.
   There are also some minimal emulators online that might get you started with the basics, even if not all CMD features are present.
   For example, this [Windows 95 emulator](https://www.pcjs.org/software/pcx86/sys/windows/win95/4.00.950/) features a more or less okay MS-DOS prompt.
