@@ -21,7 +21,6 @@ Once merged, this will enable the requested self-hosted Github Actions runners f
 
 1. In `conda-forge.yml`, ensure that the `provider` setting for the required build platform is set to `github_actions`
 2. In `recipe/conda_build_config.yaml`, use [`github_actions_labels`](/docs/maintainer/conda_forge_yml.mdx#github_actions_labels) to configure the `runs-on` value needed for each platform, using selectors as needed.
-3. Make sure that `github_actions_labels` is mentioned somewhere in the recipe file to make sure it participates in the rerender process.
 
 :::note
 
@@ -59,20 +58,7 @@ github_actions_labels:
 # - default  # [linux and aarch64]
 ```
 
-Ensure that this variable is used in the recipe with a dummy statement like:
-
-<RecipeTabs>
-
-```yaml
-{% set github_actions_labels = github_actions_labels %}
-```
-
-```yaml
-context:
-  github_actions_labels: ${{ github_actions_labels }}
-```
-
-</RecipeTabs>
+Then rerender.
 
 ## Real world examples
 
