@@ -82,12 +82,13 @@ real consequence to us, it hints that the package can be tested using `pytest` (
 `pytest-cov` dependency here; it is a plugin used to report test coverage which we don't need; but
 including it would not be a big issue either).
 
-To test our theory, we can create a new conda environment with `pytest` installed, and try running
+To test our theory, we can create a new virtual environment with `pytest` installed, and try running
 them:
 
 ```bash
-conda create -p ./test -y pytest
-conda activate ./test
+python -m venv ./test
+. test/bin/activate
+pip install pytest
 pytest tests/
 ```
 
