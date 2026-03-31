@@ -49,14 +49,14 @@ List of strings.
 
 Each string must be one of:
 
-- A non-empty string will be taken as is for the `runs-on` field(s) matching that selector.
+- A non-empty string that will be taken as is for the `runs-on` field(s) matching the selector for the respective item.
   Use this to configure self-hosted runners as needed. If the string contains the substring `gpu`,
   it may enable special behaviour on that platform (e.g. Docker GPU passthrough arguments).
 - A non-empty string that starts with `self-hosted@` will be dealt with in the same way, but:
     - The `self-hosted@` prefix will be removed.
     - Generic self-hosted labels will be appended to `runs-on`.
       This is needed in some providers that expect additional labels like `self-hosted` and `Linux`.
-      Other providers don't need it, and others fail with them.
+      Other providers either don't need it, or fail with these labels.
 - If absent or set to `default`, `runs-on` will use the pre-configured Github-hosted runner (e.g. `ubuntu-latest` for Linux x64).
 
 Example:
