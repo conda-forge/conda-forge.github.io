@@ -1,95 +1,6 @@
----
-title: 'Build packages on Windows'
----
-
 import { RecipeTabs } from "@site/src/components/RecipeTabs";
 
-<a id="particularities-on-windows"></a>
-
-This document presents conda-forge and conda-build information and examples
-related to building on Windows.
-
-<a id="local-testing"></a>
-
-## Local testing
-
-The first thing that you should know is that you can locally test Windows
-builds of your packages even if you don't own a Windows machine. Microsoft
-makes available free trial Windows virtual machines (VMs). If you
-are unfamiliar with VM systems or have trouble installing Microsoft's VMs, please
-use a general web search to explore — while these topics are beyond the
-scope of this documentation, there are ample discussions on them on the broader
-Internet.
-
-To bootstrap a conda environment and install `conda-build`, consider
-[miniforge](https://github.com/conda-forge/miniforge).
-
-<a id="executing-a-build"></a>
-
-### Executing a build
-
-The `build-locally.py` script does not support Windows (yet, PRs welcome!).
-You can use `conda build recipe/ -m .ci_support/choose_your_config.yaml` as
-a workaround for now.
-
-<a id="testing-a-local-build"></a>
-
-### Testing a local build
-
-Because we're using `conda-build` directly instead of `build-locally.py`,
-we can use the `local` channel:
-
-```default
-conda create -n my-new-env -c local my-package
-```
-
-<a id="testing-using-wine"></a>
-
-### Testing using wine
-
-Some degree of testing and debugging can also be performed without a Windows
-system, using [wine](https://www.winehq.org/).
-[miniforge](https://github.com/conda-forge/miniforge) works correctly
-in the wine's `cmd` shell, and can be used to create and run Conda environments.
-In fact, sometimes Wine is able to provide more insightful error messages,
-for example:
-
-```
-wine: Call from 00006FFFFFF999EA to unimplemented function libblas.dll.cdotc_, aborting
-```
-
-It may be necessary to manipulate the `WINEDEBUG` variable to obtain more
-debugging logs.
-
-<a id="debugging-dll-issues"></a>
-
-### Debugging DLL issues
-
-When debugging issues related to dynamically-linked libraries (DLLs) failing
-to load, the following tools can be helpful:
-
-- [Windows Debugger](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools)
-  can be used when debugging the dreaded "DLL load failed" errors. For example to debug a numpy import error:
-  - `"C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\gflags.exe" -i python.exe +sls`
-  - `"C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\cdb.exe" -logo log.txt -g -G -o -xn av python -c "import numpy"`
-    The log file saved in `log.txt` will display information about where the DLLs were loaded from,
-    which DLLs are missing and which symbols are missing from a DLL.
-
-- [Dependency Walker](https://www.dependencywalker.com/) can display a tree
-  diagram of all dependent modules.
-
-- [Dependencies](https://github.com/lucasg/Dependencies) is a more modern
-  replacement for Dependency Walker, with both console and GUI interface.
-  It also works better on Wine.
-
-- [dumpbin](https://learn.microsoft.com/en-us/cpp/build/reference/dumpbin-reference)
-  tool from MSVC can be used to obtain information about Windows binaries.
-  On Unix, [gendef](https://sourceforge.net/p/mingw-w64/wiki2/gendef)
-  tool can be used instead by installing the conda package.
-
-<a id="notes-on-native-code"></a>
-
-## Notes on native code
+# Compiling native code on Windows with MSVC
 
 In order to compile native code (C, C++, etc.) on Windows, you will need to
 install Microsoft's Visual C++ build tools on your VM. You must install
@@ -112,9 +23,7 @@ program. Once that's done, you can click the "Download" tab and search for
 
 If you need more information. Please refer [the Python wiki page on Windows compilers](https://wiki.python.org/moin/WindowsCompilers).
 
-<a id="simple-cmake-based-bld-bat"></a>
-
-### Simple CMake-Based `bld.bat`
+## Simple CMake-Based `bld.bat`
 
 Some projects provide hooks for CMake to build the project. The following
 example `bld.bat` file demonstrates how to build a traditional, out-of-core
@@ -150,7 +59,7 @@ The following feedstocks are examples of this build structure deployed:
 
 <a id="building-for-different-vc-versions"></a>
 
-### Versions of Microsoft Visual C++ (MSVC)
+## Versions of Microsoft Visual C++ (MSVC)
 
 Up until Visual Studio (VS) 2013, the MSVC compiler changed ABI on every major release,
 meaning packages that communicated through a C/C++ API had to be built with a consistent
@@ -216,7 +125,7 @@ requirements:
 
 <a id="using-vs2022"></a>
 
-### Using newer MSVC versions
+## Using newer MSVC versions
 
 Given that conda-forge is currently (June 2025) on the latest VS line, it's currently not possible
 to use even newer versions. However, we expect a new Visual Studio major version within the next year
@@ -234,24 +143,3 @@ cxx_compiler:  # [win]
 ```
 
 After making these changes don't forget to rerender with `conda-smithy` (to rerender manually use `conda smithy rerender` from the command line).
-
-<a id="cmd-batch-syntax"></a>
-
-<a id="tips-tricks-for-cmd-batch-syntax"></a>
-
-## Tips & tricks for CMD/Batch syntax
-
-Windows recipes rely on CMD/Batch scripts (`.bat`) by default.
-Batch syntax is a bit different from Bash and friends on Unix, so we have collected some tips here to help you get started if you are not familiar with this scripting language.
-
-- Check if you need to write a Batch script first!
-  Simple recipes might not need shell-specific code and can be written in an agnostic way.
-  Use the `build.script` item in `meta.yaml` (see [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#script)).
-  This item can take a string or a list of strings (one per line).
-- [SS64's CMD howto pages](https://ss64.com/nt/syntax.html) are the best resource for any kind of question regarding CMD/Batch syntax.
-- Search conda-forge for existing `.bat` scripts and learn with examples.
-  See this [example query for all Batchfiles](https://github.com/search?q=org%3Aconda-forge+language%3ABatchfile&type=code&l=Batchfile).
-- You can get free trial Windows VMs from Microsoft.
-  Set one up with your favorite virtualization solution to debug your CMD syntax.
-  There are also some minimal emulators online that might get you started with the basics, even if not all CMD features are present.
-  For example, this [Windows 95 emulator](https://www.pcjs.org/software/pcx86/sys/windows/win95/4.00.950/) features a more or less okay MS-DOS prompt.
