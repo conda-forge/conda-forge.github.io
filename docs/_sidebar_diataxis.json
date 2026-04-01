@@ -127,9 +127,29 @@
             "id": "how-to/advanced/autotools-to-cmake"
           },
           {
-            "type": "doc",
+            "type": "category",
             "label": "Building packages for Windows",
-            "id": "how-to/advanced/windows-builds"
+            "link": {
+              "type": "doc",
+              "id": "how-to/advanced/windows-builds"
+            },
+            "items": [
+              {
+                "type": "doc",
+                "label": "CMD/Batch scripting for Windows recipes",
+                "id": "how-to/advanced/windows/cmd-batch-syntax"
+              },
+              {
+                "type": "doc",
+                "label": "Testing and debugging Windows builds locally",
+                "id": "how-to/advanced/windows/local-testing"
+              },
+              {
+                "type": "doc",
+                "label": "Compiling native code on Windows with MSVC",
+                "id": "how-to/advanced/windows/notes-on-native-code"
+              }
+            ]
           },
           {
             "type": "link",
