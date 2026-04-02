@@ -24,7 +24,7 @@ However, they often require collaboration from the fork maintainer.
 
 If the goals of the fork are still closely aligned to these of the upstream package, the recommended course of action is to work towards merging the necessary changes upstream.
 In many cases, upstream package maintainers will happily transfer ownership or give permissions to contributors that are interested in continuing to maintain their package.
-Sometimes, the development moves to a new repository, but e.g. the PyPI project is transferred to a new owner.
+Sometimes, the development moves to a new repository, but the PyPI project is transferred to a new owner.
 This solution is preferable as it ensures the continuity of development and avoids the parallel existence of multiple divergent forks.
 
 ### Rebrand under a new name
@@ -91,7 +91,7 @@ For example, if the last pre-fork version was 1.3.0, and the fork continues the 
 
 A significant problem with mutually exclusive forks is that while a package's code may be compatible with multiple forks, its dependencies can specify only one of them.
 As a result, for different packages to be installable simultaneously, they must use the same fork of a given dependency.
-This may require deploying new forks consistently across different packages.
+This may require updating the dependencies across different packages simultaneously, or building multiple package variants with dependencies on different forks.
 
 ## Long-term risks from package forks
 
