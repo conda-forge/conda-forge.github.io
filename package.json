@@ -33,7 +33,7 @@
     "react": "^19.2.4",
     "react-chartjs-2": "^5.3.1",
     "react-dom": "^19.2.4",
-    "react-inlinesvg": "^4.2.0",
+    "react-inlinesvg": "^4.3.0",
     "react-markdown": "^10.1.0",
     "react-tooltip": "^5.30.0",
     "remark-gfm": "^4.0.1"
