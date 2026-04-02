@@ -74,7 +74,7 @@ As a last resort, if it is neither possible to get the fork merged upstream nor 
 This is usually done via prepending or appending the fork owner, or some distinguishing keyword to the package name.
 This is similar to how different packages that happened to use the same name are handled.
 
-For example, a fork updating `django-cryptography` package to support Django 5 was packaged as `django-cryptography-django5`. A fork of `ctypesgen` by `pypdfium2-team` was packaged as `ctypesgen-pypdfium2-team`.
+For example, a fork of `torch-radon` by `carterbox` was packaged as `carterbox-torch-radon`. This rule was not strictly observed while packaging the fork of `django-cryptography` with Django 5 support, as it was named `django-cryptography-django5`. A fork of `ctypesgen` by `pypdfium2-team` was packaged as `ctypesgen-pypdfium2-team`.
 
 These types of forks generally use the same filenames as the original packages, and therefore need constraints like [rebrands with file collisions](#rebrands-with-file-collisions).
 In some cases, particularly with user-facing programs, it may be preferable to rename the installed files downstream to avoid collisions.
