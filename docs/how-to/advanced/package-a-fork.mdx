@@ -18,14 +18,16 @@ The exact way of dealing with a fork depends on what kind of fork it is, and how
 This guide is focused on solutions that can be applied to specific kinds of forks.
 However, they often require collaboration from the fork maintainer.
 
-## Merge features upstream
+## Possible solutions
+
+### Merge features upstream
 
 If the goals of the fork are still closely aligned to these of the upstream package, the recommended course of action is to work towards merging the necessary changes upstream.
 In many cases, upstream package maintainers will happily transfer ownership or give permissions to contributors that are interested in continuing to maintain their package.
 Sometimes, the development moves to a new repository, but e.g. the PyPI project is transferred to a new owner.
 This solution is preferable as it ensures the continuity of development and avoids the parallel existence of multiple divergent forks.
 
-## Rebrand under a new name
+### Rebrand under a new name
 
 If the fork adds significant new functionality or changes the direction of the project, rebranding should be preferred.
 This makes the fork clearly distinguishable from the original package.
@@ -66,7 +68,7 @@ requirements:
 Such an approach risks creating unsolvable dependencies.
 For example, if two different packages require two different forks of the same dependency, it will not be possible to install both simulaneously.
 
-## Prepend the fork owner to the package name
+### Prepend the fork owner to the package name
 
 As a last resort, if it is neither possible to get the fork merged upstream nor rebranded properly, it is possible to rename the package downstream.
 This is usually done via prepending or appending the fork owner, or some distinguishing keyword to the package name.
@@ -77,7 +79,7 @@ For example, a fork updating `django-cryptography` package to support Django 5 w
 These types of forks generally use the same filenames as the original packages, and therefore need constraints like [rebrands with file collisions](#rebrands-with-file-collisions).
 In some cases, particularly with user-facing programs, it may be preferable to rename the installed files downstream to avoid collisions.
 
-## Replace the original package with a fork
+### Replace the original package with a fork
 
 In rare cases, it may be acceptable to switch to a fork without changing the package name.
 In particular, this can be done if the original package is clearly unmaintained for a long time and multiple other downstreams have already done that.
