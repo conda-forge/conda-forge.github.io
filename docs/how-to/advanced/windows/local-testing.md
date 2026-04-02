@@ -1,3 +1,7 @@
+---
+tags: [how-to, advanced, windows]
+---
+
 # Testing and debugging Windows builds locally
 
 The first thing that you should know is that you can locally test Windows

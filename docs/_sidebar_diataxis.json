@@ -131,7 +131,7 @@
             "label": "Building packages for Windows",
             "link": {
               "type": "doc",
-              "id": "how-to/advanced/windows-builds"
+              "id": "how-to/advanced/windows"
             },
             "items": [
               {

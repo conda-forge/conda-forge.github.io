@@ -1,3 +1,7 @@
+---
+tags: [how-to, advanced, windows]
+---
+
 # CMD/Batch scripting for Windows recipes
 
 Windows recipes rely on CMD/Batch scripts (`.bat`) by default.
