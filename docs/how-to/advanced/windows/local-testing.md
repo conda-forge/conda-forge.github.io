@@ -12,17 +12,8 @@ use a general web search to explore — while these topics are beyond the
 scope of this documentation, there are ample discussions on them on the broader
 Internet.
 
-To bootstrap a conda environment and install `conda-build`, consider
+To bootstrap a conda environment, consider
 [miniforge](https://github.com/conda-forge/miniforge).
-
-## Testing a local build
-
-Because we're using `conda-build` directly instead of `build-locally.py`,
-we can use the `local` channel:
-
-```default
-conda create -n my-new-env -c local my-package
-```
 
 ## Testing using wine
 
