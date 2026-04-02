@@ -25,7 +25,6 @@ export default function prismIncludeLanguages(PrismObject) {
   });
 
   // START conda-forge.github.io changes
-  require("prismjs/components/prism-markup-templating.js");
   require("./prism-recipe.js");
   // END conda-forge.github.io changes
 
