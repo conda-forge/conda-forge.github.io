@@ -1,3 +1,6 @@
+// Created npm run swizzle ... from
+// https://docusaurus.io/docs/markdown-features/code-blocks#supported-languages
+
 import siteConfig from "@generated/docusaurus.config";
 export default function prismIncludeLanguages(PrismObject) {
   const {
@@ -21,8 +24,10 @@ export default function prismIncludeLanguages(PrismObject) {
     require(`prismjs/components/prism-${lang}`);
   });
 
+  // START conda-forge.github.io changes
   require("prismjs/components/prism-markup-templating.js");
   require("./prism-recipe.js");
+  // END conda-forge.github.io changes
 
   // Clean up and eventually restore former globalThis.Prism object (if any)
   delete globalThis.Prism;
