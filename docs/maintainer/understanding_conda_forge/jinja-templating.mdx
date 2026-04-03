@@ -27,7 +27,7 @@ The values can either be scalars or lists.
 
 <RecipeTabs>
 
-```yaml
+```recipe
 {% set version = "3.7.3" %}
 
 package:
@@ -39,7 +39,7 @@ source:
   sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
 ```
 
-```yaml
+```recipe
 context:
   version: "3.7.3"
 
@@ -77,12 +77,12 @@ Expressions can be grouped using parentheses.
 
 <RecipeTabs>
 
-```yaml
+```recipe
 {% set build_base = 0 %}
 {% set build_number = build_base + 100 if mpi == "nompi" else build_base %}
 ```
 
-```yaml
+```recipe
 context:
   build_base: 0
   build_number: ${{ build_base + 100 if mpi == "nompi" else build_base }}
@@ -112,14 +112,14 @@ The full list of available filters depends on the recipe version:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 source:
   # for version 3.1.1, the filename becomes "openbabel-3-1-1.tar.gz"
   url: https://github.com/openbabel/openbabel/archive/openbabel-{{ version | replace('.','-') }}.tar.gz
   sha256: c97023ac6300d26176c97d4ef39957f06e68848d64f1a04b0b284ccff2744f02
 ```
 
-```yaml
+```recipe
 source:
   # for version 3.1.1, the filename becomes "openbabel-3-1-1.tar.gz"
   url: https://github.com/openbabel/openbabel/archive/openbabel-${{ version | replace('.','-') }}.tar.gz
@@ -136,7 +136,7 @@ This is specifically useful for Python versions (as a replacement for the `CONDA
 
 <RecipeTabs>
 
-```yaml
+```recipe
 build:
   number: {{ build_number }}
   # cuda_compiler_version = 12.9
@@ -145,7 +145,7 @@ build:
   string: cuda{{ cuda_compiler_version | replace('.', '') }}py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
 ```
 
-```yaml
+```recipe
 build:
   number: ${{ build_number }}
   # cuda_compiler_version = 12.9
@@ -164,7 +164,7 @@ For example, this can be used to conveniently construct a test skip filter for p
 
 <RecipeTabs>
 
-```yaml
+```recipe
 {% set tests_to_skip = [
     # skip test_url_is_accessible instead of hitting 20+ servers per run, since
     # each server might be occasionally unresponsive and end up failing our CI
@@ -182,7 +182,7 @@ test:
     - pytest {{ tests_to_skip | join(' OR ') }}
 ```
 
-```yaml
+```recipe
 context:
   tests_to_skip:
     # skip test_url_is_accessible instead of hitting 20+ servers per run, since
@@ -216,13 +216,13 @@ It is recommended to store the build number as a custom variable instead.
 
 <RecipeTabs>
 
-```yaml
+```recipe
 build:
   number: 0
   string: abc_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
 ```
 
-```yaml
+```recipe
 context:
   build_number: 0
 
@@ -261,7 +261,7 @@ In v0 recipes, an additional `py` variable is provided that exposes the Python v
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   build:
     - {{ compiler('c') }}
@@ -277,7 +277,7 @@ requirements:
     - onednn-cpu-threadpool             # [linux and x86_64]
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - ${{ compiler('c') }}
@@ -310,7 +310,7 @@ They can also be used to introduce conditional sections, to some degree.
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - openssl
@@ -322,7 +322,7 @@ requirements:
     - zlib
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - openssl
@@ -339,7 +339,7 @@ requirements:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 test:
   imports:
     - spam
@@ -352,7 +352,7 @@ test:
     - abi3audit %SP_DIR%/spam.pyd -s -v --assume-minimum-abi3 {{ python_min }}      # [win and is_abi3]
 ```
 
-```yaml
+```recipe
 tests:
   - python:
       imports:
@@ -383,7 +383,7 @@ The use of these functions is described in greater detail in [compilers and runt
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   build:
     - {{ compiler('c') }}
@@ -391,7 +391,7 @@ requirements:
     - {{ stdlib('c') }}
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - ${{ compiler('c') }}
@@ -408,7 +408,7 @@ It is commonly used to match against `python` versions, as a v1 recipe replaceme
 
 <RecipeTabs>
 
-```yaml
+```recipe
 build:
   skip: true  # [py<311]
 
@@ -417,7 +417,7 @@ requirements:
     - typing_extensions # [py<312]
 ```
 
-```yaml
+```recipe
 build:
   skip: match(python, "<3.11")
 
@@ -455,7 +455,7 @@ In v0 recipes, pin expressions can be specified using `min_pin` and `max_pin` ar
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - numpy
@@ -471,7 +471,7 @@ build:
     - {{ pin_subpackage('libopencv', max_pin='x.x.x') }}
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - numpy
@@ -496,13 +496,13 @@ If you need to pin on version without the build string, use an appropriately lon
 
 <RecipeTabs>
 
-```yaml
+```recipe
 build:
   run_exports:
     - {{ pin_subpackage('vtk-base', exact=true) }}
 ```
 
-```yaml
+```recipe
 requirements:
   run_exports:
     - ${{ pin_subpackage('vtk-base', exact=true) }}
@@ -517,7 +517,7 @@ CDTs are described in greater detail in [Core Dependency Tree Packages (CDTs)]/d
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   build:
     - {{ cdt('mesa-libgl-devel') }}  # [linux]
@@ -528,7 +528,7 @@ requirements:
     - {{ cdt('libxext') }}           # [linux]
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - if: linux
