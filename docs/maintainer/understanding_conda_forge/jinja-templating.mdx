@@ -78,7 +78,6 @@ Expressions can be grouped using parentheses.
 <RecipeTabs>
 
 ```yaml
-
 {% set build_base = 0 %}
 {% set build_number = build_base + 100 if mpi == "nompi" else build_base %}
 ```
@@ -166,7 +165,6 @@ For example, this can be used to conveniently construct a test skip filter for p
 <RecipeTabs>
 
 ```yaml
-
 {% set tests_to_skip = [
     # skip test_url_is_accessible instead of hitting 20+ servers per run, since
     # each server might be occasionally unresponsive and end up failing our CI
@@ -197,7 +195,6 @@ context:
     - KineticsTestCase
     - UCF101TestCase
 
-
 tests:
   - script:
       - pytest ${{ tests_to_skip | join(' OR ') }}
@@ -220,9 +217,6 @@ It is recommended to store the build number as a custom variable instead.
 <RecipeTabs>
 
 ```yaml
-
-
-
 build:
   number: 0
   string: abc_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
@@ -272,19 +266,14 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
-
     - {{ compiler('cuda') }}            # [cuda_compiler_version != "None"]
-
-
     - python                            # [build_platform != target_platform]
     - cross-python_{{ host_platform }}  # [build_platform != target_platform]
     - numpy                             # [build_platform != target_platform]
   host:
     - python
     - numpy
-
     - onednn                            # [(osx and x86_64) or linux]
-
     - onednn-cpu-threadpool             # [linux and x86_64]
 ```
 
@@ -326,7 +315,6 @@ requirements:
   host:
     - openssl
     {% if license_family == 'gpl' %}
-
     - x264
     - x265
     {% endif %}
@@ -353,12 +341,8 @@ requirements:
 
 ```yaml
 test:
-
   imports:
     - spam
-
-
-
   requires:
     - pip
     - abi3audit                      # [is_abi3]
@@ -431,7 +415,6 @@ build:
 requirements:
   host:
     - typing_extensions # [py<312]
-
 ```
 
 ```yaml
@@ -498,7 +481,6 @@ requirements:
     - ${{ pin_compatible('numpy', lower_bound='x.x', upper_bound='x') }}
     # if plotly 4.1.2 were installed, this would otuput >=4.1.2,<6.0
     - ${{ pin_compatible('plotly', upper_bound='6.0') }}
-
   run_exports:
     # pins to exact patch version
     - ${{ pin_subpackage('libopencv', upper_bound='x.x.x') }}
@@ -536,8 +518,6 @@ CDTs are described in greater detail in [Core Dependency Tree Packages (CDTs)]/d
 <RecipeTabs>
 
 ```yaml
-
-
 requirements:
   build:
     - {{ cdt('mesa-libgl-devel') }}  # [linux]
