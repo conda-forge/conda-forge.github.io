@@ -31,7 +31,7 @@ Pinning of packages are handled by the same configuration file and conda-build. 
 
 E.g.
 
-```yaml
+```recipe
 requirements:
   host:
     - gmp 6.1.*
@@ -41,7 +41,7 @@ requirements:
 
 Should be replaced by
 
-```yaml
+```recipe
 requirements:
   host:
     - gmp
@@ -56,7 +56,7 @@ The run-export mechanism (see below) additionally ensures the correct version co
 (corresponding to the expected API/ABI stability of `gmp`) are added, so a recipe with an
 unpinned `gmp` dependency in the host environment will, in the end, work as follows:
 
-```yaml
+```recipe
 requirements:
   host:
     - gmp {{ version_from_global_pinning }}.*
@@ -85,7 +85,7 @@ to run requirements.
 
 If you need to remove a pinning in rare cases like linking the package statically or if the package is used with `dlopen` instead of linking, then you can do,
 
-```yaml
+```recipe
 build:
   ignore_run_exports:
     - gmp

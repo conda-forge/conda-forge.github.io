@@ -527,13 +527,13 @@ Note that packages dependent on OpenGL and/or libGL should no longer use CDTs. I
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - libgl-devel  # [linux]
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - if: linux
@@ -556,13 +556,13 @@ Adding `numpy` in the `host:` section is sufficient to have a compatible NumPy v
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - numpy
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - numpy
@@ -574,13 +574,13 @@ At the time of writing (June 2025), the above is equivalent to the following:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - numpy 2.*
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - numpy 2.*
@@ -603,7 +603,7 @@ If the package you are building has a higher minimum requirement for numpy, plea
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     # leave this unpinned!
@@ -612,7 +612,7 @@ requirements:
     - numpy >={{ the_lower_bound_your_package_needs }}
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     # leave this unpinned!
@@ -636,7 +636,7 @@ an extension, the build should have the following `meta.yaml` snippet:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 build:
   noarch: python
 
@@ -651,7 +651,7 @@ requirements:
     - jupyterlab >=2
 ```
 
-```yaml
+```recipe
 build:
   noarch: python
 
@@ -730,13 +730,13 @@ In the recipe file:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - {{ mpi }}
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - ${{ mpi }}
@@ -770,7 +770,7 @@ and apply the appropriate conditionals in your build:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - {{ mpi }}  # [mpi != 'nompi']
@@ -778,7 +778,7 @@ requirements:
     - {{ mpi }}  # [mpi != 'nompi']
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - if: mpi != 'nompi'
@@ -819,7 +819,7 @@ Here is an example part of the recipe:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 {% set build = 0 %}
 
 {% if mpi == 'nompi' %}
@@ -843,7 +843,7 @@ build:
   string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
 ```
 
-```yaml
+```recipe
 context:
   build_base: 0
   build: ${{ build_base if mpi != 'nompi' else build_base + 100 }}
@@ -869,11 +869,11 @@ e.g. Python itself. If the package is built for multiple Python versions, use:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 string: "{{ mpi_prefix }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
 ```
 
-```yaml
+```recipe
 string: "${{ mpi_prefix }}_py${{ python | version_to_buildstring }}h${{ hash }}_${{ build }}"
 ```
 
@@ -903,14 +903,14 @@ given mpi provider requires running with that mpi:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 build:
   ...
   run_exports:
     - {{ name }} * {{ mpi_prefix }}_*  # [mpi != 'nompi']
 ```
 
-```yaml
+```recipe
 requirements:
   ...
   run_exports:
@@ -936,7 +936,7 @@ Combining all of the above, here is a complete recipe, with:
 
 This matches what is done in [hdf5](https://github.com/conda-forge/hdf5-feedstock/pull/90).
 
-```yaml title="recipe/conda_build_config.yaml"
+```recipe title="recipe/conda_build_config.yaml"
 mpi:
   - nompi
   - mpich  # [not win]
@@ -945,7 +945,7 @@ mpi:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 # meta.yaml
 {% set name = 'pkg' %}
 {% set build = 0 %}
@@ -984,7 +984,7 @@ requirements:
     - {{ mpi }}  # [mpi != 'nompi']
 ```
 
-```yaml
+```recipe
 context:
   build_base: 0
   build: ${{ build_base if mpi != 'nompi' else build_base + 100 }}
@@ -1017,7 +1017,7 @@ And then a package that depends on this one can explicitly pick the appropriate 
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - {{ mpi }}  # [mpi != 'nompi']
@@ -1028,7 +1028,7 @@ requirements:
     - pkg * mpi_{{ mpi }}_*  # [mpi != 'nompi']
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - if: mpi != 'nompi'
@@ -1062,7 +1062,7 @@ mpi:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - {{ mpi }}
@@ -1070,7 +1070,7 @@ requirements:
     - {{ mpi }}
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - ${{ mpi }}
@@ -1106,14 +1106,14 @@ to the defaults, though individual packages may require a different set:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - llvm-openmp  # [osx]
     - libgomp      # [linux]
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - if: osx
@@ -1188,7 +1188,7 @@ host of the recipe,
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - libblas
@@ -1197,7 +1197,7 @@ requirements:
     - liblapacke
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - libblas
@@ -1221,12 +1221,12 @@ At runtime, by default the following packages will be used.
 
 <RecipeTabs>
 
-```yaml
+```recipe
 - mkl        # [win]
 - openblas   # [not win]
 ```
 
-```yaml
+```recipe
 - if: win
   then: mkl
   else: openblas
@@ -1238,7 +1238,7 @@ If a package needs a specific implementation's internal API for more control you
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     # Keep mkl-devel here for pinning
@@ -1249,7 +1249,7 @@ requirements:
     - {{ blas_impl }}
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     # Keep mkl-devel here for pinning
@@ -1268,7 +1268,7 @@ a specific blas implementation,
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - openblas
@@ -1277,7 +1277,7 @@ requirements:
     - openblas
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - openblas
@@ -1369,7 +1369,7 @@ Before learning how to use it, please read these considerations:
 
 To implement microarchitecture-optimized builds in your feedstock, you'll end up with something like:
 
-```yaml title="recipe/conda_build_config.yaml"
+```recipe title="recipe/conda_build_config.yaml"
 microarch_level:
   - 1
   - 3  # [unix and x86_64]
@@ -1378,7 +1378,7 @@ microarch_level:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 # ...
 {% set build = 0 %}
 
@@ -1393,7 +1393,7 @@ requirements:
 # ...
 ```
 
-```yaml
+```recipe
 context:
   build: 0
 
@@ -1459,13 +1459,13 @@ To use this package in a build, put it in the host environment like so
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - pybind11-abi
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - pybind11-abi
@@ -1477,13 +1477,13 @@ or
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - swig-abi
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - swig-abi
@@ -1593,7 +1593,7 @@ All recipes employing `noarch: python` should usually use the `python_min` varia
 
 <RecipeTabs>
 
-```yaml
+```recipe
 name: package
 source:
   # ...
@@ -1614,7 +1614,7 @@ test:
     # ...
 ```
 
-```yaml
+```recipe
 name: package
 source:
   # ...
@@ -1648,11 +1648,11 @@ at the top of your recipe like this
 
 <RecipeTabs>
 
-```yaml
+```recipe
 {% set python_min = "3.10" %}
 ```
 
-```yaml
+```recipe
 context:
   python_min: "3.10"
 ```
@@ -1758,7 +1758,7 @@ it requires `windows-only-dependency`. You might have something like:
 
 <RecipeTabs>
 
-```yaml title="recipe/meta.yaml (original)"
+```recipe title="recipe/meta.yaml (original)"
 name: package
 source:
   # ...
@@ -1772,7 +1772,7 @@ requirements:
     - windows-only-dependency  # [win]
 ```
 
-```yaml title="recipe/recipe.yaml (original)"
+```recipe title="recipe/recipe.yaml (original)"
 name: package
 source:
   # ...
@@ -1795,7 +1795,7 @@ We can get it down to two outputs if replace it with this other approach!
 
 <RecipeTabs>
 
-```yaml title="recipe/meta.yaml (modified)"
+```recipe title="recipe/meta.yaml (modified)"
 name: package
 source:
   # ...
@@ -1814,7 +1814,7 @@ requirements:
     - windows-only-dependency  # [win]
 ```
 
-```yaml title="recipe/recipe.yaml (modified)"
+```recipe title="recipe/recipe.yaml (modified)"
 name: package
 source:
   # ...
@@ -1858,7 +1858,7 @@ If you need conditional dependencies on all three operating systems, this is how
 
 <RecipeTabs>
 
-```yaml
+```recipe
 name: package
 source:
   # ...
@@ -1878,7 +1878,7 @@ requirements:
     - windows-only-dependency  # [win]
 ```
 
-```yaml
+```recipe
 name: package
 source:
   # ...
@@ -1971,7 +1971,7 @@ Following implies that `python` is only a build dependency and no Python matrix 
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   build:
     - python
@@ -1979,7 +1979,7 @@ requirements:
     - some_other_package
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - python
@@ -1996,13 +1996,13 @@ Following implies that `python` is a runtime dependency and a Python matrix for 
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   host:
     - python
 ```
 
-```yaml
+```recipe
 requirements:
   host:
     - python
@@ -2034,7 +2034,7 @@ core team if this is something you think you need.
 
 To use a new SDK, add the following in `recipe/conda_build_config.yaml`
 
-```yaml title="recipe/conda_build_config.yaml"
+```recipe title="recipe/conda_build_config.yaml"
 # Please consult conda-forge/core before doing this
 MACOSX_SDK_VERSION:        # [osx and x86_64]
   - "15.5"                 # [osx and x86_64]
@@ -2047,7 +2047,7 @@ but with `11.0` as the deployment target.
 After increasing the SDK version, if you are getting an error that says that a function
 is available only for macOS x.x, then do the following in `recipe/conda_build_config.yaml`,
 
-```yaml title="recipe/conda_build_config.yaml"
+```recipe title="recipe/conda_build_config.yaml"
 # Please consult conda-forge/core before doing this
 c_stdlib_version:          # [osx and x86_64]
   - "12.0"                 # [osx and x86_64]
@@ -2060,13 +2060,13 @@ In the recipe file, add the following to ensure that the user's system is compat
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   build:
     - {{ stdlib("c") }}
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - ${{ stdlib("c") }}
@@ -2149,7 +2149,7 @@ There are two options for how to proceed:
 
     <RecipeTabs>
 
-    ```yaml
+    ```recipe
     build:
       # [...]
       script_env:
@@ -2157,7 +2157,7 @@ There are two options for how to proceed:
       script: "{{ PYTHON }} -m pip install . -vv"
     ```
 
-    ```yaml
+    ```recipe
     build:
       # [...]
       script:
@@ -2185,14 +2185,14 @@ put the following in your build section.
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - ${{ compiler('c') }}
@@ -2203,7 +2203,7 @@ requirements:
 
 and add the following to `recipe/conda_build_config.yaml`:
 
-```yaml title="recipe/conda_build_config.yaml"
+```recipe title="recipe/conda_build_config.yaml"
 c_stdlib_version:          # [linux]
   - "2.28"                 # [linux]
 ```
@@ -2269,14 +2269,14 @@ For now, you will have to add `nvcuda.dll` to the `missing_dso_whitelist`
 
 <RecipeTabs>
 
-```yaml
+```recipe
 build:
   ...
   missing_dso_whitelist:
     - "*/nvcuda.dll"   # [win]
 ```
 
-```yaml
+```recipe
 build:
   ...
   dynamic_linking:
@@ -2481,7 +2481,7 @@ When packaging from a specific commit, always pin the source using `rev:` with
 the full commit hash rather than a branch name. This ensures reproducible
 builds.
 
-```yaml title="recipe.yaml"
+```recipe title="recipe.yaml"
 context:
   version: "0.0.0.2026.01.22"
 

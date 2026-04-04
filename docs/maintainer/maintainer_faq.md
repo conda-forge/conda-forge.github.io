@@ -133,7 +133,7 @@ ImportError: libGL.so.1: cannot open shared object file: No such file or directo
 
 If you saw this error while building a package in your feedstock, add the Linux host dependency `libgl-devel`, provided by the [libglvnd-feedstock](https://github.com/conda-forge/libglvnd-feedstock).
 
-```yaml
+```recipe
 requirements:
   host:
     - libgl-devel  # [linux]
@@ -164,7 +164,7 @@ Available platform plugins are: eglfs, minimal, minimalegl, offscreen, vnc, webg
 This comes from the CI environment being headless and can be fixed by adding the `QT_QPA_PLATFORM=offscreen` [environment variable](https://docs.conda.io/projects/conda-build/en/stable/user-guide/environment-variables.html#inherited-environment-variables).
 The variable can either be added directly to the test command or provided in the [meta.yaml](../adding_pkgs#the-recipe-recipeyaml-or-metayaml) like so:
 
-```yaml
+```recipe
 build:
   script_env:
     - QT_QPA_PLATFORM=offscreen

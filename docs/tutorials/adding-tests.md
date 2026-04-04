@@ -28,7 +28,7 @@ cd xmltodict-feedstock/
 If you looked at `recipe/recipe.yaml`, you'd notice that the recipe is using the source distribution
 from PyPI to build the package:
 
-```yaml
+```recipe
 schema_version: 1
 
 context:
@@ -121,7 +121,7 @@ tests/test_xmltodict.py ...............................................  [100%]
 Now that we know what to do, let's translate that into the recipe. Open `recipe/recipe.yaml` and
 look at the existing `tests` section:
 
-```yaml
+```recipe
 tests:
   - python:
       imports:
@@ -136,7 +136,7 @@ script-based, that will run our test suite.
 
 Add the following to the `tests:` section:
 
-```yaml
+```recipe
   - requirements:
       run:
         - pytest
@@ -166,7 +166,7 @@ previous set.
 
 The build number can be found in the `build:` section:
 
-```yaml
+```recipe
 build:
   number: 0
   noarch: python
@@ -175,7 +175,7 @@ build:
 
 Increase it by one, making it:
 
-```yaml
+```recipe
 build:
   number: 1
   noarch: python

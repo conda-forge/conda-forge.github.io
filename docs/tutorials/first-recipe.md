@@ -80,14 +80,14 @@ Now is a good opportunity to take a look at the recipe file we've obtained. Open
 `recipes/pylast/recipe.yaml` in your favorite text editor. We will go over the YAML file section by
 section:
 
-```yaml
+```recipe
 schema_version: 1
 ```
 
 This preamble indicates that this is a v1 recipe. It will always be present on top of the v1 recipe
 files.
 
-```yaml
+```recipe
 context:
   version: 7.0.1
   python_min: 3.10
@@ -99,7 +99,7 @@ the minimal Python version required by it, per [CFEP 25](https://github.com/cond
 By defining them here, we can easily update the values
 in the future without having to modify multiple sites where they are used.
 
-```yaml
+```recipe
 package:
   name: pylast
   version: ${{ version }}
@@ -108,7 +108,7 @@ package:
 This section specifies the name and version for the package that is built from this recipe. Note
 that we're using the `version` variable that was defined earlier.
 
-```yaml
+```recipe
 source:
   url: https://pypi.org/packages/source/p/pylast/pylast-${{ version }}.tar.gz
   sha256: 319251236ba5c3e907232aacf1d6a7ff831f2243e85ace6ec6623a552ec2e0eb
@@ -118,7 +118,7 @@ This section specifies how to download the source distribution to build. It spec
 SHA256 hash that is used to verify its authenticity. The `version` variable is used again here; when
 you change the version, you won't have to update both the package version and the URL.
 
-```yaml
+```recipe
 build:
   number: 0
   noarch: python
@@ -138,7 +138,7 @@ Here, three important bits of information are specified:
    `--no-build-isolation` to make the build use our build environment rather than creating a new
    one.
 
-```yaml
+```recipe
 requirements:
   host:
     - python ${{ python_min }}.*
@@ -157,7 +157,7 @@ consistently across the file. Note that while we permit running the software aga
 no older than `python_min`, we deliberately build it using the oldest supported version to ensure
 that it will work with it.
 
-```yaml
+```recipe
 tests:
   - python:
       imports:
@@ -171,7 +171,7 @@ testing expected of Python package: checking if `pylast` can be imported success
 `pip check` to verify that the needed dependencies were installed. The testing is also done using
 the oldest Python version, to ensure that the compatibility with it remains tested.
 
-```yaml
+```recipe
 about:
   summary: A Python interface to Last.fm and Libre.fm
   license: Apache-2.0
@@ -186,7 +186,7 @@ The `about` section provides additional package information. Notably, it include
 description, its license information along with a list of files containing the license inside the
 source archive, and the homepage and repository URLs.
 
-```yaml
+```recipe
 extra:
   recipe-maintainers:
     - your-name
