@@ -42,7 +42,6 @@ cd build
 
 :: Configure using the CMakeFiles
 cmake -G "NMake Makefiles" ^
-      -DCMAKE_BUILD_TYPE:STRING=Release ^
       %CMAKE_ARGS% ^
       ..
 if errorlevel 1 exit 1
