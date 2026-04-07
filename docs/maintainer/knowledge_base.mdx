@@ -2,6 +2,9 @@
 title: 'Knowledge Base'
 ---
 
+import { BuildScriptTabs } from "@site/src/components/RecipeTabs";
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
 <a id="knowledge-base"></a>
 
 # Knowledge Base
@@ -13,17 +16,20 @@ There are a couple tricks you can use to make the most out of your searches.
 
 - Limit the search to `org:conda-forge`.
 - Limit the path to the type of file you want. This usually means:
-  - `path:meta.yaml` for the main metadata file.
+  - `path:meta.yaml` for v0 recipes.
+  - `path:recipe.yaml` for v1 recipes.
   - `path:recipe/*.sh` for Unix build scripts.
   - `path:recipe/*.bat` for Windows build scripts.
 
 That's it, with those two modifiers, you can get a lot done! Some examples include:
 
-- [All `noarch: python` recipes](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22noarch%3A+python%22).
-- Recipes that depend on... [`cuda`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22-+cuda%22), [`pytorch`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22-+pytorch%22), [`__virtual` packages](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%2F-+__%5CS%2B%2F), etc.
+- [All `noarch: python` v0 recipes](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22noarch%3A+python%22).
+- [All `noarch: python` v1 recipes](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Arecipe.yaml+%22noarch%3A+python%22).
+- Recipes that depend on... [`cuda`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+OR+path%3Arecipe.yaml+%22-+cuda%22), [`pytorch`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+OR+path%3Arecipe.yaml+%22-+pytorch%22), [`__virtual` packages](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+OR+path%3Arecipe.yaml+%2F-+__%5CS%2B%2F), etc.
 - [Scripts that use CMake on Unix](https://github.com/search?type=code&q=org%3Aconda-forge+cmake+path%3Arecipe%2F*.sh).
 - [Scripts that use CMake on Windows](https://github.com/search?type=code&q=org%3Aconda-forge+cmake+path%3Arecipe%2F*.bat).
-- [Recipes that use cross-compilation](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22target_platform+%21%3D+build_platform%22+OR+%22build_platform+%21%3D+target_platform%22).
+- [v0 recipes with cross-compilation conditions](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22target_platform+%21%3D+build_platform%22+OR+%22build_platform+%21%3D+target_platform%22).
+- [v1 recipes with cross-compilation conditions](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Arecipe.yaml+build_platform).
 
 :::tip Configure your browser to have a search shortcut
 
@@ -40,107 +46,7 @@ And with that you can simply type `cf your-search-here` for super fast queries!
 
 ## Using CMake
 
-[CMake](https://cmake.org/) can be used to build more complex projects in `build.sh`
-or `bld.bat` scripts.
-
-If you are using cmake, be sure to make it a build requirement in the `build` section. You
-may also need to include `make` or `ninja` depending on your platform and build tools.
-On Windows, you can also use `nmake` to build, but that does not need to be explicitly included.
-
-```yaml
-requirements:
-  build:
-    - cmake
-    - make  # [not win]
-    - ninja  # [win]
-```
-
-For CMake projects using the [FindPython](https://cmake.org/cmake/help/git-stage/module/FindPython.html)
-module, you can tell CMake which Python to use by passing `-DPython_EXECUTABLE="$PYTHON"`
-(macOS or Linux) or `-DPython_EXECUTABLE="%PYTHON%"` (Windows) as a command line option.
-Older CMake projects may require similar, but slightly different options.
-
-:::tip
-
-Don't forget that depending on which CMake module you use you have to use a different command:
-
-- [FindPython](https://cmake.org/cmake/help/git-stage/module/FindPython.html):
-  `-DPython_EXECUTABLE=...`.
-- [FindPython3](https://cmake.org/cmake/help/git-stage/module/FindPython3.html):
-  `-DPython3_EXECUTABLE=...`.
-- [FindPython2](https://cmake.org/cmake/help/git-stage/module/FindPython2.html):
-  `-DPython2_EXECUTABLE=...`.
-
-or if you are still on the deprecated [FindPythonLibs](https://cmake.org/cmake/help/latest/module/FindPythonLibs.html): `-DPYTHON_EXECUTABLE=...`.
-
-:::
-
-Some optional, but useful CMake options:
-
-- `-DCMAKE_BUILD_TYPE=Release` Configure as release build. This is better done on the initial
-  `cmake` call as some packages construct different build configurations depending on this flag.
-- `-DCMAKE_INSTALL_PREFIX=$PREFIX` Specify the install location.
-- `-DCMAKE_INSTALL_LIBDIR=lib` Libraries will land in $PREFIX/lib, sometimes projects install
-  into lib64 or similar but on conda-forge we keep shared libraries in simply lib.
-- `-DBUILD_SHARED_LIBS=ON` Instruct CMake to build shared libraries instead of static ones.
-- `-DCMAKE_FIND_FRAMEWORK=NEVER` and `-DCMAKE_FIND_APPBUNDLE=NEVER` Prevent CMake from using system-wide macOS packages.
-- `${CMAKE_ARGS}` Add variables defined by conda-forge internally. This is required to enable various conda-forge enhancements, like [CUDA builds](#cuda).
-
-:::warning
-
-As `${CMAKE_ARGS}` is a space separated list of options, quoting `${CMAKE_ARGS}`
-(`"${CMAKE_ARGS}"`) in recipes can lead to build errors as quoting makes the shell
-treat the contents of the variable as a single argument.
-
-:::
-
-Here are some basic commands for you to get started. These are dependent on your source
-code layout and aren't intended to be used "as is".
-
-**CMake lines for build.sh (macOS/Linux):**
-
-```default
-cmake CMakeLists.txt -DPython3_EXECUTABLE="$PYTHON"
-cmake --build . --config Release
-```
-
-**CMake lines for bld.bat (Windows):**
-
-```default
-cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DPython3_EXECUTABLE="%PYTHON%"
-if errorlevel 1 exit /b 1
-cmake --build . --config Release
-if errorlevel 1 exit /b 1
-```
-
-See also the `bld.bat` in the Windows section below for an additional example.
-
-Other useful `cmake` options are `-B<directory>` and `-S<directory>` to specify build and source
-directories.
-
-<a id="moving-from-an-autotools-build-to-a-cmake-build"></a>
-
-### Moving from an autotools build to a CMake build
-
-Some packages maintain an autotools build and a cmake build. Some maintainers
-would like to switch to a cmake build because that provides windows builds
-easily. These builds are mostly not ABI compatible with each other.
-Here are some things you should check,
-
-1. Check that both libraries have the same SONAME on linux
-
-   Run `readelf -d /path/to/lib.so`
-
-2. Check that both libraries have the same install name and have the same
-   compatibility and current versions.
-
-   Run `otool -L /path/to/lib.dylib`. The second line should give you
-   the three pieces of information
-
-3. Check that the file list is the same in both.
-4. Check that you use the same options as the same autoconf build.
-5. Check that the symbols exported are the same.
-6. Check that additional packaging information stays the same, e.g. is the same pkg-config information provided.
+Please refer to [How-to > Basics > Use CMake](/docs/how-to/basics/cmake/) and [How-to > Advanced > Move from autotools to CMake](/docs/how-to/advanced/autotools-to-cmake/).
 
 <a id="particularities-on-windows"></a>
 
@@ -260,9 +166,7 @@ Some projects provide hooks for CMake to build the project. The following
 example `bld.bat` file demonstrates how to build a traditional, out-of-core
 build for such projects.
 
-**CMake-based bld.bat:**
-
-```batch
+```batch title="CMake-based bld.bat"
 setlocal EnableDelayedExpansion
 
 :: Make a build folder and change to it.
@@ -333,6 +237,8 @@ If the day ever comes where MSVC breaks the ABI again (codename "vNext"), then w
 all compiled packages in conda-forge on windows. After such a migration has taken place, you can then
 choose to skip building for one or the other by using `vc` in a selector, e.g.
 
+<RecipeTabs>
+
 ```yaml
 build:
     # to demonstrate mechanism: only build vNext
@@ -342,6 +248,18 @@ requirements:
   build:
     - {{ compiler('cxx') }}
 ```
+
+```yaml
+build:
+    # to demonstrate mechanism: only build vNext
+    skip: win and vc<15
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+```
+
+</RecipeTabs>
 
 <a id="using-vs2022"></a>
 
@@ -354,7 +272,7 @@ it will be possible to opt into newer compilers (e.g. for C++23 support) as foll
 
 In `recipe/conda_build_config.yaml` file:
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 # note: future VS version is speculative!
 c_compiler:    # [win]
 - vs2026       # [win]
@@ -512,7 +430,7 @@ and `linux-aarch64` are not natively supported by Azure, so
 `conda-smithy` will add QEMU steps to emulate it. However, `linux-64` is
 natively supported by Azure, so no emulation is needed.
 
-```yaml
+```yaml title="conda-forge.yml"
 provider:
   linux_aarch64: azure
   linux_ppc64le: azure
@@ -529,7 +447,7 @@ For a new version, please file an issue on that feedstock.
 
 To enable the rust nightly compiler in your feedstock, follow the section above and then add the `rust_dev` channel in the `conda_build_config.yaml` file:
 
-```yaml
+```yaml title="conda-forge.yml"
 channel_sources:
   - conda-forge/label/rust_dev,conda-forge
 ```
@@ -540,7 +458,7 @@ channel_sources:
 
 ### Core Dependency Tree Packages (CDTs)
 
-Dependencies outside of the `conda-forge` channel should be avoided (see [Avoid external dependencies](adding_pkgs.md#no-external-deps)).
+Dependencies outside of the `conda-forge` channel should be avoided (see [Avoid external dependencies](../adding_pkgs#avoid-external-dependencies)).
 However, there are a few exceptions:
 
 Some dependencies are so close to the system that they are not packaged with conda-forge.
@@ -607,11 +525,22 @@ practice has been deprecated). To add a new CDT, make a PR on the
 
 Note that packages dependent on OpenGL and/or libGL should no longer use CDTs. Instead, use the host dependency `libgl-devel` from the [libglvnd-feedstock](https://github.com/conda-forge/libglvnd-feedstock).
 
-```yaml
+<RecipeTabs>
+
+```recipe
 requirements:
   host:
     - libgl-devel  # [linux]
 ```
+
+```recipe
+requirements:
+  host:
+    - if: linux
+      then: libgl-devel
+```
+
+</RecipeTabs>
 
 Other OpenGL API variants such as `libegl-devel`, `libgles-devel`, `libglx-devel`, and `libopengl-devel` are also available, and will automatically add non-development `run_exports` dependencies.
 
@@ -625,17 +554,39 @@ Finding `numpy.get_include()` in `setup.py` or `cimport` statements in `.pyx` or
 
 Adding `numpy` in the `host:` section is sufficient to have a compatible NumPy version at run time:
 
-```yaml
-host:
-  - numpy
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - numpy
 ```
+
+```recipe
+requirements:
+  host:
+    - numpy
+```
+
+</RecipeTabs>
 
 At the time of writing (June 2025), the above is equivalent to the following:
 
-```yaml title="recipe/conda_build_config.yaml"
-host:
-  - numpy 2.*
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - numpy 2.*
 ```
+
+```recipe
+requirements:
+  host:
+    - numpy 2.*
+```
+
+</RecipeTabs>
 
 See the pinning repository for
 [what the pinning corresponds to](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml) at any given time.
@@ -650,13 +601,27 @@ run-export, which is:
 
 If the package you are building has a higher minimum requirement for numpy, please add this under `run`:
 
-```yaml
-host:
-  # leave this unpinned!
-  - numpy
-run:
-  - numpy >={{ the_lower_bound_your_package_needs }}
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    # leave this unpinned!
+    - numpy
+  run:
+    - numpy >={{ the_lower_bound_your_package_needs }}
 ```
+
+```recipe
+requirements:
+  host:
+    # leave this unpinned!
+    - numpy
+  run:
+    - numpy >=${{ the_lower_bound_your_package_needs }}
+```
+
+</RecipeTabs>
 
 <a id="jupyterlab-extension"></a>
 
@@ -669,10 +634,11 @@ These should be packaged together, to prevent node from being needing to
 grab the JavaScript side of the package on the user's machine. To package
 an extension, the build should have the following `meta.yaml` snippet:
 
-```yaml
+<RecipeTabs>
+
+```recipe
 build:
   noarch: python
-
 
 requirements:
   host:
@@ -685,9 +651,26 @@ requirements:
     - jupyterlab >=2
 ```
 
+```recipe
+build:
+  noarch: python
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - nodejs
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - nodejs
+    - jupyterlab >=2
+```
+
+</RecipeTabs>
+
 Please use the following `build.sh` script in your recipe:
 
-```bash
+```bash title="recipe/build.sh"
 #!/usr/bin/env bash
 set -ex
 
@@ -737,19 +720,29 @@ for details.
 
 In conda_build_config.yaml:
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 mpi:
   - mpich
   - openmpi
 ```
 
-In meta.yaml:
+In the recipe file:
 
-```yaml
+<RecipeTabs>
+
+```recipe
 requirements:
   host:
     - {{ mpi }}
 ```
+
+```recipe
+requirements:
+  host:
+    - ${{ mpi }}
+```
+
+</RecipeTabs>
 
 And rerender with:
 
@@ -766,7 +759,7 @@ to produce the build matrices.
 Some packages (e.g. hdf5) may want a no-mpi build, in addition to the mpi builds.
 To do this, add nompi to the mpi matrix:
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 mpi:
   - nompi
   - mpich
@@ -775,13 +768,27 @@ mpi:
 
 and apply the appropriate conditionals in your build:
 
-```yaml
+<RecipeTabs>
+
+```recipe
 requirements:
   host:
     - {{ mpi }}  # [mpi != 'nompi']
   run:
     - {{ mpi }}  # [mpi != 'nompi']
 ```
+
+```recipe
+requirements:
+  host:
+    - if: mpi != 'nompi'
+      then: ${{ mpi }}
+  run:
+    - if: mpi != 'nompi'
+      then: ${{ mpi }}
+```
+
+</RecipeTabs>
 
 <a id="preferring-a-provider-usually-nompi"></a>
 
@@ -808,9 +815,13 @@ parallel hdf5 yet. This works fine, though some features may not be available).
 Typically, if there is a preference it will be for the serial build, such that installers/requirers of the package
 only get the mpi build if explicitly requested. We use a higher build number for the `nompi` variant in this case.
 
-Here is an example build section:
+Here is an example part of the recipe:
 
-```yaml
+<RecipeTabs>
+
+```recipe
+{% set build = 0 %}
+
 {% if mpi == 'nompi' %}
 # prioritize nompi variant via build number
 {% set build = build + 100 %}
@@ -832,15 +843,41 @@ build:
   string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
 ```
 
+```recipe
+context:
+  build_base: 0
+  build: ${{ build_base if mpi != 'nompi' else build_base + 100 }}
+  # add build string so packages can depend on
+  # mpi or nompi variants explicitly:
+  # `pkg * mpi_mpich_*` for mpich
+  # `pkg * mpi_*` for any mpi
+  # `pkg * nompi_*` for no mpi
+  mpi_prefix: ${{ 'mpi_' + mpi if mpi != 'nompi' else 'nompi' }}
+
+build:
+  number: ${{ build }}
+  string: ${{ mpi_prefix }}_h${{ hash }}_${{ build }}
+```
+
+</RecipeTabs>
+
 :::note
 
-`{{ PKG_HASH }}` avoids build string collisions on _most_ variants,
+Variant hash avoids build string collisions on _most_ variants,
 but not on packages that are excluded from the default build string,
 e.g. Python itself. If the package is built for multiple Python versions, use:
 
-```yaml
+<RecipeTabs>
+
+```recipe
 string: "{{ mpi_prefix }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
 ```
+
+```recipe
+string: "${{ mpi_prefix }}_py${{ python | version_to_buildstring }}h${{ hash }}_${{ build }}"
+```
+
+</RecipeTabs>
 
 as seen in [mpi4py](https://github.com/conda-forge/h5py-feedstock/pull/49/commits/b08ee9307d16864e775f1a7f9dd10f25c83b5974)
 
@@ -864,14 +901,24 @@ If building with this library creates a runtime dependency on the variant, the b
 For example, if building against the nompi variant will work with any installed version, but building with a
 given mpi provider requires running with that mpi:
 
-```yaml
+<RecipeTabs>
+
+```recipe
 build:
   ...
-  {% if mpi != 'nompi' %}
   run_exports:
-    - {{ name }} * {{ mpi_prefix }}_*
-  {% endif %}
+    - {{ name }} * {{ mpi_prefix }}_*  # [mpi != 'nompi']
 ```
+
+```recipe
+requirements:
+  ...
+  run_exports:
+    - if: mpi != 'nompi'
+      then: ${{ name }} * ${{ mpi_prefix }}_*
+```
+
+</RecipeTabs>
 
 Remove the `if mpi...` condition if all variants should create a strict runtime dependency based on the variant
 chosen at build time (i.e. if the nompi build cannot be run against the mpich build).
@@ -889,15 +936,16 @@ Combining all of the above, here is a complete recipe, with:
 
 This matches what is done in [hdf5](https://github.com/conda-forge/hdf5-feedstock/pull/90).
 
-```yaml
-# conda_build_config.yaml
+```recipe title="recipe/conda_build_config.yaml"
 mpi:
   - nompi
   - mpich  # [not win]
   - openmpi  # [not win]
 ```
 
-```yaml
+<RecipeTabs>
+
+```recipe
 # meta.yaml
 {% set name = 'pkg' %}
 {% set build = 0 %}
@@ -926,10 +974,8 @@ build:
   {% endif %}
   string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
 
-  {% if mpi != 'nompi' %}
   run_exports:
-    - {{ name }} * {{ mpi_prefix }}_*
-  {% endif %}
+    - {{ name }} * {{ mpi_prefix }}_*  # [mpi != 'nompi']
 
 requirements:
   host:
@@ -938,11 +984,40 @@ requirements:
     - {{ mpi }}  # [mpi != 'nompi']
 ```
 
+```recipe
+context:
+  build_base: 0
+  build: ${{ build_base if mpi != 'nompi' else build_base + 100 }}
+  # add build string so packages can depend on
+  # mpi or nompi variants explicitly:
+  # `pkg * mpi_mpich_*` for mpich
+  # `pkg * mpi_*` for any mpi
+  # `pkg * nompi_*` for no mpi
+  mpi_prefix: ${{ 'mpi_' + mpi if mpi != 'nompi' else 'nompi' }}
+
+build:
+  number: ${{ build }}
+  string: ${{ mpi_prefix }}_h${{ hash }}_${{ build }}
+
+requirements:
+  host:
+    - if: mpi != 'nompi'
+      then: ${{ mpi }}
+  run:
+    - if: mpi != 'nompi'
+      then: ${{ mpi }}
+  run_exports:
+    - if: mpi != 'nompi'
+      then: ${{ name }} * ${{ mpi_prefix }}_*
+```
+
+</RecipeTabs>
+
 And then a package that depends on this one can explicitly pick the appropriate mpi builds:
 
-```yaml
-# meta.yaml
+<RecipeTabs>
 
+```recipe
 requirements:
   host:
     - {{ mpi }}  # [mpi != 'nompi']
@@ -953,6 +1028,23 @@ requirements:
     - pkg * mpi_{{ mpi }}_*  # [mpi != 'nompi']
 ```
 
+```recipe
+requirements:
+  host:
+    - if: mpi != 'nompi'
+      then:
+        - ${{ mpi }}
+        - pkg * mpi_${{ mpi }}_*
+    - pkg
+  run:
+    - if: mpi != 'nompi'
+      then:
+        - ${{ mpi }}
+        - pkg * mpi_${{ mpi }}_*
+```
+
+</RecipeTabs>
+
 mpi-metapackage exclusivity allows `mpi_*` to resolve the same as `mpi_{{ mpi }}_*`
 if `{{ mpi }}` is also a direct dependency, though it's probably nicer to be explicit.
 
@@ -962,21 +1054,31 @@ if `{{ mpi }}` is also a direct dependency, though it's probably nicer to be exp
 
 Without a preferred `nompi` variant, recipes that require mpi are much simpler. This is all that is needed:
 
-```yaml
-# conda_build_config.yaml
+```yaml title="recipe/conda_build_config.yaml"
 mpi:
   - mpich
   - openmpi
 ```
 
-```yaml
-# meta.yaml
+<RecipeTabs>
+
+```recipe
 requirements:
   host:
     - {{ mpi }}
   run:
     - {{ mpi }}
 ```
+
+```recipe
+requirements:
+  host:
+    - ${{ mpi }}
+  run:
+    - ${{ mpi }}
+```
+
+</RecipeTabs>
 
 <a id="mpi-compiler-packages"></a>
 
@@ -1002,13 +1104,25 @@ When packages are built against `libgomp`, it is possible to use both `libgomp` 
 Dependencies on OpenMP providers belong in the `host` section of recipe dependencies. The following snippet corresponds
 to the defaults, though individual packages may require a different set:
 
-```yaml
-# meta.yaml
+<RecipeTabs>
+
+```recipe
 requirements:
   host:
     - llvm-openmp  # [osx]
     - libgomp      # [linux]
 ```
+
+```recipe
+requirements:
+  host:
+    - if: osx
+      then: llvm-openmp
+    - if: linux
+      then: libgomp
+```
+
+</RecipeTabs>
 
 <a id="switching-openmp-implementation"></a>
 
@@ -1017,7 +1131,7 @@ requirements:
 On macOS, only LLVM's OpenMP implementation `llvm-openmp` is supported. This implementation is used even in Fortran code compiled
 using GNU's gfortran.
 
-On Windows, switching between different OpenMP implemnentations is not supported. Every package uses the implementation
+On Windows, switching between different OpenMP implementations is not supported. Every package uses the implementation
 it was built against.
 
 On Linux, when packages are linked against GNU's `libgomp.so.1`, the OpenMP library at install time can be
@@ -1072,7 +1186,9 @@ After changing `yum_requirements.txt`, [rerender](updating_pkgs.md#dev-update-re
 If a package needs one of BLAS, CBLAS, LAPACK, LAPACKE, use the following in the
 host of the recipe,
 
-```yaml
+<RecipeTabs>
+
+```recipe
 requirements:
   host:
     - libblas
@@ -1080,6 +1196,17 @@ requirements:
     - liblapack
     - liblapacke
 ```
+
+```recipe
+requirements:
+  host:
+    - libblas
+    - libcblas
+    - liblapack
+    - liblapacke
+```
+
+</RecipeTabs>
 
 :::note
 
@@ -1092,14 +1219,26 @@ At runtime, by default the following packages will be used.
 
 :::
 
-```yaml
-- openblas   # [not win]
+<RecipeTabs>
+
+```recipe
 - mkl        # [win]
+- openblas   # [not win]
 ```
+
+```recipe
+- if: win
+  then: mkl
+  else: openblas
+```
+
+</RecipeTabs>
 
 If a package needs a specific implementation's internal API for more control you can have,
 
-```yaml
+<RecipeTabs>
+
+```recipe
 requirements:
   host:
     # Keep mkl-devel here for pinning
@@ -1110,10 +1249,26 @@ requirements:
     - {{ blas_impl }}
 ```
 
+```recipe
+requirements:
+  host:
+    # Keep mkl-devel here for pinning
+    - if: blas_impl == "mkl"
+      then: mkl-devel
+      else: ${{ blas_impl }}
+  run:
+    - libblas * *${{ blas_impl }}
+    - ${{ blas_impl }}
+```
+
+</RecipeTabs>
+
 This would give you a matrix builds for different blas implementations. If you only want to support
 a specific blas implementation,
 
-```yaml
+<RecipeTabs>
+
+```recipe
 requirements:
   host:
     - openblas
@@ -1121,6 +1276,17 @@ requirements:
     - libblas * *openblas
     - openblas
 ```
+
+```recipe
+requirements:
+  host:
+    - openblas
+  run:
+    - libblas * *openblas
+    - openblas
+```
+
+</RecipeTabs>
 
 :::note
 
@@ -1203,30 +1369,49 @@ Before learning how to use it, please read these considerations:
 
 To implement microarchitecture-optimized builds in your feedstock, you'll end up with something like:
 
-```yaml title="recipe/conda_build_config.yaml"
+```recipe title="recipe/conda_build_config.yaml"
 microarch_level:
   - 1
   - 3  # [unix and x86_64]
   - 4  # [unix and x86_64]
 ```
 
-```yaml title="recipe/meta.yaml"
+<RecipeTabs>
+
+```recipe
 # ...
 {% set build = 0 %}
 
 build:
-  number: {{ build }}          # [not (unix and x86_64)]
-  number: {{ build + 100 }}    # [unix and x86_64 and microarch_level == 1]
-  number: {{ build + 300 }}    # [unix and x86_64 and microarch_level == 3]
-  number: {{ build + 400 }}    # [unix and x86_64 and microarch_level == 4]
+  number: {{ build + 100 * (microarch_level|default(1)|int - 1) }}
 
 requirements:
   build:
-    - x86_64-microarch-level {{ microarch_level }}  # [unix and x86_64]
+    - x86_64-microarch-level =={{ microarch_level }}  # [unix and x86_64]
     - {{ compiler('c') }}
     # ...
 # ...
 ```
+
+```recipe
+context:
+  build: 0
+
+# ...
+
+build:
+  number: ${{ build + 100 * (microarch_level|default(1)|int - 1) }}
+
+requirements:
+  build:
+    - if: unix and x86_64
+      then: x86_64-microarch-level ==${{ microarch_level }}
+    - ${{ compiler('c') }}
+    # ...
+# ...
+```
+
+</RecipeTabs>
 
 :::note[Prioritize your preferred microarchitecture]
 The `run_exports` metadata is only set up with lower bounds to allow in-CI testing.
@@ -1272,19 +1457,39 @@ consistent usage.
 
 To use this package in a build, put it in the host environment like so
 
-```yaml
+<RecipeTabs>
+
+```recipe
 requirements:
   host:
     - pybind11-abi
 ```
 
+```recipe
+requirements:
+  host:
+    - pybind11-abi
+```
+
+</RecipeTabs>
+
 or
 
-```yaml
+<RecipeTabs>
+
+```recipe
 requirements:
   host:
     - swig-abi
 ```
+
+```recipe
+requirements:
+  host:
+    - swig-abi
+```
+
+</RecipeTabs>
 
 <a id="knowledge-empty"></a>
 
@@ -1310,13 +1515,13 @@ can be controlled with `run_constrained`, even for packages not available on all
 
 Currently available packages:
 
-| Name               | Available on:      | Empty on:     |
-| ------------------ | ------------------ | ------------- |
-| backports.strenum  | python >=3.8,<3.11 | python >=3.12 |
-| dataclasses        | python >=3.6,<3.7  | python >=3.7  |
-| enum34             | python =2.7        | python >=3.4  |
-| pywin32-on-windows | windows            | unix          |
-| typing             |                    | python >=3    |
+| Name               | Available on:            | Empty on:        |
+| ------------------ | ------------------------ | ---------------- |
+| backports.strenum  | python >=3.8,\<3.11      | python >=3.12    |
+| dataclasses        | python >=3.6,\<3.7       | python >=3.7     |
+| enum34             | python =2.7              | python >=3.4     |
+| pywin32-on-windows | windows                  | unix             |
+| typing             |                          | python >=3       |
 
 <a id="knowledge-all-installs"></a>
 
@@ -1386,7 +1591,9 @@ In order to qualify as a noarch python package, all of the following criteria mu
 
 All recipes employing `noarch: python` should usually use the `python_min` variable per the following example:
 
-```yaml title="recipe/meta.yaml"
+<RecipeTabs>
+
+```recipe
 name: package
 source:
   # ...
@@ -1407,13 +1614,50 @@ test:
     # ...
 ```
 
+```recipe
+name: package
+source:
+  # ...
+build:
+  noarch: python
+  # ...
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    # ...
+  run:
+    - python >=${{ python_min }}
+    # ...
+
+tests:
+  - python:
+      python_version: ${{ python_min }}.*
+      # ...
+  - requirements:
+      run:
+        - python ${{ python_min }}.*
+      script:
+        # ...
+```
+
+</RecipeTabs>
+
 See [CFEP-25](https://github.com/conda-forge/cfep/blob/main/cfep-25.md) for more details on this syntax. If you
 need to override this syntax, you can add a Jinja2 `set` statement (or equivalent `context` variable for v1 recipes)
 at the top of your recipe like this
 
-```yaml title="recipe/meta.yaml"
+<RecipeTabs>
+
+```recipe
 {% set python_min = "3.10" %}
 ```
+
+```recipe
+context:
+  python_min: "3.10"
+```
+
+</RecipeTabs>
 
 It also possible to achieve the same effect by adding a `conda_build_config.yaml` file to your recipe that
 contains a map like
@@ -1512,7 +1756,9 @@ The idea is to generate different noarch packages for each OS needing different 
 Let's say you have a pure Python package, perfectly eligible for `noarch: python`, but on Windows
 it requires `windows-only-dependency`. You might have something like:
 
-```yaml title="recipe/meta.yaml (original)"
+<RecipeTabs>
+
+```recipe title="recipe/meta.yaml (original)"
 name: package
 source:
   # ...
@@ -1526,11 +1772,30 @@ requirements:
     - windows-only-dependency  # [win]
 ```
 
+```recipe title="recipe/recipe.yaml (original)"
+name: package
+source:
+  # ...
+build:
+  number: 0
+requirements:
+  # ...
+  run:
+    - python
+    - numpy
+    - if: win
+      then: windows-only-dependency
+```
+
+</RecipeTabs>
+
 Being non-noarch, this means that the build matrix will include at least 12 outputs: three platforms,
 times four Python versions. This gets worse with `arm64`, `aarch64` and `ppc64le` in the mix.
 We can get it down to two outputs if replace it with this other approach!
 
-```yaml title="recipe/meta.yaml (modified)"
+<RecipeTabs>
+
+```recipe title="recipe/meta.yaml (modified)"
 name: package
 source:
   # ...
@@ -1549,11 +1814,35 @@ requirements:
     - windows-only-dependency  # [win]
 ```
 
+```recipe title="recipe/recipe.yaml (modified)"
+name: package
+source:
+  # ...
+build:
+  number: 0
+  noarch: python
+requirements:
+  host:
+    - python {{ python_min }}.*
+    # ...
+  run:
+    - python >={{ python_min }}
+    - numpy
+    - if: unix
+      then:
+        - __unix
+      else:
+        - __win
+        - windows-only-dependency
+```
+
+</RecipeTabs>
+
 Do not forget to specify the platform virtual packages with their selectors!
 Otherwise, the solver will not be able to choose the variants correctly.
 
 By default, conda-forge will only build `noarch` packages on a `linux_64` CI runner, so
-only the `# [unix]` selectors would be true. However, we can change this behaviour using
+only the `unix` selector would be true. However, we can change this behaviour using
 the `noarch_platforms` option in `conda-forge.yml`:
 
 ```yaml title="conda-forge.yml"
@@ -1567,7 +1856,9 @@ feedstock rerender to be applied. See [Rerendering feedstocks](updating_pkgs.md#
 
 If you need conditional dependencies on all three operating systems, this is how you do it:
 
-```yaml title="recipe/meta.yaml"
+<RecipeTabs>
+
+```recipe
 name: package
 source:
   # ...
@@ -1586,6 +1877,34 @@ requirements:
     - osx-only-dependency      # [osx]
     - windows-only-dependency  # [win]
 ```
+
+```recipe
+name: package
+source:
+  # ...
+build:
+  number: 0
+  noarch: python
+requirements:
+  # ...
+  run:
+    - python >={{ python_min }}
+    - numpy
+    - if: linux
+      then:
+        - __linux
+        - linux-only-dependency
+    - if: osx
+      then:
+        - __osx
+        - osx-only-dependency
+    - if: win
+      then:
+        - __win
+        - windows-only-dependency
+```
+
+</RecipeTabs>
 
 ```yaml title="conda-forge.yml"
 noarch_platforms:
@@ -1650,28 +1969,52 @@ package is not dependent on Python), use `build` section
 
 Following implies that `python` is only a build dependency and no Python matrix will be created.
 
-```yaml
-build:
-  - python
-host:
-  - some_other_package
+<RecipeTabs>
+
+```recipe
+requirements:
+  build:
+    - python
+  host:
+    - some_other_package
 ```
+
+```recipe
+requirements:
+  build:
+    - python
+  host:
+    - some_other_package
+```
+
+</RecipeTabs>
 
 Note that `host` should be non-empty or `compiler` jinja syntax used or `build/merge_build_host` set to
 True for the `build` section to be treated as different from `host`.
 
 Following implies that `python` is a runtime dependency and a Python matrix for each supported Python version will be created.
 
-```yaml
-host:
-  - python
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - python
 ```
+
+```recipe
+requirements:
+  host:
+    - python
+```
+
+</RecipeTabs>
 
 `conda-forge.yml`'s build matrices is removed in conda-smithy=3. To get a build matrix,
 create a `conda_build_config.yaml` file inside the recipe folder. For example, the following will give you 2
 builds and you can use the selector `vtk_with_osmesa` in the `meta.yaml`
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 vtk_with_osmesa:
   - False
   - True
@@ -1683,47 +2026,53 @@ You need to rerender the feedstock after this change.
 
 ## Requiring newer macOS SDKs
 
-conda-forge uses macOS SDK 10.13 to build software so that they can be deployed to
-all macOS versions newer than 10.13. Sometimes, some packages require a newer SDK
-to build with. While the default version 10.13 can be overridden using the following
+conda-forge uses macOS SDK 11.0 to build software so that they can be deployed to
+all macOS versions newer than 11.0. Sometimes, some packages require a newer SDK
+to build with. While the default version 11.0 can be overridden using the following
 changes to the recipe, it should be done as a last resort. Please consult with
 core team if this is something you think you need.
 
 To use a new SDK, add the following in `recipe/conda_build_config.yaml`
 
-```yaml
+```recipe title="recipe/conda_build_config.yaml"
 # Please consult conda-forge/core before doing this
 MACOSX_SDK_VERSION:        # [osx and x86_64]
-  - "10.15"                # [osx and x86_64]
+  - "15.5"                 # [osx and x86_64]
 ```
 
 Note that this should be done if the error you are getting says that a header is not
 found or a macro is not defined. This will make your package compile with a newer SDK
-but with `10.13` as the deployment target.
-WARNING: some packages might use features from `10.15` if you do the above due to
-buggy symbol availability checks. For example packages looking for `clock_gettime`
-will see it as it will be a weak symbol, but the package might not have a codepath
-to handle the weak symbol, in that case, you need to update the `c_stdlib_version`
-(previously `MACOSX_DEPLOYMENT_TARGET`) as described below.
+but with `11.0` as the deployment target.
 
 After increasing the SDK version, if you are getting an error that says that a function
 is available only for macOS x.x, then do the following in `recipe/conda_build_config.yaml`,
 
-```yaml
+```recipe title="recipe/conda_build_config.yaml"
 # Please consult conda-forge/core before doing this
 c_stdlib_version:          # [osx and x86_64]
-  - "10.15"                # [osx and x86_64]
-MACOSX_SDK_VERSION:        # [osx and x86_64]
-  - "10.15"                # [osx and x86_64]
+  - "12.0"                 # [osx and x86_64]
 ```
 
-In `recipe/meta.yaml`, add the following to ensure that the user's system is compatible.
+In this case you don't need to set `MACOSX_SDK_VERSION` (unless it needs to be newer than
+12.0), because the SDK version will always be _at least_ the deployment target.
 
-```yaml
+In the recipe file, add the following to ensure that the user's system is compatible.
+
+<RecipeTabs>
+
+```recipe
 requirements:
   build:
     - {{ stdlib("c") }}
 ```
+
+```recipe
+requirements:
+  build:
+    - ${{ stdlib("c") }}
+```
+
+</RecipeTabs>
 
 Note that the run-export on `__osx` that's produced by the stdlib metapackages
 requires `conda>=4.8`.
@@ -1736,15 +2085,14 @@ The libc++ library uses Clang availability annotations to mark certain symbols a
 unavailable when targeting versions of macOS that ship with a system libc++
 that do not contain them. Clang always assumes that the system libc++ is used.
 
-The conda-forge build infrastructure targets macOS 10.13 and some newer C++ features
+The conda-forge build infrastructure targets macOS 11.0 and some newer C++ features
 such as `fs::path` are marked as unavailable on that platform, so the build aborts:
 
 ```bash
 ...
-error: 'path' is unavailable: introduced in macOS 10.15
+error: 'foo' is unavailable: introduced in macOS 12.3
 ...
-note: 'path' has been explicitly marked unavailable here
-class _LIBCPP_TYPE_VIS path {
+note: 'foo' has been explicitly marked unavailable here
 ```
 
 However, since conda-forge ships its own (modern) libcxx we can ignore these checks
@@ -1780,29 +2128,46 @@ There are two options for how to proceed:
 - Specify the environment variable `SETUPTOOLS_SCM_PRETEND_VERSION` with the version string.
   If specified this environment variable is the principle source for `setuptools_scm`.
   There are two ways how to do this:
-  - If you are using build scripts, in `build.sh` specify:
+  - If you are using build scripts, specify in the build script:
+
+    <BuildScriptTabs>
 
     ```bash
     export SETUPTOOLS_SCM_PRETEND_VERSION="$PKG_VERSION"
     ```
 
-    and in `bld.bat` specify:
-
-    ```bash
+    ```batch
     set SETUPTOOLS_SCM_PRETEND_VERSION=%PKG_VERSION%
     ```
+
+    </BuildScriptTabs>
 
     Whereby you use that `PKG_VERSION` has been set with the version string,
     see [Environment variables](https://docs.conda.io/projects/conda-build/en/stable/user-guide/environment-variables.html#env-vars).
 
   - Otherwise, if you are directly building from `meta.yaml`, use for example:
-    ```yaml
+
+    <RecipeTabs>
+
+    ```recipe
     build:
       # [...]
       script_env:
         - SETUPTOOLS_SCM_PRETEND_VERSION={{version}}
       script: "{{ PYTHON }} -m pip install . -vv"
     ```
+
+    ```recipe
+    build:
+      # [...]
+      script:
+        env:
+          SETUPTOOLS_SCM_PRETEND_VERSION: ${{version}}
+        content:
+          - "${{ PYTHON }} -m pip install . -vv"
+    ```
+
+    </RecipeTabs>
 
 <a id="centos7"></a>
 
@@ -1818,16 +2183,27 @@ However, some feedstocks may already require newer `glibc` versions.
 To use the newer `sysroot` with `glibc` `2.28` or `2.34` on `linux`,
 put the following in your build section.
 
-```yaml
+<RecipeTabs>
+
+```recipe
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
 ```
 
+```recipe
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+```
+
+</RecipeTabs>
+
 and add the following to `recipe/conda_build_config.yaml`:
 
-```yaml
+```recipe title="recipe/conda_build_config.yaml"
 c_stdlib_version:          # [linux]
   - "2.28"                 # [linux]
 ```
@@ -1843,7 +2219,7 @@ yourself with changing the image manually.
 However, if for some reason you want to override the image versions, you can do so
 by setting the following in the `conda-forge.yml` of your recipe and rerendering.
 
-```yaml
+```yaml title="conda-forge.yml"
 os_version:             # example of possible values
   linux_64: cos7
   linux_aarch64: alma8
@@ -2117,12 +2493,25 @@ sysroot(s) nor the missing_dso_whitelist.
 
 For now, you will have to add `nvcuda.dll` to the `missing_dso_whitelist`
 
-```yaml
+<RecipeTabs>
+
+```recipe
 build:
   ...
   missing_dso_whitelist:
     - "*/nvcuda.dll"   # [win]
 ```
+
+```recipe
+build:
+  ...
+  dynamic_linking:
+    missing_dso_allowlist:
+      - if: win
+        then: "*/nvcuda.dll"
+```
+
+</RecipeTabs>
 
 <a id="my-feedstock-is-not-building-old-cuda-versions-anymore"></a>
 
@@ -2141,28 +2530,7 @@ There may be other fixes needed for the feedstock depending on when it was last 
 
 ## Packages that require a GPU or long-running builds
 
-conda-forge has access to [an OpenStack server](https://github.com/Quansight/open-gpu-server) that provides GPU builds and long-running builds (beyond the usual 6h limit).
-If your package needs a GPU to be built or tested, or its compilation times are so long that they are currently done manually off-CI, you can request access to these runners.
-To do so:
-
-1. Open a PR in [conda-forge/admin-requests](https://github.com/conda-forge/admin-requests). Follow the instructions in the repository README.
-   Note you need to request the type of resource you want access to (e.g. GPU runners, or long-running CPU builds)
-   Once merged, this will enable the self-hosted Github Actions runners for your feedstock.
-2. In order to trigger jobs for these runners, the maintainer must have read and agreed to the open-gpu-server [terms of use](https://github.com/Quansight/open-gpu-server/blob/main/TOS.md).
-   You will need to open a PR in the open-gpu-server repository, as instructed in their README.
-   You only need to do this once per maintainer (e.g. if you maintain multiple feedstocks).
-3. Finally, you can configure your feedstock to use the self-hosted runners. A PR will have been created by admin-requests after the PR in step (1) is merged.
-   However, due to security measurements imposed by Github, automated re-rendering is not possible when they modify Github Actions workflows.
-   You will need to rerender it manually by running `conda-smithy rerender` in your machine and then commit and push the result.
-
-:::note
-
-Due to some technical and legal limitations, some of the usual automation infrastructure is not available for these runners.
-As mentioned above, the conda-forge bots won't be able to rerender your feedstock automatically anymore.
-Automerge will not function properly either. Also note that the conda-forge bots won't be able to trigger the self-hosted runners.
-Closing and reopening the PR won't work, but a maintainer with sufficient permissions can trigger it manually by pushing an empty commit.
-
-:::
+See [How to configure self-hosted runners](/docs/how-to/advanced/self-hosted-runners.mdx).
 
 <a id="osxarm64"></a>
 
@@ -2217,21 +2585,21 @@ This branch must change the `recipe/conda_build_config.yaml` file to point to th
 
 For example, matplotlib rc releases would include:
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 channel_targets:
   - conda-forge matplotlib_rc
 ```
 
 If a pre-release build of B depends on a pre-release build of A, then A should have,
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 channel_targets:
   - conda-forge A_rc
 ```
 
 while B should have,
 
-```yaml
+```yaml title="recipe/conda_build_config.yaml"
 channel_sources:
   - conda-forge/label/A_rc,conda-forge
 channel_targets:
@@ -2244,7 +2612,7 @@ in `recipe/conda_build_config.yaml` in their respective feedstocks.
 
 A rerender needs to happen for these changes to reflect in CI files. The channel_targets entries map
 
-- <channel target> <label target> pairs for use in the post-build upload step.
+- \<channel target> \<label target> pairs for use in the post-build upload step.
 
 :::
 
@@ -2276,14 +2644,14 @@ conda install -c conda-forge/label/matplotlib_rc -c conda-forge matplotlib
 Use [MatchSpec](https://github.com/conda/conda/blob/c3fb8150ed4c3dabb7ca376ade208095f98ee0b9/conda/models/match_spec.py#L70-L150)
 to specify your package:
 
-```yaml
+```yaml title="environment.yml"
 dependencies:
   - conda-forge/label/matplotlib_rc::matplotlib=3.7.0rc1
 ```
 
 Alternately, you can use the channels section to enable the matplotlib_rc channel:
 
-```yaml
+```yaml title="environment.yml"
 channels:
   - conda-forge/label/matplotlib_rc
 dependencies:
@@ -2313,6 +2681,43 @@ The tl;dr here is that conda sorts as follows:
 So make sure that you **tag** your package in such a way that the package name
 that conda-build spits out will sort the package uploaded with an `rc` label
 higher than the package uploaded with the `dev` label.
+
+<a id="packages-without-upstream-versions"></a>
+
+## Packages without upstream versions
+
+The preferred approach is always to **ask upstream to add version tags** to
+their repository. Proper upstream versioning benefits the entire packaging
+ecosystem and avoids ambiguity.
+
+However, when this is impractical — for example, when the upstream repository
+only uses platform-specific release tags (e.g. Android release versions) that
+don't reflect the package's own versioning, or the project is unlikely to
+adopt conventional versioning — use the **`0.0.0.YYYY.MM.DD`** version format,
+where `YYYY.MM.DD` is the date of the pinned commit.
+
+This format is preferred because:
+
+- **All segments are numeric**, which is required by conda's
+  `apply_pin_expressions()` for compatibility specifications.
+- **Any future real release** (e.g. `0.0.1`) will automatically sort higher.
+- It clearly communicates that this is not an official upstream version.
+
+When packaging from a specific commit, always pin the source using `rev:` with
+the full commit hash rather than a branch name. This ensures reproducible
+builds.
+
+```recipe title="recipe.yaml"
+context:
+  version: "0.0.0.2026.01.22"
+
+source:
+  git: https://example.com/project.git
+  rev: abc123def456  # pin to a specific commit
+```
+
+For more context, see the discussion on
+[conda-forge/staged-recipes#30713](https://github.com/conda-forge/staged-recipes/pull/30713).
 
 <a id="how-to-update-your-feedstock-token"></a>
 
@@ -2392,7 +2797,7 @@ being investigated or the migration PR got closed accidentally. To migrate a PR 
 All conda-forge packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use conda-forge packages if you or your team require a high level of security.
 You are also free to download recipes and rebuild them yourself, if you would like at least that much oversight. However, many people use conda-forge all the time with no issues and here are some things that conda-forge does to help with security in some ways:
 
-1. [Sources](adding_pkgs.md#meta-yaml-source) (where you specify where the package's source code is coming from) can be pulled from GitHub, PyPI, or other sources and sha256 hashes are always used, so moving of tags or uploading of new sdists can not cause automatic package rebuilds.
+1. [Sources](../adding_pkgs#source) (where you specify where the package's source code is coming from) can be pulled from GitHub, PyPI, or other sources and SHA256 hashes are always used, so moving of tags or uploading of new sdists can not cause automatic package rebuilds.
    Also, once packages are accepted and made into feedstocks, only the maintainers of that feedstock have the right to merge PRs made to that feedstock.
 2. Each feedstock can only upload packages for that feedstock. This is enforced by using a cf-staging channel where builds are first sent.
    A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the `conda-forge` channel.

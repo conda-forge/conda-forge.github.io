@@ -1,0 +1,65 @@
+---
+tags: [how-to, advanced]
+---
+
+import { BuildScriptTabs } from "@site/src/components/RecipeTabs";
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+# How to configure self-hosted runners
+
+conda-forge has access to external CI resources that can provide GPU-equipped and/or long-running builds (beyond the usual 6h limit).
+If your package needs a GPU to be built or tested, or its compilation times are so long that they are currently done manually off-CI, you can request access to these runners.
+
+## Request access
+
+Open a PR in [conda-forge/admin-requests](https://github.com/conda-forge/admin-requests) by following the instructions in the repository README.
+
+Note you need to specify the type of resource you want access to (e.g. GPU runners, or long-running CPU builds).
+Once merged, this will enable the requested self-hosted Github Actions runners for your feedstock.
+
+## Configure your feedstock
+
+1. In `conda-forge.yml`, ensure that the `provider` setting for the required build platform is set to `github_actions`
+2. In `recipe/conda_build_config.yaml`, configure the [`github_actions_labels`](/docs/maintainer/conda_forge_yml.mdx#github_actions_labels) field to specify the `runs-on` value for each platform, using selectors as needed. The exact values depend on which runner type you requested and are listed in [conda-forge/admin-requests](https://github.com/conda-forge/admin-requests).
+
+:::note
+
+Some of the usual automation infrastructure is not available for self-hosted runners:
+
+- Due to security measurements imposed by Github, automated re-rendering is not possible when they modify Github Actions workflows.
+  You will need to rerender it manually by running `conda-smithy rerender` in your machine and then commit and push the result.
+- Automerge will not function properly either.
+- The conda-forge bots may not be able to trigger the self-hosted runners.
+- Closing and reopening the PR may not work, but a maintainer with sufficient permissions can trigger it manually by pushing an empty commit.
+
+:::
+
+:::info
+
+Prior to `conda-smithy 3.57.0`, `conda-forge.yml` needed a `github_actions.self_hosted: true` field in `conda-forge.yml`.
+This is now deprecated and has no effect, so please remove it.
+
+:::
+
+## Example
+
+For example, to configure `a-custom-self-hosted-provider` for `linux-64`:
+
+```yaml title="conda-forge.yml"
+provider:
+  linux_64: github_actions
+  linux_aarch64: github_actions
+```
+
+```recipe title="recipe/conda_build_config.yaml"
+github_actions_labels:
+- a-custom-self-hosted-provider  # [linux64]
+# absent value for linux-aarch64 means it will use the default; same as:
+# - default  # [linux and aarch64]
+```
+
+Then rerender.
+
+## Real world examples
+
+Use [this search query](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Aconda_build_config.yaml+github_actions_labels) to find some real world examples in conda-forge.

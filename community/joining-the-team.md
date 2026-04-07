@@ -37,7 +37,7 @@ Generally speaking, your role is as follows:
 
 1. Keep up to date with the current best practices for conda packaging standards
 2. Provide recipe review which generally means making sure that the recipe
-   under review adheres to what we list on the [Contributing packages](/docs/maintainer/adding_pkgs/#dev-contribute-pkgs) page.
+   under review adheres to what we list on the [Contributing packages](/docs/maintainer/adding_pkgs/) page.
 3. Open issues as needed, both on staged and on the other flagship repos
    ([smithy](https://github.com/conda-forge/conda-smithy),
    [webservices](https://github.com/conda-forge/conda-forge-webservices),

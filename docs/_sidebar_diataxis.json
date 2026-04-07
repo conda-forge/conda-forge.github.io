@@ -42,9 +42,16 @@
     },
     "items": [
       {
-        "type": "link",
-        "label": "Contribute your first recipe",
-        "href": "/docs/maintainer/adding_pkgs/#the-staging-process"
+        "type": "doc",
+        "id": "tutorials/first-recipe"
+      },
+      {
+        "type": "doc",
+        "id": "tutorials/building-locally"
+      },
+      {
+        "type": "doc",
+        "id": "tutorials/adding-tests"
       }
     ]
   },
@@ -73,6 +80,16 @@
             "type": "doc",
             "label": "Keep your fork in sync",
             "id": "how-to/basics/fork-sync"
+          },
+          {
+            "type": "doc",
+            "label": "Populate package dependencies",
+            "id": "how-to/basics/populate-dependencies"
+          },
+          {
+            "type": "doc",
+            "label": "Use CMake",
+            "id": "how-to/basics/cmake"
           }
         ]
       },
@@ -105,6 +122,11 @@
             "id": "how-to/advanced/cross-compilation"
           },
           {
+            "type": "doc",
+            "label": "Move from autotools to CMake",
+            "id": "how-to/advanced/autotools-to-cmake"
+          },
+          {
             "type": "link",
             "label": "Enable CUDA",
             "href": "/docs/maintainer/knowledge_base/#cuda-builds"
@@ -118,6 +140,11 @@
             "type": "doc",
             "label": "Maintain several versions",
             "id": "how-to/advanced/several-versions"
+          },
+          {
+            "type": "doc",
+            "label": "Self-hosted runners",
+            "id": "how-to/advanced/self-hosted-runners"
           },
           {
             "type": "link",
@@ -140,9 +167,24 @@
             "href": "https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/blob/main/recipe/README.md"
           },
           {
-            "type": "link",
+            "type": "doc",
             "label": "Remove broken packages",
-            "href": "/docs/maintainer/updating_pkgs/#removing-broken-packages"
+            "id": "how-to/emergencies/remove-broken-packages"
+          },
+          {
+            "type": "doc",
+            "label": "Fix a security vulnerability",
+            "id": "how-to/emergencies/fix-a-security-vulnerability"
+          },
+          {
+            "type": "doc",
+            "label": "Fix a packaging error",
+            "id": "how-to/emergencies/fix-a-packaging-error"
+          },
+          {
+            "type": "doc",
+            "label": "Update a dependency in published packages",
+            "id": "how-to/emergencies/update-a-dependency-in-published-packages"
           }
         ]
       }
@@ -170,14 +212,14 @@
         "label": "Building packages",
         "items": [
           {
-            "type": "link",
+            "type": "doc",
             "label": "Compilation concepts",
-            "href": "#"
+            "id": "maintainer/understanding_conda_forge/compilation-concepts"
           },
           {
             "type": "link",
             "label": "Build environments",
-            "href": "/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host"
+            "href": "/docs/how-to/advanced/cross-compilation/#placing-requirements-in-build-or-host"
           },
           {
             "type": "link",
@@ -188,6 +230,11 @@
             "type": "doc",
             "label": "Cross-compilation",
             "id": "maintainer/understanding_conda_forge/cross-compilation"
+          },
+          {
+            "type": "doc",
+            "label": "The directory structure",
+            "id": "maintainer/understanding_conda_forge/directory-structure"
           },
           {
             "type": "link",

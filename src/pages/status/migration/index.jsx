@@ -483,7 +483,7 @@ function Table({ details }) {
   const CI_STATUS_ORDER = { clean: 0, behind: 1, has_hooks: 2, unknown: 3, unstable: 4, blocked: 5, dirty: 6, draft: 7, "": 999 };
 
   // Transform data to match expected structure for compare function
-  const rows = ORDERED.reduce((rows, [status]) => (
+  const _rows = ORDERED.reduce((rows, [status]) => (
     filters[status] ? rows :
       rows.concat((details[status]).map(name => {
         const feedstockData = feedstock[name];
@@ -496,7 +496,12 @@ function Table({ details }) {
           updated_at_timestamp: feedstockData["updated_at"] ? new Date(feedstockData["updated_at"]).getTime() : 0,
         };
       }))
-  ), []).sort(compare(sort.by, sort.order, previousSort));
+  ), []);
+
+  // sort by name first if no previousSort, this is to make sure when loading
+  // the page we sort by (numchildren dec, name inc)
+  const _initial_rows = previousSort ? _rows : _rows.sort(compare("name", "ascending"));
+  const rows = _initial_rows.sort(compare(sort.by, sort.order, previousSort));
 
   return (
     <>

@@ -78,7 +78,7 @@ you can use the `-r` option to supply an alternative.
 
 The **meta.yaml** looks like:
 
-```yaml
+```recipe
 {% set name = "myproj" %}
 {% set version = environ.get('GIT_DESCRIBE_TAG', 'untagged')|string|replace('-','_') %}
 

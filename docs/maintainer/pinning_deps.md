@@ -31,7 +31,7 @@ Pinning of packages are handled by the same configuration file and conda-build. 
 
 E.g.
 
-```yaml
+```recipe
 requirements:
   host:
     - gmp 6.1.*
@@ -41,7 +41,7 @@ requirements:
 
 Should be replaced by
 
-```yaml
+```recipe
 requirements:
   host:
     - gmp
@@ -56,7 +56,7 @@ The run-export mechanism (see below) additionally ensures the correct version co
 (corresponding to the expected API/ABI stability of `gmp`) are added, so a recipe with an
 unpinned `gmp` dependency in the host environment will, in the end, work as follows:
 
-```yaml
+```recipe
 requirements:
   host:
     - gmp {{ version_from_global_pinning }}.*
@@ -85,7 +85,7 @@ to run requirements.
 
 If you need to remove a pinning in rare cases like linking the package statically or if the package is used with `dlopen` instead of linking, then you can do,
 
-```yaml
+```recipe
 build:
   ignore_run_exports:
     - gmp
@@ -112,7 +112,7 @@ For example, numpy may be used either as a python package, and it also has a C l
 The former usage would not require `run_exports`, but the latter would.
 
 In this scenario, it may be advantageous to split the package into distinct metapackages that may share a common parent containing the actual files, but with each metapackage defining different pinning behavior.
-Anaconda does this for numpy (see the [recipe](https://github.com/AnacondaRecipes/numpy-feedstock/blob/main/recipe/meta.yaml)).
+Anaconda does this for numpy (see the [recipe](https://github.com/AnacondaRecipes/numpy-feedstock/blob/67c05421596390629611fc2bd55233071eb00b1e/recipe/meta.yaml)).
 
 The general idea is that the `numpy-devel` package should be used when a package is building against the C interface (i.e. it needs the compatibility bound), and the numpy package should be used when a package is using only the python interface.
 

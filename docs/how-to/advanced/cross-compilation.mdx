@@ -168,7 +168,7 @@ A simple C library using autotools for cross-compilation might look like this:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   build:
     - {{ compiler("c") }}
@@ -180,7 +180,7 @@ requirements:
     - libogg
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - ${{ compiler("c") }}
@@ -230,7 +230,7 @@ A simple C++ library using CMake for cross-compilation might look like this:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   build:
     - {{ compiler("cxx") }}
@@ -241,7 +241,7 @@ requirements:
     - libboost-devel
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - ${{ compiler("cxx") }}
@@ -298,7 +298,7 @@ Similarly, with Meson, the `meta.yaml` needs:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   build:
     - {{ compiler("c") }}
@@ -310,7 +310,7 @@ requirements:
     - libogg
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - ${{ compiler("c") }}
@@ -368,7 +368,7 @@ A simple Python extension using Cython and NumPy's C API would look like so:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   build:
     - {{ compiler("c") }}
@@ -386,7 +386,7 @@ requirements:
     - python
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - ${{ compiler("c") }}
@@ -418,7 +418,7 @@ With MPI, openmpi is required for the build platform as the compiler wrappers ar
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   build:
     - {{ mpi }}  # [build_platform != target_platform and mpi == "openmpi"]
@@ -428,7 +428,7 @@ requirements:
     - {{ mpi }}
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - if: build_platform != host_platform and mpi == "openmpi"
