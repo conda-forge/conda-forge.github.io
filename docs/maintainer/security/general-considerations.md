@@ -8,7 +8,7 @@ While we do our best to ensure that these packages remain reliable and secure, t
 
 Here is a number of measures that conda-forge takes to improve package security:
 
-1. [Sources](../adding_pkgs#source) (external files containing package sources, patches, etc.) are pinned to specific SHA256 hashes.
+1. [Sources](/docs/maintainer/adding_pkgs/#source) (external files containing package sources, patches, etc.) are pinned to specific SHA256 hashes.
    If a git tag is updated or a source archive is altered, no new packages will be built and the builders will report a hash mismatch.
    This protects against the most common attacks against existing package versions.
 2. The newer v1 recipes are built in environments without Internet access, preventing the build process from downloading any potentially insecure data or sources.
