@@ -93,7 +93,7 @@ def get_cfeps():
                 # Hardcode title and status for CFEP-00
                 yield Cfep(name, "CFEP Template", "Proposed", url)
                 continue
-            cfep_text = cfep.read_text()
+            cfep_text = cfep.read_text(encoding="utf-8")
             m = re.search(TITLE_PATTERN, cfep_text)
             title = m.group(1).strip() if m else ""
             m = re.search(STATUS_PATTERN, cfep_text)
