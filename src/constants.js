@@ -38,6 +38,11 @@ export const urls = {
       link: "https://status.dev.azure.com/",
       title: "Azure DevOps",
     },
+    blacksmith: {
+      api: "https://status.blacksmith.sh/v2/components.json",
+      link: "https://status.blacksmith.sh",
+      title: "Blacksmith.sh",
+    },
     // circle: {
     //   api: "https://status.circleci.com/api/v2/status.json",
     //   link: "https://status.circleci.com",
@@ -52,6 +57,11 @@ export const urls = {
       api: "https://www.githubstatus.com/api/v2/status.json",
       link: "https://www.githubstatus.com/",
       title: "GitHub",
+    },
+    namespace: {
+      api: "https://namespace-status.com/proxy/namespace-status.com",
+      link: "https://namespace-status.com/",
+      title: "Namespace.so",
     },
     prefix_dev: {
       api: "https://status.prefix.dev/api/getMonitorDetails/status.conda-forge.org?m=798888560",
