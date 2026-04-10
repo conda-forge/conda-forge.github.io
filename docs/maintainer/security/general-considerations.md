@@ -23,5 +23,17 @@ Here is a number of measures that conda-forge takes to improve package security:
 
 ## Reporting conda-forge security issues
 
-If you have found a security-related issue with conda-forge, please check our [Security Policy](https://github.com/conda-forge/security/security/policy)
-to learn how to report it responsibly.
+If you have found a security-related issue in a project governed by conda-forge, please check our [Security Policy](https://github.com/conda-forge/security/security/policy) to learn how to report it responsibly.
+Please note that this policy does not apply to software packaged in conda-forge.
+
+## Reporting packaged software security issues
+
+If you have found a security-related issue on a software packaged by conda-forge, please report it upstream (if it is not reported already).
+You can usually find the appropriate bug reporting instructions on upstream's homepage, which you can find e.g. on anaconda.org's overview of the package (`https://anaconda.org/channels/conda-forge/packages/{package-name}/overview`).
+
+Normally, package security fixes propagate to conda-forge after upstream releases a fixed version and the conda package is bumped.
+In some cases, in particular if the issue is urgent or the software is no longer maintained upstream, [the security fixes may be applied in the feedstock](/docs/how-to/emergencies/fix-a-security-vulnerability/#creating-a-patched-version) instead.
+If you believe that this would be justified, please report a bug to the feedstock.
+However, please bear in mind that feedstocks are maintained by volunteers.
+
+If you believe that the particular issue is strictly caused by conda-forge packaging and is not an upstream bug, please report an issue to the feedstock directly.
