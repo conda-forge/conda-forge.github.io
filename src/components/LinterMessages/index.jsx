@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useId } from "react";
+import { useQueryString } from "@docusaurus/theme-common";
 import Heading from "@theme/Heading";
 import Admonition from "@theme/Admonition";
 import Markdown from "@site/src/components/OurMarkdown";
@@ -7,8 +8,8 @@ import { urls } from "@site/src/constants";
 
 export default function LinterMessages({ toc = null }) {
   const messagesURL = urls.linter.messages;
+  const [showDeprecated, _] = useDeprecated();
   const [messages, setMessages] = useState(prefetchedLinterMessages);
-
   useEffect(() => {
     fetch(messagesURL, {
       headers: {
@@ -19,6 +20,26 @@ export default function LinterMessages({ toc = null }) {
       .then((parsed) => setMessages(parsed));
   }, []);
 
+  // Group messages by category, considering deprecation status
+  const groupedMessages = {};
+  if (messages.messages) {
+    for (const message of messages.messages) {
+      if (!groupedMessages[message.category]) {
+        groupedMessages[message.category] = [];
+      }
+      if (message.deprecated_in.length === 0 || showDeprecated) {
+        groupedMessages[message.category].push(message);
+      }
+    }
+  }
+  // We will only publish categories with messages
+  const populatedCategories = {};
+  for (const category in messages.categories) {
+    if (groupedMessages[category].length > 0) {
+      populatedCategories[category] = messages.categories[category];
+    }
+  }
+
   return (
     <>
       <Admonition type="info">
@@ -28,29 +49,41 @@ export default function LinterMessages({ toc = null }) {
         </a>
         .
       </Admonition>
+      <ToggleDeprecated />
       <Heading as="h2" id="categories">
         Available categories
       </Heading>
-      <CategoriesToc messages={messages} />
+      <CategoriesToc categories={populatedCategories} />
       <Heading as="h2" id="messages">
         Messages
       </Heading>
-      {messages.categories &&
-        Object.entries(messages.categories).map(([id, description]) => (
+      {populatedCategories &&
+        Object.entries(populatedCategories).map(([id, description]) => (
           <Category
             id={id}
             description={description}
             messages={messages}
             toc={toc}
+            showDeprecated={showDeprecated}
           />
         ))}
     </>
   );
 }
 
-function Category({ id, description, messages, toc = null }) {
+function Category({
+  id,
+  description,
+  messages,
+  toc = null,
+  showDeprecated = false,
+}) {
   if (toc) {
-    toc.push({ value: `${id}: ${description}`, id: id, level: 2 });
+    toc.push({
+      value: `${id}: ${description.replaceAll("`", "")}`,
+      id: id,
+      level: 2,
+    });
   }
   return (
     <>
@@ -60,14 +93,20 @@ function Category({ id, description, messages, toc = null }) {
       {messages.messages &&
         messages.messages.map(
           (message) =>
-            message.category == id && <Message message={message} toc={toc} />,
+            message.category == id && (
+              <Message
+                message={message}
+                toc={toc}
+                showDeprecated={showDeprecated}
+              />
+            ),
         )}
     </>
   );
 }
 
-function Message({ message, toc = null }) {
-  if (toc) {
+function Message({ message, toc = null, showDeprecated = false }) {
+  if (toc && (message.deprecated_in === "" || showDeprecated)) {
     toc.push({ value: message.identifier, id: message.identifier, level: 3 });
   }
   return (
@@ -93,6 +132,12 @@ function Message({ message, toc = null }) {
         {(message.deprecated_in && (
           <li key={`${message.identifier}-depr-${message.deprecated_in}`}>
             <strong>Deprecated in {message.deprecated_in}</strong>
+          </li>
+        )) ||
+          null}
+        {(message.paths.length > 0 && (
+          <li key={`${message.identifier}-depr-${message.paths.join("-")}`}>
+            Affected paths: <code>{message.paths}</code>
           </li>
         )) ||
           null}
@@ -131,11 +176,11 @@ function Message({ message, toc = null }) {
   );
 }
 
-function CategoriesToc({ messages }) {
+function CategoriesToc({ categories }) {
   return (
     <ul>
-      {messages.categories &&
-        Object.entries(messages.categories).map(([id, desc]) => (
+      {categories &&
+        Object.entries(categories).map(([id, desc]) => (
           <li key={`toc-${id}`}>
             <a href={`#${id}`} key={id}>
               {id}: {desc.replaceAll("`", "")}
@@ -143,5 +188,38 @@ function CategoriesToc({ messages }) {
           </li>
         ))}
     </ul>
+  );
+}
+
+function useDeprecated() {
+  const [deprecatedQuery, setDeprecatedQuery] = useQueryString("deprecated");
+  const deprecated = deprecatedQuery === "true";
+  const toggleDeprecated = useCallback(() => {
+    const newDeprecated = !deprecated;
+    setDeprecatedQuery(newDeprecated);
+  }, [deprecated, setDeprecatedQuery]);
+  return [deprecated, toggleDeprecated];
+}
+
+function ToggleDeprecated() {
+  const id = useId();
+  const [deprecated, toggleDeprecated] = useDeprecated(false);
+  return (
+    <div className="check-box">
+      <input
+        id={id}
+        className="toggle-switch"
+        type="checkbox"
+        aria-label="Show or hide deprecated rules"
+        checked={deprecated}
+        onChange={toggleDeprecated}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            toggleDeprecated();
+          }
+        }}
+      />
+      <label> Show deprecated rules</label>
+    </div>
   );
 }
