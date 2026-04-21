@@ -132,7 +132,9 @@ def write_governance():
     readme.raise_for_status()
     core = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/teams/core.csv", timeout=5)
     core.raise_for_status()
-    emeritus = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/teams/emeritus.csv", timeout=5)
+    emeritus = requests.get(
+        f"{GOVERNANCE_REPO_URL}/raw/main/teams/emeritus.csv", timeout=5
+    )
     emeritus.raise_for_status()
     contents = GOVERNANCE_MD_TMPL.read_text()
     contents += readme.text
