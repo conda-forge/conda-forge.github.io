@@ -4,10 +4,20 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/news/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Sun, 08 Mar 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 21 Apr 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Feedstock Team Update Maintenance & Downtime]]></title>
+            <link>https://conda-forge.org/news/2026/04/21/team-update-maint/</link>
+            <guid>https://conda-forge.org/news/2026/04/21/team-update-maint/</guid>
+            <pubDate>Tue, 21 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[We need to do maintenance on the feedstock GitHub teams that requires some downtime.]]></description>
+            <content:encoded><![CDATA[<p>We need to do maintenance on the feedstock GitHub teams that requires some downtime.
+During this downtime, feedstock teams will not be updated. If you need help with an
+urgent, feedstock team-related maintenance item, please contact <code>@conda-forge/core</code>.</p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Github-hosted Actions Runners for conda-forge]]></title>
             <link>https://conda-forge.org/news/2026/03/08/move-to-github-actions/</link>
@@ -379,16 +389,6 @@ By default this is 2.17, which means you'd have to do</p>
 <li class="">... and so on.</li>
 </ul>
 <p>A new calendar is now available in the <a class="" href="https://conda-forge.org/community/meetings/">Community &gt; Meetings</a> section to help find the dates.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[Moving to Zulip]]></title>
-            <link>https://conda-forge.org/news/2024/11/04/moving-to-zulip/</link>
-            <guid>https://conda-forge.org/news/2024/11/04/moving-to-zulip/</guid>
-            <pubDate>Mon, 04 Nov 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[Two weeks ago we called a vote on CFEP-23 to decide whether we move our Element/Matrix chat rooms to Zulip.]]></description>
-            <content:encoded><![CDATA[<p>Two weeks ago we called a <a href="https://github.com/conda-forge/cfep/pull/54" target="_blank" rel="noopener noreferrer" class="">vote</a> on <a href="https://github.com/conda-forge/cfep/blob/main/cfep-23.md" target="_blank" rel="noopener noreferrer" class="">CFEP-23</a> to decide whether we move our <a href="https://matrix.to/#/#conda-forge:matrix.org" target="_blank" rel="noopener noreferrer" class="">Element/Matrix chat rooms</a> to Zulip.</p>
-<p>This vote has passed and now we are opening the doors to our Zulip instance: <a href="https://conda-forge.zulipchat.com/" target="_blank" rel="noopener noreferrer" class="">https://conda-forge.zulipchat.com/</a>. Please sign up to stay in touch!</p>
-<p>As per <a href="https://github.com/conda-forge/cfep/blob/main/cfep-23.md" target="_blank" rel="noopener noreferrer" class="">CFEP-23</a> (read it for more details), this means that we will stop using our <a href="https://matrix.to/#/#conda-forge:matrix.org" target="_blank" rel="noopener noreferrer" class="">Element chat rooms</a>. Instead all chat activity will continue in Zulip.</p>]]></content:encoded>
         </item>
     </channel>
 </rss>
