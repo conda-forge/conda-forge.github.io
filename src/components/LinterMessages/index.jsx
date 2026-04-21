@@ -135,9 +135,9 @@ function Message({ message, toc = null, showDeprecated = false }) {
           </li>
         )) ||
           null}
-        {(message.paths.length > 0 && (
-          <li key={`${message.identifier}-depr-${message.paths.join("-")}`}>
-            Affected paths: <code>{message.paths}</code>
+        {(message.path && (
+          <li key={`${message.identifier}-path-${message.path}`}>
+            Affected path: <code>{message.path}</code>
           </li>
         )) ||
           null}
