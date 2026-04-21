@@ -8,6 +8,7 @@ import { urls } from "@site/src/constants";
 export default function LinterMessages({ toc = null }) {
   const messagesURL = urls.linter.messages;
   const [messages, setMessages] = useState(prefetchedLinterMessages);
+
   useEffect(() => {
     fetch(messagesURL, {
       headers: {
@@ -27,127 +28,120 @@ export default function LinterMessages({ toc = null }) {
         </a>
         .
       </Admonition>
-      {<MessagesToc toc={toc} messages={messages} />}
+      <Heading as="h2" id="categories">
+        Available categories
+      </Heading>
+      <CategoriesToc messages={messages} />
+      <Heading as="h2" id="messages">
+        Messages
+      </Heading>
       {messages.categories &&
         Object.entries(messages.categories).map(([id, description]) => (
-          <div key={`${id}-div`}>
-            <Heading as="h2" id={id} key={id}>
-              {id}: {description.replaceAll("`", "")}
-            </Heading>
-            {messages.messages &&
-              messages.messages.map(
-                (message) =>
-                  (message.category == id && (
-                    <>
-                      <Heading
-                        as="h3"
-                        id={message.identifier}
-                        key={message.identifier}
-                      >
-                        {(message.deprecated_in && (
-                          <s>
-                            {message.identifier}: {message.name}
-                          </s>
-                        )) || (
-                          <>
-                            {message.identifier}: {message.name}
-                          </>
-                        )}
-                      </Heading>
-                      <ul key={`${message.identifier}-ul`}>
-                        <li key={`${message.identifier}-kind-${message.kind}`}>
-                          {(message.kind == "lint" && "🚨 Lint") || "ℹ️ Hint"}
-                        </li>
-                        <li
-                          key={`${message.identifier}-added-${message.added_in}`}
-                        >
-                          Added in conda-smithy {message.added_in}
-                        </li>
-                        {(message.deprecated_in && (
-                          <li
-                            key={`${message.identifier}-depr-${message.deprecated_in}`}
-                          >
-                            <strong>
-                              Deprecated in {message.deprecated_in}
-                            </strong>
-                          </li>
-                        )) ||
-                          null}
-                      </ul>
-                      <Markdown>{message.documentation}</Markdown>
-                      {(message.message.length > 0 && (
-                        <>
-                          <p>
-                            <strong>Message or template</strong>
-                          </p>
-                          <Admonition type="info" title={null} icon={null}>
-                            <Markdown>{message.message}</Markdown>
-                          </Admonition>
-                        </>
-                      )) ||
-                        null}
-                      {message.examples.length > 0 && (
-                        <>
-                          <p>
-                            <strong>Examples</strong>
-                          </p>
-                          {message.examples.map((example, idx) => (
-                            <Admonition
-                              type="note"
-                              title={null}
-                              icon={null}
-                              key={`${message.identifier}-example-${idx}`}
-                            >
-                              <Markdown>{example}</Markdown>
-                            </Admonition>
-                          ))}
-                        </>
-                      )}
-                      <hr />
-                    </>
-                  )) ||
-                  null,
-              )}
-          </div>
+          <Category
+            id={id}
+            description={description}
+            messages={messages}
+            toc={toc}
+          />
         ))}
     </>
   );
 }
 
-function MessagesToc({ toc, messages }) {
-  <ul>
-    {messages.categories &&
-      Object.entries(messages.categories).map(([id, desc]) => (
-        <li key={id}>
-          {toc &&
-            toc.push({
-              value: `${id}: ${desc.replaceAll("`", "")}`,
-              id: id,
-              level: 2,
-            }) &&
-            null}
-          <a href={`#${id}`}>{id}</a>
-          <ul>
-            {messages.messages &&
-              messages.messages.map(
-                (message) =>
-                  message.category == id && (
-                    <li key={message.identifier}>
-                      {toc &&
-                        toc.push({
-                          value: message.identifier,
-                          id: message.identifier,
-                          level: 3,
-                        }) &&
-                        null}
-                      <a href={`#${message.identifier}`}>
-                        {message.identifier}
-                      </a>
-                    </li>
-                  ),
-              )}
-          </ul>
+function Category({ id, description, messages, toc = null }) {
+  if (toc) {
+    toc.push({ value: `${id}: ${description}`, id: id, level: 2 });
+  }
+  return (
+    <>
+      <Heading as="h3" id={id} key={id}>
+        {id}: {description.replaceAll("`", "")}
+      </Heading>
+      {messages.messages &&
+        messages.messages.map(
+          (message) =>
+            message.category == id && <Message message={message} toc={toc} />,
+        )}
+    </>
+  );
+}
+
+function Message({ message, toc = null }) {
+  if (toc) {
+    toc.push({ value: message.identifier, id: message.identifier, level: 3 });
+  }
+  return (
+    <>
+      <Heading as="h4" id={message.identifier} key={message.identifier}>
+        {(message.deprecated_in && (
+          <s>
+            {message.identifier}: {message.name}
+          </s>
+        )) || (
+          <>
+            {message.identifier}: {message.name}
+          </>
+        )}
+      </Heading>
+      <ul key={`${message.identifier}-ul`}>
+        <li key={`${message.identifier}-kind-${message.kind}`}>
+          {(message.kind == "lint" && "🚨 Lint") || "ℹ️ Hint"}
         </li>
-      ))}
-  </ul>;
+        <li key={`${message.identifier}-added-${message.added_in}`}>
+          Added in conda-smithy {message.added_in}
+        </li>
+        {(message.deprecated_in && (
+          <li key={`${message.identifier}-depr-${message.deprecated_in}`}>
+            <strong>Deprecated in {message.deprecated_in}</strong>
+          </li>
+        )) ||
+          null}
+      </ul>
+      <Markdown>{message.documentation}</Markdown>
+      {(message.message.length > 0 && (
+        <>
+          <p>
+            <strong>Message or template</strong>
+          </p>
+          <Admonition type="info" title={null} icon={null}>
+            <Markdown>{message.message}</Markdown>
+          </Admonition>
+        </>
+      )) ||
+        null}
+      {message.examples.length > 0 && (
+        <>
+          <p>
+            <strong>Examples</strong>
+          </p>
+          {message.examples.map((example, idx) => (
+            <Admonition
+              type="note"
+              title={null}
+              icon={null}
+              key={`${message.identifier}-example-${idx}`}
+            >
+              <Markdown>{example}</Markdown>
+            </Admonition>
+          ))}
+        </>
+      )}
+      <hr />
+    </>
+  );
+}
+
+function CategoriesToc({ messages }) {
+  return (
+    <ul>
+      {messages.categories &&
+        Object.entries(messages.categories).map(([id, desc]) => (
+          <li key={`toc-${id}`}>
+            <a href={`#${id}`} key={id}>
+              {id}: {desc.replaceAll("`", "")}
+            </a>
+          </li>
+        ))}
+    </ul>
+  );
 }
