@@ -109,8 +109,8 @@ a {
 a:hover,
 /* We need to (re)override some of the infima rules to have proper states on
 navbar links, table of contents, and docs sidebar links, respectively */
-a.navbar__link:hover,  /* Top bar navigation links */
-a.table-of-contents__link:hover, /*Right sidebar links (table of contents) */
+  a.navbar__link:hover /* Top bar navigation links */,
+a.table-of-contents__link:hover /*Right sidebar links (table of contents) */,
 a[class^="sidebarItemLink"]:hover /* The docs sidebar links do not have its own class */ {
   text-decoration: underline;
   text-decoration-thickness: var(--pydata-link-hover-decoration-thickness);
@@ -126,13 +126,13 @@ a[class^="sidebarItemLink"]:active {
 
 /* In some cases, we override the underlines because there are other elements that
 already report the state (e.g. borders, background colors, etc) */
-a[class^="sidebarItemLink"][aria-current="page"], /* No underline if this is the current page */
+a[class^="sidebarItemLink"][aria-current="page"] /* No underline if this is the current page */,
 a.navbar__link,
 .navbar-sidebar__item,
 .menu a,
 .navbar__items--right a,
 .pagination-nav__link,
-a.card, /* These cards are used in index-like documentation pages */
+a.card /* These cards are used in index-like documentation pages */,
 a.card:hover {
   text-decoration: none;
 }

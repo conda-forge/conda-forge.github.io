@@ -55,15 +55,20 @@ You can refer to the [Glossary](../glossary.md).
 Using conda-forge is easy!
 
 - Make sure you have `conda >=4.9`:
+
   ```bash
   conda --version
   conda update conda
   ```
+
 - Add conda-forge as the highest priority channel:
+
   ```bash
   conda config --add channels conda-forge
   ```
+
 - Activate `strict` channel priority (`strict` will be activated by default in conda 5.0):
+
   ```bash
   conda config --set channel_priority strict
   ```
@@ -103,7 +108,7 @@ Please refer to [Using multiple channels](tipsandtricks.md#multiple-channels) fo
 
 Anyone can contribute packages to the `conda-forge` channel.
 You don't have to be the upstream maintainer of a package in order to contribute it to conda-forge.
-To learn how to contribute your first package read [the staging process](../../maintainer/adding_pkgs#the-staging-process).
+To learn how to contribute your first package read [the staging process](/docs/maintainer/adding_pkgs#the-staging-process).
 
 <a id="how-can-i-give-credit-to-conda-forge"></a>
 

@@ -4,7 +4,7 @@ authors:
 tags: [conda]
 ---
 
-# By the power of Grayskull... I have the Conda recipe!
+# By the power of Grayskull... I have the Conda recipe
 
 _The main goal of the Skeleto_~~n~~_r is to conquer Grayskull._
 

@@ -176,7 +176,7 @@ The current de facto policy can be found in [python-feedstock#794](https://githu
 
 ## Reviewing recipes
 
-To add new packages to conda-forge, users can submit a PR to `staged-recipes` (see [Contributing packages](../adding_pkgs) for more details),
+To add new packages to conda-forge, users can submit a PR to `staged-recipes` (see [Contributing packages](/docs/maintainer/adding_pkgs) for more details),
 where it will undergo a series of automated checks and a code review.
 Any conda-forge member can perform a code review, but the final merge can only be done by the `staged-recipes` or `core` teams.
 The following sections suggest guidelines on how to perform a successful code review.
@@ -218,7 +218,7 @@ Recommended:
 
 Required:
 
-1. `noarch: python` packages fulfill the [required criteria](../knowledge_base#noarch-python) to be considered as such.
+1. `noarch: python` packages fulfill the [required criteria](/docs/maintainer/knowledge_base#noarch-python) to be considered as such.
 
 Recommended:
 
@@ -228,8 +228,8 @@ Recommended:
    Alternatively, a patch can be applied. See [example](https://github.com/conda-forge/staged-recipes/pull/19166/commits/0284fc6da273031a4f93a1fea4533822cd4b385d).
 2. The modules checked by `test.imports` are not empty (this can happen with placeholder `__init__.py` files in top-level packages).
 3. The versions reported by `pip list` and `conda build` logs match.
-4. `pip check` passes. See [pip check](../adding_pkgs#testing-python-packages) for more details.
-5. If a project can be considered `noarch` (see [criteria](../knowledge_base#noarch-python)), it should be packaged as such.
+4. `pip check` passes. See [pip check](/docs/maintainer/adding_pkgs#testing-python-packages) for more details.
+5. If a project can be considered `noarch` (see [criteria](/docs/maintainer/knowledge_base#noarch-python)), it should be packaged as such.
 
 <a id="compiled-objects"></a>
 

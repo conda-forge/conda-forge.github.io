@@ -121,6 +121,5 @@ consider reading our [Infrastructure guide](/docs/maintainer/infrastructure).
 
 [anaconda-org-labels]: https://docs.anaconda.com/anacondaorg/user-guide/tutorials/
 [staged-recipes]: /docs/maintainer/understanding_conda_forge/staged_recipes/
-[feedstock-creation]: /docs/maintainer/understanding_conda_forge/staged_recipes/#feedstock-creation
 
 <!-- [feedstocks]: /docs/reference/infrastructure/feedstocks.md -->

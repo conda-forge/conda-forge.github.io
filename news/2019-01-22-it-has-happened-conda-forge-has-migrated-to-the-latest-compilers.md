@@ -1,4 +1,4 @@
-# It has happened! Conda-forge has migrated to the latest compilers 🎉.
+# It has happened! Conda-forge has migrated to the latest compilers 🎉
 
 If you:
 

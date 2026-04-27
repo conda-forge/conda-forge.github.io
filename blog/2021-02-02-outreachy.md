@@ -14,12 +14,12 @@ groups in free and open-source software. Outreachy is organized by
 
 <!--truncate-->
 
-## Participant Application Process:
+## Participant Application Process
 
 First, please review the Outreachy Eligibility and Application
 Information page to learn more about eligibility for Outreachy.
 
-## Steps for applicants to conda-forge:
+## Steps for applicants to conda-forge
 
 1. Confirm your eligibility on the Outreachy site
 2. Look at the Conda-forge projects available on the Outreachy site,
@@ -105,7 +105,7 @@ are some preliminary tasks that you can inspect to get ideas:
   in particular the autotick bot. You could find some new information
   or ideas for your contributing proposals.
 
-## Good starter tasks:
+## Good starter tasks
 
 ### Small Starter Tasks
 

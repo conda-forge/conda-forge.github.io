@@ -125,7 +125,7 @@ Please go to [News](/news/) for the latest ones! The RSS feed is available at [/
 
 [Read more](/news/2021/09/30/defaults-channel-is-now-dropped-when-building-conda-forge-packages/).
 
-### 2021-05-22: conda-forge is now citable! {#conda-forge-is-now-citable}
+### 2021-05-22: conda-forge is now citable {#conda-forge-is-now-citable}
 
 [Read more](/news/2021/05/22/conda-forge-is-now-citable/).
 
@@ -217,11 +217,11 @@ Please go to [News](/news/) for the latest ones! The RSS feed is available at [/
 
 [Read more](/news/2019/09/30/clang-900-and-gfortran-730-as-default-compilers-in-osx/).
 
-### 2019-03-28: We overhauled the blas support in conda-forge. {#we-overhauled-the-blas-support-in-conda-forge}
+### 2019-03-28: We overhauled the blas support in conda-forge {#we-overhauled-the-blas-support-in-conda-forge}
 
 [Read more](/news/2019/03/28/we-overhauled-the-blas-support-in-conda-forge/).
 
-### 2019-01-22: It has happened! Conda-forge has migrated to the latest compilers 🎉. {#it-has-happened-conda-forge-has-migrated-to-the-latest-compilers}
+### 2019-01-22: It has happened! Conda-forge has migrated to the latest compilers 🎉 {#it-has-happened-conda-forge-has-migrated-to-the-latest-compilers}
 
 [Read more](/news/2019/01/22/it-has-happened-conda-forge-has-migrated-to-the-latest-compilers/).
 
@@ -229,11 +229,11 @@ Please go to [News](/news/) for the latest ones! The RSS feed is available at [/
 
 ## 2018 {#id7}
 
-### 2018-10-12: The rebuild is moving along nicely with almost a third of the packages completed. {#the-rebuild-is-moving-along-nicely-with-almost-a-third-of-the-packages-completed}
+### 2018-10-12: The rebuild is moving along nicely with almost a third of the packages completed {#the-rebuild-is-moving-along-nicely-with-almost-a-third-of-the-packages-completed}
 
 [Read more](/news/2018/10/12/the-rebuild-is-moving-along-nicely-with-almost-a-third-of-the-packages-completed/).
 
-### 2018-09-24: A minimal python 3.7 build is now available across all platforms and both compilers! {#a-minimal-python-3-7-build-is-now-available-across-all-platforms-and-both-compilers}
+### 2018-09-24: A minimal python 3.7 build is now available across all platforms and both compilers {#a-minimal-python-3-7-build-is-now-available-across-all-platforms-and-both-compilers}
 
 [Read more](/news/2018/09/24/deprecation-notice-for-python-35/).
 
@@ -241,10 +241,10 @@ Please go to [News](/news/) for the latest ones! The RSS feed is available at [/
 
 [Read more](/news/2018/09/24/a-minimal-python-37-build-is-now-available-across-all-platforms-and-both-compilers/).
 
-### 2018-09-20: The compiler migration is in full swing. {#the-compiler-migration-is-in-full-swing}
+### 2018-09-20: The compiler migration is in full swing {#the-compiler-migration-is-in-full-swing}
 
 [Read more](/news/2018/09/20/the-compiler-migration-is-in-full-swing/).
 
-### 2018-09-10: Conda forge now has a magical status bar for tracking the progress of migrations. {#conda-forge-now-has-a-magical-status-bar-for-tracking-the-progress-of-migrations}
+### 2018-09-10: Conda forge now has a magical status bar for tracking the progress of migrations {#conda-forge-now-has-a-magical-status-bar-for-tracking-the-progress-of-migrations}
 
 [Read more](/news/2018/09/10/conda-forge-now-has-a-magical-status-bar-for-tracking-the-progress-of-migrations/).
