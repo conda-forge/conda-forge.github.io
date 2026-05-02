@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr" class="blog-wrapper blog-post-page plugin-blog plugin-id-default" data-has-hydrated="false">
 <head>
 <meta charset="UTF-8">
-<meta name="generator" content="Docusaurus v3.9.2">
+<meta name="generator" content="Docusaurus v3.10.1">
 <title data-rh="true">Contributing Packages To conda-forge Using Grayskull | conda-forge | community-driven packaging for conda</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://conda-forge.org/blog/2021/06/16/graykull-step-by-step/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Contributing Packages To conda-forge Using Grayskull | conda-forge | community-driven packaging for conda"><meta data-rh="true" name="description" content="When contributing packages to conda-forge, Grayskull can make your life"><meta data-rh="true" property="og:description" content="When contributing packages to conda-forge, Grayskull can make your life"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2021-06-16T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/ForgottenProgramme"><meta data-rh="true" property="article:tag" content="grayskull,outreachy"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://conda-forge.org/blog/2021/06/16/graykull-step-by-step/"><link data-rh="true" rel="alternate" href="https://conda-forge.org/blog/2021/06/16/graykull-step-by-step/" hreflang="en"><link data-rh="true" rel="alternate" href="https://conda-forge.org/blog/2021/06/16/graykull-step-by-step/" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://KB43FQOB7U-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://conda-forge.org/blog/2021/06/16/graykull-step-by-step","mainEntityOfPage":"https://conda-forge.org/blog/2021/06/16/graykull-step-by-step","url":"https://conda-forge.org/blog/2021/06/16/graykull-step-by-step","headline":"Contributing Packages To conda-forge Using Grayskull","name":"Contributing Packages To conda-forge Using Grayskull","description":"When contributing packages to conda-forge, Grayskull can make your life","datePublished":"2021-06-16T00:00:00.000Z","author":{"@type":"Person","name":"Mahe","description":"Outreachy intern","url":"https://github.com/ForgottenProgramme","image":"https://github.com/ForgottenProgramme.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://conda-forge.org/blog","name":"Blog"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="conda-forge | community-driven packaging for conda RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="conda-forge | community-driven packaging for conda Atom Feed">
 
@@ -16,11 +16,11 @@
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-<script src="/js/count.js" defer="defer" data-goatcounter="https://conda-forge.goatcounter.com/count"></script><link rel="stylesheet" href="/assets/css/styles.57813d0e.css">
-<script src="/assets/js/runtime~main.4c365502.js" defer="defer"></script>
-<script src="/assets/js/main.e937552f.js" defer="defer"></script>
+<script src="/js/count.js" defer="defer" data-goatcounter="https://conda-forge.goatcounter.com/count"></script><link rel="stylesheet" href="/assets/css/styles.1fc5f1fd.css">
+<script src="/assets/js/runtime~main.3e471717.js" defer="defer"></script>
+<script src="/assets/js/main.c2f07d11.js" defer="defer"></script>
 </head>
-<body class="navigation-with-keyboard">
+<body>
 <svg style="display: none;"><defs>
 <symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
 </defs></svg>
@@ -37,7 +37,7 @@ to generate the recipe.</p>
 <ol>
 <li class="">
 <p>Install <code>grayskull</code> using <code>conda</code> through the <code>conda-forge</code> channel:</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">$ conda install -c conda-forge grayskull</span><br></span></code></pre></div></div>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">$ conda install -c conda-forge grayskull</span><br></div></code></pre></div></div>
 </li>
 <li class="">
 <p>Fork and clone the conda-forge <a href="https://github.com/conda-forge/staged-recipes" target="_blank" rel="noopener noreferrer" class="">staged-recipes
