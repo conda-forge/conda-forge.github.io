@@ -170,12 +170,12 @@ tests:
         - example-package
       python_version:
         - ${{ python_min }}.*
-        - *
+        - "*"
       pip_check: true
 ```
 
 - `imports`: List the Python modules to import to verify the package installed correctly. This ensures basic functionality.
-- `python_version`: Test against the minimum supported Python version to ensure compatibility. Also test against the latest Python version (`*`) to catch any issues with newer releases.
+- `python_version`: Test against the minimum supported Python version to ensure compatibility. Also test against the latest Python version (`"*"`) to catch any issues with newer releases.
 - `pip_check`: Runs `pip check` to ensure all dependencies are satisfied and there are no conflicts.
 
 #### Command line tests

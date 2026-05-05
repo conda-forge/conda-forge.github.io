@@ -58,7 +58,7 @@ def main():
         initial_items = [
             item
             for json_path in directory.glob("_sidebar*.json")
-            for item in json.loads(json_path.read_text())
+            for item in json.loads(json_path.read_text(encoding="utf-8"))
         ]
         sidebar_files = set(get_sidebar_files(initial_items))
         missing_files_from_sidebar = docs_files - sidebar_files
