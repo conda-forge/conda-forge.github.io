@@ -152,6 +152,6 @@ export const urls = {
   },
   linter: {
     messages:
-      "https://raw.githubusercontent.com/jaimergp/conda-smithy/linter-revamp/conda_smithy/data/linter-messages.json",
+      "https://raw.githubusercontent.com/conda-forge/conda-smithy/main/conda_smithy/data/linter-messages.json",
   },
 };

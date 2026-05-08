@@ -19,7 +19,7 @@ curl -sL \
   "https://raw.githubusercontent.com/conda-forge/conda-smithy/main/conda_smithy/data/conda-forge.json"
 curl -sL \
   -o "$BASE_DIR/static/schema/linter-messages.json" \
-  "https://raw.githubusercontent.com/jaimergp/conda-smithy/linter-revamp/conda_smithy/data/linter-messages.json"
+  "https://raw.githubusercontent.com/conda-forge/conda-smithy/main/conda_smithy/data/linter-messages.json"
 
 # Render the templated content (e.g. CFEPs, core.csv, etc)
 python "$BASE_DIR/.ci_scripts/render_templated_content.py"
