@@ -117,11 +117,19 @@ function Message({ message, toc = null, showDeprecated = false }) {
             {message.identifier}: {message.name}
           </s>
         )) || (
-          <>
-            {message.identifier}: {message.name}
-          </>
-        )}
+            <>
+              {message.identifier}: {message.name}
+            </>
+          )}
       </Heading>
+      {(message.deprecated_in && (
+        <p>
+          <span className={["badge", "badge--danger"].join(" ")}>
+            Deprecated in {message.deprecated_in}
+          </span>
+        </p>
+      )) || 
+        null}
       <ul key={`${message.identifier}-ul`}>
         <li key={`${message.identifier}-kind-${message.kind}`}>
           {(message.kind == "lint" && "🚨 Lint") || "ℹ️ Hint"}
@@ -129,12 +137,6 @@ function Message({ message, toc = null, showDeprecated = false }) {
         <li key={`${message.identifier}-added-${message.added_in}`}>
           Added in conda-smithy {message.added_in}
         </li>
-        {(message.deprecated_in && (
-          <li key={`${message.identifier}-depr-${message.deprecated_in}`}>
-            <strong>Deprecated in {message.deprecated_in}</strong>
-          </li>
-        )) ||
-          null}
         {(message.path && (
           <li key={`${message.identifier}-path-${message.path}`}>
             Affected path: <code>{message.path}</code>
