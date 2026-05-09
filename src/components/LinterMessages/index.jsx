@@ -128,7 +128,7 @@ function Message({ message, toc = null, showDeprecated = false }) {
             Deprecated in {message.deprecated_in}
           </span>
         </p>
-      )) || 
+      )) ||
         null}
       <ul key={`${message.identifier}-ul`}>
         <li key={`${message.identifier}-kind-${message.kind}`}>
