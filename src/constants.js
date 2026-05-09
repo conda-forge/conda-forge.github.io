@@ -150,4 +150,8 @@ export const urls = {
     "conda-forge.yml":
       "https://raw.githubusercontent.com/conda-forge/conda-smithy/main/conda_smithy/data/conda-forge.json",
   },
+  linter: {
+    messages:
+      "https://raw.githubusercontent.com/conda-forge/conda-smithy/main/conda_smithy/data/linter-messages.json",
+  },
 };

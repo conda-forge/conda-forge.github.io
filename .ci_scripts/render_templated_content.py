@@ -120,7 +120,7 @@ def _get_formatted_names(csv_contents):
 
 
 def write_code_of_conduct():
-    r = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/CODE_OF_CONDUCT.md")
+    r = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/CODE_OF_CONDUCT.md", timeout=5)
     r.raise_for_status()
     contents = CODE_OF_CONDUCT_MD_TMPL.read_text()
     contents += r.text
@@ -128,11 +128,13 @@ def write_code_of_conduct():
 
 
 def write_governance():
-    readme = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/README.md")
+    readme = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/README.md", timeout=5)
     readme.raise_for_status()
-    core = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/teams/core.csv")
+    core = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/teams/core.csv", timeout=5)
     core.raise_for_status()
-    emeritus = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/teams/emeritus.csv")
+    emeritus = requests.get(
+        f"{GOVERNANCE_REPO_URL}/raw/main/teams/emeritus.csv", timeout=5
+    )
     emeritus.raise_for_status()
     contents = GOVERNANCE_MD_TMPL.read_text()
     contents += readme.text
