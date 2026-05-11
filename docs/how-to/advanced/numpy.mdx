@@ -1,0 +1,80 @@
+---
+tags: [howto, advanced]
+---
+
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+# Building Against NumPy
+
+Finding `numpy.get_include()` in `setup.py` or `cimport` statements in `.pyx` or `.pyd` files are a telltale sign that the package links against NumPy.
+
+Adding `numpy` in the `host:` section is sufficient to have a compatible NumPy version at run time:
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - numpy
+```
+
+```recipe
+requirements:
+  host:
+    - numpy
+```
+
+</RecipeTabs>
+
+At the time of writing (June 2025), the above is equivalent to the following:
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - numpy 2.*
+```
+
+```recipe
+requirements:
+  host:
+    - numpy 2.*
+```
+
+</RecipeTabs>
+
+See the pinning repository for
+[what the pinning corresponds to](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml) at any given time.
+
+In either case, the actual runtime requirements are determined through numpy's
+run-export, which is:
+
+- `>=1.2x,<2` if you're building against numpy 1.2x
+- `>=1.19,<3` if you're building against numpy 2.0
+- `>=1.21,<3` if you're building against numpy 2.1 or 2.2
+- `>=1.23,<3` if you're building against numpy 2.3
+
+If the package you are building has a higher minimum requirement for numpy, please add this under `run`:
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    # leave this unpinned!
+    - numpy
+  run:
+    - numpy >={{ the_lower_bound_your_package_needs }}
+```
+
+```recipe
+requirements:
+  host:
+    # leave this unpinned!
+    - numpy
+  run:
+    - numpy >=${{ the_lower_bound_your_package_needs }}
+```
+
+</RecipeTabs>

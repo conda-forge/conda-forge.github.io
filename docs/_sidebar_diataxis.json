@@ -102,9 +102,9 @@
         },
         "items": [
           {
-            "type": "link",
+            "type": "doc",
             "label": "Deal with numpy",
-            "href": "/docs/maintainer/knowledge_base/#building-against-numpy"
+            "id": "how-to/advanced/numpy"
           },
           {
             "type": "doc",
