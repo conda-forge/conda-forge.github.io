@@ -6,7 +6,7 @@ import { RecipeTabs } from "@site/src/components/RecipeTabs";
 
 # Building Against NumPy
 
-Finding `numpy.get_include()` in `setup.py` or `cimport` statements in `.pyx` or `.pyd` files are a telltale sign that the package links against NumPy.
+Finding `numpy.get_include()` in `setup.py`, `dependency('numpy')` in `meson.build`, or `cimport` statements in `.pyx` or `.pyd` files are a telltale sign that the package links against NumPy.
 
 Adding `numpy` in the `host:` section is sufficient to have a compatible NumPy version at run time:
 
