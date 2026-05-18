@@ -74,7 +74,7 @@ See [this comment](https://github.com/conda-forge/conda-forge-pinning-feedstock/
 You'll need edits in both `conda_build_config.yaml` and your recipe file.
 
 ```recipe title="recipe/conda_build_config.yaml"
-# Note how the selector does NOT mention CUDA.
+# Note that the selector does NOT mention CUDA.
 github_actions_labels:
 - runner-for-cpu  # [linux64]
 - runner-for-gpu  # [linux64]
