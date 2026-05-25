@@ -98,7 +98,7 @@ While these last changes often need to be done by the maintainers, conda-forge h
 
 This happens in two steps in the CI of [`cf-scripts`](https://github.com/regro/cf-scripts).
 
-First, the version information is updated from upstream sources and stored in the [`cf-graph-countyfair` repo](/docs/maintainer/infrastructure/#regrocf-graph-countyfair), more specifically in the `versions` directory tree, nested by hash with one file per package.
+First, the version information is updated from upstream sources and stored in the [`autotick-bot-graph` repo](/docs/maintainer/infrastructure/#conda-forgeautotick-bot-graph), more specifically in the `versions` directory tree, nested by hash with one file per package.
 
 ```mermaid
 sequenceDiagram
@@ -106,7 +106,7 @@ sequenceDiagram
     participant gha as github actions
     participant cft as conda_forge_tick
     participant ups as upstream
-    participant cfg as cf-graph-countyfair
+    participant cfg as autotick-bot-graph
     loop every hour at :15, :45
         cfs->>gha: bot-versions
         gha->>cft: update-upstream-versions
@@ -128,7 +128,7 @@ sequenceDiagram
     participant gha as github actions
     participant cft as conda_forge_tick
     participant fs as feedstock
-    participant cfg as cf-graph-countyfair
+    participant cfg as autotick-bot-graph
     loop self renewing
         cfs->>gha: bot-bot
         gha->>cft: auto-tick
@@ -163,7 +163,7 @@ sequenceDiagram
     participant gha as github actions
     participant cft as conda_forge_tick
     participant fs as feedstock
-    participant cfg as cf-graph-countyfair
+    participant cfg as autotick-bot-graph
     loop self renewing
         cfs->>gha: bot-bot
         gha->>cft: auto-tick
