@@ -67,7 +67,7 @@ External services connect to `staged-recipes` too:
 - ⚙️ Deployed in Github repositories
 - 🔒 Has access to Azure Pipelines, Github Actions, Anaconda.org (cf-staging)
 - 🔐 Might have access to Travis CI, Cirun via `admin-requests` (WIP)
-- 🤖 Integrated with [`admin-migrations`](#admin-migrations), [`admin-requests`](#admin-requests), the [`autotick-bot`](#autotick-bot), and [`webservices`](#webservices).
+- 🤖 Integrated with [`admin-migrations`](#admin-migrations), [`admin-requests`](#admin-requests), the [`conda-forge-bot`](#conda-forge-bot), and [`webservices`](#webservices).
 
 Conda-forge has thousands of feedstocks.
 Each feedstock hosts a recipe plus the required pipelines, supporting scripts and configuration metadata.
@@ -84,7 +84,7 @@ You should never manually edit files _not_ listed above! Changes will be overrid
 Combining these two sources with some external components, `conda-smithy` will generate (render) the contents of the feedstock. Many of the directories are named like that because it is what the external service (e.g. Azure) requests. However, some `conda-smithy`-unique directories are worth discussing:
 
 - `.ci_support/`: Contains the rendered `conda_build_config.yaml` files, passed to `conda-build` via the `-m` flag. Each file here corresponds to one job in the CI build matrix.
-- `.ci_support/migrations/`: Special YAML files that instruct `conda-smithy` how to update the `.ci_support/*.yaml` files. These migration files are usually put here by the [`autotick-bot`](#autotick-bot) infrastructure, and removed once the migration is considered finished.
+- `.ci_support/migrations/`: Special YAML files that instruct `conda-smithy` how to update the `.ci_support/*.yaml` files. These migration files are usually put here by the [`conda-forge-bot`](#conda-forge-bot) infrastructure, and removed once the migration is considered finished.
 - `.scripts/`: Common logic and code supporting the steps you can find in the CI pipelines and local debugging tools.
 - `build-locally.py`: A Python script to debug recipes in your machine, roughly equivalent to what's done in the CI pipelines.
 
@@ -179,7 +179,7 @@ This special feedstock provides a package that defines the logic to install and 
 
 #### conda-forge/conda-forge-bot-data
 
-This is the graph data used by [`autotick-bot`](#autotick-bot).
+This is the graph data used by [`conda-forge-bot`](#conda-forge-bot).
 
 - ⚙️ Deployed in [Github Actions via `conda-forge/conda-forge-bot-data`](https://github.com/conda-forge/conda-forge-bot-data)
 - ⛓ Needs [`regro/cf-scripts`](#regrocf-scripts), [`conda-forge/conda-forge-pinning-feedstock`](#conda-forge-pinning)
@@ -243,7 +243,7 @@ Bugs or suggestions regarding the service functionality should therefore be open
 
 #### regro/cf-scripts
 
-The code and logic behind [`autotick-bot`](#autotick-bot).
+The code and logic behind [`conda-forge-bot`](#conda-forge-bot).
 
 - 📜 Source at [`regro/cf-scripts`](https://github.com/regro/cf-scripts)
 - 📖 [Documentation](https://github.com/regro/cf-scripts/blob/main/README.md)
@@ -275,7 +275,7 @@ It also does the job of creating new feedstocks for recipes that have been merge
 The [`create_feedstocks` workflow](https://github.com/conda-forge/admin-requests/blob/main/.github/workflows/create_feedstocks.yml) runs several times per hour to create the new feedstock repositories on the `conda-forge` organization.
 The core logic is defined in the Python script [`.github/workflows/scripts/create_feedstocks.py`](https://github.com/conda-forge/admin-requests/blob/main/scripts/create_feedstocks.py).
 
-#### autotick-bot
+#### conda-forge-bot
 
 - ⚙️ Deployed in [`regro/cf-scripts`](https://github.com/regro/cf-scripts)
 - ⛓ Needs [`regro/cf-scripts`](https://github.com/regro/cf-scripts), [`conda-forge/conda-forge-bot-data`](https://github.com/conda-forge/conda-forge-bot-data), [`conda-forge/conda-forge-pinning-feedstock`](https://github.com/conda-forge/conda-forge-pinning-feedstock)
@@ -1036,7 +1036,7 @@ In addition to the thousands of repositories, conda-forge uses several other Git
 #### Organizations
 
 - [`conda-forge`](https://github.com/conda-forge): the main organization
-- [`regro`](https://github.com/regro): hosts the `autotick-bot` machinery
+- [`regro`](https://github.com/regro): hosts the `conda-forge-bot` machinery
 - [`channel-mirrors`](https://github.com/channel-mirrors): OCI mirror of the conda-forge channel
 
 :::info
