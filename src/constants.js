@@ -82,18 +82,18 @@ export const urls = {
     "https://raw.githubusercontent.com/conda-forge/by-the-numbers/main/data/live_counts.json",
   migrations: {
     details:
-      "https://raw.githubusercontent.com/conda-forge/autotick-bot-graph/main/status/migration_json/<NAME>.json",
+      "https://raw.githubusercontent.com/conda-forge/conda-forge-bot-data/main/status/migration_json/<NAME>.json",
     graph:
-      "https://raw.githubusercontent.com/conda-forge/autotick-bot-graph/main/status/migration_svg/<NAME>.svg?sanitize=true",
+      "https://raw.githubusercontent.com/conda-forge/conda-forge-bot-data/main/status/migration_svg/<NAME>.svg?sanitize=true",
     status: {
       closed:
-        "https://raw.githubusercontent.com/conda-forge/autotick-bot-graph/main/status/closed_status.json",
+        "https://raw.githubusercontent.com/conda-forge/conda-forge-bot-data/main/status/closed_status.json",
       longterm:
-        "https://raw.githubusercontent.com/conda-forge/autotick-bot-graph/main/status/longterm_status.json",
+        "https://raw.githubusercontent.com/conda-forge/conda-forge-bot-data/main/status/longterm_status.json",
       paused:
-        "https://raw.githubusercontent.com/conda-forge/autotick-bot-graph/main/status/paused_status.json",
+        "https://raw.githubusercontent.com/conda-forge/conda-forge-bot-data/main/status/paused_status.json",
       regular:
-        "https://raw.githubusercontent.com/conda-forge/autotick-bot-graph/main/status/regular_status.json",
+        "https://raw.githubusercontent.com/conda-forge/conda-forge-bot-data/main/status/regular_status.json",
     },
   },
   repos: {
@@ -143,7 +143,7 @@ export const urls = {
     usage: "https://conda-forge.herokuapp.com/status-monitor/report/travis-ci",
   },
   versions: {
-    api: "https://raw.githubusercontent.com/conda-forge/autotick-bot-graph/main/status/version_status.v2.json",
+    api: "https://raw.githubusercontent.com/conda-forge/conda-forge-bot-data/main/status/version_status.v2.json",
     pr: "https://github.com/conda-forge/<NAME>-feedstock/tree/main/recipe",
   },
   schemas: {
