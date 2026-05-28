@@ -305,7 +305,7 @@ In these cases, the bot can be confused, consider subsequent releases as older t
 You can check which version the bot detected by looking in the metadata that it collected, which is conveniently available in its own Github repo.
 To deal with the large number of packages, the information is sharded (i.e. split into several subdirectories) according to some hash function,
 which makes it a bit challenging to find.
-The best way is to use Github search with the query [`repo:conda-forge/autotick-bot-graph path:version_pr_info/**/amrex.json`](https://github.com/search?q=repo%3Aconda-forge%2Fautotick-bot-graph+path%3Aversion_pr_info%2F**%2Famrex.json&type=code), where you should replace `amrex` with the name of your own package.
+The best way is to use Github search with the query [`repo:conda-forge/conda-forge-bot-data path:version_pr_info/**/amrex.json`](https://github.com/search?q=repo%3Aconda-forge%2Fconda-forge-bot-data+path%3Aversion_pr_info%2F**%2Famrex.json&type=code), where you should replace `amrex` with the name of your own package.
 This will lead you to a file looking like:
 
 ```json
