@@ -107,11 +107,11 @@ export const urls = {
           "https://github.com/conda-forge/conda-forge.github.io/actions?query=workflow%3Adeploy",
       },
       {
-        name: "autotick bot",
-        link: "https://github.com/regro/cf-scripts",
+        name: "conda-forge-bot",
+        link: "https://github.com/conda-forge/conda-forge-bot",
         badge:
-          "https://github.com/regro/cf-scripts/actions/workflows/bot-bot.yml/badge.svg",
-        badgeLink: "https://github.com/regro/cf-scripts/actions",
+          "https://github.com/conda-forge/conda-forge-bot/actions/workflows/bot-bot.yml/badge.svg",
+        badgeLink: "https://github.com/conda-forge/conda-forge-bot/actions",
       },
       {
         name: "feedstock creation",

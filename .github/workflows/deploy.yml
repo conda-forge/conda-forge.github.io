@@ -74,6 +74,7 @@ jobs:
             --exclude '.*/404.html/'
             --exclude 'https://wave.webaim.org/report#/conda-forge.org'
             --exclude 'https://www.gnu.org/software/autoconf/*'
+            --exclude 'https://github.com/regro/cf-scripts/*'
             --exclude '.*,.*'
             --exclude-path './build/community/minutes/'
             --remap "https://conda-forge.org/(.*) file://$(pwd)/build/\$1"

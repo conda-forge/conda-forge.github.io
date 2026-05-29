@@ -182,11 +182,11 @@ This special feedstock provides a package that defines the logic to install and 
 This is the graph data used by [`conda-forge-bot`](#conda-forge-bot).
 
 - ⚙️ Deployed in [Github Actions via `conda-forge/conda-forge-bot-data`](https://github.com/conda-forge/conda-forge-bot-data)
-- ⛓ Needs [`regro/cf-scripts`](#regrocf-scripts), [`conda-forge/conda-forge-pinning-feedstock`](#conda-forge-pinning)
+- ⛓ Needs [`conda-forge/conda-forge-bot`](#conda-forgeconda-forge-bot), [`conda-forge/conda-forge-pinning-feedstock`](#conda-forge-pinning)
 - 🤖 Uses [`@regro-cf-autotick-bot`](#bot-accounts)
 - 🔒 Has access to Github API
 
-The logic to build the graph is provided by [`cf-scripts`](#regrocf-scripts).
+The logic to build the graph is provided by [`conda-forge-bot`](#conda-forgeconda-forge-bot).
 
 #### docker-images
 
@@ -241,12 +241,12 @@ Please note that the code logic provided by the app is in the `Smithy` repositor
 
 Bugs or suggestions regarding the service functionality should therefore be opened in `conda-forge/conda-smithy`'s [bug tracker](https://github.com/conda-forge/conda-smithy/issues).
 
-#### regro/cf-scripts
+#### conda-forge/conda-forge-bot
 
 The code and logic behind [`conda-forge-bot`](#conda-forge-bot).
 
-- 📜 Source at [`regro/cf-scripts`](https://github.com/regro/cf-scripts)
-- 📖 [Documentation](https://github.com/regro/cf-scripts/blob/main/README.md)
+- 📜 Source at [`conda-forge/conda-forge-bot`](https://github.com/conda-forge/conda-forge-bot)
+- 📖 [Documentation](https://github.com/conda-forge/conda-forge-bot/blob/main/README.md)
 
 ### Automated maintenance
 
@@ -277,13 +277,13 @@ The core logic is defined in the Python script [`.github/workflows/scripts/creat
 
 #### conda-forge-bot
 
-- ⚙️ Deployed in [`regro/cf-scripts`](https://github.com/regro/cf-scripts)
-- ⛓ Needs [`regro/cf-scripts`](https://github.com/regro/cf-scripts), [`conda-forge/conda-forge-bot-data`](https://github.com/conda-forge/conda-forge-bot-data), [`conda-forge/conda-forge-pinning-feedstock`](https://github.com/conda-forge/conda-forge-pinning-feedstock)
+- ⚙️ Deployed in [`conda-forge/conda-forge-bot`](https://github.com/conda-forge/conda-forge-bot)
+- ⛓ Needs [`conda-forge/conda-forge-bot`](https://github.com/conda-forge/conda-forge-bot), [`conda-forge/conda-forge-bot-data`](https://github.com/conda-forge/conda-forge-bot-data), [`conda-forge/conda-forge-pinning-feedstock`](https://github.com/conda-forge/conda-forge-pinning-feedstock)
 - 🤖 Uses [`@regro-cf-autotick-bot`](https://github.com/regro-cf-autotick-bot)
 
 :::note
 The older repo [`regro/autotick-bot`](https://github.com/regro/autotick-bot) is no longer in use;
-the bot now runs directly in `regro/cf-scripts`.
+the bot now runs directly in `conda-forge/conda-forge-bot`.
 :::
 
 #### webservices
@@ -361,7 +361,7 @@ Entering this command in the title or comment of an issue will instruct the admi
 open a PR enabling the automatic merging of passing PRs from the `auto-tick`
 bot. This functionality is currently experimental. You can find more details
 [here](#automerge).
-Please open issue on `regro/cf-scripts` for any feedback, bugs, and/or questions!
+Please open issue on `conda-forge/conda-forge-bot` for any feedback, bugs, and/or questions!
 
 ### @conda-forge-admin, please remove bot automerge
 
