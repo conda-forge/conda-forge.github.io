@@ -94,7 +94,7 @@ Dynamic
 
 ### Responsibility
 
-The migration and autotick bot is now a central part of the conda-forge ecosystem.
+The migration and conda-forge-bot is now a central part of the conda-forge ecosystem.
 This subteam has the right and responsibility to manage and develop the general
 operation of the bot.
 This includes building new migrators, fixing migration related bugs, and tooling.
@@ -113,7 +113,7 @@ migration.
 
 Packages and tools that fall under the purview of the bot subteam include:
 
-- cf-scripts
+- conda-forge-bot
 - libcflib
 - libcfgraph
 - cf-graph

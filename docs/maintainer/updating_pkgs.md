@@ -76,11 +76,11 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
 
 ##### **How does regro-cf-autotick-bot create automatic version updates?**
 
-The [regro-cf-autotick-bot](https://github.com/regro/cf-scripts) continuously searches on a loop for any PyPI releases, GitHub releases, and any other sources of versions when any updates are released. The source code that gets executed in the loop comes from the [cf-scripts repository](https://github.com/regro/cf-scripts), which contains the code to detect versions and submit PRs.
-Visit [cf-scripts](https://github.com/regro/cf-scripts/blob/main/README.md) to read more about it.
+The [regro-cf-autotick-bot](https://github.com/conda-forge/conda-forge-bot) continuously searches on a loop for any PyPI releases, GitHub releases, and any other sources of versions when any updates are released. The source code that gets executed in the loop comes from the [conda-forge-bot repository](https://github.com/conda-forge/conda-forge-bot), which contains the code to detect versions and submit PRs.
+Visit [conda-forge-bot](https://github.com/conda-forge/conda-forge-bot/blob/main/README.md) to read more about it.
 
 The bot creates updates via inspection of the upstream release and will always update the `source` section and build version in the [recipe metadata](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#).
-As an experimental feature, the autotick bot can also be configured to verify or update the recipe's requirements for [Grayskull](https://github.com/conda-incubator/grayskull)-compatible recipes.
+As an experimental feature, the conda-forge-bot can also be configured to verify or update the recipe's requirements for [Grayskull](https://github.com/conda-incubator/grayskull)-compatible recipes.
 This may help maintain packages with frequent requirements changes or specific requirements version pins, however this feature is not as extensively verified and proposed updates should be reviewed.
 (See the [bot](conda_forge_yml.mdx#bot) section in `conda-forge.yml`)
 
