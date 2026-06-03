@@ -4,17 +4,15 @@ title: "What is conda-forge?"
 
 # Why conda-forge as a software distribution?
 
-Conda-forge's mission is to make software easily distributable and usable by the world.
+Conda-forge's goal is to make software easily installable and usable by the world.
 
-conda-forge solves the problem of distributing scientific software properly and consistently for many applications and platforms.
+Conda-forge grew out of the intersection between Python and the scientific software ecosystem, not least because it solves many problems in this space that had not been solved elsewhere. Scientific computing is still a core constituency of conda-forge, but over the last 10+ years, the ecosystem has grown to encompass packages from essentially all programming languages, across all major platforms and architectures. See also [key issues in native Python packaging](https://pypackaging-native.github.io/#key-issues).
 
-conda-forge is much more than `python` and `conda`, and it covers much more than scientific software applications: conda-forge distributes the entire dependency chain for anyone to be able to run their projects.
+In other words, conda-forge is much more than `python` and `conda`: it distributes the entire dependency chain (including the compilers!) for pretty much anyone to be able to run their projects.
 
 ## Encompassing ecosystems across languages
 
-Projects use different languages, and language ecosystems do not exist in isolation: Python, C++, R, Fortran, and potentially assets (like model weights) live all together in end-users applications.
-
-conda-forge distributes all of them so that they can be used consistently altogether in end-users projects.
+Projects use different languages, and language ecosystems do not exist in isolation: Python, C++, R, Fortran, and potentially assets (like model weights) live all together in end-users applications, and conda-forge distributes all of them so that they can be used consistently altogether in end-users projects.
 
 :::info Benefits
 conda-forge provides a plethora of packages from different ecosystems, making sure they can be used all together.
@@ -22,9 +20,9 @@ conda-forge provides a plethora of packages from different ecosystems, making su
 
 ## Built on an open package format, with community-managed artifacts
 
-conda packages originated from maintainers of Scientific Python projects at Anaconda who wanted to properly solve distributing their projects given their complexity (mixture of Python, C, Fortran, Cython, C++ code; interface with external C and Fortran libraries) compared to normal python-only projects.
+The conda package manager and format were created to address packaging challenges for the NumPy stack and other software with native extensions—projects that mix Python with C, Fortran, Cython, C++, and interfaces to external libraries, and that are harder to ship with tools aimed at pure-Python packages alone.
 
-Anaconda came up with a package format which could meet the needs of distributing Python projects with native extensions: the conda package.
+At the first PyData meetup, several developers asked Guido van Rossum how to fix Python packaging for the NumPy stack; his answer was to "solve the problem ourselves." Engineers at Continuum (now Anaconda, Inc.) took that seriously: they studied dpkg, rpm, pip/virtualenv, Homebrew, Nix, and other systems, drew on experience with Enthought Python Distribution (EPD), and created the conda package manager and conda environments. A fuller account of this history is in progress in the [conda-forge history article](https://github.com/conda-forge/conda-forge.github.io/pull/2298) (see also [this talk](https://www.youtube.com/watch?v=U2oa_RLbTVA) and [this talk](https://www.youtube.com/watch?v=gFEE3w7F0ww)).
 
 While Anaconda's distribution is linked to specific legal Terms of Service, conda-forge reuses this package format in a community-run distribution where artifacts are published under BSD-3-Clause, alongside the original projects' licenses.
 
