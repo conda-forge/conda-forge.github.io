@@ -55,9 +55,7 @@
           "type": "doc",
           "id": "reference/index"
         },
-        "items": [
-          "reference/runners"
-        ]
+        "items": ["reference/runners"]
       },
       {
         "type": "category",
