@@ -398,7 +398,7 @@
       {
         "type": "link",
         "label": "Ongoing migrations",
-        "href": "/status/#migrations"
+        "href": "/status/"
       },
       {
         "type": "ref",
