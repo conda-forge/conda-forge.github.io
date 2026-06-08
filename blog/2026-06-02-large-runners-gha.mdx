@@ -1,0 +1,79 @@
+---
+authors:
+  - jaimergp
+tags: [infrastructure]
+---
+
+import Link from '@docusaurus/Link';
+import styles from "@site/src/components/Supporters/styles.module.css";
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+# New large runners available for GitHub Actions
+
+In March, we were notified that the colocation where the `open-gpu-server` CI was running was going to be decommissioned. This meant no GPU CI jobs and no long-running CPU jobs. Fortunately, we could get in touch with several companies that kindly agreed to sponsor the long-running CPU CI. We have not found a replacement for the GPU jobs, but we are still searching!
+
+{/* truncate */}
+
+## Decommissioning the `open-gpu-server` CI
+
+After [almost three years](https://quansight.com/post/building-a-gpu-ci-service-for-conda-forge/), the [`open-gpu-server`](https://github.com/Quansight/open-gpu-server) powering the long-running GPU and CPU CI jobs was decommissioned on March 13th. We started searching for suitable providers that could provide equivalent CI services and decided to give [Cirrus Runners](https://cirrus-runners.app) (CPU _and_ GPU) a try. The timing was terrible, because [Cirrus Labs was acquired by OpenAI on April 7th](https://cirruslabs.org) and their Runners service is being wound down.
+
+## New providers for long-running CPU jobs
+
+Immediately after, we reached out to a few companies offering external runners for GitHub Actions. Maybe someone out there can help us with our most resource-demanding feedstocks... Fortunately, three different providers agreed to sponsor **large CPU runners for Linux, macOS and Windows**! We are incredibly grateful to these three companies:
+
+<div className={styles.supporters}>
+  <div className={styles.card}>
+    {[
+      {
+        name: "Namespace.so",
+        link: "https://namespace.so",
+        light: "img/supporters/namespace_light.svg",
+        dark: "img/supporters/namespace_dark.svg",
+      },
+      {
+        name: "Blacksmith.sh",
+        link: "https://blacksmith.sh",
+        light: "img/supporters/blacksmith_light.png",
+        dark: "img/supporters/blacksmith_dark.png",
+      },
+      {
+        name: "Depot.dev",
+        link: "https://depot.dev",
+        light: "img/supporters/depot_light.svg",
+        dark: "img/supporters/depot_dark.svg",
+      },
+    ].map(({ name, link, light, dark, width }, index) => (
+      <Link key={index} to={link}>
+        <div className={styles.cardWrapper}>
+          <ThemedImage
+            className={styles.image}
+            alt={`${name} logo`}
+            title={`Go to ${name}'s website`}
+            sources={{
+              light: useBaseUrl(`${light}`),
+              dark: useBaseUrl(`${dark}`),
+            }}
+            width={"110%"}
+          />
+        </div>
+        <p align={"center"}>{name}</p>
+      </Link>
+    ))}
+  </div>
+  <p></p>
+</div>
+
+If you maintain a feedstock with special CI requirements (e.g. it cannot be built with the Microsoft-hosted Azure Pipelines or GitHub Actions runners within the allocated six hours, or it runs out of RAM or disk despite all possible workarounds), learn how to opt-in at [How to> Advanced> Self-hosted runners](/docs/how-to/advanced/self-hosted-runners/).
+
+## What about the GPU CI jobs?
+
+Sadly, we don't have GPU CI jobs yet. Despite our attempts, we have not been able to find a GPU CI service that meets our requirements, which include:
+
+- Fixed costs or org-wide capped concurrency to estimate an upper bound for the costs.
+- Runs on GitHub Actions or equivalent integration effort in `conda-smithy`.
+- Based on ephemeral Linux and/or Windows VMs that can (ideally) run Docker.
+- VM images are maintained by the service provider, not us.
+
+If you know of a service that can cover these points, please [reach out](/community/getting-in-touch.md)! You can also email us at [conda-forge-core@googlegroups.com](mailto:conda-forge-core@googlegroups.com).
