@@ -50,6 +50,17 @@
       },
       {
         "type": "category",
+        "label": "Reference",
+        "link": {
+          "type": "doc",
+          "id": "reference/index"
+        },
+        "items": [
+          "reference/runners"
+        ]
+      },
+      {
+        "type": "category",
         "label": "Example recipes",
         "link": {
           "type": "doc",

@@ -369,6 +369,10 @@
   {
     "type": "category",
     "label": "Reference",
+    "link": {
+      "type": "doc",
+      "id": "reference/index"
+    },
     "items": [
       {
         "type": "ref",
