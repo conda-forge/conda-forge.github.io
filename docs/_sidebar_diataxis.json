@@ -173,6 +173,10 @@
           },
           {
             "type": "doc",
+            "id": "how-to/advanced/run-package-tests-off-ci"
+          },
+          {
+            "type": "doc",
             "label": "Package a fork",
             "id": "how-to/advanced/package-a-fork"
           },
@@ -369,6 +373,14 @@
       {
         "type": "ref",
         "id": "maintainer/infrastructure"
+      },
+      {
+        "type": "ref",
+        "id": "reference/runners"
+      },
+      {
+        "type": "ref",
+        "id": "maintainer/linter"
       },
       {
         "type": "ref",
