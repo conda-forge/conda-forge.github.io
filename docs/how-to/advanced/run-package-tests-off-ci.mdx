@@ -1,0 +1,55 @@
+---
+tags: [how-to, advanced]
+---
+
+# Run package tests off CI
+
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+
+Despite having a successful build, sometimes we can't run all the tests we'd like on CI. Some reasons include:
+
+- Specific types of hardware not available
+- Tests are too demanding for CI
+- Requires non-public credentials
+
+In these cases, it's desirable to run the disabled tests elsewhere, before publishing the package, as part of the regular PR contribution workflow.
+
+## Steps
+
+1. Enable [build artifacts in `conda-forge.yml`](/docs/maintainer/conda_forge_yml/#workflow-settings) and [rerender](/docs/basics/rerender/):
+
+    ```yaml file=conda-forge.yml
+    workflow_settings:
+        store_build_artifacts: true
+    ```
+
+2. Open a PR and let the regular CI build the packages for you.
+3. Download the PR artifacts starting with `conda_artifacts_` or `conda_pkgs_` to a suitable location, and extract the contents from the (possibly nested) Zip archive(s).
+4. Run the tests:
+
+    <RecipeTabs>
+
+    ```bash
+    conda-build --override-channels --channel conda-forge --test path/to/your-package-*.conda
+    ```
+
+    ```bash
+    rattler-build test --package-file path/to/your-package-*.conda
+    ```
+
+    </RecipeTabs>
+
+## Automated script
+
+Steps 3 and 4 can be automated with [this script](https://gist.github.com/jaimergp/99f25166325cd0a4622685ff6c3e71a3). Copy it somewhere and run it with uv:
+
+```bash
+uv run test_remote_conda_packages.py URL_TO_GITHUB_PR_OR_COMMIT
+```
+
+:::tip
+
+If you don't have access to a GPU-equipped machine, you may try services like [Google Colab](https://colab.research.google.com), [Kaggle](https://www.kaggle.com) and [Marimo Molab](https://molab.marimo.io), which are known for offering free GPUs along with the notebook-centric IDEs.
+
+:::
