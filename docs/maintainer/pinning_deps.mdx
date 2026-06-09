@@ -10,8 +10,6 @@ import { RecipeTabs } from "@site/src/components/RecipeTabs";
 
 # Pinned dependencies
 
-<a id="globally-pinned-packages"></a>
-
 <a id="id1"></a>
 
 ## Globally pinned packages
@@ -150,8 +148,6 @@ There is additional documentation on this pinning scheme in [the conda docs](htt
 
 <a id="run-exports"></a>
 
-<a id="specifying-run-exports"></a>
-
 ## Specifying run_exports
 
 The `run_exports` feature can be used to specify the versions that are [ABI](../glossary.md#abi) compatible with the built version. This leads to higher flexibility of choosable packages, without breakages due to incompatibilities.
@@ -178,8 +174,6 @@ If there is an ABI break, as determined by the `run_exports`, then the global pi
 Once the pins are updated, via a migration yaml, then all the packages that are linked are rebuilt.
 
 <a id="update-pins"></a>
-
-<a id="updating-package-pins"></a>
 
 ## Updating package pins
 
