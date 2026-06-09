@@ -171,7 +171,7 @@ If your package breaks ABI with a version bump, here are a few steps you can tak
 - Add a PR to pin the old version in `conda-forge-pinning` (if not already present)
 - Open a migrator following [CFEP-09](https://github.com/conda-forge/cfep/blob/main/cfep-09.md)
 
-To read more on how to specify `run_exports`, see [Specifying run_exports](../maintainer/pinning_deps.mdx#run-exports).
+To read more on how to specify `run_exports`, see [Specifying run_exports](../maintainer/pinning_deps.mdx#specifying-run_exports).
 Some of the examples you can see for reference, where broken packages are fixed by:
 
 - [Replacing an existing pin that was incorrect](https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/pull/217).

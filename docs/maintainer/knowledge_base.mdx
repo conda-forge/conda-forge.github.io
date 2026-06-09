@@ -2214,7 +2214,7 @@ There are several kinds of migrations, which you can read about in [Making Migra
 To propose a migration in one or more pins, the migrator issues a PR into the pinning feedstock using a yaml file expressing the changes to the global pinning file in the migrations folder.
 Once the PR is merged, the dependency graph is built. After that, the bot walks through the graph, migrates all the nodes (feedstocks) one by one, and issues PRs for those feedstocks.
 
-Usually, the bot generates these migrations automatically. However, when a pin is first made or added, one may need to be added by hand. To do this, you can follow the steps mentioned in [Updating package pins](pinning_deps.mdx#update-pins).
+Usually, the bot generates these migrations automatically. However, when a pin is first made or added, one may need to be added by hand. To do this, you can follow the steps mentioned in [Updating package pins](pinning_deps.mdx#updating-package-pins).
 
 The way migrations proceed are:
 
