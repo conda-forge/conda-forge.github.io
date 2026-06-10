@@ -594,7 +594,7 @@ function Row({ children }) {
       </td>
     </tr>
     {details && !collapsed && (<tr>
-      <td colSpan={6}><pre dangerouslySetInnerHTML={{ __html: details}} /></td>
+      <td colSpan={6}><pre>{ details }</pre></td>
     </tr>)}
   </>);
 }

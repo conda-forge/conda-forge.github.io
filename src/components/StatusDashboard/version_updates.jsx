@@ -97,7 +97,7 @@ export default function VersionUpdates({ onLoad }) {
               </div>
               <div className={styles.errored_item_content}
                 style={{ display: !expanded[name] && "none" }}>
-                <pre dangerouslySetInnerHTML={{ __html: message}} />
+                <pre>{ message }</pre>
               </div>
             </React.Fragment>
           ))}
