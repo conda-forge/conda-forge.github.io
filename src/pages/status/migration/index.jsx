@@ -14,6 +14,7 @@ import { compare } from '@site/src/components/StatusDashboard/current_migrations
 import { useSorting, SortableHeader } from '@site/src/components/SortableTable';
 import * as d3 from "d3";
 import DependencyGraph from "@site/src/components/DependencyGraph";
+import ErrorMessageDetails from "@site/src/components/ErrorMessageDetails";
 
 // GitHub GraphQL MergeStateStatus documentation
 // Reference: https://docs.github.com/en/graphql/reference/enums#mergestatestatus
@@ -593,9 +594,9 @@ function Row({ children }) {
         </React.Fragment>))}
       </td>
     </tr>
-    {details && !collapsed && (<tr>
-      <td colSpan={6}><pre>{ details }</pre></td>
-    </tr>)}
+    {details && !collapsed && (
+      <tr><td colSpan={6}><ErrorMessageDetails details={details}/></td></tr>
+    )}
   </>);
 }
 
