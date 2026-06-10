@@ -2,6 +2,7 @@ import Link from "@docusaurus/Link";
 import { urls } from "@site/src/constants";
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
+import ErrorMessageDetails from "@site/src/components/ErrorMessageDetails";
 
 export default function VersionUpdates({ onLoad }) {
   const [{ collapsed, expanded, errors, queued }, setState] =
@@ -97,7 +98,7 @@ export default function VersionUpdates({ onLoad }) {
               </div>
               <div className={styles.errored_item_content}
                 style={{ display: !expanded[name] && "none" }}>
-                <pre>{ message }</pre>
+                <ErrorMessageDetails details={ message }/>
               </div>
             </React.Fragment>
           ))}
