@@ -159,12 +159,12 @@ export default function MigrationDetails() {
             <div className={`card margin-top--xs`}>
               <div className="card__header">
                 <div className={styles.migration_details_toggle}>
-                  <div class="tabs-container">
-                    <ul role="tablist" aria-orientation="horizontal" class="tabs">
+                  <div className="tabs-container">
+                    <ul role="tablist" aria-orientation="horizontal" className="tabs">
                       <li
                         key="table"
                         role="tab"
-                        class={["tabs__item", (view == "table" ? "tabs__item--active" : null)].join(" ")}
+                        className={["tabs__item", (view == "table" ? "tabs__item--active" : null)].join(" ")}
                         onClick={() => toggle("table")}
                       >
                         Table
@@ -172,7 +172,7 @@ export default function MigrationDetails() {
                       <li
                         key="dependencies"
                         role="tab"
-                        class={["tabs__item", (view == "dependencies" ? "tabs__item--active" : null)].join(" ")}
+                        className={["tabs__item", (view == "dependencies" ? "tabs__item--active" : null)].join(" ")}
                         onClick={() => toggle("dependencies")}
                       >
                         Dependencies
@@ -180,7 +180,7 @@ export default function MigrationDetails() {
                       <li
                         key="graph"
                         role="tab"
-                        class={["tabs__item", (view == "graph" ? "tabs__item--active" : null)].join(" ")}
+                        className={["tabs__item", (view == "graph" ? "tabs__item--active" : null)].join(" ")}
                         onClick={() => toggle("graph")}
                       >
                         Graph
@@ -190,7 +190,7 @@ export default function MigrationDetails() {
                           <li
                             key="raw"
                             role="tab"
-                            class="tabs__item"
+                            className="tabs__item"
                           >
                             <span>Raw <i className="fa fa-fw fa-arrow-up-right-from-square"></i></span>
                           </li>
@@ -534,7 +534,7 @@ function Table({ details }) {
         </thead>
         <tbody>
           {rows.map((row, i) =>
-            <Row key={i}>{{ feedstock: feedstock[row.name], name: row.name, status: row.status }}</Row>
+            <Row key={`row-${i}`}>{{ feedstock: feedstock[row.name], name: row.name, status: row.status }}</Row>
           )}
         </tbody>
       </table>}
