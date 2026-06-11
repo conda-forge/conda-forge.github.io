@@ -4,6 +4,17 @@ function unescapeHTML(html) {
   return doc.documentElement.textContent.replace("&#x27;", "'");
 }
 
+function isSafeUrl(urlString) {
+  try {
+    const parsed = new URL(urlString);
+    // Explicitly allow only http: and https: protocols
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch (e) {
+    // If the URL constructor throws an error, the URL is invalid
+    return false;
+  }
+};
+
 /*
   This component deals with untrusted inputs. These details may come from externally-controlled
   data (tracebacks in bot logic and other types of unhandled errors, branch names, etc). We
@@ -26,9 +37,15 @@ export default function ErrorMessageDetails({ details }) {
           </span>
         )
       }
-      if (details.url) {
+      if (details.url && isSafeUrl(details.url)) {
         header.push(
-          <a href={details.url} target="_blank" title="View CI job" style={{ marginLeft: "1em"}}>
+          <a 
+            href={details.url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            title="View CI job" 
+            style={{ marginLeft: "1em" }}
+          >
             View CI job{" "}
             <small className="fa fa-fw">
               <i className="fa fa-fw fa-arrow-up-right-from-square"></i>
