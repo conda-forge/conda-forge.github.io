@@ -35,7 +35,7 @@ function Badge({ children, link, badge, badgeLink }) {
   return (
     <tr>
       <td>
-        {link && isSafeUrl(link) ? 
+        {link && isSafeUrl(link) ?
           <a href={link} style={{ display: "inline-block", minWidth: "100%" }}>
             {children}
           </a>
