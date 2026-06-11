@@ -40,7 +40,7 @@ export default function VersionUpdates({ onLoad }) {
             <span className="badge badge--warning">{Object.keys(errors).length}</span>
             {" "}
             <small className="fa fa-fw">
-              <a href={urls.versions.api} target="_blank" title="View raw payload">
+              <a href={urls.versions.api} target="_blank" rel="noopener noreferrer" title="View raw payload">
                 <i className="fa fa-fw fa-arrow-up-right-from-square"></i>
               </a>
             </small>
