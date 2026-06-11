@@ -12,11 +12,13 @@ export default function ErrorMessageDetails({ details }) {
     if (details.kind || details.url) {
       let header = []
       if (details.kind) {
-        header.push(<span className="badge badge--warning">
-        {(details.kind && details.kind != "plain") && details.kind || "error"}
-        {details.base_branch && ` @ ${details.base_branch}` || null}
-        {details.attempts && ` after ${details.attempts.toFixed(1)} attempts` || null}
-      </span>)
+        header.push(
+          <span className="badge badge--warning">
+            {(details.kind && details.kind != "plain") && details.kind || "error"}
+            {details.base_branch && ` @ ${details.base_branch}` || null}
+            {details.attempts && ` after ${details.attempts.toFixed(1)} attempts` || null}
+          </span>
+        )
       }
       if (details.url) {
         header.push(
