@@ -13,6 +13,7 @@ function unescapeHTML(html) {
 */
 export default function ErrorMessageDetails({ details }) {
   let children = [];
+  /* Structured error metadata was introduced in 2026-06... */
   if (details.messages) {
     if (details.kind || details.url) {
       let header = []
@@ -40,7 +41,7 @@ export default function ErrorMessageDetails({ details }) {
     details.messages.map((message, index) => (
       children.push(<pre key={`message-${index}`}>{unescapeHTML(message.toString())}</pre>)
     ))
-  /* Legacy: string only values */
+  /* ... but bot data may still contain legacy, string only values */
   } else {
     children.push(<pre>{unescapeHTML(details.toString())}</pre>)
   }
