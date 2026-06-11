@@ -1,12 +1,11 @@
-function unescapeHTML(html) {
-  console.log(html);
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, 'text/html');
-  return doc.documentElement.textContent.replace("&#x27;", "'");
-}
+/*
+  This component deals with untrusted inputs. These details may come from externally-controlled
+  data (tracebacks in bot logic and other types of unhandled errors, branch names, etc). We
+  need to be careful not to render those inputs as arbitrary elements!
 
+  Thankfully, React escapes children strings before rendering, so that should take care of it.
+*/
 export default function ErrorMessageDetails({ details }) {
-  console.log(details);
   let children = [];
   if (details.messages) {
     if (details.kind || details.url) {
