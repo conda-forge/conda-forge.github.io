@@ -39,11 +39,11 @@ export default function ErrorMessageDetails({ details }) {
       }
       if (details.url && isSafeUrl(details.url)) {
         header.push(
-          <a 
-            href={details.url} 
-            target="_blank" 
+          <a
+            href={details.url}
+            target="_blank"
             rel="noopener noreferrer"
-            title="View CI job" 
+            title="View CI job"
             style={{ marginLeft: "1em" }}
           >
             View CI job{" "}
