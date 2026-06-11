@@ -1,7 +1,7 @@
 function unescapeHTML(html) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
-  return doc.documentElement.textContent.replace("&#x27;", "'");
+  return doc.documentElement.textContent.replaceAll("&#x27;", "'");
 }
 
 function isSafeUrl(urlString) {
