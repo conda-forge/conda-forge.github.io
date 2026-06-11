@@ -15,6 +15,7 @@ import { useSorting, SortableHeader } from '@site/src/components/SortableTable';
 import * as d3 from "d3";
 import DependencyGraph from "@site/src/components/DependencyGraph";
 import ErrorMessageDetails from "@site/src/components/ErrorMessageDetails";
+import { isSafeUrl } from "@site/src/utils";
 
 // GitHub GraphQL MergeStateStatus documentation
 // Reference: https://docs.github.com/en/graphql/reference/enums#mergestatestatus
@@ -555,7 +556,7 @@ function Row({ children }) {
   return (<>
     <tr>
       <td>
-      {href ? (
+      {href && isSafeUrl(href) ? (
         <a href={href}>{name}</a>
       ) : (
         details ? (

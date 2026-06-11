@@ -1,6 +1,7 @@
 import { urls } from "@site/src/constants";
 import { React, useEffect, useState } from "react";
 import styles from "./styles.module.css";
+import { isSafeUrl } from "@site/src/utils";
 
 // If CDN status is updated in this window (20 minutes), status is operational.
 const OPERATIONAL_WINDOW = 20 * 60 * 1000;
@@ -34,9 +35,12 @@ function Badge({ children, link, badge, badgeLink }) {
   return (
     <tr>
       <td>
-        <a href={link} style={{ display: "inline-block", minWidth: "100%" }}>
-          {children}
-        </a>
+        {link && isSafeUrl(link) ? 
+          <a href={link} style={{ display: "inline-block", minWidth: "100%" }}>
+            {children}
+          </a>
+        : <span>children</span>
+        }
       </td>
       <td style={{ textAlign: "right" }}>
         <Image alt={`${children} status`} link={badgeLink}>{badge}</Image>
@@ -53,7 +57,7 @@ function Image({ alt, link, children }) {
     <img alt={alt}
       style={{ verticalAlign: "bottom" }} onError={onError} src={children} />
   );
-  return link ? <a href={link}>{image}</a> : image;
+  return link && isSafeUrl(link) ? <a href={link}>{image}</a> : image;
 }
 
 function CDNStatus() {

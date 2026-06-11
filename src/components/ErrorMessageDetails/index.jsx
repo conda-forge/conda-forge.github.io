@@ -1,19 +1,4 @@
-function unescapeHTML(html) {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, 'text/html');
-  return doc.documentElement.textContent.replaceAll("&#x27;", "'");
-}
-
-function isSafeUrl(urlString) {
-  try {
-    const parsed = new URL(urlString);
-    // Explicitly allow only http: and https: protocols
-    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
-  } catch (e) {
-    // If the URL constructor throws an error, the URL is invalid
-    return false;
-  }
-};
+import {isSafeUrl, unescapeHTML} from "@site/src/utils";
 
 /*
   This component deals with untrusted inputs. These details may come from externally-controlled
