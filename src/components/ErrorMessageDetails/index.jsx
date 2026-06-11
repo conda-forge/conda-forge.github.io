@@ -1,3 +1,9 @@
+function unescapeHTML(html) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  return doc.documentElement.textContent.replace("&#x27;", "'");
+}
+
 /*
   This component deals with untrusted inputs. These details may come from externally-controlled
   data (tracebacks in bot logic and other types of unhandled errors, branch names, etc). We
@@ -32,7 +38,7 @@ export default function ErrorMessageDetails({ details }) {
       children.push(<div style={{ display: "inline-flex"}}>{header}</div>)
     }
     details.messages.map((message, index) => (
-      children.push(<pre key={`message-${index}`}>{unescapeHTML(message)}</pre>)
+      children.push(<pre key={`message-${index}`}>{unescapeHTML(message.toString())}</pre>)
     ))
   /* Legacy: string only values */
   } else {
