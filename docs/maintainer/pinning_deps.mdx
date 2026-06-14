@@ -2,13 +2,13 @@
 title: 'Pinned dependencies'
 ---
 
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
 <a id="pinned-deps"></a>
 
 <a id="pinned-dependencies"></a>
 
 # Pinned dependencies
-
-<a id="globally-pinned-packages"></a>
 
 <a id="id1"></a>
 
@@ -31,6 +31,8 @@ Pinning of packages are handled by the same configuration file and conda-build. 
 
 E.g.
 
+<RecipeTabs>
+
 ```recipe
 requirements:
   host:
@@ -39,7 +41,19 @@ requirements:
     - gmp 6.1.*
 ```
 
+```recipe
+requirements:
+  host:
+    - gmp 6.1.*
+  run:
+    - gmp 6.1.*
+```
+
+</RecipeTabs>
+
 Should be replaced by
+
+<RecipeTabs>
 
 ```recipe
 requirements:
@@ -52,9 +66,24 @@ requirements:
     - gmp
 ```
 
+```recipe
+requirements:
+  host:
+    - gmp
+  # most libraries will automatically add the corresponding runtime requirement using
+  # a so-called "run-export" from the gmp build pulled into the host environment.
+  # In that case you can leave out the following run-requirement:
+  run:
+    - gmp
+```
+
+</RecipeTabs>
+
 The run-export mechanism (see below) additionally ensures the correct version constraints
 (corresponding to the expected API/ABI stability of `gmp`) are added, so a recipe with an
 unpinned `gmp` dependency in the host environment will, in the end, work as follows:
+
+<RecipeTabs>
 
 ```recipe
 requirements:
@@ -63,6 +92,16 @@ requirements:
   run:
     - gmp >={{ version_from_global_pinning }},<{{ next_version_with_breaking_changes }}
 ```
+
+```recipe
+requirements:
+  host:
+    - gmp ${{ version_from_global_pinning }}.*
+  run:
+    - gmp >=${{ version_from_global_pinning }},<${{ next_version_with_breaking_changes }}
+```
+
+</RecipeTabs>
 
 When there's a new ABI version of gmp (say 7.0), then conda-forge-pinning will be updated. A re-rendering of a package using gmp will change. Therefore to check that a recipe needs to be rebuilt for updated pinnings, you only need to check if the package needs a rerender.
 
@@ -85,19 +124,29 @@ to run requirements.
 
 If you need to remove a pinning in rare cases like linking the package statically or if the package is used with `dlopen` instead of linking, then you can do,
 
+<RecipeTabs>
+
 ```recipe
 build:
   ignore_run_exports:
     - gmp
+
 ```
+
+```recipe
+build:
+  ignore_run_exports:
+    by_name:
+      - gmp
+```
+
+</RecipeTabs>
 
 :::
 
 There is additional documentation on this pinning scheme in [the conda docs](https://docs.conda.io/projects/conda-build/en/stable/resources/variants.html#build-variants).
 
 <a id="run-exports"></a>
-
-<a id="specifying-run-exports"></a>
 
 ## Specifying run_exports
 
@@ -126,8 +175,6 @@ Once the pins are updated, via a migration yaml, then all the packages that are 
 
 <a id="update-pins"></a>
 
-<a id="updating-package-pins"></a>
-
 ## Updating package pins
 
 Changing global pins requires rerendering all packages that depend on the package with the changed pin. Doing this manually
@@ -147,7 +194,7 @@ be added by hand. To do this, follow these steps:
    - Remove the migrator yaml for the completed migration
    - If the version of the package is pinned in the global conda_build_config.yaml, this PR should also:
      - Update the version in conda_build_config.yaml
-     - Bump the version in meta.yaml to the current date
+     - Bump the version in the recipe to the current date
 
 Details of how the migration yaml is setup are provided in an [example](https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/main/recipe/migrations/example.exyaml)
 and documentation [here](https://github.com/conda-forge/conda-forge-bot/blob/main/README.md#making-migrators).
