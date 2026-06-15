@@ -1,6 +1,7 @@
 import { urls } from "@site/src/constants";
 import { React, useEffect, useState } from "react";
 import styles from "./styles.module.css";
+import { isSafeUrl } from "@site/src/utils";
 
 const OPERATIONAL = "All Systems Operational";
 
@@ -53,9 +54,12 @@ function Status({ api, link, title }) {
   return (
     <tr>
       <td>
-        <a href={link} style={{ display: "inline-block", minWidth: "100%" }}>
-          {title}
-        </a>
+        {link && isSafeUrl(link) ?
+          <a href={link} style={{ display: "inline-block", minWidth: "100%" }}>
+            {title}
+          </a>
+        : title
+        }
       </td>
       <td>
         <span className={className} style={{
