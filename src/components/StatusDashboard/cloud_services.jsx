@@ -45,7 +45,7 @@ function Status({ api, link, title }) {
             .components
             .filter((comp) => comp.name === "Blacksmith Managed Runners")[0]
             .status;
-        } else if (title === "Namespace.so") {
+        } else if (title === "Namespace.so" || title === "Depot.dev") {
           status = json.summary.affected_components.length > 0
             ? "Ongoing incident"
             : "operational";

@@ -43,6 +43,11 @@ export const urls = {
       link: "https://status.blacksmith.sh",
       title: "Blacksmith.sh",
     },
+    depot: {
+      api: "https://status.depot.dev/proxy/status.depot.dev",
+      link: "https://status.depot.dev",
+      title: "Depot.dev",
+    },
     // circle: {
     //   api: "https://status.circleci.com/api/v2/status.json",
     //   link: "https://status.circleci.com",
