@@ -3,11 +3,11 @@ import { React, useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { isSafeUrl } from "@site/src/utils";
 
-// If CDN status is updated in this window (20 minutes), status is operational.
-const OPERATIONAL_WINDOW = 20 * 60 * 1000;
+// If CDN status is updated in this window (45 minutes), status is operational.
+const OPERATIONAL_WINDOW = 45 * 60 * 1000;
 
-// If CDN status is updated in this window (40 minutes), status is degraded.
-const DEGRADED_WINDOW = 40 * 60 * 1000;
+// If CDN status is updated in this window (90 minutes), status is degraded.
+const DEGRADED_WINDOW = 90 * 60 * 1000;
 
 export default function ReposAndBots({ onLoad, style }) {
   useEffect(() => onLoad?.(), []);
