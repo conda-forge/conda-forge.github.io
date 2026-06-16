@@ -1546,7 +1546,7 @@ select the correct package for your platform.
 
 For example, if you have a `windows-only-dependency` as in the example above, but you
 forget to enumerate the unix selector and virtual package, the result will be two noarch
-builds: only the Windows build will include a virtual package (`__win`), and the other
+builds: the Windows build will include a virtual package (`__win`), and the other
 will include no virtual packages. The latter package, **without
 `windows-only-dependency`**, can be selected by the solver on any OS, including Windows.
 :::
