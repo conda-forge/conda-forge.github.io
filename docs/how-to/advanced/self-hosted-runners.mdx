@@ -17,46 +17,24 @@ Once merged, this will enable the requested self-hosted Github Actions runners f
 
 ## Configure your feedstock
 
-1. In `conda-forge.yml`, ensure that the `provider` setting for the required build platform is set to `github_actions`
+1. In `conda-forge.yml`, ensure that the `provider` setting for the required build platform is set to `github_actions`.
 2. In `recipe/conda_build_config.yaml`, configure the [`github_actions_labels`](/docs/maintainer/conda_forge_yml.mdx#github_actions_labels) field to specify the `runs-on` value for each platform, using selectors as needed. The exact values depend on which runner type you requested and are listed in [Reference> Runners](/docs/reference/runners.md).
 
 :::note
 
-Some of the usual automation infrastructure is not available for self-hosted runners:
+Some of the usual automation infrastructure may not be available for self-hosted runners:
 
-- Due to security measurements imposed by Github, automated re-rendering is not possible when they modify Github Actions workflows.
+- Due to security measurements imposed by Github, automated re-rendering may not be possible when they modify Github Actions workflows.
   You will need to rerender it manually by running `conda-smithy rerender` in your machine and then commit and push the result.
-- Automerge will not function properly either.
-- The conda-forge bots may not be able to trigger the self-hosted runners.
+- Automerge may not function properly either.
+- The conda-forge bots may not be able to trigger some self-hosted runners (provider-dependent).
 - Closing and reopening the PR may not work, but a maintainer with sufficient permissions can trigger it manually by pushing an empty commit.
-
-:::
-
-:::info
-
-Prior to `conda-smithy 3.57.0`, `conda-forge.yml` needed a `github_actions.self_hosted: true` field in `conda-forge.yml`.
-This is now deprecated and has no effect, so please remove it.
 
 :::
 
 ## Example
 
-For example, to configure `a-custom-self-hosted-provider` for `linux-64`:
-
-```yaml title="conda-forge.yml"
-provider:
-  linux_64: github_actions
-  linux_aarch64: github_actions
-```
-
-```recipe title="recipe/conda_build_config.yaml"
-github_actions_labels:
-- a-custom-self-hosted-provider  # [linux64]
-# absent value for linux-aarch64 means it will use the default; same as:
-# - default  # [linux and aarch64]
-```
-
-Then rerender.
+Refer to [`github_actions_labels`](/docs/maintainer/conda_forge_yml.mdx#github_actions_labels).
 
 ### Real world examples
 
