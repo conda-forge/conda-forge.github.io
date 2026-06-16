@@ -1539,10 +1539,9 @@ requirements:
 
 :::warning[Important]
 Do not forget to enumerate all platforms in your selectors, **including virtual package
-dependencies**!
-
-The solver requires virtual packages to be present in the package metadata in order to
-select the correct package for your platform.
+dependencies**! For OS-specific builds, the solver requires virtual packages to be
+present in the package metadata in order to select the correct package for your
+platform.
 
 For example, if you have a `windows-only-dependency` as in the example above, but you
 forget to enumerate the unix selector and virtual package, the result will be two noarch
