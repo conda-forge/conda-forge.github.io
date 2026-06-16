@@ -1457,7 +1457,7 @@ it requires `windows-only-dependency`. You might have something like:
 
 <RecipeTabs>
 
-```recipe title="recipe/meta.yaml (original)"
+```recipe title="recipe/meta.yaml (non-noarch)"
 name: package
 source:
   # ...
@@ -1471,7 +1471,7 @@ requirements:
     - windows-only-dependency  # [win]
 ```
 
-```recipe title="recipe/recipe.yaml (original)"
+```recipe title="recipe/recipe.yaml (non-noarch)"
 name: package
 source:
   # ...
@@ -1494,7 +1494,7 @@ We can get it down to two outputs if replace it with this other approach!
 
 <RecipeTabs>
 
-```recipe title="recipe/meta.yaml (modified)"
+```recipe title="recipe/meta.yaml (noarch)"
 name: package
 source:
   # ...
@@ -1513,7 +1513,7 @@ requirements:
     - windows-only-dependency  # [win]
 ```
 
-```recipe title="recipe/recipe.yaml (modified)"
+```recipe title="recipe/recipe.yaml (noarch)"
 name: package
 source:
   # ...
