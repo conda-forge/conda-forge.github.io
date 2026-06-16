@@ -102,9 +102,9 @@
         },
         "items": [
           {
-            "type": "link",
+            "type": "doc",
             "label": "Deal with numpy",
-            "href": "/docs/maintainer/knowledge_base/#building-against-numpy"
+            "id": "how-to/advanced/numpy"
           },
           {
             "type": "doc",
@@ -313,9 +313,9 @@
         "label": "Security",
         "items": [
           {
-            "type": "link",
+            "type": "doc",
             "label": "General considerations",
-            "href": "/docs/maintainer/knowledge_base/#security-considerations-for-conda-forge-builds"
+            "id": "maintainer/security/general-considerations"
           }
         ]
       },

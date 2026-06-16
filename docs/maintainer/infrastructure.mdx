@@ -56,8 +56,7 @@ The actual creation of the feedstock is run in [conda-forge/admin-requests](#adm
 
 Additional workflows help users set up their recipes correctly. They react to events in PRs:
 
-- [`automate-review-labels`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/automate-review-labels.yml): Updates PR labels to streamline reviews and requests for help.
-- [`linter`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/linter.yml): General recipe linting plus some staged-recipes specific checks, like not editing the examples.
+- [`staged-recipes-linter`](https://github.com/conda-forge/staged-recipes/blob/main/.github/workflows/staged-recipes-linter.yml): General recipe linting plus some staged-recipes specific checks, like not editing the examples.
 
 External services connect to `staged-recipes` too:
 
@@ -68,7 +67,7 @@ External services connect to `staged-recipes` too:
 - ⚙️ Deployed in Github repositories
 - 🔒 Has access to Azure Pipelines, Github Actions, Anaconda.org (cf-staging)
 - 🔐 Might have access to Travis CI, Cirun via `admin-requests` (WIP)
-- 🤖 Integrated with [`admin-migrations`](#admin-migrations), [`admin-requests`](#admin-requests), the [`autotick-bot`](#autotick-bot), and [`webservices`](#webservices).
+- 🤖 Integrated with [`admin-migrations`](#admin-migrations), [`admin-requests`](#admin-requests), the [`conda-forge-bot`](#conda-forge-bot), and [`webservices`](#webservices).
 
 Conda-forge has thousands of feedstocks.
 Each feedstock hosts a recipe plus the required pipelines, supporting scripts and configuration metadata.
@@ -85,7 +84,7 @@ You should never manually edit files _not_ listed above! Changes will be overrid
 Combining these two sources with some external components, `conda-smithy` will generate (render) the contents of the feedstock. Many of the directories are named like that because it is what the external service (e.g. Azure) requests. However, some `conda-smithy`-unique directories are worth discussing:
 
 - `.ci_support/`: Contains the rendered `conda_build_config.yaml` files, passed to `conda-build` via the `-m` flag. Each file here corresponds to one job in the CI build matrix.
-- `.ci_support/migrations/`: Special YAML files that instruct `conda-smithy` how to update the `.ci_support/*.yaml` files. These migration files are usually put here by the [`autotick-bot`](#autotick-bot) infrastructure, and removed once the migration is considered finished.
+- `.ci_support/migrations/`: Special YAML files that instruct `conda-smithy` how to update the `.ci_support/*.yaml` files. These migration files are usually put here by the [`conda-forge-bot`](#conda-forge-bot) infrastructure, and removed once the migration is considered finished.
 - `.scripts/`: Common logic and code supporting the steps you can find in the CI pipelines and local debugging tools.
 - `build-locally.py`: A Python script to debug recipes in your machine, roughly equivalent to what's done in the CI pipelines.
 
@@ -160,9 +159,9 @@ Hosts the global pinnings for conda-forge, and the ongoing migrations.
 
 Package-wide dependency pins are defined in [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml) in the [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock).
 
-For more information on conda-forge wide package pins, please refer to [Globally pinned packages](pinning_deps.md#globally-pinned-packages).
+For more information on conda-forge wide package pins, please refer to [Globally pinned packages](pinning_deps.mdx#globally-pinned-packages).
 
-Please open a [PR](../glossary.md#pr) and/or an issue there, if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to [Updating package pins](pinning_deps.md#update-pins).
+Please open a [PR](../glossary.md#pr) and/or an issue there, if you think a pin needs to be advanced. For more information on updating globally pinned packages, please refer to [Updating package pins](pinning_deps.mdx#updating-package-pins).
 
 #### conda-forge-repodata-patches
 
@@ -178,16 +177,16 @@ This special feedstock provides a package that defines the logic to install and 
 - ⚙️ Deployed in [Anaconda.org](https://anaconda.org/conda-forge/conda-forge-ci-setup) via [`conda-forge/conda-forge-ci-setup-feedstock`](https://github.com/conda-forge/conda-forge-ci-setup-feedstock)
 - 🔒 Has access to Azure, Anaconda.org (cf-staging)
 
-#### regro/cf-graph-countyfair
+#### conda-forge/conda-forge-bot-data
 
-This is the graph data used by [`autotick-bot`](#autotick-bot).
+This is the graph data used by [`conda-forge-bot`](#conda-forge-bot).
 
-- ⚙️ Deployed in [Github Actions via `regro/cf-graph-countyfair`](https://github.com/regro/cf-graph-countyfair)
-- ⛓ Needs [`regro/cf-scripts`](#regrocf-scripts), [`conda-forge/conda-forge-pinning-feedstock`](#conda-forge-pinning)
+- ⚙️ Deployed in [Github Actions via `conda-forge/conda-forge-bot-data`](https://github.com/conda-forge/conda-forge-bot-data)
+- ⛓ Needs [`conda-forge/conda-forge-bot`](#conda-forgeconda-forge-bot), [`conda-forge/conda-forge-pinning-feedstock`](#conda-forge-pinning)
 - 🤖 Uses [`@regro-cf-autotick-bot`](#bot-accounts)
 - 🔒 Has access to Github API
 
-The logic to build the graph is provided by [`cf-scripts`](#regrocf-scripts).
+The logic to build the graph is provided by [`conda-forge-bot`](#conda-forgeconda-forge-bot).
 
 #### docker-images
 
@@ -242,12 +241,12 @@ Please note that the code logic provided by the app is in the `Smithy` repositor
 
 Bugs or suggestions regarding the service functionality should therefore be opened in `conda-forge/conda-smithy`'s [bug tracker](https://github.com/conda-forge/conda-smithy/issues).
 
-#### regro/cf-scripts
+#### conda-forge/conda-forge-bot
 
-The code and logic behind [`autotick-bot`](#autotick-bot).
+The code and logic behind [`conda-forge-bot`](#conda-forge-bot).
 
-- 📜 Source at [`regro/cf-scripts`](https://github.com/regro/cf-scripts)
-- 📖 [Documentation](https://github.com/regro/cf-scripts/blob/main/README.md)
+- 📜 Source at [`conda-forge/conda-forge-bot`](https://github.com/conda-forge/conda-forge-bot)
+- 📖 [Documentation](https://github.com/conda-forge/conda-forge-bot/blob/main/README.md)
 
 ### Automated maintenance
 
@@ -276,15 +275,15 @@ It also does the job of creating new feedstocks for recipes that have been merge
 The [`create_feedstocks` workflow](https://github.com/conda-forge/admin-requests/blob/main/.github/workflows/create_feedstocks.yml) runs several times per hour to create the new feedstock repositories on the `conda-forge` organization.
 The core logic is defined in the Python script [`.github/workflows/scripts/create_feedstocks.py`](https://github.com/conda-forge/admin-requests/blob/main/scripts/create_feedstocks.py).
 
-#### autotick-bot
+#### conda-forge-bot
 
-- ⚙️ Deployed in [`regro/cf-scripts`](https://github.com/regro/cf-scripts)
-- ⛓ Needs [`regro/cf-scripts`](https://github.com/regro/cf-scripts), [`regro/cf-graph-countyfair`](https://github.com/regro/cf-graph-countyfair), [`conda-forge/conda-forge-pinning-feedstock`](https://github.com/conda-forge/conda-forge-pinning-feedstock)
+- ⚙️ Deployed in [`conda-forge/conda-forge-bot`](https://github.com/conda-forge/conda-forge-bot)
+- ⛓ Needs [`conda-forge/conda-forge-bot`](https://github.com/conda-forge/conda-forge-bot), [`conda-forge/conda-forge-bot-data`](https://github.com/conda-forge/conda-forge-bot-data), [`conda-forge/conda-forge-pinning-feedstock`](https://github.com/conda-forge/conda-forge-pinning-feedstock)
 - 🤖 Uses [`@regro-cf-autotick-bot`](https://github.com/regro-cf-autotick-bot)
 
 :::note
 The older repo [`regro/autotick-bot`](https://github.com/regro/autotick-bot) is no longer in use;
-the bot now runs directly in `regro/cf-scripts`.
+the bot now runs directly in `conda-forge/conda-forge-bot`.
 :::
 
 #### webservices
@@ -362,7 +361,7 @@ Entering this command in the title or comment of an issue will instruct the admi
 open a PR enabling the automatic merging of passing PRs from the `auto-tick`
 bot. This functionality is currently experimental. You can find more details
 [here](#automerge).
-Please open issue on `regro/cf-scripts` for any feedback, bugs, and/or questions!
+Please open issue on `conda-forge/conda-forge-bot` for any feedback, bugs, and/or questions!
 
 ### @conda-forge-admin, please remove bot automerge
 
@@ -647,7 +646,7 @@ can be specified as arguments to the `compiler(...)` macro:
 The authoritative source of the current compilers and versions for various languages
 and platforms is the [conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml) file
 in the [conda-forge/conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock) repository
-as described in [Globally pinned packages](pinning_deps.md#globally-pinned-packages).
+as described in [Globally pinned packages](pinning_deps.mdx#globally-pinned-packages).
 
 The default C and C++ compilers are GCC on Linux, Clang on macOS and VS2022
 on Windows. Clang can also be used as the compiler on Linux and Windows.
@@ -1037,7 +1036,7 @@ In addition to the thousands of repositories, conda-forge uses several other Git
 #### Organizations
 
 - [`conda-forge`](https://github.com/conda-forge): the main organization
-- [`regro`](https://github.com/regro): hosts the `autotick-bot` machinery
+- [`regro`](https://github.com/regro): hosts the `conda-forge-bot` machinery
 - [`channel-mirrors`](https://github.com/channel-mirrors): OCI mirror of the conda-forge channel
 
 :::info

@@ -205,7 +205,7 @@ For a new version, please file an issue on that feedstock.
 
 To enable the rust nightly compiler in your feedstock, follow the section above and then add the `rust_dev` channel in the `conda_build_config.yaml` file:
 
-```yaml title="conda-forge.yml"
+```yaml title="conda_build_config.yaml"
 channel_sources:
   - conda-forge/label/rust_dev,conda-forge
 ```
@@ -308,78 +308,7 @@ Other OpenGL API variants such as `libegl-devel`, `libgles-devel`, `libglx-devel
 
 ### Building Against NumPy
 
-Finding `numpy.get_include()` in `setup.py` or `cimport` statements in `.pyx` or `.pyd` files are a telltale sign that the package links against NumPy.
-
-Adding `numpy` in the `host:` section is sufficient to have a compatible NumPy version at run time:
-
-<RecipeTabs>
-
-```recipe
-requirements:
-  host:
-    - numpy
-```
-
-```recipe
-requirements:
-  host:
-    - numpy
-```
-
-</RecipeTabs>
-
-At the time of writing (June 2025), the above is equivalent to the following:
-
-<RecipeTabs>
-
-```recipe
-requirements:
-  host:
-    - numpy 2.*
-```
-
-```recipe
-requirements:
-  host:
-    - numpy 2.*
-```
-
-</RecipeTabs>
-
-See the pinning repository for
-[what the pinning corresponds to](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml) at any given time.
-
-In either case, the actual runtime requirements are determined through numpy's
-run-export, which is:
-
-- `>=1.2x,<2` if you're building against numpy 1.2x
-- `>=1.19,<3` if you're building against numpy 2.0
-- `>=1.21,<3` if you're building against numpy 2.1 or 2.2
-- `>=1.23,<3` if you're building against numpy 2.3
-
-If the package you are building has a higher minimum requirement for numpy, please add this under `run`:
-
-<RecipeTabs>
-
-```recipe
-requirements:
-  host:
-    # leave this unpinned!
-    - numpy
-  run:
-    - numpy >={{ the_lower_bound_your_package_needs }}
-```
-
-```recipe
-requirements:
-  host:
-    # leave this unpinned!
-    - numpy
-  run:
-    - numpy >=${{ the_lower_bound_your_package_needs }}
-```
-
-</RecipeTabs>
+Please refer to [How-to > Advanced > Build against NumPy](/docs/how-to/advanced/numpy/).
 
 <a id="jupyterlab-extension"></a>
 
@@ -853,8 +782,8 @@ corresponding compilers in `requirements/build` as normal.
 
 The default OpenMP runtime used depends on the compiler and platform used. GCC (on Linux and the Windows MinGW
 toolchain) uses the `libgomp` runtime. Clang (on all platforms) and GNU Fortran on macOS default to the `llvm-openmp`
-runtime. MSVC may use its own runtime or `llvm-openmp`. However, individual projects may force building against
-a different runtime through their build system configuration.
+runtime. For MSVC `llvm-openmp` is recommended, though `llvm-openmp` requires use of the `/openmp:llvm` option.
+However, individual projects may force building against a different runtime through their build system configuration.
 
 On Linux, building against `libgomp` is recommended as the other OpenMP providers are backwards compatible with it.
 When packages are built against `libgomp`, it is possible to use both `libgomp` and `llvm-openmp` provider at runtime.
@@ -865,19 +794,31 @@ to the defaults, though individual packages may require a different set:
 <RecipeTabs>
 
 ```recipe
+build:
+   script:
+    - set "CXXFLAGS=%CXXFLAGS% /openmp:llvm"  # [win]
+
+...
+
 requirements:
   host:
-    - llvm-openmp  # [osx]
     - libgomp      # [linux]
+    - llvm-openmp  # [not linux]
 ```
 
 ```recipe
+build:
+   script:
+    - if: win
+      then: set "CXXFLAGS=%CXXFLAGS% /openmp:llvm"
+
+...
+
 requirements:
   host:
-    - if: osx
-      then: llvm-openmp
     - if: linux
       then: libgomp
+      else: llvm-openmp
 ```
 
 </RecipeTabs>
@@ -2281,11 +2222,11 @@ Once the PR is merged, the migration bot goes through the list of feedstocks in 
 When any changes are made in the global pinnings of a package, then the entire stack of the packages that need that package on their `host` section would need to be updated and rebuilt.
 Doing it manually can be quite tedious, and that's where migrations come to help. Migrations automate the process of submitting changes to a feedstock and are an integral part of the `regro-cf-autotick-bot`'s duties.
 
-There are several kinds of migrations, which you can read about in [Making Migrators](https://github.com/regro/cf-scripts/blob/main/README.md#making-migrators). To generate these migrations, you use migrators, which are bots that automatically create pull requests for the affected packages in conda-forge.
+There are several kinds of migrations, which you can read about in [Making Migrators](https://github.com/conda-forge/conda-forge-bot/blob/main/README.md#making-migrators). To generate these migrations, you use migrators, which are bots that automatically create pull requests for the affected packages in conda-forge.
 To propose a migration in one or more pins, the migrator issues a PR into the pinning feedstock using a yaml file expressing the changes to the global pinning file in the migrations folder.
 Once the PR is merged, the dependency graph is built. After that, the bot walks through the graph, migrates all the nodes (feedstocks) one by one, and issues PRs for those feedstocks.
 
-Usually, the bot generates these migrations automatically. However, when a pin is first made or added, one may need to be added by hand. To do this, you can follow the steps mentioned in [Updating package pins](pinning_deps.md#update-pins).
+Usually, the bot generates these migrations automatically. However, when a pin is first made or added, one may need to be added by hand. To do this, you can follow the steps mentioned in [Updating package pins](pinning_deps.mdx#updating-package-pins).
 
 The way migrations proceed are:
 
@@ -2308,7 +2249,7 @@ to see if there are any issues. This may show there are still dependencies
 needing migration, in which case the best approach is to wait (or if possible
 offer to help migrate those dependencies). If there is a bot error, there will
 be a link to the CI job to provide more details about what may have gone wrong.
-In these cases [please raise an issue](http://github.com/regro/cf-scripts/issues/new)
+In these cases [please raise an issue](http://github.com/conda-forge/conda-forge-bot/issues/new)
 and include as much information as possible.
 
 It is worth noting that one also has the option to create a migration PR
@@ -2322,23 +2263,9 @@ being investigated or the migration PR got closed accidentally. To migrate a PR 
 > 5. [Rerender](updating_pkgs.md#dev-update-rerender) the feedstock
 > 6. Push these changes and open a PR
 
-<a id="security-considerations-for-conda-forge-builds"></a>
-
 ## Security considerations for conda-forge builds
 
-All conda-forge packages are built by strangers on the internet on public cloud infrastructure from source code you likely have not inspected, so you should not use conda-forge packages if you or your team require a high level of security.
-You are also free to download recipes and rebuild them yourself, if you would like at least that much oversight. However, many people use conda-forge all the time with no issues and here are some things that conda-forge does to help with security in some ways:
-
-1. [Sources](../adding_pkgs#source) (where you specify where the package's source code is coming from) can be pulled from GitHub, PyPI, or other sources and SHA256 hashes are always used, so moving of tags or uploading of new sdists can not cause automatic package rebuilds.
-   Also, once packages are accepted and made into feedstocks, only the maintainers of that feedstock have the right to merge PRs made to that feedstock.
-2. Each feedstock can only upload packages for that feedstock. This is enforced by using a cf-staging channel where builds are first sent.
-   A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the `conda-forge` channel.
-   This helps mitigate against a bad actor gaining access to an inconspicuous feedstock and then trying to push a build with malicious code into essential infrastructure packages (e.g., OpenSSL or Python).
-3. We have [artifact-validation](https://github.com/conda-forge/artifact-validation) for validating all the conda-forge artifacts uploaded to `anaconda.org`. This validation scans for various security-related items, such as artifacts that overwrite key pieces of certain packages.
-4. We have a dedicated [Security and Systems Sub-Team](/community/subteams/#security-subteam) who works hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by conda-forge.
-
-If you have found a security-related issue with conda-forge, please check our [Security Policy](https://github.com/conda-forge/conda-forge.github.io/security/policy)
-to learn how to report it responsibly.
+Moved to [Security → General considerations](/docs/maintainer/security/general-considerations).
 
 <a id="significant-changes-to-upstream-projects"></a>
 

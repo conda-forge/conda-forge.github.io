@@ -96,17 +96,17 @@ While these last changes often need to be done by the maintainers, conda-forge h
 
 :::info How does it work?
 
-This happens in two steps in the CI of [`cf-scripts`](https://github.com/regro/cf-scripts).
+This happens in two steps in the CI of [`conda-forge-bot`](https://github.com/conda-forge/conda-forge-bot).
 
-First, the version information is updated from upstream sources and stored in the [`cf-graph-countyfair` repo](/docs/maintainer/infrastructure/#regrocf-graph-countyfair), more specifically in the `versions` directory tree, nested by hash with one file per package.
+First, the version information is updated from upstream sources and stored in the [`conda-forge-bot-data` repo](/docs/maintainer/infrastructure/#conda-forgeconda-forge-bot-data), more specifically in the `versions` directory tree, nested by hash with one file per package.
 
 ```mermaid
 sequenceDiagram
-    participant cfs as cf-scripts
+    participant cfs as conda-forge-bot
     participant gha as github actions
     participant cft as conda_forge_tick
     participant ups as upstream
-    participant cfg as cf-graph-countyfair
+    participant cfg as conda-forge-bot-data
     loop every hour at :15, :45
         cfs->>gha: bot-versions
         gha->>cft: update-upstream-versions
@@ -119,16 +119,16 @@ sequenceDiagram
     end
 ```
 
-Second, the main bot CI job, the `bot-bot` action in [`cf-scripts`](/docs/maintainer/infrastructure/#regrocf-scripts) creates PRs for all packages that have a new version available upstream.
+Second, the main bot CI job, the `bot-bot` action in [`conda-forge-bot`](/docs/maintainer/infrastructure/#conda-forgeconda-forge-bot) creates PRs for all packages that have a new version available upstream.
 Here is a simplified diagram of how that is done. For the full picture, read [below](#rebuilds-for-migrators).
 
 ```mermaid
 sequenceDiagram
-    participant cfs as cf-scripts
+    participant cfs as conda-forge-bot
     participant gha as github actions
     participant cft as conda_forge_tick
     participant fs as feedstock
-    participant cfg as cf-graph-countyfair
+    participant cfg as conda-forge-bot-data
     loop self renewing
         cfs->>gha: bot-bot
         gha->>cft: auto-tick
@@ -159,11 +159,11 @@ A more complete picture of what `auto-tick` does is the following:
 
 ```mermaid
 sequenceDiagram
-    participant cfs as cf-scripts
+    participant cfs as conda-forge-bot
     participant gha as github actions
     participant cft as conda_forge_tick
     participant fs as feedstock
-    participant cfg as cf-graph-countyfair
+    participant cfg as conda-forge-bot-data
     loop self renewing
         cfs->>gha: bot-bot
         gha->>cft: auto-tick
@@ -182,4 +182,4 @@ sequenceDiagram
 ```
 
 Migrators are a powerful mechanism that can do almost arbitrary recipe changes.
-They are written in Python and the current set of migrators can be found in the [`regro/cf-scripts` repository](https://github.com/regro/cf-scripts/tree/main/conda_forge_tick/migrators).
+They are written in Python and the current set of migrators can be found in the [`conda-forge/conda-forge-bot` repository](https://github.com/conda-forge/conda-forge-bot/tree/main/conda_forge_tick/migrators).

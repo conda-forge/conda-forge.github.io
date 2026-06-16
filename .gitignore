@@ -33,6 +33,7 @@ sphinx/newsfeed/demo/_build
 /docs/orga/cfep-index.md
 /docs/orga/governance.md
 /static/schema/conda-forge.schema.json
+/static/schema/linter-messages.json
 /community/cfep-index.md
 /community/governance.md
 /community/code-of-conduct.md
