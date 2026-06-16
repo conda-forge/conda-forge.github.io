@@ -17,11 +17,11 @@ In March, we were notified that the colocation where the `open-gpu-server` CI wa
 
 ## Decommissioning the `open-gpu-server` CI
 
-After [almost three years](https://quansight.com/post/building-a-gpu-ci-service-for-conda-forge/), the [`open-gpu-server`](https://github.com/Quansight/open-gpu-server) powering the long-running GPU and CPU CI jobs was decommissioned on March 13th. We started searching for suitable providers that could provide equivalent CI services and decided to give [Cirrus Runners](https://cirrus-runners.app) (CPU _and_ GPU) a try. The timing was terrible, because [Cirrus Labs was acquired by OpenAI on April 7th](https://cirruslabs.org) and their Runners service is being wound down.
+After [almost three years](https://quansight.com/post/building-a-gpu-ci-service-for-conda-forge/), the [`open-gpu-server`](https://github.com/Quansight/open-gpu-server) powering the long-running GPU and CPU CI jobs was decommissioned on March 13th. We started searching for suitable providers that could provide equivalent CI services and decided to give [Cirrus Runners](https://cirrus-runners.app) (CPU _and_ GPU) a try. Our timing was unlucky, because [Cirrus Labs was acquired by OpenAI on April 7th](https://cirruslabs.org) and their Runners service is being wound down.
 
 ## New providers for long-running CPU jobs
 
-Immediately after, we reached out to a few companies offering external runners for GitHub Actions. Maybe someone out there can help us with our most resource-demanding feedstocks... Fortunately, three different providers agreed to sponsor **large CPU runners for Linux, macOS and Windows**! We are incredibly grateful to these three companies:
+Immediately after, we reached out to a few companies offering external runners for GitHub Actions. Maybe someone out there would be able to help us with our most resource-demanding feedstocks... Fortunately, three different providers agreed to sponsor **large CPU runners for Linux, macOS and Windows**! We are incredibly grateful to these three companies:
 
 <div className={styles.supporters}>
   <div className={styles.card}>
@@ -74,6 +74,6 @@ Sadly, we don't have GPU CI jobs yet. Despite our attempts, we have not been abl
 - Fixed costs or org-wide capped concurrency to estimate an upper bound for the costs.
 - Runs on GitHub Actions or equivalent integration effort in `conda-smithy`.
 - Based on ephemeral Linux and/or Windows VMs that can (ideally) run Docker.
-- VM images are maintained by the service provider, not us.
+- (Ideally) VM images are maintained by the service provider, not us.
 
 If you know of a service that can cover these points, please [reach out](/community/getting-in-touch/)! You can also email us at [conda-forge-core@googlegroups.com](mailto:conda-forge-core@googlegroups.com).
