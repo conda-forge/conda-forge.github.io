@@ -39,12 +39,24 @@ function Status({ api, link, title }) {
     void (async () => {
       try {
         const json = (await (await fetch(api)).json());
-        const status =
-          typeof json.status === "object"      // support StatusPage API
-            ? json.status.description
-            : typeof json.monitor === "object" // support UptimeRobot API
-              ? json.monitor.statusClass
-              : json.status || "unknown";
+        let status;
+        if (title === "Blacksmith.sh") {
+          status = json
+            .components
+            .filter((comp) => comp.name === "Blacksmith Managed Runners")[0]
+            .status;
+        } else if (title === "Namespace.so" || title === "Depot.dev") {
+          status = json.summary.affected_components.length > 0
+            ? "Ongoing incident"
+            : "operational";
+        } else {
+          status =
+            typeof json.status === "object"      // support StatusPage API
+              ? json.status.description
+              : typeof json.monitor === "object" // support UptimeRobot API
+                ? json.monitor.statusClass
+                : json.status || "unknown";
+        }
         setState({ status });
       } catch (error) {
         console.warn(`error fetching data for ${title} – ${api}`, error);
