@@ -4,10 +4,35 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/blog/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Mon, 09 Feb 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 17 Jun 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[New large runners available for GitHub Actions]]></title>
+            <link>https://conda-forge.org/blog/2026/06/17/large-runners-gha/</link>
+            <guid>https://conda-forge.org/blog/2026/06/17/large-runners-gha/</guid>
+            <pubDate>Wed, 17 Jun 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[In March, we were notified that the colocation where the open-gpu-server CI was running was going to be decommissioned. This meant no GPU CI jobs and no long-running CPU jobs. Fortunately, we could get in touch with several companies that kindly agreed to sponsor the long-running CPU CI. We have not found a replacement for the GPU jobs, but we are still searching!]]></description>
+            <content:encoded><![CDATA[<p>In March, we were notified that the colocation where the <code>open-gpu-server</code> CI was running was going to be decommissioned. This meant no GPU CI jobs and no long-running CPU jobs. Fortunately, we could get in touch with several companies that kindly agreed to sponsor the long-running CPU CI. We have not found a replacement for the GPU jobs, but we are still searching!</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="decommissioning-the-open-gpu-server-ci">Decommissioning the <code>open-gpu-server</code> CI<a href="https://conda-forge.org/blog/2026/06/17/large-runners-gha/#decommissioning-the-open-gpu-server-ci" class="hash-link" aria-label="Direct link to decommissioning-the-open-gpu-server-ci" title="Direct link to decommissioning-the-open-gpu-server-ci" translate="no">​</a></h2>
+<p>After <a href="https://quansight.com/post/building-a-gpu-ci-service-for-conda-forge/" target="_blank" rel="noopener noreferrer" class="">almost three years</a>, the <a href="https://github.com/Quansight/open-gpu-server" target="_blank" rel="noopener noreferrer" class=""><code>open-gpu-server</code></a> powering the long-running GPU and CPU CI jobs was decommissioned on March 13th. We started searching for suitable providers that could provide equivalent CI services and decided to give <a href="https://cirrus-runners.app/" target="_blank" rel="noopener noreferrer" class="">Cirrus Runners</a> (CPU <em>and</em> GPU) a try. Our timing was unlucky, because <a href="https://cirruslabs.org/" target="_blank" rel="noopener noreferrer" class="">Cirrus Labs was acquired by OpenAI on April 7th</a> and their Runners service is being wound down.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-providers-for-long-running-cpu-jobs">New providers for long-running CPU jobs<a href="https://conda-forge.org/blog/2026/06/17/large-runners-gha/#new-providers-for-long-running-cpu-jobs" class="hash-link" aria-label="Direct link to New providers for long-running CPU jobs" title="Direct link to New providers for long-running CPU jobs" translate="no">​</a></h2>
+<p>Immediately after, we reached out to a few companies offering external runners for GitHub Actions. Maybe someone out there would be able to help us with our most resource-demanding feedstocks... Fortunately, three different providers agreed to sponsor <strong>large CPU runners for Linux, macOS and Windows</strong>! We are incredibly grateful to these three companies:</p>
+<div class="supporters_nqy8"><div class="card_hgkJ"><a href="https://namespace.so/" target="_blank" rel="noopener noreferrer"><div class="cardWrapper_DMAK"><img src="https://conda-forge.org/img/supporters/namespace_light.svg" alt="Namespace.so logo" class="themedComponent_mlkZ themedComponent--light_NVdE" title="Go to Namespace.so's website" width="110%"><img src="https://conda-forge.org/img/supporters/namespace_dark.svg" alt="Namespace.so logo" class="themedComponent_mlkZ themedComponent--dark_xIcU" title="Go to Namespace.so's website" width="110%"></div><p align="center">Namespace.so</p></a><a href="https://blacksmith.sh/" target="_blank" rel="noopener noreferrer"><div class="cardWrapper_DMAK"><img src="https://conda-forge.org/img/supporters/blacksmith_light.png" alt="Blacksmith.sh logo" class="themedComponent_mlkZ themedComponent--light_NVdE" title="Go to Blacksmith.sh's website" width="110%"><img src="https://conda-forge.org/img/supporters/blacksmith_dark.png" alt="Blacksmith.sh logo" class="themedComponent_mlkZ themedComponent--dark_xIcU" title="Go to Blacksmith.sh's website" width="110%"></div><p align="center">Blacksmith.sh</p></a><a href="https://depot.dev/" target="_blank" rel="noopener noreferrer"><div class="cardWrapper_DMAK"><img src="https://conda-forge.org/img/supporters/depot_light.svg" alt="Depot.dev logo" class="themedComponent_mlkZ themedComponent--light_NVdE" title="Go to Depot.dev's website" width="110%"><img src="https://conda-forge.org/img/supporters/depot_dark.svg" alt="Depot.dev logo" class="themedComponent_mlkZ themedComponent--dark_xIcU" title="Go to Depot.dev's website" width="110%"></div><p align="center">Depot.dev</p></a></div><p></p></div>
+<p>If you maintain a feedstock with special CI requirements (e.g. it cannot be built with the Microsoft-hosted Azure Pipelines or GitHub Actions runners within the allocated six hours, or it runs out of RAM or disk despite all possible workarounds), learn how to opt-in at <a class="" href="https://conda-forge.org/docs/how-to/advanced/self-hosted-runners/">How to&gt; Advanced&gt; Self-hosted runners</a>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-about-the-gpu-ci-jobs">What about the GPU CI jobs?<a href="https://conda-forge.org/blog/2026/06/17/large-runners-gha/#what-about-the-gpu-ci-jobs" class="hash-link" aria-label="Direct link to What about the GPU CI jobs?" title="Direct link to What about the GPU CI jobs?" translate="no">​</a></h2>
+<p>Sadly, we don't have GPU CI jobs yet. Despite our attempts, we have not been able to find a GPU CI service that meets our requirements, which include:</p>
+<ul>
+<li class="">Fixed costs or org-wide capped concurrency to estimate an upper bound for the costs.</li>
+<li class="">Runs on GitHub Actions or equivalent integration effort in <code>conda-smithy</code>.</li>
+<li class="">Based on ephemeral Linux and/or Windows VMs that can (ideally) run Docker.</li>
+<li class="">(Ideally) VM images are maintained by the service provider, not us.</li>
+</ul>
+<p>If you know of a service that can cover these points, please <a class="" href="https://conda-forge.org/community/getting-in-touch/">reach out</a>! You can also email us at <a href="mailto:conda-forge-core@googlegroups.com" target="_blank" rel="noopener noreferrer" class="">conda-forge-core@googlegroups.com</a>.</p>]]></content:encoded>
+            <category>infrastructure</category>
+        </item>
         <item>
             <title><![CDATA[python builds on win-arm64]]></title>
             <link>https://conda-forge.org/blog/2026/02/09/win-arm64/</link>
@@ -1249,73 +1274,6 @@ account.</li>
 </ul>
 <p>Happy editing!</p>]]></content:encoded>
             <category>outreachy</category>
-        </item>
-        <item>
-            <title><![CDATA[2020 in Review]]></title>
-            <link>https://conda-forge.org/blog/2020/12/26/year-in-review/</link>
-            <guid>https://conda-forge.org/blog/2020/12/26/year-in-review/</guid>
-            <pubDate>Sat, 26 Dec 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[As 2020 winds down, the Core team thought it'd be fun to review some of]]></description>
-            <content:encoded><![CDATA[<p>As 2020 winds down, the Core team thought it'd be fun to review some of
-the big accomplishments our community has made this year.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="strong-growth">Strong Growth<a href="https://conda-forge.org/blog/2020/12/26/year-in-review/#strong-growth" class="hash-link" aria-label="Direct link to Strong Growth" title="Direct link to Strong Growth" translate="no">​</a></h2>
-<p>The <code>conda-forge</code> community has grown immensely this year. Here are some
-numbers to help give you an idea of the scale of our growth.</p>
-<ul>
-<li class="">The community has added 3,751 new, unique <code>conda</code> packages this
-year, along with a corresponding number of new feedstocks.</li>
-<li class="">For the majority of 2020, the <code>conda-forge</code> channel on
-<code>anaconda.org</code> exceeded 100 million downloads per month.</li>
-<li class="">In July of 2020, the <code>conda-forge</code> channel passed 2 billion total,
-all-time downloads.</li>
-<li class="">We've grown our core developer community, adding seven new members
-to the <code>conda-forge</code> Core team and at least two members to the
-<code>staged-recipes</code> team.</li>
-<li class="">We now have over 2,500 recipe maintainers in the <code>conda-forge</code>
-GitHub organization.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="big-new-features">Big New Features<a href="https://conda-forge.org/blog/2020/12/26/year-in-review/#big-new-features" class="hash-link" aria-label="Direct link to Big New Features" title="Direct link to Big New Features" translate="no">​</a></h2>
-<p>We've also shipped a ton of big updates to our core infrastructure this
-year. These updates include</p>
-<ul>
-<li class=""><code>PyPy</code> <strong>support</strong>: We added support for <code>PyPy</code> 3.6 and now supply
-one of the biggest stacks of <code>PyPy</code>-enabled packages in the <code>PyPy</code>
-ecosystem.</li>
-<li class=""><strong>automerge</strong>: We now support the automatic merging of PRs on
-feedstocks using the <code>automerge</code> label or through an opt-in setting
-in the <code>conda-forge.yml</code>.</li>
-<li class=""><code>R</code> <strong>4.0 migration</strong>: This migration was the first one to use our
-<code>automerge</code> infrastructure at scale. With it, we completed a
-complete rebuild/upgrade of the <code>R</code> ecosystem in about a week.</li>
-<li class=""><code>Python</code> <strong>updates</strong>: We deprecated <code>Python</code> 2.7, completed the
-<code>Python</code> 3.8 migration, and got about 75% of the way through the
-<code>Python</code> 3.9 migration.</li>
-<li class=""><strong>compiler upgrades</strong>: We upgraded our compiler infrastructure to
-<code>GCC</code> 9 and <code>clang</code> 11.</li>
-<li class=""><strong>CentOS 7 and CentOS 6 EOL</strong>: We shipped an option to enable our
-compilers to use the CentOS 7 <code>sysroot</code> in preparation for the
-CentOS 6 EOL. We hope to complete the move to CentOS 7 early next
-year.</li>
-<li class=""><strong>miniforge</strong>: We built our own standalone, <code>miniconda</code>-like
-installers. These support a broad range of platforms, including
-<code>osx-arm64</code> and <code>linux-aarch64</code>.</li>
-<li class=""><strong>standalone Windows stack</strong>: We fully decoupled our Windows recipes
-from the <code>defaults</code> channel by rebuilding the <code>msys2</code> recipes.</li>
-<li class=""><strong>Apple silicon support</strong>: We added support for Apple silicon with
-our <code>osx-arm64</code> platform. This platform is our first one to use a
-fully cross-compiled infrastructure.</li>
-<li class=""><strong>CUDA support</strong>: We added support for building CUDA packages on
-windows and added CUDA 11.0 support.</li>
-</ul>
-<hr>
-<p>We know that this year has been extremely difficult for so many of our
-community members and that the fantastic success of <code>conda-forge</code> would
-not have been possible without the active participation and support of
-our community. <strong>Thank you everyone so much for the work you put into</strong>
-<code>conda-forge</code> <strong>this year, making it the wonderful, community-led
-resource that it is.</strong></p>
-<p>We wish everyone a happy, healthy, and peaceful new year!</p>]]></content:encoded>
-            <category>conda-forge</category>
         </item>
     </channel>
 </rss>
