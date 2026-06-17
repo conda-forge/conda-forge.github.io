@@ -173,6 +173,10 @@
           },
           {
             "type": "doc",
+            "id": "how-to/advanced/run-package-tests-off-ci"
+          },
+          {
+            "type": "doc",
             "label": "Package a fork",
             "id": "how-to/advanced/package-a-fork"
           },
@@ -365,10 +369,22 @@
   {
     "type": "category",
     "label": "Reference",
+    "link": {
+      "type": "doc",
+      "id": "reference/index"
+    },
     "items": [
       {
         "type": "ref",
         "id": "maintainer/infrastructure"
+      },
+      {
+        "type": "ref",
+        "id": "reference/runners"
+      },
+      {
+        "type": "ref",
+        "id": "maintainer/linter"
       },
       {
         "type": "ref",
@@ -382,7 +398,7 @@
       {
         "type": "link",
         "label": "Ongoing migrations",
-        "href": "/status/#migrations"
+        "href": "/status/"
       },
       {
         "type": "ref",
