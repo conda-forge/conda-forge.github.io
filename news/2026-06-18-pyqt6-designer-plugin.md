@@ -8,12 +8,14 @@ To install:
 
 ```bash
 mamba install -c conda-forge "pyqt6=*=*_1"
-+
+```
+
 The plugin is automatically installed to
 $CONDA_PREFIX/lib/qt6/plugins/designer/ (Linux/macOS) or
 %PREFIX%\Library\plugins\designer\ (Windows).
 
 Available platforms: linux-64, linux-aarch64, osx-64, osx-arm64, win-64
+
 Python versions: 3.10, 3.11, 3.12, 3.13, 3.14
 
 This fixes a long-standing issue reported upstream
