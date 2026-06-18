@@ -4,7 +4,7 @@ After years of being silently missing from conda-forge builds, libpyqt6.so has b
 
 To install, run:
 
-mamba install -c conda-forge "pyqt6=*=*_1"
+mamba install -c conda-forge "pyqt6=_=_\_1"
 
 On Linux the plugin is at $CONDA_PREFIX/lib/qt6/plugins/designer/libpyqt6.so.
 On macOS it is at $CONDA_PREFIX/lib/qt6/plugins/designer/libpyqt6.dylib.
