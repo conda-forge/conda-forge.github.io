@@ -24,7 +24,7 @@ The solver will process all the metadata and will provide the most adequate sele
 For most packages, the paragraphs above are enough to describe their life cycle.
 However, the repodata-first approach followed in the conda ecosystem allows for some unique features in the post-publication stages.
 
-For large volume channels like conda-forge, Anaconda.org delivers the artifacts through a [CDN](/docs/glossary#cdn) network for faster access.
+For large volume channels like conda-forge, Anaconda.org delivers the artifacts through a [CDN](/docs/glossary#cdn) for faster access.
 The CDN network is synced with the channels periodically.
 As a result, packages take around 15 minutes to be available for installation after their publication.
 
@@ -119,7 +119,7 @@ consider reading our [Infrastructure guide](/docs/maintainer/infrastructure).
 
 <!-- LINKS -->
 
-[anaconda-org-labels]: https://docs.anaconda.com/anacondaorg/user-guide/tutorials/
+[anaconda-org-labels]: https://docs.anaconda.com/anacondaorg/user-guide/work-with-labels/
 [staged-recipes]: /docs/maintainer/understanding_conda_forge/staged_recipes/
 [feedstock-creation]: /docs/maintainer/understanding_conda_forge/staged_recipes/#feedstock-creation
 
