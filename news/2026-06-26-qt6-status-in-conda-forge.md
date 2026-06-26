@@ -2,6 +2,8 @@
 
 The Qt Designer Python plugin (`libpyqt6.so`) is now shipped with the conda-forge `pyqt6` package, completing the core PyQt6 packaging story. This has been a multi-year community effort; here is where things stand.
 
+The Qt6 migration in conda-forge spans over three years, starting with [qt-main-feedstock#44](https://github.com/conda-forge/qt-main-feedstock/pull/44). Qt 5.15 reached EOL in May 2025, accelerating the push to finalise the transition. The qt6 branch was merged into `main` in August 2025 ([qt-main-feedstock#350](https://github.com/conda-forge/qt-main-feedstock/pull/350)), followed by PyQt6 in February 2026 ([pyqt-feedstock#162](https://github.com/conda-forge/pyqt-feedstock/pull/162)). The Designer plugin was the last piece missing from the PyQt6 packaging.
+
 <!-- truncate -->
 
 ## What is available
@@ -30,4 +32,4 @@ The plugin can be found at:
 
 ## Thanks
 
-Thanks to everyone who has worked on the Qt6 transition over the years: [@hmaarrfk](https://github.com/hmaarrfk), [@jschueller](https://github.com/jschueller), [@h-vetinari](https://github.com/h-vetinari), [@JarrettSJohnson](https://github.com/JarrettSJohnson), [@ccordoba12](https://github.com/ccordoba12), and many others.
+Thanks to everyone who has worked on the Qt6 transition over the years: [@hmaarrfk](https://github.com/hmaarrfk), [@jschueller](https://github.com/jschueller), [@h-vetinari](https://github.com/h-vetinari), [@JarrettSJohnson](https://github.com/JarrettSJohnson), [@ccordoba12](https://github.com/ccordoba12), [@ludmilaklenova](https://github.com/ludmilaklenova), and many others.
