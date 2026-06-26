@@ -9,9 +9,7 @@ The Qt Designer Python plugin (`libpyqt6.so`) is now shipped with the conda-forg
 | Package | Status |
 |---------|--------|
 | **qt6-main** (Qt 6.11.1) | Default on `main` branch since August 2025 ([qt-main-feedstock#350](https://github.com/conda-forge/qt-main-feedstock/pull/350)) |
-| **qt-main** (Qt 5.15 LTS) | Maintained on `qt5` branch |
 | **pyqt6** (PyQt 6.11.0) | Available for Python 3.10–3.14 on linux-64, linux-aarch64, osx-64, osx-arm64, win-64 |
-| **pyqt** (PyQt 5.15) | Maintained on `qt5` branch |
 | **pyqt6 Designer plugin** | ✅ Now included ([pyqt-feedstock#184](https://github.com/conda-forge/pyqt-feedstock/pull/184)) |
 
 To install the updated package:
