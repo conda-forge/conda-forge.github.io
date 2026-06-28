@@ -22,21 +22,21 @@ These are modules from The Qt Company / the Qt Project, all released in lockstep
 
 | Package | What it provides |
 |---------|------------------|
-| **qt6-main** | The Qt Essentials base bundle (Core, GUI, Widgets, Network, Qml/Quick, Test, SQL, OpenGL, …) plus SVG, image formats, dev tools, translations, Qt5Compat, WebChannel, WebSockets |
-| **qt6-webengine** | Chromium-based web content rendering/embedding (the long-awaited piece, added May 2026) |
-| **qt6-multimedia** | Audio/video playback, recording, and camera access |
-| **qt6-charts** | 2D charts (line, bar, pie, scatter, …) — shipped separately partly because it is GPLv3 |
 | **qt6-3d** | Qt 3D — near-realtime simulation and 3D rendering framework |
-| **qt6-quick3d** | High-level API for 3D content/UIs on top of Qt Quick |
-| **qt6-graphs** | Newer unified 2D/3D graphing module |
+| **qt6-charts** | 2D charts (line, bar, pie, scatter, …) — shipped separately partly because it is GPLv3 |
 | **qt6-datavis3d** | 3D data visualization (bar, scatter, surface graphs) |
+| **qt6-graphs** | Newer unified 2D/3D graphing module |
+| **qt6-gtk-platformtheme** | GTK3 platform theme plugin for a native GTK look on Linux |
+| **qt6-main** | The Qt Essentials base bundle (Core, GUI, Widgets, Network, Qml/Quick, Test, SQL, OpenGL, …) plus SVG, image formats, dev tools, translations, Qt5Compat, WebChannel, WebSockets |
+| **qt6-multimedia** | Audio/video playback, recording, and camera access |
+| **qt6-networkauth** | OAuth-based authorization to online services |
+| **qt6-positioning** | Positioning, satellite info, and area monitoring |
+| **qt6-quick3d** | High-level API for 3D content/UIs on top of Qt Quick |
 | **qt6-scxml** | State machines from SCXML files |
 | **qt6-sensors** | Access to device sensor hardware |
 | **qt6-serialport** | Hardware and virtual serial port access |
-| **qt6-positioning** | Positioning, satellite info, and area monitoring |
-| **qt6-networkauth** | OAuth-based authorization to online services |
 | **qt6-wayland** | Wayland compositor framework and platform integration (Linux) |
-| **qt6-gtk-platformtheme** | GTK3 platform theme plugin for a native GTK look on Linux |
+| **qt6-webengine** | Chromium-based web content rendering/embedding (the long-awaited piece, added May 2026) |
 
 ## Community features (third-party Qt6 libraries)
 
@@ -60,16 +60,7 @@ conda-forge ships **three** complementary ways to use Qt6 from Python:
 
 Shipping both PySide6 and PyQt6, plus `qtpy` to abstract over them (and their Qt5 predecessors), means downstream projects can pick the binding that fits their licensing and feature needs without rewriting their code. For source-editor components, `qscintilla2` is also available.
 
-The Qt Designer Python plugin that prompted this post is now included in `pyqt6` ([pyqt-feedstock#184](https://github.com/conda-forge/pyqt-feedstock/pull/184)), so PyQt6 widgets show up in Designer's widget box. To get it:
-
-```
-mamba install -c conda-forge "pyqt6==6.*=*_1"
-```
-
-The plugin can be found at:
-- Linux: `$CONDA_PREFIX/lib/qt6/plugins/designer/libpyqt6.so`
-- macOS: `$CONDA_PREFIX/lib/qt6/plugins/designer/libpyqt6.dylib`
-- Windows: `%PREFIX%\Library\plugins\designer\libpyqt6.dll`
+The Qt Designer Python plugin that prompted this post is now included in `pyqt6` ([pyqt-feedstock#184](https://github.com/conda-forge/pyqt-feedstock/pull/184)), so PyQt6 widgets show up in Designer's widget box.
 
 ## A note on naming
 
