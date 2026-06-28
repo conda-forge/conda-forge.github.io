@@ -8,7 +8,7 @@ The migration spans more than three years. It started with the first attempts at
 
 ## A slimmer `qt6-main`
 
-The most important design decision behind this work is invisible to most users: **`qt6-main` was deliberately slimmed down**. Upstream's `qt-everywhere` source bundles dozens of submodules, and the old approach of shipping them all in one package made the base download enormous and pulled heavy, rarely-needed components (a whole Chromium, GPU/3D stacks, multimedia codecs) into *every* Qt install.
+The most important design decision behind this work is invisible to most users: **`qt6-main` was deliberately slimmed down**. Upstream's `qt-everywhere` source bundles dozens of submodules, and the old approach of shipping them all in one package made the base download enormous and pulled heavy, rarely-needed components (a whole Chromium, GPU/3D stacks, multimedia codecs) into _every_ Qt install.
 
 Instead, the modules were **broken out into separate feedstocks**, each producing its own `qt6-*` package version-locked to `qt6-main`. The split was driven as much by **license hygiene** as by size: most of Qt is LGPL, but a few modules (notably Qt Charts, which is GPLv3) would otherwise taint the base package. Keeping `qt6-main` cleanly LGPL is a recurring constraint — even GPL-encumbered optional dependencies like MySQL were pushed out of the base build ([qt-main-feedstock#335](https://github.com/conda-forge/qt-main-feedstock/issues/335), [qt-main-feedstock#78](https://github.com/conda-forge/qt-main-feedstock/issues/78)).
 
@@ -20,43 +20,43 @@ Because Qt6 promises ABI compatibility across the whole 6.x series, packages onl
 
 These are modules from The Qt Company / the Qt Project, all released in lockstep (currently 6.11.1). Install only the ones you need:
 
-| Package | What it provides |
-|---------|------------------|
-| **qt6-3d** | Qt 3D — near-realtime simulation and 3D rendering framework |
-| **qt6-charts** | 2D charts (line, bar, pie, scatter, …) — shipped separately partly because it is GPLv3 |
-| **qt6-datavis3d** | 3D data visualization (bar, scatter, surface graphs) |
-| **qt6-graphs** | Newer unified 2D/3D graphing module |
-| **qt6-gtk-platformtheme** | GTK3 platform theme plugin for a native GTK look on Linux |
-| **qt6-main** | The Qt Essentials base bundle (Core, GUI, Widgets, Network, Qml/Quick, Test, SQL, OpenGL, …) plus SVG, image formats, dev tools, translations, Qt5Compat, WebChannel, WebSockets |
-| **qt6-multimedia** | Audio/video playback, recording, and camera access |
-| **qt6-networkauth** | OAuth-based authorization to online services |
-| **qt6-positioning** | Positioning, satellite info, and area monitoring |
-| **qt6-quick3d** | High-level API for 3D content/UIs on top of Qt Quick |
-| **qt6-scxml** | State machines from SCXML files |
-| **qt6-sensors** | Access to device sensor hardware |
-| **qt6-serialport** | Hardware and virtual serial port access |
-| **qt6-wayland** | Wayland compositor framework and platform integration (Linux) |
-| **qt6-webengine** | Chromium-based web content rendering/embedding (the long-awaited piece, added May 2026) |
+| Package                   | What it provides                                                                                                                                                                 |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **qt6-3d**                | Qt 3D — near-realtime simulation and 3D rendering framework                                                                                                                      |
+| **qt6-charts**            | 2D charts (line, bar, pie, scatter, …) — shipped separately partly because it is GPLv3                                                                                           |
+| **qt6-datavis3d**         | 3D data visualization (bar, scatter, surface graphs)                                                                                                                             |
+| **qt6-graphs**            | Newer unified 2D/3D graphing module                                                                                                                                              |
+| **qt6-gtk-platformtheme** | GTK3 platform theme plugin for a native GTK look on Linux                                                                                                                        |
+| **qt6-main**              | The Qt Essentials base bundle (Core, GUI, Widgets, Network, Qml/Quick, Test, SQL, OpenGL, …) plus SVG, image formats, dev tools, translations, Qt5Compat, WebChannel, WebSockets |
+| **qt6-multimedia**        | Audio/video playback, recording, and camera access                                                                                                                               |
+| **qt6-networkauth**       | OAuth-based authorization to online services                                                                                                                                     |
+| **qt6-positioning**       | Positioning, satellite info, and area monitoring                                                                                                                                 |
+| **qt6-quick3d**           | High-level API for 3D content/UIs on top of Qt Quick                                                                                                                             |
+| **qt6-scxml**             | State machines from SCXML files                                                                                                                                                  |
+| **qt6-sensors**           | Access to device sensor hardware                                                                                                                                                 |
+| **qt6-serialport**        | Hardware and virtual serial port access                                                                                                                                          |
+| **qt6-wayland**           | Wayland compositor framework and platform integration (Linux)                                                                                                                    |
+| **qt6-webengine**         | Chromium-based web content rendering/embedding (the long-awaited piece, added May 2026)                                                                                          |
 
 ## Community features (third-party Qt6 libraries)
 
-These packages also start with `qt6` but are independent open-source projects built *for* Qt6, not part of an official Qt release:
+These packages also start with `qt6` but are independent open-source projects built _for_ Qt6, not part of an official Qt release:
 
-| Package | What it is |
-|---------|------------|
-| **qt6-keychain** | Platform-independent API for securely storing passwords ([QtKeychain](https://github.com/frankosterfeld/qtkeychain)) |
-| **qt6-advanced-docking-system** | [Advanced Docking System](https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System) for dockable UI panels |
-| **qt6molecularnetwork** | Graph-visualization widgets used by MetGem |
+| Package                         | What it is                                                                                                           |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **qt6-keychain**                | Platform-independent API for securely storing passwords ([QtKeychain](https://github.com/frankosterfeld/qtkeychain)) |
+| **qt6-advanced-docking-system** | [Advanced Docking System](https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System) for dockable UI panels     |
+| **qt6molecularnetwork**         | Graph-visualization widgets used by MetGem                                                                           |
 
 ## Python bindings
 
 conda-forge ships **three** complementary ways to use Qt6 from Python:
 
-| Package | What it is |
-|---------|------------|
-| **pyside6** | The Qt Company's *official* "Qt for Python" bindings |
-| **pyqt6** | Riverbank Computing's PyQt6 bindings (with `pyqt6-sip`, and add-ons such as `pyqt6-charts`) |
-| **qtpy** | A compatibility shim that lets a single codebase target PyQt5, PySide2, PyQt6, *and* PySide6 |
+| Package     | What it is                                                                                   |
+| ----------- | -------------------------------------------------------------------------------------------- |
+| **pyside6** | The Qt Company's _official_ "Qt for Python" bindings                                         |
+| **pyqt6**   | Riverbank Computing's PyQt6 bindings (with `pyqt6-sip`, and add-ons such as `pyqt6-charts`)  |
+| **qtpy**    | A compatibility shim that lets a single codebase target PyQt5, PySide2, PyQt6, _and_ PySide6 |
 
 Shipping both PySide6 and PyQt6, plus `qtpy` to abstract over them (and their Qt5 predecessors), means downstream projects can pick the binding that fits their licensing and feature needs without rewriting their code. For source-editor components, `qscintilla2` is also available.
 
@@ -68,7 +68,7 @@ The package names carry history. The original `qt` feedstock now ships a Qt5 met
 
 ## What remains
 
-- **PyQt6 WebEngine** — `qt6-webengine` now exists, but the PyQt6 WebEngine *bindings* are not yet packaged. PySide6 includes WebEngine support today, so projects needing web content from Python can use PySide6 (or `qt6-webengine` directly).
+- **PyQt6 WebEngine** — `qt6-webengine` now exists, but the PyQt6 WebEngine _bindings_ are not yet packaged. PySide6 includes WebEngine support today, so projects needing web content from Python can use PySide6 (or `qt6-webengine` directly).
 
 ## Thanks
 
