@@ -76,6 +76,7 @@ jobs:
             --exclude 'https://www.gnu.org/software/autoconf/*'
             --exclude 'https://github.com/regro/cf-scripts/*'
             --exclude 'https://webarchive.nationalarchives.gov.uk/*'
+            --exclude 'https://design-system.service.gov.uk/*'
             --exclude '.*,.*'
             --exclude-path './build/community/minutes/'
             --exclude 'https://webarchive.nationalarchives.gov.uk/ukgwa/20130812104657/http://odi.dwp.gov.uk/docs/iod/easy-read-guidance.pdf'
