@@ -22,9 +22,20 @@ conda-forge provides a plethora of packages from different ecosystems, making su
 
 The conda package manager and format were created to address packaging challenges for the NumPy stack and other software with native extensions—projects that mix Python with C, Fortran, Cython, C++, and interfaces to external libraries, and that are harder to ship with tools aimed at pure-Python packages alone.
 
-At the first PyData meetup, several developers asked Guido van Rossum how to fix Python packaging for the NumPy stack; his answer was to "solve the problem ourselves." Engineers at Continuum (now Anaconda, Inc.) took that seriously: they studied dpkg, rpm, pip/virtualenv, Homebrew, Nix, and other systems, drew on experience with Enthought Python Distribution (EPD), and created the conda package manager and conda environments. A fuller account of this history is in progress in the [conda-forge history article](https://github.com/conda-forge/conda-forge.github.io/pull/2298) (see also [this talk](https://www.youtube.com/watch?v=U2oa_RLbTVA) and [this talk](https://www.youtube.com/watch?v=gFEE3w7F0ww)).
+As [Travis Oliphant recounts](https://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html):
 
-While Anaconda's distribution is linked to specific legal Terms of Service, conda-forge reuses this package format in a community-run distribution where artifacts are published under BSD-3-Clause, alongside the original projects' licenses.
+> This was confirmed for me at the first PyData meetup at Google HQ, where several of us asked Guido what we can do to fix Python packaging for the NumPy stack. Guido's answer was to "solve the problem ourselves". We at Continuum took him at his word. We looked at dpkg, rpm, pip/virtualenv, brew, nixos, and 0installer, and used our past experience with EPD. We thought hard about the fundamental issues, and created the conda package manager and conda environments.
+
+A fuller account of this history is in progress in the [conda-forge history article](https://github.com/conda-forge/conda-forge.github.io/pull/2298) (see also [this talk](https://www.youtube.com/watch?v=U2oa_RLbTVA) and [this talk](https://www.youtube.com/watch?v=gFEE3w7F0ww)).
+
+Condensing a lot of history, it's important to distinguish different meanings of the word "conda":
+
+- the packaging paradigm that grew out of the above-mentioned efforts
+- `conda`, the CLI tool used to interact with packages in this format
+- Anaconda, the company where this was initially developed, which maintains curated channels of packages that may be subject to licensing fees (subject to the size of the organisation that users belong to)
+- the conda ecosystem, which has outgrown the control of Anaconda, and nowadays is a [standards-based](https://github.com/conda/ceps/blob/main/cep-1.md) [effort](https://conda.org/blog/2024-08-14-conda-ecosystem-explained), under multi-stakeholder [governance](https://github.com/conda/governance).
+
+To relate conda-forge to all this: it is the community-driven channel of packages which are _not_ subject to Anaconda's Terms of Service, all the while still being hosted on Anaconda infrastructure (i.e. https://anaconda.org/conda-forge), which can be installed through `conda` as well as other installers like `mamba` and `pixi`, and which forms a key part of the wider conda ecosystem, in addition to being (broadly, but not fully) the "upstream" of Anaconda's own curated channels (roughly comparable for example to the dynamic between CentOS Stream and Red Hat Enterprise Linux). Artifacts published on conda-forge are licensed under BSD-3-Clause, alongside the original projects' licenses.
 
 :::info Benefits
 conda-forge's users aren't technically constrained by the operations of a single entity, and package usage is governed by artifact and upstream project licenses.
@@ -32,7 +43,13 @@ conda-forge's users aren't technically constrained by the operations of a single
 
 ## Open, automated, distributed and transparent maintenance of projects' distribution
 
-Anaconda distribution was really popular, but it was also faced with a tremendous number of requests to add or modify packages, so people decided to create a distributed alternative that could scale: conda-forge.
+Under conda's packaging paradigm, libraries need to be "packaged" according to a declarative recipe that describes how the sources are processed, which tools and other libraries need to be present before running the build scripts, etc. These recipes form the backbone of the conda ecosystem.
+
+The flipside however, is that in order to benefit from the advantages of conda's paradigm, such a recipe needs to be created initially and then maintained as new versions of the library get released.
+
+Given the success of conda's approach, this meant that users very soon wanted to consume a vast variety of packages through conda, and given the scope (not just Python, but many more languages) of the task, as well as the very high rate of change, no single entity — not even Anaconda — could keep up with packaging everything users wanted, and keeping it up to date.
+
+What ended up happening is that the volunteer-driven conda-forge channel could absorb contributions much more quickly and easily than an enterprise distribution, and eventually ended up becoming the place where thousands of contributors of varying degrees of involvement and expertise come together in a way that's proven most scalable in dealing with the vast breadth and depth and pace of the wider software ecosystem.
 
 Contrary to other distributions that are only managed by a small number of people without any potential understanding of the process of publishing packages for outsiders, conda-forge adopted a model where each project distribution is managed by a repository on GitHub called a feedstock.
 
