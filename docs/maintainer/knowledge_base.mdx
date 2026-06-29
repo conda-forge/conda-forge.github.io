@@ -1451,13 +1451,13 @@ relies on three concepts:
 2. `conda-forge.yml`'s [noarch_platforms](conda_forge_yml.mdx#noarch-platforms) option.
 3. **conda-build 3.25.0 or above** changing the build hash depending on virtual packages used.
 
-The idea is to generate different noarch packages for each OS needing different dependencies.
+The idea is to generate **different noarch packages** for each OS needing different dependencies.
 Let's say you have a pure Python package, perfectly eligible for `noarch: python`, but on Windows
 it requires `windows-only-dependency`. You might have something like:
 
 <RecipeTabs>
 
-```recipe title="recipe/meta.yaml (original)"
+```recipe title="recipe/meta.yaml (non-noarch)"
 name: package
 source:
   # ...
@@ -1471,7 +1471,7 @@ requirements:
     - windows-only-dependency  # [win]
 ```
 
-```recipe title="recipe/recipe.yaml (original)"
+```recipe title="recipe/recipe.yaml (non-noarch)"
 name: package
 source:
   # ...
@@ -1494,7 +1494,7 @@ We can get it down to two outputs if replace it with this other approach!
 
 <RecipeTabs>
 
-```recipe title="recipe/meta.yaml (modified)"
+```recipe title="recipe/meta.yaml (noarch)"
 name: package
 source:
   # ...
@@ -1513,7 +1513,7 @@ requirements:
     - windows-only-dependency  # [win]
 ```
 
-```recipe title="recipe/recipe.yaml (modified)"
+```recipe title="recipe/recipe.yaml (noarch)"
 name: package
 source:
   # ...
@@ -1537,8 +1537,18 @@ requirements:
 
 </RecipeTabs>
 
-Do not forget to specify the platform virtual packages with their selectors!
-Otherwise, the solver will not be able to choose the variants correctly.
+:::warning[Important]
+Do not forget to enumerate all platforms in your selectors, **including virtual package
+dependencies**! For OS-specific builds, the solver requires virtual packages to be
+present in the package metadata in order to select the correct package for your
+platform.
+
+For example, if you have a `windows-only-dependency` as in the example above, but you
+forget to enumerate the unix selector and virtual package, the result will be two noarch
+builds: the Windows build will include a virtual package (`__win`), and the other
+will include no virtual packages. The latter package, **without
+`windows-only-dependency`**, can be selected by the solver on any OS, including Windows.
+:::
 
 By default, conda-forge will only build `noarch` packages on a `linux_64` CI runner, so
 only the `unix` selector would be true. However, we can change this behaviour using
