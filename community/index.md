@@ -1,5 +1,5 @@
 ---
-title: 'conda-forge community'
+title: 'The conda-forge community'
 ---
 
 # Community
