@@ -33,14 +33,14 @@
     "react": "^19.2.7",
     "react-chartjs-2": "^5.3.1",
     "react-dom": "^19.2.7",
-    "react-inlinesvg": "^4.4.1",
+    "react-inlinesvg": "^4.5.0",
     "react-markdown": "^10.1.0",
-    "react-tooltip": "^6.0.6",
+    "react-tooltip": "^6.0.8",
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.9.2",
-    "prettier": "^3.8.3"
+    "prettier": "^3.9.4"
   },
   "browserslist": {
     "production": [
