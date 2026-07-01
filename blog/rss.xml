@@ -4,10 +4,155 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/blog/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Wed, 17 Jun 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 01 Jul 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Qt6 status in conda-forge]]></title>
+            <link>https://conda-forge.org/blog/2026/07/01/qt6-status-in-conda-forge/</link>
+            <guid>https://conda-forge.org/blog/2026/07/01/qt6-status-in-conda-forge/</guid>
+            <pubDate>Wed, 01 Jul 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Qt6 has quietly become a first-class citizen in conda-forge. The recent addition of the Qt Designer Python plugin (libpyqt6.so) to the pyqt6 package closed one of the last gaps in the PyQt6 story, but it is a small piece of a much larger, multi-year community effort. This post takes the opportunity to lay out what the whole Qt6 ecosystem now looks like on conda-forge.]]></description>
+            <content:encoded><![CDATA[<p>Qt6 has quietly become a first-class citizen in conda-forge. The recent addition of the Qt Designer Python plugin (<code>libpyqt6.so</code>) to the <code>pyqt6</code> package closed one of the last gaps in the PyQt6 story, but it is a small piece of a much larger, multi-year community effort. This post takes the opportunity to lay out what the whole Qt6 ecosystem now looks like on conda-forge.</p>
+<p>The migration spans more than three years. It started with the first attempts at a 6.x build in <a href="https://github.com/conda-forge/qt-main-feedstock/pull/44" target="_blank" rel="noopener noreferrer" class="">qt-main-feedstock#44</a> (2022), gathered urgency once Qt 5.15 reached end-of-life in May 2025, and culminated in the "flip" that made Qt6 the default — the <code>qt6</code> branch was merged into <code>main</code> in August 2025 (<a href="https://github.com/conda-forge/qt-main-feedstock/pull/350" target="_blank" rel="noopener noreferrer" class="">qt-main-feedstock#350</a>). PyQt6 followed in February 2026 (<a href="https://github.com/conda-forge/pyqt-feedstock/pull/162" target="_blank" rel="noopener noreferrer" class="">pyqt-feedstock#162</a>), and <code>qt6-webengine</code> landed in May 2026 (<a href="https://github.com/conda-forge/qt-webengine-feedstock/pull/90" target="_blank" rel="noopener noreferrer" class="">qt-webengine-feedstock#90</a>), removing the last major blocker tracked in <a href="https://github.com/conda-forge/qt-main-feedstock/issues/349" target="_blank" rel="noopener noreferrer" class="">qt-main-feedstock#349</a>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-slimmer-qt6-main">A slimmer <code>qt6-main</code><a href="https://conda-forge.org/blog/2026/07/01/qt6-status-in-conda-forge/#a-slimmer-qt6-main" class="hash-link" aria-label="Direct link to a-slimmer-qt6-main" title="Direct link to a-slimmer-qt6-main" translate="no">​</a></h2>
+<p>The most important design decision behind this work is invisible to most users: <strong><code>qt6-main</code> was deliberately slimmed down</strong>. Upstream's <code>qt-everywhere</code> source bundles dozens of submodules, and the old approach of shipping them all in one package made the base download enormous and pulled heavy, rarely-needed components (a whole Chromium, GPU/3D stacks, multimedia codecs) into <em>every</em> Qt install.</p>
+<p>Instead, the modules were <strong>broken out into separate feedstocks</strong>, each producing its own <code>qt6-*</code> package version-locked to <code>qt6-main</code>. The split was driven as much by <strong>license hygiene</strong> as by size: most of Qt is LGPL, but a few modules (notably Qt Charts, which is GPLv3) would otherwise taint the base package. Keeping <code>qt6-main</code> cleanly LGPL is a recurring constraint — even GPL-encumbered optional dependencies like MySQL were pushed out of the base build (<a href="https://github.com/conda-forge/qt-main-feedstock/issues/335" target="_blank" rel="noopener noreferrer" class="">qt-main-feedstock#335</a>, <a href="https://github.com/conda-forge/qt-main-feedstock/issues/78" target="_blank" rel="noopener noreferrer" class="">qt-main-feedstock#78</a>).</p>
+<p><code>qt6-main</code> still bundles the Qt <strong>Essentials</strong> — Core, GUI, Widgets, Network, Qml/Quick, Test, D-Bus, SQL, OpenGL, PrintSupport — plus a handful of small, universally-useful modules (SVG, image formats, shader tools, the developer tools like Designer/Linguist/Assistant, translations, Qt5Compat, WebChannel, and WebSockets). Everything heavier is opt-in.</p>
+<p>Because Qt6 promises ABI compatibility across the whole 6.x series, packages only pin <code>qt6-main</code> to the major version, which keeps the dependency graph stable across minor releases.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="qt-features-official-qt-modules">Qt features (official Qt modules)<a href="https://conda-forge.org/blog/2026/07/01/qt6-status-in-conda-forge/#qt-features-official-qt-modules" class="hash-link" aria-label="Direct link to Qt features (official Qt modules)" title="Direct link to Qt features (official Qt modules)" translate="no">​</a></h2>
+<p>These are modules from The Qt Company / the Qt Project, all released in lockstep (currently 6.11.1). Install only the ones you need:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Package</th><th>What it provides</th></tr></thead><tbody><tr><td><strong>qt6-3d</strong></td><td>Qt 3D — near-realtime simulation and 3D rendering framework</td></tr><tr><td><strong>qt6-charts</strong></td><td>2D charts (line, bar, pie, scatter, …) — shipped separately partly because it is GPLv3</td></tr><tr><td><strong>qt6-datavis3d</strong></td><td>3D data visualization (bar, scatter, surface graphs)</td></tr><tr><td><strong>qt6-graphs</strong></td><td>Newer unified 2D/3D graphing module</td></tr><tr><td><strong>qt6-gtk-platformtheme</strong></td><td>GTK3 platform theme plugin for a native GTK look on Linux</td></tr><tr><td><strong>qt6-main</strong></td><td>The Qt Essentials base bundle (Core, GUI, Widgets, Network, Qml/Quick, Test, SQL, OpenGL, …) plus SVG, image formats, dev tools, translations, Qt5Compat, WebChannel, WebSockets</td></tr><tr><td><strong>qt6-multimedia</strong></td><td>Audio/video playback, recording, and camera access</td></tr><tr><td><strong>qt6-networkauth</strong></td><td>OAuth-based authorization to online services</td></tr><tr><td><strong>qt6-positioning</strong></td><td>Positioning, satellite info, and area monitoring</td></tr><tr><td><strong>qt6-quick3d</strong></td><td>High-level API for 3D content/UIs on top of Qt Quick</td></tr><tr><td><strong>qt6-scxml</strong></td><td>State machines from SCXML files</td></tr><tr><td><strong>qt6-sensors</strong></td><td>Access to device sensor hardware</td></tr><tr><td><strong>qt6-serialport</strong></td><td>Hardware and virtual serial port access</td></tr><tr><td><strong>qt6-wayland</strong></td><td>Wayland compositor framework and platform integration (Linux)</td></tr><tr><td><strong>qt6-webengine</strong></td><td>Chromium-based web content rendering/embedding (the long-awaited piece, added May 2026)</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="community-features-third-party-qt6-libraries">Community features (third-party Qt6 libraries)<a href="https://conda-forge.org/blog/2026/07/01/qt6-status-in-conda-forge/#community-features-third-party-qt6-libraries" class="hash-link" aria-label="Direct link to Community features (third-party Qt6 libraries)" title="Direct link to Community features (third-party Qt6 libraries)" translate="no">​</a></h2>
+<p>These packages also start with <code>qt6</code> but are independent open-source projects built <em>for</em> Qt6, not part of an official Qt release:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Package</th><th>What it is</th></tr></thead><tbody><tr><td><strong>qt6-keychain</strong></td><td>Platform-independent API for securely storing passwords (<a href="https://github.com/frankosterfeld/qtkeychain" target="_blank" rel="noopener noreferrer" class="">QtKeychain</a>)</td></tr><tr><td><strong>qt6-advanced-docking-system</strong></td><td><a href="https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System" target="_blank" rel="noopener noreferrer" class="">Advanced Docking System</a> for dockable UI panels</td></tr><tr><td><strong>qt6molecularnetwork</strong></td><td>Graph-visualization widgets used by MetGem</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="python-bindings">Python bindings<a href="https://conda-forge.org/blog/2026/07/01/qt6-status-in-conda-forge/#python-bindings" class="hash-link" aria-label="Direct link to Python bindings" title="Direct link to Python bindings" translate="no">​</a></h2>
+<p>conda-forge ships <strong>three</strong> complementary ways to use Qt6 from Python:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Package</th><th>What it is</th></tr></thead><tbody><tr><td><strong>pyside6</strong></td><td>The Qt Company's <em>official</em> "Qt for Python" bindings</td></tr><tr><td><strong>pyqt6</strong></td><td>Riverbank Computing's PyQt6 bindings (with <code>pyqt6-sip</code>, and add-ons such as <code>pyqt6-charts</code>)</td></tr><tr><td><strong>qtpy</strong></td><td>A compatibility shim that lets a single codebase target PyQt5, PySide2, PyQt6, <em>and</em> PySide6</td></tr></tbody></table>
+<p>Shipping both PySide6 and PyQt6, plus <code>qtpy</code> to abstract over them (and their Qt5 predecessors), means downstream projects can pick the binding that fits their licensing and feature needs without rewriting their code. For source-editor components, <code>qscintilla2</code> is also available.</p>
+<p>The Qt Designer Python plugin that prompted this post is now included in <code>pyqt6</code> (<a href="https://github.com/conda-forge/pyqt-feedstock/pull/184" target="_blank" rel="noopener noreferrer" class="">pyqt-feedstock#184</a>), so PyQt6 widgets show up in Designer's widget box.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-note-on-naming">A note on naming<a href="https://conda-forge.org/blog/2026/07/01/qt6-status-in-conda-forge/#a-note-on-naming" class="hash-link" aria-label="Direct link to A note on naming" title="Direct link to A note on naming" translate="no">​</a></h2>
+<p>The package names carry history. The original <code>qt</code> feedstock now ships a Qt5 metapackage (<code>qt</code> → <code>qt-main</code> 5.15); <code>qt-main-feedstock</code> builds <code>qt-main</code> (Qt5) on its <code>qt5</code> branch and <code>qt6-main</code> (Qt6) on <code>main</code>. Encoding the major version into the package name (<code>qt6-main</code>) is what lets Qt5 and Qt6 coexist across the ecosystem during the long transition. See <a href="https://github.com/conda-forge/qt-main-feedstock/issues/349" target="_blank" rel="noopener noreferrer" class="">qt-main-feedstock#349</a> for the wrap-up plan.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-remains">What remains<a href="https://conda-forge.org/blog/2026/07/01/qt6-status-in-conda-forge/#what-remains" class="hash-link" aria-label="Direct link to What remains" title="Direct link to What remains" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>PyQt6 WebEngine</strong> — <code>qt6-webengine</code> now exists, but the PyQt6 WebEngine <em>bindings</em> are not yet packaged. PySide6 includes WebEngine support today, so projects needing web content from Python can use PySide6 (or <code>qt6-webengine</code> directly).</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="thanks">Thanks<a href="https://conda-forge.org/blog/2026/07/01/qt6-status-in-conda-forge/#thanks" class="hash-link" aria-label="Direct link to Thanks" title="Direct link to Thanks" translate="no">​</a></h2>
+<p>Thanks to everyone who has worked on the Qt6 transition over the years: <a href="https://github.com/hmaarrfk" target="_blank" rel="noopener noreferrer" class="">@hmaarrfk</a>, <a href="https://github.com/jschueller" target="_blank" rel="noopener noreferrer" class="">@jschueller</a>, <a href="https://github.com/h-vetinari" target="_blank" rel="noopener noreferrer" class="">@h-vetinari</a>, <a href="https://github.com/traversaro" target="_blank" rel="noopener noreferrer" class="">@traversaro</a>, <a href="https://github.com/andfoy" target="_blank" rel="noopener noreferrer" class="">@andfoy</a>, <a href="https://github.com/Tobias-Fischer" target="_blank" rel="noopener noreferrer" class="">@Tobias-Fischer</a>, <a href="https://github.com/JarrettSJohnson" target="_blank" rel="noopener noreferrer" class="">@JarrettSJohnson</a>, <a href="https://github.com/ccordoba12" target="_blank" rel="noopener noreferrer" class="">@ccordoba12</a>, <a href="https://github.com/ludmilaklenova" target="_blank" rel="noopener noreferrer" class="">@ludmilaklenova</a>, and many others.</p>]]></content:encoded>
+            <category>ecosystem</category>
+        </item>
         <item>
             <title><![CDATA[New large runners available for GitHub Actions]]></title>
             <link>https://conda-forge.org/blog/2026/06/17/large-runners-gha/</link>
@@ -1100,179 +1245,6 @@ might need to make certain tweaks.</p>
 <p>Once the PR gets merged, your package will be available on the
 conda-forge channel. Tada! It's that easy.</p>]]></content:encoded>
             <category>grayskull</category>
-            <category>outreachy</category>
-        </item>
-        <item>
-            <title><![CDATA[Conda-forge Outreachy]]></title>
-            <link>https://conda-forge.org/blog/2021/02/02/outreachy/</link>
-            <guid>https://conda-forge.org/blog/2021/02/02/outreachy/</guid>
-            <pubDate>Tue, 02 Feb 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[Conda-forge is participating in the upcoming round of]]></description>
-            <content:encoded><![CDATA[<p>Conda-forge is participating in the upcoming round of
-<a href="https://www.outreachy.org/" target="_blank" rel="noopener noreferrer" class="">Outreachy</a> i.e May 2021 to August 2021. The
-goal of this program is to increase participation from under-represented
-groups in free and open-source software. Outreachy is organized by
-<a href="https://sfconservancy.org/" target="_blank" rel="noopener noreferrer" class="">Software Freedom Conservancy</a>.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="participant-application-process">Participant Application Process:<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#participant-application-process" class="hash-link" aria-label="Direct link to Participant Application Process:" title="Direct link to Participant Application Process:" translate="no">​</a></h2>
-<p>First, please review the Outreachy Eligibility and Application
-Information page to learn more about eligibility for Outreachy.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="steps-for-applicants-to-conda-forge">Steps for applicants to conda-forge:<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#steps-for-applicants-to-conda-forge" class="hash-link" aria-label="Direct link to Steps for applicants to conda-forge:" title="Direct link to Steps for applicants to conda-forge:" translate="no">​</a></h2>
-<ol>
-<li class="">Confirm your eligibility on the Outreachy site</li>
-<li class="">Look at the Conda-forge projects available on the Outreachy site,
-consider your options, and if you have questions, communicate with the
-project mentors.</li>
-<li class="">Begin by contributing to the project by looking at our <a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer" class="">issues
-page</a>.
-As you make contributions, record them on the Outreachy site.</li>
-<li class="">Once you have made a few contributions, begin to write your application.
-Ask the mentors to review the application before you submit it.</li>
-</ol>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="participant-expectations">Participant Expectations<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#participant-expectations" class="hash-link" aria-label="Direct link to Participant Expectations" title="Direct link to Participant Expectations" translate="no">​</a></h2>
-<p>You will be working full-time on your project for three months. You will
-meet with your mentor(s) frequently and participate in the open-source
-development process -- writing code, reviewing code, testing, and so
-on. You will be expected to write a blog entry each week.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="project-contribution-information">Project Contribution Information<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#project-contribution-information" class="hash-link" aria-label="Direct link to Project Contribution Information" title="Direct link to Project Contribution Information" translate="no">​</a></h2>
-<p>As part of the application process, all applicants must make at least
-one contribution to be accepted as an intern for this project. Only
-applicants who make a contribution will be eligible to be accepted as
-interns.</p>
-<p>While we don't have one we highly recommend the first-time contributor
-to be a conda user and/or submit a package to conda-forge via
-<a href="https://github.com/conda-forge/staged-recipes" target="_blank" rel="noopener noreferrer" class="">staged-recipes</a>. That
-will ensure the contributor understands the value of what we do and
-means that they are willing to participate in our community.</p>
-<p>Applicants can contribute to this project through the <a href="https://conda-forge.org/#contribute" target="_blank" rel="noopener noreferrer" class="">project
-repository or contribution page</a>.
-The project uses an <a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer" class="">issue
-tracker</a> to
-keep information about bugs to fix, project features to implement,
-documentation to write, and more. Applicants can look for
-newcomer-friendly issues to use for their first contributions by looking
-for the following issue tags in the project issue
-<a href="https://github.com/conda-forge/conda-forge.github.io/issues" target="_blank" rel="noopener noreferrer" class="">tracker</a>:
-Docs, Good first issue</p>
-<p>We here at <a href="https://conda-forge.org/#contribute" target="_blank" rel="noopener noreferrer" class="">conda-forge</a> have a
-large number of potential Outreachy endeavors around documentation,
-maintenance, and development. These tasks are high-impact, affecting the
-entire conda-forge ecosystem. They also cover multiple systems including
-databases, conda's CDN provider, continuous integration providers, and
-user interactions on GitHub.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-do-i-work-with-the-conda-forge-community">How do I work with the conda-forge community?<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#how-do-i-work-with-the-conda-forge-community" class="hash-link" aria-label="Direct link to How do I work with the conda-forge community?" title="Direct link to How do I work with the conda-forge community?" translate="no">​</a></h2>
-<p>Outreachy applicants can get help and feedback from both mentors and
-community members. Community members discuss their contributions in a
-public chat. Outreachy applicants can often learn from those
-discussions.</p>
-<p>Please introduce yourself on the public project chat:</p>
-<ul>
-<li class="">Gitter - <a href="https://gitter.im/conda-forge/conda-forge.github.io" target="_blank" rel="noopener noreferrer" class="">Follow this
-link</a> to join this
-project's public chat.</li>
-<li class="">Outreachy mentors will often be in the community public chat. The
-project mentor's usernames are: <code>@viniciusdc</code>.</li>
-</ul>
-<p>Here are some ready-to-go ways you can get started contributing on your
-own.</p>
-<ul>
-<li class="">Find an open issue to tackle or report a bug to the issue tracker;</li>
-<li class="">Don't be afraid to communicate: Ask if you can help write a new
-feature or help Automate project setups;</li>
-<li class="">Improving current tooling and testing features is always welcome.</li>
-</ul>
-<p>As this project main goal is enhancing our current documentation, here
-are some preliminary tasks that you can inspect to get ideas:</p>
-<ul>
-<li class="">Write and improve the project's documentation;</li>
-<li class="">Link to duplicate issues, and suggest new issue labels, to keep
-things organized;</li>
-<li class="">Go through open issues and suggest closing old ones;</li>
-<li class="">Ask clarifying questions on recently opened issues to move the
-discussion forward;</li>
-<li class="">We also have issues regarding the main functionalities of our bot,
-in particular the autotick bot. You could find some new information
-or ideas for your contributing proposals.</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="good-starter-tasks">Good starter tasks:<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#good-starter-tasks" class="hash-link" aria-label="Direct link to Good starter tasks:" title="Direct link to Good starter tasks:" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="small-starter-tasks">Small Starter Tasks<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#small-starter-tasks" class="hash-link" aria-label="Direct link to Small Starter Tasks" title="Direct link to Small Starter Tasks" translate="no">​</a></h3>
-<p>As with most organizations, there are lots of small issues that need
-addressing usually related to problems such as bad recipes, old
-documentation and others. These will make good first issues to resolve
-or "update". This will also be an opportunity to familiarise yourself
-with the conda-forge environment.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="larger-tasks">Larger tasks<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#larger-tasks" class="hash-link" aria-label="Direct link to Larger tasks" title="Direct link to Larger tasks" translate="no">​</a></h3>
-<p>There are a few potential larger tasks that can come after a few smaller
-task contributions. These are included into our three main bases:</p>
-<ul>
-<li class=""><a href="https://conda-forge.org/docs/user/00_intro.html" target="_blank" rel="noopener noreferrer" class="">Users</a>: In this
-case, some good starter tasks are mainly checking the actual
-contents of conda-forge users documentations, and ideas to better
-express its contents.</li>
-<li class=""><a href="https://conda-forge.org/docs/maintainer/00_intro.html" target="_blank" rel="noopener noreferrer" class="">Maintainers</a>:
-There are a bunch of missed topics in this area, some information
-have to be updated or rewritten for better understanding. Writing a
-complete guide containing the actual steps and standard model for a
-package recipe, building process (just a simple discussion) and how
-conda-forge bot recognize defective licenses, recipes and packages
-in general is highly welcomed. For further understanding of the
-general system check <a href="https://conda-forge.org/docs/maintainer/infrastructure.html" target="_blank" rel="noopener noreferrer" class="">this
-link</a>.
-<ul>
-<li class="">It can be funny to say, but lots of helpful ideas and bug
-solutions appear on our gitter channel, so if you have time to
-write guides about them... it's also an incredible task.</li>
-</ul>
-</li>
-<li class=""><a href="https://conda-forge.org/docs/orga/00_intro.html" target="_blank" rel="noopener noreferrer" class="">And organization</a>
-Our environment is changing everyday, because of that a lot of
-information is lost in this process or even worse, not documented at
-all! which leads to some difficulties inserting new members to
-develop and further enhance the current process.
-<ul>
-<li class="">The related work on this matter is highly welcomed and for a
-better grasp of the situation you can start with this
-<a href="https://conda-forge.org/docs/orga/guidelines.html" target="_blank" rel="noopener noreferrer" class="">guideline</a>
-and read some of our posts in our
-<a href="https://conda-forge.org/blog/blog/" target="_blank" rel="noopener noreferrer" class="">blog</a></li>
-<li class="">Revitalizing ideas/projects for the conda-forge blog are
-definitely welcomed;</li>
-<li class="">Currently we have some interesting projects going on inside our
-ecosystem, which in return will need good documentation... Some
-of the projects conda-forge is affiliated include the <a href="https://github.com/regro/cf-scripts" target="_blank" rel="noopener noreferrer" class="">auto-tick
-bot</a>,
-<a href="https://github.com/symbol-management/symbol-exporter" target="_blank" rel="noopener noreferrer" class="">symbol-exporter</a>
-and a new service we are eager to start developing is the
-<a href="https://github.com/regro/cf-scripts/issues/1367" target="_blank" rel="noopener noreferrer" class="">distributed-bot</a>.
-All of them have a great coverage of subjects and lots of people
-to help and give advice about the service structure and
-functionalities.</li>
-</ul>
-</li>
-</ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="improving-the-documentation">Improving the documentation<a href="https://conda-forge.org/blog/2021/02/02/outreachy/#improving-the-documentation" class="hash-link" aria-label="Direct link to Improving the documentation" title="Direct link to Improving the documentation" translate="no">​</a></h2>
-<p>You can help improve the documentation as it is version-controlled in
-the conda-forge.github.io repository on GitHub. The source text is
-stored there in the <code>src/subdirectory</code> and is formatted using <a href="https://wiki.python.org/moin/reStructuredText" target="_blank" rel="noopener noreferrer" class="">Python's
-reStructuredText system</a>.</p>
-<p>You can propose quick edits directly through the GitHub website, if you
-have an account there --- for instance, this
-<a href="https://github.com/conda-forge/conda-forge.github.io/edit/master/src/user/contributing.rst" target="_blank" rel="noopener noreferrer" class="">link</a>
-will take you directly to a web-based editor for this section page in
-our
-<a href="https://conda-forge.org/docs/user/contributing.html#improve-docs" target="_blank" rel="noopener noreferrer" class="">docs</a>.
-In general, the file corresponding to each page in the GitHub browser
-has a little pencil icon in its top-right that lets you open it up for
-editing.</p>
-<p>The more manual process is as follows:</p>
-<ul>
-<li class="">Fork the conda-forge.github.io repository to your own GitHub user
-account.</li>
-<li class="">Clone that fork onto your computer.</li>
-<li class="">Check out a new branch deriving from master to do your work.</li>
-<li class="">Make and commit your changes.</li>
-<li class="">Submit a pull request to the main repository proposing your changes.</li>
-</ul>
-<p>Happy editing!</p>]]></content:encoded>
             <category>outreachy</category>
         </item>
     </channel>
