@@ -1,3 +1,10 @@
+---
+authors:
+  - hmaarrfk
+  - ludmilaklenova
+tags: [ecosystem]
+---
+
 # Qt6 status in conda-forge
 
 Qt6 has quietly become a first-class citizen in conda-forge. The recent addition of the Qt Designer Python plugin (`libpyqt6.so`) to the `pyqt6` package closed one of the last gaps in the PyQt6 story, but it is a small piece of a much larger, multi-year community effort. This post takes the opportunity to lay out what the whole Qt6 ecosystem now looks like on conda-forge.
