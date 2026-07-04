@@ -559,7 +559,7 @@ function Row({ children }) {
       {href && isSafeUrl(href) ? (
         <a href={href}>{name}</a>
       ) : (
-        details ? (
+        details && Object.keys(details).length > 0 ? (
           <span className={`${collapsed ? styles.collapsed : styles.expanded}`}
             onClick={() => setState(!collapsed)}>
             {name}
@@ -595,8 +595,8 @@ function Row({ children }) {
         </React.Fragment>))}
       </td>
     </tr>
-    {details && !collapsed && (
-      <tr><td colSpan={6}><ErrorMessageDetails details={details}/></td></tr>
+    {details && Object.keys(details).length > 0 && !collapsed && (
+      <tr ><td colSpan={6}><ErrorMessageDetails details={details}/></td></tr>
     )}
   </>);
 }
