@@ -6,12 +6,14 @@ import { RecipeTabs } from "@site/src/components/RecipeTabs";
 
 # Creating noarch packages
 
-Noarch packages are packages that are not architecture specific and therefore only have to be built once.
+`noarch` packages are packages that do not contain architecture specific contents and therefore do not have to be built separately for each architecture.
+For example, the `tzdata` package provides only data files that are installed into the same layout irrespective of the system used.
+Rather than building a number of roughly the same `linux-64`, `linux-aarch64`, `osx-64`, etc. packages, we can build a single `noarch` package that can be installed on all of these platforms.
 
-Declaring these packages as `noarch` in the `build` section of the meta.yaml, reduces shared CI resources.
-Therefore all packages that qualify to be noarch packages should be declared as such.
+Declaring packages as `noarch` reduces the use of shared CI and CDN resources.
+Therefore all packages that qualify to be `noarch` packages should be declared as such.
 
-## Noarch python
+## noarch: python
 
 The `noarch: python` directive, in the `build` section, makes pure-Python
 packages that only need to be built once.
@@ -176,7 +178,7 @@ See mini-tutorial below.
 If an existing python package qualifies to be converted to a noarch package, you can request the required changes
 by opening a new issue and including `@conda-forge-admin, please add noarch: python`.
 
-### Noarch packages with OS-specific dependencies
+### noarch packages with OS-specific dependencies
 
 It is possible to build `noarch` packages with runtime requirements that depend on the target OS
 (Linux, Windows, MacOS), regardless the architecture (amd64, ARM, PowerPC, etc). This approach
@@ -354,7 +356,7 @@ noarch_platforms:
 
 Again, remember to rerender after adding / modifying these files so the changes are applied.
 
-## Noarch generic
+## noarch: generic
 
 :::info[Todo]
 
