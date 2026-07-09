@@ -112,7 +112,7 @@ python_min:
 - "3.12"
 ```
 
-If you go that route, you will need to [rerender the feedstock](../infrastructure/#conda-forge-admin-please-rerender)
+If you go that route, you will need to [rerender the feedstock](rerender.md)
 after adding the `conda_build_config.yaml` file.
 
 Using `noarch: python` packages, with `python {{ python_min }}` pins in their `test.requires` section, as
