@@ -94,12 +94,12 @@ at the top of your recipe like this
 <RecipeTabs>
 
 ```recipe
-{% set python_min = "3.10" %}
+{% set python_min = "3.12" %}
 ```
 
 ```recipe
 context:
-  python_min: "3.10"
+  python_min: "3.12"
 ```
 
 </RecipeTabs>
@@ -109,7 +109,7 @@ contains a map like
 
 ```yaml title="recipe/conda_build_config.yaml"
 python_min:
-- "3.10"
+- "3.12"
 ```
 
 If you go that route, you will need to [rerender the feedstock](../infrastructure/#conda-forge-admin-please-rerender)
