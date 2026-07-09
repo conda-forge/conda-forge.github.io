@@ -19,24 +19,20 @@ There are currently two types of `noarch` packages supported:
 
 ## noarch: python
 
-The `noarch: python` directive, in the `build` section, makes pure-Python
-packages that only need to be built once.
+The `noarch: python` directive, in the `build` section, creates pure Python packages that do not need to be build separately for every supported Python version.
+A non-`noarch` package needs to be built for all supported platforms, and for every platform a separate variant is built for every supported Python version.
+This can lead to building over 20 packages that would be roughly equivalent for a pure Python package.
+With `noarch: python`, the same recipe can produce a single package that works across all platforms and Python versions.
 
-In order to qualify as a noarch python package, all of the following criteria must be fulfilled:
+In order to qualify as a `noarch: python` package, all of the following criteria must be fulfilled:
 
 - No compiled extensions
 - No post-link or pre-link or pre-unlink scripts
 - No OS-specific build scripts
-- No python version specific requirements
-- No skips except for python version. If the recipe is py3 only, remove skip
-  statement and add version constraint on python in `host` and `run`
-  section.
-- `2to3` is not used
+- No requirements specific to Python version
 - `scripts` argument in `setup.py` is not used
-- If `console_scripts` `entry_points` are defined in `setup.py` or `setup.cfg`, they are also
-  [listed](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points)
-  in the `build` section of `meta.yaml`
-- No activate scripts
+- If `console_scripts` entry points are used (`[project.scripts]` in `pyproject.toml`, `entry_points` → `console_scripts` in `setup.py` or `setup.cfg`), they are also [listed](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points) in the `build` section of the recipe
+- No activation scripts
 
 All recipes employing `noarch: python` should usually use the `python_min` variable per the following example:
 
