@@ -90,6 +90,11 @@
             "type": "doc",
             "label": "Use CMake",
             "id": "how-to/basics/cmake"
+          },
+          {
+            "type": "doc",
+            "label": "Create noarch packages",
+            "id": "how-to/basics/noarch"
           }
         ]
       },
