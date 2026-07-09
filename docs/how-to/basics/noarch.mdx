@@ -13,6 +13,10 @@ Rather than building a number of roughly the same `linux-64`, `linux-aarch64`, `
 Declaring packages as `noarch` reduces the use of shared CI and CDN resources.
 Therefore all packages that qualify to be `noarch` packages should be declared as such.
 
+There are currently two types of `noarch` packages supported:
+- `noarch: python` that is used for Python packages that feature no files specific to Python version
+- `noarch: generic` that is used for non-Python `noarch` packages
+
 ## noarch: python
 
 The `noarch: python` directive, in the `build` section, makes pure-Python
