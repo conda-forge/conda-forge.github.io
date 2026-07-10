@@ -1,0 +1,107 @@
+---
+tags: [how-to, advanced]
+---
+
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+
+# How to package a fork
+
+Sometimes you face the possibility of needing to package a fork.
+
+There can be a variety of reasons to fork software and a variety of characteristics for such forks.
+In some cases, packages are forked because they are no longer maintained and their forks can be seen as a direct continuation of the original package.
+At other times, forks are created over disagreements on how to develop a software, and they can be seen as competing packages.
+There are also so-called "friendly forks" that do not compete in a divergent manner, but rather aim to follow the development of the original software while complementing it with specific customizations.
+
+The exact way of dealing with a fork depends on what kind of fork it is, and how compatible it is with the original package.
+This guide is focused on solutions that can be applied to specific kinds of forks.
+However, they often require collaboration from the fork maintainer.
+
+## Possible solutions
+
+### Merge features upstream
+
+If the goals of the fork are still closely aligned to these of the upstream package, the recommended course of action is to work towards merging the necessary changes upstream.
+In many cases, upstream package maintainers will happily transfer ownership or give permissions to contributors that are interested in continuing to maintain their package.
+Sometimes, the development moves to a new repository, but the PyPI project is transferred to a new owner.
+This solution is preferable as it ensures the continuity of development and avoids the parallel existence of multiple divergent forks.
+
+### Rebrand under a new name
+
+If the fork adds significant new functionality or changes the direction of the project, rebranding should be preferred.
+This makes the fork clearly distinguishable from the original package.
+Such a rebranding should usually also involve renaming the installed files, so that the forked package can be installed alongside the original package.
+
+There are many examples of projects following this principle.
+To list a few:
+
+- [Pillow](https://pypi.org/project/pillow/) was forked from [PIL](https://pypi.org/project/PIL/) when the development of PIL was discontinued
+- [html5rdf](https://pypi.org/project/html5rdf/) was forked from [html5lib](https://pypi.org/project/html5lib/)
+- [LibreOffice](https://www.libreoffice.org/) was forked from [OpenOffice](https://www.openoffice.org/) over governance model
+
+### Rebrands with file collisions
+
+There are also cases when projects were rebranded without renaming the installed files, leading to mutually exclusive packages.
+For example, [faust-cchardet](https://pypi.org/project/faust-cchardet/) is a fork of [cchardet](https://pypi.org/project/cchardet/) that uses the same `cchardet` package name.
+
+When packaging such forks it is important to mark them as incompatible with the original package:
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  # ...
+  run_constrained:
+    - cchardet <0.0a0
+```
+
+```recipe
+requirements:
+  # ...
+  run_constraints:
+    - cchardet <0.0a0
+```
+
+</RecipeTabs>
+
+Such an approach risks creating unsolvable dependencies.
+For example, if two different packages require two different forks of the same dependency, it will not be possible to install both simulaneously.
+
+### Prepend the fork owner to the package name
+
+As a last resort, if it is neither possible to get the fork merged upstream nor rebranded properly, it is possible to rename the package downstream.
+This is usually done via prepending or appending the fork owner, or some distinguishing keyword to the package name.
+This is similar to how different packages that happened to use the same name are handled.
+
+For example, a fork of `torch-radon` by `carterbox` was packaged as `carterbox-torch-radon`. This rule was not strictly observed while packaging the fork of `django-cryptography` with Django 5 support, as it was named `django-cryptography-django5`. A fork of `ctypesgen` by `pypdfium2-team` was packaged as `ctypesgen-pypdfium2-team`.
+
+These types of forks generally use the same filenames as the original packages, and therefore need constraints like [rebrands with file collisions](#rebrands-with-file-collisions).
+In some cases, particularly with user-facing programs, it may be preferable to rename the installed files downstream to avoid collisions.
+
+### Replace the original package with a fork
+
+In rare cases, it may be acceptable to switch to a fork without changing the package name.
+In particular, this can be done if the original package is clearly unmaintained for a long time and multiple other downstreams have already done that.
+
+However, this comes with a significant risk: if the package eventually becomes active again, switching back to it may result in overlapping version numbers.
+For example, if the last pre-fork version was 1.3.0, and the fork continues the timeline by releasing 1.4.0, a later 1.4.0 release of the original package will conflict.
+
+## Mutually exclusive forks and package dependencies
+
+A significant problem with mutually exclusive forks is that while a package's code may be compatible with multiple forks, its dependencies can specify only one of them.
+As a result, for different packages to be installable simultaneously, they must use the same fork of a given dependency.
+This may require updating the dependencies across different packages simultaneously, or building multiple package variants with dependencies on different forks.
+
+## Long-term risks from package forks
+
+Packaging forks comes with a few long-term risks:
+
+- The existence of multiple independently maintained forks may lead to some of them featuring issues that were fixed in others.
+  In particular, security issues need to be tracked and fixed independently in all forks.
+- Forks created to continue development of an unmaintained package may become unmaintained themselves.
+  This can eventually lead a whole chain of forks.
+- Originally unmaintained packages may become maintained again, potentially necessitating reverting the switch to a fork.
+  This can be especially problematic if the fork diverged from the original package significantly, and then became abandoned itself.
+- Originally compatible forks may start diverging.
+  Combined with them being mutually exclusive, this could lead to impossible dependency constraints.

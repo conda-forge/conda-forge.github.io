@@ -1,0 +1,76 @@
+---
+tags: [how-to, advanced]
+---
+
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+# How to configure self-hosted runners
+
+conda-forge has access to additional CI resources for feedstocks that can't build their packages in the default runners. Check [Reference> Runners](/docs/reference/runners.md) for a comprehensive list.
+
+## Request access
+
+Open a PR in [conda-forge/admin-requests](https://github.com/conda-forge/admin-requests) by following the instructions in the repository README.
+
+Note you need to specify the type of resource you want access to (e.g. GPU runners, or long-running CPU builds).
+Once merged, this will enable the requested self-hosted Github Actions runners for your feedstock.
+
+## Configure your feedstock
+
+1. In `conda-forge.yml`, ensure that the `provider` setting for the required build platform is set to `github_actions`.
+2. In `recipe/conda_build_config.yaml`, configure the [`github_actions_labels`](/docs/maintainer/conda_forge_yml.mdx#github_actions_labels) field to specify the `runs-on` value for each platform, using selectors as needed. The exact values depend on which runner type you requested and are listed in [Reference> Runners](/docs/reference/runners.md).
+
+## Example
+
+Refer to [`github_actions_labels`](/docs/maintainer/conda_forge_yml.mdx#github_actions_labels).
+
+### Real world examples
+
+Use [this search query](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Aconda_build_config.yaml+github_actions_labels) to find some real world examples in conda-forge.
+
+
+## Distinguishing CPU vs GPU jobs
+
+Large runners are often required to build packages with GPU backends due to their CPU/RAM requirements,
+while their CPU-only counterpart builds fine on a regular runner.
+Splitting runner assignment between CPU and GPU requires some fiddling with the recipe skips.
+See [this comment](https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/6910#issuecomment-2604111352) for context.
+
+You'll need edits in both `conda_build_config.yaml` and your recipe file.
+
+```recipe title="recipe/conda_build_config.yaml"
+# Note that the selector does NOT mention CUDA.
+github_actions_labels:
+- runner-for-cpu  # [linux64]
+- runner-for-gpu  # [linux64]
+```
+
+:::tip
+
+For the Github-hosted runners, you can use `"default"` instead of `"runner-for-cpu"`
+
+:::
+
+Then in your recipe file:
+
+<RecipeTabs>
+
+```recipe
+build:
+  # In v0 recipes, the if-condition MUST be in a single line
+  # for conda-build to parse the variables correctly
+  {% if (cuda_compiler_version == "None" and github_actions_labels == "runner-for-gpu") or (cuda_compiler_version != "None" and github_actions_labels == "runner-for-cpu") %}
+  skip: true
+  {% endif %}
+```
+
+```recipe
+build:
+  skip:
+    # Skip CPU jobs on GPU runner:
+    - cuda_compiler_version == "None" and github_actions_labels == "runner-for-gpu"
+    # Skip GPU jobs on CPU runner:
+    - cuda_compiler_version != "None" and github_actions_labels == "runner-for-cpu"
+```
+
+</RecipeTabs>

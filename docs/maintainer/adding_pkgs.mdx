@@ -370,13 +370,13 @@ You can e.g. specify not to build …
 - on specific architectures:
   <RecipeTabs>
 
-  ```yaml
+  ```recipe
   build:
     skip: true  # [win]
     skip: true  # [osx-arm64]
   ```
 
-  ```yaml
+  ```recipe
   build:
     skip:
       - win
@@ -386,14 +386,14 @@ You can e.g. specify not to build …
 - for specific python versions:
   <RecipeTabs>
 
-  ```yaml
+  ```recipe
   build:
       skip: true  # [py<312]
   ```
 
-  ```yaml
+  ```recipe
   build:
-      skip: match(python, "<3.12)
+      skip: match(python, "<3.12")
   ```
   </RecipeTabs>
 
@@ -429,12 +429,12 @@ Normally Python packages should use this line:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 build:
   script: "{{ PYTHON }} -m pip install . -vv"
 ```
 
-```yaml
+```recipe
 build:
   script: "${{ PYTHON }} -m pip install . -vv"
 ```
@@ -444,7 +444,7 @@ build:
 as the installation script in the recipe file or the build script files,
 while adding `pip` to the host requirements:
 
-```yaml
+```recipe
 requirements:
   host:
     - pip
@@ -454,8 +454,8 @@ These options should be used to ensure a clean installation of the package witho
 dependencies. This helps make sure that we're only including this package,
 and not accidentally bringing any dependencies along into the conda package.
 
-Usually pure-Python packages only require `python`, `setuptools` and `pip`
-as `host` requirements; the real package dependencies are only
+Usually pure-Python packages only require `python`, a build system (e.g. `setuptools`),
+and `pip` as `host` requirements; the real package dependencies are only
 `run` requirements.
 
 <a id="requirements"></a>
@@ -534,7 +534,7 @@ In the best case, the shared library you depend on:
 
 In these cases you do not have to worry about version requirements:
 
-```yaml
+```recipe
 requirements:
   # [...]
   host:
@@ -544,14 +544,14 @@ requirements:
 
 In other cases you have to specify [ABI](../glossary.md#abi) compatible versions manually.
 
-```yaml
+```recipe
 requirements:
   # [...]
   host:
     - libawesome 1.1.*
 ```
 
-For more information on pinning, please refer to [Pinned dependencies](pinning_deps.md#pinned-deps).
+For more information on pinning, please refer to [Pinned dependencies](pinning_deps.mdx).
 
 <a id="constraining-packages-at-runtime"></a>
 
@@ -572,14 +572,14 @@ chooses to install it. In v1 recipes, the key `run_constraints` is used, whereas
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   # [...]
   run_constrained:
     - awesome-software 1.*
 ```
 
-```yaml
+```recipe
 requirements:
   # [...]
   run_constraints:
@@ -599,7 +599,7 @@ In combination with an unsatisfiable version, run constraints can define blocker
 
 <RecipeTabs>
 
-```yaml
+```recipe
 package:
   name: awesome-db
 
@@ -609,7 +609,7 @@ requirements:
     - amazing-db <0.0a0
 ```
 
-```yaml
+```recipe
 package:
   name: awesome-db
 
@@ -661,7 +661,7 @@ Simple existence testing example:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 test:
   commands:
     - test -f $PREFIX/lib/libboost_log$SHLIB_EXT        # [unix]
@@ -669,7 +669,7 @@ test:
     - if not exist %LIBRARY_LIB%\\boost_log.lib exit 1  # [win]
 ```
 
-```yaml
+```recipe
 tests:
   - package_contents:
       lib:
@@ -703,7 +703,7 @@ command test needs to be used:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 test:
   imports:
     - package_name
@@ -711,7 +711,7 @@ test:
     - pip check
 ```
 
-```yaml
+```recipe
 tests:
   - python:
       imports:
@@ -765,7 +765,7 @@ in the test stanza:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 test:
   imports:
     - package_name
@@ -775,7 +775,7 @@ test:
     - ...  # details below
 ```
 
-```yaml
+```recipe
 tests:
   - python:
       imports:
@@ -802,7 +802,7 @@ or `source_files` section in v0 recipes:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 test:
   imports:
     - package_name
@@ -816,7 +816,7 @@ test:
     - pytest test_pkg_integration.py
 ```
 
-```yaml
+```recipe
 tests:
   - python:
       imports:
@@ -846,14 +846,14 @@ directly in the test stanza:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 test:
   ...
   commands:
      - python -c "import package_name; package_name.tests.runall()"
 ```
 
-```yaml
+```recipe
 tests:
   ...
   - script:
@@ -868,7 +868,7 @@ Alternatively, a custom test script can be created and placed in the `recipe`
 directory. This allows an arbitrarily complicated test script. For v1 recipes,
 the script is listed via a `script` test with a `file` key:
 
-```yaml
+```recipe
 tests:
   - script:
       file: run_test.py
@@ -887,7 +887,7 @@ for you with the following command:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 test:
   requires:
     - pytest
@@ -895,7 +895,7 @@ test:
     - pytest --pyargs package_name
 ```
 
-```yaml
+```recipe
 tests:
   - requirements:
       run:
@@ -915,13 +915,13 @@ they were properly installed:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 test:
   commands:
     - util_1 --help
 ```
 
-```yaml
+```recipe
 tests:
   - script:
       - util_1 --help
@@ -959,13 +959,13 @@ can be successfully imported. This is accomplished with:
 
 <RecipeTabs>
 
-```yaml
+```recipe
 test:
   commands:
     - R -e "library('PackageName')"
 ```
 
-```yaml
+```recipe
 tests:
   - r:
       libraries:
@@ -986,7 +986,7 @@ will look like
 
 <RecipeTabs>
 
-```yaml
+```recipe
 test:
   requires:
     - r-testthat
@@ -997,7 +997,7 @@ test:
     - R -e "testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)"
 ```
 
-```yaml
+```recipe
 tests:
   - r:
       libraries:
@@ -1063,13 +1063,13 @@ the individual tests. In that case, one can instead test the
 
 <RecipeTabs>
 
-```yaml
+```recipe
 test:
   commands:
     - R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed', stop_on_failure=TRUE)"
 ```
 
-```yaml
+```recipe
 tests:
   - script:
       - R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed', stop_on_failure=TRUE)"
@@ -1131,7 +1131,7 @@ Sometimes upstream maintainers do not include a license file in their tarball de
 
 If this is the case, you can add the license to the `recipe` directory (here named `LICENSE.txt`) and reference it inside the recipe file:
 
-```yaml
+```recipe
 about:
   license_file: LICENSE.txt
 ```
@@ -1193,7 +1193,7 @@ For a detailed description, please visit the project page but a short example ca
 
 First, include the collection of licenses as a step of the build process.
 
-```yaml
+```recipe
 build:
   number: 0
   script:
@@ -1203,7 +1203,7 @@ build:
 
 Then, include the tool as a build time dependency.
 
-```yaml
+```recipe
 requirements:
   build:
     - cargo-bundle-licenses
@@ -1211,7 +1211,7 @@ requirements:
 
 Finally, make sure that the generated file is included in the recipe.
 
-```yaml
+```recipe
 about:
   license_file:
     - THIRDPARTY.yml
@@ -1228,7 +1228,7 @@ For a detailed description, please visit the project page but a short example ca
 
 First, include the collection of licenses as a step of the build process.
 
-```yaml
+```recipe
 build:
   number: 0
   script:
@@ -1240,14 +1240,14 @@ Then, include the tool as a build time dependency.
 
 <RecipeTabs>
 
-```yaml
+```recipe
 requirements:
   build:
     - {{ compiler('go') }}
     - go-licenses
 ```
 
-```yaml
+```recipe
 requirements:
   build:
     - ${{ compiler('go') }}
@@ -1258,7 +1258,7 @@ requirements:
 
 Finally, make sure that the generated file is included in the recipe.
 
-```yaml
+```recipe
 about:
   license_file:
     - LICENSE
@@ -1307,7 +1307,7 @@ where username is the GitHub username of the new maintainer to be added. Please 
 
 If you want the name of the feedstock to be different from the package name in the staged-recipes, you can use the `feedstock-name` directive in the recipe of that package, like this:
 
-```yaml
+```recipe
 extra:
   feedstock-name: <name>
 ```
@@ -1363,98 +1363,6 @@ for %%F in (activate deactivate) DO (
 
 </BuildScriptTabs>
 
-<a id="jinja-templating"></a>
-
 ### Jinja templating
 
-The recipe file can contain expressions that are evaluated during build time.
-These expressions are written in [Jinja](http://jinja.pocoo.org/) syntax.
-
-Jinja expressions serve following purposes in the recipe file:
-
-- They allow defining variables to avoid code duplication. Using a variable for the `version` allows changing the version only once with every update.
-
-  <RecipeTabs>
-
-  ```yaml
-  {% set version = "3.7.3" %}
-
-  package:
-    name: python
-    version: {{ version }}
-
-  source:
-    url: https://www.python.org/ftp/python/{{ version }}/Python-{{ version }}.tar.xz
-    sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
-  ```
-
-  ```yaml
-  context:
-    version: "3.7.3"
-
-  package:
-    name: python
-    version: ${{ version }}
-
-  source:
-    url: https://www.python.org/ftp/python/${{ version }}/Python-${{ version }}.tar.xz
-    sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
-  ```
-
-  </RecipeTabs>
-
-- They can call [rattler-build](https://rattler-build.prefix.dev/latest/reference/jinja/) or [conda-build functions](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#conda-build-specific-jinja2-functions) for automatic code generation. Examples are the compilers or the `pin_compatible` function.
-
-  <RecipeTabs>
-
-  ```yaml
-  requirements:
-    build:
-      - {{ compiler('c') }}
-      - {{ compiler('cxx') }}
-      - {{ stdlib('c') }}
-  ```
-
-  ```yaml
-  requirements:
-    build:
-      - ${{ compiler('c') }}
-      - ${{ compiler('cxx') }}
-      - ${{ stdlib('c') }}
-  ```
-
-  </RecipeTabs>
-
-  or
-
-  <RecipeTabs>
-
-  ```yaml
-  requirements:
-    build:
-      - {{ compiler('c') }}
-      - {{ compiler('cxx') }}
-      - {{ stdlib('c') }}
-    host:
-      - python
-      - numpy
-    run:
-      - python
-  ```
-
-  ```yaml
-  requirements:
-    build:
-      - ${{ compiler('c') }}
-      - ${{ compiler('cxx') }}
-      - ${{ stdlib('c') }}
-    host:
-      - python
-      - numpy
-    run:
-      - python
-  ```
-
-  </RecipeTabs>
-
-For more information please refer to the "Templating with Jinja" section in the [rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#templating-with-jinja) or [conda-build](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#templating-with-jinja) docs.
+Moved to [Jinja templating](/docs/maintainer/understanding_conda_forge/jinja-templating/).

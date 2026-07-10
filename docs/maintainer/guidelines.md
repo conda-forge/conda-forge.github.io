@@ -207,7 +207,7 @@ Recommended:
 
 1. Source should be obtained from a URL that provides a stable tarball (same SHA over time).
    Git or other SVC repositories should only be used as a last resort.
-2. Host requirements contained in the [conda-forge pinnings](pinning_deps.md#pinned-deps) should be _name-only_; i.e. they do not specify a separate version.
+2. Host requirements contained in the [conda-forge pinnings](pinning_deps.mdx) should be _name-only_; i.e. they do not specify a separate version.
 3. Runtime requirements are not pinned too strictly without justification.
    Thanks to repodata patches, we can afford to be optimistic about lower or upper bounds instead of single-version pins: `>=1.4.2,<1.5` is better than `==1.4.2`.
 4. The package should place its files under standard locations (e.g. executables under `$PREFIX/bin`), unless justification is provided.
@@ -245,4 +245,4 @@ Recommended:
 
 1. SONAMEs follow naming recommendations given by upstream.
 2. If ABI compatibility is important for the package, `run_exports` are set accordingly.
-   See [Pinned dependencies](pinning_deps.md#pinned-deps) and the [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#export-runtime-requirements) for more information.
+   See [Pinned dependencies](pinning_deps.mdx) and the [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#export-runtime-requirements) for more information.

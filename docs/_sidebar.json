@@ -32,6 +32,7 @@
       "maintainer/updating_pkgs",
       "maintainer/pinning_deps",
       "maintainer/conda_forge_yml",
+      "maintainer/linter",
       "maintainer/knowledge_base",
       "maintainer/maintainer_faq",
       {
@@ -46,6 +47,15 @@
           "maintainer/understanding_conda_forge/staged_recipes",
           "maintainer/understanding_conda_forge/feedstocks"
         ]
+      },
+      {
+        "type": "category",
+        "label": "Reference",
+        "link": {
+          "type": "doc",
+          "id": "reference/index"
+        },
+        "items": ["reference/runners"]
       },
       {
         "type": "category",
