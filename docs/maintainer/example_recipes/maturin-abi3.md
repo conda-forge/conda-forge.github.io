@@ -13,7 +13,7 @@ package. Instead of one build per Python version, you build once against the min
 supported Python and reuse it everywhere.
 
 For more general information on abi3 packages, see the
-[knowledge base](../knowledge_base.mdx#abi3).
+[knowledge base](../knowledge_base.mdx#packages-with-abi3-extensions).
 
 ## Recipe template
 
