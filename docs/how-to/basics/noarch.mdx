@@ -89,9 +89,11 @@ tests:
 
 </RecipeTabs>
 
-See [CFEP-25](https://github.com/conda-forge/cfep/blob/main/cfep-25.md) for more details on this syntax. If you
-need to override this syntax, you can add a Jinja2 `set` statement (or equivalent `context` variable for v1 recipes)
-at the top of your recipe like this
+See [CFEP-25](https://github.com/conda-forge/cfep/blob/main/cfep-25.md) for more details on this syntax.
+
+### Overriding the minimum Python version
+
+If you need to override the minimum Python version, you can add a Jinja2 `set` statement (or equivalent `context` variable for v1 recipes) at the top of your recipe:
 
 <RecipeTabs>
 
@@ -116,6 +118,12 @@ python_min:
 
 If you go that route, you will need to [rerender the feedstock](rerender.md)
 after adding the `conda_build_config.yaml` file.
+
+:::note
+If the minimum Python version supported by the package is older or the same as the minimum version supported by conda-forge (`python_min` in [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml)), please remove the `python_min` override, so that the global setting (and any subsequent updates to it) take effect.
+:::
+
+### TODO: update
 
 Using `noarch: python` packages, with `python {{ python_min }}` pins in their `test.requires` section, as
 `downstream` tests can cause failures for the `upstream` package if the Python version required for the test
