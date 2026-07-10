@@ -110,6 +110,8 @@ This package pins the abi3 toolchain so the resulting artifact is compatible acr
 
 If your package doesn't support abi3, remove all abi3-related things from the recipe to build it.
 
+:::
+
 ### The `cargo-auditable-wrapper`
 
 `cargo-auditable` embeds a dependency manifest into the compiled artifact so it can later be
@@ -133,3 +135,5 @@ cargo auditable %*
 These wrappers are a temporary workaround. Once
 [rust-activation-feedstock#79](https://github.com/conda-forge/rust-activation-feedstock/pull/79)
 is merged, `cargo auditable` will be wired up automatically and the wrappers can be removed.
+
+:::
