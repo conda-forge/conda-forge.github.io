@@ -164,9 +164,12 @@ relies on three concepts:
 2. `conda-forge.yml`'s [noarch_platforms](/docs/maintainer/conda_forge_yml.mdx#noarch-platforms) option.
 3. **conda-build 3.25.0 or above** changing the build hash depending on virtual packages used.
 
-The idea is to generate different noarch packages for each OS needing different dependencies.
-Let's say you have a pure Python package, perfectly eligible for `noarch: python`, but on Windows
-it requires `windows-only-dependency`. You might have something like:
+The idea is to generate different variants of a `noarch` package.
+While all of these variants are `noarch` and therefore are visible on all platforms, they feature a dependency on the OS-specific virtual package such as `__linux` that make them not installable on other platforms.
+The resolver automatically selects the variant with the compatible virtual package, or throws an error if no compatible package can be found.
+
+Let's say you have a pure Python package, perfectly eligible for `noarch: python`, but on Windows it requires `windows-only-dependency`.
+A platform-specific recipe could look like the following:
 
 <RecipeTabs>
 
@@ -201,9 +204,10 @@ requirements:
 
 </RecipeTabs>
 
-Being non-noarch, this means that the build matrix will include at least 12 outputs: three platforms,
-times four Python versions. This gets worse with `arm64`, `aarch64` and `ppc64le` in the mix.
-We can get it down to two outputs if replace it with this other approach!
+With this recipe, the build matrix will include separate builds for every supported platform, and for every supported Python version on every platform.
+All the built package will have the same contents, and only `win-64` packages will have different dependencies (though they still will be duplicated across all Python versions).
+
+We can get it down to two packages if replace it with this other approach!
 
 <RecipeTabs>
 
@@ -264,7 +268,7 @@ noarch_platforms:
 ```
 
 This will provide two runners per package! Perfect! All these changes require a
-feedstock rerender to be applied. See [Rerendering feedstocks](/docs/maintainer/updating_pkgs.md#dev-update-rerender).
+feedstock rerender to be applied. See [Rerendering feedstocks](rerender.md).
 
 If you need conditional dependencies on all three operating systems, this is how you do it:
 
