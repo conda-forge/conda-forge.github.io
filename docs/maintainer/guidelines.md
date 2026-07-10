@@ -218,7 +218,7 @@ Recommended:
 
 Required:
 
-1. `noarch: python` packages fulfill the [required criteria](../knowledge_base#noarch-python) to be considered as such.
+1. `noarch: python` packages fulfill the [required criteria](/docs/how-to/basics/noarch/#noarch-python) to be considered as such.
 
 Recommended:
 
