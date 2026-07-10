@@ -123,61 +123,31 @@ after adding the `conda_build_config.yaml` file.
 If the minimum Python version supported by the package is older or the same as the minimum version supported by conda-forge (`python_min` in [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml)), please remove the `python_min` override, so that the global setting (and any subsequent updates to it) take effect.
 :::
 
-### TODO: update
+### Further notes
 
-:::tip[Hint]
+1. Adding an explicit `python_min` to your `noarch: python` recipe can be an effective way to ensure the required Python in your package's metadata is enforced at `conda-build` time, as the build will fail if the package's required Python version is newer than `python_min`.
+2. While `noarch: python` does not work with selectors, it does work with version constraints.
+   `skip: match(python, "<3.12")` can be replaced with `python_min: 3.12` override.
+3. Only `console_scripts` entry points have to be listed in your recipe explicitly, as they require special treatment to create platform-appropriate scripts.
+   Other types of entry points do not conflict with `noarch` and therefore do not require extra treatment.
+4. `noarch` is a statement about the package's source code and not its install environment.
+   A package is still considered `noarch` even if one of its dependencies is not available on a given platform.
+   If this is the case, a helpful error message will be printed upon install, describing which dependency couldn't be found.
+   If the dependency is later made available, your package will be installable on that platform without having to make any changes to the feedstock.
+5. If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including `@conda-forge-admin, please add noarch: python`.
 
-Adding an explicit `python_min` to your `noarch: python` recipe can be an effective way to ensure the required
-Python in your package's metadata is enforced at `conda-build` time, as the build will fail if the package's
-required Python version is newer than `python_min`.
-
-:::
-
-:::note
-
-While `noarch: python` does not work with selectors, it does work with version constraints.
-`skip: True  # [py2k]` can be replaced with a constrained python version in the host and run subsections:
-say `python >=3` instead of just `python`.
-
-:::
-
-:::note
-
-Only `console_scripts` entry points have to be listed in `meta.yaml`. Other entry points do not conflict
-with `noarch` and therefore do not require extra treatment.
-
-:::
-
-:::note
-
-`noarch` is a statement about the package's source code and not its install environment. A package is still considered
-`noarch` even if one of its dependencies is not available on a given platform. If this is the case, conda will
-display a helpful error message describing which dependency couldn't be found when it tries to install the package.
-If the dependency is later made available, your package will be installable on that platform without having to make
-any changes to the feedstock.
+### Building noarch packages on other platforms
 
 By default, `noarch` packages are built on Linux, and all dependencies must be available on Linux.
+If a `noarch` package cannot be built on Linux, one or more `noarch_platforms` can be provided in `conda-forge.yml`.
+For example, a package that can only be built on Windows can use the following `conda-forge.yml`:
 
-:::
+```yaml title="conda-forge.yml"
+noarch_platforms:
+- win-64
+```
 
-:::tip[Hint]
-
-If a `noarch` package cannot be built on Linux, one or more `noarch_platforms` can be provided in
-`conda-forge.yml`. One example is [pywin32-on-windows](https://github.com/conda-forge/pywin32-on-windows-feedstock),
-which builds on Linux and Windows, with `build_number` offsets to create a pair packages, like
-`dataclasses`.
-
-:::
-
-:::tip[Hint]
-
-You can build platform-specific `noarch` packages to include runtime requirements depending on the target OS.
-See mini-tutorial below.
-
-:::
-
-If an existing python package qualifies to be converted to a noarch package, you can request the required changes
-by opening a new issue and including `@conda-forge-admin, please add noarch: python`.
+A more complex example is [pywin32-on-windows](https://github.com/conda-forge/pywin32-on-windows-feedstock), which is built both on Linux and Windows, with `build_number` offsets to create a pair of packages.
 
 ### noarch packages with OS-specific dependencies
 
