@@ -29,6 +29,7 @@ In order to qualify as a `noarch: python` package, all of the following criteria
 - No compiled extensions
 - No post-link or pre-link or pre-unlink scripts
 - No OS-specific build scripts
+<!-- TODO: discuss repodata v3 conditional dependencies when ready -->
 - No requirements specific to Python version
 - `scripts` argument in `setup.py` is not used
 - If `console_scripts` entry points are used (`[project.scripts]` in `pyproject.toml`, `entry_points` → `console_scripts` in `setup.py` or `setup.cfg`), they are also [listed](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points) in the `build` section of the recipe
