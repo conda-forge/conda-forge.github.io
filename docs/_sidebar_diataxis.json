@@ -118,6 +118,11 @@
           },
           {
             "type": "doc",
+            "label": "Advanced noarch topics",
+            "id": "how-to/advanced/noarch"
+          },
+          {
+            "type": "doc",
             "label": "Talk to the bots",
             "id": "how-to/advanced/talk-to-the-bots"
           },
