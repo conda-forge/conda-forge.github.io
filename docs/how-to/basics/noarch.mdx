@@ -29,12 +29,18 @@ In order to qualify as a `noarch: python` package, all of the following criteria
 - No compiled extensions
 - No post-link or pre-link or pre-unlink scripts
 - No OS-specific build scripts
-<!-- TODO: discuss repodata v3 conditional dependencies when ready -->
 - No requirements specific to Python version
+  <!-- TODO: discuss repodata v3 conditional dependencies when ready -->
 - `scripts` argument in `setup.py` is not used
-- If `console_scripts` entry points are used (`[project.scripts]` in `pyproject.toml`, `entry_points` → `console_scripts` in `setup.py` or `setup.cfg`), they are also [listed](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points) in the `build` section of the recipe
+- If `console_scripts` entry points are used (`[project.scripts]` in `pyproject.toml`, `entry_points` → `console_scripts` in `setup.py` or `setup.cfg`), they are also [listed](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points) in the `build` section of the recipe.
+  This is necessary for conda to generate the correct platform-appropriate scripts.
+  Other types of entry points do not require special treatment.
 
-All recipes employing `noarch: python` must use the `python_min` variable per the following example:
+All recipes employing `noarch: python` must use the `python_min` variable as follows:
+
+1. The host and test requirements must pin to `{{ python_min }}.*`.
+   This ensures that the build will fail if the package actually requires newer Python version than the one specified in `python_min`.
+2. The run requirement must list `python_min >={{ python_min }}`, permitting the whole range of supported versions at runtime.
 
 <RecipeTabs>
 
@@ -125,17 +131,14 @@ If the minimum Python version supported by the package is older or the same as t
 
 ### Further notes
 
-1. Adding an explicit `python_min` to your `noarch: python` recipe can be an effective way to ensure the required Python in your package's metadata is enforced at `conda-build` time, as the build will fail if the package's required Python version is newer than `python_min`.
-2. While `noarch: python` does not work with selectors, it does work with version constraints.
+1. While `noarch: python` does not work with selectors, it does work with version constraints.
    `skip: match(python, "<3.12")` can be replaced with `python_min: 3.12` override.
-3. Only `console_scripts` entry points have to be listed in your recipe explicitly, as they require special treatment to create platform-appropriate scripts.
-   Other types of entry points do not conflict with `noarch` and therefore do not require extra treatment.
-4. `noarch` is a statement about the package's source code and not its install environment.
+2. `noarch` is a statement about the package's source code and not its install environment.
    A package is still considered `noarch` even if one of its dependencies is not available on a given platform.
    If this is the case, a helpful error message will be printed upon install, describing which dependency couldn't be found.
    If the dependency is later made available, your package will be installable on that platform without having to make any changes to the feedstock.
-5. If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including `@conda-forge-admin, please add noarch: python`.
-6. There is also an [advanced noarch topics](/docs/how-to/advanced/noarch) how-to.
+3. If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including `@conda-forge-admin, please add noarch: python` (see [examples](https://github.com/search?type=issues&q=org%3Aconda-forge+%22%40conda-forge-admin%2C+please+add+noarch%22)).
+4. There is also an [advanced noarch topics](/docs/how-to/advanced/noarch) how-to.
 
 ## noarch: generic
 
