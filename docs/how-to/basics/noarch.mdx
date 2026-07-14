@@ -56,6 +56,17 @@ In order to qualify as a `noarch: python` package, all of the following criteria
   - These entry points can be found in `[project.scripts]` table in `pyproject.toml`, or in `entry_points` → `console_scripts` in `setup.py` or `setup.cfg` files.
   - Other types of entry points do not require special treatment.
 
+### Package type comparison
+
+| `noarch: python` | regular Python package |
+| ---------------- | ---------------------- |
+| A single package, with optional OS variants. | Packages for every platform, with variants for every Python version. |
+| Can be installed on any platform, on any Python version that meets the constraints. | Can be installed only on platform and Python version combinations it was built for. |
+| Built on Linux, using `python_min`. | Built on every supported OS, using every supported Python version. |
+| Cannot include Python extensions or files specific to platform or Python version. | Can install any files. |
+| Has to use entry points. | Can use entry points and setuptools `scripts`. |
+| Dependencies must be the same for all Python versions (but they do not have to be satisfiable on all of them). | Dependencies can be conditional to Python versions. |
+
 ### Expressing Python version requirements
 
 All recipes employing `noarch: python` must use the `python_min` variable as follows:
