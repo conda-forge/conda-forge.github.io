@@ -30,7 +30,7 @@ All build dependencies must be available for all platforms, and if the package n
 
 Conversely, when `noarch: python` is enabled, a single `noarch` package is built for all supported Python versions and all platforms.
 Typically, the build is performed on a Linux system using the oldest Python version supported, and the necessary adjustments to make it universal are performed automatically.
-The advanced how-to covers the topic of [building noarch packages on other platforms](/docs/how-to/advanced/noarch/#building-noarch-packages-on-other-platforms).
+The advanced how-to covers the topic of [building noarch packages on other platforms](../advanced/noarch.mdx#building-noarch-packages-on-other-platforms).
 
 In order to qualify as a `noarch: python` package, all of the following criteria must be fulfilled:
 
@@ -46,7 +46,7 @@ In order to qualify as a `noarch: python` package, all of the following criteria
     Conda will display an appropriate error if one attempts to install this package along with the newer Python version.
     However, when the dependency is rebuilt for the new Python version, your package will become installable immediately, with no need to build a new version.
   - Instead of `skip: match(python, ...)`, `python_min` needs to be overridden, see [overriding the minimum Python version](#overriding-the-minimum-python-version).
-  - The advanced how-to explains how to express [OS-specific dependencies](/docs/how-to/advanced/noarch/#noarch-packages-with-os-specific-dependencies).
+  - The advanced how-to explains how to express [OS-specific dependencies](../advanced/noarch.mdx#noarch-packages-with-os-specific-dependencies).
 - `scripts` argument in `setup.py` must not be used.
   - It is recommended to replace explicit scripts with entry points upstream.
 - If `console_scripts` entry points are used, they must be [listed](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points) in the `build` section of the recipe.
