@@ -19,22 +19,40 @@ There are currently two types of `noarch` packages supported:
 
 ## noarch: python
 
-The `noarch: python` directive, in the `build` section, creates pure Python packages that do not need to be build separately for every supported Python version.
-A non-`noarch` package needs to be built for all supported platforms, and for every platform a separate variant is built for every supported Python version.
-This can lead to building over 20 packages that would be roughly equivalent for a pure Python package.
-With `noarch: python`, the same recipe can produce a single package that works across all platforms and Python versions.
+The `noarch: python` directive, in the `build` section, creates packages that are compatible with multiple platforms and multiple Python versions.
+This is similar in spirit to the `py3-none-any` wheels.
+
+When a non-`noarch` package is being built, a separate package is being built for every Python version on every supported platform.
+For example, when a package supports Python 3.10 through 3.14, and `linux-64`, `linux-arm64`, `osx-64`, `osx-arm64` and `win-64` platforms, this means building 5 packages per platform times 5 platforms, which totals 25 packages.
+For a pure Python package, this would actually mean 25 packages with the same contents.
+Every package is built on the appropriate OS, using the matching Python version.
+All build dependencies must be available for all platforms, and if the package needs build scripts, they also need to be available in appropriate variants.
+
+Conversely, when `noarch: python` is enabled, a single `noarch` package is built for all supported Python versions and all platforms.
+Typically, the build is performed on a Linux system using the oldest Python version supported, and the necessary adjustments to make it universal are performed automatically.
+The advanced how-to covers the topic of [building noarch packages on other platforms](/docs/how-to/advanced/noarch/#building-noarch-packages-on-other-platforms).
 
 In order to qualify as a `noarch: python` package, all of the following criteria must be fulfilled:
 
-- No compiled extensions
-- No post-link or pre-link or pre-unlink scripts
-- No OS-specific build scripts
-- No requirements specific to Python version
+- The package contents must be invariant across Python versions and platforms.
+  - This means that the package must not compile any extensions.
+    For packages with `abi3` extensions, see [ABI3 packages](/docs/maintainer/knowledge_base/#packages-with-abi3-extensions).
+  - Typically, the package must not rely on platform-specific build scripts, unless they produce the same results.
+- No post-link or pre-link or pre-unlink scripts may be used.
+- The recipe must not use selectors.
   <!-- TODO: discuss repodata v3 conditional dependencies when ready -->
-- `scripts` argument in `setup.py` is not used
-- If `console_scripts` entry points are used (`[project.scripts]` in `pyproject.toml`, `entry_points` → `console_scripts` in `setup.py` or `setup.cfg`), they are also [listed](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points) in the `build` section of the recipe.
+  - Requirements that are version-restricted upstream can be listed unconditionally in the recipe instead.
+  - If the specific requirement is incompatible with a newer Python version, the package will built successfully.
+    Conda will display an appropriate error if one attempts to install this package along with the newer Python version.
+    However, when the dependency is rebuilt for the new Python version, your package will become installable immediately, with no need to build a new version.
+  - Instead of `skip: match(python, ...)`, `python_min` needs to be overridden, see [overriding the minimum Python version](#overriding-the-minimum-python-version).
+  - The advanced how-to explains how to express [OS-specific dependencies](/docs/how-to/advanced/noarch/#noarch-packages-with-os-specific-dependencies).
+- `scripts` argument in `setup.py` must not be used.
+  - It is recommended to replace explicit scripts with entry points upstream.
+- If `console_scripts` entry points are used, they must be [listed](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points) in the `build` section of the recipe.
   This is necessary for conda to generate the correct platform-appropriate scripts.
-  Other types of entry points do not require special treatment.
+  - These entry points can be found in `[project.scripts]` table in `pyproject.toml`, or in `entry_points` → `console_scripts` in `setup.py` or `setup.cfg` files.
+  - Other types of entry points do not require special treatment.
 
 All recipes employing `noarch: python` must use the `python_min` variable as follows:
 
@@ -129,16 +147,9 @@ after adding the `conda_build_config.yaml` file.
 If the minimum Python version supported by the package is older or the same as the minimum version supported by conda-forge (`python_min` in [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml)), please remove the `python_min` override, so that the global setting (and any subsequent updates to it) take effect.
 :::
 
-### Further notes
+### Converting existing packages to noarch
 
-1. While `noarch: python` does not work with selectors, it does work with version constraints.
-   `skip: match(python, "<3.12")` can be replaced with `python_min: 3.12` override.
-2. `noarch` is a statement about the package's source code and not its install environment.
-   A package is still considered `noarch` even if one of its dependencies is not available on a given platform.
-   If this is the case, a helpful error message will be printed upon install, describing which dependency couldn't be found.
-   If the dependency is later made available, your package will be installable on that platform without having to make any changes to the feedstock.
-3. If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including `@conda-forge-admin, please add noarch: python` (see [examples](https://github.com/search?type=issues&q=org%3Aconda-forge+%22%40conda-forge-admin%2C+please+add+noarch%22)).
-4. There is also an [advanced noarch topics](/docs/how-to/advanced/noarch) how-to.
+If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including `@conda-forge-admin, please add noarch: python` (see [examples](https://github.com/search?type=issues&q=org%3Aconda-forge+%22%40conda-forge-admin%2C+please+add+noarch%22)).
 
 ## noarch: generic
 
