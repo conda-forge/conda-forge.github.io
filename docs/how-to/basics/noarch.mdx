@@ -49,7 +49,7 @@ In order to qualify as a `noarch: python` package, all of the following criteria
   - The advanced how-to explains how to express [OS-specific dependencies](../advanced/noarch.mdx#noarch-packages-with-os-specific-dependencies).
 - `scripts` argument in `setup.py` must not be used.
   - It is recommended to replace explicit scripts with entry points upstream.
-- If `console_scripts` entry points are used, they must be [listed](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points) in the `build` section of the recipe.
+- If `console_scripts` entry points are used, they must be listed in the `build` section of the recipe: as [`entry_points` in v0 format](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points) or [`python.entry_points` in v1 format](https://rattler-build.prefix.dev/latest/reference/recipe_file/#entry-points).
   This is necessary for the package manager to generate the correct platform-appropriate scripts.
   - These entry points can be found in `[project.scripts]` table in `pyproject.toml`, or in `entry_points` → `console_scripts` in `setup.py` or `setup.cfg` files.
   - Other types of entry points do not require special treatment.
@@ -158,3 +158,5 @@ If an existing python package qualifies to be converted to a noarch package, you
 add some information on r packages which make heavy use of `noarch: generic`
 
 :::
+
+[Examples of recipes using `noarch: generic`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Arecipe+%22noarch%3A+generic%22+language%3AYAML&l=YAML)
