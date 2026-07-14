@@ -77,7 +77,7 @@ requirements:
 With this recipe, the build matrix will include separate builds for every supported platform, and for every supported Python version on every platform.
 All the built package will have the same contents, and only `win-64` packages will have different dependencies (though they still will be duplicated across all Python versions).
 
-We can get it down to two packages if replace it with this other approach!
+We can get it down to two packages if replace it with this other approach:
 
 <RecipeTabs>
 
@@ -124,7 +124,7 @@ requirements:
 
 </RecipeTabs>
 
-Do not forget to specify the platform virtual packages with their selectors!
+Do not forget to specify the platform virtual packages with their selectors.
 Otherwise, the solver will not be able to choose the variants correctly.
 
 By default, conda-forge will only build `noarch` packages on a `linux_64` CI runner, so
@@ -137,8 +137,7 @@ noarch_platforms:
   - win_64
 ```
 
-This will provide two runners per package! Perfect! All these changes require a
-feedstock rerender to be applied. See [Rerendering feedstocks](../basics/rerender.md).
+Once [rerendered](../basics/rerender.md), this will result in two CI jobs.
 
 If you need conditional dependencies on all three operating systems, this is how you do it:
 

@@ -6,7 +6,7 @@ import { RecipeTabs } from "@site/src/components/RecipeTabs";
 
 # Creating noarch packages
 
-`noarch` packages are packages that do not contain architecture specific contents and therefore do not have to be built separately for each architecture.
+`noarch` packages are packages that do not ship platform or architecture specific contents and therefore do not have to be built separately for each subdir.
 For example, the `tzdata` package provides only data files that are installed into the same layout irrespective of the system used.
 Rather than building a number of roughly the same `linux-64`, `linux-aarch64`, `osx-64`, etc. packages, we can build a single `noarch` package that can be installed on all of these platforms.
 
@@ -15,7 +15,7 @@ Therefore all packages that qualify to be `noarch` packages should be declared a
 
 There are currently two types of `noarch` packages supported:
 - `noarch: python` that is used for Python packages that feature no files specific to Python version
-- `noarch: generic` that is used for non-Python `noarch` packages
+- `noarch: generic` that is used for all other cases (e.g. R, Perl, data-only packages)
 
 ## noarch: python
 
@@ -43,14 +43,14 @@ In order to qualify as a `noarch: python` package, all of the following criteria
   <!-- TODO: discuss repodata v3 conditional dependencies when ready -->
   - Requirements that are version-restricted upstream can be listed unconditionally in the recipe instead.
   - If the specific requirement is incompatible with a newer Python version, the package will built successfully.
-    Conda will display an appropriate error if one attempts to install this package along with the newer Python version.
+    The package manager will display an appropriate error if one attempts to install this package along with the newer Python version.
     However, when the dependency is rebuilt for the new Python version, your package will become installable immediately, with no need to build a new version.
   - Instead of `skip: match(python, ...)`, `python_min` needs to be overridden, see [overriding the minimum Python version](#overriding-the-minimum-python-version).
   - The advanced how-to explains how to express [OS-specific dependencies](../advanced/noarch.mdx#noarch-packages-with-os-specific-dependencies).
 - `scripts` argument in `setup.py` must not be used.
   - It is recommended to replace explicit scripts with entry points upstream.
 - If `console_scripts` entry points are used, they must be [listed](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points) in the `build` section of the recipe.
-  This is necessary for conda to generate the correct platform-appropriate scripts.
+  This is necessary for the package manager to generate the correct platform-appropriate scripts.
   - These entry points can be found in `[project.scripts]` table in `pyproject.toml`, or in `entry_points` → `console_scripts` in `setup.py` or `setup.cfg` files.
   - Other types of entry points do not require special treatment.
 
