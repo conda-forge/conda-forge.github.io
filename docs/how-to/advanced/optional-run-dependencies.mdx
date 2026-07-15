@@ -1,0 +1,156 @@
+---
+tags: [howto, advanced]
+---
+
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+# Expressing optional run dependencies (extras)
+
+Optional run dependencies are the dependencies that are not strictly necessary for the installed package to work, but whose presence may enable additional features.
+
+In Python packages, they are commonly expressed using so-called "extras" (`optional-dependencies` in `pyproject.toml`).
+For example, the [urllib3](https://pypi.org/project/urllib3/) package features [extras](https://github.com/urllib3/urllib3/blob/470374abd485b6705dfea82689b1e29c345785f1/pyproject.toml#L43-L56) for different compression algorithms, SOCKS and HTTP/2 support.
+Extras can be used both by end users and in dependencies: a package needing `urllib3` with HTTP/2 support would depend on `urllib3[h2]`.
+
+:::note
+
+Historically, extras were also used to express additional dependencies used for development, tests, etc.
+These extras should be omitted for conda-forge packaging.
+Nowadays, `dependency-groups` are used for that purpose instead.
+
+:::
+
+A key characteristic of optional runtime dependencies is that they do not affect the installed package contents in any way.
+The relevant features become available as soon as the needed dependencies are installed, and stop functioning once these dependencies are uninstalled; at no point the package itself needs to be reinstalled.
+
+Conda-forge does not provide a direct equivalent of optional runtime dependencies.
+This how-to explores a few common approaches to dealing with them.
+
+
+## Base package plus extras
+
+One possible layout is to use:
+
+- a base `{name}` output that contains the actual Python package and expressed its unconditional dependencies
+- one or more `{name}-with-{extra}` outputs that install no files and depend on the base package and the respective extra dependencies
+
+<RecipeTabs>
+
+```recipe
+{% set version = "2.7.0" %}
+# workaround conda-build template rendering problem for outputs that
+# do not use python
+{% set PYTHON = PYTHON | default("$PYTHON") %}
+
+package:
+  name: urllib3
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/u/urllib3/urllib3-{{ version }}.tar.gz
+  sha256: 231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python {{ python_min }}.*
+    - hatchling >=1.27.0,<2
+    - hatch-vcs >=0.4.0,<0.6.0
+    - setuptools-scm >=8,<11
+    - pip
+  run:
+    - python >={{ python_min }}
+
+outputs:
+  - name: urllib3
+  - name: urllib3-with-brotli
+    requirements:
+      run:
+        - "{{ pin_subpackage('urllib3', exact=True) }}"
+        - brotli >=1.2.0
+    build:
+      noarch: generic
+  - name: urllib3-with-h2
+    requirements:
+      run:
+        - "{{ pin_subpackage('urllib3', exact=True) }}"
+        - h2 >=4,<5
+    build:
+      noarch: generic
+```
+
+```recipe
+schema_version: 1
+
+context:
+  version: "2.7.0"
+
+recipe:
+  name: urllib3
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/u/urllib3/urllib3-${{ version }}.tar.gz
+  sha256: 231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c
+
+outputs:
+  - package:
+      name: urllib3
+    build:
+      number: 0
+      noarch: python
+      script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    requirements:
+      host:
+        - python ${{ python_min }}.*
+        - hatchling >=1.27.0,<2
+        - hatch-vcs >=0.4.0,<0.6.0
+        - setuptools-scm >=8,<11
+        - pip
+      run:
+        - python >=${{ python_min }}
+  - package:
+      name: urllib3-with-brotli
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage('urllib3', exact=True) }}
+        - brotli >=1.2.0
+  - package:
+      name: urllib3-with-h2
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage('urllib3', exact=True) }}
+        - h2 >=4,<5
+```
+
+</RecipeTabs>
+
+Packages that need specific extras can depend on one or more of these outputs:
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  run:
+    - urllib3  # (optional)
+    - urllib3-with-brotli
+    - urllib3-with-h2
+```
+
+```recipe
+requirements:
+  run:
+    - urllib3  # (optional)
+    - urllib3-with-brotli
+    - urllib3-with-h2
+```
+
+</RecipeTabs>
