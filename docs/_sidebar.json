@@ -68,7 +68,8 @@
           "maintainer/example_recipes/go",
           "maintainer/example_recipes/rust",
           "maintainer/example_recipes/pure-python",
-          "maintainer/example_recipes/maturin-abi3"
+          "maintainer/example_recipes/maturin-abi3",
+          "maintainer/example_recipes/abi3"
         ]
       }
     ]
