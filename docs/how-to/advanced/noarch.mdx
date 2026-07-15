@@ -6,7 +6,7 @@ import { RecipeTabs } from "@site/src/components/RecipeTabs";
 
 # Advanced noarch topics
 
-### Building noarch packages on other platforms
+## Building noarch packages on other platforms
 
 By default, `noarch` packages are built on Linux, and all dependencies must be available on Linux.
 If a `noarch` package cannot be built on Linux, one or more `noarch_platforms` can be provided in `conda-forge.yml`.
@@ -19,7 +19,7 @@ noarch_platforms:
 
 A more complex example is [pywin32-on-windows](https://github.com/conda-forge/pywin32-on-windows-feedstock), which is built both on Linux and Windows, with `build_number` offsets to create a pair of packages.
 
-### noarch packages with OS-specific dependencies
+## noarch packages with OS-specific dependencies
 
 It is possible to build `noarch` packages with runtime requirements that depend on the target OS
 (Linux, Windows, MacOS), regardless the architecture (amd64, ARM, PowerPC, etc). This approach
