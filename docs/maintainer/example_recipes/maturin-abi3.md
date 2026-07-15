@@ -107,7 +107,7 @@ extra:
 
 Both `is_abi3` and `is_python_min` are provided by conda-forge's build matrix.
 
-`is_abi3` is not really about the package itself but about the Python *variant* being built
+`is_abi3` is not really about the package itself but about the Python _variant_ being built
 against, and whether that variant supports the stable ABI. Regular CPython does, so
 `is_abi3` is `true` there and the extension is built once against the minimum supported
 Python. Other variants — such as free-threading CPython or PyPy — don't provide a stable
