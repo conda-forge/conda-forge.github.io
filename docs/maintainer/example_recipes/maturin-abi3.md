@@ -15,6 +15,12 @@ supported Python and reuse it everywhere.
 For more general information on abi3 packages, see the
 [knowledge base](../knowledge_base.mdx#packages-with-abi3-extensions).
 
+conda-forge also keeps full example recipes in the
+[`python-abi3-feedstock`](https://github.com/conda-forge/python-abi3-feedstock) repository:
+
+- [`example-recipe.yaml`](https://github.com/conda-forge/python-abi3-feedstock/blob/main/recipe/example-recipe.yaml) (v1 format)
+- [`example-meta.yaml`](https://github.com/conda-forge/python-abi3-feedstock/blob/main/recipe/example-meta.yaml) (v0 format)
+
 ## Recipe template
 
 ```yaml title="recipe.yaml"
@@ -99,9 +105,15 @@ extra:
     - LandoCalrissian
 ```
 
-Both `is_abi3` and `is_python_min` are provided by conda-forge's build matrix. This lets the
-same recipe fall back to a regular per-Python build if abi3 is ever disabled, without
-further changes.
+Both `is_abi3` and `is_python_min` are provided by conda-forge's build matrix.
+
+`is_abi3` is not really about the package itself but about the Python *variant* being built
+against, and whether that variant supports the stable ABI. Regular CPython does, so
+`is_abi3` is `true` there and the extension is built once against the minimum supported
+Python. Other variants — such as free-threading CPython or PyPy — don't provide a stable
+ABI, so `is_abi3` is `false` and the recipe falls back to a normal per-Python build. The
+`if: is_abi3` selectors are what let the same recipe handle both cases without further
+changes.
 
 `python-abi3` (when `is_abi3`): Ensures the extension is built and linked against the stable ABI.
 This package pins the abi3 toolchain so the resulting artifact is compatible across Python versions.
