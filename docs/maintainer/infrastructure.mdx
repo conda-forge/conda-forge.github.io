@@ -837,9 +837,16 @@ Sometimes these reports fail. If you think you are having trouble with uploads, 
 the following things:
 
 - Ensure that `conda_forge_output_validation: true` is set in your `conda-forge.yml`.
+- If the feedstock has not been built and uploaded in a long time, its output may never
+  have been registered. Feedstocks created before output registration existed only get
+  their outputs registered on their next successful upload, so a build will fail validation
+  until the mapping is added. Register the output via the
+  [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#add-a-package-output-to-a-feedstock).
 - Retry the package build and upload by pushing an empty commit to the feedstock.
 - Rerender the feedstock in a PR from a fork of the feedstock and merge.
-- Request a feedstock token reset via our [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#reset-your-feedstock-token).
+- If none of the above apply, request a feedstock token reset via our
+  [admin-requests repo](https://github.com/conda-forge/admin-requests?tab=readme-ov-file#reset-your-feedstock-token).
+  A token reset only re-authenticates uploads; it does not register outputs.
 
 ## Stages of package building and involved infrastructure
 
