@@ -461,7 +461,7 @@ requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
     - r-matrix                   # [build_platform != target_platform]
-    - {{ compiler('c') }}
+    - {{ compiler("c") }}
     - {{ stdlib("c") }}
     - make
   host:
@@ -477,7 +477,7 @@ requirements:
   build:
     - if: build_platform != host_platform
       then:
-        - cross-r-base {{ r_base }}
+        - cross-r-base ${{ r_base }}
         - r-matrix
     - ${{ compiler("c") }}
     - ${{ stdlib("c") }}
