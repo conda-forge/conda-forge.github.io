@@ -752,8 +752,12 @@ OSX (Clang + GNU Fortran):
   [openmp](https://github.com/conda-forge/openmp-feedstock),
   [lld](https://github.com/conda-forge/lld-feedstock),
   [cctools](https://github.com/conda-forge/cctools-and-ld64-feedstock)
-- [Fortran] Activation: https://github.com/conda-forge/gfortran_osx-64-feedstock/
-- [Fortran] Implementation: https://github.com/conda-forge/gfortran_impl_osx-64-feedstock/
+- [Fortran] Activation
+  - as of GCC v15: https://github.com/conda-forge/ctng-compiler-activation-feedstock
+  - until GCC v14: https://github.com/conda-forge/gfortran_osx-64-feedstock
+- [Fortran] Implementation
+  - as of GCC v15: https://github.com/conda-forge/ctng-compilers-feedstock
+  - until GCC v14: https://github.com/conda-forge/gfortran_impl_osx-64-feedstock
 
 Windows (MSVC + Flang):
 
