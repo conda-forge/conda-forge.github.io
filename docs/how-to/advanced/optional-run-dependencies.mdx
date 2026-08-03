@@ -14,9 +14,10 @@ Extras can be used both by end users and in dependencies: a package needing `url
 
 :::note
 
-Historically, extras were also used to express additional dependencies used for development, tests, etc.
+Historically, extras were also used to express additional dependencies used for development, testing, etc.
 These extras should be omitted for conda-forge packaging.
 Nowadays, `dependency-groups` are used for that purpose instead.
+Unlike extras, dependency groups are not exposed to the built wheels, but rather are specified when installing the package in editable mode, for example by specfying `pip install -e . --group={name}`.
 
 :::
 
