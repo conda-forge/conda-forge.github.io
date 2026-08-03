@@ -209,6 +209,10 @@ outputs:
 
 An another variation of the same approach is to have a `{package}-base` output that installs the files and features the obligatory dependencies.
 This frees the prefix-free `{package}` output for the default package variation; one that pulls the recommended set of extras in.
+
+There are variations of this approach using different suffixes, such as `-core`.
+However, you need to be careful not to accidentally use a name that corresponds to another upstream package.
+
 For example, if we we decided that the `h2` extra should be enabled by default, we'd modify the previous recipe to state:
 
 <RecipeTabs>
