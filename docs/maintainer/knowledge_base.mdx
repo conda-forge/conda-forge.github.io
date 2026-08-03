@@ -1488,7 +1488,7 @@ requirements:
 
 </RecipeTabs>
 
-Being non-noarch, this means that the build matrix will include at least 12 outputs: three platforms,
+Being arch-specific, this means that the build matrix will include at least 12 outputs: three platforms,
 times four Python versions. This gets worse with `arm64`, `aarch64` and `ppc64le` in the mix.
 We can get it down to two outputs if replace it with this other approach!
 
