@@ -832,7 +832,7 @@ Output packages that match these patterns will be automatically registered for y
 
 ### Package validation failed for an existing output name
 
-This commonly happens when the feedstock has not been built and uploaded in a long time,
+This may happen when the feedstock has not been built and uploaded in a long time,
 so its output was never registered. Feedstocks created before output registration existed only
 get their outputs registered on their next successful upload, so a build fails validation until
 the mapping is added. Register the output via the
