@@ -63,7 +63,6 @@ export default function Download() {
                   'X-GitHub-Api-Version': '2022-11-28'
               }
           });
-          console.log(latest);
           if (latest.data) {
               setVersion(latest.data.tag_name);
           }

@@ -32,6 +32,7 @@
       "maintainer/updating_pkgs",
       "maintainer/pinning_deps",
       "maintainer/conda_forge_yml",
+      "maintainer/linter",
       "maintainer/knowledge_base",
       "maintainer/maintainer_faq",
       {
@@ -49,6 +50,15 @@
       },
       {
         "type": "category",
+        "label": "Reference",
+        "link": {
+          "type": "doc",
+          "id": "reference/index"
+        },
+        "items": ["reference/runners"]
+      },
+      {
+        "type": "category",
         "label": "Example recipes",
         "link": {
           "type": "doc",
@@ -57,7 +67,8 @@
         "items": [
           "maintainer/example_recipes/go",
           "maintainer/example_recipes/rust",
-          "maintainer/example_recipes/pure-python"
+          "maintainer/example_recipes/pure-python",
+          "maintainer/example_recipes/abi3"
         ]
       }
     ]

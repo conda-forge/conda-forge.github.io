@@ -2,6 +2,8 @@
 title: 'FAQ'
 ---
 
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
 <a id="faq"></a>
 
 # FAQ
@@ -80,19 +82,6 @@ To do this, first install the solver and then build the recipe like you normally
 
 For more details visit [this](https://boa-build.readthedocs.io/en/stable/mambabuild.html) page.
 
-<a id="mfaq-conda-verify"></a>
-
-<a id="i-am-seeing-importing-conda-verify-failed-error-message-during-build-what-do-i-do"></a>
-
-## I am seeing `Importing conda-verify failed.` error message during build. What do I do?
-
-```shell-session
-Importing conda-verify failed. Please be sure to test your packages. conda install conda-verify to make this message go away.
-```
-
-You are seeing this error message because by default, conda-build uses conda-verify to ensure that your recipe and package meet some minimum sanity checks.
-This message can be safely ignored as conda-forge doesn't use conda-verify.
-
 <a id="mfaq-version-update"></a>
 
 <a id="when-the-bot-creates-a-pull-request-to-a-feedstock-to-update-the-version-should-i-approve-the-pull-request-and-wait-with-merging-until-everybody-else-that-is-a-code-owner-has-approved-the-pr"></a>
@@ -133,11 +122,23 @@ ImportError: libGL.so.1: cannot open shared object file: No such file or directo
 
 If you saw this error while building a package in your feedstock, add the Linux host dependency `libgl-devel`, provided by the [libglvnd-feedstock](https://github.com/conda-forge/libglvnd-feedstock).
 
+<RecipeTabs>
+
 ```recipe
 requirements:
   host:
     - libgl-devel  # [linux]
+
 ```
+
+```recipe
+requirements:
+  host:
+    - if: linux
+      then: libgl-devel
+```
+
+</RecipeTabs>
 
 Other OpenGL API variants such as `libegl-devel`, `libgles-devel`, `libglx-devel`, and `libopengl-devel` are also available, and will automatically add non-development `run_exports` dependencies.
 
@@ -164,11 +165,23 @@ Available platform plugins are: eglfs, minimal, minimalegl, offscreen, vnc, webg
 This comes from the CI environment being headless and can be fixed by adding the `QT_QPA_PLATFORM=offscreen` [environment variable](https://docs.conda.io/projects/conda-build/en/stable/user-guide/environment-variables.html#inherited-environment-variables).
 The variable can either be added directly to the test command or provided in the [meta.yaml](../adding_pkgs#the-recipe-recipeyaml-or-metayaml) like so:
 
+<RecipeTabs>
+
 ```recipe
 build:
   script_env:
     - QT_QPA_PLATFORM=offscreen
+
 ```
+
+```recipe
+build:
+  script:
+    env:
+      QT_QPA_PLATFORM: offscreen
+```
+
+</RecipeTabs>
 
 <a id="mfaq-contact-core"></a>
 
@@ -196,7 +209,7 @@ In case your issue is longer or you would like to contact us privately, feel fre
 
 A feedstock is generally considered abandoned when the maintainer isn't around anymore and doesn't merge new PRs or answer any issues.
 If that is the case, you can add yourself to the team by using the [@conda-forge-admin, please add user @username](../infrastructure#conda-forge-admin-please-add-user-username) command.
-If the maintainer doesn't merge it after roughly a week, [contact conda-forge/core](#mfaq-contact-core) to have it merged.
+If the maintainer doesn't merge it after roughly a week, [contact conda-forge/core](#how-can-i-contact-conda-forgecore) to have it merged.
 Once added, you have full rights to the feedstock and can continue its maintenance.
 
 :::note

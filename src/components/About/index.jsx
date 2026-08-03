@@ -40,12 +40,12 @@ export default function Stats() {
 
     const stats2 = [
         {
-            number: stats ? stats.n_members_core : "",
-            content: "Core Developers",
-        },
-        {
             number: stats ? `${(stats.n_artifacts / 1e6).toFixed(1)}M` : "",
             content: "Artifacts",
+        },
+        {
+            number: stats ? `${(stats.total_packages_size / 1e12).toFixed(1)}TB` : "",
+            content: "Channel Size",
         },
         {
             number: stats ? `${(stats.n_members / 1e3).toFixed(1)}K` : "",

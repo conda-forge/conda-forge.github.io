@@ -94,6 +94,6 @@ only bot config (in `conda-forge.yml`) that's being taken into account is the on
 
 :::note
 
-In some cases, the `abi_migration_branches` may receive migration PRs that have already been processed. This is being looked into at [regro/cf-scripts#2500](https://github.com/regro/cf-scripts/issues/2500). In the meantime, you can ignore these redundant PRs by closing them.
+In some cases, the `abi_migration_branches` may receive migration PRs that have already been processed. This is being looked into at [conda-forge/conda-forge-bot#2500](https://github.com/conda-forge/conda-forge-bot/issues/2500). In the meantime, you can ignore these redundant PRs by closing them.
 
 :::
