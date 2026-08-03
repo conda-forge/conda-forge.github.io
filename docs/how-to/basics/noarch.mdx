@@ -1,0 +1,177 @@
+---
+tags: [howto, basic, noarch]
+---
+
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+# Creating noarch packages
+
+`noarch` packages are packages that do not ship platform or architecture specific contents and therefore do not have to be built separately for each subdir.
+For example, the `tzdata` package provides only data files that are installed into the same layout irrespective of the system used.
+Rather than building a number of roughly the same `linux-64`, `linux-aarch64`, `osx-64`, etc. packages, we can build a single `noarch` package that can be installed on all of these platforms.
+
+Declaring packages as `noarch` reduces the use of shared CI and CDN resources.
+Therefore all packages that qualify to be `noarch` packages should be declared as such.
+
+There are currently two types of `noarch` packages supported:
+- `noarch: python` that is used for Python packages that feature no files specific to Python version
+- `noarch: generic` that is used for all other cases (e.g. R, Perl, data-only packages)
+
+## noarch: python
+
+The `noarch: python` directive, in the `build` section, creates packages that are compatible with multiple platforms and multiple Python versions.
+This is similar in spirit to the `py3-none-any` wheels.
+
+When a non-`noarch` package is being built, a separate package is being built for every Python version on every supported platform.
+For example, when a package supports Python 3.10 through 3.14, and `linux-64`, `linux-arm64`, `osx-64`, `osx-arm64` and `win-64` platforms, this means building 5 packages per platform times 5 platforms, which totals 25 packages.
+For a pure Python package, this would actually mean 25 packages with the same contents.
+Every package is built on the appropriate OS, using the matching Python version.
+All build dependencies must be available for all platforms, and if the package needs build scripts, they also need to be available in appropriate variants.
+
+Conversely, when `noarch: python` is enabled, a single `noarch` package is built for all supported Python versions and all platforms.
+Typically, the build is performed on a Linux system using the oldest Python version supported, and the necessary adjustments to make it universal are performed automatically.
+The advanced how-to covers the topic of [building noarch packages on other platforms](../advanced/noarch.mdx#building-noarch-packages-on-other-platforms).
+
+### Requirements
+
+In order to qualify as a `noarch: python` package, all of the following criteria must be fulfilled:
+
+- The package contents must be invariant across Python versions and platforms.
+  - This means that the package must not compile any extensions.
+    For packages with `abi3` extensions, see [ABI3 packages](/docs/maintainer/knowledge_base/#packages-with-abi3-extensions).
+  - Typically, the package must not rely on platform-specific build scripts, unless they produce the same results.
+- No post-link or pre-link or pre-unlink scripts may be used.
+- The recipe must not use selectors.
+  <!-- TODO: discuss repodata v3 conditional dependencies when ready -->
+  - Requirements that are version-restricted upstream can be listed unconditionally in the recipe instead.
+  - If the specific requirement is incompatible with a newer Python version, the package will built successfully.
+    The package manager will display an appropriate error if one attempts to install this package along with the newer Python version.
+    However, when the dependency is rebuilt for the new Python version, your package will become installable immediately, with no need to build a new version.
+  - Instead of `skip: match(python, ...)`, `python_min` needs to be overridden, see [overriding the minimum Python version](#overriding-the-minimum-python-version).
+  - The advanced how-to explains how to express [OS-specific dependencies](../advanced/noarch.mdx#noarch-packages-with-os-specific-dependencies).
+- `scripts` argument in `setup.py` must not be used.
+  - It is recommended to replace explicit scripts with entry points upstream.
+- If `console_scripts` entry points are used, they must be listed in the `build` section of the recipe: as [`entry_points` in v0 format](https://conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-entry-points) or [`python.entry_points` in v1 format](https://rattler-build.prefix.dev/latest/reference/recipe_file/#entry-points).
+  This is necessary for the package manager to generate the correct platform-appropriate scripts.
+  - These entry points can be found in `[project.scripts]` table in `pyproject.toml`, or in `entry_points` → `console_scripts` in `setup.py` or `setup.cfg` files.
+  - Other types of entry points do not require special treatment.
+
+### Package type comparison
+
+| `noarch: python` | regular Python package |
+| ---------------- | ---------------------- |
+| A single package, with optional OS variants. | Packages for every platform, with variants for every Python version. |
+| Can be installed on any platform, on any Python version that meets the constraints. | Can be installed only on platform and Python version combinations it was built for. |
+| Built on Linux, using `python_min`. | Built on every supported OS, using every supported Python version. |
+| Cannot include Python extensions or files specific to platform or Python version. | Can install any files. |
+| Has to use entry points. | Can use entry points and setuptools `scripts`. |
+| Dependencies must be the same for all Python versions (but they do not have to be satisfiable on all of them). | Dependencies can be conditional to Python versions. |
+
+### Expressing Python version requirements
+
+All recipes employing `noarch: python` must use the `python_min` variable as follows:
+
+1. The host and test requirements must pin to `{{ python_min }}.*`.
+   This ensures that the build will fail if the package actually requires newer Python version than the one specified in `python_min`.
+2. The run requirement must list `python_min >={{ python_min }}`, permitting the whole range of supported versions at runtime.
+
+<RecipeTabs>
+
+```recipe
+name: package
+source:
+  # ...
+build:
+  noarch: python
+  # ...
+requirements:
+  host:
+    - python {{ python_min }}.*
+    # ...
+  run:
+    - python >={{ python_min }}
+    # ...
+
+test:
+  requires:
+    - python {{ python_min }}.*
+    # ...
+```
+
+```recipe
+name: package
+source:
+  # ...
+build:
+  noarch: python
+  # ...
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    # ...
+  run:
+    - python >=${{ python_min }}
+    # ...
+
+tests:
+  - python:
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+      # ...
+  - requirements:
+      run:
+        - python ${{ python_min }}.*
+      script:
+        # ...
+```
+
+</RecipeTabs>
+
+See [CFEP-25](https://github.com/conda-forge/cfep/blob/main/cfep-25.md) for more details on this syntax.
+
+### Overriding the minimum Python version
+
+If you need to override the minimum Python version, you can add a Jinja2 `set` statement (or equivalent `context` variable for v1 recipes) at the top of your recipe:
+
+<RecipeTabs>
+
+```recipe
+{% set python_min = "3.12" %}
+```
+
+```recipe
+context:
+  python_min: "3.12"
+```
+
+</RecipeTabs>
+
+It also possible to achieve the same effect by adding a `conda_build_config.yaml` file to your recipe that
+contains a map like
+
+```yaml title="recipe/conda_build_config.yaml"
+python_min:
+- "3.12"
+```
+
+If you go that route, you will need to [rerender the feedstock](rerender.md)
+after adding the `conda_build_config.yaml` file.
+
+:::note
+If the minimum Python version supported by the package is older or the same as the minimum version supported by conda-forge (`python_min` in [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml)), please remove the `python_min` override, so that the global setting (and any subsequent updates to it) take effect.
+:::
+
+### Converting existing packages to noarch
+
+If an existing python package qualifies to be converted to a noarch package, you can request the required changes by opening a new issue and including `@conda-forge-admin, please add noarch: python` (see [examples](https://github.com/search?type=issues&q=org%3Aconda-forge+%22%40conda-forge-admin%2C+please+add+noarch%22)).
+
+## noarch: generic
+
+:::info[Todo]
+
+add some information on r packages which make heavy use of `noarch: generic`
+
+:::
+
+[Examples of recipes using `noarch: generic`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Arecipe+%22noarch%3A+generic%22+language%3AYAML&l=YAML)
