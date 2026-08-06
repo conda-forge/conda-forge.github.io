@@ -4,10 +4,21 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/news/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Tue, 21 Apr 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 06 Aug 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Moving to GCC 15 and Clang 21 as default compiler versions]]></title>
+            <link>https://conda-forge.org/news/2026/08/06/moving-to-gcc-15-clang-21/</link>
+            <guid>https://conda-forge.org/news/2026/08/06/moving-to-gcc-15-clang-21/</guid>
+            <pubDate>Thu, 06 Aug 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[As part of our regular toolchain updates, we're planning to update the baseline]]></description>
+            <content:encoded><![CDATA[<p>As part of our regular toolchain updates, we're planning to update the baseline
+versions of GCC (our default compiler on Linux) to v15 and of Clang (default on macOS) to v21,
+in one week.</p>
+<p>For more details, see <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/8795" target="_blank" rel="noopener noreferrer" class="">https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/8795</a>.</p>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[Feedstock Team Update Maintenance & Downtime]]></title>
             <link>https://conda-forge.org/news/2026/04/21/team-update-maint/</link>
@@ -371,24 +382,6 @@ By default this is 2.17, which means you'd have to do</p>
             <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[We will be slowly migrating conda-forge to use unique feedstock tokens per provider. The feedstock token is used to allow maintainers to copy packages from our staging area to the main conda-forge channel. This change will improve our security posture and help us limit the impact of any leaked tokens. During this migration we will also be using newly implemented feedstock token expiration times to avoid race conditions between token changes and running builds.]]></description>
             <content:encoded><![CDATA[<p>We will be slowly migrating <code>conda-forge</code> to use unique feedstock tokens per provider. The feedstock token is used to allow maintainers to copy packages from our staging area to the main <code>conda-forge</code> channel. This change will improve our security posture and help us limit the impact of any leaked tokens. During this migration we will also be using newly implemented feedstock token expiration times to avoid race conditions between token changes and running builds.</p>]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[New time available for conda-forge core meetings]]></title>
-            <link>https://conda-forge.org/news/2024/11/07/new-time-core-meetings/</link>
-            <guid>https://conda-forge.org/news/2024/11/07/new-time-core-meetings/</guid>
-            <pubDate>Thu, 07 Nov 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[The core team has decided to change the time when core meetings happen to accommodate more attendees across different timezones. It will still happen every two Wednesdays, but starting next Wednesday, November 13th 2024, it will alternate between 1700 UTC and 1400 UTC.]]></description>
-            <content:encoded><![CDATA[<p>The core team has decided to change the time when core meetings happen to accommodate more attendees across different timezones. It will still happen every two Wednesdays, but starting next Wednesday, November 13th 2024, it will alternate between 17:00-18:00 UTC and 14:00-15:00 UTC.</p>
-<p>For clarity, these are the next dates:</p>
-<ul>
-<li class="">November 13th, 2024 at 17:00 UTC</li>
-<li class="">November 27th, 2024 at 14:00 UTC</li>
-<li class="">December 11th, 2024 at 17:00 UTC</li>
-<li class=""><del>December 25th, 2024 at 14:00 UTC</del></li>
-<li class="">January 8th, 2025, at 17:00 UTC</li>
-<li class="">... and so on.</li>
-</ul>
-<p>A new calendar is now available in the <a class="" href="https://conda-forge.org/community/meetings/">Community &gt; Meetings</a> section to help find the dates.</p>]]></content:encoded>
         </item>
     </channel>
 </rss>
