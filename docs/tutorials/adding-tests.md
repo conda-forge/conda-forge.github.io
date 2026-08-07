@@ -170,7 +170,7 @@ The build number can be found in the `build:` section:
 build:
   number: 0
   noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: ${{ PYTHON }} -m pip install . -vv
 ```
 
 Increase it by one, making it:
@@ -179,7 +179,7 @@ Increase it by one, making it:
 build:
   number: 1
   noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: ${{ PYTHON }} -m pip install . -vv
 ```
 
 Note that in some recipes, the build number will be referenced via a variable rather than directly.
