@@ -9,6 +9,7 @@
     },
     "items": [
       "user/introduction",
+      "user/what-is-conda-forge",
       "user/tipsandtricks",
       "user/ci-skeleton",
       "user/transitioning_from_defaults",
