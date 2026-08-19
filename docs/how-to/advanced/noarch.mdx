@@ -210,3 +210,74 @@ noarch_platforms:
 ```
 
 Again, remember to rerender after adding / modifying these files so the changes are applied.
+
+## noarch variants for different Python version ranges
+
+Normally, a `noarch: python` package is built in a single variant for all supported Python versions.
+However, in some cases you actually need to build two or more different variants, for example to account for dependencies that are conditional to Python versions.
+In these cases, it is possible to parametrize the `python_min` parameter.
+
+:::tip
+
+Before employing this solution, please consider whether you actually need to build multiple variants.
+For example, common backport packages such as `backports.zstd` or `typing_extensions` can safely be listed as a dependency irrespective of Python version.
+If your package uses different lower bounds conditionally to Python versions, you can usually use the highest bound to account for all versions.
+
+:::
+
+
+```yaml title="recipe/conda_build_config.yaml"
+python_min:
+  - "3.10"
+  - "3.14"
+```
+
+This will result in separate build configurations being created for different `python_min` values.
+The parts of recipe that apply conditionally to Python version will need to be made conditional to the `python_min` value.
+Additionally, the upper `python` version cap will also need to be adjusted conditionally.
+Optionally, you may want to adjust the build string for readability.
+
+<RecipeTabs>
+
+```recipe
+build:
+  number: {{ build_number }}
+  string: py{{ python_min | replace('.', '') }}_h{{ PKG_HASH }}_{{ build_number }}
+  noarch: python
+  script: "{{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation"
+
+requirements:
+  host:
+    - pip
+    - python {{ python_min }}.*
+    - setuptools
+  run:
+    - python >={{ python_min }}        # [python_min == "3.14"]
+    - python >={{ python_min }},<3.14  # [python_min != "3.14"]
+    - onnxruntime >=1.24               # [python_min == "3.14"]
+    - onnxruntime >=1.20,<1.24         # [python_min != "3.14"]
+```
+
+```recipe
+build:
+  number: ${{ build_number }}
+  string: py${{ python_min | version_to_buildstring }}_h${{ hash }}_${{ build_number }}
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - pip
+    - python ${{ python_min }}.*
+    - setuptools
+  run:
+    - if: match(python_min, '>=3.14')
+      then:
+        - python >=${{ python_min }}
+        - onnxruntime >=1.24
+      else:
+        - python >=${{ python_min }},<3.14
+        - onnxruntime >=1.20,<1.24
+```
+
+</RecipeTabs>
