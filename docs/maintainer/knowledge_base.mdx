@@ -1718,8 +1718,8 @@ CUDA libraries are split into separate packages with standard naming:
 
 - The base package (e.g., `libcublas`) provides runtime shared libraries.
 - The `*-dev` package includes headers, symlinks, and CMake files for compiling code that dynamically links the library.
-- The `*-static` package includes the static library for static linking
-  For build files, users will also needed to install the `*-dev` packages.
+- The `*-static` package includes the static library for static linking.
+  For build files, users may also needed to install the `*-dev` packages.
 
 For example, [libcublas](https://github.com/conda-forge/libcublas-feedstock) is available as `libcublas`, `libcublas-dev`, and `libcublas-static`.
 
@@ -1882,7 +1882,7 @@ build:
 
 As new CUDA versions come out regularly, periodically conda-forge needs to
 decide how many versions will be supported within resource constraints.
-As of January 2025, conda-forge supports CUDA 11 and 12.
+As of August 2026, conda-forge supports CUDA 12 and 13.
 
 To update to the latest supported versions [rerender the feedstock](updating_pkgs.md#dev-update-rerender).
 There may be other fixes needed for the feedstock depending on when it was last updated.
