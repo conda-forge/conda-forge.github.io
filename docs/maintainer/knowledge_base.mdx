@@ -1627,17 +1627,17 @@ equivalent to installing the CUDA Toolkit with traditional system package manage
 `apt` or `yum` on Linux. Similarly to such package managers, the individual components may
 also be installed independently.
 
-The [`cuda-version`
-metapackage](https://github.com/conda-forge/cuda-version-feedstock/blob/main/recipe/README.md)
+The [`cuda-version` metapackage](
+https://github.com/conda-forge/cuda-version-feedstock/blob/main/recipe/README.md )
 is used to select the version of CUDA to install. This metapackage is important because
 individual components of the CTK are typically versioned independently (the current versions
-may be found in the [release
-notes](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html)). The
+may be found in the [release notes](
+https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html )). The
 `cuda-version` metapackage provides a standard way to install the version of a specific CUDA
-component corresponding to a given version of the CTK. This way, you never have to specify a
-particular version of any CTK package; you just specify the `cuda-version` that you want,
-then list packages you want installed and conda will take care of finding the right versions
-for you. The above command will install all components of CUDA from the latest patch release
+component corresponding to a given version of the CTK. This way, one never has to specify a
+particular version of any CTK package; one just specifies the `cuda-version` desired,
+then list packages needed and conda will take care of finding the right versions.
+The above command will install all components of CUDA from the latest patch release
 of the CUDA 12.x series.
 
 :::warning
@@ -1678,13 +1678,12 @@ issue](https://github.com/conda-forge/staged-recipes/issues/21382).
 
 For convenience, a number of additional metapackages are available:
 
-- `cuda-runtime`: All CUDA runtime libraries needed to run a CUDA application
-- `cuda-libraries`: All libraries required to run a CUDA application requiring libraries beyond the CUDA runtime (such as the CUDA math libraries) as well as packages needed to perform JIT compilation
-- `cuda-visual-tools`: GUIs for visualizing and profiling such as Nsight Compute
+- `cuda-runtime` / `cuda-libraries`: All CUDA runtime libraries needed to run a CUDA application
+- `cuda-visual-tools`: GUIs for visualizing and profiling such as Nsight™ Compute
 - `cuda-command-line-tools`: Command line tools for analyzing and profiling such as cupti, cuda-gdb, and Compute Sanitizer
 - `cuda-tools`: All tools for analyzing and profiling, both GUI (includes cuda-visual-tools) and CLI (includes cuda-command-line-tools)
 
-##### Selecting ARM Variant
+##### Selecting ARM Device Variant
 
 Many of NVIDIA's CUDA packages are built for both SBSA and Tegra devices. For CUDA 12.9,
 Tegra devices are a separate ARM variant. To install packages built for CUDA 12.9 Tegra, add
@@ -1701,7 +1700,8 @@ means that only Orin (sm_87) and later devices are supported.
 
 #### CUDA C++ Core Libraries (CCCL)
 
-CCCL is a special case among CUDA packages. Due to 1) being header-only, 2) fast-moving, and 3) independently-evolving, consumers may want a different (newer) version of CCCL than the
+CCCL is a special case among CUDA packages. Due to 1) being header-only, 2) fast-moving, and 3) independently-evolving,
+consumers may want a different (newer) version of CCCL than the
 one corresponding to their CTK version. Instructions on how to install a suitable CCCL
 package from conda can be found
 [in the CCCL README](https://github.com/NVIDIA/cccl/?tab=readme-ov-file#conda).
@@ -1714,7 +1714,8 @@ CUDA libraries are split into separate packages with standard naming:
 
 - The base package (e.g., `libcublas`) provides runtime shared libraries.
 - The `*-dev` package includes headers, symlinks, and CMake files for compiling code that dynamically links the library.
-- The `*-static` package includes the static library for static linking, and usually requires `*-dev` to be present for build files, though this isn't enforced.
+- The `*-static` package includes the static library for static linking
+  For build files, users will also needed to install the `*-dev` packages.
 
 For example, [libcublas](https://github.com/conda-forge/libcublas-feedstock) is available as `libcublas`, `libcublas-dev`, and `libcublas-static`.
 
