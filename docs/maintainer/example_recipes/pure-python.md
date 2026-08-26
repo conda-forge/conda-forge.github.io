@@ -30,7 +30,7 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/e/example-package/example_package-${{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/e/example-package/example_package-${{ version }}.tar.gz
   sha256: 12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a
 
 build:
@@ -96,11 +96,11 @@ package:
 
 ```recipe
 source:
-  url: https://pypi.org/packages/source/e/example-package/example_package-${{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/e/example-package/example_package-${{ version }}.tar.gz
   sha256: 12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a
 ```
 
-- `url`: The PyPI source URL follows the pattern `https://pypi.org/packages/source/<first-letter>/<package-name>/<package-name>-<version>.tar.gz`. Note that the package name in the URL may use underscores instead of hyphens (e.g., `example_package` vs `example-package`).
+- `url`: The PyPI source URL follows the pattern `https://files.pythonhosted.org/packages/source/<first-letter>/<package-name>/<package-name>-<version>.tar.gz`. Note that the package name in the URL may use underscores instead of hyphens (e.g., `example_package` vs `example-package`).
 - `sha256`: The SHA256 hash of the source archive. Run `openssl sha256 <artifact>` to get its hash after downloading the source file.
 
 ### The `build` section
