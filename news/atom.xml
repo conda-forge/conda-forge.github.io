@@ -2,11 +2,23 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/news/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2026-08-06T00:00:00.000Z</updated>
+    <updated>2026-08-28T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/news/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[New Admin Webservices Command to Convert Recipes to v1]]></title>
+        <id>https://conda-forge.org/news/2026/08/28/admin-recipe-v1-conversion-command/</id>
+        <link href="https://conda-forge.org/news/2026/08/28/admin-recipe-v1-conversion-command/"/>
+        <updated>2026-08-28T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We have added a new admin webservices command to convert recipes to the v1 format. You can]]></summary>
+        <content type="html"><![CDATA[<p>We have added a new admin webservices command to convert recipes to the v1 format. You can
+use this command, <code>@conda-forge-admin, please convert to v1</code> in the title of an issue to
+open a new PR or in a comment on a PR to push to an existing one. The conversion process is
+done by <a href="https://github.com/conda/conda-recipe-manager" target="_blank" rel="noopener noreferrer" class="">conda-recipe-manager</a>, and any errors
+in the conversion process will be posted as a comment to the PR.</p>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Moving to GCC 15 and Clang 21 as default compiler versions]]></title>
         <id>https://conda-forge.org/news/2026/08/06/moving-to-gcc-15-clang-21/</id>
@@ -373,13 +385,5 @@ in <code>conda-forge.yml</code>, see above) matches the <code>c_stdlib_version</
 By default this is 2.17, which means you'd have to do</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">os_version:</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  linux_64: cos7</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  linux_aarch64: cos7</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">  linux_ppc64le: cos7</span><br></div></code></pre></div></div>
 <p>If you require a <code>c_stdlib_version</code> of 2.28 for a given platform, then set <code>alma8</code>.</p>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Migration to Unique Feedstock Tokens per Provider]]></title>
-        <id>https://conda-forge.org/news/2024/11/08/unique-feedstock-token-per-provider-migration/</id>
-        <link href="https://conda-forge.org/news/2024/11/08/unique-feedstock-token-per-provider-migration/"/>
-        <updated>2024-11-08T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[We will be slowly migrating conda-forge to use unique feedstock tokens per provider. The feedstock token is used to allow maintainers to copy packages from our staging area to the main conda-forge channel. This change will improve our security posture and help us limit the impact of any leaked tokens. During this migration we will also be using newly implemented feedstock token expiration times to avoid race conditions between token changes and running builds.]]></summary>
-        <content type="html"><![CDATA[<p>We will be slowly migrating <code>conda-forge</code> to use unique feedstock tokens per provider. The feedstock token is used to allow maintainers to copy packages from our staging area to the main <code>conda-forge</code> channel. This change will improve our security posture and help us limit the impact of any leaked tokens. During this migration we will also be using newly implemented feedstock token expiration times to avoid race conditions between token changes and running builds.</p>]]></content>
     </entry>
 </feed>
