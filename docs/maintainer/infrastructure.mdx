@@ -406,6 +406,15 @@ to check if there are any new versions available. If there are, it will open a P
 with the needed changes. Note that the bot might start by opening a PR with only partial
 changes. The rest of the contents will be added in a subsequent commit after a few minutes.
 
+### @conda-forge-admin, please convert to v1
+
+Entering the above phrase in the title of an issue on a feedstock will request the admin bot
+to convert the recipe to the v1 format using
+[conda-recipe-manager](https://github.com/conda/conda-recipe-manager). You can also use this command
+in a comment on a PR. If the conversion fails, the admin bot will post an error message with the
+output of the conversion process. Note that the bot might start by opening a PR with only partial
+changes. The rest of the contents will be added in a subsequent commit after a few minutes.
+
 ## CI build services
 
 Here we describe common issues with the CI Services that conda-forge builds.
