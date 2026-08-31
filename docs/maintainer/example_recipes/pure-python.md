@@ -36,7 +36,7 @@ source:
 build:
   noarch: python
   number: 0
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: ${{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
@@ -109,7 +109,7 @@ source:
 build:
   noarch: python
   number: 0
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: ${{ PYTHON }} -m pip install . -vv
 ```
 
 - `noarch: python`: Indicates that this is a pure-Python package and can be installed on any architecture.
@@ -117,8 +117,11 @@ build:
 - `script`: The build script uses pip to install the package:
   - `${{ PYTHON }} -m pip install`: Ensures the correct Python interpreter is used.
   - `-vv`: Verbose output for debugging build issues.
-  - `--no-deps`: Prevents pip from installing dependencies itself, as these are specified in the `requirements.run` section.
-  - `--no-build-isolation`: Ensures that the `host` environment is used to build the package (instead of creating a new virtualenv).
+
+Note that the `pip` flags `--no-deps` and `--no-build-isolation` are automatically applied by `rattler-build`.
+
+- `--no-deps`: Prevents pip from installing dependencies itself, as these are specified in the `requirements.run` section.
+- `--no-build-isolation`: Ensures that the `host` environment is used to build the package (instead of creating a new virtualenv).
 
 #### Entry points
 
