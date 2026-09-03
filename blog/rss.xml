@@ -4,10 +4,143 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/blog/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Wed, 01 Jul 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 03 Sep 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Python 3.15.0rc1 on conda-forge, a leaner libpython, and a more unixy Windows layout]]></title>
+            <link>https://conda-forge.org/blog/2026/09/03/python-315/</link>
+            <guid>https://conda-forge.org/blog/2026/09/03/python-315/</guid>
+            <pubDate>Thu, 03 Sep 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Following the release of Python 3.15.0rc1,]]></description>
+            <content:encoded><![CDATA[<p>Following the <a href="https://github.com/conda-forge/python-feedstock/pull/900" target="_blank" rel="noopener noreferrer" class="">release of Python 3.15.0rc1</a>,
+conda-forge has started building Python 3.15 packages. You can create an
+environment with the Python 3.15 release candidate by running the command:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">conda create -n py315 python=3.15 -c conda-forge -c conda-forge/label/python_rc</span><br></div></code></pre></div></div>
+<p>As with previous feature releases, we start building against the release
+candidate because the ABI is guaranteed to be stable from here to the final
+3.15.0. This is also a release where the <code>python</code> package on Windows looks
+noticeably different on disk, and where the shared library that every
+<code>python</code> package used to carry has moved into its own package.</p>
+<p>Note that at this early stage only the <code>python</code> interpreter itself, <code>noarch</code>
+packages, and extensions built against the stable ABI (<code>abi3</code>) are available
+for 3.15. The broader rebuild of compiled packages hasn't started yet — that
+begins once a <code>python315</code> entry lands in <a href="https://github.com/conda-forge/conda-forge-pinning-feedstock" target="_blank" rel="noopener noreferrer" class="">conda-forge-pinning</a>,
+the same way it did for <a href="https://conda-forge.org/blog/2025/10/09/python-314/" target="_blank" rel="noopener noreferrer" class="">3.14</a> and <a href="https://conda-forge.org/blog/2024/09/26/python-313/" target="_blank" rel="noopener noreferrer" class="">3.13</a>.
+That initial migration will only cover the regular (non-freethreading)
+builds — the 3.14t migration keeps running in the meantime, and a 3.15t
+migration will start at a later date, the same way 3.14t followed 3.13t
+(<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/8891" target="_blank" rel="noopener noreferrer" class="">conda-forge/conda-forge-pinning-feedstock#8891</a>).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="a-more-unixy-layout-on-windows">A more unixy layout on Windows<a href="https://conda-forge.org/blog/2026/09/03/python-315/#a-more-unixy-layout-on-windows" class="hash-link" aria-label="Direct link to A more unixy layout on Windows" title="Direct link to A more unixy layout on Windows" translate="no">​</a></h2>
+<p>For as long as conda-forge has shipped Python on Windows, the layout inside
+an environment has looked like a regular Windows Python install: a flat
+<code>Lib\</code> for the standard library and <code>site-packages</code>, a top-level <code>DLLs\</code> for
+compiled extension modules, <code>include\</code> for headers, and <code>libs\</code> for import
+libraries. On Unix, the same content is grouped under a single
+<code>lib/pythonX.Y/</code> tree. That divergence meant every other package uses
+<code>&lt;PREFIX&gt;\Library\</code> instead of <code>&lt;PREFIX&gt;\</code> on windows.</p>
+<p>Starting with 3.15, conda-forge's Windows builds move to a layout that
+mirrors the Unix one:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>content</th><th>old path (≤3.14)</th><th>new path (3.15+)</th></tr></thead><tbody><tr><td>standard library</td><td><code>Lib\</code></td><td><code>lib\python\</code></td></tr><tr><td>site-packages</td><td><code>Lib\site-packages\</code></td><td><code>lib\python\site-packages\</code></td></tr><tr><td>compiled extension modules (<code>.pyd</code>)</td><td><code>DLLs\</code></td><td><code>lib\python\lib-dynload\</code></td></tr><tr><td><code>Tools\</code> scripts</td><td><code>Tools\</code></td><td><code>lib\python\Tools\</code></td></tr><tr><td>headers, <code>pyconfig.h</code></td><td><code>include\</code></td><td><code>include\python\</code></td></tr></tbody></table>
+<p><code>Scripts\</code>, <code>libs\</code>, and the top-level <code>python.exe</code>/<code>pythonw.exe</code>/<code>python3.dll</code> are
+unchanged. This is purely about conda-forge's own Python build layout — it
+doesn't touch the general <code>Library\</code> convention that other conda packages
+use for their headers and DLLs on Windows.</p>
+<p>This will help to remove the distinction between <code>&lt;PREFIX&gt;/Library</code>
+and <code>&lt;PREFIX&gt;</code> in the future, but we will keep the distinction for now.</p>
+<p>See <a href="https://github.com/conda-forge/python-feedstock/pull/873" target="_blank" rel="noopener noreferrer" class="">conda-forge/python-feedstock#873</a>
+for the change and <a href="https://github.com/conda-forge/cfep/blob/main/cfep-27.md" target="_blank" rel="noopener noreferrer" class="">CFEP-27</a>
+for the CFEP that explains the rationale.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-shared-library-moves-into-its-own-libpython-package">The shared library moves into its own <code>libpython</code> package<a href="https://conda-forge.org/blog/2026/09/03/python-315/#the-shared-library-moves-into-its-own-libpython-package" class="hash-link" aria-label="Direct link to the-shared-library-moves-into-its-own-libpython-package" title="Direct link to the-shared-library-moves-into-its-own-libpython-package" translate="no">​</a></h2>
+<p>The <code>python</code> package has always carried the shared library —
+<code>libpythonX.Y.so</code>/<code>.dylib</code> even though most environments never touch
+it directly. It's only needed for apps that embed python. This is because
+on Unix, the python executable links against the static libpython library
+for performance reasons. Every other package that just runs Python or uses
+compiled extensions was paying for bytes it didn't use.</p>
+<p>conda-forge already split the <em>static</em> archive out into <code>libpython-static</code>
+some time ago. For 3.15, the shared library gets the same treatment: a new
+<code>libpython</code> output now carries it, and <code>python</code> is simply run_constrained by
+an exact pin of <code>libpython</code>. Installing <code>python</code> now doesn't give you the
+shared library and applications that embed python need to depend on
+<code>libpython</code> directly, and environments that don't need it can end up
+smaller. This work
+started on the 3.15 branch and will be backported to previous minor
+versions, but installing <code>python</code> on those versions will bring in <code>libpython</code>
+automatically unlike 3.15.</p>
+<p>Alongside this, macOS now also gets an unversioned <code>libpython3.dylib</code> for
+stable-ABI (<code>abi3</code>) consumers, matching the <code>libpython3.so</code> that has long
+existed on Linux for the same purpose — so applications that embed Python
+via the stable ABI on macOS no longer need to pin an exact Python minor
+version to link against. This is distinct from regular Python extension
+modules built against <code>abi3</code>, which don't link against <code>libpython</code> at all.</p>
+<p>Note that <code>libpython</code> is empty on windows, and <code>python*.dll</code> are in the <code>python</code>
+package since the executables depend on the shared library unlike Unix.
+Also note that the <code>libpython</code> name was previously used by a Windows-only
+package from <a href="https://github.com/conda-forge/libpython-feedstock" target="_blank" rel="noopener noreferrer" class="">libpython-feedstock</a>
+that provided a mingw-w64 import library for <code>pythonXY.dll</code>, for use with
+the m2 (mingw) toolchain. That old meaning has been repurposed to make room
+for the new <code>libpython</code> output described above — anyone who depended on it
+for the m2 toolchain should switch to <code>distutils-activate-mingw</code> instead
+(<a href="https://github.com/conda-forge/libpython-feedstock/issues/20" target="_blank" rel="noopener noreferrer" class="">conda-forge/libpython-feedstock#20</a>).</p>
+<p>See <a href="https://github.com/conda-forge/python-feedstock/issues/843" target="_blank" rel="noopener noreferrer" class="">conda-forge/python-feedstock#843</a>
+for the motivation and <a href="https://github.com/conda-forge/python-feedstock/pull/894" target="_blank" rel="noopener noreferrer" class="">#894</a>
+and <a href="https://github.com/conda-forge/python-feedstock/pull/885" target="_blank" rel="noopener noreferrer" class="">#885</a> for the
+implementation across platforms.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="dropping-the-old-python31-symlink">Dropping the old <code>python3.1</code> symlink<a href="https://conda-forge.org/blog/2026/09/03/python-315/#dropping-the-old-python31-symlink" class="hash-link" aria-label="Direct link to dropping-the-old-python31-symlink" title="Direct link to dropping-the-old-python31-symlink" translate="no">​</a></h2>
+<p>conda-forge's Python builds have long carried a <code>python3.1</code> symlink (and a
+matching <code>site-packages</code> path) alongside the real interpreter, as a
+workaround for an old bug in <code>conda</code> (<a href="https://github.com/conda/conda/issues/10969" target="_blank" rel="noopener noreferrer" class="">conda/conda#10969</a>)
+where minor versions with two digits, like <code>3.10</code> or <code>3.15</code>, could be
+misparsed as <code>3.1</code>. That bug has long since been fixed, and 3.15 drops the
+<code>python3.1</code> symlink and the associated workaround
+(<a href="https://github.com/conda-forge/python-feedstock/pull/912" target="_blank" rel="noopener noreferrer" class="">conda-forge/python-feedstock#912</a>).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="thanks">Thanks<a href="https://conda-forge.org/blog/2026/09/03/python-315/#thanks" class="hash-link" aria-label="Direct link to Thanks" title="Direct link to Thanks" translate="no">​</a></h2>
+<p>Thanks to Michał Górny (<a href="https://github.com/mgorny" target="_blank" rel="noopener noreferrer" class="">@mgorny</a>) for the 3.15.0rc1
+bump and the original <code>libpython</code> split, and to Axel Obermeier
+(<a href="https://github.com/h-vetinari" target="_blank" rel="noopener noreferrer" class="">@h-vetinari</a>) for backporting the libpython PRs
+to previous versions.</p>
+<p>Some of this work was partially funded by <a href="https://www.sovereign.tech/tech/conda" target="_blank" rel="noopener noreferrer" class="">Sovereign Tech Agency</a></p>
+<p>Any issues with the <code>python</code> package itself can be reported at
+<a href="https://github.com/conda-forge/python-feedstock/issues" target="_blank" rel="noopener noreferrer" class=""><code>python-feedstock</code></a>.</p>]]></content:encoded>
+            <category>infrastructure</category>
+        </item>
         <item>
             <title><![CDATA[Qt6 status in conda-forge]]></title>
             <link>https://conda-forge.org/blog/2026/07/01/qt6-status-in-conda-forge/</link>
@@ -1179,73 +1312,6 @@ Our feedstock maintainers are in the best position to notice incidents
 and issues. Please responsibly report anything you find to us at
 <code>condaforge+security@gmail.com</code>.</p>]]></content:encoded>
             <category>security</category>
-        </item>
-        <item>
-            <title><![CDATA[Contributing Packages To conda-forge Using Grayskull]]></title>
-            <link>https://conda-forge.org/blog/2021/06/16/graykull-step-by-step/</link>
-            <guid>https://conda-forge.org/blog/2021/06/16/graykull-step-by-step/</guid>
-            <pubDate>Wed, 16 Jun 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[When contributing packages to conda-forge, Grayskull can make your life]]></description>
-            <content:encoded><![CDATA[<p>When contributing packages to conda-forge, Grayskull can make your life
-much easier. Grayskull generates recipes for Python packages hosted on
-PyPI.</p>
-<p>As the
-<a href="https://github.com/conda-incubator/grayskull#introduction" target="_blank" rel="noopener noreferrer" class="">introduction</a>
-for Grayskull reads; "The main goal of this project is to generate
-concise recipes for conda-forge." In this tutorial we learn how to
-contribute a Python package to the conda-forge channel using Grayskull
-to generate the recipe.</p>
-<p>Let us get started.</p>
-<ol>
-<li class="">
-<p>Install <code>grayskull</code> using <code>conda</code> through the <code>conda-forge</code> channel:</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">$ conda install -c conda-forge grayskull</span><br></div></code></pre></div></div>
-</li>
-<li class="">
-<p>Fork and clone the conda-forge <a href="https://github.com/conda-forge/staged-recipes" target="_blank" rel="noopener noreferrer" class="">staged-recipes
-repository</a> from
-GitHub.</p>
-</li>
-<li class="">
-<p>Checkout a new branch from the <code>master branch</code>.</p>
-</li>
-<li class="">
-<p>Through CLI, cd inside the 'staged-recipes/recipes' directory.</p>
-</li>
-<li class="">
-<p>Call <code>grayskull</code> and pass the <code>pypi</code> repository, followed by the
-name of the package you want to contribute to conda-forge. For
-example: <code>grayskull pypi abc</code></p>
-<p>Or you could use <code>grayskull pypi abc --strict-conda-forge</code> to remove
-some selectors which are not necessary for conda-forge and adapt
-recipes to fit better in the conda-forge ecosystem.</p>
-<p>Grayskull will create a folder with the same name as the package (in
-this case: 'abc') in the 'recipes' folder of the 'staged-recipes'
-directory. This folder will contain the <code>meta.yaml</code> file and also
-the license file if the package includes a license in the PyPI
-distribution.</p>
-</li>
-<li class="">
-<p>Go through the generated <code>meta.yaml</code> file. For simpler packages, the
-generated recipes are nearly perfect, but for some packages you
-might need to make certain tweaks.</p>
-</li>
-<li class="">
-<p>Commit and push the changes. <code>git add recipe/abc/meta.yaml</code>
-<code>git commit -m "add a commit message"</code> <code>git push</code></p>
-</li>
-<li class="">
-<p>Create a PR.</p>
-</li>
-<li class="">
-<p>Once the CI is passing, post a comment saying:
-<code>This is ready for review</code> <code>@conda-forge-admin, please ping team</code></p>
-</li>
-</ol>
-<p>Once the PR gets merged, your package will be available on the
-conda-forge channel. Tada! It's that easy.</p>]]></content:encoded>
-            <category>grayskull</category>
-            <category>outreachy</category>
         </item>
     </channel>
 </rss>
