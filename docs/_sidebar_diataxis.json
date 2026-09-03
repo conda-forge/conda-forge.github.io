@@ -90,6 +90,11 @@
             "type": "doc",
             "label": "Use CMake",
             "id": "how-to/basics/cmake"
+          },
+          {
+            "type": "doc",
+            "label": "Create noarch packages",
+            "id": "how-to/basics/noarch"
           }
         ]
       },
@@ -110,6 +115,11 @@
             "type": "doc",
             "label": "Enable additional architectures",
             "id": "how-to/advanced/enable-archs"
+          },
+          {
+            "type": "doc",
+            "label": "Advanced noarch topics",
+            "id": "how-to/advanced/noarch"
           },
           {
             "type": "doc",
@@ -170,6 +180,10 @@
             "type": "doc",
             "label": "Self-hosted runners",
             "id": "how-to/advanced/self-hosted-runners"
+          },
+          {
+            "type": "doc",
+            "id": "how-to/advanced/run-package-tests-off-ci"
           },
           {
             "type": "doc",
@@ -313,9 +327,9 @@
         "label": "Security",
         "items": [
           {
-            "type": "link",
+            "type": "doc",
             "label": "General considerations",
-            "href": "/docs/maintainer/knowledge_base/#security-considerations-for-conda-forge-builds"
+            "id": "maintainer/security/general-considerations"
           }
         ]
       },
@@ -365,10 +379,22 @@
   {
     "type": "category",
     "label": "Reference",
+    "link": {
+      "type": "doc",
+      "id": "reference/index"
+    },
     "items": [
       {
         "type": "ref",
         "id": "maintainer/infrastructure"
+      },
+      {
+        "type": "ref",
+        "id": "reference/runners"
+      },
+      {
+        "type": "ref",
+        "id": "maintainer/linter"
       },
       {
         "type": "ref",
@@ -382,7 +408,7 @@
       {
         "type": "link",
         "label": "Ongoing migrations",
-        "href": "/status/#migrations"
+        "href": "/status/"
       },
       {
         "type": "ref",

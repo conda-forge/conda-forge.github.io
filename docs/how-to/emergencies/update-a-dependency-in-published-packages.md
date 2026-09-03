@@ -19,7 +19,7 @@ packages built will have the correct dependencies.
 
 For example, let's assume that we are changing a dependency in `sympy-feedstock` from:
 
-```recipe title="meta.yaml (old)"
+```recipe title="The recipe (prior to update)"
 build:
   number: 2
   # ...
@@ -31,7 +31,7 @@ requirements:
 
 to:
 
-```recipe title="meta.yaml (new)"
+```recipe title="The recipe (updated)"
 build:
   number: 3
   # ...

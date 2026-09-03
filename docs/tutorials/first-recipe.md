@@ -122,7 +122,7 @@ you change the version, you won't have to update both the package version and th
 build:
   number: 0
   noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: ${{ PYTHON }} -m pip install . -vv
 ```
 
 Here, three important bits of information are specified:
@@ -133,7 +133,8 @@ Here, three important bits of information are specified:
 2. The `noarch` key that indicates that we're building a pure Python package, and so we do not need
    to build separate packages for different conda-forge platforms and Python versions.
 3. The actual build command invocation. We're using the Python package manager `pip` to build
-   and install our package into the workspace. We are passing `--no-deps` to stop `pip` from trying
+   and install our package into the workspace.
+   Note that `rattler-build` is automatically passing `--no-deps` to stop `pip` from trying
    to automatically install its dependencies (they are already preinstalled in the environment), and
    `--no-build-isolation` to make the build use our build environment rather than creating a new
    one.

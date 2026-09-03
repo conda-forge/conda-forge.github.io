@@ -1,0 +1,212 @@
+---
+tags: [howto, advanced, noarch]
+---
+
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+# Advanced noarch topics
+
+## Building noarch packages on other platforms
+
+By default, `noarch` packages are built on Linux, and all dependencies must be available on Linux.
+If a `noarch` package cannot be built on Linux, one or more `noarch_platforms` can be provided in `conda-forge.yml`.
+For example, a package that can only be built on Windows can use the following `conda-forge.yml`:
+
+```yaml title="conda-forge.yml"
+noarch_platforms:
+- win-64
+```
+
+A more complex example is [pywin32-on-windows](https://github.com/conda-forge/pywin32-on-windows-feedstock), which is built both on Linux and Windows, with `build_number` offsets to create a pair of packages.
+
+## noarch packages with OS-specific dependencies
+
+It is possible to build `noarch` packages with runtime requirements that depend on the target OS
+(Linux, Windows, MacOS), regardless the architecture (amd64, ARM, PowerPC, etc). This approach
+relies on two concepts:
+
+1. [Virtual packages](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html).
+   Prefixed with a double underscore, they are used by conda to represent system properties as
+   constraints for the solver at install-time. We will use `__linux`, `__win` or `__osx`,
+   which are only present when the running platform is Linux, Windows, or MacOS, respectively.
+   `__unix` is present in both Linux and MacOS. Note that this feature is **only fully available
+   on conda 4.10 or above**.
+2. `conda-forge.yml`'s [noarch_platforms](/docs/maintainer/conda_forge_yml.mdx#noarch-platforms) option.
+
+The idea is to generate **different variants** of a `noarch` package.
+While all of these variants are `noarch` and therefore are visible on all platforms, they feature a dependency on the OS-specific virtual package such as `__linux` that make them not installable on other platforms.
+The resolver automatically selects the variant with the compatible virtual package, or throws an error if no compatible package can be found.
+
+Let's say you have a pure Python package, perfectly eligible for `noarch: python`, but on Windows it requires `windows-only-dependency`.
+A platform-specific recipe could look like the following:
+
+<RecipeTabs>
+
+```recipe title="recipe/meta.yaml (arch-specific)"
+name: package
+source:
+  # ...
+build:
+  number: 0
+requirements:
+  # ...
+  run:
+    - python
+    - numpy
+    - windows-only-dependency  # [win]
+```
+
+```recipe title="recipe/recipe.yaml (arch-specific)"
+name: package
+source:
+  # ...
+build:
+  number: 0
+requirements:
+  # ...
+  run:
+    - python
+    - numpy
+    - if: win
+      then: windows-only-dependency
+```
+
+</RecipeTabs>
+
+With this recipe, the build matrix will include separate builds for every supported platform, and for every supported Python version on every platform.
+All the built package will have the same contents, and only `win-64` packages will have different dependencies (though they still will be duplicated across all Python versions).
+
+We can get it down to two packages if replace it with this other approach:
+
+<RecipeTabs>
+
+```recipe title="recipe/meta.yaml (noarch)"
+name: package
+source:
+  # ...
+build:
+  number: 0
+  noarch: python
+requirements:
+  host:
+    - python {{ python_min }}.*
+    # ...
+  run:
+    - python >={{ python_min }}
+    - numpy
+    - __unix  # [unix]
+    - __win   # [win]
+    - windows-only-dependency  # [win]
+```
+
+```recipe title="recipe/recipe.yaml (noarch)"
+name: package
+source:
+  # ...
+build:
+  number: 0
+  noarch: python
+requirements:
+  host:
+    - python {{ python_min }}.*
+    # ...
+  run:
+    - python >={{ python_min }}
+    - numpy
+    - if: unix
+      then:
+        - __unix
+      else:
+        - __win
+        - windows-only-dependency
+```
+
+</RecipeTabs>
+
+:::warning[Important]
+
+Do not forget to enumerate all platforms in your selectors, **including virtual package
+dependencies**! For OS-specific builds, the solver requires virtual packages to be
+present in the runtime requirements in order to select the correct package for your
+platform.
+
+For example, if you have a `windows-only-dependency` as in the example above, but you
+forget to enumerate the unix selector and virtual package, the result will be two noarch
+builds: the Windows build will include a virtual package (`__win`), and the other
+will include no virtual packages. The latter package, **without
+`windows-only-dependency`**, can be selected by the solver on any OS, including Windows.
+
+:::
+
+By default, conda-forge will only build `noarch` packages on a `linux_64` CI runner, so
+only the `unix` selector would be true. However, we can change this behaviour using
+the `noarch_platforms` option in `conda-forge.yml`:
+
+```yaml title="conda-forge.yml"
+noarch_platforms:
+  - linux_64
+  - win_64
+```
+
+Once [rerendered](../basics/rerender.md), this will result in two CI jobs.
+
+If you need conditional dependencies on all three operating systems, this is how you do it:
+
+<RecipeTabs>
+
+```recipe
+name: package
+source:
+  # ...
+build:
+  number: 0
+  noarch: python
+requirements:
+  # ...
+  run:
+    - python >={{ python_min }}
+    - numpy
+    - __linux  # [linux]
+    - __osx    # [osx]
+    - __win    # [win]
+    - linux-only-dependency    # [linux]
+    - osx-only-dependency      # [osx]
+    - windows-only-dependency  # [win]
+```
+
+```recipe
+name: package
+source:
+  # ...
+build:
+  number: 0
+  noarch: python
+requirements:
+  # ...
+  run:
+    - python >={{ python_min }}
+    - numpy
+    - if: linux
+      then:
+        - __linux
+        - linux-only-dependency
+    - if: osx
+      then:
+        - __osx
+        - osx-only-dependency
+    - if: win
+      then:
+        - __win
+        - windows-only-dependency
+```
+
+</RecipeTabs>
+
+```yaml title="conda-forge.yml"
+noarch_platforms:
+  - linux_64
+  - osx_64
+  - win_64
+```
+
+Again, remember to rerender after adding / modifying these files so the changes are applied.

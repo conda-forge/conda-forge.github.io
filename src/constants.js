@@ -38,6 +38,16 @@ export const urls = {
       link: "https://status.dev.azure.com/",
       title: "Azure DevOps",
     },
+    blacksmith: {
+      api: "https://status.blacksmith.sh/v2/components.json",
+      link: "https://status.blacksmith.sh",
+      title: "Blacksmith.sh",
+    },
+    depot: {
+      api: "https://status.depot.dev/proxy/status.depot.dev",
+      link: "https://status.depot.dev",
+      title: "Depot.dev",
+    },
     // circle: {
     //   api: "https://status.circleci.com/api/v2/status.json",
     //   link: "https://status.circleci.com",
@@ -52,6 +62,11 @@ export const urls = {
       api: "https://www.githubstatus.com/api/v2/status.json",
       link: "https://www.githubstatus.com/",
       title: "GitHub",
+    },
+    namespace: {
+      api: "https://namespace-status.com/proxy/namespace-status.com",
+      link: "https://namespace-status.com/",
+      title: "Namespace.so",
     },
     prefix_dev: {
       api: "https://status.prefix.dev/api/getMonitorDetails/status.conda-forge.org?m=798888560",
@@ -82,18 +97,18 @@ export const urls = {
     "https://raw.githubusercontent.com/conda-forge/by-the-numbers/main/data/live_counts.json",
   migrations: {
     details:
-      "https://raw.githubusercontent.com/regro/cf-graph-countyfair/master/status/migration_json/<NAME>.json",
+      "https://raw.githubusercontent.com/conda-forge/conda-forge-bot-data/main/status/migration_json/<NAME>.json",
     graph:
-      "https://raw.githubusercontent.com/regro/cf-graph-countyfair/master/status/migration_svg/<NAME>.svg?sanitize=true",
+      "https://raw.githubusercontent.com/conda-forge/conda-forge-bot-data/main/status/migration_svg/<NAME>.svg?sanitize=true",
     status: {
       closed:
-        "https://raw.githubusercontent.com/regro/cf-graph-countyfair/master/status/closed_status.json",
+        "https://raw.githubusercontent.com/conda-forge/conda-forge-bot-data/main/status/closed_status.json",
       longterm:
-        "https://raw.githubusercontent.com/regro/cf-graph-countyfair/master/status/longterm_status.json",
+        "https://raw.githubusercontent.com/conda-forge/conda-forge-bot-data/main/status/longterm_status.json",
       paused:
-        "https://raw.githubusercontent.com/regro/cf-graph-countyfair/master/status/paused_status.json",
+        "https://raw.githubusercontent.com/conda-forge/conda-forge-bot-data/main/status/paused_status.json",
       regular:
-        "https://raw.githubusercontent.com/regro/cf-graph-countyfair/master/status/regular_status.json",
+        "https://raw.githubusercontent.com/conda-forge/conda-forge-bot-data/main/status/regular_status.json",
     },
   },
   repos: {
@@ -107,11 +122,11 @@ export const urls = {
           "https://github.com/conda-forge/conda-forge.github.io/actions?query=workflow%3Adeploy",
       },
       {
-        name: "autotick bot",
-        link: "https://github.com/regro/cf-scripts",
+        name: "conda-forge-bot",
+        link: "https://github.com/conda-forge/conda-forge-bot",
         badge:
-          "https://github.com/regro/cf-scripts/actions/workflows/bot-bot.yml/badge.svg",
-        badgeLink: "https://github.com/regro/cf-scripts/actions",
+          "https://github.com/conda-forge/conda-forge-bot/actions/workflows/bot-bot.yml/badge.svg",
+        badgeLink: "https://github.com/conda-forge/conda-forge-bot/actions",
       },
       {
         name: "feedstock creation",
@@ -143,7 +158,7 @@ export const urls = {
     usage: "https://conda-forge.herokuapp.com/status-monitor/report/travis-ci",
   },
   versions: {
-    api: "https://raw.githubusercontent.com/regro/cf-graph-countyfair/master/status/version_status.v2.json",
+    api: "https://raw.githubusercontent.com/conda-forge/conda-forge-bot-data/main/status/version_status.v2.json",
     pr: "https://github.com/conda-forge/<NAME>-feedstock/tree/main/recipe",
   },
   schemas: {

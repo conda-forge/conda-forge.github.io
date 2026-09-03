@@ -76,11 +76,11 @@ When a new version of a package is released on PyPI/CRAN/.., we have a bot that 
 
 ##### **How does regro-cf-autotick-bot create automatic version updates?**
 
-The [regro-cf-autotick-bot](https://github.com/regro/autotick-bot) continuously searches on a loop for any PyPI releases, GitHub releases, and any other sources of versions when any updates are released. The source code that gets executed in the loop comes from the [cf-scripts repository](https://github.com/regro/cf-scripts), which contains the code to detect versions and submit PRs.
-Visit [cf-scripts](https://github.com/regro/cf-scripts/blob/main/README.md) to read more about it.
+The [regro-cf-autotick-bot](https://github.com/conda-forge/conda-forge-bot) continuously searches on a loop for any PyPI releases, GitHub releases, and any other sources of versions when any updates are released. The source code that gets executed in the loop comes from the [conda-forge-bot repository](https://github.com/conda-forge/conda-forge-bot), which contains the code to detect versions and submit PRs.
+Visit [conda-forge-bot](https://github.com/conda-forge/conda-forge-bot/blob/main/README.md) to read more about it.
 
 The bot creates updates via inspection of the upstream release and will always update the `source` section and build version in the [recipe metadata](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#).
-As an experimental feature, the autotick bot can also be configured to verify or update the recipe's requirements for [Grayskull](https://github.com/conda-incubator/grayskull)-compatible recipes.
+As an experimental feature, the conda-forge-bot can also be configured to verify or update the recipe's requirements for [Grayskull](https://github.com/conda-incubator/grayskull)-compatible recipes.
 This may help maintain packages with frequent requirements changes or specific requirements version pins, however this feature is not as extensively verified and proposed updates should be reviewed.
 (See the [bot](conda_forge_yml.mdx#bot) section in `conda-forge.yml`)
 
@@ -305,7 +305,7 @@ In these cases, the bot can be confused, consider subsequent releases as older t
 You can check which version the bot detected by looking in the metadata that it collected, which is conveniently available in its own Github repo.
 To deal with the large number of packages, the information is sharded (i.e. split into several subdirectories) according to some hash function,
 which makes it a bit challenging to find.
-The best way is to use Github search with the query [`repo:regro/cf-graph-countyfair path:version_pr_info/**/amrex.json`](https://github.com/search?q=repo%3Aregro%2Fcf-graph-countyfair+path%3Aversion_pr_info%2F**%2Famrex.json&type=code), where you should replace `amrex` with the name of your own package.
+The best way is to use Github search with the query [`repo:conda-forge/conda-forge-bot-data path:version_pr_info/**/amrex.json`](https://github.com/search?q=repo%3Aconda-forge%2Fconda-forge-bot-data+path%3Aversion_pr_info%2F**%2Famrex.json&type=code), where you should replace `amrex` with the name of your own package.
 This will lead you to a file looking like:
 
 ```json

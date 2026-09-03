@@ -93,7 +93,7 @@ build:
   # Uncomment the following line if the package is pure Python and the recipe
   # is exactly the same for all platforms. It is okay if the dependencies are
   # not built for all platforms/versions, although selectors are still not allowed.
-  # See https://conda-forge.org/docs/maintainer/knowledge_base.html#noarch-python
+  # See https://conda-forge.org/docs/how-to/basics/noarch/#noarch-python
   # for more details.
   # noarch: python
 

@@ -67,7 +67,7 @@ There are, currently, three ways to generate a recipe:
    You do _not_ necessarily have to use `grayskull`, and the recipes produced by `grayskull` might need to be reviewed and edited.
    Read more about `grayskull` and how to use it [here](https://github.com/conda-incubator/grayskull#introduction).
 
-3. If it's none of the above, generate a recipe with the help of [the example v1 recipe](https://github.com/conda-forge/staged-recipes/tree/main/recipes/example-v1) (or [the example v0 recipe](https://github.com/conda-forge/staged-recipes/tree/main/recipes/example), if you wish to use the v0 format) in the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and modify it as necessary.
+3. If it's none of the above, generate a recipe with the help of [the example v1 recipe](https://github.com/conda-forge/staged-recipes/tree/main/recipes/example-v1) in the [staged-recipes repository](https://github.com/conda-forge/staged-recipes) and modify it as necessary.
 
 Your final recipe should have no comments (unless they're actually relevant to the recipe, and not generic instruction comments), and follow the order in the example.
 
@@ -393,7 +393,7 @@ You can e.g. specify not to build …
 
   ```recipe
   build:
-      skip: match(python, "<3.12)
+      skip: match(python, "<3.12")
   ```
   </RecipeTabs>
 
@@ -454,8 +454,8 @@ These options should be used to ensure a clean installation of the package witho
 dependencies. This helps make sure that we're only including this package,
 and not accidentally bringing any dependencies along into the conda package.
 
-Usually pure-Python packages only require `python`, `setuptools` and `pip`
-as `host` requirements; the real package dependencies are only
+Usually pure-Python packages only require `python`, a build system (e.g. `setuptools`),
+and `pip` as `host` requirements; the real package dependencies are only
 `run` requirements.
 
 <a id="requirements"></a>
@@ -551,7 +551,7 @@ requirements:
     - libawesome 1.1.*
 ```
 
-For more information on pinning, please refer to [Pinned dependencies](pinning_deps.md#pinned-deps).
+For more information on pinning, please refer to [Pinned dependencies](pinning_deps.mdx).
 
 <a id="constraining-packages-at-runtime"></a>
 
