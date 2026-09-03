@@ -9,12 +9,12 @@ install = { cmd = "npm install", description = "Install Node packages."}
 start = { cmd = "npm run start", description = "Live-reload deployment for local development.", depends-on = ["install"]}
 build-production = { cmd = "bash ./.ci_scripts/update_docs", description = "Build site for production." }
 serve-production = { cmd = "python -m http.server -d build/", description = "Serve site built for production." }
-lint = { cmd = "pre-commit run --all-files", description = "Run pre-commit hooks to lint the codebase." }
+lint = { cmd = "prek run --all-files", description = "Run prek hooks to lint the codebase." }
 
 [dependencies]
 curl = "*"
 nodejs = "24.*"
-pre-commit = "*"
+prek = ">=0.5.0,<1.0"
 python = "3.*"
 requests = "*"
 
