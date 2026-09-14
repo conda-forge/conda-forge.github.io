@@ -11,6 +11,6 @@ feedstock without causing inadvertent package uploads. Second, for version
 or ABI branches on feedstocks, the `conda-forge.yml` file on the branch will need to
 specify the configuration value `upload_on_branch` with the name of the branch
 in order for uploads to take place. During the deprecation period, we will be
-automatically adjusting the configuration of non-`main` feedstock branches to ensure uploads still work. After the deprecation
-period, uploads from non-`main` branches where the `upload_on_branch` value is
-not specified will fail.
+automatically adjusting the configuration of non-`main` feedstock branches to ensure
+uploads still work. After the deprecation period, uploads from non-`main` branches
+where the `upload_on_branch` value is not specified will fail.
