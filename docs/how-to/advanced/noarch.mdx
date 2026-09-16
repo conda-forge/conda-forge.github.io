@@ -210,3 +210,133 @@ noarch_platforms:
 ```
 
 Again, remember to rerender after adding / modifying these files so the changes are applied.
+
+## Testing noarch packages with multiple Python versions.
+
+Normally, the whole build and testing process for a `noarch: python` package is run using a single Python version, usually `python_min`.
+As a special case, v1 recipes support specifying multiple Python versions for smoke testing, via the `tests[].python.python_version` key.
+However, in some cases it may be reasonable to run the upstream test suite using multiple Python versions to ensure that the package works correctly with all of them.
+
+It is possible to achieve this by splitting the tests into a separate output that's not `noarch: python`.
+The main package will still be built as a single `noarch: python` package, using the oldest supported Python version.
+However, the test subpackage will now be built in multiple variants, one for every supported Python version.
+The tests will be run separately for every variant, ensuring that all Python versions are tested.
+
+<RecipeTabs>
+
+```recipe
+{% set version = "1.0.4" %}
+
+package:
+  name: xmltodict-split
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/x/xmltodict/xmltodict-{{ version }}.tar.gz
+  sha256: 6d94c9f834dd9e44514162799d344d815a3a4faec913717a9ecbfa5be1bb8e61
+
+build:
+  number: 0
+
+outputs:
+  - name: xmltodict
+    build:
+      noarch: python
+      # In multi-output v0 recipes, PYTHON will be undefined during some of the rendering passes.
+      # Add a fallback to prevent conda-smithy from failing.
+      script: {{ PYTHON | default('python') }} -m pip install . -vv --no-deps --no-build-isolation
+    requirements:
+      host:
+        - python {{ python_min }}.*
+        - setuptools >=77.0.3
+        - pip
+      run:
+        - python >={{ python_min }}
+    test:
+      imports:
+        - xmltodict
+      commands:
+        - pip check
+      requires:
+        - pip
+        - python {{ python_min }}.*
+
+  - name: xmltodict-tests
+    build:
+      noarch: generic
+    requirements:
+      host:
+        # python needs to be an explicit host dependency to create variants.
+        - python
+      run:
+        - {{ pin_subpackage('xmltodict', exact=True) }}
+    test:
+      commands:
+        - pytest tests/
+      source_files:
+        - tests/
+      requires:
+        - pytest
+```
+
+```recipe
+schema_version: 1
+
+context:
+  version: "1.0.4"
+
+recipe:
+  name: xmltodict-split
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/x/xmltodict/xmltodict-${{ version }}.tar.gz
+  sha256: 6d94c9f834dd9e44514162799d344d815a3a4faec913717a9ecbfa5be1bb8e61
+
+build:
+  number: 0
+
+outputs:
+  - package:
+      name: xmltodict
+    build:
+      noarch: python
+      script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    requirements:
+      host:
+        - python ${{ python_min }}.*
+        - setuptools >=77.0.3
+        - pip
+      run:
+        - python >=${{ python_min }}
+    tests:
+      - python:
+          imports:
+            - xmltodict
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - "*"
+
+  - package:
+      name: xmltodict-tests
+    build:
+      noarch: generic
+    requirements:
+      host:
+        # python needs to be an explicit host dependency to create variants.
+        - python
+      run:
+        - ${{ pin_subpackage('xmltodict', exact=True) }}
+    tests:
+      - files:
+          source:
+            - tests/
+        requirements:
+          run:
+            - pytest
+        script:
+          - pytest tests/
+```
+
+</RecipeTabs>
