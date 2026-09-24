@@ -264,8 +264,8 @@ headers and the library itself come from the same place. The header search order
 3. `$CONDA_PREFIX/include`
 4. `/usr/local/include`
 5. `/usr/include/<target>` if it exists (like on Debian)
-5. `/usr/include`
-6. directories passed with `-idirafter`
+6. `/usr/include`
+7. directories passed with `-idirafter`
 
 `conda-gcc-specs` is meant as a convenience for local use. conda-forge
 recipes shouldn't rely on it. Inside conda-build and rattler-build, the
