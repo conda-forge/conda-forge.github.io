@@ -2,11 +2,135 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/blog/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2026-09-03T00:00:00.000Z</updated>
+    <updated>2026-09-15T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/blog/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Bringing RISC-V to conda-forge]]></title>
+        <id>https://conda-forge.org/blog/2026/09/15/riscv64/</id>
+        <link href="https://conda-forge.org/blog/2026/09/15/riscv64/"/>
+        <updated>2026-09-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[conda-forge now has an early, working linux-riscv64 platform. If you have]]></summary>
+        <content type="html"><![CDATA[<p>conda-forge now has an early, working <code>linux-riscv64</code> platform. If you have
+access to a <code>riscv64</code> machine (or an emulator), you can already try it out:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token function" style="color:#d73a49">curl</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-L</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-O</span><span class="token plain"> https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-riscv64.sh</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">bash</span><span class="token plain"> Miniforge3-Linux-riscv64.sh</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">conda </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> python</span><br></div></code></pre></div></div>
+<p>That last command actually solves and installs today, giving you a native
+<code>linux-riscv64</code> Python built entirely on conda-forge infrastructure.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-this-got-started">How this got started<a href="https://conda-forge.org/blog/2026/09/15/riscv64/#how-this-got-started" class="hash-link" aria-label="Direct link to How this got started" title="Direct link to How this got started" translate="no">​</a></h2>
+<p>Interest in RISC-V support has come up on and off for a while, but it started
+moving in earnest after outreach on
+<a href="https://conda-forge.zulipchat.com/#narrow/channel/457337-general/topic/Bringing.20conda-forge.20to.20RISC-V.20.28We.20have.20a.20working.20miniforge/with/555198090" target="_blank" rel="noopener noreferrer" class="">Zulip</a>
+and a presentation from the OpenKylin community at the core call on
+<a href="https://github.com/conda-forge/conda-forge.github.io/blob/main/community/minutes/2025-11-12.md" target="_blank" rel="noopener noreferrer" class="">2025-11-12</a>.
+conda-forge/core was generally supportive, and the OpenKylin folks committed
+real, full-time engineering effort (Tianxiang Bian, Jiankang Li and Ruian
+Zhan, later joined by Chenguang Ding and Zhuoheng Li) to help push the
+platform through. All of this is being tracked in
+<a href="https://github.com/conda-forge/conda-forge.github.io/issues/1744" target="_blank" rel="noopener noreferrer" class="">conda-forge.github.io#1744</a>,
+which is a good read if you want the blow-by-blow.</p>
+<p>Two decisions were made early on:</p>
+<ul>
+<li class="">A <code>conda-forge/help-riscv64</code> team was formed so there'd be people
+responding quickly to CI failures on this new platform, the same pattern we
+use for every new platform.</li>
+<li class="">Rather than chase the newer <code>RVA23</code> profile from day one, we're building
+for the more conservative <code>rv64gc</code> baseline, the same one Ubuntu 24.04
+targets. <code>RVA23</code> is a superset, so this is not a fork of the ABI, just
+starting from a safer, more broadly compatible point and upgrading later
+once there's a need.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="bootstrapping-again-via-cross-compilation">Bootstrapping, again, via cross-compilation<a href="https://conda-forge.org/blog/2026/09/15/riscv64/#bootstrapping-again-via-cross-compilation" class="hash-link" aria-label="Direct link to Bootstrapping, again, via cross-compilation" title="Direct link to Bootstrapping, again, via cross-compilation" translate="no">​</a></h2>
+<p>Every time conda-forge has added a new platform — <code>osx-arm64</code> in 2020,
+<code>win-arm64</code> more recently — we've followed the same recipe: cross-compile
+from an existing platform until the new platform can build its own compilers
+and build tools, and only then start building everything else natively (or
+migrate to native CI, in win-arm64's case). RISC-V is no exception.</p>
+<p>The toolchain work happened in the usual feedstocks:</p>
+<ul>
+<li class=""><a href="https://github.com/conda-forge/linux-sysroot-feedstock" target="_blank" rel="noopener noreferrer" class=""><code>linux-sysroot-feedstock</code></a>
+for the <code>riscv64</code> sysroot and kernel headers (targeting glibc 2.39, since
+AlmaLinux doesn't currently ship <code>riscv64</code> packages but RockyLinux does)</li>
+<li class=""><a href="https://github.com/conda-forge/binutils-feedstock" target="_blank" rel="noopener noreferrer" class=""><code>binutils-feedstock</code></a>
+for the assembler/linker</li>
+<li class=""><a href="https://github.com/conda-forge/ctng-compilers-feedstock" target="_blank" rel="noopener noreferrer" class=""><code>ctng-compilers-feedstock</code></a>
+for cross GCC/G++/gfortran (<code>#205</code>), and later the cross-<em>native</em> compilers
+that actually run on <code>riscv64</code> (<code>#216</code>)</li>
+<li class=""><a href="https://github.com/conda-forge/ctng-compiler-activation-feedstock" target="_blank" rel="noopener noreferrer" class=""><code>ctng-compiler-activation-feedstock</code></a>
+for the small activation meta-packages</li>
+</ul>
+<p>With those in place, the classic bootstrapping sequence played out: build a
+cross-compiler on <code>linux-64</code> targeting <code>riscv64</code>, use it to build a
+cross-<em>native</em> compiler, then use QEMU emulation (via
+<code>qemu-execve-feedstock</code>, which needed a
+<a href="https://github.com/conda-forge/docker-images/issues/320" target="_blank" rel="noopener noreferrer" class="">docker-images update</a>
+to bring in a newer QEMU) to test the handful of packages needed to get
+<code>micromamba</code> and <code>conda</code>/<code>mamba</code>/<code>rattler-build</code>/<code>pixi</code>/<code>python</code> themselves
+building. <code>rust_linux-riscv64</code> is still being finished off.</p>
+<p>Once that base was solid, we opened up the full
+<a href="https://conda-forge.org/status/migration/?name=supportlinuxriscv64platform" target="_blank" rel="noopener noreferrer" class=""><code>supportlinuxriscv64platform</code></a>
+migration, seeded from the explicit package list in
+<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migration_support/linux_riscv64.txt" target="_blank" rel="noopener noreferrer" class="">conda-forge-pinning-feedstock</a>
+and driven by the regro bot the same way every other platform migration is.
+<code>python-feedstock#896</code> landing was the big unlock — it broke through the
+largest cluster of blocked dependents. As of today there are already north of
+500 distinct packages built for <code>linux-riscv64</code> on the <code>conda-forge</code> channel,
+and the list keeps growing every day.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="miniforge">Miniforge<a href="https://conda-forge.org/blog/2026/09/15/riscv64/#miniforge" class="hash-link" aria-label="Direct link to Miniforge" title="Direct link to Miniforge" translate="no">​</a></h2>
+<p><a href="https://github.com/conda-forge/miniforge/pull/899" target="_blank" rel="noopener noreferrer" class=""><code>miniforge#899</code></a> added
+<code>linux-riscv64</code> support to Miniforge alongside a bump to conda 26.7.2 and
+mamba 2.9.0, and it shipped in the
+<a href="https://github.com/conda-forge/miniforge/releases/tag/26.7.2-0" target="_blank" rel="noopener noreferrer" class="">26.7.2-0 release</a>,
+which includes a <code>Miniforge3-Linux-riscv64.sh</code> installer. That's the
+installer used at the top of this post, and <code>conda install python</code> on a bare
+<code>linux-riscv64</code> container really does work with it today.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-next-native-ci-runners">What's next: native CI runners<a href="https://conda-forge.org/blog/2026/09/15/riscv64/#whats-next-native-ci-runners" class="hash-link" aria-label="Direct link to What's next: native CI runners" title="Direct link to What's next: native CI runners" translate="no">​</a></h2>
+<p>All of the above still happens on <code>linux-64</code> machines, cross-compiling. That
+has always been a bootstrapping phase, not the destination — the same as it
+was for <code>osx-arm64</code> and <code>win-arm64</code>. Once we have a self-sufficient native
+toolchain (native GCC built <em>on</em> <code>riscv64</code>, not just cross-built <em>for</em> it) and
+enough of the base stack to run our build agents, the plan is to move
+<code>linux-riscv64</code> CI onto real native hardware instead of cross-compiling
+everything from <code>linux-64</code>. We recently merged two of the remaining essential
+components for this, the native <a href="https://github.com/conda-forge/docker-images/pull/337" target="_blank" rel="noopener noreferrer" class="">docker images</a>
+and <a href="https://github.com/conda-forge/conda-forge-ci-setup-feedstock/pull/436" target="_blank" rel="noopener noreferrer" class=""><code>conda-forge-ci-setup</code></a>.</p>
+<p>For the actual agents on which to execute runs, we have two promising offers on the table:</p>
+<ul>
+<li class=""><a href="https://riseproject.dev/" target="_blank" rel="noopener noreferrer" class="">RISE</a>, a Linux Foundation project focused on the
+RISC-V software ecosystem, runs a free-to-use pool of
+<a href="https://riscv-runners.riseproject.dev/" target="_blank" rel="noopener noreferrer" class="">RISC-V GitHub Actions runners</a>
+already used by projects like llama.cpp, PyTorch, and CNCF, with newer
+<code>RVA23</code> hardware on the way.</li>
+<li class="">The OpenKylin community has offered an OpenStack-based <code>riscv64</code> build
+cluster of their own.</li>
+</ul>
+<p>Neither is wired into conda-forge's CI yet — conda-forge's build matrix for
+linux runs on Github Actions (see the
+<a href="https://conda-forge.org/docs/maintainer/infrastructure/#ci-build-services" target="_blank" rel="noopener noreferrer" class="">CI build services docs</a>),
+so there's real integration work ahead to plug native <code>riscv64</code> runners into
+that pipeline, whichever provider(s) we end up using. That work will start in
+earnest once the native compiler toolchain is further along, and help is very
+welcome, whether that's runner integration, feedstock fixes, or just watching
+CI on the <a href="https://conda-forge.org/status/migration/?name=supportlinuxriscv64platform" target="_blank" rel="noopener noreferrer" class="">migration status page</a>
+and pinging <code>conda-forge/help-riscv64</code> when something breaks.</p>
+<p>Huge thanks to everyone who's pushed this forward so far: the OpenKylin team
+(Tianxiang Bian, Jiankang Li, Ruian Zhan, Chenguang Ding, Zhuoheng Li),
+for initial toolchain bring-up, Ludovic Henry and <code>velonica0</code> for debugging and fixing
+many, many feedstock PRs, RISE and OpenKylin for the compiler/runner work and offering
+native hardware, <code>conda-forge/core</code> and the individual conda-forge feedstock
+maintainers including Peter Williams and Pavel Zwerschke who reviewed and
+fixed the flood of feedstock PRs this migration produced.</p>]]></content>
+        <author>
+            <name>Isuru Fernando</name>
+            <uri>https://github.com/isuruf</uri>
+        </author>
+        <author>
+            <name>Axel Obermeier</name>
+            <uri>https://github.com/h-vetinari</uri>
+        </author>
+        <category label="infrastructure" term="infrastructure"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python 3.15.0rc1 on conda-forge, a leaner libpython, and a more unixy Windows layout]]></title>
         <id>https://conda-forge.org/blog/2026/09/03/python-315/</id>
@@ -1342,58 +1466,5 @@ for their contributions to the recipe</li>
             <uri>https://github.com/wolfv</uri>
         </author>
         <category label="conda-forge" term="conda-forge"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Travis CI Security Incident]]></title>
-        <id>https://conda-forge.org/blog/2021/09/24/travis-security/</id>
-        <link href="https://conda-forge.org/blog/2021/09/24/travis-security/"/>
-        <updated>2021-09-24T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[On September 9, 2021 one of our core devs discovered that artifacts]]></summary>
-        <content type="html"><![CDATA[<p>On September 9, 2021 one of our core devs discovered that artifacts
-building on Travis CI were being uploaded to our conda channel from PRs
-running on forked repositories. A quick investigation revealed that
-Travis CI was passing encrypted secrets to PR builds on forks. Further
-examination of our logs and artifacts indicated that this had been
-happening since about September 3, 2021. This security bug was
-subsequently confirmed by Travis CI. See this
-<a href="https://nvd.nist.gov/vuln/detail/CVE-2021-41077" target="_blank" rel="noopener noreferrer" class="">CVE</a> for more details
-on this incident. <strong>As far as we know, there were no actual exploits
-against conda-forge which used this vulnerability.</strong></p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="our-response">Our Response<a href="https://conda-forge.org/blog/2021/09/24/travis-security/#our-response" class="hash-link" aria-label="Direct link to Our Response" title="Direct link to Our Response" translate="no">​</a></h2>
-<p>We took the following steps to respond to this incident.</p>
-<ol>
-<li class="">We immediately turned off all builds on Travis CI by suspending the
-Travis CI GitHub App.</li>
-<li class="">We immediately disclosed the bug to Travis CI through our contacts
-there.</li>
-<li class="">Once Travis CI indicated to us that they were ready, we rotated all
-feedstock tokens and later our anaconda.org token for our staging
-channel. The anaconda.org token for the main <code>conda-forge</code> channel
-was never disclosed in this incident. Further, only ~70 feedstocks
-had their tokens exposed in this incident.</li>
-<li class="">We examined our artifacts and marked as broken any artifacts that
-were uploaded from PRs. We think we found everything, but we are not
-completely sure. Our criterion for marking things broken was more
-generous than it needed to be.</li>
-<li class="">We issued PRs to rebuild any broken artifacts via our bots.</li>
-<li class="">We put in changes to <code>conda-smithy</code> to help prevent inadvertent
-uploads of artifacts from PRs in the future.</li>
-</ol>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="closing-thoughts--what-can-you-do">Closing Thoughts &amp; What can you do?<a href="https://conda-forge.org/blog/2021/09/24/travis-security/#closing-thoughts--what-can-you-do" class="hash-link" aria-label="Direct link to Closing Thoughts &amp; What can you do?" title="Direct link to Closing Thoughts &amp; What can you do?" translate="no">​</a></h2>
-<p>I (MRB) want to recognize the quick work of our core dev team in
-handling this incident. It goes without saying that the public nature of
-<code>conda-forge</code>'s infrastructure carries risks. On the other hand, by
-being public, anyone can look and verify our artifact builds. Security
-for <code>conda-forge</code> is about reducing risk and we will continue to do our
-best.</p>
-<p>Our best defense against security incidents in <code>conda-forge</code> is <em>you</em>!
-Our feedstock maintainers are in the best position to notice incidents
-and issues. Please responsibly report anything you find to us at
-<code>condaforge+security@gmail.com</code>.</p>]]></content>
-        <author>
-            <name>Matthew R. Becker</name>
-            <uri>https://github.com/beckermr</uri>
-        </author>
-        <category label="security" term="security"/>
     </entry>
 </feed>
