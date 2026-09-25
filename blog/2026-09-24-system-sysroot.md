@@ -54,13 +54,17 @@ or newer. The `{{ stdlib("c") }}` in a recipe picks the sysroot version,
 and its `run_exports` adds the matching `__glibc` constraint to the
 package. See
 [Requiring newer `glibc` versions](/docs/maintainer/knowledge_base/#requiring-newer-glibc-versions)
-for details. The vendored sysroot also makes the compilers behave the same
-way on every distribution, and makes cross-compiling from `linux-64` to
-the other Linux architectures just a matter of installing another
-sysroot.
+for details.
+
+The vendored sysroot also makes the compilers behave the same
+way on every distribution making build reproducible since the headers
+used during compilation do not depend on the host system,
+I also makes cross-compiling from `linux-64` to the other Linux
+architectures just a matter of installing another sysroot.
 
 For building conda packages this is exactly what we want, and nothing is
 changing there.
+
 
 ## Compilers outside of conda-build
 
@@ -230,6 +234,7 @@ A few things to keep in mind:
 - The system sysroot is meant for native compilation. For cross-compiling,
   keep using the vendored `sysroot_<target>` packages, unless you have a
   sysroot for the target architecture installed in your system.
+- Using the system sysroot makes builds less reproducible.
 
 ## `conda-gcc-specs`
 
