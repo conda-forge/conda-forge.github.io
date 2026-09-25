@@ -168,10 +168,230 @@ If an existing python package qualifies to be converted to a noarch package, you
 
 ## noarch: generic
 
-:::info[Todo]
+`noarch: generic` is used for all the cases of packages that do not ship platform or architecture specific contents that are not covered by other `noarch:` types.
+Common cases include packages for the Perl and R programming languages, data-only packages, some metapackages.
+For a `noarch: generic` recipe, a single package is built for every defined variant and it is put into `noarch/` directory, making it available to all platforms.
 
-add some information on r packages which make heavy use of `noarch: generic`
+### Requirements
 
-:::
+In order to qualify as a `noarch: generic` package, all of the following criteria must be fulfilled:
+
+- The package contents must be invariant across all platforms.
+  - This means that the package must not compile any libraries, modules or executables.
+  - Typically, the package must not rely on platform-specific build scripts, unless they produce the same results.
+- No post-link or pre-link or pre-unlink scripts may be used.
+- The recipe must not use platform selectors.
+  <!-- TODO: discuss repodata v3 conditional dependencies when ready -->
+  - The advanced how-to explains how to express [OS-specific dependencies](../advanced/noarch.mdx#noarch-packages-with-os-specific-dependencies).
+
+### R packages
+
+Much like Python, the R programming language supports `noarch` packages that consist only of source code and bytecode that is not platform-specific.
+A typical `noarch` R recipe looks like the following:
+
+<RecipeTabs>
+
+```recipe
+{% set version = "1.5.0" %}
+
+package:
+  name: r-shades
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/shades_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/shades/shades_{{ version }}.tar.gz
+  sha256: 848398c2e1c10e9c95582841867bb3d1143ff8495047fab03313fe239feed2ac
+
+build:
+  number: 0
+  noarch: generic
+  script: $R CMD INSTALL --build .         # [unix]
+  script: "\"%R%\" CMD INSTALL --build ."  # [win]
+  script_env:
+    DISABLE_AUTOBREW: "1"
+
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  host:
+    - r-base
+  run:
+    - r-base
+
+test:
+  commands:
+    - $R -e "library('shades')"           # [not win]
+    - "\"%R%\" -e \"library('shades')\""  # [win]
+
+about:
+  home: https://github.com/jonclayden/shades
+  license: BSD-3-Clause
+  summary: Functions for easily manipulating colours, creating colour scales and calculating colour distances.
+  license_family: BSD
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/BSD_3_clause'
+    - LICENCE
+```
+
+```recipe
+schema_version: 1
+
+context:
+  version: "1.5.0"
+
+package:
+  name: r-shades
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/shades_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/shades/shades_${{ version }}.tar.gz
+  sha256: 848398c2e1c10e9c95582841867bb3d1143ff8495047fab03313fe239feed2ac
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    env:
+      DISABLE_AUTOBREW: "1"
+    content:
+      - if: unix
+        then: $R CMD INSTALL --build .
+        else: "\"%R%\" CMD INSTALL --build ."
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base
+  run:
+    - r-base
+
+tests:
+  - r:
+      libraries:
+        - shades
+
+about:
+  license: BSD-3-Clause
+  summary: Functions for easily manipulating colours, creating colour scales and calculating colour distances.
+  license_file:
+    - ${{ PREFIX }}/lib/R/share/licenses/BSD_3_clause
+    - LICENCE
+  homepage: https://github.com/jonclayden/shades
+```
+
+</RecipeTabs>
+
+Note that the example includes both Unix and Windows commands, even though normally it will only be built on Linux.
+This makes it easier to adapt for packages with platform-specific code.
+
+### Perl packages
+
+A typical `noarch` Perl recipe looks like the following:
+
+<RecipeTabs>
+
+```recipe
+{% set version = "2021.0814" %}
+
+package:
+  name: perl-text-tabs-wrap
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/A/AR/ARISTOTLE/Text-Tabs+Wrap-{{ version }}.tar.gz
+  sha256: 30bbea13a5f5ef446b676b4493644df0ea19fc6a70ff649a8beb64571dbf6dfa
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install VERBINST=1
+
+requirements:
+  build:
+    - make
+  host:
+    - perl
+    - perl-extutils-makemaker
+  run:
+    - perl
+
+test:
+  imports:
+    - Text::Tabs
+    - Text::Wrap
+
+about:
+  home: https://metacpan.org/dist/Text-Tabs+Wrap
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_family: OTHER
+  summary: 'Expand tabs and do simple line wrapping'
+  license_file:
+    - {{ environ["PREFIX"] }}/man/man1/perlartistic.1
+    - {{ environ["PREFIX"] }}/man/man1/perlgpl.1
+```
+
+```recipe
+schema_version: 1
+
+context:
+  version: "2021.0814"
+
+package:
+  name: perl-text-tabs-wrap
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/A/AR/ARISTOTLE/Text-Tabs+Wrap-${{ version }}.tar.gz
+  sha256: 30bbea13a5f5ef446b676b4493644df0ea19fc6a70ff649a8beb64571dbf6dfa
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install VERBINST=1
+
+requirements:
+  build:
+    - make
+  host:
+    - perl
+    - perl-extutils-makemaker
+  run:
+    - perl
+
+tests:
+  - perl:
+      uses:
+        - Text::Tabs
+        - Text::Wrap
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  summary: Expand tabs and do simple line wrapping
+  license_file:
+    - ${{ PREFIX }}/man/man1/perlartistic.1
+    - ${{ PREFIX }}/man/man1/perlgpl.1
+  homepage: https://metacpan.org/dist/Text-Tabs+Wrap
+```
+
+</RecipeTabs>
+
+### Further examples
 
 [Examples of recipes using `noarch: generic`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Arecipe+%22noarch%3A+generic%22+language%3AYAML&l=YAML)
