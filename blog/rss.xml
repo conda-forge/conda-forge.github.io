@@ -9,7 +9,7 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
-            <title><![CDATA[Using conda-forge compilers with your system's sysroot]]></title>
+            <title><![CDATA[Using conda-forge compilers with your system headers and libraries]]></title>
             <link>https://conda-forge.org/blog/2026/09/24/system-sysroot/</link>
             <guid>https://conda-forge.org/blog/2026/09/24/system-sysroot/</guid>
             <pubDate>Thu, 24 Sep 2026 00:00:00 GMT</pubDate>

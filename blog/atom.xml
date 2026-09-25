@@ -8,7 +8,7 @@
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[Using conda-forge compilers with your system's sysroot]]></title>
+        <title type="html"><![CDATA[Using conda-forge compilers with your system headers and libraries]]></title>
         <id>https://conda-forge.org/blog/2026/09/24/system-sysroot/</id>
         <link href="https://conda-forge.org/blog/2026/09/24/system-sysroot/"/>
         <updated>2026-09-24T00:00:00.000Z</updated>
