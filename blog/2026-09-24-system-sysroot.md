@@ -65,7 +65,6 @@ architectures just a matter of installing another sysroot.
 For building conda packages this is exactly what we want, and nothing is
 changing there.
 
-
 ## Compilers outside of conda-build
 
 More and more people use the conda-forge compilers outside of conda-build
