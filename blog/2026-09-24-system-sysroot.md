@@ -57,9 +57,9 @@ package. See
 for details.
 
 The vendored sysroot also makes the compilers behave the same
-way on every distribution making build reproducible since the headers
-used during compilation do not depend on the host system,
-I also makes cross-compiling from `linux-64` to the other Linux
+way on every distribution, making builds reproducible since the headers
+used during compilation do not depend on the host system.
+It also makes cross-compiling between different Linux
 architectures just a matter of installing another sysroot.
 
 For building conda packages this is exactly what we want, and nothing is
