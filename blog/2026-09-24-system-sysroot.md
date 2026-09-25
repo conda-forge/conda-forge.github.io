@@ -4,7 +4,7 @@ authors:
 tags: [infrastructure]
 ---
 
-# Using conda-forge compilers with your system's sysroot
+# Using conda-forge compilers with your system headers and libraries
 
 conda-forge's Linux compilers have always shipped with their own copy of
 glibc and the Linux kernel headers, known as the sysroot. With
