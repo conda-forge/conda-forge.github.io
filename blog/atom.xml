@@ -2,11 +2,242 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://conda-forge.org/blog/</id>
     <title>conda-forge | community-driven packaging for conda Blog</title>
-    <updated>2026-09-15T00:00:00.000Z</updated>
+    <updated>2026-09-24T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://conda-forge.org/blog/"/>
     <subtitle>conda-forge | community-driven packaging for conda Blog</subtitle>
     <icon>https://conda-forge.org/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Using conda-forge compilers with your system's sysroot]]></title>
+        <id>https://conda-forge.org/blog/2026/09/24/system-sysroot/</id>
+        <link href="https://conda-forge.org/blog/2026/09/24/system-sysroot/"/>
+        <updated>2026-09-24T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[conda-forge's Linux compilers have always shipped with their own copy of]]></summary>
+        <content type="html"><![CDATA[<p>conda-forge's Linux compilers have always shipped with their own copy of
+glibc and the Linux kernel headers, known as the sysroot. With
+<a href="https://github.com/conda-forge/linux-sysroot-feedstock/pull/101" target="_blank" rel="noopener noreferrer" class="">conda-forge/linux-sysroot-feedstock#101</a>
+you can now tell the conda-forge <code>gcc</code>, <code>g++</code> and <code>gfortran</code> compilers (and
+<code>clang</code>) to use the glibc and kernel headers already installed on your Linux
+distribution:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">conda create </span><span class="token parameter variable" style="color:#36acaa">-n</span><span class="token plain"> sys-cc </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge/label/sysroot_dev </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    gcc gxx gfortran system-linux-sysroot</span><br></div></code></pre></div></div>
+<p>This post covers why the conda-forge compilers carry a sysroot in the
+first place, why using the system one makes sense now, and the multi-year
+work that was needed before this was possible.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-the-conda-forge-compilers-come-with-a-sysroot">Why the conda-forge compilers come with a sysroot<a href="https://conda-forge.org/blog/2026/09/24/system-sysroot/#why-the-conda-forge-compilers-come-with-a-sysroot" class="hash-link" aria-label="Direct link to Why the conda-forge compilers come with a sysroot" title="Direct link to Why the conda-forge compilers come with a sysroot" translate="no">​</a></h2>
+<p>A sysroot is a directory that the compiler and linker treat as the root
+filesystem when they look for the C library headers (<code>stdio.h</code>,
+<code>pthread.h</code>, ...), the kernel headers (<code>linux/*.h</code>), and the C runtime
+objects and libraries (<code>crt1.o</code>, <code>libc.so</code>, <code>libm.so</code>, <code>libpthread.so</code>,
+...). For conda-forge's Linux compilers it is located at
+<code>$CONDA_PREFIX/&lt;triplet&gt;/sysroot</code>, for example
+<code>$CONDA_PREFIX/x86_64-conda-linux-gnu/sysroot</code>, and is provided by the
+<code>sysroot_linux-64</code> package (and its <code>aarch64</code>, <code>ppc64le</code>, <code>riscv64</code>
+and <code>s390x</code> equivalents).</p>
+<p>The sysroot is only used when compiling and linking. It is never used
+when running the executables and libraries created by the compiler. At
+run time, the dynamic loader loads the system's <code>libc.so.6</code>,
+<code>libm.so.6</code>, etc., just as it does for any other program on the system.
+The sysroot only decides which glibc headers and symbols the compiled
+code can use.</p>
+<p>conda-forge has always used a vendored sysroot because glibc is
+backwards compatible but not forwards compatible. A binary linked against
+glibc 2.28 may use symbols that don't exist in glibc 2.17, and would then
+fail to load on an older system. Building every package against the same
+old glibc, whatever the host OS of the CI machine or the maintainer's
+laptop is, makes the resulting binaries run on every system with that glibc
+or newer. The <code>{{ stdlib("c") }}</code> in a recipe picks the sysroot version,
+and its <code>run_exports</code> adds the matching <code>__glibc</code> constraint to the
+package. See
+<a class="" href="https://conda-forge.org/docs/maintainer/knowledge_base/#requiring-newer-glibc-versions">Requiring newer <code>glibc</code> versions</a>
+for details.</p>
+<p>The vendored sysroot also makes the compilers behave the same
+way on every distribution, making builds reproducible since the headers
+used during compilation do not depend on the host system.
+It also makes cross-compiling between different Linux
+architectures just a matter of installing another sysroot.</p>
+<p>For building conda packages this is exactly what we want, and nothing is
+changing there.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="compilers-outside-of-conda-build">Compilers outside of conda-build<a href="https://conda-forge.org/blog/2026/09/24/system-sysroot/#compilers-outside-of-conda-build" class="hash-link" aria-label="Direct link to Compilers outside of conda-build" title="Direct link to Compilers outside of conda-build" translate="no">​</a></h2>
+<p>More and more people use the conda-forge compilers outside of conda-build
+and rattler-build: in pixi or conda development environments, in CI for
+projects that are never packaged, or as a quick way to get a recent GCC on
+an old distribution without root access. In these cases the vendored
+sysroot is often not what people need:</p>
+<ul>
+<li class="">A developer building a project for their own machine gains nothing from
+targeting glibc 2.17 and has to make do with the old kernel headers and
+missing newer glibc APIs.</li>
+<li class="">Libraries from the system (for example a vendor-provided MPI, CUDA
+driver, or other hardware-specific libraries) were built against the
+system glibc and headers. Linking them against an older sysroot glibc
+can fail or give subtle problems.</li>
+<li class="">The sysroot adds a download of about 40 MB to every environment
+with a compiler.</li>
+</ul>
+<p>We have made the vendored sysroot easier to use outside the build tools,
+for example in
+<a href="https://github.com/conda-forge/linux-sysroot-feedstock/pull/88" target="_blank" rel="noopener noreferrer" class="">linux-sysroot-feedstock#88</a>,
+which added builds of the newer sysroots without <code>track_features</code> so that
+the solver doesn't force the oldest one on you. The next step is to not
+use a vendored sysroot at all.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="splitting-the-sysroot-from-the-gcc-support-libraries">Splitting the sysroot from the GCC support libraries<a href="https://conda-forge.org/blog/2026/09/24/system-sysroot/#splitting-the-sysroot-from-the-gcc-support-libraries" class="hash-link" aria-label="Direct link to Splitting the sysroot from the GCC support libraries" title="Direct link to Splitting the sysroot from the GCC support libraries" translate="no">​</a></h2>
+<p>Replacing the sysroot with a symlink to <code>/usr</code> sounds easy, but for a long
+time the sysroot contained more than just glibc and the kernel headers.
+When the compilers were built with crosstool-ng, the GCC support libraries
+(<code>libgcc_s</code>, <code>libstdc++</code>, <code>libgfortran</code>, <code>libgomp</code>, sanitizer libraries,
+spec files, ...) were installed or symlinked into
+<code>&lt;triplet&gt;/sysroot/lib</code>, because that's where crosstool-ng puts
+everything. GCC found them there only because they were inside its
+sysroot. A different sysroot meant a compiler that couldn't find its own
+runtime libraries.</p>
+<p>Untangling these took several years:</p>
+<ul>
+<li class="">In 2021, the compilers stopped using crosstool-ng and are now built
+directly from the GCC sources with <code>--with-sysroot</code>
+(<a href="https://github.com/conda-forge/ctng-compilers-feedstock/pull/53" target="_blank" rel="noopener noreferrer" class="">ctng-compilers-feedstock#53</a>).
+After that, the sysroot's contents came only from the
+<code>sysroot_linux-*</code> packages, and the GCC libraries were installed into
+<code>$PREFIX/lib</code> and <code>$PREFIX/&lt;triplet&gt;/lib</code>.</li>
+<li class="">In 2023, <code>libgcc_s.so</code> and <code>libstdc++.so</code>, which were still symlinked
+into the sysroot, moved to <code>$PREFIX/&lt;triplet&gt;/lib</code>
+(<a href="https://github.com/conda-forge/ctng-compilers-feedstock/pull/112" target="_blank" rel="noopener noreferrer" class="">ctng-compilers-feedstock#112</a>,
+<a href="https://github.com/conda-forge/ctng-compilers-feedstock/pull/118" target="_blank" rel="noopener noreferrer" class="">#118</a>).</li>
+<li class="">In 2025, as part of the macOS support and Unix layout fixes, the GCC
+libraries, spec files and sanitizer objects that the compiler needs
+moved to GCC's own private directory, <code>$PREFIX/lib/gcc/&lt;triplet&gt;/&lt;version&gt;</code>
+(<a href="https://github.com/conda-forge/ctng-compilers-feedstock/pull/189" target="_blank" rel="noopener noreferrer" class="">ctng-compilers-feedstock#189</a>).
+GCC always searches this directory, whatever the sysroot is.</li>
+<li class="">Finally, the compilers are now configured with <code>--enable-multiarch</code>
+(<a href="https://github.com/conda-forge/ctng-compilers-feedstock/pull/233" target="_blank" rel="noopener noreferrer" class="">ctng-compilers-feedstock#233</a>).
+Debian, Ubuntu and their derivatives put the libraries and some headers
+in <code>/usr/lib/x86_64-linux-gnu</code> and <code>/usr/include/x86_64-linux-gnu</code>
+instead of <code>/usr/lib64</code> and <code>/usr/include</code> like RHEL-based
+distributions do, and a multiarch-enabled GCC knows how to look for
+them.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="making-binutils-independent-of-the-sysroot">Making binutils independent of the sysroot<a href="https://conda-forge.org/blog/2026/09/24/system-sysroot/#making-binutils-independent-of-the-sysroot" class="hash-link" aria-label="Direct link to Making binutils independent of the sysroot" title="Direct link to Making binutils independent of the sysroot" translate="no">​</a></h2>
+<p>The linker is the other half of the story. conda-forge's <code>ld</code> is built
+with <code>--with-sysroot=$PREFIX/&lt;triplet&gt;/sysroot</code>, so by default it looks
+for libraries inside the conda sysroot. A few changes made binutils work
+no matter what is in that directory:</p>
+<ul>
+<li class=""><code>ld</code> falls back to <code>/</code> instead of failing when its configured sysroot
+directory doesn't exist
+(<a href="https://github.com/conda-forge/binutils-feedstock/pull/52" target="_blank" rel="noopener noreferrer" class="">binutils-feedstock#52</a>).</li>
+<li class="">The <code>binutils_&lt;platform&gt;</code> activation package used to live in
+ctng-compiler-activation-feedstock, where it depended on the sysroot
+version used by the compilers. It moved to binutils-feedstock
+(<a href="https://github.com/conda-forge/binutils-feedstock/pull/75" target="_blank" rel="noopener noreferrer" class="">binutils-feedstock#75</a>,
+<a href="https://github.com/conda-forge/ctng-compiler-activation-feedstock/pull/133" target="_blank" rel="noopener noreferrer" class="">ctng-compiler-activation-feedstock#133</a>).
+Now binutils only needs some <code>sysroot_&lt;platform&gt;</code> package, with no
+version constraint, and nothing in binutils depends on what that package
+contains. The compilers find <code>ld</code>, <code>as</code> and the other tools in
+<code>$PREFIX/bin</code> and <code>$PREFIX/&lt;triplet&gt;/bin</code>, outside the sysroot.</li>
+<li class="">The sysroot packages write a <code>&lt;triplet&gt;.cfg</code> config file into
+<code>$PREFIX/bin</code> with the <code>--sysroot</code> flag
+(<a href="https://github.com/conda-forge/linux-sysroot-feedstock/pull/81" target="_blank" rel="noopener noreferrer" class="">linux-sysroot-feedstock#81</a>).
+<code>clang</code> reads this file, so the sysroot package, not the compiler, decides
+which sysroot <code>clang</code> uses.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-system-sysroot">The system sysroot<a href="https://conda-forge.org/blog/2026/09/24/system-sysroot/#the-system-sysroot" class="hash-link" aria-label="Direct link to The system sysroot" title="Direct link to The system sysroot" translate="no">​</a></h2>
+<p>With the compilers and binutils no longer relying on what's in the sysroot
+directory, a system sysroot package is small. The new <code>sysroot_linux-*</code>
+packages with version <code>9999</code> contain only:</p>
+<ul>
+<li class=""><code>$PREFIX/&lt;triplet&gt;/sysroot/usr</code>, a symlink to <code>/usr</code>, so that GCC, which
+always looks in its configured sysroot, finds the system headers and
+libraries.</li>
+<li class=""><code>$PREFIX/bin/&lt;triplet&gt;.cfg</code> with <code>--sysroot=/</code> for <code>clang</code>.</li>
+</ul>
+<p><code>system-linux-sysroot</code> is a metapackage that installs the right one for
+your platform. Because version <code>9999</code> is higher than any real glibc
+version, it satisfies the sysroot requirement of the compiler packages.</p>
+<p>These packages are uploaded to the <code>conda-forge/label/sysroot_dev</code>
+label, not the <code>main</code> label. They are also down-prioritized, but
+down-prioritization alone was not enough to keep empty packages from
+being chosen for the system MPI packages.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-to-use-it">How to use it<a href="https://conda-forge.org/blog/2026/09/24/system-sysroot/#how-to-use-it" class="hash-link" aria-label="Direct link to How to use it" title="Direct link to How to use it" translate="no">​</a></h2>
+<p>First, install the glibc development files and kernel headers from your
+distribution, if they are not installed already:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># Debian, Ubuntu</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">sudo</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">apt</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> libc6-dev linux-libc-dev</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># Fedora, RHEL, AlmaLinux, Rocky Linux</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">sudo</span><span class="token plain"> dnf </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> glibc-devel kernel-headers</span><br></div></code></pre></div></div>
+<p>Then install the compilers together with <code>system-linux-sysroot</code>. Put the
+<code>sysroot_dev</code> label before <code>conda-forge</code>. With strict channel priority,
+the label has to have a higher priority than <code>conda-forge</code> or the solver
+will not look at its packages.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">conda create </span><span class="token parameter variable" style="color:#36acaa">-n</span><span class="token plain"> sys-cc </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge/label/sysroot_dev </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge </span><span class="token punctuation" style="color:#393A34">\</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    gcc gxx gfortran system-linux-sysroot</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">conda activate sys-cc</span><br></div></code></pre></div></div>
+<p>With pixi:</p>
+<div class="language-toml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-toml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">[workspace]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">channels = ["conda-forge/label/sysroot_dev", "conda-forge"]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">platforms = ["linux-64"]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">[dependencies]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">gcc = "*"</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">gxx = "*"</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">system-linux-sysroot = "*"</span><br></div></code></pre></div></div>
+<p>To check that the compiler is using the system glibc headers, compare the
+<code>__GLIBC__</code> and <code>__GLIBC_MINOR__</code> macros the compiler sees with the
+system's glibc version:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token builtin class-name">printf</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'#include &lt;features.h&gt;\nglibc used by gcc: __GLIBC__.__GLIBC_MINOR__\n'</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">|</span><span class="token plain"> gcc </span><span class="token parameter variable" style="color:#36acaa">-E</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-P</span><span class="token plain"> - </span><span class="token operator" style="color:#393A34">|</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">tail</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-1</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">|</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">sed</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'s/ \. /./'</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">getconf GNU_LIBC_VERSION</span><br></div></code></pre></div></div>
+<p>The first command prints the glibc version that gcc sees when compiling,
+for example <code>glibc used by gcc: 2.39</code>, and the second prints the system's
+glibc version, for example <code>glibc 2.39</code>. With the regular sysroot, the
+first command prints the sysroot's glibc version (for example 2.17)
+instead of the system's.</p>
+<p>A few things to keep in mind:</p>
+<ul>
+<li class="">Binaries built this way require the glibc version of the machine they
+were built on, or newer. <strong>Don't use the system sysroot to build packages
+that you distribute.</strong> Use the regular <code>{{ stdlib("c") }}</code> in your recipes
+instead.</li>
+<li class="">The system sysroot is meant for native compilation. For cross-compiling,
+keep using the vendored <code>sysroot_&lt;target&gt;</code> packages, unless you have a
+sysroot for the target architecture installed in your system.</li>
+<li class="">Using the system sysroot makes builds less reproducible.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="conda-gcc-specs"><code>conda-gcc-specs</code><a href="https://conda-forge.org/blog/2026/09/24/system-sysroot/#conda-gcc-specs" class="hash-link" aria-label="Direct link to conda-gcc-specs" title="Direct link to conda-gcc-specs" translate="no">​</a></h2>
+<p>The <code>gcc</code>, <code>gxx</code> and <code>gfortran</code> packages now install <code>conda-gcc-specs</code> by
+default (<a href="https://github.com/conda-forge/ctng-compilers-feedstock/pull/172" target="_blank" rel="noopener noreferrer" class="">ctng-compilers-feedstock#172</a>).
+This package adds a <code>conda.specs</code> file to
+<code>$CONDA_PREFIX/lib/gcc/&lt;triplet&gt;/&lt;version&gt;</code>. GCC reads it after its
+built-in specs, and it changes the default compile and link commands:</p>
+<ul>
+<li class=""><code>-isystem $CONDA_PREFIX/include</code> is added to compile commands, so
+headers installed in the conda environment are found without any
+extra flags. This used to be <code>-idirafter</code>, which searched the
+environment's <code>include</code> directory after the system include directories
+(<a href="https://github.com/conda-forge/ctng-compilers-feedstock/pull/234" target="_blank" rel="noopener noreferrer" class="">ctng-compilers-feedstock#234</a>).</li>
+<li class=""><code>-L $CONDA_PREFIX/lib -rpath $CONDA_PREFIX/lib -rpath-link $CONDA_PREFIX/lib</code>
+(and <code>-L $CONDA_PREFIX/lib/stubs</code>) are added to link commands, so
+libraries in the conda environment can be linked with just <code>-lfoo</code> and
+the resulting executables find them at run time.</li>
+<li class=""><code>--disable-new-dtags</code> is added to link commands so that the rpath is
+written as <code>DT_RPATH</code> instead of <code>DT_RUNPATH</code> and has priority over
+<code>LD_LIBRARY_PATH</code>. Passing <code>-Wl,--enable-new-dtags</code> overrides it.</li>
+</ul>
+<p>Together with the system sysroot, this makes the conda-forge <code>gcc</code> work
+like a system compiler that also knows about the conda environment. You
+can use headers and libraries from the system and from conda without
+setting <code>CFLAGS</code> or <code>LDFLAGS</code>. When a header or a library is both in the
+conda environment and in the system, the conda one is used, so a library's
+headers and the library itself come from the same place. The header search order is:</p>
+<ol>
+<li class="">directories passed with <code>-I</code></li>
+<li class="">directories passed with <code>-isystem</code></li>
+<li class=""><code>$CONDA_PREFIX/include</code></li>
+<li class=""><code>/usr/local/include</code></li>
+<li class=""><code>/usr/include/&lt;target&gt;</code> if it exists (like on Debian)</li>
+<li class=""><code>/usr/include</code></li>
+<li class="">directories passed with <code>-idirafter</code></li>
+</ol>
+<p><code>conda-gcc-specs</code> is meant as a convenience for local use. conda-forge
+recipes shouldn't rely on it. Inside conda-build and rattler-build, the
+activation scripts of <code>{{ compiler("c") }}</code> set the flags explicitly. If you
+don't want these defaults, install <code>gcc-no-conda-specs</code> along with <code>gcc</code>
+(<a href="https://github.com/conda-forge/ctng-compilers-feedstock/pull/180" target="_blank" rel="noopener noreferrer" class="">ctng-compilers-feedstock#180</a>):</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">conda </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> gcc gcc-no-conda-specs</span><br></div></code></pre></div></div>
+<p>As always, if you run into problems or have ideas on how to improve this,
+please open an issue on
+<a href="https://github.com/conda-forge/linux-sysroot-feedstock/issues" target="_blank" rel="noopener noreferrer" class="">linux-sysroot-feedstock</a>
+or reach out on <a href="https://conda-forge.zulipchat.com/" target="_blank" rel="noopener noreferrer" class="">Zulip</a>.</p>]]></content>
+        <author>
+            <name>Isuru Fernando</name>
+            <uri>https://github.com/isuruf</uri>
+        </author>
+        <category label="infrastructure" term="infrastructure"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Bringing RISC-V to conda-forge]]></title>
         <id>https://conda-forge.org/blog/2026/09/15/riscv64/</id>
@@ -1374,97 +1605,5 @@ awesome mentors and the kind people of the conda-forge community! :)</p>]]></con
             <uri>https://github.com/ssurbhi560</uri>
         </author>
         <category label="Outreachy" term="Outreachy"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[GPU enabled TensorFlow builds on conda-forge]]></title>
-        <id>https://conda-forge.org/blog/2021/11/03/tensorflow-gpu/</id>
-        <link href="https://conda-forge.org/blog/2021/11/03/tensorflow-gpu/"/>
-        <updated>2021-11-03T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Tensorflow on Anvil]]></summary>
-        <content type="html"><![CDATA[<p><img decoding="async" loading="lazy" src="https://i.imgur.com/pRdJaYw.png" alt="Tensorflow on Anvil" class="img_ev3q"></p>
-<p>Recently we've been able to add GPU-enabled TensorFlow builds to
-conda-forge! This was quite a journey, with multiple contributors trying
-different ways to convince the Bazel-based build system of TensorFlow to
-build CUDA-enabled packages. But we managed, <a href="https://github.com/conda-forge/tensorflow-feedstock/pull/157" target="_blank" rel="noopener noreferrer" class="">and the pull request got
-merged</a>.</p>
-<p>We now have a configuration in place that creates CUDA-enabled
-TensorFlow builds for all conda-forge supported configurations (CUDA
-10.2, 11.0, 11.1, and 11.2+). Building out the CUDA packages requires
-beefy machines -- on a 32 core machine it still takes around 3 hours to
-build a single package. Our build matrix now includes 12 CUDA-enabled
-packages &amp; 3 CPU packages (because we need separate packages per Python
-version). As one can imagine, this isn't easily possible on an average
-"home computer".</p>
-<p>For this purpose, we have written an Ansible playbook that lets us boot
-up cloud machines which then build the feedstock (using the
-<code>build-locally.py</code> script). Thanks to the generous support
-of OVH we were able to boot multiple 32-core virtual machines
-simultaneously to build the different TensorFlow variants.</p>
-<p>We have open-sourced the <a href="https://github.com/mamba-org/build-locally-ansible" target="_blank" rel="noopener noreferrer" class="">Ansible playbook in
-GitHub</a> and we're
-working towards making it (more) generally useful for other long-running
-builds!</p>
-<p><img decoding="async" loading="lazy" src="https://i.imgur.com/nvV6izV.jpg" alt="Running 3 builds in parallel on 32 cores ... still takes around 3 hours to finish" class="img_ev3q"></p>
-<p>With the TensorFlow builds in place, conda-forge now has CUDA-enabled
-builds for PyTorch and Tensorflow, the two most popular deep learning
-libraries.</p>
-<p>We are still missing Windows builds for TensorFlow (CPU &amp; CUDA,
-unfortunately) and would love the community to help us out with that.
-There is an open PR, but it probably needs some poking in Bazel to get
-it to pass: <a href="https://github.com/conda-forge/tensorflow-feedstock/pull/111" target="_blank" rel="noopener noreferrer" class="">conda-forge/tensorflow-feedstock#111</a>.</p>
-<p>We hope that these new GPU builds will enable many more packages to be
-added to the conda-forge channel! We are already looking forward to the
-2.6.2 and 2.7 releases of TensorFlow and to adding Windows support in
-the future. We hope you enjoy this work.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="installation">Installation<a href="https://conda-forge.org/blog/2021/11/03/tensorflow-gpu/#installation" class="hash-link" aria-label="Direct link to Installation" title="Direct link to Installation" translate="no">​</a></h2>
-<p>You can now select between GPU enabled (default) and CPU packages using
-the <code>tensorflow-gpu</code> and <code>tensorflow-cpu</code> packages. Just run</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">mamba </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> tensorflow-gpu </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># OR</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">conda </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> tensorflow-gpu </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge</span><br></div></code></pre></div></div>
-<p>When installing the <code>tensorflow</code> package, the package resolution will
-now default to the GPU-enabled builds of tensorflow if the local machine
-has a GPU (these builds can be identified by "cuda" at the beginning
-of the version number). Note that GPU-enabled packages can also work on
-CPU-only machines, but one would need to override the enviornment
-variable <code>CONDA_OVERRIDE_CUDA</code> like below. This could be handy if you
-are in a situation where your current node (e.g. login node) on an HPC
-does not have GPUs, but the compute nodes with GPUs do not have internet
-access.</p>
-<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token assign-left variable" style="color:#36acaa">CONDA_OVERRIDE_CUDA</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">"11.2"</span><span class="token plain"> conda </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> tensorflow cudatoolkit</span><span class="token operator" style="color:#393A34">&gt;=</span><span class="token number" style="color:#36acaa">11.2</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># OR</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token assign-left variable" style="color:#36acaa">CONDA_OVERRIDE_CUDA</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">"11.2"</span><span class="token plain"> mamba </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> tensorflow cudatoolkit</span><span class="token operator" style="color:#393A34">&gt;=</span><span class="token number" style="color:#36acaa">11.2</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge</span><br></div></code></pre></div></div>
-<p>Note that you should select the cudatoolkit version most appropraite for
-your GPU; currently, we have "10.2", "11.0", "11.1", and "11.2"
-builds available where the the "11.2" builds are compatible with all
-cudatoolkits&gt;=11.2. You could also force a specific version of
-<code>cudatoolkit</code> by specifying it like above. Moreover, you could ensure
-you get a sepcific build of tensorflow by appending the package name
-like <code>tensorflow==2.7.0=cuda*</code> or <code>tensorflow==2.7.0=cuda112*</code>. If you
-want the slimmer "cpu-only" package, then you can install
-<code>tensorflow-cpu</code> directly or equivalently <code>tensorflow==2.7.0=cpu*</code>. At
-the time of writing (February 2022), on a machine without a GPU, one
-would always get the <code>-cpu</code> variant unless overriden like
-above. This decision has been made to allow greater accessibility for
-users with limited bandwidth and resources.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="thanks-to">Thanks to<a href="https://conda-forge.org/blog/2021/11/03/tensorflow-gpu/#thanks-to" class="hash-link" aria-label="Direct link to Thanks to" title="Direct link to Thanks to" translate="no">​</a></h2>
-<ul>
-<li class="">Mark Harfouche (@hmaarrfk) &amp; Ista Zahn (@izahn) for their initial
-work on the TensorFlow GPU builds, and all other TensorFlow
-maintainers. Uwe Korn (@xhochy) for his work on the Bazel scripts &amp;
-TensorFlow -- and all the other maintainers of the <a href="https://github.com/conda-forge/tensorflow-feedstock" target="_blank" rel="noopener noreferrer" class="">TensorFlow
-feedstock</a>!</li>
-<li class="">NVIDIA for pushing cudatoolkit and cudnn on conda-forge that makes
-this possible</li>
-<li class="">OVH for their generous sponsoring of large build machines that we
-could use to build the recipes</li>
-<li class="">Bloomberg for their sponsorship of QuantStack's involvement with
-conda-forge</li>
-<li class="">Andreas Trawoger (@atrawog) for the Ansible scripts that this is
-based on</li>
-<li class="">Thorsten Beier (@derthorsten) and Adrien Delsalle (@adriendelsalle)
-for their contributions to the recipe</li>
-</ul>]]></content>
-        <author>
-            <name>Wolf Vollprecht</name>
-            <uri>https://github.com/wolfv</uri>
-        </author>
-        <category label="conda-forge" term="conda-forge"/>
     </entry>
 </feed>
