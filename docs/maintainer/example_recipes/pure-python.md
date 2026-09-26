@@ -30,7 +30,7 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/e/example-package/example_package-${{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/e/example-package/example_package-${{ version }}.tar.gz
   sha256: 12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a
 
 build:
