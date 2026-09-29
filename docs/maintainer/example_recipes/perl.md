@@ -140,6 +140,7 @@ package:
   name: perl-try-tiny
   version: "{{ version }}"
 ```
+
 - `name`: The conda package name. This should always be the CPAN package name converted to lowercase and prepended with `perl-`.
 
 ### The `source` section
@@ -166,7 +167,7 @@ build:
       && make install VERBINST=1
 ```
 
-- `noarch: generic`: Many pure-Perl packages can be built as `noarch: generic`, meaning a single conda package is built and installed on multiple platforms. Use this flag whenever possible. Exceptions include modules containing compiled (XS) code and modules utilizing different platform-specific drivers (see `File::HomeDir` as an example). 
+- `noarch: generic`: Many pure-Perl packages can be built as `noarch: generic`, meaning a single conda package is built and installed on multiple platforms. Use this flag whenever possible. Exceptions include modules containing compiled (XS) code and modules utilizing different platform-specific drivers (see `File::HomeDir` as an example).
 - `script`: The command that actually builds, tests, and installs the package. See notes below.
 
 #### `script` best practices
@@ -206,6 +207,7 @@ Most of the `EU::MM` discussion above applies here as well, with different equiv
 #### `run_exports`
 
 TODO: what is policy here? Some recipes have:
+
 ```recipe
   run_exports:
     weak:
@@ -225,6 +227,7 @@ requirements:
   run:
     - perl
 ```
+
 ```recipe title="pure-Perl module (Module::Build)"
 requirements:
   host:
@@ -264,7 +267,6 @@ A prime example of this is `ExtUtils::MakeMaker` (the CF package `perl-extutils-
 
 :::
 
-
 ### The `test`/`tests` section
 
 ```recipe title="v0"
@@ -291,6 +293,7 @@ test:
 - `requires`: If running `prove`, testing dependencies need to be included here as well as under `requirements: host`, as this testing is done outside of the build environment.
 
 A equivalent `v1` block:
+
 ```recipe title="v1"
 tests:
   - perl:
@@ -335,10 +338,12 @@ One of the oddities of Perl when it comes to licensing is that a historically co
 ##### Generate the license during the build stage
 
 The text of the dual Perl licenses are included with every Perl installation and can always be generated using the `perldoc` command. You can therefore add the following to your `build: script` string:
+
 ```recipe
   && perldoc -tT perlartistic > LICENSE
   && perldoc -tT perlgpl >> LICENSE
 ```
+
 and use `license_file: LICENSE` in the `about` section.
 
 ##### Use the SPDX repository
@@ -373,7 +378,6 @@ The Perl distribution (and CF `perl` package) include the text of both licenses 
 
 The advantage of this approach is that it requires no changes anywhere else in the recipe file. The disadvantage is that it assumes files from another package to be present at a given location. If something changes in the `perl` builds that change the location of these files or removes them, it will break your recipe. This happened in the case of a number of recipes which used this approach but referenced the corresponding manpage files. When the `perl` feedstock recipe stopped generating manpages, all of these recipes required a patch to their license blocks. For this reason, it is suggested to use one of the alternative approaches above for new recipes.
 
-
 ### The `extra` section
 
 ```recipe
@@ -392,10 +396,10 @@ Your own GitHub account will automatically be added when your PR is merged from 
 
 ### v0 (`meta.yaml`) recipes
 
-* https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html
+- https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html
 
 ### v1 (`recipe.yaml`) recipes
 
-* https://rattler-build.prefix.dev/dev/reference/recipe_file/
+- https://rattler-build.prefix.dev/dev/reference/recipe_file/
 
-* https://conda-forge.org/blog/2025/02/27/conda-forge-v1-recipe-support
+- https://conda-forge.org/blog/2025/02/27/conda-forge-v1-recipe-support
