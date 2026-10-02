@@ -37,14 +37,14 @@ context:
 # ...
 
 source:
-  url: https://pypi.org/packages/source/x/xmltodict/xmltodict-${{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/x/xmltodict/xmltodict-${{ version }}.tar.gz
   sha256: 6d94c9f834dd9e44514162799d344d815a3a4faec913717a9ecbfa5be1bb8e61
 ```
 
 Let's start by downloading and unpacking the source distribution, then enter the unpacked directory:
 
 ```bash
-wget https://pypi.org/packages/source/x/xmltodict/xmltodict-1.0.4.tar.gz
+wget https://files.pythonhosted.org/packages/source/x/xmltodict/xmltodict-1.0.4.tar.gz
 tar -x -f xmltodict-1.0.4.tar.gz
 cd xmltodict-1.0.4/
 ```
