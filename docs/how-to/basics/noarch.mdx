@@ -324,7 +324,6 @@ requirements:
     - make
   host:
     - perl
-    - perl-extutils-makemaker
   run:
     - perl
 
@@ -338,9 +337,7 @@ about:
   license: GPL-1.0-or-later OR Artistic-1.0-Perl
   license_family: OTHER
   summary: 'Expand tabs and do simple line wrapping'
-  license_file:
-    - {{ environ["PREFIX"] }}/man/man1/perlartistic.1
-    - {{ environ["PREFIX"] }}/man/man1/perlgpl.1
+  license_file: LICENSE
 ```
 
 ```recipe
@@ -371,7 +368,6 @@ requirements:
     - make
   host:
     - perl
-    - perl-extutils-makemaker
   run:
     - perl
 
@@ -384,9 +380,7 @@ tests:
 about:
   license: GPL-1.0-or-later OR Artistic-1.0-Perl
   summary: Expand tabs and do simple line wrapping
-  license_file:
-    - ${{ PREFIX }}/man/man1/perlartistic.1
-    - ${{ PREFIX }}/man/man1/perlgpl.1
+  license_file: LICENSE
   homepage: https://metacpan.org/dist/Text-Tabs+Wrap
 ```
 
