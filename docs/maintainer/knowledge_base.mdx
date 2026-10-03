@@ -1802,12 +1802,326 @@ Going forward, CUDA packages should be retrieved from `conda-forge`.
 
 ### CUDA for Maintainers
 
-Although the provisioned CI machines do not feature a GPU, conda-forge does provide mechanisms
-to build CUDA-enabled packages.
-See the [guide for maintainers of recipes that use CUDA](https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/doc/recipe_guide.md)
-for more information.
-If a feedstock does need access to additional resources (like GPUs), please see the following
-[section](#packages-that-require-a-gpu-or-long-running-builds).
+This guide is intended for maintainers of recipes that depend on CUDA. It
+assumes familiarity with writing compiled code recipes for `conda-forge` in
+general (see the
+[Compilers and Runtimes](/docs/maintainer/infrastructure/#compilers-and-runtimes)
+documentation) and with the user guide for [running CUDA
+code](#cuda-for-end-users).
+
+By default, provisioned CI machines do not feature a GPU. If a feedstock does
+need access to additional resources (like GPUs), please see [how to configure
+self-hosted runners](/docs/how-to/advanced/self-hosted-runners).
+
+#### Only using required components
+
+Recipe maintainers are encouraged not to use CUDA metapackages (e.g. `cuda-toolkit`)
+for specifying dependencies, but to instead specify only the minimal subset of
+CUDA components required for usage of their libraries (e.g. `libcufft-dev`). The
+`-dev/-devel` variants of the packages all have
+[`run_exports`](https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#export-runtime-requirements)
+set up such that if your package requires a certain CUDA library at run time,
+specifying the corresponding `-dev/-devel` package as a host requirement will result in
+your package requiring the corresponding non-dev package as a runtime
+dependency.
+
+#### Supporting both CUDA and Non-CUDA variants
+
+If your recipe has separate variants for CUDA and non-CUDA builds, use the `cuda_compiler_version` variable as a switch.
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  build:
+    - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
+  host:
+    - libcufft-dev  # [cuda_compiler_version != "None"]
+    - cuda-version={{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
+```
+
+```recipe
+requirements:
+  build:
+    - if cuda_compiler_version != "None":
+      then: ${{ compiler('cuda') }}
+  host:
+    - if cuda_compiler_version != "None":
+      then:
+        - libcublas-dev
+        - cuda-version=${{ cuda_compiler_version }}
+```
+
+</RecipeTabs>
+
+#### Compiling for all supported CUDA architectures
+
+Packages built on conda-forge should target broad compatibility across CUDA
+devices. This means passing explicit compiler arguments to NVCC to target all
+supported CUDA architectures instead of accepting the compiler's default
+target.
+
+For developer convenience, the CUDA compiler package activation script
+automatically sets the environment variables `CUDAARCHS` and `NVCC_GENCODE` to
+all supported CUDA architectures for the target host platform when
+`CONDA_BUILD` is detected and when they are not already set. By using these
+environment variables, recipe maintainers do not need to update their build
+scripts when new architectures become available in new releases of the CUDA
+Toolkit.
+
+The libtorch/pytorch packages similarly set `CF_TORCH_CUDA_ARCH_LIST` in their
+activation scripts so that downstream packages building pytorch modules may
+easily keep their CUDA targets updated by setting
+`TORCH_CUDA_ARCH_LIST=CF_TORCH_CUDA_ARCH_LIST` in their build environment.
+
+For example, in your build script:
+
+<BuildScriptTabs>
+
+```bash
+export TORCH_CUDA_ARCH_LIST="$CF_TORCH_CUDA_ARCH_LIST"
+```
+
+```batch
+set TORCH_CUDA_ARCH_LIST=%CF_TORCH_CUDA_ARCH_LIST%
+```
+
+</BuildScriptTabs>
+
+#### CUDA Enhanced Compatibility
+
+Since CUDA 11, [CUDA has offered a number of stronger compatibility
+guarantees](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#cuda-compatibility-developer-s-guide).
+The most up-to-date documentation for these may be found in [the CUDA best
+practices
+documentation](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#cuda-toolkit-versioning).
+Of particular interest from a conda packaging perspective is the binary
+backwards compatibility offered by the CUDA Toolkit (CTK): packages built with
+newer versions of the CTK will also run with older minor versions (within the
+same major family) of the CTK installed, assuming that your package has
+properly guarded any usage of APIs introduced in newer versions with suitable
+checks. This guide assumes that you already know how to write and compile code
+that supports such behavior. Even if your library is properly configured for
+this behavior, you will need to do some extra work to ensure that your conda
+package supports it as well:
+
+- You must define
+  [`ignore_run_exports_from`](https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#export-runtime-requirements)
+  for any CTK library `-dev/-devel` packages that your package depends on. Otherwise,
+  the `run_exports` would require the runtime libraries to have versions equal
+  to or greater than the versions used to build the package.
+- You must define `ignore_run_exports` for the `cuda-version` package.
+- You must add explicit runtime dependencies (or `run_constrained` for soft/optional dependencies) that specify the desired version range for the dependencies whose `run_exports` have been ignored.
+
+For example, suppose you have built a package that requires `libcublas`:
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  build:
+    - {{ compiler('cuda') }}
+  host:
+    - libcublas-dev
+    - cuda-version={{ cuda_compiler_version }}
+```
+
+```recipe
+requirements:
+  build:
+    - ${{ compiler('cuda') }}
+  host:
+    - libcublas-dev
+    - cuda-version=${{ cuda_compiler_version }}
+```
+
+</RecipeTabs>
+
+Because of run-exports in the `libcublas-dev` package, your library will have a
+`run` requirement on `libcublas` corresponding to `{{ cuda_compiler_version }}`
+or newer. To make this compatible with all CUDA minor versions from the same
+CUDA major version family, you must add the following:
+
+<RecipeTabs>
+
+```recipe
+build:
+  # Ignore run exports from CUDA libraries in the host section
+  ignore_run_exports_from:
+    - libcublas-dev
+  # Ignore cuda-version itself; do not ignore exports from
+  # {{ compiler('cuda') }}, which has other needed exports
+  ignore_run_exports:
+    - cuda-version
+
+requirements:
+  build:
+    - {{ compiler('cuda') }}
+  host:
+    - libcublas-dev
+    - cuda-version={{ cuda_compiler_version }}
+  run:
+    # Since we've ignored the run export from libcublas-dev, we pin
+    # libcublas manually. Having a pin_compatible on cuda-version with
+    # max_pin='x' and min_pin='x' will constrain libcublas to the same
+    # major version as what we pinned in host.
+    - {{ pin_compatible('cuda-version', max_pin='x', min_pin='x') }}
+    - libcublas
+```
+
+```recipe
+requirements:
+  build:
+    - ${{ compiler('cuda') }}
+  host:
+    - libcublas-dev
+    - cuda-version=${{ cuda_compiler_version }}
+  run:
+    # Since we've ignored the run export from libcublas-dev, we pin
+    # libcublas manually. Having a pin_compatible on cuda-version with
+    # max_pin='x' and min_pin='x' will constrain libcublas to the same
+    # major version as what we pinned in host.
+    - ${{ pin_compatible('cuda-version', max_pin='x', min_pin='x') }}
+    - libcublas
+  # Ignore run exports from CUDA libraries in the host section
+  ignore_run_exports:
+    from_package:
+      - libcublas-dev
+    # Ignore cuda-version itself; do not ignore exports from
+    # ${{ compiler('cuda') }}, which has other needed exports
+    by_name:
+      - cuda-version
+```
+
+</RecipeTabs>
+
+#### Cross-compilation {#cuda-cross-compilation}
+
+The CUDA compiler toolchain supports cross-compilation in the same way as
+other compiler toolchains on conda-forge. Please see
+the [cross-compilation documentation](/docs/how-to/advanced/cross-compilation/) for more information.
+
+#### Building for ARM Tegra devices
+
+::::info
+
+Support for Tegra builds on conda-forge is only available for CUDA 12.9 and later.
+This means that only Orin (sm_87) and later devices are supported.
+
+Starting with CUDA 13.0 and Jetpack 7, new Tegra devices are SBSA-compliant, so
+building a separate variant for Tegra devices is not required.
+
+::::
+
+The CUDA compiler toolchain treats Tegra ARM (`aarch64`) and SBSA ARM (`sbsa`) as
+separate compilation targets. Older Tegra devices are `aarch64` (pre-Thor) and
+newer devices are `sbsa`. Device code compiled for `aarch64` and `sbsa` devices
+is not interchangeable, so one build cannot service all variants. Therefore,
+the [arm-variant](https://github.com/conda-forge/arm-variant-feedstock) package
+allows end-users to select which variant of the CUDA ARM packages is installed
+into their environment.
+
+Since there are no Tegra devices in the conda-forge CI available for native
+compilation, these packages must be cross-compiled from `linux_64`. Recipes
+that wish to build for both SBSA ARM and Tegra ARM devices should make the
+following changes to their feedstock:
+
+1. The `arm-variant` package should be added to the recipe's build
+   environment(s) to constrain the CUDA compiler toolchain.
+
+   For example:
+
+<RecipeTabs>
+
+```recipe
+# A fake selector may also be needed for conda-build to pick up arm_variant_type as a variant
+# [arm_variant_type]
+
+requirements:
+  build:
+    - {{ compiler('cuda') }}
+    - arm-variant * {{ arm_variant_type }}  # [linux and aarch64 and cuda_compiler_version != "None"]
+```
+
+```recipe
+requirements:
+  build:
+    - ${{ compiler('cuda') }}
+    - if: linux and aarch64 and cuda_compiler_version != "None"
+      then: arm-variant * ${{ arm_variant_type }}
+```
+
+</RecipeTabs>
+
+::::note
+
+Building with the `arm-variant` package will produce overlinking warnings from
+`conda-build`. This is expected and may be safely ignored.
+
+::::
+
+::::note
+
+The `arm-variant` package is only required for targeting CUDA 12.9 and Orin
+(sm_87) devices.
+
+::::
+
+2. The `arm_variant_type.yaml` migrator should be added to the `.ci_support/migrations` folder.
+
+    This migrator may be downloaded from https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/main/recipe/migrations. It adds the `arm_variant_type` variable to the build matrix for CUDA 12.9 only and sets a higher `c_stdlib_version`.
+
+3. The ARM platform should be enabled for linux in `conda-forge.yml`.
+
+    For example:
+
+    ```yaml
+    build_platform:
+      linux_aarch64: linux_64
+    ```
+
+#### Directory structure
+
+The `conda-forge` CUDA Toolkit (CTK) packages aim to satisfy two sets of
+constraints. On one hand, the packages strive to retain as similar a structure as
+possible to the CTK packages that may be installed via system package managers
+(e.g. `apt` and `yum`) while supporting cross-compilation. On the other hand,
+the packages are designed to provide a seamless experience at both build
+time and run time within conda environments, and the need for cross-compilation support
+introduces some special considerations that are not present on other platforms.
+
+##### Linux
+
+All files in CTK conda packages are installed into the `$PREFIX/targets/<platform>`
+directory. This includes libraries, headers, and packaging files, along with
+other miscellaneous files that may be present in any given package. We then
+symlink a number of these files into standard sysroot locations so that they
+can be found by standard tooling (e.g. CMake, compilers, ld).
+
+Specifically, we apply the following conventions:
+- Shared libraries are symlinked from `$PREFIX/targets/<platform>` into
+  `$PREFIX/lib`. This includes the bare name (`libcublas.so`), the SONAME, and
+  the full name.
+- Pkgconfig files are installed directly into `$PREFIX/lib/pkgconfig`. These
+  are not symlinked from `$PREFIX/targets/<platform>`, but are moved
+  to this location. The reason is that pkgconfig files contain relative paths
+  to libraries/headers/etc and the paths cannot be accurate relative to both
+  the `targets` directory and the `lib/pkgconfig` directory. Since the latter
+  is what `pkgconfig` will use, we choose to install the files into
+  `lib/pkgconfig` and reroot the paths accordingly.
+- Static libraries and header files are not symlinked into the sysroot
+  directories. Instead, conda installations of `nvcc` know how to search for
+  these files in the correct directories.
+
+##### Windows
+
+Windows does not support symlinks, so we cannot have the same file in two
+places at once.
+
+Therefore, we apply the following conventions:
+- Shared libraries are located in `%PREFIX%/Library/bin`.
+- Static and import libraries are located in `%PREFIX%/Library/lib/<platform>`.
+- Headers are located in `%PREFIX%/Library/include`.
 
 <a id="common-problems-and-known-issues"></a>
 
