@@ -282,7 +282,7 @@ test:
   commands:
     - prove
   source_files:
-    - t
+    - t/
   requires:
     - perl-test-exception
 ```
