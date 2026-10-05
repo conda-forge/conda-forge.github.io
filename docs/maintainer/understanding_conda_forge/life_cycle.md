@@ -25,7 +25,7 @@ For most packages, the paragraphs above are enough to describe their life cycle.
 However, the repodata-first approach followed in the conda ecosystem allows for some unique features in the post-publication stages.
 
 For large volume channels like conda-forge, Anaconda.org delivers the artifacts through a [CDN](/docs/glossary#cdn) for faster access.
-The CDN network is synced with the channels periodically.
+The CDN is synced with the channels periodically.
 As a result, packages take around 15 minutes to be available for installation after their publication.
 
 This repodata-first approach offers a unique opportunity to post-process the repodata files.
