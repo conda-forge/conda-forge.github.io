@@ -131,7 +131,7 @@ curl -sL https://github.com/username/reponame/archive/vX.X.X.tar.gz | openssl sh
 
 ### Feedback and revision
 
-Once you finished your pull request PR, all you have to do is wait for feedback from our review team.
+Once you finished your pull request, all you have to do is wait for feedback from our review team.
 
 The review team will assist you by pointing out improvements and answering questions. Once the package is ready, the reviewers will approve and merge your pull request.
 
