@@ -33,8 +33,10 @@ sphinx/newsfeed/demo/_build
 /docs/orga/cfep-index.md
 /docs/orga/governance.md
 /static/schema/conda-forge.schema.json
+/static/schema/linter-messages.json
 /community/cfep-index.md
 /community/governance.md
+/community/code-of-conduct.md
 
 # Generated files
 .docusaurus
@@ -53,3 +55,11 @@ yarn-error.log*
 # pyc files
 *.pyc
 __pycache__/
+*.egg-info
+
+# pixi environments and lockfiles
+.pixi
+pixi.lock
+
+# vscode stuff
+.vscode

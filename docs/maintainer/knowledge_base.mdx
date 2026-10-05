@@ -1,0 +1,2172 @@
+---
+title: 'Knowledge Base'
+---
+
+import { BuildScriptTabs } from "@site/src/components/RecipeTabs";
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+<a id="knowledge-base"></a>
+
+# Knowledge Base
+
+## Finding examples with Github Code Search {#search-github}
+
+Github's [Code Search](https://github.com/features/code-search) is an incredibly useful tool to find examples of recipes in conda-forge.
+There are a couple tricks you can use to make the most out of your searches.
+
+- Limit the search to `org:conda-forge`.
+- Limit the path to the type of file you want. This usually means:
+  - `path:meta.yaml` for v0 recipes.
+  - `path:recipe.yaml` for v1 recipes.
+  - `path:recipe/*.sh` for Unix build scripts.
+  - `path:recipe/*.bat` for Windows build scripts.
+
+That's it, with those two modifiers, you can get a lot done! Some examples include:
+
+- [All `noarch: python` v0 recipes](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22noarch%3A+python%22).
+- [All `noarch: python` v1 recipes](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Arecipe.yaml+%22noarch%3A+python%22).
+- Recipes that depend on... [`cuda`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+OR+path%3Arecipe.yaml+%22-+cuda%22), [`pytorch`](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+OR+path%3Arecipe.yaml+%22-+pytorch%22), [`__virtual` packages](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+OR+path%3Arecipe.yaml+%2F-+__%5CS%2B%2F), etc.
+- [Scripts that use CMake on Unix](https://github.com/search?type=code&q=org%3Aconda-forge+cmake+path%3Arecipe%2F*.sh).
+- [Scripts that use CMake on Windows](https://github.com/search?type=code&q=org%3Aconda-forge+cmake+path%3Arecipe%2F*.bat).
+- [v0 recipes with cross-compilation conditions](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Ameta.yaml+%22target_platform+%21%3D+build_platform%22+OR+%22build_platform+%21%3D+target_platform%22).
+- [v1 recipes with cross-compilation conditions](https://github.com/search?type=code&q=org%3Aconda-forge+path%3Arecipe.yaml+build_platform).
+
+:::tip Configure your browser to have a search shortcut
+
+For example, in Chrome you can go to [`chrome://settings/searchEngines`](chrome://settings/searchEngines) and add a new entry with:
+
+- Name: conda-forge recipes
+- Shortcut: `cf`
+- URL: `https://github.com/search?type=code&q=org%3Aconda-forge+%s`
+
+And with that you can simply type `cf your-search-here` for super fast queries!
+:::
+
+<a id="using-cmake"></a>
+
+## Using CMake
+
+Please refer to [How-to > Basics > Use CMake](/docs/how-to/basics/cmake/) and [How-to > Advanced > Move from autotools to CMake](/docs/how-to/advanced/autotools-to-cmake/).
+
+<a id="particularities-on-windows"></a>
+
+## Particularities on Windows
+
+This document presents conda-forge and conda-build information and examples
+while building on Windows.
+
+<a id="local-testing"></a>
+
+### Local testing
+
+Please refer to [How-to > Advanced > Windows > Building packages for Windows](/docs/how-to/advanced/windows/).
+
+<a id="building-packages-using-configure-scripts-written-in-shell-script"></a>
+
+### Building packages using configure scripts written in shell script
+
+Some packages do not provide build systems with first-hand support for Windows, in particular these using `configure` scripts using autotools, or hand-written in shell scripts.
+You can use the [autotools_clang_conda](https://github.com/conda-forge/autotools_clang_conda-feedstock?tab=readme-ov-file#about-autotools_clang_conda-feedstock) to provide a build environment with a set of MSYS2 packages and a Clang toolchain configured to build packages compatible with MSVC.
+The feedstock's description provides example instructions.
+
+<a id="install-paths-and-naming-conventions"></a>
+
+### Install paths and naming conventions
+
+Unix-style packages in conda-forge are installed into a special `Library` directory tree under the build prefix.
+For the convenience of writing build scripts, both conda-build and rattler-build define the following variables:
+
+| Variable         | Value                      | Use                                                     |
+| ---------------- | -------------------------- | ------------------------------------------------------- |
+| `LIBRARY_PREFIX` | `%PREFIX%\Library`         | Prefix for installing packages                          |
+| `LIBRARY_BIN`    | `%PREFIX%\Library\bin`     | Executables and DLL libraries (`.exe` and `.dll` files) |
+| `LIBRARY_INC`    | `%PREFIX%\Library\include` | Header files                                            |
+| `LIBRARY_LIB`    | `%PREFIX%\Library\lib`     | Import and static libraries (`.lib` files)              |
+| `SCRIPTS`        | `%PREFIX%\Scripts`         | Python scripts                                          |
+
+On Windows, it is not possible to link directly to dynamic libraries (`.dll` files); the linker needs to use so-called import libraries instead.
+Import libraries have the same format and generally use the same suffix (`.lib`) as static libraries.
+Therefore, whenever both dynamic and static libraries are installed, the import library and the static library must use different names.
+There are two main naming conventions for installing libraries on Windows: the MSVC convention and the GCC/MinGW convention.
+
+The MSVC convention uses the following names:
+
+- dynamic library: `{name}.dll` (e.g. `zlib.dll`)
+- import library: `{name}.lib` (e.g. `zlib.lib`)
+- static library: no standard convention, often `lib{name}.lib` or `{name}-static.lib` (e.g. `zlibstatic.lib`)
+
+Usually, `{name}` does not include a `lib` prefix.
+Following this convention ensures that `-l{name}` works for dynamic linking, same as on Unix.
+However, some packages do use `lib` prefix for historical reasons, e.g. `libprotobuf.dll` + `libprotobuf.lib`.
+
+The GCC/MinGW convention uses the following names:
+
+- dynamic library: `lib{name}.dll`
+- import library: `lib{name}.dll.a`
+- static library: `lib{name}.a`
+
+There is no standard convention for providing SONAME-style versioning for libraries.
+Some packages do not provide versioning at all, others embed the version into the `.dll` name (but not the import library name, to preserve `-l{name}` behavior).
+
+<a id="special-dependencies-and-packages"></a>
+
+## Special Dependencies and Packages
+
+<a id="dep-compilers"></a>
+
+<a id="compilers"></a>
+
+### Compilers
+
+Dependencies on compilers are explained in detail in [Compilers and Runtimes](/docs/maintainer/infrastructure/#compilers-and-runtimes) infrastructure documentation.
+
+<a id="cross-compilation"></a>
+
+<a id="id1"></a>
+
+### Cross-compilation
+
+conda-forge defaults to native builds of packages for x86_64 on Linux, macOS and Windows, because
+that's the architecture powering the default CI runners. Other architectures are supported too,
+but they are not guaranteed to have native builds. In those platforms where we can't provide native
+CI runners, we can still resort to either cross-compilation or emulation.
+
+<!-- backwards compatiblity anchors -->
+
+<a id="cross-compilation-howto"></a>
+
+<a id="how-to-enable-cross-compilation"></a>
+
+<a id="placing-requirements-in-build-or-host"></a>
+
+<a id="cross-compilation-examples"></a>
+
+<a id="python-cross-compilation"></a>
+
+<a id="details-about-cross-compiled-python-packages"></a>
+
+Cross-compiling means building a package for a different architecture than the one the build process
+is running on. Given how abundant x86_64 runners are, most common cross-compilation setups will target
+non-x86_64 architectures from x86_64 runners.
+
+For more details on cross-compilation, see [cross-compilation](/docs/how-to/advanced/cross-compilation/).
+
+<a id="emulation"></a>
+
+<a id="emulated-builds"></a>
+
+### Emulated builds
+
+When cross-compilation is not possible, one can resort to emulation. This is a technique that uses
+a virtual machine ([QEMU](https://www.qemu.org/)) to emulate the target platform, which has a
+significant overhead. However, `conda-build` will see the target platform as native, so very
+little changes are usually needed in the recipe.
+
+To enable emulated builds, you must use the [provider](conda_forge_yml.mdx#provider) mapping in `conda-forge.yml`.
+This key maps a `build_platform` to a `provider` that will be used to emulate the platform.
+`conda-smithy` will know how to detect whether the provider supports that platform natively or
+requires emulation, and will adjust the appropriate CI steps to ensure that QEMU runs the process.
+Ensure changes are applied by [rerendering](updating_pkgs.md#dev-update-rerender) the feedstock.
+
+Note that only Linux architectures are currently supported via emulation.
+
+:::warning
+
+Emulated builds are very slow and incur an additional strain on conda-forge CI resources.
+Whenever possible, please consider cross-compilation instead. Only use emulated builds as a last
+resort.
+
+:::
+
+<a id="emulation-examples"></a>
+
+#### Emulation examples
+
+Configure `conda-forge.yml` to emulate `linux-ppc64le` and `linux-aarch64`,
+but use native runners for `linux-64`. This works because `linux-ppc64le`
+and `linux-aarch64` are not natively supported by Azure, so
+`conda-smithy` will add QEMU steps to emulate it. However, `linux-64` is
+natively supported by Azure, so no emulation is needed.
+
+```yaml title="conda-forge.yml"
+provider:
+  linux_aarch64: azure
+  linux_ppc64le: azure
+  linux_64: azure
+```
+
+<a id="rust-nightly"></a>
+
+### Rust Nightly
+
+Many rust packages rely on nightly versions of the rust compiler. Given this fast release cadence, conda-forge does not yet pull each release.
+Instead, rust nightly versions are pulled into the `dev` branch of the [conda-forge/rust-feedstock](https://github.com/conda-forge/rust-feedstock/tree/dev) on an as-needed basis.
+For a new version, please file an issue on that feedstock.
+
+To enable the rust nightly compiler in your feedstock, follow the section above and then add the `rust_dev` channel in the `conda_build_config.yaml` file:
+
+```yaml title="conda_build_config.yaml"
+channel_sources:
+  - conda-forge/label/rust_dev,conda-forge
+```
+
+<a id="cdt-packages"></a>
+
+<a id="core-dependency-tree-packages-cdts"></a>
+
+### Core Dependency Tree Packages (CDTs)
+
+Dependencies outside of the `conda-forge` channel should be avoided (see [Avoid external dependencies](../adding_pkgs#avoid-external-dependencies)).
+However, there are a few exceptions:
+
+Some dependencies are so close to the system that they are not packaged with conda-forge.
+These dependencies have to be satisfied with _Core Dependency Tree_ (CDT) packages.
+
+A CDT package consists of repackaged CentOS/AlmaLinux binaries from the appropriate version,
+either 7, 8 or 9 depending on user choice and platform. We manage the build of CDT
+packages using a centralized repo, [conda-forge/cdt-builds](https://github.com/conda-forge/cdt-builds),
+as opposed to generating feedstocks for them. (Note that historically we did use feedstocks but this
+practice has been deprecated). To add a new CDT, make a PR on the
+[conda-forge/cdt-builds](https://github.com/conda-forge/cdt-builds) repo.
+
+<a id="why-are-cdts-bad"></a>
+
+#### Why are CDTs bad?
+
+1. CDTs repackage old versions of the library.
+2. As a result, newer functionality in the packages won't be used by downstream conda packages
+   which check for the version of the library being built against.
+   For example: OpenGL functionality from the CentOS 7 packaged library is available, but
+   any newer functionality cannot be used.
+3. We have no guarantees that the version provided by the user's system is compatible.
+   We only have the `__glibc>=2.17` constraint and we assume that CentOS 7's
+   lower bound of GLIBC and its corresponding lower bound of the CDT are equivalent.
+4. We have no guarantee that the library is provided by the user's system at all.
+
+<a id="when-should-cdts-be-used"></a>
+
+#### When should CDTs be used?
+
+1. When there are system specific configurations are used by the library.
+   Some examples include:
+   1. linux-pam: This is a library that allows pluggable authentication modules and the
+      configuration files for these modules usually live in `/etc/pam.d`. The issue is that
+      the pluggable modules live in a distro specific location. For example:
+      `/usr/lib/x86_64-linux-gnu/security/`. The default modules are built into the
+      conda package in `$CONDA_PREFIX/lib/security`, but custom ones for
+      system-wide configuration are installed into `/usr/lib/x86_64-linux-gnu/security/`.
+      So, we would need to patch the module to look into both, but the directory
+      `/usr/lib/x86_64-linux-gnu/security/` is distro specific and will be hard to
+      detect.
+2. When a conda packaged library will not work properly.
+   For example: a new `glibc` package means we would have to edit the elf interpreter of
+   all the conda package binaries.
+
+<a id="what-s-are-some-good-examples"></a>
+
+#### What's are some good examples?
+
+1. The OpenCL loader (`ocl-icd` together with `ocl-icd-system`) provides an OpenCL
+   loading library. The loader will look at OpenCL implementations given in
+   `$CONDA_PREFIX/etc/OpenCL/vendors`.
+   For example: Pocl is a conda packaged implementation that runs OpenCL on the CPU. Vendor
+   specific implementations like the NVIDIA OpenCL or ROCm OpenCL are not conda packaged, so we
+   have to rely on the system. By installing `ocl-icd-system` we enable the loader to look at
+   the configuration in `/etc/OpenCL/vendors`, which is the configuration directory for all linux
+   distributions. This gives us the best of both worlds. You don't need a system level package to
+   run OpenCL because we have a conda packaged installation, but if there is a system wide
+   implementation that is accelerated by specific hardware, we can use those.
+
+<a id="libgl"></a>
+
+### libGL
+
+Note that packages dependent on OpenGL and/or libGL should no longer use CDTs. Instead, use the host dependency `libgl-devel` from the [libglvnd-feedstock](https://github.com/conda-forge/libglvnd-feedstock).
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - libgl-devel  # [linux]
+```
+
+```recipe
+requirements:
+  host:
+    - if: linux
+      then: libgl-devel
+```
+
+</RecipeTabs>
+
+Other OpenGL API variants such as `libegl-devel`, `libgles-devel`, `libglx-devel`, and `libopengl-devel` are also available, and will automatically add non-development `run_exports` dependencies.
+
+<a id="linking-numpy"></a>
+
+<a id="building-against-numpy"></a>
+
+### Building Against NumPy
+
+Please refer to [How-to > Advanced > Build against NumPy](/docs/how-to/advanced/numpy/).
+
+<a id="jupyterlab-extension"></a>
+
+<a id="jupyterlab-extensions"></a>
+
+### JupyterLab Extensions
+
+A typical JupyterLab extension has both Python and JavaScript components.
+These should be packaged together, to prevent node from being needing to
+grab the JavaScript side of the package on the user's machine. To package
+an extension, the build should have the following `meta.yaml` snippet:
+
+<RecipeTabs>
+
+```recipe
+build:
+  noarch: python
+
+requirements:
+  host:
+    - python {{ python_min }}.*
+    - nodejs
+    - pip
+  run:
+    - python >={{ python_min }}
+    - nodejs
+    - jupyterlab >=2
+```
+
+```recipe
+build:
+  noarch: python
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - nodejs
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - nodejs
+    - jupyterlab >=2
+```
+
+</RecipeTabs>
+
+Please use the following `build.sh` script in your recipe:
+
+```bash title="recipe/build.sh"
+#!/usr/bin/env bash
+set -ex
+
+$PYTHON -m pip install . -vv
+npm pack ${PKG_NAME}@${PKG_VERSION}
+mkdir -p ${PREFIX}/share/jupyter/lab/extensions/js
+cp ${PKG_NAME}-${PKG_VERSION}.tgz ${PREFIX}/share/jupyter/lab/extensions/js
+```
+
+Since this is a noarch recipe, the build script only needs to run on `linux-64`.
+Also note that we do not need to run `jupyter labextension install` or
+`jupyter lab build` as part of the package build or in any post-link scripts.
+This is because JupyterLab will run the build step itself when it is next run.
+The `${PREFIX}/share/jupyter/lab/extensions/js` directory which JupyterLab
+knows to build from when performing this build step.
+
+<a id="message-passing-interface-mpi"></a>
+
+### Message passing interface (MPI)
+
+:::note
+
+This section originates from Min's notes: [https://hackmd.io/ry4uI0thTs2q_b4mAQd_qg](https://hackmd.io/ry4uI0thTs2q_b4mAQd_qg)
+
+:::
+
+<a id="mpi-variants-in-conda-forge"></a>
+
+#### MPI Variants in conda-forge
+
+How are MPI variants best handled in conda-forge?
+
+There are a few broad cases:
+
+- package requires a specific MPI provider (easy!)
+- the package works with any MPI provider (e.g. mpich, openmpi)
+- the package works with/without MPI
+
+Note that sometimes users want to use packages in conda-forge built against
+our MPI libraries but linked to external MPI libraries at runtime. If you are interested
+in this procedure, see [Using External Message Passing Interface (MPI) Libraries](../user/tipsandtricks.md#using-external-message-passing-interface-mpi-libraries)
+for details.
+
+<a id="building-mpi-variants"></a>
+
+#### Building MPI variants
+
+In conda_build_config.yaml:
+
+```yaml title="recipe/conda_build_config.yaml"
+mpi:
+  - mpich
+  - openmpi
+```
+
+In the recipe file:
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - {{ mpi }}
+```
+
+```recipe
+requirements:
+  host:
+    - ${{ mpi }}
+```
+
+</RecipeTabs>
+
+And rerender with:
+
+```bash
+conda-smithy rerender -c auto
+```
+
+to produce the build matrices.
+
+<a id="including-a-no-mpi-build"></a>
+
+#### Including a no-mpi build
+
+Some packages (e.g. hdf5) may want a no-mpi build, in addition to the mpi builds.
+To do this, add nompi to the mpi matrix:
+
+```yaml title="recipe/conda_build_config.yaml"
+mpi:
+  - nompi
+  - mpich
+  - openmpi
+```
+
+and apply the appropriate conditionals in your build:
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - {{ mpi }}  # [mpi != 'nompi']
+  run:
+    - {{ mpi }}  # [mpi != 'nompi']
+```
+
+```recipe
+requirements:
+  host:
+    - if: mpi != 'nompi'
+      then: ${{ mpi }}
+  run:
+    - if: mpi != 'nompi'
+      then: ${{ mpi }}
+```
+
+</RecipeTabs>
+
+<a id="preferring-a-provider-usually-nompi"></a>
+
+#### Preferring a provider (usually nompi)
+
+Up to here, mpi providers have no explicit preference. When choosing an MPI provider, the mutual exclusivity of
+the `mpi` metapackage allows picking between mpi providers by installing an mpi provider, e.g.
+
+```bash
+conda install mpich ptscotch
+```
+
+or
+
+```bash
+conda install openmpi ptscotch
+```
+
+This doesn't extend to `nompi`, because there is no `nompi` variant of the mpi metapackage. And there probably
+shouldn't be, because some packages built with mpi don't preclude other packages in the env that _may_ have an mpi variant
+from using the no-mpi variant of the library (e.g. for a long time, fenics used mpi with no-mpi hdf5 since there was no
+parallel hdf5 yet. This works fine, though some features may not be available).
+
+Typically, if there is a preference it will be for the serial build, such that installers/requirers of the package
+only get the mpi build if explicitly requested. We use a higher build number for the `nompi` variant in this case.
+
+Here is an example part of the recipe:
+
+<RecipeTabs>
+
+```recipe
+{% set build = 0 %}
+
+{% if mpi == 'nompi' %}
+# prioritize nompi variant via build number
+{% set build = build + 100 %}
+{% endif %}
+build:
+  number: {{ build }}
+
+  # add build string so packages can depend on
+  # mpi or nompi variants explicitly:
+  # `pkg * mpi_mpich_*` for mpich
+  # `pkg * mpi_*` for any mpi
+  # `pkg * nompi_*` for no mpi
+
+  {% if mpi != 'nompi' %}
+  {% set mpi_prefix = "mpi_" + mpi %}
+  {% else %}
+  {% set mpi_prefix = "nompi" %}
+  {% endif %}
+  string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
+```
+
+```recipe
+context:
+  build_base: 0
+  build: ${{ build_base if mpi != 'nompi' else build_base + 100 }}
+  # add build string so packages can depend on
+  # mpi or nompi variants explicitly:
+  # `pkg * mpi_mpich_*` for mpich
+  # `pkg * mpi_*` for any mpi
+  # `pkg * nompi_*` for no mpi
+  mpi_prefix: ${{ 'mpi_' + mpi if mpi != 'nompi' else 'nompi' }}
+
+build:
+  number: ${{ build }}
+  string: ${{ mpi_prefix }}_h${{ hash }}_${{ build }}
+```
+
+</RecipeTabs>
+
+:::note
+
+Variant hash avoids build string collisions on _most_ variants,
+but not on packages that are excluded from the default build string,
+e.g. Python itself. If the package is built for multiple Python versions, use:
+
+<RecipeTabs>
+
+```recipe
+string: "{{ mpi_prefix }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
+```
+
+```recipe
+string: "${{ mpi_prefix }}_py${{ python | version_to_buildstring }}h${{ hash }}_${{ build }}"
+```
+
+</RecipeTabs>
+
+as seen in [mpi4py](https://github.com/conda-forge/h5py-feedstock/pull/49/commits/b08ee9307d16864e775f1a7f9dd10f25c83b5974)
+
+:::
+
+This build section creates the following packages:
+
+- `pkg-x.y.z-mpi_mpich_h12345_0`
+- `pkg-x.y.z-mpi_openmpi_h23456_0`
+- `pkg-x.y.z-nompi_h34567_100`
+
+Which has the following consequences:
+
+- The `nompi` variant is preferred, and will be installed by default unless an mpi variant is explicitly requested.
+- mpi variants can be explicitly requested with `pkg=*=mpi_{{ mpi }}_*`
+- any mpi variant, ignoring provider, can be requested with `pkg=*=mpi_*`
+- nompi variant can be explicitly requested with `pkg=*=nompi_*`
+
+If building with this library creates a runtime dependency on the variant, the build string pinning can be added to `run_exports`.
+
+For example, if building against the nompi variant will work with any installed version, but building with a
+given mpi provider requires running with that mpi:
+
+<RecipeTabs>
+
+```recipe
+build:
+  ...
+  run_exports:
+    - {{ name }} * {{ mpi_prefix }}_*  # [mpi != 'nompi']
+```
+
+```recipe
+requirements:
+  ...
+  run_exports:
+    - if: mpi != 'nompi'
+      then: ${{ name }} * ${{ mpi_prefix }}_*
+```
+
+</RecipeTabs>
+
+Remove the `if mpi...` condition if all variants should create a strict runtime dependency based on the variant
+chosen at build time (i.e. if the nompi build cannot be run against the mpich build).
+
+<a id="complete-example"></a>
+
+#### Complete example
+
+Combining all of the above, here is a complete recipe, with:
+
+- nompi, mpich, openmpi variants
+- run-exports to apply mpi choice made at build time to runtime where nompi builds can be run with mpi, but not vice versa.
+- nompi variant is preferred by default
+- only build nompi on Windows
+
+This matches what is done in [hdf5](https://github.com/conda-forge/hdf5-feedstock/pull/90).
+
+```recipe title="recipe/conda_build_config.yaml"
+mpi:
+  - nompi
+  - mpich  # [not win]
+  - openmpi  # [not win]
+```
+
+<RecipeTabs>
+
+```recipe
+# meta.yaml
+{% set name = 'pkg' %}
+{% set build = 0 %}
+
+# ensure mpi is defined (needed for conda-smithy recipe-lint)
+{% set mpi = mpi or 'nompi' %}
+
+{% if mpi == 'nompi' %}
+# prioritize nompi variant via build number
+{% set build = build + 100 %}
+{% endif %}
+
+build:
+  number: {{ build }}
+
+  # add build string so packages can depend on
+  # mpi or nompi variants explicitly:
+  # `pkg * mpi_mpich_*` for mpich
+  # `pkg * mpi_*` for any mpi
+  # `pkg * nompi_*` for no mpi
+
+  {% if mpi != 'nompi' %}
+  {% set mpi_prefix = "mpi_" + mpi %}
+  {% else %}
+  {% set mpi_prefix = "nompi" %}
+  {% endif %}
+  string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
+
+  run_exports:
+    - {{ name }} * {{ mpi_prefix }}_*  # [mpi != 'nompi']
+
+requirements:
+  host:
+    - {{ mpi }}  # [mpi != 'nompi']
+  run:
+    - {{ mpi }}  # [mpi != 'nompi']
+```
+
+```recipe
+context:
+  build_base: 0
+  build: ${{ build_base if mpi != 'nompi' else build_base + 100 }}
+  # add build string so packages can depend on
+  # mpi or nompi variants explicitly:
+  # `pkg * mpi_mpich_*` for mpich
+  # `pkg * mpi_*` for any mpi
+  # `pkg * nompi_*` for no mpi
+  mpi_prefix: ${{ 'mpi_' + mpi if mpi != 'nompi' else 'nompi' }}
+
+build:
+  number: ${{ build }}
+  string: ${{ mpi_prefix }}_h${{ hash }}_${{ build }}
+
+requirements:
+  host:
+    - if: mpi != 'nompi'
+      then: ${{ mpi }}
+  run:
+    - if: mpi != 'nompi'
+      then: ${{ mpi }}
+  run_exports:
+    - if: mpi != 'nompi'
+      then: ${{ name }} * ${{ mpi_prefix }}_*
+```
+
+</RecipeTabs>
+
+And then a package that depends on this one can explicitly pick the appropriate mpi builds:
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - {{ mpi }}  # [mpi != 'nompi']
+    - pkg
+    - pkg * mpi_{{ mpi }}_*  # [mpi != 'nompi']
+  run:
+    - {{ mpi }}  # [mpi != 'nompi']
+    - pkg * mpi_{{ mpi }}_*  # [mpi != 'nompi']
+```
+
+```recipe
+requirements:
+  host:
+    - if: mpi != 'nompi'
+      then:
+        - ${{ mpi }}
+        - pkg * mpi_${{ mpi }}_*
+    - pkg
+  run:
+    - if: mpi != 'nompi'
+      then:
+        - ${{ mpi }}
+        - pkg * mpi_${{ mpi }}_*
+```
+
+</RecipeTabs>
+
+mpi-metapackage exclusivity allows `mpi_*` to resolve the same as `mpi_{{ mpi }}_*`
+if `{{ mpi }}` is also a direct dependency, though it's probably nicer to be explicit.
+
+<a id="just-mpi-example"></a>
+
+#### Just mpi example
+
+Without a preferred `nompi` variant, recipes that require mpi are much simpler. This is all that is needed:
+
+```yaml title="recipe/conda_build_config.yaml"
+mpi:
+  - mpich
+  - openmpi
+```
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - {{ mpi }}
+  run:
+    - {{ mpi }}
+```
+
+```recipe
+requirements:
+  host:
+    - ${{ mpi }}
+  run:
+    - ${{ mpi }}
+```
+
+</RecipeTabs>
+
+<a id="mpi-compiler-packages"></a>
+
+#### MPI Compiler Packages
+
+Do not use the `[openmpi,mpich]-[mpicc,mpicxx,mpifort]` metapackages in the `requirements/build` section
+of a recipe; the MPI compiler wrappers are included in the main `openmpi`/`mpich` packages.
+As shown above, just add `openmpi`/`mpich` to the `requirements/host` section and use compiler directives for the
+corresponding compilers in `requirements/build` as normal.
+
+<a id="openmp"></a>
+
+### OpenMP
+
+The default OpenMP runtime used depends on the compiler and platform used. GCC (on Linux and the Windows MinGW
+toolchain) uses the `libgomp` runtime. Clang (on all platforms) and GNU Fortran on macOS default to the `llvm-openmp`
+runtime. For MSVC `llvm-openmp` is recommended, though `llvm-openmp` requires use of the `/openmp:llvm` option.
+However, individual projects may force building against a different runtime through their build system configuration.
+
+On Linux, building against `libgomp` is recommended as the other OpenMP providers are backwards compatible with it.
+When packages are built against `libgomp`, it is possible to use both `libgomp` and `llvm-openmp` provider at runtime.
+
+Dependencies on OpenMP providers belong in the `host` section of recipe dependencies. The following snippet corresponds
+to the defaults, though individual packages may require a different set:
+
+<RecipeTabs>
+
+```recipe
+build:
+   script:
+    - set "CXXFLAGS=%CXXFLAGS% /openmp:llvm"  # [win]
+
+...
+
+requirements:
+  host:
+    - libgomp      # [linux]
+    - llvm-openmp  # [not linux]
+```
+
+```recipe
+build:
+   script:
+    - if: win
+      then: set "CXXFLAGS=%CXXFLAGS% /openmp:llvm"
+
+...
+
+requirements:
+  host:
+    - if: linux
+      then: libgomp
+      else: llvm-openmp
+```
+
+</RecipeTabs>
+
+<a id="switching-openmp-implementation"></a>
+
+#### Switching OpenMP implementation
+
+On macOS, only LLVM's OpenMP implementation `llvm-openmp` is supported. This implementation is used even in Fortran code compiled
+using GNU's gfortran.
+
+On Windows, switching between different OpenMP implementations is not supported. Every package uses the implementation
+it was built against.
+
+On Linux, when packages are linked against GNU's `libgomp.so.1`, the OpenMP library at install time can be
+switched from GNU to LLVM by doing the following.
+
+```shell-session
+conda install _openmp_mutex=*=*_llvm
+```
+
+OpenMP library can be switched back to GNU's libgomp by doing the following.
+
+```shell-session
+conda install _openmp_mutex=*=*_gnu
+```
+
+:::note
+
+OpenMP library switching is possible because LLVM's implementation has the symbol's from GNU in addition to the LLVM
+ones (originally from Intel). An object file generated by `gcc`, `g++` or `gfortran` will have GNU's symbols and
+therefore the underlying library can be switched.
+However, an object file generated by `clang` or `clang++` will have LLVM's symbols and therefore the underlying
+OpenMP library cannot be switched to GNU's library.
+
+One reason you may wish to switch to LLVM is because the implementation is fork safe. One reason to keep using the
+GNU implementation is that the OpenMP target offloading symbols in `libgomp` like `GOMP_target` are empty stubs
+in LLVM and therefore does not work.
+
+:::
+
+<a id="yum-deps"></a>
+
+<a id="yum-requirements-txt"></a>
+
+### yum_requirements.txt
+
+Dependencies can be installed into the build container with `yum`, by listing package names line by line in a file
+named `yum_requirements.txt` in the `recipe` directory of a feedstock.
+
+There are only very few situations where dependencies installed by yum are acceptable. These cases include
+
+- satisfying the requirements of [CDT](../glossary.md#cdt) packages during test phase
+- installing packages that are only required for testing
+
+After changing `yum_requirements.txt`, [rerender](updating_pkgs.md#dev-update-rerender) to update the configuration.
+
+<a id="knowledge-blas"></a>
+
+<a id="blas"></a>
+
+### BLAS
+
+If a package needs one of BLAS, CBLAS, LAPACK, LAPACKE, use the following in the
+host of the recipe,
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - libblas
+    - libcblas
+    - liblapack
+    - liblapacke
+```
+
+```recipe
+requirements:
+  host:
+    - libblas
+    - libcblas
+    - liblapack
+    - liblapacke
+```
+
+</RecipeTabs>
+
+:::note
+
+You should specify only the libraries that the package needs. (i.e. if the package
+doesn't need LAPACK, remove liblapack and liblapacke)
+
+At recipe build time, above requirements would download the NETLIB's reference
+implementations and build your recipe against those.
+At runtime, by default the following packages will be used.
+
+:::
+
+<RecipeTabs>
+
+```recipe
+- mkl        # [win]
+- openblas   # [not win]
+```
+
+```recipe
+- if: win
+  then: mkl
+  else: openblas
+```
+
+</RecipeTabs>
+
+If a package needs a specific implementation's internal API for more control you can have,
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    # Keep mkl-devel here for pinning
+    - mkl-devel         {{ blas_impl == "mkl" }}
+    - {{ blas_impl }}   {{ blas_impl != "mkl" }}
+  run:
+    - libblas * *{{ blas_impl }}
+    - {{ blas_impl }}
+```
+
+```recipe
+requirements:
+  host:
+    # Keep mkl-devel here for pinning
+    - if: blas_impl == "mkl"
+      then: mkl-devel
+      else: ${{ blas_impl }}
+  run:
+    - libblas * *${{ blas_impl }}
+    - ${{ blas_impl }}
+```
+
+</RecipeTabs>
+
+This would give you a matrix builds for different blas implementations. If you only want to support
+a specific blas implementation,
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - openblas
+  run:
+    - libblas * *openblas
+    - openblas
+```
+
+```recipe
+requirements:
+  host:
+    - openblas
+  run:
+    - libblas * *openblas
+    - openblas
+```
+
+</RecipeTabs>
+
+:::note
+
+`blas_*` features should not be used anymore.
+
+:::
+
+<a id="switching-blas-implementation"></a>
+
+#### Switching BLAS implementation
+
+You can switch your BLAS implementation by doing,
+
+```bash
+conda install "libblas=*=*_mkl"
+conda install "libblas=*=*_openblas"
+conda install "libblas=*=*_blis"
+conda install "libblas=*=*_accelerate"
+conda install "libblas=*=*_newaccelerate"
+conda install "libblas=*=*_netlib"
+```
+
+This would change the BLAS implementation without changing the conda packages depending
+on BLAS.
+
+:::note
+
+For macOS 13.3+, you can use `newaccelerate` to use the new BLAS/LAPACK
+support in Accelerate.
+
+The following legacy commands are also supported as well.
+
+```bash
+conda install "blas=*=mkl"
+conda install "blas=*=openblas"
+conda install "blas=*=blis"
+conda install "blas=*=accelerate"
+conda install "blas=*=newaccelerate"
+conda install "blas=*=netlib"
+```
+
+:::note
+
+If you want to commit to a specific blas implementation, you can prevent conda from switching back by pinning
+the blas implementation in your environment. To commit to mkl, add `blas=*=mkl` to
+`<conda-root>/envs/<env-name>/conda-meta/pinned`, as described in the
+[conda-docs](https://docs.conda.io/projects/conda/en/stable/user-guide/tasks/manage-pkgs.html#preventing-packages-from-updating-pinning).
+
+:::
+
+<a id="how-it-works"></a>
+
+#### How it works
+
+At recipe build time, the netlib packages are used. This means that the downstream package will
+link to `libblas.so.3` in the `libblas=*=*netlib` and will use only the reference
+implementation's symbols.
+
+`libblas` and `libcblas` versioning is based on the Reference LAPACK versioning which at the
+time of writing is `3.8.0`. Since the BLAS API is stable, a downstream package will only pin to
+`3.*` of `libblas` and `libcblas`. On the other hand, `liblapack` and `liblapacke` pins to
+`3.8.*`.
+
+In addition to the above netlib package, there are other variants like `libblas=*=*openblas`,
+which has `openblas` as a dependency and has a symlink from `libblas.so.3` to `libopenblas.so`.
+`libblas=3.8.0=*openblas` pins the `openblas` dependency to a version that is known to support the
+BLAS `3.8.0` API. This means that, at install time, the user can select what BLAS implementation
+they like without any knowledge of the version of the BLAS implementation needed.
+
+### Microarchitecture-optimized builds {#microarch}
+
+conda [virtual packages](../glossary.md#virtual-package) include `__archspec`, which expose the processor architecture to the solver. However, `__archspec` should not be used directly in recipes; instead, users should rely on the [`microarch-level`](https://github.com/conda-forge/microarch-level-feedstock) helper packages (contributed in [staged-recipes#24306](https://github.com/conda-forge/staged-recipes/pull/24306)).
+
+Before learning how to use it, please read these considerations:
+
+- Adding microarchitecture variants can result in too many entries in the build matrix. Do not overuse it.
+- These optimized builds should only be used when the performance improvements are significant.
+- Preferably, the project should rely on runtime dispatch for arch-specific optimizations.
+- If the package is already too large, consider using smaller outputs for the arch-optimized variants.
+
+To implement microarchitecture-optimized builds in your feedstock, you'll end up with something like:
+
+```recipe title="recipe/conda_build_config.yaml"
+microarch_level:
+  - 1
+  - 3  # [unix and x86_64]
+  - 4  # [unix and x86_64]
+```
+
+<RecipeTabs>
+
+```recipe
+# ...
+{% set build = 0 %}
+
+build:
+  number: {{ build + 100 * (microarch_level|default(1)|int - 1) }}
+
+requirements:
+  build:
+    - x86_64-microarch-level =={{ microarch_level }}  # [unix and x86_64]
+    - {{ compiler('c') }}
+    # ...
+# ...
+```
+
+```recipe
+context:
+  build: 0
+
+# ...
+
+build:
+  number: ${{ build + 100 * (microarch_level|default(1)|int - 1) }}
+
+requirements:
+  build:
+    - if: unix and x86_64
+      then: x86_64-microarch-level ==${{ microarch_level }}
+    - ${{ compiler('c') }}
+    # ...
+# ...
+```
+
+</RecipeTabs>
+
+:::note[Prioritize your preferred microarchitecture]
+The `run_exports` metadata is only set up with lower bounds to allow in-CI testing.
+This means that `level=2` package can be installed in a `level=3` machine. Make sure
+to assign a higher build number to the preferred microarchitecture (usually the highest level).
+:::
+
+That's it! The activation scripts behind the `microarch-level` packages are already injecting the necessary compiler flags for you. Since they also have `run_exports` entries, your
+package will have the necessary runtime requirements to ensure the most adequate variant gets installed. Refer to [this comment](https://github.com/conda-forge/staged-recipes/pull/24306#issuecomment-1800095471) and the [`microarch-level-feedstock` README](https://github.com/conda-forge/microarch-level-feedstock) for more information.
+
+<a id="knowledge-mpl"></a>
+
+<a id="matplotlib"></a>
+
+### Matplotlib
+
+`matplotlib` on conda-forge comes in two parts. The core library is in `matplotlib-base`. The
+actual `matplotlib` package is this core library plus `pyside6`. Most, if not all, packages that have
+dependence at runtime on `matplotlib` should list this dependence as `matplotlib-base` unless they
+explicitly need `pyside6`. The idea is that a user installing `matplotlib` explicitly would get a full
+featured installation with `pyside6`. However, `pyside6` is a rather large package, so not requiring it
+indirectly is better for performance. Note that you may need to include a `yum_requirements.txt` file
+in your recipe with
+
+```bash
+xorg-x11-server-Xorg
+```
+
+if you import parts of `matplotlib` that link to `libX11`.
+
+Or, if your recipe is using Alma10 as the linux distribution (you can check in the `.ci_support/linux_64_.yaml` file under the `docker_image:` entry), Xorg is no longer available out of the box and you'll need to use Wayland instead:
+
+```bash
+xorg-x11-server-Xwayland
+```
+
+<a id="pybind11-abi-constraints"></a>
+
+<a id="pybind11-swig-abi-constraints"></a>
+
+### `pybind11` and `swig` ABI Constraints
+
+Sometimes when different python libraries using `pybind11`/`swig` interact via lower-level interfaces,
+the underlying ABI between the two libraries has to match. To ease this use case, we have a `pybind11-abi`/`swig-abi`
+metapackage that can be used in the `host` section of a build. Its version is pinned globally, and it has a
+run export on itself, meaning that builds with this package in `host` will have a runtime constraint on it.
+Further, the `pybind11`/`swig` has a run constraint on the respective ABI metapackage to help ensure
+consistent usage.
+
+To use this package in a build, put it in the host environment like so
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - pybind11-abi
+```
+
+```recipe
+requirements:
+  host:
+    - pybind11-abi
+```
+
+</RecipeTabs>
+
+or
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - swig-abi
+```
+
+```recipe
+requirements:
+  host:
+    - swig-abi
+```
+
+</RecipeTabs>
+
+<a id="knowledge-empty"></a>
+
+<a id="empty-python-packages"></a>
+
+### Empty Python packages
+
+For some features introduced in later Python versions, the Python community creates backports, which makes these
+features available for earlier versions of Python as well.
+One example here is [dataclasses](https://www.python.org/dev/peps/pep-0557/) which was introduced with
+Python3.7 but is available as a [backport](https://github.com/ericvsmith/dataclasses) for Python3.6 too.
+Therefore, most upstream packages make those backports only mandatory for specific versions of Python and exclude them otherwise.
+
+Implementing this restriction in conda-forge is currently only possible through the use of `skips`
+which restricts the corresponding conda-forge recipes from becoming `noarch`.
+
+Therefore, some conda-forge recipes only create an actual package on specific Python versions and are otherwise an
+empty placeholder. This allows them to be safely installed under all Python versions and makes using `skips` unnecessary.
+
+Similarly, some packages are only platform-specific dependency of a package, such as `pywin32`, and have
+helper metapackages which can help recipes stay `noarch`. The version of the actual package required
+can be controlled with `run_constrained`, even for packages not available on all platforms.
+
+Currently available packages:
+
+| Name               | Available on:            | Empty on:        |
+| ------------------ | ------------------------ | ---------------- |
+| backports.strenum  | python >=3.8,\<3.11      | python >=3.12    |
+| backports.zstd     | python >=3.10,\<3.14     | python >=3.14    |
+| dataclasses        | python >=3.6,\<3.7       | python >=3.7     |
+| enum34             | python =2.7              | python >=3.4     |
+| pywin32-on-windows | windows                  | unix             |
+| typing             |                          | python >=3       |
+
+<a id="knowledge-all-installs"></a>
+
+<a id="non-version-specific-python-packages"></a>
+
+### Non-version-specific Python packages
+
+For some dependencies, upstream maintainers list Python versions where those packages are needed,
+even if the packages can actually be installed under all Python versions.
+
+Implementing this restriction in conda-forge is currently only possible through the use of `skips`
+which restricts the corresponding conda-forge recipes from becoming `noarch`.
+
+Therefore, the conda-forge community maintains a list of packages that are safe to be installed under all Python versions,
+even if the original package only requires it for some versions.
+
+For example, the package [pyquil](https://github.com/rigetti/pyquil) only
+[requires](https://github.com/rigetti/pyquil/blob/497791e8108d8780109d75410be786c5f6e590ea/pyproject.toml#L30) `importlib-metadata` for `python <3.8` but it is actually safe to be installed under `python >=3.8` as well.
+
+Currently available packages:
+
+- exceptiongroup
+- importlib-metadata
+
+<a id="abi3"></a>
+
+### Packages with abi3 extensions
+
+Packages can be built using CPython's stable [`abi3` mode](https://docs.python.org/3/c-api/stable.html) by adding a few conditionals to the `build`, `requirements`, and (optionally) `test` sections. See [this `meta.yaml` example](https://github.com/conda-forge/python-abi3-feedstock/blob/main/recipe/example-meta.yaml) from the `python-abi3-feedstock`, in particular the parts that depend on the `is_abi3`, as well as the relevant [conda-build documentation](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#python-version-independent-packages).
+
+Note that the python extension that is being packaged needs to support building the extension as an ABI3 package. For setuptools
+based projects, the keyword argument `py_limited_api=True` needs to be passed to the `setup` function.
+
+<a id="noarch-builds"></a>
+
+## Noarch builds
+
+<a id="noarch"></a>
+
+<a id="noarch-python"></a>
+
+<a id="os-specific-noarch"></a>
+
+<a id="noarch-packages-with-os-specific-dependencies"></a>
+
+<a id="noarch-generic"></a>
+
+Moved to:
+- [How-to → Basics → Create noarch packages](/docs/how-to/basics/noarch).
+- [How-to → Advanced → Advanced noarch topics](/docs/how-to/advanced/noarch).
+
+
+## Multi-output recipes
+
+`conda-build` has the ability to create multiple package artifacts from a single recipe via the `outputs` section in `meta.yaml`. This is useful in several scenarios, including:
+
+- Distributing a project (which share the same source code) in separate artifacts. For example:
+  - A compiled C++ library and its Python bindings:
+    - [mamba-feedstock](https://github.com/conda-forge/mamba-feedstock/blob/e13e667edd0e9efb5091444c11307ddb2bd8fa5e/recipe/meta.yaml)
+  - A runtime library and its headers:
+    - [cpp-opentelemetry-sdk](https://github.com/conda-forge/cpp-opentelemetry-sdk-feedstock/blob/6c9f81074f0343f2fb41a4491e91b7b84e962cc1/recipe/meta.yaml)
+  - A dynamic library and a static version:
+    - [libarchive](https://github.com/conda-forge/libarchive-feedstock/blob/642a473daf5cfc84598ed7fde1016c243e359e3b/recipe/meta.yaml)
+- Distributing the same project with different sets of dependencies. For example:
+  - The project with the minimal dependencies to run, and a separate output that extends that list:
+    - [geopandas-base and geopandas](https://github.com/conda-forge/geopandas-feedstock/blob/d6a3efdf12408f1875f1aa0b7cc2393f877a73e8/recipe/meta.yaml)
+    - [matplotlib-base and matplotlib](https://github.com/conda-forge/matplotlib-feedstock/blob/dc89bb11d502475b7bb71d8600b2eeaff4c185bd/recipe/meta.yaml)
+  - CPU vs GPU versions of a package (this can also be done with package variants):
+    - [pytorch-cpu, pytorch-gpu and pytorch](https://github.com/conda-forge/pytorch-cpu-feedstock/blob/b629af608e13eb180dab698b1e44ac0991ab1135/recipe/meta.yaml)
+  - A package with different strictness levels for its dependencies:
+    - [opencv](https://github.com/conda-forge/opencv-feedstock/blob/850a09ec4e4e1a34e2619c5b937bfdc8ffe8bbbd/recipe/meta.yaml)
+- Distributing the same project under two different names (alias packags). For example:
+  - A package that changed names but wants to keep existing users up-to-date:
+  - A package that uses dashes and underscores and expects users to use either:
+    - [importlib_metadata and importlib-metadata](https://github.com/conda-forge/importlib_metadata-feedstock/blob/e4595fd73bba559d248f97896aff89a762073f2a/recipe/meta.yaml)
+    - [typing_extensions and typing-extensions](https://github.com/conda-forge/typing_extensions-feedstock/blob/d9d0d1161d5ded886a272c0e4907f62d9272c7a8/recipe/meta.yaml)
+
+### Common pitfalls with `outputs`
+
+This is a non-exhaustive list of common pitfalls when using `outputs`.
+
+- It's usually simpler to use a top-level name that does not match any output names. If the top-level name is different than the feedstock name, make sure to set the `extra.feedstock-name` in `meta.yaml`. See [rich-feedstock](https://github.com/conda-forge/rich-feedstock/blob/0d745692c1bcf/recipe/meta.yaml#L110-L111). Note how the top-level name is `rich-split`, the feedstock name is `rich` and the main output is `rich` too.
+- The `build.sh` and `bld.bat` scripts are only automatically used for the top-level package. Consider using other file names for the scripts in the outputs. See [gdal-feedstock](https://github.com/conda-forge/gdal-feedstock/blob/66ba0a2284476/recipe/meta.yaml#L70-L73) for an example.
+- The `outputs[].script` field can only be set to a script name. If you prefer passing shell commands, you have to use `outputs[].build.script`. Compare [geopandas-feedstock](https://github.com/conda-forge/geopandas-feedstock/blob/8b985635a8538af1ee213900bd563085e3cdbd92/recipe/meta.yaml#L17) to [gym-feedstock](https://github.com/conda-forge/gym-feedstock/blob/2b47e0479923b7d49a39e9860ba30a28e263480b/recipe/meta.yaml#L31), respectively.
+- Some `PIP_*` environment variables that are usually set for the top-level scripts are not automatically set for the outputs. If you are invoking `pip` in an output, you may need to pass additional flags. See [napari-feedstock](https://github.com/conda-forge/napari-feedstock/blob/32a4eb04ca7b6ccd2c4e146bde204f1dd5425a17/recipe/meta.yaml#L26). This issue is tracked in [conda/conda-build#3993](https://github.com/conda/conda-build/issues/3993).
+
+<a id="build-matrices"></a>
+
+## Build matrices
+
+Currently, `python, vc, r-base` will create a matrix of jobs for each supported version. If `python` is only a
+build dependency and not a runtime dependency (eg: build script of the package is written in Python, but the
+package is not dependent on Python), use `build` section
+
+Following implies that `python` is only a build dependency and no Python matrix will be created.
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  build:
+    - python
+  host:
+    - some_other_package
+```
+
+```recipe
+requirements:
+  build:
+    - python
+  host:
+    - some_other_package
+```
+
+</RecipeTabs>
+
+Note that `host` should be non-empty or `compiler` jinja syntax used or `build/merge_build_host` set to
+True for the `build` section to be treated as different from `host`.
+
+Following implies that `python` is a runtime dependency and a Python matrix for each supported Python version will be created.
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - python
+```
+
+```recipe
+requirements:
+  host:
+    - python
+```
+
+</RecipeTabs>
+
+`conda-forge.yml`'s build matrices is removed in conda-smithy=3. To get a build matrix,
+create a `conda_build_config.yaml` file inside the recipe folder. For example, the following will give you 2
+builds and you can use the selector `vtk_with_osmesa` in the `meta.yaml`
+
+```yaml title="recipe/conda_build_config.yaml"
+vtk_with_osmesa:
+  - False
+  - True
+```
+
+You need to rerender the feedstock after this change.
+
+<a id="requiring-newer-macos-sdks"></a>
+
+## Requiring newer macOS SDKs
+
+conda-forge uses macOS SDK 11.0 to build software so that they can be deployed to
+all macOS versions newer than 11.0. Sometimes, some packages require a newer SDK
+to build with. While the default version 11.0 can be overridden using the following
+changes to the recipe, it should be done as a last resort. Please consult with
+core team if this is something you think you need.
+
+To use a new SDK, add the following in `recipe/conda_build_config.yaml`
+
+```recipe title="recipe/conda_build_config.yaml"
+# Please consult conda-forge/core before doing this
+MACOSX_SDK_VERSION:        # [osx and x86_64]
+  - "15.5"                 # [osx and x86_64]
+```
+
+Note that this should be done if the error you are getting says that a header is not
+found or a macro is not defined. This will make your package compile with a newer SDK
+but with `11.0` as the deployment target.
+
+After increasing the SDK version, if you are getting an error that says that a function
+is available only for macOS x.x, then do the following in `recipe/conda_build_config.yaml`,
+
+```recipe title="recipe/conda_build_config.yaml"
+# Please consult conda-forge/core before doing this
+c_stdlib_version:          # [osx and x86_64]
+  - "12.0"                 # [osx and x86_64]
+```
+
+In this case you don't need to set `MACOSX_SDK_VERSION` (unless it needs to be newer than
+12.0), because the SDK version will always be _at least_ the deployment target.
+
+In the recipe file, add the following to ensure that the user's system is compatible.
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  build:
+    - {{ stdlib("c") }}
+```
+
+```recipe
+requirements:
+  build:
+    - ${{ stdlib("c") }}
+```
+
+</RecipeTabs>
+
+Note that the run-export on `__osx` that's produced by the stdlib metapackages
+requires `conda>=4.8`.
+
+<a id="newer-c-features-with-old-sdk"></a>
+
+### Newer C++ features with old SDK
+
+The libc++ library uses Clang availability annotations to mark certain symbols as
+unavailable when targeting versions of macOS that ship with a system libc++
+that do not contain them. Clang always assumes that the system libc++ is used.
+
+The conda-forge build infrastructure targets macOS 11.0 and some newer C++ features
+such as `fs::path` are marked as unavailable on that platform, so the build aborts:
+
+```bash
+...
+error: 'foo' is unavailable: introduced in macOS 12.3
+...
+note: 'foo' has been explicitly marked unavailable here
+```
+
+However, since conda-forge ships its own (modern) libcxx we can ignore these checks
+because these symbols are in fact available. To do so, add
+`_LIBCPP_DISABLE_AVAILABILITY` to the defines. For example
+
+```bash
+CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
+```
+
+<a id="pypy-builds"></a>
+
+## PyPy builds
+
+As of August 2024, [PyPy support in conda-forge has been sunset](/news/2024/08/14/sunsetting-pypy/).
+
+<a id="using-setuptools-scm"></a>
+
+## Using setuptools_scm
+
+The Python module [setuptools_scm](https://github.com/pypa/setuptools_scm)
+can be used to manage a package's version automatically from metadata, such as git tags.
+The package's version string is thus not specified anywhere in the package,
+but encoded in it at install-time.
+
+For conda-build this means that `setuptools_scm` must be included as a `host` dependency.
+Additionally, some attention because the metadata is often not available in the sources.
+There are two options for how to proceed:
+
+- For Python package also available on PyPI:
+  Use the PyPi tarball as a source, as it will have the metadata encoded
+  (in such a way that `setuptools_scm` knows how to find it).
+- Specify the environment variable `SETUPTOOLS_SCM_PRETEND_VERSION` with the version string.
+  If specified this environment variable is the principle source for `setuptools_scm`.
+  There are two ways how to do this:
+  - If you are using build scripts, specify in the build script:
+
+    <BuildScriptTabs>
+
+    ```bash
+    export SETUPTOOLS_SCM_PRETEND_VERSION="$PKG_VERSION"
+    ```
+
+    ```batch
+    set SETUPTOOLS_SCM_PRETEND_VERSION=%PKG_VERSION%
+    ```
+
+    </BuildScriptTabs>
+
+    Whereby you use that `PKG_VERSION` has been set with the version string,
+    see [Environment variables](https://docs.conda.io/projects/conda-build/en/stable/user-guide/environment-variables.html#env-vars).
+
+  - Otherwise, if you are directly building from `meta.yaml`, use for example:
+
+    <RecipeTabs>
+
+    ```recipe
+    build:
+      # [...]
+      script_env:
+        - SETUPTOOLS_SCM_PRETEND_VERSION={{version}}
+      script: "{{ PYTHON }} -m pip install . -vv"
+    ```
+
+    ```recipe
+    build:
+      # [...]
+      script:
+        env:
+          SETUPTOOLS_SCM_PRETEND_VERSION: ${{version}}
+        content:
+          - "${{ PYTHON }} -m pip install . -vv"
+    ```
+
+    </RecipeTabs>
+
+<a id="centos7"></a>
+
+<a id="using-centos-7"></a>
+
+## Requiring newer `glibc` versions
+
+Conda-forge aims to build for as many users as possible, which means
+that we target `glibc 2.17` from CentOS 7, which allows packages to be
+installed on essentially any linux system (newer than 2014).
+
+However, some feedstocks may already require newer `glibc` versions.
+To use the newer `sysroot` with `glibc` `2.28` or `2.34` on `linux`,
+put the following in your build section.
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ stdlib('c') }}
+```
+
+```recipe
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+```
+
+</RecipeTabs>
+
+and add the following to `recipe/conda_build_config.yaml`:
+
+```recipe title="recipe/conda_build_config.yaml"
+c_stdlib_version:          # [linux]
+  - "2.28"                 # [linux]
+```
+
+This covers the headers/library present at build-time, and will also create
+a corresponding run-export on the `__glibc` virtual package.
+
+By default, conda-forge build infrastructure uses old sysroots on new images, meaning that
+the `glibc` present in the docker image is not what we compile against. This has
+several advantages, and also means that generally you don't have to concern
+yourself with changing the image manually.
+
+However, if for some reason you want to override the image versions, you can do so
+by setting the following in the `conda-forge.yml` of your recipe and rerendering.
+
+```yaml title="conda-forge.yml"
+os_version:             # example of possible values
+  linux_64: cos7
+  linux_aarch64: alma8
+  linux_ppc64le: alma9
+```
+
+In the exceptional case that a feedstock does _binary repackaging_ (i.e. no
+compilation from source), please ensure that you use the oldest-possible image,
+matching the `c_stdlib_version` of your recipe. For example, if you use the
+default `c_stdlib_version` of `2.17`, then set `os_version: linux_*: cos7`;
+if you're using a `c_stdlib_version` of `2.28`, set it to `alma8`.
+
+<a id="cuda"></a>
+
+## Support for NVIDIA CUDA {#cuda-builds}
+
+### CUDA for End-Users
+
+This section is for people who wish to use conda environments to run CUDA-enabled software.
+
+#### Prerequisites
+
+You must have an NVIDIA GPU on your machine and you must install the CUDA drivers. The CUDA
+driver _cannot_ be installed with conda and must be installed on your system using an
+appropriate installation method. See the [CUDA documentation](https://docs.nvidia.com/cuda/)
+for instructions on how to install the CUDA driver
+([Linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html),
+[Windows](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html)).
+
+:::tip
+
+Conda CUDA packages are installable even if no CUDA driver or NVIDIA GPU is available, but
+they will not run properly. See [Common problems and known
+issues](#common-problems-and-known-issues) for why this is the case.
+
+:::
+
+#### Installing CUDA
+
+##### Basic Installation
+
+The easiest one-step solution to install the full CUDA Toolkit is to install the [`cuda`
+metapackage](https://github.com/conda-forge/cuda-feedstock/) with this command:
+
+```
+conda install -c conda-forge cuda cuda-version=12
+```
+
+Let's break down this command. We are requesting the installation of two metapackages:
+`cuda` and `cuda-version`.
+
+The `cuda` metapackage pulls in all the components of the CUDA Toolkit (CTK) and is roughly
+equivalent to installing the CUDA Toolkit with traditional system package managers like
+`apt` or `yum` on Linux. Similarly to such package managers, the individual components may
+also be installed independently.
+
+The [`cuda-version` metapackage](
+https://github.com/conda-forge/cuda-version-feedstock/blob/main/recipe/README.md )
+is used to select the version of CUDA to install. This metapackage is important because
+individual components of the CTK are typically versioned independently (the current versions
+may be found in the [release notes](
+https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html )). The
+`cuda-version` metapackage provides a standard way to install the version of a specific CUDA
+component corresponding to a given version of the CTK. This way, one never has to specify a
+particular version of any CTK package; one just specifies the `cuda-version` desired,
+then list packages needed and conda will take care of finding the right versions.
+The above command will install all components of CUDA from the latest patch release
+of the CUDA 12.x series.
+
+:::warning
+
+The following CUDA components are not available as conda packages:
+
+- Driver libraries, such as (but not limited to)
+  - `libcuda`
+  - `libnvidia-ml` library
+  - GPUDirect Storage (GDS)
+- Documentation and Samples
+- Fabric Manager
+- IMEX
+- NVSwitch Configuration and Query (NSCQ)
+- Nsight Systems
+
+:::
+
+##### Installing individual components of the CUDA Toolkit
+
+Rather than installing all of CUDA at once, users may instead install just the packages that
+they need. For example, to install just `libcublas` and `libcusparse` one may run:
+
+```
+conda install -c conda-forge libcublas libcusparse cuda-version=<CUDA version>
+```
+
+The best way to get a current listing is to run:
+
+```
+conda install --dry-run -c conda-forge cuda cuda-version=<CUDA version>
+```
+
+For a complete listing of the packages that were originally created, see [this
+issue](https://github.com/conda-forge/staged-recipes/issues/21382).
+
+##### Metapackages
+
+For convenience, a number of additional metapackages are available:
+
+- `cuda-runtime` / `cuda-libraries`: All CUDA runtime libraries needed to run a CUDA application
+- `cuda-visual-tools`: GUIs for visualizing and profiling such as Nsight™ Compute
+- `cuda-command-line-tools`: Command line tools for analyzing and profiling such as cupti, cuda-gdb, and Compute Sanitizer
+- `cuda-tools`: All tools for analyzing and profiling, both GUI (includes cuda-visual-tools) and CLI (includes cuda-command-line-tools)
+
+##### Selecting ARM Device Variant
+
+Many of NVIDIA's CUDA packages are built for both SBSA and Tegra devices. For CUDA 12.9,
+Tegra devices are a separate ARM variant. To install packages built for CUDA 12.9 Tegra, add
+the `arm-variant=*=tegra` package to your environment. For CUDA 13.0 and later, the
+arm-variant package is no longer required. Tegra devices are no longer a separate
+architecture from SBSA.
+
+:::info
+
+Support for Tegra builds on conda-forge is only available for CUDA 12.9 and later. This
+means that only Orin (sm_87) and later devices are supported.
+
+:::
+
+#### CUDA C++ Core Libraries (CCCL)
+
+CCCL is a special case among CUDA packages. Due to 1) being header-only, 2) fast-moving, and 3) independently-evolving,
+consumers may want a different (newer) version of CCCL than the
+one corresponding to their CTK version. Instructions on how to install a suitable CCCL
+package from conda can be found
+[in the CCCL README](https://github.com/NVIDIA/cccl/?tab=readme-ov-file#conda).
+See [this issue](https://github.com/conda-forge/cuda-cccl-impl-feedstock/issues/2)
+for more information on the history of these packages.
+
+#### Package Naming Conventions
+
+CUDA libraries are split into separate packages with standard naming:
+
+- The base package (e.g., `libcublas`) provides runtime shared libraries.
+- The `*-dev` package includes headers, symlinks, and CMake files for compiling code that dynamically links the library.
+- The `*-static` package includes the static library for static linking.
+  For build files, users may also needed to install the `*-dev` packages.
+
+For example, [libcublas](https://github.com/conda-forge/libcublas-feedstock) is available as `libcublas`, `libcublas-dev`, and `libcublas-static`.
+
+#### Development Metapackages
+
+The above discussion of naming also applies to metapackages. For instance, the
+`cuda-libraries` package contains all the runtime libraries, while `cuda-libraries-dev` also
+includes dependencies on the corresponding `*-dev` packages. In addition, for the purposes
+of development there are a few additional key metapackages:
+
+- `cuda-compiler`: All packages required to compile a minimal CUDA program (one that does
+  not require e.g. extra math libraries like cuBLAS or cuSPARSE).
+
+#### Compatibility between the `conda-forge` vs `nvidia` channels
+
+Understanding the difference between the CUDA packages on the `conda-forge` and `nvidia`
+channels requires a bit of history because of how the relationship has evolved over time. In
+particular, how these channels may or may not coexist will depend on the versions of CUDA
+that you need support for.
+
+<details>
+<summary>Pre-CUDA 12</summary>
+
+Prior to CUDA 12, the only package available on `conda-forge` was the `cudatoolkit` package,
+a community-maintained, monolithic package containing the entire repackaged CTK. During the
+CUDA 11 release cycle, NVIDIA began developing a set of CUDA Toolkit packages in the
+`nvidia` channel. Unlike the monolithic `conda-forge` package, the `nvidia` channel
+distributed the CTK split into components such that each library was given its own package.
+This package organization made it possible to install separate components independently and
+better aligned the conda packaging ecosystem with other package managers, such as those for
+Linux distributions. However, this organization introduced a number of changes that were at
+times confusing -- such as the introduction of a `cuda-toolkit` (note the hyphen)
+metapackage that installs a partially overlapping set of components to the original
+`cudatoolkit` -- and at other times breaking, particularly in conda environments configured
+to pull packages from both `conda-forge` and the `nvidia` channel. Therefore, in a CUDA 11
+world the `conda-forge` and `nvidia` channels were difficult to use in the same environment
+without some care.
+
+</details>
+<details>
+<summary>CUDA 12.0-12.4</summary>
+
+With the CUDA 12 release, NVIDIA contributed the new packaging structure to `conda-forge`,
+introducing the CUDA Toolkit packages that existed on the `nvidia` channel as a replacement
+for the old `cudatoolkit` package on `conda-forge`. This was done starting with CUDA 12.0 to
+indicate the breaking nature of these changes compared to the prior CUDA 11.x packaging in
+`conda-forge`. These packages became the standard mechanism for delivering CUDA conda
+packages. Due to the scale of the reorganization, the CUDA 12.0, 12.1, and 12.2 releases
+also involved numerous additional fixes to the packaging structure to better integrate them
+in the conda ecosystem. Due to the number of such changes that were required and the focus
+on improving the quality of these installations, no corresponding updates were provided for
+packages on the `nvidia` channel during this time period. While the `conda-forge` and
+`nvidia` channel package lists were the same (i.e. the same packages existed in both places
+with the same core contents like libraries and headers), the `nvidia` channel did not
+include many of the incremental fixes made on `conda-forge` to improve things like symlinks,
+static library handling, proper package constraints, etc. As a result, `nvidia` and
+`conda-forge` CUDA packages remained incompatible from CUDA 12.0-12.4.
+
+</details>
+<details>
+<summary>CUDA 12.5+</summary>
+
+With CUDA 12.5, the `nvidia` channel was fully aligned with `conda-forge`. Packages on both
+channels are identical, ensuring safe coexistence of the two channels within the same conda
+environment.
+
+Additionally [Anaconda has incorporated compatible CUDA 12 packages in its `defaults` channel]( https://www.anaconda.com/blog/anaconda-accelerates-ai-development-and-deployment-with-nvidia-cuda-toolkit).
+
+Going forward, CUDA packages on the `conda-forge` and `nvidia` channels should be expected
+to remain compatible.
+
+</details>
+<details>
+<summary>CUDA 13.4+</summary>
+
+CUDA 13.3, is the last CTK release to the `nvidia` channel.
+
+Going forward, CUDA packages should be retrieved from `conda-forge`.
+</details>
+
+### CUDA for Maintainers
+
+Although the provisioned CI machines do not feature a GPU, conda-forge does provide mechanisms
+to build CUDA-enabled packages.
+See the [guide for maintainers of recipes that use CUDA](https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/doc/recipe_guide.md)
+for more information.
+If a feedstock does need access to additional resources (like GPUs), please see the following
+[section](#packages-that-require-a-gpu-or-long-running-builds).
+
+<a id="common-problems-and-known-issues"></a>
+
+### Common problems and known issues
+
+#### What if I see an error saying `__cuda` is too old?
+
+The `__cuda` virtual package is used by `conda` to represent the maximum CUDA version fully
+supported by the available CUDA driver. See the [conda docs on virtual
+packages](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html)
+for more information.
+
+To update the `__cuda` virtual package, you must install a newer driver:
+
+- [Linux instructions](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#driver-installation)
+- [Windows instructions](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#installing-cuda-development-tools)
+
+If conda has incorrectly identified the CUDA driver, you can override by setting the
+`CONDA_OVERRIDE_CUDA` environment variable to a version number like `"12.5"` or `""` to
+indicate that no CUDA driver is detected.
+
+#### Can I install CUDA conda packages in a CPU-only environment (such as free-tier CIs)?
+
+Yes! All of the CUDA packages can be installed in an environment without the presence of a
+physical GPU or CUDA driver. The inter-package dependency is established properly so that
+this use case is covered. If you want to test package installation assuming a certain driver
+version is installed, use the `CONDA_OVERRIDE_CUDA` environment variable mentioned above.
+Even if the package requires CUDA to run, this allows the packaging and dependency
+resolution to be tested in a CPU-only environment.
+
+<a id="nvcuda-dll-cannot-be-found-on-windows"></a>
+
+#### `nvcuda.dll` cannot be found on Windows
+
+The [scripts](https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/main/recipe/install_cuda.bat)
+used to install the CUDA Toolkit on Windows cannot provide `nvcuda.dll`
+as part of the installation because no GPU is physically present in the CI machines.
+As a result, you might get linking errors in the postprocessing steps of `conda build`:
+
+```default
+WARNING (arrow-cpp,Library/bin/arrow_cuda.dll): $RPATH/nvcuda.dll not found in packages,
+sysroot(s) nor the missing_dso_whitelist.
+
+.. is this binary repackaging?
+```
+
+For now, you will have to add `nvcuda.dll` to the `missing_dso_whitelist`
+
+<RecipeTabs>
+
+```recipe
+build:
+  ...
+  missing_dso_whitelist:
+    - "*/nvcuda.dll"   # [win]
+```
+
+```recipe
+build:
+  ...
+  dynamic_linking:
+    missing_dso_allowlist:
+      - if: win
+        then: "*/nvcuda.dll"
+```
+
+</RecipeTabs>
+
+<a id="my-feedstock-is-not-building-old-cuda-versions-anymore"></a>
+
+#### My feedstock is not building old CUDA versions anymore
+
+As new CUDA versions come out regularly, periodically conda-forge needs to
+decide how many versions will be supported within resource constraints.
+As of August 2026, conda-forge supports CUDA 12 and 13.
+
+To update to the latest supported versions [rerender the feedstock](updating_pkgs.md#dev-update-rerender).
+There may be other fixes needed for the feedstock depending on when it was last updated.
+
+<a id="opengpuserver"></a>
+
+<a id="packages-that-require-a-gpu-or-long-running-builds"></a>
+
+## Packages that require a GPU or long-running builds
+
+See [How to configure self-hosted runners](/docs/how-to/advanced/self-hosted-runners.mdx).
+
+<a id="osxarm64"></a>
+
+<a id="apple-silicon-builds"></a>
+
+## Apple Silicon builds
+
+See [How to enable additional architectures](/docs/how-to/advanced/enable-archs.md).
+
+<a id="pre-release-builds"></a>
+
+## Pre-release builds
+
+Recipe maintainers can make pre-release builds available on
+conda-forge by adding them to the `dev` or `rc` label.
+
+The semantics of these labels should generally follow the
+[guidelines](https://devguide.python.org/developer-workflow/development-cycle/index.html#stages) that Python
+itself follows.
+
+- `rc`: [Beta](https://devguide.python.org/developer-workflow/development-cycle/index.html#beta) and [Release
+  Candidate](https://devguide.python.org/developer-workflow/development-cycle/index.html#release-candidate-rc)
+  (RC). No new features. Bugfix only.
+- `dev`: [Pre-Alpha](https://devguide.python.org/developer-workflow/development-cycle/index.html#pre-alpha)
+  and [Alpha](https://devguide.python.org/developer-workflow/development-cycle/index.html#alpha). These are
+  still packages that could see substantial changes
+  between the dev version and the final release.
+
+:::note
+
+`alpha` and `beta` labels aren't used. Given the light usage of labels on the conda-forge
+channel thus far, it seems rather unnecessary to introduce many labels.
+`dev` and `rc` seem like a nice compromise.
+
+:::
+
+:::note
+
+Certain packages (for example [black](https://pypi.org/project/black/#history)) follow
+a release cycle in which they have never had a non-beta/alpha release. In these cases
+the conda packages for those do _not_ need to be published to a prerelease label.
+
+:::
+
+<a id="creating-a-pre-release-build"></a>
+
+### Creating a pre-release build
+
+To create a `dev` or `rc` package, a PR can be issued into the `dev` or `rc` branch of the
+feedstock.
+This branch must change the `recipe/conda_build_config.yaml` file to point to the `<package_name>_dev` or `<package_name>_rc` label.
+
+For example, matplotlib rc releases would include:
+
+```yaml title="recipe/conda_build_config.yaml"
+channel_targets:
+  - conda-forge matplotlib_rc
+```
+
+If a pre-release build of B depends on a pre-release build of A, then A should have,
+
+```yaml title="recipe/conda_build_config.yaml"
+channel_targets:
+  - conda-forge A_rc
+```
+
+while B should have,
+
+```yaml title="recipe/conda_build_config.yaml"
+channel_sources:
+  - conda-forge/label/A_rc,conda-forge
+channel_targets:
+  - conda-forge B_rc
+```
+
+in `recipe/conda_build_config.yaml` in their respective feedstocks.
+
+:::note
+
+A rerender needs to happen for these changes to reflect in CI files. The channel_targets entries map
+
+- \<channel target> \<label target> pairs for use in the post-build upload step.
+
+:::
+
+<a id="installing-a-pre-release-build"></a>
+
+### Installing a pre-release build
+
+<a id="using-the-conda-cli"></a>
+
+#### Using the conda CLI
+
+Use the following command, but replace `PACKAGE_NAME` with the package you want
+to install and replace `LABEL` with `rc` or `dev`:
+
+```yaml
+conda install -c conda-forge/label/PACKAGE_NAME_LABEL -c conda-forge PACKAGE_NAME
+```
+
+For example, let's install matplotlib from the `rc` label:
+
+```yaml
+conda install -c conda-forge/label/matplotlib_rc -c conda-forge matplotlib
+```
+
+<a id="using-environment-yml"></a>
+
+#### Using environment.yml
+
+Use [MatchSpec](https://github.com/conda/conda/blob/c3fb8150ed4c3dabb7ca376ade208095f98ee0b9/conda/models/match_spec.py#L70-L150)
+to specify your package:
+
+```yaml title="environment.yml"
+dependencies:
+  - conda-forge/label/matplotlib_rc::matplotlib=3.7.0rc1
+```
+
+Alternately, you can use the channels section to enable the matplotlib_rc channel:
+
+```yaml title="environment.yml"
+channels:
+  - conda-forge/label/matplotlib_rc
+dependencies:
+  - matplotlib=3.7.0.rc1
+```
+
+<a id="pre-release-version-sorting"></a>
+
+### Pre-release version sorting
+
+If you wish to add numbers to your `dev` or `rc` build, you should follow the
+[guidelines](https://docs.conda.io/projects/conda/en/stable/user-guide/concepts/pkg-specs.html#version-ordering) put
+forth by Continuum regarding version sorting in `conda`. Also see the [source
+code for conda
+4.2.13](https://github.com/conda/conda/blob/4.2.13/conda/version.py#L93-L119).
+The tl;dr here is that conda sorts as follows:
+
+```default
+< 1.0
+< 1.1dev1    # special case 'dev'
+< 1.1.0dev1  # special case 'dev'
+== 1.1.dev1   # 0 is inserted before string
+< 1.1.0rc1
+< 1.1.0
+```
+
+So make sure that you **tag** your package in such a way that the package name
+that conda-build spits out will sort the package uploaded with an `rc` label
+higher than the package uploaded with the `dev` label.
+
+<a id="packages-without-upstream-versions"></a>
+
+## Packages without upstream versions
+
+The preferred approach is always to **ask upstream to add version tags** to
+their repository. Proper upstream versioning benefits the entire packaging
+ecosystem and avoids ambiguity.
+
+However, when this is impractical — for example, when the upstream repository
+only uses platform-specific release tags (e.g. Android release versions) that
+don't reflect the package's own versioning, or the project is unlikely to
+adopt conventional versioning — use the **`0.0.0.YYYY.MM.DD`** version format,
+where `YYYY.MM.DD` is the date of the pinned commit.
+
+This format is preferred because:
+
+- **All segments are numeric**, which is required by conda's
+  `apply_pin_expressions()` for compatibility specifications.
+- **Any future real release** (e.g. `0.0.1`) will automatically sort higher.
+- It clearly communicates that this is not an official upstream version.
+
+When packaging from a specific commit, always pin the source using `rev:` with
+the full commit hash rather than a branch name. This ensures reproducible
+builds.
+
+```recipe title="recipe.yaml"
+context:
+  version: "0.0.0.2026.01.22"
+
+source:
+  git: https://example.com/project.git
+  rev: abc123def456  # pin to a specific commit
+```
+
+For more context, see the discussion on
+[conda-forge/staged-recipes#30713](https://github.com/conda-forge/staged-recipes/pull/30713).
+
+<a id="how-to-update-your-feedstock-token"></a>
+
+## How to update your feedstock token?
+
+To reset your feedstock token and fix issues with uploads, follow these steps:
+
+1. Go to the `conda-forge/admin-requests` repo and copy [examples/example-token-reset.yml](https://github.com/conda-forge/admin-requests/blob/main/examples/example-token-reset.yml) to the `requests/` folder.
+2. Add the name of your feedstock in the YML file. While adding the name, don't add "-feedstock" to the end of it. For example: for `python-feedstock`, just add `python`.
+
+<a id="using-arch-rebuild"></a>
+
+<a id="using-arch-rebuild-txt"></a>
+
+## Using `arch_rebuild.txt`
+
+You can add a feedstock to `arch_rebuild.txt` if it requires rebuilding with different architectures/platforms (such as `ppc64le` or `aarch64`).
+Check the [migration status](https://conda-forge.org/status/#aarch64andppc64leaddition) to see if your package is already in the queue to get migrated.
+If not, you can add the feedstock to [`arch_rebuild.txt`](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migration_support/arch_rebuild.txt)
+by opening a PR to the [conda-forge-pinning-feedstock repository](https://github.com/conda-forge/conda-forge-pinning-feedstock).
+Once the PR is merged, the migration bot goes through the list of feedstocks in `arch_rebuild.txt` and opens a migration PR for any new feedstocks and their dependencies, enabling the aarch64/ppc64le builds.
+
+<a id="migrations-and-migrators"></a>
+
+<a id="migrators-and-migrations"></a>
+
+## Migrators and Migrations
+
+When any changes are made in the global pinnings of a package, then the entire stack of the packages that need that package on their `host` section would need to be updated and rebuilt.
+Doing it manually can be quite tedious, and that's where migrations come to help. Migrations automate the process of submitting changes to a feedstock and are an integral part of the `regro-cf-autotick-bot`'s duties.
+
+There are several kinds of migrations, which you can read about in [Making Migrators](https://github.com/conda-forge/conda-forge-bot/blob/main/README.md#making-migrators). To generate these migrations, you use migrators, which are bots that automatically create pull requests for the affected packages in conda-forge.
+To propose a migration in one or more pins, the migrator issues a PR into the pinning feedstock using a yaml file expressing the changes to the global pinning file in the migrations folder.
+Once the PR is merged, the dependency graph is built. After that, the bot walks through the graph, migrates all the nodes (feedstocks) one by one, and issues PRs for those feedstocks.
+
+Usually, the bot generates these migrations automatically. However, when a pin is first made or added, one may need to be added by hand. To do this, you can follow the steps mentioned in [Updating package pins](pinning_deps.mdx#updating-package-pins).
+
+The way migrations proceed are:
+
+> 1. You make a PR into the `migrations` folder in the [conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock) with a new yaml file representing the migration.
+> 2. Once the PR is merged, the bot picks it up, builds a migrator graph, and begins the migration process.
+> 3. A migration PR is issued for a node (a feedstock) only if:
+
+>     - The node depends on the changed pinnings.
+>     - The node has no dependencies that depend on the new pinnings and have not been migrated.
+>
+> 1. Process 3 continues until the migration is complete and the change is applied to the global pinning file via a final PR. After this step, we say this migration is closed out.
+
+Sometimes, you might get a migration PR for your package that you don't want to merge. In that case, you should put that PR in draft status but should never close it.
+If you close the PR, it makes the bot think that another PR implementing the migration is merged instead, letting the migration continue iterating on the graph; however, the downstream dependents fail because the parent (the one we closed the PR of) didn't really get rebuilt.
+Another reason why it is good to keep the PR open or in draft status is that people might help with it if they want in the future.
+
+In some cases a migration PR may not get opened. Please look for
+[the migration on our status page](https://conda-forge.org/status/#big_migrations)
+to see if there are any issues. This may show there are still dependencies
+needing migration, in which case the best approach is to wait (or if possible
+offer to help migrate those dependencies). If there is a bot error, there will
+be a link to the CI job to provide more details about what may have gone wrong.
+In these cases [please raise an issue](http://github.com/conda-forge/conda-forge-bot/issues/new)
+and include as much information as possible.
+
+It is worth noting that one also has the option to create a migration PR
+themselves. This can be a good option if the bot errored and that is still
+being investigated or the migration PR got closed accidentally. To migrate a PR manually:
+
+> 1. Fork the feedstock and clone it locally
+> 2. Create a new branch
+> 3. Create the directory `.ci_support/migrations` in the feedstock (if absent)
+> 4. Copy the migrator from [conda-forge-pinning's migrators](https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/main/recipe/migrations) to `.ci_support/migrations` and commit it
+> 5. [Rerender](updating_pkgs.md#dev-update-rerender) the feedstock
+> 6. Push these changes and open a PR
+
+## Security considerations for conda-forge builds
+
+Moved to [Security → General considerations](/docs/maintainer/security/general-considerations).
+
+<a id="significant-changes-to-upstream-projects"></a>
+
+## Significant Changes To Upstream Projects
+
+From time to time, we make changes in upstream projects so that they better integrate into the conda-forge ecosystem. We
+have listed some, but not all, of those changes here for specific projects along with any associated documentation.
+
+<a id="python"></a>
+
+### Python
+
+We carry an extensive set of python patches that change some core behaviors around search paths, environment isolation
+in conda environments, and some operating system limits. See the [python feedstock](https://github.com/conda-forge/python-feedstock) for more details.

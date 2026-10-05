@@ -38,7 +38,8 @@ that mismatch can lead to errors when the install environment is mixing packages
 
 :::note
 
-All of conda-forge software pinning can be found at: [https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/master/recipe/conda_build_config.yaml)
+All of conda-forge software pinning can be found at:
+[https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml)
 
 :::
 
@@ -71,17 +72,6 @@ channels:
 In addition to the channel priority, we recommend always installing your packages inside a new environment instead of the `base` environment from anaconda/miniconda.
 Using envs make it easier to debug problems with packages and ensure the stability of your root env.
 
-:::note
-
-In the past conda-forge used to vendorize some of `defaults` dependencies that were not built in our infrastructure,
-like compilers run-times, to avoid the mixing channel problem.
-However, with the `strict` option, we no longer have to vendorize those (this led to its own set of problems),
-instead, we removed everything that is not built in conda-forge and let `strict` pull those from `defaults`.
-
-TL;DR if you are experiencing missing compilers run-times like `libgcc-ng`,
-that is probably because you removed `defaults`,
-just re-add it and activate `strict` for a smooth and stable experience when installing packages.
-
 :::
 
 <a id="using-external-message-passing-interface-mpi-libraries"></a>
@@ -104,8 +94,8 @@ correct environments while avoiding installing MPI binaries from conda-forge. Yo
 dummy package with the following command
 
 ```shell-session
-$ conda install "mpich=x.y.z=external_*"
-$ conda install "openmpi=x.y.z=external_*"
+$ conda install -c conda-forge/label/mpi-external mpich
+$ conda install -c conda-forge/label/mpi-external openmpi
 ```
 
 As long as you have the local copies of the `mpich`/`openmpi` library in your linking paths and
@@ -149,29 +139,38 @@ echo "CONDA_SUBDIR: $CONDA_SUBDIR"  # Should print "CONDA_SUBDIR: osx-64"
 
 ## Installing CUDA-enabled packages like TensorFlow and PyTorch
 
-In conda-forge, some packages are available with GPU support. These packages not only take significantly longer to compile and build, but they also result in rather large binaries that users then download. As an effort to maximize accessibility for users with lower connection and/or storage bandwidth, there is an ongoing effort to limit installing packages compiled for GPUs unnecessarily on CPU-only machines by default. This is accomplished by adding a run dependency, `__cuda`, that detects if the local machine has a GPU. However, this introduces challenges to users who may prefer to still download and use GPU-enabled packages even on a non-GPU machine. For example, login nodes on HPCs often do not have GPUs and their compute counterparts with GPUs often do not have internet access. In this case, a user can override the default setting via the environment variable `CONDA_OVERRIDE_CUDA` to install GPU packages on the login node to be used later on the compute node. At the time of writing (February 2022), we have concluded this safe default behavior is best for most of conda-forge users, with an easy override option available and documented. Please let us know if you have thoughts on or issues with this.
+In conda-forge, some packages are available with GPU support. These packages not only take significantly longer to compile and build, but they also result in rather large binaries that users then download. As an effort to maximize accessibility for users with lower connection and/or storage bandwidth, there is an ongoing effort to limit installing packages compiled for GPUs unnecessarily on CPU-only machines by default. This is accomplished by adding a [virtual package](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html) run dependency, `__cuda`, that detects if the local machine has a GPU. However, this introduces challenges to users who may prefer to still download and use GPU-enabled packages even on a non-GPU machine. For example, login nodes on HPCs often do not have GPUs and their compute counterparts with GPUs often do not have internet access. In this case, a user can override the default setting via the environment variable `CONDA_OVERRIDE_CUDA` to install GPU packages on the login node to be used later on the compute node. At the time of writing (February 2022), we have concluded this safe default behavior is best for most of conda-forge users, with an easy override option available and documented. Please let us know if you have thoughts on or issues with this.
 
 In order to override the default behavior, a user can set the environment variable `CONDA_OVERRIDE_CUDA` like below to install TensorFlow with GPU support even on a machine with CPU only.
 
 ```shell-session
-CONDA_OVERRIDE_CUDA="11.2" conda install "tensorflow==2.7.0=cuda112*" -c conda-forge
+CONDA_OVERRIDE_CUDA="<CUDA version>" conda install tensorflow -c conda-forge
 # OR
-CONDA_OVERRIDE_CUDA="11.2" mamba install "tensorflow==2.7.0=cuda112*" -c conda-forge
+CONDA_OVERRIDE_CUDA="<CUDA version>" mamba install tensorflow -c conda-forge
 ```
 
 :::note
 
-You should select the cudatoolkit version most appropriate for your GPU; currently, we have "10.2", "11.0", "11.1", and "11.2" builds available, where the "11.2" builds are compatible with all cudatoolkits>=11.2. At the time of writing (Mar 2022), there seems to be a bug in how the CUDA builds are resolved by `mamba`, defaulting to `cudatoolkit==10.2`; thus, it is prudent to be as explicit as possible like above or by adding `cudatoolkit>=11.2` or similar to the line above.
+See the [relevant CUDA user guides](https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/README.md) for more information.
 
 :::
 
-For context, installing the TensorFlow 2.7.0 CUDA-enabled variant, `tensorflow==2.7.0=cuda*`, results in approximately 2 GB of packages to download while the CPU variant, `tensorflow=2.7.0=cpu*`, results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the CPU only variant!
+For context, installing the TensorFlow 2.7.0 CUDA-enabled variant, `tensorflow=2.7.0=cuda*`, results in approximately 2 GB of packages to download while the CPU variant, `tensorflow=2.7.0=cpu*`, results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the CPU only variant!
 
 <a id="pypy"></a>
 
 <a id="using-pypy-as-an-interpreter"></a>
 
 ## Using PyPy as an interpreter
+
+:::warning
+
+As of August 2024, [PyPy support in conda-forge has been sunset](/news/2024/08/14/sunsetting-pypy/).
+It still may be possible to create an environment using an old version of PyPy, but (with the
+exception of noarch packages still compatible with python 3.9), you will be constrained to the
+packages that were built for PyPy until mid-2024.
+
+:::
 
 The `conda-forge` channel supports creating and installing packages into
 environments using the [PyPy interpreter](https://www.pypy.org). Many packages are already
@@ -182,11 +181,6 @@ the `pypy` identifier when creating your environment:
 $ conda create -c conda-forge -n my-pypy-env pypy python=3.8
 $ conda activate my-pypy-env
 ```
-
-Currently supported python versions are 3.8 and 3.9. Support for `pypy3.7`
-has been dropped. While you can still create a python 3.7 environment, you
-you will not be getting updates as new package versions are released (including
-pypy itself).
 
 :::note
 

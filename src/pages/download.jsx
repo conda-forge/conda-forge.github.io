@@ -25,7 +25,7 @@ export default function Home() {
                     <h1>
                         Installation
                     </h1>
-                    <p>Basic installation instructions are available below. More detailed instructions are available <a href="https://github.com/conda-forge/miniforge/?tab=readme-ov-file#install">here</a>.</p>
+                    <p>Basic installation instructions are available below. More detailed instructions are available at <a href="https://github.com/conda-forge/miniforge" target="_blank">conda-forge/miniforge</a>.</p>
                     <h2>
                         Unix-like platforms (Mac OS & Linux)
                     </h2>

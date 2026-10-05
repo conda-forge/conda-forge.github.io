@@ -8,7 +8,7 @@ export default function Home() {
       title="Status dashboard"
       description="Status dashboard for conda-forge"
     >
-      <StatusDashboard />
+      <StatusDashboard/>
     </Layout>
   );
 }

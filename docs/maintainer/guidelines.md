@@ -43,7 +43,7 @@ The section order should go `package`, `source`, `build`,
 `requirements`, `test`, `about`, `extra/recipe-maintainers`. It
 is recommended to add a `build` section with the `number` set to
 `0` explicitly even if the rest is unneeded. If there is no build for
-Windows, make sure to add `skip: True  # [win]` to the `build`
+Windows, make sure to add `skip: true  # [win]` to the `build`
 section. The `about` section must have the `home` URL (verify if the
 URL is still correct), `license` (verify if the correct license is present),
 and a one sentence (or few words) `summary`. When specifying the version, it
@@ -100,7 +100,7 @@ Sometimes, packages are misnamed.
 To correct the name of the package, please submit a PR into [staged-recipes](https://github.com/conda-forge/staged-recipes) with the correct name.
 During the review process, please make certain to note that the package is renamed and contact a member of conda-forge/core to remove the old feedstock (and potentially package, if needed).
 
-Occasionally, the .gitmodules file in the [feedstocks](https://github.com/conda-forge/feedstocks/blob/master/.gitmodules) needs to be updated to remove the old feedstock.
+Occasionally, the .gitmodules file in the [feedstocks](https://github.com/conda-forge/feedstocks/blob/main/.gitmodules) needs to be updated to remove the old feedstock.
 It's not entirely clear what those circumstances are.
 See [conda-forge.github.io#1070](https://github.com/conda-forge/conda-forge.github.io/issues/1070).
 
@@ -164,23 +164,11 @@ As it comes up, each group should be able to define their own policy on how long
 
 ### Python
 
-For the Python language, conda-forge aims to keep package builds active and available for the current version and at least two preceding minor versions.
+For the Python language, conda-forge aims to keep package builds active and available for [all the Python versions currently supported upstream](https://devguide.python.org/versions/).
+However, the support for the oldest `3.{n}` version may be disabled a few months before it reaches its end-of-life, once migration for the `3.{n+5}rc` starts.
 Whenever Python 4.0 comes out we'll need to figure out if this policy should change to support multiple versions of 3.x and 4.x simultaneously.
 Fortunately, we can punt on that for now.
-The question of when to decide to drop an older language version remains.
-The guidance that we can provide here is two fold:
-
-1. We will move with the community.
-   When our core libraries stop supporting an old version, so too will conda forge.
-   The (nonexhaustive) list of core libraries that we consider when making the decision to drop an older version are:
-   - matplotlib
-   - numpy
-   - scipy
-   - pypy
-2. The core team can decide to keep an old version around temporarily until some specific criteria is met.
-   For example, we're holding off on turning off py36 until pypy comes out with pypy3.7.
-3. If there are lots of people in the community relying on older versions, core team can decide to keep an old version around.
-   For example, we held off turning off py27 even after numpy, scipy dropped support as there were many in the community interested in keeping support until the end of life of that version.
+The current de facto policy can be found in [python-feedstock#794](https://github.com/conda-forge/python-feedstock/issues/794).
 
 <a id="reviewer-guidelines"></a>
 
@@ -188,7 +176,7 @@ The guidance that we can provide here is two fold:
 
 ## Reviewing recipes
 
-To add new packages to conda-forge, users can submit a PR to `staged-recipes` (see [Contributing packages](adding_pkgs.md#dev-contribute-pkgs) for more details),
+To add new packages to conda-forge, users can submit a PR to `staged-recipes` (see [Contributing packages](../adding_pkgs) for more details),
 where it will undergo a series of automated checks and a code review.
 Any conda-forge member can perform a code review, but the final merge can only be done by the `staged-recipes` or `core` teams.
 The following sections suggest guidelines on how to perform a successful code review.
@@ -219,7 +207,7 @@ Recommended:
 
 1. Source should be obtained from a URL that provides a stable tarball (same SHA over time).
    Git or other SVC repositories should only be used as a last resort.
-2. Host requirements contained in the [conda-forge pinnings](pinning_deps.md#pinned-deps) should be _name-only_; i.e. they do not specify a separate version.
+2. Host requirements contained in the [conda-forge pinnings](pinning_deps.mdx) should be _name-only_; i.e. they do not specify a separate version.
 3. Runtime requirements are not pinned too strictly without justification.
    Thanks to repodata patches, we can afford to be optimistic about lower or upper bounds instead of single-version pins: `>=1.4.2,<1.5` is better than `==1.4.2`.
 4. The package should place its files under standard locations (e.g. executables under `$PREFIX/bin`), unless justification is provided.
@@ -230,7 +218,7 @@ Recommended:
 
 Required:
 
-1. `noarch: python` packages fulfill the [required criteria](knowledge_base.md#noarch) to be considered as such.
+1. `noarch: python` packages fulfill the [required criteria](/docs/how-to/basics/noarch/#noarch-python) to be considered as such.
 
 Recommended:
 
@@ -240,8 +228,8 @@ Recommended:
    Alternatively, a patch can be applied. See [example](https://github.com/conda-forge/staged-recipes/pull/19166/commits/0284fc6da273031a4f93a1fea4533822cd4b385d).
 2. The modules checked by `test.imports` are not empty (this can happen with placeholder `__init__.py` files in top-level packages).
 3. The versions reported by `pip list` and `conda build` logs match.
-4. `pip check` passes. See [pip check](adding_pkgs.md#pip-check) for more details.
-5. If a project can be considered `noarch` (see [criteria](knowledge_base.md#noarch)), it should be packaged as such.
+4. `pip check` passes. See [pip check](../adding_pkgs#testing-python-packages) for more details.
+5. If a project can be considered `noarch` (see [criteria](/docs/how-to/basics/noarch/#noarch-python)), it should be packaged as such.
 
 <a id="compiled-objects"></a>
 
@@ -250,11 +238,11 @@ Recommended:
 Required:
 
 1. The source does not include compiled files.
-   In principle, all compiled objects need to be generated in the CI, from source.
+   In principle, all compiled objects need to be generated in the conda-forge CI, from source.
    Exceptions to this rule (e.g. binary repackaging) need to be approved explicitly.
 
 Recommended:
 
 1. SONAMEs follow naming recommendations given by upstream.
 2. If ABI compatibility is important for the package, `run_exports` are set accordingly.
-   See [Pinned dependencies](pinning_deps.md#pinned-deps) and the [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#export-runtime-requirements) for more information.
+   See [Pinned dependencies](pinning_deps.mdx) and the [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#export-runtime-requirements) for more information.

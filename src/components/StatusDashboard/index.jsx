@@ -35,7 +35,7 @@ export default function StatusDashboard() {
   const onLoadIncidents = incidents =>
     setState((prev) => ({ ...prev, incidents, loaded: prev.loaded + 1 }));
   return (
-    <main className="container">
+    <main className="container" style={{ paddingBottom: "1em" }}>
       <div className="row row--no-gutters">
         <div className="col col--2"><TOC /></div>
         <div className="col col--10">
@@ -61,6 +61,12 @@ export default function StatusDashboard() {
           </div>
           <div className="row row--no-gutters">
             <div className="col col--12">
+              <div id="version" className={styles.toc_anchor}></div>
+              <VersionUpdates onLoad={onLoad} />
+            </div>
+          </div>
+          <div className="row row--no-gutters">
+            <div className="col col--12">
               <div id="azure" className={styles.toc_anchor}></div>
               <UsageChart
                 backgroundColor={chartColors[colorMode]}
@@ -81,22 +87,8 @@ export default function StatusDashboard() {
           </div>
           <div className="row row--no-gutters">
             <div className="col col--12">
-              <div id="travis" className={styles.toc_anchor}></div>
-              <UsageChart
-                backgroundColor={chartColors[colorMode]}
-                onLoad={onLoad}
-                url={urls.travis.usage}
-                title="Travis CI Usage" />
-            </div>
-          </div>
-          <div className="row row--no-gutters">
-            <div className="col col--6">
               <div id="incidents" className={styles.toc_anchor}></div>
               <Incidents onLoad={onLoadIncidents} />
-            </div>
-            <div className="col col--6">
-              <div id="version" className={styles.toc_anchor}></div>
-              <VersionUpdates onLoad={onLoad} />
             </div>
           </div>
         </div>

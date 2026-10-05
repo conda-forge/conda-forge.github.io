@@ -11,6 +11,7 @@
       "user/introduction",
       "user/tipsandtricks",
       "user/ci-skeleton",
+      "user/transitioning_from_defaults",
       "user/faq",
       "user/contributing",
       "user/how_to_get_help",
@@ -31,6 +32,7 @@
       "maintainer/updating_pkgs",
       "maintainer/pinning_deps",
       "maintainer/conda_forge_yml",
+      "maintainer/linter",
       "maintainer/knowledge_base",
       "maintainer/maintainer_faq",
       {
@@ -44,6 +46,29 @@
           "maintainer/understanding_conda_forge/life_cycle",
           "maintainer/understanding_conda_forge/staged_recipes",
           "maintainer/understanding_conda_forge/feedstocks"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Reference",
+        "link": {
+          "type": "doc",
+          "id": "reference/index"
+        },
+        "items": ["reference/runners"]
+      },
+      {
+        "type": "category",
+        "label": "Example recipes",
+        "link": {
+          "type": "doc",
+          "id": "maintainer/example_recipes/index"
+        },
+        "items": [
+          "maintainer/example_recipes/go",
+          "maintainer/example_recipes/rust",
+          "maintainer/example_recipes/pure-python",
+          "maintainer/example_recipes/abi3"
         ]
       }
     ]

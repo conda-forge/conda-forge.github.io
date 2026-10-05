@@ -25,6 +25,12 @@
   line-height: 30px;
 }
 
+.supporters_conda_forge h1 a {
+  text-decoration: none;
+  color: inherit;
+  cursor: default;
+}
+
 .supporters_conda_forge p {
   font-size: 18px;
   font-weight: 500;

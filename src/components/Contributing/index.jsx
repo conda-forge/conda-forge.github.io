@@ -34,10 +34,10 @@ const contributing = [
         Svg: require("@site/static/img/contributing/help.svg").default,
         alt: "Question mark icon",
         title: "Ask For Help",
-        href: "https://app.element.io/#/room/#conda-forge:matrix.org",
+        href: "https://conda-forge.zulipchat.com/",
         content: (
             <>
-                Join the conda-forge community on Element and reach out for{" "}
+                Join the conda-forge community on Zulip and reach out for{" "}
                 assistance whenever needed.
             </>
         ),

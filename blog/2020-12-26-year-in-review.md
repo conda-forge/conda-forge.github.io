@@ -9,6 +9,8 @@ tags: [conda-forge]
 As 2020 winds down, the Core team thought it'd be fun to review some of
 the big accomplishments our community has made this year.
 
+<!-- truncate -->
+
 ## Strong Growth
 
 The `conda-forge` community has grown immensely this year. Here are some

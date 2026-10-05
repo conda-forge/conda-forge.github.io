@@ -31,10 +31,24 @@ const infrastructure = [
   //   width: 250,
   // },
   {
+    name: "Blacksmith",
+    link: "https://blacksmith.sh",
+    light: "img/supporters/blacksmith_light.png",
+    dark: "img/supporters/blacksmith_dark.png",
+    width: 200,
+  },
+  {
     name: "Cirun",
     link: "https://cirun.io",
     light: "img/supporters/cirun_light.svg",
     dark: "img/supporters/cirun_dark.svg",
+    width: 200,
+  },
+  {
+    name: "Depot",
+    link: "https://depot.dev",
+    light: "img/supporters/depot_light.svg",
+    dark: "img/supporters/depot_dark.svg",
     width: 200,
   },
   {
@@ -52,11 +66,11 @@ const infrastructure = [
   //   width: 150,
   // },
   {
-    name: "MetroStar",
-    link: "https://www.metrostar.com/company/",
-    light: "img/supporters/metrostar_light.svg",
-    dark: "img/supporters/metrostar_dark.svg",
-    width: 210,
+    name: "Namespace.so",
+    link: "https://namespace.so",
+    light: "img/supporters/namespace_light.svg",
+    dark: "img/supporters/namespace_dark.svg",
+    width: 250,
   },
   {
     name: "Oracle Cloud",
@@ -80,6 +94,13 @@ const infrastructure = [
     width: 220,
   },
   {
+    name: "Pulumi",
+    link: "https://www.pulumi.com/",
+    light: "img/supporters/pulumi_light.svg",
+    dark: "img/supporters/pulumi_dark.svg",
+    width: 220,
+  },
+  {
     name: "Quansight",
     link: "https://www.quansight.com/",
     light: "img/supporters/quansight_light.svg",
@@ -98,6 +119,13 @@ const infrastructure = [
     link: "https://prefix.dev/",
     light: "img/supporters/prefix_light.svg",
     dark: "img/supporters/prefix_dark.svg",
+    width: 250,
+  },
+  {
+    name: "Zulip",
+    link: "https://zulip.com",
+    light: "img/supporters/zulip.svg",
+    dark: "img/supporters/zulip.svg",
     width: 250,
   },
 ];
@@ -125,13 +153,6 @@ const developer = [
     width: 250,
   },
   {
-    name: "Voltron Data",
-    link: "https://voltrondata.com/",
-    light: "img/supporters/voltron_light.svg",
-    dark: "img/supporters/voltron_dark.svg",
-    width: 250,
-  },
-  {
     name: "Quansight Labs",
     link: "https://labs.quansight.org/",
     light: "img/supporters/quansightlabs_light.svg",
@@ -152,13 +173,20 @@ const developer = [
     dark: "img/supporters/prefix_dark.svg",
     width: 250,
   },
+  {
+    name: "QuantCo",
+    link: "https://www.quantco.com/",
+    light: "img/supporters/quantco_light.svg",
+    dark: "img/supporters/quantco_dark.svg",
+    width: 210,
+  },
 ];
 
 export default function Supporters() {
   return (
     <div className={[styles.supporters, styles.section_padding].join(" ")}>
       <div className={styles.supporters_conda_forge}>
-        <h1>Supporters</h1>
+        <h1 id="supporters"><a href="#supporters">Supporters</a></h1>
         <p>
           If you like conda-forge and want to support our mission, please
           consider making a{" "}

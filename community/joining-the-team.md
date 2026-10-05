@@ -21,7 +21,7 @@ for officially interfacing with external communities, organizations, non-profits
 and companies. They are also responsible for maintaining conda-forge's infrastructure.
 
 If you are interested in joining the core team, please get in touch with us on our
-[Element chatroom](https://app.element.io/#/room/#conda-forge:matrix.org).
+[Zulip chatroom](https://conda-forge.zulipchat.com/).
 Core members are added via a vote amongst the current core team. The core team
 member who is running your vote will ask you to provide sufficient justification
 as to why you should be nominated to core. Prior service to the community, including
@@ -37,7 +37,7 @@ Generally speaking, your role is as follows:
 
 1. Keep up to date with the current best practices for conda packaging standards
 2. Provide recipe review which generally means making sure that the recipe
-   under review adheres to what we list on the [Contributing packages](/docs/maintainer/adding_pkgs/#dev-contribute-pkgs) page.
+   under review adheres to what we list on the [Contributing packages](/docs/maintainer/adding_pkgs/) page.
 3. Open issues as needed, both on staged and on the other flagship repos
    ([smithy](https://github.com/conda-forge/conda-smithy),
    [webservices](https://github.com/conda-forge/conda-forge-webservices),
@@ -46,7 +46,7 @@ Generally speaking, your role is as follows:
 4. Helping recipe maintainers who bump the `conda-forge/help-*` teams.
 
 To join the staged-recipes team, please ask one of the core members on our
-[Element chatroom](https://app.element.io/#/room/#conda-forge:matrix.org).
+[Zulip chatroom](https://conda-forge.zulipchat.com/).
 We will then reach consensus in private and let you know our decision.
 Our decision will likely be "yes" but it could be "please get more involved
 with the review process on staged recipes first" if we have not seen you

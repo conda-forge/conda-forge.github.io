@@ -21,12 +21,15 @@ If you have questions or need help, please check out our documentation for a [li
 
 1.  [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the [conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io) repository to your own GitHub user account.
 2.  [Clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) this fork onto your computer.
-3.  Go into the main folder.
-    Run the following commands.
-    - `conda env create -f ./.ci_scripts/environment.yml`
-    - `conda activate conda-forge-docs`
-    - For live builds, `npm install && npm run start`
-    - For production builds, run `.ci_scripts/update_docs`
+3.  Go into the cloned folder and:
+    - If you are using `pixi`:
+      - Use `pixi run start` for live builds
+      - Use `pixi run build-production` for production builds
+    - If you are using `conda` or `mamba` (replace command accordingly):
+      - `conda env create -f ./.ci_scripts/environment.yml`
+      - `conda activate conda-forge-docs`
+      - For live builds, `npm install && npm run start`
+      - For production builds, run `.ci_scripts/update_docs`
 4.  Make and commit your changes.
 5.  Submit a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) to the main repository proposing your changes.
 
@@ -52,19 +55,6 @@ All reports will be kept confidential. Please have a look at the [Reporting guid
 
 conda-forge's team and/or our event staff will try to ensure your safety and help with any immediate needs, particularly at an in-person event. Once we have received the report through the relevant authorities, conda-forge will make every effort to acknowledge the receipt and take action. Have a look at the process of [What Happens After a Report is Filed?](https://numfocus.org/code-of-conduct#enforcement).
 
-## conda-forge dev meetings
+## conda-forge meetings
 
-We hold biweekly meetings every second Wednesday from 17:00-18:00 (UTC). Feel free to stop by!
-Up-to-date invites are always available in the [conda.org community calendar](https://conda.org/community/calendar). Look for the `[conda-forge] core meeting` events!
-
-Our [meeting notes](https://conda-forge.org/docs/orga/minutes/00_intro.html) record important points discussed during the meetings and serve as a record for upcoming meetings. We make use of [HackMd](https://hackmd.io/) and a [template](https://github.com/conda-forge/conda-forge.github.io/blob/main/misc/DEV_MEETING_TEMPLATE.md) to create the meeting notes.
-
-We use a Github Actions [workflow][gha-workflow] to create an automated PR with the meeting notes
-template for each session, which is automatically published to our HackMD team account. During the
-meeting, attendees will edit the HackMD document. After the meeting, the document is saved and the
-PR is synced with the changes by adding the `sync-hackmd-notes` label. Once satisfied, the PR is
-merged and the website will be updated with the new meeting notes.
-
-We encourage contributors to join the meetings and learn more about and from the community.
-
-[gha-workflow]: https://github.com/conda-forge/conda-forge.github.io/actions/workflows/meeting-notes.yml
+Refer to our [Community > Meeting minutes](https://conda-forge.org/community/minutes/) page.

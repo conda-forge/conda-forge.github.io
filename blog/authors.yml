@@ -3,6 +3,11 @@ core:
   title: The conda-forge core team
   url: https://github.com/orgs/conda-forge/teams/core
   image_url: https://github.com/conda-forge.png
+r:
+  name: conda-forge/r
+  title: The maintainers of the R ecosystem in conda-forge
+  url: https://github.com/orgs/conda-forge/teams/r
+  image_url: https://avatars.githubusercontent.com/t/2337964
 beckermr:
   name: Matthew R. Becker
   title: Member of conda-forge/core
@@ -138,3 +143,8 @@ hmaarrfk:
   title: Member of conda-forge/core
   url: https://github.com/hmaarrfk
   image_url: https://github.com/hmaarrfk.png
+ludmilaklenova:
+  name: Lioudmila Klenov
+  title: Contributor
+  url: https://github.com/ludmilaklenova
+  image_url: https://github.com/ludmilaklenova.png

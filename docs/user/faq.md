@@ -12,7 +12,7 @@ title: 'FAQ'
 
 ## A package I am looking for is not on conda-forge, what can I do?
 
-We have an overview and step-by-step instruction on contributing packages in the section [Contributing packages](../maintainer/adding_pkgs.md#dev-contribute-pkgs).
+We have an overview and step-by-step instruction on contributing packages in the section [Contributing packages](../../maintainer/adding_pkgs).
 
 <a id="faq-pkg-update"></a>
 
@@ -36,7 +36,7 @@ You can open an issue in the packages feedstock repository on GitHub. Search for
 
 ## I have a question/suggestion. How can I contact you?
 
-Please join us on our [Element chatroom](https://app.element.io/#/room/#conda-forge:matrix.org). We are always happy to answer questions and help beginners.
+Please join us on our [Zulip chatroom](https://conda-forge.zulipchat.com/). We are always happy to answer questions and help beginners.
 
 <a id="faq-teams"></a>
 
@@ -107,7 +107,7 @@ compilers only contains the sysroot they were built with. The compiler binary na
 ‘prefixed' with more complete information about the architecture and [ABI](../glossary.md#abi) they target. So, instead
 of `gcc`, the actual binary will be named something like `x86_64-conda-linux-gnu-cc`.
 
-The conda-forge infrastructure provides [activation scripts](../maintainer/adding_pkgs.md#activate-scripts) which are run when
+The conda-forge infrastructure provides [activation scripts](../../maintainer/adding_pkgs#activate-scripts) which are run when
 you `conda activate` an environment that contains the compiler toolchain. Those scripts set
 many environment variables that are typically used by GNU `autotools` and `make` in the
 `standard` (i.e. builtin) build rules. For example, you would see the variable `CC` set to
@@ -154,9 +154,8 @@ conda environment. This can be accomplished (for gcc) by passing `-sysroot=/` on
 
 ## How can I compile CUDA (host or device) codes in my environment?
 
-Unfortunately, this is not possible with conda-forge's current infrastructure (`nvcc`, `cudatoolkit`, etc) if there is no local CUDA Toolkit installation. In particular, the `nvcc` package provided on conda-forge is a _wrapper package_ that exposes the actual `nvcc` compiler to our CI infrastructure in a `conda`-friendly way; it does not contain the full `nvcc` compiler toolchain. One of the reasons is that CUDA headers like `cuda.h`, `cuda_runtime.h`, etc, which are needed at compile time, are not redistributable according to NVIDIA's EULA. Likewise, the `cudatoolkit` package only contains CUDA runtime libraries and not the compiler toolchain.
-
-If you need to compile CUDA code, even if it involves only CUDA host APIs, you will still need a valid CUDA Toolkit installed locally and use it. Please refer to [NVCC's documentation](https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html) for the CUDA compiler usage and [CUDA Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html) for general CUDA programming.
+Beginning with CUDA 12.0, a full suite of CUDA packages are provided in conda-forge including various metapackages to group components together.
+These metapackages and their documentation are updated frequently, so for the most up to date recommendations and documentation please read the [relevant guides provided in the `cuda` feedstock](https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/README.md).
 
 <a id="faq-abi-incompatibility"></a>
 
@@ -172,7 +171,7 @@ If your package breaks ABI with a version bump, here are a few steps you can tak
 - Add a PR to pin the old version in `conda-forge-pinning` (if not already present)
 - Open a migrator following [CFEP-09](https://github.com/conda-forge/cfep/blob/main/cfep-09.md)
 
-To read more on how to specify `run_exports`, see [Specifying run_exports](../maintainer/pinning_deps.md#run-exports).
+To read more on how to specify `run_exports`, see [Specifying run_exports](../maintainer/pinning_deps.mdx#specifying-run_exports).
 Some of the examples you can see for reference, where broken packages are fixed by:
 
 - [Replacing an existing pin that was incorrect](https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/pull/217).

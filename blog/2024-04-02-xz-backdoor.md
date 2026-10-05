@@ -16,7 +16,7 @@ To the best of our knowledge, conda-forge's artifacts for `xz` are _not_ affecte
 
 We immediately checked which `xz` artifacts had been published in our channel:
 
-- Our latest build for `xz` (recipe source available in the [`xz-feedstock`](https://github.com/conda-forge/xz-feedstock/blob/main/recipe/meta.yaml)) is for version `5.2.9` and was uploaded on 2022-12-08. See artifacts in [anaconda.org](https://anaconda.org/conda-forge/xz/files).
+- Our latest build for `xz` (recipe source available in the [`xz-feedstock`](https://github.com/conda-forge/xz-feedstock/blob/8b8001268eb4eb7f9dcab4166ba88926e5ed6e91/recipe/meta.yaml)) is for version `5.2.9` and was uploaded on 2022-12-08. See artifacts in [anaconda.org](https://anaconda.org/conda-forge/xz/files).
 - The backdoored versions of `xz` belong to the `5.6.x` series.
 
 We are monitoring the situation develop and will update this announcement accordingly if needed.

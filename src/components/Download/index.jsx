@@ -10,14 +10,14 @@ export default function Download() {
       {
           arch: "arm64 (Apple Silicon)",
           dark: "img/download/apple.svg",
-          href: "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh",
+          href: "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Darwin-arm64.sh",
           light: "img/download/apple.svg",
           os: "macOS",
       },
       {
           arch: "x86_64 (Intel)",
           dark: "img/download/apple.svg",
-          href: "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.sh",
+          href: "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Darwin-x86_64.sh",
           light: "img/download/apple.svg",
           os: "macOS",
       },
@@ -63,7 +63,6 @@ export default function Download() {
                   'X-GitHub-Api-Version': '2022-11-28'
               }
           });
-          console.log(latest);
           if (latest.data) {
               setVersion(latest.data.tag_name);
           }
