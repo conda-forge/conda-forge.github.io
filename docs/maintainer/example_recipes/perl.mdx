@@ -528,15 +528,15 @@ tests:
 
 </RecipeTabs>
 
-- `imports`: List the Perl modules to load to verify the package installed correctly.
+- `perl:uses`: List the Perl modules to load to verify the package installed correctly.
   This ensures basic functionality.
-  Please endeavor to test loading of all modules included in the Perl distribution you are packaging, and not just the primary one.
-- `source_files`: Load these files from the source directory for use during testing.
+  Please endeavor to test loading of all modules included in the Perl distribution you are packaging, and not just the primary one (**v0** equivalent: `imports`).
+- `files:source`: Load these files from the source directory for use during testing.
   For most Perl packages, at minimum the `t` directory needs to be copied for use by `prove`.
-  Some packages may require additional files; trial-and-error may be necessary.
-- `commands`: Many existing Perl package recipes only using `imports` for testing.
-  Calling `prove` will run the package unit tests on the installed package as an additional check that everything is working as expected after installation.
-- `requires`: If running `prove`, testing dependencies need to be included here as well as under `requirements: host`, as this testing is done outside of the build environment.
+  Some packages may require additional files; trial-and-error may be necessary (**v0** equivalent: `source_files`).
+- `script`: Many existing Perl package recipes only using `imports` for testing.
+  Calling `prove` will run the package unit tests on the installed package as an additional check that everything is working as expected after installation (**v0** equivalent: `commands`).
+- `requirements:run`: If running `prove`, testing dependencies need to be included here as well as under the earlier `requirements: host`, as this testing is done outside of the build environment (**v0** equivalent: `requires`).
 
 ### The `about` section
 
