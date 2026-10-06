@@ -643,7 +643,7 @@ Please also always include the `conda-forge/perl-packagers` team so that they ca
 
 ## Packaging a `noarch` Perl distribution with platform-specific modules
 
-Occassionally, you may run across a Perl distribution that is not compiled but contains platform-specific modules.
+Occasionally, you may run across a Perl distribution that is not compiled but contains platform-specific modules.
 A good example of this is the [`File::HomeDir`](https://metacpan.org/pod/File::HomeDir) distribution, which provides methods for locating the context-specific paths to "standard" user locations (home, Documents, Desktop, etc).
 This distribution contains a primary `File::HomeDir` module that loads platform-specific submodules (`File::HomeDir::Unix`, `File::HomeDir::Windows`, `File::HomeDir::Darwin`, etc) as needed.
 These recipes should still be marked `noarch: generic`, but a few extra steps are needed to ensure they test (and pass) properly on all appropriate platforms.
