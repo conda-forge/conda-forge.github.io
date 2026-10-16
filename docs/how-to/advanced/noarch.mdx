@@ -244,7 +244,7 @@ build:
   number: {{ build_number }}
   string: py{{ python_min | replace('.', '') }}_h{{ PKG_HASH }}_{{ build_number }}
   noarch: python
-  script: "{{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation"
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
@@ -263,7 +263,7 @@ build:
   number: ${{ build_number }}
   string: py${{ python_min | version_to_buildstring }}_h${{ hash }}_${{ build_number }}
   noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: ${{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
