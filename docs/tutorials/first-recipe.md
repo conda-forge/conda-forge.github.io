@@ -110,7 +110,7 @@ that we're using the `version` variable that was defined earlier.
 
 ```recipe
 source:
-  url: https://pypi.org/packages/source/p/pylast/pylast-${{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/p/pylast/pylast-${{ version }}.tar.gz
   sha256: 319251236ba5c3e907232aacf1d6a7ff831f2243e85ace6ec6623a552ec2e0eb
 ```
 
