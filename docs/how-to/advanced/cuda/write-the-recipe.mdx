@@ -202,6 +202,104 @@ set TORCH_CUDA_ARCH_LIST=%CF_TORCH_CUDA_ARCH_LIST%
 
 </BuildScriptTabs>
 
+### Set your own CUDA architecture targets
+
+If your package only supports a subset of all CUDA architectures, depend on the `cuda-arch` metapackage to express the **minimum** compute capability it supports. Packages that use one of the options above do not need `cuda-arch`.
+
+For example, a package built with `cuda-arch=6.0` is only installable when a user's least capable device has compute capability 6.0 (Pascal) or later. Users who see `__cuda_arch` errors should read [the user guide](/docs/user/cuda/#what-if-i-see-an-error-saying-that-__cuda_arch-is-missing).
+
+#### Define the minimum architecture
+
+In your `conda_build_config.yaml`, define the **minimum** supported target architecture and the build arguments that you want to use for it. Leave no compatibility gaps between the minimum target and the highest target.
+
+```yaml title="conda_build_config.yaml"
+# CMake reads CUDAARCHS and passes it to NVCC
+CUDAARCHS:
+  - "70-real;80-real;90-real;90-virtual"
+
+# The minimum compute capability your build supports
+cuda_arch_version:
+  - "7.0"
+```
+
+:::warning
+
+The variable holding the minimum architecture MUST be named `cuda_arch_version`. `conda-forge-ci-setup` looks for this name to decide what value to set for `CONDA_OVERRIDE_CUDA_ARCH` on the build runner.
+
+Always include PTX for the highest architecture targeted by your build. The plugin reports only the **minimum** compute capability on the system, so a machine may have a mix of newer and older devices.
+
+:::
+
+#### Pin `cuda-arch` in the recipe
+
+Pass the architecture flags to the build, and pin `cuda-arch` in `host` and in the `test` environments. The `cuda-arch` metapackage has `run_exports`, so a package with `cuda-arch` in `host` automatically gets the matching run requirement. The name of the environment variable that carries the architecture flags depends on your build system; `CUDAARCHS` is used here for CMake.
+
+<RecipeTabs>
+
+```recipe
+# Variant variables must be referenced in the recipe or conda-smithy strips them
+# from the build matrix
+env:
+  - CUDAARCHS={{ CUDAARCHS }}
+
+requirements:
+  build:
+    - {{ compiler('cuda') }}
+  host:
+    # Pin the minimum supported arch so that dependencies are compatible with it too
+    - cuda-arch {{ cuda_arch_version }}
+
+test:
+  requires:
+    # Otherwise cuda-arch would float up to the newest allowed version
+    - cuda-arch {{ cuda_arch_version }}
+```
+
+```recipe
+build:
+  script:
+    env:
+      # Variant variables must be referenced in the recipe or conda-smithy strips
+      # them from the build matrix
+      CUDAARCHS: ${{ CUDAARCHS }}
+
+requirements:
+  build:
+    - ${{ compiler('cuda') }}
+  host:
+    # Pin the minimum supported arch so that dependencies are compatible with it too
+    - cuda-arch ${{ cuda_arch_version }}.*
+
+tests:
+  - requirements:
+      run:
+        # Otherwise cuda-arch would float up to the newest allowed version
+        - cuda-arch ${{ cuda_arch_version }}.*
+```
+
+</RecipeTabs>
+
+#### Use architecture-specific instruction sets
+
+If your program benefits from instruction sets such as `90a` or `120f`, use them. Every `sm_90` device also supports `sm_90a`, and every `sm_120` device also supports `sm_120f`. Sub-architectures such as `100f` cannot be expressed as `cuda-arch` versions but can still be targeted at build time.
+
+These instruction sets are not forward-compatible, so include non-specific PTX for the highest target architecture:
+
+```yaml title="conda_build_config.yaml"
+TORCH_CUDA_ARCH_LIST:
+  - "8.0 9.0a 10.0a 10.0f 10.0+PTX"
+
+cuda_arch_version:
+  - "8.0"
+```
+
+Here `10.0+PTX` provides forward compatibility. `9.0+PTX` is unnecessary because any device it would run on also supports `9.0a` or `10.0+PTX`.
+
+#### Real world examples
+
+- [cudnn-feedstock](https://github.com/conda-forge/cudnn-feedstock) (`meta.yaml`)
+- [kokkos-feedstock](https://github.com/conda-forge/kokkos-feedstock) (`recipe.yaml`, with multiple variants)
+
 ## Fix `nvcuda.dll` not found on Windows
 
 The [scripts](https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/main/recipe/install_cuda.bat)
