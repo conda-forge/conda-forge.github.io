@@ -1,0 +1,15 @@
+node_modules/
+build/
+.docusaurus/
+.git/
+package.json
+package-lock.json
+pnpm-lock.yaml
+community/minutes/
+scripts/
+static/
+.github/
+vote-results/
+misc/
+*.mdx
+.ci_scripts/environment.yml

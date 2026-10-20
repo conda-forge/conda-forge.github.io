@@ -1,0 +1,85 @@
+import { urls } from "@site/src/constants";
+import { React, useEffect, useState } from "react";
+import styles from "./styles.module.css";
+import { isSafeUrl } from "@site/src/utils";
+
+const OPERATIONAL = "All Systems Operational";
+
+export default function CloudServices({ onLoad, style }) {
+  useEffect(() => onLoad?.(), []);
+  return (
+    <div className="card margin-top--xs" style={style}>
+      <div className="card__header">
+        <h3>Cloud Services</h3>
+      </div>
+      <div className="card__body">
+        <table style={{ fontSize: "small" }}>
+          <tbody>
+            {Object.keys(urls.cloud).map((service, index) =>
+              <Status key={index} {...urls.cloud[service]} />
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function Status({ api, link, title }) {
+  const [state, setState] = useState({ status: "..." });
+  const status = ({
+    OPERATIONAL,
+    "Everything is looking good": OPERATIONAL,
+    "operational": OPERATIONAL,
+    "success": OPERATIONAL
+  })[state.status] || state.status;
+  const className = "badge " +
+    (status === OPERATIONAL ? "badge--success" : "badge--warning")
+  useEffect(() => {
+    void (async () => {
+      try {
+        const json = (await (await fetch(api)).json());
+        let status;
+        if (title === "Blacksmith.sh") {
+          status = json
+            .components
+            .filter((comp) => comp.name === "Blacksmith Managed Runners")[0]
+            .status;
+        } else if (title === "Namespace.so" || title === "Depot.dev") {
+          status = json.summary.affected_components.length > 0
+            ? "Ongoing incident"
+            : "operational";
+        } else {
+          status =
+            typeof json.status === "object"      // support StatusPage API
+              ? json.status.description
+              : typeof json.monitor === "object" // support UptimeRobot API
+                ? json.monitor.statusClass
+                : json.status || "unknown";
+        }
+        setState({ status });
+      } catch (error) {
+        console.warn(`error fetching data for ${title} – ${api}`, error);
+      }
+    })();
+  }, []);
+  return (
+    <tr>
+      <td>
+        {link && isSafeUrl(link) ?
+          <a href={link} style={{ display: "inline-block", minWidth: "100%" }}>
+            {title}
+          </a>
+        : title
+        }
+      </td>
+      <td>
+        <span className={className} style={{
+          display: "inline-block",
+          minWidth: "100%",
+          textAlign: "center"
+        }}>{status}</span>
+      </td>
+    </tr>
+  );
+}

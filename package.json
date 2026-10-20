@@ -1,0 +1,60 @@
+{
+  "name": "cf-infra-docs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "start": ".ci_scripts/update_docs pre-build-only && docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids"
+  },
+  "dependencies": {
+    "@docusaurus/core": "^3.10.2",
+    "@docusaurus/plugin-client-redirects": "^3.10.2",
+    "@docusaurus/plugin-content-blog": "^3.10.2",
+    "@docusaurus/preset-classic": "^3.10.2",
+    "@docusaurus/theme-mermaid": "^3.10.2",
+    "@mdx-js/react": "^3.1.1",
+    "@stoplight/json-ref-resolver": "^3.1.6",
+    "chart.js": "^4.5.1",
+    "chartjs-adapter-moment": "^1.0.1",
+    "clsx": "^2.1.1",
+    "d3": "^7.9.0",
+    "dagre-d3-es": "^7.0.14",
+    "install": "^0.13.0",
+    "moment": "^2.31.0",
+    "octokit": "^5.0.5",
+    "prism-react-renderer": "^2.4.1",
+    "react": "^19.2.8",
+    "react-chartjs-2": "^5.3.1",
+    "react-dom": "^19.2.8",
+    "react-inlinesvg": "^4.5.0",
+    "react-markdown": "^10.1.0",
+    "react-tooltip": "^6.0.8",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "^3.9.2",
+    "prettier": "^3.9.6"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=18.0"
+  }
+}

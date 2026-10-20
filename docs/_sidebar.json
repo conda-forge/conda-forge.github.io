@@ -1,0 +1,77 @@
+[
+  "index",
+  {
+    "type": "category",
+    "label": "User Documentation",
+    "link": {
+      "type": "doc",
+      "id": "user/index"
+    },
+    "items": [
+      "user/introduction",
+      "user/tipsandtricks",
+      "user/ci-skeleton",
+      "user/transitioning_from_defaults",
+      "user/faq",
+      "user/contributing",
+      "user/how_to_get_help",
+      "user/talks"
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Maintainer Documentation",
+    "link": {
+      "type": "doc",
+      "id": "maintainer/index"
+    },
+    "items": [
+      "maintainer/infrastructure",
+      "maintainer/guidelines",
+      "maintainer/adding_pkgs",
+      "maintainer/updating_pkgs",
+      "maintainer/pinning_deps",
+      "maintainer/conda_forge_yml",
+      "maintainer/linter",
+      "maintainer/knowledge_base",
+      "maintainer/maintainer_faq",
+      {
+        "type": "category",
+        "label": "Understanding conda-forge",
+        "link": {
+          "type": "doc",
+          "id": "maintainer/understanding_conda_forge/index"
+        },
+        "items": [
+          "maintainer/understanding_conda_forge/life_cycle",
+          "maintainer/understanding_conda_forge/staged_recipes",
+          "maintainer/understanding_conda_forge/feedstocks"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Reference",
+        "link": {
+          "type": "doc",
+          "id": "reference/index"
+        },
+        "items": ["reference/runners"]
+      },
+      {
+        "type": "category",
+        "label": "Example recipes",
+        "link": {
+          "type": "doc",
+          "id": "maintainer/example_recipes/index"
+        },
+        "items": [
+          "maintainer/example_recipes/go",
+          "maintainer/example_recipes/rust",
+          "maintainer/example_recipes/pure-python",
+          "maintainer/example_recipes/abi3"
+        ]
+      }
+    ]
+  },
+  "glossary"
+]

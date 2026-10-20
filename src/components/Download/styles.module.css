@@ -1,0 +1,114 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+.arch {
+  font-size: 1em;
+  font-weight: bold;
+  width: 100%;
+}
+
+.cardWrapper {
+  background: var(--theme-card);
+  align-items: center;
+  border-radius: 10px;
+  flex: 1;
+  margin: 1.5rem;
+  padding: 2.25rem;
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  width: 350px;
+}
+
+.cardWrapper:hover {
+  transform: scale(0.9);
+}
+
+.header {
+  display: flex;
+}
+
+.header_image {
+  padding: 0 30px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.header_content {
+  flex: 4;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.header_content h1 {
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 60px;
+}
+
+.header_content a {
+  text-decoration: none;
+}
+
+.header_content button {
+  background-color: transparent;
+  border-radius: 12px;
+  font-size: 1.3em;
+  padding: 10px;
+  margin: 10px;
+  text-align: justify;
+  width: 350px;
+}
+
+.os {
+  font-size: 1.2em;
+  font-weight: bold;
+  width: 100%;
+}
+
+[data-theme="dark"] .os_image {
+  filter: invert(1);
+}
+
+@media screen and (max-width: 1050px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .header_content {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .header_image {
+    width: 50%;
+    align-self: center;
+    margin-bottom: 2em;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .header h1 {
+    font-size: 40px;
+    line-height: 50px;
+  }
+
+  .section_padding {
+    padding: 4rem;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .header h1 {
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  .section_padding {
+    padding: 3rem;
+  }
+}

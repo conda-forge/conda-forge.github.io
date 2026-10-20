@@ -1,0 +1,339 @@
+---
+title: 'Maintaining packages'
+---
+
+<a id="maintaining-pkgs"></a>
+
+<a id="maintaining-packages"></a>
+
+# Maintaining packages
+
+<a id="important-notes"></a>
+
+## Important notes
+
+<a id="packages-on-conda-forge-are-immutable"></a>
+
+### Packages on conda-forge are immutable
+
+As a matter of policy, we do not allow edits or the deletion of packages on conda-forge. This
+policy is very important as it increases the reliability and reproducibility of `conda` environments
+made with the `conda-forge` channel. Note that because of this policy, our upload scripts will refuse to
+upload packages which already exist on the `conda-forge` channel.
+
+If you need to remove a package, please see the [section](#maint-fix-broken-packages) on marking packages broken.
+
+<a id="forking-and-pull-requests"></a>
+
+### Forking and pull requests
+
+All maintainers are given push access to the feedstocks that they maintain.
+This means that a maintainer can create branches in the main repo.
+For updates, using a branch in the main repo is discouraged because,
+
+1. [CI](../glossary.md#ci) is run on both the branch and the PR.
+
+   This wastes [CI](../glossary.md#ci) resources
+
+2. Branches are automatically published.
+
+   This means if you push a version update to a branch and then create a [PR](../glossary.md#pr), conda packages will be published to anaconda.org before the PR is merged.
+
+:::warning[Important]
+
+For these reasons, maintainers are asked to fork the feedstock to their personal account, push to a branch in the fork and then open a PR to the conda-forge repo.
+
+:::
+
+<a id="pushing-to-regro-cf-autotick-bot-branch"></a>
+
+#### Pushing to regro-cf-autotick-bot branch
+
+When a new version of a package is released on PyPI/CRAN/.., we have a bot that automatically creates version updates for the feedstock. In most cases you can simply merge this PR and it should include all changes. When certain things have changed upstream, e.g. the dependencies, you will still have to do changes to the created PR. As feedstock maintainer, you don't have to create a new PR for that but can simply push to the branch the bot created. There are two alternatives to push to the branch of the bot:
+
+1. Manually setting up git remotes:
+   - Clone the conda-forge feedstock repository
+   - Add the remote of the bot: `git remote add regro-cf-autotick-bot git@github.com:regro-cf-autotick-bot/<package>-feedstock.git`
+     :::warning[Important]
+
+     It is not possible to push to a GitHub repository using the
+     `git://` protocol. See [Which remote URL should I use?](https://help.github.com/en/github/using-git/which-remote-url-should-i-use)
+     for instructions on using the `https://` protocol if you have
+     enabled [two-factor authentication](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa).
+     :::
+
+   - Fetch the remote: `git fetch regro-cf-autotick-bot`
+   - Checkout the branch of the PR, git should automatically link it to the regro-cf-autotick-bot remote if this is the only remote with a branch of that name.
+   - If there are multiple remotes with this branch name, you need to first checkout the remote branch and then turn it into a local branch: `git checkout regro-cf-autotick-bot/<branch> && git checkout -b <branch>`
+   - Commit and push on that branch, if the remote was not correctly setup, use `git push -u regro-cf-autotick-bot <branch>`.
+
+2. Using Github's [hub](https://github.com/github/hub) tool (which conda-forge ships! `conda install hub -c conda-forge`):
+   - Clone the conda-forge feedstock repository
+   - Checkout the correct branch with remote: `hub pr checkout 12` where `12` is the ID of the PR.
+   - Commit and push on this branch, the remote is automatically set up to push to regro-cf-autotick-bot's fork.
+
+<a id="how-does-regro-cf-autotick-bot-create-automatic-version-updates"></a>
+
+##### **How does regro-cf-autotick-bot create automatic version updates?**
+
+The [regro-cf-autotick-bot](https://github.com/conda-forge/conda-forge-bot) continuously searches on a loop for any PyPI releases, GitHub releases, and any other sources of versions when any updates are released. The source code that gets executed in the loop comes from the [conda-forge-bot repository](https://github.com/conda-forge/conda-forge-bot), which contains the code to detect versions and submit PRs.
+Visit [conda-forge-bot](https://github.com/conda-forge/conda-forge-bot/blob/main/README.md) to read more about it.
+
+The bot creates updates via inspection of the upstream release and will always update the `source` section and build version in the [recipe metadata](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#).
+As an experimental feature, the conda-forge-bot can also be configured to verify or update the recipe's requirements for [Grayskull](https://github.com/conda-incubator/grayskull)-compatible recipes.
+This may help maintain packages with frequent requirements changes or specific requirements version pins, however this feature is not as extensively verified and proposed updates should be reviewed.
+(See the [bot](conda_forge_yml.mdx#bot) section in `conda-forge.yml`)
+
+Sometimes the bot may take several hours to search for these updates. You can also check [status of version updates](https://conda-forge.org/status/#version_updates) for all the pending version updates. These version updates are pending either because an updated version was found, but a PR wasn't opened yet, or because the bot might have had an error while making the PR.
+If you can't find a version here, then the chances are that the bot couldn't find it either.
+
+The bot stops making version update PRs when the package feedstock has three or more open version update PRs. The package's maintainer should close or merge those PRs for the bot to work correctly for future version updates.
+
+<a id="example-workflow-for-updating-a-package"></a>
+
+#### Example workflow for updating a package
+
+Here we assume that you would like to update the feedstock `<feedstock>`. Feedstock is a placeholder and can e.g. be replaced by `numpy-feedstock`.
+
+1. Forking the feedstock
+
+   Before you can submit your first PR, you have to fork conda-forge's feedstock.
+   - Navigate to [https://github.com/conda-forge](https://github.com/conda-forge)/<feedstock> in your favorite web browser and click the `fork` button.
+   - You now have a clone of the feedstock in `https://github.com/<your-github-id>/<feedstock>` under your control.
+   - Connect to the feedstock from your computer by using `git clone https://github.com/<your-github-id>/<feedstock>`.
+
+2. Syncing your fork with conda-forge's feedstock
+
+   This step is only required if you have forked some time ago and your fork is missing commits from the feedstock at conda-forge.
+   - Make sure you are on the main branch: `git checkout main`
+   - Register conda-forge's feedstock with `git remote add upstream https://github.com/conda-forge/<feedstock>`
+   - Fetch the latest updates with `git fetch upstream`
+   - Pull in the latest changes into your main branch: `git rebase upstream/main`
+
+3. Creating your changes in a new branch
+
+   Now you are ready to update the recipe
+   - Create and switch to a new branch: `git checkout -b <branch-name>`. `<branch-name>` can be e.g. `update_1_0_1`.
+   - Make your changes locally
+   - Review your changes then use `git add <changed-files>`. Where `<changed-files>` are a whitespace separated list of filenames you changed.
+   - Create a commit by `git commit -m <commit-msg>`, where `<commit-msg>` can be `updated feedstock to version 1.0.1`
+
+4. Pushing your changes to GitHub and propose a PR
+   - Push the branch with changes to your fork on GitHub: `git push origin <branch-name>`
+   - Create a pull request via the web interface by navigating to `https://github.com/<your-github-id>/<feedstock>` with your web browser and clicking the button `create pull request`.
+
+<a id="updating-recipes"></a>
+
+## Updating recipes
+
+Please follow the following guidelines while updating recipes:
+
+1. Always use a fork of the feedstock while updating the recipe.
+2. When a package's version is not changed, but other metadata or parts of the recipe are changed, increase the build number by `1`.
+3. While shipping a new version of your package, reset the build number to `0`.
+
+<a id="dev-update-rerender"></a>
+
+<a id="rerendering-feedstocks"></a>
+
+## Rerendering feedstocks
+
+See [How to rerender a feedstock](/docs/how-to/basics/rerender.md).
+
+<a id="updating-for-newly-released-python-version"></a>
+
+## Updating for newly released Python version
+
+When a new Python version is released (e.g. `3.11`), an automatic migration process is triggered that will have `@regro-cf-autotick-bot` eventually automatically open pull requests to all feedstocks, updating their CI setup to include the new Python version in the build matrix. After veryfing that the PR build passes, that automatic PR can simply be merged to roll out packages for new Python version.
+This process takes time, though, and pull requests will not be opened to all feedstocks at the same time to not overload CI. The current status of the migration can be tracked on the [migration status page](https://conda-forge.org/status/#big_migrations) and there maintainers can verify that their feedstock is listed under the `AWAITING-PR` dropdown list.
+
+<a id="testing-changes-locally"></a>
+
+<a id="id1"></a>
+
+## Testing changes locally
+
+If you have docker installed on your system, you can test builds locally on your machine under the same settings as it is built by our [CI](../glossary.md#ci).
+
+If you want to build and test updates to a feedstock locally, go to the root
+feedstock directory and run:
+
+```shell-session
+python build-locally.py
+```
+
+This will prompt you to choose one of the `*.yaml` config files in `.ci_support/`. Note that `shyaml` is needed to parse the `docker_image` from these files. Otherwise the build will use the default `docker_image`.
+
+Alternatively, you can specify ahead which config to use with e.g. (assuming you wish to build and test python 3.6 on Linux, and such a config file exists at `.ci_support/linux_python3.6.yaml`):
+
+```shell-session
+python build-locally.py linux_python3.6
+```
+
+Note that for long build logs one can do
+
+```shell-session
+python build-locally.py 2>&1 | tee log.txt
+```
+
+to save it in a text file for future inspection.
+
+Once built, you can find the finished package in the `build_artifacts` directory in your feedstock, which can be used as a channel.
+
+To create a new environment `my-new-env` using conda, and which will contain the new built package `my-package`, run:
+
+```shell-session
+conda create -n my-new-env -c "file://${PWD}/build_artifacts" my-package
+```
+
+If the new built package depends on another one to be working, i.e. `other-package`, and which is available on `conda-forge` channel for example, you can run:
+
+```shell-session
+conda create -n my-new-env -c "file://${PWD}/build_artifacts" -c conda-forge my-package other-package
+```
+
+<a id="downloading-prebuilt-packages-from-ci"></a>
+
+## Downloading prebuilt packages from CI
+
+A neat feature that feedstocks have is the ability to [upload packages to the CI provider for testing](conda_forge_yml.mdx#azure).
+This is useful when trying out packages built in a PR. But you first need to download these prebuilt packages.
+
+To download prebuilt packages follow the steps below:
+
+- Starting from your PR, navigate to the CI.
+- Open the log corresponding to the package you want to download.
+- In this log find a link to the `artifacts produced`.
+- From the list of published artifacts that appears download your required archive.
+- Unarchive and extract the required package.
+
+<a id="maint-fix-broken-packages"></a>
+
+<a id="removing-broken-packages"></a>
+
+## Removing broken packages
+
+Moved to [Removing broken packages](/docs/how-to/emergencies/remove-broken-packages).
+
+<a id="archiving-feedstocks"></a>
+
+## Archiving feedstocks
+
+If a package is no longer maintained conda-forge will _archive_
+the repository. An archived repository can no longer accept PRs and issues, which prevents people and `regro-cf-autotick-bot` from updating the
+package (an example would be to re-render the feedstock to support new Python versions). Note that this **does not** remove the existing packages, those will still be available.
+
+If you believe a feedstock should be archived, please do the following:
+
+1. Raise an issue on the feedstock asking if it can be archived (CC the maintainer team and @conda-forge/core)
+2. Fork [conda-forge/admin-requests](https://github.com/conda-forge/admin-requests) and add a new `yml` file in the `requests` directory , named `<package>-archive.yml` and containing:
+
+```
+action: archive
+feedstocks:
+  - <name of the feedstock to archive without the -feedstock suffix>
+```
+
+Example:
+
+```
+action: archive
+feedstocks:
+  - or-datasets
+```
+
+You can list multiple feedstocks in the same request.
+
+3. Open a PR and cross-reference the issue raised in step 1.
+
+<a id="maint-updating-maintainers"></a>
+
+<a id="updating-the-maintainer-list"></a>
+
+## Updating the maintainer list
+
+The list of maintainers of a feedstock is recorded in the recipe itself. A new maintainer can be added by opening
+an issue in the feedstock repository with the following title:
+
+`@conda-forge-admin, please add user @username`
+
+where `username` is the username of the new maintainer to be added.
+A PR will be automatically created and a maintainer or a member of the `core` team, in case no maintainer is active anymore, can then merge this PR to add the user.
+To contact core, ping them by mentioning @conda-forge/core in a comment or, if you haven't heard back in a while or are new to conda-forge, contact them through the community [Zulip chatroom](https://conda-forge.zulipchat.com/).
+
+:::note
+
+This PR is designed to skip building the package. Please do **not** modify it or adjust the commit message.
+
+This is not the recommended way to start to help with a feedstock.
+If you are interested in helping with a particular recipe, it is better to start by
+submitting a PR with a new version or a fix. This way, you can get feedback on your
+work and learn about some of the historical context of the feedstock.
+
+Once you have established a working relationship with the maintainers, you can ask
+them to add you to the feedstock team. They can then use this command
+to add you to the team. There isn't any official requirement for how to add new
+maintainers so it may take a while for consensus to be reached
+on when to add new maintainers. Do not let this discourage you from contributing!
+
+PRs are free to be opened by anyone!!! Thank you for your time and effort!!!
+
+:::
+
+For an example see [this](https://github.com/conda-forge/cudnn-feedstock/issues/20) issue.
+
+<a id="maintaining-several-versions"></a>
+
+## Maintaining several versions
+
+See [How to maintain several versions](/docs/how-to/advanced/several-versions.md).
+
+## Troubleshooting
+
+Sometimes things go wrong, particularly with the automation. This section aims to provide guidance on these problems.
+
+### Automatic version updates don't work
+
+Usually, the bot detects automatically when a new version of a package is released.
+It does that by monitoring the source url named in the recipe in an appropriate way,
+i.e. for PyPI sources it queries the API, for Github source releases it monitors the release page
+or the tags in the upstream repository.
+Sometimes an erroneous release happens or an unrelated tag is misidentified as a release.
+For example, `project-a` usually releases under a semver scheme like 4.0.2, but a typo in the release process ended up creating a tag with 40.3 (missing period).
+In these cases, the bot can be confused, consider subsequent releases as older than the misidentified one, and stop issuing automatic update PRs.
+
+You can check which version the bot detected by looking in the metadata that it collected, which is conveniently available in its own Github repo.
+To deal with the large number of packages, the information is sharded (i.e. split into several subdirectories) according to some hash function,
+which makes it a bit challenging to find.
+The best way is to use Github search with the query [`repo:conda-forge/conda-forge-bot-data path:version_pr_info/**/amrex.json`](https://github.com/search?q=repo%3Aconda-forge%2Fconda-forge-bot-data+path%3Aversion_pr_info%2F**%2Famrex.json&type=code), where you should replace `amrex` with the name of your own package.
+This will lead you to a file looking like:
+
+```json
+{
+  "bad": false,
+  "new_version": "25.07",
+  "new_version_attempts": {
+    "2024": 0,
+    "23.11": 1,
+    "23.12": 1,
+    "24.01": 1,
+    "24.02": 1,
+    "24.03": 1
+  },
+  "new_version_errors": {}
+}
+```
+
+Here, look for the `"new_version"` field. If that contains a wrong value, note it down for fixing in the next step.
+
+The solution in this case is to let the bot know that it should ignore a certain version.
+This can be done in the `conda-forge.yml` configuration file, with [more details](../conda_forge_yml/#bot) in the documentation, the simple snippet boils down to
+
+```yaml
+bot:
+  version_updates:
+    exclude:
+      - '08.14'
+```
+
+where `'08.14'` represents the erroneous version.

@@ -1,21 +1,10 @@
 name: conda-forge-docs
 channels:
-  - conda-forge
+- conda-forge
+- nodefaults
 dependencies:
-  - python=3
-  - conda-smithy
-  - sphinx<3
-  - cloud_sptheme
-  - sphinxcontrib-fulltoc
-  - make
-  - xonsh
-  - recommonmark
-  - pyyaml
-  - jinja2
-  - requests
-  - python-dateutil
-  - pip
-  - python-rapidjson
-  # uncomment to restore search
-  # - elm
-  # - nodejs
+- curl *
+- nodejs 24.*
+- prek >=0.5.0,<1.0
+- python 3.*
+- requests *

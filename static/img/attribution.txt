@@ -1,0 +1,4 @@
+sparks.jpg - https://pixabay.com/en/sparks-saw-equipment-metal-tool-692122/
+anvil_*.png - adapted from https://thenounproject.com/term/anvil/64539/
+hot_metal.jpg - https://flic.kr/p/6RKzPK
+

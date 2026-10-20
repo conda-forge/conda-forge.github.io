@@ -1,35 +1,60 @@
 # [conda-forge.org](https://conda-forge.org)
+
 [![deploy](https://github.com/conda-forge/conda-forge.github.io/workflows/deploy/badge.svg)](https://github.com/conda-forge/conda-forge.github.io/actions?query=workflow%3Adeploy)
 
 ## Overview
+
 This repository
+
 - is the home of the source code of conda-forge's documentation.
+- is the home of the source code of conda-forge's [status dashboard](src/components/StatusDashboard/README.md).
 - provides an [issue tracker](https://github.com/conda-forge/conda-forge.github.io/issues) for conda-forge related questions and issues that are **not specific to individual feedstocks**.
 
 If you have questions or need help, please check out our documentation for a [list of ways to interact with us](https://conda-forge.org/docs/user/how_to_get_help.html).
 
-## Building the docs
-
-The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` script.
-To build the docs locally, you should do the following:
-1.  Clone the repository into your local machine.
-2.  Go into the main folder. </br>
-    Run the following commands.  
-3. `conda env create -f ./.ci_scripts/environment.yml`
-4. `conda activate conda-forge-docs`
-5. `cd newsfeed && pip install --no-deps .`
-6. `cd ../src`
-7. `make html`
-
 ## Improving the docs
 
-We are constantly improving our documentation and are very grateful for feedback and contributions. If you would like to help, please be aware that the html documentation in the `docs` folder is automatically generated from the source files in the `src` folder. Therefore please always edit the files in `src` and never in `docs`.
+- You can help to improve the documentation! It is version-controlled in the [conda-forge.github.io repository on GitHub](https://github.com/conda-forge/conda-forge.github.io).
 
-## conda-forge dev meetings
+- The docs are built on GitHub Actions and run the `.ci_scripts/update_docs` script.
+  We are glad to know that you would like to contribute. To build the docs locally, follow the steps mentioned below:
 
-Our documentation contains a section with [minutes from previous dev meetings]([https://conda-forge.org/docs/minutes/00_intro.html]). These meetings occur every two weeks on Wednesday from 17:00-18:00 UTC.
-A link to the google calendar item can be found [here](https://calendar.google.com/event?action=TEMPLATE&tmeid=Z2lraDk2a205cGUxdDkxYmNybXQxMGIxMGtfMjAxOTA3MjRUMTcwMDAwWiBzY29wYXR6QG0&tmsrc=scopatz%40gmail.com&scp=ALL).
+1.  [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the [conda-forge.github.io](https://github.com/conda-forge/conda-forge.github.io) repository to your own GitHub user account.
+2.  [Clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) this fork onto your computer.
+3.  Go into the cloned folder and:
+    - If you are using `pixi`:
+      - Use `pixi run start` for live builds
+      - Use `pixi run build-production` for production builds
+    - If you are using `conda` or `mamba` (replace command accordingly):
+      - `conda env create -f ./.ci_scripts/environment.yml`
+      - `conda activate conda-forge-docs`
+      - For live builds, `npm install && npm run start`
+      - For production builds, run `.ci_scripts/update_docs`
+4.  Make and commit your changes.
+5.  Submit a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) to the main repository proposing your changes.
 
-We use https://hackmd.io/ for taking meeting minutes and will upload the resultant markdown file after the meeting has concluded.
+## Code of conduct
 
-There is a template provided in [`misc/DEV_MEETING_TEMPLATE.md`](https://github.com/conda-forge/conda-forge.github.io/tree/master/misc/DEV_MEETING_TEMPLATE.md) that you should use to create a new hackmd document.
+We at conda-forge adhere to the [NumFOCUS Code of Conduct](https://numfocus.org/code-of-conduct):
+
+> - Be kind to others. Do not insult or put down others. Behave professionally. Remember that harassment and sexist, racist, or exclusionary jokes are not appropriate for conda-forge.
+> - All communication should be appropriate for a professional audience, including people of many different backgrounds. Sexual language and imagery is not appropriate.
+> - conda-forge is dedicated to providing a harassment-free community for everyone, regardless of gender, sexual orientation, gender identity and expression, disability, physical appearance, body size, race, or religion. We do not tolerate harassment of community members in any form.
+
+Thank you for helping make this a welcoming, friendly community for all.
+
+### Reporting guidelines
+
+If you believe someone is violating the code of conduct, please report this in a timely manner. Code of conduct violations reduce the value of the community for everyone. The team at conda-forge takes reports of misconduct very seriously and is committed to preserving and maintaining the welcoming nature of our community.
+
+Reports should be sent to <conda-forge-core@googlegroups.com>, a private mailing list only accessible by the members of the core team. If your report involves a member of the core team, please send it to NumFOCUS following [these instructions](https://numfocus.org/code-of-conduct#how-to-report).
+
+All reports will be kept confidential. Please have a look at the [Reporting guidelines](https://numfocus.org/code-of-conduct#reporting-guidelines).
+
+### Enforcement: What happens after a report is filed?
+
+conda-forge's team and/or our event staff will try to ensure your safety and help with any immediate needs, particularly at an in-person event. Once we have received the report through the relevant authorities, conda-forge will make every effort to acknowledge the receipt and take action. Have a look at the process of [What Happens After a Report is Filed?](https://numfocus.org/code-of-conduct#enforcement).
+
+## conda-forge meetings
+
+Refer to our [Community > Meeting minutes](https://conda-forge.org/community/minutes/) page.

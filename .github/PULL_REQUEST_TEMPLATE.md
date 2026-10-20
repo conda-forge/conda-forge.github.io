@@ -1,12 +1,5 @@
-<!--
-Thank you for pull request!
-
-Please note that the `docs` subdir is generated from the sphinx sources in `src`, changes 
-to `.html` files will only be effective if applied to the respective `.rst`.
--->
-
 PR Checklist:
 
-- [ ] make all edits to the docs in the `src` directory, not in `docs`
 - [ ] note any issues closed by this PR with [closing keywords](https://help.github.com/articles/closing-issues-using-keywords)
+- [ ] if you are adding a new page under `docs/` or `community/`, you have added it to the sidebar in the corresponding `_sidebar.json` file
 - [ ] put any other relevant information below

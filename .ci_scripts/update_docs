@@ -2,49 +2,44 @@
 
 set -ex
 
-git checkout -b new_site_content
-conda env create -f ./.ci_scripts/environment.yml
-conda activate conda-forge-docs
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASE_DIR=$(dirname $HERE)
 
-pushd newsfeed
-pip install --no-deps .
-popd
+# configure bot account
+if [[ "$CI" == "1" ]]; then
+  git config --global user.email "pelson.pub+conda-forge@gmail.com"
+  git config --global user.name "conda-forge-admin"
+  git checkout -b new_site_content
+fi
 
-python .ci_scripts/generate_html.py
+# Fetch conda-smithy JSON schema
+mkdir -p "$BASE_DIR/static/schema/"
+curl -sL \
+  -o "$BASE_DIR/static/schema/conda-forge.schema.json" \
+  "https://raw.githubusercontent.com/conda-forge/conda-smithy/main/conda_smithy/data/conda-forge.json"
+curl -sL \
+  -o "$BASE_DIR/static/schema/linter-messages.json" \
+  "https://raw.githubusercontent.com/conda-forge/conda-smithy/main/conda_smithy/data/linter-messages.json"
 
-# rebuild elm
-# uncomment to restore search
-# npm install uglify-js --global
-# ./elm-compile.xsh
+# Render the templated content (e.g. CFEPs, core.csv, etc)
+python "$BASE_DIR/.ci_scripts/render_templated_content.py"
 
-# build docs into docs/; preserve old README file
-mv docs/README docs-README
-rm -rf docs/
+if [[ ${1:-} == "pre-build-only" ]]; then
+  exit 0
+fi
 
-python .ci_scripts/generate_cfep_index.py
+# Ensure that all docs/ items are in the sidebar
+python "$BASE_DIR/.ci_scripts/check_sidebars.py"
 
-pushd src
-make html
-mv _build/html ../docs
-rm -rf _build
-popd
+# Build docusaurus site
+npm install
+npm run build
 
-mv docs-README docs/README
+# Serve the announcements RSS feed in this old location too
+# we can't redirect with the Docusaurus plugin, so just copy it
+cp build/news/rss.xml build/docs/news.rss
 
-# git diff
-
-# # Only commit the docs for commits on master.
-# if [[ $GH_REF == refs/heads/master ]] && [[ $GH_TOKEN != "" ]]; then
-#     git add -A :/
-#     git commit -m "Re-ran make.py. [ci skip]" || true
-#     git remote add pushable https://${GH_TOKEN}@github.com/conda-forge/conda-forge.github.io.git/ > /dev/null
-#
-#     # Update the remotes before pushing and check the status.
-#     # This should give us more info if the push will not be
-#     # a simple fast-forward push.
-#     git fetch --all 2> /dev/null
-#     git branch -u pushable/gh-pages
-#     git status
-#     git push pushable new_site_content:gh-pages
-#     # 2> /dev/null
-# fi
+set +x
+echo "Built website! Preview with one of:"
+echo "  python -m http.server -d build/"
+echo "  npm run serve"
