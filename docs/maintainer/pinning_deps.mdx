@@ -10,19 +10,34 @@ import { RecipeTabs } from "@site/src/components/RecipeTabs";
 
 # Pinned dependencies
 
-**Pinning a dependency** is the practice of explicitly pointing to the version of a library which our package is linked with.
-A pinned dependency , for example, can look like this : `numpy==1.1.3` . On the other hand, a non-pinned dependency would be  just: `numpy`.
+**Pinning a dependency** means restricting the versions of a dependency that your package
+accepts in its requirements. For example, a pinned dependency can look like this: `numpy
+2.0.*`. A non-pinned dependency would be just `numpy`.
 
-**Why to pin your dependencies?**
+## Why pin dependencies?
 
-Explicitly declaring the versions of the dependencies could be advantageous to the quality of the software and to the developers and the open source community that makes up the software ecosystem.
+Pinning may help avoid a situation where your package no longer builds or runs after a new
+release of a dependency that contains breaking changes.
 
-* Pinning our dependencies may help in avoiding a situation where our software does not build or run due to the release of newer versions of the dependencies which are incompatible with our software, consisting some breaking changes.
-* Not updating the pinned dependencies each time we upgrade our software and deploy it with newer versions of those dependencies, can result in an older version to hang around longer than it should, which can pose difficulties if these older version have some security issues. These older versions might also be incompatible with some new dependency that is introduced.
+## Why not pin dependencies?
 
-While its good on many levels to get your versions of dependencies explicit, it might not always be a good choice to pin them in all the cases.
-By not pinning the dependencies , especially the non-crucial ones, we provide fewer constraints on the software and make it easier to incorporate into an existing software stack.
-Case in point, Suppose `numpy==1.1.3` has been specified / pinned for a software 'A'. There is a person with `numpy 1.1.4` already there in their system. If they try to install this package 'A', they will have to downgrade numpy to meet the package dependencies or create a new Python environment just to use our package. However, if we specify `numpy>=1.1.3` ( i.e. not pinning it to a certain version but to a range of versions) , the package will be installed smoothly.
+Pinning is not always the right choice. Pins that are not updated when you update your
+package can keep older versions of dependencies in use for longer than they should be. This
+can cause difficulties if those older versions have security issues, or if they are
+incompatible with a new dependency that is introduced later. By not pinning dependencies,
+especially the non-crucial ones, you provide fewer constraints and make your package easier
+to incorporate into an existing software stack.
+
+For example, suppose package A pins `numpy 2.0.*`, and a user already has `numpy 2.1`
+installed. To install package A, they would have to downgrade numpy or create a new
+environment just to use it. If package A instead specified `numpy >=2.0,<3`, a range of
+versions rather than a single one, it could be installed without any changes to the user's
+environment. The upper bound is the next major version, where breaking changes are expected.
+
+On conda-forge, most pins are applied automatically, so you rarely need to write them by
+hand. See [Globally pinned packages](#globally-pinned-packages) and [Specifying
+run_exports](#specifying-run_exports) for how this works. Manual pins are mainly needed for
+exceptions.
 
 <a id="id1"></a>
 
@@ -117,26 +132,26 @@ requirements:
 
 </RecipeTabs>
 
-When there's a new ABI version of gmp (say 7.0), then conda-forge-pinning will be updated. A re-rendering of a package using gmp will change. Therefore to check that a recipe needs to be rebuilt for updated pinnings, you only need to check if the package needs a rerender.
+When there's a new ABI version of gmp (say 7.0), then conda-forge-pinning will be updated. A
+re-rendering of a package using gmp will change. Therefore to check that a recipe needs to
+be rebuilt for updated pinnings, you only need to check if the package needs a rerender.
 
-:::
 
-If a package is not pinned in [conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml),
-then the pinning needs to be done manually. If the package is a `C/C++` library with a `C/C++` API that is consumed and linked to by other libraries, then that package is a candidate to be added to `conda-forge-pinning`. Please open an issue in [conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock) for discussion.
+If a package is not pinned in
+[conda-forge-pinning](https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/conda_build_config.yaml),
+then the pinning needs to be done manually. If the package is a `C/C++` library with a
+`C/C++` API that is consumed and linked to by other libraries, then that package is a
+candidate to be added to `conda-forge-pinning`. Please open an issue in
+[conda-forge-pinning-feedstock](https://github.com/conda-forge/conda-forge-pinning-feedstock)
+for discussion.
 
-:::note
+If the constraints in `conda-forge-pinning` (resp. those coming from the package's
+run-exports) are not strict enough, you can override them by changing back to pinning the
+package with a version manually. You can make a pinning stricter by adding `{{
+pin_compatible('gmp', max_pin='x.x.x') }}` to run requirements.
 
-If the constraints in `conda-forge-pinning` (resp. those coming from the package's run-exports)
-are not strict enough, you can override them by changing back to pinning the package with
-a version manually.
-You can make a pinning stricter by adding `{{ pin_compatible('gmp', max_pin='x.x.x') }}`
-to run requirements.
-
-:::
-
-:::note
-
-If you need to remove a pinning in rare cases like linking the package statically or if the package is used with `dlopen` instead of linking, then you can do,
+In rare cases, such as linking the package statically or using it with `dlopen` instead of
+linking, you may need to remove a pinning. You can do this with `ignore_run_exports`:
 
 <RecipeTabs>
 
@@ -155,6 +170,13 @@ build:
 ```
 
 </RecipeTabs>
+
+:::warning
+
+Ignoring `run_exports` removes the runtime constraint that keeps your package compatible
+with the ABI of the library it was built against. Only do this if your package does not rely
+on that ABI at runtime. If it does, users can end up with an incompatible version of the
+library installed, which can cause crashes or other failures at runtime.
 
 :::
 
