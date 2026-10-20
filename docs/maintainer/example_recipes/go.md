@@ -23,8 +23,8 @@ build:
     - cd src
     - go-licenses save . --save_path ../library_licenses
     - if: unix
-      then: go build -v -o $PREFIX/bin/example-package -ldflags="-s -w"
-      else: go build -v -o %LIBRARY_BIN%\example-package.exe -ldflags="-s"
+      then: go build -v -o $PREFIX/bin/example-package -ldflags="-s -w" -trimpath .
+      else: go build -v -o %LIBRARY_BIN%\example-package.exe -ldflags="-s -w" -trimpath .
     - if: unix
       then:
         - mkdir -p $PREFIX/share/zsh/site-functions $PREFIX/share/bash-completion/completions $PREFIX/share/fish/vendor_completions.d
