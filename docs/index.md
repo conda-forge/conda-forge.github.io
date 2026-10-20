@@ -12,6 +12,7 @@ title: 'conda-forge documentation'
 
 conda-forge is a community effort and a GitHub organization which contains repositories of conda recipes and thus provides conda packages for a wide range of software.
 The built distributions are uploaded to [anaconda.org/conda-forge](https://anaconda.org/conda-forge) and can be installed with [conda](https://conda.pydata.org/docs/intro.html).
+For a deeper explanation of conda-forge's mission, model, and benefits, see [What is conda-forge?](user/what-is-conda-forge.md).
 
 **Missing a package that you would love to install with conda?**
 
