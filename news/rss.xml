@@ -265,7 +265,7 @@ before/after of the new CUDA architecture.</li>
 will drop the respective CI jobs upon rerendering. For feedstocks wanting to keep building
 CUDA 11.8 a bit longer, we have provided a custom migrator.</p>
 <p>The way to make use of this is to copy
-<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/main/recipe/migrations/cuda118.yaml" target="_blank" rel="noopener noreferrer" class=""><code>cuda118.yaml</code></a>
+<a href="https://github.com/conda-forge/conda-forge-pinning-feedstock/blob/cf75e31cb9ed810b0a7189e9dfd0c8c3a1f3feb8/recipe/migrations/cuda118.yaml" target="_blank" rel="noopener noreferrer" class=""><code>cuda118.yaml</code></a>
 from the global pinning into <code>.ci_support/migrations</code> on your feedstock.
 If the <code>migrations</code> subfolder doesn't exist, please create it. Once that's committed
 (and there are no skips in the recipe for CUDA 11.8), rerendering the feedstock
