@@ -33,9 +33,15 @@ function levenshteinDistance(a, b) {
   return dp[m][n] / maxLen;
 }
 
+// Normalize package names so `-` and `_` are treated as equivalent (PEP 503)
+function normalizePackageName(name) {
+  return name.replace(/[-_]/g, "_");
+}
+
 function highlightSubstring(str, substr) {
-  const substrLower = substr.toLowerCase();
-  const substrIndex = str.toLowerCase().indexOf(substrLower);
+  const normalizedStr = normalizePackageName(str.toLowerCase());
+  const normalizedSubstr = normalizePackageName(substr.toLowerCase());
+  const substrIndex = normalizedStr.indexOf(normalizedSubstr);
   if (substrIndex === -1) {
     return str;
   }
@@ -47,6 +53,10 @@ function highlightSubstring(str, substr) {
       {str.substring(substrEndIndex)}
     </span>
   );
+}
+
+function feedstockName(repo) {
+  return repo === "cdt-builds" ? repo : `${repo}-feedstock`;
 }
 
 const Packages = () => {
@@ -112,13 +122,16 @@ const Packages = () => {
   }, []);
 
   const searchTermLower = searchTerm.toLowerCase();
+  const searchTermNormalized = normalizePackageName(searchTermLower);
   var filteredPackages = [];
   var inclusionCriteria;
   if (searchTerm.length > 0) {
     if (searchTerm.length >= 3) {
-      inclusionCriteria = (name) => name.includes(searchTermLower);
+      inclusionCriteria = (name) =>
+        normalizePackageName(name).includes(searchTermNormalized);
     } else {
-      inclusionCriteria = (name) => name.startsWith(searchTermLower);
+      inclusionCriteria = (name) =>
+        normalizePackageName(name).startsWith(searchTermNormalized);
     }
     for (const name in allPackages) {
       if (inclusionCriteria(name)) {
@@ -129,8 +142,14 @@ const Packages = () => {
 
   // Sort the filtered packages in place by their Levenshtein distance
   filteredPackages.sort((a, b) => {
-    const aDistance = levenshteinDistance(a, searchTermLower);
-    const bDistance = levenshteinDistance(b, searchTermLower);
+    const aDistance = levenshteinDistance(
+      normalizePackageName(a),
+      searchTermNormalized,
+    );
+    const bDistance = levenshteinDistance(
+      normalizePackageName(b),
+      searchTermNormalized,
+    );
     return aDistance - bDistance;
   });
 
@@ -143,12 +162,12 @@ const Packages = () => {
       (allPackages[pkgName.toLowerCase()] || []).map((repo, index) => (
         <span key={`${pkgName}-${index}-${repo}`}>
           <a
-            href={`https://github.com/conda-forge/${repo}-feedstock`}
+            href={`https://github.com/conda-forge/${feedstockName(repo)}`}
             target="_blank"
             rel="noopener noreferrer"
-            title={`View ${repo}-feedstock on GitHub`}
+            title={`View ${feedstockName(repo)} on GitHub`}
           >
-            {repo}-feedstock
+            {feedstockName(repo)}
           </a>
           <br />
         </span>

@@ -2,6 +2,7 @@ import Link from "@docusaurus/Link";
 import { urls } from "@site/src/constants";
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
+import ErrorMessageDetails from "@site/src/components/ErrorMessageDetails";
 
 export default function VersionUpdates({ onLoad }) {
   const [{ collapsed, expanded, errors, queued }, setState] =
@@ -39,7 +40,7 @@ export default function VersionUpdates({ onLoad }) {
             <span className="badge badge--warning">{Object.keys(errors).length}</span>
             {" "}
             <small className="fa fa-fw">
-              <a href={urls.versions.api} target="_blank" title="View raw payload">
+              <a href={urls.versions.api} target="_blank" rel="noopener noreferrer" title="View raw payload">
                 <i className="fa fa-fw fa-arrow-up-right-from-square"></i>
               </a>
             </small>
@@ -97,7 +98,7 @@ export default function VersionUpdates({ onLoad }) {
               </div>
               <div className={styles.errored_item_content}
                 style={{ display: !expanded[name] && "none" }}>
-                <pre dangerouslySetInnerHTML={{ __html: message}} />
+                <ErrorMessageDetails details={ message }/>
               </div>
             </React.Fragment>
           ))}

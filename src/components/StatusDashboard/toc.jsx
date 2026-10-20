@@ -24,9 +24,6 @@ export default function TOC({ incident }) {
           <a className="menu__link" href="#github">GitHub Actions Usage</a>
         </li>
         <li className="menu__list-item">
-          <a className="menu__link" href="#travis">Travis CI Usage</a>
-        </li>
-        <li className="menu__list-item">
           <a className="menu__link" href="#incidents">Incidents</a>
         </li>
       </ul>

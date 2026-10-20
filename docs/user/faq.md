@@ -12,7 +12,7 @@ title: 'FAQ'
 
 ## A package I am looking for is not on conda-forge, what can I do?
 
-We have an overview and step-by-step instruction on contributing packages in the section [Contributing packages](../maintainer/adding_pkgs.md#dev-contribute-pkgs).
+We have an overview and step-by-step instruction on contributing packages in the section [Contributing packages](../../maintainer/adding_pkgs).
 
 <a id="faq-pkg-update"></a>
 
@@ -118,7 +118,7 @@ compilers only contains the sysroot they were built with. The compiler binary na
 ‘prefixed' with more complete information about the architecture and [ABI](../glossary.md#abi) they target. So, instead
 of `gcc`, the actual binary will be named something like `x86_64-conda-linux-gnu-cc`.
 
-The conda-forge infrastructure provides [activation scripts](../maintainer/adding_pkgs.md#activate-scripts) which are run when
+The conda-forge infrastructure provides [activation scripts](../../maintainer/adding_pkgs#activate-scripts) which are run when
 you `conda activate` an environment that contains the compiler toolchain. Those scripts set
 many environment variables that are typically used by GNU `autotools` and `make` in the
 `standard` (i.e. builtin) build rules. For example, you would see the variable `CC` set to
@@ -182,7 +182,7 @@ If your package breaks ABI with a version bump, here are a few steps you can tak
 - Add a PR to pin the old version in `conda-forge-pinning` (if not already present)
 - Open a migrator following [CFEP-09](https://github.com/conda-forge/cfep/blob/main/cfep-09.md)
 
-To read more on how to specify `run_exports`, see [Specifying run_exports](../maintainer/pinning_deps.md#run-exports).
+To read more on how to specify `run_exports`, see [Specifying run_exports](../maintainer/pinning_deps.mdx#specifying-run_exports).
 Some of the examples you can see for reference, where broken packages are fixed by:
 
 - [Replacing an existing pin that was incorrect](https://github.com/conda-forge/conda-forge-repodata-patches-feedstock/pull/217).

@@ -28,7 +28,6 @@ const config = {
   url: "https://conda-forge.org/",
   baseUrl: "/",
   onBrokenLinks: process.env.GITHUB_ACTIONS ? "throw" : "warn",
-  onBrokenMarkdownLinks: process.env.GITHUB_ACTIONS ? "throw" : "warn",
   onBrokenAnchors: process.env.GITHUB_ACTIONS ? "throw" : "warn",
   favicon: "img/favicon.ico",
   trailingSlash: true,
@@ -63,6 +62,10 @@ const config = {
   markdown: {
     mermaid: true,
     format: "detect",
+    hooks: {
+      onBrokenMarkdownImages: process.env.GITHUB_ACTIONS ? "throw" : "warn",
+      onBrokenMarkdownLinks: process.env.GITHUB_ACTIONS ? "throw" : "warn",
+    },
   },
   themes: ["@docusaurus/theme-mermaid"],
 
@@ -81,6 +84,7 @@ const config = {
           showReadingTime: true,
           blogSidebarCount: 10,
           onInlineAuthors: "ignore",
+          onUntruncatedBlogPosts: "throw",
           ...editUrl,
         },
         theme: {
@@ -253,6 +257,10 @@ const config = {
             from: "/news/2024/04/09/clang-everywhere/",
             to: "/news/2024/04/30/clang-everywhere/",
           },
+          {
+            from: "/news/2025/05/16/new-ubuntu-base-for-miniforge-docker-images/",
+            to: "/news/2025/04/17/new-ubuntu-base-for-miniforge-docker-images/",
+          },
           /* Docs redirects */
           {
             from: "/docs/user/announcements.html",
@@ -413,6 +421,10 @@ const config = {
                 label: "CFEPs",
                 to: "/community/cfep/",
               },
+              {
+                label: "Reorganized docs",
+                to: "/docs/diataxis",
+              },
             ],
           },
           {
@@ -452,8 +464,8 @@ const config = {
                 href: "/status/",
               },
               {
-                label: "Twitter",
-                href: "https://twitter.com/condaforge",
+                label: "Bluesky",
+                href: "https://bsky.app/profile/conda-forge.org",
               },
             ],
           },
@@ -475,10 +487,6 @@ const config = {
               {
                 label: "Zulip",
                 href: "https://conda-forge.zulipchat.com",
-              },
-              {
-                label: "Discourse",
-                href: "https://conda.discourse.group/c/pkg-building/conda-forge/25",
               },
               {
                 label: "Stack Overflow",

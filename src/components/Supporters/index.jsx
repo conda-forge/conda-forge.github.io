@@ -31,10 +31,24 @@ const infrastructure = [
   //   width: 250,
   // },
   {
+    name: "Blacksmith",
+    link: "https://blacksmith.sh",
+    light: "img/supporters/blacksmith_light.png",
+    dark: "img/supporters/blacksmith_dark.png",
+    width: 200,
+  },
+  {
     name: "Cirun",
     link: "https://cirun.io",
     light: "img/supporters/cirun_light.svg",
     dark: "img/supporters/cirun_dark.svg",
+    width: 200,
+  },
+  {
+    name: "Depot",
+    link: "https://depot.dev",
+    light: "img/supporters/depot_light.svg",
+    dark: "img/supporters/depot_dark.svg",
     width: 200,
   },
   {
@@ -52,11 +66,11 @@ const infrastructure = [
   //   width: 150,
   // },
   {
-    name: "MetroStar",
-    link: "https://www.metrostar.com/company/",
-    light: "img/supporters/metrostar_light.svg",
-    dark: "img/supporters/metrostar_dark.svg",
-    width: 210,
+    name: "Namespace.so",
+    link: "https://namespace.so",
+    light: "img/supporters/namespace_light.svg",
+    dark: "img/supporters/namespace_dark.svg",
+    width: 250,
   },
   {
     name: "Oracle Cloud",
@@ -139,13 +153,6 @@ const developer = [
     width: 250,
   },
   {
-    name: "Voltron Data",
-    link: "https://voltrondata.com/",
-    light: "img/supporters/voltron_light.svg",
-    dark: "img/supporters/voltron_dark.svg",
-    width: 250,
-  },
-  {
     name: "Quansight Labs",
     link: "https://labs.quansight.org/",
     light: "img/supporters/quansightlabs_light.svg",
@@ -179,7 +186,7 @@ export default function Supporters() {
   return (
     <div className={[styles.supporters, styles.section_padding].join(" ")}>
       <div className={styles.supporters_conda_forge}>
-        <h1>Supporters</h1>
+        <h1 id="supporters"><a href="#supporters">Supporters</a></h1>
         <p>
           If you like conda-forge and want to support our mission, please
           consider making a{" "}

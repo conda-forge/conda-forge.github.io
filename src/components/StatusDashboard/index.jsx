@@ -87,16 +87,6 @@ export default function StatusDashboard() {
           </div>
           <div className="row row--no-gutters">
             <div className="col col--12">
-              <div id="travis" className={styles.toc_anchor}></div>
-              <UsageChart
-                backgroundColor={chartColors[colorMode]}
-                onLoad={onLoad}
-                url={urls.travis.usage}
-                title="Travis CI Usage" />
-            </div>
-          </div>
-          <div className="row row--no-gutters">
-            <div className="col col--12">
               <div id="incidents" className={styles.toc_anchor}></div>
               <Incidents onLoad={onLoadIncidents} />
             </div>

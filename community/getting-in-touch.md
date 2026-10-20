@@ -45,10 +45,6 @@ Note: All Gitter room links forward to Element
 
 </details>
 
-## Forum
-
-- [conda community discourse forum](https://conda.discourse.group/): The [conda-forge section](https://conda.discourse.group/c/pkg-building/conda-forge/25) is dedicated to discussions of conda-forge.
-
 ## Online meetings
 
 - Check [Meeting minutes](./minutes.mdx) to see how to join our calls.

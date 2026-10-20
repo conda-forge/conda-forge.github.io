@@ -16,7 +16,7 @@ conda-forge is a community effort that provides conda packages for a wide range 
 
 You can [search](https://anaconda.org/) for packages online. Look out for packages provided by our conda-forge organization.
 
-**Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack! Please refer to [Becoming involved](contributing.md#becoming-involved), for an overview on how to start contributing.
+**Cannot find a package or only outdated versions of a package?** - Everybody is welcome to contribute to our package stack! Please refer to [Becoming involved](contributing.mdx), for an overview on how to start contributing.
 
 <a id="why-conda-forge"></a>
 
@@ -103,7 +103,7 @@ Please refer to [Using multiple channels](tipsandtricks.md#multiple-channels) fo
 
 Anyone can contribute packages to the `conda-forge` channel.
 You don't have to be the upstream maintainer of a package in order to contribute it to conda-forge.
-To learn how to contribute your first package read [the staging process](../maintainer/adding_pkgs.md#creating-recipes).
+To learn how to contribute your first package read [the staging process](../../maintainer/adding_pkgs#the-staging-process).
 
 <a id="how-can-i-give-credit-to-conda-forge"></a>
 

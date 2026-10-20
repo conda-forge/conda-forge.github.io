@@ -1,0 +1,147 @@
+---
+tags: [how-to, advanced, windows]
+---
+
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+# Compiling native code on Windows with MSVC
+
+In order to compile native code (C, C++, etc.) on Windows, you will need to
+install Microsoft's Visual C++ build tools on your VM. You must install
+particular versions of these tools — this is to maintain compatibility between
+compiled libraries used in Python, [as described on this Python wiki page](https://wiki.python.org/moin/WindowsCompilers). The current relevant
+versions are:
+
+- For Python 3.5–3.12+: Visual C++ 14.x
+
+While you can obtain these tools by installing the right version of the full
+[Visual Studio](https://visualstudio.microsoft.com/) development
+environment, you can save a lot of time and bandwidth by installing standalone
+"build tools" packages. You can get them from [Visual Studio
+Subscriptions](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2022-and-other-products).
+To download build tools, you'll need a Microsoft account. Once on the
+Visual Studio Subscriptions page, you may also need to join the Dev Essentials
+program. Once that's done, you can click the "Download" tab and search for
+"Build Tools for Visual Studio 2022". You can directly install VC-2022 using the
+[Visual Studio Build Tools 2022 installer](https://aka.ms/vs/17/release/vs_BuildTools.exe).
+
+If you need more information. Please refer [the Python wiki page on Windows compilers](https://wiki.python.org/moin/WindowsCompilers).
+
+## Simple CMake-Based `bld.bat`
+
+Some projects provide hooks for CMake to build the project. The following
+example `bld.bat` file demonstrates how to build a traditional, out-of-core
+build for such projects.
+
+```batch title="CMake-based bld.bat"
+setlocal EnableDelayedExpansion
+
+:: Make a build folder and change to it.
+mkdir build
+cd build
+
+:: Configure using the CMakeFiles
+cmake -G "NMake Makefiles" ^
+      %CMAKE_ARGS% ^
+      ..
+if errorlevel 1 exit 1
+
+:: Build!
+nmake
+if errorlevel 1 exit 1
+
+:: Install!
+nmake install
+if errorlevel 1 exit 1
+```
+
+The following feedstocks are examples of this build structure deployed:
+
+- [Pugixml](https://github.com/conda-forge/pugixml-feedstock/blob/main/recipe/bld.bat)
+
+<a id="building-for-different-vc-versions"></a>
+
+## Versions of Microsoft Visual C++ (MSVC)
+
+Up until Visual Studio (VS) 2013, the MSVC compiler changed ABI on every major release,
+meaning packages that communicated through a C/C++ API had to be built with a consistent
+version. This meant for example that python 2.7 required `vs2008` for the duration of its lifetime.
+
+Since VS2015, the ABI has been kept stable though, meaning that packages do not have to be
+built with the same MSVC version. This allows us to avoid complicated migrations for ~all
+compiled packages, or getting stuck on old compiler versions.
+
+Speaking of versions, the situation with MSVC can be very confusing. The Visual Studio year is
+often used as a shorthand for the compiler generation, but what's really relevant is the
+toolchain version, which, since VS2015 has been 14.x, and which is referred to as `vc`.
+
+| VS Year | VS Version | Compiler Version | Toolchain Version | Runtime Version |
+| ------- | ---------- | ---------------- | ----------------- | --------------- |
+| 2015    | 14.0       | 19.0             | 14.0              | 14.0.zzzzz      |
+| 2017    | 15.x       | 19.1y            | 14.1              | 14.1y.zzzzz     |
+| 2019    | 16.x       | 19.2x            | 14.2              | 14.2x.zzzzz     |
+| 2022    | 17.x       | 19.3x            | 14.3              | 14.3x.zzzzz     |
+
+In the table above, `x` and `y` on the same line are referring to the same digit, though there
+are various deviations from this schema. For example, the minor versions for the 2022 line went
+beyond 9, so 17.14 corresponds to compiler 19.44 (30+14) and runtime 14.44.
+
+We are always able to use the newest runtime in an environment, so we always satisfy the respective
+lower bound imposed by the compiler version. However, there are other situations where the toolchain
+version becomes "viral", in the sense that certain artefacts like static libraries have to be
+consumed by a toolchain that's at least as new as the one that produced it. We therefore try to
+not raise our default compiler version too quickly.
+
+As of June 2025, we are now on the most recent VS2022 (because VS2019 had reached end-of-life already
+in mid 2024), though the next major version of Visual Studio is already on the horizon. It will
+still be ABI-compatible, such that we will not have to rebuild everything. In other words, the
+toolchain version will remain `14.x`.
+
+If the day ever comes where MSVC breaks the ABI again (codename "vNext"), then we will have to rebuild
+all compiled packages in conda-forge on windows. After such a migration has taken place, you can then
+choose to skip building for one or the other by using `vc` in a selector, e.g.
+
+<RecipeTabs>
+
+```recipe
+build:
+    # to demonstrate mechanism: only build vNext
+    skip: true  # [win and vc<15]
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+```
+
+```recipe
+build:
+    # to demonstrate mechanism: only build vNext
+    skip: win and vc<15
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+```
+
+</RecipeTabs>
+
+<a id="using-vs2022"></a>
+
+## Using newer MSVC versions
+
+Given that conda-forge is currently (June 2025) on the latest VS line, it's currently not possible
+to use even newer versions. However, we expect a new Visual Studio major version within the next year
+or so, and once it becomes available in the runner-images for Azure Pipelines and then in conda-forge,
+it will be possible to opt into newer compilers (e.g. for C++23 support) as follows.
+
+In `recipe/conda_build_config.yaml` file:
+
+```recipe title="recipe/conda_build_config.yaml"
+# note: future VS version is speculative!
+c_compiler:    # [win]
+- vs2026       # [win]
+cxx_compiler:  # [win]
+- vs2026       # [win]
+```
+
+After making these changes don't forget to rerender with `conda-smithy` (to rerender manually use `conda smithy rerender` from the command line).

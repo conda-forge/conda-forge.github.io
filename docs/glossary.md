@@ -36,7 +36,7 @@ performance (reduced latency, higher download speeds) and availability.
 
 Core Dependency Tree. Core Dependency Tree packages take care of the dependencies that are so close to the system that they are not packaged with conda-forge. For example, in conda-forge, we have used repackaged CentOS 6 or 7 binaries for some time.
 
-[Learn more](https://conda-forge.org/docs/maintainer/knowledge_base.html#cdt-packages).
+[Learn more](https://conda-forge.org/docs/maintainer/knowledge_base.html#core-dependency-tree-packages-cdts).
 
 <a id="term-CFEP"></a>
 
@@ -114,7 +114,7 @@ Pull Request. A Pull Request is a workflow method to submit contributions to an 
 
 ## Recipe
 
-A recipe is a collection of files required to build a conda package. This includes, at minimum, a [`meta.yaml`](maintainer/adding_pkgs.md#the-recipe-meta-yaml) file, but can also include license files, patches, build scripts, test scripts etc.
+A recipe is a collection of files required to build a conda package. This includes, at minimum, a [`meta.yaml`](../maintainer/adding_pkgs#the-recipe-recipeyaml-or-metayaml) file, but can also include license files, patches, build scripts, test scripts etc.
 
 [Learn More](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html).
 

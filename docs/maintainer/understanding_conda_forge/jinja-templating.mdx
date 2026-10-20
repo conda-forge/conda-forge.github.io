@@ -1,0 +1,548 @@
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+# Jinja templating
+
+The recipe file can contain expressions that are evaluated during build time.
+These expressions are written using a subset of [Jinja](http://jinja.pocoo.org/) syntax.
+
+The v0 recipes were Jinja templates entirely and needed to be preprocessed before being read as YAML.
+This enabled quite powerful customization, but it meant that the unprocessed recipes were not valid YAML.
+The resulting recipe may have differed significantly depending on the state of Jinja environment, and this caused issues for a variety of tools such as linters or migrators.
+
+The v1 recipes are plain YAML files, and Jinja expression support is added in the value processing layer.
+As a result, no control structures (such as `{% for ... %}` blocks) are supported.
+
+## Defining variables
+
+The primary use of Jinja expressions is to define variables that can be used elsewhere in the recipe file.
+They can be used to avoid duplication and to keep frequently changing values in a single block.
+
+In the v0 recipe format, variables can be set anywhere in the recipe using the `{% set ... %}` Jinja structure, though it is recommended to keep them on top of the recipe file.
+They can be referenced using the standard Jinja `{{ ... }}` syntax after being declared.
+
+In the v1 recipe format, they are defined in a `context:` section.
+They can be referenced using a modified `${{ ... }}` syntax (with a `$` prepended).
+In the `context:` section, later keys can reference variables defined in earlier keys.
+The values can either be scalars or lists.
+
+<RecipeTabs>
+
+```recipe
+{% set version = "3.7.3" %}
+
+package:
+  name: python
+  version: "{{ version }}"
+
+source:
+  url: https://www.python.org/ftp/python/{{ version }}/Python-{{ version }}.tar.xz
+  sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
+```
+
+```recipe
+context:
+  version: "3.7.3"
+
+package:
+  name: python
+  version: ${{ version }}
+
+source:
+  url: https://www.python.org/ftp/python/${{ version }}/Python-${{ version }}.tar.xz
+  sha256: da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
+```
+
+</RecipeTabs>
+
+## Jinja expressions
+
+The `{{ ... }}` and `${{ ... }}` blocks contain Jinja expressions.
+Aside from variable references, expressions may use a number of arithmetic and logical operators.
+
+The following Python operators are supported:
+
+- arithmetic operators: `+`, `-`, `/`, `//`, `%`, `*`, `**`
+- comparison operators: `==`, `!=`, `>`, `>=`, `<`, `<=`
+- logical operators: `and`, `or`, `not`
+- containtment test operator: `in`
+- if expressions: `... if ...` and `... if ... else ...`
+
+Additionally, the following Jinja-specific operators are supported:
+
+- test operator: `is` (usually used with `true` or `false`)
+- string concatenation operator: `~` (like `+` but converts all operands into strings)
+- filter application: `|` (see [using Jinja filters](#using-jinja-filters))
+
+Expressions can be grouped using parentheses.
+
+<RecipeTabs>
+
+```recipe
+{% set build_base = 0 %}
+{% set build_number = build_base + 100 if mpi == "nompi" else build_base %}
+```
+
+```recipe
+context:
+  build_base: 0
+  build_number: ${{ build_base + 100 if mpi == "nompi" else build_base }}
+```
+
+</RecipeTabs>
+
+## Using Jinja filters
+
+Filters are used to modify the value of Jinja variables.
+Filters are appended to variable references using the pipe (`|`) character.
+Filters may take arguments.
+Multiple filters can be chained together.
+
+Filters commonly used in recipes include:
+- `| default(...)` to provide a default value if variable is undefined
+- `| int` to convert a string to integer
+- `| join(...)` to join a list into a string using specified separator
+- `| length` to obtain the length of the value
+- `| lower` to convert the value into lowercase
+- `| trim` to trim a string (remove whitespace from both ends)
+- `| upper` to convert the value to uppercase
+
+The full list of available filters depends on the recipe version:
+- for v0 recipes, it can be found in [Jinja2 builtin filters](https://jinja.palletsprojects.com/en/stable/templates/#list-of-builtin-filters)
+- for v1 recipes, it can be found in [minijinja builtin filters](https://docs.rs/minijinja/latest/minijinja/filters/index.html#functions)
+
+<RecipeTabs>
+
+```recipe
+source:
+  # for version 3.1.1, the filename becomes "openbabel-3-1-1.tar.gz"
+  url: https://github.com/openbabel/openbabel/archive/openbabel-{{ version | replace('.','-') }}.tar.gz
+  sha256: c97023ac6300d26176c97d4ef39957f06e68848d64f1a04b0b284ccff2744f02
+```
+
+```recipe
+source:
+  # for version 3.1.1, the filename becomes "openbabel-3-1-1.tar.gz"
+  url: https://github.com/openbabel/openbabel/archive/openbabel-${{ version | replace('.','-') }}.tar.gz
+  sha256: c97023ac6300d26176c97d4ef39957f06e68848d64f1a04b0b284ccff2744f02
+```
+
+</RecipeTabs>
+
+### The `version_to_buildstring` filter (v1 recipes)
+
+The v1 recipe format features an additional `version_to_buildstring` filter that converts a version into a form suitable for use in build string.
+More specifically, it takes the first two version components (major and minor), and removes the version separator (`.`).
+This is specifically useful for Python versions (as a replacement for the `CONDA_PY` variable in v0 format), but may be used for other versions where pinning on minor version is desired.
+
+<RecipeTabs>
+
+```recipe
+build:
+  number: {{ build_number }}
+  # cuda_compiler_version = 12.9
+  # CONDA_PY = 312
+  # gives: cuda129py312h...
+  string: cuda{{ cuda_compiler_version | replace('.', '') }}py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+```
+
+```recipe
+build:
+  number: ${{ build_number }}
+  # cuda_compiler_version = 12.9
+  # python = 3.12.13
+  # gives: cuda129py312h...
+  string: cuda${{ cuda_compiler_version | version_to_buildstring }}py${{ python | version_to_buildstring }}h${{ hash }}_${{ build_number }}
+```
+
+</RecipeTabs>
+
+## List variables
+
+Jinja (and the v1 recipe `context` key) supports declaring list variables.
+Such variables need to be converted to scalar strings to be used in a value.
+For example, this can be used to conveniently construct a test skip filter for pytest.
+
+<RecipeTabs>
+
+```recipe
+{% set tests_to_skip = [
+    # skip test_url_is_accessible instead of hitting 20+ servers per run, since
+    # each server might be occasionally unresponsive and end up failing our CI
+    'test_url_is_accessible',
+    # skip classes inheriting from `datasets_utils.VideoDatasetTestCase`, which
+    # are very prone to hanging, especially on osx & windows; see
+    # https://github.com/pytorch/vision/blob/v0.25.0/test/test_datasets.py
+    'HMDB51TestCase',
+    'KineticsTestCase',
+    'UCF101TestCase',
+] %}
+
+test:
+  commands:
+    - pytest {{ tests_to_skip | join(' OR ') }}
+```
+
+```recipe
+context:
+  tests_to_skip:
+    # skip test_url_is_accessible instead of hitting 20+ servers per run, since
+    # each server might be occasionally unresponsive and end up failing our CI
+    - test_url_is_accessible
+    # skip classes inheriting from `datasets_utils.VideoDatasetTestCase`, which
+    # are very prone to hanging, especially on osx & windows; see
+    # https://github.com/pytorch/vision/blob/v0.25.0/test/test_datasets.py
+    - HMDB51TestCase
+    - KineticsTestCase
+    - UCF101TestCase
+
+tests:
+  - script:
+      - pytest ${{ tests_to_skip | join(' OR ') }}
+```
+
+</RecipeTabs>
+
+## Special variables
+
+A number of special variables are made available for use in variable references and selector expressions.
+The most common are listed in this section.
+
+### Build string variables
+
+The build strings for a package usually contain the build number and a package hash.
+In v0 recipes, the build number (as defined in the recipe) is exposed as `{{ PKG_BUILDNUM }}` variable, while the package hash is exposed as `{{ PKG_HASH }}`.
+In v1 recipes, only package hash is exposed, as `${{ hash }}`.
+It is recommended to store the build number as a custom variable instead.
+
+<RecipeTabs>
+
+```recipe
+build:
+  number: 0
+  string: abc_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+```
+
+```recipe
+context:
+  build_number: 0
+
+build:
+  number: 0
+  string: abc_h{{ hash }}_{{ build_number }}
+```
+
+</RecipeTabs>
+
+### Selector variables
+
+A number of variables is provided for use in selectors.
+
+The following variables expose platform identifiers as strings:
+
+- `build_platform` for the build platform
+- `host_platform` for the host platform (v1 recipe only)
+- `target_platform` for the target platform
+
+These concepts are described in greater detail in [cross-compilation](/docs/how-to/advanced/cross-compilation/).
+
+The following variables are provided for checking the platform the package is being built for (the host platform), as booleans:
+
+- `linux`, `osx`, `win` are true when building for the specified operating system
+- `unix` is true when building for a Unix system (macOS or Linux)
+- `x86_64` is true when building for 64-bit x86
+- `aarch64` is true when building for AArch64 Linux (use `arm64` for other systems)
+- `arm64` is true when building for ARM64 macOS / Windows (use `aarch64` for Linux)
+- `ppc64le`, `s390x` are true when building for PowerPC64 little-endian and s390x architectures (Linux only)
+
+Additionally, variables used to define variants can be referenced.
+For example, in a package with Python-version variants, the `python` variable will contain the version specifier for the `python` package.
+In v1 recipes, the [match()](#the-match-function-v1-recipes) function is provided to test against such version.
+In v0 recipes, an additional `py` variable is provided that exposes the Python version as an integer (e.g. 3.11 is exposed as 311).
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ stdlib('c') }}
+    - {{ compiler('cuda') }}            # [cuda_compiler_version != "None"]
+    - python                            # [build_platform != target_platform]
+    - cross-python_{{ host_platform }}  # [build_platform != target_platform]
+    - numpy                             # [build_platform != target_platform]
+  host:
+    - python
+    - numpy
+    - onednn                            # [(osx and x86_64) or linux]
+    - onednn-cpu-threadpool             # [linux and x86_64]
+```
+
+```recipe
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - if: cuda_compiler_version != "None"
+      then: ${{ compiler('cuda') }}
+    - if: build_platform != host_platform
+      then:
+        - python
+        - cross-python_${{ host_platform }}
+        - numpy
+  host:
+    - python
+    - numpy
+    - if: (osx and x86_64) or linux
+      then: onednn
+    - if: linux and x86_64
+      then: onednn-cpu-threadpool
+```
+
+</RecipeTabs>
+
+## Conditional blocks
+
+In addition to selectors, v0 recipes can use the Jinja `{% if ... %}` conditional blocks to make parts of the recipe conditional.
+While powerful, these blocks are discouraged as they prevent many tools from processing the recipe, most notably the version migrator.
+
+The v1 recipe format has preprocessing selectors as a replacement for both selectors and Jinja conditional blocks.
+They can also be used to introduce conditional sections, to some degree.
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - openssl
+    {% if license_family == 'gpl' %}
+    - x264
+    - x265
+    {% endif %}
+    - libvpx  # [not win]
+    - zlib
+```
+
+```recipe
+requirements:
+  host:
+    - openssl
+    - if: license_family == 'gpl'
+      then:
+        - x264
+        - x265
+    - if: not win
+      then: libvpx
+    - zlib
+```
+
+</RecipeTabs>
+
+<RecipeTabs>
+
+```recipe
+test:
+  imports:
+    - spam
+  requires:
+    - pip
+    - abi3audit                      # [is_abi3]
+  commands:
+    - pip check
+    - abi3audit $SP_DIR/spam.abi3.so -s -v --assume-minimum-abi3 {{ python_min }}   # [unix and is_abi3]
+    - abi3audit %SP_DIR%/spam.pyd -s -v --assume-minimum-abi3 {{ python_min }}      # [win and is_abi3]
+```
+
+```recipe
+tests:
+  - python:
+      imports:
+        - spam
+      pip_check: true
+  - if: is_abi3
+    then:
+      requirements:
+        run:
+          - abi3audit
+      script:
+        - if: unix
+          then: abi3audit $SP_DIR/spam.abi3.so -s -v --assume-minimum-abi3 ${{ python_min }}
+          else: abi3audit %SP_DIR%/spam.pyd -s -v --assume-minimum-abi3 ${{ python_min }}
+```
+
+</RecipeTabs>
+
+## Additional Jinja functions
+
+Both recipe formats provide a few additional functions that can be called using the variable reference syntax.
+
+### The `compiler` and `stdlib` functions
+
+The `compiler()` and `stdlib()` functions take the identifier of a programming language or toolchain as an argument, and output appropriate dependency string for the respective compiler or standard library.
+Notably, this streamlines per-platform toolchain specifics.
+The use of these functions is described in greater detail in [compilers and runtimes](/docs/maintainer/infrastructure/#compilers-and-runtimes).
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ stdlib('c') }}
+```
+
+```recipe
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+```
+
+</RecipeTabs>
+
+### The `match()` function (v1 recipes)
+
+The v1 recipe format features an additional `match()` function that can be used to match version strings against version specifications.
+It is commonly used to match against `python` versions, as a v1 recipe replacement for `py...` selectors.
+
+<RecipeTabs>
+
+```recipe
+build:
+  skip: true  # [py<311]
+
+requirements:
+  host:
+    - typing_extensions # [py<312]
+```
+
+```recipe
+build:
+  skip: match(python, "<3.11")
+
+requirements:
+  host:
+    - if: match(python, "<3.12")
+      then: typing_extensions
+```
+
+</RecipeTabs>
+
+### The `pin_compatible()` and `pin_subpackage()` function
+
+The `pin_compatible()` function outputs a dependency string that is pinned to a version compatible with the package used at build time.
+It is usually used to construct `run` dependencies when run exports are not sufficient.
+
+The `pin_subpackage()` function outputs a similar dependency string, but pinned to a another output of the same recipe.
+It is often used to construct `run_exports`.
+
+Both functions take a package name as the only positional argument.
+In case of `pin_compatible()`, the package must be a `host` or a `build` dependency.
+In case of `pin_subpackage()`, it must be one of the outputs of the recipe.
+
+#### Pinning to version ranges
+
+By default, the functions output a dependency string with upper and lower bounds.
+The bounds can be adjusted using keyword arguments, and normally are expression using a pin expression such as `x.x.x`, where each `x` refers to the determined package version.
+The default bounds are `x.x.x.x.x.x` for the lower bound, and `x` for the upper bound.
+For example, if the current package version is `1.2.3`, then the resulting depenendency string then would be `>=1.2.3,<2`.
+
+In v1 recipes, the keyword arguments are named `lower_bound` and `upper_bound`, respectively.
+They can accept either pin expressions or fixed version numbers.
+
+In v0 recipes, pin expressions can be specified using `min_pin` and `max_pin` arguments, or fixed version numbers can be specified via `lower_bound` and `upper_bound`.
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - numpy
+    - plotly
+  run:
+    # if numpy 1.11.2 were installed, this would output >=1.11,<2
+    - {{ pin_compatible('numpy', min_pin='x.x', max_pin='x') }}
+    # if plotly 4.1.2 were installed, this would otuput >=4.1.2,<6.0
+    - {{ pin_compatible('plotly', upper_bound='6.0') }}
+build:
+  run_exports:
+    # pins to exact patch version
+    - {{ pin_subpackage('libopencv', max_pin='x.x.x') }}
+```
+
+```recipe
+requirements:
+  host:
+    - numpy
+    - plotly
+  run:
+    # if numpy 1.11.2 were installed, this would output >=1.11,<2
+    - ${{ pin_compatible('numpy', lower_bound='x.x', upper_bound='x') }}
+    # if plotly 4.1.2 were installed, this would otuput >=4.1.2,<6.0
+    - ${{ pin_compatible('plotly', upper_bound='6.0') }}
+  run_exports:
+    # pins to exact patch version
+    - ${{ pin_subpackage('libopencv', upper_bound='x.x.x') }}
+```
+
+</RecipeTabs>
+
+#### Pinning to an exact version
+
+Alternatively, an `exact=true` keyword argument can be used to pin to the exact package version.
+Note that this includes the full build string.
+If you need to pin on version without the build string, use an appropriately long pin expression instead.
+
+<RecipeTabs>
+
+```recipe
+build:
+  run_exports:
+    - {{ pin_subpackage('vtk-base', exact=true) }}
+```
+
+```recipe
+requirements:
+  run_exports:
+    - ${{ pin_subpackage('vtk-base', exact=true) }}
+```
+
+</RecipeTabs>
+
+### The `cdt()` function
+
+The `cdt()` function takes a single CDT name as an argument and outputs appropriate CDT dependency.
+CDTs are described in greater detail in [Core Dependency Tree Packages (CDTs)]/docs/maintainer/knowledge_base/#core-dependency-tree-packages-cdts).
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  build:
+    - {{ cdt('mesa-libgl-devel') }}  # [linux]
+    - {{ cdt('mesa-dri-drivers') }}  # [linux]
+    - {{ cdt('libselinux') }}        # [linux]
+    - {{ cdt('libxdamage') }}        # [linux]
+    - {{ cdt('libxxf86vm') }}        # [linux]
+    - {{ cdt('libxext') }}           # [linux]
+```
+
+```recipe
+requirements:
+  build:
+    - if: linux
+      then:
+        - ${{ cdt('mesa-libgl-devel') }}
+        - ${{ cdt('mesa-dri-drivers') }}
+        - ${{ cdt('libselinux') }}
+        - ${{ cdt('libxdamage') }}
+        - ${{ cdt('libxxf86vm') }}
+        - ${{ cdt('libxext') }}
+```
+
+</RecipeTabs>
+
+## More information
+
+For more information please refer to the "Templating with Jinja" section in the [rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#templating-with-jinja) or [conda-build](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#templating-with-jinja) docs.
