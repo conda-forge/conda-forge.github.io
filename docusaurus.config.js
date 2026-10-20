@@ -509,6 +509,7 @@ const config = {
           "python",
           "markdown",
           "shell-session",
+          "powershell",
         ],
       },
       docs: {

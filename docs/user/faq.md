@@ -155,7 +155,7 @@ conda environment. This can be accomplished (for gcc) by passing `-sysroot=/` on
 ## How can I compile CUDA (host or device) codes in my environment?
 
 Beginning with CUDA 12.0, a full suite of CUDA packages are provided in conda-forge including various metapackages to group components together.
-These metapackages and their documentation are updated frequently, so for the most up to date recommendations and documentation please read the [relevant guides provided in the `cuda` feedstock](https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/README.md).
+See [Compiling CUDA code in your environment](/docs/user/cuda/#compiling-cuda-code-in-your-environment) for more information.
 
 <a id="faq-abi-incompatibility"></a>
 

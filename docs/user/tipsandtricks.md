@@ -133,30 +133,6 @@ python -c "import platform;print(platform.machine())"  # Should print "x86_64"
 echo "CONDA_SUBDIR: $CONDA_SUBDIR"  # Should print "CONDA_SUBDIR: osx-64"
 ```
 
-<a id="installing-packages-for-gpus-and-cpus"></a>
-
-<a id="installing-cuda-enabled-packages-like-tensorflow-and-pytorch"></a>
-
-## Installing CUDA-enabled packages like TensorFlow and PyTorch
-
-In conda-forge, some packages are available with GPU support. These packages not only take significantly longer to compile and build, but they also result in rather large binaries that users then download. As an effort to maximize accessibility for users with lower connection and/or storage bandwidth, there is an ongoing effort to limit installing packages compiled for GPUs unnecessarily on CPU-only machines by default. This is accomplished by adding a [virtual package](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html) run dependency, `__cuda`, that detects if the local machine has a GPU. However, this introduces challenges to users who may prefer to still download and use GPU-enabled packages even on a non-GPU machine. For example, login nodes on HPCs often do not have GPUs and their compute counterparts with GPUs often do not have internet access. In this case, a user can override the default setting via the environment variable `CONDA_OVERRIDE_CUDA` to install GPU packages on the login node to be used later on the compute node. At the time of writing (February 2022), we have concluded this safe default behavior is best for most of conda-forge users, with an easy override option available and documented. Please let us know if you have thoughts on or issues with this.
-
-In order to override the default behavior, a user can set the environment variable `CONDA_OVERRIDE_CUDA` like below to install TensorFlow with GPU support even on a machine with CPU only.
-
-```shell-session
-CONDA_OVERRIDE_CUDA="<CUDA version>" conda install tensorflow -c conda-forge
-# OR
-CONDA_OVERRIDE_CUDA="<CUDA version>" mamba install tensorflow -c conda-forge
-```
-
-:::note
-
-See the [relevant CUDA user guides](https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/README.md) for more information.
-
-:::
-
-For context, installing the TensorFlow 2.7.0 CUDA-enabled variant, `tensorflow=2.7.0=cuda*`, results in approximately 2 GB of packages to download while the CPU variant, `tensorflow=2.7.0=cpu*`, results in approximately 200 MB to download. That is a significant bandwidth and storage wasted if one only needs the CPU only variant!
-
 <a id="pypy"></a>
 
 <a id="using-pypy-as-an-interpreter"></a>
