@@ -27,7 +27,7 @@
     "d3": "^7.9.0",
     "dagre-d3-es": "^7.0.14",
     "install": "^0.13.0",
-    "moment": "^2.29.4",
+    "moment": "^2.31.0",
     "octokit": "^5.0.5",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.8",
