@@ -1744,34 +1744,10 @@ package supports it as well:
   that specify the desired version range for the dependencies whose run exports have been
   ignored.
 
-For example, suppose you have built a package that requires `libcublas`:
-
-<RecipeTabs>
-
-```recipe
-requirements:
-  build:
-    - {{ compiler('cuda') }}
-  host:
-    - libcublas-dev
-    - cuda-version ={{ cuda_compiler_version }}
-```
-
-```recipe
-requirements:
-  build:
-    - ${{ compiler('cuda') }}
-  host:
-    - libcublas-dev
-    - cuda-version ${{ cuda_compiler_version }}.*
-```
-
-</RecipeTabs>
-
-Because of run-exports in the `libcublas-dev` package, your library will have a
-`run` requirement on `libcublas` corresponding to `{{ cuda_compiler_version }}`
-or newer. To make this compatible with all CUDA minor versions from the same
-CUDA major version family, you must add the following:
+Suppose you have built a package that requires `libcublas`. Because of run exports in the
+`libcublas-dev` package, your library will have a `run` requirement on `libcublas`
+corresponding to `{{ cuda_compiler_version }}` or newer. To make this compatible with all
+CUDA minor versions from the same CUDA major version family, you must add the following:
 
 <RecipeTabs>
 
