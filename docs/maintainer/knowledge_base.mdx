@@ -1625,8 +1625,8 @@ requirements:
   build:
     - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
   host:
-    - libcufft-dev  # [cuda_compiler_version != "None"]
-    - cuda-version ={{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
+    - libcublas-dev  # [cuda_compiler_version != "None"]
+    - cuda-version {{ cuda_compiler_version }}.*  # [cuda_compiler_version != "None"]
 ```
 
 ```recipe
@@ -1652,15 +1652,11 @@ then get the non-CUDA variant.
 <RecipeTabs>
 
 ```recipe
-{% set build = 0 %}
-
-# Prefer the CUDA variant when it is installable
-{% if cuda_compiler_version != "None" %}
-{% set build = build + 100 %}
-{% endif %}
+{% set build_number = 0 %}
 
 build:
-  number: {{ build }}
+  # Prefer the CUDA variant when it is installable
+  number: {{ build_number + (100 if cuda_compiler_version != "None" else 0) }}
 
 requirements:
   run:
@@ -1766,7 +1762,7 @@ requirements:
     - {{ compiler('cuda') }}
   host:
     - libcublas-dev
-    - cuda-version ={{ cuda_compiler_version }}
+    - cuda-version {{ cuda_compiler_version }}.*
   run:
     # Since we've ignored the run export from libcublas-dev, we pin
     # libcublas manually. Having a pin_compatible on cuda-version with
