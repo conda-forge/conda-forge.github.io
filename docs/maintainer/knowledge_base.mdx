@@ -1626,7 +1626,7 @@ requirements:
     - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
   host:
     - libcufft-dev  # [cuda_compiler_version != "None"]
-    - cuda-version={{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
+    - cuda-version ={{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
 ```
 
 ```recipe
@@ -1638,7 +1638,7 @@ requirements:
     - if cuda_compiler_version != "None":
       then:
         - libcublas-dev
-        - cuda-version=${{ cuda_compiler_version }}
+        - cuda-version ${{ cuda_compiler_version }}.*
 ```
 
 </RecipeTabs>
@@ -1754,7 +1754,7 @@ requirements:
     - {{ compiler('cuda') }}
   host:
     - libcublas-dev
-    - cuda-version={{ cuda_compiler_version }}
+    - cuda-version ={{ cuda_compiler_version }}
 ```
 
 ```recipe
@@ -1763,7 +1763,7 @@ requirements:
     - ${{ compiler('cuda') }}
   host:
     - libcublas-dev
-    - cuda-version=${{ cuda_compiler_version }}
+    - cuda-version ${{ cuda_compiler_version }}.*
 ```
 
 </RecipeTabs>
@@ -1790,7 +1790,7 @@ requirements:
     - {{ compiler('cuda') }}
   host:
     - libcublas-dev
-    - cuda-version={{ cuda_compiler_version }}
+    - cuda-version ={{ cuda_compiler_version }}
   run:
     # Since we've ignored the run export from libcublas-dev, we pin
     # libcublas manually. Having a pin_compatible on cuda-version with
@@ -1806,7 +1806,7 @@ requirements:
     - ${{ compiler('cuda') }}
   host:
     - libcublas-dev
-    - cuda-version=${{ cuda_compiler_version }}
+    - cuda-version ${{ cuda_compiler_version }}.*
   run:
     # Since we've ignored the run export from libcublas-dev, we pin
     # libcublas manually. Having a pin_compatible on cuda-version with
