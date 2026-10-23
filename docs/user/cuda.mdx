@@ -59,8 +59,6 @@ desired CUDA version.
 
 ```bash
 CONDA_OVERRIDE_CUDA="12.9" conda install tensorflow -c conda-forge
-# OR
-CONDA_OVERRIDE_CUDA="13.2" mamba install tensorflow -c conda-forge
 ```
 
 </TabItem>
@@ -69,9 +67,6 @@ CONDA_OVERRIDE_CUDA="13.2" mamba install tensorflow -c conda-forge
 ```batch
 set CONDA_OVERRIDE_CUDA=12.9
 conda install tensorflow -c conda-forge
-REM OR
-set CONDA_OVERRIDE_CUDA=13.2
-mamba install tensorflow -c conda-forge
 ```
 
 </TabItem>
@@ -80,9 +75,6 @@ mamba install tensorflow -c conda-forge
 ```powershell
 $env:CONDA_OVERRIDE_CUDA = "12.9"
 conda install tensorflow -c conda-forge
-# OR
-$env:CONDA_OVERRIDE_CUDA = "13.2"
-mamba install tensorflow -c conda-forge
 ```
 
 </TabItem>
