@@ -1646,7 +1646,7 @@ requirements:
 To make the solver prefer the CUDA variant where it can be installed, give it a higher build
 number than the non-CUDA variant. To make the CUDA variant uninstallable on machines without a
 CUDA driver, which would otherwise download large GPU packages needlessly, add the `__cuda`
-virtual package as a runtime requirement of the CUDA variant only. Users without a CUDA driver
+virtual package as a runtime requirement of the CUDA variant. Users without a CUDA driver
 then get the non-CUDA variant.
 
 <RecipeTabs>
@@ -1703,7 +1703,7 @@ Toolkit.
 The libtorch/pytorch packages similarly set `CF_TORCH_CUDA_ARCH_LIST` in their
 activation scripts so that downstream packages building pytorch modules may
 easily keep their CUDA targets updated by setting
-`TORCH_CUDA_ARCH_LIST=CF_TORCH_CUDA_ARCH_LIST` in their build environment.
+`TORCH_CUDA_ARCH_LIST=${CF_TORCH_CUDA_ARCH_LIST}` in their build environment.
 
 For example, in your build script:
 
@@ -1736,13 +1736,13 @@ that supports such behavior. Even if your library is properly configured for
 this behavior, you will need to do some extra work to ensure that your conda
 package supports it as well:
 
-- You must define
-  [`ignore_run_exports_from`](https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#export-runtime-requirements)
-  for any CTK library `-dev/-devel` packages that your package depends on. Otherwise,
-  the `run_exports` would require the runtime libraries to have versions equal
-  to or greater than the versions used to build the package.
-- You must define `ignore_run_exports` for the `cuda-version` package.
-- You must add explicit runtime dependencies (or `run_constrained` for soft/optional dependencies) that specify the desired version range for the dependencies whose `run_exports` have been ignored.
+- You must ignore run exports from any CTK library `-dev/-devel` packages that your package
+  depends on. Otherwise, the run exports would require the runtime libraries to have
+  versions equal to or greater than the versions used to build the package.
+- You must ignore run exports of the `cuda-version` package.
+- You must add explicit runtime dependencies (or constraints for soft/optional dependencies)
+  that specify the desired version range for the dependencies whose run exports have been
+  ignored.
 
 For example, suppose you have built a package that requires `libcublas`:
 
