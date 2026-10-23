@@ -1,0 +1,711 @@
+---
+title: 'Perl packages'
+tags: [howto, basic, perl]
+---
+
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+The recipes below exemplify the suggested conda-forge format for packaging Perl distributions from [CPAN](https://metacpan.org).
+Full examples are given for the two major build systems used by Perl packages: `ExtUtils::MakeMaker` (via `Makefile.PL`) and `Module::Build` (via `Build.PL`), representing roughly 80% and 20% of packages on CPAN in 2026, respectively.
+
+The ensuing discussion highlights important Perl-specific aspects of the recipes, as well as noting variations for `v1`-style `recipe.yaml` files and compiled (XS) packages.
+A general discussion of the parts of the recipe that are not Perl-specific (such as the use of Jinja variables and the meaning of many of the language-agnostic fields in the YAML) is left to others (see [See also](#see-also)).
+
+## `Makefile.PL`-based recipe
+
+<RecipeTabs>
+
+```recipe
+{% set version = "0.32" %}
+{% set sha256 = "ef2d6cab0bad18e3ab1c4e6125cc5f695c7e459899f512451c8fa3ef83fa7fc0" %}
+
+package:
+  name: perl-try-tiny
+  version: "{{ version }}"
+
+source:
+  - url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Try-Tiny-{{ version }}.tar.gz
+    sha256: {{ sha256 }}
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - >-
+      perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1 MAKE=make
+      && make
+      && make test
+      && make install VERBINST=1
+
+requirements:
+  build:
+    - make
+  host:
+    - perl
+    - perl-capture-tiny >=0.12
+    - perl-cpan-meta-check >=0.011
+    - perl-sub-name >=0.08
+  run:
+    - perl
+    - perl-sub-name >=0.08
+
+test:
+  imports:
+    - Try::Tiny
+  commands:
+    - prove
+  source_files:
+    - t/
+  requires:
+    - perl-capture-tiny >=0.12
+    - perl-cpan-meta-check >=0.011
+
+about:
+  home: https://metacpan.org/pod/Try::Tiny
+  summary: Minimal try/catch with proper preservation of $@
+  license: MIT
+  license_file: LICENCE
+
+extra:
+  recipe-maintainers:
+    - nobby-nobbs
+    - conda-forge/perl-packagers
+```
+
+```recipe
+context:
+  version: "0.32"
+  sha256: "ef2d6cab0bad18e3ab1c4e6125cc5f695c7e459899f512451c8fa3ef83fa7fc0"
+
+package:
+  name: perl-try-tiny
+  version: "${{ version }}"
+
+source:
+  - url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Try-Tiny-${{ version }}.tar.gz
+    sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - >-
+      perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1 MAKE=make
+      && make
+      && make test
+      && make install VERBINST=1
+
+requirements:
+  build:
+    - make
+  host:
+    - perl
+    - perl-capture-tiny >=0.12
+    - perl-cpan-meta-check >=0.011
+    - perl-sub-name >=0.08
+  run:
+    - perl
+    - perl-sub-name >=0.08
+
+tests:
+  - perl:
+      uses:
+        - Try::Tiny
+  - script:
+      - prove
+    files:
+      source:
+        - t/
+    requirements:
+      run:
+        - perl-capture-tiny >=0.12
+        - perl-cpan-meta-check >=0.011
+
+about:
+  home: https://metacpan.org/pod/Try::Tiny
+  summary: Minimal try/catch with proper preservation of $@
+  license: MIT
+  license_file: LICENCE
+
+extra:
+  recipe-maintainers:
+    - nobby-nobbs
+    - conda-forge/perl-packagers
+```
+
+</RecipeTabs>
+
+## `Build.PL`-based recipe
+
+<RecipeTabs>
+
+```recipe
+{% set version = "0.008014" %}
+{% set sha256 = "a3e7ee01885c60422001268905022f8558a6724ca1854bc2bb2a40c319892f14" %}
+
+package:
+  name: perl-biox-seq
+  version: "{{ version }}"
+
+source:
+  - url: https://cpan.metacpan.org/authors/id/V/VO/VOLKENING/BioX-Seq-{{ version }}.tar.gz
+    sha256: {{ sha256 }}
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - >-
+      perl Build.PL
+      && perl ./Build
+      && perl ./Build test
+      && perl ./Build install --installdirs vendor --create_packlist 0
+
+requirements:
+  host:
+    - perl
+    - perl-compress-bgzf
+    - perl-module-build
+    - perl-test-exception
+  run:
+    - perl
+    - perl-compress-bgzf
+
+test:
+  imports:
+    - BioX::Seq
+    - BioX::Seq::Fetch
+    - BioX::Seq::Stream
+    - BioX::Seq::Stream::FASTA
+    - BioX::Seq::Stream::FASTQ
+    - BioX::Seq::Stream::TwoBit
+    - BioX::Seq::Utils
+  commands:
+    - prove
+  source_files:
+    - t/
+  requires:
+    - perl-test-exception
+
+about:
+  home: https://metacpan.org/pod/BioX::Seq
+  summary: a (very) basic biological sequence object
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - nobby-nobbs
+    - conda-forge/perl-packagers
+```
+
+```recipe
+context:
+  version: "0.008014"
+  sha256: "a3e7ee01885c60422001268905022f8558a6724ca1854bc2bb2a40c319892f14"
+
+package:
+  name: perl-biox-seq
+  version: "${{ version }}"
+
+source:
+  - url: https://cpan.metacpan.org/authors/id/V/VO/VOLKENING/BioX-Seq-${{ version }}.tar.gz
+    sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - >-
+      perl Build.PL
+      && perl ./Build
+      && perl ./Build test
+      && perl ./Build install --installdirs vendor --create_packlist 0
+
+requirements:
+  host:
+    - perl
+    - perl-compress-bgzf
+    - perl-module-build
+    - perl-test-exception
+  run:
+    - perl
+    - perl-compress-bgzf
+
+tests:
+  - perl:
+      uses:
+        - BioX::Seq
+        - BioX::Seq::Fetch
+        - BioX::Seq::Stream
+        - BioX::Seq::Stream::FASTA
+        - BioX::Seq::Stream::FASTQ
+        - BioX::Seq::Stream::TwoBit
+        - BioX::Seq::Utils
+  - script:
+      - prove
+    files:
+      source:
+        - t/
+    requirements:
+      run:
+        - perl-test-exception
+
+about:
+  home: https://metacpan.org/pod/BioX::Seq
+  summary: a (very) basic biological sequence object
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - nobby-nobbs
+    - conda-forge/perl-packagers
+```
+
+</RecipeTabs>
+
+## Where to start
+
+Recipes for most Perl packages are simple, requiring a single `meta.yaml` or `recipe.yaml` that is primarily boilerplate.
+An easy way to get started is simply to copy the recipe from an existing feedstock (or the examples above) and modify the module-specific bits.
+
+:::note
+The `conda-build` tool can generate a skeleton recipe for Perl modules (`conda skeleton cpan <module_name>`).
+The generated output can provide some guidance on, for example, what dependencies to include, but the final recipe is somewhat outdated at this point.
+The `rattler-build generate-recipe cpan` command addresses several of these shortcomings but produces an incorrect recipe in some cases (such as for `Build.PL`-based packages).
+Until those code bases are updated, it is recommended to defer to the examples on this page as your starting point.
+:::
+
+## Perl-specific recommendations
+
+### The `package` section
+
+<RecipeTabs>
+
+```recipe
+package:
+  name: perl-try-tiny
+  version: "{{ version }}"
+```
+
+```recipe
+package:
+  name: perl-try-tiny
+  version: "${{ version }}"
+```
+
+</RecipeTabs>
+
+- `name`: The conda package name. This should always be the CPAN package name converted to lowercase and prepended with `perl-`.
+
+### The `source` section
+
+<RecipeTabs>
+
+```recipe
+source:
+  - url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Try-Tiny-{{ version }}.tar.gz
+    sha256: {{ sha256 }}
+```
+
+```recipe
+source:
+  - url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Try-Tiny-${{ version }}.tar.gz
+    sha256: ${{ sha256 }}
+```
+
+</RecipeTabs>
+
+- `url`: Use the MetaCPAN download URL, replacing the hard-coded version string with the `version` variable defined earlier. Do not use the development repository (e.g. GitHub, Codeberg) URL -- CPAN is considered the authoritative source for stable releases.
+
+### The `build` section
+
+<RecipeTabs>
+
+```recipe
+build:
+  number: 0
+  noarch: generic
+  script:
+    - >-
+      perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1 MAKE=make
+      && make
+      && make test
+      && make install VERBINST=1
+```
+
+```recipe
+build:
+  number: 0
+  noarch: generic
+  script:
+    - >-
+      perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1 MAKE=make
+      && make
+      && make test
+      && make install VERBINST=1
+```
+
+</RecipeTabs>
+
+- `noarch: generic`: Many pure-Perl packages can be built as `noarch: generic`, meaning a single conda package is built and installed on multiple platforms.
+  Use this flag whenever possible (i.e. unless the Perl distribution contains compiled code).
+- `script`: The command that actually builds, tests, and installs the package.
+  See notes below.
+
+#### `script` best practices
+
+There are some important Perl-specific guidelines on the composition of the build script string that should be followed to ensure the recipe builds successfully regardless of platform.
+Most `Makefile.PL`-based modules will have a build script that looks like this:
+
+```recipe title="Makefile.PL build string"
+  script:
+    - >-
+      perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1 MAKE=make
+      && make
+      && make test
+      && make install VERBINST=1
+```
+
+- Note that four individual commands are called, but `&&` is used along with the YAML chomp operator (`>-`) to chain them together rather than using an array of individual commands (as you may see in many existing recipes).
+  This approach allows a single script to be used across all platforms (both \*nixes and Windows) with reproducible behavior.
+  A list of commands does not behave well on Windows in case of failure (hence the need for `IF %ERRORLEVEL% NEQ 0 exit /B 1` after each command in a standalone `bld.bat` script).
+  Linux, OSX, and Windows all support `&&` chaining and will report failure properly using this approach.
+
+- `INSTALLDIRS=vendor`: Perl organizes modules on disk under three prefixes: `core`, `site`, and `vendor`.
+  A detailed explanation is not relevant here; know that package managers like Conda should be installing all modules under `vendor`, and this argument enforces that policy.
+  Always include this flag.
+
+- `NO_PERLLOCAL=1 NO_PACKLIST=1`: These arguments prevent unnecessary generation/modification of packaging-related files on the user's system.
+  Always include these flags.
+
+- `MAKE=make`: This flag should always be included exactly as shown for compiled (i.e. not `noarch: generic`) packages.
+  It allows predictable behavior across different platforms/architectures when building, and omitting this argument can lead to hard-to-debug errors due to incompatible Makefile syntax on Windows.
+  Note that this does not control what `make` is used to build the package, only the flavor of `Makefile` that is generated in the first step of the build.
+
+Most `Build.PL`-based modules will have a build script that looks like this:
+
+```recipe title="Module::Build build string"
+  script:
+    - >-
+      perl Build.PL
+      && perl ./Build
+      && perl ./Build test
+      && perl ./Build install --installdirs vendor --create_packlist 0
+```
+
+Most of the `Makefile.PL` discussion above applies here as well, with different equivalent syntax, and you will rarely need to modify this script.
+No `NO_PERLLOCAL` equivalent is needed because `Module::Build` does not modify this file by default.
+
+#### `run_exports`
+
+TODO: what is policy here? Some recipes have:
+
+```recipe
+  run_exports:
+    weak:
+      - {{ name }} ={{ version }}
+```
+
+Should this be standard on all Perl distro recipes?
+Only compiled distros?
+
+### The `requirements` section
+
+```recipe title="pure-Perl module (Makefile.PL)"
+requirements:
+  build:
+    - make
+  host:
+    - perl
+  run:
+    - perl
+```
+
+```recipe title="pure-Perl module (Build.PL)"
+requirements:
+  host:
+    - perl
+    - perl-module-build
+  run:
+    - perl
+```
+
+#### `build` requirements
+
+For pure-Perl packages, the only `build` requirement is typically `make` for `Makefile.PL`-based modules.
+For compiled (XS) packages, a typical `requirements: build` section will look similar to this:
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  build:
+    - make
+    - {{ compiler('c') }}
+    - {{ stdlib('c') }}
+```
+
+```recipe
+requirements:
+  build:
+    - make
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+```
+
+</RecipeTabs>
+
+No other `build` requirements are typically needed or appropriate for Perl recipes.
+
+#### `host` requirements
+
+This section should include all of the Perl packages needed for building and testing the package.
+In CPAN metadata, these are included under "Build" and "Test" dependencies.
+Note that "Test" dependencies should also be included in the `test` section below.
+For `Build.PL`-based recipes, this section must always include `perl-module-build`.
+
+#### `run` requirements
+
+This section should include all of the Perl packages needed during use of the package.
+In CPAN metadata, these are included under general dependencies.
+
+:::note
+
+Many examples can be found of existing conda-forge Perl packages which include core modules under `requirements`.
+Please avoid this if possible -- all core modules are include in the Perl installation itself (this is true for the conda-forge feedstock, in any case) and, unless you have a good reason for doing so, adding these as dependencies serves no useful purpose.
+An up-to-date list of core modules can be found at https://perldoc.perl.org/modules.
+
+A prime example of this is `ExtUtils::MakeMaker` (the CF package `perl-extutils-makemaker`) which is a dependency of ~ 80% of the packages on CPAN.
+This has been a core module since early days and will almost certainly continue to be a core module until end days.
+You do not need to include it in your recipe.
+
+:::
+
+### The `test`/`tests` section
+
+<RecipeTabs>
+
+```recipe
+test:
+  imports:
+    - BioX::Seq
+    - BioX::Seq::Fetch
+    - BioX::Seq::Stream
+    - BioX::Seq::Stream::FASTA
+    - BioX::Seq::Stream::FASTQ
+    - BioX::Seq::Stream::TwoBit
+    - BioX::Seq::Utils
+  commands:
+    - prove
+  source_files:
+    - t/
+  requires:
+    - perl-test-exception
+```
+
+```recipe
+tests:
+  - perl:
+      uses:
+        - BioX::Seq
+        - BioX::Seq::Fetch
+        - BioX::Seq::Stream
+        - BioX::Seq::Stream::FASTA
+        - BioX::Seq::Stream::FASTQ
+        - BioX::Seq::Stream::TwoBit
+        - BioX::Seq::Utils
+  - script:
+      - prove
+    files:
+      source:
+        - t/
+    requirements:
+      run:
+        - perl-test-exception
+```
+
+</RecipeTabs>
+
+- `perl:uses`: List the Perl modules to load to verify the package installed correctly.
+  This ensures basic functionality.
+  Please endeavor to test loading of all modules included in the Perl distribution you are packaging, and not just the primary one (**v0** equivalent: `imports`).
+- `files:source`: Load these files from the source directory for use during testing.
+  For most Perl packages, at minimum the `t` directory needs to be copied for use by `prove`.
+  Some packages may require additional files; trial-and-error may be necessary (**v0** equivalent: `source_files`).
+- `script`: Many existing Perl package recipes only using `imports` for testing.
+  Calling `prove` will run the package unit tests on the installed package as an additional check that everything is working as expected after installation (**v0** equivalent: `commands`).
+- `requirements:run`: If running `prove`, testing dependencies need to be included here as well as under the earlier `requirements: host`, as this testing is done outside of the build environment (**v0** equivalent: `requires`).
+
+### The `about` section
+
+```recipe
+about:
+  home: https://metacpan.org/pod/Try::Tiny
+  summary: Minimal try/catch with proper preservation of $@
+  license: MIT
+  license_file: LICENCE
+```
+
+- `home`: use the MetaCPAN POD page for the package in preference to the development repository
+- `summary`: typically this can be taken directly from the one-sentence summary in the POD `NAME` section of the package
+- `license` and `license_file`: see below
+
+#### Licenses
+
+If you are lucky, Perl package authors will include a LICENSE file with the distribution which you can reference in the `license_file` field.
+Utilize this file if present.
+At other times, the author may indicate the type of license in the package metadata but fail to include the license text (this is not good practice but it happens).
+You can find the license in these cases listed, among other places, in the left sidebar of the package MetaCPAN page.
+
+One of the oddities of Perl when it comes to licensing is that a historically common usage pattern was to specify a short license string somewhere in the source code or documentation along the lines of "This module is free software; you can redistribute it and/or modify it under the same terms as Perl itself."
+If you run across a package like this (and they are common), the correct SPDX string to use in the `license` field is `Artistic-1.0-Perl OR GPL-1.0-or-later`.
+You can either include the text of these licenses in a `LICENSE` file in your conda-forge package `recipe` directory, or you can use one of the approaches below:
+
+##### Generate the license during the build stage
+
+The text of the dual Perl licenses are included with every Perl installation and can always be generated using the `perldoc` command.
+You can therefore add the following to your `build: script` string:
+
+```recipe
+  && perldoc -tT perlartistic > LICENSE
+  && perldoc -tT perlgpl >> LICENSE
+```
+
+and use `license_file: LICENSE` in the `about` section.
+
+##### Use the SPDX repository
+
+A general-purpose approach to including licenses for packages that don't contain the text already is to include the `spdx/license-list-data` GitHub repository as a source in your recipe and reference the relevant files in the `about` section.
+For the standard Perl dual Artistic/GPL-1 license, the configuration would look like this:
+
+```recipe
+source:
+  - url: https://github.com/spdx/license-list-data/archive/refs/tags/v3.28.0.tar.gz
+    folder: spdx
+    sha256: 52375a91b28b5f6f3142c4b3a555086482f1e09be68c4fa7fdbf377d37afa340
+```
+
+```recipe
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - spdx/text/Artistic-1.0-Perl.txt
+    - spdx/text/GPL-1.0-or-later.txt
+```
+
+##### Reference the license POD files directly
+
+The Perl distribution (and CF `perl` package) include the text of both licenses as POD (the Perl documentation format) in any installation.
+POD is a markup language that is also mostly human-readable.
+You may therefore also use the following for any packages utilizing the `perl_5' license:
+
+<RecipeTabs>
+
+```recipe
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/perl5/core_perl/pod/perlartistic.pod
+    - {{ environ["PREFIX"] }}/lib/perl5/core_perl/pod/perlgpl.pod
+```
+
+```recipe
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ environ["PREFIX"] }}/lib/perl5/core_perl/pod/perlartistic.pod
+    - ${{ environ["PREFIX"] }}/lib/perl5/core_perl/pod/perlgpl.pod
+```
+
+</RecipeTabs>
+
+The advantage of this approach is that it requires no changes anywhere else in the recipe file.
+The disadvantage is that it assumes files from another package to be present at a given location.
+If something changes in the `perl` builds that change the location of these files or removes them, it will break your recipe.
+This happened in the case of a number of recipes which used this approach but referenced the corresponding manpage files.
+When the `perl` feedstock recipe stopped generating manpages, all of these recipes required a patch to their license blocks.
+For this reason, it is suggested to use one of the alternative approaches above for new recipes.
+
+### The `extra` section
+
+```recipe
+extra:
+  recipe-maintainers:
+    - nobby-nobbs
+    - conda-forge/perl-packagers
+```
+
+A schema-free area for storing non-conda-specific metadata in standard YAML form.
+In conda-forge recipes, you have to add at least the `recipe-maintainers` field with the GitHub usernames of the maintainers.
+
+Your own GitHub account will automatically be added when your PR is merged from `staged-recipes`, but including it from the start will do no harm.
+Please also always include the `conda-forge/perl-packagers` team so that they can assist in maintenance of the feedstock.
+
+## Packaging a `noarch` Perl distribution with platform-specific modules
+
+Occasionally, you may run across a Perl distribution that is not compiled but contains platform-specific modules.
+A good example of this is the [`File::HomeDir`](https://metacpan.org/pod/File::HomeDir) distribution, which provides methods for locating the context-specific paths to "standard" user locations (home, Documents, Desktop, etc).
+This distribution contains a primary `File::HomeDir` module that loads platform-specific submodules (`File::HomeDir::Unix`, `File::HomeDir::Windows`, `File::HomeDir::Darwin`, etc) as needed.
+These recipes should still be marked `noarch: generic`, but a few extra steps are needed to ensure they test (and pass) properly on all appropriate platforms.
+
+### Modify `conda-forge.yaml`
+
+By default, `noarch: generic` feedstocks are only built (and thus tested) on Linux.
+To ensure the platform-specific modules are properly tested during build, add the following to the `conda-forge.yaml` file in the root of the feedstock:
+
+```yaml
+noarch_platforms:
+  - linux_64
+  - win_64
+  - osx_64
+```
+
+### Include platform-specific tests
+
+The `test`/`tests` section of the recipe file would then look like this:
+
+<RecipeTabs>
+
+```recipe
+test:
+  imports:
+    - File::HomeDir
+    - File::HomeDir::Driver
+    - File::HomeDir::Test
+    - File::HomeDir::Darwin  # [osx]
+    - File::HomeDir::Unix  # [linux]
+    - File::HomeDir::Windows  # [win]
+```
+
+```recipe
+test:
+  imports:
+    - File::HomeDir
+    - File::HomeDir::Driver
+    - File::HomeDir::Test
+    - if: osx
+      then:
+      - File::HomeDir::Darwin
+    - if: linux
+      then:
+      - File::HomeDir::Unix
+    - if: win
+      then:
+      - File::HomeDir::Windows
+```
+
+</RecipeTabs>
+
+## See also
+
+### General packaging guidance
+
+#### v0 (`meta.yaml`) recipes
+
+- https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html
+
+#### v1 (`recipe.yaml`) recipes
+
+- https://rattler-build.prefix.dev/dev/reference/recipe_file/
+
+- https://conda-forge.org/blog/2025/02/27/conda-forge-v1-recipe-support
