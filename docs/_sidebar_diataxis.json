@@ -162,9 +162,34 @@
             ]
           },
           {
-            "type": "link",
-            "label": "Enable CUDA",
-            "href": "/docs/maintainer/knowledge_base/#cuda-builds"
+            "type": "category",
+            "label": "Building NVIDIA CUDA packages",
+            "link": {
+              "type": "doc",
+              "id": "how-to/advanced/cuda"
+            },
+            "items": [
+              {
+                "type": "doc",
+                "label": "Write a recipe that depends on CUDA",
+                "id": "how-to/advanced/cuda/write-the-recipe"
+              },
+              {
+                "type": "doc",
+                "label": "Compile for all supported CUDA architectures",
+                "id": "how-to/advanced/cuda/configure-the-build-script"
+              },
+              {
+                "type": "doc",
+                "label": "Configure a feedstock for CUDA",
+                "id": "how-to/advanced/cuda/configure-the-feedstock"
+              },
+              {
+                "type": "doc",
+                "label": "Build for ARM Tegra devices",
+                "id": "how-to/advanced/cuda/tegra"
+              }
+            ]
           },
           {
             "type": "link",

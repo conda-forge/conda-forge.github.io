@@ -1,0 +1,31 @@
+---
+tags: [how-to, advanced, cuda, nvidia]
+---
+
+import { BuildScriptTabs } from "@site/src/components/RecipeTabs";
+
+# How to compile for all supported CUDA architectures
+
+Packages built on conda-forge should target broad compatibility across CUDA devices. This means passing explicit compiler arguments to NVCC to target all supported CUDA architectures instead of accepting the compiler's default target.
+
+## Use the architecture variables set by the CUDA compiler
+
+The CUDA compiler package activation script automatically sets the environment variables `CUDAARCHS` and `NVCC_GENCODE` to all supported CUDA architectures for the target host platform when `CONDA_BUILD` is detected and when they are not already set. Use these environment variables in your build script instead of hard-coding architectures. You then do not need to update your build scripts when new architectures become available in new releases of the CUDA Toolkit.
+
+## Target the architectures of PyTorch extensions
+
+The libtorch/pytorch packages similarly set `CF_TORCH_CUDA_ARCH_LIST` in their activation scripts. To keep the CUDA targets of a PyTorch module up to date, set `TORCH_CUDA_ARCH_LIST=${CF_TORCH_CUDA_ARCH_LIST}` in your build environment.
+
+For example, in your build script:
+
+<BuildScriptTabs>
+
+```bash
+export TORCH_CUDA_ARCH_LIST="$CF_TORCH_CUDA_ARCH_LIST"
+```
+
+```batch
+set TORCH_CUDA_ARCH_LIST=%CF_TORCH_CUDA_ARCH_LIST%
+```
+
+</BuildScriptTabs>

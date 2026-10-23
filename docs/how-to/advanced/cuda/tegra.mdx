@@ -1,0 +1,67 @@
+---
+tags: [how-to, advanced, cuda, nvidia]
+---
+
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+# How to build for ARM Tegra devices
+
+:::info
+
+Only Orin (sm_87) / Jetpack 6 and later Tegra devices are supported.
+
+A separate Tegra variant is needed for CUDA 12.9 only. Starting with CUDA 13.0 and Jetpack
+7, new Tegra devices are SBSA-compliant, so building a separate variant for Tegra devices is
+not required.
+
+:::
+
+The CUDA compiler toolchain treats Tegra ARM (`aarch64`) and SBSA ARM (`sbsa`) as separate compilation targets, and device code compiled for one is not interchangeable with the other, so one build cannot service all variants. The [arm-variant](https://github.com/conda-forge/arm-variant-feedstock) package allows end-users to select which variant of the CUDA ARM packages is installed into their environment.
+
+To build for both SBSA ARM and Tegra ARM devices, make the following changes to your feedstock:
+
+1. Add the `arm-variant` package to the recipe's build environment(s) to constrain the CUDA compiler toolchain.
+
+   For example:
+
+<RecipeTabs>
+
+```recipe
+# A fake selector may also be needed for conda-build to pick up arm_variant_type as a variant
+# [arm_variant_type]
+
+requirements:
+  build:
+    - {{ compiler('cuda') }}
+    - arm-variant * {{ arm_variant_type }}  # [linux and aarch64 and cuda_compiler_version != "None"]
+```
+
+```recipe
+requirements:
+  build:
+    - ${{ compiler('cuda') }}
+    - if: linux and aarch64 and cuda_compiler_version != "None"
+      then: arm-variant * ${{ arm_variant_type }}
+```
+
+</RecipeTabs>
+
+:::note
+
+Building with the `arm-variant` package will produce overlinking warnings from
+`conda-build`. This is expected and may be safely ignored.
+
+:::
+
+2. Add the `arm_variant_type.yaml` migrator to the `.ci_support/migrations` folder.
+
+    You can download this migrator from https://github.com/conda-forge/conda-forge-pinning-feedstock/tree/main/recipe/migrations. It adds the `arm_variant_type` variable to the build matrix for CUDA 12.9 only and sets a higher `c_stdlib_version`.
+
+3. Enable the ARM platform for linux in `conda-forge.yml`. Tegra variants may be built on linux-aarch64 runners or cross-compiled from linux-64 runners using the usual cross-compiling setup.
+
+    For example:
+
+    ```yaml
+    provider:
+      linux_aarch64: default
+    ```
