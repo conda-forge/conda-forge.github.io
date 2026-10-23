@@ -10,6 +10,7 @@
     "items": [
       "user/introduction",
       "user/tipsandtricks",
+      "user/cuda",
       "user/ci-skeleton",
       "user/transitioning_from_defaults",
       "user/faq",

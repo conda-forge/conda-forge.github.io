@@ -1,0 +1,166 @@
+---
+tags: [how-to, advanced, cuda, nvidia]
+---
+
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+# How to write a recipe that depends on CUDA
+
+Recipes for packages that depend on the CUDA Toolkit need a few changes compared to other compiled-code recipes. This guide covers the recipe itself. See [how to compile for all supported CUDA architectures](/docs/how-to/advanced/cuda/configure-the-build-script/) for the build script and [how to configure a feedstock for CUDA](/docs/how-to/advanced/cuda/configure-the-feedstock/) for the feedstock.
+
+## Only use the required CUDA components
+
+Do not use CUDA metapackages (e.g. `cuda-toolkit`) to specify dependencies. Instead, specify only the minimal subset of CUDA components that your package requires (e.g. `libcufft-dev`). Specifying a `-dev/-devel` package as a host requirement makes your package require the corresponding non-dev package at run time, because the `-dev/-devel` packages have [`run_exports`](https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#export-runtime-requirements).
+
+## Support both CUDA and non-CUDA variants
+
+If your recipe has separate variants for CUDA and non-CUDA builds:
+
+1. Use the `cuda_compiler_version` variable as a switch for the CUDA requirements.
+2. Give the CUDA variant a higher build number than the non-CUDA variant, so the solver prefers it where it can be installed.
+3. Add the `__cuda` virtual package as a runtime requirement of the CUDA variant. This makes the CUDA variant uninstallable on machines without a CUDA driver, which would otherwise download large GPU packages needlessly. Users without a CUDA driver get the non-CUDA variant instead.
+
+For example:
+
+<RecipeTabs>
+
+```recipe
+{% set build_number = 0 %}
+
+build:
+  # Prefer the CUDA variant when it is installable
+  number: {{ build_number + (100 if cuda_compiler_version != "None" else 0) }}
+
+requirements:
+  build:
+    - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
+  host:
+    - libcublas-dev  # [cuda_compiler_version != "None"]
+    - cuda-version {{ cuda_compiler_version }}.*  # [cuda_compiler_version != "None"]
+  run:
+    # Makes the CUDA variant uninstallable without a CUDA driver
+    - __cuda  # [cuda_compiler_version != "None"]
+```
+
+```recipe
+context:
+  build_number: 0
+
+build:
+  # Prefer the CUDA variant when it is installable
+  number: ${{ build_number + (100 if cuda_compiler_version != "None" else 0) }}
+
+requirements:
+  build:
+    - if cuda_compiler_version != "None":
+      then: ${{ compiler('cuda') }}
+  host:
+    - if cuda_compiler_version != "None":
+      then:
+        - libcublas-dev
+        - cuda-version ${{ cuda_compiler_version }}.*
+  run:
+    # Makes the CUDA variant uninstallable without a CUDA driver
+    - if: cuda_compiler_version != "None"
+      then: __cuda
+```
+
+</RecipeTabs>
+
+## Support CUDA Enhanced Compatibility
+
+If your package's code already supports [CUDA Enhanced Compatibility](/docs/maintainer/knowledge_base/#cuda-enhanced-compatibility), make these changes to the recipe so that the conda package supports it too:
+
+1. Ignore the run exports from any CTK library `-dev/-devel` packages that your package depends on. Otherwise, the run exports would require runtime libraries with versions equal to or greater than the versions used to build the package.
+2. Ignore the run exports of the `cuda-version` package.
+3. Add explicit runtime dependencies (or constraints for soft/optional dependencies) that specify the desired version range for the dependencies whose run exports you ignored.
+
+For example, because of run exports in the `libcublas-dev` package, a package that requires `libcublas` has a `run` requirement on `libcublas` corresponding to `{{ cuda_compiler_version }}` or newer. To make it compatible with all CUDA minor versions from the same CUDA major version family, add the following:
+
+<RecipeTabs>
+
+```recipe
+build:
+  # Ignore run exports from CUDA libraries in the host section
+  ignore_run_exports_from:
+    - libcublas-dev
+  # Ignore cuda-version itself; do not ignore exports from
+  # compiler('cuda'), which has other needed exports
+  ignore_run_exports:
+    - cuda-version
+
+requirements:
+  build:
+    - {{ compiler('cuda') }}
+  host:
+    - libcublas-dev
+    - cuda-version {{ cuda_compiler_version }}.*
+  run:
+    # Since we've ignored the run export from libcublas-dev, we pin
+    # libcublas manually. Having a pin_compatible on cuda-version with
+    # max_pin='x' and min_pin='x' will constrain libcublas to the same
+    # major version as what we pinned in host.
+    - {{ pin_compatible('cuda-version', max_pin='x', min_pin='x') }}
+    - libcublas
+```
+
+```recipe
+requirements:
+  build:
+    - ${{ compiler('cuda') }}
+  host:
+    - libcublas-dev
+    - cuda-version ${{ cuda_compiler_version }}.*
+  run:
+    # Since we've ignored the run export from libcublas-dev, we pin
+    # libcublas manually. Having a pin_compatible on cuda-version with
+    # max_pin='x' and min_pin='x' will constrain libcublas to the same
+    # major version as what we pinned in host.
+    - ${{ pin_compatible('cuda-version', max_pin='x', min_pin='x') }}
+    - libcublas
+  # Ignore run exports from CUDA libraries in the host section
+  ignore_run_exports:
+    from_package:
+      - libcublas-dev
+    # Ignore cuda-version itself; do not ignore exports from
+    # compiler('cuda'), which has other needed exports
+    by_name:
+      - cuda-version
+```
+
+</RecipeTabs>
+
+## Fix `nvcuda.dll` not found on Windows
+
+The [scripts](https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/main/recipe/install_cuda.bat)
+used to install the CUDA Toolkit on Windows cannot provide `nvcuda.dll` as part of the installation because no GPU is physically present in the CI machines.
+As a result, you might get linking errors in the postprocessing steps of `conda build`:
+
+```default
+WARNING (arrow-cpp,Library/bin/arrow_cuda.dll): $RPATH/nvcuda.dll not found in packages,
+sysroot(s) nor the missing_dso_whitelist.
+
+.. is this binary repackaging?
+```
+
+For now, you will have to add `nvcuda.dll` to the `missing_dso_whitelist`:
+
+<RecipeTabs>
+
+```recipe
+build:
+  ...
+  missing_dso_whitelist:
+    - "*/nvcuda.dll"   # [win]
+```
+
+```recipe
+build:
+  ...
+  dynamic_linking:
+    missing_dso_allowlist:
+      - if: win
+        then: "*/nvcuda.dll"
+```
+
+</RecipeTabs>
