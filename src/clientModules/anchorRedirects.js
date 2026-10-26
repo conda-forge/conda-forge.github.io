@@ -12,11 +12,9 @@ const anchorRedirects = {
     "#only-using-required-components":
       "/docs/how-to/advanced/cuda/write-the-recipe/#only-use-the-required-cuda-components",
     "#supporting-both-cuda-and-non-cuda-variants":
-      "/docs/how-to/advanced/cuda/write-the-recipe/#support-both-cuda-and-non-cuda-variants",
+      "/docs/how-to/advanced/cuda/write-the-recipe/#build-both-cuda-and-non-cuda-variants",
     "#compiling-for-all-supported-cuda-architectures":
-      "/docs/how-to/advanced/cuda/configure-the-build-script/",
-    "#cuda-cross-compilation":
-      "/docs/how-to/advanced/cuda/configure-the-feedstock/#cross-compile",
+      "/docs/how-to/advanced/cuda/write-the-recipe/#set-cuda-architecture-targets",
     "#building-for-arm-tegra-devices": "/docs/how-to/advanced/cuda/tegra/",
     "#common-problems-and-known-issues":
       "/docs/how-to/advanced/cuda/write-the-recipe/#fix-nvcudadll-not-found-on-windows",
@@ -25,7 +23,7 @@ const anchorRedirects = {
     "#nvcuda-dll-cannot-be-found-on-windows":
       "/docs/how-to/advanced/cuda/write-the-recipe/#fix-nvcudadll-not-found-on-windows",
     "#my-feedstock-is-not-building-old-cuda-versions-anymore":
-      "/docs/how-to/advanced/cuda/configure-the-feedstock/#adopting-a-new-cuda-version",
+      "/docs/how-to/advanced/cuda/write-the-recipe/#adopt-a-new-cuda-version",
   },
 };
 

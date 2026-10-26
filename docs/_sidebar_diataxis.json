@@ -163,7 +163,7 @@
           },
           {
             "type": "category",
-            "label": "Building NVIDIA CUDA packages",
+            "label": "Build NVIDIA CUDA packages",
             "link": {
               "type": "doc",
               "id": "how-to/advanced/cuda"
@@ -176,13 +176,8 @@
               },
               {
                 "type": "doc",
-                "label": "Compile for all supported CUDA architectures",
-                "id": "how-to/advanced/cuda/configure-the-build-script"
-              },
-              {
-                "type": "doc",
-                "label": "Configure a feedstock for CUDA",
-                "id": "how-to/advanced/cuda/configure-the-feedstock"
+                "label": "Build on GPU runners",
+                "id": "how-to/advanced/cuda/gpu-runners"
               },
               {
                 "type": "doc",

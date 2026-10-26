@@ -2,17 +2,61 @@
 tags: [how-to, advanced, cuda, nvidia]
 ---
 
-import { RecipeTabs } from "@site/src/components/RecipeTabs";
+import { RecipeTabs, BuildScriptTabs } from "@site/src/components/RecipeTabs";
 
 # How to write a recipe that depends on CUDA
 
-Recipes for packages that depend on the CUDA Toolkit need a few changes compared to other compiled-code recipes. This guide covers the recipe itself. See [how to compile for all supported CUDA architectures](/docs/how-to/advanced/cuda/configure-the-build-script/) for the build script and [how to configure a feedstock for CUDA](/docs/how-to/advanced/cuda/configure-the-feedstock/) for the feedstock.
+Recipes for packages that depend on the CUDA Toolkit typically are more complicated compared
+to other compiled-code recipes. This guide covers best practices and common situations for
+recipes that depend on CUDA.
+
+## Add the CUDA compiler
+
+Add the `{{ compiler('cuda') }}` template to your recipe to install NVCC and enable CUDA
+variants in your feedstock. Remember to rerender.
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  build:
+    - {{ compiler('cuda') }}
+```
+
+```recipe
+requirements:
+  build:
+    - ${{ compiler('cuda') }}
+```
+
+</RecipeTabs>
+
+## Pin the host environment
+
+Pin the `cuda-version` package to `cuda_compiler_version` in the host environment, so that
+any host dependencies are compatible with the CUDA compiler.
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  host:
+    - cuda-version {{ cuda_compiler_version }}.*
+```
+
+```recipe
+requirements:
+  host:
+    - cuda-version ${{ cuda_compiler_version }}.*
+```
+
+</RecipeTabs>
 
 ## Only use the required CUDA components
 
 Do not use CUDA metapackages (e.g. `cuda-toolkit`) to specify dependencies. Instead, specify only the minimal subset of CUDA components that your package requires (e.g. `libcufft-dev`). Specifying a `-dev/-devel` package as a host requirement makes your package require the corresponding non-dev package at run time, because the `-dev/-devel` packages have [`run_exports`](https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#export-runtime-requirements).
 
-## Support both CUDA and non-CUDA variants
+## Build both CUDA and non-CUDA variants
 
 If your recipe has separate variants for CUDA and non-CUDA builds:
 
@@ -69,7 +113,9 @@ requirements:
 
 ## Support CUDA Enhanced Compatibility
 
-If your package's code already supports [CUDA Enhanced Compatibility](/docs/maintainer/knowledge_base/#cuda-enhanced-compatibility), make these changes to the recipe so that the conda package supports it too:
+If your package's code already supports [CUDA Enhanced
+Compatibility](/docs/maintainer/knowledge_base/#cuda-enhanced-compatibility), make these
+changes to the recipe so that the conda package supports it too:
 
 1. Ignore the run exports from any CTK library `-dev/-devel` packages that your package depends on. Otherwise, the run exports would require runtime libraries with versions equal to or greater than the versions used to build the package.
 2. Ignore the run exports of the `cuda-version` package.
@@ -130,6 +176,32 @@ requirements:
 
 </RecipeTabs>
 
+## Set CUDA architecture targets
+
+Packages built on conda-forge should target broad compatibility across CUDA devices. This means passing explicit compiler arguments to NVCC to target all supported CUDA architectures instead of accepting the compiler's default target.
+
+### Use variables set by the CUDA compiler conda package
+
+The CUDA compiler package activation script automatically sets the environment variables `CUDAARCHS` and `NVCC_GENCODE` to all supported CUDA architectures for the target host platform when `CONDA_BUILD` is detected and when they are not already set. Use these environment variables in your build script instead of hard-coding architectures. You then do not need to update your build scripts when new architectures become available in new releases of the CUDA Toolkit.
+
+### Use variables set by the PyTorch conda package
+
+The libtorch/pytorch packages similarly set `CF_TORCH_CUDA_ARCH_LIST` in their activation scripts. To keep the CUDA targets of a PyTorch module up to date, set `TORCH_CUDA_ARCH_LIST=${CF_TORCH_CUDA_ARCH_LIST}` in your build environment.
+
+For example, in your build script:
+
+<BuildScriptTabs>
+
+```bash
+export TORCH_CUDA_ARCH_LIST="$CF_TORCH_CUDA_ARCH_LIST"
+```
+
+```batch
+set TORCH_CUDA_ARCH_LIST=%CF_TORCH_CUDA_ARCH_LIST%
+```
+
+</BuildScriptTabs>
+
 ## Fix `nvcuda.dll` not found on Windows
 
 The [scripts](https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/main/recipe/install_cuda.bat)
@@ -164,3 +236,11 @@ build:
 ```
 
 </RecipeTabs>
+
+## Adopt a new CUDA version
+
+As new CUDA versions come out regularly, periodically conda-forge needs to decide how many versions will be supported within resource constraints. As of August 2026, conda-forge supports CUDA 12 and 13.
+
+conda-forge manages the adoption of a new CUDA major version with a [migration](/docs/maintainer/knowledge_base/#migrators-and-migrations). The migration bot opens a pull request in your feedstock with the changes needed to build for the new version.
+
+To update to the latest supported versions outside of a migration, or if your feedstock no longer builds old CUDA versions, [rerender the feedstock](/docs/how-to/basics/rerender/). There may be other fixes needed for the feedstock depending on when it was last updated.
