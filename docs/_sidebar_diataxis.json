@@ -123,6 +123,11 @@
           },
           {
             "type": "doc",
+            "label": "Optional run dependencies (extras)",
+            "id": "how-to/advanced/optional-run-dependencies"
+          },
+          {
+            "type": "doc",
             "label": "Talk to the bots",
             "id": "how-to/advanced/talk-to-the-bots"
           },

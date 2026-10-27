@@ -1,0 +1,271 @@
+---
+tags: [howto, advanced]
+---
+
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+# Expressing optional run dependencies (extras)
+
+Optional run dependencies are the dependencies that are not strictly necessary for the installed package to work, but whose presence may enable additional features.
+
+In Python packages, they are commonly expressed using so-called "extras" (`optional-dependencies` in `pyproject.toml`).
+For example, the [urllib3](https://pypi.org/project/urllib3/) package features [extras](https://github.com/urllib3/urllib3/blob/470374abd485b6705dfea82689b1e29c345785f1/pyproject.toml#L43-L56) for different compression algorithms, SOCKS and HTTP/2 support.
+Extras can be used both by end users and in dependencies: a package needing `urllib3` with HTTP/2 support would depend on `urllib3[h2]`.
+
+:::note
+
+Historically, extras were also used to express additional dependencies used for development, testing, etc.
+These extras should be omitted for conda-forge packaging.
+Nowadays, `dependency-groups` are used for that purpose instead.
+Unlike extras, dependency groups are not exposed to the built wheels, but rather are specified when installing the package in editable mode, for example by specfying `pip install -e . --group={name}`.
+
+:::
+
+A key characteristic of optional runtime dependencies is that they do not affect the installed package contents in any way.
+The relevant features become available as soon as the needed dependencies are installed, and stop functioning once these dependencies are uninstalled; at no point the package itself needs to be reinstalled.
+
+Conda-forge does not provide a direct equivalent of optional runtime dependencies, yet. In the future, [CEP 44](https://github.com/conda/ceps/blob/main/cep-0044.md) will be available.
+This how-to explores a few common approaches to dealing with them.
+
+
+## Extras as separate outputs
+
+A common way of expressing extras is through adding additional outputs to the package, typically named `{package}-with-{extra}`.
+These outputs do not install any files; all the files are installed from the base package.
+The base package lists all the required dependencies, while additional outputs combine a dependency on the base package with dependencies specific to the extra.
+
+<RecipeTabs>
+
+```recipe
+{% set version = "2.7.0" %}
+# workaround conda-build template rendering problem
+# for outputs that do not use python
+{% set PYTHON = PYTHON | default("python") %}
+
+package:
+  name: urllib3
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/u/urllib3/urllib3-{{ version }}.tar.gz
+  sha256: 231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python {{ python_min }}.*
+    - hatchling >=1.27.0,<2
+    - hatch-vcs >=0.4.0,<0.6.0
+    - setuptools-scm >=8,<11
+    - pip
+  run:
+    - python >={{ python_min }}
+
+outputs:
+  - name: urllib3
+  - name: urllib3-with-brotli
+    requirements:
+      run:
+        - {{ pin_subpackage('urllib3', exact=True) }}
+        - brotli >=1.2.0
+    build:
+      noarch: generic
+  - name: urllib3-with-h2
+    requirements:
+      run:
+        - {{ pin_subpackage('urllib3', exact=True) }}
+        - h2 >=4,<5
+    build:
+      noarch: generic
+```
+
+```recipe
+schema_version: 1
+
+context:
+  version: "2.7.0"
+
+recipe:
+  name: urllib3
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/u/urllib3/urllib3-${{ version }}.tar.gz
+  sha256: 231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c
+
+outputs:
+  - package:
+      name: urllib3
+    build:
+      number: 0
+      noarch: python
+      script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    requirements:
+      host:
+        - python ${{ python_min }}.*
+        - hatchling >=1.27.0,<2
+        - hatch-vcs >=0.4.0,<0.6.0
+        - setuptools-scm >=8,<11
+        - pip
+      run:
+        - python >=${{ python_min }}
+  - package:
+      name: urllib3-with-brotli
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage('urllib3', exact=True) }}
+        - brotli >=1.2.0
+  - package:
+      name: urllib3-with-h2
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage('urllib3', exact=True) }}
+        - h2 >=4,<5
+```
+
+</RecipeTabs>
+
+The individual outputs may also be extended to feature testing specific to the given extra.
+For example, if some of the package's modules can only be imported when the extra is satisfied, it can try to import them to verify that the dependencies are installed correctly.
+
+As a result, the extras are "enabled" via installing the additional outputs.
+For example, the equivalent of:
+
+```
+pip install urllib3[brotli,h2]
+```
+
+is:
+
+```
+conda install urllib3-with-brotli urllib3-with-h2
+```
+
+Similarly, packages that require these extras depend on the appropriate outputs:
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  run:
+    - urllib3  # (optional)
+    - urllib3-with-brotli
+    - urllib3-with-h2
+```
+
+```recipe
+requirements:
+  run:
+    - urllib3  # (optional)
+    - urllib3-with-brotli
+    - urllib3-with-h2
+```
+
+</RecipeTabs>
+
+
+## An output for all extras
+
+Additionally, some feedstocks provide an additional `{package}-with-all` output that depends on all its extra packages.
+
+<RecipeTabs>
+
+```recipe
+outputs:
+  # ...
+  - name: urllib3-with-all
+    requirements:
+      run:
+        - {{ pin_subpackage('urllib3-with-brotli', exact=True) }}
+        - {{ pin_subpackage('urllib3-with-h2', exact=True) }}
+    build:
+      noarch: generic
+```
+
+```recipe
+outputs:
+  # ...
+  - package:
+      name: urllib3-with-all
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage('urllib3-with-brotli', exact=True) }}
+        - ${{ pin_subpackage('urllib3-with-h2', exact=True) }}
+```
+
+</RecipeTabs>
+
+
+## A separate base package
+
+An another variation of the same approach is to have a `{package}-base` output that installs the files and features the obligatory dependencies.
+This frees the prefix-free `{package}` output for the default package variation; one that pulls the recommended set of extras in.
+
+There are variations of this approach using different suffixes, such as `-core`.
+However, you need to be careful not to accidentally use a name that corresponds to another upstream package.
+
+For example, if we we decided that the `h2` extra should be enabled by default, we'd modify the previous recipe to state:
+
+<RecipeTabs>
+
+```recipe
+package:
+  name: urllib3-base
+  version: {{ version }}
+
+# ...
+
+outputs:
+  - name: urllib3-base
+  # ...
+  - name: urllib3-with-h2
+    requirements:
+      run:
+        - {{ pin_subpackage('urllib3-base', exact=True) }}
+        - h2 >=4,<5
+    build:
+      noarch: generic
+  - name: urllib3
+    requirements:
+      run:
+        - {{ pin_subpackage('urllib3-with-h2', exact=True) }}
+```
+
+```recipe
+outputs:
+  - package:
+      name: urllib3-base
+    # ...
+  - package:
+      name: urllib3-with-h2
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage('urllib3-base', exact=True) }}
+        - h2 >=4,<5
+  - package:
+      name: urllib3
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage('urllib3-with-h2', exact=True) }}
+```
+
+</RecipeTabs>
+
+Note that in this instance, packages that want to depend on `urllib3` with no extras enabled need to explicitly depend on `urllib3-core`.
+
+This approach can be particularly interesting if upstream decides to make some of the formerly-core dependencies optional.
+In this case, the original package can still enable these dependencies by default while the new `-core` package omits them.
