@@ -308,3 +308,31 @@ To update the `__cuda` virtual package, you must install a newer driver:
 If conda has incorrectly identified the CUDA driver, you can override by setting the
 `CONDA_OVERRIDE_CUDA` environment variable to a version number like `"12.5"` or `""` to
 indicate that no CUDA driver is detected.
+
+### What if I see an error saying that `__cuda_arch` is missing?
+
+For example, conda may report:
+
+```bash
+__cuda_arch >=8.9, for which no candidates were found
+```
+or
+```bash
+__cuda_arch >=12.1 *, which is missing on the system
+```
+
+The `__cuda_arch` virtual package is used by `conda` to represent the minimum compute
+capability of the CUDA devices available on your system.
+
+To provide or update the `__cuda_arch` virtual package:
+
+- If you use conda, install the `nvidia-virtual-packages` plugin into your `base`
+  environment with `conda install -n base -c conda-forge nvidia-virtual-packages`.
+- If you use another package manager (e.g., pixi or mamba), try updating it to a newer
+  version which implements `__cuda_arch`
+- Use a CUDA device with a higher compute capability
+
+If conda has incorrectly identified the least capable device or if you want to raise the minimum
+supported compute capability of your environment, you can override by setting the
+`CONDA_OVERRIDE_CUDA_ARCH` environment variable to a version number like `"10.0"` or `""` to
+indicate that no devices are detected.
