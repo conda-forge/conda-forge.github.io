@@ -179,9 +179,9 @@ In order to qualify as a `noarch: generic` package, all of the following criteri
 - The package contents must be invariant across all platforms.
   - This means that the package must not compile any libraries, modules or executables.
   - Typically, the package must not rely on platform-specific build scripts, unless they produce the same results.
-  - As a special case, packages such as `libstdcxx-devel_linux-riscv64` install platform-specific files in a prefix such as `${PREFIX}/lib/gcc/riscv64-conda-linux-gnu`.
+  - As a special case, toolchain packages such as `libstdcxx-devel_linux-riscv64` (i.e. the C++ standard library targeting `linux-riscv64`) are also noarch -- otherwise it would be impossible to install them when cross-compiling from another platform -- but such packages take care to install platform-specific files in paths that reflect the architecture, e.g. `${PREFIX}/lib/gcc/riscv64-conda-linux-gnu`.
 - No post-link or pre-link or pre-unlink scripts may be used.
-- The recipe must not use platform selectors, unless they are combined with appropriate virtuals.
+- The recipe must not use platform selectors, unless they are combined with appropriate virtual packages (e.g. `__unix` / `__win`).
   <!-- TODO: discuss repodata v3 conditional dependencies when ready -->
   - The advanced how-to explains how to express [OS-specific dependencies](../advanced/noarch.mdx#noarch-packages-with-os-specific-dependencies).
 
