@@ -205,7 +205,7 @@ export default function DependencyGraph({ details }) {
           .classed("nodeAwaitingParentsNoParent", true)
           .selectAll("rect")
           .style("stroke-dasharray", "5,5")
-          .style("stroke-width", "2px");
+          .style("stroke-width", "3px");
       }
     });
 
