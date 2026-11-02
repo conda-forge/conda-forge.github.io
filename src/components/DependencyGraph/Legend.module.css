@@ -62,6 +62,15 @@
   box-sizing: border-box;
 }
 
+[data-theme="dark"] .legendAwaitingPr {
+  background-color: #4a4a4a;
+}
+
+[data-theme="dark"] .legendAwaitingParents,
+[data-theme="dark"] .legendDashed {
+  background-color: #333333;
+}
+
 .legendLabel {
   color: var(--ifm-color-emphasis-800);
 }

@@ -124,6 +124,23 @@
   stroke-width: 1px !important;
 }
 
+/* Dark mode: darker grey fills so the green/yellow outlines stand out; white text */
+[data-theme="dark"] .graphContainer :global(g.node.nodeAwaitingPr rect) {
+  fill: #4a4a4a !important;
+}
+
+[data-theme="dark"] .graphContainer :global(g.node.nodeAwaitingParents rect),
+[data-theme="dark"]
+  .graphContainer
+  :global(g.node.nodeAwaitingParentsNoParent rect) {
+  fill: #333333 !important;
+}
+
+[data-theme="dark"] .graphContainer :global(g.node.nodeAwaitingPr text),
+[data-theme="dark"] .graphContainer :global(g.node.nodeAwaitingParents text) {
+  fill: #ffffff !important;
+}
+
 .graphContainer :global(g.node.nodeAwaitingParentsNoParent rect) {
   stroke: var(--ifm-color-warning) !important;
   stroke-width: 3px !important;
