@@ -114,8 +114,8 @@
 
 .graphContainer :global(g.node.nodeAwaitingPr rect) {
   fill: var(--ifm-color-emphasis-600) !important;
-  stroke: var(--ifm-color-emphasis-800) !important;
-  stroke-width: 1px !important;
+  stroke: var(--ifm-color-success) !important;
+  stroke-width: 3px !important;
 }
 
 .graphContainer :global(g.node.nodeAwaitingParents rect) {
@@ -125,8 +125,8 @@
 }
 
 .graphContainer :global(g.node.nodeAwaitingParentsNoParent rect) {
-  stroke: var(--ifm-color-emphasis-800) !important;
-  stroke-width: 2px !important;
+  stroke: var(--ifm-color-warning) !important;
+  stroke-width: 3px !important;
 }
 
 .graphContainer :global(g.node.nodeSelected rect) {
