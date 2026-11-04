@@ -279,6 +279,15 @@ tests:
 
 </RecipeTabs>
 
+:::tip
+
+Lock files created from an environment constrained by virtual packges (`__cuda_arch`,
+`__cuda`, `__archspec`) are less portable because the solver was considering constraints
+unique to the local system when solving the environment. Use the [`CONDA_OVERRIDE*`
+environment variables](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html#overriding-detected-packages) to adjust these virtual packages to appropriate values before locking.
+
+:::
+
 #### Use architecture-specific instruction sets
 
 If your program benefits from instruction sets such as `90a` or `120f`, use them. Every `sm_90` device also supports `sm_90a`, and every `sm_120` device also supports `sm_120f`. Sub-architectures such as `100f` cannot be expressed as `cuda-arch` versions but can still be targeted at build time.

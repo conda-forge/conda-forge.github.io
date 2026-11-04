@@ -55,14 +55,14 @@ conda install -c conda-forge "pytorch=*=cuda*"
 
 All of the CUDA packages can be installed in an environment without a physical GPU or CUDA
 driver, such as on an HPC login node (where the compute nodes have GPUs but no internet
-access) or on free-tier CIs by setting the `CONDA_OVERRIDE_CUDA` environment variable to the
-desired CUDA version.
+access) or on free-tier CIs by setting the `CONDA_OVERRIDE_CUDA`/`CONDA_OVERRIDE_CUDA_ARCH`
+environment variable to the desired CUDA version.
 
 <Tabs groupId="synced-shell-tabs">
 <TabItem label="bash" value="bash" default>
 
 ```bash
-CONDA_OVERRIDE_CUDA="12.9" conda install tensorflow -c conda-forge
+CONDA_OVERRIDE_CUDA="12.9" CONDA_OVERRIDE_CUDA_ARCH="10.0" conda install tensorflow -c conda-forge
 ```
 
 </TabItem>
@@ -70,6 +70,7 @@ CONDA_OVERRIDE_CUDA="12.9" conda install tensorflow -c conda-forge
 
 ```batch
 set CONDA_OVERRIDE_CUDA=12.9
+set CONDA_OVERRIDE_CUDA_ARCH=10.0
 conda install tensorflow -c conda-forge
 ```
 
@@ -78,6 +79,7 @@ conda install tensorflow -c conda-forge
 
 ```powershell
 $env:CONDA_OVERRIDE_CUDA = "12.9"
+$env:CONDA_OVERRIDE_CUDA_ARCH = "10.0"
 conda install tensorflow -c conda-forge
 ```
 
