@@ -10,7 +10,7 @@ If you plan to install and use compilers distributed on conda-forge in your envi
 (e.g. to develop a C++ project), you may need to first configure your system to install some
 pre-requisite software. The extent of the required setup depends on which operating system
 you are using.
- 
+
 After following these instructions, you can install the `compilers` package for the standard
 C, C++, and Fortran compilers, or installing specific compiler packages such as
 `cxx-compiler`, `rust`, and `go-cgo`.
@@ -38,7 +38,7 @@ xcode-select --install
 
 ## Windows
 
-The easiest way to install 
+The easiest way to install
 
 - TODO: clear guidance on minimal visual studio intallation via visual studio GUI
 
