@@ -11,6 +11,7 @@
         "label": "Miniforge",
         "href": "/download"
       },
+      "user/system_setup_compilers",
       {
         "type": "link",
         "label": "Get help",
