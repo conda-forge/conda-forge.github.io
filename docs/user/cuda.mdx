@@ -91,6 +91,130 @@ In `cmd` and PowerShell the variable stays set for the rest of the shell session
 Even if the package requires CUDA to run, this allows packaging and dependency resolution to
 be tested in a CPU-only environment.
 
+### Lock files and CUDA packages {#cuda-lock-files}
+
+CUDA packages are less portable between machines than CPU-only packages. Besides the
+platform (e.g. `linux-64`), a CUDA package may have multiple variants for `cuda-version`
+(constrained by the `__cuda` virtual package, i.e. the CUDA driver) and for `cuda-arch`
+(constrained by the `__cuda_arch` virtual package, i.e. the compute capability of the least
+capable GPU). A lock file records exactly one variant of each package, chosen for the
+virtual packages present when the lock file was solved. Furthermore, newer versions of a
+package may drop support for older values of `cuda-version` and `cuda-arch`.
+
+As a result, an environment locked on one machine may:
+
+- not be installable on another machine, because that machine's driver is older than the
+  locked `cuda-version` or its GPUs have a lower compute capability than the locked
+  `cuda-arch`;
+- install but have suboptimal performance, because the locked variant was not built for
+  that machine's newer GPUs, or because no GPU was detected and a CPU-only variant was
+  locked.
+
+If your lock files need to work on more than one kind of machine, create multiple lock files
+(or multiple locked environments) for the different situations you need to support, e.g. one
+per minimum driver version and GPU generation. Declare the virtual packages explicitly
+for each lock file instead of relying on whatever the solving machine happens to have.
+
+Each of the examples below locks `kokkos` for `linux-64` twice: once for machines with a
+CUDA 12 driver and Ampere (compute capability 8.0) or newer GPUs, and once for machines with
+a CUDA 13 driver and Blackwell (compute capability 10.0) or newer GPUs.
+
+<Tabs>
+<TabItem label="conda" value="conda" default>
+
+The `CONDA_OVERRIDE_CUDA` and `CONDA_OVERRIDE_CUDA_ARCH` environment variables described
+[above](#cuda-without-a-gpu) set the virtual packages used when solving an environment.
+Solve and export one explicit lock file per situation:
+
+```bash
+CONDA_OVERRIDE_CUDA="12.0" CONDA_OVERRIDE_CUDA_ARCH="8.0" \
+  conda create -n cuda12-ampere -c conda-forge kokkos
+conda export -n cuda12-ampere --format=explicit --file=cuda12-ampere.txt
+
+CONDA_OVERRIDE_CUDA="13.0" CONDA_OVERRIDE_CUDA_ARCH="10.0" \
+  conda create -n cuda13-blackwell -c conda-forge kokkos
+conda export -n cuda13-blackwell --format=explicit --file=cuda13-blackwell.txt
+```
+
+</TabItem>
+<TabItem label="conda-lock" value="conda-lock">
+
+[conda-lock](https://github.com/conda/conda-lock) reads the virtual packages from a file
+passed with `--virtual-package-spec`. This file replaces conda-lock's default virtual
+packages, so it must also list any other virtual packages that your dependencies require,
+such as `__glibc`. Otherwise, conda-lock may silently lock an old or CPU-only build. Create
+one spec file and one lock file per situation:
+
+```yaml title="environment.yml"
+channels:
+  - conda-forge
+dependencies:
+  - kokkos
+```
+
+```yaml title="virtual-packages-cuda12-ampere.yml"
+subdirs:
+  linux-64:
+    packages:
+      __glibc: "2.28"
+      __cuda: "12.0"
+      __cuda_arch: "8.0"
+```
+
+```yaml title="virtual-packages-cuda13-blackwell.yml"
+subdirs:
+  linux-64:
+    packages:
+      __glibc: "2.28"
+      __cuda: "13.0"
+      __cuda_arch: "10.0"
+```
+
+```bash
+conda-lock -f environment.yml -p linux-64 \
+  --virtual-package-spec virtual-packages-cuda12-ampere.yml \
+  --lockfile cuda12-ampere.conda-lock.yml
+conda-lock -f environment.yml -p linux-64 \
+  --virtual-package-spec virtual-packages-cuda13-blackwell.yml \
+  --lockfile cuda13-blackwell.conda-lock.yml
+```
+
+</TabItem>
+<TabItem label="pixi" value="pixi">
+
+[pixi](https://pixi.prefix.dev/latest/workspace/multi_platform_configuration/#declaring-virtual-packages-per-platform)
+can declare the virtual packages for each platform and store multiple environments in a
+single `pixi.lock`:
+
+```toml title="pixi.toml"
+[workspace]
+channels = ["conda-forge"]
+platforms = [
+  { name = "linux-64-cuda12-ampere", platform = "linux-64", cuda = { driver = "12.0", arch = "8.0" } },
+  { name = "linux-64-cuda13-blackwell", platform = "linux-64", cuda = { driver = "13.0", arch = "10.0" } },
+]
+
+[dependencies]
+kokkos = "*"
+
+[feature.cuda12-ampere]
+platforms = ["linux-64-cuda12-ampere"]
+
+[feature.cuda13-blackwell]
+platforms = ["linux-64-cuda13-blackwell"]
+
+[environments]
+cuda12-ampere = ["cuda12-ampere"]
+cuda13-blackwell = ["cuda13-blackwell"]
+```
+
+```bash
+pixi lock
+```
+
+</TabItem>
+</Tabs>
+
 ## Installing the CUDA Toolkit
 
 The sections below are for developers who need the CUDA compiler, headers, or tools.
