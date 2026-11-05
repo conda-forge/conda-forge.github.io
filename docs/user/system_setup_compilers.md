@@ -38,36 +38,59 @@ xcode-select --install
 
 ## Windows
 
-The easiest way to install
+On Windows, you need to install Microsoft's Visual C++ build tools
+to get standard compilers which rely on a C/C++ toolchain working.
+This can be achieved via a relatively minimal Visual Studio installation.
 
-- TODO: clear guidance on minimal visual studio intallation via visual studio GUI
+In many cases, installing any recent version of Visual Studio will be sufficient.
+At the time of writing, conda-forge defaults to Visual Studio 2022,
+so that is the recommended version to install.
+See [the detailed notes on MSVC versions](../how-to/advanced/windows/notes-on-native-code/#versions-of-microsoft-visual-c-msvc)
+for more information on what various relevant version numbers mean
+and where compatibility can be expected.
+
+### Using the Visual Studio Installer GUI
+
+The easiest way to install the build tools is via the Visual Studio Installer GUI.
+
+1. Download the 'Build Tools for Visual Studio' installer from
+[https://visualstudio.microsoft.com/downloads/](https://visualstudio.microsoft.com/downloads/).
+2. TODO: install the minimal required components of vs2022
 
 - TODO: what do users need to make sure is on their PATH / how to launch a shell which handles that?
 
-- TODO: explain minimal visual studio CLI installation:
+### Using Powershell
+
+If using the Visual Studio Installer GUI is not an option on your machine,
+it is possible to install what you need in a terminal using powershell.
+
+Here is a script that you can use to install vs2022 or vs2026:
 
 ```powershell
-# --- Change these two values to switch versions ---
-# VS 2022 -> '2022' and '17'
-# VS 2019 -> '2019' and '16'
+# --- Change this one value to switch versions: '2026' or '2022' ---
 $vsVersion = '2022'
-$channel   = '17'
-# ---------------------------------------------------
+# -------------------------------------------------------------------
 
-$url       = "https://aka.ms/vs/$channel/release/vs_buildtools.exe"
+$urls = @{
+  '2026' = 'https://aka.ms/vs/18/stable/vs_buildtools.exe'
+  '2022' = 'https://aka.ms/vs/17/release/vs_buildtools.exe'
+}
+
+if (-not $urls.ContainsKey($vsVersion)) { throw "Unsupported VS version: $vsVersion" }
+
 $installer = Join-Path $env:TEMP "vs_buildtools$vsVersion.exe"
 
-Invoke-WebRequest $url -OutFile $installer
+Invoke-WebRequest $urls[$vsVersion] -OutFile $installer
 
 $proc = Start-Process $installer -Wait -PassThru -ArgumentList `
   '--quiet --wait --norestart --nocache',
   '--add Microsoft.VisualStudio.Workload.VCTools',
   '--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64',
-  '--add Microsoft.VisualStudio.Component.Windows10SDK.19041'
+  '--add Microsoft.VisualStudio.Component.Windows11SDK.26100'
 
 if ($proc.ExitCode -notin 0, 3010) { throw "Install failed: $($proc.ExitCode)" }
 ```
 
-- TODO: link to [the notes on native code on Windows for maintainers](/how-to/advanced/windows/notes-on-native-code/) for more detailedn guidance
+- TODO: what do users need to make sure is on their PATH / how to launch a shell which handles that?
 
 - TODO: any other setup required for Fortran? Other languages?
