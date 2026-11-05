@@ -208,6 +208,16 @@ If your package only supports a subset of all CUDA architectures, depend on the 
 
 For example, a package built with `cuda-arch=6.0` is only installable when a user's least capable device has compute capability 6.0 (Pascal) or later. Users who see `__cuda_arch` errors should read [the user guide](/docs/user/cuda/#what-if-i-see-an-error-saying-that-__cuda_arch-is-missing).
 
+:::note
+
+Using `cuda-arch` to split a package into multiple `cuda-arch` variants makes it more
+difficult to generate lock files which include the package. Because the lock file will only
+lock one of the variants at a time, multiple lock files will need to be created or consumers
+of the lock file may experience sub-optimal performance or uninstallable lock files
+depending on their hardware configuration.
+
+:::
+
 #### Define the minimum architecture
 
 In your `conda_build_config.yaml`, define the **minimum** supported target architecture and the build arguments that you want to use for it. Leave no compatibility gaps between the minimum target and the highest target.
@@ -278,15 +288,6 @@ tests:
 ```
 
 </RecipeTabs>
-
-:::tip
-
-Lock files created from an environment constrained by virtual packges (`__cuda_arch`,
-`__cuda`, `__archspec`) are less portable because the solver was considering constraints
-unique to the local system when solving the environment. Use the [`CONDA_OVERRIDE*`
-environment variables](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html#overriding-detected-packages) to adjust these virtual packages to appropriate values before locking.
-
-:::
 
 #### Use architecture-specific instruction sets
 
