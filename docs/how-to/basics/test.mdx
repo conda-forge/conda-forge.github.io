@@ -23,6 +23,18 @@ Skipping a subset of tests can be desirable if:
 This how-to provides suggestions how to test different types of packages.
 
 
+## Preliminary note on the test section
+
+The test model changed significantly in v1 recipes.
+
+The v0 recipe format used a single `test` section that combined all tests for the given package (output).
+This section could combine different kinds of tests: existence testing, Python-specific tests, script tests.
+
+The v1 format uses a `tests` list instead.
+A single package (output) can define as many separate tests as necessary, and each of them is run in a separate test environment.
+This also implies that it is no longer possible to combine different kinds of tests in a single item; for example, script tests need to be separated from Python-specific tests, as demonstrated in the examples in the subsequent sections.
+
+
 ## General package testing
 
 ### Simple existence tests
