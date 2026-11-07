@@ -153,10 +153,9 @@ It is good to run some other tests of the code itself (the test suite) if possib
 
 :::note
 
-`pip check` can sometimes fail due to metadata discrepancies between
-PyPI and conda-forge (e.g. same package with different names). In these
-cases, the reviewer must evaluate whether the error was a false negative.
-Tip: use `pip list` to show what `pip check` "sees".
+`pip check` can sometimes fail due to deliberate metadata discrepancies between PyPI and conda-forge, for example when the upstream package metadata pins dependencies unnecessarily and the package maintainer wishes to relax the pins.
+In these cases, it is necessary to alter the package metadata to be no stricter than the conda-forge dependencies.
+While it is technically possible to disable calling `pip check`, this is strongly discouraged, as it will cause `pip check` failures in other packages that depend on your package.
 
 :::
 
