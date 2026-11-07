@@ -23,7 +23,9 @@ Skipping a subset of tests can be desirable if:
 This how-to provides suggestions how to test different types of packages.
 
 
-## Simple existence tests
+## General package testing
+
+### Simple existence tests
 
 At the very least,
 we want to verify that the package has installed the desired files in the desired
@@ -60,7 +62,36 @@ tests:
 </RecipeTabs>
 
 
+### Command Line Utilities
+
+If a package installs command line utilities, you probably want to test that
+they were properly installed:
+
+<RecipeTabs>
+
+```recipe
+test:
+  commands:
+    - util_1 --help
+```
+
+```recipe
+tests:
+  - script:
+      - util_1 --help
+```
+
+</RecipeTabs>
+
+If the utility actually has a test mode, great. Otherwise simply invoking
+`--help` or `--version` or something will at least test that it is
+installed and can run.
+
+
+
 ## Testing Python packages
+
+### Smoke testing
 
 For the best information about testing, see the test sectios in the
 [rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#tests-section)
@@ -118,7 +149,7 @@ Tip: use `pip list` to show what `pip check` "sees".
 :::
 
 
-## Running unit tests
+### Running unit tests
 
 The trick here is that there are multiple ways to run unit tests in Python,
 including pytest, etc.
@@ -128,7 +159,7 @@ run in place, while others keep the tests with the source code, and thus can
 not be run straight from an installed package.
 
 
-### Test requirements
+#### Test requirements
 
 Sometimes there are packages required to run the tests that are not required
 to simply use the package. This is usually a test-running framework, such as
@@ -162,7 +193,7 @@ tests:
 </RecipeTabs>
 
 
-### Copying test files
+#### Copying test files
 
 Often test files are not installed alongside packages. Conda creates a fresh
 working copy to execute the test stage of build recipes, which don't contain
@@ -209,7 +240,7 @@ tests:
 They work for files and directories.
 
 
-### Built-in tests
+#### Built-in tests
 
 Some packages have testing built-in. In this case, you can put a test command
 directly in the test stanza:
@@ -232,7 +263,7 @@ tests:
 
 </RecipeTabs>
 
-### Custom test script
+#### Custom test script
 
 Alternatively, a custom test script can be created and placed in the `recipe`
 directory. This allows an arbitrarily complicated test script. For v1 recipes,
@@ -249,7 +280,7 @@ automatically when present. However, note that it will override the `test:`
 section of the recipe entirely and cause it to be silently ignored.
 
 
-### pytest tests
+#### pytest tests
 
 If the tests are installed with the package, pytest can find and run them
 for you with the following command:
@@ -274,32 +305,6 @@ tests:
 ```
 
 </RecipeTabs>
-
-
-## Command Line Utilities
-
-If a Python package installs command line utilities, you probably want to test that
-they were properly installed:
-
-<RecipeTabs>
-
-```recipe
-test:
-  commands:
-    - util_1 --help
-```
-
-```recipe
-tests:
-  - script:
-      - util_1 --help
-```
-
-</RecipeTabs>
-
-If the utility actually has a test mode, great. Otherwise simply invoking
-`--help` or `--version` or something will at least test that it is
-installed and can run.
 
 
 ## Testing R packages
