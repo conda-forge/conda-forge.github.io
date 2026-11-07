@@ -6,23 +6,26 @@ tags: [how-to, basic]
 import { BuildScriptTabs } from "@site/src/components/RecipeTabs";
 import { RecipeTabs } from "@site/src/components/RecipeTabs";
 
-All recipes need tests. Here are some tips, tricks, and justifications.
-How you should test depends on the type of package (python, c-lib,
-command-line tool, … ), and what tests are available for that package.
-But every conda package must have at least _some_ tests.
+Testing packages is important to ensure that they will function correctly once installed by the users.
+Running tests can ensure that any packaging problems (such as missing or incompatible dependencies, insufficient error handling) are caught before the package is released.
+This is why it is necessary for every package to feature tests.
+
+The absolute minimum level of testing involves performing smoke tests: ensuring that the expected files were installed, that the executables do not fail to load, Python modules can be imported and so on.
+Whenever possible, it is also recommended to run at least part of the upstream test suite.
+The exact extent of testing may need to be decided on case-by-case basis.
+Skipping a subset of tests can be desirable if:
+
+- they require packaging additional dependencies
+- they impose significant load on the conda-forge [CI](/docs/glossary.md#ci) infrastructure
+- they impose significant load on other infrastructure, for example by downloading data from third-party websites
+- they are flaky (often incorrectly fail)
+
+This how-to provides suggestions how to test different types of packages.
 
 
 ## Simple existence tests
 
-Sometimes defining tests seems to be hard, e.g. due to:
-
-- tests for the underlying code base may not exist.
-- test suites may take too long to run on limited [CI](/docs/glossary.md#ci) infrastructure.
-- tests may take too much bandwidth.
-
-In these cases, conda-forge may not be able to execute the prescribed test suite.
-
-However, this is no reason for the recipe to not have tests. At the very least,
+At the very least,
 we want to verify that the package has installed the desired files in the desired
 locations. This is called existence testing.
 
