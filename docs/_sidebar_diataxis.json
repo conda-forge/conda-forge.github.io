@@ -95,6 +95,11 @@
             "type": "doc",
             "label": "Create noarch packages",
             "id": "how-to/basics/noarch"
+          },
+          {
+            "type": "doc",
+            "label": "Test packages",
+            "id": "how-to/basics/test"
           }
         ]
       },
