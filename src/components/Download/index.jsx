@@ -48,6 +48,13 @@ export default function Download() {
           href: "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe",
           light: "img/download/windows.svg",
           os: "Windows",
+      },
+      {
+          arch: "arm64 (experimental)",
+          dark: "img/download/windows.svg",
+          href: "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-arm64.exe",
+          light: "img/download/windows.svg",
+          os: "Windows",
       }
   ];
   const [version, setVersion] = useState(null);
