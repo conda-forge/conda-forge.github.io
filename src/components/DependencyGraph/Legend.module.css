@@ -22,11 +22,12 @@
 }
 
 .legendCircle {
-  width: 12px;
-  height: 12px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
-  border: 1px solid var(--ifm-color-emphasis-800);
+  border: 5px solid var(--ifm-color-emphasis-800);
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .legendSuccess {
@@ -47,6 +48,8 @@
 
 .legendAwaitingPr {
   background-color: var(--ifm-color-emphasis-600);
+  border: 5px solid var(--ifm-color-success);
+  box-sizing: border-box;
 }
 
 .legendAwaitingParents {
@@ -55,8 +58,17 @@
 
 .legendDashed {
   background-color: var(--ifm-color-emphasis-500);
-  border: 1px dashed var(--ifm-color-emphasis-800);
+  border: 5px dashed var(--ifm-color-warning);
   box-sizing: border-box;
+}
+
+[data-theme="dark"] .legendAwaitingPr {
+  background-color: #4a4a4a;
+}
+
+[data-theme="dark"] .legendAwaitingParents,
+[data-theme="dark"] .legendDashed {
+  background-color: #333333;
 }
 
 .legendLabel {
