@@ -4,10 +4,82 @@
         <title>conda-forge | community-driven packaging for conda Blog</title>
         <link>https://conda-forge.org/blog/</link>
         <description>conda-forge | community-driven packaging for conda Blog</description>
-        <lastBuildDate>Thu, 24 Sep 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 19 Oct 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[CUDA architecture detection]]></title>
+            <link>https://conda-forge.org/blog/2026/10/19/cuda-arch/</link>
+            <guid>https://conda-forge.org/blog/2026/10/19/cuda-arch/</guid>
+            <pubDate>Mon, 19 Oct 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Some conda-forge CUDA packages, especially in machine learning, support only some CUDA]]></description>
+            <content:encoded><![CDATA[<p>Some conda-forge CUDA packages, especially in machine learning, support only some CUDA
+architectures, but until now nothing stopped conda from installing them on an incompatible
+machine. The first sign of trouble was a run-time error like <code>no kernel image is available for execution on the device</code>, or even a crash. The new <code>__cuda_arch</code> virtual package and
+<code>cuda-arch</code> metapackage let conda prevent the mismatch at install time instead.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="what-are-__cuda_arch-and-cuda-arch">What are <code>__cuda_arch</code> and <code>cuda-arch</code>?<a href="https://conda-forge.org/blog/2026/10/19/cuda-arch/#what-are-__cuda_arch-and-cuda-arch" class="hash-link" aria-label="Direct link to what-are-__cuda_arch-and-cuda-arch" title="Direct link to what-are-__cuda_arch-and-cuda-arch" translate="no">​</a></h2>
+<p>conda already knows about your CUDA <em>driver</em>: the <code>__cuda</code> virtual package reports the
+latest CUDA Toolkit version that the available CUDA driver fully supports, and the
+<code>cuda-version</code> metapackage constrains it, so you never install CUDA libraries beyond what
+your driver can run. <code>__cuda_arch</code> and <code>cuda-arch</code> do the same for your CUDA <em>devices</em>.</p>
+<ul>
+<li class=""><code>__cuda_arch</code> is a virtual package created by the
+<a href="https://github.com/conda-incubator/nvidia-virtual-packages" target="_blank" rel="noopener noreferrer" class=""><code>nvidia-virtual-packages</code></a>
+conda plugin. Its version, as detected by the plugin, is the <strong>minimum</strong> compute
+capability of all the CUDA devices on the machine.</li>
+<li class=""><code>cuda-arch</code> is a metapackage on conda-forge, one version per compute capability. A package
+built with <code>cuda-arch=6.0</code> is installable only where <code>__cuda_arch&gt;=6.0</code>, which mirrors the
+forward compatibility of PTX.</li>
+</ul>
+<p>Packages depend on the <code>cuda-arch</code> metapackage rather than on <code>__cuda_arch</code> directly, for
+the same reason they depend on <code>cuda-version</code> rather than <code>__cuda</code>: a metapackage can carry
+<code>run_exports</code> and can be pinned by users without setting an environment variable.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="using-it">Using it<a href="https://conda-forge.org/blog/2026/10/19/cuda-arch/#using-it" class="hash-link" aria-label="Direct link to Using it" title="Direct link to Using it" translate="no">​</a></h2>
+<p>If you use conda, install the plugin into your <code>base</code> environment:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">conda </span><span class="token function" style="color:#d73a49">install</span><span class="token plain"> </span><span class="token parameter variable" style="color:#36acaa">-n</span><span class="token plain"> base </span><span class="token parameter variable" style="color:#36acaa">-c</span><span class="token plain"> conda-forge nvidia-virtual-packages</span><br></div></code></pre></div></div>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Other package managers, such as <a href="https://pixi.prefix.dev/latest/CHANGELOG/#0710-2026-06-24" target="_blank" rel="noopener noreferrer" class="">pixi</a> and mamba, do not use this plugin and must implement
+<code>__cuda_arch</code> support separately. Check your package manager's release notes.</p></div></div>
+<p>Once <code>__cuda_arch</code> is detected, conda will only select packages that your GPUs can run, and
+there is nothing else to configure. Unlike <code>cuda-version</code>, where a new driver lets you
+choose between, say, a CUDA 12 or CUDA 13 environment, <code>cuda-arch</code> offers no choice to make:
+your hardware decides. If you have several GPUs, the least capable one decides, so the
+result runs on all of them. If a package offers several variants, conda picks the most
+suitable one for your hardware.</p>
+<p>If something goes wrong, such as conda reporting that <code>__cuda_arch</code> is missing, see the
+<a class="" href="https://conda-forge.org/docs/user/cuda/#what-if-i-see-an-error-saying-that-__cuda_arch-is-missing">known
+issues</a>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="using-it-in-a-feedstock">Using it in a feedstock<a href="https://conda-forge.org/blog/2026/10/19/cuda-arch/#using-it-in-a-feedstock" class="hash-link" aria-label="Direct link to Using it in a feedstock" title="Direct link to Using it in a feedstock" translate="no">​</a></h2>
+<p>Maintainers who want to express the minimum supported CUDA architecture of their package can
+opt in by adding a <code>cuda_arch_version</code> variant variable to <code>conda_build_config.yaml</code> and
+<code>cuda-arch {{ cuda_arch_version }}</code> to their host and test requirements. conda-forge's CI
+sets <code>CONDA_OVERRIDE_CUDA_ARCH</code> from <code>cuda_arch_version</code> automatically.</p>
+<p><code>cuda-arch</code> may be used to split a package into variants by CUDA architecture. This means
+smaller targeted binaries for groups of compute capabilities instead of one large binary
+with code for all supported devices.</p>
+<p>A few things to keep in mind:</p>
+<ul>
+<li class="">Always include PTX for the highest architecture each variant targets. Only the <em>minimum</em>
+architecture on the system is reported, so a machine may also have newer devices that can
+run your binary only by JIT compiling PTX.</li>
+<li class="">Leave no gaps. A variant installs on every device from its minimum architecture up to the
+next variant's minimum, so it must run on all of them. For example, a <code>5.0</code> variant
+without PTX plus a <code>7.0</code> variant leaves 6.x devices with a binary that cannot run.</li>
+<li class="">Sub-architectures such as <code>100f</code> cannot be expressed as <code>cuda-arch</code> versions, but you can
+still target them at build time.</li>
+<li class="">More variants mean more CI jobs, so use this when the benefit justifies the cost.</li>
+</ul>
+<p>The
+<a class="" href="https://conda-forge.org/docs/how-to/advanced/cuda/write-the-recipe/#set-your-own-cuda-architecture-targets">how-to guide</a>
+has an example <code>conda_build_config.yaml</code> and recipe, in both <code>meta.yaml</code> and <code>recipe.yaml</code>
+form. The <a href="https://github.com/conda-forge/cudnn-feedstock" target="_blank" rel="noopener noreferrer" class="">cudnn-feedstock</a> and
+<a href="https://github.com/conda-forge/kokkos-feedstock" target="_blank" rel="noopener noreferrer" class="">kokkos-feedstock</a> are real examples.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="feedback">Feedback<a href="https://conda-forge.org/blog/2026/10/19/cuda-arch/#feedback" class="hash-link" aria-label="Direct link to Feedback" title="Direct link to Feedback" translate="no">​</a></h2>
+<p>Please report problems or ideas in the
+<a href="https://github.com/conda-incubator/nvidia-virtual-packages/issues" target="_blank" rel="noopener noreferrer" class="">nvidia-virtual-packages</a>
+repository.</p>]]></content:encoded>
+            <category>infrastructure</category>
+        </item>
         <item>
             <title><![CDATA[Using conda-forge compilers with your system headers and libraries]]></title>
             <link>https://conda-forge.org/blog/2026/09/24/system-sysroot/</link>
@@ -638,7 +710,7 @@ to previous versions.</p>
             <content:encoded><![CDATA[<p>In March, we were notified that the colocation where the <code>open-gpu-server</code> CI was running was going to be decommissioned. This meant no GPU CI jobs and no long-running CPU jobs. Fortunately, we could get in touch with several companies that kindly agreed to sponsor the long-running CPU CI. We have not found a replacement for the GPU jobs, but we are still searching!</p>
 <!-- -->
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="decommissioning-the-open-gpu-server-ci">Decommissioning the <code>open-gpu-server</code> CI<a href="https://conda-forge.org/blog/2026/06/17/large-runners-gha/#decommissioning-the-open-gpu-server-ci" class="hash-link" aria-label="Direct link to decommissioning-the-open-gpu-server-ci" title="Direct link to decommissioning-the-open-gpu-server-ci" translate="no">​</a></h2>
-<p>After <a href="https://quansight.com/post/building-a-gpu-ci-service-for-conda-forge/" target="_blank" rel="noopener noreferrer" class="">almost three years</a>, the <a href="https://github.com/Quansight/open-gpu-server" target="_blank" rel="noopener noreferrer" class=""><code>open-gpu-server</code></a> powering the long-running GPU and CPU CI jobs was decommissioned on March 13th. We started searching for suitable providers that could provide equivalent CI services and decided to give <a href="https://cirrus-runners.app/" target="_blank" rel="noopener noreferrer" class="">Cirrus Runners</a> (CPU <em>and</em> GPU) a try. Our timing was unlucky, because <a href="https://cirruslabs.org/" target="_blank" rel="noopener noreferrer" class="">Cirrus Labs was acquired by OpenAI on April 7th</a> and their Runners service is being wound down.</p>
+<p>After <a href="https://quansight.com/blog/building-a-gpu-ci-service-for-conda-forge/" target="_blank" rel="noopener noreferrer" class="">almost three years</a>, the <a href="https://github.com/Quansight/open-gpu-server" target="_blank" rel="noopener noreferrer" class=""><code>open-gpu-server</code></a> powering the long-running GPU and CPU CI jobs was decommissioned on March 13th. We started searching for suitable providers that could provide equivalent CI services and decided to give <a href="https://cirrus-runners.app/" target="_blank" rel="noopener noreferrer" class="">Cirrus Runners</a> (CPU <em>and</em> GPU) a try. Our timing was unlucky, because <a href="https://cirruslabs.org/" target="_blank" rel="noopener noreferrer" class="">Cirrus Labs was acquired by OpenAI on April 7th</a> and their Runners service is being wound down.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-providers-for-long-running-cpu-jobs">New providers for long-running CPU jobs<a href="https://conda-forge.org/blog/2026/06/17/large-runners-gha/#new-providers-for-long-running-cpu-jobs" class="hash-link" aria-label="Direct link to New providers for long-running CPU jobs" title="Direct link to New providers for long-running CPU jobs" translate="no">​</a></h2>
 <p>Immediately after, we reached out to a few companies offering external runners for GitHub Actions. Maybe someone out there would be able to help us with our most resource-demanding feedstocks... Fortunately, three different providers agreed to sponsor <strong>large CPU runners for Linux, macOS and Windows</strong>! We are incredibly grateful to these three companies:</p>
 <div class="supporters_nqy8"><div class="card_hgkJ"><a href="https://namespace.so/" target="_blank" rel="noopener noreferrer"><div class="cardWrapper_DMAK"><img src="https://conda-forge.org/img/supporters/namespace_light.svg" alt="Namespace.so logo" class="themedComponent_mlkZ themedComponent--light_NVdE" title="Go to Namespace.so's website" width="110%"><img src="https://conda-forge.org/img/supporters/namespace_dark.svg" alt="Namespace.so logo" class="themedComponent_mlkZ themedComponent--dark_xIcU" title="Go to Namespace.so's website" width="110%"></div><p align="center">Namespace.so</p></a><a href="https://blacksmith.sh/" target="_blank" rel="noopener noreferrer"><div class="cardWrapper_DMAK"><img src="https://conda-forge.org/img/supporters/blacksmith_light.png" alt="Blacksmith.sh logo" class="themedComponent_mlkZ themedComponent--light_NVdE" title="Go to Blacksmith.sh's website" width="110%"><img src="https://conda-forge.org/img/supporters/blacksmith_dark.png" alt="Blacksmith.sh logo" class="themedComponent_mlkZ themedComponent--dark_xIcU" title="Go to Blacksmith.sh's website" width="110%"></div><p align="center">Blacksmith.sh</p></a><a href="https://depot.dev/" target="_blank" rel="noopener noreferrer"><div class="cardWrapper_DMAK"><img src="https://conda-forge.org/img/supporters/depot_light.svg" alt="Depot.dev logo" class="themedComponent_mlkZ themedComponent--light_NVdE" title="Go to Depot.dev's website" width="110%"><img src="https://conda-forge.org/img/supporters/depot_dark.svg" alt="Depot.dev logo" class="themedComponent_mlkZ themedComponent--dark_xIcU" title="Go to Depot.dev's website" width="110%"></div><p align="center">Depot.dev</p></a></div><p></p></div>
@@ -1331,193 +1403,6 @@ feedstock maintainers are in the best position to notice incidents and
 issues. Please responsibly report anything you find to us at
 <code>condaforge+security@gmail.com</code>.</p>]]></content:encoded>
             <category>security</category>
-        </item>
-        <item>
-            <title><![CDATA[Outreachy 2022 Wrap-up Blog]]></title>
-            <link>https://conda-forge.org/blog/2022/08/26/outreachy-wrap-up-blog-2022/</link>
-            <guid>https://conda-forge.org/blog/2022/08/26/outreachy-wrap-up-blog-2022/</guid>
-            <pubDate>Fri, 26 Aug 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[This blog is about my work during my Outreachy internship with]]></description>
-            <content:encoded><![CDATA[<p>This blog is about my work during my Outreachy internship with
-<a href="https://conda-forge.github.io/" target="_blank" rel="noopener noreferrer" class="">conda-forge</a>. Before that a little about
-me - I am <a href="https://github.com/ssurbhi560" target="_blank" rel="noopener noreferrer" class="">Surbhi</a>, an Outreachy intern
-with conda-forge for the May-August 2022 cohort and I worked on
-documenting the conda-forge ecosystem.</p>
-<p>The first issue I started working on when the internship began was
-<a href="https://github.com/conda-forge/conda-forge.github.io/issues/1611" target="_blank" rel="noopener noreferrer" class="">Better anchoring of
-announcements(#1611)</a>.
-The goal of this issue was to fix the anchor for each year and also
-specific announcements in the Announcements section so as to provide
-better navigation of the <a href="https://conda-forge.org/docs/user/announcements.html" target="_blank" rel="noopener noreferrer" class="">Announcements
-page</a>. This was
-also the time when I was feeling quite overwhelmed and anxious since I
-was just starting and was unsure if I would be able to give my best. But
-thanks to my awesome mentors
-<a href="https://github.com/kathatherine" target="_blank" rel="noopener noreferrer" class="">@Katherine</a> and
-<a href="https://github.com/beckermr" target="_blank" rel="noopener noreferrer" class="">@Matt</a>, who have always been so helpful,
-I was able to have a good start. We solved this issue in two parts. The
-first part was to add anchors to each year which is solved with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1766" target="_blank" rel="noopener noreferrer" class="">Improve
-anchors for each year in the Announcements section.
-(#1766)</a>,
-and the second part was adding anchors to each announcement and fixing
-the RSS feed.</p>
-<p>The part of the documentation I focused on after completing the first
-issue was <a href="https://conda-forge.org/docs/maintainer/00_intro.html" target="_blank" rel="noopener noreferrer" class="">Maintainers'
-Documentation</a>.
-Many open issues needed to be taken care of to make the Maintainers'
-documentation more useful and accessible for new maintainers. The open
-tickets that we have worked on are:</p>
-<ol>
-<li class="">
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1769" target="_blank" rel="noopener noreferrer" class="">Document extras feedstock-name
-(#1769)</a>
-and <a href="https://github.com/conda-forge/conda-forge.github.io/issues/1331" target="_blank" rel="noopener noreferrer" class="">Explain how to become a maintainer
-(#1331)</a>.
-Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1772" target="_blank" rel="noopener noreferrer" class="">add extra section-recipe maintainer and feedstock-name
-(#1772)</a>.</p>
-<blockquote>
-<p>As we started with improving the Maintainer documentation, these
-were the issues we picked first to work on. The first issue was
-documenting how maintainers can use the "feedstock-name" directive
-for naming feedstocks differently than their package names in
-staged recipes. The second issue was documenting how one should
-become a package maintainer.</p>
-</blockquote>
-</li>
-<li class="">
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1651" target="_blank" rel="noopener noreferrer" class="">Add more steps in Improve the documentation section
-(#1651)</a>.
-Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1776" target="_blank" rel="noopener noreferrer" class="">Update "Improve the documentation" section with more
-steps
-(#1776)</a>.</p>
-<blockquote>
-<p>In this issue we added some additional steps for people who would
-like to start contributing to conda-forge, especially to
-documentation.</p>
-</blockquote>
-</li>
-<li class="">
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1655" target="_blank" rel="noopener noreferrer" class="">Add more information about Grayskull in the documentation itself
-(#1655)</a>.
-Closed with
-<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1777" target="_blank" rel="noopener noreferrer" class="">#1777</a>.</p>
-<blockquote>
-<p>The documentation on Grayskull in docs lacked the answers to
-questions like what exactly Grayskull is and how one should use
-Grayskull to generate a recipe. With this issue, we added more
-documentation on Grayskull for users.</p>
-</blockquote>
-</li>
-<li class="">
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/803" target="_blank" rel="noopener noreferrer" class="">Clarify feedstock LICENSE.txt
-(#803)</a>.
-Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1786" target="_blank" rel="noopener noreferrer" class="">Add Feedstock repository structure section
-(#1786)</a>.</p>
-<blockquote>
-<p>The docs for contributing and maintaining conda recipes discuss
-when and how to distribute the license for a particular package.
-The auto-generated feedstock repositories also include a license
-in the root, which is different from the related package license.
-With this issue, we added documentation on the differences between
-those two licenses and briefly explained the feedstock repository
-structure.</p>
-</blockquote>
-</li>
-<li class="">
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1117" target="_blank" rel="noopener noreferrer" class="">DOC: New maintainer
-(#1117)</a>.
-Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1788" target="_blank" rel="noopener noreferrer" class="">Add "How regro-cf-autotick-bot create version update
-PR?" section.
-(#1788)</a>.</p>
-<blockquote>
-<p>With this issue we improved docs for the new maintainers and the
-working of the bot. A "How does <code>regro-cf-autotick-bot</code> create
-automatic version updates?" section was added to the docs, which
-explains the whole process of creating an automated version update
-PRs by bot.</p>
-</blockquote>
-</li>
-<li class="">
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1536" target="_blank" rel="noopener noreferrer" class="">Add Perl package hints to documentation
-(#1536)</a>.
-Working on this
-<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1790" target="_blank" rel="noopener noreferrer" class="">#1790</a>.</p>
-<blockquote>
-<p>With this issue we added ​​packaging instructions for Perl packages
-with different build systems in the documentation.</p>
-</blockquote>
-</li>
-<li class="">
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1532" target="_blank" rel="noopener noreferrer" class="">DOC: Update documentation about tokens
-(#1532)</a>.
-Closed with
-<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1793" target="_blank" rel="noopener noreferrer" class="">#1793</a>.</p>
-<blockquote>
-<p>Feedstocks have stopped storing encrypted tokens to upload
-packages, but outdated information on tokens was still present in
-the documentation. With this issue we removed the outdated
-information and also added a new section "How to update your
-feedstock token?" for maintainers.</p>
-</blockquote>
-</li>
-<li class="">
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1668" target="_blank" rel="noopener noreferrer" class="">Improve the documentation on arch_rebuild.txt
-(#1668)</a>.
-Closed with
-<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1794" target="_blank" rel="noopener noreferrer" class="">#1794</a>.</p>
-<blockquote>
-<p>With this issue we improved the documentation on
-<code>arch_rebuild.txt</code> and how maintainers can add a feedstock to
-<code>arch-rebuild.txt</code> if it requires rebuilding with different
-architectures/platforms (such as ppc64le or aarch64).</p>
-</blockquote>
-</li>
-<li class="">
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1355" target="_blank" rel="noopener noreferrer" class="">Document migrators
-(#1355)</a>,
-<a href="https://github.com/conda-forge/conda-forge.github.io/issues/862" target="_blank" rel="noopener noreferrer" class="">Update migration docs
-(#862)</a>,
-and <a href="https://github.com/conda-forge/conda-forge.github.io/issues/737" target="_blank" rel="noopener noreferrer" class="">document migrators
-(#737)</a>
-. Closed with <a href="https://github.com/conda-forge/conda-forge.github.io/pull/1801" target="_blank" rel="noopener noreferrer" class="">Documenting Migrators and Migrations.
-(#1801)</a>.</p>
-<blockquote>
-<p>With these, we added more documentation on migrations and
-migrators, which would help maintainers find answers to questions
-like - What is a migrator/migration, and what does it do? When can
-(and why would) they should reject a migration PR? And so on.</p>
-</blockquote>
-</li>
-<li class="">
-<p><a href="https://github.com/conda-forge/conda-forge.github.io/issues/1808" target="_blank" rel="noopener noreferrer" class="">Add a section in docs on security aspects of conda-forge
-(#1808)</a>.
-Closed with
-<a href="https://github.com/conda-forge/conda-forge.github.io/pull/1812" target="_blank" rel="noopener noreferrer" class="">#1812</a>.</p>
-<blockquote>
-<p>Currently, information regarding the security considerations of
-conda-forge builds is scattered throughout the documentation, and
-therefore it is hard to find and read. With this issue, we will
-put all the information together in one place, which will help
-maintainers and users to know more about how conda-forge secures
-its packages and infrastructure.</p>
-</blockquote>
-</li>
-</ol>
-<p>I met some wonderful people during the internship who helped me with all
-my questions and doubts that I had. The experience during the internship
-also helped me get better opportunities after completing the Outreachy
-internship. I have learned so many things during the internship that it
-would make a long list if I were to write all of those. But the most
-important things I learned are:</p>
-<ul>
-<li class="">The importance of documentation and how to write good documentation.</li>
-<li class="">The best practices to follow while writing documentation.</li>
-<li class="">More about conda-forge and packaging tools.</li>
-</ul>
-<p>And above all, Outreachy helped me feel more confident about my skills
-and overcome the imposter syndrome I had before. Thanks again to my
-awesome mentors and the kind people of the conda-forge community! :)</p>]]></content:encoded>
-            <category>Outreachy</category>
         </item>
     </channel>
 </rss>
