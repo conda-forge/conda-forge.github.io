@@ -213,7 +213,7 @@
           {
             "type": "link",
             "label": "Rename packages",
-            "href": "#"
+            "href": "/docs/maintainer/guidelines/#renaming-packages"
           }
         ]
       },
