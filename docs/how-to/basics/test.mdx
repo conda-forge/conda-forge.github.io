@@ -1,0 +1,498 @@
+---
+tags: [how-to, basic]
+---
+# Testing packages
+
+import { BuildScriptTabs } from "@site/src/components/RecipeTabs";
+import { RecipeTabs } from "@site/src/components/RecipeTabs";
+
+Testing packages is important to ensure that they will function correctly once installed by the users.
+Running tests can ensure that any packaging problems (such as missing or incompatible dependencies, insufficient error handling) are caught before the package is released.
+This is why it is necessary for every package to feature tests.
+
+The absolute minimum level of testing involves performing smoke tests: ensuring that the expected files were installed, that the executables do not fail to load, Python modules can be imported and so on.
+Whenever possible, it is also recommended to run at least part of the upstream test suite.
+The exact extent of testing may need to be decided on case-by-case basis.
+Skipping a subset of tests can be desirable if:
+
+- they require packaging additional dependencies
+- they impose significant load on the conda-forge [CI](/docs/glossary.md#ci) infrastructure
+- they impose significant load on other infrastructure, for example by downloading data from third-party websites
+- they are flaky (often incorrectly fail)
+
+This how-to provides suggestions how to test different types of packages.
+
+
+## Preliminary note on the test section
+
+The test model changed significantly in v1 recipes.
+
+The v0 recipe format used a single `test` section that combined all tests for the given package (output).
+This section could combine different kinds of tests: existence testing, Python-specific tests, script tests.
+
+The v1 format uses a `tests` list instead.
+A single package (output) can define as many separate tests as necessary, and each of them is run in a separate test environment.
+This also implies that it is no longer possible to combine different kinds of tests in a single item; for example, script tests need to be separated from Python-specific tests, as demonstrated in the examples in the subsequent sections.
+
+
+## General package testing
+
+### Simple existence tests
+
+At the very least,
+we want to verify that the package has installed the desired files in the desired
+locations. This is called existence testing.
+
+In v1 recipes, existence testing can be accomplished `package_contents` tests. In v0 recipes, it
+needs to be done manually in the `commands` subsection of the `test` section.
+
+On POSIX systems, use the `test` utility and the `$PREFIX` variable. On Windows, use the `exist`
+command. See below for an example.
+
+Simple existence testing example:
+
+<RecipeTabs>
+
+```recipe
+test:
+  commands:
+    - test -f $PREFIX/lib/libboost_log$SHLIB_EXT        # [unix]
+    - if not exist %LIBRARY_BIN%\\boost_log.dll exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\boost_log.lib exit 1  # [win]
+```
+
+```recipe
+tests:
+  - package_contents:
+      lib:
+        # $PREFIX/lib/libboost_log.so on Linux
+        # $PREFIX/lib/libboost_log.dylib on macOS
+        # %LIBRARY_BIN%/boost_log.dll and %LIBRARY_LIB%/boost_log.lib on Windows
+        - boost_log
+```
+
+</RecipeTabs>
+
+
+### Command Line Utilities
+
+If a package installs command line utilities, you probably want to test that
+they were properly installed:
+
+<RecipeTabs>
+
+```recipe
+test:
+  commands:
+    - util_1 --help
+```
+
+```recipe
+tests:
+  - script:
+      - util_1 --help
+```
+
+</RecipeTabs>
+
+If the utility actually has a test mode, great. Otherwise simply invoking
+`--help` or `--version` or something will at least test that it is
+installed and can run.
+
+
+
+## Testing Python packages
+
+### Smoke testing
+
+For the best information about testing, see the test sectios in the
+[rattler-build](https://rattler-build.prefix.dev/latest/reference/recipe_file/#tests-section)
+or [conda-build docs](https://docs.conda.io/projects/conda-build/en/stable/resources/define-metadata.html#test-section).
+
+The recommended minimum of testing for Python packages involves the following tests:
+
+- testing whether one or more installed Python modules can be imported correctly,
+- running `pip check` to ensure that all dependencies specified in the Python metadata are met.
+
+In v1 recipes, this is accomplished using a `python` test which combines both `imports` testing
+and an automatic `pip check` test. In v0 recipes, a combination of `imports` test with an explicit
+command test needs to be used:
+
+<RecipeTabs>
+
+```recipe
+test:
+  imports:
+    - package_name
+  commands:
+    - pip check
+```
+
+```recipe
+tests:
+  - python:
+      imports:
+        - package_name
+```
+
+</RecipeTabs>
+
+Note that `package_name` is the name imported by Python;
+not necessarily the name of the conda package (they are sometimes different), or even the wheel name.
+
+Testing for an import will catch the bulk of the packaging errors, generally
+including the presence of dependencies. However, it does not assure that the
+package works correctly. In particular, it doesn't test if it works
+correctly with the versions of dependencies used. In some cases, the top level
+import name does not contain any executable code (e.g. a package with an empty
+`__init__.py`, or without any direct imports). This test would always pass!
+In these cases, it helps to add more imports explicitly targeting modules
+that do contain executable code (e.g. `package_name.core`).
+
+It is good to run some other tests of the code itself (the test suite) if possible.
+
+:::note
+
+`pip check` can sometimes fail due to deliberate metadata discrepancies between PyPI and conda-forge, for example when the upstream package metadata pins dependencies unnecessarily and the package maintainer wishes to relax the pins.
+In these cases, it is necessary to alter the package metadata to be no stricter than the conda-forge dependencies.
+While it is technically possible to disable calling `pip check`, this is strongly discouraged, as it will cause `pip check` failures in other packages that depend on your package.
+
+:::
+
+
+### Running unit tests
+
+The trick here is that there are multiple ways to run unit tests in Python,
+including pytest, etc.
+
+Also, some packages install the tests with the package, and thus they can be
+run in place, while others keep the tests with the source code, and thus can
+not be run straight from an installed package.
+
+
+#### Test requirements
+
+Sometimes there are packages required to run the tests that are not required
+to simply use the package. This is usually a test-running framework, such as
+`pytest`. You can ensure that it is included by adding it to requirements
+in the test stanza:
+
+<RecipeTabs>
+
+```recipe
+test:
+  imports:
+    - package_name
+  requires:
+    - pytest
+  commands:
+    - ...  # details below
+```
+
+```recipe
+tests:
+  - python:
+      imports:
+        - package_name
+  - requirements:
+      run:
+        - pytest
+    script:
+      - ...  # details below
+```
+
+</RecipeTabs>
+
+
+#### Copying test files
+
+Often test files are not installed alongside packages. Conda creates a fresh
+working copy to execute the test stage of build recipes, which don't contain
+the files of source package.
+
+You can include files required for testing with the `files/source` section in v1 recipes,
+or `source_files` section in v0 recipes:
+
+<RecipeTabs>
+
+```recipe
+test:
+  imports:
+    - package_name
+  requires:
+    - pytest
+  source_files:
+    - tests/
+    - test_pkg_integration.py
+  commands:
+    - pytest tests/
+    - pytest test_pkg_integration.py
+```
+
+```recipe
+tests:
+  - python:
+      imports:
+        - package_name
+  - requirements:
+      run:
+        - pytest
+    files:
+      source:
+        - tests/
+        - test_pkg_integration.py
+    script:
+      - pytest tests/
+      - pytest test_pkg_integration.py
+```
+
+</RecipeTabs>
+
+They work for files and directories.
+
+
+#### Built-in tests
+
+Some packages have testing built-in. In this case, you can put a test command
+directly in the test stanza:
+
+<RecipeTabs>
+
+```recipe
+test:
+  ...
+  commands:
+     - python -c "import package_name; package_name.tests.runall()"
+```
+
+```recipe
+tests:
+  ...
+  - script:
+      - python -c "import package_name; package_name.tests.runall()"
+```
+
+</RecipeTabs>
+
+#### Custom test script
+
+Alternatively, a custom test script can be created and placed in the `recipe`
+directory. This allows an arbitrarily complicated test script. For v1 recipes,
+the script is listed via a `script` test with a `file` key:
+
+```recipe
+tests:
+  - script:
+      file: run_test.py
+```
+
+For v0 recipes, the file is always called `run_test.py`, and it is used
+automatically when present. However, note that it will override the `test:`
+section of the recipe entirely and cause it to be silently ignored.
+
+
+#### pytest tests
+
+If the tests are installed with the package, pytest can find and run them
+for you with the following command:
+
+<RecipeTabs>
+
+```recipe
+test:
+  requires:
+    - pytest
+  commands:
+    - pytest --pyargs package_name
+```
+
+```recipe
+tests:
+  - requirements:
+      run:
+        - pytest
+    script:
+      - pytest --pyargs package_name
+```
+
+</RecipeTabs>
+
+
+## Testing R packages
+
+R packages should be tested for successful library loading. All
+recipes for CRAN packages should begin from [conda_r_skeleton_helper](https://github.com/bgruening/conda_r_skeleton_helper) and will
+automatically include library loading tests. However, many R packages
+also include `testthat` tests that can potentially be run. While
+optional, additional testing is encouraged when packages:
+
+- provide interaces to other (compiled) libraries (e.g., `r-curl`,
+  `r-xml2`)
+- extend functionality of or integrate many other R libraries
+  (e.g., `r-vetiver`)
+- are cornerstone R packages that provide often-used functions
+  (e.g., `r-rmarkdown`)
+
+
+### Testing R library loading
+
+The minimal test of an R package should ensure that the delivered library
+can be successfully imported. This is accomplished with:
+
+<RecipeTabs>
+
+```recipe
+test:
+  commands:
+    - R -e "library('PackageName')"
+```
+
+```recipe
+tests:
+  - r:
+      libraries:
+        - PackageName
+```
+
+</RecipeTabs>
+
+Note that `PackageName` is the name imported by R; not necessarily
+the name of the conda package (e.g., `r-matrix` delivers `Matrix`).
+
+
+### Running `testthat` tests
+
+A typical `test` section for an R package with `testthat` testing
+will look like
+
+<RecipeTabs>
+
+```recipe
+test:
+  requires:
+    - r-testthat
+  source_files:
+    - tests/
+  commands:
+    - R -e "library('PackageName')"
+    - R -e "testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)"
+```
+
+```recipe
+tests:
+  - r:
+      libraries:
+        - PackageName
+  - files:
+      source:
+        - tests/
+    requirements:
+      run:
+        - r-testthat
+    script:
+      - R -e "testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)"
+```
+
+</RecipeTabs>
+
+:::note
+
+We recommend including a library loading check _before_ the `testthat`
+tests.
+
+:::
+
+First, one needs to declare that the test environment have `r-testthat`
+installed. One may need additional requirements here, especially if a
+package has optional functionality that is tested.
+
+:::note
+
+If any `testthat` tests fail due to missing packages, maintainers
+are encouraged to communicate this to the upstream repository. Some R
+packages have optional functionality that usually involves packages
+listed under the `Suggests:` section of the `DESCRIPTION` file.
+Developers should be using `testthat::skip_if_not_installed()`
+functions to guard against test failures when optional packages are
+not installed. Posting an Issue or Pull Request when this is not
+done will help improve testing practices in the R ecosystem.
+
+:::
+
+Second, one needs to declare where to source the tests. R package tests will
+be found in the `tests/` directory of the tarball. This will typically
+include a `tests/testthat.R` file and additional tests under
+`tests/testthat/test_*.R`. Auxiliary directories and files may also be
+present and needed for specific tests.
+
+The default R build procedure on conda-forge will not include the
+`tests/` directory in the final build. While it is possible to do this
+(via an `--install-tests` flag), it is preferable to use the
+`files.source` or `source_files` keys (for `recipe.yaml` or `meta.yaml`, respectively) to copy the tests for the
+testing phase only.
+
+Finally, one uses the `testthat::test_file()` function to test the
+`tests/testthat.R` file, which for most packages serves as the main entry
+point for all the other tests. By default, this function does not return
+an error value on test failures, so one needs to pass the argument
+`stop_on_failure=TRUE` to ensure that test failures propagate to
+conda-build.
+
+There are scenarios where the `tests/testthat.R` file does not orchestrate
+the individual tests. In that case, one can instead test the
+`tests/testthat` directory with
+
+<RecipeTabs>
+
+```recipe
+test:
+  commands:
+    - R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed', stop_on_failure=TRUE)"
+```
+
+```recipe
+tests:
+  - script:
+      - R -e "testthat::test_dir('tests/testthat/', package='PackageName', load_package='installed', stop_on_failure=TRUE)"
+```
+
+</RecipeTabs>
+
+In this case, the function will error on any failures by default. Again,
+the `PackageName` here refers to the R library name.
+
+
+## Tests outside of the package
+
+Note that conda-build runs the tests in an isolated environment after installing
+the package – thus, at this point it does not have access to the original source
+tarball. This is to ensure that the test environment is as close as possible to
+what an end-user will see.
+
+This makes it very hard to run tests that are not installed with the package.
+
+<!-- **NOTE** if anyone has good ideas as to how to do that, please put it here! -->
+
+
+
+## Running tests locally for staged recipes
+
+If you want to run and build packages in the staged-recipes repository locally,
+go to the root repository directory and run the
+`build-locally.py` script (you need Python 3). And then you could follow the prompt to select the variant you'd like to build. This requires that you have Docker
+installed on your machine if you are building a package for Linux.
+For MacOS, it will prompt you to select a location for the SDK (e.g. `export OSX_SDK_DIR=/opt`) to be downloaded.
+
+```bash
+$ cd ~/staged-recipes
+$ python build-locally.py
+```
+
+If you know which image you want to build, you can specify it as an argument to the script.
+
+```bash
+$ cd ~/staged-recipes
+$ python build-locally.py <VARIANT>
+```
+
+where `<VARIANT>` is one of the file names in the `.ci_support/` directory, e.g. `linux64`, `osx64`, and `linux64_cuda<version>`.
