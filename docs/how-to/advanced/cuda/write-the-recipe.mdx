@@ -314,8 +314,7 @@ Here `10.0+PTX` provides forward compatibility. `9.0+PTX` is unnecessary because
 
 ## Fix `nvcuda.dll` not found on Windows
 
-The [scripts](https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/main/recipe/install_cuda.bat)
-used to install the CUDA Toolkit on Windows cannot provide `nvcuda.dll` as part of the installation because no GPU is physically present in the CI machines.
+`nvcuda.dll` is part of the NVIDIA driver and is not available on the Windows CI machines because no GPU is physically present.
 As a result, you might get linking errors in the postprocessing steps of `conda build`:
 
 ```default
