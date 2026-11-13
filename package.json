@@ -21,7 +21,7 @@
     "@docusaurus/theme-mermaid": "^3.10.2",
     "@mdx-js/react": "^3.1.1",
     "@stoplight/json-ref-resolver": "^3.1.6",
-    "chart.js": "^4.5.1",
+    "chart.js": "^4.6.1",
     "chartjs-adapter-moment": "^1.0.1",
     "clsx": "^2.1.1",
     "d3": "^7.9.0",
@@ -30,17 +30,17 @@
     "moment": "^2.31.0",
     "octokit": "^5.0.5",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.8",
+    "react": "^19.3.1",
     "react-chartjs-2": "^5.3.1",
-    "react-dom": "^19.2.8",
+    "react-dom": "^19.3.1",
     "react-inlinesvg": "^4.5.0",
     "react-markdown": "^10.1.0",
-    "react-tooltip": "^6.0.8",
+    "react-tooltip": "^6.0.9",
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.9.2",
-    "prettier": "^3.9.6"
+    "prettier": "^3.9.10"
   },
   "browserslist": {
     "production": [
