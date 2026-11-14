@@ -229,6 +229,8 @@ test:
   requires:
     - pytest
   source_files:
+    - pytest.ini
+    - testdata/
     - tests/
     - test_pkg_integration.py
   commands:
@@ -246,6 +248,8 @@ tests:
         - pytest
     files:
       source:
+        - pytest.ini
+        - testdata/
         - tests/
         - test_pkg_integration.py
     script:
@@ -257,6 +261,8 @@ tests:
 
 They work for files and directories.
 
+Note that alongside test modules themselves, test suites may require additional data and configuration files.
+For example, `pytest` is often configured via `pytest.ini`, `[tool:pytest]` section in `pyproject.toml` or `setup.cfg`, or `[pytest]` section in `tox.ini`.
 
 #### Built-in tests
 
