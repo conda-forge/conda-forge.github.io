@@ -234,8 +234,8 @@ test:
     - tests/
     - test_pkg_integration.py
   commands:
-    - pytest tests/
-    - pytest test_pkg_integration.py
+    - pytest -vv tests/
+    - pytest -vv test_pkg_integration.py
 ```
 
 ```recipe
@@ -253,8 +253,8 @@ tests:
         - tests/
         - test_pkg_integration.py
     script:
-      - pytest tests/
-      - pytest test_pkg_integration.py
+      - pytest -vv tests/
+      - pytest -vv test_pkg_integration.py
 ```
 
 </RecipeTabs>
@@ -316,7 +316,7 @@ test:
   requires:
     - pytest
   commands:
-    - pytest --pyargs package_name
+    - pytest -vv --pyargs package_name
 ```
 
 ```recipe
@@ -325,7 +325,7 @@ tests:
       run:
         - pytest
     script:
-      - pytest --pyargs package_name
+      - pytest -vv --pyargs package_name
 ```
 
 </RecipeTabs>
