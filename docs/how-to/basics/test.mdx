@@ -390,6 +390,69 @@ tests:
 
 </RecipeTabs>
 
+#### Skipping tests
+
+In some cases, it may be desirable to skip a subset of the test suite: tests that are broken, flaky, slow, have unsatisfiable dependencies or otherwise are problematic.
+Some test suites may skip tests automatically when the prerequisite dependencies are missing; others will fail to import the relevant test modules.
+
+Depending on the test suite in question, the preferred approach may be to either explicitly select a subset of tests to run or to deselect a part of the test suite.
+
+Both `pytest` and `unittest` runners support using boolean expressions to match test files, classes and names against substrings, for example:
+
+<RecipeTabs>
+
+```recipe
+test:
+  requirements:
+    - pytest
+  source_files:
+    - tests/
+  commands:
+    - pytest -k "not ((TestFrobnicate and (test_foo or test_bar)) or TestOtherClass)"
+```
+
+```recipe
+tests:
+  - requirements:
+      run:
+        - pytest
+    files:
+      source:
+        - tests/
+    script:
+      - pytest -k "not ((TestFrobnicate and (test_foo or test_bar)) or TestOtherClass)"
+```
+
+</RecipeTabs>
+
+`pytest` can also explicitly `--deselect` specific files, classes or tests by name.
+It can also `--ignore` a whole file, which needs to be used if the file cannot be imported.
+
+<RecipeTabs>
+
+```recipe
+test:
+  requirements:
+    - pytest
+  source_files:
+    - tests/
+  commands:
+    - pytest --ignore=tests/test_release.py --deselect=tests/test_python.py::test_extract_releases_gil_for_parallel_scans
+```
+
+```recipe
+tests:
+  - requirements:
+      run:
+        - pytest
+    files:
+      source:
+        - tests/
+    script:
+      - pytest --ignore=tests/test_release.py --deselect=tests/test_python.py::test_extract_releases_gil_for_parallel_scans
+```
+
+</RecipeTabs>
 
 ## Testing R packages
 
