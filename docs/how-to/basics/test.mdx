@@ -598,19 +598,6 @@ In this case, the function will error on any failures by default. Again,
 the `PackageName` here refers to the R library name.
 
 
-## Tests outside of the package
-
-Note that conda-build runs the tests in an isolated environment after installing
-the package – thus, at this point it does not have access to the original source
-tarball. This is to ensure that the test environment is as close as possible to
-what an end-user will see.
-
-This makes it very hard to run tests that are not installed with the package.
-
-<!-- **NOTE** if anyone has good ideas as to how to do that, please put it here! -->
-
-
-
 ## Running tests locally for staged recipes
 
 If you want to run and build packages in the staged-recipes repository locally,
