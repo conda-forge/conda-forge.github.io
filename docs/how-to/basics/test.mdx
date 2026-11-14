@@ -162,13 +162,14 @@ While it is technically possible to disable calling `pip check`, this is strongl
 
 ### Running unit tests
 
-The trick here is that there are multiple ways to run unit tests in Python,
-including pytest, etc.
+The main difficulty in testing Python packages is establishing the correct method to run tests.
+A large bulk of modern packages either use test suites based on pytest, or work correctly when run by pytest.
+However, there are also packages that need to be run via the stdlib `unittest` test runner or some other binary.
+Using an incorrect test runner can lead to confusing test failures or a subset of the test suite being skipped.
 
-Also, some packages install the tests with the package, and thus they can be
-run in place, while others keep the tests with the source code, and thus can
-not be run straight from an installed package.
-
+Some packages install the complete test suite as part of the package, and therefore it can be run directly from an environment with the package installed.
+Others include tests in the source code, and thus require pulling them into the test environment.
+In some cases, the source distribution published on PyPI does not include all the necessary test files, and fetching the source archive from the upstream repository may be necessary instead.
 
 #### Test requirements
 
