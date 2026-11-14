@@ -204,6 +204,13 @@ tests:
 
 </RecipeTabs>
 
+Test dependencies are often included as an extra or a dependency group (with names such as `test` or `dev`).
+Alternatively, they may be listed in a test runner configurations such as `tox.ini`, or GitHub Actions workflows.
+More suggestions on how to find dependencies can be found in [the Python part of the dependency population how-to](/docs/how-to/basics/populate-dependencies/#python).
+
+Note that in some cases not all listed dependencies will be actually required.
+For example, if a subset of the test suite is skipped, the relevant dependencies can be omitted as well.
+However, missing a dependency may cause some tests to be skipped implicitly as well.
 
 #### Copying test files
 
