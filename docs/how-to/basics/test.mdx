@@ -214,9 +214,8 @@ However, missing a dependency may cause some tests to be skipped implicitly as w
 
 #### Copying test files
 
-Often test files are not installed alongside packages. Conda creates a fresh
-working copy to execute the test stage of build recipes, which don't contain
-the files of source package.
+Often test files are not installed alongside packages.
+The test stage of the built recipe is executed in a fresh environment that does not contain the source files of the source package.
 
 You can include files required for testing with the `files/source` section in v1 recipes,
 or `source_files` section in v0 recipes:
