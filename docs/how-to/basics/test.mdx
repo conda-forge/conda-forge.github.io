@@ -598,6 +598,28 @@ In this case, the function will error on any failures by default. Again,
 the `PackageName` here refers to the R library name.
 
 
+## Testing C packages
+
+C-style packages often integrate test suites as part of the build process, and run them in the build tree.
+For these packages, it is generally more convenient to run the test suite as part of the build process rather than a separate test stage.
+
+<BuildScriptTabs>
+
+```bash
+cmake -S . -B build -G Ninja ${CMAKE_ARGS}
+cmake --build build
+cmake --build build --target test
+```
+
+```batch
+cmake -S . -B build -G Ninja %CMAKE_ARGS% || exit 1
+cmake --build build || exit 1
+cmake --build build --target test || exit 1
+```
+
+</BuildScriptTabs>
+
+
 ## Running tests locally for staged recipes
 
 If you want to run and build packages in the staged-recipes repository locally,
