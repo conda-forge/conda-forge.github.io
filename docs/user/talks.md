@@ -33,4 +33,4 @@ to learn more about conda-forge.
 - **Talk Python Podcast**, [episode 94: (2017)](https://talkpython.fm/episodes/show/94/guarenteed-packages-via-conda-and-conda-forge), with Phillip Elson, Kale Franz, and Michael Sarahan
 - **Open Source Directions**, [episode 23: conda-forge (2019)](https://www.youtube.com/watch?v=EWh-BtdYE7M), with Marius van Niekerk, John Kirkham, and Anthony Scopatz
 - **Quansight Quirkshops**: [The Conda Forge Bots (2020)](https://www.youtube.com/watch?v=uH1jM2U-0ho), with CJ Wright, Marius van Niekerk, and Matthew R Becker
-- **Contribute Your First Package to conda-forge:** [The Python Exchange September 2026](https://youtu.be/iP7ALo0ujDY) + [slides](https://travishathaway.github.io/conda-forge-staged-recipe-presentation/), with Travis Hathaway 
+- **Contribute Your First Package to conda-forge:** [The Python Exchange September 2026](https://youtu.be/iP7ALo0ujDY) + [slides](https://travishathaway.github.io/conda-forge-staged-recipe-presentation/), with Travis Hathaway
