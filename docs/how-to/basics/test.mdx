@@ -332,6 +332,64 @@ tests:
 
 An example for running pytests from the source directory was covered in the [copying test files](#copying-test-files) section.
 
+#### unittest tests
+
+The stdlib `unittest` module features a test runner as well.
+It can either discover all the test files in a package, or run specific test suites:
+
+<RecipeTabs>
+
+```recipe
+test:
+  requirements:
+    - python
+    - manuel
+  commands:
+    # runs tests from the installed package
+    - python -m unittest discover -v persistent
+```
+
+```recipe
+tests:
+  - requirements:
+      run:
+        - python
+        - manuel
+    script:
+      # runs tests from the installed package
+      - python -m unittest discover -v persistent
+```
+
+</RecipeTabs>
+
+<RecipeTabs>
+
+```recipe
+test:
+  requirements:
+    - python
+  source_files:
+    - testdata/
+    - tests/
+  commands:
+    - python -m unittest -v tests.test_suite
+```
+
+```recipe
+tests:
+  - requirements:
+      run:
+        - python
+    files:
+      source:
+        - testdata/
+        - tests/
+    script:
+      - python -m unittest -v tests.test_suite
+```
+
+</RecipeTabs>
+
 
 ## Testing R packages
 
