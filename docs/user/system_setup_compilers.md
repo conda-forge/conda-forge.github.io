@@ -25,8 +25,13 @@ Most linux distributions will have all pre-requisite software already installed.
 If you run a particularly minimal distribution, you may need to follow error messages to expose any
 missing tools as you encounter them.
 
+:::note
 Distributions which use `musl` instead of `glibc` by default, such as Alpine,
-will need special treatment, as much of conda-forge assumes that `glibc` is available.
+will need special treatment
+(e.g. [https://wiki.alpinelinux.org/wiki/Running_glibc_programs](https://wiki.alpinelinux.org/wiki/Running_glibc_programs)),
+as much of conda-forge assumes that `glibc` is available.
+Full instructions for using such a setup with conda-forge have not yet been written.
+:::
 
 <a id="system-setup-macos"></a>
 
