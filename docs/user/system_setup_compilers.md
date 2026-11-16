@@ -32,7 +32,7 @@ will need special treatment, as much of conda-forge assumes that `glibc` is avai
 
 ## macOS
 
-In a terminal, execute the following command to install the macOS Software Development Kit
+In a terminal, execute the following command to install the macOS Software Development Kit,
 as part of Command Line Tools:
 
 ```bash
@@ -43,42 +43,78 @@ xcode-select --install
 
 ## Windows
 
-On Windows, you need to install Microsoft's Visual C++ build tools
+You need to install Microsoft's Visual C++ build tools
 to get standard compilers which rely on a C/C++ toolchain working.
 This can be achieved via a relatively minimal Visual Studio installation.
 
-At the time of writing, conda-forge defaults to Visual Studio 2022,
-so that is the recommended version to install.
-See [the detailed notes on MSVC versions](../../how-to/advanced/windows/notes-on-native-code/#versions-of-microsoft-visual-c-msvc)
-for more information on what various relevant version numbers mean
-and where compatibility can be expected.
+1. **Download the installer.**
+   Go to [visualstudio.microsoft.com/downloads](https://visualstudio.microsoft.com/downloads/)
+   and download the **Build Tools for Visual Studio** installer.
+   At the time of writing, it is available directly at
+   [aka.ms/vs/stable/vs_BuildTools.exe](https://aka.ms/vs/stable/vs_BuildTools.exe).
 
-<!--
-NOTE: we haven't included instructions for using the Visual Studio Installer GUI,
-as at the time of writing, that heavily encourages installation of vs2026,
-which is newer than conda-forge's default of vs2022.
+2. **Select the C++ workload.**
+   Launch the downloaded installer, and when prompted to select workloads,
+   select **Desktop development for C++**.
 
-If, at some point in the future, conda-forge's default aligns with a version that is
-easily installable via the GUI, it may be beneficial to include instructions for that method.
--->
+3. **Deselect unnecessary components.**
+   Under _Installation details_, several components are preselected that are not necessary.
+   At the time of writing, these are:
 
-It is possible to install what you need in a terminal using powershell.
-Here is a script that you can use to install the relevant components of vs2022:
+   - **C++ CMake tools for Windows**
+   - **Testing tools core features - Build Tools**
+   - **MSVC AddressSanitizer**
+   - **vcpkg package manager**
+
+4. **Keep the Windows SDK.**
+   Make sure the **Windows 11 SDK** component stays selected.
+
+5. **Select the MSVC build tools version.**
+   Select the component for the build tools version you plan to use.
+   At the time of writing, conda-forge defaults to Visual Studio 2022,
+   so select **MSVC v143 - VS 2022 C++ x64/x86 build tools**.
+
+   :::tip
+   Some projects use a different version than the conda-forge default:
+
+   - **Newer:** for e.g. 2026, the corresponding component,
+     **MSVC Build Tools for x64/x86 (Latest)**, is preselected.
+     If you do not plan to use version 2026, you can deselect it.
+   - **Older (e.g. 2019):** select the corresponding component,
+     such as **MSVC v142 - VS 2019 C++ x64/x86 build tools**.
+
+   :::
+
+   :::note
+   See [the detailed notes on MSVC versions](../../how-to/advanced/windows/notes-on-native-code/#versions-of-microsoft-visual-c-msvc)
+   for more information on what the various version numbers mean and where compatibility can be expected.
+   :::
+
+6. **Install.**
+   Select **Install** and wait for the installation to complete.
+
+Once activated in a new shell, a conda environment with `cxx-compiler` installed
+should have the compiler `cl.exe` available on `PATH`, e.g. at:
+
+```text
+path\to\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\cl.exe
+```
+
+### Terminal Installation
+
+An alternative to the GUI installer is to use powershell.
+Here is an example script that you can use to install the relevant components:
 
 ```powershell
-$installer = Join-Path $env:TEMP 'vs_buildtools2022.exe'
+$installer = Join-Path $env:TEMP 'vs_buildtools2026.exe'
 
-Invoke-WebRequest 'https://aka.ms/vs/17/release/vs_buildtools.exe' -OutFile $installer
+Invoke-WebRequest 'https://aka.ms/vs/18/stable/vs_buildtools.exe' -OutFile $installer
 
 $proc = Start-Process $installer -Wait -PassThru -ArgumentList `
   '--quiet --wait --norestart --nocache',
   '--add Microsoft.VisualStudio.Workload.VCTools',
-  '--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64',
+  '--add Microsoft.VisualStudio.Component.VC.14.44.17.14.x86.x64',
   '--add Microsoft.VisualStudio.Component.Windows11SDK.26100'
 
 if ($proc.ExitCode -notin 0, 3010) { throw "Install failed: $($proc.ExitCode)" }
 ```
-
-A conda environment with the `cxx-compiler` dependency activated in a new shell
-should now have the compiler `cl.exe` available on `PATH`, at e.g.
-`path\to\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\cl.exe`.
