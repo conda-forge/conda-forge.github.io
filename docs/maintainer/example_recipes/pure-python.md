@@ -41,6 +41,7 @@ build:
 requirements:
   host:
     - python ${{ python_min }}.*
+    - hatchling
     - pip
   run:
     - python >=${{ python_min }}
@@ -48,7 +49,7 @@ requirements:
 tests:
   - python:
       imports:
-        - example-package
+        - example_package
       python_version:
         - ${{ python_min }}.*
         - "*"
@@ -129,11 +130,12 @@ If your package has a command line interface, you can add entry points to the bu
 
 ```recipe
 build:
-  entry_points:
-    - example-cli=example_package.cli:main
+  python:
+    entry_points:
+      - example-cli = example_package.cli:main
 ```
 
-This creates a `example-cli` command that calls the `main` function from `example_package.cli`.
+This creates an `example-cli` command that calls the `main` function from `example_package.cli`.
 
 ### The `requirements` section
 
@@ -170,14 +172,14 @@ Add your package's runtime dependencies here. These should match what's specifie
 tests:
   - python:
       imports:
-        - example-package
+        - example_package
       python_version:
         - ${{ python_min }}.*
         - "*"
       pip_check: true
 ```
 
-- `imports`: List the Python modules to import to verify the package installed correctly. This ensures basic functionality.
+- `imports`: Use the importable module name. For example, the distribution `example-package` provides the module `example_package`.
 - `python_version`: Test against the minimum supported Python version to ensure compatibility. Also test against the latest Python version (`"*"`) to catch any issues with newer releases.
 - `pip_check`: Runs `pip check` to ensure all dependencies are satisfied and there are no conflicts.
 
