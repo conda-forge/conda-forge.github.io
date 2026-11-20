@@ -94,6 +94,17 @@ x86_64-apple-darwin13.4.0-clang: No such file or directory
 
 are a telltale sign that you are lacking compilers.
 
+The actual orchestration of the various compilation and linking steps is almost always done
+by some build orchestrator (e.g. `CMake`, `meson`, ...), which will generally require a
+build system (e.g. `ninja`, `make`), or possibly other supporting tools like `pkg-config`.
+
+We package several tools that can be used for building C/C++ code; a selection that covers
+the most common scenarios would be:
+
+```
+cxx-compiler cmake pkg-config make ninja meson
+```
+
 <a id="faq-compiler-required-options"></a>
 
 <a id="why-don-t-the-c-c-compilers-automatically-know-how-to-find-libraries-installed-by-conda"></a>
@@ -155,7 +166,7 @@ conda environment. This can be accomplished (for gcc) by passing `-sysroot=/` on
 ## How can I compile CUDA (host or device) codes in my environment?
 
 Beginning with CUDA 12.0, a full suite of CUDA packages are provided in conda-forge including various metapackages to group components together.
-These metapackages and their documentation are updated frequently, so for the most up to date recommendations and documentation please read the [relevant guides provided in the `cuda` feedstock](https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/README.md).
+See [Compiling CUDA code in your environment](/docs/user/cuda/#compiling-cuda-code-in-your-environment) for more information.
 
 <a id="faq-abi-incompatibility"></a>
 

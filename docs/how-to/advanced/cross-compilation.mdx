@@ -449,6 +449,55 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" && "${mpi}" == "openmpi" ]]; then
 fi
 ```
 
+### R
+
+Cross-compiling R packages, similar to Python, requires a specialized `cross-r-base` and R library dependencies in the `build` environment.
+A simple R package requiring C compilation and depending on `r-matrix` would look something like:
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+    - r-matrix                   # [build_platform != target_platform]
+    - {{ compiler("c") }}
+    - {{ stdlib("c") }}
+    - make
+  host:
+    - r-base
+    - r-matrix
+  run:
+    - r-base
+    - r-matrix
+```
+
+```recipe
+requirements:
+  build:
+    - if: build_platform != host_platform
+      then:
+        - cross-r-base ${{ r_base }}
+        - r-matrix
+    - ${{ compiler("c") }}
+    - ${{ stdlib("c") }}
+    - make
+  host:
+    - r-base
+    - r-matrix
+  run:
+    - r-base
+    - r-matrix
+```
+
+</RecipeTabs>
+
+:::note
+
+The example above omits typical overhead needed to support Windows compilation, which relies on [the MinGW-based compiler stack](/docs/maintainer/infrastructure/#mingw-based-compiler-stack-for-windows) for nearly all R recipes. See [the `r-mgcv` feedstock](https://github.com/conda-forge/r-mgcv-feedstock) for a full example.
+
+:::
+
 ### Other examples
 
 There are more variations of this approach in the wild. So this is not meant to be exhaustive,

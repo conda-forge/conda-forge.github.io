@@ -30,13 +30,13 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/e/example-package/example_package-${{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/e/example-package/example_package-${{ version }}.tar.gz
   sha256: 12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a
 
 build:
   noarch: python
   number: 0
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: ${{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
@@ -96,11 +96,11 @@ package:
 
 ```recipe
 source:
-  url: https://pypi.org/packages/source/e/example-package/example_package-${{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/e/example-package/example_package-${{ version }}.tar.gz
   sha256: 12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a
 ```
 
-- `url`: The PyPI source URL follows the pattern `https://pypi.org/packages/source/<first-letter>/<package-name>/<package-name>-<version>.tar.gz`. Note that the package name in the URL may use underscores instead of hyphens (e.g., `example_package` vs `example-package`).
+- `url`: The PyPI source URL follows the pattern `https://files.pythonhosted.org/packages/source/<first-letter>/<package-name>/<package-name>-<version>.tar.gz`. Note that the package name in the URL may use underscores instead of hyphens (e.g., `example_package` vs `example-package`).
 - `sha256`: The SHA256 hash of the source archive. Run `openssl sha256 <artifact>` to get its hash after downloading the source file.
 
 ### The `build` section
@@ -109,7 +109,7 @@ source:
 build:
   noarch: python
   number: 0
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: ${{ PYTHON }} -m pip install . -vv
 ```
 
 - `noarch: python`: Indicates that this is a pure-Python package and can be installed on any architecture.
@@ -117,8 +117,11 @@ build:
 - `script`: The build script uses pip to install the package:
   - `${{ PYTHON }} -m pip install`: Ensures the correct Python interpreter is used.
   - `-vv`: Verbose output for debugging build issues.
-  - `--no-deps`: Prevents pip from installing dependencies itself, as these are specified in the `requirements.run` section.
-  - `--no-build-isolation`: Ensures that the `host` environment is used to build the package (instead of creating a new virtualenv).
+
+Note that the `pip` flags `--no-deps` and `--no-build-isolation` are automatically applied by `rattler-build`.
+
+- `--no-deps`: Prevents pip from installing dependencies itself, as these are specified in the `requirements.run` section.
+- `--no-build-isolation`: Ensures that the `host` environment is used to build the package (instead of creating a new virtualenv).
 
 #### Entry points
 

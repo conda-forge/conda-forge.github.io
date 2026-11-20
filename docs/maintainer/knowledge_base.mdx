@@ -1141,6 +1141,12 @@ xorg-x11-server-Xorg
 
 if you import parts of `matplotlib` that link to `libX11`.
 
+Or, if your recipe is using Alma10 as the linux distribution (you can check in the `.ci_support/linux_64_.yaml` file under the `docker_image:` entry), Xorg is no longer available out of the box and you'll need to use Wayland instead:
+
+```bash
+xorg-x11-server-Xwayland
+```
+
 <a id="pybind11-abi-constraints"></a>
 
 <a id="pybind11-swig-abi-constraints"></a>
@@ -1217,6 +1223,7 @@ Currently available packages:
 | Name               | Available on:            | Empty on:        |
 | ------------------ | ------------------------ | ---------------- |
 | backports.strenum  | python >=3.8,\<3.11      | python >=3.12    |
+| backports.zstd     | python >=3.10,\<3.14     | python >=3.14    |
 | dataclasses        | python >=3.6,\<3.7       | python >=3.7     |
 | enum34             | python =2.7              | python >=3.4     |
 | pywin32-on-windows | windows                  | unix             |
@@ -1582,69 +1589,70 @@ if you're using a `c_stdlib_version` of `2.28`, set it to `alma8`.
 
 <a id="cuda"></a>
 
-<a id="cuda-builds"></a>
+## Building CUDA packages {#cuda-builds}
 
-## CUDA builds
+For step-by-step instructions, see
+[How-to > Advanced > Build NVIDIA CUDA packages](/docs/how-to/advanced/cuda/).
+This section keeps the background and reference material for building CUDA packages.
 
-Although the provisioned CI machines do not feature a GPU, conda-forge does provide mechanisms
-to build CUDA-enabled packages.
-See the [guide for maintainers of recipes that use CUDA](https://github.com/conda-forge/cuda-feedstock/blob/main/recipe/doc/recipe_guide.md)
-for more information.
-If a feedstock does need access to additional resources (like GPUs), please see the following
-[section](#packages-that-require-a-gpu-or-long-running-builds).
+### CUDA Enhanced Compatibility
 
-<a id="common-problems-and-known-issues"></a>
+Since CUDA 11, [CUDA has offered a number of stronger compatibility
+guarantees](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#cuda-compatibility-developer-s-guide).
+The most up-to-date documentation for these may be found in [the CUDA best
+practices
+documentation](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#cuda-toolkit-versioning).
+Of particular interest from a conda packaging perspective is the binary
+backwards compatibility offered by the CUDA Toolkit (CTK): packages built with
+newer versions of the CTK will also run with older minor versions (within the
+same major family) of the CTK installed, assuming that your package has
+properly guarded any usage of APIs introduced in newer versions with suitable
+checks. Even if your library is properly configured for this behavior, your conda package
+needs extra configuration to support it; see
+[how to support CUDA Enhanced Compatibility](/docs/how-to/advanced/cuda/write-the-recipe/#support-cuda-enhanced-compatibility).
 
-### Common problems and known issues
+### Directory structure
 
-<a id="nvcuda-dll-cannot-be-found-on-windows"></a>
+The `conda-forge` CUDA Toolkit (CTK) packages aim to satisfy two sets of
+constraints. On one hand, the packages strive to retain as similar a structure as
+possible to the CTK packages that may be installed via system package managers
+(e.g. `apt` and `yum`) while supporting cross-compilation. On the other hand,
+the packages are designed to provide a seamless experience at both build
+time and run time within conda environments, and the need for cross-compilation support
+introduces some special considerations that are not present on other platforms.
 
-#### `nvcuda.dll` cannot be found on Windows
+#### Linux
 
-The [scripts](https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/main/recipe/install_cuda.bat)
-used to install the CUDA Toolkit on Windows cannot provide `nvcuda.dll`
-as part of the installation because no GPU is physically present in the CI machines.
-As a result, you might get linking errors in the postprocessing steps of `conda build`:
+All files in CTK conda packages are installed into the `$PREFIX/targets/<platform>`
+directory. This includes libraries, headers, and packaging files, along with
+other miscellaneous files that may be present in any given package. We then
+symlink a number of these files into standard sysroot locations so that they
+can be found by standard tooling (e.g. CMake, compilers, ld).
 
-```default
-WARNING (arrow-cpp,Library/bin/arrow_cuda.dll): $RPATH/nvcuda.dll not found in packages,
-sysroot(s) nor the missing_dso_whitelist.
+Specifically, we apply the following conventions:
+- Shared libraries are symlinked from `$PREFIX/targets/<platform>` into
+  `$PREFIX/lib`. This includes the bare name (`libcublas.so`), the SONAME, and
+  the full name.
+- Pkgconfig files are installed directly into `$PREFIX/lib/pkgconfig`. These
+  are not symlinked from `$PREFIX/targets/<platform>`, but are moved
+  to this location. The reason is that pkgconfig files contain relative paths
+  to libraries/headers/etc and the paths cannot be accurate relative to both
+  the `targets` directory and the `lib/pkgconfig` directory. Since the latter
+  is what `pkgconfig` will use, we choose to install the files into
+  `lib/pkgconfig` and reroot the paths accordingly.
+- Static libraries and header files are not symlinked into the sysroot
+  directories. Instead, conda installations of `nvcc` know how to search for
+  these files in the correct directories.
 
-.. is this binary repackaging?
-```
+#### Windows
 
-For now, you will have to add `nvcuda.dll` to the `missing_dso_whitelist`
+Windows does not support symlinks, so we cannot have the same file in two
+places at once.
 
-<RecipeTabs>
-
-```recipe
-build:
-  ...
-  missing_dso_whitelist:
-    - "*/nvcuda.dll"   # [win]
-```
-
-```recipe
-build:
-  ...
-  dynamic_linking:
-    missing_dso_allowlist:
-      - if: win
-        then: "*/nvcuda.dll"
-```
-
-</RecipeTabs>
-
-<a id="my-feedstock-is-not-building-old-cuda-versions-anymore"></a>
-
-#### My feedstock is not building old CUDA versions anymore
-
-As new CUDA versions come out regularly, periodically conda-forge needs to
-decide how many versions will be supported within resource constraints.
-As of January 2025, conda-forge supports CUDA 11 and 12.
-
-To update to the latest supported versions [rerender the feedstock](updating_pkgs.md#dev-update-rerender).
-There may be other fixes needed for the feedstock depending on when it was last updated.
+Therefore, we apply the following conventions:
+- Shared libraries are located in `%PREFIX%/Library/bin`.
+- Static and import libraries are located in `%PREFIX%/Library/lib/<platform>`.
+- Headers are located in `%PREFIX%/Library/include`.
 
 <a id="opengpuserver"></a>
 

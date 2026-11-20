@@ -313,7 +313,7 @@ directories are searched for dependent libraries (provided they do not specify a
 
 Furthermore, the paths in `DT_RPATH` and `DT_RUNPATH` can use the `$ORIGIN` placeholder to reference
 the directory containing the binary. Conda-forge packages typically ensure that the correct
-libraries are used by embedding a `DT_RUNPATH` pointing to the appropriate directory within the
+libraries are used by embedding a `DT_RPATH` pointing to the appropriate directory within the
 conda-forge environment, usually `$ORIGIN/../lib`. This can be done e.g. by linking with
 `-Wl,-rpath,\$ORIGIN/../lib` flag.
 

@@ -164,7 +164,7 @@ task contributions. These are included into our three main bases:
 You can help improve the documentation as it is version-controlled in
 the conda-forge.github.io repository on GitHub. The source text is
 stored there in the `src/subdirectory` and is formatted using [Python's
-reStructuredText system](https://wiki.python.org/moin/reStructuredText).
+reStructuredText system](https://wiki.python.org/python/archive/reStructuredText.html).
 
 You can propose quick edits directly through the GitHub website, if you
 have an account there --- for instance, this

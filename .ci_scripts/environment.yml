@@ -5,6 +5,6 @@ channels:
 dependencies:
 - curl *
 - nodejs 24.*
-- pre-commit *
+- prek >=0.5.0,<1.0
 - python 3.*
 - requests *

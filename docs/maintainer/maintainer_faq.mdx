@@ -82,19 +82,6 @@ To do this, first install the solver and then build the recipe like you normally
 
 For more details visit [this](https://boa-build.readthedocs.io/en/stable/mambabuild.html) page.
 
-<a id="mfaq-conda-verify"></a>
-
-<a id="i-am-seeing-importing-conda-verify-failed-error-message-during-build-what-do-i-do"></a>
-
-## I am seeing `Importing conda-verify failed.` error message during build. What do I do?
-
-```shell-session
-Importing conda-verify failed. Please be sure to test your packages. conda install conda-verify to make this message go away.
-```
-
-You are seeing this error message because by default, conda-build uses conda-verify to ensure that your recipe and package meet some minimum sanity checks.
-This message can be safely ignored as conda-forge doesn't use conda-verify.
-
 <a id="mfaq-version-update"></a>
 
 <a id="when-the-bot-creates-a-pull-request-to-a-feedstock-to-update-the-version-should-i-approve-the-pull-request-and-wait-with-merging-until-everybody-else-that-is-a-code-owner-has-approved-the-pr"></a>

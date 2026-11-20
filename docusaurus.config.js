@@ -58,6 +58,8 @@ const config = {
     ...(process.env.GITHUB_ACTIONS ? [goatcounter] : []),
   ],
 
+  clientModules: [require.resolve("./src/clientModules/anchorRedirects.js")],
+
   // Mermaid configuration
   markdown: {
     mermaid: true,
@@ -509,6 +511,7 @@ const config = {
           "python",
           "markdown",
           "shell-session",
+          "powershell",
         ],
       },
       docs: {
