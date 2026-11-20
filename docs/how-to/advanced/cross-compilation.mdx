@@ -498,6 +498,10 @@ The example above omits typical overhead needed to support Windows compilation, 
 
 :::
 
+### CUDA
+
+The CUDA compiler supports cross-compiling from `linux-64` to `linux-aarch64`, and from `win-64` to `win-arm64`. Recipes that use `{{ compiler('cuda') }}` need no extra changes. For platform-specific details, see [CUDA cross-compilation](/docs/maintainer/knowledge_base/#cuda-cross-compilation) in the knowledge base.
+
 ### Other examples
 
 There are more variations of this approach in the wild. So this is not meant to be exhaustive,

@@ -1611,6 +1611,43 @@ checks. Even if your library is properly configured for this behavior, your cond
 needs extra configuration to support it; see
 [how to support CUDA Enhanced Compatibility](/docs/how-to/advanced/cuda/write-the-recipe/#support-cuda-enhanced-compatibility).
 
+### CUDA cross-compilation {#cuda-cross-compilation}
+
+The CUDA compiler toolchain is designed to support cross-compilation, which lets
+a machine of one platform compile code for another platform. The conda-forge
+NVCC packages support two cross-compilation scenarios:
+
+- `linux-64` building for `linux-aarch64` (SBSA or Tegra)
+- `win-64` building for `win-arm64`
+
+No other combination is supported. For example, a `linux-aarch64` machine cannot
+target `linux-64`.
+
+Set up the feedstock as described in the
+[cross-compilation guide](/docs/how-to/advanced/cross-compilation/). CUDA recipes
+need no extra changes: keep `{{ compiler('cuda') }}` in `build` and the CUDA
+`-dev` libraries in `host`, exactly as for a native build.
+
+:::info
+
+`win-arm64` packages are available starting with CUDA 13.4.1.
+
+:::
+
+#### Linux {#cuda-cross-compilation-linux}
+
+- SBSA is the default ARM variant. SBSA builds need no extra recipe changes.
+- Tegra builds with CUDA 12.9 need extra recipe changes. These changes are the
+  same for cross-compiled builds and native builds. See
+  [How to build for ARM Tegra devices](/docs/how-to/advanced/cuda/tegra/).
+
+#### Windows {#cuda-cross-compilation-windows}
+
+- ARM64EC (targeting the ARM64EC ABI) is not supported in conda.
+- ARM64 libraries are in `Library\lib\arm64`. CCCL headers are in
+  `Library\include\targets\arm64`. For the full Windows layout, see
+  [Directory structure](#directory-structure).
+
 ### Directory structure
 
 The `conda-forge` CUDA Toolkit (CTK) packages aim to satisfy two sets of
@@ -1653,6 +1690,10 @@ Therefore, we apply the following conventions:
 - Shared libraries are located in `%PREFIX%/Library/bin`.
 - Static and import libraries are located in `%PREFIX%/Library/lib/<platform>`.
 - Headers are located in `%PREFIX%/Library/include`.
+- The CCCL headers that ship with the CUDA Toolkit (the `cuda-cccl` package) are
+  located in `%PREFIX%/Library/include/targets/<platform>`.
+
+Here, `<platform>` is `x64` for `win-64` and `arm64` for `win-arm64`.
 
 <a id="opengpuserver"></a>
 
