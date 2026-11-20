@@ -9,7 +9,7 @@ import { RecipeTabs } from "@site/src/components/RecipeTabs";
 Optional run dependencies are the dependencies that are not strictly necessary for the installed package to work, but whose presence may enable additional features.
 
 In Python packages, they are commonly expressed using so-called "extras" (`optional-dependencies` in `pyproject.toml`).
-For example, the [urllib3](https://pypi.org/project/urllib3/) package features [extras](https://github.com/urllib3/urllib3/blob/470374abd485b6705dfea82689b1e29c345785f1/pyproject.toml#L43-L56) for different compression algorithms, SOCKS and HTTP/2 support.
+For example, the [urllib3](https://files.pythonhosted.org/project/urllib3/) package features [extras](https://github.com/urllib3/urllib3/blob/470374abd485b6705dfea82689b1e29c345785f1/pyproject.toml#L43-L56) for different compression algorithms, SOCKS and HTTP/2 support.
 Extras can be used both by end users and in dependencies: a package needing `urllib3` with HTTP/2 support would depend on `urllib3[h2]`.
 
 :::note
@@ -24,13 +24,120 @@ Unlike extras, dependency groups are not exposed to the built wheels, but rather
 A key characteristic of optional runtime dependencies is that they do not affect the installed package contents in any way.
 The relevant features become available as soon as the needed dependencies are installed, and stop functioning once these dependencies are uninstalled; at no point the package itself needs to be reinstalled.
 
-Conda-forge does not provide a direct equivalent of optional runtime dependencies, yet. In the future, [CEP 44](https://github.com/conda/ceps/blob/main/cep-0044.md) will be available.
-This how-to explores a few common approaches to dealing with them.
 
+## CEP 44 optional dependency groups
+
+[CEP 44](https://conda.org/learn/ceps/cep-0044/) introduced a direct way of expressing optional dependency groups.
+These dependencies are expressed using the `extras` key in the `requirements` of a recipe:
+
+<RecipeTabs>
+
+```recipe
+{% set version = "2.7.0" %}
+
+package:
+  name: urllib3
+  version: {{ version }}
+
+source:
+  url: https://files.pythonhosted.org/packages/source/u/urllib3/urllib3-{{ version }}.tar.gz
+  sha256: 231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python {{ python_min }}.*
+    - hatchling >=1.27.0,<2
+    - hatch-vcs >=0.4.0,<0.6.0
+    - setuptools-scm >=8,<11
+    - pip
+  run:
+    - python >={{ python_min }}
+  extras:
+    brotli:
+      - brotli >=1.2.0
+    h2:
+      - h2 >=4,<5
+```
+
+```recipe
+schema_version: 1
+
+context:
+  version: "2.7.0"
+
+recipe:
+  name: urllib3
+  version: ${{ version }}
+
+source:
+  url: https://files.pythonhosted.org/packages/source/u/urllib3/urllib3-${{ version }}.tar.gz
+  sha256: 231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - hatchling >=1.27.0,<2
+    - hatch-vcs >=0.4.0,<0.6.0
+    - setuptools-scm >=8,<11
+    - pip
+  run:
+    - python >=${{ python_min }}
+  extras:
+    brotli:
+      - brotli >=1.2.0
+    h2:
+      - h2 >=4,<5
+```
+
+</RecipeTabs>
+
+The optional dependency groups are embedded in the package metadata.
+They can be installed using the `extras=` key, for example the equivalent of:
+
+```
+pip install urllib3[brotli,h2]
+```
+
+is:
+
+```
+conda install urllib3[extras=brotli,h2]
+```
+
+The MatchSpec syntax can also be used to express extra depedencies within recipes.
+For example, another recipe could require:
+
+<RecipeTabs>
+
+```recipe
+requirements:
+  run:
+    - python >={{ python_min }}
+    - urllib3[extras="brotli,h2"]
+```
+
+```recipe
+requirements:
+  run:
+    - python >=${{ python_min }}
+    - urllib3[extras="brotli,h2"]
+```
+
+</RecipeTabs>
 
 ## Extras as separate outputs
 
-A common way of expressing extras is through adding additional outputs to the package, typically named `{package}-with-{extra}`.
+Historically, a common way of expressing extras was through adding additional outputs to the package, typically named `{package}-with-{extra}`.
 These outputs do not install any files; all the files are installed from the base package.
 The base package lists all the required dependencies, while additional outputs combine a dependency on the base package with dependencies specific to the extra.
 
@@ -47,12 +154,12 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/u/urllib3/urllib3-{{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/u/urllib3/urllib3-{{ version }}.tar.gz
   sha256: 231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c
 
 build:
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: {{ PYTHON }} -m pip install . -vv
   number: 0
 
 requirements:
@@ -64,23 +171,6 @@ requirements:
     - pip
   run:
     - python >={{ python_min }}
-
-outputs:
-  - name: urllib3
-  - name: urllib3-with-brotli
-    requirements:
-      run:
-        - {{ pin_subpackage('urllib3', exact=True) }}
-        - brotli >=1.2.0
-    build:
-      noarch: generic
-  - name: urllib3-with-h2
-    requirements:
-      run:
-        - {{ pin_subpackage('urllib3', exact=True) }}
-        - h2 >=4,<5
-    build:
-      noarch: generic
 ```
 
 ```recipe
@@ -94,7 +184,7 @@ recipe:
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/u/urllib3/urllib3-${{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/u/urllib3/urllib3-${{ version }}.tar.gz
   sha256: 231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c
 
 outputs:
@@ -103,7 +193,7 @@ outputs:
     build:
       number: 0
       noarch: python
-      script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+      script: ${{ PYTHON }} -m pip install . -vv
     requirements:
       host:
         - python ${{ python_min }}.*
