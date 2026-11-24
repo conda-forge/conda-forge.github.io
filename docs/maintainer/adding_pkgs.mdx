@@ -553,6 +553,26 @@ requirements:
 
 For more information on pinning, please refer to [Pinned dependencies](pinning_deps.mdx).
 
+#### Optional dependency groups
+
+In a v1 recipe, use `requirements.extras` for dependencies that a user can request
+together with the package. For example, a package named `example` can offer a
+`cache` feature that uses Redis:
+
+```yaml
+requirements:
+  run:
+    - python
+  extras:
+    cache:
+      - redis-py >=3
+```
+
+With a client that supports [CEP 44](https://github.com/conda/ceps/blob/main/cep-0044.md),
+installing `'example[extras="cache"]'` includes both Python and redis-py.
+Installing `example` alone leaves redis-py optional. Use a run constraint instead
+when you only need to restrict the version of a package if it is already present.
+
 <a id="constraining-packages-at-runtime"></a>
 
 #### Constraining packages at runtime

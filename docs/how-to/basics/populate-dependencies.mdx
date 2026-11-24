@@ -421,8 +421,9 @@ test = ["pytest>7"]
 ```
 
 This corresponds to `host` dependency on `setuptools` (note unnecessary `wheel` dependency), `run`
-dependencies on `lxml` and `beautifulsoup4`, and possibly `run` dependency on `redis>=3.0.0` if the
-optional dependency is desired. Tests additionally require `pytest>7`. Python is constrained to
+dependencies on `lxml` and `beautifulsoup4`. In a v1 recipe, the Python extra
+`cache` can be packaged as an [optional dependency group](../../maintainer/adding_pkgs.mdx#optional-dependency-groups)
+containing the conda-forge package `redis-py >=3.0.0`. Tests additionally require `pytest>7`. Python is constrained to
 version `>=3.10`.
 
 In some cases, `dependencies` may be listed under the `dynamic` key instead. For example, the
