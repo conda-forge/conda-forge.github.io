@@ -27,44 +27,18 @@ The relevant features become available as soon as the needed dependencies are in
 
 ## CEP 44 optional dependency groups
 
+:::note
+
+Optional dependency groups are supported in the v1 recipe format only.
+They are a relatively recent addition, and they are not supported by older versions of clients.
+However, new optional dependency groups can be safely used in the recipe; older versions of clients will ignore them.
+
+:::
+
 [CEP 44](https://conda.org/learn/ceps/cep-0044/) introduced a direct way of expressing optional dependency groups.
 These dependencies are expressed using the `extras` key in the `requirements` of a recipe:
 
-<RecipeTabs>
-
-```recipe
-{% set version = "2.7.0" %}
-
-package:
-  name: urllib3
-  version: {{ version }}
-
-source:
-  url: https://files.pythonhosted.org/packages/source/u/urllib3/urllib3-{{ version }}.tar.gz
-  sha256: 231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c
-
-build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
-  number: 0
-
-requirements:
-  host:
-    - python {{ python_min }}.*
-    - hatchling >=1.27.0,<2
-    - hatch-vcs >=0.4.0,<0.6.0
-    - setuptools-scm >=8,<11
-    - pip
-  run:
-    - python >={{ python_min }}
-  extras:
-    brotli:
-      - brotli >=1.2.0
-    h2:
-      - h2 >=4,<5
-```
-
-```recipe
+```recipe title="recipe.yaml (v1 only)"
 schema_version: 1
 
 context:
@@ -99,8 +73,6 @@ requirements:
       - h2 >=4,<5
 ```
 
-</RecipeTabs>
-
 The optional dependency groups are embedded in the package metadata.
 They can be installed using the `extras=` key, for example the equivalent of:
 
@@ -111,10 +83,16 @@ pip install urllib3[brotli,h2]
 is:
 
 ```
-conda install urllib3[extras=brotli,h2]
+conda install urllib3[extras=[brotli,h2]]
 ```
 
-The MatchSpec syntax can also be used to express extra depedencies within recipes.
+Note that the list of extras must be placed in an additional pair of brackets.
+
+<!--
+
+TODO: uncomment this once v3 MatchSpecs are universally supported.
+
+The MatchSpec syntax can also be used to express extra dependencies within recipes.
 For example, another recipe could require:
 
 <RecipeTabs>
@@ -134,6 +112,8 @@ requirements:
 ```
 
 </RecipeTabs>
+
+-->
 
 ## Extras as separate outputs
 
