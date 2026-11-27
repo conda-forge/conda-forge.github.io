@@ -4,7 +4,9 @@ channels:
 - nodefaults
 dependencies:
 - curl *
+- jinja2 *
 - nodejs 24.*
 - prek >=0.5.0,<1.0
 - python 3.*
+- pyyaml *
 - requests *

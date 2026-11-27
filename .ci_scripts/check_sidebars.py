@@ -7,6 +7,12 @@ DOCS_DIR = REPO_ROOT / "docs"
 COMMUNITY_DIR = REPO_ROOT / "community"
 
 
+def is_generated_team_page(path):
+    # community/teams/<category>/<team>.md are rendered at build time from
+    # conda-forge/governance; the static landing pages live in community/teams/
+    return path.startswith("teams/") and path.count("/") > 1
+
+
 def get_all_documents(docs_dir):
     files = []
     for ext in (".md", ".mdx", ".jsx", ".md.tmpl"):
@@ -17,6 +23,8 @@ def get_all_documents(docs_dir):
             if path.startswith("minutes/"):
                 continue
             if path.startswith("funding/"):
+                continue
+            if is_generated_team_page(path):
                 continue
             files.append(path)
     return files
@@ -60,7 +68,9 @@ def main():
             for json_path in directory.glob("_sidebar*.json")
             for item in json.loads(json_path.read_text(encoding="utf-8"))
         ]
-        sidebar_files = set(get_sidebar_files(initial_items))
+        sidebar_files = {
+            f for f in get_sidebar_files(initial_items) if not is_generated_team_page(f)
+        }
         missing_files_from_sidebar = docs_files - sidebar_files
         if missing_files_from_sidebar:
             print(f"The following files are missing from the {dirname}/ sidebar:")

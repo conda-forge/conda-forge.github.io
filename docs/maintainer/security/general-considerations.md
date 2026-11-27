@@ -19,7 +19,7 @@ Here is a number of measures that conda-forge takes to improve package security:
    This is enforced by using a cf-staging channel where builds are first sent.
    A bot then assesses that the submitting feedstock has permission to build the package it has submitted, and only then will it relay the build to the `conda-forge` channel.
    This helps mitigate against a bad actor gaining access to an inconspicuous feedstock and then trying to push a build with malicious code into essential infrastructure packages (e.g., OpenSSL or Python).
-5. Conda-forge's [Security and Systems Sub-Team](/community/subteams/#security-subteam) is working hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by conda-forge.
+5. Conda-forge's [Security and Systems Sub-Team](/community/teams/static-subteams/) is working hard towards making sure to secure and maintain appropriate access to the credentials and services/systems used by conda-forge.
 
 ## Reporting conda-forge security issues
 

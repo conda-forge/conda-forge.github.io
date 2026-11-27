@@ -1,0 +1,2 @@
+The subdirectories here are populated at build time from the YAML files in
+conda-forge/governance. See `.ci_scripts/render_templated_content.py`. Do not edit manually.
