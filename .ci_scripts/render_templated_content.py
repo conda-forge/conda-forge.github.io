@@ -206,8 +206,6 @@ The charter of this team has not been recorded yet.
 {% if members %}
 {% for member, member_data in members | dictsort(case_sensitive=False) -%}
 * [{{ member_data.full_name if member_data is mapping and member_data.full_name else "@" ~ member }}](https://github.com/{{ member }})
-{%- if member_data is string %} ([record]({{ member_data }})){% endif %}
-{%- if member_data is sequence and member_data is not string and member_data is not mapping %} ({% for url in member_data %}[record {{ loop.index }}]({{ url }}){{ ", " if not loop.last }}{% endfor %}){% endif %}
 {% endfor -%}
 {% else %}
 This team has no members at the moment.
