@@ -1,18 +1,22 @@
-import csv
-import io
 import re
+import shutil
 import tarfile
+from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
 import requests
-
+import yaml
+from jinja2 import Environment
 
 CFEP_REPO_URL = "https://github.com/conda-forge/cfep"
 CFEP_REPO_ARCHIVE = "https://github.com/conda-forge/cfep/archive/main.tar.gz"
 CFEP_REPO_CONTENTS = "https://api.github.com/repos/conda-forge/cfep/contents/"
 GOVERNANCE_REPO_URL = "https://github.com/conda-forge/governance"
+GOVERNANCE_REPO_ARCHIVE = (
+    f"{GOVERNANCE_REPO_URL}/archive/all-teams.tar.gz"  # TODO: Back to main
+)
 TITLE_PATTERN = r"<td>\s*Title\s*</td><td>\s*(.*)\s*</td>"
 STATUS_PATTERN = r"<td>\s*Status\s*</td><td>\s*(.*)\s*</td>"
 REPO_DIR = Path(__file__).parents[1].absolute()
@@ -22,6 +26,7 @@ GOVERNANCE_MD_TMPL = REPO_DIR / "community" / "governance.md.tmpl"
 GOVERNANCE_MD = REPO_DIR / "community" / "governance.md"
 CODE_OF_CONDUCT_MD_TMPL = REPO_DIR / "community" / "code-of-conduct.md.tmpl"
 CODE_OF_CONDUCT_MD = REPO_DIR / "community" / "code-of-conduct.md"
+TEAMS_DIR = REPO_DIR / "community" / "teams"
 
 
 @dataclass
@@ -108,45 +113,206 @@ def write_cfep_index():
     CFEP_INDEX_MD.write_text(contents)
 
 
-def _get_formatted_names(csv_contents):
-    memfile = io.StringIO(csv_contents)
-    dict_csv = csv.DictReader(memfile)
-    sorted_csv = sorted(dict_csv, key=lambda d: d["name"])
+@contextmanager
+def governance_repo():
+    """Download and extract the conda-forge/governance archive; yield its root."""
+    with TemporaryDirectory() as tmp:
+        tarball = Path(tmp) / "governance.tar.gz"
+        if GOVERNANCE_REPO_ARCHIVE.startswith(("http://", "https://")):
+            r = requests.get(GOVERNANCE_REPO_ARCHIVE, stream=True, timeout=30)
+            r.raise_for_status()
+            with tarball.open("wb") as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    f.write(chunk)
+        else:
+            shutil.copy(GOVERNANCE_REPO_ARCHIVE, tarball)
+        extracted = Path(tmp) / "governance"
+        extracted.mkdir()
+        with tarfile.open(tarball) as tar:
+            tar.extractall(extracted, filter="data")
+        # GitHub archives contain a single top-level directory: <repo>-<ref>/
+        (root,) = extracted.iterdir()
+        yield root
+
+
+def _team_yamls(governance: Path) -> dict[str, dict]:
+    teams = {}
+    for path in sorted((governance / "teams").glob("*.y*ml")):
+        if path.name.startswith("__") or path.suffix not in (".yml", ".yaml"):
+            continue
+        teams[path.stem] = yaml.safe_load(path.read_text(encoding="utf-8"))
+    return teams
+
+
+def _full_name_or_username(username, details):
+    if isinstance(details, dict) and details.get("full_name"):
+        return f"{details['full_name']} (@{username})"
+    return f"@{username}"
+
+
+def _format_members(members):
     return "\n".join(
-        f"- [{m['name']} @{m['github_username']}]"
-        f"(https://github.com/{m['github_username']})"
-        for m in sorted_csv
+        f"- [{_full_name_or_username(username, details)}](https://github.com/{username})"
+        for username, details in sorted(
+            (members or {}).items(), key=lambda kv: _full_name_or_username(*kv)
+        )
     )
 
 
-def write_code_of_conduct():
-    r = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/CODE_OF_CONDUCT.md", timeout=5)
-    r.raise_for_status()
+def write_code_of_conduct(governance: Path):
     contents = CODE_OF_CONDUCT_MD_TMPL.read_text()
-    contents += r.text
+    contents += (governance / "CODE_OF_CONDUCT.md").read_text(encoding="utf-8")
     CODE_OF_CONDUCT_MD.write_text(contents)
 
 
-def write_governance():
-    readme = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/README.md", timeout=5)
-    readme.raise_for_status()
-    core = requests.get(f"{GOVERNANCE_REPO_URL}/raw/main/teams/core.csv", timeout=5)
-    core.raise_for_status()
-    emeritus = requests.get(
-        f"{GOVERNANCE_REPO_URL}/raw/main/teams/emeritus.csv", timeout=5
-    )
-    emeritus.raise_for_status()
+def write_governance(governance: Path, teams: dict[str, dict]):
     contents = GOVERNANCE_MD_TMPL.read_text()
-    contents += readme.text
-    contents = contents.replace("{{ core_members }}", _get_formatted_names(core.text))
+    contents += (governance / "README.md").read_text(encoding="utf-8")
     contents = contents.replace(
-        "{{ emeritus_members }}", _get_formatted_names(emeritus.text)
+        "{{ core_members }}", _format_members(teams["core"]["members"])
+    )
+    contents = contents.replace(
+        "{{ emeritus_members }}", _format_members(teams["emeritus-core"]["members"])
     )
     contents = contents.replace("(./CODE_OF_CONDUCT.md)", "(./code-of-conduct.md)")
     GOVERNANCE_MD.write_text(contents)
 
 
+TEAM_TEMPLATE = """\
+---
+{{ frontmatter }}
+---
+
+# {{ title }}
+
+{{ description }}
+
+<!--
+This document is autogenerated with .ci_scripts/render_templated_content.py
+from teams/{{ name }}.yml in conda-forge/governance. Do not edit manually!
+-->
+
+{% if charter in ("static-subteam", "dynamic-subteam") -%}
+This sub-team has a {{ charter.split("-")[0] }} [charter](/community/governance/#sub-teams).
+{%- elif charter != "council" -%}
+The charter of this team has not been recorded yet.
+{%- endif %}
+{%- if details %}
+
+{{ details }}
+{%- endif %}
+
+## Members
+{% if members %}
+{% for member, member_data in members | dictsort(case_sensitive=False) -%}
+* [{{ member_data.full_name if member_data is mapping and member_data.full_name else "@" ~ member }}](https://github.com/{{ member }})
+{% endfor -%}
+{% else %}
+This team has no members at the moment.
+{% endif -%}
+{% if name == "core" %}
+See also the [emeritus members](/community/teams/emeritus-core/).
+{% endif -%}
+{% if emeritus %}
+### Emeritus
+
+{% for member, member_data in emeritus | dictsort(case_sensitive=False) -%}
+* [{{ member_data.full_name if member_data is mapping and member_data.full_name else "@" ~ member }}](https://github.com/{{ member }})
+{% endfor -%}
+{% endif -%}
+{% if resources.teams or resources.repos or resources.other %}
+## Resources
+{% if resources.teams %}
+This team is represented by the following GitHub teams:
+
+{% for team in resources.teams -%}
+* `@{{ team }}`
+{% endfor -%}
+{% endif -%}
+{% if resources.repos %}
+This team has write access to these repositories:
+
+{% for repo in resources.repos -%}
+* [`{{ repo }}`](https://github.com/{{ repo }})
+{% endfor -%}
+{% endif -%}
+{% if resources.other %}
+Additionally, it controls these other resources:
+
+{% for other in resources.other -%}
+* {{ other }}
+{% endfor -%}
+{% endif -%}
+{% endif -%}
+{% if links %}
+## Links
+
+{% for link in links -%}
+* {{ link }}
+{% endfor -%}
+{% endif -%}
+"""
+
+# Charter (or team name prefix) -> directory under community/teams/
+TEAM_CATEGORIES = {
+    "council": "council",
+    "static-subteam": "static-subteam",
+    "dynamic-subteam": "dynamic-subteam",
+}
+# Core first, then its emeritus members. The rest are sorted alphabetically.
+TEAM_SIDEBAR_POSITIONS = {"core": 0, "emeritus-core": 1}
+
+
+def _team_category(team: dict) -> str:
+    if team["name"].startswith("help-"):
+        return "help-team"
+    return TEAM_CATEGORIES.get(team["charter"], "unknown")
+
+
+def write_teams(teams: dict[str, dict]):
+    for category in {*TEAM_CATEGORIES.values(), "help-team", "unknown"}:
+        shutil.rmtree(TEAMS_DIR / category, ignore_errors=True)
+    template = Environment(keep_trailing_newline=True).from_string(TEAM_TEMPLATE)
+    for name, team in teams.items():
+        if team.get("dissolved"):
+            continue
+        details = (team.get("details") or "").strip()
+        title = name
+        # Some details start with the full team name as a level-1 heading
+        if m := re.match(r"^# (.+)\n+", details):
+            title, details = m.group(1).strip(), details[m.end() :]
+        sidebar_label = (
+            title[: -len(" Sub-Team")] if title.endswith("Sub-Team") else name
+        )
+        frontmatter = {
+            "title": title,
+            "sidebar_label": sidebar_label,
+            "slug": f"/teams/{name}",
+            "description": team["description"],
+            "custom_edit_url": f"{GOVERNANCE_REPO_URL}/blob/main/teams/{name}.yml",
+        }
+        if name in TEAM_SIDEBAR_POSITIONS:
+            frontmatter["sidebar_position"] = TEAM_SIDEBAR_POSITIONS[name]
+        page = template.render(
+            **{**team, "details": details},
+            title=title,
+            frontmatter=yaml.safe_dump(
+                frontmatter, sort_keys=False, allow_unicode=True, width=1000
+            ).strip(),
+        )
+        # Collapse the blank lines left by the template
+        page = re.sub(r"\n{3,}", "\n\n", page)
+        out = TEAMS_DIR / _team_category(team) / f"{name}.md"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(page, encoding="utf-8")
+
+
 if __name__ == "__main__":
     write_cfep_index()
-    write_governance()
-    write_code_of_conduct()
+    with governance_repo() as governance:
+        teams = _team_yamls(governance)
+        if not teams:
+            raise SystemExit("Could not find any teams YAML files!")
+        write_governance(governance, teams)
+        write_code_of_conduct(governance)
+        write_teams(teams)

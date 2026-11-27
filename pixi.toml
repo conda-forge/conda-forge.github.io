@@ -13,9 +13,11 @@ lint = { cmd = "prek run --all-files", description = "Run prek hooks to lint the
 
 [dependencies]
 curl = "*"
+jinja2 = "*"
 nodejs = "24.*"
 prek = ">=0.5.0,<1.0"
 python = "3.*"
+pyyaml = "*"
 requests = "*"
 
 [target.win-64.dependencies]

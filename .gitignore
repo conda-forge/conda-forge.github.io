@@ -37,6 +37,7 @@ sphinx/newsfeed/demo/_build
 /community/cfep-index.md
 /community/governance.md
 /community/code-of-conduct.md
+/community/teams/*/
 
 # Generated files
 .docusaurus
